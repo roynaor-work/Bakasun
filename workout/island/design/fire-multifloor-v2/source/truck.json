@@ -1,0 +1,40 @@
+{
+  "file": "models/fire-truck.glb",
+  "bytes": 249940,
+  "triangles": 3476,
+  "clips": [
+    "lights",
+    "ladder_extend",
+    "ladder_retract",
+    "drive"
+  ],
+  "front": "+Z",
+  "up": "+Y",
+  "units": "metres",
+  "origin": "ground at wheel contact, centred on chassis",
+  "attachments": [
+    "ladder_tip",
+    "hose_outlet"
+  ],
+  "stabilizers": {
+    "count": 4,
+    "deployment": "included in ladder_extend and ladder_retract"
+  },
+  "ladder": {
+    "stages": 3,
+    "rungs": [
+      13,
+      12,
+      11
+    ],
+    "elevationDegrees": 62,
+    "extensionPerStageMeters": 3.4
+  },
+  "animationNotes": {
+    "drive": "2 s wheel-roll loop, in place; translate fire_truck along +Z at 3.14 m/s",
+    "ladder_extend": "4 s; raise base, then telescope overlapping nested truss stages",
+    "ladder_retract": "4 s inverse deployment; play once, clamp last frame",
+    "lights": "1 s alternating emissive chip visibility loop; opaque housings remain"
+  },
+  "provenance": "Original mesh and materials; existing repository truck assets inspected as references only; no copied geometry, textures or third-party marks."
+}

@@ -1,0 +1,39 @@
+{
+  "command": "npm test",
+  "originalRun": {
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "failure": "tests/workout-royiki.test.mjs: browserType.launch: Playwright Chromium executable missing",
+    "cleanup": "The failed browser launch left a test HTTP server open; the remaining child was terminated after all other test files finished."
+  },
+  "recovery": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/fire-v2-browsers node --test tests/workout-royiki.test.mjs",
+    "runtime": "Temporary external symlinks to /usr/bin/chromium; repository test code unchanged.",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "originalSummary": [
+    "ℹ tests 4326",
+    "ℹ suites 0",
+    "ℹ pass 4261",
+    "ℹ fail 1",
+    "ℹ cancelled 0",
+    "ℹ skipped 64",
+    "ℹ todo 0",
+    "ℹ duration_ms 800060.65509"
+  ],
+  "recoverySummary": [
+    "ℹ tests 5",
+    "ℹ suites 0",
+    "ℹ pass 5",
+    "ℹ fail 0",
+    "ℹ cancelled 0",
+    "ℹ skipped 0",
+    "ℹ todo 0",
+    "ℹ duration_ms 31372.879606"
+  ]
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="icons/extinguisher-powder.svg" type="image/svg+xml">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>יחידת כיבוי · שלוש קומות</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main id="app">
+  <header><div class="brand"><i></i><strong>יחידת כיבוי</strong><span>03 / MULTIFLOOR</span></div>
+    <nav aria-label="תצוגת נכסים"><button data-view="truck" aria-pressed="true">כבאית</button><button data-view="building" aria-pressed="false">בניין</button><button data-view="equipment" aria-pressed="false">ציוד</button></nav>
+  </header>
+  <section class="workspace">
+    <aside>
+      <div class="eyebrow" id="section-label">01 / רכב חילוץ</div>
+      <h1 id="heading">מוכנים לקריאה.</h1>
+      <p id="description">כבאית אחת. סולם טלסקופי בעל שלוש חוליות וציוד מובנה.</p>
+      <div class="panel" data-panel="truck">
+        <div class="button-grid"><button data-clip="drive">נסיעה</button><button data-clip="lights">אורות</button><button data-clip="ladder_extend" class="primary">פתיחת סולם</button><button data-clip="ladder_retract">סגירת סולם</button></div>
+        <div class="detail"><span>סולם מתארך</span><strong>3 חוליות</strong></div>
+        <div class="detail"><span>דגם יחיד</span><strong id="truck-tris">טוען…</strong></div>
+      </div>
+      <div class="panel" data-panel="building" hidden>
+        <div class="segmented" aria-label="בחירת קומה"><button data-floor="all" aria-pressed="true">הכול</button><button data-floor="1" aria-pressed="false">1</button><button data-floor="2" aria-pressed="false">2</button><button data-floor="3" aria-pressed="false">3</button></div>
+        <div class="segmented states" aria-label="מצב השריפה"><button data-state="intact" aria-pressed="false">שלם</button><button data-state="burning" aria-pressed="true">בוער</button><button data-state="burnt" aria-pressed="false">מפוחם</button></div>
+        <label class="smoke-label" for="smoke">הצטברות עשן <output id="smoke-value">35%</output></label><input id="smoke" type="range" min="0" max="100" value="35">
+        <div class="detail"><span>חללים פנימיים</span><strong>3 קומות · 9 חדרים</strong></div>
+      </div>
+      <div class="panel" data-panel="equipment" hidden>
+        <div id="tools" class="tools" aria-label="בחירת כלי"></div>
+        <button id="use-tool" class="primary wide">הפעלת הכלי</button>
+        <div class="detail"><span id="effect-label">אבקה</span><strong>8 פריימים</strong></div>
+      </div>
+    </aside>
+    <div id="viewport" aria-label="תצוגה תלת ממדית אינטראקטיבית">
+      <canvas id="scene" aria-label="גרירה לסיבוב, גלגלת להגדלה" tabindex="0"></canvas>
+      <span class="stage-tag" id="stage-tag">RESCUE / 01</span>
+      <button id="reset-camera" title="איפוס מצלמה" aria-label="איפוס מצלמה">⌖</button>
+      <div id="loading" role="status">טוען נכסי תלת־ממד…</div>
+      <div id="play-status" role="status" aria-live="polite"></div>
+      <div id="effect-preview" hidden><canvas id="effect-canvas" width="160" height="160" aria-label="אפקט כיבוי מונפש"></canvas></div>
+      <div class="stage-caption"><b id="asset-caption">כבאית חילוץ</b><span>גרירה לסיבוב · גלילה להגדלה</span></div>
+    </div>
+  </section>
+  <footer><div><i></i><span>FIRE / MULTIFLOOR V2</span></div><span id="metrics">טוען חבילת נכסים</span><button id="pause" aria-pressed="false">השהיה</button></footer>
+</main>
+<script type="module" src="preview.mjs"></script>
+</body>
+</html>

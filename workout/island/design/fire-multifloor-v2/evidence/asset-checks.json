@@ -1,0 +1,5805 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "id": "models/building-floor-1.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/building-floor-1.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/building-floor-1.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/building-floor-1.glb:burnables",
+      "pass": true,
+      "detail": [
+        "burn_f1_living_door",
+        "burn_f1_living_curtain_left",
+        "burn_f1_living_curtain_right",
+        "burn_f1_living_sofa",
+        "burn_f1_living_rug",
+        "burn_f1_living_coffee_table",
+        "burn_f1_living_tv_console",
+        "burn_f1_living_television",
+        "burn_f1_living_floor_lamp",
+        "burn_f1_kitchen_door",
+        "burn_f1_kitchen_stove",
+        "burn_f1_kitchen_oil_pot",
+        "burn_f1_kitchen_base_cabinet",
+        "burn_f1_kitchen_wall_cabinet",
+        "burn_f1_kitchen_refrigerator",
+        "burn_f1_kitchen_kitchen_table",
+        "burn_f1_kitchen_chair_left",
+        "burn_f1_kitchen_chair_right",
+        "burn_f1_kitchen_electrical_outlet",
+        "burn_f1_kitchen_power_strip",
+        "burn_f1_bedroom_door",
+        "burn_f1_bedroom_curtain_left",
+        "burn_f1_bedroom_curtain_right",
+        "burn_f1_bedroom_bed",
+        "burn_f1_bedroom_mattress",
+        "burn_f1_bedroom_blanket",
+        "burn_f1_bedroom_pillow",
+        "burn_f1_bedroom_wardrobe",
+        "burn_f1_bedroom_desk",
+        "burn_f1_bedroom_computer",
+        "burn_f1_bedroom_nightstand",
+        "burn_f1_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_door",
+        "burnt_f1_living_door",
+        "fire_f1_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_door",
+        "burnt_f1_living_door",
+        "fire_f1_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_door",
+        "burnt_f1_living_door",
+        "fire_f1_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_left",
+        "burnt_f1_living_curtain_left",
+        "fire_f1_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_left",
+        "burnt_f1_living_curtain_left",
+        "fire_f1_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_left",
+        "burnt_f1_living_curtain_left",
+        "fire_f1_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_right",
+        "burnt_f1_living_curtain_right",
+        "fire_f1_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_right",
+        "burnt_f1_living_curtain_right",
+        "fire_f1_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_curtain_right",
+        "burnt_f1_living_curtain_right",
+        "fire_f1_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_sofa:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_sofa",
+        "burnt_f1_living_sofa",
+        "fire_f1_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_sofa:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_sofa",
+        "burnt_f1_living_sofa",
+        "fire_f1_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_sofa:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_sofa",
+        "burnt_f1_living_sofa",
+        "fire_f1_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_sofa:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_rug:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_rug",
+        "burnt_f1_living_rug",
+        "fire_f1_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_rug:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_rug",
+        "burnt_f1_living_rug",
+        "fire_f1_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_rug:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_rug",
+        "burnt_f1_living_rug",
+        "fire_f1_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_rug:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_coffee_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_coffee_table",
+        "burnt_f1_living_coffee_table",
+        "fire_f1_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_coffee_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_coffee_table",
+        "burnt_f1_living_coffee_table",
+        "fire_f1_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_coffee_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_coffee_table",
+        "burnt_f1_living_coffee_table",
+        "fire_f1_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_coffee_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_tv_console:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_tv_console",
+        "burnt_f1_living_tv_console",
+        "fire_f1_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_tv_console:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_tv_console",
+        "burnt_f1_living_tv_console",
+        "fire_f1_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_tv_console:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_tv_console",
+        "burnt_f1_living_tv_console",
+        "fire_f1_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_tv_console:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_television:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_television",
+        "burnt_f1_living_television",
+        "fire_f1_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_television:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_television",
+        "burnt_f1_living_television",
+        "fire_f1_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_television:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_television",
+        "burnt_f1_living_television",
+        "fire_f1_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_television:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_floor_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_floor_lamp",
+        "burnt_f1_living_floor_lamp",
+        "fire_f1_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_floor_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_floor_lamp",
+        "burnt_f1_living_floor_lamp",
+        "fire_f1_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_floor_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_living_floor_lamp",
+        "burnt_f1_living_floor_lamp",
+        "fire_f1_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_living_floor_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_door",
+        "burnt_f1_kitchen_door",
+        "fire_f1_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_door",
+        "burnt_f1_kitchen_door",
+        "fire_f1_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_door",
+        "burnt_f1_kitchen_door",
+        "fire_f1_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_stove:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_stove",
+        "burnt_f1_kitchen_stove",
+        "fire_f1_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_stove:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_stove",
+        "burnt_f1_kitchen_stove",
+        "fire_f1_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_stove:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_stove",
+        "burnt_f1_kitchen_stove",
+        "fire_f1_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_stove:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_oil_pot:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_oil_pot",
+        "burnt_f1_kitchen_oil_pot",
+        "fire_f1_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_oil_pot:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_oil_pot",
+        "burnt_f1_kitchen_oil_pot",
+        "fire_f1_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_oil_pot:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_oil_pot",
+        "burnt_f1_kitchen_oil_pot",
+        "fire_f1_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_oil_pot:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_base_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_base_cabinet",
+        "burnt_f1_kitchen_base_cabinet",
+        "fire_f1_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_base_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_base_cabinet",
+        "burnt_f1_kitchen_base_cabinet",
+        "fire_f1_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_base_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_base_cabinet",
+        "burnt_f1_kitchen_base_cabinet",
+        "fire_f1_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_base_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_wall_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_wall_cabinet",
+        "burnt_f1_kitchen_wall_cabinet",
+        "fire_f1_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_wall_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_wall_cabinet",
+        "burnt_f1_kitchen_wall_cabinet",
+        "fire_f1_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_wall_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_wall_cabinet",
+        "burnt_f1_kitchen_wall_cabinet",
+        "fire_f1_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_wall_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_refrigerator:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_refrigerator",
+        "burnt_f1_kitchen_refrigerator",
+        "fire_f1_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_refrigerator:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_refrigerator",
+        "burnt_f1_kitchen_refrigerator",
+        "fire_f1_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_refrigerator:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_refrigerator",
+        "burnt_f1_kitchen_refrigerator",
+        "fire_f1_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_refrigerator:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_kitchen_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_kitchen_table",
+        "burnt_f1_kitchen_kitchen_table",
+        "fire_f1_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_kitchen_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_kitchen_table",
+        "burnt_f1_kitchen_kitchen_table",
+        "fire_f1_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_kitchen_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_kitchen_table",
+        "burnt_f1_kitchen_kitchen_table",
+        "fire_f1_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_kitchen_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_left",
+        "burnt_f1_kitchen_chair_left",
+        "fire_f1_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_left",
+        "burnt_f1_kitchen_chair_left",
+        "fire_f1_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_left",
+        "burnt_f1_kitchen_chair_left",
+        "fire_f1_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_right",
+        "burnt_f1_kitchen_chair_right",
+        "fire_f1_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_right",
+        "burnt_f1_kitchen_chair_right",
+        "fire_f1_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_chair_right",
+        "burnt_f1_kitchen_chair_right",
+        "fire_f1_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_chair_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_electrical_outlet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_electrical_outlet",
+        "burnt_f1_kitchen_electrical_outlet",
+        "fire_f1_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_electrical_outlet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_electrical_outlet",
+        "burnt_f1_kitchen_electrical_outlet",
+        "fire_f1_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_electrical_outlet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_electrical_outlet",
+        "burnt_f1_kitchen_electrical_outlet",
+        "fire_f1_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_electrical_outlet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_power_strip:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_power_strip",
+        "burnt_f1_kitchen_power_strip",
+        "fire_f1_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_power_strip:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_power_strip",
+        "burnt_f1_kitchen_power_strip",
+        "fire_f1_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_power_strip:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_kitchen_power_strip",
+        "burnt_f1_kitchen_power_strip",
+        "fire_f1_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_kitchen_power_strip:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_door",
+        "burnt_f1_bedroom_door",
+        "fire_f1_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_door",
+        "burnt_f1_bedroom_door",
+        "fire_f1_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_door",
+        "burnt_f1_bedroom_door",
+        "fire_f1_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_left",
+        "burnt_f1_bedroom_curtain_left",
+        "fire_f1_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_left",
+        "burnt_f1_bedroom_curtain_left",
+        "fire_f1_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_left",
+        "burnt_f1_bedroom_curtain_left",
+        "fire_f1_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_right",
+        "burnt_f1_bedroom_curtain_right",
+        "fire_f1_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_right",
+        "burnt_f1_bedroom_curtain_right",
+        "fire_f1_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_curtain_right",
+        "burnt_f1_bedroom_curtain_right",
+        "fire_f1_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bed:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bed",
+        "burnt_f1_bedroom_bed",
+        "fire_f1_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bed:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bed",
+        "burnt_f1_bedroom_bed",
+        "fire_f1_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bed:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bed",
+        "burnt_f1_bedroom_bed",
+        "fire_f1_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bed:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_mattress:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_mattress",
+        "burnt_f1_bedroom_mattress",
+        "fire_f1_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_mattress:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_mattress",
+        "burnt_f1_bedroom_mattress",
+        "fire_f1_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_mattress:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_mattress",
+        "burnt_f1_bedroom_mattress",
+        "fire_f1_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_mattress:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_blanket:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_blanket",
+        "burnt_f1_bedroom_blanket",
+        "fire_f1_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_blanket:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_blanket",
+        "burnt_f1_bedroom_blanket",
+        "fire_f1_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_blanket:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_blanket",
+        "burnt_f1_bedroom_blanket",
+        "fire_f1_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_blanket:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_pillow:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_pillow",
+        "burnt_f1_bedroom_pillow",
+        "fire_f1_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_pillow:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_pillow",
+        "burnt_f1_bedroom_pillow",
+        "fire_f1_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_pillow:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_pillow",
+        "burnt_f1_bedroom_pillow",
+        "fire_f1_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_pillow:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_wardrobe:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_wardrobe",
+        "burnt_f1_bedroom_wardrobe",
+        "fire_f1_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_wardrobe:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_wardrobe",
+        "burnt_f1_bedroom_wardrobe",
+        "fire_f1_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_wardrobe:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_wardrobe",
+        "burnt_f1_bedroom_wardrobe",
+        "fire_f1_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_wardrobe:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_desk:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_desk",
+        "burnt_f1_bedroom_desk",
+        "fire_f1_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_desk:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_desk",
+        "burnt_f1_bedroom_desk",
+        "fire_f1_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_desk:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_desk",
+        "burnt_f1_bedroom_desk",
+        "fire_f1_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_desk:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_computer:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_computer",
+        "burnt_f1_bedroom_computer",
+        "fire_f1_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_computer:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_computer",
+        "burnt_f1_bedroom_computer",
+        "fire_f1_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_computer:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_computer",
+        "burnt_f1_bedroom_computer",
+        "fire_f1_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_computer:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_nightstand:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_nightstand",
+        "burnt_f1_bedroom_nightstand",
+        "fire_f1_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_nightstand:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_nightstand",
+        "burnt_f1_bedroom_nightstand",
+        "fire_f1_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_nightstand:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_nightstand",
+        "burnt_f1_bedroom_nightstand",
+        "fire_f1_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_nightstand:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bedside_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bedside_lamp",
+        "burnt_f1_bedroom_bedside_lamp",
+        "fire_f1_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bedside_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bedside_lamp",
+        "burnt_f1_bedroom_bedside_lamp",
+        "fire_f1_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bedside_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f1_bedroom_bedside_lamp",
+        "burnt_f1_bedroom_bedside_lamp",
+        "fire_f1_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:burn_f1_bedroom_bedside_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-1.glb:three-rooms",
+      "pass": true,
+      "detail": [
+        "room_f1_living",
+        "room_f1_kitchen",
+        "room_f1_bedroom"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/building-floor-2.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/building-floor-2.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/building-floor-2.glb:burnables",
+      "pass": true,
+      "detail": [
+        "burn_f2_living_door",
+        "burn_f2_living_curtain_left",
+        "burn_f2_living_curtain_right",
+        "burn_f2_living_sofa",
+        "burn_f2_living_rug",
+        "burn_f2_living_coffee_table",
+        "burn_f2_living_tv_console",
+        "burn_f2_living_television",
+        "burn_f2_living_floor_lamp",
+        "burn_f2_kitchen_door",
+        "burn_f2_kitchen_stove",
+        "burn_f2_kitchen_oil_pot",
+        "burn_f2_kitchen_base_cabinet",
+        "burn_f2_kitchen_wall_cabinet",
+        "burn_f2_kitchen_refrigerator",
+        "burn_f2_kitchen_kitchen_table",
+        "burn_f2_kitchen_chair_left",
+        "burn_f2_kitchen_chair_right",
+        "burn_f2_kitchen_electrical_outlet",
+        "burn_f2_kitchen_power_strip",
+        "burn_f2_bedroom_door",
+        "burn_f2_bedroom_curtain_left",
+        "burn_f2_bedroom_curtain_right",
+        "burn_f2_bedroom_bed",
+        "burn_f2_bedroom_mattress",
+        "burn_f2_bedroom_blanket",
+        "burn_f2_bedroom_pillow",
+        "burn_f2_bedroom_wardrobe",
+        "burn_f2_bedroom_desk",
+        "burn_f2_bedroom_computer",
+        "burn_f2_bedroom_nightstand",
+        "burn_f2_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_door",
+        "burnt_f2_living_door",
+        "fire_f2_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_door",
+        "burnt_f2_living_door",
+        "fire_f2_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_door",
+        "burnt_f2_living_door",
+        "fire_f2_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_left",
+        "burnt_f2_living_curtain_left",
+        "fire_f2_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_left",
+        "burnt_f2_living_curtain_left",
+        "fire_f2_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_left",
+        "burnt_f2_living_curtain_left",
+        "fire_f2_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_right",
+        "burnt_f2_living_curtain_right",
+        "fire_f2_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_right",
+        "burnt_f2_living_curtain_right",
+        "fire_f2_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_curtain_right",
+        "burnt_f2_living_curtain_right",
+        "fire_f2_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_sofa:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_sofa",
+        "burnt_f2_living_sofa",
+        "fire_f2_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_sofa:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_sofa",
+        "burnt_f2_living_sofa",
+        "fire_f2_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_sofa:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_sofa",
+        "burnt_f2_living_sofa",
+        "fire_f2_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_sofa:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_rug:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_rug",
+        "burnt_f2_living_rug",
+        "fire_f2_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_rug:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_rug",
+        "burnt_f2_living_rug",
+        "fire_f2_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_rug:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_rug",
+        "burnt_f2_living_rug",
+        "fire_f2_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_rug:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_coffee_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_coffee_table",
+        "burnt_f2_living_coffee_table",
+        "fire_f2_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_coffee_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_coffee_table",
+        "burnt_f2_living_coffee_table",
+        "fire_f2_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_coffee_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_coffee_table",
+        "burnt_f2_living_coffee_table",
+        "fire_f2_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_coffee_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_tv_console:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_tv_console",
+        "burnt_f2_living_tv_console",
+        "fire_f2_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_tv_console:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_tv_console",
+        "burnt_f2_living_tv_console",
+        "fire_f2_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_tv_console:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_tv_console",
+        "burnt_f2_living_tv_console",
+        "fire_f2_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_tv_console:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_television:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_television",
+        "burnt_f2_living_television",
+        "fire_f2_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_television:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_television",
+        "burnt_f2_living_television",
+        "fire_f2_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_television:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_television",
+        "burnt_f2_living_television",
+        "fire_f2_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_television:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_floor_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_floor_lamp",
+        "burnt_f2_living_floor_lamp",
+        "fire_f2_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_floor_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_floor_lamp",
+        "burnt_f2_living_floor_lamp",
+        "fire_f2_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_floor_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_living_floor_lamp",
+        "burnt_f2_living_floor_lamp",
+        "fire_f2_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_living_floor_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_door",
+        "burnt_f2_kitchen_door",
+        "fire_f2_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_door",
+        "burnt_f2_kitchen_door",
+        "fire_f2_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_door",
+        "burnt_f2_kitchen_door",
+        "fire_f2_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_stove:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_stove",
+        "burnt_f2_kitchen_stove",
+        "fire_f2_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_stove:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_stove",
+        "burnt_f2_kitchen_stove",
+        "fire_f2_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_stove:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_stove",
+        "burnt_f2_kitchen_stove",
+        "fire_f2_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_stove:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_oil_pot:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_oil_pot",
+        "burnt_f2_kitchen_oil_pot",
+        "fire_f2_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_oil_pot:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_oil_pot",
+        "burnt_f2_kitchen_oil_pot",
+        "fire_f2_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_oil_pot:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_oil_pot",
+        "burnt_f2_kitchen_oil_pot",
+        "fire_f2_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_oil_pot:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_base_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_base_cabinet",
+        "burnt_f2_kitchen_base_cabinet",
+        "fire_f2_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_base_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_base_cabinet",
+        "burnt_f2_kitchen_base_cabinet",
+        "fire_f2_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_base_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_base_cabinet",
+        "burnt_f2_kitchen_base_cabinet",
+        "fire_f2_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_base_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_wall_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_wall_cabinet",
+        "burnt_f2_kitchen_wall_cabinet",
+        "fire_f2_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_wall_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_wall_cabinet",
+        "burnt_f2_kitchen_wall_cabinet",
+        "fire_f2_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_wall_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_wall_cabinet",
+        "burnt_f2_kitchen_wall_cabinet",
+        "fire_f2_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_wall_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_refrigerator:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_refrigerator",
+        "burnt_f2_kitchen_refrigerator",
+        "fire_f2_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_refrigerator:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_refrigerator",
+        "burnt_f2_kitchen_refrigerator",
+        "fire_f2_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_refrigerator:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_refrigerator",
+        "burnt_f2_kitchen_refrigerator",
+        "fire_f2_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_refrigerator:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_kitchen_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_kitchen_table",
+        "burnt_f2_kitchen_kitchen_table",
+        "fire_f2_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_kitchen_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_kitchen_table",
+        "burnt_f2_kitchen_kitchen_table",
+        "fire_f2_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_kitchen_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_kitchen_table",
+        "burnt_f2_kitchen_kitchen_table",
+        "fire_f2_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_kitchen_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_left",
+        "burnt_f2_kitchen_chair_left",
+        "fire_f2_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_left",
+        "burnt_f2_kitchen_chair_left",
+        "fire_f2_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_left",
+        "burnt_f2_kitchen_chair_left",
+        "fire_f2_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_right",
+        "burnt_f2_kitchen_chair_right",
+        "fire_f2_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_right",
+        "burnt_f2_kitchen_chair_right",
+        "fire_f2_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_chair_right",
+        "burnt_f2_kitchen_chair_right",
+        "fire_f2_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_chair_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_electrical_outlet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_electrical_outlet",
+        "burnt_f2_kitchen_electrical_outlet",
+        "fire_f2_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_electrical_outlet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_electrical_outlet",
+        "burnt_f2_kitchen_electrical_outlet",
+        "fire_f2_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_electrical_outlet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_electrical_outlet",
+        "burnt_f2_kitchen_electrical_outlet",
+        "fire_f2_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_electrical_outlet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_power_strip:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_power_strip",
+        "burnt_f2_kitchen_power_strip",
+        "fire_f2_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_power_strip:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_power_strip",
+        "burnt_f2_kitchen_power_strip",
+        "fire_f2_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_power_strip:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_kitchen_power_strip",
+        "burnt_f2_kitchen_power_strip",
+        "fire_f2_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_kitchen_power_strip:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_door",
+        "burnt_f2_bedroom_door",
+        "fire_f2_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_door",
+        "burnt_f2_bedroom_door",
+        "fire_f2_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_door",
+        "burnt_f2_bedroom_door",
+        "fire_f2_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_left",
+        "burnt_f2_bedroom_curtain_left",
+        "fire_f2_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_left",
+        "burnt_f2_bedroom_curtain_left",
+        "fire_f2_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_left",
+        "burnt_f2_bedroom_curtain_left",
+        "fire_f2_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_right",
+        "burnt_f2_bedroom_curtain_right",
+        "fire_f2_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_right",
+        "burnt_f2_bedroom_curtain_right",
+        "fire_f2_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_curtain_right",
+        "burnt_f2_bedroom_curtain_right",
+        "fire_f2_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bed:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bed",
+        "burnt_f2_bedroom_bed",
+        "fire_f2_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bed:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bed",
+        "burnt_f2_bedroom_bed",
+        "fire_f2_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bed:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bed",
+        "burnt_f2_bedroom_bed",
+        "fire_f2_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bed:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_mattress:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_mattress",
+        "burnt_f2_bedroom_mattress",
+        "fire_f2_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_mattress:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_mattress",
+        "burnt_f2_bedroom_mattress",
+        "fire_f2_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_mattress:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_mattress",
+        "burnt_f2_bedroom_mattress",
+        "fire_f2_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_mattress:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_blanket:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_blanket",
+        "burnt_f2_bedroom_blanket",
+        "fire_f2_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_blanket:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_blanket",
+        "burnt_f2_bedroom_blanket",
+        "fire_f2_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_blanket:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_blanket",
+        "burnt_f2_bedroom_blanket",
+        "fire_f2_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_blanket:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_pillow:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_pillow",
+        "burnt_f2_bedroom_pillow",
+        "fire_f2_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_pillow:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_pillow",
+        "burnt_f2_bedroom_pillow",
+        "fire_f2_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_pillow:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_pillow",
+        "burnt_f2_bedroom_pillow",
+        "fire_f2_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_pillow:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_wardrobe:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_wardrobe",
+        "burnt_f2_bedroom_wardrobe",
+        "fire_f2_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_wardrobe:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_wardrobe",
+        "burnt_f2_bedroom_wardrobe",
+        "fire_f2_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_wardrobe:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_wardrobe",
+        "burnt_f2_bedroom_wardrobe",
+        "fire_f2_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_wardrobe:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_desk:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_desk",
+        "burnt_f2_bedroom_desk",
+        "fire_f2_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_desk:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_desk",
+        "burnt_f2_bedroom_desk",
+        "fire_f2_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_desk:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_desk",
+        "burnt_f2_bedroom_desk",
+        "fire_f2_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_desk:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_computer:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_computer",
+        "burnt_f2_bedroom_computer",
+        "fire_f2_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_computer:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_computer",
+        "burnt_f2_bedroom_computer",
+        "fire_f2_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_computer:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_computer",
+        "burnt_f2_bedroom_computer",
+        "fire_f2_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_computer:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_nightstand:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_nightstand",
+        "burnt_f2_bedroom_nightstand",
+        "fire_f2_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_nightstand:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_nightstand",
+        "burnt_f2_bedroom_nightstand",
+        "fire_f2_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_nightstand:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_nightstand",
+        "burnt_f2_bedroom_nightstand",
+        "fire_f2_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_nightstand:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bedside_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bedside_lamp",
+        "burnt_f2_bedroom_bedside_lamp",
+        "fire_f2_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bedside_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bedside_lamp",
+        "burnt_f2_bedroom_bedside_lamp",
+        "fire_f2_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bedside_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f2_bedroom_bedside_lamp",
+        "burnt_f2_bedroom_bedside_lamp",
+        "fire_f2_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:burn_f2_bedroom_bedside_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-2.glb:three-rooms",
+      "pass": true,
+      "detail": [
+        "room_f2_living",
+        "room_f2_kitchen",
+        "room_f2_bedroom"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/building-floor-3.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/building-floor-3.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/building-floor-3.glb:burnables",
+      "pass": true,
+      "detail": [
+        "burn_f3_living_door",
+        "burn_f3_living_curtain_left",
+        "burn_f3_living_curtain_right",
+        "burn_f3_living_sofa",
+        "burn_f3_living_rug",
+        "burn_f3_living_coffee_table",
+        "burn_f3_living_tv_console",
+        "burn_f3_living_television",
+        "burn_f3_living_floor_lamp",
+        "burn_f3_kitchen_door",
+        "burn_f3_kitchen_stove",
+        "burn_f3_kitchen_oil_pot",
+        "burn_f3_kitchen_base_cabinet",
+        "burn_f3_kitchen_wall_cabinet",
+        "burn_f3_kitchen_refrigerator",
+        "burn_f3_kitchen_kitchen_table",
+        "burn_f3_kitchen_chair_left",
+        "burn_f3_kitchen_chair_right",
+        "burn_f3_kitchen_electrical_outlet",
+        "burn_f3_kitchen_power_strip",
+        "burn_f3_bedroom_door",
+        "burn_f3_bedroom_curtain_left",
+        "burn_f3_bedroom_curtain_right",
+        "burn_f3_bedroom_bed",
+        "burn_f3_bedroom_mattress",
+        "burn_f3_bedroom_blanket",
+        "burn_f3_bedroom_pillow",
+        "burn_f3_bedroom_wardrobe",
+        "burn_f3_bedroom_desk",
+        "burn_f3_bedroom_computer",
+        "burn_f3_bedroom_nightstand",
+        "burn_f3_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_door",
+        "burnt_f3_living_door",
+        "fire_f3_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_door",
+        "burnt_f3_living_door",
+        "fire_f3_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_door",
+        "burnt_f3_living_door",
+        "fire_f3_living_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_left",
+        "burnt_f3_living_curtain_left",
+        "fire_f3_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_left",
+        "burnt_f3_living_curtain_left",
+        "fire_f3_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_left",
+        "burnt_f3_living_curtain_left",
+        "fire_f3_living_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_right",
+        "burnt_f3_living_curtain_right",
+        "fire_f3_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_right",
+        "burnt_f3_living_curtain_right",
+        "fire_f3_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_curtain_right",
+        "burnt_f3_living_curtain_right",
+        "fire_f3_living_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_sofa:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_sofa",
+        "burnt_f3_living_sofa",
+        "fire_f3_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_sofa:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_sofa",
+        "burnt_f3_living_sofa",
+        "fire_f3_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_sofa:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_sofa",
+        "burnt_f3_living_sofa",
+        "fire_f3_living_sofa"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_sofa:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_rug:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_rug",
+        "burnt_f3_living_rug",
+        "fire_f3_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_rug:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_rug",
+        "burnt_f3_living_rug",
+        "fire_f3_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_rug:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_rug",
+        "burnt_f3_living_rug",
+        "fire_f3_living_rug"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_rug:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_coffee_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_coffee_table",
+        "burnt_f3_living_coffee_table",
+        "fire_f3_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_coffee_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_coffee_table",
+        "burnt_f3_living_coffee_table",
+        "fire_f3_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_coffee_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_coffee_table",
+        "burnt_f3_living_coffee_table",
+        "fire_f3_living_coffee_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_coffee_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_tv_console:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_tv_console",
+        "burnt_f3_living_tv_console",
+        "fire_f3_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_tv_console:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_tv_console",
+        "burnt_f3_living_tv_console",
+        "fire_f3_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_tv_console:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_tv_console",
+        "burnt_f3_living_tv_console",
+        "fire_f3_living_tv_console"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_tv_console:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_television:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_television",
+        "burnt_f3_living_television",
+        "fire_f3_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_television:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_television",
+        "burnt_f3_living_television",
+        "fire_f3_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_television:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_television",
+        "burnt_f3_living_television",
+        "fire_f3_living_television"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_television:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_floor_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_floor_lamp",
+        "burnt_f3_living_floor_lamp",
+        "fire_f3_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_floor_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_floor_lamp",
+        "burnt_f3_living_floor_lamp",
+        "fire_f3_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_floor_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_living_floor_lamp",
+        "burnt_f3_living_floor_lamp",
+        "fire_f3_living_floor_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_living_floor_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_door",
+        "burnt_f3_kitchen_door",
+        "fire_f3_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_door",
+        "burnt_f3_kitchen_door",
+        "fire_f3_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_door",
+        "burnt_f3_kitchen_door",
+        "fire_f3_kitchen_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_stove:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_stove",
+        "burnt_f3_kitchen_stove",
+        "fire_f3_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_stove:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_stove",
+        "burnt_f3_kitchen_stove",
+        "fire_f3_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_stove:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_stove",
+        "burnt_f3_kitchen_stove",
+        "fire_f3_kitchen_stove"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_stove:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_oil_pot:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_oil_pot",
+        "burnt_f3_kitchen_oil_pot",
+        "fire_f3_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_oil_pot:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_oil_pot",
+        "burnt_f3_kitchen_oil_pot",
+        "fire_f3_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_oil_pot:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_oil_pot",
+        "burnt_f3_kitchen_oil_pot",
+        "fire_f3_kitchen_oil_pot"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_oil_pot:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_base_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_base_cabinet",
+        "burnt_f3_kitchen_base_cabinet",
+        "fire_f3_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_base_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_base_cabinet",
+        "burnt_f3_kitchen_base_cabinet",
+        "fire_f3_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_base_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_base_cabinet",
+        "burnt_f3_kitchen_base_cabinet",
+        "fire_f3_kitchen_base_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_base_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_wall_cabinet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_wall_cabinet",
+        "burnt_f3_kitchen_wall_cabinet",
+        "fire_f3_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_wall_cabinet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_wall_cabinet",
+        "burnt_f3_kitchen_wall_cabinet",
+        "fire_f3_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_wall_cabinet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_wall_cabinet",
+        "burnt_f3_kitchen_wall_cabinet",
+        "fire_f3_kitchen_wall_cabinet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_wall_cabinet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_refrigerator:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_refrigerator",
+        "burnt_f3_kitchen_refrigerator",
+        "fire_f3_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_refrigerator:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_refrigerator",
+        "burnt_f3_kitchen_refrigerator",
+        "fire_f3_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_refrigerator:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_refrigerator",
+        "burnt_f3_kitchen_refrigerator",
+        "fire_f3_kitchen_refrigerator"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_refrigerator:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_kitchen_table:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_kitchen_table",
+        "burnt_f3_kitchen_kitchen_table",
+        "fire_f3_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_kitchen_table:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_kitchen_table",
+        "burnt_f3_kitchen_kitchen_table",
+        "fire_f3_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_kitchen_table:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_kitchen_table",
+        "burnt_f3_kitchen_kitchen_table",
+        "fire_f3_kitchen_kitchen_table"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_kitchen_table:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_left",
+        "burnt_f3_kitchen_chair_left",
+        "fire_f3_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_left",
+        "burnt_f3_kitchen_chair_left",
+        "fire_f3_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_left",
+        "burnt_f3_kitchen_chair_left",
+        "fire_f3_kitchen_chair_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_right",
+        "burnt_f3_kitchen_chair_right",
+        "fire_f3_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_right",
+        "burnt_f3_kitchen_chair_right",
+        "fire_f3_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_chair_right",
+        "burnt_f3_kitchen_chair_right",
+        "fire_f3_kitchen_chair_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_chair_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_electrical_outlet:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_electrical_outlet",
+        "burnt_f3_kitchen_electrical_outlet",
+        "fire_f3_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_electrical_outlet:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_electrical_outlet",
+        "burnt_f3_kitchen_electrical_outlet",
+        "fire_f3_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_electrical_outlet:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_electrical_outlet",
+        "burnt_f3_kitchen_electrical_outlet",
+        "fire_f3_kitchen_electrical_outlet"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_electrical_outlet:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_power_strip:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_power_strip",
+        "burnt_f3_kitchen_power_strip",
+        "fire_f3_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_power_strip:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_power_strip",
+        "burnt_f3_kitchen_power_strip",
+        "fire_f3_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_power_strip:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_kitchen_power_strip",
+        "burnt_f3_kitchen_power_strip",
+        "fire_f3_kitchen_power_strip"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_kitchen_power_strip:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_door:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_door",
+        "burnt_f3_bedroom_door",
+        "fire_f3_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_door:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_door",
+        "burnt_f3_bedroom_door",
+        "fire_f3_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_door:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_door",
+        "burnt_f3_bedroom_door",
+        "fire_f3_bedroom_door"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_door:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_left:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_left",
+        "burnt_f3_bedroom_curtain_left",
+        "fire_f3_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_left:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_left",
+        "burnt_f3_bedroom_curtain_left",
+        "fire_f3_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_left:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_left",
+        "burnt_f3_bedroom_curtain_left",
+        "fire_f3_bedroom_curtain_left"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_left:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_right:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_right",
+        "burnt_f3_bedroom_curtain_right",
+        "fire_f3_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_right:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_right",
+        "burnt_f3_bedroom_curtain_right",
+        "fire_f3_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_right:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_curtain_right",
+        "burnt_f3_bedroom_curtain_right",
+        "fire_f3_bedroom_curtain_right"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_curtain_right:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bed:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bed",
+        "burnt_f3_bedroom_bed",
+        "fire_f3_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bed:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bed",
+        "burnt_f3_bedroom_bed",
+        "fire_f3_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bed:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bed",
+        "burnt_f3_bedroom_bed",
+        "fire_f3_bedroom_bed"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bed:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_mattress:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_mattress",
+        "burnt_f3_bedroom_mattress",
+        "fire_f3_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_mattress:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_mattress",
+        "burnt_f3_bedroom_mattress",
+        "fire_f3_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_mattress:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_mattress",
+        "burnt_f3_bedroom_mattress",
+        "fire_f3_bedroom_mattress"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_mattress:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_blanket:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_blanket",
+        "burnt_f3_bedroom_blanket",
+        "fire_f3_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_blanket:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_blanket",
+        "burnt_f3_bedroom_blanket",
+        "fire_f3_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_blanket:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_blanket",
+        "burnt_f3_bedroom_blanket",
+        "fire_f3_bedroom_blanket"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_blanket:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_pillow:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_pillow",
+        "burnt_f3_bedroom_pillow",
+        "fire_f3_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_pillow:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_pillow",
+        "burnt_f3_bedroom_pillow",
+        "fire_f3_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_pillow:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_pillow",
+        "burnt_f3_bedroom_pillow",
+        "fire_f3_bedroom_pillow"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_pillow:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_wardrobe:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_wardrobe",
+        "burnt_f3_bedroom_wardrobe",
+        "fire_f3_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_wardrobe:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_wardrobe",
+        "burnt_f3_bedroom_wardrobe",
+        "fire_f3_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_wardrobe:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_wardrobe",
+        "burnt_f3_bedroom_wardrobe",
+        "fire_f3_bedroom_wardrobe"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_wardrobe:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_desk:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_desk",
+        "burnt_f3_bedroom_desk",
+        "fire_f3_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_desk:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_desk",
+        "burnt_f3_bedroom_desk",
+        "fire_f3_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_desk:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_desk",
+        "burnt_f3_bedroom_desk",
+        "fire_f3_bedroom_desk"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_desk:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_computer:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_computer",
+        "burnt_f3_bedroom_computer",
+        "fire_f3_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_computer:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_computer",
+        "burnt_f3_bedroom_computer",
+        "fire_f3_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_computer:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_computer",
+        "burnt_f3_bedroom_computer",
+        "fire_f3_bedroom_computer"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_computer:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_nightstand:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_nightstand",
+        "burnt_f3_bedroom_nightstand",
+        "fire_f3_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_nightstand:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_nightstand",
+        "burnt_f3_bedroom_nightstand",
+        "fire_f3_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_nightstand:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_nightstand",
+        "burnt_f3_bedroom_nightstand",
+        "fire_f3_bedroom_nightstand"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_nightstand:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bedside_lamp:intact_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bedside_lamp",
+        "burnt_f3_bedroom_bedside_lamp",
+        "fire_f3_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bedside_lamp:burnt_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bedside_lamp",
+        "burnt_f3_bedroom_bedside_lamp",
+        "fire_f3_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bedside_lamp:fire_",
+      "pass": true,
+      "detail": [
+        "intact_f3_bedroom_bedside_lamp",
+        "burnt_f3_bedroom_bedside_lamp",
+        "fire_f3_bedroom_bedside_lamp"
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:burn_f3_bedroom_bedside_lamp:default-burnt-hidden",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "models/building-floor-3.glb:three-rooms",
+      "pass": true,
+      "detail": [
+        "room_f3_living",
+        "room_f3_kitchen",
+        "room_f3_bedroom"
+      ]
+    },
+    {
+      "id": "models/building-shell.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/building-shell.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/building-shell.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/extinguisher-foam.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/extinguisher-foam.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/extinguisher-foam.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2.0416667461395264,
+        "nonConstantChannels": 2
+      }
+    },
+    {
+      "id": "models/extinguisher-foam.glb:use-clip",
+      "pass": true,
+      "detail": [
+        "use"
+      ]
+    },
+    {
+      "id": "models/extinguisher-powder.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/extinguisher-powder.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/extinguisher-powder.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2.0416667461395264,
+        "nonConstantChannels": 2
+      }
+    },
+    {
+      "id": "models/extinguisher-powder.glb:use-clip",
+      "pass": true,
+      "detail": [
+        "use"
+      ]
+    },
+    {
+      "id": "models/fire-blanket.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/fire-blanket.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/fire-blanket.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 3,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/fire-blanket.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-blanket.glb:use:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2.0416667461395264,
+        "nonConstantChannels": 3
+      }
+    },
+    {
+      "id": "models/fire-blanket.glb:use-clip",
+      "pass": true,
+      "detail": [
+        "use"
+      ]
+    },
+    {
+      "id": "blanket:unfold-transforms",
+      "pass": true,
+      "detail": [
+        {
+          "node": "blanket_unfold",
+          "path": "translation",
+          "keys": 49
+        },
+        {
+          "node": "blanket_unfold",
+          "path": "rotation",
+          "keys": 49
+        },
+        {
+          "node": "blanket_unfold",
+          "path": "scale",
+          "keys": 49
+        }
+      ]
+    },
+    {
+      "id": "models/fire-truck.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/fire-truck.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/fire-truck.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/fire-truck.glb:lights:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:lights:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:lights:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:lights:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:lights:motion",
+      "pass": true,
+      "detail": {
+        "duration": 1,
+        "nonConstantChannels": 2
+      }
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_extend:motion",
+      "pass": true,
+      "detail": {
+        "duration": 4,
+        "nonConstantChannels": 7
+      }
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:ladder_retract:motion",
+      "pass": true,
+      "detail": {
+        "duration": 4,
+        "nonConstantChannels": 7
+      }
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/fire-truck.glb:drive:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2,
+        "nonConstantChannels": 6
+      }
+    },
+    {
+      "id": "truck:triangle-budget",
+      "pass": true,
+      "detail": 3476
+    },
+    {
+      "id": "truck:clip:drive",
+      "pass": true,
+      "detail": [
+        "lights",
+        "ladder_extend",
+        "ladder_retract",
+        "drive"
+      ]
+    },
+    {
+      "id": "truck:clip:ladder_extend",
+      "pass": true,
+      "detail": [
+        "lights",
+        "ladder_extend",
+        "ladder_retract",
+        "drive"
+      ]
+    },
+    {
+      "id": "truck:clip:ladder_retract",
+      "pass": true,
+      "detail": [
+        "lights",
+        "ladder_extend",
+        "ladder_retract",
+        "drive"
+      ]
+    },
+    {
+      "id": "truck:clip:lights",
+      "pass": true,
+      "detail": [
+        "lights",
+        "ladder_extend",
+        "ladder_retract",
+        "drive"
+      ]
+    },
+    {
+      "id": "truck:attachment:ladder_tip",
+      "pass": true,
+      "detail": "ladder_tip"
+    },
+    {
+      "id": "truck:attachment:hose_outlet",
+      "pass": true,
+      "detail": "hose_outlet"
+    },
+    {
+      "id": "truck:ladder-inverse",
+      "pass": true,
+      "detail": "Extension/retraction must reverse the same transform endpoints"
+    },
+    {
+      "id": "truck:telescoping",
+      "pass": true,
+      "detail": "Two translating telescope stages, at least one metre travel each"
+    },
+    {
+      "id": "truck:rest-height",
+      "pass": true,
+      "detail": 3.405
+    },
+    {
+      "id": "models/hydrant.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/hydrant.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/hydrant.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/hydrant.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/hydrant.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/hydrant.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/hydrant.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/hydrant.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/hydrant.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/hydrant.glb:use:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2.0416667461395264,
+        "nonConstantChannels": 3
+      }
+    },
+    {
+      "id": "models/hydrant.glb:use-clip",
+      "pass": true,
+      "detail": [
+        "use"
+      ]
+    },
+    {
+      "id": "models/wall-hose.glb:embedded",
+      "pass": true,
+      "detail": "All buffers and images embedded in GLB"
+    },
+    {
+      "id": "models/wall-hose.glb:standard",
+      "pass": true,
+      "detail": {
+        "extensionsRequired": []
+      }
+    },
+    {
+      "id": "models/wall-hose.glb:khronos",
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0
+      }
+    },
+    {
+      "id": "models/wall-hose.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/wall-hose.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/wall-hose.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/wall-hose.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/wall-hose.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/wall-hose.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/wall-hose.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/wall-hose.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/wall-hose.glb:use:finite",
+      "pass": true,
+      "detail": "Finite keyframe times and values"
+    },
+    {
+      "id": "models/wall-hose.glb:use:time-order",
+      "pass": true,
+      "detail": "Strictly increasing keyframe timestamps"
+    },
+    {
+      "id": "models/wall-hose.glb:use:motion",
+      "pass": true,
+      "detail": {
+        "duration": 2.0416667461395264,
+        "nonConstantChannels": 5
+      }
+    },
+    {
+      "id": "models/wall-hose.glb:use-clip",
+      "pass": true,
+      "detail": [
+        "use"
+      ]
+    },
+    {
+      "id": "required:model:fire-truck",
+      "pass": true,
+      "detail": "models/fire-truck.glb"
+    },
+    {
+      "id": "required:model:building-shell",
+      "pass": true,
+      "detail": "models/building-shell.glb"
+    },
+    {
+      "id": "required:model:building-floor-1",
+      "pass": true,
+      "detail": "models/building-floor-1.glb"
+    },
+    {
+      "id": "required:model:building-floor-2",
+      "pass": true,
+      "detail": "models/building-floor-2.glb"
+    },
+    {
+      "id": "required:model:building-floor-3",
+      "pass": true,
+      "detail": "models/building-floor-3.glb"
+    },
+    {
+      "id": "required:model:extinguisher-powder",
+      "pass": true,
+      "detail": "models/extinguisher-powder.glb"
+    },
+    {
+      "id": "required:model:extinguisher-foam",
+      "pass": true,
+      "detail": "models/extinguisher-foam.glb"
+    },
+    {
+      "id": "required:model:wall-hose",
+      "pass": true,
+      "detail": "models/wall-hose.glb"
+    },
+    {
+      "id": "required:model:hydrant",
+      "pass": true,
+      "detail": "models/hydrant.glb"
+    },
+    {
+      "id": "required:model:fire-blanket",
+      "pass": true,
+      "detail": "models/fire-blanket.glb"
+    },
+    {
+      "id": "truck:single-model",
+      "pass": true,
+      "detail": [
+        "models/fire-truck.glb"
+      ]
+    },
+    {
+      "id": "building:budget",
+      "pass": true,
+      "detail": {
+        "bytes": 2907048,
+        "limit": 3000000
+      }
+    },
+    {
+      "id": "required:effect:powder",
+      "pass": true,
+      "detail": "effects/powder.png"
+    },
+    {
+      "id": "powder:eight-frames",
+      "pass": true,
+      "detail": {
+        "width": 2048,
+        "height": 256,
+        "frameWidth": 256
+      }
+    },
+    {
+      "id": "powder:alpha",
+      "pass": true,
+      "detail": [
+        {
+          "index": 0,
+          "content": 1486,
+          "transparent": 64050
+        },
+        {
+          "index": 1,
+          "content": 2951,
+          "transparent": 62585
+        },
+        {
+          "index": 2,
+          "content": 4328,
+          "transparent": 61208
+        },
+        {
+          "index": 3,
+          "content": 11165,
+          "transparent": 54371
+        },
+        {
+          "index": 4,
+          "content": 11739,
+          "transparent": 53797
+        },
+        {
+          "index": 5,
+          "content": 11281,
+          "transparent": 54255
+        },
+        {
+          "index": 6,
+          "content": 13420,
+          "transparent": 52116
+        },
+        {
+          "index": 7,
+          "content": 14127,
+          "transparent": 51409
+        }
+      ]
+    },
+    {
+      "id": "powder:distinct",
+      "pass": true,
+      "detail": "Every frame has distinct RGBA content"
+    },
+    {
+      "id": "required:effect:foam",
+      "pass": true,
+      "detail": "effects/foam.png"
+    },
+    {
+      "id": "foam:eight-frames",
+      "pass": true,
+      "detail": {
+        "width": 2048,
+        "height": 256,
+        "frameWidth": 256
+      }
+    },
+    {
+      "id": "foam:alpha",
+      "pass": true,
+      "detail": [
+        {
+          "index": 0,
+          "content": 825,
+          "transparent": 64711
+        },
+        {
+          "index": 1,
+          "content": 1463,
+          "transparent": 64073
+        },
+        {
+          "index": 2,
+          "content": 1964,
+          "transparent": 63572
+        },
+        {
+          "index": 3,
+          "content": 3870,
+          "transparent": 61666
+        },
+        {
+          "index": 4,
+          "content": 4291,
+          "transparent": 61245
+        },
+        {
+          "index": 5,
+          "content": 4623,
+          "transparent": 60913
+        },
+        {
+          "index": 6,
+          "content": 4771,
+          "transparent": 60765
+        },
+        {
+          "index": 7,
+          "content": 5124,
+          "transparent": 60412
+        }
+      ]
+    },
+    {
+      "id": "foam:distinct",
+      "pass": true,
+      "detail": "Every frame has distinct RGBA content"
+    },
+    {
+      "id": "required:effect:water",
+      "pass": true,
+      "detail": "effects/water.png"
+    },
+    {
+      "id": "water:eight-frames",
+      "pass": true,
+      "detail": {
+        "width": 2048,
+        "height": 256,
+        "frameWidth": 256
+      }
+    },
+    {
+      "id": "water:alpha",
+      "pass": true,
+      "detail": [
+        {
+          "index": 0,
+          "content": 814,
+          "transparent": 64722
+        },
+        {
+          "index": 1,
+          "content": 1361,
+          "transparent": 64175
+        },
+        {
+          "index": 2,
+          "content": 1826,
+          "transparent": 63710
+        },
+        {
+          "index": 3,
+          "content": 3336,
+          "transparent": 62200
+        },
+        {
+          "index": 4,
+          "content": 3840,
+          "transparent": 61696
+        },
+        {
+          "index": 5,
+          "content": 3924,
+          "transparent": 61612
+        },
+        {
+          "index": 6,
+          "content": 3994,
+          "transparent": 61542
+        },
+        {
+          "index": 7,
+          "content": 3919,
+          "transparent": 61617
+        }
+      ]
+    },
+    {
+      "id": "water:distinct",
+      "pass": true,
+      "detail": "Every frame has distinct RGBA content"
+    },
+    {
+      "id": "required:effect:blanket",
+      "pass": true,
+      "detail": "effects/blanket.png"
+    },
+    {
+      "id": "blanket:eight-frames",
+      "pass": true,
+      "detail": {
+        "width": 2048,
+        "height": 256,
+        "frameWidth": 256
+      }
+    },
+    {
+      "id": "blanket:alpha",
+      "pass": true,
+      "detail": [
+        {
+          "index": 0,
+          "content": 2333,
+          "transparent": 63203
+        },
+        {
+          "index": 1,
+          "content": 4247,
+          "transparent": 61289
+        },
+        {
+          "index": 2,
+          "content": 7588,
+          "transparent": 57948
+        },
+        {
+          "index": 3,
+          "content": 12009,
+          "transparent": 53527
+        },
+        {
+          "index": 4,
+          "content": 17326,
+          "transparent": 48210
+        },
+        {
+          "index": 5,
+          "content": 21071,
+          "transparent": 44465
+        },
+        {
+          "index": 6,
+          "content": 23491,
+          "transparent": 42045
+        },
+        {
+          "index": 7,
+          "content": 25957,
+          "transparent": 39579
+        }
+      ]
+    },
+    {
+      "id": "blanket:distinct",
+      "pass": true,
+      "detail": "Every frame has distinct RGBA content"
+    },
+    {
+      "id": "required:icon:extinguisher-powder",
+      "pass": true,
+      "detail": "icons/extinguisher-powder.svg"
+    },
+    {
+      "id": "icon:extinguisher-powder:standalone",
+      "pass": true,
+      "detail": "SVG viewBox present; no remote images or fonts"
+    },
+    {
+      "id": "required:icon:extinguisher-foam",
+      "pass": true,
+      "detail": "icons/extinguisher-foam.svg"
+    },
+    {
+      "id": "icon:extinguisher-foam:standalone",
+      "pass": true,
+      "detail": "SVG viewBox present; no remote images or fonts"
+    },
+    {
+      "id": "required:icon:wall-hose",
+      "pass": true,
+      "detail": "icons/wall-hose.svg"
+    },
+    {
+      "id": "icon:wall-hose:standalone",
+      "pass": true,
+      "detail": "SVG viewBox present; no remote images or fonts"
+    },
+    {
+      "id": "required:icon:hydrant",
+      "pass": true,
+      "detail": "icons/hydrant.svg"
+    },
+    {
+      "id": "icon:hydrant:standalone",
+      "pass": true,
+      "detail": "SVG viewBox present; no remote images or fonts"
+    },
+    {
+      "id": "required:icon:fire-blanket",
+      "pass": true,
+      "detail": "icons/fire-blanket.svg"
+    },
+    {
+      "id": "icon:fire-blanket:standalone",
+      "pass": true,
+      "detail": "SVG viewBox present; no remote images or fonts"
+    },
+    {
+      "id": "required:manifest.json",
+      "pass": true,
+      "detail": "manifest.json"
+    },
+    {
+      "id": "required:preview.html",
+      "pass": true,
+      "detail": "preview.html"
+    },
+    {
+      "id": "required:LICENSES.md",
+      "pass": true,
+      "detail": "LICENSES.md"
+    },
+    {
+      "id": "required:REPORT.md",
+      "pass": true,
+      "detail": "REPORT.md"
+    },
+    {
+      "id": "package:budget",
+      "pass": true,
+      "detail": {
+        "bytes": 4892221,
+        "limit": 8000000
+      }
+    }
+  ],
+  "models": [
+    {
+      "file": "models/building-floor-1.glb",
+      "bytes": 851608,
+      "sha256": "d72f9b663e53cd978119c63c9b80ed00190cfda63e647c97bf4b6dc5cb1ff4b3",
+      "sceneTriangles": 12477,
+      "visibleTriangles": 7348,
+      "meshTriangles": 12477,
+      "nodeCount": 161,
+      "meshCount": 78,
+      "materialCount": 1,
+      "bounds": {
+        "min": [
+          -9.99,
+          -0.18,
+          -3.94
+        ],
+        "max": [
+          9.96,
+          3.14,
+          1.052
+        ],
+        "dimensions": [
+          19.95,
+          3.32,
+          4.992
+        ]
+      },
+      "animations": []
+    },
+    {
+      "file": "models/building-floor-2.glb",
+      "bytes": 851608,
+      "sha256": "458c85d36497c062efe2c4494b5a313b39a1f9418d6d0d36f4ae8ec507fd44ab",
+      "sceneTriangles": 12477,
+      "visibleTriangles": 7348,
+      "meshTriangles": 12477,
+      "nodeCount": 161,
+      "meshCount": 78,
+      "materialCount": 1,
+      "bounds": {
+        "min": [
+          -9.99,
+          -0.18,
+          -3.94
+        ],
+        "max": [
+          9.96,
+          3.14,
+          1.052
+        ],
+        "dimensions": [
+          19.95,
+          3.32,
+          4.992
+        ]
+      },
+      "animations": []
+    },
+    {
+      "file": "models/building-floor-3.glb",
+      "bytes": 851608,
+      "sha256": "071cb005fa01dd63521cc8ce03d0447004558d86ba9f583e2df081a516e7366b",
+      "sceneTriangles": 12477,
+      "visibleTriangles": 7348,
+      "meshTriangles": 12477,
+      "nodeCount": 161,
+      "meshCount": 78,
+      "materialCount": 1,
+      "bounds": {
+        "min": [
+          -9.99,
+          -0.18,
+          -3.94
+        ],
+        "max": [
+          9.96,
+          3.14,
+          1.052
+        ],
+        "dimensions": [
+          19.95,
+          3.32,
+          4.992
+        ]
+      },
+      "animations": []
+    },
+    {
+      "file": "models/building-shell.glb",
+      "bytes": 352224,
+      "sha256": "ee2831d67407c2e50c97f312ddc67e17ca358415b9876934fc7d431f3b4927d0",
+      "sceneTriangles": 5692,
+      "visibleTriangles": 5692,
+      "meshTriangles": 5692,
+      "nodeCount": 20,
+      "meshCount": 9,
+      "materialCount": 1,
+      "bounds": {
+        "min": [
+          -10.08,
+          -0.18,
+          -4.04
+        ],
+        "max": [
+          14.05,
+          9.44,
+          4.85
+        ],
+        "dimensions": [
+          24.13,
+          9.62,
+          8.89
+        ]
+      },
+      "animations": []
+    },
+    {
+      "file": "models/extinguisher-foam.glb",
+      "bytes": 67760,
+      "sha256": "2330b124a83c9a62453fd0353bdf62004aae99bfaecf90127bc9e7489f00711d",
+      "sceneTriangles": 1764,
+      "visibleTriangles": 1764,
+      "meshTriangles": 1764,
+      "nodeCount": 27,
+      "meshCount": 23,
+      "materialCount": 9,
+      "bounds": {
+        "min": [
+          -0.137,
+          0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ],
+        "dimensions": [
+          0.355558,
+          0.799308,
+          0.2785
+        ]
+      },
+      "animations": [
+        {
+          "name": "use",
+          "duration": 2.041667,
+          "channels": [
+            {
+              "node": "nozzle_use",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "squeeze_lever",
+              "path": "rotation",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 2
+        }
+      ]
+    },
+    {
+      "file": "models/extinguisher-powder.glb",
+      "bytes": 73288,
+      "sha256": "bbdf7c6dd2f77cba9f407aeb0c87ddbaffee0d8e251b60624137023893f78cdb",
+      "sceneTriangles": 1952,
+      "visibleTriangles": 1952,
+      "meshTriangles": 1952,
+      "nodeCount": 27,
+      "meshCount": 23,
+      "materialCount": 9,
+      "bounds": {
+        "min": [
+          -0.137,
+          0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ],
+        "dimensions": [
+          0.355558,
+          0.799308,
+          0.2785
+        ]
+      },
+      "animations": [
+        {
+          "name": "use",
+          "duration": 2.041667,
+          "channels": [
+            {
+              "node": "nozzle_use",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "squeeze_lever",
+              "path": "rotation",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 2
+        }
+      ]
+    },
+    {
+      "file": "models/fire-blanket.glb",
+      "bytes": 55244,
+      "sha256": "470d39879e8bb54b36c9e1c6ec4c1e75ede6c6502caf2fac581a7f7fa08cb280",
+      "sceneTriangles": 712,
+      "visibleTriangles": 712,
+      "meshTriangles": 712,
+      "nodeCount": 18,
+      "meshCount": 13,
+      "materialCount": 6,
+      "bounds": {
+        "min": [
+          -0.155,
+          -0.025,
+          -0.07
+        ],
+        "max": [
+          0.155,
+          0.585,
+          0.103
+        ],
+        "dimensions": [
+          0.31,
+          0.61,
+          0.173
+        ]
+      },
+      "animations": [
+        {
+          "name": "use",
+          "duration": 2.041667,
+          "channels": [
+            {
+              "node": "blanket_unfold",
+              "path": "translation",
+              "keys": 49
+            },
+            {
+              "node": "blanket_unfold",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "blanket_unfold",
+              "path": "scale",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 3
+        }
+      ]
+    },
+    {
+      "file": "models/fire-truck.glb",
+      "bytes": 249940,
+      "sha256": "877d7c9bdd4e31afe40adee696ffac7af5cccc75a030ba306158ccbe02528183",
+      "sceneTriangles": 3476,
+      "visibleTriangles": 3476,
+      "meshTriangles": 3476,
+      "nodeCount": 37,
+      "meshCount": 17,
+      "materialCount": 18,
+      "bounds": {
+        "min": [
+          -1.5,
+          0,
+          -3.76
+        ],
+        "max": [
+          1.5,
+          3.405,
+          3.8905
+        ],
+        "dimensions": [
+          3,
+          3.405,
+          7.6505
+        ]
+      },
+      "animations": [
+        {
+          "name": "lights",
+          "duration": 1,
+          "channels": [
+            {
+              "node": "beacon_flash_-1",
+              "path": "scale",
+              "keys": 25
+            },
+            {
+              "node": "beacon_flash_1",
+              "path": "scale",
+              "keys": 25
+            }
+          ],
+          "nonConstantChannels": 2
+        },
+        {
+          "name": "ladder_extend",
+          "duration": 4,
+          "channels": [
+            {
+              "node": "ladder_elevation",
+              "path": "rotation",
+              "keys": 97
+            },
+            {
+              "node": "ladder_stage_2",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "ladder_stage_3",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_-1_0",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_-1_1",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_1_0",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_1_1",
+              "path": "translation",
+              "keys": 97
+            }
+          ],
+          "nonConstantChannels": 7
+        },
+        {
+          "name": "ladder_retract",
+          "duration": 4,
+          "channels": [
+            {
+              "node": "ladder_elevation",
+              "path": "rotation",
+              "keys": 97
+            },
+            {
+              "node": "ladder_stage_2",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "ladder_stage_3",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_-1_0",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_-1_1",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_1_0",
+              "path": "translation",
+              "keys": 97
+            },
+            {
+              "node": "outrigger_1_1",
+              "path": "translation",
+              "keys": 97
+            }
+          ],
+          "nonConstantChannels": 7
+        },
+        {
+          "name": "drive",
+          "duration": 2,
+          "channels": [
+            {
+              "node": "wheel_0_left",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "wheel_0_right",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "wheel_1_left",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "wheel_1_right",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "wheel_2_left",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "wheel_2_right",
+              "path": "rotation",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 6
+        }
+      ]
+    },
+    {
+      "file": "models/hydrant.glb",
+      "bytes": 66120,
+      "sha256": "640838026cadc6c2cec04521e2cf75073b28604255d398a1d96549ff96892857",
+      "sceneTriangles": 1588,
+      "visibleTriangles": 1588,
+      "meshTriangles": 1588,
+      "nodeCount": 32,
+      "meshCount": 28,
+      "materialCount": 6,
+      "bounds": {
+        "min": [
+          -0.27,
+          0,
+          -0.225
+        ],
+        "max": [
+          0.27,
+          0.85,
+          0.2675
+        ],
+        "dimensions": [
+          0.54,
+          0.85,
+          0.4925
+        ]
+      },
+      "animations": [
+        {
+          "name": "use",
+          "duration": 2.041667,
+          "channels": [
+            {
+              "node": "front_cap",
+              "path": "translation",
+              "keys": 49
+            },
+            {
+              "node": "front_cap",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "valve_rotation",
+              "path": "rotation",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 3
+        }
+      ]
+    },
+    {
+      "file": "models/wall-hose.glb",
+      "bytes": 141336,
+      "sha256": "6817cb7499cff79740dde0c89e6e29b983a1de27ccb985ed2d0d53ff17c653fd",
+      "sceneTriangles": 3888,
+      "visibleTriangles": 3888,
+      "meshTriangles": 3888,
+      "nodeCount": 30,
+      "meshCount": 24,
+      "materialCount": 7,
+      "bounds": {
+        "min": [
+          -0.4675,
+          -0.0015,
+          -0.1425
+        ],
+        "max": [
+          0.4675,
+          1.1015,
+          0.205
+        ],
+        "dimensions": [
+          0.935,
+          1.103,
+          0.3475
+        ]
+      },
+      "animations": [
+        {
+          "name": "use",
+          "duration": 2.041667,
+          "channels": [
+            {
+              "node": "cabinet_door_hinge",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "hose_nozzle",
+              "path": "translation",
+              "keys": 49
+            },
+            {
+              "node": "hose_nozzle",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "reel_rotation",
+              "path": "rotation",
+              "keys": 49
+            },
+            {
+              "node": "unreeled_hose",
+              "path": "scale",
+              "keys": 49
+            }
+          ],
+          "nonConstantChannels": 5
+        }
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "file": "effects/powder.png",
+      "width": 2048,
+      "height": 256,
+      "depth": 8,
+      "type": 6,
+      "interlace": 0,
+      "frameWidth": 256,
+      "frames": [
+        {
+          "index": 0,
+          "nontransparentPixels": 1486,
+          "transparentPixels": 64050,
+          "sha256": "9713d3dfcb96ff1f0a094f2e9456418385250adbc37d62761442c94483afb82b"
+        },
+        {
+          "index": 1,
+          "nontransparentPixels": 2951,
+          "transparentPixels": 62585,
+          "sha256": "cf0bb1fe4281496574237370312c64bf1e10d4602dde5932a7ad600c7ed42773"
+        },
+        {
+          "index": 2,
+          "nontransparentPixels": 4328,
+          "transparentPixels": 61208,
+          "sha256": "51127dd8036ae93adad24a2a719c43061feaf5a92ad22d4c0a0a26a9baec4aac"
+        },
+        {
+          "index": 3,
+          "nontransparentPixels": 11165,
+          "transparentPixels": 54371,
+          "sha256": "c2a204635386276d03d453badaf48c69b59cbc8a0940ccdb48061638201d9d56"
+        },
+        {
+          "index": 4,
+          "nontransparentPixels": 11739,
+          "transparentPixels": 53797,
+          "sha256": "e8bdd4fe80c380efe5d505f1bf6ff971c516e2c93f94a0e8b11f31ae7759d1f6"
+        },
+        {
+          "index": 5,
+          "nontransparentPixels": 11281,
+          "transparentPixels": 54255,
+          "sha256": "fff092dd39a5a0f1dc1b9552d5cb89468d8339be1c400dcd641e14d6c77a6683"
+        },
+        {
+          "index": 6,
+          "nontransparentPixels": 13420,
+          "transparentPixels": 52116,
+          "sha256": "43e8fc053fe1114357d116d9a8b2094105f5346b60cae3df8a9ab898d7f2094c"
+        },
+        {
+          "index": 7,
+          "nontransparentPixels": 14127,
+          "transparentPixels": 51409,
+          "sha256": "f2636ec0e1d523e8a46e64d7bf72652336dfe2f7e1dc6cc9ebd992a3c94f0cde"
+        }
+      ]
+    },
+    {
+      "file": "effects/foam.png",
+      "width": 2048,
+      "height": 256,
+      "depth": 8,
+      "type": 6,
+      "interlace": 0,
+      "frameWidth": 256,
+      "frames": [
+        {
+          "index": 0,
+          "nontransparentPixels": 825,
+          "transparentPixels": 64711,
+          "sha256": "3911891ba2cece514d777becdb343bb01d83c3a2e075fd2fd5af3388868a317a"
+        },
+        {
+          "index": 1,
+          "nontransparentPixels": 1463,
+          "transparentPixels": 64073,
+          "sha256": "8d7d88f2debbefeba8f4bfd9463ede15f20db7519828290b5896d07dd00dbbb9"
+        },
+        {
+          "index": 2,
+          "nontransparentPixels": 1964,
+          "transparentPixels": 63572,
+          "sha256": "01288e2a6622856274f6ccca7ac00731061dc311b35976c2959ae0c83d48702b"
+        },
+        {
+          "index": 3,
+          "nontransparentPixels": 3870,
+          "transparentPixels": 61666,
+          "sha256": "bda0c72ced45be0129d9d73702791ac031770efcf3625bf5846d52032417c8a9"
+        },
+        {
+          "index": 4,
+          "nontransparentPixels": 4291,
+          "transparentPixels": 61245,
+          "sha256": "9a0b30399db44dfb7230b509b7f413980d65e6a8d029c6ab04572ed31063553b"
+        },
+        {
+          "index": 5,
+          "nontransparentPixels": 4623,
+          "transparentPixels": 60913,
+          "sha256": "ce600deac4532afa7bfeee3508a9e9acbe5a940eeab950dc7aec5834c4df12ba"
+        },
+        {
+          "index": 6,
+          "nontransparentPixels": 4771,
+          "transparentPixels": 60765,
+          "sha256": "5b8d75044c68649c9de43d0d43214a7b3c8e7c8ca4ee8ffdaa34dd7da1cc9918"
+        },
+        {
+          "index": 7,
+          "nontransparentPixels": 5124,
+          "transparentPixels": 60412,
+          "sha256": "5c6d6258452ed6c9ed01f8e1cac2e11ad00e9df909a1592f74f3123065652612"
+        }
+      ]
+    },
+    {
+      "file": "effects/water.png",
+      "width": 2048,
+      "height": 256,
+      "depth": 8,
+      "type": 6,
+      "interlace": 0,
+      "frameWidth": 256,
+      "frames": [
+        {
+          "index": 0,
+          "nontransparentPixels": 814,
+          "transparentPixels": 64722,
+          "sha256": "e67849f297510f5079e5e77313edd05d731a0e6b3d2d6f8f2f8655117c00132b"
+        },
+        {
+          "index": 1,
+          "nontransparentPixels": 1361,
+          "transparentPixels": 64175,
+          "sha256": "521585ad7e9b24ac83e58d34478071ac7dbe75cdc837d38e4e8d8d6a6bf3e4d7"
+        },
+        {
+          "index": 2,
+          "nontransparentPixels": 1826,
+          "transparentPixels": 63710,
+          "sha256": "0cd2c5e66169e3b3923a169d043946b1491d293edbd7c5fdc4d429baa1102172"
+        },
+        {
+          "index": 3,
+          "nontransparentPixels": 3336,
+          "transparentPixels": 62200,
+          "sha256": "8ba64efe8de3f16109eb3bb9596bc0299df94dcbd4de0977804b5ffd160cf2b4"
+        },
+        {
+          "index": 4,
+          "nontransparentPixels": 3840,
+          "transparentPixels": 61696,
+          "sha256": "c40a7923e8db3aa688136a9b3796270000b3189e1e54f222a6ec73d960f7261c"
+        },
+        {
+          "index": 5,
+          "nontransparentPixels": 3924,
+          "transparentPixels": 61612,
+          "sha256": "00be6920c2da9e24461eb893585aeb5d0c5a16a145034405452734fc81c63837"
+        },
+        {
+          "index": 6,
+          "nontransparentPixels": 3994,
+          "transparentPixels": 61542,
+          "sha256": "eca303c6e06f937acecfdbc8f9a7906fbff8e7f1f67ba3c2eab3ae91dd3a77e1"
+        },
+        {
+          "index": 7,
+          "nontransparentPixels": 3919,
+          "transparentPixels": 61617,
+          "sha256": "8f92dffc93b434a03358af4a3e700952268a817d1acf4d926ec9ee882e892236"
+        }
+      ]
+    },
+    {
+      "file": "effects/blanket.png",
+      "width": 2048,
+      "height": 256,
+      "depth": 8,
+      "type": 6,
+      "interlace": 0,
+      "frameWidth": 256,
+      "frames": [
+        {
+          "index": 0,
+          "nontransparentPixels": 2333,
+          "transparentPixels": 63203,
+          "sha256": "5b95825f7f4186a87d42fac038ec6ccd5266cf681560e697eeeddc793a8f4119"
+        },
+        {
+          "index": 1,
+          "nontransparentPixels": 4247,
+          "transparentPixels": 61289,
+          "sha256": "b1aa57bb869d82c67faf195f4ec95f77980216cb4f5c612f65b8edc75085d048"
+        },
+        {
+          "index": 2,
+          "nontransparentPixels": 7588,
+          "transparentPixels": 57948,
+          "sha256": "93c3bdd17f5d2c3d731d02643c3831b47e32e5f44d5f4c03b56f9c35fb4609c6"
+        },
+        {
+          "index": 3,
+          "nontransparentPixels": 12009,
+          "transparentPixels": 53527,
+          "sha256": "7139abdb17ab970b988da2f665fc16a5fe2ea179287ec19d48a941dc6085a38e"
+        },
+        {
+          "index": 4,
+          "nontransparentPixels": 17326,
+          "transparentPixels": 48210,
+          "sha256": "94e1b1a26f857ff0be56bdc8c92717d9c24d8957fc475d9a030c40b8b826e837"
+        },
+        {
+          "index": 5,
+          "nontransparentPixels": 21071,
+          "transparentPixels": 44465,
+          "sha256": "463a01953a2846306b6749dc7f4f990d6453233031759eb133a5892eab0160ea"
+        },
+        {
+          "index": 6,
+          "nontransparentPixels": 23491,
+          "transparentPixels": 42045,
+          "sha256": "a19d8619c71a7922c05305757b4fb9499c8ba75563cf874c8cac8dd2c54f5260"
+        },
+        {
+          "index": 7,
+          "nontransparentPixels": 25957,
+          "transparentPixels": 39579,
+          "sha256": "07f432e3f9b4902599dcf210e57bf805c284bac536ede0e8d7c14893a8fbb468"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "effects/atmosphere.json",
+      "bytes": 1581
+    },
+    {
+      "file": "effects/blanket.json",
+      "bytes": 1080
+    },
+    {
+      "file": "effects/blanket.png",
+      "bytes": 101962
+    },
+    {
+      "file": "effects/fire.png",
+      "bytes": 58910
+    },
+    {
+      "file": "effects/foam.json",
+      "bytes": 1090
+    },
+    {
+      "file": "effects/foam.png",
+      "bytes": 78622
+    },
+    {
+      "file": "effects/powder.json",
+      "bytes": 1099
+    },
+    {
+      "file": "effects/powder.png",
+      "bytes": 228894
+    },
+    {
+      "file": "effects/smoke.png",
+      "bytes": 123814
+    },
+    {
+      "file": "effects/water.json",
+      "bytes": 1100
+    },
+    {
+      "file": "effects/water.png",
+      "bytes": 37707
+    },
+    {
+      "file": "evidence/asset-checks.json",
+      "bytes": 144671
+    },
+    {
+      "file": "evidence/browser-checks.json",
+      "bytes": 66241
+    },
+    {
+      "file": "evidence/building-floor-burning-844x390.webp",
+      "bytes": 26396
+    },
+    {
+      "file": "evidence/building-floor-burnt-844x390.webp",
+      "bytes": 26210
+    },
+    {
+      "file": "evidence/building-overview-844x390.webp",
+      "bytes": 30398
+    },
+    {
+      "file": "evidence/equipment-blanket-844x390.webp",
+      "bytes": 15434
+    },
+    {
+      "file": "evidence/khronos.json",
+      "bytes": 14729
+    },
+    {
+      "file": "evidence/package-summary.json",
+      "bytes": 421
+    },
+    {
+      "file": "evidence/repository-tests.json",
+      "bytes": 1082
+    },
+    {
+      "file": "evidence/truck-extended-844x390.webp",
+      "bytes": 16078
+    },
+    {
+      "file": "evidence/truck-stowed-844x390.webp",
+      "bytes": 22418
+    },
+    {
+      "file": "icons/extinguisher-foam.svg",
+      "bytes": 1509
+    },
+    {
+      "file": "icons/extinguisher-powder.svg",
+      "bytes": 1511
+    },
+    {
+      "file": "icons/fire-blanket.svg",
+      "bytes": 1200
+    },
+    {
+      "file": "icons/hydrant.svg",
+      "bytes": 1384
+    },
+    {
+      "file": "icons/wall-hose.svg",
+      "bytes": 1202
+    },
+    {
+      "file": "LICENSES.md",
+      "bytes": 3522
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 85366
+    },
+    {
+      "file": "models/building-floor-1.glb",
+      "bytes": 851608
+    },
+    {
+      "file": "models/building-floor-2.glb",
+      "bytes": 851608
+    },
+    {
+      "file": "models/building-floor-3.glb",
+      "bytes": 851608
+    },
+    {
+      "file": "models/building-shell.glb",
+      "bytes": 352224
+    },
+    {
+      "file": "models/extinguisher-foam.glb",
+      "bytes": 67760
+    },
+    {
+      "file": "models/extinguisher-powder.glb",
+      "bytes": 73288
+    },
+    {
+      "file": "models/fire-blanket.glb",
+      "bytes": 55244
+    },
+    {
+      "file": "models/fire-truck.glb",
+      "bytes": 249940
+    },
+    {
+      "file": "models/hydrant.glb",
+      "bytes": 66120
+    },
+    {
+      "file": "models/wall-hose.glb",
+      "bytes": 141336
+    },
+    {
+      "file": "preview.css",
+      "bytes": 5585
+    },
+    {
+      "file": "preview.html",
+      "bytes": 4228
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 19091
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 9313
+    },
+    {
+      "file": "runtime.mjs",
+      "bytes": 1594
+    },
+    {
+      "file": "source/browser-check.mjs",
+      "bytes": 11851
+    },
+    {
+      "file": "source/build_atmosphere.py",
+      "bytes": 5495
+    },
+    {
+      "file": "source/build_building.py",
+      "bytes": 37232
+    },
+    {
+      "file": "source/build_effects.py",
+      "bytes": 12371
+    },
+    {
+      "file": "source/build_equipment.py",
+      "bytes": 17662
+    },
+    {
+      "file": "source/build_truck.py",
+      "bytes": 19819
+    },
+    {
+      "file": "source/building.json",
+      "bytes": 64521
+    },
+    {
+      "file": "source/equipment.json",
+      "bytes": 5507
+    },
+    {
+      "file": "source/package.py",
+      "bytes": 3929
+    },
+    {
+      "file": "source/truck.json",
+      "bytes": 1120
+    },
+    {
+      "file": "source/validate.mjs",
+      "bytes": 16536
+    }
+  ],
+  "budget": {
+    "totalBytes": 4892221,
+    "limitBytes": 8000000,
+    "buildingBytes": 2907048,
+    "buildingLimitBytes": 3000000
+  }
+}

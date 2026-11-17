@@ -1,0 +1,91 @@
+{
+  "license": "CC0-1.0",
+  "generator": "source/build_atmosphere.py",
+  "layout": "horizontal",
+  "frameCount": 8,
+  "frameWidth": 128,
+  "frameHeight": 128,
+  "colorSpace": "sRGB",
+  "alpha": "straight",
+  "seamGuardPixels": 3,
+  "frames": [
+    {
+      "index": 0,
+      "x": 0,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 1,
+      "x": 128,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 2,
+      "x": 256,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 3,
+      "x": 384,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 4,
+      "x": 512,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 5,
+      "x": 640,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 6,
+      "x": 768,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "index": 7,
+      "x": 896,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    }
+  ],
+  "effects": {
+    "fire": {
+      "file": "effects/fire.png",
+      "fps": 12,
+      "blend": "normal",
+      "pivot": [
+        0.5,
+        0.9
+      ],
+      "usage": "Billboard at fire_<id>; animate UV x over 8 frames. Hidden outside burning state."
+    },
+    "smoke": {
+      "file": "effects/smoke.png",
+      "fps": 8,
+      "blend": "normal",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "usage": "Layer at smoke anchors; grow radius/opacity and move toward ceiling with accumulated density."
+    }
+  }
+}

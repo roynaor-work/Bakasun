@@ -1,0 +1,243 @@
+{
+  "assets": [
+    {
+      "id": "extinguisher-powder",
+      "path": "models/extinguisher-powder.glb",
+      "description": "Portable powder extinguisher with pressure gauge, safety pin, squeeze lever and deployable nozzle.",
+      "triangles": 1952,
+      "bytes": 73288,
+      "animations": [
+        "use"
+      ],
+      "durationSeconds": 2,
+      "dimensionsMeters": [
+        0.355558,
+        0.799308,
+        0.2785
+      ],
+      "restBoundsMeters": {
+        "min": [
+          -0.137,
+          0.0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ]
+      },
+      "useEndBoundsMeters": {
+        "min": [
+          -0.137,
+          0.0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ]
+      },
+      "attachments": [
+        "spray_origin"
+      ],
+      "coordinates": "+Y up, +Z front; origin at base center",
+      "use": "Play use once, clamp final pose; reset mixer to initial pose before next use."
+    },
+    {
+      "id": "extinguisher-foam",
+      "path": "models/extinguisher-foam.glb",
+      "description": "Portable foam extinguisher with pressure gauge, safety pin, squeeze lever and deployable nozzle.",
+      "triangles": 1764,
+      "bytes": 67760,
+      "animations": [
+        "use"
+      ],
+      "durationSeconds": 2,
+      "dimensionsMeters": [
+        0.355558,
+        0.799308,
+        0.2785
+      ],
+      "restBoundsMeters": {
+        "min": [
+          -0.137,
+          0.0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ]
+      },
+      "useEndBoundsMeters": {
+        "min": [
+          -0.137,
+          0.0,
+          -0.137
+        ],
+        "max": [
+          0.218558,
+          0.799308,
+          0.1415
+        ]
+      },
+      "attachments": [
+        "spray_origin"
+      ],
+      "coordinates": "+Y up, +Z front; origin at base center",
+      "use": "Play use once, clamp final pose; reset mixer to initial pose before next use."
+    },
+    {
+      "id": "wall-hose",
+      "path": "models/wall-hose.glb",
+      "description": "Wall-mounted cabinet, framed hinge door, coiled hose reel and deployable brass nozzle.",
+      "triangles": 3888,
+      "bytes": 141336,
+      "animations": [
+        "use"
+      ],
+      "durationSeconds": 2,
+      "dimensionsMeters": [
+        0.935,
+        1.103,
+        0.3475
+      ],
+      "restBoundsMeters": {
+        "min": [
+          -0.4675,
+          -0.0015,
+          -0.1425
+        ],
+        "max": [
+          0.4675,
+          1.1015,
+          0.205
+        ]
+      },
+      "useEndBoundsMeters": {
+        "min": [
+          -0.804857,
+          -0.0015,
+          -0.1425
+        ],
+        "max": [
+          0.4675,
+          1.1015,
+          1.07
+        ]
+      },
+      "attachments": [
+        "spray_origin"
+      ],
+      "coordinates": "+Y up, +Z front; origin at base center",
+      "use": "Play use once, clamp final pose; reset mixer to initial pose before next use."
+    },
+    {
+      "id": "hydrant",
+      "path": "models/hydrant.glb",
+      "description": "Cast hydrant with chained side caps, removable front coupling and rotating operating wrench.",
+      "triangles": 1588,
+      "bytes": 66120,
+      "animations": [
+        "use"
+      ],
+      "durationSeconds": 2,
+      "dimensionsMeters": [
+        0.54,
+        0.85,
+        0.4925
+      ],
+      "restBoundsMeters": {
+        "min": [
+          -0.27,
+          0.0,
+          -0.225
+        ],
+        "max": [
+          0.27,
+          0.85,
+          0.2675
+        ]
+      },
+      "useEndBoundsMeters": {
+        "min": [
+          -0.27,
+          0.0,
+          -0.225
+        ],
+        "max": [
+          0.272509,
+          0.85,
+          0.392919
+        ]
+      },
+      "attachments": [
+        "hose_outlet"
+      ],
+      "coordinates": "+Y up, +Z front; origin at base center",
+      "use": "Play use once, clamp final pose; reset mixer to initial pose before next use."
+    },
+    {
+      "id": "fire-blanket",
+      "path": "models/fire-blanket.glb",
+      "description": "Fire-resistant blanket in red pull-tab pouch; unfolds to full size then covers a small fire.",
+      "triangles": 712,
+      "bytes": 55244,
+      "animations": [
+        "use"
+      ],
+      "durationSeconds": 2,
+      "dimensionsMeters": [
+        0.31,
+        0.61,
+        0.173
+      ],
+      "restBoundsMeters": {
+        "min": [
+          -0.155,
+          -0.025,
+          -0.07
+        ],
+        "max": [
+          0.155,
+          0.585,
+          0.103
+        ]
+      },
+      "useEndBoundsMeters": {
+        "min": [
+          -0.155,
+          -0.025,
+          -0.07
+        ],
+        "max": [
+          1.095,
+          0.873,
+          1.8025
+        ]
+      },
+      "attachments": [
+        "cover_origin",
+        "grip_left",
+        "grip_right"
+      ],
+      "coordinates": "+Y up, +Z front; origin at base center",
+      "use": "Play use once, clamp final pose; reset mixer to initial pose before next use."
+    }
+  ],
+  "originalWork": true,
+  "references": [
+    {
+      "type": "existing_repository_reference",
+      "path": "workout/island/design/fire-v7/models/hydrant.glb",
+      "copied": false
+    },
+    {
+      "url": "https://kenney.nl/assets",
+      "result": "Catalog search unavailable through execution proxy; original authored equipment meshes, no third-party asset copied."
+    }
+  ]
+}
