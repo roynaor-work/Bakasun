@@ -1,0 +1,4 @@
+Pillow>=12,<13
+numpy>=2,<3
+# Optional: only --render and verify_preview.py require Playwright + Chromium.
+playwright>=1.50,<2

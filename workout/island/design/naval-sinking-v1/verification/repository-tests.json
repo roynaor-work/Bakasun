@@ -1,0 +1,27 @@
+{
+  "passAfterTargetedEnvironmentRetry": true,
+  "initialSuite": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "durationMs": 745577.872349,
+    "failureFile": "tests/workout-royiki.test.mjs",
+    "failureReason": "Playwright managed Chromium headless-shell executable is not installed. Existing test starts an HTTP server before browser launch; failed launch left the test worker alive. Worker terminated to collect results."
+  },
+  "targetedRetry": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/naval-system-playwright.mjs node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 25325.164494,
+    "environmentAdapter": "Temporary module proxies the installed Playwright chromium.launch and supplies executablePath=/usr/bin/chromium. No repository file was modified."
+  },
+  "uniquePassingChecksAfterRetry": 4262,
+  "skipped": 64,
+  "runtimeCodeChanged": false
+}

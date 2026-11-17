@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>קו המים · פגיעות וטביעה</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main id="app" aria-label="תצוגת פגיעות וטביעה בספינות">
+    <header>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">≋</span><div><h1>קו המים</h1><span class="subtitle">פגיעות וטביעה בספינות</span></div></div>
+      <span class="edition" dir="ltr">NAVAL / SINKING <b>01</b></span>
+      <button id="sound" class="quiet" aria-pressed="false" title="הפעלת הצלילים המקוריים">צליל כבוי <span aria-hidden="true">◌</span></button>
+    </header>
+    <section class="theater">
+      <div class="scene-wrap">
+        <canvas id="scene" width="628" height="228" role="img" aria-label="ספינה בים עם שכבות נזק ואפקטים מונפשים"></canvas>
+        <div class="scene-caption"><span class="live-dot" aria-hidden="true"></span><span id="state-label">בוערת</span><span class="caption-rule"></span><span id="ship-label">משחתת</span></div>
+        <div class="scene-code" dir="ltr"><span>SEA STATE 02</span><span id="frame-label">DECK FIRE</span></div>
+        <span id="loading" role="status">טוען את הצי…</span>
+        <div class="transport">
+          <button id="play" class="round" aria-pressed="true" aria-label="השהיה">Ⅱ</button>
+          <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="מיקום באנימציה">
+          <output id="time" dir="ltr">0.0 / 3.7</output>
+        </div>
+      </div>
+      <aside aria-label="בחירת ספינה ואפקט">
+        <label class="field-label" for="ship">הספינה שלך <span dir="ltr">01—13</span></label>
+        <select id="ship" aria-label="דגם ספינה"></select>
+        <div class="section-label">ארסנל האפקטים <span aria-hidden="true">↙</span></div>
+        <div class="effects">
+          <button data-effect="shell">פגז נכנס <small>עמוד מים</small></button>
+          <button data-effect="explosion">מחסן תחמושת <small>פיצוץ</small></button>
+          <button data-effect="rockets">מטח רקטות <small>5 רקטות</small></button>
+          <button data-effect="torpedo">טורפדו <small>עם שובל</small></button>
+        </div>
+        <div class="layer-controls">
+          <label><input id="smoke" type="checkbox" checked> עשן ואש</label>
+          <label><input id="water" type="checkbox" checked> בועות ושמן</label>
+        </div>
+        <div class="action-row"><button id="sink">הטבעה <span aria-hidden="true">↓</span></button><button id="replay" class="quiet" aria-label="הפעלה מחדש">↻</button></div>
+      </aside>
+    </section>
+    <section class="states" aria-label="מצבי נזק לספינה">
+      <div class="states-heading"><span>מצבי הספינה</span><small id="model-count">9 דגמים · 13 גרסאות</small></div>
+      <div id="state-buttons" role="group" aria-label="בחירת מצב נזק"></div>
+    </section>
+    <div id="error" role="alert" hidden></div>
+  </main>
+</body>
+</html>
