@@ -1,0 +1,54 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-010: a complete cold cache preserves the v22 basketball rollback with a real offline worker (118982.224249ms)
+✖ V241-010: the rollback-offline kill switch restores the old download list (6.933377ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119099.282336
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-010.test.mjs:8:1
+✖ V241-010: a complete cold cache preserves the v22 basketball rollback with a real offline worker (118982.224249ms)
+  AssertionError [ERR_ASSERTION]: [{"query":"","version":"v2"},{"query":"hoopsV241=0","version":"v10"},{"query":"hoopsBodyV2=0","version":"v10"}]
+  + actual - expected
+  
+    [
+      'v2',
+  +   'v10',
+  +   'v10'
+  -   'v22',
+  -   'v22'
+    ]
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs:43:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'v2', 'v10', 'v10' ],
+    expected: [ 'v2', 'v22', 'v22' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-010.test.mjs:48:1
+✖ V241-010: the rollback-offline kill switch restores the old download list (6.933377ms)
+  AssertionError [ERR_ASSERTION]: the fixed default includes every role
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs:59:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-010","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":119151,"log":"before-new-V241-010.log"}

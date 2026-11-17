@@ -1,0 +1,56 @@
+✖ V241-015: late optional failure is observed immediately and the billboard fallback survives (2574.772694ms)
+✔ V241-015: the explicit rollback preserves the old late-rejection timing (1843.127203ms)
+✖ V241-015: disposal during the blocked load cannot attach a late crowd or emit an unhandled rejection (2838.837453ms)
+✔ V241-015: successful prefetch still builds and swaps the real 600-fan crowd (3397.816024ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10837.984859
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:71:1
+✖ V241-015: late optional failure is observed immediately and the billboard fallback survives (2574.772694ms)
+  AssertionError [ERR_ASSERTION]: prefetch rejection must already have a handler while fan-01 is pending
+  + actual - expected
+  
+  + [
+  +   'Error: runtime/lod2/fan-12.glb 503'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:74:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'Error: runtime/lod2/fan-12.glb 503' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:88:1
+✖ V241-015: disposal during the blocked load cannot attach a late crowd or emit an unhandled rejection (2838.837453ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'Error: runtime/lod2/fan-12.glb 503'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:90:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'Error: runtime/lod2/fan-12.glb 503' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

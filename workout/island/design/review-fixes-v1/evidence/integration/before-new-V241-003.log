@@ -1,0 +1,50 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-003: tutorial has a semantic continue button activated by Enter and Space (1728.87273ms)
+✖ V241-003: semantic click works once and fireKeyboard=0 retains old markup (1674.450738ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3580.034681
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:5:1
+✖ V241-003: tutorial has a semantic continue button activated by Enter and Space (1728.87273ms)
+  AssertionError [ERR_ASSERTION]: tutorial needs a native button
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:9:59)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:13:1
+✖ V241-003: semantic click works once and fireKeyboard=0 retains old markup (1674.450738ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:14:236)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-003","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":3623,"log":"before-new-V241-003.log"}

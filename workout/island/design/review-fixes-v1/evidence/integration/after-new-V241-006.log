@@ -1,0 +1,16 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-006.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-006: real retargeted slide stays finite and monotonic through contact, recovery, get-up and idle (28.549451ms)
+✔ V241-006: a recovered slide releases to a moving player (4.706906ms)
+✔ V241-006: ?soccerTackleV2=0 keeps the real v24 slide (1.542946ms)
+✔ V241-006: ?soccerV241=0 keeps the real v24 slide (1.721942ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 459.397731
+
+# result: {"name":"after-new-V241-006","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-006.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":583,"log":"after-new-V241-006.log"}

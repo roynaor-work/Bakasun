@@ -1,0 +1,15 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: expected a generated patch to disappear while its physics still applies
+    at file:///workspace/v241-alpine/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs:27:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: null,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

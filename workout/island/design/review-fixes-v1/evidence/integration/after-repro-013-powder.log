@@ -1,0 +1,19 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: expected a generated patch to disappear while its physics still applies
+    at file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs:27:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: null,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+
+# result: {"name":"after-repro-013-powder","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":249,"log":"after-repro-013-powder.log"}

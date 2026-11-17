@@ -1,0 +1,446 @@
+{
+  "schemaVersion": 1,
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "audit": "aafc3e170d1f271f3a8695446b733b35f03d3443",
+  "findings": [
+    {
+      "id": "V241-001",
+      "title": "כשל בטעינת החדר הראשון מקפיא את שלב הכניסה",
+      "group": "fire",
+      "order": 1,
+      "patch": "patches/V241-001.patch",
+      "sha256": "b0d2e10e5c0afc4bc40e1ccf5ce20990b33d96ca72746b69e1e4b52c763f08a8",
+      "test": "V241-001.test.mjs",
+      "existingTests": [
+        "tests/island-fire-v24.test.mjs",
+        "tests/island-fire-v23.test.mjs",
+        "tests/island-fire-playability.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-002",
+      "title": "אובדן WebGL בחדר משאיר מסך שחור והשעון ממשיך",
+      "group": "fire",
+      "order": 2,
+      "patch": "patches/V241-002.patch",
+      "sha256": "e7b9d593b3dfe18d0d153c1dd10230fc282e316e15c0b287ec18d1986d47638a",
+      "test": "V241-002.test.mjs",
+      "existingTests": [
+        "tests/island-fire-v24.test.mjs",
+        "tests/island-fire-v23.test.mjs",
+        "tests/island-fire-playability.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-003",
+      "title": "אי אפשר לסגור את שיעור הכניסה הראשון במקלדת",
+      "group": "fire",
+      "order": 3,
+      "patch": "patches/V241-003.patch",
+      "sha256": "ea5267868b62d518e916cda3a5586a53651922109e5dc66b927d2955325196c3",
+      "test": "V241-003.test.mjs",
+      "existingTests": [
+        "tests/island-fire-v24.test.mjs",
+        "tests/island-fire-v23.test.mjs",
+        "tests/island-fire-playability.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-004",
+      "title": "חדר המשך מתחיל מול הגאומטריה והחבר של החדר הקודם",
+      "group": "fire",
+      "order": 4,
+      "patch": "patches/V241-004.patch",
+      "sha256": "8c68e95394d391e86264b7961799ea2aa036537c582346cb906ebd4d2d669f8d",
+      "test": "V241-004.test.mjs",
+      "existingTests": [
+        "tests/island-fire-v24.test.mjs",
+        "tests/island-fire-v23.test.mjs",
+        "tests/island-fire-playability.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-005",
+      "title": "בחירת עף או מספרת להגבהה ברחבה מוחלפת בנגיחה",
+      "group": "soccer",
+      "order": 5,
+      "patch": "patches/V241-005.patch",
+      "sha256": "6743c9f98712698ff52925aa3acb971a9ea68459f6d3c82cceaf64aaa0cb0b36",
+      "test": "V241-005.test.mjs",
+      "existingTests": [
+        "tests/island-soccer-v241.test.mjs",
+        "tests/island-soccer-slide-timeline.test.mjs",
+        "tests/island-soccer-feel-v2.test.mjs",
+        "tests/island-soccer-motion-v9.test.mjs",
+        "tests/island-soccer-headers-v22.test.mjs",
+        "tests/island-soccer-loft-reception.test.mjs",
+        "tests/island-soccer-controls-v2.test.mjs",
+        "tests/island-soccer-gameplay.test.mjs",
+        "tests/island-soccer-keeper-distribution.test.mjs",
+        "tests/island-soccer-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-006",
+      "title": "שעון אנימציית ההחלקה נהיה NaN מהפריים השני",
+      "group": "soccer",
+      "order": 6,
+      "patch": "patches/V241-006.patch",
+      "sha256": "eae7e60cde716b17e5f300d0e401bfdfe6678d8171c13dab682ea9b15c2ed8d0",
+      "test": "V241-006.test.mjs",
+      "existingTests": [
+        "tests/island-soccer-v241.test.mjs",
+        "tests/island-soccer-slide-timeline.test.mjs",
+        "tests/island-soccer-feel-v2.test.mjs",
+        "tests/island-soccer-motion-v9.test.mjs",
+        "tests/island-soccer-headers-v22.test.mjs",
+        "tests/island-soccer-loft-reception.test.mjs",
+        "tests/island-soccer-controls-v2.test.mjs",
+        "tests/island-soccer-gameplay.test.mjs",
+        "tests/island-soccer-keeper-distribution.test.mjs",
+        "tests/island-soccer-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-007",
+      "title": "זינוק השוער החדש נקטע אחרי פריים אחד",
+      "group": "soccer",
+      "order": 7,
+      "patch": "patches/V241-007.patch",
+      "sha256": "16a3a46c89ba2f8f53f995b985aef55b931172c5ca1769773260307d1fbeae7a",
+      "test": "V241-007.test.mjs",
+      "existingTests": [
+        "tests/island-soccer-v241.test.mjs",
+        "tests/island-soccer-slide-timeline.test.mjs",
+        "tests/island-soccer-feel-v2.test.mjs",
+        "tests/island-soccer-motion-v9.test.mjs",
+        "tests/island-soccer-headers-v22.test.mjs",
+        "tests/island-soccer-loft-reception.test.mjs",
+        "tests/island-soccer-controls-v2.test.mjs",
+        "tests/island-soccer-gameplay.test.mjs",
+        "tests/island-soccer-keeper-distribution.test.mjs",
+        "tests/island-soccer-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-008",
+      "title": "אספקה ותיקון מפסיקים לעבוד בסיום האווירי בספינות",
+      "group": "combat",
+      "order": 8,
+      "patch": "patches/V241-008.patch",
+      "sha256": "e5018d0d662811c3a6ad541e69db250c1745959d4235436707aa1bdbaad17741",
+      "test": "V241-008.test.mjs",
+      "existingTests": [
+        "tests/island-naval-boars-v241.test.mjs",
+        "tests/island-aliens-v25-arsenal.test.mjs",
+        "tests/island-racing-v24-1.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-009",
+      "title": "מתג הנשק החדש בחלליות מתעלם מהפעלה סמנטית",
+      "group": "combat",
+      "order": 9,
+      "patch": "patches/V241-009.patch",
+      "sha256": "8d6bce2a6c33287428c391bf3e379e6fac9ea5ede92ff2d864edd7dcdf021fb6",
+      "test": "V241-009.test.mjs",
+      "existingTests": [
+        "tests/island-naval-boars-v241.test.mjs",
+        "tests/island-aliens-v25-arsenal.test.mjs",
+        "tests/island-racing-v24-1.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-010",
+      "title": "דגל החזרה בכדורסל אינו מחזיר את הגוף הישן באופליין קר",
+      "group": "hoops",
+      "order": 10,
+      "patch": "patches/V241-010.patch",
+      "sha256": "7d09eeb40f1b9d2e9c8da13521efa5ea1e46869765448933e6fb4d28f5bc84b9",
+      "test": "V241-010.test.mjs",
+      "existingTests": [
+        "tests/island-offline.test.mjs",
+        "tests/island-hoops-v241-players.test.mjs",
+        "tests/island-hoops-motion-v12.test.mjs",
+        "tests/island-hoops-v241.test.mjs",
+        "tests/island-hoops-tall.test.mjs",
+        "tests/island-hoops-motion2.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-011",
+      "title": "כיוון המגלשיים החדש מחמיר את הסיבוב נגד כיוון התנועה",
+      "group": "alpine",
+      "order": 11,
+      "patch": "patches/V241-011.patch",
+      "sha256": "9b32f35954382792b444c0679408c726c579b5c8bd0b282fc66bbbe20ffce292",
+      "test": "V241-011.test.mjs",
+      "existingTests": [
+        "tests/island-alpine.test.mjs",
+        "tests/island-alpine-gameplay.test.mjs",
+        "tests/island-alpine-v241.test.mjs",
+        "tests/island-alpine-league-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-012",
+      "title": "שיא ו-ghost ישנים מוצגים מול קורס וכללי תנועה חדשים",
+      "group": "alpine",
+      "order": 12,
+      "patch": "patches/V241-012.patch",
+      "sha256": "f1ca7690b88f56377fa1d5cf71d1cce9489fb227534e8f0927e96206d2204b02",
+      "test": "V241-012.test.mjs",
+      "existingTests": [
+        "tests/island-alpine.test.mjs",
+        "tests/island-alpine-gameplay.test.mjs",
+        "tests/island-alpine-v241.test.mjs",
+        "tests/island-alpine-league-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-013",
+      "title": "שלג עמוק נעלם לפני שההאטה שלו מסתיימת",
+      "group": "alpine",
+      "order": 13,
+      "patch": "patches/V241-013.patch",
+      "sha256": "46d1f339d51f42ffb20fbd65456bd20053e4c44bbfa3b43c133dd29b3c9597af",
+      "test": "V241-013.test.mjs",
+      "existingTests": [
+        "tests/island-alpine.test.mjs",
+        "tests/island-alpine-gameplay.test.mjs",
+        "tests/island-alpine-v241.test.mjs",
+        "tests/island-alpine-league-v23.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-014",
+      "title": "פייק בקליפ v13 משאיר את הכדור נמוך",
+      "group": "hoops",
+      "order": 14,
+      "patch": "patches/V241-014.patch",
+      "sha256": "f2e8b902118139a099f95cfed08a19f72bef3349a483b9b6886ebc28936a8bc5",
+      "test": "V241-014.test.mjs",
+      "existingTests": [
+        "tests/island-offline.test.mjs",
+        "tests/island-hoops-v241-players.test.mjs",
+        "tests/island-hoops-motion-v12.test.mjs",
+        "tests/island-hoops-v241.test.mjs",
+        "tests/island-hoops-tall.test.mjs",
+        "tests/island-hoops-motion2.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-015",
+      "title": "כשל בקהל אופציונלי בטניס יוצר Promise rejection לא מטופל",
+      "group": "tennis",
+      "order": 15,
+      "patch": "patches/V241-015.patch",
+      "sha256": "a742950819159be4d4d76d3a215c27e24d4eaf74544d4bd48543864c4a44ecc1",
+      "test": "V241-015.test.mjs",
+      "existingTests": [
+        "tests/island-tennis-v25.test.mjs",
+        "tests/island-tennis-v12-stadium.test.mjs",
+        "tests/island-tennis-crowd-v22.test.mjs"
+      ]
+    },
+    {
+      "id": "V241-016",
+      "title": "הוראות העזרה אינן חוזרות עם דגלי החזרה",
+      "group": "combat",
+      "order": 16,
+      "patch": "patches/V241-016.patch",
+      "sha256": "8e9332592e1cdbdabe1f97958c7cb4efe0174a54635abf7893c1c90d93800a97",
+      "test": "V241-016.test.mjs",
+      "existingTests": [
+        "tests/island-naval-boars-v241.test.mjs",
+        "tests/island-aliens-v25-arsenal.test.mjs",
+        "tests/island-racing-v24-1.test.mjs"
+      ]
+    }
+  ],
+  "reproductions": [
+    {
+      "name": "001-shell",
+      "file": "fire-first-room-shell.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        1
+      ]
+    },
+    {
+      "name": "002-context",
+      "file": "fire-context-loss.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "003-keyboard",
+      "file": "fire-keyboard.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "004-rooms",
+      "file": "fire-interior-failures.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        1
+      ]
+    },
+    {
+      "name": "005-air",
+      "file": "soccer-air-choice-override.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        1
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "006-slide",
+      "file": "soccer-view-slide-timeline.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        1
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "007-dive",
+      "file": "soccer-view-keeper-dive.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        1
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "008-supply",
+      "file": "combat-naval-finale-supply.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        1
+      ]
+    },
+    {
+      "name": "009-switch",
+      "file": "combat-switch.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "010-offline",
+      "file": "offline-roundtrip.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ],
+      "args": [
+        "--games",
+        "",
+        "--output",
+        "/tmp/review-fixes-v1-offline-roundtrip.json"
+      ],
+      "timeoutMs": 480000
+    },
+    {
+      "name": "011-yaw",
+      "file": "alpine-yaw-sign.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "012-records",
+      "file": "alpine-records-ruleset.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "013-powder",
+      "file": "alpine-powder-visibility.mjs",
+      "executable": "node",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        1
+      ]
+    },
+    {
+      "name": "014-fake",
+      "file": "hoops-fake-comparison.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "015-crowd",
+      "file": "tennis-crowd-failure.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        0
+      ]
+    },
+    {
+      "name": "016-help",
+      "file": "racing-help-rollback.py",
+      "executable": "python3",
+      "beforeCodes": [
+        0
+      ],
+      "afterCodes": [
+        1
+      ]
+    }
+  ]
+}

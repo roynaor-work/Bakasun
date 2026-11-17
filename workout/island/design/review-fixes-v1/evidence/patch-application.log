@@ -1,0 +1,54 @@
+Base:43b27dc235387e3cb737aee9558cdf9d5fd5a262
+V241-001.patch standalone --check:PASS
+V241-002.patch standalone --check:PASS
+V241-003.patch standalone --check:PASS
+V241-004.patch standalone --check:PASS
+V241-005.patch standalone --check:PASS
+V241-006.patch standalone --check:PASS
+V241-007.patch standalone --check:PASS
+V241-008.patch standalone --check:PASS
+V241-009.patch standalone --check:PASS
+V241-010.patch standalone --check:PASS
+V241-011.patch standalone --check:PASS
+V241-012.patch standalone --check:PASS
+V241-013.patch standalone --check:PASS
+V241-014.patch standalone --check:PASS
+V241-015.patch standalone --check:PASS
+V241-016.patch standalone --check:PASS
+V241-001.patch cumulative --3way --index:PASS
+V241-002.patch cumulative --3way --index:PASS
+V241-003.patch cumulative --3way --index:PASS
+V241-004.patch cumulative --3way --index:PASS
+V241-005.patch cumulative --3way --index:PASS
+V241-006.patch cumulative --3way --index:PASS
+V241-007.patch cumulative --3way --index:PASS
+V241-008.patch cumulative --3way --index:PASS
+V241-009.patch cumulative --3way --index:PASS
+V241-010.patch cumulative --3way --index:PASS
+V241-011.patch cumulative --3way --index:PASS
+V241-012.patch cumulative --3way --index:PASS
+V241-013.patch cumulative --3way --index:PASS
+V241-014.patch cumulative --3way --index:PASS
+V241-015.patch cumulative --3way --index:PASS
+V241-016.patch cumulative --3way --index:PASS
+ workout/island/data/strings.he.json                |  8 +++-
+ workout/island/minigames/alien-v25-ui.mjs          |  4 +-
+ workout/island/minigames/alpine-engine.mjs         |  7 ++-
+ workout/island/minigames/alpine-league-island.mjs  | 28 +++++++++++-
+ workout/island/minigames/alpine-records.mjs        | 34 +++++++++++++++
+ workout/island/minigames/alpine-session.mjs        | 20 ++++-----
+ workout/island/minigames/alpine-view.mjs           | 11 ++++-
+ workout/island/minigames/fire-v24-scene.mjs        | 38 ++++++++++++----
+ workout/island/minigames/fire-v24-session.mjs      | 50 +++++++++++++++++-----
+ workout/island/minigames/hoops-athlete.mjs         |  2 +-
+ workout/island/minigames/hoops-tall.mjs            | 11 ++++-
+ workout/island/minigames/naval.mjs                 |  8 ++--
+ .../island/minigames/soccer-design-character.mjs   |  4 +-
+ workout/island/minigames/soccer.mjs                |  9 ++--
+ workout/island/minigames/tennis-v12-stadium.mjs    |  5 ++-
+ workout/island/offline-manifest.json               |  3 ++
+ workout/island/tools/hoops-v241-offline.mjs        | 11 ++---
+ workout/island/ui/activity.mjs                     | 26 ++++++++++-
+ workout/island/ui/alpine-league.mjs                |  2 +-
+ workout/island/ui/offline.mjs                      |  6 +++
+ 20 files changed, 231 insertions(+), 56 deletions(-)

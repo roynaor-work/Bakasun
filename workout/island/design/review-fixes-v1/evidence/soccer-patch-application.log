@@ -1,0 +1,9 @@
+Base: 43b27dc235387e3cb737aee9558cdf9d5fd5a262
+V241-005 independent check on main: PASS
+V241-006 independent check on main: PASS
+V241-007 independent check on main: PASS
+V241-005 isolated new tests: PASS
+V241-006 isolated new tests: PASS
+V241-007 isolated new tests: PASS
+005 + 007 + 006 composition: PASS (plain git apply)
+005 + 006 + 007 composition: PASS (plain git apply; identical resulting source)

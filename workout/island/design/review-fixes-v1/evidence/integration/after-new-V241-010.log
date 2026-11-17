@@ -1,0 +1,15 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+{"download":{"failed":[],"total":1542,"status":{"supported":true,"version":"island-v2-20261107-15","total":1542,"have":1542,"complete":true,"shell":{"total":680,"have":680,"complete":true},"games":{"soccer":{"total":141,"have":141,"complete":true},"hoops":{"total":159,"have":159,"complete":true},"alpine":{"total":88,"have":88,"complete":true},"alpineLeague":{"total":56,"have":56,"complete":true},"tennis":{"total":81,"have":81,"complete":true},"racing":{"total":138,"have":138,"complete":true},"naval":{"total":27,"have":27,"complete":true},"fire":{"total":100,"have":100,"complete":true},"alien":{"total":24,"have":24,"complete":true},"city":{"total":25,"have":25,"complete":true},"catch":{"total":66,"have":66,"complete":true}}}},"versions":[{"query":"","version":"v2"},{"query":"hoopsV241=0","version":"v22"},{"query":"hoopsBodyV2=0","version":"v22"}]}
+✔ V241-010: a complete cold cache preserves the v22 basketball rollback with a real offline worker (49041.389556ms)
+✔ V241-010: the rollback-offline kill switch restores the old download list (31.516873ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49188.572318
+
+# result: {"name":"after-new-V241-010","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-010.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":49239,"log":"after-new-V241-010.log"}

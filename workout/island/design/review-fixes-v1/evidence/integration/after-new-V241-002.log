@@ -1,0 +1,15 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (21892.641027ms)
+✔ V241-002: permanent context loss exits once; disposed listeners cannot fire (5430.660343ms)
+✔ V241-002: fireContextRecovery=0 retains the previous clock behavior (2001.422068ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 29433.03605
+
+# result: {"name":"after-new-V241-002","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":29481,"log":"after-new-V241-002.log"}

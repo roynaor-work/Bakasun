@@ -1,0 +1,21 @@
+diff --git a/workout/island/minigames/naval.mjs b/workout/island/minigames/naval.mjs
+index bc1131d353a2fe428f9bb86cea74dee3b6b52427..8e1a235fa7c877a9d66bc330608c1c8461612ae3 100644
+--- a/workout/island/minigames/naval.mjs
++++ b/workout/island/minigames/naval.mjs
+@@ -506,11 +506,13 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
+    if(playerShip.hp<=0){finish('lose');return;}
+    // v24.1 (`?navalAirEnd=v24` ends at once): the fleet is down but an aircraft is still up (attacking, flying away or falling), so the
+    // stage waits for a clear sky: no new aircraft, the clock stands still, the Vulcan keeps working (it runs above, in airSim.step).
+-   if(missionState.complete&&airEnd&&airSim&&navalSkyBusy(airSim.air)){if(!airFinale){airFinale=true;airFinaleAt=time;airSim.state.next=Infinity;}return;}
+-   if(missionState.complete){if(delay<=0)finish('win');return;}
++   const waitingForAir=missionState.complete&&airEnd&&airSim&&navalSkyBusy(airSim.air);
++   if(waitingForAir&&!airFinale){airFinale=true;airFinaleAt=time;airSim.state.next=Infinity;}
++   // Waiting blocks completion, not the controls below: repairs and supply buoys keep the Vulcan usable.
++   if(missionState.complete&&!waitingForAir){if(delay<=0)finish('win');return;}
+    if(enemyShip.hp<=0){enemyShip=enemies.find(e=>e.hp>0&&!e.structure)||enemies.find(e=>e.hp>0)||enemyShip;wave=enemyShip.index+1;}
+    if(phase==='sink'&&delay<=0)phase=ball.active?'shot':'aim';
+-   if(remaining<=0){finish('lose');return;}
++   if(remaining<=0&&!airFinale){finish('lose');return;}
+    const useful=[0,1,2,4].some(i=>ammo[i]>0),inFlight=ball.active||extraShots.length>0;
+    if(limited){
+     // Supply buoys: sail into one to reload. A buoy appears when the loaded shells or the belt reach the low mark, or after a sinking when the magazine is below the wave share; it drifts to a ship with nothing loaded.

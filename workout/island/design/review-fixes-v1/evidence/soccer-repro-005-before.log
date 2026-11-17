@@ -1,0 +1,91 @@
+[
+  {
+    "duration": 1.15,
+    "receiverMarker": false,
+    "offered": [
+      "header",
+      "volley"
+    ],
+    "selected": "volley",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.82,
+      "assisted": false,
+      "aerial": "volley"
+    }
+  },
+  {
+    "duration": 1.15,
+    "receiverMarker": true,
+    "offered": [
+      "header",
+      "volley"
+    ],
+    "selected": "volley",
+    "observed": {
+      "id": 2,
+      "type": "header",
+      "player": 0,
+      "team": 0
+    }
+  },
+  {
+    "duration": 1.4,
+    "receiverMarker": false,
+    "offered": [
+      "header",
+      "scissor"
+    ],
+    "selected": "scissor",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.92,
+      "assisted": false,
+      "aerial": "scissor"
+    }
+  },
+  {
+    "duration": 1.4,
+    "receiverMarker": true,
+    "offered": [
+      "header",
+      "scissor"
+    ],
+    "selected": "scissor",
+    "observed": {
+      "id": 2,
+      "type": "header",
+      "player": 0,
+      "team": 0
+    }
+  }
+]
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: the intended cross must obey the child's aerial choice
++ actual - expected
+
++ undefined
+- 'volley'
+
+    at file:///workspace/v241-soccer/workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs:56:57
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: 'volley',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

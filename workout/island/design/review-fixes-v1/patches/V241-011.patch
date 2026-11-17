@@ -1,0 +1,29 @@
+diff --git a/workout/island/minigames/alpine-view.mjs b/workout/island/minigames/alpine-view.mjs
+index 41caba13d4ec5820199a2edc7f929a28e8ee34f3..752e54069f626e35c87270eac115b4e7a6b32dc6 100644
+--- a/workout/island/minigames/alpine-view.mjs
++++ b/workout/island/minigames/alpine-view.mjs
+@@ -14,6 +14,15 @@ import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
+ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-15';
+ import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-15';
+ 
++/** Track heading is positive toward +X; with downhill -Z the root's Y rotation
++ * must have the opposite sign. Keep travelYaw's track-space contract for callers.
++ * ?alpineYawFix=0 restores the v24.1 presentation; alpineV241=0 keeps v24. */
++export function riderRootYaw(tilt, frame = {}, speed = 20, lateralSpeed = 8.5, v241 = true, search = globalThis.location?.search || '') {
++  if (!v241 || frame.crashed) return carvePose(tilt).yaw;
++  const heading = travelYaw(tilt, frame, speed, lateralSpeed);
++  return new URLSearchParams(search).get('alpineYawFix') === '0' ? heading : -heading;
++}
++
+ /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
+  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
+  * Everything is placed in world space through the course centreline: s along the path,
+@@ -517,7 +526,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
+       r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
+       const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll + (V241 ? curveBank(s.curve) : 0);
+       // v24.1: the skis point where the rider really goes (travelYaw) and the body banks into the course's turns (curveBank).
+-      const yawShown = V241 && !s.crashed ? travelYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed) : carve.yaw;
++      const yawShown = riderRootYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed, V241);
+       place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, yawShown, s.airKind === 'ramp' ? r.air * .12 : 0);
+       if (V241 && id === 'player') {
+         // The shield bubble around the rider, the magnet ring on the snow, and a spray of snow from the skis while braking.

@@ -1,0 +1,83 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-001: failed required room calls completion once and restores the street DOM (2251.73843ms)
+✖ V241-001: stalled request has bounded wait and disposal cancels the watchdog (5864.013713ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (5791.415809ms)
+✖ V241-001: parent entry flow resumes the paused street after a required scene failure (1241.629739ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15264.351031
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:5:1
+✖ V241-001: failed required room calls completion once and restores the street DOM (2251.73843ms)
+  AssertionError [ERR_ASSERTION]: a failed scene must leave the interior instead of waiting forever
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:8:10)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:502:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:11:1
+✖ V241-001: stalled request has bounded wait and disposal cancels the watchdog (5864.013713ms)
+  AssertionError [ERR_ASSERTION]: pending first room must time out
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:13:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:19:1
+✖ V241-001: parent entry flow resumes the paused street after a required scene failure (1241.629739ms)
+  AssertionError [ERR_ASSERTION]: the actual entry wrapper must release the street and discard the failed interior
+  + actual - expected
+  
+    {
+  +   done: false,
+  +   failed: undefined,
+  +   inside: true,
+  +   interior: false,
+  +   paused: true
+  -   done: true,
+  -   failed: true,
+  -   inside: false,
+  -   interior: true,
+  -   paused: false
+    }
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:34:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { paused: true, inside: true, done: false, failed: undefined, interior: false },
+    expected: { paused: false, inside: false, done: true, failed: true, interior: true },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-001","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":15315,"log":"before-new-V241-001.log"}

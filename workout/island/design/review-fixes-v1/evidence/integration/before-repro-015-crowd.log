@@ -1,0 +1,5 @@
+$ python3 "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/tennis-crowd-failure.py"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+{"metrics": {"fans": 600, "stands": 10, "triangles": 24290, "crowd": "billboard", "crowd3d": null, "crowdLate": "failed"}, "unhandled": ["TypeError: Failed to fetch"]}
+
+# result: {"name":"before-repro-015-crowd","executable":"python3","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/tennis-crowd-failure.py"],"code":0,"signal":null,"timedOut":false,"durationMs":3799,"log":"before-repro-015-crowd.log"}

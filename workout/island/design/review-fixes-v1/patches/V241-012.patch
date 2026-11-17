@@ -1,0 +1,174 @@
+diff --git a/workout/island/minigames/alpine-league-island.mjs b/workout/island/minigames/alpine-league-island.mjs
+index e4f5cc47cc9db6ca9dfdec78e96629f641fae1f1..afd6cff93f9624e1d5c37c24a6e9974ac59ce5a9 100644
+--- a/workout/island/minigames/alpine-league-island.mjs
++++ b/workout/island/minigames/alpine-league-island.mjs
+@@ -1,8 +1,10 @@
+-import {leagueEnabled,leagueSummary,stageSetup,applyStage,buyGear,stageInfo,STAGE_COUNT} from './alpine-league-core.mjs?v=island-v2-20261107-15';
++import {leagueEnabled,leagueSummary,stageSetup,applyStage,buyGear,stageInfo,engineStageOf,STAGE_COUNT} from './alpine-league-core.mjs?v=island-v2-20261107-15';
+ import {createLeagueStore} from './alpine-league-store.mjs?v=island-v2-20261107-15';
+ import {alpineLeagueResult} from './alpine-league-result.mjs?v=island-v2-20261107-15';
+ import {stageGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-15';
+ import {balanceForPage} from './alpine-v241.mjs?v=island-v2-20261107-15';
++import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-15';
++import {loadRecords,recordRun,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-15';
+ 
+ /** Ski league v23 on the island engine: `engine.alpineLeague`. The league state lives in its own key (alpine-league-store.mjs), so
+  * nothing here reads or writes the island save. A league run starts through engine.startMinigame('alpineRush', {alpineLeague: n}) and
+@@ -12,13 +14,27 @@ import {balanceForPage} from './alpine-v241.mjs?v=island-v2-20261107-15';
+ export function installAlpineLeague(engine, {storage, config, flags = {}, busy = () => null, notify = () => {}}) {
+   // v24.1: ?alpineV241=0 gives the league its v24 courses, rivals and goals (the session strips the same way).
+   const base = balanceForPage(config.minigames.alpineRush), store = createLeagueStore(storage);
++  const search = globalThis.location?.search || '', scopedTimes = !!base.physics.v241 && new URLSearchParams(search).get('alpineHistoryFix') !== '0', spaces = new Map();
++  function timingSpace(n) {
++    if (!spaces.has(n)) {
++      const balance = alpineRunBalance(base, n, search), level = balance.levels[engineStageOf(n) - 1], track = {...balance.tracks[level.trackId], id: level.trackId};
++      spaces.set(n, {balance, trackId: level.trackId, storage: alpineHistoryStorage(storage, balance, generateCourse(track, balance.physics), search)});
++    }
++    return spaces.get(n);
++  }
++  function stageBest(n) {
++    const previous = store.state.best[n] || null;
++    if (!scopedTimes) return previous;
++    const space = timingSpace(n), current = loadRecords(space.storage, space.balance.records).data.best[space.trackId];
++    return previous ? {...previous, ms: current?.ms || 0} : current ? {stars: 0, ms: current.ms, place: current.rank} : null;
++  }
+   const api = {
+     enabled: () => leagueEnabled() && !!flags.minigames && flags.alpineRush !== false && engine.registry.minigames.has('alpineRush'),
+     get state() { return store.state; },
+     status: () => store.status,
+     summary: () => leagueSummary(store.state),
+     /** Goals and course facts of a stage for the screens (any stage, open or not). */
+-    stage(n) { const info = stageInfo(n); return info ? {...info, goals: stageGoals(base, n), facts: courseFacts(base, n), best: store.state.best[n] || null, open: n <= store.state.stage} : null; },
++    stage(n) { const info = stageInfo(n); return info ? {...info, goals: stageGoals(base, n), facts: courseFacts(base, n), best: stageBest(n), open: n <= store.state.stage} : null; },
+     /** The setup of a run of stage n (the frontier when omitted), or null when the league is off or the stage is closed. */
+     setup(n = store.state.stage) {
+       if (!api.enabled()) return null;
+@@ -28,7 +44,15 @@ export function installAlpineLeague(engine, {storage, config, flags = {}, busy =
+     /** Checks and applies one finished league run. Null when the result does not add up (the engine then rejects it). */
+     finish(raw, ctx) {
+       const v = alpineLeagueResult(raw, ctx, base); if (!v) return null;
++      const previousMs = store.state.best[v.n]?.ms || 0;
+       let applied; try { applied = applyStage(store.state, v); } catch { return null; }
++      if (scopedTimes) {
++        // Stars, gear and progression keep their history. v24's timing field stays
++        // available to rollback; current times live beside the session's ghost.
++        store.state.best[v.n].ms = previousMs;
++        const space = timingSpace(v.n);
++        recordRun(space.storage, space.balance.records, loadRecords(space.storage, space.balance.records), raw.alpine);
++      }
+       const saved = store.save();
+       return {...v, ...applied, saved: saved.ok, setup: ctx.alpineLeague};
+     },
+diff --git a/workout/island/minigames/alpine-records.mjs b/workout/island/minigames/alpine-records.mjs
+index e0ddaf5d38bef39f7dba6a09e285a88143c9c53f..5904249b73ab951d18fd97adb577e4f9ac6824c4 100644
+--- a/workout/island/minigames/alpine-records.mjs
++++ b/workout/island/minigames/alpine-records.mjs
+@@ -1,3 +1,6 @@
++import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-15';
++import {GHOST_KEY} from './alpine-league-ghost.mjs?v=island-v2-20261107-15';
++
+ /** Alpine Rush personal records (best time per course) in their own local key.
+  * The island save keeps stages, stars, wins and coins; this file never touches it.
+  * Damaged data is copied aside once and never overwritten silently; a newer
+@@ -46,3 +49,34 @@ export function formatRaceTime(ms) {
+   const total = Math.max(0, Math.round(ms / 10)), minutes = Math.floor(total / 6000), seconds = Math.floor(total / 100) % 60, hundredths = total % 100;
+   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+ }
++
++/** The session and league timing display must identify the same effective rules. */
++export function alpineRunBalance(pageBalance, leagueN, search = globalThis.location?.search || '') {
++  const baseBalance = leagueN ? leagueBalance(pageBalance, leagueN) : pageBalance;
++  const q = new URLSearchParams(search), airOff = q.get('alpineAir') === '0', fallOff = q.get('alpineFall') === '0', obsOff = q.get('alpineObs') === '0';
++  const b = (airOff && baseBalance.physics.airBoost) || (fallOff && baseBalance.physics.fall) ? {...baseBalance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(baseBalance.physics)} : baseBalance;
++  return obsOff ? {...b, tracks: Object.fromEntries(Object.entries(b.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : b;
++}
++
++/** Personal times and ghosts must describe the same physics and generated course.
++ * This is a namespace, never a migration: old bytes remain available to rollback.
++ * alpineV241=0 (no physics.v241) and ?alpineHistoryFix=0 use the original keys. */
++export function alpineHistoryStorage(storage, balance, course, search = globalThis.location?.search || '') {
++  if (!storage || !balance.physics.v241 || new URLSearchParams(search).get('alpineHistoryFix') === '0') return storage;
++  // Two independent 32-bit lanes avoid large keys and run synchronously in browsers
++  // without a crypto/WASM dependency. Include the generated geometry, not just its id.
++  const identity = JSON.stringify({ruleset: 'alpine-v241-1', physics: balance.physics, course});
++  let a = 0x811c9dc5, b = 0x9e3779b9;
++  for (let i = 0; i < identity.length; i++) {
++    const c = identity.charCodeAt(i);
++    a = Math.imul(a ^ c, 0x01000193);
++    b = Math.imul(b ^ c, 0x85ebca6b);
++  }
++  const suffix = '.rules-v241-' + (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
++  const recordsKey = balance.records.storageKey;
++  const keyFor = key => key === recordsKey || key === GHOST_KEY ? key + suffix : key === recordsKey + '.corrupt' ? recordsKey + suffix + '.corrupt' : key;
++  return {
++    getItem: key => storage.getItem(keyFor(key)),
++    setItem: (key, value) => storage.setItem(keyFor(key), value),
++  };
++}
+diff --git a/workout/island/minigames/alpine-session.mjs b/workout/island/minigames/alpine-session.mjs
+index 3635dc6b2dee66d81cb82c5b8ab0edf7f72b6f3f..1f6b3fd9b4e4e656d4184aea3d695d03e22ca55e 100644
+--- a/workout/island/minigames/alpine-session.mjs
++++ b/workout/island/minigames/alpine-session.mjs
+@@ -3,7 +3,7 @@ import {enhanceAlpineOpening} from './alpine-screen.mjs';
+ import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-15';
+ import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-15';
+ import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-15';
+-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261107-15';
++import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-15';
+ import {createQualityGovernor} from './alpine-quality.mjs';
+ import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-15';
+ import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-15';
+@@ -55,18 +55,14 @@ export function runAlpineSession(ctx) {
+   const league = ctx.alpineLeague || null, leagueTheme = league ? THEME_LOOKS[league.theme] : null;
+   // v24.1: ?alpineV241=0 runs v24 (the island strips the balance too, so the result check sees the same courses; stripping is idempotent).
+   const pageBalance = balanceForPage(ctx.balance);
+-  const baseBalance = league ? leagueBalance(pageBalance, league.n) : pageBalance;
+-  // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
+-  const urlQuery = new URLSearchParams(globalThis.location?.search || ''), airOff = urlQuery.get('alpineAir') === '0', fallOff = urlQuery.get('alpineFall') === '0', obsOff = urlQuery.get('alpineObs') === '0';
+-  const balance0 = (airOff && baseBalance.physics.airBoost) || (fallOff && baseBalance.physics.fall) ? {...baseBalance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(baseBalance.physics)} : baseBalance,
+-    // ?alpineObs=0 removes the narrow passages (warning signs come with them).
+-    balance = obsOff ? {...balance0, tracks: Object.fromEntries(Object.entries(balance0.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : balance0, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
++  const balance = alpineRunBalance(pageBalance, league?.n), stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
+   const level = engine.level, track = engine.track, v241 = !!balance.physics.v241;
+   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
+-  const records = loadRecords(storage, balance.records);
++  const historyStorage = alpineHistoryStorage(storage, balance, engine.course);
++  const records = loadRecords(historyStorage, balance.records);
+   // League: the record run of this stage rides along as a ghost, and this run is recorded to become the next ghost if it is faster.
+-  const ghostTrack = league ? loadGhost(storage, league.n) : null, ghostRecorder = league ? createGhostRecorder() : null;
++  const ghostTrack = league ? loadGhost(historyStorage, league.n) : null, ghostRecorder = league ? createGhostRecorder() : null;
+   let ghostOutcome = null;
+   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
+   let kitHud=null;
+@@ -368,9 +364,9 @@ export function runAlpineSession(ctx) {
+     if (snap.result && !finished) {
+       finished = true;
+       const r = snap.result;
+-      recordOutcome = recordRun(storage, balance.records, records, r);
++      recordOutcome = recordRun(historyStorage, balance.records, records, r);
+       // League: a finished run faster than the stored ghost becomes the new ghost of this stage.
+-      if (league && r.completed) ghostOutcome = saveGhost(storage, league.n, ghostRecorder.encode(r.elapsedMs));
++      if (league && r.completed) ghostOutcome = saveGhost(historyStorage, league.n, ghostRecorder.encode(r.elapsedMs));
+       const summary = {...r, trackName, coinTotal: engine.course.coins, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest, ...(league ? {ghost: {saved: !!ghostOutcome?.saved, previousMs: ghostTrack?.ms ?? null}} : {})};
+       ctx.onAlpineSummary?.(summary);
+       const stats = league ? engine.leagueStats() : null;
+@@ -382,3 +378,5 @@ export function runAlpineSession(ctx) {
+   }
+   return session;
+ }
++
++export {alpineRunBalance,alpineHistoryStorage};
+diff --git a/workout/island/ui/alpine-league.mjs b/workout/island/ui/alpine-league.mjs
+index 11c4254573f42325d3ff2eda4a2b92e61eeec074..fe97fa21ab920c3b3058008f4451b94214525961 100644
+--- a/workout/island/ui/alpine-league.mjs
++++ b/workout/island/ui/alpine-league.mjs
+@@ -32,7 +32,7 @@ function chip(id) { const c = el('span', 'al-chip'); c.style.background = colorO
+ function stageStrip(engine, sum, themeIndex, go) {
+   const theme = sum.themes[themeIndex - 1], list = el('ol', 'al-stages'); accent(list, theme.id); list.setAttribute('aria-label', `שלבי ${theme.name}`);
+   for (let k = 0; k < PER_THEME; k++) {
+-    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.state.best[n], open = n <= sum.stage, item = el('li', 'al-stage');
++    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.stage(n)?.best, open = n <= sum.stage, item = el('li', 'al-stage');
+     item.dataset.n = String(n); item.dataset.state = best?.stars ? 'done' : open ? 'next' : 'locked'; if (info.boss) item.dataset.boss = 'true';
+     const b = button('', 'alpine-league-stage', () => go(n), 'al-stage-button'); b.disabled = !open; b.dataset.n = String(n);
+     b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, ${best?.stars || 0} כוכבים` : ', נעול'}`);

@@ -1,0 +1,860 @@
+{
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "audit": "aafc3e170d1f271f3a8695446b733b35f03d3443",
+  "node": "v24.19.0",
+  "started": "2026-11-17T18:28:57.295Z",
+  "finished": "2026-11-17T18:41:44.143Z",
+  "durationSeconds": 766.848,
+  "success": true,
+  "commands": 98,
+  "externalTimeouts": 0,
+  "standalonePatchChecks": 16,
+  "cumulativePatchesApplied": 16,
+  "newTests": {
+    "before": {
+      "tests": 51,
+      "pass": 16,
+      "fail": 35,
+      "skipped": 0
+    },
+    "after": {
+      "tests": 51,
+      "pass": 51,
+      "fail": 0,
+      "skipped": 0
+    },
+    "filesFailingBefore": 16,
+    "filesPassingAfter": 16
+  },
+  "existing": {
+    "files": 29,
+    "before": {
+      "code": 0,
+      "tests": 339,
+      "pass": 339,
+      "fail": 0,
+      "skipped": 0,
+      "log": "evidence/integration/before-existing.log"
+    },
+    "after": {
+      "code": 0,
+      "tests": 339,
+      "pass": 339,
+      "fail": 0,
+      "skipped": 0,
+      "log": "evidence/integration/after-existing.log"
+    }
+  },
+  "findings": [
+    {
+      "id": "V241-001",
+      "patch": "patches/V241-001.patch",
+      "sha256": "b0d2e10e5c0afc4bc40e1ccf5ce20990b33d96ca72746b69e1e4b52c763f08a8",
+      "test": "tests/V241-001.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 4,
+        "pass": 1,
+        "fail": 3,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-001.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-001.log"
+      }
+    },
+    {
+      "id": "V241-002",
+      "patch": "patches/V241-002.patch",
+      "sha256": "e7b9d593b3dfe18d0d153c1dd10230fc282e316e15c0b287ec18d1986d47638a",
+      "test": "tests/V241-002.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 3,
+        "pass": 1,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-002.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-002.log"
+      }
+    },
+    {
+      "id": "V241-003",
+      "patch": "patches/V241-003.patch",
+      "sha256": "ea5267868b62d518e916cda3a5586a53651922109e5dc66b927d2955325196c3",
+      "test": "tests/V241-003.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-003.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-003.log"
+      }
+    },
+    {
+      "id": "V241-004",
+      "patch": "patches/V241-004.patch",
+      "sha256": "8c68e95394d391e86264b7961799ea2aa036537c582346cb906ebd4d2d669f8d",
+      "test": "tests/V241-004.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 3,
+        "pass": 0,
+        "fail": 3,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-004.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-004.log"
+      }
+    },
+    {
+      "id": "V241-005",
+      "patch": "patches/V241-005.patch",
+      "sha256": "6743c9f98712698ff52925aa3acb971a9ea68459f6d3c82cceaf64aaa0cb0b36",
+      "test": "tests/V241-005.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 6,
+        "pass": 4,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-005.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-005.log"
+      }
+    },
+    {
+      "id": "V241-006",
+      "patch": "patches/V241-006.patch",
+      "sha256": "eae7e60cde716b17e5f300d0e401bfdfe6678d8171c13dab682ea9b15c2ed8d0",
+      "test": "tests/V241-006.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 4,
+        "pass": 3,
+        "fail": 1,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-006.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-006.log"
+      }
+    },
+    {
+      "id": "V241-007",
+      "patch": "patches/V241-007.patch",
+      "sha256": "16a3a46c89ba2f8f53f995b985aef55b931172c5ca1769773260307d1fbeae7a",
+      "test": "tests/V241-007.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 9,
+        "pass": 3,
+        "fail": 6,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-007.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-007.log"
+      }
+    },
+    {
+      "id": "V241-008",
+      "patch": "patches/V241-008.patch",
+      "sha256": "e5018d0d662811c3a6ad541e69db250c1745959d4235436707aa1bdbaad17741",
+      "test": "tests/V241-008.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 2,
+        "pass": 1,
+        "fail": 1,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-008.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-008.log"
+      }
+    },
+    {
+      "id": "V241-009",
+      "patch": "patches/V241-009.patch",
+      "sha256": "8d6bce2a6c33287428c391bf3e379e6fac9ea5ede92ff2d864edd7dcdf021fb6",
+      "test": "tests/V241-009.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-009.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-009.log"
+      }
+    },
+    {
+      "id": "V241-010",
+      "patch": "patches/V241-010.patch",
+      "sha256": "7d09eeb40f1b9d2e9c8da13521efa5ea1e46869765448933e6fb4d28f5bc84b9",
+      "test": "tests/V241-010.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-010.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-010.log"
+      }
+    },
+    {
+      "id": "V241-011",
+      "patch": "patches/V241-011.patch",
+      "sha256": "9b32f35954382792b444c0679408c726c579b5c8bd0b282fc66bbbe20ffce292",
+      "test": "tests/V241-011.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-011.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-011.log"
+      }
+    },
+    {
+      "id": "V241-012",
+      "patch": "patches/V241-012.patch",
+      "sha256": "f1ca7690b88f56377fa1d5cf71d1cce9489fb227534e8f0927e96206d2204b02",
+      "test": "tests/V241-012.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 3,
+        "pass": 0,
+        "fail": 3,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-012.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-012.log"
+      }
+    },
+    {
+      "id": "V241-013",
+      "patch": "patches/V241-013.patch",
+      "sha256": "46d1f339d51f42ffb20fbd65456bd20053e4c44bbfa3b43c133dd29b3c9597af",
+      "test": "tests/V241-013.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-013.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-013.log"
+      }
+    },
+    {
+      "id": "V241-014",
+      "patch": "patches/V241-014.patch",
+      "sha256": "f2e8b902118139a099f95cfed08a19f72bef3349a483b9b6886ebc28936a8bc5",
+      "test": "tests/V241-014.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-014.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-014.log"
+      }
+    },
+    {
+      "id": "V241-015",
+      "patch": "patches/V241-015.patch",
+      "sha256": "a742950819159be4d4d76d3a215c27e24d4eaf74544d4bd48543864c4a44ecc1",
+      "test": "tests/V241-015.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 4,
+        "pass": 2,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-015.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-015.log"
+      }
+    },
+    {
+      "id": "V241-016",
+      "patch": "patches/V241-016.patch",
+      "sha256": "8e9332592e1cdbdabe1f97958c7cb4efe0174a54635abf7893c1c90d93800a97",
+      "test": "tests/V241-016.test.mjs",
+      "before": {
+        "code": 1,
+        "tests": 3,
+        "pass": 1,
+        "fail": 2,
+        "skipped": 0,
+        "log": "evidence/integration/before-new-V241-016.log"
+      },
+      "after": {
+        "code": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "skipped": 0,
+        "log": "evidence/integration/after-new-V241-016.log"
+      }
+    }
+  ],
+  "reproductions": [
+    {
+      "name": "001-shell",
+      "file": "fire-first-room-shell.py",
+      "before": {
+        "name": "before-repro-001-shell",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-first-room-shell.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 18540,
+        "log": "before-repro-001-shell.log"
+      },
+      "after": {
+        "name": "after-repro-001-shell",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-first-room-shell.py"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 75351,
+        "log": "after-repro-001-shell.log"
+      }
+    },
+    {
+      "name": "002-context",
+      "file": "fire-context-loss.py",
+      "before": {
+        "name": "before-repro-002-context",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-context-loss.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 6020,
+        "log": "before-repro-002-context.log"
+      },
+      "after": {
+        "name": "after-repro-002-context",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-context-loss.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 5871,
+        "log": "after-repro-002-context.log"
+      }
+    },
+    {
+      "name": "003-keyboard",
+      "file": "fire-keyboard.py",
+      "before": {
+        "name": "before-repro-003-keyboard",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-keyboard.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 4091,
+        "log": "before-repro-003-keyboard.log"
+      },
+      "after": {
+        "name": "after-repro-003-keyboard",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-keyboard.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 4306,
+        "log": "after-repro-003-keyboard.log"
+      }
+    },
+    {
+      "name": "004-rooms",
+      "file": "fire-interior-failures.py",
+      "before": {
+        "name": "before-repro-004-rooms",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-interior-failures.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 10878,
+        "log": "before-repro-004-rooms.log"
+      },
+      "after": {
+        "name": "after-repro-004-rooms",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-interior-failures.py"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 6184,
+        "log": "after-repro-004-rooms.log"
+      }
+    },
+    {
+      "name": "005-air",
+      "file": "soccer-air-choice-override.mjs",
+      "before": {
+        "name": "before-repro-005-air",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 722,
+        "log": "before-repro-005-air.log"
+      },
+      "after": {
+        "name": "after-repro-005-air",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 207,
+        "log": "after-repro-005-air.log"
+      }
+    },
+    {
+      "name": "006-slide",
+      "file": "soccer-view-slide-timeline.mjs",
+      "before": {
+        "name": "before-repro-006-slide",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 144,
+        "log": "before-repro-006-slide.log"
+      },
+      "after": {
+        "name": "after-repro-006-slide",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 122,
+        "log": "after-repro-006-slide.log"
+      }
+    },
+    {
+      "name": "007-dive",
+      "file": "soccer-view-keeper-dive.mjs",
+      "before": {
+        "name": "before-repro-007-dive",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 134,
+        "log": "before-repro-007-dive.log"
+      },
+      "after": {
+        "name": "after-repro-007-dive",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 113,
+        "log": "after-repro-007-dive.log"
+      }
+    },
+    {
+      "name": "008-supply",
+      "file": "combat-naval-finale-supply.mjs",
+      "before": {
+        "name": "before-repro-008-supply",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 321,
+        "log": "before-repro-008-supply.log"
+      },
+      "after": {
+        "name": "after-repro-008-supply",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 260,
+        "log": "after-repro-008-supply.log"
+      }
+    },
+    {
+      "name": "009-switch",
+      "file": "combat-switch.py",
+      "before": {
+        "name": "before-repro-009-switch",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-switch.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 2678,
+        "log": "before-repro-009-switch.log"
+      },
+      "after": {
+        "name": "after-repro-009-switch",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-switch.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 1764,
+        "log": "after-repro-009-switch.log"
+      }
+    },
+    {
+      "name": "010-offline",
+      "file": "offline-roundtrip.py",
+      "before": {
+        "name": "before-repro-010-offline",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/offline-roundtrip.py",
+          "--games",
+          "",
+          "--output",
+          "/tmp/review-fixes-v1-offline-roundtrip.json"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 50275,
+        "log": "before-repro-010-offline.log"
+      },
+      "after": {
+        "name": "after-repro-010-offline",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/offline-roundtrip.py",
+          "--games",
+          "",
+          "--output",
+          "/tmp/review-fixes-v1-offline-roundtrip.json"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 49222,
+        "log": "after-repro-010-offline.log"
+      }
+    },
+    {
+      "name": "011-yaw",
+      "file": "alpine-yaw-sign.mjs",
+      "before": {
+        "name": "before-repro-011-yaw",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 71,
+        "log": "before-repro-011-yaw.log"
+      },
+      "after": {
+        "name": "after-repro-011-yaw",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 66,
+        "log": "after-repro-011-yaw.log"
+      }
+    },
+    {
+      "name": "012-records",
+      "file": "alpine-records-ruleset.mjs",
+      "before": {
+        "name": "before-repro-012-records",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 707,
+        "log": "before-repro-012-records.log"
+      },
+      "after": {
+        "name": "after-repro-012-records",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 648,
+        "log": "after-repro-012-records.log"
+      }
+    },
+    {
+      "name": "013-powder",
+      "file": "alpine-powder-visibility.mjs",
+      "before": {
+        "name": "before-repro-013-powder",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 248,
+        "log": "before-repro-013-powder.log"
+      },
+      "after": {
+        "name": "after-repro-013-powder",
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 249,
+        "log": "after-repro-013-powder.log"
+      }
+    },
+    {
+      "name": "014-fake",
+      "file": "hoops-fake-comparison.py",
+      "before": {
+        "name": "before-repro-014-fake",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/hoops-fake-comparison.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 4467,
+        "log": "before-repro-014-fake.log"
+      },
+      "after": {
+        "name": "after-repro-014-fake",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/hoops-fake-comparison.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 4542,
+        "log": "after-repro-014-fake.log"
+      }
+    },
+    {
+      "name": "015-crowd",
+      "file": "tennis-crowd-failure.py",
+      "before": {
+        "name": "before-repro-015-crowd",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/tennis-crowd-failure.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 3799,
+        "log": "before-repro-015-crowd.log"
+      },
+      "after": {
+        "name": "after-repro-015-crowd",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/tennis-crowd-failure.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 3742,
+        "log": "after-repro-015-crowd.log"
+      }
+    },
+    {
+      "name": "016-help",
+      "file": "racing-help-rollback.py",
+      "before": {
+        "name": "before-repro-016-help",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/racing-help-rollback.py"
+        ],
+        "code": 0,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 2050,
+        "log": "before-repro-016-help.log"
+      },
+      "after": {
+        "name": "after-repro-016-help",
+        "executable": "python3",
+        "argv": [
+          "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/racing-help-rollback.py"
+        ],
+        "code": 1,
+        "signal": null,
+        "timedOut": false,
+        "durationMs": 2082,
+        "log": "after-repro-016-help.log"
+      }
+    }
+  ]
+}

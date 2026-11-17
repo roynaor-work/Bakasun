@@ -1,0 +1,68 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (9860.339018ms)
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (8342.134937ms)
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (5708.661177ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24022.19882
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:5:1
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (9860.339018ms)
+  AssertionError [ERR_ASSERTION]: a required second room must reset readiness
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:10:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:13:1
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (8342.134937ms)
+  AssertionError [ERR_ASSERTION]: a rejected prefetch must be requested again at the actual transition
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:20:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:22:1
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (5708.661177ms)
+  AssertionError [ERR_ASSERTION]: readiness waits for the next friend only when the fix is enabled
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:28:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-004","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":24074,"log":"before-new-V241-004.log"}

@@ -1,0 +1,16 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-001: failed required room calls completion once and restores the street DOM (2008.48515ms)
+✔ V241-001: stalled request has bounded wait and disposal cancels the watchdog (6432.640118ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (6352.208177ms)
+✔ V241-001: parent entry flow resumes the paused street after a required scene failure (1644.676101ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16566.108129
+
+# result: {"name":"after-new-V241-001","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":16612,"log":"after-new-V241-001.log"}

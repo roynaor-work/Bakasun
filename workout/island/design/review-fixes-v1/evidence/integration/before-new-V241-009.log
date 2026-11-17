@@ -1,0 +1,32 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-009.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-009: native Enter, Space and semantic click activate once; a pointer keeps one immediate edge (1369.972737ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1847.156973
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-009.test.mjs:21:1
+✖ V241-009: native Enter, Space and semantic click activate once; a pointer keeps one immediate edge (1369.972737ms)
+  AssertionError [ERR_ASSERTION]: Enter activates the native button
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-009.test.mjs:27:66)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-009","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-009.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":1893,"log":"before-new-V241-009.log"}

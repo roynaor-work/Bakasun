@@ -1,0 +1,18 @@
+✔ V241-001: failed required room calls completion once and restores the street DOM (5585.369807ms)
+✔ V241-001: stalled request has bounded wait and disposal cancels the watchdog (15071.47007ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (10693.873909ms)
+✔ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (16594.7218ms)
+✔ V241-002: permanent context loss exits once; disposed listeners cannot fire (10737.980794ms)
+✔ V241-002: fireContextRecovery=0 retains the previous clock behavior (9768.604464ms)
+✔ V241-003: tutorial has a semantic continue button activated by Enter and Space (9787.544726ms)
+✔ V241-003: semantic click works once and fireKeyboard=0 retains old markup (4868.919416ms)
+✔ V241-004: delayed second room is a loading barrier; no model time or stale picking (9573.823321ms)
+✔ V241-004: rejected prefetch is evicted and the real transition retries it (6314.023964ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99987.960212

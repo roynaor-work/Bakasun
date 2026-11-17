@@ -1,0 +1,52 @@
+✖ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (19022.465269ms)
+✔ V241-002: permanent context loss exits once; disposed listeners cannot fire (5940.447295ms)
+✔ V241-002: fireContextRecovery=0 retains the previous clock behavior (2118.527616ms)
+✔ V241-004: delayed second room is a loading barrier; no model time or stale picking (4383.016707ms)
+✔ V241-004: rejected prefetch is evicted and the real transition retries it (3747.677733ms)
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (7139.055938ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 42613.072993
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:5:1
+✖ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (19022.465269ms)
+  AssertionError [ERR_ASSERTION]: model time must stop while the renderer is lost
+  + actual - expected
+  
+  + 4.452000000000003
+  - 4.341000000000003
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:9:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 4.452000000000003,
+    expected: 4.341000000000003,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:19:1
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (7139.055938ms)
+  AssertionError [ERR_ASSERTION]: the room timer follows the same barrier: {"before":17.59999999999998,"time":17.59999999999998,"phase":"intro","fade":"in","hidden":false,"ready":true,"done":[]}
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:26:217)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

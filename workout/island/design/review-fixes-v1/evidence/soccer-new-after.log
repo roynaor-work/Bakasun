@@ -1,0 +1,27 @@
+✔ V241-005: intended penalty-area cross obeys explicit volley (315.030885ms)
+✔ V241-005: intended penalty-area cross obeys explicit scissor (230.742157ms)
+✔ V241-005: an unarmed intended cross still receives automatic heading assistance (105.120192ms)
+✔ V241-005: soccerV241 rollback keeps legacy high-ball behavior (121.324253ms)
+✔ V241-005: URL rollback ?soccerAirChoice=0 restores automatic heading (132.1013ms)
+✔ V241-005: URL rollback ?soccerV241=0 restores automatic heading (149.338217ms)
+✔ V241-006: real retargeted slide stays finite and monotonic through contact, recovery, get-up and idle (126.539951ms)
+✔ V241-006: a recovered slide releases to a moving player (16.723411ms)
+✔ V241-006: ?soccerTackleV2=0 keeps the real v24 slide (11.202569ms)
+✔ V241-006: ?soccerV241=0 keeps the real v24 slide (2.468045ms)
+✔ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (130.481717ms)
+✔ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (69.23109ms)
+✔ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (11.975297ms)
+✔ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (30.026633ms)
+✔ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (24.257128ms)
+✔ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (84.384611ms)
+✔ V241-007: an explicit celebration can interrupt the dive (10.982786ms)
+✔ V241-007: ?soccerTackleV2=0 keeps legacy keeper clips (3.915019ms)
+✔ V241-007: ?soccerV241=0 keeps legacy keeper clips (42.714123ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1633.719086

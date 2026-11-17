@@ -1,0 +1,45 @@
+✔ v25 flags: HUD, arsenal and enemy fire on by default; ?alienHud=v24|v23, ?alienArsenal=0, ?alienEnemyFire=v24 (or the globals) restore v24; config carries the numbers (8.75574ms)
+✔ a little more enemy fire: the cadence x0.8 and two more bullets in the air; measured +15% or more bullets per minute, stage 1 still won (2041.017495ms)
+✔ the switch: one press = the next special weapon (missile, lightning, shockwave, missile), held does not repeat; the special button fires the selected one (1.889005ms)
+✔ chain lightning: an instant bolt to the nearest alien above the ship, then up to 3 jumps, each weaker; a charge per use, nothing in range costs nothing (4.597408ms)
+✔ shockwave: a ring rolls up from the ship, wipes out the enemy bullets it touches, hits every alien it passes once, one ring at a time, gone at its radius (39.065114ms)
+✔ ammo: a token for the emptiest weapon (big ships often, others by chance, pity for a weapon empty a while), one at a time; flying into it fills, capped (329.603654ms)
+✔ ?alienArsenal=0 is v24: the special button is the missile, the switch input does nothing, no arsenal fields (2.964583ms)
+✔ drawing: the bolt (three strokes per hop), the ring, the ammo tokens, from model state only; nothing with the arsenal off (3.619091ms)
+✔ the switch on a fake DOM: one press per tap (and the C key), the special button shows the selected weapon, the switch the next one and its charges (11.170274ms)
+✔ HUD v25 stylesheet and wiring: the same ring sizes from the bottom corner up, the switch beside the special button, no text by the stick; only with data-alien-low (70.474201ms)
+boars v24.1 model {"v24":{"hit":0.652,"med":0.721,"mean":0.961,"strokes":4.285,"first":1.223},"v241":{"hit":0.69,"med":0.662,"mean":0.878,"strokes":3.987,"first":1.072}}
+✔ ships v24.1 flags: radar, clear sky, no hit words and the deep submarine are on by default; each one alone returns to v24 (41.711054ms)
+✔ radar lock time: 0.8 s for a near hull at stage 1 up to 1.5 s for a far hull late, longer with distance and stage, never outside 0.8-1.5 (26.070159ms)
+✔ radar in the model: a tap starts an acquisition (no lock, the turret already swings), the lock comes after the measured time, a second tap fires right after it (449.263651ms)
+✔ radar in the model: a quick Fire tap during the acquisition waits for the lock; the Lock button acquires the top of the order and a second tap moves the acquisition on (92.233077ms)
+✔ radar range: a hull out of range is refused with its reason, and a lock breaks when its hull leaves the range (sailing away) (604.760891ms)
+✔ aim precision: tapping Fire every 0.4 s at a locked hull, the radar gun holds fire after the kill, so no locked shell flies into the empty sea after its hull sank (v24 sent some there) (12619.557199ms)
+✔ the child bot with the radar (it waits for the gauge, sails in on "out of range"): 80-100% hits at stages 1, 5 and 10, stage 1 won, every lock 0.8-1.5 s (11777.772708ms)
+✔ clear sky at the end: the fleet sinks with the helicopter up, the stage waits (clock still, no new aircraft) and ends once the Vulcan brings it down; ?navalAirEnd=v24 ends at once (798.388873ms)
+✔ deep submarine: under water from the first frame to the last (only the torpedo reaches it), enough torpedoes for every hit, an empty tube reloads; ?navalSub=v24 surfaces (1215.392245ms)
+✔ deep submarine: the child bot sinks it with torpedoes from its button (no surfacing needed) and wins the hunt (381.610242ms)
+✔ v24.1 HUD: the radar gauge fills on the hull, a refused or lost lock says why and shows the radar ring, the clear-sky banner; v24 HUD: no hit words, a neutral ring (3.606441ms)
+✔ input layer: the Lock button rim fills with the acquisition (data-radar, --naval-radar) and is plain again once locked (10.019771ms)
+✔ boars v24.1 stick: only the curve start and the slowdown over a boar change; a small push is a third faster, full tilt unchanged (0.334655ms)
+✔ boars v24.1 in the child model (8-12 deg aim noise, 2400 boars a version): hits up, time onto a new boar down, fewer corrections, first hit sooner than v24 (1929.373616ms)
+✔ boars v24.1: a push away still leaves the boar, never slower than v24 below 60% tilt, a firm push within 0.65 s (21.002231ms)
+✔ boars v24.1 weapons: every one of the 12 has its own round (bullets, pellets, shells, bolts by family), its own colours and its own sound (1.798324ms)
+✔ boars v24.1 shells: the arc lands on the aim point in v24's flight time at any frame rate, rises visibly, the mortar higher (0.97017ms)
+✔ boars v24.1 wiring: game.js draws the rounds and plays the sounds behind ?boarFx=v24, the stick behind ?boarAim=v24; the island forwards both; versioned imports; offline (25.907845ms)
+✔ flag and rule: v24.1 by default, ?racingPitAuto=0 is v24; the automatic stop is at the end of lap 2, or lap 1 in a two-lap race (14.226121ms)
+✔ why v24 showed the stop on one track only: it needed 3 laps, and the quick races of tiers 0-1, the league sprints and half the short-races calendar have 2; v24.1 stops in every race (947.123809ms)
+✔ 3 laps, no tap at all: the stop is announced at the start of lap 2 (not 80 m before the entry as in v24), the car goes in at the end of lap 2, the change starts by itself, new tyres (16854.356635ms)
+✔ 2 laps, no tap: the stop is announced after the start and taken at the end of lap 1; every computer driver stops on lap 1 too and the race finishes (10659.890888ms)
+✔ a tap cancels the automatic stop until the car is committed 80 m before the entry; it is not asked again, and the button can still ask for one (10241.450194ms)
+✔ v24 without pitAuto (?racingPitAuto=0): 2-lap races have no stop, cancel does nothing, and in 3 laps the player is asked silently 80 m before the entry (4024.288566ms)
+✔ pit HUD: the button pulses "automatic" from the start of the stop lap and a tap cancels; a hand request can be cancelled too; v24 keeps its button (2.854615ms)
+✔ session, view and style carry v24.1 (72.01877ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 43436.592102

@@ -1,0 +1,8 @@
+$ git "apply" "--3way" "--index" "/workspace/Bakasun/workout/island/design/review-fixes-v1/patches/V241-012.patch"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+Applied patch to 'workout/island/minigames/alpine-league-island.mjs' cleanly.
+Applied patch to 'workout/island/minigames/alpine-records.mjs' cleanly.
+Applied patch to 'workout/island/minigames/alpine-session.mjs' cleanly.
+Applied patch to 'workout/island/ui/alpine-league.mjs' cleanly.
+
+# result: {"name":"apply-V241-012","executable":"git","argv":["apply","--3way","--index","/workspace/Bakasun/workout/island/design/review-fixes-v1/patches/V241-012.patch"],"code":0,"signal":null,"timedOut":false,"durationMs":24,"log":"apply-V241-012.log"}

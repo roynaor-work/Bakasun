@@ -1,0 +1,61 @@
+diff --git a/workout/island/data/strings.he.json b/workout/island/data/strings.he.json
+index d6e52223cb2e8ed1bbf2844a613e40ff12493951..46bf859f45a38ed6f1c577a9b0f052b40bcc857b 100644
+--- a/workout/island/data/strings.he.json
++++ b/workout/island/data/strings.he.json
+@@ -1959,5 +1959,11 @@
+  "fire.v24.say.leave": "כולם בחוץ. יוצאים לרחוב",
+  "fire.v24.say.friendOut": "החבר בחוץ. מכבים את מה שנשאר",
+  "fire.v24.result.rooms": "חדרים בבניין",
+- "fire.v24.result.insideStars": "כוכבי השעון בפנים"
++ "fire.v24.result.insideStars": "כוכבי השעון בפנים",
++ "minigame.navalDuel.help.1.v24": "הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. נגיעה בספינת אויב נועלת עליה, והתותח מסתובב אליה לבד. כפתור הנעילה שליד האש נועל על הספינה המסוכנת או הקרובה, לחיצה נוספת עוברת לבאה, והחלקה עליו עוברת בין המטרות. כשהטבעת על הספינה ירוקה, לחיצה על האש פוגעת.",
++ "minigame.navalDuel.help.1.v23": "הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. החזקה ממושכת על ספינת אויב נועלת עליה, והתותח מסתובב אליה לבד. לחיצה על כפתור האש יורה אל המטרה הנעולה.",
++ "minigame.navalDuel.help.1.noLock": "הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. כוונו עם כפתור האש: החזיקו וגררו כדי לסובב את התותח, ושחררו כדי לירות.",
++ "minigame.navalDuel.help.3.v24": "נגיעה קצרה יורה מיד, ושחרור על סימן ה־X מבטל בלי לירות. פגיעה במרכז הספינה שווה יותר. סימון אדום מהבהב על המים מראה איפה ייפול ירי האויב: שטים ממנו. צוללת נשארת תמיד מתחת למים (רואים רק פריסקופ): פגזים וטילים עוברים מעליה, ורק טורפדו (הכפתור הכחול) פוגע בה. ליד כפתור האש בוחרים נשק: טיל עוקב, טורפדו שט על המים, מוקש וערכת תיקון.",
++ "minigame.islandRacing.help.2.v24": "בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. במרוץ של שלוש הקפות ומעלה נכנסים פעם אחת לפיטס להחלפת צמיגים.",
++ "minigame.islandRacing.help.2.noPit": "בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת."
+ }
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 9dbd650afcc6c69d64bdcc0aa671587930f7086a..764645c771f7ea98f18a13233a29b8ed89dc3580 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -24,6 +24,28 @@ import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-15';
+ import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-15';
+ import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-15';
+ 
++import {pitAutoEnabled,racingV24Flags} from '../minigames/racing-v24.mjs?v=island-v2-20261107-15';
++import {navalRadarV241,navalAirEndV241} from '../minigames/naval-v241.mjs?v=island-v2-20261107-15';
++import {navalAimV24} from '../minigames/naval-v24.mjs?v=island-v2-20261107-15';
++import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-15';
++import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-15';
++import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-15';
++
++/** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
++function helpKeys(id){
++ const keys=[1,2,3].map(i=>`minigame.${id}.help.${i}`);
++ if(polishValue('reviewHelp')==='0')return keys;
++ if(id==='islandRacing'){
++  if(!racingV24Flags().pit)keys[1]+='.noPit';else if(!pitAutoEnabled())keys[1]+='.v24';
++ }
++ if(id==='navalDuel'){
++  if(!navalLockOn())keys[0]+='.noLock';
++  else if(!navalAimV24())keys[0]+='.v23';
++  else if(!navalRadarV241())keys[0]+='.v24';
++  if(!navalAirEndV241()||!navalAirEnabled())keys[2]+='.v24';
++ }
++ return keys;
++}
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+ // Today's-task lock: the kit's lock icon in place of the emoji pair; the label text stays in the button.
+@@ -239,8 +261,8 @@ export class ActivityInterface {
+     // Event countdown is the introduction; play opens directly and help stays reachable.
+     this.launch(choice.gameId,choice.eventId,stage);
+   }
+-  narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
+-  helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
++  narrateHelp(id) {for(const key of helpKeys(id)){this.engine.narration.announce(key);this.ui.narrate(key);}}
++  helpLines(id) {const lines=el('div','game-help-lines');for(const key of helpKeys(id))lines.append(el('p','',this.t(key)));return lines;}
+   soccerHandedness(id='soccer'){
+     const c=this.data.config.minigames[id].controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action=id+'-hand';
+     let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}

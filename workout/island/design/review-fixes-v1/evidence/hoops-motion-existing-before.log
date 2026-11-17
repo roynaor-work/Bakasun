@@ -1,0 +1,26 @@
+✔ fake-shot package parses as a standard local THREE clip with the exact authored duration (1.954386ms)
+✔ every key is finite, normalized and ordered, including the full return to its initial pose (1.902977ms)
+✔ track names bind to real sanitized GLTF bones without root movement or unrelated finger tracks (1.68269ms)
+✔ source provenance and inherited CMU terms remain attached to the derived timing edit (3.816781ms)
+✔ peak rotations are independently recoverable from the existing jumpshot at 0.5 seconds (11.229877ms)
+✔ the upper body visibly raises for the fake instead of containing an idle or empty clip (0.626769ms)
+✔ a real mixer evaluates the clip on the target bone names and leaves world translation untouched (12.116849ms)
+✔ motion is presentation data and cannot carry gameplay release, possession or scoring events (4.526504ms)
+✔ tall switches: default on, ?hoopsTall=0 off, forced on only when configured, quality gate (1.503352ms)
+✔ runtime files live under assets/, exist, are on the offline list; every position has a profile (26.461368ms)
+✔ motion pack: 83 clips on the 18-bone rig, every clip the state machine names exists, the dunk calibration is there for each body (52.160458ms)
+✔ dunk hips: the positive lift is calibrated per body (a taller body jumps less), the crouch is untouched (70.349934ms)
+✔ gaits: the authored speed picks the clip, hysteresis keeps it, cadence stays near the clip's own (0.78448ms)
+✔ shot timing: the step-and-a-half lines the clip's takeoff, release and landing up with the engine's; the approach is never more than 1.6x (0.485289ms)
+✔ sideways movement plays a sideways clip, forward movement a forward gait (19.791015ms)
+✔ layup hand follows the side of the basket the shooter comes from (1.540909ms)
+✔ ball track: floor contact at 0.42 of the bounce phase, the ball reaches the floor in every dribble gait (1.808198ms)
+✔ motion plan: defender stands in the stance, locked handler never dribbles, acts pick their clips, a stumble gets up (2.037854ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 817.349089

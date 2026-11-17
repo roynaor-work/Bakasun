@@ -1,0 +1,39 @@
+✔ V241-001: failed required room calls completion once and restores the street DOM (3517.251741ms)
+✔ V241-001: stalled request has bounded wait and disposal cancels the watchdog (9599.480293ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (7360.636953ms)
+✔ V241-001: parent entry flow resumes the paused street after a required scene failure (2147.364307ms)
+✔ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (14441.064001ms)
+✔ V241-002: permanent context loss exits once; disposed listeners cannot fire (6733.968215ms)
+✔ V241-002: fireContextRecovery=0 retains the previous clock behavior (6464.197374ms)
+✔ V241-003: tutorial has a semantic continue button activated by Enter and Space (6708.348224ms)
+✔ V241-003: semantic click works once and fireKeyboard=0 retains old markup (3409.206839ms)
+✔ V241-004: delayed second room is a loading barrier; no model time or stale picking (8464.248118ms)
+✔ V241-004: rejected prefetch is evicted and the real transition retries it (6806.309069ms)
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (7925.037369ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 11
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84605.985734
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:19:1
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (7925.037369ms)
+  AssertionError [ERR_ASSERTION]: the room timer follows the same barrier
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:26:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

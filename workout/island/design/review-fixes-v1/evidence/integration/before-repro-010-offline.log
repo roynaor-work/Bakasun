@@ -1,0 +1,17 @@
+$ python3 "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/offline-roundtrip.py" "--games" "" "--output" "/tmp/review-fixes-v1-offline-roundtrip.json"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+Online shell ready; downloading the manifest.
+Download finished: 0 failed files.
+Offline shell ready.
+Offline body versions: [{"query": "", "bodyVersion": "v2", "fallbacks": []}, {"query": "hoopsV241=0", "bodyVersion": "v10", "fallbacks": [{"what": "athlete-body-v22", "error": "TypeError: Failed to fetch"}]}]
+{
+  "output": "/tmp/review-fixes-v1-offline-roundtrip.json",
+  "offlineShell": true,
+  "downloadFailed": 0,
+  "games": [],
+  "fatal": null,
+  "errors": [],
+  "csp": []
+}
+
+# result: {"name":"before-repro-010-offline","executable":"python3","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/offline-roundtrip.py","--games","","--output","/tmp/review-fixes-v1-offline-roundtrip.json"],"code":0,"signal":null,"timedOut":false,"durationMs":50275,"log":"before-repro-010-offline.log"}

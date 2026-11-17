@@ -1,0 +1,100 @@
+[
+  {
+    "tick": 0,
+    "remaining": 0.35,
+    "expectedTime": 0,
+    "actualTime": 0,
+    "finite": true,
+    "slide": {
+      "name": "v241_slide",
+      "time": 0,
+      "rate": 1,
+      "follow": false,
+      "v2": true,
+      "v24": false,
+      "v241": true
+    }
+  },
+  {
+    "tick": 1,
+    "remaining": 0.3333333333333333,
+    "expectedTime": 0.02380952380952378,
+    "actualTime": null,
+    "finite": false,
+    "slide": {
+      "name": "v241_slide",
+      "time": null,
+      "rate": 1,
+      "follow": false,
+      "v2": true,
+      "v24": false,
+      "v241": true
+    }
+  },
+  {
+    "tick": 2,
+    "remaining": 0.31666666666666665,
+    "expectedTime": 0.047619047619047616,
+    "actualTime": null,
+    "finite": false,
+    "slide": {
+      "name": "v241_slide",
+      "time": null,
+      "rate": 1,
+      "follow": false,
+      "v2": true,
+      "v24": false,
+      "v241": true
+    }
+  },
+  {
+    "tick": 3,
+    "remaining": 0.3,
+    "expectedTime": 0.0714285714285714,
+    "actualTime": null,
+    "finite": false,
+    "slide": {
+      "name": "v241_slide",
+      "time": null,
+      "rate": 1,
+      "follow": false,
+      "v2": true,
+      "v24": false,
+      "v241": true
+    }
+  },
+  {
+    "tick": 4,
+    "remaining": 0.2833333333333333,
+    "expectedTime": 0.09523809523809523,
+    "actualTime": null,
+    "finite": false,
+    "slide": {
+      "name": "v241_slide",
+      "time": null,
+      "rate": 1,
+      "follow": false,
+      "v2": true,
+      "v24": false,
+      "v241": true
+    }
+  }
+]
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: every live slide action must retain a finite clip time
+    at file:///workspace/v241-soccer/workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs:25:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

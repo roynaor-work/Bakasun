@@ -1,0 +1,17 @@
+✔ V241-001: failed required room calls completion once and restores the street DOM (5605.136289ms)
+✔ V241-001: stalled request has bounded wait and disposal cancels the watchdog (7372.330314ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (6834.457113ms)
+✔ V241-001: parent entry flow resumes the paused street after a required scene failure (1804.401701ms)
+✔ V241-003: tutorial has a semantic continue button activated by Enter and Space (3557.977463ms)
+✔ V241-003: semantic click works once and fireKeyboard=0 retains old markup (4068.0123ms)
+✔ V241-004: delayed second room is a loading barrier; no model time or stale picking (7076.602385ms)
+✔ V241-004: rejected prefetch is evicted and the real transition retries it (6577.16464ms)
+✔ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (16016.400277ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 59577.682353

@@ -1,0 +1,162 @@
+{
+  "group": "alpine",
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "worktree": "/workspace/v241-alpine",
+  "patches_are_independent_diffs_against_base": true,
+  "recommended_order": [
+    "V241-011",
+    "V241-012",
+    "V241-013"
+  ],
+  "new_tests_command": "node --test <artifact-root>/tests/V241-011.test.mjs <artifact-root>/tests/V241-012.test.mjs <artifact-root>/tests/V241-013.test.mjs",
+  "new_tests_before": {
+    "exit_code_each_file": 1,
+    "tests": 7,
+    "pass": 0,
+    "fail": 7
+  },
+  "new_tests_after": {
+    "exit_code": 0,
+    "tests": 7,
+    "pass": 7,
+    "fail": 0,
+    "log": "alpine-new-after.log"
+  },
+  "existing_tests": [
+    "tests/island-alpine.test.mjs",
+    "tests/island-alpine-gameplay.test.mjs",
+    "tests/island-alpine-v241.test.mjs",
+    "tests/island-alpine-league-v23.test.mjs"
+  ],
+  "existing_command": "node --test tests/island-alpine.test.mjs tests/island-alpine-gameplay.test.mjs tests/island-alpine-v241.test.mjs tests/island-alpine-league-v23.test.mjs",
+  "existing_before": {
+    "exit_code": 0,
+    "pass": 69,
+    "fail": 0,
+    "skip": 0,
+    "log": "alpine-existing-before.log"
+  },
+  "existing_after": {
+    "exit_code": 0,
+    "pass": 69,
+    "fail": 0,
+    "skip": 0,
+    "log": "alpine-existing-after.log"
+  },
+  "findings": [
+    {
+      "id": "V241-011",
+      "patch": "patches/V241-011.patch",
+      "test": "tests/V241-011.test.mjs",
+      "modified_files": [
+        "workout/island/minigames/alpine-view.mjs"
+      ],
+      "flags": [
+        "alpineYawFix=0",
+        "alpineV241=0"
+      ],
+      "default": "on",
+      "change": "שימור travelYaw כחישוב heading במרחב המסלול; riderRootYaw מיוצא מתוך alpine-view ממיר את הסימן בגבול ההצבה בעולם ומשמש בפועל ב-dispatch של כל root.",
+      "before": "כיוון העולם שגוי: 46.05 מעלות ב-20m/s ו-75.39 מעלות ב-11m/s.",
+      "after": "הפונקציה מה-view שמוצבת על ה-root נבדקה ב-45 וקטורים: שני צדדים, שלוש מהירויות ושלושה כיווני מסלול; שגיאה מרבית כ-0.000000854 מעלות. lead, crash ושני מסלולי rollback נבדקו.",
+      "original_repro_command": "node workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs",
+      "original_repro_before_exit": 0,
+      "original_repro_after_exit": 0,
+      "original_repro_limit": "ה-probe המקורי קורא ישירות ל-travelYaw בלבד ומניח שה-scalar שלו מוצב בעולם ללא המרה. ה-helper נשמר כדי לא לשבור בדיקות וצורכים קיימים; אחרי התיקון ה-view מפעיל riderRootYaw. לכן ה-probe הישן עדיין מודד scalar חיובי, והוכחת התיקון היא בדיקת ה-view המיוצאת ווקטור העולם, לא exit הקוד הישן.",
+      "risk": "נמוך: תצוגה בלבד. אין שינוי פיזיקה/זמן/ניקוד. אופן הבנקינג נשמר; לא נמדדה תחושה בטלפון.",
+      "new_test_before": {
+        "exit_code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "log": "alpine-011-test-before.log"
+      },
+      "new_test_after": {
+        "exit_code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "log": "alpine-new-after.log"
+      },
+      "original_repro_before_log": "alpine-011-repro-before.log",
+      "original_repro_after_log": "alpine-011-repro-after.log"
+    },
+    {
+      "id": "V241-012",
+      "patch": "patches/V241-012.patch",
+      "test": "tests/V241-012.test.mjs",
+      "modified_files": [
+        "workout/island/minigames/alpine-records.mjs",
+        "workout/island/minigames/alpine-session.mjs",
+        "workout/island/minigames/alpine-league-island.mjs",
+        "workout/island/ui/alpine-league.mjs"
+      ],
+      "flags": [
+        "alpineHistoryFix=0",
+        "alpineV241=0"
+      ],
+      "default": "on",
+      "change": "namespace משותף לשיאים ול-ghost לפי physics ו-course שנוצר בפועל. get/set של ה-session בלבד ממופים, כולל גיבוי corrupt; אין העתקה, מחיקה או דריסה של היסטוריה ישנה. helpers קלי משקל ב-alpine-records משותפים ל-session ולמפת הליגה. API.stage מחזיר זמן מה-namespace החדש, והכרטיס האמיתי משתמש בו. finish משמר את שדה timing הישן בprogression ומקליט timing נוכחי בנפרד, בלי לשנות מנגנון stars/gear/progress.",
+      "before": "session v24.1 טוען best ו-ghost שנשמרו בקורס v24 הישן.",
+      "after": "session v24.1 מציג best=null ו-ghost=null מול היסטוריית v24. כתיבת 56171ms מתבצעת ב-keys חדשים ושני ה-keys הישנים עם 59931ms נשמרים byte-identical. rollback מחזיר אותם. course/physics שונים, alpineAir/alpineFall=0 ו-corrupt backup מבודדים; שינוי דגל תצוגה בלבד שומר אותו namespace. הרחבה: leagueCard האמיתי לא מציג 59931ms הישן בקורס החדש; אחרי replay אמיתי 55992ms הכרטיס וה-session מציגים אותו. timing הישן עדיין59931ms, stage2 והציוד ללא שינוי, stars עלו2→3 לפי תוצאת הריצה; rollback מציג שוב0:59.93.",
+      "original_repro_command": "node workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs",
+      "original_repro_before_exit": 0,
+      "original_repro_after_exit": 0,
+      "original_repro_limit": "ה-probe המקורי מפעיל loadRecords/loadGhost ישירות באחסון הישן בלי לייצר session. ה-APIs נשמרו ללא שינוי כדי לשמור rollback. הוא הורץ ללא שינוי בשני הצדדים; בדיקת session החדשה מוכיחה שהמשחק בפועל בוחר namespace מתאים ושלא אבד מידע.",
+      "risk": "בינוני: v24.1 מתחיל השוואות אישיות חדשות, בלי למחוק הישנות. נוצר עד זוג keys נוסף לכל מסלול/צירוף פיזיקה, וחישוב fingerprint אחד לכל session. שינוי physics או course נוסף מפריד היסטוריה שמרנית.",
+      "new_test_before": {
+        "exit_code": 1,
+        "tests": 3,
+        "pass": 0,
+        "fail": 3,
+        "log": "alpine-012-test-before.log"
+      },
+      "new_test_after": {
+        "exit_code": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "log": "alpine-012-test-after.log"
+      },
+      "original_repro_before_log": "alpine-012-repro-before.log",
+      "original_repro_after_log": "alpine-012-repro-after.log",
+      "patch_sha256": "f1ca7690b88f56377fa1d5cf71d1cce9489fb227534e8f0927e96206d2204b02"
+    },
+    {
+      "id": "V241-013",
+      "patch": "patches/V241-013.patch",
+      "test": "tests/V241-013.test.mjs",
+      "modified_files": [
+        "workout/island/minigames/alpine-engine.mjs"
+      ],
+      "flags": [
+        "alpineV241=0"
+      ],
+      "default": "on only with physics.v241",
+      "change": "culling של קרח/שלג עמוק לפי מלוא התחום, כולל max patch reach כדי ש-break על אובייקט מוקדם לא יזרוק patch ארוך בהמשך.",
+      "before": "peak-a-25 נעלם ב-s=326.896, למרות שפעולת powder נמשכת עד328.03.",
+      "after": "147 פריימים פעילים של אותה גאומטריה נותרו גלויים, כולל5 פריימים מעבר לחלון המרכז הישן. נבדקו גם תחום קדמי, קרח, ואובייקט נקודתי בין patches. rollback v24 משמר point-culling.",
+      "original_repro_command": "node workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs",
+      "original_repro_before_exit": 0,
+      "original_repro_after_exit": 1,
+      "original_repro_limit": "exit1 אחרי הוא ההצלחה הצפויה של defect probe: assertion המחייב למצוא powder פעיל ובלתי נראה נכשל כי כבר לא נמצא מקרה כזה בכל30 השלבים.",
+      "risk": "נמוך: snapshot לתצוגה בלבד; מספר patches סמוכים עשוי לגדול מעט, בלי שינוי פיזיקה או תוצאות.",
+      "new_test_before": {
+        "exit_code": 1,
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "log": "alpine-013-test-before.log"
+      },
+      "new_test_after": {
+        "exit_code": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "log": "alpine-new-after.log"
+      },
+      "original_repro_before_log": "alpine-013-repro-before.log",
+      "original_repro_after_log": "alpine-013-repro-after.log"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+✖ V241-008: the aerial finale accepts repair and supply while its mission clock is frozen (440.312843ms)
+✔ V241-008: navalAirEnd=v24 retains immediate fleet-completion behavior (330.817559ms)
+✖ V241-009: native Enter, Space and semantic click activate once; a pointer keeps one immediate edge (3467.6782ms)
+✖ V241-016: pit rollback and full pit disable describe the actual race rules (35.627316ms)
+✖ V241-016: radar and aerial-end rollback flags select matching displayed and spoken help independently (9.032246ms)
+✔ V241-016: reviewHelp=0 restores the original help keys and unrelated games retain their text (0.516936ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 2
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4810.199075
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-008.test.mjs:28:1
+✖ V241-008: the aerial finale accepts repair and supply while its mission clock is frozen (440.312843ms)
+  AssertionError [ERR_ASSERTION]: repair works while the sky is still occupied
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-008.test.mjs:34:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-009.test.mjs:21:1
+✖ V241-009: native Enter, Space and semantic click activate once; a pointer keeps one immediate edge (3467.6782ms)
+  AssertionError [ERR_ASSERTION]: Enter activates the native button
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-009.test.mjs:27:66)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:30:1
+✖ V241-016: pit rollback and full pit disable describe the actual race rules (35.627316ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /שלוש הקפות/. Input:
+  
+  'בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. בכל מרוץ נכנסים פעם אחת לפיטס להחלפת צמיגים: המכונית נכנסת לבד בסוף ההקפה השנייה (במרוץ של שתי הקפות בסוף הראשונה), ולחיצה על „פיטס” מבטלת.'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:32:121)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. בכל מרוץ נכנסים פעם אחת לפיטס להחלפת צמיגים: המכונית נכנסת לבד בסוף ההקפה השנייה (במרוץ של שתי הקפות בסוף הראשונה), ולחיצה על „פיטס” מבטלת.',
+    expected: /שלוש הקפות/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:36:1
+✖ V241-016: radar and aerial-end rollback flags select matching displayed and spoken help independently (9.032246ms)
+  AssertionError [ERR_ASSERTION]: no timed radar under ?navalRadar=v24
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:39:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. נגיעה בספינת אויב מפעילה את המכ״ם: הטבעת סביבה מתמלאת בשנייה בערך (יותר לספינה רחוקה), ורק אז התותח ננעל ומסתובב אליה לבד. ספינה מחוץ לטווח המכ״ם לא ננעלת, ונעילה נשברת כשהספינה יוצאת מהטווח. כפתור הנעילה שליד האש נועל על הספינה המסוכנת או הקרובה, לחיצה נוספת עוברת לבאה, והחלקה עליו עוברת בין המטרות. כשהנעילה ירוקה, לחיצה על האש יורה.',
+    expected: /המכ״ם|מתמלאת בשנייה/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }

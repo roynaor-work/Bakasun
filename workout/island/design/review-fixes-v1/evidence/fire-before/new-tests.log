@@ -1,0 +1,155 @@
+✖ V241-001: failed required room calls completion once and restores the street DOM (2575.307774ms)
+✖ V241-001: stalled request has bounded wait and disposal cancels the watchdog (7078.832454ms)
+✔ V241-001: fireLoadRecovery=0 preserves the old waiting path (7085.790988ms)
+✖ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (16234.530473ms)
+✖ V241-002: permanent context loss exits once; disposed listeners cannot fire (7017.084787ms)
+✔ V241-002: fireContextRecovery=0 retains the previous clock behavior (6346.458286ms)
+✖ V241-003: tutorial has a semantic continue button activated by Enter and Space (5721.478795ms)
+✖ V241-003: semantic click works once and fireKeyboard=0 retains old markup (5197.39199ms)
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (10850.979836ms)
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (9393.561603ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 2
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78391.271978
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:5:1
+✖ V241-001: failed required room calls completion once and restores the street DOM (2575.307774ms)
+  AssertionError [ERR_ASSERTION]: a failed scene must leave the interior instead of waiting forever
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:8:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:11:1
+✖ V241-001: stalled request has bounded wait and disposal cancels the watchdog (7078.832454ms)
+  AssertionError [ERR_ASSERTION]: pending first room must time out
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:13:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:5:1
+✖ V241-002: actual WebGL loss freezes room time and restore resumes from the same time (16234.530473ms)
+  AssertionError [ERR_ASSERTION]: model time must stop while the renderer is lost
+  + actual - expected
+  
+  + 2.0800000000000014
+  - 0
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:9:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 2.0800000000000014,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:12:1
+✖ V241-002: permanent context loss exits once; disposed listeners cannot fire (7017.084787ms)
+  AssertionError [ERR_ASSERTION]: permanent context loss must recover to the street
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-002.test.mjs:14:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:5:1
+✖ V241-003: tutorial has a semantic continue button activated by Enter and Space (5721.478795ms)
+  AssertionError [ERR_ASSERTION]: tutorial needs a native button
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:9:59)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:13:1
+✖ V241-003: semantic click works once and fireKeyboard=0 retains old markup (5197.39199ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-003.test.mjs:14:145)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:5:1
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (10850.979836ms)
+  AssertionError [ERR_ASSERTION]: a required second room must reset readiness
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:10:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:13:1
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (9393.561603ms)
+  AssertionError [ERR_ASSERTION]: a rejected prefetch must not poison the room cache
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:17:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,131 @@
+{
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "worktree": "/workspace/v241-combat",
+  "sourceFilesChangedInDeliverable": false,
+  "patchesIndependentAgainstBase": true,
+  "dependencies": [],
+  "existingTests": [
+    "tests/island-naval-boars-v241.test.mjs",
+    "tests/island-aliens-v25-arsenal.test.mjs",
+    "tests/island-racing-v24-1.test.mjs"
+  ],
+  "existingCommand": "node --test tests/island-naval-boars-v241.test.mjs tests/island-aliens-v25-arsenal.test.mjs tests/island-racing-v24-1.test.mjs",
+  "existingBefore": {
+    "pass": 36,
+    "fail": 0,
+    "log": "combat-existing-before.log"
+  },
+  "existingAfter": {
+    "pass": 36,
+    "fail": 0,
+    "log": "combat-existing-after.log"
+  },
+  "newBefore": {
+    "pass": 2,
+    "fail": 4,
+    "log": "combat-new-before.log"
+  },
+  "newAfter": {
+    "pass": 6,
+    "fail": 0,
+    "log": "combat-new-after.log"
+  },
+  "browserReproductions": "Original scripts run unchanged against a local static server on their documented port 8766. Final before/after logs are exact commands, without any port remapping.",
+  "findings": [
+    {
+      "id": "V241-008",
+      "patch": "patches/V241-008.patch",
+      "test": "tests/V241-008.test.mjs",
+      "newTests": 2,
+      "beforePass": 1,
+      "beforeFail": 1,
+      "afterPass": 2,
+      "flags": [
+        "navalAirEnd=v24 (existing)"
+      ],
+      "defaultBehavior": "Air-finale gate blocks mission completion, while repair, buoy drift/pickup, emergency supply and combat input continue; no new aircraft, clock frozen.",
+      "rollback": "navalAirEnd=v24 still wins immediately after fleet completion.",
+      "risk": "בינוני: פעולות הקרב והתחזוקה נמשכות כעת גם בסיום האווירי; שעון המשימה נשאר קפוא וסיום השלב מחכה לשמיים נקיים.",
+      "repro": "node workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs",
+      "beforeExit": 0,
+      "afterExit": 1,
+      "beforeEvidence": "combat-008-repro-before.log",
+      "afterEvidence": "combat-008-repro-after.log",
+      "afterMeasurement": "combat-008-measure-after.log",
+      "before": "HP 6.5→6.5, repair charges 3→3; supplies=0 and belt=0 despite steering into the buoy.",
+      "after": "HP 6.5→8, repair charges 3→2; supplies=1, belt=160, buoy removed; standalone regression also waits for a genuine final win.",
+      "probeNote": "Original defect assertions require unchanged HP, charges, supplies=0 and belt=0, so the corrected code intentionally fails them. A read-only measurement rerun records those assertions without changing model inputs. Its pre-update closest-distance sampler misses the collection frame (16.216m before the step); the new regression samples both sides of that step and confirms radius crossing, pickup and replenishment."
+    },
+    {
+      "id": "V241-009",
+      "patch": "patches/V241-009.patch",
+      "test": "tests/V241-009.test.mjs",
+      "newTests": 1,
+      "beforePass": 0,
+      "beforeFail": 1,
+      "afterPass": 1,
+      "flags": [
+        "alienArsenal=0 (existing)"
+      ],
+      "defaultBehavior": "Native semantic clicks (detail=0) pulse the switch; pointerdown remains immediate and the following pointer click does not add a pulse. AbortController removes both handlers.",
+      "rollback": "The existing arsenal flag removes the switch in the session; even an isolated directly-mounted switch preserves its previous pointer-only behavior with alienArsenal=0.",
+      "risk": "נמוך: click סמנטי בלבד נוסף; native pointer click לא מוסיף הפעלה נוספת, keyC והתעלמות מקלט טקסט נשמרו.",
+      "repro": "python3 workout/island/design/external-review-v241/repro/combat-switch.py",
+      "beforeExit": 0,
+      "afterExit": 0,
+      "beforeEvidence": "combat-009-repro-before.log",
+      "afterEvidence": "combat-009-repro-after.log",
+      "before": {
+        "enter": false,
+        "space": false,
+        "keyC": true,
+        "pointerClick": true,
+        "semanticClick": false
+      },
+      "after": {
+        "enter": true,
+        "space": true,
+        "keyC": true,
+        "pointerClick": true,
+        "semanticClick": true
+      },
+      "extraChecks": [
+        "Immediate pointerdown followed by click has one onGesture and one pulse",
+        "Disabled controller ignores activation",
+        "Dispose removes semantic handler",
+        "KeyC works; focused text input ignores it",
+        "Native Chromium Enter and Space, no synthetic-only DOM test"
+      ]
+    },
+    {
+      "id": "V241-016",
+      "patch": "patches/V241-016.patch",
+      "test": "tests/V241-016.test.mjs",
+      "newTests": 3,
+      "beforePass": 1,
+      "beforeFail": 2,
+      "afterPass": 3,
+      "flags": [
+        "reviewHelp=0 (new, restores original help keys)",
+        "racingPitAuto=0",
+        "racingPit=0",
+        "navalRadar=v24",
+        "navalAirEnd=v24",
+        "navalAir=off",
+        "navalAim and navalLock gates respected"
+      ],
+      "defaultBehavior": "Written help and both narration paths use one key selector. Six added Hebrew translation keys preserve default wording and select truthful rollback wording.",
+      "rollback": "reviewHelp=0 returns precisely the original three keys per game. Existing gameplay flags select matching rollback help by default.",
+      "risk": "נמוך: מיפוי טקסט בלבד, ללא שינוי כללי משחק או API הקריינות. אין שינוי במפתחות התרגום הקיימים.",
+      "repro": "python3 workout/island/design/external-review-v241/repro/racing-help-rollback.py",
+      "beforeExit": 0,
+      "afterExit": 1,
+      "beforeEvidence": "combat-016-repro-before.log",
+      "afterEvidence": "combat-016-repro-after.log",
+      "afterMeasurement": "combat-016-measure-after.log",
+      "before": "Rollback models had pit.on=false/auto=false and radarOn=false/airEnd=false, but help promised an automatic pit every race, timed radar acquisition and waiting for aircraft.",
+      "after": "Pit rollback help limits stops to races of three laps or more; radar rollback uses the v24 immediate-lock text; air-end rollback omits waiting for aircraft. Displayed text equals announced/narrated keys for independent flag combinations.",
+      "probeNote": "The unmodified original asserts the presence of incorrect help and therefore exits 1 after the fix. An additional python3 -O run prints the exact same browser/model measurements with defect assertions disabled; the new node --test assertions independently validate the corrected contracts."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "group": "tennis",
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "audit": "aafc3e170d1f271f3a8695446b733b35f03d3443",
+  "sourceRoot": "/workspace/v241-tennis",
+  "existingTests": [
+    "tests/island-tennis-v25.test.mjs",
+    "tests/island-tennis-v12-stadium.test.mjs",
+    "tests/island-tennis-crowd-v22.test.mjs"
+  ],
+  "findings": [
+    {
+      "id": "V241-015",
+      "title": "כשל בקהל אופציונלי בטניס יוצר Promise rejection לא מטופל",
+      "patch": "patches/V241-015.patch",
+      "test": "V241-015.test.mjs",
+      "sourceFiles": ["workout/island/minigames/tennis-v12-stadium.mjs"],
+      "dependencies": [],
+      "recommendedOrder": 15,
+      "rollback": "?tennisCrowdPrefetchSafe=0",
+      "default": "enabled",
+      "behavior": "כל prefetch מקבל handler מיד ביצירתו; ה-Promise המקורי נשאר דחוי כדי שה-consumer הסדרתי יקבל את השגיאה ויפעיל את fallback הקיים.",
+      "risk": "נמוך. משתנה רק מועד רישום rejection handler. סדר הטעינה, ההחלפה לקהל תלת-ממד והחזרה ל-billboards נשארים באותו מסלול.",
+      "before": {
+        "newTests": {"exit": 1, "tests": 4, "pass": 2, "fail": 2},
+        "existingTests": {"exit": 0, "tests": 16, "pass": 16, "fail": 0},
+        "originalReproduction": {"exit": 0, "crowdLate": "failed", "crowd": "billboard", "unhandled": ["TypeError: Failed to fetch"]}
+      },
+      "after": {
+        "newTests": {"exit": 0, "tests": 4, "pass": 4, "fail": 0},
+        "existingTests": {"exit": 0, "tests": 16, "pass": 16, "fail": 0},
+        "originalReproduction": {"exit": 0, "crowdLate": "failed", "crowd": "billboard", "unhandled": []}
+      },
+      "coverage": [
+        "HTTP503 ב-fan-12 בזמן ש-fan-01 חסום: אין unhandledrejection וה-billboards נשמרים.",
+        "דגל החזרה משמר את תזמון ה-rejection הישן.",
+        "dispose בזמן טעינה חסומה: הקבוצה מוסרת, ה-venue הישן משוחזר ואין rejection לא מטופל.",
+        "טעינה מוצלחת של כל הנכסים האמיתיים: קהל 600 שחקנים נבנה וה-billboards מוסתרים.",
+        "שחזור Python המקורי ללא שינוי: network abort מאוחר והשהיית fan-01 של שתי שניות."
+      ],
+      "commands": {
+        "newTests": "node --test /workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs",
+        "existingTests": "node --test tests/island-tennis-v25.test.mjs tests/island-tennis-v12-stadium.test.mjs tests/island-tennis-crowd-v22.test.mjs",
+        "originalReproduction": "python3 workout/island/design/external-review-v241/repro/tennis-crowd-failure.py",
+        "server": "python3 -m http.server 8766 --bind 127.0.0.1",
+        "cwd": "/workspace/v241-tennis"
+      },
+      "logs": [
+        "tennis-new-before.log",
+        "tennis-new-after.log",
+        "tennis-existing-before.log",
+        "tennis-existing-after.log",
+        "tennis-repro-before.log",
+        "tennis-repro-after.log"
+      ],
+      "limitations": "בדיקת שילוב בסצנת האצטדיון האמיתית בדפדפן; אין כאן קמפיין טניס מלא או מדידת FPS בטלפון. הפעלת הדגל המחזיר את התקלה מיועדת לבדיקת rollback בלבד."
+    }
+  ]
+}

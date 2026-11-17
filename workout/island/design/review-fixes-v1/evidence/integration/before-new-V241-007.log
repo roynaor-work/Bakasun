@@ -1,0 +1,159 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (19.412577ms)
+✖ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (2.453941ms)
+✖ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (1.777182ms)
+✖ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (1.24726ms)
+✖ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (1.666318ms)
+✖ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (1.565303ms)
+✔ V241-007: an explicit celebration can interrupt the dive (1.349873ms)
+✔ V241-007: ?soccerTackleV2=0 keeps legacy keeper clips (2.167954ms)
+✔ V241-007: ?soccerV241=0 keeps legacy keeper clips (1.53691ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 3
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 293.299875
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (19.412577ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_low_left'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_low_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (2.453941ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_mid_left'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_mid_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (1.777182ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_high_left'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_high_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (1.24726ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_low_right'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_low_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (1.666318ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_mid_right'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_mid_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (1.565303ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_high_right'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_high_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-007","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":347,"log":"before-new-V241-007.log"}

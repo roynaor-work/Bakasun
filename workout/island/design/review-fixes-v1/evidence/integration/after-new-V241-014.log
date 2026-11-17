@@ -1,0 +1,14 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-014.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+[{"query":"","peak":{"actT":0.26,"l":1.5479263512049641,"r":1.4175569845103029,"chest":1.3143921271175263,"foot":0.08134264196623431,"clipTime":1.4},"start":{"actT":0,"l":1.0711897264008219,"r":1.0218540203373003,"chest":1.314377915304515,"foot":0.0813375979557232,"clipTime":0.21},"end":{"actT":0.52,"l":1.0711897264008219,"r":1.0218540203373003,"chest":1.314377915304515,"foot":0.0813375979557232,"clipTime":0.21000000000000013},"release":1.8,"bodyVersion":"v2"},{"query":"hoopsFakeV13=0","peak":{"actT":0.26,"l":1.1970118901128588,"r":1.066568941291561,"chest":1.2010750964446186,"foot":0.08119564842344268,"clipTime":0.5800000000000001},"start":{"actT":0,"l":1.062460072509196,"r":1.0152150025868254,"chest":1.3143728526456642,"foot":0.08133761781220322,"clipTime":0.2},"end":{"actT":0.52,"l":1.062460072509196,"r":1.0152150025868254,"chest":1.3143728526456642,"foot":0.08133761781220322,"clipTime":0.20000000000000007},"release":1.8,"bodyVersion":"v2"},{"query":"hoopsMotionV13=0","peak":{"actT":0.26,"l":1.4023890499288938,"r":1.3710351921024864,"chest":1.1712626462744384,"foot":0.08078455154515862,"clipTime":0.5800000000000001},"start":{"actT":0,"l":1.0369639874993148,"r":1.0368734026714481,"chest":1.251889425511216,"foot":0.08100239932615788,"clipTime":0.2},"end":{"actT":0.52,"l":1.0369639874993148,"r":1.0368734026714481,"chest":1.251889425511216,"foot":0.08100239932615788,"clipTime":0.20000000000000007},"release":1.2231,"bodyVersion":"v2"},{"query":"hoopsV241=0","peak":{"actT":0.26,"l":1.4023890499288938,"r":1.3710351921024864,"chest":1.1712626462744384,"foot":0.08078455154515862,"clipTime":0.5800000000000001},"start":{"actT":0,"l":1.0369639874993148,"r":1.0368734026714481,"chest":1.251889425511216,"foot":0.08100239932615788,"clipTime":0.2},"end":{"actT":0.52,"l":1.0369639874993148,"r":1.0368734026714481,"chest":1.251889425511216,"foot":0.08100239932615788,"clipTime":0.20000000000000007},"release":1.2231,"bodyVersion":"v22"}]
+✔ V241-014: the real v13 pump fake raises both palms to a shooting position and returns without releasing (5206.941241ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5325.27005
+
+# result: {"name":"after-new-V241-014","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-014.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":5378,"log":"after-new-V241-014.log"}

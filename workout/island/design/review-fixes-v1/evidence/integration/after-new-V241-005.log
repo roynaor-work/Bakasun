@@ -1,0 +1,18 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-005.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-005: intended penalty-area cross obeys explicit volley (103.321663ms)
+✔ V241-005: intended penalty-area cross obeys explicit scissor (50.796863ms)
+✔ V241-005: an unarmed intended cross still receives automatic heading assistance (18.764578ms)
+✔ V241-005: soccerV241 rollback keeps legacy high-ball behavior (19.094927ms)
+✔ V241-005: URL rollback ?soccerAirChoice=0 restores automatic heading (11.530889ms)
+✔ V241-005: URL rollback ?soccerV241=0 restores automatic heading (10.626055ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 361.570666
+
+# result: {"name":"after-new-V241-005","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-005.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":414,"log":"after-new-V241-005.log"}

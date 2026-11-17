@@ -1,0 +1,50 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-011.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-011: the production view root faces the real velocity, both ways and at braking speed (1.803134ms)
+✖ V241-011: lead follows intent; both rollback paths and crash presentation retain their original pose (0.292197ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.211644
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-011.test.mjs:23:1
+✖ V241-011: the production view root faces the real velocity, both ways and at braking speed (1.803134ms)
+  AssertionError [ERR_ASSERTION]: speed=20, lean=-1, course=0: heading error 46.05098401705608 degrees
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-011.test.mjs:29:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-011.test.mjs:37:1
+✖ V241-011: lead follows intent; both rollback paths and crash presentation retain their original pose (0.292197ms)
+  AssertionError [ERR_ASSERTION]: lead turns toward the requested side
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-011.test.mjs:39:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-011","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-011.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":168,"log":"before-new-V241-011.log"}

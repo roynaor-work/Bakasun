@@ -1,0 +1,24 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+{
+  "finding": "powder_invisible_but_active",
+  "leagueStage": 26,
+  "object": {
+    "type": "powder",
+    "x": -2.1,
+    "s": 306.78,
+    "w": 9.99,
+    "len": 42.5,
+    "id": "peak-a-25"
+  },
+  "player": {
+    "s": 326.89608333333325,
+    "x": -2.1000238783733045,
+    "surface": "powder"
+  },
+  "distanceAfterPatchCentre": 20.11608333333328,
+  "patchEnd": 328.03,
+  "viewBehind": 20
+}
+
+# result: {"name":"before-repro-013-powder","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":248,"log":"before-repro-013-powder.log"}

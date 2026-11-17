@@ -1,0 +1,16 @@
+diff --git a/workout/island/minigames/tennis-v12-stadium.mjs b/workout/island/minigames/tennis-v12-stadium.mjs
+index f19e2f3fe5d6b9366cfb1e55d4a44835e3edbfd7..e5f0c2266bd7bffcbead0cb904203291d8c37ddf 100644
+--- a/workout/island/minigames/tennis-v12-stadium.mjs
++++ b/workout/island/minigames/tennis-v12-stadium.mjs
+@@ -85,7 +85,10 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
+  if(lateCrowd&&crowdModule?.createLODCrowd){metrics.crowdLate='loading';void (async()=>{let late=null;try{
+    if(typeof lateCrowd?.then==='function')await lateCrowd;if(disposed)return;
+    const manifest=await (await fetch(new URL('assets.json',crowdBase))).json(),cache=new Map();
+-   for(const asset of manifest.assets||[]){const href=new URL(asset.file,crowdBase).href;cache.set(href,fetch(href).then(r=>{if(!r.ok)throw Error(asset.file+' '+r.status);return r.arrayBuffer();}));}
++   for(const asset of manifest.assets||[]){const href=new URL(asset.file,crowdBase).href,pending=fetch(href).then(r=>{if(!r.ok)throw Error(asset.file+' '+r.status);return r.arrayBuffer();});
++    // The crowd consumes these sequentially: observe every failure now, even if an earlier file is still pending.
++    // Keep the original rejected promise so the consumer's catch still selects the billboard fallback. ?tennisCrowdPrefetchSafe=0 rolls back.
++    if(params?.get?.('tennisCrowdPrefetchSafe')!=='0')pending.catch(()=>{});cache.set(href,pending);}
+    class Prefetched extends GLTFLoader{loadAsync(url,onProgress){const hit=cache.get(new URL(url,crowdBase).href);return hit?hit.then(buffer=>this.parseAsync(buffer,new URL('./',url).href)):super.loadAsync(url,onProgress);}}
+    late=await crowdModule.createLODCrowd({T,GLTFLoader:Prefetched,seats:seatList(),base:crowdBase});if(disposed){late.dispose?.();return;}
+    for(const m of late.batches)m.material.color.set('#c2ccd8');crowd3d=late;group.add(crowd3d.root);if(crowd){crowd.visible=false;}

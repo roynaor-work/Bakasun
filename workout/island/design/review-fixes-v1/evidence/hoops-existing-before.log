@@ -1,0 +1,40 @@
+✔ the v12 pack has every clip the chooser needs, trimmed to the core, with the catalog scores (1.759716ms)
+✔ gait rates use the clip reference speed and the repair time scale (1.36529ms)
+✔ dribble clips carry a root-relative ball track that reaches the floor and the events the bounce phase needs (0.50412ms)
+✔ v13 runtime copy: the eight clips the game plays, canonical profile, every clip record as in the pack (tall-v12 encoding) (46.002991ms)
+✔ one footfall for every gait that shares the phase: v13 jog / run / sprint / run dribble and v12 walk / sprint dribble at 0.33 (64.511673ms)
+✔ shiftLoop turns whole frames, keeps the loop closed and moves the events with them (6.590848ms)
+✔ per-body gait tables: references x the skeleton scale, rates inside 0.5-1.8, the v12 walk and sprint dribble keep their references (45.09199ms)
+✔ the motion plan with the v13 tables: stands, runs, dribbles on the spot with the full-body clip, sprints with the v12 dribble above ~4 m/s (16.606309ms)
+✔ v13 jump shot under the jump shot and the three: events the shot timing reads (takeoff, release, land) (3.382092ms)
+✔ athlete-body-v2 basketball bodies: the pack files byte for byte, the v22 rig and atlas, the glove morph off, hands and region colours (134.156372ms)
+✔ v24.1 switches: everything on by default, each one off on its own, ?hoopsV241=0 turns all of them off (1.83282ms)
+✔ referee: the gesture of each call, and he trails the ball on the far line without shuffling or leaving the court length (64.891041ms)
+✔ referee model: the pack file byte for byte, six clips, twenty primitives merged into two skinned meshes on one skeleton (132.39246ms)
+✔ referee whistle rules: a steal or an intercepted pass takes the short whistle, a foul the long one, nothing else changes (0.313306ms)
+✔ the runtime whistles are the pack files byte for byte (hashes of design/hoops-referee-audio-v1/manifest.json), with the CC0 licence (12.335149ms)
+✔ audio v24.1: a steal and an interception blow the short whistle (not the squeak), a foul the long one, a violation keeps the v24 sample (84.297151ms)
+✔ audio v24.1: the 2.5 s gate spaces a steal and a foul right after it into one whistle (81.111736ms)
+✔ audio v24.1: an OGG the browser cannot decode falls back to the MP3 of the same pack (81.963525ms)
+✔ ?hoopsWhistleV241=0 is v24: the steal plays the shoe squeak, the foul the old whistle, no pack file is fetched (82.065768ms)
+✔ offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game (247.491897ms)
+offline MB {"soccer":24,"hoops":26.3,"alpine":8,"alpineLeague":0.7,"tennis":4.7,"racing":7.2,"naval":2,"fire":6.3,"alien":0.4,"city":4.5,"catch":5.1} assets 84.6 with app code 96.9
+✔ offline manifest: sizes per game and for the island (reported in the release notes) (864.157607ms)
+✔ offline manifest: the basketball motion clips and the shell list are complete and up to date (1294.560111ms)
+✔ offline worker: classic script with the same managed rule as the page, version scoped, no code from text (7.968988ms)
+✔ offline worker: old caches are dropped on activate, only the current version stays (95.566128ms)
+✔ offline worker: cached assets come from the device, other requests and other origins are left alone (17.22036ms)
+✔ offline worker: a stalled asset ends in a 504 after a retry, a network error stays an error, and the app shell opens offline (83.317005ms)
+✔ download: files are cached with progress, retried after a failure, and already cached files are skipped (11.339447ms)
+✔ download: a file that keeps failing or hangs is reported, never thrown, and the rest still downloads (44.839788ms)
+✔ save data safety: the offline code never clears or deletes game saves (18.029828ms)
+✔ wiring: one panel in the main games menu, automatic download and release check on every open, reports for all three games (4.536711ms)
+✔ CSP: scripts and workers come from the island only; no blob workers or inline scripts (3.576915ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3152.063859

@@ -1,0 +1,24 @@
+✔ tennis crowd v22: every runtime file exists (3 levels x 12 variants, modules, config, licence) (19.695451ms)
+✔ tennis crowd v22: LOD levels and triangle budget follow lod-config.json (crowd under 90,000, 600 fans) (20.839144ms)
+✔ tennis crowd v22: ?tennisCrowd3d=0 returns the billboard crowd, and the 3D crowd falls back by itself on a load error (2.886944ms)
+✔ tennis crowd v22: the offline list carries the crowd files and the shell list is current (713.551518ms)
+✔ offline panel: a small Hebrew version line shows the running DATA_VERSION (no exclamation marks) (3.355987ms)
+✔ tennis v12 stadium: the layout matches the package scene (10 stands, 600 fans, 12 boards, 4 floodlights) (6.036814ms)
+✔ tennis v12 stadium: z is pulled in by the missing length behind the baselines, the net-side stays (0.615328ms)
+✔ tennis v12 stadium: assets are in the game folder, small, and CC0 (3.580011ms)
+✔ v25 flags: the session turns the receive spot and the stopped ball on (off with ?tennisReceive=0 / ?tennisOut=v24); the model defaults stay v24 (58.680103ms)
+✔ receive spot: before the opponent serves the child picks one of three spots on the baseline (the middle one is the old spot), with the stick (6.994506ms)
+✔ receive spot: the opponent waits about a second longer before the toss, and for a child who moved to arrive (at most 3.2 s); v24 tossed at 0.7 s (15.999324ms)
+✔ after the point the ball stops: no dead ball bouncing on after a soft drop (v24: it bounced and rolled), and every out/net mark carries an id (231.093244ms)
+✔ grip: the held racket points exactly where the v24 racket pointed for every swing angle; the head the IK aims at is the package head node (1.313112ms)
+✔ grip asset: the package racket is 68 cm with grip and head nodes, no decoders; licensed; the view swaps it in only after it loaded (4.594116ms)
+✔ the out X and the receive arrow: Codex decals on the court, 1.5 s for the X (view clock), the arrow on the chosen spot; the drawn X stays for ?tennisOut=v24 (4.958459ms)
+✔ the load: one parse and a skinned clone, the model/stadium/racket/motion fetched at once, the 3D crowd after the model; ?tennisLoad=v24 keeps the old order (2.085444ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 852.502049

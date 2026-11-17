@@ -1,0 +1,50 @@
+PROBE_ASSERTION_RECORDED {"method":"equal","actual":8,"expected":6.5,"message":"BUG: repair input is skipped as well"}
+PROBE_ASSERTION_RECORDED {"method":"equal","actual":2,"expected":3}
+PROBE_ASSERTION_RECORDED {"method":"ok","actual":false,"expected":true,"message":"the ship reached the buoy using real movement input"}
+PROBE_ASSERTION_RECORDED {"method":"equal","actual":1,"expected":0,"message":"BUG: the finale bypassed the supply update"}
+PROBE_ASSERTION_RECORDED {"method":"equal","actual":160,"expected":0,"message":"BUG: the belt could not reload at the buoy"}
+{
+  "merge": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "beforeKill": {
+    "time": 18.100000000000254,
+    "belt": 0,
+    "buoys": [
+      {
+        "x": 104.96718954763422,
+        "z": 24.223941352572105,
+        "born": 8.349999999999994
+      }
+    ]
+  },
+  "atFinale": {
+    "time": 22.533333333333335,
+    "belt": 0,
+    "air": [
+      {
+        "kind": "heli",
+        "state": "in",
+        "hp": 3
+      }
+    ],
+    "hp": 6.5
+  },
+  "repairBefore": {
+    "hp": 6.5,
+    "charges": 3
+  },
+  "repairAfter": {
+    "hp": 8,
+    "charges": 2,
+    "repairLife": 1.2
+  },
+  "after": {
+    "time": 32.549999999999436,
+    "closestBuoyDistance": 16.216139251758296,
+    "collectRadius": 16,
+    "belt": 160,
+    "supplies": 1,
+    "buoys": 0,
+    "hp": 7.45,
+    "result": null
+  }
+}

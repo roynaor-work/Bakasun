@@ -1,0 +1,78 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+[
+  {
+    "duration": 1.15,
+    "receiverMarker": false,
+    "offered": [
+      "header",
+      "volley"
+    ],
+    "selected": "volley",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.82,
+      "assisted": false,
+      "aerial": "volley"
+    }
+  },
+  {
+    "duration": 1.15,
+    "receiverMarker": true,
+    "offered": [
+      "header",
+      "volley"
+    ],
+    "selected": "volley",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.82,
+      "assisted": false,
+      "aerial": "volley"
+    }
+  },
+  {
+    "duration": 1.4,
+    "receiverMarker": false,
+    "offered": [
+      "header",
+      "scissor"
+    ],
+    "selected": "scissor",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.92,
+      "assisted": false,
+      "aerial": "scissor"
+    }
+  },
+  {
+    "duration": 1.4,
+    "receiverMarker": true,
+    "offered": [
+      "header",
+      "scissor"
+    ],
+    "selected": "scissor",
+    "observed": {
+      "id": 2,
+      "type": "shot",
+      "team": 0,
+      "player": 0,
+      "power": 0.92,
+      "assisted": false,
+      "aerial": "scissor"
+    }
+  }
+]
+
+# result: {"name":"after-repro-005-air","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":207,"log":"after-repro-005-air.log"}

@@ -1,0 +1,120 @@
+{
+  "group": "hoops",
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "worktree": "/workspace/v241-hoops",
+  "patches_are_independent_diffs_against_base": true,
+  "recommended_order": [
+    "V241-010",
+    "V241-014"
+  ],
+  "new_tests_command": "REVIEW_FIX_ROOT=<clean-copy> node --test <artifact-root>/tests/V241-010.test.mjs <artifact-root>/tests/V241-014.test.mjs",
+  "new_tests_before": {
+    "exit_code_each_file": 1,
+    "tests": 3,
+    "pass": 0,
+    "fail": 3,
+    "logs": [
+      "hoops-010-new-before.log",
+      "hoops-014-new-before.log"
+    ]
+  },
+  "new_tests_after": {
+    "exit_code": 0,
+    "tests": 3,
+    "pass": 3,
+    "fail": 0,
+    "logs": [
+      "hoops-010-new-after.log",
+      "hoops-014-new-after.log"
+    ]
+  },
+  "existing_tests": [
+    "tests/island-offline.test.mjs",
+    "tests/island-hoops-v241-players.test.mjs",
+    "tests/island-hoops-motion-v12.test.mjs",
+    "tests/island-hoops-v241.test.mjs",
+    "tests/island-hoops-tall.test.mjs",
+    "tests/island-hoops-motion2.test.mjs"
+  ],
+  "existing_command": "node --test tests/island-offline.test.mjs tests/island-hoops-v241-players.test.mjs tests/island-hoops-motion-v12.test.mjs tests/island-hoops-v241.test.mjs tests/island-hoops-tall.test.mjs tests/island-hoops-motion2.test.mjs",
+  "existing_before": {
+    "exit_code": 0,
+    "pass": 49,
+    "fail": 0,
+    "skip": 0,
+    "logs": [
+      "hoops-existing-before.log",
+      "hoops-motion-existing-before.log"
+    ],
+    "note": "Two disjoint node --test invocations, 31 plus 18 tests."
+  },
+  "existing_after": {
+    "exit_code": 0,
+    "pass": 49,
+    "fail": 0,
+    "skip": 0,
+    "log": "hoops-existing-after.log"
+  },
+  "findings": [
+    {
+      "id": "V241-010",
+      "patch": "patches/V241-010.patch",
+      "test": "tests/V241-010.test.mjs",
+      "modified_files": [
+        "workout/island/offline-manifest.json",
+        "workout/island/tools/hoops-v241-offline.mjs",
+        "workout/island/ui/offline.mjs"
+      ],
+      "flags": [
+        "hoopsRollbackOffline=0 (new download-list kill switch)",
+        "hoopsV241=0 and hoopsBodyV2=0 (existing body selection rollback)"
+      ],
+      "default": "on",
+      "change": "המניפסט וה-generator כוללים את guard/wing/center מ-v22; loadManifest מאפשר להחזיר את רשימת ההורדה הקודמת עם hoopsRollbackOffline=0. אין שינוי בבחירת גוף המשחק.",
+      "before": "מטמון קר מלא 1539 קבצים, אפס כשלים; offline default=v2 אך hoopsV241=0 וגם hoopsBodyV2=0 נופלים ל-v10 כי גופי v22 חסרים.",
+      "after": "מטמון קר מלא 1542 קבצים, אפס כשלים; offline default=v2 ושני דגלי הגוף מחזירים v22 ללא fallback. בדיקת kill switch משחזרת רשימה בלי שלושת הגופים.",
+      "risk": "תוספת 1,435,768 bytes (1.369 MiB) להורדה. בדיקת offline הקיימת מודדת 85.9 MiB של assets לעומת 84.6, תחת cap90 MiB. אין שינוי שמירות.",
+      "reproduction": {
+        "before_command": "python3 workout/island/design/external-review-v241/repro/offline-roundtrip.py --base http://127.0.0.1:8767/workout/island/ --games '' --output <evidence>/hoops-010-repro-before.json",
+        "after_command": "python3 workout/island/design/external-review-v241/repro/offline-roundtrip.py --base http://127.0.0.1:8767/workout/island/ --games '' --output <evidence>/hoops-010-repro-after.json",
+        "before_exit": 0,
+        "after_exit": 0,
+        "logs": [
+          "hoops-010-repro-before.log",
+          "hoops-010-repro-after.log"
+        ],
+        "note": "Original source is unchanged; --base is its existing CLI option. Exit0 is a measurement result, not an absence-of-defect assertion."
+      }
+    },
+    {
+      "id": "V241-014",
+      "patch": "patches/V241-014.patch",
+      "test": "tests/V241-014.test.mjs",
+      "modified_files": [
+        "workout/island/minigames/hoops-athlete.mjs",
+        "workout/island/minigames/hoops-tall.mjs"
+      ],
+      "flags": [
+        "hoopsFakeV13=0 (new)",
+        "hoopsMotionV13=0",
+        "hoopsV241=0"
+      ],
+      "default": "on only for a v13 jump_shot",
+      "change": "חלון הפייק של v13 נגזר מאירוע takeoff ונע מראשית האיסוף עד פוזת תחילת הניתור וחזרה. הוא אינו מתקדם לתוך הניתור ונשאר לפני release, כך שהכפות עולות והרגליים נשארות על הקרקע; חלון v12 נשמר בדיוק.",
+      "before": "ב-actT=.26 יד ימין 1.066569m, חזה 1.201075m; הכדור נשאר נמוך.",
+      "after": "ב-actT=.26 יד ימין 1.417557m, יד שמאל 1.547926m, חזה 1.314392m; endpoint של קליפ 1.4s מול release1.8s. הכדור מוחזק וה-foot variation קטן מ 1cm לאורך 33 פריימים; דגל off משחזר 1.066569m.",
+      "risk": "שינוי חזותי בלבד של קליפ fake ב-v13. לא משתנה קלט, פיזיקה, שחרור כדור או חלון v12. יש לבדוק תחושה בטלפון.",
+      "reproduction": {
+        "command": "python3 workout/island/design/external-review-v241/repro/hoops-fake-comparison.py",
+        "before_exit": 0,
+        "after_exit": 0,
+        "logs": [
+          "hoops-014-repro-before.log",
+          "hoops-014-repro-after.log"
+        ],
+        "note": "Original source and command unchanged in both runs. Before used the shared8766 server with unmodified hoops modules; after used the dedicated hoops worktree on8766. Measurements confirm1.066569m→1.417557m, while hoopsMotionV13=0 stays1.371035m."
+      }
+    }
+  ],
+  "complete": true
+}

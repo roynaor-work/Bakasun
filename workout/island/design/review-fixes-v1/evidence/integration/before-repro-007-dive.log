@@ -1,0 +1,56 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+[
+  {
+    "tick": 0,
+    "diveTime": 0.65,
+    "state": "v241_keeper_dive_mid_left",
+    "dive": {
+      "name": "v241_keeper_dive_mid_left",
+      "time": 0.08379157509157507,
+      "contact": 0.5333,
+      "land": 0.8333,
+      "stand": 1.9,
+      "rate": 1.0254945054945057,
+      "v2": true
+    }
+  },
+  {
+    "tick": 1,
+    "diveTime": 0.6333333333333333,
+    "state": "v9_goalkeeper_ready",
+    "dive": null
+  },
+  {
+    "tick": 2,
+    "diveTime": 0.6166666666666667,
+    "state": "v9_goalkeeper_ready",
+    "dive": null
+  },
+  {
+    "tick": 3,
+    "diveTime": 0.6,
+    "state": "v9_goalkeeper_ready",
+    "dive": null
+  }
+]
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: the keeper dive must continue while the simulation is diving
+    at file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs:23:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+
+# result: {"name":"before-repro-007-dive","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":134,"log":"before-repro-007-dive.log"}

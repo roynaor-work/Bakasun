@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "group": "soccer",
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceReview": "aafc3e170d1f271f3a8695446b733b35f03d3443",
+  "findings": [
+    {
+      "id": "V241-005",
+      "title": "בחירת עף/מספרת קודמת לסיוע הנגיחה ולריצת מקבל ההגבהה",
+      "flags": [
+        "soccerAirChoice=0",
+        "soccerV241=0"
+      ],
+      "before": {
+        "tests": 6,
+        "pass": 4,
+        "fail": 2,
+        "observation": "בשתי הגבהות מסומנות ברחבה נפלט header במקום volley/scissor שנבחרו"
+      },
+      "after": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "observation": "שתי הבחירות מפיקות shot עם aerial תואם; סיוע הנגיחה נשמר ללא בחירה חמושה"
+      },
+      "risk": "בינוני: קדימות תנועת המקבל משתנה רק לבחירת volley/scissor מפורשת כאשר airChoice פעיל; מקל ידני אינו נחסם.",
+      "patch": "patches/V241-005.patch",
+      "test": "tests/V241-005.test.mjs",
+      "independentAgainstBase": true,
+      "dependencies": [],
+      "recommendedOrder": 5,
+      "originalReproduction": {
+        "command": "node workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs",
+        "beforeExit": 1,
+        "afterExit": 0,
+        "beforeLog": "evidence/soccer-repro-005-before.log",
+        "afterLog": "evidence/soccer-repro-005-after.log"
+      },
+      "isolatedPatchTestLog": "evidence/soccer-patch-005-isolated.log"
+    },
+    {
+      "id": "V241-006",
+      "title": "המשך החלקת v24.1 משתמש בציר הזמן של v24.1",
+      "flags": [
+        "soccerTackleV2=0",
+        "soccerV241=0"
+      ],
+      "before": {
+        "tests": 4,
+        "pass": 3,
+        "fail": 1,
+        "observation": "העדכון השני מעביר NaN לשעון ולפוזת העצמות"
+      },
+      "after": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "observation": "ציר הזמן סופי ומונוטוני עד מגע ב-0.5s, קימה ב-1.6s וחזרה לעמידה/ריצה"
+      },
+      "risk": "נמוך: תיקון dispatch בתצוגה בלבד; אותן פונקציות מיפוי זמן קיימות, והענף נגיש רק אחרי יצירת slide.v241 תחת דגלי התנועה.",
+      "patch": "patches/V241-006.patch",
+      "test": "tests/V241-006.test.mjs",
+      "independentAgainstBase": true,
+      "dependencies": [],
+      "recommendedOrder": 6,
+      "originalReproduction": {
+        "command": "node workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs",
+        "beforeExit": 1,
+        "afterExit": 0,
+        "beforeLog": "evidence/soccer-repro-006-before.log",
+        "afterLog": "evidence/soccer-repro-006-after.log"
+      },
+      "isolatedPatchTestLog": "evidence/soccer-patch-006-isolated.log"
+    },
+    {
+      "id": "V241-007",
+      "title": "זינוק v24.1 נשמר גם בפריימי dive לאחר פריים הכניסה",
+      "flags": [
+        "soccerTackleV2=0",
+        "soccerV241=0"
+      ],
+      "before": {
+        "tests": 9,
+        "pass": 3,
+        "fail": 6,
+        "observation": "כל ששת זינוקי גובה/צד נחתכים ל-idle בפריים השני"
+      },
+      "after": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "observation": "ששת הזינוקים עוברים takeoff/contact/land/get-up וחוזרים ל-idle; חגיגה עדיין יכולה לקטוע"
+      },
+      "risk": "נמוך: הגנת התצוגה מתרחבת ל-mode=dive רק כש-tackle241 פעיל ועד זמן stand של תוכנית הזינוק הקיימת.",
+      "patch": "patches/V241-007.patch",
+      "test": "tests/V241-007.test.mjs",
+      "independentAgainstBase": true,
+      "dependencies": [],
+      "recommendedOrder": 7,
+      "originalReproduction": {
+        "command": "node workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs",
+        "beforeExit": 1,
+        "afterExit": 0,
+        "beforeLog": "evidence/soccer-repro-007-before.log",
+        "afterLog": "evidence/soccer-repro-007-after.log"
+      },
+      "isolatedPatchTestLog": "evidence/soccer-patch-007-isolated.log"
+    }
+  ],
+  "newTests": {
+    "before": {
+      "command": "node --test workout/island/design/review-fixes-v1/tests/V241-005.test.mjs workout/island/design/review-fixes-v1/tests/V241-006.test.mjs workout/island/design/review-fixes-v1/tests/V241-007.test.mjs",
+      "root": "clean main checkout",
+      "tests": 19,
+      "pass": 10,
+      "fail": 9,
+      "exit": 1,
+      "log": "evidence/soccer-new-clean-before.log"
+    },
+    "after": {
+      "command": "node --test <artifact>/tests/V241-005.test.mjs <artifact>/tests/V241-006.test.mjs <artifact>/tests/V241-007.test.mjs",
+      "root": "isolated checkout with three patches",
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "exit": 0,
+      "log": "evidence/soccer-new-after.log"
+    }
+  },
+  "existingTests": [
+    "tests/island-soccer-v241.test.mjs",
+    "tests/island-soccer-slide-timeline.test.mjs",
+    "tests/island-soccer-feel-v2.test.mjs",
+    "tests/island-soccer-motion-v9.test.mjs",
+    "tests/island-soccer-headers-v22.test.mjs",
+    "tests/island-soccer-loft-reception.test.mjs",
+    "tests/island-soccer-controls-v2.test.mjs",
+    "tests/island-soccer-gameplay.test.mjs",
+    "tests/island-soccer-keeper-distribution.test.mjs",
+    "tests/island-soccer-v23.test.mjs"
+  ],
+  "existing": {
+    "command": "node --test --test-concurrency=2 tests/island-soccer-v241.test.mjs tests/island-soccer-slide-timeline.test.mjs tests/island-soccer-feel-v2.test.mjs tests/island-soccer-motion-v9.test.mjs tests/island-soccer-headers-v22.test.mjs tests/island-soccer-loft-reception.test.mjs tests/island-soccer-controls-v2.test.mjs tests/island-soccer-gameplay.test.mjs tests/island-soccer-keeper-distribution.test.mjs tests/island-soccer-v23.test.mjs",
+    "before": {
+      "tests": 120,
+      "pass": 120,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 109008.5999,
+      "log": "evidence/soccer-existing-clean-before.log"
+    },
+    "after": {
+      "tests": 120,
+      "pass": 120,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 91205.389832,
+      "log": "evidence/soccer-existing-after.log"
+    }
+  },
+  "rollbackParity": {
+    "command": "node workout/island/design/external-review-v241/repro/soccer-rollback-parity.mjs",
+    "exit": 0,
+    "ticks": 5400,
+    "against": "first parent 11fef2fb98eec4173381346caee94f2930f9cffa",
+    "log": "evidence/soccer-rollback-parity-after.log"
+  },
+  "patchApplication": {
+    "log": "evidence/soccer-patch-application.log",
+    "independentChecks": true,
+    "isolatedTests": true,
+    "cumulativePlainGitApply": true
+  },
+  "sharedNewTestHelper": "tests/soccer-motion-fixture.mjs",
+  "verificationBoundary": "בדיקות התנועה מריצות mixer, retargeter, היררכיית עצמות ו-tracks אמיתיים מהמאגר; אין WebGL renderer או GLB mesh בבדיקות Node החדשות. שחזורי הביקורת המקוריים של שלושת הממצאים הורצו ללא שינוי. לא נערך קובץ קיים בענף התוצר."
+}

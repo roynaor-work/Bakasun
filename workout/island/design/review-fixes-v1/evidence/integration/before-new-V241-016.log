@@ -1,0 +1,54 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-016: pit rollback and full pit disable describe the actual race rules (11.534738ms)
+✖ V241-016: radar and aerial-end rollback flags select matching displayed and spoken help independently (6.391341ms)
+✔ V241-016: reviewHelp=0 restores the original help keys and unrelated games retain their text (0.523579ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 212.303637
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:30:1
+✖ V241-016: pit rollback and full pit disable describe the actual race rules (11.534738ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /שלוש הקפות/. Input:
+  
+  'בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. בכל מרוץ נכנסים פעם אחת לפיטס להחלפת צמיגים: המכונית נכנסת לבד בסוף ההקפה השנייה (במרוץ של שתי הקפות בסוף הראשונה), ולחיצה על „פיטס” מבטלת.'
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:32:121)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. בכל מרוץ נכנסים פעם אחת לפיטס להחלפת צמיגים: המכונית נכנסת לבד בסוף ההקפה השנייה (במרוץ של שתי הקפות בסוף הראשונה), ולחיצה על „פיטס” מבטלת.',
+    expected: /שלוש הקפות/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:36:1
+✖ V241-016: radar and aerial-end rollback flags select matching displayed and spoken help independently (6.391341ms)
+  AssertionError [ERR_ASSERTION]: no timed radar under ?navalRadar=v24
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs:39:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. נגיעה בספינת אויב מפעילה את המכ״ם: הטבעת סביבה מתמלאת בשנייה בערך (יותר לספינה רחוקה), ורק אז התותח ננעל ומסתובב אליה לבד. ספינה מחוץ לטווח המכ״ם לא ננעלת, ונעילה נשברת כשהספינה יוצאת מהטווח. כפתור הנעילה שליד האש נועל על הספינה המסוכנת או הקרובה, לחיצה נוספת עוברת לבאה, והחלקה עליו עוברת בין המטרות. כשהנעילה ירוקה, לחיצה על האש יורה.',
+    expected: /המכ״ם|מתמלאת בשנייה/,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-016","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-016.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":266,"log":"before-new-V241-016.log"}

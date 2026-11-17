@@ -1,0 +1,40 @@
+✖ V241-001: parent entry flow resumes the paused street after a required scene failure (2668.579575ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2832.632474
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:19:1
+✖ V241-001: parent entry flow resumes the paused street after a required scene failure (2668.579575ms)
+  AssertionError [ERR_ASSERTION]: the actual entry wrapper must release the street and discard the failed interior
+  + actual - expected
+  
+    {
+  +   done: false,
+  +   failed: undefined,
+  +   inside: true,
+  +   interior: false,
+  +   paused: true
+  -   done: true,
+  -   failed: true,
+  -   inside: false,
+  -   interior: true,
+  -   paused: false
+    }
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-001.test.mjs:34:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { paused: true, inside: true, done: false, failed: undefined, interior: false },
+    expected: { paused: false, inside: false, done: true, failed: true, interior: true },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

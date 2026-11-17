@@ -1,0 +1,222 @@
+✖ V241-005: intended penalty-area cross obeys explicit volley (197.784787ms)
+✖ V241-005: intended penalty-area cross obeys explicit scissor (132.595035ms)
+✔ V241-005: an unarmed intended cross still receives automatic heading assistance (192.177665ms)
+✔ V241-005: soccerV241 rollback keeps legacy high-ball behavior (98.935261ms)
+✔ V241-005: URL rollback ?soccerAirChoice=0 restores automatic heading (76.051837ms)
+✔ V241-005: URL rollback ?soccerV241=0 restores automatic heading (85.709248ms)
+✖ V241-006: real retargeted slide stays finite and monotonic through contact, recovery, get-up and idle (25.142172ms)
+✔ V241-006: a recovered slide releases to a moving player (17.261556ms)
+✔ V241-006: ?soccerTackleV2=0 keeps the real v24 slide (19.233661ms)
+✔ V241-006: ?soccerV241=0 keeps the real v24 slide (7.505399ms)
+✖ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (59.068394ms)
+✖ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (6.124649ms)
+✖ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (8.650697ms)
+✖ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (6.023745ms)
+✖ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (7.593051ms)
+✖ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (2.359525ms)
+✔ V241-007: an explicit celebration can interrupt the dive (4.084965ms)
+✔ V241-007: ?soccerTackleV2=0 keeps legacy keeper clips (11.338893ms)
+✔ V241-007: ?soccerV241=0 keeps legacy keeper clips (2.580217ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 10
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1006.871159
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-005.test.mjs:44:3
+✖ V241-005: intended penalty-area cross obeys explicit volley (197.784787ms)
+  AssertionError [ERR_ASSERTION]: explicit foot contact must survive automatic reception
+  
+  'header' !== 'shot'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-005.test.mjs:48:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'header',
+    expected: 'shot',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-005.test.mjs:44:3
+✖ V241-005: intended penalty-area cross obeys explicit scissor (132.595035ms)
+  AssertionError [ERR_ASSERTION]: explicit foot contact must survive automatic reception
+  
+  'header' !== 'shot'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-005.test.mjs:48:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'header',
+    expected: 'shot',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-006.test.mjs:7:1
+✖ V241-006: real retargeted slide stays finite and monotonic through contact, recovery, get-up and idle (25.142172ms)
+  AssertionError [ERR_ASSERTION]: live slide time is finite on every frame
+      at step (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-006.test.mjs:15:14)
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-006.test.mjs:20:75)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (59.068394ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_low_left'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_low_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (6.124649ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_mid_left'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_mid_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (8.650697ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_high_left'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_high_left',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (6.023745ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_low_right'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_low_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (7.593051ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_mid_right'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_mid_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:6:152
+✖ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (2.359525ms)
+  AssertionError [ERR_ASSERTION]: an active dive cannot be replaced by locomotion
+  + actual - expected
+  
+  + 'idle'
+  - 'v241_keeper_dive_high_right'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs:21:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'idle',
+    expected: 'v241_keeper_dive_high_right',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

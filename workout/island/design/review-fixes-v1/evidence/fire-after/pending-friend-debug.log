@@ -1,0 +1,28 @@
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (6702.094993ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6850.078223
+
+✖ failing tests:
+
+test at ../Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:19:1
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (6702.094993ms)
+  AssertionError [ERR_ASSERTION]: the room timer follows the same barrier: {"before":17.59999999999998,"time":17.59999999999998,"phase":"intro","fade":"in","hidden":false,"ready":true,"done":[]}
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:26:217)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

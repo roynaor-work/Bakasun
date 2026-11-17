@@ -1,0 +1,138 @@
+{
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "review": "aafc3e170d1f271f3a8695446b733b35f03d3443",
+  "newCodeLanguage": "JavaScript",
+  "productSourcesModifiedInDelivery": false,
+  "independentMainRelativePatches": true,
+  "application": "git apply --3way in numeric order; main-relative patches001..004 were applied together cleanly in isolated worktree",
+  "flagsDefault": "on; existing fireFlow=v23 bypasses this flow completely",
+  "helper": "tests/fire-browser-support.mjs",
+  "findings": [
+    {
+      "id": "V241-001",
+      "flag": "fireLoadRecovery=0",
+      "patch": "patches/V241-001.patch",
+      "test": "tests/V241-001.test.mjs",
+      "before": "הטעינה הכושלת משאירה streetPaused=true, inside=true; watchdog חסר.",
+      "after": "onDone(null,error) פעם אחת; dispose לinterior; הwrapper מחזיר paused=false, inside=false וfailed=true; timeout 15000ms לבקשה תקועה.",
+      "risk": "בינוני: טעינה איטית מ15 שניות חוזרת לרחוב עם אפס נקודות על הכניסה, במקום לחכות ללא גבול.",
+      "order": 1
+    },
+    {
+      "id": "V241-002",
+      "flag": "fireContextRecovery=0",
+      "patch": "patches/V241-002.patch",
+      "test": "tests/V241-002.test.mjs",
+      "before": "אובדן WebGL אמיתי השאיר ready=true והזמן התקדם 5.092 שניות מול קנבס שחור.",
+      "after": "זמן המודל נשאר קבוע 5 שניות לאחר אובדן ההקשר; restore מחזיר שעון; permanent loss חוזר לרחוב לאחר15s; shell pause/resume אינו מפעיל audio בזמן אובדן ההקשר.",
+      "risk": "נמוך–בינוני: restore תלוי מימוש GPU; נבדק Chromium/SwiftShader, לא טלפון אמיתי.",
+      "order": 2
+    },
+    {
+      "id": "V241-003",
+      "flag": "fireKeyboard=0",
+      "patch": "patches/V241-003.patch",
+      "test": "tests/V241-003.test.mjs",
+      "before": "אין native button; חמש לולאות Tab/Enter/Space משאירות tutorialOpen=true.",
+      "after": "כפתור המשך אמיתי גם בשיעור וגם בכרטיס החדר; Enter/Space/click סוגרים שיעור; focus עובר לקנבס וחוזר לפקד המקורי בdispose.",
+      "risk": "נמוך: שינוי focus ופקד המשך; לא נטען שכל משחק הכיבוי קיבל aiming/rescue במקלדת.",
+      "order": 3
+    },
+    {
+      "id": "V241-004",
+      "flag": "fireRoomBarrier=0",
+      "patch": "patches/V241-004.patch",
+      "test": "tests/V241-004.test.mjs",
+      "before": "ready=true אחרי מעבר מודל בזמן שהroom/friend הנוכחיים עדיין קודמים; prefetch שנדחה מרעיל cache.",
+      "after": "ready=false בין חדרים, זמן מודל קפוא, picking=null, loading overlay עד טעינת room וfriend; rejected prefetch נמחק ונדרש מחדש; retryRoom אינו משתמש בPromise שנדחה.",
+      "risk": "בינוני: בקשת retry נוספת לאחר prefetch failure; מומלץ001 לפני004 כדי לצאת גם מכשל טעינה סופי או timeout.",
+      "order": 4
+    }
+  ],
+  "existingTests": [
+    "tests/island-fire-v24.test.mjs",
+    "tests/island-fire-v23.test.mjs",
+    "tests/island-fire-playability.test.mjs"
+  ],
+  "existingBefore": {
+    "pass": 49,
+    "fail": 0,
+    "log": "evidence/fire-before/existing.log"
+  },
+  "existingAfter": {
+    "pass": 49,
+    "fail": 0,
+    "log": "evidence/fire-after/final-existing.log"
+  },
+  "newTestsBefore": {
+    "pass": 2,
+    "fail": 10,
+    "focusedRuns": [
+      {
+        "findings": [
+          "V241-001",
+          "V241-003",
+          "V241-004"
+        ],
+        "pass": 1,
+        "fail": 8,
+        "log": "evidence/fire-before/final-raf-tests.log"
+      },
+      {
+        "findings": [
+          "V241-002"
+        ],
+        "pass": 1,
+        "fail": 2,
+        "log": "evidence/fire-before/final-002-clock.log"
+      }
+    ]
+  },
+  "newTestsAfter": {
+    "totalVerified": 12,
+    "fail": 0,
+    "focusedRuns": [
+      {
+        "findings": [
+          "V241-001",
+          "V241-003",
+          "V241-004"
+        ],
+        "pass": 9,
+        "fail": 0,
+        "log": "evidence/fire-after/final-raf-tests.log"
+      },
+      {
+        "findings": [
+          "V241-002"
+        ],
+        "pass": 3,
+        "fail": 0,
+        "log": "evidence/fire-after/final-002-clock.log"
+      }
+    ],
+    "fixtureCorrection": "Virtual clocks are installed before session setup.001/003 clocks pause before setup and run64ms to deliver RAF deterministically;002 explicitly pauses after real scene readiness and samples native lost/restored events;004 waits for actual failed-prefetch and retry request events instead of fixed wall-time sleeps."
+  },
+  "originalRepro": {
+    "before": [
+      "evidence/fire-before/first-room.log",
+      "evidence/fire-before/context-loss.log",
+      "evidence/fire-before/keyboard.log",
+      "evidence/fire-before/interior-failures.log"
+    ],
+    "after": [
+      "evidence/fire-after/fire-first-room-shell.log",
+      "evidence/fire-after/fire-context-loss.log",
+      "evidence/fire-after/fire-keyboard.log",
+      "evidence/fire-after/fire-interior-failures.log"
+    ],
+    "note": "001 original waits for the failed interior which is now disposed: bounded local run80s exited124; root cumulative runner reruns with larger outer timeout to capture internal predicate failure.004 original combines first-room and later-room cases, and exits1 reading a fade DOM node that correct recovery removed; the new runtime tests explicitly cover later room and friend failure/delay.002 and003 original repros exit0 with corrected measurements. The final cumulative run completed the unchanged001 probe with its internal predicate timeout (exit1, no outer timeout); integration/after-repro-001-shell.log supersedes the earlier bounded local attempt."
+  },
+  "commands": {
+    "newTests": "node --test --test-concurrency=1 workout/island/design/review-fixes-v1/tests/V241-00{1,2,3,4}.test.mjs",
+    "existing": "node --test tests/island-fire-v24.test.mjs tests/island-fire-v23.test.mjs tests/island-fire-playability.test.mjs"
+  },
+  "environment": "Node24.19.0; Chromium151; Playwright JS package installed through Python environment; no new Python deliverables and no WASM",
+  "status": "final: cumulative apply.sh verified all four final test files and49 existing fire tests",
+  "cumulativeVerification": "evidence/summary-integration.json"
+}

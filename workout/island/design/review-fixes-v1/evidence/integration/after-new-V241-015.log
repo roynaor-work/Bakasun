@@ -1,0 +1,16 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-015: late optional failure is observed immediately and the billboard fallback survives (1724.295116ms)
+✔ V241-015: the explicit rollback preserves the old late-rejection timing (1386.306423ms)
+✔ V241-015: disposal during the blocked load cannot attach a late crowd or emit an unhandled rejection (1440.850066ms)
+✔ V241-015: successful prefetch still builds and swaps the real 600-fan crowd (1213.19918ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5879.787845
+
+# result: {"name":"after-new-V241-015","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":5938,"log":"after-new-V241-015.log"}

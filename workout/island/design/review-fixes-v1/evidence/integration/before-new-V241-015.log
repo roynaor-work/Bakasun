@@ -1,0 +1,60 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✖ V241-015: late optional failure is observed immediately and the billboard fallback survives (1884.156391ms)
+✔ V241-015: the explicit rollback preserves the old late-rejection timing (1460.336391ms)
+✖ V241-015: disposal during the blocked load cannot attach a late crowd or emit an unhandled rejection (1458.009498ms)
+✔ V241-015: successful prefetch still builds and swaps the real 600-fan crowd (1190.033004ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6094.270875
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:71:1
+✖ V241-015: late optional failure is observed immediately and the billboard fallback survives (1884.156391ms)
+  AssertionError [ERR_ASSERTION]: prefetch rejection must already have a handler while fan-01 is pending
+  + actual - expected
+  
+  + [
+  +   'Error: runtime/lod2/fan-12.glb 503'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:74:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'Error: runtime/lod2/fan-12.glb 503' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:88:1
+✖ V241-015: disposal during the blocked load cannot attach a late crowd or emit an unhandled rejection (1458.009498ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'Error: runtime/lod2/fan-12.glb 503'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs:90:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'Error: runtime/lod2/fan-12.glb 503' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+# result: {"name":"before-new-V241-015","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-015.test.mjs"],"code":1,"signal":null,"timedOut":false,"durationMs":6138,"log":"before-new-V241-015.log"}

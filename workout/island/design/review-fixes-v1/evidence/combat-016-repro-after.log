@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/v241-combat/workout/island/design/external-review-v241/repro/racing-help-rollback.py", line 20, in <module>
+    assert 'בכל מרוץ' in result['racingHelp'][1] and 'מבטלת' in result['racingHelp'][1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

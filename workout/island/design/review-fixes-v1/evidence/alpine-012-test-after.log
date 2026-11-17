@@ -1,0 +1,14 @@
+{"case":"session-new-ruleset","best":null,"ghost":null}
+{"keys":["island.alpine.v1","island.alpine.ghosts.v1","island.alpine.v1.rules-v241-d2624aacbeebf7e8","island.alpine.ghosts.v1.rules-v241-d2624aacbeebf7e8","island.alpine.v1.rules-v241-d2624aacbeebf7e8.corrupt"],"oldMs":59931,"newMs":56171}
+{"case":"real-league-card-and-settlement","oldMs":59931,"newMs":55992,"stage":2,"gear":{"skis":1,"helmet":1,"goggles":1},"stars":3}
+✔ V241-012: the actual session excludes old-course times and ghosts and restores them on rollback (37.186979ms)
+✔ V241-012: records and ghosts write into matching course/physics namespaces, without altering legacy bytes (39.896909ms)
+✔ V241-012: the real league map isolates times and finishing a new run preserves old timing, stars, gear and progress (426.815807ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 655.130847

@@ -1,0 +1,5 @@
+$ python3 "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-context-loss.py"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+{"before": {"phase": "enter", "time": 0, "remaining": 50}, "after": {"phase": "enter", "time": 0, "remaining": 50, "ready": false, "loadFailed": false, "contextLost": true, "done": []}}
+
+# result: {"name":"after-repro-002-context","executable":"python3","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/fire-context-loss.py"],"code":0,"signal":null,"timedOut":false,"durationMs":5871,"log":"after-repro-002-context.log"}

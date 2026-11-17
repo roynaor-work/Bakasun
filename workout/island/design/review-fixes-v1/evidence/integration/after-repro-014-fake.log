@@ -1,0 +1,48 @@
+$ python3 "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/hoops-fake-comparison.py"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+[
+  {
+    "query": "hoopsMotionV13=0",
+    "bodyVersion": "v2",
+    "motion": "jump_shot",
+    "hand": [
+      -1.0423536353222533,
+      1.3710351921024864,
+      0.2859212535632812
+    ],
+    "head": [
+      -0.9020510172200408,
+      1.4200315236568783,
+      0.037823983063981034
+    ],
+    "chest": [
+      -0.9008869288757441,
+      1.1712626462744384,
+      0.015717469732215952
+    ],
+    "handBelowChest": -0.19977254582804793
+  },
+  {
+    "query": "",
+    "bodyVersion": "v2",
+    "motion": "jump_shot",
+    "hand": [
+      0.8297749746831142,
+      1.4175569845103029,
+      0.3084112475566944
+    ],
+    "head": [
+      0.9009777525278623,
+      1.5642594768230056,
+      0.002323500001229701
+    ],
+    "chest": [
+      0.9009777525278623,
+      1.3143921271175263,
+      0.0011949059430276096
+    ],
+    "handBelowChest": -0.10316485739277659
+  }
+]
+
+# result: {"name":"after-repro-014-fake","executable":"python3","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/hoops-fake-comparison.py"],"code":0,"signal":null,"timedOut":false,"durationMs":4542,"log":"after-repro-014-fake.log"}

@@ -1,0 +1,21 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "--test" "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+✔ V241-007: low_left owns takeoff, contact, landing and get-up across live frames (32.90545ms)
+✔ V241-007: mid_left owns takeoff, contact, landing and get-up across live frames (12.193308ms)
+✔ V241-007: high_left owns takeoff, contact, landing and get-up across live frames (6.760464ms)
+✔ V241-007: low_right owns takeoff, contact, landing and get-up across live frames (5.650946ms)
+✔ V241-007: mid_right owns takeoff, contact, landing and get-up across live frames (8.164604ms)
+✔ V241-007: high_right owns takeoff, contact, landing and get-up across live frames (6.3171ms)
+✔ V241-007: an explicit celebration can interrupt the dive (0.840737ms)
+✔ V241-007: ?soccerTackleV2=0 keeps legacy keeper clips (1.268987ms)
+✔ V241-007: ?soccerV241=0 keeps legacy keeper clips (1.019086ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 345.014979
+
+# result: {"name":"after-new-V241-007","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["--test","/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/review-fixes-v1/tests/V241-007.test.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":392,"log":"after-new-V241-007.log"}

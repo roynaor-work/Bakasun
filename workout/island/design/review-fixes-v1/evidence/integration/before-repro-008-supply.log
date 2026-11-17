@@ -1,0 +1,49 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+{
+  "merge": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "beforeKill": {
+    "time": 18.100000000000254,
+    "belt": 0,
+    "buoys": [
+      {
+        "x": 104.96718954763422,
+        "z": 24.223941352572105,
+        "born": 8.349999999999994
+      }
+    ]
+  },
+  "atFinale": {
+    "time": 22.533333333333335,
+    "belt": 0,
+    "air": [
+      {
+        "kind": "heli",
+        "state": "in",
+        "hp": 3
+      }
+    ],
+    "hp": 6.5
+  },
+  "repairBefore": {
+    "hp": 6.5,
+    "charges": 3
+  },
+  "repairAfter": {
+    "hp": 6.5,
+    "charges": 3,
+    "repairLife": 0
+  },
+  "after": {
+    "time": 32.549999999999436,
+    "closestBuoyDistance": 0.022490462326420733,
+    "collectRadius": 16,
+    "belt": 0,
+    "supplies": 0,
+    "buoys": 1,
+    "hp": 5.95,
+    "result": null
+  }
+}
+
+# result: {"name":"before-repro-008-supply","executable":"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs"],"code":0,"signal":null,"timedOut":false,"durationMs":321,"log":"before-repro-008-supply.log"}

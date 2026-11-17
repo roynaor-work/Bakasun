@@ -1,0 +1,61 @@
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (11821.963895ms)
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (4097.000261ms)
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (6278.381649ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22331.84943
+
+✖ failing tests:
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:5:1
+✖ V241-004: delayed second room is a loading barrier; no model time or stale picking (11821.963895ms)
+  AssertionError [ERR_ASSERTION]: a required second room must reset readiness
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:10:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:13:1
+✖ V241-004: rejected prefetch is evicted and the real transition retries it (4097.000261ms)
+  AssertionError [ERR_ASSERTION]: a rejected prefetch must not poison the room cache
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:17:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:19:1
+✖ V241-004: a pending friend is required too, and fireRoomBarrier=0 keeps the previous readiness (6278.381649ms)
+  AssertionError [ERR_ASSERTION]: readiness waits for the next friend only when the fix is enabled
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun/workout/island/design/review-fixes-v1/tests/V241-004.test.mjs:25:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,60 @@
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+index 6b0dbd790c9856809b4f8f256b0273a8e5c70eb0..3aba0be07230272a785b69dd1f815891d7d1aa10 100644
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -963,6 +963,9 @@
+    "design/viewer/retarget-map.json",
+    "vendor/draco/draco_decoder.wasm",
+    "vendor/draco/draco_wasm_wrapper.js",
++   "assets/athlete-body-v22/models/guard.glb",
++   "assets/athlete-body-v22/models/wing.glb",
++   "assets/athlete-body-v22/models/center.glb",
+    "assets/hoops-v241/body/models/center.glb",
+    "assets/hoops-v241/body/models/guard.glb",
+    "assets/hoops-v241/body/models/wing.glb",
+diff --git a/workout/island/tools/hoops-v241-offline.mjs b/workout/island/tools/hoops-v241-offline.mjs
+index a193720a6220a4991439b1e7e7c9fa7cb187a201..e92d3c5dca55f703d455c872a4c68274234c4ba9 100644
+--- a/workout/island/tools/hoops-v241-offline.mjs
++++ b/workout/island/tools/hoops-v241-offline.mjs
+@@ -8,10 +8,11 @@ import {fileURLToPath} from 'node:url';
+ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+ const DIR='assets/hoops-v241';
+ const RUNTIME=/\.(?:glb|ogg|mp3|json|png|webp)$/;
+-// Kept online only, so the island's offline download stays under its 80 MB (tests/island-offline.test.mjs): the crowd's level 0 (only
+-// `?hoopsCrowd3d=full`, a comparison mode) and the v22 basketball bodies, which the v2 bodies replace (they stay the fallback, fetched if needed).
++// The comparison-only crowd level 0 stays online. The v22 role bodies are required by
++// ?hoopsV241=0 / ?hoopsBodyV2=0 even with a cold offline cache; keep them as rollback dependencies.
+ const ONLINE_ONLY=/^assets\/hoops-v241\/crowd\/runtime\/lod0\//;
+-const REPLACED=['assets/athlete-body-v22/models/guard.glb','assets/athlete-body-v22/models/wing.glb','assets/athlete-body-v22/models/center.glb'];
++const rollbackOffline=!process.argv.includes('--hoopsRollbackOffline=0');
++const ROLLBACK_BODIES=['assets/athlete-body-v22/models/guard.glb','assets/athlete-body-v22/models/wing.glb','assets/athlete-body-v22/models/center.glb'];
+ async function walk(rel){
+   const out=[];
+   for(const name of await readdir(path.join(root,rel)).catch(()=>[])){
+@@ -21,7 +22,7 @@ async function walk(rel){
+   return out;
+ }
+ const file=path.join(root,'offline-manifest.json'),manifest=JSON.parse(await readFile(file,'utf8'));
+-const files=(await walk(DIR)).filter(p=>!ONLINE_ONLY.test(p)),keep=manifest.games.hoops.filter(p=>!p.startsWith(DIR+'/')&&!REPLACED.includes(p));
+-manifest.games.hoops=[...new Set([...keep,...files.sort()])];
++const files=(await walk(DIR)).filter(p=>!ONLINE_ONLY.test(p)),keep=manifest.games.hoops.filter(p=>!p.startsWith(DIR+'/')&&!ROLLBACK_BODIES.includes(p));
++manifest.games.hoops=[...new Set([...keep,...(rollbackOffline?ROLLBACK_BODIES:[]),...files.sort()])];
+ await writeFile(file,JSON.stringify(manifest,null,1)+'\n');
+ console.log('hoops offline files:',manifest.games.hoops.length,'of which v24.1:',files.length);
+diff --git a/workout/island/ui/offline.mjs b/workout/island/ui/offline.mjs
+index 1ea332dbcf3b9a17be5495f541e4dce2d70163fb..8fb9a3bd9ae93a9ff469be0df39229667e32252b 100644
+--- a/workout/island/ui/offline.mjs
++++ b/workout/island/ui/offline.mjs
+@@ -20,6 +20,12 @@ export async function loadManifest(version=DATA_VERSION,fetcher=globalThis.fetch
+   if(!response.ok)throw Error('manifest '+response.status);
+   const manifest=await response.json();
+   if(!manifest?.games||typeof manifest.games!=='object')throw Error('manifest shape');
++  // V241-010: an explicit kill switch restores the pre-fix download set; the game flags
++  // still select v2/v22 as before. Default downloads include every documented rollback body.
++  if(new URLSearchParams(globalThis.location?.search||'').get('hoopsRollbackOffline')==='0'){
++    const legacyBodies=new Set(['guard','wing','center'].map(id=>'assets/athlete-body-v22/models/'+id+'.glb'));
++    manifest.games.hoops=(manifest.games.hoops||[]).filter(p=>!legacyBodies.has(p));
++  }
+   return manifest;
+ }
+ /** Unique paths for the named games (all games when none are named). The app shell

@@ -1,0 +1,9 @@
+$ python3 "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/racing-help-rollback.py"
+# cwd: /tmp/review-fixes-v1.EP7ev2TE/checkout
+Traceback (most recent call last):
+  File "/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/racing-help-rollback.py", line 20, in <module>
+    assert 'בכל מרוץ' in result['racingHelp'][1] and 'מבטלת' in result['racingHelp'][1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+# result: {"name":"after-repro-016-help","executable":"python3","argv":["/tmp/review-fixes-v1.EP7ev2TE/checkout/workout/island/design/external-review-v241/repro/racing-help-rollback.py"],"code":1,"signal":null,"timedOut":false,"durationMs":2082,"log":"after-repro-016-help.log"}
