@@ -48,6 +48,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   // v24.1 rules (physics.v241): null when the balance is v24's (?alpineV241=0), and then none of the code below that reads `v2` runs.
   const v2 = v241Rules(physics);
   const patches = v2 ? objects.filter(o => o.type === 'ice' || o.type === 'powder') : [], sections = v2 && course.sections?.length ? course.sections : [];
+  // v24.1 surfaces have length: their centre may leave the window while their
+  // edge remains under the rider (or already enters the window ahead).
+  const patchReach = patches.reduce((n, o) => Math.max(n, (o.len || 0) / 2), 0);
   const rampOf = o => (v2 && o.big ? v2.bigRamp : physics.ramp), launchOf = o => (v2 && o.big ? v2.bigRamp.launch : physics.rampLaunch);
   /** The patch (ice or deep snow) under a rider on the ground, if any. */
   function patchUnder(r) {
@@ -669,7 +672,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       const ahead = physics.viewAhead, behind = physics.viewBehind, obstacles = [];
       const now = ticks * step;
       for (const o of objects) {
-        if (o.s < p.s - behind) continue; if (o.s > p.s + ahead) break;
+        if (o.s > p.s + ahead + patchReach) break;
+        const half = v2 && (o.type === 'ice' || o.type === 'powder') ? (o.len || 0) / 2 : 0;
+        if (o.s + half < p.s - behind || o.s - half > p.s + ahead) continue;
         if (o.type === 'coin') { if (!p.coins.has(o.id)) obstacles.push({ id: o.id, type: 'coin', x: o.x, z: p.s - o.s, s: o.s, h: o.h }); continue; }
         if (v2 && o.type !== 'rock' && o.type !== 'gate' && o.type !== 'boost' && o.type !== 'warn' && !(o.type === 'ramp' && !o.big)) { const v = v2Obstacle(o, p, now); if (v) obstacles.push(v); continue; }
         obstacles.push(o.type === 'rock' ? { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s, radius: o.radius } : { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s });
