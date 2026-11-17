@@ -1,0 +1,542 @@
+import {installCity} from './city-runtime.mjs?v=island-v2-20261107-15';
+import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-15';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-15';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-15';
+import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-15';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-15';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-15';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-15';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-15';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-15';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-15';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-15';
+import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-15';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-15';
+import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-15';
+import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-15';
+import { createRegistry } from './registry.mjs?v=island-v2-20261107-15';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-15';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-15';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-15';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-15';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-15';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-15';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-15';
+import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-15';
+
+const clone = value => JSON.parse(JSON.stringify(value));
+
+/** Pure game state and commands. No DOM, Three.js, timers, network, or audio. */
+export function createEngine(data, options = {}) {
+  const registry = createRegistry(data);
+  const config = data.config;
+  const flags = data.featureFlags || {};
+  const now = options.now || Date.now;
+  let storage = options.storage;
+  if (storage === undefined) { try { storage = globalThis.localStorage; } catch { storage = null; } }
+  const loaded = loadWorld(storage, data, registry, now());
+  const state = loaded.ok && loaded.state ? loaded.state : createInitialState(data, now());
+  const listeners = new Set(), history = [];
+  let activeMinigame = null;
+  let saveBlocked = !loaded.ok && loaded.reason !== 'reason.storage';
+  const narration = createNarrationHook();
+  const engine = { state, data, registry, flags, narration, now, storageStatus: loaded.ok ? { ok: true } : loaded, canPlay, spendPlayTime };
+
+  function notify(type, detail = {}) {
+    const event = { type, ...detail };
+    for (const listener of listeners) listener(state, event);
+    return event;
+  }
+  function save() {
+    state.updatedAt = now();
+    const result = saveBlocked ? { ok: false, reason: engine.storageStatus.reason } : saveWorld(storage, state);
+    engine.storageStatus = result;
+    return result;
+  }
+  function changed(type, detail = {}) {
+    engine.city?.sync();
+    const saved = save();
+    notify(type, { ...detail, saved });
+    return saved;
+  }
+  function remember(action) {
+    action.city = clone(state.city);
+    if (action.kind === 'remove' && state.events.repairs[action.building.id] != null) action.repairs = {id:action.building.id, until:state.events.repairs[action.building.id]};
+    history.push(action);
+    if (history.length > config.maxUndo) history.shift();
+  }
+  function expand() {
+    const parts = state.parts[data.world.partGroup] || 0;
+    let expanded = false;
+    const stages=state.readyPlan?(config.readyWorldStages||config.worldStages):config.worldStages;
+    stages.forEach((stage, index) => {
+      if (index > state.world.stage && parts >= stage.requiredParts) { state.world = { size: stage.size, stage: index }; expanded = true; }
+    });
+    if(expanded){repairHarbors(state,registry,flags);if(state.readyPlan)prepareReadyPlan(state,registry,flags);}
+    return expanded;
+  }
+  function grantReward(id, reward) {
+    if (state.claimedRewards.includes(id)) return false;
+    state.claimedRewards.push(id);
+    state.money += reward.money || 0;
+    for (const resource of Object.keys(state.resources)) state.resources[resource] += reward[resource] || 0;
+    if (reward.parts) {
+      const group = data.world.partGroup;
+      state.parts[group] = (state.parts[group] || 0) + reward.parts;
+      expand();
+    }
+    return true;
+  }
+  function tutorialObjective() {
+    if (!flags.tutorial || state.tutorial.completed || state.tutorial.skipped) return null;
+    const step = data.tutorial.steps[state.tutorial.step];
+    return step ? { ...step, kind: 'tutorial', reward: config.tutorialRewards[step.id] || {}, target: config.tutorialPlacements[step.id] } : null;
+  }
+  function nextObjective() {
+    const tutorial = tutorialObjective();
+    if (tutorial) return tutorial;
+    const mission = (data.missions || []).find(row => !state.completedMissions.includes(row.id));
+    if (mission) return { ...mission, kind: 'mission', reward: config.missionReward };
+    const nextStage = config.worldStages[state.world.stage + 1];
+    return nextStage ? { id: 'expand', title: 'mission.expand', kind: 'parts', targetParts: nextStage.requiredParts, reward: {} } : { id: 'grow', title: 'mission.grow', buildType: 'house', kind: 'freebuild', reward: {} };
+  }
+  function onPlaced(typeId) {
+    const objective = nextObjective();
+    if (objective.buildType !== typeId || !['tutorial', 'mission'].includes(objective.kind)) return null;
+    const paid = grantReward(`${objective.kind}.${objective.id}`, objective.reward);
+    if (objective.kind === 'tutorial') {
+      state.tutorial.step++;
+      state.tutorial.completed = state.tutorial.step >= data.tutorial.steps.length;
+    } else state.completedMissions.push(objective.id);
+    return { ...objective, paid };
+  }
+  function enabledType(typeId) {
+    const type = registry.buildings.get(typeId);
+    if (type?.category === 'sports' && !flags.sportFacilities) return false;
+    return !type?.featureFlag || Boolean(flags[type.featureFlag]);
+  }
+  function check(typeId, x, z, ignoreId) {
+    if (!enabledType(typeId)) return { ok: false, reason: 'reason.locked' };
+    return validatePlacement(state, registry, typeId, x, z, ignoreId, flags);
+  }
+
+  engine.subscribe = listener => { listeners.add(listener); return () => listeners.delete(listener); };
+  engine.save = save;
+  function prepareIsland(target) {
+    const stage=config.readyWorldStages?.[target.world.stage];
+    if(!stage)return {ok:false,reason:'reason.invalid'};
+    const enlarged=target.world.size<stage.size;
+    if(enlarged)target.world={...target.world,size:stage.size};
+    const repaired=repairHarbors(target,registry,flags);
+    const result=prepareReadyPlan(target,registry,flags);
+    return {...result,changed:result.changed||enlarged||repaired.length>0};
+  }
+  engine.enableReadyBuilding = () => {
+    if(!flags.readyPlots)return {ok:false,reason:'reason.locked'};
+    if(saveBlocked)return {ok:false,reason:engine.storageStatus.reason};
+    if(activeMinigame)return {ok:false,reason:'reason.gameActive'};
+    const previous=clone(state),result=prepareIsland(state);
+    if(!result.ok){for(const key of Object.keys(state))delete state[key];Object.assign(state,previous);return result;}
+    if(result.changed)changed('ready-island',{size:state.world.size});
+    return {...result,size:state.world.size};
+  };
+  engine.readyPlots = () => listReadyPlots(state,registry,flags);
+  engine.readyPlotForType = typeId => findReadyType(state,registry,typeId,flags);
+  engine.readyPlotAt = (x,z) => {const cell=typeof x==='object'?x:{x,z};return cell?findReadyCell(state,registry,cell.x,cell.z,flags):null;};
+  engine.reset = ({ keepAvatar = false } = {}) => {
+    const fresh = createInitialState(data, now());
+    if (keepAvatar) fresh.avatar = clone(state.avatar);
+    if(state.readyPlan&&flags.readyPlots){const prepared=prepareIsland(fresh);if(!prepared.ok)return prepared;}
+    const result = resetWorld(storage, fresh);
+    engine.storageStatus = result;
+    if (!result.ok) { notify('storage', result); return result; }
+    for (const key of Object.keys(state)) delete state[key];
+    Object.assign(state, fresh); history.length = 0; saveBlocked = false;
+    notify('reset');
+    return { ok: true };
+  };
+  engine.validatePlacement = check;
+  engine.nextObjective = nextObjective;
+  engine.population = () => population(state, registry, config);
+  engine.metrics = () => {
+    if (!flags.metrics) return {};
+    const values = calculateMetrics(state, registry, config);
+    for (const metric of registry.metrics.values()) if (metric.featureFlag && !flags[metric.featureFlag]) delete values[metric.id];
+    return values;
+  };
+  engine.coverage = id => coverageForBuilding(state, registry, id, config);
+  engine.income = () => flags.economy ? calculateIncome(state, registry, config, data.city) : { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
+  engine.incomePerMinute = () => engine.income().money;
+  engine.cityReport = options => cityReport(state,registry,config,engine.income(),options);
+  engine.setCityPolicy = input => {
+    if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!['enabled','taxRate','funding'].includes(key)))return {ok:false,reason:'reason.invalid'};
+    if(input.enabled!==undefined&&typeof input.enabled!=='boolean'||input.taxRate!==undefined&&!config.cityManagement.taxRates.includes(input.taxRate))return {ok:false,reason:'reason.invalid'};
+    if(input.funding&&(!Object.keys(input.funding).length||Object.keys(input.funding).some(id=>!Object.hasOwn(state.cityManagement.funding,id)||!config.cityManagement.fundingLevels.includes(input.funding[id]))))return {ok:false,reason:'reason.invalid'};
+    if(input.funding!==undefined&&(!input.funding||typeof input.funding!=='object'||Array.isArray(input.funding)))return {ok:false,reason:'reason.invalid'};
+    const policy=state.cityManagement;
+    remember({kind:'city-policy',previous:{enabled:policy.enabled,taxRate:policy.taxRate,funding:{...policy.funding}},moneyDelta:0});
+    if(input.enabled!==undefined)policy.enabled=input.enabled;
+    if(input.taxRate!==undefined)policy.taxRate=input.taxRate;
+    Object.assign(policy.funding,input.funding);
+    changed('city-policy');return {ok:true};
+  };
+  engine.validateZone = (kind,x,z) => zoneAvailability(state,registry,kind,x,z);
+  engine.zone = (kind,x,z) => {
+    if(state.cityManagement.zones.length>=config.cityManagement.maxZones)return {ok:false,reason:'city.reason.maxZones'};
+    const result=engine.validateZone(kind,x,z);if(!result.ok)return result;
+    let id;do{id=`zone-${state.cityManagement.nextZoneId++}`;}while(state.cityManagement.zones.some(row=>row.id===id));
+    state.cityManagement.zones.push({id,kind,x,z});remember({kind:'city-zone',id,moneyDelta:0});changed('city-zone',{id});return {ok:true,id};
+  };
+  engine.removeZone = id => {
+    const index=state.cityManagement.zones.findIndex(row=>row.id===id);if(index<0)return {ok:false,reason:'reason.invalid'};
+    const [zone]=state.cityManagement.zones.splice(index,1);remember({kind:'city-unzone',zone,index,moneyDelta:0});changed('city-unzone',{id});return {ok:true};
+  };
+  engine.canUndo = () => Boolean(history.length);
+  const placeBuilding = (typeId, x, z, automatic=false) => {
+    const validation = check(typeId, x, z);
+    if (!validation.ok) return validation;
+    const type = registry.buildings.get(typeId);
+    let id;
+    do { id = `building-${state.nextId++}`; } while (state.buildings.some(row => row.id === id));
+    state.money -= type.cost;
+    const building = { id, typeId, x, z, level: 1 };
+    state.buildings.push(building);
+    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
+    const reward = onPlaced(typeId);
+    if(!automatic)changed('place', { id, reward });
+    if (reward) narration.announce(reward.title, { reward: reward.reward });
+    return { ok: true, reason: 'reason.placed', id, reward };
+  };
+  engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
+  engine.buildReadyPlot = id => {
+    if(typeof id!=='string'||!state.readyPlan)return {ok:false,reason:'reason.invalid'};
+    const site=engine.readyPlots().find(row=>row.id===id);
+    if(!site)return {ok:false,reason:'reason.occupied'};
+    if(!site.ok)return {ok:false,reason:site.reason||'reason.invalid'};
+    const result=engine.place(site.typeId,site.x,site.z);
+    if(!result.ok)return result;
+    // The pre-laid streets fulfil the road tutorial; the child never has to
+    // position a redundant road just to continue the guided building sequence.
+    if(tutorialObjective()?.buildType==='road'&&state.buildings.some(row=>registry.buildings.get(row.typeId)?.isRoad)){
+      const reward=onPlaced('road');changed('ready-roads',{reward});
+    }
+    return {...result,plotId:id};
+  };
+  engine.move = (id, x, z) => {
+    const building = state.buildings.find(row => row.id === id);
+    if (!building) return { ok: false, reason: 'reason.invalid' };
+    if(state.readyPlan&&registry.buildings.get(building.typeId)?.isRoad)return {ok:false,reason:'ready.fixedRoad'};
+    const validation = check(building.typeId, x, z, id);
+    if (!validation.ok) return validation;
+    remember({ kind: 'move', id, previous: { x: building.x, z: building.z }, moneyDelta: 0 });
+    Object.assign(building, { x, z });
+    changed('move', { id });
+    return { ok: true, reason: 'reason.moved', id };
+  };
+  engine.remove = id => {
+    if(state.readyPlan&&registry.buildings.get(state.buildings.find(row=>row.id===id)?.typeId)?.isRoad)return {ok:false,reason:'ready.fixedRoad'};
+    const validation = canRemove(state, registry, id);
+    if (!validation.ok) return validation;
+    const index = state.buildings.findIndex(row => row.id === id);
+    const building = state.buildings[index];
+    const type = registry.buildings.get(building.typeId);
+    const investment = type.cost + type.levels.slice(1, building.level).reduce((sum, level) => sum + level.cost, 0);
+    const refund = Math.floor(investment * config.removeRefundRatio);
+    remember({ kind: 'remove', building: clone(building), index, moneyDelta: refund });
+    state.buildings.splice(index, 1); state.money += refund;
+    changed('remove', { id, refund });
+    return { ok: true, reason: 'reason.removed', id, refund };
+  };
+  engine.upgrade = id => {
+    const validation = upgradeAvailability(state, registry, id);
+    if (!validation.ok) return validation;
+    const building = state.buildings.find(row => row.id === id);
+    const nextLevel = validation.nextLevel;
+    remember({ kind: 'upgrade', id, previousLevel: building.level, moneyDelta: -nextLevel.cost });
+    state.money -= nextLevel.cost; building.level++;
+    changed('upgrade', { id });
+    return { ok: true, reason: 'reason.upgraded', id };
+  };
+  engine.undo = () => {
+    const action = history.at(-1);
+    if (!action) return { ok: false, reason: 'reason.noUndo' };
+    if(state.money-action.moneyDelta<0)return {ok:false,reason:'reason.money'};
+    const restored=action.kind==='remove'?action.building:action.kind==='move'?{...state.buildings.find(row=>row.id===action.id),...action.previous}:null;
+    if(restored){const keys=new Set(cellsFor(registry.buildings.get(restored.typeId),restored.x,restored.z).map(cell=>cell.join(',')));if(state.buildings.some(row=>row.id!==restored.id&&cellsFor(registry.buildings.get(row.typeId),row.x,row.z).some(cell=>keys.has(cell.join(',')))))return {ok:false,reason:'reason.occupied'};}
+    history.pop();
+    const building = state.buildings.find(row => row.id === action.id);
+    if(action.kind==='city-policy')Object.assign(state.cityManagement,action.previous);
+    if(action.kind==='city-zone')state.cityManagement.zones=state.cityManagement.zones.filter(row=>row.id!==action.id);
+    if(action.kind==='city-unzone')state.cityManagement.zones.splice(action.index,0,action.zone);
+    if (action.kind === 'place') state.buildings.splice(state.buildings.findIndex(row => row.id === action.id), 1);
+    if (action.kind === 'move' && building) Object.assign(building, action.previous);
+    if (action.kind === 'upgrade' && building) building.level = action.previousLevel;
+    if (action.kind === 'remove') state.buildings.splice(action.index, 0, action.building);
+    if (action.city) state.city = clone(action.city);
+    if (action.repairs) state.events.repairs[action.repairs.id] = action.repairs.until;
+    for (const [key, delta] of Object.entries(action.resourcesDelta || {})) state.resources[key] -= delta;
+    // Only reverse the action delta: earned income and once-only rewards remain intact.
+    state.money -= action.moneyDelta;
+    changed('undo', { action: action.kind });
+    return { ok: true, reason: 'reason.undone', id: action.id || action.building?.id };
+  };
+  engine.tick = seconds => {
+    if (!Number.isFinite(seconds) || seconds <= 0) return { ok: false, reason: 'reason.invalid' };
+    const duration = Math.min(seconds, config.maxTickSeconds);
+    state.updatedAt = now();
+    let gained={},developed=[];
+    if(flags.economy){
+      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration,data.city);
+      else{
+        let remaining=duration;
+        while(remaining>0){
+          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds,data.city);
+          for(const [resource,value]of Object.entries(step))gained[resource]=(gained[resource]||0)+value;
+          developed.push(...advanceCity(state,registry,config,seconds,(typeId,x,z)=>placeBuilding(typeId,x,z,true)));remaining-=seconds;
+        }
+      }
+    }
+    state.playSeconds += duration;
+    changed('tick', { gained,developed });
+    return { ok: true, gained,developed };
+  };
+  engine.setAvatar = input => {
+    if (!input || typeof input !== 'object') return { ok: false, reason: 'reason.invalid' };
+    const next = { ...state.avatar };
+    const choiceLists = { gender: 'genders', hairstyle: 'hairstyles', skinColor: 'skinColors', hairColor: 'hairColors', shirtColor: 'shirtColors', pantsColor: 'pantsColors' };
+    for (const [field, list] of Object.entries(choiceLists)) {
+      if (input[field] != null && !data.avatar[list].some(row => (row.color || row.id) === input[field])) return { ok: false, reason: 'reason.invalid' };
+      if (input[field] != null) next[field] = input[field];
+    }
+    if (input.nameId != null) {
+      if (!data.avatar.names.some(row => row.labelId === input.nameId)) return { ok: false, reason: 'reason.invalid' };
+      next.nameId = input.nameId;
+    }
+    if (input.name != null) next.name = String(input.name).trim().slice(0, 30);
+    next.created = input.created !== false;
+    state.avatar = next;
+    changed('avatar');
+    return { ok: true, reason: 'reason.avatar' };
+  };
+  engine.grantParts = (groupId, count) => {
+    if (typeof groupId !== 'string' || !/^[a-zA-Z][\w.-]*$/.test(groupId) || !Number.isSafeInteger(count) || count < 0 || !Number.isSafeInteger((state.parts[groupId] || 0) + count)) return { ok: false, reason: 'reason.invalid' };
+    state.parts[groupId] = (state.parts[groupId] || 0) + count;
+    const expanded = expand();
+    changed('parts', { groupId, count, expanded });
+    return { ok: true, reason: expanded ? 'reason.expanded' : 'reason.parts', expanded, size: state.world.size };
+  };
+  engine.skipTutorial = () => { state.tutorial.skipped = true; changed('tutorial'); return { ok: true }; };
+  engine.restartTutorial = () => { Object.assign(state.tutorial, { step: 0, completed: false, skipped: false }); changed('tutorial'); return { ok: true }; };
+  engine.exportJSON = () => exportWorld(state);
+  engine.importJSON = raw => {
+    const result = importWorld(raw, state, data, registry);
+    if (!result.ok) return result;
+    // Persist before changing the live object, so quota/security errors cannot replace it.
+    const saved = saveWorld(storage, result.state);
+    if (!saved.ok) { engine.storageStatus = saved; notify('storage', saved); return saved; }
+    Object.assign(state, result.state); history.length = 0; saveBlocked = false;
+    engine.storageStatus = { ok: true };
+    notify('import', { added: result.added, conflicts: result.conflicts });
+    return { ok: true, reason: 'reason.imported', added: result.added, conflicts: result.conflicts };
+  };
+  engine.startEpisode = (id, { testMode = false } = {}) => {
+    const result = loadEpisode(data, id);
+    if (!result.ok) return result;
+    if ((!flags.episodes || result.episode.testOnly) && !testMode) return { ok: false, reason: 'reason.locked' };
+    if (!episodeAvailable(result.episode, state)) return { ok: false, reason: 'reason.locked' };
+    return result;
+  };
+  engine.completeEpisode = (id, options) => {
+    const result = engine.startEpisode(id, options);
+    if (!result.ok) return result;
+    if (!state.completedEpisodes.includes(id)) state.completedEpisodes.push(id);
+    const paid = grantReward(`episode.${id}`, result.episode.rewards);
+    changed('episode', { id, paid });
+    return { ok: true, paid };
+  };
+  engine.isMinigameActive = () => Boolean(activeMinigame);
+  engine.editSoccerPlayer=(id,input)=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};const r=editSoccerPlayer(state.soccerRoster,id,input,config.minigames.soccer);if(r.ok)changed('soccer-roster');return r;};
+  engine.setSoccerRole=role=>{if(activeMinigame||!['field','keeper'].includes(role))return {ok:false,reason:'reason.invalid'};state.soccerRoster.role=role;changed('soccer-role');return {ok:true};};
+  engine.soccerOutdoorPractice=()=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};const r=awardSoccerPractice(state,config.minigames.soccer,'outdoor',now());if(r.ok)changed('soccer-outdoor');return r;};
+  engine.setSoccerDifficulty = difficulty => {
+    if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};
+    if(typeof difficulty!=='string'||!Object.hasOwn(config.minigames.soccer.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};
+    state.soccerCard.difficulty=difficulty;changed('soccer-difficulty');return {ok:true};
+  };
+  engine.soccerTrainingOffer = key => {
+    if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};
+    const card=state.soccerCard,at=Math.floor(now());
+    if(card.lastTrainingAt>at){card.lastTrainingAt=at;changed('soccer-clock');}
+    return trainingOffer(card,key,config.minigames.soccer,at);
+  };
+  engine.trainSoccer = key => {
+    const offer=engine.soccerTrainingOffer(key);if(!offer.ok)return offer;
+    const card=state.soccerCard;
+    card.stars-=offer.cost;card.attributes[key]=Math.min(config.minigames.soccer.card.max,card.attributes[key]+config.minigames.soccer.training.gain);
+    const attribute={power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key];if(attribute)state.soccerRoster.players[0].attributes[attribute]=Math.max(state.soccerRoster.players[0].attributes[attribute],card.attributes[key]);
+    card.trainings=Math.min(Number.MAX_SAFE_INTEGER,card.trainings+1);card.lastTrainingAt=Math.floor(now());changed('soccer-training');return {ok:true,cost:offer.cost};
+  };
+  // Island Pro Basketball club: every change is validated, saved and refused while a game runs.
+  const hoopsBusy=()=>activeMinigame?{ok:false,reason:'reason.gameBusy'}:null;
+  const hoopsC=()=>config.minigames.streetSlam;
+  engine.hoops={
+    summary:()=>hoopsSummary(state.hoops,hoopsC()),
+    setLineup:ids=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-lineup');return r;})(hoopsSetLineup(state.hoops,ids))),
+    offer:(id,drill)=>hoopsOffer(state.hoops,id,drill,hoopsC()),
+    train:(id,drill)=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-train');return r;})(hoopsTrain(state.hoops,id,drill,hoopsC(),now()))),
+    newSeason:()=>hoopsBusy()||((r=>{if(r.ok)changed('hoops-season');return r;})(hoopsNewSeason(state.hoops))),
+    settings:patch=>{const b=hoopsBusy();if(b)return b;const h=state.hoops;
+      if(patch.profile!==undefined){if(!['quick','standard','pro'].includes(patch.profile))return {ok:false,reason:'reason.invalid'};h.profile=patch.profile;}
+      if(patch.difficulty!==undefined){if(!['easy','normal','hard'].includes(patch.difficulty))return {ok:false,reason:'reason.invalid'};h.difficulty=patch.difficulty;}
+      if(patch.autoSub!==undefined)h.autoSub=!!patch.autoSub;
+      if(patch.offense!==undefined){if(!['motion','pnr','iso'].includes(patch.offense))return {ok:false,reason:'reason.invalid'};h.tactics.offense=patch.offense;}
+      if(patch.defense!==undefined){if(!['man','zone'].includes(patch.defense))return {ok:false,reason:'reason.invalid'};h.tactics.defense=patch.defense;}
+      changed('hoops-settings');return {ok:true};},
+  };
+  // Racing league (07/11/2026): own state (islandRacingLeague), own result path in startMinigame, refused while a game runs.
+  const leagueBusy=()=>activeMinigame?{ok:false,reason:'reason.gameBusy'}:null;
+  engine.racingLeague={
+    enabled:()=>leagueEnabled(),
+    summary:()=>leagueSummary(state.islandRacingLeague),
+    next:()=>leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null,
+    buy:name=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-upgrade');return r;})(leagueBuy(state.islandRacingLeague,name))),
+    nextSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-season');return r;})(leagueNext(state.islandRacingLeague))),
+    // racing-deep-m6: replay a season that ended below the gate; league setting "short races" (one lap less)
+    restartSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-restart');return r;})(leagueRestart(state.islandRacingLeague))),
+    setShortRaces:on=>leagueBusy()||((r=>{changed('racing-league-settings');return r;})(leagueShort(state.islandRacingLeague,on))),
+  };
+  // Ski league (v23): 30 stages after the three ski stages, in its own key (island.alpine.league.v1); the island save never changes.
+  installAlpineLeague(engine,{storage,config,flags,busy:leagueBusy,notify});
+  engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
+  engine.startMinigame = (id, context = {}) => {
+    const minigame = registry.minigames.get(id);
+    if (!minigame || !flags.minigames || (minigame.featureFlag && !flags[minigame.featureFlag])) return { ok: false, reason: 'reason.locked' };
+    if (activeMinigame) return { ok: false, reason: 'reason.gameBusy' };
+    const available=gameAvailability(state,config,id);
+    if(available&&!available.ok)return available;
+    const customAvailable=minigame.availability?.(state);
+    if(customAvailable&&!customAvailable.ok)return customAvailable;
+    if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
+    // A league race picks its own circuit from the season, so it neither needs nor changes the regular stage progress.
+    const leagueRun=id==='islandRacing'&&context.league===true&&leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null;
+    if(id==='islandRacing'&&context.league===true&&!leagueRun)return {ok:false,reason:'reason.invalid'};
+    // 13/11/2026 fire v23: a bonus mission (water targets, inside a building) is gated by campaign progress and runs on stage 1 data;
+    // its result pays coins only (see finish), so no save field changes. `?fireTargets=0` / `?fireInterior=0` refuse it.
+    const fireBonus=id==='fireRescue'&&context.fireMode!==undefined?fireBonusMission(context.fireMode,context.fireBonusLevel,state.minigameProgress.fireRescue):null;
+    if(fireBonus&&!fireBonus.ok)return {ok:false,reason:fireBonus.reason};
+    // Ski league: game stage 3 + n, set up by the league; the regular ski stages and their progress are not involved.
+    const alpineRun=id==='alpineRush'&&context.alpineLeague!=null?engine.alpineLeague.setup(context.alpineLeague):null;
+    if(id==='alpineRush'&&context.alpineLeague!=null&&!alpineRun)return {ok:false,reason:'reason.invalid'};
+    const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:alpineRun?alpineRun.number:fireBonus?1:(context.level??progress?.stage);
+    if(!leagueRun&&!alpineRun&&progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
+    const token = {}, startedAt = now();
+    let ended = false, session;
+    const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    if(fireBonus){ctx.fireMode=fireBonus.mode;ctx.fireBonusLevel=fireBonus.level;}else{delete ctx.fireMode;delete ctx.fireBonusLevel;}
+    if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
+    if(leagueRun){ctx.league=leagueRun;ctx.equipment=leagueRun.equipment;}
+    else delete ctx.league;
+    if(alpineRun){ctx.alpineLeague=alpineRun;ctx.equipment=alpineRun.equipment;ctx.power=1;}
+    else delete ctx.alpineLeague;
+    if(id==='streetSlam'){ctx.hoops=clone(state.hoops);const g=hoopsNextGame(state.hoops);ctx.hoopsGame=g?{id:g.id,home:g.home,away:g.away,round:g.round}:null;}
+    if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;
+      // League ladder (29/10/2026): the match number decides the difficulty, the child always plays in the field.
+      const league=leagueMatch(data.config.minigames.soccer,ctx.level);if(league.leagues&&!ctx.drill){if(ctx.level>league.total)ctx.level=league.total;ctx.difficulty=league.difficulty;ctx.role='field';}}
+    const finish = (raw, cancelled = false) => {
+      if (ended) return { ok: false, reason: 'reason.duplicate' };
+      let result;
+      if (!cancelled && ctx.league) {
+        // League race: validated by its own contract, applied to islandRacingLeague only (no stars, stage progress, island money or highscore).
+        let lr; try { lr = racingLeagueResult(raw, ctx, config.minigames.islandRacing); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!lr) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        const league = leagueApply(state.islandRacingLeague, { order: lr.order, fastestLapId: lr.fastestLapId });
+        result = Object.freeze({ outcome: lr.outcome, score: lr.score, money: 0, parts: 0, stars: 0, stage, league: Object.freeze({ ...league, season: ctx.league.season, race: ctx.league.race, track: ctx.league.track, laps: ctx.league.laps, order: lr.order }) });
+        changed('racing-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled && fireBonus) {
+        // Fire bonus mission: coins only. No stars, stage progress, certificate, wins, parts or high score are recorded.
+        let bonus; try { bonus = fireBonusResult(raw, fireBonus.mode, fireBonus.level, config.minigames.fireRescue); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!bonus || !Number.isSafeInteger(bonus.money) || bonus.money < 0 || !Number.isFinite(state.money + bonus.money)) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        state.money += bonus.money;
+        const summary = raw?.summary && typeof raw.summary === 'object' ? Object.freeze(Object.fromEntries(Object.entries(raw.summary).filter(([, v]) => Number.isSafeInteger(v)))) : null;
+        result = Object.freeze({ outcome: bonus.outcome, score: bonus.score, money: bonus.money, parts: 0, stars: bonus.stars, stage, fireBonus: Object.freeze({ mode: fireBonus.mode, level: fireBonus.level, number: fireBonusNumber(fireBonus.mode, fireBonus.level, config.minigames.fireRescue.levels.length), summary }) });
+        changed('minigame', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled && ctx.alpineLeague) {
+        // Ski league run: checked and applied to the league's own key only (no island money, stars, stage progress or high score).
+        const run = engine.alpineLeague.finish(raw, ctx);
+        if (!run) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        result = Object.freeze({ outcome: run.passed ? 'win' : 'lose', score: run.score, money: 0, parts: 0, stars: run.stars, stage, alpineLeague: Object.freeze(run) });
+        notify('alpine-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled) {
+        try { result = minigame.onResult(raw, ctx); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!result || !['win', 'lose'].includes(result.outcome) || !Number.isSafeInteger(result.score) || result.score < 0 || !Number.isSafeInteger(result.money) || result.money < 0 || !Number.isFinite(state.money + result.money)) return { ok: false, reason: 'reason.invalid' };
+        const wins = (state.minigameWins[id] || 0) + Number(result.outcome === 'win');
+        const periodicParts = result.outcome === 'win' && config.minigames?.partEveryWins && wins % config.minigames.partEveryWins === 0 ? config.minigames.winParts : 0;
+        const won=result.outcome==='win',settings=config.minigames?.[id]?.levels[stage-1];
+        const stars=progress&&won?result.stars:0;
+        if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
+        const parts=periodicParts+(won?(settings?.winParts||0):0);
+        result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
+          ...(result.drill?{drill:result.drill}:{}),...(id==='fireRescue'&&validCertificate(raw?.certificate)?{certificate:{...raw.certificate}}:{}),
+          ...(id==='soccer'&&result.penalties?{penalties:{...result.penalties}}:{}),...(id==='soccer'?{difficulty:ctx.difficulty,trainingStars:won?stars+config.minigames.soccer.difficulties[ctx.difficulty].bonusStars:0}:{}),
+          ...(id==='streetSlam'&&result.hoops?{hoops:result.hoops}:{}) });
+      }
+      ended = true; activeMinigame = null;
+      session?.dispose?.();
+      ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+      if (result) {
+        if(result.drill){const practice=result.drill.attempts>=config.minigames.soccer.training.drillAttempts?awardSoccerPractice(state,config.minigames.soccer,result.drill.kind,now()):{ok:false,reason:'soccer.practice.tryAgain'};result={...result,practice};changed('soccer-practice',{result});context.onFinish?.(result);return {ok:true,result};}
+        if(id==='fireRescue'&&result.certificate)recordFireCertificate(state.fireCertificates,stage,result.certificate);
+        if(id==='alienDefense'){const h=config.minigames.alienDefense.hangar;state.hangar.damage=Number.isSafeInteger(raw?.damage)?Math.max(0,Math.min(h.maxDamage,raw.damage)):state.hangar.damage;state.hangar.coins=Math.min(h.maxCoins,state.hangar.coins+(result.outcome==='win'?h.winCoins:h.lossCoins));if(result.outcome==='win')state.hangar.credits=Math.min(h.maxCoins,state.hangar.credits+1);}
+        if(id==='streetSlam'&&result.hoops){const credited=hoopsApply(state.hoops,result.hoops,config.minigames.streetSlam,now());result={...result,hoopsCredit:credited};}
+        state.money += result.money;
+        // Only shipped game IDs are persisted; third-party contract examples remain compatible.
+        if (config.minigameLevels?.[id]) {
+          state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+          if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
+          if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
+          if(id==='tennis'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer,'tennis');
+          if(id==='soccer'&&result.outcome==='win'){
+            recordTeamWin(state,config.minigames.soccer);
+            state.soccerCard.stars=Math.min(Number.MAX_SAFE_INTEGER,state.soccerCard.stars+result.trainingStars);
+          }
+          if(result.parts){const group=data.world.partGroup;state.parts[group]=(state.parts[group]||0)+result.parts;expand();}
+        }
+        changed('minigame', { id, result });
+      }
+      context.onFinish?.(cancelled ? { cancelled: true } : result);
+      return { ok: true, ...(cancelled ? { cancelled: true } : { result }) };
+    };
+    ctx.finish = raw => finish(raw);
+    ctx.cancel = () => finish(null, true);
+    activeMinigame = token;
+    try {
+      session = minigame.start(ctx);
+      // A synchronous extension may finish from start() itself.
+      if (ended) session?.dispose?.();
+      return { ok: true, session, cancel: ctx.cancel };
+    } catch {
+      if (activeMinigame === token) activeMinigame = null;
+      ended = true; session?.dispose?.();
+      return { ok: false, reason: 'reason.gameStart' };
+    }
+  };
+  engine.prepareEvent = (id, context = {}) => {
+    const event = registry.eventTypes.get(id);
+    if (!event || !flags.events || (event.featureFlag && !flags[event.featureFlag])) return { ok: false, reason: 'reason.locked' };
+    if (!event.warningId) return { ok: false, reason: 'reason.invalid' };
+    return { ok: true, warningId: event.warningId, prepared: event.prepare?.({ ...context, state, engine }) };
+  };
+  for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
+  installLearning(engine,changed);
+  installCity(engine,{changed,notify,remember});
+  return engine;
+}

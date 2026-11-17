@@ -1,0 +1,228 @@
+/** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
+ * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
+ * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
+import {createHoopsScreens} from './hoops-screens.mjs';
+import {gameContext} from './context.mjs?v=island-v2-20261107-15';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-15';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-15';
+import {loadHoopsTactics} from './hoops-tactics.mjs';
+import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-15';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-15';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-15';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-15';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-15';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-15';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-15';
+import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
+
+const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
+const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
+
+function controlMode(snapshot){
+ let controlled=null;for(const p of snapshot.players)if(p.id===snapshot.controlled){controlled=p;break;}
+ if(controlled?.hasBall&&snapshot.phase==='freethrow')return 'free_throw';
+ if(controlled?.hasBall&&snapshot.phase==='inbound')return 'inbound';
+ return controlled?.hasBall?'ball':snapshot.possession===snapshot.userTeam&&snapshot.ball.state!=='loose'?'offense':'defense';
+}
+/** Ownership may change between two simulation steps in the same render frame.
+ * Change the action context before consuming another edge, preserving held sprint. */
+export function consumeHoopsInput(controls,snapshot){controls.setMode(controlMode(snapshot));return controls.consume();}
+
+export function startHoops(ctx){
+ if(ctx.engine)ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'streetSlam',ctx.level),...ctx};
+ const balance=ctx.balance,t=ctx.t||(k=>k),seed=ctx.seed>>>0,stage=ctx.level||1;
+ const params=typeof location!=='undefined'?new URLSearchParams(location.search):new URLSearchParams();
+ const storage=(()=>{try{return globalThis.localStorage;}catch{return null;}})();
+ const setup=matchTeams(balance,ctx.hoops,{stage,equipment:ctx.equipment||{},power:ctx.power||1,game:ctx.hoopsGame});
+ const profile=params.get('hoopsProfile')||setup.profile||'standard';
+ // M4 presentation (11/11): automatic replay after dunks, alley-oops and buzzer/winning threes, reactions, crowd moods, HUD polish; `?hoopsShow=0` restores today
+ const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
+ // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined});
+ engine.setAutoSub(setup.autoSub!==false);
+ let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
+ const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
+ const abort=new AbortController(),on={signal:abort.signal};let audio;
+ try{audio=createHoopsAudio({config:balance.audio,storage});}catch{audio=createHoopsAudio({config:balance.audio,storage:null});}
+ const session={
+  setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
+  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
+   try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
+  get ready(){return Boolean(view)&&!error;},get loadFailed(){return error;},
+  get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying,replayInfo:view?.replayInfo||null,show:{enabled:show,...showCounts,pending:!!autoReplay}};},
+ };
+ const canvas=ctx.canvas;if(!canvas)return session;
+ const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
+ try{void screen.orientation?.unlock?.();}catch{}
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-15',import.meta.url).href;screenEl.append(css);
+ screenEl.dataset.hoopsShow=show?'v1':'0';
+ const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
+ const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
+
+ // HUD: broadcast score bug — team colour, score, quarter pips, clock, shot clock (digits only)
+ const looks=setup.teams.map(x=>x.look);
+ const bug=node('div','hoops-bug');bug.dir='ltr';bug.setAttribute('role','status');
+ const side=(i)=>{const s=node('div','hoops-team');s.style.setProperty('--team',looks[i].primary);s.style.setProperty('--team2',looks[i].secondary);const chip=node('span','hoops-chip');const sc=node('bdi','hoops-score','0');const fouls=node('span','hoops-fouls');for(let k=0;k<5;k++)fouls.append(node('i'));const poss=node('span','hoops-poss');s.append(chip,sc,fouls,poss);return {s,sc,fouls,poss};};
+ const home=side(0),away=side(1);
+ const mid=node('div','hoops-mid'),pips=node('span','hoops-pips');for(let k=0;k<4;k++)pips.append(node('i'));
+ const clock=node('bdi','hoops-clock','0:00'),shotc=node('bdi','hoops-shotclock','24');mid.append(pips,clock,shotc);
+ bug.append(home.s,mid,away.s);
+ const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterYellow=node('span','hoops-meter-yellow'),meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterYellow,meterWin,meterFill);
+ const grade=node('div','hoops-grade');grade.hidden=true;let gradeUntil=0;
+ const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
+ // show: the broadcast tag during a replay (Hebrew, no words otherwise on the game screen), gone the moment live play returns
+ const replayTag=node('div','hoops-replay-tag','שידור חוזר');replayTag.dir='rtl';replayTag.hidden=true;replayTag.setAttribute('aria-live','polite');
+ const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
+ const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
+ const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה ועצירת כדרור (אחריו אין כדרור, עד 2 צעדים)'));
+ const stepEl=node('div','hoops-steps');stepEl.hidden=true;stepEl.setAttribute('role','status');
+ const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
+ const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
+ stageEl.append(bug,meter,grade,toast,stepEl,replayBtn,replayTag,benchPanel,loading,stamina);
+ // ?hoopsLabels=all puts a position label over all ten players (old behaviour).
+ roleLabels=createHoopsRoleLabels(stageEl,{scope:params.get('hoopsLabels')==='all'?'all':'team'});
+ screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
+  onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
+  onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
+ controls=createHoopsControls({root,doc,config:{...balance.controls,doubleTap:(balance.play?.doubleTapMs??260)/1000},onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
+ root.classList.add('hoops-controls');controls.setEnabled(!paused);
+ doc.addEventListener('visibilitychange',()=>{last=0;loop.reset();controls.setEnabled(!doc.hidden&&!paused&&!view?.replaying);audio.setPaused(paused||doc.hidden);},on);
+ screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
+ const statusEl=ctx.status;
+
+ let loadStart=0,loadTimer=null;
+ function fail(reason){
+  if(disposed)return;clearTimeout(loadTimer);saveGameReport('hoops',{status:'failed',ms:loadStart?performance.now()-loadStart:undefined,lines:['failed: '+reason]});error=reason;loading.hidden=false;loading.replaceChildren();loading.classList.add('failed');loading.setAttribute('role','alert');
+  // icons only on the game screen: the reason is read out by screen readers, not printed
+  loading.setAttribute('aria-label',t('hoops.unavailable'));loading.append(hoopsIcon('warning',doc));
+  const retry=node('button','hoops-retry');retry.type='button';retry.dataset.action='hoops-retry';retry.setAttribute('aria-label',t('hoops.retry'));retry.append(hoopsIcon('retry',doc));
+  const back=node('button','hoops-back');back.type='button';back.dataset.action='hoops-back';back.setAttribute('aria-label',t('hoops.back'));back.append(hoopsIcon('back',doc));
+  retry.onclick=()=>{loading.classList.remove('failed');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));loading.replaceChildren(screens.elements.intro,ringEl);error=null;load();};back.onclick=()=>ctx.cancel();
+  loading.append(retry,back);ctx.onError?.('hoops.unavailable');
+ }
+ const dev=params.get('dev')==='1';
+ function load(){
+  loadStart=performance.now();clearTimeout(loadTimer);
+  // A stalled connection ends in the retry/back screen after 45 s instead of waiting forever;
+  // files already downloaded stay in the device cache, so retry continues where it stopped.
+  loadTimer=setTimeout(()=>{if(!view&&!disposed&&!error)fail('timeout 45 s');},45000);
+  const forceFail=dev&&params.get('hoopsFail')==='1';
+  const court=createCourt(balance.court);
+  const assetBase=new URL('../',import.meta.url);
+  const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-15');
+  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
+   if(!loaded)return;
+   if(disposed){loaded.dispose();return;}
+   clearTimeout(loadTimer);saveGameReport('hoops',{status:'ready',ms:performance.now()-loadStart,lines:['characters v'+(Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1))]});view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();
+   if(frame===undefined)frame=requestAnimationFrame(tick);
+  }).catch(e=>fail(String(e?.message||e)));
+ }
+ const ro=new ResizeObserver(()=>{if(!view)return;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);});ro.observe(stageEl);abort.signal.addEventListener('abort',()=>ro.disconnect());
+ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();if(disposed)return;view?.dispose();view=null;session.setPaused(true);fail('webgl-context-lost');},on);
+ replayBtn.addEventListener('click',()=>{if(!view||view.replaying)return;const frames=engine.replay();replayBtn.hidden=true;controls.setEnabled(false);view.startReplay(frames,()=>{controls.setEnabled(!paused);last=0;loop.reset();});},on);
+ // show: a tap anywhere during the automatic replay skips to the blend back to the live camera
+ screenEl.addEventListener('pointerdown',e=>{if(!show||!view?.replaying||!view.replayInfo?.show||e.target?.closest?.('button'))return;if(view.skipReplay())showCounts.skipped++;},{...on,capture:true});
+ function startAutoReplay(now){
+  const t=autoReplay.trigger;autoReplay=null;if(!view||view.replaying)return false;
+  const t0=now,ok=view.startShowReplay(engine.replay(),t,()=>{showCounts.replaysDone++;showCounts.replayWall.push(+((performance.now()-t0)/1000).toFixed(2));controls.setEnabled(!paused);last=0;loop.reset();});
+  if(ok){showCounts.replays++;replayOffer=0;replayBtn.hidden=true;controls.setEnabled(false);}
+  return ok;
+ }
+ if(dev)session.debug={engine,controls,get screens(){return screens;},get view(){return view;},
+  step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||consumeHoopsInput(controls,cur));cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
+  render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}},
+  // show stills: `holdReplay` keeps an armed automatic replay waiting until the harness releases it
+  holdReplay:false};
+ load();
+
+ function showToast(content,kind,ms=900){toast.hidden=false;toast.dataset.kind=kind;toast.replaceChildren(content);toastUntil=performance.now()+ms;}
+ function handleEvents(events){
+  if(!events.length)return;view?.effects(events,cur);audio.events(events,{show,userTeam:0});
+  for(const e of events)if(e.type==='score'&&e.shotType==='dunk')showCounts.dunks++;
+  if(show){const triggers=replayTriggers(events,cur,{userTeam:0});for(const t of triggers){showCounts.triggers++;if(t.reason==='alleyoop')showCounts.alleyoops++;else if(t.reason==='buzzer')showCounts.buzzer++;else if(t.reason==='winner')showCounts.winner++;}
+   // one automatic replay per basket, SHOW.replayDelay seconds after the make (the live celebration first; the inbound has not started)
+   if(triggers.length&&!autoReplay&&!view?.replaying)autoReplay={trigger:triggers[0],at:performance.now()+SHOW.replayDelay*1000};}
+  for(const e of events){
+   if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.zone==='green'?'perfect':e.zone==='yellow'?'good':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
+   if(e.type==='score'){if(statusEl)statusEl.textContent=t('hoops.scoreStatus',{home:e.score[0],away:e.score[1]});replayOffer=performance.now()+4500;showToast(doc.createTextNode('+'+e.points),e.team===0?'home':'away',900);}
+   if(e.type==='violation'&&(e.kind==='travel'||e.kind==='doubleDribble')){const w=doc.createElement('span');w.textContent=e.kind==='travel'?'צעדים':'כדרור כפול';showToast(w,'whistle',1100);}
+   else if(e.type==='foul'||e.type==='violation'){showToast(hoopsIcon('whistle',doc),'whistle',900);}
+   if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
+   if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
+   if(e.type==='timeout'&&e.team===0)openBench();
+   // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
+   if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
+   if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
+  }
+ }
+
+ function openBench(){
+  benchPanel.hidden=false;benchPanel.replaceChildren();
+  const roster=engine.roster(0);let pick=null;
+  const row=(list,cls)=>{const r=node('div','hoops-bench-row '+cls);for(const p of list){const b=node('button','hoops-card');b.type='button';b.dataset.id=p.id;b.setAttribute('aria-label',t('hoops.playerCard',{number:p.number,name:p.name}));
+   const num=node('bdi','hoops-card-num',String(p.number)),bar=node('span','hoops-card-energy');bar.style.setProperty('--e',String(p.energy));const fouls=node('span','hoops-card-fouls');for(let k=0;k<p.fouls;k++)fouls.append(node('i'));
+   b.append(num,bar,fouls);b.onclick=()=>{if(!pick){pick=p;b.classList.add('picked');return;}const a=pick.onCourt?pick:p,c=pick.onCourt?p:pick;pick=null;if(a.onCourt&&!c.onCourt){engine.substitute(0,a.id,c.id);}openBench();};r.append(b);}return r;};
+  benchPanel.append(row(roster.filter(p=>p.onCourt),'court'),row(roster.filter(p=>!p.onCourt),'bench'));
+  const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));close.onclick=()=>{benchPanel.hidden=true;};benchPanel.append(close);
+ }
+
+ const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
+ function hud(s,now){
+  roleLabels?.update(s,view);
+  setText(home.sc,String(s.score[0]));setText(away.sc,String(s.score[1]));
+  markFirst(foulDots[0],s.teamFouls[0]);markFirst(foulDots[1],s.teamFouls[1]);
+  home.poss.classList.toggle('on',s.possession===0);away.poss.classList.toggle('on',s.possession===1);
+  markFirst(pipDots,Math.min(4,s.quarter));setData(pips,'ot',String(s.overtime));
+  const c=fmtClock(s.clock);setText(clock,c);
+  const sc=String(Math.ceil(s.shotClock));setText(shotc,sc);setData(shotc,'low',String(s.shotClock<=5));setHidden(shotc,!s.shotClockOn&&s.phase==='live');
+  // the spoken board changes with the score, the clock and the quarter only
+  const bk=`${s.score[0]}|${s.score[1]}|${c}|${s.quarter}`;if(bk!==boardKey){boardKey=bk;setAttr(bug,'aria-label',t('hoops.board',{home:s.score[0],away:s.score[1],clock:c,quarter:s.quarter}));}
+  let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
+  if(me){const value=Math.round((me.boost??me.energy)*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.boostLocked||!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
+  controls.setMode(controlMode(s));controls.setDribbleDead(!!(me&&me.hasBall&&me.steps>=0&&me.dribbling===false));
+  stepEl.hidden=!(me&&me.hasBall&&me.dribbling===false&&s.phase==='live');if(!stepEl.hidden){const n=Math.min(3,me.steps||0);setText(stepEl,n?t('hoops.steps',{n}):t('hoops.noDribble'));setData(stepEl,'n',String(n));}
+  // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
+  const shooting=!!(me&&me.act==='shoot'&&me.hasBall&&me.shotHeld);
+  setHidden(meter,!shooting);
+  if(shooting&&view){
+   const rel=balance.anim[me.shotType==='ft'?'freethrow':me.shotType]?.release||0.8,w=balance.shot.window,max=rel+w;
+   const g=w*(balance.shot.green??0.35),y=w*(balance.shot.yellow??0.8),pct=v=>`${Math.max(0,v/max*100)}%`;
+   // above the shooter, but never on top of the score bug
+   const p=view.project(me.x,2.5,me.z),floor=bug.offsetTop+bug.offsetHeight+104;meter.style.transform=`translate(${Math.round(p.x)}px,${Math.round(Math.max(p.y,floor))}px)`;
+   meterYellow.style.bottom=pct(rel-y);meterYellow.style.height=pct(2*y);
+   meterWin.style.bottom=pct(rel-g);meterWin.style.height=pct(2*g);meterFill.style.height=`${Math.min(1,me.actT/max)*100}%`;
+  }
+  if(!grade.hidden&&now>gradeUntil)grade.hidden=true;
+  if(!toast.hidden&&now>toastUntil)toast.hidden=true;
+  if(autoReplay&&now>=autoReplay.at&&view&&!view.replaying&&!session.debug?.holdReplay)startAutoReplay(now);
+  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);
+  if(s.phase!=='timeout'&&!benchPanel.hidden&&s.phase==='live')benchPanel.hidden=true;
+  setData(screenEl,'hoopsPhase',s.phase);
+ }
+
+ function tick(now){
+  frame=undefined;if(disposed)return;frame=requestAnimationFrame(tick);
+  const dt=last?(now-last)/1000:0;last=now;
+  if(!view)return;
+  if(session.debug?.hold)return; // dev only: keeps the last frame for a screenshot
+  if(!paused&&!doc.hidden&&!view.replaying&&cur.phase!=='final'){
+   loop.advance(dt,()=>{prev=cur;engine.step(consumeHoopsInput(controls,cur));cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
+  }
+  let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
+  if(holder&&holder.dribbling!==false&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
+  const alpha=paused?1:loop.alpha;
+  view.render(prev,cur,alpha,paused||doc.hidden?0:dt);hud(cur,now);
+  if(cur.phase==='final'&&!finished){
+   if(!paused&&!doc.hidden)finalDisplay+=Math.min(dt,.1);
+   if(finalDisplay<(view.celebrationSeconds||0)||view.replaying)return;
+   finished=true;const r=engine.result;cancelAnimationFrame(frame);frame=undefined;
+   const sc=r.score,won=sc[0]>sc[1];
+   const box=r.box[0].map(p=>({id:p.id,pts:p.pts,reb:p.reb,ast:p.ast,stl:p.stl,blk:p.blk,sec:p.sec,fgm:p.fgm,fga:p.fga,tpm:p.tpm,tpa:p.tpa,ftm:p.ftm,fta:p.fta,pf:p.pf,tov:p.tov}));
+   const prof=balance.rules.profiles[profile],gameSeconds=4*prof.quarterSeconds+r.overtime*prof.overtimeSeconds;
+   ctx.finish({outcome:won?'win':'lose',score:sc[0],streetSlam:{won,scoreFor:sc[0],scoreAgainst:sc[1],quarters:r.quarters,overtime:r.overtime,profile,stage,seed,gameSeconds,gameId:ctx.hoopsGame?.id??null,opponent:setup.teams[1].id,box,mvp:r.mvp}});
+  }
+ }
+ return session;
+}

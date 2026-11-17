@@ -1,0 +1,23 @@
+{
+  "name": "island-asset-compression-v1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "measure": "node tools/measure.mjs",
+    "compress": "node tools/compress.mjs",
+    "test": "node --test tools/*.test.mjs",
+    "verify": "node tools/verify.mjs"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1",
+    "@jsquash/webp": "1.5.0",
+    "draco3dgltf": "1.5.7",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "meshoptimizer": "0.25.0",
+    "sharp": "0.34.5"
+  }
+}

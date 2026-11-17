@@ -1,0 +1,31 @@
+/* Aliens v24 HUD (Roy, 14/11/2026: "the buttons are too big and hide; they should be elegant, at the side"): the steady cannon,
+ * the Vulcan and the missile become thin, half-transparent rings with an icon, stacked in one column at the right edge, above the
+ * ship's lane (the lane is the bottom 16.4% of the play area) and far from the stick. Touch targets stay 56-64 px. The Vulcan's heat
+ * is a thin arc around its ring (green, yellow, red, a red blink while locked, cyan while a magazine keeps it cold); the missile's
+ * charge is the same thin arc. The one-word captions sit beside the rings and fade after the first seconds of a stage.
+ * Only with the v23 two-button fire and without ?alienHud=v23 (data-alien-hud=v24 on the controls). */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] :is(#shoot,#vulcan,#pass){position:absolute;display:grid;place-items:center;padding:0;min-width:0;border-radius:50%;background:radial-gradient(circle,#05101d47 0 58%,#05101d00 71%);border:1.5px solid var(--alien-ring,#cfe9f6a3);box-shadow:0 0 0 1px #0000003d,0 2px 10px #00000026;backdrop-filter:none;-webkit-backdrop-filter:none;opacity:.88;filter:none;transition:opacity .15s,border-color .15s,background .15s,box-shadow .15s;touch-action:none;-webkit-tap-highlight-color:transparent}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #shoot{width:64px;height:64px;min-height:64px;right:max(14px,env(safe-area-inset-right));bottom:calc(16.4% + 20px);color:#e6f4fb;--alien-ring:#cfe9f6b8}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan{width:58px;height:58px;min-height:58px;right:calc(max(14px,env(safe-area-inset-right)) + 3px);bottom:calc(16.4% + 98px);color:#ffe2b8;--alien-ring:#f0c49099}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #pass{width:56px;height:56px;min-height:56px;right:calc(max(14px,env(safe-area-inset-right)) + 4px);bottom:calc(16.4% + 168px);color:#efd5ae;--alien-ring:#d4b58999}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #shoot svg{width:26px;height:26px}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan svg{width:25px;height:25px;padding:0;filter:drop-shadow(0 1px 2px #0009)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #pass svg{width:23px;height:23px}
+/* Thin arcs: the Vulcan heat and the missile charge (3 px rings drawn by masks, nothing over the icon). */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] :is(#vulcan,#pass)::before{content:'';position:absolute;inset:-5px;border-radius:50%;pointer-events:none;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3px))}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan::before{background:conic-gradient(var(--vulcan-color,#7fe0a0) var(--heat,0%),#ffffff17 0)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #pass::before{background:conic-gradient(#dfbb84 var(--charge,100%),#ffffff17 0)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan .alien-vulcan-ring{inset:-8px;border-width:1px}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan[data-level=lock]{--alien-ring:#ff4a30;color:#ffb3a6}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan[data-level=lock][data-blink=on]{--alien-ring:#ffffff}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #vulcan[data-level=cold]{--alien-ring:#6fe3ffcc;color:#c9f6ff}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] :is(#shoot,#vulcan,#pass).held{opacity:1;background:radial-gradient(circle,#a8dcf02e 0 58%,#a8dcf000 71%);--alien-ring:#effaff;box-shadow:0 0 0 1px #0000003d,0 0 16px #8fd3f05c!important;filter:none}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #pass:disabled{opacity:.42;filter:saturate(.4)}
+/* The missile count: a small chip on the inner side (toward the middle of the screen). */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] #pass .alien-ammo{right:auto;left:-6px;bottom:-4px;width:18px;height:18px;border-radius:6px;font-size:11px!important;background:#0c1a29d9;border-color:#d2ba9466;box-shadow:0 1px 4px #0007}
+/* Captions beside the rings (one word each), gone after the first seconds of the stage. */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] .alien-fire-caption{top:50%;left:auto;right:calc(100% + 8px);transform:translateY(-50%);font-size:10px!important;opacity:.85;transition:opacity .6s}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24][data-alien-captions=off] .alien-fire-caption{opacity:0}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24] :is(#shoot,#vulcan,#pass,.alien-fire-caption){transition:none}}
+/* A magazine keeps the barrels cold (also on the v23 HUD): the ring is cyan. */
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=cold]{--vulcan-color:#6fe3ff}

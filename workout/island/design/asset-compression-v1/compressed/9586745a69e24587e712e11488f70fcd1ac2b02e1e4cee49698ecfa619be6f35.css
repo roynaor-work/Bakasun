@@ -1,0 +1,5 @@
+/* Lock feedback uses the reticle on the water; there is no power gauge. */
+.game-screen[data-game=navalDuel] #shoot:before,.game-screen[data-game=navalDuel] #shoot:after{content:none}
+.game-screen[data-game=navalDuel] .ammo-rack button{border-bottom:5px solid var(--naval-weapon,#ffd36e)}
+.game-screen[data-game=navalDuel] .ammo-rack button[aria-pressed=true]{box-shadow:0 0 0 3px var(--naval-weapon,#ffd36e)}
+.game-screen[data-game=navalDuel] .game-controls[data-aiming=true] #shoot{box-shadow:0 0 0 4px #72edc5,0 0 22px #72edc566}

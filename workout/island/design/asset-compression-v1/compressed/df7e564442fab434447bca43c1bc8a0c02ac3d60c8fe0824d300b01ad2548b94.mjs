@@ -1,0 +1,683 @@
+import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
+import * as THREE from '../vendor/three.module.js';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-15';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-15';
+import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
+import {loadAlpineWorld} from './alpine-design-world.mjs';
+import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
+import {padChevrons} from './alpine-arrows.mjs';
+import {loadAlpineCharacters} from './alpine-character.mjs';
+import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
+import {bodyTarget,followBody,carvePose,travelYaw,curveBank} from './alpine-steer.mjs';
+import {createProRider as createFallbackRider} from './rider-fallback.mjs';
+import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-15';
+import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-15';
+
+/** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
+ * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
+ * Everything is placed in world space through the course centreline: s along the path,
+ * x across the pipe, height above the floor. Version 9 keeps the original collision
+ * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
+ * camera and grooves recording engine positions. The Mixamo rig has authored sport outerwear; attribution is in ASSETS.md.
+ * This local candidate includes a separately reviewed engine feel proposal; it is not a released build. */
+export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}, v7 = null, ghost = null} = {}) {
+  if (!course?.path || !physics) throw new Error('alpine.view.course');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
+  let vfx=null,feel=null;
+  const reduced=globalThis.matchMedia?.('(prefers-reduced-motion:reduce)').matches??false;
+  let quality = initialQuality, disposed = false, ro = null;
+  const mobile = forcedMobile ?? (globalThis.matchMedia?.('(pointer: coarse)').matches ?? false);
+  const highDpr = mobile ? Math.min(1.25,maxDpr) : maxDpr;
+  renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  if (!canvas) host.append(renderer.domElement);
+  // alpine-v5 environment (sunset / fog / night). Any failure leaves env null and the earlier look untouched.
+  let env = null, envRig = null; const envId = resolveEnvironmentId(visual);
+  if (envId) { try { env = await loadAlpineEnv(envId, {isDisposed, portrait: host.clientHeight > host.clientWidth}); } catch { env = null; } }
+  const look = {sky: '#85a9b9', fog: '#b5c9d1', fogNear: 85, fogFar: 300, snow: .10, light: 1, trees: 1, ...visual}; const forestStage=(look.trees??1)>1.5;look.fog=look.dusk?'#aab2c5':forestStage?'#b6cbd0':'#b5c9d1';look.fogNear=look.dusk?75:forestStage?85:105;look.fogFar=look.dusk?245:forestStage?285:330;look.snow=look.dusk?.38:forestStage?.17:.09;
+  // Fog ranges keep the game's reading distance: a 26 m near plane would hide rocks and gates in time to react to.
+  if (env) { look.fog = env.look.fog; look.fogNear = Math.max(45, env.look.fogNear); look.fogFar = Math.max(150, env.look.fogFar); }
+  const dusk = !!look.dusk;
+  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(look.fog, look.fogNear, look.fogFar);
+  const envScene=new THREE.Scene();envScene.add(new THREE.Mesh(new THREE.SphereGeometry(50,24,12),new THREE.ShaderMaterial({side:THREE.BackSide,toneMapped:false,vertexShader:'varying vec3 p;void main(){p=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec3 p;void main(){float t=normalize(p).y*.5+.5;gl_FragColor=vec4(mix(vec3(.14,.20,.25),vec3(.72,.87,.97),t),1.);}'})));
+  const envSun=new THREE.Mesh(new THREE.SphereGeometry(3,12,8),new THREE.MeshBasicMaterial({color:new THREE.Color('#ffe4bc').multiplyScalar(3),toneMapped:false}));envSun.position.set(-15,20,-20);envScene.add(envSun);
+  const pmrem=new THREE.PMREMGenerator(renderer),envTarget=pmrem.fromScene(envScene,.035,.1,100);scene.environment=envTarget.texture;pmrem.dispose();envScene.traverse(n=>{n.geometry?.dispose();n.material?.dispose();});
+  const camera = new THREE.PerspectiveCamera(50, 1, .1, 900);
+  const hemi = new THREE.HemisphereLight(dusk ? '#9da3ca' : '#bbd4e4', '#3c5368', 1.1 * look.light); scene.add(hemi);
+  const SHADOW_SIZE = mobile ? 1024 : 2048;
+  const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
+  Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120}); sun.shadow.bias = -.0005; scene.add(sun, sun.target);
+  if (env) { const e = env.json; hemi.color.set(e.hemisphere.sky); hemi.groundColor.set(e.hemisphere.ground); hemi.intensity = e.hemisphere.intensity * look.light; sun.color.set(e.sun.color); sun.intensity = e.sun.intensity * look.light; renderer.toneMappingExposure = e.exposure; }
+  // Ski league v23: a league stage names its theme (visual.theme); its look module grades the scene and adds the theme layers.
+  // Regular stages never load it. Any failure keeps the regular look.
+  let leagueLook = null, theme = null, themeLayers = null, disposeBackplate = null;
+  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-15'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
+  const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
+  const trackMats=[],snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
+  function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
+  const box = (w, h, d, m, p, x, y, z) => mesh(new THREE.BoxGeometry(w, h, d), m, p, x, y, z);
+  const placed = (geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, s = 1) => geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, ry, 0)), new THREE.Vector3(s, s, s)));
+  const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
+
+  let designWorld;
+  try { feel=createAlpineFeel(await loadAlpineFeel(),{maxSpeedKmh:maxPlayerSpeedKmh||physics.boostSpeed*3.6,reducedMotion:reduced}); designWorld=await loadAlpineWorld({isDisposed,skipBackgrounds:!!env,assets:theme?.assets||null}); }
+  catch(error) {
+    // This await precedes course/actor construction. The complete scene
+    // disposer below is not initialized yet, so release the boot resources.
+    env?.dispose();for(const m of [snow,ice,navy,orange,white,stone,green,red,gold,...trackMats])m.dispose();
+    envTarget.dispose();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();
+    if(!canvas)renderer.domElement.remove();
+    throw error;
+  }
+  snow.map=designWorld.snowTexture; snow.color.set('#ffffff'); snow.onBeforeCompile=()=>{}; snow.customProgramCacheKey=()=> 'alpine-design-snow';
+  scene.background=new THREE.Color(look.fog);
+  const tint = env ? new THREE.Color(env.json.snowTint) : null;
+  let granite=new THREE.Texture(),rockTextureError=null;try{granite=await new THREE.TextureLoader().loadAsync(rockTextureUrl);}catch(error){rockTextureError=String(error?.message||'rock-texture-unavailable');}
+  granite.colorSpace=THREE.SRGBColorSpace;granite.wrapS=granite.wrapT=THREE.RepeatWrapping;granite.anisotropy=8;if(granite.image)stone.userData.granite=granite;
+  // ---------- Course frame: centreline position, heading and grade at any s ----------
+  const path = course.path, N = path.count, pipe = pipeProfile(physics), DECK = 3, deckEdge = pipe.lip + DECK;
+  function frameAt(s, o) {
+    let i, f;
+    if (s <= 0) { i = 0; f = s; } else if (s >= N - 1) { i = N - 2; f = s - i; } else { i = Math.floor(s); f = s - i; }
+    const grade = path.py[i] - path.py[i + 1];
+    if (s <= 0 || s >= N - 1) { const th = path.theta[s <= 0 ? 0 : N - 1], base = s <= 0 ? 0 : N - 1, d = s - base; o.theta = th; o.x = path.px[base] + Math.sin(th) * d; o.z = path.pz[base] - Math.cos(th) * d; o.y = path.py[base] - grade * d; }
+    else { o.theta = path.theta[i] + (path.theta[i + 1] - path.theta[i]) * f; o.x = path.px[i] + (path.px[i + 1] - path.px[i]) * f; o.z = path.pz[i] + (path.pz[i + 1] - path.pz[i]) * f; o.y = path.py[i] + (path.py[i + 1] - path.py[i]) * f; }
+    o.grade = grade; return o;
+  }
+  const FR = {}, FR2 = {};
+  function worldPoint(s, x, y, out) { frameAt(s, FR); return out.set(FR.x + x * Math.cos(FR.theta), FR.y + y, FR.z + x * Math.sin(FR.theta)); }
+  /** Positions an object on the course; local -z points downhill, +x across to the right. */
+  function place(obj, s, x, y, roll = 0, yaw = 0, pitch = 0) { worldPoint(s, x, y, obj.position); obj.rotation.set(-Math.atan(FR.grade) + pitch, -FR.theta + yaw, roll, 'YXZ'); }
+
+  // ---------- Halfpipe surface: one texture across the profile, stripes run downhill ----------
+  const right = [{x: 0, y: 0, nx: 0, ny: 1}, {x: pipe.F * .5, y: 0, nx: 0, ny: 1}, {x: pipe.F, y: 0, nx: 0, ny: 1}];
+  for (let k = 1; k <= 14; k++) { const a = pipe.angle * k / 14; right.push({x: pipe.F + pipe.R * Math.sin(a), y: pipe.R * (1 - Math.cos(a)), nx: -Math.sin(a), ny: Math.cos(a)}); }
+  right.push({x: pipe.lip, y: pipe.lipHeight, nx: 0, ny: 1}, {x: pipe.lip + .3, y: pipe.lipHeight + .04, nx: 0, ny: 1}, {x: deckEdge, y: pipe.lipHeight, nx: 0, ny: 1});
+  const profile = [...right.slice(1).reverse().map(p => ({x: -p.x, y: p.y, nx: -p.nx, ny: p.ny})), ...right];
+  let arc = 0; profile.forEach((p, i) => { if (i) arc += Math.hypot(p.x - profile[i - 1].x, p.y - profile[i - 1].y); p.arc = arc; }); profile.forEach(p => { p.u = p.arc / arc; });
+  const xAtU = u => { const a = u * arc; for (let i = 1; i < profile.length; i++) if (profile[i].arc >= a) { const p = profile[i - 1], q = profile[i], f = (a - p.arc) / Math.max(1e-6, q.arc - p.arc); return p.x + (q.x - p.x) * f; } return deckEdge; };
+  // Track pack surfaces: groomed snow with a light normal map on the run (UV: u = x / 5 m, v = s / 6 m, tile 4 m),
+  // wind ripples on the banks. Without the pack the previous look is used unchanged.
+  const trk = designWorld.trackTextures || {};
+  let pipeMat = snow;
+  if (trk.groomed) {
+    trk.groomed.repeat.set(5 / 4, 6 / 4); if (trk.groomedN) trk.groomedN.repeat.set(5 / 4, 6 / 4);
+    pipeMat = new THREE.MeshStandardMaterial({map: trk.groomed, normalMap: trk.groomedN || null, roughness: .94, envMapIntensity: .16});
+    if (trk.groomedN) pipeMat.normalScale.set(.08, .08); trackMats.push(pipeMat);
+    // The groomed tile is made of parallel grooves, so at speed a single tile reads as stripes running past. Sampling it
+    // at three unrelated scales and averaging breaks the periodicity and softens the grooves while keeping the grain.
+    pipeMat.onBeforeCompile = shader => {
+      shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>', `
+        #ifdef USE_MAP
+          vec3 snowA = texture2D(map, vMapUv).rgb;
+          vec3 snowB = texture2D(map, vMapUv * 0.31 + vec2(0.17, 0.43)).rgb;
+          vec3 snowC = texture2D(map, vMapUv * 0.083 + vec2(0.61, 0.29)).rgb;
+          diffuseColor.rgb *= mix(snowA, (snowA + snowB + snowC) / 3.0, 0.72);
+        #endif`);
+    };
+    pipeMat.customProgramCacheKey = () => 'alpine-snow-break';
+  }
+  const bankMap = trk.ripples || designWorld.snowTexture; if (trk.ripples) trk.ripples.repeat.set(1, 8 / 6);
+  const terrainMat = new THREE.MeshStandardMaterial({color: '#f2f6f7', map: bankMap, roughness: .96, envMapIntensity: .16}); trackMats.push(terrainMat);
+  if (env) {
+    // alpine-v5 snow: tint from the environment, plus its fine normal/roughness on the banks (one repeat per 4 m; terrain UV is x/6, s/8).
+    terrainMat.color.multiply(tint); if (pipeMat !== snow) pipeMat.color.multiply(tint);
+    if (env.snowNormal) { env.snowNormal.repeat.set(1.5, 2); terrainMat.normalMap = env.snowNormal; terrainMat.normalScale.set(env.json.surface.normalScale, env.json.surface.normalScale); }
+    if (env.snowRough && !mobile) { env.snowRough.repeat.set(1.5, 2); terrainMat.roughnessMap = env.snowRough; }
+  }
+  if (theme) {
+    // The theme's snow and ground tiles carry their own colours: the environment's snow tint is replaced by the grade's colour.
+    leagueLook.tintMaterials(theme, [[terrainMat, 'snow'], [pipeMat !== snow ? pipeMat : snow, 'snow']]);
+    leagueLook.tintPalette(theme, designWorld.palette); if (env) disposeBackplate = leagueLook.themeBackplate(theme, env);
+  }
+  // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
+  const TX=[0,2,5,10,18,30,50,90],TY=[0,.5,2,6,11,19,9,-35];
+  function terrainY(s, ax, side) {
+    const d = ax - deckEdge;
+    if (d <= 0) return pipe.lipHeight;
+    for (let k = 1; k < TX.length; k++) if (d <= TX[k] || k === TX.length - 1) {
+      const y0 = terrainAt(s, k - 1, side), y1 = terrainAt(s, k, side), f = Math.min(1, (d - TX[k - 1]) / (TX[k] - TX[k - 1]));
+      return y0 + (y1 - y0) * f;
+    }
+    return pipe.lipHeight;
+  }
+  function terrainAt(s, k, side) {
+    if (k === 0) return pipe.lipHeight;
+    const x = TX[k], bump = k < 7 ? 1.5*Math.sin(s*.047+x*.31+side*1.7)+1.8*Math.sin(s*.023+x*.12+side*4.1) : 0;
+    return pipe.lipHeight + TY[k] + bump * Math.min(1, k / 2);
+  }
+  function strip(s0, s1, K, sample, vScale, normals) {
+    const rows = Math.round(s1 - s0) + 1, pos = new Float32Array(rows * K * 3), nor = new Float32Array(rows * K * 3), uv = new Float32Array(rows * K * 2), index = [], p = {};
+    for (let j = 0; j < rows; j++) {
+      const s = s0 + j; frameAt(s, FR2); const c = Math.cos(FR2.theta), sn = Math.sin(FR2.theta);
+      for (let k = 0; k < K; k++) {
+        sample(s, k, p); const o = (j * K + k) * 3, t = (j * K + k) * 2;
+        pos[o] = FR2.x + p.x * c; pos[o + 1] = FR2.y + p.y; pos[o + 2] = FR2.z + p.x * sn;
+        nor[o] = p.nx * c; nor[o + 1] = p.ny; nor[o + 2] = p.nx * sn; uv[t] = p.u; uv[t + 1] = s / vScale;
+        if (j && k) { const d = j * K + k, b = d - K, a = b - 1, cc = d - 1; index.push(a, b, cc, b, d, cc); }
+      }
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('normal', new THREE.BufferAttribute(nor, 3)); g.setAttribute('uv', new THREE.BufferAttribute(uv, 2)); g.setIndex(index);
+    if (normals) g.computeVertexNormals(); g.computeBoundingSphere(); return g;
+  }
+  const CHUNK = 40, chunks = [], sFirst = -60, sLast = N - 1;
+  for (let s0 = sFirst; s0 < sLast; s0 += CHUNK) {
+    const s1 = Math.min(sLast, s0 + CHUNK), group = new THREE.Group();
+    const surface = mesh(designWorld.slopeSurface(s0,s1,{pipe,worldPoint,deckEdge}), pipeMat, group); surface.castShadow = false;
+    const sides = [-1, 1].map(side => strip(s0, s1, TX.length, (s, k, o) => { const kk = side < 0 ? TX.length - 1 - k : k; o.x = side * (deckEdge + TX[kk]); o.y = terrainAt(s, kk, side); o.nx = 0; o.ny = 1; o.u = trk.ripples ? o.x / 6 : 0; }, 8, true));
+    const land = mesh(mergeGeometries(sides), terrainMat, group); land.castShadow = false; sides.forEach(g => g.dispose());
+
+    group.userData = {s0, s1, perf: 'track'}; scene.add(group); chunks.push(group);
+  }
+  // Flag rope along both lips, one 8 m module at a time. The module spans X and ends share anchors, so it is turned
+  // a quarter turn to run down the course; one InstancedMesh per chunk keeps it to one draw call each.
+  const flagModuleGeo = designWorld.trackGeometry?.('flag-rope');
+  if (flagModuleGeo) {
+    const flagMat = new THREE.MeshStandardMaterial({color: '#ffffff', vertexColors: !!flagModuleGeo.attributes.color, roughness: .8, envMapIntensity: .2, side: THREE.DoubleSide}); trackMats.push(flagMat);
+    const o = new THREE.Object3D();
+    for (const chunk of chunks) {
+      const {s0, s1} = chunk.userData, n = Math.max(0, Math.floor((s1 - s0) / 8)), inst = new THREE.InstancedMesh(flagModuleGeo, flagMat, n * 2); let k = 0;
+      for (const side of [-1, 1]) for (let i = 0; i < n; i++) { place(o, s0 + 4 + i * 8, side * (pipe.lip + .6), pipe.lipHeight, 0, Math.PI / 2); o.updateMatrix(); inst.setMatrixAt(k++, o.matrix); }
+      inst.instanceMatrix.needsUpdate = true; inst.castShadow = false; inst.frustumCulled = false; inst.userData.perf = 'flags'; chunk.add(inst);
+    }
+  }
+  const art=designWorld.createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees,env});
+  if (env) { try { envRig = createEnvRig(scene, env, {course, deckEdge, terrainY, place, worldPoint, frameAt, mobile, reduced}); envRig.setQuality(quality); } catch { envRig = null; } }
+  if (theme) { try { themeLayers = await leagueLook.createThemeLayers(theme, {scene, course, place, worldPoint, terrainY, frameAt, deckEdge, mobile, reduced, designWorld, isDisposed}); themeLayers.setQuality(quality); } catch { themeLayers = null; } }
+  const scenery={update(){},dispose(){}};
+  const mountains=new THREE.Group(),field=new THREE.Group();
+  const treeMeshes=[],flagPole=new THREE.Group(),flagCloth=new THREE.Group();
+  const matrix = new THREE.Matrix4(), quat = new THREE.Quaternion(), vec = new THREE.Vector3(), vec2 = new THREE.Vector3(), scl = new THREE.Vector3(), euler = new THREE.Euler(0, 0, 0, 'YXZ');
+  function placeScenery(){};
+  let seed=92317;const rnd=()=>((seed=Math.imul(seed,1664525)+1013904223)>>>0)/4294967296;
+
+  // ---------- Coins: one instanced mesh, spinning ----------
+  const COIN_POOL = 90, coinGeo = new THREE.TorusGeometry(.32,.065,8,24);
+  const coins = new THREE.InstancedMesh(coinGeo, gold, COIN_POOL); coins.castShadow = true; coins.frustumCulled = false; coins.count = 0; coins.userData.perf = 'coins'; scene.add(coins);
+  /** Both presets keep the shadow map on, so a switch never recompiles a shader (recompiling every
+   * material was one multi-frame hitch). Low: quarter-size map, only riders and props cast, lower DPR. */
+  let lastSwitch = null;
+  function applyQuality() {
+    const t0 = performance.now();
+    renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr));
+    const t1 = performance.now(), size = quality === 'low' ? Math.min(512, SHADOW_SIZE) : SHADOW_SIZE;
+    if (sun.shadow.mapSize.x !== size) { sun.shadow.mapSize.set(size, size); if (sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; } }
+    coins.castShadow = quality !== 'low'; art.setQuality(quality); envRig?.setQuality(quality); themeLayers?.setQuality(quality);
+    lastSwitch = {quality, pixelRatioMs: +(t1 - t0).toFixed(2), shadowMs: +(performance.now() - t1).toFixed(2), resizeMs: 0, totalMs: +(performance.now() - t0).toFixed(2)};
+  }
+  applyQuality();
+
+  // ---------- Obstacles: bounded pools per type ----------
+  const boostMat = new THREE.MeshStandardMaterial({color:'#a9dbd5',emissive:'#477875',emissiveIntensity:.25,roughness:.55});
+  function pad() { const g = new THREE.Group(); box(3.3, .08, 5.5, ice, g, 0, .07, 0); for (const b of padChevrons()) { const a = box(b.length, .04, .25, boostMat, g, b.x, .14, b.z); a.rotation.y = b.ry; } return g; }
+  const kickerGeo = designWorld.trackGeometry?.('kicker'), flagGeo = designWorld.trackGeometry?.('flag-rope');
+  let kickerMat = null; if (kickerGeo && trk.groomed) { const map = trk.groomed.clone(); map.needsUpdate = true; map.repeat.set(1, 6 / 4); kickerMat = new THREE.MeshStandardMaterial({map, vertexColors: !!kickerGeo.attributes.color, roughness: .94, envMapIntensity: .16}); trackMats.push(kickerMat); }
+  function kickerRamp() {
+    // The pack's kicker rises toward +Z; in this scene downhill is -Z, so it is turned half a revolution and centred.
+    const g = new THREE.Group(), m = new THREE.Mesh(kickerGeo, kickerMat); m.castShadow = true; m.receiveShadow = true;
+    m.position.set(0, 0, 3 * (physics.ramp.length / 6)); m.rotation.y = Math.PI; m.scale.set(physics.ramp.width / 4, physics.ramp.height / 1.8, physics.ramp.length / 6); g.add(m);
+    return g;
+  }
+  function woodRamp() { const g = new THREE.Group(), geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute([-2, 0, 3, 2, 0, 3, -2, 1.2, -3, 2, 0, 3, 2, 1.2, -3, -2, 1.2, -3], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); for (const x of [-2, 2]) { const edge = box(.12, .08, 6.12, orange, g, x, .6, 0); edge.rotation.x = .197; } box(4.1, 1.2, .14, navy, g, 0, .6, -3); return g; }
+  function gate() {
+    // Slalom gate: striped poles, red flag panels and the banner bar riders pass under.
+    const g = new THREE.Group(), gw = physics.gateHalfWidth, top = physics.gatePostHeight;
+    for (const side of [-1, 1]) {
+      for (let k = 0; k < 5; k++) { const m = mesh(new THREE.CylinderGeometry(.09, .09, top * 1.2 / 5, 8), k % 2 ? white : red, g, side * gw, top * 1.2 * (k + .5) / 5, 0); m.castShadow = true; }
+      const cloth = box(.9, 1.15, .03, red, g, side * (gw + .5), top * 1.2 - .62, 0); cloth.castShadow = true;
+    }
+    box(gw * 2, .5, .12, navy, g, 0, top, 0); box(gw * 2, .08, .14, red, g, 0, top + .29, 0); box(gw * 2, .08, .14, red, g, 0, top - .29, 0);
+    return g;
+  }
+  function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
+  /** Warning sign: a pole with an orange diamond and a black exclamation mark, readable from far away against snow. */
+  const warnTex = canvasTexture(128, 128, (ctx, w, h) => { ctx.fillStyle = '#ff8a1f'; ctx.fillRect(0, 0, w, h); ctx.strokeStyle = '#1b2330'; ctx.lineWidth = 9; ctx.strokeRect(9, 9, w - 18, h - 18); ctx.fillStyle = '#1b2330'; ctx.fillRect(w / 2 - 7, 26, 14, 48); ctx.beginPath(); ctx.arc(w / 2, 92, 9, 0, 7); ctx.fill(); });
+  function warn() {
+    const g = new THREE.Group(); box(.1, 2.3, .1, navy, g, 0, 1.15, 0);
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 1.15), new THREE.MeshBasicMaterial({map: warnTex, side: THREE.DoubleSide, fog: true}));
+    sign.position.set(0, 2.45, 0); sign.rotation.z = Math.PI / 4; sign.rotation.y = Math.PI; g.add(sign); return g;
+  }
+  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp, warn}, pools = {rock: [], gate: [], boost: [], ramp: [], warn: []};
+  // Ski league v23: a theme with two gate colours alternates them along the course (by first sight, so a gate keeps its colour).
+  const gateColours = designWorld.gateVariants?.() > 1 ? new Map() : null;
+  if (gateColours) { makers.gateB = () => designWorld.prop('gate', physics, 1); pools.gateB = []; }
+  const gateType = id => { if (!gateColours) return 'gate'; if (!gateColours.has(id)) gateColours.set(id, gateColours.size % 2); return gateColours.get(id) ? 'gateB' : 'gate'; };
+  // ---------- v24.1 props (physics.v241 only; with ?alpineV241=0 none of these exist and the scene is v24's) ----------
+  const V241 = !!physics.v241, v241Mats = [];
+  const v2mat = (c, o = {}) => { const m = new THREE.MeshStandardMaterial({color: c, roughness: .6, envMapIntensity: .25, ...o}); v241Mats.push(m); return m; };
+  let stars = null, STAR_POOL = 0, shieldBubble = null, magnetRing = null;
+  if (V241) {
+    const big = {width: 4.6, length: 7.5, height: 2.1, ...physics.v241.bigRamp}, lip = v2mat('#ff8a3d', {roughness: .5, emissive: '#7a2e08', emissiveIntensity: .2});
+    const glow = v2mat('#ffd34d', {emissive: '#ff9e1f', emissiveIntensity: .6, roughness: .3, metalness: .35}), redM = v2mat('#d2483f', {roughness: .45}), steel = v2mat('#dfe7ee', {roughness: .25, metalness: .7});
+    const blue = v2mat('#4fb3ff', {emissive: '#1f6fb2', emissiveIntensity: .45, transparent: true, opacity: .62, roughness: .2}), black = v2mat('#1b2330', {roughness: .7}), belly = v2mat('#f4f6f8', {roughness: .8}), beak = v2mat('#ff9a2e', {roughness: .5});
+    const carrot = v2mat('#ff7a1a', {roughness: .5}), coal = v2mat('#22262c', {roughness: .9}), scarf = v2mat('#c8323c', {roughness: .7}), dark = v2mat('#4a4744', {roughness: .9}), snowWhite = v2mat('#ffffff', {roughness: .95});
+    const iceMat = v2mat('#9fdcff', {transparent: true, opacity: .55, roughness: .08, metalness: .25, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2});
+    const powderMat = v2mat('#ffffff', {roughness: 1, polygonOffset: true, polygonOffsetFactor: -1});
+    /** Big kicker: the pack's kicker (or the wooden one) at the v24.1 size, with an orange lip so it reads as the big jump. */
+    function bigKicker() {
+      const g = new THREE.Group();
+      if (kickerMat) { const m = new THREE.Mesh(kickerGeo, kickerMat); m.castShadow = m.receiveShadow = true; m.position.set(0, 0, big.length / 2); m.rotation.y = Math.PI; m.scale.set(big.width / 4, big.height / 1.8, big.length / 6); g.add(m); }
+      else { const geo = new THREE.BufferGeometry(), W = big.width / 2, L = big.length / 2, H = big.height; geo.setAttribute('position', new THREE.Float32BufferAttribute([-W, 0, L, W, 0, L, -W, H, -L, W, 0, L, W, H, -L, -W, H, -L], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); }
+      box(big.width + .1, .12, .35, lip, g, 0, big.height + .02, -big.length / 2 + .1);
+      for (const x of [-1, 1]) { const s = box(.14, .1, big.length, lip, g, x * big.width / 2, big.height / 2, 0); s.rotation.x = Math.atan(big.height / big.length); }
+      return g;
+    }
+    function ring() { const g = new THREE.Group(), t = mesh(new THREE.TorusGeometry(physics.v241.ring?.radius ?? 1.25, .09, 10, 40), glow, g); t.castShadow = false; return g; }
+    function magnet() { const g = new THREE.Group(), body = new THREE.Group(); g.add(body); body.position.y = .95; const u = mesh(new THREE.TorusGeometry(.3, .1, 8, 18, Math.PI), redM, body); u.rotation.z = Math.PI; for (const x of [-.3, .3]) mesh(new THREE.CylinderGeometry(.1, .1, .16, 10), steel, body, x, .08, 0); g.userData.spin = body; return g; }
+    function shield() { const g = new THREE.Group(), body = new THREE.Group(); g.add(body); body.position.y = .95; mesh(new THREE.IcosahedronGeometry(.42, 1), blue, body); const t = mesh(new THREE.TorusGeometry(.5, .04, 6, 28), steel, body); t.rotation.x = Math.PI / 2; g.userData.spin = body; return g; }
+    function snowman() {
+      const g = new THREE.Group(); mesh(new THREE.SphereGeometry(.55, 18, 12), snowWhite, g, 0, .5, 0); mesh(new THREE.SphereGeometry(.42, 16, 12), snowWhite, g, 0, 1.25, 0); mesh(new THREE.SphereGeometry(.3, 14, 10), snowWhite, g, 0, 1.86, 0);
+      const nose = mesh(new THREE.ConeGeometry(.06, .3, 8), carrot, g, 0, 1.86, .38); nose.rotation.x = Math.PI / 2;
+      for (const x of [-.1, .1]) mesh(new THREE.SphereGeometry(.035, 6, 4), coal, g, x, 1.95, .27);
+      mesh(new THREE.CylinderGeometry(.2, .22, .32, 12), coal, g, 0, 2.2, 0); mesh(new THREE.CylinderGeometry(.32, .32, .04, 14), coal, g, 0, 2.05, 0);
+      const sc = mesh(new THREE.TorusGeometry(.33, .07, 6, 16), scarf, g, 0, 1.58, 0); sc.rotation.x = Math.PI / 2;
+      for (const x of [-1, 1]) { const arm = mesh(new THREE.CylinderGeometry(.025, .03, .7, 5), dark, g, x * .62, 1.4, 0); arm.rotation.z = x * 1.05; }
+      return g; // built facing +Z: placed with no turn it faces up the slope, toward the rider
+    }
+    function penguin() {
+      const g = new THREE.Group(), body = new THREE.Group(); g.add(body);
+      const b = mesh(new THREE.CapsuleGeometry(.3, .45, 6, 12), black, body, 0, .58, 0); b.scale.set(1, 1, .85);
+      const front = mesh(new THREE.SphereGeometry(.26, 14, 10), belly, body, 0, .55, .12); front.scale.set(1, 1.5, .6);
+      mesh(new THREE.SphereGeometry(.21, 14, 10), black, body, 0, 1.08, 0);
+      const bk = mesh(new THREE.ConeGeometry(.06, .18, 8), beak, body, 0, 1.06, .22); bk.rotation.x = Math.PI / 2;
+      for (const x of [-.08, .08]) mesh(new THREE.SphereGeometry(.03, 6, 4), belly, body, x, 1.13, .18);
+      for (const x of [-.12, .12]) box(.12, .05, .2, beak, body, x, .03, .06);
+      for (const x of [-1, 1]) { const w = box(.06, .42, .2, black, body, x * .32, .62, 0); w.rotation.z = x * .25; }
+      g.userData.waddle = body; return g;
+    }
+    function rollingBall(material, radius, lumpy) { const g = new THREE.Group(), geo = new THREE.IcosahedronGeometry(radius, lumpy ? 2 : 1), p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), n = 1 + (lumpy ? .07 : .12) * Math.sin(x * 9 + z * 5) * Math.cos(y * 7); p.setXYZ(i, x * n, y * n, z * n); } geo.computeVertexNormals(); const m = mesh(geo, material, g, 0, radius, 0); g.userData.roll = m; g.userData.radius = radius; return g; }
+    function icePatch() { const g = new THREE.Group(), m = mesh(new THREE.PlaneGeometry(1, 1), iceMat, g, 0, .035, 0); m.rotation.x = -Math.PI / 2; m.castShadow = false; m.receiveShadow = false; return g; }
+    function powderPatch() {
+      const g = new THREE.Group(), geo = new THREE.PlaneGeometry(1, 1, 10, 10), p = geo.attributes.position;
+      for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), edge = Math.min(1, (.5 - Math.abs(x)) * 6, (.5 - Math.abs(y)) * 6); p.setZ(i, Math.max(0, edge) * (.1 + .07 * Math.sin(x * 23 + y * 11) * Math.cos(y * 17))); }
+      geo.computeVertexNormals(); const m = mesh(geo, powderMat, g, 0, .02, 0); m.rotation.x = -Math.PI / 2; m.castShadow = false; return g;
+    }
+    Object.assign(makers, {rampBig: bigKicker, ring, magnet, shield, snowman, 'mover-penguin': penguin, 'mover-snowball': () => rollingBall(snow, .8, true), 'mover-boulder': () => rollingBall(stone, .85, false), ice: icePatch, powder: powderPatch});
+    for (const key of ['rampBig', 'ring', 'magnet', 'shield', 'snowman', 'mover-penguin', 'mover-snowball', 'mover-boulder', 'ice', 'powder']) pools[key] = [];
+    // Stars: one instanced mesh (like the coins), spinning and glowing.
+    const sh = new THREE.Shape(); for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 - Math.PI / 2, r = i % 2 ? .18 : .42, x = Math.cos(a) * r, y = -Math.sin(a) * r; if (i) sh.lineTo(x, y); else sh.moveTo(x, y); } sh.closePath();
+    const starGeo = new THREE.ExtrudeGeometry(sh, {depth: .1, bevelEnabled: true, bevelThickness: .03, bevelSize: .025, bevelSegments: 1}); starGeo.center();
+    STAR_POOL = 48; stars = new THREE.InstancedMesh(starGeo, glow, STAR_POOL); stars.castShadow = false; stars.frustumCulled = false; stars.count = 0; stars.userData.perf = 'coins'; scene.add(stars);
+    // The player's shield (a see-through bubble) and magnet (a pulsing ring on the snow).
+    shieldBubble = new THREE.Mesh(new THREE.SphereGeometry(1.05, 20, 14), v2mat('#6fc3ff', {transparent: true, opacity: .2, emissive: '#2f86d6', emissiveIntensity: .5, depthWrite: false})); shieldBubble.visible = false; shieldBubble.userData.perf = 'effects'; scene.add(shieldBubble);
+    magnetRing = new THREE.Mesh(new THREE.TorusGeometry(1.3, .05, 6, 40), v2mat('#ff5a4f', {emissive: '#d2483f', emissiveIntensity: .8, transparent: true, opacity: .8})); magnetRing.visible = false; magnetRing.userData.perf = 'effects'; scene.add(magnetRing);
+    // A section arch at the start of every section: a banner across the run in the section's colour, with its picture (no text).
+    const SECTION_LOOK = {jumps: '#ff8a3d', movers: '#ff5d73', ice: '#4fb3ff', powder: '#9fb7c9', stars: '#f2b630', speed: '#4caf50'};
+    const icon = (kind, ctx, w, h) => {
+      ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; const cx = w / 2, cy = h / 2;
+      if (kind === 'jumps') { ctx.beginPath(); ctx.moveTo(cx - 90, cy + 34); ctx.lineTo(cx + 10, cy + 34); ctx.lineTo(cx + 10, cy - 8); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.arc(cx + 50, cy - 10, 26, Math.PI, 0); ctx.stroke(); }
+      else if (kind === 'movers') { ctx.beginPath(); ctx.ellipse(cx, cy + 8, 26, 36, 0, 0, 7); ctx.fill(); ctx.beginPath(); ctx.arc(cx, cy - 34, 18, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(cx - 70, cy); ctx.lineTo(cx - 44, cy); ctx.moveTo(cx + 44, cy); ctx.lineTo(cx + 70, cy); ctx.stroke(); }
+      else if (kind === 'ice') { for (let k = 0; k < 3; k++) { const a = k * Math.PI / 3; ctx.beginPath(); ctx.moveTo(cx - Math.cos(a) * 44, cy - Math.sin(a) * 44); ctx.lineTo(cx + Math.cos(a) * 44, cy + Math.sin(a) * 44); ctx.stroke(); } }
+      else if (kind === 'powder') { ctx.beginPath(); ctx.arc(cx - 30, cy + 8, 26, 0, 7); ctx.arc(cx + 2, cy - 12, 32, 0, 7); ctx.arc(cx + 36, cy + 8, 24, 0, 7); ctx.fill(); ctx.fillRect(cx - 56, cy + 8, 116, 26); }
+      else if (kind === 'stars') { ctx.beginPath(); for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 - Math.PI / 2, r = i % 2 ? 18 : 44; const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); } ctx.closePath(); ctx.fill(); }
+      else { for (const dx of [-24, 18]) { ctx.beginPath(); ctx.moveTo(cx + dx - 22, cy - 34); ctx.lineTo(cx + dx + 14, cy); ctx.lineTo(cx + dx - 22, cy + 34); ctx.stroke(); } }
+    };
+    for (const z of course.sections || []) {
+      // poles well outside the lip: the chase camera follows a rider up the wall to about lip + 0.5 and must never pass through one
+      const g = new THREE.Group(), colour = SECTION_LOOK[z.kind] || '#ff8a3d', half = pipe.lip + 2.2, poleM = v2mat(colour, {roughness: .5});
+      for (const x of [-half, half]) box(.32, 6, .32, poleM, g, x, pipe.lipHeight + 3, 0);
+      const tex = canvasTexture(512, 128, (ctx, w, h) => { ctx.fillStyle = colour; ctx.fillRect(0, 0, w, h); ctx.fillStyle = '#ffffff33'; for (let x = -h; x < w; x += 64) { ctx.beginPath(); ctx.moveTo(x, h); ctx.lineTo(x + 32, h); ctx.lineTo(x + 32 + h, 0); ctx.lineTo(x + h, 0); ctx.fill(); } icon(z.kind, ctx, w, h); });
+      const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .3, 1.2, .18), v2mat('#ffffff', {map: tex, roughness: .7})); banner.position.set(0, pipe.lipHeight + 5.4, 0); banner.castShadow = true; g.add(banner);
+      g.userData.perf = 'finish'; scene.add(g); place(g, z.s0, 0, 0);
+    }
+  }
+  const unused = () => Object.fromEntries(Object.keys(makers).map(type => [type, 0]));
+  function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
+  function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
+    return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
+  }
+  // Finish arch and chequered line, built once at the finish.
+  const finish = new THREE.Group(); {
+    const half = pipe.lip + .9, packGate = designWorld.gate?.('finish-gate');
+    if (packGate) { packGate.scale.setScalar(2.35); packGate.position.set(0, 0, 0); finish.add(packGate); }
+    else {
+      for (const x of [-half, half]) box(.55, 6.2, .55, navy, finish, x, pipe.lipHeight + 3.1, 0);
+      const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .6, 1.3, .22), new THREE.MeshStandardMaterial({map: textTexture('FINISH', '#123d59', '#ffffff'), roughness: .7}));
+      banner.position.set(0, pipe.lipHeight + 5.7, 0); finish.add(banner);
+    }
+    for (let i = 0; i < 26; i++) for (let j = 0; j < 2; j++) { const t = box(pipe.F * 2 / 26, .02, .6, (i + j) % 2 ? navy : white, finish, -pipe.F + (i + .5) * pipe.F * 2 / 26, .03, j * .6 - .3); t.castShadow = false; }
+    finish.userData.perf = 'finish'; scene.add(finish); place(finish, course.length, 0, 0);
+  }
+  // Start gate over the first metres of the course (visual only).
+  const startGate = designWorld.gate?.('start-gate');
+  if (startGate) { const g = new THREE.Group(); startGate.scale.setScalar(2.1); g.add(startGate); g.userData.perf = 'finish'; scene.add(g); place(g, 13, 0, 0); }
+  const powder = designWorld.createPowder?.(scene, 4);
+
+  // ---------- Riders ----------
+  const contactTex=canvasTexture(128,128,(ctx,w,h)=>{const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);g.addColorStop(0,'rgba(25,45,65,.55)');g.addColorStop(1,'rgba(25,45,65,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);});
+  let gltf=null,modelError=null;try{gltf=await loadAlpineCharacters({modelUrl,isDisposed,v7,quality});}catch(error){modelError=String(error.message);}
+  if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
+  const riders = new Map();
+  // Clone skeletons without importing an additional runtime dependency.
+  function cloneSkinned(source) { const clone = source.clone(true), orig = [], copies = [], boneMap = new Map(); source.traverse(n => orig.push(n)); clone.traverse(n => copies.push(n)); for (let i = 0; i < orig.length; i++) if (orig[i].isBone) boneMap.set(orig[i], copies[i]); for (let i = 0; i < orig.length; i++) if (orig[i].isSkinnedMesh) { copies[i].skeleton = orig[i].skeleton.clone(); copies[i].skeleton.bones = orig[i].skeleton.bones.map(b => boneMap.get(b)); copies[i].bindMatrix.copy(orig[i].bindMatrix); } return clone; }
+  const riderMaterials=new Set(),riderGeo=g=>g;
+  const riderMat=(color,opts={})=>{const m=new THREE.MeshStandardMaterial({color,roughness:.8,envMapIntensity:.24,...opts});riderMaterials.add(m);return m;};
+  const riderMesh=(g,m,parent,x=0,y=0,z=0)=>mesh(g,m,parent,x,y,z),riderBox=(a,b,c,m,p,x,y,z)=>box(a,b,c,m,p,x,y,z);
+ function boardTexture(color){return canvasTexture(256,1024,(c,w,h)=>{c.fillStyle='#dbd2b7';c.fillRect(0,0,w,h);c.fillStyle='#b75c43';c.beginPath();c.moveTo(0,0);c.lineTo(w,0);c.lineTo(w,200);c.lineTo(0,360);c.fill();c.fillStyle='#203b45';c.fillRect(0,720,w,304);c.fillStyle='#b75c43';c.fillRect(24,470,12,165);c.fillStyle='#ecdfbf';c.font='bold 48px Arial';c.save();c.translate(145,930);c.rotate(-Math.PI/2);c.fillText('AR / 06',0,0);c.restore();});}
+ function snowboard(color,parent){const shape=new THREE.Shape();shape.moveTo(0,-1.1);shape.bezierCurveTo(.3,-1.1,.24,-.63,.21,-.35);shape.bezierCurveTo(.185,0,.185,.4,.22,.7);shape.bezierCurveTo(.3,1.23,-.3,1.23,-.22,.7);shape.bezierCurveTo(-.185,.4,-.185,0,-.21,-.35);shape.bezierCurveTo(-.24,-.63,-.3,-1.1,0,-1.1);const g=new THREE.ExtrudeGeometry(shape,{depth:.045,bevelEnabled:true,bevelThickness:.012,bevelSize:.015,bevelSegments:3,steps:1,curveSegments:14});g.rotateX(Math.PI/2);const a=g.attributes.position;for(let i=0;i<a.count;i++)a.setY(i,a.getY(i)+Math.pow(Math.max(0,Math.abs(a.getZ(i))-.68),2)*.64);g.computeVertexNormals();const uv=g.attributes.uv;for(let i=0;i<a.count;i++)uv.setXY(i,(a.getX(i)+.3)/.6,(a.getZ(i)+1.1)/2.2);g.scale(.8,1,.77);const m=new THREE.MeshPhysicalMaterial({color:'#ffffff',map:boardTexture(color),roughness:.24,clearcoat:.85,clearcoatRoughness:.18});riderMaterials.add(m);riderMesh(g,m,parent,0,.105,0);for(const z of [-.31,.31]){const n=riderBox(.32,.07,.19,navy,parent,0,.155,z);n.rotation.y=z<0?-.22:.22;riderBox(.11,.12,.24,white,parent,-.11,.2,z);}}
+  const PIVOT=.85;
+  function rider(id,color){
+    const root=new THREE.Group(),pivot=new THREE.Group(),inner=new THREE.Group();root.add(pivot);pivot.add(inner);pivot.position.y=PIVOT;inner.position.y=-PIVOT;scene.add(root);
+    const actor=gltf?gltf.createRider(id,color,scene,{cloneSkinned,mesh:riderMesh,geo:riderGeo,mat:riderMat,basic:opts=>new THREE.MeshBasicMaterial(opts),box:riderBox,dark:navy,silver:white,snowboard,contactTex,profile:{slope:.11},materials:riderMaterials}):createFallbackRider(null,id,color,scene,{cloneSkinned,mesh:riderMesh,geo:riderGeo,mat:riderMat,basic:opts=>new THREE.MeshBasicMaterial(opts),box:riderBox,dark:navy,silver:white,snowboard,contactTex,profile:{slope:.11},materials:riderMaterials});scene.remove(actor.root);inner.add(actor.root);
+    root.userData.perf=actor.shadow.userData.perf='riders';
+    const r={root,pivot,inner,body:actor.body,shadow:actor.shadow,actor,bones:{},air:0,squash:0,grab:0,roll:0,crashAt:-1,hitAt:-10,wasHit:false};riders.set(id,r);return r;
+  }
+  for (const [id, color] of [['player', '#ce6545'], ['rival-1', '#bd974e'], ['rival-2', '#498b9d'], ['rival-3', '#746b96'], ['rival-4', '#a95d5b'], ['rival-5', '#7b8d5b']]) rider(id, color);
+  // League record ghost: the same rider asset, see-through (alpine-league-look ghostify), driven by the stored best run; never a collider.
+  let ghostRider = null; const GHOST = {};
+  if (ghost && leagueLook && gltf) { try { ghostRider = rider('ghost', '#9fdcff'); riders.delete('ghost'); ghostRider.shadow.visible = false; ghostRider.root.visible = false; leagueLook.ghostify(ghostRider.root); } catch { ghostRider = null; } }
+
+  // ---------- Weather and effects ----------
+  const dot = canvasTexture(32, 32, (ctx, w) => { const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); g.addColorStop(0, '#ffffffff'); g.addColorStop(.45, '#ffffffcc'); g.addColorStop(1, '#ffffff00'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, w); });
+  const SNOW_MAX = Math.round(450 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
+  for (let i = 0; i < SNOW_MAX; i++) { const a = rnd() * Math.PI * 2, d = 3 + rnd() * 27; snowOffsets[i * 3] = Math.cos(a) * d; snowOffsets[i * 3 + 1] = rnd() * 24 - 5; snowOffsets[i * 3 + 2] = Math.sin(a) * d; }
+  const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
+  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: look.snowColor || '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
+  const snowSpeed = 1.6 + look.snow * 2.6, wind = look.snow > .8 ? 3.2 : .6;
+  const trailGeo = new THREE.BufferGeometry(), trailPositions = new Float32Array(140 * 3),trailAge=new Float32Array(140); trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));trailGeo.setAttribute('powderAge',new THREE.BufferAttribute(trailAge,1));
+  const powderMat=new THREE.PointsMaterial({color:'#f2f7fa',map:dot,size:.23,transparent:true,opacity:.55,depthWrite:false});powderMat.onBeforeCompile=s=>{s.vertexShader='attribute float powderAge; varying float vPowderAge;\n'+s.vertexShader;s.vertexShader=s.vertexShader.replace('gl_PointSize = size;','vPowderAge=powderAge;gl_PointSize=size*(.55+powderAge*1.4);');s.fragmentShader='varying float vPowderAge;\n'+s.fragmentShader;s.fragmentShader=s.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );','vec4 diffuseColor=vec4(diffuse,opacity*pow(1.-vPowderAge,1.7));');};powderMat.customProgramCacheKey=()=> 'alpine-powder-v7';
+  const spray = new THREE.Points(trailGeo,powderMat); spray.frustumCulled = false; spray.userData.perf = 'effects'; scene.add(spray);
+  // Short bursts: gold sparkles for coins, snow puffs for crashes.
+  const BURST = 120, burstPos = new Float32Array(BURST * 3), burstCol = new Float32Array(BURST * 3), burstVel = new Float32Array(BURST * 3), burstLife = new Float32Array(BURST); let burstNext = 0;
+  const burstGeo = new THREE.BufferGeometry(); burstGeo.setAttribute('position', new THREE.BufferAttribute(burstPos, 3)); burstGeo.setAttribute('color', new THREE.BufferAttribute(burstCol, 3));
+  const bursts = new THREE.Points(burstGeo, new THREE.PointsMaterial({size: .3, map: dot, vertexColors: true, transparent: true, depthWrite: false})); bursts.frustumCulled = false; bursts.userData.perf = 'effects'; scene.add(bursts);
+  for (let i = 0; i < BURST; i++) burstPos[i * 3 + 1] = -1e5;
+  const sparkleColor = new THREE.Color('#ffd34d'), puffColor = new THREE.Color('#ffffff');
+  function burst(at, color, count, speed) {
+    for (let n = 0; n < count; n++) {
+      const i = burstNext; burstNext = (burstNext + 1) % BURST; const a = rnd() * Math.PI * 2, up = rnd();
+      burstPos.set([at.x, at.y, at.z], i * 3); burstVel.set([Math.cos(a) * speed * (1 - up * .5), speed * (.4 + up), Math.sin(a) * speed * (1 - up * .5)], i * 3); burstCol.set([color.r, color.g, color.b], i * 3); burstLife[i] = .55 + rnd() * .3;
+    }
+  }
+  function stepBursts(dt) {
+    for (let i = 0; i < BURST; i++) {
+      if (burstLife[i] <= 0) continue; burstLife[i] -= dt;
+      if (burstLife[i] <= 0) { burstPos[i * 3 + 1] = -1e5; continue; }
+      burstVel[i * 3 + 1] -= 9 * dt; for (let k = 0; k < 3; k++) burstPos[i * 3 + k] += burstVel[i * 3 + k] * dt;
+    }
+    burstGeo.attributes.position.needsUpdate = true; burstGeo.attributes.color.needsUpdate = true;
+  }
+
+  const target = new THREE.Vector3(), camAt = new THREE.Vector3(), P = new THREE.Vector3(),cameraUp=new THREE.Vector3();
+  // Board grooves record actual engine positions, including the deterministic review replay.
+  const trackCapacity=4200,trackVertices=new Float32Array(trackCapacity*18),trackGeo=new THREE.BufferGeometry();trackGeo.setAttribute('position',new THREE.BufferAttribute(trackVertices,3));trackGeo.setDrawRange(0,0);
+  const trackMesh=new THREE.Mesh(trackGeo,new THREE.MeshBasicMaterial({color:'#6f8b99',transparent:true,opacity:.085,depthWrite:false,side:THREE.DoubleSide}));trackMesh.frustumCulled=false;trackMesh.userData.perf='effects';scene.add(trackMesh);let trackCount=0,trackNext=0,trackFull=false;const previousTracks=new Map(),trackAttr=trackGeo.attributes.position;
+  const groovePoint=new THREE.Vector3();
+  function rememberTracks(state,bulk=false){
+    const rivals=state.rivals||[];
+    for(let riderIndex=-1;riderIndex<rivals.length;riderIndex++){
+      const r=riderIndex<0?state.player:rivals[riderIndex],id=r.id||'player',s=r.s??state.player.s-r.z,old=previousTracks.get(id);
+      if(r.airborne||r.crashed){previousTracks.delete(id);continue;}
+      if(old&&s>old.s+.18&&s-old.s<5)for(let ski=0;ski<2;ski++){
+        const offset=ski===0?-.14:.14,base=trackNext*18;
+        for(let vertex=0;vertex<6;vertex++){
+          const current=vertex===1||vertex===3||vertex===4,edge=vertex===2||vertex===4||vertex===5?.017:-.017;
+          const ss=current?s:old.s,xx=(current?r.x:old.x)+offset+edge;
+          worldPoint(ss,xx,surfaceHeight(xx,pipe)+.013,groovePoint);const n=base+vertex*3;
+          trackVertices[n]=groovePoint.x;trackVertices[n+1]=groovePoint.y;trackVertices[n+2]=groovePoint.z;
+        }
+        if(!bulk)trackAttr.addUpdateRange(base,18);trackNext=(trackNext+1)%trackCapacity;trackCount=Math.min(trackCapacity,trackCount+1);
+        trackGeo.setDrawRange(0,trackCount*6);trackAttr.needsUpdate=true;
+      }
+      if(!old||s>old.s+.18)previousTracks.set(id,{s,x:r.x});
+    }
+  }
+  function seedTracks(frames){previousTracks.clear();trackCount=trackNext=0;for(const state of frames)rememberTracks(state,true);trackFull=true;}
+  let lastTrackS=0;
+  try { vfx=await createAlpineVfx({scene,worldPoint,surfaceHeight:x=>surfaceHeight(x,pipe),frameAt,reducedMotion:reduced,crashSeconds:physics.crashSeconds}); }
+  catch(error) { if (error?.disposed || isDisposed()) { disposeAll(); throw error; } vfx = inertAlpineVfx(error); }
+  function resize(){if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
+  // Warm the shader cache while the loading card is up: every material in the scene, including the
+  // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
+  for (const type of Object.keys(makers)) prop(type, unused());
+  for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+  vfx.warmUp();
+  try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
+  if (isDisposed()) { disposeAll(); throw Object.assign(new Error('alpine.disposed'), {disposed: true}); }
+  warmUp();
+  // Screen-space speed lines use a different depth pipeline from contact puffs.
+  // Exercise that pipeline under the loading card as well, then wait only here
+  // for pending uploads/draw setup; racing frames never wait on the GPU.
+  vfx.warmUp(true); warmUp(); renderer.getContext().finish(); vfx.reset();
+  let canonicalPresentation=false;
+  let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0, lastStars = new Map(), lastSnowmen = new Map(), brakePuffAt = 0;
+  /** v24.1 objects other than stars and patches: big kickers, air rings, power-ups (spinning, bobbing), snowmen and movers (a penguin
+   * waddling the way it walks, a snowball or boulder rolling). Returns false for anything that is not a v24.1 object. */
+  function v241Prop(o, os, used, wall) {
+    if (o.type === 'ramp' && o.big) { place(prop('rampBig', used), os, o.x, 0); return true; }
+    if (o.type === 'ring') { place(prop('ring', used), os, o.x, o.h ?? 4); return true; }
+    if (o.type === 'magnet' || o.type === 'shield') { const g = prop(o.type, used); place(g, os, o.x, 0); const b = g.userData.spin; b.rotation.y = wall * 2.4; b.position.y = .95 + Math.sin(wall * 3 + os) * .08; return true; }
+    if (o.type === 'snowman') { const g = prop('snowman', used); place(g, os, o.x, 0); g.scale.setScalar((o.radius ?? .72) / .72); return true; }
+    if (o.type === 'mover') {
+      const key = `mover-${makers['mover-' + o.kind] ? o.kind : 'snowball'}`, g = prop(key, used), dir = o.dir || 1;
+      // the penguin is built facing +Z (uphill, toward the camera); a quarter turn faces it the way it walks (+X is to the right)
+      if (key === 'mover-penguin') { place(g, os, o.x, 0, 0, dir > 0 ? Math.PI / 2 : -Math.PI / 2); const w = g.userData.waddle; w.rotation.z = Math.sin(wall * 9) * .2; w.position.y = Math.abs(Math.sin(wall * 9)) * .06; }
+      else { place(g, os, o.x, 0); g.userData.roll.rotation.z = -o.x / g.userData.radius; }
+      return true;
+    }
+    return false;
+  }
+  const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
+  const crashSeconds = physics.crashSeconds ?? 1.4;
+
+  /** One hidden frame under the loading card with every rider, coin, prop and particle system drawn
+   * inside the camera and the shadow box. Compiling programs is not enough: GPU drivers (and SwiftShader)
+   * finish pipeline state on the first draw, which used to land on the first racing frame as a long hitch. */
+  function warmUp() {
+    worldPoint(0, 0, 0, P); sun.target.position.copy(P); sun.position.set(P.x - 32, P.y + 25, P.z - 38);
+    worldPoint(-6, .4, 2.6, camera.position); worldPoint(12, 0, 1, target); camera.lookAt(target); camera.updateProjectionMatrix();
+    let i = 0; for (const r of riders.values()) { r.root.visible = r.shadow.visible = true; place(r.root, 4 + i * 1.5, (i % 3 - 1) * 2.4, .03); place(r.shadow, 4 + i * 1.5, (i % 3 - 1) * 2.4, .05); r.shadow.rotateX(-Math.PI / 2); if (r.actor) r.actor.pose(0, .3, .5, .2, .4); i++; }
+    if (ghostRider) { ghostRider.root.visible = true; place(ghostRider.root, 6, 1.2, .03); ghostRider.actor?.pose?.(0, .2, 0, 0, 0); leagueLook.ghostify(ghostRider.root); }
+    const used = unused(); let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
+    for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
+    coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
+    if (V241) { for (let c = 0; c < 8; c++) { worldPoint(7 + c * .4, (c % 4 - 1.5) * .9, 1, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); stars.setMatrixAt(c, matrix); } stars.count = 8; stars.instanceMatrix.needsUpdate = true; worldPoint(5, 0, 1, shieldBubble.position); shieldBubble.visible = true; place(magnetRing, 5, 0, .07); magnetRing.visible = true; }
+    for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
+    trailGeo.attributes.position.needsUpdate = true; trailGeo.attributes.powderAge.needsUpdate = true; spray.visible = true;
+    art.update(0, look.fogFar, camera, quality); for (const c of chunks) c.visible = c.userData.s1 > -70 && c.userData.s0 < look.fogFar + 30;
+    renderer.render(scene, camera);
+    spray.visible = false; coins.count = 0; for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+    if (V241) { stars.count = 0; shieldBubble.visible = magnetRing.visible = false; }
+    for (const r of riders.values()) r.root.visible = r.shadow.visible = false;
+    if (ghostRider) ghostRider.root.visible = false;
+  }
+  function render(canonicalState, presentation = canonicalState.presentation) {
+    if (disposed) return;
+    // Pausing preserves the exact scene pose; UI overlays are managed by the session.
+    if(canonicalState.phase==='paused'){snowAt=performance.now()/1000;renderer.render(scene,camera);return;}
+    canonicalPresentation=!!presentation;
+    const state=presentationFrame(canonicalState,physics.fixedStep,presentation);
+    const t = state.timeMs / 1000, playing = state.phase !== 'menu', portrait = camera.aspect < .9, dt = Math.min(.1, Math.max(0, t - lastT)), wall = performance.now() / 1000, wdt = Math.min(.1, Math.max(0, wall - snowAt));
+    lastT = t; snowAt = wall;
+    const player = state.player, ps = player.s ?? 0, feedback=feel.update(state,wdt);
+    if(ps<lastTrackS-2){seedTracks([]);for(const r of riders.values()){r.air=r.squash=r.grab=r.roll=0;r.wasHit=false;r.wasAirborne=false;r.hitAt=-10;r.crashAt=-1;}camLat=player.x*.98;camRise=0;}
+    lastTrackS=ps;rememberTracks(canonicalState);
+    if(trackFull){trackAttr.clearUpdateRanges();trackAttr.needsUpdate=true;trackFull=false;}
+    placeScenery(ps, wall);scenery.update(ps,look.fogFar);
+    for (const c of chunks) c.visible = c.userData.s1 > ps - 70 && c.userData.s0 < ps + look.fogFar + 30;
+    if (V241) shieldBubble.visible = magnetRing.visible = false;
+    for (const [id, r] of riders) {
+      const s = id === 'player' ? player : state.rivals?.find(x => x.id === id), z = id === 'player' ? 0 : s?.z ?? 0;
+      // Riders just behind the player sit between the chase camera and the player; they are hidden so they never fill the screen.
+      const blocking = id !== 'player' && !!s && (z > 1.2 || (z > .4 && Math.abs(s.x - player.x) < 2.4));
+      const visible = !!s && playing && z > -look.fogFar && z < 30 && !blocking; r.root.visible = r.shadow.visible = visible; if (!visible) continue;
+      const height = Math.max(0, s.height ?? 0), lean = s.lean ?? 0, side = Math.sign(s.x) || 1, surf = surfaceHeight(s.x, pipe), trick = s.trick;
+      r.air += ((s.airborne ? 1 : 0) - r.air) * dampWeight(10,wdt); r.squash += ((s.landing ? 1 : 0) - r.squash) * dampWeight(15,wdt);
+      const grabbing = trick && (trick.id === 'grab' || trick.id === 'combo') ? Math.sin(Math.min(1, trick.progress) * Math.PI) : 0;
+      r.grab += (grabbing - r.grab) * dampWeight(18,wdt);
+
+      // On a wall the rider stands square to the surface; in pipe air the body eases upright.
+      const rollTarget = s.airKind === 'pipe' ? side * wallAngle(pipe.lip, pipe) * .55 : s.airborne ? 0 : side * wallAngle(s.x, pipe);
+      r.roll += (rollTarget - r.roll) * dampWeight(11,wdt);
+      // Body first: the tilt follows the stick intent, then the carve banks the board into the turn (more at speed).
+      r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
+      const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll + (V241 ? curveBank(s.curve) : 0);
+      // v24.1: the skis point where the rider really goes (travelYaw) and the body banks into the course's turns (curveBank).
+      const yawShown = V241 && !s.crashed ? travelYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed) : carve.yaw;
+      place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, yawShown, s.airKind === 'ramp' ? r.air * .12 : 0);
+      if (V241 && id === 'player') {
+        // The shield bubble around the rider, the magnet ring on the snow, and a spray of snow from the skis while braking.
+        shieldBubble.visible = (s.shield || 0) > 0; if (shieldBubble.visible) { worldPoint(s.s ?? ps, s.x, surf + height + .95, shieldBubble.position); shieldBubble.scale.setScalar(1 + Math.sin(wall * 5) * .04); }
+        magnetRing.visible = (s.magnet || 0) > 0 && !s.airborne; if (magnetRing.visible) { place(magnetRing, s.s ?? ps, s.x, surf + .07); magnetRing.rotateX(Math.PI / 2); magnetRing.scale.setScalar(1 + (wall * 1.6 % 1) * .5); magnetRing.material.opacity = .85 - (wall * 1.6 % 1) * .6; }
+        if ((s.braking || 0) > .1 && !s.airborne && !s.crashed && wall > brakePuffAt && !reduced) { brakePuffAt = wall + .05; for (const side of [-.25, .25]) { worldPoint((s.s ?? ps) + .6, s.x + side, surf + .1, P); burst(P, puffColor, 2, 1.4 + s.braking); } }
+      }
+      r.actor?.setDistance?.(camera.position.distanceTo(r.root.position)); // alpine-v7: rider LOD by camera distance
+      // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
+      let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
+      if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
+      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); if (!envRig?.powder(P, 2.1)) powder?.emit(P, 2.1); } } const c = Math.min(1, (t - r.crashAt) / (s.crashDur || crashSeconds)), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
+        // A real wipe-out: the rider tumbles two full somersaults in the first half, thrown up off the snow, then slides and lies flat before getting up.
+        const tc = Math.min(1, c / .5); if (!reduced) { flip = -Math.PI * 4 * (1 - (1 - tc) ** 3); lift = Math.sin(tc * Math.PI) * .55; } }
+      else r.crashAt = -1;
+      if(s.hit&&!r.wasHit&&!s.crashed){r.hitAt=t;if(id==='player'){worldPoint(s.s??ps,s.x,surf+.35,P);burst(P,puffColor,reduced?8:22,2.5);}}
+      r.wasHit=!!s.hit;
+      // Landing: a puff of animated powder where the rider touches down (player only; quiet in reduced motion).
+      if (id === 'player' && r.wasAirborne && !s.airborne && !s.crashed && !reduced) { worldPoint(s.s ?? ps, s.x, surf + .08, P); if (!envRig?.landing(P, s.airKind === 'pipe' ? 1.7 : 1.2)) powder?.emit(P, s.airKind === 'pipe' ? 1.7 : 1.2); }
+      r.wasAirborne = !!s.airborne;
+      const impact=s.crashed?0:Math.max(0,1-(t-r.hitAt)/.65)**2;
+      // A readable recoil and knee compression, including reduced-motion mode.
+      flip-=impact*.28;roll+=side*impact*.16;drop+=impact*.1;
+      r.pivot.rotation.set(flip, r.actor?.update&&s.crashed?0:yaw, r.actor?.update&&s.crashed?0:roll, 'YXZ'); r.pivot.position.y = PIVOT - (r.actor?.update&&s.crashed?0:drop) + lift;
+      if(r.actor?.update)r.actor.update(s,{phase:state.phase,time:t,dt:state.phase==='finished'?wdt:dt,speedKmh:state.speedKmh,result:state.result});else if(r.actor)r.actor.pose(t,lean,r.air,Math.max(r.squash,impact*.8),r.grab);else r.body.position.y = .14 + Math.sin(t * 5 + (id === 'player' ? 0 : 3)) * .018;
+      place(r.shadow, s.s ?? ps - z, s.x, surf + .05, s.airborne ? 0 : side * wallAngle(s.x, pipe)); r.shadow.rotateX(-Math.PI / 2);
+      r.shadow.material.opacity = .2 / (1 + height * .7); r.shadow.scale.set(.75 / (1 + height * .15), 1.4 / (1 + height * .15), 1);
+      if(r.sf){const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;}
+    }
+    // League ghost: where the record run was at this race time; hidden behind the player (it would fill the chase camera) and after its finish.
+    if (ghostRider) {
+      const g = ghostAt(ghost, state.timeMs, GHOST), gz = ps - g.s, block = gz > 1.2 || (gz > .4 && Math.abs(g.x - player.x) < 2.4);
+      const show = playing && state.phase !== 'countdown' && !g.finished && gz > -look.fogFar && !block; ghostRider.root.visible = show; ghostRider.shadow.visible = false;
+      if (show) {
+        const gs = surfaceHeight(g.x, pipe); place(ghostRider.root, g.s, g.x, gs + g.height + .03, g.airborne ? 0 : (Math.sign(g.x) || 1) * wallAngle(g.x, pipe), 0, 0);
+        ghostRider.actor?.setDistance?.(camera.position.distanceTo(ghostRider.root.position));
+        ghostRider.actor?.update?.({id: 'ghost', s: g.s, x: g.x, z: gz, height: g.height, lean: g.lean, intent: g.lean, airborne: g.airborne, airKind: g.airborne ? 'ramp' : null, landing: false, crashed: false, boosting: false, hit: false, trick: null}, {phase: state.phase, time: t, dt, speedKmh: state.speedKmh});
+        leagueLook.ghostify(ghostRider.root);
+      }
+    }
+    // Obstacles and coins from the frame.
+    const used = unused();
+    for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+    let coinCount = 0, starCount = 0; const seen = new Map(), seenStars = new Map(), seenSnowmen = new Map();
+    for (const o of state.obstacles ?? []) {
+      const os = o.s ?? ps - o.z;
+      // v24.1 patches (ice, deep snow) stay drawn until their far end has passed, so the snow under the rider never vanishes.
+      if (V241 && (o.type === 'ice' || o.type === 'powder')) { if (os + (o.len || 0) / 2 < ps - 1.5) continue; const g = prop(o.type, used); place(g, os, o.x, 0); g.scale.set(o.w || 1, 1, o.len || 1); continue; }
+      // Anything already behind the player would sit between it and the chase camera.
+      if (os < ps - 1.5) continue;
+      if (V241 && o.type === 'star') {
+        if (starCount >= STAR_POOL) continue;
+        worldPoint(os, o.x, (o.h ?? .9) + Math.sin(wall * 3 + os) * .07, vec); frameAt(os, FR);
+        matrix.compose(vec, quat.setFromEuler(euler.set(0, -FR.theta + wall * 2.6 + os * .3, 0)), scl.setScalar(1)); stars.setMatrixAt(starCount++, matrix);
+        seenStars.set(o.id, {s: os, x: o.x, h: o.h ?? .9}); continue;
+      }
+      if (V241 && v241Prop(o, os, used, wall)) { if (o.type === 'snowman') seenSnowmen.set(o.id, {s: os, x: o.x}); continue; }
+      if (o.type === 'coin') {
+        if (coinCount >= COIN_POOL) continue;
+        worldPoint(os, o.x, (o.h ?? .85) + Math.sin(wall * 3 + os) * .06, vec); frameAt(os, FR);
+        matrix.compose(vec, quat.setFromEuler(euler.set(0, -FR.theta + wall * 3.2 + os * .4, 0)), scl.setScalar(1)); coins.setMatrixAt(coinCount++, matrix);
+        seen.set(o.id, {s: os, x: o.x, h: o.h ?? .85}); continue;
+      }
+      if (!makers[o.type]) continue;
+      const g = prop(o.type === 'gate' ? gateType(o.id) : o.type, used); place(g, os, o.x, 0);
+      if (o.type === 'rock') g.scale.setScalar((o.radius ?? .7) / .7);
+    }
+    coins.count = coinCount; coins.instanceMatrix.clearUpdateRanges(); if (coinCount) { coins.instanceMatrix.addUpdateRange(0, coinCount * 16); coins.instanceMatrix.needsUpdate = true; }
+    // A coin that vanishes beside the player was collected: sparkle where it was.
+    for (const [id, c] of lastCoins) if (!seen.has(id) && Math.abs(c.s - ps) < 4 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 9, 2.4); }
+    lastCoins = seen;
+    if (V241) {
+      stars.count = starCount; stars.instanceMatrix.clearUpdateRanges(); if (starCount) { stars.instanceMatrix.addUpdateRange(0, starCount * 16); stars.instanceMatrix.needsUpdate = true; }
+      for (const [id, c] of lastStars) if (!seenStars.has(id) && Math.abs(c.s - ps) < 5 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 12, 2.8); }
+      // A snowman that disappears beside the player was smashed: a burst of snow.
+      for (const [id, c] of lastSnowmen) if (!seenSnowmen.has(id) && Math.abs(c.s - ps) < 5 && playing) { worldPoint(c.s, c.x, 1.1, P); burst(P, puffColor, reduced ? 10 : 30, 3.4); }
+      lastStars = seenStars; lastSnowmen = seenSnowmen;
+    }
+    stepBursts(dt); powder?.update(wdt);
+
+    // Camera: a chase rig along the path that rises with the rider on walls and in the air.
+    const px = player.x, boost = !!player.boosting, absY = surfaceHeight(px, pipe) + Math.max(0, player.height ?? 0);
+    // Narrow screens sit higher with a wider lens and follow the rider almost fully sideways.
+    const wide=Math.min(1,Math.max(0,(camera.aspect-.45)/1.3)),baseFov=67-wide*7;
+    fov=baseFov+feedback.fovAdd;if(camera.fov!==fov){camera.fov=fov;camera.updateProjectionMatrix();}
+    const follow=.98;
+    if (playing) {
+      const k = dampWeight(9,wdt); camLat += (px * follow - camLat) * k; camRise += (absY * .75 - camRise) * dampWeight(6,wdt);
+      worldPoint(ps-(portrait?5.2:5.8)-feedback.speedFraction*.4,camLat+(portrait?.2:.65),2.45+camRise,camera.position);
+      worldPoint(ps+feedback.lookAhead,px*.8+feedback.carve*.6,2.0+camRise*.8,target);
+    } else {
+      worldPoint(portrait ? -4.8 : -5.5, portrait ? 4 : 7, portrait ? 2.6 : 2.7, camera.position); worldPoint(portrait ? 8 : 8, portrait ? 0 : -4, .7, target);
+      const pr = riders.get('player'); pr.actor?.update?.(player,{phase:'menu',time:wall,dt:wdt}); pr.root.visible = pr.shadow.visible = true; place(pr.root, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .03, 0, -.38); pr.pivot.rotation.set(0, 0, 0); pr.pivot.position.y = PIVOT; place(pr.shadow, portrait ? 2 : .4, portrait ? 1.8 : 3.8, .05); pr.shadow.rotateX(-Math.PI / 2);
+      for (const [id, r] of riders) if (id !== 'player') r.root.visible = r.shadow.visible = false;
+    }
+    if (player.hit && !reduced) {const impact=Math.max(0,1-(t-riders.get('player').hitAt)/.45);camera.position.y+=Math.sin(Math.min(1,(t-riders.get('player').hitAt)/.45)*Math.PI)*.055*impact;}
+    vfx.applyCamera(state,camera,target);
+    camera.lookAt(target);
+    if(playing&&feedback.landingShakeFraction){
+      worldPoint(ps,px,absY+.8,P);
+      const actionHeight=2*camera.position.distanceTo(P)*Math.tan(camera.fov*Math.PI/360);
+      cameraUp.set(0,1,0).applyQuaternion(camera.quaternion);camera.position.addScaledVector(cameraUp,actionHeight*feedback.landingShakeFraction);camera.lookAt(target);
+    }
+    vfx.update(state,camera,feedback);
+    if (playing && !reduced) camera.rotateZ(feedback.bank);
+    camAt.copy(camera.position);
+    mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);
+    worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);envRig?.update(ps,camera,wdt);themeLayers?.update(ps,camera,wdt,wall);
+    // Board spray and falling snow.
+    frameAt(ps, FR); const dx = Math.sin(FR.theta), dz = -Math.cos(FR.theta), rx = Math.cos(FR.theta), rz = Math.sin(FR.theta);
+    worldPoint(ps, px, absY, P);
+    spray.visible=false;
+    const count = quality === 'low' ? Math.round(SNOW_MAX * .35) : SNOW_MAX;
+    // League courses: a side gust (state.wind) blows the falling snow across the run, so the wind is seen before it is felt.
+    const gust = state.wind?.v || 0, gx = gust * rx * 2.2, gz = gust * rz * 2.2;
+    for (let i = 0; i < count; i++) {
+      let y = snowOffsets[i * 3 + 1] - snowSpeed * wdt, x = snowOffsets[i * 3] + wind * wdt;
+      if (y < -5) y += 24; if (x > 30) x -= 57;
+      if (gust) { x += gx * wdt; if (x < -27) x += 57; else if (x > 30) x -= 57; let z = snowOffsets[i * 3 + 2] + gz * wdt; if (z < -30) z += 60; else if (z > 30) z -= 60; snowOffsets[i * 3 + 2] = z; }
+      snowOffsets[i * 3] = x; snowOffsets[i * 3 + 1] = y;
+      snowPos[i * 3] = camAt.x + x; snowPos[i * 3 + 1] = camAt.y + y; snowPos[i * 3 + 2] = camAt.z + snowOffsets[i * 3 + 2];
+    }
+    snowGeo.setDrawRange(0, count); snowGeo.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+  }
+  function setQuality(value) { if (disposed) return; const next = value === 'low' ? 'low' : 'high'; if (next === quality) return; quality = next; applyQuality(); gltf?.setQuality?.(quality); const t0 = performance.now(); resize(); lastSwitch.resizeMs = +(performance.now() - t0).toFixed(2); lastSwitch.totalMs = +(lastSwitch.totalMs + lastSwitch.resizeMs).toFixed(2); }
+  function disposeAll() {
+    if (disposed) return; disposed = true; ro?.disconnect();
+    const materials = new Set(), geometries = new Set();
+    scene.traverse(o => { if (o.geometry) geometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) materials.add(m); });
+    geometries.forEach(g => g.dispose()); materials.forEach(m => { for (const v of Object.values(m)) if (v?.isTexture) v.dispose(); m.dispose(); });
+    themeLayers?.dispose();disposeBackplate?.();if(ghostRider)leagueLook?.disposeGhost(ghostRider.root);
+    vfx?.dispose();gltf?.dispose();scene.background?.dispose?.();scenery.dispose();art.dispose();envRig?.dispose();env?.dispose();designWorld.dispose();contactTex.dispose();granite.dispose();
+    for (const m of [...treeMeshes, flagPole, flagCloth, coins]) m.dispose?.();
+    sun.shadow.map?.dispose();envTarget.dispose(); renderer.renderLists.dispose(); renderer.dispose();renderer.forceContextLoss();
+    if (!canvas) renderer.domElement.remove();
+  }
+  /** Dev/perf audit: triangles the GPU processes per frame by category (perf tags on objects),
+   * in the colour pass and in the shadow pass, with the renderer's own culling rules. */
+  function audit() {
+    const camFrustum = new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+    const shadowCam = sun.shadow.camera, shadowFrustum = new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(shadowCam.projectionMatrix, shadowCam.matrixWorldInverse));
+    const out = {}, tagOf = o => { for (let n = o; n; n = n.parent) if (n.userData?.perf) return n.userData.perf; return 'other'; };
+    scene.traverseVisible(o => {
+      if (!o.isMesh && !o.isPoints) return;
+      const g = o.geometry, prims = g.index ? g.index.count : g.attributes.position?.count || 0, range = g.drawRange.count === Infinity ? prims : Math.min(prims, g.drawRange.count);
+      const tris = o.isPoints ? 0 : range / 3 * (o.isInstancedMesh ? o.count : 1), points = o.isPoints ? range : 0;
+      const row = out[tagOf(o)] ||= {objects: 0, tris: 0, shadowTris: 0, points: 0};
+      if (!o.frustumCulled || camFrustum.intersectsObject(o)) { row.objects++; row.tris += tris; row.points += points; }
+      if (renderer.shadowMap.enabled && o.castShadow && (!o.frustumCulled || shadowFrustum.intersectsObject(o))) row.shadowTris += tris;
+    });
+    for (const row of Object.values(out)) { row.tris = Math.round(row.tris); row.shadowTris = Math.round(row.shadowTris); }
+    return {categories: out, shadowMapSize: sun.shadow.mapSize.x, shadowsEnabled: renderer.shadowMap.enabled, programs: renderer.info.programs?.length ?? null};
+  }
+  return {
+    render, seedTracks, setQuality, audit, dispose: disposeAll, canvas: renderer.domElement,
+    get quality() { return quality; },
+    get modelError() { return modelError; },
+    get rockTextureError(){return rockTextureError;},
+    mode: 'alpine-feel-v9',
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),designAssets:{...designWorld.metrics(),powderActive:powder?.active?.()??0},environment:envRig?.metrics()??null,...(theme?{league:{...(themeLayers?.metrics()??{theme:theme.id,layers:[]}),ghost:ghostRider?{visible:ghostRider.root.visible,lod:ghostRider.actor?.lod??null}:null}}:{}),quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
+  };
+}

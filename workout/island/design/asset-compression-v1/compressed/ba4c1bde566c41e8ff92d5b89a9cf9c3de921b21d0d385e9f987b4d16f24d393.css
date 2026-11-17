@@ -1,0 +1,92 @@
+/* Original, scoped HUD companion. CC0-1.0; see LICENSES.md. */
+.uo-kit {
+  --uo-panel: #091826; --uo-text: #f5f8fa; --uo-muted: #c8d3dd;
+  --uo-accent: #ffd16a; --uo-on-accent: #09131c; --uo-tile: #172d3e;
+  --uo-border: #8497a7; --uo-track: #50616b; --uo-fill: #ffd16a;
+  color: var(--uo-text); color-scheme: dark; font: 18px/1.45 Arial, sans-serif;
+}
+.uo-kit[data-mode="light"] {
+  --uo-panel: #ffffff; --uo-text: #102b41; --uo-muted: #425b6d;
+  --uo-accent: #805000; --uo-on-accent: #ffffff; --uo-tile: #edf3f7;
+  --uo-border: #63798a; --uo-track: #d2dce4; --uo-fill: #805000;
+  color-scheme: light;
+}
+.uo-kit *, .uo-kit *::before, .uo-kit *::after { box-sizing: border-box; }
+.uo-kit [hidden], .uo-kit[hidden] { display: none !important; }
+.uo-card {
+  position: relative; isolation: isolate; width: min(100%, 360px); min-width: 0;
+  padding: 24px; border: 1px solid var(--uo-border); border-radius: 20px;
+  background: var(--uo-panel); box-shadow: 0 12px 36px #0002; text-align: center;
+  animation: uo-open 320ms cubic-bezier(.2,.7,.3,1) both;
+}
+.uo-card p, .uo-card h2, .uo-card h3 { margin: 0; overflow-wrap: anywhere; }
+.uo-top { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.uo-title { font-size: 24px; line-height: 1.3; }
+.uo-mark { width: 28px; height: 28px; }
+.uo-card .uo-category { margin-top: 6px; font-size: 16px; color: var(--uo-muted); }
+.uo-art {
+  position: relative; display: grid; place-items: center; width: 88px; height: 88px;
+  margin: 20px auto 14px; border: 1px solid var(--uo-border); border-radius: 24px;
+  background: var(--uo-tile);
+}
+.uo-main-icon { width: 56px; height: 56px; }
+.uo-spark { position: absolute; width: 20px; height: 20px; pointer-events: none; opacity: 0; }
+.uo-spark-0 { top: -8px; right: -12px; }
+.uo-spark-1 { top: 22px; left: -16px; width: 16px; height: 16px; }
+.uo-spark-2 { bottom: -6px; right: -8px; width: 14px; height: 14px; }
+.uo-card[data-state="ready"] .uo-spark { animation: uo-spark 520ms 60ms ease-out both; }
+.uo-name { font-size: 24px; line-height: 1.3; }
+.uo-card .uo-status { margin-top: 8px; font-size: 18px; font-weight: 700; color: var(--uo-accent); }
+.uo-budget { display: grid; gap: 8px; margin-top: 22px; text-align: start; }
+.uo-budget > div { display: flex; align-items: center; gap: 8px; }
+.uo-budget > div > :first-child { margin-inline-end: auto; color: var(--uo-muted); }
+.uo-number { font-size: 22px; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+.uo-currency { width: 24px; height: 24px; }
+.uo-unit { font-size: 16px; color: var(--uo-muted); }
+.uo-progress {
+  display: block; width: 100%; height: 10px; margin-top: 12px; border: 0;
+  border-radius: 10px; overflow: hidden; background: var(--uo-track); accent-color: var(--uo-fill);
+  appearance: none; direction: rtl;
+}
+.uo-progress::-webkit-progress-bar { background: var(--uo-track); border-radius: 10px; }
+.uo-progress::-webkit-progress-value { background: var(--uo-fill); border-radius: 10px; }
+.uo-progress::-moz-progress-bar { background: var(--uo-fill); border-radius: 10px; }
+.uo-card .uo-hint { min-height: 24px; margin-top: 10px; font-size: 16px; color: var(--uo-muted); }
+.uo-controls { display: flex; gap: 10px; margin-top: 22px; }
+.uo-button {
+  flex: 1; min-width: 48px; min-height: 52px; padding: 10px 12px; border-radius: 12px;
+  border: 1px solid var(--uo-border); font: inherit; font-weight: 700; cursor: pointer;
+  touch-action: manipulation; overflow-wrap: anywhere;
+}
+.uo-primary { background: var(--uo-accent); color: var(--uo-on-accent); border-color: var(--uo-accent); }
+.uo-later { background: var(--uo-tile); color: var(--uo-text); }
+.uo-button:focus-visible { outline: 3px solid var(--uo-accent); outline-offset: 4px; }
+.uo-button:active:enabled { transform: translateY(1px); }
+.uo-button:disabled { background: var(--uo-tile); color: var(--uo-muted); border: 1px dashed var(--uo-border); cursor: default; }
+.uo-card[data-state="locked"] .uo-art { border-style: dashed; }
+@keyframes uo-open { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+/* Three small stars, one gentle reveal, no loop or full-screen flash. Total 580ms. */
+@keyframes uo-spark {
+  0%, 100% { opacity: 0; transform: scale(.7); }
+  40% { opacity: .85; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .uo-card, .uo-card * { animation: none !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+  .uo-button:focus-visible { outline-color: Highlight; }
+  .uo-progress { appearance: auto; }
+}
+
+/* Island integration (07/11/2026): compact variant inside the result dialog, so card and buttons fit a phone in landscape. */
+[data-upgrade-offer] .uo-card { width: 100%; max-width: 360px; padding: 14px 16px; }
+[data-upgrade-offer] .uo-title { font-size: 20px; }
+[data-upgrade-offer] .uo-category { display: none; }
+[data-upgrade-offer] .uo-art { width: 64px; height: 64px; margin: 10px auto 8px; }
+[data-upgrade-offer] .uo-main-icon { width: 40px; height: 40px; }
+[data-upgrade-offer] .uo-name { font-size: 20px; }
+[data-upgrade-offer] .uo-card .uo-status { margin-top: 4px; font-size: 17px; }
+[data-upgrade-offer] .uo-budget { margin-top: 10px; gap: 4px; }
+[data-upgrade-offer] .uo-progress { margin-top: 8px; }
+[data-upgrade-offer] .uo-card .uo-hint { min-height: 0; margin-top: 6px; }
+[data-upgrade-offer] .uo-controls { margin-top: 12px; }

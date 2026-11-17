@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="motion16 bounds error while preserving event times, IDs, metadata and large coordinates" time="0.010459" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="motion16 rejects truncated payloads, invalid offsets and reserved keys" time="0.000583" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="loop gate catches a discontinuous wrap and preserves sample count" time="0.000301" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="native quantization preserves positions/topology and requires no decoder" time="0.043983" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="source and output guards refuse paths outside the package/island" time="0.003400" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="WebP preserves hidden RGB used by straight-alpha texture filtering" time="0.321154" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<testcase name="native gate refuses forbidden WASM codecs and KTX2" time="0.000561" classname="test" file="/workspace/Bakasun/workout/island/design/asset-compression-v1/tools/codecs.test.mjs"/>
+	<!-- tests 7 -->
+	<!-- suites 0 -->
+	<!-- pass 7 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 737.419079 -->
+</testsuites>

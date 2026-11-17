@@ -1,0 +1,1198 @@
+/** Island Pro Basketball — 5 on 5 match engine.
+ * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
+ * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
+ * the result. The view, the replay and the sound only read snapshots and ordered events. */
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-15';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-15';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-15';
+import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
+import {createHoopsTacticsController} from './hoops-tactics.mjs';
+
+export const HOOPS_DT=1/60;
+export const HOOPS_SPRINT_MIN_ENERGY=0.08;
+export const SPRINT_RESERVE=Object.freeze({drain:3.5,delay:1,refill:6,unlock:0.3});
+export const HOOPS_ATTACK=Object.freeze({moveCost:0.012,spinCost:0.018,moveRange:2,moveResolve:0.18,spinResolve:0.27,moveStun:0.42,spinStun:0.5,moveRecovery:0.16,fakeCost:0.006,fakeDuration:0.52,fakeResolve:0.16,fakeCooldown:0.9,fakeRange:1.8});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const hyp=Math.hypot;
+export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDouble:false,passDir:null,altPress:false,movePress:false,spinPress:false,fakePress:false,switchPress:false,timeoutPress:false,call:null});
+
+export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;},get state(){return a;}};}
+
+/** M3: can `q` finish a lob at the rim? Within play.oopRadius of the attacked rim, running at it (or already
+ * near), and no defender boxing him within play.oopBox. Pure: positions and velocities only. */
+export function alleyOopEligible(q,rim,defenders,play){
+ if(!play||!q||q.air>=0||q.act)return false;
+ const dx=rim.x-q.x,dz=rim.z-q.z,d=Math.hypot(dx,dz);
+ if(d>play.oopRadius||d<0.2)return false;
+ const toward=(q.vx*dx+q.vz*dz)/d;
+ if(toward<(play.oopApproach??0.6)&&d>(play.oopNear??1.8))return false;
+ for(const o of defenders)if(Math.hypot(o.x-q.x,o.z-q.z)<(play.oopBox??0.9))return false;
+ return true;
+}
+/** M3: is a defender's reach inside the straight line of a pass (same radius as the target choice)? Pure. */
+export function passLaneBlocked(p,q,defenders,laneRadius){
+ const dx=q.x-p.x,dz=q.z-p.z,dd=Math.hypot(dx,dz)||1;
+ for(const o of defenders){const t=((o.x-p.x)*dx+(o.z-p.z)*dz)/(dd*dd);if(t<=0.05||t>=0.95)continue;if(Math.hypot(p.x+dx*t-o.x,p.z+dz*t-o.z)<laneRadius)return true;}
+ return false;
+}
+
+/** Effective rating 0..1 (fatigue lowers everything a little). */
+function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
+
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play}={}){
+ const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
+ // M3 gameplay layer (alley-oops, pass kinds, spacing, cuts): config.play, on unless `play:false` (?hoopsPlay=0)
+ const PL=play===false?null:(play&&typeof play==='object'?play:(C.play&&C.play.enabled!==false?C.play:null));
+ const prof=R.profiles[profile]||R.profiles.standard,diff=C.ai.difficulty[difficulty]||C.ai.difficulty.normal;
+ let rng,S,seq=0,queue=[],history=[],disposed=false,tacticsController=null;
+ const rand=()=>rng.next();
+
+ function emit(e){const ev={seq:++seq,tick:S.tick,time:S.tick*HOOPS_DT,...e};queue.push(ev);return ev;}
+
+ function makePlayer(card,team,slot){
+  const ratings=runtimeRatings(card);
+  return {id:card.id,team,slot,pos:card.pos,positionName:positionName(card.pos),abilities:playerAbilities({pos:card.pos,r:ratings}),name:card.name,number:card.number,look:card.look||{},r:ratings,
+   x:0,z:0,vx:0,vz:0,y:0,face:0,energy:card.energy??1,sprinting:false,boost:1,boostRest:0,boostLock:false,fouls:0,onCourt:true,
+   act:null,actT:0,act2:null,shot:null,move:null,fake:null,air:-1,airDur:0,jumpH:0,stumble:0,cd:{steal:0,jump:0,move:0,fake:0,pickup:0},
+   intent:{x:0,z:0,speed:0,face:null,sprint:false},dead:false,stepDist:0,steps:0,think:0,paintT:0,role:null,
+   stats:{pts:0,fgm:0,fga:0,tpm:0,tpa:0,ftm:0,fta:0,reb:0,oreb:0,ast:0,stl:0,blk:0,tov:0,pf:0,sec:0}};
+ }
+
+ function reset(newSeed){
+  rng=mulberry32(newSeed>>>0);seq=0;queue=[];history=[];
+  const T=teams.map((t,i)=>({index:i,id:t.id,name:t.name,colors:t.colors,tactics:{offense:t.tactics?.offense||'motion',defense:t.tactics?.defense||'man',pace:t.tactics?.pace??0.5},
+   roster:t.players.map((card,k)=>makePlayer(card,i,k)),score:0,fouls:0,timeouts:R.timeouts,bonus:false,call:null,callT:0}));
+  for(const t of T){
+   const lineup=teams[t.index].lineup||t.roster.slice(0,5).map(p=>p.id);
+   for(const p of t.roster)p.onCourt=lineup.includes(p.id);
+   t.lineup=lineup.slice(0,5);
+  }
+  S={seed:newSeed>>>0,tick:0,mode,profile,phase:'pregame',phaseT:0,quarter:1,clock:prof.quarterSeconds,shotClock:R.shotClock,shotClockOn:true,
+   teams:T,dir:[1,-1],possession:0,userTeam,controlled:null,
+   ball:{x:0,y:1,z:0,vx:0,vy:0,vz:0,state:'dead',owner:null,hand:1,shot:null,pass:null,lastTouch:0,touchedRim:false,dribbleT:0},
+   frontcourtSet:false,backcourtT:0,inbound:null,ft:null,lastScore:null,result:null,overtime:0,nextShotId:1,
+   pending:null,deadT:0,arrow:1,replayMark:null,assist:clamp(assist,0,1),stoppage:null,lastFoul:null,lastViolation:null,autopilot};
+  startJumpBall();
+ }
+
+ // ---------- helpers ----------
+ const team=i=>S.teams[i];
+ const onCourt=i=>team(i).roster.filter(p=>p.onCourt);
+ const all=()=>[...onCourt(0),...onCourt(1)];
+ const byId=id=>{for(const t of S.teams)for(const p of t.roster)if(p.id===id)return p;return null;};
+ const side=i=>S.dir[i];
+ const holder=()=>S.ball.state==='held'?byId(S.ball.owner):null;
+ const dist=(a,b)=>hyp(a.x-b.x,a.z-b.z);
+ const speedCap=(p,sprint)=>C.player.speed*(0.72+0.38*eff(p,'speed'))*(sprint?C.player.sprintFactor:1)*(S.ball.owner===p.id?C.player.dribbleFactor:1);
+ function nearestTo(list,pt,exclude){let best=null,bd=1e9;for(const p of list){if(p===exclude)continue;const d=hyp(p.x-pt.x,p.z-pt.z);if(d<bd){bd=d;best=p;}}return best;}
+ const oopEligible=q=>!!PL&&S.phase==='live'&&alleyOopEligible(q,court.rim(side(q.team)),onCourt(1-q.team),PL);
+
+ function setControlled(p){if(!p||p.team!==S.userTeam)return;if(S.controlled!==p.id){S.controlled=p.id;emit({type:'control',playerId:p.id});}}
+ function autoControl(){
+  const h=holder();
+  if(h&&h.team===S.userTeam){setControlled(h);return;}
+  const me=byId(S.controlled);
+  if(!me||!me.onCourt){const b=S.ball;setControlled(nearestTo(onCourt(S.userTeam),b));}
+ }
+
+ function giveBall(p,reason){
+  const b=S.ball,prevTeam=b.lastTouch,wasLoose=b.state!=='held';
+  b.state='held';b.owner=p.id;b.shot=null;b.pass=null;b.vx=b.vy=b.vz=0;b.lastTouch=p.team;b.dribbleT=0;
+  p.cd.pickup=0;for(const q of all()){q.dead=false;q.stepDist=0;q.steps=0;}
+  if(reason==='rebound'||reason==='interception'){S.frontcourtSet=court.frontcourt(side(p.team),p.x);S.backcourtT=0;}
+  const changed=S.possession!==p.team;
+  if(changed){
+   S.possession=p.team;S.frontcourtSet=court.frontcourt(side(p.team),p.x);S.backcourtT=0;
+   if(reason!=='inbound-ready'){S.shotClock=R.shotClock;S.shotClockOn=true;}
+  }
+  emit({type:'possession',playerId:p.id,team:p.team,reason});
+  autoControl();
+  // defence: the child takes over the defender closest to the new ball handler
+  if(changed&&p.team!==S.userTeam&&C.player.autoSwitch&&!S.autopilot){const n=nearestTo(onCourt(S.userTeam),p);if(n)setControlled(n);}
+ }
+
+ /** After a miss the child takes the teammate clearly closest to the rim. */
+ function reboundSwitch(sideIdx){
+  if(!C.player.autoSwitch||S.autopilot)return;
+  const me=byId(S.controlled),spot=court.rim(sideIdx),n=nearestTo(onCourt(S.userTeam),spot);
+  if(me&&n&&n!==me&&hyp(me.x-spot.x,me.z-spot.z)-hyp(n.x-spot.x,n.z-spot.z)>3)setControlled(n);
+ }
+ /** Where a rebound will come down: the rim of a shot in the air, or just ahead of a loose ball. */
+ function reboundSpot(b){
+  if(b.state==='shot'&&b.shot){const r=court.rim(b.shot.side);return {x:r.x-Math.sign(r.x)*0.9,z:r.z};}
+  return {x:b.x+b.vx*0.25,z:b.z+b.vz*0.25};
+ }
+
+ function ballLoose(vx,vy,vz,touchTeam){
+  const b=S.ball;b.state='loose';b.owner=null;b.vx=vx;b.vy=vy;b.vz=vz;if(touchTeam!=null)b.lastTouch=touchTeam;b.shot=null;b.pass=null;
+ }
+
+ function placeFormation(){
+  // jump ball: centres in the circle, the rest spread in their own half
+  const spots=[[0.55,0],[3.2,-4.2],[3.2,4.2],[5.8,-2],[6.6,2.6]],order=['C','PF','SF','SG','PG'];
+  for(const t of [0,1]){
+   const list=onCourt(t).slice().sort((a,b)=>order.indexOf(a.pos)-order.indexOf(b.pos)),s=side(t);
+   list.forEach((p,k)=>{const [u,v]=spots[k];p.x=-s*u;p.z=t?-v:v;p.vx=p.vz=0;p.face=s>0?Math.PI/2:-Math.PI/2;resetAct(p);});
+  }
+ }
+
+ function resetAct(p){p.act=null;p.actT=0;p.act2=null;p.shot=null;p.move=null;p.fake=null;p.air=-1;p.y=0;p.stumble=0;p.sprinting=false;}
+
+ // ---------- phases ----------
+ function startJumpBall(){
+  S.phase='jumpball';S.phaseT=0;placeFormation();
+  const b=S.ball;b.state='toss';b.owner=null;b.x=0;b.z=0;b.y=2.2;b.vx=b.vz=0;b.vy=4.6;
+  S.controlled=null;autoControl();
+  emit({type:'jumpBall',quarter:S.quarter});
+ }
+
+ function startInbound(teamIdx,spot,reason){
+  S.phase='inbound';S.phaseT=0;S.ball.state='dead';S.ball.owner=null;S.ball.shot=null;S.ball.pass=null;
+  const s=side(teamIdx),list=onCourt(teamIdx);
+  // inbounder: prefer a non-PG
+  const pg=list.find(p=>p.pos==='PG')||list[0];
+  const inb=list.find(p=>p!==pg&&p.pos!=='C')||list.find(p=>p!==pg)||pg;
+  S.inbound={team:teamIdx,inbounder:inb.id,receiver:pg.id,spot:{...spot},reason,delay:R.inboundDelay};
+  inb.x=spot.x;inb.z=spot.z;inb.vx=inb.vz=0;resetAct(inb);
+  inb.face=Math.atan2(-spot.x*0.2,-spot.z*0.2||(s>0?1:-1));
+  const b=S.ball;b.x=inb.x;b.z=inb.z;b.y=1.1;
+  S.possession=teamIdx;S.shotClock=reason==='side-14'?Math.max(S.shotClock,R.shotClockReset):(reason==='keep'?S.shotClock:R.shotClock);
+  S.shotClockOn=true;S.frontcourtSet=court.frontcourt(s,spot.x)&&reason!=='score';S.backcourtT=0;
+  emit({type:'inbound',team:teamIdx,reason,x:spot.x,z:spot.z});
+  maybeSubstitute();
+  autoControl();
+  setControlled(byId(pg.id));
+ }
+
+ function deadBall(next,delay){S.phase='dead';S.phaseT=0;S.pending={next,delay};}
+
+ function afterScore(scoringTeam){
+  const other=1-scoringTeam,s=side(other);
+  // inbound from under the basket the scoring team attacked (= the other team's own baseline)
+  const spot={x:-s*(court.hx+0.4),z:-1.2};
+  deadBall(()=>startInbound(other,spot,'score'),C.timing.afterScore);
+ }
+
+ function startFreeThrows(shooter,count,andOne){
+  S.phase='freethrow';S.phaseT=0;S.ball.state='dead';S.ball.owner=shooter.id;S.ball.shot=null;S.ball.pass=null;
+  S.ft={shooter:shooter.id,team:shooter.team,left:count,total:count,andOne:!!andOne,state:'setup',t:0};
+  const s=side(shooter.team),spot=court.ftSpot(s);
+  shooter.x=spot.x;shooter.z=spot.z;shooter.vx=shooter.vz=0;resetAct(shooter);shooter.face=s>0?Math.PI/2:-Math.PI/2;
+  // lane spots
+  const lane=[[1.2,2.5],[1.2,-2.5],[2.5,2.5],[2.5,-2.5],[3.8,2.5],[3.8,-2.5],[-2.0,4.0],[-2.0,-4.0],[-1.0,6.5]];
+  let k=0;
+  const defenders=onCourt(1-shooter.team),mates=onCourt(shooter.team).filter(p=>p!==shooter);
+  const order=[...defenders.slice(0,2),...mates.slice(0,2),...defenders.slice(2,3),...mates.slice(2,3),...defenders.slice(3),...mates.slice(3)];
+  for(const p of order){const [u,v]=lane[k++%lane.length];p.x=s*(court.rimX-u-0.4);p.z=v;p.vx=p.vz=0;resetAct(p);p.face=Math.atan2(s*court.rimX-p.x,-p.z);}
+  S.ball.x=shooter.x;S.ball.z=shooter.z;S.ball.y=1.0;
+  maybeSubstitute(true);
+  setControlled(shooter.team===S.userTeam?shooter:byId(S.controlled));
+  emit({type:'freeThrows',playerId:shooter.id,count});
+ }
+
+ function endQuarter(){
+  emit({type:'quarterEnd',quarter:S.quarter,score:[team(0).score,team(1).score]});
+  const regulation=4;
+  if(S.quarter>=regulation&&team(0).score!==team(1).score){finish();return;}
+  S.quarter++;
+  if(S.quarter>regulation)S.overtime++;
+  S.clock=S.quarter>regulation?prof.overtimeSeconds:prof.quarterSeconds;
+  for(const t of S.teams)t.fouls=0,t.bonus=false;
+  if(S.quarter===3){S.dir=[-1,1];}
+  for(const t of S.teams)for(const p of t.roster)p.energy=Math.min(1,p.energy+C.fatigue.breakRecover);
+  S.phase='break';S.phaseT=0;
+  maybeSubstitute(true);
+  const breakTime=C.timing.quarterBreak;
+  S.pending={next:()=>{
+   if(S.quarter===1||S.quarter>4&&S.quarter===5){startJumpBall();return;}
+   // possession arrow alternates for the start of quarters 2-4
+   const t=S.arrow;S.arrow=1-S.arrow;const s=side(t);startInbound(t,{x:-s*0.4,z:-(court.hz+0.4)},'quarter');
+  },delay:breakTime};
+ }
+
+ function finish(){
+  S.phase='final';S.phaseT=0;
+  const sc=[team(0).score,team(1).score],won=sc[S.userTeam]>sc[1-S.userTeam];
+  const box=S.teams.map(t=>t.roster.map(p=>({id:p.id,name:p.name,number:p.number,pos:p.pos,...p.stats,sec:Math.round(p.stats.sec)})));
+  const mvp=[...box[S.userTeam]].sort((a,b)=>(b.pts+b.reb+b.ast*1.5+b.stl*2+b.blk*2)-(a.pts+a.reb+a.ast*1.5+a.stl*2+a.blk*2))[0];
+  S.result={won,score:sc,userTeam:S.userTeam,quarters:S.quarter,overtime:S.overtime,profile,box,mvp:mvp?.id||null,seed:S.seed,
+   teams:S.teams.map(t=>t.id),energy:S.teams.map(t=>t.roster.map(p=>({id:p.id,energy:+p.energy.toFixed(3)})))};
+  emit({type:'final',score:sc,won});
+ }
+
+ // ---------- fouls & violations ----------
+ function stopClockFor(reason){S.stoppage=reason;}
+
+ function foul(offender,victim,kind,shooting){
+  offender.fouls++;offender.stats.pf++;
+  const ot=team(offender.team);
+  const isDefensive=offender.team!==S.possession||kind==='shooting'||kind==='block';
+  if(kind!=='offensive')ot.fouls++;
+  const bonus=ot.fouls>=R.teamFoulBonus;
+  S.lastFoul={offender:offender.id,victim:victim?.id,kind,team:offender.team};
+  emit({type:'foul',playerId:offender.id,victimId:victim?.id||null,kind,personal:offender.fouls,teamFouls:ot.fouls,bonus});
+  if(offender.fouls>=R.personalFoulLimit)emit({type:'foulOut',playerId:offender.id});
+  if(kind==='offensive'){
+   const t=1-offender.team,s=side(t);
+   const h=holder();if(h)h.stats.tov++;
+   deadBall(()=>startInbound(t,sidelineSpot(offender.x,t),'turnover'),C.timing.afterFoul);return;
+  }
+  if(shooting){deadBall(()=>startFreeThrows(victim,shooting.count,shooting.andOne),C.timing.afterFoul);return;}
+  if(bonus){deadBall(()=>startFreeThrows(victim,2,false),C.timing.afterFoul);return;}
+  const t=victim?victim.team:1-offender.team;
+  const spot=sidelineSpot(victim?victim.x:offender.x,t);
+  const s=side(t);
+  const reason=court.frontcourt(s,spot.x)&&S.shotClock<R.shotClockReset?'side-14':'keep';
+  deadBall(()=>startInbound(t,spot,reason),C.timing.afterFoul);
+ }
+
+ function sidelineSpot(x,t){
+  const s=side(t),lim=court.hx-1.5,sx=clamp(x,-lim,lim);
+  return {x:sx,z:(court.hz+0.4)*(sx*s>0?-1:1)*(S.tick%2?1:-1)};
+ }
+
+ function violation(kind,teamIdx,x){
+  const h=holder();if(h)h.stats.tov++;
+  S.lastViolation={kind,team:teamIdx};
+  emit({type:'violation',kind,team:teamIdx});
+  const t=1-teamIdx;
+  deadBall(()=>startInbound(t,kind==='shotclock'?{x:-side(t)*(court.hx+0.4),z:2}:sidelineSpot(x??0,t),'turnover'),C.timing.afterViolation);
+ }
+
+ // ---------- substitutions ----------
+ function maybeSubstitute(force){
+  for(const t of S.teams){
+   // the child's bench is the child's call, except a fouled-out player always leaves
+   const manual=t.index===S.userTeam&&!S.autoSubUser&&!force;
+   const court5=t.roster.filter(p=>p.onCourt);
+   for(const p of court5){
+    const fouledOut=p.fouls>=R.personalFoulLimit;
+    const tired=p.energy<C.fatigue.subBelow&&!manual;
+    if(!fouledOut&&!tired)continue;
+    const bench=t.roster.filter(q=>!q.onCourt&&q.fouls<R.personalFoulLimit&&q.energy>C.fatigue.readyAbove);
+    if(!bench.length)continue;
+    bench.sort((a,b)=>(b.pos===p.pos)-(a.pos===p.pos)||b.energy-a.energy);
+    const q=bench[0];
+    if(S.ball.owner===p.id&&S.phase!=='freethrow')continue;
+    if(S.ft&&S.ft.shooter===p.id)continue;
+    q.x=p.x;q.z=p.z;q.face=p.face;q.vx=q.vz=0;resetAct(q);p.onCourt=false;q.onCourt=true;resetAct(p);
+    t.lineup=t.lineup.map(id=>id===p.id?q.id:id);
+    if(S.controlled===p.id)S.controlled=q.team===S.userTeam?q.id:S.controlled;
+    if(S.inbound){if(S.inbound.inbounder===p.id)S.inbound.inbounder=q.id;if(S.inbound.receiver===p.id)S.inbound.receiver=q.id;}
+    emit({type:'sub',team:t.index,out:p.id,in:q.id,reason:fouledOut?'fouls':'fatigue'});
+   }
+  }
+ }
+
+ function substitute(teamIdx,outId,inId){
+  if(!['dead','inbound','break','timeout','freethrow'].includes(S.phase))return {ok:false,reason:'live'};
+  const t=team(teamIdx),p=byId(outId),q=byId(inId);
+  if(!p||!q||!p.onCourt||q.onCourt||p.team!==teamIdx||q.team!==teamIdx||q.fouls>=R.personalFoulLimit)return {ok:false,reason:'invalid'};
+  if(S.ball.owner===p.id&&S.phase!=='dead')return {ok:false,reason:'ball'};
+  q.x=p.x;q.z=p.z;q.face=p.face;resetAct(q);p.onCourt=false;q.onCourt=true;
+  t.lineup=t.lineup.map(id=>id===p.id?q.id:id);
+  if(S.controlled===p.id)S.controlled=q.id;
+  if(S.inbound){if(S.inbound.inbounder===p.id)S.inbound.inbounder=q.id;if(S.inbound.receiver===p.id)S.inbound.receiver=q.id;}
+  emit({type:'sub',team:teamIdx,out:p.id,in:q.id,reason:'manual'});
+  return {ok:true};
+ }
+
+ function timeout(teamIdx){
+  const t=team(teamIdx);
+  const ok=t.timeouts>0&&(['dead','inbound','break','freethrow'].includes(S.phase)||(S.phase==='live'&&S.possession===teamIdx&&S.ball.state==='held'));
+  if(!ok)return {ok:false};
+  t.timeouts--;
+  const resume=S.phase==='live'?(()=>{const h=holder();const spot=sidelineSpot(h?h.x:0,teamIdx);startInbound(teamIdx,spot,'keep');}):S.pending?.next||(()=>{});
+  S.phase='timeout';S.phaseT=0;S.pending={next:resume,delay:C.timing.timeout};
+  for(const tt of S.teams)for(const p of tt.roster)p.energy=Math.min(1,p.energy+C.fatigue.timeoutRecover);
+  emit({type:'timeout',team:teamIdx,left:t.timeouts});
+  maybeSubstitute(true);
+  return {ok:true};
+ }
+
+ // ---------- actions ----------
+ function startShot(p,human){
+  if(p.act||p.air>=0||S.ball.owner!==p.id||S.ball.state!=='held')return false;
+  const s=side(p.team),rim=court.rim(s),d=court.distToRim(s,p.x,p.z),speed=hyp(p.vx,p.vz);
+  const toRim={x:(rim.x-p.x)/Math.max(d,1e-3),z:(rim.z-p.z)/Math.max(d,1e-3)};
+  const driving=(p.vx*toRim.x+p.vz*toRim.z)>2.2;
+  let type='jumpshot';
+  if(d<C.shot.dunkRange&&driving&&p.r.dunk>=C.shot.dunkMinRating&&p.energy>C.shot.dunkEnergy)type='dunk';
+  else if(d<C.shot.layupRange&&(driving||d<1.6))type='layup';
+  else if(speed>1.6)type='pullup';
+  const meta=A[type==='dunk'?'layup':type];
+  p.act='shoot';p.actT=0;p.shot={type,human:!!human,held:!!human&&(type==='jumpshot'||type==='pullup'),releaseAt:meta.release*(type==='dunk'?0.92:1),duration:meta.duration,quality:null,released:false,
+   gatherX:p.x,gatherZ:p.z,toRim,drive:driving?Math.min(speed,C.shot.layupCarry):0,contact:null};
+  p.face=Math.atan2(toRim.x,toRim.z);
+  emit({type:'shotStart',playerId:p.id,shotType:type});
+  return true;
+ }
+
+ function releaseQuality(p){
+  const sh=p.shot;
+  if(sh.quality!=null)return sh.quality;
+  // AI: rating-based timing with difficulty noise; human without release = slightly late
+  if(!sh.human){const sk=eff(p,'release')*diff.aiTiming;return clamp(1-Math.abs(rand()-0.5)*(1.2-sk),0,1);}
+  // a child's layup or dunk is not timed: a sure hand, short of a perfect jump shot
+  return sh.held?0.35:0.8;
+ }
+
+ /** Shot meter zones, one rule for the meter, the grade and the chance:
+  * green around the ideal release, yellow on both sides of it, red beyond. */
+ function timingQuality(e){
+  const w=C.shot.window,g=w*(C.shot.green??0.35),y=w*(C.shot.yellow??0.8);
+  if(e<=g)return {quality:1,zone:'green'};
+  if(e<=y)return {quality:0.62-0.12*(e-g)/Math.max(1e-6,y-g),zone:'yellow'};
+  return {quality:clamp(0.35*(1-(e-y)/Math.max(1e-6,w-y)),0,0.35),zone:'red'};
+ }
+ function gradeRelease(p){
+  const sh=p.shot;if(!sh||sh.released||sh.quality!=null)return;
+  const t=p.actT,ideal=sh.releaseAt,{quality,zone}=timingQuality(Math.abs(t-ideal));
+  sh.quality=quality;sh.zone=zone;sh.early=t<ideal;
+  emit({type:'timing',playerId:p.id,quality:+quality.toFixed(3),zone,early:t<ideal});
+ }
+
+ function contestOf(p){
+  const s=side(p.team),rim=court.rim(s);let best=0,who=null;
+  for(const d of onCourt(1-p.team)){
+   const dd=dist(d,p);if(dd>3)continue;
+   // between shooter and rim?
+   const ax=rim.x-p.x,az=rim.z-p.z,al=hyp(ax,az)||1,dot=((d.x-p.x)*ax+(d.z-p.z)*az)/al;
+   const front=dot>-0.3?1:0.45;
+   const height=(d.r.height||200)/200,jump=d.air>=0?1.25:1;
+   const defense=eff(d,court.distToRim(s,p.x,p.z)<3.5?'interiorD':'perimD');
+   const c=clamp((1.8-dd)/1.5,0,1)*front*height*jump*(0.45+0.65*defense);
+   if(c>best){best=c;who=d;}
+  }
+  return {value:clamp(best,0,1),defender:who};
+ }
+
+ function makeChance(p,type,points,quality,contest){
+  const s=side(p.team),d=court.distToRim(s,p.x,p.z);
+  let skill;
+  if(type==='dunk')skill=eff(p,'dunk')*0.75+eff(p,'vertical')*0.15+eff(p,'strength')*0.1;
+  else if(type==='layup')skill=eff(p,'inside');
+  else if(type==='ft')skill=eff(p,'ft');
+  else if(points===3)skill=eff(p,'three');
+  else skill=d<4.5?(eff(p,'inside')*0.4+eff(p,'mid')*0.6):eff(p,'mid');
+  const base=type==='dunk'?0.93:type==='layup'?0.68:type==='ft'?0.74:points===3?0.38:clamp(0.62-0.035*d,0.4,0.58);
+  let pr=base*(0.35+0.9*skill);
+  if(type!=='ft'){pr*=1-C.shot.contestWeight*contest*(type==='dunk'?0.4:1);if(type==='pullup')pr*=C.shot.pullupFactor;}
+  // timing: perfect release adds, bad release removes (a human's skill matters most)
+  pr*=C.shot.timingBase+C.shot.timingWeight*quality;
+  pr+=S.assist*C.shot.assistBonus*(p.team===S.userTeam?1:0);
+  return clamp(pr,0.02,type==='dunk'?0.98:0.95);
+ }
+
+ function release(p){
+  const sh=p.shot,s=side(p.team),rim=court.rim(s);
+  const points=sh.type==='ft'?1:court.points(s,sh.gatherX,sh.gatherZ);
+  const quality=releaseQuality(p);sh.quality=quality;
+  const contest=sh.type==='ft'?{value:0,defender:null}:contestOf(p);
+  let pr=makeChance(p,sh.type,points,quality,contest.value);
+  if(sh.oop)pr=clamp(pr+(PL?.oopBonus??0.15),0.02,0.98);   // M3: a lob caught at the rim is the easiest finish there is
+  const make=rand()<pr;
+  const height=(p.r.height||200)/100;
+  const relY=sh.type==='dunk'?rim.y+0.45:sh.type==='layup'?Math.max(2.9,height+0.85+p.jumpH):height+0.55+p.jumpH;
+  const from={x:p.x+Math.sin(p.face)*0.3,y:relY,z:p.z+Math.cos(p.face)*0.3};
+  let target={x:rim.x,y:rim.y,z:rim.z},angle;
+  const dd=hyp(from.x-rim.x,from.z-rim.z);
+  if(make){
+   const e=C.shot.makeError*(1-quality*0.5);
+   target={x:rim.x+(rand()-0.5)*e,y:rim.y,z:rim.z+(rand()-0.5)*e};
+  } else {
+   // a believable miss: front rim, back rim, side, or off the glass
+   const k=rand(),off=0.2+rand()*0.16,ang=rand()*Math.PI*2;
+   const ux=(rim.x-from.x)/Math.max(dd,1e-3),uz=(rim.z-from.z)/Math.max(dd,1e-3);
+   if(k<0.35){target={x:rim.x-ux*off,y:rim.y,z:rim.z-uz*off};}            // short
+   else if(k<0.7){target={x:rim.x+ux*off,y:rim.y,z:rim.z+uz*off};}       // long
+   else {target={x:rim.x+Math.cos(ang)*off*0.7,y:rim.y,z:rim.z+Math.sin(ang)*off*1.1};}
+  }
+  angle=sh.type==='dunk'?20:sh.type==='layup'?58:sh.type==='ft'?52:clamp(48+dd*0.6,48,56);
+  const b=S.ball;
+  if(sh.type==='dunk'&&make){
+   b.x=rim.x+(p.x-rim.x)*0.15;b.z=rim.z+(p.z-rim.z)*0.15;b.y=rim.y+0.35;b.vx=0;b.vz=0;b.vy=-4.5;
+  } else {
+   const v=launch(from,{...target,y:target.y+0.02},angle,P.gravity);
+   b.x=from.x;b.y=from.y;b.z=from.z;b.vx=v.vx;b.vy=v.vy;b.vz=v.vz;
+  }
+  b.state='shot';b.owner=null;b.touchedRim=false;b.lastTouch=p.team;
+  const id=S.nextShotId++;
+  b.shot={id,shooter:p.id,team:p.team,points,type:sh.type,intended:make,pr,quality,contest:contest.value,side:s,blocked:false,scored:false,clockAtRelease:S.clock,gameOver:false,foul:sh.contact,oop:sh.oop||null};
+  sh.released=true;
+  if(sh.type!=='ft'){p.stats.fga++;if(points===3)p.stats.tpa++;}else p.stats.fta++;
+  S.shotClockOn=false;
+  emit({type:'release',playerId:p.id,shotId:id,shotType:sh.type,points,quality:+quality.toFixed(3),chance:+pr.toFixed(3),contest:+contest.value.toFixed(3),x:+p.x.toFixed(2),z:+p.z.toFixed(2),oop:!!sh.oop});
+  S.replayMark={tick:S.tick,shotId:id};
+ }
+
+ /** Short pass (default): the nearest open mate in the stick's direction. Long pass: the open
+  * man far away. A defender standing in the passing lane counts against a target. */
+ function choosePassTarget(p,dir,long){
+  const mates=onCourt(p.team).filter(q=>q!==p),opp=onCourt(1-p.team);
+  let best=null,bs=-1e9;
+  for(const q of mates){
+   const dx=q.x-p.x,dz=q.z-p.z,dd=hyp(dx,dz)||1;
+   let score=long?dd*C.pass.longWeight:-dd*C.pass.shortWeight;
+   if(dir&&(dir.x||dir.z)){const dl=hyp(dir.x,dir.z)||1;score+=((dx*dir.x+dz*dir.z)/(dd*dl))*C.pass.dirWeight;}
+   const open=Math.min(...opp.map(o=>dist(o,q)));score+=Math.min(open,3)*(long?0.6:0.35);
+   // M3: a held pass button while a mate cuts to the rim means the lob to him, not the far man
+   if(long&&oopEligible(q))score+=PL.oopTargetBonus??2.5;
+   for(const o of opp){
+    const t=((o.x-p.x)*dx+(o.z-p.z)*dz)/(dd*dd);if(t<=0.05||t>=0.95)continue;
+    if(hyp(p.x+dx*t-o.x,p.z+dz*t-o.z)<C.pass.laneRadius)score-=C.pass.lanePenalty*(long?0.5:1);
+   }
+   if(score>bs){bs=score;best=q;}
+  }
+  return best;
+ }
+
+ function startPass(p,target,kind,human){
+  if(p.act||S.ball.owner!==p.id||S.ball.state!=='held'||!target)return false;
+  const far=dist(p,target);
+  if(kind==='overhead')kind='lob';
+  // chosen by the situation when the player did not ask for a kind: far = overhead lob, a defender
+  // right on the passer = jump pass over him, otherwise a chest pass
+  const pressed=onCourt(1-p.team).some(o=>dist(o,p)<(C.pass.jumpPressure??1.7)&&Math.abs(Math.atan2(o.x-p.x,o.z-p.z)-Math.atan2(target.x-p.x,target.z-p.z))<1.6);
+  let chosen,oop=false;
+  if(PL){
+   // M3: legible kinds. Tap = chest, the jump pass over a defender right on the passer (v11), or a bounce pass
+   // under the arm of a defender deeper in the lane; hold = overhead lob to a far man or the alley-oop lob to
+   // a mate cutting to the rim; 'bounce'/'lob' when asked for.
+   oop=(kind==='long'||kind==='lob')&&oopEligible(target);
+   const lane=passLaneBlocked(p,target,onCourt(1-p.team),C.pass.laneRadius);
+   chosen=oop?'lob':kind==='long'?(far>(PL.lobFar??7)?'lob':lane&&!pressed?'bounce':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':lane&&far<9?'bounce':'chest');
+  } else chosen=kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':'chest');
+  p.act='pass';p.actT=0;p.act2={target:target.id,kind:chosen,oop,human:!!human};
+  p.face=Math.atan2(target.x-p.x,target.z-p.z);
+  if(chosen==='jump'&&!startJump(p,'pass'))p.act2.kind='chest';
+  emit({type:'passStart',playerId:p.id,targetId:target.id,kind:p.act2.kind,oop});
+  return true;
+ }
+
+ /** Release height and catch height per pass kind: chest from the chest, bounce from the waist into the
+  * floor, overhead from above the head into the receiver's hands high, jump pass from the top of a hop. */
+ const PASS_SHAPE={chest:{y0:1.3,y1:1.3},bounce:{y0:0.95,y1:1.05},lob:{y0:2.1,y1:1.9},jump:{y0:1.85,y1:1.45}};
+ /** Is the passer's body turned to the receiver (within `tol` rad)? The ball is not thrown before that. */
+ function passFacing(p,tol=0.32){
+  const q=byId(p.act2?.target);if(!q)return true;
+  const d=((Math.atan2(q.x-p.x,q.z-p.z)-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;return Math.abs(d)<=tol;
+ }
+
+ function throwPass(p){
+  const q=byId(p.act2.target);if(!q||!q.onCourt){p.act=null;return;}
+  const kind=p.act2.kind,shape=PASS_SHAPE[kind]||PASS_SHAPE.chest,passSkill=eff(p,'pass'),baseSpeed=kind==='lob'?C.pass.lobSpeed:kind==='bounce'?C.pass.bounceSpeed:kind==='jump'?C.pass.speed*1.08:C.pass.speed,speed=baseSpeed*(0.78+0.3*passSkill);
+  const lead=0.35;
+  const distance=hyp(q.x-p.x,q.z-p.z),error=(1-passSkill)*Math.min(1.8,0.15+distance*0.12);
+  // M3 alley-oop: the lob is thrown above the receiver's reach to where his run meets the rim area; the
+  // cutter is re-checked now (a defender may have closed), otherwise it is an ordinary overhead pass
+  const oop=!!p.act2.oop&&oopEligible(q);
+  const to={x:q.x+q.vx*lead+(rand()-.5)*error,y:shape.y1,z:q.z+q.vz*lead+(rand()-.5)*error};
+  if(oop){const rim=court.rim(side(q.team)),t=0.55,mx=q.x+q.vx*t,mz=q.z+q.vz*t,dm=hyp(rim.x-mx,rim.z-mz);const k=dm>1.4?(dm-1.4)/dm:0;to.x=mx+(rim.x-mx)*k+(rand()-.5)*error*0.5;to.z=mz+(rim.z-mz)*k+(rand()-.5)*error*0.5;to.y=PL.oopCatchHeight??2.75;}
+  const from={x:p.x+Math.sin(p.face)*0.35,y:shape.y0+(kind==='jump'?p.jumpH:0),z:p.z+Math.cos(p.face)*0.35};
+  const d=hyp(to.x-from.x,to.z-from.z),time=Math.max(0.22,d/speed)+(kind==='lob'?(oop?0.25:0.4):0);
+  const v=passVelocity(from,to,time,P.gravity);
+  const b=S.ball;b.x=from.x;b.y=from.y;b.z=from.z;b.vx=v.vx;b.vy=v.vy;b.vz=v.vz;b.state='pass';b.owner=null;b.lastTouch=p.team;
+  b.pass={from:p.id,to:q.id,t:0,time,kind,target:to,checked:new Set(),bounced:false,bounceVy:0,oop,human:!!p.act2.human};
+  if(kind==='bounce'){
+   // lands on the floor 58% of the way (constant horizontal speed) and comes up to the receiver's waist
+   const t1=time*0.58,t2=time-t1,g=P.gravity;
+   b.vy=(court.ballR-from.y)/t1+0.5*g*t1;b.pass.bounceVy=(to.y-court.ballR)/t2+0.5*g*t2;
+  }
+  q.intent.catchAt={x:to.x,z:to.z};
+  emit({type:'pass',playerId:p.id,targetId:q.id,kind,oop,human:!!p.act2.human,precision:+passSkill.toFixed(3),speed:+speed.toFixed(2)});
+ }
+
+ /** M3 alley-oop finish: the receiver leaves the floor to meet the lob and finishes as a dunk (rating, energy and
+  * within play.oopDunkRadius of the rim) or a layup. actT starts at the clip's takeoff so the authored dunk/layup
+  * motion lines up with the engine's jump; the ball is caught in the air (no gather, no dribble) and released at
+  * the clip's release. The lob leads by OOP_LEAD s so the ball arrives at the top of the jump. */
+ const OOP_LEAD=0.40;
+ function startOopFinish(q,ps){
+  const s=side(q.team),rim=court.rim(s),dm=court.distToRim(s,ps.target.x,ps.target.z);
+  const type=dm<(PL.oopDunkRadius??1.6)&&q.r.dunk>=C.shot.dunkMinRating&&q.energy>C.shot.dunkEnergy?'dunk':'layup';
+  const meta=A.layup,releaseAt=meta.release*(type==='dunk'?0.92:1),takeoff=releaseAt-0.32-0.12;
+  const dd=court.distToRim(s,q.x,q.z)||1,toRim={x:(rim.x-q.x)/dd,z:(rim.z-q.z)/dd};
+  q.act='shoot';q.actT=takeoff;q.dead=false;q.jumpQueue=null;
+  q.shot={type,human:false,held:false,releaseAt,duration:meta.duration,quality:null,released:false,gatherX:q.x,gatherZ:q.z,toRim,drive:clamp(q.vx*toRim.x+q.vz*toRim.z,0,C.shot.layupCarry),contact:null,oop:{from:ps.from}};
+  q.air=0;q.airDur=C.jump.shotAir*(type==='dunk'?1.35:1.2);q.jumpMax=type==='dunk'?0.8:0.6;q.jumpH=0;q.cd.jump=C.jump.cooldown;
+  q.face=Math.atan2(toRim.x,toRim.z);
+  emit({type:'shotStart',playerId:q.id,shotType:type,oop:true});
+ }
+
+ function startJump(p,kind){
+  if(p.air>=0||p.act==='shoot'||p.cd.jump>0)return false;
+  const v=eff(p,'vertical');
+  p.air=0;p.airDur=C.jump.duration*(0.85+0.3*v);p.jumpH=0;p.jumpMax=C.jump.height*(0.6+0.6*v);p.act=p.act||kind;p.actT=0;p.jumpKind=kind;
+  p.cd.jump=C.jump.cooldown;
+  emit({type:'jump',playerId:p.id,kind});
+  return true;
+ }
+
+ function startSteal(p){
+  if(S.phase!=='live'||p.act||p.cd.steal>0||p.air>=0)return false;
+  // A previous pass stores a target in act2. It must not suppress this reach.
+  p.act='steal';p.actT=0;p.act2=null;p.cd.steal=C.steal.cooldown;
+  emit({type:'stealTry',playerId:p.id});
+  return true;
+ }
+
+ function resolveSteal(p){
+  const h=holder();
+  if(!h||h.team===p.team){emit({type:'stealMiss',playerId:p.id,reason:'no-handler'});return;}
+  const d=dist(p,h);
+  if(d>C.steal.range){emit({type:'stealMiss',playerId:p.id,reason:'range',distance:+d.toFixed(2),range:C.steal.range});return;}
+  const length=Math.max(d,1e-4);
+  const toP={x:(p.x-h.x)/length,z:(p.z-h.z)/length},hf={x:Math.sin(h.face),z:Math.cos(h.face)};
+  const frontal=toP.x*hf.x+toP.z*hf.z;            // defender in front of the handler
+  let chance=C.steal.base*(0.5+eff(p,'steal'))*(1.25-eff(h,'handle'))*(h.act==='shoot'?1.4:1);
+  chance*=frontal>-0.2?1:0.55;
+  if(h.act==='cross'||h.act==='spin')chance*=0.4;
+  if(rand()<chance){
+   p.stats.stl++;h.stats.tov++;
+   emit({type:'steal',playerId:p.id,fromId:h.id});
+   const b=S.ball;b.x=h.x+toP.x*0.4;b.z=h.z+toP.z*0.4;b.y=0.9;
+   ballLoose(toP.x*2.2+(rand()-0.5),1.2,toP.z*2.2+(rand()-0.5),p.team);
+   h.stumble=0.25;return;
+  }
+  const foulChance=C.steal.foulBase*(frontal<-0.2?1.6:1)*(1.3-eff(p,'steal'))*(d<0.75?1.3:1)*(p.team===S.userTeam?C.contact.userScale:1);
+  if(rand()<foulChance)foul(p,h,'reach',null);
+  else emit({type:'stealMiss',playerId:p.id,reason:'protected',distance:+d.toFixed(2),range:C.steal.range});
+ }
+
+ /** Explicit switching follows the opponent's handler, or the airborne/loose ball.
+  * Excluding the selected player makes the button useful even when he is closest. */
+ function switchPlayer(p){
+  const h=holder(),target=h&&h.team!==p.team?h:S.ball;
+  const next=nearestTo(onCourt(p.team),target,p);
+  if(!next)return false;
+  setControlled(next);return true;
+ }
+
+ /** Ends the dribble: the ball is held in two hands. No second dribble; moving is counted in steps. */
+ function gatherBall(p){
+  if(p.dead||S.ball.owner!==p.id||S.ball.state!=='held')return false;
+  p.dead=true;p.stepDist=0;p.steps=0;emit({type:'gather',playerId:p.id});return true;
+ }
+ /** A second dribble after the dribble ended is a violation (double dribble). */
+ function attemptDribble(p){
+  if(!p.dead||S.phase!=='live'||S.ball.owner!==p.id||S.ball.state!=='held')return false;
+  violation('doubleDribble',p.team,p.x);return true;
+ }
+ function startMove(p,kind){
+  if(p.dead)return false;
+  if(S.phase!=='live'||p.act||p.air>=0||p.stumble>0||p.cd.move>0||p.energy<=HOOPS_SPRINT_MIN_ENERGY||S.ball.state!=='held'||S.ball.owner!==p.id)return false;
+  const spin=kind==='spin'||kind!=='cross'&&hyp(p.vx,p.vz)>3&&p.r.handle>70&&(S.tick%3===0);
+  const d=nearestTo(onCourt(1-p.team),p),speed=hyp(p.vx,p.vz),moving=hyp(p.intent.x,p.intent.z);
+  const dx=speed>0.5?p.vx/speed:moving>0.1?p.intent.x/moving:Math.sin(p.face),dz=speed>0.5?p.vz/speed:moving>0.1?p.intent.z/moving:Math.cos(p.face);
+  // The useful window is the defender's committed reach, or a wrong-footed run.
+  const reach=d?.act==='steal'?1-clamp(Math.abs(d.actT-C.steal.reachAt)/0.18,0,1):0;
+  const wrongFoot=d?clamp((-d.vx*dz+d.vz*dx)*(p.moveSide||1)/3,0,1):0;
+  p.move={targetId:d&&dist(p,d)<=HOOPS_ATTACK.moveRange?d.id:null,checked:false,timing:Math.max(reach,wrongFoot),dx,dz,speed:clamp(speed/C.player.speed,0.3,1),side:p.moveSide||1,grade:null};
+  p.moveSide=-p.move.side;
+  p.act=spin?'spin':'cross';p.actT=0;p.act2=null;p.cd.move=C.move.cooldown;
+  p.energy=Math.max(0,p.energy-(spin?HOOPS_ATTACK.spinCost:HOOPS_ATTACK.moveCost));
+  emit({type:'move',playerId:p.id,kind:p.act});
+  return true;
+ }
+
+ function resolveMove(p){
+  const move=p.move;if(!move||move.checked)return;move.checked=true;
+  const d=byId(move.targetId);
+  if(!d||!d.onCourt||dist(p,d)>HOOPS_ATTACK.moveRange||S.ball.owner!==p.id||S.ball.state!=='held'){
+   move.grade='space';emit({type:'moveResult',playerId:p.id,kind:p.act,success:false,reason:'space'});return;
+  }
+  const chance=clamp(0.24+eff(p,'handle')*0.46-eff(d,'perimD')*0.3+move.timing*0.38+p.energy*0.06,0.08,0.92);
+  const success=rand()<chance;move.grade=success?'beat':'held';
+  if(success){d.stumble=Math.max(d.stumble,p.act==='spin'?HOOPS_ATTACK.spinStun:HOOPS_ATTACK.moveStun);d.vx*=0.4;d.vz*=0.4;}
+  else p.stumble=Math.max(p.stumble,HOOPS_ATTACK.moveRecovery);
+  emit({type:'moveResult',playerId:p.id,targetId:d.id,kind:p.act,success,timed:move.timing>=0.5});
+ }
+
+ function startFake(p){
+  if(S.phase!=='live'||p.act||p.air>=0||p.cd.fake>0||p.energy<=HOOPS_SPRINT_MIN_ENERGY||S.ball.owner!==p.id||S.ball.state!=='held')return false;
+  const d=nearestTo(onCourt(1-p.team),p),distance=d?dist(p,d):Infinity;
+  const closing=d?clamp((d.vx*(p.x-d.x)+d.vz*(p.z-d.z))/Math.max(0.01,distance)/3,0,1):0;
+  p.fake={targetId:d&&distance<=HOOPS_ATTACK.fakeRange?d.id:null,closing,checked:false};
+  p.act='fake';p.actT=0;p.act2=null;p.cd.fake=HOOPS_ATTACK.fakeCooldown;p.energy=Math.max(0,p.energy-HOOPS_ATTACK.fakeCost);
+  emit({type:'fake',playerId:p.id});gatherBall(p);return true;
+ }
+
+ function resolveFake(p){
+  const fake=p.fake;if(!fake||fake.checked)return;fake.checked=true;
+  const d=byId(fake.targetId);
+  const eligible=d&&d.onCourt&&dist(p,d)<=HOOPS_ATTACK.fakeRange&&d.air<0&&!d.act;
+  const chance=eligible?clamp(0.12+eff(p,'release')*0.35-eff(d,'perimD')*0.2+fake.closing*0.25,0.05,0.85):0;
+  const success=!!eligible&&rand()<chance&&startJump(d,'block');
+  emit({type:'fakeResult',playerId:p.id,targetId:d?.id??null,success});
+ }
+
+ // ---------- per-tick ----------
+ /** The child's jump. A block is a straight-up jump (no lunge into the shooter, so no foul for
+  * verticality). A rebound jump far from the ball first runs there and jumps on arrival. */
+ function humanJump(p,kind){
+  const b=S.ball;
+  if(kind==='rebound'&&(b.state==='shot'||b.state==='loose')){
+   const land=reboundSpot(b),d=hyp(land.x-p.x,land.z-p.z);
+   if(d>C.jump.queueReach&&p.air<0){p.jumpQueue={until:S.tick+Math.round(C.jump.queueSeconds/HOOPS_DT)};return;}
+   if(startJump(p,kind)&&d>0.2){const l=C.jump.reboundLunge*Math.min(1,d/1.5);p.vx=(land.x-p.x)/d*l;p.vz=(land.z-p.z)/d*l;}
+   return;
+  }
+  const h=holder();
+  if(startJump(p,kind)&&h&&h.team!==p.team){p.face=Math.atan2(h.x-p.x,h.z-p.z);p.vx*=0.35;p.vz*=0.35;}
+ }
+ function followJumpQueue(p,ml){
+  const b=S.ball;
+  if(S.tick>p.jumpQueue.until||p.air>=0||!(b.state==='shot'||b.state==='loose')){p.jumpQueue=null;return;}
+  const land=reboundSpot(b),d=hyp(land.x-p.x,land.z-p.z);
+  if(ml<0.05&&d>0.3){p.intent.x=(land.x-p.x)/d;p.intent.z=(land.z-p.z)/d;p.intent.speed=1;p.intent.sprint=true;}
+  if(d<=C.jump.queueReach&&(b.state==='loose'||b.vy<0)){p.jumpQueue=null;humanJump(p,'rebound');}
+ }
+
+ /** Defence help for the child: with the stick released his player guards his man (between the
+  * man and the basket, closer on the ball), sprinting back in transition; while he steers, the
+  * player keeps facing the ball handler so he slides instead of turning his back. */
+ function defendAssist(p,ml,sprintRequested=false){
+  const h=holder();if(!h)return;
+  // steering on defence: face the ball handler only when close to him (a real defensive stance);
+  // further away the player turns and runs where the stick points instead of side-shuffling
+  if(ml>=0.05){if(dist(p,h)<3.5)p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);return;}
+  const T=team(p.team),o=byId(T.ai?.assign?.[p.id])||h,rim=court.rim(side(o.team));
+  const onBall=o.id===h.id,gap=onBall?C.player.assistGapBall??1.0:C.player.assistGapOff??1.8;
+  const k=Math.min(gap/Math.max(0.6,dist(o,rim)),0.85),pt={x:o.x+(rim.x-o.x)*k,z:o.z+(rim.z-o.z)*k};
+  const dx=pt.x-p.x,dz=pt.z-p.z,d=hyp(dx,dz);
+  if(d>0.25){p.intent.x=dx/d;p.intent.z=dz/d;p.intent.speed=clamp(d/1.2,0.3,1);p.intent.sprint=!!sprintRequested;}
+  p.intent.face=Math.atan2(h.x-p.x,h.z-p.z);
+ }
+
+ function humanInput(p,inp){
+  const m=inp.move||{x:0,z:0},ml=hyp(m.x,m.z);
+  // unit direction x tilt: speed follows the stick linearly (the old m/max(1,ml) x ml squared a half tilt to 25% speed)
+  p.intent.x=ml>0.05?m.x/ml:0;p.intent.z=ml>0.05?m.z/ml:0;p.intent.speed=Math.min(1,ml);
+  p.intent.sprint=!!inp.sprint;p.intent.face=null;
+  const offense=S.possession===p.team&&S.ball.state!=='loose';
+  const hasBall=S.ball.owner===p.id&&S.ball.state==='held';
+  // triple threat: with the ball and the stick released in the frontcourt the player squares up to
+  // the basket, so a shot or a drive starts facing it instead of snapping round on release
+  if(hasBall&&ml<0.05&&!p.act&&court.frontcourt(side(p.team),p.x)){const rim=court.rim(side(p.team));p.intent.face=Math.atan2(rim.x-p.x,rim.z-p.z);}
+  if(inp.shootCancel&&p.act==='shoot'&&p.shot?.held&&!p.shot.released){p.act=null;p.shot=null;emit({type:'shotCancel',playerId:p.id});}
+  if(hasBall){
+   p.jumpQueue=null;
+   if(inp.fakePress)startFake(p);
+   else if(inp.shootDown&&!inp.shootCancel)startShot(p,true);
+   // Input buffer: a pass pressed while a move or fake is finishing is kept for C.player.bufferTicks
+   // steps (about 100 ms) and thrown the moment the player is free, instead of being swallowed.
+   const BUF=C.player.bufferTicks??6;
+   if(p.buf&&(S.tick>p.buf.until||p.buf.kind!=='pass'))p.buf=null;
+   if(inp.passPress){
+    const dir=inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null);
+    // M3: the second tap of a double tap, while the first pass is still in the wind-up, turns it into a bounce pass
+    if(PL&&inp.passDouble&&p.act==='pass'&&p.act2&&!p.act2.oop&&p.act2.kind!=='jump'&&p.act2.kind!=='lob'){if(p.act2.kind!=='bounce'){p.act2.kind='bounce';emit({type:'passKind',playerId:p.id,kind:'bounce'});}}
+    else if(startPass(p,choosePassTarget(p,dir,!!inp.passLong),inp.passLong?'long':(PL&&inp.passDouble?'bounce':null),true))p.buf=null;
+    else if(p.act&&p.act!=='shoot'&&p.act!=='pass')p.buf={kind:'pass',until:S.tick+BUF,dir,long:!!inp.passLong};
+   }else if(p.buf&&!p.act&&startPass(p,choosePassTarget(p,p.buf.dir,p.buf.long),p.buf.long?'long':null,true))p.buf=null;
+   if(inp.spinPress||inp.movePress||inp.altPress){if(p.dead)attemptDribble(p);else startMove(p,inp.spinPress?'spin':'cross');}
+  } else if(!offense||S.ball.state==='loose'||S.ball.state==='shot'){
+   if(inp.shootDown)humanJump(p,S.ball.state==='shot'||S.ball.state==='loose'?'rebound':'block');
+   if(inp.passPress)startSteal(p);
+  } else {
+   // off-ball offense: pass button asks for the ball; shoot button near the rim asks for the alley-oop lob
+   // (M3: the handler AI throws it when the line is open, and the engine times the jump), elsewhere it jumps
+   if(inp.passPress){const h=holder();if(h&&h.team===p.team&&h.id!==p.id)h.intent.wantPass=p.id;}
+   if(inp.shootDown){const h=holder();if(PL&&h&&h.team===p.team&&h.id!==p.id&&oopEligible(p)){h.intent.wantOop={id:p.id,until:S.tick+60};emit({type:'oopCall',playerId:p.id});}else humanJump(p,'rebound');}
+  }
+  if(p.jumpQueue)followJumpQueue(p,ml);
+  if(!hasBall&&S.ball.state==='held'&&S.possession!==p.team&&C.player.defenseAssist)defendAssist(p,ml,!!inp.sprint);
+  if(p.act==='shoot'&&p.shot&&p.shot.held&&inp.shootUp)gradeRelease(p);
+  if((inp.switchPress||inp.altPress)&&!hasBall){
+   switchPlayer(p);
+  }
+  if(inp.timeoutPress)timeout(p.team);
+  if(inp.call==='defense'){const t=team(p.team);t.tactics.defense=t.tactics.defense==='zone'?'man':'zone';emit({type:'tactics',team:p.team,defense:t.tactics.defense});}
+  else if(inp.call){team(p.team).call=inp.call;team(p.team).callT=0;team(p.team).tactics.offense=inp.call;emit({type:'playCall',team:p.team,play:inp.call});}
+ }
+
+ let travelCall=null;
+ function movePlayers(dt){
+  travelCall=null;
+  for(const p of all()){
+   const it=p.intent;let tx=it.x*it.speed,tz=it.z*it.speed;
+   // Charge the sprint multiplier only while it can actually accelerate a moving
+   // player. Holding sprint at rest or with an empty reserve is not extra drain.
+   // v4: a short sprint reserve on top of match energy. It only drains while the button is
+   // held and the player really moves (about 3.5 s full to empty), waits about a second after
+   // the sprint stops, then refills slowly (about 6 s); once emptied it stays locked until it
+   // is back to 30%, so a tap cannot give a burst from an empty tank.
+   const B=C.sprintReserve||SPRINT_RESERVE;
+   p.sprinting=!!it.sprint&&it.speed>0.05&&p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot'&&p.boost>0&&!p.boostLock;
+   if(p.sprinting){p.boost=Math.max(0,p.boost-dt/B.drain);p.boostRest=0;if(p.boost<=1e-6){p.boost=0;p.boostLock=true;}}
+   else{p.boostRest+=dt;if(p.boostRest>=B.delay)p.boost=Math.min(1,p.boost+dt/B.refill);if(p.boostLock&&p.boost>=B.unlock)p.boostLock=false;}
+   const maxS=speedCap(p,p.sprinting);
+   if(p.act==='shoot'){
+    const sh=p.shot;
+    if(sh.type==='layup'||sh.type==='dunk'){const near=court.distToRim(side(p.team),p.x,p.z);const k=(p.actT<sh.releaseAt?1:0.4)*clamp((near-0.9)/0.8,0,1);tx=sh.toRim.x*sh.drive*k/maxS;tz=sh.toRim.z*sh.drive*k/maxS;}
+    else{tx=0;tz=0;}
+   }
+   if(p.act==='pass'||p.act==='steal'){tx*=0.5;tz*=0.5;}
+   if(p.act==='fake'){tx=0;tz=0;}
+   if(p.stumble>0){tx*=0.2;tz*=0.2;}
+   const airborne=p.air>=0&&p.act!=='shoot',user=p.id===S.controlled&&!S.autopilot;
+   let wantVx=tx*maxS,wantVz=tz*maxS;
+   if((p.act==='cross'||p.act==='spin')&&p.move){const burst=C.move.burst*(p.act==='spin'?1.1:1),m=p.move,k=m.speed*(p.actT<0.3?0.7:1.15);wantVx=m.dx*maxS*burst*k;wantVz=m.dz*maxS*burst*k;if(p.actT<0.3&&p.act==='cross'){wantVx-=m.dz*1.8*m.side;wantVz+=m.dx*1.8*m.side;}}
+   if(airborne){
+    // in the air the body keeps its run-up and steers only a little
+    const k=Math.min(1,C.jump.airDrag*dt),ac=C.jump.airControl;p.vx+=(wantVx*ac-p.vx)*k;p.vz+=(wantVz*ac-p.vz)*k;
+   } else {
+    let acc=(hyp(wantVx,wantVz)>hyp(p.vx,p.vz)?C.player.accel:C.player.decel)*(0.75+0.35*eff(p,'speed'))*(user?C.player.userAccel:1);
+    if(user){
+     // Response for the child's player only (the AI keeps its own curve): a standing player leaves at
+     // userKick m/s on the very first step (first visible motion in one step instead of three), and a
+     // stick pushed against the run direction brakes userBrake times harder (a turn took 18 steps).
+     const wl=hyp(wantVx,wantVz),sp0=hyp(p.vx,p.vz);
+     if(wl>0.3){
+      if(sp0<(C.player.userKickBelow??0.4)){const k=Math.min(wl,C.player.userKick??1.1)/wl;p.vx=wantVx*k;p.vz=wantVz*k;}
+      else if(p.vx*wantVx+p.vz*wantVz<0)acc*=C.player.userBrake??1.5;
+     }
+    }
+    const dvx=wantVx-p.vx,dvz=wantVz-p.vz,dl=hyp(dvx,dvz),step=acc*dt;
+    if(dl<=step){p.vx=wantVx;p.vz=wantVz;}else{p.vx+=dvx/dl*step;p.vz+=dvz/dl*step;}
+   }
+   p.x+=p.vx*dt;p.z+=p.vz*dt;
+   if(p.dead&&S.ball.owner===p.id&&S.ball.state==='held'&&S.phase==='live'&&p.act!=='shoot'&&p.act!=='pass'&&p.air<0){
+    p.stepDist+=hyp(p.vx,p.vz)*dt;const n=Math.floor(p.stepDist/(R.stepLength??0.75));
+    if(n>p.steps){p.steps=n;emit({type:'step',playerId:p.id,n,max:R.freeSteps??2});if(n>(R.freeSteps??2))travelCall=p;}
+   }
+   // facing: towards movement, or the intent's facing (defence faces the man / ball)
+   const sp=hyp(p.vx,p.vz);
+   let fx=null;
+   let turnFast=false;
+   if(p.act==='pass'&&p.act2){const pq=byId(p.act2.target);if(pq){fx=Math.atan2(pq.x-p.x,pq.z-p.z);turnFast=true;}}
+   else if(it.face!=null&&p.act!=='shoot')fx=it.face;
+   else if(sp>0.6&&p.act!=='shoot')fx=Math.atan2(p.vx,p.vz);
+   if(fx!=null){const tr=turnFast?Math.max(14,C.player.turnRate):user?C.player.userTurn:C.player.turnRate;let d=((fx-p.face+Math.PI*3)%(Math.PI*2))-Math.PI;p.face+=clamp(d,-tr*dt,tr*dt);}
+   // fatigue
+   const load=(sp/C.player.speed)**2*(p.sprinting?C.fatigue.sprint:1);
+   const endurance=0.65+0.7*eff(p,'stamina');
+   p.energy=clamp(p.energy-(C.fatigue.drain*load/endurance-C.fatigue.recover*endurance*(1-Math.min(1,sp/2)))*dt,0,1);
+   p.stats.sec+=dt;
+   if(p.stumble>0)p.stumble=Math.max(0,p.stumble-dt);
+   for(const k in p.cd)p.cd[k]=Math.max(0,p.cd[k]-dt);
+  }
+  // body separation (no overlapping players); defenders that hold their spot stop drivers
+  const list=all();
+  for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
+   const a=list[i],b=list[j],dx=b.x-a.x,dz=b.z-a.z,d=hyp(dx,dz),min=C.player.radius*2;
+   if(d<min&&d>1e-6){
+    const push=(min-d)/2,ux=dx/d,uz=dz/d;
+    const wa=a.air>=0?0.3:1,wb=b.air>=0?0.3:1;
+    a.x-=ux*push*wa;a.z-=uz*push*wa;b.x+=ux*push*wb;b.z+=uz*push*wb;
+    contact(a,b,d);
+   }
+  }
+  for(const p of list){p.x=clamp(p.x,-court.hx-1.2,court.hx+1.2);p.z=clamp(p.z,-court.hz-1.2,court.hz+1.2);}
+  if(travelCall){const q=travelCall;travelCall=null;violation('travel',q.team,q.x);}
+ }
+
+ function contact(a,b,d){
+  if(S.phase!=='live')return;
+  const h=holder();if(!h||(a!==h&&b!==h))return;
+  const def=a===h?b:a;if(def.team===h.team)return;
+  const rel=hyp(h.vx-def.vx,h.vz-def.vz);if(rel<C.contact.minSpeed)return;
+  if((h.contactCd||0)>S.tick)return;h.contactCd=S.tick+C.contact.cooldownTicks;
+  // charge: the defender was set (slow) and in the handler's path; block: the defender was still moving in
+  const hv=hyp(h.vx,h.vz)||1,toD={x:(def.x-h.x)/d,z:(def.z-h.z)/d},inPath=(h.vx*toD.x+h.vz*toD.z)/hv;
+  const defMoving=hyp(def.vx,def.vz);
+  if(inPath<0.5)return;
+  const restricted=court.distToRim(side(h.team),def.x,def.z)<court.restrictedR;
+  const us=C.contact.userScale;
+  if(defMoving<C.contact.setSpeed&&!restricted){if(rand()<C.contact.chargeChance*(0.5+eff(def,'perimD'))*(h.team===S.userTeam?us:1))foul(h,def,'offensive',null);}
+  else if(rand()<C.contact.blockChance*(def.team===S.userTeam?us:1)){
+   const shooting=h.act==='shoot'&&!h.shot?.released?{count:court.points(side(h.team),h.x,h.z),andOne:false}:null;
+   foul(def,h,'block',shooting);
+  }
+ }
+
+ function updateActs(dt,inp){
+  for(const p of all()){
+   if(p.air>=0){
+    p.air+=dt;const u=p.air/p.airDur;p.jumpH=u<1?4*p.jumpMax*u*(1-u):0;
+    if(u>=1){p.air=-1;p.jumpH=0;if(p.act==='block'||p.act==='rebound'){p.act=null;}}
+   }
+   if(!p.act)continue;
+   p.actT+=dt;
+   if(p.act==='shoot'){
+    const sh=p.shot;
+    if(!sh.released){
+     // shooters leave the floor shortly before release: the jump follows the clip
+     const lift=sh.type==='ft'?0.08:sh.type==='layup'||sh.type==='dunk'?0.32:0.22;
+     if(p.air<0&&p.actT>=sh.releaseAt-lift-0.12&&sh.type!=='ft'){p.air=0;p.airDur=C.jump.shotAir*(sh.type==='dunk'?1.35:sh.type==='layup'?1.2:1);p.jumpMax=sh.type==='dunk'?0.8:sh.type==='layup'?0.6:0.42;}
+     // a held jump shot leaves the hand when the child lets go (or, held too long, late and red)
+     if(sh.held&&sh.quality==null&&p.actT>=sh.releaseAt+C.shot.window)gradeRelease(p);
+     const due=sh.held?sh.quality!=null&&p.actT>=C.shot.minHold:p.actT>=sh.releaseAt;
+     if(due){
+      if(S.ball.owner===p.id&&S.ball.state==='held')release(p);else{p.act=null;p.shot=null;}
+     }
+     // contact: only a defender who jumps INTO the shooter, judged once per defender and shot
+     if(!sh.released&&!sh.contact&&S.phase==='live')for(const d of onCourt(1-p.team)){
+      if(d.air<0||(sh.judged&&sh.judged.includes(d.id)))continue;
+      const dd=dist(d,p);if(dd>=C.contact.shotContact)continue;
+      (sh.judged||(sh.judged=[])).push(d.id);
+      const into=(d.vx*(p.x-d.x)+d.vz*(p.z-d.z))/Math.max(dd,1e-3);
+      if(into<C.contact.intoSpeed)continue;
+      if(rand()<C.contact.shootingFoul*(d.team===S.userTeam?C.contact.userScale:1)){sh.contact={by:d.id};break;}
+     }
+    }
+    if(p.actT>=sh.duration){p.act=null;p.shot=null;}
+   } else if(p.act==='pass'){
+    if(p.actT>=C.pass.windup&&S.ball.owner===p.id&&S.ball.state==='held'&&(passFacing(p)||p.actT>=C.pass.windup+0.14))throwPass(p);
+    if(p.actT>=C.pass.windup+0.25&&S.ball.owner!==p.id)p.act=null;else if(p.actT>=C.pass.windup+0.45)p.act=null;
+   } else if(p.act==='steal'){
+    if(p.actT>=C.steal.reachAt&&!p.act2)resolveSteal(p),p.act2=true;
+    if(p.actT>=C.steal.duration){p.act=null;p.act2=null;}
+   } else if(p.act==='cross'||p.act==='spin'){
+    if(p.actT>=(p.act==='spin'?HOOPS_ATTACK.spinResolve:HOOPS_ATTACK.moveResolve))resolveMove(p);
+    if(p.actT>=(p.act==='spin'?C.move.spin:C.move.cross)){p.act=null;p.move=null;}
+   } else if(p.act==='fake'){
+    if(p.actT>=HOOPS_ATTACK.fakeResolve)resolveFake(p);
+    if(p.actT>=HOOPS_ATTACK.fakeDuration){p.act=null;p.fake=null;}
+   } else if(p.act==='freethrow'){
+    // handled by the free-throw phase
+   }
+  }
+ }
+
+ function updateBall(dt){
+  const b=S.ball;
+  if(b.state==='held'){
+   const h=holder();if(!h){b.state='loose';return;}
+   if(!h.dead)b.dribbleT+=dt;
+   b.x=h.x+Math.sin(h.face)*0.32;b.z=h.z+Math.cos(h.face)*0.32;b.y=h.act==='shoot'?1.6+h.jumpH:0.9;
+   return;
+  }
+  if(b.state==='pass'){
+   const ps=b.pass;ps.t+=dt;
+   b.vy-=P.gravity*dt;b.x+=b.vx*dt;b.y+=b.vy*dt;b.z+=b.vz*dt;
+   if(ps.kind==='bounce'&&!ps.bounced&&b.vy<0&&b.y<=court.ballR){b.y=court.ballR;b.vy=ps.bounceVy;ps.bounced=true;emit({type:'bounce',playerId:ps.from});}
+   // the receiver turns to the ball's source while he waits for it (a standing receiver catches facing the passer)
+   {const rq=byId(ps.to),src=byId(ps.from);if(rq&&src&&hyp(rq.vx,rq.vz)<0.6){const want=Math.atan2(src.x-rq.x,src.z-rq.z),dd=((want-rq.face+Math.PI*3)%(Math.PI*2))-Math.PI;rq.face+=clamp(dd,-9*dt,9*dt);}}
+   // interception: defenders near the ball's path, ball at reachable height
+   for(const d of onCourt(1-b.lastTouch)){
+    if(ps.checked.has(d.id))continue;
+    const dd=hyp(d.x-b.x,d.z-b.z);
+    if(dd<C.pass.interceptRadius&&b.y<2.3+d.jumpH){
+     ps.checked.add(d.id);
+     const chance=C.pass.interceptBase*(0.4+eff(d,'steal'))*(ps.kind==='lob'?0.5:ps.kind==='bounce'?0.7:1);
+     if(rand()<chance){const from=byId(ps.from);if(from)from.stats.tov++;d.stats.stl++;emit({type:'interception',playerId:d.id,fromId:ps.from});
+      if(rand()<0.55){giveBall(d,'interception');}else{ballLoose(-b.vx*0.25+(rand()-0.5)*2,1.5,-b.vz*0.25+(rand()-0.5)*2,d.team);}return;}
+    }
+   }
+   const q=byId(ps.to);
+   if(ps.oop&&q&&q.onCourt){
+    if(q.air<0&&!q.act&&ps.time-ps.t<=OOP_LEAD)startOopFinish(q,ps);
+    // the catch in the air: the ball attaches the moment it is within reach of the raised hands
+    if(q.act==='shoot'&&q.shot?.oop&&!q.shot.released){
+     const reach=(q.r.height||200)/100*1.33+q.jumpH;
+     if(hyp(q.x-b.x,q.z-b.z)<C.pass.catchRadius+0.3&&b.y<reach&&b.y>1.2+q.jumpH){q.intent.catchAt=null;S.lastPasser={id:ps.from,tick:S.tick};giveBall(q,'pass');emit({type:'catch',playerId:q.id,oop:true});return;}
+    }
+   }
+   if(q&&hyp(q.x-b.x,q.z-b.z)<C.pass.catchRadius&&b.y<2.4+q.jumpH&&ps.t>0.1){
+    q.intent.catchAt=null;S.lastPasser={id:ps.from,tick:S.tick};giveBall(q,'pass');emit({type:'catch',playerId:q.id});return;
+   }
+   if(ps.t>ps.time+0.6){ballLoose(b.vx*0.3,0,b.vz*0.3,b.lastTouch);}
+   return;
+  }
+  if(b.state==='toss'){
+   b.vy-=P.gravity*dt;b.y+=b.vy*dt;
+   if(b.vy<0&&b.y<3.0){
+    // the jumpers tip it to a teammate
+    const cs=all().filter(p=>hyp(p.x,p.z)<1.3);
+    let win=cs[0];let bw=-1;for(const p of cs){const w=eff(p,'vertical')+(p.r.height||200)/240+rand()*0.5;if(w>bw){bw=w;win=p;}}
+    const t=win?win.team:(rand()<0.5?0:1);
+    const mate=onCourt(t).filter(p=>p!==win).sort((a,c)=>hyp(a.x,a.z)-hyp(c.x,c.z))[0];
+    emit({type:'tip',team:t,playerId:win?.id});
+    S.phase='live';S.phaseT=0;S.arrow=1-t;
+    if(mate)giveBall(mate,'tip');
+   }
+   return;
+  }
+  if(b.state==='shot'||b.state==='loose'){
+   const res=stepBall(b,dt,court,cols,P);
+   for(const e of res.events){emit({type:'contact',what:e.type,speed:+e.speed.toFixed(2)});if(e.type==='rim'||e.type==='board')b.touchedRim=b.touchedRim||e.type==='rim';}
+   if(res.touchedRim)b.touchedRim=true;
+   const sh=b.shot;
+   if(sh&&!sh.blocked){
+    // blocks and goaltending
+    for(const d of onCourt(1-sh.team)){
+     if(d.air<0)continue;
+     const reach=(d.r.height||200)/100*1.33+d.jumpH;
+     const dd=hyp(d.x-b.x,d.z-b.z),user=d.id===S.controlled&&!S.autopilot;
+     const rad=user?C.block.userRadius:C.block.radius,vert=user?C.block.userVertical:C.block.vertical;
+     if(dd<rad&&Math.abs(b.y-reach)<vert){
+      const rim=court.rim(sh.side),toRim=hyp(b.x-rim.x,b.z-rim.z);
+      if(dd<C.block.radius&&b.vy<0&&b.y>rim.y&&toRim<court.rimR+C.block.goaltendRadius){
+       // goaltending: the basket counts
+       sh.goaltend=d.id;emit({type:'goaltending',playerId:d.id});score(sh,true);return;
+      }
+      if(sh.tried&&sh.tried.includes(d.id))continue;(sh.tried||(sh.tried=[])).push(d.id);
+      // one try per defender and shot; the child's jump counts more when it peaks at the ball
+      const u=d.air/Math.max(d.airDur,1e-3),timed=u>0.25&&u<0.75;
+      const chance=clamp((user?(timed?C.block.userTimed:C.block.userBase)*(0.45+0.75*eff(d,'block')):C.block.base*(0.4+eff(d,'block')))*(sh.type==='dunk'?0.35:1),0,0.97);
+      if(rand()<chance){
+       sh.blocked=true;d.stats.blk++;
+       emit({type:'block',playerId:d.id,shooterId:sh.shooter});
+       const ax=b.x-d.x,az=b.z-d.z,al=hyp(ax,az)||1;
+       ballLoose(-b.vx*0.35+ax/al*2.5,Math.abs(b.vy)*0.2+0.5,-b.vz*0.35+az/al*2.5,d.team);
+       const shooter=byId(sh.shooter);if(shooter&&sh.foul){const f=byId(sh.foul.by)||d;foul(f,shooter,'shooting',{count:sh.points,andOne:false});}
+       return;
+      }
+     }
+    }
+   }
+   for(const c of res.crossings){
+    if(sh&&!sh.scored&&!sh.blocked&&c.side===sh.side){score(sh,false);return;}
+    if(!sh&&b.state==='loose'){ // a tip-in from a loose ball
+     const last=b.lastTouch,s=side(last);if(c.side===s){team(last).score+=2;emit({type:'score',team:last,points:2,kind:'tip'});afterScore(last);return;}
+    }
+   }
+   if(b.state==='shot'&&sh){
+    // the shot is over once the ball falls clearly below the ring or leaves the rim area
+    const rim=court.rim(sh.side),near=hyp(b.x-rim.x,b.z-rim.z);
+    sh.age=(sh.age||0)+dt;
+    const below=b.vy<0&&b.y<rim.y-0.35,away=b.touchedRim&&near>0.9&&b.vy<0,timeout=sh.age>4.5;
+    if(below||away||timeout){
+     if(sh.foul&&!sh.foulDone){sh.foulDone=true;const shooter=byId(sh.shooter),f=byId(sh.foul.by);if(shooter&&f){foul(f,shooter,'shooting',{count:sh.points,andOne:false});return;}}
+     if(sh.type==='ft'){b.state='loose';b.shot=null;afterFreeThrowMiss(sh);return;}
+     b.state='loose';b.missShot=sh;b.shot=null;emit({type:'miss',shotId:sh.id,playerId:sh.shooter});
+     if(sh.oop)emit({type:'alleyoop',from:sh.oop.from,to:sh.shooter,team:sh.team,shotType:sh.type,result:'miss'});
+     reboundSwitch(sh.side);
+     if(S.clock<=0){endPeriodAfterShot();return;}
+    }
+   }
+   // the ball goes out of bounds when it lands outside the lines
+   if(b.state==='loose'&&b.y<court.ballR+0.05&&!court.inBounds(b.x,b.z)){
+    const t=b.lastTouch;emit({type:'outOfBounds',team:t});violation('out',t,b.x);return;
+   }
+   // pick-ups and rebounds
+   if(b.state==='loose'){
+    let best=null,bs=-1;
+    for(const p of all()){
+     if(p.stumble>0||p.cd.pickup>0)continue;
+     const reach=(p.r.height||200)/100*1.25+p.jumpH+(p.air>=0?0.25:0);
+     const dd=hyp(p.x-b.x,p.z-b.z),rad=p.air>=0?C.rebound.airRadius:C.rebound.radius;
+     if(dd<rad&&b.y<reach){
+      const w=eff(p,'rebound')*1.15+eff(p,'strength')*0.18+(p.air>=0?0.35:0)+(p.air>=0&&p.id===S.controlled&&!S.autopilot?C.rebound.userBonus:0)+rand()*0.35-(dd/rad)*0.3;
+      if(w>bs){bs=w;best=p;}
+     }
+    }
+    if(best){
+     const ms=b.missShot;
+     if(ms){best.stats.reb++;if(best.team===ms.team)best.stats.oreb++;emit({type:'rebound',playerId:best.id,offensive:best.team===ms.team});}
+     const offensive=ms&&best.team===ms.team;
+     b.missShot=null;
+     const prevPossession=S.possession;
+     giveBall(best,'rebound');
+     if(ms&&b.touchedRim){S.shotClock=offensive?Math.max(S.shotClock,R.shotClockReset):R.shotClock;S.shotClockOn=true;if(offensive)S.shotClock=R.shotClockReset;}
+     else if(prevPossession===best.team){S.shotClockOn=true;}
+     b.touchedRim=false;
+    }
+   }
+  }
+ }
+
+ function score(sh,goaltend){
+  const b=S.ball;sh.scored=true;
+  const t=team(sh.team),shooter=byId(sh.shooter);
+  t.score+=sh.points;
+  if(shooter){shooter.stats.pts+=sh.points;if(sh.type==='ft')shooter.stats.ftm++;else{shooter.stats.fgm++;if(sh.points===3)shooter.stats.tpm++;}}
+  if(sh.type!=='ft'&&S.lastPasser&&S.tick-S.lastPasser.tick<C.timing.assistTicks){const a=byId(S.lastPasser.id);if(a&&a.team===sh.team&&a.id!==sh.shooter)a.stats.ast++;}
+  S.lastPasser=null;
+  S.lastScore={team:sh.team,points:sh.points,shooter:sh.shooter,type:sh.type,tick:S.tick,shotId:sh.id};
+  emit({type:'score',team:sh.team,points:sh.points,playerId:sh.shooter,shotType:sh.type,shotId:sh.id,goaltend:!!goaltend,score:[team(0).score,team(1).score]});
+  if(sh.oop)emit({type:'alleyoop',from:sh.oop.from,to:sh.shooter,team:sh.team,shotType:sh.type,result:'score'});
+  b.state='dead';b.shot=null;
+  if(sh.type==='ft'){afterFreeThrow(true);return;}
+  if(sh.foul&&!sh.foulDone){
+   sh.foulDone=true;const f=byId(sh.foul.by);
+   if(f&&shooter){
+    // and-one
+    f.fouls++;f.stats.pf++;team(f.team).fouls++;emit({type:'foul',playerId:f.id,victimId:shooter.id,kind:'shooting',andOne:true,personal:f.fouls,teamFouls:team(f.team).fouls});
+    deadBall(()=>startFreeThrows(shooter,1,true),C.timing.afterFoul);return;
+   }
+  }
+  if(S.clock<=0){endPeriodAfterShot(true);return;}
+  afterScore(sh.team);
+ }
+
+ function afterFreeThrow(made){
+  const ft=S.ft;if(!ft)return;
+  ft.left--;
+  if(ft.left>0){ft.state='setup';ft.t=0;S.ball.state='dead';S.ball.owner=ft.shooter;return;}
+  S.ft=null;
+  if(made){afterScore(ft.team);return;}
+ }
+
+ function afterFreeThrowMiss(sh){
+  const ft=S.ft;if(!ft)return;
+  ft.left--;
+  emit({type:'miss',shotId:sh.id,playerId:sh.shooter,ft:true});
+  if(ft.left>0){ft.state='setup';ft.t=0;S.ball.state='dead';S.ball.owner=ft.shooter;return;}
+  // last free throw missed: live rebound
+  S.ft=null;S.phase='live';S.ball.state='loose';S.ball.missShot=sh;S.shotClockOn=false;
+ }
+
+ function endPeriodAfterShot(){
+  if(S.phase==='final')return;
+  endQuarter();
+ }
+
+ function updateClocks(dt){
+  if(S.phase!=='live')return;
+  const clockRuns=!(S.ball.state==='dead');
+  if(clockRuns){
+   S.clock-=dt;
+   if(S.clock<=0){
+    S.clock=0;
+    if(S.ball.state==='shot'&&S.ball.shot&&!S.ball.shot.gameOver){S.ball.shot.gameOver=true;emit({type:'buzzer',inAir:true});return;}
+    if(S.ball.state!=='shot'){emit({type:'buzzer',inAir:false});endQuarter();return;}
+   }
+  }
+  if(S.shotClockOn&&S.ball.state!=='shot'){
+   const useShotClock=S.clock>S.shotClock||S.shotClock<R.shotClock;
+   S.shotClock-=dt;
+   if(S.shotClock<=0&&S.clock>0.05){S.shotClock=0;violation('shotclock',S.possession);return;}
+  }
+  // backcourt rules
+  const h=holder();
+  if(h){
+   const s=side(h.team);
+   if(!S.frontcourtSet){S.backcourtT+=dt;if(court.frontcourt(s,h.x)&&court.frontcourt(s,S.ball.x)){S.frontcourtSet=true;}else if(S.backcourtT>R.backcourtSeconds){violation('eight',h.team,h.x);return;}}
+   else if(!court.frontcourt(s,h.x)&&h.act!=='shoot'&&S.ball.state==='held'&&S.lastPossessionTick!==S.tick){violation('backcourt',h.team,h.x);return;}
+   if(!court.inBounds(h.x,h.z)){emit({type:'outOfBounds',team:h.team,playerId:h.id});violation('out',h.team,h.x);return;}
+  }
+  // offensive three seconds
+  for(const p of onCourt(S.possession)){
+   if(court.inPaint(side(p.team),p.x,p.z)&&S.ball.state==='held'&&!(p.act==='shoot')&&S.ball.owner!==p.id){p.paintT+=dt;if(p.paintT>R.laneSeconds){p.paintT=0;violation('three',p.team,p.x);return;}}
+   else p.paintT=0;
+  }
+ }
+
+ function runPhase(dt,inp){
+  S.phaseT+=dt;
+  if(S.phase==='dead'||S.phase==='timeout'||S.phase==='break'){
+   for(const p of all()){p.vx*=0.9;p.vz*=0.9;p.x+=p.vx*dt;p.z+=p.vz*dt;if(p.air>=0)updateActs(dt,inp);}
+   if(S.pending&&S.phaseT>=S.pending.delay){const n=S.pending.next;S.pending=null;n();}
+   if(S.phase!=='timeout')for(const p of all())p.energy=Math.min(1,p.energy+C.fatigue.deadRecover*dt);
+   return true;
+  }
+  if(S.phase==='inbound'){
+   const ib=S.inbound,inb=byId(ib.inbounder),rec=byId(ib.receiver);
+   // receiver gets open toward the inbounder, others go to formation (AI)
+   teamThink(api,dt,'inbound');
+   const user=byId(S.controlled);
+   if(user&&user!==inb&&user.team===S.userTeam&&inp)humanInput(user,{...inp,shootDown:false,passPress:false,altPress:false});
+   inb.intent.x=0;inb.intent.z=0;inb.intent.speed=0;
+   movePlayers(dt);
+   inb.x=ib.spot.x;inb.z=ib.spot.z;
+   S.ball.x=inb.x;S.ball.z=inb.z;S.ball.y=1.1;
+   const target0=rec&&rec.onCourt?rec:onCourt(ib.team).find(p=>p!==inb);
+   const ready=target0&&(!S.frontcourtSet||court.frontcourt(side(ib.team),target0.x))&&hyp(target0.vx,target0.vz)<2.5;
+   if(S.phaseT>=ib.delay&&(ready||S.phaseT>=R.inboundSeconds)){
+    const target=target0;
+    S.phase='live';S.phaseT=0;S.ball.state='held';S.ball.owner=inb.id;S.possession=ib.team;S.lastPossessionTick=S.tick;
+    inb.face=Math.atan2(target.x-inb.x,target.z-inb.z);
+    startPass(inb,target,'chest');inb.actT=C.pass.windup;throwPass(inb);inb.act=null;
+    S.inbound=null;
+   }
+   return true;
+  }
+  if(S.phase==='freethrow'){
+   const ft=S.ft,sh=byId(ft.shooter);
+   for(const p of all()){p.vx=p.vz=0;}
+   ft.t+=dt;
+   if(ft.state==='setup'&&ft.t>=C.timing.freeThrowSetup){
+    ft.state='shoot';ft.t=0;S.ball.state='held';S.ball.owner=sh.id;
+    sh.act='shoot';sh.actT=0;sh.shot={type:'ft',human:sh.team===S.userTeam&&!S.autopilot,held:sh.team===S.userTeam&&!S.autopilot,releaseAt:A.freethrow.release,duration:A.freethrow.duration,quality:null,released:false,gatherX:sh.x,gatherZ:sh.z,toRim:{x:side(sh.team),z:0},drive:0,contact:null};
+    emit({type:'shotStart',playerId:sh.id,shotType:'ft'});
+   }
+   if(ft.state==='shoot'){
+    if(sh.team===S.userTeam&&inp&&inp.shootUp&&sh.shot&&sh.shot.held&&!S.autopilot)gradeRelease(sh);
+    updateActs(dt,inp);
+    if(S.ball.state==='shot'){ft.state='flight';}
+   }
+   if(ft.state==='flight'){
+    updateBall(dt);
+    if(S.phase==='live'){ // missed last: live rebound
+     return false;
+    }
+   }
+   return true;
+  }
+  if(S.phase==='jumpball'){
+   updateBall(dt);
+   for(const p of all()){p.vx=p.vz=0;}
+   return true;
+  }
+  return S.phase==='final';
+ }
+
+ function snapshotPlayers(){
+  return all().map(p=>({id:p.id,team:p.team,pos:p.pos,positionName:p.positionName,abilities:p.abilities,number:p.number,x:+p.x.toFixed(3),z:+p.z.toFixed(3),y:+p.jumpH.toFixed(3),vx:+p.vx.toFixed(3),vz:+p.vz.toFixed(3),
+   face:+p.face.toFixed(3),act:p.act,actT:+p.actT.toFixed(3),shotType:p.shot?.type||null,shotHeld:!!(p.shot&&p.shot.held&&!p.shot.released&&p.shot.quality==null),air:p.air>=0,energy:+p.energy.toFixed(3),sprinting:p.sprinting,boost:+p.boost.toFixed(3),boostLocked:p.boostLock,maxSpeed:+speedCap(p,p.energy>HOOPS_SPRINT_MIN_ENERGY&&p.act!=='fake'&&p.act!=='shoot').toFixed(3),exhausted:p.energy<=HOOPS_SPRINT_MIN_ENERGY,fouls:p.fouls,
+   hasBall:S.ball.owner===p.id&&S.ball.state==='held',dribbling:S.ball.owner===p.id&&S.ball.state==='held'&&!p.dead,steps:p.dead?p.steps:0,controlled:p.id===S.controlled,stumble:p.stumble>0,look:p.look,role:p.role,passKind:p.act==='pass'?p.act2?.kind??null:null,passTo:p.act==='pass'?p.act2?.target??null:null}));
+ }
+
+ const api={aiV2:aiVersion!=='v1',
+  get S(){return S;},gatherBall,attemptDribble,court,C,rand,eff,onCourt,all,side,holder,byId,dist,nearestTo,
+  startShot,startPass,startJump,startSteal,startMove,startFake,choosePassTarget,diff,
+  play:PL,oopEligible,laneBlocked:(p,q)=>passLaneBlocked(p,q,onCourt(1-p.team),C.pass.laneRadius),
+ };
+
+ const engine={
+  step(inp=NO_INPUT){
+   if(disposed||S.phase==='final')return;
+   S.tick++;const dt=HOOPS_DT;
+   if(S.phase!=='live'){
+    if(runPhase(dt,inp)){recordHistory();return;}
+    if(S.phase!=='live'){recordHistory();return;}
+   }
+   // live play
+   teamThink(api,dt,'live');
+   tacticsController?.step(api,dt,'live');
+   const me=byId(S.controlled);
+   if(me&&me.onCourt&&!S.autopilot)humanInput(me,inp||NO_INPUT);
+   updateActs(dt,inp);
+   movePlayers(dt);
+   if(S.phase==='live')updateBall(dt);
+   if(S.phase==='live')updateClocks(dt);
+   if(S.phase==='live')autoControl();
+   recordHistory();
+  },
+  snapshot(){
+   const b=S.ball;
+   return {tick:S.tick,phase:S.phase,phaseT:+S.phaseT.toFixed(3),quarter:S.quarter,overtime:S.overtime,clock:+Math.max(0,S.clock).toFixed(2),shotClock:+Math.max(0,S.shotClock).toFixed(2),shotClockOn:S.shotClockOn,
+    score:[team(0).score,team(1).score],teamFouls:[team(0).fouls,team(1).fouls],timeouts:[team(0).timeouts,team(1).timeouts],possession:S.possession,dir:[...S.dir],userTeam:S.userTeam,
+    controlled:S.controlled,ball:{x:+b.x.toFixed(3),y:+b.y.toFixed(3),z:+b.z.toFixed(3),state:b.state,owner:b.owner,passTo:b.state==='pass'?b.pass?.to??null:null,passKind:b.state==='pass'?b.pass?.kind??null:null,shotId:b.shot?.id||null,dribbleT:+b.dribbleT.toFixed(3)},
+    players:snapshotPlayers(),ft:S.ft?{shooter:S.ft.shooter,left:S.ft.left,total:S.ft.total}:null,inbound:S.inbound?{team:S.inbound.team,inbounder:S.inbound.inbounder}:null,
+    call:[team(0).call,team(1).call],lastScore:S.lastScore,result:S.result,profile:S.profile,mode:S.mode};
+  },
+  drainEvents(){const q=queue;queue=[];return q;},
+  /** Last seconds of snapshots for an instant replay (read only). */
+  replay(seconds=C.replay.seconds){const n=Math.round(seconds*C.replay.hz);return history.slice(-n);},
+  substitute,timeout:t=>timeout(t),
+  setAutoSub(on){S.autoSubUser=!!on;},
+  setTacticsData(data){tacticsController=data?createHoopsTacticsController(data):null;return !!tacticsController;},
+  get tacticsMetrics(){return tacticsController?.metrics()||{loaded:false};},
+  setTactics(t,tac){Object.assign(team(t).tactics,tac);emit({type:'tactics',team:t,...tac});},
+  callPlay(t,play){team(t).call=play;team(t).callT=0;emit({type:'playCall',team:t,play});},
+  roster(t){return team(t).roster.map(p=>({id:p.id,name:p.name,number:p.number,pos:p.pos,onCourt:p.onCourt,energy:+p.energy.toFixed(3),fouls:p.fouls,stats:{...p.stats}}));},
+  get result(){return S.result;},
+  get court(){return court;},
+  debug:{get state(){return S;},api,give:(id)=>giveBall(byId(id),'debug'),place:(id,x,z)=>{const p=byId(id);p.x=x;p.z=z;p.vx=p.vz=0;},
+   setClock(c,sc){if(c!=null)S.clock=c;if(sc!=null)S.shotClock=sc;},setPhase(ph){S.phase=ph;},free:(t,count)=>startFreeThrows(onCourt(t)[0],count,false),
+   setEnergy(id,e){byId(id).energy=e;},foul},
+  dispose(){disposed=true;queue=[];history=[];},
+ };
+ function recordHistory(){if(S.tick%Math.round(60/C.replay.hz))return;history.push(engine.snapshot());const max=C.replay.seconds*C.replay.hz*2;if(history.length>max)history.splice(0,history.length-max);}
+ reset(seed);
+ return engine;
+}

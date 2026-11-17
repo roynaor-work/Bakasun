@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "runtimeRequiresWASM": false,
+  "passed": 1550,
+  "failed": 0,
+  "failures": [],
+  "sourceHashesUnchanged": true,
+  "checks": [
+    "Original and selected artifact SHA-256",
+    "No Draco, Meshopt, Basis, KTX2, WASM or Brotli-WASM in runtime",
+    "Native GLB geometry, skin, animation, normal/UV thresholds",
+    "Source-equivalent native preview references",
+    "Exact RGBA including hidden RGB",
+    "Motion16 and gzip roundtrip",
+    "No new native glTF validator errors",
+    "Per-game download totals"
+  ],
+  "validatorWarnings": [
+    {
+      "source": "assets/athlete/athlete.glb",
+      "errors": {},
+      "warnings": 7
+    },
+    {
+      "source": "assets/game-catch/models/apartment.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 8
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/game-catch/models/lamp.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 2
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/game-catch/models/police-station.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 3
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/game-catch/models/shop.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 9
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/game-catch/models/taxi.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 29
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/game-catch/models/tree.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 14
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/hoops-v7/c.glb",
+      "errors": {},
+      "warnings": 63
+    },
+    {
+      "source": "assets/hoops-v7/pf.glb",
+      "errors": {},
+      "warnings": 65
+    },
+    {
+      "source": "assets/hoops-v7/pg.glb",
+      "errors": {},
+      "warnings": 59
+    },
+    {
+      "source": "assets/hoops-v7/sf.glb",
+      "errors": {},
+      "warnings": 60
+    },
+    {
+      "source": "assets/hoops-v7/sg.glb",
+      "errors": {},
+      "warnings": 57
+    },
+    {
+      "source": "assets/models/adult-man-rigged-512.glb",
+      "errors": {},
+      "warnings": 1
+    },
+    {
+      "source": "assets/models/adult-woman-rigged-512.glb",
+      "errors": {},
+      "warnings": 1
+    },
+    {
+      "source": "assets/models/city/04-duplex-house.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 8
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/05-apartment-4-floors.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 8
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/09-corner-shop.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 14
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/20-warehouse.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 6
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/22-power-plant.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 1
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/25-water-tower.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 3
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/28-fire-station.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 100
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/29-police-station.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 3
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/30-hospital.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 1
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/32-university-building.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 6
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/35-small-stadium.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 12
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/39-park-with-fountain.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 15
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/49-fire-truck.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 3
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/50-police-car.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 2
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/city/52-taxi.glb",
+      "errors": {
+        "ACCESSOR_VECTOR3_NON_UNIT": 29
+      },
+      "warnings": 0
+    },
+    {
+      "source": "assets/models/firefighter-rigged-512.glb",
+      "errors": {},
+      "warnings": 1
+    },
+    {
+      "source": "assets/soccer-v7/goalkeeper-far.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 72
+      },
+      "warnings": 24
+    },
+    {
+      "source": "assets/soccer-v7/goalkeeper-near.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 66
+      },
+      "warnings": 34
+    },
+    {
+      "source": "assets/soccer-v7/player-01-far.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 64
+      },
+      "warnings": 32
+    },
+    {
+      "source": "assets/soccer-v7/player-01-near.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 76
+      },
+      "warnings": 24
+    },
+    {
+      "source": "assets/soccer-v7/player-04-far.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 70
+      },
+      "warnings": 26
+    },
+    {
+      "source": "assets/soccer-v7/player-04-near.glb",
+      "errors": {
+        "ACCESSOR_WEIGHTS_NON_NORMALIZED": 67
+      },
+      "warnings": 33
+    },
+    {
+      "source": "design/hoops/lod-v4/hoops-v4-c-lod.glb",
+      "errors": {},
+      "warnings": 8
+    },
+    {
+      "source": "design/hoops/lod-v4/hoops-v4-pf-lod.glb",
+      "errors": {},
+      "warnings": 8
+    },
+    {
+      "source": "design/hoops/lod-v4/hoops-v4-pg-lod.glb",
+      "errors": {},
+      "warnings": 8
+    },
+    {
+      "source": "design/hoops/lod-v4/hoops-v4-sf-lod.glb",
+      "errors": {},
+      "warnings": 8
+    },
+    {
+      "source": "design/hoops/lod-v4/hoops-v4-sg-lod.glb",
+      "errors": {},
+      "warnings": 8
+    },
+    {
+      "source": "design/hoops/lod/hoops-big-lod.glb",
+      "errors": {},
+      "warnings": 40
+    },
+    {
+      "source": "design/hoops/lod/hoops-forward-lod.glb",
+      "errors": {},
+      "warnings": 40
+    },
+    {
+      "source": "design/hoops/lod/hoops-guard-lod.glb",
+      "errors": {},
+      "warnings": 39
+    },
+    {
+      "source": "design/hoops/lod/hoops-wing-lod.glb",
+      "errors": {},
+      "warnings": 35
+    }
+  ]
+}

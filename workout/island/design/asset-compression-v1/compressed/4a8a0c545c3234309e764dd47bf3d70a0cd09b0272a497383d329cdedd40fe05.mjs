@@ -1,0 +1,717 @@
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt,windAt,nextWind,WIND_EASE} from './alpine-track.mjs?v=island-v2-20261107-15';
+import {v241Rules,moverX} from './alpine-v241.mjs?v=island-v2-20261107-15';
+
+/** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
+ * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
+ * same command sequence (in simulation time) give the same race at any frame rate.
+ * Every rider, the player included, uses the same course, halfpipe, turns, tricks and collision
+ * tests. The track is a halfpipe on a curved centreline: turns push riders toward the outer
+ * wall, walls pull them back to the floor, and a fast climb over the lip launches them into the air. */
+
+export const RIDER_IDS = Object.freeze(['player', 'rival-1', 'rival-2', 'rival-3', 'rival-4', 'rival-5']);
+export const TRICK_IDS = Object.freeze(['grab', 'spin', 'flip', 'combo']);
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+/** Reward table shared with the island result validator. Coins count whatever the placing. */
+export function alpineReward(balance, stage, rank, completed = true, coins = 0) {
+  const level = balance.levels[stage - 1];
+  const won = completed && rank <= level.targetRank;
+  const stars = won ? Math.max(1, 4 - rank) : 0;
+  const score = completed ? balance.riders + 1 - rank : 0;
+  return { won, stars, score, money: (won ? level.winMoney + score : 0) + coins * balance.physics.coins.value };
+}
+
+export function alpineTrack(balance, stage) {
+  const level = balance.levels[stage - 1];
+  if (!level) throw new Error('alpine.stage');
+  const track = balance.tracks[level.trackId];
+  return { level, track: { ...track, id: level.trackId } };
+}
+
+/** Board rectangle (half sizes hx along x, hs along s) against a circle. */
+function boardHitsCircle(dx, ds, hx, hs, r) {
+  const nx = clamp(dx, -hx, hx), ns = clamp(ds, -hs, hs);
+  return (dx - nx) ** 2 + (ds - ns) ** 2 < r * r;
+}
+
+export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {}, power = 1, course: courseOverride = null }) {
+  // Purchased equipment and the game level apply to the player only, within configured tracks.
+  const wax = clamp(Number(equipment.wax) || 1, 1, 1.1), tankSize = clamp(Number(equipment.tank) || 1, 1, 1.5), recharge = clamp(Number(power) || 1, 1, 1.2);
+  // Ski league v23 gear, player only: the helmet shortens a fall and softens its speed loss, goggles cut the side wind and make a gate fill
+  // more of the tank. Both are 1 (no effect) unless the league passes them, so the three existing stages are unchanged.
+  const helmet = clamp(Number(equipment.helmet) || 1, 1, 1.3), goggles = clamp(Number(equipment.goggles) || 1, 1, 1.4);
+  const physics = balance.physics, step = physics.fixedStep, pipe = pipeProfile(physics), tricks = physics.tricks;
+  const { level, track } = alpineTrack(balance, stage);
+  // courseOverride exists for rule tests only (hand-placed obstacles); the game always generates.
+  const course = courseOverride || generateCourse(track, physics);
+  const objects = course.objects, windZones = course.wind?.length ? course.wind : null, gatesTotal = objects.filter(o => o.type === 'gate').length;
+  // v24.1 rules (physics.v241): null when the balance is v24's (?alpineV241=0), and then none of the code below that reads `v2` runs.
+  const v2 = v241Rules(physics);
+  const patches = v2 ? objects.filter(o => o.type === 'ice' || o.type === 'powder') : [], sections = v2 && course.sections?.length ? course.sections : [];
+  const rampOf = o => (v2 && o.big ? v2.bigRamp : physics.ramp), launchOf = o => (v2 && o.big ? v2.bigRamp.launch : physics.rampLaunch);
+  /** The patch (ice or deep snow) under a rider on the ground, if any. */
+  function patchUnder(r) {
+    if (!patches.length || r.airborne || r.ramp) return null;
+    for (const p of patches) if (Math.abs(r.s - p.s) <= p.len / 2 && Math.abs(r.x - p.x) <= p.w / 2) return p;
+    return null;
+  }
+  const inSteep = s => { for (const z of sections) if (z.pace === 'steep' && s >= z.s0 && s <= z.s1) return true; return false; };
+  let finalOrder = null;
+  /** Side wind felt by a rider at its position (league courses only). Each rider walks the zones with its own cursor. */
+  function windFor(r) {
+    while (r.windCursor < windZones.length && windZones[r.windCursor].s1 < r.s) r.windCursor++;
+    const z = windZones[r.windCursor]; if (!z || r.s < z.s0) return 0;
+    return z.dir * z.speed * Math.max(0, Math.min(1, (r.s - z.s0) / WIND_EASE, (z.s1 - r.s) / WIND_EASE));
+  }
+  const fallScale = r => r.ai ? 1 : 1 / helmet, lossScale = r => r.ai ? 1 : 1 - (helmet - 1) / 2;
+  let phase = 'menu', countdownShown = 0, resumePhase = null, accumulator = 0, ticks = 0, countdownTicks = 0, run = 0, disposed = false;
+  const bumpUntil = new Map();
+  let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [], previousPresentation = null, brakeInput = 0;
+  const aiRandom = { value: null };
+
+  function emit(type, extra = {}) { events.push({ id: `e${++eventSeq}`, type, ...extra }); }
+
+  function makeRider(id, index) {
+    const grid = physics.grid[index];
+    const ai = index === 0 ? null : level.ai[index - 1];
+    return {
+      id, index, ai, s: grid.s, x: grid.x, vx: 0, speed: 0, steer: 0, steerOut: 0, alt: 0, vy: 0, airborne: false, airKind: null, airCap: 0,
+      tank: physics.boostStartTank, boostTime: 0, padTime: 0, hitTime: 0, grace: 0, landTime: 0, crashTime: 0, glideT: 0, glideBonus: 0,
+      ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
+      trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
+      finished: false, finishTicks: 0, peak: 0, collisions: 0,
+      decideIn: 0, targetX: grid.x, windCursor: 0,
+      // v24.1: brake (player), shield and magnet seconds, stars and power-ups taken, the patch underfoot, the next section to announce.
+      brake: 0, shieldT: 0, magnetT: 0, stars: new Set(), picks: new Set(), surface: null, sectionCursor: 0,
+    };
+  }
+
+  function reset() {
+    run++;
+    aiRandom.value = courseRandom((Number(seed) >>> 0) ^ Math.imul(run, 0x9e3779b1));
+    riders = RIDER_IDS.map(makeRider);
+    bumpUntil.clear(); accumulator = 0; ticks = 0; countdownTicks = Math.round(physics.countdownSeconds / step);
+    result = null; finalOrder = null; steerInput = 0; brakeInput = 0; boostRequest = false; trickRequest = null; resumePhase = null;
+    order = riders.map(r => r.id);
+    previousPresentation = null;
+    phase = 'countdown';
+    countdownShown = Math.ceil(physics.countdownSeconds);
+    emit('countdown', { value: countdownShown });
+  }
+
+  const heightOf = r => r.alt - surfaceHeight(r.x, pipe);
+  /** Seconds until an airborne rider meets the surface below it. */
+  function airTimeLeft(r) {
+    const h = Math.max(0, heightOf(r)), g = physics.gravity;
+    return (r.vy + Math.sqrt(Math.max(0, r.vy * r.vy + 2 * g * h))) / g;
+  }
+
+  // ---------- AI: same rules, decisions limited by reaction time, lookahead and accuracy ----------
+  function aiDecide(r) {
+    const ai = r.ai, half = pipe.lip - 0.5, board = physics.board;
+    const ahead = objects.filter(o => o.s > r.s + 1 && o.s < r.s + ai.lookahead && o.type !== 'coin' && o.type !== 'warn');
+    // Each obstacle is judged once: a rider either notices it or misses it (mistakeRate).
+    for (const o of ahead) if (!r.seen.has(o.id)) r.seen.set(o.id, aiRandom.value() < ai.mistakeRate);
+    const laneCost = cx => {
+      let cost = Math.abs(cx - r.x) * 0.12 + Math.max(0, Math.abs(cx) - pipe.F) * physics.aiWallCost;
+      for (const o of ahead) {
+        if (r.seen.get(o.id)) continue;
+        const near = 1 / (1 + (o.s - r.s) / 18);
+        // While moving across to cx the board sweeps every lane in between; obstacles reached
+        // before the move ends count against the whole sweep.
+        const sweeping = o.s - r.s < Math.abs(cx - r.x) / physics.lateralSpeed * Math.max(r.speed, 8) + 3;
+        const lo = Math.min(cx, r.x), hi = Math.max(cx, r.x);
+        if (o.type === 'rock') {
+          const reach = o.radius * physics.rockHitScale + board.halfWidth + ai.margin;
+          if (Math.abs(cx - o.x) < reach || (sweeping && o.x > lo - reach && o.x < hi + reach)) cost += 100 * near;
+        } else if (o.type === 'gate') {
+          const off = Math.abs(cx - o.x), reach = board.halfWidth + physics.postHalf[0] + ai.margin;
+          const crossesPost = sweeping && [-1, 1].some(side => { const p = o.x + side * physics.gateHalfWidth; return p > lo - reach && p < hi + reach; });
+          if (Math.abs(off - physics.gateHalfWidth) < reach || crossesPost) cost += 100 * near;
+          else if (off < physics.gateHalfWidth - board.halfWidth) cost -= (ai.gateDesire ?? 0) * near;
+        } else if (o.type === 'boost') {
+          if (Math.abs(cx - o.x) < physics.pad.width / 2 - 0.3) cost -= ai.padDesire * near;
+        } else if (o.type === 'ramp') {
+          const off = Math.abs(cx - o.x), width = rampOf(o).width;
+          if (off < width / 2 - 0.4) cost -= ai.rampDesire * near;
+          else if (off < width / 2 + board.halfWidth) cost += 60 * near;
+          // v24.1: a move that would sweep across a kicker's side wall counts as hitting it (the v24 rule only looked at the end lane).
+          else if (v2 && sweeping && [-1, 1].some(side => { const edge = o.x + side * width / 2; return edge > lo - board.halfWidth && edge < hi + board.halfWidth; })) cost += 60 * near;
+        } else if (v2) cost += v2Cost(r, o, cx, lo, hi, near, sweeping);
+      }
+      for (const other of riders) {
+        if (other === r || other.finished) continue;
+        const ds = other.s - r.s;
+        if (ds > -2 && ds < 10 && Math.abs(cx - other.x) < physics.riderSeparation + 0.4) cost += 14 / (1 + Math.max(0, ds) / 6);
+      }
+      return cost;
+    };
+    let best = r.x, bestCost = Infinity;
+    for (let cx = -half; cx <= half + 1e-9; cx += 0.4) {
+      const cost = laneCost(cx);
+      if (cost < bestCost - 1e-9) { bestCost = cost; best = cx; }
+    }
+    // Aim error moves the line only within lanes that are about as good (imprecise, not blind).
+    const noisy = clamp(best + (aiRandom.value() * 2 - 1) * ai.error, -half, half);
+    r.targetX = laneCost(noisy) <= bestCost + 3 ? noisy : best;
+    r.decideIn = ai.reaction;
+    // Boost only in an open lane, with the tank skill of this rider.
+    if (r.boostTime <= 0 && r.tank >= ai.boostTank && !r.airborne && aiRandom.value() < ai.boostChance) {
+      const blocked = objects.some(o => o.type === 'rock' && o.s > r.s && o.s < r.s + 45 && Math.abs(o.x - r.targetX) < o.radius + board.halfWidth + 0.6);
+      if (!blocked) r.wantsBoost = true;
+    }
+  }
+  /** v24.1 lane cost of the new objects for a computer rider (same rules as the player): snowmen are rocks, a mover is avoided where it
+   * will be when the rider gets there, deep snow and ice are avoided a little, stars and power-ups are wanted (padDesire scale). */
+  function v2Cost(r, o, cx, lo, hi, near, sweeping) {
+    const ai = r.ai, board = physics.board;
+    if (o.type === 'snowman') {
+      const reach = o.radius * physics.rockHitScale + board.halfWidth + ai.margin;
+      return Math.abs(cx - o.x) < reach || (sweeping && o.x > lo - reach && o.x < hi + reach) ? 100 * near : 0;
+    }
+    if (o.type === 'mover') {
+      const at = ticks * step + (o.s - r.s) / Math.max(r.speed, 8), mx = moverX(o, at), reach = o.radius + board.halfWidth + ai.margin + .35;
+      return Math.abs(cx - mx) < reach || (sweeping && mx > lo - reach && mx < hi + reach) ? 100 * near : 0;
+    }
+    if (o.type === 'powder') return Math.abs(cx - o.x) < o.w / 2 ? 9 * near : 0;
+    if (o.type === 'ice') return Math.abs(cx - o.x) < o.w / 2 ? 2 * near : 0;
+    if (o.type === 'star') return !r.stars.has(o.id) && Math.abs(cx - o.x) < .9 && o.h < 2 ? -.8 * near : 0;
+    if (o.type === 'magnet' || o.type === 'shield') return !r.picks.has(o.id) && Math.abs(cx - o.x) < .9 ? -ai.padDesire * near : 0;
+    return 0;
+  }
+  /** AI tricks: the longest trick that fits the remaining air with this rider's margin; a
+   * rider who misjudges (mistakeRate) may start one that cannot finish, and crash. */
+  function aiTrick(r) {
+    r.trickDecideIn -= step; if (r.trickDecideIn > 0 || r.trick || r.crashTime > 0) return;
+    r.trickDecideIn = .1;
+    if (aiRandom.value() > r.ai.trickChance) return;
+    const left = airTimeLeft(r), careless = aiRandom.value() < r.ai.mistakeRate * 2;
+    const options = TRICK_IDS.filter(id => careless || tricks[id].seconds * (1 + r.ai.trickMargin) < left);
+    if (options.length) startTrick(r, options.reduce((a, b) => tricks[b].points > tricks[a].points ? b : a));
+  }
+
+  function startBoost(r) {
+    if (r.boostTime > 0 || r.tank < physics.boostMinimum) return false;
+    r.boostTime = r.tank * physics.boostSeconds * (r.ai ? 1 : tankSize); r.tank = 0;
+    emit('boost-start', { riderId: r.id });
+    return true;
+  }
+  function startTrick(r, id) {
+    if (!r.airborne || r.trick || r.crashTime > 0 || !tricks[id]) return false;
+    r.trick = { id, t: 0, duration: tricks[id].seconds };
+    emit('trick-start', { riderId: r.id, objectId: id });
+    return true;
+  }
+  /** Forgive an early input for at most 120ms of simulation time, including an
+   * input received on the same tick as takeoff. Grounded riders never perform
+   * tricks and a press during an active trick never queues an automatic combo. */
+  function consumePlayerTrick(r) {
+    if (!trickRequest) return;
+    if (ticks > trickRequest.expiresAt || r.trick || r.crashTime > 0) { trickRequest = null; return; }
+    if (startTrick(r, trickRequest.id)) trickRequest = null;
+  }
+
+  /** A course rock remains solid after its one damage event. Move the board completely
+   * clear on the nearest available side, choosing the inward side near a pipe boundary. */
+  function separateRock(r, object) {
+    const reach = object.radius * physics.rockHitScale + physics.board.halfWidth + .04;
+    const preferred = Math.sign(r.x - object.x) || Math.sign(r.vx) || (r.index % 2 ? -1 : 1);
+    const sides = [preferred, -preferred].map(side => ({side, x: object.x + side * reach}));
+    const clear = sides.find(p => p.x >= -pipe.lip && p.x <= pipe.lip);
+    if (clear) {
+      r.x = clear.x;
+      const rebound = Math.min(physics.lateralSpeed * .3, physics.lipLaunchSpeed * .75, Math.max(1.25, Math.abs(r.vx) * .35 + r.speed * .04));
+      r.vx = clear.side * rebound;
+      if (!r.airborne && !r.ramp) r.alt = surfaceHeight(r.x, pipe);
+      return clear.side;
+    }
+    // Defensive fallback for a hand-authored rock wider than the pipe: do not push a
+    // rider outside the course or let it pass through an obstacle that has no side exit.
+    r.s = Math.min(r.s, object.s - object.radius * physics.rockHitScale - physics.board.halfDepth - .04);
+    r.vx *= -.25;
+    return 0;
+  }
+
+  function collide(r, object) {
+    const speedBefore = r.speed;
+    r.hits.add(object.id); r.collisions++;
+    const rock = object.type === 'rock';
+    // Hitting a rock is a fall for the player and every rival: the rider tumbles, loses most of the
+    // speed and cannot steer or boost until up again. A gate post stays a bump.
+    // physics.fall: a ramp wall or a gate post is a real (shorter) fall too, with its own duration and speed loss.
+    // v24.1: a snowman or a mover is a short fall (v2.snowman / v2.mover), and a shield turns the next fall of any kind into a bump.
+    const hazard = v2 && (object.type === 'snowman' || object.type === 'mover') ? v2[object.type] : null;
+    const fallCfg = hazard || (!rock && physics.fall ? physics.fall[object.type] : null), seconds = (fallCfg ? fallCfg.seconds : physics.crashSeconds) * fallScale(r);
+    if (v2 && r.shieldT > 0 && (rock || fallCfg)) {
+      r.shieldT = 0; r.speed *= 1 - v2.shield.loss; r.hitTime = physics.recoverySeconds * .5; r.grace = .6; r.glideT = 0;
+      const side = rock ? separateRock(r, object) : object.type === 'mover' ? kickOff(r, object) : 0;
+      emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide: side, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1), shielded: true });
+      emit('shield', { riderId: r.id, objectId: object.id, objectType: object.type });
+      return;
+    }
+    if (rock || fallCfg) {
+      r.crashes++; r.speed *= 1 - (fallCfg ? fallCfg.loss : physics.crashSpeedLoss) * lossScale(r); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds;
+      r.boostTime = 0; r.padTime = 0; r.trick = null; r.airScore = 0; r.airTricks = 0;
+    } else { r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds; }
+    r.glideT = 0;
+    const impactSide = rock ? separateRock(r, object) : hazard && object.type === 'mover' ? kickOff(r, object) : 0;
+    emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1) });
+    if (rock || fallCfg) emit('crash', { riderId: r.id, objectId: object.id, objectType: object.type });
+  }
+  /** A mover knocks the rider a little to the side it was on (never off the course). */
+  function kickOff(r, o) {
+    const side = Math.sign(r.x - moverX(o, ticks * step)) || (r.index % 2 ? -1 : 1);
+    r.vx = side * 2.5; r.x = clamp(r.x + side * .25, -pipe.lip, pipe.lip);
+    return side;
+  }
+
+  function takeoff(r, kind, vy, objectId) {
+    r.airborne = true; r.airKind = kind; r.vy = vy; r.airScore = 0; r.airTricks = 0; r.lastTrick = null;
+    // Ramp air boost: a small, capped push forward while airborne (a share of the takeoff speed, never above boost speed).
+    const ab = physics.airBoost, skill = r.ai ? r.ai.speed : wax;
+    r.airCap = ab && kind === 'ramp' ? Math.min(Math.max(r.speed, physics.baseSpeed * skill) * (1 + ab.maxGain), physics.boostSpeed * skill) : 0;
+    r.airScale = ab ? clamp(vy / ab.refVy, .4, 1.2) : 1;
+    emit('takeoff', { riderId: r.id, objectId });
+  }
+  function land(r) {
+    const surface = surfaceHeight(r.x, pipe), impact = r.vy;
+    r.alt = surface; r.vy = 0; r.airborne = false; r.landTime = physics.landSeconds; r.airCap = 0;
+    if (r.airKind === 'pipe') r.vx = -Math.sign(r.x) * Math.min(physics.pipeReturnSpeed, Math.abs(impact) * .6);
+    const kind = r.airKind; r.airKind = null;
+    if (v2 && r.shieldT > 0 && r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
+      // v24.1: the shield saves an unfinished trick too: no points, a little speed, no fall.
+      r.shieldT = 0; r.speed *= 1 - v2.shield.loss;
+      emit('shield', { riderId: r.id, objectId: r.trick.id, objectType: 'trick' }); r.trick = null; r.airScore = 0; r.airTricks = 0;
+      emit('land', { riderId: r.id });
+      return;
+    }
+    if (r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
+      // An unfinished trick on landing is a fall: a big slowdown and a longer recovery.
+      const seconds = physics.crashSeconds * fallScale(r);
+      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss * lossScale(r); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds; r.glideT = 0;
+      emit('crash', { riderId: r.id, objectId: r.trick.id }); r.trick = null; r.airScore = 0; r.airTricks = 0;
+      return;
+    }
+    if (r.trick) { completeTrick(r); }
+    landGlide(r, kind);
+    if (r.airTricks > 0) {
+      const points = Math.round(r.airScore * (1 + physics.comboBonus * (r.airTricks - 1)));
+      r.trickScore += points; r.tank = Math.min(1, r.tank + physics.trickCharge * r.airTricks);
+      emit('trick', { riderId: r.id, objectId: r.lastTrick, value: points, count: r.airTricks });
+    } else emit('land', { riderId: r.id });
+    r.airScore = 0; r.airTricks = 0;
+  }
+  /** Downhill after a jump: a clean, straight landing keeps the rider accelerating for a moment (more with tricks);
+   * a sideways landing scrubs a little speed instead. The glide never lifts speed above the boost cap. */
+  function landGlide(r, kind) {
+    const g = physics.landGlide; if (!g || kind === 'fall') return;
+    if (Math.abs(r.vx) > g.slideVx * physics.lateralSpeed) { r.speed *= 1 - g.slideLoss; r.glideT = 0; return; }
+    r.glideBonus = Math.min(g.max, g.base + g.perTrick * r.airTricks); r.glideT = g.seconds;
+  }
+  function completeTrick(r) { r.airScore += tricks[r.trick.id].points; r.airTricks++; r.lastTrick = r.trick.id; r.trick = null; }
+
+  /** v24.1 pickups and hazards. Stars and power-ups are taken once per rider (like coins); a magnet pulls in coins and stars from
+   * v2.magnet.reach; an air ring counts when the rider flies through its plane inside the ring; snowmen and movers are fall hazards. */
+  const magnetReach = (r, dx, ds, dh) => r.magnetT > 0 && Math.abs(dx) < v2.magnet.reach && Math.abs(ds) < v2.magnet.depth && dh > -1.4 && dh < 3.5;
+  function interactV2(r, o, ds, dx, prevS) {
+    const board = physics.board;
+    if (o.type === 'star') {
+      const st = v2.star, dh = o.h - (r.alt + st.centre);
+      if (!r.stars.has(o.id) && ((Math.abs(dx) < st.reach && Math.abs(ds) < st.depth && Math.abs(dh) < st.height) || magnetReach(r, dx, ds, dh))) {
+        r.stars.add(o.id); r.trickScore += st.points; r.tank = Math.min(1, r.tank + st.tank);
+        emit('pickup', { riderId: r.id, objectId: o.id, objectType: 'star', value: st.points });
+      }
+    } else if (o.type === 'ring') {
+      if (r.airborne && prevS < o.s && r.s >= o.s && !r.stars.has(o.id) && Math.hypot(dx, r.alt + v2.star.centre - o.h) < v2.ring.radius) {
+        r.stars.add(o.id); r.trickScore += v2.ring.points; r.tank = Math.min(1, r.tank + v2.ring.tank);
+        emit('pickup', { riderId: r.id, objectId: o.id, objectType: 'ring', value: v2.ring.points });
+      }
+    } else if (o.type === 'magnet' || o.type === 'shield') {
+      if (!r.picks.has(o.id) && Math.abs(dx) < 1.25 && Math.abs(ds) < 1.1 && r.alt - surfaceHeight(r.x, pipe) < 1.8) {
+        r.picks.add(o.id); if (o.type === 'magnet') r.magnetT = v2.magnet.seconds; else r.shieldT = v2.shield.seconds;
+        emit('pickup', { riderId: r.id, objectId: o.id, objectType: o.type });
+      }
+    } else if (o.type === 'snowman') {
+      if (r.hits.has(o.id) || r.grace > 0 || r.alt >= rockClearance(o.radius) + .6) return;
+      if (boardHitsCircle(dx, ds, board.halfWidth, board.halfDepth, o.radius * physics.rockHitScale)) collide(r, o);
+    } else if (o.type === 'mover') {
+      if (r.hits.has(o.id) || r.grace > 0 || r.alt >= rockClearance(o.radius)) return;
+      if (boardHitsCircle(r.x - moverX(o, ticks * step), ds, board.halfWidth, board.halfDepth, o.radius)) collide(r, o);
+    }
+  }
+  function interact(r, prevS) {
+    const board = physics.board, coin = physics.coins;
+    while (r.cursor < objects.length && objects[r.cursor].s < r.s - 12) r.cursor++;
+    for (let i = r.cursor; i < objects.length && objects[i].s < r.s + 8; i++) {
+      const o = objects[i], ds = r.s - o.s, dx = r.x - o.x;
+      if (o.type === 'coin') {
+        if (!r.coins.has(o.id) && ((Math.abs(dx) < coin.reach && Math.abs(ds) < coin.depth && Math.abs(r.alt + coin.centre - o.h) < coin.height) || (v2 && magnetReach(r, dx, ds, o.h - (r.alt + coin.centre))))) {
+          r.coins.add(o.id); emit('coin', { riderId: r.id, objectId: o.id });
+        }
+      } else if (o.type === 'rock') {
+        if (r.alt >= rockClearance(o.radius) || !boardHitsCircle(dx, ds, board.halfWidth, board.halfDepth, o.radius * physics.rockHitScale)) continue;
+        if (r.hits.has(o.id)) { separateRock(r, o); continue; }
+        if (r.grace <= 0) collide(r, o);
+      } else if (o.type === 'gate') {
+        if (r.alt < physics.gatePostHeight && !r.hits.has(o.id) && r.grace <= 0) {
+          for (const side of [-1, 1]) {
+            const px = dx - side * physics.gateHalfWidth;
+            if (Math.abs(px) < board.halfWidth + physics.postHalf[0] && Math.abs(ds) < board.halfDepth + physics.postHalf[1]) { collide(r, o); break; }
+          }
+        }
+        if (prevS < o.s && r.s >= o.s && !r.gates.has(o.id) && !r.hits.has(o.id) && Math.abs(dx) < physics.gateHalfWidth - physics.postHalf[0] - board.halfWidth) {
+          r.gates.add(o.id); r.tank = Math.min(1, r.tank + physics.gateCharge * (r.ai ? 1 : goggles));
+          emit('gate', { riderId: r.id, objectId: o.id });
+        }
+      } else if (o.type === 'boost') {
+        if (!r.airborne && !r.pads.has(o.id) && Math.abs(dx) < physics.pad.width / 2 && Math.abs(ds) < physics.pad.length / 2) {
+          r.pads.add(o.id); r.padTime = physics.padSeconds; r.tank = Math.min(1, r.tank + physics.padCharge);
+          emit('boost-start', { riderId: r.id, objectId: o.id });
+        }
+      } else if (o.type === 'ramp') {
+        const dims = rampOf(o), near = o.s - dims.length / 2, far = o.s + dims.length / 2, halfW = dims.width / 2;
+        if (!r.airborne && r.ramp === null && prevS < near && r.s >= near && Math.abs(dx) <= halfW) r.ramp = o;
+        else if (!r.airborne && r.ramp === null && !r.hits.has(o.id) && r.grace <= 0 && r.s > near + 0.6 && r.s < far && Math.abs(dx) < halfW + board.halfWidth * 0.5) {
+          // Riding into the side wall of a ramp is a collision; the rider is moved clear of it.
+          collide(r, o); r.x = o.x + Math.sign(dx || 1) * (halfW + board.halfWidth * 0.5 + 0.05); r.vx = 0;
+        }
+      } else if (v2) interactV2(r, o, ds, dx, prevS);
+    }
+  }
+
+  function updateRider(r, dt) {
+    if (r.finished) {
+      // Finished riders glide on so the view and rank stay continuous.
+      r.speed = Math.max(0, r.speed - 4 * dt); r.s += r.speed * dt;
+      if (r.airborne) { r.vy -= physics.gravity * dt; r.alt += r.vy * dt; if (r.alt <= surfaceHeight(r.x, pipe)) { r.alt = surfaceHeight(r.x, pipe); r.airborne = false; r.trick = null; r.vy = 0; } }
+      return;
+    }
+    // League courses only: the side wind here (goggles soften it for the player; a rider who is down drifts a little).
+    const wind = windZones ? windFor(r) * (r.ai ? 1 : 1 / goggles) * (r.crashTime > 0 ? .3 : 1) : 0;
+    if (r.ai) {
+      r.decideIn -= dt; if (r.decideIn <= 0) aiDecide(r);
+      // Feed-forward against the turn's outward push, then a proportional pull to the chosen line.
+      const lean = curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush / (physics.lateralResponse * physics.lateralSpeed);
+      // In wind the computer leans into the gust too, not quite fully (ai.windComp, default 0.85).
+      r.steer = clamp((r.targetX - r.x) * 0.7 + lean - (wind ? (r.ai.windComp ?? .85) * wind / physics.lateralSpeed : 0), -1, 1);
+      if (r.wantsBoost) { r.wantsBoost = false; if (r.crashTime <= 0) startBoost(r); }
+      if (r.airborne) aiTrick(r);
+    } else {
+      if (r.crashTime > 0) boostRequest = false;
+      else {
+        // Fine control near the centre (expo) and a rate limit so a thumb flick cannot snap the board sideways.
+        // Less twitchy at speed: the expo grows and the attack slows with the boost share, so a boosted board never snaps sideways.
+        const boostShare = clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1);
+        const shaped = Math.sign(steerInput) * Math.pow(Math.abs(steerInput), (physics.steerExpo ?? 1) + (physics.steerBoostExpo ?? 0) * boostShare);
+        const rate = ((Math.sign(shaped) !== Math.sign(r.steerOut) || Math.abs(shaped) > Math.abs(r.steerOut) ? physics.steerAttack : physics.steerRelease) ?? 1e9) * (1 - (physics.steerBoostSoften ?? 0) * boostShare);
+        r.steerOut += clamp(shaped - r.steerOut, -rate * dt, rate * dt);
+        r.steer = r.steerOut;
+        // v24.1 curve assist: the same feed-forward against the turn's outward push the computer riders use, so a centred stick keeps
+        // the line through a turn instead of drifting up the outer wall. The body still leans on the stick alone (steerOut).
+        if (v2 && !r.airborne) r.steer = clamp(r.steerOut + v2.curveAssist * curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush / (physics.lateralResponse * physics.lateralSpeed), -1, 1);
+        if (boostRequest) { boostRequest = false; startBoost(r); }
+      }
+      consumePlayerTrick(r);
+      // v24.1 brake (snowplough), player only: never in the air, in a fall or after the finish.
+      if (v2) r.brake = r.crashTime > 0 || r.airborne || r.ramp ? 0 : brakeInput;
+    }
+    if (r.crashTime > 0) { r.steer = 0; r.steerOut = 0; }
+    const angle = r.airborne ? 0 : wallAngle(r.x, pipe), onWall = angle > 0;
+    const boosted = r.boostTime > 0 || r.padTime > 0;
+    const skill = r.ai ? r.ai.speed : wax;
+    let target = (boosted ? physics.boostSpeed : physics.baseSpeed) * skill * (onWall ? physics.wallSpeedFactor : 1);
+    let decel = physics.deceleration;
+    if (v2) {
+      // v24.1 pace: a steep drop lifts the cruising speed (never above the boost speed), ice is a little fast, deep snow slows a rider
+      // who is not boosting; the brake caps the speed and slows hard.
+      r.surface = patchUnder(r)?.type ?? null;
+      if (!boosted && inSteep(r.s)) target = Math.min(physics.boostSpeed * skill, target * v2.speed.cruise);
+      if (r.surface === 'ice' && !boosted) target = Math.min(physics.boostSpeed * skill, target * v2.ice.speed);
+      if (r.surface === 'powder' && !boosted) { target *= v2.powder.speed; decel = Math.max(decel, v2.powder.decel); }
+      if (r.brake > 0) r.glideT = 0;
+    }
+    let glide = 1;
+    if (r.glideT > 0 && physics.landGlide && !r.airborne && r.crashTime <= 0) {
+      const g = physics.landGlide; glide = g.accelMul;
+      target = Math.min(Math.max(target, physics.boostSpeed * skill), target + r.glideBonus * r.glideT / g.seconds); r.glideT = Math.max(0, r.glideT - dt);
+    }
+    if (v2 && r.brake > 0) { target = Math.min(target, Math.max(v2.brake.min, target * (1 - v2.brake.cut * r.brake))); decel = Math.max(decel, v2.brake.decel * r.brake); }
+    // A boost must help below cruising speed too; use the same acceleration rule for
+    // the player, rivals and boost pads without changing their configured speed caps.
+    const acceleration = physics.acceleration * (boosted ? 2 : 1) * glide;
+    // Ramp air: no snow to slow the rider, so speed is held (no deceleration), and a capped push is added on top (physics.airBoost).
+    const rampAir = r.airborne && r.airCap > 0 && r.crashTime <= 0;
+    if (r.speed < target) r.speed = Math.min(target, r.speed + acceleration * dt);
+    else if (!rampAir) r.speed = Math.max(target, r.speed - decel * dt);
+    if (rampAir && r.speed < r.airCap) {
+      // Flying straight earns the full push; steering hard in the air halves it (a crooked jump is still the worse jump).
+      const ab = physics.airBoost, straight = 1 - ab.steerPenalty * clamp(Math.abs(r.vx) / physics.lateralSpeed, 0, 1);
+      r.speed = Math.min(r.airCap, r.speed + ab.accel * r.airScale * straight * dt);
+    }
+    if (r.boostTime > 0) { r.boostTime = Math.max(0, r.boostTime - dt); if (r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
+    else r.tank = Math.min(1, r.tank + physics.boostRechargePerSecond * (r.ai ? 1 : recharge) * dt);
+    if (r.padTime > 0) { r.padTime = Math.max(0, r.padTime - dt); if (r.padTime === 0 && r.boostTime === 0) emit('boost-end', { riderId: r.id }); }
+    r.hitTime = Math.max(0, r.hitTime - dt); r.grace = Math.max(0, r.grace - dt); r.landTime = Math.max(0, r.landTime - dt); r.crashTime = Math.max(0, r.crashTime - dt);
+    if (v2) { r.shieldT = Math.max(0, r.shieldT - dt); r.magnetT = Math.max(0, r.magnetT - dt); }
+    // Lateral: steering sets a target lateral speed. Walls pull back toward the floor, turns push
+    // toward the outer wall, and airborne riders have reduced (pipe air: no) control.
+    if (r.airKind !== 'pipe') {
+      const control = r.airborne ? (r.airCap > 0 && physics.airBoost?.control ? physics.airBoost.control : physics.airControl) : Math.cos(angle);
+      const lateral = r.steer * physics.lateralSpeed * (1 - (physics.lateralBoostDamp ?? 0) * clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1));
+      // Wind shifts the line a rider holds: with the stick centred the board drifts at the gust's speed.
+      let want = wind ? lateral + wind : lateral, response = physics.lateralResponse * control;
+      if (v2 && !r.airborne && !onWall) {
+        // v24.1 grip, on the floor: easing off or reversing the stick, the edges bite (less sliding past the lane). Ice: little grip and a
+        // softer stick, so the skis keep sliding the way they went; deep snow holds a little less. The walls keep the v24 feel (the
+        // drop back from pipe air is not damped).
+        if (r.surface === 'ice') { response *= v2.ice.grip; want *= v2.ice.steer; }
+        else { if (r.surface === 'powder') response *= v2.powder.grip; if (Math.abs(want) < Math.abs(r.vx) - .05 || want * r.vx < 0) response *= v2.grip; }
+      }
+      r.vx += (want - r.vx) * Math.min(1, response * dt);
+      if (!r.airborne) {
+        if (onWall) r.vx -= Math.sign(r.x) * physics.wallGravity * Math.sin(angle) * dt;
+        r.vx -= curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush * dt;
+      }
+      r.x += r.vx * dt;
+    }
+    if (Math.abs(r.x) >= pipe.lip) {
+      const outward = r.vx * Math.sign(r.x);
+      if (!r.airborne && outward > physics.lipLaunchSpeed) {
+        r.x = Math.sign(r.x) * pipe.lip; r.alt = pipe.lipHeight;
+        takeoff(r, 'pipe', outward * physics.lipLaunchFactor + physics.lipKick, 'lip'); r.vx = 0;
+      } else { r.x = Math.sign(r.x) * pipe.lip; if (outward > 0) r.vx = 0; }
+    }
+    const prevS = r.s;
+    r.s += r.speed * dt;
+    // Vertical
+    if (r.ramp) {
+      const o = r.ramp, dims = rampOf(o), near = o.s - dims.length / 2, far = o.s + dims.length / 2;
+      if (Math.abs(r.x - o.x) > dims.width / 2) { r.ramp = null; takeoff(r, 'fall', 0, o.id); }
+      else if (r.s >= far) {
+        r.ramp = null; r.alt = dims.height;
+        takeoff(r, 'ramp', r.speed * (dims.height / dims.length) + launchOf(o), o.id);
+      } else r.alt = dims.height * (r.s - near) / dims.length;
+    } else if (r.airborne) {
+      r.vy -= physics.gravity * dt; r.alt += r.vy * dt;
+      if (r.trick) { r.trick.t += dt; if (r.trick.t >= r.trick.duration) completeTrick(r); }
+      if (r.vy <= 0 && r.alt <= surfaceHeight(r.x, pipe)) land(r);
+    } else r.alt = surfaceHeight(r.x, pipe);
+    // A ramp/lip can launch after input was read at the top of this tick.
+    // Consume the surviving request only after that authoritative launch.
+    if (!r.ai) consumePlayerTrick(r);
+    interact(r, prevS);
+    // v24.1: the player is told when a section begins (HUD banner, sound).
+    if (v2 && !r.ai) while (r.sectionCursor < sections.length && r.s >= sections[r.sectionCursor].s0) { emit('section', { riderId: 'player', objectId: `section-${r.sectionCursor}`, kind: sections[r.sectionCursor].kind }); r.sectionCursor++; }
+    if (!r.ai) r.peak = Math.max(r.peak, r.speed);
+    if (r.s >= course.length) {
+      const over = (r.s - course.length) / Math.max(r.speed, 1e-6);
+      r.finished = true; r.finishTicks = ticks + 1 - over / step;
+      emit('finish', { riderId: r.id });
+    }
+  }
+
+  function separate() {
+    const sep = physics.riderSeparation;
+    for (let i = 0; i < riders.length; i++) for (let j = i + 1; j < riders.length; j++) {
+      const a = riders[i], b = riders[j];
+      if (a.finished || b.finished || a.airborne || b.airborne) continue;
+      const ds = a.s - b.s, dx = a.x - b.x;
+      if (Math.abs(ds) < 1.6 && Math.abs(dx) < sep) {
+        const push = (sep - Math.abs(dx)) * 0.12, dir = dx === 0 ? (a.index < b.index ? -1 : 1) : Math.sign(dx);
+        a.x = clamp(a.x + dir * push, -pipe.lip, pipe.lip);
+        b.x = clamp(b.x - dir * push, -pipe.lip, pipe.lip);
+        // Two riders touching bump each other: a small jolt sideways and a slight slowdown (like clipping a gate post),
+        // never a fall. One bump per pair every bumpCooldown seconds; riders already down are not bumped.
+        const key = a.index * 16 + b.index;
+        if (a.crashTime <= 0 && b.crashTime <= 0 && (bumpUntil.get(key) ?? 0) <= ticks) {
+          bumpUntil.set(key, ticks + Math.round((physics.bumpCooldown ?? .6) / step));
+          const kick = physics.bumpImpulse ?? 2.4, loss = 1 - (physics.bumpSpeedLoss ?? .04);
+          a.vx += dir * kick; b.vx -= dir * kick; a.speed *= loss; b.speed *= loss;
+          a.hitTime = b.hitTime = Math.max(a.hitTime, physics.recoverySeconds * .7);
+          if (!a.ai || !b.ai) emit('collision', { riderId: a.ai ? b.id : a.id, objectId: a.ai ? a.id : b.id, objectType: 'rider', impactSide: a.ai ? -dir : dir, impactStrength: .35 });
+        }
+      }
+    }
+  }
+
+  function standings() {
+    return [...riders].sort((a, b) => {
+      if (a.finished !== b.finished) return a.finished ? -1 : 1;
+      if (a.finished) return a.finishTicks - b.finishTicks || a.index - b.index;
+      return b.s - a.s || a.index - b.index;
+    });
+  }
+
+  function finishRace(completed) {
+    const player = riders[0], ranked = standings(), rank = ranked.indexOf(player) + 1;
+    finalOrder = ranked.map(r => r.id);
+    const elapsedMs = Math.round((completed ? player.finishTicks : ticks) * step * 1000);
+    const coins = player.coins.size, reward = alpineReward(balance, stage, rank, completed, coins);
+    result = Object.freeze({
+      runId: `alpine-${track.id}-${Number(seed) >>> 0}-${run}`, rank, elapsedMs, peakKmh: Math.round(player.peak * 3.6),
+      reward: reward.money, won: reward.won, stars: reward.stars, score: reward.score, completed,
+      stage, trackId: track.id, seed: Number(seed) >>> 0, totalRiders: riders.length, collisions: player.collisions,
+      trickScore: player.trickScore, coins, crashes: player.crashes,
+    });
+    phase = 'finished';
+  }
+
+  function tick() {
+    if (phase === 'countdown') {
+      countdownTicks--;
+      const value = Math.max(0, Math.ceil(countdownTicks * step - 1e-9));
+      if (value !== countdownShown) { countdownShown = value; emit('countdown', { value }); }
+      if (countdownTicks <= 0) phase = 'racing';
+      return;
+    }
+    ticks++;
+    for (const r of riders) updateRider(r, step);
+    separate();
+    const next = standings().map(r => r.id);
+    const playerBefore = order.indexOf('player'), playerAfter = next.indexOf('player');
+    if (playerAfter < playerBefore) for (const id of order.slice(playerAfter, playerBefore)) emit('overtake', { riderId: 'player', objectId: id });
+    else if (playerAfter > playerBefore) for (const id of next.slice(playerBefore, playerAfter)) emit('overtake', { riderId: id, objectId: 'player' });
+    order = next;
+    if (riders[0].finished) finishRace(true);
+    else if (ticks * step >= balance.maximumSeconds) finishRace(false);
+  }
+
+  function frame(r) {
+    const p = riders[0];
+    return {
+      id: r.id, x: r.x, z: p.s - r.s, s: r.s, height: heightOf(r),
+      lean: clamp(r.vx / physics.lateralSpeed, -1, 1),
+      // What the player is asking for right now (stick after expo and rate limit): the body leans on this before the track position moves.
+      intent: r.ai ? clamp(r.steer, -1, 1) : r.steerOut,
+      boosting: r.boostTime > 0 || r.padTime > 0, hit: r.hitTime > physics.recoverySeconds - physics.hitFlashSeconds || r.crashTime > 0,
+      crashed: r.crashTime > 0, crashDur: r.crashDur || physics.crashSeconds, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind, airBoost: r.airborne && r.airCap > 0 && r.crashTime <= 0 && r.speed < r.airCap - 1e-6,
+      trick: r.trick ? { id: r.trick.id, progress: Math.min(1, r.trick.t / r.trick.duration) } : null,
+      // v24.1 only (the v24 frame keeps its exact keys): brake 0..1, shield and magnet seconds left, the patch underfoot, the turn bank.
+      ...(v2 ? { braking: +r.brake.toFixed(3), shield: +r.shieldT.toFixed(2), magnet: +r.magnetT.toFixed(2), surface: r.surface, curve: +(curvatureAt(course.path, r.s) * r.speed * r.speed).toFixed(3), v: +r.speed.toFixed(2) } : {}),
+    };
+  }
+
+  /** v24.1 objects as the snapshot shows them to the player: taken stars, rings and power-ups and smashed snowmen are gone, a mover is
+   * where it is now (and which way it rolls). */
+  function v2Obstacle(o, p, now) {
+    const base = { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s };
+    switch (o.type) {
+      case 'star': case 'ring': return p.stars.has(o.id) ? null : { ...base, h: o.h };
+      case 'magnet': case 'shield': return p.picks.has(o.id) ? null : base;
+      case 'snowman': return p.hits.has(o.id) ? null : { ...base, radius: o.radius };
+      case 'mover': { const x = moverX(o, now), ahead = moverX(o, now + .05); return { ...base, x, kind: o.kind, radius: o.radius, dir: Math.sign(ahead - x) || 1, centre: o.x, amp: o.amp }; }
+      case 'ice': case 'powder': return { ...base, w: o.w, len: o.len };
+      case 'ramp': return { ...base, big: 1 };
+      default: return base;
+    }
+  }
+  /** The section the HUD names: the one the player is in, or the next one within 90 m. */
+  function sectionCue(p) {
+    for (const z of sections) {
+      if (p.s >= z.s0 && p.s <= z.s1) return { kind: z.kind, active: true, leftM: Math.round(z.s1 - p.s) };
+      if (z.s0 > p.s) return z.s0 - p.s <= 90 ? { kind: z.kind, active: false, inM: Math.round(z.s0 - p.s) } : null;
+    }
+    return null;
+  }
+  const copyFrame = value => ({...value, trick: value.trick ? {...value.trick} : null});
+  function presentationFrames(player, rivals) {
+    const active = !disposed && phase === 'racing' && riders.length > 0;
+    const previous = active && previousPresentation;
+    return {
+      alpha: active ? clamp(accumulator / step, 0, 1) : 1,
+      previousPlayer: copyFrame(previous ? previous.player : player),
+      previousRivals: (previous ? previous.rivals : rivals).map(copyFrame),
+    };
+  }
+
+  const engine = {
+    course, level, track, pipe,
+    command(cmd) {
+      if (disposed || !cmd || typeof cmd !== 'object') return;
+      switch (cmd.type) {
+        case 'start': if (phase === 'menu') reset(); break;
+        case 'steer': steerInput = clamp(Number(cmd.value) || 0, -1, 1); break;
+        // v24.1: the stick pulled down (0..1). Without physics.v241 it is ignored, as in v24.
+        case 'brake': brakeInput = v2 ? clamp(Number(cmd.value) || 0, 0, 1) : 0; break;
+        case 'boost': if (phase === 'racing') boostRequest = true; break;
+        case 'trick': if (phase === 'racing' && TRICK_IDS.includes(cmd.id)) trickRequest = {id: cmd.id, expiresAt: ticks + Math.max(1, Math.floor(.12 / step))}; break;
+        case 'pause': if (phase === 'countdown' || phase === 'racing') { resumePhase = phase; phase = 'paused'; accumulator = 0; steerInput = 0; brakeInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; } break;
+        case 'resume': if (phase === 'paused') { phase = resumePhase; resumePhase = null; accumulator = 0; previousPresentation = null; } break;
+        case 'retry': if (phase !== 'menu') reset(); break;
+        case 'exit': phase = 'menu'; steerInput = 0; brakeInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; break;
+      }
+    },
+    step(dtSeconds) {
+      if (disposed || (phase !== 'countdown' && phase !== 'racing')) return 0;
+      const dt = clamp(Number(dtSeconds) || 0, 0, physics.maxCatchUpSeconds);
+      accumulator += dt;
+      let count = Math.floor((accumulator + 1e-7) / step);
+      accumulator = Math.max(0, accumulator - count * step);
+      let done = 0;
+      while (count-- > 0 && (phase === 'countdown' || phase === 'racing')) {
+        previousPresentation = {player: frame(riders[0]), rivals: riders.slice(1).map(frame)};
+        tick(); done++;
+      }
+      if (phase === 'finished') accumulator = 0;
+      return done;
+    },
+    snapshot() {
+      const p = riders[0];
+      if (!p) {
+        const player = { id: 'player', x: 0, z: 0, s: 0, height: 0, lean: 0, boosting: false, hit: false, trick: null };
+        return {
+        schemaVersion: 1, phase, timeMs: 0, distanceM: 0, remainingM: course.length, rank: RIDER_IDS.length, totalRiders: RIDER_IDS.length,
+        speedKmh: 0, player, rivals: [], obstacles: [],
+        countdown: Math.ceil(physics.countdownSeconds), countdownMs: Math.round(physics.countdownSeconds * 1000), boostFraction: physics.boostStartTank, trackLength: course.length, score: 0, coins: 0, coinTotal: course.coins || 0,
+        };
+      }
+      const ranked = standings();
+      const ahead = physics.viewAhead, behind = physics.viewBehind, obstacles = [];
+      const now = ticks * step;
+      for (const o of objects) {
+        if (o.s < p.s - behind) continue; if (o.s > p.s + ahead) break;
+        if (o.type === 'coin') { if (!p.coins.has(o.id)) obstacles.push({ id: o.id, type: 'coin', x: o.x, z: p.s - o.s, s: o.s, h: o.h }); continue; }
+        if (v2 && o.type !== 'rock' && o.type !== 'gate' && o.type !== 'boost' && o.type !== 'warn' && !(o.type === 'ramp' && !o.big)) { const v = v2Obstacle(o, p, now); if (v) obstacles.push(v); continue; }
+        obstacles.push(o.type === 'rock' ? { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s, radius: o.radius } : { id: o.id, type: o.type, x: o.x, z: p.s - o.s, s: o.s });
+      }
+      if (course.length - p.s < ahead) obstacles.push({ id: 'finish', type: 'finish', x: 0, z: p.s - course.length, s: course.length });
+      const player = frame(p), rivals = riders.slice(1).map(frame);
+      return {
+        schemaVersion: 1, phase, timeMs: Math.round(ticks * step * 1000), distanceM: p.s, remainingM: Math.max(0, course.length - p.s),
+        rank: ranked.indexOf(p) + 1, totalRiders: riders.length, speedKmh: Math.round(p.speed * 3.6),
+        player, rivals, obstacles,
+        countdown: phase === 'countdown' ? Math.max(1, Math.ceil(countdownTicks * step - 1e-9)) : 0,
+        // Remaining countdown in ms (the start lights follow it; read-only, nothing in the race depends on it).
+        countdownMs: phase === 'countdown' ? Math.max(0, Math.round(countdownTicks * step * 1000)) : 0,
+        boostFraction: p.boostTime > 0 ? Math.min(1, p.boostTime / (physics.boostSeconds * tankSize)) : p.tank,
+        boostReady: p.boostTime <= 0 && p.tank >= physics.boostMinimum,
+        trickReady: p.airborne && !p.trick && p.crashTime <= 0,
+        score: p.trickScore, coins: p.coins.size, coinTotal: course.coins || 0,
+        trackLength: course.length,
+        // League courses: the side wind at the player (m/s, + right) and the next gust within 60 m, for the HUD.
+        ...(windZones ? { wind: { v: +windAt(windZones, p.s).toFixed(3), next: nextWind(windZones, p.s) } } : {}),
+        // v24.1: the section to name on the HUD, the stars taken (they count into score), whether braking is available.
+        ...(v2 ? { v241: true, section: sectionCue(p), stars: p.stars.size } : {}),
+        ...(result ? { result: { ...result } } : {}),
+      };
+    },
+    /** Ski league v23: what a league result needs beyond the island race summary: the finishing order of all six riders (taken when
+     * the race ended) and the gates the player went through. Read-only. */
+    leagueStats() {
+      const p = riders[0];
+      return { order: finalOrder ? [...finalOrder] : standings().map(r => r.id), gates: p ? p.gates.size : 0, gatesTotal, crashes: p ? p.crashes : 0 };
+    },
+    /** Read-only render timing, deliberately separate from the canonical SkiFrame. */
+    presentation() {
+      const player = riders[0] ? frame(riders[0]) : { id: 'player', x: 0, z: 0, s: 0, height: 0, lean: 0, boosting: false, hit: false, trick: null };
+      return presentationFrames(player, riders.slice(1).map(frame));
+    },
+    drainEvents() { const out = events; events = []; return out; },
+    dispose() { disposed = true; events = []; riders = []; steerInput = 0; brakeInput = 0; boostRequest = false; trickRequest = null; previousPresentation = null; },
+    /** Read-only diagnostics for tests; never used to render or score. */
+    debug() { return riders.map(r => ({ id: r.id, s: r.s, x: r.x, vx: r.vx, speed: r.speed, tank: r.tank, boostTime: r.boostTime, padTime: r.padTime, hitTime: r.hitTime, height: heightOf(r), alt: r.alt, vy: r.vy, airborne: r.airborne, airKind: r.airKind, trick: r.trick ? {...r.trick} : null, trickScore: r.trickScore, crashes: r.crashes, coins: r.coins.size, finished: r.finished, collisions: r.collisions, hits: [...r.hits], pads: [...r.pads], gates: [...r.gates] })); },
+    get phase() { return phase; },
+    get disposed() { return disposed; },
+  };
+  return engine;
+}

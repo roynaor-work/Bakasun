@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102731"><meta name="description" content="הגנו על האי מפני פלישת חזירים רובוטיים. משחק ירי תלת ממדי עם ארבעה נשקים, גלי אויבים, בוסים ושדרוגים.">
+  <title>אי החזירים — הגנת החווה</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game" data-mode="menu" aria-label="אי החזירים — הגנת החווה">
+    <canvas id="scene" tabindex="0" aria-label="זירת המשחק. כוונו בעכבר ולחצו לירי. 1 עד 4 החלפת נשק, R טעינה, Q טיל, E הקפאה, רווח כוח אש, P השהיה."></canvas>
+    <div class="vignette" aria-hidden="true"></div><div id="damage-flash" aria-hidden="true"></div><div id="frost-veil" aria-hidden="true"></div>
+    <header id="hud">
+      <div class="hud-top"><div class="brand"><span class="brand-icon">◈</span><div><strong>אי החזירים</strong><small>ISLAND DEFENSE</small></div></div><div class="top-controls"><button id="sound" class="icon-btn" aria-label="כיבוי צליל" title="צליל">♫</button><button id="pause" class="icon-btn" aria-label="השהיה" title="השהיה (P)">Ⅱ</button><button id="fullscreen" class="icon-btn" aria-label="מסך מלא" title="מסך מלא">⛶</button></div></div>
+      <div class="combat-hud"><div class="health-block"><div><span>הגנת האי</span><b id="hp-text">100 / 100</b></div><div class="bar health"><i id="hp-fill"></i></div></div><div class="wave-block"><small>הגל הנוכחי</small><b id="wave">01</b><span id="progress">מוכנים לפלישה</span></div><div class="coin-block"><span class="coin">◆</span><b id="coins">250</b><small>מטבעות</small></div></div>
+    </header>
+    <div id="enemy-labels" aria-hidden="true"></div><div id="crosshair" aria-hidden="true"><span></span><i></i><b></b><em></em></div><div id="hit-marker" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div id="banner" role="status"></div><div id="toast" role="status"></div>
+    <div id="boss-hud" hidden><span id="boss-name">מלך הברזל</span><div class="bar"><i id="boss-fill"></i></div></div>
+    <div id="battle-ui" hidden>
+      <div class="ammo-panel"><div><small id="weapon-name">מקלע חוף · דרגה 1</small><strong id="heat-text">מוכן לירי</strong></div><div class="bar heat"><i id="heat-fill"></i></div><div id="ammo-pips" class="ammo-pips"></div></div>
+      <div id="weapons" class="weapons" role="toolbar" aria-label="בחירת נשק"></div>
+      <div class="abilities"><button id="rocket" class="ability"><kbd>Q</kbd><span class="ability-icon">↗</span><strong>מטח טילים</strong><small id="rocket-cd">מוכן</small><i></i></button><button id="frost" class="ability"><kbd>E</kbd><span class="ability-icon">❄</span><strong>גל הקפאה</strong><small id="frost-cd">מוכן</small><i></i></button><button id="fury" class="ability fury"><kbd>רווח</kbd><span class="ability-icon">ϟ</span><strong>כוח אש</strong><small id="fury-text">0%</small><i></i></button></div>
+      <div class="battle-hint" id="battle-hint">כוונו בעכבר · החזיקו לחיצה לירי <span>1–4 נשק · R טעינה · Q טילים · E הקפאה · P השהיה</span></div>
+    </div>
+    <section id="menu" class="overlay menu-screen">
+      <div class="menu-content"><div class="eyebrow"><span></span> קו ההגנה האחרון של האי</div><h1>אי <span>החזירים</span></h1><p class="subtitle">הגנת החווה</p><div class="menu-line"></div><p class="intro">הם באים מהים. הם עשויים מברזל.<br>ואת היבול שלנו הם לא יקבלו.</p><div class="menu-actions"><button id="start" class="primary">הגנו על האי <span>←</span></button><button id="garage" class="secondary">מוסך ונשקים <span>⚙</span></button></div><div class="menu-meta"><span>◈ גוף ראשון</span><span>ϟ ארבעה נשקים</span><span>♛ שני בוסים</span><span>⚓ כרישים, מנטות וסרטנים</span></div><div class="menu-links"><button id="help" class="text-btn">איך משחקים?</button><button id="quality" class="text-btn">איכות גרפיקה</button></div><p class="save-note" id="save-note">ההתקדמות נשמרת אוטומטית במכשיר הזה</p></div>
+      <div class="sector-tag"><span>SECTOR 01 / TROPICAL COAST</span><b>חוף הדקלים</b><small>זוהתה תנועה באופק ●</small></div><div class="version">BOAR ISLAND · V0.4.2</div>
+    </section>
+    <section id="shop" class="overlay panel-screen" hidden><div class="panel shop-panel"><div class="panel-heading"><div><div class="eyebrow" id="shop-eyebrow">חוזרים לקרב חזקים יותר</div><h2 id="shop-title">מוסך החוף</h2><p id="shop-subtitle">שדרגו את הנשקים ואת ההגנה לפני הגל הבא.</p></div><span class="shop-wallet">◆ <b id="shop-coins">250</b></span></div>
+      <div id="wave-stats" class="wave-stats" hidden></div>
+      <div class="tabs" role="tablist"><button id="tab-weapons" class="tab active" role="tab" aria-selected="true">נשקים</button><button id="tab-upgrades" class="tab" role="tab" aria-selected="false">ביצורים ויכולות</button></div>
+      <div id="weapon-grid" class="weapon-grid"></div><div id="upgrade-grid" class="upgrade-grid" hidden></div>
+      <div id="perk-section" hidden><h3>בחרו יתרון לגל הבא</h3><div id="perks" class="perks"></div></div>
+      <div class="shop-footer"><span id="shop-message">כל שדרוג נשמר אוטומטית</span><button id="next-wave" class="primary">יוצאים לקרב ←</button><button id="shop-back" class="secondary">חזרה</button></div></div></section>
+    <section id="pause-screen" class="overlay panel-screen" hidden><div class="panel small-panel"><div class="eyebrow">נשימה לפני המטח הבא</div><h2>האי מחכה לכם</h2><p>הקרב מושהה.</p><button id="resume" class="primary">ממשיכים בקרב ←</button><button id="exit" class="secondary">חזרה לבסיס</button></div></section>
+    <section id="gameover" class="overlay panel-screen" hidden><div class="panel small-panel"><div class="eyebrow">החזירים פרצו את ההגנה</div><h2>נחזור חזקים יותר</h2><p id="result"></p><button id="retry" class="primary">ניסיון נוסף ←</button><button id="death-shop" class="secondary">שדרגו במוסך</button></div></section>
+    <section id="help-screen" class="overlay panel-screen" hidden><div class="panel small-panel help-panel"><div class="eyebrow">תדריך קצר</div><h2>החוף בידיים שלכם</h2><p>כוונו בעכבר והחזיקו לחיצה כדי לירות. בטלפון: מניחים אצבע בכל מקום וגוררים, הכוונת זזה יחד עם האצבע בלי שהאצבע תסתיר את המטרה. אפשר לכוון גם עם החצים ולירות עם F.</p><p><b>1–4 / גלגלת</b>: החלפת נשק. <b>R</b>: טעינה מחדש.<br><b>Q / מטח טילים</b>: פיצוץ באזור הכוונת.<br><b>E / הקפאה</b>: מאטה את כל הפלישה.<br><b>רווח / כוח אש</b>: כשהמד מלא, ירי כפול בלי התחממות.<br><b>P / השהיה</b>: עוצר את הקרב.</p><p>העיניים הזוהרות הן נקודת התורפה: פגיעה בהן כפולה. שריון מחזיר ניצוצות ובולע נזק, פיצוצים חודרים אותו. פגזי מרגמה וטורפדו אפשר להפיל לפני שהם מגיעים. מה שמתחת למים לא נפגע, אז מחכים שהכריש יעלה. הצבת הגדולה של סרטן המצור בולעת כדורים, אז מכוונים לעיניים שעל הגבעולים או יורים פגז. מנטה שמאדימה צוללת אל העמדה, ויורים בה מיד. בגל 5 מגיע מלך הברזל, בגל 10 ספינת הכוורת.</p><button id="help-close" class="primary">הבנתי, מוכנים ←</button></div></section>
+    <section id="error-screen" class="overlay panel-screen" hidden><div class="panel small-panel"><h2>התלת־ממד לא נטען</h2><p id="error-message">נסו לרענן ולוודא שהדפדפן תומך ב־WebGL.</p><button onclick="location.reload()" class="primary">טעינה מחדש</button></div></section>
+  </main><script type="module" src="game.js"></script>
+</body></html>

@@ -1,0 +1,385 @@
+@font-face{font-family:Island;src:local("Arial");font-display:swap}
+:root{font-family:Island,"Segoe UI",Arial,sans-serif;color:#224b58;background:#c5edf0;font-synthesis:none;--ink:#224b58;--teal:#258b87;--muted:#77908e;--cream:#fffdf4;--line:#dce9df;--shadow:0 2px 4px #245f7018;--edge:8px;--rail:64px}
+*{box-sizing:border-box}body{margin:0;overflow:hidden}h1,h2,h3,p{margin:0}
+button,input{font:inherit}button{min-width:56px;min-height:56px;border:0;border-radius:14px;cursor:pointer;font-weight:700;color:var(--ink);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible{outline:3px solid #164e7c;outline-offset:-3px}button:disabled{opacity:.48;cursor:default}[hidden]{display:none!important}
+#world{width:100vw;height:100dvh;display:block;position:fixed;inset:0;touch-action:none}
+.island-ui{position:fixed;inset:0;pointer-events:none}.panel{background:var(--cream);border:1px solid #fff;border-radius:16px;box-shadow:var(--shadow)}
+.hud{position:absolute;inset-block-start:max(var(--edge),env(safe-area-inset-top));inset-inline-start:max(var(--edge),env(safe-area-inset-right));inset-inline-end:calc(max(var(--edge),env(safe-area-inset-left)) + var(--rail) + 8px);display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.hud>aside{pointer-events:auto;min-width:0}.status-strip,.mission-strip{width:100%;height:56px;display:flex;align-items:center;background:var(--cream);padding:0 6px;gap:0}
+.status-strip{justify-content:space-between;font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums;overflow:hidden}.status-value{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px}.status-value:first-child{flex:1.5}.status-value>span{font-size:12px}.status-value b{font-size:9px}
+.mission-strip{gap:8px;text-align:start;padding-inline:12px}.mission-strip strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}.mission-strip>span{font-size:20px}.mission-complete .mission-strip{animation:mission-flash .9s ease-out}
+@keyframes mission-flash{0%,45%{background:#f9d28e}100%{background:var(--cream)}}
+.city-details,.mission-details{padding:12px;max-height:calc(100dvh - 285px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow:auto;overscroll-behavior:contain;border-top:1px solid var(--line)}
+.topbar,.brand,.wallet{display:flex;align-items:center;gap:8px}.topbar{flex-wrap:wrap;margin-bottom:12px}.brand{width:100%}.brand-mark{font-size:26px}.brand h1{font-size:20px}.brand p{font-size:11px;color:var(--muted)}.wallet{flex-wrap:wrap;font-size:12px}.money{display:flex;align-items:center;gap:5px}.money strong{font-size:18px}.coin{color:#b88020}.panel-heading{font-size:14px;margin-bottom:10px}.metrics{display:flex;flex-direction:column;gap:10px}.metric-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}.metric-track{height:6px;background:#e6ede3;border-radius:8px;overflow:hidden;direction:ltr}.metric-track span{height:100%;display:block}.resources{display:flex;gap:10px;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-size:12px}
+.mission-eyebrow{font-size:11px;color:#92632e;margin-bottom:8px}.mission-main{display:flex;align-items:center;gap:8px}.guide-avatar{font-size:28px}.mission-main small{display:block;font-size:11px;color:var(--muted)}.mission-main strong{font-size:14px}.tutorial-count{display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-block:12px}.reward{color:#986d24;background:#fff0c9;padding:5px;border-radius:8px;font-size:11px}.tutorial-dots{display:flex;gap:5px;margin-block:8px}.tutorial-dots span{height:5px;flex:1;border-radius:8px;background:#e4e9dc}.tutorial-dots .done{background:#74b89b}.tutorial-dots .current{background:#f3ad63}.mission-hint{font-size:12px;line-height:1.5}.text-button{background:transparent;text-decoration:underline;font-size:12px;padding-inline:8px}
+.camera-controls{position:absolute;inset-inline-end:max(var(--edge),env(safe-area-inset-left));inset-block-start:max(var(--edge),env(safe-area-inset-top));inset-block-end:calc(80px + env(safe-area-inset-bottom));width:56px;display:flex;flex-direction:column;gap:8px;pointer-events:auto}.utilities{display:flex;flex-direction:column;gap:8px}.round-button{width:56px;height:56px;font-size:26px;line-height:1;background:var(--cream);flex-shrink:0;display:grid;place-items:center}.round-button.holding{background:#f9cc83;box-shadow:inset 0 0 0 4px #e69b46}.home-button{width:56px;padding:4px;font-size:11px;line-height:1.3;background:var(--cream);flex-shrink:0}
+.build-dock{position:absolute;inset-block-end:0;inset-inline:0;padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:var(--cream);border-top:1px solid #fff;border-radius:18px 18px 0 0;pointer-events:auto;min-width:0}.dock-top{display:flex;gap:4px;min-width:0;align-items:center}.dock-handle{width:56px;flex:0 0 56px;font-size:26px;background:#e6efdf}.categories{display:flex;gap:4px;min-width:0;flex:1;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;scrollbar-width:none}.category-button{flex:1 0 56px;padding:0 6px;font-size:11px;background:transparent;border:2px solid transparent;white-space:nowrap;position:relative}.category-button[aria-current=true]{background:#e2efdf;border-color:var(--category-color)}.category-button.required-category:after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;top:4px;right:4px;background:#d8852b}
+.catalog-caption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-block-start:8px;font-size:11px}.catalog-caption span{color:#617c71}.catalog{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;padding:16px 4px 4px;scrollbar-width:thin}.building-card{position:relative;flex:0 0 100px;height:102px;background:#fff;border:2px solid #e2e9dd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:8px 4px}.building-icon{font-size:28px;line-height:1}.building-card strong{font-size:11px}.building-cost{color:#986d24;font-size:11px}.building-card.selected,.building-card.guided{border-color:#dd9544;background:#fff3d9}.building-card.guided:before{content:"⬇";position:absolute;top:-19px;font-size:25px;color:#b66e16}.building-card.locked{background:#eef0e9}.building-card.locked .building-icon{opacity:.6}
+.placement{display:flex;align-items:center;gap:8px;padding:0;background:transparent;border:0;box-shadow:none;min-width:0}.build-dock[data-placing=true] .dock-top,.build-dock[data-placing=true] .catalog,.build-dock[data-placing=true] .catalog-caption{display:none}.ghost-status{min-width:0;flex:1;font-size:12px;font-weight:700;color:#268e6c;line-height:1.4;overflow-wrap:anywhere}.ghost-status[data-valid=false]{color:#a43b45}.primary-button{background:#288c81;color:#fff;padding:0 16px;font-size:14px;border:2px solid #ffffff40}.secondary-button{background:#edf3e9;border:1px solid #dfe8d9;padding:0 12px;font-size:13px}.placement .primary-button{min-width:100px;padding-inline:8px;font-size:12px}
+.info-card{position:absolute;inset-inline-start:max(var(--edge),env(safe-area-inset-right));inset-inline-end:calc(max(var(--edge),env(safe-area-inset-left)) + var(--rail) + 8px);inset-block-start:calc(var(--hud-height,120px) + max(8px,env(safe-area-inset-top)) + 8px);max-height:calc(100dvh - var(--hud-height,120px) - 104px - env(safe-area-inset-bottom));padding:12px;overflow:auto;overscroll-behavior:contain;pointer-events:auto}.info-title{display:flex;align-items:center;gap:8px}.info-title h2{flex:1;font-size:17px}.level-badge{display:inline-block;font-size:12px;margin-block:8px}.info-card h3{font-size:12px}.info-effects{display:flex;flex-wrap:wrap;gap:6px;margin-block:8px}.info-effects span{font-size:11px;background:#edf3e9;padding:6px;border-radius:8px}.radius-label,.info-card>p{font-size:12px;line-height:1.5;margin-block:8px}.info-actions{display:flex;flex-wrap:wrap;gap:8px}.info-actions button{flex:1;min-width:56px}.info-actions .primary-button{flex-basis:100%}
+.save-badge{display:none}.save-error{display:block;background:#ffe4da;color:#8d3f31;padding:8px;border-radius:12px;font-size:11px;line-height:1.4}
+.modal-toast{background:#224f55;color:#fff;padding:10px 12px;margin-bottom:12px;border-radius:12px;font-size:12px;line-height:1.5}
+#toast{display:none;background:#224f55;color:#fff;padding:10px 12px;border:1px solid #fff;border-radius:12px;font-size:12px;font-weight:700;line-height:1.5;text-align:center;pointer-events:none;overflow-wrap:anywhere}#toast.visible{display:block}
+@media(orientation:landscape) and (max-height:600px){
+  :root{--land-panel:min(240px,calc(40vw - 80px))}
+  .hud{inset-inline-end:auto;width:var(--land-panel)}.city-details,.mission-details{max-height:calc(100dvh - var(--hud-base-height,124px) - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)));background:var(--cream)}
+  .build-dock{inset-inline-start:max(var(--edge),env(safe-area-inset-right));inset-inline-end:auto;inset-block-end:max(8px,env(safe-area-inset-bottom));width:var(--land-panel);max-height:calc(100dvh - var(--hud-height,124px) - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)) - 8px);border-radius:16px;padding:8px;overflow:auto}
+  .island-ui:has(.build-dock[data-open=true]) .mission{display:none}
+  .category-button{flex-basis:56px}.camera-controls{inset-block-end:max(var(--edge),env(safe-area-inset-bottom))}.placement{flex-wrap:wrap}.ghost-status{flex-basis:100%}.placement .primary-button{flex:1}
+  .info-card{width:var(--land-panel);inset-inline-end:auto;inset-block-start:max(8px,env(safe-area-inset-top));max-height:calc(100dvh - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)))}
+  .island-ui:has(.info-card:not([hidden])) .hud,.island-ui:has(.info-card:not([hidden])) .build-dock{visibility:hidden}
+}
+@media(min-width:1000px) and (min-height:601px){.hud,.info-card{width:350px;inset-inline-end:auto}.status-strip,.status-strip .resource{font-size:12px}.mission-strip strong{font-size:15px}}
+
+.modal-overlay{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:#173b4a75;padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.modal{position:relative;padding:24px;width:min(580px,100%);min-width:0;max-height:100%;overflow:auto;border:2px solid #fff}.modal h2{font-size:23px;margin-inline-end:60px;overflow-wrap:anywhere}.modal-subtitle{font-size:13px;color:#617c71;line-height:1.6;margin-block:8px 18px}.modal-close{position:absolute;inset-block-start:8px;inset-inline-end:8px;z-index:2}.parent-controls{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}.parent-controls button{width:100%}.import-file{display:none}.modal>p:not(.modal-subtitle){font-size:13px;line-height:1.7;margin-block:10px;color:#617c71}.modal>small{color:#617c71}
+.avatar-modal{width:min(660px,100%);height:min(900px,100%);max-width:100%;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.avatar-scroll{flex:1;min-height:0;min-width:0;width:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scroll-padding-block:16px;padding:24px 16px 16px}
+.avatar-preview{position:relative;height:160px;overflow:hidden;border-radius:16px;background:#dfeedd;margin-bottom:16px}.avatar-preview-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.avatar-field{border:0;min-inline-size:0;max-width:100%;padding:4px;margin:0 0 14px}.avatar-field legend{display:block;float:none;width:auto;max-width:100%;padding:0;margin-bottom:8px;font-size:12px;font-weight:700}.choices{display:flex;flex-wrap:wrap;gap:8px;min-width:0;max-width:100%}.choice{padding:0 12px;font-size:13px;background:#eef2e6;border:2px solid transparent}.swatch{width:56px;height:56px;border:4px solid #fff;border-radius:16px;position:relative}.choice[aria-pressed=true]{border-color:#4b9a83;background:#dceee0}.swatch[aria-pressed=true]{outline:3px solid #255e62;outline-offset:0}.swatch[aria-pressed=true]:after{content:"✓";color:#fff;font-size:23px}.avatar-footer{flex-shrink:0;padding:12px 16px;background:var(--cream);border-top:1px solid var(--line)}.avatar-start{width:100%;margin:0}
+.load-error{position:fixed;inset:25%;background:var(--cream);border-radius:24px;display:grid;place-items:center;padding:30px;color:var(--ink)}
+@media(orientation:landscape) and (max-height:600px){.avatar-preview{height:120px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+.event-panel>button{width:100%;background:#fff0c9;font-size:13px;padding:8px}.event-details{padding:12px;max-height:calc(100dvh - 320px);overflow:auto;display:grid;gap:8px;font-size:13px;line-height:1.5}.event-details button{width:100%}.repair-status{color:#986d24;font-weight:700}
+.game-cards{display:grid;gap:14px}.game-card{background:#edf3e9;border-radius:14px;padding:14px;display:grid;gap:8px}.game-card h3{font-size:18px}.game-card p{font-size:13px}.game-card-actions{display:flex;flex-wrap:wrap;gap:8px}.game-card-actions button{flex:1}.game-help-lines{display:grid;gap:16px;margin-block:18px;line-height:1.6}.game-result{font-weight:700;font-size:18px!important}.modal[data-result]>button{margin:4px}
+.game-result{display:grid;gap:8px;margin-block:16px}.result-row{display:flex;justify-content:space-between;gap:12px;font-size:15px}.result-row bdi{font-size:22px}
+.game-screen{width:min(1000px,100%);height:100%;max-height:100%;padding:12px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:8px;overflow:hidden}.game-header{display:flex;align-items:center;justify-content:space-between;gap:8px}.game-header h2{margin:0;font-size:18px}.game-header button{flex-shrink:0;padding-inline:12px}.game-status{font-size:13px;text-align:center;min-height:20px}.game-stage{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:16px;background:#173d54}.minigame-canvas{display:block;width:100%;height:100%;touch-action:none}.game-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;min-width:0}.game-controls>button{flex:1;padding-inline:8px;font-size:13px;background:#e6efdf}.game-controls>button[data-game-control=fire]{background:#288c81;color:#fff}.game-gauge{flex:1;min-width:100px;font-size:13px;display:grid;gap:6px}.game-gauge progress{width:100%;height:16px;accent-color:#288c81}.game-slider{min-width:0;flex:1 1 40%;font-size:13px}.game-slider input{display:block;width:100%;min-width:56px;height:56px;accent-color:#288c81;touch-action:pan-x}.game-turn{width:100%;text-align:center;font-size:12px;min-height:16px}.game-help-sheet{position:absolute;inset:0;background:var(--cream);padding:12px;overflow:auto}.game-help-sheet button{margin:4px}
+@media(orientation:landscape) and (max-height:600px){.game-screen{grid-template-columns:minmax(0,1fr) minmax(180px,30%);grid-template-rows:auto auto minmax(0,1fr)}.game-header{grid-column:1/-1}.game-status{grid-column:1}.game-stage{grid-column:1;grid-row:3}.game-controls{grid-column:2;grid-row:2/4;overflow:auto;align-content:center;justify-content:stretch}.game-controls>button{flex-basis:100%}.game-slider{flex-basis:100%}.game-help-lines{gap:8px;margin-block:8px;font-size:13px}}
+
+/* City guidance stays inside the existing dock and information card. */
+.building-hint{font-size:10px;line-height:1.25;padding:2px 4px;border-radius:6px;background:#f5e8cf;color:#735620}.building-card[data-availability=recommended] .building-hint{background:#d9f1df;color:#237349}
+.info-actions{flex-wrap:nowrap;margin-block:8px;align-items:stretch}.info-actions button,.info-actions .primary-button{flex:1 1 0;min-width:56px;min-height:56px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;white-space:normal;overflow-wrap:anywhere}.info-actions small{font-size:10px;line-height:1.4}.upgrade-details{display:flex;flex-direction:column;gap:4px}.placement [data-action=cancel]{padding-inline:8px;font-size:11px}
+.building-card[data-availability=limited][data-limit=unique]{gap:5px}.building-card[data-availability=limited][data-limit=unique] .building-cost{display:none}
+.info-actions button:disabled{opacity:1;background:#e9ede5;color:#526b65;border-color:#dfe8d9}
+
+/* Parent-only reset: two explicit stages inside the existing gated modal. */
+.reset-stage{display:grid;gap:14px}.reset-keep{display:flex;align-items:center;gap:10px;min-height:44px}.reset-keep input{width:24px;height:24px}.reset-confirm-label{font-weight:700}.reset-stage input[type=text]{font:inherit;padding:12px;border:2px solid #946647;border-radius:12px;min-width:0;width:100%;box-sizing:border-box}.danger-button{font:inherit;min-height:56px;border:2px solid #aa4039;border-radius:12px;padding:10px;background:#fff0e8;color:#842b27;font-weight:700}.danger-button:disabled{opacity:.45}.danger-button:focus-visible{outline:3px solid #287a83;outline-offset:3px}
+
+/* Ten stage choices fit narrow phones and remain inside the scrollable modal. */
+.stage-map { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-block:12px; }
+.stage-map button { min-height:64px; min-width:0; white-space:normal; font-size:16px; }
+.stage-map button:disabled { opacity:.55; }
+
+/* G2c equipment lives between rounds; game controls retain 56px touch targets. */
+.equipment-list{display:grid;gap:10px;margin-block:12px}.equipment-row{display:grid;gap:4px}.equipment-row p{font-size:13px}.equipment-row button{width:100%;text-align:start}.game-screen[data-game=alienDefense] .game-controls>button{flex:1 1 25%}.game-screen[data-game=fireRescue] .game-controls>button{flex:1 1 25%}.game-screen[data-game=navalDuel] .game-gauge{min-width:110px}.game-screen[data-game=navalDuel] .game-turn{order:3}.game-status{line-height:1.35}.game-stage{box-shadow:inset 0 0 0 1px #ffffff2a}.game-controls>button[data-game-control=nova]{background:#5b518b;color:#fff}.game-controls>button[data-game-control=charge]{background:#ffe1a2;color:#244b58}.game-controls>button:disabled{opacity:.55}
+
+/* G2d: one row for force/fire, a four-slot ammo rack, and an in-scene choice. */
+.ammo-rack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%;order:1}.ammo-rack button{font-size:12px;padding:5px;line-height:1.3;min-width:0;min-height:56px}.ammo-rack button[aria-pressed=true]{background:#285c72;color:white;box-shadow:inset 0 0 0 3px #f4cc7a}.game-screen[data-game=navalDuel] .game-gauge{order:2}.game-screen[data-game=navalDuel] [data-action=game-help]{order:3;flex:0 0 70px}.game-screen[data-game=navalDuel] .game-turn{width:auto;flex:1;order:3}.game-screen[data-game=navalDuel] .game-controls{gap:6px}.game-screen[data-game=navalDuel] .game-slider{flex:1 1 65%}.game-upgrade-panel{position:absolute;inset:0;background:#122441ed;color:#fff;padding:16px;display:flex;flex-direction:column;justify-content:center;gap:12px;overflow:auto}.game-upgrade-panel[hidden]{display:none}.game-upgrade-panel h3{margin:0;text-align:center}.game-upgrade-panel button{min-height:56px;background:#f5d99f;color:#173d54;font-size:16px}.game-stage:has(.game-upgrade-panel:not([hidden])){overflow:auto}
+
+.stage-feature{display:block;font-size:12px;font-weight:400;margin-top:4px}
+
+/* Native selection/callouts interrupt held controls on Android and iOS. */
+.game-screen,.game-screen *{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.game-screen button,.minigame-canvas{touch-action:none;-webkit-tap-highlight-color:transparent}
+.game-screen input[type=range]{touch-action:none}
+.naval-angles{display:flex;gap:8px;width:100%;direction:ltr}.naval-angles label{flex:1;min-width:0;text-align:center}.naval-angles input{height:28px;min-height:28px}.angle-fine{display:flex;gap:6px}.angle-fine button{flex:1;padding:4px;min-width:56px;min-height:56px}.game-slider output{display:inline-block;margin-inline:4px;direction:ltr;font-variant-numeric:tabular-nums}.ammo-rack button{display:flex;align-items:center;gap:4px;text-align:start}.ammo-rack canvas{width:36px;height:24px;flex:none}.ammo-copy{flex:1}.game-screen[data-game=navalDuel] .game-controls{max-height:48dvh;overflow-y:auto;overscroll-behavior:contain;align-content:start;padding:2px}.game-screen[data-game=navalDuel] .naval-angles .game-slider{flex:1 1 40%}
+
+/* G2f: illustrated choices and compact touch controls leave the sea visible. */
+.game-icon{width:44px;height:44px;flex:none;vertical-align:middle}
+.sound-toggle{display:inline-flex;align-items:center;gap:3px;min-height:44px;font-size:11px;padding:4px 7px!important;position:absolute;inset-block-start:6px;inset-inline-start:8px}
+.sound-toggle .game-icon{width:23px;height:26px}.game-header .sound-toggle{position:static;margin-inline-start:auto}.modal:has(>.sound-toggle)>h2{padding-top:36px}
+.game-header h2{font-size:15px}.game-header button{min-height:44px;font-size:12px}
+.game-screen .game-status{font-size:11px;line-height:1.3;margin:0;min-height:14px}
+.game-warning{position:absolute;inset-block-start:6px;inset-inline:8px;margin:0;padding:10px;border:2px solid #ffda75;border-radius:12px;background:#8c2635ee;color:#fff;font-size:16px;font-weight:800;text-align:center;z-index:4;pointer-events:none}.game-warning[hidden]{display:none}
+.game-upgrade-panel{background:radial-gradient(ellipse at top,#275486,#101d37 80%);gap:10px;padding:18px 12px}.game-upgrade-panel button,.result-upgrades button{display:flex;align-items:center;text-align:start;gap:12px;min-height:85px;padding:10px 14px;border:2px solid #c8efff;border-radius:18px;background:linear-gradient(120deg,#236994,#163851);color:#fff;box-shadow:0 5px 0 #08172d70}.game-upgrade-panel button[hidden]{display:none}.game-upgrade-panel .game-icon,.result-upgrades .game-icon{width:62px;height:62px;filter:drop-shadow(0 3px 5px #07152c70)}
+[data-upgrade=rapid]{background:linear-gradient(120deg,#99601c,#624021)!important;border-color:#ffe0a0!important}[data-upgrade=shield]{background:linear-gradient(120deg,#167e72,#16475a)!important;border-color:#a2ffe0!important}[data-upgrade=wing]{background:linear-gradient(120deg,#9263a6,#51336d)!important;border-color:#ead0ff!important}[data-upgrade=damage]{background:linear-gradient(120deg,#aa4b4e,#6d2d45)!important;border-color:#ffc7a8!important}
+[data-upgrade] strong,[data-upgrade] small{display:block}[data-upgrade] strong{font-size:17px}[data-upgrade] small{font-size:12px;margin-top:5px;font-weight:400;color:#fff}.result-upgrades{display:grid;gap:10px;margin-top:14px}.result-upgrades h3{text-align:center;font-size:17px}.result-upgrades button{width:100%}
+.game-screen[data-game=navalDuel]{padding:6px;gap:3px;grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr) auto;background:#103e59;border-color:#2e758e;color:#effcff}
+.game-screen[data-game=navalDuel] .game-header,.game-screen[data-game=navalDuel] .game-status{grid-column:1;grid-row:auto}.game-screen[data-game=navalDuel] .game-stage{grid-column:1;grid-row:3;border-radius:12px}.game-screen[data-game=navalDuel] .game-controls{grid-column:1;grid-row:4;overflow:visible;max-height:none;padding:0;gap:6px;flex-wrap:nowrap}.game-screen[data-game=navalDuel] .ammo-rack{position:absolute;inset-inline-end:10px;top:100px;z-index:2;display:flex;flex-direction:column;width:58px;gap:8px;order:0}.ammo-rack button{display:flex;flex-direction:column;gap:1px;justify-content:center;min-height:66px;border:1px solid #afdae5;border-radius:15px;background:#e5f3f0;box-shadow:0 3px 8px #061d32aa;color:#133a54}.ammo-rack button:disabled{filter:grayscale(1);background:#89959b;opacity:.65}.ammo-rack button[aria-pressed=true]{background:#28657b;color:white;box-shadow:0 0 0 3px #ffd783}.ammo-rack canvas{width:44px;height:30px}.ammo-copy{font-size:15px;font-weight:800;line-height:1}.game-screen[data-game=navalDuel] [data-game-control=fire]{flex:1;min-height:62px;font-size:22px;background:linear-gradient(#db6c40,#a93d36);display:flex;align-items:center;justify-content:center;gap:14px;border:2px solid #ffc481;box-shadow:inset 0 2px 0 #ffe1a9}.game-screen[data-game=navalDuel] [data-action=game-help]{order:0;flex:0 0 56px;min-height:56px}.game-screen[data-game=navalDuel] .game-gauge,.game-screen[data-game=navalDuel] .game-turn{display:none}
+.game-screen[data-game=fireRescue] [data-game-control]{display:flex;align-items:center;justify-content:center;gap:5px;min-height:58px}.game-screen[data-game=fireRescue] .game-gauge progress{height:20px}.game-screen[data-game=fireRescue] .game-gauge:has(progress[value="0"]){color:#a82937}.game-screen[data-game=alienDefense] .game-controls{gap:5px}.game-screen[data-game=alienDefense] .game-controls>button{flex:1 1 22%;min-width:55px;min-height:48px;font-size:12px}.game-screen[data-game=alienDefense] [data-game-control=nova] .game-icon{width:28px;height:30px}
+@media(orientation:landscape) and (max-height:600px){.game-screen[data-game=navalDuel] .ammo-rack{top:66px;inset-inline-end:9px;flex-direction:row;width:auto}.game-screen[data-game=navalDuel] .ammo-rack button{width:58px;min-height:60px}.game-screen[data-game=navalDuel] [data-game-control=fire]{min-height:48px}.game-upgrade-panel{flex-direction:row;align-items:center;flex-wrap:wrap}.game-upgrade-panel h3{width:100%}.game-upgrade-panel button{flex:1;min-width:140px}.game-upgrade-panel .game-icon{width:38px;height:38px}}
+
+.game-screen[data-game=navalDuel] .game-status{color:#d5f3ff}.game-screen[data-game=navalDuel] .game-stage{background:#103e59}
+
+/* Four fire actions plus help stay thumb sized on both narrow viewports. */
+.game-screen[data-game=fireRescue] .game-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.game-screen[data-game=fireRescue] .game-gauge{grid-column:span 2;min-width:0}
+.game-screen[data-game=fireRescue] [data-game-control]{min-width:56px;min-height:58px;flex-direction:column;gap:1px;padding:4px;font-size:12px}
+.game-screen[data-game=fireRescue] .game-icon{width:28px;height:28px}
+.game-screen[data-game=fireRescue] [data-game-control=rescue]{background:#246f67;color:#fff}
+.game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:1/-1;min-height:56px}
+@media(orientation:landscape) and (max-height:600px){.game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr));overflow:auto}.game-screen[data-game=fireRescue] .game-gauge{grid-column:auto}}
+
+.modal-overlay:has(.game-screen){padding:0;display:block;background:#103e59}
+.game-screen.game-screen{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;display:block;overflow:hidden;background:#103e59;color:#effcff}
+.game-screen:fullscreen{width:100%;height:100%;background:#103e59}
+.game-screen .game-stage.game-stage{position:absolute;inset:0;width:100%;height:100%;border-radius:0;overflow:hidden;box-shadow:none}
+.game-screen .game-header.game-header{position:absolute;top:max(8px,env(safe-area-inset-top));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));z-index:3;min-height:56px;padding-inline-end:108px;gap:6px}
+.game-screen .game-header h2{font-size:13px;max-width:44%;text-shadow:0 1px 3px #000}
+.game-screen .game-header .sound-toggle{min-width:56px;min-height:56px;margin-inline-start:auto;font-size:11px;padding:5px;background:#e5f3f0;color:#173d54}
+.game-screen .game-header .game-pause{position:fixed;top:max(8px,env(safe-area-inset-top));left:max(8px,env(safe-area-inset-left));z-index:10;min-width:100px;min-height:56px;padding:8px;font-size:16px;background:#ffe3a3;color:#173d54}
+.game-screen .game-status{position:absolute;top:calc(max(8px,env(safe-area-inset-top)) + 64px);left:8px;right:8px;z-index:2;color:#fff;text-shadow:0 1px 3px #000;background:#102b48b8;border-radius:8px;padding:3px;font-size:11px}
+.game-screen .game-controls.game-controls{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));z-index:2;width:auto;max-height:38dvh;padding:6px;border-radius:16px;background:#10394bd9;overflow:auto;gap:6px}
+.game-screen .game-controls>button{min-height:56px;color:#173d54}
+.game-screen .game-gauge{color:#fff}
+.game-screen[data-game=navalDuel] .ammo-rack{position:static;display:flex;flex-direction:row;flex:1;width:auto;gap:4px}
+.game-screen[data-game=navalDuel] .game-controls{flex-wrap:wrap}
+.game-screen[data-game=navalDuel] .ammo-rack button{flex:1;min-height:56px}
+.game-screen[data-game=navalDuel] [data-game-control=fire]{min-height:56px;font-size:18px}
+.game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(4,minmax(0,1fr))}
+.game-screen[data-game=fireRescue] [data-action=game-help]{grid-column:auto}
+.game-pause-sheet{position:absolute;inset:0;z-index:14;display:flex;align-items:center;justify-content:center;padding:76px 16px 16px;background:#0d2538d9;overflow:auto;color:#173d54}
+.game-pause-card{width:min(480px,100%);max-height:100%;overflow:auto;padding:20px;border-radius:20px;background:#fff4dc;text-align:center;box-shadow:0 8px 36px #0006}
+.game-pause-card h2{font-size:25px;margin:0 0 18px}
+.game-pause-actions{display:flex;gap:12px}
+.game-pause-actions button{flex:1;min-width:100px;min-height:64px;font-size:20px}
+.game-screen[data-paused=true] .game-header .sound-toggle{visibility:hidden}
+.required-building{outline:4px solid #288c81;outline-offset:-4px}.move-space-reason{color:#923c29}.city-hall-metrics{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:12px}
+@media(orientation:landscape) and (max-height:600px){
+ .game-screen .game-controls.game-controls{left:auto;right:max(8px,env(safe-area-inset-right));top:96px;bottom:max(8px,env(safe-area-inset-bottom));width:214px;max-height:none;align-content:start;flex-wrap:wrap;overflow:auto}
+ .game-screen .game-status{right:238px}
+ .game-screen[data-game=fireRescue] .game-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .game-screen[data-game=navalDuel] .ammo-rack{display:grid;grid-template-columns:1fr 1fr;flex-basis:100%}
+ .game-screen[data-game=navalDuel] .ammo-rack button{width:auto}
+ .game-pause-sheet{padding-top:72px}.game-pause-card{padding:14px}
+}
+.game-screen .game-header .game-pause{display:flex;align-items:center;justify-content:center;gap:8px}
+.game-pause::before{content:"";display:inline-block;flex:none;width:12px;height:18px;border-left:4px solid currentColor;border-right:4px solid currentColor}
+.game-screen[data-paused=true] .game-pause::before{width:0;height:0;border:0;border-left:15px solid currentColor;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.game-screen.game-screen .game-status{color:#fff}
+.info-card[data-type=cityHall] .info-actions{display:grid;grid-template-columns:1fr 1fr}.info-card[data-type=cityHall] [data-action=city-hall-games]{grid-column:1/-1;grid-row:1}
+.game-screen[data-paused=true] .game-header.game-header{z-index:9;pointer-events:none}.game-screen[data-paused=true] .game-header .game-pause{pointer-events:auto}
+
+
+/* Soccer card and pre-match training. */
+.soccer-player-card{position:relative;isolation:isolate;width:min(280px,100%);margin:14px auto;padding:18px 22px;border:3px solid #9f6638;border-radius:28px 28px 42px 42px;background:linear-gradient(135deg,#f3d2a4,#bd8051);color:#34291e;text-align:center;box-shadow:0 8px 22px #173d5426}
+.soccer-player-card.silver{border-color:#899aa6;background:linear-gradient(135deg,#f6fafc,#a9bac6);color:#1b3445}
+.soccer-player-card.gold{border-color:#bc8e22;background:linear-gradient(135deg,#fff0a4,#d3a63c);color:#47340e}
+.soccer-overall{position:absolute;top:18px;inset-inline-start:18px;font-size:40px;line-height:1}.soccer-card-name{margin:0 40px 6px;font-size:18px}.soccer-portrait{width:130px;height:116px;display:block;margin:auto}
+.soccer-card-attributes{margin:6px 0;display:grid;grid-template-columns:1fr 1fr;gap:5px 18px}.soccer-card-attributes div{display:flex;justify-content:space-between;border-bottom:1px solid #49321f33;padding:4px 0}.soccer-card-attributes dd{margin:0;font-size:18px;font-weight:800}.soccer-wallet,.soccer-stars-added{font-weight:800;margin:8px 0 0}
+.soccer-difficulties{display:flex;gap:8px;justify-content:center;border:0;padding:10px 0}.soccer-difficulties legend{font-weight:700;text-align:center}.soccer-difficulties button{min-height:56px;flex:1}.soccer-difficulties button[aria-pressed=true]{background:#1a7065;color:white;outline:3px solid #e4b13d}
+.soccer-training-list{display:grid;gap:10px}.soccer-training-row{display:grid;gap:4px}.soccer-training-row button{min-height:56px}.soccer-training-reason{font-size:13px;color:#713e27}.soccer-training-countdown{font-weight:700;text-align:center}
+.game-screen[data-game=soccer] .soccer-live-status{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);padding:0;margin:0;white-space:nowrap}
+
+/* G3d: full-window broadcast view, three action circles and floating thumb zones. */
+.game-screen[data-game=soccer] .game-header.game-header{padding:0;pointer-events:none}
+.game-screen[data-game=soccer] .game-header h2{display:none}
+.game-screen[data-game=soccer] .game-header button{pointer-events:auto;background:#12354999;color:#fff;border:1px solid #ffffff80;backdrop-filter:blur(5px)}
+.game-screen[data-game=soccer] .game-header .sound-toggle{position:absolute;right:64px;top:0;margin:0;width:56px}
+.game-screen[data-game=soccer] .game-header .game-pause{left:auto;right:max(8px,env(safe-area-inset-right));min-width:56px;width:56px;font-size:12px;flex-direction:column;gap:3px}
+.game-screen[data-game=soccer] .soccer-scoreboard{position:absolute;z-index:2;left:max(8px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));display:flex;align-items:center;width:max-content;max-width:calc(100vw - 170px);height:28px;gap:6px;padding:3px 7px;direction:ltr;border:1px solid #c3e9df66;border-radius:4px;background:#102f46c9;color:#fff;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-team-name{border-inline-start:6px solid;border-radius:4px;color:#173d54;font-weight:700;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;padding:1px 4px;max-width:80px;direction:rtl}
+.game-screen[data-game=soccer] .soccer-score{font-size:20px;line-height:1;font-weight:900;white-space:nowrap}
+.game-screen[data-game=soccer] .soccer-clock{font-size:13px;line-height:1;padding-left:6px;border-left:1px solid #ffffff50;font-variant-numeric:tabular-nums}
+.game-screen[data-game=soccer] .soccer-controls.soccer-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;display:block;transform:none;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-stick-zone{position:absolute;left:0;top:80px;bottom:0;width:50%;touch-action:none;pointer-events:auto}
+.game-screen[data-game=soccer] .soccer-joystick{position:absolute;border-radius:50%;width:108px;height:108px;margin:0;transform:translate(-50%,-50%);background:#eaf8ff20;border:2px solid #ffffff80;pointer-events:none;box-shadow:0 2px 16px #062b4533}
+.game-screen[data-game=soccer] .soccer-joystick[hidden]{display:none}
+.game-screen[data-game=soccer] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;border-radius:50%;background:#fff9;box-shadow:0 2px 6px #062b4566}
+.game-screen[data-game=soccer] .soccer-actions{position:absolute;right:max(32px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:216px;height:216px;display:block;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-actions button{position:absolute;min-width:64px;min-height:64px;padding:4px;border:2px solid #ffffff80;border-radius:50%;background:#e6f7ff29;color:#fff;box-shadow:0 3px 14px #061d3266,inset 0 0 12px #ffffff20;font-size:12px;text-shadow:0 1px 3px #000;pointer-events:auto;backdrop-filter:blur(3px);margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;touch-action:none}
+.game-screen[data-game=soccer] #shoot{right:0;bottom:0;width:90px;height:90px;background:#ecb95a66;font-size:16px}
+.game-screen[data-game=soccer] #pass{right:102px;bottom:4px;width:72px;height:72px}
+.game-screen[data-game=soccer] #sprint{right:4px;bottom:102px;width:72px;height:72px;background:#64e3b33b}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #shoot{background:#4d8ccc66}
+.game-screen[data-game=soccer] .soccer-controls[data-mode=defense] #pass{background:#9f6dc966}
+.game-screen[data-game=soccer] .soccer-controls .held{background:#ffe4a5a1!important;color:#173d54!important;text-shadow:none}
+.soccer-action-icon{width:25px;height:25px;flex:none}
+.soccer-sprint[data-exhausted=true]{opacity:.65}
+.soccer-goal-banner{position:absolute;top:26%;left:50%;transform:translateX(-50%) rotate(-5deg);font-size:clamp(48px,10vw,110px);font-weight:900;color:#fff0a5;text-shadow:0 4px 0 #9e6835,0 8px 24px #10293f;pointer-events:none;z-index:1}
+.soccer-phase-banner{position:absolute;top:max(48px,calc(env(safe-area-inset-top) + 40px));left:50%;transform:translateX(-50%);max-width:70%;padding:8px 14px;border-radius:10px;background:#102f46dd;color:#fff4ce;font-size:18px;font-weight:700;text-align:center;pointer-events:none;z-index:2}
+.soccer-edge-arrow{position:absolute;font-size:32px;color:#ffe293;text-shadow:0 2px 5px #10293f;pointer-events:none;z-index:1}
+.soccer-rotate{position:absolute;inset:0;z-index:12;background:#102b43;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;padding:24px;color:#fff4ce;font-size:27px;font-weight:800}
+.soccer-rotate svg{width:130px;height:130px;animation:soccer-turn 2s ease-in-out infinite alternate}
+.soccer-rotate[hidden],.soccer-goal-banner[hidden],.soccer-edge-arrow[hidden]{display:none}
+.game-screen[data-orientation-blocked=true]>.game-header,.game-screen[data-orientation-blocked=true]>.soccer-scoreboard,.game-screen[data-orientation-blocked=true]>.soccer-controls{visibility:hidden}
+.soccer-energy{position:absolute;right:max(8px,env(safe-area-inset-right));top:86px;width:10px;height:calc(100% - 200px);min-height:90px;max-height:300px;border:1px solid #ffffffb3;background:#122f4f88;border-radius:7px;overflow:hidden}
+.soccer-energy-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(#b8f5ab,#34b79b);height:100%;transition:height .1s linear}
+.soccer-hand-setting{display:flex;justify-content:center;align-items:center;gap:10px;min-height:56px;margin:8px 0;font-weight:700}
+.soccer-hand-setting input{width:56px;height:32px;accent-color:#288c81}
+@keyframes soccer-turn{to{transform:rotate(-35deg)}}
+@media(prefers-reduced-motion:reduce){.soccer-rotate svg{animation:none}}
+/* G6: a full-window broadside battle with independent steering and aiming. */
+.game-screen[data-game=navalDuel] .game-controls.game-controls{inset:0;width:100%;height:100%;max-height:none;background:transparent;padding:0;display:block;overflow:hidden;pointer-events:none}
+.game-screen[data-game=navalDuel] .naval-stick-zone{position:absolute;left:0;top:100px;bottom:0;width:48%;pointer-events:auto;touch-action:none}
+.naval-stick{position:fixed;transform:translate(-50%,-50%);width:108px;height:108px;border:2px solid #ffffffa0;background:#ffffff20;border-radius:50%}.naval-stick[hidden]{display:none}.naval-knob{position:absolute;left:29px;top:29px;width:46px;height:46px;background:#ffffffa0;border-radius:50%}
+.game-screen[data-game=navalDuel] .ammo-rack{position:absolute;top:86px;right:12px;left:auto;display:flex;flex-direction:column;width:58px;gap:5px;pointer-events:auto}
+.game-screen[data-game=navalDuel] .ammo-rack button{width:58px;min-height:48px;height:48px;flex:none;border-radius:12px;padding:2px;display:flex;flex-direction:row}.game-screen[data-game=navalDuel] .ammo-rack .game-icon{width:32px;height:36px}
+.game-screen[data-game=navalDuel] [data-game-control=fire]{position:absolute;right:86px;bottom:18px;width:88px;height:88px;min-width:88px;min-height:88px;border-radius:50%;font-size:16px;pointer-events:auto;display:flex;flex-direction:column;gap:2px;padding:5px}
+.game-screen[data-game=navalDuel] [data-game-control=fire] .game-icon{width:38px;height:38px}
+.game-screen[data-game=navalDuel] .game-gauge,.game-screen[data-game=navalDuel] .game-turn{display:none}
+.game-screen[data-game=navalDuel] .game-status{left:116px;right:130px;top:12px;font-size:12px;pointer-events:none}
+.game-screen[data-orientation-blocked=true] .game-controls{visibility:hidden}
+
+.game-screen[data-game=navalDuel] .game-header h2{display:none}
+
+/* G4b shares the full-window floating sports layout. */
+.game-screen[data-game=tennis] .soccer-live-status{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);padding:0;margin:0;white-space:nowrap}
+.game-screen[data-game=tennis] .game-header.game-header{padding:0;pointer-events:none}
+.game-screen[data-game=tennis] .game-header h2{display:none}
+.game-screen[data-game=tennis] .game-header button{pointer-events:auto;background:#12354999;color:#fff;border:1px solid #ffffff80;backdrop-filter:blur(5px)}
+.game-screen[data-game=tennis] .game-header .sound-toggle{position:absolute;right:64px;top:0;margin:0;width:56px}
+.game-screen[data-game=tennis] .game-header .game-pause{left:auto;right:max(8px,env(safe-area-inset-right));min-width:56px;width:56px;font-size:12px;flex-direction:column;gap:3px}
+.game-screen[data-game=tennis] .soccer-scoreboard{position:absolute;z-index:2;left:max(8px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));display:flex;align-items:center;width:max-content;max-width:calc(100vw - 170px);height:28px;gap:6px;padding:3px 7px;direction:ltr;border:1px solid #c3e9df66;border-radius:4px;background:#102f46c9;color:#fff;pointer-events:none}
+.game-screen[data-game=tennis] .soccer-team-name{border-inline-start:6px solid;border-radius:4px;color:#173d54;font-weight:700;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;padding:1px 4px;max-width:80px;direction:rtl}
+.game-screen[data-game=tennis] .soccer-score{font-size:20px;line-height:1;font-weight:900;white-space:nowrap}
+.game-screen[data-game=tennis] .soccer-clock{font-size:13px;line-height:1;padding-left:6px;border-left:1px solid #ffffff50;font-variant-numeric:tabular-nums}
+.game-screen[data-game=tennis] .soccer-controls.soccer-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;display:block;transform:none;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden;pointer-events:none}
+.game-screen[data-game=tennis] .soccer-stick-zone{position:absolute;left:0;top:80px;bottom:0;width:50%;touch-action:none;pointer-events:auto}
+.game-screen[data-game=tennis] .soccer-joystick{position:absolute;border-radius:50%;width:108px;height:108px;margin:0;transform:translate(-50%,-50%);background:#eaf8ff20;border:2px solid #ffffff80;pointer-events:none;box-shadow:0 2px 16px #062b4533}
+.game-screen[data-game=tennis] .soccer-joystick[hidden]{display:none}
+.game-screen[data-game=tennis] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;border-radius:50%;background:#fff9;box-shadow:0 2px 6px #062b4566}
+.game-screen[data-game=tennis] .soccer-actions{position:absolute;right:max(32px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:216px;height:216px;display:block;pointer-events:none}
+.game-screen[data-game=tennis] .soccer-actions button{position:absolute;min-width:64px;min-height:64px;padding:4px;border:2px solid #ffffff80;border-radius:50%;background:#e6f7ff29;color:#fff;box-shadow:0 3px 14px #061d3266,inset 0 0 12px #ffffff20;font-size:12px;text-shadow:0 1px 3px #000;pointer-events:auto;backdrop-filter:blur(3px);margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;touch-action:none}
+.game-screen[data-game=tennis] #shoot{right:0;bottom:0;width:90px;height:90px;background:#ecb95a66;font-size:16px}
+.game-screen[data-game=tennis] #pass{right:102px;bottom:4px;width:72px;height:72px}
+.game-screen[data-game=tennis] #sprint{right:4px;bottom:102px;width:72px;height:72px;background:#64e3b33b}
+.game-screen[data-game=tennis] .soccer-controls[data-mode=defense] #shoot{background:#4d8ccc66}
+.game-screen[data-game=tennis] .soccer-controls[data-mode=defense] #pass{background:#9f6dc966}
+.game-screen[data-game=tennis] .soccer-controls .held{background:#ffe4a5a1!important;color:#173d54!important;text-shadow:none}
+.game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-stick-zone{left:auto;right:0}
+.game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions{right:auto;left:max(16px,env(safe-area-inset-left));transform:scaleX(-1)}
+.game-screen[data-game=tennis] .soccer-controls.left-handed .soccer-actions button{transform:scaleX(-1)}
+/* G7: one corner action, immediate pointer feedback, and a landscape city rail. */
+button[data-pressed=true]{scale:.95;filter:brightness(.82)}
+.placement-help{display:flex;align-items:center;justify-content:center;gap:6px;min-height:56px}.placement-help>span:first-child{font-size:25px}
+.placement-cue{animation:placement-help 1.2s ease-in-out infinite}.placement-confirm-cue{animation:placement-help 1s ease-in-out infinite}
+@keyframes placement-help{50%{box-shadow:inset 0 0 0 4px #e5b44e;background:#ffe6a9}}
+.info-title{position:sticky;top:-12px;z-index:2;background:var(--cream);padding-block:4px}
+.modal:not(.avatar-modal):not(.game-screen)>.modal-close{position:sticky;top:0;float:inline-end;min-width:56px;z-index:4}
+.action-direction{position:absolute;inset:-14px;border:2px solid #ffe7a3;border-radius:50%;pointer-events:none;transform:rotate(var(--aim-angle,0rad))}
+.action-direction:after{content:"";position:absolute;right:-10px;top:calc(50% - 7px);border-left:14px solid #ffe7a3;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.game-screen .game-header h2,.game-screen .game-header>.sound-toggle{display:none}
+.game-screen .game-header.game-header{padding:0;pointer-events:none;min-height:56px}
+.game-screen .game-header .game-pause{left:auto;right:max(8px,env(safe-area-inset-right));width:56px;min-width:56px;font-size:11px;padding:3px;flex-direction:column;pointer-events:auto}
+.game-screen .game-status:not(.soccer-live-status){top:max(8px,env(safe-area-inset-top));left:8px;right:80px;width:max-content;max-width:calc(100vw - 96px);font-size:12px;pointer-events:none;padding:5px 8px}
+.game-pause-card>[data-action=game-pause-sound]{margin-bottom:12px;min-height:48px}
+@media(orientation:landscape) and (max-height:600px){
+ .camera-controls{width:120px;height:max-content;display:grid;grid-template-columns:56px 56px;gap:8px;bottom:auto}.utilities{display:contents}
+ .build-dock[data-open=false]:not([data-placing=true]){max-height:none}.build-dock .dock-top{align-items:stretch}.build-dock .categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:4px}.build-dock .category-button{padding:2px;min-width:0;min-height:48px;white-space:normal;font-size:11px}
+ .build-dock .dock-handle{align-self:stretch;min-height:48px;width:48px;flex-basis:48px}
+ .island-ui:has(.build-dock[data-placing=true]) .mission{display:none}
+ .placement{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:8px}.ghost-status,.placement-help{grid-column:1/-1}.placement .primary-button{min-width:0;min-height:56px}
+ .game-screen[data-game=alienDefense] .game-controls.game-controls{top:auto;bottom:8px;left:8px;right:8px;width:auto;max-height:none;display:flex;justify-content:center;flex-wrap:nowrap}.game-screen[data-game=alienDefense] .game-controls>button{flex:1;min-width:56px;max-width:120px;font-size:12px;padding:4px;flex-basis:auto}
+}
+/* G3e: sprint rests under the thumb; the large shot/slide button sits above it. */
+.game-screen[data-game=soccer] #shoot{right:0;bottom:102px;width:90px;height:90px}
+.game-screen[data-game=soccer] #sprint{right:4px;bottom:4px;width:72px;height:72px}
+
+/* G3f pre-match roster and short practices. */
+.soccer-roster-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.soccer-roster-card {border:2px solid #759fb4;border-radius:18px;padding:12px;background:linear-gradient(145deg,#fff6d5,#e2edf1);min-width:0;}
+.soccer-roster-card[data-team="1"] {border-color:#c58374;background:linear-gradient(145deg,#fff0dc,#f0d8d0);}
+.soccer-roster-card h3 {margin:0 0 6px;padding-left:35px;}
+.soccer-name-editor {display:grid;grid-template-columns:1fr 90px;gap:8px;margin:12px 0;padding:10px;border:1px solid #a0bac5;border-radius:12px;}
+.soccer-name-editor input,.soccer-role-choice button,.soccer-drill-choices button {min-height:48px;min-width:48px;max-width:100%;}
+.soccer-name-editor input {display:block;width:100%;box-sizing:border-box;}
+.soccer-role-choice {display:flex;flex-wrap:wrap;gap:8px;}
+.soccer-drill-choices {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+.soccer-drill-choices progress {width:100%;height:16px;}
+.soccer-card-improved .soccer-player-card {animation:card-improved .6s ease-out;}
+@keyframes card-improved {50% {transform:scale(1.04);filter:brightness(1.15);}}
+.game-screen[data-drill] .soccer-phase-banner {top:64px;font-size:15px;max-width:calc(100% - 32px);padding:6px;pointer-events:none;}
+.soccer-roster-card {position:relative;font-size:13px;}
+.soccer-roster-card .soccer-overall {font-size:25px;top:8px;inset-inline-start:auto;inset-inline-end:8px;}
+.soccer-roster-card .soccer-card-attributes {gap:4px 9px;}
+.modal[data-rosters] {width:min(900px,calc(100vw - 16px));max-width:calc(100vw - 16px);}
+.modal[data-rosters] select {min-height:48px;min-width:90px;}
+.game-screen:not([data-drill]) .soccer-phase-banner {left:16px;transform:none;max-width:calc(100% - 100px);}
+/* G4c: the serve meter stays beside the court, clear of movement and action controls. */
+.tennis-serve-hint{position:absolute;left:50%;top:42px;transform:translateX(-50%);padding:7px 16px;background:#123d41ed;color:#fff;border-radius:16px;pointer-events:none;font-weight:800}
+.tennis-serve-meter{position:absolute;left:12px;top:27%;height:130px;width:18px;border:2px solid white;border-radius:12px;background:linear-gradient(to top,#f06960 0% 25%,#efc355 25% 35%,#67d398 35% 65%,#efc355 65% 75%,#f06960 75%);pointer-events:none}
+.tennis-serve-needle{position:absolute;left:-6px;width:26px;height:4px;background:white;box-shadow:0 0 4px #123d41}
+.serve-ready{box-shadow:0 0 0 4px #67d398!important;animation:serve-ready 1s ease-in-out infinite alternate}
+@keyframes serve-ready{to{box-shadow:0 0 0 9px #67d39855}}
+.game-screen[data-game=navalDuel] .naval-stick{position:absolute;transform:translate(-50%,-50%)}
+.game-screen[data-game=navalDuel] .ammo-rack{max-width:62vw;flex-wrap:wrap}
+.naval-heat{position:absolute;bottom:12px;right:22%;width:86px;height:6px;background:#123d41;border-radius:4px;pointer-events:none}
+.naval-heat>span{display:block;height:100%;background:#ffac4b;border-radius:4px}
+.game-screen[data-game=navalDuel] .ammo-rack{display:grid;grid-template-columns:58px 58px;width:121px}
+.hangar-preview{display:block;width:180px;height:180px;max-height:35dvh;margin:auto;background:#071b39;border-radius:24px}.hangar-actions,.hangar-choices{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.hangar-choices[hidden]{display:none}
+.game-screen[data-game=alienDefense] [data-game-control=spread]{background-image:conic-gradient(#75dac4 var(--charge,0%),#174360 0);border-radius:50%;border:3px solid #9ac6cd}
+.game-screen[data-game=alienDefense] .soccer-stick-zone{position:absolute;left:0;top:70px;bottom:0;width:48%;pointer-events:auto;touch-action:none}
+.game-screen[data-game=alienDefense] .soccer-joystick{position:absolute;transform:translate(-50%,-50%);width:108px;height:108px;border-radius:50%;border:2px solid #fff8;background:#fff2;pointer-events:none}
+.game-screen[data-game=alienDefense] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;background:#fff9;border-radius:50%}
+.game-screen[data-game=alienDefense] #shoot,.game-screen[data-game=alienDefense] #pass,.game-screen[data-game=alienDefense] #sprint{position:absolute;width:72px;height:72px;border-radius:50%;bottom:15px;pointer-events:auto;min-width:0;padding:3px;font-size:12px}
+.game-screen[data-game=alienDefense] #shoot{right:12px}.game-screen[data-game=alienDefense] #pass{right:94px}.game-screen[data-game=alienDefense] #sprint{right:176px}
+.game-screen[data-game=alienDefense] .game-controls.game-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;background:transparent;padding:0;display:block;overflow:hidden;pointer-events:none}
+.game-screen[data-game=alienDefense] #pass{background-image:conic-gradient(#75dac4 var(--charge,100%),#174360 0)}
+.fire-certificate{padding:18px;border:3px solid #e4b957;border-radius:20px;background:#fff7dd;color:#234b56;text-align:center;margin:10px 0}.certificate-stars{font-size:34px;color:#b47719}.fire-certificate p{margin:5px}.fire-certificate .earned{font-weight:800;color:#237954}
+.game-screen[data-game=fireRescue] .game-controls.game-controls{position:absolute;inset:0;width:100%;height:100%;max-height:none;background:transparent;padding:0;display:block;overflow:hidden;pointer-events:none}
+.game-screen[data-game=fireRescue] .soccer-stick-zone{position:absolute;left:0;top:130px;bottom:0;width:48%;pointer-events:auto;touch-action:none}
+.game-screen[data-game=fireRescue] .soccer-joystick{position:absolute;transform:translate(-50%,-50%);width:108px;height:108px;border-radius:50%;border:2px solid #fff8;background:#fff2;pointer-events:none}
+.game-screen[data-game=fireRescue] .soccer-knob{position:absolute;left:calc(50% - 23px);top:calc(50% - 23px);width:46px;height:46px;background:#fff9;border-radius:50%}
+.game-screen[data-game=fireRescue] [data-game-control]{position:absolute;width:68px;height:68px;min-width:0;min-height:0;border-radius:50%;bottom:12px;right:12px;font-size:12px;padding:3px;pointer-events:auto;display:flex;flex-direction:column}
+.game-screen[data-game=fireRescue] #pass{right:88px}.game-screen[data-game=fireRescue] [data-game-control=charge]{bottom:88px}.game-screen[data-game=fireRescue] [data-game-control=refill]{right:88px;bottom:88px}
+.game-screen[data-game=fireRescue] .game-gauge{position:absolute;left:12px;top:65px;width:120px;pointer-events:none;padding:2px;color:#fff;background:#123d41b0;font-size:12px}.game-screen[data-game=fireRescue] .game-gauge:nth-of-type(2){top:108px}.game-screen[data-game=fireRescue] .game-gauge progress{height:10px}
+.game-screen[data-game=fireRescue] [data-action=fire-certificate]{position:absolute;right:166px;bottom:12px;width:105px;min-height:56px;pointer-events:auto}
+
+/* Island chrome: restrained surfaces leave the coast and city in view.
+   Kept under island-ui so the five game interfaces retain their ownership. */
+.island-ui{--ink:#263e44;--teal:#397b72;--cream:#f5f1e7;--line:#d2d9cc;--shadow:0 6px 22px #173c4424}
+.island-ui .panel,.island-ui .build-dock{border:1px solid #fff9e8a6;border-radius:11px;box-shadow:0 6px 22px #143b4224;background:#f5f1e7ed;backdrop-filter:blur(9px)}
+.island-ui .status-strip{background:linear-gradient(130deg,#193f49f2,#2b5b60ed);border-radius:10px;color:#f2ecdc;box-shadow:0 5px 18px #14383d22;border-color:#b7d2c13b}
+.island-ui .status-value{gap:5px}.island-ui .status-value b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.1px}
+.island-ui .mission-strip{background:transparent;height:49px}.island-ui .mission-strip strong{font-weight:500;font-size:12px}
+.island-ui .round-button,.island-ui .home-button{background:#193f49de;color:#f4efdd;border:1px solid #b5d2c044;border-radius:10px;box-shadow:0 5px 16px #143b4226;font-weight:500;backdrop-filter:blur(8px)}
+.island-ui .round-button{font-size:23px}.island-ui .utilities{gap:6px}
+.island-ui .dock-handle{background:#dce4d6;border-radius:8px;color:#38564f;font-size:20px}
+.island-ui .category-button{border-radius:8px;border-width:1px;font-weight:500}.island-ui .category-button[aria-current=true]{background:#e6ecdf;border-color:#8eaa98}
+.island-ui .building-card{border-radius:9px;box-shadow:none;background:#faf7ee;border:1px solid #cfd9ca}
+.island-ui .building-card.selected,.island-ui .building-card.guided{border-color:#a28b52;background:#eee6cd}
+.island-ui [data-action=open-games]{background:#2e655e;color:#fff9e5;border:1px solid #5f8c7a;box-shadow:none;border-radius:9px}
+.island-ui .primary-button,.island-ui .secondary-button{border-radius:9px;box-shadow:none}
+@media(orientation:landscape) and (max-height:600px){.island-ui .build-dock{padding:6px}.island-ui .build-dock .category-button{min-height:42px}.island-ui .hud{gap:6px}.island-ui .build-dock .dock-handle{width:42px;flex-basis:42px}}
+
+/* Island Pro Basketball club (menu screen) */
+.hoops-club{display:grid;gap:14px;margin:10px 0;text-align:right}
+.hoops-club h4{margin:6px 0}
+.hoops-club-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.hoops-club-head h3{margin:0 0 0 auto}
+.hoops-club-crest{width:28px;height:28px;border-radius:50%;background:conic-gradient(var(--team) 0 50%,var(--team2) 0);border:2px solid #fff}
+.hoops-club-stat{padding:4px 10px;border-radius:999px;background:#0001;font-weight:700;font-size:14px}
+.hoops-club-table{width:100%;border-collapse:collapse;font-size:14px}
+.hoops-club-table th,.hoops-club-table td{padding:5px 6px;border-bottom:1px solid #0002;text-align:right}
+.hoops-club-table tr.mine{font-weight:800;background:#ffd84a33}
+.hoops-club-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.hoops-club-card{display:grid;grid-template-columns:auto 1fr auto;gap:2px 8px;align-items:center;min-height:56px;padding:8px 10px;border-radius:12px;text-align:right;background:#f4f6fb;color:#13203a;border:1px solid #c8d2e6}
+.hoops-club-card[aria-pressed=true]{background:#1f5fbf;color:#fff;border-color:#9cc3ff;outline:2px solid #9cc3ff}
+.hoops-club-num{font-size:20px;font-weight:900;grid-row:span 2}
+.hoops-club-name{font-weight:700}
+.hoops-club-pos{font-size:12px;opacity:.75;grid-column:2}
+.hoops-club-ovr{font-size:18px;font-weight:900;grid-column:3;grid-row:1/span 2}
+.hoops-club-line{grid-column:1/-1;font-size:12px;opacity:.8}
+.hoops-club-drills,.hoops-club-choice{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:6px 0}
+.hoops-club-drills button,.hoops-club-choice button{min-height:48px;flex:1 1 30%}
+.hoops-club-drills button[aria-pressed=true],.hoops-club-choice button[aria-pressed=true]{outline:3px solid #2f7de1}
+.hoops-club-select{min-height:48px;width:100%;font-size:16px}
+.hoops-club-preview{min-height:1.4em;font-weight:700}
+.hoops-club-toggle{display:flex;gap:10px;align-items:center;min-height:48px}
+
+/* Start card before a game (menu, not the court): the next match and one big button. */
+.hoops-start{display:grid;gap:10px;justify-items:center;text-align:center;padding:14px 12px;border-radius:14px;background:#10192a0d;border:1px solid #10192a1f}
+.hoops-start-matchup{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.hoops-start-team{display:grid;justify-items:center;gap:6px;min-width:96px}
+.hoops-start-team .hoops-club-crest{width:44px;height:44px}
+.hoops-start-vs{font-weight:800;opacity:.7}
+.hoops-start-line,.hoops-start-place{margin:0}
+.hoops-start-play{min-height:56px;min-width:min(260px,100%);font-size:1.15rem}
+.hoops-more{margin-top:10px}
+.hoops-more>summary{cursor:pointer;min-height:44px;padding-block:10px;font-weight:700;box-sizing:border-box}
+.game-screen.boar-game-screen .game-stage{position:relative;flex:1;min-height:0;overflow:hidden}
+.game-screen.boar-game-screen .boar-game-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#102731}
+.game-screen.boar-game-screen .game-status,.game-screen.boar-game-screen .game-controls{display:none}
+.game-screen.boar-game-screen .game-stage>.game-warning{position:absolute;z-index:2;top:12px;inset-inline:12px;background:#102731;color:#fff;padding:12px;border-radius:8px}
+
+/* Island download panel (ui/offline-panel.mjs) and last load reports (ui/load-report.mjs) */
+.offline-panel{margin-top:16px;padding:14px;border-radius:16px;background:rgba(255,255,255,.7);display:grid;gap:10px}
+.offline-panel h3{margin:0;font-size:1.05rem}
+.offline-status{margin:0;font-weight:600}
+.offline-version{margin:0;font-size:.78rem;opacity:.7;direction:rtl}
+.offline-progress{width:100%;height:12px}
+.offline-games{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 16px}
+.offline-games li[data-complete="true"]::before{content:"✔ "}
+.offline-panel button{min-height:48px}
+.load-report summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+.load-report pre{white-space:pre-wrap;word-break:break-all;font-size:.8rem;text-align:left}
+.load-rescue{position:fixed;inset-inline:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:grid;gap:8px;padding:12px 14px;border-radius:14px;background:#0f1f2ef2;color:#fff4dc;border:1px solid #fff4dc44;box-shadow:0 8px 28px #0008;max-width:560px;margin-inline:auto}
+.load-progress{position:fixed;inset-inline:12px;top:max(8px,env(safe-area-inset-top));z-index:59;margin:0 auto;max-width:520px;padding:8px 12px;border-radius:12px;background:#0f1f2ee6;color:#fff4dc;font-size:.9rem;display:grid;gap:6px}
+.load-progress-bar{display:block;height:4px;border-radius:2px;background:linear-gradient(90deg,#fff4dc33,#ffd27a,#fff4dc33);background-size:200% 100%;animation:load-slide 1.2s linear infinite}
+@keyframes load-slide{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.load-progress-bar{animation:none}}
+.load-rescue-hint{margin:0;font-size:.95rem;line-height:1.4}
+.load-rescue-row{display:flex;flex-wrap:wrap;gap:8px}
+.load-rescue-row button{min-height:44px;min-width:44px;padding:8px 16px;font-size:1rem;flex:1 1 auto}

@@ -1,0 +1,32 @@
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls]{position:absolute;inset:0;direction:ltr;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions{position:absolute;inset:0!important;width:auto;height:auto;display:block;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] [data-design-slot]{position:absolute;box-sizing:border-box;transform:none;min-width:48px;min-height:48px;pointer-events:auto;touch-action:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions button{border-radius:17px;padding:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;direction:rtl}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions button[hidden]{display:none!important;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{border:0;background:none;overflow:visible}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-joystick{position:absolute!important;inset:0!important;width:100%;height:100%;transform:none!important;display:block}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-knob{left:calc(50% - 16px);top:calc(50% - 16px);width:32px;height:32px}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-move-hint{display:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions [aria-disabled=true]{border-style:dashed;filter:saturate(.45)}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button:focus-visible,.game-screen[data-game=soccer] .soccer-joystick:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.game-screen[data-game=soccer] .game-header .game-pause[data-design-slot=pause]{position:absolute;min-width:48px;min-height:48px;transform:none}
+.game-screen[data-game=soccer] .game-header.game-header{inset:0;min-height:0;pointer-events:none}
+.game-screen[data-game=soccer] .soccer-scoreboard{left:calc(76px + env(safe-area-inset-left,0px));max-width:calc(100vw - 100px)}
+.game-screen[data-game=soccer] .soccer-loading[data-error=true]{padding:28px;color:#fff;text-align:center;background:#102b43f0}
+.game-screen[data-game=soccer] .soccer-loading[data-error=true]::after{display:none}
+@media(orientation:portrait){.game-screen[data-game=soccer] .soccer-fixture{top:calc(66px + env(safe-area-inset-top,0px));max-width:78%;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button{transition:none;animation:none}}
+
+/* Floating stick pad (04/11/2026): the lower-left touch area; size set from config.controls.stick. */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-pad{position:absolute;left:0;bottom:0;width:46%;height:60%;z-index:0;touch-action:none;pointer-events:auto;background:none}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{z-index:1}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone .soccer-joystick{transition:opacity 80ms ease}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions{z-index:3}
+/* Air v23 (soccer-v23.mjs): "נגיחה" pulses while a high ball is on its way; "הגבהה" takes the switch slot while the child has the ball. */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header]{animation:soccer-air-pulse .55s ease-in-out infinite alternate;box-shadow:0 0 0 3px #ffe37a,0 0 18px 4px #ffe37acc}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=lob]{background:linear-gradient(180deg,#2f7fbf,#1d5a8c);color:#fff}
+/* v24.1: the kick button pulses for a volley too; the fourth button offers the second way (נגיחה / עף / מספרת) in the same gold */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=volley]{animation:soccer-air-pulse .55s ease-in-out infinite alternate;box-shadow:0 0 0 3px #ffe37a,0 0 18px 4px #ffe37acc}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air^="alt-"]{background:linear-gradient(180deg,#f3c14b,#c98a17);color:#142a35;box-shadow:0 0 0 2px #fff4c4,0 0 14px 2px #ffe37a99}
+@keyframes soccer-air-pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header],.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=volley]{animation:none}}

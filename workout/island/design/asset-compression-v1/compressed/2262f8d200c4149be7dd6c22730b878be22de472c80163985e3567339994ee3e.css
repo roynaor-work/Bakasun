@@ -1,0 +1,123 @@
+/* Alpine Rush race HUD, decluttered. During a race the centre of the screen stays free: the left edge keeps
+ * position, speed and boost; the right edge, under the island's sound and pause buttons, holds time, distance
+ * and the score/coin tally as small chips; progress is a hairline along the top; call-outs are small pills. */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-brand{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-hud{
+  display:grid!important;grid-template-columns:auto 1fr auto;grid-auto-rows:min-content;gap:6px 8px!important;align-items:start!important;
+  top:calc(max(10px,env(safe-area-inset-top)) + 4px)!important;left:var(--a-edge,20px)!important;right:var(--a-edge,20px)!important;direction:ltr}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-position{grid-column:1;grid-row:1;width:auto!important;min-height:0!important;padding:4px 10px!important;gap:6px;border-radius:12px;background:#f0f8f9d9}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-rank{font-size:26px!important;letter-spacing:-1px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-of small{display:none}
+/* right column: starts below the shell's sound and pause buttons */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-race-info{display:contents}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-track-line{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) :is(.alpine-time,.alpine-distance,.alpine-tally){
+  grid-column:3;justify-self:end;margin:0!important;box-sizing:border-box;position:static!important;border:0!important;
+  background:#f0f8f9d1;border-radius:12px;padding:4px 10px!important;color:#123148;direction:rtl;pointer-events:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time{grid-row:2;margin-top:56px!important;display:flex;align-items:baseline;gap:6px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time small{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-time .alpine-ltr{font-size:17px!important;margin:0!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-distance{grid-row:3;font-size:15px!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-distance small{font-size:10px!important;opacity:.75}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally{grid-row:4;flex-direction:row!important;gap:10px!important;background:none;padding:0!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally>span{font-size:14px!important;background:#f0f8f9d1;padding:3px 9px 3px 5px!important;min-width:0}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally svg{width:17px!important;height:17px!important}
+/* progress: a hairline along the very top */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-progress{position:fixed!important;top:0;left:0;right:0;height:3px!important;border-radius:0!important;background:#ffffff30!important;z-index:6;pointer-events:none}
+/* call-outs: a small pill under the top edge instead of a large card in the middle of the view */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout{top:calc(max(10px,env(safe-area-inset-top)) + 22px)!important;width:max-content;max-width:calc(100% - 200px);padding:5px 14px!important;border-radius:999px!important;transform:translate(-50%,-50%)!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout span{font-size:10px!important;letter-spacing:1.5px!important;display:inline!important;margin-inline-end:8px}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-callout b{font-size:17px!important;display:inline!important;margin:0!important}
+/* the steering hint is only for the countdown */
+.game-screen[data-game=alpineRush][data-alpine-phase=racing] .alpine-steer-hint{display:none}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) :is(.alpine-time,.alpine-distance,.alpine-tally){min-height:0!important;height:auto!important;width:auto!important}
+
+/* The game's name is never shown on screen */
+.game-screen[data-game=alpineRush] .alpine-brand{display:none!important}
+
+/* Speedometer: a dial like a car's, with the boost tank under it */
+.game-screen[data-game=alpineRush] .alpine-kit-speed .alpine-dial{width:150px;max-width:100%;padding:4px 6px 2px;box-sizing:border-box;margin:0}
+.game-screen[data-game=alpineRush] .alpine-dial svg{display:block;width:100%;height:auto;overflow:visible;direction:ltr}
+.game-screen[data-game=alpineRush] .alpine-dial-track{stroke:#ffffff2e;stroke-width:7;stroke-linecap:round}
+.game-screen[data-game=alpineRush] .alpine-dial-red{stroke:#ff6a4acc;stroke-width:3}
+.game-screen[data-game=alpineRush] .alpine-dial-fill{stroke:#ff8a3d;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .16s linear}
+.game-screen[data-game=alpineRush] .alpine-dial-tick{stroke:#d1e3ed99;stroke-width:1}
+.game-screen[data-game=alpineRush] .alpine-dial-tick.major{stroke:#f5f8fa;stroke-width:1.6}
+.game-screen[data-game=alpineRush] .alpine-dial-num{fill:#d1e3ed;font:600 8px system-ui,sans-serif}
+.game-screen[data-game=alpineRush] .alpine-dial-needle{transition:transform .16s linear}
+.game-screen[data-game=alpineRush] .alpine-dial-hand{fill:#ff6a4a}
+.game-screen[data-game=alpineRush] .alpine-dial-hub{fill:#f5f8fa;stroke:#102b41;stroke-width:2}
+.game-screen[data-game=alpineRush] .alpine-dial-value{fill:#f5f8fa;font:800 27px system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.game-screen[data-game=alpineRush] .alpine-dial-unit{fill:#d1e3ed;font:600 10px system-ui,sans-serif}
+
+/* Trick buttons: icon plus a short name, and a caption that wakes up in the air */
+.game-screen[data-game=alpineRush] .alpine-trick{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0}
+.game-screen[data-game=alpineRush] .alpine-trick svg{flex:none}
+.game-screen[data-game=alpineRush] .alpine-trick-label{font-size:9px;font-weight:800;line-height:1;color:#24465c;letter-spacing:0}
+.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{animation:alpine-trick-ready .9s ease-in-out infinite;box-shadow:0 0 0 3px #ff8a3d99}
+.game-screen[data-game=alpineRush] .alpine-trick-caption{position:absolute;left:0;top:-4px;font-size:11px;font-weight:800;color:#24465c;background:#f0f8f9d9;border-radius:999px;padding:2px 9px;opacity:.55;pointer-events:none;white-space:nowrap}
+.game-screen[data-game=alpineRush] .alpine-trick-caption[data-ready=true]{opacity:1;background:#ff8a3d;color:#fff}
+@keyframes alpine-trick-ready{50%{transform:scale(1.08)}}
+
+/* Boost ready: blinking arrow beside the boost button */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{position:absolute;right:calc(var(--boost-size,86px) + 8px);bottom:calc(var(--boost-size,86px) / 2 - 14px);width:30px;height:28px;color:#ff8a3d;pointer-events:none;animation:alpine-arrow-blink .7s steps(2,jump-none) infinite;filter:drop-shadow(0 1px 3px #0b2f4b66)}
+.game-screen[data-game=alpineRush] .alpine-boost-arrow svg{width:100%;height:100%}
+@keyframes alpine-arrow-blink{0%{opacity:1;transform:translateX(0)}50%{opacity:.25;transform:translateX(6px)}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alpineRush] .alpine-boost-arrow,.game-screen[data-game=alpineRush] .alpine-trick[data-ready=true]{animation:none}}
+
+/* Stars and coins: tiny, in the corner, quiet */
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally{gap:5px!important;opacity:.8}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally>span{font-size:11px!important;padding:2px 7px 2px 4px!important}
+.game-screen[data-game=alpineRush]:not([data-alpine-phase=menu]) .alpine-tally svg{width:12px!important;height:12px!important}
+/* the dial's read-out must beat the kit's generic .ih-speed-value rules (these are SVG user units) */
+.game-screen[data-game=alpineRush] .alpine-kit-speed .alpine-dial .alpine-dial-value.ih-speed-value{font:800 27px system-ui,sans-serif;letter-spacing:0;color:inherit;display:inline;line-height:1}
+.game-screen[data-game=alpineRush] .alpine-kit-speed .ih-speed.alpine-dial{display:block;padding:4px 6px 2px}
+
+/* Boost ready: a bigger, brighter arrow with a caption and a glowing ring on the button, so nobody misses it */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{width:52px!important;height:48px!important;right:calc(var(--boost-size,86px) + 10px)!important;bottom:calc(var(--boost-size,86px) / 2 - 24px)!important;color:#ffc43a!important;filter:drop-shadow(0 0 6px #ff8a3d) drop-shadow(0 2px 3px #0b2f4b99)!important;animation-duration:.55s!important}
+.game-screen[data-game=alpineRush] .alpine-boost-arrow svg path{stroke-width:3.6}
+.game-screen[data-game=alpineRush] .alpine-boost-caption{position:absolute;right:calc(var(--boost-size,86px) - 4px);bottom:calc(var(--boost-size,86px) + 6px);font-size:12px;font-weight:800;color:#fff;background:#ff7a1a;border-radius:999px;padding:3px 11px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px #0b2f4b55;animation:alpine-caption-pop .9s ease-in-out infinite}
+.game-screen[data-game=alpineRush] .alpine-boost[data-full=true]{animation:alpine-boost-ring .9s ease-in-out infinite}
+@keyframes alpine-caption-pop{50%{transform:scale(1.07)}}
+@keyframes alpine-boost-ring{0%,100%{box-shadow:0 0 0 0 #ffb02e99}50%{box-shadow:0 0 0 12px #ffb02e00,0 0 22px 4px #ffb02e}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alpineRush] .alpine-boost-caption,.game-screen[data-game=alpineRush] .alpine-boost[data-full=true]{animation:none}}
+/* the arrow sits on top of the trick buttons; the caption rides above the whole cluster */
+.game-screen[data-game=alpineRush] .alpine-boost-arrow{z-index:6}
+.game-screen[data-game=alpineRush] .alpine-boost-caption{z-index:6;right:0!important;bottom:auto!important;top:-34px!important}
+
+/* the game's name is not shown on the opening card either: the track name below is the heading */
+.game-screen[data-game=alpineRush] .alpine-title{display:none!important}
+/* ctrl-ski (04/11, רועי: "הג'ויסטיקים צריכים להיות בצד שמאל כל הזמן"): the steering stick is always on the left,
+   the boost and trick cluster always on the right, in both phone orientations. There is no left/right switch and no
+   saved side; nothing here depends on page direction or on a stored setting. */
+.game-screen[data-game=alpineRush] .alpine-footer{direction:ltr!important;flex-direction:row!important;justify-content:space-between!important}
+.game-screen[data-game=alpineRush] .alpine-joystick{order:0!important;margin:0!important;transition:transform .14s ease-out}
+.game-screen[data-game=alpineRush] .alpine-joystick[data-floating=true]{transition:none}
+.game-screen[data-game=alpineRush] .alpine-actions{order:2!important;margin-left:auto!important;transform:scale(1.14);transform-origin:100% 100%}
+/* Larger touch targets: boost 66 -> 92 px in landscape, 76 -> 84 px in portrait; trick buttons 48 -> 67 px in landscape; stick 100 -> 116 / 112 -> 124 px. */
+@media(max-width:700px){
+ /* Portrait is only 390 px wide: the trick arc must stay right of the middle, so the cluster keeps its size and only the boost grows. */
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:none}
+ .game-screen[data-game=alpineRush] .alpine-actions .alpine-boost{width:84px;min-width:84px;height:84px;min-height:84px}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:124px!important;height:124px!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:136px!important}
+}
+@media(max-height:600px) and (min-width:701px){
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(1.4)}
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:116px!important;height:116px!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
+}
+
+/* The stick and the action cluster never overlap and the actions always sit above the stick. */
+.game-screen[data-game=alpineRush] .alpine-joystick{z-index:1}
+.game-screen[data-game=alpineRush] .alpine-actions{position:relative;z-index:3}
+@media(max-width:380px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:108px!important;height:108px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.88)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:122px!important}
+}
+@media(max-width:340px){
+ .game-screen[data-game=alpineRush] .alpine-joystick{width:100px!important;height:100px!important}
+ .game-screen[data-game=alpineRush] .alpine-actions{transform:scale(.8)!important}
+ .game-screen[data-game=alpineRush] .alpine-center{bottom:112px!important}
+}

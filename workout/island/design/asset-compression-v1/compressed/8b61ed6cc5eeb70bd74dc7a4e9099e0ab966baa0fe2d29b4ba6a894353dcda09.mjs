@@ -1,0 +1,195 @@
+/** Basketball on the shared athlete body (11/11/2026, "sports-deep-fable" M1, see athlete-body.mjs).
+ *
+ * The tall motion library (Codex hoops-tall-v1 + v9, unified gaits, the v8 passes) keeps driving the game exactly as before: the same
+ * `chooseTallMotion` plan, the same events, ball tracks and jump calibration. What changes is the body it plays on: the realistic MakeHuman
+ * athlete of soccer (skin shader, kit shader with team colours and the player's number, sleeveless jersey, sneakers), scaled per profile
+ * (guard 1.88, wing 1.98, centre 2.08 m). Every tall clip is sampled on the canonical rig and retargeted once per profile through the
+ * world-basis map (`athleteRetargetMap`), then `createAvatarTall` builds the avatar with `assets.bodyFactory` (this module) instead of the
+ * merged vertex-coloured mesh. `?athleteBody=0` returns to the tall bodies. */
+import * as THREE from '../vendor/three.module.js';
+import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
+import {loadHoopsGLTF} from './hoops-gltf.mjs';
+import {loadAthleteSource,athleteRetargetMap,retargetCanonicalClips,createAthleteInstance,athleteKitFor,athleteKitGeometry,ATHLETE_HEIGHTS,ATHLETE_BULK,CANON_REST,CANON18,athleteBodyEnabled} from './athlete-body.mjs';
+import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
+import {decodeTallPack,buildTallClips,TALL_PROFILES,TALL_REQUIRED,tallEnabled} from './hoops-tall.mjs';
+import {loadV8Motion,buildV8Clips,v8MotionEnabled} from './hoops-v8-motion.mjs';
+import {athletesEnabled,unifyTallPack} from './athletes-gait.mjs';
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-15';
+import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-15';
+import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-15';
+import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-15';
+import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-15';
+
+/** The athlete body is used when the tall library is on and the flag does not say otherwise. */
+export function hoopsAthleteEnabled(cfg,params,quality=2){return athleteBodyEnabled(params?.toString?.()?'?'+params.toString():'')&&tallEnabled(cfg,params,quality);}
+
+/** Face / skin profiles for the ten players (the soccer table has eight; basketball reuses them by player number). */
+export const HOOPS_PROFILES=Object.freeze([
+ {skin:'#8a5a40',hair:'#120e0c',beard:.3,shape:{african:.75,narrow:.25,hairVolume:0}},
+ {skin:'#c08a68',hair:'#1f1712',beard:.55,shape:{caucasian:.25,jaw:.4,hairVolume:.15}},
+ {skin:'#5e3b2a',hair:'#0d0b0a',beard:.25,shape:{african:1,jaw:.5,hairVolume:.05}},
+ {skin:'#a8714f',hair:'#18120f',beard:.65,shape:{nose:.5,brow:.5,hairVolume:.3}},
+ {skin:'#ddb090',hair:'#5a3a22',beard:.7,shape:{caucasian:.7,jaw:.7,hairVolume:.5}},
+ {skin:'#9a6448',hair:'#1a1411',beard:.8,shape:{brow:.6,jaw:.3,nose:.3,hairVolume:.2}},
+ {skin:'#e6bd9c',hair:'#a07246',beard:.2,shape:{caucasian:.8,narrow:.5,hairVolume:.6}},
+ {skin:'#c99a78',hair:'#2b1e15',beard:.4,shape:{asian:.6,hairVolume:.35}},
+]);
+
+/** A canonical-rig AnimationClip (tracks `<bone>.quaternion`, `Hips.position` absolute) -> the state shape of the retargeter: keyframes at
+ * `fps` with rotations per canonical bone and the hips offset from `restHips` (metres). Pure except for three.js interpolants. */
+export function clipToCanonicalState(clip,restHips,fps=30){
+ const n=Math.max(2,Math.round(clip.duration*fps)+1),dur=clip.duration,inter={};
+ for(const t of clip.tracks){const [bone,prop]=t.name.split('.');inter[bone+'.'+prop]=t.createInterpolant();}
+ const keyframes=[];
+ for(let f=0;f<n;f++){
+  const time=Math.min(dur,f/fps),rotations={};
+  for(const b of CANON18){const i=inter[b+'.quaternion'];rotations[b]=i?Array.from(i.evaluate(time)):[0,0,0,1];}
+  const hp=inter['Hips.position']?.evaluate(time);
+  keyframes.push({time:dur?time/dur:0,rotations,hipsOffsetMeters:hp?[hp[0]-restHips[0],hp[1]-restHips[1],hp[2]-restHips[2]]:[0,0,0]});
+ }
+ return {durationSeconds:dur,loop:clip.userData?.loop??true,keyframes};
+}
+
+/** Retarget a Map of canonical clips (buildTallClips / buildV8Clips output) onto the athlete rig; names are kept. */
+export function retargetClipMap(clips,restHips,rig,map,fps=30){
+ const states={};for(const [name,clip] of clips)states[name]=clipToCanonicalState(clip,restHips,fps);
+ const out=new Map();for(const clip of retargetCanonicalClips(THREE,states,CANON_REST,rig,map)){clip.userData.loop=states[clip.name].loop;out.set(clip.name,clip);}
+ return out;
+}
+
+/** Dunk calibration on the athlete body (the packs were calibrated on the Codex tall bodies, whose arms are longer than the MakeHuman athlete's at
+ * the same height): plays each dunk clip on a bare clone of the rig scaled like the profile, measures the highest palm against the rim and
+ * scales the positive hips lift so the palm clears the rim by `clearance` (NBA Live look: the hand well over the ring). Returns the scales. */
+export function calibrateAthleteDunks(source,clipSet,{height,bulk=1,rimY=3.05,clearance=.25,ids=['dunk_one_hand','dunk_two_hands']}={}){
+ const root=cloneSkinned(source.scene),scale=height/source.height;root.scale.set(scale*bulk,scale,scale*bulk);root.position.y=-source.floor*scale;
+ const hands=[],bones={};root.traverse(o=>{if(o.isBone)bones[o.name]=o;});
+ for(const side of ['Left','Right']){const hand=bones[side+'Hand'],f=bones[side+'FingerBase'];const a=new THREE.Object3D();if(f)a.position.copy(f.position).multiplyScalar(.75);else a.position.set(0,-.08,0);hand.add(a);hands.push(a);}
+ const mixer=new THREE.AnimationMixer(root),v=new THREE.Vector3(),result={};
+ for(const id of ids){
+  const clip=clipSet.get(id);if(!clip)continue;
+  const track=clip.tracks.find(t=>t.name==='Hips.position');if(!track)continue;
+  const action=mixer.clipAction(clip);action.play();action.setEffectiveWeight(1);
+  let palmMax=-Infinity,liftAtMax=0;const rest=bones.Hips.position.y;
+  for(let t=0;t<clip.duration;t+=1/60){action.time=t;mixer.update(0);root.updateMatrixWorld(true);for(const h of hands){const y=h.getWorldPosition(v).y;if(y>palmMax){palmMax=y;liftAtMax=(bones.Hips.position.y-rest)*scale;}}}
+  action.stop();mixer.uncacheClip(clip);
+  const wanted=rimY+clearance,k=liftAtMax>.05?Math.max(.5,Math.min(1.8,(wanted-palmMax+liftAtMax)/liftAtMax)):1;
+  if(Math.abs(k-1)>.02){const vals=track.values,restY=vals[1];for(let i=0;i<vals.length;i+=3){const y=vals[i+1];if(y>restY)vals[i+1]=restY+(y-restY)*k;}}
+  result[id]={palmMax:+palmMax.toFixed(3),lift:+liftAtMax.toFixed(3),scale:+k.toFixed(3)};
+ }
+ mixer.uncacheRoot(root);return result;
+}
+
+/** The three profiles and the pack, on the athlete body. Same contract as loadTall (createAvatarTall reads pack / clipSets / baseHeights /
+ * posProfile / unified / v8) plus `athlete:true` and `bodyFactory`. Throws on any failure: the caller falls back to the tall bodies. */
+export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={}){
+ const t=cfg.tall;if(!t?.profiles)throw Error('Basketball tall is not configured');
+ const loader=new GLTFLoader();let done=0;const tick=()=>onProgress?.(++done/4);
+ // the repaired Codex v12 clips (tools/hoops-tall-v12.mjs, QA 90-97) are the default on the athlete body; ?hoopsMotion=v9 keeps the v9 pack
+ const wantV12=params?.get?.('hoopsMotion')!=='v9',v12Name=t.motionV12||'motion-v12.json';
+ let pack=null,motionSource='v9';
+ if(wantV12){try{const r=await fetch(new URL(t.base+v12Name,base));if(!r.ok)throw Error('Basketball v12 motion pack '+r.status);pack=decodeTallPack(await r.json());motionSource='v12';}catch(error){pack=null;onFallback?.('motion v12',error);}}
+ if(!pack){const pr=await fetch(new URL(t.base+t.motion,base));if(!pr.ok)throw Error('Basketball tall motion pack '+pr.status);pack=decodeTallPack(await pr.json());}
+ tick();
+ for(const n of TALL_REQUIRED)if(!pack.clips[n])throw Error('Basketball tall clip missing: '+n);
+ // v22 (12/11): the Codex shared body (athlete-body-v22.mjs), canonical 18-bone rig: the packs play on it through an identity map. Any failure keeps the previous athlete.
+ let v22=null;
+ const search=params?.toString?.()?'?'+params.toString():'';
+ if(athleteBodyV22Enabled(search)){
+  // v24.1: the athlete-body-v2 guard / wing / centre first (hands, number on the back and shorts; same rig as v22), the v22 bodies if they fail
+  if(hoopsBodyV2Enabled(search)){try{v22=await loadHoopsBodyV2({T:THREE,GLTFLoader,load:(l,url)=>loadHoopsGLTF(l,url)});}catch(error){v22=null;onFallback?.('athlete-body-v2',error);}}
+  if(!v22)try{v22=await loadAthleteV22(url=>loadHoopsGLTF(loader,url),{T:THREE,bodies:TALL_PROFILES});}
+  catch(error){v22=null;onFallback?.('athlete-body-v22',error);}
+ }
+ const source=v22?v22.bodies[TALL_PROFILES[0]]:await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
+ let unified=null;
+ if(t.athletes&&athletesEnabled(t,params||'')){
+  try{const dr=await fetch(new URL(t.athletes.donor,base));if(!dr.ok)throw Error('Gait donor '+dr.status);unified=unifyTallPack(pack,await dr.json(),{cap:motionSource!=='v12'});}
+  catch(error){unified=null;onFallback?.('athletes',error);}
+ }
+ tick();
+ // v24.1 hoops-motion-v13 (hoops-motion-v13.mjs): canonical-rig clips, so only on the v22 / v2 bodies (that very rig); after the gait
+ // unification (the v13 arms are the pack's own), the gaits that share a phase turned to one footfall. Any failure keeps v12.
+ let v13=null,motionV13=null;
+ if(v22&&hoopsMotionV13Enabled(search)){
+  try{const r=await fetch(v13Url());if(!r.ok)throw Error('Basketball v13 motion pack '+r.status);v13=prepareV13(await r.json(),decodeTallPack);motionV13={clips:[...v13.byGame.keys()],aligned:v13.aligned,shared:alignSharedV12(pack,V22_LEG_RATIO.wing)};}
+  catch(error){v13=null;motionV13=null;onFallback?.('motion v13',error);}
+ }
+ let v8=null;
+ if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
+ const map=v22?null:athleteRetargetMap(source.rig,CANON_REST),clipSets={};
+ const t0=globalThis.performance?.now?.()??0;
+ const heights=t.baseHeights||{guard:188,wing:198,center:208},dunks={};
+ for(const p of TALL_PROFILES){
+  const rest=pack.profiles[p].hips,canonical=buildTallClips(pack,p);
+  if(v8)for(const [n,c] of buildV8Clips(THREE,v8,rest))canonical.set(n,c);
+  // v22: each profile has its own body; Hips and Root translations are rest-relative and scaled by canonical / source leg length (Codex motion-manifest)
+  const body=v22?v22.bodies[p]:source,pmap=v22?{...athleteRetargetMap(body.rig,CANON_REST,V22_MAP,{tweaks:{}}),motionScale:V22_LEG_RATIO[p]}:map;
+  clipSets[p]=retargetClipMap(canonical,rest,body.rig,pmap);
+  // v24.1: the v13 clips under the game's names (one copy per name), canonical hips offsets (motionScale 1: the body is the canonical rig scaled)
+  if(v13){
+   const built=buildTallClips(v13.pack,'canonical'),renamed=new Map();
+   for(const [game,id] of Object.entries(V13_USE)){const c=built.get(id).clone();c.name=game;renamed.set(game,c);}
+   for(const [n,c] of retargetClipMap(renamed,v13.pack.profiles.canonical.hips,body.rig,{...pmap,motionScale:1}))clipSets[p].set(n,c);
+  }
+  dunks[p]=calibrateAthleteDunks(body,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:v22?1:ATHLETE_BULK[p]||1});
+ }
+ // the plan reads clip data by game name (durations, events, ball tracks): the v13 data replaces v12's for the connected names; each body's
+ // gait table has the v13 references x its skeleton scale (BodyScale x height / natural height)
+ let gaits13=null;
+ if(v13){
+  gaits13=Object.fromEntries(TALL_PROFILES.map(p=>{const body=v22.bodies[p];let s=1;body.scene.traverse(o=>{if(o.name==='BodyScale')s=o.scale.x;});const h=(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100;return [p,hoopsV13Gaits(v13.pack,s*h/body.height,pack.clips)];}));
+  for(const [game,data] of v13.byGame)pack.clips[game]=data;
+  motionV13.refScale=Object.fromEntries(Object.entries(gaits13).map(([p,g])=>[p,g.refScale]));
+ }
+ const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
+ const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
+ return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,
+  /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
+  bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
+   if(v22){
+    // the Codex body: team colours painted by region into this player's own vertex colours, one shared material, role body (guard / wing / centre)
+    const h22=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100,pr=HOOPS_PROFILES[Math.abs(card.look?.skin??card.number??0)%HOOPS_PROFILES.length];
+    const kit22=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
+    if(look?.shortsBase)kit22.shorts=look.shortsBase;
+    const inst=createAthleteV22Instance(THREE,v22,{bodyId:profile,cloneRig:cloneSkinned,appearance:{skin:pr.skin,hair:pr.hair,hairStyle:v22HairFor(pr,card.number??cell)},kit:kit22,style:'basketball',height:h22,track});
+    inst.root.userData.characterVersion=v22.v2?12:11;
+    const palmPack=pack.profiles[profile].palms;
+    for(const [side,key] of [['Left','l'],['Right','r']]){const pp=palmPack?.[side+'Hand']?.palmPoint;if(pp)inst.palms[key].position.fromArray(pp);}
+    // v24.1 body v2: the player's number on the back and the shorts in the kit's trim colour (the soccer v24 decoration, the body's own width)
+    const decoration=v22.v2?decorateAthleteV2(THREE,inst,{number:card.number??null,gloves:false,kit:kit22,appearance:{skin:pr.skin,hair:pr.hair},style:'basketball',shape:HOOPS_V2_BODY_SHAPES[profile]}):null;
+    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,decoration,
+     applyKit(k){const next={...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'};inst.paint({kit:next});if(decoration){decoration.uniforms.athleteTrim.value.set(next.secondary);decoration.uniforms.athleteSecondary.value.set(next.shorts);}},
+     setLod:level=>inst.setLod(level),get lod(){return inst.lod;},
+     dispose(){decoration?.dispose();inst.dispose();}};
+   }
+   const height=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100;
+   const kit=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
+   if(look?.shortsBase)kit.shorts=look.shortsBase;
+   const profileLook=HOOPS_PROFILES[Math.abs(card.look?.skin??card.number??0)%HOOPS_PROFILES.length];
+   const inst=createAthleteInstance(THREE,source,{createMaterials:createAthleteMaterials,cloneRig:cloneSkinned,profile:profileLook,kit,number:cell,numbers:numbers||blankNumbers(),track,style:'basketball',height,sleeveGeometry:sleeves,bulk:ATHLETE_BULK[profile]||1});
+   inst.root.userData.characterVersion=10;
+   const u=inst.materials.kit.userData.athlete,col=hex=>{const c=new THREE.Color(hex);return new THREE.Vector3(c.r,c.g,c.b);};
+   return {root:inst.root,mats:[inst.materials.skin,inst.materials.kit],palms:inst.palms,instance:inst,
+    applyKit(k){u.kitPrimary.value.copy(col(k.base||'#5b38c9'));u.kitSecondary.value.copy(col(k.accent||'#f4d377'));u.kitShorts.value.copy(col(k.shorts||k.base||'#5b38c9'));u.kitShortsTrim.value.copy(col(k.accent||'#f4d377'));u.kitBootAccent.value.copy(col(k.accent||'#f4d377'));},
+    setLod:level=>inst.setLod(level),get lod(){return inst.lod;},
+    dispose(){inst.dispose();}};
+  },
+  dispose(){for(const set of Object.values(clipSets))set.clear();}};
+}
+
+let blank=null;
+/** The kit shader needs a numbers texture; without the roster canvas a 1-cell transparent one keeps the back empty. */
+function blankNumbers(){
+ if(blank)return blank;
+ const data=new Uint8Array(64*64*4),tex=new THREE.DataTexture(data,64,64);tex.needsUpdate=true;blank=tex;return tex;
+}
+
+/** The numbers texture for a roster: one 64x64 cell per card index, the number in white with a dark edge (the shader samples cell `number`). */
+export function hoopsNumbersTexture(cards,doc=globalThis.document){
+ if(!doc)return blankNumbers();
+ const canvas=doc.createElement('canvas');canvas.width=Math.max(1,cards.length)*64;canvas.height=64;const ctx=canvas.getContext('2d');
+ ctx.font='bold 46px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+ cards.forEach((c,i)=>{const n=String(c.number??i);ctx.lineWidth=5;ctx.strokeStyle='rgba(0,0,0,.55)';ctx.strokeText(n,i*64+32,34);ctx.fillStyle='#ffffff';ctx.fillText(n,i*64+32,34);});
+ const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;return tex;
+}

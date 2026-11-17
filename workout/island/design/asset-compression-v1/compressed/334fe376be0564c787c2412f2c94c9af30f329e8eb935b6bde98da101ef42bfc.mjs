@@ -1,0 +1,120 @@
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261107-15';
+import {createLoftFlight} from './soccer-loft.mjs';
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
+/** Pure presentation decisions; the simulation never imports this module. */
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+export function slideWeight(player,config){
+ if(player.recover>0)return clamp(player.recover/config.slide.recoverSeconds,0,1);
+ const u=clamp(1-player.slideTime/config.slide.seconds,0,1),keys=config.view.slidePhases;
+ for(let i=1;i<keys.length;i++)if(u<=keys[i].at){const a=keys[i-1],b=keys[i],v=(u-a.at)/(b.at-a.at),smooth=v*v*(3-2*v);return a.weight+(b.weight-a.weight)*smooth;}
+ return keys.at(-1).weight;
+}
+export function playerAnimation(player,state,config){
+  // soccerShow v1: the presentation copy carries the celebration cast (state.show.roles); without it the scorer celebrates in place as before.
+  const role=state.show?.roles?.[player.id]||null;
+  const a=config.view.animation,speed=hypot2(player.vx,player.vz),celebrating=role?role.role==='celebrate':state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
+  // v24.1 (soccer-r241.mjs): a volley / scissor kick (aerialKind; the scissor kicker lies on his back through his recovery), the fouled carrier
+  // down and getting up (fouledTime), the carrier who lost a clean tackle stumbling on (stumbleTime). Absent fields = the v24 modes exactly.
+  const aerial=player.aerialKind&&(player.headerTime>0||player.aerialKind==='scissor'&&player.recover>0)?player.aerialKind:null;
+  const mode=role?.role==='dejected'?'dejected':celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':aerial?aerial:player.headerTime>0?'header':player.slideTime>0?'slide':player.fouledTime>0?'fouled':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':player.stumbleTime>0?'stumble':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
+  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks',dejected:'stand',volley:'kick',scissor:'stand',fouled:'stand',stumble:'run'}[mode];
+  const recovery=mode==='slide'||mode==='recover'?slideWeight(player,config):1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
+  return {mode,clip,speed:clip==='run'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
+    lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,
+    roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode,clipHint:role?.clip||null};
+}
+/** Landing point of a charging ground pass (the loft shows its arc instead). */
+export function passLanding(state,config){
+  if(!state.charging||state.chargeKind!=='pass'||state.ball.owner!==state.controlled||state.ball.owner==null)return null;
+  const power=state.charge/config.passing.chargeSeconds;
+  if(state.charge>=config.passing.loftThresholdSeconds)return null;
+  const destination=passDestination({...state,aim:soccerPassAim(state)},config,power,{snap:state.aiV2});
+  return {x:destination.x,z:destination.z,target:destination.target??null,distance:destination.distance};
+}
+export function passReceiver(state,config){
+  return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds,{snap:state.aiV2}).target:null;
+}
+export function soccerShotIcon(state,config){
+ if(state.role==='keeper'&&state.ball.owner!==state.controlled)return 'slide';
+ return canHead(state.players[state.controlled],state.ball,config)?'header':state.mode==='defense'?'slide':'shoot';
+}
+/** Preview and flight share the same physical launch, endpoint and peak. */
+export function crossArc(state,config){
+ if(state.ball.flight)return state.ball.flight;
+ if(!state.charging||state.chargeKind!=='pass'||state.charge<config.passing.loftThresholdSeconds)return null;
+ const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power,{snap:state.aiV2});
+ return createLoftFlight(state.ball,destination,config,power).flight;
+}
+/** Camera elevation for the display: portrait looks down more steeply so the
+ * pitch fills the tall frame instead of a strip between two bands of sky. */
+export function soccerElevationDegrees(aspect,config){
+  const c=config.view.camera;return aspect<1&&Number.isFinite(c.portraitElevationDegrees)?c.portraitElevationDegrees:c.elevationDegrees;
+}
+/** Analytic perspective projection matching the side camera, useful without WebGL. */
+export function projectSoccerPoint(point,camera,aspect,config){
+  const c=config.view.camera,angle=soccerElevationDegrees(aspect,config)*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360),dx=point.x-camera.x,dz=(point.z-camera.z)*camera.direction,y=point.y||0;
+  const depth=camera.distance-y*sin-dz*cos;
+  return {x:dx*camera.direction/(depth*tan*aspect),y:(y*cos-dz*sin)/(depth*tan),depth};
+}
+/** Smooth tracking with velocity lead and zoom, then a hard fit for ball + player.
+ * The fit is solved after smoothing, including the player's head and airborne ball. */
+export function soccerCamera(state,aspect,config,previous,dt=0,boxZoom=0){
+  const c=config.view.camera,b=state.ball,p=state.players[state.controlled],speed=hypot2(b.vx,b.vz),lead=Math.min(c.maxLead,speed*c.leadSeconds),length=speed||1;
+  // A narrow portrait frame starts further back than landscape (portraitNearDistance):
+  // the landscape near distance showed only five metres of pitch width.
+  const near=aspect<1&&Number.isFinite(c.portraitNearDistance)?c.portraitNearDistance:c.nearDistance;
+  // Portrait is narrow: fitting a far-away player as well pushed the camera tens of
+  // metres back into the fog (goal phase, long balls). The ball is always framed and
+  // centred; the player is followed only within portraitFollowRange, beyond that the
+  // edge arrow points at it.
+  const followPlayer=aspect>=1||Math.hypot(p.x-b.x,p.z-b.z)<=(c.portraitFollowRange??14);
+  // A ball in the net keeps the centre at the goal line, not in the stands behind it.
+  const edge=config.pitch.length/2-(c.portraitGoalInset??3);
+  const wanted={x:followPlayer?(b.x+p.x)/2+b.vx/length*lead:clamp(b.x+b.vx/length*lead,-edge,edge),z:(followPlayer?(b.z+p.z)/2:b.z)+b.vz/length*lead,distance:near+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom,direction:state.attackDir};
+  // soccerShow v1 broadcast zoom: a few metres closer while the ball is in either box (the hard fit below still frames ball and player); landscape only.
+  if(boxZoom>0&&aspect>=1)wanted.distance-=boxZoom*soccerBoxFactor(b,config.pitch);
+  const blend=previous?1-Math.exp(-c.smoothing*dt):1;
+  const next={x:previous?previous.x+(wanted.x-previous.x)*blend:wanted.x,z:previous?previous.z+(wanted.z-previous.z)*blend:wanted.z,distance:previous?previous.distance+(wanted.distance-previous.distance)*blend:wanted.distance,direction:wanted.direction};
+  const angle=soccerElevationDegrees(aspect,config)*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360);
+  const arc=crossArc(state,config),points=followPlayer?[b,{x:p.x,z:p.z,y:0},{x:p.x,z:p.z,y:c.playerHeight}]:[b,{x:b.x,z:b.z,y:c.playerHeight}];
+  if(arc)points.push({x:arc.x,z:arc.z,y:0},{x:(arc.fromX+arc.x)/2,z:(arc.fromZ+arc.z)/2,y:arc.height});
+  for(const point of points){
+    const dx=point.x-next.x,dz=(point.z-next.z)*next.direction,y=point.y||0;
+    next.distance=Math.max(next.distance,y*sin+dz*cos+Math.max(Math.abs(dx)/(tan*aspect*c.safeX),Math.abs(y*cos-dz*sin)/(tan*c.safeY)));
+  }return next;
+}
+/** 1 inside either penalty box, 0 four metres outside it (soccer-show.boxExcitement without the module import; the view's camera budget is tight). */
+export function soccerBoxFactor(ball,pitch,ramp=4){
+  const outX=Math.max(0,pitch.length/2-pitch.penaltyDepth-Math.abs(ball.x)),outZ=Math.max(0,Math.abs(ball.z)-pitch.penaltyWidth/2);
+  return clamp(1-hypot2(outX,outZ)/ramp,0,1);
+}
+/** Adaptive-quality policy on wall-clock frame times (pure, unit-tested). sample() returns true when
+ * the view should step one tier down: either the average over `qualityWindowSeconds` is above
+ * `slowFrameMs`, or the last `qualityQuickFrames` frames average more than `qualityQuickFactor` times
+ * the budget. After a step (or at start) `qualityGraceSeconds` of frames are ignored, so compiles,
+ * resizes and the first frames of a match do not trigger a second step. */
+export function createQualityMonitor(view){
+  let frameSum=0,frameCount=0,seconds=0,quickSum=0,quickCount=0,grace=0;
+  const reset=()=>{frameSum=frameCount=seconds=quickSum=quickCount=grace=0;};
+  return {reset,sample(frameMs){
+    if(!Number.isFinite(frameMs)||frameMs<=0)return false;grace+=frameMs/1000;
+    if(grace<(view.qualityGraceSeconds??0))return false;
+    frameSum+=frameMs;frameCount++;seconds+=frameMs/1000;quickSum+=frameMs;quickCount++;
+    const quick=view.qualityQuickFrames||0;
+    if(quick&&quickCount>=quick){const slow=quickSum/quickCount>view.slowFrameMs*(view.qualityQuickFactor||1.8);quickSum=quickCount=0;if(slow){reset();return true;}}
+    if(seconds>=view.qualityWindowSeconds){const slow=frameSum/frameCount>view.slowFrameMs;seconds=frameSum=frameCount=0;if(slow){reset();return true;}}
+    return false;
+  }};
+}
+
+/** Distance level of detail for the full-quality tiers. The few players nearest the camera focus keep the
+ * detailed mesh, the rest use the economy mesh, so twelve players stay inside the triangle budget at tier 0
+ * (shadows, full pixel ratio, full crowd). Sticky: a member leaves only when it is clearly farther than the
+ * threshold, so a player on the border does not flicker between meshes. Returns the set of detailed ids. */
+export function nearDetailPlayers(players,focus,count,previous=null,hysteresis=1.2){
+  const ranked=players.map(p=>({id:p.id,d:hypot2(p.x-focus.x,p.z-focus.z)})).sort((a,b)=>a.d-b.d);
+  const limit=count>0?ranked[Math.min(ranked.length,count)-1]?.d??0:-1,keep=new Set();
+  if(previous)for(const r of ranked)if(previous.has(r.id)&&r.d<=limit*hysteresis&&keep.size<count)keep.add(r.id);
+  for(const r of ranked){if(keep.size>=count)break;keep.add(r.id);}
+  return keep;
+}

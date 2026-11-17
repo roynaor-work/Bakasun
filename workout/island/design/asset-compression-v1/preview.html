@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'">
+<title>האי · השוואת דחיסת נכסים</title>
+<link rel="stylesheet" href="preview.css">
+<header><span class="eyebrow">האי · מעבדת נכסים</span><h1>אותו עולם. פחות הורדה.</h1><p>השוואת מקור ותוצר, באותה מצלמה ובאותו זמן. כל המשאבים מקומיים.</p><a href="report.md">דוח ומדידות</a></header>
+<main>
+ <section class="controls" aria-label="בחירת נכס">
+  <label>משחק<select id="game"><option value="">כל המשחקים</option></select></label>
+  <label>סוג<select id="type"><option value="glb">מודלים</option><option value="image">תמונות</option><option value="motion">תנועה</option><option value="audio">צליל</option></select></label>
+  <label class="wide">נכס<select id="asset" dir="ltr"></select></label>
+ </section>
+ <p id="status" role="status">טוען את החבילה…</p>
+ <div class="comparison">
+  <section class="panel"><div class="panel-head"><h2>מקור</h2><span id="before-size"></span></div><canvas id="before" aria-label="תצוגת מקור"></canvas><img id="before-image" hidden alt="תמונת מקור"><audio id="before-audio" hidden controls></audio><button id="before-loop" hidden>ניגון לולאה — מקור</button></section>
+  <section class="panel"><div class="panel-head"><h2>אחרי דחיסה</h2><span id="after-size"></span></div><canvas id="after" aria-label="תצוגת תוצר"></canvas><img id="after-image" hidden alt="תמונה דחוסה"><audio id="after-audio" hidden controls></audio><button id="after-loop" hidden>ניגון לולאה — תוצר</button></section>
+ </div>
+ <section id="view-controls" class="controls" aria-label="מצלמה ואנימציה">
+  <label>סיבוב<input id="yaw" type="range" min="-180" max="180" value="25"></label>
+  <label>גובה מבט<input id="pitch" type="range" min="-40" max="65" value="12"></label>
+  <label>התקרבות<input id="zoom" type="range" min="0.5" max="3" value="1" step="0.01"></label>
+  <label>קליפ<select id="clip" dir="ltr"></select></label>
+  <label>זמן<input id="time" type="range" min="0" max="1" value="0" step="0.001"></label><button id="play">ניגון</button>
+ </section>
+ <p id="quality" class="metrics" dir="ltr"></p>
+ <p class="note">בדיקת הצבע והגאומטריה מבוצעת גם במספרים. זמני הענן אינם מדידת טלפון. להאזנה רציפה ללא רווח בין לולאות, השתמשו בכפתורי ניגון הלולאה.</p>
+</main>
+<script type="module" src="preview.mjs"></script>
+</html>

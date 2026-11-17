@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "browser": "system Chromium / SwiftShader",
+  "wasmDisabled": true,
+  "networkPolicy": "only localhost allowed; all remote and WASM decoder requests blocked",
+  "errors": [],
+  "remoteRequests": [],
+  "forbiddenRequests": [],
+  "workers": [],
+  "models": [
+    {
+      "source": "assets/models/adult-man-rigged-512.glb",
+      "beforeMS": 46.60000000009313,
+      "afterMS": 38.299999999813735,
+      "loadMS": 218.20000000018626,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 6.291946308724833e-05,
+        "changedChannels": 63,
+        "nonBackgroundChannels": 100545
+      }
+    },
+    {
+      "source": "assets/kid-full.glb",
+      "beforeMS": 50.799999999813735,
+      "afterMS": 63.60000000009313,
+      "loadMS": 242.29999999981374,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 0,
+        "meanChannelError": 0,
+        "changedChannels": 0,
+        "nonBackgroundChannels": 102048
+      }
+    },
+    {
+      "source": "assets/hoops-tall/guard.glb",
+      "beforeMS": 83.89999999990687,
+      "afterMS": 42.5,
+      "loadMS": 169.59999999962747,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 2.696548418024928e-05,
+        "changedChannels": 27,
+        "nonBackgroundChannels": 70759
+      }
+    },
+    {
+      "source": "assets/hoops-v7/pg.glb",
+      "beforeMS": 50.10000000009313,
+      "afterMS": 52.799999999813735,
+      "loadMS": 236.60000000009313,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 1.3982102908277405e-05,
+        "changedChannels": 14,
+        "nonBackgroundChannels": 51762
+      }
+    },
+    {
+      "source": "assets/athlete/athlete.glb",
+      "beforeMS": 130.39999999990687,
+      "afterMS": 112.60000000009313,
+      "loadMS": 389,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 1.5979546180888464e-05,
+        "changedChannels": 16,
+        "nonBackgroundChannels": 53472
+      }
+    },
+    {
+      "source": "assets/soccer-v24/body/models/soccer.glb",
+      "beforeMS": 67.20000000018626,
+      "afterMS": 33.6999999997206,
+      "loadMS": 144,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 2.9961649089165866e-05,
+        "changedChannels": 30,
+        "nonBackgroundChannels": 60567
+      }
+    },
+    {
+      "source": "design/models2/soccer-stadium.glb",
+      "beforeMS": 61.299999999813735,
+      "afterMS": 63,
+      "loadMS": 165.10000000009313,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 0,
+        "meanChannelError": 0,
+        "changedChannels": 0,
+        "nonBackgroundChannels": 77334
+      }
+    },
+    {
+      "source": "assets/models/city/47-sedan-car.glb",
+      "beforeMS": 23.5,
+      "afterMS": 17.600000000093132,
+      "loadMS": 56.60000000009313,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 0,
+        "meanChannelError": 0,
+        "changedChannels": 0,
+        "nonBackgroundChannels": 115731
+      }
+    },
+    {
+      "source": "assets/naval-v7/ships/destroyer-lod0.glb",
+      "beforeMS": 39.90000000037253,
+      "afterMS": 13,
+      "loadMS": 71.10000000009313,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 7.989773090444232e-06,
+        "changedChannels": 8,
+        "nonBackgroundChannels": 36630
+      }
+    },
+    {
+      "source": "assets/hoops-v241/body/models/guard.glb",
+      "beforeMS": 40.60000000009313,
+      "afterMS": 24.59999999962747,
+      "loadMS": 87.10000000009313,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 1.797698945349952e-05,
+        "changedChannels": 18,
+        "nonBackgroundChannels": 59583
+      }
+    },
+    {
+      "source": "assets/fire-v24/rooms/bedroom.glb",
+      "beforeMS": 38.5,
+      "afterMS": 12,
+      "loadMS": 85.3000000002794,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 0,
+        "meanChannelError": 0,
+        "changedChannels": 0,
+        "nonBackgroundChannels": 194427
+      }
+    },
+    {
+      "source": "assets/racing-formula-cars-v1/formula-lod0.glb",
+      "beforeMS": 16.299999999813735,
+      "afterMS": 15.899999999906868,
+      "loadMS": 68.59999999962747,
+      "type": "glb",
+      "pixels": {
+        "maxChannelError": 1,
+        "meanChannelError": 9.98721636305529e-06,
+        "changedChannels": 10,
+        "nonBackgroundChannels": 60960
+      }
+    }
+  ],
+  "images": [
+    {
+      "source": "assets/alien-v24/pickup-burst.png",
+      "width": 768,
+      "height": 128,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.992156862745098,
+      "meanVisibleChannelError": 0.09439505782781023
+    },
+    {
+      "source": "assets/alien-v24/vulcan-magazine.png",
+      "width": 96,
+      "height": 96,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.9058823529411764,
+      "meanVisibleChannelError": 0.11509076286764747
+    },
+    {
+      "source": "assets/alien-v25/impact-256.png",
+      "width": 256,
+      "height": 256,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.992156862745098,
+      "meanVisibleChannelError": 0.14298504100124648
+    },
+    {
+      "source": "assets/alien-v25/muzzle-256.png",
+      "width": 256,
+      "height": 256,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.9764705882352942,
+      "meanVisibleChannelError": 0.09513361313762508
+    },
+    {
+      "source": "assets/alien-v25/plasma-256.png",
+      "width": 256,
+      "height": 256,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.9372549019607843,
+      "meanVisibleChannelError": 0.07915378645354028
+    },
+    {
+      "source": "assets/alien-v25/steam-256.png",
+      "width": 256,
+      "height": 256,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1.4823529411764707,
+      "meanVisibleChannelError": 0.02649512197457104
+    },
+    {
+      "source": "assets/alpine-themes-v23/ice/sparkle.png",
+      "width": 256,
+      "height": 256,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 0.9019607843137255,
+      "meanVisibleChannelError": 0.028698939903112054
+    },
+    {
+      "source": "assets/athlete-body-v22/textures/athlete-atlas.png",
+      "width": 1024,
+      "height": 1024,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 0,
+      "meanVisibleChannelError": 0
+    },
+    {
+      "source": "assets/athlete/textures/ball-albedo.jpg",
+      "width": 1024,
+      "height": 512,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 1,
+      "meanVisibleChannelError": 0.03142738342285156
+    },
+    {
+      "source": "assets/athlete/textures/ball-normal.png",
+      "width": 1024,
+      "height": 512,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 0,
+      "meanVisibleChannelError": 0
+    },
+    {
+      "source": "assets/athlete/textures/kit-detail.png",
+      "width": 2048,
+      "height": 2048,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 0,
+      "meanVisibleChannelError": 0
+    },
+    {
+      "source": "assets/athlete/textures/kit-mask.png",
+      "width": 1024,
+      "height": 1024,
+      "sameDimensions": true,
+      "maxVisibleChannelError": 0,
+      "meanVisibleChannelError": 0
+    }
+  ],
+  "jsonFiles": 112,
+  "audioFiles": 180,
+  "motionPixels": {
+    "maxChannelError": 0,
+    "meanChannelError": 0,
+    "changedChannels": 0,
+    "nonBackgroundChannels": 3906
+  },
+  "mobileViewport": "390x844; no horizontal overflow",
+  "pass": true
+}

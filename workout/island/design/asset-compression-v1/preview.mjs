@@ -1,0 +1,52 @@
+import * as T from '../../vendor/three.module.js';
+import {GLTFLoader} from '../../vendor/GLTFLoader.js';
+import {createCompressedAssetLoader} from './runtime/loader.mjs';
+
+const $=id=>document.getElementById(id),island=new URL('../../',import.meta.url),loader=await createCompressedAssetLoader(new URL('./manifest.json',import.meta.url)),manifest=loader.manifest;
+const quality=await fetch(new URL('./quality.json',import.meta.url)).then(r=>r.json()),measurements=new Map(quality.assets.map(a=>[a.source,a]));
+let current=null,views=[],playing=false,sequence=0,audioContext,loopSources=[];
+const state={ready:false,stats:null,manifest,loader,selectSource,renderFrame};window.assetPreview=state;
+const kind=entry=>entry.source.endsWith('.glb')?'glb':/\.(png|jpe?g|webp)$/.test(entry.source)?'image':/\.(ogg|mp3)$/.test(entry.source)?'audio':measurements.get(entry.source)?.motion?'motion':null;
+for(const name of Object.keys(manifest.games))$('game').add(new Option(name,name));
+function fill(){const game=$('game').value,type=$('type').value,paths=game?new Set(manifest.groups[game]):null;$('asset').replaceChildren();for(const entry of manifest.assets)if(kind(entry)===type&&(!paths||paths.has(entry.source)))$('asset').add(new Option(entry.source,entry.source));if($('asset').value)void selectSource($('asset').value);}
+$('type').onchange=fill;$('game').onchange=fill;$('asset').onchange=()=>void selectSource($('asset').value);
+for(const id of ['yaw','pitch','zoom','time'])$(id).oninput=()=>renderFrame();
+$('clip').onchange=()=>renderFrame();$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'עצירה':'ניגון';};
+function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error);}
+function stopLoops(){for(const s of loopSources)s.stop();loopSources=[];}
+function dispose(){stopLoops();for(const v of views){v.root.traverse(o=>{o.geometry?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){for(const value of Object.values(m))if(value?.isTexture)value.dispose();m.dispose();}});v.renderer.dispose();}views=[];for(const side of ['before','after']){$(`${side}-audio`).pause();$(`${side}-audio`).removeAttribute('src');}}
+function view(side,root){const renderer=new T.WebGLRenderer({canvas:$(side),antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize($(side).clientWidth,$(side).clientHeight,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;const scene=new T.Scene();scene.background=new T.Color('#122632');scene.add(new T.HemisphereLight(0xe9f8ff,0x54564a,2.8));const sun=new T.DirectionalLight(0xfff1d9,3);sun.position.set(3,5,4);scene.add(sun);scene.add(root);return {side,renderer,scene,root,camera:new T.PerspectiveCamera(38,1,.001,1e6)};}
+function clips(value,prefix=''){let result=[];if(!value||typeof value!=='object')return result;if(Array.isArray(value.keyframes))result.push({name:prefix||value.clip||'motion',value});else for(const [key,child]of Object.entries(value))if(child&&typeof child==='object')result.push(...clips(child,prefix?`${prefix}/${key}`:key));return result;}
+function skeleton(bones){const root=new T.Group(),nodes=new Map();for(const bone of bones){const node=new T.Object3D();node.position.fromArray(bone.restTranslationMeters);nodes.set(bone.name,node);(nodes.get(bone.parent)||root).add(node);}const lines=new T.LineSegments(new T.BufferGeometry(),new T.LineBasicMaterial({color:0x98e7ce}));root.add(lines);return {root,nodes,bones,lines};}
+function applySkeleton(v,frame){for(const bone of v.bones){const node=v.nodes.get(bone.name);node.position.fromArray(bone.restTranslationMeters);node.quaternion.fromArray(frame.rotations?.[bone.name]||[0,0,0,1]).normalize();if(bone.name==='Hips'&&frame.hipsOffsetMeters)node.position.add(new T.Vector3().fromArray(frame.hipsOffsetMeters));if(bone.name==='Root'&&frame.referenceRootTranslationMeters)node.position.add(new T.Vector3().fromArray(frame.referenceRootTranslationMeters));}v.root.updateMatrixWorld(true);const positions=[];for(const bone of v.bones)if(v.nodes.has(bone.parent)){for(const name of [bone.parent,bone.name])positions.push(...v.nodes.get(name).getWorldPosition(new T.Vector3()).toArray());}v.lines.geometry.dispose();v.lines.geometry=new T.BufferGeometry();v.lines.geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));}
+function sample(frames,time){let i=frames.findIndex(f=>f.time>=time);if(i<0)i=frames.length-1;if(i===0)return frames[0];const a=frames[i-1],b=frames[i],u=(time-a.time)/(b.time-a.time||1),result={...a,rotations:{}};for(const [bone,q]of Object.entries(a.rotations||{}))result.rotations[bone]=new T.Quaternion().fromArray(q).normalize().slerp(new T.Quaternion().fromArray(b.rotations?.[bone]||q).normalize(),u).toArray();for(const key of Object.keys(a))if(/Meters$/.test(key)&&Array.isArray(a[key]))result[key]=a[key].map((v,j)=>v+(b[key][j]-v)*u);return result;}
+export async function selectSource(source){const id=++sequence;state.ready=false;playing=false;$('play').textContent='ניגון';dispose();current=loader.record(source);$('type').value=kind(current);$('asset').value=source;status('טוען מקור ותוצר…');$('before-size').textContent=`${(current.sourceBytes/1e6).toFixed(3)} MB`;$('after-size').textContent=`${(current.bytes/1e6).toFixed(3)} MB · ${current.codec}`;const type=kind(current);for(const side of ['before','after']){ $(side).hidden=!['glb','motion'].includes(type);$(`${side}-image`).hidden=type!=='image';$(`${side}-audio`).hidden=type!=='audio';$(`${side}-loop`).hidden=type!=='audio';}$('view-controls').hidden=!['glb','motion'].includes(type);$('clip').replaceChildren();
+ try{
+  const start=performance.now();let beforeMS=0,afterMS=0;
+  if(type==='glb'){
+   const t=performance.now(),before=await loader.referenceGLB(source,new GLTFLoader());beforeMS=performance.now()-t;const u=performance.now(),after=await loader.glb(source,new GLTFLoader());afterMS=performance.now()-u;if(id!==sequence)return;
+   views=[view('before',before.scene),view('after',after.scene)];views.forEach((v,i)=>{v.animations=[before,after][i].animations;v.mixer=new T.AnimationMixer(v.root);});
+   before.animations.forEach((clip,i)=>$('clip').add(new Option(clip.name||`clip ${i}`,String(i))));
+   const bounds=new T.Box3().setFromObject(before.scene).union(new T.Box3().setFromObject(after.scene));for(const v of views){v.center=bounds.getCenter(new T.Vector3());v.radius=Math.max(.01,bounds.getSize(new T.Vector3()).length()/2);}
+  }else if(type==='image'){
+   $('before-image').src=new URL(source,island).href;$('after-image').src=loader.resolve(source);await Promise.all(['before','after'].map(side=>$(`${side}-image`).decode()));
+  }else if(type==='motion'){
+   const before=await fetch(new URL(source,island)).then(r=>r.json()),after=await loader.json(source);const boneSource=before.skeleton?.bones?before:await fetch(new URL('design/motion/hoops.json',island)).then(r=>r.json());
+   const bones=boneSource.skeleton.bones;views=[before,after].map((json,i)=>{const rig=skeleton(bones),v=view(i?'after':'before',rig.root);return {...v,...rig,clips:clips(json),center:new T.Vector3(0,.85,0),radius:1.2};});views[0].clips.forEach((c,i)=>$('clip').add(new Option(c.name,String(i))));
+  }else if(type==='audio'){
+   for(const side of ['before','after']){$(`${side}-audio`).src=side==='before'?new URL(source,island).href:loader.resolve(source);$(`${side}-audio`).loop=true;$(`${side}-loop`).onclick=async()=>{stopLoops();audioContext||=new AudioContext();await audioContext.resume();const buffer=await fetch($(`${side}-audio`).src).then(r=>r.arrayBuffer()).then(b=>audioContext.decodeAudioData(b));const node=audioContext.createBufferSource();node.buffer=buffer;node.loop=true;node.connect(audioContext.destination);node.start();loopSources.push(node);};}
+  }
+  if(id!==sequence)return;const fixed=$('clip').options.length===0;$('clip').disabled=fixed;$('time').disabled=fixed;$('play').disabled=fixed;if(fixed)$('clip').add(new Option('פוזה קבועה','0'));renderFrame();state.stats={source,beforeMS,afterMS,loadMS:performance.now()-start,type};state.ready=true;
+  const metrics=measurements.get(source),q=type==='motion'?metrics.motion:metrics.quality,f=v=>Number(v||0).toPrecision(4);
+  $('quality').textContent=type==='glb'?`Position error: ${f(q.maxPositionError)} · Normal: ${f(q.maxNormalDegrees)}° · UV: ${f(q.maxUVError)} · Skin and animation: exact`:type==='motion'?`Rotation: ${f(q.maxRotationDegrees)}° · Translation: ${f(q.maxTranslationMeters*1000)} mm · FK: ${f(q.maxForwardKinematicsMeters*1000)} mm`:type==='image'?`${q?.width||''} × ${q?.height||''} · RGBA error: ${q?.maxRGBAError??'original'} / 255`:`SNR: ${f(q.snrDB)} dB · Sample error: ${f(q.maxSampleError)} · Loop: ${q.loop?(q.outputSeam.pass?'passed':'review required'):'one-shot'}`;
+  status(`${current.compressionSafe?'עבר את שער האיכות':'מועמד הדחיסה נדחה; נשמר המקור'} · ${current.selected?'נבחר תוצר חדש':'נשמרו בתים קיימים'}`);
+ }catch(error){if(id===sequence){status(error.message,true);state.error=error.message;state.ready=true;}throw error;}
+}
+export function renderFrame(time=Number($('time').value)){
+ for(const v of views){const index=Number($('clip').value)||0;
+  if(v.mixer){const clip=v.animations[index];if(clip){if(v.active!==clip){v.mixer.stopAllAction();v.mixer.clipAction(clip).play();v.active=clip;}v.mixer.setTime(time*clip.duration);}}
+  if(v.clips){const f=v.clips[index]?.value.keyframes;if(f?.length)applySkeleton(v,sample(f,time));}
+  const yaw=Number($('yaw').value)*Math.PI/180,pitch=Number($('pitch').value)*Math.PI/180,distance=v.radius/Math.sin(19*Math.PI/180)/Number($('zoom').value);v.camera.position.copy(v.center).add(new T.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch)).multiplyScalar(distance));v.camera.lookAt(v.center);v.camera.aspect=$(v.side).clientWidth/$(v.side).clientHeight;v.camera.near=Math.max(.0001,distance/1000);v.camera.far=distance*1000;v.camera.updateProjectionMatrix();v.renderer.render(v.scene,v.camera);
+ }
+}
+let previous=performance.now();function tick(now){if(playing&&state.ready&&views.length){$('time').value=(Number($('time').value)+(now-previous)/3000)%1;renderFrame();}previous=now;requestAnimationFrame(tick);}requestAnimationFrame(tick);fill();

@@ -1,0 +1,464 @@
+/* Original racing instrumentation. All rules stay inside the racing screen. */
+.game-screen[data-game=islandRacing]{
+ --race-ink:#0a111b;--race-panel:#101b28e8;--race-white:#f6f8fc;--race-muted:#a8b8c7;
+ --race-yellow:#f5cf42;--race-nitro:#55e5ed;--race-edge:24px;--race-bottom:22px;
+ background:var(--race-ink);color:var(--race-white);font-family:inherit;isolation:isolate;
+}
+.game-screen[data-game=islandRacing] .game-stage{background:#101d2a}
+.game-screen[data-game=islandRacing] .game-stage::after{
+ content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(180deg,#07101992 0%,#07101900 25%,#07101900 66%,#07101975 100%);
+}
+.game-screen[data-game=islandRacing] .game-header{z-index:6;pointer-events:none}
+.game-screen[data-game=islandRacing] .game-header h2{display:none}
+.game-screen[data-game=islandRacing] .game-header>button{pointer-events:auto}
+.game-screen[data-game=islandRacing] .game-header .game-pause{
+ top:max(15px,env(safe-area-inset-top));right:max(var(--race-edge),env(safe-area-inset-right));
+ width:48px;min-width:48px;height:48px;min-height:48px;padding:8px;border:1px solid #c6d8e73d;
+ border-radius:9px;background:#0b1523d9;color:var(--race-white);box-shadow:0 4px 16px #0003;
+}
+.game-screen[data-game=islandRacing] .game-pause::before{width:11px;height:15px;border-width:3px}
+.game-screen[data-game=islandRacing] .game-status{
+ position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:0!important;
+ clip-path:inset(50%);overflow:hidden;white-space:nowrap;
+}
+.game-screen[data-game=islandRacing] .racing-hud{
+ position:absolute;top:max(17px,env(safe-area-inset-top));left:max(var(--race-edge),env(safe-area-inset-left));
+ display:flex;gap:18px;align-items:center;direction:ltr;z-index:3;pointer-events:none;
+ color:var(--race-white);text-shadow:0 2px 7px #0008;
+}
+.game-screen[data-game=islandRacing] .racing-position{
+ position:relative;display:grid;justify-items:center;min-width:78px;padding:3px 12px 6px 9px;line-height:1;
+ border-left:3px solid var(--race-yellow);
+}
+.game-screen[data-game=islandRacing] .racing-position::before{
+ content:'';position:absolute;inset:-4px -6px -4px -3px;z-index:-1;
+ background:linear-gradient(112deg,#0a1424e6,#0a142485);clip-path:polygon(0 0,100% 0,89% 100%,0 100%);
+}
+.game-screen[data-game=islandRacing] .racing-rank{
+ display:flex;align-items:baseline;gap:3px;font-size:58px;font-weight:900;font-style:italic;
+ letter-spacing:-3px;line-height:.94;font-variant-numeric:tabular-nums;
+}
+.game-screen[data-game=islandRacing] .racing-of{
+ padding-left:2px;font-size:16px;font-style:normal;font-weight:650;letter-spacing:0;color:#c6d2dd;
+}
+.game-screen[data-game=islandRacing] .racing-position-label{font-size:10px;font-weight:750;margin-top:5px;color:#d7e2ec}
+.game-screen[data-game=islandRacing] .racing-race-info{display:grid;grid-template-columns:auto auto;gap:5px 15px;direction:rtl;align-items:center}
+.game-screen[data-game=islandRacing] .racing-track{grid-column:1/-1;font-size:15px;font-weight:800;color:#fff;letter-spacing:.1px}
+.game-screen[data-game=islandRacing] .racing-lap{font-size:13px;font-weight:650;direction:ltr;unicode-bidi:embed;text-align:right;white-space:nowrap;color:#d2e0ed}
+.game-screen[data-game=islandRacing] .racing-clock{font-size:20px;font-weight:750;letter-spacing:.7px;font-variant-numeric:tabular-nums;direction:ltr;color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-minimap{
+ position:absolute;right:calc(var(--race-edge) + 66px);top:15px;width:142px;height:94px;z-index:2;
+ pointer-events:none;opacity:.94;filter:drop-shadow(0 2px 2px #06111b) drop-shadow(0 0 8px #06111b66);
+}
+.game-screen[data-game=islandRacing] .racing-readout{
+ position:absolute;right:calc(var(--race-edge) + 192px);left:auto;bottom:calc(var(--race-bottom) + 13px);
+ width:96px;display:flex;align-items:baseline;justify-content:center;gap:5px;direction:ltr;
+ pointer-events:none;z-index:3;line-height:1;text-shadow:0 2px 8px #0009;
+}
+.game-screen[data-game=islandRacing] .racing-speed{
+ font-size:48px;line-height:1;font-style:italic;font-weight:900;letter-spacing:-2px;font-variant-numeric:tabular-nums;color:#fff;
+}
+.game-screen[data-game=islandRacing] .racing-speed-unit{font-size:9px;font-weight:650;color:#d5e4ee;white-space:nowrap}
+.game-screen[data-game=islandRacing] .racing-energy{
+ position:absolute;right:calc(var(--race-edge) + 192px);left:auto;bottom:var(--race-bottom);width:96px;height:5px;
+ border-radius:1px;background:#101f2de0;z-index:3;overflow:hidden;border:1px solid #c1e5f147;transform:skewX(-14deg);
+}
+.game-screen[data-game=islandRacing] .racing-energy-fill{
+ display:block;width:100%;height:100%;background:linear-gradient(90deg,#25b7d2,var(--race-nitro));
+ transform-origin:left;transition:transform .1s linear;
+}
+.game-screen[data-game=islandRacing] .racing-drift-meter{
+ position:absolute;left:max(var(--race-edge),env(safe-area-inset-left));bottom:calc(var(--race-bottom) + 91px);
+ width:166px;height:4px;background:#132131bb;z-index:3;overflow:hidden;transform:skewX(-16deg);
+}
+.game-screen[data-game=islandRacing] .racing-drift-fill{display:block;width:100%;height:100%;background:var(--race-yellow);transform-origin:left}
+.game-screen[data-game=islandRacing] .racing-countdown{
+ position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:4;
+ color:var(--race-yellow);font-size:116px;font-style:italic;font-weight:950;line-height:1;
+ text-shadow:0 3px 0 #111e31,0 9px 30px #040b145c;
+}
+.game-screen[data-game=islandRacing] .racing-countdown[hidden],
+.game-screen[data-game=islandRacing] .racing-toast[hidden],
+.game-screen[data-game=islandRacing] .racing-hint[hidden],
+.game-screen[data-game=islandRacing] .racing-drift-meter[hidden],
+.game-screen[data-game=islandRacing] .racing-action[hidden]{display:none!important}
+.game-screen[data-game=islandRacing] .racing-toast{
+ position:absolute;top:99px;left:50%;transform:translateX(-50%);max-width:54%;z-index:4;
+ border:1px solid #9ac5d238;border-inline-start:3px solid var(--race-nitro);border-radius:3px;
+ padding:8px 18px;background:#0b1729df;color:#f4fbff;font-size:15px;font-weight:800;
+ pointer-events:none;white-space:nowrap;text-align:center;box-shadow:0 5px 18px #040b1426;
+}
+.game-screen[data-game=islandRacing] .racing-hint{
+ position:absolute;top:109px;left:26%;right:26%;padding:5px 12px;margin:0;
+ color:#f2f5f9;font-size:12px;line-height:1.5;font-weight:600;text-align:center;
+ background:linear-gradient(90deg,#0a142000,#0a1420ba 18%,#0a1420ba 82%,#0a142000);
+ text-shadow:0 1px 5px #000;pointer-events:none;z-index:3;
+}
+.game-screen[data-game=islandRacing] .game-controls.game-controls{
+ position:absolute;inset:0;width:100%;height:100%;max-height:none;background:transparent;overflow:hidden;
+ grid-area:auto;pointer-events:none;z-index:5;display:block;padding:0;margin:0;border:0;border-radius:0;
+}
+.game-screen[data-game=islandRacing] .racing-steering{
+ position:absolute;left:max(var(--race-edge),env(safe-area-inset-left));bottom:var(--race-bottom);
+ width:172px;height:78px;pointer-events:auto;touch-action:none;direction:ltr;
+}
+.game-screen[data-game=islandRacing] .racing-steering::before{
+ content:'';position:absolute;inset:5px -4px 0;background:radial-gradient(ellipse at 50% 80%,#0a1727ba,#0a172700 73%);
+ pointer-events:none;
+}
+.game-screen[data-game=islandRacing] .racing-wheel{
+ position:absolute;left:calc(50% - 23px);top:0;width:46px;height:38px;color:#e9f3f8a6;
+ transform:rotate(var(--turn,0deg));transform-origin:50% 80%;transition:color .12s;pointer-events:none;
+}
+.game-screen[data-game=islandRacing] .racing-wheel svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round}
+.game-screen[data-game=islandRacing] .racing-steer{
+ -webkit-appearance:none;appearance:none;position:absolute;left:0;top:18px;width:100%;height:48px;
+ margin:0;padding:0;min-width:0;opacity:1;background:transparent;outline:none;cursor:ew-resize;touch-action:none;direction:ltr;
+}
+.game-screen[data-game=islandRacing] .racing-steer::-webkit-slider-runnable-track{
+ height:3px;border:0;border-radius:0;background:linear-gradient(90deg,#d7e6f326,#d7e6f399 24%,#d7e6f399 76%,#d7e6f326);
+}
+.game-screen[data-game=islandRacing] .racing-steer::-webkit-slider-thumb{
+ -webkit-appearance:none;appearance:none;width:30px;height:34px;margin-top:-15px;
+ border:2px solid #f2f7fb;border-radius:5px;background:linear-gradient(145deg,#65788b,#17283b);
+ box-shadow:0 3px 12px #0006,inset 0 0 0 5px #11213266;transform:skewX(-9deg);
+}
+.game-screen[data-game=islandRacing] .racing-steer::-moz-range-track{height:3px;border:0;background:#d7e6f366}
+.game-screen[data-game=islandRacing] .racing-steer::-moz-range-thumb{width:26px;height:30px;border:2px solid #f2f7fb;border-radius:5px;background:#31475b;box-shadow:0 3px 12px #0006}
+.game-screen[data-game=islandRacing] .racing-steering-label{
+ position:absolute;left:0;right:0;bottom:0;text-align:center;font-size:10px;font-weight:750;letter-spacing:.4px;
+ color:#e2ebf2d9;pointer-events:none;text-shadow:0 1px 4px #000;
+}
+.game-screen[data-game=islandRacing] .racing-steering.active .racing-wheel{color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-steering.active .racing-steer::-webkit-slider-thumb{background:#e4bb2f;border-color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-steering:focus-within{outline:2px solid var(--race-yellow);outline-offset:5px;border-radius:5px}
+.game-screen[data-game=islandRacing] .racing-controls .racing-credit{
+ position:absolute;left:max(var(--race-edge),env(safe-area-inset-left));top:105px;
+ display:inline-flex;align-items:center;gap:5px;min-height:32px;padding:0 7px;
+ border-radius:3px;background:#0c182585;color:#cbd8e4;font-size:10px;font-weight:500;
+ text-decoration:underline;text-decoration-color:#8ea7bc75;text-underline-offset:3px;
+ pointer-events:auto;white-space:nowrap;text-shadow:0 1px 3px #0008;
+}
+.game-screen[data-game=islandRacing] .racing-controls .racing-credit::after{content:'↗';font-size:11px;text-decoration:none}
+.game-screen[data-game=islandRacing] .racing-controls .racing-credit:focus-visible{outline:2px solid var(--race-yellow);outline-offset:2px}
+.game-screen[data-game=islandRacing] .racing-actions{
+ position:absolute;right:max(var(--race-edge),env(safe-area-inset-right));bottom:var(--race-bottom);
+ width:160px;height:82px;display:flex;align-items:flex-end;justify-content:space-between;direction:ltr;pointer-events:none;
+}
+.game-screen[data-game=islandRacing] .racing-action{
+ position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+ width:64px;min-width:64px;height:64px;min-height:64px;margin:0;padding:8px 4px;
+ border:1px solid #c0d9e17a;border-bottom:3px solid var(--race-yellow);border-radius:9px 9px 14px 9px;
+ background:linear-gradient(145deg,#18293ee8,#0a1323ee);color:var(--race-white);box-shadow:0 5px 18px #0004;
+ touch-action:none;pointer-events:auto;transition:background .1s,box-shadow .1s;user-select:none;
+}
+.game-screen[data-game=islandRacing] .racing-action svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-actions [data-game-control] .racing-action-copy{font-size:10px!important;font-weight:800;line-height:1.15;white-space:nowrap;pointer-events:none;direction:rtl}
+.game-screen[data-game=islandRacing] .racing-nitro{
+ width:82px;min-width:82px;height:82px;min-height:82px;border:1px solid #7bf3f4b3;border-bottom:3px solid var(--race-nitro);
+ border-radius:12px 12px 18px 12px;color:var(--race-nitro);background:linear-gradient(145deg,#123443f0,#091b2af5);
+ box-shadow:0 4px 19px #00181e66,inset 0 1px 0 #b7ffff18;
+}
+.game-screen[data-game=islandRacing] .racing-nitro svg{width:36px;height:36px;fill:currentColor;stroke:none;filter:drop-shadow(0 0 7px #55e5ed40)}
+.game-screen[data-game=islandRacing] .racing-action.held{background:var(--race-yellow);color:#101b29;border-color:#ffe877;box-shadow:0 0 0 3px #f5cf422b,0 5px 16px #0004}
+.game-screen[data-game=islandRacing] .racing-nitro.held{background:var(--race-nitro);color:#09202c;border-color:#c2ffff;box-shadow:0 0 0 3px #55e5ed26,0 0 24px #55e5ed40}
+.game-screen[data-game=islandRacing] .racing-accelerate{
+ position:absolute;left:5px;bottom:78px;width:54px;min-width:54px;height:54px;min-height:54px;padding:6px 3px;
+ border-bottom-color:#f1f6fa;background:#101f31ed;
+}
+.game-screen[data-game=islandRacing] .racing-accelerate svg{width:23px;height:23px}
+.game-screen[data-game=islandRacing] .game-controls .racing-auto{
+ position:absolute;right:max(var(--race-edge),env(safe-area-inset-right));bottom:calc(var(--race-bottom) + 105px);
+ display:flex;align-items:center;gap:6px;width:96px;min-width:96px;min-height:44px;height:44px;padding:5px 8px;
+ border:1px solid #c2d8e339;border-radius:4px;background:#091421b8;color:#d5e4ee;
+ font-size:9px;font-weight:650;line-height:1.15;white-space:normal;text-align:right;pointer-events:auto;
+}
+.game-screen[data-game=islandRacing] .game-controls .racing-auto::before{content:'';flex:none;width:5px;height:5px;border-radius:50%;background:var(--race-yellow);box-shadow:0 0 5px #f5cf4244}
+.game-screen[data-game=islandRacing] .game-controls .racing-auto[aria-pressed=false]{color:var(--race-white);border-color:#e0eaf266;background:#101e2ee6}
+.game-screen[data-game=islandRacing] .game-controls .racing-auto[aria-pressed=false]::before{background:#718397;box-shadow:none}
+.game-screen[data-game=islandRacing] .racing-action:focus-visible,
+.game-screen[data-game=islandRacing] .game-controls .racing-auto:focus-visible{outline:2px solid var(--race-white);outline-offset:4px}
+.game-screen[data-game=islandRacing] .racing-action:disabled,
+.game-screen[data-game=islandRacing] .game-controls .racing-auto:disabled{opacity:.55}
+.game-screen[data-game=islandRacing] .racing-loading{
+ position:absolute;inset:0;z-index:7;display:grid;align-content:center;justify-items:center;gap:20px;
+ background:radial-gradient(ellipse at 50% 35%,#1c3348,#09111d 75%);color:var(--race-white);font-size:19px;
+}
+.game-screen[data-game=islandRacing][data-boosting=true] .racing-speed{color:var(--race-nitro);text-shadow:0 0 15px #55e5ed66,0 3px 8px #0009}
+.game-screen[data-game=islandRacing][data-boosting=true] .racing-energy-fill{background:#c6ffff}
+.game-screen[data-game=islandRacing][data-offroad=true] .racing-toast{border-inline-start-color:var(--race-yellow);color:#ffe596;background:#281f10e6}
+.game-screen[data-game=islandRacing] .game-pause-sheet{padding:18px;background:#07111bce;backdrop-filter:blur(6px)}
+.game-screen[data-game=islandRacing] .game-pause-card{
+ width:min(430px,100%);padding:25px;border:1px solid #b3cddd40;border-top:3px solid var(--race-yellow);
+ border-radius:10px;background:linear-gradient(145deg,#1b2b3e,#0d1725);color:var(--race-white);box-shadow:0 20px 60px #0005;
+}
+.game-screen[data-game=islandRacing] .game-pause-actions .shell-icon{border:1px solid #b5cadb42;border-radius:8px;background:#192b3f;color:#eff8ff}
+.game-screen[data-game=islandRacing] .game-pause-actions [data-action=game-resume]{background:var(--race-yellow);border-color:var(--race-yellow);color:#101b29}
+.game-screen[data-game=islandRacing] .soccer-rotate{gap:32px;background:radial-gradient(ellipse at 50% 35%,#23384e,#091321 75%);color:#f4f7fb}
+.game-screen[data-game=islandRacing] .soccer-rotate>svg{width:108px;height:108px;color:var(--race-yellow);animation:none}
+.game-screen[data-game=islandRacing] .soccer-rotate::after{content:'סובבו את המכשיר למרוץ';order:1;font-size:19px;font-weight:650;color:#d6e5ef}
+.game-screen[data-game=islandRacing] .soccer-rotate>button{order:2;border:1px solid #b6cfdf4d;border-radius:9px;background:#15273b;color:#eff7fb}
+@media(min-width:1000px) and (min-height:600px){
+ .game-screen[data-game=islandRacing]{--race-edge:30px;--race-bottom:30px}
+ .game-screen[data-game=islandRacing] .racing-hud{top:25px;gap:22px}
+ .game-screen[data-game=islandRacing] .racing-rank{font-size:68px}
+ .game-screen[data-game=islandRacing] .racing-track{font-size:17px}
+ .game-screen[data-game=islandRacing] .racing-lap{font-size:14px}
+ .game-screen[data-game=islandRacing] .racing-clock{font-size:22px}
+ .game-screen[data-game=islandRacing] .racing-steering{width:190px;height:84px}
+ .game-screen[data-game=islandRacing] .racing-steer{top:21px}
+ .game-screen[data-game=islandRacing] .racing-minimap{width:164px;height:109px;top:20px}
+ .game-screen[data-game=islandRacing] .racing-readout{bottom:calc(var(--race-bottom) + 17px)}
+ .game-screen[data-game=islandRacing] .racing-speed{font-size:55px}
+ .game-screen[data-game=islandRacing] .racing-hint{top:130px;font-size:13px}
+ .game-screen[data-game=islandRacing] .racing-toast{top:130px;font-size:16px}
+ .game-screen[data-game=islandRacing] .racing-controls .racing-credit{top:129px}
+}
+@media(max-height:400px) and (orientation:landscape){
+ .game-screen[data-game=islandRacing]{--race-edge:20px;--race-bottom:17px}
+ .game-screen[data-game=islandRacing] .racing-hud{top:12px;gap:13px}
+ .game-screen[data-game=islandRacing] .racing-position{min-width:65px;padding:3px 8px 5px 6px}
+ .game-screen[data-game=islandRacing] .racing-rank{font-size:49px}
+ .game-screen[data-game=islandRacing] .racing-of{font-size:13px}
+ .game-screen[data-game=islandRacing] .racing-race-info{gap:3px 10px}
+ .game-screen[data-game=islandRacing] .racing-track{font-size:13px}
+ .game-screen[data-game=islandRacing] .racing-lap{font-size:11px}
+ .game-screen[data-game=islandRacing] .racing-clock{font-size:17px}
+ .game-screen[data-game=islandRacing] .racing-minimap{width:118px;height:79px;right:calc(var(--race-edge) + 58px);top:10px}
+ .game-screen[data-game=islandRacing] .game-header .game-pause{top:12px;width:44px;min-width:44px;height:44px;min-height:44px}
+ .game-screen[data-game=islandRacing] .racing-steering{width:152px;height:67px}
+ .game-screen[data-game=islandRacing] .racing-wheel{width:40px;height:32px;left:calc(50% - 20px)}
+ .game-screen[data-game=islandRacing] .racing-steer{top:13px;height:45px}
+ .game-screen[data-game=islandRacing] .racing-steer::-webkit-slider-thumb{width:28px;height:32px;margin-top:-14px}
+ .game-screen[data-game=islandRacing] .racing-steering-label{font-size:9px}
+ .game-screen[data-game=islandRacing] .racing-actions{width:146px;height:73px}
+ .game-screen[data-game=islandRacing] .racing-action{width:59px;min-width:59px;height:59px;min-height:59px;padding:6px 3px}
+ .game-screen[data-game=islandRacing] .racing-nitro{width:73px;min-width:73px;height:73px;min-height:73px}
+ .game-screen[data-game=islandRacing] .racing-action svg{width:26px;height:26px}
+ .game-screen[data-game=islandRacing] .racing-nitro svg{width:32px;height:32px}
+ .game-screen[data-game=islandRacing] .game-controls .racing-actions [data-game-control] .racing-action-copy{font-size:9px!important}
+ .game-screen[data-game=islandRacing] .racing-accelerate{left:3px;bottom:70px;width:50px;min-width:50px;height:50px;min-height:50px}
+ .game-screen[data-game=islandRacing] .racing-accelerate svg{width:20px;height:20px}
+ .game-screen[data-game=islandRacing] .game-controls .racing-auto{width:88px;min-width:88px;bottom:calc(var(--race-bottom) + 92px);height:44px;min-height:44px;font-size:9px;padding:4px 6px}
+ .game-screen[data-game=islandRacing] .racing-readout{right:calc(var(--race-edge) + 174px);bottom:calc(var(--race-bottom) + 13px);width:84px}
+ .game-screen[data-game=islandRacing] .racing-speed{font-size:40px}
+ .game-screen[data-game=islandRacing] .racing-speed-unit{font-size:8px}
+ .game-screen[data-game=islandRacing] .racing-energy{right:calc(var(--race-edge) + 174px);width:84px}
+ .game-screen[data-game=islandRacing] .racing-drift-meter{bottom:calc(var(--race-bottom) + 76px);width:150px}
+ .game-screen[data-game=islandRacing] .racing-hint{top:86px;left:25%;right:25%;font-size:10px;padding:4px 10px}
+ .game-screen[data-game=islandRacing] .racing-toast{top:82px;font-size:12px;padding:6px 12px}
+ .game-screen[data-game=islandRacing] .racing-countdown{font-size:92px}
+ .game-screen[data-game=islandRacing] .game-pause-card{padding:18px}
+ .game-screen[data-game=islandRacing] .racing-controls .racing-credit{top:88px;font-size:9px}
+}
+@media(orientation:portrait){
+ .game-screen[data-game=islandRacing][data-orientation-blocked=true] .racing-controls,
+ .game-screen[data-game=islandRacing][data-orientation-blocked=true] .racing-hud,
+ .game-screen[data-game=islandRacing][data-orientation-blocked=true] .racing-minimap{visibility:hidden}
+ .game-screen[data-game=islandRacing] .soccer-rotate{padding:28px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-screen[data-game=islandRacing] .racing-action,
+ .game-screen[data-game=islandRacing] .racing-energy-fill,
+ .game-screen[data-game=islandRacing] .racing-wheel{transition:none}
+}
+/* A real circular speed instrument, clear of the car and touch controls. */
+.game-screen[data-game=islandRacing] .racing-readout{
+ --race-dial:122px;width:var(--race-dial);height:var(--race-dial);display:block;
+ right:calc(var(--race-edge) + 185px);bottom:calc(var(--race-bottom) + 9px);
+ filter:drop-shadow(0 3px 10px #030a1466);text-shadow:none;
+}
+.game-screen[data-game=islandRacing] .racing-speed-dial{display:block;width:100%;height:100%;overflow:visible}
+.game-screen[data-game=islandRacing] .racing-dial-face{fill:#091321d9;stroke:#afc7dc4d;stroke-width:.8}
+.game-screen[data-game=islandRacing] .racing-dial-rim{fill:none;stroke:#c6d7e51c;stroke-width:1}
+.game-screen[data-game=islandRacing] .racing-dial-track{fill:none;stroke:#8092a442;stroke-width:3;stroke-linecap:round}
+.game-screen[data-game=islandRacing] .racing-dial-progress{fill:none;stroke:var(--race-yellow);stroke-width:3;stroke-linecap:round;stroke-dasharray:254.469;stroke-dashoffset:254.469}
+.game-screen[data-game=islandRacing] .racing-dial-tick{fill:none;stroke:#d6e2ef;stroke-width:1}
+.game-screen[data-game=islandRacing] .racing-dial-redline{stroke:#ff7864}
+.game-screen[data-game=islandRacing] .racing-dial-labels{fill:#b4c5d6;font:7px Arial,sans-serif;text-anchor:middle;direction:ltr}
+.game-screen[data-game=islandRacing] .racing-speed-needle{fill:#ff7662;stroke:#ff7662;stroke-width:1.2}
+.game-screen[data-game=islandRacing] .racing-dial-pin{fill:#e0ebf6;stroke:#445567;stroke-width:2}
+.game-screen[data-game=islandRacing] .racing-readout .racing-speed{
+ position:absolute;left:50%;top:74%;transform:translate(-50%,-50%);font-size:calc(var(--race-dial) * .215);
+ font-weight:850;font-style:normal;line-height:1;letter-spacing:-.5px;text-shadow:0 1px 4px #0008;
+}
+.game-screen[data-game=islandRacing] .racing-readout .racing-speed-unit{position:absolute;left:50%;top:86%;transform:translateX(-50%);font-size:8px;line-height:1;color:#b7c7d8}
+.game-screen[data-game=islandRacing] .racing-energy{right:calc(var(--race-edge) + 202px);width:88px}
+.game-screen[data-game=islandRacing][data-boosting=true] .racing-dial-progress{stroke:var(--race-nitro)}
+@media(max-height:400px) and (orientation:landscape){
+ .game-screen[data-game=islandRacing] .racing-readout{--race-dial:106px;right:calc(var(--race-edge) + 168px)}
+ .game-screen[data-game=islandRacing] .racing-energy{right:calc(var(--race-edge) + 183px);width:76px}
+}
+@media(min-width:1000px) and (min-height:600px){
+ .game-screen[data-game=islandRacing] .racing-readout{--race-dial:144px;right:calc(var(--race-edge) + 185px)}
+ .game-screen[data-game=islandRacing] .racing-energy{right:calc(var(--race-edge) + 207px);width:100px}
+}
+
+/* racing-v9: a real steering wheel on a pad that is the whole left half (?racingWheel=0 restores the slider). */
+.game-screen[data-game=islandRacing] .racing-pad{position:absolute;left:0;top:0;width:50%;height:100%;z-index:1;pointer-events:auto;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]{position:absolute;inset:0;width:auto;height:auto;pointer-events:none;z-index:2}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]::before{display:none}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1] .racing-wheel{
+ --wheel:clamp(96px,32vh,128px);position:absolute;left:max(var(--race-edge),env(safe-area-inset-left));top:auto;bottom:var(--race-bottom);
+ width:var(--wheel);height:var(--wheel);color:#f1f6fa;opacity:.62;transform:rotate(var(--turn,0deg));transform-origin:50% 50%;
+ transition:opacity .12s;filter:drop-shadow(0 4px 10px #000a);will-change:transform;
+}
+.game-screen[data-game=islandRacing] .racing-steering.floating[data-wheel=v1] .racing-wheel{left:var(--wx,50%);top:var(--wy,50%);bottom:auto;margin:calc(var(--wheel)/-2) 0 0 calc(var(--wheel)/-2);opacity:1;transition:none}
+.game-screen[data-game=islandRacing] .racing-wheel svg{width:100%;height:100%;fill:none;stroke:none}
+.game-screen[data-game=islandRacing] .racing-wheel .rim-shadow{stroke:#0b1520;stroke-width:15}
+.game-screen[data-game=islandRacing] .racing-wheel .rim{stroke:#2a3947;stroke-width:11}
+.game-screen[data-game=islandRacing] .racing-wheel .rim-hi{stroke:#e9f1f7;stroke-width:2.4;stroke-dasharray:none;transform:scale(.93);transform-origin:50% 50%}
+.game-screen[data-game=islandRacing] .racing-wheel .spokes{stroke:#2a3947;stroke-width:9;stroke-linecap:round}
+.game-screen[data-game=islandRacing] .racing-wheel .hub{fill:#1b2733;stroke:#e9f1f7;stroke-width:3}
+.game-screen[data-game=islandRacing] .racing-wheel .mark{fill:var(--race-yellow);stroke:none}
+.game-screen[data-game=islandRacing] .racing-steering.active .racing-wheel .rim-hi{stroke:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1] .racing-steering-label{display:none}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1] .racing-steer{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;clip-path:inset(50%)}
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]:focus-within .racing-wheel{opacity:1;outline:2px solid var(--race-yellow);outline-offset:4px;border-radius:50%}
+.game-screen[data-game=islandRacing] .racing-controls .racing-credit,.game-screen[data-game=islandRacing] .racing-actions,.game-screen[data-game=islandRacing] .racing-auto{z-index:3}
+
+/* racing-v9: the wheel eases back to centre on release instead of snapping. */
+.game-screen[data-game=islandRacing] .racing-steering[data-wheel=v1]:not(.active) .racing-wheel{transition:opacity .12s,transform .16s ease-out}
+
+/* racing-v9 formula look: lap times and slipstream badge. */
+.game-screen[data-game=islandRacing] .racing-lapinfo{font-size:11px;font-weight:700;color:#d6e8f2;text-shadow:0 1px 4px #000;white-space:nowrap}
+.game-screen[data-game=islandRacing] .racing-draft{position:absolute;left:50%;bottom:calc(var(--race-bottom) + 118px);transform:translateX(-50%);z-index:3;padding:3px 14px;border-radius:3px;background:#0b1729d9;border:1px solid var(--race-nitro);border-inline-start:3px solid var(--race-nitro);color:#f4fbff;font-size:13px;font-weight:800;letter-spacing:.5px;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-draft[hidden]{display:none}
+
+/* racing-v11 podium */
+.game-screen[data-game=islandRacing] .racing-podium{position:absolute;inset:0;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at 50% 60%,#16283ce6,#08111cf2);color:#f4fbff;pointer-events:auto;touch-action:manipulation;cursor:pointer}
+.game-screen[data-game=islandRacing] .racing-podium-title{font-size:26px;font-weight:800;letter-spacing:.5px;color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-podium-row{display:flex;align-items:flex-end;gap:10px;direction:ltr}
+.game-screen[data-game=islandRacing] .racing-podium-step{width:110px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;padding:8px 6px 0;border-radius:6px 6px 0 0;background:linear-gradient(#3a4f66,#1c2c3e);border:1px solid #b5cadb44;border-bottom:0}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-1{height:118px;background:linear-gradient(#e6bd3e,#8a6a14)}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-2{height:92px;background:linear-gradient(#cbd5dc,#6d7b86)}
+.game-screen[data-game=islandRacing] .racing-podium-step.place-3{height:74px;background:linear-gradient(#cd8a4b,#6b4220)}
+.game-screen[data-game=islandRacing] .racing-podium-step.you{outline:2px solid #fff;outline-offset:2px}
+.game-screen[data-game=islandRacing] .racing-podium-car{width:46px;height:18px;border-radius:9px 9px 4px 4px;box-shadow:inset 0 -4px 0 #0003,0 2px 4px #0006}
+.game-screen[data-game=islandRacing] .racing-podium-name{font-size:12px;font-weight:700;color:#08111c;text-align:center}
+.game-screen[data-game=islandRacing] .racing-podium-place{font-size:30px;line-height:1;color:#08111c}
+.game-screen[data-game=islandRacing] .racing-podium-note{font-size:12px;opacity:.85}
+
+/* racing-v11 gearbox readout under the speed number */
+/* racing-deep-m3 gear cluster: a Formula 1 wheel display next to the dial: big gear number inside a rev arc, three shift lights that light one by one (all three = shift) */
+.game-screen[data-game=islandRacing] .racing-gearbox{position:absolute;left:-62px;top:50%;width:58px;height:66px;transform:translateY(-54%);pointer-events:none;z-index:3}
+.game-screen[data-game=islandRacing] .racing-gearbox[hidden]{display:none}
+.game-screen[data-game=islandRacing] .racing-gear-dial{display:block;width:100%;height:100%;overflow:visible}
+.game-screen[data-game=islandRacing] .racing-gear-face{fill:#091321d9;stroke:#afc7dc4d;stroke-width:.8}
+.game-screen[data-game=islandRacing] .racing-rev-track{fill:none;stroke:#8092a442;stroke-width:4;stroke-linecap:round}
+.game-screen[data-game=islandRacing] .racing-rev-arc{fill:none;stroke:#e9f3f8;stroke-width:4;stroke-linecap:round;stroke-dasharray:113.1;stroke-dashoffset:113.1;transition:stroke-dashoffset .08s linear,stroke .15s}
+.game-screen[data-game=islandRacing] .racing-rev-arc.red{stroke:#ff5a4a}
+.game-screen[data-game=islandRacing] .racing-gear{font:900 27px Arial,sans-serif;fill:var(--race-yellow);text-anchor:middle;direction:ltr;paint-order:stroke;stroke:#000a;stroke-width:1.2}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle{fill:#22303d;stroke:#8fa3b533;stroke-width:.8;transition:fill .08s}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle.on{fill:#3dd66a;filter:drop-shadow(0 0 2px #3dd66a)}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle:nth-child(2).on{fill:#ffd23c;filter:drop-shadow(0 0 2px #ffd23c)}
+.game-screen[data-game=islandRacing] .racing-gearbox[data-shift=now] .racing-shift-lights circle.on{fill:#ff5a4a;filter:drop-shadow(0 0 3px #ff5a4a)}
+.game-screen[data-game=islandRacing] .racing-gearbox[data-shift=now] .racing-gear{fill:#fff}
+.game-screen[data-game=islandRacing] .racing-rev{display:none}
+@media(max-height:400px) and (orientation:landscape){.game-screen[data-game=islandRacing] .racing-gearbox{left:-56px;width:52px;height:60px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-rev-arc,.game-screen[data-game=islandRacing] .racing-shift-lights circle{transition:none}}
+
+/* racing-ers-v1: the energy meter charges while driving; the tag and a moving sheen show it */
+.game-screen[data-game=islandRacing] .racing-energy{overflow:visible}
+.game-screen[data-game=islandRacing] .racing-energy-tag{position:absolute;left:0;top:-14px;font-size:10px;font-weight:800;letter-spacing:.6px;color:#d6e8f2;text-shadow:0 1px 3px #000;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-tag{color:#8dffb0}
+.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{background:linear-gradient(90deg,#44d17a,#b8ffd0,#44d17a);background-size:60px 100%;animation:racing-ers-flow .7s linear infinite}
+@keyframes racing-ers-flow{to{background-position:60px 0}}
+/* racing-deep-m3: a full meter glows and blinks twice, the tag reads "ERS מלא" */
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true]{border-color:#9fffc0;box-shadow:0 0 8px #44d17a99}
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-fill{background:linear-gradient(90deg,#8dffb0,#e6fff0);animation:racing-ers-full .45s ease-in-out 2}
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-tag{color:#b8ffd0}
+@keyframes racing-ers-full{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-fill{animation:none}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{animation:none}}
+
+/* racing-deep-m4 broadcast (racing-broadcast.mjs, racing-tower.mjs broadcast mode; ?racingBroadcast=0 removes all of it). Left of the wheel, under the HUD, never over a control. */
+.game-screen[data-game=islandRacing] .racing-tower.broadcast{position:absolute;left:10px;top:120px;z-index:4;display:grid;gap:0;font:600 10.5px/1 system-ui,sans-serif;color:#fff;direction:rtl;pointer-events:none;text-shadow:0 1px 2px #000a;width:150px}
+.game-screen[data-game=islandRacing] .rt-row{display:grid;grid-template-columns:14px 4px 16px 1fr 36px 9px;align-items:center;gap:3px;height:12px;padding:0 3px 0 2px;background:#0b1624c8;border-inline-start:3px solid transparent;direction:rtl}
+.game-screen[data-game=islandRacing] .rt-row:first-child{border-radius:3px 3px 0 0}.game-screen[data-game=islandRacing] .rt-row:last-child{border-radius:0 0 3px 3px}
+.game-screen[data-game=islandRacing] .rt-pos{text-align:center;font-weight:800}
+.game-screen[data-game=islandRacing] .rt-bar{display:block;width:4px;height:9px;border-radius:1px}
+.game-screen[data-game=islandRacing] .rt-no{font-size:9px;font-weight:800;color:#c8d6e2;text-align:center;font-variant-numeric:tabular-nums}
+.game-screen[data-game=islandRacing] .rt-name{overflow:hidden;white-space:nowrap;text-overflow:clip;min-width:0}
+.game-screen[data-game=islandRacing] .rt-gap{opacity:.85;text-align:end;font-variant-numeric:tabular-nums;font-size:9.5px}
+.game-screen[data-game=islandRacing] .rt-arrow{font-size:8px;text-align:center}
+.game-screen[data-game=islandRacing] .rt-row[data-delta="1"] .rt-arrow{color:#5be28a}.game-screen[data-game=islandRacing] .rt-row[data-delta="-1"] .rt-arrow{color:#ff7a6b}
+.game-screen[data-game=islandRacing] .rt-row.you{background:#2a2410d8;border-inline-start-color:#ffd54a}
+.game-screen[data-game=islandRacing] .rt-row.traffic .rt-name{color:#c9d3dc}
+.game-screen[data-game=islandRacing] .rt-row.fastest .rt-gap{color:#fff;background:#8a3fd6;border-radius:2px;padding:0 2px;opacity:1}
+.game-screen[data-game=islandRacing] .racing-lights{position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:4;display:grid;grid-template-columns:repeat(5,26px);gap:6px;justify-items:center;padding:7px 10px 6px;border-radius:6px;background:#0b1624e6;border:1px solid #9ac5d238;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-lights[hidden]{display:none}
+.game-screen[data-game=islandRacing] .rb-lamp{width:24px;height:24px;border-radius:50%;background:#3a1715;border:2px solid #1a0d0c;box-shadow:inset 0 2px 4px #0008;transition:background .08s,box-shadow .08s}
+.game-screen[data-game=islandRacing] .rb-lamp.on{background:#ff3b2f;box-shadow:0 0 12px #ff5a4a,0 0 26px #ff2a1a88,inset 0 -3px 6px #a0150d}
+.game-screen[data-game=islandRacing] .racing-lights[data-out=true] .rb-lamp{background:#1d2a1d;border-color:#0c130c}
+.game-screen[data-game=islandRacing] .rb-lights-label{grid-column:1/-1;font-size:12px;font-weight:800;letter-spacing:.3px;color:#f4fbff;min-height:14px;text-align:center}
+.game-screen[data-game=islandRacing] .racing-lights[data-out=true] .rb-lights-label{color:#5be28a;font-size:15px}
+.game-screen[data-game=islandRacing] .rb-early{grid-column:1/-1;font-size:10px;font-weight:700;color:#ffe596;text-align:center}.game-screen[data-game=islandRacing] .rb-early[hidden]{display:none}
+.game-screen[data-game=islandRacing] .racing-card{position:absolute;top:128px;left:50%;transform:translateX(-50%);z-index:4;display:grid;gap:2px;min-width:150px;max-width:44%;padding:6px 16px;border-radius:3px;background:#0b1729df;border:1px solid #9ac5d238;border-inline-start:4px solid var(--race-yellow);color:#f4fbff;text-align:center;pointer-events:none;white-space:nowrap;box-shadow:0 5px 18px #040b1426;direction:rtl}
+.game-screen[data-game=islandRacing] .racing-card[hidden]{display:none}
+.game-screen[data-game=islandRacing] .rb-card-title{font-size:17px;font-weight:900;letter-spacing:.2px}
+.game-screen[data-game=islandRacing] .rb-card-sub{font-size:11px;font-weight:700;color:#d2e0ed}
+.game-screen[data-game=islandRacing] .racing-card[data-kind=fastest]{border-inline-start-color:#b26bff;background:#2a1246e6}
+.game-screen[data-game=islandRacing] .racing-card[data-kind=up]{border-inline-start-color:#5be28a}.game-screen[data-game=islandRacing] .racing-card[data-kind=up] .rb-card-title{color:#8dffb0;font-size:22px}
+.game-screen[data-game=islandRacing] .racing-card[data-kind=down]{border-inline-start-color:#ff9a4a}.game-screen[data-game=islandRacing] .racing-card[data-kind=down] .rb-card-title{color:#ffcf8a;font-size:22px}
+.game-screen[data-game=islandRacing] .racing-card[data-kind=lap] .rb-card-title{color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .rb-chip{display:inline-grid;grid-template-columns:auto 1fr;align-items:center;gap:5px;min-width:0;padding:1px 6px 1px 4px;border-radius:3px;background:#101b28e8;border-inline-start:4px solid var(--team,#8a98a6);color:#f4fbff;font-weight:700}
+.game-screen[data-game=islandRacing] .rb-chip.you{background:#3a3010f0;outline:1px solid #ffd54a}
+.game-screen[data-game=islandRacing] .rb-no{font-size:11px;font-weight:900;color:#d6e8f2;font-variant-numeric:tabular-nums}
+.game-screen[data-game=islandRacing] .rb-name{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.game-screen[data-game=islandRacing] .racing-intro{position:absolute;inset:0;z-index:6;display:grid;grid-template-columns:minmax(210px,1fr) minmax(0,1.4fr);gap:14px;align-items:center;padding:16px max(var(--race-edge),env(safe-area-inset-right)) 16px max(var(--race-edge),env(safe-area-inset-left));background:radial-gradient(ellipse at 50% 40%,#16283cf0,#08111cf8);color:#f4fbff;direction:rtl;pointer-events:auto;touch-action:manipulation;cursor:pointer}
+.game-screen[data-game=islandRacing] .rb-intro-side{display:grid;gap:8px;justify-items:start}
+.game-screen[data-game=islandRacing] .rb-intro-head{display:grid;gap:4px}
+.game-screen[data-game=islandRacing] .rb-intro-track{font-size:26px;font-weight:900;color:var(--race-yellow);line-height:1.1}
+.game-screen[data-game=islandRacing] .rb-intro-meta{font-size:13px;font-weight:700;color:#d2e0ed}
+.game-screen[data-game=islandRacing] .rb-intro-league{justify-self:start;padding:2px 10px;border-radius:999px;background:#ffd54a;color:#1a1400;font-size:11px;font-weight:900}
+.game-screen[data-game=islandRacing] .rb-intro-you{margin:0;font-size:14px;font-weight:800}
+.game-screen[data-game=islandRacing] .rb-intro-go,.game-screen[data-game=islandRacing] .rp-go{min-width:132px;min-height:48px;padding:8px 22px;border:0;border-radius:8px;background:var(--race-yellow);color:#101b29;font:inherit;font-size:16px;font-weight:900;cursor:pointer;pointer-events:auto;touch-action:manipulation}
+.game-screen[data-game=islandRacing] .rb-intro-go:focus-visible,.game-screen[data-game=islandRacing] .rp-go:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.game-screen[data-game=islandRacing] .rb-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row;gap:4px 8px;align-self:center;max-height:100%}
+.game-screen[data-game=islandRacing] .rb-grid-slot{display:grid;grid-template-columns:18px 1fr;align-items:center;gap:5px;min-height:26px}
+.game-screen[data-game=islandRacing] .rb-grid-slot .rb-chip{min-height:24px}
+.game-screen[data-game=islandRacing] .rb-grid-pos{font-size:12px;font-weight:900;color:#c8d6e2;text-align:center}
+.game-screen[data-game=islandRacing] .rb-grid-slot.you .rb-grid-pos{color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast{display:grid;grid-template-columns:minmax(300px,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:12px max(var(--race-edge),env(safe-area-inset-right)) 12px max(var(--race-edge),env(safe-area-inset-left));direction:rtl}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast .rp-left{display:grid;gap:8px;justify-items:center}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-title{font-size:22px}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step{width:96px;gap:2px}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-1{height:112px}.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-2{height:92px}.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-3{height:76px}
+.game-screen[data-game=islandRacing] .rp-step-no{font-size:11px;font-weight:900;color:#08111c}
+.game-screen[data-game=islandRacing] .rp-step-time{font-size:10px;font-weight:700;color:#08111c;font-variant-numeric:tabular-nums}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-place{font-size:24px}
+.game-screen[data-game=islandRacing] .rp-table{list-style:none;margin:0;padding:0;display:grid;gap:2px;align-self:center;max-height:100%;overflow:hidden}
+.game-screen[data-game=islandRacing] .rp-row{display:grid;grid-template-columns:20px minmax(0,1fr) 54px auto;align-items:center;gap:6px;height:24px;padding:0 6px;border-radius:3px;background:#0b1624b8;direction:rtl}
+.game-screen[data-game=islandRacing] .rp-row.you{background:#2a2410e0;outline:1px solid #ffd54a}
+.game-screen[data-game=islandRacing] .rp-row .rb-chip{background:transparent;padding-top:0;padding-bottom:0}
+.game-screen[data-game=islandRacing] .rp-pos{font-size:13px;font-weight:900;text-align:center}
+.game-screen[data-game=islandRacing] .rp-gap{font-size:11px;font-weight:700;color:#d2e0ed;text-align:end;font-variant-numeric:tabular-nums}
+.game-screen[data-game=islandRacing] .rp-row.fastest .rp-gap{color:#e4c8ff}.game-screen[data-game=islandRacing] .rp-row.fastest .rp-pos{color:#c89bff}
+.game-screen[data-game=islandRacing] .rp-league{font-style:normal;font-size:9px;font-weight:900;padding:1px 5px;border-radius:999px;background:#ffd54a;color:#1a1400}
+@media(max-height:400px) and (orientation:landscape){
+ .game-screen[data-game=islandRacing] .racing-lights{top:14px;grid-template-columns:repeat(5,22px);gap:5px;padding:5px 8px 4px}
+ .game-screen[data-game=islandRacing] .rb-lamp{width:20px;height:20px}
+ .game-screen[data-game=islandRacing] .rb-lights-label{font-size:11px;min-height:12px}
+ .game-screen[data-game=islandRacing] .racing-card{top:112px;padding:4px 12px}
+ .game-screen[data-game=islandRacing] .rb-card-title{font-size:15px}
+ .game-screen[data-game=islandRacing] .racing-intro{gap:10px;padding:10px var(--race-edge)}
+ .game-screen[data-game=islandRacing] .rb-intro-track{font-size:22px}
+ .game-screen[data-game=islandRacing] .rb-grid{gap:2px 6px}.game-screen[data-game=islandRacing] .rb-grid-slot{min-height:22px}.game-screen[data-game=islandRacing] .rb-grid-slot .rb-chip{min-height:20px}
+ .game-screen[data-game=islandRacing] .racing-podium.broadcast{padding:8px var(--race-edge);gap:8px}
+ .game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-title{font-size:18px}
+ .game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step{width:84px}
+ .game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-1{height:96px}.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-2{height:80px}.game-screen[data-game=islandRacing] .racing-podium.broadcast .racing-podium-step.place-3{height:66px}
+ .game-screen[data-game=islandRacing] .rp-row{height:21px;gap:4px}.game-screen[data-game=islandRacing] .rp-table{gap:1px}
+ .game-screen[data-game=islandRacing] .rp-go{min-height:44px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .rb-lamp{transition:none}}
+/* racing-broadcast-v1 (Codex art, ?racingBroadcastArt=0 removes the rb-art class): team crests, podium backdrop, leaderboard strip, card frame. The urls come from the --rb-* properties set in racing-broadcast-art.mjs. */
+.game-screen[data-game=islandRacing] .rb-crest{display:block;width:16px;height:16px;flex:none}
+.game-screen[data-game=islandRacing] .rb-chip.crest{grid-template-columns:auto auto 1fr}
+.game-screen[data-game=islandRacing] .racing-tower.rb-art .rt-row{grid-template-columns:14px 11px 16px 1fr 36px 9px}
+.game-screen[data-game=islandRacing] .racing-tower.rb-art .rt-bar{width:11px;height:11px;border-radius:0}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast.rb-art{background:linear-gradient(#08111ccc,#08111c99),var(--rb-podium) center/cover no-repeat}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast.rb-art .rp-row:not(.you){background:var(--rb-strip) 0 0/150px 12px repeat,#0b1624b8}
+.game-screen[data-game=islandRacing] .racing-intro.rb-art .rb-intro-side{border:8px solid transparent;border-image:var(--rb-frame) 12 fill/8px/0 stretch}

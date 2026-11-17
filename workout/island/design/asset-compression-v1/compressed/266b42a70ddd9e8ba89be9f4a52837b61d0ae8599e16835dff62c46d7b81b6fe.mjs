@@ -1,0 +1,583 @@
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-15';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-15';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-15';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-15';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-15';
+import {createSoccerSurround} from './soccer-surround.mjs';
+import {soccerV8Enabled} from './soccer-v8.mjs';
+import {loadStadium as loadV8Stadium} from './soccer-v8-stadium.mjs';
+import * as T from '../vendor/three.module.js';
+import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {loadDesignCharacters,soccerDesignCharacterError,soccerV5FallbackReason} from './soccer-design-character.mjs';
+import {expandSoccerConfig} from './soccer-squad.mjs';
+import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
+import {createSoccerDesignScene} from './soccer-design-scene.mjs';
+import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
+import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
+import {soccerShowEnabled,soccerShowConfig} from './soccer-show.mjs';
+import {createSoccerShowView} from './soccer-show-view.mjs';
+import {selectedSoccerKit} from './soccer-design-screens.mjs';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-15';
+import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL,withSoccerV7Kits} from './soccer-v7.mjs';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-15';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-15';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-15';
+import {passDestination} from './soccer.mjs?v=island-v2-20261107-15';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-15';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-15';
+import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
+import {restartAimPreview} from './soccer-restarts.mjs';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-15';
+import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-15';
+// v24 (13/11): Codex pitch kit, effects, 3D fans (each behind its own switch, see soccer-v24.mjs)
+import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-15';
+import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-15';
+import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-15';
+// v24.1 (14/11): the referee on the pitch (`?soccerReferee=0` = none), full match only
+import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-15';
+import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-15';
+import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-15';
+import {crowdPlacements,LEVELS as V8_LEVELS,TIERS as V8_TIERS} from './soccer-v8-layout.mjs';
+// Soccer full (14/11): the 11 against 11 broadcast camera and the distance LOD / off-camera culling of the 22 bodies (`?soccerFull=0` = none of it).
+import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-15';
+const FX_REPLACED=new Set(['confetti','landing-dust']);
+const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
+
+const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
+export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=[],onAsset=()=>{},onEdge=()=>{},onContextLost=()=>{}}) {
+  globalThis.performance?.mark?.('soccer:view-construct-start');
+  const restartAim={};let restartAttachment=null,restartStrike=null;
+  config=expandSoccerConfig(config);
+  const selectedKit=selectedSoccerKit();
+  if(selectedKit&&withSoccerV7Kits(config)===config){
+    const home=new T.Color(selectedKit.primary),away=new T.Color(config.opponent.colors[0]);
+    const distance=(home.r-away.r)**2+(home.g-away.g)**2+(home.b-away.b)**2;
+    config={...config,team:{...config.team,colors:[...selectedKit.colors]},opponent:distance<.2?{...config.opponent,colors:['#18364f','#f4f0df']}:config.opponent};
+  }
+  const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
+  const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));adventureRenderer(renderer,.98);
+  const scene=new T.Scene();scene.background=new T.Color('#7d9592');scene.fog=config.full?new T.Fog('#7d9592',80,230):new T.Fog('#7d9592',48,125);
+  const camera=new T.PerspectiveCamera(config.view.camera.fovDegrees,1,config.view.camera.nearPlane,config.view.camera.farPlane),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
+  const resources=new Set(),track=o=>(resources.add(o),o);
+  const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
+  const lighting=createSoccerLighting(scene,renderer,config);
+  // soccerShow v1 (M4 broadcast: two-cut goal replay at every tier, celebrations, crowd mood, box zoom); `?soccerShow=0` keeps the previous presentation.
+  const showOn=soccerShowEnabled(config.show?.version),showCfg=soccerShowConfig(config);
+  const designVfx=createSoccerDesignVfx(scene,{track}),replay=createSoccerDesignReplay(showOn?{config,historySeconds:showCfg.replay.recordSeconds,capacity:Math.ceil(showCfg.replay.recordSeconds*30)+8}:{config}),show=showOn?createSoccerShowView({config,replay}):null,liveTarget=[0,0,0];
+  const beforeStadium=new Set(scene.children),stadium=createUltraSoccerStadium(scene,config,track);
+  const fallbackStadiumObjects=scene.children.filter(object=>!beforeStadium.has(object));
+  const surround=createSoccerSurround(scene,config,track),effects=createUltraSoccerEffects(scene,config,track);
+  // One geometry per material for all static scenery. No per-frame construction.
+  const batches=new Map();
+  function addStatic(geometry,material,x=0,y=0,z=0,rx=0,ry=0,rz=0) {
+    dummy.position.set(x,y,z);dummy.rotation.set(rx,ry,rz);dummy.scale.set(1,1,1);dummy.updateMatrix();geometry.applyMatrix4(dummy.matrix);
+    if(!batches.has(material))batches.set(material,[]);batches.get(material).push(geometry);
+  }
+  const LW=.12,white=track(new T.MeshStandardMaterial({color:'#f6f5e6',emissive:'#3d3d34',roughness:.6})); // pitch lines: a little wider and brighter than before, readable on the mown stripes
+  const goalWhite=config.view.designScene===false?white:track(white.clone()),fallbackGoalFrames=[];
+  const hx=config.pitch.length/2,hz=config.pitch.width/2,gw=config.pitch.goalWidth,gh=config.pitch.goalHeight,gd=config.pitch.goalDepth;
+  const line=(x,z,w,d)=>addStatic(new T.PlaneGeometry(w,d),white,x,.018,z,-Math.PI/2);
+  line(0,0, LW,config.pitch.width);line(0,-hz,config.pitch.length, LW);line(0,hz,config.pitch.length, LW);line(-hx,0, LW,config.pitch.width);line(hx,0, LW,config.pitch.width);
+  // Pitch v23 (soccer-v23.mjs, `?soccerPitch=v22` = as before): every line from the numbers the simulation plays on, plus the penalty arc and
+  // the corner arcs. v22 drew a 1.7 x 5.8 m goal area and a 2.5 m centre circle whatever the pitch (the 8-a-side goal area is 2.5 x 8.2 m).
+  const pitchV23=Boolean(config.pitch.v23),centreRadius=pitchV23?config.pitch.centreRadius:2.49;
+  addStatic(new T.RingGeometry(centreRadius-LW/2,centreRadius+LW/2,pitchV23?96:64),white,0,.02,0,-Math.PI/2);addStatic(new T.CircleGeometry(.12,16),white,0,.02,0,-Math.PI/2);
+  if(pitchV23)for(const d of [-1,1])for(const side of [-1,1]){const r=config.pitch.cornerRadius,start=d>0?(side>0?Math.PI/2:Math.PI):(side>0?0:-Math.PI/2);addStatic(new T.RingGeometry(r-LW/2,r+LW/2,12,1,start,Math.PI/2),white,d*hx,.02,side*hz,-Math.PI/2);}
+  for(const d of [-1,1]){
+    if(pitchV23){for(const r of soccerMarkingRects(config.pitch,d,LW))line(r.x,r.z,r.sx,r.sz);const arc=penaltyArcAngles(config.pitch);if(arc)addStatic(new T.RingGeometry(arc.radius-LW/2,arc.radius+LW/2,40,1,(d>0?Math.PI:0)-arc.half,2*arc.half),white,d*(hx-config.pitch.penaltySpot),.02,0,-Math.PI/2);}
+    else{
+    const depth=config.pitch.penaltyDepth,width=config.pitch.penaltyWidth;line(d*(hx-depth),0, LW,width);line(d*(hx-depth/2),-width/2,depth, LW);line(d*(hx-depth/2),width/2,depth, LW);
+    line(d*(hx-1.7),0, LW,5.8);line(d*(hx-.85),-2.9,1.7, LW);line(d*(hx-.85),2.9,1.7, LW);
+    }
+    addStatic(new T.CircleGeometry(.1,12),white,d*(hx-config.pitch.penaltySpot),.025,0,-Math.PI/2);
+    for(const z of [-gw/2,gw/2]){
+      addStatic(new T.CylinderGeometry(config.pitch.postRadius,config.pitch.postRadius,gh,10),goalWhite,d*hx,gh/2,z);
+      addStatic(new T.CylinderGeometry(.035,.035,gh,5),goalWhite,d*(hx+gd),gh/2,z);
+      addStatic(new T.BoxGeometry(gd,.035,.035),goalWhite,d*(hx+gd/2),gh,z);
+    }
+    addStatic(new T.CylinderGeometry(config.pitch.postRadius,config.pitch.postRadius,gw,10),goalWhite,d*hx,gh,0,Math.PI/2);
+    addStatic(new T.CylinderGeometry(.035,.035,gw,5),goalWhite,d*(hx+gd),gh,0,Math.PI/2);
+    for(const z of [-gw/2,gw/2])addStatic(new T.BoxGeometry(gd,.035,.035),goalWhite,d*(hx+gd/2),.025,z);
+  }
+  const gameLines=[]; // v24: the game's own painted lines, hidden when the pitch kit paints the same lines
+  for(const [material,geometries] of batches){const merged=track(mergeGeometries(geometries)),mesh=new T.Mesh(merged,material);mesh.castShadow=mesh.receiveShadow=true;scene.add(mesh);if(material===goalWhite)fallbackGoalFrames.push(mesh);if(material===white&&material!==goalWhite)gameLines.push(mesh);geometries.forEach(g=>g.dispose());}batches.clear();
+  // Goal nets are fixed buffers, displaced on a goal.
+  const nets=[];
+  for(const d of [-1,1]){
+    const vertices=[];const segment=(a,b)=>vertices.push(...a,...b);
+    for(let z=-gw/2;z<=gw/2+.01;z+=gw/18){segment([d*(hx+gd),0,z],[d*(hx+gd),gh,z]);segment([d*hx,gh,z],[d*(hx+gd),gh,z]);}
+    for(let y=0;y<=gh+.01;y+=gh/8){segment([d*(hx+gd),y,-gw/2],[d*(hx+gd),y,gw/2]);for(const z of [-gw/2,gw/2])segment([d*hx,y,z],[d*(hx+gd),y,z]);}
+    const geometry=track(new T.BufferGeometry());geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));
+    const net=new T.LineSegments(geometry,track(new T.LineBasicMaterial({color:'#d5dfd6',transparent:true,opacity:.5})));scene.add(net);nets.push({mesh:net,geometry,base:new Float32Array(vertices),direction:d});
+  }
+  const count=config.view.crowd.count,crowd=soccerCrowd(T,scene,config,track);
+  const numberCanvas=document.createElement('canvas');numberCanvas.width=roster.length*64;numberCanvas.height=64;const numberContext=numberCanvas.getContext('2d'),numberTexture=track(new T.CanvasTexture(numberCanvas));numberTexture.colorSpace=T.SRGBColorSpace;
+  let numberSignature='';const numbersShown=[],framingShown={ball:null,controlled:null,camera:{},elevationDegrees:0},edgeShown={x:0,y:0,angle:0};
+  const practiceTarget=new T.Mesh(track(new T.RingGeometry(.55,.7,20)),mat('#ffdc70',{side:T.DoubleSide}));scene.add(practiceTarget);
+  const practiceCones=new T.InstancedMesh(track(new T.ConeGeometry(.22,.6,6)),mat('#f0a947'),2);scene.add(practiceCones);
+  const boxes=new T.InstancedMesh(track(new T.BoxGeometry(1,1,1)),track(new T.MeshLambertMaterial()),108);
+  const spheres=new T.InstancedMesh(track(new T.SphereGeometry(1,10,7)),track(new T.MeshLambertMaterial()),roster.length*2);boxes.frustumCulled=spheres.frustumCulled=false;scene.add(boxes,spheres);
+  const shadows=new T.InstancedMesh(track(new T.PlaneGeometry(2.3,2.3)),track(new T.MeshBasicMaterial({map:stadium.shadowMap,transparent:true,opacity:.8,depthWrite:false})),roster.length+1);shadows.frustumCulled=false;scene.add(shadows);
+  const selector=new T.Mesh(track(new T.RingGeometry(.68,.74,40)),track(new T.MeshBasicMaterial({color:config.team.colors[0],side:T.DoubleSide})));selector.rotation.x=-Math.PI/2;scene.add(selector);
+  const arrow=new T.Mesh(track(new T.ConeGeometry(.15,.26,3)),track(new T.MeshBasicMaterial({color:'#e8dab0'})));arrow.rotation.z=Math.PI;scene.add(arrow);
+  const aimArrow=new T.Group(),aimMaterial=track(new T.MeshBasicMaterial({color:config.team.colors[0],side:T.DoubleSide}));
+  const shaft=new T.Mesh(track(new T.PlaneGeometry(config.view.aimArrowWidth,config.view.aimArrowLength)),aimMaterial);shaft.position.z=config.view.aimArrowLength/2;shaft.rotation.x=-Math.PI/2;aimArrow.add(shaft);
+  const head=new T.Mesh(track(new T.ConeGeometry(.13,.32,3)),aimMaterial);head.rotation.x=Math.PI/2;head.position.z=config.view.aimArrowLength;aimArrow.add(head);scene.add(aimArrow);
+  const requests=new T.InstancedMesh(track(new T.RingGeometry(.14,.22,12)),track(new T.MeshBasicMaterial({color:'#dfffac',side:T.DoubleSide})),roster.length);requests.frustumCulled=false;scene.add(requests);
+  const landing=new T.Mesh(track(new T.RingGeometry(.65,.74,32)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,side:T.DoubleSide,transparent:true,opacity:.9})));landing.rotation.x=-Math.PI/2;scene.add(landing);
+  const arcDots=new T.InstancedMesh(track(new T.SphereGeometry(config.passing.arcRadius,6,4)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,depthTest:false})),config.passing.arcDots);arcDots.frustumCulled=false;scene.add(arcDots);
+  const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
+  const releaseBlend={x:0,y:0,z:0,ox:0,oy:0,oz:0,held:false,age:-1}; // v24: the shown ball after a Codex v13 throw clip lets go
+  const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
+  const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
+  // Soccer full: per-player LOD plan and frustum test (allocated once), and the camera's footprint on the grass for the radar.
+  const fullLodCfg=config.full?.lod||null,fullFrustum=new T.Frustum(),fullProj=new T.Matrix4(),fullSphere=new T.Sphere(new T.Vector3(),1.25),fullRay=new T.Vector3(),fullLevels=[],fullVisible=[],fullDistance=[],fullOrder=[],groundFrame=[{x:0,z:0},{x:0,z:0},{x:0,z:0},{x:0,z:0}];let fullStats=null;
+  let probeBackground=null,nearDetail=null,v7Full=null,v7Cap=SOCCER_V7_FULL_DETAIL,disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
+  const loadStart=globalThis.performance?.now?.()??0,loadReport={characters:null,characterError:null,athleteError:null,sceneError:null,ms:null};
+  let designSceneReady=false;
+  // ---- v24 (soccer-v24.mjs): Codex pitch kit, effects and 3D fans. Each one falls back to what shipped before on any load failure. ----
+  const v24Flags=soccerV24Flags();
+  const kit=v24Flags.pitchAssets?createSoccerPitchKit({scene,config,track,renderer}):null;if(kit)ballRoot.add(kit.ball);
+  const fx=v24Flags.fxV1?createSoccerFxV1({scene,config,track}):null;
+  // v24.1: the referee follows play and makes the calls; a failed load plays on without him (status in metrics().referee).
+  let referee=null,refereeStatus=config.full&&soccerRefereeEnabled()?'loading':'off';
+  if(refereeStatus==='loading')createSoccerReferee({T,GLTFLoader,scene,pitch:config.pitch}).then(r=>{if(disposed){r.dispose();return;}referee=r;refereeStatus='ready';}).catch(error=>{refereeStatus='failed: '+String(error?.message||error);});
+  let kitReady=false,kitHidden=null;
+  // 3D fans (budget: the far long stand's front rows, turned with the camera at half time; full: Codex's 1,200 all round).
+  const crowdMode=v24Flags.crowd3d,crowdSpec=crowdMode==='full'?SOCCER_CROWD_FULL:SOCCER_CROWD_BUDGET,crowdSections=crowdMode==='full'?null:[4];
+  const crowdState={mode:crowdMode,status:crowdMode==='off'?'off':'loading',error:null,fans:0,seats:0,hiddenCards:0,side:1,limit:null,measured:null,frames:0,shed:0,room:null};
+  let crowd3d=null,crowdOn=false,crowdSide=1;
+  const crowdLayout=crowdMode==='off'?null:(()=>{const sx=config.pitch.length/105,sz=config.pitch.width/68;return soccerCrowdSeats(crowdPlacements(V8_LEVELS[0]),{scale:{x:sx,y:Math.min(sx,sz),z:sz},rows:crowdSpec.rows,sections:crowdSections,variants:crowdSpec.variants,fansPerCard:crowdSpec.fansPerCard,limit:crowdMode==='full'?SOCCER_CROWD_FULL.instances:1200,tread:.82*V8_TIERS[0].rise});})();
+  if(crowdLayout)crowdState.seats=crowdLayout.seats.length;
+  // GPT soccer v8 evening stadium (bowl, crowd, turf, sky, floodlights). It replaces the procedural stadium, the v10 surround,
+  // the instanced crowd and the v5 stands; the game keeps its own pitch lines, goals and ball. Any failure keeps what shipped before.
+  const v8Wanted=soccerV8Enabled(config,'stadium'),v8Report={status:v8Wanted?'loading':'off',error:null,ms:null,lod:null};let v8=null;const v8Start=globalThis.performance?.now?.()??0;
+  const V8_LODS=[0,0,1,2];
+  const v8Ready=v8Wanted?loadV8Stadium({scene,omitParts:['Markings','Goals','Nets','ContactShadows'],crowdRank:crowdLayout?p=>soccerCrowdCardRank(p,{rows:crowdSpec.rows,sections:crowdMode==='full'?null:[0,4]}):null}).then(loaded=>{
+    if(disposed){loaded.dispose();return false;}
+    v8=loaded;loaded.root.scale.set(config.pitch.length/105,Math.min(config.pitch.length/105,config.pitch.width/68),config.pitch.width/68);
+    // The game keeps its own lighting (sun with soft shadows); the pack's three lights would be a second sun.
+    for(const light of Object.values(loaded.lights))light.visible=false;
+    for(const object of fallbackStadiumObjects)object.removeFromParent();
+    surround.root.removeFromParent();crowd.count=0;
+    loaded.setLOD(V8_LODS[quality]);v8Report.status='ready';v8Report.ms=Math.round((globalThis.performance?.now?.()??0)-v8Start);v8Report.lod=loaded.lod;return true;
+  }).catch(error=>{v8Report.status='fallback';v8Report.error=String(error?.message||error);return false;}):Promise.resolve(false);
+  const designSceneLoader=config.view.designScene===false?null:createSoccerDesignLoader();
+  const designScene=designSceneLoader?createSoccerDesignScene({scene,config,loader:designSceneLoader,track,ballRoot,stadium:v8Ready.then(ok=>!ok),onError(error){loadReport.sceneError=String(error?.message||error);},onReady(built){
+    if(disposed)return;designSceneReady=true;if(built.stadium)crowd.setDesignStadium(true);designScene?.setQuality(quality);
+    // Detach successful replacements before shader warm-up. Hidden fallback
+    // roofs would otherwise be re-enabled by their original visibility update.
+    if(built.stadium)for(const object of fallbackStadiumObjects)object.removeFromParent();
+    for(const object of fallbackGoalFrames)object.removeFromParent();
+    for(const net of nets)net.mesh.removeFromParent();
+    for(const child of [...ballRoot.children])if(child!==designScene.ball&&child!==kit?.ball)child.removeFromParent();
+  }}):null;
+  // v24 pitch kit up: the game's lines go when the kit paints the same ones, the v8 turf, flags and LED ring when the stadium is up.
+  const kitDone=kit?kit.ready.then(ok=>{kitReady=ok&&!disposed;if(kitReady&&kit.lines.use)for(const mesh of gameLines)mesh.visible=false;return kitReady;}):Promise.resolve(false);
+  Promise.all([kitDone,v8Ready]).then(([ok,stadiumUp])=>{if(ok&&stadiumUp&&v8&&!disposed)kitHidden=hideV8KitParts(v8);});
+  // v24 3D fans: loaded beside the match, shown once measured against the tier budget (render below).
+  if(crowdLayout)Promise.all([v8Ready,createSoccerCrowd3d({T,GLTFLoader,seats:crowdLayout.seats,mode:crowdMode})]).then(([stadiumUp,loaded])=>{
+    if(disposed||!stadiumUp){loaded.dispose();crowdState.status=stadiumUp?'disposed':'no-stadium';return false;}
+    // unlit vertex colours: the same grade as the flat cards beside them (soccer-v8-stadium makeCrowd colour), so the rows read as one crowd
+    crowd3d=loaded;loaded.root.visible=false;loaded.setTeamColors(config.team.colors[0],config.opponent.colors[0]);for(const mesh of loaded.batches)mesh.material.color.set('#c5d0d4');scene.add(loaded.root);crowdState.status='measuring';return true;
+  }).catch(error=>{crowdState.status='fallback';crowdState.error=String(error?.message||error);return false;});
+  const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
+  // Authored v2 characters first, retaining the previous athlete and kid as fallbacks.
+  // Comparison flag: ?soccerChars=athlete-old (the Oct 29 athlete path with its own 13 CMU clips) or =kid (illustrated kid-full.glb, Oct 26); athlete (default, shared body)/v7/v5/v4 are handled by the design loader.
+  const forcedChars=new URLSearchParams(globalThis.location?.search||'').get('soccerChars');
+  const kidUrl=new URL('../assets/kid-full.glb',import.meta.url).href,athleteUrl=config.view.athlete&&config.view.athlete.enabled!==false&&forcedChars!=='kid'?new URL(config.view.athlete.url,import.meta.url).href:null;let athleteMode=false;
+  // Kickoff waits for the turf maps too: a texture arriving mid-match recompiled the pitch shader.
+  let designCharacters=null;
+  const design=()=>loadDesignCharacters({config,roster,scene,track,selectedKit,numbers:numberTexture}).then(result=>({design:result}));
+  const fallback=()=>{athleteMode=false;return design().catch(()=>new GLTFLoader().loadAsync(kidUrl));};
+  const athlete=()=>athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)):new GLTFLoader().loadAsync(kidUrl);
+  const model=config.view.designCharacters===false||forcedChars==='athlete-old'||forcedChars==='kid'?athlete().catch(fallback):design().catch(error=>{loadReport.characterError=String(error?.message||error)||soccerDesignCharacterError();return athlete().catch(e=>{loadReport.athleteError=String(e?.message||e);return new GLTFLoader().loadAsync(kidUrl);});});
+  // v24: the kit and the effect sheets join the warm-up (their programs compile before kickoff); the fans load beside the match.
+  const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,v8Ready,designVfx.ready,replay.ready,loadSoccerRestartMotion().catch(()=>null),kitDone,fx?.ready]).then(([data,,,,,,restartData])=>{
+    if(data.design){
+      designCharacters=data.design;
+      if(disposed){designCharacters.dispose();return;}
+      characters.push(...designCharacters.characters);assetStats=designCharacters.metrics;loadReport.characters='design-glb-v2';loadReport.characterSet=designCharacters.metrics.characterSet;loadReport.v5Fallback=soccerV5FallbackReason();
+      if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)assetStats.lod=c.setLod(quality>=3?2:1);
+      warm();assetStatus='ready';onAsset('ready');return;
+    }
+    if(disposed){disposeObject(data.scene);return;}
+    const source=data.scene,embeddedBall=source.getObjectByName('Ball');
+    if(embeddedBall){
+      embeddedBall.removeFromParent();track(embeddedBall.geometry);track(embeddedBall.material);
+      if(!designSceneReady){const mesh=new T.Mesh(embeddedBall.geometry,embeddedBall.material);mesh.castShadow=mesh.receiveShadow=true;mesh.geometry.computeBoundingBox();mesh.geometry.boundingBox.getCenter(target);mesh.geometry=track(mesh.geometry.clone());mesh.geometry.translate(-target.x,-target.y,-target.z);mesh.geometry.computeBoundingSphere();mesh.scale.setScalar(config.physics.ballRadius/mesh.geometry.boundingSphere.radius);ballRoot.remove(fallbackBall);ballRoot.add(mesh);}
+    }
+    bounds.setFromObject(source);bounds.getSize(size);const scale=config.view.animation.characterHeight/size.y;source.scale.setScalar(scale);source.position.y=-bounds.min.y*scale;
+    if(athleteMode){
+      let triangles=0,lowTriangles=0,meshes=0;source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);const n=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;if(/LOD1/.test(o.parent?.name||''))lowTriangles+=n;else{triangles+=n;meshes++;}});
+      const animations=[...data.animations,...compileAthleteRestartClips(T,source,restartData)];
+      for(const c of setupAthletes(T,{source,animations,config,roster,numbers:numberTexture,track,cloneRig:cloneSoccerRig,scene,createMotion:createAthleteMotion})){
+        if(selectedKit&&c.team===0&&!c.keeper){
+          const uniforms=c.materials.kit.userData.athlete;
+          for(const key of ['primary','secondary','shorts','shortsTrim','socks','socksTrim']){
+            color.set(selectedKit[key]);uniforms['kit'+key[0].toUpperCase()+key.slice(1)].value.set(color.r,color.g,color.b);
+          }
+        }
+        c.bones=Object.fromEntries(Object.entries(ATHLETE_BONES).map(([key,name])=>{const bone=c.root.getObjectByName(name);return [key,{bone,rest:bone?.quaternion.clone()}];}));
+        if(quality>=config.view.athlete.lodFromQuality)c.setLod(1);
+        characters.push(Object.assign(c,{lookWeight:1,roll:0,lift:0,headPoint:new T.Vector3(),chestPoint:new T.Vector3(),feetPoints:[new T.Vector3(),new T.Vector3()],active:'idle',mode:'idle',kickTime:0,stealTime:0,yaw:null}));
+      }
+      const ballTriangles=embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0;
+      assetStats={kind:'athlete',triangles,sourceTriangles:triangles+ballTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:2,perPlayerMaterials:roster.length*2,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length,economyCharacterTriangles:lowTriangles,lod:0,clips:data.animations.map(a=>a.name)};
+      if(quality>=config.view.athlete.lodFromQuality)assetStats.lod=1;loadReport.characters='athlete';warm();assetStatus='ready';onAsset('ready');return;
+    }
+    loadReport.characters='kid';
+    let faceMap=null,triangles=0,meshes=0;
+    source.traverse(o=>{if(!o.isMesh)return;track(o.geometry);triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;meshes++;
+      const material=Array.isArray(o.material)?o.material[0]:o.material;track(material);if(material.map){faceMap=material.map;track(faceMap);}
+      const count=o.geometry.attributes.position.count;
+      o.geometry.setAttribute('soccerKeeper',new T.BufferAttribute(new Float32Array(count),1));
+      o.geometry.setAttribute('soccerNumber',new T.BufferAttribute(new Float32Array(count),1));
+      o.geometry.setAttribute('soccerFace',new T.BufferAttribute(new Float32Array(count).fill(material.map?1:0),1));
+      o.geometry.setAttribute('soccerUv',o.geometry.attributes.uv||new T.BufferAttribute(new Float32Array(count*2),2));
+    });
+    for(const [teamIndex,kit]of [config.team,config.opponent].entries()){
+      const material=track(new T.MeshStandardMaterial({vertexColors:true,transparent:true,alphaTest:.1,roughness:.83,metalness:0}));
+      const shirt=new T.Color(kit.colors[0]),keeper=new T.Color(teamIndex===0?'#cf9d2e':'#167b72');
+      material.onBeforeCompile=shader=>{
+        shader.uniforms.soccerShirt={value:shirt};shader.uniforms.soccerKeeperColor={value:keeper};shader.uniforms.soccerFaceMap={value:numberTexture};shader.uniforms.soccerNumberCells={value:roster.length};
+        shader.vertexShader='attribute float soccerKeeper; attribute float soccerFace; attribute float soccerNumber; attribute vec2 soccerUv; varying float vSoccerKeeper; varying float vSoccerFace; varying float vSoccerNumber; varying vec2 vSoccerUv;\n'+shader.vertexShader;
+        shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSoccerKeeper=soccerKeeper;vSoccerFace=soccerFace;vSoccerNumber=soccerNumber;vSoccerUv=soccerUv;');
+        shader.fragmentShader='uniform float soccerNumberCells;uniform vec3 soccerShirt;uniform vec3 soccerKeeperColor;uniform sampler2D soccerFaceMap;varying float vSoccerKeeper;varying float vSoccerFace;varying float vSoccerNumber;varying vec2 vSoccerUv;\n'+shader.fragmentShader;
+        shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(diffuseColor.b>diffuseColor.r*1.4 && diffuseColor.b>diffuseColor.g*1.1) diffuseColor.rgb=mix(soccerShirt,soccerKeeperColor,vSoccerKeeper)*(.62+clamp(diffuseColor.b,0.,1.)*.38);\nif(vSoccerFace>.5) diffuseColor*=texture2D(soccerFaceMap,vec2((clamp(vSoccerUv.x,.015,.985)+vSoccerNumber)/soccerNumberCells,vSoccerUv.y));');
+      };kitMaterials.push(material);
+    }
+    for(let id=0;id<roster.length;id++){
+      const root=cloneSoccerRig(source),pivot=new T.Group();pivot.add(root);scene.add(pivot);
+      const appearance=config.view.appearance,identity=id;
+      root.traverse(o=>{if(!o.isMesh)return;o.material=kitMaterials[roster[id].team];o.frustumCulled=false;o.castShadow=o.receiveShadow=true;
+        const original=o.geometry,geometry=track(original.clone()),colors=geometry.attributes.color?.clone();
+        if(colors){const skin=new T.Color(appearance.skin[identity]),hair=new T.Color(appearance.hair[identity]),sock=new T.Color(appearance.socks[identity]);
+          for(let i=0;i<colors.count;i++){const r=colors.getX(i),g=colors.getY(i),b=colors.getZ(i),y=geometry.attributes.position.getY(i);
+            if(r>g*1.15&&g>b*1.05&&/Head|Skin_1/.test(o.name)){
+              const isHair=/HeadSurface/.test(o.name)&&(y>.3||r/Math.max(g,.001)>2.25),tint=isHair?hair:skin;
+              const shade=isHair?Math.max(.4,Math.min(1.18,.25+Math.sqrt(r/.16)*.7)):.65+Math.min(.45,r*.5);
+              colors.setXYZ(i,tint.r*shade,tint.g*shade,tint.b*shade);
+            }
+            else if(r>.7&&g>.7&&b>.6&&y<.55&&o.name==='Skin_1'){const shade=.75+.25*r;colors.setXYZ(i,sock.r*shade,sock.g*shade,sock.b*shade);}
+          }geometry.setAttribute('color',colors);
+        }geometry.setAttribute('soccerNumber',new T.BufferAttribute(new Float32Array(geometry.attributes.position.count).fill(id),1));o.geometry=geometry;
+        if(roster[id].role==='keeper'){if(!keeperGeometries.has(o.geometry)){const geometry=track(o.geometry.clone());geometry.setAttribute('soccerKeeper',new T.BufferAttribute(new Float32Array(geometry.attributes.position.count).fill(1),1));keeperGeometries.set(o.geometry,geometry);}o.geometry=keeperGeometries.get(o.geometry);}
+      });
+      const mixer=new T.AnimationMixer(root),actions={};
+      for(const clip of data.animations)if(['stand','run','kick','jumping-jacks'].includes(clip.name))actions[clip.name]=mixer.clipAction(playerSoccerClip(clip));
+      actions.kick.setLoop(T.LoopOnce,1);actions.kick.clampWhenFinished=true;actions.stand.play();const bones=Object.fromEntries(['UpperLeg_R','LowerLeg_R','UpperLeg_L','LowerLeg_L','Head','Neck','Chest','Hips','Spine','UpperArm_L','UpperArm_R','LowerArm_L','LowerArm_R','Hand_L','Hand_R','Foot_L','Foot_R'].map(name=>{const bone=root.getObjectByName(name);return [name,{bone,rest:bone?.quaternion.clone()}];}));characters.push({root,pivot,mixer,actions,bones,headPoint:new T.Vector3(),chestPoint:new T.Vector3(),feetPoints:[new T.Vector3(),new T.Vector3()],active:'stand',mode:'idle',kickTime:0,stealTime:0,yaw:null});
+    }
+    const sourceTriangles=triangles+(embeddedBall?(embeddedBall.geometry.index?.count||embeddedBall.geometry.attributes.position.count)/3:0);
+    assetStats={triangles,sourceTriangles,meshes,sixCharacterTriangles:triangles*6,sharedTeamMaterials:kitMaterials.length,independentSkeletons:true,eightCharacterTriangles:triangles*roster.length};warm();assetStatus='ready';onAsset('ready');
+  }).catch(error=>{if(!disposed){loadReport.characters='blocks';loadReport.characterError=loadReport.characterError||String(error?.message||error);assetStatus='fallback';onAsset('fallback');}});
+  /** Compile every program variant the match can need (with and without shadows, both LOD meshes,
+   * hidden cues such as confetti and the aim arrow) and upload every texture while the loading
+   * panel is still up. A quality step or the first goal then switches programs without a compile stall. */
+  let warmed=null;
+  function warm(){
+    if(disposed||warmed)return;globalThis.performance?.mark?.('soccer:warm-start');const hidden=[];scene.traverse(o=>{if((o.isMesh||o.isPoints||o.isLine||o.isSprite)&&!o.visible){o.visible=true;hidden.push(o);}});
+    const level=quality,shadowless=Math.max(level,config.view.athlete.lodFromQuality),t0=performance.now();let programs=0,drawn=null;
+    try{
+      for(const tier of [shadowless,level]){lighting.setQuality(tier);renderer.compile(scene,camera);programs=renderer.info.programs?.length||0;}
+      scene.traverse(o=>{for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])for(const key of ['map','normalMap','roughnessMap','emissiveMap','alphaMap'])if(m[key]?.isTexture)renderer.initTexture(m[key]);});
+      if(kit||fx||crowd3d)drawn=warmDraw();
+    }catch{/* warming is an optimisation only; the match still starts */}
+    finally{for(const o of hidden)o.visible=false;lighting.setQuality(level);}
+    warmed={programs,ms:Math.round(performance.now()-t0),...(drawn===null?null:{draw:drawn})};globalThis.performance?.mark?.('soccer:warm-end');
+  }
+  /** v24 (only with a v24 pack on): one real draw of the whole scene while the loading panel still covers the canvas, with the hidden
+   * cues shown, frustum culling off, empty instanced batches at one instance and the 3D fans' root shown. ANGLE (Metal on iOS, Vulkan on
+   * Android) and SwiftShader build a material's pipeline at its first draw, not when the program compiles: measured in SwiftShader, every
+   * first draw during play cost 0.7-2.6 s (the fans, the aim arrow, the landing ring, the effect sprites), four in 30 s against one before
+   * v24. Everything goes back as it was before the first frame. Returns the draw's milliseconds. */
+  function warmDraw(){
+    const undo=[],t=performance.now();
+    scene.traverse(o=>{
+      if((o.isMesh||o.isSprite||o.isPoints||o.isLine)&&o.frustumCulled){o.frustumCulled=false;undo.push(()=>{o.frustumCulled=true;});}
+      if(o.isInstancedMesh&&o.count<1){const count=o.count;o.count=1;undo.push(()=>{o.count=count;});}
+    });
+    for(const group of [aimArrow,crowd3d?.root])if(group&&!group.visible){group.visible=true;undo.push(()=>{group.visible=false;});}
+    try{renderer.render(scene,camera);}finally{for(const restore of undo.reverse())restore();}
+    return Math.round(performance.now()-t);
+  }
+  function disposeObject(root){root.traverse(o=>{o.geometry?.dispose();o.skeleton?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){m.map?.dispose();m.dispose();}});}
+  const observer=new ResizeObserver(resize);for(const node of [canvas,...layoutNodes])observer.observe(node);
+  function resize(){if(disposed)return;replay.skip('resize');const rect=canvas.getBoundingClientRect(),area=playArea?.()||{x:0,y:0,width:rect.width,height:rect.height};lastWidth=area.width;lastHeight=area.height;renderer.setSize(rect.width,rect.height,false);renderer.setViewport(area.x,rect.height-area.y-area.height,area.width,area.height);camera.aspect=lastWidth/Math.max(1,lastHeight);camera.updateProjectionMatrix();}
+  resize();globalThis.performance?.mark?.('soccer:view-construct-end');
+  // Adaptive quality measures wall-clock frame time (not the capped simulation dt): a long window
+  // decides on the average; a short one steps down at once when frames stay far over budget.
+  const qualityMonitor=createQualityMonitor(config.view);
+  const pinParam=new URLSearchParams(globalThis.location?.search||'').get('soccerTier'),pinQuality=pinParam!==null&&pinParam!==''&&Number.isFinite(Number(pinParam)); // comparison shots: ?soccerTier=0..3 holds that quality tier, never stepping on its own
+  function qualitySample(frameMs) {if(pinQuality)return;if(qualityMonitor.sample(frameMs)&&quality<3)lowerQuality();}
+  function lowerQuality(){
+    if(quality>=3)return;quality++;
+    if(quality>=config.view.athlete.lodFromQuality)for(const c of characters)if(c.setLod&&assetStats)assetStats.lod=c.setLod(c.design&&quality>=3?2:1);
+    qualityMonitor.reset();lighting.setQuality(quality);stadium.setQuality(quality);designScene?.setQuality(quality);v8?.setLOD(V8_LODS[quality]);renderer.setPixelRatio(quality===1?1:config.view.lowPixelRatio);if(!v8)crowd.count=Math.floor(count/config.view.crowd.lowDivisor**Math.min(quality,2));resize();
+  }
+  /** v24 pitch kit up: the design goals and ball, the fallback goal frames and nets and the procedural ball stay hidden (any of them may
+   * finish loading after the kit). */
+  let designGoals=null;
+  function hideKitReplaced(){
+    designGoals||=designScene?.root.getObjectByName('soccer-design-goals')||null;if(designGoals)designGoals.visible=false;
+    if(designScene)designScene.ball.visible=false;fallbackBall.visible=false;
+    for(const mesh of fallbackGoalFrames)mesh.visible=false;for(const net of nets)net.mesh.visible=false;
+  }
+  /** v24 3D fans. Measured a few frames after the match is up (the fans hidden, every card drawn): soccerCrowdLimit gives the first fan
+   * count and levels; then every frame the room is taken from the previous frame (the stadium is frustum culled, so the match's own count
+   * moves by a few thousand triangles with the camera; one frame above maxTriangles steps the whole match down a tier): fans are shed at
+   * once when the room shrinks, and come back slowly (a few at a time, after a pause) when it grows. The cards they stand for are hidden,
+   * exactly those. Budget mode keeps them on the stand the camera faces (half a turn at half time, never during a replay). Tiers 2-3
+   * (v8 LOD1/2): every card back, no fans. */
+  const crowdBall=new T.Vector3(),crowdLook=new T.Vector3(),crowdCameraLocal=[0,0,0],NO_HIDDEN=new Map();let crowdHidden=NO_HIDDEN,crowdHiddenA=NO_HIDDEN,crowdHiddenB=NO_HIDDEN,crowdCount=0,crowdTarget=0,crowdLevels=[2],crowdGrowAt=0;
+  const CROWD_ROOM=.975,CROWD_GROW_SECONDS=1.5,CROWD_GROW_FANS=30;
+  function setCrowdCount(count,room){
+    crowdCount=count;crowd3d.configure({count,triangles:Math.max(count*24,room),levels:crowdLevels});
+    crowdHiddenA=soccerCrowdHiddenCards(crowdLayout.cards,count,crowdSpec.fansPerCard);crowdHiddenB=crowdMode==='full'?crowdHiddenA:new Map([[0,crowdHiddenA.get(4)||0]]);
+    crowdState.fans=count;
+  }
+  /** What v24 is drawing (dev overlay, tests, the touch harness). */
+  function v24Metrics(){
+    return {flags:v24Flags,pitch:kit?{...kit.metrics(),v8PartsHidden:kitHidden,gameLinesHidden:gameLines.some(m=>!m.visible)}:{status:'off'},fx:fx?.metrics()||{status:'off'},
+      crowd:{...crowdState,on:crowdOn,triangles:crowdOn?crowd3d.metrics.triangles:0,draws:crowdOn?crowd3d.metrics.draws:0,submitted:crowd3d?.metrics.submitted||null,files:crowd3d?.metrics.files||0}};
+  }
+  function updateCrowd3d(live,calm){
+    if(!crowd3d||!v8)return;
+    const allowed=assetStatus==='ready'&&quality<=crowdSpec.maxQuality&&v8.lod===0;
+    if(crowdState.status==='measuring'){
+      if(!allowed||poseFocus!==null||++crowdState.frames<6)return;
+      const info=renderer.info.render,limit=soccerCrowdLimit({scene:info.triangles,draws:info.calls,maxTriangles:config.view.maxTriangles,maxDrawCalls:config.view.maxDrawCalls,mode:crowdMode,seats:crowdLayout.seats.length});
+      const fans=Math.floor(limit.fans/crowdSpec.fansPerCard)*crowdSpec.fansPerCard;
+      crowdState.measured={triangles:info.triangles,draws:info.calls};crowdState.limit={...limit,fans};
+      if(!fans){crowdState.status='no-budget';return;}
+      crowdTarget=crowdMode==='full'?fans:crowdLayout.seats.length;crowdLevels=limit.levels;crowdGrowAt=time+CROWD_GROW_SECONDS;setCrowdCount(fans,limit.triangles);
+      crowdState.status='active';
+    }
+    if(crowdState.status!=='active')return;
+    // budget mode: the room the previous frame left (its triangles minus the fans' own); shed at once, grow back slowly
+    if(crowdMode!=='full'&&crowdOn){
+      const info=renderer.info.render,mine=crowd3d.metrics.triangles||0,room=Math.floor(config.view.maxTriangles*CROWD_ROOM-(info.triangles-mine));
+      const fit=Math.max(0,Math.min(crowdTarget,Math.floor(room/24/crowdSpec.fansPerCard)*crowdSpec.fansPerCard));
+      if(fit<crowdCount){setCrowdCount(fit,room);crowdGrowAt=time+CROWD_GROW_SECONDS;crowdState.shed=(crowdState.shed||0)+1;}
+      else if(fit>=crowdCount+CROWD_GROW_FANS&&time>=crowdGrowAt){setCrowdCount(crowdCount+CROWD_GROW_FANS,room);crowdGrowAt=time+CROWD_GROW_SECONDS;}
+      if(crowdLevels.length>1&&info.calls>config.view.maxDrawCalls-2){crowdLevels=[2];setCrowdCount(crowdCount,room);}
+      crowdState.room=room;
+    }
+    // the stand the camera looks at (its view direction, not its position: the game camera sits inside the touchlines when play is wide)
+    if(crowdMode!=='full'&&!(show?.replaying||replay.active)){camera.getWorldDirection(crowdLook);if(Math.abs(crowdLook.z)>.2)crowdSide=crowdLook.z<0?1:-1;}
+    crowdOn=allowed;crowd3d.root.visible=crowdOn;crowd3d.root.rotation.y=crowdMode==='full'||crowdSide>0?0:Math.PI;
+    const want=crowdOn?(crowdMode==='full'||crowdSide>0?crowdHiddenA:crowdHiddenB):NO_HIDDEN;
+    if(want!==crowdHidden){crowdHidden=want;crowdState.hiddenCards=v8.setCrowdHidden(want);}
+    if(!crowdOn)return;
+    const flip=crowd3d.root.rotation.y===0?1:-1;
+    crowdCameraLocal[0]=camera.position.x*flip;crowdCameraLocal[1]=camera.position.y;crowdCameraLocal[2]=camera.position.z*flip;
+    crowdBall.set(ballRoot.position.x*flip,ballRoot.position.y,ballRoot.position.z*flip);
+    crowd3d.update({seconds:calm?0:time,celebration:calm?0:show?show.mood.cheer:live.phase==='goal'?1:0,ballLocal:crowdBall,cameraLocal:crowdCameraLocal,pose:-1});
+    crowdState.side=crowdSide;
+  }
+  function render(s,dt=0,frameMs=0) {
+    if(disposed)return;time+=dt;qualitySample(frameMs,dt);
+    const fxUp=fx?.status==='ready';effects.update(s,dt,quality,{ribbon:!fxUp}); // v24: the soccer-fx-v1 trail replaces the plain ribbon once loaded
+    let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
+    if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,numberCanvas.width,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
+    const c=config.view.camera,elevation=soccerElevationDegrees(camera.aspect,config),angle=elevation*Math.PI/180;
+    cameraState=config.full?soccerFullCamera(s,camera.aspect,config,cameraState,dt):soccerCamera(s,camera.aspect,config,cameraState,dt,show?showCfg.camera.boxZoom:0);
+    referee?.update(s,dt);
+    camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
+    const ballProjection=projectSoccerPoint(s.ball,cameraState,camera.aspect,config),playerProjection=projectSoccerPoint(s.players[s.controlled],cameraState,camera.aspect,config);
+    framing=framingShown;framing.ball=ballProjection;framing.controlled=playerProjection;Object.assign(framing.camera,cameraState);framing.elevationDegrees=elevation;
+    if(Math.abs(playerProjection.x)>1||Math.abs(playerProjection.y)>1){
+      const x=playerProjection.x,y=-playerProjection.y,r=Math.max(Math.abs(x),Math.abs(y));
+      edgeShown.x=Math.max(c.edgeInset,Math.min(lastWidth-c.edgeInset,(x/r+1)*lastWidth/2));edgeShown.y=Math.max(c.edgeInset,Math.min(lastHeight-c.edgeInset,(y/r+1)*lastHeight/2));edgeShown.angle=Math.atan2(y,x);onEdge(edgeShown);
+    }else onEdge(null);
+    if(s.eventId!==lastEvent){lastEvent=s.eventId;if(s.event?.type==='goal'){
+      goalPulse=1;goalTeam=s.event.team;
+    }}
+    const live=s;let rate=1,markers=true;
+    if(show){
+      // The show renders the same scene with the same live avatars (recorded frames read back into one reused state copy), so it costs the
+      // same at every tier: a tier-2 phone gets the replay too. `rate` slows the design clips inside the half-speed cut.
+      liveTarget[0]=cameraState.x;liveTarget[1]=0;liveTarget[2]=cameraState.z;
+      const shown=show.update(live,dt,camera,liveTarget,quality);s=shown.state;rate=shown.rate;markers=shown.markers;if(shown.owned||shown.hold)onEdge(null);
+    }
+    // The existing economy tiers spend their budget on the athletes and pitch.
+    // Replays never extend the goal pause or force a weaker device to render a
+    // second camera workload. The normal tiers retain the full presentation.
+    else if(quality>=2||config.view.designReplay===false)replay.skip('quality');
+    else s=replay.sample(live,dt,camera);
+    if(replay.active)onEdge(null);
+    designVfx.update(live,dt,quality,camera,{skip:fxUp?FX_REPLACED:null}); // v24: confetti and slide dust come from soccer-fx-v1
+    const stadiumDirection=-Math.sign(camera.getWorldDirection(target).z)||live.attackDir;
+    if(designSceneReady){designScene.update(stadiumDirection,lastWidth,lastHeight);designScene.netRipple(goalPulse,(goalTeam===0?1:-1)*live.attackDir,time);}else stadium.update(stadiumDirection);
+    const calm=quality>=2||globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true;
+    if(v8){v8.update(camera,time,{autoLOD:false,reducedMotion:calm});if(show)v8.setMood(show.mood.cheer,show.mood.groan,calm&&quality>=3);}
+    else{surround.update(stadiumDirection);crowd.update(time,show?show.mood.cheer>.2:live.phase==='goal',stadiumDirection,show?show.mood.groan:0);}
+    goalPulse=Math.max(0,goalPulse-dt*.7);
+    if(kitReady)hideKitReplaced();
+    updateCrowd3d(live,calm);
+    let boxIndex=0,sphereIndex=0;
+    function box(x,y,z,sx,sy,sz,c,angle=0){dummy.position.set(x,y,z);dummy.rotation.set(0,angle,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();boxes.setMatrixAt(boxIndex,dummy.matrix);boxes.setColorAt(boxIndex++,color.set(c));}
+    function sphere(x,y,z,sx,sy,sz,c){dummy.position.set(x,y,z);dummy.rotation.set(0,0,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();spheres.setMatrixAt(sphereIndex,dummy.matrix);spheres.setColorAt(sphereIndex++,color.set(c));}
+    const receiver=passReceiver(s,config);poses.length=s.players.length;let turfAt=0;
+    // Soccer full: one LOD per player from his distance to the camera (soccerFullLodLevel, with hysteresis); the players in an action stay
+    // near; at most lod.maxFull full bodies; a body outside the camera's frustum is not drawn (it keeps animating, only the draw is skipped).
+    if(fullLodCfg&&characters[0]?.design){
+      camera.updateMatrixWorld();fullProj.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);fullFrustum.setFromProjectionMatrix(fullProj);
+      fullOrder.length=0;const farEdge=(fullLodCfg.qualityFar?.[quality]??fullLodCfg.far)*1.25;
+      for(const p of s.players){
+        fullSphere.center.set(p.x,.95,p.z);const seen=fullFrustum.intersectsSphere(fullSphere)||p.id===poseFocus,dist=Math.hypot(camera.position.x-p.x,camera.position.y-1,camera.position.z-p.z);
+        let level=soccerFullLodLevel(dist,fullLevels[p.id]??1,quality,fullLodCfg);
+        const actor=p.id===s.controlled||p.id===s.ball.owner||Boolean(p.restartMotion)||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0||p.id===poseFocus;
+        if(actor&&level>0&&dist<farEdge)level=0;
+        fullLevels[p.id]=level;fullVisible[p.id]=seen;fullDistance[p.id]=actor?-1:dist;if(level===0&&seen)fullOrder.push(p.id);
+      }
+      const maxFull=fullLodCfg.qualityMaxFull?.[quality]??fullLodCfg.maxFull;if(fullOrder.length>maxFull){fullOrder.sort((a,b)=>fullDistance[a]-fullDistance[b]);for(let i=maxFull;i<fullOrder.length;i++)fullLevels[fullOrder[i]]=1;}
+      const stats=fullStats||(fullStats={full:0,middle:0,far:0,hidden:0});stats.full=stats.middle=stats.far=stats.hidden=0;
+      for(const p of s.players){if(!fullVisible[p.id])stats.hidden++;else if(fullLevels[p.id]===0)stats.full++;else if(fullLevels[p.id]===1)stats.middle++;else stats.far++;}
+      // the four screen corners on the grass (bottom-left, bottom-right, top-right, top-left); above the horizon: 400 m out
+      const corners=[[-1,-1],[1,-1],[1,1],[-1,1]];
+      for(let i=0;i<4;i++){fullRay.set(corners[i][0],corners[i][1],.5).unproject(camera).sub(camera.position);const out=groundFrame[i];
+        if(fullRay.y<-1e-4){const t=Math.min(-camera.position.y/fullRay.y,400/Math.max(1e-6,Math.hypot(fullRay.x,fullRay.z)));out.x=camera.position.x+fullRay.x*t;out.z=camera.position.z+fullRay.z*t;}
+        else{const l=Math.hypot(fullRay.x,fullRay.z)||1;out.x=camera.position.x+fullRay.x/l*400;out.z=camera.position.z+fullRay.z/l*400;}}
+    }
+    const nearCount=config.view.nearDetailPlayers??0;if(nearCount>0&&quality<config.view.athlete.lodFromQuality)nearDetail=nearDetailPlayers(s.players,cameraState||{x:s.ball.x,z:s.ball.z},nearCount,nearDetail);
+    restartStrike=null;
+    // GPT v7 characters: LOD0 is 35K triangles, so at most `fullDetail` players show it (priority actors first,
+    // then the nearest to the camera focus); everyone else uses the 5.8K LOD1 to stay inside maxTriangles.
+    v7Full=(characters[0]?.v7||characters[0]?.athleteBody)&&quality<config.view.athlete.lodFromQuality?soccerV7FullDetail(s.players,cameraState||{x:s.ball.x,z:s.ball.z},[poseFocus,s.controlled,s.ball.owner,...s.players.filter(q=>q.restartMotion||q.kickTime>0||q.headerTime>0||q.slideTime>0||q.diveTime>0).map(q=>q.id)],Math.min(v7Cap,config.view.v7?.fullDetail??SOCCER_V7_FULL_DETAIL),v7Full):null;
+    for(const p of s.players){
+      // Authored characters remain visible. Foreground/actions retain their
+      // detail while distant geometry stays within the mobile triangle budget.
+      const character=characters[p.id],useModel=Boolean(character);
+      if(character)character.pivot.visible=Boolean(useModel)&&(!fullStats||fullVisible[p.id]!==false);
+      if(useModel){if(character.design){
+        const contactActor=p.id===s.controlled||p.id===s.ball.owner||p.restartMotion||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0;
+        const wantedLod=(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0),actorLod=character.setLod(fullStats?fullLevels[p.id]:v7Full&&wantedLod===0&&!v7Full.has(p.id)?1:wantedLod);
+        const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt*rate);
+        const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;pose.lod=actorLod;
+      }else if(character.athlete){
+        if(nearCount>0&&nearDetail&&quality<config.view.athlete.lodFromQuality&&character.lodCount>1)character.setLod(nearDetail.has(p.id)||p.id===s.controlled||p.id===poseFocus?0:1);
+        const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;if(animation.mode==='dejected')animation.mode='idle'; // the show's keeper stance exists only in the design state machine
+        const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive','volley','scissor'].includes(animation.mode));character.yaw=bodyState.yaw;
+        const sliding=animation.mode==='slide'||animation.mode==='recover',roll=animation.mode==='dive'?animation.roll:sliding?animation.roll*ad.slideRollScale:bodyState.roll;
+        const lift=animation.mode==='dive'?Math.sin(Math.PI*Math.min(1,Math.max(0,1-p.diveTime/config.goalkeeping.diveSeconds)))*ad.diveLift:0;
+        const ease=1-Math.exp(-dt/ad.rollEase);character.roll+=(roll-character.roll)*ease;character.lift+=(lift-character.lift)*ease;
+        pivot.position.set(p.x,character.lift,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateZ(character.roll);if(!sliding&&animation.mode!=='dive')pivot.rotateX(bodyState.pitch);
+        const owner=s.ball.owner===null||s.ball.owner===undefined?null:s.players[s.ball.owner],charge=s.charging&&s.controlled===p.id&&s.ball.owner===p.id?Math.min(1,s.charge/(s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds)):0;
+        const marking=Boolean(owner&&owner.team!==p.team&&hypot2(s.ball.x-p.x,s.ball.z-p.z)<ad.markDistance);
+        const motion=character.motion.update(p,s,animation.mode,dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1),{charge,chargeKind:s.chargeKind,slide:sliding?slideWeight(p,config):0,marking,turnRate:bodyState.rate});
+        character.mode=animation.mode;character.active=motion.oneShot||'locomotion';
+        character.lookWeight+=((['celebrate','slide','recover','dive','throw','fouled','volley','scissor'].includes(animation.mode)||p.hands?0:1)-character.lookWeight)*(1-Math.exp(-dt/ad.lookEase));athleteLook(T,character,s.ball,dt,ad);
+        if(p.hands&&!p.restartMotion)holdSoccerBall(T,character,p,config);
+        if(animation.head&&bones.Head.bone)bones.Head.bone.rotation.x+=animation.head*ad.headNod;
+        body.plant(pivot,dt,motion.oneShot||sliding||charge>0||p.hands||!['idle','run','sprint','steal'].includes(animation.mode)?0:1,motion.warp);
+        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);
+        character.dribbleOffset=body.dribble(p,s.ball.owner===p.id&&!p.hands,dt,along(feet[1],p),motion.rate>0?1/motion.rate:.7,!motion.oneShot&&!charge&&(animation.mode==='run'||animation.mode==='sprint'),along(s.ball,p));
+        // Metrics for tests and the dev overlay, written into one record per player (no per-frame garbage).
+        const pose=poses[p.id]||(poses[p.id]={id:p.id,feet:[[0,0,0],[0,0,0]],handRadii:[0,0],weights:{}});
+        pose.mode=animation.mode;pose.clip=character.active;pose.headAlong=along(headWorld,p);pose.footAlong=Math.max(along(feet[0],p),along(feet[1],p));pose.headHeight=headWorld.y;pose.lean=0;pose.yaw=character.yaw;
+        for(let i=0;i<2;i++){const f=pose.feet[i];f[0]=feet[i].x;f[1]=feet[i].y;f[2]=feet[i].z;}
+        pose.footDistance=s.ball.owner===p.id&&!p.hands?Math.min(ballDistance(feet[0],s.ball),ballDistance(feet[1],s.ball)):null;
+        if(p.hands){pose.handRadii=pose.handRadii||[0,0];pose.handRadii[0]=ballDistance(bones.Hand_L.bone.getWorldPosition(target),s.ball);pose.handRadii[1]=ballDistance(bones.Hand_R.bone.getWorldPosition(target),s.ball);}else pose.handRadii=null;
+        Object.assign(pose.weights,character.motion.weights);
+      }else{
+        const {pivot,actions,mixer,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz);if(animation.mode==='dejected')animation.mode='idle';if(character.yaw===null||['slide','kick','throw'].includes(animation.mode))character.yaw=wanted;else character.yaw+=Math.atan2(Math.sin(wanted-character.yaw),Math.cos(wanted-character.yaw))*(1-Math.exp(-config.view.animation.turnSmoothing*dt));
+        pivot.position.set(p.x,animation.height,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateX(animation.lean);pivot.rotateZ(animation.roll);
+        const retrigger=animation.clip==='kick'&&(p.kickTime>character.kickTime||p.stealTime>character.stealTime);
+        if(animation.clip!==character.active||retrigger){const fade=animation.clip==='kick'||character.active==='kick'?config.view.animation.fadeSeconds:config.view.animation.locomotionFadeSeconds;actions[character.active].fadeOut(fade);actions[animation.clip].reset().fadeIn(fade).play();character.active=animation.clip;}
+        actions[animation.clip].setEffectiveTimeScale(animation.speed);character.mode=animation.mode;character.kickTime=p.kickTime;character.stealTime=p.stealTime;
+        for(const {bone,rest}of Object.values(bones))if(bone)bone.quaternion.copy(rest);
+        mixer.update(dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1));
+        const a=config.view.animation,rotate=(name,axis,amount)=>{if(bones[name]?.bone)bones[name].bone.rotation[axis]+=amount;};
+        if(animation.mode==='slide'||animation.mode==='recover'){const u=slideWeight(p,config);for(const {bone,rest}of Object.values(bones))if(bone)bone.quaternion.copy(rest);rotate('Hips','x',a.slideHip*u);rotate('Spine','x',a.slideSpine*u);rotate('UpperLeg_R','x',a.slideStraightHip*u);rotate('LowerLeg_R','x',a.slideStraightKnee*u);rotate('UpperLeg_L','x',a.slideBentHip*u);rotate('LowerLeg_L','x',-a.slideKnee*u);rotate('UpperArm_L','x',a.slideSupportArm*u);rotate('LowerArm_L','x',a.slideSpine*u);}
+        else if(animation.mode==='steal'){rotate('UpperLeg_R','x',-animation.leg);rotate('LowerLeg_R','x',animation.leg/2);rotate('Spine','x',a.stealLean);}
+        if(animation.mode==='throw'){for(const side of ['L','R']){rotate('UpperArm_'+side,'x',a.throwArm);rotate('LowerArm_'+side,'x',a.throwElbow);}rotate('Spine','x',-a.headerLean);}
+        if(animation.mode==='dive'||animation.mode==='catch'){for(const side of ['L','R'])rotate('UpperArm_'+side,'x',a.catchArm);}
+        if(p.hands&&!p.restartMotion)holdSoccerBall(T,character,p,config);
+        if(animation.head)bones.Head.bone.rotation.x-=animation.head;
+        pivot.updateMatrixWorld(true);const headWorld=bones.Head.bone.getWorldPosition(character.headPoint),feet=character.feetPoints;bones.Foot_L.bone.getWorldPosition(feet[0]);bones.Foot_R.bone.getWorldPosition(feet[1]);
+        const handRadii=p.hands?[ballDistance(bones.Hand_L.bone.getWorldPosition(target),s.ball),ballDistance(bones.Hand_R.bone.getWorldPosition(target),s.ball)]:null;
+        poses[p.id]={id:p.id,mode:animation.mode,clip:animation.clip,headAlong:along(headWorld,p),footAlong:Math.max(along(feet[0],p),along(feet[1],p)),headHeight:headWorld.y,lean:animation.lean,footDistance:s.ball.owner===p.id&&!p.hands?Math.min(ballDistance(feet[0],s.ball),ballDistance(feet[1],s.ball)):null,handRadii};
+      }}else if(assetStatus==='fallback'){
+        // The block figures are only the failure fallback, never a loading placeholder.
+        const angle=Math.atan2(p.fx,p.fz),cos=Math.cos(angle),sin=Math.sin(angle),kit=p.team===0?config.team.colors:config.opponent.colors,shirt=p.role==='keeper'?kit[1]:kit[0];
+        const point=(x,z)=>({x:p.x+x*cos+z*sin,z:p.z-x*sin+z*cos});
+        const speed=hypot2(p.vx,p.vz),swing=Math.sin(time*12+p.id)*Math.min(.18,speed*.045);
+        box(p.x,.99,p.z,.58,.63,.34,shirt,angle);sphere(p.x,1.55,p.z,.29,.33,.28,config.view.appearance.skin[p.id]);sphere(p.x,1.74,p.z-.02,.3,.16,.28,config.view.appearance.hair[p.id]);
+        for(const side of [-1,1]){let q=point(side*.17,swing*side);box(q.x,.48,q.z,.21,.48,.24,config.view.appearance.socks[p.id],angle);q=point(side*.17,.1+swing*side);box(q.x,.13,q.z,.24,.18,.42,'#293b54',angle);q=point(side*.38,-swing*side);box(q.x,.93,q.z,.16,.55,.18,config.view.appearance.skin[p.id],angle);q=point(side*.11,.265);box(q.x,1.6,q.z,.065,.065,.035,'#273345',angle);}
+        const number=point(0,.176);box(number.x,1.02,number.z,.065,.22,.018,kit[1],angle);
+      }
+      for(let i=0;i<config.view.animation.turfPerPlayer;i++){const moving=p.slideTime>0,age=(time*3+i/config.view.animation.turfPerPlayer)%1;turfPositions[turfAt]=p.x-p.fx*age*.8+Math.sin(i*4)*.2;turfPositions[turfAt+1]=moving?.08+age*.2:-10;turfPositions[turfAt+2]=p.z-p.fz*age*.8+Math.cos(i*4)*.2;turfAt+=3;}
+      if(character){const strike=alignSoccerRestartStrike(T,character,p.restartMotion,s.ball,config.physics.ballRadius);if(strike)restartStrike=strike;}
+      dummy.position.set(p.x+.18,.03,p.z-.12);dummy.rotation.set(-Math.PI/2,0,-.6);dummy.scale.set(.85,.58,1);if(assetStatus==='loading')dummy.scale.setScalar(0);dummy.updateMatrix();shadows.setMatrixAt(p.id,dummy.matrix);
+      dummy.position.set(p.x,2.15,p.z);dummy.rotation.set(Math.PI/2-.6,0,0);dummy.scale.setScalar(p.request||receiver===p.id?1:0);dummy.updateMatrix();requests.setMatrixAt(p.id,dummy.matrix);
+    }
+    practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}
+    const restartCue=restartAimPreview(s,config,restartAim,passDestination),arc=restartCue?(restartCue.loft?restartCue:null):crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
+    for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
+    turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
+    boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
+    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);arrow.visible=markers;selector.visible=markers&&!fx?.ringActive;if(!markers)requests.count=0;fx?.update(s,dt,{quality,camera,markers,kitGoals:kitReady,controlled,calm}); // v24: the soccer-fx-v1 selection ring replaces the plain one
+    const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
+    const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
+    aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);
+    const chargeLimit=s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds;aimArrow.scale.z=(config.view.aimArrowMinLength+(config.view.aimArrowMaxLength-config.view.aimArrowMinLength)*s.charge/chargeLimit)/config.view.aimArrowLength;
+    const height=shotHeight(s.charge/config.physics.chargeSeconds,s.kickAim?.height,config);aimMaterial.color.set(s.chargeKind==='pass'?config.passing.landingColor:height>config.pitch.goalHeight?config.shooting.arrowHighColor:height>config.aerial.minHeight?config.shooting.arrowMidColor:config.shooting.arrowLowColor);
+    {// Dribble touches: a visual offset along the carrier's facing, eased out when the ball leaves the foot.
+      const holder=s.ball.owner===null||s.ball.owner===undefined?null:s.players[s.ball.owner],hc=holder&&characters[holder.id],off=hc?.athlete&&s.ball.y<.6?hc.dribbleOffset||0:0,dx=holder?holder.fx*off:0,dz=holder?holder.fz*off:0;
+      const drift=ballDrift,k=off?1:1-Math.exp(-dt/.07),px=drift.x,pz=drift.z;drift.x+=(dx-drift.x)*k;drift.z+=(dz-drift.z)*k;drift.vx=dt>0?(drift.x-px)/dt:0;drift.vz=dt>0?(drift.z-pz)/dt:0;}
+    ballRoot.position.set(s.ball.x+ballDrift.x,s.ball.y,s.ball.z+ballDrift.z);{ballRoot.rotation.z-=(s.ball.vx+ballDrift.vx)*dt/config.ball.spinRadius;ballRoot.rotation.x+=(s.ball.vz+ballDrift.vz)*dt/config.ball.spinRadius;}
+    // Glitch v23 (`?soccerGlitch=v22` = as before): a keeper's catch and the start of his throw moved the ball 0.5-1.5 m in one frame (the
+    // simulation puts it in his hands at once); the shown ball now travels there in about 0.1 s. Teleports (kickoff, restarts) stay instant.
+    if(glitchV23){const holderNow=s.ball.owner==null?null:s.players[s.ball.owner],gap=Math.hypot(ballRoot.position.x-ballShown.x,ballRoot.position.y-ballShown.y,ballRoot.position.z-ballShown.z);
+      if(ballShown.valid&&holderNow?.hands&&s.phase==='playing'&&gap>.2&&gap<3&&dt>0){const k=1-Math.exp(-dt/.05);ballRoot.position.set(ballShown.x+(ballRoot.position.x-ballShown.x)*k,ballShown.y+(ballRoot.position.y-ballShown.y)*k,ballShown.z+(ballRoot.position.z-ballShown.z)*k);}
+      ballShown.x=ballRoot.position.x;ballShown.y=ballRoot.position.y;ballShown.z=ballRoot.position.z;ballShown.valid=true;}
+    const holder=s.ball.owner==null?null:s.players[s.ball.owner],character=holder&&characters[holder.id];
+    restartAttachment=character&&soccerRestartBallAttachment(T,character,holder.restartMotion,config.physics.ballRadius,ballRoot.position)?character.restartContactMetrics:null;
+    if(restartAttachment&&character.v7){
+      // The v7 body is shorter-armed than the rig the restart ball heights were calibrated on (hands ~17 cm lower at
+      // the overhead throw), so the attached ball is eased onto the simulation ball over the last half of the motion
+      // instead of snapping at the release edge.
+      const m=holder.restartMotion,u=Math.min(1,Math.max(0,(m.elapsed/(m.kind==='keeperPunt'?SOCCER_RESTART_SEQUENCES.keeperPunt.drop:m.contact)-.5)/.5)),w=u*u*(3-2*u);
+      if(w>0)ballRoot.position.set(ballRoot.position.x+(s.ball.x+ballDrift.x-ballRoot.position.x)*w,ballRoot.position.y+(s.ball.y-ballRoot.position.y)*w,ballRoot.position.z+(s.ball.z+ballDrift.z-ballRoot.position.z)*w);
+    }
+    // v24: the Codex v13 throw clips let go of the ball lower than the simulation's calibrated release point (throw-in 0.39 m, keeper
+    // throw about 0.3 m); the shown ball stays in the real hands to the release and then joins the simulated flight within 0.12 s
+    // (eased out) instead of jumping at the release edge. The flight itself is the simulation's.
+    if(restartAttachment&&character?.motion?.restartClip){releaseBlend.x=ballRoot.position.x;releaseBlend.y=ballRoot.position.y;releaseBlend.z=ballRoot.position.z;releaseBlend.held=true;releaseBlend.age=-1;}
+    else if(releaseBlend.held){releaseBlend.held=false;releaseBlend.ox=releaseBlend.x-ballRoot.position.x;releaseBlend.oy=releaseBlend.y-ballRoot.position.y;releaseBlend.oz=releaseBlend.z-ballRoot.position.z;releaseBlend.age=Math.hypot(releaseBlend.ox,releaseBlend.oy,releaseBlend.oz)<1.5?0:-1;}
+    if(releaseBlend.age>=0){const u=Math.min(1,releaseBlend.age/.12),w=(1-u)*(1-u);ballRoot.position.x+=releaseBlend.ox*w;ballRoot.position.y+=releaseBlend.oy*w;ballRoot.position.z+=releaseBlend.oz*w;releaseBlend.age=u>=1?-1:releaseBlend.age+dt;}
+    trail.count=0; // The height-correct tapered ribbon owns the flight cue.
+    for(let i=0;i<trail.count;i++){dummy.position.set(s.ball.x-s.ball.vx*trailConfig.spacingSeconds*(i+1),s.ball.y,s.ball.z-s.ball.vz*trailConfig.spacingSeconds*(i+1));dummy.rotation.set(0,0,0);dummy.scale.setScalar(1-i/trailConfig.count);dummy.updateMatrix();trail.setMatrixAt(i,dummy.matrix);}trail.instanceMatrix.needsUpdate=true;
+    dummy.position.set(s.ball.x,.032,s.ball.z);dummy.rotation.set(-Math.PI/2,0,0);dummy.scale.setScalar(config.view.ballShadowScale+Math.min(s.ball.y,config.pitch.goalHeight)*config.view.ballShadowHeightScale);dummy.updateMatrix();shadows.setMatrixAt(roster.length,dummy.matrix);shadows.instanceMatrix.needsUpdate=true;
+    if(!designSceneReady)for(const net of nets){const array=net.geometry.attributes.position.array;for(let i=0;i<array.length;i+=3){const attachment=Math.max(0,(Math.abs(net.base[i])-hx)/gd),edge=Math.max(0,1-Math.abs(net.base[i+2])/(gw/2)),wave=Math.sin(time*25+net.base[i+2]*2+net.base[i+1]*2);array[i]=net.base[i]+(net.direction*s.attackDir===(goalTeam===0?1:-1)?net.direction*wave*goalPulse*.34*attachment*edge:0);}net.geometry.attributes.position.needsUpdate=true;}
+    if(poseMode==='split'&&poseFocus!==null){const p=s.players[poseFocus];camera.aspect=lastWidth/2/lastHeight;camera.updateProjectionMatrix();renderer.setScissorTest(true);renderer.setViewport(0,0,lastWidth/2,lastHeight);renderer.setScissor(0,0,lastWidth/2,lastHeight);renderer.render(scene,camera);camera.position.set(p.x,6,p.z+.1);camera.lookAt(p.x,0,p.z);camera.updateMatrixWorld();renderer.setViewport(lastWidth/2,0,lastWidth/2,lastHeight);renderer.setScissor(lastWidth/2,0,lastWidth/2,lastHeight);renderer.render(scene,camera);renderer.setScissorTest(false);renderer.setViewport(0,0,lastWidth,lastHeight);camera.aspect=lastWidth/lastHeight;camera.updateProjectionMatrix();}else renderer.render(scene,camera);
+    // v7 near meshes are the biggest single line in the budget: shed one before the tier machinery steps down.
+    if(v7Full&&!pinQuality&&quality<2&&v7Cap>0&&renderer.info.render.triangles>config.view.maxTriangles&&renderer.info.render.calls<=config.view.maxDrawCalls)v7Cap--;
+    else if(!pinQuality&&quality<2&&(renderer.info.render.triangles>config.view.maxTriangles||renderer.info.render.calls>config.view.maxDrawCalls)){lowerQuality();renderer.render(scene,camera);}
+  }
+  const lost=event=>{event.preventDefault();onContextLost();};canvas.addEventListener('webglcontextlost',lost);
+  const skipReplay=()=>{replay.skip('touch');show?.skip();};canvas.addEventListener('pointerdown',skipReplay);
+  function pitchBounds(){
+    const points=[];for(const x of [-hx,hx])for(const z of [-hz,hz]){target.set(x,0,z).project(camera);points.push({x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2});}
+    return {width:Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x)),height:Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y))};
+  }
+  /** What this match actually loaded and why anything fell back; filled when assets settle. */
+  function report(){if(loadReport.ms===null&&assetStatus!=='loading')loadReport.ms=Math.round((globalThis.performance?.now?.()??0)-loadStart);let gpu=null;try{const gl=renderer.getContext(),info=gl.getExtension('WEBGL_debug_renderer_info');gpu=info?gl.getParameter(info.UNMASKED_RENDERER_WEBGL):null;}catch{}return {...loadReport,assetStatus,scene:designSceneReady?'design':designScene?.metrics().status||'disabled',sceneFailure:designScene?.metrics().failure||null,quality,gpu,warmup:warmed,webgl2:!!renderer.capabilities?.isWebGL2};}
+  if(lite){lowerQuality();lowerQuality();loadReport.lite=true;}
+  if(pinQuality)for(let i=0;i<Math.min(3,Math.floor(Number(pinParam)));i++)lowerQuality();
+  return {ready,render,qualitySample,report,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return show?show.replaying:replay.active;},
+    /** soccerShow v1: the session does not step the model while `hold` is true; `noteEvent` feeds drained match events (short replays, crowd mood). */
+    get hold(){return Boolean(show?.hold);},get show(){return show;},get showPhase(){return show?.phase||'live';},get finaleSeconds(){return show?show.finaleSeconds:0;},get crowdMood(){return show?.mood||null;},noteEvent(event){show?.event(event);fx?.noteEvent(event);referee?.noteEvent(event);},
+    poseCamera(id,mode){poseFocus=id;poseMode=mode;},
+    /** Test hook: backdrop meshes off and the clear colour magenta, so any pixel the scenery fails to cover shows. */
+    get scene(){return scene;},get characters(){return characters;},
+    skyProbe(on,surroundOn=true){if(on&&!probeBackground)probeBackground=scene.background;scene.background=on?new T.Color('#ff00ff'):probeBackground||new T.Color('#7d9592');if(!on)probeBackground=null;scene.traverse(o=>{if(o.renderOrder===-1000)o.visible=!on;});if(v8)v8.root.visible=surroundOn;else surround.root.visible=surroundOn;},
+    /** Soccer full: the camera's footprint on the grass (radar), null in the small match. */
+    groundFrame:()=>fullStats?groundFrame:null,
+    metrics:()=>({referee:referee?.metrics()||refereeStatus,full:fullStats?{...fullStats,camera:cameraState?{x:+cameraState.x.toFixed(2),z:+cameraState.z.toFixed(2),distance:+cameraState.distance.toFixed(2),zoom:+(cameraState.zoom??cameraState.distance).toFixed(2)}:null}:null,v24:v24Metrics(),v8:{...v8Report,lod:v8?.lod??null,roofCutaway:v8?.roofCutawayActive??null,parts:v8?.metrics().parts??null,triangles:v8?.metrics().total??null},triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:v8?'Soccer v8 evening stadium':designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),show:show?.metrics()||null,assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    dispose(){if(disposed)return;disposed=true;kit?.dispose();fx?.dispose();referee?.dispose();referee=null;crowd3d?.dispose();v8?.dispose();show?.dispose();replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
+  };
+}

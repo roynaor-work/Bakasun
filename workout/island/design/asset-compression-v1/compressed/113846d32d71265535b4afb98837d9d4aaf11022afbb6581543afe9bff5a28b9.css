@@ -1,0 +1,11 @@
+.info-actions [hidden]{display:none!important}
+.city-depth{display:grid;gap:8px;border-block-start:1px solid #c5d9cf;margin-block-start:10px;padding-block-start:10px}
+.city-depth p{font-size:12px;line-height:1.5;margin:0}
+.city-depth h3{margin:4px 0;font-size:14px}
+.city-depth button{min-height:56px;white-space:normal}
+.city-building-status{font-weight:700;color:#245e64}
+.city-building-status[data-city-status=damaged]{color:#9a412a}
+.city-building-status[data-city-status=unserved]{color:#87600d}
+.city-order,.city-goal{display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:#edf4ee;border-radius:10px}
+.city-order p,.city-goal p{flex-basis:100%}
+.city-order button,.city-goal button{flex:1}
