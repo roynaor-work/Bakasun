@@ -1,0 +1,906 @@
+{
+  "schemaVersion": 1,
+  "inputs": {
+    "sequence.json": "d7741dc51177c3e369a9983790412dcd4ba94526c375cc10e6e0c5060668808d",
+    "clips/pit-actions.glb": "c1e2311c90527ddab8fab2586efb377ebd06b5be28d1424e5c25791a6d2fd247",
+    "src/pit-sequence.mjs": "420b006f041de5a0062871624b01f0c33d6d879b516ff532be2dcc41c0cb113a",
+    "src/preview.mjs": "38bf664697ab45311beca101b4535fe088a783b8deb609f9ca84c82724eedecd",
+    "preview.html": "47d6e8286350c056c62deb6508519972f7ec20d0ed2dd7d343cc481dce8d4cba",
+    "preview.css": "6c3ea6c08a6a829088ea47c487269c441c696a7e2cd310c871df88e1adc623f9"
+  },
+  "wasmDisabled": true,
+  "externalRequests": [],
+  "errors": [],
+  "failedRequests": [],
+  "teardownCancellations": [],
+  "viewports": [
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "layout": {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "scrollHeight": 390,
+        "canvas": [
+          {
+            "width": 653,
+            "height": 257
+          }
+        ]
+      },
+      "states": [
+        {
+          "time": 0.19,
+          "state": "enter",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              -3
+            ],
+            "liftMeters": 0,
+            "stopped": false
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.42000000000000004,
+          "state": "stop",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "liftMeters": 0,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.56,
+          "state": "jack_up",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.08000000000000002,
+              0
+            ],
+            "liftMeters": 0.08000000000000002,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.77,
+          "state": "loosen",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.06,
+          "state": "remove_old",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.4300000000000002,
+          "state": "mount_new",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.75,
+          "state": "tighten",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.92,
+          "state": "green",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.0300000000000002,
+          "state": "jack_down",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.006874999999999698,
+              0
+            ],
+            "liftMeters": 0.006874999999999698,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.2,
+          "state": "signal",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "liftMeters": 0,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.59,
+          "state": "exit",
+          "light": "green",
+          "canExit": true,
+          "car": {
+            "position": [
+              0,
+              0,
+              1.75
+            ],
+            "liftMeters": 0,
+            "stopped": false
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        }
+      ],
+      "terminal": {
+        "time": 2.88,
+        "complete": true,
+        "canExit": true
+      },
+      "contactMaxMeters": {
+        "leftGrip": 3.1401849173675503e-16,
+        "rightGrip": 6.377745716588144e-16,
+        "gunSocket": 3.1401849173675503e-16,
+        "carPosition": 0,
+        "handoffWheelStep": 0.000047416264546260245,
+        "jackPad": 5.551115123125783e-17,
+        "jackLeftGrip": 3.272819388556489e-11,
+        "jackRightGrip": 3.272781129977652e-11
+      },
+      "sampleCount": 185,
+      "runtimePoseSamples": 185,
+      "contactSamples": 185,
+      "controls": {
+        "stageButtons": true,
+        "scrubViaApi": true,
+        "keyboardFrame": true,
+        "replay": true,
+        "slowMotion": true,
+        "pause": true,
+        "viewToggle": true
+      },
+      "sceneSeekDeterministic": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "canvas": [
+          {
+            "width": 390,
+            "height": 327
+          }
+        ]
+      },
+      "states": [
+        {
+          "time": 0.19,
+          "state": "enter",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              -3
+            ],
+            "liftMeters": 0,
+            "stopped": false
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.42000000000000004,
+          "state": "stop",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "liftMeters": 0,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.56,
+          "state": "jack_up",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.08000000000000002,
+              0
+            ],
+            "liftMeters": 0.08000000000000002,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 0.77,
+          "state": "loosen",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "hub",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.06,
+          "state": "remove_old",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "held",
+              "newState": "rack",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.4300000000000002,
+          "state": "mount_new",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "held",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.75,
+          "state": "tighten",
+          "light": "red",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": false
+            }
+          }
+        },
+        {
+          "time": 1.92,
+          "state": "green",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.16,
+              0
+            ],
+            "liftMeters": 0.16,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.0300000000000002,
+          "state": "jack_down",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0.006874999999999698,
+              0
+            ],
+            "liftMeters": 0.006874999999999698,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.2,
+          "state": "signal",
+          "light": "green",
+          "canExit": false,
+          "car": {
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "liftMeters": 0,
+            "stopped": true
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        },
+        {
+          "time": 2.59,
+          "state": "exit",
+          "light": "green",
+          "canExit": true,
+          "car": {
+            "position": [
+              0,
+              0,
+              1.75
+            ],
+            "liftMeters": 0,
+            "stopped": false
+          },
+          "wheels": {
+            "front_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "front_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_left": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            },
+            "rear_right": {
+              "oldState": "rack",
+              "newState": "hub",
+              "confirmed": true
+            }
+          }
+        }
+      ],
+      "terminal": {
+        "time": 2.88,
+        "complete": true,
+        "canExit": true
+      }
+    }
+  ],
+  "passed": true
+}

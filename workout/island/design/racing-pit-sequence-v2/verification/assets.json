@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "method": "Pure JavaScript GLB structure, canonical rig and animation track audit; not the Khronos validator",
+  "constraints": {
+    "local": true,
+    "wasm": false,
+    "draco": false,
+    "meshopt": false,
+    "ktx2": false
+  },
+  "assets": [
+    {
+      "file": "../racing-formula/formula.glb",
+      "bytes": 336864,
+      "sha256": "0fafed905c2d8a1274aad64bd9f569bcd303fc6365cec8086da4d1f1cb95883f",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/jack.glb",
+      "bytes": 49404,
+      "sha256": "5cff483e929bca105a41b27a9d10b5685629a967c43d61d97a8675c11969e652",
+      "joints": 0,
+      "animations": [
+        {
+          "name": "jack_up",
+          "duration": 1.2000000476837158
+        },
+        {
+          "name": "jack_down",
+          "duration": 1.2000000476837158
+        }
+      ]
+    },
+    {
+      "file": "../racing-pit-v1/models/jack_operator.glb",
+      "bytes": 529552,
+      "sha256": "2f28f9c735a393a8512706ff6cc7d0713357db5b6efc3b2e68ab54639964675c",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_wait",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "rush_in",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "remove_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "mount_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "jack_up",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "jack_down",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "thumbs_up",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "step_back",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "wipe_screen",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "signal_release",
+          "duration": 2.4000000953674316
+        }
+      ]
+    },
+    {
+      "file": "../racing-pit-v1/models/pit_light_entry.glb",
+      "bytes": 58600,
+      "sha256": "4c7e825d504ac76c7253bc234ca8b5fadca4e3c40571ce9cd538b1b6f111b636",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/pit_light_exit.glb",
+      "bytes": 58600,
+      "sha256": "c087a7f6b3fbbdc83432a8455644908e7ac0b6d871f0a1716e68ead88e568203",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/spare_wheel.glb",
+      "bytes": 61764,
+      "sha256": "06612121e956c03685faf6451c9871d5a224909157e45868e046821ad6d2a6f1",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/stop_star.glb",
+      "bytes": 14652,
+      "sha256": "6d7daff4fc4aa6ce752dcce2552dcdf7d2f493589e155190e2b7b1020b453546",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/wheel_front_left.glb",
+      "bytes": 535276,
+      "sha256": "e377bdde3cb7a99f1791b8e6b27a3193d07a65dc99b84d7650523cc2b0c54f6c",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_wait",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "rush_in",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "remove_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "mount_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "jack_up",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "jack_down",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "thumbs_up",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "step_back",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "wipe_screen",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "signal_release",
+          "duration": 2.4000000953674316
+        }
+      ]
+    },
+    {
+      "file": "../racing-pit-v1/models/wheel_front_right.glb",
+      "bytes": 535276,
+      "sha256": "62728e1f1bac7be4c88fb745711861212b2fa17620a30901d53e81cf0bd48e1f",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_wait",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "rush_in",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "remove_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "mount_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "jack_up",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "jack_down",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "thumbs_up",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "step_back",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "wipe_screen",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "signal_release",
+          "duration": 2.4000000953674316
+        }
+      ]
+    },
+    {
+      "file": "../racing-pit-v1/models/wheel_gun.glb",
+      "bytes": 18536,
+      "sha256": "2de3c1cd3d4030c6586be92a803dc2f95657613ff9a932fd8cfa57554a27a6ba",
+      "joints": 0,
+      "animations": []
+    },
+    {
+      "file": "../racing-pit-v1/models/wheel_rear_left.glb",
+      "bytes": 535272,
+      "sha256": "0237d759ed47b9825624bea9e625174ef7ed5d77d5b71bba1692fbb58da93d8c",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_wait",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "rush_in",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "remove_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "mount_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "jack_up",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "jack_down",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "thumbs_up",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "step_back",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "wipe_screen",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "signal_release",
+          "duration": 2.4000000953674316
+        }
+      ]
+    },
+    {
+      "file": "../racing-pit-v1/models/wheel_rear_right.glb",
+      "bytes": 535276,
+      "sha256": "c85d92e15ee327868e3feb6664404b5797b35a8d369934327b84e00f92353278",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_wait",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "rush_in",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "remove_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "mount_wheel",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "jack_up",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "jack_down",
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "thumbs_up",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "step_back",
+          "duration": 2.4000000953674316
+        },
+        {
+          "name": "wipe_screen",
+          "duration": 3.200000047683716
+        },
+        {
+          "name": "signal_release",
+          "duration": 2.4000000953674316
+        }
+      ]
+    },
+    {
+      "file": "clips/pit-actions.glb",
+      "bytes": 825412,
+      "sha256": "c1e2311c90527ddab8fab2586efb377ebd06b5be28d1424e5c25791a6d2fd247",
+      "joints": 18,
+      "animations": [
+        {
+          "name": "idle_work",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "idle_clear",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "ready_jack",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "idle_signal",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "held_jack",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "signal_hold",
+          "duration": 0.30000001192092896
+        },
+        {
+          "name": "jack_up",
+          "duration": 0.20000000298023224
+        },
+        {
+          "name": "loosen",
+          "duration": 0.2199999988079071
+        },
+        {
+          "name": "remove_old",
+          "duration": 0.36000001430511475
+        },
+        {
+          "name": "mount_new",
+          "duration": 0.3799999952316284
+        },
+        {
+          "name": "tighten",
+          "duration": 0.25999999046325684
+        },
+        {
+          "name": "withdraw",
+          "duration": 0.2199999988079071
+        },
+        {
+          "name": "jack_down",
+          "duration": 0.14000000059604645
+        },
+        {
+          "name": "signal",
+          "duration": 0.20000000298023224
+        },
+        {
+          "name": "work_sequence",
+          "duration": 1.2200000286102295
+        },
+        {
+          "name": "jack_cycle",
+          "duration": 1.840000033378601
+        }
+      ]
+    }
+  ]
+}

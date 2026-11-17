@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "reproducible": true,
+  "method": "Run JavaScript generator twice, compare complete GLB SHA-256",
+  "asset": "clips/pit-actions.glb",
+  "bytes": 825412,
+  "sha256": "c1e2311c90527ddab8fab2586efb377ebd06b5be28d1424e5c25791a6d2fd247",
+  "joints": [
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Head",
+    "LeftArm",
+    "LeftForeArm",
+    "LeftHand",
+    "RightArm",
+    "RightForeArm",
+    "RightHand",
+    "LeftUpLeg",
+    "LeftLeg",
+    "LeftFoot",
+    "RightUpLeg",
+    "RightLeg",
+    "RightFoot"
+  ],
+  "clips": [
+    {
+      "name": "idle_work",
+      "duration": 0.3,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "idle_clear",
+      "duration": 0.3,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "ready_jack",
+      "duration": 0.3,
+      "role": "jack_operator"
+    },
+    {
+      "name": "idle_signal",
+      "duration": 0.3,
+      "role": "jack_operator"
+    },
+    {
+      "name": "held_jack",
+      "duration": 0.3,
+      "role": "jack_operator"
+    },
+    {
+      "name": "signal_hold",
+      "duration": 0.3,
+      "role": "jack_operator"
+    },
+    {
+      "name": "jack_up",
+      "duration": 0.2,
+      "role": "jack_operator"
+    },
+    {
+      "name": "loosen",
+      "duration": 0.22,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "remove_old",
+      "duration": 0.36,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "mount_new",
+      "duration": 0.38,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "tighten",
+      "duration": 0.26,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "withdraw",
+      "duration": 0.22,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "jack_down",
+      "duration": 0.14,
+      "role": "jack_operator"
+    },
+    {
+      "name": "signal",
+      "duration": 0.2,
+      "role": "jack_operator"
+    },
+    {
+      "name": "work_sequence",
+      "duration": 1.22,
+      "role": "wheel_mechanic"
+    },
+    {
+      "name": "jack_cycle",
+      "duration": 1.84,
+      "role": "jack_operator"
+    }
+  ],
+  "noRootYaw": true,
+  "rootSideStepMeters": [
+    -0.35,
+    0,
+    -0.28
+  ],
+  "sampleRateHz": 120
+}

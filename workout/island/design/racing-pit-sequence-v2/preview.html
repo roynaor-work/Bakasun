@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="סימולציית פיט מלאה של 2.88 שניות: ארבעה גלגלים, שני ג׳קים, רצף פעולות ובקרת יציאה.">
+  <title>פיט סטופ / רצף 02</title>
+  <link rel="icon" href="../racing-pit-v1/icons/wheel_change.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="identity" href="REPORT.md"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>פיט סטופ<span class="edition">02</span></a>
+      <div class="heading-note">ארבעה גלגלים. עצירה אחת.</div>
+      <a class="report-link" href="REPORT.md">דוח המסירה <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section class="viewport" aria-label="סימולציית פיט תלת־ממדית">
+        <canvas id="scene" aria-label="מכונית פורמולה ושישה אנשי צוות מחליפים ארבעה גלגלים"></canvas>
+        <div class="scene-top"><span class="live-label"><i></i>סימולציה מקומית</span><button id="view" title="החלפת זווית צפייה" aria-label="החלפת זווית צפייה">מבט על</button></div>
+        <div id="loading" role="status">טוען את תחנת הפיטס…</div>
+        <div class="scene-caption"><span class="caption-rule"></span><span id="scene-caption">מוכנים לקליטת המכונית</span></div>
+      </section>
+      <aside aria-label="מצב העצירה">
+        <div class="eyebrow">רצף פיט מלא</div>
+        <div class="stop-time"><span id="time" dir="ltr">0.00</span><span class="time-unit">/ 2.88 ש׳</span></div>
+        <div class="current"><span id="stage-count">01 / 11</span><h1 id="action">כניסה לתא</h1></div>
+        <div class="wheel-grid" aria-label="מצב ארבעת הגלגלים">
+          <div class="wheel-status" data-wheel="front_left"><i></i><span>קדמי שמאל</span><b>ממתין</b></div>
+          <div class="wheel-status" data-wheel="front_right"><i></i><span>קדמי ימין</span><b>ממתין</b></div>
+          <div class="wheel-status" data-wheel="rear_left"><i></i><span>אחורי שמאל</span><b>ממתין</b></div>
+          <div class="wheel-status" data-wheel="rear_right"><i></i><span>אחורי ימין</span><b>ממתין</b></div>
+        </div>
+        <div class="release"><span class="signal" id="signal"></span><span id="release-label">אדום · ממתינים לשירות</span></div>
+        <p class="clear-note" id="clear-note">היציאה ממתינה להידוק, להורדת הג׳קים ולפינוי הצוות.</p>
+      </aside>
+    </main>
+    <footer>
+      <nav id="stages" aria-label="מעבר לשלבי העצירה"></nav>
+      <label class="scrub-label"><span class="sr-only">זמן הסימולציה בשניות</span><input id="timeline" type="range" min="0" max="2.88" value="0" step="0.001" aria-label="זמן הסימולציה בשניות" dir="ltr"></label>
+      <div class="controls">
+        <button id="play" disabled><span id="play-icon" aria-hidden="true">▶</span><span id="play-label">הפעלת העצירה</span></button>
+        <button id="replay" disabled aria-label="התחלה מחדש"><span aria-hidden="true">↺</span></button>
+        <label class="speed-label">קצב <select id="speed" aria-label="מהירות הניגון"><option value="1">משחק ×1</option><option value=".25">הילוך איטי ×¼</option><option value=".1">בדיקת תנועה ×⅒</option></select></label>
+        <span class="key-hint">רווח: ניגון / השהיה <span>·</span> חצים: פריים</span>
+        <span class="duration-label">2.88 שניות בקצב המשחק</span>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="src/preview.mjs"></script>
+</body>
+</html>

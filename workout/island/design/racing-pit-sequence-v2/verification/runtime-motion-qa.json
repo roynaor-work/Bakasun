@@ -1,0 +1,2777 @@
+{
+  "schemaVersion": 1,
+  "source": "actual browser scene world poses",
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "metricDefinitions": {
+    "footSliding": {
+      "label": "החלקת רגליים",
+      "unit": "height ratio",
+      "green": 0.01,
+      "yellow": 0.035,
+      "weight": 18,
+      "description": "Maximum horizontal sole displacement from the first sample of each declared support window, divided by character height. Inferred support is used only when no windows were supplied."
+    },
+    "floorPenetration": {
+      "label": "חדירה לרצפה",
+      "unit": "height ratio",
+      "green": 0.005,
+      "yellow": 0.02,
+      "weight": 15,
+      "description": "Maximum depth of the supplied sole probe points and all skeletal joint centers below the declared floor plane, divided by height. Sole probes are not a mesh collision audit."
+    },
+    "posePops": {
+      "label": "קפיצות פוזה",
+      "unit": "discontinuity ratio",
+      "green": 1,
+      "yellow": 2.5,
+      "weight": 18,
+      "description": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+    },
+    "anatomy": {
+      "label": "חריגות אנטומיות",
+      "unit": "% affected frames",
+      "green": 0.5,
+      "yellow": 3,
+      "weight": 14,
+      "description": "Percentage of frames with elbow or knee flexion above 165 degrees, neck bend above 80 degrees, or a segment length changing by more than 5%. Optional calibrated hinge checks detect reverse knee flexion above 8 degrees. Conservative marker limits do not diagnose axial joint twist."
+    },
+    "ballContact": {
+      "label": "מגע בכדור",
+      "unit": "height ratio",
+      "green": 0.015,
+      "yellow": 0.05,
+      "weight": 13,
+      "description": "Maximum absolute distance from the ball surface to the sampled, bone-transformed declared contact point, divided by height. Events are evaluated at their exact declared times by interpolation."
+    },
+    "continuity": {
+      "label": "כניסה ויציאה מול המתנה",
+      "unit": "continuity ratio",
+      "green": 1,
+      "yellow": 3,
+      "weight": 10,
+      "description": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+    },
+    "bodySliding": {
+      "label": "מהירות גוף מול צעדים",
+      "unit": "relative speed error",
+      "green": 0.2,
+      "yellow": 0.5,
+      "weight": 8,
+      "description": "Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion."
+    },
+    "symmetry": {
+      "label": "סימטריה",
+      "unit": "relative mismatch",
+      "green": 0.03,
+      "yellow": 0.1,
+      "weight": 4,
+      "description": "Maximum bilateral segment-length mismatch. Looping locomotion additionally compares reflected half-cycle leg markers; explicit pose symmetry compares simultaneous bilateral markers. One-sided actions retain unscored motion diagnostics, so a valid kick or dribble arm is not penalized for intentional asymmetry."
+    }
+  },
+  "sampleRateHz": 60,
+  "totalCapturedFrames": 185,
+  "minimum": 89.7,
+  "coverage": 1,
+  "insufficientDataMetrics": 0,
+  "motionPassed": true,
+  "browserPassed": true,
+  "passed": true,
+  "clips": [
+    {
+      "id": "wheel_front_left/service",
+      "actor": "wheel_front_left",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.49999999999999994,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.1400000000000001,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 90.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 203,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000726,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.723333,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 0.69,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.082928,
+          "status": "yellow",
+          "score": 58.34,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.082457,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.082928373825717,
+              "t": 1.39,
+              "previousTime": 1.373333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.061537,
+              "degrees60Hz": 31.243926
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.085908,
+          "status": "green",
+          "score": 98.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.08590795074821499,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.064431,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.087234,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.082928,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_front_left/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_front_left/full_sequence",
+      "actor": "wheel_front_left",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.96,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.6,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 90.3,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 331,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000407,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 1.183333,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 1.15,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.082928,
+          "status": "yellow",
+          "score": 58.34,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.082457,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.082928373825717,
+              "t": 1.85,
+              "previousTime": 1.833333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.061537,
+              "degrees60Hz": 31.243926
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 3.704190159097233e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.090156,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.082928,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_front_left/full_sequence",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_front_right/service",
+      "actor": "wheel_front_right",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.49999999999999994,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.1400000000000001,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 90.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 203,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000726,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.723333,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 0.69,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.082928,
+          "status": "yellow",
+          "score": 58.34,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.082457,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.0829283738257236,
+              "t": 1.39,
+              "previousTime": 1.373333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.061537,
+              "degrees60Hz": 31.243926
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.085908,
+          "status": "green",
+          "score": 98.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.08590795074820805,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.064431,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.087275,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.082928,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_front_right/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_front_right/full_sequence",
+      "actor": "wheel_front_right",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.96,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.6,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 90.3,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 331,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000407,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 1.183333,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 1.15,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.082928,
+          "status": "yellow",
+          "score": 58.34,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.082457,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.0829283738257236,
+              "t": 1.85,
+              "previousTime": 1.833333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.061537,
+              "degrees60Hz": 31.243926
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 4.3828569025983384e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.090181,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.082928,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_front_right/full_sequence",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_rear_left/service",
+      "actor": "wheel_rear_left",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.49999999999999994,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.1400000000000001,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 89.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 203,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000726,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.723333,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 0.69,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.164284,
+          "status": "yellow",
+          "score": 56.71,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.086571,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.1642838880802553,
+              "t": 0.29,
+              "previousTime": 0.28,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.086571,
+              "degrees60Hz": 25
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.085892,
+          "status": "green",
+          "score": 98.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.08589236803018885,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.064419,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.087944,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.164284,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_rear_left/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_rear_left/full_sequence",
+      "actor": "wheel_rear_left",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.96,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.6,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 89.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 331,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000407,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 1.183333,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 1.15,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.164284,
+          "status": "yellow",
+          "score": 56.71,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.086571,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.1642838880802553,
+              "t": 0.75,
+              "previousTime": 0.74,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.086571,
+              "degrees60Hz": 25
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 3.704190159097233e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.090606,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.164284,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_rear_left/full_sequence",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_rear_right/service",
+      "actor": "wheel_rear_right",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.49999999999999994,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.1400000000000001,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 89.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 203,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000726,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.723333,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 0.69,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.164284,
+          "status": "yellow",
+          "score": 56.71,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.086571,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.1642836679794173,
+              "t": 0.29,
+              "previousTime": 0.28,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.086571,
+              "degrees60Hz": 25
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.085892,
+          "status": "green",
+          "score": 98.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.08589235320290155,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.064419,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.087928,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.164284,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_rear_right/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "wheel_rear_right/full_sequence",
+      "actor": "wheel_rear_right",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "wheel_mechanic",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.96,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 1.6,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 89.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000063,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 331,
+            "maxDriftMeters": 0.000105,
+            "p95SpeedMetersPerSecond": 0.000407,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 1.183333,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0.000105
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000257,
+          "status": "green",
+          "score": 98.97,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0.000428,
+            "worst": {
+              "t": 1.15,
+              "bone": "RightFoot",
+              "depthMeters": 0.000428,
+              "y": -0.000428
+            }
+          }
+        },
+        "posePops": {
+          "value": 2.164284,
+          "status": "yellow",
+          "score": 56.71,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 31.243926,
+            "maxMarkerStepHeight60Hz": 0.086571,
+            "maxRootStepHeight60Hz": 0.042419,
+            "worst": {
+              "ratio": 2.1642836679794173,
+              "t": 0.75,
+              "previousTime": 0.74,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.086571,
+              "degrees60Hz": 25
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 155.917619,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 4.3828569025983384e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.090595,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 2.164284,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "wheel_rear_right/full_sequence",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "jack_front/service",
+      "actor": "jack_front",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "front_jack_and_release_signal",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 90.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 242,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.631499,
+          "status": "yellow",
+          "score": 67.37,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 24.472482,
+            "maxMarkerStepHeight60Hz": 0.050823,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 1.6314987904756608,
+              "t": 1.606667,
+              "previousTime": 1.59,
+              "bone": "LeftForeArm",
+              "markerStepHeight60Hz": 0.009164,
+              "degrees60Hz": 24.472482
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 116.405772,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.916703,
+          "status": "green",
+          "score": 81.67,
+          "evidence": {
+            "entry": {
+              "ratio": 0.27756600686577937,
+              "t": 0,
+              "idleTime": 0.45,
+              "markers": 17,
+              "rmsPositionHeight": 0.000484,
+              "rmsRotationDegrees": 0.229405,
+              "rmsVelocityHeightPerSecond": 0.208175,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.9167025398045944,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.687527,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.0416,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.631499,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jack_front/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "jack_front/full_sequence",
+      "actor": "jack_front",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "front_jack_and_release_signal",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 92.6,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 370,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.631499,
+          "status": "yellow",
+          "score": 67.37,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 24.472482,
+            "maxMarkerStepHeight60Hz": 0.050823,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 1.6314987904756608,
+              "t": 2.066667,
+              "previousTime": 2.05,
+              "bone": "LeftForeArm",
+              "markerStepHeight60Hz": 0.009164,
+              "degrees60Hz": 24.472482
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 116.405772,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.685471115651494e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.093485,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.631499,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jack_front/full_sequence",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "jack_rear/service",
+      "actor": "jack_rear",
+      "range": {
+        "id": "service",
+        "start": 0.46,
+        "end": 2.3
+      },
+      "samples": 121,
+      "metadata": {
+        "role": "rear_jack",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8399999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 91.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 242,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0,
+              "start": 0,
+              "end": 1.84,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 3146,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.631499,
+          "status": "yellow",
+          "score": 67.37,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 24.472482,
+            "maxMarkerStepHeight60Hz": 0.050823,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 1.6314987904756686,
+              "t": 1.606667,
+              "previousTime": 1.59,
+              "bone": "RightForeArm",
+              "markerStepHeight60Hz": 0.009164,
+              "degrees60Hz": 24.472482
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 116.405772,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.277566,
+          "status": "green",
+          "score": 94.45,
+          "evidence": {
+            "entry": {
+              "ratio": 0.27756600686573946,
+              "t": 0,
+              "idleTime": 0.45,
+              "markers": 17,
+              "rmsPositionHeight": 0.000484,
+              "rmsRotationDegrees": 0.229405,
+              "rmsVelocityHeightPerSecond": 0.208175,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 1.84,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.005721,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.631499,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jack_rear/service",
+      "sport": "racing-pit"
+    },
+    {
+      "id": "jack_rear/full_sequence",
+      "actor": "jack_rear",
+      "range": {
+        "id": "full_sequence",
+        "start": 0,
+        "end": 2.88
+      },
+      "samples": 185,
+      "metadata": {
+        "role": "rear_jack",
+        "profile": "canonical18",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.88,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ballVisible": false,
+        "locomotion": false,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+        "floorProbeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+        "intent": "Stationary pit work, including authored short stance adjustments; explicit support windows preserve swing-foot timing."
+      },
+      "score": 92.6,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "captured actual Three.js world pose; station placement unchanged; horizontal root aligned by original metric",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 370,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0,
+              "start": 0,
+              "end": 2.88,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 4810,
+            "floorY": 0,
+            "probeKind": "eight actual transformed shoe sole corners and eighteen skeletal joint centers",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.631499,
+          "status": "yellow",
+          "score": 67.37,
+          "evidence": {
+            "adjacentPairs": 184,
+            "observations": 3128,
+            "maxDegrees60Hz": 24.472482,
+            "maxMarkerStepHeight60Hz": 0.050823,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 1.6314987904756686,
+              "t": 2.066667,
+              "previousTime": 2.05,
+              "bone": "RightForeArm",
+              "markerStepHeight60Hz": 0.009164,
+              "degrees60Hz": 24.472482
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 185,
+            "affectedFrames": 0,
+            "checks": 3145,
+            "maxLimbFlexionDegrees": 116.405772,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.0577370148524096e-8,
+              "t": 2.88,
+              "idleTime": 2.316667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.008214,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.631499,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jack_rear/full_sequence",
+      "sport": "racing-pit"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "13f387931b2f54e48dfab3d5b02258ef535dfc77",
+  "repositoryInitial": {
+    "command": "npm test",
+    "tests": 4082,
+    "pass": 4017,
+    "fail": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "failure": "tests/workout-royiki.test.mjs browser case: Playwright bundled Chromium executable absent"
+  },
+  "correctedBrowserFile": {
+    "command": "ISLAND_PLAYWRIGHT=<temporary launch wrapper> node --test tests/workout-royiki.test.mjs",
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "executablePath": "/usr/bin/chromium",
+    "wrapper": "import {chromium as original} from '/opt/codex/cua_node/lib/node_modules/playwright/index.mjs';\nexport const chromium = new Proxy(original, {get(target,key) {\n  if (key === 'launch') return (options={}) => target.launch({...options,executablePath:'/usr/bin/chromium',\n    args:[...(options.args ?? []),'--no-sandbox','--enable-unsafe-swiftshader']});\n  const value = Reflect.get(target,key,target);\n  return typeof value === 'function' ? value.bind(target) : value;\n}});\n",
+    "wrapperSha256": "45e9dd325e4b607f6448d1d109572efc7675d26bb904601a254360fb2da4eb86"
+  },
+  "newSequenceTests": {
+    "command": "node --test workout/island/design/racing-pit-sequence-v2/tests/*.mjs",
+    "tests": 19,
+    "pass": 19,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "existingFilesModified": false,
+  "unresolvedFailures": 0,
+  "notes": "Initial full-suite failure was environmental. All five tests in the affected file passed with installed Chromium; no repository tests changed."
+}

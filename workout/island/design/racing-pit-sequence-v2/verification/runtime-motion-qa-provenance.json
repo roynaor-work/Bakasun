@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamFiles": [
+    {
+      "name": "run.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/run.mjs",
+      "bytes": 12713,
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "name": "glb.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/glb.mjs",
+      "bytes": 9363,
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "name": "metrics.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "bytes": 36189,
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "name": "report.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/report.mjs",
+      "bytes": 15342,
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "name": "sheets.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "bytes": 5947,
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "name": "licenses.mjs",
+      "upstreamPath": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "bytes": 3539,
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "upstreamUnmodified": true,
+  "immutableHashesCheckedBeforeAndAfter": true,
+  "runner": {
+    "file": "source/run-runtime-qa.mjs",
+    "sha256": "47bd24cfca99abd153e934a2db4da36449d1a76e61b75ccd9a62ac5a0fa3ae45"
+  },
+  "source": {
+    "file": "verification/runtime-frames.json",
+    "sha256": "1a81193d6f349fa7af073f360790c76462445863a3dae8f1b02eeaa6eda2ecdd",
+    "bytes": 5541443
+  },
+  "browserEvidence": {
+    "file": "verification/browser.json",
+    "sha256": "f8906e8325bfc2559945a0b0a821df9959edd6070f057a3cee2eb503fded291c",
+    "passed": true
+  },
+  "capturedInputs": {
+    "sequence.json": "d7741dc51177c3e369a9983790412dcd4ba94526c375cc10e6e0c5060668808d",
+    "clips/pit-actions.glb": "c1e2311c90527ddab8fab2586efb377ebd06b5be28d1424e5c25791a6d2fd247",
+    "src/pit-sequence.mjs": "420b006f041de5a0062871624b01f0c33d6d879b516ff532be2dcc41c0cb113a",
+    "src/preview.mjs": "38bf664697ab45311beca101b4535fe088a783b8deb609f9ca84c82724eedecd",
+    "preview.html": "47d6e8286350c056c62deb6508519972f7ec20d0ed2dd7d343cc481dce8d4cba",
+    "preview.css": "6c3ea6c08a6a829088ea47c487269c441c696a7e2cd310c871df88e1adc623f9"
+  },
+  "capturedInputHashesCheckedBeforeAndAfter": true,
+  "sequence": {
+    "file": "sequence.json",
+    "sha256": "d7741dc51177c3e369a9983790412dcd4ba94526c375cc10e6e0c5060668808d"
+  },
+  "glbSupportMetadata": {
+    "file": "clips/pit-actions.glb",
+    "sha256": "c1e2311c90527ddab8fab2586efb377ebd06b5be28d1424e5c25791a6d2fd247"
+  },
+  "transformations": "Only frame timestamps are shifted to range-local seconds. Joints, rotations, root, scales, floor probes and actor world placement are unchanged.",
+  "idleReference": "Captured actual pre-service and post-service stances; original analyzeClip receives distinct entry and exit idle samples.",
+  "footSupports": "Authored GLB support windows mapped through exact actor tracks; adjacent planted windows merged across stage boundaries. No support inferred, omitted, or reset at each clip switch.",
+  "limitations": [
+    "This is skeleton and sole-point QA; it does not replace mesh collision, prop contact or visual review.",
+    "Body-sliding gait metric is inapplicable to stationary pit work; foot sliding remains measured from explicit stance-adjustment supports."
+  ],
+  "minimumRequiredExclusive": 88,
+  "minimumObserved": 89.7,
+  "motionPassed": true,
+  "browserPassed": true,
+  "passed": true
+}

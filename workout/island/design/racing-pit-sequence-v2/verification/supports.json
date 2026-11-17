@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "method": "Decode original uncompressed GLB triangle vertices; downward ray through each configured pad support x/z; compare lowest actual car-mesh intersection against pad top. No WASM or geometric decoders.",
+  "inputs": {
+    "sequence": {
+      "file": "sequence.json",
+      "sha256": "d7741dc51177c3e369a9983790412dcd4ba94526c375cc10e6e0c5060668808d"
+    },
+    "car": {
+      "file": "../racing-formula/formula.glb",
+      "bytes": 336864,
+      "sha256": "0fafed905c2d8a1274aad64bd9f569bcd303fc6365cec8086da4d1f1cb95883f"
+    }
+  },
+  "toleranceMeters": 0.001,
+  "padGeometry": {
+    "halfHeightMeters": 0.025,
+    "topProbeLocal": [
+      0,
+      0.025,
+      0
+    ]
+  },
+  "carBounds": {
+    "min": [
+      -1.0269999504089355,
+      0,
+      -2.299999952316284
+    ],
+    "max": [
+      1.0269999504089355,
+      1.1080000400543213,
+      2.299999952316284
+    ],
+    "vertices": 10637
+  },
+  "supports": [
+    {
+      "id": "jack_front",
+      "mesh": "FrontWing",
+      "triangles": 500,
+      "ray": {
+        "x": 0,
+        "z": 2.29,
+        "direction": [
+          0,
+          -1,
+          0
+        ]
+      },
+      "intersectionsY": [
+        0.14936363392378094,
+        0.16568180044324365
+      ],
+      "undersideY": 0.14936363392378094,
+      "restPadY": 0.124363634,
+      "padTop": [
+        0,
+        0.149363634,
+        2.29
+      ],
+      "contractContact": [
+        0,
+        0.149363634,
+        2.29
+      ],
+      "errorMeters": {
+        "padTopY": 7.621905884214186e-11,
+        "contractY": 7.621905884214186e-11,
+        "horizontal": 0,
+        "restPadY": 7.621905884214186e-11
+      },
+      "footprint": null,
+      "passed": true
+    },
+    {
+      "id": "jack_rear",
+      "mesh": "Diffuser",
+      "triangles": 168,
+      "ray": {
+        "x": 0.08,
+        "z": -1.97,
+        "direction": [
+          0,
+          -1,
+          0
+        ]
+      },
+      "intersectionsY": [
+        0.1469999998807907,
+        0.2070000022649765
+      ],
+      "undersideY": 0.1469999998807907,
+      "restPadY": 0.122,
+      "padTop": [
+        0.08,
+        0.147,
+        -1.97
+      ],
+      "contractContact": [
+        0.08,
+        0.147,
+        -1.97
+      ],
+      "errorMeters": {
+        "padTopY": 1.1920928133513087e-10,
+        "contractY": 1.1920928133513087e-10,
+        "horizontal": 0,
+        "restPadY": 1.1920928133513087e-10
+      },
+      "footprint": {
+        "radiusMeters": 0.05999999865889549,
+        "probes": 317,
+        "contactRays": 279,
+        "coverage": 0.8801261829652997,
+        "xRange": [
+          0.02000000134110451,
+          0.1399999986588955
+        ],
+        "zRange": [
+          -2.0299999986588952,
+          -1.9100000013411045
+        ],
+        "undersideRangeY": [
+          0.1469999998807907,
+          0.1494852944089069
+        ],
+        "missingRays": 38,
+        "edgeOverhang": true,
+        "centralFinClear": true,
+        "passed": true
+      },
+      "passed": true
+    }
+  ],
+  "clearances": {
+    "carHalfWidthMeters": 1.0269999504089355,
+    "operators": [
+      {
+        "id": "jack_front",
+        "position": [
+          1.35,
+          0,
+          2.29
+        ],
+        "assumedCoreRadiusMeters": 0.2,
+        "conservativeLateralMarginMeters": 0.12300004959106459,
+        "passed": true
+      },
+      {
+        "id": "jack_rear",
+        "position": [
+          -1.27,
+          0,
+          -1.97
+        ],
+        "assumedCoreRadiusMeters": 0.2,
+        "conservativeLateralMarginMeters": 0.043000049591064515,
+        "passed": true
+      }
+    ],
+    "baseClearances": [
+      {
+        "id": "jack_front",
+        "time": 2.1,
+        "position": [
+          1.48,
+          0,
+          2.29
+        ],
+        "baseBounds": {
+          "min": [
+            1.1499999868869781,
+            0,
+            2.0000000083446503
+          ],
+          "max": [
+            1.8100000131130218,
+            0.12999999523162842,
+            2.5799999916553498
+          ],
+          "vertices": 468
+        },
+        "conservativeLateralMarginMeters": 0.12300003647804258,
+        "passed": true
+      },
+      {
+        "id": "jack_rear",
+        "time": 2.1,
+        "position": [
+          -1.4,
+          0,
+          -1.97
+        ],
+        "baseBounds": {
+          "min": [
+            -1.7300000131130218,
+            0,
+            -2.25999999165535
+          ],
+          "max": [
+            -1.069999986886978,
+            0.12999999523162842,
+            -1.6800000083446502
+          ],
+          "vertices": 468
+        },
+        "conservativeLateralMarginMeters": 0.043000036478042514,
+        "passed": true
+      }
+    ]
+  },
+  "limitations": [
+    "Support verification checks the center of each pad top plus 317 rays across the rear pad footprint; it is not a continuous all-surface collision simulation.",
+    "Lateral corridor checks use full static car geometry and an explicit 0.20m operator body-core radius; hands/tool contact and animation are verified separately."
+  ]
+}
