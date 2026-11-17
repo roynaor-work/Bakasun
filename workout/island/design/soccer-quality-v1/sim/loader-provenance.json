@@ -1,0 +1,12 @@
+{
+  "source": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/draco_decoder.js",
+  "upstreamReadme": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/README.md",
+  "license": "Apache-2.0",
+  "licenseSource": "https://raw.githubusercontent.com/google/draco/1.5.5/LICENSE",
+  "bytes": 512465,
+  "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f",
+  "purpose": "Pure JavaScript Draco asset decoding whenever any soccer quality component is enabled; existing WASM decoder path stays unchanged with all quality flags off.",
+  "workerLicense": "MIT, inherited three.js static worker notice retained",
+  "requestTarget": {"afterWasmRequests":0,"afterWasmInstantiations":0},
+  "tradeoff": "Adds a 512465-byte JavaScript asset; cold parsing and decoding can cost more CPU than the existing WASM decoder. The native browser run measures loading and rendering separately."
+}

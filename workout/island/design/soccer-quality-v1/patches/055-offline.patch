@@ -1,0 +1,56 @@
+diff --git a/workout/island/ui/offline.mjs b/workout/island/ui/offline.mjs
+--- a/workout/island/ui/offline.mjs
++++ b/workout/island/ui/offline.mjs
+@@ -5,6 +5,7 @@
+ // it. Save data is never touched: only Cache API entries named island-assets-<version>
+ // are created or removed here, never localStorage or IndexedDB game data.
+ import {DATA_VERSION} from '../release.mjs';
++import {soccerQualityFlags} from '../minigames/soccer-quality.mjs';
+ 
+ export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',tennis:'טניס',racing:'מרוצים',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
+ export const STATUS_KEY='island.offline.status';
+@@ -20,7 +21,12 @@
+   if(!response.ok)throw Error('manifest '+response.status);
+   const manifest=await response.json();
+   if(!manifest?.games||typeof manifest.games!=='object')throw Error('manifest shape');
+-  return manifest;
++  // Only this experiment's soccer download changes decoder. The other games
++  // keep their authored decoder assets and all quality-off soccer URLs stay v24.
++  const javascript='vendor/draco/draco_decoder.js',quality=soccerQualityFlags().enabled;
++  const soccer=(manifest.games.soccer||[]).filter(path=>quality?!/^(?:vendor\/draco\/draco_decoder\.wasm|vendor\/draco\/draco_wasm_wrapper\.js)$/.test(path):path!==javascript);
++  if(quality&&!soccer.includes(javascript))soccer.push(javascript);
++  return {...manifest,games:{...manifest.games,soccer}};
+ }
+ /** Unique paths for the named games (all games when none are named). The app shell
+  * (code, styles, data) and the core icons are added with {shell:true}: they are what
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -516,6 +516,7 @@
+   "minigames/soccer-design-screens.mjs",
+   "minigames/soccer-design-tactics.mjs",
+   "minigames/soccer-design-vfx.mjs",
++  "minigames/soccer-draco-js-worker.mjs",
+   "minigames/soccer-draco-worker.mjs",
+   "minigames/soccer-drill.mjs",
+   "minigames/soccer-feel.mjs",
+@@ -531,6 +532,9 @@
+   "minigames/soccer-physics.mjs",
+   "minigames/soccer-poses.mjs",
+   "minigames/soccer-presentation.mjs",
++  "minigames/soccer-quality-keeper.mjs",
++  "minigames/soccer-quality-team.mjs",
++  "minigames/soccer-quality.mjs",
+   "minigames/soccer-r241.mjs",
+   "minigames/soccer-referee.mjs",
+   "minigames/soccer-restart-motion.mjs",
+@@ -827,7 +831,8 @@
+    "assets/soccer-v241/referee/referee.glb",
+    "design/athlete-lod-v1/models/soccer-lod1.glb",
+    "design/athlete-lod-v1/models/soccer-lod2.glb",
+-   "design/athlete-lod-v1/textures/number-23-mask.png"
++   "design/athlete-lod-v1/textures/number-23-mask.png",
++   "vendor/draco/draco_decoder.js"
+   ],
+   "hoops": [
+    "assets/athlete/athlete.glb",

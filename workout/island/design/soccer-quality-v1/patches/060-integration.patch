@@ -1,0 +1,144 @@
+diff --git a/workout/island/minigames/soccer.mjs b/workout/island/minigames/soccer.mjs
+index f20a5f41..4cc0ec85 100644
+--- a/workout/island/minigames/soccer.mjs
++++ b/workout/island/minigames/soccer.mjs
+@@ -21,6 +21,8 @@ import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aeria
+ import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-15';
+ // v24.1 (soccer-r241.mjs): fouls on standing tackles and the carrier's fall or stumble, volley / header / scissor on a high ball, the shorter slide get-up.
+ import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-15';
++import {qualityTeamConfig,qualityTeamTarget} from './soccer-quality-team.mjs';
++import {updateQualityKeeper,qualityKeeperCanContact,qualityKeeperSaveChance} from './soccer-quality-keeper.mjs';
+ // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
+ const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+ const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
+@@ -51,7 +53,7 @@ export function soccerPassAim(state){return state.passAim?.manual?state.passAim:
+ export function canHead(player,ball,config){return canContactBall(player,ball,config,{kind:'head'});}
+ export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false,aiVersion,rulesVersion,feelVersion,switchVersion,airVersion,v241:v241Option}={}) {
+   if (!config?.stages?.length || !Number.isFinite(config.match?.fixedStep) || config.match.fixedStep<=0) throw Error('Invalid soccer config');
+-  config=expandSoccerConfig(config);
++  config=expandSoccerConfig(qualityTeamConfig(config));
+   seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);config=campaignConfig(config,stage);
+   const aiV2=resolveSoccerAI(aiVersion)==='v2';
+   // Rules v1 (M3): fouls on slide tackles, free kicks, penalties, through balls, rival slides. `?soccerRules=0` = the old match.
+@@ -109,6 +111,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+       else if(config.squad?.kickoff?.[p.tacticalRole]){const spot=config.squad.kickoff[p.tacticalRole];p.x=d*hx*spot[0];p.z=hz*spot[1];}
+       if(p.role==='keeper')p.x=-d*(hx-aiConfig.keeperInset);
+       p.restartMotion=p.distribution=null;
++      if(config.quality?.keeper)p.qualityKeeper=null;
+       p.hands=false;p.autoHeadTime=0;p.diveTime=p.diveCooldown=p.throwTime=p.catchTime=0;p.slideTime=p.recover=p.headerTime=p.kickTime=p.stealTime=p.turnLean=0;p.slideAttempted=p.slideWon=false;
+       if('fouledTime' in p)p.fouledTime=p.stumbleTime=0;if('aerialKind' in p)p.aerialKind=null;
+     }
+@@ -169,7 +172,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+ 
+       if(manual||forceLoft){const context={...s,controlled:p.id,aim,laneAware:!helping()};destination=forceLoft?loftDestination(context,config,power,{aim,snap:aiV2}):passDestination(context,config,power,{snap:aiV2});target=players[destination.target];tx=destination.x;tz=destination.z;
+         // Rules v1 through ball: an assisted ground pass to a team-mate already running at goal goes ahead of him.
+-        const through=rulesV1&&!forceLoft&&destination.kind==='ground'&&target&&!s.passAim?.manual?throughBallPoint(s.ball,target,players,config,d):null;
++        const through=rulesV1&&!destination.through&&!forceLoft&&destination.kind==='ground'&&target&&!s.passAim?.manual?throughBallPoint(s.ball,target,players,config,d):null;
+         if(through){tx=through.x;tz=through.z;destination={...destination,x:tx,z:tz,distance:Math.hypot(tx-s.ball.x,tz-s.ball.z),through:true};}
+       }
+       else{
+@@ -211,7 +214,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+     // goalkeeping.throwMin/MaxSpeed (measured 29/10/2026 at 22 m/s for a 10 m pass).
+     const gk=config.goalkeeping,throwSpeed=handRelease&&pass&&Number.isFinite(gk.throwMaxSpeed)?clamp(Math.hypot(tx-s.ball.x,tz-s.ball.z)*ph.friction/(1-Math.exp(-ph.friction*(gk.throwTravelSeconds||config.passing.travelSeconds))),gk.throwMinSpeed||0,gk.throwMaxSpeed):null;
+     // A through ball is weighted to the runner (soccer-rules.mjs), not to a fixed travel time or the kicker's rank.
+-    const speed=destination?.through?throughBallSpeed(Math.hypot(tx-s.ball.x,tz-s.ball.z),target,config):throwSpeed??(pass?passSpeed:ph.shotSpeed+power*ph.shotBoost)*(1+(p.kick-1)*config.players.kickPerRank)*(pass?1:skill.power)*(pass?1:1+(p.card.shot-config.card.initial)/config.card.max*config.roster.attributeShotWeight);
++    const speed=destination?.through?throughBallSpeed(Math.hypot(tx-s.ball.x,tz-s.ball.z),target,config):throwSpeed??(pass?passSpeed:ph.shotSpeed+power*ph.shotBoost)*(config.quality?.passing&&humanGround?1:1+(p.kick-1)*config.players.kickPerRank)*(pass?1:skill.power)*(pass?1:1+(p.card.shot-config.card.initial)/config.card.max*config.roster.attributeShotWeight);
+     Object.assign(s.ball,{flight:null,owner:null,vx:dx/len*speed,vz:dz/len*speed,vy:pass?aiConfig.passLift:aiConfig.shotLift+power*aiConfig.shotLiftPower,curve:pass||manual&&!assisted?0:(rng()-.5)*power*aiConfig.curveStrength*(manual?skill.spread:1),lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace});
+     if(!pass&&manual)s.ball.vy=shotLift(power,action?.height,config);
+     if(handRelease){p.throwTime=config.restarts.throwSeconds;if(pass)s.ball.vy=config.restarts.throwLift;}
+@@ -376,12 +379,12 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+         p.think=p.team===0?aiConfig.teamThinkSeconds:Math.min(opponent.thinkSeconds,attack.thinkSeconds);
+       }
+     } else if(p.role==='keeper') {
+-      const target=keeperTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
++      const target=updateQualityKeeper(p,s,config,dt)||keeperTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
+     } else {
+       // While our keeper holds the ball the team takes goal-kick outlets (short on
+       // either side, one runner beyond the press) instead of its open-play shape.
+       const outlet=owner&&owner.team===p.team&&owner.role==='keeper'&&owner.hands?distributionOutlet(owner,p):null;
+-      const target=outlet||fieldTarget(p,s,config);tx=target.x;tz=target.z;p.duty=target.duty;
++      const target=outlet||qualityTeamTarget(p,s,config,fieldTarget(p,s,config));tx=target.x;tz=target.z;p.duty=target.duty;
+       p.request=possession&&distance(p,owner)>aiConfig.requestDistance&&distance(nearest(1-p.team,p),p)>aiConfig.requestClearance;
+       // Rules v1: a rival defender chasing the child's carrier may slide (ai.slide). The roll hashes the
+       // tick, player and seed so the shared RNG sequence is untouched; next tick the slide branch moves him.
+@@ -409,7 +412,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+     p.sprintRest=Math.max(0,p.sprintRest-dt);p.sprintTime=Math.max(0,p.sprintTime-dt);
+     if(owner===p&&p.team===1&&stage>=aiConfig.sprintFromStage&&p.role!=='keeper'&&p.sprintRest<=0&&distance(p,{x:tx,z:tz})>=aiConfig.sprintDistance){p.sprintTime=aiConfig.sprintSeconds;p.sprintRest=aiConfig.sprintRestSeconds;}
+     p.sprinting=p.sprintTime>0||catchUp>1+aiConfig.catchUpBoost*.4;
+-    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?aiConfig.keeperSpeedScale:p.sprintTime>0?Math.max(aiConfig.sprintMultiplier,catchUp):catchUp);
++    move(p,tx-p.x,tz-p.z,dt,p.role==='keeper'?(config.quality?.keeper&&p.qualityKeeper?.diving?config.goalkeeping.diveSpeed/config.players.speed:aiConfig.keeperSpeedScale):p.sprintTime>0?Math.max(aiConfig.sprintMultiplier,catchUp):catchUp);
+   }
+   function mode(){return role==='keeper'&&s.ball.owner!==s.controlled||s.ball.owner!==null&&players[s.ball.owner].team===1?'defense':'attack';}
+   /** The easy-level beginner helper drives the selected player after idleHelpSeconds; its
+@@ -813,13 +816,14 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+         owner.cooldown=rules.tackleCooldown;
+       } else {
+         const keeper=handsAllowed && b.lastTeam!==p.team && Math.hypot(b.vx,b.vz)>aiConfig.keeperFastBall;
++        if(keeper&&!qualityKeeperCanContact(p,s,config))continue;
+         const radius=keeper?aiConfig.keeperBaseReach+(p.team===0?aiConfig.teamKeeper:opponent.keeper)*aiConfig.keeperReachScale:ph.pickupRadius;
+         const controlledFoot=p.id===s.controlled&&!keeper&&canContactBall(p,b,config);
+         // v24.1: the child asked for a volley or a scissor kick: the ball is met with that, not trapped on the way
+         if(airChoice&&s.headerArm?.kind&&s.headerArm.kind!=='header'&&s.headerArm.player===p.id&&b.y>ph.ballRadius+.25)continue;
+         if(dist>radius&&!controlledFoot || (b.grace>0 && p.id===b.lastPlayer))continue;
+-        if(keeper){p.diveTime=config.goalkeeping.diveSeconds;p.diveZ=Math.sign(b.z-p.z)||1;}
+-        if(keeper && rng()>Math.min(.99,keeperSaveChance(p.card,players[b.shot?.shooter??b.lastPlayer]?.card??cards[0],b.shot||{speed:Math.hypot(b.vx,b.vz),aim:Math.abs(b.z)/(config.pitch.goalWidth/2),distance:0},config)*(p.team===1?config.difficulties[difficulty].keeper:1)+(p.id===s.controlled&&role==='keeper'&&p.diveCooldown>0?.12:0))) {p.cooldown=aiConfig.keeperAttemptCooldown;continue;}
++        if(keeper&&!config.quality?.keeper){p.diveTime=config.goalkeeping.diveSeconds;p.diveZ=Math.sign(b.z-p.z)||1;}
++        if(keeper && rng()>Math.min(.99,qualityKeeperSaveChance(keeperSaveChance(p.card,players[b.shot?.shooter??b.lastPlayer]?.card??cards[0],b.shot||{speed:Math.hypot(b.vx,b.vz),aim:Math.abs(b.z)/(config.pitch.goalWidth/2),distance:0},config),p,s,config)*(p.team===1?config.difficulties[difficulty].keeper:1)+(p.id===s.controlled&&role==='keeper'&&p.diveCooldown>0?.12:0))) {p.cooldown=aiConfig.keeperAttemptCooldown;continue;}
+       }
+       if(!owner&&s.passTarget&&b.lastTeam!==p.team&&p.role!=='keeper'){const sender=players[b.lastPlayer],chance=clamp(config.roster.interceptionBase+(p.card.defense-sender.card.pass)*config.roster.duelWeight,0,1);if(rng()>chance){p.cooldown=config.roster.interceptionCooldown;continue;}}
+       takeBall(p);p.hold=0;event('possession',{team:p.team,player:p.id});break;
+@@ -876,6 +880,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+     s.aim=length>aiConfig.idleThreshold?{x:mx/length,z:mz/length}:{x:p.fx,z:p.fz};
+     s.moving=length>aiConfig.idleThreshold;s.headerAim=s.moving?s.aim:null;
+     s.kickAim=input.kickAim;s.passAim=input.passAim;
++    if(config.quality?.passing)s.throughPass=!!(input.throughPass||input.sprintHeld);
+     s.actionAim=input.kickAim?.manual?input.kickAim:input.passAim?.manual?input.passAim:null;
+     s.mode=mode();
+     // v24.1: what the kick and fourth buttons offer for a high ball on its way to the controlled player (the session draws them from this).
+@@ -1009,7 +1014,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
+     },
+     tacticalMetrics:()=>config.tactics.designController?.diagnostics(s)||null,
+     /** Pure tactical target for one player, for tools and tests (same controller the AI uses). */
+-    tacticalTarget:p=>p.role==='keeper'?keeperTarget(p,s,config):fieldTarget(p,s,config),
++    tacticalTarget:p=>p.role==='keeper'?keeperTarget(p,s,config):qualityTeamTarget(p,s,config,fieldTarget(p,s,config)),
+     clearInput,
+     snapshot:()=>JSON.parse(JSON.stringify(s)),
+     get result(){return s.result;}
+diff --git a/workout/island/minigames/soccer-session.mjs b/workout/island/minigames/soccer-session.mjs
+index 09692a8c..7f8a2cee 100644
+--- a/workout/island/minigames/soccer-session.mjs
++++ b/workout/island/minigames/soccer-session.mjs
+@@ -64,9 +64,11 @@ export function soccerActionLabels(state,config){
+   return {icon,shot:diving?'soccer.keeperDive':icon==='header'?'soccer.header':state.mode==='defense'?'soccer.slide':'minigame.soccer.shoot',pass:state.mode==='defense'?'soccer.steal':'soccer.pass',switchable:state.role!=='keeper'};
+ }
+ 
++import {applySoccerQuality} from './soccer-quality.mjs';
++import {qualityTeamConfig} from './soccer-quality-team.mjs';
+ /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
+ export function startSoccer(ctx) {
+-  const {balance:sourceBalance,canvas,controls,status,t}=ctx,fullOn=!ctx.drill&&soccerFullEnabled(),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
++  const {balance:rawBalance,canvas,controls,status,t}=ctx,sourceBalance=ctx.drill?rawBalance:qualityTeamConfig(applySoccerQuality(rawBalance)),fullOn=!ctx.drill&&(sourceBalance.quality?.eleven||soccerFullEnabled()),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
+   const balance=applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey))));
+   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
+   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
+diff --git a/workout/island/minigames/soccer-full.mjs b/workout/island/minigames/soccer-full.mjs
+index 9e657a6e..fd81aae1 100644
+--- a/workout/island/minigames/soccer-full.mjs
++++ b/workout/island/minigames/soccer-full.mjs
+@@ -6,6 +6,7 @@
+  * `?soccerFull=0` (or an explicit `?soccerTeams=`) gives back the v24 small match exactly: nothing below is read then.
+  * Pure: no three.js and no DOM; the URL is read only when a browser location exists. */
+ import {applySoccerTeams} from './soccer-teams.mjs';
++import {soccerQualityFlags} from './soccer-quality.mjs';
+ import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-15';
+ 
+ const read=(name,search=globalThis.location?.search)=>{try{return typeof search==='string'?new URLSearchParams(search).get(name):null;}catch{return null;}};
+@@ -21,6 +22,8 @@ export function soccerFullEnabled(option,search){
+   const chosen=pick(option);if(chosen!==null)return chosen;
+   const query=typeof search==='string'?search:globalThis.location?.search;
+   if(typeof query!=='string')return false;
++  // The quality 11-a-side switch must select the same duration in the session and result validator.
++  if(soccerQualityFlags(query).eleven)return true;
+   const url=pick(read('soccerFull',query));if(url!==null)return url;
+   return !read('soccerTeams',query);
+ }

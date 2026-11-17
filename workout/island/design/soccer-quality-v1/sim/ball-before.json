@@ -1,0 +1,793 @@
+{
+  "sourceRoot": "/workspace/Bakasun",
+  "enabled": false,
+  "loftIntentPercent": 46,
+  "landingRollPercent": 26.67,
+  "groundReceiverPercent": 64.81,
+  "throughIntentPercent": 0,
+  "throughOverallPercent": 0,
+  "throughUnsafeRejectPercent": 100,
+  "loftLandingErrorMaxMetres": 1.7763568394002505e-14,
+  "counts": {
+    "loft": 100,
+    "roll": 90,
+    "ground": 54,
+    "through": 18,
+    "throughEligible": 10,
+    "throughUnsafe": 8
+  },
+  "roll": {
+    "min": 0.541421928312723,
+    "median": 5.5345928911805276,
+    "max": 10.005284400023632,
+    "outOfPitchSamples": 0
+  },
+  "rows": {
+    "loft": [
+      {
+        "range": 10,
+        "error": -24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": -24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": -24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": -24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": -24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": -12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": -12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": -12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": -12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": -12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 0,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 0,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 0,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": 0,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 0,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 10,
+        "error": 24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": 24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": 24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": 24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 10,
+        "error": 24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": -12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": -12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": -12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": -12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": -12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 0,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 0,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 0,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": 0,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 0,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 14,
+        "error": 24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": 24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": 24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": 24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 14,
+        "error": 24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": -12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": -12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": -12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": -12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": -12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 0,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 0,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 0,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": 0,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 0,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 18,
+        "error": 24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": 24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": 24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": 24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 18,
+        "error": 24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -24,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": -12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": -12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": -12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": -12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": -12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 0,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 0,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 0,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 0,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 0,
+        "chargeError": 0.3,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 12,
+        "chargeError": -0.3,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 12,
+        "chargeError": -0.15,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 12,
+        "chargeError": 0,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 12,
+        "chargeError": 0.15,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 12,
+        "chargeError": 0.3,
+        "target": 2
+      },
+      {
+        "range": 21,
+        "error": 24,
+        "chargeError": -0.3,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 24,
+        "chargeError": -0.15,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 24,
+        "chargeError": 0,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 24,
+        "chargeError": 0.15,
+        "target": 1
+      },
+      {
+        "range": 21,
+        "error": 24,
+        "chargeError": 0.3,
+        "target": 1
+      }
+    ],
+    "through": [
+      {
+        "range": 8,
+        "bearing": 15,
+        "attackDir": -1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 8,
+        "bearing": 15,
+        "attackDir": 1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 8,
+        "bearing": 22,
+        "attackDir": -1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 8,
+        "bearing": 22,
+        "attackDir": 1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 8,
+        "bearing": 28,
+        "attackDir": -1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 8,
+        "bearing": 28,
+        "attackDir": 1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 15,
+        "attackDir": -1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 15,
+        "attackDir": 1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 22,
+        "attackDir": -1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 22,
+        "attackDir": 1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 28,
+        "attackDir": -1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 12,
+        "bearing": 28,
+        "attackDir": 1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 15,
+        "attackDir": -1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 15,
+        "attackDir": 1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 22,
+        "attackDir": -1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 22,
+        "attackDir": 1,
+        "eligible": false,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 28,
+        "attackDir": -1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      },
+      {
+        "range": 16,
+        "bearing": 28,
+        "attackDir": 1,
+        "eligible": true,
+        "target": 1,
+        "through": false,
+        "lead": 0
+      }
+    ]
+  }
+}

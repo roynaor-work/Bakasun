@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "reviewedRevision": "b31011b65144f9c6cc2eefddd0150a6f92707e4b",
+  "remoteRef": "refs/heads/codex/soccer-keeper-motion-v3",
+  "source": "https://github.com/roynaor-work/Bakasun/tree/b31011b65144f9c6cc2eefddd0150a6f92707e4b/workout/island/design/soccer-keeper-motion-v3",
+  "availabilityAtBaseline": "Separate branch; absent from origin/main 43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "nativeCatalog": {
+    "schemaVersion": 1,
+    "fps": 30,
+    "units": "metres",
+    "forward": "+Z",
+    "anatomicalLeft": "+X",
+    "rootMotion": false
+  },
+  "cues": {
+    "ready": "keeper_ready",
+    "shuffle": "keeper_shuffle",
+    "low": "keeper_dive_low",
+    "high": "keeper_dive_high",
+    "catch": "keeper_catch_two_hands"
+  },
+  "nativeDive": {
+    "durationSeconds": 5.2,
+    "takeoffSeconds": 0.65,
+    "saveSeconds": 1.1,
+    "bodyLandLowSeconds": 1.7,
+    "bodyLandHighSeconds": 2,
+    "recoverSeconds": 3.1
+  },
+  "runtimeExportsReviewed": ["sampleMotion", "makeBridge", "makeClipBridge", "interruptBridge"],
+  "integration": {
+    "cueFunction": "keeperMotionV3Cue(player,state,config)",
+    "physicsOwns": ["actor translation", "reaction clock", "ball contact", "save probability"],
+    "rendererOwns": ["canonical rig retargeting", "clip phase and playback rate", "left/right mirroring", "C1 bridge from displayed pose and velocity"],
+    "requiredFollowup": "Apply/review the separate v3 asset package and explicitly retime/bridge its 5.2-second native dive. The current .65-second gameplay dive timer is not the native animation duration.",
+    "nativeV3RenderingClaimed": false
+  }
+}

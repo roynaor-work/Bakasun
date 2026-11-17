@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "declaredBeforeTuning": true,
+  "baselineRevision": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "metrics": {
+    "loftIntentPercent": {"target": 90, "direction": "at-least", "description": "Intended receiver selected with 12 degree intent margin, +/-24 degree stick error and +/-0.30 charge error; existing snap=true baseline"},
+    "landingRollPercent": {"target": 95, "direction": "at-least", "description": "Interior lofts roll 0.5 to 3 metres during six seconds after first actual ground contact, with no pitch crossing"},
+    "groundReceiverPercent": {"target": 95, "direction": "at-least", "description": "An isolated eligible receiver 4 to 21 metres away is selected with up to +/-42 degree stick error"},
+    "throughIntentPercent": {"target": 90, "direction": "at-least", "description": "Explicit through input chooses a running receiver rather than the stationary short outlet; safe lane and predicted roll remain inside pitch"},
+    "loftLandingErrorMaxMetres": {"target": 0.00001, "direction": "at-most", "description": "Real Euler integrator lands at the shown landing point; no deflections or interceptions in this physical calibration"}
+  }
+}

@@ -1,0 +1,18 @@
+diff --git a/workout/island/minigames/soccer-quality.mjs b/workout/island/minigames/soccer-quality.mjs
+new file mode 100644
+--- /dev/null
++++ b/workout/island/minigames/soccer-quality.mjs
+@@ -0,0 +1,13 @@
++/** Opt-in, URL-only quality experiment. Never writes storage or shared config. */
++const components=Object.freeze({loft:'Loft',passing:'Pass',keeper:'Keeper',team:'Team',difficulty:'Difficulty',eleven:'11'});
++export function soccerQualityFlags(search=globalThis.location?.search||''){
++  const query=new URLSearchParams(search),bundle=query.get('soccerQuality')==='v1',flags={};
++  for(const [name,suffix] of Object.entries(components)){
++    const value=query.get('soccerQuality'+suffix);
++    flags[name]=value==='1'||value!=='0'&&bundle;
++  }
++  return Object.freeze({version:'v1',enabled:Object.values(flags).some(Boolean),...flags});
++}
++export function applySoccerQuality(config,flags=soccerQualityFlags()){
++  return flags.enabled?{...config,quality:flags}:config;
++}

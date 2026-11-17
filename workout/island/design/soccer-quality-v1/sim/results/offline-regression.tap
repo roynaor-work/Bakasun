@@ -1,0 +1,19 @@
+✔ offline: every league module is in the shell; every theme file exists and is in the league group (the pack) or the ski group (shipped fallbacks), both within budget (2891.360125ms)
+✔ offline list: the Codex files are cached for soccer and basketball, and the shell list is up to date (3547.903158ms)
+✔ offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game (102.346513ms)
+offline MB {"soccer":24.5,"hoops":26.3,"alpine":8,"alpineLeague":0.7,"tennis":4.7,"racing":7.2,"naval":2,"fire":6.3,"alien":0.4,"city":4.5,"catch":5.1} assets 85.1 with app code 97.4
+✔ offline manifest: sizes per game and for the island (reported in the release notes) (118.99714ms)
+✔ offline manifest: the basketball motion clips and the shell list are complete and up to date (438.093612ms)
+✔ offline worker: classic script with the same managed rule as the page, version scoped, no code from text (1.128551ms)
+✔ offline worker: old caches are dropped on activate, only the current version stays (53.131364ms)
+✔ offline worker: cached assets come from the device, other requests and other origins are left alone (14.980651ms)
+✔ offline worker: a stalled asset ends in a 504 after a retry, a network error stays an error, and the app shell opens offline (65.362341ms)
+✔ save data safety: the offline code never clears or deletes game saves (3.694967ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4978.305451

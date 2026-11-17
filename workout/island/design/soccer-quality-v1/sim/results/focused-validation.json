@@ -1,0 +1,27 @@
+{
+  "source": "/tmp/sqv1-final",
+  "baseline": "/workspace/Bakasun",
+  "recordedAt": "2026-11-17T18:23:42.716Z",
+  "artifact": {
+    "command": "SOCCER_QUALITY_SOURCE=/tmp/sqv1-final SOCCER_QUALITY_BASE=/workspace/Bakasun node --test workout/island/design/soccer-quality-v1/tests/*.test.mjs",
+    "log": "focused.tap",
+    "tests": 38,
+    "pass": 38,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 13484.853703
+  },
+  "offline": {
+    "command": "node --test --test-name-pattern offline tests/island-offline.test.mjs tests/island-alpine-league-v23.test.mjs tests/island-athlete-body-v22.test.mjs",
+    "log": "offline-regression.tap",
+    "tests": 10,
+    "pass": 10,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 4978.305451
+  }
+}

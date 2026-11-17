@@ -1,0 +1,166 @@
+{
+  "baseline": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/soccer-quality-v1",
+  "node": "v24.19.0",
+  "patches": [
+    "010-quality-flags.patch",
+    "020-ball-pass.patch",
+    "030-keeper.patch",
+    "040-team-difficulty.patch",
+    "050-js-loader.patch",
+    "055-offline.patch",
+    "060-integration.patch"
+  ],
+  "delivery": "Only new files in this folder; game patches are not applied to this branch. All seven patches checked/applied to a separate fresh clean copy.",
+  "sourceProof": "sim/applied-source.json",
+  "tests": {
+    "focused": {
+      "tests": 38,
+      "pass": 38,
+      "fail": 0
+    },
+    "offlineRecheck": {
+      "tests": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    "workoutBrowserRecheck": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "originalFullSuite": {
+      "tests": 4326,
+      "pass": 4259,
+      "fail": 3,
+      "skipped": 64,
+      "originalRunPassed": false,
+      "unresolvedAfterRechecks": 0,
+      "details": "sim/results/full-suite.json"
+    }
+  },
+  "bot": {
+    "combinedMatches": 24,
+    "combinedTimedOut": 0,
+    "teamMatches": 8,
+    "teamTimedOut": 0,
+    "passTrialsPerCondition": 480
+  },
+  "functionalBrowser": {
+    "baseline": [
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "passed": true,
+        "players": 22,
+        "errors": 0,
+        "cspViolations": 0,
+        "wasmRequests": 4
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "passed": true,
+        "players": 22,
+        "errors": 0,
+        "cspViolations": 0,
+        "wasmRequests": 4
+      }
+    ],
+    "after": [
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "passed": true,
+        "players": 22,
+        "errors": 0,
+        "cspViolations": 0,
+        "wasmRequests": 0
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "passed": true,
+        "players": 22,
+        "errors": 0,
+        "cspViolations": 0,
+        "wasmRequests": 0
+      }
+    ]
+  },
+  "performanceBrowser": {
+    "baseline": [
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rafP95Ms": 133.29999999999563,
+        "rafMeanMs": 91.10666666666665,
+        "renderCallP95Ms": 23.800000000279397,
+        "readyWallMs": 21364,
+        "targetMet": false
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rafP95Ms": 283.40000000000146,
+        "rafMeanMs": 149.99444444444444,
+        "renderCallP95Ms": 16.199999999720603,
+        "readyWallMs": 15441,
+        "targetMet": false
+      }
+    ],
+    "after": [
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rafP95Ms": 183.29999999999563,
+        "rafMeanMs": 104.62555555555551,
+        "renderCallP95Ms": 15.800000000279397,
+        "readyWallMs": 24529,
+        "targetMet": false
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "rafP95Ms": 450,
+        "rafMeanMs": 197.21555555555557,
+        "renderCallP95Ms": 57.5,
+        "readyWallMs": 17513,
+        "targetMet": false
+      }
+    ]
+  },
+  "openTargets": {
+    "keeperSaveGain": {
+      "targetPercentagePoints": 10,
+      "holdoutActualPercentagePoints": 2.0833333333333313,
+      "met": false
+    },
+    "frameP95": {
+      "targetMs": 33.34,
+      "met": false,
+      "observation": "RAF p95 regressed in software GPU natural matches; post-change landscape includes a goal celebration, so workloads differ."
+    }
+  },
+  "keeperV3": {
+    "rendered": false,
+    "contract": "sim/keeper-motion-v3-contract.json",
+    "revision": "b31011b65144f9c6cc2eefddd0150a6f92707e4b"
+  }
+}

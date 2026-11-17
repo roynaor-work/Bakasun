@@ -1,0 +1,20 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+import {measureKeeperScenarios,KEEPER_TARGETS} from './keeper-scenarios.mjs';
+const repository=new URL('../../../../../',import.meta.url);
+const source=process.env.SOCCER_QUALITY_SOURCE;
+if(!source)throw Error('Set SOCCER_QUALITY_SOURCE to a temporary copy with the patches applied.');
+const afterRoot=pathToFileURL(resolve(source)+'/'),beforeRoot=process.env.SOCCER_QUALITY_BASE?pathToFileURL(resolve(process.env.SOCCER_QUALITY_BASE)+'/'):repository;
+const load=async root=>({createSoccer:(await import(new URL('workout/island/minigames/soccer.mjs',root))).createSoccer,config:(await import(new URL('workout/island/minigames/soccer-full.mjs',root))).applySoccerFull(JSON.parse(await readFile(new URL('workout/island/data/config.json',root),'utf8')).minigames.soccer,{v241:false})});
+const before=await load(beforeRoot),after=await load(afterRoot);
+const primarySeeds=[7,19,41,67,101,143,211,307],holdoutSeeds=Array.from({length:64},(_,i)=>1001+i);
+const pair=seeds=>{
+ const baseline=measureKeeperScenarios(before.createSoccer,before.config,false,{seeds}),patched=measureKeeperScenarios(after.createSoccer,after.config,true,{seeds});
+ const gain=(patched.reachableSaveRate-baseline.reachableSaveRate)*100;
+ return {before:baseline,after:patched,saveRateGainPercentagePoints:gain,checks:{saveGainStretch:gain>=KEEPER_TARGETS.saveRateGainPercentagePoints,correctSide:patched.correctSideRate>=KEEPER_TARGETS.correctSideRate,noPrematureDives:patched.prematureDiveCount===0,legalTargets:patched.illegalTargetCount===0&&patched.targetSamples>0,extremeNotAutomatic:patched.extremeSaveRate<=.25}};
+};
+const report={schemaVersion:1,baselineRoot:fileURLToPath(beforeRoot),patchedRoot:fileURLToPath(afterRoot),targets:KEEPER_TARGETS,primarySeeds,holdoutSeeds,primary:pair(primarySeeds),holdout:pair(holdoutSeeds),limitations:['Controlled observed-ball shot grid, not a human play test or a win-rate estimate.','v3 assets are a separately reviewed package; this test verifies selected clip cues, not native clip rendering.','Save +10 percentage points is a declared stretch target; its boolean is retained even if unmet.']};
+const index=process.argv.indexOf('--out'),output=index>=0?resolve(process.argv[index+1]):fileURLToPath(new URL('keeper-results.json',import.meta.url));
+await writeFile(output,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({output,primary:{gain:report.primary.saveRateGainPercentagePoints,checks:report.primary.checks},holdout:{gain:report.holdout.saveRateGainPercentagePoints,checks:report.holdout.checks}},null,2));

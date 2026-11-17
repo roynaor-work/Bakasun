@@ -1,0 +1,88 @@
+diff --git a/workout/island/minigames/soccer-quality-team.mjs b/workout/island/minigames/soccer-quality-team.mjs
+new file mode 100644
+index 00000000..61e6e6de
+--- /dev/null
++++ b/workout/island/minigames/soccer-quality-team.mjs
+@@ -0,0 +1,82 @@
++/** Opt-in soccer-quality-v1. No DOM, wall clock, storage or RNG. Targets use only
++ * the observed ball and bodies; normal movement/contact rules still decide play. */
++import {applySoccerFull,soccerFullAnchor} from './soccer-full.mjs';
++import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
++import {passInterceptionClearance,passLaneClearance} from './soccer-teamplay.mjs';
++const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
++const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
++const prepared=Symbol('soccerQualityTeamConfig'),plans=new WeakMap();
++const levels=Object.freeze({
++ easy:Object.freeze({speed:.86,stageSpeed:.90,think:1.05,hold:.92,steal:.80,accuracy:.90}),
++ normal:Object.freeze({speed:1.08,stageSpeed:1,think:.62,hold:.62,steal:1,accuracy:1}),
++ hard:Object.freeze({speed:1.26,stageSpeed:1.07,think:.34,hold:.44,steal:1.08,accuracy:1})
++});
++/** Reuse the shipped 11-a-side package, rather than creating another roster or
++ * changing saved cards. Config clones are idempotent at session/model entry. */
++export function qualityTeamConfig(config){
++ if(!config||config[prepared])return config;
++ let next=config;
++ if(config.quality?.eleven&&!config.full?.version)next=applySoccerFull(next,{v241:false});
++ if(config.quality?.difficulty){
++  const attack={},difficulties={};
++  for(const [name,row]of Object.entries(next.ai.attack)){
++   const level=levels[name];
++   attack[name]=level?{...row,speed:level.speed,thinkSeconds:Math.max(row.thinkSeconds,level.think),passHold:Math.max(row.passHold,level.hold)}:{...row};
++  }
++  for(const [name,row]of Object.entries(next.difficulties)){
++   const level=levels[name];
++   difficulties[name]=level?{...row,speed:row.speed*level.stageSpeed,stealRate:row.stealRate*level.steal,accuracy:row.accuracy*level.accuracy}:{...row};
++  }
++  next={...next,ai:{...next.ai,attack},difficulties};
++ }
++ return next===config?config:{...next,[prepared]:true};
++}
++/** The authored defensive anchor is also used by the existing full-match
++ * compiler. Outside the danger zone, losing possession brings the block back
++ * together instead of following every distant runner across the pitch. */
++export function qualityShapeAnchor(player,state,config){
++ const formation=SOCCER_TACTICS_DATA.formations.find(f=>f.id===(config.squad?.formation||'4-3-3'));
++ const role=player.tacticalRole,phase=formation?.phases.find(p=>p.id==='defense');
++ if(!phase?.positions?.[role])return null;
++ const d=state.attackDir*(player.team===0?1:-1);
++ if(config.full?.shape)return soccerFullAnchor(role,'defense',phase,state.ball,d,config.pitch.length,config.pitch.width,config.full.shape);
++ const spot=phase.positions[role];
++ return {x:d*(spot.y-.5)*config.pitch.length+state.ball.x*.18,z:(spot.x-.5)*config.pitch.width+state.ball.z*.25};
++}
++const bounded=(point,c)=>({x:clamp(point.x,-c.pitch.length/2+c.tactics.goalInset,c.pitch.length/2-c.tactics.goalInset),z:clamp(point.z,-c.pitch.width/2+c.tactics.sideInset,c.pitch.width/2-c.tactics.sideInset)});
++function supportTarget(p,s,c,fallback,owner){
++ const d=s.attackDir,scale=clamp(c.pitch.length/70,.65,1.5),step=2.6*scale;
++ const opponents=s.players.filter(q=>q.team!==p.team&&q.role!=='keeper'&&!(q.recover>0));
++ const mates=s.players.filter(q=>q.team===p.team&&q.id!==p.id&&q.id!==owner.id&&q.role!=='keeper');
++ const centre=bounded(fallback,c);let best=centre,bestScore=-Infinity;
++ // A centre-out fixed ordering gives reproducible ties. Keep runs and rest
++ // defence within their original longitudinal band; width creates the outlet.
++ for(const [ox,oz]of [[0,0],[0,-1],[0,1],[-.6,0],[.6,0],[-.6,-1],[-.6,1],[.6,-1],[.6,1]]){
++  const q=bounded({x:centre.x+ox*step,z:centre.z+oz*step},c),range=distance(owner,q);
++  if(range<Math.max(c.ai.requestDistance,2)||range>c.passing.maxDistance*1.05)continue;
++  let lane=4,landing=6,room=6;
++  for(const rival of opponents){lane=Math.min(lane,passLaneClearance(rival,owner,q),passInterceptionClearance(rival,owner,q,clamp(.42+range*.014,.3,1.2)));landing=Math.min(landing,distance(rival,q));}
++  for(const mate of mates)room=Math.min(room,distance(mate,q));
++  const score=lane*2.7+Math.min(landing,4)*.55+Math.min(room,4)*.5-distance(q,centre)*.19-Math.max(0,3-room)*2-Math.max(0,3.2-distance(q,owner))*3;
++  if(score>bestScore+1e-9){best=q;bestScore=score;}
++ }
++ // A centre-back never leaves the existing rest-defence line for a pass.
++ if(/^(LCB|RCB|CB|DM)$/.test(p.tacticalRole)&&best.x*d>centre.x*d)best={...best,x:centre.x};
++ return {...fallback,...best,duty:fallback.duty==='support'?'quality-space':fallback.duty};
++}
++export function qualityTeamTarget(p,s,c,fallback){
++ if(!c.quality?.team||!fallback||p.team!==0||p.role==='keeper'||p.id===s.controlled||p.recover>0||p.slideTime>0||s.phase!=='playing')return fallback;
++ const owner=s.ball.owner==null?null:s.players.find(q=>q.id===s.ball.owner);
++ if(!owner||s.passTarget?.player===p.id||fallback.duty==='press'||owner.id===p.id||owner.hands)return fallback;
++ let cache=plans.get(s);
++ const key=(owner.team===0?'attack':'defense')+'/'+s.attackDir+'/'+owner.id;
++ if(!cache||cache.config!==c||cache.key!==key||s.elapsed>=cache.until||s.elapsed<cache.at){cache={config:c,key,at:s.elapsed,until:s.elapsed+.125,targets:new Map()};plans.set(s,cache);}
++ if(cache.targets.has(p.id))return cache.targets.get(p.id);
++ let target=fallback;
++ if(owner.team===0)target=supportTarget(p,s,c,fallback,owner);
++ else if(s.ball.x*s.attackDir>-c.pitch.length*.2){
++  const anchor=qualityShapeAnchor(p,s,c);
++  if(anchor){const point=bounded({x:fallback.x*.25+anchor.x*.75,z:fallback.z*.25+anchor.z*.75},c);target={...fallback,...point,duty:'quality-return'};}
++ }
++ cache.targets.set(p.id,target);return target;
++}

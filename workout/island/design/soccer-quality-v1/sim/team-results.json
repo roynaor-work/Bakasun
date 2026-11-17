@@ -1,0 +1,1327 @@
+{
+  "source": "/tmp/sqv1-final",
+  "baseline": "/workspace/Bakasun",
+  "targets": {
+    "recordedBeforeTuning": true,
+    "sourceBase": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "support": {
+      "metric": "mean visible defender clearance from carrier-to-target corridor in paired attacking snapshots, metres",
+      "target": "after >= before * 1.10"
+    },
+    "shape": {
+      "metric": "RMS distance of offball nonpressing midfield-return targets from authored formation block, metres",
+      "target": "after <= before * 0.80"
+    },
+    "difficulty": {
+      "metric": "actual-engine isolated presser approach seconds from 20 m to 2 m, stages 2/5/12/30",
+      "target": "easy >= normal * 1.08 and normal >= hard * 1.04, no RNG read by quality planner"
+    },
+    "eleven": {
+      "metric": "actual engine counts, identity, unique roles and finite positions after 60 seconds",
+      "target": "22 actors, 11/team, one keeper/team, saved four-card schema unchanged, 0 nonfinite"
+    },
+    "limits": "Support and return metrics are tactical fixture probes, not match win rates; paired full bot matches are recorded separately without treating small samples as balance certification."
+  },
+  "tactical": {
+    "before": {
+      "attackingTargets": 216,
+      "meanLaneClearance": 2.83095423237964,
+      "returnTargets": 193,
+      "returnAnchorRms": 16.17977457764746,
+      "finite": true
+    },
+    "after": {
+      "attackingTargets": 216,
+      "meanLaneClearance": 3.2986419039118853,
+      "returnTargets": 193,
+      "returnAnchorRms": 4.044943644411865,
+      "finite": true
+    }
+  },
+  "physicalReturn": {
+    "before": {
+      "initialRms": 39.468295328163215,
+      "at4Seconds": 28.471298072522647,
+      "at8Seconds": 27.245266171445564
+    },
+    "after": {
+      "initialRms": 39.468295328163215,
+      "at4Seconds": 12.995096727912196,
+      "at8Seconds": 1.0595980431024934
+    }
+  },
+  "difficulty": [
+    {
+      "stage": 2,
+      "difficulty": "easy",
+      "before": {
+        "stage": 2,
+        "difficulty": "easy",
+        "seconds": 4.833333,
+        "arrived": true,
+        "remaining": 1.961171491381977
+      },
+      "after": {
+        "stage": 2,
+        "difficulty": "easy",
+        "seconds": 5.35,
+        "arrived": true,
+        "remaining": 1.99805434224373
+      }
+    },
+    {
+      "stage": 2,
+      "difficulty": "normal",
+      "before": {
+        "stage": 2,
+        "difficulty": "normal",
+        "seconds": 4.833333,
+        "arrived": true,
+        "remaining": 1.961171491381977
+      },
+      "after": {
+        "stage": 2,
+        "difficulty": "normal",
+        "seconds": 4.833333,
+        "arrived": true,
+        "remaining": 1.961171491381977
+      }
+    },
+    {
+      "stage": 2,
+      "difficulty": "hard",
+      "before": {
+        "stage": 2,
+        "difficulty": "hard",
+        "seconds": 4.316667,
+        "arrived": true,
+        "remaining": 1.9857491808024186
+      },
+      "after": {
+        "stage": 2,
+        "difficulty": "hard",
+        "seconds": 4.366667,
+        "arrived": true,
+        "remaining": 1.9992088537292094
+      }
+    },
+    {
+      "stage": 5,
+      "difficulty": "easy",
+      "before": {
+        "stage": 5,
+        "difficulty": "easy",
+        "seconds": 3.583333,
+        "arrived": true,
+        "remaining": 1.9481755890825632
+      },
+      "after": {
+        "stage": 5,
+        "difficulty": "easy",
+        "seconds": 3.966667,
+        "arrived": true,
+        "remaining": 1.9724680301743138
+      }
+    },
+    {
+      "stage": 5,
+      "difficulty": "normal",
+      "before": {
+        "stage": 5,
+        "difficulty": "normal",
+        "seconds": 3.533333,
+        "arrived": true,
+        "remaining": 1.9883932493570224
+      },
+      "after": {
+        "stage": 5,
+        "difficulty": "normal",
+        "seconds": 3.533333,
+        "arrived": true,
+        "remaining": 1.9883932493570224
+      }
+    },
+    {
+      "stage": 5,
+      "difficulty": "hard",
+      "before": {
+        "stage": 5,
+        "difficulty": "hard",
+        "seconds": 3.316667,
+        "arrived": true,
+        "remaining": 1.990539033554036
+      },
+      "after": {
+        "stage": 5,
+        "difficulty": "hard",
+        "seconds": 3.183333,
+        "arrived": true,
+        "remaining": 1.930355707046452
+      }
+    },
+    {
+      "stage": 12,
+      "difficulty": "easy",
+      "before": {
+        "stage": 12,
+        "difficulty": "easy",
+        "seconds": 2.516667,
+        "arrived": true,
+        "remaining": 1.9062344914622376
+      },
+      "after": {
+        "stage": 12,
+        "difficulty": "easy",
+        "seconds": 2.783333,
+        "arrived": true,
+        "remaining": 1.9288617851732006
+      }
+    },
+    {
+      "stage": 12,
+      "difficulty": "normal",
+      "before": {
+        "stage": 12,
+        "difficulty": "normal",
+        "seconds": 2.466667,
+        "arrived": true,
+        "remaining": 1.9427859753460233
+      },
+      "after": {
+        "stage": 12,
+        "difficulty": "normal",
+        "seconds": 2.466667,
+        "arrived": true,
+        "remaining": 1.9427859753460233
+      }
+    },
+    {
+      "stage": 12,
+      "difficulty": "hard",
+      "before": {
+        "stage": 12,
+        "difficulty": "hard",
+        "seconds": 2.3,
+        "arrived": true,
+        "remaining": 1.9346299386555987
+      },
+      "after": {
+        "stage": 12,
+        "difficulty": "hard",
+        "seconds": 2.216667,
+        "arrived": true,
+        "remaining": 1.9846942463747137
+      }
+    },
+    {
+      "stage": 30,
+      "difficulty": "easy",
+      "before": {
+        "stage": 30,
+        "difficulty": "easy",
+        "seconds": 2.15,
+        "arrived": true,
+        "remaining": 1.9715842275232518
+      },
+      "after": {
+        "stage": 30,
+        "difficulty": "easy",
+        "seconds": 2.383333,
+        "arrived": true,
+        "remaining": 1.939896490489236
+      }
+    },
+    {
+      "stage": 30,
+      "difficulty": "normal",
+      "before": {
+        "stage": 30,
+        "difficulty": "normal",
+        "seconds": 2.116667,
+        "arrived": true,
+        "remaining": 1.940528565374084
+      },
+      "after": {
+        "stage": 30,
+        "difficulty": "normal",
+        "seconds": 2.116667,
+        "arrived": true,
+        "remaining": 1.940528565374084
+      }
+    },
+    {
+      "stage": 30,
+      "difficulty": "hard",
+      "before": {
+        "stage": 30,
+        "difficulty": "hard",
+        "seconds": 2,
+        "arrived": true,
+        "remaining": 1.8885291816679324
+      },
+      "after": {
+        "stage": 30,
+        "difficulty": "hard",
+        "seconds": 1.95,
+        "arrived": true,
+        "remaining": 1.9064959080872246
+      }
+    }
+  ],
+  "eleven": {
+    "before": {
+      "formation": "4-4-2",
+      "actors": 12,
+      "teams": [
+        {
+          "count": 6,
+          "keepers": 1,
+          "uniqueRoles": 6
+        },
+        {
+          "count": 6,
+          "keepers": 1,
+          "uniqueRoles": 6
+        }
+      ],
+      "legacySlots": [
+        {
+          "id": 0,
+          "team": 0,
+          "role": "striker",
+          "templateId": "playerSun"
+        },
+        {
+          "id": 1,
+          "team": 0,
+          "role": "support",
+          "templateId": "playerWave"
+        },
+        {
+          "id": 2,
+          "team": 0,
+          "role": "keeper",
+          "templateId": "playerStar"
+        },
+        {
+          "id": 3,
+          "team": 1,
+          "role": "striker",
+          "templateId": "opponent0"
+        },
+        {
+          "id": 4,
+          "team": 1,
+          "role": "support",
+          "templateId": "opponent1"
+        },
+        {
+          "id": 5,
+          "team": 1,
+          "role": "keeper",
+          "templateId": "opponent2"
+        },
+        {
+          "id": 6,
+          "team": 0,
+          "role": "wing",
+          "templateId": "playerBolt"
+        },
+        {
+          "id": 7,
+          "team": 1,
+          "role": "wing",
+          "templateId": "opponent3"
+        }
+      ],
+      "savedCards": 4,
+      "invalid": 0,
+      "elapsed": 55.566666666664794,
+      "phase": "playing"
+    },
+    "after": [
+      {
+        "formation": "4-4-2",
+        "actors": 22,
+        "teams": [
+          {
+            "count": 11,
+            "keepers": 1,
+            "uniqueRoles": 11
+          },
+          {
+            "count": 11,
+            "keepers": 1,
+            "uniqueRoles": 11
+          }
+        ],
+        "legacySlots": [
+          {
+            "id": 0,
+            "team": 0,
+            "role": "striker",
+            "templateId": "playerSun"
+          },
+          {
+            "id": 1,
+            "team": 0,
+            "role": "support",
+            "templateId": "playerWave"
+          },
+          {
+            "id": 2,
+            "team": 0,
+            "role": "keeper",
+            "templateId": "playerStar"
+          },
+          {
+            "id": 3,
+            "team": 1,
+            "role": "striker",
+            "templateId": "opponent0"
+          },
+          {
+            "id": 4,
+            "team": 1,
+            "role": "support",
+            "templateId": "opponent1"
+          },
+          {
+            "id": 5,
+            "team": 1,
+            "role": "keeper",
+            "templateId": "opponent2"
+          },
+          {
+            "id": 6,
+            "team": 0,
+            "role": "wing",
+            "templateId": "playerBolt"
+          },
+          {
+            "id": 7,
+            "team": 1,
+            "role": "wing",
+            "templateId": "opponent3"
+          }
+        ],
+        "savedCards": 4,
+        "invalid": 0,
+        "elapsed": 54.11666666666488,
+        "phase": "playing"
+      },
+      {
+        "formation": "4-3-3",
+        "actors": 22,
+        "teams": [
+          {
+            "count": 11,
+            "keepers": 1,
+            "uniqueRoles": 11
+          },
+          {
+            "count": 11,
+            "keepers": 1,
+            "uniqueRoles": 11
+          }
+        ],
+        "legacySlots": [
+          {
+            "id": 0,
+            "team": 0,
+            "role": "striker",
+            "templateId": "playerSun"
+          },
+          {
+            "id": 1,
+            "team": 0,
+            "role": "support",
+            "templateId": "playerWave"
+          },
+          {
+            "id": 2,
+            "team": 0,
+            "role": "keeper",
+            "templateId": "playerStar"
+          },
+          {
+            "id": 3,
+            "team": 1,
+            "role": "striker",
+            "templateId": "opponent0"
+          },
+          {
+            "id": 4,
+            "team": 1,
+            "role": "support",
+            "templateId": "opponent1"
+          },
+          {
+            "id": 5,
+            "team": 1,
+            "role": "keeper",
+            "templateId": "opponent2"
+          },
+          {
+            "id": 6,
+            "team": 0,
+            "role": "wing",
+            "templateId": "playerBolt"
+          },
+          {
+            "id": 7,
+            "team": 1,
+            "role": "wing",
+            "templateId": "opponent3"
+          }
+        ],
+        "savedCards": 4,
+        "invalid": 0,
+        "elapsed": 44.83333333333207,
+        "phase": "restartReady"
+      }
+    ]
+  },
+  "bot": {
+    "method": "Shipped createHumanBot typical profile, 9-tick reaction, 180s full 442, v23 pitch/control/air, all v241 rules; paired seeds, exploratory balance sample.",
+    "seeds": [
+      1100,
+      1101
+    ],
+    "stages": [
+      2,
+      5
+    ],
+    "before": [
+      {
+        "stage": 2,
+        "runSeconds": [
+          209.3000000000587,
+          206.33333333338967
+        ],
+        "timedOut": 0,
+        "summary": {
+          "matches": 2,
+          "team": [
+            {
+              "goals": 3.5,
+              "shots": 9.5,
+              "shotsOnTarget": 6,
+              "shotDistance": 19.545190803798363,
+              "passes": 71.5,
+              "passCompletion": 0.7624217527386541,
+              "passUnintended": 0.05594679186228482,
+              "passIntercepted": 0.09066901408450705,
+              "passOut": 0,
+              "passDoneCount": 54.5,
+              "passInterceptedCount": 6.5,
+              "passOutCount": 0,
+              "passOtherCount": 4,
+              "loft": 0,
+              "possession": 0.634410593573479,
+              "tackles": 2.5,
+              "looseWins": 10.5,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 0,
+              "freeKicks": 0,
+              "penalties": 0,
+              "fouls": 2,
+              "slides": 0.5,
+              "slideWins": 0,
+              "through": 15,
+              "throughDone": 13.5,
+              "throughCompletion": 0.8936651583710407,
+              "anchorDist": 21.552501904261106,
+              "farFromRole": 0.7296946473593249,
+              "pressers": 0.1509528529272633,
+              "multiPress": 0,
+              "carrierPressure": 5.072911781489379,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0,
+              "saves": 0.5,
+              "heavyTouches": 0,
+              "shotsCtrl": 9.5,
+              "shotsMate": 0,
+              "shotsFar": 0.5,
+              "conversion": 0.3666666666666667,
+              "saveRate": 1,
+              "conceded": 0,
+              "spells": 13,
+              "spellSeconds": 7.706770833333334,
+              "passesPerSpell": 4.63125,
+              "builtSpells": 0.58125,
+              "lineOwn": 22.045438615847015,
+              "lineMid": 33.720849223221194,
+              "lineAtt": 48.55822087244056,
+              "stillOffBall": 0.0011495353961107385,
+              "teamLength": 37.152712790981965,
+              "teamWidth": 42.99046303865652,
+              "crowd": 0.0011479733481399223,
+              "goalSideCover": 6.862050323249161,
+              "unmarkedThreat": 0.6206896551724138
+            },
+            {
+              "goals": 0,
+              "shots": 0.5,
+              "shotsOnTarget": 0.5,
+              "shotDistance": 17.338768135677306,
+              "passes": 32.5,
+              "passCompletion": 0.7854406130268199,
+              "passUnintended": 0.013888888888888888,
+              "passIntercepted": 0.16954022988505746,
+              "passOut": 0,
+              "passDoneCount": 25.5,
+              "passInterceptedCount": 5.5,
+              "passOutCount": 0,
+              "passOtherCount": 0.5,
+              "loft": 0,
+              "possession": 0.365589406426521,
+              "tackles": 1.5,
+              "looseWins": 11.5,
+              "throwIns": 0.5,
+              "corners": 0,
+              "goalKicks": 2.5,
+              "freeKicks": 2,
+              "penalties": 0,
+              "fouls": 0,
+              "slides": 1.5,
+              "slideWins": 0,
+              "through": 4.5,
+              "throughDone": 3,
+              "throughCompletion": 0.6071428571428572,
+              "anchorDist": 20.532905904292946,
+              "farFromRole": 0.7117643478790092,
+              "pressers": 0.9843914646996839,
+              "multiPress": 0.004298783408372449,
+              "carrierPressure": 4.183595342273142,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0,
+              "saves": 2.5,
+              "heavyTouches": 0.5,
+              "shotsCtrl": 0,
+              "shotsMate": 0.5,
+              "shotsFar": 0,
+              "conversion": 0,
+              "saveRate": 0.41428571428571426,
+              "conceded": 3.5,
+              "spells": 13,
+              "spellSeconds": 4.681770833333333,
+              "passesPerSpell": 2.15625,
+              "builtSpells": 0.375,
+              "lineOwn": 23.020401419218796,
+              "lineMid": 30.767845735308498,
+              "lineAtt": 43.4972163638217,
+              "stillOffBall": 0.007948199205821833,
+              "teamLength": 33.58211426953802,
+              "teamWidth": 40.03698349312262,
+              "crowd": 0.0007159911160466407,
+              "goalSideCover": 4.777415221764537,
+              "unmarkedThreat": 0.8424317617866005
+            }
+          ],
+          "game": {
+            "duelsEngaged": 29.5,
+            "duelsWon": 11,
+            "duelsBeaten": 0,
+            "totalGoals": 3.5,
+            "totalShots": 10,
+            "deadBall": 0.00013890175016205206,
+            "restBall": 0,
+            "stuckWindows": 0,
+            "maxStuckSeconds": 2.466666666666663,
+            "thirdAttack": 0.38429484211501064,
+            "thirdMid": 0.5488008148902677,
+            "thirdDefend": 0.06690434299472173,
+            "swings": 8,
+            "coverage": 0.5820904820033868,
+            "switchesPerMinute": 31.83628113714233,
+            "autoSwitchesPerMinute": 7.50069450875081,
+            "autoPingPong": 2,
+            "pingPong": 17.5,
+            "switchAccuracy": 0.8733974358974359,
+            "mismatchShare": 0.15785274055763196,
+            "mismatchP90": 0.7250000000000005,
+            "mismatchMedian": 0.3,
+            "touchToMoveMedian": 0.12500000000004974,
+            "touchToMoveP90": 0.2333333333333263,
+            "maxEdgeRun": 1.4999999999999996,
+            "cornerShare": 0,
+            "nonPlaySeconds": 27.83333333339087,
+            "transitionsPerMinute": 8.667469210112047,
+            "controlledOwner": 0.31822390962126124,
+            "controlledRoles": {
+              "striker": 0.4949995369941661,
+              "support": 0.30025928326696916,
+              "wing": 0.2047411797388647
+            }
+          },
+          "spread": {
+            "totalGoals": {
+              "p10": 3,
+              "p90": 4,
+              "zeroGoal": 0,
+              "inRange": 1
+            },
+            "totalShots": {
+              "p10": 10,
+              "p90": 10
+            },
+            "maxStuckSeconds": {
+              "p90": 2.5166666666666626
+            }
+          },
+          "restartDur": {
+            "goalKick": {
+              "n": 2.5,
+              "mean": 3.3333333333353927
+            },
+            "throwIn": {
+              "n": 0.5,
+              "mean": 4.083333333333101
+            },
+            "corner": {
+              "n": 0,
+              "mean": null
+            },
+            "freeKick": {
+              "n": 2,
+              "mean": 3.3333333333338544
+            },
+            "penalty": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "seconds": 207.8166666667242
+        }
+      },
+      {
+        "stage": 5,
+        "runSeconds": [
+          188.56666666670887,
+          198.55000000005015
+        ],
+        "timedOut": 0,
+        "summary": {
+          "matches": 2,
+          "team": [
+            {
+              "goals": 1,
+              "shots": 6.5,
+              "shotsOnTarget": 5,
+              "shotDistance": 24.597478225582687,
+              "passes": 71.5,
+              "passCompletion": 0.7342527386541471,
+              "passUnintended": 0.06298904538341157,
+              "passIntercepted": 0.08382237871674492,
+              "passOut": 0,
+              "passDoneCount": 52.5,
+              "passInterceptedCount": 6,
+              "passOutCount": 0,
+              "passOtherCount": 4.5,
+              "loft": 0,
+              "possession": 0.6237614593943883,
+              "tackles": 1,
+              "looseWins": 12.5,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 0,
+              "freeKicks": 0,
+              "penalties": 0,
+              "fouls": 1,
+              "slides": 0.5,
+              "slideWins": 0,
+              "through": 14,
+              "throughDone": 13,
+              "throughCompletion": 0.9166666666666667,
+              "anchorDist": 22.057401395238347,
+              "farFromRole": 0.7530860772937495,
+              "pressers": 0.19853745215965007,
+              "multiPress": 0,
+              "carrierPressure": 4.621145731018144,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0.5,
+              "saves": 1,
+              "heavyTouches": 0,
+              "shotsCtrl": 6.5,
+              "shotsMate": 0,
+              "shotsFar": 1,
+              "conversion": 0.14285714285714285,
+              "saveRate": 0.41666666666666663,
+              "conceded": 1.5,
+              "spells": 14,
+              "spellSeconds": 7.3548290598290595,
+              "passesPerSpell": 4.771794871794872,
+              "builtSpells": 0.5743589743589743,
+              "lineOwn": 20.212410820464736,
+              "lineMid": 33.72013814575341,
+              "lineAtt": 47.789768134734416,
+              "stillOffBall": 0.0019704538884933553,
+              "teamLength": 37.779871966673284,
+              "teamWidth": 42.61529994001083,
+              "crowd": 0.0012413587113253408,
+              "goalSideCover": 6.761048842719155,
+              "unmarkedThreat": 1
+            },
+            {
+              "goals": 1.5,
+              "shots": 2.5,
+              "shotsOnTarget": 2.5,
+              "shotDistance": 17.62779499578155,
+              "passes": 41,
+              "passCompletion": 0.6946428571428571,
+              "passUnintended": 0.07380952380952381,
+              "passIntercepted": 0.21904761904761905,
+              "passOut": 0,
+              "passDoneCount": 28.5,
+              "passInterceptedCount": 9,
+              "passOutCount": 0,
+              "passOtherCount": 3,
+              "loft": 0,
+              "possession": 0.3762385406056116,
+              "tackles": 1.5,
+              "looseWins": 12.5,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 0.5,
+              "freeKicks": 1,
+              "penalties": 0,
+              "fouls": 0,
+              "slides": 0.5,
+              "slideWins": 0,
+              "through": 10,
+              "throughDone": 7.5,
+              "throughCompletion": 0.7747252747252746,
+              "anchorDist": 19.342928311991024,
+              "farFromRole": 0.6478285273594788,
+              "pressers": 0.9907915299090571,
+              "multiPress": 0.00954653937947494,
+              "carrierPressure": 4.134221526817173,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0,
+              "saves": 3.5,
+              "heavyTouches": 0,
+              "shotsCtrl": 0,
+              "shotsMate": 2.5,
+              "shotsFar": 0,
+              "conversion": 0.5833333333333333,
+              "saveRate": 0.8333333333333333,
+              "conceded": 1,
+              "spells": 13.5,
+              "spellSeconds": 4.723333333333333,
+              "passesPerSpell": 2.7916666666666665,
+              "builtSpells": 0.3416666666666667,
+              "lineOwn": 19.39323730590508,
+              "lineMid": 29.58563268411686,
+              "lineAtt": 46.45969367449729,
+              "stillOffBall": 0.0032314449111654035,
+              "teamLength": 33.59978125527476,
+              "teamWidth": 39.300520176267,
+              "crowd": 0.0009572158365261814,
+              "goalSideCover": 5.624402781571417,
+              "unmarkedThreat": 0.5963827838827839
+            }
+          ],
+          "game": {
+            "duelsEngaged": 24,
+            "duelsWon": 4,
+            "duelsBeaten": 0,
+            "totalGoals": 2.5,
+            "totalShots": 9,
+            "deadBall": 0,
+            "restBall": 0,
+            "stuckWindows": 0.022727272727272728,
+            "maxStuckSeconds": 2.6249999999999956,
+            "thirdAttack": 0.3661913140105565,
+            "thirdMid": 0.5092138160940828,
+            "thirdDefend": 0.12459486989536069,
+            "swings": 8.5,
+            "coverage": 0.5976869728155678,
+            "switchesPerMinute": 31.83628113714233,
+            "autoSwitchesPerMinute": 7.000648208167423,
+            "autoPingPong": 0.5,
+            "pingPong": 17.5,
+            "switchAccuracy": 0.9592074592074592,
+            "mismatchShare": 0.1608850363855041,
+            "mismatchP90": 0.5916666666666668,
+            "mismatchMedian": 0.27499999999999997,
+            "touchToMoveMedian": 0.13333333333332575,
+            "touchToMoveP90": 0.2333333333333263,
+            "maxEdgeRun": 1.4666666666666663,
+            "cornerShare": 0,
+            "nonPlaySeconds": 13.575000000046188,
+            "transitionsPerMinute": 9.167515510695434,
+            "controlledOwner": 0.2619687008056302,
+            "controlledRoles": {
+              "striker": 0.44406889526808035,
+              "support": 0.346050560237059,
+              "wing": 0.20988054449486063
+            }
+          },
+          "spread": {
+            "totalGoals": {
+              "p10": 1,
+              "p90": 4,
+              "zeroGoal": 0,
+              "inRange": 0.5
+            },
+            "totalShots": {
+              "p10": 8,
+              "p90": 10
+            },
+            "maxStuckSeconds": {
+              "p90": 2.716666666666662
+            }
+          },
+          "restartDur": {
+            "goalKick": {
+              "n": 0.5,
+              "mean": 3.333333333333144
+            },
+            "throwIn": {
+              "n": 0,
+              "mean": null
+            },
+            "corner": {
+              "n": 0,
+              "mean": null
+            },
+            "freeKick": {
+              "n": 1,
+              "mean": 3.333333333334565
+            },
+            "penalty": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "seconds": 193.5583333333795
+        }
+      }
+    ],
+    "after": [
+      {
+        "stage": 2,
+        "runSeconds": [
+          202.983333333387,
+          205.21666666672212
+        ],
+        "timedOut": 0,
+        "summary": {
+          "matches": 2,
+          "team": [
+            {
+              "goals": 5,
+              "shots": 12.5,
+              "shotsOnTarget": 8.5,
+              "shotDistance": 19.32771174673672,
+              "passes": 78.5,
+              "passCompletion": 0.8466297622924128,
+              "passUnintended": 0.03158580267014002,
+              "passIntercepted": 0.05714750895473787,
+              "passOut": 0,
+              "passDoneCount": 66.5,
+              "passInterceptedCount": 4.5,
+              "passOutCount": 0,
+              "passOtherCount": 2.5,
+              "loft": 0,
+              "possession": 0.6656634873599407,
+              "tackles": 1,
+              "looseWins": 13,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 0,
+              "freeKicks": 0,
+              "penalties": 0,
+              "fouls": 1,
+              "slides": 0,
+              "slideWins": 0,
+              "through": 20,
+              "throughDone": 20,
+              "throughCompletion": 1,
+              "anchorDist": 21.21503639492518,
+              "farFromRole": 0.7082448537830988,
+              "pressers": 0.18014511291460833,
+              "multiPress": 0,
+              "carrierPressure": 5.028824621155027,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0.5,
+              "saves": 0,
+              "heavyTouches": 0,
+              "shotsCtrl": 12.5,
+              "shotsMate": 0,
+              "shotsFar": 1.5,
+              "conversion": 0.39743589743589747,
+              "saveRate": null,
+              "conceded": 0,
+              "spells": 14.5,
+              "spellSeconds": 7.473237179487179,
+              "passesPerSpell": 4.831730769230769,
+              "builtSpells": 0.6971153846153846,
+              "lineOwn": 25.712886496177717,
+              "lineMid": 32.22763728753819,
+              "lineAtt": 48.69109409315334,
+              "stillOffBall": 0.0006200233552170168,
+              "teamLength": 37.322353766999036,
+              "teamWidth": 43.234282875148644,
+              "crowd": 0.0007535192398854057,
+              "goalSideCover": 7.771858827334745,
+              "unmarkedThreat": null
+            },
+            {
+              "goals": 0,
+              "shots": 0,
+              "shotsOnTarget": 0,
+              "shotDistance": null,
+              "passes": 30,
+              "passCompletion": 0.6852678571428572,
+              "passUnintended": 0.05133928571428571,
+              "passIntercepted": 0.24776785714285715,
+              "passOut": 0,
+              "passDoneCount": 20.5,
+              "passInterceptedCount": 7.5,
+              "passOutCount": 0,
+              "passOtherCount": 1.5,
+              "loft": 0,
+              "possession": 0.33433651264005926,
+              "tackles": 1,
+              "looseWins": 13.5,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 2,
+              "freeKicks": 1,
+              "penalties": 0,
+              "fouls": 0,
+              "slides": 0.5,
+              "slideWins": 0,
+              "through": 4,
+              "throughDone": 3.5,
+              "throughCompletion": 0.9166666666666667,
+              "anchorDist": 20.07897654100274,
+              "farFromRole": 0.7208903826255575,
+              "pressers": 0.9909655583695408,
+              "multiPress": 0.005979073243647235,
+              "carrierPressure": 4.176651118980275,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0,
+              "saves": 3,
+              "heavyTouches": 0.5,
+              "shotsCtrl": 0,
+              "shotsMate": 0,
+              "shotsFar": 0,
+              "conversion": null,
+              "saveRate": 0.3666666666666667,
+              "conceded": 5,
+              "spells": 14,
+              "spellSeconds": 3.2330341880341877,
+              "passesPerSpell": 1.5410256410256409,
+              "builtSpells": 0.2153846153846154,
+              "lineOwn": 22.532198888975927,
+              "lineMid": 29.831075630817633,
+              "lineAtt": 36.066515175115796,
+              "stillOffBall": 0.007176196254944591,
+              "teamLength": 32.21105047152156,
+              "teamWidth": 39.23498155696514,
+              "crowd": 0.0009757105463838908,
+              "goalSideCover": 4.457062199400544,
+              "unmarkedThreat": 0.7035714285714285
+            }
+          ],
+          "game": {
+            "duelsEngaged": 26,
+            "duelsWon": 10,
+            "duelsBeaten": 0,
+            "totalGoals": 5,
+            "totalShots": 12.5,
+            "deadBall": 0.00013890175016205206,
+            "restBall": 0,
+            "stuckWindows": 0,
+            "maxStuckSeconds": 2.2166666666666637,
+            "thirdAttack": 0.4549958329474951,
+            "thirdMid": 0.5366237614593944,
+            "thirdDefend": 0.008380405593110473,
+            "swings": 4,
+            "coverage": 0.5537054941402835,
+            "switchesPerMinute": 33.16973793869803,
+            "autoSwitchesPerMinute": 3.8336883044726364,
+            "autoPingPong": 0.5,
+            "pingPong": 20.5,
+            "switchAccuracy": 0.9714285714285714,
+            "mismatchShare": 0.12659516021734485,
+            "mismatchP90": 0.641666666666667,
+            "mismatchMedian": 0.22499999999999998,
+            "touchToMoveMedian": 0.14166666666670835,
+            "touchToMoveP90": 0.23333333333351902,
+            "maxEdgeRun": 1.4999999999999996,
+            "cornerShare": 0,
+            "nonPlaySeconds": 24.116666666721244,
+            "transitionsPerMinute": 9.500879711084359,
+            "controlledOwner": 0.3476247800722289,
+            "controlledRoles": {
+              "striker": 0.595055097694231,
+              "support": 0.25266228354477266,
+              "wing": 0.15228261876099639
+            }
+          },
+          "spread": {
+            "totalGoals": {
+              "p10": 4,
+              "p90": 6,
+              "zeroGoal": 0,
+              "inRange": 0.5
+            },
+            "totalShots": {
+              "p10": 12,
+              "p90": 13
+            },
+            "maxStuckSeconds": {
+              "p90": 2.4333333333333296
+            }
+          },
+          "restartDur": {
+            "goalKick": {
+              "n": 2,
+              "mean": 3.3333333333336768
+            },
+            "throwIn": {
+              "n": 0,
+              "mean": null
+            },
+            "corner": {
+              "n": 0,
+              "mean": null
+            },
+            "freeKick": {
+              "n": 1,
+              "mean": 3.333333333335986
+            },
+            "penalty": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "seconds": 204.10000000005456
+        }
+      },
+      {
+        "stage": 5,
+        "runSeconds": [
+          198.55000000005015,
+          194.1000000000466
+        ],
+        "timedOut": 0,
+        "summary": {
+          "matches": 2,
+          "team": [
+            {
+              "goals": 2.5,
+              "shots": 6.5,
+              "shotsOnTarget": 4.5,
+              "shotDistance": 15.988465660356496,
+              "passes": 71.5,
+              "passCompletion": 0.755,
+              "passUnintended": 0.0353921568627451,
+              "passIntercepted": 0.1188235294117647,
+              "passOut": 0,
+              "passDoneCount": 54,
+              "passInterceptedCount": 8.5,
+              "passOutCount": 0,
+              "passOtherCount": 2.5,
+              "loft": 0,
+              "possession": 0.5844522640985277,
+              "tackles": 0.5,
+              "looseWins": 15.5,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 0,
+              "freeKicks": 0,
+              "penalties": 0,
+              "fouls": 0,
+              "slides": 0,
+              "slideWins": 0,
+              "through": 17.5,
+              "throughDone": 16,
+              "throughCompletion": 0.9133986928104575,
+              "anchorDist": 21.276570404766815,
+              "farFromRole": 0.7102686459736438,
+              "pressers": 0.22474883565257348,
+              "multiPress": 0,
+              "carrierPressure": 4.8853344970883885,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0.5,
+              "saves": 0,
+              "heavyTouches": 0,
+              "shotsCtrl": 6.5,
+              "shotsMate": 0,
+              "shotsFar": 0,
+              "conversion": 0.39285714285714285,
+              "saveRate": 0,
+              "conceded": 2,
+              "spells": 16,
+              "spellSeconds": 5.73156862745098,
+              "passesPerSpell": 3.9,
+              "builtSpells": 0.6274509803921569,
+              "lineOwn": 21.944767962200796,
+              "lineMid": 32.15426066674654,
+              "lineAtt": 48.58597688633553,
+              "stillOffBall": 0.0005590496156533892,
+              "teamLength": 36.289776670181624,
+              "teamWidth": 42.375788778344344,
+              "crowd": 0.0006792250838943446,
+              "goalSideCover": 6.685719796459022,
+              "unmarkedThreat": 1
+            },
+            {
+              "goals": 2,
+              "shots": 2.5,
+              "shotsOnTarget": 2,
+              "shotDistance": 21.485559708569212,
+              "passes": 47,
+              "passCompletion": 0.776595744680851,
+              "passUnintended": 0.031914893617021274,
+              "passIntercepted": 0.19148936170212766,
+              "passOut": 0,
+              "passDoneCount": 36.5,
+              "passInterceptedCount": 9,
+              "passOutCount": 0,
+              "passOtherCount": 1.5,
+              "loft": 0,
+              "possession": 0.41554773590147237,
+              "tackles": 3,
+              "looseWins": 13,
+              "throwIns": 0,
+              "corners": 0,
+              "goalKicks": 1,
+              "freeKicks": 0,
+              "penalties": 0,
+              "fouls": 0,
+              "slides": 1,
+              "slideWins": 0,
+              "through": 12,
+              "throughDone": 9.5,
+              "throughCompletion": 0.7928571428571429,
+              "anchorDist": 20.073892892018087,
+              "farFromRole": 0.6938865371759524,
+              "pressers": 0.9947589098532494,
+              "multiPress": 0.005974842767295598,
+              "carrierPressure": 4.156823507084802,
+              "headers": 0,
+              "clearances": 0,
+              "posts": 0.5,
+              "saves": 2,
+              "heavyTouches": 0,
+              "shotsCtrl": 0,
+              "shotsMate": 2.5,
+              "shotsFar": 0,
+              "conversion": 0.8333333333333333,
+              "saveRate": 0.45,
+              "conceded": 2.5,
+              "spells": 16,
+              "spellSeconds": 4.242549019607843,
+              "passesPerSpell": 2.6686274509803924,
+              "builtSpells": 0.4392156862745098,
+              "lineOwn": 21.31069479338599,
+              "lineMid": 31.572269155438594,
+              "lineAtt": 47.00576721186405,
+              "stillOffBall": 0.003018977792632112,
+              "teamLength": 34.30226263654707,
+              "teamWidth": 40.79815880436868,
+              "crowd": 0.00033967087339331175,
+              "goalSideCover": 4.870859538784067,
+              "unmarkedThreat": 0.7439516129032258
+            }
+          ],
+          "game": {
+            "duelsEngaged": 30.5,
+            "duelsWon": 5,
+            "duelsBeaten": 0,
+            "totalGoals": 4.5,
+            "totalShots": 9,
+            "deadBall": 0.00004630058338735068,
+            "restBall": 0,
+            "stuckWindows": 0,
+            "maxStuckSeconds": 2.2166666666666637,
+            "thirdAttack": 0.37285859801833504,
+            "thirdMid": 0.5173164181868691,
+            "thirdDefend": 0.10982498379479581,
+            "swings": 10,
+            "coverage": 0.660477697030873,
+            "switchesPerMinute": 35.33660524122604,
+            "autoSwitchesPerMinute": 8.334105009723123,
+            "autoPingPong": 0.5,
+            "pingPong": 13,
+            "switchAccuracy": 0.8631818181818182,
+            "mismatchShare": 0.22060161966644612,
+            "mismatchP90": 0.6250000000000002,
+            "mismatchMedian": 0.22499999999999998,
+            "touchToMoveMedian": 0.17499999999999005,
+            "touchToMoveP90": 0.24166666666666625,
+            "maxEdgeRun": 1.4749999999999996,
+            "cornerShare": 0.002361329752754885,
+            "nonPlaySeconds": 16.341666666715057,
+            "transitionsPerMinute": 10.667654412445597,
+            "controlledOwner": 0.28206315399574033,
+            "controlledRoles": {
+              "striker": 0.5019446245022687,
+              "support": 0.3143809612001111,
+              "wing": 0.18367441429762016
+            }
+          },
+          "spread": {
+            "totalGoals": {
+              "p10": 4,
+              "p90": 5,
+              "zeroGoal": 0,
+              "inRange": 1
+            },
+            "totalShots": {
+              "p10": 8,
+              "p90": 10
+            },
+            "maxStuckSeconds": {
+              "p90": 2.2166666666666637
+            }
+          },
+          "restartDur": {
+            "goalKick": {
+              "n": 1,
+              "mean": 3.333333333334565
+            },
+            "throwIn": {
+              "n": 0,
+              "mean": null
+            },
+            "corner": {
+              "n": 0,
+              "mean": null
+            },
+            "freeKick": {
+              "n": 0,
+              "mean": null
+            },
+            "penalty": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "seconds": 196.32500000004836
+        }
+      }
+    ]
+  },
+  "acceptance": {
+    "support": true,
+    "shape": true,
+    "difficulty": true,
+    "eleven": true,
+    "physicalReturn": true
+  }
+}

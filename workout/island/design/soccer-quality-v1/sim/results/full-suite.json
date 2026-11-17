@@ -1,0 +1,54 @@
+{
+  "command": "npm test",
+  "source": "/tmp/sqv1-final",
+  "recordedAt": "2026-11-17T18:29:23.345Z",
+  "status": "failed",
+  "exitCode": 1,
+  "tests": 4326,
+  "suites": 0,
+  "pass": 4259,
+  "fail": 3,
+  "cancelled": 0,
+  "skipped": 64,
+  "todo": 0,
+  "duration_ms": 880973.132234,
+  "failures": [
+    {
+      "location": "tests/island-alpine-league-v23.test.mjs:275:1",
+      "name": "offline: every league module is in the shell; every theme file exists and is in the league group (the pack) or the ski group (shipped fallbacks), both within budget"
+    },
+    {
+      "location": "tests/island-athlete-body-v22.test.mjs:161:1",
+      "name": "offline list: the Codex files are cached for soccer and basketball, and the shell list is up to date"
+    },
+    {
+      "location": "tests/workout-royiki.test.mjs:91:1",
+      "name": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists"
+    }
+  ],
+  "explanation": {
+    "offline": "Two offline-manifest assertions executed before patch 055 was applied. All three affected offline files were then rechecked with --test-name-pattern offline on the final seven-patch copy: 10 tests passed, zero failed.",
+    "browser": "The existing workout-royiki test calls chromium.launch without executablePath; its bundled Playwright chromium_headless_shell-1234 binary is absent. The test opened an HTTP server before launch and its cleanup starts after launch; root terminated only the resulting idle leaked child to let the full runner report its already-recorded failure. This cleanup did not create an additional failed test.",
+    "scope": "This is the original full-suite result. Do not describe it as a green full npm test run. The final artifact test suite separately passed 38/38."
+  },
+  "logs": {
+    "original": "full-suite.tap",
+    "focused": "focused.tap",
+    "offlineRecheck": "offline-regression.tap"
+  },
+  "rechecks": {
+    "workoutBrowser": {
+      "command": "ISLAND_PLAYWRIGHT=/workspace/Bakasun/workout/island/design/soccer-quality-v1/tests/system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+      "cwd": "/tmp/sqv1-final",
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0,
+      "durationMs": 24770.813091,
+      "log": "workout-browser-recheck.tap",
+      "note": "Original existing test file unchanged; test-only adapter chooses installed /usr/bin/chromium."
+    }
+  },
+  "unresolvedTestFailures": 0,
+  "rechecksDoNotConvertOriginalRunToSuccess": true
+}

@@ -1,0 +1,194 @@
+diff --git a/workout/island/minigames/soccer-loft.mjs b/workout/island/minigames/soccer-loft.mjs
+--- a/workout/island/minigames/soccer-loft.mjs
++++ b/workout/island/minigames/soccer-loft.mjs
+@@ -44,10 +44,11 @@
+ export function loftDestination(state,c,power=0,{aim:requestedAim,point,snap=false}={}){
+  const p=state.players.find(player=>player.id===state.controlled),b=state.ball;
+  if(!p)throw Error('A controlled soccer player is required');
+- const q=clamp(finite(power),0,1),passing=c.passing;
++ const q=clamp(finite(power),0,1),passing=c.passing,quality=c.quality?.loft===true;
+  const fallback=unit(finite(p.fx,state.attackDir*(p.team===0?1:-1)),finite(p.fz));
+  const raw=requestedAim||state.passAim?.manual&&state.passAim||state.aim||fallback;
+  const aim=unit(finite(raw.x),finite(raw.z),fallback),manual=!!raw.manual;
++ const assistQuality=quality&&!manual&&!point;
+  const min=Math.max(0,finite(passing.minDistance,5)),max=Math.max(min,finite(passing.maxDistance,22));
+  const requestedRange=min+(max-min)*q;
+  const hx=c.pitch.length/2,hz=c.pitch.width/2,margin=Math.max(c.physics.ballRadius*4,.75);
+@@ -55,12 +56,12 @@
+  const range=inside?Math.min(requestedRange,rayLimit(b.x,aim.x,hx,margin),rayLimit(b.z,aim.z,hz,margin)):requestedRange;
+  let landing=safeLoftPoint(point||{x:b.x+aim.x*range,z:b.z+aim.z*range},c),target=null,assisted=false,correction=0;
+  const originalLanding=landing;let bestReceiver=null,bestTurn=0;
+- const zone=clamp(finite(c.assistance?.passing?.landingReceiverZone,1.8),0,2.2);
+- const maxTurn=clamp(finite(c.assistance?.passing?.maxCorrectionDegrees,18),0,28)*Math.PI/180;
++ const zone=assistQuality?Math.max(5,requestedRange*.5):clamp(finite(c.assistance?.passing?.landingReceiverZone,1.8),0,2.2);
++ const maxTurn=(assistQuality?30:clamp(finite(c.assistance?.passing?.maxCorrectionDegrees,18),0,28))*Math.PI/180;
+  const maxLead=Math.max(0,finite(c.assistance?.passing?.maxLeadDistance,.85));
+  let best=Infinity;
+  for(const member of state.players){
+-  if(member.team!==p.team||member.id===p.id||member.recover>0||member.slideTime>0)continue;
++  if(member.team!==p.team||member.id===p.id||member.recover>0||member.slideTime>0||assistQuality&&member.role==='keeper')continue;
+   const actualDistance=distance(member,b);
+   if(actualDistance<1.3||actualDistance>max+zone)continue;
+   let lx=finite(member.vx)*Math.min(.35,Math.max(0,finite(passing.leadSeconds))),lz=finite(member.vz)*Math.min(.35,Math.max(0,finite(passing.leadSeconds)));
+@@ -70,14 +71,16 @@
+   // because their clamped projection happens to sit inside it.
+   if(Math.abs(member.x)>hx-c.physics.ballRadius||Math.abs(member.z)>hz-c.physics.ballRadius)continue;
+   const miss=distance(receiver,originalLanding),turn=angle(aim,unit(receiver.x-b.x,receiver.z-b.z,aim));
+-  if(miss>zone||Math.abs(turn)>maxTurn+1e-10)continue;
+-  const score=miss+Math.abs(turn)*.5;
++  // Quality assistance tolerates charge error along the ray, while stick bearing
++  // selects the receiver. A nearer outlet cannot beat a clearly intended runner.
++  if((assistQuality?Math.abs(distance(receiver,b)-requestedRange)>zone:miss>zone)||Math.abs(turn)>maxTurn+1e-10)continue;
++  const score=assistQuality?Math.abs(turn)/maxTurn+Math.abs(distance(receiver,b)-requestedRange)/Math.max(1,zone)*.15:miss+Math.abs(turn)*.5;
+   if(score<best-1e-10||Math.abs(score-best)<=1e-10&&(target===null||member.id<target)){
+    best=score;target=member.id;
+    bestReceiver=receiver;bestTurn=turn;
+   }
+  }
+- if(!bestReceiver&&snap&&!manual&&!point){
++ if(!bestReceiver&&snap&&!manual&&!point&&!quality){
+   // Pointer-style lob: with the stick towards a team-mate (cone of about 30 degrees) the ball goes to that team-mate whatever the charge.
+   // The charge then only chooses the flight time. A drag (manual) keeps its ray as before.
+   const dirSign=state.attackDir*(p.team===0?1:-1),cone=Math.cos(clamp(finite(c.assistance?.passing?.lobSnapDegrees,30),0,45)*Math.PI/180);let bestScore=Infinity;
+@@ -95,7 +98,11 @@
+     bestTurn=angle(aim,unit(bestReceiver.x-b.x,bestReceiver.z-b.z,aim));}
+   }
+  }
+- if(bestReceiver&&!manual&&!point){landing=bestReceiver;assisted=distance(landing,originalLanding)>1e-8;correction=bestTurn;}
++ if(bestReceiver&&!manual&&!point){
++  landing=bestReceiver;
++  if(quality){const d=state.attackDir*(p.team===0?1:-1);if(landing.x*d>hx-c.pitch.penaltyDepth&&Math.abs(landing.z)<c.pitch.penaltyWidth/2)landing=headerLandingPoint(b,landing,c,q);}
++  assisted=distance(landing,originalLanding)>1e-8;correction=bestTurn;
++ }
+  return {...landing,distance:distance(landing,b),target,kind:'loft',assisted,correctionRadians:correction};
+ }
+ 
+@@ -109,7 +116,11 @@
+  if(options.durationSeconds!==undefined&&(!Number.isFinite(options.durationSeconds)||options.durationSeconds<=0))throw Error('Invalid soccer flight duration');
+  // A lob always clears head height: a full charge to a near team-mate used to make a flat flight of under 1 m.
+  const minimumApex=Math.sqrt(8*(finite(c.aerial?.minHeight,1)+.25)/Math.max(1,g));
+- const duration=options.durationSeconds===undefined?Math.max(.35,minimumApex,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal)))):clamp(options.durationSeconds,.18,3);
++ // Range sets a playable apex; charge error no longer flattens a short cross or
++ // sends it needlessly high. The same Euler solver still determines the launch.
++ const apex=clamp(1.35+range*.055,1.65,3),fromHeight=Math.max(r,finite(ball.y,r));
++ const qualityTime=Math.sqrt(2*Math.max(.2,r+apex-fromHeight)/g)+Math.sqrt(2*apex/g);
++ const duration=options.durationSeconds===undefined?(c.quality?.loft===true?Math.max(minimumApex,qualityTime):Math.max(.35,minimumApex,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal))))):clamp(options.durationSeconds,.18,3);
+  const steps=Math.max(8,Math.ceil(duration/dt)),time=steps*dt,fromY=Math.max(r,finite(ball.y,r));
+  const vy=(r-fromY)/time+g*dt*(steps-1)/2;
+  let attenuation=1,travel=0,height=fromY-r;
+@@ -137,7 +148,11 @@
+  if(!descending||ball.y>r+1e-7)return false;
+  // Floating point equality must not defer a contact for a whole extra tick.
+  if(ball.y<=r+1e-7){ball.y=r;if(ball.vy<0)ball.vy=Math.abs(ball.vy)>c.ball.bounceThreshold?-ball.vy*c.ball.bounce:0;}
+- const carry=clamp(finite(c.ball.landingCarry,.62),0,1);ball.vx*=carry;ball.vz*=carry;
++ const quality=c.quality?.loft===true;
++ // A low first bounce preserves horizontal momentum, then grass friction rolls
++ // it out. Never add velocity or snap it to a planned landing after a deflection.
++ if(quality)ball.vy*=.35;
++ const carry=quality ? .82 : clamp(finite(c.ball.landingCarry,.62),0,1);ball.vx*=carry;ball.vz*=carry;
+  const speed=Math.hypot(ball.vx,ball.vz);
+  if(speed>0){
+   const direction={x:ball.vx/speed,z:ball.vz/speed},inset=r+.05;
+@@ -145,7 +160,8 @@
+   const friction=Math.max(0,c.ball.grassFriction),bounce=clamp(c.ball.bounce,0,.95),g=c.ball.gravity;
+   const airborne=2*Math.max(0,ball.vy)/(g*(1-bounce))+8*c.match.fixedStep;
+   const ground=friction>0?c.match.fixedStep/(1-Math.exp(-friction*c.match.fixedStep)):Infinity;
+-  const maximum=Number.isFinite(ground)?Math.max(0,room)*.95/(airborne+ground):0;
++  const rollout=quality?Math.min(Math.max(0,room)*.95,clamp(.65+speed*.13,.8,2.7)):Math.max(0,room)*.95;
++  const maximum=Number.isFinite(ground)?rollout/(airborne+ground):0;
+   if(speed>maximum){const scale=maximum/speed;ball.vx*=scale;ball.vz*=scale;}
+  }
+  ball.flight=null;return true;
+diff --git a/workout/island/minigames/soccer-assistance.mjs b/workout/island/minigames/soccer-assistance.mjs
+--- a/workout/island/minigames/soccer-assistance.mjs
++++ b/workout/island/minigames/soccer-assistance.mjs
+@@ -1,5 +1,6 @@
+ // Pure helpers for human control. Coordinates are metres in the pitch X/Z plane.
+ import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-15';
++import {throughBallPoint} from './soccer-rules.mjs';
+ // They never change a player, ball, input, save, RNG or wall clock.
+ const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+ const finite=(n,fallback=0)=>Number.isFinite(n)?n:fallback;
+@@ -15,6 +16,9 @@
+  * Opponent passes keep passing.groundTravelSeconds (they never call this). */
+ export function groundPassSeconds(range,c){
+   const base=setting(c,'passing','travelBaseSeconds',0),perMetre=setting(c,'passing','travelPerMetre',0);
++  // The quality kick uses distance alone rather than the kicker-rank multiplier.
++  // Keep its travel time close to the established pass at an average card rank.
++  if(c.quality?.passing===true)return clamp(Math.max(.36,base*.92)+Math.max(.012,perMetre*.92)*Math.max(0,finite(range)),.36,1.2);
+   if(!(base>0))return finite(c.passing.groundTravelSeconds,0.55);
+   return clamp(base+perMetre*Math.max(0,finite(range)),0.3,1.2);
+ }
+@@ -31,7 +35,29 @@
+   const pressure=near===Infinity?0:1-clamp((near-1.2)/2.4,0,1);
+   const top=Math.max(1,finite(c.players?.speed,5.3)),run=clamp(Math.hypot(finite(p.vx),finite(p.vz))/top,0,1);
+   const load=clamp(pressure*0.6+run*0.4,0,1);
+-  return radians((base+extra*load)*clamp(finite(noise),-1,1));
++  return radians((base+extra*load)*(c.quality?.passing===true ? .65 : 1)*clamp(finite(noise),-1,1));
++}
++
++/** An explicit through pass chooses an already running receiver in the intent
++ * cone. Reuse the existing lane/roll safety and arrival-speed solver; a short
++ * team-mate on the path remains a physical blocker, so this cannot pass through
++ * him. Null leaves the ordinary assisted ground pass in charge. */
++export function throughPassDestination(state,c){
++  if(c.quality?.passing!==true||!(state.throughPass||state.passAim?.through))return null;
++  const p=state.players.find(q=>q.id===state.controlled),b=state.ball;
++  if(!p||state.passAim?.manual||state.aim?.manual)return null;
++  const aim=unit(finite(state.aim?.x),finite(state.aim?.z),unit(finite(p.fx,1),finite(p.fz))),d=state.attackDir*(p.team===0?1:-1),cone=radians(38);
++  let best=null,score=Infinity;
++  for(const mate of state.players){
++    if(mate.team!==p.team||mate.id===p.id||mate.role==='keeper'||mate.recover>0||mate.slideTime>0)continue;
++    const range=distance(mate,b),turn=signedAngle(aim,unit(mate.x-b.x,mate.z-b.z));
++    if(range<3||range>c.passing.maxDistance||Math.abs(turn)>cone)continue;
++    const point=throughBallPoint(b,mate,state.players,c,d);if(!point)continue;
++    if(state.players.some(q=>q.team===p.team&&q.id!==p.id&&q.id!==mate.id&&distance(q,b)<distance(point,b)-.5&&passLaneClearance(q,b,point)<1.1))continue;
++    const value=Math.abs(turn)/cone+range*.002;
++    if(value<score-1e-10||Math.abs(value-score)<=1e-10&&mate.id<best?.target){score=value;best={...point,distance:distance(point,b),target:mate.id,kind:'ground',through:true,assisted:true,correctionRadians:signedAngle(aim,unit(point.x-b.x,point.z-b.z))};}
++  }
++  return best;
+ }
+ 
+ /** Optional config.assistance overrides. A tap or short pass goes to the team-mate
+@@ -39,9 +65,18 @@
+  * at whatever distance that is. Open lanes only break near-ties, so intent wins.
+  * Manual drags and lofted balls always retain the requested direction. */
+ export function assistedPassDestination(state,c,power=0){
++  const through=throughPassDestination(state,c);if(through)return through;
++  // Keep a receiver already found by the established narrow intent helper.
++  // The wider beginner cone is a fallback, so adding assistance does not change
++  // good short-pass choices to a different team-mate at the edge of the cone.
++  if(c.quality?.passing===true){
++    const narrow=assistedPassDestination(state,{...c,quality:{...c.quality,passing:false}},power);
++    const receiver=state.players.find(member=>member.id===narrow.target);
++    if(receiver&&!(receiver.recover>0)&&!(receiver.slideTime>0))return narrow;
++  }
+   const p=state.players.find(player=>player.id===state.controlled),b=state.ball;
+   if(!p)throw Error('A controlled soccer player is required');
+-  const q=clamp(finite(power),0,1),passing=c.passing;
++  const q=clamp(finite(power),0,1),passing=c.passing,quality=c.quality?.passing===true;
+   const fallback=unit(finite(p.fx,1),finite(p.fz));
+   const manual=!!(state.passAim?.manual||state.aim?.manual);
+   const raw=state.passAim?.manual?state.passAim:state.aim;
+@@ -50,9 +85,9 @@
+   const minRange=Math.max(0,passing.minDistance),maxRange=Math.max(minRange,passing.maxDistance);
+   let range=minRange+(maxRange-minRange)*q,direction=aim,target=null,correction=0;
+   const requestedRange=range;
+-  const cone=radians(clamp(setting(c,'passing','coneDegrees',38),0,80));
+-  const maxCorrection=radians(clamp(setting(c,'passing','maxCorrectionDegrees',38),0,cone*180/Math.PI));
+-  const maxAssistRange=clamp(setting(c,'passing','maxAssistDistance',20),0,maxRange);
++  const cone=radians(quality?46:clamp(setting(c,'passing','coneDegrees',38),0,80));
++  const maxCorrection=radians(quality?46:clamp(setting(c,'passing','maxCorrectionDegrees',38),0,cone*180/Math.PI));
++  const maxAssistRange=quality?maxRange:clamp(setting(c,'passing','maxAssistDistance',20),0,maxRange);
+   const minAssistRange=Math.max(0,setting(c,'passing','minAssistDistance',1.3));
+   const receiverZone=Math.max(0,setting(c,'passing','receiverZone',0.85));
+   const maxLead=Math.max(0,setting(c,'passing','maxLeadDistance',1.6));
+@@ -64,7 +99,7 @@
+   let best=Infinity;
+   if(!manual&&!loft&&maxCorrection>0){
+     for(const member of state.players){
+-      if(member.team!==p.team||member.id===p.id||member.recover>0)continue;
++      if(member.team!==p.team||member.id===p.id||member.recover>0||quality&&member.slideTime>0)continue;
+       const actualDistance=distance(member,b);
+       if(actualDistance<minAssistRange||actualDistance>maxAssistRange)continue;
+       const actual=unit(member.x-b.x,member.z-b.z);

@@ -1,0 +1,102 @@
+diff --git a/workout/island/minigames/soccer-quality-keeper.mjs b/workout/island/minigames/soccer-quality-keeper.mjs
+new file mode 100644
+index 0000000..c665b4d
+--- /dev/null
++++ b/workout/island/minigames/soccer-quality-keeper.mjs
+@@ -0,0 +1,96 @@
++import {rollBall,inPenaltyArea} from './soccer-physics.mjs';
++
++const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
++const direction=(p,s)=>s.attackDir*(p.team===0?1:-1);
++const enabled=c=>c.quality?.keeper===true;
++const manual=(p,s)=>s.role==='keeper'&&s.controlled===p.id;
++
++/** Explicit contract for the separately reviewed, uncompressed v3 animations.
++ * This module selects cues; it never loads assets or turns animation events
++ * into a save. Actor translation and legal contact remain simulation-owned. */
++export const KEEPER_MOTION_V3={
++  version:'soccer-keeper-motion-v3',
++  revision:'b31011b65144f9c6cc2eefddd0150a6f92707e4b',
++  source:'https://github.com/roynaor-work/Bakasun/tree/b31011b65144f9c6cc2eefddd0150a6f92707e4b/workout/island/design/soccer-keeper-motion-v3',
++  rootMotion:false,units:'metres',forward:'+Z',anatomicalLeft:'+X',
++  clips:{ready:'keeper_ready',shuffle:'keeper_shuffle',low:'keeper_dive_low',high:'keeper_dive_high',catch:'keeper_catch_two_hands'},
++  diveTakeoffSeconds:.65,diveSaveSeconds:1.1,diveDurationSeconds:5.2,
++};
++
++/** Integrate the observed ball, including curve/drag/bounce, to the keeper's
++ * home plane. No shooter input, target, RNG, wall time or future state is read. */
++export function predictQualityKeeperBall(p,s,c){
++  const b=s.ball,d=direction(p,s),plane=-d*(c.pitch.length/2-c.ai.keeperInset),dt=c.match.fixedStep;
++  if(b.owner!=null||b.lastTeam===p.team||b.vx*d>=-.1)return null;
++  const future={x:b.x,y:b.y,z:b.z,vx:b.vx,vy:b.vy,vz:b.vz,curve:b.curve||0};
++  for(let i=1;i*dt<=1.6+1e-8;i++){
++    const previous={x:future.x,y:future.y,z:future.z};rollBall(future,dt,c);
++    if((previous.x-plane)*d>=0&&(future.x-plane)*d<=0){
++      const f=clamp((plane-previous.x)/(future.x-previous.x),0,1),z=previous.z+(future.z-previous.z)*f,y=previous.y+(future.y-previous.y)*f;
++      return {x:plane,y,z,seconds:(i-1+f)*dt,onFrame:Math.abs(z)<=c.pitch.goalWidth/2+c.physics.ballRadius&&y<=c.pitch.goalHeight+c.physics.ballRadius};
++    }
++    if(future.vx*d>=-.1)break;
++  }
++  return null;
++}
++
++/** A deterministic, bounded reaction followed by one committed dive choice.
++ * Returns null for ordinary sweeps so the existing slow-ball keeper still runs.
++ * The caller moves toward this target through the normal body integrator. */
++export function updateQualityKeeper(p,s,c,dt){
++  if(!enabled(c)||manual(p,s))return null;
++  const b=s.ball,d=direction(p,s),fast=Math.hypot(b.vx,b.vz)>c.ai.keeperFastBall;
++  if(b.owner!=null||b.lastTeam===p.team||b.vx*d>=-.1||!fast){p.qualityKeeper=null;return null;}
++  let memory=p.qualityKeeper;
++  if(!memory||memory.shot!==b.shot||memory.lastPlayer!==b.lastPlayer){
++    const reactions=clamp(Number(p.card?.reactions)||50,1,99);
++    memory=p.qualityKeeper={shot:b.shot,lastPlayer:b.lastPlayer,age:0,reaction:clamp(.19-reactions*.0012,.08,.18),prediction:null,replan:0,diving:false,choice:null,committedZ:null,diveAge:0};
++  }
++  memory.age+=dt;memory.replan-=dt;
++  if(memory.replan<=0){memory.prediction=predictQualityKeeperBall(p,s,c);memory.replan=.075;}
++  const prediction=memory.prediction;
++  const ready=memory.age+1e-8>=memory.reaction;
++  const hx=c.pitch.length/2,k=c.goalkeeping,limit=c.pitch.goalWidth/2-c.ai.keeperPostInset;
++  if(!ready||!prediction?.onFrame)return null;
++  const gap=prediction.z-p.z,reach=c.ai.keeperBaseReach+c.ai.teamKeeper*c.ai.keeperReachScale;
++  // Delay takeoff until the trajectory is known and contact is close enough;
++  // then retain the chosen side instead of flicking as the ball passes the body.
++  if(!memory.choice&&prediction.seconds<=.7){
++    memory.choice=Math.abs(gap)<=reach*.45?'catch':prediction.y>1.15?'high':'low';
++    memory.committedZ=prediction.z;
++    if(memory.choice!=='catch'){
++      memory.diving=true;p.diveTime=k.diveSeconds;p.diveCooldown=k.diveSeconds+.15;
++      p.diveZ=Math.sign(gap)||1;memory.diveAge=0;
++    }
++  }
++  if(memory.diving)memory.diveAge+=dt;
++  const z=clamp(memory.committedZ??prediction.z,-limit,limit);
++  const target={x:d*clamp(prediction.x*d,-hx+k.areaInset,-hx+c.pitch.penaltyDepth-k.areaInset),z,duty:memory.diving?'keeper-quality-dive':'keeper-quality-set'};
++  memory.target=target;return target;
++}
++
++/** This supplements (never bypasses) the engine's radius, height, area and
++ * back-pass checks. A manually controlled keeper keeps the player's timing. */
++export function qualityKeeperCanContact(p,s,c){
++  if(!enabled(c)||manual(p,s))return true;
++  const memory=p.qualityKeeper;
++  return !!memory&&memory.age+1e-8>=memory.reaction&&inPenaltyArea(p,p,s,c)&&inPenaltyArea(p,s.ball,s,c);
++}
++
++/** Better set hands improve a local catch, while the existing card/shot formula
++ * and one existing seeded save draw remain authoritative. No guaranteed saves. */
++export function qualityKeeperSaveChance(base,p,s,c){
++  if(!enabled(c)||manual(p,s)||!qualityKeeperCanContact(p,s,c))return base;
++  const memory=p.qualityKeeper,near=Math.hypot(p.x-s.ball.x,p.z-s.ball.z);
++  const set=memory.choice==='catch'?.12:memory.diving?.07:.04;
++  return clamp(base+set*clamp(1-near/2.2,0,1),c.goalkeeping.minSave,c.goalkeeping.maxSave);
++}
++
++/** A view adapter can consume this cue after the separate v3 package is present.
++ * Its native 5.2 s dive must be retimed/bridged explicitly; do not pretend the
++ * game's .65 s dive timer is the native v3 clip duration. */
++export function keeperMotionV3Cue(p,s,c){
++  if(!enabled(c)||p.role!=='keeper')return null;
++  const m=p.qualityKeeper,kind=p.hands?'catch':m?.choice||'ready';
++  return {version:KEEPER_MOTION_V3.version,clip:KEEPER_MOTION_V3.clips[kind]||KEEPER_MOTION_V3.clips.ready,side:(p.diveZ||0)*direction(p,s)<0?'left':'right',elapsed:m?.diveAge||0,nativeTakeoff:kind==='low'||kind==='high'?.65:null,nativeSave:kind==='low'||kind==='high'?1.1:null,rootMotion:false};
++}

@@ -1,0 +1,9 @@
+{
+  "recordedBeforeTuning": true,
+  "sourceBase": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "support": {"metric": "mean visible defender clearance from carrier-to-target corridor in paired attacking snapshots, metres", "target": "after >= before * 1.10"},
+  "shape": {"metric": "RMS distance of offball nonpressing midfield-return targets from authored formation block, metres", "target": "after <= before * 0.80"},
+  "difficulty": {"metric": "actual-engine isolated presser approach seconds from 20 m to 2 m, stages 2/5/12/30", "target": "easy >= normal * 1.08 and normal >= hard * 1.04, no RNG read by quality planner"},
+  "eleven": {"metric": "actual engine counts, identity, unique roles and finite positions after 60 seconds", "target": "22 actors, 11/team, one keeper/team, saved four-card schema unchanged, 0 nonfinite"},
+  "limits": "Support and return metrics are tactical fixture probes, not match win rates; paired full bot matches are recorded separately without treating small samples as balance certification."
+}
