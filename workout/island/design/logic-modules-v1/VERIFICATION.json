@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/logic-modules-v1",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "environment": {
+    "node": "v24.19.0",
+    "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)"
+  },
+  "scope": {
+    "allowedPath": "workout/island/design/logic-modules-v1/",
+    "existingTrackedFilesChanged": 0,
+    "otherUntrackedFiles": 0,
+    "allDeliveryFilesNew": true
+  },
+  "moduleTests": {
+    "command": "node --test workout/island/design/logic-modules-v1/contracts.test.mjs workout/island/design/logic-modules-v1/*/tests/*.test.mjs",
+    "tests": 74,
+    "passed": 74,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 43632.183843,
+    "groups": {
+      "isolationContracts": 6,
+      "soccer": 16,
+      "fire": 20,
+      "runner": 32
+    },
+    "logSha256": "fc70a3ecc54ba2b2041e1bccaa21cbaed3a51873597ea65f2bce2c19d87fbd5d"
+  },
+  "soccer": {
+    "clips": 89,
+    "tracks": 1640,
+    "transitions": 917,
+    "nativeClips": {
+      "clipCount": 89,
+      "sampledPoses": 31424,
+      "nativeFloorViolations": 0,
+      "worst": {
+        "id": "soccer-kicks-v2:running_kick",
+        "samples": 238,
+        "minFloorHeightMeters": -0.0063195169481649605,
+        "minimum": {
+          "height": -0.0063195169481649605,
+          "time": 1.5166666666666666,
+          "probe": "RightFoot-sole-center",
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        "nativeFloorViolation": false,
+        "maxQuaternionNormError": 3.81115026204526e-8
+      }
+    },
+    "profiles": [
+      {
+        "speedMps": null,
+        "transitionCount": 917,
+        "speedGuardedTransitions": 0,
+        "samples": 98652,
+        "hardCutFailures": 703,
+        "rawFloorFailures": 253,
+        "adaptedFailures": 0,
+        "maxHardCutJointMeters": 0.7822850679681549,
+        "maxBlendStepJointMeters": 0.09222812549671669,
+        "rawFloorMinimum": -0.11005993509336887,
+        "correctedFloorMinimum": 0,
+        "maxRequiredLiftMeters": 0.11005993509336887
+      },
+      {
+        "speedMps": 2.6,
+        "transitionCount": 917,
+        "speedGuardedTransitions": 70,
+        "samples": 98652,
+        "hardCutFailures": 703,
+        "rawFloorFailures": 247,
+        "adaptedFailures": 0,
+        "maxHardCutJointMeters": 0.7822850679681549,
+        "maxBlendStepJointMeters": 0.09222812549671669,
+        "rawFloorMinimum": -0.11005993509336887,
+        "correctedFloorMinimum": 0,
+        "maxRequiredLiftMeters": 0.11005993509336887
+      },
+      {
+        "speedMps": 4.5,
+        "transitionCount": 917,
+        "speedGuardedTransitions": 122,
+        "samples": 98652,
+        "hardCutFailures": 703,
+        "rawFloorFailures": 260,
+        "adaptedFailures": 0,
+        "maxHardCutJointMeters": 0.7822850679681549,
+        "maxBlendStepJointMeters": 0.09222812549671669,
+        "rawFloorMinimum": -0.11005993509336887,
+        "correctedFloorMinimum": 0,
+        "maxRequiredLiftMeters": 0.11005993509336887
+      },
+      {
+        "speedMps": 7.2,
+        "transitionCount": 917,
+        "speedGuardedTransitions": 171,
+        "samples": 98652,
+        "hardCutFailures": 703,
+        "rawFloorFailures": 265,
+        "adaptedFailures": 0,
+        "maxHardCutJointMeters": 0.7822850679681549,
+        "maxBlendStepJointMeters": 0.09603910052130002,
+        "rawFloorMinimum": -0.11005993509336887,
+        "correctedFloorMinimum": 0,
+        "maxRequiredLiftMeters": 0.11005993509336887
+      }
+    ],
+    "thresholds": {
+      "hardCutJointMeters": 0.15,
+      "hardCutRotationDegrees": 40,
+      "blendStepJointMeters": 0.12,
+      "floorPenetrationMeters": 0.02,
+      "maxPresentationLiftMeters": 0.12,
+      "sampleRateHz": 120,
+      "phaseSamples": 5
+    },
+    "totalTransitionSamples": 394608,
+    "evidence": "soccer-motion-statemachine/data/transition-audit.json",
+    "limits": "Sampled canonical bone origins and sole proxies. Not skinned mesh certification or proof over all continuous phases."
+  },
+  "fire": {
+    "committedPatientWins": 360,
+    "thinkingSecondsBeforeEveryAction": 3,
+    "committedIdleOneStarRuns": 120,
+    "additionalWideUint32Wins": 480,
+    "additionalSlowestWinSeconds": {
+      "easy": 66,
+      "normal": 127,
+      "hard": 139
+    },
+    "limits": "Game model and generated missions; arbitrary custom maps/resources can be unwinnable."
+  },
+  "runner": {
+    "committedMatrixSegments": 73728,
+    "independentMovementCourses": 144,
+    "themes": [
+      "pine",
+      "ice",
+      "lava",
+      "aurora",
+      "village",
+      "peak"
+    ],
+    "lanes": 3,
+    "segmentMeters": 30,
+    "maxSpeedMps": 31,
+    "limits": "Requires documented colliders, steering and cue visibility. No wind, sliding or moving hazards."
+  },
+  "independentReview": {
+    "openFindings": 0,
+    "soccerExactAccessorValuesChecked": 833699,
+    "soccerDenseSourcePhases": 17,
+    "soccerDenseOriginalEdgesAt7_2Mps": 911,
+    "soccerDenseFallbackEdgesAllProfiles": 6,
+    "soccerCompositeSamples": 86400,
+    "soccerCompositeTransitions": 1362,
+    "soccerJsonRestores": 639,
+    "soccerMaxCompositeJointStepM": 0.0955083,
+    "soccerCorrectedFloorMinimumM": 0,
+    "fireIndependentPatientWins": 150,
+    "fireIndependentIdleOneStarLosses": 150,
+    "fireLegalActionFuzzSteps": 3750,
+    "runnerContinuousSegments": 23040,
+    "runnerMinimumSampledMarginM": 1.350008
+  },
+  "browserChecks": [
+    {
+      "module": "runner-course-generator",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "18 difficulty/theme combinations",
+        "final32segments",
+        "deterministic rendered replay",
+        "copy JSON",
+        "no horizontal page overflow"
+      ]
+    },
+    {
+      "module": "runner-course-generator",
+      "viewport": {
+        "width": 1280,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "18 difficulty/theme combinations",
+        "final32segments",
+        "deterministic rendered replay",
+        "copy JSON",
+        "no horizontal page overflow"
+      ]
+    },
+    {
+      "module": "fire-spread-model",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "start",
+        "stable keyboard focus and held pointer click",
+        "select burning room",
+        "use correct fire-class agent",
+        "fire reaches zero",
+        "finite inventory decreases",
+        "travel arrives",
+        "pause freezes clock",
+        "hard reset at uint32 maximum",
+        "no horizontal page overflow"
+      ]
+    },
+    {
+      "module": "fire-spread-model",
+      "viewport": {
+        "width": 1280,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "start",
+        "stable keyboard focus and held pointer click",
+        "select burning room",
+        "use correct fire-class agent",
+        "fire reaches zero",
+        "finite inventory decreases",
+        "travel arrives",
+        "pause freezes clock",
+        "hard reset at uint32 maximum",
+        "no horizontal page overflow"
+      ]
+    },
+    {
+      "module": "soccer-motion-statemachine",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "89 graph nodes and917 edges",
+        "four audit profiles show0 adapted failures",
+        "ball guard rejects missing possession",
+        "kick request and explicit early cancel",
+        "jog/run/sprint at2.6/4.5/7.2 with displacement",
+        "field/keeper/referee role catalogs",
+        "keeper dive",
+        "manual step while paused",
+        "no horizontal page overflow"
+      ]
+    },
+    {
+      "module": "soccer-motion-statemachine",
+      "viewport": {
+        "width": 1280,
+        "height": 844
+      },
+      "jsErrors": [],
+      "externalRequests": [],
+      "checks": [
+        "89 graph nodes and917 edges",
+        "four audit profiles show0 adapted failures",
+        "ball guard rejects missing possession",
+        "kick request and explicit early cancel",
+        "jog/run/sprint at2.6/4.5/7.2 with displacement",
+        "field/keeper/referee role catalogs",
+        "keeper dive",
+        "manual step while paused",
+        "no horizontal page overflow"
+      ]
+    }
+  ],
+  "repositoryRegression": {
+    "command": "npm test",
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "reason": "Default Playwright-managed browser executable absent. Existing workout-royiki browser test starts a server before launch and required stopping the failed child to let the runner finish.",
+    "targetedRerun": {
+      "file": "tests/workout-royiki.test.mjs",
+      "browser": "/usr/bin/chromium",
+      "adapter": "Temporary ISLAND_PLAYWRIGHT wrapper, outside the repository",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0
+    },
+    "fullOriginalRunGreen": false,
+    "existingFilesModifiedToResolveEnvironment": 0
+  }
+}

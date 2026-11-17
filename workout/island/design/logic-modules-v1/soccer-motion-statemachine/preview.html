@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מעבדת מעברי כדורגל</title>
+<link rel="stylesheet" href="./preview.css">
+<body>
+<main>
+ <header><p class="eyebrow">מעבדה מבודדת · נתוני מקור אמיתיים</p><h1>מעברי תנועה בכדורגל</h1><p id="inventory">טוען את נתוני הקליפים…</p></header>
+ <section class="controls" aria-label="בקרת הדגמה">
+  <label>תפקיד<select id="role"><option value="field">שחקן שדה</option><option value="keeper">שוער</option><option value="referee">שופט</option></select></label>
+  <label>מהירות במטר לשנייה<select id="speed"><option value="0">0</option><option value="2.6">2.6</option><option value="4.5">4.5</option><option value="7.2">7.2</option></select></label>
+  <label>קליפ<select id="clip"></select></label>
+  <label>גובה כדור בזמן המגע<input id="height" type="number" value="0.8" min="0" max="4" step="0.1"></label>
+  <label><input id="hasBall" type="checkbox" checked>הכדור זמין לפעולה</label>
+  <label><input id="scissorSpace" type="checkbox" checked>מרחב פנוי למספרת</label>
+  <button id="request">בקשת קליפ</button><button id="locomotion">תנועה לפי המהירות</button><button id="cancel">ביטול מוקדם</button><button id="pause">השהיה</button><button id="step">צעד של 0.1 שנייה</button><button id="reset">איפוס</button>
+ </section>
+ <section class="live"><div><canvas id="pose" width="640" height="440" aria-label="הקרנת שלד הקליפ האמיתי"></canvas><p>שלד אבחוני מתוך הנתונים המקוריים. אין כאן רשת דמות או אישור למגעי גוף.</p></div><div><h2>מצב פעיל</h2><pre id="state"></pre><h2>אירועים אחרונים</h2><ol id="events" aria-live="polite"></ol></div></section>
+ <section><h2>גרף הקליפים</h2><p>כל נקודה היא קליפ בעל מקור נפרד. הקווים מציגים את המעברים היוצאים מהמצב הפעיל. לחיצה בוחרת קליפ לבקשה.</p><div class="graph-scroll"><svg id="graph" viewBox="0 0 1140 620" role="img" aria-label="גרף 89 קליפים"></svg></div></section>
+ <section><h2>טבלת מעברים מהמצב הפעיל</h2><div class="table-scroll"><table><thead><tr><th>יעד</th><th>סוג</th><th>חלון יציאה</th><th>מיזוג בשניות</th><th>תנאים</th></tr></thead><tbody id="transitions"></tbody></table></div></section>
+ <section><h2>ממצאי בדיקות אמיתיות</h2><p>כל מעבר נבדק בחמישה שלבים בחלון היציאה, בקצב 120 הרץ, בארבעה פרופילי מהירות. המדידה מוגבלת לנקודות שלד ופינות כף רגל; אינה בודקת את מעטפת הדמות או את כל הזמנים הרציפים. קצב קליפים ישנים מוגבל ל־1.5; בקשת מהירות גבוהה מהטווח שלהם נדחית.</p><div id="audit">טוען דוח מדידות…</div></section>
+</main>
+<script type="module" src="./preview.mjs"></script>
+</body></html>

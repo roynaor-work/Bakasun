@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>חילוץ וכיבוי — תצוגת מנוע</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#f6f3eb;background:#10202b;color-scheme:dark}*{box-sizing:border-box}body{margin:0 auto;max-width:1100px;padding:20px}h1{font-size:1.8rem;margin:0 0 8px}p{line-height:1.6}.bar,.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}button,input,select{font:inherit;border:1px solid #65737c;border-radius:9px;padding:11px;background:#203847;color:inherit;min-height:44px}button{cursor:pointer}button:hover{border-color:#ffcb67;background:#304a58}button:focus-visible{outline:3px solid #ffcb67;outline-offset:2px}button:disabled{opacity:.5;cursor:default}label{display:flex;gap:6px;align-items:center}input{width:110px}.layout{display:grid;grid-template-columns:1fr 310px;gap:18px;margin-top:18px}.panel{background:#192c38;padding:16px;border:1px solid #435866;border-radius:14px}#building{display:grid;gap:12px}.floor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;border-bottom:1px solid #435866;padding-bottom:12px}.floor-title{grid-column:1/-1;color:#cbd5db}.room{display:flex;flex-direction:column;gap:8px;text-align:right;min-height:150px;background:linear-gradient(160deg,#283d49,#20313c)}.room.selected{outline:2px solid #ffcb67}.room.burning{border-color:#ff884b;background:linear-gradient(160deg,#713623,#302732)}.room.actor{box-shadow:inset 0 0 0 2px #67d9d0}.room small{font-size:.8rem;line-height:1.5}.room strong{font-size:1rem}.value{font-variant-numeric:tabular-nums}#actions{display:grid;gap:8px}#actions button{text-align:right}#inventory{display:grid;gap:6px;margin:16px 0;font-size:.85rem}.agent{display:flex;justify-content:space-between;gap:8px}#log{font-size:.8rem;padding-right:20px;line-height:1.7;color:#c9d8de;min-height:90px}#message{font-weight:700;color:#ffda8a;min-height:30px}#clock{font-size:1.4rem;margin-inline:auto 0}.help{color:#cbd5db;font-size:.9rem;margin:10px 0}#status{margin-top:10px;color:#a9ece7}@media(max-width:740px){body{padding:12px}.layout{grid-template-columns:1fr}.room{min-height:135px;padding:9px}.floor{gap:6px}h1{font-size:1.5rem}.panel{padding:12px}}
+</style>
+<h1>חילוץ וכיבוי</h1>
+<p class="help">בחרו חדר. כבו מהמסדרון, היכנסו כשבטוח, אספו כל אדם ולוו אותו ליציאה בקומת הקרקע. התנועה והחילוץ לוקחים זמן.</p>
+<div class="bar">
+  <label>מסלול <input id="seed" type="number" min="0" max="4294967295" step="1" value="7"></label>
+  <label>רמה <select id="difficulty"><option value="easy">קלה</option><option value="normal">רגילה</option><option value="hard">מאתגרת</option></select></label>
+  <button id="reset">מסלול חדש</button><button id="pause">התחילו</button><span id="clock" class="value"></span>
+</div>
+<div id="status" aria-live="polite"></div>
+<div class="layout">
+  <main class="panel"><div id="building" aria-label="הבניין"></div></main>
+  <aside class="panel">
+    <div id="message" role="status"></div><div id="actions"></div>
+    <p class="help">התאמה במשחק: A — מים, B — קצף, E — פחמן דו־חמצני, F — חומר לשמן. כיבוי נעצר כשהחדר מתקרר.</p>
+    <div id="inventory"></div><strong>מה קרה עכשיו</strong><ol id="log"></ol>
+  </aside>
+</div>
+<script type="module">
+import { createGame, step, getAvailableActions, getResult } from './src/index.mjs';
+const $ = id => document.getElementById(id);
+const agentNames = { water:'מים', foam:'קצף', co2:'פחמן דו־חמצני', powder:'אבקה', wetChemical:'חומר לשמן' };
+const materials = { wood:'עץ', fabric:'בד', liquid:'נוזל דליק', electrical:'חשמל', cookingOil:'שמן בישול', concrete:'בטון' };
+const reasons = { 'out-of-range':'החדר מחוץ לטווח', 'unsafe-entry':'הכניסה עדיין חמה — קררו מהמסדרון', 'unsafe-rescue':'צריך לכבות ולקרר לפני החילוץ', 'closed-door':'הדלת סגורה', 'travelling':'בדרך לחדר', 'carrying-person':'לוו קודם את האדם ליציאה', 'empty-agent':'המכל הזה התרוקן' };
+let state, selected, started = false, messages = [], lastTime = null, lastRender = 0, dirty = true;
+const roomNodes = new Map(), inventoryNodes = new Map(), actionNodes = new Map();
+let actionSignature = '', logSignature = '';
+const setText = (node, value) => { if(node.textContent !== value) node.textContent = value; };
+function roomName(room){return room.exit?'יציאה ומסדרון':room.id.startsWith('landing')?'מסדרון ומדרגות':`חדר ${room.id.split('-').at(-1)==='0'?'א':'ב'}`}
+function doAction(action){const next=step(state,action,0);state=next.state;record(next.events);render()}
+function record(events){for(const event of events){let message=null;if(event.type==='action-rejected')message=reasons[event.code]||'הפעולה אינה זמינה כרגע';if(event.type==='fire-extinguished')message='האש כובתה';if(event.type==='fire-ignited')message='אש התפשטה לחדר נוסף';if(event.type==='person-picked-up')message='האדם אתכם — חזרו ליציאה';if(event.type==='person-rescued')message='האדם הגיע ליציאה בשלום';if(event.type==='arrived')message='הגעתם לחדר';if(event.type==='agent-mismatch')message='החומר הזה כמעט אינו משפיע על האש הזאת';if(event.type==='agent-empty')message='המכל התרוקן — בחרו חומר מתאים אחר';if(event.type==='travel-blocked')message='הכניסה התחממה בדרך — קררו לפני ניסיון נוסף';if(message)messages.unshift(message)}messages=messages.slice(0,6)}
+function prepareRooms(){
+ $('building').replaceChildren();roomNodes.clear();
+ for(const floor of [...new Set(state.rooms.map(r=>r.floor))].sort((a,b)=>b-a)){
+  const row=document.createElement('section');row.className='floor';
+  const title=document.createElement('div');title.className='floor-title';title.textContent=`קומה ${floor+1}`;row.append(title);
+  for(const room of state.rooms.filter(r=>r.floor===floor)){
+   const b=document.createElement('button'),heading=document.createElement('strong'),info=document.createElement('small');
+   b.dataset.roomId=room.id;info.style.whiteSpace='pre-line';b.append(heading,info);
+   b.onclick=()=>{selected=room.id;render()};row.append(b);roomNodes.set(room.id,{b,heading,info});
+  }
+  $('building').append(row);
+ }
+ $('inventory').replaceChildren();inventoryNodes.clear();
+ for(const name of Object.keys(state.inventory)){
+  const d=document.createElement('div'),label=document.createElement('span'),value=document.createElement('span');
+  d.className='agent';label.textContent=agentNames[name];d.append(label,value);$('inventory').append(d);inventoryNodes.set(name,value);
+ }
+ actionSignature='';actionNodes.clear();
+}
+function renderActions(available,result){
+ const desired=[];
+ for(const action of available){
+  if(action.type==='move'&&action.roomId===selected)desired.push(['לכו לחדר הזה',action]);
+  if(action.type==='spray'&&action.roomId===selected)desired.push([`כבו בעזרת ${agentNames[action.agent]}`,action]);
+  if(action.type==='rescue')desired.push(['אספו אדם לחילוץ',action]);
+  if(action.type==='door'){
+   const link=state.links.find(l=>l.id===action.linkId);
+   if([link.from,link.to].includes(selected))desired.push([action.open?'פתחו את הדלת':'סגרו את הדלת',action]);
+  }
+ }
+ if(started&&state.actor.task)desired.push(['עצרו פעולה',{type:'wait'}]);
+ if(!started){desired.length=0;desired.push(['לחצו על התחילו כדי לצאת למשימה.',null])}
+ else if(!desired.length&&!result)desired.push([state.status==='paused'?'לחצו על המשיכו.':state.actor.travel?'המתינו להגעה.':'בחרו חדר סמוך או מסדרון כדי להתקדם.',null]);
+ const signature=JSON.stringify(desired);if(signature===actionSignature)return;actionSignature=signature;
+ const nodes=desired.map(([text,action])=>{
+  const key=JSON.stringify(action??text);
+  if(!actionNodes.has(key)){
+   const node=document.createElement(action?'button':'p');node.textContent=text;
+   if(action)node.onclick=()=>doAction(action);else node.className='help';actionNodes.set(key,node);
+  }
+  return actionNodes.get(key);
+ });
+ // Keep the same button elements across clock/heat updates. A held touch or
+ // keyboard focus survives normal frame rendering.
+ for(const child of [...$('actions').children])if(!nodes.includes(child))child.remove();
+ nodes.forEach((node,index)=>{if($('actions').children[index]!==node)$('actions').insertBefore(node,$('actions').children[index]??null)});
+}
+function render(){
+ setText($('clock'),`${Math.ceil(state.clock.remaining)} שנ׳`);
+ setText($('pause'),!started?'התחילו':state.status==='paused'?'המשיכו':'השהיה');$('pause').disabled=['won','lost'].includes(state.status);
+ const result=getResult(state),destination=state.actor.travel&&state.rooms.find(r=>r.id===state.actor.travel.to);
+ setText($('status'),result?`${'★'.repeat(result.stars)} ${result.outcome==='won'?'כל האנשים חולצו והאש כובתה':'המשימה הסתיימה — אפשר לנסות שוב'} · ${result.rescued}/${result.people} חולצו`:destination?`בדרך אל ${roomName(destination)}, קומה ${destination.floor+1} · ${state.actor.travel.remaining.toFixed(1)} שנ׳`:state.actor.carrying?'מלווים אדם ליציאה':state.status==='paused'?'המשחק בהשהיה':`נמצאים בקומה ${state.rooms.find(r=>r.id===state.actor.roomId).floor+1}`);
+ for(const room of state.rooms){
+  const {b,heading,info}=roomNodes.get(room.id);b.className=`room ${room.fire>0?'burning':''} ${room.id===selected?'selected':''} ${state.actor.roomId===room.id?'actor':''}`;
+  const people=state.people.filter(p=>p.roomId===room.id&&p.status==='waiting');
+  setText(heading,`${state.actor.roomId===room.id?'● ':''}${roomName(room)}${room.fire>0?' 🔥':''}${people.length?' 👤':''}`);
+  setText(info,`${materials[room.material]} · סוג ${room.fireClass}\nאש ${Math.round(room.fire*100)}% · חום ${Math.round(room.heat*100)}%\nעשן ${Math.round(room.smoke*100)}% · חמצן ${Math.round(room.oxygen*100)}%`);
+ }
+ const room=state.rooms.find(r=>r.id===selected);setText($('message'),room?`${roomName(room)} · קומה ${room.floor+1}`:'');
+ renderActions(getAvailableActions(state),result);
+ for(const [name,value] of Object.entries(state.inventory))setText(inventoryNodes.get(name),`${Math.ceil(value)} / ${Math.ceil(state.initialInventory[name])}`);
+ const log=JSON.stringify(messages);if(log!==logSignature){logSignature=log;$('log').replaceChildren(...messages.map(message=>{const li=document.createElement('li');li.textContent=message;return li}))}
+ dirty=false;
+}
+function reset(){try{state=createGame({seed:Number($('seed').value),difficulty:$('difficulty').value});selected='room-0-0';started=false;messages=[];lastTime=null;prepareRooms();doAction({type:'pause'})}catch(error){$('message').textContent='מספר המסלול חייב להיות מספר שלם בטווח הנתון.'}}
+ $('reset').onclick=reset;$('pause').onclick=()=>{if(!started)started=true;doAction({type:state.status==='paused'?'resume':'pause'});lastTime=null};
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.status==='running')doAction({type:'pause'});lastTime=null});
+ function frame(now){if(lastTime!==null&&started&&state.status==='running'){const next=step(state,null,Math.min(.25,(now-lastTime)/1000));state=next.state;record(next.events);dirty=true}lastTime=now;if(dirty&&now-lastRender>100){render();lastRender=now}requestAnimationFrame(frame)}
+ reset();requestAnimationFrame(frame);
+</script>
+</html>

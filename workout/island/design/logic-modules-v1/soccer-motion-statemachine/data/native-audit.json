@@ -1,0 +1,1574 @@
+{
+  "schemaVersion": 1,
+  "method": "Independent tool: exact float32 GLB animation tracks, LINEAR shortest-path quaternion slerp, full parent-local FK, each native key plus 120 Hz uniform samples and exact endpoint",
+  "floorY": 0,
+  "thresholdMeters": 0.02,
+  "probes": [
+    {
+      "name": "all-joint-origins",
+      "description": "Every canonical joint origin, not a mesh surface"
+    },
+    {
+      "name": "left-sole-center",
+      "bone": "LeftFoot",
+      "local": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "name": "right-sole-center",
+      "bone": "RightFoot",
+      "local": [
+        0,
+        -0.08,
+        0
+      ]
+    }
+  ],
+  "limits": [
+    "Skeletal probe floor check only. Mesh vertices, skin deformation, shoe shape and garment surfaces are excluded.",
+    "Sampling at 120 Hz plus original keys can miss extrema between samples; no continuous-time certification.",
+    "Baked local translations are used once. Demonstration referenceTravel is not applied, as its Y component may describe a separate host scenario.",
+    "This measures native clips only. Transition windows and blended pose checks are covered separately by runtime graph diagnostics.",
+    "No assertion that a positive probe height means stable contact, realistic foot sliding, collision-free posture, or visually acceptable animation."
+  ],
+  "clips": [
+    {
+      "id": "soccer-locomotion-v2:idle_relaxed",
+      "samples": 593,
+      "minFloorHeightMeters": -9.188943826676788e-8,
+      "minimum": {
+        "height": -9.188943826676788e-8,
+        "time": 0.8833333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 2.9789349764719475e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:idle_weight_shift",
+      "samples": 593,
+      "minFloorHeightMeters": -9.613589208035123e-8,
+      "minimum": {
+        "height": -9.613589208035123e-8,
+        "time": 0.8833333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 2.9789349764719475e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:idle_scan",
+      "samples": 593,
+      "minFloorHeightMeters": -9.207899495655703e-8,
+      "minimum": {
+        "height": -9.207899495655703e-8,
+        "time": 0.8833333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 2.994563130798156e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:walk",
+      "samples": 159,
+      "minFloorHeightMeters": 0.0034894964281393104,
+      "minimum": {
+        "height": 0.0034894964281393104,
+        "time": 0.6166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.9644590610343755e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:jog",
+      "samples": 130,
+      "minFloorHeightMeters": 0.003081388844181035,
+      "minimum": {
+        "height": 0.003081388844181035,
+        "time": 0.45,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.1201377259648666e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:run",
+      "samples": 110,
+      "minFloorHeightMeters": 0.002482634536586578,
+      "minimum": {
+        "height": 0.002482634536586578,
+        "time": 0.6166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.21229683963864e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:sprint",
+      "samples": 100,
+      "minFloorHeightMeters": 0.0007408096099313366,
+      "minimum": {
+        "height": 0.0007408096099313366,
+        "time": 0.5833333333333334,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.854071284337124e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_left_45",
+      "samples": 219,
+      "minFloorHeightMeters": 0.002381320225562561,
+      "minimum": {
+        "height": 0.002381320225562561,
+        "time": 0.9833333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.060489100510267e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_right_45",
+      "samples": 219,
+      "minFloorHeightMeters": 0.002381320225562561,
+      "minimum": {
+        "height": 0.002381320225562561,
+        "time": 0.9833333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.060489100510267e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_left_90",
+      "samples": 219,
+      "minFloorHeightMeters": 0.001579719912406491,
+      "minimum": {
+        "height": 0.001579719912406491,
+        "time": 0.5166666666666667,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.529302605720375e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_right_90",
+      "samples": 219,
+      "minFloorHeightMeters": 0.001579719912406491,
+      "minimum": {
+        "height": 0.001579719912406491,
+        "time": 0.5166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.529302605720375e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_left_180",
+      "samples": 327,
+      "minFloorHeightMeters": 0.0029424295099077236,
+      "minimum": {
+        "height": 0.0029424295099077236,
+        "time": 1.7166666666666666,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.6012040682820157e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:turn_right_180",
+      "samples": 327,
+      "minFloorHeightMeters": 0.0029424295099077236,
+      "minimum": {
+        "height": 0.0029424295099077236,
+        "time": 1.7166666666666666,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.6012040682820157e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:strafe_left",
+      "samples": 130,
+      "minFloorHeightMeters": 0.0037896999445364565,
+      "minimum": {
+        "height": 0.0037896999445364565,
+        "time": 0.016666666666666666,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.1821858370584266e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:strafe_right",
+      "samples": 130,
+      "minFloorHeightMeters": 0.0037896999445364565,
+      "minimum": {
+        "height": 0.0037896999445364565,
+        "time": 0.016666666666666666,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.1821858370584266e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:run_backward",
+      "samples": 110,
+      "minFloorHeightMeters": 0.0036435383190132065,
+      "minimum": {
+        "height": 0.0036435383190132065,
+        "time": 0.6166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 2.9430611281355823e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:run_ball",
+      "samples": 110,
+      "minFloorHeightMeters": 0.003024643335620636,
+      "minimum": {
+        "height": 0.003024643335620636,
+        "time": 0.6166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.107124491030788e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:idle_to_run",
+      "samples": 75,
+      "minFloorHeightMeters": -0.0017126084563332256,
+      "minimum": {
+        "height": -0.0017126084563332256,
+        "time": 0.31666666666666665,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.21229683963864e-8
+    },
+    {
+      "id": "soccer-locomotion-v2:run_to_idle",
+      "samples": 71,
+      "minFloorHeightMeters": -2.296784117061801e-8,
+      "minimum": {
+        "height": -2.296784117061801e-8,
+        "time": 0.46666666865348816,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.225280720275947e-8
+    },
+    {
+      "id": "soccer-kicks-v2:power_landing",
+      "samples": 475,
+      "minFloorHeightMeters": -0.0029577937634467782,
+      "minimum": {
+        "height": -0.0029577937634467782,
+        "time": 0.2833333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.644007340319888e-8
+    },
+    {
+      "id": "soccer-kicks-v2:inside_curve",
+      "samples": 475,
+      "minFloorHeightMeters": -0.00003012501501996334,
+      "minimum": {
+        "height": -0.00003012501501996334,
+        "time": 1.05,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.989137287163658e-8
+    },
+    {
+      "id": "soccer-kicks-v2:outside_kick",
+      "samples": 445,
+      "minFloorHeightMeters": -0.00003096995223136889,
+      "minimum": {
+        "height": -0.00003096995223136889,
+        "time": 0.48333333333333334,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.541354642866423e-8
+    },
+    {
+      "id": "soccer-kicks-v2:placed_kick",
+      "samples": 415,
+      "minFloorHeightMeters": -0.00002053913839075716,
+      "minimum": {
+        "height": -0.00002053913839075716,
+        "time": 0.5166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.057707858606818e-8
+    },
+    {
+      "id": "soccer-kicks-v2:weak_foot",
+      "samples": 459,
+      "minFloorHeightMeters": -0.000023494777096122466,
+      "minimum": {
+        "height": -0.000023494777096122466,
+        "time": 0.5166666666666667,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.7927405993620766e-8
+    },
+    {
+      "id": "soccer-kicks-v2:volley",
+      "samples": 475,
+      "minFloorHeightMeters": -0.000019346991316560036,
+      "minimum": {
+        "height": -0.000019346991316560036,
+        "time": 0.5833333333333334,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.858779862309092e-8
+    },
+    {
+      "id": "soccer-kicks-v2:scissors",
+      "samples": 653,
+      "minFloorHeightMeters": -0.00001878515135210479,
+      "minimum": {
+        "height": -0.00001878515135210479,
+        "time": 0.18333333333333332,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.1013207607853985e-8
+    },
+    {
+      "id": "soccer-kicks-v2:chip",
+      "samples": 431,
+      "minFloorHeightMeters": -0.00045853897275245636,
+      "minimum": {
+        "height": -0.00045853897275245636,
+        "time": 1.1166666666666667,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.780264057340332e-8
+    },
+    {
+      "id": "soccer-kicks-v2:running_kick",
+      "samples": 238,
+      "minFloorHeightMeters": -0.0063195169481649605,
+      "minimum": {
+        "height": -0.0063195169481649605,
+        "time": 1.5166666666666666,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.81115026204526e-8
+    },
+    {
+      "id": "soccer-kicks-v2:short_inside_pass",
+      "samples": 357,
+      "minFloorHeightMeters": -0.0000384198919548967,
+      "minimum": {
+        "height": -0.0000384198919548967,
+        "time": 0.45,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.593372077670409e-8
+    },
+    {
+      "id": "soccer-kicks-v2:long_pass",
+      "samples": 489,
+      "minFloorHeightMeters": -0.00002509936429534454,
+      "minimum": {
+        "height": -0.00002509936429534454,
+        "time": 1.15,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.4999207976227353e-8
+    },
+    {
+      "id": "soccer-kicks-v2:through_pass",
+      "samples": 401,
+      "minFloorHeightMeters": -0.00003323336402195898,
+      "minimum": {
+        "height": -0.00003323336402195898,
+        "time": 0.48333333333333334,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.000492648259524e-8
+    },
+    {
+      "id": "soccer-kicks-v2:lift_pass",
+      "samples": 445,
+      "minFloorHeightMeters": -0.00001963413986950935,
+      "minimum": {
+        "height": -0.00001963413986950935,
+        "time": 0.55,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.7644352413046533e-8
+    },
+    {
+      "id": "soccer-kicks-v2:wing_cross",
+      "samples": 519,
+      "minFloorHeightMeters": -0.00003145916457407416,
+      "minimum": {
+        "height": -0.00003145916457407416,
+        "time": 1.25,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.760659583740278e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:slide_tackle",
+      "samples": 149,
+      "minFloorHeightMeters": -0.00020535010389476083,
+      "minimum": {
+        "height": -0.00020535010389476083,
+        "time": 0.08333333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.837105466697466e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:getup_fast",
+      "samples": 90,
+      "minFloorHeightMeters": -0.0007753318799506581,
+      "minimum": {
+        "height": -0.0007753318799506581,
+        "time": 0.4166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.669575932008229e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:stumble_light",
+      "samples": 75,
+      "minFloorHeightMeters": -0.00022056051031317525,
+      "minimum": {
+        "height": -0.00022056051031317525,
+        "time": 0.25,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 2.9321000072357606e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:fall_soft",
+      "samples": 46,
+      "minFloorHeightMeters": 0.001247167450224379,
+      "minimum": {
+        "height": 0.001247167450224379,
+        "time": 0.041666666666666664,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.18869850524095e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:getup_soft",
+      "samples": 61,
+      "minFloorHeightMeters": -0.003213705854071297,
+      "minimum": {
+        "height": -0.003213705854071297,
+        "time": 0.25833333333333336,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.794933811640533e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:fall_foul",
+      "samples": 179,
+      "minFloorHeightMeters": 0.001534546848801388,
+      "minimum": {
+        "height": 0.001534546848801388,
+        "time": 0.08333333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.0332856388047844e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:getup_foul",
+      "samples": 120,
+      "minFloorHeightMeters": -0.00042428024202986747,
+      "minimum": {
+        "height": -0.00042428024202986747,
+        "time": 0.6833333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.957744088012305e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_left",
+      "samples": 164,
+      "minFloorHeightMeters": -0.001149522693405694,
+      "minimum": {
+        "height": -0.001149522693405694,
+        "time": 0.08333333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.708391349555029e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_low_left",
+      "samples": 149,
+      "minFloorHeightMeters": -0.0045983443614590475,
+      "minimum": {
+        "height": -0.0045983443614590475,
+        "time": 0.05,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.763154587943518e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_high_left",
+      "samples": 193,
+      "minFloorHeightMeters": -0.0007494472365210114,
+      "minimum": {
+        "height": -0.0007494472365210114,
+        "time": 0.08333333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.822493155336559e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:getup_keeper_left",
+      "samples": 120,
+      "minFloorHeightMeters": -0.0013006509737929078,
+      "minimum": {
+        "height": -0.0013006509737929078,
+        "time": 0.65,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.637870682471345e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_right",
+      "samples": 164,
+      "minFloorHeightMeters": -0.0011422094182464565,
+      "minimum": {
+        "height": -0.0011422094182464565,
+        "time": 0.08333333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.2885859146958296e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_low_right",
+      "samples": 149,
+      "minFloorHeightMeters": -0.004588455257459448,
+      "minimum": {
+        "height": -0.004588455257459448,
+        "time": 0.05,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.763154587943518e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:dive_high_right",
+      "samples": 193,
+      "minFloorHeightMeters": -0.0007459475621182932,
+      "minimum": {
+        "height": -0.0007459475621182932,
+        "time": 0.08333333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.822493155336559e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:getup_keeper_right",
+      "samples": 120,
+      "minFloorHeightMeters": -0.0012922344983036793,
+      "minimum": {
+        "height": -0.0012922344983036793,
+        "time": 0.65,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.637870682471345e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:catch_chest",
+      "samples": 164,
+      "minFloorHeightMeters": -0.00027462592569754696,
+      "minimum": {
+        "height": -0.00027462592569754696,
+        "time": 0.11666666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.541560877895478e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:catch_high",
+      "samples": 193,
+      "minFloorHeightMeters": -0.0006978226500004986,
+      "minimum": {
+        "height": -0.0006978226500004986,
+        "time": 0.08333333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.18869850524095e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:punch",
+      "samples": 193,
+      "minFloorHeightMeters": -0.0006853941033871103,
+      "minimum": {
+        "height": -0.0006853941033871103,
+        "time": 0.08333333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.8256673606795744e-8
+    },
+    {
+      "id": "soccer-tackle-keeper-v2:save_with_foot",
+      "samples": 164,
+      "minFloorHeightMeters": -0.0016300927416546263,
+      "minimum": {
+        "height": -0.0016300927416546263,
+        "time": 0.08333333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.6028629635254106e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:volley_right",
+      "samples": 445,
+      "minFloorHeightMeters": -0.00002051314119680403,
+      "minimum": {
+        "height": -0.00002051314119680403,
+        "time": 0.5166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.770514100942535e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:volley_left",
+      "samples": 445,
+      "minFloorHeightMeters": -0.0000201016383802044,
+      "minimum": {
+        "height": -0.0000201016383802044,
+        "time": 0.5166666666666667,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.640707169072499e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:scissor_backward",
+      "samples": 311,
+      "minFloorHeightMeters": -0.00008214059799738216,
+      "minimum": {
+        "height": -0.00008214059799738216,
+        "time": 0.4166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.722215957679964e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:scissor_land_getup",
+      "samples": 223,
+      "minFloorHeightMeters": -0.0029608413657631893,
+      "minimum": {
+        "height": -0.0029608413657631893,
+        "time": 0.5166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.6316964768801085e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:header_prepare",
+      "samples": 267,
+      "minFloorHeightMeters": -0.00003923181933558617,
+      "minimum": {
+        "height": -0.00003923181933558617,
+        "time": 0.38333333333333336,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.0206043888370004e-8
+    },
+    {
+      "id": "soccer-volley-scissor-v1:header_jump_neutral",
+      "samples": 267,
+      "minFloorHeightMeters": -0.00033659868858708364,
+      "minimum": {
+        "height": -0.00033659868858708364,
+        "time": 0.45,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.815657767525238e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:idle_relaxed",
+      "samples": 929,
+      "minFloorHeightMeters": 0.003999966465390761,
+      "minimum": {
+        "height": 0.003999966465390761,
+        "time": 1.2666666507720947,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.2299196206508896e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:referee_idle",
+      "samples": 929,
+      "minFloorHeightMeters": 0.003999966465390761,
+      "minimum": {
+        "height": 0.003999966465390761,
+        "time": 1.2666666507720947,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.2299196206508896e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:jog",
+      "samples": 175,
+      "minFloorHeightMeters": 0.003999959904949238,
+      "minimum": {
+        "height": 0.003999959904949238,
+        "time": 0.4083333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.74954265414118e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:run",
+      "samples": 156,
+      "minFloorHeightMeters": 0.003999975398466263,
+      "minimum": {
+        "height": 0.003999975398466263,
+        "time": 0.36666666666666664,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.9480483771114905e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:sprint",
+      "samples": 129,
+      "minFloorHeightMeters": 0.003999973080949529,
+      "minimum": {
+        "height": 0.003999973080949529,
+        "time": 0.30833333333333335,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.476918419842434e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:referee_run",
+      "samples": 156,
+      "minFloorHeightMeters": 0.003999965544891862,
+      "minimum": {
+        "height": 0.003999965544891862,
+        "time": 0.6666666666666666,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.5017519328661706e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:keeper_ready_side_steps",
+      "samples": 744,
+      "minFloorHeightMeters": 0.003999958947150203,
+      "minimum": {
+        "height": 0.003999958947150203,
+        "time": 0.008333333767950535,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.018161892105354e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:keeper_catch_chest",
+      "samples": 558,
+      "minFloorHeightMeters": 0.0040000014745031065,
+      "minimum": {
+        "height": 0.0040000014745031065,
+        "time": 0,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.4814751637135544e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:keeper_catch_head",
+      "samples": 558,
+      "minFloorHeightMeters": 0.0040000014745031065,
+      "minimum": {
+        "height": 0.0040000014745031065,
+        "time": 0,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.0741837459279395e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:idle_to_jog",
+      "samples": 523,
+      "minFloorHeightMeters": 0.003999959699070604,
+      "minimum": {
+        "height": 0.003999959699070604,
+        "time": 2.2083333333333335,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.957344218985526e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:jog_to_idle",
+      "samples": 523,
+      "minFloorHeightMeters": 0.003999955370458316,
+      "minimum": {
+        "height": 0.003999955370458316,
+        "time": 1.3416666666666666,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.07093042609219e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:idle_to_run",
+      "samples": 465,
+      "minFloorHeightMeters": 0.003999964343396181,
+      "minimum": {
+        "height": 0.003999964343396181,
+        "time": 1.95,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.132561792768996e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:run_to_idle",
+      "samples": 465,
+      "minFloorHeightMeters": 0.003999964990582902,
+      "minimum": {
+        "height": 0.003999964990582902,
+        "time": 1.8916666666666666,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.0762274444716695e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:idle_to_sprint",
+      "samples": 383,
+      "minFloorHeightMeters": 0.003999956975752408,
+      "minimum": {
+        "height": 0.003999956975752408,
+        "time": 1.2166666666666666,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.003815046171866e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:sprint_to_idle",
+      "samples": 383,
+      "minFloorHeightMeters": 0.00399995905048188,
+      "minimum": {
+        "height": 0.00399995905048188,
+        "time": 1.1166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.881778898318089e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:idle_to_referee_run",
+      "samples": 465,
+      "minFloorHeightMeters": 0.003999956000341837,
+      "minimum": {
+        "height": 0.003999956000341837,
+        "time": 1.9583333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.871017539847088e-8
+    },
+    {
+      "id": "soccer-run-cycles-v3:referee_run_to_idle",
+      "samples": 465,
+      "minFloorHeightMeters": 0.0039999665175043525,
+      "minimum": {
+        "height": 0.0039999665175043525,
+        "time": 1.1833333333333333,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.7590772161699704e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_ready",
+      "samples": 357,
+      "minFloorHeightMeters": 0.003999951705098273,
+      "minimum": {
+        "height": 0.003999951705098273,
+        "time": 0.5166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.6872276565347306e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_shuffle",
+      "samples": 475,
+      "minFloorHeightMeters": 0.0038012968718256906,
+      "minimum": {
+        "height": 0.0038012968718256906,
+        "time": 0.8166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.911031254411057e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_dive_low",
+      "samples": 770,
+      "minFloorHeightMeters": 0.003774996772644673,
+      "minimum": {
+        "height": 0.003774996772644673,
+        "time": 0.45,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.2083250217928025e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_dive_high",
+      "samples": 770,
+      "minFloorHeightMeters": 0.003774996772644673,
+      "minimum": {
+        "height": 0.003774996772644673,
+        "time": 0.45,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.0071883811165776e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_catch_two_hands",
+      "samples": 533,
+      "minFloorHeightMeters": 0.00400002577698523,
+      "minimum": {
+        "height": 0.00400002577698523,
+        "time": 0,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.1425107788484183e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_punch",
+      "samples": 475,
+      "minFloorHeightMeters": 0.0039638043029753545,
+      "minimum": {
+        "height": 0.0039638043029753545,
+        "time": 0.21666666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.160119893015235e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_throw",
+      "samples": 563,
+      "minFloorHeightMeters": 0.003967252616646724,
+      "minimum": {
+        "height": 0.003967252616646724,
+        "time": 1.3166666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.93136873055866e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_punt",
+      "samples": 622,
+      "minFloorHeightMeters": 0.003985267302363871,
+      "minimum": {
+        "height": 0.003985267302363871,
+        "time": 1.95,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.0351459840159976e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_celebrate",
+      "samples": 563,
+      "minFloorHeightMeters": 0.00400002577698523,
+      "minimum": {
+        "height": 0.00400002577698523,
+        "time": 0,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.970869655312015e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:keeper_disappointed",
+      "samples": 533,
+      "minFloorHeightMeters": 0.003998739814454241,
+      "minimum": {
+        "height": 0.003998739814454241,
+        "time": 2.716666666666667,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.8402334867626564e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:field_miss",
+      "samples": 563,
+      "minFloorHeightMeters": -0.000013550233100359521,
+      "minimum": {
+        "height": -0.000013550233100359521,
+        "time": 0.35,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 4.2597629867913156e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:field_group_celebrate",
+      "samples": 653,
+      "minFloorHeightMeters": -0.000013550233100359521,
+      "minimum": {
+        "height": -0.000013550233100359521,
+        "time": 0.35,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.240036816620773e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:field_enter",
+      "samples": 593,
+      "minFloorHeightMeters": -0.0006831445931893276,
+      "minimum": {
+        "height": -0.0006831445931893276,
+        "time": 2.283333333333333,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.630607570137556e-8
+    },
+    {
+      "id": "soccer-keeper-motion-v3:field_clap",
+      "samples": 593,
+      "minFloorHeightMeters": -0.000013550233100359521,
+      "minimum": {
+        "height": -0.000013550233100359521,
+        "time": 0.35,
+        "probe": "LeftFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.7610041081492795e-8
+    }
+  ],
+  "summary": {
+    "clipCount": 89,
+    "sampledPoses": 31424,
+    "nativeFloorViolations": 0,
+    "worst": {
+      "id": "soccer-kicks-v2:running_kick",
+      "samples": 238,
+      "minFloorHeightMeters": -0.0063195169481649605,
+      "minimum": {
+        "height": -0.0063195169481649605,
+        "time": 1.5166666666666666,
+        "probe": "RightFoot-sole-center",
+        "local": [
+          0,
+          -0.08,
+          0
+        ]
+      },
+      "nativeFloorViolation": false,
+      "maxQuaternionNormError": 3.81115026204526e-8
+    }
+  }
+}
