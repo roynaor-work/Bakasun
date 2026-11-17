@@ -3,7 +3,7 @@
  *  - A small round switch beside it (#special-switch, 46 px, the C key) shows the NEXT weapon and its charges; a tap selects it.
  *  - alien-v25.css: the same three rings from the bottom corner up (reachable), the switch on the inner side of the special button, and no
  *    text block next to the stick (the short notices move to the top centre). Only with the v24 HUD rings and without ?alienHud=v24. */
-import {SPECIALS,nextSpecial} from './alien-v25-arsenal.mjs?v=island-v2-20261107-16';
+import {SPECIALS,nextSpecial,alienArsenalEnabled} from './alien-v25-arsenal.mjs?v=island-v2-20261107-16';
 let styled=false;
 export function ensureAlienV25Style(doc=globalThis.document){if(styled||!doc?.head)return;styled=true;const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v25.css?v=island-v2-20261107-16',import.meta.url).href;doc.head.append(link);}
 const PATHS={
@@ -25,6 +25,8 @@ export function createAlienSpecialSwitch({controls,special,missileIcon,labels={}
  const faces=Object.fromEntries(SPECIALS.map(k=>[k,k==='missile'?missileIcon:specialIcon(k,documentTarget)]));
  let enabled=false,pulse=false,shownNext=null,shownSelected='missile',lastCount='';
  button.addEventListener('pointerdown',event=>{if(!enabled||event.button>0)return;event.preventDefault();onGesture();pulse=true;},options);
+ // Native keyboard/assistive activation has detail=0; a pointer click has already fired on pointerdown.
+ if(alienArsenalEnabled())button.addEventListener('click',event=>{if(!enabled||event.detail!==0)return;event.preventDefault();onGesture();pulse=true;},options);
  windowTarget?.addEventListener('keydown',event=>{if(!enabled||event.code!==key||event.repeat||event.target?.matches?.('input,select,textarea,[contenteditable=true]'))return;event.preventDefault();onGesture();pulse=true;},options);
  return {
   button,
