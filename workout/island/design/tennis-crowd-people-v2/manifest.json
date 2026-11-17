@@ -1,0 +1,1477 @@
+{
+  "schemaVersion": 1,
+  "title": "Tennis crowd people v2",
+  "created": "2026-11-17",
+  "license": "CC0-1.0",
+  "units": "meters",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "budgetBytes": 5000000,
+  "modelCount": 14,
+  "lodTriangles": [
+    210,
+    90,
+    24
+  ],
+  "lodSelection": "Mount all gltf.scenes in one Group and set scene.visible = (index === lod). Bind AnimationMixer to that Group. Each core scene has an independent rig; all five animations target all three rigs using shared keyframe accessors.",
+  "rig": {
+    "name": "Crowd17",
+    "jointNames": [
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "UpperArm_L",
+      "ForeArm_L",
+      "Hand_L",
+      "UpperArm_R",
+      "ForeArm_R",
+      "Hand_R",
+      "UpperLeg_L",
+      "Leg_L",
+      "Foot_L",
+      "UpperLeg_R",
+      "Leg_R",
+      "Foot_R"
+    ],
+    "parents": [
+      -1,
+      0,
+      1,
+      2,
+      3,
+      2,
+      5,
+      6,
+      2,
+      8,
+      9,
+      0,
+      11,
+      12,
+      0,
+      14,
+      15
+    ]
+  },
+  "clips": [
+    {
+      "name": "seated_idle",
+      "durationSeconds": 4.0,
+      "loop": true
+    },
+    {
+      "name": "polite_applause",
+      "durationSeconds": 3.2,
+      "loop": true
+    },
+    {
+      "name": "cheer",
+      "durationSeconds": 4.0,
+      "loop": true
+    },
+    {
+      "name": "track_ball",
+      "durationSeconds": 5.0,
+      "loop": true
+    },
+    {
+      "name": "stand_up",
+      "durationSeconds": 6.0,
+      "loop": true
+    }
+  ],
+  "models": [
+    {
+      "id": "fan-01",
+      "label": "כובע קש וחולצת פולו",
+      "age": 67,
+      "gender": "male",
+      "height": 1.77,
+      "build": 1.13,
+      "skin": "#bc8564",
+      "hair": "#b2aaa0",
+      "shirt": "#ece9d8",
+      "bottom": "#68705a",
+      "hat": "sunhat",
+      "hatColor": "#d9c59c",
+      "glasses": true,
+      "outfit": "polo",
+      "hairStyle": "short",
+      "file": "models/fan-01.glb",
+      "bytes": 227388,
+      "sha256": "ddc8b47af825a05b0cd51fa0fa72572c972140984d0289189be2d7ecc96848a2",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.48871548619447785,
+      "seatCenter": [
+        0,
+        0.48871548619447785,
+        -0.10624249699879953
+      ]
+    },
+    {
+      "id": "fan-02",
+      "label": "חולצת פשתן מרווה",
+      "age": 32,
+      "gender": "female",
+      "height": 1.68,
+      "build": 0.98,
+      "skin": "#784b35",
+      "hair": "#241d19",
+      "shirt": "#849b82",
+      "bottom": "#e1d6ba",
+      "hat": "none",
+      "hatColor": "#d4c09a",
+      "glasses": false,
+      "outfit": "linen",
+      "hairStyle": "bun",
+      "file": "models/fan-02.glb",
+      "bytes": 225252,
+      "sha256": "56992266161964427aa8ad63ff259f8ad880f693377841f2264587afbd9b8c07",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.4638655462184874,
+      "seatCenter": [
+        0,
+        0.4638655462184874,
+        -0.10084033613445378
+      ]
+    },
+    {
+      "id": "fan-03",
+      "label": "מצחייה כחולה",
+      "age": 24,
+      "gender": "male",
+      "height": 1.86,
+      "build": 1.02,
+      "skin": "#e6bfa0",
+      "hair": "#73523a",
+      "shirt": "#aec4cb",
+      "bottom": "#324d54",
+      "hat": "cap",
+      "hatColor": "#344f58",
+      "glasses": false,
+      "outfit": "polo",
+      "hairStyle": "short",
+      "file": "models/fan-03.glb",
+      "bytes": 225348,
+      "sha256": "34ddfc5cd1cf9fa05d3bd468592c7a5d865df7ce14a1e733f56d62ff19a30d37",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.5135654261704682,
+      "seatCenter": [
+        0,
+        0.5135654261704682,
+        -0.11164465786314526
+      ]
+    },
+    {
+      "id": "fan-04",
+      "label": "כובע שמש וסריג קיץ",
+      "age": 74,
+      "gender": "female",
+      "height": 1.56,
+      "build": 1.16,
+      "skin": "#e0ad8e",
+      "hair": "#c9c3b6",
+      "shirt": "#d9b0aa",
+      "bottom": "#f0e7d4",
+      "hat": "sunhat",
+      "hatColor": "#e8dcc0",
+      "glasses": false,
+      "outfit": "knit",
+      "hairStyle": "short",
+      "file": "models/fan-04.glb",
+      "bytes": 227908,
+      "sha256": "533cf48dd55d1e82bb8c241268dc7f1e2b8493a46db2d88edef56690825f9708",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.4307322929171669,
+      "seatCenter": [
+        0,
+        0.4307322929171669,
+        -0.09363745498199282
+      ]
+    },
+    {
+      "id": "fan-05",
+      "label": "חולצת טניס לבנה",
+      "age": 41,
+      "gender": "male",
+      "height": 1.81,
+      "build": 1.25,
+      "skin": "#543628",
+      "hair": "#201d1b",
+      "shirt": "#eeede3",
+      "bottom": "#39424e",
+      "hat": "none",
+      "hatColor": "#ddd4bc",
+      "glasses": true,
+      "outfit": "polo",
+      "hairStyle": "short",
+      "file": "models/fan-05.glb",
+      "bytes": 221940,
+      "sha256": "38b003ca3b76255d5e62eb55e3dc7188e79a5b85e87afd002db283648ec6022b",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.49975990396158465,
+      "seatCenter": [
+        0,
+        0.49975990396158465,
+        -0.10864345738295318
+      ]
+    },
+    {
+      "id": "fan-06",
+      "label": "חולצת פסים קיצית",
+      "age": 19,
+      "gender": "female",
+      "height": 1.72,
+      "build": 0.94,
+      "skin": "#ce9873",
+      "hair": "#382b23",
+      "shirt": "#d6d9cc",
+      "bottom": "#8a6d59",
+      "hat": "visor",
+      "hatColor": "#eee9d9",
+      "glasses": false,
+      "outfit": "stripe",
+      "hairStyle": "ponytail",
+      "file": "models/fan-06.glb",
+      "bytes": 228344,
+      "sha256": "a1960d9d3a2bc361c98cb9842e8ab9d5c5bfee91de6b70c24bad92bef3d870a2",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.4749099639855943,
+      "seatCenter": [
+        0,
+        0.4749099639855943,
+        -0.10324129651860746
+      ]
+    },
+    {
+      "id": "fan-07",
+      "label": "כובע דייג ופולו כחול",
+      "age": 57,
+      "gender": "male",
+      "height": 1.73,
+      "build": 1.2,
+      "skin": "#9b6647",
+      "hair": "#777268",
+      "shirt": "#536d80",
+      "bottom": "#c5b99a",
+      "hat": "bucket",
+      "hatColor": "#a4ad98",
+      "glasses": true,
+      "outfit": "polo",
+      "hairStyle": "short",
+      "file": "models/fan-07.glb",
+      "bytes": 226064,
+      "sha256": "f37395b9a2092cc0ab4eb53e074ead6a340b5521b2cc4ec792f68e56c5a8541b",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.47767106842737095,
+      "seatCenter": [
+        0,
+        0.47767106842737095,
+        -0.10384153661464586
+      ]
+    },
+    {
+      "id": "fan-08",
+      "label": "חולצת קורל ופשתן",
+      "age": 44,
+      "gender": "female",
+      "height": 1.64,
+      "build": 1.09,
+      "skin": "#e7c4a5",
+      "hair": "#956549",
+      "shirt": "#c88876",
+      "bottom": "#c9c7b1",
+      "hat": "none",
+      "hatColor": "#ddc9a1",
+      "glasses": true,
+      "outfit": "linen",
+      "hairStyle": "bob",
+      "file": "models/fan-08.glb",
+      "bytes": 228180,
+      "sha256": "308df38e2ecf84ff51dc2d59d87af75803a98663299dcc5b56f0b49b186c55be",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.45282112845138056,
+      "seatCenter": [
+        0,
+        0.45282112845138056,
+        -0.09843937575030012
+      ]
+    },
+    {
+      "id": "fan-09",
+      "label": "חולצה ירוקה ומצחייה",
+      "age": 16,
+      "gender": "male",
+      "height": 1.7,
+      "build": 0.9,
+      "skin": "#b27c59",
+      "hair": "#2e241e",
+      "shirt": "#576e57",
+      "bottom": "#d1c4a6",
+      "hat": "cap",
+      "hatColor": "#c3b491",
+      "glasses": false,
+      "outfit": "tee",
+      "hairStyle": "short",
+      "file": "models/fan-09.glb",
+      "bytes": 227140,
+      "sha256": "60d873259643113fd09346d2b5faf52c498085ed3c1a46db7593c3942552251a",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.46938775510204084,
+      "seatCenter": [
+        0,
+        0.46938775510204084,
+        -0.10204081632653061
+      ]
+    },
+    {
+      "id": "fan-10",
+      "label": "כובע רחב וחולצת לבנדר",
+      "age": 61,
+      "gender": "female",
+      "height": 1.6,
+      "build": 1.05,
+      "skin": "#714831",
+      "hair": "#9a948c",
+      "shirt": "#b3a7bb",
+      "bottom": "#d8d4bf",
+      "hat": "sunhat",
+      "hatColor": "#d4bd90",
+      "glasses": true,
+      "outfit": "linen",
+      "hairStyle": "bun",
+      "file": "models/fan-10.glb",
+      "bytes": 225256,
+      "sha256": "b47d415e1239b9ceb929fd3f8312b1614a0afc159da611e0e9878405d5f057fa",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.44177671068427377,
+      "seatCenter": [
+        0,
+        0.44177671068427377,
+        -0.09603841536614648
+      ]
+    },
+    {
+      "id": "fan-11",
+      "label": "חולצת פיקניק משובצת",
+      "age": 36,
+      "gender": "male",
+      "height": 1.91,
+      "build": 1.1,
+      "skin": "#d5a883",
+      "hair": "#44372c",
+      "shirt": "#b6bdad",
+      "bottom": "#5d635b",
+      "hat": "none",
+      "hatColor": "#ddd1b6",
+      "glasses": false,
+      "outfit": "check",
+      "hairStyle": "short",
+      "file": "models/fan-11.glb",
+      "bytes": 228220,
+      "sha256": "6acc8d0837448fa25b1061292d272cb9aeed67c08f5c087ea05041371479461e",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.5273709483793517,
+      "seatCenter": [
+        0,
+        0.5273709483793517,
+        -0.11464585834333735
+      ]
+    },
+    {
+      "id": "fan-12",
+      "label": "מצחיית טניס ושמנת",
+      "age": 27,
+      "gender": "female",
+      "height": 1.75,
+      "build": 1.01,
+      "skin": "#9d6f50",
+      "hair": "#27211d",
+      "shirt": "#eee9d8",
+      "bottom": "#768a89",
+      "hat": "visor",
+      "hatColor": "#e1d8be",
+      "glasses": true,
+      "outfit": "polo",
+      "hairStyle": "ponytail",
+      "file": "models/fan-12.glb",
+      "bytes": 226484,
+      "sha256": "46b720589f9f2f9a1f61338b2ac1c9341cfb1926dde4a1f2e67c29d3c57d8795",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.48319327731092443,
+      "seatCenter": [
+        0,
+        0.48319327731092443,
+        -0.1050420168067227
+      ]
+    },
+    {
+      "id": "fan-13",
+      "label": "כובע טבעי ופולו חול",
+      "age": 70,
+      "gender": "male",
+      "height": 1.69,
+      "build": 1.07,
+      "skin": "#e5c2a1",
+      "hair": "#d1cbbd",
+      "shirt": "#bbab88",
+      "bottom": "#555f67",
+      "hat": "sunhat",
+      "hatColor": "#c1aa7c",
+      "glasses": false,
+      "outfit": "polo",
+      "hairStyle": "short",
+      "file": "models/fan-13.glb",
+      "bytes": 226560,
+      "sha256": "3ff2d8c0817d005a5918b3c3ca83dc8e34df15cbea6aef40198f0b3767aa06be",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.46662665066026415,
+      "seatCenter": [
+        0,
+        0.46662665066026415,
+        -0.10144057623049221
+      ]
+    },
+    {
+      "id": "fan-14",
+      "label": "כובע דייג וטי שירט תכלת",
+      "age": 52,
+      "gender": "female",
+      "height": 1.66,
+      "build": 1.22,
+      "skin": "#c18d69",
+      "hair": "#5e5042",
+      "shirt": "#a6bbc1",
+      "bottom": "#eee1c6",
+      "hat": "bucket",
+      "hatColor": "#dadbc9",
+      "glasses": false,
+      "outfit": "tee",
+      "hairStyle": "bob",
+      "file": "models/fan-14.glb",
+      "bytes": 227308,
+      "sha256": "b124831d60fac79e51b21b5e9e01319cd910b1c7178bbf69dfa6178c6e7d8a6d",
+      "texture": {
+        "width": 256,
+        "height": 256,
+        "embedded": true
+      },
+      "joints": 17,
+      "lods": [
+        {
+          "scene": 0,
+          "mesh": "People_LOD0_210",
+          "triangles": 210,
+          "distanceMeters": 0
+        },
+        {
+          "scene": 1,
+          "mesh": "People_LOD1_90",
+          "triangles": 90,
+          "distanceMeters": 12
+        },
+        {
+          "scene": 2,
+          "mesh": "People_LOD2_24",
+          "triangles": 24,
+          "distanceMeters": 28
+        }
+      ],
+      "clips": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.2,
+          "loop": true
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4.0,
+          "loop": true
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5.0,
+          "loop": true
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6.0,
+          "loop": true
+        }
+      ],
+      "seatHeightMeters": 0.458343337334934,
+      "seatCenter": [
+        0,
+        0.458343337334934,
+        -0.09963985594237695
+      ]
+    }
+  ],
+  "modelBytes": 3171392,
+  "delivery": {
+    "budgetBytes": 5000000,
+    "totalBytes": 4827582,
+    "fileCount": 56,
+    "includes": "All files in this directory, including this manifest, source, vendor and verification."
+  },
+  "files": [
+    {
+      "file": "LICENSES.md",
+      "bytes": 2995,
+      "sha256": "f6a893729722dabcfce08f520e2884070a5ac15c0ef73e4bc83fc3b87d01157c"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 12093,
+      "sha256": "ad0a68f93cde0cb9fcef0078acc8368dd22eb0f59c96cfcc7faf98082537f01e"
+    },
+    {
+      "file": "models/fan-01.glb",
+      "bytes": 227388,
+      "sha256": "ddc8b47af825a05b0cd51fa0fa72572c972140984d0289189be2d7ecc96848a2"
+    },
+    {
+      "file": "models/fan-02.glb",
+      "bytes": 225252,
+      "sha256": "56992266161964427aa8ad63ff259f8ad880f693377841f2264587afbd9b8c07"
+    },
+    {
+      "file": "models/fan-03.glb",
+      "bytes": 225348,
+      "sha256": "34ddfc5cd1cf9fa05d3bd468592c7a5d865df7ce14a1e733f56d62ff19a30d37"
+    },
+    {
+      "file": "models/fan-04.glb",
+      "bytes": 227908,
+      "sha256": "533cf48dd55d1e82bb8c241268dc7f1e2b8493a46db2d88edef56690825f9708"
+    },
+    {
+      "file": "models/fan-05.glb",
+      "bytes": 221940,
+      "sha256": "38b003ca3b76255d5e62eb55e3dc7188e79a5b85e87afd002db283648ec6022b"
+    },
+    {
+      "file": "models/fan-06.glb",
+      "bytes": 228344,
+      "sha256": "a1960d9d3a2bc361c98cb9842e8ab9d5c5bfee91de6b70c24bad92bef3d870a2"
+    },
+    {
+      "file": "models/fan-07.glb",
+      "bytes": 226064,
+      "sha256": "f37395b9a2092cc0ab4eb53e074ead6a340b5521b2cc4ec792f68e56c5a8541b"
+    },
+    {
+      "file": "models/fan-08.glb",
+      "bytes": 228180,
+      "sha256": "308df38e2ecf84ff51dc2d59d87af75803a98663299dcc5b56f0b49b186c55be"
+    },
+    {
+      "file": "models/fan-09.glb",
+      "bytes": 227140,
+      "sha256": "60d873259643113fd09346d2b5faf52c498085ed3c1a46db7593c3942552251a"
+    },
+    {
+      "file": "models/fan-10.glb",
+      "bytes": 225256,
+      "sha256": "b47d415e1239b9ceb929fd3f8312b1614a0afc159da611e0e9878405d5f057fa"
+    },
+    {
+      "file": "models/fan-11.glb",
+      "bytes": 228220,
+      "sha256": "6acc8d0837448fa25b1061292d272cb9aeed67c08f5c087ea05041371479461e"
+    },
+    {
+      "file": "models/fan-12.glb",
+      "bytes": 226484,
+      "sha256": "46b720589f9f2f9a1f61338b2ac1c9341cfb1926dde4a1f2e67c29d3c57d8795"
+    },
+    {
+      "file": "models/fan-13.glb",
+      "bytes": 226560,
+      "sha256": "3ff2d8c0817d005a5918b3c3ca83dc8e34df15cbea6aef40198f0b3767aa06be"
+    },
+    {
+      "file": "models/fan-14.glb",
+      "bytes": 227308,
+      "sha256": "b124831d60fac79e51b21b5e9e01319cd910b1c7178bbf69dfa6178c6e7d8a6d"
+    },
+    {
+      "file": "preview.html",
+      "bytes": 4956,
+      "sha256": "a035788668fc0eb8da3c017a23372423616f5f6e51ce6ae485b0d2373be697d0"
+    },
+    {
+      "file": "preview.js",
+      "bytes": 10404,
+      "sha256": "d4fce70c97b1492bfe2ad8cf6e21c2b716b21558e2e91066744edf0c1273c180"
+    },
+    {
+      "file": "source/build-geometry.py",
+      "bytes": 7048,
+      "sha256": "0c67184f41626330128a800a269aa95d0ce994afe509dfa2f1c497341a635f00"
+    },
+    {
+      "file": "source/build.py",
+      "bytes": 26007,
+      "sha256": "9d896f82d5a4e5e176028121278f52a3d9d6524d09be3c7c947d4b083127a794"
+    },
+    {
+      "file": "source/check-browser.py",
+      "bytes": 7652,
+      "sha256": "529b6eaa0a645073d20d6f5058ca9a49c90c0d778e11cde00abc4d22df5a5f94"
+    },
+    {
+      "file": "source/finalize.py",
+      "bytes": 13197,
+      "sha256": "6b78f39aa727026a2011ae380b45931e7529732c568e95acb749b005ab7c9dd7"
+    },
+    {
+      "file": "source/package-lock.json",
+      "bytes": 14702,
+      "sha256": "675ebbb8be7f3e8f45f0ac16134b04835cdf7079ad4e87f64236f368b5d29f26"
+    },
+    {
+      "file": "source/package.json",
+      "bytes": 202,
+      "sha256": "bff0a6a6886a65aaf62c6627aac5daf5b24e26924f95025dce9dda64194d0e27"
+    },
+    {
+      "file": "source/people.json",
+      "bytes": 3837,
+      "sha256": "fd202036f0ff75f955b16dccce8b037a802c84544c6e9accdf51e6d419b993bf"
+    },
+    {
+      "file": "source/requirements.txt",
+      "bytes": 61,
+      "sha256": "4047b120f4154ae432d316f69db692a51c7487b780fd40557362a73f5b8452ae"
+    },
+    {
+      "file": "source/vendor/MakeHuman-LICENSE.ASSETS.md",
+      "bytes": 6962,
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+    },
+    {
+      "file": "source/vendor/MakeHuman-LICENSE.md",
+      "bytes": 3598,
+      "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1"
+    },
+    {
+      "file": "source/vendor/makehuman-base.obj.gz",
+      "bytes": 533926,
+      "sha256": "78243a7c3e42843e6fcf0f2db93c6752604ccf12fb794222003c8b489945c5f8"
+    },
+    {
+      "file": "source/vendor/provenance.json",
+      "bytes": 489,
+      "sha256": "29b45a60a6efa9ad2822529d1cfe5d04e8f803df1d7c4d3da1e8c6a6c912988f"
+    },
+    {
+      "file": "source/verify.mjs",
+      "bytes": 7865,
+      "sha256": "ad9fca4a6dc99a5d68a20e3e7b7706cfb97d6a50548b31a9d6b92fa1337b887d"
+    },
+    {
+      "file": "source/viewer-entry.js",
+      "bytes": 172,
+      "sha256": "a5d1d4521cfef8ee48e519fa25cfe80ef1bae83dfd8fbc02ba1d1ccbc4209732"
+    },
+    {
+      "file": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "file": "vendor/three-r160.js",
+      "bytes": 721517,
+      "sha256": "aa664c84a81e3663abaa48dbad9a0c480dff768122d621b81774c32d8f292383"
+    },
+    {
+      "file": "verification/applause-844x390.jpg",
+      "bytes": 32516,
+      "sha256": "5596e260ed26a27cc7c95de66d86c27807fe892cf85631a941a235fd7e6129ac"
+    },
+    {
+      "file": "verification/assets.json",
+      "bytes": 49685,
+      "sha256": "ca62e6b5bb014422cf5ed4b22bbb3d27e56a396fca29945ef3bcc7f85e1101aa"
+    },
+    {
+      "file": "verification/browser.json",
+      "bytes": 11203,
+      "sha256": "64899a5f188c4cb02112a6251bb2c337593e177355efd089572eab6a649e000c"
+    },
+    {
+      "file": "verification/crowd-844x390.jpg",
+      "bytes": 60799,
+      "sha256": "d063316f4b78f9831dd9d4cd702a1db07690526109e0b8cfd563df46a77227d0"
+    },
+    {
+      "file": "verification/fan-01-khronos.json",
+      "bytes": 295,
+      "sha256": "36d3dc6afeaac706184f0f96d75c8cac5dccb3cf23fdc01d171124a030026a6c"
+    },
+    {
+      "file": "verification/fan-02-khronos.json",
+      "bytes": 295,
+      "sha256": "6bd0d8f585e90bbd316437b611df7711e27f24149bd61b2438e66cd58017ae8a"
+    },
+    {
+      "file": "verification/fan-03-khronos.json",
+      "bytes": 295,
+      "sha256": "1da5fb54a34046aa87515a3342c962541d890946294d92b124a3a79e9f442a32"
+    },
+    {
+      "file": "verification/fan-04-khronos.json",
+      "bytes": 295,
+      "sha256": "f2075c6ce23e0db3bed9c0b74f37d5146dfefe0268dd88d134ca18aac5cd7c8f"
+    },
+    {
+      "file": "verification/fan-05-khronos.json",
+      "bytes": 295,
+      "sha256": "ed09961d0ddbfeab631e08f45407dfe3b53563a384054c1886fdf501a61d8a71"
+    },
+    {
+      "file": "verification/fan-06-khronos.json",
+      "bytes": 295,
+      "sha256": "02214d3681b3a488f9080735ecc299c0a413d92e53cffd3f0497b0d260e1ff23"
+    },
+    {
+      "file": "verification/fan-07-khronos.json",
+      "bytes": 295,
+      "sha256": "b78a2c83b27256cf28df03abdd398bff7a18881121b7744b2a2a2c9ac6c7ddbf"
+    },
+    {
+      "file": "verification/fan-08-khronos.json",
+      "bytes": 295,
+      "sha256": "8df139c61b599a6389a2d5f7470d9adab9f388cfefb44c86f9a50faf4bceab61"
+    },
+    {
+      "file": "verification/fan-09-khronos.json",
+      "bytes": 295,
+      "sha256": "c4d53b6552a68b3e1d8114602e878169bc9c21fec6933f76a502ee863b241748"
+    },
+    {
+      "file": "verification/fan-10-khronos.json",
+      "bytes": 295,
+      "sha256": "f1ba3852abc981030afea1995ddd6c14755afa34925af998b58643773afdd60f"
+    },
+    {
+      "file": "verification/fan-11-khronos.json",
+      "bytes": 295,
+      "sha256": "c66e928c4aa79af5a4d272b5999fdc92f26c13c1b3acaeaf2ce3455e735329da"
+    },
+    {
+      "file": "verification/fan-12-khronos.json",
+      "bytes": 295,
+      "sha256": "9e8059417bfd0568a83f2b377c0c7ddbe048a20c50cc5a25082798ee875ff850"
+    },
+    {
+      "file": "verification/fan-13-khronos.json",
+      "bytes": 295,
+      "sha256": "cd0c7f24a16ba3149cf92aa9b3ae417a9aafc771495794de30ae524a280bf8e6"
+    },
+    {
+      "file": "verification/fan-14-khronos.json",
+      "bytes": 295,
+      "sha256": "e5090151d49f8c47f7a7fd9cd0c8f0af1ffd5c4400b6ce9acb690f0955fdaa49"
+    },
+    {
+      "file": "verification/lod2-844x390.jpg",
+      "bytes": 48499,
+      "sha256": "9cdd3f87d26dd1143b4fa279a58e0adff153e1d6916fd65f0f0bcb0c04029ae5"
+    },
+    {
+      "file": "verification/repository-tests.json",
+      "bytes": 1228,
+      "sha256": "0c58f3bebf61ac427b3269f60b0fed10e4031a62fa96d820f91eac889bc3365c"
+    },
+    {
+      "file": "verification/standing-844x390.jpg",
+      "bytes": 33395,
+      "sha256": "115d90073279e487a9aca910ac3bfdde970e8f1ca980ce7e03e6792a8483c888"
+    }
+  ]
+}

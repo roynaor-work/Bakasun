@@ -1,0 +1,160 @@
+"""Generate the handoff report, file checksums and inclusive 5 MB budget gate."""
+from pathlib import Path
+import hashlib
+import json
+
+ROOT=Path(__file__).resolve().parent.parent
+manifest=json.loads((ROOT/'manifest.json').read_text())
+assets=json.loads((ROOT/'verification/assets.json').read_text())
+browser=json.loads((ROOT/'verification/browser.json').read_text())
+repo_path=ROOT/'verification/repository-tests.json'
+repository=json.loads(repo_path.read_text()) if repo_path.exists() else {'status':'pending'}
+maximum_drift=max(a['maximumFootJointDriftMeters'] for m in assets['models'] for a in m['animations'])
+lowest=min(p['minimumY'] for p in browser['poseBounds'])
+rows='\n'.join(f"| {m['id']} | {m['age']} | {m['height']:.2f} | {m['label']} | {m['bytes']:,} |" for m in manifest['models'])
+test_line=repository.get('description','בדיקות המאגר עדיין בהרצה; יש לעדכן לפני מסירה.')
+
+def report(total):
+    return f'''# קהל טניס — אנשים v2
+
+נמסרו 14 דגמי GLB מקוריים נגזרים מבסיס אנטומי של MakeHuman, עם פרופורציות אנושיות, גילי 16–74, גבהים 1.56–1.91 מ׳ וגוני עור מגוונים. לבוש קיץ מאופק: פולו, פשתן, פסים, חולצה משובצת, מכנסיים קצרים, נעלי קיץ, כובעי שמש ומצחיות. שש דמויות כוללות משקפי שמש באטלס.
+
+הענף: `codex/tennis-crowd-people-v2`. בסיס המאגר: `f5f2b40814fc0e2186daed1ac100a8d806dd3a7d`. כל קובצי המסירה חדשים ובתיקייה זו בלבד. קריטריון הסיום: 14 GLB, שלושה LOD מדויקים, חמש לולאות, Khronos נקי, תצוגת 844×390 וחבילה מלאה עד 5,000,000 bytes.
+
+| דרישה | תוצאה שנמדדה |
+|---|---|
+| דמויות | 14 קובצי GLB שונים; ה־SHA-256 ב־manifest |
+| LOD0 / LOD1 / LOD2 | **210 / 90 / 24 משולשים לדמות**, כולל שיער וכובע; 324 משולשים מאוחסנים בסך הכול בכל GLB |
+| קליפים | חמש לולאות בכל GLB; כל אחת מניעה את שלושת השלדים |
+| שלד | 17 מפרקים לכל LOD; שלוש סצנות ליבה עצמאיות בכל GLB |
+| טקסטורה | אטלס אלבדו יחיד 256×256, מוטבע; PBR, ללא מתכת |
+| Khronos Validator | **14/14: אפס שגיאות, אפס אזהרות, אפס הודעות מידע** |
+| משקל כל ה־GLB | {manifest['modelBytes']:,} bytes |
+| משקל כל תיקיית המסירה | **{total:,} bytes / {total/1e6:.3f} MB**, כולל מקור, ספרייה מקומית, דוחות וצילומים |
+| תצוגה | Chromium {browser['browser']}, 844×390; נבדקה גם 390×844 |
+
+## עיון בתוצאה
+
+![14 דמויות הקהל ב־844×390](verification/crowd-844x390.jpg)
+
+1. משורש המאגר מריצים שרת מקומי לתיקייה זו:
+
+   ```sh
+   python3 -m http.server 8765 --directory workout/island/design/tennis-crowd-people-v2
+   ```
+
+2. פותחים [preview.html המקומי](http://127.0.0.1:8765/preview.html), בחלון 844×390. התוצאה הצפויה היא 14 אנשים יושבים לצד המגרש, ללא הורדות מ־CDN.
+3. בוחרים דמות לתקריב, תנועה ורמת LOD. גרירה מסובבת, גלגלת או צביטה מקרבת; רווח או כפתור ההשהיה עוצרים את התנועה. `prefers-reduced-motion` פותח את הדף במצב מושהה.
+
+קובצי ה־GLB נטענים בפועל מן המסירה; אין דמויות חלופיות המציירות את התוצאה בתצוגה. כל ספריות הצפייה מקומיות. פתיחה דרך HTTP מקומי נתמכת ונבדקה; `file://` עשוי להיחסם בשל טעינת GLB ו־JSON.
+
+## דגמים
+
+| קובץ ב־models | גיל עיצובי | גובה במ׳ | לבוש | bytes |
+|---|---:|---:|---|---:|
+{rows}
+
+הגיל, הגובה והגוונים מתארים דמויות בדיוניות. שונות בגובה, ברוחב הכתפיים והאגן, במבנה הגוף, בשיער וביציבה נשמרת בגאומטריה; העיניים, קמטי הגיל, גווני העור, משקפי השמש ופרטי הבד נמצאים באטלס.
+
+## תנועות
+
+| שם קליפ | משך | התנהגות |
+|---|---:|---|
+| `seated_idle` | 4.0 שנ׳ | ישיבה, כפות ידיים בחיק, נשימה קטנה ותנועת ראש עדינה |
+| `polite_applause` | 3.2 שנ׳ | שתי מחיאות כפיים מאופקות מול החזה; אצבעות כלפי מעלה |
+| `cheer` | 4.0 שנ׳ | הרמת הידיים בהתלהבות וחזרה רגועה לחיק |
+| `track_ball` | 5.0 שנ׳ | סיבוב צוואר וראש לשני הצדדים, כמעקב אחרי חילופי כדור |
+| `stand_up` | 6.0 שנ׳ | ישיבה, רכינה, קימה, שהייה בעמידה וחזרה לישיבה לסגירת הלולאה |
+
+כל הקליפים נדגמו בכ־12Hz עם interpolation לינארי של מיקומים ו־SLERP לסיבובים בזמן ניגון. ערכי תחילת הלולאה וסופה זהים. כפות הרגליים נשארות נטועות באמצעות IK שנאפה ל־keyframes; אין צורך בפותר IK בזמן המשחק. שינוי הגובה והמיקום המקומי של האגן בעת קימה הוא חלק מן הקליפ. אין תנועה של הדמות לאורך המגרש.
+
+## חוזה שילוב
+
+יחידות במטרים, `+Y` למעלה, `+Z` כיוון הפנים. שלוש הסצנות הן `gltf.scenes[0..2]`, עם 210/90/24 משולשים בהתאמה. סצנת ברירת המחדל היא LOD0. לכל סצנה שלד עצמאי, עם שמות `L0_Hips`, `L1_Hips`, `L2_Hips` וכן הלאה. קליפ אחד כולל ערוצים לשלוש הסצנות ומשתף ביניהן את נתוני המפתח הבינאריים.
+
+דוגמת טעינה ב־Three.js, לאחר טעינת GLTFLoader:
+
+```js
+const gltf = await loader.loadAsync('models/fan-01.glb');
+const person = new THREE.Group();
+person.add(...gltf.scenes);
+function setLOD(level) {{
+  gltf.scenes.forEach((scene, i) => {{ scene.visible = i === level; }});
+}}
+setLOD(0);
+const mixer = new THREE.AnimationMixer(person);
+mixer.clipAction(gltf.animations.find(c => c.name === 'seated_idle'))
+  .setLoop(THREE.LoopRepeat, Infinity).play();
+scene.add(person);
+// בזמן הריצה: mixer.update(deltaSeconds);
+```
+
+יש לבחור LOD אחד להצגה. מרחקי התחלה מומלצים: LOD0 עד 12 מ׳, LOD1 מ־12 מ׳ ו־LOD2 מ־28 מ׳; יש לכייל לפי גודל הדמות בפיקסלים. LOD2 הוא צללית עם ראש בנפח וגפיים מונפשות, ומתאים לדמויות זעירות בריחוק. אין שימוש בהרחבת LOD ייחודית למנוע, ב־Draco או ב־Meshopt.
+
+`seatHeightMeters` ו־`seatCenter` בכל רשומת manifest מציינים מקום ישיבה המתאים לגובה הדמות. הכיסא, הקרקע, התאורה וצל המגע שייכים לתצוגה המקדימה; תקציב המשולשים של הדמות כולל רק את גופה ואת לבושה ואביזריה.
+
+## אימות
+
+- [verification/assets.json](verification/assets.json): ספירה מפענוח ה־GLB הסופי, חתימות, משקלים, טקסטורה, סצנות, עצמות, נורמלים, משקלי skin, שטחי משולשים, סגירת כל 70 הלולאות, מחיאת כפיים, סיבוב ראש וקימה. כל דוחות Khronos המלאים נמצאים לצדו.
+- סטיית מרכז מפרק כף רגל מרבית בין דגימות קליפ: {maximum_drift:.9f} מ׳. זו בדיקת מפרקים; אינה טענה לבדיקת התנגשות מלאה של אצבעות ונעליים.
+- [verification/browser.json](verification/browser.json): **840 דגימות פוזה**, 14 דמויות × 3 רמות × 5 קליפים × 4 זמנים. נבדקו קודקודי גוף אחרי skinning; כולם סופיים ובתחום גוף סביר. ערך Y הנמוך ביותר שנמדד הוא {lowest:.6f} מ׳.
+- אפס שגיאות JavaScript, אזהרות קונסול, כשלי HTTP או בקשות חיצוניות בתצוגה התקינה. נבדקו בחירת כל 14 הדמויות, החלפת LOD ותנועה, עצירה וחידוש, רווח במקלדת, מסך אנכי, reduced motion והודעת שגיאה כאשר GLB חסר.
+- {test_line} הפרטים ב־[verification/repository-tests.json](verification/repository-tests.json).
+- [manifest.json](manifest.json) כולל SHA-256 ומשקל לכל קובץ מסירה, למעט חתימה עצמית של המניפסט; `delivery.totalBytes` כולל גם אותו. תקרת 5MB נאכפת על כל התיקייה, ללא הסתמכות על gzip או Git LFS.
+
+צילומים נוספים: [מחיאות כפיים](verification/applause-844x390.jpg), [עמידה](verification/standing-844x390.jpg), [LOD2 בבדיקת פירוט](verification/lod2-844x390.jpg).
+
+## יצירה ושחזור
+
+הבסיס האנטומי נקרא מעותק CC0 מצורף, בלי התקנה או הפעלה של MakeHuman. Blender 4.3.2 מלביש ומפשט את משטח הגוף, סוגר פרטי פנים ואצבעות זעירים, מסיר איים מנותקים ומייצר LOD. היצואן מצרף אביזרים, אטלס, שלד ותנועות וכותב GLB ליבה ישירות. פרטי המקור והרישוי ב־[LICENSES.md](LICENSES.md).
+
+כלי הבנייה מותקנים בתיקייה זמנית; אין התקנה בשורש המאגר:
+
+```sh
+mkdir -p /tmp/tennis-people-tools
+cp workout/island/design/tennis-crowd-people-v2/source/package*.json /tmp/tennis-people-tools/
+npm ci --prefix /tmp/tennis-people-tools --cache /tmp/tennis-people-npm --no-audit --no-fund
+python3 -m venv /tmp/tennis-people-python
+/tmp/tennis-people-python/bin/pip install -r workout/island/design/tennis-crowd-people-v2/source/requirements.txt
+blender -b -t 2 --python workout/island/design/tennis-crowd-people-v2/source/build-geometry.py
+/tmp/tennis-people-python/bin/python workout/island/design/tennis-crowd-people-v2/source/build.py
+node workout/island/design/tennis-crowd-people-v2/source/verify.mjs
+/tmp/tennis-people-python/bin/python workout/island/design/tennis-crowd-people-v2/source/check-browser.py
+/tmp/tennis-people-python/bin/python workout/island/design/tennis-crowd-people-v2/source/finalize.py
+```
+
+Chromium נדרש ב־`/usr/bin/chromium`. ספריית זמן הריצה המוכנה מצורפת. לבנייה מחדש שלה:
+
+```sh
+NODE_PATH=/tmp/tennis-people-tools/node_modules /tmp/tennis-people-tools/node_modules/.bin/esbuild workout/island/design/tennis-crowd-people-v2/source/viewer-entry.js --bundle --minify --legal-comments=eof --format=iife --global-name=CrowdThree --outfile=workout/island/design/tennis-crowd-people-v2/vendor/three-r160.js
+```
+
+## גבולות המסירה
+
+העיצוב מכוון לקהל בעל אנטומיה ופרופורציות אנושיות בתקציב נמוך. בתקריב נראות פאות הרשת והפשטת כפות הידיים; אלה דמויות קהל דלות פוליגונים. LOD2 מיועד למרחק שבו פרטי פנים ואביזרים אינם קריאים. גיל מבוגר מוצג בשיער, בפרטי אטלס וביציבה. חמש התנועות הן keyframes מקוריים; הפנים אינן כוללות שלד הבעות.
+
+המדידה הגרפית בוצעה ב־SwiftShader: `{browser['renderer']}`. בדיקת טלפון פיזי ומדידת FPS במכשיר לא בוצעו. החבילה מיועדת לעיון ולשילוב בהמשך; קובצי המשחק הקיימים אינם חלק משינוי זה.
+'''
+
+total=0
+for _ in range(10):
+    (ROOT/'REPORT.md').write_text(report(total))
+    files=[]
+    for p in sorted(ROOT.rglob('*')):
+        if not p.is_file() or p==ROOT/'manifest.json':continue
+        if '__pycache__' in p.parts:raise RuntimeError('Remove authoring bytecode before packaging')
+        b=p.read_bytes();files.append({'file':p.relative_to(ROOT).as_posix(),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+    manifest['delivery']={'budgetBytes':5000000,'totalBytes':total,'fileCount':len(files)+1,
+        'includes':'All files in this directory, including this manifest, source, vendor and verification.'}
+    manifest['files']=files
+    raw=json.dumps(manifest,indent=2,ensure_ascii=False)+'\n'
+    (ROOT/'manifest.json').write_text(raw)
+    current=sum(f['bytes'] for f in files)+len(raw.encode())
+    if current==total:break
+    total=current
+else:raise RuntimeError('Inclusive size did not converge')
+assert total<=5000000,f'Delivery exceeds 5 MB: {total}'
+assert total==sum(p.stat().st_size for p in ROOT.rglob('*') if p.is_file())
+for f in files:
+    assert hashlib.sha256((ROOT/f['file']).read_bytes()).hexdigest()==f['sha256']
+print(f'{len(manifest["models"])} GLBs; {len(files)+1} files; inclusive delivery {total:,} / 5,000,000 bytes')

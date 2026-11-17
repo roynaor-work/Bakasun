@@ -1,0 +1,1616 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "models": [
+    {
+      "id": "fan-01",
+      "bytes": 227388,
+      "sha256": "ddc8b47af825a05b0cd51fa0fa72572c972140984d0289189be2d7ecc96848a2",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0023281987545191807,
+          "bounds": {
+            "min": [
+              -0.5922133326530457,
+              0.021523628383874893,
+              -0.14767706394195557
+            ],
+            "max": [
+              0.5922133922576904,
+              1.8114346265792847,
+              0.3303361237049103
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.004396413521009058,
+          "bounds": {
+            "min": [
+              -0.5492892265319824,
+              0.037989068776369095,
+              -0.14661464095115662
+            ],
+            "max": [
+              0.5492892265319824,
+              1.8061224222183228,
+              0.26901480555534363
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.006231928166183388,
+          "bounds": {
+            "min": [
+              -0.5217456221580505,
+              0.04990742728114128,
+              -0.0775570198893547
+            ],
+            "max": [
+              0.5217456221580505,
+              1.7699999809265137,
+              0.22447921335697174
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.012014031774226e-8,
+          "minimumHandJointSeparationMeters": 0.308103210421971,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.0038247108459472656
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 8.744601773728413e-8,
+          "minimumHandJointSeparationMeters": 0.05524606853348124,
+          "headYawSpanRadians": 0.0498994960735158,
+          "hipsVerticalTravelMeters": 0.003811657428741455
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.012014031774226e-8,
+          "minimumHandJointSeparationMeters": 0.30810324183931603,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.0038247108459472656
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1436423523423699e-7,
+          "minimumHandJointSeparationMeters": 0.3081032152401598,
+          "headYawSpanRadians": 1.001136597564694,
+          "hipsVerticalTravelMeters": 0.0038247108459472656
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 7.030079799233939e-8,
+          "minimumHandJointSeparationMeters": 0.30810320762368615,
+          "headYawSpanRadians": 0.05039833981859502,
+          "hipsVerticalTravelMeters": 0.36355060338974
+        }
+      ]
+    },
+    {
+      "id": "fan-02",
+      "bytes": 225252,
+      "sha256": "56992266161964427aa8ad63ff259f8ad880f693377841f2264587afbd9b8c07",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.00033235373994866844,
+          "bounds": {
+            "min": [
+              -0.5006062984466553,
+              0.02002768963575363,
+              -0.12346278131008148
+            ],
+            "max": [
+              0.5006063580513,
+              1.6810084581375122,
+              0.2803930342197418
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.00014643033473984524,
+          "bounds": {
+            "min": [
+              -0.467113196849823,
+              0.030498500913381577,
+              -0.12413489073514938
+            ],
+            "max": [
+              0.465058833360672,
+              1.6810084581375122,
+              0.2230347841978073
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005614216715267458,
+          "bounds": {
+            "min": [
+              -0.4446046054363251,
+              0.047369763255119324,
+              -0.07361344248056412
+            ],
+            "max": [
+              0.4446046054363251,
+              1.6799999475479126,
+              0.19448529183864594
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 7.90178993489529e-8,
+          "minimumHandJointSeparationMeters": 0.29243695173291484,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003630220890045166
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 8.38919782231681e-8,
+          "minimumHandJointSeparationMeters": 0.052436989076553586,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0036178231239318848
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 7.90178993489529e-8,
+          "minimumHandJointSeparationMeters": 0.2924369724387457,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003630220890045166
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.03001575781624e-8,
+          "minimumHandJointSeparationMeters": 0.2924369450682824,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.003630220890045166
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.145630278702857e-8,
+          "minimumHandJointSeparationMeters": 0.29243695580698537,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.34506499767303467
+        }
+      ]
+    },
+    {
+      "id": "fan-03",
+      "bytes": 225348,
+      "sha256": "34ddfc5cd1cf9fa05d3bd468592c7a5d865df7ce14a1e733f56d62ff19a30d37",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0021022413177161415,
+          "bounds": {
+            "min": [
+              -0.5861712694168091,
+              0.023590074852108955,
+              -0.13198553025722504
+            ],
+            "max": [
+              0.5861712694168091,
+              1.9035414457321167,
+              0.31190159916877747
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.005391634666412998,
+          "bounds": {
+            "min": [
+              -0.5515955090522766,
+              0.02497517690062523,
+              -0.13642434775829315
+            ],
+            "max": [
+              0.5515955686569214,
+              1.8979592323303223,
+              0.25945019721984863
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.006881735086180144,
+          "bounds": {
+            "min": [
+              -0.5155983567237854,
+              0.05244509130716324,
+              -0.0815005972981453
+            ],
+            "max": [
+              0.5155983567237854,
+              1.8600000143051147,
+              0.21902702748775482
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.8080883725986815e-7,
+          "minimumHandJointSeparationMeters": 0.323769483523652,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.004019200801849365
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4026962009758015e-7,
+          "minimumHandJointSeparationMeters": 0.05805519486658106,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.004005491733551025
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.8080883725986815e-7,
+          "minimumHandJointSeparationMeters": 0.3237695059659481,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.004019200801849365
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4314551108453103e-7,
+          "minimumHandJointSeparationMeters": 0.3237694782330513,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.004019200801849365
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4307099483139945e-7,
+          "minimumHandJointSeparationMeters": 0.32376947566387415,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.3820362687110901
+        }
+      ]
+    },
+    {
+      "id": "fan-04",
+      "bytes": 227908,
+      "sha256": "533cf48dd55d1e82bb8c241268dc7f1e2b8493a46db2d88edef56690825f9708",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0004603542703725297,
+          "bounds": {
+            "min": [
+              -0.5157363414764404,
+              0.01574220322072506,
+              -0.13015605509281158
+            ],
+            "max": [
+              0.5157363414764404,
+              1.596518635749817,
+              0.30565693974494934
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.0017959405188734236,
+          "bounds": {
+            "min": [
+              -0.4732244312763214,
+              0.03748152032494545,
+              -0.1292196810245514
+            ],
+            "max": [
+              0.48847857117652893,
+              1.59183669090271,
+              0.24520611763000488
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.004840901000977166,
+          "bounds": {
+            "min": [
+              -0.4568023979663849,
+              0.043986205011606216,
+              -0.06835534423589706
+            ],
+            "max": [
+              0.4568023979663849,
+              1.559999942779541,
+              0.2037985473871231
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1349640411233705e-7,
+          "minimumHandJointSeparationMeters": 0.2715485903768498,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003370940685272217
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.427574133157412e-7,
+          "minimumHandJointSeparationMeters": 0.04869147984758626,
+          "headYawSpanRadians": 0.0498994960735158,
+          "hipsVerticalTravelMeters": 0.0033594369888305664
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1349640411233705e-7,
+          "minimumHandJointSeparationMeters": 0.2715486154019923,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003370940685272217
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2632070631611352e-7,
+          "minimumHandJointSeparationMeters": 0.2715485917292001,
+          "headYawSpanRadians": 1.001136597564694,
+          "hipsVerticalTravelMeters": 0.003370940685272217
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2386005104981393e-7,
+          "minimumHandJointSeparationMeters": 0.2715485903768498,
+          "headYawSpanRadians": 0.05039833981859502,
+          "hipsVerticalTravelMeters": 0.32041746377944946
+        }
+      ]
+    },
+    {
+      "id": "fan-05",
+      "bytes": 221940,
+      "sha256": "38b003ca3b76255d5e62eb55e3dc7188e79a5b85e87afd002db283648ec6022b",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0003857792355679221,
+          "bounds": {
+            "min": [
+              -0.6414703726768494,
+              0.018417570739984512,
+              -0.16060419380664825
+            ],
+            "max": [
+              0.641470193862915,
+              1.8110864162445068,
+              0.36613935232162476
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.00016996897309900334,
+          "bounds": {
+            "min": [
+              -0.5905224680900574,
+              0.02849847450852394,
+              -0.1607285588979721
+            ],
+            "max": [
+              0.5905225276947021,
+              1.8110864162445068,
+              0.30728691816329956
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.006516847854285887,
+          "bounds": {
+            "min": [
+              -0.5668433904647827,
+              0.05103527382016182,
+              -0.07930972427129745
+            ],
+            "max": [
+              0.5668433904647827,
+              1.809999942779541,
+              0.24558711051940918
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.552911583751182e-8,
+          "minimumHandJointSeparationMeters": 0.3150660034554513,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003911137580871582
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 8.189928983282634e-8,
+          "minimumHandJointSeparationMeters": 0.05649462568772767,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0038977861404418945
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.552911583751182e-8,
+          "minimumHandJointSeparationMeters": 0.3150660207831607,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003911137580871582
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.126467046980939e-8,
+          "minimumHandJointSeparationMeters": 0.3150659992552962,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.003911137580871582
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.129918655396068e-7,
+          "minimumHandJointSeparationMeters": 0.3150659888650256,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.37176644802093506
+        }
+      ]
+    },
+    {
+      "id": "fan-06",
+      "bytes": 228344,
+      "sha256": "a1960d9d3a2bc361c98cb9842e8ab9d5c5bfee91de6b70c24bad92bef3d870a2",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0020429256629599865,
+          "bounds": {
+            "min": [
+              -0.5021610856056213,
+              0.017318861559033394,
+              -0.11020638793706894
+            ],
+            "max": [
+              0.5021610856056213,
+              1.7602641582489014,
+              0.289900541305542
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.0015154626437607227,
+          "bounds": {
+            "min": [
+              -0.46057528257369995,
+              0.027315666899085045,
+              -0.0991116464138031
+            ],
+            "max": [
+              0.46057531237602234,
+              1.7551020383834839,
+              0.2142428606748581
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005884719322500727,
+          "bounds": {
+            "min": [
+              -0.4439501166343689,
+              0.04849760979413986,
+              -0.07536614686250687
+            ],
+            "max": [
+              0.4439501166343689,
+              1.7200000286102295,
+              0.1931885927915573
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2753941066275915e-7,
+          "minimumHandJointSeparationMeters": 0.2993997434533144,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003716707229614258
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3331804975407965e-7,
+          "minimumHandJointSeparationMeters": 0.0536855064208247,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0037040114402770996
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2753941066275915e-7,
+          "minimumHandJointSeparationMeters": 0.29939977569069365,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003716707229614258
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2904689270342572e-7,
+          "minimumHandJointSeparationMeters": 0.29939973702651335,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.003716707229614258
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.341782273650479e-7,
+          "minimumHandJointSeparationMeters": 0.2993997358231627,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.35328084230422974
+        }
+      ]
+    },
+    {
+      "id": "fan-07",
+      "bytes": 226064,
+      "sha256": "f37395b9a2092cc0ab4eb53e074ead6a340b5521b2cc4ec792f68e56c5a8541b",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.00203739300677729,
+          "bounds": {
+            "min": [
+              -0.5864446759223938,
+              0.01757408119738102,
+              -0.14536908268928528
+            ],
+            "max": [
+              0.5977663993835449,
+              1.7704981565475464,
+              0.34071284532546997
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.0020331049683222587,
+          "bounds": {
+            "min": [
+              -0.5559546947479248,
+              0.03408702835440636,
+              -0.143301323056221
+            ],
+            "max": [
+              0.5547619462013245,
+              1.7653061151504517,
+              0.2712666988372803
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005953473997149176,
+          "bounds": {
+            "min": [
+              -0.5286805033683777,
+              0.04877956211566925,
+              -0.07580432295799255
+            ],
+            "max": [
+              0.5286805033683777,
+              1.7300000190734863,
+              0.22908899188041687
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4362800574587496e-7,
+          "minimumHandJointSeparationMeters": 0.3011404354773566,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0037383437156677246
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.0307556995307754e-7,
+          "minimumHandJointSeparationMeters": 0.053997613331871086,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0037255287170410156
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4362800574587496e-7,
+          "minimumHandJointSeparationMeters": 0.30114046119866217,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0037383437156677246
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.4362800574587496e-7,
+          "minimumHandJointSeparationMeters": 0.3011404249106747,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.0037383437156677246
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 8.74831972870743e-8,
+          "minimumHandJointSeparationMeters": 0.3011404291446557,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.3553347587585449
+        }
+      ]
+    },
+    {
+      "id": "fan-08",
+      "bytes": 228180,
+      "sha256": "308df38e2ecf84ff51dc2d59d87af75803a98663299dcc5b56f0b49b186c55be",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0003167157007441718,
+          "bounds": {
+            "min": [
+              -0.5246431231498718,
+              0.017135949805378914,
+              -0.12462056428194046
+            ],
+            "max": [
+              0.5246431231498718,
+              1.6409844160079956,
+              0.29910793900489807
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.00013954047026637636,
+          "bounds": {
+            "min": [
+              -0.483626127243042,
+              0.031213505193591118,
+              -0.10698950290679932
+            ],
+            "max": [
+              0.4836260676383972,
+              1.6409844160079956,
+              0.22966818511486053
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005350100129011601,
+          "bounds": {
+            "min": [
+              -0.4626246392726898,
+              0.04624190554022789,
+              -0.07186074554920197
+            ],
+            "max": [
+              0.4626246392726898,
+              1.6399999856948853,
+              0.20441214740276337
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1642086917370337e-7,
+          "minimumHandJointSeparationMeters": 0.2854741698356194,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0035437941551208496
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.492532455260318e-8,
+          "minimumHandJointSeparationMeters": 0.05118847791349429,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0035317540168762207
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1642086917370337e-7,
+          "minimumHandJointSeparationMeters": 0.28547419338806795,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0035437941551208496
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.03794488686637e-7,
+          "minimumHandJointSeparationMeters": 0.2854741698356194,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.0035437941551208496
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.512074393171944e-8,
+          "minimumHandJointSeparationMeters": 0.2854741591454496,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.3368492126464844
+        }
+      ]
+    },
+    {
+      "id": "fan-09",
+      "bytes": 227140,
+      "sha256": "60d873259643113fd09346d2b5faf52c498085ed3c1a46db7593c3942552251a",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0018214670950128314,
+          "bounds": {
+            "min": [
+              -0.4953514039516449,
+              0.020903699100017548,
+              -0.1052260473370552
+            ],
+            "max": [
+              0.4953514337539673,
+              1.7397959232330322,
+              0.25907766819000244
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.004503941419869902,
+          "bounds": {
+            "min": [
+              -0.4606207609176636,
+              0.03472060710191727,
+              -0.10561112314462662
+            ],
+            "max": [
+              0.4606207609176636,
+              1.7346938848495483,
+              0.2152431607246399
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.0057486430330120665,
+          "bounds": {
+            "min": [
+              -0.4371524453163147,
+              0.047933679074048996,
+              -0.07448979467153549
+            ],
+            "max": [
+              0.4371524453163147,
+              1.7000000476837158,
+              0.18574096262454987
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.5124728106844806e-7,
+          "minimumHandJointSeparationMeters": 0.2959183432270431,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0036734938621520996
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.375155112039354e-7,
+          "minimumHandJointSeparationMeters": 0.053061200802315966,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.003660917282104492
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.5124728106844806e-7,
+          "minimumHandJointSeparationMeters": 0.2959183743977869,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0036734938621520996
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3143186273012581e-7,
+          "minimumHandJointSeparationMeters": 0.2959183493005,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.0036734938621520996
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.45103804235926e-7,
+          "minimumHandJointSeparationMeters": 0.29591834251886073,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.3491729497909546
+        }
+      ]
+    },
+    {
+      "id": "fan-10",
+      "bytes": 225256,
+      "sha256": "b47d415e1239b9ceb929fd3f8312b1614a0afc159da611e0e9878405d5f057fa",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0019298608041664743,
+          "bounds": {
+            "min": [
+              -0.4923105239868164,
+              0.015699993818998337,
+              -0.13349339365959167
+            ],
+            "max": [
+              0.49231067299842834,
+              1.6374549865722656,
+              0.27298691868782043
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.003989652845462481,
+          "bounds": {
+            "min": [
+              -0.45950260758399963,
+              0.019963396713137627,
+              -0.1325330138206482
+            ],
+            "max": [
+              0.4595026671886444,
+              1.6326531171798706,
+              0.22605156898498535
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005092286310652583,
+          "bounds": {
+            "min": [
+              -0.44132909178733826,
+              0.045114051550626755,
+              -0.07010804116725922
+            ],
+            "max": [
+              0.44132909178733826,
+              1.600000023841858,
+              0.1949523240327835
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.19413824615069e-7,
+          "minimumHandJointSeparationMeters": 0.2785113827818114,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003457367420196533
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3652582059618472e-7,
+          "minimumHandJointSeparationMeters": 0.04993998992534471,
+          "headYawSpanRadians": 0.0498994960735158,
+          "hipsVerticalTravelMeters": 0.003445565700531006
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.19413824615069e-7,
+          "minimumHandJointSeparationMeters": 0.2785113911889254,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003457367420196533
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3704130291120316e-7,
+          "minimumHandJointSeparationMeters": 0.27851138527365377,
+          "headYawSpanRadians": 1.001136597564694,
+          "hipsVerticalTravelMeters": 0.003457367420196533
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3650922146747574e-7,
+          "minimumHandJointSeparationMeters": 0.27851137534932124,
+          "headYawSpanRadians": 0.05039833981859502,
+          "hipsVerticalTravelMeters": 0.3286333680152893
+        }
+      ]
+    },
+    {
+      "id": "fan-11",
+      "bytes": 228220,
+      "sha256": "6acc8d0837448fa25b1061292d272cb9aeed67c08f5c087ea05041371479461e",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0004295838386548583,
+          "bounds": {
+            "min": [
+              -0.6280766129493713,
+              0.02272839844226837,
+              -0.1470327377319336
+            ],
+            "max": [
+              0.6280766129493713,
+              1.9111464023590088,
+              0.3478964567184448
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.00018926888905368465,
+          "bounds": {
+            "min": [
+              -0.5785609483718872,
+              0.024100739508867264,
+              -0.1522003710269928
+            ],
+            "max": [
+              0.5785609483718872,
+              1.9111464023590088,
+              0.28391650319099426
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.0072567356799736315,
+          "bounds": {
+            "min": [
+              -0.5539970993995667,
+              0.05385490134358406,
+              -0.08369147777557373
+            ],
+            "max": [
+              0.5539970993995667,
+              1.909999966621399,
+              0.23624667525291443
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.9058444272808334e-7,
+          "minimumHandJointSeparationMeters": 0.33247296072143956,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0041272640228271484
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.8016143446490103e-7,
+          "minimumHandJointSeparationMeters": 0.059615846999045596,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.004113137722015381
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.9058444272808334e-7,
+          "minimumHandJointSeparationMeters": 0.3324729831567241,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0041272640228271484
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.865385342152337e-7,
+          "minimumHandJointSeparationMeters": 0.33247296072143956,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.0041272640228271484
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.6485527324857036e-7,
+          "minimumHandJointSeparationMeters": 0.3324729485183978,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.39230602979660034
+        }
+      ]
+    },
+    {
+      "id": "fan-12",
+      "bytes": 226484,
+      "sha256": "46b720589f9f2f9a1f61338b2ac1c9341cfb1926dde4a1f2e67c29d3c57d8795",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0015623103921168018,
+          "bounds": {
+            "min": [
+              -0.5395904183387756,
+              0.01911231130361557,
+              -0.13171720504760742
+            ],
+            "max": [
+              0.5395904183387756,
+              1.7909663915634155,
+              0.2799820601940155
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.004772774392763975,
+          "bounds": {
+            "min": [
+              -0.49447402358055115,
+              0.02806706540286541,
+              -0.11522887647151947
+            ],
+            "max": [
+              0.5024205446243286,
+              1.7857142686843872,
+              0.24487915635108948
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.006091824031268472,
+          "bounds": {
+            "min": [
+              -0.47158488631248474,
+              0.049343496561050415,
+              -0.07668067514896393
+            ],
+            "max": [
+              0.47158488631248474,
+              1.75,
+              0.20588544011116028
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1772834747230963e-7,
+          "minimumHandJointSeparationMeters": 0.30462182854890446,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0037814974784851074
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2982013361629833e-7,
+          "minimumHandJointSeparationMeters": 0.05462185010751591,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0037685632705688477
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1772834747230963e-7,
+          "minimumHandJointSeparationMeters": 0.30462182854890446,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.0037814974784851074
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3082030378716203e-7,
+          "minimumHandJointSeparationMeters": 0.30462182854890446,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.0037814974784851074
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.214663415937097e-7,
+          "minimumHandJointSeparationMeters": 0.3046218253339662,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.35944271087646484
+        }
+      ]
+    },
+    {
+      "id": "fan-13",
+      "bytes": 226560,
+      "sha256": "3ff2d8c0817d005a5918b3c3ca83dc8e34df15cbea6aef40198f0b3767aa06be",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.0017015550920830994,
+          "bounds": {
+            "min": [
+              -0.5462683439254761,
+              0.017963098362088203,
+              -0.14100240170955658
+            ],
+            "max": [
+              0.5382680296897888,
+              1.7295618057250977,
+              0.30705735087394714
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.002712017069761225,
+          "bounds": {
+            "min": [
+              -0.5109885334968567,
+              0.043086692690849304,
+              -0.1399879902601242
+            ],
+            "max": [
+              0.5109885931015015,
+              1.7244898080825806,
+              0.24900506436824799
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005681288905187011,
+          "bounds": {
+            "min": [
+              -0.4821203351020813,
+              0.04765171557664871,
+              -0.0740516185760498
+            ],
+            "max": [
+              0.4821203351020813,
+              1.690000057220459,
+              0.20741881430149078
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.0215551842587184e-7,
+          "minimumHandJointSeparationMeters": 0.2941776512355217,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003651857376098633
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1336475284769117e-7,
+          "minimumHandJointSeparationMeters": 0.052749121011211264,
+          "headYawSpanRadians": 0.0498994960735158,
+          "hipsVerticalTravelMeters": 0.003639400005340576
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.0215551842587184e-7,
+          "minimumHandJointSeparationMeters": 0.2941776737300688,
+          "headYawSpanRadians": 0.05007052590023997,
+          "hipsVerticalTravelMeters": 0.003651857376098633
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 9.554920177485876e-8,
+          "minimumHandJointSeparationMeters": 0.2941776467512735,
+          "headYawSpanRadians": 1.001136597564694,
+          "hipsVerticalTravelMeters": 0.003651857376098633
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.1170746932598184e-7,
+          "minimumHandJointSeparationMeters": 0.29417764503077,
+          "headYawSpanRadians": 0.05039833981859502,
+          "hipsVerticalTravelMeters": 0.34711897373199463
+        }
+      ]
+    },
+    {
+      "id": "fan-14",
+      "bytes": 227308,
+      "sha256": "b124831d60fac79e51b21b5e9e01319cd910b1c7178bbf69dfa6178c6e7d8a6d",
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      },
+      "lods": [
+        {
+          "lod": 0,
+          "triangles": 210,
+          "minimumTriangleAreaM2": 0.00017557973958077228,
+          "bounds": {
+            "min": [
+              -0.5498100519180298,
+              0.016957655549049377,
+              -0.1291966438293457
+            ],
+            "max": [
+              0.5498100519180298,
+              1.6988595724105835,
+              0.3430202007293701
+            ]
+          }
+        },
+        {
+          "lod": 1,
+          "triangles": 90,
+          "minimumTriangleAreaM2": 0.00017557973958077228,
+          "bounds": {
+            "min": [
+              -0.5498100519180298,
+              0.05609815567731857,
+              -0.1375029981136322
+            ],
+            "max": [
+              0.5498100519180298,
+              1.6938775777816772,
+              0.3430202007293701
+            ]
+          }
+        },
+        {
+          "lod": 2,
+          "triangles": 24,
+          "minimumTriangleAreaM2": 0.005481448278966515,
+          "bounds": {
+            "min": [
+              -0.5010176301002502,
+              0.04680582880973816,
+              -0.07273709774017334
+            ],
+            "max": [
+              0.5010176301002502,
+              1.659999966621399,
+              0.22314020991325378
+            ]
+          }
+        }
+      ],
+      "animations": [
+        {
+          "name": "seated_idle",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3911837820426928e-7,
+          "minimumHandJointSeparationMeters": 0.28895554102660104,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003587007522583008
+        },
+        {
+          "name": "polite_applause",
+          "durationSeconds": 3.200000047683716,
+          "samples": 39,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2153956039906897e-7,
+          "minimumHandJointSeparationMeters": 0.05181275041277217,
+          "headYawSpanRadians": 0.04984898368661361,
+          "hipsVerticalTravelMeters": 0.0035747885704040527
+        },
+        {
+          "name": "cheer",
+          "durationSeconds": 4,
+          "samples": 49,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.3911837820426928e-7,
+          "minimumHandJointSeparationMeters": 0.28895559166377616,
+          "headYawSpanRadians": 0.050019840490812074,
+          "hipsVerticalTravelMeters": 0.003587007522583008
+        },
+        {
+          "name": "track_ball",
+          "durationSeconds": 5,
+          "samples": 61,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.2426042511675037e-7,
+          "minimumHandJointSeparationMeters": 0.2889555495384118,
+          "headYawSpanRadians": 1.0003040617130723,
+          "hipsVerticalTravelMeters": 0.003587007522583008
+        },
+        {
+          "name": "stand_up",
+          "durationSeconds": 6,
+          "samples": 73,
+          "loopSeamMaximum": 0,
+          "maximumFootJointDriftMeters": 1.5622463862642517e-7,
+          "minimumHandJointSeparationMeters": 0.2889555520197938,
+          "headYawSpanRadians": 0.050275261286016046,
+          "hipsVerticalTravelMeters": 0.3409571051597595
+        }
+      ]
+    }
+  ],
+  "note": "Values decoded independently from the final GLB binary. Foot tests measure joint centers, not physical collision or a motion-capture reference."
+}

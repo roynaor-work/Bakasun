@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/tennis-people-browsers npm test",
+  "exitCode": 0,
+  "tests": 3334,
+  "passed": 3278,
+  "failed": 0,
+  "skipped": 56,
+  "cancelled": 0,
+  "durationMs": 191675.744759,
+  "description": "בדיקות המאגר (`npm test`): **3,278 עברו, 0 נכשלו, 56 דולגו** לאחר הגדרת Chromium המקומי בסביבת הבדיקה",
+  "initialAttempt": {
+    "passed": 3277,
+    "failed": 1,
+    "skipped": 56,
+    "failingTest": "tests/workout-royiki.test.mjs:91",
+    "reason": "Playwright expected a missing chromium_headless_shell-1234 executable. The test created its HTTP server before browser launch; after launch failed, the server kept the child alive. The stalled child was stopped after more than 10 minutes."
+  },
+  "environmentResolution": {
+    "browser": "/usr/bin/chromium",
+    "temporaryExecutableAlias": "/tmp/tennis-people-browsers/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "repositoryChangesRequired": false,
+    "focusedRerun": {
+      "tests": 5,
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "finalLogSha256": "0512c4ca04ce46089261fd376d4029aa564ba767d61d1bf51b8ffff54671614a"
+}
