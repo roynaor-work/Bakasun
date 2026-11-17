@@ -1,0 +1,124 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>block_jump</title><style>body{font:16px system-ui;background:#101d28;color:#e7edf2;margin:0 auto;padding:24px;max-width:1400px}a{color:#8de3cb}table{border-collapse:collapse;width:100%;background:#162838}th,td{border:1px solid #456;padding:10px;text-align:right}img{width:100%;height:auto}pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}.green{color:#8decbe}.yellow{color:#ffe18e}.red{color:#ff9696}.score{font-size:1.4em}@media(max-width:600px){body{padding:12px}th,td{padding:5px;font-size:13px}}</style><h1>block_jump</h1><p><a href="../report.html">כל הקליפים</a> · <a href="../../../preview.html">תצוגת התנועה</a> · <a href="hoops-motion-v14--block_jump.json">JSON מקורי</a></p><p class="score">ציון 96.6 · כיסוי 100%</p><p>נתוני motion-qa-v1 המקוריים; עיצוב הדוח בלבד הותאם לחבילה. נקודות הסוליה נמדדות בתרחיש שחקן חיצוני מוצהר; Root בנכס נשאר קבוע.</p><img src="../sheets/hoops-motion-v14--block_jump.svg" alt="שמונה פריימים מדודים: block_jump"><table><thead><tr><th>מדד</th><th>מצב</th><th>ערך</th><th>ציון</th><th>ראיות</th></tr></thead><tbody><tr><th>החלקת רגליים</th><td class="green">ירוק</td><td>0.000028</td><td>99.94</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;coordinateSpace&quot;: &quot;native GLB plus explicitly declared external actor position and heading, applied once&quot;,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;windows&quot;: 4,
+  &quot;samples&quot;: 774,
+  &quot;maxDriftMeters&quot;: 0.000047,
+  &quot;p95SpeedMetersPerSecond&quot;: 0.001777,
+  &quot;worst&quot;: {
+    &quot;bone&quot;: &quot;RightFoot&quot;,
+    &quot;t&quot;: 0.516667,
+    &quot;start&quot;: 0,
+    &quot;end&quot;: 1.4,
+    &quot;driftMeters&quot;: 0.000047
+  }
+}</pre></details></td></tr><tr><th>חדירה לרצפה</th><td class="green">ירוק</td><td>0.000319</td><td>98.72</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;samples&quot;: 10100,
+  &quot;floorY&quot;: 0,
+  &quot;probeKind&quot;: &quot;declared sole probes plus skeletal joint centers (no mesh surfaces)&quot;,
+  &quot;maxDepthMeters&quot;: 0.000539,
+  &quot;worst&quot;: {
+    &quot;t&quot;: 2.483333,
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;depthMeters&quot;: 0.000539,
+    &quot;y&quot;: -0.000539
+  }
+}</pre></details></td></tr><tr><th>קפיצות פוזה</th><td class="green">ירוק</td><td>0.813674</td><td>83.73</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;adjacentPairs&quot;: 504,
+  &quot;observations&quot;: 8568,
+  &quot;maxDegrees60Hz&quot;: 12.205117,
+  &quot;maxMarkerStepHeight60Hz&quot;: 0.019437,
+  &quot;maxRootStepHeight60Hz&quot;: 0,
+  &quot;worst&quot;: {
+    &quot;ratio&quot;: 0.8136744963749601,
+    &quot;t&quot;: 0.2,
+    &quot;previousTime&quot;: 0.191667,
+    &quot;bone&quot;: &quot;LeftHand&quot;,
+    &quot;markerStepHeight60Hz&quot;: 0.006758,
+    &quot;degrees60Hz&quot;: 12.205117
+  }
+}</pre></details></td></tr><tr><th>חריגות אנטומיות</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;testedFrames&quot;: 505,
+  &quot;affectedFrames&quot;: 0,
+  &quot;checks&quot;: 8585,
+  &quot;maxLimbFlexionDegrees&quot;: 143.850776,
+  &quot;maxRelativeSegmentLengthChange&quot;: 0,
+  &quot;hingeDirectionChecked&quot;: true,
+  &quot;axialTwistChecked&quot;: false,
+  &quot;violations&quot;: []
+}</pre></details></td></tr><tr><th>מגע בכדור</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;radiusMeters&quot;: 0.12,
+  &quot;samples&quot;: 1,
+  &quot;missed&quot;: [],
+  &quot;contacts&quot;: [
+    {
+      &quot;t&quot;: 1.9,
+      &quot;bone&quot;: &quot;RightHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        -0.181134,
+        2.164864,
+        0.220823
+      ],
+      &quot;ballCenter&quot;: [
+        -0.181134,
+        2.164865,
+        0.340823
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    }
+  ],
+  &quot;contactDetailsTruncated&quot;: false,
+  &quot;coordinateSpace&quot;: &quot;native GLB plus explicitly declared external actor position and heading, applied once&quot;
+}</pre></details></td></tr><tr><th>כניסה ויציאה מול המתנה</th><td class="green">ירוק</td><td>0.012333</td><td>99.75</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;entry&quot;: {
+    &quot;ratio&quot;: 0.012333070145216772,
+    &quot;t&quot;: 0,
+    &quot;idleTime&quot;: 0.141667,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.000429,
+    &quot;rmsRotationDegrees&quot;: 0.082338,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.00925,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;exit&quot;: {
+    &quot;ratio&quot;: 0.006898623886472203,
+    &quot;t&quot;: 4.2,
+    &quot;idleTime&quot;: 3.925,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.000227,
+    &quot;rmsRotationDegrees&quot;: 0.043589,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.005174,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;worstEndpoint&quot;: &quot;entry&quot;,
+  &quot;alignment&quot;: &quot;horizontal root translation; raw asset poses used when provided&quot;
+}</pre></details></td></tr><tr><th>מהירות גוף מול צעדים</th><td class="not-applicable">לא חל</td><td>—</td><td>—</td><td><details><summary>ראיות המדידה</summary><pre>{}</pre></details></td></tr><tr><th>סימטריה</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;mode&quot;: &quot;structural&quot;,
+  &quot;modeSource&quot;: &quot;declared&quot;,
+  &quot;structuralMismatch&quot;: 0,
+  &quot;segments&quot;: [
+    {
+      &quot;segment&quot;: &quot;Arm-ForeArm&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;ForeArm-Hand&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;UpLeg-Leg&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;Leg-Foot&quot;,
+      &quot;mismatch&quot;: 0
+    }
+  ],
+  &quot;motionRmsHeight&quot;: null,
+  &quot;worstMotion&quot;: null,
+  &quot;bilateralPoseRmsHeightUnscored&quot;: 0.032851,
+  &quot;note&quot;: &quot;One-sided authored actions are checked for structural symmetry only.&quot;
+}</pre></details></td></tr></tbody></table></html>

@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "format": "hoops-tall v12 version1/fps30/int16 canonical18",
+  "profile": "canonical",
+  "scope": "Encoding/round-trip verification for canonical proportions. Original tall guard/wing/center retargeting is not applied by this pack.",
+  "clips": 20,
+  "maxHipsQuantizationMeters": 0.00006737472303428888,
+  "maxBallQuantizationMeters": 0.00007228261440682091,
+  "checks": [
+    {
+      "id": "layup_right",
+      "frames": 127,
+      "maxHipsMeters": 0.00006546739722886946,
+      "maxQuaternionComponentError": 0.000025325226496962484,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "layup_left",
+      "frames": 127,
+      "maxHipsMeters": 0.00006546739722886946,
+      "maxQuaternionComponentError": 0.000025325226496962484,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "dunk_two_hand",
+      "frames": 139,
+      "maxHipsMeters": 0.00006445748969528813,
+      "maxQuaternionComponentError": 0.00002491684068132823,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "dunk_reverse",
+      "frames": 139,
+      "maxHipsMeters": 0.00006445748969528813,
+      "maxQuaternionComponentError": 0.000025668365792218288,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "block_jump",
+      "frames": 127,
+      "maxHipsMeters": 0.00006482260200702451,
+      "maxQuaternionComponentError": 0.000027032565243436707,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "block_reach",
+      "frames": 127,
+      "maxHipsMeters": 0.00006482260200702451,
+      "maxQuaternionComponentError": 0.000027032565243436707,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "steal_sprint",
+      "frames": 81,
+      "maxHipsMeters": 0.00004592693356284243,
+      "maxQuaternionComponentError": 0.00002411560632345295,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "free_throw_prepare",
+      "frames": 55,
+      "maxHipsMeters": 0.00004809332648147979,
+      "maxQuaternionComponentError": 0.000026749904437625505,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "free_throw_release",
+      "frames": 37,
+      "maxHipsMeters": 0.000045915912292082695,
+      "maxQuaternionComponentError": 0.000025909964040222934,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "free_throw_follow",
+      "frames": 67,
+      "maxHipsMeters": 0.000046912727900472184,
+      "maxQuaternionComponentError": 0.000024816228108117004,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "fadeaway",
+      "frames": 127,
+      "maxHipsMeters": 0.00006545435402479504,
+      "maxQuaternionComponentError": 0.000025451136967555523,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "pass_overhead",
+      "frames": 106,
+      "maxHipsMeters": 0.000049060295393421605,
+      "maxQuaternionComponentError": 0.000024635598337870566,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "pass_chest",
+      "frames": 85,
+      "maxHipsMeters": 0.00004179359954081807,
+      "maxQuaternionComponentError": 0.000024616772897999622,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "pass_jump",
+      "frames": 103,
+      "maxHipsMeters": 0.000050014066696024706,
+      "maxQuaternionComponentError": 0.000025402379056341974,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "dribble_behind",
+      "frames": 97,
+      "maxHipsMeters": 0.00006316974447033064,
+      "maxQuaternionComponentError": 0.000024186984014715148,
+      "maxBallMeters": 0.00007228261440682091,
+      "eventsPreserved": true,
+      "ballTrackEncoded": true,
+      "passed": true
+    },
+    {
+      "id": "dribble_between",
+      "frames": 97,
+      "maxHipsMeters": 0.00006316774506910011,
+      "maxQuaternionComponentError": 0.000024862726808021076,
+      "maxBallMeters": 0.00006428939859399002,
+      "eventsPreserved": true,
+      "ballTrackEncoded": true,
+      "passed": true
+    },
+    {
+      "id": "pivot",
+      "frames": 121,
+      "maxHipsMeters": 0.00006737472303428888,
+      "maxQuaternionComponentError": 0.00002573590754764992,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "celebrate_score",
+      "frames": 97,
+      "maxHipsMeters": 0.00006728079099170981,
+      "maxQuaternionComponentError": 0.000025794841964702816,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "disappointed",
+      "frames": 97,
+      "maxHipsMeters": 0.00006261480245122424,
+      "maxQuaternionComponentError": 0.000024904703806373025,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    },
+    {
+      "id": "help_up",
+      "frames": 145,
+      "maxHipsMeters": 0.000060160301812650033,
+      "maxQuaternionComponentError": 0.000024619210646911405,
+      "maxBallMeters": 0,
+      "eventsPreserved": true,
+      "ballTrackEncoded": false,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "sharedModel": {
+    "sha256": "26135088b73dea8674fba04b87d255a43eb49c44f8cab1697237cec34a8878ca",
+    "canonical18": true,
+    "noCompression": true,
+    "selfContained": true
+  }
+}

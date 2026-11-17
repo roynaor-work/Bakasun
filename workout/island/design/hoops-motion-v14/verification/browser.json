@@ -1,0 +1,1638 @@
+{
+  "sharedModelSha256": "26135088b73dea8674fba04b87d255a43eb49c44f8cab1697237cec34a8878ca",
+  "realPlayback": {
+    "before": "פריים 24 / 126",
+    "after": "פריים 29 / 126",
+    "advanced": true
+  },
+  "bridgeSmoke": [
+    {
+      "source": "idle",
+      "target": "layup_right",
+      "started": true,
+      "completed": true
+    },
+    {
+      "source": "run",
+      "target": "layup_right",
+      "started": true,
+      "completed": true
+    },
+    {
+      "source": "layup_right",
+      "target": "idle",
+      "started": true,
+      "completed": true
+    },
+    {
+      "source": "idle",
+      "target": "run",
+      "started": true,
+      "completed": true
+    }
+  ],
+  "clipsLoaded": [
+    {
+      "id": "layup_right",
+      "frames": [
+        0,
+        16,
+        32,
+        42,
+        54,
+        72,
+        74,
+        126
+      ],
+      "timesSeconds": [
+        0,
+        0.5333333333333333,
+        1.0666666666666667,
+        1.4,
+        1.8,
+        2.4,
+        2.466666666666667,
+        4.2
+      ],
+      "sheet": "sheets/layup_right.png",
+      "glbSha256": "03a1db028a2f9a852308ff86f78cb6a2e10bc50806d2ef9d4cc77d5f307f4c2b",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.8,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 2.3690640000000007,
+          "positionMeters": [
+            -0.03499999999999991,
+            2.3690640000000007,
+            1.180464
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": {
+        "center": [
+          -0.034999999999999844,
+          3.05,
+          2.917062109620736
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "layup_left",
+      "frames": [
+        0,
+        16,
+        32,
+        42,
+        54,
+        72,
+        74,
+        126
+      ],
+      "timesSeconds": [
+        0,
+        0.5333333333333333,
+        1.0666666666666667,
+        1.4,
+        1.8,
+        2.4,
+        2.466666666666667,
+        4.2
+      ],
+      "sheet": "sheets/layup_left.png",
+      "glbSha256": "e0500d79d3ea575f30f2191f9348d4450e32bd7ce0a9021f713a1e0a2de34667",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.8,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 2.3690640000000007,
+          "positionMeters": [
+            0.03499999999999991,
+            2.3690640000000007,
+            1.180464
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": {
+        "center": [
+          0.034999999999999844,
+          3.05,
+          2.917062109620736
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "dunk_two_hand",
+      "frames": [
+        0,
+        17,
+        42,
+        60,
+        62,
+        63,
+        78,
+        138
+      ],
+      "timesSeconds": [
+        0,
+        0.5666666666666667,
+        1.4,
+        2,
+        2.066666666666667,
+        2.1,
+        2.6,
+        4.6
+      ],
+      "sheet": "sheets/dunk_two_hand.png",
+      "glbSha256": "5baf0c8b4f530f5c1a5eef8430d4be6e11bc0d2bda7e776cc47e06d05afaaa1a",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 2,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.1130572809000094,
+          "positionMeters": [
+            -0.08000000000000085,
+            3.1130572809000094,
+            1.1300000000000001
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "contact",
+          "time": 2,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.1130572809000094,
+          "positionMeters": [
+            0.0799999999999982,
+            3.1130572809000094,
+            1.1300000000000008
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "rim_contact",
+          "time": 2.1,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.05,
+          "positionMeters": [
+            0.2249999999999996,
+            3.05,
+            1.2698828861626041
+          ],
+          "surface": "rim"
+        },
+        {
+          "type": "rim_contact",
+          "time": 2.1,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.0499999999999994,
+          "positionMeters": [
+            -0.22500000000000026,
+            3.0499999999999994,
+            1.2698828861626041
+          ],
+          "surface": "rim"
+        }
+      ],
+      "rim": {
+        "center": [
+          0,
+          3.05,
+          1.2698828861626041
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "dunk_reverse",
+      "frames": [
+        0,
+        17,
+        42,
+        60,
+        62,
+        63,
+        78,
+        138
+      ],
+      "timesSeconds": [
+        0,
+        0.5666666666666667,
+        1.4,
+        2,
+        2.066666666666667,
+        2.1,
+        2.6,
+        4.6
+      ],
+      "sheet": "sheets/dunk_reverse.png",
+      "glbSha256": "6b302c5ac5da683e7e1e3c714d0b00654074f186c7e33b210c9f2ccf5e3e8f29",
+      "referenceHeading": true,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 2,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.0825000000000005,
+          "positionMeters": [
+            -7.038624191914366e-18,
+            3.0825000000000005,
+            1.1300000000000003
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "rim_contact",
+          "time": 2.1,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 3.05,
+          "positionMeters": [
+            0.225,
+            3.05,
+            1.2698828861626041
+          ],
+          "surface": "rim"
+        }
+      ],
+      "rim": {
+        "center": [
+          0,
+          3.05,
+          1.2698828861626041
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "block_jump",
+      "frames": [
+        0,
+        16,
+        32,
+        42,
+        47,
+        57,
+        72,
+        126
+      ],
+      "timesSeconds": [
+        0,
+        0.5333333333333333,
+        1.0666666666666667,
+        1.4,
+        1.5666666666666667,
+        1.9,
+        2.4,
+        4.2
+      ],
+      "sheet": "sheets/block_jump.png",
+      "glbSha256": "d2bb2754d03f8f16bbdd1b70581f2f6230ea87f3e5a59f496e8714b9fda7f932",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 1.9,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 2.1648644694998564,
+          "positionMeters": [
+            -0.18113384807680533,
+            2.1648644694998564,
+            0.2208227349135944
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "block_reach",
+      "frames": [
+        0,
+        16,
+        32,
+        47,
+        57,
+        63,
+        79,
+        126
+      ],
+      "timesSeconds": [
+        0,
+        0.5333333333333333,
+        1.0666666666666667,
+        1.5666666666666667,
+        1.9,
+        2.1,
+        2.6333333333333333,
+        4.2
+      ],
+      "sheet": "sheets/block_reach.png",
+      "glbSha256": "fce10cd497be3ed72de0ea69c5990ae01a7733a4405934406cec2b6cb66efc84",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 1.9,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.7448644694998565,
+          "positionMeters": [
+            -0.18113384807680522,
+            1.7448644694998565,
+            0.22082273491359442
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "steal_sprint",
+      "frames": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        45,
+        50,
+        80
+      ],
+      "timesSeconds": [
+        0,
+        0.3333333333333333,
+        0.6666666666666666,
+        1,
+        1.3333333333333333,
+        1.5,
+        1.6666666666666667,
+        2.6666666666666665
+      ],
+      "sheet": "sheets/steal_sprint.png",
+      "glbSha256": "5e693f3048d99f27f6ab0c7ad56a59ae116bcb5dc75fa66c8dbb7088d40f090d",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 1.5,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 0.890950094701094,
+          "positionMeters": [
+            -0.27667837552109237,
+            0.890950094701094,
+            5.337693623607938
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "footstrike",
+          "time": 0.5666666666666667,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999906,
+          "positionMeters": [
+            0.108,
+            0.003999999999999906,
+            2.154666666666651
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 1.2333333333333334,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999684,
+          "positionMeters": [
+            0.10799999999999998,
+            0.003999999999999684,
+            4.288000000000089
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 1.9,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999684,
+          "positionMeters": [
+            0.10799999999999998,
+            0.003999999999999684,
+            6.4213333333331954
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 2.5666666666666664,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999906,
+          "positionMeters": [
+            0.108,
+            0.003999999999999906,
+            8.554666666666295
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 0.2333333333333333,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999851,
+          "positionMeters": [
+            -0.108,
+            0.003999999999999851,
+            1.0880000000000023
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 0.9,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999962,
+          "positionMeters": [
+            -0.10799999999999998,
+            0.003999999999999962,
+            3.2213333333333622
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 1.5666666666666667,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999684,
+          "positionMeters": [
+            -0.10799999999999998,
+            0.003999999999999684,
+            5.354666666666646
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 2.2333333333333334,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": 0.003999999999999684,
+          "positionMeters": [
+            -0.10799999999999998,
+            0.003999999999999684,
+            7.4879999999997455
+          ],
+          "surface": "floor"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "free_throw_prepare",
+      "frames": [
+        0,
+        7,
+        14,
+        18,
+        20,
+        27,
+        34,
+        54
+      ],
+      "timesSeconds": [
+        0,
+        0.23333333333333334,
+        0.4666666666666667,
+        0.6,
+        0.6666666666666666,
+        0.9,
+        1.1333333333333333,
+        1.8
+      ],
+      "sheet": "sheets/free_throw_prepare.png",
+      "glbSha256": "38595a839b8bf2fffe5fb81cb9c660a90ecb6d93331cf3a7355ea5a1c35b6a8e",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 0.6,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 0.946811387537314,
+          "positionMeters": [
+            -0.2867244986088773,
+            0.946811387537314,
+            0.20609343209876552
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "contact",
+          "time": 1.8,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.4000000000000001,
+          "positionMeters": [
+            0.08500000000000005,
+            1.4000000000000001,
+            0.27000000000000013
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": {
+        "center": [
+          -0.035,
+          3.05,
+          4.6
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "free_throw_release",
+      "frames": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23,
+        25,
+        36
+      ],
+      "timesSeconds": [
+        0,
+        0.16666666666666666,
+        0.3,
+        0.4666666666666667,
+        0.6,
+        0.7666666666666667,
+        0.8333333333333334,
+        1.2
+      ],
+      "sheet": "sheets/free_throw_release.png",
+      "glbSha256": "ef672876dd31b7dcc1db43ed18e5932d260a8d913fc7ccbe626e5eaf5c163dcc",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 0.8499999999999999,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.68000382764975,
+          "positionMeters": [
+            -0.03499999384078469,
+            1.68000382764975,
+            0.290079243654433
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": {
+        "center": [
+          -0.035,
+          3.05,
+          4.6
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "free_throw_follow",
+      "frames": [
+        0,
+        8,
+        17,
+        18,
+        25,
+        33,
+        41,
+        66
+      ],
+      "timesSeconds": [
+        0,
+        0.26666666666666666,
+        0.5666666666666667,
+        0.6,
+        0.8333333333333334,
+        1.1,
+        1.3666666666666667,
+        2.2
+      ],
+      "sheet": "sheets/free_throw_follow.png",
+      "glbSha256": "422d9d66e1e7a81b2893e4f5c0e0b345fe026cf8f9a661d2d4c0ccdae923c361",
+      "referenceHeading": false,
+      "contactHeightMarkers": [],
+      "rim": {
+        "center": [
+          -0.035,
+          3.05,
+          4.6
+        ],
+        "radius": 0.225,
+        "coordinateSpace": "world",
+        "heightMeters": 3.05
+      },
+      "partnerRendered": false
+    },
+    {
+      "id": "fadeaway",
+      "frames": [
+        0,
+        16,
+        32,
+        42,
+        47,
+        54,
+        72,
+        126
+      ],
+      "timesSeconds": [
+        0,
+        0.5333333333333333,
+        1.0666666666666667,
+        1.4,
+        1.5666666666666667,
+        1.8,
+        2.4,
+        4.2
+      ],
+      "sheet": "sheets/fadeaway.png",
+      "glbSha256": "566957282a1a4020a91fe922dfcf60b131a936e758fe4e2f1f2596dc45d939b7",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.8,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 2.027437539670703,
+          "positionMeters": [
+            -0.04021361558752468,
+            2.027437539670703,
+            0.13091861658755508
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "pass_overhead",
+      "frames": [
+        0,
+        13,
+        26,
+        39,
+        45,
+        53,
+        66,
+        105
+      ],
+      "timesSeconds": [
+        0,
+        0.43333333333333335,
+        0.8666666666666667,
+        1.3,
+        1.5,
+        1.7666666666666666,
+        2.2,
+        3.5
+      ],
+      "sheet": "sheets/pass_overhead.png",
+      "glbSha256": "64b96b7366c66e3c66ce6b4cc06954b9cf21256ce207455daf2fcc31dbdbb2ba",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.5,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.5299999999999996,
+          "positionMeters": [
+            -0.12,
+            1.5299999999999996,
+            0.2899999999999998
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "contact",
+          "time": 1.5,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.5299999999999996,
+          "positionMeters": [
+            0.12,
+            1.5299999999999996,
+            0.2899999999999998
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "pass_chest",
+      "frames": [
+        0,
+        11,
+        21,
+        32,
+        36,
+        42,
+        53,
+        84
+      ],
+      "timesSeconds": [
+        0,
+        0.36666666666666664,
+        0.7,
+        1.0666666666666667,
+        1.2,
+        1.4,
+        1.7666666666666666,
+        2.8
+      ],
+      "sheet": "sheets/pass_chest.png",
+      "glbSha256": "0155ca2e2b37334db658954eda4189e18511bfa73d1a962cc1d413787a97efb6",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.2,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.1000000000000003,
+          "positionMeters": [
+            -0.11999999999999994,
+            1.1000000000000003,
+            0.4300000000000001
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "contact",
+          "time": 1.2,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.1000000000000003,
+          "positionMeters": [
+            0.11999999999999994,
+            1.1000000000000003,
+            0.4300000000000001
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "pass_jump",
+      "frames": [
+        0,
+        13,
+        26,
+        30,
+        38,
+        39,
+        48,
+        102
+      ],
+      "timesSeconds": [
+        0,
+        0.43333333333333335,
+        0.8666666666666667,
+        1,
+        1.2666666666666666,
+        1.3,
+        1.6,
+        3.4
+      ],
+      "sheet": "sheets/pass_jump.png",
+      "glbSha256": "8f97aa0677f0dc6fb313e85505f738fff8ddea4405c13287a0336c14dde8f4ad",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "release",
+          "time": 1.3,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.5614500000000002,
+          "positionMeters": [
+            -0.11999999999999995,
+            1.5614500000000002,
+            0.4299999999999999
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "contact",
+          "time": 1.3,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.5614500000000002,
+          "positionMeters": [
+            0.11999999999999995,
+            1.5614500000000002,
+            0.4299999999999999
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "dribble_behind",
+      "frames": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        96
+      ],
+      "timesSeconds": [
+        0,
+        0.4,
+        0.8,
+        1.2,
+        1.6,
+        2,
+        2.4,
+        3.2
+      ],
+      "sheet": "sheets/dribble_behind.png",
+      "glbSha256": "9fe0ca84c5141a3ce7d7c1ffd9b1ce6900785d769a87ef4d0754f1c1a74d6056",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 0,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0599999999999998,
+          "positionMeters": [
+            -0.30999999999999994,
+            1.0599999999999998,
+            -0.19999999999999987
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 0.4,
+          "heightMeters": 0,
+          "positionMeters": [
+            -1.8982025386783976e-17,
+            0,
+            -0.265
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 0.8,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0599999999999998,
+          "positionMeters": [
+            0.30999999999999994,
+            1.0599999999999998,
+            -0.20000000000000004
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 1.2000000000000002,
+          "heightMeters": 0,
+          "positionMeters": [
+            3.3228138626739073e-16,
+            0,
+            -0.265
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 1.6,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.06,
+          "positionMeters": [
+            -0.30999999999999983,
+            1.06,
+            -0.2000000000000001
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 2,
+          "heightMeters": 0,
+          "positionMeters": [
+            -9.491012693391987e-17,
+            0,
+            -0.265
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 2.4000000000000004,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.06,
+          "positionMeters": [
+            0.30999999999999994,
+            1.06,
+            -0.19999999999999996
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 2.8000000000000003,
+          "heightMeters": 0,
+          "positionMeters": [
+            6.835447979215655e-16,
+            0,
+            -0.265
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 3.2,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0599999999999998,
+          "positionMeters": [
+            -0.30999999999999994,
+            1.0599999999999998,
+            -0.19999999999999987
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "dribble_between",
+      "frames": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        96
+      ],
+      "timesSeconds": [
+        0,
+        0.4,
+        0.8,
+        1.2,
+        1.6,
+        2,
+        2.4,
+        3.2
+      ],
+      "sheet": "sheets/dribble_between.png",
+      "glbSha256": "a24b4ae80cd925a5e7cf583192f3a2a0c7f8e14164c676e38cd36a2e94599767",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "contact",
+          "time": 0,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0600000000000005,
+          "positionMeters": [
+            -0.31000000000000005,
+            1.0600000000000005,
+            0.19000000000000003
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 0.4,
+          "heightMeters": 0,
+          "positionMeters": [
+            -1.8982025386783976e-17,
+            0,
+            0
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 0.8,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0600000000000003,
+          "positionMeters": [
+            0.3100000000000001,
+            1.0600000000000003,
+            0.19
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 1.2000000000000002,
+          "heightMeters": 0,
+          "positionMeters": [
+            3.3228138626739073e-16,
+            0,
+            0
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 1.6,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0600000000000003,
+          "positionMeters": [
+            -0.31000000000000005,
+            1.0600000000000003,
+            0.19
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 2,
+          "heightMeters": 0,
+          "positionMeters": [
+            -9.491012693391987e-17,
+            0,
+            0
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 2.4000000000000004,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0600000000000003,
+          "positionMeters": [
+            0.30999999999999994,
+            1.0600000000000003,
+            0.19000000000000003
+          ],
+          "surface": "ball"
+        },
+        {
+          "type": "bounce",
+          "time": 2.8000000000000003,
+          "heightMeters": 0,
+          "positionMeters": [
+            6.835447979215655e-16,
+            0,
+            0
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "contact",
+          "time": 3.2,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0600000000000005,
+          "positionMeters": [
+            -0.31000000000000005,
+            1.0600000000000005,
+            0.19000000000000003
+          ],
+          "surface": "ball"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "pivot",
+      "frames": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        90,
+        120
+      ],
+      "timesSeconds": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3,
+        4
+      ],
+      "sheet": "sheets/pivot.png",
+      "glbSha256": "8cac57c5040cc977824e7c6a2cc547354bbdc6bee0344b2edf3d90ad4d14f6a4",
+      "referenceHeading": true,
+      "contactHeightMarkers": [
+        {
+          "type": "pivot_plant",
+          "time": 0.55,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": -0.00005795649940361358,
+          "positionMeters": [
+            0.10798806954808424,
+            -0.00005795649940361358,
+            -0.000002225528512551631
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "pivot_turn",
+          "time": 1.9,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": -9.71445146547012e-17,
+          "positionMeters": [
+            0.1080000000000001,
+            -9.71445146547012e-17,
+            -1.3877787807814457e-17
+          ],
+          "surface": "floor"
+        },
+        {
+          "type": "footstrike",
+          "time": 3.2,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "heightMeters": -9.71445146547012e-17,
+          "positionMeters": [
+            0.324,
+            -9.71445146547012e-17,
+            -1.1233092822742417e-16
+          ],
+          "surface": "floor"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "celebrate_score",
+      "frames": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        96
+      ],
+      "timesSeconds": [
+        0,
+        0.4,
+        0.8,
+        1.2,
+        1.6,
+        2,
+        2.4,
+        3.2
+      ],
+      "sheet": "sheets/celebrate_score.png",
+      "glbSha256": "27e43f16c57ddfff18a540d9c75ae99c0e57213344bc5d8ed76ba2b10b0ce5df",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "score_reaction",
+          "time": 1.3,
+          "bone": "Head",
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "heightMeters": 1.4236347767239483,
+          "positionMeters": [
+            -0.007030849720527564,
+            1.4236347767239483,
+            -0.06965118840481827
+          ],
+          "surface": "body"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "disappointed",
+      "frames": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        96
+      ],
+      "timesSeconds": [
+        0,
+        0.4,
+        0.8,
+        1.2,
+        1.6,
+        2,
+        2.4,
+        3.2
+      ],
+      "sheet": "sheets/disappointed.png",
+      "glbSha256": "eaee0d1cb12ca0e0888e777c34b87f272f95ce068d640bd5ddf7ac560eaba6de",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "miss_reaction",
+          "time": 1.3,
+          "bone": "Head",
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "heightMeters": 1.339261646519371,
+          "positionMeters": [
+            -0.01483173000823884,
+            1.339261646519371,
+            0.15335388147385431
+          ],
+          "surface": "body"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": false
+    },
+    {
+      "id": "help_up",
+      "frames": [
+        0,
+        18,
+        36,
+        39,
+        54,
+        72,
+        87,
+        144
+      ],
+      "timesSeconds": [
+        0,
+        0.6,
+        1.2,
+        1.3,
+        1.8,
+        2.4,
+        2.9,
+        4.8
+      ],
+      "sheet": "sheets/help_up.png",
+      "glbSha256": "9919266d2c4c1f68ca79fefa2b7fc5c1e1430d15e138fdc267ef0a078e17db9b",
+      "referenceHeading": false,
+      "contactHeightMarkers": [
+        {
+          "type": "assist_contact",
+          "time": 1.3,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 0.7500000000000001,
+          "positionMeters": [
+            -0.13,
+            0.7500000000000001,
+            0.4600000000000002
+          ],
+          "surface": "partner"
+        },
+        {
+          "type": "assist_lift",
+          "time": 2.1,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 0.9,
+          "positionMeters": [
+            -0.1299999999999999,
+            0.9,
+            0.42499999999999993
+          ],
+          "surface": "partner"
+        },
+        {
+          "type": "assist_release",
+          "time": 2.9,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.08,
+            0.025
+          ],
+          "heightMeters": 1.0500000000000003,
+          "positionMeters": [
+            -0.1299999999999999,
+            1.0500000000000003,
+            0.39000000000000024
+          ],
+          "surface": "partner"
+        }
+      ],
+      "rim": null,
+      "partnerRendered": true
+    }
+  ],
+  "clipCount": 20,
+  "framesPerSheet": 8,
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390
+    },
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "captures": [
+    "sheets/layup_right.png",
+    "sheets/layup_left.png",
+    "sheets/dunk_two_hand.png",
+    "sheets/dunk_reverse.png",
+    "sheets/block_jump.png",
+    "sheets/block_reach.png",
+    "sheets/steal_sprint.png",
+    "sheets/free_throw_prepare.png",
+    "sheets/free_throw_release.png",
+    "sheets/free_throw_follow.png",
+    "sheets/fadeaway.png",
+    "sheets/pass_overhead.png",
+    "sheets/pass_chest.png",
+    "sheets/pass_jump.png",
+    "sheets/dribble_behind.png",
+    "sheets/dribble_between.png",
+    "sheets/pivot.png",
+    "sheets/celebrate_score.png",
+    "sheets/disappointed.png",
+    "sheets/help_up.png",
+    "preview-844x390.png",
+    "preview-desktop.png",
+    "preview-mobile.png"
+  ],
+  "errors": [],
+  "mobileOverflow": false,
+  "landscapeOverflow": {
+    "horizontal": false,
+    "vertical": false
+  },
+  "webAssemblyBlocked": true,
+  "wasmRequests": [],
+  "networkOrigins": [
+    "http://127.0.0.1:39967"
+  ],
+  "passed": true
+}

@@ -1,0 +1,266 @@
+{
+  "source": "workout/island/assets/hoops-tall/guard.glb",
+  "sourceSha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da",
+  "sourceBytes": 1030508,
+  "target": "runtime/reference/athlete.glb",
+  "targetSha256": "26135088b73dea8674fba04b87d255a43eb49c44f8cab1697237cec34a8878ca",
+  "targetBytes": 1124368,
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "localSegmentScales": {
+    "Root": [
+      0.85,
+      0.85,
+      0.85
+    ],
+    "Hips": [
+      0.9689069393542948,
+      0.8489069393542948,
+      0.9689069393542948
+    ],
+    "Spine": [
+      0.9006252942323187,
+      0.7806252942323187,
+      0.9006252942323187
+    ],
+    "Chest": [
+      0.8872812721086895,
+      0.7672812721086895,
+      0.8872812721086895
+    ],
+    "Neck": [
+      0.9,
+      0.9,
+      0.9
+    ],
+    "Head": [
+      0.9,
+      0.9,
+      0.9
+    ],
+    "LeftArm": [
+      0.8287255960793422,
+      0.7087255960793422,
+      0.8287255960793422
+    ],
+    "LeftForeArm": [
+      0.8240934026409149,
+      0.7040934026409149,
+      0.8240934026409149
+    ],
+    "LeftHand": [
+      0.78,
+      0.78,
+      0.78
+    ],
+    "RightArm": [
+      0.8287255960793422,
+      0.7087255960793422,
+      0.8287255960793422
+    ],
+    "RightForeArm": [
+      0.8240934026409149,
+      0.7040934026409149,
+      0.8240934026409149
+    ],
+    "RightHand": [
+      0.78,
+      0.78,
+      0.78
+    ],
+    "LeftUpLeg": [
+      0.9495353306976297,
+      0.8295353306976297,
+      0.9495353306976297
+    ],
+    "LeftLeg": [
+      0.9383199376591566,
+      0.8183199376591566,
+      0.9383199376591566
+    ],
+    "LeftFoot": [
+      0.9,
+      0.985,
+      0.9
+    ],
+    "RightUpLeg": [
+      0.9495353306976297,
+      0.8295353306976297,
+      0.9495353306976297
+    ],
+    "RightLeg": [
+      0.9383199376591566,
+      0.8183199376591566,
+      0.9383199376591566
+    ],
+    "RightFoot": [
+      0.9,
+      0.985,
+      0.9
+    ]
+  },
+  "license": "CC0-1.0",
+  "meshChanged": "Rest-space affine fit only; original UVs, topology, weights, texture and material surfaces retained."
+}

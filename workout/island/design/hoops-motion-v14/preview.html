@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>כדורסל · ספריית תנועה 14</title>
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="page-head"><div><span class="eyebrow">כדורסל / 14</span><h1>עד הסל. ובחזרה למשחק.</h1></div><nav><a href="./REPORT.md">דוח המדידות</a><a href="./LICENSES.md">רישיונות</a></nav></header>
+  <main class="layout">
+    <aside class="library" aria-label="בחירת תנועה"><div class="library-head"><span>ספריית התנועות</span><span id="clip-count"></span></div><div id="clips" class="clip-list"></div><section class="clip-detail"><h2 id="title">טוען…</h2><p id="description"></p></section></aside>
+    <section class="workspace" aria-label="תצוגה תלת ממדית">
+      <div class="stage"><canvas id="stage" aria-label="שחקן כדורסל תלת ממדי מבצע את התנועה הנבחרת"></canvas><div class="stage-top"><span id="phase">טוען…</span><span id="height-label">רצפה 0.00 מ׳</span></div><div class="view-controls" aria-label="זווית צפייה"><button type="button" data-view="three" aria-pressed="true">¾</button><button type="button" data-view="front" aria-pressed="false">מלפנים</button><button type="button" data-view="side" aria-pressed="false">מהצד</button></div><div id="events" class="events" aria-label="אירועים וגובה מגע"></div><p id="error" class="error" hidden></p></div>
+      <div class="transport"><div class="transport-main"><button id="play" class="play" type="button">השהיה Ⅱ</button><button id="restart" class="text-button" type="button" aria-label="התחלה מחדש">↺</button><label class="speed-label" for="speed">מהירות <select id="speed"><option value="0.25">×¼</option><option value="0.5">×½</option><option value="1" selected>×1</option></select></label><output id="time">0.00 / 0.00</output><span id="frame">פריים 0</span></div><input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="פריים בתנועה"></div>
+      <div class="display-options"><label><input id="ball" type="checkbox" checked> כדור</label><label><input id="soles" type="checkbox" checked> מגע רגל</label><label><input id="skeleton" type="checkbox"> שלד</label><label><input id="heading" type="checkbox" checked> תנועה במגרש</label><span id="loop-label"></span><span>30 הרץ · 18 עצמות</span></div>
+      <div class="bridge-controls" aria-label="מעברים רציפים"><span>מעברי C1</span><button id="from-idle" type="button">עמידה ← תנועה</button><button id="from-run" type="button">ריצה ← תנועה</button><button id="to-idle" type="button">תנועה ← עמידה</button><button id="to-run" type="button">תנועה ← ריצה</button></div>
+    </section>
+  </main>
+  <footer>20 תנועות · מקוריות / CC0 · גובה טבעת 3.05 מ׳ <span>גיליונות שמונה פריימים לכל קליפ בדוח</span></footer>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

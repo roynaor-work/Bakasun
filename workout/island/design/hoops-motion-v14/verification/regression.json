@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "command": "npm test",
+  "baselineCommit": "f97bf53bf2a933c2a5411fa542aeee02d7059156",
+  "testFilesChanged": false,
+  "tests": 4082,
+  "suites": 0,
+  "passedTests": 4018,
+  "failedTests": 0,
+  "skippedTests": 64,
+  "cancelledTests": 0,
+  "durationMilliseconds": 848248.436033,
+  "logSha256": "bd6428d6228f42cfaccdaed140f76c9b2db3cc7564b8ab14f08ebf7eefcb46b7",
+  "failures": [],
+  "passed": true,
+  "initialSuite": {
+    "passedTests": 4017,
+    "failedTests": 1,
+    "skippedTests": 64,
+    "failures": [
+      "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (30.596216ms)"
+    ]
+  },
+  "rerun": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=<temporary cache linked to installed /usr/lib/chromium/chromium> node --test tests/workout-royiki.test.mjs",
+    "tests": 5,
+    "passedTests": 5,
+    "failedTests": 0,
+    "logSha256": "5fe8a05408b373d3b2d0e81120c0ff6d168cac41bf560254b7970abf524690ac",
+    "reason": "The default Playwright browser binary was absent. The existing test opens its HTTP server before launch and only enters try/finally after launch; failed launch leaves that server open. The stalled worker was terminated after diagnosis; the unchanged file was rerun using installed system Chromium."
+  }
+}

@@ -1,0 +1,196 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>dribble_behind</title><style>body{font:16px system-ui;background:#101d28;color:#e7edf2;margin:0 auto;padding:24px;max-width:1400px}a{color:#8de3cb}table{border-collapse:collapse;width:100%;background:#162838}th,td{border:1px solid #456;padding:10px;text-align:right}img{width:100%;height:auto}pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}.green{color:#8decbe}.yellow{color:#ffe18e}.red{color:#ff9696}.score{font-size:1.4em}@media(max-width:600px){body{padding:12px}th,td{padding:5px;font-size:13px}}</style><h1>dribble_behind</h1><p><a href="../report.html">כל הקליפים</a> · <a href="../../../preview.html">תצוגת התנועה</a> · <a href="hoops-motion-v14--dribble_behind.json">JSON מקורי</a></p><p class="score">ציון 92.8 · כיסוי 100%</p><p>נתוני motion-qa-v1 המקוריים; עיצוב הדוח בלבד הותאם לחבילה. נקודות הסוליה נמדדות בתרחיש שחקן חיצוני מוצהר; Root בנכס נשאר קבוע.</p><img src="../sheets/hoops-motion-v14--dribble_behind.svg" alt="שמונה פריימים מדודים: dribble_behind"><table><thead><tr><th>מדד</th><th>מצב</th><th>ערך</th><th>ציון</th><th>ראיות</th></tr></thead><tbody><tr><th>החלקת רגליים</th><td class="green">ירוק</td><td>0.000004</td><td>99.99</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;coordinateSpace&quot;: &quot;native GLB plus explicitly declared external actor position and heading, applied once&quot;,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;windows&quot;: 2,
+  &quot;samples&quot;: 770,
+  &quot;maxDriftMeters&quot;: 0.000007,
+  &quot;p95SpeedMetersPerSecond&quot;: 0.000543,
+  &quot;worst&quot;: {
+    &quot;bone&quot;: &quot;RightFoot&quot;,
+    &quot;t&quot;: 2.416667,
+    &quot;start&quot;: 0,
+    &quot;end&quot;: 3.2,
+    &quot;driftMeters&quot;: 0.000007
+  }
+}</pre></details></td></tr><tr><th>חדירה לרצפה</th><td class="green">ירוק</td><td>0.000001</td><td>99.99</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;samples&quot;: 7700,
+  &quot;floorY&quot;: 0,
+  &quot;probeKind&quot;: &quot;declared sole probes plus skeletal joint centers (no mesh surfaces)&quot;,
+  &quot;maxDepthMeters&quot;: 0.000002,
+  &quot;worst&quot;: {
+    &quot;t&quot;: 2.416667,
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;depthMeters&quot;: 0.000002,
+    &quot;y&quot;: -0.000002
+  }
+}</pre></details></td></tr><tr><th>קפיצות פוזה</th><td class="green">ירוק</td><td>0.725797</td><td>85.48</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;adjacentPairs&quot;: 384,
+  &quot;observations&quot;: 6528,
+  &quot;maxDegrees60Hz&quot;: 10.438336,
+  &quot;maxMarkerStepHeight60Hz&quot;: 0.029032,
+  &quot;maxRootStepHeight60Hz&quot;: 0,
+  &quot;worst&quot;: {
+    &quot;ratio&quot;: 0.7257970921127971,
+    &quot;t&quot;: 1.033333,
+    &quot;previousTime&quot;: 1.025,
+    &quot;bone&quot;: &quot;LeftForeArm&quot;,
+    &quot;markerStepHeight60Hz&quot;: 0.029032,
+    &quot;degrees60Hz&quot;: 6.906
+  }
+}</pre></details></td></tr><tr><th>חריגות אנטומיות</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;testedFrames&quot;: 385,
+  &quot;affectedFrames&quot;: 0,
+  &quot;checks&quot;: 6545,
+  &quot;maxLimbFlexionDegrees&quot;: 114.806082,
+  &quot;maxRelativeSegmentLengthChange&quot;: 0,
+  &quot;hingeDirectionChecked&quot;: true,
+  &quot;axialTwistChecked&quot;: false,
+  &quot;violations&quot;: []
+}</pre></details></td></tr><tr><th>מגע בכדור</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;radiusMeters&quot;: 0.12,
+  &quot;samples&quot;: 5,
+  &quot;missed&quot;: [],
+  &quot;contacts&quot;: [
+    {
+      &quot;t&quot;: 0,
+      &quot;bone&quot;: &quot;RightHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        -0.31,
+        1.06,
+        -0.2
+      ],
+      &quot;ballCenter&quot;: [
+        -0.31,
+        0.94,
+        -0.2
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    },
+    {
+      &quot;t&quot;: 0.8,
+      &quot;bone&quot;: &quot;LeftHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        0.31,
+        1.06,
+        -0.2
+      ],
+      &quot;ballCenter&quot;: [
+        0.31,
+        0.94,
+        -0.2
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    },
+    {
+      &quot;t&quot;: 1.6,
+      &quot;bone&quot;: &quot;RightHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        -0.31,
+        1.06,
+        -0.2
+      ],
+      &quot;ballCenter&quot;: [
+        -0.31,
+        0.94,
+        -0.2
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    },
+    {
+      &quot;t&quot;: 2.4,
+      &quot;bone&quot;: &quot;LeftHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        0.31,
+        1.06,
+        -0.2
+      ],
+      &quot;ballCenter&quot;: [
+        0.31,
+        0.94,
+        -0.2
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    },
+    {
+      &quot;t&quot;: 3.2,
+      &quot;bone&quot;: &quot;RightHand&quot;,
+      &quot;gapMeters&quot;: 0,
+      &quot;signedGapMeters&quot;: 0,
+      &quot;centerDistanceMeters&quot;: 0.12,
+      &quot;contactPoint&quot;: [
+        -0.31,
+        1.06,
+        -0.2
+      ],
+      &quot;ballCenter&quot;: [
+        -0.31,
+        0.94,
+        -0.2
+      ],
+      &quot;declaredLocalPoint&quot;: true
+    }
+  ],
+  &quot;contactDetailsTruncated&quot;: false,
+  &quot;coordinateSpace&quot;: &quot;native GLB plus explicitly declared external actor position and heading, applied once&quot;
+}</pre></details></td></tr><tr><th>כניסה ויציאה מול המתנה</th><td class="yellow">צהוב</td><td>2.342458</td><td>59.86</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;entry&quot;: {
+    &quot;ratio&quot;: 2.342458391005434,
+    &quot;t&quot;: 0,
+    &quot;idleTime&quot;: 3.5,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.09199,
+    &quot;rmsRotationDegrees&quot;: 58.56146,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.147328,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;exit&quot;: {
+    &quot;ratio&quot;: 2.3424583668342818,
+    &quot;t&quot;: 3.2,
+    &quot;idleTime&quot;: 3.5,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.09199,
+    &quot;rmsRotationDegrees&quot;: 58.561459,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.167676,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;worstEndpoint&quot;: &quot;entry&quot;,
+  &quot;alignment&quot;: &quot;horizontal root translation; raw asset poses used when provided&quot;
+}</pre></details></td></tr><tr><th>מהירות גוף מול צעדים</th><td class="not-applicable">לא חל</td><td>—</td><td>—</td><td><details><summary>ראיות המדידה</summary><pre>{}</pre></details></td></tr><tr><th>סימטריה</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות המדידה</summary><pre>{
+  &quot;mode&quot;: &quot;structural&quot;,
+  &quot;modeSource&quot;: &quot;declared&quot;,
+  &quot;structuralMismatch&quot;: 0,
+  &quot;segments&quot;: [
+    {
+      &quot;segment&quot;: &quot;Arm-ForeArm&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;ForeArm-Hand&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;UpLeg-Leg&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;Leg-Foot&quot;,
+      &quot;mismatch&quot;: 0
+    }
+  ],
+  &quot;motionRmsHeight&quot;: null,
+  &quot;worstMotion&quot;: null,
+  &quot;bilateralPoseRmsHeightUnscored&quot;: 0.121791,
+  &quot;note&quot;: &quot;One-sided authored actions are checked for structural symmetry only.&quot;
+}</pre></details></td></tr></tbody></table></html>
