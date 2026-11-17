@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "helperSha256": "8af1fa67f20bcca9bbe8cc94dbca32cd97b5f546e9f8b2a39ed061aefec062da",
+  "nativeProjectFunctionSha256": "ff5b79062775e6591d537b8588e377656fe279b069287543ada20308eb27cf4f",
+  "case": {
+    "points": 1304,
+    "length": 2608,
+    "width": 16,
+    "pointFormula": "{x:0,y:0,z:sqrt(2-i*2**-13),s:i}",
+    "query": {
+      "x": 1000000,
+      "z": 0,
+      "hint": null
+    },
+    "repeats": 4
+  },
+  "explanation": "The superseded fixed128 guard picked s1302 on the second query while the native function picked s1303. A subtraction near1e12 extends an epsilon tie by rounding. The count-scaled guard covers accumulated rounding and retains the native answer.",
+  "expected": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "s": 1303,
+    "heading": 0,
+    "width": 16,
+    "normal": {
+      "x": 1,
+      "y": 0,
+      "z": 0
+    },
+    "tangent": {
+      "x": 0,
+      "y": 0,
+      "z": 1
+    },
+    "lateral": 1000000,
+    "distance": 1000000.0000009205
+  },
+  "answers": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "s": 1303,
+      "heading": 0,
+      "width": 16,
+      "normal": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "tangent": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "lateral": 1000000,
+      "distance": 1000000.0000009205
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "s": 1303,
+      "heading": 0,
+      "width": 16,
+      "normal": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "tangent": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "lateral": 1000000,
+      "distance": 1000000.0000009205
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "s": 1303,
+      "heading": 0,
+      "width": 16,
+      "normal": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "tangent": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "lateral": 1000000,
+      "distance": 1000000.0000009205
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "s": 1303,
+      "heading": 0,
+      "width": 16,
+      "normal": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "tangent": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "lateral": 1000000,
+      "distance": 1000000.0000009205
+    }
+  ],
+  "stats": {
+    "queries": 4,
+    "evaluated": 5216,
+    "discarded": 0,
+    "fallbacks": 0,
+    "verified": 4
+  },
+  "allStrictlyEqual": true,
+  "gameplayEvidence": false
+}

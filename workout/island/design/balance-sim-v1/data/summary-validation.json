@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "method": "Two independent summary/Markdown/SVG generations from an immutable copy of all final baseline files and their manifest.",
+  "coverage": {
+    "expectedGames": 10,
+    "presentGames": 10,
+    "missingGames": [],
+    "totalTrials": 20672,
+    "expectedCells": 978,
+    "completeCells": 978,
+    "complete": true
+  },
+  "inputHashes": {
+    "baseline-alienDefense.json": "e379c2e23c5987a4af80b1db9ae3062a02f99ae0eec16e1f45c1bb1fae4e77f0",
+    "baseline-alpineRush.json": "71c0f8683255add785560d7fa6d17a3d255ee90de7a182a9a698d300e708b889",
+    "baseline-boarDefense.json": "45457d1b02e8db7e6d85b8b4f0899224fce40fb4442642ffc16b91e3ca2aeac6",
+    "baseline-catchCriminal.json": "3ca8e1ff977ecf1788863d985072f6d04a6f0d3deea5b1fa7cedac095760ad20",
+    "baseline-fireRescue.json": "cf853092932bad0ecb3807fc055431f01469af6b7b1a59c1c833fad786f49331",
+    "baseline-islandRacing.json": "21ab211ef500378a11623ead837048d3c3793487fb837250b03f29f83d000ef5",
+    "baseline-navalDuel.json": "0330576929d0a89b00448d6e80e03d595f26d0ee4d544a45beb9a66de9f2564d",
+    "baseline-soccer.json": "ec0addd6476fdddb8ffc8dd40d1828d1f1b1b8df3af89c4a1302d650a96ad698",
+    "baseline-streetSlam.json": "e2fe783b9909034a2d0f3c3224b06002707a9a9ec8e9e20d7400a890a9af0aea",
+    "baseline-tennis.json": "a4cffba3589a9a17239d0a77e68772f26a1a620432d5138bb99e6562909a49be",
+    "source-manifest.json": "289a7cf7c2290ddb189523be9d0438d4fdbf6e5c18a8abe9a3ac26345f3da85b"
+  },
+  "outputHashes": {
+    "TABLES.md": "8494f0287b65a322338c9e886026be2e8b458490654d8dea0a3350e3a0430df8",
+    "charts/alienDefense.svg": "51b8f13f2a1fb6d0f76622d8adce76ce5e2f66f01fd150d87145332705c180ff",
+    "charts/alpineRush.svg": "84e2def772a3ef925999a905c63048e095d9f13788e3d8e60d44ba12a8851f09",
+    "charts/boarDefense.svg": "b8fd1740c38fe3459ed52ed0a881359ee0cbbffff23392941ebc76adbee7b219",
+    "charts/catchCriminal.svg": "766dde1df4574f652887ef4674ec752297a5db0201bfff7a8ebb3f57cc5cc187",
+    "charts/fireRescue.svg": "9962be519974693d262d602d1e19c5dffed2f11e24f5881e56ff60dc1cb3dded",
+    "charts/islandRacing.svg": "4c21a7d496a17f36b08f3c352520e15e77e7ede4ab7d567cc41a539646f01f44",
+    "charts/navalDuel.svg": "846a73898feaea426037c6ce1954b08a206fb7540b70c006b7ee43de412b33cb",
+    "charts/soccer.svg": "d80e61f29423d908ce4dbf4b7fe1ba4705d346459e49c01aa9d930a307a033f6",
+    "charts/streetSlam.svg": "7d58976dd4fcc31ca1759ee3702f40d6419f9f9b704c71c7b2ef8fd99a27f591",
+    "charts/tennis.svg": "2b771edbb119ebf6423e97847b486ea4f0bf9377537b1575831d59387f7e7682",
+    "summary.json": "01993efe07338b86a8e7bbdd4538bb491438aca6a3ff8cb435a469180138655e"
+  },
+  "toolHashes": {
+    "summarize.mjs": "e6a6a4ad5d6db9a837b8287926f1cae11d2b7f3683d1c8a2accb5d23a32889a7",
+    "charts.py": "317c884df4e9b3f31e52447a58ec344014e4277f04efdafdc6b70fa23657d4d0"
+  },
+  "independentRounds": 2,
+  "inputFilesUnchanged": true,
+  "byteIdenticalOutputs": true,
+  "deliveredOutputsMatch": true,
+  "complete": true
+}

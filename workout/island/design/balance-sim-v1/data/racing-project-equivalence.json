@@ -1,0 +1,2395 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "helperSha256": "8af1fa67f20bcca9bbe8cc94dbca32cd97b5f546e9f8b2a39ed061aefec062da",
+  "adapterSha256": "2aba5e0d92d694bbb6bad19d4981a7f3b0f6905aaa7dd84655f718b16713775c",
+  "method": {
+    "queryTolerance": "Object.is for every numeric field (zero tolerance), recursive object fields",
+    "raceTolerance": "assert.deepStrictEqual on every returned field, including native score, rank, ordered checkpoints, stars, falls, goals, elapsed time, decisions and diagnostics",
+    "gameRules": "Native default v24 physics, same source snapshot, actual base/league stages, full native termination, same frozen adapter inputs. Only track.project query index differs.",
+    "randomQueries": "300 deterministic on/offroad samples plus30 exact segment endpoints for each of30 stage tracks; includes reversed tracks and native full-scan fallback",
+    "timing": "Per-thread CPU usage (process.threadCpuUsage) and wall time both recorded. Serial native/verify/fast runs in each worker,2 workers by default. CPU ratios avoid shared-load wall-time distortion; constructor/index overhead included.",
+    "floatingGuard": "max(128,32×scannedSegmentCount)×Number.EPSILON×coordinate magnitude; expands the AABB inclusion threshold; scan order and native 1e-4 tie rule are unchanged."
+  },
+  "complete": true,
+  "queryTests": [
+    {
+      "stage": 1,
+      "segments": 1444,
+      "queries": 330,
+      "evaluated": 4760,
+      "discarded": 95572,
+      "fallbacks": 48,
+      "verified": 330
+    },
+    {
+      "stage": 2,
+      "segments": 1380,
+      "queries": 330,
+      "evaluated": 4727,
+      "discarded": 98053,
+      "fallbacks": 52,
+      "verified": 330
+    },
+    {
+      "stage": 3,
+      "segments": 1500,
+      "queries": 330,
+      "evaluated": 5159,
+      "discarded": 111361,
+      "fallbacks": 57,
+      "verified": 330
+    },
+    {
+      "stage": 4,
+      "segments": 1472,
+      "queries": 330,
+      "evaluated": 4750,
+      "discarded": 107230,
+      "fallbacks": 55,
+      "verified": 330
+    },
+    {
+      "stage": 5,
+      "segments": 1552,
+      "queries": 330,
+      "evaluated": 4782,
+      "discarded": 97630,
+      "fallbacks": 46,
+      "verified": 330
+    },
+    {
+      "stage": 6,
+      "segments": 1412,
+      "queries": 330,
+      "evaluated": 5383,
+      "discarded": 93413,
+      "fallbacks": 48,
+      "verified": 330
+    },
+    {
+      "stage": 7,
+      "segments": 1444,
+      "queries": 330,
+      "evaluated": 5232,
+      "discarded": 100876,
+      "fallbacks": 52,
+      "verified": 330
+    },
+    {
+      "stage": 8,
+      "segments": 1380,
+      "queries": 330,
+      "evaluated": 4754,
+      "discarded": 113206,
+      "fallbacks": 63,
+      "verified": 330
+    },
+    {
+      "stage": 9,
+      "segments": 1500,
+      "queries": 330,
+      "evaluated": 5382,
+      "discarded": 100638,
+      "fallbacks": 50,
+      "verified": 330
+    },
+    {
+      "stage": 10,
+      "segments": 1472,
+      "queries": 330,
+      "evaluated": 5201,
+      "discarded": 109723,
+      "fallbacks": 57,
+      "verified": 330
+    },
+    {
+      "stage": 11,
+      "segments": 1552,
+      "queries": 330,
+      "evaluated": 5320,
+      "discarded": 101748,
+      "fallbacks": 49,
+      "verified": 330
+    },
+    {
+      "stage": 12,
+      "segments": 1412,
+      "queries": 330,
+      "evaluated": 4810,
+      "discarded": 93986,
+      "fallbacks": 48,
+      "verified": 330
+    },
+    {
+      "stage": 13,
+      "segments": 1444,
+      "queries": 330,
+      "evaluated": 4705,
+      "discarded": 101403,
+      "fallbacks": 52,
+      "verified": 330
+    },
+    {
+      "stage": 14,
+      "segments": 1380,
+      "queries": 330,
+      "evaluated": 4909,
+      "discarded": 107531,
+      "fallbacks": 59,
+      "verified": 330
+    },
+    {
+      "stage": 15,
+      "segments": 1500,
+      "queries": 330,
+      "evaluated": 5018,
+      "discarded": 101002,
+      "fallbacks": 50,
+      "verified": 330
+    },
+    {
+      "stage": 16,
+      "segments": 1472,
+      "queries": 330,
+      "evaluated": 4775,
+      "discarded": 101317,
+      "fallbacks": 51,
+      "verified": 330
+    },
+    {
+      "stage": 17,
+      "segments": 1552,
+      "queries": 330,
+      "evaluated": 5092,
+      "discarded": 123704,
+      "fallbacks": 63,
+      "verified": 330
+    },
+    {
+      "stage": 18,
+      "segments": 1412,
+      "queries": 330,
+      "evaluated": 5051,
+      "discarded": 103629,
+      "fallbacks": 55,
+      "verified": 330
+    },
+    {
+      "stage": 19,
+      "segments": 1444,
+      "queries": 330,
+      "evaluated": 5240,
+      "discarded": 105200,
+      "fallbacks": 55,
+      "verified": 330
+    },
+    {
+      "stage": 20,
+      "segments": 1380,
+      "queries": 330,
+      "evaluated": 4990,
+      "discarded": 108830,
+      "fallbacks": 60,
+      "verified": 330
+    },
+    {
+      "stage": 21,
+      "segments": 1500,
+      "queries": 330,
+      "evaluated": 5369,
+      "discarded": 102151,
+      "fallbacks": 51,
+      "verified": 330
+    },
+    {
+      "stage": 22,
+      "segments": 1472,
+      "queries": 330,
+      "evaluated": 5020,
+      "discarded": 99600,
+      "fallbacks": 50,
+      "verified": 330
+    },
+    {
+      "stage": 23,
+      "segments": 1552,
+      "queries": 330,
+      "evaluated": 5395,
+      "discarded": 124953,
+      "fallbacks": 64,
+      "verified": 330
+    },
+    {
+      "stage": 24,
+      "segments": 1412,
+      "queries": 330,
+      "evaluated": 5501,
+      "discarded": 107415,
+      "fallbacks": 58,
+      "verified": 330
+    },
+    {
+      "stage": 25,
+      "segments": 1444,
+      "queries": 330,
+      "evaluated": 5187,
+      "discarded": 118249,
+      "fallbacks": 64,
+      "verified": 330
+    },
+    {
+      "stage": 26,
+      "segments": 1380,
+      "queries": 330,
+      "evaluated": 4847,
+      "discarded": 108973,
+      "fallbacks": 60,
+      "verified": 330
+    },
+    {
+      "stage": 27,
+      "segments": 1500,
+      "queries": 330,
+      "evaluated": 5105,
+      "discarded": 118915,
+      "fallbacks": 62,
+      "verified": 330
+    },
+    {
+      "stage": 28,
+      "segments": 1472,
+      "queries": 330,
+      "evaluated": 4649,
+      "discarded": 113219,
+      "fallbacks": 59,
+      "verified": 330
+    },
+    {
+      "stage": 29,
+      "segments": 1552,
+      "queries": 330,
+      "evaluated": 5425,
+      "discarded": 126475,
+      "fallbacks": 65,
+      "verified": 330
+    },
+    {
+      "stage": 30,
+      "segments": 1412,
+      "queries": 330,
+      "evaluated": 5517,
+      "discarded": 108811,
+      "fallbacks": 59,
+      "verified": 330
+    }
+  ],
+  "completeRaces": [
+    {
+      "job": {
+        "stage": 1,
+        "profile": "impatient",
+        "seed": 1701
+      },
+      "native": {
+        "milliseconds": 21392.733630999996,
+        "cpuMilliseconds": 3665.978,
+        "result": {
+          "outcome": "lose",
+          "seconds": 194.6833333333804,
+          "stars": 0,
+          "falls": 0,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 1,
+            "stageLabel": "בסיס 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-3",
+              "ai-4",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 4.666666666666655,
+            "nitroSeconds": 16.466666666667013,
+            "bumps": 14,
+            "decisions": 433,
+            "lapses": 77,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 11461.168504000001,
+        "cpuMilliseconds": 3190.614,
+        "result": {
+          "outcome": "lose",
+          "seconds": 194.6833333333804,
+          "stars": 0,
+          "falls": 0,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 1,
+            "stageLabel": "בסיס 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-3",
+              "ai-4",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 4.666666666666655,
+            "nitroSeconds": 16.466666666667013,
+            "bumps": 14,
+            "decisions": 433,
+            "lapses": 77,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 304163,
+            "evaluated": 549040,
+            "discarded": 28042282,
+            "fallbacks": 0,
+            "verified": 304163
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 3088.0447609999974,
+        "cpuMilliseconds": 931.798,
+        "result": {
+          "outcome": "lose",
+          "seconds": 194.6833333333804,
+          "stars": 0,
+          "falls": 0,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 1,
+            "stageLabel": "בסיס 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-3",
+              "ai-4",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 4.666666666666655,
+            "nitroSeconds": 16.466666666667013,
+            "bumps": 14,
+            "decisions": 433,
+            "lapses": 77,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 304163,
+            "evaluated": 549040,
+            "discarded": 28042282,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 2,
+        "profile": "regular",
+        "seed": 1732
+      },
+      "native": {
+        "milliseconds": 11290.701113000003,
+        "cpuMilliseconds": 2758.685,
+        "result": {
+          "outcome": "win",
+          "seconds": 147.48333333334284,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 2,
+            "stageLabel": "בסיס 2",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-1",
+              "ai-2",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "jungle",
+            "timeLimit": 248,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 17.166666666666973,
+            "bumps": 1,
+            "decisions": 590,
+            "lapses": 40,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 19367.062963000004,
+        "cpuMilliseconds": 3694.205,
+        "result": {
+          "outcome": "win",
+          "seconds": 147.48333333334284,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 2,
+            "stageLabel": "בסיס 2",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-1",
+              "ai-2",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "jungle",
+            "timeLimit": 248,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 17.166666666666973,
+            "bumps": 1,
+            "decisions": 590,
+            "lapses": 40,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 228703,
+            "evaluated": 426469,
+            "discarded": 21071613,
+            "fallbacks": 0,
+            "verified": 228703
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 4605.351452000003,
+        "cpuMilliseconds": 1061.093,
+        "result": {
+          "outcome": "win",
+          "seconds": 147.48333333334284,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 2,
+            "stageLabel": "בסיס 2",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-1",
+              "ai-2",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "jungle",
+            "timeLimit": 248,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 17.166666666666973,
+            "bumps": 1,
+            "decisions": 590,
+            "lapses": 40,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 228703,
+            "evaluated": 426469,
+            "discarded": 21071613,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 3,
+        "profile": "skilled",
+        "seed": 1763
+      },
+      "native": {
+        "milliseconds": 7509.326894999991,
+        "cpuMilliseconds": 2169.697,
+        "result": {
+          "outcome": "win",
+          "seconds": 150.4333333333452,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 3,
+            "stageLabel": "בסיס 3",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-2",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "volcano",
+            "timeLimit": 268,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 15.000000000000325,
+            "bumps": 3,
+            "decisions": 1505,
+            "lapses": 20,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 12144.792174000002,
+        "cpuMilliseconds": 3360.659,
+        "result": {
+          "outcome": "win",
+          "seconds": 150.4333333333452,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 3,
+            "stageLabel": "בסיס 3",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-2",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "volcano",
+            "timeLimit": 268,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 15.000000000000325,
+            "bumps": 3,
+            "decisions": 1505,
+            "lapses": 20,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 238468,
+            "evaluated": 479790,
+            "discarded": 21936202,
+            "fallbacks": 0,
+            "verified": 238468
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 3311.248749999999,
+        "cpuMilliseconds": 897.359,
+        "result": {
+          "outcome": "win",
+          "seconds": 150.4333333333452,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 3,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 3,
+            "stageLabel": "בסיס 3",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-2",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 3,
+            "laps": 2,
+            "trackId": "volcano",
+            "timeLimit": 268,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 15.000000000000325,
+            "bumps": 3,
+            "decisions": 1505,
+            "lapses": 20,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 238468,
+            "evaluated": 479790,
+            "discarded": 21936202,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 7,
+        "profile": "impatient",
+        "seed": 1794
+      },
+      "native": {
+        "milliseconds": 17203.458813000005,
+        "cpuMilliseconds": 3737.898,
+        "result": {
+          "outcome": "lose",
+          "seconds": 209.1333333333919,
+          "stars": 0,
+          "falls": 3,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 7,
+            "stageLabel": "בסיס 7",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-2",
+              "ai-3",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 3,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 2,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 8.133333333333317,
+            "nitroSeconds": 15.666666666667025,
+            "bumps": 5,
+            "decisions": 465,
+            "lapses": 78,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 13943.543678999995,
+        "cpuMilliseconds": 3409.497,
+        "result": {
+          "outcome": "lose",
+          "seconds": 209.1333333333919,
+          "stars": 0,
+          "falls": 3,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 7,
+            "stageLabel": "בסיס 7",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-2",
+              "ai-3",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 3,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 2,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 8.133333333333317,
+            "nitroSeconds": 15.666666666667025,
+            "bumps": 5,
+            "decisions": 465,
+            "lapses": 78,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 304243,
+            "evaluated": 535262,
+            "discarded": 28063580,
+            "fallbacks": 0,
+            "verified": 304243
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 5248.5712769999955,
+        "cpuMilliseconds": 1077.825,
+        "result": {
+          "outcome": "lose",
+          "seconds": 209.1333333333919,
+          "stars": 0,
+          "falls": 3,
+          "score": 1,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 5,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 7,
+            "stageLabel": "בסיס 7",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-2",
+              "ai-3",
+              "ai-1",
+              "player"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 3,
+            "rank": 5,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 2,
+            "laps": 2,
+            "trackId": "coast",
+            "timeLimit": 260,
+            "recoveries": 0,
+            "offroadSeconds": 8.133333333333317,
+            "nitroSeconds": 15.666666666667025,
+            "bumps": 5,
+            "decisions": 465,
+            "lapses": 78,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 304243,
+            "evaluated": 535262,
+            "discarded": 28063580,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 19,
+        "profile": "regular",
+        "seed": 1825
+      },
+      "native": {
+        "milliseconds": 18768.942714999997,
+        "cpuMilliseconds": 4367.511,
+        "result": {
+          "outcome": "lose",
+          "seconds": 233.60000000007804,
+          "stars": 0,
+          "falls": 0,
+          "score": 4,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 2,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 19,
+            "stageLabel": "בסיס 19",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "player",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 2,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.316666666666624,
+            "bumps": 9,
+            "decisions": 935,
+            "lapses": 53,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 21423.703597999993,
+        "cpuMilliseconds": 5422.57,
+        "result": {
+          "outcome": "lose",
+          "seconds": 233.60000000007804,
+          "stars": 0,
+          "falls": 0,
+          "score": 4,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 2,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 19,
+            "stageLabel": "בסיס 19",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "player",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 2,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.316666666666624,
+            "bumps": 9,
+            "decisions": 935,
+            "lapses": 53,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 379828,
+            "evaluated": 687671,
+            "discarded": 35016161,
+            "fallbacks": 0,
+            "verified": 379828
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 8160.219343999983,
+        "cpuMilliseconds": 1978.078,
+        "result": {
+          "outcome": "lose",
+          "seconds": 233.60000000007804,
+          "stars": 0,
+          "falls": 0,
+          "score": 4,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 2,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 19,
+            "stageLabel": "בסיס 19",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "player",
+              "ai-4",
+              "ai-1",
+              "ai-3"
+            ],
+            "fastestLapId": "ai-2",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 2,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.316666666666624,
+            "bumps": 9,
+            "decisions": 935,
+            "lapses": 53,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 379828,
+            "evaluated": 687671,
+            "discarded": 35016161,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 25,
+        "profile": "skilled",
+        "seed": 1856
+      },
+      "native": {
+        "milliseconds": 9232.437494999991,
+        "cpuMilliseconds": 2895.447,
+        "result": {
+          "outcome": "win",
+          "seconds": 211.43333333339373,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 1,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 25,
+            "stageLabel": "בסיס 25",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-2",
+              "ai-1",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.749999999999932,
+            "bumps": 4,
+            "decisions": 2115,
+            "lapses": 23,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 11067.975739000001,
+        "cpuMilliseconds": 3505.385,
+        "result": {
+          "outcome": "win",
+          "seconds": 211.43333333339373,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 1,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 25,
+            "stageLabel": "בסיס 25",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-2",
+              "ai-1",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.749999999999932,
+            "bumps": 4,
+            "decisions": 2115,
+            "lapses": 23,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 341684,
+            "evaluated": 610423,
+            "discarded": 31507873,
+            "fallbacks": 0,
+            "verified": 341684
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 4718.321549999993,
+        "cpuMilliseconds": 1182.354,
+        "result": {
+          "outcome": "win",
+          "seconds": 211.43333333339373,
+          "stars": 3,
+          "falls": 0,
+          "score": 5,
+          "reason": "target-rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 1,
+              "target": 1,
+              "met": true
+            }
+          },
+          "diagnostics": {
+            "mode": "base",
+            "season": null,
+            "race": null,
+            "engineStage": 25,
+            "stageLabel": "בסיס 25",
+            "modelStars": 3,
+            "order": [
+              "player",
+              "ai-3",
+              "ai-2",
+              "ai-1",
+              "ai-4"
+            ],
+            "fastestLapId": "player",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 1,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 23.749999999999932,
+            "bumps": 4,
+            "decisions": 2115,
+            "lapses": 23,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 341684,
+            "evaluated": 610423,
+            "discarded": 31507873,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 31,
+        "profile": "impatient",
+        "seed": 1887
+      },
+      "native": {
+        "milliseconds": 27422.68920600001,
+        "cpuMilliseconds": 5882.698,
+        "result": {
+          "outcome": "lose",
+          "seconds": 295.00000000006037,
+          "stars": 0,
+          "falls": 2,
+          "score": 0,
+          "reason": "time-limit",
+          "objectives": {
+            "finish": {
+              "value": false,
+              "target": true,
+              "met": false
+            },
+            "rank": {
+              "value": 12,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 1,
+            "race": 0,
+            "engineStage": 1,
+            "stageLabel": "עונה 1 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-1",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-4",
+              "ai-7",
+              "ai-3",
+              "ai-8",
+              "ai-9",
+              "ai-11",
+              "player"
+            ],
+            "fastestLapId": "ai-3",
+            "pits": 1,
+            "offTracks": 2,
+            "rank": 12,
+            "completed": false,
+            "checkpoints": 46,
+            "requiredCheckpoints": 48,
+            "targetRank": 3,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 5.483333333333319,
+            "nitroSeconds": 20.033333333333477,
+            "bumps": 12,
+            "decisions": 656,
+            "lapses": 113,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 28698.103130000003,
+        "cpuMilliseconds": 7793.87,
+        "result": {
+          "outcome": "lose",
+          "seconds": 295.00000000006037,
+          "stars": 0,
+          "falls": 2,
+          "score": 0,
+          "reason": "time-limit",
+          "objectives": {
+            "finish": {
+              "value": false,
+              "target": true,
+              "met": false
+            },
+            "rank": {
+              "value": 12,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 1,
+            "race": 0,
+            "engineStage": 1,
+            "stageLabel": "עונה 1 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-1",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-4",
+              "ai-7",
+              "ai-3",
+              "ai-8",
+              "ai-9",
+              "ai-11",
+              "player"
+            ],
+            "fastestLapId": "ai-3",
+            "pits": 1,
+            "offTracks": 2,
+            "rank": 12,
+            "completed": false,
+            "checkpoints": 46,
+            "requiredCheckpoints": 48,
+            "targetRank": 3,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 5.483333333333319,
+            "nitroSeconds": 20.033333333333477,
+            "bumps": 12,
+            "decisions": 656,
+            "lapses": 113,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 514930,
+            "evaluated": 904040,
+            "discarded": 47499380,
+            "fallbacks": 0,
+            "verified": 514930
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 9114.87797999999,
+        "cpuMilliseconds": 2650.16,
+        "result": {
+          "outcome": "lose",
+          "seconds": 295.00000000006037,
+          "stars": 0,
+          "falls": 2,
+          "score": 0,
+          "reason": "time-limit",
+          "objectives": {
+            "finish": {
+              "value": false,
+              "target": true,
+              "met": false
+            },
+            "rank": {
+              "value": 12,
+              "target": 3,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 1,
+            "race": 0,
+            "engineStage": 1,
+            "stageLabel": "עונה 1 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-2",
+              "ai-1",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-4",
+              "ai-7",
+              "ai-3",
+              "ai-8",
+              "ai-9",
+              "ai-11",
+              "player"
+            ],
+            "fastestLapId": "ai-3",
+            "pits": 1,
+            "offTracks": 2,
+            "rank": 12,
+            "completed": false,
+            "checkpoints": 46,
+            "requiredCheckpoints": 48,
+            "targetRank": 3,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 5.483333333333319,
+            "nitroSeconds": 20.033333333333477,
+            "bumps": 12,
+            "decisions": 656,
+            "lapses": 113,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 514930,
+            "evaluated": 904040,
+            "discarded": 47499380,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 43,
+        "profile": "regular",
+        "seed": 1918
+      },
+      "native": {
+        "milliseconds": 17629.809153999988,
+        "cpuMilliseconds": 4139.361,
+        "result": {
+          "outcome": "lose",
+          "seconds": 237.93333333341482,
+          "stars": 0,
+          "falls": 0,
+          "score": 2,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 11,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 2,
+            "race": 0,
+            "engineStage": 7,
+            "stageLabel": "עונה 2 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-3",
+              "ai-4",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-7",
+              "ai-1",
+              "ai-8",
+              "ai-2",
+              "ai-9",
+              "player",
+              "ai-11"
+            ],
+            "fastestLapId": "ai-10",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 11,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 2,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 20.750000000000103,
+            "bumps": 16,
+            "decisions": 952,
+            "lapses": 49,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 30870.974709000002,
+        "cpuMilliseconds": 6865.115,
+        "result": {
+          "outcome": "lose",
+          "seconds": 237.93333333341482,
+          "stars": 0,
+          "falls": 0,
+          "score": 2,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 11,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 2,
+            "race": 0,
+            "engineStage": 7,
+            "stageLabel": "עונה 2 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-3",
+              "ai-4",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-7",
+              "ai-1",
+              "ai-8",
+              "ai-2",
+              "ai-9",
+              "player",
+              "ai-11"
+            ],
+            "fastestLapId": "ai-10",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 11,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 2,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 20.750000000000103,
+            "bumps": 16,
+            "decisions": 952,
+            "lapses": 49,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 456808,
+            "evaluated": 844531,
+            "discarded": 42095421,
+            "fallbacks": 0,
+            "verified": 456808
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 9382.267275999999,
+        "cpuMilliseconds": 2321.613,
+        "result": {
+          "outcome": "lose",
+          "seconds": 237.93333333341482,
+          "stars": 0,
+          "falls": 0,
+          "score": 2,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 11,
+              "target": 2,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 2,
+            "race": 0,
+            "engineStage": 7,
+            "stageLabel": "עונה 2 מרוץ 1",
+            "modelStars": 0,
+            "order": [
+              "ai-3",
+              "ai-4",
+              "ai-5",
+              "ai-10",
+              "ai-6",
+              "ai-7",
+              "ai-1",
+              "ai-8",
+              "ai-2",
+              "ai-9",
+              "player",
+              "ai-11"
+            ],
+            "fastestLapId": "ai-10",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 11,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 2,
+            "laps": 3,
+            "trackId": "coast",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 0,
+            "nitroSeconds": 20.750000000000103,
+            "bumps": 16,
+            "decisions": 952,
+            "lapses": 49,
+            "settlementValid": true,
+            "patienceExceeded": true
+          }
+        },
+        "stats": [
+          {
+            "queries": 456808,
+            "evaluated": 844531,
+            "discarded": 42095421,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 77,
+        "profile": "skilled",
+        "seed": 1949
+      },
+      "native": {
+        "milliseconds": 11658.838865999976,
+        "cpuMilliseconds": 3219.762,
+        "result": {
+          "outcome": "lose",
+          "seconds": 162.75000000002166,
+          "stars": 0,
+          "falls": 0,
+          "score": 9,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 4,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 4,
+            "race": 4,
+            "engineStage": 23,
+            "stageLabel": "עונה 4 מרוץ 5",
+            "modelStars": 0,
+            "order": [
+              "ai-1",
+              "ai-3",
+              "ai-5",
+              "player",
+              "ai-7",
+              "ai-10",
+              "ai-2",
+              "ai-6",
+              "ai-4",
+              "ai-9",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-1",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 4,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 1,
+            "laps": 2,
+            "trackId": "summit",
+            "timeLimit": 197,
+            "recoveries": 0,
+            "offroadSeconds": 0.55,
+            "nitroSeconds": 14.36666666666696,
+            "bumps": 4,
+            "decisions": 1628,
+            "lapses": 22,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 11252.283647999982,
+        "cpuMilliseconds": 3324.08,
+        "result": {
+          "outcome": "lose",
+          "seconds": 162.75000000002166,
+          "stars": 0,
+          "falls": 0,
+          "score": 9,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 4,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 4,
+            "race": 4,
+            "engineStage": 23,
+            "stageLabel": "עונה 4 מרוץ 5",
+            "modelStars": 0,
+            "order": [
+              "ai-1",
+              "ai-3",
+              "ai-5",
+              "player",
+              "ai-7",
+              "ai-10",
+              "ai-2",
+              "ai-6",
+              "ai-4",
+              "ai-9",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-1",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 4,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 1,
+            "laps": 2,
+            "trackId": "summit",
+            "timeLimit": 197,
+            "recoveries": 0,
+            "offroadSeconds": 0.55,
+            "nitroSeconds": 14.36666666666696,
+            "bumps": 4,
+            "decisions": 1628,
+            "lapses": 22,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 303589,
+            "evaluated": 629482,
+            "discarded": 27907884,
+            "fallbacks": 0,
+            "verified": 303589
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 4329.009568000009,
+        "cpuMilliseconds": 1048.08,
+        "result": {
+          "outcome": "lose",
+          "seconds": 162.75000000002166,
+          "stars": 0,
+          "falls": 0,
+          "score": 9,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 4,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 4,
+            "race": 4,
+            "engineStage": 23,
+            "stageLabel": "עונה 4 מרוץ 5",
+            "modelStars": 0,
+            "order": [
+              "ai-1",
+              "ai-3",
+              "ai-5",
+              "player",
+              "ai-7",
+              "ai-10",
+              "ai-2",
+              "ai-6",
+              "ai-4",
+              "ai-9",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-1",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 4,
+            "completed": true,
+            "checkpoints": 32,
+            "requiredCheckpoints": 32,
+            "targetRank": 1,
+            "laps": 2,
+            "trackId": "summit",
+            "timeLimit": 197,
+            "recoveries": 0,
+            "offroadSeconds": 0.55,
+            "nitroSeconds": 14.36666666666696,
+            "bumps": 4,
+            "decisions": 1628,
+            "lapses": 22,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 303589,
+            "evaluated": 629482,
+            "discarded": 27907884,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    },
+    {
+      "job": {
+        "stage": 108,
+        "profile": "skilled",
+        "seed": 1980
+      },
+      "native": {
+        "milliseconds": 18012.14014199999,
+        "cpuMilliseconds": 4574.487,
+        "result": {
+          "outcome": "lose",
+          "seconds": 214.3666666667294,
+          "stars": 0,
+          "falls": 0,
+          "score": 5,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 8,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 5,
+            "race": 17,
+            "engineStage": 30,
+            "stageLabel": "עונה 5 מרוץ 18",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-3",
+              "ai-1",
+              "ai-10",
+              "ai-9",
+              "ai-2",
+              "ai-7",
+              "player",
+              "ai-5",
+              "ai-6",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 8,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "ruins",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 2.033333333333331,
+            "nitroSeconds": 20.850000000000097,
+            "bumps": 9,
+            "decisions": 2144,
+            "lapses": 37,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": []
+      },
+      "verifyEveryQuery": {
+        "milliseconds": 23024.003424000024,
+        "cpuMilliseconds": 6153.327,
+        "result": {
+          "outcome": "lose",
+          "seconds": 214.3666666667294,
+          "stars": 0,
+          "falls": 0,
+          "score": 5,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 8,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 5,
+            "race": 17,
+            "engineStage": 30,
+            "stageLabel": "עונה 5 מרוץ 18",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-3",
+              "ai-1",
+              "ai-10",
+              "ai-9",
+              "ai-2",
+              "ai-7",
+              "player",
+              "ai-5",
+              "ai-6",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 8,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "ruins",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 2.033333333333331,
+            "nitroSeconds": 20.850000000000097,
+            "bumps": 9,
+            "decisions": 2144,
+            "lapses": 37,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 416272,
+            "evaluated": 808943,
+            "discarded": 38320625,
+            "fallbacks": 0,
+            "verified": 416272
+          }
+        ]
+      },
+      "fast": {
+        "milliseconds": 6870.56508,
+        "cpuMilliseconds": 1740.561,
+        "result": {
+          "outcome": "lose",
+          "seconds": 214.3666666667294,
+          "stars": 0,
+          "falls": 0,
+          "score": 5,
+          "reason": "rank",
+          "objectives": {
+            "finish": {
+              "value": true,
+              "target": true,
+              "met": true
+            },
+            "rank": {
+              "value": 8,
+              "target": 1,
+              "met": false
+            }
+          },
+          "diagnostics": {
+            "mode": "league",
+            "season": 5,
+            "race": 17,
+            "engineStage": 30,
+            "stageLabel": "עונה 5 מרוץ 18",
+            "modelStars": 0,
+            "order": [
+              "ai-4",
+              "ai-3",
+              "ai-1",
+              "ai-10",
+              "ai-9",
+              "ai-2",
+              "ai-7",
+              "player",
+              "ai-5",
+              "ai-6",
+              "ai-11",
+              "ai-8"
+            ],
+            "fastestLapId": "ai-4",
+            "pits": 1,
+            "offTracks": 0,
+            "rank": 8,
+            "completed": true,
+            "checkpoints": 48,
+            "requiredCheckpoints": 48,
+            "targetRank": 1,
+            "laps": 3,
+            "trackId": "ruins",
+            "timeLimit": 295,
+            "recoveries": 0,
+            "offroadSeconds": 2.033333333333331,
+            "nitroSeconds": 20.850000000000097,
+            "bumps": 9,
+            "decisions": 2144,
+            "lapses": 37,
+            "settlementValid": true,
+            "patienceExceeded": false
+          }
+        },
+        "stats": [
+          {
+            "queries": 416272,
+            "evaluated": 808943,
+            "discarded": 38320625,
+            "fallbacks": 0,
+            "verified": 0
+          }
+        ]
+      },
+      "strictlyEqual": true
+    }
+  ],
+  "summary": {
+    "races": 10,
+    "allStrictlyEqual": true,
+    "verificationQueries": 3498588,
+    "nativeMilliseconds": 160121.07802999995,
+    "fastMilliseconds": 58828.47703799997,
+    "nativeCpuMilliseconds": 37411.524000000005,
+    "fastCpuMilliseconds": 14888.921,
+    "observedCpuSpeedup": 2.5127088793069694,
+    "observedWallSpeedup": 2.721829394403165
+  }
+}

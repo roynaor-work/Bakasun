@@ -1,0 +1,9464 @@
+{
+  "schemaVersion": 1,
+  "game": "islandRacing",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "input": "/workspace/Bakasun/workout/island/design/balance-sim-v1/data/baseline-islandRacing.json",
+  "method": "Native applyRace, standings and nextSeason on recorded complete race orders, independent stock-equipment seasons, no purchases, no retries; later seasons are counterfactual if an earlier gate failed.",
+  "complete": true,
+  "summary": [
+    {
+      "season": 1,
+      "profile": "impatient",
+      "trials": 8,
+      "targetRank": 10,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0,
+      "meanSeconds": 277.07725694451455
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "trials": 8,
+      "targetRank": 10,
+      "goal": "next-season",
+      "successPct": 100,
+      "titlePct": 0,
+      "meanRank": 6.75,
+      "ranks": [
+        8,
+        5,
+        7,
+        7,
+        7,
+        7,
+        6,
+        7
+      ],
+      "meanPoints": 88.375,
+      "meanSeconds": 230.74375000007575
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "trials": 8,
+      "targetRank": 10,
+      "goal": "next-season",
+      "successPct": 100,
+      "titlePct": 100,
+      "meanRank": 1,
+      "ranks": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "meanPoints": 306.5,
+      "meanSeconds": 210.28246527783725
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "trials": 8,
+      "targetRank": 8,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0,
+      "meanSeconds": 269.4419642857844
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "trials": 8,
+      "targetRank": 8,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 11.5,
+      "ranks": [
+        12,
+        12,
+        11,
+        12,
+        11,
+        11,
+        11,
+        12
+      ],
+      "meanPoints": 12.25,
+      "meanSeconds": 223.28452380959368
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "trials": 8,
+      "targetRank": 8,
+      "goal": "next-season",
+      "successPct": 100,
+      "titlePct": 0,
+      "meanRank": 2.5,
+      "ranks": [
+        3,
+        3,
+        2,
+        2,
+        2,
+        3,
+        2,
+        3
+      ],
+      "meanPoints": 189.875,
+      "meanSeconds": 207.5763392857716
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0,
+      "meanSeconds": 269.59544270840314
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0.375,
+      "meanSeconds": 223.57578125007007
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 25,
+      "titlePct": 0,
+      "meanRank": 6.5,
+      "ranks": [
+        6,
+        7,
+        8,
+        7,
+        6,
+        5,
+        5,
+        8
+      ],
+      "meanPoints": 122.125,
+      "meanSeconds": 210.8222656250599
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0,
+      "meanSeconds": 270.88900462969946
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 1.25,
+      "meanSeconds": 226.08460648155358
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "trials": 8,
+      "targetRank": 5,
+      "goal": "next-season",
+      "successPct": 100,
+      "titlePct": 12.5,
+      "meanRank": 3.25,
+      "ranks": [
+        2,
+        1,
+        3,
+        4,
+        5,
+        3,
+        3,
+        5
+      ],
+      "meanPoints": 246.5,
+      "meanSeconds": 210.70902777783755
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "trials": 8,
+      "targetRank": 1,
+      "goal": "title",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 0,
+      "meanSeconds": 270.98506944451475
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "trials": 8,
+      "targetRank": 1,
+      "goal": "title",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 12,
+      "ranks": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "meanPoints": 3.375,
+      "meanSeconds": 225.40324074081227
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "trials": 8,
+      "targetRank": 1,
+      "goal": "title",
+      "successPct": 0,
+      "titlePct": 0,
+      "meanRank": 4,
+      "ranks": [
+        3,
+        2,
+        4,
+        5,
+        3,
+        4,
+        5,
+        6
+      ],
+      "meanPoints": 213.75,
+      "meanSeconds": 211.48680555561603
+    }
+  ],
+  "rows": [
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1701,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 276.2541666667383,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 231,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 215,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 169,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 152,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 131,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 90,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 87,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 65,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 46,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 22,
+          "best": 7
+        },
+        {
+          "id": "dor",
+          "points": 16,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1702,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 281.5763888889563,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 216,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 200,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 173,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 156,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 131,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 93,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 63,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 52,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1703,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 281.6944444445107,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 220,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 206,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 181,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 131,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 126,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 112,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 83,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 67,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 54,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 24,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 20,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1704,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 272.7513888889626,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 206,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 202,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 154,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 125,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 52,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 49,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 27,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1705,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 270.24583333340877,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 220,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 210,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 161,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 149,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 110,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 101,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 81,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 79,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 18,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 9,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1706,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 279.2222222222918,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 270,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 233,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 185,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 116,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 114,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 103,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 76,
+          "best": 4
+        },
+        {
+          "id": "noa",
+          "points": 62,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 35,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 22,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 8,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1707,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 274.34027777784814,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 262,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 177,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 161,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 79,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 56,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 50,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 19,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "impatient",
+      "seed": 1708,
+      "races": 12,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": false,
+      "meanSeconds": 280.53333333339987,
+      "timeLimits": 4,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 224,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 183,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 173,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 166,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 155,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 85,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 80,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 76,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 30,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1701,
+      "races": 12,
+      "rank": 8,
+      "points": 62,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 232.59722222229948,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 219,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 203,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 186,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 121,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 113,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 100,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 88,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 62,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 61,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 35,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 30,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1702,
+      "races": 12,
+      "rank": 5,
+      "points": 111,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 229.09166666674108,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 186,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 182,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 156,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 111,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 106,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 104,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 74,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 61,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 40,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 17,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 11,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1703,
+      "races": 12,
+      "rank": 7,
+      "points": 111,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 228.52638888896286,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 164,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 152,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 142,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 141,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 111,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 80,
+          "best": 0
+        },
+        {
+          "id": "dor",
+          "points": 45,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 42,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 19,
+          "best": 7
+        },
+        {
+          "id": "gal",
+          "points": 16,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1704,
+      "races": 12,
+      "rank": 7,
+      "points": 86,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 230.26666666674205,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 195,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 173,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 161,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 137,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 112,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 86,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 70,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 57,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 37,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 12,
+          "best": 8
+        },
+        {
+          "id": "gal",
+          "points": 8,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1705,
+      "races": 12,
+      "rank": 7,
+      "points": 86,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 231.83194444452104,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 235,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 170,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 167,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 162,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 102,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "player",
+          "points": 86,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 73,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 71,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 22,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1706,
+      "races": 12,
+      "rank": 7,
+      "points": 74,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 231.43750000007637,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 239,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 215,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 191,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 111,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 85,
+          "best": 2
+        },
+        {
+          "id": "player",
+          "points": 74,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 65,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 64,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 30,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 29,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1707,
+      "races": 12,
+      "rank": 6,
+      "points": 96,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 230.29305555563096,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 244,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 205,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 179,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 107,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 106,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 96,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 80,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 69,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 53,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 39,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 36,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "regular",
+      "seed": 1708,
+      "races": 12,
+      "rank": 7,
+      "points": 81,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 231.90555555563222,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 223,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 187,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 165,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 127,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 125,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 86,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 81,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 78,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 61,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 56,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 26,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 9,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1701,
+      "races": 12,
+      "rank": 1,
+      "points": 294,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 211.16666666672688,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 294,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 185,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 168,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 145,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 129,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 81,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 74,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 53,
+          "best": 4
+        },
+        {
+          "id": "or",
+          "points": 35,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 30,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 27,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 3,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1702,
+      "races": 12,
+      "rank": 1,
+      "points": 304,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 210.0263888889481,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 304,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 172,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 133,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 131,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 131,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 119,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 65,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 56,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 46,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 34,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 16,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1703,
+      "races": 12,
+      "rank": 1,
+      "points": 312,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 209.952777777837,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 162,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 131,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 124,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 119,
+          "best": 2
+        },
+        {
+          "id": "barkat",
+          "points": 114,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 76,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 71,
+          "best": 3
+        },
+        {
+          "id": "almog",
+          "points": 69,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 26,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1704,
+      "races": 12,
+      "rank": 1,
+      "points": 312,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 210.27777777783726,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 164,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 139,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 133,
+          "best": 2
+        },
+        {
+          "id": "barkat",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 100,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 98,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 62,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 22,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 7,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 1,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1705,
+      "races": 12,
+      "rank": 1,
+      "points": 312,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 209.70833333339235,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 158,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 140,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 137,
+          "best": 2
+        },
+        {
+          "id": "turkiz",
+          "points": 135,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 103,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 66,
+          "best": 4
+        },
+        {
+          "id": "or",
+          "points": 61,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 60,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 26,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 19,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 7,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1706,
+      "races": 12,
+      "rank": 1,
+      "points": 312,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 209.8000000000591,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 187,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 186,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 125,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 79,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 77,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 68,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 68,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 56,
+          "best": 4
+        },
+        {
+          "id": "or",
+          "points": 43,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 13,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1707,
+      "races": 12,
+      "rank": 1,
+      "points": 312,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 209.78333333339242,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 188,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 155,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 154,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 83,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 75,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 69,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 61,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 52,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 35,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 31,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 9,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 1,
+      "profile": "skilled",
+      "seed": 1708,
+      "races": 12,
+      "rank": 1,
+      "points": 294,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 10,
+      "met": true,
+      "meanSeconds": 211.54444444450493,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 294,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 181,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 142,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 127,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 113,
+          "best": 2
+        },
+        {
+          "id": "turkiz",
+          "points": 102,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 99,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 59,
+          "best": 4
+        },
+        {
+          "id": "rom",
+          "points": 53,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 26,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 22,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1701,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 271.6666666667355,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 290,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 230,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 224,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 137,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 129,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 120,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 95,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 83,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 71,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 28,
+          "best": 7
+        },
+        {
+          "id": "dor",
+          "points": 21,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1702,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 269.280952381023,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 268,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 234,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 226,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 207,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 106,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 80,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 79,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 60,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 28,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1703,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 272.0035714286404,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 309,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 216,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 161,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 143,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 129,
+          "best": 2
+        },
+        {
+          "id": "barkat",
+          "points": 124,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 99,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 98,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 71,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 51,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 27,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1704,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 267.14523809530846,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 255,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 247,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 220,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 173,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 141,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 95,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 86,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 81,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 76,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 51,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 3,
+          "best": 8
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1705,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 263.8702380953124,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 258,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 209,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 182,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 180,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 120,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 117,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 87,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 42,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 40,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1706,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 275.6226190476846,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 284,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 246,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 149,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 124,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 97,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 82,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 44,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 34,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 16,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1707,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 264.0654761905504,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 277,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 238,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 210,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 180,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 129,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 105,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 90,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 75,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 70,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 49,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 5,
+          "best": 8
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "impatient",
+      "seed": 1708,
+      "races": 14,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 271.88095238102096,
+      "timeLimits": 4,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 246,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 208,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 197,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 185,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 162,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 138,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 115,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 58,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 57,
+          "best": 4
+        },
+        {
+          "id": "noa",
+          "points": 55,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 7,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1701,
+      "races": 14,
+      "rank": 12,
+      "points": 4,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 223.57142857149864,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 256,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 255,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 234,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 145,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 143,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 106,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 93,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 91,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 47,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 31,
+          "best": 7
+        },
+        {
+          "id": "dor",
+          "points": 23,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 4,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1702,
+      "races": 14,
+      "rank": 12,
+      "points": 12,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 223.56547619054624,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 230,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 217,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 181,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 94,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 83,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 74,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 73,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 59,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 12,
+          "best": 3
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1703,
+      "races": 14,
+      "rank": 11,
+      "points": 12,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 222.1166666667356,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 297,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 185,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 184,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 163,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 128,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 128,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 101,
+          "best": 0
+        },
+        {
+          "id": "dor",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 41,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 12,
+          "best": 7
+        },
+        {
+          "id": "gal",
+          "points": 11,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1704,
+      "races": 14,
+      "rank": 12,
+      "points": 11,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 222.13095238102127,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 221,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 219,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 205,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 193,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 176,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 118,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 85,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 55,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 24,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 12,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 11,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1705,
+      "races": 14,
+      "rank": 11,
+      "points": 18,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 223.70238095245114,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 225,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 215,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 195,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 168,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 153,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 146,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 102,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 86,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 71,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 44,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 18,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 5,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1706,
+      "races": 14,
+      "rank": 11,
+      "points": 14,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 224.25595238102298,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 280,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 242,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 216,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 150,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 148,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 124,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 82,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 60,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 55,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 49,
+          "best": 3
+        },
+        {
+          "id": "player",
+          "points": 14,
+          "best": 7
+        },
+        {
+          "id": "gal",
+          "points": 8,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1707,
+      "races": 14,
+      "rank": 11,
+      "points": 12,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 223.52500000007007,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 283,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 208,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 141,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 137,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 121,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 108,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 54,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 47,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 40,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 12,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 8,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "regular",
+      "seed": 1708,
+      "races": 14,
+      "rank": 12,
+      "points": 15,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": false,
+      "meanSeconds": 223.40833333340328,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 262,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 222,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 211,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 182,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 148,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 132,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 129,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 49,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 31,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 29,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 18,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 15,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1701,
+      "races": 14,
+      "rank": 3,
+      "points": 198,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 206.97738095243784,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 255,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 238,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 198,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 167,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 142,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 121,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 78,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 72,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 55,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 46,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 38,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 18,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1702,
+      "races": 14,
+      "rank": 3,
+      "points": 190,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 206.44285714291354,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 229,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 211,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 168,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 151,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 120,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 98,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 98,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 51,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 45,
+          "best": 4
+        },
+        {
+          "id": "noa",
+          "points": 38,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 29,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1703,
+      "races": 14,
+      "rank": 2,
+      "points": 180,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 206.7392857143424,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 274,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 180,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 150,
+          "best": 2
+        },
+        {
+          "id": "barkat",
+          "points": 147,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 146,
+          "best": 2
+        },
+        {
+          "id": "turkiz",
+          "points": 131,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 123,
+          "best": 0
+        },
+        {
+          "id": "dor",
+          "points": 107,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 76,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 46,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 26,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 22,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1704,
+      "races": 14,
+      "rank": 2,
+      "points": 195,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 206.53333333338983,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 197,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 195,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 191,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 182,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 160,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 103,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 69,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 43,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 24,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 2,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1705,
+      "races": 14,
+      "rank": 2,
+      "points": 193,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 207.7452380952956,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 202,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 193,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 178,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 177,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 134,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 128,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 92,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 64,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 41,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 16,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 13,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1706,
+      "races": 14,
+      "rank": 3,
+      "points": 204,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 207.63214285720025,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 264,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 217,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 204,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 177,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 129,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 117,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 91,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 71,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 65,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 51,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 36,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1707,
+      "races": 14,
+      "rank": 2,
+      "points": 196,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 208.43809523815324,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 299,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 196,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 194,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 166,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 139,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 113,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 105,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 70,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 61,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 55,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 25,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 5,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 2,
+      "profile": "skilled",
+      "seed": 1708,
+      "races": 14,
+      "rank": 3,
+      "points": 163,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 8,
+      "met": true,
+      "meanSeconds": 210.10238095244026,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 198,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 163,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 159,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 150,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 125,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 123,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 97,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 56,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 50,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 32,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 3,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1701,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 270.6354166667363,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 319,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 283,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 165,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 164,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 136,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 87,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 74,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 66,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 53,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 25,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1702,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 271.1583333334016,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 300,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 263,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 252,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 196,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 153,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 128,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 78,
+          "best": 4
+        },
+        {
+          "id": "or",
+          "points": 77,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 41,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 29,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1703,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 270.63854166673605,
+      "timeLimits": 4,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 266,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 245,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 239,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 189,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 166,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 165,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 126,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 79,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 31,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 26,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1704,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 266.68854166673816,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 289,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 263,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 235,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 140,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 131,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 119,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 72,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 62,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1705,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 264.7250000000734,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "rom",
+          "points": 250,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 229,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 197,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 196,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 159,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 122,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 95,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 70,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 52,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1706,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 275.79687500006526,
+      "timeLimits": 6,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 310,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 300,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 288,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 179,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 136,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 109,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 92,
+          "best": 4
+        },
+        {
+          "id": "or",
+          "points": 74,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 70,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 57,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1707,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 265.49479166674064,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 243,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 157,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 89,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 88,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 80,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 36,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 19,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "impatient",
+      "seed": 1708,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 271.6260416667336,
+      "timeLimits": 4,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 330,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 222,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 214,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 148,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 130,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 51,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 50,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 28,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1701,
+      "races": 16,
+      "rank": 12,
+      "points": 2,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 223.45937500007,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 321,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 257,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 256,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 201,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 176,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 127,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 81,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 50,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 39,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 30,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 2,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1702,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 223.79375000007022,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 277,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 268,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 226,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 208,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 182,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 138,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 87,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 47,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 45,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 39,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1703,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 222.36354166673576,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 340,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 205,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 203,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 201,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 192,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 162,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 91,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 71,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 68,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 67,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 32,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1704,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 222.47708333340256,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 275,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 244,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 229,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 150,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 116,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 111,
+          "best": 3
+        },
+        {
+          "id": "rom",
+          "points": 77,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 72,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 69,
+          "best": 1
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1705,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 224.36666666673736,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 317,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 223,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 205,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 196,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 107,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 96,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 72,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 60,
+          "best": 4
+        },
+        {
+          "id": "noa",
+          "points": 56,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 28,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1706,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 224.46250000007078,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 302,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 299,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 286,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 134,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 125,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 100,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 55,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 42,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 21,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1707,
+      "races": 16,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 223.8895833334037,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 351,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 244,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 239,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 237,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 127,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 115,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 98,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 82,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 72,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 45,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 22,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "regular",
+      "seed": 1708,
+      "races": 16,
+      "rank": 12,
+      "points": 1,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 223.79375000007025,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 294,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 244,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 237,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 223,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 153,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 134,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 115,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 86,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 65,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 63,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 1,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1701,
+      "races": 16,
+      "rank": 6,
+      "points": 130,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 210.10520833339268,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 303,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 231,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 218,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 204,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 174,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 130,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 104,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 76,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 75,
+          "best": 5
+        },
+        {
+          "id": "rom",
+          "points": 73,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 26,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 18,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1702,
+      "races": 16,
+      "rank": 7,
+      "points": 110,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 210.63229166672645,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 303,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 226,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 165,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 156,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 123,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 110,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 90,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 58,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 56,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 42,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 31,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1703,
+      "races": 16,
+      "rank": 8,
+      "points": 103,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 210.11666666672605,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 217,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 197,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 191,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 173,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 148,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 120,
+          "best": 2
+        },
+        {
+          "id": "player",
+          "points": 103,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 102,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 60,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 44,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 29,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1704,
+      "races": 16,
+      "rank": 7,
+      "points": 124,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 209.88541666672586,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 289,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 266,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 242,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 160,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 155,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 136,
+          "best": 3
+        },
+        {
+          "id": "player",
+          "points": 124,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 75,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 61,
+          "best": 5
+        },
+        {
+          "id": "rom",
+          "points": 60,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 59,
+          "best": 1
+        },
+        {
+          "id": "gal",
+          "points": 5,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1705,
+      "races": 16,
+      "rank": 6,
+      "points": 158,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 211.2104166667269,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "turkiz",
+          "points": 233,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 231,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 228,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 210,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 189,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 158,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 108,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 61,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 54,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 54,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1706,
+      "races": 16,
+      "rank": 5,
+      "points": 119,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 211.2125000000602,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 355,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 256,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 239,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 119,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 112,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 102,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 88,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 84,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 49,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 33,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 5,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1707,
+      "races": 16,
+      "rank": 5,
+      "points": 126,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 210.75312500005987,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 348,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 240,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 238,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 185,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 126,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 123,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 111,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 96,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 85,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 55,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 15,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 10,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 3,
+      "profile": "skilled",
+      "seed": 1708,
+      "races": 16,
+      "rank": 8,
+      "points": 107,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 212.66250000006139,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 267,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 256,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 245,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 212,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 151,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 115,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 113,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 107,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 89,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 30,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 28,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 19,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1701,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 272.01851851858714,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 402,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 320,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 240,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 206,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 191,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 132,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 108,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 91,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 62,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 44,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 40,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1702,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 271.9685185185877,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 321,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 302,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 278,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 256,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 165,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 153,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 128,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 72,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 66,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 54,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 41,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1703,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 275.46944444451077,
+      "timeLimits": 6,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 330,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 226,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 210,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 198,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 194,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 184,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 126,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 125,
+          "best": 0
+        },
+        {
+          "id": "dor",
+          "points": 110,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 98,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 35,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1704,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 267.51388888896145,
+      "timeLimits": 1,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 300,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 298,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 270,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 232,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 198,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 185,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 161,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 85,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 61,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 32,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 14,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1705,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 264.5888888889632,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 310,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 306,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 285,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 261,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 136,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 105,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 90,
+          "best": 0
+        },
+        {
+          "id": "yam",
+          "points": 65,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 61,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 27,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1706,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 274.9657407408081,
+      "timeLimits": 8,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 395,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 321,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 304,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 188,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 136,
+          "best": 3
+        },
+        {
+          "id": "shaked",
+          "points": 128,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 97,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 96,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 90,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 60,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 21,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1707,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 266.34351851859105,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 411,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 267,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 241,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 191,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 156,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 92,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 91,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 75,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 44,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 20,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "impatient",
+      "seed": 1708,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 274.2435185185862,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 347,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 264,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 246,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 242,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 220,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 168,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 120,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 77,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 64,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 55,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 33,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1701,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 226.8888888889616,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 400,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 307,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 174,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 142,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 135,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 54,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 30,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 29,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1702,
+      "races": 18,
+      "rank": 12,
+      "points": 2,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 224.65462962970057,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 353,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 313,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 280,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 209,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 149,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 131,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 130,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 116,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 56,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 53,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 44,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 2,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1703,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 224.61203703710797,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 331,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 311,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 221,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 197,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 196,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 171,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 154,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 139,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 66,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 34,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 16,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1704,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 225.39351851858999,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 324,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 323,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 243,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 184,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 131,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 114,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 111,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 96,
+          "best": 1
+        },
+        {
+          "id": "gal",
+          "points": 23,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 18,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1705,
+      "races": 18,
+      "rank": 12,
+      "points": 4,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 225.9361111111831,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 344,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 267,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 257,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 230,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 115,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 110,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 74,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 49,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 13,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 4,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1706,
+      "races": 18,
+      "rank": 12,
+      "points": 3,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 227.0092592593321,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 369,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 323,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 274,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 212,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 157,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 123,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 111,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 110,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 80,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 26,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 3,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1707,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 226.81481481488746,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 384,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 310,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 186,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 123,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 110,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 82,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 76,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 9,
+          "best": 8
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "regular",
+      "seed": 1708,
+      "races": 18,
+      "rank": 12,
+      "points": 1,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": false,
+      "meanSeconds": 227.36759259266566,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 299,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 278,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 267,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 212,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 191,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 113,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 88,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 57,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 43,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 27,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 1,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1701,
+      "races": 18,
+      "rank": 2,
+      "points": 280,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 209.43055555561438,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 354,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 280,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 252,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 213,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 178,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 152,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 88,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 78,
+          "best": 1
+        },
+        {
+          "id": "gal",
+          "points": 62,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 41,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 23,
+          "best": 4
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1702,
+      "races": 18,
+      "rank": 1,
+      "points": 303,
+      "champion": true,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 208.7740740741323,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "player",
+          "points": 303,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 273,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 271,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 161,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 153,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 136,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 78,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 76,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 59,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 42,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 36,
+          "best": 2
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1703,
+      "races": 18,
+      "rank": 3,
+      "points": 209,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 211.290740740801,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 347,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 249,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 209,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 193,
+          "best": 1
+        },
+        {
+          "id": "turkiz",
+          "points": 184,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 169,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 166,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 108,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 108,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 38,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 34,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 31,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1704,
+      "races": 18,
+      "rank": 4,
+      "points": 260,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 209.76388888894795,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 293,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 284,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 263,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 260,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 207,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 176,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 108,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 77,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 40,
+          "best": 6
+        },
+        {
+          "id": "dor",
+          "points": 22,
+          "best": 7
+        },
+        {
+          "id": "gal",
+          "points": 6,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1705,
+      "races": 18,
+      "rank": 5,
+      "points": 213,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 212.20000000006107,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 274,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 253,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 252,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 242,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 213,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 164,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 116,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 107,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 103,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 50,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 42,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 20,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1706,
+      "races": 18,
+      "rank": 3,
+      "points": 251,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 210.2777777778373,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 353,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 318,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 201,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 199,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 108,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 97,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 96,
+          "best": 4
+        },
+        {
+          "id": "noa",
+          "points": 87,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 49,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 29,
+          "best": 5
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1707,
+      "races": 18,
+      "rank": 3,
+      "points": 241,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 211.41944444450482,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 354,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 307,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 241,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 228,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 209,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 131,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 131,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 95,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 67,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 30,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 30,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 13,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 4,
+      "profile": "skilled",
+      "seed": 1708,
+      "races": 18,
+      "rank": 5,
+      "points": 215,
+      "champion": false,
+      "goal": "next-season",
+      "targetRank": 5,
+      "met": true,
+      "meanSeconds": 212.51574074080202,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 257,
+          "best": 1
+        },
+        {
+          "id": "barkat",
+          "points": 248,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 245,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 215,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 198,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 128,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 94,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 82,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 47,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 31,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 19,
+          "best": 4
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1701,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 271.639814814884,
+      "timeLimits": 7,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 396,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 295,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 295,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 198,
+          "best": 2
+        },
+        {
+          "id": "almog",
+          "points": 168,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 158,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 92,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 46,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 41,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 38,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1702,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 273.9398148148831,
+      "timeLimits": 4,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 342,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 314,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 272,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 258,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 146,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 132,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 127,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 81,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 78,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 63,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 23,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1703,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 274.88703703710434,
+      "timeLimits": 5,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 303,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 255,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 246,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 186,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 181,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 135,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 106,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 88,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 49,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 36,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1704,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 268.25462962970147,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 295,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 291,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 288,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 264,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 204,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 174,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 115,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 84,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 61,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 50,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1705,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 264.4342592593348,
+      "timeLimits": 3,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 381,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 264,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 250,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 184,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 101,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 47,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 43,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 12,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1706,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 276.9879629630284,
+      "timeLimits": 8,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 375,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 331,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 269,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 210,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 170,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 165,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 92,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 88,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 82,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 33,
+          "best": 7
+        },
+        {
+          "id": "gal",
+          "points": 21,
+          "best": 4
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1707,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 265.7842592593341,
+      "timeLimits": 2,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 425,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 281,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 251,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 219,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 191,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 134,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 107,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 103,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 68,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 9,
+          "best": 7
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "impatient",
+      "seed": 1708,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 271.9527777778479,
+      "timeLimits": 6,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 300,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 292,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 273,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 237,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 216,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 150,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 130,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 111,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 62,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 43,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 22,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1701,
+      "races": 18,
+      "rank": 12,
+      "points": 4,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 224.87962962970073,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 409,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 293,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 250,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 211,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 178,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 139,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 120,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 98,
+          "best": 3
+        },
+        {
+          "id": "gal",
+          "points": 58,
+          "best": 6
+        },
+        {
+          "id": "yam",
+          "points": 40,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 36,
+          "best": 2
+        },
+        {
+          "id": "player",
+          "points": 4,
+          "best": 7
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1702,
+      "races": 18,
+      "rank": 12,
+      "points": 1,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 224.66203703710798,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 340,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 290,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 289,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 265,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 173,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 158,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 118,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 84,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 36,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 34,
+          "best": 3
+        },
+        {
+          "id": "player",
+          "points": 1,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1703,
+      "races": 18,
+      "rank": 12,
+      "points": 1,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 224.69537037044134,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 354,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 319,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 236,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 209,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 201,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 145,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 122,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 89,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 84,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 39,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 37,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 1,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1704,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 224.06666666673712,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 334,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 286,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 279,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 265,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 206,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 145,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 114,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 103,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 44,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 33,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 27,
+          "best": 5
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 11
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1705,
+      "races": 18,
+      "rank": 12,
+      "points": 7,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 225.92500000007195,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 374,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 281,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 280,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 222,
+          "best": 1
+        },
+        {
+          "id": "shemesh",
+          "points": 205,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 139,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 123,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 105,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 50,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 40,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 10,
+          "best": 8
+        },
+        {
+          "id": "player",
+          "points": 7,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1706,
+      "races": 18,
+      "rank": 12,
+      "points": 0,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 226.48055555562794,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 341,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 317,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 310,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 182,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 176,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 168,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 102,
+          "best": 3
+        },
+        {
+          "id": "or",
+          "points": 99,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 72,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 37,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 32,
+          "best": 3
+        },
+        {
+          "id": "player",
+          "points": 0,
+          "best": 10
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1707,
+      "races": 18,
+      "rank": 12,
+      "points": 6,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 225.86018518525705,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 350,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 312,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 205,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 173,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 128,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 108,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 101,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 59,
+          "best": 2
+        },
+        {
+          "id": "dor",
+          "points": 59,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 23,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 6,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "regular",
+      "seed": 1708,
+      "races": 18,
+      "rank": 12,
+      "points": 8,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 226.65648148155398,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 331,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 317,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 254,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 239,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 187,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 105,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 100,
+          "best": 1
+        },
+        {
+          "id": "yam",
+          "points": 84,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 65,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 24,
+          "best": 6
+        },
+        {
+          "id": "player",
+          "points": 8,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1701,
+      "races": 18,
+      "rank": 3,
+      "points": 258,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 210.19722222228165,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "barkat",
+          "points": 357,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 276,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 258,
+          "best": 0
+        },
+        {
+          "id": "noa",
+          "points": 202,
+          "best": 2
+        },
+        {
+          "id": "turkiz",
+          "points": 196,
+          "best": 1
+        },
+        {
+          "id": "almog",
+          "points": 170,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 105,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 78,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 70,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 67,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 34,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 23,
+          "best": 4
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1702,
+      "races": 18,
+      "rank": 2,
+      "points": 289,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 208.45185185190994,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 317,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 289,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 274,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 249,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 177,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 128,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 125,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 109,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 55,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 47,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 37,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 29,
+          "best": 4
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1703,
+      "races": 18,
+      "rank": 4,
+      "points": 203,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 211.4324074074678,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 353,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 242,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 219,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 203,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 198,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 189,
+          "best": 1
+        },
+        {
+          "id": "or",
+          "points": 166,
+          "best": 1
+        },
+        {
+          "id": "shaked",
+          "points": 108,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 55,
+          "best": 1
+        },
+        {
+          "id": "gal",
+          "points": 50,
+          "best": 5
+        },
+        {
+          "id": "dor",
+          "points": 45,
+          "best": 5
+        },
+        {
+          "id": "yam",
+          "points": 8,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1704,
+      "races": 18,
+      "rank": 5,
+      "points": 190,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 211.8009259259866,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "almog",
+          "points": 326,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 275,
+          "best": 0
+        },
+        {
+          "id": "shemesh",
+          "points": 231,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 224,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 190,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 162,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 128,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 122,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 83,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 60,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 33,
+          "best": 6
+        },
+        {
+          "id": "gal",
+          "points": 2,
+          "best": 9
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1705,
+      "races": 18,
+      "rank": 3,
+      "points": 240,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 211.45648148154197,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 294,
+          "best": 0
+        },
+        {
+          "id": "rom",
+          "points": 267,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 240,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 232,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 227,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 208,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 121,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 101,
+          "best": 1
+        },
+        {
+          "id": "dor",
+          "points": 54,
+          "best": 2
+        },
+        {
+          "id": "noa",
+          "points": 41,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 40,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 11,
+          "best": 8
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1706,
+      "races": 18,
+      "rank": 4,
+      "points": 208,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 211.66203703709766,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 332,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 322,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 245,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 208,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 206,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 133,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 111,
+          "best": 2
+        },
+        {
+          "id": "or",
+          "points": 101,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 69,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 48,
+          "best": 4
+        },
+        {
+          "id": "yam",
+          "points": 46,
+          "best": 2
+        },
+        {
+          "id": "gal",
+          "points": 15,
+          "best": 6
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1707,
+      "races": 18,
+      "rank": 5,
+      "points": 166,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 212.81944444450596,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 408,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 279,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 237,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 236,
+          "best": 1
+        },
+        {
+          "id": "player",
+          "points": 166,
+          "best": 0
+        },
+        {
+          "id": "shaked",
+          "points": 130,
+          "best": 1
+        },
+        {
+          "id": "noa",
+          "points": 123,
+          "best": 1
+        },
+        {
+          "id": "rom",
+          "points": 81,
+          "best": 3
+        },
+        {
+          "id": "dor",
+          "points": 70,
+          "best": 2
+        },
+        {
+          "id": "yam",
+          "points": 48,
+          "best": 5
+        },
+        {
+          "id": "or",
+          "points": 36,
+          "best": 4
+        },
+        {
+          "id": "gal",
+          "points": 22,
+          "best": 4
+        }
+      ]
+    },
+    {
+      "season": 5,
+      "profile": "skilled",
+      "seed": 1708,
+      "races": 18,
+      "rank": 6,
+      "points": 156,
+      "champion": false,
+      "goal": "title",
+      "targetRank": 1,
+      "met": false,
+      "meanSeconds": 214.0740740741366,
+      "timeLimits": 0,
+      "standings": [
+        {
+          "id": "shemesh",
+          "points": 306,
+          "best": 0
+        },
+        {
+          "id": "or",
+          "points": 293,
+          "best": 0
+        },
+        {
+          "id": "almog",
+          "points": 271,
+          "best": 0
+        },
+        {
+          "id": "turkiz",
+          "points": 231,
+          "best": 0
+        },
+        {
+          "id": "barkat",
+          "points": 217,
+          "best": 0
+        },
+        {
+          "id": "player",
+          "points": 156,
+          "best": 2
+        },
+        {
+          "id": "rom",
+          "points": 107,
+          "best": 2
+        },
+        {
+          "id": "shaked",
+          "points": 104,
+          "best": 3
+        },
+        {
+          "id": "noa",
+          "points": 58,
+          "best": 3
+        },
+        {
+          "id": "yam",
+          "points": 49,
+          "best": 4
+        },
+        {
+          "id": "dor",
+          "points": 27,
+          "best": 5
+        },
+        {
+          "id": "gal",
+          "points": 17,
+          "best": 4
+        }
+      ]
+    }
+  ],
+  "pending": []
+}
