@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eff2e8">
+  <title>תושבי העיר · העיר שלי</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="heading"><p>העיר שלי / ספריית תושבים</p><h1>אנשים שעושים עיר<span>.</span></h1></div>
+      <div class="collection"><b>12</b><span>תושבים</span><i></i><b>6</b><span>חיות עיר</span></div>
+      <div class="edition">CITY LIFE <b>01</b></div>
+    </header>
+    <div class="workspace">
+      <aside class="library" aria-label="בחירת דמות">
+        <div class="library-heading"><h2>השכונה שלנו</h2><span id="asset-count">18 דמויות</span></div>
+        <div class="tabs" role="tablist" aria-label="סוג דמות"><button type="button" role="tab" aria-selected="true" data-family="people">תושבים</button><button type="button" role="tab" aria-selected="false" data-family="animals">חיות העיר</button></div>
+        <div id="asset-list" class="asset-list"></div>
+        <div class="palette-row"><span>צבעי לבוש</span><div id="palettes" aria-label="גרסת צבע"></div></div>
+        <div class="library-foot"><span class="live-dot"></span><span id="load-status" role="status">טוען את השכונה…</span></div>
+      </aside>
+      <section class="stage" aria-label="תצוגת העיר בתלת ממד">
+        <canvas id="scene" aria-label="דמויות תלת ממד מונפשות"></canvas>
+        <div class="view-tabs" aria-label="סוג תצוגה"><button type="button" data-mode="city" aria-pressed="true">בשכונה</button><button type="button" data-mode="focus" aria-pressed="false">מקרוב</button><button type="button" data-mode="lineup" aria-pressed="false">כל הדמויות</button></div>
+        <div class="stage-caption"><span class="caption-overline">נעים להכיר</span><h2 id="selected-name">תושבי השכונה</h2><p id="selected-detail">ילדים, מבוגרים וכל מי שביניהם</p></div>
+        <button type="button" id="rotate" class="rotate-button" aria-pressed="false" title="סיבוב התצוגה" aria-label="סיבוב התצוגה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8a8 8 0 1 0 1 7M19 3v5h-5"/></svg></button>
+        <div id="stage-error" class="stage-error" role="alert" hidden></div>
+        <div class="scene-credit">A LITTLE MORE LIFE, EVERY DAY</div>
+        <div class="stage-spec"><span id="triangle-count">—</span><span>30Hz</span></div>
+      </section>
+    </div>
+    <footer class="motion-bar">
+      <button type="button" id="play" class="play-button" aria-label="השהיית האנימציה" aria-pressed="false"><svg id="pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><svg id="play-icon" viewBox="0 0 20 20" aria-hidden="true" hidden><path d="m7 5 8 5-8 5Z"/></svg></button>
+      <div class="motion-selector"><span class="motion-label">קצת תנועה</span><div id="clip-list" class="clip-list" aria-label="בחירת אנימציה"></div></div>
+      <div class="timeline"><input id="scrub" type="range" min="0" max="1000" value="0" aria-label="מיקום באנימציה"><output id="time">0.00 / 0.00</output></div>
+      <a class="report-link" href="REPORT.md" title="דוח החבילה">דוח החבילה <span aria-hidden="true">↗</span></a>
+    </footer>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

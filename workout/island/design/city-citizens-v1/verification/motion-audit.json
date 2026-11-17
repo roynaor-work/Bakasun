@@ -1,0 +1,2240 @@
+{
+  "tool": "independent exported GLB audit",
+  "sampleHz": 120,
+  "limits": {
+    "citizenTriangles": [
+      800,
+      1200
+    ],
+    "floorPenetrationMeters": 0.001,
+    "loopPositionMeters": 0.001,
+    "loopRotationRadians": 0.01,
+    "loopVelocityDifferenceMetersPerSecond": 0.5
+  },
+  "assets": [
+    {
+      "file": "animals/bird.glb",
+      "sha256": "7172baf1ded435cd34487c8fe47188ad9ea08662f265c1d3df7f2109b9292eb6",
+      "bytes": 21880,
+      "category": "animal",
+      "triangles": 576,
+      "vertices": 330,
+      "skinJoints": [
+        8
+      ],
+      "clips": [
+        "fly"
+      ],
+      "motionSignature": "9afdce803b89944d7b7b1ecf413f6611a2621edb45e3fd95846f868ad97b1d13",
+      "motions": [
+        {
+          "name": "fly",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 32010,
+          "minSkinnedY": 0.12573248936909642,
+          "maxSkinnedY": 0.44379721995850147,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 5.077776732420602e-7,
+          "velocitySeamNode": "Body",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "animals/butterfly.glb",
+      "sha256": "f374920fa38151573eb26ea62420cd63a5ecf6e120a5cd2c5c93c22141c30fd4",
+      "bytes": 13584,
+      "category": "animal",
+      "triangles": 326,
+      "vertices": 191,
+      "skinJoints": [
+        4
+      ],
+      "clips": [
+        "flutter"
+      ],
+      "motionSignature": "13a959a418e24fb63ef5bc642ff0d2c750ae44d13cb7c20aa2e5d894b7c81244",
+      "motions": [
+        {
+          "name": "flutter",
+          "duration": 0.4000000059604645,
+          "loop": true,
+          "samples": 49,
+          "vertexSamples": 9359,
+          "minSkinnedY": 0.1511131339891445,
+          "maxSkinnedY": 0.32888688229826607,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 0.00020485920902075738,
+          "velocitySeamNode": "Wing_L",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "animals/cat.glb",
+      "sha256": "f73143950ee2c41d7f50ff2a9b2b51af7b515302aa31db1e6e0454e3d49350d0",
+      "bytes": 44200,
+      "category": "animal",
+      "triangles": 814,
+      "vertices": 513,
+      "skinJoints": [
+        17
+      ],
+      "clips": [
+        "idle",
+        "walk"
+      ],
+      "motionSignature": "ede040440af9ab46eef4ab7283009a85564bfd10e7f637566f59898f2e99e97f",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 148257,
+          "minSkinnedY": 0.0003797317071818074,
+          "maxSkinnedY": 0.5604084007078927,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 0,
+          "velocitySeamNode": "",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 74385,
+          "minSkinnedY": 0.00035230397092178345,
+          "maxSkinnedY": 0.5543627958185395,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.1507521568251103,
+          "velocitySeamNode": "BackShin_R",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "animals/dog.glb",
+      "sha256": "f4d086acbfd79ea634ac65849bddaa64f53c0d73554db95d0200067df1344850",
+      "bytes": 43080,
+      "category": "animal",
+      "triangles": 800,
+      "vertices": 474,
+      "skinJoints": [
+        19
+      ],
+      "clips": [
+        "idle",
+        "trot"
+      ],
+      "motionSignature": "4925ff3f126b5d27d9a9bea876c238cc7d522777e94a306d250d18539a245b04",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 136986,
+          "minSkinnedY": 0.0004235467118676728,
+          "maxSkinnedY": 0.5772217015163676,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 0.0000729367117293281,
+          "velocitySeamNode": "Ear_L",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "trot",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 45978,
+          "minSkinnedY": -0.00012054389120655688,
+          "maxSkinnedY": 0.5714187725067139,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 4.2146848510894035e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.26424031420692295,
+          "velocitySeamNode": "BackShin_L",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "animals/fish.glb",
+      "sha256": "948c3651a34d90725d2d3bfb5f9cd3e0286066170eb97854016d9fc9b1e080e9",
+      "bytes": 16412,
+      "category": "animal",
+      "triangles": 350,
+      "vertices": 199,
+      "skinJoints": [
+        5
+      ],
+      "clips": [
+        "swim"
+      ],
+      "motionSignature": "1b5d09d2632bd3b6d8b4c6b415699144d79d151e7104c2ba5d28c29834abc635",
+      "motions": [
+        {
+          "name": "swim",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 28855,
+          "minSkinnedY": 0.1290000081062317,
+          "maxSkinnedY": 0.29800000782977953,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.00009086854460828798,
+          "velocitySeamNode": "Tail",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "animals/pigeon.glb",
+      "sha256": "11a550fed9079f850df115b72589e36c7f1dc6343b9d0adc9bed71df7b9dba8e",
+      "bytes": 27612,
+      "category": "animal",
+      "triangles": 636,
+      "vertices": 362,
+      "skinJoints": [
+        8
+      ],
+      "clips": [
+        "peck",
+        "flutter"
+      ],
+      "motionSignature": "03d1f7ba9623bb0eee2c38fd046a4c84e569143a09c93318f943d4f12fa24ea8",
+      "motions": [
+        {
+          "name": "peck",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 104618,
+          "minSkinnedY": 0.005999999679625036,
+          "maxSkinnedY": 0.2860000193119049,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 0,
+          "velocitySeamNode": "",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "flutter",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 35114,
+          "minSkinnedY": 0.005732491807585921,
+          "maxSkinnedY": 0.30379721939292,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 0,
+          "loopVelocityDifferenceMetersPerSecond": 0,
+          "velocitySeamNode": "",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/adult-man-a.glb",
+      "sha256": "eb02cafe070c58463b9c140782d348bf460a6fb6550a5f0762c076be977c798f",
+      "bytes": 132420,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "9640b3bd56ba76159573758c19f73d000cead8e202354c4e386d939b73600bad",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7310317415291583,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 91495,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.6972831636378847,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7637769637984948,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 303511,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7317457907918414,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7326877889952523,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 61207,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.6672670890912156,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/adult-man-b.glb",
+      "sha256": "30fb5859c2dc1d12e4d66c7964cc39682b627b621f4cd36314403dd61e041dfc",
+      "bytes": 132420,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "9640b3bd56ba76159573758c19f73d000cead8e202354c4e386d939b73600bad",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/adult-man-a.glb"
+      }
+    },
+    {
+      "file": "people/adult-man-c.glb",
+      "sha256": "ee60e632eea89bd881d248717639d86723ddb8d6173a4a404c1bd9ba4ba39acd",
+      "bytes": 132420,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "9640b3bd56ba76159573758c19f73d000cead8e202354c4e386d939b73600bad",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/adult-man-a.glb"
+      }
+    },
+    {
+      "file": "people/adult-woman-a.glb",
+      "sha256": "33d07ebaca4dbf47de9be133f56c2921422f8aa434cfc6d5e8fad68668e73acf",
+      "bytes": 134204,
+      "category": "citizen",
+      "triangles": 1113,
+      "vertices": 665,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "35e7d9f12b22acf52947b11faa711e5d4327c787d0348891b52e5ef6cc45fbfd",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 192185,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7310317290159638,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 96425,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.6972831636378847,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 192185,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7637769637984948,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 319865,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7317457907918414,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 192185,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7326863403071349,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 64505,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.6672670890910744,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/adult-woman-b.glb",
+      "sha256": "427c04dbb90f53501c57b0644b6f21464771c1d928516a2c85592265ef76c510",
+      "bytes": 134204,
+      "category": "citizen",
+      "triangles": 1113,
+      "vertices": 665,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "35e7d9f12b22acf52947b11faa711e5d4327c787d0348891b52e5ef6cc45fbfd",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/adult-woman-a.glb"
+      }
+    },
+    {
+      "file": "people/adult-woman-c.glb",
+      "sha256": "87164015d143aa000610b8a7ec72494c20c54f4798d63fe9b063014cbb00a7df",
+      "bytes": 134204,
+      "category": "citizen",
+      "triangles": 1113,
+      "vertices": 665,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "35e7d9f12b22acf52947b11faa711e5d4327c787d0348891b52e5ef6cc45fbfd",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/adult-woman-a.glb"
+      }
+    },
+    {
+      "file": "people/boy-a.glb",
+      "sha256": "adbf96b064d40a4fdf2c3e2000ad65799353f458ae40f417c975e0e0bf97a6f4",
+      "bytes": 132400,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "aa44a6a1498a55ed3b9b7dc74876cc70c518e9dd203dc9460db8b07894463d51",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.744033967454227,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 91495,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.710318231748445,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7637769637984948,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 303511,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7447918930870823,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 182359,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7457966142917338,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 61207,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.680354063975207,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/boy-b.glb",
+      "sha256": "473dc1261895cb02c7cfe3204a390d98f27e453b160ad51431f85dc7bffcd94d",
+      "bytes": 132400,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "aa44a6a1498a55ed3b9b7dc74876cc70c518e9dd203dc9460db8b07894463d51",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/boy-a.glb"
+      }
+    },
+    {
+      "file": "people/boy-c.glb",
+      "sha256": "e784c3bfb18c3dc5714c5496efd783fad8dc67e2513f542f5b4c59b88a5a9837",
+      "bytes": 132400,
+      "category": "citizen",
+      "triangles": 1021,
+      "vertices": 631,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "aa44a6a1498a55ed3b9b7dc74876cc70c518e9dd203dc9460db8b07894463d51",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/boy-a.glb"
+      }
+    },
+    {
+      "file": "people/cleaner-a.glb",
+      "sha256": "c6b8ac5039c392ce4385023e2c55ef1e86bfc0cf57974b00f88e804f430e07d6",
+      "bytes": 137820,
+      "category": "citizen",
+      "triangles": 1153,
+      "vertices": 759,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "3c72b500f0c02346c75f6d85d5104142cee2bcd7b28fab7e113698ff1eb1b685",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 219351,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7310317290159638,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 110055,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.6972831636378847,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 219351,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7637769637984948,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 365079,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7317457907918414,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 219351,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7326863403071349,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 73623,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.6672670890910744,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/cleaner-b.glb",
+      "sha256": "3c97be0565f8dace43cdf12d345755ac2794b52cef21b59e8a2ad9f3aa3fe7e4",
+      "bytes": 137820,
+      "category": "citizen",
+      "triangles": 1153,
+      "vertices": 759,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "3c72b500f0c02346c75f6d85d5104142cee2bcd7b28fab7e113698ff1eb1b685",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/cleaner-a.glb"
+      }
+    },
+    {
+      "file": "people/cleaner-c.glb",
+      "sha256": "5f48bc8a7b24544dca236a8d45f7472aad5f756238910008f01f5f1eff29739b",
+      "bytes": 137820,
+      "category": "citizen",
+      "triangles": 1153,
+      "vertices": 759,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "3c72b500f0c02346c75f6d85d5104142cee2bcd7b28fab7e113698ff1eb1b685",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/cleaner-a.glb"
+      }
+    },
+    {
+      "file": "people/courier-a.glb",
+      "sha256": "78e6755d50569c61071f1475271cdbc4c35c8256956a3d2315977431d7358b67",
+      "bytes": 136052,
+      "category": "citizen",
+      "triangles": 1135,
+      "vertices": 713,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "e284c657f0186c7370abb9e3a8f788e9a50ee0011214e134b38048ae54ca9a88",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 206057,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8050440781406891,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 103385,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.7714802600516237,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 206057,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8065537208880176,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 342953,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.8060048779507565,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 206057,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.807284826012162,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 69161,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.741755559909432,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/courier-b.glb",
+      "sha256": "15b20eebdbb7fa643c01c9d860b91bdff292faab703e9551fbab95d15c216eae",
+      "bytes": 136052,
+      "category": "citizen",
+      "triangles": 1135,
+      "vertices": 713,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "e284c657f0186c7370abb9e3a8f788e9a50ee0011214e134b38048ae54ca9a88",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/courier-a.glb"
+      }
+    },
+    {
+      "file": "people/courier-c.glb",
+      "sha256": "736fba9b52d66f2107a106981758063daf796bc72d16f92a709217a392a2ad19",
+      "bytes": 136052,
+      "category": "citizen",
+      "triangles": 1135,
+      "vertices": 713,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "e284c657f0186c7370abb9e3a8f788e9a50ee0011214e134b38048ae54ca9a88",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/courier-a.glb"
+      }
+    },
+    {
+      "file": "people/elder-man-a.glb",
+      "sha256": "8c7d441bf7da00b629293f8f4094359e977a80224a95a6e467c5c7de68f2a379",
+      "bytes": 135332,
+      "category": "citizen",
+      "triangles": 1048,
+      "vertices": 670,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "cd9ff9875bb84b49593397bcd6655d6cff8de7ded68ed705dd3b2bf88b2e6485",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193630,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7107282789164844,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.0000018720645851647555,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.399999976158142,
+          "loop": true,
+          "samples": 169,
+          "vertexSamples": 113230,
+          "minSkinnedY": -0.00003388071461183881,
+          "maxSkinnedY": 1.6770538039178469,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.17984818270268524,
+          "velocitySeamNode": "LeftFoot",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193630,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7638314498785705,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.1373987603378347,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 322270,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7119180635749494,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193630,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7138031526442405,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.04107701447194625,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 64990,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.6472510481720246,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/elder-man-b.glb",
+      "sha256": "a1bbec7eeb443aa949d105b5284a18c5d14b7b2a1de1b63cd5567b975f356baa",
+      "bytes": 135332,
+      "category": "citizen",
+      "triangles": 1048,
+      "vertices": 670,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "cd9ff9875bb84b49593397bcd6655d6cff8de7ded68ed705dd3b2bf88b2e6485",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/elder-man-a.glb"
+      }
+    },
+    {
+      "file": "people/elder-man-c.glb",
+      "sha256": "20b4440d67809d2ab1f760abb64d8504cae4fa66592ab57e6c39c13cfabfd66c",
+      "bytes": 135332,
+      "category": "citizen",
+      "triangles": 1048,
+      "vertices": 670,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "cd9ff9875bb84b49593397bcd6655d6cff8de7ded68ed705dd3b2bf88b2e6485",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/elder-man-a.glb"
+      }
+    },
+    {
+      "file": "people/elder-woman-a.glb",
+      "sha256": "ba50b8af4ab7dcdd00bdcf79b4af9c3c025796953cc76a5fccc2af6d34dae720",
+      "bytes": 136404,
+      "category": "citizen",
+      "triangles": 1087,
+      "vertices": 693,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "54a896a8f9057cb8a71f98feb50a93e8e3a0655d7d1adcb3ef90aea4213ad3ae",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 200277,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7332793824990411,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.0000018720645851647555,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.399999976158142,
+          "loop": true,
+          "samples": 169,
+          "vertexSamples": 117117,
+          "minSkinnedY": -0.00003388071461183881,
+          "maxSkinnedY": 1.6995179671687142,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.17984818270268524,
+          "velocitySeamNode": "LeftFoot",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 200277,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7638314498785705,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.1373987603378347,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 333333,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7339803987655589,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 200277,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.734979893495045,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.04107701447194625,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 67221,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.6695003562550275,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/elder-woman-b.glb",
+      "sha256": "922d26fffb815a5fc74b5692b976590f6d7d9b3214708c72f74730ce8e63864d",
+      "bytes": 136404,
+      "category": "citizen",
+      "triangles": 1087,
+      "vertices": 693,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "54a896a8f9057cb8a71f98feb50a93e8e3a0655d7d1adcb3ef90aea4213ad3ae",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/elder-woman-a.glb"
+      }
+    },
+    {
+      "file": "people/elder-woman-c.glb",
+      "sha256": "8d82aa5ecc93156fed64c7f35eca32f1ab6f398fd009fad22bf1a0f8335c2dec",
+      "bytes": 136404,
+      "category": "citizen",
+      "triangles": 1087,
+      "vertices": 693,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "54a896a8f9057cb8a71f98feb50a93e8e3a0655d7d1adcb3ef90aea4213ad3ae",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/elder-woman-a.glb"
+      }
+    },
+    {
+      "file": "people/firefighter-a.glb",
+      "sha256": "56a9c852979ee1eb48a2678fabf08900c9db78450de592e0b8337335e15d960c",
+      "bytes": 135960,
+      "category": "citizen",
+      "triangles": 1165,
+      "vertices": 705,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "159eb370a1719c3d94c56228945ccce84bee0b2c335fa90c1a1f6603cc3cfcf5",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 203745,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8050440781406891,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 102225,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.7714802600516237,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 203745,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8065537208880176,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 339105,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.8060048779507565,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 203745,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.807284826012162,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 68385,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.741755559909432,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/firefighter-b.glb",
+      "sha256": "b50cd3fbc84a55a160855a95b954b1abc89e3438cf68b83ea33e53d94a82285b",
+      "bytes": 135960,
+      "category": "citizen",
+      "triangles": 1165,
+      "vertices": 705,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "159eb370a1719c3d94c56228945ccce84bee0b2c335fa90c1a1f6603cc3cfcf5",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/firefighter-a.glb"
+      }
+    },
+    {
+      "file": "people/firefighter-c.glb",
+      "sha256": "4a2b3c081a04dead7b738b9847a0a6e8cccde8d40e2e0d5d7c3598c84f86c7e8",
+      "bytes": 135960,
+      "category": "citizen",
+      "triangles": 1165,
+      "vertices": 705,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "159eb370a1719c3d94c56228945ccce84bee0b2c335fa90c1a1f6603cc3cfcf5",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/firefighter-a.glb"
+      }
+    },
+    {
+      "file": "people/gardener-a.glb",
+      "sha256": "fffe50245782e8f522eb2d3c2368f826cab2c60507920c1a0995f53937a3bdd3",
+      "bytes": 135900,
+      "category": "citizen",
+      "triangles": 1133,
+      "vertices": 709,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "19f1314c951b418cb5ce2c948fb3194e2464d86679a109f4e9f576aec6b1dc85",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 204901,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8050440781406891,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 102805,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.7714802600516237,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 204901,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8065537208880176,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 341029,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.8060048779507565,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 204901,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.807284826012162,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 68773,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.741755559909432,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/gardener-b.glb",
+      "sha256": "dbd4385b86cf621a421d6fb64d3ed6b62e8a31df6de490a80767bc39ad43553d",
+      "bytes": 135900,
+      "category": "citizen",
+      "triangles": 1133,
+      "vertices": 709,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "19f1314c951b418cb5ce2c948fb3194e2464d86679a109f4e9f576aec6b1dc85",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/gardener-a.glb"
+      }
+    },
+    {
+      "file": "people/gardener-c.glb",
+      "sha256": "97bf0d2ad272f86c40b77623b529ccfda1f1c7aa24a50b2c778b388f0483c689",
+      "bytes": 135900,
+      "category": "citizen",
+      "triangles": 1133,
+      "vertices": 709,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "19f1314c951b418cb5ce2c948fb3194e2464d86679a109f4e9f576aec6b1dc85",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/gardener-a.glb"
+      }
+    },
+    {
+      "file": "people/girl-a.glb",
+      "sha256": "4f5d47636cc1ab8a4db80e97b5283ffbec3c00867201cc6fe6ef9208cf94e83f",
+      "bytes": 134280,
+      "category": "citizen",
+      "triangles": 1093,
+      "vertices": 671,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "26749e681bebf4e08ef1fca2a21da2919133c4cc3ab867cfaab516671a311105",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193919,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.744033967454227,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 97295,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.710318231748445,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193919,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7637769637984948,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 322751,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.7447918930870823,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 193919,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.7457966142917338,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 65087,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.680354063975207,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/girl-b.glb",
+      "sha256": "c58a89c05302b8bc0f58f488c995a69f7c0b3f74467f70116e3e748c99b2bab8",
+      "bytes": 134280,
+      "category": "citizen",
+      "triangles": 1093,
+      "vertices": 671,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "26749e681bebf4e08ef1fca2a21da2919133c4cc3ab867cfaab516671a311105",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/girl-a.glb"
+      }
+    },
+    {
+      "file": "people/girl-c.glb",
+      "sha256": "36e0d263312c61d87f80893d5f319667a00a4f5c89983b63ada92709d6db1da7",
+      "bytes": 134280,
+      "category": "citizen",
+      "triangles": 1093,
+      "vertices": 671,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "26749e681bebf4e08ef1fca2a21da2919133c4cc3ab867cfaab516671a311105",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/girl-a.glb"
+      }
+    },
+    {
+      "file": "people/maintenance-a.glb",
+      "sha256": "2419d0bc573714b284dd4f5b086ebabda13dc4a6cd827e2a6081c2e999707f3f",
+      "bytes": 137784,
+      "category": "citizen",
+      "triangles": 1157,
+      "vertices": 757,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "8c3bd7384ffc4d119486193ea980b7829bbab587e8161a42f4fa4a78ae463825",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 218773,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8050440781406891,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 109765,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.7714802600516237,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 218773,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8065537208880176,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 364117,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.8060048779507565,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 218773,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.807284826012162,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 73429,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.741755559909432,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/maintenance-b.glb",
+      "sha256": "8753fff1e0b78d1f29a0f88de15677b70e01f4660f1c7c9c417cc5da2904d7ce",
+      "bytes": 137784,
+      "category": "citizen",
+      "triangles": 1157,
+      "vertices": 757,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "8c3bd7384ffc4d119486193ea980b7829bbab587e8161a42f4fa4a78ae463825",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/maintenance-a.glb"
+      }
+    },
+    {
+      "file": "people/maintenance-c.glb",
+      "sha256": "7c8a25ad0d6a98611db66aa602b28fa10c22564472110d983aa2a94bbec38777",
+      "bytes": 137784,
+      "category": "citizen",
+      "triangles": 1157,
+      "vertices": 757,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "8c3bd7384ffc4d119486193ea980b7829bbab587e8161a42f4fa4a78ae463825",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/maintenance-a.glb"
+      }
+    },
+    {
+      "file": "people/police-a.glb",
+      "sha256": "7484456df7773f38a68be703cd216bd00ead5c819ddf408457b90bbd17cedbc9",
+      "bytes": 137676,
+      "category": "citizen",
+      "triangles": 1177,
+      "vertices": 751,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "c2f31ac1a5e2dbb93b11a8bca2ac5856582482ca5de86de1d84de1a5b7dbc727",
+      "motions": [
+        {
+          "name": "idle",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 217039,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8050440781406891,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 8.322186718799647e-7,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "walk",
+          "duration": 1.2000000476837158,
+          "loop": true,
+          "samples": 145,
+          "vertexSamples": 108895,
+          "minSkinnedY": -0.0000734993499757108,
+          "maxSkinnedY": 1.7714802600516237,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 5.16191365590357e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.30127789305516894,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "wave",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 217039,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.8065537208880176,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.13739868126343918,
+          "velocitySeamNode": "RightHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "sit",
+          "duration": 4,
+          "loop": true,
+          "samples": 481,
+          "vertexSamples": 361231,
+          "minSkinnedY": -0.00035065327462040924,
+          "maxSkinnedY": 1.8060048779507565,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.045454855696803714,
+          "velocitySeamNode": "LeftLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "talk",
+          "duration": 2.4000000953674316,
+          "loop": true,
+          "samples": 289,
+          "vertexSamples": 217039,
+          "minSkinnedY": 2.1012397112102538e-8,
+          "maxSkinnedY": 1.807284826012162,
+          "loopMaxPositionMeters": 0,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.041075739024027516,
+          "velocitySeamNode": "LeftHand",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        },
+        {
+          "name": "run",
+          "duration": 0.800000011920929,
+          "loop": true,
+          "samples": 97,
+          "vertexSamples": 72847,
+          "minSkinnedY": 0.0015573281176921026,
+          "maxSkinnedY": 1.741755559909432,
+          "loopMaxPositionMeters": 1.6886513819990118e-8,
+          "loopMaxRotationRadians": 2.9802322387695312e-8,
+          "loopVelocityDifferenceMetersPerSecond": 0.21461340069089688,
+          "velocitySeamNode": "RightLeg",
+          "floorPass": true,
+          "loopPass": true,
+          "velocityPass": true
+        }
+      ]
+    },
+    {
+      "file": "people/police-b.glb",
+      "sha256": "448198a893da19b7f5b59504d9210640f558e8c1f4133f020a3f1be22775f9c4",
+      "bytes": 137676,
+      "category": "citizen",
+      "triangles": 1177,
+      "vertices": 751,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "c2f31ac1a5e2dbb93b11a8bca2ac5856582482ca5de86de1d84de1a5b7dbc727",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/police-a.glb"
+      }
+    },
+    {
+      "file": "people/police-c.glb",
+      "sha256": "4bd098835cab75362a4640e246e12eb4edd007134d96177659ca39e68a208358",
+      "bytes": 137676,
+      "category": "citizen",
+      "triangles": 1177,
+      "vertices": 751,
+      "skinJoints": [
+        18
+      ],
+      "clips": [
+        "idle",
+        "walk",
+        "wave",
+        "sit",
+        "talk",
+        "run"
+      ],
+      "motionSignature": "c2f31ac1a5e2dbb93b11a8bca2ac5856582482ca5de86de1d84de1a5b7dbc727",
+      "motions": {
+        "identicalMotionAndGeometryTo": "people/police-a.glb"
+      }
+    }
+  ],
+  "negativeControls": {
+    "missingClipDetected": true,
+    "brokenLoopDetected": true,
+    "floorPenetrationDetected": true
+  },
+  "failures": [],
+  "passed": true
+}

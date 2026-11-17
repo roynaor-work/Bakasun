@@ -1,0 +1,25 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "repositoryFilesModified": false,
+  "fullSuite": {
+    "command": "npm test",
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "durationMs": 767726.78,
+    "failure": "tests/workout-royiki.test.mjs could not launch the missing Playwright bundled Chromium; its already-open HTTP server prevented worker exit. Only that stuck worker was terminated after inspecting its command line."
+  },
+  "rerun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/system-playwright.mjs node --test tests/workout-royiki.test.mjs",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 24274.819002,
+    "browser": "/usr/bin/chromium",
+    "temporaryAdapter": "Adds installed Chromium executablePath and container WebGL flags to Playwright launch; repository test code unchanged.",
+    "testFileSha256": "1f42bf3b84fd00a030f71a78798f6e8bd18e8f8089385ce0edd4386f07263f9f"
+  },
+  "conclusion": "The only failure in the full run was browser setup. The affected test file passed in full with the installed system browser; the entire suite was not run a second time."
+}

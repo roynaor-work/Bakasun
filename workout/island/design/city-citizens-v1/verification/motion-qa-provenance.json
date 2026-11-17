@@ -1,0 +1,71 @@
+{
+  "upstreamRepository": "https://github.com/roynaor-work/Bakasun",
+  "upstreamBranch": "codex/motion-qa-v1",
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamEntryPoint": "workout/island/design/motion-qa-v1/run.mjs",
+  "upstreamFiles": [
+    {
+      "file": "workout/island/design/motion-qa-v1/run.mjs",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/report.mjs",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "upstreamUnmodified": true,
+  "inputAdapter": {
+    "file": "source/qa-sources.mjs",
+    "sha256": "8297f35b854982bc3d0eb901c28f8edcfc9a31dd21b2b649bc2ab91a9d9090f1"
+  },
+  "loader": {
+    "file": "source/qa-loader.mjs",
+    "sha256": "e5cd2578250f418bcabc2126ddacb742cc3b0f0eaefa38526742e54ed2ace3b0"
+  },
+  "vendor": {
+    "file": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+    "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+    "license": "MIT; temporary verification dependency"
+  },
+  "assetsGitCommit": "working-tree",
+  "scoring": "all original upstream metric definitions, thresholds and weights unchanged",
+  "scope": "216 clips from36 citizen GLBs, including all3 palettes per identity;120Hz plus exact key/support/event times",
+  "limitations": [
+    "The canonical humanoid scoring tool does not support animal anatomy. All6 animals instead receive independent decoded GLB mesh-floor and loop audits.",
+    "In-place locomotion uses the documented simulation-owned reference speed; the game runtime is not executed.",
+    "Scores are reproducible diagnostics, not a human perceptual evaluation."
+  ],
+  "minimumRequiredExclusive": 88,
+  "minimumObserved": 92.5,
+  "coverage": 1,
+  "insufficientDataMetrics": 0,
+  "negativeControls": {
+    "footSlipDetected": true,
+    "floorPenetrationDetected": true,
+    "posePopDetected": true,
+    "injectedMeters": {
+      "supportFootDrift": 0.3,
+      "floorDepth": 0.2,
+      "oneFrameHandJump": 0.4
+    },
+    "scope": "cloned first native GLB samples; unchanged upstream analyzeClip; delivered bytes remain untouched"
+  },
+  "passed": true,
+  "cliStdout": "{\"libraries\":1,\"clips\":216,\"elapsedSeconds\":25.44,\"report\":\"/tmp/city-citizens-upstream-4XBwvD/output/report.html\"}"
+}

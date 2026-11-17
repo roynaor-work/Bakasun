@@ -1,0 +1,4577 @@
+{
+  "schema": "city-citizens-v1",
+  "version": 1,
+  "title": "תושבי העיר שלי",
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390
+  },
+  "license": "CC0-1.0",
+  "units": "meters",
+  "axes": {
+    "+Y": "up",
+    "+Z": "forward",
+    "+X": "anatomicalLeft"
+  },
+  "skeleton": "skeleton.json",
+  "canonicalSkeletonSource": "workout/island/design/motion2/soccer.json",
+  "fps": 30,
+  "budgetBytes": 6000000,
+  "people": [
+    {
+      "id": "adult-man",
+      "name": "adult-man",
+      "labelHe": "תושב",
+      "role": "resident",
+      "age": "adult",
+      "scale": 1.0,
+      "variants": [
+        {
+          "path": "people/adult-man-a.glb",
+          "file": "people/adult-man-a.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132420,
+          "sha256": "eb02cafe070c58463b9c140782d348bf460a6fb6550a5f0762c076be977c798f",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.736,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24489,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/adult-man-b.glb",
+          "file": "people/adult-man-b.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132420,
+          "sha256": "30fb5859c2dc1d12e4d66c7964cc39682b627b621f4cd36314403dd61e041dfc",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.736,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24489,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/adult-man-c.glb",
+          "file": "people/adult-man-c.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132420,
+          "sha256": "ee60e632eea89bd881d248717639d86723ddb8d6173a4a404c1bd9ba4ba39acd",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.736,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24489,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1021,
+        "vertices": 631,
+        "hairStyle": "sidepart",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "adult-woman",
+      "name": "adult-woman",
+      "labelHe": "תושבת",
+      "role": "resident",
+      "age": "adult",
+      "scale": 0.96,
+      "variants": [
+        {
+          "path": "people/adult-woman-a.glb",
+          "file": "people/adult-woman-a.glb",
+          "triangles": 1113,
+          "vertices": 665,
+          "byteLength": 134204,
+          "sha256": "33d07ebaca4dbf47de9be133f56c2921422f8aa434cfc6d5e8fad68668e73acf",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6665599999999998,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/adult-woman-b.glb",
+          "file": "people/adult-woman-b.glb",
+          "triangles": 1113,
+          "vertices": 665,
+          "byteLength": 134204,
+          "sha256": "427c04dbb90f53501c57b0644b6f21464771c1d928516a2c85592265ef76c510",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6665599999999998,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/adult-woman-c.glb",
+          "file": "people/adult-woman-c.glb",
+          "triangles": 1113,
+          "vertices": 665,
+          "byteLength": 134204,
+          "sha256": "87164015d143aa000610b8a7ec72494c20c54f4798d63fe9b063014cbb00a7df",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6665599999999998,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1113,
+        "vertices": 665,
+        "hairStyle": "bob",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "boy",
+      "name": "boy",
+      "labelHe": "ילד",
+      "role": "child",
+      "age": "child",
+      "scale": 0.76,
+      "variants": [
+        {
+          "path": "people/boy-a.glb",
+          "file": "people/boy-a.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132400,
+          "sha256": "adbf96b064d40a4fdf2c3e2000ad65799353f458ae40f417c975e0e0bf97a6f4",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.3292400000000002,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/boy-b.glb",
+          "file": "people/boy-b.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132400,
+          "sha256": "473dc1261895cb02c7cfe3204a390d98f27e453b160ad51431f85dc7bffcd94d",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.3292400000000002,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/boy-c.glb",
+          "file": "people/boy-c.glb",
+          "triangles": 1021,
+          "vertices": 631,
+          "byteLength": 132400,
+          "sha256": "e784c3bfb18c3dc5714c5496efd783fad8dc67e2513f542f5b4c59b88a5a9837",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.3292400000000002,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1021,
+        "vertices": 631,
+        "hairStyle": "crop",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "cleaner",
+      "name": "cleaner",
+      "labelHe": "עובדת ניקיון",
+      "role": "city-worker",
+      "age": "adult",
+      "scale": 0.95,
+      "variants": [
+        {
+          "path": "people/cleaner-a.glb",
+          "file": "people/cleaner-a.glb",
+          "triangles": 1153,
+          "vertices": 759,
+          "byteLength": 137820,
+          "sha256": "c6b8ac5039c392ce4385023e2c55ef1e86bfc0cf57974b00f88e804f430e07d6",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6492,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.111
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/cleaner-b.glb",
+          "file": "people/cleaner-b.glb",
+          "triangles": 1153,
+          "vertices": 759,
+          "byteLength": 137820,
+          "sha256": "3c97be0565f8dace43cdf12d345755ac2794b52cef21b59e8a2ad9f3aa3fe7e4",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6492,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.111
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/cleaner-c.glb",
+          "file": "people/cleaner-c.glb",
+          "triangles": 1153,
+          "vertices": 759,
+          "byteLength": 137820,
+          "sha256": "5f48bc8a7b24544dca236a8d45f7472aad5f756238910008f01f5f1eff29739b",
+          "heightMeters": 1.736,
+          "runtimeHeightMeters": 1.6492,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.111
+            ],
+            "max": [
+              0.24048,
+              1.736,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1153,
+        "vertices": 759,
+        "hairStyle": "curly",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "courier",
+      "name": "courier",
+      "labelHe": "שליחה עירונית",
+      "role": "city-worker",
+      "age": "adult",
+      "scale": 0.97,
+      "variants": [
+        {
+          "path": "people/courier-a.glb",
+          "file": "people/courier-a.glb",
+          "triangles": 1135,
+          "vertices": 713,
+          "byteLength": 136052,
+          "sha256": "78e6755d50569c61071f1475271cdbc4c35c8256956a3d2315977431d7358b67",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7557,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.164
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/courier-b.glb",
+          "file": "people/courier-b.glb",
+          "triangles": 1135,
+          "vertices": 713,
+          "byteLength": 136052,
+          "sha256": "15b20eebdbb7fa643c01c9d860b91bdff292faab703e9551fbab95d15c216eae",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7557,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.164
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/courier-c.glb",
+          "file": "people/courier-c.glb",
+          "triangles": 1135,
+          "vertices": 713,
+          "byteLength": 136052,
+          "sha256": "736fba9b52d66f2107a106981758063daf796bc72d16f92a709217a392a2ad19",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7557,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.164
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1135,
+        "vertices": 713,
+        "hairStyle": "cap",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "elder-man",
+      "name": "elder-man",
+      "labelHe": "תושב ותיק",
+      "role": "resident",
+      "age": "elder",
+      "scale": 0.96,
+      "variants": [
+        {
+          "path": "people/elder-man-a.glb",
+          "file": "people/elder-man-a.glb",
+          "triangles": 1048,
+          "vertices": 670,
+          "byteLength": 135332,
+          "sha256": "8c7d441bf7da00b629293f8f4094359e977a80224a95a6e467c5c7de68f2a379",
+          "heightMeters": 1.7156486,
+          "runtimeHeightMeters": 1.6470226559999999,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.243,
+              1.7156486,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/elder-man-b.glb",
+          "file": "people/elder-man-b.glb",
+          "triangles": 1048,
+          "vertices": 670,
+          "byteLength": 135332,
+          "sha256": "a1bbec7eeb443aa949d105b5284a18c5d14b7b2a1de1b63cd5567b975f356baa",
+          "heightMeters": 1.7156486,
+          "runtimeHeightMeters": 1.6470226559999999,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.243,
+              1.7156486,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/elder-man-c.glb",
+          "file": "people/elder-man-c.glb",
+          "triangles": 1048,
+          "vertices": 670,
+          "byteLength": 135332,
+          "sha256": "20b4440d67809d2ab1f760abb64d8504cae4fa66592ab57e6c39c13cfabfd66c",
+          "heightMeters": 1.7156486,
+          "runtimeHeightMeters": 1.6470226559999999,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.104
+            ],
+            "max": [
+              0.243,
+              1.7156486,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 43,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.31250000000000006,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.28,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.8666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.7,
+              "end": 1.4,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.31250000000000006,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1048,
+        "vertices": 670,
+        "hairStyle": "bald",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "elder-woman",
+      "name": "elder-woman",
+      "labelHe": "תושבת ותיקה",
+      "role": "resident",
+      "age": "elder",
+      "scale": 0.92,
+      "variants": [
+        {
+          "path": "people/elder-woman-a.glb",
+          "file": "people/elder-woman-a.glb",
+          "triangles": 1087,
+          "vertices": 693,
+          "byteLength": 136404,
+          "sha256": "ba50b8af4ab7dcdd00bdcf79b4af9c3c025796953cc76a5fccc2af6d34dae720",
+          "heightMeters": 1.738235,
+          "runtimeHeightMeters": 1.5991762,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.149
+            ],
+            "max": [
+              0.24048,
+              1.738235,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/elder-woman-b.glb",
+          "file": "people/elder-woman-b.glb",
+          "triangles": 1087,
+          "vertices": 693,
+          "byteLength": 136404,
+          "sha256": "922d26fffb815a5fc74b5692b976590f6d7d9b3214708c72f74730ce8e63864d",
+          "heightMeters": 1.738235,
+          "runtimeHeightMeters": 1.5991762,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.149
+            ],
+            "max": [
+              0.24048,
+              1.738235,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/elder-woman-c.glb",
+          "file": "people/elder-woman-c.glb",
+          "triangles": 1087,
+          "vertices": 693,
+          "byteLength": 136404,
+          "sha256": "8d82aa5ecc93156fed64c7f35eca32f1ab6f398fd009fad22bf1a0f8335c2dec",
+          "heightMeters": 1.738235,
+          "runtimeHeightMeters": 1.5991762,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.149
+            ],
+            "max": [
+              0.24048,
+              1.738235,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 43,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.31250000000000006,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.28,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.8666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.7,
+              "end": 1.4,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.31250000000000006,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1087,
+        "vertices": 693,
+        "hairStyle": "bun",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "firefighter",
+      "name": "firefighter",
+      "labelHe": "כבאי",
+      "role": "firefighter",
+      "age": "adult",
+      "scale": 1.03,
+      "variants": [
+        {
+          "path": "people/firefighter-a.glb",
+          "file": "people/firefighter-a.glb",
+          "triangles": 1165,
+          "vertices": 705,
+          "byteLength": 135960,
+          "sha256": "56a9c852979ee1eb48a2678fabf08900c9db78450de592e0b8337335e15d960c",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8643,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/firefighter-b.glb",
+          "file": "people/firefighter-b.glb",
+          "triangles": 1165,
+          "vertices": 705,
+          "byteLength": 135960,
+          "sha256": "b50cd3fbc84a55a160855a95b954b1abc89e3438cf68b83ea33e53d94a82285b",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8643,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/firefighter-c.glb",
+          "file": "people/firefighter-c.glb",
+          "triangles": 1165,
+          "vertices": 705,
+          "byteLength": 135960,
+          "sha256": "4a2b3c081a04dead7b738b9847a0a6e8cccde8d40e2e0d5d7c3598c84f86c7e8",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8643,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1165,
+        "vertices": 705,
+        "hairStyle": "helmet",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "gardener",
+      "name": "gardener",
+      "labelHe": "גנן",
+      "role": "city-worker",
+      "age": "adult",
+      "scale": 0.99,
+      "variants": [
+        {
+          "path": "people/gardener-a.glb",
+          "file": "people/gardener-a.glb",
+          "triangles": 1133,
+          "vertices": 709,
+          "byteLength": 135900,
+          "sha256": "fffe50245782e8f522eb2d3c2368f826cab2c60507920c1a0995f53937a3bdd3",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7919,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.243,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/gardener-b.glb",
+          "file": "people/gardener-b.glb",
+          "triangles": 1133,
+          "vertices": 709,
+          "byteLength": 135900,
+          "sha256": "dbd4385b86cf621a421d6fb64d3ed6b62e8a31df6de490a80767bc39ad43553d",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7919,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.243,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/gardener-c.glb",
+          "file": "people/gardener-c.glb",
+          "triangles": 1133,
+          "vertices": 709,
+          "byteLength": 135900,
+          "sha256": "97bf0d2ad272f86c40b77623b529ccfda1f1c7aa24a50b2c778b388f0483c689",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7919,
+          "bounds": {
+            "min": [
+              -0.243,
+              0.0,
+              -0.12705
+            ],
+            "max": [
+              0.243,
+              1.81,
+              0.14305
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1133,
+        "vertices": 709,
+        "hairStyle": "hat",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "girl",
+      "name": "girl",
+      "labelHe": "ילדה",
+      "role": "child",
+      "age": "child",
+      "scale": 0.74,
+      "variants": [
+        {
+          "path": "people/girl-a.glb",
+          "file": "people/girl-a.glb",
+          "triangles": 1093,
+          "vertices": 671,
+          "byteLength": 134280,
+          "sha256": "4f5d47636cc1ab8a4db80e97b5283ffbec3c00867201cc6fe6ef9208cf94e83f",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.29426,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.1730429
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/girl-b.glb",
+          "file": "people/girl-b.glb",
+          "triangles": 1093,
+          "vertices": 671,
+          "byteLength": 134280,
+          "sha256": "c58a89c05302b8bc0f58f488c995a69f7c0b3f74467f70116e3e748c99b2bab8",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.29426,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.1730429
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/girl-c.glb",
+          "file": "people/girl-c.glb",
+          "triangles": 1093,
+          "vertices": 671,
+          "byteLength": 134280,
+          "sha256": "36e0d263312c61d87f80893d5f319667a00a4f5c89983b63ada92709d6db1da7",
+          "heightMeters": 1.749,
+          "runtimeHeightMeters": 1.29426,
+          "bounds": {
+            "min": [
+              -0.2367,
+              0.0,
+              -0.1730429
+            ],
+            "max": [
+              0.2367,
+              1.749,
+              0.148
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1093,
+        "vertices": 671,
+        "hairStyle": "ponytail",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "maintenance",
+      "name": "maintenance",
+      "labelHe": "עובד תחזוקה",
+      "role": "city-worker",
+      "age": "adult",
+      "scale": 1.02,
+      "variants": [
+        {
+          "path": "people/maintenance-a.glb",
+          "file": "people/maintenance-a.glb",
+          "triangles": 1157,
+          "vertices": 757,
+          "byteLength": 137784,
+          "sha256": "2419d0bc573714b284dd4f5b086ebabda13dc4a6cd827e2a6081c2e999707f3f",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8462,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/maintenance-b.glb",
+          "file": "people/maintenance-b.glb",
+          "triangles": 1157,
+          "vertices": 757,
+          "byteLength": 137784,
+          "sha256": "8753fff1e0b78d1f29a0f88de15677b70e01f4660f1c7c9c417cc5da2904d7ce",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8462,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/maintenance-c.glb",
+          "file": "people/maintenance-c.glb",
+          "triangles": 1157,
+          "vertices": 757,
+          "byteLength": 137784,
+          "sha256": "7c8a25ad0d6a98611db66aa602b28fa10c22564472110d983aa2a94bbec38777",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.8462,
+          "bounds": {
+            "min": [
+              -0.24489,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24489,
+              1.81,
+              0.14
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1157,
+        "vertices": 757,
+        "hairStyle": "hardhat",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    },
+    {
+      "id": "police",
+      "name": "police",
+      "labelHe": "שוטרת",
+      "role": "police",
+      "age": "adult",
+      "scale": 0.98,
+      "variants": [
+        {
+          "path": "people/police-a.glb",
+          "file": "people/police-a.glb",
+          "triangles": 1177,
+          "vertices": 751,
+          "byteLength": 137676,
+          "sha256": "7484456df7773f38a68be703cd216bd00ead5c819ddf408457b90bbd17cedbc9",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7738,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "a",
+          "labelHe": "מקור"
+        },
+        {
+          "path": "people/police-b.glb",
+          "file": "people/police-b.glb",
+          "triangles": 1177,
+          "vertices": 751,
+          "byteLength": 137676,
+          "sha256": "448198a893da19b7f5b59504d9210640f558e8c1f4133f020a3f1be22775f9c4",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7738,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "b",
+          "labelHe": "חלופה חמה"
+        },
+        {
+          "path": "people/police-c.glb",
+          "file": "people/police-c.glb",
+          "triangles": 1177,
+          "vertices": 751,
+          "byteLength": 137676,
+          "sha256": "4bd098835cab75362a4640e246e12eb4edd007134d96177659ca39e68a208358",
+          "heightMeters": 1.81,
+          "runtimeHeightMeters": 1.7738,
+          "bounds": {
+            "min": [
+              -0.24048,
+              0.0,
+              -0.1080289
+            ],
+            "max": [
+              0.24048,
+              1.81,
+              0.174
+            ]
+          },
+          "id": "c",
+          "labelHe": "חלופה קרירה"
+        }
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "labelHe": "עמידה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "labelHe": "הליכה",
+          "duration": 1.2,
+          "fps": 30,
+          "loop": true,
+          "samples": 37,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 0.44270833333333337,
+          "dutyFactor": 0.64,
+          "strideMeters": 0.34,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.0,
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.7666666666666667,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.0,
+              "end": 0.16666666666666669,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.6,
+              "end": 1.2,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 0.44270833333333337,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "name": "wave",
+          "labelHe": "הנפת יד",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "sit",
+          "labelHe": "ישיבה",
+          "duration": 4.0,
+          "fps": 30,
+          "loop": true,
+          "samples": 121,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "seatHeight": 0.395,
+          "seatDepth": -0.41,
+          "support": "seat-and-feet",
+          "feetZ": 0.0,
+          "seatedHold": [
+            0.9,
+            3.1
+          ],
+          "includesTransitions": true,
+          "locomotion": false
+        },
+        {
+          "name": "talk",
+          "labelHe": "שיחה",
+          "duration": 2.4,
+          "fps": 30,
+          "loop": true,
+          "samples": 73,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "support": "both-feet",
+          "locomotion": false
+        },
+        {
+          "name": "run",
+          "labelHe": "ריצה",
+          "duration": 0.8,
+          "fps": 30,
+          "loop": true,
+          "samples": 25,
+          "rootMotion": false,
+          "authored": true,
+          "capturedMocap": false,
+          "speed": 1.726190476190476,
+          "dutyFactor": 0.42,
+          "strideMeters": 0.58,
+          "virtualTravelAxis": "+Z",
+          "interpolationFloorClearance": 0.003,
+          "interpolation": "CUBICSPLINE",
+          "supports": [
+            {
+              "bone": "LeftFoot",
+              "start": 0.0,
+              "end": 0.3333333333333333,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            },
+            {
+              "bone": "RightFoot",
+              "start": 0.4,
+              "end": 0.7333333333333334,
+              "local": [
+                0,
+                -0.08,
+                0
+              ]
+            }
+          ],
+          "locomotion": true,
+          "expectedRootSpeed": 1.726190476190476,
+          "soleLocal": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "metadata": {
+        "license": "CC0-1.0",
+        "provenance": "Original ring-loft surfaces, authored for city-citizens-v1; no imported geometry or textures.",
+        "triangles": 1177,
+        "vertices": 751,
+        "hairStyle": "policecap",
+        "soleY": 0,
+        "footJointY": 0.08,
+        "canonical18": true,
+        "paletteColorSpace": "linear-sRGB",
+        "symbols": false,
+        "brands": false
+      }
+    }
+  ],
+  "animals": [
+    {
+      "id": "bird",
+      "name": "Bird",
+      "labelHe": "ציפור",
+      "path": "animals/bird.glb",
+      "file": "animals/bird.glb",
+      "triangles": 576,
+      "vertices": 330,
+      "byteLength": 21880,
+      "sha256": "7172baf1ded435cd34487c8fe47188ad9ea08662f265c1d3df7f2109b9292eb6",
+      "heightMeters": 0.27999999999999997,
+      "runtimeHeightMeters": 0.27999999999999997,
+      "bounds": {
+        "min": [
+          -0.215,
+          0.006,
+          -0.172
+        ],
+        "max": [
+          0.215,
+          0.286,
+          0.151
+        ]
+      },
+      "animations": [
+        {
+          "name": "fly",
+          "duration": 0.8,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "Original geometry and choreography authored in source/animals.py",
+        "habitat": "air",
+        "nominalHeightMeters": 0.286,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 576
+      }
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly",
+      "labelHe": "פרפר",
+      "path": "animals/butterfly.glb",
+      "file": "animals/butterfly.glb",
+      "triangles": 326,
+      "vertices": 191,
+      "byteLength": 13584,
+      "sha256": "f374920fa38151573eb26ea62420cd63a5ecf6e120a5cd2c5c93c22141c30fd4",
+      "heightMeters": 0.028500000000000025,
+      "runtimeHeightMeters": 0.028500000000000025,
+      "bounds": {
+        "min": [
+          -0.116,
+          0.23099999999999998,
+          -0.073
+        ],
+        "max": [
+          0.116,
+          0.2595,
+          0.09205909775886582
+        ]
+      },
+      "animations": [
+        {
+          "name": "flutter",
+          "duration": 0.4,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "Original geometry and choreography authored in source/animals.py",
+        "habitat": "air",
+        "nominalWingspanMeters": 0.232,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 326
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "labelHe": "חתול",
+      "path": "animals/cat.glb",
+      "file": "animals/cat.glb",
+      "triangles": 814,
+      "vertices": 513,
+      "byteLength": 44200,
+      "sha256": "f73143950ee2c41d7f50ff2a9b2b51af7b515302aa31db1e6e0454e3d49350d0",
+      "heightMeters": 0.5586202929742724,
+      "runtimeHeightMeters": 0.5586202929742724,
+      "bounds": {
+        "min": [
+          -0.14819999814033508,
+          0.0003797318212598745,
+          -0.30621643149233735
+        ],
+        "max": [
+          0.17572175464818932,
+          0.5590000247955322,
+          0.24300904427834558
+        ]
+      },
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        },
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "fps": 30,
+          "recommendedSpeedMps": 0.08802083333333334,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "workout/island/assets/fire-v24/friends/cat.glb",
+        "sourceLicense": "workout/island/assets/fire-v24/friends/LICENSES.md",
+        "modifications": "Per-surface QEM simplification, city scale, new analytic foot-contact loops; original source animation discarded.",
+        "recommendedSpeedMps": 0.08802083333333334,
+        "scaleFromSource": 0.52,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 814
+      }
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "labelHe": "כלב",
+      "path": "animals/dog.glb",
+      "file": "animals/dog.glb",
+      "triangles": 800,
+      "vertices": 474,
+      "byteLength": 43080,
+      "sha256": "f4d086acbfd79ea634ac65849bddaa64f53c0d73554db95d0200067df1344850",
+      "heightMeters": 0.5762152408927479,
+      "runtimeHeightMeters": 0.5762152408927479,
+      "bounds": {
+        "min": [
+          -0.2084010624540109,
+          0.0004235470314052446,
+          -0.32008596182614885
+        ],
+        "max": [
+          0.21670363411247737,
+          0.5766387879241531,
+          0.30817466354365974
+        ]
+      },
+      "animations": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        },
+        {
+          "name": "trot",
+          "duration": 0.8,
+          "loop": true,
+          "fps": 30,
+          "recommendedSpeedMps": 0.23727272727272722,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "workout/island/assets/fire-v24/friends/dog.glb",
+        "sourceLicense": "workout/island/assets/fire-v24/friends/LICENSES.md",
+        "modifications": "Per-surface QEM simplification, city scale, new analytic foot-contact loops; original source animation discarded.",
+        "recommendedSpeedMps": 0.23727272727272722,
+        "scaleFromSource": 0.58,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 800
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "labelHe": "דג",
+      "path": "animals/fish.glb",
+      "file": "animals/fish.glb",
+      "triangles": 350,
+      "vertices": 199,
+      "byteLength": 16412,
+      "sha256": "948c3651a34d90725d2d3bfb5f9cd3e0286066170eb97854016d9fc9b1e080e9",
+      "heightMeters": 0.15499999999999997,
+      "runtimeHeightMeters": 0.15499999999999997,
+      "bounds": {
+        "min": [
+          -0.09,
+          0.136,
+          -0.178
+        ],
+        "max": [
+          0.09,
+          0.291,
+          0.12
+        ]
+      },
+      "animations": [
+        {
+          "name": "swim",
+          "duration": 1.2,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "Original geometry and choreography authored in source/animals.py",
+        "habitat": "water",
+        "nominalLengthMeters": 0.3,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 350
+      }
+    },
+    {
+      "id": "pigeon",
+      "name": "Pigeon",
+      "labelHe": "יונה",
+      "path": "animals/pigeon.glb",
+      "file": "animals/pigeon.glb",
+      "triangles": 636,
+      "vertices": 362,
+      "byteLength": 27612,
+      "sha256": "11a550fed9079f850df115b72589e36c7f1dc6343b9d0adc9bed71df7b9dba8e",
+      "heightMeters": 0.27999999999999997,
+      "runtimeHeightMeters": 0.27999999999999997,
+      "bounds": {
+        "min": [
+          -0.215,
+          0.006,
+          -0.172
+        ],
+        "max": [
+          0.215,
+          0.286,
+          0.165
+        ]
+      },
+      "animations": [
+        {
+          "name": "peck",
+          "duration": 2.4,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        },
+        {
+          "name": "flutter",
+          "duration": 0.8,
+          "loop": true,
+          "fps": 30,
+          "locomotion": false
+        }
+      ],
+      "metadata": {
+        "provenance": "Original geometry and choreography authored in source/animals.py",
+        "habitat": "sidewalk",
+        "nominalHeightMeters": 0.286,
+        "fps": 30,
+        "rootMotion": false,
+        "license": "CC0-1.0",
+        "triangles": 636
+      }
+    }
+  ],
+  "assets": [
+    {
+      "path": "people/adult-man-a.glb",
+      "file": "people/adult-man-a.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132420,
+      "sha256": "eb02cafe070c58463b9c140782d348bf460a6fb6550a5f0762c076be977c798f",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.736,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24489,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-man-a",
+      "labelHe": "מקור",
+      "identity": "adult-man",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 1.0
+    },
+    {
+      "path": "people/adult-man-b.glb",
+      "file": "people/adult-man-b.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132420,
+      "sha256": "30fb5859c2dc1d12e4d66c7964cc39682b627b621f4cd36314403dd61e041dfc",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.736,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24489,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-man-b",
+      "labelHe": "חלופה חמה",
+      "identity": "adult-man",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 1.0
+    },
+    {
+      "path": "people/adult-man-c.glb",
+      "file": "people/adult-man-c.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132420,
+      "sha256": "ee60e632eea89bd881d248717639d86723ddb8d6173a4a404c1bd9ba4ba39acd",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.736,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24489,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-man-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "adult-man",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 1.0
+    },
+    {
+      "path": "people/adult-woman-a.glb",
+      "file": "people/adult-woman-a.glb",
+      "triangles": 1113,
+      "vertices": 665,
+      "byteLength": 134204,
+      "sha256": "33d07ebaca4dbf47de9be133f56c2921422f8aa434cfc6d5e8fad68668e73acf",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6665599999999998,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-woman-a",
+      "labelHe": "מקור",
+      "identity": "adult-woman",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/adult-woman-b.glb",
+      "file": "people/adult-woman-b.glb",
+      "triangles": 1113,
+      "vertices": 665,
+      "byteLength": 134204,
+      "sha256": "427c04dbb90f53501c57b0644b6f21464771c1d928516a2c85592265ef76c510",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6665599999999998,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-woman-b",
+      "labelHe": "חלופה חמה",
+      "identity": "adult-woman",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/adult-woman-c.glb",
+      "file": "people/adult-woman-c.glb",
+      "triangles": 1113,
+      "vertices": 665,
+      "byteLength": 134204,
+      "sha256": "87164015d143aa000610b8a7ec72494c20c54f4798d63fe9b063014cbb00a7df",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6665599999999998,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "adult-woman-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "adult-woman",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/boy-a.glb",
+      "file": "people/boy-a.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132400,
+      "sha256": "adbf96b064d40a4fdf2c3e2000ad65799353f458ae40f417c975e0e0bf97a6f4",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.3292400000000002,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "boy-a",
+      "labelHe": "מקור",
+      "identity": "boy",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.76
+    },
+    {
+      "path": "people/boy-b.glb",
+      "file": "people/boy-b.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132400,
+      "sha256": "473dc1261895cb02c7cfe3204a390d98f27e453b160ad51431f85dc7bffcd94d",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.3292400000000002,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "boy-b",
+      "labelHe": "חלופה חמה",
+      "identity": "boy",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.76
+    },
+    {
+      "path": "people/boy-c.glb",
+      "file": "people/boy-c.glb",
+      "triangles": 1021,
+      "vertices": 631,
+      "byteLength": 132400,
+      "sha256": "e784c3bfb18c3dc5714c5496efd783fad8dc67e2513f542f5b4c59b88a5a9837",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.3292400000000002,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "boy-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "boy",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.76
+    },
+    {
+      "path": "people/cleaner-a.glb",
+      "file": "people/cleaner-a.glb",
+      "triangles": 1153,
+      "vertices": 759,
+      "byteLength": 137820,
+      "sha256": "c6b8ac5039c392ce4385023e2c55ef1e86bfc0cf57974b00f88e804f430e07d6",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6492,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.111
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "cleaner-a",
+      "labelHe": "מקור",
+      "identity": "cleaner",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.95
+    },
+    {
+      "path": "people/cleaner-b.glb",
+      "file": "people/cleaner-b.glb",
+      "triangles": 1153,
+      "vertices": 759,
+      "byteLength": 137820,
+      "sha256": "3c97be0565f8dace43cdf12d345755ac2794b52cef21b59e8a2ad9f3aa3fe7e4",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6492,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.111
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "cleaner-b",
+      "labelHe": "חלופה חמה",
+      "identity": "cleaner",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.95
+    },
+    {
+      "path": "people/cleaner-c.glb",
+      "file": "people/cleaner-c.glb",
+      "triangles": 1153,
+      "vertices": 759,
+      "byteLength": 137820,
+      "sha256": "5f48bc8a7b24544dca236a8d45f7472aad5f756238910008f01f5f1eff29739b",
+      "heightMeters": 1.736,
+      "runtimeHeightMeters": 1.6492,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.111
+        ],
+        "max": [
+          0.24048,
+          1.736,
+          0.14
+        ]
+      },
+      "id": "cleaner-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "cleaner",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.95
+    },
+    {
+      "path": "people/courier-a.glb",
+      "file": "people/courier-a.glb",
+      "triangles": 1135,
+      "vertices": 713,
+      "byteLength": 136052,
+      "sha256": "78e6755d50569c61071f1475271cdbc4c35c8256956a3d2315977431d7358b67",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7557,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.164
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "courier-a",
+      "labelHe": "מקור",
+      "identity": "courier",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.97
+    },
+    {
+      "path": "people/courier-b.glb",
+      "file": "people/courier-b.glb",
+      "triangles": 1135,
+      "vertices": 713,
+      "byteLength": 136052,
+      "sha256": "15b20eebdbb7fa643c01c9d860b91bdff292faab703e9551fbab95d15c216eae",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7557,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.164
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "courier-b",
+      "labelHe": "חלופה חמה",
+      "identity": "courier",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.97
+    },
+    {
+      "path": "people/courier-c.glb",
+      "file": "people/courier-c.glb",
+      "triangles": 1135,
+      "vertices": 713,
+      "byteLength": 136052,
+      "sha256": "736fba9b52d66f2107a106981758063daf796bc72d16f92a709217a392a2ad19",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7557,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.164
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "courier-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "courier",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.97
+    },
+    {
+      "path": "people/elder-man-a.glb",
+      "file": "people/elder-man-a.glb",
+      "triangles": 1048,
+      "vertices": 670,
+      "byteLength": 135332,
+      "sha256": "8c7d441bf7da00b629293f8f4094359e977a80224a95a6e467c5c7de68f2a379",
+      "heightMeters": 1.7156486,
+      "runtimeHeightMeters": 1.6470226559999999,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.243,
+          1.7156486,
+          0.14
+        ]
+      },
+      "id": "elder-man-a",
+      "labelHe": "מקור",
+      "identity": "elder-man",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/elder-man-b.glb",
+      "file": "people/elder-man-b.glb",
+      "triangles": 1048,
+      "vertices": 670,
+      "byteLength": 135332,
+      "sha256": "a1bbec7eeb443aa949d105b5284a18c5d14b7b2a1de1b63cd5567b975f356baa",
+      "heightMeters": 1.7156486,
+      "runtimeHeightMeters": 1.6470226559999999,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.243,
+          1.7156486,
+          0.14
+        ]
+      },
+      "id": "elder-man-b",
+      "labelHe": "חלופה חמה",
+      "identity": "elder-man",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/elder-man-c.glb",
+      "file": "people/elder-man-c.glb",
+      "triangles": 1048,
+      "vertices": 670,
+      "byteLength": 135332,
+      "sha256": "20b4440d67809d2ab1f760abb64d8504cae4fa66592ab57e6c39c13cfabfd66c",
+      "heightMeters": 1.7156486,
+      "runtimeHeightMeters": 1.6470226559999999,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.104
+        ],
+        "max": [
+          0.243,
+          1.7156486,
+          0.14
+        ]
+      },
+      "id": "elder-man-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "elder-man",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.96
+    },
+    {
+      "path": "people/elder-woman-a.glb",
+      "file": "people/elder-woman-a.glb",
+      "triangles": 1087,
+      "vertices": 693,
+      "byteLength": 136404,
+      "sha256": "ba50b8af4ab7dcdd00bdcf79b4af9c3c025796953cc76a5fccc2af6d34dae720",
+      "heightMeters": 1.738235,
+      "runtimeHeightMeters": 1.5991762,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.149
+        ],
+        "max": [
+          0.24048,
+          1.738235,
+          0.14
+        ]
+      },
+      "id": "elder-woman-a",
+      "labelHe": "מקור",
+      "identity": "elder-woman",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.92
+    },
+    {
+      "path": "people/elder-woman-b.glb",
+      "file": "people/elder-woman-b.glb",
+      "triangles": 1087,
+      "vertices": 693,
+      "byteLength": 136404,
+      "sha256": "922d26fffb815a5fc74b5692b976590f6d7d9b3214708c72f74730ce8e63864d",
+      "heightMeters": 1.738235,
+      "runtimeHeightMeters": 1.5991762,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.149
+        ],
+        "max": [
+          0.24048,
+          1.738235,
+          0.14
+        ]
+      },
+      "id": "elder-woman-b",
+      "labelHe": "חלופה חמה",
+      "identity": "elder-woman",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.92
+    },
+    {
+      "path": "people/elder-woman-c.glb",
+      "file": "people/elder-woman-c.glb",
+      "triangles": 1087,
+      "vertices": 693,
+      "byteLength": 136404,
+      "sha256": "8d82aa5ecc93156fed64c7f35eca32f1ab6f398fd009fad22bf1a0f8335c2dec",
+      "heightMeters": 1.738235,
+      "runtimeHeightMeters": 1.5991762,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.149
+        ],
+        "max": [
+          0.24048,
+          1.738235,
+          0.14
+        ]
+      },
+      "id": "elder-woman-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "elder-woman",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.92
+    },
+    {
+      "path": "people/firefighter-a.glb",
+      "file": "people/firefighter-a.glb",
+      "triangles": 1165,
+      "vertices": 705,
+      "byteLength": 135960,
+      "sha256": "56a9c852979ee1eb48a2678fabf08900c9db78450de592e0b8337335e15d960c",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8643,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "firefighter-a",
+      "labelHe": "מקור",
+      "identity": "firefighter",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 1.03
+    },
+    {
+      "path": "people/firefighter-b.glb",
+      "file": "people/firefighter-b.glb",
+      "triangles": 1165,
+      "vertices": 705,
+      "byteLength": 135960,
+      "sha256": "b50cd3fbc84a55a160855a95b954b1abc89e3438cf68b83ea33e53d94a82285b",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8643,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "firefighter-b",
+      "labelHe": "חלופה חמה",
+      "identity": "firefighter",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 1.03
+    },
+    {
+      "path": "people/firefighter-c.glb",
+      "file": "people/firefighter-c.glb",
+      "triangles": 1165,
+      "vertices": 705,
+      "byteLength": 135960,
+      "sha256": "4a2b3c081a04dead7b738b9847a0a6e8cccde8d40e2e0d5d7c3598c84f86c7e8",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8643,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "firefighter-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "firefighter",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 1.03
+    },
+    {
+      "path": "people/gardener-a.glb",
+      "file": "people/gardener-a.glb",
+      "triangles": 1133,
+      "vertices": 709,
+      "byteLength": 135900,
+      "sha256": "fffe50245782e8f522eb2d3c2368f826cab2c60507920c1a0995f53937a3bdd3",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7919,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.243,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "gardener-a",
+      "labelHe": "מקור",
+      "identity": "gardener",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.99
+    },
+    {
+      "path": "people/gardener-b.glb",
+      "file": "people/gardener-b.glb",
+      "triangles": 1133,
+      "vertices": 709,
+      "byteLength": 135900,
+      "sha256": "dbd4385b86cf621a421d6fb64d3ed6b62e8a31df6de490a80767bc39ad43553d",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7919,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.243,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "gardener-b",
+      "labelHe": "חלופה חמה",
+      "identity": "gardener",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.99
+    },
+    {
+      "path": "people/gardener-c.glb",
+      "file": "people/gardener-c.glb",
+      "triangles": 1133,
+      "vertices": 709,
+      "byteLength": 135900,
+      "sha256": "97bf0d2ad272f86c40b77623b529ccfda1f1c7aa24a50b2c778b388f0483c689",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7919,
+      "bounds": {
+        "min": [
+          -0.243,
+          0.0,
+          -0.12705
+        ],
+        "max": [
+          0.243,
+          1.81,
+          0.14305
+        ]
+      },
+      "id": "gardener-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "gardener",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.99
+    },
+    {
+      "path": "people/girl-a.glb",
+      "file": "people/girl-a.glb",
+      "triangles": 1093,
+      "vertices": 671,
+      "byteLength": 134280,
+      "sha256": "4f5d47636cc1ab8a4db80e97b5283ffbec3c00867201cc6fe6ef9208cf94e83f",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.29426,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.1730429
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "girl-a",
+      "labelHe": "מקור",
+      "identity": "girl",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.74
+    },
+    {
+      "path": "people/girl-b.glb",
+      "file": "people/girl-b.glb",
+      "triangles": 1093,
+      "vertices": 671,
+      "byteLength": 134280,
+      "sha256": "c58a89c05302b8bc0f58f488c995a69f7c0b3f74467f70116e3e748c99b2bab8",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.29426,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.1730429
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "girl-b",
+      "labelHe": "חלופה חמה",
+      "identity": "girl",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.74
+    },
+    {
+      "path": "people/girl-c.glb",
+      "file": "people/girl-c.glb",
+      "triangles": 1093,
+      "vertices": 671,
+      "byteLength": 134280,
+      "sha256": "36e0d263312c61d87f80893d5f319667a00a4f5c89983b63ada92709d6db1da7",
+      "heightMeters": 1.749,
+      "runtimeHeightMeters": 1.29426,
+      "bounds": {
+        "min": [
+          -0.2367,
+          0.0,
+          -0.1730429
+        ],
+        "max": [
+          0.2367,
+          1.749,
+          0.148
+        ]
+      },
+      "id": "girl-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "girl",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.74
+    },
+    {
+      "path": "people/maintenance-a.glb",
+      "file": "people/maintenance-a.glb",
+      "triangles": 1157,
+      "vertices": 757,
+      "byteLength": 137784,
+      "sha256": "2419d0bc573714b284dd4f5b086ebabda13dc4a6cd827e2a6081c2e999707f3f",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8462,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14
+        ]
+      },
+      "id": "maintenance-a",
+      "labelHe": "מקור",
+      "identity": "maintenance",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 1.02
+    },
+    {
+      "path": "people/maintenance-b.glb",
+      "file": "people/maintenance-b.glb",
+      "triangles": 1157,
+      "vertices": 757,
+      "byteLength": 137784,
+      "sha256": "8753fff1e0b78d1f29a0f88de15677b70e01f4660f1c7c9c417cc5da2904d7ce",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8462,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14
+        ]
+      },
+      "id": "maintenance-b",
+      "labelHe": "חלופה חמה",
+      "identity": "maintenance",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 1.02
+    },
+    {
+      "path": "people/maintenance-c.glb",
+      "file": "people/maintenance-c.glb",
+      "triangles": 1157,
+      "vertices": 757,
+      "byteLength": 137784,
+      "sha256": "7c8a25ad0d6a98611db66aa602b28fa10c22564472110d983aa2a94bbec38777",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.8462,
+      "bounds": {
+        "min": [
+          -0.24489,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24489,
+          1.81,
+          0.14
+        ]
+      },
+      "id": "maintenance-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "maintenance",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 1.02
+    },
+    {
+      "path": "people/police-a.glb",
+      "file": "people/police-a.glb",
+      "triangles": 1177,
+      "vertices": 751,
+      "byteLength": 137676,
+      "sha256": "7484456df7773f38a68be703cd216bd00ead5c819ddf408457b90bbd17cedbc9",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7738,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "police-a",
+      "labelHe": "מקור",
+      "identity": "police",
+      "variant": "a",
+      "category": "citizen",
+      "scale": 0.98
+    },
+    {
+      "path": "people/police-b.glb",
+      "file": "people/police-b.glb",
+      "triangles": 1177,
+      "vertices": 751,
+      "byteLength": 137676,
+      "sha256": "448198a893da19b7f5b59504d9210640f558e8c1f4133f020a3f1be22775f9c4",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7738,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "police-b",
+      "labelHe": "חלופה חמה",
+      "identity": "police",
+      "variant": "b",
+      "category": "citizen",
+      "scale": 0.98
+    },
+    {
+      "path": "people/police-c.glb",
+      "file": "people/police-c.glb",
+      "triangles": 1177,
+      "vertices": 751,
+      "byteLength": 137676,
+      "sha256": "4bd098835cab75362a4640e246e12eb4edd007134d96177659ca39e68a208358",
+      "heightMeters": 1.81,
+      "runtimeHeightMeters": 1.7738,
+      "bounds": {
+        "min": [
+          -0.24048,
+          0.0,
+          -0.1080289
+        ],
+        "max": [
+          0.24048,
+          1.81,
+          0.174
+        ]
+      },
+      "id": "police-c",
+      "labelHe": "חלופה קרירה",
+      "identity": "police",
+      "variant": "c",
+      "category": "citizen",
+      "scale": 0.98
+    },
+    {
+      "path": "animals/bird.glb",
+      "file": "animals/bird.glb",
+      "triangles": 576,
+      "vertices": 330,
+      "byteLength": 21880,
+      "sha256": "7172baf1ded435cd34487c8fe47188ad9ea08662f265c1d3df7f2109b9292eb6",
+      "heightMeters": 0.27999999999999997,
+      "runtimeHeightMeters": 0.27999999999999997,
+      "bounds": {
+        "min": [
+          -0.215,
+          0.006,
+          -0.172
+        ],
+        "max": [
+          0.215,
+          0.286,
+          0.151
+        ]
+      },
+      "id": "bird",
+      "identity": "bird",
+      "category": "animal"
+    },
+    {
+      "path": "animals/butterfly.glb",
+      "file": "animals/butterfly.glb",
+      "triangles": 326,
+      "vertices": 191,
+      "byteLength": 13584,
+      "sha256": "f374920fa38151573eb26ea62420cd63a5ecf6e120a5cd2c5c93c22141c30fd4",
+      "heightMeters": 0.028500000000000025,
+      "runtimeHeightMeters": 0.028500000000000025,
+      "bounds": {
+        "min": [
+          -0.116,
+          0.23099999999999998,
+          -0.073
+        ],
+        "max": [
+          0.116,
+          0.2595,
+          0.09205909775886582
+        ]
+      },
+      "id": "butterfly",
+      "identity": "butterfly",
+      "category": "animal"
+    },
+    {
+      "path": "animals/cat.glb",
+      "file": "animals/cat.glb",
+      "triangles": 814,
+      "vertices": 513,
+      "byteLength": 44200,
+      "sha256": "f73143950ee2c41d7f50ff2a9b2b51af7b515302aa31db1e6e0454e3d49350d0",
+      "heightMeters": 0.5586202929742724,
+      "runtimeHeightMeters": 0.5586202929742724,
+      "bounds": {
+        "min": [
+          -0.14819999814033508,
+          0.0003797318212598745,
+          -0.30621643149233735
+        ],
+        "max": [
+          0.17572175464818932,
+          0.5590000247955322,
+          0.24300904427834558
+        ]
+      },
+      "id": "cat",
+      "identity": "cat",
+      "category": "animal"
+    },
+    {
+      "path": "animals/dog.glb",
+      "file": "animals/dog.glb",
+      "triangles": 800,
+      "vertices": 474,
+      "byteLength": 43080,
+      "sha256": "f4d086acbfd79ea634ac65849bddaa64f53c0d73554db95d0200067df1344850",
+      "heightMeters": 0.5762152408927479,
+      "runtimeHeightMeters": 0.5762152408927479,
+      "bounds": {
+        "min": [
+          -0.2084010624540109,
+          0.0004235470314052446,
+          -0.32008596182614885
+        ],
+        "max": [
+          0.21670363411247737,
+          0.5766387879241531,
+          0.30817466354365974
+        ]
+      },
+      "id": "dog",
+      "identity": "dog",
+      "category": "animal"
+    },
+    {
+      "path": "animals/fish.glb",
+      "file": "animals/fish.glb",
+      "triangles": 350,
+      "vertices": 199,
+      "byteLength": 16412,
+      "sha256": "948c3651a34d90725d2d3bfb5f9cd3e0286066170eb97854016d9fc9b1e080e9",
+      "heightMeters": 0.15499999999999997,
+      "runtimeHeightMeters": 0.15499999999999997,
+      "bounds": {
+        "min": [
+          -0.09,
+          0.136,
+          -0.178
+        ],
+        "max": [
+          0.09,
+          0.291,
+          0.12
+        ]
+      },
+      "id": "fish",
+      "identity": "fish",
+      "category": "animal"
+    },
+    {
+      "path": "animals/pigeon.glb",
+      "file": "animals/pigeon.glb",
+      "triangles": 636,
+      "vertices": 362,
+      "byteLength": 27612,
+      "sha256": "11a550fed9079f850df115b72589e36c7f1dc6343b9d0adc9bed71df7b9dba8e",
+      "heightMeters": 0.27999999999999997,
+      "runtimeHeightMeters": 0.27999999999999997,
+      "bounds": {
+        "min": [
+          -0.215,
+          0.006,
+          -0.172
+        ],
+        "max": [
+          0.215,
+          0.286,
+          0.165
+        ]
+      },
+      "id": "pigeon",
+      "identity": "pigeon",
+      "category": "animal"
+    }
+  ],
+  "qa": {
+    "khronos": "verification/khronos.json",
+    "motion": "verification/motion-qa.json"
+  },
+  "summary": {
+    "identities": 12,
+    "colorVariants": 36,
+    "animals": 6,
+    "glbCount": 42,
+    "glbBytes": 5045464
+  }
+}
