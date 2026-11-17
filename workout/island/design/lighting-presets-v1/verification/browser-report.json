@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "date": "2026-11-17",
+  "browser": "Chromium 151.0.7922.173",
+  "gpu": "ANGLE / SwiftShader (software)",
+  "target": {
+    "width": 844,
+    "height": 390,
+    "presets": 10,
+    "scenes": 3,
+    "renderedCombinations": 30,
+    "verticalOverflow": false
+  },
+  "layouts": [
+    {
+      "width": 844,
+      "height": 390,
+      "horizontalOverflow": false,
+      "minTouchPx": 44
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "horizontalOverflow": false,
+      "minTouchPx": 44
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false,
+      "minTouchPx": 44
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "horizontalOverflow": false,
+      "minTouchPx": 44
+    }
+  ],
+  "distinctImageSignatures": {
+    "morning": {
+      "coast": "d97fb799aba981148c6bc327480e7565c155558d9da5b40ed39a9eb664b95781",
+      "stadium": "bcfa929693ae2a6aa0447ed4ee85f2a5e790e568659fc482761403c0818e5be3",
+      "alpine": "a4a9f1eb07faebf4003e6e7f48787fafb2d55b20dffcbb42290eb8a4ca7ed356"
+    },
+    "noon": {
+      "coast": "5b4e99d6fcf00bf7fcc84a0f9a2f71955e72e8782369a8d77260bb9044dcd2f4",
+      "stadium": "529a5229acdfd549967c6ad6306f17cbc9f5f01921adc3ceb4d8f4f96db03ce3",
+      "alpine": "9ec110816e6a9bb661d05e0dbd725471cfe68fde7a5af686d259e0d714983486"
+    },
+    "afternoon": {
+      "coast": "77dc6e2e9ee329a718d339c3ba4718e85f43bc75c6040b1a7f711d87901794d8",
+      "stadium": "f5e8d9953b9659656837e437be09fd76f052869062e3822a42b8093147ab1b47",
+      "alpine": "5130780051fa9fe6d799f52f7962b59d6019c53d22fa5a81791fe8bc0d67dac9"
+    },
+    "sunset": {
+      "coast": "18edeac577c3d23fedc683b3253517e3a6d567a6d89883f2ba89a7e9359eb8f2",
+      "stadium": "d3696ffa5236178bceb5333f4b01784ab548bffaff68336ab19a3f3b434ae4c3",
+      "alpine": "22315d1d4e4d8c8d06dfef4bdf7f6c8b0f245bf107d65514c6b25831bed5fd36"
+    },
+    "evening": {
+      "coast": "1691e8380bd092aee521486d3650970560e6b5b35743e5ac5b275825d3d63b66",
+      "stadium": "49ee73bbac5eb3a8dc78c5fe427dff60098911a2ca41db03de0cf46368dbabf4",
+      "alpine": "a440f62717d3a3a0c4dcc313f45acfd77ed106cea7367157c0ad479ab597d471"
+    },
+    "night": {
+      "coast": "8b37f0f074b2bd8939acce047bcc7951205ee20d877a24da0cae9240ddb1394b",
+      "stadium": "4558edb206e6e222e875e7ffd4ca2ff3b025cd3f3f62172a7451df9757570260",
+      "alpine": "29b2c637d803f06e5b450347f48cd51568b5d73e0bb4276a5c38bbe245e19718"
+    },
+    "fog": {
+      "coast": "668ba3551e9ef548340df16d109e26005f7878d4037fcbce326907cc901ccfec",
+      "stadium": "b138d07f4ef4596ce1aaa3a1a5121dc03bfc20f2722c3f84dcaa014f99398658",
+      "alpine": "3532b94d1834c2a6ed81f39518344c396d1516e61a186a9e4e9e24e96f9d3e29"
+    },
+    "rain": {
+      "coast": "7cc31f934c9ae6142aa14b08bef5e9aa1d25ce7655a0e19cbe5ab71fb64476f1",
+      "stadium": "effe5a22ed8b15671f960edefba46a2bdb9196eda3b52bd84cdeab9db4249dfc",
+      "alpine": "dc2a18cb4adf1fae34c0393e28b428fa15ff591f921da844ceace404470b52b9"
+    },
+    "snow": {
+      "coast": "ab6f2e3602c43ee2d774d090a5886c1abf9f0acee3a9bb039d22c762dbb381d0",
+      "stadium": "ef1e69e6bc93d9304d28db7e645a88e5e58e1a0151aff8f0e99e31279a458daa",
+      "alpine": "5133ec22a803aa38cb9747729b7d6c5b604cd4bd7761ae627f78d4b33ee7fc00"
+    },
+    "stadium": {
+      "coast": "fe2d6d077adbd50fe9096830e1990765ce2eb3c21bc27e87878446815862d957",
+      "stadium": "778078a2454dc399f8c0fb54c6641b871d400fda2dcc8ffb1b6641c101f6d041",
+      "alpine": "4078b2ae67ed1b761ebb2e7e7006f0479205043b0097382488a0d322aaea1b2d"
+    }
+  },
+  "controls": {
+    "keyboardPreset": true,
+    "keyboardOrbitAndReset": true,
+    "pointerOrbit": true,
+    "copyJSON": true,
+    "downloadCanonicalJSON": true,
+    "animatedWeatherPixels": true,
+    "pause": true,
+    "reducedMotion": true,
+    "dispose": true
+  },
+  "adapterScaling": {
+    "near": 4512,
+    "far": 17860,
+    "intensity": 33576800,
+    "scale": 94,
+    "spotDistance": 9400,
+    "staleSpots": 0,
+    "clean": true
+  },
+  "effectPixels": {
+    "stars": {
+      "channels": 75,
+      "max": 158
+    },
+    "clouds": {
+      "channels": 4121,
+      "max": 54
+    },
+    "spotIllumination": {
+      "channels": 483514,
+      "max": 203
+    }
+  },
+  "externalRequests": 0,
+  "pageErrors": 0,
+  "httpErrors": 0,
+  "coldOfflineZIP": {
+    "presets": 10,
+    "scenes": 3,
+    "cache": false,
+    "network": false,
+    "diskFulfilledRequests": 6
+  },
+  "fileScheme": "not verified: managed Chromium blocks file:// (ERR_BLOCKED_BY_ADMINISTRATOR)",
+  "withoutJavaScript": "JSON download available",
+  "withoutWebGL": "explicit message and JSON download",
+  "screenshots": [
+    "preset-morning-844x390.webp",
+    "preset-noon-844x390.webp",
+    "preset-afternoon-844x390.webp",
+    "preset-sunset-844x390.webp",
+    "preset-evening-844x390.webp",
+    "preset-night-844x390.webp",
+    "preset-fog-844x390.webp",
+    "preset-rain-844x390.webp",
+    "preset-snow-844x390.webp",
+    "preset-stadium-844x390.webp",
+    "all-presets-contact-sheet.webp"
+  ]
+}

@@ -1,0 +1,912 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "island-lighting-presets-v1",
+  "title": "האי · ערכות תאורה ושמיים",
+  "conventions": {
+    "coordinates": "Right-handed, +Y up, distances in metres before worldUnitsPerMeter scaling.",
+    "sunDirection": "Unit vector FROM the origin TOWARDS the sun/moon; light rays travel in the opposite direction.",
+    "colors": "sRGB #RRGGBB; Three.Color converts to linear working space. PNG alpha is straight.",
+    "intensity": "Three.js r160 light intensities; directional/hemisphere relative, spots in candela with inverse-square decay.",
+    "fog": "Linear view-space depth fog: 0 before start, 1 after end, matching THREE.Fog.",
+    "sky": "Analytic gradient in linear RGB; ground below -0.15 elevation, horizon at 0, upper at 0.35, zenith at 1.",
+    "weather": "Particles in a 64 x 36 x 64 metre volume. GPU motion; weather does not change ground materials.",
+    "spotlights": "Positions/targets in metres; scale intensity by worldUnitsPerMeter squared to retain illuminance.",
+    "filePreview": "preset-data.js is a build-generated exact copy of this JSON and PNG data URLs; no fetch is required."
+  },
+  "renderer": {
+    "toneMapping": "ACESFilmicToneMapping",
+    "exposure": 1,
+    "outputColorSpace": "srgb",
+    "maxPixelRatio": 1.5,
+    "shadowMapSize": 1024
+  },
+  "assets": {
+    "skyTile": {
+      "path": "textures/sky-tile.png",
+      "width": 256,
+      "height": 256,
+      "channels": "RGB",
+      "colorSpace": "none",
+      "wrapS": "repeat",
+      "wrapT": "repeat",
+      "role": "Neutral periodic sky detail, multiplied into the analytic gradient at 1.8% amplitude.",
+      "bytes": 23514,
+      "sha256": "0fbae9b3a1a8f210142f61d2580aff40b24f22098b637a946dbb654a90c94e83"
+    },
+    "clouds": {
+      "path": "textures/clouds.png",
+      "width": 256,
+      "height": 128,
+      "channels": "RGBA",
+      "colorSpace": "srgb",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "alpha": "straight",
+      "role": "Tintable transparent cloud billboard.",
+      "bytes": 6032,
+      "sha256": "9feaa04a3f09184df3bd7f57147da3d9d6a585d6d6b73c38693be96a31aaad3e"
+    },
+    "halo": {
+      "path": "textures/halo.png",
+      "width": 128,
+      "height": 128,
+      "channels": "RGBA",
+      "colorSpace": "srgb",
+      "wrapS": "clamp",
+      "wrapT": "clamp",
+      "alpha": "straight",
+      "role": "Additive light halo for stadium fixtures.",
+      "bytes": 2524,
+      "sha256": "80010a0b7d8e57bf655261ef1749ffa07dc0cfefe6db26206cba14dc43a65d32"
+    }
+  },
+  "presets": [
+    {
+      "id": "morning",
+      "name": "בוקר",
+      "nameEn": "Morning",
+      "description": "שמש נמוכה וחמה, שמיים רכים וצל ארוך.",
+      "sun": {
+        "kind": "sun",
+        "color": "#ffe1a6",
+        "direction": [
+          0.8573889,
+          0.358907,
+          -0.3688766
+        ],
+        "intensity": 2.1,
+        "discAngularRadius": 0.025,
+        "haloOpacity": 0.68
+      },
+      "ambient": {
+        "color": "#c2e3ef",
+        "groundColor": "#b6a07d",
+        "intensity": 0.9
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#c6d7cf",
+        "start": 44,
+        "end": 170
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#4899c9",
+          "upper": "#a8d6e4",
+          "horizon": "#f7ddbc",
+          "ground": "#c3b79e"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 9,
+        "color": "#fff1dc",
+        "opacity": 0.72,
+        "scale": 1,
+        "speed": 0.8,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "noon",
+      "name": "צהריים",
+      "nameEn": "Noon",
+      "description": "אור לבן ושמיים צלולים, צל קצר ומוגדר.",
+      "sun": {
+        "kind": "sun",
+        "color": "#fff6de",
+        "direction": [
+          -0.220077,
+          0.9503327,
+          -0.220077
+        ],
+        "intensity": 2.8,
+        "discAngularRadius": 0.018,
+        "haloOpacity": 0.38
+      },
+      "ambient": {
+        "color": "#c1dff3",
+        "groundColor": "#a4b08b",
+        "intensity": 1.0
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#b5dcdf",
+        "start": 70,
+        "end": 230
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#187bb9",
+          "upper": "#62b8db",
+          "horizon": "#c9e8e9",
+          "ground": "#acbca9"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 6,
+        "color": "#f4fcff",
+        "opacity": 0.68,
+        "scale": 0.9,
+        "speed": 0.55,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "afternoon",
+      "name": "אחר הצהריים",
+      "nameEn": "Afternoon",
+      "description": "אור זהוב צדדי, צבע טבעי וצל אלכסוני.",
+      "sun": {
+        "kind": "sun",
+        "color": "#ffd08e",
+        "direction": [
+          -0.6299685,
+          0.639968,
+          -0.439978
+        ],
+        "intensity": 2.35,
+        "discAngularRadius": 0.022,
+        "haloOpacity": 0.6
+      },
+      "ambient": {
+        "color": "#c3dce7",
+        "groundColor": "#b8a47e",
+        "intensity": 0.82
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#c6d0c8",
+        "start": 52,
+        "end": 185
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#3f8fc2",
+          "upper": "#92c6d7",
+          "horizon": "#f2d4b0",
+          "ground": "#c5ae8d"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 8,
+        "color": "#ffe7c3",
+        "opacity": 0.7,
+        "scale": 1.1,
+        "speed": 0.65,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "sunset",
+      "name": "שקיעה",
+      "nameEn": "Sunset",
+      "description": "אופק אפרסק, שמש כתומה וצללים סגלגלים.",
+      "sun": {
+        "kind": "sun",
+        "color": "#ff9d54",
+        "direction": [
+          -0.9347796,
+          0.1507709,
+          -0.3216446
+        ],
+        "intensity": 1.85,
+        "discAngularRadius": 0.033,
+        "haloOpacity": 0.95
+      },
+      "ambient": {
+        "color": "#b6b5db",
+        "groundColor": "#bd896c",
+        "intensity": 0.75
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#dba194",
+        "start": 36,
+        "end": 145
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#3b568b",
+          "upper": "#b884ab",
+          "horizon": "#ffb578",
+          "ground": "#bc8684"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 10,
+        "color": "#f1ad91",
+        "opacity": 0.76,
+        "scale": 1.05,
+        "speed": 0.7,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "evening",
+      "name": "ערב",
+      "nameEn": "Evening",
+      "description": "שמיים סגולים עם הכוכבים הראשונים.",
+      "sun": {
+        "kind": "sun",
+        "color": "#d9b8ff",
+        "direction": [
+          -0.7796492,
+          0.0899595,
+          -0.6197212
+        ],
+        "intensity": 0.42,
+        "discAngularRadius": 0.015,
+        "haloOpacity": 0.32
+      },
+      "ambient": {
+        "color": "#92a9d8",
+        "groundColor": "#726b93",
+        "intensity": 0.65
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#77769d",
+        "start": 32,
+        "end": 135
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#202b58",
+          "upper": "#585b91",
+          "horizon": "#c28aab",
+          "ground": "#525277"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": true,
+        "count": 150,
+        "opacity": 0.65,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 7,
+        "color": "#9991b2",
+        "opacity": 0.48,
+        "scale": 1.0,
+        "speed": 0.4,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "night",
+      "name": "לילה",
+      "nameEn": "Night",
+      "description": "אור ירח קר ושדה כוכבים, עם מילוי לקריאות.",
+      "sun": {
+        "kind": "moon",
+        "color": "#bed9ff",
+        "direction": [
+          0.3498426,
+          0.5997302,
+          -0.7196762
+        ],
+        "intensity": 0.7,
+        "discAngularRadius": 0.013,
+        "haloOpacity": 0.42
+      },
+      "ambient": {
+        "color": "#6885bc",
+        "groundColor": "#39415d",
+        "intensity": 0.54
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#31425f",
+        "start": 34,
+        "end": 150
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#080f2e",
+          "upper": "#172b50",
+          "horizon": "#49627f",
+          "ground": "#242e4d"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": true,
+        "count": 420,
+        "opacity": 0.96,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 5,
+        "color": "#506886",
+        "opacity": 0.4,
+        "scale": 0.9,
+        "speed": 0.3,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "fog",
+      "name": "ערפל",
+      "nameEn": "Fog",
+      "description": "ערפל בהיר קרוב שמטשטש את קו האופק.",
+      "sun": {
+        "kind": "sun",
+        "color": "#e1e6d8",
+        "direction": [
+          -0.4015894,
+          0.6525828,
+          -0.6425431
+        ],
+        "intensity": 0.65,
+        "discAngularRadius": 0.014,
+        "haloOpacity": 0.08
+      },
+      "ambient": {
+        "color": "#c3d4cf",
+        "groundColor": "#a8b5a7",
+        "intensity": 1.02
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#c7d2c9",
+        "start": 12,
+        "end": 56
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#849f9e",
+          "upper": "#b7c8c1",
+          "horizon": "#d8dfd3",
+          "ground": "#bcc8bc"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 14,
+        "color": "#d3ddd3",
+        "opacity": 0.82,
+        "scale": 1.6,
+        "speed": 0.32,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "גשם",
+      "nameEn": "Rain",
+      "description": "עננים נמוכים, אור מפוזר וגשם נוטה ברוח.",
+      "sun": {
+        "kind": "sun",
+        "color": "#b8d0dc",
+        "direction": [
+          -0.2007138,
+          0.8530337,
+          -0.4817131
+        ],
+        "intensity": 0.85,
+        "discAngularRadius": 0.014,
+        "haloOpacity": 0.07
+      },
+      "ambient": {
+        "color": "#9db5c0",
+        "groundColor": "#697e83",
+        "intensity": 0.88
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#92a6ae",
+        "start": 22,
+        "end": 98
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#344f65",
+          "upper": "#6c8794",
+          "horizon": "#a2b2b5",
+          "ground": "#798c92"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 16,
+        "color": "#8399a5",
+        "opacity": 0.95,
+        "scale": 1.7,
+        "speed": 2.2,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "rain",
+        "count": 360,
+        "color": "#c7e4f3",
+        "opacity": 0.6,
+        "speed": 18,
+        "wind": [
+          2.1,
+          0.65
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "snow",
+      "name": "שלג",
+      "nameEn": "Snow",
+      "description": "שמיים חלביים, אור קר ופתיתי שלג רכים.",
+      "sun": {
+        "kind": "sun",
+        "color": "#f5ebdf",
+        "direction": [
+          0.29994,
+          0.79984,
+          -0.519896
+        ],
+        "intensity": 1.12,
+        "discAngularRadius": 0.018,
+        "haloOpacity": 0.15
+      },
+      "ambient": {
+        "color": "#cfdeec",
+        "groundColor": "#b0bdcc",
+        "intensity": 1.05
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#d4dfe6",
+        "start": 24,
+        "end": 118
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#91a9c4",
+          "upper": "#c9d6e2",
+          "horizon": "#ecede7",
+          "ground": "#c6d3de"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": false,
+        "count": 0,
+        "opacity": 0,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 14,
+        "color": "#e1e6eb",
+        "opacity": 0.85,
+        "scale": 1.5,
+        "speed": 0.5,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "snow",
+        "count": 280,
+        "color": "#ffffff",
+        "opacity": 0.86,
+        "speed": 2.8,
+        "wind": [
+          0.7,
+          0.25
+        ]
+      },
+      "spotlights": [],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    },
+    {
+      "id": "stadium",
+      "name": "זרקורים באצטדיון",
+      "nameEn": "Stadium floodlights",
+      "description": "ארבעה זרקורים לבנים מול שמי לילה עמוקים.",
+      "sun": {
+        "kind": "moon",
+        "color": "#adc6f7",
+        "direction": [
+          0.2499875,
+          0.59997,
+          -0.759962
+        ],
+        "intensity": 0.19,
+        "discAngularRadius": 0.012,
+        "haloOpacity": 0.15
+      },
+      "ambient": {
+        "color": "#829cc4",
+        "groundColor": "#364957",
+        "intensity": 0.43
+      },
+      "fog": {
+        "enabled": true,
+        "color": "#30445e",
+        "start": 48,
+        "end": 190
+      },
+      "sky": {
+        "gradient": {
+          "zenith": "#080f28",
+          "upper": "#1b3153",
+          "horizon": "#4a6179",
+          "ground": "#233447"
+        },
+        "tileRepeat": [
+          8,
+          4
+        ],
+        "tileStrength": 0.018
+      },
+      "stars": {
+        "enabled": true,
+        "count": 260,
+        "opacity": 0.8,
+        "color": "#dceaff",
+        "size": 2.4,
+        "seed": 7351
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 4,
+        "color": "#49627b",
+        "opacity": 0.28,
+        "scale": 0.9,
+        "speed": 0.4,
+        "altitude": 34,
+        "seed": 1219
+      },
+      "weather": {
+        "type": "none",
+        "count": 0,
+        "color": "#ffffff",
+        "opacity": 0,
+        "speed": 0,
+        "wind": [
+          0,
+          0
+        ]
+      },
+      "spotlights": [
+        {
+          "position": [
+            -20,
+            16,
+            -14
+          ],
+          "target": [
+            3.2,
+            0,
+            2.52
+          ],
+          "color": "#e2eeff",
+          "intensity": 3800,
+          "distance": 100,
+          "angle": 0.62,
+          "penumbra": 0.65,
+          "decay": 2,
+          "haloOpacity": 0.8
+        },
+        {
+          "position": [
+            20,
+            16,
+            -14
+          ],
+          "target": [
+            -3.2,
+            0,
+            2.52
+          ],
+          "color": "#e2eeff",
+          "intensity": 3800,
+          "distance": 100,
+          "angle": 0.62,
+          "penumbra": 0.65,
+          "decay": 2,
+          "haloOpacity": 0.8
+        },
+        {
+          "position": [
+            -20,
+            16,
+            14
+          ],
+          "target": [
+            3.2,
+            0,
+            -2.52
+          ],
+          "color": "#e2eeff",
+          "intensity": 3800,
+          "distance": 100,
+          "angle": 0.62,
+          "penumbra": 0.65,
+          "decay": 2,
+          "haloOpacity": 0.8
+        },
+        {
+          "position": [
+            20,
+            16,
+            14
+          ],
+          "target": [
+            -3.2,
+            0,
+            -2.52
+          ],
+          "color": "#e2eeff",
+          "intensity": 3800,
+          "distance": 100,
+          "angle": 0.62,
+          "penumbra": 0.65,
+          "decay": 2,
+          "haloOpacity": 0.8
+        }
+      ],
+      "textures": {
+        "skyTile": "skyTile",
+        "clouds": "clouds",
+        "halo": "halo"
+      }
+    }
+  ]
+}

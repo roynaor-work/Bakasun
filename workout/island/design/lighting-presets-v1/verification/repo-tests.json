@@ -1,0 +1,24 @@
+{
+  "command": "npm test",
+  "status": "passed",
+  "exitCode": 0,
+  "node": "v24.19.0",
+  "total": 3334,
+  "passed": 3278,
+  "failed": 0,
+  "skipped": 56,
+  "durationMs": 190746.905363,
+  "browser": "Chromium 151.0.7922.173",
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": "/tmp/lighting-playwright-browsers",
+    "executable": "/usr/bin/chromium",
+    "setup": "Temporary symlinks at the Playwright Chromium/headless-shell registry paths; no repository configuration changes."
+  },
+  "initialAttempt": {
+    "status": "environment failure",
+    "test": "tests/workout-royiki.test.mjs",
+    "reason": "Playwright default headless-shell executable was absent; existing test starts a server before browser launch and leaves it open on launch failure.",
+    "recovery": "Stopped the stalled test worker only; reran the entire suite with installed Chromium."
+  },
+  "existingTestFilesModified": false
+}

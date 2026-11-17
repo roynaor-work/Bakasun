@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>האי · מעבדת אור</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script defer src="vendor/three.local.js"></script>
+  <script defer src="preset-data.js"></script>
+  <script defer src="lighting.js"></script>
+  <script defer src="preview.js"></script>
+</head>
+<body>
+  <div class="studio">
+    <header class="topbar">
+      <div class="brandmark" aria-hidden="true"><span></span></div>
+      <div class="title"><p class="eyebrow" dir="ltr">ISLAND / LIGHTING STUDY 01</p><h1>אותו אי. אור אחר.</h1></div>
+      <div class="header-meta"><span class="local-dot" aria-hidden="true"></span><span>10 ערכות · 3 זירות</span></div>
+      <button class="motion-button" id="motion" type="button" aria-pressed="false" aria-label="הפעלת תנועה בעננים ובמזג האוויר"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7Z"/></svg><span>תנועה</span></button>
+    </header>
+    <main>
+      <section id="views" class="views" aria-label="שלוש סצנות תלת־ממד עם אותה ערכת תאורה">
+        <canvas id="viewport" aria-label="תצוגת תלת־ממד של אי חופי, אצטדיון ומסלול הררי"></canvas>
+        <div class="scene-grid">
+          <article class="pane" data-scene="coast" tabindex="0" aria-label="אי חופי. גרירה או חצים מסובבים את המצלמה; Home מאפס.">
+            <div class="scene-heading"><span class="scene-index">01 / COAST</span><h2>חוף האי</h2></div>
+            <div class="scene-caption"><span>מים · חול · צמחייה</span><span class="orbit-hint" aria-hidden="true">↔</span></div>
+          </article>
+          <article class="pane" data-scene="stadium" tabindex="0" aria-label="אצטדיון. גרירה או חצים מסובבים את המצלמה; Home מאפס.">
+            <div class="scene-heading"><span class="scene-index">02 / SPORT</span><h2>מגרש הבית</h2></div>
+            <div class="scene-caption"><span>דשא · בטון · מתכת</span><span class="orbit-hint" aria-hidden="true">↔</span></div>
+          </article>
+          <article class="pane" data-scene="alpine" tabindex="0" aria-label="מסלול הררי. גרירה או חצים מסובבים את המצלמה; Home מאפס.">
+            <div class="scene-heading"><span class="scene-index">03 / ALPINE</span><h2>מעל העננים</h2></div>
+            <div class="scene-caption"><span>שלג · סלע · יער</span><span class="orbit-hint" aria-hidden="true">↔</span></div>
+          </article>
+        </div>
+        <p id="loading" class="loading" role="status">טוען אור ושמיים…</p>
+      </section>
+      <section class="preset-section" aria-label="בחירת ערכת תאורה">
+        <div class="preset-heading"><span>בחרו רגע ביום</span><span id="preset-counter" dir="ltr">04 / 10</span></div>
+        <div id="presets" class="presets" role="group" aria-label="10 ערכות תאורה"></div>
+      </section>
+      <footer class="details">
+        <div class="palette" aria-label="צבעי הערכה"><span class="swatch" id="sun-swatch" title="צבע שמש"></span><span class="swatch" id="ambient-swatch" title="צבע סביבה"></span><span class="swatch" id="fog-swatch" title="צבע ערפל"></span></div>
+        <div class="preset-description"><strong id="preset-name">שקיעה</strong><span id="preset-description">אופק אפרסק, שמש כתומה וצללים סגלגלים.</span></div>
+        <div class="metrics" id="metrics" aria-label="עוצמה וטווח ערפל"></div>
+        <div class="actions"><button id="copy" type="button" disabled>העתק ערכה</button><a id="download" href="presets.json" download="presets.json">כל הערכות <span aria-hidden="true">↓</span></a></div>
+      </footer>
+      <p class="status" id="status" role="status" aria-live="polite">אפשר לגרור כל זירה כדי לשנות את זווית הצפייה. כל הקבצים מקומיים.</p>
+      <noscript><p class="no-script">לתצוגת התלת־ממד צריך JavaScript. <a href="presets.json" download>הורדת כל הערכות</a> · <a href="REPORT.md">הוראות ודוח</a></p></noscript>
+    </main>
+  </div>
+</body>
+</html>
