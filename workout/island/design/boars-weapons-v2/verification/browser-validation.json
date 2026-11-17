@@ -1,0 +1,295 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "viewport": [
+    844,
+    390
+  ],
+  "renderer": "Chromium WebGL / SwiftShader; functional verification only, no phone performance claim",
+  "scenarios": [
+    {
+      "weapon": "cannon",
+      "flightSeconds": 0.7,
+      "hitCount": 1
+    },
+    {
+      "weapon": "cannon2",
+      "flightSeconds": 0.82,
+      "hitCount": 1
+    },
+    {
+      "weapon": "cannon3",
+      "flightSeconds": 1.12,
+      "hitCount": 1
+    },
+    {
+      "weapon": "shotgun",
+      "flightSeconds": 0.24,
+      "hitCount": 8
+    },
+    {
+      "weapon": "shotgun2",
+      "flightSeconds": 0.27,
+      "hitCount": 8
+    },
+    {
+      "weapon": "shotgun3",
+      "flightSeconds": 0.21,
+      "hitCount": 8
+    }
+  ],
+  "impactVariationsTested": 4,
+  "browserDecodedAudio": [
+    {
+      "key": "cannon",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.0499773242630386
+    },
+    {
+      "key": "cannon",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.123265306122449
+    },
+    {
+      "key": "cannon2",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.3500226757369616
+    },
+    {
+      "key": "cannon2",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.4106122448979592
+    },
+    {
+      "key": "cannon3",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.7083900226757369
+    },
+    {
+      "key": "cannon3",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.7836734693877551
+    },
+    {
+      "key": "shotgun",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.548390022675737
+    },
+    {
+      "key": "shotgun",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.626938775510204
+    },
+    {
+      "key": "shotgun2",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.7256235827664399
+    },
+    {
+      "key": "shotgun2",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.7836734693877551
+    },
+    {
+      "key": "shotgun3",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.408390022675737
+    },
+    {
+      "key": "shotgun3",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.4963265306122449
+    },
+    {
+      "key": "impact-cannon",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.8185034013605442
+    },
+    {
+      "key": "impact-cannon",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.8881632653061224
+    },
+    {
+      "key": "impact-cannon2",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.1
+    },
+    {
+      "key": "impact-cannon2",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 1.1755102040816328
+    },
+    {
+      "key": "impact-cannon3",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.9346031746031747
+    },
+    {
+      "key": "impact-cannon3",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.9926530612244898
+    },
+    {
+      "key": "impact-shotgun-1",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.1784126984126984
+    },
+    {
+      "key": "impact-shotgun-1",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.2612244897959184
+    },
+    {
+      "key": "impact-shotgun-2",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.2147845804988662
+    },
+    {
+      "key": "impact-shotgun-2",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.2873469387755102
+    },
+    {
+      "key": "impact-shotgun-3",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.23800453514739228
+    },
+    {
+      "key": "impact-shotgun-3",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.313469387755102
+    },
+    {
+      "key": "impact-shotgun-4",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.2533786848072562
+    },
+    {
+      "key": "impact-shotgun-4",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.3395918367346939
+    },
+    {
+      "key": "shellWhistle",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.6383673469387755
+    },
+    {
+      "key": "shellWhistle",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.7053061224489796
+    },
+    {
+      "key": "mortarWhistle",
+      "codec": "ogg",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.9183673469387755
+    },
+    {
+      "key": "mortarWhistle",
+      "codec": "mp3",
+      "channels": 1,
+      "sampleRate": 44100,
+      "duration": 0.9926530612244898
+    }
+  ],
+  "playback": [
+    {
+      "codec": "ogg",
+      "played": true
+    },
+    {
+      "codec": "mp3",
+      "played": true
+    }
+  ],
+  "fallbackEvidence": {
+    "simulatedOggFailure": true,
+    "selectedCodec": "mp3"
+  },
+  "expectedFallbackFailures": [
+    {
+      "url": "http://127.0.0.1:8765/workout/island/design/boars-weapons-v2/audio/cannon.ogg",
+      "error": "net::ERR_FAILED"
+    }
+  ],
+  "expectedFallbackErrors": [
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "unexpectedErrors": [],
+  "unexpectedRequestsFailed": [],
+  "screenshots": [
+    "cannon-flight-844x390.png",
+    "cannon-impact-844x390.png",
+    "cannon2-flight-844x390.png",
+    "cannon2-impact-844x390.png",
+    "cannon3-flight-844x390.png",
+    "cannon3-impact-844x390.png",
+    "shotgun-flight-844x390.png",
+    "shotgun-impact-844x390.png",
+    "shotgun2-flight-844x390.png",
+    "shotgun2-impact-844x390.png",
+    "shotgun3-flight-844x390.png",
+    "shotgun3-impact-844x390.png",
+    "crater-844x390.png",
+    "portrait-390x844.png"
+  ]
+}

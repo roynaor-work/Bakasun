@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<title>אי החזירים · מעבדת ירי V2</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<main id="lab">
+  <header>
+    <div class="identity"><span class="mark" aria-hidden="true">◈</span><div><h1>אי החזירים <span>/ מעבדת ירי</span></h1><p>מתכת כבדה. רסס מורגש.</p></div></div>
+    <div class="edition"><i></i> WEAPONS <b>02</b></div>
+  </header>
+  <nav aria-label="בחירת נשק">
+    <div class="family">תותח</div>
+    <button data-weapon="cannon" aria-pressed="true">רגיל</button>
+    <button data-weapon="cannon2" aria-pressed="false">כבד</button>
+    <button data-weapon="cannon3" aria-pressed="false">מרגמה</button>
+    <div class="divider"></div><div class="family">שוטגן</div>
+    <button data-weapon="shotgun" aria-pressed="false">רסס</button>
+    <button data-weapon="shotgun2" aria-pressed="false">כבד</button>
+    <button data-weapon="shotgun3" aria-pressed="false">חיצים</button>
+  </nav>
+  <section id="stage" aria-label="מטווח תלת ממדי">
+    <canvas id="scene" aria-label="מטווח: לחיצה יורה בנשק הנבחר" tabindex="0"></canvas>
+    <div class="stage-top"><span><i></i> מטווח החוף</span><span id="phase" role="status">טוען נכסים…</span></div>
+    <aside id="specimen"><div class="spec-title">התחמושת</div><canvas id="model" aria-label="תצוגת פגז מסתובב"></canvas><strong id="model-title">פגז פלדה</strong><small id="model-detail">מתכת כהה · חגורת נחושת</small></aside>
+    <div id="target-label">מטרת אימון</div>
+    <div id="caption"><b id="weapon-title">תותח רגיל</b><span id="weapon-description">פגז כבד, עשן ופיצוץ מדורג</span></div>
+    <div id="error" role="alert" hidden></div>
+  </section>
+  <footer>
+    <div class="actions"><button id="fire" class="primary" disabled>ירי <span aria-hidden="true"></span></button><button id="target" aria-pressed="false">מטרה: חזיר</button><button id="sound" aria-pressed="false">צליל: כבוי</button><button id="pause" aria-pressed="false">השהיה</button></div>
+    <div class="timeline"><label for="scrub">בדיקת הרצף</label><input id="scrub" type="range" min="0" max="100" value="0" step="1"><output id="time">0.00 ש׳</output></div>
+  </footer>
+</main>
+<script type="module" src="preview.mjs"></script>
+</html>
