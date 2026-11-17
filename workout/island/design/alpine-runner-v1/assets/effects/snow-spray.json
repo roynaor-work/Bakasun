@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "authorship": "Original Alpine Runner v1; CC0-1.0",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "units": {
+    "position": "metres",
+    "velocity": "metres-per-second",
+    "duration": "seconds",
+    "angle": "radians"
+  },
+  "simulation": {
+    "fixedStepSeconds": 0.016666666666666666,
+    "maxCatchupSteps": 4,
+    "pauseWhenHidden": true
+  },
+  "random": {
+    "algorithm": "xorshift32",
+    "seed": 19088743,
+    "seedPolicy": "Reset to seed on a new run; never use wall-clock time. Advance unsigned uint32 once per random value.",
+    "nextUint32": "x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0;",
+    "unitFloat": "nextUint32 / 4294967296"
+  },
+  "lifecycle": "Allocate once; reuse the oldest inactive slot. Clamp emission to the pool capacity. Dispose GPU resources on preview teardown.",
+  "text": false,
+  "id": "snow_spray",
+  "primitive": "camera-facing-quad",
+  "poolCapacity": 64,
+  "attachmentBones": [
+    "LeftFoot",
+    "RightFoot"
+  ],
+  "attachmentOffsetMeters": [
+    0,
+    -0.065,
+    -0.28
+  ],
+  "emission": {
+    "particlesPerSecondPerSki": {
+      "glide": 10,
+      "laneChange": 20,
+      "landingBurst": 10,
+      "turbo": 24
+    },
+    "landingBurstIsOneShotPerSki": true,
+    "suppressWhen": [
+      "jump_rise",
+      "jump_apex",
+      "fall_left",
+      "fall_right",
+      "fall_forward"
+    ]
+  },
+  "initialVelocity": {
+    "xRange": [
+      -0.7,
+      0.7
+    ],
+    "yRange": [
+      0.18,
+      0.7
+    ],
+    "zRange": [
+      -2.6,
+      -0.8
+    ]
+  },
+  "gravityMetersPerSecondSquared": [
+    0,
+    -2.1,
+    0
+  ],
+  "sizeMetersRange": [
+    0.025,
+    0.09
+  ],
+  "lifeSecondsRange": [
+    0.35,
+    0.7
+  ],
+  "colorHex": [
+    "#f8fcff",
+    "#d9f7ff"
+  ],
+  "opacityOverLife": [
+    [
+      0,
+      0
+    ],
+    [
+      0.12,
+      0.7
+    ],
+    [
+      0.6,
+      0.5
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "render": {
+    "blending": "normal",
+    "depthTest": true,
+    "depthWrite": false,
+    "sort": "back-to-front",
+    "texture": null
+  }
+}

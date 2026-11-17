@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "name": "Original alpine courier",
+  "authorship": "All geometry and movement authored here; no external meshes, textures or captured motion.",
+  "trianglesPerCharacter": 1200,
+  "baseSculptTriangles": 1144,
+  "jointCount": 18,
+  "sampleRateHz": 30,
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "units": "metres",
+  "canonicalSource": "workout/island/design/motion2/alpine.json#skeleton.bones",
+  "joints": [
+    {
+      "name": "Root",
+      "parent": null,
+      "restTranslationMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "restTranslationMeters": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "restTranslationMeters": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "restTranslationMeters": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "restTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "restTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "restTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "restTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "restTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "restTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "restTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "restTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "suits": [
+    {
+      "id": "coral",
+      "path": "assets/characters/skier-coral.glb",
+      "bytes": 338840,
+      "sha256": "b05992706ddf2c79e7eb09408a8e42589f84f68831ca8dcc4961446ec80e00a2",
+      "triangles": 1200,
+      "suitColor": [
+        0.95,
+        0.2,
+        0.16,
+        1
+      ]
+    },
+    {
+      "id": "teal",
+      "path": "assets/characters/skier-teal.glb",
+      "bytes": 338840,
+      "sha256": "b62e740c093ee07342578d4d092f4644a6ded57c702c39e3d58ab8a7b609deba",
+      "triangles": 1200,
+      "suitColor": [
+        0.025,
+        0.68,
+        0.63,
+        1
+      ]
+    },
+    {
+      "id": "violet",
+      "path": "assets/characters/skier-violet.glb",
+      "bytes": 338840,
+      "sha256": "48a42707f27c0ebcb0305d58092826501b60eae20beece796212d72f82235404",
+      "triangles": 1200,
+      "suitColor": [
+        0.43,
+        0.24,
+        0.85,
+        1
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "name": "glide",
+      "durationSeconds": 1.2,
+      "sampleCount": 37,
+      "loop": true,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "lane_left",
+      "durationSeconds": 0.4,
+      "sampleCount": 13,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "lane_right",
+      "durationSeconds": 0.4,
+      "sampleCount": 13,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "jump_rise",
+      "durationSeconds": 0.3,
+      "sampleCount": 10,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "jump_apex",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+      "locomotion": false
+    },
+    {
+      "name": "jump_apex",
+      "durationSeconds": 0.3,
+      "sampleCount": 10,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "jump_rise",
+          "timeSeconds": 0.3
+        },
+        "exit": {
+          "clip": "jump_land",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+      "locomotion": false
+    },
+    {
+      "name": "jump_land",
+      "durationSeconds": 0.4,
+      "sampleCount": 13,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "jump_apex",
+          "timeSeconds": 0.3
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+      "locomotion": false
+    },
+    {
+      "name": "slide",
+      "durationSeconds": 0.8,
+      "sampleCount": 25,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "fall_left",
+      "durationSeconds": 0.8,
+      "sampleCount": 25,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "fall_left",
+          "timeSeconds": 0.8
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "fall_right",
+      "durationSeconds": 0.8,
+      "sampleCount": 25,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "fall_right",
+          "timeSeconds": 0.8
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "fall_forward",
+      "durationSeconds": 0.8,
+      "sampleCount": 25,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "fall_forward",
+          "timeSeconds": 0.8
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "get_up",
+      "durationSeconds": 1.2,
+      "sampleCount": 37,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "fall_forward",
+          "timeSeconds": 0.8
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "celebrate",
+      "durationSeconds": 1.6,
+      "sampleCount": 49,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    },
+    {
+      "name": "turbo",
+      "durationSeconds": 0.8,
+      "sampleCount": 25,
+      "loop": false,
+      "sampleRateHz": 30,
+      "transitionReferences": {
+        "entry": {
+          "clip": "glide",
+          "timeSeconds": 0
+        },
+        "exit": {
+          "clip": "glide",
+          "timeSeconds": 0
+        }
+      },
+      "soleLocal": [
+        0,
+        -0.055,
+        0
+      ],
+      "contactPolicy": "grounded skis sliding",
+      "locomotion": false
+    }
+  ],
+  "parts": [
+    {
+      "name": "tailored jacket",
+      "triangles": 76,
+      "joint": "Spine"
+    },
+    {
+      "name": "snow trousers seat",
+      "triangles": 44,
+      "joint": "Hips"
+    },
+    {
+      "name": "neck gaiter",
+      "triangles": 28,
+      "joint": "Neck"
+    },
+    {
+      "name": "face",
+      "triangles": 80,
+      "joint": "Head"
+    },
+    {
+      "name": "helmet",
+      "triangles": 120,
+      "joint": "Head"
+    },
+    {
+      "name": "goggle strap rear",
+      "triangles": 12,
+      "joint": "Head"
+    },
+    {
+      "name": "goggle visor",
+      "triangles": 12,
+      "joint": "Head"
+    },
+    {
+      "name": "goggle bridge",
+      "triangles": 12,
+      "joint": "Head"
+    },
+    {
+      "name": "helmet center stripe",
+      "triangles": 12,
+      "joint": "Head"
+    },
+    {
+      "name": "back chevron upper",
+      "triangles": 12,
+      "joint": "Chest"
+    },
+    {
+      "name": "back spine stripe",
+      "triangles": 12,
+      "joint": "Spine"
+    },
+    {
+      "name": "zip front",
+      "triangles": 12,
+      "joint": "Spine"
+    },
+    {
+      "name": "Left jacket sleeve",
+      "triangles": 44,
+      "joint": "LeftArm"
+    },
+    {
+      "name": "Left sleeve cuff",
+      "triangles": 44,
+      "joint": "LeftForeArm"
+    },
+    {
+      "name": "Left insulated glove",
+      "triangles": 48,
+      "joint": "LeftHand"
+    },
+    {
+      "name": "Left upper trousers",
+      "triangles": 44,
+      "joint": "LeftUpLeg"
+    },
+    {
+      "name": "Left lower trousers",
+      "triangles": 44,
+      "joint": "LeftLeg"
+    },
+    {
+      "name": "Left trouser reflective seam",
+      "triangles": 12,
+      "joint": "LeftUpLeg"
+    },
+    {
+      "name": "Left boot",
+      "triangles": 12,
+      "joint": "LeftFoot"
+    },
+    {
+      "name": "Left binding",
+      "triangles": 12,
+      "joint": "LeftFoot"
+    },
+    {
+      "name": "Left shaped ski",
+      "triangles": 44,
+      "joint": "LeftFoot"
+    },
+    {
+      "name": "Left ski rear inlay",
+      "triangles": 12,
+      "joint": "LeftFoot"
+    },
+    {
+      "name": "Left pole shaft",
+      "triangles": 16,
+      "joint": "LeftHand"
+    },
+    {
+      "name": "Left pole basket",
+      "triangles": 24,
+      "joint": "LeftHand"
+    },
+    {
+      "name": "Right jacket sleeve",
+      "triangles": 44,
+      "joint": "RightArm"
+    },
+    {
+      "name": "Right sleeve cuff",
+      "triangles": 44,
+      "joint": "RightForeArm"
+    },
+    {
+      "name": "Right insulated glove",
+      "triangles": 48,
+      "joint": "RightHand"
+    },
+    {
+      "name": "Right upper trousers",
+      "triangles": 44,
+      "joint": "RightUpLeg"
+    },
+    {
+      "name": "Right lower trousers",
+      "triangles": 44,
+      "joint": "RightLeg"
+    },
+    {
+      "name": "Right trouser reflective seam",
+      "triangles": 12,
+      "joint": "RightUpLeg"
+    },
+    {
+      "name": "Right boot",
+      "triangles": 12,
+      "joint": "RightFoot"
+    },
+    {
+      "name": "Right binding",
+      "triangles": 12,
+      "joint": "RightFoot"
+    },
+    {
+      "name": "Right shaped ski",
+      "triangles": 44,
+      "joint": "RightFoot"
+    },
+    {
+      "name": "Right ski rear inlay",
+      "triangles": 12,
+      "joint": "RightFoot"
+    },
+    {
+      "name": "Right pole shaft",
+      "triangles": 16,
+      "joint": "RightHand"
+    },
+    {
+      "name": "Right pole basket",
+      "triangles": 24,
+      "joint": "RightHand"
+    }
+  ],
+  "rootPolicy": {
+    "lateral": "lane clips are in-place; runtime translates lane centers",
+    "forward": "in-place; runtime scrolls the track",
+    "vertical": "Root owns the complete vertical jump arc; Hips owns ground support correction. Runtime must not add a second jump displacement."
+  },
+  "transitions": {
+    "jump": [
+      "jump_rise",
+      "jump_apex",
+      "jump_land"
+    ],
+    "recovery": "All fall variations -> get_up with 0.18 s crossfade. get_up starts in forward-fall pose and finishes at glide.",
+    "slideHoldSeconds": [
+      0.2,
+      0.6
+    ],
+    "loop": [
+      "glide"
+    ],
+    "crossfadeSeconds": 0.12
+  },
+  "license": "CC0-1.0"
+}

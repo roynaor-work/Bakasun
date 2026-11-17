@@ -1,0 +1,2970 @@
+{
+  "schemaVersion": 1,
+  "id": "alpine-runner-v1",
+  "title": "מסלול הפסגה",
+  "version": "1.0.0",
+  "createdDate": "2026-11-17",
+  "sourceBaseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "scope": {
+    "directory": "workout/island/design/alpine-runner-v1/",
+    "existingFilesChanged": false,
+    "integration": "Standalone asset and playable review pack; integration remains with the game maintainer."
+  },
+  "authorship": {
+    "art": "Original procedural meshes, animation curves, icons and VFX contracts; no third-party game art, branding, or captured movement.",
+    "assetLicense": "CC0-1.0",
+    "runtimeLicense": "MIT (Three.js); full notice in vendor/LICENSE.three"
+  },
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X",
+    "laneCentersMeters": [
+      -2.4,
+      0,
+      2.4
+    ],
+    "tileOrigin": "near port z=0; far port z=30; grounded surface y=0 at both ports"
+  },
+  "characters": {
+    "spec": "character-spec.json",
+    "trianglesPerVariant": 1200,
+    "boneCount": 18,
+    "sampleRateHz": 30,
+    "variants": [
+      {
+        "id": "coral",
+        "path": "assets/characters/skier-coral.glb",
+        "bytes": 338840,
+        "sha256": "b05992706ddf2c79e7eb09408a8e42589f84f68831ca8dcc4961446ec80e00a2",
+        "triangles": 1200,
+        "suitColor": [
+          0.95,
+          0.2,
+          0.16,
+          1
+        ]
+      },
+      {
+        "id": "teal",
+        "path": "assets/characters/skier-teal.glb",
+        "bytes": 338840,
+        "sha256": "b62e740c093ee07342578d4d092f4644a6ded57c702c39e3d58ab8a7b609deba",
+        "triangles": 1200,
+        "suitColor": [
+          0.025,
+          0.68,
+          0.63,
+          1
+        ]
+      },
+      {
+        "id": "violet",
+        "path": "assets/characters/skier-violet.glb",
+        "bytes": 338840,
+        "sha256": "48a42707f27c0ebcb0305d58092826501b60eae20beece796212d72f82235404",
+        "triangles": 1200,
+        "suitColor": [
+          0.43,
+          0.24,
+          0.85,
+          1
+        ]
+      }
+    ],
+    "clips": [
+      {
+        "name": "glide",
+        "durationSeconds": 1.2,
+        "sampleCount": 37,
+        "loop": true,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "lane_left",
+        "durationSeconds": 0.4,
+        "sampleCount": 13,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "lane_right",
+        "durationSeconds": 0.4,
+        "sampleCount": 13,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "jump_rise",
+        "durationSeconds": 0.3,
+        "sampleCount": 10,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "jump_apex",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+        "locomotion": false
+      },
+      {
+        "name": "jump_apex",
+        "durationSeconds": 0.3,
+        "sampleCount": 10,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "jump_rise",
+            "timeSeconds": 0.3
+          },
+          "exit": {
+            "clip": "jump_land",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+        "locomotion": false
+      },
+      {
+        "name": "jump_land",
+        "durationSeconds": 0.4,
+        "sampleCount": 13,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "jump_apex",
+            "timeSeconds": 0.3
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "continuous authored jump with takeoff, apex hold and landing segmented across three clips",
+        "locomotion": false
+      },
+      {
+        "name": "slide",
+        "durationSeconds": 0.8,
+        "sampleCount": 25,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "fall_left",
+        "durationSeconds": 0.8,
+        "sampleCount": 25,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "fall_left",
+            "timeSeconds": 0.8
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "fall_right",
+        "durationSeconds": 0.8,
+        "sampleCount": 25,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "fall_right",
+            "timeSeconds": 0.8
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "fall_forward",
+        "durationSeconds": 0.8,
+        "sampleCount": 25,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "fall_forward",
+            "timeSeconds": 0.8
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "get_up",
+        "durationSeconds": 1.2,
+        "sampleCount": 37,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "fall_forward",
+            "timeSeconds": 0.8
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "celebrate",
+        "durationSeconds": 1.6,
+        "sampleCount": 49,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      },
+      {
+        "name": "turbo",
+        "durationSeconds": 0.8,
+        "sampleCount": 25,
+        "loop": false,
+        "sampleRateHz": 30,
+        "transitionReferences": {
+          "entry": {
+            "clip": "glide",
+            "timeSeconds": 0
+          },
+          "exit": {
+            "clip": "glide",
+            "timeSeconds": 0
+          }
+        },
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "contactPolicy": "grounded skis sliding",
+        "locomotion": false
+      }
+    ],
+    "rootPolicy": {
+      "lateral": "lane clips are in-place; runtime translates lane centers",
+      "forward": "in-place; runtime scrolls the track",
+      "vertical": "Root owns the complete vertical jump arc; Hips owns ground support correction. Runtime must not add a second jump displacement."
+    },
+    "transitions": {
+      "jump": [
+        "jump_rise",
+        "jump_apex",
+        "jump_land"
+      ],
+      "recovery": "All fall variations -> get_up with 0.18 s crossfade. get_up starts in forward-fall pose and finishes at glide.",
+      "slideHoldSeconds": [
+        0.2,
+        0.6
+      ],
+      "loop": [
+        "glide"
+      ],
+      "crossfadeSeconds": 0.12
+    }
+  },
+  "track": {
+    "spec": "world-spec.json",
+    "lengthMeters": 30,
+    "variants": [
+      {
+        "path": "assets/tiles/straight.glb",
+        "bytes": 47408,
+        "triangleCount": 720,
+        "visualBounds": {
+          "min": [
+            -7.88113,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            7.936,
+            3.9775,
+            30.0
+          ]
+        },
+        "id": "straight",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/gentle_turn.glb",
+        "bytes": 47484,
+        "triangleCount": 728,
+        "visualBounds": {
+          "min": [
+            -6.98204,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            8.892,
+            4.1925,
+            30.0
+          ]
+        },
+        "id": "gentle_turn",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "1.2*sin(pi*z/30)^2",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0.02936609,
+            "y": 0,
+            "dx_dz": 0.03883222,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0.1145898,
+            "y": 0,
+            "dx_dz": 0.07386327,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0.24732885,
+            "y": 0,
+            "dx_dz": 0.10166407,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0.4145898,
+            "y": 0,
+            "dx_dz": 0.11951329,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0.6,
+            "y": 0,
+            "dx_dz": 0.12566371,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0.7854102,
+            "y": 0,
+            "dx_dz": 0.11951329,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0.95267115,
+            "y": 0,
+            "dx_dz": 0.10166407,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 1.0854102,
+            "y": 0,
+            "dx_dz": 0.07386327,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 1.17063391,
+            "y": 0,
+            "dx_dz": 0.03883222,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 1.2,
+            "y": 0,
+            "dx_dz": 0.0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 1.17063391,
+            "y": 0,
+            "dx_dz": -0.03883222,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 1.0854102,
+            "y": 0,
+            "dx_dz": -0.07386327,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0.95267115,
+            "y": 0,
+            "dx_dz": -0.10166407,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0.7854102,
+            "y": 0,
+            "dx_dz": -0.11951329,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0.6,
+            "y": 0,
+            "dx_dz": -0.12566371,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0.4145898,
+            "y": 0,
+            "dx_dz": -0.11951329,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0.24732885,
+            "y": 0,
+            "dx_dz": -0.10166407,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0.1145898,
+            "y": 0,
+            "dx_dz": -0.07386327,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0.02936609,
+            "y": 0,
+            "dx_dz": -0.03883222,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/slope.glb",
+        "bytes": 49032,
+        "triangleCount": 744,
+        "visualBounds": {
+          "min": [
+            -8.28204,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            8.612,
+            4.81611,
+            30.0
+          ]
+        },
+        "id": "slope",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "1.5*sin(pi*z/30)^2"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0.03670761,
+            "dx_dz": 0,
+            "dy_dz": 0.04854028
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0.14323725,
+            "dx_dz": 0,
+            "dy_dz": 0.09232909
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0.30916106,
+            "dx_dz": 0,
+            "dy_dz": 0.12708009
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0.51823725,
+            "dx_dz": 0,
+            "dy_dz": 0.14939161
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0.75,
+            "dx_dz": 0,
+            "dy_dz": 0.15707963
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0.98176275,
+            "dx_dz": 0,
+            "dy_dz": 0.14939161
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 1.19083894,
+            "dx_dz": 0,
+            "dy_dz": 0.12708009
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 1.35676275,
+            "dx_dz": 0,
+            "dy_dz": 0.09232909
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 1.46329239,
+            "dx_dz": 0,
+            "dy_dz": 0.04854028
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 1.5,
+            "dx_dz": 0,
+            "dy_dz": 0.0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 1.46329239,
+            "dx_dz": 0,
+            "dy_dz": -0.04854028
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 1.35676275,
+            "dx_dz": 0,
+            "dy_dz": -0.09232909
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 1.19083894,
+            "dx_dz": 0,
+            "dy_dz": -0.12708009
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0.98176275,
+            "dx_dz": 0,
+            "dy_dz": -0.14939161
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0.75,
+            "dx_dz": 0,
+            "dy_dz": -0.15707963
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0.51823725,
+            "dx_dz": 0,
+            "dy_dz": -0.14939161
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0.30916106,
+            "dx_dz": 0,
+            "dy_dz": -0.12708009
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0.14323725,
+            "dx_dz": 0,
+            "dy_dz": -0.09232909
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0.03670761,
+            "dx_dz": 0,
+            "dy_dz": -0.04854028
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/bridge.glb",
+        "bytes": 45792,
+        "triangleCount": 740,
+        "visualBounds": {
+          "min": [
+            -5.6,
+            -4.2,
+            0.0
+          ],
+          "max": [
+            5.6,
+            0.96,
+            30.0
+          ]
+        },
+        "id": "bridge",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/ice_tunnel.glb",
+        "bytes": 53876,
+        "triangleCount": 848,
+        "visualBounds": {
+          "min": [
+            -5.6,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            5.6,
+            4.75,
+            30.0
+          ]
+        },
+        "id": "ice_tunnel",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/village.glb",
+        "bytes": 66604,
+        "triangleCount": 1048,
+        "visualBounds": {
+          "min": [
+            -8.81446,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            8.98148,
+            3.13,
+            30.0
+          ]
+        },
+        "id": "village",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/forest.glb",
+        "bytes": 72716,
+        "triangleCount": 1152,
+        "visualBounds": {
+          "min": [
+            -8.78568,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            8.76,
+            5.0525,
+            30.0
+          ]
+        },
+        "id": "forest",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "path": "assets/tiles/summit.glb",
+        "bytes": 34468,
+        "triangleCount": 538,
+        "visualBounds": {
+          "min": [
+            -9.71347,
+            -0.35,
+            0.0
+          ],
+          "max": [
+            9.576,
+            4.351,
+            30.0
+          ]
+        },
+        "id": "summit",
+        "lengthMeters": 30,
+        "laneCentersMeters": [
+          -2.4,
+          0,
+          2.4
+        ],
+        "centerlineEquation": {
+          "x": "0",
+          "y": "0"
+        },
+        "centerline": [
+          {
+            "z": 0.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 1.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 3.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 4.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 6.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 7.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 9.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 10.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 12.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 13.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 15.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 16.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 18.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 19.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 21.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 22.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 24.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 25.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 27.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 28.5,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          },
+          {
+            "z": 30.0,
+            "x": 0,
+            "y": 0,
+            "dx_dz": 0,
+            "dy_dz": 0
+          }
+        ],
+        "ports": {
+          "near": {
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          },
+          "far": {
+            "center": [
+              0,
+              0,
+              30
+            ],
+            "tangent": [
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      }
+    ],
+    "ports": {
+      "nearZ": 0,
+      "farZ": 30,
+      "crossSection": [
+        [
+          -5.6,
+          0.35
+        ],
+        [
+          -3.6,
+          0
+        ],
+        [
+          -1.2,
+          0
+        ],
+        [
+          1.2,
+          0
+        ],
+        [
+          3.6,
+          0
+        ],
+        [
+          5.6,
+          0.35
+        ]
+      ],
+      "continuity": "C1 position and tangent; all 64 ordered tile pairs compatible"
+    },
+    "streaming": {
+      "activeTileSlots": 6,
+      "tileSequence": [
+        "straight",
+        "gentle_turn",
+        "slope",
+        "bridge",
+        "ice_tunnel",
+        "village",
+        "forest",
+        "summit"
+      ],
+      "recycleBehindMeters": 35,
+      "lookAheadMeters": 125,
+      "matchingPairsChecked": 64
+    }
+  },
+  "props": [
+    {
+      "path": "assets/props/tree.glb",
+      "bytes": 8680,
+      "triangleCount": 92,
+      "visualBounds": {
+        "min": [
+          -0.73159,
+          0.0,
+          -0.79164
+        ],
+        "max": [
+          0.812,
+          3.1175,
+          0.79164
+        ]
+      },
+      "id": "tree",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.75,
+          1.45,
+          0.75
+        ],
+        "centerMeters": [
+          0,
+          1.45,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/rock.glb",
+      "bytes": 5504,
+      "triangleCount": 56,
+      "visualBounds": {
+        "min": [
+          -0.68663,
+          -0.19,
+          -0.5488
+        ],
+        "max": [
+          0.7621,
+          1.29,
+          0.5488
+        ]
+      },
+      "id": "rock",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.88,
+          0.625,
+          0.65
+        ],
+        "centerMeters": [
+          0,
+          0.625,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/low_fence.glb",
+      "bytes": 7620,
+      "triangleCount": 84,
+      "visualBounds": {
+        "min": [
+          -1.0,
+          0.0,
+          -0.12
+        ],
+        "max": [
+          1.0,
+          1.03,
+          0.12
+        ]
+      },
+      "id": "low_fence",
+      "interaction": "jump",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.02,
+          0.41,
+          0.2
+        ],
+        "centerMeters": [
+          0,
+          0.41,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "jumpClearanceMeters": 1.05
+    },
+    {
+      "path": "assets/props/high_beam.glb",
+      "bytes": 6924,
+      "triangleCount": 84,
+      "visualBounds": {
+        "min": [
+          -1.11,
+          0.0,
+          -0.17
+        ],
+        "max": [
+          1.11,
+          1.77,
+          0.17
+        ]
+      },
+      "id": "high_beam",
+      "interaction": "slide",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.1,
+          0.845,
+          0.23
+        ],
+        "centerMeters": [
+          0,
+          0.845,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "slideClearanceMeters": 1.05
+    },
+    {
+      "path": "assets/props/cable_car.glb",
+      "bytes": 10316,
+      "triangleCount": 108,
+      "visualBounds": {
+        "min": [
+          -0.85,
+          0.055,
+          -0.74
+        ],
+        "max": [
+          0.85,
+          2.52,
+          0.74
+        ]
+      },
+      "id": "cable_car",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.85,
+          1.26,
+          0.74
+        ],
+        "centerMeters": [
+          0,
+          1.26,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/ice_crevasse.glb",
+      "bytes": 4268,
+      "triangleCount": 30,
+      "visualBounds": {
+        "min": [
+          -1.06,
+          0.006,
+          -0.9
+        ],
+        "max": [
+          1.05,
+          0.025,
+          0.9
+        ]
+      },
+      "id": "ice_crevasse",
+      "interaction": "jump",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.05,
+          0.04,
+          0.9
+        ],
+        "centerMeters": [
+          0,
+          0.04,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "jumpGapLengthMeters": 1.8
+    },
+    {
+      "path": "assets/props/snowman.glb",
+      "bytes": 33032,
+      "triangleCount": 490,
+      "visualBounds": {
+        "min": [
+          -0.93103,
+          -0.01,
+          -0.41607
+        ],
+        "max": [
+          0.93103,
+          2.24,
+          0.47
+        ]
+      },
+      "id": "snowman",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.76,
+          1.12,
+          0.46
+        ],
+        "centerMeters": [
+          0,
+          1.12,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/penguin.glb",
+      "bytes": 39156,
+      "triangleCount": 590,
+      "visualBounds": {
+        "min": [
+          -0.48,
+          0.005,
+          -0.28532
+        ],
+        "max": [
+          0.48,
+          1.37,
+          0.45
+        ]
+      },
+      "id": "penguin",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.49,
+          0.685,
+          0.43
+        ],
+        "centerMeters": [
+          0,
+          0.685,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/rolling_snowball.glb",
+      "bytes": 12800,
+      "triangleCount": 180,
+      "visualBounds": {
+        "min": [
+          -0.78,
+          0.0,
+          -0.78
+        ],
+        "max": [
+          0.78,
+          1.56,
+          0.78
+        ]
+      },
+      "id": "rolling_snowball",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.78,
+          0.775,
+          0.78
+        ],
+        "centerMeters": [
+          0,
+          0.775,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "motion": {
+        "axis": "-Z",
+        "rollingRadiusMeters": 0.78,
+        "recommendedSpeedMetersPerSecond": 2.2
+      }
+    },
+    {
+      "path": "assets/props/coin.glb",
+      "bytes": 7192,
+      "triangleCount": 121,
+      "visualBounds": {
+        "min": [
+          -0.29,
+          -0.29,
+          -0.0375
+        ],
+        "max": [
+          0.29,
+          0.29,
+          0.054
+        ]
+      },
+      "id": "coin",
+      "interaction": "collect",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.3,
+          0.15,
+          0.07
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/star.glb",
+      "bytes": 3408,
+      "triangleCount": 20,
+      "visualBounds": {
+        "min": [
+          -0.35189,
+          -0.29934,
+          -0.105
+        ],
+        "max": [
+          0.35189,
+          0.37,
+          0.105
+        ]
+      },
+      "id": "star",
+      "interaction": "collect",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.37,
+          0.185,
+          0.11
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/magnet.glb",
+      "bytes": 6316,
+      "triangleCount": 72,
+      "visualBounds": {
+        "min": [
+          -0.31,
+          -0.33,
+          -0.09
+        ],
+        "max": [
+          0.31,
+          0.42,
+          0.1175
+        ]
+      },
+      "id": "magnet",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.32,
+          0.215,
+          0.12
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/shield.glb",
+      "bytes": 5116,
+      "triangleCount": 34,
+      "visualBounds": {
+        "min": [
+          -0.34,
+          -0.4,
+          -0.07
+        ],
+        "max": [
+          0.34,
+          0.31,
+          0.1525
+        ]
+      },
+      "id": "shield",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.34,
+          0.205,
+          0.14
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/turbo.glb",
+      "bytes": 3696,
+      "triangleCount": 20,
+      "visualBounds": {
+        "min": [
+          -0.3,
+          -0.41,
+          -0.075
+        ],
+        "max": [
+          0.31,
+          0.41,
+          0.075
+        ]
+      },
+      "id": "turbo",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.32,
+          0.21,
+          0.08
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/double_coin.glb",
+      "bytes": 12616,
+      "triangleCount": 242,
+      "visualBounds": {
+        "min": [
+          -0.39,
+          -0.29,
+          -0.0375
+        ],
+        "max": [
+          0.41,
+          0.29,
+          0.164
+        ]
+      },
+      "id": "double_coin",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.41,
+          0.15,
+          0.19
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    }
+  ],
+  "icons": {
+    "directory": "assets/icons",
+    "format": "SVG",
+    "viewBox": [
+      0,
+      0,
+      64,
+      64
+    ],
+    "embeddedText": false,
+    "count": 16
+  },
+  "effects": {
+    "contracts": [
+      "assets/effects/snow-spray.json",
+      "assets/effects/ski-trail.json",
+      "assets/effects/turbo-streaks.json"
+    ],
+    "preview": {
+      "ambientSnowPointPool": 100,
+      "skiSprayPointPool": 48,
+      "reducedMotionPools": [
+        36,
+        18
+      ],
+      "random": "seeded LCG32; seed 0x51a17e"
+    }
+  },
+  "preview": {
+    "entry": "preview.html",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "network": "HTTP server needed for modules and GLB fetch; all runtime resources local, no external requests.",
+    "camera": "rear third-person perspective",
+    "simulationHz": 120,
+    "maximumFrameCatchupSeconds": 0.25,
+    "input": {
+      "keyboard": {
+        "ArrowLeft": "lane left",
+        "ArrowRight": "lane right",
+        "ArrowUp / Space": "jump",
+        "ArrowDown": "slide",
+        "P / Escape": "pause"
+      },
+      "touch": "swipe in four directions or use icon buttons"
+    },
+    "gameplayTuning": {
+      "baseSpeedMetersPerSecond": 14,
+      "maximumBaseSpeedMetersPerSecond": 19,
+      "turboSpeedMetersPerSecond": 22,
+      "powerDurationSeconds": {
+        "turbo": 6,
+        "magnet": 9,
+        "shield": 9,
+        "double_coin": 9
+      },
+      "fenceRequiredRootLiftMeters": 1.05,
+      "slideHoldSeconds": [
+        0.2,
+        0.6
+      ]
+    },
+    "testMode": "?test=1 exposes deterministic __alpine.advance; optional ?autoplay=1 and ?tile=forest"
+  },
+  "budgets": {
+    "wholeFolderMaximumBytes": 8000000,
+    "tileMaximumBytes": 150000,
+    "largestTileBytes": 72716,
+    "inventoriedRuntimeBytes": 2512343,
+    "allGlbBytes": 1600544
+  },
+  "qa": {
+    "khronosReport": "verification/assets.json",
+    "motionReport": "verification/motion-qa.json",
+    "browserReport": "verification/browser.json",
+    "motionToolCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "minimumActionScore": 90.8,
+    "requiredActionScoreExclusive": 88,
+    "deliveredClips": 13,
+    "measuredCompleteActions": 11,
+    "jumpScoring": "jump_rise + jump_apex + jump_land sampled as a single continuous action. Individual airborne phase diagnostics are retained and are not passing standalone scores.",
+    "phonePerformance": "Not measured; software Chromium checks are functional evidence."
+  },
+  "inventory": [
+    {
+      "path": "assets/characters/skier-coral.glb",
+      "bytes": 338840,
+      "sha256": "b05992706ddf2c79e7eb09408a8e42589f84f68831ca8dcc4961446ec80e00a2"
+    },
+    {
+      "path": "assets/characters/skier-teal.glb",
+      "bytes": 338840,
+      "sha256": "b62e740c093ee07342578d4d092f4644a6ded57c702c39e3d58ab8a7b609deba"
+    },
+    {
+      "path": "assets/characters/skier-violet.glb",
+      "bytes": 338840,
+      "sha256": "48a42707f27c0ebcb0305d58092826501b60eae20beece796212d72f82235404"
+    },
+    {
+      "path": "assets/effects/ski-trail.json",
+      "bytes": 1702,
+      "sha256": "468ab370e20da23d44256672e1cfea24739e21db069fbcf2e533a836d764786b"
+    },
+    {
+      "path": "assets/effects/snow-spray.json",
+      "bytes": 2051,
+      "sha256": "1e30d65c8c78c15e241b693c70ee1d01047d72833b0853b57765b974854ef170"
+    },
+    {
+      "path": "assets/effects/turbo-streaks.json",
+      "bytes": 2045,
+      "sha256": "67dda6af58137166392203cf7c76c94581afed16849756e2e315dc6ee881f924"
+    },
+    {
+      "path": "assets/icons/celebrate.svg",
+      "bytes": 576,
+      "sha256": "7aee103bf8b6edf213a4ce73f6ac61c5639be3c2a2b30c3b04ff1839d2ab30fa"
+    },
+    {
+      "path": "assets/icons/coin.svg",
+      "bytes": 366,
+      "sha256": "7378e7be4ec7cb5c261cc6a9e41508efc43c0e0f0532267d8ffe08512074e15f"
+    },
+    {
+      "path": "assets/icons/distance.svg",
+      "bytes": 392,
+      "sha256": "bdf69ce5f045355083d94d37d5e40ccc5cc4fc4facff2e95661c7c0454ebd255"
+    },
+    {
+      "path": "assets/icons/double_coin.svg",
+      "bytes": 498,
+      "sha256": "3f79b6d58da1a306bd4b296ccc86d8feecb9fa68ee1a1feaea35012b7ef0e3dd"
+    },
+    {
+      "path": "assets/icons/jump.svg",
+      "bytes": 310,
+      "sha256": "638da0fb3b76d220de2c7270962e9fbc81f3de8547d347c60ee25af059e51ca6"
+    },
+    {
+      "path": "assets/icons/left.svg",
+      "bytes": 244,
+      "sha256": "c9adfe34c274b75f1aaba353bea7bb03f74bbfad6641fb7a6fc157f78a5f5679"
+    },
+    {
+      "path": "assets/icons/magnet.svg",
+      "bytes": 412,
+      "sha256": "5f911eea0a8f6a089b1a87a5762165b410f64a51d4b34251bb78a2dfa516b556"
+    },
+    {
+      "path": "assets/icons/pause.svg",
+      "bytes": 320,
+      "sha256": "c9e7d04cb634bfafaf42a6c6933b57624bbb0507fc470377503f25c455fcf13a"
+    },
+    {
+      "path": "assets/icons/play.svg",
+      "bytes": 287,
+      "sha256": "3bc23e00d5aa8df4cc157e0294167f33feb847565f1e339c9c7ad40f652e1eeb"
+    },
+    {
+      "path": "assets/icons/restart.svg",
+      "bytes": 373,
+      "sha256": "530e408a318bf50360e464da999cf3f16dea9cf765e7fd71a4981f7677f05cdd"
+    },
+    {
+      "path": "assets/icons/right.svg",
+      "bytes": 244,
+      "sha256": "e2ee00d4331e0e794377a7ceb14c98ccbb5ae7d5b46b6c06c19ecef1c6f48e46"
+    },
+    {
+      "path": "assets/icons/shield.svg",
+      "bytes": 414,
+      "sha256": "238c2b57bdbcfb500464fe028a5f3e9e26b0407c9335557c7372e25624bca29f"
+    },
+    {
+      "path": "assets/icons/slide.svg",
+      "bytes": 311,
+      "sha256": "7ff66930d6bf6ba96299486f4909f130b33dc992ad4d128f7a4a1ffa19dc26f3"
+    },
+    {
+      "path": "assets/icons/star.svg",
+      "bytes": 375,
+      "sha256": "24e4cc0fcd4a00a5a4c0ee7821a56d0d0f9a6306dc5df2547393b8a7fee0dd48"
+    },
+    {
+      "path": "assets/icons/turbo.svg",
+      "bytes": 333,
+      "sha256": "34d920b35e3e5a8fff3162d394c6b58c0bda270bd589e2af1845e95c890183ab"
+    },
+    {
+      "path": "assets/icons/wardrobe.svg",
+      "bytes": 393,
+      "sha256": "9cf909979277d08634d74332670f10f1d725a08e72146f45a5c1741117232800"
+    },
+    {
+      "path": "assets/props/cable_car.glb",
+      "bytes": 10316,
+      "sha256": "c2f4b36d5c9155f686c6d1ce7f947642ea5472403b9e00bc7b61ae67cd5b2b33"
+    },
+    {
+      "path": "assets/props/coin.glb",
+      "bytes": 7192,
+      "sha256": "a3c7cf5c5296046e48d9be9aa0ad2ee2783c0caa677fbe087e02b1e9045a289c"
+    },
+    {
+      "path": "assets/props/double_coin.glb",
+      "bytes": 12616,
+      "sha256": "bec12bd9f67fa22f0915a8848a0f916e458db02b757aa1b9dc6fdf25957bcdf4"
+    },
+    {
+      "path": "assets/props/high_beam.glb",
+      "bytes": 6924,
+      "sha256": "ffef849278b6bc9bac800e8eef77bad17604c398047c7252bce176386a21593f"
+    },
+    {
+      "path": "assets/props/ice_crevasse.glb",
+      "bytes": 4268,
+      "sha256": "1e78be43f35e3f0056853cbbe14c372c4e68fca78d7d247342450e324896d38c"
+    },
+    {
+      "path": "assets/props/low_fence.glb",
+      "bytes": 7620,
+      "sha256": "24f90a85c4c8e8d96ed594ac155413f11f9e56b53c28d40549ece73d263c7d34"
+    },
+    {
+      "path": "assets/props/magnet.glb",
+      "bytes": 6316,
+      "sha256": "1a0d94b61cd216e0fad48bb44a7854fcca45471e84dfba8cafb3718078586aa8"
+    },
+    {
+      "path": "assets/props/penguin.glb",
+      "bytes": 39156,
+      "sha256": "a61c18d9df2bdae185b500bdf5bc2faab2564f5b79bfa1394ad5cf28c6e11176"
+    },
+    {
+      "path": "assets/props/rock.glb",
+      "bytes": 5504,
+      "sha256": "ebe08497291287fd16c3b36318ebcd8a59228c49fca3b532b40933610265a3be"
+    },
+    {
+      "path": "assets/props/rolling_snowball.glb",
+      "bytes": 12800,
+      "sha256": "830683e2047fa72ff5b916b4320578b68a2df5210bfcb0751bd9d7214d98d747"
+    },
+    {
+      "path": "assets/props/shield.glb",
+      "bytes": 5116,
+      "sha256": "91eefcac51b1c90c8d02ec6584b048c912f677ce7a8085f5c5beb137a93a74bd"
+    },
+    {
+      "path": "assets/props/snowman.glb",
+      "bytes": 33032,
+      "sha256": "30a524ff596e9a8f56e41bf20a3410ebbb34948b794b4ad4f597d7efa60729b4"
+    },
+    {
+      "path": "assets/props/star.glb",
+      "bytes": 3408,
+      "sha256": "25f1e0d3d37dd403e509996d1b15e103be2d91ba1b00a42f7f1fe09be30e0370"
+    },
+    {
+      "path": "assets/props/tree.glb",
+      "bytes": 8680,
+      "sha256": "53b8dcb077af6bd606e622ecd15a678621deb14797118e7bcfb693782e4e4a62"
+    },
+    {
+      "path": "assets/props/turbo.glb",
+      "bytes": 3696,
+      "sha256": "0f20446994732c144829edb55e254553b56ba9220efc71ac229fb06421f9e32c"
+    },
+    {
+      "path": "assets/tiles/bridge.glb",
+      "bytes": 45792,
+      "sha256": "e4598418c70ee8f2b3980d85a9212c7aa617c6b96e5d25666be94de98766af18"
+    },
+    {
+      "path": "assets/tiles/forest.glb",
+      "bytes": 72716,
+      "sha256": "3fd1a704cc541526775dac7e994cf07df3fb541e6b38929f413a72c5ffb2bc74"
+    },
+    {
+      "path": "assets/tiles/gentle_turn.glb",
+      "bytes": 47484,
+      "sha256": "32fee947f878574a5f67d119634677c75e0276c3a949de97a6d216ee371b4656"
+    },
+    {
+      "path": "assets/tiles/ice_tunnel.glb",
+      "bytes": 53876,
+      "sha256": "0f8cd271e7607b9f69341ddc6beb84b9caad6bfdfc29ddfa3d61ab52e18670e9"
+    },
+    {
+      "path": "assets/tiles/slope.glb",
+      "bytes": 49032,
+      "sha256": "b0f4f2bbffe8eb0f0b5c50259999d43bdb5a974bd0c60e39f088ac7a54bae875"
+    },
+    {
+      "path": "assets/tiles/straight.glb",
+      "bytes": 47408,
+      "sha256": "e81f848b094cd8c6185902d34638d5da7d271ad47e9067aef3f3152ce02cc72b"
+    },
+    {
+      "path": "assets/tiles/summit.glb",
+      "bytes": 34468,
+      "sha256": "be432b3c9b856c38b75a69c5eea9e3d708721fc5ac672ed7daf1130b007f9f66"
+    },
+    {
+      "path": "assets/tiles/village.glb",
+      "bytes": 66604,
+      "sha256": "80c515be4d418995d698017e15e6da51e60fff1ebe372f2cc99c7214e9c1db6c"
+    },
+    {
+      "path": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "path": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 4126,
+      "sha256": "a76855d4438b1e01b6f351f8ba3e6e9e1fce320b5608f636e5584e207bc49e8c"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 6351,
+      "sha256": "d11c86bf746f617e55b5d2fdecfceb57117ef0531bf1690ccb7d546822a854eb"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 23297,
+      "sha256": "32f571942f6315b6ad86e1d16620bc4c268c3505083fb15715e2a1b28282f531"
+    },
+    {
+      "path": "character-spec.json",
+      "bytes": 14688,
+      "sha256": "772828c2736ddc44100146518fe226278a4a410e794cc8b660239338367c5d52"
+    },
+    {
+      "path": "world-spec.json",
+      "bytes": 39484,
+      "sha256": "0692ae4943c095d6c1cc642aa859da0acaa9541015382c65fb735ad3f9111498"
+    }
+  ]
+}

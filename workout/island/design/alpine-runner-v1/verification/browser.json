@@ -1,0 +1,759 @@
+{
+  "schemaVersion": 1,
+  "browser": "151.0.7922.173",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "mode": "Chromium software WebGL; deterministic 120Hz advance; no physical phone performance claim",
+  "checks": [
+    {
+      "name": "all assets loaded",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "844x390 canvas",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "keyboard left changes lane",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "lane left clamps",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "keyboard right reaches right lane",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "lane right clamps",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "pointer swipe changes lane",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "coin collects in lane",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "jump clears physical 1.03m fence",
+      "pass": true,
+      "evidence": {
+        "height": 1.25,
+        "collisions": 0
+      }
+    },
+    {
+      "name": "jump returns to glide",
+      "pass": true,
+      "evidence": "glide"
+    },
+    {
+      "name": "slide clears beam during low hold",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "standing skier hits beam",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fall recovers to glide",
+      "pass": true,
+      "evidence": "glide"
+    },
+    {
+      "name": "collision low_fence",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision tree",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision rock",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision cable_car",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision ice_crevasse",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision snowman",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision penguin",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "collision rolling_snowball",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "star collects",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "magnet collects adjacent lane",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "shield absorbs collision and is consumed",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "magnet attracts another lane",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "double coin awards two",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "turbo accelerates and animates",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "turbo expires",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "suit change safely resets transient action",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "pause freezes distance and action",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "pause button resumes",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "stream visits all eight variants",
+      "pass": true,
+      "evidence": [
+        "straight",
+        "gentle_turn",
+        "slope",
+        "bridge",
+        "ice_tunnel",
+        "village",
+        "forest",
+        "summit"
+      ]
+    },
+    {
+      "name": "stream keeps six tile slots",
+      "pass": true,
+      "evidence": 6
+    },
+    {
+      "name": "entity population remains bounded",
+      "pass": true,
+      "evidence": 70
+    },
+    {
+      "name": "restart resets scores powers and distance",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "no browser errors",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "name": "no failed requests",
+      "pass": true,
+      "evidence": []
+    }
+  ],
+  "passed": 37,
+  "failed": 0,
+  "errors": [],
+  "requestFailures": [],
+  "longRun": {
+    "ready": true,
+    "running": true,
+    "started": true,
+    "paused": false,
+    "distance": 2282.296982537928,
+    "coins": 1027,
+    "stars": 51,
+    "lane": 0,
+    "laneX": 0,
+    "suit": 1,
+    "time": 150,
+    "action": "glide",
+    "actionTime": 1.1666666666387473,
+    "falling": false,
+    "invulnerable": 151.33333333336412,
+    "nextRow": 2414,
+    "spawnIndex": 172,
+    "tilesPassed": 76,
+    "collisions": 14,
+    "collected": 753,
+    "powers": {
+      "double_coin": 154.66666666669852
+    },
+    "visited": [
+      "straight",
+      "gentle_turn",
+      "slope",
+      "bridge",
+      "ice_tunnel",
+      "village",
+      "forest",
+      "summit"
+    ],
+    "events": [
+      {
+        "type": "collect",
+        "t": 136.05,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.117,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.183,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.25,
+        "kind": "coin"
+      },
+      {
+        "type": "blocked",
+        "t": 136.533,
+        "kind": "cable_car"
+      },
+      {
+        "type": "collect",
+        "t": 136.533,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.6,
+        "kind": "coin"
+      },
+      {
+        "type": "animation",
+        "t": 136.65,
+        "name": "glide"
+      },
+      {
+        "type": "collect",
+        "t": 136.667,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.692,
+        "kind": "star"
+      },
+      {
+        "type": "collect",
+        "t": 136.75,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.825,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 136.908,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.25,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.333,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.408,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.492,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.567,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.65,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 137.992,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.075,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.15,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.233,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.283,
+        "kind": "shield"
+      },
+      {
+        "type": "collect",
+        "t": 138.308,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.392,
+        "kind": "coin"
+      },
+      {
+        "type": "blocked",
+        "t": 138.725,
+        "kind": "penguin"
+      },
+      {
+        "type": "collect",
+        "t": 138.733,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.808,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.892,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 138.917,
+        "kind": "star"
+      },
+      {
+        "type": "collect",
+        "t": 138.967,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.05,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.133,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.475,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.55,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.633,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.708,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.792,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 139.867,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.208,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.292,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.367,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.45,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.525,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 140.608,
+        "kind": "coin"
+      },
+      {
+        "type": "animation",
+        "t": 140.942,
+        "name": "fall_right"
+      },
+      {
+        "type": "collision",
+        "t": 140.942,
+        "kind": "rock"
+      },
+      {
+        "type": "collect",
+        "t": 140.942,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 141.258,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 141.575,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 141.667,
+        "kind": "star"
+      },
+      {
+        "type": "animation",
+        "t": 141.742,
+        "name": "get_up"
+      },
+      {
+        "type": "collect",
+        "t": 141.892,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 142.208,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 142.525,
+        "kind": "coin"
+      },
+      {
+        "type": "animation",
+        "t": 142.942,
+        "name": "glide"
+      },
+      {
+        "type": "collect",
+        "t": 143.183,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.258,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.342,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.417,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.5,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.575,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.917,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 143.992,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 144.075,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 144.15,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 144.233,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 144.308,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 144.825,
+        "kind": "star"
+      },
+      {
+        "type": "collect",
+        "t": 145.075,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.15,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.233,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.308,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.383,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.467,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.667,
+        "kind": "double_coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.8,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.883,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 145.958,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 146.042,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 146.117,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 146.2,
+        "kind": "coin"
+      },
+      {
+        "type": "animation",
+        "t": 146.833,
+        "name": "fall_forward"
+      },
+      {
+        "type": "collision",
+        "t": 146.833,
+        "kind": "penguin"
+      },
+      {
+        "type": "collect",
+        "t": 147.567,
+        "kind": "star"
+      },
+      {
+        "type": "animation",
+        "t": 147.633,
+        "name": "get_up"
+      },
+      {
+        "type": "collect",
+        "t": 148.542,
+        "kind": "coin"
+      },
+      {
+        "type": "animation",
+        "t": 148.833,
+        "name": "glide"
+      },
+      {
+        "type": "collect",
+        "t": 148.842,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 148.917,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.075,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.158,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.492,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.567,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.65,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.725,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.808,
+        "kind": "coin"
+      },
+      {
+        "type": "collect",
+        "t": 149.883,
+        "kind": "coin"
+      }
+    ],
+    "rootHeight": 0,
+    "entityCount": 70,
+    "tileCount": 6,
+    "renderer": {
+      "frame": 34,
+      "calls": 259,
+      "triangles": 15336,
+      "points": 148,
+      "lines": 0
+    }
+  }
+}

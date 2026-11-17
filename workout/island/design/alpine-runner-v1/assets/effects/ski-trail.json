@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "authorship": "Original Alpine Runner v1; CC0-1.0",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "units": {
+    "position": "metres",
+    "velocity": "metres-per-second",
+    "duration": "seconds",
+    "angle": "radians"
+  },
+  "simulation": {
+    "fixedStepSeconds": 0.016666666666666666,
+    "maxCatchupSteps": 4,
+    "pauseWhenHidden": true
+  },
+  "random": {
+    "algorithm": "xorshift32",
+    "seed": 19088743,
+    "seedPolicy": "Reset to seed on a new run; never use wall-clock time. Advance unsigned uint32 once per random value.",
+    "nextUint32": "x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0;",
+    "unitFloat": "nextUint32 / 4294967296"
+  },
+  "lifecycle": "Allocate once; reuse the oldest inactive slot. Clamp emission to the pool capacity. Dispose GPU resources on preview teardown.",
+  "text": false,
+  "id": "ski_trail",
+  "primitive": "pooled-two-point-ribbon",
+  "ribbonCount": 2,
+  "pointsPerRibbon": 24,
+  "poolCapacity": 48,
+  "attachmentBones": [
+    "LeftFoot",
+    "RightFoot"
+  ],
+  "attachmentOffsetMeters": [
+    0,
+    -0.075,
+    -0.2
+  ],
+  "pointSpacingMeters": 0.17,
+  "pointLifeSeconds": 0.72,
+  "widthMeters": 0.06,
+  "surfaceOffsetMeters": 0.008,
+  "sampleGroundAtEachPoint": true,
+  "breakRibbonWhen": [
+    "airborne",
+    "fallen",
+    "teleport",
+    "run_restart"
+  ],
+  "resumeOnlyWithFreshPoints": true,
+  "colorHex": "#98c9dc",
+  "opacityOverLife": [
+    [
+      0,
+      0.32
+    ],
+    [
+      0.65,
+      0.16
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "render": {
+    "blending": "normal",
+    "depthTest": true,
+    "depthWrite": false,
+    "polygonOffset": [
+      -1,
+      -1
+    ],
+    "texture": null
+  }
+}

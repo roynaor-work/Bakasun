@@ -1,0 +1,2213 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "authorship": "Original procedural geometry authored in source/build-world.py; no third-party visual assets.",
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "laneCentersMeters": [
+    -2.4,
+    0,
+    2.4
+  ],
+  "tileLengthMeters": 30,
+  "playableWidthMeters": 7.2,
+  "surfaceWidthMeters": 11.2,
+  "ports": {
+    "nearZ": 0,
+    "farZ": 30,
+    "crossSection": [
+      [
+        -5.6,
+        0.35
+      ],
+      [
+        -3.6,
+        0
+      ],
+      [
+        -1.2,
+        0
+      ],
+      [
+        1.2,
+        0
+      ],
+      [
+        3.6,
+        0
+      ],
+      [
+        5.6,
+        0.35
+      ]
+    ],
+    "continuity": "C1 position and tangent; all 64 ordered tile pairs compatible"
+  },
+  "tiles": [
+    {
+      "path": "assets/tiles/straight.glb",
+      "bytes": 47408,
+      "triangleCount": 720,
+      "visualBounds": {
+        "min": [
+          -7.88113,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          7.936,
+          3.9775,
+          30.0
+        ]
+      },
+      "id": "straight",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/gentle_turn.glb",
+      "bytes": 47484,
+      "triangleCount": 728,
+      "visualBounds": {
+        "min": [
+          -6.98204,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          8.892,
+          4.1925,
+          30.0
+        ]
+      },
+      "id": "gentle_turn",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "1.2*sin(pi*z/30)^2",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0.02936609,
+          "y": 0,
+          "dx_dz": 0.03883222,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0.1145898,
+          "y": 0,
+          "dx_dz": 0.07386327,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0.24732885,
+          "y": 0,
+          "dx_dz": 0.10166407,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0.4145898,
+          "y": 0,
+          "dx_dz": 0.11951329,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0.6,
+          "y": 0,
+          "dx_dz": 0.12566371,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0.7854102,
+          "y": 0,
+          "dx_dz": 0.11951329,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0.95267115,
+          "y": 0,
+          "dx_dz": 0.10166407,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 1.0854102,
+          "y": 0,
+          "dx_dz": 0.07386327,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 1.17063391,
+          "y": 0,
+          "dx_dz": 0.03883222,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 1.2,
+          "y": 0,
+          "dx_dz": 0.0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 1.17063391,
+          "y": 0,
+          "dx_dz": -0.03883222,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 1.0854102,
+          "y": 0,
+          "dx_dz": -0.07386327,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0.95267115,
+          "y": 0,
+          "dx_dz": -0.10166407,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0.7854102,
+          "y": 0,
+          "dx_dz": -0.11951329,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0.6,
+          "y": 0,
+          "dx_dz": -0.12566371,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0.4145898,
+          "y": 0,
+          "dx_dz": -0.11951329,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0.24732885,
+          "y": 0,
+          "dx_dz": -0.10166407,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0.1145898,
+          "y": 0,
+          "dx_dz": -0.07386327,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0.02936609,
+          "y": 0,
+          "dx_dz": -0.03883222,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/slope.glb",
+      "bytes": 49032,
+      "triangleCount": 744,
+      "visualBounds": {
+        "min": [
+          -8.28204,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          8.612,
+          4.81611,
+          30.0
+        ]
+      },
+      "id": "slope",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "1.5*sin(pi*z/30)^2"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0.03670761,
+          "dx_dz": 0,
+          "dy_dz": 0.04854028
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0.14323725,
+          "dx_dz": 0,
+          "dy_dz": 0.09232909
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0.30916106,
+          "dx_dz": 0,
+          "dy_dz": 0.12708009
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0.51823725,
+          "dx_dz": 0,
+          "dy_dz": 0.14939161
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0.75,
+          "dx_dz": 0,
+          "dy_dz": 0.15707963
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0.98176275,
+          "dx_dz": 0,
+          "dy_dz": 0.14939161
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 1.19083894,
+          "dx_dz": 0,
+          "dy_dz": 0.12708009
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 1.35676275,
+          "dx_dz": 0,
+          "dy_dz": 0.09232909
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 1.46329239,
+          "dx_dz": 0,
+          "dy_dz": 0.04854028
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 1.5,
+          "dx_dz": 0,
+          "dy_dz": 0.0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 1.46329239,
+          "dx_dz": 0,
+          "dy_dz": -0.04854028
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 1.35676275,
+          "dx_dz": 0,
+          "dy_dz": -0.09232909
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 1.19083894,
+          "dx_dz": 0,
+          "dy_dz": -0.12708009
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0.98176275,
+          "dx_dz": 0,
+          "dy_dz": -0.14939161
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0.75,
+          "dx_dz": 0,
+          "dy_dz": -0.15707963
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0.51823725,
+          "dx_dz": 0,
+          "dy_dz": -0.14939161
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0.30916106,
+          "dx_dz": 0,
+          "dy_dz": -0.12708009
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0.14323725,
+          "dx_dz": 0,
+          "dy_dz": -0.09232909
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0.03670761,
+          "dx_dz": 0,
+          "dy_dz": -0.04854028
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/bridge.glb",
+      "bytes": 45792,
+      "triangleCount": 740,
+      "visualBounds": {
+        "min": [
+          -5.6,
+          -4.2,
+          0.0
+        ],
+        "max": [
+          5.6,
+          0.96,
+          30.0
+        ]
+      },
+      "id": "bridge",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/ice_tunnel.glb",
+      "bytes": 53876,
+      "triangleCount": 848,
+      "visualBounds": {
+        "min": [
+          -5.6,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          5.6,
+          4.75,
+          30.0
+        ]
+      },
+      "id": "ice_tunnel",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/village.glb",
+      "bytes": 66604,
+      "triangleCount": 1048,
+      "visualBounds": {
+        "min": [
+          -8.81446,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          8.98148,
+          3.13,
+          30.0
+        ]
+      },
+      "id": "village",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/forest.glb",
+      "bytes": 72716,
+      "triangleCount": 1152,
+      "visualBounds": {
+        "min": [
+          -8.78568,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          8.76,
+          5.0525,
+          30.0
+        ]
+      },
+      "id": "forest",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "path": "assets/tiles/summit.glb",
+      "bytes": 34468,
+      "triangleCount": 538,
+      "visualBounds": {
+        "min": [
+          -9.71347,
+          -0.35,
+          0.0
+        ],
+        "max": [
+          9.576,
+          4.351,
+          30.0
+        ]
+      },
+      "id": "summit",
+      "lengthMeters": 30,
+      "laneCentersMeters": [
+        -2.4,
+        0,
+        2.4
+      ],
+      "centerlineEquation": {
+        "x": "0",
+        "y": "0"
+      },
+      "centerline": [
+        {
+          "z": 0.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 1.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 3.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 4.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 6.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 7.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 9.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 10.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 12.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 13.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 15.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 16.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 18.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 19.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 21.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 22.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 24.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 25.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 27.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 28.5,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        },
+        {
+          "z": 30.0,
+          "x": 0,
+          "y": 0,
+          "dx_dz": 0,
+          "dy_dz": 0
+        }
+      ],
+      "ports": {
+        "near": {
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        },
+        "far": {
+          "center": [
+            0,
+            0,
+            30
+          ],
+          "tangent": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "props": [
+    {
+      "path": "assets/props/tree.glb",
+      "bytes": 8680,
+      "triangleCount": 92,
+      "visualBounds": {
+        "min": [
+          -0.73159,
+          0.0,
+          -0.79164
+        ],
+        "max": [
+          0.812,
+          3.1175,
+          0.79164
+        ]
+      },
+      "id": "tree",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.75,
+          1.45,
+          0.75
+        ],
+        "centerMeters": [
+          0,
+          1.45,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/rock.glb",
+      "bytes": 5504,
+      "triangleCount": 56,
+      "visualBounds": {
+        "min": [
+          -0.68663,
+          -0.19,
+          -0.5488
+        ],
+        "max": [
+          0.7621,
+          1.29,
+          0.5488
+        ]
+      },
+      "id": "rock",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.88,
+          0.625,
+          0.65
+        ],
+        "centerMeters": [
+          0,
+          0.625,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/low_fence.glb",
+      "bytes": 7620,
+      "triangleCount": 84,
+      "visualBounds": {
+        "min": [
+          -1.0,
+          0.0,
+          -0.12
+        ],
+        "max": [
+          1.0,
+          1.03,
+          0.12
+        ]
+      },
+      "id": "low_fence",
+      "interaction": "jump",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.02,
+          0.41,
+          0.2
+        ],
+        "centerMeters": [
+          0,
+          0.41,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "jumpClearanceMeters": 1.05
+    },
+    {
+      "path": "assets/props/high_beam.glb",
+      "bytes": 6924,
+      "triangleCount": 84,
+      "visualBounds": {
+        "min": [
+          -1.11,
+          0.0,
+          -0.17
+        ],
+        "max": [
+          1.11,
+          1.77,
+          0.17
+        ]
+      },
+      "id": "high_beam",
+      "interaction": "slide",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.1,
+          0.845,
+          0.23
+        ],
+        "centerMeters": [
+          0,
+          0.845,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "slideClearanceMeters": 1.05
+    },
+    {
+      "path": "assets/props/cable_car.glb",
+      "bytes": 10316,
+      "triangleCount": 108,
+      "visualBounds": {
+        "min": [
+          -0.85,
+          0.055,
+          -0.74
+        ],
+        "max": [
+          0.85,
+          2.52,
+          0.74
+        ]
+      },
+      "id": "cable_car",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.85,
+          1.26,
+          0.74
+        ],
+        "centerMeters": [
+          0,
+          1.26,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/ice_crevasse.glb",
+      "bytes": 4268,
+      "triangleCount": 30,
+      "visualBounds": {
+        "min": [
+          -1.06,
+          0.006,
+          -0.9
+        ],
+        "max": [
+          1.05,
+          0.025,
+          0.9
+        ]
+      },
+      "id": "ice_crevasse",
+      "interaction": "jump",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          1.05,
+          0.04,
+          0.9
+        ],
+        "centerMeters": [
+          0,
+          0.04,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "jumpGapLengthMeters": 1.8
+    },
+    {
+      "path": "assets/props/snowman.glb",
+      "bytes": 33032,
+      "triangleCount": 490,
+      "visualBounds": {
+        "min": [
+          -0.93103,
+          -0.01,
+          -0.41607
+        ],
+        "max": [
+          0.93103,
+          2.24,
+          0.47
+        ]
+      },
+      "id": "snowman",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.76,
+          1.12,
+          0.46
+        ],
+        "centerMeters": [
+          0,
+          1.12,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/penguin.glb",
+      "bytes": 39156,
+      "triangleCount": 590,
+      "visualBounds": {
+        "min": [
+          -0.48,
+          0.005,
+          -0.28532
+        ],
+        "max": [
+          0.48,
+          1.37,
+          0.45
+        ]
+      },
+      "id": "penguin",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.49,
+          0.685,
+          0.43
+        ],
+        "centerMeters": [
+          0,
+          0.685,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/rolling_snowball.glb",
+      "bytes": 12800,
+      "triangleCount": 180,
+      "visualBounds": {
+        "min": [
+          -0.78,
+          0.0,
+          -0.78
+        ],
+        "max": [
+          0.78,
+          1.56,
+          0.78
+        ]
+      },
+      "id": "rolling_snowball",
+      "interaction": "dodge",
+      "origin": "ground center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.78,
+          0.775,
+          0.78
+        ],
+        "centerMeters": [
+          0,
+          0.775,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "motion": {
+        "axis": "-Z",
+        "rollingRadiusMeters": 0.78,
+        "recommendedSpeedMetersPerSecond": 2.2
+      }
+    },
+    {
+      "path": "assets/props/coin.glb",
+      "bytes": 7192,
+      "triangleCount": 121,
+      "visualBounds": {
+        "min": [
+          -0.29,
+          -0.29,
+          -0.0375
+        ],
+        "max": [
+          0.29,
+          0.29,
+          0.054
+        ]
+      },
+      "id": "coin",
+      "interaction": "collect",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.3,
+          0.15,
+          0.07
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/star.glb",
+      "bytes": 3408,
+      "triangleCount": 20,
+      "visualBounds": {
+        "min": [
+          -0.35189,
+          -0.29934,
+          -0.105
+        ],
+        "max": [
+          0.35189,
+          0.37,
+          0.105
+        ]
+      },
+      "id": "star",
+      "interaction": "collect",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.37,
+          0.185,
+          0.11
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1
+    },
+    {
+      "path": "assets/props/magnet.glb",
+      "bytes": 6316,
+      "triangleCount": 72,
+      "visualBounds": {
+        "min": [
+          -0.31,
+          -0.33,
+          -0.09
+        ],
+        "max": [
+          0.31,
+          0.42,
+          0.1175
+        ]
+      },
+      "id": "magnet",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.32,
+          0.215,
+          0.12
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/shield.glb",
+      "bytes": 5116,
+      "triangleCount": 34,
+      "visualBounds": {
+        "min": [
+          -0.34,
+          -0.4,
+          -0.07
+        ],
+        "max": [
+          0.34,
+          0.31,
+          0.1525
+        ]
+      },
+      "id": "shield",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.34,
+          0.205,
+          0.14
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/turbo.glb",
+      "bytes": 3696,
+      "triangleCount": 20,
+      "visualBounds": {
+        "min": [
+          -0.3,
+          -0.41,
+          -0.075
+        ],
+        "max": [
+          0.31,
+          0.41,
+          0.075
+        ]
+      },
+      "id": "turbo",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.32,
+          0.21,
+          0.08
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    },
+    {
+      "path": "assets/props/double_coin.glb",
+      "bytes": 12616,
+      "triangleCount": 242,
+      "visualBounds": {
+        "min": [
+          -0.39,
+          -0.29,
+          -0.0375
+        ],
+        "max": [
+          0.41,
+          0.29,
+          0.164
+        ]
+      },
+      "id": "double_coin",
+      "interaction": "powerup",
+      "origin": "object center",
+      "collider": {
+        "type": "box",
+        "halfExtentsMeters": [
+          0.41,
+          0.15,
+          0.19
+        ],
+        "centerMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "recommendedLaneCount": 1,
+      "durationSeconds": 8
+    }
+  ],
+  "collectiblePlacement": {
+    "arc": {
+      "count": 7,
+      "spacingMeters": 1.4,
+      "baseHeightMeters": 0.85,
+      "peakAdditionalHeightMeters": 1.1,
+      "formula": "y = baseHeight + peakAdditionalHeight * sin(pi*i/(count-1))"
+    },
+    "runtimeRotationAxis": "+Y"
+  },
+  "seamNotes": "Surface y=0 and centerline x=0 at both boundaries. Interior curvature/elevation never changes the port profile. Sample player and prop y from centerline.",
+  "interpretations": {
+    "ice_crevasse": "\u05e7\u05e8\u05d5\u05d1 \u05e7\u05e8\u05d7 interpreted as a jumpable ice crevasse."
+  }
+}

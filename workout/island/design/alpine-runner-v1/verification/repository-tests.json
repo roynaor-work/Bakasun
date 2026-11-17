@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "existingRepositoryFilesChanged": false,
+  "command": "npm test",
+  "initialRun": {
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "durationMs": 814589.541076,
+    "failure": "tests/workout-royiki.test.mjs:91 browserType.launch: default Chromium headless shell-1234 executable absent. Its leftover server required process cleanup."
+  },
+  "targetedRerun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/alpine-runner-system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+    "adapter": "Temporary module exported Playwright chromium with launch executablePath=/usr/bin/chromium; no repository source changes.",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 23782.373899
+  },
+  "interpretation": "The complete suite was run once. Its sole environmental failure passed a targeted rerun with installed Chromium; this is not a claim that a second full npm test run was performed."
+}

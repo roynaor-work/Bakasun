@@ -1,0 +1,2910 @@
+{
+  "schemaVersion": 1,
+  "tool": "motion-qa-v1",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "qaFiles": [
+    {
+      "path": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "bytes": 36189
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/glb.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "bytes": 9363
+    }
+  ],
+  "invocation": "Original analyzeClip() and sampleGLB() loaded byte-for-byte; 120Hz plus original 30Hz sample times; declared intended state transitions",
+  "sourceAsset": "assets/characters/skier-coral.glb",
+  "sourceSha256": "b05992706ddf2c79e7eb09408a8e42589f84f68831ca8dcc4961446ec80e00a2",
+  "sampleHz": 120,
+  "deliveredClips": 13,
+  "measuredActions": 11,
+  "metricDefinitions": {
+    "footSliding": {
+      "label": "החלקת רגליים",
+      "unit": "height ratio",
+      "green": 0.01,
+      "yellow": 0.035,
+      "weight": 18,
+      "description": "Maximum horizontal sole displacement from the first sample of each declared support window, divided by character height. Inferred support is used only when no windows were supplied."
+    },
+    "floorPenetration": {
+      "label": "חדירה לרצפה",
+      "unit": "height ratio",
+      "green": 0.005,
+      "yellow": 0.02,
+      "weight": 15,
+      "description": "Maximum depth of the supplied sole probe points and all skeletal joint centers below the declared floor plane, divided by height. Sole probes are not a mesh collision audit."
+    },
+    "posePops": {
+      "label": "קפיצות פוזה",
+      "unit": "discontinuity ratio",
+      "green": 1,
+      "yellow": 2.5,
+      "weight": 18,
+      "description": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+    },
+    "anatomy": {
+      "label": "חריגות אנטומיות",
+      "unit": "% affected frames",
+      "green": 0.5,
+      "yellow": 3,
+      "weight": 14,
+      "description": "Percentage of frames with elbow or knee flexion above 165 degrees, neck bend above 80 degrees, or a segment length changing by more than 5%. Optional calibrated hinge checks detect reverse knee flexion above 8 degrees. Conservative marker limits do not diagnose axial joint twist."
+    },
+    "ballContact": {
+      "label": "מגע בכדור",
+      "unit": "height ratio",
+      "green": 0.015,
+      "yellow": 0.05,
+      "weight": 13,
+      "description": "Maximum absolute distance from the ball surface to the sampled, bone-transformed declared contact point, divided by height. Events are evaluated at their exact declared times by interpolation."
+    },
+    "continuity": {
+      "label": "כניסה ויציאה מול המתנה",
+      "unit": "continuity ratio",
+      "green": 1,
+      "yellow": 3,
+      "weight": 10,
+      "description": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+    },
+    "bodySliding": {
+      "label": "מהירות גוף מול צעדים",
+      "unit": "relative speed error",
+      "green": 0.2,
+      "yellow": 0.5,
+      "weight": 8,
+      "description": "Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion."
+    },
+    "symmetry": {
+      "label": "סימטריה",
+      "unit": "relative mismatch",
+      "green": 0.03,
+      "yellow": 0.1,
+      "weight": 4,
+      "description": "Maximum bilateral segment-length mismatch. Looping locomotion additionally compares reflected half-cycle leg markers; explicit pose symmetry compares simultaneous bilateral markers. One-sided actions retain unscored motion diagnostics, so a valid kick or dribble arm is not penalized for intentional asymmetry."
+    }
+  },
+  "scoreKind": "Original weighted reproducible screening proxy; not a perceptual quality score",
+  "skiingSemantics": "Skis slide continuously: gait cadence/bodySliding is not applicable. Forward travel and lane displacement are driven externally by the preview. FootSliding checks the stance in the local sliding frame.",
+  "minimumScore": 90.8,
+  "averageScore": 96.27272727272727,
+  "redMetrics": 0,
+  "jumpMeasurement": "Three delivered clips are sampled consecutively as one real jump action for the scoring gate. Isolated airborne phases have no support contacts; the original footSliding formula cannot express this as not-applicable. Per-phase diagnostics remain unmodified below and are not claimed as passing standalone scores.",
+  "phaseDiagnostics": [
+    {
+      "id": "jump_rise",
+      "sourceClips": [
+        "jump_rise"
+      ],
+      "durationSeconds": 0.30000001192092896,
+      "samples": 37,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "jump_apex",
+        "timeSeconds": 0
+      },
+      "score": 86.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 18,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.016667,
+              "start": 0,
+              "end": 0.066667,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 740,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.992786,
+          "status": "yellow",
+          "score": 60.14,
+          "evidence": {
+            "adjacentPairs": 36,
+            "observations": 612,
+            "maxDegrees60Hz": 3.681702,
+            "maxMarkerStepHeight60Hz": 0.079711,
+            "maxRootStepHeight60Hz": 0.067897,
+            "worst": {
+              "ratio": 1.9927861258812087,
+              "t": 0.233333,
+              "previousTime": 0.225,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.079711,
+              "degrees60Hz": 3.681701
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 37,
+            "affectedFrames": 0,
+            "checks": 629,
+            "maxLimbFlexionDegrees": 98.93611,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 2.051891,
+          "status": "yellow",
+          "score": 64.22,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0463043010612162,
+              "t": 0,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 2.0518911491093,
+              "t": 0.3,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.015677,
+              "rmsRotationDegrees": 0.523555,
+              "rmsVelocityHeightPerSecond": 1.538918,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.992786,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        },
+        {
+          "metric": "continuity",
+          "label": "כניסה ויציאה מול המתנה",
+          "status": "yellow",
+          "value": 2.051891,
+          "unit": "continuity ratio",
+          "reason": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jump_rise",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "jump_apex",
+      "sourceClips": [
+        "jump_apex"
+      ],
+      "durationSeconds": 0.30000001192092896,
+      "samples": 37,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "jump_rise",
+        "timeSeconds": 0.3
+      },
+      "exitReference": {
+        "clip": "jump_land",
+        "timeSeconds": 0
+      },
+      "score": 70.5,
+      "coverage": 0.7722,
+      "metrics": {
+        "footSliding": {
+          "value": null,
+          "status": "insufficient-data",
+          "score": null,
+          "reason": "No measurable foot support interval.",
+          "evidence": {
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition"
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 740,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 1.204289
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.471956,
+          "status": "green",
+          "score": 90.56,
+          "evidence": {
+            "adjacentPairs": 36,
+            "observations": 612,
+            "maxDegrees60Hz": 0.861676,
+            "maxMarkerStepHeight60Hz": 0.018878,
+            "maxRootStepHeight60Hz": 0.015891,
+            "worst": {
+              "ratio": 0.4719557609714744,
+              "t": 0.033333,
+              "previousTime": 0.025,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.018878,
+              "degrees60Hz": 0.861676
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 37,
+            "affectedFrames": 0,
+            "checks": 629,
+            "maxLimbFlexionDegrees": 99.751225,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 2.050949,
+          "status": "yellow",
+          "score": 64.24,
+          "evidence": {
+            "entry": {
+              "ratio": 2.0509488092611514,
+              "t": 0,
+              "idleTime": 0.283333,
+              "markers": 17,
+              "rmsPositionHeight": 0.04132,
+              "rmsRotationDegrees": 1.380819,
+              "rmsVelocityHeightPerSecond": 1.538212,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 4.382856902598338e-8,
+              "t": 0.3,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "footSliding",
+          "label": "החלקת רגליים",
+          "status": "insufficient-data",
+          "value": null,
+          "unit": "height ratio",
+          "reason": "No measurable foot support interval."
+        },
+        {
+          "metric": "continuity",
+          "label": "כניסה ויציאה מול המתנה",
+          "status": "yellow",
+          "value": 2.050949,
+          "unit": "continuity ratio",
+          "reason": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 61,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jump_apex",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "jump_land",
+      "sourceClips": [
+        "jump_land"
+      ],
+      "durationSeconds": 0.4000000059604645,
+      "samples": 49,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "jump_apex",
+        "timeSeconds": 0.3
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 68,
+      "coverage": 0.7722,
+      "metrics": {
+        "footSliding": {
+          "value": null,
+          "status": "insufficient-data",
+          "score": null,
+          "reason": "No measurable foot support interval.",
+          "evidence": {
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition"
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 980,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 1.258
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.992786,
+          "status": "yellow",
+          "score": 60.14,
+          "evidence": {
+            "adjacentPairs": 48,
+            "observations": 816,
+            "maxDegrees60Hz": 3.681702,
+            "maxMarkerStepHeight60Hz": 0.079711,
+            "maxRootStepHeight60Hz": 0.067897,
+            "worst": {
+              "ratio": 1.9927859773304069,
+              "t": 0.175,
+              "previousTime": 0.166667,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.079711,
+              "degrees60Hz": 3.6817
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 49,
+            "affectedFrames": 0,
+            "checks": 833,
+            "maxLimbFlexionDegrees": 99.751225,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 4.382856902598338e-8,
+              "t": 0,
+              "idleTime": 0.283333,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.04630430106120928,
+              "t": 0.4,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "footSliding",
+          "label": "החלקת רגליים",
+          "status": "insufficient-data",
+          "value": null,
+          "unit": "height ratio",
+          "reason": "No measurable foot support interval."
+        },
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.992786,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 61,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jump_land",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "glide",
+      "sourceClips": [
+        "glide"
+      ],
+      "durationSeconds": 1.2000000476837158,
+      "samples": 145,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 99.8,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 290,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000006,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.583333,
+              "start": 0,
+              "end": 1.2,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 2900,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.033493,
+          "status": "green",
+          "score": 99.33,
+          "evidence": {
+            "adjacentPairs": 144,
+            "observations": 2448,
+            "maxDegrees60Hz": 0.203611,
+            "maxMarkerStepHeight60Hz": 0.00134,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.03349291322968218,
+              "t": 0.633333,
+              "previousTime": 0.625,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.00134,
+              "degrees60Hz": 0.203607
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 145,
+            "affectedFrames": 0,
+            "checks": 2465,
+            "maxLimbFlexionDegrees": 80.871714,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.000064,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 3.704190159097233e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.00006358915660762737,
+              "t": 1.2,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.000048,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.00244,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "glide",
+      "sport": "alpine",
+      "metadata": {
+        "loop": true,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "lane_left",
+      "sourceClips": [
+        "lane_left"
+      ],
+      "durationSeconds": 0.4000000059604645,
+      "samples": 49,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 96.8,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.004141,
+          "status": "green",
+          "score": 91.72,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 98,
+            "maxDriftMeters": 0.006999,
+            "p95SpeedMetersPerSecond": 0.052885,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.2,
+              "start": 0,
+              "end": 0.4,
+              "driftMeters": 0.006999
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 980,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.223871,
+          "status": "green",
+          "score": 95.52,
+          "evidence": {
+            "adjacentPairs": 48,
+            "observations": 816,
+            "maxDegrees60Hz": 2.124715,
+            "maxMarkerStepHeight60Hz": 0.008955,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.22387085320093175,
+              "t": 0.133333,
+              "previousTime": 0.125,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.008955,
+              "degrees60Hz": 2.124685
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 49,
+            "affectedFrames": 0,
+            "checks": 833,
+            "maxLimbFlexionDegrees": 87.866731,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.120586,
+          "status": "green",
+          "score": 97.59,
+          "evidence": {
+            "entry": {
+              "ratio": 0.10121614216861397,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.075912,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.12058638546630072,
+              "t": 0.4,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.09044,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.032532,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "lane_left",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "lane_right",
+      "sourceClips": [
+        "lane_right"
+      ],
+      "durationSeconds": 0.4000000059604645,
+      "samples": 49,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 96.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.004141,
+          "status": "green",
+          "score": 91.72,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 98,
+            "maxDriftMeters": 0.006999,
+            "p95SpeedMetersPerSecond": 0.052885,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.2,
+              "start": 0,
+              "end": 0.4,
+              "driftMeters": 0.006999
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 980,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.223871,
+          "status": "green",
+          "score": 95.52,
+          "evidence": {
+            "adjacentPairs": 48,
+            "observations": 816,
+            "maxDegrees60Hz": 2.124715,
+            "maxMarkerStepHeight60Hz": 0.008955,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.22387085320093175,
+              "t": 0.133333,
+              "previousTime": 0.125,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.008955,
+              "degrees60Hz": 2.124685
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 49,
+            "affectedFrames": 0,
+            "checks": 833,
+            "maxLimbFlexionDegrees": 87.866731,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.136846,
+          "status": "green",
+          "score": 97.26,
+          "evidence": {
+            "entry": {
+              "ratio": 0.07784005267545427,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.05838,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.13684608182978633,
+              "t": 0.4,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.102635,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.032532,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "lane_right",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "slide",
+      "sourceClips": [
+        "slide"
+      ],
+      "durationSeconds": 0.800000011920929,
+      "samples": 97,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 93.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000493,
+          "status": "green",
+          "score": 99.01,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 6,
+            "samples": 186,
+            "maxDriftMeters": 0.000833,
+            "p95SpeedMetersPerSecond": 0.072644,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.116667,
+              "start": 0,
+              "end": 0.116667,
+              "driftMeters": 0.000833
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 1940,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.023965,
+          "status": "yellow",
+          "score": 79.52,
+          "evidence": {
+            "adjacentPairs": 96,
+            "observations": 1632,
+            "maxDegrees60Hz": 10.974889,
+            "maxMarkerStepHeight60Hz": 0.040959,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 1.0239650812098853,
+              "t": 0.675,
+              "previousTime": 0.666667,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.040959,
+              "degrees60Hz": 1.006919
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 97,
+            "affectedFrames": 0,
+            "checks": 1649,
+            "maxLimbFlexionDegrees": 150.130867,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.755515,
+          "status": "green",
+          "score": 84.89,
+          "evidence": {
+            "entry": {
+              "ratio": 0.6852952328022175,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.513971,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.7555152334153469,
+              "t": 0.8,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.566636,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.023965,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "slide",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "fall_left",
+      "sourceClips": [
+        "fall_left"
+      ],
+      "durationSeconds": 0.800000011920929,
+      "samples": 97,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "fall_left",
+        "timeSeconds": 0.8
+      },
+      "score": 95.5,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.001488,
+          "status": "green",
+          "score": 97.02,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 38,
+            "maxDriftMeters": 0.002514,
+            "p95SpeedMetersPerSecond": 0.027309,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.2,
+              "start": 0,
+              "end": 0.2,
+              "driftMeters": 0.002514
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 1940,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.815578,
+          "status": "green",
+          "score": 83.69,
+          "evidence": {
+            "adjacentPairs": 96,
+            "observations": 1632,
+            "maxDegrees60Hz": 5.239284,
+            "maxMarkerStepHeight60Hz": 0.032623,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.8155775534022724,
+              "t": 0.341667,
+              "previousTime": 0.333333,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.032623,
+              "degrees60Hz": 0
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 97,
+            "affectedFrames": 0,
+            "checks": 1649,
+            "maxLimbFlexionDegrees": 119.270495,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0463043010612162,
+              "t": 0,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 2.8692533594737974e-8,
+              "t": 0.8,
+              "idleTime": 0.783333,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.123494,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "fall_left",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "fall_right",
+      "sourceClips": [
+        "fall_right"
+      ],
+      "durationSeconds": 0.800000011920929,
+      "samples": 97,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "fall_right",
+        "timeSeconds": 0.8
+      },
+      "score": 95.5,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.001488,
+          "status": "green",
+          "score": 97.02,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 38,
+            "maxDriftMeters": 0.002514,
+            "p95SpeedMetersPerSecond": 0.027309,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.2,
+              "start": 0,
+              "end": 0.2,
+              "driftMeters": 0.002514
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 1940,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.815578,
+          "status": "green",
+          "score": 83.69,
+          "evidence": {
+            "adjacentPairs": 96,
+            "observations": 1632,
+            "maxDegrees60Hz": 5.239284,
+            "maxMarkerStepHeight60Hz": 0.032623,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.8155775534022724,
+              "t": 0.341667,
+              "previousTime": 0.333333,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.032623,
+              "degrees60Hz": 0
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 97,
+            "affectedFrames": 0,
+            "checks": 1649,
+            "maxLimbFlexionDegrees": 119.270495,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0463043010612162,
+              "t": 0,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 2.8692533594737974e-8,
+              "t": 0.8,
+              "idleTime": 0.783333,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.123494,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "fall_right",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "fall_forward",
+      "sourceClips": [
+        "fall_forward"
+      ],
+      "durationSeconds": 0.800000011920929,
+      "samples": 97,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "fall_forward",
+        "timeSeconds": 0.8
+      },
+      "score": 97,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000028,
+          "status": "green",
+          "score": 99.94,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 66,
+            "maxDriftMeters": 0.000048,
+            "p95SpeedMetersPerSecond": 0.004033,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.25,
+              "start": 0,
+              "end": 0.266667,
+              "driftMeters": 0.000048
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 1940,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.63502,
+          "status": "green",
+          "score": 87.3,
+          "evidence": {
+            "adjacentPairs": 96,
+            "observations": 1632,
+            "maxDegrees60Hz": 5.239284,
+            "maxMarkerStepHeight60Hz": 0.025401,
+            "maxRootStepHeight60Hz": 0.003538,
+            "worst": {
+              "ratio": 0.6350204190445238,
+              "t": 0.241667,
+              "previousTime": 0.233333,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.025401,
+              "degrees60Hz": 0
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 97,
+            "affectedFrames": 0,
+            "checks": 1649,
+            "maxLimbFlexionDegrees": 119.270495,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 0.04630430106121678,
+              "t": 0,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 5.972827162270582e-8,
+              "t": 0.8,
+              "idleTime": 0.791667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "fall_forward",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "get_up",
+      "sourceClips": [
+        "get_up"
+      ],
+      "durationSeconds": 1.2000000476837158,
+      "samples": 145,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "fall_forward",
+        "timeSeconds": 0.8
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 98.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 88,
+            "maxDriftMeters": 0.000002,
+            "p95SpeedMetersPerSecond": 0.000148,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.975,
+              "start": 0.841667,
+              "end": 1.2,
+              "driftMeters": 0.000002
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 2900,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.44976
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.394182,
+          "status": "green",
+          "score": 92.12,
+          "evidence": {
+            "adjacentPairs": 144,
+            "observations": 2448,
+            "maxDegrees60Hz": 3.281228,
+            "maxMarkerStepHeight60Hz": 0.015767,
+            "maxRootStepHeight60Hz": 0.002216,
+            "worst": {
+              "ratio": 0.39418202262065294,
+              "t": 0.866667,
+              "previousTime": 0.858333,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.015767,
+              "degrees60Hz": 0
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 145,
+            "affectedFrames": 0,
+            "checks": 2465,
+            "maxLimbFlexionDegrees": 119.270495,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 4.9696925983963054e-8,
+              "t": 0,
+              "idleTime": 0.783333,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.046304301061213554,
+              "t": 1.2,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "get_up",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "celebrate",
+      "sourceClips": [
+        "celebrate"
+      ],
+      "durationSeconds": 1.600000023841858,
+      "samples": 193,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 97.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 386,
+            "maxDriftMeters": 0.000001,
+            "p95SpeedMetersPerSecond": 0.000056,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.016667,
+              "start": 0,
+              "end": 1.6,
+              "driftMeters": 0.000001
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 3860,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.470256,
+          "status": "green",
+          "score": 90.59,
+          "evidence": {
+            "adjacentPairs": 192,
+            "observations": 3264,
+            "maxDegrees60Hz": 3.631511,
+            "maxMarkerStepHeight60Hz": 0.01881,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.4702562213260806,
+              "t": 0.4,
+              "previousTime": 0.391667,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.01881,
+              "degrees60Hz": 3.486277
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 193,
+            "affectedFrames": 0,
+            "checks": 3281,
+            "maxLimbFlexionDegrees": 82.528574,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.064097,
+          "status": "green",
+          "score": 98.72,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0640967235279937,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.048073,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.06299412505752276,
+              "t": 1.6,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.047246,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "celebrate",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "turbo",
+      "sourceClips": [
+        "turbo"
+      ],
+      "durationSeconds": 0.800000011920929,
+      "samples": 97,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 97.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000016,
+          "status": "green",
+          "score": 99.97,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 194,
+            "maxDriftMeters": 0.000027,
+            "p95SpeedMetersPerSecond": 0.002317,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.583333,
+              "start": 0,
+              "end": 0.8,
+              "driftMeters": 0.000027
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 1940,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.387428,
+          "status": "green",
+          "score": 92.25,
+          "evidence": {
+            "adjacentPairs": 96,
+            "observations": 1632,
+            "maxDegrees60Hz": 5.306077,
+            "maxMarkerStepHeight60Hz": 0.015497,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.38742816581962136,
+              "t": 0.633333,
+              "previousTime": 0.625,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.015497,
+              "degrees60Hz": 5.306077
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 97,
+            "affectedFrames": 0,
+            "checks": 1649,
+            "maxLimbFlexionDegrees": 114.165702,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.139292,
+          "status": "green",
+          "score": 97.21,
+          "evidence": {
+            "entry": {
+              "ratio": 0.05305655612423215,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.039792,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.1392918914461828,
+              "t": 0.8,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.104469,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "turbo",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": false,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    },
+    {
+      "id": "jump",
+      "sourceClips": [
+        "jump_rise",
+        "jump_apex",
+        "jump_land"
+      ],
+      "durationSeconds": 1.0000000298023224,
+      "samples": 121,
+      "heightMeters": 1.6900000000000002,
+      "entryReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "exitReference": {
+        "clip": "glide",
+        "timeSeconds": 0
+      },
+      "score": 90.8,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+            "supportSource": "inferred from height and vertical speed; no horizontal-speed condition",
+            "windows": 2,
+            "samples": 18,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.016667,
+              "start": 0,
+              "end": 0.066667,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 2420,
+            "floorY": 0,
+            "probeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0.008
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.992786,
+          "status": "yellow",
+          "score": 60.14,
+          "evidence": {
+            "adjacentPairs": 120,
+            "observations": 2040,
+            "maxDegrees60Hz": 3.681702,
+            "maxMarkerStepHeight60Hz": 0.079711,
+            "maxRootStepHeight60Hz": 0.067897,
+            "worst": {
+              "ratio": 1.9927861258812087,
+              "t": 0.233333,
+              "previousTime": 0.225,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.079711,
+              "degrees60Hz": 3.681701
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 121,
+            "affectedFrames": 0,
+            "checks": 2057,
+            "maxLimbFlexionDegrees": 99.751225,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046304,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0463043010612162,
+              "t": 0,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.04630430106120928,
+              "t": 1,
+              "idleTime": 0.016667,
+              "markers": 17,
+              "rmsPositionHeight": 0.000579,
+              "rmsRotationDegrees": 0.134332,
+              "rmsVelocityHeightPerSecond": 0.034728,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.992786,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "jump",
+      "sport": "alpine",
+      "metadata": {
+        "loop": false,
+        "rootMotion": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContacts": [],
+        "events": [],
+        "supports": [],
+        "soleLocal": [
+          0,
+          -0.055,
+          0
+        ],
+        "floorY": 0,
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "kind": "ski-slide",
+        "coordinateSpace": "Actual delivered GLB in canonical metres; external forward/lane travel excluded",
+        "floorProbeKind": "Actual ski sole center [0,-.055,0] transformed from native GLB joints plus skeletal joint centers; whole mesh audited separately"
+      }
+    }
+  ],
+  "passed": true,
+  "failures": []
+}

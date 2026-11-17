@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#152e43" />
+  <title>מסלול הפסגה · Alpine Runner</title>
+  <link rel="icon" href="assets/icons/star.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="preview.css" />
+  <main id="stage" aria-label="ראנר סקי בשלושה נתיבים">
+    <canvas id="world" aria-label="מסלול סקי תלת ממדי במבט מאחור"></canvas>
+    <header>
+      <div class="brand">
+        <svg viewBox="0 0 44 32" aria-hidden="true">
+          <path d="M2 29 15 7l7 11L29 3l13 26Z" />
+          <path d="m11 14 4-7 7 11-6-3-3 3m12-7 4-8 5 11-5-3-3 3" />
+        </svg>
+        <div><b>מסלול הפסגה</b><small>מסע אינסופי בשלג</small></div>
+      </div>
+      <div class="metrics" dir="ltr">
+        <div class="metric">
+          <img src="assets/icons/distance.svg" alt="מרחק" /><span id="distance"
+            >0</span
+          ><small>מ׳</small>
+        </div>
+        <div class="metric">
+          <img src="assets/icons/coin.svg" alt="מטבעות" /><span id="coins"
+            >0</span
+          >
+        </div>
+        <div class="metric">
+          <img src="assets/icons/star.svg" alt="כוכבים" /><span id="stars"
+            >0</span
+          >
+        </div>
+      </div>
+      <button id="pause" class="icon" aria-label="השהיה" title="השהיה">
+        <img src="assets/icons/pause.svg" alt="" />
+      </button>
+    </header>
+    <div id="location">
+      <span class="dot"></span><span id="biome">מדרון פתוח</span
+      ><span class="separator">/</span><span id="speed" dir="ltr">50 km/h</span>
+    </div>
+    <div id="powers" aria-label="כוחות פעילים"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="welcome" class="panel">
+      <span class="eyebrow">שלושה נתיבים. פסגה אחת.</span>
+      <h1>ההר מחכה לך.</h1>
+      <p>החליקו הצידה, קפצו מעל גדרות<br />והתכופפו מתחת לקורות.</p>
+      <button id="start">
+        יוצאים לדרך
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M5 19 19 5M7 5h12v12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg></button
+      ><small>חצים במקלדת או החלקה באצבע</small>
+    </div>
+    <div id="loading" role="status">מכינים את השלג…</div>
+    <footer>
+      <div class="controls" dir="ltr">
+        <button class="icon move" data-command="left" aria-label="נתיב שמאלה">
+          <img src="assets/icons/left.svg" alt="" /></button
+        ><button class="icon move" data-command="right" aria-label="נתיב ימינה">
+          <img src="assets/icons/right.svg" alt="" />
+        </button>
+      </div>
+      <div class="utilities">
+        <button
+          id="suit"
+          class="icon subtle"
+          aria-label="החלפת צבע חליפה"
+          title="החלפת חליפה"
+        >
+          <img src="assets/icons/wardrobe.svg" alt="" /></button
+        ><button
+          id="restart"
+          class="icon subtle"
+          aria-label="התחלה מחדש"
+          title="התחלה מחדש"
+        >
+          <img src="assets/icons/restart.svg" alt="" />
+        </button>
+      </div>
+      <div class="controls">
+        <button class="icon move" data-command="jump" aria-label="קפיצה">
+          <img src="assets/icons/jump.svg" alt="" /></button
+        ><button
+          class="icon move"
+          data-command="slide"
+          aria-label="החלקה מתחת למכשול"
+        >
+          <img src="assets/icons/slide.svg" alt="" />
+        </button>
+      </div>
+    </footer>
+    <div id="progress"><i></i></div>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</html>

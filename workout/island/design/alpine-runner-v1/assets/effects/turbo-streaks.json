@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "authorship": "Original Alpine Runner v1; CC0-1.0",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "units": {
+    "position": "metres",
+    "velocity": "metres-per-second",
+    "duration": "seconds",
+    "angle": "radians"
+  },
+  "simulation": {
+    "fixedStepSeconds": 0.016666666666666666,
+    "maxCatchupSteps": 4,
+    "pauseWhenHidden": true
+  },
+  "random": {
+    "algorithm": "xorshift32",
+    "seed": 19088743,
+    "seedPolicy": "Reset to seed on a new run; never use wall-clock time. Advance unsigned uint32 once per random value.",
+    "nextUint32": "x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0;",
+    "unitFloat": "nextUint32 / 4294967296"
+  },
+  "lifecycle": "Allocate once; reuse the oldest inactive slot. Clamp emission to the pool capacity. Dispose GPU resources on preview teardown.",
+  "text": false,
+  "id": "turbo_streaks",
+  "primitive": "velocity-aligned-quad",
+  "poolCapacity": 24,
+  "attachment": "player-world-position",
+  "emission": {
+    "particlesPerSecond": 20,
+    "onlyWhen": "turbo_powerup_active"
+  },
+  "spawnBoxMeters": {
+    "x": [
+      -2.6,
+      2.6
+    ],
+    "y": [
+      0.15,
+      2.5
+    ],
+    "z": [
+      4,
+      9
+    ]
+  },
+  "initialVelocity": {
+    "xRange": [
+      0,
+      0
+    ],
+    "yRange": [
+      0,
+      0
+    ],
+    "zRange": [
+      -18,
+      -12
+    ]
+  },
+  "widthMetersRange": [
+    0.012,
+    0.025
+  ],
+  "lengthMetersRange": [
+    0.35,
+    0.9
+  ],
+  "lifeSecondsRange": [
+    0.3,
+    0.5
+  ],
+  "colorHex": [
+    "#95e7ed",
+    "#f8fcff"
+  ],
+  "opacityOverLife": [
+    [
+      0,
+      0
+    ],
+    [
+      0.2,
+      0.6
+    ],
+    [
+      0.75,
+      0.4
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "reduceMotion": {
+    "respectUserPreference": true,
+    "prefersReducedMotionAction": "disable",
+    "policy": "Disable streaks when prefers-reduced-motion is active; retain colour and HUD icon feedback."
+  },
+  "render": {
+    "blending": "normal",
+    "depthTest": true,
+    "depthWrite": false,
+    "texture": null
+  }
+}
