@@ -42,6 +42,12 @@ export async function loadManifest(version=DATA_VERSION,fetcher=globalThis.fetch
   if(!response.ok)throw Error('manifest '+response.status);
   const manifest=await response.json();
   if(!manifest?.games||typeof manifest.games!=='object')throw Error('manifest shape');
+  // V241-010: an explicit kill switch restores the pre-fix download set; the game flags
+  // still select v2/v22 as before. Default downloads include every documented rollback body.
+  if(new URLSearchParams(globalThis.location?.search||'').get('hoopsRollbackOffline')==='0'){
+    const legacyBodies=new Set(['guard','wing','center'].map(id=>'assets/athlete-body-v22/models/'+id+'.glb'));
+    manifest.games.hoops=(manifest.games.hoops||[]).filter(p=>!legacyBodies.has(p));
+  }
   return manifest;
 }
 /** Unique paths for the named games (all games when none are named). The app shell

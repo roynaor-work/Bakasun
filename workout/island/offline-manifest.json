@@ -966,6 +966,9 @@
    "design/viewer/retarget-map.json",
    "vendor/draco/draco_decoder.wasm",
    "vendor/draco/draco_wasm_wrapper.js",
+   "assets/athlete-body-v22/models/guard.glb",
+   "assets/athlete-body-v22/models/wing.glb",
+   "assets/athlete-body-v22/models/center.glb",
    "assets/hoops-v241/body/models/center.glb",
    "assets/hoops-v241/body/models/guard.glb",
    "assets/hoops-v241/body/models/wing.glb",
@@ -2025,9 +2028,21 @@
    "2cf66e1a4063fcb5",
    17572
   ],
+  "assets/athlete-body-v22/models/center.glb": [
+   "935b0f7d387b8b48",
+   478588
+  ],
+  "assets/athlete-body-v22/models/guard.glb": [
+   "78f872e572588123",
+   478588
+  ],
   "assets/athlete-body-v22/models/soccer.glb": [
    "450da150f615e8db",
    478588
+  ],
+  "assets/athlete-body-v22/models/wing.glb": [
+   "1f396d80319a7ca5",
+   478592
   ],
   "assets/athlete-body-v22/textures/athlete-atlas.png": [
    "7024031216a0af3b",
@@ -5830,8 +5845,8 @@
    6082
   ],
   "minigames/alien-flight-model.mjs": [
-   "76f329004fd9d7d7",
-   45683
+   "ef686a446da150f3",
+   46809
   ],
   "minigames/alien-move.mjs": [
    "dfa7550eb5e78800",
@@ -5934,8 +5949,8 @@
    8898
   ],
   "minigames/alien-v25-ui.mjs": [
-   "e6539ce11f56be4c",
-   4700
+   "83ce09dec4bed002",
+   4986
   ],
   "minigames/alien-v25.css": [
    "33a88085ede85666",
@@ -6170,8 +6185,8 @@
    9415
   ],
   "minigames/boar-island/chain.mjs": [
-   "d1f591a48a12a72e",
-   4335
+   "90174a36a38c56e8",
+   5702
   ],
   "minigames/boar-island/core.mjs": [
    "877bc7679bd38cd1",
@@ -6182,8 +6197,8 @@
    20402
   ],
   "minigames/boar-island/game.js": [
-   "4fd625da7fd9fca9",
-   139128
+   "7c4f9040f5853c77",
+   139285
   ],
   "minigames/boar-island/guns.js": [
    "14a972a0df710e2b",
@@ -6234,8 +6249,8 @@
    23262
   ],
   "minigames/boar-session.mjs": [
-   "fbb919670989b00f",
-   4587
+   "ab7a6e844c3c693d",
+   4848
   ],
   "minigames/canvas-session.mjs": [
    "292e2f5d81526083",
@@ -6430,12 +6445,12 @@
    11943
   ],
   "minigames/fire-v24-scene.mjs": [
-   "74bdf66fac895cb4",
-   28729
+   "7dfbe0a30666275b",
+   29823
   ],
   "minigames/fire-v24-session.mjs": [
-   "0a53afb30b195d91",
-   15860
+   "ab6054e2d4693f4d",
+   18731
   ],
   "minigames/fire-v24.css": [
    "7158b3c53e1b19a5",
@@ -6530,8 +6545,8 @@
    17303
   ],
   "minigames/hoops-audio.mjs": [
-   "f71d60ea3eaa4a58",
-   14299
+   "053555019a983cf1",
+   16253
   ],
   "minigames/hoops-baked.mjs": [
    "7f240cc78e7d8cc6",
@@ -6630,8 +6645,8 @@
    15860
   ],
   "minigames/hoops-referee.mjs": [
-   "39978ddd8d1fe5e9",
-   8247
+   "dd5768312a897eea",
+   8446
   ],
   "minigames/hoops-reflection.mjs": [
    "0346e66802146fce",
@@ -6858,16 +6873,16 @@
    8768
   ],
   "minigames/naval-v241-hud.mjs": [
-   "7d1babaede1d0807",
-   7752
+   "d7374d996a793abc",
+   7866
   ],
   "minigames/naval-v241.css": [
    "4c258c0f5e898ce9",
    909
   ],
   "minigames/naval-v241.mjs": [
-   "57365884d77fe667",
-   6538
+   "636881bb8ed1f3e5",
+   6746
   ],
   "minigames/naval-v7.mjs": [
    "097486fc921f201c",
@@ -6886,8 +6901,8 @@
    15335
   ],
   "minigames/naval.mjs": [
-   "9b06914baab3b468",
-   76704
+   "048ba84fb6bde318",
+   77545
   ],
   "minigames/patrol-boat.mjs": [
    "e23de9bc532c7fd4",
@@ -6966,16 +6981,16 @@
    7245
   ],
   "minigames/racing-pit-ui.mjs": [
-   "bba80b7260876b6d",
-   6795
+   "ec82a23be9714aba",
+   7044
   ],
   "minigames/racing-pit-view.mjs": [
    "74ac56f06a2e7348",
    2027
   ],
   "minigames/racing-pit.mjs": [
-   "e19f1b5427cb36a2",
-   11108
+   "4df10f6486b1e619",
+   11321
   ],
   "minigames/racing-recover.mjs": [
    "2ab8b278b1dd47ab",
@@ -7106,8 +7121,8 @@
    16760
   ],
   "minigames/soccer-design-character.mjs": [
-   "3caf5dd21c2b6000",
-   86018
+   "d3173f9d7ec2746b",
+   86100
   ],
   "minigames/soccer-design-contracts.mjs": [
    "be71e6a4d29b41b2",
@@ -7330,8 +7345,8 @@
    76303
   ],
   "minigames/soccer.mjs": [
-   "1312f45352a5002e",
-   102084
+   "8efba3318523965d",
+   102443
   ],
   "minigames/sound.mjs": [
    "522b4b41e74b348d",
@@ -7378,8 +7393,8 @@
    1469
   ],
   "minigames/tennis-session.mjs": [
-   "0202156e5f356442",
-   17714
+   "f607283f9fbb2ade",
+   19223
   ],
   "minigames/tennis-ui.mjs": [
    "14ea8ef230d9612e",
@@ -7410,8 +7425,8 @@
    19558
   ],
   "minigames/tennis.mjs": [
-   "3bb1a1c9eab739b0",
-   47345
+   "e4383d0d6c7c9c9c",
+   48278
   ],
   "minigames/ultra-alien-effects.mjs": [
    "e1dce31bfe7e2b84",
@@ -7602,8 +7617,8 @@
    16136
   ],
   "ui/offline.mjs": [
-   "a38ee128633f1754",
-   25203
+   "002b7614c24da510",
+   25681
   ],
   "ui/press.mjs": [
    "c1c9ae632a225d2e",
