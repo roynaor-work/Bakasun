@@ -25,6 +25,8 @@ export function runBoarSession(ctx) {
   frame=doc.createElement('iframe');frame.className='boar-game-frame';
   frame.title='אי החזירים — הגנת החווה';frame.setAttribute('allow','autoplay; fullscreen');
   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
+  // Forward F's kill switches into the embedded campaign, including when launched from the island URL.
+  {const q=new URLSearchParams(globalThis.location?.search);for(const key of ['phoneFixes','phoneFixF'])if(q.has(key))url.searchParams.set(key,q.get(key));}
   if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
   // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
