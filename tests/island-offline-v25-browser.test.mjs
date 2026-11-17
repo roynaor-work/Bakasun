@@ -141,7 +141,7 @@ test('v25: a next release is prepared by copying unchanged files and downloading
   // The new worker takes over; its activate drops the old cache; the new cache holds the new bytes.
   const switched=await t.page.evaluate(async NEXT=>{const m=await import(new URL('./ui/offline.mjs',location.href).href);let reloaded=null;const ok=await m.switchRelease(NEXT,{reload:u=>{reloaded=u;}});return {ok,reloaded,controller:navigator.serviceWorker.controller?.scriptURL};},NEXT);
   assert.equal(switched.ok,true,JSON.stringify(switched));assert.match(switched.reloaded,/release=island-v2-test-next/);assert.match(switched.controller,/v=island-v2-test-next&v25=1/);
-  await t.page.waitForFunction(async()=>(await caches.keys()).length===1,null,{timeout:30000});
+  await t.page.waitForFunction(()=>caches.keys().then(k=>k.length===1),null,{timeout:30000});
   assert.deepEqual(await t.page.evaluate(()=>caches.keys()),['island-assets-'+NEXT],'the old cache is gone once the new release is live');
   const bytes=await t.page.evaluate(async href=>{const c=await caches.open((await caches.keys())[0]);const r=await c.match(href);return r?(await r.arrayBuffer()).byteLength:-1;},hrefOf(changedPath,new URL(server.url)));
   assert.equal(bytes,modified.length,'the new cache holds the changed file');

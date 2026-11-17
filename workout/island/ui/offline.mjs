@@ -109,7 +109,9 @@ export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgres
 }
 export async function countCached(cache,urls){let n=0;for(const href of urls)if(await cache.match(href,{ignoreSearch:true}))n++;return n;}
 /** Bare hrefs (no query) of everything in a cache, read once instead of one match() per file. */
-export async function cachedSet(cache){const set=new Set();for(const request of await cache.keys()){const u=new URL(request.url);u.search='';u.hash='';set.add(u.href);}return set;}
+export async function cachedSet(cache){const set=new Set();if(!cache)return set;for(const request of await cache.keys()){const u=new URL(request.url);u.search='';u.hash='';set.add(u.href);}return set;}
+/** Open a cache only if it exists (caches.open would create an empty one, e.g. the old release's cache right after its worker dropped it). */
+export async function openExisting(name,cacheStorage=globalThis.caches){return (await cacheStorage.has(name))?cacheStorage.open(name):null;}
 
 function storage(){try{return globalThis.localStorage||null;}catch{return null;}}
 export function readStatus(){try{return JSON.parse(storage()?.getItem(STATUS_KEY)||'null');}catch{return null;}}
@@ -141,7 +143,7 @@ export function registerOfflineWorker(){
 /** What is on the device for this version, counted from the real cache, with bytes from the manifest. */
 export async function offlineStatus(version=DATA_VERSION){
   if(!offlineSupported())return {supported:false,games:{}};
-  const manifest=await loadManifest(version),cache=await caches.open(cacheName(version)),have=await cachedSet(cache),games={};
+  const manifest=await loadManifest(version),have=await cachedSet(await openExisting(cacheName(version))),games={};
   const count=paths=>{let n=0,b=0;for(const p of paths)if(have.has(hrefOf(p))){n++;b+=manifest.files?.[p]?.[1]||0;}return {have:n,haveBytes:b};};
   const all=new Set();
   for(const game of Object.keys(OFFLINE_GAMES)){
@@ -178,7 +180,7 @@ export function removablePaths(manifest,game,have){
  * another downloaded package or the shell still needs. Returns {removed, bytes}. Saves untouched. */
 export async function deletePack(game,{version=DATA_VERSION,cacheStorage=globalThis.caches,fetcher=globalThis.fetch}={}){
   if(!cacheStorage||!OFFLINE_GAMES[game])return {removed:0,bytes:0};
-  const manifest=await loadManifest(version,fetcher),cache=await cacheStorage.open(cacheName(version)),have=await cachedSet(cache);
+  const manifest=await loadManifest(version,fetcher),cache=await openExisting(cacheName(version),cacheStorage);if(!cache)return {removed:0,bytes:0};const have=await cachedSet(cache);
   let removed=0,bytes=0;
   for(const p of removablePaths(manifest,game,have)){if(await cache.delete(hrefOf(p),{ignoreSearch:true})){removed++;bytes+=manifest.files?.[p]?.[1]||0;}}
   return {removed,bytes};
@@ -239,13 +241,13 @@ async function prefetchReleaseOnce(version,{onProgress,games,v25=v25On(),concurr
     const urls=pathsFor(next,undefined,{shell:true}).map(p=>hrefOf(p));
     return downloadSet({urls,cache:nextCache,onProgress});
   }
-  const current=await caches.open(cacheName(DATA_VERSION)),have=await cachedSet(current),already=await cachedSet(nextCache);
+  const current=await openExisting(cacheName(DATA_VERSION)),have=await cachedSet(current),already=await cachedSet(nextCache);
   if(!games){const status=await offlineStatus();games=Object.keys(OFFLINE_GAMES).filter(g=>status.games[g]?.complete);}
   const paths=pathsFor(next,games,{shell:true}).filter(p=>!already.has(hrefOf(p)));
-  const hashOf=async href=>{const hit=await current.match(href,{ignoreSearch:true});return hit?digestBlob(await hit.blob()):null;};
+  const hashOf=async href=>{const hit=current?await current.match(href,{ignoreSearch:true}):null;return hit?digestBlob(await hit.blob()):null;};
   const plan=await planRelease(next,paths,{have,hashOf});
   let copied=0;
-  for(const p of plan.copy){const hit=await current.match(hrefOf(p),{ignoreSearch:true});if(hit){await nextCache.put(hrefOf(p),hit);copied++;}else plan.download.push(p);}
+  for(const p of plan.copy){const hit=current?await current.match(hrefOf(p),{ignoreSearch:true}):null;if(hit){await nextCache.put(hrefOf(p),hit);copied++;}else plan.download.push(p);}
   const urls=plan.download.map(p=>hrefOf(p));
   const downloaded=await downloadSet({urls,cache:nextCache,onProgress,concurrency,pauseMs,gate,expect:expectedHashes(next,plan.download),direct:true});
   return {version,copied,copiedBytes:plan.copyBytes,planned:plan.downloadBytes,downloaded,total:paths.length,games};
@@ -262,6 +264,8 @@ export async function switchRelease(version,{timeoutMs=15000,reload=url=>locatio
   });
   if(!ok)return false;
   registration=null;
+  // The new worker's activate drops every other island cache; drop the current one here too, in case this page re-created it meanwhile.
+  if(version!==DATA_VERSION)await caches.delete(cacheName(DATA_VERSION)).catch(()=>{});
   const url=new URL(location.href);url.searchParams.set('release',version);reload(url.href);return true;
 }
 
