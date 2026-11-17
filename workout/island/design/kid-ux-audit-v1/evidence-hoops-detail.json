@@ -1,0 +1,4118 @@
+{
+  "phase": "hoops-detail",
+  "screens": [
+    {
+      "id": "streetSlam-timeout-bench",
+      "game": "streetSlam",
+      "state": "timeout bench display from legal model state",
+      "fixture": "synthetic-legal-timeout-bench-display-frozen-model",
+      "screenshot": "screenshots/streetSlam-timeout-bench.png",
+      "metrics": {
+        "url": "http://127.0.0.1:32929/workout/island/?dev=1",
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "documentDirection": "rtl",
+        "documentLang": "he",
+        "targets": [
+          {
+            "selector": "[data-action=\"game-pause\"]",
+            "label": "השהיה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 12,
+              "y": 12,
+              "width": 48,
+              "height": 48,
+              "right": 60,
+              "bottom": 60
+            },
+            "visibleRect": {
+              "x": 12,
+              "y": 12,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-pause\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 25, אורי סלע",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 14, יונתן אלמוג",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 42, צחי לבנון",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 352,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 408,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 352,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 55, גיא נוף",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 416,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 472,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 416,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 11, אופיר שקדי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 480,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 536,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 480,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 0, נתן שקדי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 50, עמית דגן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 40, איתן ברקן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 352,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 408,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 352,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 41, יואב ארזי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 416,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 472,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 416,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 15, עדי גל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 480,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 536,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 480,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 20, אריאל אגמון",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 301,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 361
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 301,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 7, יואב אשל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 301,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 361
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 301,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-bench-close",
+            "label": "סגירה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 582,
+              "y": 163,
+              "width": 40,
+              "height": 56,
+              "right": 622,
+              "bottom": 219
+            },
+            "visibleRect": {
+              "x": 582,
+              "y": 163,
+              "width": 40,
+              "height": 56
+            },
+            "centerHit": true,
+            "hitElement": "path.",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                6.95,
+                9.8,
+                16.15,
+                1
+              ],
+              "ratio": 19.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-kit-trigger",
+            "label": "תלבושות",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 784,
+              "y": 72,
+              "width": 48,
+              "height": 48,
+              "right": 832,
+              "bottom": 120
+            },
+            "visibleRect": {
+              "x": 784,
+              "y": 72,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "path.",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"pass\"]",
+            "label": "אליי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 680,
+              "y": 314,
+              "width": 60,
+              "height": 60,
+              "right": 740,
+              "bottom": 374
+            },
+            "visibleRect": {
+              "x": 680,
+              "y": 314,
+              "width": 60,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"pass\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"cross\"]",
+            "label": "מהלך",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 608,
+              "y": 314,
+              "width": 60,
+              "height": 60,
+              "right": 668,
+              "bottom": 374
+            },
+            "visibleRect": {
+              "x": 608,
+              "y": 314,
+              "width": 60,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"cross\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"fake\"]",
+            "label": "מסך",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 680,
+              "y": 242,
+              "width": 64,
+              "height": 64,
+              "right": 744,
+              "bottom": 306
+            },
+            "visibleRect": {
+              "x": 680,
+              "y": 242,
+              "width": 64,
+              "height": 64
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"fake\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"sprint\"]",
+            "label": "ריצה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 752,
+              "y": 226,
+              "width": 80,
+              "height": 64,
+              "right": 832,
+              "bottom": 290
+            },
+            "visibleRect": {
+              "x": 752,
+              "y": 226,
+              "width": 80,
+              "height": 64
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"sprint\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                33,
+                29,
+                53,
+                1
+              ],
+              "ratio": 15.24,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"timeout\"]",
+            "label": "פסק זמן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 72,
+              "y": 12,
+              "width": 48,
+              "height": 48,
+              "right": 120,
+              "bottom": 60
+            },
+            "visibleRect": {
+              "x": 72,
+              "y": 12,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"timeout\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "gapsUnder8": [],
+        "text": [
+          {
+            "selector": "bdi.hoops-score",
+            "text": "0",
+            "fontPx": 28,
+            "direction": "ltr",
+            "rect": {
+              "x": 258.5,
+              "y": 13,
+              "width": 42,
+              "height": 46,
+              "right": 300.5,
+              "bottom": 59
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-clock",
+            "text": "1:30",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 389.5,
+              "y": 24.5,
+              "width": 52,
+              "height": 23,
+              "right": 441.5,
+              "bottom": 47.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                6.36,
+                8.88,
+                14.64,
+                1
+              ],
+              "ratio": 19.93,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-shotclock",
+            "text": "24",
+            "fontPx": 16,
+            "direction": "ltr",
+            "rect": {
+              "x": 451.5,
+              "y": 22,
+              "width": 28,
+              "height": 28,
+              "right": 479.5,
+              "bottom": 50
+            },
+            "color": {
+              "foreground": "rgb(255, 176, 32)",
+              "background": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "ratio": 11.48,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-score",
+            "text": "0",
+            "fontPx": 28,
+            "direction": "ltr",
+            "rect": {
+              "x": 543.5,
+              "y": 13,
+              "width": 42,
+              "height": 46,
+              "right": 585.5,
+              "bottom": 59
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "25",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 240.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 263.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "14",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 304.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 327.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "42",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 368.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 391.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "55",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 432.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 455.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "11",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 497.42,
+              "y": 183.5,
+              "width": 21.16,
+              "height": 23,
+              "right": 518.58,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "0",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 246.44,
+              "y": 251.5,
+              "width": 11.13,
+              "height": 23,
+              "right": 257.56,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "50",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 304.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 327.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "40",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 368.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 391.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "41",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 432.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 455.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "15",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 496.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 519.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "20",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 240.88,
+              "y": 319.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 263.13,
+              "bottom": 342.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "7",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 310.44,
+              "y": 319.5,
+              "width": 11.13,
+              "height": 23,
+              "right": 321.56,
+              "bottom": 342.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-stamina-value",
+            "text": "100",
+            "fontPx": 12,
+            "direction": "ltr",
+            "rect": {
+              "x": 86,
+              "y": 177,
+              "width": 22,
+              "height": 12,
+              "right": 108,
+              "bottom": 189
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                15.31,
+                22.87,
+                38.11,
+                1
+              ],
+              "ratio": 17.94,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.hoops-role-code",
+            "text": "SF",
+            "fontPx": 10,
+            "direction": "ltr",
+            "rect": {
+              "x": 693.6,
+              "y": 100.4,
+              "width": 8.8,
+              "height": 11.2,
+              "right": 702.4,
+              "bottom": 111.6
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                15.23,
+                22.74,
+                37.9,
+                1
+              ],
+              "ratio": 17.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "אליי",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 700.19,
+              "y": 355,
+              "width": 19.63,
+              "height": 13,
+              "right": 719.81,
+              "bottom": 368
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "מהלך",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 625.23,
+              "y": 355,
+              "width": 25.53,
+              "height": 13,
+              "right": 650.77,
+              "bottom": 368
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "מסך",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 702.08,
+              "y": 280.91,
+              "width": 19.84,
+              "height": 13.19,
+              "right": 721.92,
+              "bottom": 294.09
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "ריצה",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 780.88,
+              "y": 264.91,
+              "width": 22.23,
+              "height": 13.19,
+              "right": 803.11,
+              "bottom": 278.09
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                33,
+                29,
+                53,
+                1
+              ],
+              "ratio": 15.24,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "פסק זמן",
+            "fontPx": 10,
+            "direction": "rtl",
+            "rect": {
+              "x": 80.81,
+              "y": 41.5,
+              "width": 30.36,
+              "height": 10,
+              "right": 111.17,
+              "bottom": 51.5
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "scroll": [],
+        "textContent": "השהיה\n0\n1:30\n24\n0\n25\n14\n42\n55\n11\n0\n50\n40\n41\n15\n20\n7\n100\nSF\nאליי\nמהלך\nמסך\nריצה\nפסק זמן",
+        "instrument": {
+          "events": [],
+          "audio": [
+            {
+              "kind": "AudioBufferSourceNode",
+              "t": 21124.199999999255,
+              "contextState": "running"
+            }
+          ],
+          "speech": [],
+          "canvasTexts": []
+        }
+      }
+    },
+    {
+      "id": "streetSlam-timeout-substitution",
+      "game": "streetSlam",
+      "state": "trusted touches select a substitution in the fixture",
+      "fixture": "synthetic-legal-timeout-bench-display-frozen-model",
+      "screenshot": "screenshots/streetSlam-timeout-substitution.png",
+      "metrics": {
+        "url": "http://127.0.0.1:32929/workout/island/?dev=1",
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "documentDirection": "rtl",
+        "documentLang": "he",
+        "targets": [
+          {
+            "selector": "[data-action=\"game-pause\"]",
+            "label": "השהיה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 12,
+              "y": 12,
+              "width": 48,
+              "height": 48,
+              "right": 60,
+              "bottom": 60
+            },
+            "visibleRect": {
+              "x": 12,
+              "y": 12,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-pause\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 14, יונתן אלמוג",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 42, צחי לבנון",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 55, גיא נוף",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 352,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 408,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 352,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 11, אופיר שקדי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 416,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 472,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 416,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 0, נתן שקדי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 480,
+              "y": 165,
+              "width": 56,
+              "height": 60,
+              "right": 536,
+              "bottom": 225
+            },
+            "visibleRect": {
+              "x": 480,
+              "y": 165,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 25, אורי סלע",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 50, עמית דגן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 40, איתן ברקן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 352,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 408,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 352,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 41, יואב ארזי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 416,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 472,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 416,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 15, עדי גל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 480,
+              "y": 233,
+              "width": 56,
+              "height": 60,
+              "right": 536,
+              "bottom": 293
+            },
+            "visibleRect": {
+              "x": 480,
+              "y": 233,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 20, אריאל אגמון",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 224,
+              "y": 301,
+              "width": 56,
+              "height": 60,
+              "right": 280,
+              "bottom": 361
+            },
+            "visibleRect": {
+              "x": 224,
+              "y": 301,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-card",
+            "label": "מספר 7, יואב אשל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 288,
+              "y": 301,
+              "width": 56,
+              "height": 60,
+              "right": 344,
+              "bottom": 361
+            },
+            "visibleRect": {
+              "x": 288,
+              "y": 301,
+              "width": 56,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "bdi.hoops-card-num",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-bench-close",
+            "label": "סגירה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 582,
+              "y": 163,
+              "width": 40,
+              "height": 56,
+              "right": 622,
+              "bottom": 219
+            },
+            "visibleRect": {
+              "x": 582,
+              "y": 163,
+              "width": 40,
+              "height": 56
+            },
+            "centerHit": true,
+            "hitElement": "path.",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                6.95,
+                9.8,
+                16.15,
+                1
+              ],
+              "ratio": 19.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "button.hoops-kit-trigger",
+            "label": "תלבושות",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 784,
+              "y": 72,
+              "width": 48,
+              "height": 48,
+              "right": 832,
+              "bottom": 120
+            },
+            "visibleRect": {
+              "x": 784,
+              "y": 72,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "path.",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 16,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"pass\"]",
+            "label": "אליי",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 680,
+              "y": 314,
+              "width": 60,
+              "height": 60,
+              "right": 740,
+              "bottom": 374
+            },
+            "visibleRect": {
+              "x": 680,
+              "y": 314,
+              "width": 60,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"pass\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"cross\"]",
+            "label": "מהלך",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 608,
+              "y": 314,
+              "width": 60,
+              "height": 60,
+              "right": 668,
+              "bottom": 374
+            },
+            "visibleRect": {
+              "x": 608,
+              "y": 314,
+              "width": 60,
+              "height": 60
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"cross\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"fake\"]",
+            "label": "מסך",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 680,
+              "y": 242,
+              "width": 64,
+              "height": 64,
+              "right": 744,
+              "bottom": 306
+            },
+            "visibleRect": {
+              "x": 680,
+              "y": 242,
+              "width": 64,
+              "height": 64
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"fake\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"sprint\"]",
+            "label": "ריצה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 752,
+              "y": 226,
+              "width": 80,
+              "height": 64,
+              "right": 832,
+              "bottom": 290
+            },
+            "visibleRect": {
+              "x": 752,
+              "y": 226,
+              "width": 80,
+              "height": 64
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"sprint\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                33,
+                29,
+                53,
+                1
+              ],
+              "ratio": 15.24,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"timeout\"]",
+            "label": "פסק זמן",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 72,
+              "y": 12,
+              "width": 48,
+              "height": 48,
+              "right": 120,
+              "bottom": 60
+            },
+            "visibleRect": {
+              "x": 72,
+              "y": 12,
+              "width": 48,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"timeout\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 0,
+            "direction": "ltr",
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "gapsUnder8": [],
+        "text": [
+          {
+            "selector": "bdi.hoops-score",
+            "text": "0",
+            "fontPx": 28,
+            "direction": "ltr",
+            "rect": {
+              "x": 258.5,
+              "y": 13,
+              "width": 42,
+              "height": 46,
+              "right": 300.5,
+              "bottom": 59
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-clock",
+            "text": "1:30",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 389.5,
+              "y": 24.5,
+              "width": 52,
+              "height": 23,
+              "right": 441.5,
+              "bottom": 47.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                6.36,
+                8.88,
+                14.64,
+                1
+              ],
+              "ratio": 19.93,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-shotclock",
+            "text": "24",
+            "fontPx": 16,
+            "direction": "ltr",
+            "rect": {
+              "x": 451.5,
+              "y": 22,
+              "width": 28,
+              "height": 28,
+              "right": 479.5,
+              "bottom": 50
+            },
+            "color": {
+              "foreground": "rgb(255, 176, 32)",
+              "background": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "ratio": 11.48,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-score",
+            "text": "0",
+            "fontPx": 28,
+            "direction": "ltr",
+            "rect": {
+              "x": 543.5,
+              "y": 13,
+              "width": 42,
+              "height": 46,
+              "right": 585.5,
+              "bottom": 59
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                10.6,
+                14.8,
+                24.4,
+                1
+              ],
+              "ratio": 19.19,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "14",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 240.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 263.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "42",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 304.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 327.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "55",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 368.88,
+              "y": 183.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 391.13,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "11",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 433.42,
+              "y": 183.5,
+              "width": 21.16,
+              "height": 23,
+              "right": 454.58,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "0",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 502.44,
+              "y": 183.5,
+              "width": 11.13,
+              "height": 23,
+              "right": 513.56,
+              "bottom": 206.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                29,
+                63,
+                134,
+                1
+              ],
+              "ratio": 9.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "25",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 240.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 263.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "50",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 304.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 327.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "40",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 368.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 391.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "41",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 432.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 455.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "15",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 496.88,
+              "y": 251.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 519.13,
+              "bottom": 274.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "20",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 240.88,
+              "y": 319.5,
+              "width": 22.25,
+              "height": 23,
+              "right": 263.13,
+              "bottom": 342.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-card-num",
+            "text": "7",
+            "fontPx": 20,
+            "direction": "ltr",
+            "rect": {
+              "x": 310.44,
+              "y": 319.5,
+              "width": 11.13,
+              "height": 23,
+              "right": 321.56,
+              "bottom": 342.5
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                27,
+                34,
+                51,
+                1
+              ],
+              "ratio": 15.87,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "bdi.hoops-stamina-value",
+            "text": "100",
+            "fontPx": 12,
+            "direction": "ltr",
+            "rect": {
+              "x": 86,
+              "y": 177,
+              "width": 22,
+              "height": 12,
+              "right": 108,
+              "bottom": 189
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                15.31,
+                22.87,
+                38.11,
+                1
+              ],
+              "ratio": 17.94,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.hoops-role-code",
+            "text": "SF",
+            "fontPx": 10,
+            "direction": "ltr",
+            "rect": {
+              "x": 693.6,
+              "y": 100.4,
+              "width": 8.8,
+              "height": 11.2,
+              "right": 702.4,
+              "bottom": 111.6
+            },
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                15.23,
+                22.74,
+                37.9,
+                1
+              ],
+              "ratio": 17.96,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "אליי",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 700.19,
+              "y": 355,
+              "width": 19.63,
+              "height": 13,
+              "right": 719.81,
+              "bottom": 368
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "מהלך",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 625.23,
+              "y": 355,
+              "width": 25.53,
+              "height": 13,
+              "right": 650.77,
+              "bottom": 368
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "מסך",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 702.08,
+              "y": 280.91,
+              "width": 19.84,
+              "height": 13.19,
+              "right": 721.92,
+              "bottom": 294.09
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "ריצה",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 780.88,
+              "y": 264.91,
+              "width": 22.23,
+              "height": 13.19,
+              "right": 803.11,
+              "bottom": 278.09
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                33,
+                29,
+                53,
+                1
+              ],
+              "ratio": 15.24,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.ih-action-label",
+            "text": "פסק זמן",
+            "fontPx": 10,
+            "direction": "rtl",
+            "rect": {
+              "x": 80.81,
+              "y": 41.5,
+              "width": 30.36,
+              "height": 10,
+              "right": 111.17,
+              "bottom": 51.5
+            },
+            "color": {
+              "foreground": "rgb(245, 248, 250)",
+              "background": [
+                9,
+                24,
+                38,
+                1
+              ],
+              "ratio": 16.83,
+              "requiresManual": false,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "scroll": [],
+        "textContent": "השהיה\n0\n1:30\n24\n0\n14\n42\n55\n11\n0\n25\n50\n40\n41\n15\n20\n7\n100\nSF\nאליי\nמהלך\nמסך\nריצה\nפסק זמן",
+        "instrument": {
+          "events": [
+            {
+              "type": "pointerdown",
+              "t": 22885.099999999627,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 2,
+              "isPrimary": true,
+              "action": "hoops-card",
+              "x": 252,
+              "y": 195,
+              "nextFrameMs": 14.400000000372529
+            },
+            {
+              "type": "pointerup",
+              "t": 23026.299999999814,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 2,
+              "isPrimary": true,
+              "action": "hoops-card",
+              "x": 252,
+              "y": 195
+            },
+            {
+              "type": "click",
+              "t": 23026.5,
+              "trusted": false,
+              "pointerType": "",
+              "pointerId": -1,
+              "isPrimary": false,
+              "action": "hoops-card",
+              "x": 0,
+              "y": 0
+            },
+            {
+              "type": "click",
+              "t": 23029.5,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 2,
+              "isPrimary": false,
+              "action": "hoops-card picked",
+              "x": 252,
+              "y": 195
+            },
+            {
+              "type": "pointerdown",
+              "t": 23284,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 3,
+              "isPrimary": true,
+              "action": "hoops-card",
+              "x": 252,
+              "y": 263,
+              "nextFrameMs": 15.5
+            },
+            {
+              "type": "pointerup",
+              "t": 23346.099999999627,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 3,
+              "isPrimary": true,
+              "action": "hoops-card",
+              "x": 252,
+              "y": 263
+            },
+            {
+              "type": "click",
+              "t": 23346.199999999255,
+              "trusted": false,
+              "pointerType": "",
+              "pointerId": -1,
+              "isPrimary": false,
+              "action": "hoops-card",
+              "x": 0,
+              "y": 0
+            },
+            {
+              "type": "click",
+              "t": 23350.599999999627,
+              "trusted": true,
+              "pointerType": "touch",
+              "pointerId": 3,
+              "isPrimary": false,
+              "action": "hoops-card",
+              "x": 252,
+              "y": 263
+            }
+          ],
+          "audio": [
+            {
+              "kind": "AudioBufferSourceNode",
+              "t": 21124.199999999255,
+              "contextState": "running"
+            },
+            {
+              "kind": "OscillatorNode",
+              "t": 22889.5,
+              "contextState": "running"
+            },
+            {
+              "kind": "OscillatorNode",
+              "t": 23284.299999999814,
+              "contextState": "running"
+            }
+          ],
+          "speech": [],
+          "canvasTexts": []
+        }
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "selector": ".hoops-bench-row.court .hoops-card",
+      "frame": "main",
+      "x": 252.0,
+      "y": 195.0,
+      "holdMs": 45,
+      "before": {
+        "t": 22878.799999999814,
+        "audio": 1,
+        "speech": 0
+      },
+      "after": {
+        "t": 23232.299999999814,
+        "events": [
+          {
+            "type": "pointerdown",
+            "t": 22885.099999999627,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 2,
+            "isPrimary": true,
+            "action": "hoops-card",
+            "x": 252,
+            "y": 195,
+            "nextFrameMs": 14.400000000372529
+          },
+          {
+            "type": "pointerup",
+            "t": 23026.299999999814,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 2,
+            "isPrimary": true,
+            "action": "hoops-card",
+            "x": 252,
+            "y": 195
+          },
+          {
+            "type": "click",
+            "t": 23026.5,
+            "trusted": false,
+            "pointerType": "",
+            "pointerId": -1,
+            "isPrimary": false,
+            "action": "hoops-card",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "type": "click",
+            "t": 23029.5,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 2,
+            "isPrimary": false,
+            "action": "hoops-card picked",
+            "x": 252,
+            "y": 195
+          }
+        ],
+        "audio": [
+          {
+            "kind": "AudioBufferSourceNode",
+            "t": 21124.199999999255,
+            "contextState": "running"
+          },
+          {
+            "kind": "OscillatorNode",
+            "t": 22889.5,
+            "contextState": "running"
+          }
+        ],
+        "speech": []
+      }
+    },
+    {
+      "selector": ".hoops-bench-row.bench .hoops-card",
+      "frame": "main",
+      "x": 252.0,
+      "y": 263.0,
+      "holdMs": 45,
+      "before": {
+        "t": 23274.599999999627,
+        "audio": 2,
+        "speech": 0
+      },
+      "after": {
+        "t": 23552.799999999814,
+        "events": [
+          {
+            "type": "click",
+            "t": 23029.5,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 2,
+            "isPrimary": false,
+            "action": "hoops-card picked",
+            "x": 252,
+            "y": 195
+          },
+          {
+            "type": "pointerdown",
+            "t": 23284,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 3,
+            "isPrimary": true,
+            "action": "hoops-card",
+            "x": 252,
+            "y": 263,
+            "nextFrameMs": 15.5
+          },
+          {
+            "type": "pointerup",
+            "t": 23346.099999999627,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 3,
+            "isPrimary": true,
+            "action": "hoops-card",
+            "x": 252,
+            "y": 263
+          },
+          {
+            "type": "click",
+            "t": 23346.199999999255,
+            "trusted": false,
+            "pointerType": "",
+            "pointerId": -1,
+            "isPrimary": false,
+            "action": "hoops-card",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "type": "click",
+            "t": 23350.599999999627,
+            "trusted": true,
+            "pointerType": "touch",
+            "pointerId": 3,
+            "isPrimary": false,
+            "action": "hoops-card",
+            "x": 252,
+            "y": 263
+          }
+        ],
+        "audio": [
+          {
+            "kind": "AudioBufferSourceNode",
+            "t": 21124.199999999255,
+            "contextState": "running"
+          },
+          {
+            "kind": "OscillatorNode",
+            "t": 22889.5,
+            "contextState": "running"
+          },
+          {
+            "kind": "OscillatorNode",
+            "t": 23284.299999999814,
+            "contextState": "running"
+          }
+        ],
+        "speech": []
+      }
+    }
+  ],
+  "errors": [],
+  "fixtures": {
+    "progressedCity": {
+      "age": 7,
+      "learning": {
+        "day": "2026-11-17",
+        "rounds": 2,
+        "target": 2,
+        "complete": true,
+        "firstDay": true,
+        "locked": false
+      },
+      "buildings": [
+        {
+          "id": "audit-airbase",
+          "typeId": "airbase",
+          "x": 13,
+          "z": 19,
+          "level": 1
+        },
+        {
+          "id": "audit-fireStation",
+          "typeId": "fireStation",
+          "x": 9,
+          "z": 11,
+          "level": 1
+        },
+        {
+          "id": "audit-harbor",
+          "typeId": "harbor",
+          "x": 0,
+          "z": 8,
+          "level": 1
+        },
+        {
+          "id": "audit-soccer",
+          "typeId": "soccer",
+          "x": 16,
+          "z": 11,
+          "level": 1
+        },
+        {
+          "id": "audit-tennis",
+          "typeId": "tennis",
+          "x": 15,
+          "z": 13,
+          "level": 1
+        },
+        {
+          "id": "audit-basketball",
+          "typeId": "basketball",
+          "x": 11,
+          "z": 15,
+          "level": 1
+        },
+        {
+          "id": "audit-library",
+          "typeId": "library",
+          "x": 6,
+          "z": 12,
+          "level": 1
+        },
+        {
+          "id": "audit-mathLab",
+          "typeId": "mathLab",
+          "x": 6,
+          "z": 14,
+          "level": 1
+        },
+        {
+          "id": "audit-zoo",
+          "typeId": "zoo",
+          "x": 4,
+          "z": 12,
+          "level": 1
+        },
+        {
+          "id": "audit-puzzleRoom",
+          "typeId": "puzzleRoom",
+          "x": 2,
+          "z": 12,
+          "level": 1
+        }
+      ],
+      "games": [
+        {
+          "id": "alienDefense",
+          "title": "הגנה מפני חייזרים"
+        },
+        {
+          "id": "fireRescue",
+          "title": "כיבוי שריפה"
+        },
+        {
+          "id": "navalDuel",
+          "title": "קרב ספינות"
+        },
+        {
+          "id": "soccer",
+          "title": "ליגת העיר"
+        },
+        {
+          "id": "tennis",
+          "title": "טניס בעיר"
+        },
+        {
+          "id": "islandRacing",
+          "title": "מרוצי העיר"
+        },
+        {
+          "id": "streetSlam",
+          "title": "ליגת העיר בכדורסל"
+        },
+        {
+          "id": "alpineRush",
+          "title": "מרוץ סנובורד"
+        },
+        {
+          "id": "boarDefense",
+          "title": "אי החזירים — הגנת החווה"
+        },
+        {
+          "id": "catchCriminal",
+          "title": "תפוס את הפושע"
+        }
+      ]
+    },
+    "timeout-command": {
+      "ok": true
+    },
+    "timeout-bench": {
+      "tick": 17,
+      "phase": "timeout",
+      "phaseT": 0.017,
+      "quarter": 1,
+      "overtime": 0,
+      "clock": 90,
+      "shotClock": 24,
+      "shotClockOn": true,
+      "score": [
+        0,
+        0
+      ],
+      "teamFouls": [
+        0,
+        0
+      ],
+      "timeouts": [
+        6,
+        7
+      ],
+      "possession": 0,
+      "dir": [
+        1,
+        -1
+      ],
+      "userTeam": 0,
+      "controlled": "waves-5",
+      "ball": {
+        "x": 0,
+        "y": 3.056,
+        "z": 0,
+        "state": "toss",
+        "owner": null,
+        "passTo": null,
+        "passKind": null,
+        "shotId": null,
+        "dribbleT": 0
+      },
+      "players": [
+        {
+          "id": "waves-2",
+          "team": 0,
+          "pos": "SG",
+          "positionName": "שוטינג גארד",
+          "abilities": {
+            "shooting": 84,
+            "dunk": 75,
+            "rebound": 56,
+            "defense": 68,
+            "passing": 72,
+            "speed": 84
+          },
+          "number": 14,
+          "x": -5.8,
+          "z": -2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": 1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.608,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "guard",
+            "skin": 2,
+            "hairTint": null
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "waves-3",
+          "team": 0,
+          "pos": "SF",
+          "positionName": "סמול פורוורד",
+          "abilities": {
+            "shooting": 75,
+            "dunk": 82,
+            "rebound": 69,
+            "defense": 71,
+            "passing": 71,
+            "speed": 71
+          },
+          "number": 42,
+          "x": -3.2,
+          "z": 4.2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": 1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.229,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "wing",
+            "skin": 1,
+            "hairTint": null
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "waves-4",
+          "team": 0,
+          "pos": "PF",
+          "positionName": "פאוור פורוורד",
+          "abilities": {
+            "shooting": 67,
+            "dunk": 80,
+            "rebound": 84,
+            "defense": 75,
+            "passing": 64,
+            "speed": 68
+          },
+          "number": 55,
+          "x": -3.2,
+          "z": -4.2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": 1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.143,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "forward",
+            "skin": 1,
+            "hairTint": "#6b4a2e"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "waves-5",
+          "team": 0,
+          "pos": "C",
+          "positionName": "סנטר",
+          "abilities": {
+            "shooting": 56,
+            "dunk": 88,
+            "rebound": 97,
+            "defense": 83,
+            "passing": 59,
+            "speed": 62
+          },
+          "number": 11,
+          "x": -0.55,
+          "z": 0,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": 1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 6.97,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": true,
+          "stumble": false,
+          "look": {
+            "body": "big",
+            "skin": 2,
+            "hairTint": "#151515"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "waves-6",
+          "team": 0,
+          "pos": "PG",
+          "positionName": "פוינט גארד",
+          "abilities": {
+            "shooting": 76,
+            "dunk": 53,
+            "rebound": 55,
+            "defense": 65,
+            "passing": 88,
+            "speed": 79
+          },
+          "number": 0,
+          "x": -6.6,
+          "z": 2.6,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": 1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.494,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "guard",
+            "skin": 2,
+            "hairTint": "#2a1d14"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "stars-1",
+          "team": 1,
+          "pos": "PG",
+          "positionName": "פוינט גארד",
+          "abilities": {
+            "shooting": 80,
+            "dunk": 64,
+            "rebound": 59,
+            "defense": 70,
+            "passing": 95,
+            "speed": 91
+          },
+          "number": 0,
+          "x": 6.6,
+          "z": -2.6,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": -1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.836,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "guard",
+            "skin": 3,
+            "hairTint": "#6b4a2e"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "stars-2",
+          "team": 1,
+          "pos": "SG",
+          "positionName": "שוטינג גארד",
+          "abilities": {
+            "shooting": 92,
+            "dunk": 76,
+            "rebound": 65,
+            "defense": 72,
+            "passing": 78,
+            "speed": 81
+          },
+          "number": 4,
+          "x": 5.8,
+          "z": 2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": -1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.512,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "guard",
+            "skin": 0,
+            "hairTint": "#151515"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "stars-3",
+          "team": 1,
+          "pos": "SF",
+          "positionName": "סמול פורוורד",
+          "abilities": {
+            "shooting": 78,
+            "dunk": 79,
+            "rebound": 77,
+            "defense": 74,
+            "passing": 71,
+            "speed": 76
+          },
+          "number": 24,
+          "x": 3.2,
+          "z": -4.2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": -1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.412,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "wing",
+            "skin": 3,
+            "hairTint": "#2a1d14"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "stars-4",
+          "team": 1,
+          "pos": "PF",
+          "positionName": "פאוור פורוורד",
+          "abilities": {
+            "shooting": 71,
+            "dunk": 92,
+            "rebound": 93,
+            "defense": 85,
+            "passing": 74,
+            "speed": 73
+          },
+          "number": 25,
+          "x": 3.2,
+          "z": 4.2,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": -1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.267,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "forward",
+            "skin": 1,
+            "hairTint": "#6b4a2e"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        },
+        {
+          "id": "stars-5",
+          "team": 1,
+          "pos": "C",
+          "positionName": "סנטר",
+          "abilities": {
+            "shooting": 65,
+            "dunk": 92,
+            "rebound": 98,
+            "defense": 86,
+            "passing": 73,
+            "speed": 71
+          },
+          "number": 34,
+          "x": 0.55,
+          "z": 0,
+          "y": 0,
+          "vx": 0,
+          "vz": 0,
+          "face": -1.571,
+          "act": null,
+          "actT": 0,
+          "shotType": null,
+          "shotHeld": false,
+          "air": false,
+          "energy": 1,
+          "sprinting": false,
+          "boost": 1,
+          "boostLocked": false,
+          "maxSpeed": 7.215,
+          "exhausted": false,
+          "fouls": 0,
+          "hasBall": false,
+          "dribbling": false,
+          "steps": 0,
+          "controlled": false,
+          "stumble": false,
+          "look": {
+            "body": "big",
+            "skin": 0,
+            "hairTint": "#6b4a2e"
+          },
+          "role": null,
+          "passKind": null,
+          "passTo": null
+        }
+      ],
+      "ft": null,
+      "inbound": null,
+      "call": [
+        null,
+        null
+      ],
+      "lastScore": null,
+      "result": null,
+      "profile": "quick",
+      "mode": "match",
+      "paused": false,
+      "disposed": false,
+      "stepsRun": 16,
+      "error": null,
+      "renderMetrics": {
+        "calls": 61,
+        "triangles": 94212,
+        "frameMs": 3.6,
+        "players": 10,
+        "avatars": 10,
+        "pending": 14,
+        "crowd": 2084,
+        "crowdLevel": 0,
+        "v5": false,
+        "v8": true,
+        "v8Motion": true,
+        "tall": true,
+        "quality": 2,
+        "textures": 34,
+        "geometries": 72,
+        "landscape": true,
+        "dpr": 1,
+        "bufferWidth": 844,
+        "bufferHeight": 390,
+        "style": "v2-broadcast",
+        "characterVersion": 10,
+        "athleteBody": true,
+        "motionSource": "v12",
+        "dunks": {
+          "guard": {
+            "dunk_one_hand": {
+              "palmMax": 2.801,
+              "lift": 0.779,
+              "scale": 1.641
+            },
+            "dunk_two_hands": {
+              "palmMax": 2.863,
+              "lift": 0.841,
+              "scale": 1.519
+            }
+          },
+          "wing": {
+            "dunk_one_hand": {
+              "palmMax": 2.907,
+              "lift": 0.715,
+              "scale": 1.55
+            },
+            "dunk_two_hands": {
+              "palmMax": 2.97,
+              "lift": 0.772,
+              "scale": 1.428
+            }
+          },
+          "center": {
+            "dunk_one_hand": {
+              "palmMax": 3.013,
+              "lift": 0.667,
+              "scale": 1.43
+            },
+            "dunk_two_hands": {
+              "palmMax": 3.076,
+              "lift": 0.72,
+              "scale": 1.311
+            }
+          }
+        },
+        "retargetMs": 877.7000000001863,
+        "lods": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "arenaSource": "assets/hoops-v8/arena/",
+        "crowd3d": true,
+        "v4Fallbacks": [],
+        "clipCount": 0,
+        "loadTimes": {
+          "arena": 1076,
+          "models": 264,
+          "environment": 94,
+          "crowd": 0,
+          "playerAssets": 1771,
+          "avatars": 17,
+          "vfx": 66,
+          "feel": 8,
+          "total": 3296,
+          "firstFrame": 1850
+        },
+        "arenaVersion": 4,
+        "baked": [],
+        "reflection": null,
+        "feel": {
+          "authored": true,
+          "queued": 0,
+          "fov": 0,
+          "seen": 0
+        },
+        "vfx": {
+          "missingAtlases": [],
+          "sprites": 0,
+          "residentAtlases": 0,
+          "loadedAtlases": 5,
+          "reducedMotion": false
+        },
+        "show": {
+          "autoReplays": 0,
+          "autoReplaysDone": 0,
+          "skipped": 0,
+          "liveCuts": 0,
+          "casts": 0,
+          "stand": 0,
+          "groan": 0,
+          "wave": false,
+          "cut": false
+        },
+        "motion": [
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready"
+        ],
+        "v241": {
+          "flags": {
+            "whistle": true,
+            "crowd3d": "budget",
+            "bodyV2": true,
+            "motionV13": true,
+            "referee": true
+          },
+          "crowd3d": {
+            "mode": "budget",
+            "status": "ready",
+            "error": null,
+            "fans": 796,
+            "submitted": [
+              0,
+              166,
+              219
+            ],
+            "instances": 377,
+            "triangles": 20196,
+            "draws": 12,
+            "inView": 377,
+            "scale": 0.968,
+            "tier": "high",
+            "limit": 24000,
+            "plans": 3,
+            "files": 12,
+            "planMs": 2.2,
+            "visible": true,
+            "cardsHidden": 1876
+          },
+          "bodyV2": true,
+          "motionV13": {
+            "clips": [
+              "idle_ready",
+              "idle_ready_ball",
+              "jog",
+              "run",
+              "sprint",
+              "jog_ball",
+              "run_ball",
+              "dribble_stand",
+              "jump_shot",
+              "three_point"
+            ],
+            "aligned": {
+              "jog": {
+                "before": 0.231,
+                "after": 0.346
+              },
+              "run": {
+                "before": 0.909,
+                "after": 0.318
+              },
+              "sprint": {
+                "before": 0,
+                "after": 0.35
+              },
+              "dribble_run": {
+                "before": 0.909,
+                "after": 0.318
+              }
+            },
+            "shared": {
+              "walk": {
+                "before": 0.529,
+                "after": 0.324
+              },
+              "sprint_ball": {
+                "before": 0.091,
+                "after": 0.333
+              }
+            },
+            "refScale": {
+              "guard": 1.0864,
+              "wing": 1.1442,
+              "center": 1.202
+            }
+          },
+          "referee": {
+            "status": "ready",
+            "error": null,
+            "gestures": {},
+            "triangles": 1225,
+            "draws": 2,
+            "x": 0,
+            "gesture": null
+          }
+        }
+      },
+      "audioMetrics": {
+        "context": "running",
+        "buffers": 16,
+        "active": 0,
+        "events": 0,
+        "loops": 0,
+        "bed": null,
+        "played": {
+          "opening": 1
+        },
+        "muted": false,
+        "paused": false,
+        "disposed": false,
+        "mix": true,
+        "duckGain": 1,
+        "whistle": {
+          "last": 19.474,
+          "blocked": 1,
+          "jumpBalls": 1,
+          "v241": true,
+          "referee": {
+            "steal": 0,
+            "foul": 0,
+            "fallback": 0,
+            "gated": 0,
+            "ready": [
+              "steal",
+              "foul"
+            ],
+            "mp3": []
+          }
+        },
+        "dribbleSqueak": false,
+        "scheduled": []
+      },
+      "input": {
+        "shoot": false,
+        "pass": false,
+        "alt": false,
+        "sprint": false,
+        "stick": false,
+        "queued": 0
+      },
+      "replaying": false,
+      "replayInfo": null,
+      "show": {
+        "enabled": true,
+        "dunks": 0,
+        "alleyoops": 0,
+        "buzzer": 0,
+        "winner": 0,
+        "triggers": 0,
+        "replays": 0,
+        "replaysDone": 0,
+        "replayWall": [],
+        "skipped": 0,
+        "pending": false
+      }
+    }
+  },
+  "console": [],
+  "requestsFailed": [],
+  "metadata": {
+    "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "release": "island-v2-20261107-15",
+    "capturedAt": "2026-11-17T21:05:13.965535+02:00",
+    "browser": "151.0.7922.173",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "deviceScaleFactor": 1,
+    "touchProtocol": "CDP Input.dispatchTouchEvent",
+    "renderer": "SwiftShader software WebGL",
+    "serviceWorkers": "blocked in disposable context",
+    "cspBypass": false
+  },
+  "touchCommands": [
+    {
+      "type": "touchStart",
+      "points": [
+        {
+          "id": 1,
+          "x": 252.0,
+          "y": 195.0
+        }
+      ],
+      "hostMonotonic": 4459.7849
+    },
+    {
+      "type": "touchEnd",
+      "points": [],
+      "hostMonotonic": 4459.8432
+    },
+    {
+      "type": "touchStart",
+      "points": [
+        {
+          "id": 1,
+          "x": 252.0,
+          "y": 263.0
+        }
+      ],
+      "hostMonotonic": 4460.181
+    },
+    {
+      "type": "touchEnd",
+      "points": [],
+      "hostMonotonic": 4460.2373
+    }
+  ]
+}

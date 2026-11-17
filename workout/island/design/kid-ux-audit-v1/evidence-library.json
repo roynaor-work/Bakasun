@@ -1,0 +1,2086 @@
+{
+  "phase": "library",
+  "screens": [
+    {
+      "id": "games-library",
+      "game": "library",
+      "state": "games-library",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/games-library.png",
+      "metrics": {
+        "url": "http://127.0.0.1:40041/workout/island/?dev=1",
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "documentDirection": "rtl",
+        "documentLang": "he",
+        "targets": [
+          {
+            "selector": "[data-action=\"close-modal\"]",
+            "label": "סגירה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 33,
+              "y": 21,
+              "width": 40,
+              "height": 40,
+              "right": 73,
+              "bottom": 61
+            },
+            "visibleRect": {
+              "x": 33,
+              "y": 21,
+              "width": 40,
+              "height": 40
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"close-modal\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 24,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(202, 219, 213)",
+              "background": [
+                121.1,
+                158.12,
+                166.38,
+                1
+              ],
+              "ratio": 2.01,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-sound\"]",
+            "label": "השתק",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 81,
+              "y": 21,
+              "width": 64.61,
+              "height": 40,
+              "right": 145.61,
+              "bottom": 61
+            },
+            "visibleRect": {
+              "x": 81,
+              "y": 21,
+              "width": 64.61,
+              "height": 40
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-sound\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 11,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(202, 219, 213)",
+              "background": [
+                121.1,
+                158.12,
+                166.38,
+                1
+              ],
+              "ratio": 2.01,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"boarDefense\"]",
+            "label": "כניסה · אי החזירים — הגנת החווה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 670,
+              "y": 171.98,
+              "width": 132,
+              "height": 34,
+              "right": 802,
+              "bottom": 205.98
+            },
+            "visibleRect": {
+              "x": 670,
+              "y": 171.98,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"boarDefense\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"alienDefense\"]",
+            "label": "כניסה · הגנה מפני חייזרים",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 513,
+              "y": 171.98,
+              "width": 132,
+              "height": 34,
+              "right": 645,
+              "bottom": 205.98
+            },
+            "visibleRect": {
+              "x": 513,
+              "y": 171.98,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"alienDefense\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"fireRescue\"]",
+            "label": "כניסה · כיבוי שריפה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 356,
+              "y": 171.98,
+              "width": 132,
+              "height": 34,
+              "right": 488,
+              "bottom": 205.98
+            },
+            "visibleRect": {
+              "x": 356,
+              "y": 171.98,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"fireRescue\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"navalDuel\"]",
+            "label": "כניסה · קרב ספינות",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 199,
+              "y": 171.98,
+              "width": 132,
+              "height": 34,
+              "right": 331,
+              "bottom": 205.98
+            },
+            "visibleRect": {
+              "x": 199,
+              "y": 171.98,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"navalDuel\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"soccer\"]",
+            "label": "כניסה · ליגת העיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 42,
+              "y": 171.98,
+              "width": 132,
+              "height": 34,
+              "right": 174,
+              "bottom": 205.98
+            },
+            "visibleRect": {
+              "x": 42,
+              "y": 171.98,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"soccer\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"tennis\"]",
+            "label": "כניסה · טניס בעיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 670,
+              "y": 321.17,
+              "width": 132,
+              "height": 34,
+              "right": 802,
+              "bottom": 355.17
+            },
+            "visibleRect": {
+              "x": 670,
+              "y": 321.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"tennis\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"islandRacing\"]",
+            "label": "כניסה · מרוצי העיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 513,
+              "y": 321.17,
+              "width": 132,
+              "height": 34,
+              "right": 645,
+              "bottom": 355.17
+            },
+            "visibleRect": {
+              "x": 513,
+              "y": 321.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"islandRacing\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"streetSlam\"]",
+            "label": "כניסה · ליגת העיר בכדורסל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 356,
+              "y": 321.17,
+              "width": 132,
+              "height": 34,
+              "right": 488,
+              "bottom": 355.17
+            },
+            "visibleRect": {
+              "x": 356,
+              "y": 321.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"streetSlam\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"alpineRush\"]",
+            "label": "כניסה · מרוץ סנובורד",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 199,
+              "y": 321.17,
+              "width": 132,
+              "height": 34,
+              "right": 331,
+              "bottom": 355.17
+            },
+            "visibleRect": {
+              "x": 199,
+              "y": 321.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"alpineRush\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"catchCriminal\"]",
+            "label": "כניסה · תפוס את הפושע",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 42,
+              "y": 321.17,
+              "width": 132,
+              "height": 34,
+              "right": 174,
+              "bottom": 355.17
+            },
+            "visibleRect": {
+              "x": 42,
+              "y": 321.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"catchCriminal\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"offline-download-all\"]",
+            "label": "הורדת כל המשחקים למכשיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 47,
+              "y": 531.17,
+              "width": 750,
+              "height": 48,
+              "right": 797,
+              "bottom": 579.17
+            },
+            "visibleRect": {
+              "x": 47,
+              "y": 531.17,
+              "width": 750,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": false,
+            "clipped": true,
+            "fontPx": 14,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                40,
+                140,
+                129,
+                1
+              ],
+              "ratio": 4.07,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"offline-check-update\"]",
+            "label": "בדיקת עדכון והורדה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 47,
+              "y": 589.17,
+              "width": 750,
+              "height": 48,
+              "right": 797,
+              "bottom": 637.17
+            },
+            "visibleRect": {
+              "x": 47,
+              "y": 589.17,
+              "width": 750,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": false,
+            "clipped": true,
+            "fontPx": 13,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(34, 75, 88)",
+              "background": [
+                237,
+                243,
+                233,
+                1
+              ],
+              "ratio": 8.39,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "gapsUnder8": [],
+        "text": [
+          {
+            "selector": "#modal-title",
+            "text": "משחקי העיר",
+            "fontPx": 18,
+            "direction": "rtl",
+            "rect": {
+              "x": 169,
+              "y": 21,
+              "width": 642,
+              "height": 24.3,
+              "right": 811,
+              "bottom": 45.3
+            },
+            "color": {
+              "foreground": "rgb(240, 238, 226)",
+              "background": [
+                116.96,
+                155.12,
+                163.64,
+                1
+              ],
+              "ratio": 2.58,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "p.modal-subtitle",
+            "text": "בחרו משחק כדי להתחיל.",
+            "fontPx": 11,
+            "direction": "rtl",
+            "rect": {
+              "x": 33,
+              "y": 47.3,
+              "width": 778,
+              "height": 16.5,
+              "right": 811,
+              "bottom": 63.8
+            },
+            "color": {
+              "foreground": "rgb(162, 186, 185)",
+              "background": [
+                116.96,
+                155.12,
+                163.64,
+                1
+              ],
+              "ratio": 1.47,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.",
+            "text": "צליל",
+            "fontPx": 11,
+            "direction": "rtl",
+            "rect": {
+              "x": 89,
+              "y": 35,
+              "width": 22.61,
+              "height": 12,
+              "right": 111.61,
+              "bottom": 47
+            },
+            "color": {
+              "foreground": "rgb(202, 219, 213)",
+              "background": [
+                121.1,
+                158.12,
+                166.38,
+                1
+              ],
+              "ratio": 2.01,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "span.adventure-new",
+            "text": "חדש",
+            "fontPx": 11,
+            "direction": "rtl",
+            "rect": {
+              "x": 767.03,
+              "y": 78.8,
+              "width": 36.97,
+              "height": 19.39,
+              "right": 804,
+              "bottom": 98.19
+            },
+            "color": {
+              "foreground": "rgb(29, 42, 48)",
+              "background": [
+                242,
+                193,
+                78,
+                1
+              ],
+              "ratio": 8.77,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "אי החזירים — הגנת החווה",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 670,
+              "y": 136.98,
+              "width": 132,
+              "height": 30,
+              "right": 802,
+              "bottom": 166.98
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "הגנה מפני חייזרים",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 513,
+              "y": 136.98,
+              "width": 132,
+              "height": 30,
+              "right": 645,
+              "bottom": 166.98
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "כיבוי שריפה",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 356,
+              "y": 136.98,
+              "width": 132,
+              "height": 30,
+              "right": 488,
+              "bottom": 166.98
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "קרב ספינות",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 199,
+              "y": 136.98,
+              "width": 132,
+              "height": 30,
+              "right": 331,
+              "bottom": 166.98
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "ליגת העיר",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 42,
+              "y": 136.98,
+              "width": 132,
+              "height": 30,
+              "right": 174,
+              "bottom": 166.98
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "טניס בעיר",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 670,
+              "y": 286.17,
+              "width": 132,
+              "height": 30,
+              "right": 802,
+              "bottom": 316.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "מרוצי העיר",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 513,
+              "y": 286.17,
+              "width": 132,
+              "height": 30,
+              "right": 645,
+              "bottom": 316.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                95,
+                127.77,
+                134.12,
+                1
+              ],
+              "ratio": 3.74,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "ליגת העיר בכדורסל",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 356,
+              "y": 286.17,
+              "width": 132,
+              "height": 30,
+              "right": 488,
+              "bottom": 316.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "מרוץ סנובורד",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 199,
+              "y": 286.17,
+              "width": 132,
+              "height": 30,
+              "right": 331,
+              "bottom": 316.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "תפוס את הפושע",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 42,
+              "y": 286.17,
+              "width": 132,
+              "height": 30,
+              "right": 174,
+              "bottom": 316.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "scroll": [
+          {
+            "selector": "section.modal.panel",
+            "top": 0,
+            "height": 372,
+            "total": 678,
+            "rect": {
+              "x": 16,
+              "y": 8,
+              "width": 812,
+              "height": 374,
+              "right": 828,
+              "bottom": 382
+            }
+          }
+        ],
+        "textContent": "×\nמשחקי העיר\n\nבחרו משחק כדי להתחיל.\n\nצליל\nחדש\nאי החזירים — הגנת החווה\nכניסה\nהגנה מפני חייזרים\nכניסה\nכיבוי שריפה\nכניסה\nקרב ספינות\nכניסה\nליגת העיר\nכניסה\nטניס בעיר\nכניסה\nמרוצי העיר\nכניסה\nליגת העיר בכדורסל\nכניסה\nמרוץ סנובורד\nכניסה\nתפוס את הפושע\nכניסה\nהורדת המשחקים למכשיר\n\nעוד לא נשמר במכשיר. הורדה אחת מקצרת כל טעינה.\n\nכדורגל: 0 מתוך 141\nכדורסל: 0 מתוך 156\nסקי: 0 מתוך 88\nליגת הסקי: 0 מתוך 56\nטניס: 0 מתוך 81\nמרוצים: 0 מתוך 138\nספינות: 0 מתוך 27\nכיבוי אש: 0 מתוך 100\nהגנה מחייזרים: 0 מתוך 24\nהעיר: 0 מתוך 25\nתפוס את הפושע: 0 מתוך 66\nהורדת כל המשחקים למכשיר\nבדיקת עדכון והורדה\n\nגרסה: island-v2-20261107-15",
+        "instrument": {
+          "events": [
+            {
+              "type": "pointerdown",
+              "t": 31654.199999999953,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "quick-games",
+              "x": 561.125,
+              "y": 349.6015625,
+              "firstRelatedMutationMs": 207.40000000002328,
+              "nextFrameMs": -18.39999999995416
+            },
+            {
+              "type": "pointerup",
+              "t": 35592.5,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "quick-games",
+              "x": 561.125,
+              "y": 349.6015625
+            },
+            {
+              "type": "click",
+              "t": 35592.90000000002,
+              "trusted": false,
+              "pointerType": "",
+              "action": "quick-games",
+              "x": 0,
+              "y": 0
+            },
+            {
+              "type": "click",
+              "t": 35668.79999999993,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "game-enter",
+              "x": 561,
+              "y": 350
+            }
+          ],
+          "audio": [],
+          "speech": []
+        }
+      }
+    },
+    {
+      "id": "games-library--scroll-01",
+      "game": "library",
+      "state": "games-library--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/games-library--scroll-01.png",
+      "metrics": {
+        "url": "http://127.0.0.1:40041/workout/island/?dev=1",
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "documentDirection": "rtl",
+        "documentLang": "he",
+        "targets": [
+          {
+            "selector": "[data-action=\"close-modal\"]",
+            "label": "סגירה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 33,
+              "y": -285,
+              "width": 40,
+              "height": 40,
+              "right": 73,
+              "bottom": -245
+            },
+            "visibleRect": {
+              "x": 33,
+              "y": 8,
+              "width": 40,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 24,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(202, 219, 213)",
+              "background": [
+                121.1,
+                158.12,
+                166.38,
+                1
+              ],
+              "ratio": 2.01,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-sound\"]",
+            "label": "השתק",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 81,
+              "y": -285,
+              "width": 64.61,
+              "height": 40,
+              "right": 145.61,
+              "bottom": -245
+            },
+            "visibleRect": {
+              "x": 81,
+              "y": 8,
+              "width": 64.61,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 11,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(202, 219, 213)",
+              "background": [
+                121.1,
+                158.12,
+                166.38,
+                1
+              ],
+              "ratio": 2.01,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"boarDefense\"]",
+            "label": "כניסה · אי החזירים — הגנת החווה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 670,
+              "y": -134.02,
+              "width": 132,
+              "height": 34,
+              "right": 802,
+              "bottom": -100.02
+            },
+            "visibleRect": {
+              "x": 670,
+              "y": 8,
+              "width": 132,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"alienDefense\"]",
+            "label": "כניסה · הגנה מפני חייזרים",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 513,
+              "y": -134.02,
+              "width": 132,
+              "height": 34,
+              "right": 645,
+              "bottom": -100.02
+            },
+            "visibleRect": {
+              "x": 513,
+              "y": 8,
+              "width": 132,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"fireRescue\"]",
+            "label": "כניסה · כיבוי שריפה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 356,
+              "y": -134.02,
+              "width": 132,
+              "height": 34,
+              "right": 488,
+              "bottom": -100.02
+            },
+            "visibleRect": {
+              "x": 356,
+              "y": 8,
+              "width": 132,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"navalDuel\"]",
+            "label": "כניסה · קרב ספינות",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 199,
+              "y": -134.02,
+              "width": 132,
+              "height": 34,
+              "right": 331,
+              "bottom": -100.02
+            },
+            "visibleRect": {
+              "x": 199,
+              "y": 8,
+              "width": 132,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"soccer\"]",
+            "label": "כניסה · ליגת העיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 42,
+              "y": -134.02,
+              "width": 132,
+              "height": 34,
+              "right": 174,
+              "bottom": -100.02
+            },
+            "visibleRect": {
+              "x": 42,
+              "y": 8,
+              "width": 132,
+              "height": 0
+            },
+            "centerHit": false,
+            "hitElement": null,
+            "under44": true,
+            "clipped": true,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"tennis\"]",
+            "label": "כניסה · טניס בעיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 670,
+              "y": 15.17,
+              "width": 132,
+              "height": 34,
+              "right": 802,
+              "bottom": 49.17
+            },
+            "visibleRect": {
+              "x": 670,
+              "y": 15.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"tennis\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"islandRacing\"]",
+            "label": "כניסה · מרוצי העיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 513,
+              "y": 15.17,
+              "width": 132,
+              "height": 34,
+              "right": 645,
+              "bottom": 49.17
+            },
+            "visibleRect": {
+              "x": 513,
+              "y": 15.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"islandRacing\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"streetSlam\"]",
+            "label": "כניסה · ליגת העיר בכדורסל",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 356,
+              "y": 15.17,
+              "width": 132,
+              "height": 34,
+              "right": 488,
+              "bottom": 49.17
+            },
+            "visibleRect": {
+              "x": 356,
+              "y": 15.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"streetSlam\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"alpineRush\"]",
+            "label": "כניסה · מרוץ סנובורד",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 199,
+              "y": 15.17,
+              "width": 132,
+              "height": 34,
+              "right": 331,
+              "bottom": 49.17
+            },
+            "visibleRect": {
+              "x": 199,
+              "y": 15.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"alpineRush\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"game-enter\"][data-game-id=\"catchCriminal\"]",
+            "label": "כניסה · תפוס את הפושע",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 42,
+              "y": 15.17,
+              "width": 132,
+              "height": 34,
+              "right": 174,
+              "bottom": 49.17
+            },
+            "visibleRect": {
+              "x": 42,
+              "y": 15.17,
+              "width": 132,
+              "height": 34
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"game-enter\"][data-game-id=\"catchCriminal\"]",
+            "under44": true,
+            "clipped": false,
+            "fontPx": 12,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(32, 52, 59)",
+              "background": [
+                231,
+                223,
+                202,
+                1
+              ],
+              "ratio": 9.78,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"offline-download-all\"]",
+            "label": "הורדת כל המשחקים למכשיר",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 47,
+              "y": 225.17,
+              "width": 750,
+              "height": 48,
+              "right": 797,
+              "bottom": 273.17
+            },
+            "visibleRect": {
+              "x": 47,
+              "y": 225.17,
+              "width": 750,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"offline-download-all\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 14,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(255, 255, 255)",
+              "background": [
+                40,
+                140,
+                129,
+                1
+              ],
+              "ratio": 4.07,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "[data-action=\"offline-check-update\"]",
+            "label": "בדיקת עדכון והורדה",
+            "tag": "BUTTON",
+            "role": null,
+            "disabled": false,
+            "inert": false,
+            "rect": {
+              "x": 47,
+              "y": 283.17,
+              "width": 750,
+              "height": 48,
+              "right": 797,
+              "bottom": 331.17
+            },
+            "visibleRect": {
+              "x": 47,
+              "y": 283.17,
+              "width": 750,
+              "height": 48
+            },
+            "centerHit": true,
+            "hitElement": "[data-action=\"offline-check-update\"]",
+            "under44": false,
+            "clipped": false,
+            "fontPx": 13,
+            "direction": "rtl",
+            "color": {
+              "foreground": "rgb(34, 75, 88)",
+              "background": [
+                237,
+                243,
+                233,
+                1
+              ],
+              "ratio": 8.39,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "gapsUnder8": [],
+        "text": [
+          {
+            "selector": "h3.",
+            "text": "טניס בעיר",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 670,
+              "y": -19.83,
+              "width": 132,
+              "height": 30,
+              "right": 802,
+              "bottom": 10.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "מרוצי העיר",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 513,
+              "y": -19.83,
+              "width": 132,
+              "height": 30,
+              "right": 645,
+              "bottom": 10.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                95,
+                127.77,
+                134.12,
+                1
+              ],
+              "ratio": 3.74,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "ליגת העיר בכדורסל",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 356,
+              "y": -19.83,
+              "width": 132,
+              "height": 30,
+              "right": 488,
+              "bottom": 10.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "מרוץ סנובורד",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 199,
+              "y": -19.83,
+              "width": 132,
+              "height": 30,
+              "right": 331,
+              "bottom": 10.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "תפוס את הפושע",
+            "fontPx": 12,
+            "direction": "rtl",
+            "rect": {
+              "x": 42,
+              "y": -19.83,
+              "width": 132,
+              "height": 30,
+              "right": 174,
+              "bottom": 10.17
+            },
+            "color": {
+              "foreground": "rgb(237, 241, 233)",
+              "background": [
+                102.75,
+                138,
+                146.06,
+                1
+              ],
+              "ratio": 3.26,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "h3.",
+            "text": "הורדת המשחקים למכשיר",
+            "fontPx": 16.8,
+            "direction": "rtl",
+            "rect": {
+              "x": 47,
+              "y": 87.17,
+              "width": 750,
+              "height": 20,
+              "right": 797,
+              "bottom": 107.17
+            },
+            "color": {
+              "foreground": "rgb(237, 242, 236)",
+              "background": [
+                213.59,
+                225.04,
+                227.59,
+                1
+              ],
+              "ratio": 1.18,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "p.offline-status",
+            "text": "עוד לא נשמר במכשיר. הורדה אחת מקצרת כל טעינה.",
+            "fontPx": 16,
+            "direction": "rtl",
+            "rect": {
+              "x": 47,
+              "y": 117.17,
+              "width": 750,
+              "height": 18,
+              "right": 797,
+              "bottom": 135.17
+            },
+            "color": {
+              "foreground": "rgb(237, 242, 236)",
+              "background": [
+                213.59,
+                225.04,
+                227.59,
+                1
+              ],
+              "ratio": 1.18,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          },
+          {
+            "selector": "p.offline-version",
+            "text": "גרסה: island-v2-20261107-15",
+            "fontPx": 12.48,
+            "direction": "rtl",
+            "rect": {
+              "x": 47,
+              "y": 341.17,
+              "width": 750,
+              "height": 14,
+              "right": 797,
+              "bottom": 355.17
+            },
+            "color": {
+              "foreground": "rgb(237, 242, 236)",
+              "background": [
+                213.59,
+                225.04,
+                227.59,
+                1
+              ],
+              "ratio": 1.18,
+              "requiresManual": true,
+              "textShadow": "none"
+            }
+          }
+        ],
+        "scroll": [
+          {
+            "selector": "section.modal.panel",
+            "top": 306,
+            "height": 372,
+            "total": 678,
+            "rect": {
+              "x": 16,
+              "y": 8,
+              "width": 812,
+              "height": 374,
+              "right": 828,
+              "bottom": 382
+            }
+          }
+        ],
+        "textContent": "×\nמשחקי העיר\n\nבחרו משחק כדי להתחיל.\n\nצליל\nחדש\nאי החזירים — הגנת החווה\nכניסה\nהגנה מפני חייזרים\nכניסה\nכיבוי שריפה\nכניסה\nקרב ספינות\nכניסה\nליגת העיר\nכניסה\nטניס בעיר\nכניסה\nמרוצי העיר\nכניסה\nליגת העיר בכדורסל\nכניסה\nמרוץ סנובורד\nכניסה\nתפוס את הפושע\nכניסה\nהורדת המשחקים למכשיר\n\nעוד לא נשמר במכשיר. הורדה אחת מקצרת כל טעינה.\n\nכדורגל: 0 מתוך 141\nכדורסל: 0 מתוך 156\nסקי: 0 מתוך 88\nליגת הסקי: 0 מתוך 56\nטניס: 0 מתוך 81\nמרוצים: 0 מתוך 138\nספינות: 0 מתוך 27\nכיבוי אש: 0 מתוך 100\nהגנה מחייזרים: 0 מתוך 24\nהעיר: 0 מתוך 25\nתפוס את הפושע: 0 מתוך 66\nהורדת כל המשחקים למכשיר\nבדיקת עדכון והורדה\n\nגרסה: island-v2-20261107-15",
+        "instrument": {
+          "events": [
+            {
+              "type": "pointerdown",
+              "t": 31654.199999999953,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "quick-games",
+              "x": 561.125,
+              "y": 349.6015625,
+              "firstRelatedMutationMs": 207.40000000002328,
+              "nextFrameMs": -18.39999999995416
+            },
+            {
+              "type": "pointerup",
+              "t": 35592.5,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "quick-games",
+              "x": 561.125,
+              "y": 349.6015625
+            },
+            {
+              "type": "click",
+              "t": 35592.90000000002,
+              "trusted": false,
+              "pointerType": "",
+              "action": "quick-games",
+              "x": 0,
+              "y": 0
+            },
+            {
+              "type": "click",
+              "t": 35668.79999999993,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "game-enter",
+              "x": 561,
+              "y": 350
+            },
+            {
+              "type": "pointerdown",
+              "t": 42950.90000000002,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "modal panel",
+              "x": 815,
+              "y": 362,
+              "nextFrameMs": 1.099999999976717
+            },
+            {
+              "type": "pointercancel",
+              "t": 43649.09999999998,
+              "trusted": true,
+              "pointerType": "touch",
+              "action": "modal panel",
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "audio": [],
+          "speech": []
+        }
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "selector": "[data-action=quick-games]",
+      "frame": "main",
+      "x": 561.12,
+      "y": 349.6,
+      "holdMs": 45,
+      "before": {
+        "t": 22414.400000000023,
+        "audio": 0,
+        "speech": 0
+      },
+      "after": {
+        "t": 35926.59999999998,
+        "events": [
+          {
+            "type": "pointerdown",
+            "t": 31654.199999999953,
+            "trusted": true,
+            "pointerType": "touch",
+            "action": "quick-games",
+            "x": 561.125,
+            "y": 349.6015625,
+            "firstRelatedMutationMs": 207.40000000002328,
+            "nextFrameMs": -18.39999999995416
+          },
+          {
+            "type": "pointerup",
+            "t": 35592.5,
+            "trusted": true,
+            "pointerType": "touch",
+            "action": "quick-games",
+            "x": 561.125,
+            "y": 349.6015625
+          },
+          {
+            "type": "click",
+            "t": 35592.90000000002,
+            "trusted": false,
+            "pointerType": "",
+            "action": "quick-games",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "type": "click",
+            "t": 35668.79999999993,
+            "trusted": true,
+            "pointerType": "touch",
+            "action": "game-enter",
+            "x": 561,
+            "y": 350
+          }
+        ],
+        "audio": [],
+        "speech": []
+      }
+    }
+  ],
+  "errors": [],
+  "fixtures": {
+    "progressedCity": {
+      "age": 7,
+      "learning": {
+        "day": "2026-11-17",
+        "rounds": 2,
+        "target": 2,
+        "complete": true,
+        "firstDay": true,
+        "locked": false
+      },
+      "buildings": [
+        {
+          "id": "audit-airbase",
+          "typeId": "airbase",
+          "x": 13,
+          "z": 19,
+          "level": 1
+        },
+        {
+          "id": "audit-fireStation",
+          "typeId": "fireStation",
+          "x": 9,
+          "z": 11,
+          "level": 1
+        },
+        {
+          "id": "audit-harbor",
+          "typeId": "harbor",
+          "x": 0,
+          "z": 8,
+          "level": 1
+        },
+        {
+          "id": "audit-soccer",
+          "typeId": "soccer",
+          "x": 16,
+          "z": 11,
+          "level": 1
+        },
+        {
+          "id": "audit-tennis",
+          "typeId": "tennis",
+          "x": 15,
+          "z": 13,
+          "level": 1
+        },
+        {
+          "id": "audit-basketball",
+          "typeId": "basketball",
+          "x": 11,
+          "z": 15,
+          "level": 1
+        },
+        {
+          "id": "audit-library",
+          "typeId": "library",
+          "x": 6,
+          "z": 12,
+          "level": 1
+        },
+        {
+          "id": "audit-mathLab",
+          "typeId": "mathLab",
+          "x": 6,
+          "z": 14,
+          "level": 1
+        },
+        {
+          "id": "audit-zoo",
+          "typeId": "zoo",
+          "x": 4,
+          "z": 12,
+          "level": 1
+        },
+        {
+          "id": "audit-puzzleRoom",
+          "typeId": "puzzleRoom",
+          "x": 2,
+          "z": 12,
+          "level": 1
+        }
+      ],
+      "games": [
+        {
+          "id": "alienDefense",
+          "title": "הגנה מפני חייזרים"
+        },
+        {
+          "id": "fireRescue",
+          "title": "כיבוי שריפה"
+        },
+        {
+          "id": "navalDuel",
+          "title": "קרב ספינות"
+        },
+        {
+          "id": "soccer",
+          "title": "ליגת העיר"
+        },
+        {
+          "id": "tennis",
+          "title": "טניס בעיר"
+        },
+        {
+          "id": "islandRacing",
+          "title": "מרוצי העיר"
+        },
+        {
+          "id": "streetSlam",
+          "title": "ליגת העיר בכדורסל"
+        },
+        {
+          "id": "alpineRush",
+          "title": "מרוץ סנובורד"
+        },
+        {
+          "id": "boarDefense",
+          "title": "אי החזירים — הגנת החווה"
+        },
+        {
+          "id": "catchCriminal",
+          "title": "תפוס את הפושע"
+        }
+      ]
+    }
+  },
+  "console": [],
+  "requestsFailed": [],
+  "metadata": {
+    "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "release": "island-v2-20261107-15",
+    "capturedAt": "2026-11-17T20:03:58.464703+02:00",
+    "browser": "151.0.7922.173",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "deviceScaleFactor": 1,
+    "touchProtocol": "CDP Input.dispatchTouchEvent",
+    "renderer": "SwiftShader software WebGL",
+    "serviceWorkers": "blocked in disposable context",
+    "cspBypass": false
+  }
+}
