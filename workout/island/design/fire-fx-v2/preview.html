@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>אפקטי אש · v2</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="brand"><span class="mark" aria-hidden="true">✦</span><div><h1>מעבדת אש<span>02</span></h1><p>אפקטים למשחק הכיבוי</p></div></div>
+      <div class="meta"><span>1024 × 1024</span><span id="weight">טוען…</span><i></i><span>שקיפות מלאה</span></div>
+    </header>
+    <div class="workspace">
+      <section class="scene-panel" aria-label="בדיקת הצמדה בסצנה">
+        <canvas id="scene" width="1088" height="520" aria-label="להבות מונפשות על מבנה. אפשר לכבות ולהצית מחדש."></canvas>
+        <div class="scene-top"><span class="live"><i></i>תצוגה חיה</span><button id="background" aria-label="החלפת רקע בהיר או כהה">רקע בהיר</button></div>
+        <div class="scene-bottom"><div class="segments" role="group" aria-label="מיקום האש"><button data-place="wall" aria-pressed="false">קיר</button><button data-place="window" aria-pressed="true">חלון</button><button data-place="roof" aria-pressed="false">גג</button></div><span id="state" role="status" aria-live="polite">להבה בינונית · חלון</span></div>
+      </section>
+      <aside aria-label="ספריית אפקטים">
+        <div class="library-heading"><span>ספריית אפקטים</span><span>12</span></div>
+        <div id="library" class="library" role="group" aria-label="בחירת אפקט"></div>
+      </aside>
+    </div>
+    <footer>
+      <div class="actions"><button id="quench" class="primary">כיבוי במים <span aria-hidden="true">↓</span></button><button id="ignite">התלקחות <span aria-hidden="true">✦</span></button></div>
+      <div class="options"><button id="heat" aria-pressed="true">עיוות חום <span class="switch" aria-hidden="true"></span></button><button id="pause" aria-pressed="false" aria-label="השהיית האנימציה">Ⅱ</button></div>
+    </footer>
+    <div id="error" role="alert" hidden></div>
+  </main>
+  <script src="atlas-data.js"></script>
+  <script src="preview.js"></script>
+</body>
+</html>
