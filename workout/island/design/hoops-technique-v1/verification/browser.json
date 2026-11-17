@@ -1,0 +1,1215 @@
+{
+  "schemaVersion": 1,
+  "kind": "actual-glb-preview-capture",
+  "generatedAtUTC": "2026-11-17T13:05:04.273Z",
+  "viewport": [
+    844,
+    390
+  ],
+  "renderer": "Chromium ANGLE SwiftShader; AnimationMixer GLB playback",
+  "inputHashes": [
+    {
+      "file": "catalog.json",
+      "bytes": 143606,
+      "sha256": "54f22c49faa5f4ede228e7e64b0bd5f5b8eedf128e42df81b2a3d21583375abf"
+    },
+    {
+      "file": "preview.html",
+      "bytes": 9313,
+      "sha256": "cb59748e22d45e527e8503caf842b26f72b6388f97343e4943a6f39439f4e132"
+    },
+    {
+      "file": "source/preview.mjs",
+      "bytes": 19093,
+      "sha256": "7e549281eb218a9f8b3679b0854ccf63b885e4234cf809c3bdfcf3c8edb761c1"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 10943,
+      "sha256": "b2fcf551b5e35ea1e5e79ddcf41fb587f3cbd299d4a60872818389d47a2d54c2"
+    },
+    {
+      "file": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "file": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "file": "vendor/DRACOLoader.js",
+      "bytes": 13640,
+      "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb"
+    },
+    {
+      "file": "vendor/meshopt_decoder.module.js",
+      "bytes": 32483,
+      "sha256": "4ac97b2c44347dacb9a0ca9c3740c8678d166fdcf02bc1612f371e27418e70a7"
+    },
+    {
+      "file": "models/athlete.glb",
+      "bytes": 8787236,
+      "sha256": "9344ee1d690ddad6d4ceebfcf369c1ff6a3021552cadbf43c8ec6006110b03a9"
+    },
+    {
+      "file": "contacts/pass_chest.json",
+      "bytes": 5068,
+      "sha256": "149644ffb2db3a84fd2cf82a9159e409ee082367352dbfce82f85a854684d495"
+    },
+    {
+      "file": "contacts/pass_bounce.json",
+      "bytes": 5625,
+      "sha256": "6733b7049360f27dfeb45a5919f73e9459a311dbb89fe6972833e389c376baaa"
+    },
+    {
+      "file": "contacts/pass_overhead.json",
+      "bytes": 5382,
+      "sha256": "6499e75923e2683933e316505da0a18bf9ff3f6e3d09e92fdd91f4d6c84ac225"
+    },
+    {
+      "file": "contacts/pass_behind_back_right.json",
+      "bytes": 5771,
+      "sha256": "a4c4597e64cf4d0300f79a65cb51f62d99ca32a5932487bfb0f452e12cfabe92"
+    },
+    {
+      "file": "contacts/pass_behind_back_left.json",
+      "bytes": 5750,
+      "sha256": "5a9d11a6ef128370b5ee075a19343a902017fc529bab0a072dd912371952a1f5"
+    },
+    {
+      "file": "contacts/pass_jump.json",
+      "bytes": 6058,
+      "sha256": "c9bbe3a380ac80ecb90fcc1e865889f52ff8c5144d78fbb6bbe85cb5d61a9948"
+    },
+    {
+      "file": "contacts/alley_oop_pass.json",
+      "bytes": 5694,
+      "sha256": "4c73284ef1264998c87e972e3f5e3a0f72949c5e766dc202dae8567474b3612d"
+    },
+    {
+      "file": "contacts/alley_oop_dunk.json",
+      "bytes": 6217,
+      "sha256": "5d382daf92c7ae66c49ad0e1d1f54d63a1144b65f8cfa732edc3f5db3c74825d"
+    },
+    {
+      "file": "contacts/shot_jump.json",
+      "bytes": 6323,
+      "sha256": "1e14c4820bc6463ba3f3ca7015ff5444033e2c441322d9f849c664d9a7e04905"
+    },
+    {
+      "file": "contacts/shot_three.json",
+      "bytes": 6615,
+      "sha256": "70e68d787efeda41231ec16d904d3dbc7dcc425162f3c824a79dddf820a8725a"
+    },
+    {
+      "file": "contacts/shot_fadeaway.json",
+      "bytes": 6935,
+      "sha256": "ce08b27b72d2e86a753070706f894da594763eecde50ae8120a68836885b0f63"
+    },
+    {
+      "file": "contacts/shot_stepback.json",
+      "bytes": 7583,
+      "sha256": "6d8306a5fd369675ed78b994261df65a294a83a3bee051892586ae36f6b06675"
+    },
+    {
+      "file": "contacts/layup_right.json",
+      "bytes": 6562,
+      "sha256": "880b60e66acb9f4da185dbc41c9352f2c2c1098fb69fe8dc5cc5e3af101706f3"
+    },
+    {
+      "file": "contacts/layup_left.json",
+      "bytes": 6542,
+      "sha256": "a22c1d894dea08d2e3e581158e87694de3c3812c8eeabf9e0aed7a681df24476"
+    },
+    {
+      "file": "contacts/dribble_run_right.json",
+      "bytes": 2572,
+      "sha256": "5ac855aaff80493d62bc17fdc70b3a8e0a36829dfeb6f7ea2901f3ad7005895c"
+    },
+    {
+      "file": "contacts/dribble_run_left.json",
+      "bytes": 2567,
+      "sha256": "682aaaa3d2d5d381552763cdc0edcde3b8f5e4d6863aab782f17f2587443bba9"
+    },
+    {
+      "file": "contacts/dribble_crossover.json",
+      "bytes": 3641,
+      "sha256": "ed077222fd411d8ee5caacf00da956ae1380be3b4d748a0b5dd0fda352fb622b"
+    },
+    {
+      "file": "contacts/dribble_between_legs.json",
+      "bytes": 4712,
+      "sha256": "c0b676289740c137cdebf3abbbf6d50ba9468837ea89b9417f9c5e2072de2c28"
+    },
+    {
+      "file": "contacts/dribble_behind_back.json",
+      "bytes": 4711,
+      "sha256": "5ed39609ba4f2f8bce2cfa9b569701976d45e3ebfb1c910bbe8315ea69ba638f"
+    },
+    {
+      "file": "contacts/pivot_left.json",
+      "bytes": 10806,
+      "sha256": "8529234ee483f1bc6230395e2d70e8dde61b9f9d14817599440dc9e7292b0d00"
+    },
+    {
+      "file": "contacts/pivot_right.json",
+      "bytes": 10862,
+      "sha256": "6d9a4a500787ed0721387a51ae2be396d7db2cc160320a51f9c9168d2551c52c"
+    },
+    {
+      "file": "contacts/stop_jump.json",
+      "bytes": 5390,
+      "sha256": "01f9884a19d2c88ce144ed08e7fc38c6e67095f1e99401617fe768deab075f24"
+    },
+    {
+      "file": "contacts/stop_stride.json",
+      "bytes": 5727,
+      "sha256": "c30970f90b15fe9eb96f9d878c1e2af3df2d3bb7c1087e494e89cc0f7f8045e8"
+    },
+    {
+      "file": "contacts/celebrate.json",
+      "bytes": 6759,
+      "sha256": "8c6b613a5dfac5e287a386af0c27279fdf1cfbf335d6055ab6b48d8fe16ef258"
+    }
+  ],
+  "checks": [
+    {
+      "name": "844x390 layout fits viewport",
+      "pass": true,
+      "actual": {
+        "viewport": [
+          844,
+          390
+        ],
+        "scroll": [
+          844,
+          390
+        ],
+        "clips": 24,
+        "canvas": [
+          642,
+          278
+        ],
+        "title": "זריקת קפיצה"
+      }
+    },
+    {
+      "name": "play pause and camera controls",
+      "pass": true
+    },
+    {
+      "name": "standing and running bridge selection renders actual GLB",
+      "pass": true,
+      "actual": {
+        "id": "celebrate__to_run",
+        "finite": true
+      }
+    },
+    {
+      "name": "all requested clips have eight actual rendered frames",
+      "pass": true,
+      "actual": 24
+    },
+    {
+      "name": "local assets only and no browser errors",
+      "pass": true,
+      "errors": [],
+      "externalRequests": [],
+      "failedRequests": []
+    },
+    {
+      "name": "input assets remained unchanged during capture",
+      "pass": true,
+      "changedDuringCapture": []
+    }
+  ],
+  "captures": [
+    {
+      "id": "pass_chest",
+      "file": "contact-sheets/pass_chest.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 14,
+          "timeSeconds": 0.4666666666666667
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 1.6
+        }
+      ],
+      "bytes": 55266,
+      "sha256": "d45cbb11e961199f44b9792df4173fe1a1d56913434fd33b367e6ec47428ae24"
+    },
+    {
+      "id": "pass_bounce",
+      "file": "contact-sheets/pass_bounce.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.26666666666666666
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 21,
+          "timeSeconds": 0.7
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666
+        },
+        {
+          "frame": 54,
+          "timeSeconds": 1.8
+        }
+      ],
+      "bytes": 55544,
+      "sha256": "ecd773faa9fb50259bd7b39128631d3227b9a1f2e31fae32436ee7022751a72d"
+    },
+    {
+      "id": "pass_overhead",
+      "file": "contact-sheets/pass_overhead.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.26666666666666666
+        },
+        {
+          "frame": 15,
+          "timeSeconds": 0.5
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 21,
+          "timeSeconds": 0.7
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 42,
+          "timeSeconds": 1.4
+        },
+        {
+          "frame": 51,
+          "timeSeconds": 1.7
+        }
+      ],
+      "bytes": 55090,
+      "sha256": "1d01be0f90cae42e71a3c768721d7986e5d8bc513a46ee0bcde5083a54f5a7e5"
+    },
+    {
+      "id": "pass_behind_back_right",
+      "file": "contact-sheets/pass_behind_back_right.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 17,
+          "timeSeconds": 0.5666666666666667
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 47,
+          "timeSeconds": 1.5666666666666667
+        },
+        {
+          "frame": 57,
+          "timeSeconds": 1.9
+        }
+      ],
+      "bytes": 52970,
+      "sha256": "0c014178c36e18157ab01e1d972ef095154ceaee3b2e0b6cdb5d18ef2680dde2"
+    },
+    {
+      "id": "pass_behind_back_left",
+      "file": "contact-sheets/pass_behind_back_left.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 17,
+          "timeSeconds": 0.5666666666666667
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 47,
+          "timeSeconds": 1.5666666666666667
+        },
+        {
+          "frame": 57,
+          "timeSeconds": 1.9
+        }
+      ],
+      "bytes": 55110,
+      "sha256": "7fcfba34b935e6a3c49166e6442ba49a1f609bb6cb39ea8768f860629549b54f"
+    },
+    {
+      "id": "pass_jump",
+      "file": "contact-sheets/pass_jump.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 17,
+          "timeSeconds": 0.5666666666666667
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 29,
+          "timeSeconds": 0.9666666666666667
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666
+        },
+        {
+          "frame": 57,
+          "timeSeconds": 1.9
+        }
+      ],
+      "bytes": 55930,
+      "sha256": "2f638f8f94d29a413d9912105442268dc955f1d53c25c00fe1dd0e4658c1fc1d"
+    },
+    {
+      "id": "alley_oop_pass",
+      "file": "contact-sheets/alley_oop_pass.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.26666666666666666
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 22,
+          "timeSeconds": 0.7333333333333333
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 27,
+          "timeSeconds": 0.9
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666
+        },
+        {
+          "frame": 54,
+          "timeSeconds": 1.8
+        }
+      ],
+      "bytes": 54900,
+      "sha256": "f78e4cd60e1183d4e66ba7d6faa7bde8562737813ae3aeb855ba5c8b09d3a37e"
+    },
+    {
+      "id": "alley_oop_dunk",
+      "file": "contact-sheets/alley_oop_dunk.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 34,
+          "timeSeconds": 1.1333333333333333
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 52,
+          "timeSeconds": 1.7333333333333334
+        },
+        {
+          "frame": 63,
+          "timeSeconds": 2.1
+        }
+      ],
+      "bytes": 48528,
+      "sha256": "18e085ccf9b583c0b29e853cd3d5f142dcf84b9884fb841457070331831a5b11"
+    },
+    {
+      "id": "shot_jump",
+      "file": "contact-sheets/shot_jump.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 18,
+          "timeSeconds": 0.6
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 32,
+          "timeSeconds": 1.0666666666666667
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 1.6
+        },
+        {
+          "frame": 60,
+          "timeSeconds": 2
+        }
+      ],
+      "bytes": 55488,
+      "sha256": "1d4016c9430f86a635f6479c2ad1d88fde9eaea66fcabf879899bb5f6f9c9a40"
+    },
+    {
+      "id": "shot_three",
+      "file": "contact-sheets/shot_three.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.3333333333333333
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 26,
+          "timeSeconds": 0.8666666666666667
+        },
+        {
+          "frame": 29,
+          "timeSeconds": 0.9666666666666667
+        },
+        {
+          "frame": 33,
+          "timeSeconds": 1.1
+        },
+        {
+          "frame": 50,
+          "timeSeconds": 1.6666666666666667
+        },
+        {
+          "frame": 63,
+          "timeSeconds": 2.1
+        }
+      ],
+      "bytes": 55440,
+      "sha256": "699f576a8aa61ca82c11c8c51bb9ff1efa38f78a0d8f481334c3187f72ab25e6"
+    },
+    {
+      "id": "shot_fadeaway",
+      "file": "contact-sheets/shot_fadeaway.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.3333333333333333
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.0333333333333334
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667
+        },
+        {
+          "frame": 53,
+          "timeSeconds": 1.7666666666666666
+        },
+        {
+          "frame": 66,
+          "timeSeconds": 2.2
+        }
+      ],
+      "bytes": 54418,
+      "sha256": "5ae9b917f5380bc464bc83f21f695ddb9651ed2cd1a7ae52ef2e0afba23a8878"
+    },
+    {
+      "id": "shot_stepback",
+      "file": "contact-sheets/shot_stepback.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 11,
+          "timeSeconds": 0.36666666666666664
+        },
+        {
+          "frame": 22,
+          "timeSeconds": 0.7333333333333333
+        },
+        {
+          "frame": 34,
+          "timeSeconds": 1.1333333333333333
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 59,
+          "timeSeconds": 1.9666666666666666
+        },
+        {
+          "frame": 72,
+          "timeSeconds": 2.4
+        }
+      ],
+      "bytes": 53978,
+      "sha256": "ffee38ea1ed49fa8d659492cd2e45ef501f29bb11b8cc9b312cc84fe7965d89e"
+    },
+    {
+      "id": "layup_right",
+      "file": "contact-sheets/layup_right.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 32,
+          "timeSeconds": 1.0666666666666667
+        },
+        {
+          "frame": 33,
+          "timeSeconds": 1.1
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.2333333333333334
+        },
+        {
+          "frame": 51,
+          "timeSeconds": 1.7
+        },
+        {
+          "frame": 63,
+          "timeSeconds": 2.1
+        }
+      ],
+      "bytes": 55904,
+      "sha256": "668c5d42306e233fee059e4a09393d7df922343b87861be46e20f5b93c50e8d9"
+    },
+    {
+      "id": "layup_left",
+      "file": "contact-sheets/layup_left.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.3
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 32,
+          "timeSeconds": 1.0666666666666667
+        },
+        {
+          "frame": 33,
+          "timeSeconds": 1.1
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.2333333333333334
+        },
+        {
+          "frame": 51,
+          "timeSeconds": 1.7
+        },
+        {
+          "frame": 63,
+          "timeSeconds": 2.1
+        }
+      ],
+      "bytes": 55210,
+      "sha256": "74114ca8c7656333c3d456bed3c999ae98636c928a986a2e6c8c5feb170e051b"
+    },
+    {
+      "id": "dribble_run_right",
+      "file": "contact-sheets/dribble_run_right.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 4,
+          "timeSeconds": 0.13333333333333333
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.3333333333333333
+        },
+        {
+          "frame": 12,
+          "timeSeconds": 0.4
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        }
+      ],
+      "bytes": 58084,
+      "sha256": "196e4e2871f858fbe0278f0c9488741aaa7c312aa14ab19356512c8e55e3c3af"
+    },
+    {
+      "id": "dribble_run_left",
+      "file": "contact-sheets/dribble_run_left.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 4,
+          "timeSeconds": 0.13333333333333333
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.3333333333333333
+        },
+        {
+          "frame": 12,
+          "timeSeconds": 0.4
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        }
+      ],
+      "bytes": 55296,
+      "sha256": "fc7a5d7c7da0bc159590a0550e01fe50e96700182855729a3d206c2b6bf476cf"
+    },
+    {
+      "id": "dribble_crossover",
+      "file": "contact-sheets/dribble_crossover.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 5,
+          "timeSeconds": 0.16666666666666666
+        },
+        {
+          "frame": 15,
+          "timeSeconds": 0.5
+        },
+        {
+          "frame": 18,
+          "timeSeconds": 0.6
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 30,
+          "timeSeconds": 1
+        },
+        {
+          "frame": 36,
+          "timeSeconds": 1.2
+        }
+      ],
+      "bytes": 57282,
+      "sha256": "00c4fc3f59591268642bcbd0ed72fecee1d0fd4249cebd0d92e2db27ee707de4"
+    },
+    {
+      "id": "dribble_between_legs",
+      "file": "contact-sheets/dribble_between_legs.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.0333333333333334
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 1.6
+        }
+      ],
+      "bytes": 58308,
+      "sha256": "84058fb5d2c9054745e8c4fe84a5d0c2b004e21539eef371f7a8be7167f6a4c0"
+    },
+    {
+      "id": "dribble_behind_back",
+      "file": "contact-sheets/dribble_behind_back.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 0.8
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.0333333333333334
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 1.6
+        }
+      ],
+      "bytes": 54366,
+      "sha256": "58641200259690b1d89545379ec2ca0f501f107a62dd1f534318bf2274cbded3"
+    },
+    {
+      "id": "pivot_left",
+      "file": "contact-sheets/pivot_left.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.26666666666666666
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666
+        },
+        {
+          "frame": 54,
+          "timeSeconds": 1.8
+        }
+      ],
+      "bytes": 52372,
+      "sha256": "05503754b67df62c504439985c9ebc7f91251ebf0b91dc606de840761ce63a27"
+    },
+    {
+      "id": "pivot_right",
+      "file": "contact-sheets/pivot_right.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.26666666666666666
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.5333333333333333
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666
+        },
+        {
+          "frame": 54,
+          "timeSeconds": 1.8
+        }
+      ],
+      "bytes": 54506,
+      "sha256": "152379b7917124726a13036d646d9f553874179f73aeefc41e03a9555d1a7d60"
+    },
+    {
+      "id": "stop_jump",
+      "file": "contact-sheets/stop_jump.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 14,
+          "timeSeconds": 0.4666666666666667
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.6333333333333333
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667
+        },
+        {
+          "frame": 29,
+          "timeSeconds": 0.9666666666666667
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.2333333333333334
+        },
+        {
+          "frame": 45,
+          "timeSeconds": 1.5
+        }
+      ],
+      "bytes": 54006,
+      "sha256": "83a24387cd92618c921f02bef99ebb4b8ea4b3120fd095b06b130859fddec78e"
+    },
+    {
+      "id": "stop_stride",
+      "file": "contact-sheets/stop_stride.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.23333333333333334
+        },
+        {
+          "frame": 14,
+          "timeSeconds": 0.4666666666666667
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.0333333333333334
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.3
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 1.6
+        }
+      ],
+      "bytes": 54184,
+      "sha256": "f821b18d4eef26eeef5874d1a5739500a767d59ba7a76c15db388eae4dad2c7b"
+    },
+    {
+      "id": "celebrate",
+      "file": "contact-sheets/celebrate.webp",
+      "frameCount": 8,
+      "frames": [
+        {
+          "frame": 0,
+          "timeSeconds": 0
+        },
+        {
+          "frame": 11,
+          "timeSeconds": 0.36666666666666664
+        },
+        {
+          "frame": 22,
+          "timeSeconds": 0.7333333333333333
+        },
+        {
+          "frame": 30,
+          "timeSeconds": 1
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.2333333333333334
+        },
+        {
+          "frame": 47,
+          "timeSeconds": 1.5666666666666667
+        },
+        {
+          "frame": 59,
+          "timeSeconds": 1.9666666666666666
+        },
+        {
+          "frame": 72,
+          "timeSeconds": 2.4
+        }
+      ],
+      "bytes": 53992,
+      "sha256": "ad4e4083fda74ab5342e44e124cd87ea1adfb68dc4fbecedf84b3effa483fffa"
+    }
+  ],
+  "pass": true
+}

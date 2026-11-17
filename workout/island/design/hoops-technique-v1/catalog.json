@@ -1,0 +1,4261 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-technique-v1",
+  "sampleHz": 30,
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "glb": "models/athlete.glb",
+  "skeleton": {
+    "boneCount": 18,
+    "names": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "bind": "rig.json",
+    "profile": "pg",
+    "compatibility": "Canonical18 names and hierarchy; target bind from pg. Retarget rotations for different bind proportions."
+  },
+  "authorship": {
+    "method": "Original analytic basketball phase poses, measured two-bone IK and independent left/right grip morphs. No motion capture.",
+    "referenceAsset": "../hoops-v7/characters/models/pg-lod1.glb",
+    "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+  },
+  "clips": [
+    {
+      "id": "pass_chest",
+      "label": "מסירת חזה",
+      "labelEn": "Two-hand chest pass",
+      "duration": 1.6,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 20,
+      "events": [
+        {
+          "type": "release",
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666,
+          "time": 0.6666666666666666
+        }
+      ],
+      "technique": [
+        "Transfer weight toward the target",
+        "Elbows extend together",
+        "Thumbs rotate down after release"
+      ],
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_chest",
+      "contacts": "contacts/pass_chest.json",
+      "contactSheet": "contact-sheets/pass_chest.webp"
+    },
+    {
+      "id": "pass_bounce",
+      "label": "מסירה מקפיצה",
+      "labelEn": "Two-hand bounce pass",
+      "duration": 1.8,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 21,
+      "events": [
+        {
+          "type": "release",
+          "frame": 21,
+          "timeSeconds": 0.7,
+          "time": 0.7
+        },
+        {
+          "type": "floor_contact",
+          "frame": 30,
+          "timeSeconds": 1,
+          "time": 1
+        }
+      ],
+      "technique": [
+        "Low athletic base",
+        "Push down and forward",
+        "One controlled floor contact"
+      ],
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_bounce",
+      "contacts": "contacts/pass_bounce.json",
+      "contactSheet": "contact-sheets/pass_bounce.webp"
+    },
+    {
+      "id": "pass_overhead",
+      "label": "מסירה מעל הראש",
+      "labelEn": "Two-hand overhead pass",
+      "duration": 1.7,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 21,
+      "events": [
+        {
+          "type": "release",
+          "frame": 21,
+          "timeSeconds": 0.7,
+          "time": 0.7
+        }
+      ],
+      "technique": [
+        "Ball above forehead",
+        "Elbows lead forward",
+        "No excessive lumbar arch"
+      ],
+      "durationSeconds": 1.7,
+      "frames": 52,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_overhead",
+      "contacts": "contacts/pass_overhead.json",
+      "contactSheet": "contact-sheets/pass_overhead.webp"
+    },
+    {
+      "id": "pass_behind_back_right",
+      "label": "מסירה מאחורי הגב מימין",
+      "labelEn": "Right-hand behind-the-back pass",
+      "duration": 1.9,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 24,
+      "events": [
+        {
+          "type": "release",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "time": 0.8
+        }
+      ],
+      "technique": [
+        "Ball clears the rear hip",
+        "Small trunk counter-rotation",
+        "One-hand lateral release"
+      ],
+      "durationSeconds": 1.9,
+      "frames": 58,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_behind_back_right",
+      "contacts": "contacts/pass_behind_back_right.json",
+      "contactSheet": "contact-sheets/pass_behind_back_right.webp"
+    },
+    {
+      "id": "pass_behind_back_left",
+      "label": "מסירה מאחורי הגב משמאל",
+      "labelEn": "Left-hand behind-the-back pass",
+      "duration": 1.9,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 24,
+      "events": [
+        {
+          "type": "release",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "time": 0.8
+        }
+      ],
+      "technique": [
+        "Mirrored rear-hip route",
+        "Stable planted base",
+        "One-hand lateral release"
+      ],
+      "durationSeconds": 1.9,
+      "frames": 58,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_behind_back_left",
+      "contacts": "contacts/pass_behind_back_left.json",
+      "contactSheet": "contact-sheets/pass_behind_back_left.webp"
+    },
+    {
+      "id": "pass_jump",
+      "label": "מסירה בקפיצה",
+      "labelEn": "Two-hand jump pass",
+      "duration": 1.9,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 25,
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 14,
+          "timeSeconds": 0.4666666666666667,
+          "time": 0.4666666666666667
+        },
+        {
+          "type": "release",
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334,
+          "time": 0.8333333333333334
+        },
+        {
+          "type": "landing",
+          "frame": 44,
+          "timeSeconds": 1.4666666666666666,
+          "time": 1.4666666666666666
+        }
+      ],
+      "durationSeconds": 1.9,
+      "frames": 58,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pass_jump",
+      "contacts": "contacts/pass_jump.json",
+      "contactSheet": "contact-sheets/pass_jump.webp"
+    },
+    {
+      "id": "alley_oop_pass",
+      "label": "אליי־אופ: העברה",
+      "labelEn": "Alley-oop lob pass",
+      "duration": 1.8,
+      "loop": false,
+      "category": "pass",
+      "releaseFrame": 23,
+      "events": [
+        {
+          "type": "release",
+          "frame": 23,
+          "timeSeconds": 0.7666666666666667,
+          "time": 0.7666666666666667
+        }
+      ],
+      "technique": [
+        "High soft release",
+        "Two-hand guide",
+        "Arc toward a finishing teammate"
+      ],
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "alley_oop_pass",
+      "contacts": "contacts/alley_oop_pass.json",
+      "contactSheet": "contact-sheets/alley_oop_pass.webp"
+    },
+    {
+      "id": "alley_oop_dunk",
+      "label": "אליי־אופ: תפיסה והטבעה",
+      "labelEn": "Alley-oop catch and dunk",
+      "duration": 2.1,
+      "loop": false,
+      "category": "finish",
+      "releaseFrame": 35,
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 12,
+          "timeSeconds": 0.4,
+          "time": 0.4
+        },
+        {
+          "type": "catch",
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666,
+          "time": 0.6666666666666666
+        },
+        {
+          "type": "release",
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667,
+          "time": 1.1666666666666667
+        },
+        {
+          "type": "landing",
+          "frame": 52,
+          "timeSeconds": 1.7333333333333334,
+          "time": 1.7333333333333334
+        }
+      ],
+      "technique": [
+        "Track incoming lob",
+        "Catch above shoulder",
+        "Extend and finish downward"
+      ],
+      "durationSeconds": 2.1,
+      "frames": 64,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "alley_oop_dunk",
+      "contacts": "contacts/alley_oop_dunk.json",
+      "contactSheet": "contact-sheets/alley_oop_dunk.webp"
+    },
+    {
+      "id": "shot_jump",
+      "label": "זריקת קפיצה",
+      "labelEn": "Clean jump shot",
+      "duration": 2,
+      "loop": false,
+      "category": "shot",
+      "releaseFrame": 28,
+      "events": [
+        {
+          "type": "load",
+          "frame": 9,
+          "timeSeconds": 0.3,
+          "time": 0.3
+        },
+        {
+          "type": "takeoff",
+          "frame": 17,
+          "timeSeconds": 0.5666666666666667,
+          "time": 0.5666666666666667
+        },
+        {
+          "type": "guide_hand_off",
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334,
+          "time": 0.8333333333333334
+        },
+        {
+          "type": "release",
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333,
+          "time": 0.9333333333333333
+        },
+        {
+          "type": "landing",
+          "frame": 48,
+          "timeSeconds": 1.6,
+          "time": 1.6
+        }
+      ],
+      "technique": [
+        "Knee and hip load",
+        "Ball rises through the shooting pocket",
+        "Guide hand separates",
+        "Wrist follows through"
+      ],
+      "durationSeconds": 2,
+      "frames": 61,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "shot_jump",
+      "contacts": "contacts/shot_jump.json",
+      "contactSheet": "contact-sheets/shot_jump.webp"
+    },
+    {
+      "id": "shot_three",
+      "label": "זריקת שלוש",
+      "labelEn": "Three-point jump shot",
+      "duration": 2.1,
+      "loop": false,
+      "category": "shot",
+      "releaseFrame": 29,
+      "events": [
+        {
+          "type": "load",
+          "frame": 10,
+          "timeSeconds": 0.3333333333333333,
+          "time": 0.3333333333333333
+        },
+        {
+          "type": "takeoff",
+          "frame": 18,
+          "timeSeconds": 0.6,
+          "time": 0.6
+        },
+        {
+          "type": "guide_hand_off",
+          "frame": 26,
+          "timeSeconds": 0.8666666666666667,
+          "time": 0.8666666666666667
+        },
+        {
+          "type": "release",
+          "frame": 29,
+          "timeSeconds": 0.9666666666666667,
+          "time": 0.9666666666666667
+        },
+        {
+          "type": "landing",
+          "frame": 50,
+          "timeSeconds": 1.6666666666666667,
+          "time": 1.6666666666666667
+        }
+      ],
+      "technique": [
+        "Deeper leg drive",
+        "One continuous upward motion",
+        "Higher forward launch speed"
+      ],
+      "durationSeconds": 2.1,
+      "frames": 64,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "shot_three",
+      "contacts": "contacts/shot_three.json",
+      "contactSheet": "contact-sheets/shot_three.webp"
+    },
+    {
+      "id": "shot_fadeaway",
+      "label": "פאדאווי",
+      "labelEn": "Fadeaway jump shot",
+      "duration": 2.2,
+      "loop": false,
+      "category": "shot",
+      "releaseFrame": 31,
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 18,
+          "timeSeconds": 0.6,
+          "time": 0.6
+        },
+        {
+          "type": "guide_hand_off",
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333,
+          "time": 0.9333333333333333
+        },
+        {
+          "type": "release",
+          "frame": 31,
+          "timeSeconds": 1.0333333333333334,
+          "time": 1.0333333333333334
+        },
+        {
+          "type": "landing",
+          "frame": 53,
+          "timeSeconds": 1.7666666666666666,
+          "time": 1.7666666666666666
+        }
+      ],
+      "technique": [
+        "Backward travel occurs in the air",
+        "Eyes remain on target",
+        "Balanced two-foot landing"
+      ],
+      "durationSeconds": 2.2,
+      "frames": 67,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "shot_fadeaway",
+      "contacts": "contacts/shot_fadeaway.json",
+      "contactSheet": "contact-sheets/shot_fadeaway.webp"
+    },
+    {
+      "id": "shot_stepback",
+      "label": "צעד לאחור וזריקה",
+      "labelEn": "Step-back jump shot",
+      "duration": 2.4,
+      "loop": false,
+      "category": "shot",
+      "releaseFrame": 35,
+      "events": [
+        {
+          "type": "stepback_takeoff",
+          "frame": 6,
+          "timeSeconds": 0.2,
+          "time": 0.2
+        },
+        {
+          "type": "stepback_land",
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666,
+          "time": 0.6666666666666666
+        },
+        {
+          "type": "takeoff",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "time": 0.8
+        },
+        {
+          "type": "release",
+          "frame": 35,
+          "timeSeconds": 1.1666666666666667,
+          "time": 1.1666666666666667
+        },
+        {
+          "type": "landing",
+          "frame": 59,
+          "timeSeconds": 1.9666666666666666,
+          "time": 1.9666666666666666
+        }
+      ],
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "shot_stepback",
+      "contacts": "contacts/shot_stepback.json",
+      "contactSheet": "contact-sheets/shot_stepback.webp"
+    },
+    {
+      "id": "layup_right",
+      "label": "צעד וחצי ביד ימין",
+      "labelEn": "Right-hand layup",
+      "duration": 2.1,
+      "loop": false,
+      "category": "finish",
+      "releaseFrame": 33,
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666,
+          "time": 0.6666666666666666
+        },
+        {
+          "type": "release",
+          "frame": 33,
+          "timeSeconds": 1.1,
+          "time": 1.1
+        },
+        {
+          "type": "landing",
+          "frame": 51,
+          "timeSeconds": 1.7,
+          "time": 1.7
+        }
+      ],
+      "technique": [
+        "Opposite-leg takeoff",
+        "Same-side knee drive",
+        "Soft fingertip finish"
+      ],
+      "durationSeconds": 2.1,
+      "frames": 64,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "layup_right",
+      "contacts": "contacts/layup_right.json",
+      "contactSheet": "contact-sheets/layup_right.webp"
+    },
+    {
+      "id": "layup_left",
+      "label": "צעד וחצי ביד שמאל",
+      "labelEn": "Left-hand layup",
+      "duration": 2.1,
+      "loop": false,
+      "category": "finish",
+      "releaseFrame": 33,
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 20,
+          "timeSeconds": 0.6666666666666666,
+          "time": 0.6666666666666666
+        },
+        {
+          "type": "release",
+          "frame": 33,
+          "timeSeconds": 1.1,
+          "time": 1.1
+        },
+        {
+          "type": "landing",
+          "frame": 51,
+          "timeSeconds": 1.7,
+          "time": 1.7
+        }
+      ],
+      "technique": [
+        "Mirrored footwork",
+        "Opposite-leg takeoff",
+        "Soft left-hand finish"
+      ],
+      "durationSeconds": 2.1,
+      "frames": 64,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "layup_left",
+      "contacts": "contacts/layup_left.json",
+      "contactSheet": "contact-sheets/layup_left.webp"
+    },
+    {
+      "id": "dribble_run_right",
+      "label": "ריצה בכדרור ימין",
+      "labelEn": "Run with right-hand dribble",
+      "duration": 0.8,
+      "loop": false,
+      "category": "dribble",
+      "events": [
+        {
+          "type": "hand_push",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "right",
+          "time": 0
+        },
+        {
+          "type": "floor_contact",
+          "frame": 12,
+          "timeSeconds": 0.4,
+          "time": 0.4
+        },
+        {
+          "type": "hand_catch",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "side": "right",
+          "time": 0.8
+        }
+      ],
+      "cycle": true,
+      "travelMeters": 1.76,
+      "durationSeconds": 0.8,
+      "frames": 25,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "dribble_run_right",
+      "contacts": "contacts/dribble_run_right.json",
+      "contactSheet": "contact-sheets/dribble_run_right.webp"
+    },
+    {
+      "id": "dribble_run_left",
+      "label": "ריצה בכדרור שמאל",
+      "labelEn": "Run with left-hand dribble",
+      "duration": 0.8,
+      "loop": false,
+      "category": "dribble",
+      "events": [
+        {
+          "type": "hand_push",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "left",
+          "time": 0
+        },
+        {
+          "type": "floor_contact",
+          "frame": 12,
+          "timeSeconds": 0.4,
+          "time": 0.4
+        },
+        {
+          "type": "hand_catch",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "side": "left",
+          "time": 0.8
+        }
+      ],
+      "cycle": true,
+      "travelMeters": 1.76,
+      "durationSeconds": 0.8,
+      "frames": 25,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "dribble_run_left",
+      "contacts": "contacts/dribble_run_left.json",
+      "contactSheet": "contact-sheets/dribble_run_left.webp"
+    },
+    {
+      "id": "dribble_crossover",
+      "label": "קרוס אובר",
+      "labelEn": "Low front crossover",
+      "duration": 1.2,
+      "loop": true,
+      "category": "dribble",
+      "events": [
+        {
+          "type": "hand_push",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "right",
+          "time": 0
+        },
+        {
+          "type": "floor_contact",
+          "frame": 9,
+          "timeSeconds": 0.3,
+          "time": 0.3
+        },
+        {
+          "type": "hand_catch",
+          "frame": 18,
+          "timeSeconds": 0.6,
+          "side": "left",
+          "time": 0.6
+        },
+        {
+          "type": "floor_contact",
+          "frame": 27,
+          "timeSeconds": 0.9,
+          "time": 0.9
+        },
+        {
+          "type": "hand_catch",
+          "frame": 36,
+          "timeSeconds": 1.2,
+          "side": "right",
+          "time": 1.2
+        }
+      ],
+      "cycle": true,
+      "durationSeconds": 1.2,
+      "frames": 37,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "dribble_crossover",
+      "contacts": "contacts/dribble_crossover.json",
+      "contactSheet": "contact-sheets/dribble_crossover.webp"
+    },
+    {
+      "id": "dribble_between_legs",
+      "label": "כדרור בין הרגליים",
+      "labelEn": "Between-the-legs transfer",
+      "duration": 1.6,
+      "loop": true,
+      "category": "dribble",
+      "events": [
+        {
+          "type": "hand_push",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "right",
+          "time": 0
+        },
+        {
+          "type": "floor_contact",
+          "frame": 12,
+          "timeSeconds": 0.4,
+          "time": 0.4
+        },
+        {
+          "type": "hand_catch",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "side": "left",
+          "time": 0.8
+        },
+        {
+          "type": "floor_contact",
+          "frame": 36,
+          "timeSeconds": 1.2,
+          "time": 1.2
+        },
+        {
+          "type": "hand_catch",
+          "frame": 48,
+          "timeSeconds": 1.6,
+          "side": "right",
+          "time": 1.6
+        }
+      ],
+      "cycle": true,
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "dribble_between_legs",
+      "contacts": "contacts/dribble_between_legs.json",
+      "contactSheet": "contact-sheets/dribble_between_legs.webp"
+    },
+    {
+      "id": "dribble_behind_back",
+      "label": "כדרור מאחורי הגב",
+      "labelEn": "Behind-the-back dribble",
+      "duration": 1.6,
+      "loop": true,
+      "category": "dribble",
+      "events": [
+        {
+          "type": "hand_push",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "right",
+          "time": 0
+        },
+        {
+          "type": "floor_contact",
+          "frame": 12,
+          "timeSeconds": 0.4,
+          "time": 0.4
+        },
+        {
+          "type": "hand_catch",
+          "frame": 24,
+          "timeSeconds": 0.8,
+          "side": "left",
+          "time": 0.8
+        },
+        {
+          "type": "floor_contact",
+          "frame": 36,
+          "timeSeconds": 1.2,
+          "time": 1.2
+        },
+        {
+          "type": "hand_catch",
+          "frame": 48,
+          "timeSeconds": 1.6,
+          "side": "right",
+          "time": 1.6
+        }
+      ],
+      "cycle": true,
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "dribble_behind_back",
+      "contacts": "contacts/dribble_behind_back.json",
+      "contactSheet": "contact-sheets/dribble_behind_back.webp"
+    },
+    {
+      "id": "pivot_left",
+      "label": "סיבוב על רגל שמאל",
+      "labelEn": "Left-foot anchored pivot",
+      "duration": 1.8,
+      "loop": false,
+      "category": "footwork",
+      "events": [
+        {
+          "type": "pivot_anchor",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "left",
+          "marker": "ball-of-foot",
+          "time": 0
+        },
+        {
+          "type": "swing_foot_land",
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333,
+          "time": 0.9333333333333333
+        },
+        {
+          "type": "return_land",
+          "frame": 54,
+          "timeSeconds": 1.8,
+          "time": 1.8
+        }
+      ],
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pivot_left",
+      "contacts": "contacts/pivot_left.json",
+      "contactSheet": "contact-sheets/pivot_left.webp"
+    },
+    {
+      "id": "pivot_right",
+      "label": "סיבוב על רגל ימין",
+      "labelEn": "Right-foot anchored pivot",
+      "duration": 1.8,
+      "loop": false,
+      "category": "footwork",
+      "events": [
+        {
+          "type": "pivot_anchor",
+          "frame": 0,
+          "timeSeconds": 0,
+          "side": "right",
+          "marker": "ball-of-foot",
+          "time": 0
+        },
+        {
+          "type": "swing_foot_land",
+          "frame": 28,
+          "timeSeconds": 0.9333333333333333,
+          "time": 0.9333333333333333
+        },
+        {
+          "type": "return_land",
+          "frame": 54,
+          "timeSeconds": 1.8,
+          "time": 1.8
+        }
+      ],
+      "durationSeconds": 1.8,
+      "frames": 55,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "pivot_right",
+      "contacts": "contacts/pivot_right.json",
+      "contactSheet": "contact-sheets/pivot_right.webp"
+    },
+    {
+      "id": "stop_jump",
+      "label": "עצירה פתאומית בשתי רגליים",
+      "labelEn": "Two-foot jump stop",
+      "duration": 1.5,
+      "loop": false,
+      "category": "footwork",
+      "events": [
+        {
+          "type": "takeoff",
+          "frame": 4,
+          "timeSeconds": 0.13333333333333333,
+          "time": 0.13333333333333333
+        },
+        {
+          "type": "landing",
+          "frame": 14,
+          "timeSeconds": 0.4666666666666667,
+          "time": 0.4666666666666667
+        }
+      ],
+      "technique": [
+        "Both feet land together",
+        "Hips absorb momentum",
+        "Ball gathered without an extra step"
+      ],
+      "durationSeconds": 1.5,
+      "frames": 46,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "stop_jump",
+      "contacts": "contacts/stop_jump.json",
+      "contactSheet": "contact-sheets/stop_jump.webp"
+    },
+    {
+      "id": "stop_stride",
+      "label": "עצירת צעד",
+      "labelEn": "One-two stride stop",
+      "duration": 1.6,
+      "loop": false,
+      "category": "footwork",
+      "events": [
+        {
+          "type": "lead_plant",
+          "frame": 13,
+          "timeSeconds": 0.43333333333333335,
+          "side": "right",
+          "time": 0.43333333333333335
+        },
+        {
+          "type": "trail_plant",
+          "frame": 25,
+          "timeSeconds": 0.8333333333333334,
+          "side": "left",
+          "time": 0.8333333333333334
+        }
+      ],
+      "technique": [
+        "Lead foot brakes",
+        "Trail foot restores the base",
+        "Weight settles between both feet"
+      ],
+      "durationSeconds": 1.6,
+      "frames": 49,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "stop_stride",
+      "contacts": "contacts/stop_stride.json",
+      "contactSheet": "contact-sheets/stop_stride.webp"
+    },
+    {
+      "id": "celebrate",
+      "label": "חגיגת שחקן",
+      "labelEn": "Professional player celebration",
+      "duration": 2.4,
+      "loop": false,
+      "category": "expression",
+      "events": [
+        {
+          "type": "fist_raise",
+          "frame": 27,
+          "timeSeconds": 0.9,
+          "time": 0.9
+        }
+      ],
+      "technique": [
+        "Controlled fist pump",
+        "Chest opens",
+        "Balanced feet remain planted"
+      ],
+      "durationSeconds": 2.4,
+      "frames": 73,
+      "sampleHz": 30,
+      "glb": "models/athlete.glb",
+      "animation": "celebrate",
+      "contacts": "contacts/celebrate.json",
+      "contactSheet": "contact-sheets/celebrate.webp"
+    }
+  ],
+  "references": [
+    {
+      "id": "ref_idle",
+      "label": "עמידת מוצא",
+      "labelEn": "Ready reference",
+      "duration": 2,
+      "loop": false,
+      "category": "reference",
+      "durationSeconds": 2,
+      "frames": 61,
+      "sampleHz": 30,
+      "events": [],
+      "glb": "models/athlete.glb",
+      "animation": "ref_idle",
+      "contacts": "contacts/ref_idle.json",
+      "contactSheet": "contact-sheets/ref_idle.webp"
+    },
+    {
+      "id": "ref_run",
+      "label": "ריצת מוצא",
+      "labelEn": "Running reference",
+      "duration": 0.8,
+      "loop": false,
+      "category": "reference",
+      "durationSeconds": 0.8,
+      "frames": 25,
+      "sampleHz": 30,
+      "events": [],
+      "glb": "models/athlete.glb",
+      "animation": "ref_run",
+      "contacts": "contacts/ref_run.json",
+      "contactSheet": "contact-sheets/ref_run.webp"
+    }
+  ],
+  "bridges": [
+    {
+      "id": "idle_to__pass_chest",
+      "animation": "idle_to__pass_chest",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_chest",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_chest__to_idle",
+      "animation": "pass_chest__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_chest",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_chest",
+      "animation": "run_to__pass_chest",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_chest",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_chest__to_run",
+      "animation": "pass_chest__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_chest",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pass_bounce",
+      "animation": "idle_to__pass_bounce",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_bounce",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_bounce__to_idle",
+      "animation": "pass_bounce__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_bounce",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_bounce",
+      "animation": "run_to__pass_bounce",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_bounce",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_bounce__to_run",
+      "animation": "pass_bounce__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_bounce",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pass_overhead",
+      "animation": "idle_to__pass_overhead",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_overhead",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_overhead__to_idle",
+      "animation": "pass_overhead__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_overhead",
+        "timeSeconds": 1.7,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_overhead",
+      "animation": "run_to__pass_overhead",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_overhead",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_overhead__to_run",
+      "animation": "pass_overhead__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_overhead",
+        "timeSeconds": 1.7,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pass_behind_back_right",
+      "animation": "idle_to__pass_behind_back_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_behind_back_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_behind_back_right__to_idle",
+      "animation": "pass_behind_back_right__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_behind_back_right",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_behind_back_right",
+      "animation": "run_to__pass_behind_back_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_behind_back_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_behind_back_right__to_run",
+      "animation": "pass_behind_back_right__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_behind_back_right",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pass_behind_back_left",
+      "animation": "idle_to__pass_behind_back_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_behind_back_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_behind_back_left__to_idle",
+      "animation": "pass_behind_back_left__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_behind_back_left",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_behind_back_left",
+      "animation": "run_to__pass_behind_back_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_behind_back_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_behind_back_left__to_run",
+      "animation": "pass_behind_back_left__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_behind_back_left",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pass_jump",
+      "animation": "idle_to__pass_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_jump__to_idle",
+      "animation": "pass_jump__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_jump",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pass_jump",
+      "animation": "run_to__pass_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pass_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pass_jump__to_run",
+      "animation": "pass_jump__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pass_jump",
+        "timeSeconds": 1.9,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__alley_oop_pass",
+      "animation": "idle_to__alley_oop_pass",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "alley_oop_pass",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "alley_oop_pass__to_idle",
+      "animation": "alley_oop_pass__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "alley_oop_pass",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__alley_oop_pass",
+      "animation": "run_to__alley_oop_pass",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "alley_oop_pass",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "alley_oop_pass__to_run",
+      "animation": "alley_oop_pass__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "alley_oop_pass",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__alley_oop_dunk",
+      "animation": "idle_to__alley_oop_dunk",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "alley_oop_dunk",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "alley_oop_dunk__to_idle",
+      "animation": "alley_oop_dunk__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "alley_oop_dunk",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.2
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__alley_oop_dunk",
+      "animation": "run_to__alley_oop_dunk",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "alley_oop_dunk",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098731464237404,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "alley_oop_dunk__to_run",
+      "animation": "alley_oop_dunk__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "alley_oop_dunk",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.8600000000000001
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577293,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__shot_jump",
+      "animation": "idle_to__shot_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_jump__to_idle",
+      "animation": "shot_jump__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_jump",
+        "timeSeconds": 2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__shot_jump",
+      "animation": "run_to__shot_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_jump__to_run",
+      "animation": "shot_jump__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_jump",
+        "timeSeconds": 2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__shot_three",
+      "animation": "idle_to__shot_three",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_three",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_three__to_idle",
+      "animation": "shot_three__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_three",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__shot_three",
+      "animation": "run_to__shot_three",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_three",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_three__to_run",
+      "animation": "shot_three__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_three",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__shot_fadeaway",
+      "animation": "idle_to__shot_fadeaway",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_fadeaway",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_fadeaway__to_idle",
+      "animation": "shot_fadeaway__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_fadeaway",
+        "timeSeconds": 2.2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          -0.34
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__shot_fadeaway",
+      "animation": "run_to__shot_fadeaway",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_fadeaway",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_fadeaway__to_run",
+      "animation": "shot_fadeaway__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_fadeaway",
+        "timeSeconds": 2.2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.32
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530591810478658,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__shot_stepback",
+      "animation": "idle_to__shot_stepback",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_stepback",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_stepback__to_idle",
+      "animation": "shot_stepback__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_stepback",
+        "timeSeconds": 2.4,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          -0.43
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__shot_stepback",
+      "animation": "run_to__shot_stepback",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "shot_stepback",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "shot_stepback__to_run",
+      "animation": "shot_stepback__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "shot_stepback",
+        "timeSeconds": 2.4,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.23000000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577298,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__layup_right",
+      "animation": "idle_to__layup_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "layup_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "layup_right__to_idle",
+      "animation": "layup_right__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "layup_right",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.32
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__layup_right",
+      "animation": "run_to__layup_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "layup_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "layup_right__to_run",
+      "animation": "layup_right__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "layup_right",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.98
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.1053059021557728,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__layup_left",
+      "animation": "idle_to__layup_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "layup_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "layup_left__to_idle",
+      "animation": "layup_left__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "layup_left",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.32
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__layup_left",
+      "animation": "run_to__layup_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "layup_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "layup_left__to_run",
+      "animation": "layup_left__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "layup_left",
+        "timeSeconds": 2.1,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.98
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.1053059021557728,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__dribble_run_right",
+      "animation": "idle_to__dribble_run_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577307,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_run_right__to_idle",
+      "animation": "dribble_run_right__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__dribble_run_right",
+      "animation": "run_to__dribble_run_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "gait": {
+        "method": "Full reference run cycle in lower body, endpoint-matched C1 upper-body interpolation",
+        "reference": "ref_run",
+        "cycleSeconds": 0.8,
+        "rootTravelMeters": [
+          0,
+          0,
+          1.7599999904632568
+        ],
+        "plantedFootClaim": "Lower-body gait is retained; independently audit decoded support windows."
+      },
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.003219785231048073,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_run_right__to_run",
+      "animation": "dribble_run_right__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "gait": {
+        "method": "Full reference run cycle in lower body, endpoint-matched C1 upper-body interpolation",
+        "reference": "ref_run",
+        "cycleSeconds": 0.8,
+        "rootTravelMeters": [
+          0,
+          0,
+          1.7599999904632568
+        ],
+        "plantedFootClaim": "Lower-body gait is retained; independently audit decoded support windows."
+      },
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.003219785231048073,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__dribble_run_left",
+      "animation": "idle_to__dribble_run_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577307,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_run_left__to_idle",
+      "animation": "dribble_run_left__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__dribble_run_left",
+      "animation": "run_to__dribble_run_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "gait": {
+        "method": "Full reference run cycle in lower body, endpoint-matched C1 upper-body interpolation",
+        "reference": "ref_run",
+        "cycleSeconds": 0.8,
+        "rootTravelMeters": [
+          0,
+          0,
+          1.7599999904632568
+        ],
+        "plantedFootClaim": "Lower-body gait is retained; independently audit decoded support windows."
+      },
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.003219785231048073,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_run_left__to_run",
+      "animation": "dribble_run_left__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "gait": {
+        "method": "Full reference run cycle in lower body, endpoint-matched C1 upper-body interpolation",
+        "reference": "ref_run",
+        "cycleSeconds": 0.8,
+        "rootTravelMeters": [
+          0,
+          0,
+          1.7599999904632568
+        ],
+        "plantedFootClaim": "Lower-body gait is retained; independently audit decoded support windows."
+      },
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.003219785231048073,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__dribble_crossover",
+      "animation": "idle_to__dribble_crossover",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_crossover",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.013570978237698914,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_crossover__to_idle",
+      "animation": "dribble_crossover__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_crossover",
+        "timeSeconds": 1.2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.01357097996956651,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__dribble_crossover",
+      "animation": "run_to__dribble_crossover",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_crossover",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.019571807312647058,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_crossover__to_run",
+      "animation": "dribble_crossover__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_crossover",
+        "timeSeconds": 1.2,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.13509167269835398,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__dribble_between_legs",
+      "animation": "idle_to__dribble_between_legs",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_between_legs",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.03475974138847487,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_between_legs__to_idle",
+      "animation": "dribble_between_legs__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_between_legs",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.0347597414428608,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__dribble_between_legs",
+      "animation": "run_to__dribble_between_legs",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_between_legs",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02099766476016469,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_between_legs__to_run",
+      "animation": "dribble_between_legs__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_between_legs",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.16186075421318433,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__dribble_behind_back",
+      "animation": "idle_to__dribble_behind_back",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_behind_back",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.013570978237698914,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_behind_back__to_idle",
+      "animation": "dribble_behind_back__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_behind_back",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.01357097996956651,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__dribble_behind_back",
+      "animation": "run_to__dribble_behind_back",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_behind_back",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.019571807312647058,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "dribble_behind_back__to_run",
+      "animation": "dribble_behind_back__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "dribble_behind_back",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.13509167269835398,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pivot_left",
+      "animation": "idle_to__pivot_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pivot_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.0020302081602699635,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pivot_left__to_idle",
+      "animation": "pivot_left__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pivot_left",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pivot_left",
+      "animation": "run_to__pivot_left",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pivot_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.019931819188997203,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pivot_left__to_run",
+      "animation": "pivot_left__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pivot_left",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530585707968795,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__pivot_right",
+      "animation": "idle_to__pivot_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pivot_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.002231979863819007,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pivot_right__to_idle",
+      "animation": "pivot_right__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pivot_right",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__pivot_right",
+      "animation": "run_to__pivot_right",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "pivot_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.01979048732992293,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "pivot_right__to_run",
+      "animation": "pivot_right__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "pivot_right",
+        "timeSeconds": 1.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530587002008288,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__stop_jump",
+      "animation": "idle_to__stop_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "stop_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "stop_jump__to_idle",
+      "animation": "stop_jump__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "stop_jump",
+        "timeSeconds": 1.5,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.56
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__stop_jump",
+      "animation": "run_to__stop_jump",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "stop_jump",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098732198135409,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "stop_jump__to_run",
+      "animation": "stop_jump__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "stop_jump",
+        "timeSeconds": 1.5,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          1.2200000000000002
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.1053059021557728,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__stop_stride",
+      "animation": "idle_to__stop_stride",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "stop_stride",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "stop_stride__to_idle",
+      "animation": "stop_stride__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "stop_stride",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.56
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__stop_stride",
+      "animation": "run_to__stop_stride",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "stop_stride",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098732198135409,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "stop_stride__to_run",
+      "animation": "stop_stride__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "stop_stride",
+        "timeSeconds": 1.6,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          1.2200000000000002
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.1053059021557728,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "idle_to__celebrate",
+      "animation": "idle_to__celebrate",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "celebrate",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "celebrate__to_idle",
+      "animation": "celebrate__to_idle",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "celebrate",
+        "timeSeconds": 2.4,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_idle",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "run_to__celebrate",
+      "animation": "run_to__celebrate",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "celebrate",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          2.4200000000000004
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.02098733617982931,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    },
+    {
+      "id": "celebrate__to_run",
+      "animation": "celebrate__to_run",
+      "glb": "models/athlete.glb",
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "from": {
+        "animation": "celebrate",
+        "timeSeconds": 2.4,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0.66
+        ]
+      },
+      "ballPolicy": "visible only when both endpoints retain ball; attach ownership externally",
+      "rootPolicy": "apply indicated Root/ball offsets to adjacent reference playback",
+      "grounding": {
+        "method": "Actual decoded footskin at120Hz determines a nonnegative C1 root lift. Piecewise Hermite keyheights at30Hz have zero additive tangents at everykey, preserving original endpoint derivatives. Generic transitions add smooth moving-foot clearance up to25mm; retained gait transitions are exempt. The transition may contain a short hop.",
+        "rootLiftAmplitudeMeters": 0.10530590215577287,
+        "sampleHz": 120,
+        "clearanceMeters": 0.003
+      }
+    }
+  ],
+  "files": {
+    "model": {
+      "path": "models/athlete.glb",
+      "bytes": 8787236,
+      "sha256": "9344ee1d690ddad6d4ceebfcf369c1ff6a3021552cadbf43c8ec6006110b03a9"
+    }
+  },
+  "qa": {
+    "tool": "source/validate.mjs",
+    "report": "verification/motion-qa-v1.json",
+    "rubric": "Locally authored rubric; requested external motion-qa-v1 tool was unavailable. No external certification."
+  },
+  "integration": {
+    "rootMotion": "Root translation is authored world travel. Position the actor in an outer Group. Align the next animation using bridge.from/to.rootOffsetMeters, also offset MotionBallAnchor.",
+    "ball": "Attach a radius .12m basketball to scene node MotionBallAnchor; scale zero hides it. Gameplay determines possession, rim/recipient and world flight.",
+    "referenceRun": "One forward cycle, relative Root travel. Accumulate terminal displacement before repeating; do not reset Root abruptly.",
+    "hands": "18 bones have no finger joints. Independent grip_left/right morphs shape thumb/fingers; these are baked glTF weight channels."
+  }
+}
