@@ -46,7 +46,7 @@ test('offline worker: classic script with the same managed rule as the page, ver
  assert.ok(!/^\s*(import|export)\s/m.test(source),'classic worker, not a module');
  assert.ok(source.includes(MANAGED.source),'worker carries the same managed pattern as ui/offline.mjs');
  assert.ok(source.includes("'island-assets-'+VERSION"));
- assert.equal(cacheName('island-v2-20261107-16'),'island-assets-island-v2-20261107-16');
+ assert.equal(cacheName('island-v2-20261107-17'),'island-assets-island-v2-20261107-17');
 });
 
 function runWorker(version='v1'){

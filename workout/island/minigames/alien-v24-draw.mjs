@@ -2,14 +2,14 @@
  * refill-enemyfire-v1 on an amber halo, a drawn hexagon with three rounds while the picture loads or in a test), the Codex
  * pick-up burst over the ship for 0.3 s, and the cold bar next to the ship: while a magazine keeps the barrels cold the Vulcan's
  * bar is cyan and drains with the cold time (instead of the v23 heat bar). Nothing is drawn with ?alienRefill=0 (no refills). */
-import {REFILL_COLORS} from './alien-v24.mjs?v=island-v2-20261107-16';
+import {REFILL_COLORS} from './alien-v24.mjs?v=island-v2-20261107-17';
 const TAU=Math.PI*2;
 const images=new Map();
 /** Lazy picture next to this module (assets/alien-v24); null outside a browser, false until decoded. */
 export function alienV24Image(name){
  if(typeof Image==='undefined')return null;
  let entry=images.get(name);
- if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.onerror=()=>{entry.failed=true;};img.src=new URL(`../assets/alien-v24/${name}?v=island-v2-20261107-16`,import.meta.url).href;images.set(name,entry);}
+ if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.onerror=()=>{entry.failed=true;};img.src=new URL(`../assets/alien-v24/${name}?v=island-v2-20261107-17`,import.meta.url).href;images.set(name,entry);}
  return entry.ok?entry.img:false;
 }
 function magazineGlyph(p,s){

@@ -2,7 +2,7 @@
  * recipes and voice limits. Sound never changes the match or saved club state. */
 import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
 import {scoreCrowdSample} from './hoops-show.mjs';
-import {hoopsWhistleV241Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from './hoops-v241.mjs?v=island-v2-20261107-16';
+import {hoopsWhistleV241Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from './hoops-v241.mjs?v=island-v2-20261107-17';
 const phoneFixAEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?.search||'');return p.get('phoneFixes')!=='0'&&p.get('phoneFixA')!=='0';}catch{return true;}};
 /** A short, damped rim/ball impact. One deterministic PCM buffer per audio context, JavaScript only.
  * Three inharmonic steel modes decay inside 180 ms, with an 8 ms contact transient and a short ball thump. */

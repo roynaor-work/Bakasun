@@ -5,12 +5,12 @@
  * shapes in the same palette (listed in the report as a Codex task). Everything here is drawing only: the model decides. */
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {fitModel} from '../view/local-models.mjs?v=island-v2-20261107-16';
-import {createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-16';
-import {ROOMS,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-16';
-import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-16';
+import {fitModel} from '../view/local-models.mjs?v=island-v2-20261107-17';
+import {createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-17';
+import {ROOMS,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-17';
+import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-17';
 
-const VERSION='island-v2-20261107-16';
+const VERSION='island-v2-20261107-17';
 const url=(path)=>new URL(path+'?v='+VERSION,import.meta.url).href;
 export const V24_ASSETS=Object.freeze({
   rooms:'../assets/fire-v24/rooms/',friends:'../assets/fire-v24/friends/',fx:'../assets/fire-v23/fx/',firefighter:'../assets/models/firefighter-rigged-512.glb',

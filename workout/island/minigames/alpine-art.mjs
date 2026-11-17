@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-16';
-import {createFirForest} from './alpine-fir.mjs?v=island-v2-20261107-16';
+import {mergeVertices} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-17';
+import {createFirForest} from './alpine-fir.mjs?v=island-v2-20261107-17';
 
 // Original, real-time art. Every solid surface has depth; no photo cards or scenery colliders.
 const noiseGLSL=`
