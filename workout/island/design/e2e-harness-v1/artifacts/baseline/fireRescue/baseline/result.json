@@ -1,0 +1,2268 @@
+{
+  "schemaVersion": 1,
+  "game": "fireRescue",
+  "label": "כיבוי אש",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:46:53.030Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 3155,
+  "islandToFirstFrameMs": 25655,
+  "playWallMs": 30515,
+  "playActiveMs": 30457,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": 6.623,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 3155
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 30515,
+      "activeMs": 30457,
+      "replays": 0,
+      "simulationDeltaSeconds": 6.623
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 3155
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 30457
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 6.623,
+      "activeSamples": 16
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 61717.5,
+        "wasmExposed": true,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 35,
+        "triangles": {
+          "min": 36005,
+          "max": 42775,
+          "mean": 37483.8
+        },
+        "drawCalls": {
+          "min": 35,
+          "max": 46,
+          "mean": 37.37
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 25651.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37723,
+        "drawCalls": 35,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37723,
+      "drawCalls": 35
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 25651.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37723,
+        "drawCalls": 35,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37723,
+      "drawCalls": 35
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 26469.600000000093,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.07320000000000074,
+      "stateError": null,
+      "metrics": {
+        "triangles": 42775,
+        "drawCalls": 40,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 42775,
+      "drawCalls": 40
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 29027.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.4732000000000007,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 29035.100000000093,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.4732000000000007,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 31184.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.873200000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 31187.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.873200000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 33289.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.2732000000000012,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 33293,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.2732000000000012,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 34988,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.5932000000000015,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 34994.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.5932000000000015,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 37591.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.049900000000006,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37819,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37819,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 37594.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.049900000000006,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37819,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37819,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 40040.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.489900000000006,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 40045,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.489900000000006,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37823,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37823,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 42233.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.8899000000000066,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37821,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37821,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 42236.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.8899000000000066,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37821,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37821,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 43721.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.169900000000007,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37821,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37821,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 43725.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.169900000000007,
+      "stateError": null,
+      "metrics": {
+        "triangles": 37821,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 37821,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 45945.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.5866000000000042,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 45948.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.5866000000000042,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 47856,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.083300000000008,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 47860.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.083300000000008,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 49556.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.563300000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 49559.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.563300000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 50989,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.043300000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 50992.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.043300000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36137,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36137,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 52851.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.53330000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36101,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36101,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 52853.39999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.53330000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36101,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36101,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 54431.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.983300000000011,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36005,
+        "drawCalls": 35,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36005,
+      "drawCalls": 35
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 54437.39999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.983300000000011,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36005,
+        "drawCalls": 35,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36005,
+      "drawCalls": 35
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 55950.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 6.416500000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 41535,
+        "drawCalls": 46,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 41535,
+      "drawCalls": 46
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 55957.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 6.416500000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 41535,
+        "drawCalls": 46,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 41535,
+      "drawCalls": 46
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 56962.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 6.696500000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36091,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36091,
+      "drawCalls": 37
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 56985.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 6.696500000000009,
+      "stateError": null,
+      "metrics": {
+        "triangles": 36091,
+        "drawCalls": 37,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 36091,
+      "drawCalls": 37
+    }
+  ],
+  "screenshots": {
+    "opening": "fireRescue/baseline/opening.png",
+    "play30": "fireRescue/baseline/play30.png",
+    "finish": "fireRescue/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:47:17.106Z",
+        "url": "http://127.0.0.1:37697/workout/island/assets/models/fire-truck-512.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:47:16.953Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:46:55.171Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:46:53.244Z",
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 97
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 35,
+    "triangles": {
+      "min": 36005,
+      "max": 42775,
+      "mean": 37483.8
+    },
+    "drawCalls": {
+      "min": 35,
+      "max": 46,
+      "mean": 37.37
+    }
+  },
+  "finishedAt": "2026-11-17T15:47:54.993Z",
+  "durationMs": 61964
+}

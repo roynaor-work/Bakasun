@@ -1,0 +1,17 @@
+✔ static server preserves original CSP/bytes and denies traversal/symlink escapes (55.234856ms)
+✔ real Chromium: trusted CDP multitouch, touch scrolling, no WASM in frame/worker, and nonzero CSP detection (8442.706974ms)
+✔ requested roster resolves all ten games and public aliases (1.741639ms)
+✔ first-frame detection rejects the hub, paused/loading states and stale canvas counters (0.465542ms)
+✔ missing renderer data remains missing and cannot turn into a successful zero counter (1.36855ms)
+✔ URL regression checks inspect observed renderer state, including false/null expectations (0.411888ms)
+✔ CLI rejects malformed durations and preserves full URL flag values (0.652593ms)
+✔ normal application codecs and the optional no-WASM diagnostic are separate launch modes (0.336492ms)
+✔ report keeps blocked stages, nonzero diagnostics and escapes application error HTML (2.54385ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8651.878021

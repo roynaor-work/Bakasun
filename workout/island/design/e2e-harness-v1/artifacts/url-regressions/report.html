@@ -1,0 +1,2291 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; base-uri 'none'"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E"><title>Island E2E harness v1</title>
+    <style>body{font:16px system-ui,sans-serif;margin:24px;color:#172b36;background:#f4f7f8}h1,h2{line-height:1.3}a{color:#075b9a}table{border-collapse:collapse;width:100%;background:white}th,td{padding:10px;text-align:start;border:1px solid #ccd5da}section{background:white;padding:20px;margin:24px 0;border-radius:10px}pre,code{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}pre{max-height:450px;overflow:auto;background:#edf1f3;padding:12px}.passed{color:#10633a}.failed{color:#a12420}.blocked{color:#735000}.shots{display:flex;gap:14px;flex-wrap:wrap}figure{margin:0;max-width:100%}img{width:422px;max-width:100%;height:auto;border:1px solid #ccd5da}.scroll{overflow:auto}li{margin:7px 0}</style>
+    <h1>ערכת בדיקות האי · E2E v1</h1><p dir="ltr">13 passed / 0 failed / 13 runs · 2026-11-17T16:05:13.587Z</p><p><a href="report.json">Full JSON report</a></p>
+    <p dir="ltr">844×390 · hasTouch + isMobile · ANGLE / SwiftShader · JavaScript only · No game-state injection</p>
+    <div class="scroll"><table><thead><tr><th>Game / URL case</th><th>Status</th><th>First frame (ms)</th><th>Play (ms)</th><th>Peak triangles sampled</th><th>Peak draw calls sampled</th><th>Console errors</th><th>CSP evidence</th></tr></thead><tbody><tr><td><a href="#soccer-soccer-v4">כדורגל / soccer-v4</a></td><td class="passed">passed</td><td>6307</td><td>0</td><td>97887</td><td>58</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#soccer-soccer-no-v6-goals">כדורגל / soccer-no-v6-goals</a></td><td class="passed">passed</td><td>6262</td><td>0</td><td>74210</td><td>76</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#streetSlam-hoops-v4">כדורסל / hoops-v4</a></td><td class="passed">passed</td><td>9784</td><td>0</td><td>92050</td><td>61</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#streetSlam-hoops-v3">כדורסל / hoops-v3</a></td><td class="passed">passed</td><td>9821</td><td>0</td><td>62198</td><td>50</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#alpineRush-ski-low">סקי / ski-low</a></td><td class="passed">passed</td><td>4191</td><td>0</td><td>153567</td><td>82</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#alpineRush-ski-env-off">סקי / ski-env-off</a></td><td class="passed">passed</td><td>4972</td><td>0</td><td>366519</td><td>66</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#tennis-tennis-v24-loading">טניס / tennis-v24-loading</a></td><td class="passed">passed</td><td>3820</td><td>0</td><td>99224</td><td>89</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#islandRacing-racing-no-v7">מרוצים / racing-no-v7</a></td><td class="passed">passed</td><td>10284</td><td>0</td><td>344750</td><td>213</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#alienDefense-alien-no-v7">חלליות / alien-no-v7</a></td><td class="passed">passed</td><td>3676</td><td>0</td><td>3202</td><td>14</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#navalDuel-naval-no-v7">ספינות / naval-no-v7</a></td><td class="passed">passed</td><td>3967</td><td>0</td><td>49625</td><td>20</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#fireRescue-fire-no-v7">כיבוי אש / fire-no-v7</a></td><td class="passed">passed</td><td>3324</td><td>0</td><td>64519</td><td>30</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#catchCriminal-catch-v5">פושע / catch-v5</a></td><td class="passed">passed</td><td>4900</td><td>0</td><td>175920</td><td>97</td><td>0</td><td>0</td></tr>
+<tr><td><a href="#boarDefense-boar-v1">חזירים / boar-v1</a></td><td class="passed">passed</td><td>2328</td><td>0</td><td>331456</td><td>211</td><td>0</td><td>0</td></tr></tbody></table></div><section id="soccer-soccer-v4"><h2>כדורגל · soccer · soccer-v4</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?soccerChars=v4&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="soccer/soccer-v4/opening.png"><img loading="lazy" src="soccer/soccer-v4/opening.png" width="844" height="390" alt="כדורגל opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:50:53.221Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:50:56.558Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:50:56.558Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:50:33.028Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?soccerChars=v4&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:50:30.707Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?soccerChars=v4&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;soccer&quot;,
+    &quot;atMs&quot;: 31179.900000000373,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;playing&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 97887,
+      &quot;drawCalls&quot;: 58,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: &quot;ready&quot;,
+      &quot;assetStats&quot;: {
+        &quot;kind&quot;: &quot;design-glb-v2&quot;,
+        &quot;characterSet&quot;: &quot;v4&quot;,
+        &quot;source&quot;: &quot;design/characters2&quot;
+      },
+      &quot;designScene&quot;: {
+        &quot;status&quot;: &quot;ready&quot;,
+        &quot;failure&quot;: null,
+        &quot;goals&quot;: &quot;v6&quot;
+      },
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: 11,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 717,
+      &quot;bufferHeight&quot;: 331
+    },
+    &quot;triangles&quot;: 97887,
+    &quot;drawCalls&quot;: 58
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;soccer&quot;,
+    &quot;atMs&quot;: 31179.900000000373,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;playing&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 97887,
+      &quot;drawCalls&quot;: 58,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: &quot;ready&quot;,
+      &quot;assetStats&quot;: {
+        &quot;kind&quot;: &quot;design-glb-v2&quot;,
+        &quot;characterSet&quot;: &quot;v4&quot;,
+        &quot;source&quot;: &quot;design/characters2&quot;
+      },
+      &quot;designScene&quot;: {
+        &quot;status&quot;: &quot;ready&quot;,
+        &quot;failure&quot;: null,
+        &quot;goals&quot;: &quot;v6&quot;
+      },
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: 11,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 717,
+      &quot;bufferHeight&quot;: 331
+    },
+    &quot;triangles&quot;: 97887,
+    &quot;drawCalls&quot;: 58
+  }
+]</pre></details>
+    <p><a href="soccer/soccer-v4/result.json">Result JSON</a> · <a href="soccer/soccer-v4/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="soccer-soccer-no-v6-goals"><h2>כדורגל · soccer · soccer-no-v6-goals</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?soccerV6=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="soccer/soccer-no-v6-goals/opening.png"><img loading="lazy" src="soccer/soccer-no-v6-goals/opening.png" width="844" height="390" alt="כדורגל opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:26.307Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/crop.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:26.307Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/buzz.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:29.650Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:29.659Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:06.475Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?soccerV6=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:04.755Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?soccerV6=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;soccer&quot;,
+    &quot;atMs&quot;: 30223.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;playing&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 74210,
+      &quot;drawCalls&quot;: 76,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: &quot;ready&quot;,
+      &quot;assetStats&quot;: {
+        &quot;kind&quot;: &quot;athlete-body-v2&quot;,
+        &quot;characterSet&quot;: &quot;athlete&quot;,
+        &quot;source&quot;: &quot;assets/soccer-v24/body&quot;
+      },
+      &quot;designScene&quot;: {
+        &quot;status&quot;: &quot;ready&quot;,
+        &quot;failure&quot;: null,
+        &quot;goals&quot;: &quot;v5&quot;
+      },
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: 11,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 74210,
+    &quot;drawCalls&quot;: 76
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;soccer&quot;,
+    &quot;atMs&quot;: 30223.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;playing&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 74210,
+      &quot;drawCalls&quot;: 76,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: &quot;ready&quot;,
+      &quot;assetStats&quot;: {
+        &quot;kind&quot;: &quot;athlete-body-v2&quot;,
+        &quot;characterSet&quot;: &quot;athlete&quot;,
+        &quot;source&quot;: &quot;assets/soccer-v24/body&quot;
+      },
+      &quot;designScene&quot;: {
+        &quot;status&quot;: &quot;ready&quot;,
+        &quot;failure&quot;: null,
+        &quot;goals&quot;: &quot;v5&quot;
+      },
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: 11,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 74210,
+    &quot;drawCalls&quot;: 76
+  }
+]</pre></details>
+    <p><a href="soccer/soccer-no-v6-goals/result.json">Result JSON</a> · <a href="soccer/soccer-no-v6-goals/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="streetSlam-hoops-v4"><h2>כדורסל · streetSlam · hoops-v4</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="streetSlam/hoops-v4/opening.png"><img loading="lazy" src="streetSlam/hoops-v4/opening.png" width="844" height="390" alt="כדורסל opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:01.803Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:02.052Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:39.048Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:51:37.164Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;streetSlam&quot;,
+    &quot;atMs&quot;: 32686.69999999972,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;jumpball&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0.26666666666666666,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 92050,
+      &quot;drawCalls&quot;: 61,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: 4,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 92050,
+    &quot;drawCalls&quot;: 61
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;streetSlam&quot;,
+    &quot;atMs&quot;: 32686.69999999972,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;jumpball&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0.26666666666666666,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 92050,
+      &quot;drawCalls&quot;: 61,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: 4,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 92050,
+    &quot;drawCalls&quot;: 61
+  }
+]</pre></details>
+    <p><a href="streetSlam/hoops-v4/result.json">Result JSON</a> · <a href="streetSlam/hoops-v4/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="streetSlam-hoops-v3"><h2>כדורסל · streetSlam · hoops-v3</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;hoopsV4=0&amp;hoopsV5=0&amp;hoopsV8=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="streetSlam/hoops-v3/opening.png"><img loading="lazy" src="streetSlam/hoops-v3/opening.png" width="844" height="390" alt="כדורסל opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:37.974Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-forward-lod.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:37.974Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-big-lod.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:37.975Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-wing-lod.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:37.685Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:15.093Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;hoopsV4=0&amp;hoopsV5=0&amp;hoopsV8=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:13.145Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?athleteBody=0&amp;hoopsTall=0&amp;hoopsV7=0&amp;hoopsV4=0&amp;hoopsV5=0&amp;hoopsV8=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;streetSlam&quot;,
+    &quot;atMs&quot;: 33329.10000000009,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;jumpball&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0.16666666666666666,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 62198,
+      &quot;drawCalls&quot;: 50,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: 1,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: {
+        &quot;width&quot;: 304,
+        &quot;height&quot;: 140,
+        &quot;calls&quot;: 23,
+        &quot;triangles&quot;: 35625
+      },
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 62198,
+    &quot;drawCalls&quot;: 50
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;streetSlam&quot;,
+    &quot;atMs&quot;: 33329.10000000009,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;jumpball&quot;,
+    &quot;quality&quot;: 2,
+    &quot;simulationSeconds&quot;: 0.16666666666666666,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 62198,
+      &quot;drawCalls&quot;: 50,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 2,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: 1,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: {
+        &quot;width&quot;: 304,
+        &quot;height&quot;: 140,
+        &quot;calls&quot;: 23,
+        &quot;triangles&quot;: 35625
+      },
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 62198,
+    &quot;drawCalls&quot;: 50
+  }
+]</pre></details>
+    <p><a href="streetSlam/hoops-v3/result.json">Result JSON</a> · <a href="streetSlam/hoops-v3/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="alpineRush-ski-low"><h2>סקי · alpineRush · ski-low</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?quality=low&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="alpineRush/ski-low/opening.png"><img loading="lazy" src="alpineRush/ski-low/opening.png" width="844" height="390" alt="סקי opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:10.096Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/fir-a.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:10.100Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:10.619Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:51.139Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?quality=low&amp;dev=1&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:11.831Z&quot;,
+      &quot;text&quot;: &quot;THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/three.module.js&quot;,
+        &quot;line&quot;: 5,
+        &quot;column&quot;: 311494,
+        &quot;lineNumber&quot;: 5,
+        &quot;columnNumber&quot;: 311494
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?quality=low&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:52:49.341Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?quality=low&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alpineRush&quot;,
+    &quot;atMs&quot;: 30226.400000000373,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: &quot;low&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 153567,
+      &quot;drawCalls&quot;: 82,
+      &quot;mode&quot;: &quot;model&quot;,
+      &quot;quality&quot;: &quot;low&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: {
+        &quot;id&quot;: &quot;sunset&quot;,
+        &quot;backgrounds&quot;: [
+          &quot;landscape&quot;
+        ],
+        &quot;atlases&quot;: [
+          &quot;powder-spray&quot;,
+          &quot;snow-flecks&quot;,
+          &quot;landing-cloud&quot;
+        ],
+        &quot;decals&quot;: true,
+        &quot;tower&quot;: false,
+        &quot;snowNormal&quot;: true,
+        &quot;markers&quot;: 23,
+        &quot;towers&quot;: 0,
+        &quot;decalQuads&quot;: 11,
+        &quot;ribbons&quot;: 0,
+        &quot;flecks&quot;: 48,
+        &quot;spotLights&quot;: 0,
+        &quot;landingActive&quot;: 0,
+        &quot;powderActive&quot;: 0
+      },
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;model&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 153567,
+    &quot;drawCalls&quot;: 82
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alpineRush&quot;,
+    &quot;atMs&quot;: 30226.400000000373,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: &quot;low&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 153567,
+      &quot;drawCalls&quot;: 82,
+      &quot;mode&quot;: &quot;model&quot;,
+      &quot;quality&quot;: &quot;low&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: {
+        &quot;id&quot;: &quot;sunset&quot;,
+        &quot;backgrounds&quot;: [
+          &quot;landscape&quot;
+        ],
+        &quot;atlases&quot;: [
+          &quot;powder-spray&quot;,
+          &quot;snow-flecks&quot;,
+          &quot;landing-cloud&quot;
+        ],
+        &quot;decals&quot;: true,
+        &quot;tower&quot;: false,
+        &quot;snowNormal&quot;: true,
+        &quot;markers&quot;: 23,
+        &quot;towers&quot;: 0,
+        &quot;decalQuads&quot;: 11,
+        &quot;ribbons&quot;: 0,
+        &quot;flecks&quot;: 48,
+        &quot;spotLights&quot;: 0,
+        &quot;landingActive&quot;: 0,
+        &quot;powderActive&quot;: 0
+      },
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;model&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 153567,
+    &quot;drawCalls&quot;: 82
+  }
+]</pre></details>
+    <p><a href="alpineRush/ski-low/result.json">Result JSON</a> · <a href="alpineRush/ski-low/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="alpineRush-ski-env-off"><h2>סקי · alpineRush · ski-env-off</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?env=off&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="alpineRush/ski-env-off/opening.png"><img loading="lazy" src="alpineRush/ski-env-off/opening.png" width="844" height="390" alt="סקי opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.143Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/rock.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.143Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/ski-slope.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.144Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/fir-a.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.144Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/fir-b.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.145Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/fir-c.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.145Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/models/slalom-gate.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.174Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/alpine-world/models/mogul.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.174Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/alpine-world/models/ice-wall.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.174Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/design/alpine-world/models/finish-gate.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.143Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:42.759Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:25.775Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?env=off&amp;dev=1&quot;
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:43.860Z&quot;,
+      &quot;text&quot;: &quot;THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/three.module.js&quot;,
+        &quot;line&quot;: 5,
+        &quot;column&quot;: 311494,
+        &quot;lineNumber&quot;: 5,
+        &quot;columnNumber&quot;: 311494
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?env=off&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:23.934Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?env=off&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alpineRush&quot;,
+    &quot;atMs&quot;: 29217.399999999907,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: &quot;high&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 366519,
+      &quot;drawCalls&quot;: 66,
+      &quot;mode&quot;: &quot;model&quot;,
+      &quot;quality&quot;: &quot;high&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;model&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 366519,
+    &quot;drawCalls&quot;: 66
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alpineRush&quot;,
+    &quot;atMs&quot;: 29217.399999999907,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: &quot;high&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 366519,
+      &quot;drawCalls&quot;: 66,
+      &quot;mode&quot;: &quot;model&quot;,
+      &quot;quality&quot;: &quot;high&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;model&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 366519,
+    &quot;drawCalls&quot;: 66
+  }
+]</pre></details>
+    <p><a href="alpineRush/ski-env-off/result.json">Result JSON</a> · <a href="alpineRush/ski-env-off/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="tennis-tennis-v24-loading"><h2>טניס · tennis · tennis-v24-loading</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?tennisLoad=v24&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="tennis/tennis-v24-loading/opening.png"><img loading="lazy" src="tennis/tennis-v24-loading/opening.png" width="844" height="390" alt="טניס opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:21.383Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/assets/tennis-crowd-v22/runtime/lod1/fan-12.glb&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:21.067Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm&quot;,
+      &quot;type&quot;: &quot;fetch&quot;
+    }
+  ],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:59.763Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?tennisLoad=v24&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:53:58.117Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?tennisLoad=v24&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;tennis&quot;,
+    &quot;atMs&quot;: 25969.600000000093,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;serve&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 99224,
+      &quot;drawCalls&quot;: 89,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: 8,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: {
+        &quot;mode&quot;: &quot;v24&quot;,
+        &quot;venueMs&quot;: 439,
+        &quot;charactersMs&quot;: 541
+      },
+      &quot;characterLoaded&quot;: true,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 99224,
+    &quot;drawCalls&quot;: 89
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;tennis&quot;,
+    &quot;atMs&quot;: 25969.600000000093,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;serve&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 99224,
+      &quot;drawCalls&quot;: 89,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: 8,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: {
+        &quot;mode&quot;: &quot;v24&quot;,
+        &quot;venueMs&quot;: 439,
+        &quot;charactersMs&quot;: 541
+      },
+      &quot;characterLoaded&quot;: true,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: null,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 99224,
+    &quot;drawCalls&quot;: 89
+  }
+]</pre></details>
+    <p><a href="tennis/tennis-v24-loading/result.json">Result JSON</a> · <a href="tennis/tennis-v24-loading/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="islandRacing-racing-no-v7"><h2>מרוצים · islandRacing · racing-no-v7</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?racingV7=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="islandRacing/racing-no-v7/opening.png"><img loading="lazy" src="islandRacing/racing-no-v7/opening.png" width="844" height="390" alt="מרוצים opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:42.502Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/assets/racing-formula-cars-v1/formula-lod0.glb?v=island-v2-20261107-15&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:26.870Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?racingV7=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:25.214Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?racingV7=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;islandRacing&quot;,
+    &quot;atMs&quot;: 26387.5,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 344750,
+      &quot;drawCalls&quot;: 213,
+      &quot;mode&quot;: &quot;webgl&quot;,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: 8,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: {
+        &quot;enabled&quot;: false,
+        &quot;active&quot;: false
+      },
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;webgl&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 344750,
+    &quot;drawCalls&quot;: 213
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;islandRacing&quot;,
+    &quot;atMs&quot;: 26387.5,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;countdown&quot;,
+    &quot;quality&quot;: 0,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 344750,
+      &quot;drawCalls&quot;: 213,
+      &quot;mode&quot;: &quot;webgl&quot;,
+      &quot;quality&quot;: 0,
+      &quot;frame&quot;: 8,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: {
+        &quot;enabled&quot;: false,
+        &quot;active&quot;: false
+      },
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;webgl&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 344750,
+    &quot;drawCalls&quot;: 213
+  }
+]</pre></details>
+    <p><a href="islandRacing/racing-no-v7/result.json">Result JSON</a> · <a href="islandRacing/racing-no-v7/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="alienDefense-alien-no-v7"><h2>חלליות · alienDefense · alien-no-v7</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?defenseV7=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="alienDefense/alien-no-v7/opening.png"><img loading="lazy" src="alienDefense/alien-no-v7/opening.png" width="844" height="390" alt="חלליות opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:59.024Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?defenseV7=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:54:57.287Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?defenseV7=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alienDefense&quot;,
+    &quot;atMs&quot;: 26288.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: null,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0.08,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 3202,
+      &quot;drawCalls&quot;: 14,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: null,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: false,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 3202,
+    &quot;drawCalls&quot;: 14
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;alienDefense&quot;,
+    &quot;atMs&quot;: 26288.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: null,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0.08,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 3202,
+      &quot;drawCalls&quot;: 14,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: null,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: false,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 3202,
+    &quot;drawCalls&quot;: 14
+  }
+]</pre></details>
+    <p><a href="alienDefense/alien-no-v7/result.json">Result JSON</a> · <a href="alienDefense/alien-no-v7/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="navalDuel-naval-no-v7"><h2>ספינות · navalDuel · naval-no-v7</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?navalV7=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="navalDuel/naval-no-v7/opening.png"><img loading="lazy" src="navalDuel/naval-no-v7/opening.png" width="844" height="390" alt="ספינות opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:55:27.145Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?navalV7=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:55:25.023Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?navalV7=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;navalDuel&quot;,
+    &quot;atMs&quot;: 28750,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;aim&quot;,
+    &quot;quality&quot;: &quot;full&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 49625,
+      &quot;drawCalls&quot;: 20,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: &quot;full&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: {
+        &quot;enabled&quot;: false
+      },
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: {
+        &quot;revision&quot;: &quot;ultra-naval-3&quot;,
+        &quot;detailedNormals&quot;: true,
+        &quot;water&quot;: &quot;reflective&quot;,
+        &quot;reflectionSize&quot;: 256,
+        &quot;reflectionCaptures&quot;: 1,
+        &quot;mirror&quot;: {
+          &quot;calls&quot;: 14,
+          &quot;triangles&quot;: 8356,
+          &quot;peakCalls&quot;: 14,
+          &quot;peakTriangles&quot;: 8356
+        },
+        &quot;waterTime&quot;: 0,
+        &quot;shallowBanks&quot;: 3,
+        &quot;fallbackRipples&quot;: true,
+        &quot;disposed&quot;: false
+      },
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 49625,
+    &quot;drawCalls&quot;: 20
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;navalDuel&quot;,
+    &quot;atMs&quot;: 28750,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;aim&quot;,
+    &quot;quality&quot;: &quot;full&quot;,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 49625,
+      &quot;drawCalls&quot;: 20,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: &quot;full&quot;,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: {
+        &quot;enabled&quot;: false
+      },
+      &quot;fireV7&quot;: null,
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;environment&quot;: {
+        &quot;revision&quot;: &quot;ultra-naval-3&quot;,
+        &quot;detailedNormals&quot;: true,
+        &quot;water&quot;: &quot;reflective&quot;,
+        &quot;reflectionSize&quot;: 256,
+        &quot;reflectionCaptures&quot;: 1,
+        &quot;mirror&quot;: {
+          &quot;calls&quot;: 14,
+          &quot;triangles&quot;: 8356,
+          &quot;peakCalls&quot;: 14,
+          &quot;peakTriangles&quot;: 8356
+        },
+        &quot;waterTime&quot;: 0,
+        &quot;shallowBanks&quot;: 3,
+        &quot;fallbackRipples&quot;: true,
+        &quot;disposed&quot;: false
+      },
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 49625,
+    &quot;drawCalls&quot;: 20
+  }
+]</pre></details>
+    <p><a href="navalDuel/naval-no-v7/result.json">Result JSON</a> · <a href="navalDuel/naval-no-v7/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="fireRescue-fire-no-v7"><h2>כיבוי אש · fireRescue · fire-no-v7</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?fireV7=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="fireRescue/fire-no-v7/opening.png"><img loading="lazy" src="fireRescue/fire-no-v7/opening.png" width="844" height="390" alt="כיבוי אש opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:56:19.825Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/assets/models/apartment-block-512.glb?v=island-v2-20261107-15&quot;,
+      &quot;type&quot;: &quot;fetch&quot;,
+      &quot;reason&quot;: &quot;net::ERR_ABORTED&quot;
+    }
+  ],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:55:57.795Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?fireV7=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:55:55.445Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?fireV7=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;fireRescue&quot;,
+    &quot;atMs&quot;: 26417.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: null,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 64519,
+      &quot;drawCalls&quot;: 30,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: null,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: {
+        &quot;enabled&quot;: false,
+        &quot;level&quot;: 2
+      },
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 64519,
+    &quot;drawCalls&quot;: 30
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;fireRescue&quot;,
+    &quot;atMs&quot;: 26417.200000000186,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: null,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 64519,
+      &quot;drawCalls&quot;: 30,
+      &quot;mode&quot;: null,
+      &quot;quality&quot;: null,
+      &quot;frame&quot;: null,
+      &quot;assetStatus&quot;: null,
+      &quot;assetStats&quot;: null,
+      &quot;designScene&quot;: null,
+      &quot;characterVersion&quot;: null,
+      &quot;modelCount&quot;: null,
+      &quot;reflection&quot;: null,
+      &quot;v7&quot;: null,
+      &quot;fireV7&quot;: {
+        &quot;enabled&quot;: false,
+        &quot;level&quot;: 2
+      },
+      &quot;defenseV7&quot;: null,
+      &quot;load&quot;: null,
+      &quot;characterLoaded&quot;: null,
+      &quot;bufferWidth&quot;: null,
+      &quot;bufferHeight&quot;: null
+    },
+    &quot;mode&quot;: &quot;three&quot;,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 64519,
+    &quot;drawCalls&quot;: 30
+  }
+]</pre></details>
+    <p><a href="fireRescue/fire-no-v7/result.json">Result JSON</a> · <a href="fireRescue/fire-no-v7/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="catchCriminal-catch-v5"><h2>פושע · catchCriminal · catch-v5</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?catchV6=0&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="catchCriminal/catch-v5/opening.png"><img loading="lazy" src="catchCriminal/catch-v5/opening.png" width="844" height="390" alt="פושע opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:56:25.361Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?catchV6=0&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:56:23.733Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?catchV6=0&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;catchCriminal&quot;,
+    &quot;atMs&quot;: 21935.399999999907,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;chase&quot;,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 175920,
+      &quot;drawCalls&quot;: 97,
+      &quot;frame&quot;: 8
+    },
+    &quot;mode&quot;: null,
+    &quot;catchV6&quot;: false,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 175920,
+    &quot;drawCalls&quot;: 97
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;catchCriminal&quot;,
+    &quot;atMs&quot;: 21935.399999999907,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;chase&quot;,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 175920,
+      &quot;drawCalls&quot;: 97,
+      &quot;frame&quot;: 8
+    },
+    &quot;mode&quot;: null,
+    &quot;catchV6&quot;: false,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 175920,
+    &quot;drawCalls&quot;: 97
+  }
+]</pre></details>
+    <p><a href="catchCriminal/catch-v5/result.json">Result JSON</a> · <a href="catchCriminal/catch-v5/touches.json">CDP touch journal</a></p>
+    </section>
+<section id="boarDefense-boar-v1"><h2>חזירים · boarDefense · boar-v1</h2>
+    <p class="passed">passed · opening · finish: exit</p>
+    <p>Play: 0 ms wall time, 0 ms active play; UI replays: 0; observed simulation increments: unavailable s. First-frame latency is sampled detection, not a GPU timestamp.</p>
+    <p>The harness is JavaScript only; existing application codecs run normally. Service workers are blocked for a cold network run. All user input uses CDP touch.</p>
+    <p>URL: <code>http://127.0.0.1:35417/workout/island/?boar=v1&amp;dev=1</code></p>
+
+    <ul><li class="passed">opening: passed</li></ul>
+    <div class="shots"><figure><a href="boarDefense/boar-v1/opening.png"><img loading="lazy" src="boarDefense/boar-v1/opening.png" width="844" height="390" alt="חזירים opening"></a><figcaption>opening</figcaption></figure></div>
+    <h3>Checks</h3><ul><li class="passed">game-first-frame: PASS</li><li class="passed">mobile-viewport: PASS</li><li class="passed">application-csp-present: PASS</li><li class="passed">url-flag-observed: PASS</li><li class="passed">zero-console-errors: PASS</li><li class="passed">zero-page-errors: PASS</li><li class="passed">zero-csp-violations: PASS</li><li class="passed">zero-page-crashes: PASS</li><li class="passed">diagnostics-observers-active: PASS</li><li class="passed">zero-session-errors: PASS</li><li class="passed">render-counters-available: PASS</li></ul>
+    <details><summary>Diagnostics (unfiltered)</summary><pre>{
+  &quot;consoleErrors&quot;: [],
+  &quot;pageErrors&quot;: [],
+  &quot;cspViolations&quot;: [],
+  &quot;failedRequests&quot;: [],
+  &quot;wasmRequests&quot;: [],
+  &quot;warnings&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:56:50.934Z&quot;,
+      &quot;text&quot;: &quot;Service Worker registration blocked by Playwright&quot;,
+      &quot;location&quot;: {
+        &quot;url&quot;: &quot;&quot;,
+        &quot;line&quot;: 2,
+        &quot;column&quot;: 86,
+        &quot;lineNumber&quot;: 2,
+        &quot;columnNumber&quot;: 86
+      },
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?boar=v1&amp;dev=1&quot;
+    }
+  ],
+  &quot;crashes&quot;: [],
+  &quot;cspDocuments&quot;: [
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:56:49.166Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/?boar=v1&amp;dev=1&quot;,
+      &quot;header&quot;: null
+    },
+    {
+      &quot;phase&quot;: &quot;opening&quot;,
+      &quot;at&quot;: &quot;2026-11-17T15:57:05.882Z&quot;,
+      &quot;url&quot;: &quot;http://127.0.0.1:35417/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&amp;island=1&amp;qa=1&amp;boar=v1&quot;,
+      &quot;header&quot;: null
+    }
+  ],
+  &quot;monitorErrors&quot;: []
+}</pre></details>
+    <details><summary>Renderer samples</summary><pre>[
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;boarDefense&quot;,
+    &quot;atMs&quot;: 22692.600000000093,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;battle&quot;,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 331456,
+      &quot;calls&quot;: 211,
+      &quot;frame&quot;: 38
+    },
+    &quot;mode&quot;: null,
+    &quot;childWasmExposed&quot;: true,
+    &quot;boarFlags&quot;: {
+      &quot;TOUCH&quot;: true,
+      &quot;AIMSTICK&quot;: false,
+      &quot;FIRE_V21&quot;: false,
+      &quot;HUD_V21&quot;: false,
+      &quot;STICK_V21&quot;: false,
+      &quot;LEGACY&quot;: true,
+      &quot;AIM_V24&quot;: false,
+      &quot;AIM_V241&quot;: false,
+      &quot;FX_V241&quot;: false
+    },
+    &quot;boarShots&quot;: 0,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 331456,
+    &quot;drawCalls&quot;: 211
+  },
+  {
+    &quot;apiReady&quot;: true,
+    &quot;active&quot;: true,
+    &quot;id&quot;: &quot;boarDefense&quot;,
+    &quot;atMs&quot;: 22692.600000000093,
+    &quot;wasmExposed&quot;: true,
+    &quot;viewport&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;dpr&quot;: 1
+    },
+    &quot;menuVisible&quot;: false,
+    &quot;resultVisible&quot;: false,
+    &quot;current&quot;: true,
+    &quot;historyDepth&quot;: 2,
+    &quot;paused&quot;: false,
+    &quot;starting&quot;: false,
+    &quot;phase&quot;: &quot;battle&quot;,
+    &quot;quality&quot;: null,
+    &quot;simulationSeconds&quot;: 0,
+    &quot;stateError&quot;: null,
+    &quot;metrics&quot;: {
+      &quot;triangles&quot;: 331456,
+      &quot;calls&quot;: 211,
+      &quot;frame&quot;: 38
+    },
+    &quot;mode&quot;: null,
+    &quot;childWasmExposed&quot;: true,
+    &quot;boarFlags&quot;: {
+      &quot;TOUCH&quot;: true,
+      &quot;AIMSTICK&quot;: false,
+      &quot;FIRE_V21&quot;: false,
+      &quot;HUD_V21&quot;: false,
+      &quot;STICK_V21&quot;: false,
+      &quot;LEGACY&quot;: true,
+      &quot;AIM_V24&quot;: false,
+      &quot;AIM_V241&quot;: false,
+      &quot;FX_V241&quot;: false
+    },
+    &quot;boarShots&quot;: 0,
+    &quot;canvas&quot;: {
+      &quot;width&quot;: 844,
+      &quot;height&quot;: 390,
+      &quot;bufferWidth&quot;: 844,
+      &quot;bufferHeight&quot;: 390
+    },
+    &quot;triangles&quot;: 331456,
+    &quot;drawCalls&quot;: 211
+  }
+]</pre></details>
+    <p><a href="boarDefense/boar-v1/result.json">Result JSON</a> · <a href="boarDefense/boar-v1/touches.json">CDP touch journal</a></p>
+    </section></html>

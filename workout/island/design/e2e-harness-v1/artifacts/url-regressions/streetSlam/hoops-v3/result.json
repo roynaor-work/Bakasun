@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "game": "streetSlam",
+  "label": "כדורסל",
+  "variant": "hoops-v3",
+  "scenario": "opening",
+  "startedAt": "2026-11-17T15:52:12.268Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+  "query": {
+    "athleteBody": "0",
+    "hoopsTall": "0",
+    "hoopsV7": "0",
+    "hoopsV4": "0",
+    "hoopsV5": "0",
+    "hoopsV8": "0"
+  },
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": false,
+  "firstFrameMs": 9821,
+  "islandToFirstFrameMs": 33337,
+  "playWallMs": 0,
+  "playActiveMs": 0,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 9821
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 9821
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "url-flag-observed",
+      "pass": true,
+      "path": "metrics.characterVersion",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 2,
+        "triangles": {
+          "min": 62198,
+          "max": 62198,
+          "mean": 62198
+        },
+        "drawCalls": {
+          "min": 50,
+          "max": 50,
+          "mean": 50
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 33329.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": 2,
+      "simulationSeconds": 0.16666666666666666,
+      "stateError": null,
+      "metrics": {
+        "triangles": 62198,
+        "drawCalls": 50,
+        "mode": null,
+        "quality": 2,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": 1,
+        "modelCount": null,
+        "reflection": {
+          "width": 304,
+          "height": 140,
+          "calls": 23,
+          "triangles": 35625
+        },
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "characterLoaded": null,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 62198,
+      "drawCalls": 50
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 33329.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": 2,
+      "simulationSeconds": 0.16666666666666666,
+      "stateError": null,
+      "metrics": {
+        "triangles": 62198,
+        "drawCalls": 50,
+        "mode": null,
+        "quality": 2,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": 1,
+        "modelCount": null,
+        "reflection": {
+          "width": 304,
+          "height": 140,
+          "calls": 23,
+          "triangles": 35625
+        },
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "characterLoaded": null,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 62198,
+      "drawCalls": 50
+    }
+  ],
+  "screenshots": {
+    "opening": "streetSlam/hoops-v3/opening.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:37.974Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-forward-lod.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:37.974Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-big-lod.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:37.975Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-wing-lod.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:37.685Z",
+        "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:15.093Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:52:13.145Z",
+        "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 31
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 2,
+    "triangles": {
+      "min": 62198,
+      "max": 62198,
+      "mean": 62198
+    },
+    "drawCalls": {
+      "min": 50,
+      "max": 50,
+      "mean": 50
+    }
+  },
+  "finishedAt": "2026-11-17T15:52:48.877Z",
+  "durationMs": 36609
+}

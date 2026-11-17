@@ -1,0 +1,1348 @@
+{
+  "schemaVersion": 1,
+  "game": "fireRescue",
+  "label": "כיבוי אש",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:27:02.788Z",
+  "status": "failed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 3711,
+  "islandToFirstFrameMs": 28064,
+  "playWallMs": 30891,
+  "simulationDeltaSeconds": 5.76,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 10,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 3711
+    },
+    {
+      "name": "play30",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 11,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 30891,
+      "simulationDeltaSeconds": 5.76
+    },
+    {
+      "name": "finish",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 11,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 3711
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "webassembly-disabled",
+      "pass": true,
+      "actual": {
+        "parent": false,
+        "child": null
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 30891
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 5.76,
+      "activeSamples": 14
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 65928.5,
+        "wasmExposed": false,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": false,
+      "actual": 11,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 17,
+        "triangles": {
+          "min": 64475,
+          "max": 69769,
+          "mean": 64866.06
+        },
+        "drawCalls": {
+          "min": 30,
+          "max": 32,
+          "mean": 31.76
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 28059.600000000093,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64475,
+        "drawCalls": 30,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64475,
+      "drawCalls": 30
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 28059.600000000093,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64475,
+        "drawCalls": 30,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64475,
+      "drawCalls": 30
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 29384,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.13009999999999855,
+      "stateError": null,
+      "metrics": {
+        "triangles": 69769,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 69769,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 31626.700000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.4900999999999984,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 34072,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 0.8900999999999988,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 36531.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.2900999999999991,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 38981.200000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 1.6999999999999937,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 41628.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.059999999999994,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 44369.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.459999999999994,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 46669.80000000028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 2.8199999999999945,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 48648.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.139999999999995,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 51497.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 3.589999999999995,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 53386.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.0066999999999995,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 55102.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.440100000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 56626.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 4.880100000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 58265.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.360100000000002,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64575,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 2
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64575,
+      "drawCalls": 32
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "fireRescue",
+      "atMs": 60619.700000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": null,
+      "quality": null,
+      "simulationSeconds": 5.8568,
+      "stateError": null,
+      "metrics": {
+        "triangles": 64529,
+        "drawCalls": 32,
+        "mode": null,
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": {
+          "enabled": true,
+          "level": 1
+        },
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 64529,
+      "drawCalls": 32
+    }
+  ],
+  "screenshots": {
+    "opening": "fireRescue/baseline/opening.png",
+    "play30": "fireRescue/baseline/play30.png",
+    "finish": "fireRescue/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.682Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.688Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.693Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.696Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:29.696Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "play30",
+        "at": "2026-11-17T15:27:51.026Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:05.272Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:27:03.000Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 90
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 17,
+    "triangles": {
+      "min": 64475,
+      "max": 69769,
+      "mean": 64866.06
+    },
+    "drawCalls": {
+      "min": 30,
+      "max": 32,
+      "mean": 31.76
+    }
+  },
+  "finishedAt": "2026-11-17T15:28:08.938Z",
+  "durationMs": 66150
+}

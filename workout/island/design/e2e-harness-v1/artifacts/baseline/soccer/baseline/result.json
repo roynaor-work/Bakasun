@@ -1,0 +1,3881 @@
+{
+  "schemaVersion": 1,
+  "game": "soccer",
+  "label": "כדורגל",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:38:06.203Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 6422,
+  "islandToFirstFrameMs": 31665,
+  "playWallMs": 30265,
+  "playActiveMs": 30158,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": 19.667,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 6422
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 30265,
+      "activeMs": 30158,
+      "replays": 0,
+      "simulationDeltaSeconds": 19.667
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 6422
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 30158
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 19.667,
+      "activeSamples": 28
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 68237.1000000001,
+        "wasmExposed": true,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 59,
+        "triangles": {
+          "min": 20656,
+          "max": 82203,
+          "mean": 30961.24
+        },
+        "drawCalls": {
+          "min": 52,
+          "max": 87,
+          "mean": 61.68
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 31654.100000000093,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 74210,
+        "drawCalls": 76,
+        "mode": null,
+        "quality": 0,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 74210,
+      "drawCalls": 76
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 31654.100000000093,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 74210,
+        "drawCalls": 76,
+        "mode": null,
+        "quality": 0,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 74210,
+      "drawCalls": 76
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 33728,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 0,
+      "simulationSeconds": 0.966666666666668,
+      "stateError": null,
+      "metrics": {
+        "triangles": 82203,
+        "drawCalls": 83,
+        "mode": null,
+        "quality": 0,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 13,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 82203,
+      "drawCalls": 83
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 35055.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 2.3499999999999965,
+      "stateError": null,
+      "metrics": {
+        "triangles": 79610,
+        "drawCalls": 87,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 79610,
+      "drawCalls": 87
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 35059.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 2.3499999999999965,
+      "stateError": null,
+      "metrics": {
+        "triangles": 79610,
+        "drawCalls": 87,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 79610,
+      "drawCalls": 87
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 36582.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 3.5499999999999923,
+      "stateError": null,
+      "metrics": {
+        "triangles": 71501,
+        "drawCalls": 79,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 71501,
+      "drawCalls": 79
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 36585.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 3.5499999999999923,
+      "stateError": null,
+      "metrics": {
+        "triangles": 71501,
+        "drawCalls": 79,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 71501,
+      "drawCalls": 79
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 37754.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 4.666666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 66476,
+        "drawCalls": 71,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 66476,
+      "drawCalls": 71
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 37758.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 1,
+      "simulationSeconds": 4.666666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 66476,
+        "drawCalls": 71,
+        "mode": null,
+        "quality": 1,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 66476,
+      "drawCalls": 71
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 40334.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 2,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 33989,
+        "drawCalls": 75,
+        "mode": null,
+        "quality": 2,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 22,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 33989,
+      "drawCalls": 75
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 40338.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 2,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 33989,
+        "drawCalls": 75,
+        "mode": null,
+        "quality": 2,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 22,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 33989,
+      "drawCalls": 75
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 41425.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21299,
+        "drawCalls": 64,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 22,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21299,
+      "drawCalls": 64
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 41428.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21299,
+        "drawCalls": 64,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 22,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21299,
+      "drawCalls": 64
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 42453.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23994,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23994,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 42461.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23994,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23994,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 43534.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 25492,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 13,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 25492,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 43538.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 25492,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 13,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 25492,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 44567.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 25136,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 25136,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 44570.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 25136,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 12,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 25136,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 45551,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21362,
+        "drawCalls": 53,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21362,
+      "drawCalls": 53
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 45558.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21362,
+        "drawCalls": 53,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21362,
+      "drawCalls": 53
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 46569.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20967,
+        "drawCalls": 52,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 7,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20967,
+      "drawCalls": 52
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 46573.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20967,
+        "drawCalls": 52,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 7,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20967,
+      "drawCalls": 52
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 47572.30000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22478,
+        "drawCalls": 54,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22478,
+      "drawCalls": 54
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 47575,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "goal",
+      "quality": 3,
+      "simulationSeconds": 4.766666666666655,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22478,
+        "drawCalls": 54,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22478,
+      "drawCalls": 54
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 48541.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 5.349999999999986,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23235,
+        "drawCalls": 63,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23235,
+      "drawCalls": 63
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 48545.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 5.349999999999986,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23235,
+        "drawCalls": 63,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23235,
+      "drawCalls": 63
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 49468.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 6.333333333333316,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23872,
+        "drawCalls": 62,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 13,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23872,
+      "drawCalls": 62
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 49472.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 6.333333333333316,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23872,
+        "drawCalls": 62,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 13,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23872,
+      "drawCalls": 62
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 50462.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 7.333333333333313,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23328,
+        "drawCalls": 62,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23328,
+      "drawCalls": 62
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 50465.30000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 7.333333333333313,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23328,
+        "drawCalls": 62,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 14,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23328,
+      "drawCalls": 62
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 51825.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 8.399999999999997,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20674,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20674,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 51828.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 8.399999999999997,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20674,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20674,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 52692.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 9.300000000000042,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20656,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20656,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 52695.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 9.300000000000042,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20656,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20656,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 53758,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 10.350000000000094,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20656,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20656,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 53764.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 10.350000000000094,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20656,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20656,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 54730.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 11.350000000000144,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21923,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21923,
+      "drawCalls": 57
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 54737.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 11.350000000000144,
+      "stateError": null,
+      "metrics": {
+        "triangles": 21923,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 21923,
+      "drawCalls": 57
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 55667.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 12.266666666666856,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23440,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23440,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 55671.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 12.266666666666856,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23440,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23440,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 56630.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 13.266666666666906,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23540,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23540,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 56634.30000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 13.266666666666906,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23540,
+        "drawCalls": 59,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23540,
+      "drawCalls": 59
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 57578.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 14.183333333333618,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22396,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22396,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 57581.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 14.183333333333618,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22396,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22396,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 58477.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 15.116666666666998,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22288,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22288,
+      "drawCalls": 57
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 58480.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 15.116666666666998,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22288,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22288,
+      "drawCalls": 57
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 59490,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 16.100000000000367,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20796,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20796,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 59493.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 16.100000000000367,
+      "stateError": null,
+      "metrics": {
+        "triangles": 20796,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 8,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 20796,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 60549.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 17.166666666666973,
+      "stateError": null,
+      "metrics": {
+        "triangles": 24912,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 10,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 24912,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 60553.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 17.166666666666973,
+      "stateError": null,
+      "metrics": {
+        "triangles": 24912,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 10,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 24912,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 61477.700000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 18.00000000000026,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23424,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23424,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 61481.80000000028,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 18.00000000000026,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23424,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23424,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 62238,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 18.883333333333542,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23424,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23424,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 62251.39999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 18.883333333333542,
+      "stateError": null,
+      "metrics": {
+        "triangles": 23424,
+        "drawCalls": 58,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 23424,
+      "drawCalls": 58
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 63326.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 19.916666666666817,
+      "stateError": null,
+      "metrics": {
+        "triangles": 24903,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 10,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 24903,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 63330.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 19.916666666666817,
+      "stateError": null,
+      "metrics": {
+        "triangles": 24903,
+        "drawCalls": 60,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 10,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 24903,
+      "drawCalls": 60
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 63990.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 20.633333333333443,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22274,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22274,
+      "drawCalls": 57
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 63996.39999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 3,
+      "simulationSeconds": 20.633333333333443,
+      "stateError": null,
+      "metrics": {
+        "triangles": 22274,
+        "drawCalls": 57,
+        "mode": null,
+        "quality": 3,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v6"
+        },
+        "characterVersion": null,
+        "modelCount": 9,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 717,
+        "bufferHeight": 331
+      },
+      "triangles": 22274,
+      "drawCalls": 57
+    }
+  ],
+  "screenshots": {
+    "opening": "soccer/baseline/opening.png",
+    "play30": "soccer/baseline/play30.png",
+    "finish": "soccer/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:38:32.588Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:38:32.593Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:38:08.531Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:38:06.425Z",
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 106
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 59,
+    "triangles": {
+      "min": 20656,
+      "max": 82203,
+      "mean": 30961.24
+    },
+    "drawCalls": {
+      "min": 52,
+      "max": 87,
+      "mean": 61.68
+    }
+  },
+  "finishedAt": "2026-11-17T15:39:14.658Z",
+  "durationMs": 68458
+}

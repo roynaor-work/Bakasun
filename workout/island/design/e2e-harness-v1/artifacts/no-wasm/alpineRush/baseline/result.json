@@ -1,0 +1,2939 @@
+{
+  "schemaVersion": 1,
+  "game": "alpineRush",
+  "label": "סקי",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:24:05.918Z",
+  "status": "failed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": null,
+  "islandToFirstFrameMs": null,
+  "playWallMs": 0,
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "failed",
+      "reason": "Timed out after 45000 ms: alpineRush first rendered gameplay frame"
+    },
+    {
+      "name": "play30",
+      "status": "blocked",
+      "reason": "Timed out after 45000 ms: alpineRush first rendered gameplay frame"
+    },
+    {
+      "name": "finish",
+      "status": "blocked",
+      "reason": "Timed out after 45000 ms: alpineRush first rendered gameplay frame"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "opening-completed",
+      "pass": false,
+      "actual": "Timed out after 45000 ms: alpineRush first rendered gameplay frame"
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": false,
+      "actual": 34,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": false,
+      "actual": [
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost",
+        "webgl-context-lost"
+      ]
+    },
+    {
+      "name": "render-counters-available",
+      "pass": false,
+      "actual": {
+        "samples": 0,
+        "triangles": null,
+        "drawCalls": null
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 25345.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 25886.199999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 26431.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 26972.800000000047,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 27519.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 28056.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 28602.399999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29154.300000000047,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29713.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 30269.800000000047,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 30812.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 31349.300000000047,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 31892.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 32434.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 32980.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 33520.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 34061.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 34599.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 35141.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 35681.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 36216.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 36750.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 37286.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 37842.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 38402.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 38960.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 39495,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 40033.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 40574.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 41113.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 41654.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 42196,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 42745.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 43285.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 43827.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 44383.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 44920.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 45459.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 45995.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 46534,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 47076.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 47625.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 48161.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 48728.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 49277.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 49814.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 50353.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 50895,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 51434.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 51973.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 52517.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 53059.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 53602.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 54170.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 54735.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 55282.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 55827.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 56390.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 56932.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 57513.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 58053.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 58600.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 59142.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 59680.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 60218.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 60756.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 61294.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 61829.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 62384.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 62961.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 63507.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 64047.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 64604.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 65145.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 65552.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "menu",
+      "quality": "low",
+      "simulationSeconds": 0,
+      "stateError": "webgl-context-lost",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    }
+  ],
+  "screenshots": {
+    "failure": "alpineRush/baseline/failure.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.230Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.232Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.232Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.236Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.236Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.236Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.236Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.240Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.241Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.246Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.247Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.247Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.532Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.532Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.533Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.533Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.534Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.967Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.971Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.971Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.971Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.984Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.996Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.996Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.263Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.263Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.263Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.263Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.263Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.265Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.265Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.265Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.266Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:30.267Z",
+        "text": "Alpine Draco requires WebAssembly",
+        "stack": "Error: Alpine Draco requires WebAssembly\n    at AlpineDracoLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/alpine-draco.mjs:13:64)\n    at AlpineDracoLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at Object.onLoad (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:239:11)\n    at http://127.0.0.1:36509/workout/island/vendor/three.module.js:6:568310",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.222Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/ski-slope.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.223Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/rock.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.223Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/slalom-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:27.223Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/fence.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.959Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/rock.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.960Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/slalom-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.961Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/fir-a.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.961Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/fir-b.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:28.961Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/models/fir-c.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:08.317Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:24:06.062Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 45
+  },
+  "failure": {
+    "phase": "opening",
+    "message": "Timed out after 45000 ms: alpineRush first rendered gameplay frame",
+    "stack": "Error: Timed out after 45000 ms: alpineRush first rendered gameplay frame\n    at until (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/runtime.mjs:46:9)\n    at async runScenario (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/runner.mjs:79:19)\n    at async main (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/cli.mjs:85:22)"
+  },
+  "browserVersion": "151.0.7922.173",
+  "render": {
+    "samples": 0,
+    "triangles": null,
+    "drawCalls": null
+  },
+  "finishedAt": "2026-11-17T15:25:11.684Z",
+  "durationMs": 65766
+}

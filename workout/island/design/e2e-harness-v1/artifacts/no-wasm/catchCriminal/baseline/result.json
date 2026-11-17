@@ -1,0 +1,875 @@
+{
+  "schemaVersion": 1,
+  "game": "catchCriminal",
+  "label": "פושע",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:28:08.985Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 5061,
+  "islandToFirstFrameMs": 20910,
+  "playWallMs": 31896,
+  "simulationDeltaSeconds": 2.25,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 5061
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 31896,
+      "simulationDeltaSeconds": 2.25
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 5061
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "webassembly-disabled",
+      "pass": true,
+      "actual": {
+        "parent": false,
+        "child": null
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 31896
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 2.25,
+      "activeSamples": 11
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 61466.10000000009,
+        "wasmExposed": false,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 14,
+        "triangles": {
+          "min": 209983,
+          "max": 220637,
+          "mean": 212511.64
+        },
+        "drawCalls": {
+          "min": 116,
+          "max": 140,
+          "mean": 134.64
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 20904.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 8
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 20904.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 8
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 22190.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 12
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 24792.700000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 20
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 27286.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 28
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 29475.399999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 35
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 32283.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 45
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 35144.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 53
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 37411.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 209983,
+        "drawCalls": 139,
+        "frame": 60
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 209983,
+      "drawCalls": 139
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 40733.200000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0.4333333333333333,
+      "stateError": null,
+      "metrics": {
+        "triangles": 214859,
+        "drawCalls": 140,
+        "frame": 70
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 214859,
+      "drawCalls": 140
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 44065.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 0.9333333333333346,
+      "stateError": null,
+      "metrics": {
+        "triangles": 214204,
+        "drawCalls": 116,
+        "frame": 80
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 214204,
+      "drawCalls": 116
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 47276.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 1.3833333333333333,
+      "stateError": null,
+      "metrics": {
+        "triangles": 220637,
+        "drawCalls": 121,
+        "frame": 89
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 220637,
+      "drawCalls": 121
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 50909.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 1.8333333333333317,
+      "stateError": null,
+      "metrics": {
+        "triangles": 217766,
+        "drawCalls": 130,
+        "frame": 98
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 217766,
+      "drawCalls": 130
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "catchCriminal",
+      "atMs": 54100.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "chase",
+      "quality": null,
+      "simulationSeconds": 2.249999999999997,
+      "stateError": null,
+      "metrics": {
+        "triangles": 217850,
+        "drawCalls": 127,
+        "frame": 107
+      },
+      "mode": null,
+      "catchV6": true,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 217850,
+      "drawCalls": 127
+    }
+  ],
+  "screenshots": {
+    "opening": "catchCriminal/baseline/opening.png",
+    "play30": "catchCriminal/baseline/play30.png",
+    "finish": "catchCriminal/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:28:25.337Z",
+        "url": "http://127.0.0.1:36509/workout/island/assets/game-catch/models/shop.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:28:25.340Z",
+        "url": "http://127.0.0.1:36509/workout/island/assets/game-catch/models/police-station.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:28:25.344Z",
+        "url": "http://127.0.0.1:36509/workout/island/assets/game-catch/models/lamp.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:28:11.421Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:28:09.183Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 58
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 14,
+    "triangles": {
+      "min": 209983,
+      "max": 220637,
+      "mean": 212511.64
+    },
+    "drawCalls": {
+      "min": 116,
+      "max": 140,
+      "mean": 134.64
+    }
+  },
+  "finishedAt": "2026-11-17T15:29:10.658Z",
+  "durationMs": 61673
+}

@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "game": "alpineRush",
+  "label": "סקי",
+  "variant": "ski-env-off",
+  "scenario": "opening",
+  "startedAt": "2026-11-17T15:53:23.263Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+  "query": {
+    "env": "off"
+  },
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": false,
+  "firstFrameMs": 4972,
+  "islandToFirstFrameMs": 29223,
+  "playWallMs": 0,
+  "playActiveMs": 0,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 4972
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 4972
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "url-flag-observed",
+      "pass": true,
+      "path": "metrics.environment",
+      "expected": null,
+      "actual": null
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 2,
+        "triangles": {
+          "min": 366519,
+          "max": 366519,
+          "mean": 366519
+        },
+        "drawCalls": {
+          "min": 66,
+          "max": 66,
+          "mean": 66
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29217.399999999907,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 366519,
+        "drawCalls": 66,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 366519,
+      "drawCalls": 66
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29217.399999999907,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 366519,
+        "drawCalls": 66,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 366519,
+      "drawCalls": 66
+    }
+  ],
+  "screenshots": {
+    "opening": "alpineRush/ski-env-off/opening.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.143Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/rock.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.143Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/ski-slope.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.144Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/fir-a.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.144Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/fir-b.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.145Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/fir-c.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.145Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/models/slalom-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.174Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/mogul.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.174Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/ice-wall.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.174Z",
+        "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/finish-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.143Z",
+        "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:42.759Z",
+        "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:25.775Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:43.860Z",
+        "text": "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+        "location": {
+          "url": "http://127.0.0.1:35417/workout/island/vendor/three.module.js",
+          "line": 5,
+          "column": 311494,
+          "lineNumber": 5,
+          "columnNumber": 311494
+        },
+        "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:53:23.934Z",
+        "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 47
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 2,
+    "triangles": {
+      "min": 366519,
+      "max": 366519,
+      "mean": 366519
+    },
+    "drawCalls": {
+      "min": 66,
+      "max": 66,
+      "mean": 66
+    }
+  },
+  "finishedAt": "2026-11-17T15:53:57.053Z",
+  "durationMs": 33790
+}

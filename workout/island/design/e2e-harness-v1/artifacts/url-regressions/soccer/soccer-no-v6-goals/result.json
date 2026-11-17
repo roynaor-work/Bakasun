@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "game": "soccer",
+  "label": "כדורגל",
+  "variant": "soccer-no-v6-goals",
+  "scenario": "opening",
+  "startedAt": "2026-11-17T15:51:04.459Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+  "query": {
+    "soccerV6": "0"
+  },
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": false,
+  "firstFrameMs": 6262,
+  "islandToFirstFrameMs": 30258,
+  "playWallMs": 0,
+  "playActiveMs": 0,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 6262
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 6262
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "url-flag-observed",
+      "pass": true,
+      "path": "metrics.designScene.goals",
+      "expected": "v5",
+      "actual": "v5"
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 2,
+        "triangles": {
+          "min": 74210,
+          "max": 74210,
+          "mean": 74210
+        },
+        "drawCalls": {
+          "min": 76,
+          "max": 76,
+          "mean": 76
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 30223.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 74210,
+        "drawCalls": 76,
+        "mode": null,
+        "quality": 0,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v5"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 74210,
+      "drawCalls": 76
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "soccer",
+      "atMs": 30223.200000000186,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "playing",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 74210,
+        "drawCalls": 76,
+        "mode": null,
+        "quality": 0,
+        "frame": null,
+        "assetStatus": "ready",
+        "assetStats": {
+          "kind": "athlete-body-v2",
+          "characterSet": "athlete",
+          "source": "assets/soccer-v24/body"
+        },
+        "designScene": {
+          "status": "ready",
+          "failure": null,
+          "goals": "v5"
+        },
+        "characterVersion": null,
+        "modelCount": 11,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 74210,
+      "drawCalls": 76
+    }
+  ],
+  "screenshots": {
+    "opening": "soccer/soccer-no-v6-goals/opening.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:26.307Z",
+        "url": "http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/crop.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:26.307Z",
+        "url": "http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/buzz.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:29.650Z",
+        "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:29.659Z",
+        "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:06.475Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:51:04.755Z",
+        "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 44
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 2,
+    "triangles": {
+      "min": 74210,
+      "max": 74210,
+      "mean": 74210
+    },
+    "drawCalls": {
+      "min": 76,
+      "max": 76,
+      "mean": 76
+    }
+  },
+  "finishedAt": "2026-11-17T15:51:36.958Z",
+  "durationMs": 32499
+}

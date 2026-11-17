@@ -1,0 +1,4657 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-17T16:05:13.587Z",
+  "metadata": {
+    "suite": "URL rollback openings via runScenario API",
+    "revision": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "node": "v24.19.0",
+    "noWasm": false,
+    "scenario": "opening"
+  },
+  "summary": {
+    "total": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "results": [
+    {
+      "schemaVersion": 1,
+      "game": "soccer",
+      "label": "כדורגל",
+      "variant": "soccer-v4",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:50:30.360Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?soccerChars=v4&dev=1",
+      "query": {
+        "soccerChars": "v4"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 6307,
+      "islandToFirstFrameMs": 31189,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 6307
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 6307
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.assetStats.characterSet",
+          "expected": "v4",
+          "actual": "v4"
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 97887,
+              "max": 97887,
+              "mean": 97887
+            },
+            "drawCalls": {
+              "min": 58,
+              "max": 58,
+              "mean": 58
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "soccer",
+          "atMs": 31179.900000000373,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "playing",
+          "quality": 2,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 97887,
+            "drawCalls": 58,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": "ready",
+            "assetStats": {
+              "kind": "design-glb-v2",
+              "characterSet": "v4",
+              "source": "design/characters2"
+            },
+            "designScene": {
+              "status": "ready",
+              "failure": null,
+              "goals": "v6"
+            },
+            "characterVersion": null,
+            "modelCount": 11,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 717,
+            "bufferHeight": 331
+          },
+          "triangles": 97887,
+          "drawCalls": 58
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "soccer",
+          "atMs": 31179.900000000373,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "playing",
+          "quality": 2,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 97887,
+            "drawCalls": 58,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": "ready",
+            "assetStats": {
+              "kind": "design-glb-v2",
+              "characterSet": "v4",
+              "source": "design/characters2"
+            },
+            "designScene": {
+              "status": "ready",
+              "failure": null,
+              "goals": "v6"
+            },
+            "characterVersion": null,
+            "modelCount": 11,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 717,
+            "bufferHeight": 331
+          },
+          "triangles": 97887,
+          "drawCalls": 58
+        }
+      ],
+      "screenshots": {
+        "opening": "soccer/soccer-v4/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:50:53.221Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:50:56.558Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:50:56.558Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:50:33.028Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?soccerChars=v4&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:50:30.707Z",
+            "url": "http://127.0.0.1:35417/workout/island/?soccerChars=v4&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 44
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?soccerChars=v4&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 97887,
+          "max": 97887,
+          "mean": 97887
+        },
+        "drawCalls": {
+          "min": 58,
+          "max": 58,
+          "mean": 58
+        }
+      },
+      "finishedAt": "2026-11-17T15:51:04.451Z",
+      "durationMs": 34091
+    },
+    {
+      "schemaVersion": 1,
+      "game": "soccer",
+      "label": "כדורגל",
+      "variant": "soccer-no-v6-goals",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:51:04.459Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+      "query": {
+        "soccerV6": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 6262,
+      "islandToFirstFrameMs": 30258,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 6262
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 6262
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.designScene.goals",
+          "expected": "v5",
+          "actual": "v5"
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 74210,
+              "max": 74210,
+              "mean": 74210
+            },
+            "drawCalls": {
+              "min": 76,
+              "max": 76,
+              "mean": 76
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "soccer",
+          "atMs": 30223.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "playing",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 74210,
+            "drawCalls": 76,
+            "mode": null,
+            "quality": 0,
+            "frame": null,
+            "assetStatus": "ready",
+            "assetStats": {
+              "kind": "athlete-body-v2",
+              "characterSet": "athlete",
+              "source": "assets/soccer-v24/body"
+            },
+            "designScene": {
+              "status": "ready",
+              "failure": null,
+              "goals": "v5"
+            },
+            "characterVersion": null,
+            "modelCount": 11,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 74210,
+          "drawCalls": 76
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "soccer",
+          "atMs": 30223.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "playing",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 74210,
+            "drawCalls": 76,
+            "mode": null,
+            "quality": 0,
+            "frame": null,
+            "assetStatus": "ready",
+            "assetStats": {
+              "kind": "athlete-body-v2",
+              "characterSet": "athlete",
+              "source": "assets/soccer-v24/body"
+            },
+            "designScene": {
+              "status": "ready",
+              "failure": null,
+              "goals": "v5"
+            },
+            "characterVersion": null,
+            "modelCount": 11,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 74210,
+          "drawCalls": 76
+        }
+      ],
+      "screenshots": {
+        "opening": "soccer/soccer-no-v6-goals/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:26.307Z",
+            "url": "http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/crop.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:26.307Z",
+            "url": "http://127.0.0.1:35417/workout/island/assets/athlete-body-v22/hair/buzz.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:29.650Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:29.659Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:06.475Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:04.755Z",
+            "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 44
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?soccerV6=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 74210,
+          "max": 74210,
+          "mean": 74210
+        },
+        "drawCalls": {
+          "min": 76,
+          "max": 76,
+          "mean": 76
+        }
+      },
+      "finishedAt": "2026-11-17T15:51:36.958Z",
+      "durationMs": 32499
+    },
+    {
+      "schemaVersion": 1,
+      "game": "streetSlam",
+      "label": "כדורסל",
+      "variant": "hoops-v4",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:51:36.965Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&dev=1",
+      "query": {
+        "athleteBody": "0",
+        "hoopsTall": "0",
+        "hoopsV7": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 9784,
+      "islandToFirstFrameMs": 32692,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 9784
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 9784
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.characterVersion",
+          "expected": 4,
+          "actual": 4
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 92050,
+              "max": 92050,
+              "mean": 92050
+            },
+            "drawCalls": {
+              "min": 61,
+              "max": 61,
+              "mean": 61
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "streetSlam",
+          "atMs": 32686.69999999972,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "jumpball",
+          "quality": 2,
+          "simulationSeconds": 0.26666666666666666,
+          "stateError": null,
+          "metrics": {
+            "triangles": 92050,
+            "drawCalls": 61,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": 4,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 92050,
+          "drawCalls": 61
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "streetSlam",
+          "atMs": 32686.69999999972,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "jumpball",
+          "quality": 2,
+          "simulationSeconds": 0.26666666666666666,
+          "stateError": null,
+          "metrics": {
+            "triangles": 92050,
+            "drawCalls": 61,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": 4,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 92050,
+          "drawCalls": 61
+        }
+      ],
+      "screenshots": {
+        "opening": "streetSlam/hoops-v4/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:01.803Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:02.052Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:39.048Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:51:37.164Z",
+            "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 31
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 92050,
+          "max": 92050,
+          "mean": 92050
+        },
+        "drawCalls": {
+          "min": 61,
+          "max": 61,
+          "mean": 61
+        }
+      },
+      "finishedAt": "2026-11-17T15:52:12.257Z",
+      "durationMs": 35292
+    },
+    {
+      "schemaVersion": 1,
+      "game": "streetSlam",
+      "label": "כדורסל",
+      "variant": "hoops-v3",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:52:12.268Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+      "query": {
+        "athleteBody": "0",
+        "hoopsTall": "0",
+        "hoopsV7": "0",
+        "hoopsV4": "0",
+        "hoopsV5": "0",
+        "hoopsV8": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 9821,
+      "islandToFirstFrameMs": 33337,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 9821
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 9821
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.characterVersion",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 62198,
+              "max": 62198,
+              "mean": 62198
+            },
+            "drawCalls": {
+              "min": 50,
+              "max": 50,
+              "mean": 50
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "streetSlam",
+          "atMs": 33329.10000000009,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "jumpball",
+          "quality": 2,
+          "simulationSeconds": 0.16666666666666666,
+          "stateError": null,
+          "metrics": {
+            "triangles": 62198,
+            "drawCalls": 50,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": 1,
+            "modelCount": null,
+            "reflection": {
+              "width": 304,
+              "height": 140,
+              "calls": 23,
+              "triangles": 35625
+            },
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 62198,
+          "drawCalls": 50
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "streetSlam",
+          "atMs": 33329.10000000009,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "jumpball",
+          "quality": 2,
+          "simulationSeconds": 0.16666666666666666,
+          "stateError": null,
+          "metrics": {
+            "triangles": 62198,
+            "drawCalls": 50,
+            "mode": null,
+            "quality": 2,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": 1,
+            "modelCount": null,
+            "reflection": {
+              "width": 304,
+              "height": 140,
+              "calls": 23,
+              "triangles": 35625
+            },
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 62198,
+          "drawCalls": 50
+        }
+      ],
+      "screenshots": {
+        "opening": "streetSlam/hoops-v3/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:37.974Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-forward-lod.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:37.974Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-big-lod.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:37.975Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/hoops/lod/hoops-wing-lod.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:37.685Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:15.093Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:13.145Z",
+            "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 31
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?athleteBody=0&hoopsTall=0&hoopsV7=0&hoopsV4=0&hoopsV5=0&hoopsV8=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 62198,
+          "max": 62198,
+          "mean": 62198
+        },
+        "drawCalls": {
+          "min": 50,
+          "max": 50,
+          "mean": 50
+        }
+      },
+      "finishedAt": "2026-11-17T15:52:48.877Z",
+      "durationMs": 36609
+    },
+    {
+      "schemaVersion": 1,
+      "game": "alpineRush",
+      "label": "סקי",
+      "variant": "ski-low",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:52:48.891Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?quality=low&dev=1",
+      "query": {
+        "quality": "low"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 4191,
+      "islandToFirstFrameMs": 30233,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 4191
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 4191
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "quality",
+          "expected": "low",
+          "actual": "low"
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 153567,
+              "max": 153567,
+              "mean": 153567
+            },
+            "drawCalls": {
+              "min": 82,
+              "max": 82,
+              "mean": 82
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alpineRush",
+          "atMs": 30226.400000000373,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": "low",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 153567,
+            "drawCalls": 82,
+            "mode": "model",
+            "quality": "low",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": {
+              "id": "sunset",
+              "backgrounds": [
+                "landscape"
+              ],
+              "atlases": [
+                "powder-spray",
+                "snow-flecks",
+                "landing-cloud"
+              ],
+              "decals": true,
+              "tower": false,
+              "snowNormal": true,
+              "markers": 23,
+              "towers": 0,
+              "decalQuads": 11,
+              "ribbons": 0,
+              "flecks": 48,
+              "spotLights": 0,
+              "landingActive": 0,
+              "powderActive": 0
+            },
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "model",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 153567,
+          "drawCalls": 82
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alpineRush",
+          "atMs": 30226.400000000373,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": "low",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 153567,
+            "drawCalls": 82,
+            "mode": "model",
+            "quality": "low",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": {
+              "id": "sunset",
+              "backgrounds": [
+                "landscape"
+              ],
+              "atlases": [
+                "powder-spray",
+                "snow-flecks",
+                "landing-cloud"
+              ],
+              "decals": true,
+              "tower": false,
+              "snowNormal": true,
+              "markers": 23,
+              "towers": 0,
+              "decalQuads": 11,
+              "ribbons": 0,
+              "flecks": 48,
+              "spotLights": 0,
+              "landingActive": 0,
+              "powderActive": 0
+            },
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "model",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 153567,
+          "drawCalls": 82
+        }
+      ],
+      "screenshots": {
+        "opening": "alpineRush/ski-low/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:10.096Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/fir-a.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:10.100Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:10.619Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:51.139Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?quality=low&dev=1"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:11.831Z",
+            "text": "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+            "location": {
+              "url": "http://127.0.0.1:35417/workout/island/vendor/three.module.js",
+              "line": 5,
+              "column": 311494,
+              "lineNumber": 5,
+              "columnNumber": 311494
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?quality=low&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:52:49.341Z",
+            "url": "http://127.0.0.1:35417/workout/island/?quality=low&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 47
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?quality=low&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 153567,
+          "max": 153567,
+          "mean": 153567
+        },
+        "drawCalls": {
+          "min": 82,
+          "max": 82,
+          "mean": 82
+        }
+      },
+      "finishedAt": "2026-11-17T15:53:23.224Z",
+      "durationMs": 34332
+    },
+    {
+      "schemaVersion": 1,
+      "game": "alpineRush",
+      "label": "סקי",
+      "variant": "ski-env-off",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:53:23.263Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+      "query": {
+        "env": "off"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 4972,
+      "islandToFirstFrameMs": 29223,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 4972
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 4972
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.environment",
+          "expected": null,
+          "actual": null
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 366519,
+              "max": 366519,
+              "mean": 366519
+            },
+            "drawCalls": {
+              "min": 66,
+              "max": 66,
+              "mean": 66
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alpineRush",
+          "atMs": 29217.399999999907,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": "high",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 366519,
+            "drawCalls": 66,
+            "mode": "model",
+            "quality": "high",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "model",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 366519,
+          "drawCalls": 66
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alpineRush",
+          "atMs": 29217.399999999907,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": "high",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 366519,
+            "drawCalls": 66,
+            "mode": "model",
+            "quality": "high",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "model",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 366519,
+          "drawCalls": 66
+        }
+      ],
+      "screenshots": {
+        "opening": "alpineRush/ski-env-off/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.143Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/rock.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.143Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/ski-slope.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.144Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/fir-a.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.144Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/fir-b.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.145Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/fir-c.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.145Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/models/slalom-gate.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.174Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/mogul.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.174Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/ice-wall.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.174Z",
+            "url": "http://127.0.0.1:35417/workout/island/design/alpine-world/models/finish-gate.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.143Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:42.759Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:25.775Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1"
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:43.860Z",
+            "text": "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+            "location": {
+              "url": "http://127.0.0.1:35417/workout/island/vendor/three.module.js",
+              "line": 5,
+              "column": 311494,
+              "lineNumber": 5,
+              "columnNumber": 311494
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:23.934Z",
+            "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 47
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?env=off&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 366519,
+          "max": 366519,
+          "mean": 366519
+        },
+        "drawCalls": {
+          "min": 66,
+          "max": 66,
+          "mean": 66
+        }
+      },
+      "finishedAt": "2026-11-17T15:53:57.053Z",
+      "durationMs": 33790
+    },
+    {
+      "schemaVersion": 1,
+      "game": "tennis",
+      "label": "טניס",
+      "variant": "tennis-v24-loading",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:53:57.060Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?tennisLoad=v24&dev=1",
+      "query": {
+        "tennisLoad": "v24"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 3820,
+      "islandToFirstFrameMs": 25976,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 3820
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 3820
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.load.mode",
+          "expected": "v24",
+          "actual": "v24"
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 99224,
+              "max": 99224,
+              "mean": 99224
+            },
+            "drawCalls": {
+              "min": 89,
+              "max": 89,
+              "mean": 89
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "tennis",
+          "atMs": 25969.600000000093,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "serve",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 99224,
+            "drawCalls": 89,
+            "mode": null,
+            "quality": 0,
+            "frame": 8,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": {
+              "mode": "v24",
+              "venueMs": 439,
+              "charactersMs": 541
+            },
+            "characterLoaded": true,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 99224,
+          "drawCalls": 89
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "tennis",
+          "atMs": 25969.600000000093,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "serve",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 99224,
+            "drawCalls": 89,
+            "mode": null,
+            "quality": 0,
+            "frame": 8,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": null,
+            "load": {
+              "mode": "v24",
+              "venueMs": 439,
+              "charactersMs": 541
+            },
+            "characterLoaded": true,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": null,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 99224,
+          "drawCalls": 89
+        }
+      ],
+      "screenshots": {
+        "opening": "tennis/tennis-v24-loading/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:21.383Z",
+            "url": "http://127.0.0.1:35417/workout/island/assets/tennis-crowd-v22/runtime/lod1/fan-12.glb",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:21.067Z",
+            "url": "http://127.0.0.1:35417/workout/island/vendor/draco/draco_decoder.wasm",
+            "type": "fetch"
+          }
+        ],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:59.763Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?tennisLoad=v24&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:53:58.117Z",
+            "url": "http://127.0.0.1:35417/workout/island/?tennisLoad=v24&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 42
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?tennisLoad=v24&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 99224,
+          "max": 99224,
+          "mean": 99224
+        },
+        "drawCalls": {
+          "min": 89,
+          "max": 89,
+          "mean": 89
+        }
+      },
+      "finishedAt": "2026-11-17T15:54:24.888Z",
+      "durationMs": 27828
+    },
+    {
+      "schemaVersion": 1,
+      "game": "islandRacing",
+      "label": "מרוצים",
+      "variant": "racing-no-v7",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:54:24.898Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?racingV7=0&dev=1",
+      "query": {
+        "racingV7": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 10284,
+      "islandToFirstFrameMs": 26395,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 10284
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 10284
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.v7.enabled",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 344750,
+              "max": 344750,
+              "mean": 344750
+            },
+            "drawCalls": {
+              "min": 213,
+              "max": 213,
+              "mean": 213
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "islandRacing",
+          "atMs": 26387.5,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 344750,
+            "drawCalls": 213,
+            "mode": "webgl",
+            "quality": 0,
+            "frame": 8,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": {
+              "enabled": false,
+              "active": false
+            },
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "webgl",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 344750,
+          "drawCalls": 213
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "islandRacing",
+          "atMs": 26387.5,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "countdown",
+          "quality": 0,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 344750,
+            "drawCalls": 213,
+            "mode": "webgl",
+            "quality": 0,
+            "frame": 8,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": {
+              "enabled": false,
+              "active": false
+            },
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "webgl",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 344750,
+          "drawCalls": 213
+        }
+      ],
+      "screenshots": {
+        "opening": "islandRacing/racing-no-v7/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:42.502Z",
+            "url": "http://127.0.0.1:35417/workout/island/assets/racing-formula-cars-v1/formula-lod0.glb?v=island-v2-20261107-15",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:26.870Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?racingV7=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:25.214Z",
+            "url": "http://127.0.0.1:35417/workout/island/?racingV7=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 12
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?racingV7=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 344750,
+          "max": 344750,
+          "mean": 344750
+        },
+        "drawCalls": {
+          "min": 213,
+          "max": 213,
+          "mean": 213
+        }
+      },
+      "finishedAt": "2026-11-17T15:54:56.086Z",
+      "durationMs": 31188
+    },
+    {
+      "schemaVersion": 1,
+      "game": "alienDefense",
+      "label": "חלליות",
+      "variant": "alien-no-v7",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:54:56.130Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?defenseV7=0&dev=1",
+      "query": {
+        "defenseV7": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 3676,
+      "islandToFirstFrameMs": 26297,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 3676
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 3676
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.defenseV7",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 3202,
+              "max": 3202,
+              "mean": 3202
+            },
+            "drawCalls": {
+              "min": 14,
+              "max": 14,
+              "mean": 14
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alienDefense",
+          "atMs": 26288.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": null,
+          "quality": null,
+          "simulationSeconds": 0.08,
+          "stateError": null,
+          "metrics": {
+            "triangles": 3202,
+            "drawCalls": 14,
+            "mode": null,
+            "quality": null,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": false,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 3202,
+          "drawCalls": 14
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "alienDefense",
+          "atMs": 26288.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": null,
+          "quality": null,
+          "simulationSeconds": 0.08,
+          "stateError": null,
+          "metrics": {
+            "triangles": 3202,
+            "drawCalls": 14,
+            "mode": null,
+            "quality": null,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": null,
+            "defenseV7": false,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 3202,
+          "drawCalls": 14
+        }
+      ],
+      "screenshots": {
+        "opening": "alienDefense/alien-no-v7/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:59.024Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?defenseV7=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:54:57.287Z",
+            "url": "http://127.0.0.1:35417/workout/island/?defenseV7=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 31
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?defenseV7=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 3202,
+          "max": 3202,
+          "mean": 3202
+        },
+        "drawCalls": {
+          "min": 14,
+          "max": 14,
+          "mean": 14
+        }
+      },
+      "finishedAt": "2026-11-17T15:55:24.291Z",
+      "durationMs": 28161
+    },
+    {
+      "schemaVersion": 1,
+      "game": "navalDuel",
+      "label": "ספינות",
+      "variant": "naval-no-v7",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:55:24.302Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+      "query": {
+        "navalV7": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 3967,
+      "islandToFirstFrameMs": 28760,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 3967
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 3967
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.v7.enabled",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 49625,
+              "max": 49625,
+              "mean": 49625
+            },
+            "drawCalls": {
+              "min": 20,
+              "max": 20,
+              "mean": 20
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "navalDuel",
+          "atMs": 28750,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "aim",
+          "quality": "full",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 49625,
+            "drawCalls": 20,
+            "mode": null,
+            "quality": "full",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": {
+              "enabled": false
+            },
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": {
+              "revision": "ultra-naval-3",
+              "detailedNormals": true,
+              "water": "reflective",
+              "reflectionSize": 256,
+              "reflectionCaptures": 1,
+              "mirror": {
+                "calls": 14,
+                "triangles": 8356,
+                "peakCalls": 14,
+                "peakTriangles": 8356
+              },
+              "waterTime": 0,
+              "shallowBanks": 3,
+              "fallbackRipples": true,
+              "disposed": false
+            },
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 49625,
+          "drawCalls": 20
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "navalDuel",
+          "atMs": 28750,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "aim",
+          "quality": "full",
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 49625,
+            "drawCalls": 20,
+            "mode": null,
+            "quality": "full",
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": {
+              "enabled": false
+            },
+            "fireV7": null,
+            "defenseV7": null,
+            "load": null,
+            "environment": {
+              "revision": "ultra-naval-3",
+              "detailedNormals": true,
+              "water": "reflective",
+              "reflectionSize": 256,
+              "reflectionCaptures": 1,
+              "mirror": {
+                "calls": 14,
+                "triangles": 8356,
+                "peakCalls": 14,
+                "peakTriangles": 8356
+              },
+              "waterTime": 0,
+              "shallowBanks": 3,
+              "fallbackRipples": true,
+              "disposed": false
+            },
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 49625,
+          "drawCalls": 20
+        }
+      ],
+      "screenshots": {
+        "opening": "navalDuel/naval-no-v7/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:55:27.145Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:55:25.023Z",
+            "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 66
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 49625,
+          "max": 49625,
+          "mean": 49625
+        },
+        "drawCalls": {
+          "min": 20,
+          "max": 20,
+          "mean": 20
+        }
+      },
+      "finishedAt": "2026-11-17T15:55:54.634Z",
+      "durationMs": 30332
+    },
+    {
+      "schemaVersion": 1,
+      "game": "fireRescue",
+      "label": "כיבוי אש",
+      "variant": "fire-no-v7",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:55:54.680Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?fireV7=0&dev=1",
+      "query": {
+        "fireV7": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 3324,
+      "islandToFirstFrameMs": 26436,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 3324
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 3324
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "metrics.fireV7.enabled",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 64519,
+              "max": 64519,
+              "mean": 64519
+            },
+            "drawCalls": {
+              "min": 30,
+              "max": 30,
+              "mean": 30
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "fireRescue",
+          "atMs": 26417.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": null,
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 64519,
+            "drawCalls": 30,
+            "mode": null,
+            "quality": null,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": {
+              "enabled": false,
+              "level": 2
+            },
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 64519,
+          "drawCalls": 30
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "fireRescue",
+          "atMs": 26417.200000000186,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": null,
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 64519,
+            "drawCalls": 30,
+            "mode": null,
+            "quality": null,
+            "frame": null,
+            "assetStatus": null,
+            "assetStats": null,
+            "designScene": null,
+            "characterVersion": null,
+            "modelCount": null,
+            "reflection": null,
+            "v7": null,
+            "fireV7": {
+              "enabled": false,
+              "level": 2
+            },
+            "defenseV7": null,
+            "load": null,
+            "characterLoaded": null,
+            "bufferWidth": null,
+            "bufferHeight": null
+          },
+          "mode": "three",
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 64519,
+          "drawCalls": 30
+        }
+      ],
+      "screenshots": {
+        "opening": "fireRescue/fire-no-v7/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:56:19.825Z",
+            "url": "http://127.0.0.1:35417/workout/island/assets/models/apartment-block-512.glb?v=island-v2-20261107-15",
+            "type": "fetch",
+            "reason": "net::ERR_ABORTED"
+          }
+        ],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:55:57.795Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?fireV7=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:55:55.445Z",
+            "url": "http://127.0.0.1:35417/workout/island/?fireV7=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 31
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?fireV7=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 64519,
+          "max": 64519,
+          "mean": 64519
+        },
+        "drawCalls": {
+          "min": 30,
+          "max": 30,
+          "mean": 30
+        }
+      },
+      "finishedAt": "2026-11-17T15:56:23.297Z",
+      "durationMs": 28616
+    },
+    {
+      "schemaVersion": 1,
+      "game": "catchCriminal",
+      "label": "פושע",
+      "variant": "catch-v5",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:56:23.303Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?catchV6=0&dev=1",
+      "query": {
+        "catchV6": "0"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 4900,
+      "islandToFirstFrameMs": 21940,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 4900
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 4900
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "catchV6",
+          "expected": false,
+          "actual": false
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 175920,
+              "max": 175920,
+              "mean": 175920
+            },
+            "drawCalls": {
+              "min": 97,
+              "max": 97,
+              "mean": 97
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "catchCriminal",
+          "atMs": 21935.399999999907,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "chase",
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 175920,
+            "drawCalls": 97,
+            "frame": 8
+          },
+          "mode": null,
+          "catchV6": false,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 175920,
+          "drawCalls": 97
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "catchCriminal",
+          "atMs": 21935.399999999907,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "chase",
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 175920,
+            "drawCalls": 97,
+            "frame": 8
+          },
+          "mode": null,
+          "catchV6": false,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 175920,
+          "drawCalls": 97
+        }
+      ],
+      "screenshots": {
+        "opening": "catchCriminal/catch-v5/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:56:25.361Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?catchV6=0&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:56:23.733Z",
+            "url": "http://127.0.0.1:35417/workout/island/?catchV6=0&dev=1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 14
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?catchV6=0&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 175920,
+          "max": 175920,
+          "mean": 175920
+        },
+        "drawCalls": {
+          "min": 97,
+          "max": 97,
+          "mean": 97
+        }
+      },
+      "finishedAt": "2026-11-17T15:56:48.297Z",
+      "durationMs": 24995
+    },
+    {
+      "schemaVersion": 1,
+      "game": "boarDefense",
+      "label": "חזירים",
+      "variant": "boar-v1",
+      "scenario": "opening",
+      "startedAt": "2026-11-17T15:56:48.323Z",
+      "status": "passed",
+      "url": "http://127.0.0.1:35417/workout/island/?boar=v1&dev=1",
+      "query": {
+        "boar": "v1"
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "device": {
+        "hasTouch": true,
+        "isMobile": true,
+        "deviceScaleFactor": 1
+      },
+      "launchArgs": [
+        "--use-gl=angle",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader"
+      ],
+      "noWasm": false,
+      "finishMode": "exit",
+      "requestedPlayMs": 30000,
+      "standard30Seconds": false,
+      "firstFrameMs": 2328,
+      "islandToFirstFrameMs": 22701,
+      "playWallMs": 0,
+      "playActiveMs": 0,
+      "replays": 0,
+      "naturalEnds": [],
+      "simulationDeltaSeconds": null,
+      "checkpoints": [
+        {
+          "name": "opening",
+          "status": "passed",
+          "checks": [
+            {
+              "name": "zero-console-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-errors",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-csp-violations",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "zero-page-crashes",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "diagnostics-observers-active",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            }
+          ],
+          "firstFrameMs": 2328
+        }
+      ],
+      "checks": [
+        {
+          "name": "game-first-frame",
+          "pass": true,
+          "actual": 2328
+        },
+        {
+          "name": "mobile-viewport",
+          "pass": true,
+          "actual": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          }
+        },
+        {
+          "name": "application-csp-present",
+          "pass": true,
+          "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+        },
+        {
+          "name": "url-flag-observed",
+          "pass": true,
+          "path": "boarFlags.LEGACY",
+          "expected": true,
+          "actual": true
+        },
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-session-errors",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "name": "render-counters-available",
+          "pass": true,
+          "actual": {
+            "samples": 2,
+            "triangles": {
+              "min": 331456,
+              "max": 331456,
+              "mean": 331456
+            },
+            "drawCalls": {
+              "min": 211,
+              "max": 211,
+              "mean": 211
+            }
+          }
+        }
+      ],
+      "samples": [
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "boarDefense",
+          "atMs": 22692.600000000093,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "battle",
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 331456,
+            "calls": 211,
+            "frame": 38
+          },
+          "mode": null,
+          "childWasmExposed": true,
+          "boarFlags": {
+            "TOUCH": true,
+            "AIMSTICK": false,
+            "FIRE_V21": false,
+            "HUD_V21": false,
+            "STICK_V21": false,
+            "LEGACY": true,
+            "AIM_V24": false,
+            "AIM_V241": false,
+            "FX_V241": false
+          },
+          "boarShots": 0,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 331456,
+          "drawCalls": 211
+        },
+        {
+          "apiReady": true,
+          "active": true,
+          "id": "boarDefense",
+          "atMs": 22692.600000000093,
+          "wasmExposed": true,
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 1
+          },
+          "menuVisible": false,
+          "resultVisible": false,
+          "current": true,
+          "historyDepth": 2,
+          "paused": false,
+          "starting": false,
+          "phase": "battle",
+          "quality": null,
+          "simulationSeconds": 0,
+          "stateError": null,
+          "metrics": {
+            "triangles": 331456,
+            "calls": 211,
+            "frame": 38
+          },
+          "mode": null,
+          "childWasmExposed": true,
+          "boarFlags": {
+            "TOUCH": true,
+            "AIMSTICK": false,
+            "FIRE_V21": false,
+            "HUD_V21": false,
+            "STICK_V21": false,
+            "LEGACY": true,
+            "AIM_V24": false,
+            "AIM_V241": false,
+            "FX_V241": false
+          },
+          "boarShots": 0,
+          "canvas": {
+            "width": 844,
+            "height": 390,
+            "bufferWidth": 844,
+            "bufferHeight": 390
+          },
+          "triangles": 331456,
+          "drawCalls": 211
+        }
+      ],
+      "screenshots": {
+        "opening": "boarDefense/boar-v1/opening.png"
+      },
+      "diagnostics": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "cspViolations": [],
+        "failedRequests": [],
+        "wasmRequests": [],
+        "warnings": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:56:50.934Z",
+            "text": "Service Worker registration blocked by Playwright",
+            "location": {
+              "url": "",
+              "line": 2,
+              "column": 86,
+              "lineNumber": 2,
+              "columnNumber": 86
+            },
+            "url": "http://127.0.0.1:35417/workout/island/?boar=v1&dev=1"
+          }
+        ],
+        "crashes": [],
+        "cspDocuments": [
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:56:49.166Z",
+            "url": "http://127.0.0.1:35417/workout/island/?boar=v1&dev=1",
+            "header": null
+          },
+          {
+            "phase": "opening",
+            "at": "2026-11-17T15:57:05.882Z",
+            "url": "http://127.0.0.1:35417/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1&boar=v1",
+            "header": null
+          }
+        ],
+        "monitorErrors": []
+      },
+      "input": {
+        "transport": "CDP Input.dispatchTouchEvent",
+        "events": 8
+      },
+      "failure": null,
+      "browserVersion": "151.0.7922.173",
+      "wasmExposedBeforeNavigation": true,
+      "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+      "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+      "documentPolicies": [
+        {
+          "url": "http://127.0.0.1:35417/workout/island/?boar=v1&dev=1",
+          "meta": [
+            "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+          ]
+        },
+        {
+          "url": "http://127.0.0.1:35417/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1&boar=v1",
+          "meta": []
+        }
+      ],
+      "render": {
+        "samples": 2,
+        "triangles": {
+          "min": 331456,
+          "max": 331456,
+          "mean": 331456
+        },
+        "drawCalls": {
+          "min": 211,
+          "max": 211,
+          "mean": 211
+        }
+      },
+      "finishedAt": "2026-11-17T15:57:16.491Z",
+      "durationMs": 28168
+    }
+  ]
+}

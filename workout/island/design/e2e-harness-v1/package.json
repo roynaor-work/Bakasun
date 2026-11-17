@@ -1,0 +1,10 @@
+{
+  "name": "island-e2e-harness-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/tests/*.test.mjs",
+    "run": "node src/cli.mjs"
+  },
+  "peerDependencies": { "playwright": ">=1.51 <2" }
+}

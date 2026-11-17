@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "game": "navalDuel",
+  "label": "ספינות",
+  "variant": "naval-no-v7",
+  "scenario": "opening",
+  "startedAt": "2026-11-17T15:55:24.302Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+  "query": {
+    "navalV7": "0"
+  },
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": false,
+  "firstFrameMs": 3967,
+  "islandToFirstFrameMs": 28760,
+  "playWallMs": 0,
+  "playActiveMs": 0,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 3967
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 3967
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "url-flag-observed",
+      "pass": true,
+      "path": "metrics.v7.enabled",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 2,
+        "triangles": {
+          "min": 49625,
+          "max": 49625,
+          "mean": 49625
+        },
+        "drawCalls": {
+          "min": 20,
+          "max": 20,
+          "mean": 20
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 28750,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "aim",
+      "quality": "full",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49625,
+        "drawCalls": 20,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 1,
+          "mirror": {
+            "calls": 14,
+            "triangles": 8356,
+            "peakCalls": 14,
+            "peakTriangles": 8356
+          },
+          "waterTime": 0,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49625,
+      "drawCalls": 20
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 28750,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "aim",
+      "quality": "full",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49625,
+        "drawCalls": 20,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 1,
+          "mirror": {
+            "calls": 14,
+            "triangles": 8356,
+            "peakCalls": 14,
+            "peakTriangles": 8356
+          },
+          "waterTime": 0,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49625,
+      "drawCalls": 20
+    }
+  ],
+  "screenshots": {
+    "opening": "navalDuel/naval-no-v7/opening.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:55:27.145Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:55:25.023Z",
+        "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 66
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:35417/workout/island/?navalV7=0&dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 2,
+    "triangles": {
+      "min": 49625,
+      "max": 49625,
+      "mean": 49625
+    },
+    "drawCalls": {
+      "min": 20,
+      "max": 20,
+      "mean": 20
+    }
+  },
+  "finishedAt": "2026-11-17T15:55:54.634Z",
+  "durationMs": 30332
+}

@@ -1,0 +1,2993 @@
+{
+  "schemaVersion": 1,
+  "game": "streetSlam",
+  "label": "כדורסל",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:20:02.773Z",
+  "status": "failed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": null,
+  "islandToFirstFrameMs": null,
+  "playWallMs": 0,
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "failed",
+      "reason": "Timed out after 45000 ms: streetSlam first rendered gameplay frame"
+    },
+    {
+      "name": "play30",
+      "status": "blocked",
+      "reason": "Timed out after 45000 ms: streetSlam first rendered gameplay frame"
+    },
+    {
+      "name": "finish",
+      "status": "blocked",
+      "reason": "Timed out after 45000 ms: streetSlam first rendered gameplay frame"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "opening-completed",
+      "pass": false,
+      "actual": "Timed out after 45000 ms: streetSlam first rendered gameplay frame"
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": false,
+      "actual": 17,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": false,
+      "actual": [
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly",
+        "Basketball Draco requires WebAssembly"
+      ]
+    },
+    {
+      "name": "render-counters-available",
+      "pass": false,
+      "actual": {
+        "samples": 0,
+        "triangles": null,
+        "drawCalls": null
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 26708.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 27237.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 27780.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 28310.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 28836.399999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 29359.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 29879.899999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 30396.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 30928.199999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 31472.399999999907,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 32005.699999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 32567.199999999953,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 33095.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 33622.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 34156,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 34688.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 35219.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 35742.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 36267,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 36788.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 37315.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 37838.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 38359,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 38882.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 39408.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 39942.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 40494,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 41069.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 41592.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 42119.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 42675,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 43207.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 43739.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 44261.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 44786.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 45309.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 45839.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 46365.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 46891.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 47416.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 47942.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 48461.89999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 48981,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 49504.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 50028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 50554.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 51072.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 51600.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 52126.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 52670.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 53193.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 53726.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 54255,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 54784.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 55314.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 55842.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 56372.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 56900.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 57426.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 57951.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 58476.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 59001.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 59524.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 60048.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 60574.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 61095.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 61626.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 62150.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 62678.299999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 63209,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 63740.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 64264.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 64792.39999999991,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 65356.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 65884.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 66416.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 66945.3999999999,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 67473.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 68001.09999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 68533.59999999986,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "streetSlam",
+      "atMs": 68919.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "jumpball",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": "Basketball Draco requires WebAssembly",
+      "metrics": null,
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 300,
+        "bufferHeight": 150
+      },
+      "triangles": null,
+      "drawCalls": null
+    }
+  ],
+  "screenshots": {
+    "failure": "streetSlam/baseline/failure.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.500Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.500Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 1)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.500Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 2)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.578Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.580Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 1)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.600Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 2)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.601Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 4)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.601Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 3)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.660Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.660Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.660Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.676Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.676Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.680Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.905Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.905Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.906Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async loadModel (http://127.0.0.1:36509/workout/island/minigames/hoops-models.mjs:120:54)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:05.343Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.498Z",
+        "text": "Basketball v4 v8 arena unavailable, using the v3 assets: Basketball Draco requires WebAssembly",
+        "location": {
+          "url": "http://127.0.0.1:36509/workout/island/minigames/hoops-view.mjs?v=island-v2-20261107-15",
+          "line": 45,
+          "column": 62,
+          "lineNumber": 45,
+          "columnNumber": 62
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.596Z",
+        "text": "Basketball v4 v5 arena unavailable, using the v3 assets: Basketball Draco requires WebAssembly",
+        "location": {
+          "url": "http://127.0.0.1:36509/workout/island/minigames/hoops-view.mjs?v=island-v2-20261107-15",
+          "line": 45,
+          "column": 62,
+          "lineNumber": 45,
+          "columnNumber": 62
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:27.654Z",
+        "text": "Basketball v4 arena unavailable, using the v3 assets: Basketball Draco requires WebAssembly",
+        "location": {
+          "url": "http://127.0.0.1:36509/workout/island/minigames/hoops-view.mjs?v=island-v2-20261107-15",
+          "line": 45,
+          "column": 62,
+          "lineNumber": 45,
+          "columnNumber": 62
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:20:03.018Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 31
+  },
+  "failure": {
+    "phase": "opening",
+    "message": "Timed out after 45000 ms: streetSlam first rendered gameplay frame",
+    "stack": "Error: Timed out after 45000 ms: streetSlam first rendered gameplay frame\n    at until (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/runtime.mjs:46:9)\n    at async runScenario (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/runner.mjs:79:19)\n    at async main (file:///workspace/Bakasun/workout/island/design/e2e-harness-v1/src/cli.mjs:85:22)"
+  },
+  "browserVersion": "151.0.7922.173",
+  "render": {
+    "samples": 0,
+    "triangles": null,
+    "drawCalls": null
+  },
+  "finishedAt": "2026-11-17T15:21:12.196Z",
+  "durationMs": 69423
+}

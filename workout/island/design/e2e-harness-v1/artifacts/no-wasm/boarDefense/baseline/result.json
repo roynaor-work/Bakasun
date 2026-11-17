@@ -1,0 +1,737 @@
+{
+  "schemaVersion": 1,
+  "game": "boarDefense",
+  "label": "חזירים",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:29:10.697Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 3377,
+  "islandToFirstFrameMs": 27665,
+  "playWallMs": 34228,
+  "simulationDeltaSeconds": 2.15,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 3377
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 34228,
+      "simulationDeltaSeconds": 2.15
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 3377
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "webassembly-disabled",
+      "pass": true,
+      "actual": {
+        "parent": false,
+        "child": false
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 34228
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 2.15,
+      "activeSamples": 5
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 79591.8999999999,
+        "wasmExposed": false,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 8,
+        "triangles": {
+          "min": 330494,
+          "max": 348038,
+          "mean": 336394.75
+        },
+        "drawCalls": {
+          "min": 178,
+          "max": 211,
+          "mean": 199.13
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 27661.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 330494,
+        "calls": 210,
+        "frame": 39
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 0,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 330494,
+      "drawCalls": 210
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 27661.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 330494,
+        "calls": 210,
+        "frame": 39
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 0,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 330494,
+      "drawCalls": 210
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 31463.19999999972,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 0.15000000000000002,
+      "stateError": null,
+      "metrics": {
+        "triangles": 336048,
+        "calls": 178,
+        "frame": 42
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 0,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 336048,
+      "drawCalls": 178
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 38676.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 0.6000000000000001,
+      "stateError": null,
+      "metrics": {
+        "triangles": 336374,
+        "calls": 192,
+        "frame": 52
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 1,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 336374,
+      "drawCalls": 192
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 45715.799999999814,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 1.0500000000000005,
+      "stateError": null,
+      "metrics": {
+        "triangles": 336498,
+        "calls": 192,
+        "frame": 61
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 2,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 336498,
+      "drawCalls": 192
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 52152.19999999972,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 1.4500000000000008,
+      "stateError": null,
+      "metrics": {
+        "triangles": 336594,
+        "calls": 199,
+        "frame": 69
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 3,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 336594,
+      "drawCalls": 199
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 59209.69999999972,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 1.9000000000000012,
+      "stateError": null,
+      "metrics": {
+        "triangles": 336618,
+        "calls": 201,
+        "frame": 78
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 4,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 336618,
+      "drawCalls": 201
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "boarDefense",
+      "atMs": 65709,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "battle",
+      "quality": null,
+      "simulationSeconds": 2.3000000000000003,
+      "stateError": null,
+      "metrics": {
+        "triangles": 348038,
+        "calls": 211,
+        "frame": 86
+      },
+      "mode": null,
+      "childWasmExposed": false,
+      "boarFlags": {
+        "TOUCH": true,
+        "AIMSTICK": true,
+        "FIRE_V21": true,
+        "HUD_V21": true,
+        "STICK_V21": true,
+        "LEGACY": false,
+        "AIM_V24": true,
+        "AIM_V241": true,
+        "FX_V241": true
+      },
+      "boarShots": 5,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 348038,
+      "drawCalls": 211
+    }
+  ],
+  "screenshots": {
+    "opening": "boarDefense/baseline/opening.png",
+    "play30": "boarDefense/baseline/play30.png",
+    "finish": "boarDefense/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:29:13.187Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:29:10.871Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:29:26.789Z",
+        "url": "http://127.0.0.1:36509/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 34
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:36509/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1",
+      "meta": []
+    }
+  ],
+  "render": {
+    "samples": 8,
+    "triangles": {
+      "min": 330494,
+      "max": 348038,
+      "mean": 336394.75
+    },
+    "drawCalls": {
+      "min": 178,
+      "max": 211,
+      "mean": 199.13
+    }
+  },
+  "finishedAt": "2026-11-17T15:30:30.477Z",
+  "durationMs": 79780
+}

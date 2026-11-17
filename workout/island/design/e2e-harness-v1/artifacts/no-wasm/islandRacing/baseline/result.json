@@ -1,0 +1,3419 @@
+{
+  "schemaVersion": 1,
+  "game": "islandRacing",
+  "label": "מרוצים",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:22:20.623Z",
+  "status": "failed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 8870,
+  "islandToFirstFrameMs": 27688,
+  "playWallMs": 30002,
+  "simulationDeltaSeconds": 0,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 13,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 8870
+    },
+    {
+      "name": "play30",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 13,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 30002,
+      "simulationDeltaSeconds": 0
+    },
+    {
+      "name": "finish",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 13,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 8870
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "webassembly-disabled",
+      "pass": true,
+      "actual": {
+        "parent": false,
+        "child": null
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 30002
+    },
+    {
+      "name": "game-progress",
+      "pass": false,
+      "actual": 0,
+      "activeSamples": 51
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 104875.80000000005,
+        "wasmExposed": false,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": false,
+      "actual": 13,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 54,
+        "triangles": {
+          "min": 344806,
+          "max": 344806,
+          "mean": 344806
+        },
+        "drawCalls": {
+          "min": 211,
+          "max": 211,
+          "mean": 211
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 27684.40000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 3,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 27684.40000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 3,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 32620.600000000093,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 8,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 33205.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 8,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 33823.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 9,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 34394.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 9,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 34991.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 10,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 35560.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 10,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 36130.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 11,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 36794,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 11,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 37371.40000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 12,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 37952.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 12,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 38506.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 13,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 39106.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 13,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 39679.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 14,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 40288.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 15,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 40860.40000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 15,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 41416.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 16,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 41997.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 16,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 42575.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 17,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 43200.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 17,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 43872.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 17,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 44431,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 18,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 45071.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 18,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 45677.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 19,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 46287.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 20,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 46872.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 20,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 47476.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 21,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 48060.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 21,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 48630.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 22,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 49255.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 22,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 49815.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 23,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 50389.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 23,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 50974.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 24,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 51570.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 24,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 52176.5,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 25,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 52802.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 26,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 53371.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 26,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 53932.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 27,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 54518,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 27,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 55088,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 28,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 55678.40000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 28,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 56275.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 29,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 56861.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 29,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 57422.80000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 30,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 58018.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 30,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 58593.90000000014,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 31,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 59179.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 31,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 59773.19999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 32,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 60400.69999999995,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 32,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 61003.30000000005,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 33,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 61551.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 34,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 62172.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 34,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "islandRacing",
+      "atMs": 62622.60000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 344806,
+        "drawCalls": 211,
+        "mode": "webgl",
+        "quality": 0,
+        "frame": 34,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true,
+          "active": false
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "webgl",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 344806,
+      "drawCalls": 211
+    }
+  ],
+  "screenshots": {
+    "opening": "islandRacing/baseline/opening.png",
+    "play30": "islandRacing/baseline/play30.png",
+    "finish": "islandRacing/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.025Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.071Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 1)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.071Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 2)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.072Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 3)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.072Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 4)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.074Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 5)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 6)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 7)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 8)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 10)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 9)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 11)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.078Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.allSettled (index 12)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.149Z",
+        "url": "http://127.0.0.1:36509/workout/island/design/racing-environment-v2/runtime/grandstand.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.464Z",
+        "url": "http://127.0.0.1:36509/workout/island/assets/models/palm-tree-512.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:44.464Z",
+        "url": "http://127.0.0.1:36509/workout/island/assets/racing/sport-coupe-low.glb?v=island-v2-20261107-15",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:23.196Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:22:20.978Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 27
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 54,
+    "triangles": {
+      "min": 344806,
+      "max": 344806,
+      "mean": 344806
+    },
+    "drawCalls": {
+      "min": 211,
+      "max": 211,
+      "mean": 211
+    }
+  },
+  "finishedAt": "2026-11-17T15:24:05.862Z",
+  "durationMs": 105239
+}

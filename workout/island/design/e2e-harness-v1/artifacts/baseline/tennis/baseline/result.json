@@ -1,0 +1,2175 @@
+{
+  "schemaVersion": 1,
+  "game": "tennis",
+  "label": "טניס",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:40:26.562Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 4060,
+  "islandToFirstFrameMs": 26476,
+  "playWallMs": 31070,
+  "playActiveMs": 31021,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": 16.542,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 4060
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 31070,
+      "activeMs": 31021,
+      "replays": 0,
+      "simulationDeltaSeconds": 16.542
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 4060
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 31021
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 16.542,
+      "activeSamples": 15
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 62600.299999999814,
+        "wasmExposed": true,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 33,
+        "triangles": {
+          "min": 0,
+          "max": 99514,
+          "mean": 90860
+        },
+        "drawCalls": {
+          "min": 0,
+          "max": 95,
+          "mean": 84.48
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 26446.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 0,
+        "frame": 6,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 26446.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 0,
+        "frame": 6,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 27695.399999999907,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 0,
+        "frame": 11,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 31288,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 0,
+        "frame": 25,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 31294.399999999907,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 0,
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 0,
+        "frame": 25,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 34688.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 0.8249999999999995,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99514,
+        "drawCalls": 95,
+        "mode": null,
+        "quality": 0,
+        "frame": 38,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99514,
+      "drawCalls": 95
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 34693.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 0.8249999999999995,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99514,
+        "drawCalls": 95,
+        "mode": null,
+        "quality": 0,
+        "frame": 38,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99514,
+      "drawCalls": 95
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 37287.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 3.0916666666666583,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99384,
+        "drawCalls": 92,
+        "mode": null,
+        "quality": 0,
+        "frame": 51,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99384,
+      "drawCalls": 92
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 37291,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 3.0916666666666583,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99384,
+        "drawCalls": 92,
+        "mode": null,
+        "quality": 0,
+        "frame": 51,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99384,
+      "drawCalls": 92
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 39149.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": 0,
+      "simulationSeconds": 4.8583333333333645,
+      "stateError": null,
+      "metrics": {
+        "triangles": 98044,
+        "drawCalls": 87,
+        "mode": null,
+        "quality": 0,
+        "frame": 61,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 98044,
+      "drawCalls": 87
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 39153.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": 0,
+      "simulationSeconds": 4.8583333333333645,
+      "stateError": null,
+      "metrics": {
+        "triangles": 98044,
+        "drawCalls": 87,
+        "mode": null,
+        "quality": 0,
+        "frame": 61,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 98044,
+      "drawCalls": 87
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 41030.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 0,
+      "simulationSeconds": 5.658333333333404,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 0,
+        "frame": 71,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 41034.39999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 0,
+      "simulationSeconds": 5.658333333333404,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 0,
+        "frame": 71,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 43054.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 0,
+      "simulationSeconds": 5.658333333333404,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 0,
+        "frame": 82,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 43061.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 0,
+      "simulationSeconds": 5.658333333333404,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99224,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 0,
+        "frame": 82,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99224,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 45088.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 7.658333333333504,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99384,
+        "drawCalls": 92,
+        "mode": null,
+        "quality": 0,
+        "frame": 93,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99384,
+      "drawCalls": 92
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 45094.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 0,
+      "simulationSeconds": 7.658333333333504,
+      "stateError": null,
+      "metrics": {
+        "triangles": 99384,
+        "drawCalls": 92,
+        "mode": null,
+        "quality": 0,
+        "frame": 93,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 99384,
+      "drawCalls": 92
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 47387.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": 1,
+      "simulationSeconds": 9.458333333333437,
+      "stateError": null,
+      "metrics": {
+        "triangles": 92708,
+        "drawCalls": 86,
+        "mode": null,
+        "quality": 1,
+        "frame": 104,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 92708,
+      "drawCalls": 86
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 47390.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": 1,
+      "simulationSeconds": 9.458333333333437,
+      "stateError": null,
+      "metrics": {
+        "triangles": 92708,
+        "drawCalls": 86,
+        "mode": null,
+        "quality": 1,
+        "frame": 104,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 92708,
+      "drawCalls": 86
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 49061.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 1,
+      "simulationSeconds": 10.425000000000049,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 116,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 49065,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 1,
+      "simulationSeconds": 10.425000000000049,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 116,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 50848.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 1,
+      "simulationSeconds": 10.425000000000049,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 128,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 50852.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 1,
+      "simulationSeconds": 10.425000000000049,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 128,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 52542.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 1,
+      "simulationSeconds": 12.124999999999952,
+      "stateError": null,
+      "metrics": {
+        "triangles": 94048,
+        "drawCalls": 91,
+        "mode": null,
+        "quality": 1,
+        "frame": 140,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 94048,
+      "drawCalls": 91
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 52547.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 1,
+      "simulationSeconds": 12.124999999999952,
+      "stateError": null,
+      "metrics": {
+        "triangles": 94048,
+        "drawCalls": 91,
+        "mode": null,
+        "quality": 1,
+        "frame": 140,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 94048,
+      "drawCalls": 91
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 54254.89999999991,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 1,
+      "simulationSeconds": 13.674999999999864,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 1,
+        "frame": 152,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 54258.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "serve",
+      "quality": 1,
+      "simulationSeconds": 13.674999999999864,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 90,
+        "mode": null,
+        "quality": 1,
+        "frame": 152,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 90
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 55954.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 1,
+      "simulationSeconds": 13.674999999999864,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 164,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 55959.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "toss",
+      "quality": 1,
+      "simulationSeconds": 13.674999999999864,
+      "stateError": null,
+      "metrics": {
+        "triangles": 93888,
+        "drawCalls": 89,
+        "mode": null,
+        "quality": 1,
+        "frame": 164,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 93888,
+      "drawCalls": 89
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 57553.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 1,
+      "simulationSeconds": 15.241666666666442,
+      "stateError": null,
+      "metrics": {
+        "triangles": 94048,
+        "drawCalls": 91,
+        "mode": null,
+        "quality": 1,
+        "frame": 175,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 94048,
+      "drawCalls": 91
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 57558.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "rally",
+      "quality": 1,
+      "simulationSeconds": 15.241666666666442,
+      "stateError": null,
+      "metrics": {
+        "triangles": 94048,
+        "drawCalls": 91,
+        "mode": null,
+        "quality": 1,
+        "frame": 175,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": {
+          "mode": "v25",
+          "venueMs": 302,
+          "charactersMs": 355
+        },
+        "environment": null,
+        "characterLoaded": true,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": null,
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 94048,
+      "drawCalls": 91
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 58762.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": null,
+      "simulationSeconds": 16.54166666666637,
+      "stateError": null,
+      "metrics": {
+        "triangles": 0,
+        "drawCalls": 0,
+        "mode": "canvas",
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": false,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "canvas",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 0,
+      "drawCalls": 0
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "tennis",
+      "atMs": 58765.299999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "point",
+      "quality": null,
+      "simulationSeconds": 16.54166666666637,
+      "stateError": null,
+      "metrics": {
+        "triangles": 0,
+        "drawCalls": 0,
+        "mode": "canvas",
+        "quality": null,
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": null,
+        "characterLoaded": false,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "canvas",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 0,
+      "drawCalls": 0
+    }
+  ],
+  "screenshots": {
+    "opening": "tennis/baseline/opening.png",
+    "play30": "tennis/baseline/play30.png",
+    "finish": "tennis/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:40:50.130Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:40:29.057Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:40:26.839Z",
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 110
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 33,
+    "triangles": {
+      "min": 0,
+      "max": 99514,
+      "mean": 90860
+    },
+    "drawCalls": {
+      "min": 0,
+      "max": 95,
+      "mean": 84.48
+    }
+  },
+  "finishedAt": "2026-11-17T15:41:29.457Z",
+  "durationMs": 62895
+}

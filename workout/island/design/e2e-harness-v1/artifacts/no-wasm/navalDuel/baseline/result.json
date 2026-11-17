@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": 1,
+  "game": "navalDuel",
+  "label": "ספינות",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:26:13.548Z",
+  "status": "failed",
+  "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--js-flags=--jitless"
+  ],
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 4295,
+  "islandToFirstFrameMs": 31662,
+  "playWallMs": 13667,
+  "simulationDeltaSeconds": null,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 2,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 4295
+    },
+    {
+      "name": "play30",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 2,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 13667,
+      "simulationDeltaSeconds": null
+    },
+    {
+      "name": "finish",
+      "status": "failed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": false,
+          "actual": 2,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "webassembly-disabled-before-navigation",
+      "pass": true,
+      "actual": false
+    },
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 4295
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "webassembly-disabled",
+      "pass": true,
+      "actual": {
+        "parent": false,
+        "child": null
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": false,
+      "expected": 30000,
+      "actual": 13667
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": null,
+      "activeSamples": 7
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 49001.90000000037,
+        "wasmExposed": false,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": false,
+      "actual": 2,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 9,
+        "triangles": {
+          "min": 49625,
+          "max": 69746,
+          "mean": 56475.33
+        },
+        "drawCalls": {
+          "min": 20,
+          "max": 55,
+          "mean": 33.78
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 31656.30000000028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "aim",
+      "quality": "full",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49625,
+        "drawCalls": 20,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 1,
+          "mirror": {
+            "calls": 14,
+            "triangles": 8356,
+            "peakCalls": 14,
+            "peakTriangles": 8356
+          },
+          "waterTime": 0,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49625,
+      "drawCalls": 20
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 31656.30000000028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "aim",
+      "quality": "full",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49625,
+        "drawCalls": 20,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 1,
+          "mirror": {
+            "calls": 14,
+            "triangles": 8356,
+            "peakCalls": 14,
+            "peakTriangles": 8356
+          },
+          "waterTime": 0,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49625,
+      "drawCalls": 20
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 32174.30000000028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "aim",
+      "quality": "full",
+      "simulationSeconds": 0.15339999999999418,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49627,
+        "drawCalls": 21,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 2,
+          "mirror": {
+            "calls": 16,
+            "triangles": 18211,
+            "peakCalls": 16,
+            "peakTriangles": 18211
+          },
+          "waterTime": 0.06902999999999739,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49627,
+      "drawCalls": 21
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 34913.40000000037,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "shot",
+      "quality": "full",
+      "simulationSeconds": 0.6601999999999899,
+      "stateError": null,
+      "metrics": {
+        "triangles": 49853,
+        "drawCalls": 26,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 7,
+          "mirror": {
+            "calls": 17,
+            "triangles": 18259,
+            "peakCalls": 17,
+            "peakTriangles": 18259
+          },
+          "waterTime": 0.29708999999999547,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 49853,
+      "drawCalls": 26
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 36513.40000000037,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "shot",
+      "quality": "full",
+      "simulationSeconds": 1.0935999999999917,
+      "stateError": null,
+      "metrics": {
+        "triangles": 68754,
+        "drawCalls": 47,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 11,
+          "mirror": {
+            "calls": 17,
+            "triangles": 18289,
+            "peakCalls": 17,
+            "peakTriangles": 18289
+          },
+          "waterTime": 0.4921199999999963,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 68754,
+      "drawCalls": 47
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 38484,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "shot",
+      "quality": "full",
+      "simulationSeconds": 1.6303999999999879,
+      "stateError": null,
+      "metrics": {
+        "triangles": 50645,
+        "drawCalls": 28,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 15,
+          "mirror": {
+            "calls": 17,
+            "triangles": 18325,
+            "peakCalls": 17,
+            "peakTriangles": 18325
+          },
+          "waterTime": 0.7336799999999946,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 50645,
+      "drawCalls": 28
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 40926.80000000028,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "shot",
+      "quality": "full",
+      "simulationSeconds": 2.223699999999984,
+      "stateError": null,
+      "metrics": {
+        "triangles": 69276,
+        "drawCalls": 52,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 21,
+          "mirror": {
+            "calls": 19,
+            "triangles": 18365,
+            "peakCalls": 19,
+            "peakTriangles": 18385
+          },
+          "waterTime": 1.0006649999999928,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 69276,
+      "drawCalls": 52
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 42499,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "shot",
+      "quality": "full",
+      "simulationSeconds": 2.6636999999999844,
+      "stateError": null,
+      "metrics": {
+        "triangles": 51127,
+        "drawCalls": 35,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 24,
+          "mirror": {
+            "calls": 19,
+            "triangles": 18411,
+            "peakCalls": 19,
+            "peakTriangles": 18411
+          },
+          "waterTime": 1.198664999999993,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 51127,
+      "drawCalls": 35
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "navalDuel",
+      "atMs": 44245.200000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "sink",
+      "quality": "full",
+      "simulationSeconds": 3.183699999999985,
+      "stateError": null,
+      "metrics": {
+        "triangles": 69746,
+        "drawCalls": 55,
+        "mode": null,
+        "quality": "full",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": {
+          "enabled": true
+        },
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "revision": "ultra-naval-3",
+          "detailedNormals": true,
+          "water": "reflective",
+          "reflectionSize": 256,
+          "reflectionCaptures": 29,
+          "mirror": {
+            "calls": 19,
+            "triangles": 18435,
+            "peakCalls": 19,
+            "peakTriangles": 18435
+          },
+          "waterTime": 1.4326649999999932,
+          "shallowBanks": 3,
+          "fallbackRipples": true,
+          "disposed": false
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "three",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 69746,
+      "drawCalls": 55
+    },
+    {
+      "apiReady": true,
+      "active": false,
+      "id": null,
+      "atMs": 45837.10000000009,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": true,
+      "current": false,
+      "historyDepth": 1
+    },
+    {
+      "apiReady": true,
+      "active": false,
+      "id": null,
+      "atMs": 45838.700000000186,
+      "wasmExposed": false,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": true,
+      "current": false,
+      "historyDepth": 1
+    }
+  ],
+  "screenshots": {
+    "opening": "navalDuel/baseline/opening.png",
+    "play30": "navalDuel/baseline/play30.png",
+    "finish": "navalDuel/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:26:43.183Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.all (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:26:43.187Z",
+        "text": "Basketball Draco requires WebAssembly",
+        "stack": "Error: Basketball Draco requires WebAssembly\n    at HoopsDRACOLoader._initDecoder (http://127.0.0.1:36509/workout/island/minigames/hoops-draco.mjs:15:58)\n    at HoopsDRACOLoader.preload (http://127.0.0.1:36509/workout/island/vendor/DRACOLoader.js:262:8)\n    at new GLTFDracoMeshCompressionExtension (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:1886:20)\n    at GLTFLoader.parse (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:404:37)\n    at http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:441:10\n    at new Promise (<anonymous>)\n    at GLTFLoader.parseAsync (http://127.0.0.1:36509/workout/island/vendor/GLTFLoader.js:439:10)\n    at parse (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:23:89)\n    at fetchHoopsAsset (http://127.0.0.1:36509/workout/island/minigames/hoops-gltf.mjs:13:22)\n    at async Promise.all (index 0)",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "cspViolations": [],
+    "failedRequests": [],
+    "wasmRequests": [],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:26:15.966Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:26:13.729Z",
+        "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 98
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:36509/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 9,
+    "triangles": {
+      "min": 49625,
+      "max": 69746,
+      "mean": 56475.33
+    },
+    "drawCalls": {
+      "min": 20,
+      "max": 55,
+      "mean": 33.78
+    }
+  },
+  "finishedAt": "2026-11-17T15:27:02.747Z",
+  "durationMs": 49199
+}

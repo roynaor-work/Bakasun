@@ -1,0 +1,1255 @@
+{
+  "schemaVersion": 1,
+  "game": "alpineRush",
+  "label": "סקי",
+  "variant": "baseline",
+  "scenario": "lifecycle",
+  "startedAt": "2026-11-17T15:43:06.395Z",
+  "status": "passed",
+  "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+  "query": {},
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "device": {
+    "hasTouch": true,
+    "isMobile": true,
+    "deviceScaleFactor": 1
+  },
+  "launchArgs": [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "noWasm": false,
+  "finishMode": "exit",
+  "requestedPlayMs": 30000,
+  "standard30Seconds": true,
+  "firstFrameMs": 4109,
+  "islandToFirstFrameMs": 29075,
+  "playWallMs": 33362,
+  "playActiveMs": 33329,
+  "replays": 0,
+  "naturalEnds": [],
+  "simulationDeltaSeconds": 6,
+  "checkpoints": [
+    {
+      "name": "opening",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "firstFrameMs": 4109
+    },
+    {
+      "name": "play30",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "wallMs": 33362,
+      "activeMs": 33329,
+      "replays": 0,
+      "simulationDeltaSeconds": 6
+    },
+    {
+      "name": "finish",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "zero-console-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-errors",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-csp-violations",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "zero-page-crashes",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "diagnostics-observers-active",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "mode": "exit"
+    }
+  ],
+  "checks": [
+    {
+      "name": "game-first-frame",
+      "pass": true,
+      "actual": 4109
+    },
+    {
+      "name": "mobile-viewport",
+      "pass": true,
+      "actual": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      }
+    },
+    {
+      "name": "application-csp-present",
+      "pass": true,
+      "actual": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    },
+    {
+      "name": "requested-play-duration",
+      "pass": true,
+      "expected": 30000,
+      "actual": 33329
+    },
+    {
+      "name": "game-progress",
+      "pass": true,
+      "actual": 6,
+      "activeSamples": 4
+    },
+    {
+      "name": "disposed-and-returned-to-menu",
+      "pass": true,
+      "actual": {
+        "apiReady": true,
+        "active": false,
+        "id": null,
+        "atMs": 84308.8999999999,
+        "wasmExposed": true,
+        "viewport": {
+          "width": 844,
+          "height": 390,
+          "dpr": 1
+        },
+        "menuVisible": true,
+        "resultVisible": false,
+        "current": false,
+        "historyDepth": 1
+      }
+    },
+    {
+      "name": "zero-console-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-errors",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-csp-violations",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-page-crashes",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "diagnostics-observers-active",
+      "pass": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "zero-session-errors",
+      "pass": true,
+      "actual": []
+    },
+    {
+      "name": "render-counters-available",
+      "pass": true,
+      "actual": {
+        "samples": 11,
+        "triangles": {
+          "min": 351558,
+          "max": 405745,
+          "mean": 377613
+        },
+        "drawCalls": {
+          "min": 65,
+          "max": 101,
+          "mean": 87.91
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29062.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 354007,
+        "drawCalls": 65,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 354007,
+      "drawCalls": 65
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 29062.799999999814,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 354007,
+        "drawCalls": 65,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 354007,
+      "drawCalls": 65
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 32999.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 405745,
+        "drawCalls": 95,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 405745,
+      "drawCalls": 95
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 41551.69999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 405745,
+        "drawCalls": 95,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 405745,
+      "drawCalls": 95
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 41555,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "countdown",
+      "quality": "high",
+      "simulationSeconds": 0,
+      "stateError": null,
+      "metrics": {
+        "triangles": 405745,
+        "drawCalls": 95,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 405745,
+      "drawCalls": 95
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 50298.69999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 1.75,
+      "stateError": null,
+      "metrics": {
+        "triangles": 400131,
+        "drawCalls": 101,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 400131,
+      "drawCalls": 101
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 50325.60000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 1.75,
+      "stateError": null,
+      "metrics": {
+        "triangles": 400131,
+        "drawCalls": 101,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 400131,
+      "drawCalls": 101
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 59125.69999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 4,
+      "stateError": null,
+      "metrics": {
+        "triangles": 351558,
+        "drawCalls": 81,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 351558,
+      "drawCalls": 81
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 59129.10000000009,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 4,
+      "stateError": null,
+      "metrics": {
+        "triangles": 351558,
+        "drawCalls": 81,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 351558,
+      "drawCalls": 81
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 66357.19999999972,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 6,
+      "stateError": null,
+      "metrics": {
+        "triangles": 362558,
+        "drawCalls": 94,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 362558,
+      "drawCalls": 94
+    },
+    {
+      "apiReady": true,
+      "active": true,
+      "id": "alpineRush",
+      "atMs": 66366.5,
+      "wasmExposed": true,
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "dpr": 1
+      },
+      "menuVisible": false,
+      "resultVisible": false,
+      "current": true,
+      "historyDepth": 2,
+      "paused": false,
+      "starting": false,
+      "phase": "racing",
+      "quality": "high",
+      "simulationSeconds": 6,
+      "stateError": null,
+      "metrics": {
+        "triangles": 362558,
+        "drawCalls": 94,
+        "mode": "model",
+        "quality": "high",
+        "frame": null,
+        "assetStatus": null,
+        "assetStats": null,
+        "designScene": null,
+        "characterVersion": null,
+        "modelCount": null,
+        "reflection": null,
+        "v7": null,
+        "fireV7": null,
+        "defenseV7": null,
+        "load": null,
+        "environment": {
+          "id": "sunset",
+          "backgrounds": [
+            "landscape"
+          ],
+          "atlases": [
+            "powder-spray",
+            "landing-cloud",
+            "snow-flecks"
+          ],
+          "decals": true,
+          "tower": false,
+          "snowNormal": true,
+          "markers": 23,
+          "towers": 0,
+          "decalQuads": 11,
+          "ribbons": 0,
+          "flecks": 48,
+          "spotLights": 0,
+          "landingActive": 0,
+          "powderActive": 0
+        },
+        "characterLoaded": null,
+        "bufferWidth": null,
+        "bufferHeight": null
+      },
+      "mode": "model",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "bufferWidth": 844,
+        "bufferHeight": 390
+      },
+      "triangles": 362558,
+      "drawCalls": 94
+    }
+  ],
+  "screenshots": {
+    "opening": "alpineRush/baseline/opening.png",
+    "play30": "alpineRush/baseline/play30.png",
+    "finish": "alpineRush/baseline/finish.png"
+  },
+  "diagnostics": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "cspViolations": [],
+    "failedRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.106Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-v5/models/safety-fence-sunset.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.267Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/rock.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.267Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/fir-a.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.267Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/fir-c.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.269Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/fir-b.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.270Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/slalom-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.270Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/models/ski-slope.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.275Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-track/models/flag-rope.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.280Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-world/models/ice-wall.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.283Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-world/models/mogul.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.283Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-world/models/start-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.283Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-world/models/finish-gate.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.284Z",
+        "url": "http://127.0.0.1:37697/workout/island/design/alpine-world/models/snow-powder.glb",
+        "type": "fetch",
+        "reason": "net::ERR_ABORTED"
+      }
+    ],
+    "wasmRequests": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.268Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:26.846Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      },
+      {
+        "phase": "finish",
+        "at": "2026-11-17T15:44:17.618Z",
+        "url": "http://127.0.0.1:37697/workout/island/vendor/draco/draco_decoder.wasm",
+        "type": "fetch"
+      }
+    ],
+    "warnings": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:08.417Z",
+        "text": "Service Worker registration blocked by Playwright",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 86,
+          "lineNumber": 2,
+          "columnNumber": 86
+        },
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1"
+      },
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:27.859Z",
+        "text": "THREE.WebGLRenderer: KHR_parallel_shader_compile extension not supported.",
+        "location": {
+          "url": "http://127.0.0.1:37697/workout/island/vendor/three.module.js",
+          "line": 5,
+          "column": 311494,
+          "lineNumber": 5,
+          "columnNumber": 311494
+        },
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1"
+      }
+    ],
+    "crashes": [],
+    "cspDocuments": [
+      {
+        "phase": "opening",
+        "at": "2026-11-17T15:43:06.602Z",
+        "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+        "header": null
+      }
+    ],
+    "monitorErrors": []
+  },
+  "input": {
+    "transport": "CDP Input.dispatchTouchEvent",
+    "events": 69
+  },
+  "failure": null,
+  "browserVersion": "151.0.7922.173",
+  "wasmExposedBeforeNavigation": true,
+  "firstFrameDefinition": "First observed active, unpaused game canvas with positive renderer triangles and draw calls; sampled after CDP launch touch. Includes asset loading/countdown after that touch.",
+  "csp": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "documentPolicies": [
+    {
+      "url": "http://127.0.0.1:37697/workout/island/?dev=1",
+      "meta": [
+        "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      ]
+    }
+  ],
+  "render": {
+    "samples": 11,
+    "triangles": {
+      "min": 351558,
+      "max": 405745,
+      "mean": 377613
+    },
+    "drawCalls": {
+      "min": 65,
+      "max": 101,
+      "mean": 87.91
+    }
+  },
+  "finishedAt": "2026-11-17T15:44:30.924Z",
+  "durationMs": 84529
+}
