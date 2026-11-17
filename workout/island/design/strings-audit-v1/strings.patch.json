@@ -1,0 +1,4724 @@
+{
+  "schema_version": 1,
+  "audit": "strings-audit-v1",
+  "date": "2026-11-17",
+  "timezone": "Asia/Jerusalem",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/strings-audit-v1",
+  "base_commit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "status": "proposals-only",
+  "existing_files_modified": false,
+  "format": "review-proposals-v1",
+  "auto_apply": false,
+  "instructions": "הצעות בלבד. אין להריץ כ־JSON Patch או כהחלפה גלובלית. לבדוק base_commit וערך current לכל שינוי. literal-value מציין ערך מחרוזת מפוענח; אין להחליף טקסט מקור ללא קידוד מתאים. parallel-voice-field ו־manual-template מחייבים התאמה בקוד. מזהים ומשתנים נשמרים.",
+  "replacements": [
+    {
+      "id": "SA-0001",
+      "file": "workout/island/data/strings.he.json",
+      "line": 4,
+      "key": "app.loading",
+      "current": "העיר שלי מתעוררת…",
+      "proposed": "האי מתעורר…",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0002",
+      "file": "workout/island/data/strings.he.json",
+      "line": 43,
+      "key": "app.reward",
+      "current": "הפרס שלכם",
+      "proposed": "מה מקבלים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0003",
+      "file": "workout/island/data/strings.he.json",
+      "line": 378,
+      "key": "app.atLimit",
+      "current": "הגעתם למקסימום",
+      "proposed": "הגעתם לגבול",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0004",
+      "file": "workout/island/data/strings.he.json",
+      "line": 256,
+      "key": "app.capacity",
+      "current": "קיבולת",
+      "proposed": "מקום לתושבים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0005",
+      "file": "workout/island/data/strings.he.json",
+      "line": 57,
+      "key": "building.harbor",
+      "current": "נמל ימי",
+      "proposed": "נמל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0006",
+      "file": "workout/island/data/strings.he.json",
+      "line": 65,
+      "key": "building.police",
+      "current": "משטרה",
+      "proposed": "תחנת משטרה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0007",
+      "file": "workout/island/data/strings.he.json",
+      "line": 165,
+      "key": "parent.export",
+      "current": "ייצוא העולם",
+      "proposed": "שמירת גיבוי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0008",
+      "file": "workout/island/data/strings.he.json",
+      "line": 166,
+      "key": "parent.import",
+      "current": "ייבוא גיבוי",
+      "proposed": "פתיחת גיבוי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0009",
+      "file": "workout/island/data/strings.he.json",
+      "line": 388,
+      "key": "parent.resetBackup",
+      "current": "ייצוא גיבוי לפני האיפוס",
+      "proposed": "שמירת גיבוי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0010",
+      "file": "workout/island/data/strings.he.json",
+      "line": 391,
+      "key": "parent.resetNext",
+      "current": "המשך לאישור האיפוס",
+      "proposed": "המשך לאישור",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0011",
+      "file": "workout/island/data/strings.he.json",
+      "line": 442,
+      "key": "parent.resetCancel",
+      "current": "ביטול וחזרה לאזור ההורה",
+      "proposed": "ביטול האיפוס",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0012",
+      "file": "workout/island/data/strings.he.json",
+      "line": 394,
+      "key": "parent.resetConfirm",
+      "current": "איפוס ותחילת משחק חדש",
+      "proposed": "איפוס המשחק",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0013",
+      "file": "workout/island/data/strings.he.json",
+      "line": 48,
+      "key": "app.cameraHint",
+      "current": "גוררים כדי לנוע במפה. צובטים כדי להתקרב.",
+      "proposed": "גוררים כדי להזיז את המפה. מקרבים שתי אצבעות כדי להתרחק, ומרחיקים אותן כדי להתקרב.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0014",
+      "file": "workout/island/data/strings.he.json",
+      "line": 106,
+      "key": "reason.storage",
+      "current": "העיר פתוחה, אבל השמירה לא הצליחה. אפשר לייצא גיבוי דרך ההורים.",
+      "proposed": "השמירה לא הצליחה. אפשר לבקש מההורים לשמור גיבוי.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0015",
+      "file": "workout/island/data/strings.he.json",
+      "line": 118,
+      "key": "error.webgl",
+      "current": "התלת־ממד לא נפתח. אפשר לרענן או לפתוח ב־Chrome.",
+      "proposed": "העיר לא נפתחה. אפשר לטעון שוב או לבקש עזרה מההורים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0016",
+      "file": "workout/island/data/strings.he.json",
+      "line": 271,
+      "key": "error.saveInvalid",
+      "current": "השמירה הקודמת לא נקראה. היא נשמרה לגיבוי ולא תידרס. אפשר לייבא גיבוי דרך ההורים.",
+      "proposed": "לא הצלחנו לפתוח את השמירה הקודמת. שמרנו עותק שלה. אפשר לבקש מההורים לפתוח גיבוי.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0017",
+      "file": "workout/island/data/strings.he.json",
+      "line": 38,
+      "key": "app.removeConfirm",
+      "current": "להחזיר את המבנה למחסן? הכסף חוזר ואפשר לבטל.",
+      "proposed": "להחזיר את המבנה למחסן? המטבעות יוחזרו. אפשר לבטל אחר כך.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0018",
+      "file": "workout/island/data/strings.he.json",
+      "line": 124,
+      "key": "help.world",
+      "current": "גוררים כדי להזיז את המפה, צובטים כדי להתקרב. במפה אפשר לבחור מקום, ובטיול נוגעים ברחוב כדי ללכת אליו.",
+      "proposed": "גוררים כדי להזיז את המפה. מזיזים שתי אצבעות כדי להתקרב או להתרחק. בטיול נוגעים ברחוב כדי ללכת אליו.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0019",
+      "file": "workout/island/data/strings.he.json",
+      "line": 274,
+      "key": "minigame.title",
+      "current": "משחקונים בעיר",
+      "proposed": "משחקי האי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0020",
+      "file": "workout/island/data/strings.he.json",
+      "line": 275,
+      "key": "minigame.subtitle",
+      "current": "בוחרים משחקון, משחקים וחוזרים לעיר.",
+      "proposed": "בוחרים משחק, משחקים וחוזרים לעיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0021",
+      "file": "workout/island/data/strings.he.json",
+      "line": 276,
+      "key": "minigame.open",
+      "current": "משחקונים",
+      "proposed": "משחקים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0022",
+      "file": "workout/island/data/strings.he.json",
+      "line": 272,
+      "key": "reason.gameBusy",
+      "current": "כבר פתוח משחקון. נחזור אליו או נצא לעיר.",
+      "proposed": "כבר פתוח משחק. אפשר לחזור אליו או לצאת לעיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0023",
+      "file": "workout/island/data/strings.he.json",
+      "line": 273,
+      "key": "reason.gameStart",
+      "current": "המשחקון לא נפתח. אפשר לנסות שוב.",
+      "proposed": "המשחק לא נפתח. אפשר לנסות שוב.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0024",
+      "file": "workout/island/data/strings.he.json",
+      "line": 292,
+      "key": "minigame.result",
+      "current": "ניקוד {score} · הרווחת {money} מטבעות ו־{parts} חלקים",
+      "proposed": "ניקוד: {score} · מטבעות: {money} · חלקים: {parts}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0025",
+      "file": "workout/island/data/strings.he.json",
+      "line": 346,
+      "key": "minigame.result.money",
+      "current": "מטבעות שהרווחת",
+      "proposed": "מטבעות שנוספו",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0026",
+      "file": "workout/island/data/strings.he.json",
+      "line": 347,
+      "key": "minigame.result.parts",
+      "current": "חלקים שהרווחת",
+      "proposed": "חלקים שנוספו",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0027",
+      "file": "workout/island/data/strings.he.json",
+      "line": 293,
+      "key": "minigame.resultHint",
+      "current": "העיר מחכה לך. אפשר לנסות שוב בכל רגע.",
+      "proposed": "העיר מחכה. אפשר לשחק שוב מתי שרוצים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0028",
+      "file": "workout/island/data/strings.he.json",
+      "line": 310,
+      "key": "event.go",
+      "current": "לך לשם",
+      "proposed": "למקום האירוע",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0029",
+      "file": "workout/island/data/strings.he.json",
+      "line": 508,
+      "key": "minigame.ammoReady",
+      "current": "{ammo} · {count} · מוכנה",
+      "proposed": "{ammo} · {count} · אפשר להשתמש",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0030",
+      "file": "workout/island/data/strings.he.json",
+      "line": 510,
+      "key": "minigame.ammoEmpty",
+      "current": "{ammo} · אזלה",
+      "proposed": "{ammo} · אין מלאי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0031",
+      "file": "workout/island/data/strings.he.json",
+      "line": 516,
+      "key": "minigame.combo",
+      "current": "קומבו ×{combo}",
+      "proposed": "רצף ×{combo}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0032",
+      "file": "workout/island/data/strings.he.json",
+      "line": 586,
+      "key": "minigame.noPressure",
+      "current": "חסר לחץ! לחצו על המשאבה",
+      "proposed": "חסר לחץ. לוחצים על המשאבה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0033",
+      "file": "workout/island/data/strings.he.json",
+      "line": 531,
+      "key": "minigame.refillHint",
+      "current": "החזיקו מילוי לחידוש מים",
+      "proposed": "מחזיקים את כפתור המילוי כדי למלא מים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0034",
+      "file": "workout/island/data/strings.he.json",
+      "line": 772,
+      "key": "minigame.tooFar",
+      "current": "תתקרב עם המשאית",
+      "proposed": "מתקרבים עם המשאית",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0035",
+      "file": "workout/island/data/strings.he.json",
+      "line": 886,
+      "key": "fire.driveToRescue",
+      "current": "תתקרב עם המשאית לחלון",
+      "proposed": "מתקרבים עם המשאית לחלון",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0036",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1090,
+      "key": "fire.guide.cool",
+      "current": "מחזיקים ריסוס עד שהאש כבה",
+      "proposed": "מחזיקים ריסוס עד שהאש כבויה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0037",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1832,
+      "key": "fire.v23.say.hold",
+      "current": "מחזיקים ריסוס עד שהמטרה כבה",
+      "proposed": "מחזיקים ריסוס עד שהמטרה כבויה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0038",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1942,
+      "key": "fire.v24.tutorial.spray",
+      "current": "רססו: מחזיקים עד שהאש כבה",
+      "proposed": "מחזיקים עד שהאש כבויה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0039",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1092,
+      "key": "fire.guide.refill",
+      "current": "ממלאים מים · אפשר לצאת כשהמכל מלא",
+      "proposed": "ממלאים מים. אפשר לצאת כשהמכל מלא",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0040",
+      "file": "workout/island/data/strings.he.json",
+      "line": 460,
+      "key": "equipment.tank",
+      "current": "מיכל מים",
+      "proposed": "מכל מים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0041",
+      "file": "workout/island/data/strings.he.json",
+      "line": 501,
+      "key": "equipment.tank.hint",
+      "current": "יותר מים במיכל ומילוי מהיר יותר.",
+      "proposed": "יותר מים במכל ומילוי מהיר יותר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0042",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1592,
+      "key": "equipment.alpineRush.tank",
+      "current": "מיכל האצה",
+      "proposed": "מכל האצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0043",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1630,
+      "key": "alpine.callout.gate",
+      "current": "המיכל מתמלא.",
+      "proposed": "המכל מתמלא.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0044",
+      "file": "workout/island/data/strings.he.json",
+      "line": 976,
+      "key": "naval.feedback.full",
+      "current": "גוף הספינה כבר מלא",
+      "proposed": "הספינה כבר מתוקנת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0045",
+      "file": "workout/island/data/strings.he.json",
+      "line": 985,
+      "key": "naval.weapon.hint.repair",
+      "current": "מתקן רבע גוף · ללא ירי",
+      "proposed": "מחזיר רבע ממד החיים של הספינה · ללא ירי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0046",
+      "file": "workout/island/data/strings.he.json",
+      "line": 947,
+      "key": "naval.mission.brief.bases",
+      "current": "הטביעו את בסיסי האויב על החוף. התותחים מתריעים לפני ירי, אז כדאי להתחמק מהסימון.",
+      "proposed": "פוגעים בבסיסי האויב על החוף. התותחים מסמנים לאן יירו. זזים מהסימון לפני הירי.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0047",
+      "file": "workout/island/data/strings.he.json",
+      "line": 946,
+      "key": "naval.mission.brief.intercept",
+      "current": "יירטו את סירות האגף המהירות. שאר הספינות הן ליווי.",
+      "proposed": "עוצרים את הסירות המהירות שבצדדים. שאר הספינות מלוות אותן.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0048",
+      "file": "workout/island/data/strings.he.json",
+      "line": 958,
+      "key": "naval.objective.intercept",
+      "current": "יירטו את סירות האגף",
+      "proposed": "עוצרים את הסירות שבצדדים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0049",
+      "file": "workout/island/data/strings.he.json",
+      "line": 971,
+      "key": "naval.feedback.miss",
+      "current": "פספוס · הקדימו מטרה נעה",
+      "proposed": "פספוס · מכוונים לפני הספינה הנעה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0050",
+      "file": "workout/island/data/strings.he.json",
+      "line": 980,
+      "key": "naval.weapon.hint.normal",
+      "current": "ירי מהיר · הקדימו מטרה נעה",
+      "proposed": "ירי מהיר · מכוונים לפני המטרה הנעה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0051",
+      "file": "workout/island/data/strings.he.json",
+      "line": 943,
+      "key": "feature.naval.30",
+      "current": "הקרב על הארכיפלג",
+      "proposed": "הקרב בין האיים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0052",
+      "file": "workout/island/data/strings.he.json",
+      "line": 938,
+      "key": "feature.naval.25",
+      "current": "שומרת המצר",
+      "proposed": "שומרת המֵצַר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0053",
+      "file": "workout/island/data/strings.he.json",
+      "line": 495,
+      "key": "equipment.damage.hint",
+      "current": "כל פגיעה מאירה חזק יותר.",
+      "proposed": "כל פגיעה חזקה יותר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0054",
+      "file": "workout/island/data/strings.he.json",
+      "line": 496,
+      "key": "equipment.rate.hint",
+      "current": "יותר יריות בחייזרים ותור מהיר יותר בים.",
+      "proposed": "יותר יריות בחייזרים והמתנה קצרה יותר בין תורים בים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0055",
+      "file": "workout/island/data/strings.he.json",
+      "line": 505,
+      "key": "equipment.hose.hint",
+      "current": "צוות נוסף מצטרף למשאית ומכוון רסס נוסף אל האש.",
+      "proposed": "צוות נוסף מצטרף לכבאית ומתיז עוד מים על האש.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0056",
+      "file": "workout/island/data/strings.he.json",
+      "line": 490,
+      "key": "powerup.spread",
+      "current": "ירי מפוזר",
+      "proposed": "ירי מניפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0057",
+      "file": "workout/island/data/strings.he.json",
+      "line": 524,
+      "key": "runUpgrade.spread",
+      "current": "מניפת אנרגיה",
+      "proposed": "ירי מניפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0058",
+      "file": "workout/island/data/strings.he.json",
+      "line": 587,
+      "key": "minigame.spreadReady",
+      "current": "מניפה",
+      "proposed": "ירי מניפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0059",
+      "file": "workout/island/data/strings.he.json",
+      "line": 588,
+      "key": "minigame.spreadActive",
+      "current": "מניפה · {seconds} שנ׳",
+      "proposed": "ירי מניפה · {seconds} שנ׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0060",
+      "file": "workout/island/data/strings.he.json",
+      "line": 589,
+      "key": "minigame.spreadWait",
+      "current": "מניפה בעוד {seconds} שנ׳",
+      "proposed": "ירי מניפה בעוד {seconds} שנ׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0061",
+      "file": "workout/island/data/strings.he.json",
+      "line": 525,
+      "key": "runUpgrade.laser",
+      "current": "קרן חודרת",
+      "proposed": "לייזר חודר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0062",
+      "file": "workout/island/data/strings.he.json",
+      "line": 562,
+      "key": "powerup.wing",
+      "current": "כוכב עזר",
+      "proposed": "חללית ליווי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0063",
+      "file": "workout/island/data/strings.he.json",
+      "line": 528,
+      "key": "runUpgrade.wing",
+      "current": "כוכב עזר",
+      "proposed": "חללית ליווי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0064",
+      "file": "workout/island/data/strings.he.json",
+      "line": 593,
+      "key": "runUpgrade.wing.hint",
+      "current": "כוכב מלווה שיורה איתך",
+      "proposed": "חללית מלווה שיורה יחד איתנו",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0065",
+      "file": "workout/island/data/strings.he.json",
+      "line": 498,
+      "key": "equipment.weapon.hint",
+      "current": "חלליות ליווי ולייזר קבוע. מניפה היא בונוס זמני.",
+      "proposed": "חלליות ליווי ולייזר קבוע. ירי מניפה הוא תוספת לזמן קצר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0066",
+      "file": "workout/island/data/strings.he.json",
+      "line": 575,
+      "key": "sound.mute",
+      "current": "השתק",
+      "proposed": "כיבוי צליל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0067",
+      "file": "workout/island/data/strings.he.json",
+      "line": 576,
+      "key": "sound.unmute",
+      "current": "הפעל צליל",
+      "proposed": "הפעלת צליל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0068",
+      "file": "workout/island/data/strings.he.json",
+      "line": 603,
+      "key": "minigame.soccer.eyebrow",
+      "current": "מעבדת כדורגל · 3 על 3",
+      "proposed": "ליגת הכדורגל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0069",
+      "file": "workout/island/data/strings.he.json",
+      "line": 619,
+      "key": "minigame.soccer.ranksHint",
+      "current": "מעבדת שדרוגים · דרגות 1–5 לבדיקה",
+      "proposed": "משפרים את הקבוצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0070",
+      "file": "workout/island/data/strings.he.json",
+      "line": 660,
+      "key": "minigame.soccer.loadError",
+      "current": "לא הצלחנו לטעון את המעבדה. רעננו כדי לנסות שוב.",
+      "proposed": "המגרש לא נטען. טוענים שוב כדי לנסות מחדש.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0071",
+      "file": "workout/island/data/strings.he.json",
+      "line": 662,
+      "key": "minigame.soccer.saved",
+      "current": "התוצאה נשמרה במעבדה",
+      "proposed": "תוצאת המשחק נשמרה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0072",
+      "file": "workout/island/data/strings.he.json",
+      "line": 668,
+      "key": "minigame.soccer.localOnly",
+      "current": "מעבדה עצמאית · השמירה כאן בלבד",
+      "proposed": "ההתקדמות נשמרת במכשיר הזה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0073",
+      "file": "workout/island/data/strings.he.json",
+      "line": 628,
+      "key": "minigame.soccer.touchHelp",
+      "current": "מזיזים בג׳ויסטיק. נוגעים לַמסירה, מחזיקים ומשחררים לבעיטה. החץ מסמן אותך.",
+      "proposed": "מזיזים בג׳ויסטיק. נגיעה קצרה למסירה. מחזיקים ומשחררים לבעיטה. החץ מסמן את השחקן שלנו.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0074",
+      "file": "workout/island/data/strings.he.json",
+      "line": 692,
+      "key": "minigame.soccer.rank.0",
+      "current": "ליגה ד",
+      "proposed": "ליגה ד׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0075",
+      "file": "workout/island/data/strings.he.json",
+      "line": 693,
+      "key": "minigame.soccer.rank.1",
+      "current": "ליגה ג",
+      "proposed": "ליגה ג׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0076",
+      "file": "workout/island/data/strings.he.json",
+      "line": 694,
+      "key": "minigame.soccer.rank.2",
+      "current": "ליגה ב",
+      "proposed": "ליגה ב׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0077",
+      "file": "workout/island/data/strings.he.json",
+      "line": 695,
+      "key": "minigame.soccer.rank.3",
+      "current": "ליגה א",
+      "proposed": "ליגה א׳",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0078",
+      "file": "workout/island/data/strings.he.json",
+      "line": 701,
+      "key": "minigame.soccer.feature.5",
+      "current": "שוער עירני",
+      "proposed": "שוער ערני",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0079",
+      "file": "workout/island/data/strings.he.json",
+      "line": 735,
+      "key": "soccer.attribute.stamina",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0080",
+      "file": "workout/island/data/strings.he.json",
+      "line": 750,
+      "key": "soccer.sprint",
+      "current": "ספרינט",
+      "proposed": "ריצה מהירה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0081",
+      "file": "workout/island/data/strings.he.json",
+      "line": 751,
+      "key": "soccer.energy",
+      "current": "מד ספרינט",
+      "proposed": "כוח לריצה מהירה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0082",
+      "file": "workout/island/data/strings.he.json",
+      "line": 744,
+      "key": "soccer.training.max",
+      "current": "התכונה כבר ברמה המרבית, 99",
+      "proposed": "התכונה הגיעה לרמה הגבוהה ביותר: 99",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0083",
+      "file": "workout/island/data/strings.he.json",
+      "line": 845,
+      "key": "soccer.practice.daily",
+      "current": "עַד {cap} תַּרְגִּילִים מְתַגְמְלִים בְּיוֹם. אֶפְשָׁר לְהַמְשִׁיךְ לְשַׂחֵק לַהֲנָאָה!",
+      "proposed": "עַד {cap} תַּרְגִּילִים בְּיוֹם נוֹתְנִים נְקֻדּוֹת. אֶפְשָׁר לְהַמְשִׁיךְ לְשַׂחֵק גַּם אַחֲרֵי כֵן",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0084",
+      "file": "workout/island/data/strings.he.json",
+      "line": 853,
+      "key": "soccer.practice.message.0",
+      "current": "⚽ אַלּוּפִים מִתְאַמְּנִים גַּם בֶּחָצֵר! מַתְאִים לְךָ עֶשֶׂר בְּעִיטוֹת לַקִּיר הַיּוֹם?",
+      "proposed": "⚽ אֶפְשָׁר לְתַרְגֵּל גַּם בֶּחָצֵר. אוּלַי נְנַסֶּה עֶשֶׂר בְּעִיטוֹת לַקִּיר?",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0085",
+      "file": "workout/island/data/strings.he.json",
+      "line": 813,
+      "key": "placement.voiceHint",
+      "current": "לְחַץ כָּאן לְעֶזְרָה בְּמִקּוּם.",
+      "proposed": "לוֹחֲצִים כָּאן לְעֶזְרָה בִּבְחִירַת מָקוֹם.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0086",
+      "file": "workout/island/data/strings.he.json",
+      "line": 997,
+      "key": "learning.done",
+      "current": "כָּל הַכָּבוֹד!",
+      "proposed": "כָּל הַכָּבוֹד",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0087",
+      "file": "workout/island/data/strings.he.json",
+      "line": 994,
+      "key": "learning.subtitle",
+      "current": "8 שְׁאֵלוֹת · כְּ־2–3 דַּקּוֹת · בְּקֶצֶב שֶׁלָּכֶם",
+      "proposed": "שְׁאֵלוֹת קְצָרוֹת, בְּקֶצֶב שֶׁלָּכֶם",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0088",
+      "file": "workout/island/data/strings.he.json",
+      "line": 996,
+      "key": "learning.dailyHint",
+      "current": "מְסַיְּמִים שְׁנֵי סְבָבִים וּפוֹתְחִים אֶת הַמִּשְׂחָקִים",
+      "proposed": "מְסַיְּמִים אֶת סְבָבֵי הַיּוֹם וּפוֹתְחִים אֶת הַמִּשְׂחָקִים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0089",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1682,
+      "key": "catch.throw",
+      "current": "זרוק",
+      "proposed": "זריקה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0090",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1738,
+      "key": "catch.go",
+      "current": "סע",
+      "proposed": "לדרך",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0091",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1698,
+      "key": "catch.dragHint",
+      "current": "גוררים לכוון",
+      "proposed": "גוררים כדי לכוון",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0092",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1777,
+      "key": "catch.reloading",
+      "current": "טוען",
+      "proposed": "טוענים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0093",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1754,
+      "key": "catch.pop.ram",
+      "current": "פגיעה! עוד כמה כאלה ויעצור",
+      "proposed": "פגיעה. עוד כמה פגיעות והרכב ייעצר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0094",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1748,
+      "key": "catch.pop.crimCrash",
+      "current": "הפושע התנגש! תתקרב",
+      "proposed": "הפושע התנגש. מתקרבים אליו",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0095",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1874,
+      "key": "catch.pop.down",
+      "current": "הרכב נפל, הפושע בורח ברגל",
+      "proposed": "הרכב נעצר. הפושע בורח ברגל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0096",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1884,
+      "key": "catch.chase.down",
+      "current": "הרכב נפל, הפושע בורח ברגל. זריקות: {throws}",
+      "proposed": "הרכב נעצר. הפושע בורח ברגל. זריקות: {throws}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0097",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1863,
+      "key": "catch.weapon.tyres",
+      "current": "פנצ׳ר",
+      "proposed": "ירי לגלגל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0098",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1866,
+      "key": "catch.weapon.emp",
+      "current": "פולס",
+      "proposed": "גל חשמלי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0099",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1867,
+      "key": "catch.weapon.mark",
+      "current": "סימון",
+      "proposed": "סימון למעקב",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0100",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1879,
+      "key": "catch.pop.emp",
+      "current": "פולס, הרכב נעצר לרגע",
+      "proposed": "גל חשמלי. הרכב נעצר לרגע",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0101",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1871,
+      "key": "catch.weapon.emp.hint",
+      "current": "מתקרבים ממש, הפולס עוצר את הרכב לרגע",
+      "proposed": "מתקרבים מאוד. הגל החשמלי עוצר את הרכב לרגע",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0102",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1881,
+      "key": "catch.pop.close",
+      "current": "זמן קרוב, הוא מאט",
+      "proposed": "הילוך איטי. הפושע מאט",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0103",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1890,
+      "key": "catch.bow.close",
+      "current": "זמן קרוב",
+      "proposed": "הילוך איטי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0104",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1888,
+      "key": "catch.lockHint7",
+      "current": "מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי",
+      "proposed": "מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0105",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1883,
+      "key": "catch.pop.toolEmpty",
+      "current": "אין עוד, מחליפים כלי",
+      "proposed": "הכלי התרוקן. מחליפים כלי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0106",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1886,
+      "key": "catch.ammo7",
+      "current": "נשאר: {count}",
+      "proposed": "מלאי: {count}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0107",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1686,
+      "key": "catch.tool.narrow.hint",
+      "current": "מדויקת וטווח ארוך",
+      "proposed": "רשת מדויקת שמגיעה רחוק",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0108",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1688,
+      "key": "catch.tool.wide.hint",
+      "current": "תופסת בגדול, טווח קצר",
+      "proposed": "רשת גדולה שמגיעה למרחק קצר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0109",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1690,
+      "key": "catch.tool.rope.hint",
+      "current": "טס ישר, לא נדחף ברוח",
+      "proposed": "עף ישר. הרוח לא מזיזה אותו",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0110",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1706,
+      "key": "catch.arch.help.4",
+      "current": "יש כמה זריקות, וצריך כמה פגיעות מדויקות כדי לתפוס. פגיעה בראש היא תפיסה מושלמת עם בונוס.",
+      "proposed": "יש מספר מוגבל של זריקות. צריך לפגוע כמה פעמים כדי לתפוס. פגיעה בראש נותנת תפיסה מושלמת ובונוס.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0111",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1782,
+      "key": "catch.help6.3",
+      "current": "הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.",
+      "proposed": "הפושע בורח ברגל. מחזיקים כדי למתוח את הרשת. גוררים כדי לכוון ומשחררים כדי לזרוק.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0112",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1787,
+      "key": "rescue.restart",
+      "current": "נתקע? אתחול המשחק",
+      "proposed": "הפעלה מחדש",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0113",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1790,
+      "key": "rescue.lite",
+      "current": "אתחול עם גרסה קלה",
+      "proposed": "טעינת גרסה קלה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0114",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1791,
+      "key": "rescue.clear",
+      "current": "ניקוי מטמון הנכסים של המשחק",
+      "proposed": "הורדת קבצי המשחק מחדש",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0115",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1794,
+      "key": "rescue.hintLite",
+      "current": "האתחול לא עזר. אפשר לנסות גרסה קלה: איכות נמוכה ובלי אפקטים.",
+      "proposed": "המשחק עדיין לא נפתח. אפשר לנסות גרסה קלה עם פחות אפקטים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0116",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1795,
+      "key": "rescue.hintClear",
+      "current": "גם הגרסה הקלה לא עלתה. אפשר לנקות את קבצי הנכסים של המשחק ולטעון אותם שוב. השמירות לא נמחקות.",
+      "proposed": "המשחק עדיין לא נפתח. אפשר להוריד מחדש את קבצי המשחק. ההתקדמות נשמרת.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0117",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1339,
+      "key": "city.subtitle",
+      "current": "מתכננים שכונות, מחברים לכבישים ומאזנים בין שירותים, הכנסות וצמיחה.",
+      "proposed": "בונים שכונות, מחברים כבישים ודואגים לתושבים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0118",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1361,
+      "key": "city.capacity",
+      "current": "קיבולת: {capacity}",
+      "proposed": "מקום ל־{capacity} תושבים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0119",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1368,
+      "key": "city.taxRate",
+      "current": "שיעור מס עירוני",
+      "proposed": "גובה המס בעיר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0120",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1357,
+      "key": "city.balance",
+      "current": "מאזן לדקה",
+      "proposed": "מה נשאר בכל דקה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0121",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1373,
+      "key": "city.net",
+      "current": "מאזן לאחר הוצאות",
+      "proposed": "מה נשאר אחרי ההוצאות",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0122",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1378,
+      "key": "city.plan",
+      "current": "ייעוד מגרש",
+      "proposed": "בחירת סוג מגרש",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0123",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1386,
+      "key": "city.removeZone",
+      "current": "ביטול ייעוד",
+      "proposed": "ביטול תכנון",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0124",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1400,
+      "key": "city.reason.water",
+      "current": "נדרש כיסוי מים למגרש החדש",
+      "proposed": "צריך לחבר את המגרש למים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0125",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1399,
+      "key": "city.reason.jobs",
+      "current": "נדרשים מקומות עבודה נוספים",
+      "proposed": "צריך עוד מקומות עבודה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0126",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1437,
+      "key": "city.site.industry",
+      "current": "תעדוף מרחק מבתי מגורים",
+      "proposed": "מקום רחוק מבתים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0127",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1411,
+      "key": "city.closeMap",
+      "current": "סגירת מפת הכיסוי",
+      "proposed": "סגירת המפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0128",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1415,
+      "key": "city.collapse",
+      "current": "מזעור לוח העירייה",
+      "proposed": "מזעור",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0129",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1416,
+      "key": "city.expand",
+      "current": "הרחבת לוח העירייה",
+      "proposed": "הרחבה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0130",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1421,
+      "key": "city.action.coverage",
+      "current": "בדיקת כיסוי {department} במפה",
+      "proposed": "בדיקת {department} במפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0131",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1432,
+      "key": "city.blueprintHint",
+      "current": "בחר מספר במפה או ברשימה כדי לראות את המבנה במקום המוצע. אפשר לשנות מקום לפני האישור. משלמים רק בלחיצה על בנייה.",
+      "proposed": "בוחרים מספר במפה או ברשימה כדי לראות מקום מוצע. אפשר לשנות את המקום. משלמים רק כשלוחצים על בנייה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0132",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1374,
+      "key": "city.fundingHint",
+      "current": "תקציב השירות משפיע על ההוצאה, הקיבולת וטווח הכיסוי. שירות שבשיפוץ או מנותק מרשת הכבישים אינו מכסה תושבים במפת הניהול.",
+      "proposed": "התקציב קובע לכמה תושבים השירות עוזר ועד כמה רחוק הוא מגיע. שירות שבתיקון או בלי כביש לא עוזר לתושבים כרגע.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0133",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1380,
+      "key": "city.zoneHint",
+      "current": "סימון מגרש הוא חינם. אפשר להוסיף כמה מגרשים ברצף ולסיים ב״סיום תכנון״. הפיתוח בודק כל 30 שניות ביקוש, כסף וחיבור לכביש; אחרי שמונה תושבים, מגורים נוספים זקוקים גם למים ולעבודה.",
+      "proposed": "סימון מגרש הוא חינם. מסיימים בלחיצה על ״סיום תכנון״. כל 30 שניות העיר בודקת אם יש מספיק כסף, כביש וצורך בבנייה. אחרי שמונה תושבים, בתים נוספים צריכים גם מים ומקומות עבודה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0134",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1450,
+      "key": "ready.listHint",
+      "current": "לכל מבנה מגרש קבוע ומסומן. הכבישים כבר מחוברים. בוחרים מגרש ומאשרים בנייה — בלי להזיז או לחפש מקום. מגרשים אפורים ייפתחו בהמשך.",
+      "proposed": "לכל מבנה יש מגרש מסומן וכביש מוכן. בוחרים מגרש ומאשרים בנייה. מגרשים אפורים ייפתחו בהמשך.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0135",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1447,
+      "key": "ready.help",
+      "current": "👆 בוחרים מגרש מסומן או מבנה מהתפריט, ומאשרים בנייה. לכל דבר כבר יש מקום מוכן.",
+      "proposed": "👆 בוחרים מגרש מסומן או מבנה בתפריט. מאשרים את הבנייה במקום המוכן.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0136",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1457,
+      "key": "ready.unavailable",
+      "current": "הבנייה עדיין אינה זמינה",
+      "proposed": "עדיין אי אפשר לבנות כאן",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0137",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1458,
+      "key": "ready.locked",
+      "current": "המגרש ייפתח בהמשך ההתקדמות בעיר",
+      "proposed": "המגרש ייפתח כשמתקדמים בעיר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0138",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1459,
+      "key": "ready.planned",
+      "current": "מגרש שמור להמשך ההתקדמות בעיר",
+      "proposed": "המגרש שמור להמשך המשחק",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0139",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1467,
+      "key": "ready.objective",
+      "current": "למגרש של המשימה",
+      "proposed": "למגרש המשימה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0140",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1664,
+      "key": "hoops.start.manage",
+      "current": "ניהול הקבוצה: חמישייה, אימון, הגדרות ושלבים",
+      "proposed": "ניהול הקבוצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0141",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1492,
+      "key": "hoops.shoot",
+      "current": "זריקה, להחזיק ולשחרר בזמן",
+      "proposed": "זריקה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0142",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1499,
+      "key": "hoops.sprint",
+      "current": "ספרינט",
+      "proposed": "ריצה מהירה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0143",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1525,
+      "key": "hoops.club.col.won",
+      "current": "נ",
+      "proposed": "ניצחונות",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0144",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1526,
+      "key": "hoops.club.col.lost",
+      "current": "ה",
+      "proposed": "הפסדים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0145",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1516,
+      "key": "hoops.club.chemistry",
+      "current": "כימיה {value}",
+      "proposed": "תיאום בקבוצה {value}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0146",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1529,
+      "key": "hoops.club.lineupHint",
+      "current": "לבחור חמישה שחקנים. החלפת חמישייה מורידה חצי מהכימיה של משחקים יחד.",
+      "proposed": "בוחרים חמישה שחקנים. החלפת החמישייה מורידה חצי מהתיאום שנצבר במשחקים יחד.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0147",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1536,
+      "key": "hoops.club.maxed",
+      "current": "השחקן הגיע לתקרה באימון הזה",
+      "proposed": "זה השיפור הכי גבוה שאפשר לקבל באימון הזה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0148",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1530,
+      "key": "hoops.club.saveLineup",
+      "current": "לשמור את החמישייה",
+      "proposed": "שמירת חמישייה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0149",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1557,
+      "key": "hoops.pos.SF",
+      "current": "פורוורד",
+      "proposed": "קיצוני",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0150",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1558,
+      "key": "hoops.pos.PF",
+      "current": "פאוור",
+      "proposed": "שחקן פנים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0151",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1572,
+      "key": "hoops.rating.perimD",
+      "current": "הגנה בחוץ",
+      "proposed": "הגנה רחוק מהסל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0152",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1573,
+      "key": "hoops.rating.interiorD",
+      "current": "הגנה בצבע",
+      "proposed": "הגנה ליד הסל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0153",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1568,
+      "key": "hoops.rating.three",
+      "current": "שלוש",
+      "proposed": "קליעה לשלוש",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0154",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1561,
+      "key": "hoops.drill.finishing",
+      "current": "סיומות",
+      "proposed": "קליעה ליד הסל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0155",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1619,
+      "key": "alpine.callout.air.kicker",
+      "current": "AIR TIME",
+      "proposed": "באוויר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0156",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1621,
+      "key": "alpine.callout.hit.kicker",
+      "current": "KEEP GOING",
+      "proposed": "ממשיכים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0157",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1623,
+      "key": "alpine.callout.boost.kicker",
+      "current": "FULL SEND",
+      "proposed": "האצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0158",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1625,
+      "key": "alpine.callout.pad.kicker",
+      "current": "BOOST PAD",
+      "proposed": "משטח האצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0159",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1627,
+      "key": "alpine.callout.overtake.kicker",
+      "current": "OVERTAKE",
+      "proposed": "עקיפה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0160",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1629,
+      "key": "alpine.callout.gate.kicker",
+      "current": "CLEAN GATE",
+      "proposed": "עברנו בשער",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0161",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1648,
+      "key": "alpine.callout.crash.kicker",
+      "current": "WIPEOUT",
+      "proposed": "נפילה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0162",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1628,
+      "key": "alpine.callout.overtake",
+      "current": "עוד אחד מאחוריך.",
+      "proposed": "עוד גולש מאחורינו.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0163",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1608,
+      "key": "alpine.best",
+      "current": "השיא שלך במסלול:",
+      "proposed": "השיא במסלול:",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0164",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1609,
+      "key": "alpine.goal",
+      "current": "יעד לשלב הבא: מקום {rank} ומעלה",
+      "proposed": "כדי לעבור שלב: מקום {rank} או טוב יותר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0165",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1192,
+      "key": "racing.target",
+      "current": "יעד: מקום {rank} ומעלה",
+      "proposed": "יעד: מקום {rank} או טוב יותר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0166",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1186,
+      "key": "racing.boost",
+      "current": "בוסט!",
+      "proposed": "האצה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0167",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1178,
+      "key": "racing.drift",
+      "current": "דריפט / בלם",
+      "proposed": "בלם והחלקה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0168",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1176,
+      "key": "equipment.islandRacing.nitro.hint",
+      "current": "בוסט ממושך יותר בישורות",
+      "proposed": "האצה ארוכה יותר בקטעים ישרים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0169",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1960,
+      "key": "fire.v24.say.friendOut",
+      "current": "החבר בחוץ. מכבים את מה שנשאר",
+      "proposed": "מי שחילצנו כבר בחוץ. מכבים את האש שנשארה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0170",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1953,
+      "key": "fire.v24.say.heavy",
+      "current": "אש כבדה. קצף מכבה אותה מהר",
+      "proposed": "אש חזקה. קצף מכבה אותה מהר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0171",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1852,
+      "key": "fire.v23.say.heavy",
+      "current": "אש כבדה. קצף מכבה אותה מהר",
+      "proposed": "אש חזקה. קצף מכבה אותה מהר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0172",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1958,
+      "key": "fire.v24.say.roomClear",
+      "current": "החדר נקי. ממשיכים",
+      "proposed": "כל האש בחדר כבתה. ממשיכים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0173",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1842,
+      "key": "fire.v23.say.roomClear",
+      "current": "החדר נקי. ממשיכים לחדר הבא",
+      "proposed": "כל האש בחדר כבתה. ממשיכים לחדר הבא",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0174",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1146,
+      "key": "fire.mission.30.brief",
+      "current": "תכננו מים ומסלול, כבו את העיר וחלצו את כולם.",
+      "proposed": "מתכננים מסלול ועצירות למילוי מים. מכבים את האש בעיר ומחלצים את כולם.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0175",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1672,
+      "key": "minigame.boarDefense.help.2",
+      "current": "במוסך קונים ומשדרגים ארבעה נשקים, ביצורים ויכולות. המטבעות של החווה נשמרים בנפרד ממטבעות העיר.",
+      "proposed": "במוסך קונים כלי נשק, משדרגים אותם ומשפרים את ההגנה. מטבעות החווה נשמרים בנפרד ממטבעות העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0176",
+      "file": "workout/island/data/strings.he.json",
+      "line": 327,
+      "key": "minigame.alienDefense.help.1",
+      "current": "מזיזים עם הג׳ויסטיק או בגרירה. כפתור הברק הוא הירי הרגיל: קצב קבוע כל עוד מחזיקים, בלי הפסקות. כפתור הוולקן יורה מהר מאוד, והמד שלו מתמלא: ירוק, צהוב, אדום. כשהמד מלא הוולקן נח שתי שניות ומהבהב באדום, ואז חוזר. הירי הרגיל עובד כל הזמן, גם יחד עם הוולקן. מחסנית וולקן נופלת מחייזרים גדולים, ולפעמים גם מאחרים אחרי שירו בוולקן: עפים אליה והוולקן מתקרר מיד ונשאר קר כמה שניות. בונוס מניפה נותן ירי משולש לזמן קצר.",
+      "proposed": "זזים בג׳ויסטיק או בגרירה. מחזיקים את כפתור הברק לירי רגיל ורצוף. כפתור הוולקן יורה מהר מאוד. המד שלו עובר מירוק לצהוב ולאדום. כשהמד מלא, הוולקן נח שתי שניות ומהבהב באדום. הירי הרגיל עובד גם בזמן המנוחה וגם יחד עם הוולקן. אוספים מחסנית וולקן כדי לקרר אותו מיד. הוא נשאר קר לכמה שניות. מחסניות נופלות מחייזרים גדולים, ולפעמים גם מאחרים אחרי ירי בוולקן. תוספת ירי מניפה נותנת שלוש יריות יחד לזמן קצר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0177",
+      "file": "workout/island/data/strings.he.json",
+      "line": 328,
+      "key": "minigame.alienDefense.help.1.v15",
+      "current": "מזיזים בעדינות עם הג׳ויסטיק או בגרירה. מחזיקים את כפתור הירי: קודם פרץ וולקן קצר, אחריו הקנים נחים כשתי שניות (המד אדום), ואז ירי יציב כל עוד מחזיקים. אחרי שנייה וחצי בלי ירי הפרץ חוזר. בונוס מניפה נותן ירי משולש לזמן קצר.",
+      "proposed": "זזים בג׳ויסטיק או בגרירה. מחזיקים את כפתור הירי כדי להתחיל בפרץ וולקן קצר. אחריו הקנים נחים כשתי שניות והמד אדום. אחר כך הירי נמשך כל עוד מחזיקים. מפסיקים לירות לשנייה וחצי כדי לקבל שוב את הפרץ. תוספת ירי מניפה נותנת שלוש יריות יחד לזמן קצר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0178",
+      "file": "workout/island/data/strings.he.json",
+      "line": 333,
+      "key": "minigame.alienDefense.help.3",
+      "current": "עיגול מסמן את אזור הפגיעה. הטיל עף אליו ופוגע בחלק מהמערך. מתחילים כל שלב עם שני טילים. ליד כפתור הטיל יש כפתור קטן שמחליף נשק: ברק שקופץ בין כמה חייזרים, וגל הלם שמוחק את היריות שלהם בדרך. תחמושת לכל נשק נופלת מחייזרים שהופלו: עפים אליה והיא מתמלאת.",
+      "proposed": "העיגול מראה לאן הטיל יפגע. מתחילים כל שלב עם שני טילים. הכפתור הקטן ליד כפתור הטיל מחליף נשק. ברק שרשרת קופץ בין חייזרים. גל הלם מוחק את היריות שלהם. אוספים תחמושת שנופלת מחייזרים שהופלו כדי למלא את הנשק.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0179",
+      "file": "workout/island/data/strings.he.json",
+      "line": 338,
+      "key": "minigame.navalDuel.help.1",
+      "current": "הג׳ויסטיק משיט לכל כיוון. שחררו כדי לבלום. נגיעה בספינת אויב מפעילה את המכ״ם: הטבעת סביבה מתמלאת בשנייה בערך (יותר לספינה רחוקה), ורק אז התותח ננעל ומסתובב אליה לבד. ספינה מחוץ לטווח המכ״ם לא ננעלת, ונעילה נשברת כשהספינה יוצאת מהטווח. כפתור הנעילה שליד האש נועל על הספינה המסוכנת או הקרובה, לחיצה נוספת עוברת לבאה, והחלקה עליו עוברת בין המטרות. כשהנעילה ירוקה, לחיצה על האש יורה.",
+      "proposed": "משיטים את הספינה בג׳ויסטיק. משחררים כדי לבלום. נוגעים בספינת אויב כדי להפעיל את המכ״ם. כשהטבעת מתמלאת, התותח מכוון אליה לבד. זה לוקח בערך שנייה, וקצת יותר לספינה רחוקה. המכ״ם עובד רק בתוך הטווח שלו. ספינה שיוצאת מהטווח מאבדת את הנעילה. כפתור הנעילה בוחר ספינה מסוכנת או קרובה. לחיצה נוספת או החלקה עליו מחליפה מטרה. כשהנעילה ירוקה, לוחצים אש כדי לירות.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0180",
+      "file": "workout/island/data/strings.he.json",
+      "line": 682,
+      "key": "minigame.soccer.help.1",
+      "current": "זָזִים בַּג׳וֹיְסְטִיק. גּוֹרְרִים מִכַּפְתּוֹר הַבְּעִיטָה אוֹ הַמְּסִירָה לְכִוּוּן נִפְרָד מֵהָרִיצָה. נְגִיעָה קְצָרָה מְכַוֶּנֶת בְּעֶזְרָה; הַחֲזָקָה טוֹעֶנֶת עָצְמָה וְגֹבַהּ. הַחֲזָקָה אֲרֻכָּה מְאוֹד עֲלוּלָה לַעֲבוֹר מֵעַל הַשַּׁעַר.",
+      "proposed": "זָזִים בַּג׳וֹיְסְטִיק. גּוֹרְרִים מִכַּפְתּוֹר הַבְּעִיטָה אוֹ הַמְּסִירָה כְּדֵי לְכַוֵּן. אֶפְשָׁר לְכַוֵּן לְצַד אַחֵר מִכִּוּוּן הָרִיצָה. נְגִיעָה קְצָרָה נוֹתֶנֶת עֶזְרָה בַּכִּוּוּן. הַחֲזָקָה מוֹסִיפָה כֹּחַ וְגֹבַהּ. הַחֲזָקָה אֲרֻכָּה מִדַּי עֲלוּלָה לִשְׁלֹחַ אֶת הַכַּדּוּר מֵעַל הַשַּׁעַר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0181",
+      "file": "workout/island/data/strings.he.json",
+      "line": 683,
+      "key": "minigame.soccer.help.2",
+      "current": "מְסִירָה אֲרֻכָּה מַגְבִּיהָה; בְּעִיטָה לְיַד כַּדּוּר בָּאֲוִיר נוֹגַחַת. בְּהֲגָנָה: הַכַּפְתּוֹר הַגָּדוֹל גְּלִישָׁה וּמְסִירָה חֲטִיפָה. בְּחוּץ וּבְקֶרֶן מְכַוְּנִים וּמְשַׁחְרְרִים מְסִירָה.",
+      "proposed": "מַחֲזִיקִים מְסִירָה כְּדֵי לְהַגְבִּיהַּ. לוֹחֲצִים עַל בְּעִיטָה לְיַד כַּדּוּר בָּאֲוִיר כְּדֵי לִנְגֹּחַ. בַּהֲגָנָה, הַכַּפְתּוֹר הַגָּדוֹל מַפְעִיל גְּלִישָׁה. כַּפְתּוֹר הַמְּסִירָה מַפְעִיל חֲטִיפָה. בְּהוֹצָאַת חוּץ וּבְקֶרֶן, מְכַוְּנִים וּמְשַׁחְרְרִים אֶת כַּפְתּוֹר הַמְּסִירָה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0182",
+      "file": "workout/island/data/strings.he.json",
+      "line": 684,
+      "key": "minigame.soccer.help.3",
+      "current": "אֶפְשָׁר לִבְחֹר לִהְיוֹת הַשּׁוֹעֵר לִפְנֵי הַמִּשְׂחָק: זוֹזִים עַל הַקַּו וְצוֹלְלִים בַּכַּפְתּוֹר הַגָּדוֹל. עִם כַּדּוּר בַּיָּדַיִם אֶפְשָׁר לָנוּעַ בָּרְחָבָה, לְכַוֵּן וְלִמְסֹר אוֹ לִבְעֹט. הַכַּדּוּר יוֹצֵא אַחֲרֵי חָמֵשׁ שְׁנִיּוֹת. תִּרְגּוּל קָצָר מְשַׁפֵּר אֶת הַכַּרְטִיס לְאַט.",
+      "proposed": "לִפְנֵי הַמִּשְׂחָק אֶפְשָׁר לִבְחֹר לְשַׂחֵק בַּשַּׁעַר. זָזִים עַל הַקַּו וְצוֹלְלִים בַּכַּפְתּוֹר הַגָּדוֹל. כְּשֶׁהַכַּדּוּר בַּיָּדַיִם, אֶפְשָׁר לָזוּז בָּרְחָבָה, לְכַוֵּן וְלִמְסֹר אוֹ לִבְעֹט. אַחֲרֵי חָמֵשׁ שְׁנִיּוֹת הַכַּדּוּר יוֹצֵא לְבַד. תִּרְגּוּל קָצָר מְשַׁפֵּר בְּהַדְרָגָה אֶת כַּרְטִיס הַשַּׂחְקָן.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0183",
+      "file": "workout/island/data/strings.he.json",
+      "line": 685,
+      "key": "minigame.soccer.speed.hint",
+      "current": "דַּרְגַּת מְהִירוּת לְאַרְבַּעַת שַׂחְקְנֵי הָעִיר.",
+      "proposed": "מְהִירוּת גְּבוֹהָה יוֹתֵר לְשַׂחְקְנֵי הָעִיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0184",
+      "file": "workout/island/data/strings.he.json",
+      "line": 686,
+      "key": "minigame.soccer.kick.hint",
+      "current": "דַּרְגַּת בְּעִיטָה לְאַרְבַּעַת שַׂחְקְנֵי הָעִיר.",
+      "proposed": "בְּעִיטָה חֲזָקָה יוֹתֵר לְשַׂחְקְנֵי הָעִיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0185",
+      "file": "workout/island/data/strings.he.json",
+      "line": 687,
+      "key": "minigame.soccer.guard.hint",
+      "current": "דַּרְגַּת הֲגָנָה לְאַרְבַּעַת שַׂחְקְנֵי הָעִיר.",
+      "proposed": "הֲגָנָה טוֹבָה יוֹתֵר לְשַׂחְקְנֵי הָעִיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0186",
+      "file": "workout/island/data/strings.he.json",
+      "line": 676,
+      "key": "minigame.soccer.lab",
+      "current": "G3 / LAB",
+      "proposed": "כדורגל",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0187",
+      "file": "workout/island/data/strings.he.json",
+      "line": 465,
+      "key": "equipment.buy",
+      "current": "{title} · שדרוג {level} · {cost} 🪙",
+      "proposed": "{title} · {level} · {cost} 🪙",
+      "mode": "manual-template",
+      "implementation_note": "כיום שם הפריט נמצא רק בכפתור. ההצעה שומרת אותו בכפתור. לקיצור נוסף יש להוסיף כותרת פריט נפרדת ולשמור את {title} בשם הנגיש. אין למחוק את המשתנה בלי שינוי מבנה התצוגה."
+    },
+    {
+      "id": "SA-0188",
+      "file": "workout/island/data/strings.he.json",
+      "line": 816,
+      "key": "soccer.resetName",
+      "current": "לַחֲזֹר לַשֵּׁם הַמְּקוֹרִי",
+      "proposed": "שֵׁם מְקוֹרִי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0189",
+      "file": "workout/island/data/strings.he.json",
+      "line": 821,
+      "key": "soccer.editTeam",
+      "current": "עֲרִיכַת שֵׁמוֹת וּמִסְפָּרִים",
+      "proposed": "עֲרִיכַת קְבוּצָה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0190",
+      "file": "workout/island/data/strings.he.json",
+      "line": 817,
+      "key": "soccer.rosters",
+      "current": "🃏 כַּרְטִיסֵי שְׁתֵּי הַקְּבוּצוֹת",
+      "proposed": "כַּרְטִיסֵי הַקְּבוּצוֹת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0191",
+      "file": "workout/island/data/strings.he.json",
+      "line": 823,
+      "key": "soccer.playRole.field",
+      "current": "⚽ אֲנִי שַׂחְקַן שָׂדֶה",
+      "proposed": "שַׂחְקַן שָׂדֶה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0192",
+      "file": "workout/island/data/strings.he.json",
+      "line": 824,
+      "key": "soccer.playRole.keeper",
+      "current": "🧤 אֲנִי הַשּׁוֹעֵר",
+      "proposed": "שְׁמִירָה בַּשַּׁעַר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0193",
+      "file": "workout/island/data/strings.he.json",
+      "line": 669,
+      "key": "minigame.soccer.starsHint",
+      "current": "ניצחון ★ · הפרש 2 ★★ · ניצחון בלי לספוג ★★★",
+      "proposed": "כוכב על ניצחון. שני כוכבים על ניצחון בהפרש של שני שערים. שלושה כוכבים על ניצחון בלי לספוג.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0194",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1369,
+      "key": "city.taxHint",
+      "current": "מס גבוה מוסיף הכנסה ומקטין את הביקוש לאזורים חדשים. ההכנסות הקיימות מהעיר ממשיכות כרגיל.",
+      "proposed": "מס גבוה מכניס יותר מטבעות, אבל פחות תושבים ירצו לבנות אזורים חדשים. הכנסות העיר שכבר קיימות ממשיכות כרגיל.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0195",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1352,
+      "key": "city.explanation",
+      "current": "הפעלת ניהול העיר מוסיפה מסים והוצאות שוטפות. מגרשים מתפתחים אוטומטית בכסף הקיים לפי הביקוש, הכבישים והשירותים. אפשר להשהות בכל רגע.",
+      "proposed": "ניהול העיר מוסיף מסים והוצאות קבועות. העיר בונה במגרשים שסימנתם כשיש מספיק מטבעות, צורך בבנייה, כבישים ושירותים. אפשר להשהות בכל רגע.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0196",
+      "file": "workout/island/data/strings.he.json",
+      "line": 374,
+      "key": "app.upgradeSupply",
+      "current": "יכולת שירות לעוד {amount} תושבים",
+      "proposed": "מקום לעוד {amount} תושבים בשירות הזה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0197",
+      "file": "workout/island/data/strings.he.json",
+      "line": 376,
+      "key": "app.upgradeEffects",
+      "current": "יותר כיסוי והשפעה בעיר",
+      "proposed": "השירות מגיע ליותר מקומות ועוזר יותר לעיר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0198",
+      "file": "workout/island/data/strings.he.json",
+      "line": 350,
+      "key": "reason.limit.harbor",
+      "current": "כבר יש נמל ימי בעיר. אפשר להזיז או לשדרג אותו.",
+      "proposed": "כבר יש נמל בעיר. אפשר להזיז או לשדרג אותו.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0199",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1796,
+      "key": "rescue.cleared",
+      "current": "קבצי הנכסים של המשחק נוקו ({count}). טוענים מחדש.",
+      "proposed": "קובצי המשחק נמחקו מהמטמון ({count}). מורידים אותם שוב. ההתקדמות נשמרת.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0200",
+      "file": "workout/island/data/strings.he.json",
+      "line": 339,
+      "key": "minigame.navalDuel.help.2",
+      "current": "החזיקו את כפתור האש או את צד המסך שלו. גרירה לצדדים מסובבת את התותח, גרירה למעלה מרחיקה את הירייה וגרירה למטה מקרבת, והטבעת סביב הכפתור מראה את המרחק. הקשת מראה בדיוק איפה הפגז ינחת, ושחרור יורה פעם אחת.",
+      "proposed": "מחזיקים את כפתור האש או את צד המסך שלו כדי לכוון. גוררים לצדדים כדי לסובב את התותח. גוררים למעלה כדי לירות רחוק יותר, ולמטה כדי לירות קרוב יותר. הטבעת מראה את המרחק. הקשת מראה היכן הפגז ינחת. משחררים כדי לירות פעם אחת.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0201",
+      "file": "workout/island/data/strings.he.json",
+      "line": 340,
+      "key": "minigame.navalDuel.help.3",
+      "current": "נגיעה קצרה יורה מיד, ושחרור על סימן ה־X מבטל בלי לירות. פגיעה במרכז הספינה שווה יותר. סימון אדום מהבהב על המים מראה איפה ייפול ירי האויב: שטים ממנו. צוללת נשארת תמיד מתחת למים (רואים רק פריסקופ): פגזים וטילים עוברים מעליה, ורק טורפדו (הכפתור הכחול) פוגע בה. כשהספינות טבעו ומסוק או מטוס עוד באוויר, השלב מחכה עד שמפילים אותו בוולקן או שהוא עף. ליד כפתור האש בוחרים נשק: טיל עוקב, טורפדו שט על המים, מוקש וערכת תיקון.",
+      "proposed": "נגיעה קצרה יורה מיד. שחרור על X מבטל את הירי. פגיעה במרכז הספינה חזקה יותר. סימון כתום מזהיר לאן יגיע ירי. ליד כפתור האש בוחרים טיל מונחה, טורפדו, מוקש או ערכת תיקון. הטורפדו שט על פני המים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0202",
+      "file": "workout/island/data/strings.he.json",
+      "line": 776,
+      "key": "minigame.tennis.help.1",
+      "current": "זוזו עם הג׳ויסטיק. כשהכדור מתקרב, המד שבצד ליד הכפתורים נדלק כמו בהגשה והמחט זזה לבד: לוחצים על החבטה כשהמחט בירוק, וזו מכה מדויקת וחזקה. צהוב בסדר, אדום חלש. כפתור הקשת נותן הגבהה. כפתור הכדור היורד נותן כדור קצר וגבוה שנוחת ליד הרשת וקופץ: לפעמים היריב לא מספיק אליו, אבל אם עושים אותו שוב ושוב היריב כבר מחכה לו. אפשר לגרור על כפתור החבטה כדי לכוון.",
+      "proposed": "זזים בג׳ויסטיק. כשהכדור מתקרב, המחט במד מתחילה לזוז. לוחצים על חבטה כשהמחט בירוק כדי לחבוט חזק ומדויק. צהוב נותן חבטה סבירה, ואדום חבטה חלשה. כפתור הקשת מגביה את הכדור. כפתור הכדור היורד נותן מכה קצרה ליד הרשת. כדאי לגוון, כי היריב לומד. גוררים על כפתור החבטה כדי לכוון.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0203",
+      "file": "workout/island/data/strings.he.json",
+      "line": 777,
+      "key": "minigame.tennis.help.2",
+      "current": "כפתור החצים העולים מגיש: לחיצה ראשונה זורקת את הכדור, ולחיצה שנייה כשהמד ירוק חובטת. המד עולה ויורד שוב ושוב. אפשר גם להחזיק ולשחרר כשהמד ירוק. הפס הסגול באמצע הירוק נותן הגשה חזקה ומדויקת במיוחד.",
+      "proposed": "מגישים בכפתור החצים העולים. לחיצה ראשונה זורקת את הכדור. לחיצה שנייה כשהמד ירוק חובטת בו. אפשר גם להחזיק ולשחרר בירוק. המד עולה ויורד שוב ושוב. הפס הסגול שבירוק נותן הגשה חזקה ומדויקת יותר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0204",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1472,
+      "key": "minigame.streetSlam.help.1",
+      "current": "חמישה נגד חמישה באולם. שמים אצבע בצד שמאל של המסך, והג׳ויסטיק מופיע מתחתיה. דוחפים עד הסוף כדי לרוץ מהר. במחשב: חצים או WASD, ו-Shift לספרינט.",
+      "proposed": "משחקים חמישה נגד חמישה. מניחים אצבע בשמאל המסך כדי להציג ג׳ויסטיק. דוחפים אותו עד הסוף לריצה מהירה. במחשב זזים בחצים או במקשי WASD. מחזיקים Shift לריצה מהירה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0205",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1473,
+      "key": "minigame.streetSlam.help.2",
+      "current": "עם הכדור: מחזיקים את הכפתור הגדול ומשחררים כשהפס מעל השחקן בירוק. צהוב זו זריקה סבירה, אדום זו החטאה כמעט בטוחה. ליד הסל בריצה זו הנחה או הטבעה, בלי פס. לחיצה קצרה על כפתור המסירה מוסרת לחבר קרוב, לחיצה ארוכה מוסרת רחוק. במחשב: רווח זורק, E מוסר (להחזיק = רחוק), Q מטעה.",
+      "proposed": "מחזיקים את הכפתור הגדול ומשחררים כשהפס מעל השחקן ירוק. בצהוב הזריקה סבירה. באדום סביר שנחטיא. בריצה ליד הסל קולעים מקרוב או מטביעים, בלי פס. נגיעה בכפתור המסירה מוסרת לקרוב. החזקה מוסרת לרחוק. במחשב: רווח לזריקה, E למסירה ו־Q להטעיה. מחזיקים E למסירה רחוקה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0206",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1474,
+      "key": "minigame.streetSlam.help.3",
+      "current": "בהגנה: הכפתור הגדול קופץ לחסימה. קופצים ישר למעלה מול הזורק, וזה לא עבירה. בריבאונד השחקן רץ לכדור וקופץ לבד. הכפתור הבינוני חוטף והקטן מחליף שחקן. פסק זמן פותח חילופים.",
+      "proposed": "בהגנה, הכפתור הגדול מקפיץ לחסימה. קופצים ישר מול הזורק כדי להימנע מעבירה. אחרי החטאה, השחקן רץ לכדור וקופץ לבד. הכפתור הבינוני חוטף. הקטן מחליף שחקן. בפסק זמן אפשר להחליף שחקנים.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0207",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1169,
+      "key": "minigame.islandRacing.help.2",
+      "current": "בלמו עם הכפתור „בלם” לפני פנייה חדה: הפנייה עצמה לא מאטה את המכונית. אספו תאי אנרגיה ולחצו ניטרו בישורת. בכל מרוץ נכנסים פעם אחת לפיטס להחלפת צמיגים: המכונית נכנסת לבד בסוף ההקפה השנייה (במרוץ של שתי הקפות בסוף הראשונה), ולחיצה על „פיטס” מבטלת.",
+      "proposed": "המכונית מאיצה לבד. לוחצים על ״בלם״ לפני פנייה חדה. הפנייה עצמה לא מאטה. אוספים תאי אנרגיה ולוחצים ״ניטרו״ בקטע ישר. בכל מרוץ מחליפים צמיגים פעם אחת. המכונית נכנסת לבד בסוף ההקפה השנייה. במרוץ של שתי הקפות היא נכנסת בסוף הראשונה. לחיצה על כפתור הצמיגים מבטלת את הכניסה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0208",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1170,
+      "key": "minigame.islandRacing.help.3",
+      "current": "עברו בכל נקודות הביקורת וסיימו את כל ההקפות. בשלב הראשון מספיק להגיע בשלישייה הראשונה; בשלבים מתקדמים נלחמים על המקום הראשון. ירידה לשוליים מאטה, והחזרה למסלול שומרת על התקדמות הוגנת.",
+      "proposed": "עוברים בכל נקודות הביקורת ומסיימים את כל ההקפות. בשלב הראשון צריך לסיים בין שלושת הראשונים. בהמשך צריך להגיע למקום הראשון. ירידה לשוליים מאטה את המכונית. כשחוזרים למסלול, ההתקדמות נשמרת.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0209",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1891,
+      "key": "catch.help7.2",
+      "current": "אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.",
+      "proposed": "אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי: ירי לגלגל, רשת דבק, קוצים, גל חשמלי או סימון למעקב. מכניסים את הנקודה לעיגול שעל הרכב. כשהעיגול ירוק, לוחצים ירי. כל פגיעה ממלאת את מד הנזק. כשהמד מלא, הרכב נעצר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0210",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1916,
+      "key": "catch.help8.2",
+      "current": "אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.",
+      "proposed": "אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי. העיגול מראה את המטרה: הגלגל, הגג, הכביש לפני הרכב, הרכב כולו או תא המטען. מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי. עיגול אפור מסביר למה אי אפשר לירות כרגע.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0211",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1892,
+      "key": "catch.help7.4",
+      "current": "יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.",
+      "proposed": "מספר הזריקות מוגבל, וצריך לפגוע כמה פעמים. מכוונים קרוב לפושע כדי לקבל עזרה בכיוון. הוא מאט לרגע. העיגול המקווקו מראה לאן הוא רץ.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0212",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1677,
+      "key": "minigame.catchCriminal.help.2",
+      "current": "יורים כבר מההתחלה: כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כשמד הנזק מלא, הרכב נופל.",
+      "proposed": "אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי: ירי לגלגל, רשת דבק, קוצים, גל חשמלי או סימון למעקב. מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי. כשהמד מלא, הרכב נעצר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0213",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1704,
+      "key": "catch.arch.help.2",
+      "current": "כשהפושע יורד מהרכב, מכוונים כמו בחץ וקשת: גוררים ימינה ושמאלה לכיוון ולמעלה ולמטה לגובה, ומד הכוח משמאל. הקו הכחול מראה את המסלול.",
+      "proposed": "כשהפושע יורד מהרכב, מכוונים כמו בחץ וקשת. גוררים לצדדים כדי לכוון ולמעלה או למטה כדי לשנות גובה. מד הכוח נמצא משמאל. הקו הכחול מראה לאן הרשת תעוף.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0214",
+      "file": "workout/island/data/strings.he.json",
+      "line": 348,
+      "key": "reason.limit.factory",
+      "current": "הגעתם למספר המרבי של מבני בית חרושת בשלב הזה. אפשר לשדרג את הקיימים, או לאסוף חלקים להרחבת העיר.",
+      "proposed": "יש מספיק בתי חרושת כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0215",
+      "file": "workout/island/data/strings.he.json",
+      "line": 349,
+      "key": "reason.limit.farm",
+      "current": "אין צורך בעוד חווה כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק חוות כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0216",
+      "file": "workout/island/data/strings.he.json",
+      "line": 351,
+      "key": "reason.limit.fireStation",
+      "current": "אין צורך בעוד תחנת כיבוי כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק תחנות כיבוי כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0217",
+      "file": "workout/island/data/strings.he.json",
+      "line": 352,
+      "key": "reason.limit.waterTower",
+      "current": "אין צורך בעוד מגדל מים כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק מגדלי מים כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0218",
+      "file": "workout/island/data/strings.he.json",
+      "line": 353,
+      "key": "reason.limit.hospital",
+      "current": "אין צורך בעוד בית חולים כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק בתי חולים כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0219",
+      "file": "workout/island/data/strings.he.json",
+      "line": 354,
+      "key": "reason.limit.school",
+      "current": "אין צורך בעוד בית ספר כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק בתי ספר כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0220",
+      "file": "workout/island/data/strings.he.json",
+      "line": 355,
+      "key": "reason.limit.police",
+      "current": "אין צורך בעוד תחנת משטרה כרגע. אפשר לשדרג את המבנה הקיים, או להוסיף בתים כדי שהעיר תגדל.",
+      "proposed": "יש מספיק תחנות משטרה כרגע. אפשר לשדרג מבנה קיים או להמשיך להגדיל את העיר.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0221",
+      "file": "workout/island/data/strings.he.json",
+      "line": 357,
+      "key": "reason.limit.soccer",
+      "current": "כבר יש מגרש כדורגל. אפשר לשדרג את הקיים. בעיר הגדולה אפשר להוסיף מתקן נוסף כשהעיר תגדל מספיק.",
+      "proposed": "כבר יש מגרש כדורגל. אפשר לשדרג אותו. בהמשך, כשהעיר תגדל מספיק, יהיה מקום לעוד אחד.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0222",
+      "file": "workout/island/data/strings.he.json",
+      "line": 358,
+      "key": "reason.limit.tennis",
+      "current": "כבר יש מגרש טניס. אפשר לשדרג את הקיים. בעיר הגדולה אפשר להוסיף מתקן נוסף כשהעיר תגדל מספיק.",
+      "proposed": "כבר יש מגרש טניס. אפשר לשדרג אותו. בהמשך, כשהעיר תגדל מספיק, יהיה מקום לעוד אחד.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0223",
+      "file": "workout/island/data/strings.he.json",
+      "line": 359,
+      "key": "reason.limit.basketball",
+      "current": "כבר יש אולם כדורסל. אפשר לשדרג את הקיים. בעיר הגדולה אפשר להוסיף מתקן נוסף כשהעיר תגדל מספיק.",
+      "proposed": "כבר יש אולם כדורסל. אפשר לשדרג אותו. בהמשך, כשהעיר תגדל מספיק, יהיה מקום לעוד אחד.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0224",
+      "file": "workout/island/data/strings.he.json",
+      "line": 360,
+      "key": "reason.limit.pool",
+      "current": "כבר יש בריכה. אפשר לשדרג את הקיים. בעיר הגדולה אפשר להוסיף מתקן נוסף כשהעיר תגדל מספיק.",
+      "proposed": "כבר יש בריכה. אפשר לשדרג אותה. בהמשך, כשהעיר תגדל מספיק, יהיה מקום לעוד בריכה.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0225",
+      "file": "workout/island/data/strings.he.json",
+      "line": 361,
+      "key": "reason.limit.athletics",
+      "current": "כבר יש מסלול אתלטיקה. אפשר לשדרג את הקיים. בעיר הגדולה אפשר להוסיף מתקן נוסף כשהעיר תגדל מספיק.",
+      "proposed": "כבר יש מסלול אתלטיקה. אפשר לשדרג אותו. בהמשך, כשהעיר תגדל מספיק, יהיה מקום לעוד אחד.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0226",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 116,
+      "key": "controls.sprint.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0227",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 116,
+      "key": "controls.sprint.aria_label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0228",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 116,
+      "key": "controls.sprint.hud_kit.options.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0229",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 116,
+      "key": "controls.sprint.hud_kit.update.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0230",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 116,
+      "key": "controls.sprint.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0231",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 116,
+      "key": "controls.sprint.aria_label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0232",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 116,
+      "key": "controls.sprint.hud_kit.options.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0233",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 116,
+      "key": "controls.sprint.hud_kit.update.label",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0234",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 69,
+      "key": "literal@69:65",
+      "current": "טוען",
+      "proposed": "טוענים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0235",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 871,
+      "key": "literal@871:194",
+      "current": "טוען",
+      "proposed": "טוענים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0236",
+      "file": "workout/island/minigames/catch-arsenal-hud.mjs",
+      "line": 11,
+      "key": "literal@11:76",
+      "current": "נשאר: {count}",
+      "proposed": "מלאי: {count}",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0237",
+      "file": "workout/island/minigames/catch-arsenal-hud.mjs",
+      "line": 12,
+      "key": "literal@12:22",
+      "current": "מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי",
+      "proposed": "מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0238",
+      "file": "workout/island/minigames/catch-assist.mjs",
+      "line": 28,
+      "key": "literal@28:89",
+      "current": "זמן קרוב",
+      "proposed": "הילוך איטי",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0239",
+      "file": "workout/island/minigames/catch-fire-hud.mjs",
+      "line": 9,
+      "key": "literal@9:69",
+      "current": "טוען",
+      "proposed": "טוענים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0240",
+      "file": "workout/island/minigames/catch-session6.mjs",
+      "line": 45,
+      "key": "literal@45:20",
+      "current": "אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.",
+      "proposed": "אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי: ירי לגלגל, רשת דבק, קוצים, גל חשמלי או סימון למעקב. מכניסים את הנקודה לעיגול שעל הרכב. כשהעיגול ירוק, לוחצים ירי. כל פגיעה ממלאת את מד הנזק. כשהמד מלא, הרכב נעצר.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0241",
+      "file": "workout/island/minigames/catch-session6.mjs",
+      "line": 46,
+      "key": "literal@46:20",
+      "current": "יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.",
+      "proposed": "מספר הזריקות מוגבל, וצריך לפגוע כמה פעמים. מכוונים קרוב לפושע כדי לקבל עזרה בכיוון. הוא מאט לרגע. העיגול המקווקו מראה לאן הוא רץ.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0242",
+      "file": "workout/island/minigames/catch-session6.mjs",
+      "line": 47,
+      "key": "literal@47:20",
+      "current": "אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.",
+      "proposed": "אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי. העיגול מראה את המטרה: הגלגל, הגג, הכביש לפני הרכב, הרכב כולו או תא המטען. מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי. עיגול אפור מסביר למה אי אפשר לירות כרגע.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0243",
+      "file": "workout/island/minigames/catch-session6.mjs",
+      "line": 51,
+      "key": "literal@51:20",
+      "current": "הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.",
+      "proposed": "הפושע בורח ברגל. מחזיקים כדי למתוח את הרשת. גוררים כדי לכוון ומשחררים כדי לזרוק.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0244",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 64,
+      "key": "literal@64:25",
+      "current": "פנצ׳ר",
+      "proposed": "ירי לגלגל",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0245",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 64,
+      "key": "literal@64:117",
+      "current": "פולס",
+      "proposed": "גל חשמלי",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0246",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 64,
+      "key": "literal@64:146",
+      "current": "סימון",
+      "proposed": "סימון למעקב",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0247",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 66,
+      "key": "literal@66:28",
+      "current": "מתקרבים ממש, הפולס עוצר את הרכב לרגע",
+      "proposed": "מתקרבים מאוד. הגל החשמלי עוצר את הרכב לרגע",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0248",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 67,
+      "key": "literal@67:50",
+      "current": "הרכב נפל, הפושע בורח ברגל",
+      "proposed": "הרכב נעצר. הפושע בורח ברגל",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0249",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 69,
+      "key": "literal@69:65",
+      "current": "פולס, הרכב נעצר לרגע",
+      "proposed": "גל חשמלי. הרכב נעצר לרגע",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0250",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 70,
+      "key": "literal@70:22",
+      "current": "זמן קרוב, הוא מאט",
+      "proposed": "הילוך איטי. הפושע מאט",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0251",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 70,
+      "key": "literal@70:117",
+      "current": "אין עוד, מחליפים כלי",
+      "proposed": "הכלי התרוקן. מחליפים כלי",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0252",
+      "file": "workout/island/minigames/catch-weapons.mjs",
+      "line": 71,
+      "key": "literal@71:23",
+      "current": "הרכב נפל, הפושע בורח ברגל. זריקות: {throws}",
+      "proposed": "הרכב נעצר. הפושע בורח ברגל. זריקות: {throws}",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0253",
+      "file": "workout/island/minigames/hoops-controls.mjs",
+      "line": 34,
+      "key": "literal@34:79",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0254",
+      "file": "workout/island/minigames/hoops-controls.mjs",
+      "line": 225,
+      "key": "literal@225:114",
+      "current": "ריצה",
+      "proposed": "סיבולת",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0255",
+      "file": "workout/island/minigames/naval-hud.mjs",
+      "line": 9,
+      "key": "literal@9:44",
+      "current": "פספוס · הקדימו מטרה נעה",
+      "proposed": "פספוס · מכוונים לפני הספינה הנעה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0256",
+      "file": "workout/island/minigames/naval-hud.mjs",
+      "line": 9,
+      "key": "literal@9:177",
+      "current": "גוף הספינה כבר מלא",
+      "proposed": "הספינה כבר מתוקנת",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0257",
+      "file": "workout/island/minigames/naval-hud.mjs",
+      "line": 10,
+      "key": "literal@10:89",
+      "current": "יירטו את סירות האגף",
+      "proposed": "עוצרים את הסירות שבצדדים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0258",
+      "file": "workout/island/minigames/naval-hud.mjs",
+      "line": 11,
+      "key": "literal@11:20",
+      "current": "ירי מהיר · הקדימו מטרה נעה",
+      "proposed": "ירי מהיר · מכוונים לפני המטרה הנעה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0259",
+      "file": "workout/island/minigames/naval-hud.mjs",
+      "line": 11,
+      "key": "literal@11:155",
+      "current": "מתקן רבע גוף · ללא ירי",
+      "proposed": "מחזיר רבע ממד החיים של הספינה · ללא ירי",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0260",
+      "file": "workout/island/minigames/ultra-alien-feedback.mjs",
+      "line": 5,
+      "key": "literal@5:35",
+      "current": "ירי מפוזר",
+      "proposed": "ירי מניפה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0261",
+      "file": "workout/island/index.html",
+      "line": 31,
+      "key": "html@31:1:text",
+      "current": "העיר שלי מתעוררת…",
+      "proposed": "האי מתעורר…",
+      "mode": "manual-template"
+    },
+    {
+      "id": "SA-0262",
+      "file": "workout/island/minigames/hoops-controls.mjs",
+      "line": 34,
+      "key": "literal@34:57",
+      "current": "פייק",
+      "proposed": "הטעיה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0263",
+      "file": "workout/island/minigames/hoops-controls.mjs",
+      "line": 225,
+      "key": "literal@225:85",
+      "current": "פייק",
+      "proposed": "הטעיה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0264",
+      "file": "workout/island/minigames/hoops-controls.mjs",
+      "line": 226,
+      "key": "literal@226:45",
+      "current": "פייק",
+      "proposed": "הטעיה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0265",
+      "file": "workout/island/minigames/hoops-roles.mjs",
+      "line": 2,
+      "key": "literal@2:47",
+      "current": "פוינט גארד",
+      "proposed": "רכז",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0266",
+      "file": "workout/island/minigames/hoops-roles.mjs",
+      "line": 2,
+      "key": "literal@2:63",
+      "current": "שוטינג גארד",
+      "proposed": "קלע",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0267",
+      "file": "workout/island/minigames/hoops-roles.mjs",
+      "line": 2,
+      "key": "literal@2:80",
+      "current": "סמול פורוורד",
+      "proposed": "קיצוני",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0268",
+      "file": "workout/island/minigames/hoops-roles.mjs",
+      "line": 2,
+      "key": "literal@2:98",
+      "current": "פאוור פורוורד",
+      "proposed": "שחקן פנים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0269",
+      "file": "workout/island/minigames/racing-league-core.mjs",
+      "line": 135,
+      "key": "literal@135:17",
+      "current": "אירו",
+      "proposed": "כנפיים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0270",
+      "file": "workout/island/ui/alpine-league.mjs",
+      "line": 127,
+      "key": "literal@127:40",
+      "current": "רמה מקסימלית",
+      "proposed": "הרמה הגבוהה ביותר",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0271",
+      "file": "workout/island/ui/racing-league.mjs",
+      "line": 154,
+      "key": "literal@154:81",
+      "current": "רמה מקסימלית",
+      "proposed": "הרמה הגבוהה ביותר",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0272",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 897,
+      "key": "literal@897:75",
+      "current": "דרגה מרבית",
+      "proposed": "הרמה הגבוהה ביותר",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0273",
+      "file": "workout/island/minigames/soccer-r241.mjs",
+      "line": 79,
+      "key": "literal@79:54",
+      "current": "עף",
+      "proposed": "בעיטת עף",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0274",
+      "file": "workout/island/minigames/alpine-session.mjs",
+      "line": 266,
+      "key": "literal@266:45",
+      "current": "הנפילה הבאה לא תפיל",
+      "proposed": "המגן מונע את הנפילה הבאה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0275",
+      "file": "workout/island/minigames/alpine-session.mjs",
+      "line": 266,
+      "key": "literal@266:90",
+      "current": "מגן: הנפילה הבאה לא תפיל",
+      "proposed": "מגן: מונע את הנפילה הבאה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0276",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 884,
+      "key": "literal@884:91",
+      "current": "נשקים ושדרוגים קבועים ונשמרים במכשיר הזה.",
+      "proposed": "כלי הנשק והשדרוגים נשמרים במכשיר הזה.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0277",
+      "file": "workout/island/minigames/boar-island/chain.mjs",
+      "line": 11,
+      "key": "literal@11:44",
+      "current": "סליל כפול",
+      "proposed": "ברק כפול",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0278",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 59,
+      "key": "literal@59:100",
+      "current": "נשק נוסף נפתח במוסך",
+      "proposed": "כלי נשק נוסף נפתח במוסך",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0279",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 26,
+      "key": "literal@26:53",
+      "current": "גרירה או חצים לתנועה · +/− לזום",
+      "proposed": "גרירה או חצים לתנועה · +/− להתקרבות ולהתרחקות",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0280",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 25,
+      "key": "literal@25:30",
+      "current": "סיבוב המפה בגרירה",
+      "proposed": "סיבוב המפה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0281",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 58,
+      "key": "literal@58:197",
+      "current": "סיבוב המפה בגרירה",
+      "proposed": "סיבוב המפה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0282",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 58,
+      "key": "literal@58:177",
+      "current": "תנועה במפה בגרירה",
+      "proposed": "הזזת המפה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0283",
+      "file": "workout/island/ui/offline-panel.mjs",
+      "line": 23,
+      "key": "literal@23:49",
+      "current": "הורדת כל המשחקים למכשיר",
+      "proposed": "הורדת המשחקים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0284",
+      "file": "workout/island/ui/offline-panel.mjs",
+      "line": 32,
+      "key": "literal@32:66",
+      "current": "הורדת כל המשחקים למכשיר",
+      "proposed": "הורדת המשחקים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0285",
+      "file": "workout/island/ui/offline-panel.mjs",
+      "line": 32,
+      "key": "literal@32:39",
+      "current": "הורדה מחדש (בדיקת קבצים)",
+      "proposed": "הורדה מחדש",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0286",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 55,
+      "key": "literal@55:27",
+      "current": "בחירת גיל קובעת את רמת ההתחלה בכל התחנות. לאחר מכן הרמה מסתגלת לתשובות.",
+      "proposed": "הגיל קובע מאיזו רמה מתחילים בכל תחנה. אחר כך הרמה משתנה לפי התשובות.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0287",
+      "file": "workout/island/ui/city-depth.mjs",
+      "line": 1,
+      "key": "literal@1:26",
+      "current": "מזון",
+      "proposed": "אוכל",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0288",
+      "file": "workout/island/ui/city-depth.mjs",
+      "line": 45,
+      "key": "literal@45:64",
+      "current": "שליחת משלוח",
+      "proposed": "שליחה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0289",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 13,
+      "key": "literal@13:108",
+      "current": "בלאי צמיגים",
+      "proposed": "שחיקת הצמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0290",
+      "file": "workout/island/ui/racing-league.mjs",
+      "line": 62,
+      "key": "literal@62:149",
+      "current": "פודיומים",
+      "proposed": "סיומים בשלישייה הראשונה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0291",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 8,
+      "key": "literal@8:25",
+      "current": "כניסה לפיטס",
+      "proposed": "כניסה לעצירת צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0292",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 8,
+      "key": "literal@8:44",
+      "current": "נתיב הפיטס",
+      "proposed": "נתיב עצירת הצמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0293",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 8,
+      "key": "literal@8:100",
+      "current": "יציאה מהפיטס",
+      "proposed": "יציאה מעצירת הצמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0294",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 16,
+      "key": "literal@16:167",
+      "current": "כניסה לפיטס להחלפת צמיגים",
+      "proposed": "כניסה לעצירת צמיגים להחלפת צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0295",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 18,
+      "key": "literal@18:45",
+      "current": "פיטס",
+      "proposed": "צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0296",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 33,
+      "key": "literal@33:49",
+      "current": "פיטס אוטומטי בסוף ההקפה, לחיצה מבטלת",
+      "proposed": "עצירת צמיגים אוטומטית בסוף ההקפה, לחיצה מבטלת",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0297",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 33,
+      "key": "literal@33:111",
+      "current": "פיטס בסוף ההקפה, לחיצה מבטלת",
+      "proposed": "עצירת צמיגים בסוף ההקפה, לחיצה מבטלת",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0298",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 33,
+      "key": "literal@33:142",
+      "current": "כניסה לפיטס להחלפת צמיגים",
+      "proposed": "כניסה לעצירת צמיגים להחלפת צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0299",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 40,
+      "key": "literal@40:185",
+      "current": "בסוף ההקפה: פיטס אוטומטי להחלפת צמיגים",
+      "proposed": "בסוף ההקפה: עצירת צמיגים אוטומטית להחלפת צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0300",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 40,
+      "key": "literal@40:226",
+      "current": "בסוף ההקפה: פיטס להחלפת צמיגים",
+      "proposed": "בסוף ההקפה: עצירת צמיגים להחלפת צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0301",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 40,
+      "key": "literal@40:290",
+      "current": "הפיטס בוטל",
+      "proposed": "עצירת הצמיגים בוטלה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0302",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 44,
+      "key": "literal@44:139",
+      "current": "פיטס",
+      "proposed": "צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0303",
+      "file": "workout/island/minigames/racing-pit-ui.mjs",
+      "line": 44,
+      "key": "literal@44:160",
+      "current": "פיטס",
+      "proposed": "צמיגים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0304",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 42,
+      "key": "literal@42:40",
+      "current": "הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד!",
+      "proposed": "הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0305",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 124,
+      "key": "literal@124:40",
+      "current": "⭐ כָּל הַכָּבוֹד! מַמְשִׁיכִים לִלְמֹד.",
+      "proposed": "⭐ כָּל הַכָּבוֹד. מַמְשִׁיכִים לִלְמֹד",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0306",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 145,
+      "key": "template@145:22",
+      "current": "כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.",
+      "proposed": "כָּל הַכָּבוֹד. סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים",
+      "mode": "manual-template"
+    },
+    {
+      "id": "SA-0307",
+      "file": "workout/island/minigames/racing-session.mjs",
+      "line": 85,
+      "key": "literal@85:1336",
+      "current": "דריפט מעולה · בוסט!",
+      "proposed": "דריפט מעולה · בוסט",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0308",
+      "file": "workout/island/minigames/racing-session.mjs",
+      "line": 85,
+      "key": "literal@85:1358",
+      "current": "מסלול בוסט!",
+      "proposed": "מסלול בוסט",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0309",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 61,
+      "key": "literal@61:75",
+      "current": "בדרך! אפשר לגעת ברחוב ולשנות יעד",
+      "proposed": "בדרך. אפשר לגעת ברחוב ולשנות יעד",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0310",
+      "file": "workout/island/ui/city-access.mjs",
+      "line": 61,
+      "key": "literal@61:110",
+      "current": "הגענו! בחרו יעד נוסף בעיר",
+      "proposed": "הגענו. בחרו יעד נוסף בעיר",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0311",
+      "file": "workout/island/data/strings.he.json",
+      "line": 86,
+      "key": "tutorial.welcome",
+      "current": "שלום, ראש העיר! נבנה חמישה דברים והעיר תהיה שלכם.",
+      "proposed": "שלום, ראש העיר. נבנה חמישה דברים והעיר תהיה שלכם",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0312",
+      "file": "workout/island/data/strings.he.json",
+      "line": 96,
+      "key": "tutorial.complete",
+      "current": "העיר הראשונה שלכם מוכנה! עכשיו אפשר להמשיך לבנות.",
+      "proposed": "העיר הראשונה שלכם מוכנה. עכשיו אפשר להמשיך לבנות",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0313",
+      "file": "workout/island/data/strings.he.json",
+      "line": 97,
+      "key": "tutorial.reward",
+      "current": "כל הכבוד! קיבלתם {money} מטבעות",
+      "proposed": "כל הכבוד. קיבלתם {money} מטבעות",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0314",
+      "file": "workout/island/data/strings.he.json",
+      "line": 140,
+      "key": "avatar.start",
+      "current": "זה אני! אל העיר",
+      "proposed": "זה אני. אל העיר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0315",
+      "file": "workout/island/data/strings.he.json",
+      "line": 190,
+      "key": "episode.sample.hello",
+      "current": "איזה מגרש יפה! ניפגש כאן בקרוב.",
+      "proposed": "איזה מגרש יפה. ניפגש כאן בקרוב",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0316",
+      "file": "workout/island/data/strings.he.json",
+      "line": 248,
+      "key": "episode.firstVisit.line1",
+      "current": "איזה מגרש יפה! ניפגש כאן בקרוב.",
+      "proposed": "איזה מגרש יפה. ניפגש כאן בקרוב",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0317",
+      "file": "workout/island/data/strings.he.json",
+      "line": 263,
+      "key": "reason.expanded",
+      "current": "העיר שלכם גדלה! יש מקום לעוד דברים",
+      "proposed": "העיר שלכם גדלה. יש מקום לעוד דברים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0318",
+      "file": "workout/island/data/strings.he.json",
+      "line": 290,
+      "key": "minigame.win",
+      "current": "הצלחת!",
+      "proposed": "הצלחת",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0319",
+      "file": "workout/island/data/strings.he.json",
+      "line": 469,
+      "key": "equipment.bought",
+      "current": "הציוד השתדרג! הוא מוכן לסיבוב הבא",
+      "proposed": "הציוד השתדרג. הוא מוכן לסיבוב הבא",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0320",
+      "file": "workout/island/data/strings.he.json",
+      "line": 506,
+      "key": "minigame.chooseUpgrade",
+      "current": "הגל הושלם! בחרו שדרוג למסע",
+      "proposed": "הגל הושלם. בחרו שדרוג למסע",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0321",
+      "file": "workout/island/data/strings.he.json",
+      "line": 530,
+      "key": "minigame.rescueSaved",
+      "current": "החבר בדרך למשאית!",
+      "proposed": "החבר בדרך למשאית",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0322",
+      "file": "workout/island/data/strings.he.json",
+      "line": 581,
+      "key": "minigame.upgradesFull",
+      "current": "כל השדרוגים שלך כבר בשיא!",
+      "proposed": "כל השדרוגים שלך כבר בשיא",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0323",
+      "file": "workout/island/data/strings.he.json",
+      "line": 584,
+      "key": "minigame.noAmmo",
+      "current": "נגמרה התחמושת! אפשר לנסות שוב",
+      "proposed": "נגמרה התחמושת. אפשר לנסות שוב",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0324",
+      "file": "workout/island/data/strings.he.json",
+      "line": 597,
+      "key": "minigame.rescueMarker",
+      "current": "!",
+      "proposed": "🚩",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0325",
+      "file": "workout/island/data/strings.he.json",
+      "line": 638,
+      "key": "minigame.soccer.goal",
+      "current": "גוווול!",
+      "proposed": "גוווול",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0326",
+      "file": "workout/island/data/strings.he.json",
+      "line": 640,
+      "key": "minigame.soccer.halftime",
+      "current": "מחצית! מחליפים צדדים",
+      "proposed": "מחצית. מחליפים צדדים",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0327",
+      "file": "workout/island/data/strings.he.json",
+      "line": 644,
+      "key": "minigame.soccer.win",
+      "current": "איזה ניצחון!",
+      "proposed": "איזה ניצחון",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0328",
+      "file": "workout/island/data/strings.he.json",
+      "line": 645,
+      "key": "minigame.soccer.draw",
+      "current": "תיקו! עוד משחק?",
+      "proposed": "תיקו. עוד משחק?",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0329",
+      "file": "workout/island/data/strings.he.json",
+      "line": 651,
+      "key": "minigame.soccer.request",
+      "current": "אני פנוי!",
+      "proposed": "אני פנוי",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0330",
+      "file": "workout/island/data/strings.he.json",
+      "line": 785,
+      "key": "tennis.point",
+      "current": "נקודה!",
+      "proposed": "נקודה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0331",
+      "file": "workout/island/data/strings.he.json",
+      "line": 846,
+      "key": "soccer.practice.cap",
+      "current": "כָּל הַכָּבוֹד עַל הַתִּרְגּוּל! הַנְּקֻדּוֹת יִתְחַדְּשׁוּ מָחָר",
+      "proposed": "כָּל הַכָּבוֹד עַל הַתִּרְגּוּל. הַנְּקֻדּוֹת יִתְחַדְּשׁוּ מָחָר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0332",
+      "file": "workout/island/data/strings.he.json",
+      "line": 848,
+      "key": "soccer.practice.done",
+      "current": "✦ כָּל הַכָּבוֹד עַל הָאִמּוּן!",
+      "proposed": "✦ כָּל הַכָּבוֹד עַל הָאִמּוּן",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0333",
+      "file": "workout/island/data/strings.he.json",
+      "line": 852,
+      "key": "soccer.practice.outdoorThanks",
+      "current": "כֵּיף לָזוּז! נְקֻדַּת הַתִּרְגּוּל נִשְׁמְרָה",
+      "proposed": "כֵּיף לָזוּז. נְקֻדַּת הַתִּרְגּוּל נִשְׁמְרָה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0334",
+      "file": "workout/island/data/strings.he.json",
+      "line": 854,
+      "key": "soccer.practice.message.1",
+      "current": "☀ אֶפְשָׁר לְתַרְגֵּל גַּם בַּחוּץ: מְסִירוֹת עִם חָבֵר אוֹ חֲבֵרָה!",
+      "proposed": "☀ אֶפְשָׁר לְתַרְגֵּל גַּם בַּחוּץ: מְסִירוֹת עִם חָבֵר אוֹ חֲבֵרָה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0335",
+      "file": "workout/island/data/strings.he.json",
+      "line": 855,
+      "key": "soccer.practice.message.2",
+      "current": "🌿 תִּרְגּוּל קָטָן וּמַהֲנֶה מִצְטַבֵּר. אֶפְשָׁר גַּם לָנוּחַ וּלְנַסּוֹת מָחָר!",
+      "proposed": "🌿 תִּרְגּוּל קָטָן וּמַהֲנֶה מִצְטַבֵּר. אֶפְשָׁר גַּם לָנוּחַ וּלְנַסּוֹת מָחָר",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0336",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1188,
+      "key": "racing.go",
+      "current": "צאו לדרך!",
+      "proposed": "צאו לדרך",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0337",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1699,
+      "key": "catch.pop.scrape",
+      "current": "גולשים על שפת הכביש! מסיטים חזרה לנתיב",
+      "proposed": "גולשים על שפת הכביש. מסיטים חזרה לנתיב",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0338",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1703,
+      "key": "catch.pop.hit",
+      "current": "פגיעה! עוד {hp}",
+      "proposed": "פגיעה. עוד {hp}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0339",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1708,
+      "key": "catch.pop.catch",
+      "current": "נתפס!",
+      "proposed": "נתפס",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0340",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1709,
+      "key": "catch.pop.perfect",
+      "current": "תפיסה מושלמת! בונוס",
+      "proposed": "תפיסה מושלמת. בונוס",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0341",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1743,
+      "key": "catch.chase.close",
+      "current": "קרוב מאוד! הפושע יורד מהרכב. זריקות: {throws}",
+      "proposed": "קרוב מאוד. הפושע יורד מהרכב. זריקות: {throws}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0342",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1747,
+      "key": "catch.pop.crash",
+      "current": "התנגשות! איבדת מהירות",
+      "proposed": "התנגשות. איבדת מהירות",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0343",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1750,
+      "key": "catch.pop.near",
+      "current": "כמעט!",
+      "proposed": "כמעט",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0344",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1751,
+      "key": "catch.pop.bossHit",
+      "current": "השריון נפרץ! נשארו {hp}",
+      "proposed": "השריון נפרץ. נשארו {hp}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0345",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1752,
+      "key": "catch.pop.crew",
+      "current": "עוד פושע מהכנופיה! נשארו {left}",
+      "proposed": "עוד פושע מהכנופיה. נשארו {left}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0346",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1755,
+      "key": "catch.chase.caught",
+      "current": "הרכב נעצר! הפושע יורד. זריקות: {throws}",
+      "proposed": "הרכב נעצר. הפושע יורד. זריקות: {throws}",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0347",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:26",
+      "current": "גדול",
+      "proposed": "גָּדוֹל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0348",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:33",
+      "current": "קטן",
+      "proposed": "קָטָן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0349",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:41",
+      "current": "חם",
+      "proposed": "חַם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0350",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:46",
+      "current": "קר",
+      "proposed": "קַר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0351",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:53",
+      "current": "יום",
+      "proposed": "יוֹם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0352",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:59",
+      "current": "לילה",
+      "proposed": "לַיְלָה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0353",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:68",
+      "current": "למעלה",
+      "proposed": "לְמַעְלָה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0354",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:76",
+      "current": "למטה",
+      "proposed": "לְמַטָּה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0355",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:85",
+      "current": "פתוח",
+      "proposed": "פָּתוּחַ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0356",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:92",
+      "current": "סגור",
+      "proposed": "סָגוּר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0357",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:101",
+      "current": "מלא",
+      "proposed": "מָלֵא",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0358",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:107",
+      "current": "ריק",
+      "proposed": "רֵיק",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0359",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:115",
+      "current": "מהיר",
+      "proposed": "מָהִיר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0360",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:122",
+      "current": "איטי",
+      "proposed": "אִטִּי",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0361",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:131",
+      "current": "ארוך",
+      "proposed": "אָרֹךְ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0362",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:138",
+      "current": "קצר",
+      "proposed": "קָצָר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0363",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:146",
+      "current": "קרוב",
+      "proposed": "קָרוֹב",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0364",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:153",
+      "current": "רחוק",
+      "proposed": "רָחוֹק",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0365",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:162",
+      "current": "שמח",
+      "proposed": "שָׂמֵחַ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0366",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:168",
+      "current": "עצוב",
+      "proposed": "עָצוּב",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0367",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:177",
+      "current": "קל",
+      "proposed": "קַל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0368",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:182",
+      "current": "כבד",
+      "proposed": "כָּבֵד",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0369",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:190",
+      "current": "חדש",
+      "proposed": "חָדָשׁ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0370",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 40,
+      "key": "literal@40:196",
+      "current": "ישן",
+      "proposed": "יָשָׁן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0371",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:25",
+      "current": "שמח",
+      "proposed": "שָׂמֵחַ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0372",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:31",
+      "current": "עליז",
+      "proposed": "עַלִּיז",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0373",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:40",
+      "current": "יפה",
+      "proposed": "יָפֶה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0374",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:46",
+      "current": "נאה",
+      "proposed": "נָאֶה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0375",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:54",
+      "current": "גדול",
+      "proposed": "גָּדוֹל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0376",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:61",
+      "current": "ענק",
+      "proposed": "עֲנָק",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0377",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:69",
+      "current": "חבר",
+      "proposed": "חָבֵר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0378",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:75",
+      "current": "ידיד",
+      "proposed": "יָדִיד",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0379",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:84",
+      "current": "בית",
+      "proposed": "בַּיִת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0380",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:90",
+      "current": "מעון",
+      "proposed": "מָעוֹן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0381",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:99",
+      "current": "מהיר",
+      "proposed": "מָהִיר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0382",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:106",
+      "current": "זריז",
+      "proposed": "זָרִיז",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0383",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:115",
+      "current": "אור",
+      "proposed": "אוֹר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0384",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:121",
+      "current": "זוהר",
+      "proposed": "זֹהַר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0385",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:130",
+      "current": "קטן",
+      "proposed": "קָטָן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0386",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:136",
+      "current": "זעיר",
+      "proposed": "זָעִיר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0387",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:145",
+      "current": "דרך",
+      "proposed": "דֶּרֶךְ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0388",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:151",
+      "current": "שביל",
+      "proposed": "שְׁבִיל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0389",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:160",
+      "current": "שקט",
+      "proposed": "שָׁקֵט",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0390",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 41,
+      "key": "literal@41:166",
+      "current": "דומם",
+      "proposed": "דּוֹמֵם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0391",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 43,
+      "key": "literal@43:8",
+      "current": "דולפין",
+      "proposed": "דּוֹלְפִין",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0392",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 43,
+      "key": "literal@43:17",
+      "current": "הוא יונק ונושם אוויר",
+      "proposed": "הוּא יוֹנֵק וְנוֹשֵׁם אֲוִיר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0393",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 43,
+      "key": "literal@43:40",
+      "current": "נושם אוויר",
+      "proposed": "נוֹשֵׁם אֲוִיר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0394",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 43,
+      "key": "literal@43:53",
+      "current": "נושם רק במים",
+      "proposed": "נוֹשֵׁם רַק בַּמַּיִם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0395",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 43,
+      "key": "literal@43:68",
+      "current": "הוא צמח",
+      "proposed": "הוּא צֶמַח",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0396",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 44,
+      "key": "literal@44:8",
+      "current": "פיל",
+      "proposed": "פִּיל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0397",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 44,
+      "key": "literal@44:14",
+      "current": "משתמש בחדק כדי להריח ולשתות",
+      "proposed": "מִשְׁתַּמֵּשׁ בְּחֵדֶק כְּדֵי לְהָרִיחַ וְלִשְׁתּוֹת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0398",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 44,
+      "key": "literal@44:44",
+      "current": "חדק",
+      "proposed": "חֵדֶק",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0399",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 44,
+      "key": "literal@44:50",
+      "current": "כנפיים",
+      "proposed": "כְּנָפַיִם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0400",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 44,
+      "key": "literal@44:59",
+      "current": "סנפירים",
+      "proposed": "סְנַפִּירִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0401",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 45,
+      "key": "literal@45:8",
+      "current": "קיפוד",
+      "proposed": "קִפּוֹד",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0402",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 45,
+      "key": "literal@45:16",
+      "current": "מתכדרר והקוצים שלו מגינים עליו",
+      "proposed": "מִתְכַּדְרֵר וְהַקּוֹצִים שֶׁלּוֹ מְגִנִּים עָלָיו",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0403",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 45,
+      "key": "literal@45:49",
+      "current": "קוצים",
+      "proposed": "קוֹצִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0404",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 45,
+      "key": "literal@45:57",
+      "current": "נוצות",
+      "proposed": "נוֹצוֹת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0405",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 45,
+      "key": "literal@45:65",
+      "current": "קשקשים",
+      "proposed": "קַשְׂקַשִּׂים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0406",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 46,
+      "key": "literal@46:8",
+      "current": "נשר",
+      "proposed": "נֶשֶׁר",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0407",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 46,
+      "key": "literal@46:14",
+      "current": "דואה על זרמי אוויר ויש לו נוצות",
+      "proposed": "דּוֹאֶה עַל זִרְמֵי אֲוִיר וְיֵשׁ לוֹ נוֹצוֹת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0408",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 46,
+      "key": "literal@46:48",
+      "current": "נוצות",
+      "proposed": "נוֹצוֹת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0409",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 46,
+      "key": "literal@46:56",
+      "current": "פרווה",
+      "proposed": "פַּרְוָה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0410",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 46,
+      "key": "literal@46:64",
+      "current": "קשקשים",
+      "proposed": "קַשְׂקַשִּׂים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0411",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 47,
+      "key": "literal@47:8",
+      "current": "דג",
+      "proposed": "דָּג",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0412",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 47,
+      "key": "literal@47:13",
+      "current": "נושם במים בעזרת זימים",
+      "proposed": "נוֹשֵׁם בַּמַּיִם בְּעֶזְרַת זִימִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0413",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 47,
+      "key": "literal@47:37",
+      "current": "זימים",
+      "proposed": "זִימִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0414",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 47,
+      "key": "literal@47:45",
+      "current": "חדק",
+      "proposed": "חֵדֶק",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0415",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 47,
+      "key": "literal@47:51",
+      "current": "אוזניים",
+      "proposed": "אָזְנַיִם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0416",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 48,
+      "key": "literal@48:8",
+      "current": "ג׳ירפה",
+      "proposed": "גִּ׳ירָפָה",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0417",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 48,
+      "key": "literal@48:17",
+      "current": "מגיעה לעלים גבוהים בעזרת צוואר ארוך",
+      "proposed": "מַגִּיעָה לְעָלִים גְּבוֹהִים בְּעֶזְרַת צַוָּאר אָרֹךְ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0418",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 48,
+      "key": "literal@48:55",
+      "current": "צוואר ארוך",
+      "proposed": "צַוָּאר אָרֹךְ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0419",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 48,
+      "key": "literal@48:68",
+      "current": "סנפיר גדול",
+      "proposed": "סְנַפִּיר גָּדוֹל",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0420",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 48,
+      "key": "literal@48:81",
+      "current": "כנפיים",
+      "proposed": "כְּנָפַיִם",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0421",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 49,
+      "key": "literal@49:8",
+      "current": "תרנגולת",
+      "proposed": "תַּרְנְגֹלֶת",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0422",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 49,
+      "key": "literal@49:18",
+      "current": "מטילה ביצים ומהן בוקעים אפרוחים",
+      "proposed": "מְטִילָה בֵּיצִים וּמֵהֶן בּוֹקְעִים אֶפְרוֹחִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0423",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 49,
+      "key": "literal@49:52",
+      "current": "ביצים",
+      "proposed": "בֵּיצִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0424",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 49,
+      "key": "literal@49:60",
+      "current": "גורים חיים",
+      "proposed": "גּוּרִים חַיִּים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0425",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 49,
+      "key": "literal@49:73",
+      "current": "זרעים",
+      "proposed": "זְרָעִים",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0426",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 50,
+      "key": "literal@50:8",
+      "current": "קנגורו",
+      "proposed": "קֶנְגּוּרוּ",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0427",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 50,
+      "key": "literal@50:17",
+      "current": "נושא את הגור שלו בכיס",
+      "proposed": "נוֹשֵׂא אֶת הַגּוּר שֶׁלּוֹ בַּכִּיס",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0428",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 50,
+      "key": "literal@50:41",
+      "current": "כיס",
+      "proposed": "כִּיס",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0429",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 50,
+      "key": "literal@50:47",
+      "current": "קן",
+      "proposed": "קֵן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0430",
+      "file": "workout/island/learning/banks.mjs",
+      "line": 50,
+      "key": "literal@50:52",
+      "current": "שריון",
+      "proposed": "שִׁרְיוֹן",
+      "mode": "parallel-voice-field",
+      "implementation_note": "להוסיף גרסה קולית נפרדת; לשמור ערכי תצוגה, מזהים והשוואות כמו שהם. אין להחליף את מפתח ההשוואה אוטומטית."
+    },
+    {
+      "id": "SA-0444",
+      "file": "workout/island/data/strings.he.json",
+      "line": 448,
+      "key": "minigame.starBonus",
+      "current": "ב־{stars} כוכבים: ציוד ברמה {level} במתנה",
+      "proposed": "ב־{stars} כוכבים: ציוד ברמה {level} ללא תשלום",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0445",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 34,
+      "key": "literal@34:157",
+      "current": "חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?",
+      "proposed": "חוֹזְרִים לַמִּשְׁפָּט הָרִאשׁוֹן. מָה הַדְּמוּת רָאֲתָה?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0446",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 37,
+      "key": "literal@37:186",
+      "current": "דמיינו שני מצבים מנוגדים.",
+      "proposed": "דַּמְיְנוּ שְׁנֵי מַצָּבִים הֲפוּכִים.",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0447",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 37,
+      "key": "literal@37:214",
+      "current": "חפשו מילה שאפשר להשתמש בה במקום המילה שבשאלה.",
+      "proposed": "חַפְּשׂוּ מִלָּה שֶׁאוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר.",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0448",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 86,
+      "key": "literal@86:14",
+      "current": "איזו חיה חיה כיום בטבע בארץ ישראל?",
+      "proposed": "אֵיזוֹ חַיָּה חַיָּה בַּטֶּבַע בְּיִשְׂרָאֵל?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0449",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 86,
+      "key": "literal@86:140",
+      "current": "בחרו חיה שאפשר לפגוש בטבע בארץ, גם בלי גן חיות.",
+      "proposed": "בִּחֲרוּ חַיָּה שֶׁאֶפְשָׁר לִפְגֹּשׁ בַּטֶּבַע בְּיִשְׂרָאֵל, גַּם מִחוּץ לְגַן חַיּוֹת.",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0450",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:96",
+      "current": "מה עוזר לו?",
+      "proposed": "מָה עוֹזֵר לוֹ?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0451",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:122",
+      "current": "בעזרת מה הוא נושם?",
+      "proposed": "בְּעֶזְרַת מָה הוּא נוֹשֵׁם?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0452",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:160",
+      "current": "מה היא מטילה?",
+      "proposed": "מָה הִיא מְטִילָה?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0453",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:192",
+      "current": "איפה נמצא הגור?",
+      "proposed": "אֵיפֹה נִמְצָא הַגּוּר?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0454",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:223",
+      "current": "מה מכסה את גופו?",
+      "proposed": "מָה מְכַסֶּה אֶת גּוּפוֹ?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0455",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "literal@89:242",
+      "current": "מה נכון לגבי הדולפין?",
+      "proposed": "מָה נָכוֹן לְגַבֵּי הַדּוֹלְפִין?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0456",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 90,
+      "key": "literal@90:52",
+      "current": "קראו שוב את העובדה הקצרה בתחילת השאלה.",
+      "proposed": "קִרְאוּ שׁוּב אֶת הַמִּשְׁפָּט הָרִאשׁוֹן.",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0457",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:25",
+      "current": "נועה",
+      "proposed": "נֹעָה",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0458",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:32",
+      "current": "אורי",
+      "proposed": "אוּרִי",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0459",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:39",
+      "current": "מיה",
+      "proposed": "מִיָּה",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0460",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:45",
+      "current": "איתי",
+      "proposed": "אִתַּי",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0461",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:52",
+      "current": "תמר",
+      "proposed": "תָּמָר",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0462",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "literal@32:58",
+      "current": "רון",
+      "proposed": "רוֹן",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0463",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 33,
+      "key": "literal@33:25",
+      "current": "ליד הבית",
+      "proposed": "לְיַד הַבַּיִת",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0464",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 33,
+      "key": "literal@33:36",
+      "current": "בגינה",
+      "proposed": "בַּגִּנָּה",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0465",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 33,
+      "key": "literal@33:44",
+      "current": "ליד הספרייה",
+      "proposed": "לְיַד הַסִּפְרִיָּה",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0466",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 33,
+      "key": "literal@33:58",
+      "current": "בדרך לבית הספר",
+      "proposed": "בַּדֶּרֶךְ לְבֵית הַסֵּפֶר",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0467",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 37,
+      "key": "template@37:34",
+      "current": "מה ההפך של ״${a}״?",
+      "proposed": "מָה הַהֶפֶךְ שֶׁל ${a}?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0468",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 37,
+      "key": "template@37:55",
+      "current": "איזו מילה דומה במשמעותה ל״${a}״?",
+      "proposed": "אֵיזוֹ מִלָּה אוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר כְּמוֹ ${a}?",
+      "mode": "parallel-voice-field"
+    },
+    {
+      "id": "SA-0469",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 89,
+      "key": "controls.grab.label",
+      "current": "אחיזה",
+      "proposed": "תפיסה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0470",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 89,
+      "key": "controls.grab.aria_label",
+      "current": "אחיזה",
+      "proposed": "תפיסה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0471",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 89,
+      "key": "controls.grab.hud_kit.options.label",
+      "current": "אחיזה",
+      "proposed": "תפיסה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0472",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 89,
+      "key": "controls.grab.hud_kit.update.label",
+      "current": "אחיזה",
+      "proposed": "תפיסה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0473",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 140,
+      "key": "controls.flip.label",
+      "current": "היפוך",
+      "proposed": "סלטה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0474",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 140,
+      "key": "controls.flip.aria_label",
+      "current": "היפוך",
+      "proposed": "סלטה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0475",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 140,
+      "key": "controls.flip.hud_kit.options.label",
+      "current": "היפוך",
+      "proposed": "סלטה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0476",
+      "file": "workout/island/design/controls/alpine.json",
+      "line": 140,
+      "key": "controls.flip.hud_kit.update.label",
+      "current": "היפוך",
+      "proposed": "סלטה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0477",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 170,
+      "key": "controls.screen.label",
+      "current": "מסך",
+      "proposed": "חסימה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0478",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 170,
+      "key": "controls.screen.aria_label",
+      "current": "מסך",
+      "proposed": "חסימה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0479",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 170,
+      "key": "controls.screen.hud_kit.options.label",
+      "current": "מסך",
+      "proposed": "חסימה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0480",
+      "file": "workout/island/design/controls/hoops.json",
+      "line": 170,
+      "key": "controls.screen.hud_kit.update.label",
+      "current": "מסך",
+      "proposed": "חסימה",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0481",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 219,
+      "key": "controls.throw.label",
+      "current": "אאוט",
+      "proposed": "הוצאת חוץ",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0482",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 219,
+      "key": "controls.throw.aria_label",
+      "current": "אאוט",
+      "proposed": "הוצאת חוץ",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0483",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 219,
+      "key": "controls.throw.hud_kit.options.label",
+      "current": "אאוט",
+      "proposed": "הוצאת חוץ",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0484",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 219,
+      "key": "controls.throw.hud_kit.update.label",
+      "current": "אאוט",
+      "proposed": "הוצאת חוץ",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0485",
+      "file": "workout/island/design/controls/soccer.json",
+      "line": 691,
+      "key": "states.throw_in.label",
+      "current": "הוצאת אאוט",
+      "proposed": "הוצאת חוץ",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0486",
+      "file": "workout/island/minigames/boar-island/core.mjs",
+      "line": 6,
+      "key": "literal@6:50",
+      "current": "שני קנים מסתובבים. מהיר, מדויק, מתחמם.",
+      "proposed": "שני קנים מסתובבים. יורה מהר ומדויק. צריך לתת לו להתקרר.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0487",
+      "file": "workout/island/minigames/boar-island/core.mjs",
+      "line": 7,
+      "key": "literal@7:54",
+      "current": "שמונה רסיסים בכל ירייה. קטלני מקרוב, מתפזר למרחק.",
+      "proposed": "שמונה רסיסים בכל ירייה. חזק מקרוב. הרסיסים מתפזרים למרחק.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0488",
+      "file": "workout/island/minigames/boar-island/core.mjs",
+      "line": 9,
+      "key": "literal@9:52",
+      "current": "קרן חשמלית שננעלת ומדלגת לעוד שני אויבים. מצוין נגד רחפנים.",
+      "proposed": "קרן חשמל שמכוונת למטרה וקופצת לעוד שני אויבים. טובה נגד רחפנים.",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0489",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 770,
+      "key": "literal@770:68",
+      "current": "הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי",
+      "proposed": "מכוונים בג׳ויסטיק משמאל · יורים בכפתור הימני",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0490",
+      "file": "workout/island/minigames/boar-island/game.js",
+      "line": 249,
+      "key": "literal@249:192",
+      "current": "כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ",
+      "proposed": "כשהכוונת קרובה לחזיר, היא עוזרת לכוון לעיניים שלו. היא עוקבת אחריו כל עוד האגודל על הג׳ויסטיק. ",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0491",
+      "file": "workout/island/minigames/boar-island/index.html",
+      "line": 13,
+      "key": "html@13:6:text",
+      "current": "ISLAND DEFENSE",
+      "proposed": "הגנת האי",
+      "mode": "manual-template"
+    },
+    {
+      "id": "SA-0492",
+      "file": "workout/island/minigames/boar-island/index.html",
+      "line": 27,
+      "key": "html@27:46:text",
+      "current": "SECTOR 01 / TROPICAL COAST",
+      "proposed": "אזור 1 · חוף הדקלים",
+      "mode": "manual-template"
+    },
+    {
+      "id": "SA-0494",
+      "file": "workout/island/minigames/alpine-league-core.mjs",
+      "line": 50,
+      "key": "literal@50:81",
+      "current": "הרוח מזיזה פחות, ושער ממלא יותר את המיכל",
+      "proposed": "הרוח מזיזה פחות, ושער ממלא יותר את המכל",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0495",
+      "file": "workout/island/ui/activity.mjs",
+      "line": 396,
+      "key": "literal@396:28",
+      "current": "ליגת המירוצים · עונה וטבלה",
+      "proposed": "ליגת המרוצים · עונה וטבלה",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0496",
+      "file": "workout/island/ui/activity.mjs",
+      "line": 396,
+      "key": "literal@396:62",
+      "current": "ליגת המירוצים · שדרוג הרכב",
+      "proposed": "ליגת המרוצים · שדרוג הרכב",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0497",
+      "file": "workout/island/ui/activity.mjs",
+      "line": 396,
+      "key": "literal@396:98",
+      "current": "ליגת המירוצים · תוצאת המרוץ",
+      "proposed": "ליגת המרוצים · תוצאת המרוץ",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0498",
+      "file": "workout/island/ui/racing-league.mjs",
+      "line": 108,
+      "key": "template@108:51",
+      "current": "ליגת המירוצים · ${sum.season.name}",
+      "proposed": "ליגת המרוצים · ${sum.season.name}",
+      "mode": "manual-template"
+    },
+    {
+      "id": "SA-0499",
+      "file": "workout/island/ui/upgrade-offer-core.mjs",
+      "line": 55,
+      "key": "literal@55:87",
+      "current": "ליגת המירוצים",
+      "proposed": "ליגת המרוצים",
+      "mode": "literal-value"
+    },
+    {
+      "id": "SA-0500",
+      "file": "workout/island/data/strings.he.json",
+      "line": 1585,
+      "key": "minigame.alpineRush.help.2",
+      "current": "כפתור הברק מפעיל האצה כשיש מספיק במיכל (במחשב: רווח). המיכל מתמלא לאט, בשערים, על משטחי תכלת ובכל טריק שהצליח.",
+      "proposed": "כפתור הברק מפעיל האצה כשיש מספיק במכל (במחשב: רווח). המכל מתמלא לאט, בשערים, על משטחי תכלת ובכל טריק שהצליח.",
+      "mode": "json-value"
+    },
+    {
+      "id": "SA-0501",
+      "file": "workout/island/minigames/boar-island/index.html",
+      "line": 37,
+      "key": "html@37:83:text",
+      "current": "העיניים הזוהרות הן נקודת התורפה: פגיעה בהן כפולה. שריון מחזיר ניצוצות ובולע נזק, פיצוצים חודרים אותו. פגזי מרגמה וטורפדו אפשר להפיל לפני שהם מגיעים. מה שמתחת למים לא נפגע, אז מחכים שהכריש יעלה. הצבת הגדולה של סרטן המצור בולעת כדורים, אז מכוונים לעיניים שעל הגבעולים או יורים פגז. מנטה שמאדימה צוללת אל העמדה, ויורים בה מיד. בגל 5 מגיע מלך הברזל, בגל 10 ספינת הכוורת.",
+      "proposed": "מכוונים לעיניים הזוהרות. פגיעה בהן חזקה פי שניים.\nשריון מחליש פגיעות של כדורים. פיצוצים חודרים אותו.\nאפשר לפגוע בפגזי מרגמה ובטורפדו לפני שהם מגיעים לחוף. כריש שמתחת למים לא נפגע; מחכים שיעלה.\nמול סרטן המצור מכוונים לעיניים או משתמשים בפגז. הצבת שלו חוסמת כדורים.\nמנטה אדומה עומדת לצלול לעמדה. יורים בה לפני הצלילה.\nבגל 5 מגיע מלך הברזל. בגל 10 מגיעה ספינת הכוורת.",
+      "mode": "manual-template"
+    }
+  ],
+  "integration_requirements": [
+    {
+      "id": "SA-0431",
+      "priority": "P1",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 6,
+      "key": "tts.feedback.pointing",
+      "current": "phrase(text,q) → unpoint(text) ברמה 5 ומעלה; speak(q.hint); speak(spoken)",
+      "issue": "המשוב והרמזים משתמשים בטקסט התצוגה אחרי הסרת ניקוד, גם כשהמקור מנוקד. גם התשובה המוקראת נלקחת לעיתים מ־result.answer ללא ניקוד.",
+      "proposed": "להפריד prompt/hint/answer של תצוגה מ־voice/hintVoice/answerVoice. להקריא תמיד את השדות הקוליים בלי phrase או unpoint. משוב: כָּל הַכָּבוֹד. מַמְשִׁיכִים לִלְמֹד. תשובה: הַתְּשׁוּבָה הִיא: תּוּת.",
+      "categories": [
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0432",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 32,
+      "key": "language.sentence.gender",
+      "current": "${child} ראה ${w.word} ${where}. אחר כך צייר ${other.word}. מה ראה ${child}?",
+      "issue": "נועה, מיה ותמר מקבלות ראה וצייר בזכר; השם, המילה והמקום משובצים בלי ניקוד.",
+      "proposed": "להחזיק שם מנוקד ומין דקדוקי לדמות, ולהתאים גם את השאלה החוזרת. דוגמה: תָּמָר רָאֲתָה תּוּת לְיַד הַבַּיִת. אַחַר כָּךְ צִיְּרָה גֶּזֶר. מָה רָאֲתָה תָּמָר? לבן: אוּרִי רָאָה תּוּת לְיַד הַבַּיִת. אַחַר כָּךְ צִיֵּר גֶּזֶר. מָה רָאָה אוּרִי?",
+      "categories": [
+        "gender",
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review",
+      "examples": [
+        {
+          "station": "language",
+          "level": 5,
+          "template": "sentence",
+          "voice": "תמר ראה תות ליד הבית. אחר כך צייר גזר. מה ראה תמר?",
+          "hint": "חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?",
+          "answerVoice": "תות"
+        },
+        {
+          "station": "language",
+          "level": 5,
+          "template": "sentence",
+          "voice": "מיה ראה בלון ליד הבית. אחר כך צייר מכונית. מה ראה מיה?",
+          "hint": "חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?",
+          "answerVoice": "בלון"
+        }
+      ]
+    },
+    {
+      "id": "SA-0433",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 22,
+      "key": "language.letterName",
+      "current": "הַמִּלָּה מַתְחִילָה בָּאוֹת ${w.word[0]}.",
+      "issue": "מנוע הדיבור מקבל אות בודדת בלי שם מנוקד. גם answerVoice בשאלת אות חסרה חוזר לאות הגולמית.",
+      "proposed": "להעביר את מפת שמות האותיות שכבר קיימת לשימוש משותף ולשבץ שם אות ב־hintVoice וב־answerVoice. דוגמה: הַמִּלָּה מַתְחִילָה בָּאוֹת תָּו.",
+      "categories": [
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0434",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 46,
+      "key": "math.voice.numbers",
+      "current": "q.answerVoice=String(a); q.voice += equation עם ספרות; רמזים עם ${a}, ${b}",
+      "issue": "ספרות נמסרות למנוע הדיבור בלי מילים מנוקדות. יש גם מין שונה בין מספר מופשט, צעדים, פעמים ומטבעות.",
+      "proposed": "להוסיף מספרים במילים מנוקדות לפי ההקשר בשדה קולי נפרד, כולל 0–100 לתרגילים. לדוגמה: שָׁלֹשׁ וְעוֹד שְׁתַּיִם שָׁוֶה; תשובה: חָמֵשׁ. בספירת צעדים: שְׁלֹשָׁה צְעָדִים אָחוֹרָה. בספירת פעמים: שָׁלֹשׁ פְּעָמִים.",
+      "categories": [
+        "tts-niqqud",
+        "number-agreement"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0435",
+      "priority": "P1",
+      "file": "workout/island/learning/interface.mjs",
+      "line": 145,
+      "key": "learning.result.voice",
+      "current": "כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.",
+      "issue": "המשפט מכיל סימן קריאה וספרות ללא ניקוד, ותמיד כוכבים גם כשיש כוכב אחד.",
+      "proposed": "להרכיב קול נפרד לפי הכמות: כָּל הַכָּבוֹד. סִיַּמְתֶּם סֶבֶב. דוגמה למטבע אחד וכוכב אחד: קִבַּלְתֶּם מַטְבֵּעַ אֶחָד וְכוֹכָב אֶחָד. דוגמה לשניים: קִבַּלְתֶּם שְׁנֵי מַטְבְּעוֹת וּשְׁנֵי כּוֹכָבִים.",
+      "categories": [
+        "tts-niqqud",
+        "number-agreement",
+        "system-punctuation"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0436",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 76,
+      "key": "animals.habitat.gender",
+      "current": "אֵיפֹה ${a.name} נָעָה בְּעִקָּר?",
+      "issue": "שם חיה בזכר כגון כלב או סוס משובץ עם נעה בנקבה. הרמז היא שוחה אינו מתאים לשם בזכר.",
+      "proposed": "ניסוח כללי שמתאים לכל השמות: אֵיפֹה הַחַיָּה הַזֹּאת נָעָה בְּעִקָּר? רמזים: הַחַיָּה הַזֹּאת שׂוֹחָה. / הַחַיָּה הַזֹּאת עָפָה. / הַחַיָּה הַזֹּאת הוֹלֶכֶת עַל הָאֲדָמָה.",
+      "categories": [
+        "gender",
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0437",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 89,
+      "key": "animals.fact.gender",
+      "current": "['פיל','ג׳ירפה','קיפוד'].includes(f[1]) ? 'מה עוזר לו?'",
+      "issue": "לג׳ירפה מתייחסים בלשון זכר. שאלת העובדה והרמז אינם מנוקדים.",
+      "proposed": "לג׳ירפה: מָה עוֹזֵר לָהּ? לפיל ולקיפוד: מָה עוֹזֵר לוֹ? לנקד גם את כל חלקי השאלה ואת התשובות, באמצעות גרסאות קוליות של מאגר העובדות.",
+      "categories": [
+        "gender",
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0438",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 37,
+      "key": "language.highLevel.prompts",
+      "current": "מה ההפך של ״${a}״? / איזו מילה דומה במשמעותה ל״${a}״? / רמזים ללא ניקוד",
+      "issue": "ענפי רמות 5–7 נכתבו מראש ללא ניקוד. נקודת ההעתקה q.voice=q.prompt לא מתקנת זאת.",
+      "proposed": "גרסאות קוליות: מָה הַהֶפֶךְ שֶׁל גָּדוֹל? / אֵיזוֹ מִלָּה אוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר כְּמוֹ שָׂמֵחַ? רמז: חַפְּשׂוּ מִלָּה שֶׁאוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר. לשבץ גרסאות קוליות של המילים, בלי לשנות מזהי תשובות.",
+      "categories": [
+        "tts-niqqud",
+        "clarity"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0439",
+      "priority": "P1",
+      "file": "workout/island/learning/questions.mjs",
+      "line": 86,
+      "key": "animals.highLevel.prompts",
+      "current": "איזו חיה חיה כיום בטבע בארץ ישראל? / שאלות עובדות ורמזים",
+      "issue": "שאלות מקומיות וכל שאלות העובדות ברמות 5–7 נשלחות לקול ללא ניקוד.",
+      "proposed": "שאלה: אֵיזוֹ חַיָּה חַיָּה בַּטֶּבַע בְּיִשְׂרָאֵל? רמז: בִּחֲרוּ חַיָּה שֶׁאֶפְשָׁר לִפְגֹּשׁ בַּטֶּבַע בְּיִשְׂרָאֵל, גַּם מִחוּץ לְגַן חַיּוֹת. לעובדות: קִרְאוּ שׁוּב אֶת הַמִּשְׁפָּט הָרִאשׁוֹן.",
+      "categories": [
+        "tts-niqqud"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0440",
+      "priority": "P1",
+      "file": "workout/island/ui/offline-panel.mjs",
+      "line": 30,
+      "key": "offline.rawErrors",
+      "current": "error?.message || error; r.failed[0].reason; r.latest",
+      "issue": "שגיאת דפדפן או רשת משובצת בהודעת מערכת ללא בקרת שפה. היא עלולה להיות ארוכה ובשפה אחרת. אין אפשרות להבטיח היעדר ערבית בטקסט שמגיע מבחוץ.",
+      "proposed": "לילד: ההורדה לא הושלמה. אפשר לנסות שוב. מידע טכני יופיע רק בדוח הטעינה להורים, עם שם תקלה קבוע בעברית בתצוגת הילד.",
+      "categories": [
+        "clarity",
+        "language-boundary"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0441",
+      "priority": "P2",
+      "file": "workout/island/ui/activity.mjs",
+      "line": 152,
+      "key": "plural.starLabels",
+      "current": "{stars} כוכבים / {count} כוכבים / {money} מטבעות",
+      "issue": "ההרכבה אינה מבדילה בין 1, 2 ורבים. גם תוויות ההתקדמות בקוד הליגות משתמשות תמיד בכוכבים.",
+      "proposed": "תצוגה קומפקטית שומרת את המשתנים: כוכבים: {stars}; מטבעות: {money}. במשפט שלם: כוכב אחד, שני כוכבים, שלושה כוכבים; מתנה אחת, שתי מתנות. יש לבדוק כל תווית דינמית גם ב־0, 1 ו־2.",
+      "categories": [
+        "number-agreement",
+        "terminology"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0442",
+      "priority": "P2",
+      "file": "workout/island/minigames/boar-island/index.html",
+      "line": 5,
+      "key": "boar.weaponCount",
+      "current": "ארבעה נשקים / שני בוסים / 1–4 החלפת נשק",
+      "issue": "הקובץ chain.mjs מוסיף שתי התפתחויות לכל אחד מארבעת כלי הנשק: 12 כלי נשק. בטבלת BOSSES יש ארבעה בוסים. ההוראות הישנות נשארו ב־HTML.",
+      "proposed": "כלי נשק שמתפתחים לאורך המשחק; ארבעה בוסים. הוראות מקלדת: 1 עד 9 או גלגלת לבחירת נשק. לקצר בתצוגת הילד ולהשאיר פירוט ליד הכפתורים. לעדכן גם meta והעזרה הגולמית, אף שהקוד מחליף חלק ממנה בזמן ריצה.",
+      "categories": [
+        "terminology",
+        "stale-copy"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0443",
+      "priority": "P2",
+      "file": "workout/island/data/strings.he.json",
+      "line": 45,
+      "key": "gift.semantic-boundary",
+      "current": "app.reward: הפרס שלכם; minigame.starBonus: ציוד ברמה {level} במתנה",
+      "issue": "מתנה מאפליקציית האימון היא אפשרות למשחק, ואילו כוכב בעיר הוא מדד התקדמות. המילה מתנה בציוד עלולה לרמוז שמתקבלת מתנת משחק.",
+      "proposed": "לשמור מתנה רק לאסימון המשחק מהאימון. לתוספת ציוד להשתמש ללא תשלום. פרס הוא שם כללי לתגמול, ואינו מחליף כוכב או מטבע. אין להמיר מזהי נשק, stage, level או נתוני שמירה.",
+      "categories": [
+        "terminology"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    },
+    {
+      "id": "SA-0493",
+      "priority": "P2",
+      "file": "workout/island/ui/activity.mjs",
+      "line": 156,
+      "key": "equipment.button.layout",
+      "current": "equipment.buy = {title} · שדרוג {level} · {cost} 🪙",
+      "issue": "שם נשק, מספר רמה ומחיר משתנה באותו כפתור עלולים להיות ארוכים. אורך בפיקסלים לא נבדק.",
+      "proposed": "להוסיף לכרטיס כותרת עם שם הפריט ורמתו; כפתור קצר: שדרוג · {cost} 🪙. לשמור בשם הנגיש את {title}, הרמה והמחיר. לבדוק שם ארוך ומחיר בן שש ספרות לפני חיבור.",
+      "categories": [
+        "button-length"
+      ],
+      "kind": "integration-required",
+      "mode": "manual-code-review"
+    }
+  ]
+}
