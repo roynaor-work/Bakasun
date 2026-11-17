@@ -15,7 +15,7 @@ function icon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribut
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 
 /** @param ctx the fire session context (dialog, canvas, controls, t, lite, engine); `plan` the entry plan; `onDone(result)` once the firefighter is out. */
-export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel}){
+export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel,loadTimeoutMs=15000}){
   const {dialog,t}=ctx,host=ctx.canvas.parentElement||dialog,audio=createG2nAudio();audio.unlock();
   const model=createModel({plan,sound:e=>audio.play(e)});
   const canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
@@ -87,11 +87,23 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   function updateAudio(){audioModel.spraying=model.spraying&&model.tool!=='blanket';audioModel.pressure=model.tanks[model.tool]??1;audioModel.flames=model.room&&model.inRoom?model.room.spots.filter(s=>!s.done).map(()=>({active:true,heat:1})):[];audio.update(audioModel,audioBalance);}
   // ---- frame ------------------------------------------------------------------------------------------------------------------------------------
   let samples=0,slow=0,fadeT=0,done=false,fpsAcc=0,fpsN=0;const fps=[];
+  // A required room failure is outside the street loader's one-shot ready watcher.
+  const loadRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireLoadRecovery')!=='0';
+  let loadTimer=null;
+  function failLoad(error){if(disposed||done)return;done=true;session.dispose();onDone?.(null,error);}
+  function watchLoading(){
+    if(scene.loadFailed){failLoad(new Error('Fire interior load failed'));return true;}
+    if(scene.ready){if(loadTimer!==null)clearTimeout(loadTimer);loadTimer=null;}
+    else if(loadTimer===null)loadTimer=setTimeout(()=>{loadTimer=null;if(!scene.ready)failLoad(new Error('Fire interior load timed out'));},Math.max(1,Number(loadTimeoutMs)||15000));
+    return false;
+  }
+  events.signal.addEventListener('abort',()=>{if(loadTimer!==null)clearTimeout(loadTimer);loadTimer=null;},{once:true});
   function tick(now){
     if(disposed)return;frame=requestAnimationFrame(tick);
     const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(.1,elapsed/1000);last=now;
     if(dt>0){samples++;if(elapsed>40)slow++;fpsAcc+=elapsed;fpsN++;if(fpsN>=30){fps.push(Math.round(1000/(fpsAcc/fpsN)));if(fps.length>20)fps.shift();fpsAcc=fpsN=0;}if(samples>=90){if(slow>45&&!lowQuality){lowQuality=true;resize();}samples=slow=0;}}
     try{
+      if(loadRecovery&&watchLoading())return;
       if(scene.ready&&fade.dataset.state==='in'){fadeT+=dt;if(fadeT>.35)fade.dataset.state='clear';}
       const running=scene.ready&&tutorialDone&&!paused&&dt>0&&fade.dataset.state!=='in';
       if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;model.update(dt,step);}
