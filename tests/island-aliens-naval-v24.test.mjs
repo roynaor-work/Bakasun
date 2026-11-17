@@ -81,7 +81,8 @@ test('?alienRefill=0: no magazines and the same game as v23; with the regular bu
  const both=alien({refill:false,level:2});both.effectAspect=PHONE;run(both,60*60,{firing:true,vulcan:true});assert.equal(both.refills.length,0);assert.equal(both.refillCold,0);
 });
 
-test('balance: stage 1 at the phone aspect is still won in 85-135 s with both buttons (taking the magazines as they come) and the Vulcan alone gets stronger',()=>{
+test('legacy v24 balance with phoneFixC=0: stage 1 is won in 85-135 s and refill improves Vulcan-only fire',t=>{
+ const priorLocation=globalThis.location;t.after(()=>{if(priorLocation===undefined)delete globalThis.location;else globalThis.location=priorLocation;});globalThis.location={search:'?phoneFixC=0'};
  const play=(seed,hold,refill,chase)=>{const m=alien({refill,seed});m.effectAspect=PHONE;const r0=seededRandom(seed*7+1);let on=false;
   for(let f=0;f<30*400&&!m.result;f++){if(f%30===0)on=r0()<chase;const r=on?m.refills?.[0]:null,t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0],py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}let want=r?r.x:t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>14);if(!safe(want)){out:for(let d=0;d<=360;d+=3)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>18&&x<342&&safe(x)){want=x;break out;}}}
    m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),...hold});}

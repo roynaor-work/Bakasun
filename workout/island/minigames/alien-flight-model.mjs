@@ -17,6 +17,9 @@ import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alie
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){
+ // Phone review C: every cannon/Vulcan/laser projectile stops on its first ship. AoE specials keep their own rules.
+ // Either URL switch restores the previous piercing and Vulcan-only impact presentation exactly.
+ const phoneParams=new URLSearchParams(globalThis.location?.search||''),phoneFixC=phoneParams.get('phoneFixes')!=='0'&&phoneParams.get('phoneFixC')!=='0';
  level=clamp(Math.floor(level)||1,1,balance.levels.length);
  const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,v11=balance.v11&&alienV11Enabled()?balance.v11:null,v12=balance.v12&&alienV12Enabled()?balance.v12:null,v13=balance.v13&&alienV13Enabled()?balance.v13:null,v14=balance.v14&&alienV14Enabled()?balance.v14:null,v15=v14&&alienV15Enabled()?v15Config(balance):null,move=v15&&alienMoveEnabled()?moveConfig(balance):null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
  if(v11)settings.shotSeconds*=v11.shotSecondsMult;
@@ -157,7 +160,12 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   const s=sp.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed*(kind===2?1.5:1),0,kind);if(!s)return;
   s.hitIds??=new Set();s.hitIds.clear();
   if(v23){s.vulcan=kind!==2&&shotMode==='burst';if(kind!==2){if(s.vulcan)vulcanFired++;else regularFired++;}}
-  Object.assign(s,{wing,damage:(v23&&kind!==2?(shotMode==='burst'?vc.vulcanDamage:v23.regularDamage):v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});shots.push(s);fired++;
+  Object.assign(s,{wing,damage:(v23&&kind!==2?(shotMode==='burst'?vc.vulcanDamage:v23.regularDamage):v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});
+  // Stopping the laser removes the penetration output already charged by enemy HP scaling.
+  // Put that same laser coefficient, with the same HP exponent, into its first hull hit.
+  // Higher purchased ranks keep their value; cannon rounds, volley lasers and AoE retain their damage.
+  if(phoneFixC&&kind===1){const factor=gearFactor({equipment:{weapon:equipment.weapon||0},permanentUpgrades:{laser:upgrades.laser},stacks:{laser:alienStack(campaign,'laser',upgrades.laser)}});s.damage*=Math.pow(factor,v14?(v15?v15.gearExp:v14.gearExp):1);}
+  shots.push(s);fired++;
  }
  /** v23: one trigger pull. kind 'regular' = the steady cannon on its own clock (single-shot sound), 'vulcan' = a Vulcan
   * bullet, 'ride' = the steady cannon's shot carried by a Vulcan tick while both buttons are held (regular damage, but it
@@ -276,8 +284,10 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
     for(const a of aliens){if(s.hitIds.has(a.id))continue;const t=segmentContact(x0,y0,s.x,s.y,a.x,a.y,a.radius+balance.shotRadius,aspect());if(t!==null)contacts.push({id:a.id,t});}
     contacts.sort((a,b)=>a.t-b.t||a.id-b.id);let active=true;
     for(const contact of contacts){const selected=aliens.findIndex(a=>a.id===contact.id);if(selected<0)continue;const a=aliens[selected];s.lastHit=a.id;s.hitIds.add(a.id);if(a.slot<32)s.hitLo|=1<<a.slot;else s.hitHi|=1<<(a.slot-32);hits++;
-     // v25: where a Vulcan bullet struck (presentation: an impact burst for 0.18 s).
-     if(v25&&s.vulcan){impacts.push({id:++impactSerial,x:x0+(s.x-x0)*contact.t,y:y0+(s.y-y0)*contact.t,at:time,variant:impactSerial%4});if(impacts.length>24)impacts.shift();}
+     // A short, bounded impact at the hull contact for every shot (legacy: Vulcan only).
+     if(v25&&(s.vulcan||phoneFixC)){impacts.push({id:++impactSerial,x:x0+(s.x-x0)*contact.t,y:y0+(s.y-y0)*contact.t,at:time,variant:impactSerial%4});if(impacts.length>24)impacts.shift();}
+     // Clamp to the earliest swept contact before releasing the pooled shot, including upgraded/piercing shots.
+     if(phoneFixC){s.x=x0+(s.x-x0)*contact.t;s.y=y0+(s.y-y0)*contact.t;s.hp=1;}
     if(!v12||hitSoundCool<=0){sound('hit');hitSoundCool=v12?v12.hitSoundGap:0;}a.hitTime=balance.hitFlashSeconds;
      if(a.shield>0){if(!v14||(a.shieldCool||0)<=0){a.shield--;a.shieldCool=v14?v14.shieldGap:0;signal('shield-hit',a.x,a.y,a.shield,.4);}releaseAt(shots,i,sp);active=false;break;}
      const damage=(equipment.damage||1)*power*(1+alienStack(campaign,'damage',upgrades.damage))*(s.damage||1),dealt=damageAlien(a,damage);if(dealt>0)signal('enemy-hit',a.x,a.y,dealt,.25);if(!v12||(a.sparkCool||0)<=0||a.hp<=0){burst(a.x,a.y);a.sparkCool=v12?v12.sparkCool:0;}if(a.hp<=0)destroy(selected);if(--s.hp<=0){releaseAt(shots,i,sp);active=false;break;}
