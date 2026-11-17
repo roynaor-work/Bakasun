@@ -1,0 +1,567 @@
+{
+  "schemaVersion": 1,
+  "id": "racing-podium-v1",
+  "kind": "game-asset-pack",
+  "branch": "codex/racing-podium-v1",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "scope": "New files only under workout/island/design/racing-podium-v1/",
+  "entryPoint": "preview.html",
+  "previewViewport": {
+    "width": 844,
+    "height": 390
+  },
+  "license": "CC0-1.0",
+  "licenses": "LICENSES.md",
+  "report": "REPORT.md",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X",
+    "floorY": 0
+  },
+  "rig": "rig.json",
+  "motions": "motions.json",
+  "props": "props.json",
+  "actors": [
+    {
+      "id": "driver-male",
+      "sex": "male",
+      "file": "assets/driver-male.glb",
+      "canonicalJointCount": 18,
+      "teamColors": "COLOR_0 plus _TEAM_MASK; see rig.json and preview.mjs",
+      "clips": [
+        "exit_car",
+        "helmet_lift",
+        "wave",
+        "victory_dance",
+        "disappointment",
+        "handshake",
+        "podium_idle",
+        "trophy_lift"
+      ]
+    },
+    {
+      "id": "driver-female",
+      "sex": "female",
+      "file": "assets/driver-female.glb",
+      "canonicalJointCount": 18,
+      "teamColors": "COLOR_0 plus _TEAM_MASK; see rig.json and preview.mjs",
+      "clips": [
+        "exit_car",
+        "helmet_lift",
+        "wave",
+        "victory_dance",
+        "disappointment",
+        "handshake",
+        "podium_idle",
+        "trophy_lift"
+      ]
+    }
+  ],
+  "dependencies": {
+    "runtime": [
+      {
+        "path": "../racing-v7/vendor/three.module.js",
+        "license": "MIT"
+      },
+      {
+        "path": "../racing-v7/vendor/GLTFLoader.js",
+        "license": "MIT"
+      },
+      {
+        "path": "../racing-v7/vendor/SkeletonUtils.js",
+        "license": "MIT"
+      },
+      {
+        "path": "../racing-v7/vendor/BufferGeometryUtils.js",
+        "license": "MIT"
+      }
+    ],
+    "reusedSources": [
+      {
+        "path": "../characters/rig.json",
+        "sha256": "fb766386efa0ef1cf8a9c9a42a31f0a6c3bfe3ab5c4f1a47634f5c6ffc1d9fb2",
+        "bytes": 16015,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../characters2/source/mesh.py",
+        "sha256": "8c55edd1aafd81c23aafa53b2083ce9f1eb6aeee9860641fe225f6b83701d180",
+        "bytes": 8522,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../characters2/source/body.py",
+        "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71",
+        "bytes": 18429,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../characters2/source/head_hands.py",
+        "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2",
+        "bytes": 13087,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../characters2/source/gear.py",
+        "sha256": "64c637018e3d209ad2e0e81df4bf2e62164ca03926e5cebcb4a26fe5018f010f",
+        "bytes": 11635,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../tennis-v7/source/characters.py",
+        "sha256": "a49510050d7bdcacb4e2377298c448966b4030594c677a39423fb2b498108f9c",
+        "bytes": 12396,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "../motion2/soccer.json",
+        "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+        "bytes": 1557297,
+        "access": "read-only",
+        "license": "CC0-1.0"
+      }
+    ],
+    "networkRequests": "local repository files only",
+    "glbExternalDependencies": 0
+  },
+  "validation": {
+    "motionQA": {
+      "report": "verification/motion-qa.json",
+      "provenance": "verification/motion-qa-provenance.json",
+      "minimumExclusive": 88,
+      "minimumObserved": 89,
+      "passed": true
+    },
+    "khronos": {
+      "report": "verification/khronos.json",
+      "passed": true
+    },
+    "browser": {
+      "report": "verification/browser.json",
+      "passed": true
+    }
+  },
+  "budget": {
+    "maximumBytes": 4000000,
+    "includes": "Entire new folder: runtime assets, sources, documentation, screenshots and verification",
+    "totalBytes": 2940831,
+    "remainingBytes": 1059169
+  },
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3015,
+      "sha256": "9e273bae7f09bf70d229f3105885a3a67c40836653f2c7e32a30701e6543c53a"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 10304,
+      "sha256": "9f35a785a8f8cca0d9446f3efc4acf82e1d2ba18e5ee6acabb30cf26ffea15cc"
+    },
+    {
+      "path": "assets/bronze-medal.glb",
+      "bytes": 36040,
+      "sha256": "5ddecb9876184e05007875415892b64704bfe3c7949c840daf5631d70475ddb2",
+      "glb": {
+        "triangles": 1608,
+        "vertices": 985,
+        "meshes": 1,
+        "materials": 3,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/champagne-spray.png",
+      "bytes": 46267,
+      "sha256": "227fab97f4fd29f0a42f2587a4fc7a45175c5304e54e258b277b0ca8b887222b"
+    },
+    {
+      "path": "assets/champagne.glb",
+      "bytes": 31668,
+      "sha256": "3bcbdf6b89d706e0226c4efb3e61a6cd2eaf6fa9ef14460a847b623528d1b7bd",
+      "glb": {
+        "triangles": 1344,
+        "vertices": 832,
+        "meshes": 1,
+        "materials": 4,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/checkered-flag.glb",
+      "bytes": 53972,
+      "sha256": "3d72da25ee91336033dc97a3fbb494d75d5298788e4f3dbbaf97cda1c7ad0760",
+      "glb": {
+        "triangles": 1008,
+        "vertices": 738,
+        "meshes": 4,
+        "materials": 5,
+        "joints": [],
+        "clips": [
+          {
+            "id": "flag_wave",
+            "duration": 2.0416666666666665,
+            "loop": false
+          }
+        ],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/confetti.png",
+      "bytes": 636,
+      "sha256": "30bd570b8599830242c35591a284d855b22610850bd6f9b1759a5d13585c6995"
+    },
+    {
+      "path": "assets/driver-female.glb",
+      "bytes": 842456,
+      "sha256": "06e0365083bef2986c3ff6269eb279fe638c2bd6aa233c8d77c20163a914f328",
+      "glb": {
+        "triangles": 20688,
+        "vertices": 10884,
+        "meshes": 1,
+        "materials": 1,
+        "joints": [
+          18
+        ],
+        "clips": [
+          {
+            "id": "exit_car",
+            "duration": 3.8,
+            "loop": false
+          },
+          {
+            "id": "helmet_lift",
+            "duration": 3.6,
+            "loop": false
+          },
+          {
+            "id": "wave",
+            "duration": 3.6,
+            "loop": true
+          },
+          {
+            "id": "victory_dance",
+            "duration": 3.6,
+            "loop": true
+          },
+          {
+            "id": "disappointment",
+            "duration": 3.8,
+            "loop": false
+          },
+          {
+            "id": "handshake",
+            "duration": 3.2,
+            "loop": false
+          },
+          {
+            "id": "podium_idle",
+            "duration": 3.2,
+            "loop": true
+          },
+          {
+            "id": "trophy_lift",
+            "duration": 4.2,
+            "loop": false
+          }
+        ],
+        "vertexColors": true,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/driver-male.glb",
+      "bytes": 845340,
+      "sha256": "6168c7aa82cbbb72f5d48b0be33b7adfa8532f6fd82bf51961db233eaac37bf0",
+      "glb": {
+        "triangles": 20788,
+        "vertices": 10936,
+        "meshes": 1,
+        "materials": 1,
+        "joints": [
+          18
+        ],
+        "clips": [
+          {
+            "id": "exit_car",
+            "duration": 3.8,
+            "loop": false
+          },
+          {
+            "id": "helmet_lift",
+            "duration": 3.6,
+            "loop": false
+          },
+          {
+            "id": "wave",
+            "duration": 3.6,
+            "loop": true
+          },
+          {
+            "id": "victory_dance",
+            "duration": 3.6,
+            "loop": true
+          },
+          {
+            "id": "disappointment",
+            "duration": 3.8,
+            "loop": false
+          },
+          {
+            "id": "handshake",
+            "duration": 3.2,
+            "loop": false
+          },
+          {
+            "id": "podium_idle",
+            "duration": 3.2,
+            "loop": true
+          },
+          {
+            "id": "trophy_lift",
+            "duration": 4.2,
+            "loop": false
+          }
+        ],
+        "vertexColors": true,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/effects.json",
+      "bytes": 2588,
+      "sha256": "c5e4002020cc160f5f92831cd26f5ba74af6a68b5d9c47ecc79cfbcc45000254"
+    },
+    {
+      "path": "assets/gold-medal.glb",
+      "bytes": 26800,
+      "sha256": "e5ac62a24596ea1aa1d5543f77c835079b67b52f5e24244532684533ff3f9e19",
+      "glb": {
+        "triangles": 1188,
+        "vertices": 705,
+        "meshes": 1,
+        "materials": 3,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/helmet.glb",
+      "bytes": 50452,
+      "sha256": "5d7714d75290730726cf5bdd7109a2e316779c42007c41bcf8af84c4092395a5",
+      "glb": {
+        "triangles": 2088,
+        "vertices": 1396,
+        "meshes": 1,
+        "materials": 5,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/podium.glb",
+      "bytes": 96448,
+      "sha256": "8dc82b60b98686d8115ae4a091b9c9febc4e6389cd5d00b1cc5bae9a295351aa",
+      "glb": {
+        "triangles": 2868,
+        "vertices": 3084,
+        "meshes": 1,
+        "materials": 6,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/silver-medal.glb",
+      "bytes": 32620,
+      "sha256": "cad065f9473c9001c5e5daf90d32f756d2d11d303c8a388d4ff6343d0b53db60",
+      "glb": {
+        "triangles": 1452,
+        "vertices": 881,
+        "meshes": 1,
+        "materials": 3,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "assets/trophy.glb",
+      "bytes": 51816,
+      "sha256": "a999f99ec4bb6165344ea7e78463aa9d95140cad1d7683de225717108c010a27",
+      "glb": {
+        "triangles": 2472,
+        "vertices": 1456,
+        "meshes": 1,
+        "materials": 2,
+        "joints": [],
+        "clips": [],
+        "vertexColors": false,
+        "extensionsRequired": [],
+        "textures": 0
+      }
+    },
+    {
+      "path": "motions.json",
+      "bytes": 10369,
+      "sha256": "70ac38506d4f938608b4d6ab3386cd16a8903fe24e8e81d268749b1a984b6435"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3708,
+      "sha256": "33843fb782345e5c1e8e2c6d279df275057caafe6585f81f4f78c21e3c442ba0"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 16078,
+      "sha256": "76eaab995af340b825d069fb26a421dea1becd267ad6c40f655bd3030b34de16"
+    },
+    {
+      "path": "props.json",
+      "bytes": 2075,
+      "sha256": "c0608cb580dca410a1e09742382e04e4047f9c3518d6bfe593170073515ff63a"
+    },
+    {
+      "path": "rig.json",
+      "bytes": 6211,
+      "sha256": "8d534b0d30defa5515d279eb6eaf70c8fdd242303227aa023280de0ec2737caf"
+    },
+    {
+      "path": "source/README.md",
+      "bytes": 3794,
+      "sha256": "a43004a1e2cef1ed7b549b77710e6f68df5033ef9c92aa6dbf17fdc7439c11a9"
+    },
+    {
+      "path": "source/build-driver-mesh.py",
+      "bytes": 6912,
+      "sha256": "6af74e8917ac7e6b0c62bebec8cd1deca640f8b7bc4b9859b4c2b2481c418283"
+    },
+    {
+      "path": "source/build-drivers.mjs",
+      "bytes": 6937,
+      "sha256": "122d714ab49421ff18459f1ef33f75a5639312cc3f312135c9a6a35243f848f3"
+    },
+    {
+      "path": "source/build-effects.py",
+      "bytes": 3187,
+      "sha256": "227ee3aeb8970ab77cd3ac48f9864b861b3145156d774d6b9e0dc07a4ffb0af9"
+    },
+    {
+      "path": "source/build-props.py",
+      "bytes": 13198,
+      "sha256": "fe15564880678bda34c7338c3e57d4569c8685a9beb1f653d92cc129accc8e3b"
+    },
+    {
+      "path": "source/finalize.mjs",
+      "bytes": 6527,
+      "sha256": "54a2e4378d6475027501b7b0e935a6701e24c7636f369972dd75d0a8aead53ed"
+    },
+    {
+      "path": "source/motions.mjs",
+      "bytes": 9860,
+      "sha256": "7d58b593a3d014708bc6cc817902d0c33e586273bd04c26c4a92b14740fba038"
+    },
+    {
+      "path": "source/qa-loader.mjs",
+      "bytes": 536,
+      "sha256": "0d6a986c66b577857ecb766c14975bbaaf09a844a33c2114c6c002ba6bbb66ec"
+    },
+    {
+      "path": "source/qa-sources.mjs",
+      "bytes": 5458,
+      "sha256": "7eeafe97c0ffac39557705cef824c91bb3630998ab01d3223ece3949cea3eb8a"
+    },
+    {
+      "path": "source/run-qa.mjs",
+      "bytes": 4355,
+      "sha256": "6d5b1ab148418323fd7cf4429d61e7dd70c1093454b9ef8c51d7d0b1bbe9794d"
+    },
+    {
+      "path": "source/system-chromium.mjs",
+      "bytes": 701,
+      "sha256": "1da224105dc8a944e44c64b2ef183503f7a39f7aa0a9117949312421881030f4"
+    },
+    {
+      "path": "source/validate-glb.mjs",
+      "bytes": 4550,
+      "sha256": "0fcb4fa4366c0518a769d6e0e8f7ab502f106e1653b039c7425a28e56758f84d"
+    },
+    {
+      "path": "source/verify-browser.mjs",
+      "bytes": 16983,
+      "sha256": "d25e0740906a7122dd98233348cfa10cf7a70dab744e57e198e8032ed4e3d751"
+    },
+    {
+      "path": "style.css",
+      "bytes": 7017,
+      "sha256": "13188cb23eff84817710129fca7ac1b105ca54bba08b87421adcae9c3cd5864b"
+    },
+    {
+      "path": "verification/browser-844x390.jpg",
+      "bytes": 53165,
+      "sha256": "0d8b73d960c2308d39c5709c29ba8bfee6c02865bd707cc5fd05cee7213d5be3"
+    },
+    {
+      "path": "verification/browser-contact-sheet.webp",
+      "bytes": 136690,
+      "sha256": "57355b8a3641b168e81969c2c4cd538c7c91b1485cca2a4bfc86f1f743234e30"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 319297,
+      "sha256": "80d8b97f12ba4c11cf12ce111f836553d37d3a295fb4ee8076577ea927d87406"
+    },
+    {
+      "path": "verification/khronos.json",
+      "bytes": 4157,
+      "sha256": "0bef071c00be6980c10e74d93df9953d31e5c337d12ff043f5ab9c74419b0039"
+    },
+    {
+      "path": "verification/motion-qa-provenance.json",
+      "bytes": 2893,
+      "sha256": "42291c06fb6f845b1c14211d3def259fc1fbfb4b0597a216a1abfa91309a5e24"
+    },
+    {
+      "path": "verification/motion-qa.json",
+      "bytes": 148906,
+      "sha256": "799ebabf9c354edb972fa11cb30004f7179015891a5a2b2af08be593f2f7924f"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1602,
+      "sha256": "225b9e9a7a708480a46a7667a0d3957aa462afe9a364ba39ef89e226f5e1f986"
+    }
+  ]
+}

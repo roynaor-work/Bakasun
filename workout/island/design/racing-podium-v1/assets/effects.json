@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "alpha": "straight RGBA; transparent background",
+  "champagne": {
+    "file": "assets/champagne-spray.png",
+    "width": 1024,
+    "height": 128,
+    "frames": 8,
+    "columns": 8,
+    "rows": 1,
+    "frameSize": [
+      128,
+      128
+    ],
+    "fps": 12,
+    "duration": 0.6666666666666666,
+    "loop": true,
+    "originUV": [
+      0.0546875,
+      0.5
+    ],
+    "direction": "+X in sprite plane",
+    "worldSize": [
+      1.55,
+      1.55
+    ],
+    "blend": "normal",
+    "depthWrite": false,
+    "frameUV": [
+      {
+        "frame": 0,
+        "offset": [
+          0.0,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 1,
+        "offset": [
+          0.125,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 2,
+        "offset": [
+          0.25,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 3,
+        "offset": [
+          0.375,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 4,
+        "offset": [
+          0.5,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 5,
+        "offset": [
+          0.625,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 6,
+        "offset": [
+          0.75,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      },
+      {
+        "frame": 7,
+        "offset": [
+          0.875,
+          0
+        ],
+        "repeat": [
+          0.125,
+          1
+        ]
+      }
+    ]
+  },
+  "confetti": {
+    "file": "assets/confetti.png",
+    "columns": 4,
+    "rows": 1,
+    "count": 160,
+    "lifeSeconds": 4.2,
+    "seed": 73117,
+    "gravity": 2.5,
+    "drag": 0.2,
+    "pieceSizeMetres": [
+      0.026,
+      0.065
+    ],
+    "emitterPositions": [
+      [
+        -2.7,
+        0.2,
+        0.6
+      ],
+      [
+        2.7,
+        0.2,
+        0.6
+      ]
+    ],
+    "velocityX": [
+      -1.8,
+      1.8
+    ],
+    "velocityY": [
+      2.6,
+      5.5
+    ],
+    "velocityZ": [
+      -0.8,
+      0.8
+    ],
+    "angularVelocity": [
+      -6,
+      6
+    ],
+    "colors": [
+      "#F0BE58",
+      "#4DDED0",
+      "#F4F5EC",
+      "#F56559"
+    ],
+    "previewImplementation": "GPU instances; optional transparent atlas for billboard renderers"
+  }
+}

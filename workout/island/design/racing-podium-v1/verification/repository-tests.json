@@ -1,0 +1,40 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "existingFilesChanged": false,
+  "initial": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 1004260.061216,
+    "logSha256": "3ce4f22480acea52a9d996b7e02114d999c1a8e525877146333679d5bda9b2fc",
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "case": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Bundled Playwright chromium_headless_shell-1234 is absent. The test starts its server before launch and leaves it open when launch throws; only this failed test worker was terminated to release the hanging initial run."
+    }
+  },
+  "retry": {
+    "command": "ISLAND_PLAYWRIGHT=/workspace/Bakasun/workout/island/design/racing-podium-v1/source/system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 23186.199716,
+    "logSha256": "52a856ea7db0fcf7f479fe93e8154d46a06e51631465a49cf19a5ad3c5ad5127",
+    "browser": "/usr/bin/chromium",
+    "adapter": "source/system-chromium.mjs",
+    "assertionsChanged": false
+  },
+  "resolved": true,
+  "note": "Initial npm test was not green. Its single environment-related failing case passed on retry using the existing ISLAND_PLAYWRIGHT environment hook. No existing test or application file was edited."
+}

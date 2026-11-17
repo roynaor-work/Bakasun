@@ -1,0 +1,75 @@
+{
+  "upstreamRepository": "https://github.com/roynaor-work/Bakasun",
+  "upstreamBranch": "codex/motion-qa-v1",
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamFiles": [
+    {
+      "file": "workout/island/design/motion-qa-v1/run.mjs",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/report.mjs",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "upstreamUnmodified": true,
+  "inputAdapter": {
+    "file": "source/qa-sources.mjs",
+    "sha256": "7eeafe97c0ffac39557705cef824c91bb3630998ab01d3223ece3949cea3eb8a"
+  },
+  "loader": {
+    "file": "source/qa-loader.mjs",
+    "sha256": "0d6a986c66b577857ecb766c14975bbaaf09a844a33c2114c6c002ba6bbb66ec"
+  },
+  "runner": {
+    "file": "source/run-qa.mjs",
+    "sha256": "6d5b1ab148418323fd7cf4429d61e7dd70c1093454b9ef8c51d7d0b1bbe9794d"
+  },
+  "vendor": {
+    "file": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+    "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+    "license": "MIT; temporary verification dependency"
+  },
+  "sourceBaseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "assets": [
+    {
+      "path": "assets/driver-male.glb",
+      "bytes": 845340,
+      "sha256": "6168c7aa82cbbb72f5d48b0be33b7adfa8532f6fd82bf51961db233eaac37bf0",
+      "heightMeters": 1.7805954332645624,
+      "soleVertices": 48
+    },
+    {
+      "path": "assets/driver-female.glb",
+      "bytes": 842456,
+      "sha256": "06e0365083bef2986c3ff6269eb279fe638c2bd6aa233c8d77c20163a914f328",
+      "heightMeters": 1.7844044666841994,
+      "soleVertices": 48
+    }
+  ],
+  "scoring": "Original upstream metric definitions, weights and thresholds; no sample or support repairs",
+  "scope": "All 16 embedded driver clips; 60 Hz plus every baked key and exact event/support times; actual sole vertices",
+  "minimumRequiredExclusive": 88,
+  "minimumObserved": 89,
+  "coverage": 1,
+  "insufficientDataMetrics": 0,
+  "redMetrics": 2,
+  "passed": true,
+  "cliStdout": "{\"libraries\":1,\"clips\":16,\"elapsedSeconds\":3.17,\"report\":\"/tmp/racing-podium-upstream-iXJmCU/output/report.html\"}"
+}

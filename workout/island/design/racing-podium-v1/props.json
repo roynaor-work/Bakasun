@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "license": "CC0-1.0",
+  "podium": {
+    "file": "assets/podium.glb",
+    "origin": "floor at middle of winning step",
+    "standings": [
+      {
+        "place": 1,
+        "position": [
+          0,
+          0.82,
+          0
+        ]
+      },
+      {
+        "place": 2,
+        "position": [
+          -1.18,
+          0.56,
+          0
+        ]
+      },
+      {
+        "place": 3,
+        "position": [
+          1.18,
+          0.36,
+          0
+        ]
+      }
+    ],
+    "standingSize": [
+      1.1,
+      1.08
+    ]
+  },
+  "trophy": {
+    "file": "assets/trophy.glb",
+    "origin": "stem grip; parent RightHand identity",
+    "bottom": -0.13,
+    "top": 0.355,
+    "gripRadius": 0.024
+  },
+  "helmet": {
+    "file": "assets/helmet.glb",
+    "origin": "right-side palm grip; parent RightHand identity",
+    "shellCenter": [
+      0.145,
+      0.02,
+      0
+    ],
+    "dimensions": [
+      0.29,
+      0.28,
+      0.33
+    ]
+  },
+  "champagne": {
+    "file": "assets/champagne.glb",
+    "origin": "middle body palm grip",
+    "nozzle": [
+      0,
+      0.224,
+      0
+    ],
+    "bottom": -0.12,
+    "top": 0.224,
+    "sprayAxis": [
+      0,
+      1,
+      0
+    ]
+  },
+  "medals": [
+    {
+      "place": 1,
+      "file": "assets/gold-medal.glb",
+      "origin": "neck front, ribbon descends -Y, face +Z",
+      "discCenter": [
+        0,
+        -0.23,
+        0.09
+      ]
+    },
+    {
+      "place": 2,
+      "file": "assets/silver-medal.glb",
+      "origin": "neck front, ribbon descends -Y, face +Z",
+      "discCenter": [
+        0,
+        -0.23,
+        0.09
+      ]
+    },
+    {
+      "place": 3,
+      "file": "assets/bronze-medal.glb",
+      "origin": "neck front, ribbon descends -Y, face +Z",
+      "discCenter": [
+        0,
+        -0.23,
+        0.09
+      ]
+    }
+  ],
+  "flag": {
+    "file": "assets/checkered-flag.glb",
+    "origin": "pole ground",
+    "height": 2.791,
+    "clothWidth": 1.12,
+    "clip": "flag_wave",
+    "loop": true,
+    "duration": 2.0
+  }
+}

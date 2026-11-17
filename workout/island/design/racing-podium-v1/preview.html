@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>רגע הניצחון · פודיום מרוצים</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="stage" aria-label="תצוגת פודיום מרוצים תלת־ממדית">
+  <canvas id="scene" aria-label="שלוש דמויות נהגים חוגגות על פודיום עם גביע ודגלים משובצים"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <header>
+    <div class="brand"><span class="checker" aria-hidden="true"></span><div><span class="eyebrow" dir="ltr">ISLAND RACING / 01</span><h1>רגע הניצחון</h1></div></div>
+    <div class="edition"><i aria-hidden="true"></i> פודיום וחגיגה<span dir="ltr">V.1</span></div>
+  </header>
+  <div id="loading" role="status">מכינים את החגיגה…<span>טעינת הבמה והנהגים</span></div>
+  <aside class="scene-note"><span class="eyebrow" dir="ltr">AFTER THE FINISH LINE</span><strong id="clip-title">הרמת גביע</strong><span id="clip-note">כל הדרך למקום הראשון</span></aside>
+  <aside class="team-note"><span class="team-stripe" aria-hidden="true"></span><span class="eyebrow" dir="ltr">THE WINNING MOMENT</span><strong>שלושה מקומות.<br>רגע אחד.</strong><span class="team-dots" aria-label="צבעי הקבוצות: אלמוג, טורקיז וזהב"><i></i><i></i><i></i></span></aside>
+  <div class="place-label" id="label-2"><span>02</span>טורקיז</div><div class="place-label" id="label-1"><span>01</span>אלמוג</div><div class="place-label" id="label-3"><span>03</span>זהב</div>
+  <section class="controls" aria-label="בקרת תנועה">
+    <div class="timeline-row"><button id="play" class="icon" aria-label="השהיה" title="השהיה"><svg viewBox="0 0 20 20" aria-hidden="true"><path id="play-icon" d="M6 4h3v12H6zm5 0h3v12h-3z"/></svg></button><button id="restart" class="icon" aria-label="התחלה מחדש" title="התחלה מחדש"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.2 5.5A6.5 6.5 0 1 1 3.5 12h2a4.5 4.5 0 1 0 1.1-5L9 9H2V2z"/></svg></button><label for="timeline" class="sr-only">מיקום בתנועה</label><input id="timeline" type="range" min="0" max="1000" value="0" step="1"><output id="time" dir="ltr">0.0 / 3.0</output><label class="fx"><input type="checkbox" id="effects" checked><span class="switch" aria-hidden="true"></span>חגיגה</label></div>
+    <div class="selection-row"><div class="select-wrap"><label for="clip">תנועה</label><select id="clip"><option value="exit_car">ירידה מהרכב</option><option value="helmet_lift">הרמת קסדה</option><option value="wave">נפנוף ידיים</option><option value="victory_dance">ריקוד שמחה</option><option value="disappointment">אכזבה</option><option value="handshake">לחיצת יד</option><option value="podium_idle">עמידה על הפודיום</option><option value="trophy_lift" selected>הרמת גביע</option></select></div><div class="gender" role="group" aria-label="בחירת דמות"><button id="male" aria-pressed="true">נהג</button><button id="female" aria-pressed="false">נהגת</button></div><div class="clip-counter" dir="ltr"><span id="clip-number">08</span><span>/ 08 MOTIONS</span></div><span class="controls-hint">בוחרים תנועה · עוצרים על כל רגע</span></div>
+  </section>
+  <div id="error" role="alert" hidden></div>
+</main>
+<script type="module" src="preview.mjs"></script>
+</body>
+</html>
