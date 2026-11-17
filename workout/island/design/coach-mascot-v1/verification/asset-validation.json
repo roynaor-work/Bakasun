@@ -1,0 +1,140 @@
+{
+  "asset": "coach.glb",
+  "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+  "bytes": 1006856,
+  "checks": {
+    "embeddedOnly": {
+      "pass": true
+    },
+    "sceneAndSkin": {
+      "pass": true
+    },
+    "canonicalRestSkeleton": {
+      "pass": true
+    },
+    "inverseBindMatrices": {
+      "pass": true
+    },
+    "singleTrianglePrimitive": {
+      "pass": true
+    },
+    "triangleCountAndIndices": {
+      "pass": true,
+      "detail": {
+        "triangles": 1500,
+        "vertices": 873
+      }
+    },
+    "nondegenerateTriangles": {
+      "pass": true,
+      "detail": {
+        "degenerate": 0,
+        "minArea": 0.000023130104272688452
+      }
+    },
+    "unitNormals": {
+      "pass": true
+    },
+    "skinWeights": {
+      "pass": true
+    },
+    "expressionAndHandControlMorphs": {
+      "pass": true,
+      "detail": {
+        "nonzero": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "clipNames": {
+      "pass": true
+    },
+    "standExpressionDefaults": {
+      "pass": true
+    },
+    "sampledAt30Hz": {
+      "pass": true,
+      "detail": {
+        "invalidTracks": 0,
+        "durations": {
+          "stand": 3,
+          "wave": 3.5999999046325684,
+          "point_right": 2.799999952316284,
+          "point_left": 2.799999952316284,
+          "point_up": 2.799999952316284,
+          "point_down": 2.799999952316284,
+          "fist_pump": 3,
+          "clap": 3.5999999046325684,
+          "joy_jump": 3,
+          "shrug": 2.799999952316284,
+          "nod": 3,
+          "shake_head": 3,
+          "air_hug": 3.200000047683716,
+          "go_there": 3.200000047683716,
+          "well_done": 3,
+          "try_again": 3.200000047683716,
+          "ready": 3,
+          "rest_idle": 4
+        }
+      }
+    },
+    "unitQuaternionsAndHemisphere": {
+      "pass": true,
+      "detail": {
+        "invalid": 0,
+        "hemisphereFlips": 0
+      }
+    },
+    "completeTracks": {
+      "pass": true,
+      "detail": {
+        "tracks": 362,
+        "invalid": 0
+      }
+    },
+    "sharedStandPoseAtEndpoints": {
+      "pass": true,
+      "detail": {
+        "invalidTracks": 0
+      }
+    },
+    "noHorizontalRootMotion": {
+      "pass": true,
+      "detail": {
+        "invalidTracks": 0
+      }
+    },
+    "folderBudget": {
+      "pass": true,
+      "detail": {
+        "bytes": 5101974,
+        "limit": 6000000,
+        "excludes": [
+          "__pycache__",
+          ".DS_Store"
+        ]
+      }
+    },
+    "khronos": {
+      "pass": true,
+      "detail": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0
+      }
+    }
+  },
+  "errors": [],
+  "pass": true
+}

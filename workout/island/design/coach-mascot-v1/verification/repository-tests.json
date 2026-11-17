@@ -1,0 +1,28 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "fullSuite": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "pass": 4261,
+    "fail": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "failureFile": "tests/workout-royiki.test.mjs:91",
+    "failureReason": "Playwright default Chromium headless-shell executable is absent in the environment.",
+    "cleanup": "After the browser launch error, this existing test kept its HTTP server open. The remaining test process was stopped after 10m30s."
+  },
+  "targetedRetry": {
+    "command": "ISLAND_PLAYWRIGHT=<temporary-local-browser-adapter> node --test tests/workout-royiki.test.mjs",
+    "browserExecutable": "/usr/bin/chromium",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 23725.635852
+  },
+  "repositoryFilesModifiedForTests": false,
+  "assessment": "All original suite cases other than the environment-dependent browser launch passed or skipped. The entire affected test file then passed with the installed local Chromium."
+}

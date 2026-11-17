@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "id": "coach-mascot-v1",
+  "createdDate": "2026-11-17",
+  "branch": "codex/coach-mascot-v1",
+  "role": "Friendly original coach for a seven-year-old; introduction and encouragement for workout/island.",
+  "entrypoint": "preview.html",
+  "model": "coach.glb",
+  "rig": "rig.json",
+  "licenses": "LICENSES.md",
+  "report": "REPORT.md",
+  "geometry": {
+    "triangles": 1500,
+    "vertices": 873,
+    "skins": 1,
+    "skinJoints": 18,
+    "drawPrimitives": 1,
+    "heightMeters": 1.885,
+    "textures": 0,
+    "material": "vertex colors, rough nonmetallic"
+  },
+  "rigContract": {
+    "source": "workout/island/design/motion2/soccer.json#skeleton",
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X",
+    "bindRotations": "identity",
+    "restTranslations": "exact canonical18"
+  },
+  "expressions": [
+    {
+      "id": "happy",
+      "labelHe": "שמח",
+      "targetIndex": 0
+    },
+    {
+      "id": "surprised",
+      "labelHe": "מופתע",
+      "targetIndex": 1
+    },
+    {
+      "id": "encouraging",
+      "labelHe": "מעודד",
+      "targetIndex": 2
+    },
+    {
+      "id": "thoughtful",
+      "labelHe": "מהרהר",
+      "targetIndex": 3
+    },
+    {
+      "id": "proud",
+      "labelHe": "גאה",
+      "targetIndex": 4
+    },
+    {
+      "id": "gently_disappointed",
+      "labelHe": "מאוכזב בעדינות",
+      "targetIndex": 5
+    },
+    {
+      "id": "laughing",
+      "labelHe": "צוחק",
+      "targetIndex": 6
+    },
+    {
+      "id": "wink",
+      "labelHe": "קורץ",
+      "targetIndex": 7
+    }
+  ],
+  "handControls": [
+    {
+      "id": "grip_left",
+      "targetIndex": 8
+    },
+    {
+      "id": "grip_right",
+      "targetIndex": 9
+    },
+    {
+      "id": "point_left",
+      "targetIndex": 10
+    },
+    {
+      "id": "point_right",
+      "targetIndex": 11
+    }
+  ],
+  "clips": [
+    {
+      "id": "stand",
+      "labelHe": "עמידה",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": true,
+      "motionQaScore": 100
+    },
+    {
+      "id": "wave",
+      "labelHe": "הנפת יד",
+      "durationSeconds": 3.6,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 97.3
+    },
+    {
+      "id": "point_right",
+      "labelHe": "הצבעה ימינה",
+      "durationSeconds": 2.8,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.5
+    },
+    {
+      "id": "point_left",
+      "labelHe": "הצבעה שמאלה",
+      "durationSeconds": 2.8,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.5
+    },
+    {
+      "id": "point_up",
+      "labelHe": "הצבעה למעלה",
+      "durationSeconds": 2.8,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 96.9
+    },
+    {
+      "id": "point_down",
+      "labelHe": "הצבעה למטה",
+      "durationSeconds": 2.8,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 99.4
+    },
+    {
+      "id": "fist_pump",
+      "labelHe": "כיווץ אגרוף",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 96
+    },
+    {
+      "id": "clap",
+      "labelHe": "מחיאות כפיים",
+      "durationSeconds": 3.6,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.5
+    },
+    {
+      "id": "joy_jump",
+      "labelHe": "קפיצה בשמחה",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 97.9
+    },
+    {
+      "id": "shrug",
+      "labelHe": "כתפיים מורמות",
+      "durationSeconds": 2.8,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 99
+    },
+    {
+      "id": "nod",
+      "labelHe": "הנהון",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 99.6
+    },
+    {
+      "id": "shake_head",
+      "labelHe": "ניעור ראש",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 99.5
+    },
+    {
+      "id": "air_hug",
+      "labelHe": "חיבוק אוויר",
+      "durationSeconds": 3.2,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.7
+    },
+    {
+      "id": "go_there",
+      "labelHe": "תיגש לשם",
+      "durationSeconds": 3.2,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.5
+    },
+    {
+      "id": "well_done",
+      "labelHe": "כל הכבוד",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.2
+    },
+    {
+      "id": "try_again",
+      "labelHe": "עוד פעם",
+      "durationSeconds": 3.2,
+      "sampleRateHz": 30,
+      "loop": false,
+      "motionQaScore": 98.8
+    },
+    {
+      "id": "ready",
+      "labelHe": "מוכן להתחיל",
+      "durationSeconds": 3.0,
+      "sampleRateHz": 30,
+      "loop": true,
+      "motionQaScore": 99.6
+    },
+    {
+      "id": "rest_idle",
+      "labelHe": "עמידה במנוחה",
+      "durationSeconds": 4.0,
+      "sampleRateHz": 30,
+      "loop": true,
+      "motionQaScore": 99.9
+    }
+  ],
+  "playback": {
+    "sampleRateHz": 30,
+    "interpolation": "LINEAR on densely baked smooth poses",
+    "horizontalRootMotion": false,
+    "jumpRootY": {
+      "takeoffSeconds": 0.9,
+      "landSeconds": 1.7,
+      "peakMeters": 0.18
+    },
+    "directions": "point_right and point_left mean viewer screen directions from the front camera",
+    "defaultExpression": "happy",
+    "suggestedGameCrossfadeSeconds": 0.25,
+    "extraEighteenthClip": "ready"
+  },
+  "offline": {
+    "archive": "coach-mascot-v1-offline.zip",
+    "open": "Extract the whole ZIP and open preview.html; the HTML embeds its model and renderer.",
+    "runtimeNetworkRequests": 0,
+    "wasm": false,
+    "compressionExtensions": [],
+    "brandMarksOrSymbolsOnCharacter": false,
+    "packageBudgetBytes": 6000000,
+    "budgetScope": "all delivered files, including the ZIP"
+  },
+  "qa": {
+    "tool": "motion-qa-v1",
+    "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "sampleRateHz": 60,
+    "average": 98.6,
+    "minimum": 96,
+    "allClipsAbove88": true,
+    "coverage": 1,
+    "khronosErrors": 0,
+    "khronosWarnings": 0,
+    "browserViewport": [
+      844,
+      390
+    ],
+    "browserNetworkBlocked": true,
+    "evidence": [
+      "verification/motion-qa.json",
+      "verification/motion-qa-provenance.json",
+      "verification/asset-validation.json",
+      "verification/khronos.json",
+      "verification/browser.json"
+    ]
+  },
+  "resources": [
+    {
+      "path": "coach.glb",
+      "bytes": 1006856,
+      "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 1919427,
+      "sha256": "84b7683766b23cb51e3ebdf99b8a815a4b952fcaf1bfa214beeb5d353ffc152f"
+    },
+    {
+      "path": "rig.json",
+      "bytes": 3323,
+      "sha256": "252605cae9e7305f84c3c8b2fe42ab1af29ca103030f26b9ed7d2193dd2ed4c0"
+    }
+  ],
+  "integrationScope": "Asset review package only. Existing game files are unchanged."
+}

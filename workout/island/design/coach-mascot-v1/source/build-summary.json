@@ -1,0 +1,583 @@
+{
+  "triangles": 1500,
+  "vertices": 873,
+  "bytes": 1006856,
+  "heightMeters": 1.885,
+  "bounds": [
+    [
+      -0.251507041555162,
+      0.0,
+      -0.1823370033842422
+    ],
+    [
+      0.251507041555162,
+      1.885,
+      0.21331088913245536
+    ]
+  ],
+  "expressions": [
+    "happy",
+    "surprised",
+    "encouraging",
+    "thoughtful",
+    "proud",
+    "gently_disappointed",
+    "laughing",
+    "wink"
+  ],
+  "handControls": [
+    "grip_left",
+    "grip_right",
+    "point_left",
+    "point_right"
+  ],
+  "clips": [
+    {
+      "name": "stand",
+      "duration": 3.0,
+      "loop": true,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "wave",
+      "duration": 3.6,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.6,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.6,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "point_right",
+      "duration": 2.8,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "point_left",
+      "duration": 2.8,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "point_up",
+      "duration": 2.8,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "point_down",
+      "duration": 2.8,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "fist_pump",
+      "duration": 3.0,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "clap",
+      "duration": 3.6,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.6,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.6,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": [
+        {
+          "time": 1.2,
+          "type": "clap"
+        },
+        {
+          "time": 1.9,
+          "type": "clap"
+        },
+        {
+          "time": 2.6,
+          "type": "clap"
+        }
+      ]
+    },
+    {
+      "name": "joy_jump",
+      "duration": 3.0,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 0.9,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.7,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 0.9,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.7,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": [
+        {
+          "time": 0.9,
+          "type": "takeoff"
+        },
+        {
+          "time": 1.7,
+          "type": "land"
+        }
+      ]
+    },
+    {
+      "name": "shrug",
+      "duration": 2.8,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 2.8,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "nod",
+      "duration": 3.0,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "shake_head",
+      "duration": 3.0,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "air_hug",
+      "duration": 3.2,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "go_there",
+      "duration": 3.2,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "well_done",
+      "duration": 3.0,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "try_again",
+      "duration": 3.2,
+      "loop": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.2,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "ready",
+      "duration": 3.0,
+      "loop": true,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 3.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    },
+    {
+      "name": "rest_idle",
+      "duration": 4.0,
+      "loop": true,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.0,
+          "end": 4.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.0,
+          "end": 4.0,
+          "local": [
+            0.0,
+            -0.08,
+            0.0
+          ]
+        }
+      ],
+      "events": []
+    }
+  ],
+  "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220"
+}

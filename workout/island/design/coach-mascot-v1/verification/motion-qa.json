@@ -1,0 +1,4210 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-17T13:43:02.485Z",
+  "fps": 60,
+  "metricDefinitions": {
+    "footSliding": {
+      "label": "החלקת רגליים",
+      "unit": "height ratio",
+      "green": 0.01,
+      "yellow": 0.035,
+      "weight": 18,
+      "description": "Maximum horizontal sole displacement from the first sample of each declared support window, divided by character height. Inferred support is used only when no windows were supplied."
+    },
+    "floorPenetration": {
+      "label": "חדירה לרצפה",
+      "unit": "height ratio",
+      "green": 0.005,
+      "yellow": 0.02,
+      "weight": 15,
+      "description": "Maximum depth of the supplied sole probe points and all skeletal joint centers below the declared floor plane, divided by height. Sole probes are not a mesh collision audit."
+    },
+    "posePops": {
+      "label": "קפיצות פוזה",
+      "unit": "discontinuity ratio",
+      "green": 1,
+      "yellow": 2.5,
+      "weight": 18,
+      "description": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+    },
+    "anatomy": {
+      "label": "חריגות אנטומיות",
+      "unit": "% affected frames",
+      "green": 0.5,
+      "yellow": 3,
+      "weight": 14,
+      "description": "Percentage of frames with elbow or knee flexion above 165 degrees, neck bend above 80 degrees, or a segment length changing by more than 5%. Optional calibrated hinge checks detect reverse knee flexion above 8 degrees. Conservative marker limits do not diagnose axial joint twist."
+    },
+    "ballContact": {
+      "label": "מגע בכדור",
+      "unit": "height ratio",
+      "green": 0.015,
+      "yellow": 0.05,
+      "weight": 13,
+      "description": "Maximum absolute distance from the ball surface to the sampled, bone-transformed declared contact point, divided by height. Events are evaluated at their exact declared times by interpolation."
+    },
+    "continuity": {
+      "label": "כניסה ויציאה מול המתנה",
+      "unit": "continuity ratio",
+      "green": 1,
+      "yellow": 3,
+      "weight": 10,
+      "description": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+    },
+    "bodySliding": {
+      "label": "מהירות גוף מול צעדים",
+      "unit": "relative speed error",
+      "green": 0.2,
+      "yellow": 0.5,
+      "weight": 8,
+      "description": "Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion."
+    },
+    "symmetry": {
+      "label": "סימטריה",
+      "unit": "relative mismatch",
+      "green": 0.03,
+      "yellow": 0.1,
+      "weight": 4,
+      "description": "Maximum bilateral segment-length mismatch. Looping locomotion additionally compares reflected half-cycle leg markers; explicit pose symmetry compares simultaneous bilateral markers. One-sided actions retain unscored motion diagnostics, so a valid kick or dribble arm is not penalized for intentional asymmetry."
+    }
+  },
+  "limitations": [
+    "Skeleton and declared sole/contact points are audited; compressed mesh geometry and texture pixels are not decoded.",
+    "Reference-root paths describe the author scenario. Actual simulation speed/IK/blending are not executed.",
+    "Feeling score is a reproducible weighted diagnostic heuristic, not a perceptual or medical validation.",
+    "Missing applicable metadata is unavailable and earns zero points; not-applicable metrics are excluded. Coverage is shown."
+  ],
+  "libraries": [
+    {
+      "id": "coach-mascot-v1",
+      "sport": "coach",
+      "version": 1,
+      "title": "Coach mascot",
+      "clips": [
+        {
+          "id": "stand",
+          "motionId": "stand",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": true,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "stand"
+          },
+          "score": 100,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.003742,
+              "status": "green",
+              "score": 99.93,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 0.056135,
+                "maxMarkerStepHeight60Hz": 0.000065,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.0037423066614298696,
+                  "t": 0.766667,
+                  "previousTime": 0.75,
+                  "bone": "Head",
+                  "markerStepHeight60Hz": 0.000038,
+                  "degrees60Hz": 0.056135
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 49.583357,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000246,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.00024599342901418937,
+                  "t": 0,
+                  "idleTime": 3,
+                  "markers": 17,
+                  "rmsPositionHeight": 0,
+                  "rmsRotationDegrees": 0.000001,
+                  "rmsVelocityHeightPerSecond": 0.000184,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0002459923592915304,
+                  "t": 3,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000184,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "stand",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--stand.html",
+          "jsonPath": "clips/coach-mascot-v1--stand.json",
+          "sheetPath": "sheets/coach-mascot-v1--stand.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--stand.svg",
+          "jsonHref": "coach-mascot-v1--stand.json"
+        },
+        {
+          "id": "wave",
+          "motionId": "wave",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3.5999999046325684,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "wave"
+          },
+          "score": 97.3,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 434,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3.6,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 5642,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.597314,
+              "status": "green",
+              "score": 88.05,
+              "evidence": {
+                "adjacentPairs": 216,
+                "observations": 3672,
+                "maxDegrees60Hz": 7.178733,
+                "maxMarkerStepHeight60Hz": 0.023893,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.5973139466579266,
+                  "t": 3.233333,
+                  "previousTime": 3.216667,
+                  "bone": "RightHand",
+                  "markerStepHeight60Hz": 0.023893,
+                  "degrees60Hz": 7.178732
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 217,
+                "affectedFrames": 0,
+                "checks": 3689,
+                "maxLimbFlexionDegrees": 75.70505,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.003395,
+              "status": "green",
+              "score": 99.93,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0033947634180075694,
+                  "t": 0,
+                  "idleTime": 0.05,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.002546,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.003394767096387369,
+                  "t": 3.6,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.002546,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.168723,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "wave",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--wave.html",
+          "jsonPath": "clips/coach-mascot-v1--wave.json",
+          "sheetPath": "sheets/coach-mascot-v1--wave.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--wave.svg",
+          "jsonHref": "coach-mascot-v1--wave.json"
+        },
+        {
+          "id": "point_right",
+          "motionId": "point_right",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 2.799999952316284,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": "point_left",
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "point_right"
+          },
+          "score": 98.5,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 338,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 2.8,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4394,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.338913,
+              "status": "green",
+              "score": 93.22,
+              "evidence": {
+                "adjacentPairs": 168,
+                "observations": 2856,
+                "maxDegrees60Hz": 3.849733,
+                "maxMarkerStepHeight60Hz": 0.013557,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.33891319429311373,
+                  "t": 2.433333,
+                  "previousTime": 2.416667,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.013557,
+                  "degrees60Hz": 3.849733
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 169,
+                "affectedFrames": 0,
+                "checks": 2873,
+                "maxLimbFlexionDegrees": 58.922053,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.002074,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0020736107074371224,
+                  "t": 0,
+                  "idleTime": 0.033333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001555,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0020736125845754044,
+                  "t": 2.8,
+                  "idleTime": 2.966667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001555,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "mirrored clip pair",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": 0,
+                "worstMotion": {
+                  "t": 0.366667,
+                  "errorHeight": 0
+                },
+                "bilateralPoseRmsHeightUnscored": 0.11521,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "point_right",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--point_right.html",
+          "jsonPath": "clips/coach-mascot-v1--point_right.json",
+          "sheetPath": "sheets/coach-mascot-v1--point_right.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--point_right.svg",
+          "jsonHref": "coach-mascot-v1--point_right.json"
+        },
+        {
+          "id": "point_left",
+          "motionId": "point_left",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 2.799999952316284,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": "point_right",
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "point_left"
+          },
+          "score": 98.5,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 338,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 2.8,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4394,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.338913,
+              "status": "green",
+              "score": 93.22,
+              "evidence": {
+                "adjacentPairs": 168,
+                "observations": 2856,
+                "maxDegrees60Hz": 3.849733,
+                "maxMarkerStepHeight60Hz": 0.013557,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.33891319429311373,
+                  "t": 2.433333,
+                  "previousTime": 2.416667,
+                  "bone": "RightHand",
+                  "markerStepHeight60Hz": 0.013557,
+                  "degrees60Hz": 3.849733
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 169,
+                "affectedFrames": 0,
+                "checks": 2873,
+                "maxLimbFlexionDegrees": 58.922053,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.002074,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0020736107074371224,
+                  "t": 0,
+                  "idleTime": 0.033333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001555,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.002073612584575404,
+                  "t": 2.8,
+                  "idleTime": 2.966667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001555,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "mirrored clip pair",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": 0,
+                "worstMotion": {
+                  "t": 0.366667,
+                  "errorHeight": 0
+                },
+                "bilateralPoseRmsHeightUnscored": 0.11521,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "point_left",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--point_left.html",
+          "jsonPath": "clips/coach-mascot-v1--point_left.json",
+          "sheetPath": "sheets/coach-mascot-v1--point_left.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--point_left.svg",
+          "jsonHref": "coach-mascot-v1--point_left.json"
+        },
+        {
+          "id": "point_up",
+          "motionId": "point_up",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 2.799999952316284,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "point_up"
+          },
+          "score": 96.9,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 338,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 2.8,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4394,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.681317,
+              "status": "green",
+              "score": 86.37,
+              "evidence": {
+                "adjacentPairs": 168,
+                "observations": 2856,
+                "maxDegrees60Hz": 7.654394,
+                "maxMarkerStepHeight60Hz": 0.027253,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.6813174275598909,
+                  "t": 2.433333,
+                  "previousTime": 2.416667,
+                  "bone": "RightHand",
+                  "markerStepHeight60Hz": 0.027253,
+                  "degrees60Hz": 7.654394
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 169,
+                "affectedFrames": 0,
+                "checks": 2873,
+                "maxLimbFlexionDegrees": 56.304163,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.003649,
+              "status": "green",
+              "score": 99.93,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0036493313766522996,
+                  "t": 0,
+                  "idleTime": 0.05,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.002737,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0036493354401170614,
+                  "t": 2.8,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.002737,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.17544,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "point_up",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--point_up.html",
+          "jsonPath": "clips/coach-mascot-v1--point_up.json",
+          "sheetPath": "sheets/coach-mascot-v1--point_up.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--point_up.svg",
+          "jsonHref": "coach-mascot-v1--point_up.json"
+        },
+        {
+          "id": "point_down",
+          "motionId": "point_down",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 2.799999952316284,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "point_down"
+          },
+          "score": 99.4,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 338,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 2.8,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4394,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.130761,
+              "status": "green",
+              "score": 97.38,
+              "evidence": {
+                "adjacentPairs": 168,
+                "observations": 2856,
+                "maxDegrees60Hz": 1.423978,
+                "maxMarkerStepHeight60Hz": 0.00523,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.13076144344340487,
+                  "t": 0.433333,
+                  "previousTime": 0.416667,
+                  "bone": "RightHand",
+                  "markerStepHeight60Hz": 0.00523,
+                  "degrees60Hz": 0.920885
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 169,
+                "affectedFrames": 0,
+                "checks": 2873,
+                "maxLimbFlexionDegrees": 49.583357,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.00091,
+              "status": "green",
+              "score": 99.98,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.000910303093609019,
+                  "t": 0,
+                  "idleTime": 0,
+                  "markers": 17,
+                  "rmsPositionHeight": 0,
+                  "rmsRotationDegrees": 0.000001,
+                  "rmsVelocityHeightPerSecond": 0.000683,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0009103040092191916,
+                  "t": 2.8,
+                  "idleTime": 3,
+                  "markers": 17,
+                  "rmsPositionHeight": 0,
+                  "rmsRotationDegrees": 0.000001,
+                  "rmsVelocityHeightPerSecond": 0.000683,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.051809,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "point_down",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--point_down.html",
+          "jsonPath": "clips/coach-mascot-v1--point_down.json",
+          "sheetPath": "sheets/coach-mascot-v1--point_down.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--point_down.svg",
+          "jsonHref": "coach-mascot-v1--point_down.json"
+        },
+        {
+          "id": "fist_pump",
+          "motionId": "fist_pump",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "fist_pump"
+          },
+          "score": 96,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.869361,
+              "status": "green",
+              "score": 82.61,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 13.040421,
+                "maxMarkerStepHeight60Hz": 0.029032,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.8693614051732849,
+                  "t": 0.933333,
+                  "previousTime": 0.916667,
+                  "bone": "RightForeArm",
+                  "markerStepHeight60Hz": 0.017021,
+                  "degrees60Hz": 13.040421
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 108.289408,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.003542,
+              "status": "green",
+              "score": 99.93,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0019530919436937997,
+                  "t": 0,
+                  "idleTime": 0.05,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.001465,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.003542317105652727,
+                  "t": 3,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.002657,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.132173,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "fist_pump",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--fist_pump.html",
+          "jsonPath": "clips/coach-mascot-v1--fist_pump.json",
+          "sheetPath": "sheets/coach-mascot-v1--fist_pump.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--fist_pump.svg",
+          "jsonHref": "coach-mascot-v1--fist_pump.json"
+        },
+        {
+          "id": "clap",
+          "motionId": "clap",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3.5999999046325684,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [
+              {
+                "time": 1.2,
+                "type": "clap"
+              },
+              {
+                "time": 1.9,
+                "type": "clap"
+              },
+              {
+                "time": 2.6,
+                "type": "clap"
+              }
+            ],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "clap"
+          },
+          "score": 98.5,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 434,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3.6,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 5642,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.338634,
+              "status": "green",
+              "score": 93.23,
+              "evidence": {
+                "adjacentPairs": 216,
+                "observations": 3672,
+                "maxDegrees60Hz": 5.079517,
+                "maxMarkerStepHeight60Hz": 0.011854,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.3386344428634265,
+                  "t": 2.733333,
+                  "previousTime": 2.716667,
+                  "bone": "LeftArm",
+                  "markerStepHeight60Hz": 0,
+                  "degrees60Hz": 5.079517
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 217,
+                "affectedFrames": 0,
+                "checks": 3689,
+                "maxLimbFlexionDegrees": 93.844526,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.002128,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0013272278940993762,
+                  "t": 0,
+                  "idleTime": 0.066667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.022729,
+                  "rmsVelocityHeightPerSecond": 0.000995,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0021277942532468255,
+                  "t": 3.6,
+                  "idleTime": 2.933333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.02273,
+                  "rmsVelocityHeightPerSecond": 0.001596,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "clap",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--clap.html",
+          "jsonPath": "clips/coach-mascot-v1--clap.json",
+          "sheetPath": "sheets/coach-mascot-v1--clap.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--clap.svg",
+          "jsonHref": "coach-mascot-v1--clap.json"
+        },
+        {
+          "id": "joy_jump",
+          "motionId": "joy_jump",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.7,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.7,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [
+              {
+                "time": 0.9,
+                "type": "takeoff"
+              },
+              {
+                "time": 1.7,
+                "type": "land"
+              }
+            ],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "joy_jump"
+          },
+          "score": 97.9,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 4,
+                "samples": 270,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 0.9,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.449629,
+              "status": "green",
+              "score": 91.01,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 6.224733,
+                "maxMarkerStepHeight60Hz": 0.017985,
+                "maxRootStepHeight60Hz": 0.006179,
+                "worst": {
+                  "ratio": 0.449629314367745,
+                  "t": 1.033333,
+                  "previousTime": 1.016667,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.017985,
+                  "degrees60Hz": 5.796618
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 105.943619,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.001852,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.001851607558891769,
+                  "t": 0,
+                  "idleTime": 0.066667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.022729,
+                  "rmsVelocityHeightPerSecond": 0.001389,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0006791132228005559,
+                  "t": 3,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.000504,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "joy_jump",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--joy_jump.html",
+          "jsonPath": "clips/coach-mascot-v1--joy_jump.json",
+          "sheetPath": "sheets/coach-mascot-v1--joy_jump.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--joy_jump.svg",
+          "jsonHref": "coach-mascot-v1--joy_jump.json"
+        },
+        {
+          "id": "shrug",
+          "motionId": "shrug",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 2.799999952316284,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.8,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "shrug"
+          },
+          "score": 99,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 338,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 2.8,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4394,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.221777,
+              "status": "green",
+              "score": 95.56,
+              "evidence": {
+                "adjacentPairs": 168,
+                "observations": 2856,
+                "maxDegrees60Hz": 2.516785,
+                "maxMarkerStepHeight60Hz": 0.008871,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.22177689203446782,
+                  "t": 0.416667,
+                  "previousTime": 0.4,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.008871,
+                  "degrees60Hz": 2.516784
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 169,
+                "affectedFrames": 0,
+                "checks": 2873,
+                "maxLimbFlexionDegrees": 74.561508,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000937,
+              "status": "green",
+              "score": 99.98,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0009370345470343444,
+                  "t": 0,
+                  "idleTime": 0.05,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.000703,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0009370325607934948,
+                  "t": 2.8,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.000703,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "shrug",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--shrug.html",
+          "jsonPath": "clips/coach-mascot-v1--shrug.json",
+          "sheetPath": "sheets/coach-mascot-v1--shrug.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--shrug.svg",
+          "jsonHref": "coach-mascot-v1--shrug.json"
+        },
+        {
+          "id": "nod",
+          "motionId": "nod",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "nod"
+          },
+          "score": 99.6,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.084516,
+              "status": "green",
+              "score": 98.31,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 1.267733,
+                "maxMarkerStepHeight60Hz": 0,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.08451552407961588,
+                  "t": 0.916667,
+                  "previousTime": 0.9,
+                  "bone": "Head",
+                  "markerStepHeight60Hz": 0,
+                  "degrees60Hz": 1.267733
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 49.583357,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000249,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.00024889117559905195,
+                  "t": 0,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000187,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.00024889117559735523,
+                  "t": 3,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000187,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "nod",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--nod.html",
+          "jsonPath": "clips/coach-mascot-v1--nod.json",
+          "sheetPath": "sheets/coach-mascot-v1--nod.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--nod.svg",
+          "jsonHref": "coach-mascot-v1--nod.json"
+        },
+        {
+          "id": "shake_head",
+          "motionId": "shake_head",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "shake_head"
+          },
+          "score": 99.5,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.114796,
+              "status": "green",
+              "score": 97.7,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 1.721933,
+                "maxMarkerStepHeight60Hz": 0,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.11479553701649681,
+                  "t": 0.966667,
+                  "previousTime": 0.95,
+                  "bone": "Head",
+                  "markerStepHeight60Hz": 0,
+                  "degrees60Hz": 1.721933
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 49.583357,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000249,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.00024889117559905195,
+                  "t": 0,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000187,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.00024889117559735523,
+                  "t": 3,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000187,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "shake_head",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--shake_head.html",
+          "jsonPath": "clips/coach-mascot-v1--shake_head.json",
+          "sheetPath": "sheets/coach-mascot-v1--shake_head.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--shake_head.svg",
+          "jsonHref": "coach-mascot-v1--shake_head.json"
+        },
+        {
+          "id": "air_hug",
+          "motionId": "air_hug",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3.200000047683716,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "air_hug"
+          },
+          "score": 98.7,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 386,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3.2,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 5018,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.28881,
+              "status": "green",
+              "score": 94.22,
+              "evidence": {
+                "adjacentPairs": 192,
+                "observations": 3264,
+                "maxDegrees60Hz": 4.255955,
+                "maxMarkerStepHeight60Hz": 0.011552,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.2888098688213858,
+                  "t": 1.166667,
+                  "previousTime": 1.15,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.011552,
+                  "degrees60Hz": 4.203887
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 193,
+                "affectedFrames": 0,
+                "checks": 3281,
+                "maxLimbFlexionDegrees": 79.867455,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.002141,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0012026428621036546,
+                  "t": 0,
+                  "idleTime": 0.066667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.022729,
+                  "rmsVelocityHeightPerSecond": 0.00088,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0021414638932395233,
+                  "t": 3.2,
+                  "idleTime": 2.95,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.001606,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "air_hug",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--air_hug.html",
+          "jsonPath": "clips/coach-mascot-v1--air_hug.json",
+          "sheetPath": "sheets/coach-mascot-v1--air_hug.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--air_hug.svg",
+          "jsonHref": "coach-mascot-v1--air_hug.json"
+        },
+        {
+          "id": "go_there",
+          "motionId": "go_there",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3.200000047683716,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "go_there"
+          },
+          "score": 98.5,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 386,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3.2,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 5018,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.338991,
+              "status": "green",
+              "score": 93.22,
+              "evidence": {
+                "adjacentPairs": 192,
+                "observations": 3264,
+                "maxDegrees60Hz": 4.374102,
+                "maxMarkerStepHeight60Hz": 0.01356,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.338990550055152,
+                  "t": 2.833333,
+                  "previousTime": 2.816667,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.01356,
+                  "degrees60Hz": 3.892605
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 193,
+                "affectedFrames": 0,
+                "checks": 3281,
+                "maxLimbFlexionDegrees": 89.115774,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.002092,
+              "status": "green",
+              "score": 99.96,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0018274545276834359,
+                  "t": 0,
+                  "idleTime": 0.033333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001371,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.002091865289414753,
+                  "t": 3.2,
+                  "idleTime": 2.966667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000006,
+                  "rmsRotationDegrees": 0.00294,
+                  "rmsVelocityHeightPerSecond": 0.001569,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.111307,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "go_there",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--go_there.html",
+          "jsonPath": "clips/coach-mascot-v1--go_there.json",
+          "sheetPath": "sheets/coach-mascot-v1--go_there.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--go_there.svg",
+          "jsonHref": "coach-mascot-v1--go_there.json"
+        },
+        {
+          "id": "well_done",
+          "motionId": "well_done",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "well_done"
+          },
+          "score": 98.2,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.401333,
+              "status": "green",
+              "score": 91.97,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 5.28374,
+                "maxMarkerStepHeight60Hz": 0.016053,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.401332682949776,
+                  "t": 0.383333,
+                  "previousTime": 0.366667,
+                  "bone": "RightHand",
+                  "markerStepHeight60Hz": 0.016053,
+                  "degrees60Hz": 5.283738
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 103.611638,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.001334,
+              "status": "green",
+              "score": 99.97,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0013344136432852163,
+                  "t": 0,
+                  "idleTime": 0.066667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.022729,
+                  "rmsVelocityHeightPerSecond": 0.001001,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0013344138686375772,
+                  "t": 3,
+                  "idleTime": 2.933333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.02273,
+                  "rmsVelocityHeightPerSecond": 0.001001,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.064052,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "well_done",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--well_done.html",
+          "jsonPath": "clips/coach-mascot-v1--well_done.json",
+          "sheetPath": "sheets/coach-mascot-v1--well_done.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--well_done.svg",
+          "jsonHref": "coach-mascot-v1--well_done.json"
+        },
+        {
+          "id": "try_again",
+          "motionId": "try_again",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3.200000047683716,
+          "metadata": {
+            "loop": false,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "try_again"
+          },
+          "score": 98.8,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 386,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3.2,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 5018,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.265154,
+              "status": "green",
+              "score": 94.7,
+              "evidence": {
+                "adjacentPairs": 192,
+                "observations": 3264,
+                "maxDegrees60Hz": 3.326616,
+                "maxMarkerStepHeight60Hz": 0.010606,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.2651541930712826,
+                  "t": 2.833333,
+                  "previousTime": 2.816667,
+                  "bone": "LeftHand",
+                  "markerStepHeight60Hz": 0.010606,
+                  "degrees60Hz": 3.326614
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 193,
+                "affectedFrames": 0,
+                "checks": 3281,
+                "maxLimbFlexionDegrees": 97.091647,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.001203,
+              "status": "green",
+              "score": 99.98,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.0007339951776943326,
+                  "t": 0,
+                  "idleTime": 0.05,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000027,
+                  "rmsRotationDegrees": 0.012835,
+                  "rmsVelocityHeightPerSecond": 0.00055,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0012026455574267636,
+                  "t": 3.2,
+                  "idleTime": 2.933333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000048,
+                  "rmsRotationDegrees": 0.02273,
+                  "rmsVelocityHeightPerSecond": 0.000482,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "try_again",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--try_again.html",
+          "jsonPath": "clips/coach-mascot-v1--try_again.json",
+          "sheetPath": "sheets/coach-mascot-v1--try_again.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--try_again.svg",
+          "jsonHref": "coach-mascot-v1--try_again.json"
+        },
+        {
+          "id": "ready",
+          "motionId": "ready",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 3,
+          "metadata": {
+            "loop": true,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "ready"
+          },
+          "score": 99.6,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 362,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 3,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 4706,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.076816,
+              "status": "green",
+              "score": 98.46,
+              "evidence": {
+                "adjacentPairs": 180,
+                "observations": 3060,
+                "maxDegrees60Hz": 1.152234,
+                "maxMarkerStepHeight60Hz": 0.00307,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.07681557389564195,
+                  "t": 0.766667,
+                  "previousTime": 0.75,
+                  "bone": "LeftForeArm",
+                  "markerStepHeight60Hz": 0.001448,
+                  "degrees60Hz": 1.152234
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 181,
+                "affectedFrames": 0,
+                "checks": 3077,
+                "maxLimbFlexionDegrees": 93.583318,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000235,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.00023511469302155879,
+                  "t": 0,
+                  "idleTime": 3.966667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0,
+                  "rmsRotationDegrees": 0.000452,
+                  "rmsVelocityHeightPerSecond": 0.000176,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.00023188255241013864,
+                  "t": 3,
+                  "idleTime": 0.033333,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000001,
+                  "rmsRotationDegrees": 0.000476,
+                  "rmsVelocityHeightPerSecond": 0.000174,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "entry",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "ready",
+          "sport": "coach",
+          "idleReference": "rest_idle",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--ready.html",
+          "jsonPath": "clips/coach-mascot-v1--ready.json",
+          "sheetPath": "sheets/coach-mascot-v1--ready.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--ready.svg",
+          "jsonHref": "coach-mascot-v1--ready.json"
+        },
+        {
+          "id": "rest_idle",
+          "motionId": "rest_idle",
+          "role": "coach",
+          "profile": "canonical18",
+          "height": 1.885,
+          "duration": 4,
+          "metadata": {
+            "loop": true,
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 4,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 4,
+                "local": [
+                  0,
+                  -0.08,
+                  0
+                ]
+              }
+            ],
+            "events": [],
+            "role": "coach",
+            "profile": "canonical18",
+            "sourceLibrary": "coach-mascot-v1",
+            "floorY": 0,
+            "soleLocal": [
+              0,
+              -0.08,
+              0
+            ],
+            "ballVisible": false,
+            "locomotion": false,
+            "coordinateSpace": "decoded GLB world",
+            "floorProbeKind": "four authored sole corners per shoe plus all joint centers",
+            "ball": {},
+            "referencePathAvailable": false,
+            "symmetryReference": null,
+            "heightKind": "declared profile stature",
+            "diagnosticGeometry": "declared skeletal sole/contact points; mesh not decoded"
+          },
+          "source": {
+            "file": "coach.glb",
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220",
+            "animation": "rest_idle"
+          },
+          "score": 99.9,
+          "coverage": 1,
+          "metrics": {
+            "footSliding": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "coordinateSpace": "decoded GLB world",
+                "supportSource": "declared",
+                "windows": 2,
+                "samples": 482,
+                "maxDriftMeters": 0,
+                "p95SpeedMetersPerSecond": 0,
+                "worst": {
+                  "bone": "LeftFoot",
+                  "t": 0,
+                  "start": 0,
+                  "end": 4,
+                  "driftMeters": 0
+                }
+              }
+            },
+            "floorPenetration": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "samples": 6266,
+                "floorY": 0,
+                "probeKind": "four authored sole corners per shoe plus all joint centers",
+                "maxDepthMeters": 0,
+                "worst": {
+                  "t": 0,
+                  "bone": "LeftFoot",
+                  "depthMeters": 0,
+                  "y": 0
+                }
+              }
+            },
+            "posePops": {
+              "value": 0.012651,
+              "status": "green",
+              "score": 99.75,
+              "evidence": {
+                "adjacentPairs": 240,
+                "observations": 4080,
+                "maxDegrees60Hz": 0.189764,
+                "maxMarkerStepHeight60Hz": 0.000207,
+                "maxRootStepHeight60Hz": 0,
+                "worst": {
+                  "ratio": 0.01265090135777095,
+                  "t": 1.5,
+                  "previousTime": 1.483333,
+                  "bone": "Head",
+                  "markerStepHeight60Hz": 0.000084,
+                  "degrees60Hz": 0.189764
+                }
+              }
+            },
+            "anatomy": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "testedFrames": 241,
+                "affectedFrames": 0,
+                "checks": 4097,
+                "maxLimbFlexionDegrees": 49.583357,
+                "maxRelativeSegmentLengthChange": 0,
+                "hingeDirectionChecked": false,
+                "axialTwistChecked": false,
+                "violations": []
+              }
+            },
+            "ballContact": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action explicitly has no visible ball or declared ball contact.",
+              "evidence": {}
+            },
+            "continuity": {
+              "value": 0.000243,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "entry": {
+                  "ratio": 0.00024189889247626603,
+                  "t": 0,
+                  "idleTime": 3,
+                  "markers": 17,
+                  "rmsPositionHeight": 0,
+                  "rmsRotationDegrees": 0.000001,
+                  "rmsVelocityHeightPerSecond": 0.000181,
+                  "velocityEvaluated": true
+                },
+                "exit": {
+                  "ratio": 0.0002430982623188665,
+                  "t": 4,
+                  "idleTime": 0.016667,
+                  "markers": 17,
+                  "rmsPositionHeight": 0.000003,
+                  "rmsRotationDegrees": 0.00147,
+                  "rmsVelocityHeightPerSecond": 0.000182,
+                  "velocityEvaluated": true
+                },
+                "worstEndpoint": "exit",
+                "alignment": "horizontal root translation; raw asset poses used when provided"
+              }
+            },
+            "bodySliding": {
+              "value": null,
+              "status": "not-applicable",
+              "score": null,
+              "reason": "This action is not declared locomotion.",
+              "evidence": {}
+            },
+            "symmetry": {
+              "value": 0,
+              "status": "green",
+              "score": 100,
+              "evidence": {
+                "mode": "structural",
+                "modeSource": "structural default for intentional asymmetry",
+                "structuralMismatch": 0,
+                "segments": [
+                  {
+                    "segment": "Arm-ForeArm",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "ForeArm-Hand",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "UpLeg-Leg",
+                    "mismatch": 0
+                  },
+                  {
+                    "segment": "Leg-Foot",
+                    "mismatch": 0
+                  }
+                ],
+                "motionRmsHeight": null,
+                "worstMotion": null,
+                "bilateralPoseRmsHeightUnscored": 0.001639,
+                "note": "One-sided authored actions are checked for structural symmetry only."
+              }
+            }
+          },
+          "reasons": [],
+          "scoring": {
+            "kind": "weighted reproducible screening proxy",
+            "applicableWeight": 79,
+            "measuredWeight": 79,
+            "missingApplicableMetricsScoreZero": true
+          },
+          "clipId": "rest_idle",
+          "sport": "coach",
+          "idleReference": "ready",
+          "library": "coach-mascot-v1",
+          "htmlPath": "clips/coach-mascot-v1--rest_idle.html",
+          "jsonPath": "clips/coach-mascot-v1--rest_idle.json",
+          "sheetPath": "sheets/coach-mascot-v1--rest_idle.svg",
+          "assetPrefix": "../../",
+          "sheetHref": "../sheets/coach-mascot-v1--rest_idle.svg",
+          "jsonHref": "coach-mascot-v1--rest_idle.json"
+        }
+      ],
+      "source": {
+        "ref": "working-tree",
+        "commit": "working-tree",
+        "path": "coach-mascot-v1",
+        "inputs": [
+          {
+            "path": "coach.glb",
+            "bytes": 1006856,
+            "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220"
+          }
+        ],
+        "geometryDecoded": false,
+        "adapter": "source/qa-sources.mjs; stock sampler and scoring thresholds unchanged"
+      },
+      "summary": {
+        "count": 18,
+        "average": 98.6,
+        "min": 96,
+        "max": 100,
+        "redMetrics": 0,
+        "unknownMetrics": 36
+      }
+    }
+  ],
+  "comparisons": [],
+  "elapsedSeconds": 0.92,
+  "assetPrefix": "../"
+}

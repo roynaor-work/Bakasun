@@ -1,0 +1,34 @@
+{
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamFiles": {
+    "run.mjs": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+    "glb.mjs": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+    "metrics.mjs": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+    "report.mjs": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+    "sheets.mjs": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+    "licenses.mjs": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+  },
+  "adapterFiles": {
+    "source/qa-run.mjs": "54c21970bd407e6f28ed6d3172d71af2b68e933c958166a6e140650426cd4166",
+    "source/qa-loader.mjs": "b4cf108d621b0316f47b3efad895895a951af966e42dd1dbb907b7d0765818b7",
+    "source/qa-sources.mjs": "2266c21257f7696cc1396f79b67d856fad30beed85e7c9d16eed725e47a5c46b",
+    "source/qa-input.json": "27d7b0b26b1f32ac65244decc66a254da7e09afed5cc2f568df7c52d3dc397df"
+  },
+  "fps": 60,
+  "model": {
+    "path": "coach.glb",
+    "bytes": 1006856,
+    "sha256": "1d813b789407767da37951fe80b5f0df8fba0f43be90f03a0df741c511a5f220"
+  },
+  "clips": 18,
+  "minimum": 96,
+  "average": 98.6,
+  "minCoverage": 1,
+  "insufficientData": [],
+  "limitations": [
+    "Skeleton and declared sole/contact points are audited; compressed mesh geometry and texture pixels are not decoded.",
+    "Reference-root paths describe the author scenario. Actual simulation speed/IK/blending are not executed.",
+    "Feeling score is a reproducible weighted diagnostic heuristic, not a perceptual or medical validation.",
+    "Missing applicable metadata is unavailable and earns zero points; not-applicable metrics are excluded. Coverage is shown."
+  ]
+}
