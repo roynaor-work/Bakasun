@@ -1,3 +1,5 @@
+// Historical optional pit cancellation remains available under rollback; tests/island-phone-fix-d.test.mjs checks mandatory automatic entry.
+globalThis.location={search:'?phoneFixD=0'};
 // racing-v24.1 (Roy after v24 on the phone: "a tyre change on only one track, I did not notice whether it went there by itself; the goal is that it goes in for
 // the tyre change automatically after two laps"). ?racingPitAuto=0 brings v24 back; the pure race model keeps v24 unless its config asks (the session does).
 import test from 'node:test';
