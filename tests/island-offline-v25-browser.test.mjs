@@ -70,7 +70,8 @@ test('v25: the background download keeps the shell and the main games only; the 
   const rows=await t.page.evaluate(()=>[...document.querySelectorAll('.offline-pack')].map(li=>({game:li.dataset.game,state:li.dataset.state,size:li.querySelector('.offline-pack-size').textContent,action:li.querySelector('button')?.dataset.action})));
   assert.equal(rows.length,11);
   assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:'24 MB',action:'offline-pack-delete'});
-  assert.deepEqual(rows.find(r=>r.game==='tennis'),{game:'tennis',state:'missing',size:'4.7 MB',action:'offline-pack-download'});
+  const tennis=rows.find(r=>r.game==='tennis');assert.ok(['missing','partial'].includes(tennis.state),'tennis is not ready (files shared with the main games may already be there): '+JSON.stringify(tennis));
+  assert.equal(tennis.size,'4.7 MB');assert.equal(tennis.action,'offline-pack-download');
   const texts=await t.page.evaluate(()=>({status:document.querySelector('.offline-status').textContent,storage:document.querySelector('[data-offline-storage]').textContent,install:document.querySelector('[data-action=offline-install]').textContent,installState:document.querySelector('[data-offline-panel]').dataset.install}));
   assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 11 משחקים מוכנים/);
   assert.match(texts.storage,/באחסון המכשיר: [\d.]+ MB/);assert.match(texts.storage,/שמירה קבועה: (כן|לא)/);
@@ -84,7 +85,7 @@ test('v25: the background download keeps the shell and the main games only; the 
   await t.page.locator('.offline-pack[data-game=tennis] [data-action=offline-pack-delete]').click();
   assert.equal(await t.page.evaluate(()=>document.querySelector('.offline-pack[data-game=tennis] button').textContent),'בטוח? מחיקה','a delete asks once');
   await t.page.locator('.offline-pack[data-game=tennis] [data-action=offline-pack-delete]').click();
-  await t.page.waitForFunction(()=>document.querySelector('.offline-pack[data-game=tennis]')?.dataset.state==='missing',null,{timeout:60000});
+  await t.page.waitForFunction(()=>/^(missing|partial)$/.test(document.querySelector('.offline-pack[data-game=tennis]')?.dataset.state),null,{timeout:60000});
   assert.match(await t.page.evaluate(()=>document.querySelector('.offline-status').textContent),/טניס נמחק מהמכשיר \(\d+ קבצים/);
   s=await status(t.page);assert.equal(s.games.tennis,false);assert.equal(s.games.soccer,true,'a shared file was not removed with tennis');
   const shared=pathsFor(manifest,['tennis']).filter(p=>manifest.games.soccer.includes(p));

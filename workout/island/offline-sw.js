@@ -62,6 +62,9 @@ async function networkFirstTry(request){
 self.addEventListener('fetch',event=>{
   const request=event.request;if(request.method!=='GET')return;
   let url;try{url=new URL(request.url);}catch{return;}
+  // The page's own download for the next release asks with ?v25fresh=1: it must reach the
+  // server, not this cache (which holds the current release's copy of the same file).
+  if(url.searchParams.has('v25fresh'))return;
   if(managed(url)){
     event.respondWith((async()=>{
       const cache=await caches.open(CACHE),hit=await cache.match(bare(url),{ignoreSearch:true});

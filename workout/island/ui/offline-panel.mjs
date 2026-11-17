@@ -181,7 +181,9 @@ function offlinePanel25({onChange=()=>{}}={}){
   games.addEventListener('click',async event=>{
     const b=event.target.closest?.('button[data-game]');if(!b||busyNow)return;const id=b.dataset.game;
     if(b.dataset.action==='offline-pack-download'){
-      await run(()=>downloadGames({games:[id],onProgress:p=>{packProgress[id]=p;progress(p);const li=games.querySelector(`li[data-game="${id}"]`);if(li){li.dataset.state='downloading';li.querySelector('.offline-pack-state').textContent=describePack(null,{downloading:p});}}}),{quiet:true});
+      const onProgress=p=>{packProgress[id]=p;progress(p);const li=games.querySelector(`li[data-game="${id}"]`);if(li){li.dataset.state='downloading';li.querySelector('.offline-pack-state').textContent=describePack(null,{downloading:p});}};
+      // A background download in flight is joined first (one download at a time); then this package, if it was not part of it.
+      await run(async()=>{let r=await downloadGames({games:[id],onProgress});if(!r.games?.[id])r=await downloadGames({games:[id],onProgress});return r;},{quiet:true});
       delete packProgress[id];await refresh();
     }else if(b.dataset.action==='offline-pack-delete'){
       if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='בטוח? מחיקה';b.classList.add('offline-danger');return;}

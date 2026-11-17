@@ -59,6 +59,13 @@ test('v25 download: every file is verified against the manifest hash, a wrong fi
  const noCrypto=await downloadSet({urls:['https://x/b'],cache:fakeCache(),fetcher,expect:{'https://x/b':good},digest:async()=>null,wait:async()=>{}});assert.deepEqual(noCrypto.failed,[],'no WebCrypto: not verified, not failed');
 });
 
+test('v25 release download asks the server directly (?v25fresh=1) so the current cache cannot answer with the old copy',async()=>{
+ const cache=fakeCache(),fetched=[];const fetcher=async url=>{fetched.push(url);return ok('new');};
+ await downloadSet({urls:['https://x/a.glb','https://x/b.json?v=1'],cache,fetcher,direct:true,wait:async()=>{}});
+ assert.deepEqual(fetched,['https://x/a.glb?v25fresh=1','https://x/b.json?v=1&v25fresh=1']);
+ assert.ok(cache.m.has('https://x/a.glb')&&cache.m.has('https://x/b.json'),'stored under the bare href');
+});
+
 test('v25 release plan: unchanged files are copied from the current cache, changed or missing ones are downloaded',async()=>{
  const next={games:{g:['a.glb','b.glb','c.glb']},core:[],shell:['app.mjs'],files:{'a.glb':[await hashOf('A'),10],'b.glb':[await hashOf('B2'),20],'c.glb':[await hashOf('C'),30],'app.mjs':[await hashOf('APP'),5]}};
  const current={'a.glb':'A','b.glb':'B','app.mjs':'APP'};
@@ -107,7 +114,7 @@ test('v25 worker: the app shell is answered from the device first and from the n
  assert.equal(calls,0,'no network for cached shell files');
  const miss=fakeEvent('https://x.test/workout/island/ui/new-module.mjs?v=v7');w.listeners.fetch(miss);assert.equal(await (await miss.answered).text(),'network');assert.equal(calls,1);
  const other=fakeEvent('https://x.test/workout/island/offline-manifest.json?v=v8');w.listeners.fetch(other);assert.equal(other.answered,undefined,'the next release manifest is not intercepted');
- for(const href of ['https://x.test/workout/island/release.json?check=1','https://x.test/workout/island/offline-sw.js?v=v8&v25=1']){const e=fakeEvent(href);w.listeners.fetch(e);assert.equal(e.answered,undefined,href);}
+ for(const href of ['https://x.test/workout/island/release.json?check=1','https://x.test/workout/island/offline-sw.js?v=v8&v25=1','https://x.test/workout/island/app.mjs?v25fresh=1','https://x.test/workout/island/design/x/a.glb?v25fresh=1']){const e=fakeEvent(href);w.listeners.fetch(e);assert.equal(e.answered,undefined,href+' is left to the network');}
  // v24 registration (no v25 flag): network first, device when the network fails.
  const old=await runWorker('v=v7'),oldCache=await old.cacheApi.open('island-assets-v7');await oldCache.put('https://x.test/workout/island/app.mjs',new Response('device'));
  old.context.fetchImpl=async()=>new Response('network',{status:200});const e1=fakeEvent('https://x.test/workout/island/app.mjs?v=v7');old.listeners.fetch(e1);assert.equal(await (await e1.answered).text(),'network');

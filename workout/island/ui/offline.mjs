@@ -69,8 +69,10 @@ export async function digestBlob(blob,chars=16){
  * loads over the network or falls back to its light version. Files already cached
  * are skipped, so an interrupted download resumes. With `expect` (href -> hash prefix)
  * every download is verified and a wrong file is retried; with {verify:true} the files
- * already in the cache are hashed too and a corrupt one is replaced. */
-export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgress=()=>{},concurrency=3,attempts=3,timeoutMs=60000,wait=ms=>new Promise(r=>setTimeout(r,ms)),signal,gate,pauseMs=0,expect=null,verify=false,digest=digestBlob}){
+ * already in the cache are hashed too and a corrupt one is replaced. {direct:true} adds
+ * ?v25fresh=1 so the worker lets the request through to the server (next release files). */
+export const freshHref=href=>href+(href.includes('?')?'&':'?')+'v25fresh=1';
+export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgress=()=>{},concurrency=3,attempts=3,timeoutMs=60000,wait=ms=>new Promise(r=>setTimeout(r,ms)),signal,gate,pauseMs=0,expect=null,verify=false,digest=digestBlob,direct=false}){
   const failed=[];let done=0,bytes=0,fresh=0,bad=0;const queue=[...urls],total=urls.length;
   const tick=()=>onProgress({done,total,bytes,percent:total?Math.round(done/total*100):100});
   async function one(href){
@@ -86,7 +88,7 @@ export async function downloadSet({urls,cache,fetcher=globalThis.fetch,onProgres
       if(signal?.aborted){reason='aborted';break;}
       const control=new AbortController(),timer=setTimeout(()=>control.abort(),timeoutMs),stop=()=>control.abort();signal?.addEventListener('abort',stop,{once:true});
       try{
-        const response=await fetcher(href,{cache:'no-cache',signal:control.signal});
+        const response=await fetcher(direct?freshHref(href):href,{cache:'no-cache',signal:control.signal});
         if(!response.ok)throw Error('HTTP '+response.status);
         if(/text\/html/i.test(response.headers.get('content-type')||'')&&!/\.html?$/.test(href)&&!/\/(\?.*)?$/.test(href))throw Error('not an asset (html)');
         const body=await response.blob();
@@ -245,7 +247,7 @@ async function prefetchReleaseOnce(version,{onProgress,games,v25=v25On(),concurr
   let copied=0;
   for(const p of plan.copy){const hit=await current.match(hrefOf(p),{ignoreSearch:true});if(hit){await nextCache.put(hrefOf(p),hit);copied++;}else plan.download.push(p);}
   const urls=plan.download.map(p=>hrefOf(p));
-  const downloaded=await downloadSet({urls,cache:nextCache,onProgress,concurrency,pauseMs,gate,expect:expectedHashes(next,plan.download)});
+  const downloaded=await downloadSet({urls,cache:nextCache,onProgress,concurrency,pauseMs,gate,expect:expectedHashes(next,plan.download),direct:true});
   return {version,copied,copiedBytes:plan.copyBytes,planned:plan.downloadBytes,downloaded,total:paths.length,games};
 }
 /** v25: hand the island to the new release. Registers the worker of `version` (its activate
