@@ -1,0 +1,121 @@
+diff --git a/tests/island-alpine-ctrl-ski.test.mjs b/tests/island-alpine-ctrl-ski.test.mjs
+--- a/tests/island-alpine-ctrl-ski.test.mjs
++++ b/tests/island-alpine-ctrl-ski.test.mjs
+@@ -9,7 +9,7 @@
+  * - Real touches (CDP Input.dispatchTouchEvent): a thumb landing on the left half of the slope floats the stick under it,
+  *   a second finger presses boost at the same time, steering keeps going, release clears everything.
+  * Screenshots land in workout/island/verification/ctrl-ski/. */
+-const out = fileURLToPath(new URL('../workout/island/verification/ctrl-ski/', import.meta.url));
++const out = process.env.ISLAND_CSP_AUDIT_DIR ? process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/, '') + '/ctrl-ski/' : fileURLToPath(new URL('../workout/island/verification/ctrl-ski/', import.meta.url));
+ 
+ test('browser: stick left / actions right in both orientations, floating stick with boost under a second finger',
+   {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 600000}, async () => {
+diff --git a/tests/workout-royiki.test.mjs b/tests/workout-royiki.test.mjs
+--- a/tests/workout-royiki.test.mjs
++++ b/tests/workout-royiki.test.mjs
+@@ -72,7 +72,7 @@
+ // ---- דפדפן: מסך תרגיל ב-390×844 (דורש Playwright; בלעדיו מדלגים) ----
+ let chromium = null;
+ try { chromium = await islandChromium(); } catch { /* בלי Playwright */ }
+-const browserTest = chromium ? test : test.skip;
++const browserTest = process.env.ISLAND_WORKOUT_BROWSER === '1' && chromium ? test : test.skip;
+ 
+ async function serve() {
+   const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.mp4': 'video/mp4', '.ogg': 'audio/ogg', '.wav': 'audio/wav' };
+@@ -88,9 +88,10 @@
+   return { url: `http://127.0.0.1:${server.address().port}/workout/index.html`, close: () => new Promise(r => server.close(r)) };
+ }
+ 
+-browserTest('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists', { timeout: 600000 }, async () => {
++browserTest('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists', { timeout: 600000 }, async tctx => {
+   const srv = await serve();
+-  const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--no-proxy-server'] });
++  tctx.after(() => srv.close());
++  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args: ['--use-gl=angle', '--use-angle=swiftshader', '--no-proxy-server'] });
+   try {
+     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+     const page = await ctx.newPage();
+diff --git a/workout/island/tests/aliens-naval-v24-browser.mjs b/workout/island/tests/aliens-naval-v24-browser.mjs
+--- a/workout/island/tests/aliens-naval-v24-browser.mjs
++++ b/workout/island/tests/aliens-naval-v24-browser.mjs
+@@ -15,7 +15,7 @@
+ // Run: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js CHROMIUM_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome node workout/island/tests/aliens-naval-v24-browser.mjs
+ import {verify} from './night-browser.mjs';
+ import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/aliens-naval-v24/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++const frames=process.env.ISLAND_CSP_AUDIT_DIR ? new URL('file://'+process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/frames/') : new URL('../verification/aliens-naval-v24/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+ const SHOTS=Number(process.env.SHOTS||20),only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+ let failures=[];
+diff --git a/workout/island/tests/fire-v24-browser.mjs b/workout/island/tests/fire-v24-browser.mjs
+--- a/workout/island/tests/fire-v24-browser.mjs
++++ b/workout/island/tests/fire-v24-browser.mjs
+@@ -11,7 +11,7 @@
+ import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
+ import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
+ 
+-const directory=fileURLToPath(new URL('../verification/fire-v24/',import.meta.url)),shots=directory+'shots/';await mkdir(shots,{recursive:true});
++const directory=process.env.ISLAND_CSP_AUDIT_DIR ? process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/' : fileURLToPath(new URL('../verification/fire-v24/',import.meta.url)),shots=directory+'shots/';await mkdir(shots,{recursive:true});
+ const island=fileURLToPath(new URL('../',import.meta.url));
+ const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium-1243/chrome-linux64/chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+diff --git a/workout/island/tests/naval-v241-browser.mjs b/workout/island/tests/naval-v241-browser.mjs
+--- a/workout/island/tests/naval-v241-browser.mjs
++++ b/workout/island/tests/naval-v241-browser.mjs
+@@ -14,7 +14,7 @@
+ // Run: PLAYWRIGHT_MODULE=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tests/naval-v241-browser.mjs
+ import {verify} from './night-browser.mjs';
+ import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/naval-boars-v241/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++const frames=process.env.ISLAND_CSP_AUDIT_DIR ? new URL('file://'+process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/frames/') : new URL('../verification/naval-boars-v241/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+ const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ let failures=[];
+ await verify('naval-boars-v241',[{width:844,height:390,isMobile:true}],async({page,context,viewport,tick,snap,start,exit,nav})=>{
+diff --git a/workout/island/tests/boar-fx-v241-browser.mjs b/workout/island/tests/boar-fx-v241-browser.mjs
+--- a/workout/island/tests/boar-fx-v241-browser.mjs
++++ b/workout/island/tests/boar-fx-v241-browser.mjs
+@@ -10,7 +10,7 @@
+ import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ const FX=process.env.FX||'v241',T0=Date.now(),log=(...a)=>console.error(`[${FX} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
+-const out=new URL('../verification/naval-boars-v241/',import.meta.url).pathname;await mkdir(out+'frames/',{recursive:true});
++const out=process.env.ISLAND_CSP_AUDIT_DIR ? process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/' : new URL('../verification/naval-boars-v241/',import.meta.url).pathname;await mkdir(out+'frames/',{recursive:true});
+ const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
+diff --git a/workout/island/tests/tennis-aliens-v24-1-browser.mjs b/workout/island/tests/tennis-aliens-v24-1-browser.mjs
+--- a/workout/island/tests/tennis-aliens-v24-1-browser.mjs
++++ b/workout/island/tests/tennis-aliens-v24-1-browser.mjs
+@@ -12,7 +12,7 @@
+ // The load time before/after is measured on a real clock by workout/island/tools/tennis-load-ab.mjs.
+ import {verify} from './night-browser.mjs';
+ import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/tennis-aliens-v24-1/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++const frames=process.env.ISLAND_CSP_AUDIT_DIR ? new URL('file://'+process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/frames/') : new URL('../verification/tennis-aliens-v24-1/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+ const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ const V24={aliens:'&alienVulcan=v24&alienHud=v24&alienArsenal=0&alienEnemyFire=v24',tennis:'&tennisGrip=0&tennisOut=v24&tennisReceive=0&tennisLoad=v24'};
+ let failures=[];
+diff --git a/workout/island/tests/racing-v24-touch-browser.mjs b/workout/island/tests/racing-v24-touch-browser.mjs
+--- a/workout/island/tests/racing-v24-touch-browser.mjs
++++ b/workout/island/tests/racing-v24-touch-browser.mjs
+@@ -19,7 +19,7 @@
+ import {fileURLToPath} from 'node:url';
+ import {verify} from './night-browser.mjs';
+ const scenario=process.env.RV24_SCENARIO||'turbo',part=process.env.RV24_PART||'racing-v24-fixes/'+scenario,extra=process.env.RV24_QUERY||'',FPS=Number(process.env.RV24_FPS)||30;
+-const dir=fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(dir+'frames/',{recursive:true});
++const dir=process.env.ISLAND_CSP_AUDIT_DIR ? process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/' : fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(dir+'frames/',{recursive:true});
+ const FRAME=Math.round(1000/FPS);
+ 
+ /** In-page audio log, installed before the race session creates its AudioContext: one-shots (buffer sources without loop, oscillators) with the race time,
+diff --git a/workout/island/tests/naval-v7-browser.mjs b/workout/island/tests/naval-v7-browser.mjs
+--- a/workout/island/tests/naval-v7-browser.mjs
++++ b/workout/island/tests/naval-v7-browser.mjs
+@@ -4,7 +4,7 @@
+ import {verify} from './night-browser.mjs';
+ import {writeFile,mkdir} from 'node:fs/promises';
+ import {fileURLToPath} from 'node:url';
+-const mode=process.env.NAVAL_V7_MODE||'on',out=fileURLToPath(new URL('../verification/gpt-v7-naval-fire-defense/',import.meta.url));await mkdir(out,{recursive:true});
++const mode=process.env.NAVAL_V7_MODE||'on',out=process.env.ISLAND_CSP_AUDIT_DIR ? process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/' : fileURLToPath(new URL('../verification/gpt-v7-naval-fire-defense/',import.meta.url));await mkdir(out,{recursive:true});
+ await verify('gpt-v7-naval-fire-defense/run-'+mode,[{width:844,height:390}],async({page,tick,snap,start,assert})=>{
+  // The island service worker answers asset requests itself, so page.route cannot see them: fail the two loaders in the page (GLB fetch, atlas image).
+  if(mode==='blocked')await page.evaluate(()=>{const f=window.fetch.bind(window);window.fetch=(u,...a)=>String(u?.url||u).includes('/naval-v7/')?Promise.reject(new TypeError('blocked')):f(u,...a);const d=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');Object.defineProperty(HTMLImageElement.prototype,'src',{...d,set(v){if(String(v).includes('/naval-v7/')){setTimeout(()=>this.dispatchEvent(new Event('error')),0);return;}d.set.call(this,v);}});});

@@ -1,0 +1,12 @@
+diff --git a/tests/island-soccer-reopen-browser.test.mjs b/tests/island-soccer-reopen-browser.test.mjs
+--- a/tests/island-soccer-reopen-browser.test.mjs
++++ b/tests/island-soccer-reopen-browser.test.mjs
+@@ -31,7 +31,7 @@
+    assert.ok(errors.includes('soccer-worker-failure-fixture'),'the browser really executed the failing worker');
+    assert.ok(errors.every(error=>error==='soccer-worker-failure-fixture'));await exit();errors.length=0;
+    await context.unroute('**/minigames/soccer-draco-worker.mjs');await start();const recovered=await ready();
+-   assert.equal(recovered.renderMetrics.designScene.status,'ready');assert.equal(recovered.renderMetrics.assetStats.kind,'design-glb-v2');assert.equal(recovered.renderMetrics.modelCount,12);assert.equal(recovered.players.length,12);
++   assert.equal(recovered.renderMetrics.designScene.status,'ready');assert.equal(recovered.renderMetrics.assetStats.kind,'design-glb-v2');assert.equal(recovered.players.length,22,'the shipped full match is eleven per side');assert.equal(recovered.renderMetrics.animations.length,22,'all player controllers recovered');assert.ok(recovered.renderMetrics.modelCount>0&&recovered.renderMetrics.modelCount<=22,'only visible players are counted as models');
+    await page.waitForFunction(()=>window.__island.games.current.session.snapshot.elapsed>.1);
+    await page.evaluate(()=>window.__island.games.current.session.setPaused(true));
+    if(out){await mkdir(out,{recursive:true});await page.screenshot({path:path.join(out,`${viewport.width}x${viewport.height}-recovered.png`)});}

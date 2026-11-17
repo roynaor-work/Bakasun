@@ -1,0 +1,24 @@
+{"at":"2026-11-17T18:20:13.705Z","pid":11544,"event":"browser-open","ms":675.58511,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:20:13.961Z","pid":11544,"event":"start","method":"goto","action":"http://127.0.0.1:36807/workout/island/?dev=1"}
+{"at":"2026-11-17T18:20:14.460Z","pid":11544,"event":"pass","method":"goto","action":"http://127.0.0.1:36807/workout/island/?dev=1","ms":499.722794}
+{"at":"2026-11-17T18:20:14.461Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:20:21.865Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded","ms":7404.8241610000005}
+{"at":"2026-11-17T18:20:24.584Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';}"}
+{"at":"2026-11-17T18:20:30.635Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';}","ms":6051.565563000002}
+{"at":"2026-11-17T18:20:31.417Z","pid":11544,"event":"browser-close"}
+{"at":"2026-11-17T18:20:31.991Z","pid":11544,"event":"browser-open","ms":528.5428060000013,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:20:32.193Z","pid":11544,"event":"start","method":"goto","action":"http://127.0.0.1:40715/workout/island/?dev=1"}
+{"at":"2026-11-17T18:20:32.719Z","pid":11544,"event":"pass","method":"goto","action":"http://127.0.0.1:40715/workout/island/?dev=1","ms":526.4530089999971}
+{"at":"2026-11-17T18:20:32.719Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:20:40.299Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded","ms":7579.476402}
+{"at":"2026-11-17T18:20:44.140Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>window.__island.games.current?.session.snapshot.v24?.markerKind"}
+{"at":"2026-11-17T18:20:44.160Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>window.__island.games.current?.session.snapshot.v24?.markerKind","ms":20.358886999998504}
+{"at":"2026-11-17T18:20:44.810Z","pid":11544,"event":"browser-close"}
+{"at":"2026-11-17T18:20:45.456Z","pid":11544,"event":"browser-open","ms":600.231039000002,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:20:45.697Z","pid":11544,"event":"start","method":"goto","action":"http://127.0.0.1:39123/workout/island/?dev=1&fireFlow=v23"}
+{"at":"2026-11-17T18:20:46.096Z","pid":11544,"event":"pass","method":"goto","action":"http://127.0.0.1:39123/workout/island/?dev=1&fireFlow=v23","ms":399.01506099999824}
+{"at":"2026-11-17T18:20:46.096Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:20:53.173Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view.metrics().avatarLoaded","ms":7076.785698}
+{"at":"2026-11-17T18:20:55.712Z","pid":11544,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games.current?.session.snapshot;return s?.renderMode==='three'&&s.renderMetrics?.drawCalls>0;}"}
+{"at":"2026-11-17T18:20:55.724Z","pid":11544,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games.current?.session.snapshot;return s?.renderMode==='three'&&s.renderMetrics?.drawCalls>0;}","ms":11.992775000006077}
+{"at":"2026-11-17T18:20:56.320Z","pid":11544,"event":"browser-close"}

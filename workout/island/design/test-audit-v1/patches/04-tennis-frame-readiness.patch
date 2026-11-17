@@ -1,0 +1,14 @@
+diff --git a/tests/island-tennis-v7-browser.test.mjs b/tests/island-tennis-v7-browser.test.mjs
+--- a/tests/island-tennis-v7-browser.test.mjs
++++ b/tests/island-tennis-v7-browser.test.mjs
+@@ -21,9 +21,8 @@
+     await page.goto(`${server.url}tools/perf-tennis.html?dur=3600&${query}`,{waitUntil:'load'});
+     await page.waitForFunction(()=>window.__tennis||window.__perf?.error);
+     assert.ok(await page.evaluate(()=>Boolean(window.__tennis)),name+': the view was created (a v7 failure must never stop the game)');
+-    await page.waitForTimeout(1500);
+     const before=await page.evaluate(()=>window.__tennis.view.metrics().frames);
+-    await page.waitForTimeout(1500);
++    await page.waitForFunction(before=>window.__tennis.view.metrics().frames>before,before,{timeout:120000});
+     const metrics=await page.evaluate(()=>window.__tennis.view.metrics());
+     assert.ok(metrics.frames>before,name+': frames keep rendering');
+     const extra=after?await after(page):null;

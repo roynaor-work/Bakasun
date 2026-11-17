@@ -1,0 +1,69 @@
+diff --git a/tests/island-fire-entry-lifecycle.test.mjs b/tests/island-fire-entry-lifecycle.test.mjs
+new file mode 100644
+--- /dev/null
++++ b/tests/island-fire-entry-lifecycle.test.mjs
+@@ -0,0 +1,64 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {readFile} from 'node:fs/promises';
++import {startFireEntry} from '../workout/island/minigames/fire-v24-flow.mjs';
++import {fireScenario} from '../workout/island/minigames/fire-campaign.mjs';
++import {entryBuilding} from '../workout/island/minigames/fire-v24.mjs';
++const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames;
++class Node {
++ constructor(){this.children=[];this.dataset={};this.handlers=new Map();this.hidden=false;}
++ append(...children){this.children.push(...children);for(const c of children)c.parent=this;}
++ setAttribute(){}
++ addEventListener(type,fn){this.handlers.set(type,fn);}
++ remove(){if(this.parent)this.parent.children=this.parent.children.filter(x=>x!==this);}
++ click(){this.handlers.get('click')?.();}
++}
++function fixture(loadInterior){
++ const originals=new Map(['document','requestAnimationFrame'].map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
++ const head=new Node(),frames=[];
++ globalThis.document={head,createElement:()=>new Node(),createElementNS:()=>new Node()};
++ globalThis.requestAnimationFrame=fn=>(frames.push(fn),frames.length);
++ const balance=fireScenario(config.fireRescue,3),building=entryBuilding(balance,3),pauses=[],finishes=[],dialog=new Node();
++ const model={truck:{x:building.door[0],z:building.door[2],speed:0,driving:false},time:0,update(dt){this.time+=dt;}};
++ Object.defineProperty(model,'canFinish',{configurable:true,get:()=>true});
++ Object.defineProperty(model,'guidance',{configurable:true,get:()=>({key:'fire.guide.complete'})});
++ let wrapped;
++ const runSession=(ctx,make)=>{wrapped=make(ctx);return {setPaused:p=>pauses.push(p),dispose(){pauses.push('dispose');},get snapshot(){return {time:model.time};},finish:raw=>ctx.finish(raw)};};
++ const session=startFireEntry({level:3,balance,config,dialog,canvas:{parentElement:new Node()},finish:raw=>{finishes.push(raw);return {ok:true};}},()=>model,()=>{},()=>({mode:'three'}),{runSession,loadInterior});
++ const restore=()=>{session.dispose();for(const [k,d] of originals){if(d)Object.defineProperty(globalThis,k,d);else delete globalThis[k];}};
++ return {session,model,wrapped,pauses,finishes,dialog,head,frames,restore};
++}
++const flush=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
++
++test('fire entry: the street clock freezes inside; pause/resume reaches the room; completing the room resumes the street',async()=>{
++ let onDone;const roomPauses=[];
++ const f=fixture(async()=>({runFireV24Interior(_ctx,o){onDone=o.onDone;return {snapshot:{phase:'play'},setPaused:p=>roomPauses.push(p),dispose(){}};}}));
++ try{
++  f.wrapped.update(.1,{});assert.equal(f.session.snapshot.v24.state,'ready');
++  f.dialog.children.find(n=>n.id==='fire-enter').click();f.wrapped.update(.1,{});await flush();
++  assert.equal(f.session.snapshot.v24.inside,true);assert.deepEqual(f.pauses,[true]);
++  const before=f.model.time;f.wrapped.update(10,{});assert.equal(f.model.time,before);
++  f.session.setPaused(true);f.session.setPaused(false);assert.deepEqual(roomPauses,[true,false]);assert.deepEqual(f.pauses,[true]);
++  onDone({outcome:'win',score:200,performance:1,rescued:1,rooms:1,seconds:10,handovers:0});
++  assert.equal(f.session.snapshot.v24.state,'done');assert.equal(f.session.snapshot.v24.inside,false);assert.deepEqual(f.pauses,[true,false]);
++  f.wrapped.update(.5,{});assert.equal(f.model.time,before+.5);assert.equal(f.wrapped.canFinish,true);
++ }finally{f.restore();}
++});
++
++test('fire entry: leaving while the room module is loading never mounts it or resumes the disposed street',async()=>{
++ let resolve,started=0;const pending=new Promise(r=>resolve=r),f=fixture(()=>pending);
++ try{
++  f.wrapped.update(.1,{});f.dialog.children.find(n=>n.id==='fire-enter').click();f.wrapped.update(.1,{});
++  f.session.dispose();resolve({runFireV24Interior(){started++;throw Error('mounted after exit');}});await flush();
++  assert.equal(started,0);assert.deepEqual(f.pauses,[true,'dispose']);assert.equal(f.head.children.length,0);assert.equal(f.dialog.children.length,0);
++  const queued=f.frames.splice(0);for(const fn of queued)fn();assert.equal(f.frames.length,0,'no next animation frame after disposal');
++ }finally{f.restore();}
++});
++
++test('fire entry: a room module load failure completes the failed room and gives control back to the street',async()=>{
++ const f=fixture(async()=>{throw Error('room unavailable');});
++ try{
++  f.wrapped.update(.1,{});f.dialog.children.find(n=>n.id==='fire-enter').click();f.wrapped.update(.1,{});await flush();
++  assert.equal(f.session.snapshot.v24.inside,false);assert.equal(f.session.snapshot.v24.done,true);assert.equal(f.session.snapshot.v24.result.failed,true);assert.deepEqual(f.pauses,[true,false]);
++ }finally{f.restore();}
++});

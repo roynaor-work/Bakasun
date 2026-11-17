@@ -1,0 +1,23 @@
+✔ all 50 exercises have a royiki animation, each matching a real exercise (1.766001ms)
+✔ every SVG exists, is local-only, self-contained, and identical to the design source (395.888178ms)
+✔ unique ids keep several copies in one DOM apart (0.532628ms)
+✔ the two design catalogs together list the same 50 animations, with the same durations (25.974304ms)
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (22.515715ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 721.043539
+
+✖ failing tests:
+
+test at tests/workout-royiki.test.mjs:91:1
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (22.515715ms)
+  browserType.launch: Failed to launch chromium because executable doesn't exist at /tmp/test-audit-v1/missing-browser
+      at TestContext.<anonymous> (/workspace/bakasun-test-audit-v1/tests/workout-royiki.test.mjs:94:34) {
+    name: 'Error',
+    log: []
+  }

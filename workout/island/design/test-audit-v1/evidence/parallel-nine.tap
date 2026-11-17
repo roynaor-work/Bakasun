@@ -1,0 +1,338 @@
+TAP version 13
+# Subtest: browser: stick left / actions right in both orientations, floating stick with boost under a second finger
+ok 1 - browser: stick left / actions right in both orientations, floating stick with boost under a second finger
+  ---
+  duration_ms: 512252.946105
+  type: 'test'
+  ...
+# Subtest: three stages use three different environments, set in the track config
+ok 2 - three stages use three different environments, set in the track config
+  ---
+  duration_ms: 6.548847
+  type: 'test'
+  ...
+# Subtest: alpine-v5: every file an environment can request exists, is in games.alpine, and the pack stays inside the size budget
+ok 3 - alpine-v5: every file an environment can request exists, is in games.alpine, and the pack stays inside the size budget
+  ---
+  duration_ms: 128.173293
+  type: 'test'
+  ...
+# Subtest: ui-kit-v2: files the island UI requests are in core; game coverage matches the kit manifest
+ok 4 - ui-kit-v2: files the island UI requests are in core; game coverage matches the kit manifest
+  ---
+  duration_ms: 40.859472
+  type: 'test'
+  ...
+# Subtest: source contract: silent fallbacks and no game logic in the kit helpers
+ok 5 - source contract: silent fallbacks and no game logic in the kit helpers
+  ---
+  duration_ms: 302.172427
+  type: 'test'
+  ...
+# Subtest: browser: environments per stage, rotate, offline list, silent fallbacks, kit screens
+not ok 6 - browser: environments per stage, rotate, offline list, silent fallbacks, kit screens
+  ---
+  duration_ms: 134326.617216
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-alpine-env.test.mjs:73:1'
+  failureType: 'testCodeFailure'
+  error: 'page.waitForFunction: Timeout 60000ms exceeded.'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TimeoutError'
+  stack: |-
+    page.<computed> (/tmp/test-audit-v1/playwright-observed.mjs:18:29)
+    TestContext.<anonymous> (/workspace/bakasun-test-audit-v1/tests/island-alpine-env.test.mjs:105:19)
+  ...
+# Subtest: skier3 GLB: 18 canonical bones, five embedded clips, Draco, matches its manifest
+ok 7 - skier3 GLB: 18 canonical bones, five embedded clips, Draco, matches its manifest
+  ---
+  duration_ms: 23.320782
+  type: 'test'
+  ...
+# Subtest: alpine-world: all 12 GLBs exist, are Draco, small, and match the manifest hashes
+ok 8 - alpine-world: all 12 GLBs exist, are Draco, small, and match the manifest hashes
+  ---
+  duration_ms: 18.347801
+  type: 'test'
+  ...
+# Subtest: the game wires the pack with silent fallbacks (source contract)
+ok 9 - the game wires the pack with silent fallbacks (source contract)
+  ---
+  duration_ms: 36.029354
+  type: 'test'
+  ...
+# Subtest: browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently
+ok 10 - browser: GLBs load under CSP, clips drive the state machine, game starts, every asset fails silently
+  ---
+  duration_ms: 240449.463804
+  type: 'test'
+  ...
+# Subtest: v7 switches: config default on, ?alpineV7=0 forces skier3, ?alpineV7=1 forces v7, no config block means off
+ok 11 - v7 switches: config default on, ?alpineV7=0 forces skier3, ?alpineV7=1 forces v7, no config block means off
+  ---
+  duration_ms: 14.872869
+  type: 'test'
+  ...
+# Subtest: LOD policy: the player gets the best level the tier allows, rivals are capped lower and drop to LOD2 by distance
+ok 12 - LOD policy: the player gets the best level the tier allows, rivals are capped lower and drop to LOD2 by distance
+  ---
+  duration_ms: 2.339362
+  type: 'test'
+  ...
+# Subtest: LOD plan: only levels a tier can use are fetched, LOD2 on demand at high and LOD0 never at low
+ok 13 - LOD plan: only levels a tier can use are fetched, LOD2 on demand at high and LOD0 never at low
+  ---
+  duration_ms: 1.774507
+  type: 'test'
+  ...
+# Subtest: v7 bundle: exactly the loaded files, same bytes as the package, Draco, 18 bones, 14 clips, under the cap, nothing from the preview
+ok 14 - v7 bundle: exactly the loaded files, same bytes as the package, Draco, 18 bones, 14 clips, under the cap, nothing from the preview
+  ---
+  duration_ms: 285.869923
+  type: 'test'
+  ...
+# Subtest: the game never reads the package folder for v7 and keeps the earlier assets as the fallback
+ok 15 - the game never reads the package folder for v7 and keeps the earlier assets as the fallback
+  ---
+  duration_ms: 41.003008
+  type: 'test'
+  ...
+# Subtest: offline: the three rider files are on the alpine list, the module is in the shell, nothing from the package folder is listed
+ok 16 - offline: the three rider files are on the alpine list, the module is in the shell, nothing from the package folder is listed
+  ---
+  duration_ms: 1.564046
+  type: 'test'
+  ...
+# Subtest: browser: v7 is the default, the LODs follow the tier, the kill flag and every failure fall back silently
+ok 17 - browser: v7 is the default, the LODs follow the tier, the kill flag and every failure fall back silently
+  ---
+  duration_ms: 465517.489528
+  type: 'test'
+  ...
+# Subtest: island server sends the exact shipped CSP on index, tools and viewer HTML
+ok 18 - island server sends the exact shipped CSP on index, tools and viewer HTML
+  ---
+  duration_ms: 204.179967
+  type: 'test'
+  ...
+# Subtest: actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco
+not ok 19 - actual island CSP blocks inline/blob workers, monitors frames/report-only and permits static Draco
+  ---
+  duration_ms: 420001.153931
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-browser-csp.test.mjs:25:1'
+  failureType: 'testTimeoutFailure'
+  error: 'test timed out after 420000ms'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+ok 20 - soccer: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+  ---
+  duration_ms: 130593.734066
+  type: 'test'
+  ...
+# Subtest: hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+not ok 21 - hoops: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+  ---
+  duration_ms: 94981.232499
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-load-rescue-browser.test.mjs:36:2'
+  failureType: 'testCodeFailure'
+  error: |-
+    page.waitForSelector: Timeout 10000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-load-rescue]') to be detached[22m
+    
+  code: 'ERR_TEST_FAILURE'
+  name: 'TimeoutError'
+  stack: |-
+    page.<computed> (/tmp/test-audit-v1/playwright-observed.mjs:18:29)
+    TestContext.<anonymous> (/workspace/bakasun-test-audit-v1/tests/island-load-rescue-browser.test.mjs:55:17)
+  ...
+# Subtest: alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+ok 22 - alpine: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key
+  ---
+  duration_ms: 80895.11423
+  type: 'test'
+  ...
+# Subtest: ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay
+ok 23 - ski: second stuck attempt offers the light version, third offers clearing only this game's asset cache; saves and other games' files stay
+  ---
+  duration_ms: 79391.890344
+  type: 'test'
+  ...
+# Subtest: one button downloads soccer, basketball, ski and racing; status counts the real cache; saves stay untouched; then the island opens offline with all four games
+not ok 24 - one button downloads soccer, basketball, ski and racing; status counts the real cache; saves stay untouched; then the island opens offline with all four games
+  ---
+  duration_ms: 112691.254619
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-offline-browser.test.mjs:41:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      [
+        [
+          'soccer',
+          'true'
+        ],
+    ...
+        [
+    +     'alpineLeague',
+    +     'true'
+    +   ],
+    +   [
+          'tennis',
+          'true'
+        ],
+        [
+          'racing',
+          'true'
+        ],
+    +   [
+    +     'naval',
+    +     'true'
+    +   ],
+    +   [
+    +     'fire',
+    +     'true'
+    +   ],
+    +   [
+    +     'alien',
+    +     'true'
+    +   ],
+    +   [
+    +     'city',
+    +     'true'
+    +   ],
+    +   [
+    +     'catch',
+    +     'true'
+    +   ]
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'soccer'
+      1: 'true'
+    1:
+      0: 'hoops'
+      1: 'true'
+    2:
+      0: 'alpine'
+      1: 'true'
+    3:
+      0: 'tennis'
+      1: 'true'
+    4:
+      0: 'racing'
+      1: 'true'
+  actual:
+    0:
+      0: 'soccer'
+      1: 'true'
+    1:
+      0: 'hoops'
+      1: 'true'
+    2:
+      0: 'alpine'
+      1: 'true'
+    3:
+      0: 'alpineLeague'
+      1: 'true'
+    4:
+      0: 'tennis'
+      1: 'true'
+    5:
+      0: 'racing'
+      1: 'true'
+    6:
+      0: 'naval'
+      1: 'true'
+    7:
+      0: 'fire'
+      1: 'true'
+    8:
+      0: 'alien'
+      1: 'true'
+    9:
+      0: 'city'
+      1: 'true'
+    10:
+      0: 'catch'
+      1: 'true'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/bakasun-test-audit-v1/tests/island-offline-browser.test.mjs:56:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: automatic download fills the device cache after open, and a data saver skips it
+not ok 25 - automatic download fills the device cache after open, and a data saver skips it
+  ---
+  duration_ms: 140991.984625
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-offline-browser.test.mjs:82:1'
+  failureType: 'testCodeFailure'
+  error: 'page.waitForFunction: Timeout 120000ms exceeded.'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TimeoutError'
+  stack: |-
+    page.<computed> (/tmp/test-audit-v1/playwright-observed.mjs:18:29)
+    TestContext.<anonymous> (/workspace/bakasun-test-audit-v1/tests/island-offline-browser.test.mjs:91:19)
+  ...
+# Subtest: a missing or blocked asset never hangs a game: soccer, basketball, ski and racing still reach the playing screen
+ok 26 - a missing or blocked asset never hangs a game: soccer, basketball, ski and racing still reach the playing screen
+  ---
+  duration_ms: 78753.656763
+  type: 'test'
+  ...
+# Subtest: racing v7: default, kill flag, config switch, blocked bundle and one missing file, both orientations
+not ok 27 - racing v7: default, kill flag, config switch, blocked bundle and one missing file, both orientations
+  ---
+  duration_ms: 277906.00268
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-racing-v7-browser.test.mjs:13:1'
+  failureType: 'testCodeFailure'
+  error: 'the cars in view show a LOD (cars behind the camera are not framed): -1,-1,-1,-1,-1,-1,-1,-1,-1,-1'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/bakasun-test-audit-v1/tests/island-racing-v7-browser.test.mjs:35:49)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: tennis v7 in the browser: default, kill switch, blocked files fall back silently, lazy surface, crowd governor
+not ok 28 - tennis v7 in the browser: default, kill switch, blocked files fall back silently, lazy surface, crowd governor
+  ---
+  duration_ms: 13415.403117
+  type: 'test'
+  location: '/workspace/bakasun-test-audit-v1/tests/island-tennis-v7-browser.test.mjs:9:1'
+  failureType: 'testCodeFailure'
+  error: 'inside the configured triangle budget: 99224'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/bakasun-test-audit-v1/tests/island-tennis-v7-browser.test.mjs:45:14)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 21
+# fail 6
+# cancelled 1
+# skipped 0
+# todo 0
+# duration_ms 799101.239524

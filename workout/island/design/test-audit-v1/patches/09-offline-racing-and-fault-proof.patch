@@ -1,0 +1,44 @@
+diff --git a/tests/island-offline-browser.test.mjs b/tests/island-offline-browser.test.mjs
+--- a/tests/island-offline-browser.test.mjs
++++ b/tests/island-offline-browser.test.mjs
+@@ -34,7 +34,7 @@
+  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
+  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
+  await page.waitForTimeout(3000);
+- return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
++ return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine',islandRacing:'racing'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
+ }
+ const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
+ 
+@@ -53,7 +53,8 @@
+   const texts=await t.page.evaluate(()=>[...window.__texts]);
+   assert.ok(texts.some(x=>/^מוריד \d+ מתוך \d+ · \d+%$/.test(x)),'progress shows X of Y and percent: '+texts.slice(0,5));
+   const state=await t.page.evaluate(async()=>({games:[...document.querySelectorAll('.offline-games li')].map(li=>[li.dataset.game,li.dataset.complete]),keys:await caches.keys(),after:Object.keys(localStorage).filter(k=>!k.startsWith('island.offline')).sort(),marker:localStorage.getItem('island.test.marker'),status:JSON.parse(localStorage.getItem('island.offline.status'))}));
+-  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true'],['tennis','true'],['racing','true']]);
++  for(const id of Object.keys(GAMES))assert.ok(manifest.games[id]?.length,id+' has an offline pack');
++  assert.deepEqual([...state.games].sort(([a],[b])=>a.localeCompare(b)),Object.keys(manifest.games).sort((a,b)=>a.localeCompare(b)).map(id=>[id,'true']));
+   assert.equal(state.keys.length,1);assert.match(state.keys[0],/^island-assets-/);
+   assert.equal(state.marker,'keep');assert.deepEqual(state.after,savedBefore,'no save key was removed');
+   assert.deepEqual(state.status.failed,[]);
+@@ -74,7 +75,7 @@
+   }
+   assert.deepEqual(failed.filter(u=>u.startsWith(server.url)&&!/release\.json/.test(u)),[],'nothing the app needs failed offline');
+   assert.deepEqual(errors,[]);
+-  for(const id of ['soccer','hoops','alpine'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
++  for(const id of ['soccer','hoops','alpine','racing'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
+   await t.csp.assertClean();
+  }finally{await t.csp.dispose();await t.context.close();await browser.close();await server.close();}
+ });
+@@ -101,10 +102,11 @@
+  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
+  const t=await open(browser,server,{saveData:true,contextOptions:{serviceWorkers:'block'}});
+  const blocked={soccer:/crowd-dots\.webp|goal-burst\.webp/,hoops:/net-spark\.webp|burning-ball-glow\.webp/,alpine:/ski-scrape\.webp|snow-dust\.webp/,racing:/tire-smoke\.png|asphalt-orm\.webp/};
+- let current='soccer';await t.context.route('**/*',route=>{const url=route.request().url();if(blocked[current].test(url))return route.abort('failed');return route.continue();});
++ let current='soccer';const intercepted=new Set();await t.context.route('**/*',route=>{const url=route.request().url();if(blocked[current].test(url)){intercepted.add(current);return route.abort('failed');}return route.continue();});
+  try{
+   await boot(t.page,server);
+   for(const [name,id] of Object.entries(GAMES)){current=name;const result=await play(t.page,id);assert.equal(result.status,'ready',name+' with a blocked asset: '+JSON.stringify(result));await leave(t.page);}
++  assert.deepEqual([...intercepted].sort(),Object.keys(GAMES).sort(),'each game really requested a blocked fixture');
+   assert.deepEqual(t.errors.filter(e=>!/Failed to load resource|net::/.test(e)),[]);
+  }finally{await t.csp.dispose();await t.context.close();await browser.close();await server.close();}
+ });

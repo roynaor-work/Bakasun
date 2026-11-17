@@ -1,0 +1,46 @@
+diff --git a/tests/island-v24-default-browser.test.mjs b/tests/island-v24-default-browser.test.mjs
+new file mode 100644
+--- /dev/null
++++ b/tests/island-v24-default-browser.test.mjs
+@@ -0,0 +1,41 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
++const enabled=process.env.ISLAND_CSP_BROWSER==='1';
++async function open(t,query=''){
++ const server=await serveIsland('/workout/island/');t.after(()=>server.close());
++ const browser=await(await islandChromium()).launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});t.after(()=>browser.close());
++ const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1,serviceWorkers:'block'});
++ const audit=await installIslandCspMonitor(context);t.after(()=>audit.dispose());
++ const page=await context.newPage(),errors=[];page.setDefaultTimeout(180000);page.on('pageerror',e=>errors.push(e.message));await audit.attachPage(page);
++ await page.goto(server.url+'?dev=1'+query,{waitUntil:'domcontentloaded'});
++ await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
++ await page.evaluate(()=>{
++  const {engine:e,ui,data}=window.__island;e.setAvatar({name:'בדיקה',created:true});e.skipTutorial();e.state.money=100000;e.state.learning.required=false;data.featureFlags.events=false;ui.closeModal();
++  for(const type of ['soccer','fireStation']){
++   if(e.state.buildings.some(b=>b.typeId===type))continue;
++   let placed=false;for(let z=0;z<e.state.world.size&&!placed;z++)for(let x=0;x<e.state.world.size&&!placed;x++)placed=e.place(type,x,z).ok;
++   if(!placed)throw Error('Cannot place test building '+type);
++  }
++  e.state.minigameProgress.fireRescue.stage=3;
++ });
++ const start=async(id,stage)=>{await page.evaluate(([id,stage])=>{const e=window.__island.engine;if(!e.state.instructionsSeen.includes(id))e.state.instructionsSeen.push(id);window.__island.games.start(id,undefined,stage);},[id,stage]);if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();};
++ return {page,start,async clean(){assert.deepEqual(errors,[]);await audit.assertClean();}};
++}
++test('current default: the real soccer shell starts all twenty-two players without a rollback switch',{skip:!enabled,timeout:360000},async t=>{
++ const f=await open(t);await f.start('soccer',1);
++ await f.page.waitForFunction(()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';});
++ const s=await f.page.evaluate(()=>window.__island.games.current.session.snapshot);
++ assert.equal(s.players.length,22);assert.equal(s.renderMetrics.animations.length,22,'all character controllers loaded');assert.ok(s.renderMetrics.modelCount>0&&s.renderMetrics.modelCount<=22,'the camera culls players outside its view');await f.clean();
++});
++test('current default: stage three enters the fire-entry flow and draws its door marker',{skip:!enabled,timeout:360000},async t=>{
++ const f=await open(t);await f.start('fireRescue',3);
++ await f.page.waitForFunction(()=>window.__island.games.current?.session.snapshot.v24?.markerKind);
++ const s=await f.page.evaluate(()=>window.__island.games.current.session.snapshot);
++ assert.equal(s.v24.state,'drive');assert.equal(s.v24.inside,false);assert.equal(s.v24.done,false);assert.equal(s.v24.enterButton,false);assert.ok(s.v24.doorDistance>12);await f.clean();
++});
++test('fire rollback is a separate matrix case: v23 has no entry flow',{skip:!enabled,timeout:360000},async t=>{
++ const f=await open(t,'&fireFlow=v23');await f.start('fireRescue',3);
++ await f.page.waitForFunction(()=>{const s=window.__island.games.current?.session.snapshot;return s?.renderMode==='three'&&s.renderMetrics?.drawCalls>0;});
++ const s=await f.page.evaluate(()=>window.__island.games.current.session.snapshot);assert.equal('v24' in s,false);await f.clean();
++});

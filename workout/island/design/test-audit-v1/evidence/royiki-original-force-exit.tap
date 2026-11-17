@@ -1,0 +1,31 @@
+✔ all 50 exercises have a royiki animation, each matching a real exercise (2.278143ms)
+✔ every SVG exists, is local-only, self-contained, and identical to the design source (539.789822ms)
+✔ unique ids keep several copies in one DOM apart (1.082425ms)
+✔ the two design catalogs together list the same 50 animations, with the same durations (56.45733ms)
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (18.70838ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 793.74515
+
+✖ failing tests:
+
+test at tests/workout-royiki.test.mjs:91:1
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (18.70838ms)
+  browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/bakasun-test-audit-v1/tests/workout-royiki.test.mjs:93:34) {
+    name: 'Error',
+    log: []
+  }

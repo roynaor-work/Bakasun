@@ -1,0 +1,208 @@
+[
+  {
+    "patch": "01-browser-runner-and-ci.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/helpers/run-browser-suites.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "02-browser-artifacts-and-opt-in.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-alpine-ctrl-ski.test.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "tests/workout-royiki.test.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/aliens-naval-v24-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/fire-v24-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/naval-v241-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/boar-fx-v241-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/tennis-aliens-v24-1-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/racing-v24-touch-browser.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "workout/island/tests/naval-v7-browser.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "03-load-rescue-cleanup.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-load-rescue-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "04-tennis-frame-readiness.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-tennis-v7-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "05-fire-entry-lifecycle-tests.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-fire-entry-lifecycle.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "06-soccer-reopen-current-default.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-soccer-reopen-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "07-remove-known-bug-invariants.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/bakasun-quality.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "08-deduplicate-shell-list-scan.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-soccer-assets-v24.test.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "tests/island-tennis-crowd-v22.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "09-offline-racing-and-fault-proof.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-offline-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "10-current-default-session-smoke.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-v24-default-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "11-boar-nonvacuous-acceptance.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "workout/island/tests/boar-aim-v24-browser.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "12-current-menu-contract.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-alpine-env.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  },
+  {
+    "patch": "13-racing-legacy-and-current-renderers.patch",
+    "apply_check_exit": 0,
+    "error": "",
+    "syntax_checks": [
+      {
+        "file": "tests/island-racing-v7-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      },
+      {
+        "file": "tests/island-racing-v24-render-browser.test.mjs",
+        "exit": 0,
+        "error": ""
+      }
+    ]
+  }
+]

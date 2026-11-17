@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: flag: on by default, ?fireFlow=v23 restores v23; entry stages are every third stage from 3
+ok 1 - flag: on by default, ?fireFlow=v23 restores v23; entry stages are every third stage from 3
+  ---
+  duration_ms: 7.317782
+  type: 'test'
+  ...
+# Subtest: plans: one per entry stage, rooms and fires exist, tools grow one at a time, every fire has a 3D anchor, friends are girl/cat/dog
+ok 2 - plans: one per entry stage, rooms and fires exist, tools grow one at a time, every fire has a 3D anchor, friends are girl/cat/dog
+  ---
+  duration_ms: 15.696842
+  type: 'test'
+  ...
+# Subtest: the Codex manifest and the generated anchors agree; the GLB and friend files are in the branch
+ok 3 - the Codex manifest and the generated anchors agree; the GLB and friend files are in the branch
+  ---
+  duration_ms: 65.515082
+  type: 'test'
+  ...
+# Subtest: room model: a patient child clears every plan with full time score; nobody is ever stuck
+ok 4 - room model: a patient child clears every plan with full time score; nobody is ever stuck
+  ---
+  duration_ms: 19.380538
+  type: 'test'
+  ...
+# Subtest: room model: the clock is gentle: doing nothing hands the room to the crew at zero, the stage still ends in a win with a low time score
+ok 5 - room model: the clock is gentle: doing nothing hands the room to the crew at zero, the stage still ends in a win with a low time score
+  ---
+  duration_ms: 1.287416
+  type: 'test'
+  ...
+# Subtest: room model: rules teach without punishing: water on electricity sparks, water on oil flares, the friend waits for their fire
+ok 6 - room model: rules teach without punishing: water on electricity sparks, water on oil flares, the friend waits for their fire
+  ---
+  duration_ms: 5.52524
+  type: 'test'
+  ...
+# Subtest: room model: pressure drains while spraying and refills when the finger lifts; the aim help snaps onto a fire
+ok 7 - room model: pressure drains while spraying and refills when the finger lifts; the aim help snaps onto a fire
+  ---
+  duration_ms: 0.882997
+  type: 'test'
+  ...
+# Subtest: the building: the farthest burning lot from the start, never reached before driving; arrival = parked at the door
+ok 8 - the building: the farthest burning lot from the start, never reached before driving; arrival = parked at the door
+  ---
+  duration_ms: 15.035924
+  type: 'test'
+  ...
+# Subtest: merged result: scores add up to the campaign cap, performance is the weighted mean, rescues and rooms join the summary, a loss is untouched
+ok 9 - merged result: scores add up to the campaign cap, performance is the weighted mean, rescues and rooms join the summary, a loss is untouched
+  ---
+  duration_ms: 1.774476
+  type: 'test'
+  ...
+# Subtest: door marker: a marker when the door is on screen, an edge arrow when it is off screen (pure drawing on a stub context)
+ok 10 - door marker: a marker when the door is on screen, an edge arrow when it is off screen (pure drawing on a stub context)
+  ---
+  duration_ms: 0.851822
+  type: 'test'
+  ...
+# Subtest: wiring: fire.mjs routes entry stages through the flow behind the flag; the stage map marks them; strings exist; the offline lists know the files
+ok 11 - wiring: fire.mjs routes entry stages through the flow behind the flag; the stage map marks them; strings exist; the offline lists know the files
+  ---
+  duration_ms: 21.17161
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2560.995018

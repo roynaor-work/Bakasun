@@ -1,0 +1,25 @@
+diff --git a/tests/bakasun-quality.mjs b/tests/bakasun-quality.mjs
+--- a/tests/bakasun-quality.mjs
++++ b/tests/bakasun-quality.mjs
+@@ -12,19 +12,10 @@
+ 
+ const prototype = readFileSync(new URL('../_c3d.html', import.meta.url), 'utf8');
+ const obsolete = [...prototype.matchAll(/(?:href=|from )['"]([^'"]+)['"]/g)].map(match => match[1]);
+-test('B3-Q02 current: the root 3D prototype references files absent from the repository root', () => {
+-  assert.ok(obsolete.length >= 2);
+-  assert.ok(obsolete.every(path => !existsSync(new URL('../' + path, import.meta.url))));
+-});
+ test('B3-Q02 fix: every local prototype import and stylesheet exists',
+   { skip: 'B3-Q02: _c3d.html has stale css/style.css and js/games/celebrate3d.js paths; repair or explicitly archive in a later task, no deletion in B3.' }, () => {
+     assert.ok(obsolete.every(path => existsSync(new URL('../' + path, import.meta.url))));
+   });
+ 
+-test('B3-Q03 current (static): independent ICS implementations duplicate timestamp creation', () => {
+-  for (const path of ['../js/logic/ics.js', '../js/logic/runsheet.js']) {
+-    const source = readFileSync(new URL(path, import.meta.url), 'utf8');
+-    assert.match(source, /function stamp\(/);
+-    assert.match(source, /DTSTAMP:/);
+-  }
+-});
++// ICS timestamp behavior is covered in ics.test.mjs and runsheet.test.mjs.
++// Known duplicate helpers and the broken prototype belong in an issue, not a green invariant.

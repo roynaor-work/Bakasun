@@ -1,0 +1,42 @@
+diff --git a/tests/island-load-rescue-browser.test.mjs b/tests/island-load-rescue-browser.test.mjs
+--- a/tests/island-load-rescue-browser.test.mjs
++++ b/tests/island-load-rescue-browser.test.mjs
+@@ -33,9 +33,12 @@
+ const saveKeys=page=>page.evaluate(()=>Object.keys(localStorage).filter(k=>!/lastLoadReport$/.test(k)).sort());
+ 
+ for(const [name,g] of Object.entries(GAMES)){
+- test(`${name}: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key`,{skip:!enabled,timeout:600000},async()=>{
+-  const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
++ test(`${name}: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key`,{skip:!enabled,timeout:600000},async tctx=>{
++  const server=await serveIsland('/workout/island/');
++  tctx.after(()=>server.close());
++  const chromium=await islandChromium();
+   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
++  tctx.after(()=>browser.close());
+   const t=await setup(browser,server,g.hold);
+   try{
+    await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));
+@@ -52,7 +55,7 @@
+    await t.page.locator('[data-action=rescue-restart]').first().click();
+    await t.state.release();
+    await ready(t.page);
+-   await t.page.waitForSelector('[data-load-rescue]',{state:'detached',timeout:10000});
++   await t.page.waitForSelector('[data-load-rescue]',{state:'detached',timeout:60000});
+    const after=await t.page.evaluate(key=>({keys:Object.keys(localStorage).filter(k=>!/lastLoadReport$/.test(k)).sort(),marker:localStorage.getItem('island.test.marker'),report:localStorage.getItem(`island.${key}.lastLoadReport`)}),g.key);
+    assert.deepEqual(after.keys,before,'no save key was removed or added');
+    assert.equal(after.marker,'keep');
+@@ -62,9 +65,12 @@
+  });
+ }
+ 
+-test('ski: second stuck attempt offers the light version, third offers clearing only this game\'s asset cache; saves and other games\' files stay',{skip:!enabled,timeout:600000},async()=>{
+- const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
++test('ski: second stuck attempt offers the light version, third offers clearing only this game\'s asset cache; saves and other games\' files stay',{skip:!enabled,timeout:600000},async tctx=>{
++ const server=await serveIsland('/workout/island/');
++  tctx.after(()=>server.close());
++  const chromium=await islandChromium();
+  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
++  tctx.after(()=>browser.close());
+  const g=GAMES.alpine,t=await setup(browser,server,g.hold);
+  try{
+   await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));

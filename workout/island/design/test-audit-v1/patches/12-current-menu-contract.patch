@@ -1,0 +1,13 @@
+diff --git a/tests/island-alpine-env.test.mjs b/tests/island-alpine-env.test.mjs
+--- a/tests/island-alpine-env.test.mjs
++++ b/tests/island-alpine-env.test.mjs
+@@ -145,7 +145,8 @@
+         await ui.p.evaluate(() => window.__island.ui.activityInterface.menu());
+         await ui.p.waitForFunction(() => document.querySelectorAll('.adventure-game-card .ik-game-icon').length >= 9);
+         await ui.p.waitForFunction(() => [...document.querySelectorAll('.adventure-game-card .ik-game-icon')].every(i => i.complete && i.naturalWidth > 0));
+-        assert.equal(await ui.p.locator('.adventure-game-card').count(), 9); await shot(ui.p, `menu-${tag}`);
++        const shown=await ui.p.locator('.adventure-game-card').evaluateAll(nodes=>nodes.map(n=>n.dataset.game).sort());
++        assert.deepEqual(shown,[...GAMES,'catchCriminal'].sort(),'the current catalogue, once per game'); await shot(ui.p, `menu-${tag}`);
+         await ui.p.evaluate(() => window.__island.ui.activityInterface.gameHome('alpineRush'));
+         await ui.p.waitForFunction(() => { const i = document.querySelector('.modal[data-game-home] .ik-intro'); return i?.complete && i.naturalWidth > 0; });
+         assert.equal(await ui.p.locator('.modal[data-game-home] [data-action=game-play]').evaluate(n => n.classList.contains('ik-primary')), true); await shot(ui.p, `opening-${tag}`);

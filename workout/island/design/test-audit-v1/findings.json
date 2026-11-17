@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "repository": "roynaor-work/Bakasun",
+  "base_commit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/test-audit-v1",
+  "audit_date": "2026-11-17",
+  "timezone": "Asia/Jerusalem",
+  "release": "island-v2-20261107-15",
+  "mode": "read-only analysis; only new audit artifacts committed; proposed patches not applied",
+  "scope": {
+    "test_sources": 553,
+    "tests_sources": 425,
+    "island_test_sources": 128,
+    "default_command_files": 390,
+    "automated_inventory_not_manual_line_review": true
+  },
+  "runtime": {
+    "node": "24.19.0",
+    "ci_node": "22",
+    "playwright_observed": "1.57.0",
+    "ci_playwright_pin": "1.62.1",
+    "chromium": "151.0.7922.173",
+    "cpu_quota_cores": 4,
+    "memory_limit_gib": 16,
+    "physical_phone": false
+  },
+  "findings": [
+    {
+      "id": "TA-01",
+      "priority": "P1",
+      "title": "רוב בדיקות הדפדפן ותרחישי v24 אינם שער CI",
+      "category": "coverage",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "package.json",
+          "line": 5
+        },
+        {
+          "path": ".github/workflows/tests.yml",
+          "line": 12
+        },
+        {
+          "path": ".github/workflows/tests.yml",
+          "line": 29
+        },
+        {
+          "path": "workout/island/tests/fire-v24-browser.mjs",
+          "line": 126
+        },
+        {
+          "path": "workout/island/tests/naval-v241-browser.mjs",
+          "line": 17
+        }
+      ],
+      "impact": "הפקודה הרגילה כוללת רק tests/*.mjs; הדגלים מדלגים על בדיקות דפדפן, ו-CI בוחר במפורש רק את קובץ CSP. סקריפטי המגע של v24 מחוץ לגלוב.",
+      "recommendation": "רשימת סוויטות מפורשת, תהליך דפדפן יחיד בכל worker, קבוצות CI נפרדות, ו-smoke של ברירת המחדל. תרחישי קבלה v24 הארוכים נשארים קבוצה מפורשת עד תיקון הכשלים הידועים.",
+      "patches": [
+        "01-browser-runner-and-ci.patch",
+        "10-current-default-session-smoke.patch"
+      ],
+      "verification": "אומת מתצורת CI ומהמלאי; מטריצת CI המוצעת לא הורצה במלואה."
+    },
+    {
+      "id": "TA-02",
+      "priority": "P1",
+      "title": "עומס SwiftShader וחלונות זמן לא תואמים גורמים לפסקי זמן",
+      "category": "flakiness",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-alpine-env.test.mjs",
+          "line": 105
+        },
+        {
+          "path": "tests/island-browser-csp.test.mjs",
+          "line": 26
+        },
+        {
+          "path": "tests/island-load-rescue-browser.test.mjs",
+          "line": 55
+        },
+        {
+          "path": "tests/island-tennis-v7-browser.test.mjs",
+          "line": 24,
+          "end_line": 28
+        },
+        {
+          "path": "tests/helpers/island-browser.mjs",
+          "line": 197
+        }
+      ],
+      "impact": "ארבע סוויטות תוכנה מתחרות על מכסה של ארבע ליבות, בתחילת הריצה גם עם בדיקות Node. טעינה/התקדמות/צילום נמדדים בשעון קיר; תקציב קובץ CSP הוא 420 שניות אף שהוא מכיל תרחישים רבים.",
+      "recommendation": "להפריד Node ודפדפן, להריץ את הדפדפנים בטור בכל worker, להמתין לפריים/מצב מפורש ולרשום ניקוי לפני הכנה. אין ראיה לתלות בסדר הקבצים, ואין הצדקה להוסיף retries או להעלות את כל הספים.",
+      "patches": [
+        "01-browser-runner-and-ci.patch",
+        "03-load-rescue-cleanup.patch",
+        "04-tennis-frame-readiness.patch"
+      ],
+      "verification": "A/B על אותו שלב: בעומס ההמתנה ל-racing נכשלה אחרי 60,015ms; במבודד עברה ב-12,097ms. הקובץ המבודד נכשל בהמשך מסיבה נפרדת: 10 כרטיסים מול ציפייה ל-9. לא הוכח שכל תשעת הקבצים עוברים לבד."
+    },
+    {
+      "id": "TA-03",
+      "priority": "P1",
+      "title": "בדיקת Royiki תלויה בנוכחות ספרייה ומשאירה שרת פתוח כש-launch נכשל",
+      "category": "harness",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/workout-royiki.test.mjs",
+          "line": 73,
+          "end_line": 75
+        },
+        {
+          "path": "tests/workout-royiki.test.mjs",
+          "line": 91,
+          "end_line": 94
+        },
+        {
+          "path": "tests/island-load-rescue-browser.test.mjs",
+          "line": 37,
+          "end_line": 40
+        }
+      ],
+      "impact": "npm test מפעיל בדיקת דפדפן גם בלי דגל כש-Playwright נמצא בנתיב fallback. launch מחוץ ל-try נכשל על Chromium bundled חסר, לאחר שהשרת נפתח; התהליך לא מסתיים. CHROMIUM_PATH אינו מכובד ב-Royiki.",
+      "recommendation": "דגל מפורש, כיבוד נתיב הדפדפן ורישום t.after לשרת לפני launch; רישום ניקוי גם לפני setup בסוויטות האחרות.",
+      "patches": [
+        "02-browser-artifacts-and-opt-in.patch",
+        "03-load-rescue-cleanup.patch"
+      ],
+      "verification": "שוחזר: בדיקת הדפדפן נכשלה ב-32ms, הריצה המלאה נשארה פתוחה עד עצירת הילד אחרי 1,298s. תוכן patch 02 נטען בזיכרון: 4 עברו, אחת דולגה; הפעלה מפורשת עם דפדפן חסר נכשלת ומסתיימת ב-0.72s."
+    },
+    {
+      "id": "TA-04",
+      "priority": "P1",
+      "title": "בדיקות wiring מחפשות טקסט בקוד ולכן אינן מגינות על הניתוב",
+      "category": "implementation-assertion",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-fire-v24.test.mjs",
+          "line": 148,
+          "end_line": 150
+        },
+        {
+          "path": "tests/island-soccer-assets-v24.test.mjs",
+          "line": 223,
+          "end_line": 230
+        },
+        {
+          "path": "tests/island-naval-boars-v241.test.mjs",
+          "line": 218,
+          "end_line": 225
+        }
+      ],
+      "impact": "אפשר להשאיר את הטקסט המצופה בענף שלא רץ. שינוי שמות, רווחים או חילוץ helper עלולים להפיל בדיקה בלי שינוי בהתנהגות.",
+      "recommendation": "להפעיל את ה-session ולבדוק את התוצר הציבורי; לשמור בדיקות נפרדות של manifest, רישיונות, גרסאות ותקציבי נכסים. בחימום ציור יש לבדוק גם שחזור מצב כש-render זורק, ולא רק את קיום המילה finally.",
+      "patches": [
+        "05-fire-entry-lifecycle-tests.patch",
+        "10-current-default-session-smoke.patch"
+      ],
+      "verification": "מוטציית זיכרון if(false&&fireFlowV24()...) שומרת את המחרוזות, משנה את ניתוב stage 3 מ-entry ל-street, וכל 11 בדיקות fire-v24 עדיין עוברות. אין שינוי בקובץ המקור."
+    },
+    {
+      "id": "TA-05",
+      "priority": "P1",
+      "title": "חסר כיסוי לשרשרת הכיבוי החדשה וליציאה בזמן טעינה",
+      "category": "coverage",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "workout/island/minigames/fire-v24-flow.mjs",
+          "line": 29
+        },
+        {
+          "path": "workout/island/minigames/fire-v24-flow.mjs",
+          "line": 40
+        },
+        {
+          "path": "workout/island/minigames/fire-v24-flow.mjs",
+          "line": 82,
+          "end_line": 96
+        },
+        {
+          "path": "workout/island/tests/fire-v24-browser.mjs",
+          "line": 147,
+          "end_line": 153
+        },
+        {
+          "path": "workout/island/verification/fire-v24/REPORT-v24-fire.md",
+          "line": 120
+        }
+      ],
+      "impact": "מודל החדר ובדיקת merge נפרדים אינם מוכיחים עצירת שעון הרחוב, העברת pause, ניקוי יציאה, חזרה מתקלה, או שמירת ניצחון אמיתי של המסלול המשולב. הדוח הקיים מתעד שלא הושג ניצחון בדפדפן.",
+      "recommendation": "בדיקות flow דרך נקודות ההזרקה הקיימות; smoke של הניתוב האמיתי; בהמשך fixture מגע דטרמיניסטי שמסיים חדר ורחוב ומוודא תעודה/כוכבים ושמירה פעם אחת.",
+      "patches": [
+        "05-fire-entry-lifecycle-tests.patch",
+        "10-current-default-session-smoke.patch"
+      ],
+      "verification": "3 בדיקות מוצעות עברו. מוטציה שמאפשרת לשעון הרחוב לרוץ בפנים מפילה אחת מהן, אך עוברת את 11 הקיימות. ניצחון אמיתי מלא לא הורץ בביקורת זו ואינו נטען כמכוסה."
+    },
+    {
+      "id": "TA-06",
+      "priority": "P2",
+      "title": "ציפיות היסטוריות נשארו על כתובת ברירת המחדל",
+      "category": "stale-contract",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-offline-browser.test.mjs",
+          "line": 56
+        },
+        {
+          "path": "tests/island-alpine-env.test.mjs",
+          "line": 146,
+          "end_line": 148
+        },
+        {
+          "path": "tests/island-soccer-reopen-browser.test.mjs",
+          "line": 34
+        },
+        {
+          "path": "tests/island-soccer-design-controls-browser.test.mjs",
+          "line": 48
+        },
+        {
+          "path": "tests/island-racing-v7-browser.test.mjs",
+          "line": 32
+        },
+        {
+          "path": "workout/island/minigames/racing-view.mjs",
+          "line": 252
+        },
+        {
+          "path": "tests/island-soccer-11v11-v24.test.mjs",
+          "line": 24,
+          "end_line": 39
+        }
+      ],
+      "impact": "הורדה מצפה ל-5 שורות במקום 11, תפריט ל-9 כרטיסים במקום 10, ובדיקות כדורגל מסוימות עדיין דורשות 12 שחקנים במקום 22. modelCount סופר דמויות גלויות למצלמה, לא את כל הסגל.",
+      "recommendation": "לעדכן את בדיקות ברירת המחדל לסגל ולמוצרים הנוכחיים ולבדוק זהויות/נתונים. לשמור תרחיש legacy מסומן כשיש צורך בו, לצד תרחיש אמיתי של ברירת המחדל; לא להצמיד עוד דגל חזרה רק כדי להשתיק כשל.",
+      "patches": [
+        "06-soccer-reopen-current-default.patch",
+        "09-offline-racing-and-fault-proof.patch",
+        "10-current-default-session-smoke.patch",
+        "12-current-menu-contract.patch",
+        "13-racing-legacy-and-current-renderers.patch"
+      ],
+      "verification": "פער 5/11 שוחזר בעומס, ופער 9/10 גם בהרצה מבודדת. ב-smoke הנוכחי אומת סגל של 22; באותה מצלמה רק 11 דמויות היו גלויות. יתר בדיקות הכדורגל הישנות דורשות מעבר נוסף."
+    },
+    {
+      "id": "TA-07",
+      "priority": "P2",
+      "title": "בדיקת אופליין מבטיחה ארבעה משחקים אבל מפעילה שלושה; חסרה הוכחה שהתקלה הוזרקה",
+      "category": "coverage",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-offline-browser.test.mjs",
+          "line": 14
+        },
+        {
+          "path": "tests/island-offline-browser.test.mjs",
+          "line": 32,
+          "end_line": 38
+        },
+        {
+          "path": "tests/island-offline-browser.test.mjs",
+          "line": 72,
+          "end_line": 77
+        },
+        {
+          "path": "tests/island-offline-browser.test.mjs",
+          "line": 99,
+          "end_line": 108
+        },
+        {
+          "path": "workout/island/tests/aliens-naval-v24-browser.mjs",
+          "line": 40
+        }
+      ],
+      "impact": "GAMES אינו כולל מרוצים למרות כותרת הבדיקה ומפת blocked.racing. גם regex שאינו תופס אף בקשה יכול לתת ירוק לתרחיש fallback. בסקריפט חלליות מסוים timeout של טעינת מודלים נבלע ב-catch.",
+      "recommendation": "להוסיף racing למיפוי ולבדיקת דוח הטעינה, לספור פגיעות ב-route לכל משחק ולהכשיל על timeout נדרש. לוודא תוצאה של fallback בנוסף להמשך הציור.",
+      "patches": [
+        "09-offline-racing-and-fault-proof.patch"
+      ],
+      "verification": "אומת בקריאת הלולאות והקבועים; patch 09 נבדק תחבירית וב-dry-run בלבד. הוא עשוי לחשוף עוד דפוסי חסימה שהתיישנו, וזה כשל שיש לתקן."
+    },
+    {
+      "id": "TA-08",
+      "priority": "P2",
+      "title": "בדיקת כיוון החזירים יכולה להצליח בלי פגיעות",
+      "category": "weak-oracle",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "workout/island/tests/boar-aim-v24-browser.mjs",
+          "line": 86
+        },
+        {
+          "path": "workout/island/tests/boar-aim-v24-browser.mjs",
+          "line": 108,
+          "end_line": 116
+        }
+      ],
+      "impact": "הסקריפט מודד hitRate, reached ו-killed אבל קוד היציאה בודק רק שגיאות דף וירי שלא מכפתור. אפס ניסיונות, ניסיונות שדולגו או כל הניסיונות ללא פגיעה יכולים להחזיר exit 0.",
+      "recommendation": "לדרוש מספר ניסיונות חיובי ומלא, ירי ופגיעה ומטרה שהושגה; להגדיר בנפרד יעדי איכות השוואתיים לפי seed ורמת רעש, מבלי לקבע מספר מדוד יחיד.",
+      "patches": [
+        "11-boar-nonvacuous-acceptance.patch"
+      ],
+      "verification": "אומת לוגית מקוד הסיכום וה-exit. לא הורץ סבב כיוון מלא בדפדפן; ה-patch מוסיף מינימום אי-ריק, לא יעד איכות מכויל."
+    },
+    {
+      "id": "TA-09",
+      "priority": "P2",
+      "title": "הרצות דפדפן דורסות תוצרי אימות שנמצאים ב-Git",
+      "category": "side-effects",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-alpine-ctrl-ski.test.mjs",
+          "line": 12
+        },
+        {
+          "path": "tests/island-alpine-ctrl-ski.test.mjs",
+          "line": 48
+        },
+        {
+          "path": "workout/island/tests/fire-v24-browser.mjs",
+          "line": 14
+        },
+        {
+          "path": "workout/island/tests/aliens-naval-v24-browser.mjs",
+          "line": 18
+        },
+        {
+          "path": "workout/island/tests/naval-v7-browser.mjs",
+          "line": 7
+        }
+      ],
+      "impact": "בדיקה מקומית רגילה יכולה לשנות screenshots ודוחות שכבר מנוהלים במאגר. חלק מהסקריפטים מכבדים output override רק לדוח המרכזי אך לא לתמונות.",
+      "recommendation": "שורש artifacts יחיד מחוץ ל-verification המנוהל, תיקייה לכל suite, והעלאת artifacts ב-CI. שמירת baseline דורשת פעולה מפורשת נפרדת.",
+      "patches": [
+        "02-browser-artifacts-and-opt-in.patch"
+      ],
+      "verification": "בביקורת נעשה redirect בזיכרון ל-/tmp; קובצי המקור וה-baselines המנוהלים נשארו זהים. ה-patch עצמו לא הוחל."
+    },
+    {
+      "id": "TA-10",
+      "priority": "P2",
+      "title": "בדיקות איכות מקבעות תקלות קיימות במקום לזהות תיקון",
+      "category": "weak-oracle",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/bakasun-quality.mjs",
+          "line": 7,
+          "end_line": 10
+        },
+        {
+          "path": "tests/bakasun-quality.mjs",
+          "line": 15,
+          "end_line": 21
+        },
+        {
+          "path": "tests/bakasun-quality.mjs",
+          "line": 24,
+          "end_line": 29
+        }
+      ],
+      "impact": "בדיקה ירוקה דורשת שכל הפניות אב-הטיפוס יהיו שבורות; אחרת דורשת שכפול של function stamp. תיקון הקישורים או איחוד פונקציות יציב יפיל אותן. בדיקת השפה מסתפקת בחיפוש טקסט בקובץ בדיקה אחר.",
+      "recommendation": "להסיר אינווריאנטים של known-bad, להשאיר ליקוי לא פתור מסומן במפורש, ולסמוך על תוצר ICS והתנהגות DOM לשפה. בדיקות ics.test.mjs ו-runsheet.test.mjs כבר בודקות תוצרים.",
+      "patches": [
+        "07-remove-known-bug-invariants.patch"
+      ],
+      "verification": "אומת בקוד; אין צורך ברגרסיה במוצר כדי להפיל את בדיקות current. בדיקת ה-smoke בפייתון נשארת מחוץ ל-CI הרגיל (TA-01)."
+    },
+    {
+      "id": "TA-11",
+      "priority": "P3",
+      "title": "אותה סריקת shell מלאה מופיעה בשלושה קבצים",
+      "category": "duplication",
+      "confidence": "high",
+      "evidence": [
+        {
+          "path": "tests/island-offline.test.mjs",
+          "line": 35,
+          "end_line": 40
+        },
+        {
+          "path": "tests/island-soccer-assets-v24.test.mjs",
+          "line": 265
+        },
+        {
+          "path": "tests/island-tennis-crowd-v22.test.mjs",
+          "line": 61
+        }
+      ],
+      "impact": "buildShell סורק מחדש את אותה רשימה בשלוש סוויטות, בלי חוזה נוסף. שכפול כזה מגדיל I/O ותחזוקה; בדיקות חבילה ספציפיות עדיין חשובות.",
+      "recommendation": "להחזיק השוואה מלאה אחת ב-island-offline ולהשאיר בדיקות קיום/שיוך נכסים בכל חבילה. לא לאחד מקרי gameplay שונים רק משום שהקלט דומה.",
+      "patches": [
+        "08-deduplicate-shell-list-scan.patch"
+      ],
+      "verification": "זוהו שלוש השוואות מלאות זהות מבחינת חוזה; אין טענה שכל קובצי הבדיקה כפולים."
+    }
+  ]
+}

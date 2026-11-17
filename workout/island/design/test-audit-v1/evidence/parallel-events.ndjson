@@ -1,0 +1,330 @@
+{"at":"2026-11-17T17:57:44.191Z","pid":3567,"event":"browser-open","ms":1829.1152450000002,"version":"151.0.7922.173"}
+{"at":"2026-11-17T17:57:44.981Z","pid":3567,"event":"start","method":"goto","action":"http://127.0.0.1:40821/Bakasun/workout/island/?dev=1"}
+{"at":"2026-11-17T17:57:46.361Z","pid":3574,"event":"browser-open","ms":2699.9916329999996,"version":"151.0.7922.173"}
+{"at":"2026-11-17T17:57:46.717Z","pid":3573,"event":"browser-open","ms":2901.5163690000004,"version":"151.0.7922.173"}
+{"at":"2026-11-17T17:57:46.766Z","pid":3575,"event":"browser-open","ms":2976.2042479999996,"version":"151.0.7922.173"}
+{"at":"2026-11-17T17:57:47.117Z","pid":3574,"event":"start","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T17:57:47.830Z","pid":3573,"event":"start","method":"goto","action":"http://127.0.0.1:42745/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=60&stage=1"}
+{"at":"2026-11-17T17:57:47.912Z","pid":3574,"event":"pass","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":795.2571479999997}
+{"at":"2026-11-17T17:57:47.912Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:57:47.999Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T17:57:48.597Z","pid":3573,"event":"pass","method":"goto","action":"http://127.0.0.1:42745/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=60&stage=1","ms":767.0078279999998}
+{"at":"2026-11-17T17:57:48.598Z","pid":3573,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:57:48.724Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":724.952886}
+{"at":"2026-11-17T17:57:48.724Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:57:52.524Z","pid":3567,"event":"pass","method":"goto","action":"http://127.0.0.1:40821/Bakasun/workout/island/?dev=1","ms":7542.91593}
+{"at":"2026-11-17T17:57:52.525Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => window.__island?.view.metrics().avatarLoaded"}
+{"at":"2026-11-17T17:58:23.066Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":34341.857057}
+{"at":"2026-11-17T17:58:26.812Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":38899.670954}
+{"at":"2026-11-17T17:58:28.578Z","pid":3573,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":39980.607083}
+{"at":"2026-11-17T17:58:28.692Z","pid":3573,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.phase === 'racing'"}
+{"at":"2026-11-17T17:58:28.891Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => window.__island?.view.metrics().avatarLoaded","ms":36366.250908}
+{"at":"2026-11-17T17:58:32.886Z","pid":3574,"event":"start","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T17:58:33.219Z","pid":3574,"event":"pass","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":333.27383199999895}
+{"at":"2026-11-17T17:58:33.219Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:58:33.271Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T17:58:33.669Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":397.9650909999982}
+{"at":"2026-11-17T17:58:33.669Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:58:55.406Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled && document.querySelector('.game-screen')?.dataset.starting !== 'true'; }"}
+{"at":"2026-11-17T17:59:01.192Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":27972.646030000004}
+{"at":"2026-11-17T17:59:01.225Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => ['countdown', 'racing'].includes(window.__perfSession?.snapshot.phase)"}
+{"at":"2026-11-17T17:59:01.265Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => ['countdown', 'racing'].includes(window.__perfSession?.snapshot.phase)","ms":40.06624400000146}
+{"at":"2026-11-17T17:59:06.120Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":32451.36368000001}
+{"at":"2026-11-17T17:59:14.057Z","pid":3574,"event":"start","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T17:59:14.360Z","pid":3574,"event":"pass","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":303.7351689999923}
+{"at":"2026-11-17T17:59:14.360Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:59:28.707Z","pid":3573,"event":"fail","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.phase === 'racing'","ms":60014.712947,"error":"page.waitForFunction: Timeout 60000ms exceeded."}
+{"at":"2026-11-17T17:59:31.462Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T17:59:31.790Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":328.05632499999774}
+{"at":"2026-11-17T17:59:31.790Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T17:59:43.765Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":29404.304317000002}
+{"at":"2026-11-17T17:59:43.859Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => ['countdown', 'racing'].includes(window.__perfSession?.snapshot.phase)"}
+{"at":"2026-11-17T17:59:43.913Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => ['countdown', 'racing'].includes(window.__perfSession?.snapshot.phase)","ms":53.66526900000463}
+{"at":"2026-11-17T17:59:47.659Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled && document.querySelector('.game-screen')?.dataset.starting !== 'true'; }","ms":52253.032188}
+{"at":"2026-11-17T17:59:48.065Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => window.__island.ui.activityInterface.current.session.snapshot.phase === 'racing'"}
+{"at":"2026-11-17T17:59:56.082Z","pid":3573,"event":"browser-close"}
+{"at":"2026-11-17T18:00:00.886Z","pid":4628,"event":"browser-open","ms":2759.1469159999997,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:00:01.256Z","pid":3574,"event":"start","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T18:00:01.884Z","pid":3574,"event":"pass","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":627.7006360000232}
+{"at":"2026-11-17T18:00:01.884Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:00:02.593Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":30802.475932999994}
+{"at":"2026-11-17T18:00:02.726Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession.debug.view().metrics().character.loaded.includes(2)"}
+{"at":"2026-11-17T18:00:03.277Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:03.361Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":84.14528599999994}
+{"at":"2026-11-17T18:00:04.014Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:04.076Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":61.695221999999376}
+{"at":"2026-11-17T18:00:04.798Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession.debug.view().metrics().character.loaded.includes(2)","ms":2071.633013999992}
+{"at":"2026-11-17T18:00:04.808Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:04.886Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":77.24289299999873}
+{"at":"2026-11-17T18:00:05.680Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:05.773Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":92.40563800000018}
+{"at":"2026-11-17T18:00:06.784Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:06.855Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":71.1423219999997}
+{"at":"2026-11-17T18:00:07.704Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:07.780Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":75.61295799999971}
+{"at":"2026-11-17T18:00:08.456Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:08.504Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":48.312048000001596}
+{"at":"2026-11-17T18:00:09.881Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:00:09.926Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":44.61240999999973}
+{"at":"2026-11-17T18:00:09.926Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=30"}
+{"at":"2026-11-17T18:00:10.872Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=30","ms":946.1859800000002}
+{"at":"2026-11-17T18:00:10.872Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>window.__perfSession?.snapshot.loaded||window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:00:21.184Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&quality=low"}
+{"at":"2026-11-17T18:00:21.618Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&quality=low","ms":434.0151729999925}
+{"at":"2026-11-17T18:00:21.618Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:00:40.408Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":38524.04558199999}
+{"at":"2026-11-17T18:00:40.561Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => window.__island.ui.activityInterface.current.session.snapshot.phase === 'racing'","ms":52495.56064099999}
+{"at":"2026-11-17T18:00:40.576Z","pid":3567,"event":"start","method":"screenshot","action":"[object Object]"}
+{"at":"2026-11-17T18:00:41.472Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>window.__perfSession?.snapshot.loaded||window.__perfSession?.snapshot.error","ms":30599.485107}
+{"at":"2026-11-17T18:00:41.689Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase)"}
+{"at":"2026-11-17T18:00:41.704Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>['countdown','racing'].includes(window.__perfSession?.snapshot.phase)","ms":15.455368000002636}
+{"at":"2026-11-17T18:00:48.712Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":27094.032116999995}
+{"at":"2026-11-17T18:00:58.959Z","pid":3574,"event":"start","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T18:00:59.530Z","pid":3574,"event":"pass","method":"goto","action":"http://127.0.0.1:32845/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":571.371581000014}
+{"at":"2026-11-17T18:00:59.531Z","pid":3574,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:01:00.453Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0"}
+{"at":"2026-11-17T18:01:00.705Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12&alpineV7=0","ms":252.4334819999931}
+{"at":"2026-11-17T18:01:00.705Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:01:01.426Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:01:01.517Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":91.61940400000458}
+{"at":"2026-11-17T18:01:01.518Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0&hoopsV5=0"}
+{"at":"2026-11-17T18:01:01.920Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0&hoopsV5=0","ms":402.6163910000032}
+{"at":"2026-11-17T18:01:01.921Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:01:07.000Z","pid":3567,"event":"pass","method":"screenshot","action":"[object Object]","ms":26423.560969000013}
+{"at":"2026-11-17T18:01:21.252Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => document.querySelector('.alpine-joystick')?.dataset.floating === 'true'"}
+{"at":"2026-11-17T18:01:21.259Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => document.querySelector('.alpine-joystick')?.dataset.floating === 'true'","ms":7.102932999987388}
+{"at":"2026-11-17T18:01:30.525Z","pid":3574,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":30993.970473000023}
+{"at":"2026-11-17T18:01:32.382Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":31676.422988000006}
+{"at":"2026-11-17T18:01:41.890Z","pid":3574,"event":"browser-close"}
+{"at":"2026-11-17T18:01:46.098Z","pid":5602,"event":"browser-open","ms":2793.3814549999997,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:01:46.753Z","pid":5602,"event":"start","method":"goto","action":"http://127.0.0.1:40341/workout/island/?dev=1&loadStuckMs=5000"}
+{"at":"2026-11-17T18:01:47.008Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => { const s = window.__island.ui.activityInterface.current.session.snapshot; return s.input.dragging && s.frame.player.boosting; }"}
+{"at":"2026-11-17T18:01:47.102Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => { const s = window.__island.ui.activityInterface.current.session.snapshot; return s.input.dragging && s.frame.player.boosting; }","ms":93.42539400001988}
+{"at":"2026-11-17T18:01:47.102Z","pid":3567,"event":"start","method":"screenshot","action":"[object Object]"}
+{"at":"2026-11-17T18:01:51.407Z","pid":5602,"event":"pass","method":"goto","action":"http://127.0.0.1:40341/workout/island/?dev=1&loadStuckMs=5000","ms":4653.976966}
+{"at":"2026-11-17T18:01:51.407Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:02:02.720Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T18:02:03.262Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":541.8484330000065}
+{"at":"2026-11-17T18:02:03.263Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:02:08.058Z","pid":3567,"event":"pass","method":"screenshot","action":"[object Object]","ms":20956.161864000023}
+{"at":"2026-11-17T18:02:08.058Z","pid":3567,"event":"start","method":"waitForFunction","action":"x => window.__island.ui.activityInterface.current.session.snapshot.frame.player.x > x + 1"}
+{"at":"2026-11-17T18:02:08.072Z","pid":3567,"event":"pass","method":"waitForFunction","action":"x => window.__island.ui.activityInterface.current.session.snapshot.frame.player.x > x + 1","ms":13.88038200000301}
+{"at":"2026-11-17T18:02:16.830Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":74908.94277}
+{"at":"2026-11-17T18:02:21.761Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:02:21.876Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":115.21430900000269}
+{"at":"2026-11-17T18:02:21.876Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0&hoopsV5=0"}
+{"at":"2026-11-17T18:02:22.358Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0&hoopsV5=0","ms":481.07383700000355}
+{"at":"2026-11-17T18:02:22.358Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:02:28.868Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => !window.__island.ui.activityInterface.current.session.snapshot.input.dragging"}
+{"at":"2026-11-17T18:02:28.899Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => !window.__island.ui.activityInterface.current.session.snapshot.input.dragging","ms":31.363523000036366}
+{"at":"2026-11-17T18:02:29.668Z","pid":3567,"event":"browser-close"}
+{"at":"2026-11-17T18:02:31.001Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":39593.796458000004}
+{"at":"2026-11-17T18:02:32.325Z","pid":3567,"event":"browser-open","ms":2370.7403639999684,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:02:33.084Z","pid":3567,"event":"start","method":"goto","action":"http://127.0.0.1:40821/Bakasun/workout/island/?dev=1"}
+{"at":"2026-11-17T18:02:37.879Z","pid":3567,"event":"pass","method":"goto","action":"http://127.0.0.1:40821/Bakasun/workout/island/?dev=1","ms":4794.7185670000035}
+{"at":"2026-11-17T18:02:37.879Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => window.__island?.view.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:02:39.727Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":36464.27474299999}
+{"at":"2026-11-17T18:02:55.231Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T18:02:55.927Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":696.5657670000219}
+{"at":"2026-11-17T18:02:55.927Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:03:11.014Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]"}
+{"at":"2026-11-17T18:03:16.073Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]","ms":5059.5999909999955}
+{"at":"2026-11-17T18:03:20.777Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => window.__island?.view.metrics().avatarLoaded","ms":42898.48733199999}
+{"at":"2026-11-17T18:03:24.520Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}"}
+{"at":"2026-11-17T18:03:32.695Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":36767.70932200004}
+{"at":"2026-11-17T18:03:38.805Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":76447.637778}
+{"at":"2026-11-17T18:03:41.506Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:03:41.571Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":65.03819700001623}
+{"at":"2026-11-17T18:03:41.571Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV8=0&hoopsTall=0"}
+{"at":"2026-11-17T18:03:42.063Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV8=0&hoopsTall=0","ms":491.4179780000122}
+{"at":"2026-11-17T18:03:42.063Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:03:48.169Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}","ms":23648.670075}
+{"at":"2026-11-17T18:03:48.169Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue]"}
+{"at":"2026-11-17T18:03:48.292Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue]","ms":122.96696900000097}
+{"at":"2026-11-17T18:03:52.860Z","pid":5602,"event":"browser-close"}
+{"at":"2026-11-17T18:03:53.876Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T18:03:54.494Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":618.2251449999749}
+{"at":"2026-11-17T18:03:54.494Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:03:55.202Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled && document.querySelector('.game-screen')?.dataset.starting !== 'true'; }"}
+{"at":"2026-11-17T18:03:56.258Z","pid":5602,"event":"browser-open","ms":3230.7652849999868,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:03:56.908Z","pid":5602,"event":"start","method":"goto","action":"http://127.0.0.1:39067/workout/island/?dev=1&loadStuckMs=5000"}
+{"at":"2026-11-17T18:04:05.106Z","pid":5602,"event":"pass","method":"goto","action":"http://127.0.0.1:39067/workout/island/?dev=1&loadStuckMs=5000","ms":8198.379767000006}
+{"at":"2026-11-17T18:04:05.107Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:04:11.814Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":29750.800787999993}
+{"at":"2026-11-17T18:04:14.991Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:04:15.080Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":88.94909100001678}
+{"at":"2026-11-17T18:04:15.080Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV8=0&hoopsTall=0"}
+{"at":"2026-11-17T18:04:15.462Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV8=0&hoopsTall=0","ms":381.2513779999863}
+{"at":"2026-11-17T18:04:15.462Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:04:35.385Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":40890.62438500003}
+{"at":"2026-11-17T18:04:46.826Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":41719.20694099998}
+{"at":"2026-11-17T18:04:46.900Z","pid":3575,"event":"start","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12"}
+{"at":"2026-11-17T18:04:47.304Z","pid":3575,"event":"pass","method":"goto","action":"http://127.0.0.1:34611/Bakasun/workout/island/tools/perf-alpine.html?autostart=1&seconds=12","ms":404.2983049999457}
+{"at":"2026-11-17T18:04:47.305Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error"}
+{"at":"2026-11-17T18:04:49.596Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled && document.querySelector('.game-screen')?.dataset.starting !== 'true'; }","ms":54394.29477500002}
+{"at":"2026-11-17T18:04:54.729Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => window.__island.ui.activityInterface.current.session.snapshot.phase === 'racing'"}
+{"at":"2026-11-17T18:04:58.118Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]"}
+{"at":"2026-11-17T18:05:03.195Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]","ms":5076.845493000001}
+{"at":"2026-11-17T18:05:03.474Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}"}
+{"at":"2026-11-17T18:05:07.230Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error","ms":19925.87246599997}
+{"at":"2026-11-17T18:05:07.279Z","pid":3575,"event":"start","method":"waitForFunction","action":"() => window.__perfSession.debug.view().metrics().character.deferredFailure"}
+{"at":"2026-11-17T18:05:13.518Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}","ms":10043.942229000008}
+{"at":"2026-11-17T18:05:13.518Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue]"}
+{"at":"2026-11-17T18:05:14.158Z","pid":3575,"event":"pass","method":"waitForFunction","action":"() => window.__perfSession.debug.view().metrics().character.deferredFailure","ms":6878.787613000022}
+{"at":"2026-11-17T18:05:14.596Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => window.__island.ui.activityInterface.current.session.snapshot.phase === 'racing'","ms":19867.535399999993}
+{"at":"2026-11-17T18:05:14.619Z","pid":3567,"event":"start","method":"screenshot","action":"[object Object]"}
+{"at":"2026-11-17T18:05:19.259Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":63797.440366999974}
+{"at":"2026-11-17T18:05:21.663Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:05:21.693Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":29.895743000030052}
+{"at":"2026-11-17T18:05:21.693Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0"}
+{"at":"2026-11-17T18:05:21.914Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0","ms":220.7412239999976}
+{"at":"2026-11-17T18:05:21.914Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:05:23.531Z","pid":5602,"event":"fail","method":"waitForSelector","action":"[data-load-rescue]","ms":10013.006423999992,"error":"page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-load-rescue]') to be detached\u001b[22m\n"}
+{"at":"2026-11-17T18:05:24.824Z","pid":3567,"event":"pass","method":"screenshot","action":"[object Object]","ms":10204.206121999945}
+{"at":"2026-11-17T18:05:27.414Z","pid":3575,"event":"browser-close"}
+{"at":"2026-11-17T18:05:27.759Z","pid":5602,"event":"browser-close"}
+{"at":"2026-11-17T18:05:29.323Z","pid":5602,"event":"browser-open","ms":1297.4788439999975,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:05:29.588Z","pid":7807,"event":"browser-open","ms":997.9789920000001,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:05:29.776Z","pid":5602,"event":"start","method":"goto","action":"http://127.0.0.1:35237/workout/island/?dev=1&loadStuckMs=5000"}
+{"at":"2026-11-17T18:05:30.222Z","pid":7807,"event":"start","method":"goto","action":"http://127.0.0.1:42203/workout/island/?dev=1"}
+{"at":"2026-11-17T18:05:33.318Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => document.querySelector('.alpine-joystick')?.dataset.floating === 'true'"}
+{"at":"2026-11-17T18:05:33.328Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => document.querySelector('.alpine-joystick')?.dataset.floating === 'true'","ms":9.580780000018422}
+{"at":"2026-11-17T18:05:33.878Z","pid":7807,"event":"pass","method":"goto","action":"http://127.0.0.1:42203/workout/island/?dev=1","ms":3656.7166650000004}
+{"at":"2026-11-17T18:05:33.879Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:05:35.513Z","pid":5602,"event":"pass","method":"goto","action":"http://127.0.0.1:35237/workout/island/?dev=1&loadStuckMs=5000","ms":5736.820986000006}
+{"at":"2026-11-17T18:05:35.513Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:05:47.198Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => { const s = window.__island.ui.activityInterface.current.session.snapshot; return s.input.dragging && s.frame.player.boosting; }"}
+{"at":"2026-11-17T18:05:49.403Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => { const s = window.__island.ui.activityInterface.current.session.snapshot; return s.input.dragging && s.frame.player.boosting; }","ms":2204.5421680000145}
+{"at":"2026-11-17T18:05:49.403Z","pid":3567,"event":"start","method":"screenshot","action":"[object Object]"}
+{"at":"2026-11-17T18:05:51.058Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":17179.592149999997}
+{"at":"2026-11-17T18:05:59.487Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":23974.013023999985}
+{"at":"2026-11-17T18:06:02.389Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":40475.11300999997}
+{"at":"2026-11-17T18:06:04.264Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:06:04.302Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":37.817680999985896}
+{"at":"2026-11-17T18:06:04.302Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0"}
+{"at":"2026-11-17T18:06:04.777Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0","ms":474.43617800000357}
+{"at":"2026-11-17T18:06:04.777Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:06:08.630Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>document.querySelector('.offline-status')?.textContent.includes('שמור לגרסה הזו')"}
+{"at":"2026-11-17T18:06:09.389Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]"}
+{"at":"2026-11-17T18:06:11.501Z","pid":3567,"event":"pass","method":"screenshot","action":"[object Object]","ms":22098.03986800002}
+{"at":"2026-11-17T18:06:11.501Z","pid":3567,"event":"start","method":"waitForFunction","action":"x => window.__island.ui.activityInterface.current.session.snapshot.frame.player.x > x + 1"}
+{"at":"2026-11-17T18:06:11.510Z","pid":3567,"event":"pass","method":"waitForFunction","action":"x => window.__island.ui.activityInterface.current.session.snapshot.frame.player.x > x + 1","ms":8.696081999980379}
+{"at":"2026-11-17T18:06:11.723Z","pid":3567,"event":"start","method":"waitForFunction","action":"() => !window.__island.ui.activityInterface.current.session.snapshot.input.dragging"}
+{"at":"2026-11-17T18:06:11.765Z","pid":3567,"event":"pass","method":"waitForFunction","action":"() => !window.__island.ui.activityInterface.current.session.snapshot.input.dragging","ms":42.546612000034656}
+{"at":"2026-11-17T18:06:13.693Z","pid":3567,"event":"browser-close"}
+{"at":"2026-11-17T18:06:14.470Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue] [data-action=rescue-restart]","ms":5081.091667999979}
+{"at":"2026-11-17T18:06:15.393Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}"}
+{"at":"2026-11-17T18:06:16.262Z","pid":8152,"event":"browser-open","ms":1839.7571160000002,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:06:16.702Z","pid":8152,"event":"start","method":"goto","action":"http://127.0.0.1:36077/Bakasun/workout/island/tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2"}
+{"at":"2026-11-17T18:06:17.280Z","pid":8152,"event":"pass","method":"goto","action":"http://127.0.0.1:36077/Bakasun/workout/island/tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2","ms":577.8760810000003}
+{"at":"2026-11-17T18:06:17.280Z","pid":8152,"event":"start","method":"waitForFunction","action":"()=>window.__perf"}
+{"at":"2026-11-17T18:06:43.313Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}","ms":27919.803614999983}
+{"at":"2026-11-17T18:06:43.313Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue]"}
+{"at":"2026-11-17T18:06:43.389Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue]","ms":75.54261699999915}
+{"at":"2026-11-17T18:06:48.369Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":43592.208027000015}
+{"at":"2026-11-17T18:06:48.752Z","pid":5602,"event":"browser-close"}
+{"at":"2026-11-17T18:06:49.961Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:06:50.000Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":38.86706200003391}
+{"at":"2026-11-17T18:06:50.000Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0"}
+{"at":"2026-11-17T18:06:50.225Z","pid":5602,"event":"browser-open","ms":1324.2064359999495,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:06:50.303Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0","ms":303.1292479999829}
+{"at":"2026-11-17T18:06:50.303Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:06:50.573Z","pid":5602,"event":"start","method":"goto","action":"http://127.0.0.1:42199/workout/island/?dev=1&loadStuckMs=5000"}
+{"at":"2026-11-17T18:06:55.521Z","pid":5602,"event":"pass","method":"goto","action":"http://127.0.0.1:42199/workout/island/?dev=1&loadStuckMs=5000","ms":4948.290854000021}
+{"at":"2026-11-17T18:06:55.521Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:07:11.683Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":16161.583943000005}
+{"at":"2026-11-17T18:07:17.824Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue][data-step=restart]"}
+{"at":"2026-11-17T18:07:19.689Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>document.querySelector('.offline-status')?.textContent.includes('שמור לגרסה הזו')","ms":71059.54831000001}
+{"at":"2026-11-17T18:07:20.421Z","pid":7807,"event":"browser-close"}
+{"at":"2026-11-17T18:07:21.759Z","pid":7807,"event":"browser-open","ms":1191.8457750000089,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:07:22.883Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue][data-step=restart]","ms":5058.753497999976}
+{"at":"2026-11-17T18:07:22.894Z","pid":7807,"event":"start","method":"goto","action":"http://127.0.0.1:43957/workout/island/"}
+{"at":"2026-11-17T18:07:25.212Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":34908.89614799997}
+{"at":"2026-11-17T18:07:25.690Z","pid":7807,"event":"pass","method":"goto","action":"http://127.0.0.1:43957/workout/island/","ms":2795.878900999989}
+{"at":"2026-11-17T18:07:25.690Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>window.__offlineState?.state==='save-data'"}
+{"at":"2026-11-17T18:07:26.877Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:07:26.967Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":90.215533999959}
+{"at":"2026-11-17T18:07:26.968Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0"}
+{"at":"2026-11-17T18:07:27.267Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0","ms":299.11084799998207}
+{"at":"2026-11-17T18:07:27.267Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:07:30.098Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue][data-step=lite]"}
+{"at":"2026-11-17T18:07:35.180Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue][data-step=lite]","ms":5082.46603099996}
+{"at":"2026-11-17T18:07:35.369Z","pid":5602,"event":"start","method":"waitForSelector","action":"[data-load-rescue][data-step=clear]"}
+{"at":"2026-11-17T18:07:36.369Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>window.__offlineState?.state==='save-data'","ms":10678.475026}
+{"at":"2026-11-17T18:07:36.518Z","pid":7807,"event":"start","method":"goto","action":"http://127.0.0.1:43957/workout/island/?dev=1&quality=high&autoIdleMs=2000"}
+{"at":"2026-11-17T18:07:39.418Z","pid":7807,"event":"pass","method":"goto","action":"http://127.0.0.1:43957/workout/island/?dev=1&quality=high&autoIdleMs=2000","ms":2900.793426000004}
+{"at":"2026-11-17T18:07:39.419Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:07:40.419Z","pid":5602,"event":"pass","method":"waitForSelector","action":"[data-load-rescue][data-step=clear]","ms":5049.521875000035}
+{"at":"2026-11-17T18:07:41.317Z","pid":5602,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}"}
+{"at":"2026-11-17T18:07:41.955Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":14687.942553}
+{"at":"2026-11-17T18:07:43.774Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:07:43.852Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":78.25568599998951}
+{"at":"2026-11-17T18:07:43.853Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0"}
+{"at":"2026-11-17T18:07:44.219Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0","ms":365.96122300002025}
+{"at":"2026-11-17T18:07:44.219Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:07:56.699Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":12480.447326000023}
+{"at":"2026-11-17T18:07:58.605Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:07:58.673Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":68.35703799995827}
+{"at":"2026-11-17T18:07:58.674Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0"}
+{"at":"2026-11-17T18:07:58.930Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0","ms":255.6712159999879}
+{"at":"2026-11-17T18:07:58.930Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:08:07.662Z","pid":5602,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session;return s&&s.ready===true;}","ms":26344.98587100004}
+{"at":"2026-11-17T18:08:08.197Z","pid":5602,"event":"browser-close"}
+{"at":"2026-11-17T18:08:10.460Z","pid":8846,"event":"browser-open","ms":1128.5838990000002,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:08:10.926Z","pid":8846,"event":"start","method":"goto","action":"http://127.0.0.1:34451/Bakasun/workout/island/tools/perf-tennis.html?dur=3600&tennisV7=1"}
+{"at":"2026-11-17T18:08:11.167Z","pid":8846,"event":"pass","method":"goto","action":"http://127.0.0.1:34451/Bakasun/workout/island/tools/perf-tennis.html?dur=3600&tennisV7=1","ms":240.51478300000008}
+{"at":"2026-11-17T18:08:11.167Z","pid":8846,"event":"start","method":"waitForFunction","action":"()=>window.__tennis||window.__perf?.error"}
+{"at":"2026-11-17T18:08:12.676Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":13745.901983999996}
+{"at":"2026-11-17T18:08:14.674Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:08:14.715Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":40.95393899996998}
+{"at":"2026-11-17T18:08:14.716Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV241=0"}
+{"at":"2026-11-17T18:08:14.792Z","pid":8846,"event":"pass","method":"waitForFunction","action":"()=>window.__tennis||window.__perf?.error","ms":3625.4675620000003}
+{"at":"2026-11-17T18:08:15.088Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV241=0","ms":372.3556600000011}
+{"at":"2026-11-17T18:08:15.091Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:08:21.827Z","pid":8846,"event":"browser-close"}
+{"at":"2026-11-17T18:08:24.585Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":9494.297366000013}
+{"at":"2026-11-17T18:08:26.091Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:08:26.157Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":65.11723999999231}
+{"at":"2026-11-17T18:08:26.157Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242"}
+{"at":"2026-11-17T18:08:26.375Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242","ms":218.36771600000793}
+{"at":"2026-11-17T18:08:26.375Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:08:37.557Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":11182.029031999991}
+{"at":"2026-11-17T18:08:37.590Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const v=window.__session?.snapshot?.renderMetrics?.v241;return v&&v.crowd3d.status!=='loading'&&v.referee.status!=='loading';}"}
+{"at":"2026-11-17T18:08:37.598Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const v=window.__session?.snapshot?.renderMetrics?.v241;return v&&v.crowd3d.status!=='loading'&&v.referee.status!=='loading';}","ms":7.99472599994624}
+{"at":"2026-11-17T18:08:38.864Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:08:38.896Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":32.24657399998978}
+{"at":"2026-11-17T18:08:38.896Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&athleteBody=0&hoopsV241=0"}
+{"at":"2026-11-17T18:08:39.206Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&athleteBody=0&hoopsV241=0","ms":309.670851999952}
+{"at":"2026-11-17T18:08:39.206Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:08:47.016Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":7809.450647000049}
+{"at":"2026-11-17T18:08:48.364Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:08:48.415Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":50.850657999981195}
+{"at":"2026-11-17T18:08:48.416Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&athleteBodyV22=0"}
+{"at":"2026-11-17T18:08:48.769Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&athleteBodyV22=0","ms":353.4138479999965}
+{"at":"2026-11-17T18:08:48.770Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:08:57.630Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":8860.523404999985}
+{"at":"2026-11-17T18:08:59.124Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html"}
+{"at":"2026-11-17T18:08:59.182Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/csp-fixture.html","ms":57.74550399999134}
+{"at":"2026-11-17T18:08:59.182Z","pid":4628,"event":"start","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242"}
+{"at":"2026-11-17T18:08:59.426Z","pid":4628,"event":"pass","method":"goto","action":"http://127.0.0.1:37215/Bakasun/workout/island/tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242","ms":243.86379699991085}
+{"at":"2026-11-17T18:08:59.426Z","pid":4628,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}"}
+{"at":"2026-11-17T18:09:09.079Z","pid":4628,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));}","ms":9653.05223400006}
+{"at":"2026-11-17T18:09:10.105Z","pid":4628,"event":"browser-close"}
+{"at":"2026-11-17T18:09:39.421Z","pid":7807,"event":"fail","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":120002.83519699998,"error":"page.waitForFunction: Timeout 120000ms exceeded."}
+{"at":"2026-11-17T18:09:41.482Z","pid":7807,"event":"browser-close"}
+{"at":"2026-11-17T18:09:42.560Z","pid":7807,"event":"browser-open","ms":1008.705255000008,"version":"151.0.7922.173"}
+{"at":"2026-11-17T18:09:42.922Z","pid":7807,"event":"start","method":"goto","action":"http://127.0.0.1:33127/workout/island/?dev=1"}
+{"at":"2026-11-17T18:09:46.263Z","pid":7807,"event":"pass","method":"goto","action":"http://127.0.0.1:33127/workout/island/?dev=1","ms":3340.2440009999846}
+{"at":"2026-11-17T18:09:46.263Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded"}
+{"at":"2026-11-17T18:09:56.296Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>window.__island?.view?.metrics().avatarLoaded","ms":10033.06122199999}
+{"at":"2026-11-17T18:10:05.626Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}"}
+{"at":"2026-11-17T18:10:13.204Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}","ms":7578.980709999974}
+{"at":"2026-11-17T18:10:20.496Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}"}
+{"at":"2026-11-17T18:10:30.755Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}","ms":10259.36749600002}
+{"at":"2026-11-17T18:10:35.892Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}"}
+{"at":"2026-11-17T18:10:43.429Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}","ms":7536.910750000039}
+{"at":"2026-11-17T18:10:51.211Z","pid":8152,"event":"pass","method":"waitForFunction","action":"()=>window.__perf","ms":273931.07023}
+{"at":"2026-11-17T18:10:51.892Z","pid":8152,"event":"browser-close"}
+{"at":"2026-11-17T18:10:51.995Z","pid":7807,"event":"start","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}"}
+{"at":"2026-11-17T18:10:53.294Z","pid":7807,"event":"pass","method":"waitForFunction","action":"()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');}","ms":1298.9176050000242}
+{"at":"2026-11-17T18:11:00.249Z","pid":7807,"event":"browser-close"}

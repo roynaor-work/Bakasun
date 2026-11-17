@@ -1,0 +1,11 @@
+diff --git a/workout/island/tests/boar-aim-v24-browser.mjs b/workout/island/tests/boar-aim-v24-browser.mjs
+--- a/workout/island/tests/boar-aim-v24-browser.mjs
++++ b/workout/island/tests/boar-aim-v24-browser.mjs
+@@ -113,4 +113,6 @@
+ console.log(JSON.stringify({aim:AIM,stick:results.stick,summary:results.summary,shotsBy:results.final.shotsBy,stickNoButton:results.final.stickNoButton,errors}));
+ await browser.close();await server.close();
+ const nonButton=Object.entries(results.final.shotsBy||{}).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
+-if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,results.final.shotsBy);process.exit(1);}
++const all=results.summary.all;
++const exercised=Number.isInteger(TRIALS)&&TRIALS>0&&results.trials.length===TRIALS&&all?.shots>0&&all?.hits>0&&all?.reached>0;
++if(errors.length||nonButton||!exercised){console.error('FAILED: page errors, non-button shots, or no completed aiming/hit evidence',errors,results.final.shotsBy,{expected:TRIALS,rows:results.trials.length,summary:all});process.exit(1);}

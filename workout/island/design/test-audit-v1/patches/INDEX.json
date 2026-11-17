@@ -1,0 +1,67 @@
+[
+  {
+    "file": "patches/01-browser-runner-and-ci.patch",
+    "description": "Explicit browser groups, serial software rendering within each CI worker, bounded child-process lifetime; v24 acceptance can run separately.",
+    "validation": "Syntax and git apply --check; full proposed CI matrix not run. Depends on 02/03 and remaining stale browser expectations; does not claim a green new gate."
+  },
+  {
+    "file": "patches/02-browser-artifacts-and-opt-in.patch",
+    "description": "Opt in explicitly to workout browser checks, honor CHROMIUM_PATH and redirect screenshot/report output outside tracked verification files.",
+    "validation": "git apply --check and syntax. The exact proposed Royiki module was loaded in memory: 4 pass / 1 skip without opt-in, and a missing-browser opt-in exits with the expected failure in 0.72s instead of leaving its server open. Other output overrides were not rerun."
+  },
+  {
+    "file": "patches/03-load-rescue-cleanup.patch",
+    "description": "Register cleanup before the first fallible setup await; give the post-ready UI watcher its existing ordinary 60-second browser budget.",
+    "validation": "git apply --check and syntax only; revised browser scenario not executed. Serial runner is the primary resource fix; the longer detached wait alone does not prove load recovery."
+  },
+  {
+    "file": "patches/04-tennis-frame-readiness.patch",
+    "description": "Wait for a completed frame instead of assuming a frame fits in a 1.5-second sleep.",
+    "validation": "git apply --check and syntax; full tennis browser scenario not rerun with this proposal."
+  },
+  {
+    "file": "patches/05-fire-entry-lifecycle-tests.patch",
+    "description": "Add behavioral tests of clock freeze, pause routing, disposal during lazy loading, and a failed room module.",
+    "validation": "Exact proposed file loaded with an in-memory ESM overlay: 3/3 pass. The unfrozen-street mutant is detected; the 11 existing tests miss it. No patch applied."
+  },
+  {
+    "file": "patches/06-soccer-reopen-current-default.patch",
+    "description": "Recovery on the unpinned current URL must restore the 22-player match; no rollback flag is added.",
+    "validation": "git apply --check and syntax; existing browser recovery suite not run with the proposed expectations. Other historical soccer fixtures require separate review (see findings)."
+  },
+  {
+    "file": "patches/07-remove-known-bug-invariants.patch",
+    "description": "Remove checks whose success requires broken imports or duplicated implementation. Keep the explicit skipped prototype repair check visible.",
+    "validation": "git apply --check; remaining original assertions and behavior suites read. No production file is changed by the proposal."
+  },
+  {
+    "file": "patches/08-deduplicate-shell-list-scan.patch",
+    "description": "Keep one complete shell regeneration comparison in island-offline.test.mjs; preserve the pack-specific asset assertions.",
+    "validation": "git apply --check and syntax; canonical completeness check remains at tests/island-offline.test.mjs:38."
+  },
+  {
+    "file": "patches/09-offline-racing-and-fault-proof.patch",
+    "description": "Include the fourth promised game in download/reopen/fallback checks, and require each blocked-asset route to have been hit.",
+    "validation": "git apply --check and syntax. Full offline/fault run not rerun; stale patterns now cause an explicit failure that must be repaired instead of silently passing."
+  },
+  {
+    "file": "patches/10-current-default-session-smoke.patch",
+    "description": "Start the actual soccer and fire sessions through the island shell on an unpinned URL; keep the fire v23 fallback as a separate matrix row.",
+    "validation": "Final candidate: 3/3 real Chromium cases pass (43.8s): 22-player soccer/controllers with visible-player culling, default fire-entry, and the separate v23 rollback. Temporary candidate used absolute helper import; patch uses repository-relative import. No full fire-stage win is claimed."
+  },
+  {
+    "file": "patches/11-boar-nonvacuous-acceptance.patch",
+    "description": "A run with no trials, skipped targets, no shots or no hits must fail rather than return a successful acceptance exit code.",
+    "validation": "git apply --check and syntax; pure zero-hit and missing-trial counterexamples reviewed. Full browser aiming measurements not rerun; calibrated comparative hit-rate gates are a separate follow-up."
+  },
+  {
+    "file": "patches/12-current-menu-contract.patch",
+    "description": "Check the identities of the ten current game cards, including Catch, instead of the historical nine-card count.",
+    "validation": "git apply --check and syntax; serial original reaches this deterministic 10 !== 9 failure after all environment/rotation/fallback cases. Proposed menu expectation not rerun through the full file."
+  },
+  {
+    "file": "patches/13-racing-legacy-and-current-renderers.patch",
+    "description": "Separate the v7 compatibility renderer from the actual v24 formula-all default; validate the current renderer in its own unpinned browser case.",
+    "validation": "Current-default candidate passed in Chromium in 91.6 seconds. Full legacy v7 matrix with its new explicit compatibility switches was not rerun; dry-run and syntax checks pass."
+  }
+]

@@ -1,0 +1,38 @@
+diff --git a/tests/island-racing-v7-browser.test.mjs b/tests/island-racing-v7-browser.test.mjs
+--- a/tests/island-racing-v7-browser.test.mjs
++++ b/tests/island-racing-v7-browser.test.mjs
+@@ -6,11 +6,12 @@
+ // ISLAND_CSP_BROWSER=1 node --test tests/island-racing-v7-browser.test.mjs
+ // Racing v7 (05/11): the v7 cars, props, spectators, asphalt and smoke load from assets/racing-v7 under the CSP with no request leaving
+ // the island; ?racingV7=0, the config switch and a blocked or partly missing bundle all fall back silently to the previous coupe.
++// Keep this legacy renderer fixture explicit. The current v24 formula renderer has its own unpinned browser test.
+ const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_RACING_BROWSER==='1';
+ const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
+-const url=(server,query='')=>server.url+`tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2${query?'&'+query:''}`;
++const url=(server,query='')=>server.url+`tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2&racingFormulaAll=0&racingFormulaCar=0&racingF1Field=0${query?'&'+query:''}`;
+ 
+-test('racing v7: default, kill flag, config switch, blocked bundle and one missing file, both orientations',{skip:!enabled,timeout:900000},async()=>{
++test('racing v7 compatibility (formula renderers off): kill flag, config switch, blocked bundle and one missing file, both orientations',{skip:!enabled,timeout:900000},async()=>{
+  const server=await serveIsland(),chromium=await islandChromium();
+  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
+  async function run(name,{viewport,query='',setup}){
+diff --git a/tests/island-racing-v24-render-browser.test.mjs b/tests/island-racing-v24-render-browser.test.mjs
+new file mode 100644
+--- /dev/null
++++ b/tests/island-racing-v24-render-browser.test.mjs
+@@ -0,0 +1,15 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
++test('racing v24 default: every rival uses a loaded formula LOD; the legacy v7 LOD field is not the active renderer',{skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:300000},async t=>{
++ const server=await serveIsland();t.after(()=>server.close());
++ const browser=await(await islandChromium()).launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});t.after(()=>browser.close());
++ const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}),audit=await installIslandCspMonitor(context);t.after(()=>audit.dispose());
++ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await audit.attachPage(page);
++ await page.goto(server.url+'tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2');
++ await page.waitForFunction(()=>window.__perf,null,{timeout:180000});
++ const {render:m,cars}=await page.evaluate(()=>({render:window.__perf.render,cars:window.__session.snapshot.cars.length}));
++ assert.ok(cars>=5);assert.equal(m.modelLoaded,true);assert.ok(m.formulaAll,'the current default loads the formula-all pack');assert.equal(m.formulaAll.cars,cars-1);
++ assert.ok(m.formulaAll.lods.reduce((a,b)=>a+b,0)>0,'at least one rival is drawn');assert.equal(m.formulaAll.levels.length,3);assert.ok(m.formulaAll.levels.every(n=>n>0&&n<=5000));
++ assert.deepEqual(m.failures,[]);assert.deepEqual(errors,[]);await audit.assertClean();
++});

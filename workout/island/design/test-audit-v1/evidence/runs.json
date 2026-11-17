@@ -1,0 +1,106 @@
+{
+  "base_commit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "default_suite": {
+    "command": "node --test --test-reporter=tap tests/*.mjs",
+    "result": {
+      "tests": 4326,
+      "pass": 4261,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 64,
+      "duration_ms": 1298431.313095
+    },
+    "cleanup": "The failed Royiki child was terminated to release its leaked HTTP server; the recorded full-suite duration includes that hang, not benchmark time.",
+    "log_sha256": "ae14d18f47681b861ea25bcfc93341e741949ab6b43ee3a8a506b7411480e748"
+  },
+  "parallel_nine": {
+    "concurrency": 4,
+    "co_load": "Node suite still active at start",
+    "result": {
+      "tests": 28,
+      "pass": 21,
+      "fail": 6,
+      "cancelled": 1,
+      "skipped": 0,
+      "duration_ms": 799101.239524
+    },
+    "log": "evidence/parallel-nine.tap"
+  },
+  "isolated_alpine_env": {
+    "result": {
+      "tests": 5,
+      "pass": 4,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 226609.592257
+    },
+    "phase_wait_ms": 12097.21376,
+    "eventual_failure": "10 !== 9 game cards",
+    "log": "evidence/serial-alpine-env.tap"
+  },
+  "fire_route_mutant": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 2560.995018
+  },
+  "fire_clock_mutant_existing": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 3870.023965
+  },
+  "fire_lifecycle_proposed": {
+    "tests": 3,
+    "pass": 3,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 181.109317
+  },
+  "fire_clock_mutant_proposed": {
+    "tests": 3,
+    "pass": 2,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 700.411821
+  },
+  "royiki_proposed": {
+    "tests": 5,
+    "pass": 4,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 1,
+    "duration_ms": 941.872081
+  },
+  "royiki_proposed_missing_executable": {
+    "tests": 5,
+    "pass": 4,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 721.043539
+  },
+  "current_defaults_proposed": {
+    "tests": 3,
+    "pass": 3,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 43811.338753
+  },
+  "racing_default_proposed": {
+    "tests": 1,
+    "pass": 1,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "duration_ms": 91717.018718
+  }
+}
