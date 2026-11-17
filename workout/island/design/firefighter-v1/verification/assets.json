@@ -1,0 +1,1674 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "file": "models/firefighter-equipment.glb",
+      "bytes": 219464,
+      "sha256": "af785022577b7d6c89afce12da78cec74778d694b094fffc5632d96f114bb198"
+    },
+    {
+      "file": "models/oxygen-mask.glb",
+      "bytes": 10172,
+      "sha256": "34e088c07c9b42a4317df20dc7f17bd1ca0e4635e514b021e639fc64c34f75d7"
+    },
+    {
+      "file": "motions/firefighter-clips.glb",
+      "bytes": 375392,
+      "sha256": "10e392014bf2e9e61aa7c5b0ef9e6882ef223c27c1fc5330b8bb0bc6ae0c3bf7"
+    },
+    {
+      "file": "models/rescue-cat.glb",
+      "bytes": 33068,
+      "sha256": "542af26e01c3b000962a5ca8cd99fe80c43209d3ede388bee0a5272d3341abf2"
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle_ready",
+      "frameCount": 73,
+      "maxPoseError": 2.9702225345928923e-8,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "id": "walk",
+      "frameCount": 37,
+      "maxPoseError": 2.9719146699136445e-8,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "id": "run",
+      "frameCount": 25,
+      "maxPoseError": 2.938707266419982e-8,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "id": "crouch_walk",
+      "frameCount": 49,
+      "maxPoseError": 2.974195811855651e-8,
+      "seamError": 1.4695761589768239e-18
+    },
+    {
+      "id": "spray_stand",
+      "frameCount": 97,
+      "maxPoseError": 2.9631564313348235e-8,
+      "seamError": null
+    },
+    {
+      "id": "spray_crouch",
+      "frameCount": 121,
+      "maxPoseError": 2.979332647257138e-8,
+      "seamError": null
+    },
+    {
+      "id": "open_door",
+      "frameCount": 79,
+      "maxPoseError": 2.9777418975029946e-8,
+      "seamError": null
+    },
+    {
+      "id": "carry_child",
+      "frameCount": 43,
+      "maxPoseError": 2.9764012920985294e-8,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "id": "carry_cat",
+      "frameCount": 43,
+      "maxPoseError": 2.9764012920985294e-8,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "id": "wave_victory",
+      "frameCount": 97,
+      "maxPoseError": 2.9629133369013516e-8,
+      "seamError": null
+    },
+    {
+      "id": "rescued_handoff",
+      "frameCount": 109,
+      "maxPoseError": 2.9786299760026225e-8,
+      "seamError": null
+    }
+  ],
+  "equipmentFloor": {
+    "minimumY": -0.00013315580406140972,
+    "worst": {
+      "clip": "run",
+      "time": 0.03333333333333333,
+      "node": "boot_left"
+    }
+  },
+  "crouchHeight": 1.0495852102060594,
+  "crouchHeights": [
+    {
+      "body": "soccer",
+      "highestHelmetY": 1.0495852102060592
+    },
+    {
+      "body": "guard",
+      "highestHelmetY": 1.0346754394564501
+    },
+    {
+      "body": "wing",
+      "highestHelmetY": 1.13741398912654
+    },
+    {
+      "body": "center",
+      "highestHelmetY": 1.229931881556103
+    }
+  ],
+  "checks": [
+    {
+      "name": "models/firefighter-equipment.glb uncompressed",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_details COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_details _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_collar COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_collar _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_waist COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_waist _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_left_upper COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_left_upper _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_left_lower COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_left_lower _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_left_upper COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_left_upper _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_left_lower COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_left_lower _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb glove_left COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb glove_left _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb boot_left COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb boot_left _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_right_upper COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_right_upper _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_right_lower COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb jacket_sleeve_right_lower _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_right_upper COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_right_upper _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_right_lower COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb pants_right_lower _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb glove_right COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb glove_right _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb boot_right COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb boot_right _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb helmet COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb helmet _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb helmet_visor COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb helmet_visor _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb oxygen_mask COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb oxygen_mask _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb mask_regulator COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb mask_regulator _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb air_backpack COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb air_backpack _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb nozzle COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb nozzle _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb hose_surface COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb hose_surface _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb hose_centerline COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb hose_centerline _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb nozzle_spray_vibration 30Hz",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb nozzle_spray_vibration 30Hz",
+      "passed": true
+    },
+    {
+      "name": "models/firefighter-equipment.glb unit normals",
+      "passed": true,
+      "maxNormalError": 3.5163574496621663e-8
+    },
+    {
+      "name": "models/firefighter-equipment.glb unit rotations",
+      "passed": true,
+      "maxQuaternionError": 5.188731222460774e-9
+    },
+    {
+      "name": "Equipment hard triangle cap",
+      "passed": true,
+      "triangles": 1452,
+      "limit": 1500
+    },
+    {
+      "name": "models/oxygen-mask.glb uncompressed",
+      "passed": true
+    },
+    {
+      "name": "models/oxygen-mask.glb oxygen_mask COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/oxygen-mask.glb oxygen_mask _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/oxygen-mask.glb mask_regulator COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/oxygen-mask.glb mask_regulator _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/oxygen-mask.glb unit normals",
+      "passed": true,
+      "maxNormalError": 0
+    },
+    {
+      "name": "models/oxygen-mask.glb unit rotations",
+      "passed": true,
+      "maxQuaternionError": 0
+    },
+    {
+      "name": "motions/firefighter-clips.glb uncompressed",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_ready 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb run 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb crouch_walk 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_child 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb carry_cat 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb idle_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_stand 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb spray_crouch 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb open_door 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb wave_victory 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb rescued_handoff 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb child_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "motions/firefighter-clips.glb unit normals",
+      "passed": true,
+      "maxNormalError": 0
+    },
+    {
+      "name": "motions/firefighter-clips.glb unit rotations",
+      "passed": true,
+      "maxQuaternionError": 3.990584307445033e-8
+    },
+    {
+      "name": "models/rescue-cat.glb uncompressed",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_body COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_body _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_face COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_face _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_tail_mesh COLOR_0",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_tail_mesh _REGION",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb cat_reassured 30Hz",
+      "passed": true
+    },
+    {
+      "name": "models/rescue-cat.glb unit normals",
+      "passed": true,
+      "maxNormalError": 2.7951460590536215e-8
+    },
+    {
+      "name": "models/rescue-cat.glb unit rotations",
+      "passed": true,
+      "maxQuaternionError": 2.9630446762851648e-8
+    },
+    {
+      "name": "Optional cat triangle count",
+      "passed": true,
+      "triangles": 216
+    },
+    {
+      "name": "Exact canonical 18 names and rest hierarchy",
+      "passed": true
+    },
+    {
+      "name": "Required independently addressable parts",
+      "passed": true
+    },
+    {
+      "name": "Both hose representations",
+      "passed": true
+    },
+    {
+      "name": "idle_ready full native channels",
+      "passed": true,
+      "maxPoseError": 2.9702225345928923e-8,
+      "frameCount": 73
+    },
+    {
+      "name": "idle_ready root fixed",
+      "passed": true
+    },
+    {
+      "name": "idle_ready no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "idle_ready periodic seam",
+      "passed": true,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "name": "walk full native channels",
+      "passed": true,
+      "maxPoseError": 2.9719146699136445e-8,
+      "frameCount": 37
+    },
+    {
+      "name": "walk root fixed",
+      "passed": true
+    },
+    {
+      "name": "walk no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "walk periodic seam",
+      "passed": true,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "name": "run full native channels",
+      "passed": true,
+      "maxPoseError": 2.938707266419982e-8,
+      "frameCount": 25
+    },
+    {
+      "name": "run root fixed",
+      "passed": true
+    },
+    {
+      "name": "run no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "run periodic seam",
+      "passed": true,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "name": "crouch_walk full native channels",
+      "passed": true,
+      "maxPoseError": 2.974195811855651e-8,
+      "frameCount": 49
+    },
+    {
+      "name": "crouch_walk root fixed",
+      "passed": true
+    },
+    {
+      "name": "crouch_walk no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "crouch_walk periodic seam",
+      "passed": true,
+      "seamError": 1.4695761589768239e-18
+    },
+    {
+      "name": "spray_stand full native channels",
+      "passed": true,
+      "maxPoseError": 2.9631564313348235e-8,
+      "frameCount": 97
+    },
+    {
+      "name": "spray_stand root fixed",
+      "passed": true
+    },
+    {
+      "name": "spray_stand no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "spray_crouch full native channels",
+      "passed": true,
+      "maxPoseError": 2.979332647257138e-8,
+      "frameCount": 121
+    },
+    {
+      "name": "spray_crouch root fixed",
+      "passed": true
+    },
+    {
+      "name": "spray_crouch no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "open_door full native channels",
+      "passed": true,
+      "maxPoseError": 2.9777418975029946e-8,
+      "frameCount": 79
+    },
+    {
+      "name": "open_door root fixed",
+      "passed": true
+    },
+    {
+      "name": "open_door no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "carry_child full native channels",
+      "passed": true,
+      "maxPoseError": 2.9764012920985294e-8,
+      "frameCount": 43
+    },
+    {
+      "name": "carry_child root fixed",
+      "passed": true
+    },
+    {
+      "name": "carry_child no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "carry_child periodic seam",
+      "passed": true,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "name": "carry_cat full native channels",
+      "passed": true,
+      "maxPoseError": 2.9764012920985294e-8,
+      "frameCount": 43
+    },
+    {
+      "name": "carry_cat root fixed",
+      "passed": true
+    },
+    {
+      "name": "carry_cat no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "carry_cat periodic seam",
+      "passed": true,
+      "seamError": 2.9802322387695312e-8
+    },
+    {
+      "name": "wave_victory full native channels",
+      "passed": true,
+      "maxPoseError": 2.9629133369013516e-8,
+      "frameCount": 97
+    },
+    {
+      "name": "wave_victory root fixed",
+      "passed": true
+    },
+    {
+      "name": "wave_victory no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "rescued_handoff full native channels",
+      "passed": true,
+      "maxPoseError": 2.9786299760026225e-8,
+      "frameCount": 109
+    },
+    {
+      "name": "rescued_handoff root fixed",
+      "passed": true
+    },
+    {
+      "name": "rescued_handoff no unreachable IK",
+      "passed": true,
+      "maximumReachErrorMeters": 0
+    },
+    {
+      "name": "Equipment mesh floor clearance",
+      "passed": true,
+      "minimumY": -0.00013315580406140972,
+      "worst": {
+        "clip": "run",
+        "time": 0.03333333333333333,
+        "node": "boot_left"
+      },
+      "toleranceMeters": 0.002,
+      "scope": "All authored equipment vertices at every native frame, soccer body scale. Hose is updated and checked separately by browser."
+    },
+    {
+      "name": "Crouch fits under 1.25m smoke boundary",
+      "passed": true,
+      "bodies": [
+        {
+          "body": "soccer",
+          "highestHelmetY": 1.0495852102060592
+        },
+        {
+          "body": "guard",
+          "highestHelmetY": 1.0346754394564501
+        },
+        {
+          "body": "wing",
+          "highestHelmetY": 1.13741398912654
+        },
+        {
+          "body": "center",
+          "highestHelmetY": 1.229931881556103
+        }
+      ],
+      "smokeBoundaryMeters": 1.25
+    },
+    {
+      "name": "Official motion QA gate",
+      "passed": true,
+      "minimumScore": 89.7,
+      "redMetrics": 0
+    }
+  ],
+  "passed": true
+}

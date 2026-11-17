@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "verifiedAssetCommit": "d1b1aedac7d31e33d40f60aad9eb4c3f2f72e8aa",
+  "assetBytesMatchThatCommit": true,
+  "branch": "codex/firefighter-v1",
+  "filePolicy": "Additions only under workout/island/design/firefighter-v1; no existing source, releases, version queries, CLAUDE.md, ops or application tests changed.",
+  "qa": {
+    "minimumScore": 89.7,
+    "redMetrics": 0,
+    "requiredClips": 11,
+    "coverage": 1,
+    "pinnedToolCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+  },
+  "browser": {
+    "poseCases": 176,
+    "peakTriangles": 11910,
+    "passed": true,
+    "externalRequests": []
+  },
+  "filesExcludingThisInventory": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3232,
+      "sha256": "781672fedc22f1e47d1ecef5ad6b6afeb2b104ad91dc692765157607a161795e"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 11506,
+      "sha256": "24c5c1f1523fdd16479b40ba59ded38ac4fe9aa173079930f43445140fd9bdd2"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 28553,
+      "sha256": "6731375bc093e76b03a5e6b489a6692acf0410e8ad23b4785858e075ef3ce200"
+    },
+    {
+      "path": "measure.mjs",
+      "bytes": 3532,
+      "sha256": "a3135d71a12482fc69988793955b7893a08d702ef165fc60d4a99f081675b167"
+    },
+    {
+      "path": "models/firefighter-equipment.glb",
+      "bytes": 219464,
+      "sha256": "af785022577b7d6c89afce12da78cec74778d694b094fffc5632d96f114bb198"
+    },
+    {
+      "path": "models/oxygen-mask.glb",
+      "bytes": 10172,
+      "sha256": "34e088c07c9b42a4317df20dc7f17bd1ca0e4635e514b021e639fc64c34f75d7"
+    },
+    {
+      "path": "models/rescue-cat.glb",
+      "bytes": 33068,
+      "sha256": "542af26e01c3b000962a5ca8cd99fe80c43209d3ede388bee0a5272d3341abf2"
+    },
+    {
+      "path": "motions/firefighter-clips.glb",
+      "bytes": 375392,
+      "sha256": "10e392014bf2e9e61aa7c5b0ef9e6882ef223c27c1fc5330b8bb0bc6ae0c3bf7"
+    },
+    {
+      "path": "motions/poses.json",
+      "bytes": 2818827,
+      "sha256": "cbb6f407909b846c0bd8350b1505f60c1eec98d1661b0b59bb436f68e20f830b"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 9389,
+      "sha256": "1f66a7d92e39604eba6276d66b82ace9d3b24369086a133e8a9094bb0d69cae6"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 5344,
+      "sha256": "cb4bd16009ad18ba0bffb844ca381b28bc5ccb9f02fa3469ec7fb321e3e26da5"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 21247,
+      "sha256": "8e5dfe1f43d04823093fce56cee4a2b617bbfe0178de81adbcf16877a7c723da"
+    },
+    {
+      "path": "qa-register.mjs",
+      "bytes": 530,
+      "sha256": "228676e05b6df95467541884eaa42152976c5f5fe52ef4f6bfad0108e3ae7e23"
+    },
+    {
+      "path": "qa-sources.mjs",
+      "bytes": 2313,
+      "sha256": "4994647ab309262362f84703eecd609db70af94bdae6e32f075cd30517038869"
+    },
+    {
+      "path": "runtime/equipment.mjs",
+      "bytes": 6158,
+      "sha256": "c132482f18e9873364ed26f7a20648197600e65cbabf226db66a9ab5f4c57f10"
+    },
+    {
+      "path": "source/audit.mjs",
+      "bytes": 9181,
+      "sha256": "a5947e759b1bc0803f0f12b0406774003b8d2fe8938369b257b59c4c55210940"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 27528,
+      "sha256": "462f9e1bc5ec2e56f876df2541f9e749b99aab1286caa1e9cf103e6b8ada586b"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 2402,
+      "sha256": "8b2357999c2bd6005691627f266458bc9e6ca1e4a6b02f6f88ade17993e44eac"
+    },
+    {
+      "path": "source/review.py",
+      "bytes": 10814,
+      "sha256": "4c0163f7891d0ea9b24ffe5e714f5fe3680f72a3f5e4bd2507fec52241c7fa7e"
+    },
+    {
+      "path": "source/sprites.py",
+      "bytes": 5378,
+      "sha256": "7b8f20aec5a61ef66943a79aac9c5a6c74fa6a73dadf3ac9d7fa6b59b6af3444"
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 1173,
+      "sha256": "b13df7937d97b41054e895544eb81b8adf0e677e5bd47c0c4604c5c7f94cde6d"
+    },
+    {
+      "path": "sprites/atlas.json",
+      "bytes": 8916,
+      "sha256": "d9dd9e96f8ccf9130a53fa0d85a54a12f3bd752dcae232af97bb6478eac2cfd5"
+    },
+    {
+      "path": "sprites/droplets-sheet.png",
+      "bytes": 36042,
+      "sha256": "ea8655d91bf97a5dfc8f0578e9b054b6178627f3784714548d0885992e888a60"
+    },
+    {
+      "path": "sprites/droplets.png",
+      "bytes": 4596,
+      "sha256": "26749c4267d7d8c856ff6001bf46138f22ece38bd6c7b517d60a52106dac3e39"
+    },
+    {
+      "path": "sprites/object_splash-sheet.png",
+      "bytes": 38530,
+      "sha256": "9ba803d3b44937cf81ff2c49e70f03f87317176864bd37ffcd74d9c50c333c13"
+    },
+    {
+      "path": "sprites/object_splash.png",
+      "bytes": 1622,
+      "sha256": "22cebef5eb5d571a1e1486f2a7e41885a53cb3fad3b3544638ae01d4173436f1"
+    },
+    {
+      "path": "sprites/steam-sheet.png",
+      "bytes": 24391,
+      "sha256": "8dae00637d0a847d7973d4cf546adae024bc17f86944cb69e4a6a593c7fced30"
+    },
+    {
+      "path": "sprites/steam.png",
+      "bytes": 3368,
+      "sha256": "056d263291e80458b19bbdfa18deed89e2c5e1e55ad9d2a47a1a3617d277c7b9"
+    },
+    {
+      "path": "sprites/water-arc.png",
+      "bytes": 12687,
+      "sha256": "066e719d1e94a3e7498e66c633fe2c50eb0aa06af1763f4b40305a810a6349c7"
+    },
+    {
+      "path": "sprites/water-atlas.png",
+      "bytes": 141193,
+      "sha256": "2a79fe5783a327d00efc8e54ea68f0982656d7771b297bab6daf8951e0a791c8"
+    },
+    {
+      "path": "sprites/water-contact-sheet.png",
+      "bytes": 136525,
+      "sha256": "cecb22dc294c583d2b1782124af622f02313bc8bf7bafb06789b608c48601a79"
+    },
+    {
+      "path": "sprites/water_arc-sheet.png",
+      "bytes": 40863,
+      "sha256": "4ceaa6454ff696db0bef95763f4acff5089a0e7c96f8800f4646eb88985fe496"
+    },
+    {
+      "path": "sprites/water_arc.png",
+      "bytes": 12687,
+      "sha256": "066e719d1e94a3e7498e66c633fe2c50eb0aa06af1763f4b40305a810a6349c7"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 40767,
+      "sha256": "68d3a2c658fe798d49a4ad615dfa844d6510811b0100475ea8ecd5c3235f15fc"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 34038,
+      "sha256": "a6acb129e6bdd108aa9d02b5823b1a6a63cb24a5582fc16d553601c64ab77e17"
+    },
+    {
+      "path": "verification/build.json",
+      "bytes": 1439,
+      "sha256": "ec393558b5ea87cc6ca1fb6dd4443b28b08697fbf416470e142f84c3f285919e"
+    },
+    {
+      "path": "verification/carry_cat.png",
+      "bytes": 39767,
+      "sha256": "2d31ccc11a8327db1cc82933af280f37f5b9b3f9cc7f7a10040f37027fb09a60"
+    },
+    {
+      "path": "verification/carry_child.png",
+      "bytes": 39323,
+      "sha256": "c9e0527c047a31f643d87a22320f643c3ca6c87fb23120c719f48eac04d6339b"
+    },
+    {
+      "path": "verification/crouch_walk.png",
+      "bytes": 49358,
+      "sha256": "811de3d44f947d6dccf29b5e4260d6f15a3d2358bc8617da302d92de8d858913"
+    },
+    {
+      "path": "verification/gltf-validator.json",
+      "bytes": 5110,
+      "sha256": "12ef739fad2354463a16f8cc3c8b8f2f83c3edb75769e8bbb17729b5e847da54"
+    },
+    {
+      "path": "verification/idle_ready.png",
+      "bytes": 38792,
+      "sha256": "c9e96392f2a5f2d092b39f8c63045de7c3c9e0d80701f6bf18edd6f35e3dea38"
+    },
+    {
+      "path": "verification/motion-qa.json",
+      "bytes": 11242,
+      "sha256": "c15b308d4fc2a9992fa4120d69573afb4f9c390c6110908c43cd10f9d10a8b52"
+    },
+    {
+      "path": "verification/open_door.png",
+      "bytes": 31601,
+      "sha256": "db8e258c3a12f31943f2a72b04ac002e953f1e21bd9c4839434ef5d9f7af68bf"
+    },
+    {
+      "path": "verification/preview-desktop.png",
+      "bytes": 118467,
+      "sha256": "9b1639825f17a80836538657a530bea699c65a1c1fce13f5f8532018d5e899ae"
+    },
+    {
+      "path": "verification/preview-mobile-spray.png",
+      "bytes": 75919,
+      "sha256": "8e4dd3b7e3e66749a766fcad41f12b35f95d28c5e4acbd4faed4635770f8483d"
+    },
+    {
+      "path": "verification/preview-mobile.png",
+      "bytes": 81303,
+      "sha256": "2b2ecde8b23899461f402ca45a7a6d74aebe4ad3087a2f4aa3f6121614d47c0c"
+    },
+    {
+      "path": "verification/preview.mjs",
+      "bytes": 1881,
+      "sha256": "6b4531d21b8b476fca94cc342f85993353f721dc80974109bb5944ef5135c56e"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--carry_cat.html",
+      "bytes": 13764,
+      "sha256": "4a9d813736fd5ca040b6baa24d6c4bd447f6d9d93ab216f9dd081ad459eb6ed9"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--carry_cat.json",
+      "bytes": 11182,
+      "sha256": "3af5f66d2c7cba902cf3c773fcf88a6a6e05e8ecc7df05161024e58f9ff03486"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--carry_child.html",
+      "bytes": 13778,
+      "sha256": "b2ba34530f3d3b700d41ae829c522196551da0dff236b9780c99b8e35e083db1"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--carry_child.json",
+      "bytes": 11200,
+      "sha256": "262ae4f13fef8b6e3952c2b292bd59c863dd1ea0cf2c5f2c319090805b081931"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--child_reassured.html",
+      "bytes": 12400,
+      "sha256": "2eef701f2c4085f8c0db2387e23e2e36bbeb5af976383ec8ef8850990fb37886"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--child_reassured.json",
+      "bytes": 9357,
+      "sha256": "e1c59159500759118afca245faf9c99119e5ef99a9740cb7b2d66ae3cf11f7c8"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--crouch_walk.html",
+      "bytes": 13726,
+      "sha256": "68e7fdc0c2a2b88c6dcc4c3dcf6e4338c1041638d6f3303bb568d64939475e13"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--crouch_walk.json",
+      "bytes": 10796,
+      "sha256": "70db5e0925199ebb6ac47b5d5c1827a0245bd9107c8993dbb6d4f771f6ac03ec"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--idle_crouch.html",
+      "bytes": 12344,
+      "sha256": "044ff4888410c9f26015757aca38d557c57d18ba7366ed33c53e20702eb7b94c"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--idle_crouch.json",
+      "bytes": 9240,
+      "sha256": "8ab65665aa41fd616cd3b3d18f83f96de2281e154a96ed7e69a5773877ef3948"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--idle_ready.html",
+      "bytes": 12334,
+      "sha256": "af9806f2ff30df7ba0b522ec473ffa7d3221841708ac22296be481e74a9a7c8d"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--idle_ready.json",
+      "bytes": 9102,
+      "sha256": "437da9c61e1e0d7c3254b7e783d55536dfdb70ff7a71e6f993325fc9b6bebc6a"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--open_door.html",
+      "bytes": 12438,
+      "sha256": "ede4f5538a9f15a79fc083205d1598988a6cb05ac8794249727c727487addc45"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--open_door.json",
+      "bytes": 10017,
+      "sha256": "885c7b99784a657643262e3bc87861e25433f9607ae2661ca5f4e105233302d6"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--rescued_handoff.html",
+      "bytes": 12529,
+      "sha256": "dec5820fe1c2829542cca33690ebaa8fd195c3024e8eb8115a8e28bb7195f514"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--rescued_handoff.json",
+      "bytes": 9975,
+      "sha256": "5a18ab5b9ee8bacf399bc63f87831474100a545971216710d3632656c0088f2d"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--run.html",
+      "bytes": 13468,
+      "sha256": "35926286b91996a52108f2a7bb681502446304ab7bb4752a24d7e29c62e36d33"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--run.json",
+      "bytes": 11153,
+      "sha256": "3570e84195e348dc86d6dcc6653493d3af59d8bd3438ef01a39c5bbed556eebf"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--spray_crouch.html",
+      "bytes": 12448,
+      "sha256": "9af550353976cbf7953b3b9967af35a872bfa56207f7354fb36d7e0e0ddf09d0"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--spray_crouch.json",
+      "bytes": 9440,
+      "sha256": "b582bc7eb0a8b535632bee5895583b06686b450d9c18c4695d649dad29d8633e"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--spray_stand.html",
+      "bytes": 12472,
+      "sha256": "c749acfdeb61f7658ec646c77018c35761ec386c6c8b09489680c3fb490d040e"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--spray_stand.json",
+      "bytes": 9473,
+      "sha256": "5fe0d6815a05eb2b927fb759185040513ed02c1bc78f84759931ac35c4f67ebd"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--walk.html",
+      "bytes": 13732,
+      "sha256": "2770508ec93c8bad07a9a01c8339550a716b1240b7682f5d46f20bcd1b707bb1"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--walk.json",
+      "bytes": 11313,
+      "sha256": "7edd18093a9e61fde7d59d1a04b43214a975dd67597ff3dd71e2f72a689dec87"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--wave_victory.html",
+      "bytes": 12390,
+      "sha256": "d1d5543662166b75ec69857b124fd9c6a2fcf1780eb2b16aa621845810505e7b"
+    },
+    {
+      "path": "verification/qa/clips/firefighter-v1--wave_victory.json",
+      "bytes": 9304,
+      "sha256": "5c746ccc7325be166ebd615a1a3a8f388876fcd45526642ee8850eb5c3afb8cd"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "bytes": 29874,
+      "sha256": "51d25d1c7b87b5722fab65849a229fbe8fe03e93fb1064c3216c0eb2750fe389"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "bytes": 122000,
+      "sha256": "9c2198deb26afacbbc98b67549119071931695b25b0eacf76b187ded8ab2237a"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--carry_cat.svg",
+      "bytes": 26235,
+      "sha256": "ab21f559d6b443b7a922ce93d7ac6f1ff033ee73dd6589695c95f3f8978bda40"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--carry_child.svg",
+      "bytes": 26239,
+      "sha256": "68a1033d738e1fffd7a824e67a0d9dd5b436dccf028ef0963abdd29a24732df7"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--child_reassured.svg",
+      "bytes": 26223,
+      "sha256": "88d913ebfc573969f25d2c65e1dbb087f2dbbb719b7bdac20c9268d85391a8f5"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--crouch_walk.svg",
+      "bytes": 26239,
+      "sha256": "be2d2588e578d8c899e4096a4ab824ae8f9febfa2770ba3d39e70b9d4d4b7074"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--idle_crouch.svg",
+      "bytes": 26239,
+      "sha256": "1ec0c7b59067f45c9c4f46e8427eb48faa01133aadff2e876772bdddf9ce893d"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--idle_ready.svg",
+      "bytes": 26221,
+      "sha256": "713b9f2d19f61fdbcf8036b3d29e849bd08e3b2ed9fa9fd83a531dffad628364"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--open_door.svg",
+      "bytes": 26219,
+      "sha256": "585e43bcbe33900fe580b00a5dbc978e58fd234f35fab02d19163ccf2fda1094"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--rescued_handoff.svg",
+      "bytes": 26231,
+      "sha256": "6ac90ff991c664225faf67d1de0db7478ca006ec12179460a56a7fcced624e7d"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--run.svg",
+      "bytes": 26223,
+      "sha256": "e58fae4662d9c92ce96737e8e9e8d6a454c3d2debee0a2fd64f7479a76ea1688"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--spray_crouch.svg",
+      "bytes": 26237,
+      "sha256": "2142a858f0798dc21a70e565362cf7f57b6a978fe704222bf19f6b3e65a82087"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--spray_stand.svg",
+      "bytes": 26231,
+      "sha256": "77ef28bb6ed97a20aa9f9f5da3e01f413eb955ddbd190e5befcfa0293d1965d4"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--walk.svg",
+      "bytes": 26225,
+      "sha256": "7353db5a0901e1a102f3a2d81309e00f857c4ab28ac0b6efb2922e2410625e27"
+    },
+    {
+      "path": "verification/qa/sheets/firefighter-v1--wave_victory.svg",
+      "bytes": 26207,
+      "sha256": "de7a2414710623e8b3a4430b3079dc0b0e219221fb3aaf1f647708c42c16f1df"
+    },
+    {
+      "path": "verification/rescued_handoff.png",
+      "bytes": 40856,
+      "sha256": "ebb0556e2441d18bb8b61b6e7464357e8fde936a3c0c4c3a4469578dd958efb6"
+    },
+    {
+      "path": "verification/run.png",
+      "bytes": 39693,
+      "sha256": "e8830b4e44922f5af33b89910a471f0f02a04ae6762b067a71b140f4651dc9e0"
+    },
+    {
+      "path": "verification/spray-stand.png",
+      "bytes": 118580,
+      "sha256": "0115bc1ffb1c5135682bef2c00394c0fafe95614e257a7e73f16c4fcd164a5f4"
+    },
+    {
+      "path": "verification/spray_crouch.png",
+      "bytes": 34269,
+      "sha256": "9bf7de9c89c5194f8bfada5a3c2368ce8ff7e812f9fc70b536f3582cef8ae762"
+    },
+    {
+      "path": "verification/spray_stand.png",
+      "bytes": 36435,
+      "sha256": "8750b3ea735db8784a4981e005dda78bc2d3ceab9e50b95e13782f5a5585aade"
+    },
+    {
+      "path": "verification/style.css",
+      "bytes": 2672,
+      "sha256": "a5ceee56a52e68e24f2a37bd67434153c91ce37430e3d4676973129b53f0bd83"
+    },
+    {
+      "path": "verification/walk.png",
+      "bytes": 39373,
+      "sha256": "f1d83474a2ff371fd300d981bd2c92b99cb1922621a475ea849b7d20c1769746"
+    },
+    {
+      "path": "verification/wave_victory.png",
+      "bytes": 39387,
+      "sha256": "d32f9cd142468a9a5181ae25251228ab9afed93702ed9573653a188038118298"
+    }
+  ],
+  "totalBytesExcludingThisInventory": 5779113
+}

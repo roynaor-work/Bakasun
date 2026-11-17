@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>תחנת הצלה · כבאי v1</title>
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./preview.html" aria-label="תחנת הצלה — התחלה"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 28a15 15 0 0 1 30 0v6H9Z" fill="#ffcb42"/><path d="M21 10h6v24h-6Z" fill="#fff0aa"/><path d="M5 31h38v6H5Z" fill="#e4a328"/><path d="M14 37v5h20v-5" fill="none" stroke="currentColor" stroke-width="3"/></svg><span>תחנת הצלה<small>ספריית דמות ותנועה · 01</small></span></a>
+    <nav aria-label="קובצי המסירה"><a href="./REPORT.md">דוח מסירה</a><a href="./verification/qa/report.html">מדידת תנועה</a></nav>
+  </header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">נכנסים פנימה. יוצאים יחד.</p><h1>מוכנים להציל.</h1><p>תלבושת אחת, אחת־עשרה תנועות והרבה מים.</p></div><span class="edition">FIREFIGHTER<br><b>V.01</b></span></div>
+    <div class="workbench">
+      <aside class="library" aria-label="בחירת תנועה"><div class="library-head"><h2>התנועות</h2><span>11</span></div><div id="clip-list"></div></aside>
+      <section class="workspace" aria-label="תצוגה תלת ממדית">
+        <div class="stage">
+          <canvas id="stage" aria-label="כבאי בתלבושת אדומה וקסדה צהובה מדגים את התנועה הנבחרת"></canvas>
+          <div class="stage-top"><span id="mode">תצוגת דמות</span><span class="status"><i></i><b id="load-status">טוען ציוד…</b></span></div>
+          <div class="views" aria-label="זווית צפייה"><button data-view="three" aria-pressed="true">¾</button><button data-view="front" aria-pressed="false">חזית</button><button data-view="side" aria-pressed="false">צד</button><button data-view="back" aria-pressed="false">גב</button></div>
+          <div class="stage-bottom"><span id="subject-status">תלבושת כבאי על הגוף האחיד</span><span id="triangle-count"></span></div>
+          <p id="error" role="alert" hidden></p>
+        </div>
+        <div class="transport"><button id="play" class="primary" aria-label="השהיית התנועה">השהיה</button><button id="restart" aria-label="התחלה מחדש">↺</button><input id="scrub" type="range" min="0" max="72" step="1" value="0" aria-label="פריים בתנועה"><output id="clock">0.00 / 2.40</output><label for="speed" class="sr-only">מהירות ניגון</label><select id="speed" aria-label="מהירות ניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select></div>
+        <div class="clip-info"><div><p class="eyebrow" id="clip-code">IDLE_READY</p><h2 id="clip-title">מוכנים להצלה</h2><p id="clip-description"></p></div><div class="score"><b id="score">—</b><span>מדד תנועה</span></div></div>
+        <div class="events" id="events" aria-label="אירועי התנועה"></div>
+        <details class="options"><summary>תלבושת, דמויות ותצוגה</summary><div class="option-grid"><label><input id="mask" type="checkbox" checked> מסכת חמצן</label><label><input id="hose-line" type="checkbox"> קו מרכז לצינור</label><label><input id="skeleton" type="checkbox"> הצגת השלד</label><label><input id="reactions" type="checkbox" checked> דמויות ותגובות חילוץ</label><label>גוף <select id="body"><option value="soccer">אחיד</option><option value="guard">נמוך</option><option value="wing">גבוה</option><option value="center">רחב וגבוה</option></select></label><label>תקציב סצנה <input id="budget" type="number" value="12000" min="0" max="100000" step="500" inputmode="numeric"></label><label>צבע המעיל <input id="coat-color" type="color" value="#e54935"></label><button id="reaction-play" type="button">תגובה לכבאי ↺</button></div><p id="budget-note" class="muted"></p></details>
+      </section>
+    </div>
+    <section class="water-library" aria-labelledby="water-title"><div><p class="eyebrow">אפקטים שקופים, באותה שפה</p><h2 id="water-title">המים עושים את שלהם.</h2><p>קשת מים · טיפות · נתז על חפץ · אדים</p><a href="./sprites/water-contact-sheet.png">גיליון כל הפריימים</a><a href="./sprites/atlas.json">מפת הספרייטים</a></div><div class="sprite-demo"><img id="water-sprite" src="./sprites/water-arc.png" alt="סילון מים בהיר בצורת קשת"><div><span>08 פריימים / מים</span><span>06 פריימים / אדים</span></div></div></section>
+  </main>
+  <footer><span>נכסים מקוריים · CC0 · 18 עצמות · 30 הרץ</span><a href="./LICENSES.md">מקור ורישוי</a><a href="./manifest.json">manifest.json</a></footer>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>
