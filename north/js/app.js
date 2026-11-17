@@ -100,13 +100,13 @@ function homeHtml() {
     <div class="wrap">
       <span class="kicker">צומת הגומא · הגליל העליון</span>
       <h1>מארז שמרגישים<br>עוד לפני <em>שפותחים</em></h1>
-      <p>וויסקי, קוקטיילים, יין ופינוק מהצפון, ארוזים כמו שצריך. בוחרים מארז מוכן או בונים אחד לבד, ואנחנו כותבים את הברכה ביד.</p>
+      <p>וויסקי, קוקטיילים, יין ופינוק מהצפון, ארוזים כמו שצריך. בוחרים מארז מוכן או בונים אחד לבד, ואנחנו מדפיסים את הברכה על הכרטיס.</p>
       <div class="cta"><a class="btn gold" href="#/#catalog">לכל המארזים</a><a class="btn ghost" href="#/#build">בונים מארז לבד</a></div>
     </div>
   </section>
   <div class="trust"><div class="wrap">
     <div><span class="i">${icon('truck')}</span><span><b>משלוח באזור</b>עד 40 דקות מצומת הגומא</span></div>
-    <div><span class="i">${icon('gift')}</span><span><b>אריזת מתנה</b>וכרטיס ברכה בכתב יד</span></div>
+    <div><span class="i">${icon('gift')}</span><span><b>אריזת מתנה</b>וכרטיס ברכה מודפס</span></div>
     <div><span class="i">${icon('pen')}</span><span><b>חריטה אישית</b>על פלאסקים וכוסות</span></div>
     <div><span class="i">${icon('lock')}</span><span><b>תשלום מאובטח</b>אשראי, ביט או באיסוף</span></div>
   </div></div>
@@ -120,7 +120,7 @@ function homeHtml() {
     <div class="sechead reveal"><div><h2>המארזים${occName ? ` · ${esc(occName)}` : ''}</h2><p>כל מארז נארז אצלנו בחנות. הבקבוקים מהמדף, התוספות מיצרנים שאנחנו עובדים איתם.</p></div>
       <a class="more" href="#/#build">רוצים משהו אחר? בונים לבד ←</a></div>
     <div id="occslot">${occBanner()}</div>
-    <div class="promise reveal"><span>${icon('clock')} מזמינים היום, המארז מוכן לאיסוף תוך יום עסקים. משלוח באזור תוך יומיים.</span><span>${icon('shield')} פגם או טעות במארז? מחליפים או מחזירים את הכסף, ואוספים על חשבוננו.</span></div>
+    <div class="promise reveal"><span>${icon('clock')} המארז מוכן לאיסוף תוך יום עסקים, לפי מלאי קיים או בהסכמה להחלפה, ואספקה לא באותו יום. משלוח באזור תוך יומיים.</span><span>${icon('shield')} פגם או טעות במארז? מחליפים או מחזירים את הכסף, ואוספים על חשבוננו.</span></div>
     <div class="chips" id="chips">${chipsHtml()}</div>
     <div class="grid" id="grid">${catalogHtml()}</div>
   </div></section>
@@ -129,8 +129,8 @@ function homeHtml() {
     <div class="sechead reveal"><div><h2>איך זה עובד</h2></div></div>
     <ol class="steps3 reveal">
       <li><span class="i">${icon('gift')}</span><b>בוחרים</b><span>מארז מוכן מהרשימה, או בונים אחד לבד: בקבוק, תוספות, אריזה.</span></li>
-      <li><span class="i">${icon('hands')}</span><b>אנחנו אורזים</b><span>בחנות, ביד. כותבים את הברכה על הכרטיס ואורזים בקופסה או בשקית שבחרתם.</span></li>
-      <li><span class="i">${icon('pin')}</span><b>אוספים או מקבלים</b><span>איסוף מהחנות בצומת הגומא תוך יום עסקים, או משלוח באזור תוך יומיים.</span></li>
+      <li><span class="i">${icon('hands')}</span><b>אנחנו אורזים</b><span>בחנות, ביד. מדפיסים את הברכה על הכרטיס ואורזים בקופסה או בשקית שבחרתם.</span></li>
+      <li><span class="i">${icon('pin')}</span><b>אוספים או מקבלים</b><span>איסוף מהחנות בצומת הגומא תוך יום עסקים (לפי מלאי קיים או בהסכמה להחלפה, לא באותו יום), או משלוח באזור תוך יומיים.</span></li>
     </ol>
   </div></section>
 
@@ -167,7 +167,7 @@ function homeHtml() {
       <h2 style="font-size:clamp(30px,3.6vw,44px);color:#fff;margin:12px 0 16px">חנות אלכוהול בצומת הגומא, עם נוף להרי נפתלי</h2>
       <p>הרוח הצפונית היא חנות משקאות ובר בצומת הגומא. מדף וויסקי שלא נגמר, יינות מהיקבים של הגליל והגולן, ג׳ינים שקשה למצוא, ואנשים שיודעים להתאים בקבוק לאדם. המארזים נולדו מהשאלה שאנחנו שומעים כל יום: "מה לקנות לו?"</p>
       <p>כל מארז נבנה בחנות: הבקבוק מהמדף, התוספות מיצרנים מקומיים ומיבואנים שאנחנו עובדים איתם שנים, והאריזה נסגרת ביד. מגיעים, טועמים, לוקחים. או מזמינים מכאן ואנחנו שולחים.</p>
-      <div class="stats"><div><b>600+</b><span>משקאות על המדף</span></div><div><b>12</b><span>מארזים מוכנים</span></div><div><b>∞</b><span>שילובים בהרכבה</span></div></div>
+      <div class="stats"><div><b>כמעט 2,000</b><span>מוצרים במגוון</span></div><div><b>12</b><span>מארזים מוכנים</span></div><div><b>∞</b><span>שילובים בהרכבה</span></div></div>
     </div>
   </div></div></section>
 
@@ -198,7 +198,7 @@ function buildSumHtml() {
   const rows = [base, ...addons, pack].filter(Boolean);
   return `<h3>המארז שלכם</h3>
     ${rows.length ? `<ul>${rows.map(r => `<li><span class="row-ic">${icon(r.icon, 'sm')} ${esc(r.name)}</span><span class="num">${r.price ? C.fmt(r.price) : 'כלול'}</span></li>`).join('')}</ul>` : `<p class="empty">עוד לא בחרתם. מתחילים מהבקבוק.</p>`}
-    <div class="field"><label for="bnote">ברכה לכרטיס (אנחנו כותבים ביד)</label><textarea id="bnote" maxlength="140" placeholder="למשל: לאבא, שיהיה טעים. אוהבים.">${esc(state.build.note)}</textarea>
+    <div class="field"><label for="bnote">ברכה לכרטיס (אנחנו מדפיסים)</label><textarea id="bnote" maxlength="140" placeholder="למשל: לאבא, שיהיה טעים. אוהבים.">${esc(state.build.note)}</textarea>
       <div class="cardprev ${state.build.note.trim() ? '' : 'hide'}" id="bcardprev"><div class="cardtxt" id="bcardtxt">${esc(state.build.note)}</div><span>הרוח הצפונית · צומת הגומא</span></div></div>
     <div class="tot"><span>סה"כ</span>${money(price)}</div>
     <button class="btn gold wide" id="baddbtn" ${base ? '' : 'disabled'}>הוספה לסל</button>
@@ -233,7 +233,7 @@ function productHtml(p) {
           <div class="engprev" aria-live="polite"><svg viewBox="0 0 220 120" aria-hidden="true"><defs><linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#6b6b70"/><stop offset=".45" stop-color="#d9d9de"/><stop offset="1" stop-color="#7a7a80"/></linearGradient></defs><rect x="92" y="4" width="36" height="12" rx="3" fill="#9a9aa0"/><rect x="30" y="14" width="160" height="100" rx="18" fill="url(#fl)"/><rect x="38" y="22" width="144" height="84" rx="14" fill="none" stroke="rgba(255,255,255,.25)"/></svg><div class="engtxt" id="engtxt">${esc(pstate.engrave) || 'הטקסט שלכם'}</div><small>העיצוב הסופי של החריטה עשוי להשתנות מעט</small></div></div>` : ''}
         ${p.kosher === false ? `<div class="nkbox"><b>לא כשר.</b> ${esc(p.kosherNote || 'המארז כולל מוצר ללא הכשר.')} אפשר לבקש החלפה בהערות להזמנה.</div>` : ''}
         <div class="contents"><h2>מה במארז</h2><ul>${p.contents.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-        <div class="field"><label for="pnote">ברכה לכרטיס (לא חובה) <span class="cnt" id="notecnt">${pstate.note.length} / 140</span></label><textarea id="pnote" maxlength="140" placeholder="אנחנו כותבים אותה ביד על הכרטיס">${esc(pstate.note)}</textarea>
+        <div class="field"><label for="pnote">ברכה לכרטיס (לא חובה) <span class="cnt" id="notecnt">${pstate.note.length} / 140</span></label><textarea id="pnote" maxlength="140" placeholder="אנחנו מדפיסים אותה על הכרטיס">${esc(pstate.note)}</textarea>
           <div class="cardprev ${pstate.note ? '' : 'hide'}" id="cardprev"><div class="cardtxt" id="cardtxt">${esc(pstate.note)}</div><span>הרוח הצפונית · צומת הגומא</span></div></div>
         <div class="incl big">${INCLUDED.map(x => `<span>${icon('check', 'sm')}${x}</span>`).join('')}</div>
         <div class="buyrow">
