@@ -1,0 +1,517 @@
+{
+  "pass": true,
+  "validatorVersion": "2.0.0-dev.3.10",
+  "budgetBytes": 3000000,
+  "folderAtValidation": {
+    "bytes": 1849487,
+    "files": 50
+  },
+  "glbBytes": 648464,
+  "assetCount": 29,
+  "khronosTotals": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "hints": 0
+  },
+  "buildings": {
+    "count": 8,
+    "minTriangles": 88,
+    "maxTriangles": 236
+  },
+  "canonicalContractMatchesSource": true,
+  "motion": [
+    {
+      "id": "pedestrian-coral",
+      "joints": 18,
+      "clip": "walk",
+      "sampleHz": 30,
+      "keyframes": 33,
+      "durationSeconds": 1.0666666666666667,
+      "independentPlaybackSamples": 129,
+      "playbackSampleHz": 120,
+      "minSkinnedYMeters": -0.00044859376770788414,
+      "maxStanceSoleErrorMeters": 0.00044859376770788414,
+      "maxFootTargetErrorMeters": 0.0044236323311200604,
+      "maxLoopMeshDistanceMeters": 5.0676521380147534e-8,
+      "maxFootLiftMeters": 0.12875103880308525,
+      "note": "In-place stance paths are linear at -0.90 m/s; translate actor +Z at 0.90 m/s for ground contact."
+    },
+    {
+      "id": "pedestrian-mint",
+      "joints": 18,
+      "clip": "walk",
+      "sampleHz": 30,
+      "keyframes": 33,
+      "durationSeconds": 1.0666666666666667,
+      "independentPlaybackSamples": 129,
+      "playbackSampleHz": 120,
+      "minSkinnedYMeters": -0.00044859376770788414,
+      "maxStanceSoleErrorMeters": 0.00044859376770788414,
+      "maxFootTargetErrorMeters": 0.0044236323311200604,
+      "maxLoopMeshDistanceMeters": 5.0676521380147534e-8,
+      "maxFootLiftMeters": 0.12875103880308525,
+      "note": "In-place stance paths are linear at -0.90 m/s; translate actor +Z at 0.90 m/s for ground contact."
+    },
+    {
+      "id": "pedestrian-sun",
+      "joints": 18,
+      "clip": "walk",
+      "sampleHz": 30,
+      "keyframes": 33,
+      "durationSeconds": 1.0666666666666667,
+      "independentPlaybackSamples": 129,
+      "playbackSampleHz": 120,
+      "minSkinnedYMeters": -0.00044859376770788414,
+      "maxStanceSoleErrorMeters": 0.00044859376770788414,
+      "maxFootTargetErrorMeters": 0.0044236323311200604,
+      "maxLoopMeshDistanceMeters": 5.0676521380147534e-8,
+      "maxFootLiftMeters": 0.12875103880308525,
+      "note": "In-place stance paths are linear at -0.90 m/s; translate actor +Z at 0.90 m/s for ground contact."
+    }
+  ],
+  "clearance": {
+    "tunnelClearanceRays": 9,
+    "tunnelWallsAndCeilingPresent": true,
+    "bridgeRoadClear": true,
+    "bridgeUnderpassClear": true,
+    "bridgeDeckPresent": true
+  },
+  "assets": [
+    {
+      "id": "house-coral",
+      "bytes": 11448,
+      "sha256": "267aab94705c2b23d495ea458e146eededa89aca5345360a2a4011e972f087d4",
+      "triangles": 128,
+      "vertices": 258,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.03639996812343327,
+      "maxNormalLengthError": 2.131024401386128e-8
+    },
+    {
+      "id": "shop-mint",
+      "bytes": 16540,
+      "sha256": "bb58eff6f3d3be92288aeec92b08d939bc75c03e03be617c843ff0da91045b02",
+      "triangles": 194,
+      "vertices": 388,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0024500120163111205,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "apartment-sun",
+      "bytes": 19812,
+      "sha256": "e76e442059f6b28ded690cd7ddbf9e663c05dff6892579e540e2b307c86a8178",
+      "triangles": 236,
+      "vertices": 472,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.009499987840655422,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "office-blue",
+      "bytes": 17624,
+      "sha256": "14f85e5e5265a7b01892a72ecaa2c62a8a5c0f5e3a1fa0afa6eda02f31980f41",
+      "triangles": 208,
+      "vertices": 416,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.10800041031836827,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "villa-lilac",
+      "bytes": 11624,
+      "sha256": "c2e582688a87ae52a5091ebdac7affe40577b4e207497a8de9244e1ec2cd98fd",
+      "triangles": 130,
+      "vertices": 262,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.09450004148483515,
+      "maxNormalLengthError": 1.3528667630602342e-8
+    },
+    {
+      "id": "market-peach",
+      "bytes": 16548,
+      "sha256": "7089cafb4ea730f2de5a623a07af7a5fa2f315ae43816fb0ab4300eb7ee0d42d",
+      "triangles": 194,
+      "vertices": 388,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.002449995326998078,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "workshop-teal",
+      "bytes": 8332,
+      "sha256": "ad0fb7fc2b682741e2cdb37a89f3f5de4f23ac86f0bb7ddf59507eb87415c95f",
+      "triangles": 88,
+      "vertices": 178,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.06155994266509879,
+      "maxNormalLengthError": 1.0135867256622078e-8
+    },
+    {
+      "id": "civic-cream",
+      "bytes": 14504,
+      "sha256": "3c781dc686fbf3308cdd155d102ecd52e3dc4863ab6b2fbb5947724b8601a0dd",
+      "triangles": 168,
+      "vertices": 336,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.05760003080368392,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "traffic-light",
+      "bytes": 10368,
+      "sha256": "d8764b296229341521e5a9804057927bc04242da61345332840998168744c114",
+      "triangles": 126,
+      "vertices": 228,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.001014823172836743,
+      "maxNormalLengthError": 2.853428426874416e-8
+    },
+    {
+      "id": "street-lamp",
+      "bytes": 8956,
+      "sha256": "110f520bbdfa5969940f984ba1925ce5f23318725892d16c51eda483f146e419",
+      "triangles": 108,
+      "vertices": 192,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0004193912822865187,
+      "maxNormalLengthError": 1.711427100037355e-8
+    },
+    {
+      "id": "bridge-span",
+      "bytes": 20116,
+      "sha256": "b473e13053eb17ece156fa62d997e48b95d933325e09a853cbfe6bb632014cf7",
+      "triangles": 240,
+      "vertices": 480,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0005999982446431851,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "tunnel-segment",
+      "bytes": 15472,
+      "sha256": "799897c7e44cf270d19440352874e72fa8790babbfc3e38f2ab0201f2aa76033",
+      "triangles": 180,
+      "vertices": 360,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.009000009208917525,
+      "maxNormalLengthError": 2.5092692146344575e-8
+    },
+    {
+      "id": "car-compact",
+      "bytes": 25216,
+      "sha256": "e100b887445326ae7854a02240030ce7365eb840ea458a44e1d98e443c9c3fb6",
+      "triangles": 338,
+      "vertices": 604,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.001343216509315159,
+      "maxNormalLengthError": 2.853428426874416e-8
+    },
+    {
+      "id": "car-sedan",
+      "bytes": 25208,
+      "sha256": "16f4ddd179c22c70e73bb0a04b3de5525034592d79f8212f0854902257d6d3e5",
+      "triangles": 338,
+      "vertices": 604,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0013432191692731503,
+      "maxNormalLengthError": 2.853428426874416e-8
+    },
+    {
+      "id": "car-wagon",
+      "bytes": 25232,
+      "sha256": "ce5de070404fcc5682e9860af17e926356a92c5899fc2a9d643d3a52be677b4a",
+      "triangles": 338,
+      "vertices": 604,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0013432160899642673,
+      "maxNormalLengthError": 3.9770212900691604e-8
+    },
+    {
+      "id": "car-van",
+      "bytes": 26156,
+      "sha256": "47d8fd0d92531d46a75ab1f59ded995cfac9f293dc66c8a65b30b0fccee16148",
+      "triangles": 350,
+      "vertices": 628,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0013432191692731503,
+      "maxNormalLengthError": 2.853428426874416e-8
+    },
+    {
+      "id": "car-pickup",
+      "bytes": 28968,
+      "sha256": "4b611da1261cab139a96c19541f57700f6e34c1c2c7964cc01c4a9714221e5cf",
+      "triangles": 386,
+      "vertices": 700,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0013432191692731503,
+      "maxNormalLengthError": 2.853428426874416e-8
+    },
+    {
+      "id": "tree-round",
+      "bytes": 7876,
+      "sha256": "9f027978cce56df7b2dfce0baa9aea7aa13ce55a4435251d193b99b7a681967a",
+      "triangles": 92,
+      "vertices": 162,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0039079394446179805,
+      "maxNormalLengthError": 3.354020405854641e-8
+    },
+    {
+      "id": "tree-column",
+      "bytes": 6240,
+      "sha256": "4883c5a7bf4e41e39de0d4e6b9fd176983de7a6d4d7497b8bb090a617c43a2c9",
+      "triangles": 68,
+      "vertices": 120,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0039079394446179805,
+      "maxNormalLengthError": 2.5400112568796374e-8
+    },
+    {
+      "id": "tree-pine",
+      "bytes": 7880,
+      "sha256": "e179b5370844b11e1c2bd75c2eeaf07ca66bb7e5283001c1f3e316d7a2eac573",
+      "triangles": 92,
+      "vertices": 162,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.00036060020795730674,
+      "maxNormalLengthError": 2.2980456870769217e-8
+    },
+    {
+      "id": "fence-picket",
+      "bytes": 11692,
+      "sha256": "78ec2a83d85b0d8f838a1f983b0c6ea2a18c570bbe25d58dfa3064bf0131c948",
+      "triangles": 132,
+      "vertices": 264,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.004500000245869162,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "fence-metal",
+      "bytes": 11700,
+      "sha256": "b810713d172eb5b35772c8f508fedda0e8476c58a0f52a13fdfc2e4068c76eaf",
+      "triangles": 132,
+      "vertices": 264,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0010124990746378515,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "cone-small",
+      "bytes": 8996,
+      "sha256": "c9a2b5a8c28c6b622d9a5a782103ae0ded8ac35b4cb69151b1b0ad79897490e3",
+      "triangles": 112,
+      "vertices": 192,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0002537058157017248,
+      "maxNormalLengthError": 1.711427100037355e-8
+    },
+    {
+      "id": "cone-tall",
+      "bytes": 8980,
+      "sha256": "e72e5e6f280f02590c69bc807246d3e28c95af54dd20f21d0dbbfa200c5bfc43",
+      "triangles": 112,
+      "vertices": 192,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0002537058157017248,
+      "maxNormalLengthError": 1.711427100037355e-8
+    },
+    {
+      "id": "pedestrian-coral",
+      "bytes": 86940,
+      "sha256": "4573d193d93a11a437c38a3ab94efa2fb5185388ff45fc8619088018381b76df",
+      "triangles": 668,
+      "vertices": 1148,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.00005742186326533616,
+      "maxNormalLengthError": 1.711427100037355e-8
+    },
+    {
+      "id": "pedestrian-mint",
+      "bytes": 89424,
+      "sha256": "6d423da8fcdf88a019dea885a6fa05f6a62006d3e9f1e65017bf0ea4d1bdba51",
+      "triangles": 692,
+      "vertices": 1190,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.00005742186326533616,
+      "maxNormalLengthError": 2.479842131641874e-8
+    },
+    {
+      "id": "pedestrian-sun",
+      "bytes": 89780,
+      "sha256": "9b44ca87e6ce57f80ab474bfc02ce866e0ec951bd49ae16fb1f1706b798be176",
+      "triangles": 696,
+      "vertices": 1196,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.00005742186326533616,
+      "maxNormalLengthError": 1.711427100037355e-8
+    },
+    {
+      "id": "road-straight",
+      "bytes": 7012,
+      "sha256": "e8d6e1dea9d181b11561e0d69587ca1ef82e65be7ef6560b5d46da2315c3369d",
+      "triangles": 72,
+      "vertices": 144,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.0004499999240040742,
+      "maxNormalLengthError": 0
+    },
+    {
+      "id": "road-crossing",
+      "bytes": 9820,
+      "sha256": "10999afa40488fe2f385c03900533e0fd364c01988f127856a6217a28c21902b",
+      "triangles": 108,
+      "vertices": 216,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      },
+      "minTriangleAreaMetersSquared": 0.002149999512732037,
+      "maxNormalLengthError": 0
+    }
+  ]
+}

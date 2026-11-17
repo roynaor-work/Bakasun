@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#edf1e9">
+  <link rel="icon" href="data:,">
+  <title>תפוס את הפושע · עיר צבעונית</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main id="stage" aria-label="תצוגת עיר תלת ממדית">
+    <canvas id="city" tabindex="0" aria-label="תצוגת הנכסים. גרירה לסיבוב, גלילה לקירוב, חצים לסיבוב, Escape לחזרה."></canvas>
+    <header class="topbar">
+      <div class="identity">
+        <span class="city-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div><h1>תפוס את הפושע</h1><p>עיר קטנה. הרבה דרכים לגלות.</p></div>
+      </div>
+      <div class="tools">
+        <span class="edition">ערכת עיר <b>01</b></span>
+        <button id="reset" class="icon-button" aria-label="איפוס המבט" title="איפוס המבט">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg>
+        </button>
+        <button id="pause" class="icon-button" aria-label="השהיית תנועה" aria-pressed="false" title="השהיית תנועה">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path id="pause-path" d="M9 6v12M15 6v12"/></svg>
+        </button>
+      </div>
+    </header>
+    <div class="chapter" id="chapter"><span class="eyebrow">סיור בעיר</span><h2>נפגשים בצומת.</h2><p>שכונות צבעוניות, רחובות פתוחים וקצת תנועה.</p></div>
+    <aside id="selection" class="selection" hidden aria-live="polite">
+      <span id="asset-category" class="eyebrow"></span><h2 id="asset-title"></h2><p id="asset-detail"></p>
+      <div class="selection-actions"><button id="previous" aria-label="הנכס הקודם">→</button><button id="close">חזרה לסיור</button><button id="next" aria-label="הנכס הבא">←</button></div>
+    </aside>
+    <div id="loader" class="loader" role="status"><span class="spinner"></span><strong>בונים את הרחוב…</strong><span id="loading-count">0 / 29</span></div>
+    <div id="error" class="error" hidden role="alert"></div>
+    <div class="bottom-row">
+      <div class="hint"><span class="dot"></span><span id="hint-text">גרירה לסיבוב · הקשה לבדיקת נכס</span></div>
+      <nav aria-label="בחירת תצוגה">
+        <button data-mode="city" class="active" aria-pressed="true">העיר</button>
+        <button data-mode="building" aria-pressed="false">בניינים <small>8</small></button>
+        <button data-mode="vehicle" aria-pressed="false">מכוניות <small>5</small></button>
+        <button data-mode="pedestrian" aria-pressed="false">הולכי רגל <small>3</small></button>
+        <button data-mode="street" aria-pressed="false">ברחוב</button>
+      </nav>
+      <span id="asset-count" class="asset-count">29 נכסים</span>
+    </div>
+  </main>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>

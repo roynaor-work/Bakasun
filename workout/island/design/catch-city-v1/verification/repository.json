@@ -1,0 +1,36 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/catch-city-v1",
+  "deterministicBuild": {
+    "pass": true,
+    "files": 31,
+    "sha256BeforeEqualsAfter": true
+  },
+  "existingTrackedFilesChanged": [],
+  "repositoryTests": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "failure": {
+      "test": "tests/workout-royiki.test.mjs:91",
+      "reason": "Default Playwright Chromium executable is absent in the environment cache.",
+      "independentDefaultLaunchProbe": "same missing-executable error; independent of the new city folder",
+      "cleanup": "Existing browser test opens an HTTP server before browser launch and leaks it on launch failure. Its lingering child process was terminated after diagnosing the failure so the test runner could report its results."
+    },
+    "focusedRerun": {
+      "command": "ISLAND_PLAYWRIGHT=/workspace/Bakasun/audit/2026-11-05/tools/playwright-runtime.mjs node --test --test-timeout=60000 tests/workout-royiki.test.mjs",
+      "browser": "/usr/bin/chromium",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "adapter": "Existing audit adapter, read without changes; no existing source or test file changed."
+    }
+  },
+  "scope": "Only newly added files under workout/island/design/catch-city-v1/"
+}

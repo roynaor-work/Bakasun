@@ -1,0 +1,105 @@
+{
+  "pass": true,
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium ANGLE SwiftShader (software)",
+  "targetViewport": [
+    844,
+    390
+  ],
+  "additionalLayoutViewport": [
+    390,
+    844
+  ],
+  "loadedAssets": 29,
+  "externalRequests": [],
+  "failedRequests": [],
+  "errors": [],
+  "selfContainedFolderServer": true,
+  "modes": [
+    {
+      "mode": "city",
+      "selected": null,
+      "time": 0.18,
+      "paused": true,
+      "loaded": 29,
+      "drawCalls": 112,
+      "triangles": 9772
+    },
+    {
+      "mode": "building",
+      "selected": null,
+      "time": 0.18,
+      "paused": true,
+      "loaded": 29,
+      "drawCalls": 16,
+      "triangles": 1442
+    },
+    {
+      "mode": "vehicle",
+      "selected": null,
+      "time": 0.18,
+      "paused": true,
+      "loaded": 29,
+      "drawCalls": 10,
+      "triangles": 1810
+    },
+    {
+      "mode": "pedestrian",
+      "selected": null,
+      "time": 0.18,
+      "paused": true,
+      "loaded": 29,
+      "drawCalls": 6,
+      "triangles": 2092
+    },
+    {
+      "mode": "street",
+      "selected": null,
+      "time": 0.18,
+      "paused": true,
+      "loaded": 29,
+      "drawCalls": 26,
+      "triangles": 1730
+    }
+  ],
+  "inspectedAssets": 29,
+  "nativePlayback": [
+    {
+      "id": "pedestrian-coral",
+      "bones": 18,
+      "frames": 33,
+      "maxComponentError": 1.0123448890286824e-7
+    },
+    {
+      "id": "pedestrian-mint",
+      "bones": 18,
+      "frames": 33,
+      "maxComponentError": 1.0123448890286824e-7
+    },
+    {
+      "id": "pedestrian-sun",
+      "bones": 18,
+      "frames": 33,
+      "maxComponentError": 1.0123448890286824e-7
+    }
+  ],
+  "controls": {
+    "categoryTabs": true,
+    "previousNext": true,
+    "close": true,
+    "canvasPicking": true,
+    "dragOrbit": true,
+    "wheelZoom": true,
+    "keyboardOrbit": true,
+    "reset": true,
+    "pauseResume": true
+  },
+  "reducedMotionStartsPaused": true,
+  "missingAssetShowsError": true,
+  "screenshots": [
+    "city-844x390.png",
+    "building-844x390.png",
+    "pedestrian-844x390.png"
+  ],
+  "limits": "No physical phone or GPU timing claim. Portrait was checked for overflow and navigation, not full-scene framing."
+}
