@@ -42,6 +42,18 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   const input={};let pointerId=null,downAt=0,downPoint=null,moved=false,paused=false,disposed=false,frame=0,last,W=1,H=1,dpr=1,tutorialShown=false,tutorialDone=!tutorial,lowQuality=Boolean(ctx.lite);
   const scene=createScene({model,canvas,lite:lowQuality});
   const events=new AbortController(),options={signal:events.signal};
+  const contextRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireContextRecovery')!=='0';
+  let contextLost=false,contextTimer=null;
+  canvas.addEventListener('webglcontextlost',e=>{
+    if(!contextRecovery||disposed)return;e.preventDefault();contextLost=true;clear();last=undefined;audio.setPaused(true);
+    fade.dataset.state='in';fadeText.textContent=t('fire.v24.loading');fadeT=0;
+    if(contextTimer!==null)clearTimeout(contextTimer);
+    contextTimer=setTimeout(()=>{if(disposed||!contextLost)return;session.dispose();onDone?.(null,new Error('Fire interior WebGL context was not restored'));},15000);
+  },options);
+  canvas.addEventListener('webglcontextrestored',()=>{
+    if(!contextRecovery||disposed||!contextLost)return;contextLost=false;clearTimeout(contextTimer);contextTimer=null;last=undefined;audio.setPaused(paused);
+  },options);
+  events.signal.addEventListener('abort',()=>{if(contextTimer!==null)clearTimeout(contextTimer);contextTimer=null;},{once:true});
   const local=e=>{const r=canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};};
   const aimAt=p=>{const world=scene.pick(p.x,p.y);if(!world){delete input.aim;return;}const help=model.assist(world);input.aim=help.point;input.aimRaw=world;};
   canvas.addEventListener('pointerdown',e=>{if(paused||pointerId!==null||!tutorialDone)return;e.preventDefault();audio.unlock();pointerId=e.pointerId;downAt=performance.now();moved=false;downPoint={x:e.clientX,y:e.clientY};try{canvas.setPointerCapture(e.pointerId);}catch{}
@@ -100,7 +112,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   events.signal.addEventListener('abort',()=>{if(loadTimer!==null)clearTimeout(loadTimer);loadTimer=null;},{once:true});
   function tick(now){
     if(disposed)return;frame=requestAnimationFrame(tick);
-    const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(.1,elapsed/1000);last=now;
+    const elapsed=last===undefined?0:now-last,dt=paused||document.hidden||contextLost?0:Math.min(.1,elapsed/1000);last=now;
     if(dt>0){samples++;if(elapsed>40)slow++;fpsAcc+=elapsed;fpsN++;if(fpsN>=30){fps.push(Math.round(1000/(fpsAcc/fpsN)));if(fps.length>20)fps.shift();fpsAcc=fpsN=0;}if(samples>=90){if(slow>45&&!lowQuality){lowQuality=true;resize();}samples=slow=0;}}
     try{
       if(loadRecovery&&watchLoading())return;
@@ -114,12 +126,12 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   frame=requestAnimationFrame(tick);
   const session={
     model,scene,
-    get ready(){return scene.ready;},get loadFailed(){return scene.loadFailed;},
-    setPaused(v){paused=Boolean(v);audio.setPaused(paused);clear();last=undefined;},
+    get ready(){return scene.ready&&!contextLost;},get loadFailed(){return scene.loadFailed;},
+    setPaused(v){paused=Boolean(v);audio.setPaused(paused||contextLost);clear();last=undefined;},
     dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();audio.dispose();scene.dispose();canvas.remove();root.remove();link.remove();dialog.classList.remove('fire-v24-inside');for(const [n,v]of hidden)n.style.visibility=v;},
     /** Model state plus where the friend and the fires are on the screen (CSS px of the page), for the browser checks. */
     get snapshot(){const s=model.snapshot(),r=canvas.getBoundingClientRect(),screen=p=>{const q=scene.project(p);return {x:+(r.left+q.x).toFixed(1),y:+(r.top+q.y).toFixed(1)};};
-      const out={...s,ready:scene.ready,tutorialOpen:!tutorialDone,paused,renderMetrics:{...scene.metrics(),fps:fps.slice(),dpr},audio:audio.snapshot(),viewport:{width:W,height:H}};
+      const out={...s,ready:scene.ready&&!contextLost,contextLost,tutorialOpen:!tutorialDone,paused,renderMetrics:{...scene.metrics(),fps:fps.slice(),dpr},audio:audio.snapshot(),viewport:{width:W,height:H}};
       if(s.room){out.screen={spots:s.room.spots.map(x=>({id:x.id,kind:x.kind,done:x.done,...screen([x.pos[0],x.pos[1]+.25,x.pos[2]])})),friend:{...screen([s.room.friend.pos[0],s.room.friend.height*.5,s.room.friend.pos[2]]),state:s.room.friend.state}};}
       return out;},
   };
