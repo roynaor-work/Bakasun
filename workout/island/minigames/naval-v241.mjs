@@ -17,6 +17,8 @@
  *    hits it". A v24.1 submarine stays under water for the whole stage (only its tower top and periscope break the surface), so only the
  *    torpedo reaches it; the stage carries enough torpedoes for every submarine, and an empty tube reloads one while a submarine is out. */
 import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-16';
+/** Phone fixes B: one full radar acquisition per shot; either URL switch restores v24.1. */
+export const navalPhoneFixB=search=>polishValue('phoneFixes',search)!=='0'&&polishValue('phoneFixB',search)!=='0';
 export const navalRadarV241=search=>polishValue('navalRadar',search)!=='v24';
 export const navalAirEndV241=search=>polishValue('navalAirEnd',search)!=='v24';
 export const navalHintV241=search=>polishValue('navalHint',search)!=='v24';

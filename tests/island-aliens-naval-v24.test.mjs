@@ -33,7 +33,7 @@ const FRAME=1/60,PHONE=(844/390)/(360/480),phone={...config,width:844,height:390
 // v25 (14/11/2026): the Vulcan's numbers changed on purpose (tests/island-aliens-v25.test.mjs); these v24 refill and balance checks run on ?alienVulcan=v24.
 function alien({refill=true,level=1,seed=3,vulcan='v24',...rest}={}){globalThis.__alienRefill=refill?undefined:'0';globalThis.__alienVulcan=vulcan==='v25'?undefined:'v24';globalThis.__alienEnemyFire='v24';globalThis.__alienArsenal='0';try{return createAlienModel({config,balance:ab,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienRefill=undefined;globalThis.__alienVulcan=undefined;globalThis.__alienEnemyFire=undefined;globalThis.__alienArsenal=undefined;}}
 /** Naval model under a search string (the flag readers use location.search). */
-function naval(stage,seed,search='',balance=nb){globalThis.location={search};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+function naval(stage,seed,search='',balance=nb){globalThis.location={search:search+(search?'&':'?')+'phoneFixB=0'};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
 const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
 /** A canvas that records what was drawn. */
 function recorder(){const calls=[];const p=new Proxy({canvas:{clientWidth:844,width:844},calls},{get(t,k){if(k in t)return t[k];if(k==='measureText')return s=>({width:String(s).length*6});if(k==='createRadialGradient'||k==='createLinearGradient')return()=>({addColorStop(){}});return(...a)=>{calls.push([k,...a]);};},set(t,k,v){t[k]=v;calls.push(['set:'+String(k),v]);return true;}});return p;}
@@ -246,7 +246,7 @@ test('submarine v24 in the model: shells pass over a diver ("under water"), a to
 test('ships v24 sounds: the torpedo-sub and enemy-fire samples by event; the model sends them (launch, under-water hit, sonar ping on a dive)',async()=>{
  const {NAVAL_V24_AUDIO}=await import('../workout/island/minigames/naval-v24-audio.mjs');
  assert.deepEqual(NAVAL_V24_AUDIO,{incoming:'incoming-shell',incomingTorpedo:'bubbles',enemyCannon:'enemy-cannon',torpedoLaunch:'torpedo-launch',underwaterExplosion:'underwater-explosion',sonarPing:'sonar-ping'});
- const heard=[];globalThis.location={search:''};let m;try{m=createNavalModel({config:phone,balance:nb,level:11,seed:3,random:seededRandom(3),difficulty:11,sound:n=>heard.push(n)});}finally{delete globalThis.location;}
+ const heard=[];globalThis.location={search:'?phoneFixB=0'};let m;try{m=createNavalModel({config:phone,balance:nb,level:11,seed:3,random:seededRandom(3),difficulty:11,sound:n=>heard.push(n)});}finally{delete globalThis.location;}
  const sub=m.enemies.find(e=>e.subMode==='v24');run(m,60*4);assert.ok(heard.includes('sonarPing'),'a ping when the submarine dives');let k=0;while(k<60*8&&!heard.includes('torpedoLaunch')){if(sub.depth>0)m.update(FRAME,{torpedoShot:true});else m.update(FRAME,{});k++;}
  assert.ok(heard.includes('torpedoLaunch'),'our torpedo leaves the tube');k=0;while(k<60*8&&!heard.includes('underwaterExplosion')){m.update(FRAME,{});k++;}assert.ok(heard.includes('underwaterExplosion'),'it meets the submarine under water');
 });
