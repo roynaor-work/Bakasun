@@ -39,7 +39,7 @@ async function play(page,id){
  const started=Date.now();
  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:300000});
  const ms=Date.now()-started;await page.waitForTimeout(2000);
- const status=await page.evaluate(()=>{const s=window.__island.games.current.session.snapshot;return s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':'?');});
+ const status=await page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?');},id);
  return {status,ms};
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
