@@ -31,17 +31,20 @@ import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-16
 import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-16';
 import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-16';
 
+/** Phone fixes B/D (v24.3) changed the naval lock and the racing pit; `.v241` keys keep the v24.1 text for ?phoneFixB=0 / ?phoneFixD=0 (or ?phoneFixes=0). */
+const phoneFixOn=letter=>polishValue('phoneFixes')!=='0'&&polishValue('phoneFix'+letter)!=='0';
 /** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
 function helpKeys(id){
  const keys=[1,2,3].map(i=>`minigame.${id}.help.${i}`);
  if(polishValue('reviewHelp')==='0')return keys;
  if(id==='islandRacing'){
-  if(!racingV24Flags().pit)keys[1]+='.noPit';else if(!pitAutoEnabled())keys[1]+='.v24';
+  if(!racingV24Flags().pit)keys[1]+='.noPit';else if(!pitAutoEnabled())keys[1]+='.v24';else if(!phoneFixOn('D'))keys[1]+='.v241';
  }
  if(id==='navalDuel'){
   if(!navalLockOn())keys[0]+='.noLock';
   else if(!navalAimV24())keys[0]+='.v23';
   else if(!navalRadarV241())keys[0]+='.v24';
+  else if(!phoneFixOn('B'))keys[0]+='.v241';
   if(!navalAirEndV241()||!navalAirEnabled())keys[2]+='.v24';
  }
  return keys;
