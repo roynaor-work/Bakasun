@@ -13,7 +13,7 @@ async function browserModule(){
  for(const specifier of candidates){try{return await import(specifier);}catch{}}
  throw Error('Playwright is required; install playwright or set ISLAND_PLAYWRIGHT to its index.mjs');
 }
-const pw=await browserModule();
+const pw=process.env.ISLAND_CSP_BROWSER==='1'?await browserModule():null;
 const fixture=`<!doctype html><html><body><div id="controls"><button id="pass"><svg></svg></button></div><input id="edit"><script type="module">
 import {createAlienSpecialSwitch} from '/workout/island/minigames/alien-v25-ui.mjs';
 const controls=document.querySelector('#controls'),special=document.querySelector('#pass');window.gestures=0;
