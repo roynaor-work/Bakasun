@@ -1,0 +1,1090 @@
+{
+  "schemaVersion": 2,
+  "id": "fire-rescue-people-v2",
+  "version": "2.0.0",
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "skeleton": "skeleton.json",
+  "boneCount": 18,
+  "nativeHz": 30,
+  "triangleBudget": [
+    1000,
+    1300
+  ],
+  "folderBudgetBytes": 8000000,
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390
+  },
+  "license": "CC0-1.0",
+  "qa": {
+    "tool": "motion-qa-v1",
+    "sourceCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "thresholdExclusive": 88,
+    "report": "verification/motion-qa.json"
+  },
+  "equipmentVisibility": "Show only the categories named by active clip.equipment; body and stroller remain visible. Equipment remains in GLB for host-controlled switching.",
+  "pairing": "Synchronize 5.6 second rescue_carry and carried_shoulder at identical local scene origins. Character scale is baked in Character wrapper; do not apply it again.",
+  "characters": [
+    {
+      "id": "baby-stroller",
+      "label": "תינוק בעגלה",
+      "role": "civilian",
+      "file": "models/baby-stroller.glb",
+      "scale": 0.42,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1272,
+      "bytes": 509524,
+      "sha256": "e759e7a12598b45b7c12b8334613e8c93db36a27cb53cf8dcc662a7c22b13998",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {
+        "strollerHandle": {
+          "bone": "Root",
+          "translation": [
+            0,
+            2.1,
+            -0.92
+          ]
+        }
+      },
+      "categories": [
+        "body",
+        "stroller"
+      ]
+    },
+    {
+      "id": "boy",
+      "label": "ילד",
+      "role": "civilian",
+      "file": "models/boy.glb",
+      "scale": 0.72,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1044,
+      "bytes": 481040,
+      "sha256": "faa67a98dfe641a65fbb1df00ab2debd553a975933751561aef95bff2f35ddf6",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "captain",
+      "label": "קפטן",
+      "role": "firefighter",
+      "file": "models/captain.glb",
+      "scale": 1.05,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1288,
+      "bytes": 416548,
+      "sha256": "9effb5f075ad56028d35a7e6270df920de65bcfd015f931743b07643e8e34fb3",
+      "clips": [
+        {
+          "name": "idle",
+          "label": "עמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "hose",
+          "label": "כיבוי בזרנוק",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "hose"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "extinguisher",
+          "label": "כיבוי במטף",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "extinguisher"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "rescue_carry",
+          "label": "חילוץ בנשיאה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "carried_shoulder",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "signal_clear",
+          "label": "סימון פנוי",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        }
+      ],
+      "sockets": {
+        "waterNozzle": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            -0.272,
+            0.03
+          ],
+          "direction": [
+            0,
+            -1,
+            0
+          ]
+        },
+        "hoseInlet": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            0.014,
+            0.03
+          ],
+          "direction": [
+            0,
+            1,
+            0
+          ]
+        },
+        "extinguisherNozzle": {
+          "bone": "LeftHand",
+          "translation": [
+            0.045,
+            0.012,
+            0.15
+          ],
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "carryShoulder": {
+          "bone": "Chest",
+          "translation": [
+            0.16,
+            0.16,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0.70710678,
+            0.70710678
+          ]
+        }
+      },
+      "categories": [
+        "body",
+        "hose",
+        "extinguisher"
+      ]
+    },
+    {
+      "id": "father",
+      "label": "אבא",
+      "role": "civilian",
+      "file": "models/father.glb",
+      "scale": 1.07,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1076,
+      "bytes": 486044,
+      "sha256": "ec2d9a2b1bea64bcda6ad703181cda6744a8fdef38172400ef3e1e9a8f8dfe38",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "female-firefighter",
+      "label": "כבאית",
+      "role": "firefighter",
+      "file": "models/female-firefighter.glb",
+      "scale": 1,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1300,
+      "bytes": 418824,
+      "sha256": "862c68ac52215324ee1dd8a054f7d3846b78a3f1d15ba8eb7fc84b7d6cbd627b",
+      "clips": [
+        {
+          "name": "idle",
+          "label": "עמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "hose",
+          "label": "כיבוי בזרנוק",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "hose"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "extinguisher",
+          "label": "כיבוי במטף",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "extinguisher"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "rescue_carry",
+          "label": "חילוץ בנשיאה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "carried_shoulder",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "signal_clear",
+          "label": "סימון פנוי",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        }
+      ],
+      "sockets": {
+        "waterNozzle": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            -0.272,
+            0.03
+          ],
+          "direction": [
+            0,
+            -1,
+            0
+          ]
+        },
+        "hoseInlet": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            0.014,
+            0.03
+          ],
+          "direction": [
+            0,
+            1,
+            0
+          ]
+        },
+        "extinguisherNozzle": {
+          "bone": "LeftHand",
+          "translation": [
+            0.045,
+            0.012,
+            0.15
+          ],
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "carryShoulder": {
+          "bone": "Chest",
+          "translation": [
+            0.16,
+            0.16,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0.70710678,
+            0.70710678
+          ]
+        }
+      },
+      "categories": [
+        "body",
+        "hose",
+        "extinguisher"
+      ]
+    },
+    {
+      "id": "girl",
+      "label": "ילדה",
+      "role": "civilian",
+      "file": "models/girl.glb",
+      "scale": 0.7,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1164,
+      "bytes": 498080,
+      "sha256": "81380ee8c0016a920d1e052ef19ba143e1e6de5f9e2105906ec9b5119d97949c",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "grandfather",
+      "label": "סבא",
+      "role": "civilian",
+      "file": "models/grandfather.glb",
+      "scale": 0.98,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1160,
+      "bytes": 495920,
+      "sha256": "3fd9c2e5e09692f39db663ae0688113e507b7b31d686d53c00e1a75c56c257ca",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "grandmother",
+      "label": "סבתא",
+      "role": "civilian",
+      "file": "models/grandmother.glb",
+      "scale": 0.94,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1212,
+      "bytes": 504036,
+      "sha256": "d0d24e0718f937ba801d7755991403e5e8cffa9f2edecd4148d7e4cced0196b2",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "mother",
+      "label": "אמא",
+      "role": "civilian",
+      "file": "models/mother.glb",
+      "scale": 1,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1124,
+      "bytes": 493520,
+      "sha256": "a5a192cb4fbadaf0c5ff57428f6d1a588974821bb45a50fcf25914d5bd1b30c8",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "panicked-man",
+      "label": "בחור מבוהל",
+      "role": "civilian",
+      "file": "models/panicked-man.glb",
+      "scale": 1.03,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1076,
+      "bytes": 486072,
+      "sha256": "2f38f937b2eb9eae153b2ab57d035cd8b474f8ced56e1c9f2289dfa251d230cc",
+      "clips": [
+        {
+          "name": "ready",
+          "label": "מנוחת מעבר",
+          "duration": 2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "panic_stand",
+          "label": "בהלה בעמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "cough",
+          "label": "שיעול",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "wave_help",
+          "label": "נפנוף לעזרה",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "sit_floor",
+          "label": "ישיבה על הרצפה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "carried_shoulder",
+          "label": "נשיאה על הכתף",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "rescue_carry",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "walk_happy",
+          "label": "הליכה בחוץ בשמחה",
+          "duration": 6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": true
+        }
+      ],
+      "sockets": {},
+      "categories": [
+        "body"
+      ]
+    },
+    {
+      "id": "young-firefighter",
+      "label": "כבאי צעיר",
+      "role": "firefighter",
+      "file": "models/young-firefighter.glb",
+      "scale": 1.03,
+      "scaleBakedIntoGLB": true,
+      "triangles": 1276,
+      "bytes": 415096,
+      "sha256": "bf7b587f05d796b9e2310097b28bd82d41d6b4955cd8300a0a024b1e405c5e9b",
+      "clips": [
+        {
+          "name": "idle",
+          "label": "עמידה",
+          "duration": 3.2,
+          "loop": true,
+          "equipment": [],
+          "rootMotion": false
+        },
+        {
+          "name": "hose",
+          "label": "כיבוי בזרנוק",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "hose"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "extinguisher",
+          "label": "כיבוי במטף",
+          "duration": 4.8,
+          "loop": false,
+          "equipment": [
+            "extinguisher"
+          ],
+          "rootMotion": false
+        },
+        {
+          "name": "rescue_carry",
+          "label": "חילוץ בנשיאה",
+          "duration": 5.6,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false,
+          "pair": {
+            "otherClip": "carried_shoulder",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotationY": 0,
+            "phaseSynchronized": true
+          }
+        },
+        {
+          "name": "signal_clear",
+          "label": "סימון פנוי",
+          "duration": 4,
+          "loop": false,
+          "equipment": [],
+          "rootMotion": false
+        }
+      ],
+      "sockets": {
+        "waterNozzle": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            -0.272,
+            0.03
+          ],
+          "direction": [
+            0,
+            -1,
+            0
+          ]
+        },
+        "hoseInlet": {
+          "bone": "RightHand",
+          "translation": [
+            -0.045,
+            0.014,
+            0.03
+          ],
+          "direction": [
+            0,
+            1,
+            0
+          ]
+        },
+        "extinguisherNozzle": {
+          "bone": "LeftHand",
+          "translation": [
+            0.045,
+            0.012,
+            0.15
+          ],
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "carryShoulder": {
+          "bone": "Chest",
+          "translation": [
+            0.16,
+            0.16,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0.70710678,
+            0.70710678
+          ]
+        }
+      },
+      "categories": [
+        "body",
+        "hose",
+        "extinguisher"
+      ]
+    }
+  ]
+}

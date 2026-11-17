@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "completedAtIsrael": "2026-11-17T14:53:39+02:00",
+  "branch": "codex/fire-rescue-people-v2",
+  "remote": "origin",
+  "baseCommit": "f5f2b40814fc0e2186daed1ac100a8d806dd3a7d",
+  "scope": {
+    "onlyNewFiles": true,
+    "directory": "workout/island/design/fire-rescue-people-v2/",
+    "existingFilesChanged": 0,
+    "newFileCount": 46
+  },
+  "assets": {
+    "count": 11,
+    "clips": 71,
+    "requiredClips": 63,
+    "referenceClips": 8,
+    "boneCount": 18,
+    "nativeHz": 30,
+    "trianglesRange": [
+      1044,
+      1300
+    ],
+    "glbBytes": 5204704
+  },
+  "motionQA": {
+    "pass": true,
+    "minScore": 95.9,
+    "meanScore": 97.79295774647886,
+    "coverage": 1,
+    "khronosErrors": 0,
+    "khronosWarnings": 0,
+    "originalToolTestsPassed": 30
+  },
+  "browser": {
+    "pass": true,
+    "checks": 154,
+    "clipSamples": 355,
+    "viewport": [
+      844,
+      390
+    ],
+    "sourceHashesMatch": true
+  },
+  "repositoryTests": {
+    "initialFullCommand": "node --test tests/*.mjs",
+    "initialFullResult": {
+      "tests": 3334,
+      "pass": 3277,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 56
+    },
+    "initialFailure": "Bundled Playwright headless shell unavailable; stalled server worker stopped after more than 11 minutes.",
+    "environmentRepair": "Temporary browser-path alias to preinstalled /usr/bin/chromium 151.0.7922.173, outside repository. Browser download was blocked by HTTP 403.",
+    "targetedCommand": "PLAYWRIGHT_BROWSERS_PATH=/tmp/fire-rescue-people-v2/browsers node --test tests/workout-royiki.test.mjs",
+    "targetedResult": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "distinctCasesPassedAfterRepair": 3278,
+    "skipped": 56,
+    "unresolvedFailures": 0,
+    "completeCommandRepeated": false
+  },
+  "budgets": {
+    "maxFolderBytes": 8000000,
+    "finalFolderBytes": 6607189
+  },
+  "rebuildHashesIdentical": true
+}

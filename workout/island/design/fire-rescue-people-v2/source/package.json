@@ -1,0 +1,7 @@
+{
+  "name": "fire-rescue-people-v2-authoring",
+  "private": true,
+  "type": "module",
+  "scripts": {"build": "python3 geometry.py && node build.mjs", "audit": "node audit.mjs", "test:qa": "node --test qa-vendor/test/*.test.mjs"},
+  "dependencies": {"gltf-validator": "2.0.0-dev.3.10"}
+}
