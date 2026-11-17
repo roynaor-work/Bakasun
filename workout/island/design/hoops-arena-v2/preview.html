@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101b24">
+  <title>אולם הכדורסל — 02</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+</head>
+<body>
+  <main id="arena" aria-label="תצוגה אינטראקטיבית של אולם כדורסל">
+    <canvas id="court" aria-label="אולם כדורסל בתלת ממד. גרירה מסובבת, גלילה מקרבת, מקשי חצים מזיזים." tabindex="0"></canvas>
+    <div class="scrim" aria-hidden="true"></div>
+    <header>
+      <div class="identity">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><path d="M3 20h34M20 3v34M8 8c16 1 23 8 24 24M32 8C16 9 9 16 8 32"/></svg>
+        <div><div class="eyebrow">האי שלי <span>/</span> כדורסל</div><h1>הבית של המשחק<span class="edition">02</span></h1></div>
+      </div>
+      <div class="live"><i></i> האולם מוכן</div>
+    </header>
+    <aside class="view-note" aria-live="polite"><span id="view-number">01 / 04</span><strong id="view-title">מבט שידור</strong><p id="view-description">פרקט מייפל. אור של משחק.</p></aside>
+    <footer>
+      <div class="spec"><b>28 × 15</b><span>מטרים של כדורסל</span><span class="rule"></span><span>פרקט מייפל</span></div>
+      <nav aria-label="זווית צפייה">
+        <button data-view="broadcast" aria-pressed="true"><span>01</span>אולם</button>
+        <button data-view="court" aria-pressed="false"><span>02</span>פרקט</button>
+        <button data-view="hoop" aria-pressed="false"><span>03</span>סל</button>
+        <button data-view="ceiling" aria-pressed="false"><span>04</span>תקרה</button>
+      </nav>
+      <button id="roof" class="roof" aria-pressed="false" title="פתיחה או סגירה של התקרה והיציעים הקרובים">אולם מלא</button>
+    </footer>
+    <div id="status" role="status"><div class="loader"></div><b>מדליקים את האולם</b><span>רגע לפני שעולים לפרקט</span></div>
+    <noscript><div class="failure">יש להפעיל JavaScript כדי לצפות באולם.</div></noscript>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

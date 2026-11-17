@@ -1,0 +1,174 @@
+{
+  "browser": "Chromium / SwiftShader software WebGL",
+  "desktopViewport": [
+    844,
+    390
+  ],
+  "views": [
+    {
+      "ready": true,
+      "errors": [],
+      "frames": 3,
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "broadcast",
+      "cutaway": true,
+      "three": "160",
+      "seats": 1776,
+      "reflection": "768x384 planar, blurred, 4.5% opacity, plus PBR varnish",
+      "reducedMotion": false,
+      "render": {
+        "calls": 290,
+        "triangles": 269718
+      },
+      "selected": 1,
+      "canvas": [
+        844,
+        390
+      ],
+      "scroll": [
+        844,
+        390
+      ],
+      "gl": 0
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "frames": 4,
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "court",
+      "cutaway": false,
+      "three": "160",
+      "seats": 1776,
+      "reflection": "768x384 planar, blurred, 4.5% opacity, plus PBR varnish",
+      "reducedMotion": false,
+      "render": {
+        "calls": 318,
+        "triangles": 402426
+      },
+      "selected": 1,
+      "canvas": [
+        844,
+        390
+      ],
+      "scroll": [
+        844,
+        390
+      ],
+      "gl": 0
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "frames": 5,
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "hoop",
+      "cutaway": false,
+      "three": "160",
+      "seats": 1776,
+      "reflection": "768x384 planar, blurred, 4.5% opacity, plus PBR varnish",
+      "reducedMotion": false,
+      "render": {
+        "calls": 255,
+        "triangles": 367826
+      },
+      "selected": 1,
+      "canvas": [
+        844,
+        390
+      ],
+      "scroll": [
+        844,
+        390
+      ],
+      "gl": 0
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "frames": 8,
+      "viewport": [
+        844,
+        390
+      ],
+      "view": "ceiling",
+      "cutaway": false,
+      "three": "160",
+      "seats": 1776,
+      "reflection": "768x384 planar, blurred, 4.5% opacity, plus PBR varnish",
+      "reducedMotion": false,
+      "render": {
+        "calls": 295,
+        "triangles": 397198
+      },
+      "selected": 1,
+      "canvas": [
+        844,
+        390
+      ],
+      "scroll": [
+        844,
+        390
+      ],
+      "gl": 0
+    }
+  ],
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "scroll": [
+      390,
+      844
+    ],
+    "buttons": [
+      {
+        "text": "01אולם",
+        "width": 62.765625,
+        "height": 42
+      },
+      {
+        "text": "02פרקט",
+        "width": 66.484375,
+        "height": 42
+      },
+      {
+        "text": "03סל",
+        "width": 62,
+        "height": 42
+      },
+      {
+        "text": "04תקרה",
+        "width": 66.640625,
+        "height": 42
+      },
+      {
+        "text": "אולם מלא",
+        "width": 57.703125,
+        "height": 50
+      }
+    ]
+  },
+  "errors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "checks": [
+    "four camera controls",
+    "full bowl/cutaway toggle",
+    "mouse orbit",
+    "keyboard access",
+    "no overflow",
+    "reflection A/B",
+    "no external runtime requests"
+  ]
+}

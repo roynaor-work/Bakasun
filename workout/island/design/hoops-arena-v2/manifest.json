@@ -1,0 +1,422 @@
+{
+  "id": "hoops-arena-v2",
+  "version": "2.0.0",
+  "date": "2026-11-17",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/hoops-arena-v2",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "scope": "workout/island/design/hoops-arena-v2/",
+  "entrypoint": "preview.html",
+  "preview": {
+    "viewport": [
+      844,
+      390
+    ],
+    "alsoChecked": [
+      390,
+      844
+    ],
+    "cameraViews": [
+      "broadcast",
+      "court",
+      "hoop",
+      "ceiling"
+    ],
+    "offlineAssets": true,
+    "runtimeModule": "arena.mjs",
+    "renderOnDemand": true,
+    "runtimeExternalRequests": 0
+  },
+  "coordinates": {
+    "unit": "metre",
+    "up": "+Y",
+    "courtLengthAxis": "X",
+    "courtWidthAxis": "Z"
+  },
+  "dimensions": {
+    "courtMetres": [
+      28,
+      15
+    ],
+    "rimHeightMetres": 3.05,
+    "rimInnerDiameterMetres": 0.45,
+    "backboardMetres": [
+      1.8,
+      1.05
+    ],
+    "woodRepeatMetres": [
+      4,
+      4
+    ]
+  },
+  "anchors": {
+    "arenaOrigin": [
+      0,
+      0,
+      0
+    ],
+    "eastRim": [
+      12.425,
+      3.05,
+      0
+    ],
+    "westRim": [
+      -12.425,
+      3.05,
+      0
+    ],
+    "hoopAssetOrigin": "floor beneath ring centre",
+    "hoopAssetRim": [
+      0,
+      3.05,
+      0
+    ],
+    "hoopAssetSupportDirection": "+X"
+  },
+  "components": {
+    "tiers": 3,
+    "rowsPerTier": 3,
+    "standSides": 4,
+    "seats": 1776,
+    "hoops": 2,
+    "luminaireBars": 20,
+    "playerEntrances": 2,
+    "teamBenches": 2,
+    "teamBenchSeatsEach": 10,
+    "scorersTable": 1,
+    "adText": false,
+    "brands": false,
+    "fullRoofInAsset": true
+  },
+  "models": [
+    {
+      "file": "assets/arena.glb",
+      "bytes": 1907308,
+      "triangles": 139090,
+      "meshes": 186,
+      "nodes": 5557,
+      "materials": 23,
+      "extensions": [
+        "KHR_mesh_quantization"
+      ]
+    },
+    {
+      "file": "assets/hoop.glb",
+      "bytes": 102284,
+      "triangles": 3220,
+      "meshes": 8,
+      "nodes": 9,
+      "materials": 8,
+      "extensions": []
+    }
+  ],
+  "format": {
+    "container": "GLB",
+    "gltfVersion": "2.0",
+    "arenaExtensions": [
+      "KHR_mesh_quantization"
+    ],
+    "hoopExtensions": [],
+    "embeddedImages": true,
+    "decoderRequired": false,
+    "quantization": {
+      "positionBits": 16,
+      "normalBits": 12,
+      "sceneComponentsRemoved": 0
+    }
+  },
+  "materials": {
+    "textures": [
+      {
+        "path": "textures/maple-albedo.jpg",
+        "channels": "RGB, sRGB base colour"
+      },
+      {
+        "path": "textures/maple-normal.png",
+        "channels": "RGB, linear tangent normal, OpenGL convention"
+      },
+      {
+        "path": "textures/maple-orm.png",
+        "channels": "R occlusion=1, G roughness, B metallic=0, linear"
+      }
+    ],
+    "tangentSpace": "explicit floor tangent: +X, handedness -1",
+    "previewReflection": {
+      "planar": true,
+      "opacity": 0.045,
+      "blurred": true,
+      "renderTarget": [
+        768,
+        384
+      ]
+    },
+    "lightingRecipe": "preview.mjs",
+    "unbranded": true
+  },
+  "runtime": {
+    "threeVersion": "0.160.1",
+    "sharedSeatMeshes": true,
+    "previewGpuInstances": true,
+    "staticTerracesMergedBySideAndMaterial": true,
+    "cutawayAffectsSavedAsset": false,
+    "requiresHostLighting": true,
+    "physicalPhoneBenchmark": false
+  },
+  "budgets": {
+    "packageLimitBytes": 6000000,
+    "modelLimitBytes": 2000000,
+    "tileLimitBytes": 200000,
+    "packageBytes": 3809606,
+    "largestTileBytes": 79259
+  },
+  "validation": {
+    "khronos": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 0,
+      "hints": 0
+    },
+    "reports": [
+      "verification/arena-khronos.json",
+      "verification/hoop-khronos.json",
+      "verification/assets.json",
+      "verification/browser.json",
+      "verification/repository-tests.json",
+      "verification/scope.json"
+    ]
+  },
+  "provenance": {
+    "geometry": "original deterministic authoring in source/build.py",
+    "textures": "original deterministic authoring in source/textures.py; seed 20261117",
+    "thirdPartyModels": false,
+    "thirdPartyImages": false,
+    "licenses": "LICENSES.md"
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 98,
+      "sha256": "40fa6250bc99aed6aa9b82327da2511c6670371c5a939ab043cbec1f8d1bfbb4"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 2881,
+      "sha256": "c27e81757b8bca3810c2401db944b7af35c70109fd36b78c858c3e02c613fe50"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 11183,
+      "sha256": "a9275a02dd1a6f516bab68d07864ca03f857dffc3f19e22ef5994381445e3ae4"
+    },
+    {
+      "path": "arena.mjs",
+      "bytes": 5394,
+      "sha256": "362f22c62e21fab41f657086fb2a198c549ab71c49bfbbb95549cf6e43e16574"
+    },
+    {
+      "path": "assets/arena.glb",
+      "bytes": 1907308,
+      "sha256": "2862e202332bb37327d258048315b439141f5e294307ff0bcca8c835ca8c0c71"
+    },
+    {
+      "path": "assets/hoop.glb",
+      "bytes": 102284,
+      "sha256": "2cf9c65f298f19209139be46142f0a9c69ab22ff80a788311311a1a0b169e41e"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 4382,
+      "sha256": "cd6dee560ba4118cb6d6a00e3c44b9389eff305d5b29244afb288e702432743c"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 2513,
+      "sha256": "3328abdaaf036accadf739af7752a65b4c3586db2864159aee10d0535b92711f"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 8224,
+      "sha256": "5746f1daee1e47e302d8b53ea24f58e50244ee935e0627847423d0953e2d5a7f"
+    },
+    {
+      "path": "source/build.py",
+      "bytes": 28945,
+      "sha256": "a2a57523e664e2f55051dca595ee54789fa6e92dc078abf1700bdfeaae86f270"
+    },
+    {
+      "path": "source/capture.py",
+      "bytes": 5521,
+      "sha256": "81601a78d3765ab90ec9ef952e9e3039dda0dd2af1cbfcaefd1dde7bb8ce132a"
+    },
+    {
+      "path": "source/check-assets.mjs",
+      "bytes": 4763,
+      "sha256": "3ec6322be32034687ac5f4e5b66e72967e3f41e590ff4de95926abdfa79cf65b"
+    },
+    {
+      "path": "source/optimize.mjs",
+      "bytes": 1919,
+      "sha256": "72f212353901db514662fca97038a018d3499be49046ac92714d70a4c2bafa7b"
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 272,
+      "sha256": "252d48782b4d6de143ead1ab8e9bfcafa8e541cd03857f7573a160e683a261a6"
+    },
+    {
+      "path": "source/requirements.txt",
+      "bytes": 50,
+      "sha256": "54f87261a61b998577e8d547e5b5b47ba35b55108b47fa6d8bfcbb7fd3dcc210"
+    },
+    {
+      "path": "source/textures.py",
+      "bytes": 3015,
+      "sha256": "36f2c1b118b6a909af5c1cc1b2518e3715928d114a7f14289173f6e541ad6ad0"
+    },
+    {
+      "path": "source/write-manifest.py",
+      "bytes": 4320,
+      "sha256": "0b3b904bd65149f064409995d231bd558dc0b4386e317308523ab65f1d170672"
+    },
+    {
+      "path": "textures/maple-albedo.jpg",
+      "bytes": 79259,
+      "sha256": "e03ebb531d438c60770aa148e34121b198486acbd5d420f62731f1ceb29b7956",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "textures/maple-normal.png",
+      "bytes": 51134,
+      "sha256": "2df90e55dfc3edaa6013783ef7590c1c6a91f81966e4acf73c1ac82627ef2412",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "path": "textures/maple-orm.png",
+      "bytes": 24613,
+      "sha256": "ed30585276a1d50c4cb6c9f4118afef0169db378300fd1887808d37c9fb0efec",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "path": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "path": "vendor/addons/controls/OrbitControls.js",
+      "bytes": 30973,
+      "sha256": "7aa4372a5ec60b49988edde81014c7361740a57962d032003ca33301c1f4edd5"
+    },
+    {
+      "path": "vendor/addons/environments/RoomEnvironment.js",
+      "bytes": 3735,
+      "sha256": "e21f41b7ef2016f2984a5d27850b42dffa797a6a194a138e288b06576d765a7b"
+    },
+    {
+      "path": "vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 108522,
+      "sha256": "d073b438e6a07e1359741dd5d6c76c953420cc0d4fd84eb1bdde94315540e6a3"
+    },
+    {
+      "path": "vendor/addons/objects/Reflector.js",
+      "bytes": 7043,
+      "sha256": "012ecf98f5fc9bd262871e33d79392a25c04c2573ed68852eb3b8d2d39f9808b"
+    },
+    {
+      "path": "vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 31906,
+      "sha256": "9be041e96308775d00e2695cc607645b9a9b64fd7c0e759dd8f7c00a8d92becb"
+    },
+    {
+      "path": "vendor/three.module.min.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "path": "verification/arena-khronos.json",
+      "bytes": 1837,
+      "sha256": "02cd9eb93183bf382728b5b42ed2d6d55803bdf6648e2ba79e28e12a4c8175d1"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 1763,
+      "sha256": "6894de969e8857f0496c8b8586021e5ae3054e699c93d62ea803c7cb5464eccb"
+    },
+    {
+      "path": "verification/broadcast-390x844.jpg",
+      "bytes": 58877,
+      "sha256": "5c4ebe3abca71cafa0eba4597c1fc07583b4cf01514bfcbc839965c52cf57f61",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "verification/broadcast-844x390.jpg",
+      "bytes": 109989,
+      "sha256": "a20c8b50aa7326d998649dba37de85a6b2cbb1103cdcb0b87f8377f65a0758b9",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 3159,
+      "sha256": "7723e0b97ccc2b8df9f30581956a7a7d061c727d43689e4688e4e1fa1b46bd83"
+    },
+    {
+      "path": "verification/ceiling-844x390.jpg",
+      "bytes": 101953,
+      "sha256": "a14be7a7043594fc3241c5bc436e7443ac70b00cade1498d533875d5ad684108",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/court-844x390.jpg",
+      "bytes": 107176,
+      "sha256": "0e46c150b6bf429747008275c77dc06077565aa15274659a919378cfbb544691",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/geometry.json",
+      "bytes": 892,
+      "sha256": "2fc61ac165c69effc7bc91973d08b1fd2a2f58e780af419bdb31543f34edff0d"
+    },
+    {
+      "path": "verification/hoop-844x390.jpg",
+      "bytes": 91211,
+      "sha256": "11f50f0915a5361cd622e184300d84cf975428c1b50b72943122294850cc239e",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/hoop-khronos.json",
+      "bytes": 887,
+      "sha256": "b6f9f8f20cb6d3b7a23d64577c6497a1f2b6b597359ea9767230bac089897e68"
+    },
+    {
+      "path": "verification/reflection-off-844x390.jpg",
+      "bytes": 107012,
+      "sha256": "0ad3eb7d191a42712217be8341c5715a54481333d034e73925b6ce15f398d879",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/reflection-on-844x390.jpg",
+      "bytes": 107423,
+      "sha256": "f57d57d0247b8a0216fc1ae9213e368e48c7ba2f3d72112d7e3d18efad258d31",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1026,
+      "sha256": "03cc9cd2ed7d941921483e289993177398569300f12d1bf347b213ce318459c9"
+    },
+    {
+      "path": "verification/scope.json",
+      "bytes": 3223,
+      "sha256": "7262393e74c28f3cd7d332ebbf1a4c5859c94a49db10c736ee8bcc8cd1ede032"
+    }
+  ]
+}

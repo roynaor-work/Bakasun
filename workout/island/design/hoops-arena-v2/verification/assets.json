@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-17",
+  "validatorVersion": "2.0.0-dev.3.10",
+  "models": [
+    {
+      "file": "assets/arena.glb",
+      "bytes": 1907308,
+      "sha256": "2862e202332bb37327d258048315b439141f5e294307ff0bcca8c835ca8c0c71",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "file": "assets/hoop.glb",
+      "bytes": 102284,
+      "sha256": "2cf9c65f298f19209139be46142f0a9c69ab22ff80a788311311a1a0b169e41e",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    }
+  ],
+  "textures": [
+    {
+      "file": "textures/maple-albedo.jpg",
+      "bytes": 79259,
+      "sha256": "e03ebb531d438c60770aa148e34121b198486acbd5d420f62731f1ceb29b7956"
+    },
+    {
+      "file": "textures/maple-normal.png",
+      "bytes": 51134,
+      "sha256": "2df90e55dfc3edaa6013783ef7590c1c6a91f81966e4acf73c1ac82627ef2412"
+    },
+    {
+      "file": "textures/maple-orm.png",
+      "bytes": 24613,
+      "sha256": "ed30585276a1d50c4cb6c9f4118afef0169db378300fd1887808d37c9fb0efec"
+    }
+  ],
+  "packageBytesAtCheck": 3809458,
+  "packageLimitBytes": 6000000,
+  "tileLimitBytes": 200000,
+  "externalModelDependencies": 0,
+  "checks": [
+    "Khronos zero errors/warnings/infos/hints",
+    "glTF 2.0 with standard vertex quantization only",
+    "each GLB under 2MB",
+    "embedded GLB images and buffers",
+    "all requested component groups",
+    "three tiers on all four sides",
+    "1776 seats",
+    "standalone hoop pivot and ring height",
+    "texture budgets",
+    "whole directory budget",
+    "no symlinks"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "coordinates": {
+    "unit": "metre",
+    "up": "+Y",
+    "courtLengthAxis": "X",
+    "courtWidthAxis": "Z"
+  },
+  "court": [
+    28,
+    15
+  ],
+  "rimHeight": 3.05,
+  "rimInnerDiameter": 0.45,
+  "seats": 1776,
+  "tiers": 3,
+  "rowsPerTier": 3,
+  "lamps": 20,
+  "adText": false,
+  "brands": false,
+  "models": [
+    {
+      "file": "assets/arena.glb",
+      "bytes": 1907308,
+      "triangles": 139090,
+      "meshes": 186,
+      "nodes": 5557,
+      "materials": 23,
+      "extensions": [
+        "KHR_mesh_quantization"
+      ]
+    },
+    {
+      "file": "assets/hoop.glb",
+      "bytes": 102284,
+      "triangles": 3220,
+      "meshes": 8,
+      "nodes": 9,
+      "materials": 8,
+      "extensions": []
+    }
+  ],
+  "optimization": {
+    "tool": "glTF-Transform 4.3.0",
+    "positionBits": 16,
+    "normalBits": 12,
+    "removedSceneComponents": 0,
+    "decoderRequired": false
+  }
+}
