@@ -3,8 +3,8 @@
  * league stage (place, the three goals as stars, coins, table, record ghost, season podium at a boss).
  * Loaded on demand from ui/activity.mjs the first time the ski menu opens. Every change goes through engine.alpineLeague (checks,
  * saves its own key, refuses while a game runs). Hebrew, 56px targets, numbers as LTR islands, nothing hidden. */
-import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-16';
-import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-16';
+import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-17';
+import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-17';
 
 const el = (tag, cls = '', text = '') => { const n = document.createElement(tag); n.className = cls; if (text !== '') n.textContent = text; return n; };
 const button = (text, action, fn, cls = 'secondary-button') => { const n = el('button', cls, text); n.type = 'button'; n.dataset.action = action; n.onclick = fn; return n; };
@@ -22,7 +22,7 @@ export function goalLine(g) {
 }
 export function ensureStyle(root = document.head) {
   if (document.querySelector('link[data-alpine-league-css]')) return;
-  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-16', import.meta.url).href; root.append(link);
+  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-17', import.meta.url).href; root.append(link);
 }
 const accent = (node, themeId) => { node.style.setProperty('--al-accent', THEME_LOOKS[themeId]?.accent || '#3f8f5a'); node.dataset.theme = themeId; return node; };
 function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `${count} כוכבים מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }
@@ -32,7 +32,7 @@ function chip(id) { const c = el('span', 'al-chip'); c.style.background = colorO
 function stageStrip(engine, sum, themeIndex, go) {
   const theme = sum.themes[themeIndex - 1], list = el('ol', 'al-stages'); accent(list, theme.id); list.setAttribute('aria-label', `שלבי ${theme.name}`);
   for (let k = 0; k < PER_THEME; k++) {
-    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.state.best[n], open = n <= sum.stage, item = el('li', 'al-stage');
+    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.stage(n)?.best, open = n <= sum.stage, item = el('li', 'al-stage');
     item.dataset.n = String(n); item.dataset.state = best?.stars ? 'done' : open ? 'next' : 'locked'; if (info.boss) item.dataset.boss = 'true';
     const b = button('', 'alpine-league-stage', () => go(n), 'al-stage-button'); b.disabled = !open; b.dataset.n = String(n);
     b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, ${best?.stars || 0} כוכבים` : ', נעול'}`);

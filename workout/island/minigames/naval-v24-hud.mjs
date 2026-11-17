@@ -10,14 +10,14 @@
  *  - aim: "where to hit": a ring on the hull where the shell will meet it (the forecast fleet), green when the shot will hit, amber while
  *    the turret still turns, orange when it will not land; an arrow from the hull now to that ring; one short word.
  * Nothing is drawn for a part whose switch is off. */
-import {NAVAL_V24_COLORS,navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-16';
-import {NAVAL_V241_COLORS} from './naval-v241.mjs?v=island-v2-20261107-16';
+import {NAVAL_V24_COLORS,navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-17';
+import {NAVAL_V241_COLORS} from './naval-v241.mjs?v=island-v2-20261107-17';
 const TAU=Math.PI*2;
 const images=new Map();
 /** Lazy picture under assets/game-naval/fx; null outside a browser, false until decoded. */
 export function navalFx(name){
  if(typeof Image==='undefined')return null;let entry=images.get(name);
- if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.src=new URL(`../assets/game-naval/fx/${name}?v=island-v2-20261107-16`,import.meta.url).href;images.set(name,entry);}
+ if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.src=new URL(`../assets/game-naval/fx/${name}?v=island-v2-20261107-17`,import.meta.url).href;images.set(name,entry);}
  return entry.ok?entry.img:false;
 }
 export const NAVAL_V24_WORDS=Object.freeze({hit:'פגיעה',turning:'מכוון…',far:'רחוק מדי',near:'קרוב מדי',miss:'לא יפגע',underwater:'מתחת למים · רק טורפדו',torpedo:'טורפדו'});

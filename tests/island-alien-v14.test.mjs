@@ -1,3 +1,5 @@
+// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by tests/island-phone-fix-c-progression.test.mjs.
+globalThis.location={search:'?phoneFixC=0'};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

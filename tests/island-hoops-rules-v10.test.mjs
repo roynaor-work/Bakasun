@@ -94,7 +94,8 @@ test('audio: no continuous loop or tone is active during normal play; whistle on
   createBufferSource(){return new Node('source');}createOscillator(){return new Node('osc');}
   async decodeAudioData(){return {duration:1};}resume(){return Promise.resolve();}suspend(){return Promise.resolve();}close(){this.state='closed';return Promise.resolve();}}
  const fetcher=async url=>{const u=String(url);return u.endsWith('mix.json')?{ok:true,json:async()=>JSON.parse(mixText)}:{ok:true,arrayBuffer:async()=>new ArrayBuffer(8)};};
- const audio=createHoopsAudio({config:full.minigames.streetSlam.audio,storage:null,AudioContext:Ctx,fetcher});
+ // Exercise the historical audio contract explicitly; new defaults have their own phone regression suite.
+ const audio=createHoopsAudio({phoneFix:false,config:full.minigames.streetSlam.audio,storage:null,AudioContext:Ctx,fetcher});
  audio.unlock();await new Promise(r=>setTimeout(r,60));
  const active=()=>{const m=audio.metrics();return m;};
  await new Promise(r=>setTimeout(r,60));

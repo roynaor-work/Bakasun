@@ -6,10 +6,10 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-16';
-import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-16';
-import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-16';
-import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-17';
+import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-17';
+import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-17';
+import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,PHONE_FIX_F,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);
 const QA=new URLSearchParams(location.search).has('qa');
@@ -895,7 +895,7 @@ function renderShop(){
   for(const k of WEAPON_ORDER){const w=WEAPONS[k],lv=save.weapons[k],cost=weaponCost(save,k);const ws=weaponStats(save,k);const dps=Math.round(sustainedDps(ws,st.cooling));const hit=Math.round(ws.damage*ws.pellets);
     const card=document.createElement('article');card.className='weapon-card'+(lv?'':' locked');
     const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'דרגה מרבית':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
-    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}</p>
+    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}${PHONE_FIX_F&&fam(k)==='mg'?' כל דרגת נשק מפחיתה התחממות ב־4%.':''}</p>
       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
       <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;
     card.querySelector('button').onclick=()=>{if(buyWeapon(save,k)){persist();sfx.play('buy');refreshWeaponCache();showWeapon(current);buildWeaponBar();renderShop();toast(lv===0?`${w.name} נפתח · מקש ${WEAPON_ORDER.indexOf(k)+1} בקרב`:`${w.name} · דרגה ${save.weapons[k]}`);if(lv===0){current=k;showWeapon(k);buildWeaponBar();}}};
@@ -903,7 +903,7 @@ function renderShop(){
   const ug=$('upgrade-grid');ug.replaceChildren();
   for(const [key,d] of Object.entries(UPGRADE_DEFS)){const lv=save.upgrades[key],cost=upgradeCost(save,key),max=lv>=d.max;const card=document.createElement('article');card.className='upgrade-card';
     card.innerHTML=`<div class="upgrade-top"><span class="upgrade-icon">${d.icon}</span><span class="upgrade-level">דרגה ${lv} / ${d.max}</span></div><h3>${d.name}</h3><p>${d.desc}</p><button ${max||save.coins<cost?'disabled':''} aria-label="שדרוג ${d.name}, ${cost} מטבעות">${max?'מקסימום':`שדרוג · ${cost} ◆`}</button>`;
-    card.querySelector('button').onclick=()=>{if(buyUpgrade(save,key)){persist();sfx.play('buy');renderShop();toast(`השדרוג נרכש · ${d.name} · דרגה ${save.upgrades[key]}`);}};ug.append(card);}
+    card.querySelector('button').onclick=()=>{if(buyUpgrade(save,key)){persist();sfx.play('buy');if(PHONE_FIX_F&&key==='cooling')refreshWeaponCache();renderShop();toast(`השדרוג נרכש · ${d.name} · דרגה ${save.upgrades[key]}`);}};ug.append(card);}
   updateHud();
 }
 

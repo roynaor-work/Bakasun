@@ -5,12 +5,12 @@
  * shapes in the same palette (listed in the report as a Codex task). Everything here is drawing only: the model decides. */
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {fitModel} from '../view/local-models.mjs?v=island-v2-20261107-16';
-import {createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-16';
-import {ROOMS,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-16';
-import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-16';
+import {fitModel} from '../view/local-models.mjs?v=island-v2-20261107-17';
+import {createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-17';
+import {ROOMS,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-17';
+import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-17';
 
-const VERSION='island-v2-20261107-16';
+const VERSION='island-v2-20261107-17';
 const url=(path)=>new URL(path+'?v='+VERSION,import.meta.url).href;
 export const V24_ASSETS=Object.freeze({
   rooms:'../assets/fire-v24/rooms/',friends:'../assets/fire-v24/friends/',fx:'../assets/fire-v23/fx/',firefighter:'../assets/models/firefighter-rigged-512.glb',
@@ -30,6 +30,7 @@ function discTexture(size=64,inner=0,color='#ffffff'){const c=document.createEle
 function ringTexture(size=128,width=.12,color='#ffffff'){const c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d');g.strokeStyle=color;g.lineWidth=size*width;g.beginPath();g.arc(size/2,size/2,size*(.5-width),0,Math.PI*2);g.stroke();const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;return t;}
 
 export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>new T.WebGLRenderer(o),loader=new GLTFLoader(),textureLoader=new T.TextureLoader(),tuning=V24_TUNING}){
+  const roomBarrier=new URLSearchParams(globalThis.location?.search||'').get('fireRoomBarrier')!=='0';
   const renderer=createRenderer({canvas,antialias:!lite,alpha:false,powerPreference:'low-power'});
   renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;renderer.shadowMap.enabled=false;
   const scene=new T.Scene();scene.background=new T.Color('#1d1a22');scene.fog=new T.Fog('#1d1a22',9,26);
@@ -85,7 +86,10 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   function loadGLB(path){return new Promise((resolve,reject)=>loader.load(url(path),resolve,undefined,reject));}
   async function roomObject(def){
     const room=ROOMS[def.room];if(!room.file)return buildRoom(room.id);
-    if(!cache.has(room.file))cache.set(room.file,loadGLB(V24_ASSETS.rooms+room.file).then(g=>{g.scene.traverse(o=>{if(o.isMesh){o.material.roughness=1;o.material.metalness=0;}});return g.scene;}));
+    if(!cache.has(room.file)){
+      const pending=loadGLB(V24_ASSETS.rooms+room.file).then(g=>{g.scene.traverse(o=>{if(o.isMesh){o.material.roughness=1;o.material.metalness=0;}});return g.scene;});cache.set(room.file,pending);
+      if(roomBarrier)void pending.catch(()=>{if(cache.get(room.file)===pending)cache.delete(room.file);});
+    }
     return cache.get(room.file);
   }
   const burnables=new Map();let pickables=[];
@@ -131,23 +135,39 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   let crew=null,crewRig=null,crewYaw=Math.PI,friend=null;const friends=new Map();
   const GRIP={elbowX:.3,elbowY:.95,elbowZ:.22,handX:.12,handY:.98,handZ:.55};
   async function loadCrew(){try{const g=await loadGLB(V24_ASSETS.firefighter);if(disposed)return;const visual=fitModel(g.scene,{path:'firefighter',rotationY:0,scale:1},{height:1.78});visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;scene.add(visual);crew=visual;crewRig=createFireCrewRig(g.scene,g.animations,GRIP);}catch{crew=null;}}
-  async function friendObject(id){if(!friends.has(id))friends.set(id,loadGLB(V24_ASSETS.friends+id+'.glb').then(g=>{const clips=new Map();for(const c of g.animations){if(c.name==='walk_out'){const w=c.clone();w.tracks=w.tracks.filter(t=>!/^Root\.position/.test(t.name));clips.set('walk',w);}clips.set(c.name,c);}return {root:g.scene,clips};}));return friends.get(id);}
+  async function friendObject(id){
+    if(!friends.has(id)){
+      const pending=loadGLB(V24_ASSETS.friends+id+'.glb').then(g=>{const clips=new Map();for(const c of g.animations){if(c.name==='walk_out'){const w=c.clone();w.tracks=w.tracks.filter(t=>!/^Root\.position/.test(t.name));clips.set('walk',w);}clips.set(c.name,c);}return {root:g.scene,clips};});friends.set(id,pending);
+      if(roomBarrier)void pending.catch(()=>{if(friends.get(id)===pending)friends.delete(id);});
+    }
+    return friends.get(id);
+  }
   function mountFriend(data,state){if(friend){scene.remove(friend.root);friend.mixer.stopAllAction();}
     const root=data.root,mixer=new T.AnimationMixer(root);root.position.fromArray(state.pos);root.rotation.y=0;root.visible=true;scene.add(root);
     const play=(name,once=false,speed=1)=>{const clip=data.clips.get(name);if(!clip)return;mixer.stopAllAction();const a=mixer.clipAction(clip);a.reset();a.setLoop(once?T.LoopOnce:T.LoopRepeat,Infinity);a.clampWhenFinished=once;a.timeScale=speed;a.play();};
     friend={root,mixer,play,mode:null,state};play('scared');friend.mode='waiting';}
   // ---- events from the model ---------------------------------------------------------------------------------------------------------
   let eventIndex=0,disposed=false,ready=false,loadFailed=false,time=0,width=1,height=1;
-  const pending=[];
+  const pending=[];let mountedRoomIndex=-1,roomRequest=0;
   async function prepare(){
     const plan=model.plan;try{
       const first=plan.rooms[0];const [object,friendData]=await Promise.all([roomObject(first),friendObject(first.friend),loadCrew()]);
-      if(disposed)return;mountRoom(object,first);mountFriend(friendData,model.rooms[0].friend);ready=true;
+      if(disposed)return;mountRoom(object,first);mountFriend(friendData,model.rooms[0].friend);mountedRoomIndex=0;ready=true;
       for(const def of plan.rooms.slice(1)){void roomObject(def).catch(()=>{});void friendObject(def.friend).catch(()=>{});}
     }catch{loadFailed=true;}
   }
   void prepare();
-  async function switchRoom(index){const def=model.plan.rooms[index];try{const [object,data]=await Promise.all([roomObject(def),friendObject(def.friend)]);if(disposed||model.roomIndex!==index)return;mountRoom(object,def);mountFriend(data,model.rooms[index].friend);for(const f of flames.values()){scene.remove(f.sprite,f.glow,f.ring);}flames.clear();for(const b of burnables.values())b.done=false;cam.dolly=0;}catch{}}
+  async function switchRoom(index){
+    if(roomBarrier&&mountedRoomIndex===index&&ready)return;
+    const def=model.plan.rooms[index],request=++roomRequest;
+    if(roomBarrier){ready=false;loadFailed=false;roomRoot.visible=false;pickables=[];friendRing.visible=false;if(friend)friend.root.visible=false;}
+    try{
+      const [object,data]=await Promise.all([roomObject(def),friendObject(def.friend)]);
+      if(disposed||model.roomIndex!==index||(roomBarrier&&request!==roomRequest))return;
+      mountRoom(object,def);mountFriend(data,model.rooms[index].friend);for(const f of flames.values()){scene.remove(f.sprite,f.glow,f.ring);}flames.clear();for(const b of burnables.values())b.done=false;cam.dolly=0;
+      mountedRoomIndex=index;if(roomBarrier){roomRoot.visible=true;ready=true;}
+    }catch{if(roomBarrier&&!disposed&&request===roomRequest)loadFailed=true;}
+  }
   function burst(pos){const b=bursts.find(x=>x.t<0)||bursts[0];b.t=0;b.s.position.fromArray(pos);b.s.visible=true;b.s.scale.set(1.4,2.8,1);for(let i=0;i<4;i++)spawnSteam(pos,.9);}
   function spawnPuff(pos,heat){const p=puffs.find(x=>!x.s.visible);if(!p)return;p.s.visible=true;p.life=0;p.max=2.2+Math.random()*1.2;p.size=.5+heat*.5;p.s.position.set(pos[0]+(Math.random()-.5)*.3,pos[1]+.5,pos[2]+(Math.random()-.5)*.3);p.vel.set((Math.random()-.5)*.25,.55+Math.random()*.3,(Math.random()-.5)*.2);}
   function spawnSteam(pos,size=.6){const p=steams.find(x=>!x.s.visible);if(!p)return;p.s.visible=true;p.life=0;p.max=1+Math.random()*.6;p.size=size;p.s.position.set(pos[0]+(Math.random()-.5)*.4,pos[1]+.2,pos[2]+(Math.random()-.5)*.4);p.vel.set((Math.random()-.5)*.6,1+Math.random()*.6,(Math.random()-.5)*.6);}
@@ -161,7 +181,7 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
     }}
   // ---- per frame -----------------------------------------------------------------------------------------------------------------------
   function update(dt){
-    if(disposed)return;time+=dt;consumeEvents();
+    if(disposed)return;time+=dt;consumeEvents();if(roomBarrier&&!ready)return;
     const room=model.room,inRoom=model.inRoom;
     // camera: dolly in on a new room, a slow breath, a lean toward the aim, a look at the exit when the room is clear
     cam.dolly=Math.min(1,cam.dolly+dt/.9);const d=smooth(cam.dolly);
@@ -216,15 +236,15 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   }
   // ---- picking and projection ----------------------------------------------------------------------------------------------------------
   const ray=new T.Raycaster(),ndc=new T.Vector2(),backWall=new T.Plane(new T.Vector3(0,0,1),ROOM_DEPTH/2),floor=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3();
-  function pick(x,y){ndc.set(x/width*2-1,1-y/height*2);ray.setFromCamera(ndc,camera);
+  function pick(x,y){if(roomBarrier&&!ready)return null;ndc.set(x/width*2-1,1-y/height*2);ray.setFromCamera(ndc,camera);
     const hits=ray.intersectObjects(pickables,false).filter(h=>h.object.visible&&h.object.parent?.visible!==false);
     if(hits.length){const p=hits[0].point;return [p.x,p.y,p.z];}
     if(ray.ray.intersectPlane(backWall,hit)&&hit.y>=0&&hit.y<=ROOM_HEIGHT+.5)return [hit.x,hit.y,hit.z];
     if(ray.ray.intersectPlane(floor,hit))return [hit.x,0,hit.z];return null;}
   function project(p){tmp.fromArray(p).project(camera);return {x:(tmp.x+1)*width/2,y:(1-tmp.y)*height/2};}
   function resize(w,h,dpr){width=Math.max(1,w);height=Math.max(1,h);renderer.setPixelRatio(dpr);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();}
-  function render(){if(disposed)return;renderer.render(scene,camera);}
+  function render(){if(disposed||(roomBarrier&&!ready))return;renderer.render(scene,camera);}
   function metrics(){const info=renderer.info.render;let triangles=0,draws=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite||o.isPoints){const g=o.geometry;triangles+=g?Math.round((g.index?.count||g.attributes.position?.count||0)/3):2;draws++;}});return {triangles:info.triangles,drawCalls:info.calls,sceneTriangles:triangles,sceneObjects:draws,crew:Boolean(crew),friend:Boolean(friend),roomBuilt:Boolean(roomVisual?.userData.built),burnables:burnables.size,puffs:puffs.filter(p=>p.s.visible).length,lite,width,height,ready,loadFailed};}
   function dispose(){if(disposed)return;disposed=true;friend?.mixer.stopAllAction();crewRig?.dispose();scene.traverse(o=>{if(o.geometry&&!disposables.has(o.geometry))o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];for(const m of ms)if(m&&!disposables.has(m)){for(const v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose();}});for(const d of disposables)d.dispose?.();disposables.clear();scene.clear();renderer.dispose();renderer.forceContextLoss?.();}
-  return {get ready(){return ready;},get loadFailed(){return loadFailed;},scene,camera,update,render,resize,pick,project,metrics,dispose,get crewPosition(){return crew?crew.position:null;}};
+  return {get ready(){return ready;},get loadFailed(){return loadFailed;},scene,camera,update,render,resize,pick,project,metrics,dispose,retryRoom(){if(!roomBarrier||disposed||ready)return false;void switchRoom(model.roomIndex);return true;},get crewPosition(){return crew?crew.position:null;}};
 }

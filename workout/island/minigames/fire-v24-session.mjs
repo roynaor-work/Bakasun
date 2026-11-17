@@ -4,10 +4,10 @@
  * bar on the left, a three-step picture lesson on the first entry stage. Touch: one finger on the room aims and sprays (the water goes where
  * the finger is, with help onto the nearest fire); a short tap on the friend carries them out. The model is fire-v24-interior.mjs, the
  * picture is fire-v24-scene.mjs. Nothing is written to the save. */
-import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-16';
-import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-16';
-import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-16';
-import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-16';
+import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-17';
+import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-17';
+import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-17';
+import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-17';
 
 const NS='http://www.w3.org/2000/svg';
 const ICONS={...FIRE_V23_ICONS,clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',hand:'M8 13V5a1.5 1.5 0 0 1 3 0v6V4a1.5 1.5 0 0 1 3 0v7V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0',hold:'M12 3a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Zm0 4v3M5 20h14',friend:'M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 10a6 6 0 0 1 12 0M4 9l2-2m14 2-2-2'};
@@ -15,11 +15,11 @@ function icon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribut
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 
 /** @param ctx the fire session context (dialog, canvas, controls, t, lite, engine); `plan` the entry plan; `onDone(result)` once the firefighter is out. */
-export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel}){
+export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel,loadTimeoutMs=15000}){
   const {dialog,t}=ctx,host=ctx.canvas.parentElement||dialog,audio=createG2nAudio();audio.unlock();
   const model=createModel({plan,sound:e=>audio.play(e)});
   const canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-16',import.meta.url).href;document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-17',import.meta.url).href;document.head.append(link);
   dialog.classList.add('fire-v24-inside');
   // the street HUD and controls step aside while we are inside (visibility only; the street session keeps its nodes)
   const hidden=[...dialog.children].filter(n=>!n.classList.contains('game-header')&&!n.classList.contains('game-stage')&&!n.classList.contains('shell-countdown')).map(n=>[n,n.style.visibility]);
@@ -36,12 +36,26 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   const tools=el('div','fv24-tools');tools.setAttribute('role','group');tools.setAttribute('aria-label',t('fire.v24.tools'));const toolButtons={};
   if(model.tools.length>1)for(const tool of model.tools){const b=el('button','fv24-tool');b.type='button';b.dataset.tool=tool;b.setAttribute('aria-label',t('fire.v23.tool.'+tool));b.append(icon(tool),el('span','fv24-tool-label',t('fire.v23.tool.'+tool)));const count=el('bdi','fv24-tool-count','');b.append(count);tools.append(b);toolButtons[tool]=b;b.addEventListener('click',()=>{if(!paused)input.tool=tool;});}
   const card=el('div','fv24-card');card.hidden=true;card.setAttribute('role','dialog');
+  const keyboard=new URLSearchParams(globalThis.location?.search||'').get('fireKeyboard')!=='0',previousFocus=document.activeElement;
+  if(keyboard)canvas.tabIndex=0;
   const fade=el('div','fv24-fade');fade.dataset.state='in';const fadeText=el('p','fv24-fade-text',t('fire.v24.loading'));fade.append(fadeText);
   root.append(clock,chips,coach,gauge,tools,card,fade);
   // ---- input -------------------------------------------------------------------------------------------------------------------------------
   const input={};let pointerId=null,downAt=0,downPoint=null,moved=false,paused=false,disposed=false,frame=0,last,W=1,H=1,dpr=1,tutorialShown=false,tutorialDone=!tutorial,lowQuality=Boolean(ctx.lite);
   const scene=createScene({model,canvas,lite:lowQuality});
   const events=new AbortController(),options={signal:events.signal};
+  const contextRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireContextRecovery')!=='0';
+  let contextLost=false,contextTimer=null;
+  canvas.addEventListener('webglcontextlost',e=>{
+    if(!contextRecovery||disposed)return;e.preventDefault();contextLost=true;clear();last=undefined;audio.setPaused(true);
+    fade.dataset.state='in';fadeText.textContent=t('fire.v24.loading');fadeT=0;
+    if(contextTimer!==null)clearTimeout(contextTimer);
+    contextTimer=setTimeout(()=>{if(disposed||!contextLost)return;session.dispose();onDone?.(null,new Error('Fire interior WebGL context was not restored'));},15000);
+  },options);
+  canvas.addEventListener('webglcontextrestored',()=>{
+    if(!contextRecovery||disposed||!contextLost)return;contextLost=false;clearTimeout(contextTimer);contextTimer=null;last=undefined;audio.setPaused(paused);
+  },options);
+  events.signal.addEventListener('abort',()=>{if(contextTimer!==null)clearTimeout(contextTimer);contextTimer=null;},{once:true});
   const local=e=>{const r=canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};};
   const aimAt=p=>{const world=scene.pick(p.x,p.y);if(!world){delete input.aim;return;}const help=model.assist(world);input.aim=help.point;input.aimRaw=world;};
   canvas.addEventListener('pointerdown',e=>{if(paused||pointerId!==null||!tutorialDone)return;e.preventDefault();audio.unlock();pointerId=e.pointerId;downAt=performance.now();moved=false;downPoint={x:e.clientX,y:e.clientY};try{canvas.setPointerCapture(e.pointerId);}catch{}
@@ -52,7 +66,8 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
       // a tap near the friend on the screen is a tap on the friend (the pick ray would land on the floor behind them)
       if(f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
       if(!input.tap){const world=scene.pick(l.x,l.y);if(world)input.tap=world;}}delete input.aim;delete input.aimRaw;},options);
-  card.addEventListener('pointerdown',e=>{e.preventDefault();if(paused)return;if(!tutorialDone){tutorialDone=true;card.hidden=true;return;}input.skip=true;},options);
+  card.addEventListener(keyboard?'click':'pointerdown',e=>{if(!keyboard)e.preventDefault();if(paused)return;if(!tutorialDone){tutorialDone=true;card.hidden=true;if(keyboard)canvas.focus({preventScroll:true});return;}input.skip=true;if(keyboard)canvas.focus({preventScroll:true});},options);
+  events.signal.addEventListener('abort',()=>{if(keyboard&&previousFocus?.isConnected)previousFocus.focus({preventScroll:true});},{once:true});
   for(const type of ['contextmenu','selectstart','dragstart'])root.addEventListener(type,e=>e.preventDefault(),options);
   const clear=()=>{for(const k of Object.keys(input))delete input[k];pointerId=null;};
   window.addEventListener('blur',clear,options);document.addEventListener('visibilitychange',()=>{clear();last=undefined;},options);
@@ -61,6 +76,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   const observer=new ResizeObserver(resize);observer.observe(canvas);resize();
   // ---- HUD text -----------------------------------------------------------------------------------------------------------------------------
   let lastCoach='',lastCard='',tenSaid=false;
+  function continueLabel(){const node=el(keyboard?'button':'p','fv24-card-tap',t('fire.v24.tutorial.go'));if(keyboard){node.type='button';queueMicrotask(()=>{if(!disposed&&!card.hidden)node.focus({preventScroll:true});});}return node;}
   function coachKey(s){const f=model.feedback;if(f&&model.time-f.at<2.6)return f.key;
     const p=s.phase;if(p==='enter')return 'fire.v24.loading';if(p==='leave')return 'fire.v24.say.leave';if(p==='clear')return 'fire.v24.say.roomClear';if(p==='handover')return 'fire.v24.say.handover';
     const r=s.room;if(!r)return 'fire.v24.loading';const fr=r.friend,near=r.spots.find(x=>x.id===fr.near);
@@ -76,9 +92,9 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
     for(const [tool,b]of Object.entries(toolButtons)){b.classList.toggle('active',s.tool===tool);b.setAttribute('aria-pressed',String(s.tool===tool));const lvl=tool==='blanket'?(s.blankets?1:0):(s.tanks[tool]??1);b.style.setProperty('--fv24-level',String(lvl));b.querySelector('.fv24-tool-count').textContent=tool==='blanket'?String(s.blankets):'';
       const wants=r&&s.phase==='play'&&r.spots.some(x=>!x.done&&((x.kind==='electric'&&tool==='extinguisher')||(x.kind==='oil'&&tool==='blanket')||(x.kind==='heavy'&&tool==='foam')));b.classList.toggle('hint',Boolean(wants)&&s.tool!==tool);}
     // cards: the lesson (first entry stage) then the room card
-    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend','fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,el('p','fv24-card-tap',t('fire.v24.tutorial.go')));}
-    else if(tutorialDone&&s.phase==='intro'&&r){const id='room:'+r.id+':'+s.roomIndex;card.hidden=false;if(lastCard!==id){lastCard=id;card.dataset.card='room';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.room.'+r.id)),el('p','fv24-card-rule',t('fire.v24.intro',{room:t('fire.v24.room.'+r.id),friend:t('fire.v24.friend.'+r.friend.id)})),el('p','fv24-card-clock',t('fire.v24.introClock',{seconds:r.limit})),el('p','fv24-card-tap',t('fire.v24.tutorial.go')));}}
-    else if(tutorialDone)card.hidden=true;
+    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend','fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,continueLabel());}
+    else if(tutorialDone&&s.phase==='intro'&&r){const id='room:'+r.id+':'+s.roomIndex;card.hidden=false;if(lastCard!==id){lastCard=id;card.dataset.card='room';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.room.'+r.id)),el('p','fv24-card-rule',t('fire.v24.intro',{room:t('fire.v24.room.'+r.id),friend:t('fire.v24.friend.'+r.friend.id)})),el('p','fv24-card-clock',t('fire.v24.introClock',{seconds:r.limit})),continueLabel());}}
+    else if(tutorialDone){if(keyboard&&!card.hidden&&card.contains(document.activeElement))canvas.focus({preventScroll:true});card.hidden=true;}
     const key=coachKey(s);if(key!==lastCoach){lastCoach=key;coachText.textContent=t(key);}
     root.dataset.phase=s.phase;
   }
@@ -87,27 +103,41 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   function updateAudio(){audioModel.spraying=model.spraying&&model.tool!=='blanket';audioModel.pressure=model.tanks[model.tool]??1;audioModel.flames=model.room&&model.inRoom?model.room.spots.filter(s=>!s.done).map(()=>({active:true,heat:1})):[];audio.update(audioModel,audioBalance);}
   // ---- frame ------------------------------------------------------------------------------------------------------------------------------------
   let samples=0,slow=0,fadeT=0,done=false,fpsAcc=0,fpsN=0;const fps=[];
+  // A required room failure is outside the street loader's one-shot ready watcher.
+  const loadRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireLoadRecovery')!=='0';
+  let loadTimer=null;
+  function failLoad(error){if(disposed||done)return;done=true;session.dispose();onDone?.(null,error);}
+  function watchLoading(){
+    if(scene.loadFailed){failLoad(new Error('Fire interior load failed'));return true;}
+    if(scene.ready){if(loadTimer!==null)clearTimeout(loadTimer);loadTimer=null;}
+    else if(loadTimer===null)loadTimer=setTimeout(()=>{loadTimer=null;if(!scene.ready)failLoad(new Error('Fire interior load timed out'));},Math.max(1,Number(loadTimeoutMs)||15000));
+    return false;
+  }
+  events.signal.addEventListener('abort',()=>{if(loadTimer!==null)clearTimeout(loadTimer);loadTimer=null;},{once:true});
   function tick(now){
     if(disposed)return;frame=requestAnimationFrame(tick);
-    const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(.1,elapsed/1000);last=now;
+    const elapsed=last===undefined?0:now-last,dt=paused||document.hidden||contextLost?0:Math.min(.1,elapsed/1000);last=now;
     if(dt>0){samples++;if(elapsed>40)slow++;fpsAcc+=elapsed;fpsN++;if(fpsN>=30){fps.push(Math.round(1000/(fpsAcc/fpsN)));if(fps.length>20)fps.shift();fpsAcc=fpsN=0;}if(samples>=90){if(slow>45&&!lowQuality){lowQuality=true;resize();}samples=slow=0;}}
     try{
+      if(loadRecovery&&watchLoading())return;
       if(scene.ready&&fade.dataset.state==='in'){fadeT+=dt;if(fadeT>.35)fade.dataset.state='clear';}
       const running=scene.ready&&tutorialDone&&!paused&&dt>0&&fade.dataset.state!=='in';
       if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;model.update(dt,step);}
-      scene.update(paused?0:dt);scene.render();updateAudio();updateHud();
+      scene.update(paused?0:dt);
+      if(new URLSearchParams(globalThis.location?.search||'').get('fireRoomBarrier')!=='0'&&!scene.ready){fade.dataset.state='in';fadeText.textContent=t('fire.v24.loading');fadeT=0;clear();}
+      scene.render();updateAudio();updateHud();
       if(model.result&&!done){done=true;fadeText.textContent=t('fire.v24.leaving');fade.dataset.state='out';setTimeout(()=>{if(disposed)return;const result=model.result;session.dispose();onDone?.(result);},420);}
     }catch(error){cancelAnimationFrame(frame);if(!disposed){session.dispose();onDone?.(null,error);}if(new URLSearchParams(location.search).get('dev')==='1')console.error(error);}
   }
   frame=requestAnimationFrame(tick);
   const session={
     model,scene,
-    get ready(){return scene.ready;},get loadFailed(){return scene.loadFailed;},
-    setPaused(v){paused=Boolean(v);audio.setPaused(paused);clear();last=undefined;},
+    get ready(){return scene.ready&&!contextLost;},get loadFailed(){return scene.loadFailed;},
+    setPaused(v){paused=Boolean(v);audio.setPaused(paused||contextLost);clear();last=undefined;},
     dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();audio.dispose();scene.dispose();canvas.remove();root.remove();link.remove();dialog.classList.remove('fire-v24-inside');for(const [n,v]of hidden)n.style.visibility=v;},
     /** Model state plus where the friend and the fires are on the screen (CSS px of the page), for the browser checks. */
     get snapshot(){const s=model.snapshot(),r=canvas.getBoundingClientRect(),screen=p=>{const q=scene.project(p);return {x:+(r.left+q.x).toFixed(1),y:+(r.top+q.y).toFixed(1)};};
-      const out={...s,ready:scene.ready,tutorialOpen:!tutorialDone,paused,renderMetrics:{...scene.metrics(),fps:fps.slice(),dpr},audio:audio.snapshot(),viewport:{width:W,height:H}};
+      const out={...s,ready:scene.ready&&!contextLost,contextLost,tutorialOpen:!tutorialDone,paused,renderMetrics:{...scene.metrics(),fps:fps.slice(),dpr},audio:audio.snapshot(),viewport:{width:W,height:H}};
       if(s.room){out.screen={spots:s.room.spots.map(x=>({id:x.id,kind:x.kind,done:x.done,...screen([x.pos[0],x.pos[1]+.25,x.pos[2]])})),friend:{...screen([s.room.friend.pos[0],s.room.friend.height*.5,s.room.friend.pos[2]]),state:s.room.friend.state}};}
       return out;},
   };

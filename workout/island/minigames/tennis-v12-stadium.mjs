@@ -26,13 +26,13 @@ export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=
 export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,camera,lateCrowd=false}){
  const flag=params?.get?.('tennisStadium');
  if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
- const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-16`,base);
+ const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-17`,base);
  const use3dFlag=params?.get?.('tennisCrowd3d')!=='0';
  const crowdBase=new URL('../assets/tennis-crowd-v22/',base);
  const [models,city,crowdModule]=await Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
   new T.TextureLoader().loadAsync(url('evening-city.png').href),
-  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-16').catch(()=>null):null]);
+  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-17').catch(()=>null):null]);
  const library=new Map(models),halfLength=config.court.halfLength,group=new T.Group();group.name='tennis-v12-stadium';
  const disposables=[city],track=o=>{disposables.push(o);return o;};
  city.colorSpace=T.SRGBColorSpace;
@@ -85,7 +85,10 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
  if(lateCrowd&&crowdModule?.createLODCrowd){metrics.crowdLate='loading';void (async()=>{let late=null;try{
    if(typeof lateCrowd?.then==='function')await lateCrowd;if(disposed)return;
    const manifest=await (await fetch(new URL('assets.json',crowdBase))).json(),cache=new Map();
-   for(const asset of manifest.assets||[]){const href=new URL(asset.file,crowdBase).href;cache.set(href,fetch(href).then(r=>{if(!r.ok)throw Error(asset.file+' '+r.status);return r.arrayBuffer();}));}
+   for(const asset of manifest.assets||[]){const href=new URL(asset.file,crowdBase).href,pending=fetch(href).then(r=>{if(!r.ok)throw Error(asset.file+' '+r.status);return r.arrayBuffer();});
+    // The crowd consumes these sequentially: observe every failure now, even if an earlier file is still pending.
+    // Keep the original rejected promise so the consumer's catch still selects the billboard fallback. ?tennisCrowdPrefetchSafe=0 rolls back.
+    if(params?.get?.('tennisCrowdPrefetchSafe')!=='0')pending.catch(()=>{});cache.set(href,pending);}
    class Prefetched extends GLTFLoader{loadAsync(url,onProgress){const hit=cache.get(new URL(url,crowdBase).href);return hit?hit.then(buffer=>this.parseAsync(buffer,new URL('./',url).href)):super.loadAsync(url,onProgress);}}
    late=await crowdModule.createLODCrowd({T,GLTFLoader:Prefetched,seats:seatList(),base:crowdBase});if(disposed){late.dispose?.();return;}
    for(const m of late.batches)m.material.color.set('#c2ccd8');crowd3d=late;group.add(crowd3d.root);if(crowd){crowd.visible=false;}

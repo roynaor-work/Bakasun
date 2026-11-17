@@ -6,9 +6,9 @@
  * shapes. `?navalAssets=0` keeps v22's procedural shapes and loads nothing. */
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-16';
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-16';
-import {dataURL} from '../release.mjs?v=island-v2-20261107-16';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-17';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-17';
+import {dataURL} from '../release.mjs?v=island-v2-20261107-17';
 
 export const navalAssetsEnabled=search=>polishValue('navalAssets',search)!=='0';
 export const NAVAL_ASSET_FILES=Object.freeze({plane:'assets/game-naval/models/plane.glb',heli:'assets/game-naval/models/helicopter.glb',buoy:'assets/game-naval/models/supply_buoy.glb',atlas:'assets/game-naval/models/naval_atlas_1024.png'});

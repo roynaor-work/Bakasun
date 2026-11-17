@@ -14,15 +14,15 @@ import {soccerFeelEnabled,soccerFeelDiveClip,soccerFeelDivePlan,soccerFeelSlideP
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
 import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
-import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-16'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
-import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-16';
-import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-16';
-import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-16';
+import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-17'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-17';
+import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-17';
+import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-17';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 // v24 (13/11): Codex body v2 (?athleteBodyV2=0), clips v13 (?soccerClipsV13=0)
-import {athleteBodyV2Enabled,soccerClipsV13Enabled,soccerV24ClipsUrl,soccerV24ClipStates,soccerV24RestartClip,SOCCER_V24_SLIDE,soccerV24SlideTime,soccerV24LobClip,soccerV24ChestClip,SOCCER_V24_CHEST,SOCCER_V24_HELD,soccerV24Held} from './soccer-v24.mjs?v=island-v2-20261107-16';
+import {athleteBodyV2Enabled,soccerClipsV13Enabled,soccerV24ClipsUrl,soccerV24ClipStates,soccerV24RestartClip,SOCCER_V24_SLIDE,soccerV24SlideTime,soccerV24LobClip,soccerV24ChestClip,SOCCER_V24_CHEST,SOCCER_V24_HELD,soccerV24Held} from './soccer-v24.mjs?v=island-v2-20261107-17';
 // v24.1 (14/11): Codex tackle-keeper-v2 (?soccerTackleV2=0), volley-scissor-v1 (?soccerAirChoice=0), kicks-v2 (?soccerKicksV2=0); `?soccerV241=0` = all off
-import {soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-16';
+import {soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-17';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -430,7 +430,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         }
         }
       }
-      else if(dive?.v2&&state===dive.name&&actions[state].time<dive.stand&&(mode==='catch'||mode==='recover'||mode==='idle'||mode==='run')){/* feel v2: the dive lands and gets up on its own clip; a catch after a diving save keeps the dive */}
+      else if(dive?.v2&&state===dive.name&&actions[state].time<dive.stand&&((tackle241&&mode==='dive')||mode==='catch'||mode==='recover'||mode==='idle'||mode==='run')){/* feel v2: the dive lands and gets up on its own clip; v24.1 also keeps it during the simulated dive after its first frame */}
       else if(mode==='recover'&&edge){
         const kind=p.slideKind&&actions['slide_'+p.slideKind+'_recover']?(p.slideWon===false&&actions.slide_miss?'slide_miss':'slide_'+p.slideKind+'_recover'):'recover',clip=data.states[kind],total=Math.max(.2,(p.recover||0)*(kind==='slide_miss'?.5:.75));
         change(kind,'recovery_allowed',true,{rate:Math.max(1,clip.durationSeconds/total)});
@@ -487,7 +487,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       else if(soccerV24Held(state)&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>SOCCER_V24_HELD[state].contact+SOCCER_V24_HELD[state].follow)){/* a v24 one-shot (lob pass, chest control) plays through its contact */}
       else if(state==='v9_run_brake'&&!(moving&&actions[state].time>(mine?heldClipRelease(state,true):.2))&&actions[state].time<data.states[state].durationSeconds-.05){/* the brake plays to its end unless the player clearly sets off again */}
       else if((soccerCodexHeld(state)||soccerV10Held(state))&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>(mine?heldClipRelease(state,true):.7))){/* a Codex once-clip plays to its end */}
-      else if(slide&&state===slide.name&&!(slide.v24?slideTimelineV24:slide.plan?slideTimelineV2:slideTimeline)(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
+      else if(slide&&state===slide.name&&!(slide.v241?slideTimelineV241:slide.v24?slideTimelineV24:slide.plan?slideTimelineV2:slideTimeline)(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
       else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&!state.startsWith('v11_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';

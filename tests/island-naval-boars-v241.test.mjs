@@ -27,7 +27,7 @@ import {WEAPON_ORDER,fam} from '../workout/island/minigames/boar-island/chain.mj
 const read=path=>readFile(new URL(path,import.meta.url),'utf8');
 const config=JSON.parse(await read('../workout/island/data/config.json')).minigames,nb=config.navalDuel,strings=JSON.parse(await read('../workout/island/data/strings.he.json'));
 const FRAME=1/60,phone={...config,width:844,height:390},DEG=Math.PI/180;
-function naval(stage,seed,search='',balance=nb){globalThis.location={search};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+function naval(stage,seed,search='',balance=nb){globalThis.location={search:search+(search?'&':'?')+'phoneFixB=0'};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
 const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
 const dist=(m,e)=>Math.hypot(e.x-m.playerShip.x,e.z-m.playerShip.z);
 const steer=(m,heading)=>{const d=Math.atan2(Math.sin(heading-(m.camera?.heading||0)),Math.cos(heading-(m.camera?.heading||0)));return {moveX:Math.sin(d),moveZ:-Math.cos(d)};};
@@ -159,7 +159,7 @@ test('input layer: the Lock button rim fills with the acquisition (data-radar, -
  const m=naval(10,2);run(m,30);const made=[],away={left:-1e4,right:-1e4,top:-1e4,bottom:-1e4,width:0,height:0};
  const el=(name,rect)=>{const props=new Map();const e={name,dataset:{},style:{setProperty(k,v){props.set(k,v);},removeProperty(){},props},listeners:new Map(),innerHTML:'',hidden:false,setAttribute(){},getAttribute:()=>null,remove(){},querySelector:()=>null,addEventListener(t,fn){e.listeners.set(t,[...(e.listeners.get(t)||[]),fn]);},closest:()=>null,getBoundingClientRect:()=>rect||{left:0,top:0,right:844,bottom:390,width:844,height:390},setPointerCapture(){}};return e;};
  const fire=el('fire',{left:734,right:822,top:280,bottom:368,width:88,height:88}),canvas=el('canvas'),controls={addEventListener(){},style:{setProperty(){},removeProperty(){}},dataset:{},classList:{toggle(){},remove(){},add(){}},querySelector:s=>s==='#shoot'?fire:null,prepend(){},append(){}};
- globalThis.window={addEventListener(){}};globalThis.document={addEventListener(){},createElement:tag=>{const e=el('made'+made.length,away);e.tag=tag;made.push(e);return e;}};globalThis.location={search:''};
+ globalThis.window={addEventListener(){}};globalThis.document={addEventListener(){},createElement:tag=>{const e=el('made'+made.length,away);e.tag=tag;made.push(e);return e;}};globalThis.location={search:'?phoneFixB=0'};
  try{const input=createNavalInput({controls,canvas,balance:nb,t:k=>k},()=>m,()=>null),lockBtn=made.find(e=>e.className==='naval-lock-btn');
   lockBtn.listeners.get('pointerdown')[0]({pointerId:5,clientX:700,clientY:200,button:0,preventDefault(){}});lockBtn.listeners.get('pointerup')[0]({pointerId:5,clientX:701,clientY:200});
   m.update(FRAME,input.sample({}));assert.ok(m.radar,'the Lock button starts an acquisition');m.update(FRAME,input.sample({}));assert.equal(lockBtn.dataset.radar,'acquiring');const p1=+lockBtn.style.props.get('--naval-radar');assert.ok(p1>=0&&p1<1);

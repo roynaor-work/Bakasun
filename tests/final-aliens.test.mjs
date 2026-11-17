@@ -1,3 +1,5 @@
+// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by tests/island-phone-fix-c-progression.test.mjs.
+globalThis.location={search:'?phoneFixC=0'};
 // Final fix (Fable, 11/11/2026), aliens v15: steady cannon at about 5.6/s, Vulcan only in short bursts (taps too, 12/11), a hard cap at
 // the spawn point that no gear, bonus or input path can exceed, stage 1 about 90-130 s. Pure model tests.
 // 13/11/2026 (v23): two fire buttons are the default now (steady cannon on the fire button, Vulcan with its own heat on a second

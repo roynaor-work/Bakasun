@@ -1,12 +1,12 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-16';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-16';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-16';
-import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-16';
-import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-16';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-16';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-16';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-16';
-import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-16';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-17';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-17';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-17';
+import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-17';
+import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-17';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-17';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-17';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-17';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-17';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

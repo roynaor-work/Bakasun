@@ -1,7 +1,7 @@
 import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-16';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-16';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-17';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-17';
 import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
@@ -11,8 +11,17 @@ import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {bodyTarget,followBody,carvePose,travelYaw,curveBank} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-16';
-import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-16';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-17';
+import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-17';
+
+/** Track heading is positive toward +X; with downhill -Z the root's Y rotation
+ * must have the opposite sign. Keep travelYaw's track-space contract for callers.
+ * ?alpineYawFix=0 restores the v24.1 presentation; alpineV241=0 keeps v24. */
+export function riderRootYaw(tilt, frame = {}, speed = 20, lateralSpeed = 8.5, v241 = true, search = globalThis.location?.search || '') {
+  if (!v241 || frame.crashed) return carvePose(tilt).yaw;
+  const heading = travelYaw(tilt, frame, speed, lateralSpeed);
+  return new URLSearchParams(search).get('alpineYawFix') === '0' ? heading : -heading;
+}
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
@@ -54,7 +63,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   // Ski league v23: a league stage names its theme (visual.theme); its look module grades the scene and adds the theme layers.
   // Regular stages never load it. Any failure keeps the regular look.
   let leagueLook = null, theme = null, themeLayers = null, disposeBackplate = null;
-  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-16'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
+  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-17'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
   const trackMats=[],snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
   function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
@@ -517,7 +526,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
       const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll + (V241 ? curveBank(s.curve) : 0);
       // v24.1: the skis point where the rider really goes (travelYaw) and the body banks into the course's turns (curveBank).
-      const yawShown = V241 && !s.crashed ? travelYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed) : carve.yaw;
+      const yawShown = riderRootYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed, V241);
       place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, yawShown, s.airKind === 'ramp' ? r.air * .12 : 0);
       if (V241 && id === 'player') {
         // The shield bubble around the rider, the magnet ring on the snow, and a spray of snow from the skis while braking.

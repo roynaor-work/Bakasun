@@ -6,10 +6,10 @@
  *  - the clear-sky wait at the end of a stage: a banner over the battle ("a helicopter is up, shoot it down with the Vulcan") and an edge
  *    arrow toward the aircraft when it is off the picture.
  * Nothing is drawn for a part whose switch is off (the model reports `radarOn`, `airFinale`). */
-import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-16';
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-16';
-import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-16';
-import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-16';
+import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-17';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-17';
+import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-17';
+import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-17';
 const TAU=Math.PI*2,OUTLINE=NAVAL_LOCK_COLORS.outline;
 function brackets(p,b,color,arm,alpha=1){
  p.save();p.globalAlpha=alpha;p.lineCap='round';p.lineJoin='round';
@@ -43,9 +43,9 @@ export function drawNavalV241(p,m,balance,project,width,height){
    // The gauge: a dark track, the filled part in amber, a tick at the top; the sweep: a short wedge that turns once every 0.6 s.
    p.lineCap='round';p.strokeStyle=OUTLINE;p.lineWidth=7;p.globalAlpha=.6;p.beginPath();p.arc(b.x,b.y,R,0,TAU);p.stroke();p.globalAlpha=1;
    p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=4;p.beginPath();p.arc(b.x,b.y,R,-Math.PI/2,-Math.PI/2+TAU*k);p.stroke();
-   const a=time*TAU/.6;p.save();p.globalAlpha=.32;p.fillStyle=NAVAL_V241_COLORS.radar;p.beginPath();p.moveTo(b.x,b.y);p.arc(b.x,b.y,R-4,a-.55,a);p.closePath();p.fill();p.globalAlpha=.9;p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=1.6;p.beginPath();p.moveTo(b.x,b.y);p.lineTo(b.x+Math.cos(a)*(R-4),b.y+Math.sin(a)*(R-4));p.stroke();p.restore();
+   const a=Number.isFinite(r.sweep)?r.sweep:time*TAU/.6;p.save();p.globalAlpha=.32;p.fillStyle=NAVAL_V241_COLORS.radar;p.beginPath();p.moveTo(b.x,b.y);p.arc(b.x,b.y,R-4,a-.55,a);p.closePath();p.fill();p.globalAlpha=.9;p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=1.6;p.beginPath();p.moveTo(b.x,b.y);p.lineTo(b.x+Math.cos(a)*(R-4),b.y+Math.sin(a)*(R-4));p.stroke();p.restore();
    navalPadlock(p,b.x+box.w/2+11,b.y-box.h/2-4,NAVAL_V241_COLORS.radar,1,true);
-   out.radar={index:r.index,progress:+k.toFixed(2),need:+(r.need||0).toFixed(2),queued:Boolean(r.queued),x:Math.round(b.x),y:Math.round(b.y),r:Math.round(R),box:{w:Math.round(box.w),h:Math.round(box.h)},offscreen:false};
+   out.radar={index:r.index,progress:+k.toFixed(2),need:+(r.need||0).toFixed(2),queued:Boolean(r.queued),...(Number.isFinite(r.sweep)?{sweep:r.sweep,scans:r.scans,bearing:r.bearing}:{}),x:Math.round(b.x),y:Math.round(b.y),r:Math.round(R),box:{w:Math.round(box.w),h:Math.round(box.h)},offscreen:false};
   }else{const q=project(e.x,e.z,1.5),hint=navalEdgeHint(q,width,height,30);if(hint)edgeArrow(p,hint,NAVAL_V241_COLORS.radar);out.radar={index:r.index,progress:+k.toFixed(2),offscreen:true,arrow:hint?{x:Math.round(hint.x),y:Math.round(hint.y)}:null};}
  }
  // 2. A lock refused (out of the radar's range) or lost (the hull left it): red brackets that fade and one short reason.

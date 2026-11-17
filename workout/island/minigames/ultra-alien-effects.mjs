@@ -2,7 +2,7 @@ import {drawAlienFeedback} from './ultra-alien-feedback.mjs';
 export {drawAlienFallbackFeedback} from './ultra-alien-feedback.mjs';
 import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons,drawV12Tracer} from './alien-v12-draw.mjs';
-import {drawV25Shot} from './alien-v25-draw.mjs?v=island-v2-20261107-16';
+import {drawV25Shot} from './alien-v25-draw.mjs?v=island-v2-20261107-17';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;

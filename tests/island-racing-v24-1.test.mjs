@@ -1,3 +1,5 @@
+// Historical optional pit cancellation remains available under rollback; tests/island-phone-fix-d.test.mjs checks mandatory automatic entry.
+globalThis.location={search:'?phoneFixD=0'};
 // racing-v24.1 (Roy after v24 on the phone: "a tyre change on only one track, I did not notice whether it went there by itself; the goal is that it goes in for
 // the tyre change automatically after two laps"). ?racingPitAuto=0 brings v24 back; the pure race model keeps v24 unless its config asks (the session does).
 import test from 'node:test';
@@ -124,5 +126,5 @@ test('session, view and style carry v24.1',async()=>{
  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
  const physics=await read('minigames/racing-physics.mjs');assert.match(physics,/const pitAutoOn=!!config\.pitAuto;/);assert.match(physics,/enabled:!!config\.pit,auto:pitAutoOn\}/);assert.match(physics,/state\.events=pitAutoOn\?state\.events\.filter\(e=>e\.id>stepSerial&&\/\^pit\/\.test\(e\.type\)\):\[\];/);assert.match(physics,/pitCrew\.watch\(car,state\.time\)/);
- for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-15/,f+' carries the current tag');
+ for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-16/,f+' carries the current tag');
 });

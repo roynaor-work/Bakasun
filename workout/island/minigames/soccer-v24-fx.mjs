@@ -7,7 +7,7 @@
  * Sheets follow the pack's loading contract (sRGB, straight alpha, linear filtering, no mipmaps, clamp; repeat in U for the trail).
  * Calm (reduced motion or the economy tiers) keeps only the cues that carry information: the selection ring and the switch ring. */
 import * as T from '../vendor/three.module.js';
-import {SOCCER_FX_SPRITES,soccerFxFrame,soccerFxUv,soccerFxForEvent,soccerBallLanded,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-16';
+import {SOCCER_FX_SPRITES,soccerFxFrame,soccerFxUv,soccerFxForEvent,soccerBallLanded,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-17';
 
 const POOL={'landing-turf':3,'slide-turf':3,'goal-confetti':2,'goal-net-ripple':1,'click-ring':2,'power-kick':2};
 const GROUND=new Set(['click-ring','selected-player-ring']);

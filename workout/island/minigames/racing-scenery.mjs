@@ -1,4 +1,4 @@
-import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-16';
+import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-17';
 /** Original, instanced roadside scenery. The view owns every registered resource. */
 // racing-v23: clear>0 (no walls) keeps bushes, rocks, tufts and the grass mounds that far beyond the asphalt; 0 = the old layout
 export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center,clear=0}){

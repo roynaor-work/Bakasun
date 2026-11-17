@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {athleteBodyV22Enabled, paintRegions, v22SkinFor, v22HairFor, v22BodyFor, v22Height, v22Colors, V22_BODIES, V22_HAIR, V22_SKIN, V22_REGION, V22_MAP, V22_LEG_RATIO} from '../workout/island/minigames/athlete-body-v22.mjs';
 import {CANON_REST, CANON18, athleteRetargetMap} from '../workout/island/minigames/athlete-body.mjs';
 import {buildShell} from '../workout/island/tools/offline-shell.mjs';
+import {loadManifest} from '../workout/island/ui/offline.mjs';
 
 const island = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../workout/island');
 const dir = path.join(island, 'assets/athlete-body-v22');
@@ -125,7 +126,7 @@ test('flag wiring: soccer and basketball ask the flag before the Codex body, and
   // no pre-existing branch lost its code: the MakeHuman bodyFactory and the sleeve geometry are still built when v22 is off
   assert.match(hoops, /const sleeves=v22\?null:athleteKitGeometry\(THREE,source,'basketball'\)/);
   // both games import the module with the current release tag
-  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-16/);
+  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-17/);
 });
 
 test('roles: soccer is one body, basketball guard / wing / center are their own', () => {
@@ -163,9 +164,17 @@ test('offline list: the Codex files are cached for soccer and basketball, and th
   const pre = 'assets/athlete-body-v22/';
   for (const list of [soccer, hoops]) { assert.ok(list.includes(pre + 'textures/athlete-atlas.png')); for (const h of V22_HAIR) assert.ok(list.includes(pre + 'hair/' + h + '.glb'), h); assert.ok(list.includes('assets/athlete/athlete.glb'), 'the previous athlete stays cached for the flag'); }
   assert.ok(soccer.includes(pre + 'models/soccer.glb'));
-  // basketball v24.1 (14/11): the default bodies are the athlete-body-v2 guard / wing / centre (assets/hoops-v241/body), cached in their place;
-  // the v22 basketball bodies stay the online fallback (?hoopsBodyV2=0), so the island's offline download stays under its 80 MB cap
-  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(`assets/hoops-v241/body/models/${b}.glb`) && !hoops.includes(pre + `models/${b}.glb`), b);
+  // basketball v24.1 (14/11): the default bodies are the athlete-body-v2 guard / wing / centre (assets/hoops-v241/body), cached in their place.
+  // V241-010 (v24.3): the v22 basketball bodies are cached too, as the rollback bodies of ?hoopsV241=0 / ?hoopsBodyV2=0 on a cold offline cache;
+  // ?hoopsRollbackOffline=0 restores the v24.1 download list, where they stay the online fallback (the v24.1 assertion, kept under that switch).
+  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(`assets/hoops-v241/body/models/${b}.glb`) && hoops.includes(pre + `models/${b}.glb`), b);
+  {
+    const priorLocation = globalThis.location; globalThis.location = {search: '?hoopsRollbackOffline=0'};
+    try {
+      const legacy = (await loadManifest('test', async () => ({ok: true, json: async () => JSON.parse(JSON.stringify(manifest))}))).games.hoops;
+      for (const b of ['guard', 'wing', 'center']) assert.ok(legacy.includes(`assets/hoops-v241/body/models/${b}.glb`) && !legacy.includes(pre + `models/${b}.glb`), 'rollback ' + b);
+    } finally { if (priorLocation === undefined) delete globalThis.location; else globalThis.location = priorLocation; }
+  }
   assert.ok(!hoops.includes(pre + 'models/soccer.glb') && !soccer.includes(pre + 'models/guard.glb'), 'each game downloads only its bodies');
   for (const list of [soccer, hoops]) for (const p of list.filter(p => p.startsWith(pre))) assert.ok((await stat(path.join(island, p))).size > 0, p);
   assert.ok(manifest.shell.includes('minigames/athlete-body-v22.mjs'));

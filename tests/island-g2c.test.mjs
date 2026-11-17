@@ -1,3 +1,5 @@
+// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by tests/island-phone-fix-c-progression.test.mjs.
+globalThis.location={search:'?phoneFixC=0'};
 globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';

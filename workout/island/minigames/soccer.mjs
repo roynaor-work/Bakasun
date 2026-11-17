@@ -1,13 +1,13 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-16';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-17';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-16';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-16';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-16';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-16';
-import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-16';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-16';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-16';
-import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-16';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-17';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-17';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-17';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-17';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-17';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-17';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-17';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-17';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -17,10 +17,10 @@ import {resolveSoccerAI} from './soccer-ai-flag.mjs';
 import {resolveSoccerRules,slideFoul,foulRestart,penaltySpot,throughBallPoint,throughBallSpeed,throughMeetPoint,aiSlideAim} from './soccer-rules.mjs';
 import {resolveSoccerFeel,soccerFeelConfig,feelSwitchDwell} from './soccer-feel.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
-import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-16';
-import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-16';
+import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-17';
+import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-17';
 // v24.1 (soccer-r241.mjs): fouls on standing tackles and the carrier's fall or stumble, volley / header / scissor on a high ball, the shorter slide get-up.
-import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-16';
+import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-17';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -471,6 +471,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function airHeader(){const a=crossConfig.aerial;return {min:a.minHeight,max:a.maxHeight,reach:Math.min(a.reach,Math.max(0,crossConfig.assistance?.contact?.headReach??1.2))};}
   /** v24.1: arm a volley, a header or a scissor kick for the high ball on its way (kept until it arrives, like the v23 header press). */
   function armAir(kind,options){const meet=options.meets?.[kind]||options.arrival;s.headerArm={player:s.controlled,until:s.elapsed+Math.min(SOCCER_AIR_V241.armSeconds,meet.t+.35),at:s.elapsed,kind};event('header-armed',{player:s.controlled,team:0,t:meet.t,kind});}
+  // An explicit v24.1 foot contact owns both the receiver's run and the contact;
+  // ordinary cross assistance must not turn that selected action into a header.
+  const armedAirChoice=p=>airChoice&&s.headerArm?.player===p.id&&(s.headerArm.kind==='volley'||s.headerArm.kind==='scissor');
   /** v24.1: the volley / backward scissor strike: a shot at goal from the air (the scissor kicker has his back to goal and lies on it for
    * SOCCER_AIR_V241.scissor.recover afterwards). The ball is aimed to cross the goal line at a catchable height, like a header. */
   function airKick(p,kind){
@@ -797,7 +800,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(p.id===b.thrower||p.id===b.owner || p.cooldown>0 || p.recover>0 || p.slideTime>0)continue;
       const handsAllowed=b.lastTeam!==p.team&&p.role==='keeper'&&inPenaltyArea(p,p,s,config)&&inPenaltyArea(p,b,s,config);
       const receivingCross=b.flight&&b.vy<0&&s.passTarget?.kind==='loft'&&s.passTarget.player===p.id&&p.team===b.lastTeam&&p.role!=='keeper'&&b.x*direction(p.team)>hx-config.pitch.penaltyDepth&&Math.abs(b.z)<config.pitch.penaltyWidth/2;
-      if(receivingCross){const hc=p.team===0?crossConfig:config;if(canHead(p,b,hc)){p.autoHeadTime+=dt;if(p.autoHeadTime+1e-8>=config.aerial.autoHeaderDelaySeconds&&aerialStrike(p,false,null,hc,true))break;continue;}else p.autoHeadTime=0;}else p.autoHeadTime=0;
+      if(receivingCross&&!armedAirChoice(p)){const hc=p.team===0?crossConfig:config;if(canHead(p,b,hc)){p.autoHeadTime+=dt;if(p.autoHeadTime+1e-8>=config.aerial.autoHeaderDelaySeconds&&aerialStrike(p,false,null,hc,true))break;continue;}else p.autoHeadTime=0;}else p.autoHeadTime=0;
       if(b.y>rules.pickupHeight){if(p.team===1&&p.role!=='keeper'&&b.x*direction(p.team)<-hx+config.aerial.clearanceZone&&aerialStrike(p,true))break;if(!handsAllowed||b.y>config.aerial.keeperHeight)continue;}
       const dist=distance(p,b),owner=b.owner===null?null:players[b.owner];
       if(owner) {
@@ -935,9 +938,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         if(member.hold+1e-8>=k.maxHoldSeconds-keeperThrowLead){member.cooldown=0;kick(member,0,true);}
       }else if(member.id===s.controlled&&role==='keeper')moveControlledKeeper(member,mx,mz,step);
       // A through ball (rules v1) is aimed a run ahead of the receiver: his automatic run reaches further and meets the rolling ball on its path.
-      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&s.passTarget.through&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<Math.max(feelV2?feelCfg.receiveRunDistance:0,(config.assistance?.contact?.receiveRunDistance??3.2)*2.5)){const to=throughMeetPoint(member,s.ball,config,(config.players.speed+(member.speed-1)*config.players.speedPerRank)*personal(member).pace);move(member,to.x-member.x,to.z-member.z,step,1);}
+      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&!armedAirChoice(member)&&s.passTarget.through&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<Math.max(feelV2?feelCfg.receiveRunDistance:0,(config.assistance?.contact?.receiveRunDistance??3.2)*2.5)){const to=throughMeetPoint(member,s.ball,config,(config.players.speed+(member.speed-1)*config.players.speedPerRank)*personal(member).pace);move(member,to.x-member.x,to.z-member.z,step,1);}
       // Feel v2: the controlled receiver sets off toward the pass by himself from further out (receiveRunDistance 9 m, was 3.2) while the stick is idle.
-      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(feelV2?feelCfg.receiveRunDistance:(config.assistance?.contact?.receiveRunDistance??3.2)))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,feelV2?1:.82);
+      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&!armedAirChoice(member)&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(feelV2?feelCfg.receiveRunDistance:(config.assistance?.contact?.receiveRunDistance??3.2)))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,feelV2?1:.82);
       // Air v23: the armed header runs to where the ball comes down at head height while the stick is idle; a pushed stick steers.
       else if(airV23&&member.id===s.controlled&&s.headerArm&&length<=aiConfig.idleThreshold){const meet=s.headerArm.kind&&s.headerArm.kind!=='header'?soccerAirMeet(s.headerArm.kind,member,s.ball,config,{speed:airSpeed(member)}):airMeet(member);if(meet)move(member,meet.x-member.x,meet.z-member.z,step,1);else move(member,0,0,step,1);}
       else if(member.id===s.controlled && !helping())move(member,mx,mz,step,(s.sprint.active?config.sprint.multiplier:1)*(s.charging?config.chargeSpeedMultiplier:1));

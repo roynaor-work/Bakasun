@@ -4,6 +4,24 @@
 import * as core from './core.mjs';
 export * from './core.mjs';
 const {WEAPONS}=core;
+// Phone review F: URL kill switches are read once per game load. Saves retain their schema and balances.
+const phoneQuery=new URLSearchParams(globalThis.location?.search||'');
+export const PHONE_FIX_F=phoneQuery.get('phoneFixes')!=='0'&&phoneQuery.get('phoneFixF')!=='0'&&phoneQuery.get('boar')!=='v1';
+export const UPGRADE_DEFS=PHONE_FIX_F?{...core.UPGRADE_DEFS,cooling:{...core.UPGRADE_DEFS.cooling,desc:'קירור מהיר יותר, טעינה קצרה יותר ו־5% פחות התחממות למקלע בכל דרגה.'}}:core.UPGRADE_DEFS;
+export function weaponStats(save,key){
+  const ws=core.weaponStats(save,key);
+  if(PHONE_FIX_F&&(WEAPONS[key]?.family||key)==='mg'){
+    // Keep each level's damage/rate gains; heat per second now falls 4% per level rather than rising with rate.
+    ws.heatPerShot=ws.heatPerShot*.75*.96**(ws.level-1)/(1+.06*(ws.level-1))*(1-.05*save.upgrades.cooling);
+  }
+  return ws;
+}
+// The battle cools only when not firing; keep the MG shop estimate on that same duty cycle.
+export function sustainedDps(ws,cooling){
+  if(!PHONE_FIX_F||!(ws.family==='mg'||ws.name===WEAPONS.mg.name))return core.sustainedDps(ws,cooling);
+  const on=100/(ws.heatPerShot*ws.rate),off=75/cooling;
+  return ws.damage*ws.pellets*ws.rate*on/(on+off);
+}
 Object.assign(WEAPONS,{
   mg2:{family:'mg',prev:'mg',name:'מקלע כפול',short:'כפול',icon:'≣',desc:'שני קנים בכל ירייה. מהיר יותר, אותו חום.',mode:'heat',unlock:3200,upBase:320,damage:20,rate:15,pellets:1,spread:.005,heatPerShot:1.9,mag:0,reload:0,splash:0,chain:0,color:'#ffe08a'},
   shotgun2:{family:'shotgun',prev:'shotgun',name:'רסס כבד',short:'רסס כבד',icon:'⁙',desc:'עשרה רסיסים, מחסנית גדולה, קטלני מקרוב.',mode:'mag',unlock:3600,upBase:340,damage:17,rate:2.2,pellets:10,spread:.05,heatPerShot:0,mag:8,reload:1.8,splash:0,chain:0,color:'#ffc27a'},
@@ -31,6 +49,7 @@ export function sanitizeSave(raw){
 export function weaponCost(save,key){
   const w=WEAPONS[key],lv=save.weapons[key]||0;
   if(lv>=weaponMax()||lv===0&&!legacy&&weaponLocked(save,key))return Infinity;
+  if(PHONE_FIX_F&&key==='mg'&&lv>0)return Math.round(lv<=6?80*1.5**(lv-1):80*1.5**5*1.4**(lv-6));
   return lv===0?w.unlock:Math.round(lv<=6?w.upBase*1.6**(lv-1):w.upBase*1.6**5*1.4**(lv-6));
 }
 export function buyWeapon(save,key){if(!WEAPONS[key])return false;const c=weaponCost(save,key);if(!Number.isFinite(c)||save.coins<c)return false;save.coins-=c;save.weapons[key]=(save.weapons[key]||0)+1;return true;}
