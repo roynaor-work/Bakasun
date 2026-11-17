@@ -430,7 +430,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         }
         }
       }
-      else if(dive?.v2&&state===dive.name&&actions[state].time<dive.stand&&(mode==='catch'||mode==='recover'||mode==='idle'||mode==='run')){/* feel v2: the dive lands and gets up on its own clip; a catch after a diving save keeps the dive */}
+      else if(dive?.v2&&state===dive.name&&actions[state].time<dive.stand&&((tackle241&&mode==='dive')||mode==='catch'||mode==='recover'||mode==='idle'||mode==='run')){/* feel v2: the dive lands and gets up on its own clip; v24.1 also keeps it during the simulated dive after its first frame */}
       else if(mode==='recover'&&edge){
         const kind=p.slideKind&&actions['slide_'+p.slideKind+'_recover']?(p.slideWon===false&&actions.slide_miss?'slide_miss':'slide_'+p.slideKind+'_recover'):'recover',clip=data.states[kind],total=Math.max(.2,(p.recover||0)*(kind==='slide_miss'?.5:.75));
         change(kind,'recovery_allowed',true,{rate:Math.max(1,clip.durationSeconds/total)});
