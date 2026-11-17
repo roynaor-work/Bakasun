@@ -1,0 +1,2289 @@
+{
+  "passed": true,
+  "checks": 535,
+  "failed": [],
+  "assets": 31,
+  "runtimeBytes": 4708127,
+  "maxAtlasBytes": 531679,
+  "results": [
+    {
+      "check": "water-calm integrity",
+      "passed": true
+    },
+    {
+      "check": "water-calm <= 800000 bytes",
+      "passed": true,
+      "bytes": 316689
+    },
+    {
+      "check": "water-calm frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm temporal wrap",
+      "passed": true,
+      "wrapRMS": 3.0652478405066153,
+      "otherMaxRMS": 3.078250165998965
+    },
+    {
+      "check": "water-calm-normal integrity",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal <= 800000 bytes",
+      "passed": true,
+      "bytes": 523764
+    },
+    {
+      "check": "water-calm-normal frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-calm-normal frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-normal temporal wrap",
+      "passed": true,
+      "wrapRMS": 2.5485572174037725,
+      "otherMaxRMS": 2.557936908770044
+    },
+    {
+      "check": "water-calm-normal normal lengths",
+      "passed": true,
+      "minimum": 0.9913039812475367,
+      "maximum": 1.0003843936332626
+    },
+    {
+      "check": "water-calm-tile integrity",
+      "passed": true
+    },
+    {
+      "check": "water-calm-tile tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-calm-tile tile y",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze integrity",
+      "passed": true
+    },
+    {
+      "check": "water-breeze <= 800000 bytes",
+      "passed": true,
+      "bytes": 348823
+    },
+    {
+      "check": "water-breeze frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze temporal wrap",
+      "passed": true,
+      "wrapRMS": 4.1422641029023435,
+      "otherMaxRMS": 4.1850278018953135
+    },
+    {
+      "check": "water-breeze-normal integrity",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal <= 800000 bytes",
+      "passed": true,
+      "bytes": 531679
+    },
+    {
+      "check": "water-breeze-normal frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-normal frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-normal temporal wrap",
+      "passed": true,
+      "wrapRMS": 5.460453388547154,
+      "otherMaxRMS": 5.469602681851256
+    },
+    {
+      "check": "water-breeze-normal normal lengths",
+      "passed": true,
+      "minimum": 0.9906211473581782,
+      "maximum": 1.0006918022273306
+    },
+    {
+      "check": "water-breeze-tile integrity",
+      "passed": true
+    },
+    {
+      "check": "water-breeze-tile tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-breeze-tile tile y",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough integrity",
+      "passed": true
+    },
+    {
+      "check": "water-rough <= 800000 bytes",
+      "passed": true,
+      "bytes": 382900
+    },
+    {
+      "check": "water-rough frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough temporal wrap",
+      "passed": true,
+      "wrapRMS": 5.810263582904999,
+      "otherMaxRMS": 5.936358532856252
+    },
+    {
+      "check": "water-rough-normal integrity",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal <= 800000 bytes",
+      "passed": true,
+      "bytes": 529311
+    },
+    {
+      "check": "water-rough-normal frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 0 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 1 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 2 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 3 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 4 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 5 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 6 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 7 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 8 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 9 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 10 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 11 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 12 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 13 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 14 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "water-rough-normal frame 15 spatial seams",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-normal temporal wrap",
+      "passed": true,
+      "wrapRMS": 9.215713052468034,
+      "otherMaxRMS": 9.247589828331307
+    },
+    {
+      "check": "water-rough-normal normal lengths",
+      "passed": true,
+      "minimum": 0.989564931838866,
+      "maximum": 1.0020432796705683
+    },
+    {
+      "check": "water-rough-tile integrity",
+      "passed": true
+    },
+    {
+      "check": "water-rough-tile tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "water-rough-tile tile y",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "wake-8 integrity",
+      "passed": true
+    },
+    {
+      "check": "wake-8 <= 800000 bytes",
+      "passed": true,
+      "bytes": 417267
+    },
+    {
+      "check": "wake-8 frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 0 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 1 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 2 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 3 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 4 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 5 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 6 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "wake-8 frame 7 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "wake-8 temporal wrap",
+      "passed": true,
+      "wrapRMS": 7.171823405826127,
+      "otherMaxRMS": 7.176038676188508
+    },
+    {
+      "check": "wake integrity",
+      "passed": true
+    },
+    {
+      "check": "foam-strip integrity",
+      "passed": true
+    },
+    {
+      "check": "foam-strip tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "foam-ring integrity",
+      "passed": true
+    },
+    {
+      "check": "foam-patch integrity",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 integrity",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 <= 800000 bytes",
+      "passed": true,
+      "bytes": 88257
+    },
+    {
+      "check": "impact-4x8 frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 0 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 1 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 2 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 3 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 4 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 5 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 6 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 7 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 8 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 9 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 10 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 11 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 12 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 12 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 12 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 13 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 13 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 13 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 14 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 14 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 14 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 15 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 15 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 15 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 16 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 16 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 16 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 17 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 17 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 17 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 18 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 18 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 18 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 19 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 19 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 19 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 20 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 20 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 20 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 21 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 21 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 21 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 22 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 22 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 22 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 23 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 23 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 23 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 24 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 24 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 24 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 25 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 25 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 25 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 26 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 26 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 26 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 27 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 27 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 27 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 28 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 28 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 28 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 29 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 29 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 29 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 30 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 30 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 30 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 31 bounds",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 31 extrusion",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 frame 31 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 clear event endpoints 0",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 clear event endpoints 8",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 clear event endpoints 16",
+      "passed": true
+    },
+    {
+      "check": "impact-4x8 clear event endpoints 24",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 integrity",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 <= 800000 bytes",
+      "passed": true,
+      "bytes": 86964
+    },
+    {
+      "check": "near-miss-column-12 frame 0 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 0 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 0 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 1 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 1 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 1 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 2 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 2 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 2 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 3 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 3 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 3 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 4 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 4 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 4 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 5 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 5 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 5 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 6 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 6 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 6 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 7 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 7 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 7 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 8 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 8 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 8 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 9 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 9 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 9 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 10 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 10 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 10 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 11 bounds",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 11 extrusion",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 frame 11 clear boundary",
+      "passed": true
+    },
+    {
+      "check": "near-miss-column-12 clear event endpoints 0",
+      "passed": true
+    },
+    {
+      "check": "sky-day integrity",
+      "passed": true
+    },
+    {
+      "check": "sky-day tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "sky-sunset integrity",
+      "passed": true
+    },
+    {
+      "check": "sky-sunset tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "sky-night integrity",
+      "passed": true
+    },
+    {
+      "check": "sky-night tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "horizon-fog integrity",
+      "passed": true
+    },
+    {
+      "check": "horizon-fog tile x",
+      "passed": true,
+      "maxRGBDelta": 0.0
+    },
+    {
+      "check": "sun-disc integrity",
+      "passed": true
+    },
+    {
+      "check": "float-can-buoy integrity",
+      "passed": true
+    },
+    {
+      "check": "float-can-buoy embedded glb",
+      "passed": true
+    },
+    {
+      "check": "float-can-buoy finite bounds",
+      "passed": true
+    },
+    {
+      "check": "float-cone-buoy integrity",
+      "passed": true
+    },
+    {
+      "check": "float-cone-buoy embedded glb",
+      "passed": true
+    },
+    {
+      "check": "float-cone-buoy finite bounds",
+      "passed": true
+    },
+    {
+      "check": "float-driftwood integrity",
+      "passed": true
+    },
+    {
+      "check": "float-driftwood embedded glb",
+      "passed": true
+    },
+    {
+      "check": "float-driftwood finite bounds",
+      "passed": true
+    },
+    {
+      "check": "float-supply-crate integrity",
+      "passed": true
+    },
+    {
+      "check": "float-supply-crate embedded glb",
+      "passed": true
+    },
+    {
+      "check": "float-supply-crate finite bounds",
+      "passed": true
+    },
+    {
+      "check": "lighthouse integrity",
+      "passed": true
+    },
+    {
+      "check": "lighthouse embedded glb",
+      "passed": true
+    },
+    {
+      "check": "lighthouse finite bounds",
+      "passed": true
+    },
+    {
+      "check": "rock-reef integrity",
+      "passed": true
+    },
+    {
+      "check": "rock-reef embedded glb",
+      "passed": true
+    },
+    {
+      "check": "rock-reef finite bounds",
+      "passed": true
+    },
+    {
+      "check": "rock-skerry integrity",
+      "passed": true
+    },
+    {
+      "check": "rock-skerry embedded glb",
+      "passed": true
+    },
+    {
+      "check": "rock-skerry finite bounds",
+      "passed": true
+    },
+    {
+      "check": "rock-split integrity",
+      "passed": true
+    },
+    {
+      "check": "rock-split embedded glb",
+      "passed": true
+    },
+    {
+      "check": "rock-split finite bounds",
+      "passed": true
+    },
+    {
+      "check": "rock-stack integrity",
+      "passed": true
+    },
+    {
+      "check": "rock-stack embedded glb",
+      "passed": true
+    },
+    {
+      "check": "rock-stack finite bounds",
+      "passed": true
+    },
+    {
+      "check": "reference-corvette integrity",
+      "passed": true
+    },
+    {
+      "check": "reference-corvette embedded glb",
+      "passed": true
+    },
+    {
+      "check": "reference-corvette finite bounds",
+      "passed": true
+    },
+    {
+      "check": "analytic four-second periodic surface 0.38",
+      "passed": true,
+      "maxFloatDelta": 9.947598300641403e-14
+    },
+    {
+      "check": "analytic four-second periodic surface 0.82",
+      "passed": true,
+      "maxFloatDelta": 1.5631940186722204e-13
+    },
+    {
+      "check": "analytic four-second periodic surface 1.42",
+      "passed": true,
+      "maxFloatDelta": 2.7000623958883807e-13
+    },
+    {
+      "check": "four different impact clips",
+      "passed": true
+    },
+    {
+      "check": "nine original models",
+      "passed": true
+    }
+  ]
+}

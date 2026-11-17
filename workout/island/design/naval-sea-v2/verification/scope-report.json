@@ -1,0 +1,297 @@
+{
+  "passed": true,
+  "branch": "codex/naval-sea-v2",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "newFiles": 72,
+  "violations": [],
+  "changes": [
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/LICENSE.assets"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/LICENSES.md"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/REPORT.md"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/float-can-buoy.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/float-cone-buoy.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/float-driftwood.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/float-supply-crate.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/lighthouse.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/rock-reef.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/rock-skerry.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/rock-split.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/models/rock-stack.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/preview.css"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/preview.html"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/preview.js"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/build-contact.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/build-manifest.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/build-models.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/build-textures.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/check-assets.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/check-browser.mjs"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/check-gltf.mjs"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/check-scope.py"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/decode-reference.mjs"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/model-contact.html"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/model-contact.js"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/source/reference-corvette.glb"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/foam-patch.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/foam-ring.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/foam-strip.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/horizon-fog.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/impact-4x8.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/near-miss-column-12.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/sky-day.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/sky-night.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/sky-sunset.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/sun-disc.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/wake-8.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/wake.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-breeze-normal.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-breeze-tile.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-breeze.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-calm-normal.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-calm-tile.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-calm.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-rough-normal.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-rough-tile.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/textures/water-rough.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/vendor/BufferGeometryUtils.js"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/vendor/GLTFLoader.js"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/vendor/LICENSE.three"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/vendor/provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/vendor/three.module.js"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/asset-report.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/browser-report.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/catalog-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/day-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/gltf-report.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/models-1260x840.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/near-miss-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/night-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/portrait-390x844.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/repository-tests.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/rough-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/scope-report.json"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/splash-1-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/splash-2-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/splash-3-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/splash-4-844x390.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/sprites.png"
+    },
+    {
+      "status": "A",
+      "path": "workout/island/design/naval-sea-v2/verification/sunset-844x390.png"
+    }
+  ]
+}

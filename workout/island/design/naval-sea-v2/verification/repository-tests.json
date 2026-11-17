@@ -1,0 +1,46 @@
+{
+  "fullSuite": {
+    "exitCode": 1,
+    "logSha256": "1955c9743696c75a73262f6f99b9dc1415ed82eb7b2bbe0d295b002cc222f672",
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 1541160.118278,
+    "command": "npm test",
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "line": 91,
+      "reason": "Playwright expected chromium_headless_shell-1234; its bundled executable was absent.",
+      "openServer": "Test starts its HTTP server before browser.launch and before try/finally; failed launch left the server open.",
+      "stoppedWorkerAfterSeconds": 668
+    }
+  },
+  "failedFileRerun": {
+    "exitCode": 0,
+    "logSha256": "dc5ac29e278522ecb7c16d5d86c69eb870556fcf352e239fe6380a9f83a714e6",
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 24234.730427,
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/naval-sea-v2-browsers node --test tests/workout-royiki.test.mjs",
+    "browser": "Chromium 151.0.7922.173 (/usr/bin/chromium)",
+    "setup": "Task-local browser-path symlink points to the installed system Chromium. No existing repository file changed."
+  },
+  "fullSuiteRerun": false,
+  "packageChecks": {
+    "assets": 535,
+    "browser": 36,
+    "khronosErrors": 0,
+    "khronosWarnings": 0,
+    "khronosInfos": 0
+  },
+  "environmentNote": "The original full run exited 1 due to the missing Playwright browser; the isolated rerun of that file exited 0 with the system browser."
+}

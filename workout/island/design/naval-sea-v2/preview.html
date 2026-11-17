@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="ים מונפש, שובל ספינה, נתזים ומגדלור — תצוגת נכסים עצמאית">
+<link rel="icon" href="data:,">
+<title>מצר הדמדומים · ים 02</title>
+<link rel="stylesheet" href="preview.css">
+<body>
+<main id="stage" aria-label="תצוגת ים תלת ממדית">
+  <canvas id="sea" aria-label="ים מונפש עם ספינה, סלעים ומגדלור"></canvas>
+  <header>
+    <div class="identity"><span class="eyebrow">האי שלי / אוסף הים 02</span><h1>מצר הדמדומים</h1><p>רוח במפרץ. אור אחרון על המים.</p></div>
+    <div class="time-controls" role="group" aria-label="שעת היום">
+      <button data-mode="day" aria-pressed="false">יום</button>
+      <button data-mode="sunset" aria-pressed="true">שקיעה</button>
+      <button data-mode="night" aria-pressed="false">לילה</button>
+    </div>
+  </header>
+  <aside class="sea-state" aria-label="עוצמת הגלים">
+    <span class="control-label">מצב הים</span>
+    <div role="group" aria-label="עוצמת הגלים">
+      <button data-wave="calm" aria-pressed="false">רגוע</button>
+      <button data-wave="breeze" aria-pressed="true">בינוני</button>
+      <button data-wave="rough" aria-pressed="false">סוער</button>
+    </div>
+    <span class="wave-mark" aria-hidden="true">∿ ∿ ∿</span>
+  </aside>
+  <footer>
+    <div class="actions">
+      <button id="splash" class="primary"><span aria-hidden="true">＋</span> נתז</button>
+      <button id="column">פגיעה קרובה</button>
+      <button id="pause" aria-pressed="false" aria-label="השהיית התנועה"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2"/></svg></button>
+      <button id="catalog" aria-expanded="false" aria-controls="asset-panel">הנכסים</button>
+    </div>
+    <span class="caption">לולאת ים · 4 שניות</span>
+  </footer>
+  <div id="loading" role="status">האור עולה על המפרץ…</div>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <section id="asset-panel" hidden aria-label="קטלוג נכסי הים">
+    <div class="panel-head"><h2>חומרי הגלם של המפרץ</h2><button id="close-catalog" aria-label="סגירת קטלוג">×</button></div>
+    <div id="asset-grid"></div>
+    <a href="manifest.json">מפת הנכסים</a><a href="REPORT.md">דוח הבדיקה</a>
+  </section>
+</main>
+<script type="module" src="preview.js"></script>
+</body>
+</html>

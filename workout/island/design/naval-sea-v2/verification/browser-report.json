@@ -1,0 +1,231 @@
+{
+  "passed": true,
+  "environment": "Chromium / ANGLE SwiftShader software renderer; no physical-device FPS claim",
+  "checks": 36,
+  "sourceSha256": {
+    "preview.html": "a0541897b852a1a8193edecf2e7bafd67af7b051bf7a019d79b583f24c5172b2",
+    "preview.js": "a90728561dde3d09528c9f24490d37a102eef28e3f4f480e25af2d0c779be8a7",
+    "preview.css": "11b6d0a49e69976747a061d3012efceb7d19fa658ab7888f16f591f55750a3ee",
+    "manifest.json": "94198abbcf54b54345d83c6cf503445709718d903b182f08676d793daed4f3f9"
+  },
+  "sceneAtRest": {
+    "state": {
+      "mode": "sunset",
+      "wave": "breeze",
+      "time": 1.25,
+      "paused": true,
+      "ready": true,
+      "impact": 45
+    },
+    "viewport": [
+      844,
+      390
+    ],
+    "canvas": [
+      844,
+      390
+    ],
+    "renderer": {
+      "frame": 172,
+      "calls": 44,
+      "triangles": 53365,
+      "points": 0,
+      "lines": 0
+    },
+    "memory": {
+      "geometries": 33,
+      "textures": 17
+    },
+    "effects": 0,
+    "models": [
+      "float-can-buoy",
+      "float-cone-buoy",
+      "float-driftwood",
+      "float-supply-crate",
+      "lighthouse",
+      "rock-reef",
+      "rock-skerry",
+      "rock-split",
+      "rock-stack",
+      "reference-corvette"
+    ],
+    "shipBounds": [
+      9.31880615508617,
+      12.100409507751465,
+      32.63683062018648
+    ],
+    "activeWaterFrames": [
+      5,
+      6
+    ],
+    "wakeFrame": 2
+  },
+  "results": [
+    {
+      "check": "844x390 canvas",
+      "passed": true
+    },
+    {
+      "check": "ten local GLBs render",
+      "passed": true
+    },
+    {
+      "check": "day / calm controls",
+      "passed": true
+    },
+    {
+      "check": "day / breeze controls",
+      "passed": true
+    },
+    {
+      "check": "day / rough controls",
+      "passed": true
+    },
+    {
+      "check": "sunset / calm controls",
+      "passed": true
+    },
+    {
+      "check": "sunset / breeze controls",
+      "passed": true
+    },
+    {
+      "check": "sunset / rough controls",
+      "passed": true
+    },
+    {
+      "check": "night / calm controls",
+      "passed": true
+    },
+    {
+      "check": "night / breeze controls",
+      "passed": true
+    },
+    {
+      "check": "night / rough controls",
+      "passed": true
+    },
+    {
+      "check": "day sunset night produce different pixels",
+      "passed": true,
+      "details": {
+        "day": 117287166,
+        "sunset": 98774006,
+        "night": 37822966
+      }
+    },
+    {
+      "check": "splash variant 1",
+      "passed": true
+    },
+    {
+      "check": "splash variant 2",
+      "passed": true
+    },
+    {
+      "check": "splash variant 3",
+      "passed": true
+    },
+    {
+      "check": "splash variant 4",
+      "passed": true
+    },
+    {
+      "check": "near miss creates column and ring",
+      "passed": true
+    },
+    {
+      "check": "one-shot effects expire",
+      "passed": true
+    },
+    {
+      "check": "actual rendered four-second water loop",
+      "passed": true,
+      "details": {
+        "maximumRGBDelta": 0,
+        "differentChannels": 0,
+        "region": [
+          0,
+          190,
+          844,
+          125
+        ]
+      }
+    },
+    {
+      "check": "animation resumes",
+      "passed": true
+    },
+    {
+      "check": "pause button",
+      "passed": true
+    },
+    {
+      "check": "effect pool bounded at twelve",
+      "passed": true
+    },
+    {
+      "check": "effect geometries return to baseline",
+      "passed": true,
+      "details": {
+        "before": 33,
+        "after": 33
+      }
+    },
+    {
+      "check": "catalog opens",
+      "passed": true
+    },
+    {
+      "check": "catalog Escape and focus",
+      "passed": true
+    },
+    {
+      "check": "no overflow 740x360",
+      "passed": true
+    },
+    {
+      "check": "all controls within viewport 740x360",
+      "passed": true
+    },
+    {
+      "check": "no overflow 390x844",
+      "passed": true
+    },
+    {
+      "check": "all controls within viewport 390x844",
+      "passed": true
+    },
+    {
+      "check": "no overflow 320x568",
+      "passed": true
+    },
+    {
+      "check": "all controls within viewport 320x568",
+      "passed": true
+    },
+    {
+      "check": "reduced motion starts paused",
+      "passed": true
+    },
+    {
+      "check": "nine original models render in contact sheet",
+      "passed": true
+    },
+    {
+      "check": "no JavaScript or WebGL errors",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "no HTTP failures",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "no external requests; offline assets",
+      "passed": true,
+      "details": []
+    }
+  ]
+}
