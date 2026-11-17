@@ -123,7 +123,9 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
       if(scene.ready&&fade.dataset.state==='in'){fadeT+=dt;if(fadeT>.35)fade.dataset.state='clear';}
       const running=scene.ready&&tutorialDone&&!paused&&dt>0&&fade.dataset.state!=='in';
       if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;model.update(dt,step);}
-      scene.update(paused?0:dt);scene.render();updateAudio();updateHud();
+      scene.update(paused?0:dt);
+      if(new URLSearchParams(globalThis.location?.search||'').get('fireRoomBarrier')!=='0'&&!scene.ready){fade.dataset.state='in';fadeText.textContent=t('fire.v24.loading');fadeT=0;clear();}
+      scene.render();updateAudio();updateHud();
       if(model.result&&!done){done=true;fadeText.textContent=t('fire.v24.leaving');fade.dataset.state='out';setTimeout(()=>{if(disposed)return;const result=model.result;session.dispose();onDone?.(result);},420);}
     }catch(error){cancelAnimationFrame(frame);if(!disposed){session.dispose();onDone?.(null,error);}if(new URLSearchParams(location.search).get('dev')==='1')console.error(error);}
   }
