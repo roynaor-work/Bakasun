@@ -1,0 +1,34 @@
+ALIEN HITS V1 — LICENSE AND PROVENANCE
+
+Original work in this directory:
+impacts.png, damage.png, explosion.png, all ten files in audio/,
+the synthesis and atlas-building source, preview code, metadata and documentation.
+These are original procedural drawings and seeded oscillator/noise synthesis.
+No recordings, music, sample packs, fonts, third-party images or remote generation
+services were used for these effects or sounds.
+
+To the extent possible under law, the author has waived all copyright and related
+or neighboring rights to this original work under CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/
+THE WORK IS PROVIDED WITHOUT WARRANTY OF ANY KIND.
+
+EXCEPTION — EXISTING SHIP MODELS AND THEIR PREVIEW DERIVATIVES:
+preview-ships.png is a render of five existing owner-generated Meshy models:
+../../assets/models/alien-a.glb
+../../assets/models/alien-b.glb
+../../assets/models/alien-c.glb
+../../assets/models/alien-d-512.glb
+../../assets/models/boss.glb
+The screenshots preview-844x390.png and preview-390x844.png include those renders.
+These are included only to demonstrate overlays on the repository's ships.
+Their existing source terms remain in force; no CC0 claim is made for the ships
+or for the ship content inside screenshots. Do not redistribute the ship renders
+under the CC0 dedication above.
+Source provenance: ../../assets/ultra-alien/provenance.json and ../../ASSETS.md.
+Geometry, source textures, materials and original files were not modified.
+
+TOOLS (not bundled here):
+Pillow (HPND), NumPy (BSD-3-Clause), Python (PSF), FFmpeg (build-specific LGPL/GPL),
+Playwright (Apache-2.0), Chromium (BSD and bundled component licenses),
+Three.js and GLTFLoader (MIT; ../../vendor/LICENSE.three).
+Their own licenses apply to the tools; no tool code is copied into this package.

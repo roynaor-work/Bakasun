@@ -1,0 +1,207 @@
+{
+  "media": {
+    "hashes": 14,
+    "frames": 65,
+    "atlases": [
+      {
+        "path": "impacts.png",
+        "bytes": 59595,
+        "size": [
+          768,
+          512
+        ],
+        "rgba": true
+      },
+      {
+        "path": "damage.png",
+        "bytes": 128891,
+        "size": [
+          1024,
+          512
+        ],
+        "rgba": true
+      },
+      {
+        "path": "explosion.png",
+        "bytes": 172857,
+        "size": [
+          960,
+          384
+        ],
+        "rgba": true
+      }
+    ],
+    "audio": [
+      {
+        "id": "hit-01",
+        "decodedPeakDbFS": [
+          -3.58,
+          -5.69
+        ],
+        "decodedRmsDbFS": [
+          -22.32,
+          -22.26
+        ],
+        "sources": [
+          "audio/hit-01.ogg",
+          "audio/hit-01.mp3"
+        ],
+        "bytes": [
+          4964,
+          1923
+        ]
+      },
+      {
+        "id": "hit-02",
+        "decodedPeakDbFS": [
+          -3.56,
+          -2.97
+        ],
+        "decodedRmsDbFS": [
+          -20.9,
+          -21.34
+        ],
+        "sources": [
+          "audio/hit-02.ogg",
+          "audio/hit-02.mp3"
+        ],
+        "bytes": [
+          5192,
+          2341
+        ]
+      },
+      {
+        "id": "hit-03",
+        "decodedPeakDbFS": [
+          -3.63,
+          -4.07
+        ],
+        "decodedRmsDbFS": [
+          -21.46,
+          -22.11
+        ],
+        "sources": [
+          "audio/hit-03.ogg",
+          "audio/hit-03.mp3"
+        ],
+        "bytes": [
+          5398,
+          2550
+        ]
+      },
+      {
+        "id": "crack",
+        "decodedPeakDbFS": [
+          -4.65,
+          -4.48
+        ],
+        "decodedRmsDbFS": [
+          -24.37,
+          -24.8
+        ],
+        "sources": [
+          "audio/crack.ogg",
+          "audio/crack.mp3"
+        ],
+        "bytes": [
+          5528,
+          2550
+        ]
+      },
+      {
+        "id": "explosion",
+        "decodedPeakDbFS": [
+          -2.27,
+          -2.7
+        ],
+        "decodedRmsDbFS": [
+          -19.51,
+          -19.91
+        ],
+        "sources": [
+          "audio/explosion.ogg",
+          "audio/explosion.mp3"
+        ],
+        "bytes": [
+          9887,
+          6312
+        ]
+      }
+    ],
+    "impactAreasPx": [
+      391,
+      710,
+      1127
+    ]
+  },
+  "browser": {
+    "checks": [
+      "All 3 impact powers: exactly one target, no live projectile, both one-shots cleaned up",
+      "Swept contact over a long .8 s step stops at front hull",
+      "Local contact persists and follows moving/rotating hull",
+      "All 25 ship/damage combinations render",
+      "Five audition controls play; all 10 OGG/MP3 sources decode in Chromium",
+      "Death removes hull/overlays; 10-frame one-shot ends at 500 ms",
+      "844x390 native canvas and 390x844 scaled portrait have no horizontal overflow",
+      "Reduced motion starts paused; explicit play available"
+    ],
+    "pageErrors": [],
+    "httpFailures": [],
+    "decodedAudio": [
+      {
+        "src": "audio/hit-01.ogg",
+        "duration": 0.1785034013605442,
+        "channels": 1
+      },
+      {
+        "src": "audio/hit-01.mp3",
+        "duration": 0.18,
+        "channels": 1
+      },
+      {
+        "src": "audio/hit-02.ogg",
+        "duration": 0.20709750566893423,
+        "channels": 1
+      },
+      {
+        "src": "audio/hit-02.mp3",
+        "duration": 0.2100453514739229,
+        "channels": 1
+      },
+      {
+        "src": "audio/hit-03.ogg",
+        "duration": 0.23709750566893423,
+        "channels": 1
+      },
+      {
+        "src": "audio/hit-03.mp3",
+        "duration": 0.24,
+        "channels": 1
+      },
+      {
+        "src": "audio/crack.ogg",
+        "duration": 0.25709750566893425,
+        "channels": 1
+      },
+      {
+        "src": "audio/crack.mp3",
+        "duration": 0.26,
+        "channels": 1
+      },
+      {
+        "src": "audio/explosion.ogg",
+        "duration": 0.7170975056689343,
+        "channels": 1
+      },
+      {
+        "src": "audio/explosion.mp3",
+        "duration": 0.72,
+        "channels": 1
+      }
+    ],
+    "screenshots": [
+      "preview-844x390.png",
+      "preview-390x844.png"
+    ]
+  }
+}

@@ -1,0 +1,841 @@
+{
+  "schemaVersion": 1,
+  "id": "alien-hits-v1",
+  "created": "2026-11-17",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/alien-hits-v1",
+  "runtimeIntegration": "not-connected; isolated asset package and preview only",
+  "license": {
+    "originalEffectsAudioCode": "CC0-1.0",
+    "previewShips": "Existing owner Meshy models; see LICENSE.txt"
+  },
+  "limits": {
+    "atlasBytes": 600000,
+    "audioFileBytes": 40000,
+    "preview": [
+      844,
+      390
+    ]
+  },
+  "coordinates": {
+    "origin": "top-left",
+    "x": "right",
+    "y": "down",
+    "rotation": "clockwise radians",
+    "frameRects": "pixels; no trim, rotation or scaling in the atlas",
+    "attachment": "world = ship.position + rotate(ship.angle, localContact * ship.scale)",
+    "smokeAndFlame": "emit upward in authored local coordinates; counter-rotate for screen-up if desired"
+  },
+  "atlases": [
+    {
+      "path": "impacts.png",
+      "bytes": 59595,
+      "sha256": "203e58077086d775a9e9c573bb9985191a386f00a5bc315cb83450acb9aa66fd",
+      "width": 768,
+      "height": 512,
+      "format": "RGBA8",
+      "alpha": "straight",
+      "gutterPx": 3,
+      "frames": 24
+    },
+    {
+      "path": "damage.png",
+      "bytes": 128891,
+      "sha256": "e048d80f9637d287599802e8e16fcf658284a88634d93b2cdf054079e372e557",
+      "width": 1024,
+      "height": 512,
+      "format": "RGBA8",
+      "alpha": "straight",
+      "gutterPx": 3,
+      "frames": 31
+    },
+    {
+      "path": "explosion.png",
+      "bytes": 172857,
+      "sha256": "3eab60e66b835b9b711159e4e6d84021891094b7cda7d237cc367189bac2a65f",
+      "width": 960,
+      "height": 384,
+      "format": "RGBA8",
+      "alpha": "straight",
+      "gutterPx": 3,
+      "frames": 10
+    }
+  ],
+  "clips": {
+    "impact-small": {
+      "atlas": "impacts.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 24,
+      "loop": false,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": true
+    },
+    "impact-medium": {
+      "atlas": "impacts.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 24,
+      "loop": false,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": true
+    },
+    "impact-large": {
+      "atlas": "impacts.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 24,
+      "loop": false,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": true
+    },
+    "absorb": {
+      "atlas": "impacts.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 24,
+      "loop": false,
+      "durationMs": 250,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": true
+    },
+    "crack": {
+      "atlas": "damage.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 1,
+      "loop": true,
+      "durationMs": 1000,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": false
+    },
+    "smoke-light": {
+      "atlas": "damage.png",
+      "frames": [
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "durationMs": 667,
+      "pivot": [
+        64,
+        96
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": false
+    },
+    "smoke-heavy": {
+      "atlas": "damage.png",
+      "frames": [
+        {
+          "x": 128,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "durationMs": 667,
+      "pivot": [
+        64,
+        96
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": false
+    },
+    "electric": {
+      "atlas": "damage.png",
+      "frames": [
+        {
+          "x": 128,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 18,
+      "loop": true,
+      "durationMs": 333,
+      "pivot": [
+        64,
+        64
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": false
+    },
+    "flame": {
+      "atlas": "damage.png",
+      "frames": [
+        {
+          "x": 896,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "durationMs": 667,
+      "pivot": [
+        64,
+        96
+      ],
+      "blend": "source-over",
+      "space": "ship-local",
+      "removeOnComplete": false
+    },
+    "explosion": {
+      "atlas": "explosion.png",
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 192,
+          "y": 0,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 576,
+          "y": 0,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 0,
+          "y": 192,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 192,
+          "y": 192,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 384,
+          "y": 192,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 576,
+          "y": 192,
+          "w": 192,
+          "h": 192
+        },
+        {
+          "x": 768,
+          "y": 192,
+          "w": 192,
+          "h": 192
+        }
+      ],
+      "fps": 20,
+      "loop": false,
+      "durationMs": 500,
+      "pivot": [
+        96,
+        96
+      ],
+      "blend": "source-over",
+      "space": "world",
+      "removeOnComplete": true
+    }
+  },
+  "audio": [
+    {
+      "id": "hit-01",
+      "durationMs": 180,
+      "sampleRate": 44100,
+      "channels": 1,
+      "sources": [
+        "audio/hit-01.ogg",
+        "audio/hit-01.mp3"
+      ],
+      "seed": 101,
+      "synthesisPeakDbFS": -3.35,
+      "synthesisRmsDbFS": -21.77,
+      "pcmSha256": "e05728801645e0e0a3f5031fe234362cd578eee0c4f0cc6a355ae5ade459c6b1"
+    },
+    {
+      "id": "hit-02",
+      "durationMs": 210,
+      "sampleRate": 44100,
+      "channels": 1,
+      "sources": [
+        "audio/hit-02.ogg",
+        "audio/hit-02.mp3"
+      ],
+      "seed": 102,
+      "synthesisPeakDbFS": -3.35,
+      "synthesisRmsDbFS": -20.93,
+      "pcmSha256": "b92e435faea0e45414f7e27cd2c5947d4899982401cfa9802c4d374afe76b9f6"
+    },
+    {
+      "id": "hit-03",
+      "durationMs": 240,
+      "sampleRate": 44100,
+      "channels": 1,
+      "sources": [
+        "audio/hit-03.ogg",
+        "audio/hit-03.mp3"
+      ],
+      "seed": 103,
+      "synthesisPeakDbFS": -3.35,
+      "synthesisRmsDbFS": -21.47,
+      "pcmSha256": "314dbc9b7660b0c2b74e004585c45f701a10559bb280991cb98e0512b638a29c"
+    },
+    {
+      "id": "crack",
+      "durationMs": 260,
+      "sampleRate": 44100,
+      "channels": 1,
+      "sources": [
+        "audio/crack.ogg",
+        "audio/crack.mp3"
+      ],
+      "seed": 104,
+      "synthesisPeakDbFS": -3.35,
+      "synthesisRmsDbFS": -24.08,
+      "pcmSha256": "ac9ab2c0ee8aaa1c7cfe5e2197febda18aca2574d11aa25c224369c09434fa60"
+    },
+    {
+      "id": "explosion",
+      "durationMs": 720,
+      "sampleRate": 44100,
+      "channels": 1,
+      "sources": [
+        "audio/explosion.ogg",
+        "audio/explosion.mp3"
+      ],
+      "seed": 105,
+      "synthesisPeakDbFS": -2.05,
+      "synthesisRmsDbFS": -19.46,
+      "pcmSha256": "53f18efb0b3122f39a8cbba4f989495fae6514a72dc9d6c126870ca976029b76"
+    }
+  ],
+  "impactPower": {
+    "small": {
+      "damageBelow": 2,
+      "clip": "impact-small",
+      "audio": "hit-01"
+    },
+    "medium": {
+      "damageBelow": 4,
+      "clip": "impact-medium",
+      "audio": "hit-02"
+    },
+    "large": {
+      "damageBelow": null,
+      "clip": "impact-large",
+      "audio": "hit-03"
+    },
+    "note": "Suggested mapping of actual dealt damage, including equipment modifiers."
+  },
+  "damageStates": [
+    {
+      "id": "cracked",
+      "hpRatioAtMost": 0.8,
+      "layers": [
+        "crack"
+      ],
+      "onEnterAudio": "crack"
+    },
+    {
+      "id": "light-smoke",
+      "hpRatioAtMost": 0.6,
+      "layers": [
+        "crack",
+        "smoke-light"
+      ]
+    },
+    {
+      "id": "heavy-smoke",
+      "hpRatioAtMost": 0.4,
+      "layers": [
+        "crack",
+        "smoke-heavy"
+      ]
+    },
+    {
+      "id": "electrical",
+      "hpRatioAtMost": 0.25,
+      "layers": [
+        "crack",
+        "smoke-heavy",
+        "electric"
+      ]
+    },
+    {
+      "id": "burning",
+      "hpRatioAtMost": 0.1,
+      "layers": [
+        "crack",
+        "smoke-heavy",
+        "electric",
+        "flame"
+      ]
+    },
+    {
+      "id": "destroyed",
+      "hpRatioAtMost": 0,
+      "layers": [
+        "explosion"
+      ],
+      "onEnterAudio": "explosion"
+    }
+  ],
+  "integration": {
+    "firstContact": "Use earliest swept segment contact (lowest t), including shields; apply once, release shot immediately and break regardless of shot.hp.",
+    "contactPoint": "P = previousShot + t * (nextShot - previousShot). Convert P to ship-local coordinates before attaching absorb/crack.",
+    "hit": "Start impact + absorb at contact; slug is only inside absorb, never a live projectile. Remove one-shots after 250 ms.",
+    "damage": "Select the lowest HP threshold crossed; replace light smoke with heavy, retain crack; play crack sound only on first transition.",
+    "death": "Hide ship and its local overlays immediately; play one explosion at last world position for 500 ms, then release it.",
+    "pooling": "Suggested caps: 24 impact/absorb pairs, 5 overlays per ship, 4 death explosions; recycle and clear on entity reuse.",
+    "rendering": "Normal alpha/source-over. Do not multiply damage overlays by the base sprite alpha: smoke must extend beyond the hull.",
+    "audio": "OGG/Vorbis first, MP3 fallback; unlock on user gesture; choose one of three hit variants, crack once, explosion once. Suggested polyphony 6, master gain .55."
+  },
+  "preview": {
+    "file": "preview.html",
+    "size": [
+      844,
+      390
+    ],
+    "ships": "preview-ships.png",
+    "shipsSource": "bake_preview.py reads existing assets/models/*.glb; geometry/materials unchanged",
+    "sourceProvenance": "../../assets/ultra-alien/provenance.json"
+  },
+  "files": [
+    {
+      "path": "impacts.png",
+      "bytes": 59595,
+      "sha256": "203e58077086d775a9e9c573bb9985191a386f00a5bc315cb83450acb9aa66fd"
+    },
+    {
+      "path": "damage.png",
+      "bytes": 128891,
+      "sha256": "e048d80f9637d287599802e8e16fcf658284a88634d93b2cdf054079e372e557"
+    },
+    {
+      "path": "explosion.png",
+      "bytes": 172857,
+      "sha256": "3eab60e66b835b9b711159e4e6d84021891094b7cda7d237cc367189bac2a65f"
+    },
+    {
+      "path": "preview-ships.png",
+      "bytes": 219230,
+      "sha256": "fe91d5025fd594cf193971b72f0e8744068494b508e21f3837c56f3e44647f14"
+    },
+    {
+      "path": "audio/hit-01.ogg",
+      "bytes": 4964,
+      "sha256": "1ab69e6d21bad9588b0f360b640366809eb5d23bfbce02ba43988f8cbe930b9b"
+    },
+    {
+      "path": "audio/hit-01.mp3",
+      "bytes": 1923,
+      "sha256": "f622dd9128113ce7e5b054d80751df108caf3b36730095f5b469a5d2cd4d7d36"
+    },
+    {
+      "path": "audio/hit-02.ogg",
+      "bytes": 5192,
+      "sha256": "6b6e3e985792f6b5fba79bd16b8d199ea3a29a91bb1890f279e0576be3a25717"
+    },
+    {
+      "path": "audio/hit-02.mp3",
+      "bytes": 2341,
+      "sha256": "ffd8710ca526a415745f02df17d82e550680723cebdefdf84887bf9c1c379144"
+    },
+    {
+      "path": "audio/hit-03.ogg",
+      "bytes": 5398,
+      "sha256": "11ae60038bec13cb73efc50b66c7b84ccb7598144ef399838a583aae6031e523"
+    },
+    {
+      "path": "audio/hit-03.mp3",
+      "bytes": 2550,
+      "sha256": "9d9383742f75e78b5b4c5303d4fb70cf2d0a1badcb0cdfd6e03e0fbc368c044b"
+    },
+    {
+      "path": "audio/crack.ogg",
+      "bytes": 5528,
+      "sha256": "a37ca10d54ef46db00e344955b9e23bf9da3cd40cf755c751c5975694409b2b8"
+    },
+    {
+      "path": "audio/crack.mp3",
+      "bytes": 2550,
+      "sha256": "5614d0260423bfc0f9b7cfb5acd22781786d88315de0ff3a368096399f380005"
+    },
+    {
+      "path": "audio/explosion.ogg",
+      "bytes": 9887,
+      "sha256": "6944068f2f9822b9a550ef1f98d8f9a9fff8a667ef8d3d43fcbe6a67532782a3"
+    },
+    {
+      "path": "audio/explosion.mp3",
+      "bytes": 6312,
+      "sha256": "a1aea49aee38ec3675908522c781ff8c8e4cee5be03d2ad9eaf9a7d2965b087b"
+    }
+  ]
+}
