@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
-import {isManagedPath} from '../workout/island/ui/offline.mjs';
+import {isManagedPath,OFFLINE_GAMES} from '../workout/island/ui/offline.mjs';
 
 /** Real browser checks for the one download button, the automatic download, the offline
  * start and the "game asks for a file that is not on the list" guard. Opt in with
@@ -53,7 +53,7 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
   const texts=await t.page.evaluate(()=>[...window.__texts]);
   assert.ok(texts.some(x=>/^מוריד \d+ מתוך \d+ · \d+%$/.test(x)),'progress shows X of Y and percent: '+texts.slice(0,5));
   const state=await t.page.evaluate(async()=>({games:[...document.querySelectorAll('.offline-games li')].map(li=>[li.dataset.game,li.dataset.complete]),keys:await caches.keys(),after:Object.keys(localStorage).filter(k=>!k.startsWith('island.offline')).sort(),marker:localStorage.getItem('island.test.marker'),status:JSON.parse(localStorage.getItem('island.offline.status'))}));
-  assert.deepEqual(state.games,[['soccer','true'],['hoops','true'],['alpine','true'],['tennis','true'],['racing','true']]);
+  assert.deepEqual(state.games,Object.keys(OFFLINE_GAMES).map(g=>[g,'true']),'every package row is complete after the one button');/* 17/11 v25: the list grew from 5 to 11 packages; the row attributes are unchanged */
   assert.equal(state.keys.length,1);assert.match(state.keys[0],/^island-assets-/);
   assert.equal(state.marker,'keep');assert.deepEqual(state.after,savedBefore,'no save key was removed');
   assert.deepEqual(state.status.failed,[]);
