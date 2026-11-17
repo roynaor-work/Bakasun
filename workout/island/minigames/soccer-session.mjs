@@ -1,31 +1,31 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-15';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261107-15';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-15';
-import {aerialMeet,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-15';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-16';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261107-16';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-16';
+import {aerialMeet,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-16';
 /** Air v23 prompt: a high ball the controlled player can meet within the header window. */
 const airPromptMeet=s=>{const p=s.players[s.controlled];return Boolean(p&&aerialMeet(p,s.ball,{aerial:{minHeight:.8,maxHeight:2.4,reach:1.9},physics:{ballRadius:.11},ball:{gravity:12}},{horizon:SOCCER_LOB.promptSeconds,speed:5.6}));};
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-15';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-15';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-15';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-15';
-import {createControls} from './controls.mjs?v=island-v2-20261107-15';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-16';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-16';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-16';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-16';
+import {createControls} from './controls.mjs?v=island-v2-20261107-16';
 import {withSoccerV7Kits} from './soccer-v7.mjs';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-15';
-import {gameContext} from './context.mjs?v=island-v2-20261107-15';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-16';
+import {gameContext} from './context.mjs?v=island-v2-20261107-16';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
-import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-15';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-16';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
 import {soccerShowEnabled} from './soccer-show.mjs';
-import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-15';
+import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-16';
 // Soccer full (14/11): 11 against 11 on the 105 x 68 m pitch, the radar in the corner, the advantage call. `?soccerFull=0` = the v24 small match.
-import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-15';
+import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-16';
 // v24.1 (14/11): no radar (Roy: "לא צריך אחד כזה", `?soccerRadar=1` brings it back); volley / header / scissor on the kick and fourth buttons.
-import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-15';
+import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-16';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -106,11 +106,11 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-15',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-16',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-15',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-16',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
-  if(fullOn&&!document.querySelector('link[data-soccer-full]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-full.css?v=island-v2-20261107-15',import.meta.url).href;link.dataset.soccerFull='';document.head.append(link);}
+  if(fullOn&&!document.querySelector('link[data-soccer-full]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-full.css?v=island-v2-20261107-16',import.meta.url).href;link.dataset.soccerFull='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);

@@ -4,10 +4,10 @@
  * bar on the left, a three-step picture lesson on the first entry stage. Touch: one finger on the room aims and sprays (the water goes where
  * the finger is, with help onto the nearest fire); a short tap on the friend carries them out. The model is fire-v24-interior.mjs, the
  * picture is fire-v24-scene.mjs. Nothing is written to the save. */
-import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-15';
-import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-15';
-import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-15';
-import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-15';
+import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-16';
+import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-16';
+import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-16';
+import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-16';
 
 const NS='http://www.w3.org/2000/svg';
 const ICONS={...FIRE_V23_ICONS,clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',hand:'M8 13V5a1.5 1.5 0 0 1 3 0v6V4a1.5 1.5 0 0 1 3 0v7V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0',hold:'M12 3a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Zm0 4v3M5 20h14',friend:'M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 10a6 6 0 0 1 12 0M4 9l2-2m14 2-2-2'};
@@ -19,7 +19,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   const {dialog,t}=ctx,host=ctx.canvas.parentElement||dialog,audio=createG2nAudio();audio.unlock();
   const model=createModel({plan,sound:e=>audio.play(e)});
   const canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-15',import.meta.url).href;document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-16',import.meta.url).href;document.head.append(link);
   dialog.classList.add('fire-v24-inside');
   // the street HUD and controls step aside while we are inside (visibility only; the street session keeps its nodes)
   const hidden=[...dialog.children].filter(n=>!n.classList.contains('game-header')&&!n.classList.contains('game-stage')&&!n.classList.contains('shell-countdown')).map(n=>[n,n.style.visibility]);

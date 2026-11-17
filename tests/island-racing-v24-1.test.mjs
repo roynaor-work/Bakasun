@@ -124,5 +124,5 @@ test('session, view and style carry v24.1',async()=>{
  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
  const physics=await read('minigames/racing-physics.mjs');assert.match(physics,/const pitAutoOn=!!config\.pitAuto;/);assert.match(physics,/enabled:!!config\.pit,auto:pitAutoOn\}/);assert.match(physics,/state\.events=pitAutoOn\?state\.events\.filter\(e=>e\.id>stepSerial&&\/\^pit\/\.test\(e\.type\)\):\[\];/);assert.match(physics,/pitCrew\.watch\(car,state\.time\)/);
- for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-14/,f+' carries the current tag');
+ for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-15/,f+' carries the current tag');
 });

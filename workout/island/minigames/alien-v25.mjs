@@ -17,7 +17,7 @@
  * Both buttons together keep the v23 rule: the Vulcan's barrels set the pace and each tick carries the cannon's shot when that is due.
  * ?alienVulcan=v24 (or globalThis.__alienVulcan='v24') restores v24 exactly. Numbers: config.json alienDefense.v25 (V25_DEFAULTS below is
  * the fallback). Pure: no DOM, no clock, so tests and sims import it. */
-import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-15';
+import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-16';
 const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}catch{return null;}};
 export function alienVulcanV25Enabled(search=globalThis.location?.search||'',flag=globalThis.__alienVulcan){
  if(flag==='v24'||flag===false)return false;return param('alienVulcan',search)!=='v24';

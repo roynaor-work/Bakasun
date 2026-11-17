@@ -1,4 +1,4 @@
-import {soccerHalfSeconds} from './soccer-full.mjs?v=island-v2-20261107-15';
+import {soccerHalfSeconds} from './soccer-full.mjs?v=island-v2-20261107-16';
 /** The saved selection is captured by the engine before the session starts. */
 export function soccerResult(raw,ctx,balance) {
   if(ctx.drill){const d=raw?.drill,c=balance.training;if(!d||d.kind!==ctx.drill||!['targets','penalties','cones'].includes(d.kind)||!Number.isInteger(d.attempts)||d.attempts<0||d.attempts>c.drillAttempts||!Number.isInteger(d.hits)||d.hits<0||d.hits>d.attempts||!Number.isFinite(d.elapsed)||d.elapsed<c.minDrillSeconds||d.elapsed>c.drillSeconds+balance.rules.maxUpdateSeconds)return null;return {outcome:'lose',score:d.hits,money:0,drill:d};}

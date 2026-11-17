@@ -8,7 +8,7 @@
  * connected (the v8 hall already has the engine-fed hanging board; the pack's board is 112 meshes with English labels baked in).
  * Pure parts (`refereeGesture`, `stepReferee`) run in node tests. */
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-15';
+import {hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-16';
 export {hoopsRefereeEnabled};
 
 export const refereeUrl=()=>new URL('../assets/hoops-v241/referee/referee.glb',import.meta.url).href;
