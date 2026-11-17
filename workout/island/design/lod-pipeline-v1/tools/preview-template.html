@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>השוואת רמות פירוט · האי</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<body>
+  <header>
+    <div><h1>שלוש רמות. אותה תנועה.</h1><p id="subtitle">טוען את ספריית הדגמים…</p></div>
+    <nav aria-label="קובצי החבילה"><button id="folder-button" hidden>בחירת תיקיית החבילה</button><input id="folder-input" type="file" webkitdirectory multiple hidden><span class="local">מקומי · אופליין</span><a id="report-link" href="report.md">דוח</a><a id="download-link" href="https://github.com/roynaor-work/Bakasun/raw/refs/heads/codex/lod-pipeline-v1/workout/island/design/lod-pipeline-v1/bakasun-lod-pipeline-v1.zip" download>הורדת החבילה ↓</a></nav>
+  </header>
+  <section class="controls" aria-label="בחירת דגם ותנועה">
+    <select id="group" aria-label="קבוצת נכסים"></select>
+    <button id="previous" aria-label="הדגם הקודם">→</button>
+    <select id="asset" aria-label="דגם"></select>
+    <button id="next" aria-label="הדגם הבא">←</button>
+    <select id="scene" aria-label="סצנה או מצב נזק"></select>
+    <select id="clip" aria-label="תנועה"></select>
+    <button id="play" aria-label="השהיית התנועה">||</button>
+    <button id="wire" aria-pressed="false">משולשים</button>
+    <button id="bones" aria-pressed="false">שלד</button>
+  </section>
+  <main id="stage" aria-label="שלושה דגמים באותה זווית ובאותו זמן">
+    <canvas id="canvas" aria-label="השוואת תלת ממד; גרירה מסובבת את שלושת הדגמים"></canvas>
+    <div class="cards">
+      <article data-level="0"><div class="card-title"><b>מקור <span>LOD0</span></b><small>100%</small></div><div class="card-metrics"></div></article>
+      <article data-level="1"><div class="card-title"><b>בינוני <span>LOD1</span></b><small>≈40%</small></div><div class="card-metrics"></div></article>
+      <article data-level="2"><div class="card-title"><b>רחוק <span>LOD2</span></b><small>≈12%</small></div><div class="card-metrics"></div></article>
+    </div>
+    <div id="status" role="status">טוען דגמים…</div>
+  </main>
+  <footer>
+    <label class="distance">מרחק <input id="distance" type="range" min="0" max="90" step="0.5" value="18"><output id="distance-value">18 מ׳</output></label>
+    <span id="policy">רמת פירוט לפי מרחק</span>
+    <label class="timeline">זמן <input id="time" type="range" min="0" max="1000" value="0"><output id="time-value">0.00 ש׳</output></label>
+  </footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

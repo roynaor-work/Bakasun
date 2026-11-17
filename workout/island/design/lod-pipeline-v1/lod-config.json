@@ -1,0 +1,2093 @@
+{
+  "schemaVersion": 1,
+  "units": "world-metres",
+  "distanceFrom": "camera to world bounding-sphere centre",
+  "distanceIncludesObjectScale": true,
+  "levels": [
+    {
+      "id": "lod0",
+      "triangleRatio": 1
+    },
+    {
+      "id": "lod1",
+      "triangleRatio": 0.4
+    },
+    {
+      "id": "lod2",
+      "triangleRatio": 0.12
+    }
+  ],
+  "hysteresisFraction": 0.1,
+  "profiles": {
+    "crowd": {
+      "enterMetres": [
+        0,
+        12,
+        30
+      ]
+    },
+    "athlete": {
+      "enterMetres": [
+        0,
+        12,
+        28
+      ]
+    },
+    "citizen": {
+      "enterMetres": [
+        0,
+        14,
+        32
+      ]
+    },
+    "animal": {
+      "enterMetres": [
+        0,
+        8,
+        20
+      ]
+    },
+    "vehicle": {
+      "enterMetres": [
+        0,
+        20,
+        50
+      ]
+    },
+    "rescue": {
+      "enterMetres": [
+        0,
+        12,
+        28
+      ]
+    }
+  },
+  "switching": {
+    "load": "Load the requested standalone GLB, then atomically swap after success; keep the current LOD on failure.",
+    "animation": "Keep clip name, absolute local clip time, playback rate, loop mode and action blend weights; do not restart the clip.",
+    "scene": "Preserve the current scene index, node visibility, damage morph weights and equipment selection.",
+    "skeleton": "Preserve host-driven bone transforms when no embedded clip is active, including the four basketball athletes.",
+    "notRuntimeIntegration": true
+  },
+  "measurement": {
+    "hausdorffToleranceDiagonalFraction": 0.005,
+    "maxSamplesPerDirection": 40000,
+    "scope": "All scenes in rest/default-morph state; additional sampled animated surfaces are reported separately. A conservative continuous-surface interval is reported even if the sampling cap is reached.",
+    "animationVertexSampleFractions": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "animationSurfaceSampleFractions": [
+      0.25,
+      0.75
+    ],
+    "animatedSurfaceMaxSamplesPerDirection": 2000,
+    "animatedSurfaceToleranceDiagonalFraction": 0.02
+  },
+  "projection": {
+    "referenceViewportHeightPx": 390,
+    "verticalFovDegrees": 38,
+    "maxSurfaceErrorPixels": [
+      0,
+      3,
+      1.5
+    ],
+    "bound": "D >= 2R + focalPixels * measuredHausdorffUpper / allowedPixels",
+    "compensatedForHysteresis": true,
+    "scope": "Camera centred on the bounding sphere; original GLB scale; rest/default-morph surfaces in all scenes. Animated intervals are separate. Recompute for off-centre views, instance scale, viewport height or FOV changes; this is not an animation-wide or shading-error bound."
+  },
+  "assets": {
+    "hoops-realism-v2/crowd/fan-01": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        13,
+        37
+      ],
+      "measuredErrorUpperMetres": [
+        0.0513489981671796,
+        0.08285688718733598
+      ],
+      "boundingRadiusMetres": 0.697481625320365,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-02": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        21,
+        57
+      ],
+      "measuredErrorUpperMetres": [
+        0.08975268969432217,
+        0.12966850925332132
+      ],
+      "boundingRadiusMetres": 0.787046262695857,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-03": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        15,
+        48
+      ],
+      "measuredErrorUpperMetres": [
+        0.0601382255743957,
+        0.10934928803346444
+      ],
+      "boundingRadiusMetres": 0.830289291993537,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-04": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        15,
+        45
+      ],
+      "measuredErrorUpperMetres": [
+        0.06227282323456303,
+        0.1004113237962564
+      ],
+      "boundingRadiusMetres": 0.8464024501316829,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-05": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        56
+      ],
+      "measuredErrorUpperMetres": [
+        0.07875316741179003,
+        0.12696264939034332
+      ],
+      "boundingRadiusMetres": 1.0633032671697389,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-06": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        23,
+        69
+      ],
+      "measuredErrorUpperMetres": [
+        0.09712969051288076,
+        0.15704695710533778
+      ],
+      "boundingRadiusMetres": 1.0441233660776872,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-07": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        20,
+        58
+      ],
+      "measuredErrorUpperMetres": [
+        0.08151212248499015,
+        0.1313244253929913
+      ],
+      "boundingRadiusMetres": 1.10976216036858,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-08": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        54
+      ],
+      "measuredErrorUpperMetres": [
+        0.07606303718290769,
+        0.12264831463369648
+      ],
+      "boundingRadiusMetres": 1.0243428041017748,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-09": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        56
+      ],
+      "measuredErrorUpperMetres": [
+        0.07787449772540615,
+        0.12655584129680794
+      ],
+      "boundingRadiusMetres": 1.0556338610138531,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-10": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        25,
+        68
+      ],
+      "measuredErrorUpperMetres": [
+        0.10725899975904624,
+        0.1543167788574828
+      ],
+      "boundingRadiusMetres": 1.0263669692632904,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-11": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        20,
+        57
+      ],
+      "measuredErrorUpperMetres": [
+        0.08016248785125367,
+        0.12918326123517843
+      ],
+      "boundingRadiusMetres": 1.0898764702743797,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-12": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        55
+      ],
+      "measuredErrorUpperMetres": [
+        0.07699261117637697,
+        0.12411190653233123
+      ],
+      "boundingRadiusMetres": 1.0418175824771077,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-13": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        54
+      ],
+      "measuredErrorUpperMetres": [
+        0.07517857529371275,
+        0.12115331388276582
+      ],
+      "boundingRadiusMetres": 1.0149864604860679,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-14": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        22,
+        65
+      ],
+      "measuredErrorUpperMetres": [
+        0.09175075889331778,
+        0.14750875945443245
+      ],
+      "boundingRadiusMetres": 0.9921320202122996,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-15": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        19,
+        55
+      ],
+      "measuredErrorUpperMetres": [
+        0.07738971518236046,
+        0.12475127147605657
+      ],
+      "boundingRadiusMetres": 1.0481147669827835,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/crowd/fan-16": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        18,
+        51
+      ],
+      "measuredErrorUpperMetres": [
+        0.07208298887941074,
+        0.11617251444528535
+      ],
+      "boundingRadiusMetres": 0.9747329077905226,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/players/guard": {
+      "profile": "athlete",
+      "enterMetres": [
+        0,
+        12,
+        33
+      ],
+      "measuredErrorUpperMetres": [
+        0.032708314446975424,
+        0.07182889407971052
+      ],
+      "boundingRadiusMetres": 0.943004661794381,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/players/power": {
+      "profile": "athlete",
+      "enterMetres": [
+        0,
+        12,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.031197484009900762,
+        0.08904859838264387
+      ],
+      "boundingRadiusMetres": 1.0219023423723412,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/players/shooter": {
+      "profile": "athlete",
+      "enterMetres": [
+        0,
+        12,
+        29
+      ],
+      "measuredErrorUpperMetres": [
+        0.027751478305687517,
+        0.06389822365181365
+      ],
+      "boundingRadiusMetres": 0.9473681005743219,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "hoops-realism-v2/players/wing": {
+      "profile": "athlete",
+      "enterMetres": [
+        0,
+        12,
+        37
+      ],
+      "measuredErrorUpperMetres": [
+        0.029919505802241897,
+        0.0828432089070536
+      ],
+      "boundingRadiusMetres": 0.9865065973461375,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-01": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        23,
+        57
+      ],
+      "measuredErrorUpperMetres": [
+        0.09782615823912631,
+        0.12981755115884622
+      ],
+      "boundingRadiusMetres": 0.9840171501710411,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-02": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        27,
+        67
+      ],
+      "measuredErrorUpperMetres": [
+        0.11279014674498854,
+        0.15171444784937713
+      ],
+      "boundingRadiusMetres": 1.1355175224112597,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-03": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        31,
+        78
+      ],
+      "measuredErrorUpperMetres": [
+        0.13181664189036132,
+        0.17724070227550548
+      ],
+      "boundingRadiusMetres": 1.3318625527497243,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-04": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        31,
+        76
+      ],
+      "measuredErrorUpperMetres": [
+        0.1292624435699396,
+        0.17399420065245794
+      ],
+      "boundingRadiusMetres": 1.304683717463831,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-05": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        34,
+        85
+      ],
+      "measuredErrorUpperMetres": [
+        0.14457818828433242,
+        0.19438722728639102
+      ],
+      "boundingRadiusMetres": 1.4734425532223425,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-06": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        32,
+        80
+      ],
+      "measuredErrorUpperMetres": [
+        0.1356008967439344,
+        0.18248172142185365
+      ],
+      "boundingRadiusMetres": 1.3735186628706766,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-07": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        33,
+        82
+      ],
+      "measuredErrorUpperMetres": [
+        0.138955503484368,
+        0.186951653930376
+      ],
+      "boundingRadiusMetres": 1.4146730708428714,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-08": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        31,
+        78
+      ],
+      "measuredErrorUpperMetres": [
+        0.13251354405896765,
+        0.17823795900950742
+      ],
+      "boundingRadiusMetres": 1.3405169262314336,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-09": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        35,
+        88
+      ],
+      "measuredErrorUpperMetres": [
+        0.14929739944112322,
+        0.20076057782372098
+      ],
+      "boundingRadiusMetres": 1.5199068119175454,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-10": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        30,
+        75
+      ],
+      "measuredErrorUpperMetres": [
+        0.12708657028179046,
+        0.1710182713563333
+      ],
+      "boundingRadiusMetres": 1.2883482702738058,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-11": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        33,
+        84
+      ],
+      "measuredErrorUpperMetres": [
+        0.14135837644363225,
+        0.1902758785764968
+      ],
+      "boundingRadiusMetres": 1.4450328108740655,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-12": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        31,
+        77
+      ],
+      "measuredErrorUpperMetres": [
+        0.1302704742531108,
+        0.17514640678372856
+      ],
+      "boundingRadiusMetres": 1.318027562069433,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-13": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        32,
+        81
+      ],
+      "measuredErrorUpperMetres": [
+        0.1374198645171604,
+        0.18482720452031812
+      ],
+      "boundingRadiusMetres": 1.3982892074165023,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-14": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        29,
+        74
+      ],
+      "measuredErrorUpperMetres": [
+        0.12466421925031666,
+        0.16783159657408442
+      ],
+      "boundingRadiusMetres": 1.263131946400954,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-15": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        32,
+        79
+      ],
+      "measuredErrorUpperMetres": [
+        0.13413794794288433,
+        0.1805783020268687
+      ],
+      "boundingRadiusMetres": 1.3590309075035714,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "soccer-crowd-people-v2/fan-16": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        29,
+        73
+      ],
+      "measuredErrorUpperMetres": [
+        0.12309475397963923,
+        0.16556296016427163
+      ],
+      "boundingRadiusMetres": 1.2422566462286073,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-01": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        50,
+        96
+      ],
+      "measuredErrorUpperMetres": [
+        0.22009923738537573,
+        0.220417031970845
+      ],
+      "boundingRadiusMetres": 1.28836965588311,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-02": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        36,
+        70
+      ],
+      "measuredErrorUpperMetres": [
+        0.15607621227258234,
+        0.15967919222694923
+      ],
+      "boundingRadiusMetres": 1.1501820215481988,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-03": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        42,
+        84
+      ],
+      "measuredErrorUpperMetres": [
+        0.1853191050749987,
+        0.19306723090532768
+      ],
+      "boundingRadiusMetres": 1.3228503926944106,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-04": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        46,
+        79
+      ],
+      "measuredErrorUpperMetres": [
+        0.20544108158041163,
+        0.17973844733653382
+      ],
+      "boundingRadiusMetres": 1.1740383910680638,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-05": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        45,
+        93
+      ],
+      "measuredErrorUpperMetres": [
+        0.20006839085271907,
+        0.21329150350843917
+      ],
+      "boundingRadiusMetres": 1.3465453194364168,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-06": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        42,
+        80
+      ],
+      "measuredErrorUpperMetres": [
+        0.18302829856881273,
+        0.1833837584187385
+      ],
+      "boundingRadiusMetres": 1.189163263396953,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-07": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        43,
+        86
+      ],
+      "measuredErrorUpperMetres": [
+        0.191181219192044,
+        0.1977632933796658
+      ],
+      "boundingRadiusMetres": 1.283048316491339,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-08": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        44,
+        85
+      ],
+      "measuredErrorUpperMetres": [
+        0.19582276108403235,
+        0.19610209801637862
+      ],
+      "boundingRadiusMetres": 1.16513706082094,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-09": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        37,
+        65
+      ],
+      "measuredErrorUpperMetres": [
+        0.1593150270826976,
+        0.1484419643187566
+      ],
+      "boundingRadiusMetres": 1.1678783355953763,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-10": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        36,
+        73
+      ],
+      "measuredErrorUpperMetres": [
+        0.1563728936209176,
+        0.16623949812924388
+      ],
+      "boundingRadiusMetres": 1.1363934037543841,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-11": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        45,
+        87
+      ],
+      "measuredErrorUpperMetres": [
+        0.19991932293617432,
+        0.1984423219421456
+      ],
+      "boundingRadiusMetres": 1.3606301387697313,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-12": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        43,
+        82
+      ],
+      "measuredErrorUpperMetres": [
+        0.18834332383211583,
+        0.18879836803982653
+      ],
+      "boundingRadiusMetres": 1.2351633027940925,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-13": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        42,
+        80
+      ],
+      "measuredErrorUpperMetres": [
+        0.18295985754400074,
+        0.18333209940309514
+      ],
+      "boundingRadiusMetres": 1.2195598099348235,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "tennis-crowd-people-v2/fan-14": {
+      "profile": "crowd",
+      "enterMetres": [
+        0,
+        49,
+        95
+      ],
+      "measuredErrorUpperMetres": [
+        0.21734148343378598,
+        0.21780066958173788
+      ],
+      "boundingRadiusMetres": 1.236213005729507,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/bird": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        8,
+        23
+      ],
+      "measuredErrorUpperMetres": [
+        0.0236418650781143,
+        0.05093868148402288
+      ],
+      "boundingRadiusMetres": 0.35410077193459094,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/butterfly": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        8,
+        20
+      ],
+      "measuredErrorUpperMetres": [
+        0.008323499588480365,
+        0.02555585545242621
+      ],
+      "boundingRadiusMetres": 0.16862992006865507,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/cat": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        16,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.06874823150273952,
+        0.09053615450424789
+      ],
+      "boundingRadiusMetres": 0.5143965498722581,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/dog": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        10,
+        32
+      ],
+      "measuredErrorUpperMetres": [
+        0.04032035071613116,
+        0.07266784848605283
+      ],
+      "boundingRadiusMetres": 0.5489685505938087,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/fish": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        8,
+        20
+      ],
+      "measuredErrorUpperMetres": [
+        0.03415231053699076,
+        0.03511168155269174
+      ],
+      "boundingRadiusMetres": 0.22565629655200203,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/animals/pigeon": {
+      "profile": "animal",
+      "enterMetres": [
+        0,
+        8,
+        23
+      ],
+      "measuredErrorUpperMetres": [
+        0.02371224546541394,
+        0.050971611472945405
+      ],
+      "boundingRadiusMetres": 0.35791990566421383,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-man-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04437035420037929,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9949528459504068,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-man-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04437035420037929,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9949528459504068,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-man-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04437035420037929,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9949528459504068,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-woman-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.037477552741359686,
+        0.08677739026354762
+      ],
+      "boundingRadiusMetres": 0.9956990361356588,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-woman-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.037477552741359686,
+        0.08677739026354762
+      ],
+      "boundingRadiusMetres": 0.9956990361356588,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/adult-woman-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.037477552741359686,
+        0.08677739026354762
+      ],
+      "boundingRadiusMetres": 0.9956990361356588,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/boy-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04442682647513496,
+        0.08491385522098588
+      ],
+      "boundingRadiusMetres": 0.9996012739534246,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/boy-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04442682647513496,
+        0.08491385522098588
+      ],
+      "boundingRadiusMetres": 0.9996012739534246,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/boy-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.04442682647513496,
+        0.08491385522098588
+      ],
+      "boundingRadiusMetres": 0.9996012739534246,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/cleaner-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        32
+      ],
+      "measuredErrorUpperMetres": [
+        0.04908874735601772,
+        0.07101961360065023
+      ],
+      "boundingRadiusMetres": 0.9804176608025889,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/cleaner-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        32
+      ],
+      "measuredErrorUpperMetres": [
+        0.04908874735601772,
+        0.07101961360065023
+      ],
+      "boundingRadiusMetres": 0.9804176608025889,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/cleaner-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        32
+      ],
+      "measuredErrorUpperMetres": [
+        0.04908874735601772,
+        0.07101961360065023
+      ],
+      "boundingRadiusMetres": 0.9804176608025889,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/courier-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.0436391919343834,
+        0.08683201083414258
+      ],
+      "boundingRadiusMetres": 1.0383658018818769,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/courier-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.0436391919343834,
+        0.08683201083414258
+      ],
+      "boundingRadiusMetres": 1.0383658018818769,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/courier-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.0436391919343834,
+        0.08683201083414258
+      ],
+      "boundingRadiusMetres": 1.0383658018818769,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-man-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.03497519359184784,
+        0.0847517636052425
+      ],
+      "boundingRadiusMetres": 0.9846381730307932,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-man-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.03497519359184784,
+        0.0847517636052425
+      ],
+      "boundingRadiusMetres": 0.9846381730307932,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-man-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.03497519359184784,
+        0.0847517636052425
+      ],
+      "boundingRadiusMetres": 0.9846381730307932,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-woman-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.035109144735653304,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9981321384212815,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-woman-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.035109144735653304,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9981321384212815,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/elder-woman-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        38
+      ],
+      "measuredErrorUpperMetres": [
+        0.035109144735653304,
+        0.08485447793821818
+      ],
+      "boundingRadiusMetres": 0.9981321384212815,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/firefighter-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        15,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.05800776012691241,
+        0.08523662894480394
+      ],
+      "boundingRadiusMetres": 1.0324612796349013,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/firefighter-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        15,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.05800776012691241,
+        0.08523662894480394
+      ],
+      "boundingRadiusMetres": 1.0324612796349013,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/firefighter-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        15,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.05800776012691241,
+        0.08523662894480394
+      ],
+      "boundingRadiusMetres": 1.0324612796349013,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/gardener-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03867935605753879,
+        0.08520644176247384
+      ],
+      "boundingRadiusMetres": 1.0319442222253563,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/gardener-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03867935605753879,
+        0.08520644176247384
+      ],
+      "boundingRadiusMetres": 1.0319442222253563,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/gardener-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03867935605753879,
+        0.08520644176247384
+      ],
+      "boundingRadiusMetres": 1.0319442222253563,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/girl-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03758566662194896,
+        0.08692807398085901
+      ],
+      "boundingRadiusMetres": 1.007006444901028,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/girl-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03758566662194896,
+        0.08692807398085901
+      ],
+      "boundingRadiusMetres": 1.007006444901028,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/girl-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.03758566662194896,
+        0.08692807398085901
+      ],
+      "boundingRadiusMetres": 1.007006444901028,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/maintenance-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.038127367951795964,
+        0.08522188551908737
+      ],
+      "boundingRadiusMetres": 1.0309362298321332,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/maintenance-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.038127367951795964,
+        0.08522188551908737
+      ],
+      "boundingRadiusMetres": 1.0309362298321332,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/maintenance-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        39
+      ],
+      "measuredErrorUpperMetres": [
+        0.038127367951795964,
+        0.08522188551908737
+      ],
+      "boundingRadiusMetres": 1.0309362298321332,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/police-a": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.04362193682161106,
+        0.08807760829980313
+      ],
+      "boundingRadiusMetres": 1.03504150966943,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/police-b": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.04362193682161106,
+        0.08807760829980313
+      ],
+      "boundingRadiusMetres": 1.03504150966943,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "city-citizens-v1/people/police-c": {
+      "profile": "citizen",
+      "enterMetres": [
+        0,
+        14,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.04362193682161106,
+        0.08807760829980313
+      ],
+      "boundingRadiusMetres": 1.03504150966943,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-classic": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        75,
+        212
+      ],
+      "measuredErrorUpperMetres": [
+        0.31965940488062117,
+        0.48777285328255676
+      ],
+      "boundingRadiusMetres": 3.1489964055688535,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-motorcycle": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        36,
+        133
+      ],
+      "measuredErrorUpperMetres": [
+        0.14799863050149342,
+        0.3072054515267304
+      ],
+      "boundingRadiusMetres": 1.8034566981626436,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-scooter": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        36,
+        165
+      ],
+      "measuredErrorUpperMetres": [
+        0.1531744511775006,
+        0.3828547690343677
+      ],
+      "boundingRadiusMetres": 1.688965407786789,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-sport": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        71,
+        235
+      ],
+      "measuredErrorUpperMetres": [
+        0.3053988740938527,
+        0.5427875253748009
+      ],
+      "boundingRadiusMetres": 3.0856978803916473,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-suv": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        81,
+        210
+      ],
+      "measuredErrorUpperMetres": [
+        0.34728392668920904,
+        0.48280102870595776
+      ],
+      "boundingRadiusMetres": 3.2756398359837924,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-taxi": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        74,
+        226
+      ],
+      "measuredErrorUpperMetres": [
+        0.3175316369770215,
+        0.5194133381950486
+      ],
+      "boundingRadiusMetres": 3.252749229480477,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-truck": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        65,
+        213
+      ],
+      "measuredErrorUpperMetres": [
+        0.2692421787276992,
+        0.4894838907569792
+      ],
+      "boundingRadiusMetres": 3.4123318603160238,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/fugitive-van": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        69,
+        233
+      ],
+      "measuredErrorUpperMetres": [
+        0.2936361859235395,
+        0.5368394926841318
+      ],
+      "boundingRadiusMetres": 3.2656486976908368,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-dirt-bike": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        35,
+        143
+      ],
+      "measuredErrorUpperMetres": [
+        0.1466233090070688,
+        0.3305812538241846
+      ],
+      "boundingRadiusMetres": 1.87013047696959,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-luxury": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        73,
+        232
+      ],
+      "measuredErrorUpperMetres": [
+        0.30934899646092795,
+        0.5352217570654583
+      ],
+      "boundingRadiusMetres": 3.2765493141717132,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-sedan": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        71,
+        229
+      ],
+      "measuredErrorUpperMetres": [
+        0.300328492269867,
+        0.5283272306755328
+      ],
+      "boundingRadiusMetres": 3.1735351004636656,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-suv": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        71,
+        204
+      ],
+      "measuredErrorUpperMetres": [
+        0.3027573798323161,
+        0.4670212391023993
+      ],
+      "boundingRadiusMetres": 3.2001004927556895,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-touring-bike": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        56,
+        134
+      ],
+      "measuredErrorUpperMetres": [
+        0.24336955724222298,
+        0.3087487356899165
+      ],
+      "boundingRadiusMetres": 1.815379204039246,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "catch-vehicles-v2/police-van": {
+      "profile": "vehicle",
+      "enterMetres": [
+        0,
+        72,
+        306
+      ],
+      "measuredErrorUpperMetres": [
+        0.30400677179262364,
+        0.7099462625095789
+      ],
+      "boundingRadiusMetres": 3.605528571154134,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/baby-stroller": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        76
+      ],
+      "measuredErrorUpperMetres": [
+        0.03871541175576685,
+        0.1753996205743592
+      ],
+      "boundingRadiusMetres": 0.8254690074303305,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/boy": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        29
+      ],
+      "measuredErrorUpperMetres": [
+        0.03289707544747408,
+        0.06317812837654044
+      ],
+      "boundingRadiusMetres": 0.7198228815636137,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/captain": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        17,
+        59
+      ],
+      "measuredErrorUpperMetres": [
+        0.0675873889876858,
+        0.13365622961302231
+      ],
+      "boundingRadiusMetres": 1.1332153191050414,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/father": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        14,
+        45
+      ],
+      "measuredErrorUpperMetres": [
+        0.05094103259533049,
+        0.1012655889783485
+      ],
+      "boundingRadiusMetres": 1.0771126872015255,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/female-firefighter": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        17,
+        56
+      ],
+      "measuredErrorUpperMetres": [
+        0.06579201052331317,
+        0.12731730648086972
+      ],
+      "boundingRadiusMetres": 1.0792783400167767,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/girl": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        34
+      ],
+      "measuredErrorUpperMetres": [
+        0.03867685718606484,
+        0.07694772202529443
+      ],
+      "boundingRadiusMetres": 0.7153523962657825,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/grandfather": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        42
+      ],
+      "measuredErrorUpperMetres": [
+        0.04651871998645781,
+        0.09259998819606852
+      ],
+      "boundingRadiusMetres": 0.9717534326988603,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/grandmother": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        14,
+        40
+      ],
+      "measuredErrorUpperMetres": [
+        0.05354002179312286,
+        0.08896234574440814
+      ],
+      "boundingRadiusMetres": 0.9529550355170169,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/mother": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        41
+      ],
+      "measuredErrorUpperMetres": [
+        0.04534472408729004,
+        0.09188623169307349
+      ],
+      "boundingRadiusMetres": 1.0038928579435504,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/panicked-man": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        12,
+        42
+      ],
+      "measuredErrorUpperMetres": [
+        0.044996774198636826,
+        0.09250084045817872
+      ],
+      "boundingRadiusMetres": 1.0525643563146279,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    },
+    "fire-rescue-people-v2/young-firefighter": {
+      "profile": "rescue",
+      "enterMetres": [
+        0,
+        17,
+        53
+      ],
+      "measuredErrorUpperMetres": [
+        0.0668018859521784,
+        0.11959102592300434
+      ],
+      "boundingRadiusMetres": 1.100110867454834,
+      "referencePixelLimits": [
+        3,
+        1.5
+      ]
+    }
+  }
+}

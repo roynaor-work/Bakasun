@@ -1,0 +1,36 @@
+{
+  "archive": "bakasun-lod-pipeline-v1.zip",
+  "bytes": 18264156,
+  "sha256": "af6b3f02189691167f3184a4e94e1f505857dd3b4135e0530f1bb7b223a1dc75",
+  "entries": 590,
+  "manifestSha256": "fcb2333dd6b7f4fb578236e73f2ddaf2cc2773fac1e846310421c227b93fed03",
+  "excludedFromArchive": [
+    "verification/delivery.json"
+  ],
+  "format": "Standard ZIP; no application or mesh compression required after extraction",
+  "verification": {
+    "zipCrcPassed": true,
+    "archiveSha256": "af6b3f02189691167f3184a4e94e1f505857dd3b4135e0530f1bb7b223a1dc75",
+    "entries": 590,
+    "payloadBytes": 59736382,
+    "inventoryFiles": 589,
+    "allInventoryHashesMatch": true,
+    "isolatedTests": {
+      "tests": 15,
+      "passed": 15
+    },
+    "reconstructedModels": [
+      "hoops-realism-v2/players/guard",
+      "soccer-crowd-people-v2/fan-01",
+      "tennis-crowd-people-v2/fan-14",
+      "catch-vehicles-v2/police-sedan"
+    ],
+    "reconstructedVariants": 8,
+    "byteIdenticalReconstruction": true,
+    "fetchDisabled": true,
+    "webAssemblyDisabled": true,
+    "requiresGit": false,
+    "requiresNpmInstall": false,
+    "node": "v24.19.0"
+  }
+}

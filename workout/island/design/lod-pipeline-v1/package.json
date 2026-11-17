@@ -1,0 +1,13 @@
+{
+  "name": "bakasun-lod-pipeline-v1",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "scripts": {
+    "build": "node tools/lod.mjs && node tools/bundle-preview.mjs",
+    "validate": "node tools/validate.mjs",
+    "test": "node --test tools/lod.test.mjs",
+    "preview": "node tools/serve.mjs",
+    "pack": "node tools/pack.mjs"
+  }
+}

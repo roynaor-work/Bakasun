@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: surface distance encloses the analytic distance between parallel triangles
+ok 1 - surface distance encloses the analytic distance between parallel triangles
+  ---
+  duration_ms: 39.503293
+  type: 'test'
+  ...
+# Subtest: Hausdorff includes face interiors, even when both surfaces share every vertex
+ok 2 - Hausdorff includes face interiors, even when both surfaces share every vertex
+  ---
+  duration_ms: 58.910968
+  type: 'test'
+  ...
+# Subtest: degenerate triangles have a finite nearest-surface distance
+ok 3 - degenerate triangles have a finite nearest-surface distance
+  ---
+  duration_ms: 0.388347
+  type: 'test'
+  ...
+# Subtest: distance policy holds the level near boundaries and handles large jumps
+ok 4 - distance policy holds the level near boundaries and handles large jumps
+  ---
+  duration_ms: 0.583175
+  type: 'test'
+  ...
+# Subtest: pipeline refuses output outside its own package
+ok 5 - pipeline refuses output outside its own package
+  ---
+  duration_ms: 0.503216
+  type: 'test'
+  ...
+# Subtest: calibrated distances bound perspective surface error at the reference viewport
+ok 6 - calibrated distances bound perspective surface error at the reference viewport
+  ---
+  duration_ms: 1.601475
+  type: 'test'
+  ...
+# Subtest: skinned crowd pipeline: deterministic authored output, immutable inputs and exact animation contract
+ok 7 - skinned crowd pipeline: deterministic authored output, immutable inputs and exact animation contract
+  ---
+  duration_ms: 451.913278
+  type: 'test'
+  ...
+# Subtest: QEM reduces a skinned city citizen at both budgets without changing bone weights
+ok 8 - QEM reduces a skinned city citizen at both budgets without changing bone weights
+  ---
+  duration_ms: 1531.520913
+  type: 'test'
+  ...
+# Subtest: tennis: all three independent rigs and all supported bones survive; budgets use the default scene
+ok 9 - tennis: all three independent rigs and all supported bones survive; budgets use the default scene
+  ---
+  duration_ms: 1027.682019
+  type: 'test'
+  ...
+# Subtest: shared geometry accessor addresses are remapped once for independent rigs
+ok 10 - shared geometry accessor addresses are remapped once for independent rigs
+  ---
+  duration_ms: 5.963346
+  type: 'test'
+  ...
+# Subtest: identical bind arrays share native storage while retaining every matrix byte
+ok 11 - identical bind arrays share native storage while retaining every matrix byte
+  ---
+  duration_ms: 9.114276
+  type: 'test'
+  ...
+# Subtest: shared morph and vertex views declare the required native byte stride
+ok 12 - shared morph and vertex views declare the required native byte stride
+  ---
+  duration_ms: 59.681407
+  type: 'test'
+  ...
+# Subtest: authored crowd topology retains the original wrist and shoulder influence support
+ok 13 - authored crowd topology retains the original wrist and shoulder influence support
+  ---
+  duration_ms: 151.412789
+  type: 'test'
+  ...
+# Subtest: vehicle morphs, wheel clips and every damage scene survive at both budgets
+ok 14 - vehicle morphs, wheel clips and every damage scene survive at both budgets
+  ---
+  duration_ms: 5538.816294
+  type: 'test'
+  ...
+# Subtest: compressed and externally linked GLBs fail closed
+ok 15 - compressed and externally linked GLBs fail closed
+  ---
+  duration_ms: 18.303152
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9188.382676

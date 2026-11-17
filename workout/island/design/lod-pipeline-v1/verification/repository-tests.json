@@ -1,0 +1,24 @@
+{
+  "command": "timeout --signal=TERM 600s node --test --test-force-exit tests/*.mjs",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "node": "v24.19.0",
+  "exitCode": 124,
+  "status": "לא הושלמה נקי: 4,111 עברו, כשל אחד, ביטול אחד, 64 דולגו; נעצרה אחרי 600 שניות",
+  "tests": 4177,
+  "pass": 4111,
+  "fail": 1,
+  "cancelled": 1,
+  "skipped": 64,
+  "issues": [
+    {
+      "file": "tests/workout-royiki.test.mjs",
+      "reason": "Playwright default headless-shell executable is missing. The test opens an HTTP server before launch and enters cleanup only after launch, leaving that server open on launch failure."
+    },
+    {
+      "file": "tests/island-racing-v23.test.mjs",
+      "reason": "Promise resolution is still pending but the event loop has already resolved."
+    }
+  ],
+  "originalNpmTest": "npm test was also run; it did not terminate after reporting its cases. No existing source/test files were changed.",
+  "scope": "These are existing application tests; the LOD package has its own isolated unit, validator, browser and offline checks."
+}
