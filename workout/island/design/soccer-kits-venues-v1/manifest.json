@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-kits-venues-v1",
+  "kind": "design-assets-not-runtime",
+  "created": "2026-11-17",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/soccer-kits-venues-v1",
+  "scope": "Only new files below workout/island/design/soccer-kits-venues-v1/.",
+  "license": "CC0-1.0 for assets/source; MIT for bundled three.js; Apache-2.0 for Draco; see LICENSES.md",
+  "budget": {
+    "maxBytes": 4000000,
+    "unit": "decimal bytes",
+    "scope": "Every regular file recursively in this folder, including vendor, sources, documentation and verification."
+  },
+  "preview": {
+    "file": "preview.html",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "offline": true,
+    "serveFromFolder": true,
+    "requiresLocalHttp": true,
+    "externalRequests": 0
+  },
+  "encoding": {
+    "format": "glTF 2.0 binary",
+    "compression": "KHR_draco_mesh_compression",
+    "colors": "linear-sRGB COLOR_0",
+    "rasterTextures": 0,
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "meters"
+  },
+  "rig": {
+    "file": "rig.json",
+    "bones": 18,
+    "order": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "contract": "../motion2/soccer.json / skeleton.bones names, order and parents",
+    "bind": "Preserved soccer-v5 transforms and inverse binds; use calibrated retargeting for canonical JSON clips."
+  },
+  "kits": {
+    "count": 8,
+    "catalog": "kits.json",
+    "paths": [
+      "kits/ridge-red.glb",
+      "kits/cobalt-tide.glb",
+      "kits/sunfield.glb",
+      "kits/pine-white.glb",
+      "kits/violet-dusk.glb",
+      "kits/cloud-blue.glb",
+      "kits/clay-aqua.glb",
+      "kits/midnight-lime.glb"
+    ],
+    "defaultNumbers": [
+      {
+        "kitId": "ridge-red",
+        "number": 1
+      },
+      {
+        "kitId": "cobalt-tide",
+        "number": 2
+      },
+      {
+        "kitId": "sunfield",
+        "number": 3
+      },
+      {
+        "kitId": "pine-white",
+        "number": 4
+      },
+      {
+        "kitId": "violet-dusk",
+        "number": 5
+      },
+      {
+        "kitId": "cloud-blue",
+        "number": 6
+      },
+      {
+        "kitId": "clay-aqua",
+        "number": 10
+      },
+      {
+        "kitId": "midnight-lime",
+        "number": 11
+      }
+    ],
+    "clothing": [
+      "shirt",
+      "shorts",
+      "socks"
+    ],
+    "backNumber": {
+      "range": [
+        1,
+        11
+      ],
+      "library": "kits/numbers-01-11.glb",
+      "helper": "apply.mjs",
+      "method": "Original block digits projected onto the jersey; barycentric skin weights; select exactly one number mesh.",
+      "exportedDefault": "Each kit GLB already includes its default number in COLOR_0.",
+      "runtimeSelection": "applyKitNumber(clonedKitScene, loadedNumberLibraryScene, integer1to11, kit.palette.number)"
+    },
+    "animation": "Each kit includes the existing CC0 run, retained only for fitting review; preview also provides a relaxed presentation pose."
+  },
+  "venues": {
+    "count": 3,
+    "catalog": "venues.json",
+    "paths": [
+      "venues/stadium-day.glb",
+      "venues/stadium-night.glb",
+      "venues/neighborhood.glb"
+    ],
+    "standLayersPerVenue": 3,
+    "signage": {
+      "text": false,
+      "logos": false
+    },
+    "lighting": "Directional/spot lights embedded as KHR_lights_punctual. Recreate hemisphere/fog/exposure from venues.json; these are not native glTF ambient light fields."
+  },
+  "integration": {
+    "entrypoint": "apply.mjs",
+    "characterScale": "GLB binds retained at source size (~1.30m); preview uniformly scales each actor to 1.80m. Do not rescale individual joints.",
+    "runtimeFilesUnchanged": true,
+    "venueImport": "Load exactly one venue GLB at a time. Keep Sky unlit and exempt from fog. Night has four actual spot lights.",
+    "libraryImport": "numbers-01-11.glb is an alternatives library, not a scene to render wholesale."
+  },
+  "assets": [
+    {
+      "file": "kits/ridge-red.glb",
+      "bytes": 107260,
+      "sha256": "31829f2d00c5095b95875a0a05a19abbe63f84e0c331f8a963262f07d9eb3112",
+      "triangles": 12700,
+      "vertices": 7072
+    },
+    {
+      "file": "kits/cobalt-tide.glb",
+      "bytes": 107804,
+      "sha256": "98afe2c333b8296972b1a8a3c972e9664e10ee5bcf06e92c2bf87cb6c6c33f57",
+      "triangles": 12724,
+      "vertices": 7098
+    },
+    {
+      "file": "kits/sunfield.glb",
+      "bytes": 107036,
+      "sha256": "4faa4396b10f966bdf85829c5c987ff25485cb8df5fd76362b504000c183c8f9",
+      "triangles": 12716,
+      "vertices": 7092
+    },
+    {
+      "file": "kits/pine-white.glb",
+      "bytes": 107800,
+      "sha256": "cf78cf0622bf981f6afb8ff85896097c413e0f1694c15cadc0b07c11ec6a57dc",
+      "triangles": 12748,
+      "vertices": 7102
+    },
+    {
+      "file": "kits/violet-dusk.glb",
+      "bytes": 107416,
+      "sha256": "2d0f2cb0abe4909e507cb6af80368beaccbf70e65a4d0502dddd96072859e892",
+      "triangles": 12732,
+      "vertices": 7100
+    },
+    {
+      "file": "kits/cloud-blue.glb",
+      "bytes": 107896,
+      "sha256": "7b873ff7309397e5872727f824066cfc50930fccd39513e21f759c928dbc2df7",
+      "triangles": 12740,
+      "vertices": 7101
+    },
+    {
+      "file": "kits/clay-aqua.glb",
+      "bytes": 108380,
+      "sha256": "b3516675b9912399f9278f8c32662e74a712194ad03c1a0b99f343348b2b6500",
+      "triangles": 12908,
+      "vertices": 7212
+    },
+    {
+      "file": "kits/midnight-lime.glb",
+      "bytes": 107948,
+      "sha256": "0720489afdd9d85a0e2c2debf66a636fd7154240eb3aa56274f905509e6602ab",
+      "triangles": 12836,
+      "vertices": 7165
+    },
+    {
+      "file": "kits/numbers-01-11.glb",
+      "bytes": 30776,
+      "sha256": "3693ae6b7b8cbc570d3d94b2c4a939c582a7fc38d5dbfbce10dba379e64f47d2",
+      "triangles": 2104,
+      "vertices": 1468
+    },
+    {
+      "file": "venues/stadium-day.glb",
+      "bytes": 321372,
+      "sha256": "8164850ea8559beb86b85de78c2b71443915b9d3b592ef2fcbbd024fa400d880",
+      "triangles": 83764,
+      "vertices": 179118
+    },
+    {
+      "file": "venues/stadium-night.glb",
+      "bytes": 330616,
+      "sha256": "9e66a9afff4a5429539a92de8df5bc5b66ac18f50b38abe453d2d2a7bc34d146",
+      "triangles": 88740,
+      "vertices": 181724
+    },
+    {
+      "file": "venues/neighborhood.glb",
+      "bytes": 92072,
+      "sha256": "d31685e807abf9711efd85c62ae2d5cefad2ea80609abc7a1d217b6939bc372a",
+      "triangles": 21668,
+      "vertices": 29176
+    }
+  ],
+  "sources": [
+    {
+      "file": "workout/island/design/soccer-v5/models/teal-quiff.glb",
+      "sha256": "9e17179a87f7d2a690c3e076cf19033b4a742aae901e85638f932ddf6119ea79",
+      "bytes": 453528
+    },
+    {
+      "file": "workout/island/design/soccer-v5/rig.json",
+      "sha256": "00c33e76831ee3f431641874211dddebe04d8ac969cbc6d768e43694e10d70d4",
+      "bytes": 15772
+    },
+    {
+      "file": "workout/island/design/motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "bytes": 1557297
+    },
+    {
+      "file": "workout/island/design/soccer-v5/LICENSES.md",
+      "sha256": "503bb39140c9c56021c9c561ecd47847e241a3acc0da1e23c6d8c22a21dc6aaf",
+      "bytes": 3293
+    },
+    {
+      "file": "workout/island/design/characters/LICENSES.md",
+      "sha256": "21155b93cf5777c539888d67a52e7f3531444b68dcc76b341b2753573146f913",
+      "bytes": 4219
+    }
+  ],
+  "vendor": {
+    "threeRevision": "160",
+    "draco": "three.js r160 glTF WASM decoder",
+    "files": [
+      {
+        "file": "vendor/three.module.js",
+        "source": "workout/island/vendor/three.module.js",
+        "bytes": 670681,
+        "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/GLTFLoader.js",
+        "source": "workout/island/vendor/GLTFLoader.js",
+        "bytes": 108527,
+        "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/DRACOLoader.js",
+        "source": "workout/island/vendor/DRACOLoader.js",
+        "bytes": 13640,
+        "sha256": "e4348b2c255e7d851df790cafb93bcdd7ac0d2a1a6916038b43580b1e6d6c3fb",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/BufferGeometryUtils.js",
+        "source": "workout/island/vendor/BufferGeometryUtils.js",
+        "bytes": 31918,
+        "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/SkeletonUtils.js",
+        "source": "workout/island/vendor/SkeletonUtils.js",
+        "bytes": 8019,
+        "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/LICENSE.three",
+        "source": "workout/island/vendor/LICENSE.three",
+        "bytes": 1081,
+        "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+        "license": "MIT"
+      },
+      {
+        "file": "vendor/draco/draco_wasm_wrapper.js",
+        "source": "workout/island/vendor/draco/draco_wasm_wrapper.js",
+        "bytes": 58456,
+        "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+        "license": "Apache-2.0"
+      },
+      {
+        "file": "vendor/draco/draco_decoder.wasm",
+        "source": "workout/island/vendor/draco/draco_decoder.wasm",
+        "bytes": 192420,
+        "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+        "license": "Apache-2.0"
+      }
+    ]
+  },
+  "report": "REPORT.md",
+  "verification": {
+    "assets": "verification/assets.json",
+    "browser": "verification/browser.json",
+    "numberFit": "verification/number-fit.json",
+    "repository": "verification/repository.json",
+    "package": "verification/package.json"
+  }
+}

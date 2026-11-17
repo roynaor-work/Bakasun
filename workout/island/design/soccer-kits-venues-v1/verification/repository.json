@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "command": "npm test",
+  "exitCode": 0,
+  "passed": true,
+  "node": "24.19.0",
+  "summary": {
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4262,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 461979.603447
+  },
+  "logBytes": 530102,
+  "logSha256": "be52bace44de9a772347014df4c7d0162e1f48d6a721238c3d806753d89fdac0",
+  "environment": "PLAYWRIGHT_BROWSERS_PATH=/tmp/soccer-kits-browser-cache; expected browser binaries in that temporary cache point to the installed /usr/bin/chromium.",
+  "setupNote": "The initial run found no bundled Playwright browser and left a pre-existing test server open. That run was stopped; the full suite was rerun with the temporary browser mapping. No repository configuration was edited."
+}

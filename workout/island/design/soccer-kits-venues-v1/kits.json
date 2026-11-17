@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "encoding": "linear-sRGB COLOR_0",
+  "textureImages": 0,
+  "canonicalBones": 18,
+  "source": {
+    "file": "workout/island/design/soccer-v5/models/teal-quiff.glb",
+    "sha256": "9e17179a87f7d2a690c3e076cf19033b4a742aae901e85638f932ddf6119ea79",
+    "license": "CC0-1.0"
+  },
+  "numberLibrary": {
+    "file": "kits/numbers-01-11.glb",
+    "bytes": 30776,
+    "sha256": "3693ae6b7b8cbc570d3d94b2c4a939c582a7fc38d5dbfbce10dba379e64f47d2",
+    "triangles": 2104,
+    "vertices": 1468,
+    "range": [
+      1,
+      11
+    ],
+    "selection": "one mesh at a time; bind to the kit skeleton with apply.mjs"
+  },
+  "kits": [
+    {
+      "id": "ridge-red",
+      "label": "אדום רכס",
+      "index": 1,
+      "palette": {
+        "shirt": "#DF4053",
+        "shorts": "#1A2941",
+        "socks": "#F2F0E5",
+        "trim": "#F2F0E5",
+        "number": "#F5F3E9"
+      },
+      "pattern": "solid",
+      "defaultNumber": 1,
+      "file": "kits/ridge-red.glb",
+      "bytes": 107260,
+      "sha256": "31829f2d00c5095b95875a0a05a19abbe63f84e0c331f8a963262f07d9eb3112",
+      "triangles": 12700,
+      "vertices": 7072,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "cobalt-tide",
+      "label": "גל קובלט",
+      "index": 2,
+      "palette": {
+        "shirt": "#315DE0",
+        "shorts": "#F1F2E9",
+        "socks": "#315DE0",
+        "trim": "#90D9E1",
+        "number": "#F5F3E9"
+      },
+      "pattern": "side",
+      "defaultNumber": 2,
+      "file": "kits/cobalt-tide.glb",
+      "bytes": 107804,
+      "sha256": "98afe2c333b8296972b1a8a3c972e9664e10ee5bcf06e92c2bf87cb6c6c33f57",
+      "triangles": 12724,
+      "vertices": 7098,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "sunfield",
+      "label": "שדה שמש",
+      "index": 3,
+      "palette": {
+        "shirt": "#F3BE35",
+        "shorts": "#20364A",
+        "socks": "#F3BE35",
+        "trim": "#20364A",
+        "number": "#15293B"
+      },
+      "pattern": "shoulder",
+      "defaultNumber": 3,
+      "file": "kits/sunfield.glb",
+      "bytes": 107036,
+      "sha256": "4faa4396b10f966bdf85829c5c987ff25485cb8df5fd76362b504000c183c8f9",
+      "triangles": 12716,
+      "vertices": 7092,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "pine-white",
+      "label": "אורן ולבן",
+      "index": 4,
+      "palette": {
+        "shirt": "#177C67",
+        "shorts": "#F2F0E5",
+        "socks": "#177C67",
+        "trim": "#E7C98B",
+        "number": "#F5F3E9"
+      },
+      "pattern": "side",
+      "defaultNumber": 4,
+      "file": "kits/pine-white.glb",
+      "bytes": 107800,
+      "sha256": "cf78cf0622bf981f6afb8ff85896097c413e0f1694c15cadc0b07c11ec6a57dc",
+      "triangles": 12748,
+      "vertices": 7102,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "violet-dusk",
+      "label": "סגול בין ערביים",
+      "index": 5,
+      "palette": {
+        "shirt": "#7946BC",
+        "shorts": "#29233D",
+        "socks": "#B19CD8",
+        "trim": "#EEE9F0",
+        "number": "#F5F3E9"
+      },
+      "pattern": "solid",
+      "defaultNumber": 5,
+      "file": "kits/violet-dusk.glb",
+      "bytes": 107416,
+      "sha256": "2d0f2cb0abe4909e507cb6af80368beaccbf70e65a4d0502dddd96072859e892",
+      "triangles": 12732,
+      "vertices": 7100,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "cloud-blue",
+      "label": "ענן כחול",
+      "index": 6,
+      "palette": {
+        "shirt": "#E9F1EC",
+        "shorts": "#2B4FA4",
+        "socks": "#E9F1EC",
+        "trim": "#3877B5",
+        "number": "#15293B"
+      },
+      "pattern": "side",
+      "defaultNumber": 6,
+      "file": "kits/cloud-blue.glb",
+      "bytes": 107896,
+      "sha256": "7b873ff7309397e5872727f824066cfc50930fccd39513e21f759c928dbc2df7",
+      "triangles": 12740,
+      "vertices": 7101,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "clay-aqua",
+      "label": "חמרה ותכלת",
+      "index": 7,
+      "palette": {
+        "shirt": "#EF743D",
+        "shorts": "#253E4C",
+        "socks": "#51C5C5",
+        "trim": "#F4EBDD",
+        "number": "#15293B"
+      },
+      "pattern": "shoulder",
+      "defaultNumber": 10,
+      "file": "kits/clay-aqua.glb",
+      "bytes": 108380,
+      "sha256": "b3516675b9912399f9278f8c32662e74a712194ad03c1a0b99f343348b2b6500",
+      "triangles": 12908,
+      "vertices": 7212,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    },
+    {
+      "id": "midnight-lime",
+      "label": "לילה וליים",
+      "index": 8,
+      "palette": {
+        "shirt": "#1A2E45",
+        "shorts": "#B9D853",
+        "socks": "#1A2E45",
+        "trim": "#B9D853",
+        "number": "#F5F3E9"
+      },
+      "pattern": "side",
+      "defaultNumber": 11,
+      "file": "kits/midnight-lime.glb",
+      "bytes": 107948,
+      "sha256": "0720489afdd9d85a0e2c2debf66a636fd7154240eb3aa56274f905509e6602ab",
+      "triangles": 12836,
+      "vertices": 7165,
+      "regions": {
+        "shirt": 564,
+        "shorts": 836,
+        "trim": 167,
+        "preserve": 3626,
+        "shorts-trim": 256,
+        "socks": 298,
+        "boot-trim": 244,
+        "boots": 784
+      },
+      "animations": [
+        "run"
+      ]
+    }
+  ]
+}

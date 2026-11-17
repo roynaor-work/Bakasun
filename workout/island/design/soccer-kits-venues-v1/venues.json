@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "venues": [
+    {
+      "file": "venues/stadium-day.glb",
+      "bytes": 321372,
+      "sha256": "8164850ea8559beb86b85de78c2b71443915b9d3b592ef2fcbbd024fa400d880",
+      "triangles": 83764,
+      "vertices": 179118,
+      "id": "stadium-day",
+      "label": "אצטדיון יום",
+      "pitch": {
+        "widthMeters": 68,
+        "lengthMeters": 105
+      },
+      "standLayers": 3,
+      "sky": "vertex-colored gradient dome",
+      "boards": {
+        "text": false,
+        "logos": false
+      },
+      "lighting": {
+        "embedded": "KHR_lights_punctual",
+        "directional": 1,
+        "spots": 0,
+        "atmosphere": {
+          "sky": "#C4E1E8",
+          "ground": "#657D61",
+          "hemisphereIntensity": 1.35,
+          "background": "#A7CCD8",
+          "fogNear": 240,
+          "fogFar": 400,
+          "exposure": 1.05
+        }
+      },
+      "camera": {
+        "position": [
+          103,
+          78,
+          131
+        ],
+        "target": [
+          0,
+          3,
+          0
+        ]
+      }
+    },
+    {
+      "file": "venues/stadium-night.glb",
+      "bytes": 330616,
+      "sha256": "9e66a9afff4a5429539a92de8df5bc5b66ac18f50b38abe453d2d2a7bc34d146",
+      "triangles": 88740,
+      "vertices": 181724,
+      "id": "stadium-night",
+      "label": "אצטדיון לילה",
+      "pitch": {
+        "widthMeters": 68,
+        "lengthMeters": 105
+      },
+      "standLayers": 3,
+      "sky": "vertex-colored gradient dome",
+      "boards": {
+        "text": false,
+        "logos": false
+      },
+      "lighting": {
+        "embedded": "KHR_lights_punctual",
+        "directional": 1,
+        "spots": 4,
+        "atmosphere": {
+          "sky": "#839FC0",
+          "ground": "#23382F",
+          "hemisphereIntensity": 0.8,
+          "background": "#111F38",
+          "fogNear": 190,
+          "fogFar": 400,
+          "exposure": 1.25
+        }
+      },
+      "camera": {
+        "position": [
+          103,
+          78,
+          131
+        ],
+        "target": [
+          0,
+          3,
+          0
+        ]
+      }
+    },
+    {
+      "file": "venues/neighborhood.glb",
+      "bytes": 92072,
+      "sha256": "d31685e807abf9711efd85c62ae2d5cefad2ea80609abc7a1d217b6939bc372a",
+      "triangles": 21668,
+      "vertices": 29176,
+      "id": "neighborhood",
+      "label": "מגרש שכונתי",
+      "pitch": {
+        "widthMeters": 34,
+        "lengthMeters": 52
+      },
+      "standLayers": 3,
+      "sky": "vertex-colored gradient dome",
+      "boards": {
+        "text": false,
+        "logos": false
+      },
+      "lighting": {
+        "embedded": "KHR_lights_punctual",
+        "directional": 1,
+        "spots": 0,
+        "atmosphere": {
+          "sky": "#E1CFB4",
+          "ground": "#70664F",
+          "hemisphereIntensity": 1.35,
+          "background": "#B8CACC",
+          "fogNear": 240,
+          "fogFar": 400,
+          "exposure": 1.05
+        }
+      },
+      "camera": {
+        "position": [
+          57,
+          43,
+          72
+        ],
+        "target": [
+          0,
+          2,
+          0
+        ]
+      }
+    }
+  ]
+}

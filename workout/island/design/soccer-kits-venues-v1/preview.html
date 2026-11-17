@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <title>על הקווים · שמונה ערכות, שלושה מגרשים</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">╱</span><div><strong>על הקווים</strong><span>אוסף מדים ומגרשים</span></div></div>
+    <nav id="venues" class="venues" aria-label="בחירת מגרש"></nav>
+    <span class="edition">01 <span>/</span> מהדורת מגרש</span>
+  </header>
+  <main>
+    <section id="stage" class="stage" aria-label="תצוגת תלת ממד">
+      <canvas id="canvas" tabindex="0" aria-label="תצוגת ערכות ומגרשים. גרירה או חצים לסיבוב, רווח לתנועה."></canvas>
+      <div class="stage-shade" aria-hidden="true"></div>
+      <div class="stage-toolbar">
+        <div class="segmented" aria-label="סוג התצוגה">
+          <button type="button" data-mode="kits" aria-pressed="true">מדים</button>
+          <button type="button" data-mode="venue" aria-pressed="false">מגרש</button>
+        </div>
+        <span id="venue-badge" class="badge">שמש · שלוש שכבות יציע</span>
+      </div>
+      <div class="stage-caption"><span id="stage-caption">קדמי וגב</span><span id="stage-count" dir="ltr">01 / 08</span></div>
+      <div id="loading" class="loading" role="status"><span class="spinner" aria-hidden="true"></span><span id="loading-text">מכינים את המגרש…</span></div>
+      <div id="error" class="error" role="alert" hidden><strong>התצוגה לא נטענה</strong><p id="error-detail"></p><button id="retry" type="button">ניסיון נוסף</button></div>
+    </section>
+    <aside class="inspector">
+      <div class="collection-label">הערכה הנבחרת <span id="kit-index">01</span></div>
+      <h1 id="kit-title">אדום רכס</h1>
+      <div id="palette" class="palette" aria-label="צבעי הביגוד"></div>
+      <div class="number-row"><label for="number">המספר בגב</label><select id="number" aria-label="מספר בגב, 1 עד 11"></select></div>
+      <div class="segmented views" aria-label="מבט על המדים">
+        <button type="button" data-view="front" aria-pressed="false">קדמי</button>
+        <button type="button" data-view="back" aria-pressed="false">גב</button>
+        <button type="button" data-view="pair" aria-pressed="true">שניהם</button>
+      </div>
+      <div class="motion-row"><button id="motion" type="button" aria-pressed="false"><span aria-hidden="true">▷</span> בתנועה</button><button id="reset" type="button" aria-label="איפוס הסיבוב">↺</button></div>
+      <p class="hint">גוררים לסיבוב · בוחרים צבע למטה</p>
+    </aside>
+  </main>
+  <footer class="kit-rail" aria-label="בחירת ערכה"><div class="rail-label"><b>08</b><span>ערכות<br>לכל מגרש</span></div><div id="kits" class="kits"></div></footer>
+  <noscript>יש להפעיל JavaScript כדי לצפות בקבצי התלת ממד.</noscript>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
