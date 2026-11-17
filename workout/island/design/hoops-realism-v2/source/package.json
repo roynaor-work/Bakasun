@@ -1,0 +1,17 @@
+{
+  "name": "hoops-realism-v2-authoring",
+  "private": true,
+  "type": "module",
+  "description": "Install in an external tools directory, never in the delivery folder.",
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "draco3dgltf": "1.5.7",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "meshoptimizer": "0.25.0",
+    "sharp": "0.34.5",
+    "three": "0.160.0",
+    "playwright-core": "1.57.0"
+  }
+}

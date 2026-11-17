@@ -1,0 +1,2014 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-realism-v2",
+  "created": "2026-11-17",
+  "kind": "design-assets-not-runtime-integration",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/hoops-realism-v2",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "budgetBytes": 6000000,
+  "bytesExcludingManifest": 5127902,
+  "coordinateSystem": {
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z"
+  },
+  "preview": {
+    "path": "preview.html",
+    "targetViewport": [
+      844,
+      390
+    ],
+    "serveFrom": "repository root over HTTP",
+    "network": "same-origin files only"
+  },
+  "sharedPreviewDependencies": [
+    {
+      "path": "../../vendor/three.module.js",
+      "license": "MIT",
+      "licenseFile": "../../vendor/LICENSE.three"
+    },
+    {
+      "path": "../../vendor/GLTFLoader.js",
+      "license": "MIT",
+      "licenseFile": "../../vendor/LICENSE.three"
+    },
+    {
+      "path": "../../vendor/BufferGeometryUtils.js",
+      "license": "MIT",
+      "licenseFile": "../../vendor/LICENSE.three"
+    }
+  ],
+  "catalogs": {
+    "crowd": "crowd/catalog.json",
+    "players": "players/catalog.json",
+    "audio": "audio/catalog.json"
+  },
+  "crowd": {
+    "schemaVersion": 1,
+    "rig": "CrowdHuman18",
+    "units": "metres",
+    "up": "+Y",
+    "forward": "+Z",
+    "bindPose": "natural standing, arms lowered",
+    "clips": [
+      {
+        "name": "sit",
+        "duration": 3.2,
+        "loop": true
+      },
+      {
+        "name": "stand",
+        "duration": 3.2,
+        "loop": true
+      },
+      {
+        "name": "clap",
+        "duration": 1.2,
+        "loop": true
+      },
+      {
+        "name": "jump",
+        "duration": 1.6,
+        "loop": true
+      },
+      {
+        "name": "disappointed",
+        "duration": 2.8,
+        "loop": true
+      },
+      {
+        "name": "shout",
+        "duration": 2.0,
+        "loop": true
+      }
+    ],
+    "lodPolicy": {
+      "thresholdsMetres": [
+        0,
+        12,
+        25
+      ],
+      "triangles": [
+        210,
+        90,
+        24
+      ],
+      "lod1": "Volumetric head/torso with continuous triangular arm lofts and crossed leg/neck ribbons; intended for medium-distance stands",
+      "lod2": "24-triangle double-sided skinned silhouette for distant stands; no texture impostor"
+    },
+    "provenance": {
+      "geometry": "Original anatomical retopology informed by existing CC0 characters2 body and head surfaces; no copied geometry",
+      "textures": "Original 256x128 painted face and garment atlas per fan, embedded in GLB",
+      "numeralGlyphs": "Rasterized system DejaVu Sans Bold; font software is not included",
+      "license": "CC0-1.0 for original artwork; DejaVu glyph design retains its upstream license"
+    },
+    "fans": [
+      {
+        "id": "fan-01",
+        "label": "ילד · גופיית ענבר",
+        "ageGroup": "child",
+        "height": 1.18,
+        "skin": "#A66D47",
+        "hairColor": "#241A15",
+        "shirt": "#E3AB35",
+        "outfit": "team-jersey",
+        "hair": "curls",
+        "accessories": [],
+        "build": 0.88,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-01-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36920
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-01-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 31220
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-01-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27720
+          }
+        ]
+      },
+      {
+        "id": "fan-02",
+        "label": "ילדה · ג׳קט מנטה",
+        "ageGroup": "child",
+        "height": 1.26,
+        "skin": "#E5B997",
+        "hairColor": "#593D2B",
+        "shirt": "#4C9C96",
+        "outfit": "jacket",
+        "hair": "pony",
+        "accessories": [],
+        "build": 0.84,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-02-lod0.glb",
+            "triangles": 210,
+            "vertices": 166,
+            "bytes": 35656
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-02-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30224
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-02-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26720
+          }
+        ]
+      },
+      {
+        "id": "fan-03",
+        "label": "נער · כובע כחול",
+        "ageGroup": "child",
+        "height": 1.38,
+        "skin": "#68452F",
+        "hairColor": "#211B17",
+        "shirt": "#366A9D",
+        "outfit": "team-jersey",
+        "hair": "cap",
+        "accessories": [
+          "cap"
+        ],
+        "build": 0.91,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-03-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 37092
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-03-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 31396
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-03-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27892
+          }
+        ]
+      },
+      {
+        "id": "fan-04",
+        "label": "נערה · חולצה אלמוגית",
+        "ageGroup": "child",
+        "height": 1.43,
+        "skin": "#BF8B60",
+        "hairColor": "#30231D",
+        "shirt": "#CC6552",
+        "outfit": "t-shirt",
+        "hair": "bob",
+        "accessories": [
+          "glasses"
+        ],
+        "build": 0.9,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-04-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 35968
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-04-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30264
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-04-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26756
+          }
+        ]
+      },
+      {
+        "id": "fan-05",
+        "label": "אוהד · חולצת קבוצה סגולה",
+        "ageGroup": "adult",
+        "height": 1.78,
+        "skin": "#784E36",
+        "hairColor": "#1D1716",
+        "shirt": "#74559A",
+        "outfit": "team-jersey",
+        "hair": "crop",
+        "accessories": [],
+        "build": 1.0,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-05-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36944
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-05-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 31248
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-05-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27744
+          }
+        ]
+      },
+      {
+        "id": "fan-06",
+        "label": "אוהדת · ג׳קט כהה",
+        "ageGroup": "adult",
+        "height": 1.69,
+        "skin": "#D9AC85",
+        "hairColor": "#3A241B",
+        "shirt": "#3C5666",
+        "outfit": "jacket",
+        "hair": "bun",
+        "accessories": [],
+        "build": 0.94,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-06-lod0.glb",
+            "triangles": 210,
+            "vertices": 166,
+            "bytes": 35648
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-06-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30220
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-06-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26708
+          }
+        ]
+      },
+      {
+        "id": "fan-07",
+        "label": "אוהד · ג׳קט זית",
+        "ageGroup": "adult",
+        "height": 1.84,
+        "skin": "#E4C2A4",
+        "hairColor": "#49352B",
+        "shirt": "#7E8851",
+        "outfit": "jacket",
+        "hair": "crop",
+        "accessories": [
+          "glasses"
+        ],
+        "build": 1.12,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-07-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36000
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-07-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30300
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-07-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26792
+          }
+        ]
+      },
+      {
+        "id": "fan-08",
+        "label": "אוהדת · גופיית ענבר",
+        "ageGroup": "adult",
+        "height": 1.72,
+        "skin": "#563A2B",
+        "hairColor": "#191615",
+        "shirt": "#DB9D2E",
+        "outfit": "team-jersey",
+        "hair": "curls",
+        "accessories": [],
+        "build": 0.96,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-08-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36896
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-08-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 31196
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-08-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27692
+          }
+        ]
+      },
+      {
+        "id": "fan-09",
+        "label": "אוהד · כובע אדום",
+        "ageGroup": "adult",
+        "height": 1.76,
+        "skin": "#AE7650",
+        "hairColor": "#2C201A",
+        "shirt": "#AF4F4C",
+        "outfit": "t-shirt",
+        "hair": "cap",
+        "accessories": [
+          "cap"
+        ],
+        "build": 1.04,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-09-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 35892
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-09-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30188
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-09-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26680
+          }
+        ]
+      },
+      {
+        "id": "fan-10",
+        "label": "אוהדת · חולצה טורקיז",
+        "ageGroup": "adult",
+        "height": 1.66,
+        "skin": "#B28760",
+        "hairColor": "#211A17",
+        "shirt": "#39968D",
+        "outfit": "t-shirt",
+        "hair": "pony",
+        "accessories": [],
+        "build": 0.95,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-10-lod0.glb",
+            "triangles": 210,
+            "vertices": 166,
+            "bytes": 35624
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-10-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30192
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-10-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26684
+          }
+        ]
+      },
+      {
+        "id": "fan-11",
+        "label": "אוהד · גופייה כחולה",
+        "ageGroup": "adult",
+        "height": 1.81,
+        "skin": "#C38A5D",
+        "hairColor": "#241D19",
+        "shirt": "#3D70A4",
+        "outfit": "team-jersey",
+        "hair": "bald",
+        "accessories": [],
+        "build": 1.1,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-11-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 37024
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-11-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 31324
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-11-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27824
+          }
+        ]
+      },
+      {
+        "id": "fan-12",
+        "label": "אוהדת · ג׳קט שזיף",
+        "ageGroup": "adult",
+        "height": 1.74,
+        "skin": "#E7BD9A",
+        "hairColor": "#5A3522",
+        "shirt": "#865269",
+        "outfit": "jacket",
+        "hair": "bob",
+        "accessories": [
+          "glasses"
+        ],
+        "build": 1.03,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-12-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 35992
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-12-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30288
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-12-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26784
+          }
+        ]
+      },
+      {
+        "id": "fan-13",
+        "label": "סבא · סריג שנהב",
+        "ageGroup": "senior",
+        "height": 1.7,
+        "skin": "#DAB18B",
+        "hairColor": "#B9B6AB",
+        "shirt": "#D7C9AA",
+        "outfit": "sweater",
+        "hair": "silver",
+        "accessories": [
+          "glasses"
+        ],
+        "build": 1.0,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-13-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36012
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-13-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30312
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-13-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26804
+          }
+        ]
+      },
+      {
+        "id": "fan-14",
+        "label": "סבתא · ג׳קט כחול",
+        "ageGroup": "senior",
+        "height": 1.59,
+        "skin": "#996D4C",
+        "hairColor": "#C7C3B8",
+        "shirt": "#4F7692",
+        "outfit": "jacket",
+        "hair": "bun",
+        "accessories": [
+          "glasses"
+        ],
+        "build": 1.1,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-14-lod0.glb",
+            "triangles": 210,
+            "vertices": 166,
+            "bytes": 35796
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-14-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30364
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-14-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26856
+          }
+        ]
+      },
+      {
+        "id": "fan-15",
+        "label": "סבא · גופיית ענבר",
+        "ageGroup": "senior",
+        "height": 1.75,
+        "skin": "#694A36",
+        "hairColor": "#B5AEA0",
+        "shirt": "#D2A437",
+        "outfit": "team-jersey",
+        "hair": "bald",
+        "accessories": [],
+        "build": 1.04,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-15-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 36628
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-15-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30932
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-15-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 27428
+          }
+        ]
+      },
+      {
+        "id": "fan-16",
+        "label": "סבתא · סריג מרווה",
+        "ageGroup": "senior",
+        "height": 1.63,
+        "skin": "#D5A47B",
+        "hairColor": "#C7B6A0",
+        "shirt": "#91A18A",
+        "outfit": "sweater",
+        "hair": "bob",
+        "accessories": [],
+        "build": 1.02,
+        "lods": [
+          {
+            "level": 0,
+            "path": "crowd/fan-16-lod0.glb",
+            "triangles": 210,
+            "vertices": 170,
+            "bytes": 35952
+          },
+          {
+            "level": 1,
+            "path": "crowd/fan-16-lod1.glb",
+            "triangles": 90,
+            "vertices": 97,
+            "bytes": 30244
+          },
+          {
+            "level": 2,
+            "path": "crowd/fan-16-lod2.glb",
+            "triangles": 24,
+            "vertices": 52,
+            "bytes": 26740
+          }
+        ]
+      }
+    ],
+    "totalGlbBytes": 1503780
+  },
+  "players": {
+    "schemaVersion": 1,
+    "rig": {
+      "path": "players/rig.json",
+      "bones": 18,
+      "canonical": true,
+      "axes": {
+        "up": "+Y",
+        "forward": "+Z",
+        "left": "+X"
+      },
+      "restPose": "arms-down, identity local rotations"
+    },
+    "players": [
+      {
+        "id": "guard",
+        "source": "../hoops-v7/characters/models/pg.glb",
+        "label": "רכז זריז",
+        "bodyType": "compact-lean",
+        "number": "07",
+        "heightMeters": 1.78,
+        "width": 0.98,
+        "depth": 0.96,
+        "primary": "#47b8bf",
+        "secondary": "#123f52",
+        "trim": "#f4dfba",
+        "model": "players/guard.glb",
+        "mask": "players/masks/guard-team.png",
+        "canonicalHeightMeters": 1.6433900194242597,
+        "scaleToPreferredHeight": 1.0831269381954747,
+        "groundOffsetMeters": -0.0065411729738116264,
+        "triangles": 11511,
+        "vertices": 7357,
+        "bytes": 493996,
+        "bounds": {
+          "min": [
+            -0.2509693503379822,
+            0.0065411729738116264,
+            -0.11273448914289474
+          ],
+          "max": [
+            0.24963077902793884,
+            1.6499311923980713,
+            0.1778816431760788
+          ]
+        },
+        "focusVertices": 1868,
+        "teamMaterials": {
+          "primary": [
+            "team_primary"
+          ],
+          "secondary": [
+            "team_secondary",
+            "compression"
+          ],
+          "trim": [
+            "team_trim"
+          ]
+        },
+        "atlasBytes": 119102,
+        "maskBytes": 1306,
+        "sourceSha256": "9cffb187cce91eb732b391039e314ae7d655c93bb07dd95785c78d9946aef7aa",
+        "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+      },
+      {
+        "id": "shooter",
+        "source": "../hoops-v7/characters/models/sg.glb",
+        "label": "קלע ארוך",
+        "bodyType": "long-lean",
+        "number": "12",
+        "heightMeters": 1.9,
+        "width": 0.97,
+        "depth": 0.96,
+        "primary": "#667bce",
+        "secondary": "#253557",
+        "trim": "#f4dfba",
+        "model": "players/shooter.glb",
+        "mask": "players/masks/shooter-team.png",
+        "canonicalHeightMeters": 1.660118455067277,
+        "scaleToPreferredHeight": 1.144496643718717,
+        "groundOffsetMeters": -0.003907209262251854,
+        "triangles": 12054,
+        "vertices": 7277,
+        "bytes": 498228,
+        "bounds": {
+          "min": [
+            -0.25710994005203247,
+            0.003907209262251854,
+            -0.12514962255954742
+          ],
+          "max": [
+            0.2571055591106415,
+            1.6640256643295288,
+            0.1937004029750824
+          ]
+        },
+        "focusVertices": 1826,
+        "teamMaterials": {
+          "primary": [
+            "team_primary"
+          ],
+          "secondary": [
+            "team_secondary",
+            "compression"
+          ],
+          "trim": [
+            "team_trim"
+          ]
+        },
+        "atlasBytes": 123270,
+        "maskBytes": 1243,
+        "sourceSha256": "881ced1dafff228a1286dff13a5c3fd4915fe49cd4491a3081eed8b2d176b5f9",
+        "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+      },
+      {
+        "id": "wing",
+        "source": "../hoops-v7/characters/models/sf.glb",
+        "label": "פורוורד אתלטי",
+        "bodyType": "balanced-athletic",
+        "number": "24",
+        "heightMeters": 2,
+        "width": 1.02,
+        "depth": 1.035,
+        "primary": "#d96848",
+        "secondary": "#512c37",
+        "trim": "#f4dfba",
+        "model": "players/wing.glb",
+        "mask": "players/masks/wing-team.png",
+        "canonicalHeightMeters": 1.6791313117719255,
+        "scaleToPreferredHeight": 1.1910920759910513,
+        "groundOffsetMeters": 0.000720543263014406,
+        "triangles": 12475,
+        "vertices": 8538,
+        "bytes": 546492,
+        "bounds": {
+          "min": [
+            -0.27929478883743286,
+            -0.000720543263014406,
+            -0.14229489862918854
+          ],
+          "max": [
+            0.2793160676956177,
+            1.6784107685089111,
+            0.22499534487724304
+          ]
+        },
+        "focusVertices": 1743,
+        "teamMaterials": {
+          "primary": [
+            "team_primary"
+          ],
+          "secondary": [
+            "team_secondary",
+            "compression"
+          ],
+          "trim": [
+            "team_trim"
+          ]
+        },
+        "atlasBytes": 118578,
+        "maskBytes": 1268,
+        "sourceSha256": "4787f93c548e153ddb5d25b2d380e786fc1f1e07e592c99fec40dfc16b63eefd",
+        "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+      },
+      {
+        "id": "power",
+        "source": "../hoops-v7/characters/models/pf.glb",
+        "label": "פאוור רחב",
+        "bodyType": "broad-muscular",
+        "number": "35",
+        "heightMeters": 2.1,
+        "width": 1.065,
+        "depth": 1.07,
+        "primary": "#5e9e78",
+        "secondary": "#183e3c",
+        "trim": "#f4dfba",
+        "model": "players/power.glb",
+        "mask": "players/masks/power-team.png",
+        "canonicalHeightMeters": 1.7033139918930829,
+        "scaleToPreferredHeight": 1.2328907118681247,
+        "groundOffsetMeters": 0.004721567500382662,
+        "triangles": 12149,
+        "vertices": 7236,
+        "bytes": 497424,
+        "bounds": {
+          "min": [
+            -0.31357038021087646,
+            -0.004721567500382662,
+            -0.1610426902770996
+          ],
+          "max": [
+            0.3135155737400055,
+            1.6985924243927002,
+            0.2706391215324402
+          ]
+        },
+        "focusVertices": 1787,
+        "teamMaterials": {
+          "primary": [
+            "team_primary"
+          ],
+          "secondary": [
+            "team_secondary",
+            "compression"
+          ],
+          "trim": [
+            "team_trim"
+          ]
+        },
+        "atlasBytes": 122528,
+        "maskBytes": 1288,
+        "sourceSha256": "bd9ec13349d21fd9ec1023d180ea013194d4c5f64c48e912063245d95718eb69",
+        "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+      }
+    ]
+  },
+  "audio": {
+    "schema_version": 1,
+    "license": "CC0-1.0",
+    "provenance": "Original deterministic procedural synthesis; no external audio samples",
+    "file_limit_bytes": 40000,
+    "sample_rate_hz": 44100,
+    "channels": 1,
+    "assets": [
+      {
+        "id": "rim-hit-01",
+        "label_he": "פגיעה בטבעת · רכה",
+        "event": "rim",
+        "description": "Short damped inharmonic metal tick, low soft ball contact",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.23,
+        "suggested_gain": 0.72,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/rim-hit-01.ogg",
+            "bytes": 4269,
+            "sha256": "36f96c1049becd3da6f5d8c2dc3e032e418c7bf328a9345ec1266c24a7123e94",
+            "metrics": {
+              "decoded_samples": 10015,
+              "decoded_duration_seconds": 0.227098,
+              "peak_dbfs": -4.529,
+              "rms_dbfs": -21.775,
+              "dc_mean": -0.00014209,
+              "tail_15ms_rms_dbfs": -60.433,
+              "energy_95_percent_seconds": 0.059138,
+              "spectral_centroid_hz": 787.6,
+              "energy_below_300hz_percent": 1.648,
+              "last_sample_abs": 2.885e-05,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/rim-hit-01.mp3",
+            "bytes": 3468,
+            "sha256": "c90e26e933b12f2eef91d6e871c2539619c8d546e7abd493508c2aaf07fffd9c",
+            "metrics": {
+              "decoded_samples": 10143,
+              "decoded_duration_seconds": 0.23,
+              "peak_dbfs": -4.676,
+              "rms_dbfs": -22.332,
+              "dc_mean": -0.00014218,
+              "tail_15ms_rms_dbfs": -63.083,
+              "energy_95_percent_seconds": 0.059116,
+              "spectral_centroid_hz": 791.0,
+              "energy_below_300hz_percent": 1.632,
+              "last_sample_abs": 5.3e-07,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "rim-hit-02",
+        "label_he": "פגיעה בטבעת · מעט גבוהה",
+        "event": "rim",
+        "description": "Short alternate rim tick; no sustained bell resonance",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.255011,
+        "suggested_gain": 0.69,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/rim-hit-02.ogg",
+            "bytes": 4253,
+            "sha256": "a0c72a0aec12ca921b840a9024b8fc919cce4fef9bc9b7ee17d63283e39ad866",
+            "metrics": {
+              "decoded_samples": 11118,
+              "decoded_duration_seconds": 0.252109,
+              "peak_dbfs": -5.042,
+              "rms_dbfs": -21.306,
+              "dc_mean": -0.00012376,
+              "tail_15ms_rms_dbfs": -58.744,
+              "energy_95_percent_seconds": 0.067574,
+              "spectral_centroid_hz": 853.3,
+              "energy_below_300hz_percent": 1.625,
+              "last_sample_abs": 7.085e-05,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/rim-hit-02.mp3",
+            "bytes": 3781,
+            "sha256": "220ac20f2b52a3ce65ec3bcb38f2a0f51d79d03c4e1f1465f2c4820850a72bc5",
+            "metrics": {
+              "decoded_samples": 11246,
+              "decoded_duration_seconds": 0.255011,
+              "peak_dbfs": -5.022,
+              "rms_dbfs": -21.744,
+              "dc_mean": -0.00017832,
+              "tail_15ms_rms_dbfs": -61.574,
+              "energy_95_percent_seconds": 0.067007,
+              "spectral_centroid_hz": 860.3,
+              "energy_below_300hz_percent": 1.62,
+              "last_sample_abs": 6e-08,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "rim-hit-03",
+        "label_he": "פגיעה בטבעת · עמוקה",
+        "event": "rim",
+        "description": "Lower, tighter muted metal contact",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.215011,
+        "suggested_gain": 0.75,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/rim-hit-03.ogg",
+            "bytes": 4167,
+            "sha256": "cd129392c4abc8aeef1bd1f695908b194f2fc3c3e26ae607dadb33eb2b870fbe",
+            "metrics": {
+              "decoded_samples": 9354,
+              "decoded_duration_seconds": 0.212109,
+              "peak_dbfs": -4.284,
+              "rms_dbfs": -22.501,
+              "dc_mean": -0.00017453,
+              "tail_15ms_rms_dbfs": -64.904,
+              "energy_95_percent_seconds": 0.05059,
+              "spectral_centroid_hz": 732.9,
+              "energy_below_300hz_percent": 1.827,
+              "last_sample_abs": 4.511e-05,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/rim-hit-03.mp3",
+            "bytes": 3468,
+            "sha256": "ad2844479b37f6239d1db23c941dda92b9de8ec414f5ad8764f3a8dadefb1beb",
+            "metrics": {
+              "decoded_samples": 9482,
+              "decoded_duration_seconds": 0.215011,
+              "peak_dbfs": -4.978,
+              "rms_dbfs": -22.959,
+              "dc_mean": -0.00019437,
+              "tail_15ms_rms_dbfs": -67.609,
+              "energy_95_percent_seconds": 0.050454,
+              "spectral_centroid_hz": 732.3,
+              "energy_below_300hz_percent": 1.794,
+              "last_sample_abs": 4e-08,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "net-swish",
+        "label_he": "סווש רשת",
+        "event": "net",
+        "description": "Descending noisy cord friction with three tiny thread flicks",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.39,
+        "suggested_gain": 0.78,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/net-swish.ogg",
+            "bytes": 6614,
+            "sha256": "bfab3201337aaeb58980ca04105bba684b87e2cd6c3ce91048320f1b8034fcda",
+            "metrics": {
+              "decoded_samples": 18112,
+              "decoded_duration_seconds": 0.410703,
+              "peak_dbfs": -4.971,
+              "rms_dbfs": -24.511,
+              "dc_mean": -2.37e-06,
+              "tail_15ms_rms_dbfs": -79.26,
+              "energy_95_percent_seconds": 0.119932,
+              "spectral_centroid_hz": 4257.9,
+              "energy_below_300hz_percent": 0.013,
+              "last_sample_abs": 0.0,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/net-swish.mp3",
+            "bytes": 5349,
+            "sha256": "bf054e9e2c137674b1d1fcbec1a20951a0967acc6da494f4e31583f7e9d0a105",
+            "metrics": {
+              "decoded_samples": 17199,
+              "decoded_duration_seconds": 0.39,
+              "peak_dbfs": -4.978,
+              "rms_dbfs": -24.549,
+              "dc_mean": 1.77e-06,
+              "tail_15ms_rms_dbfs": -59.219,
+              "energy_95_percent_seconds": 0.119637,
+              "spectral_centroid_hz": 4232.9,
+              "energy_below_300hz_percent": 0.012,
+              "last_sample_abs": 1.713e-05,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "backboard-thud",
+        "label_he": "חבטה עמומה בלוח",
+        "event": "backboard",
+        "description": "Damped low panel and rubber impact, no glass-shatter sample",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.24,
+        "suggested_gain": 0.76,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/backboard-thud.ogg",
+            "bytes": 4115,
+            "sha256": "18e411d43e9d130fcf80a949bc1756d1ae256321ce4f73ee8c077915484a16f9",
+            "metrics": {
+              "decoded_samples": 10456,
+              "decoded_duration_seconds": 0.237098,
+              "peak_dbfs": -4.722,
+              "rms_dbfs": -21.183,
+              "dc_mean": 0.00020565,
+              "tail_15ms_rms_dbfs": -83.743,
+              "energy_95_percent_seconds": 0.042041,
+              "spectral_centroid_hz": 168.3,
+              "energy_below_300hz_percent": 92.539,
+              "last_sample_abs": 2.6e-07,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/backboard-thud.mp3",
+            "bytes": 3781,
+            "sha256": "dc7b4da0db1e8d4452738242cb4f78dc60c0bbe58671e8b263ca154e5aa0ab52",
+            "metrics": {
+              "decoded_samples": 10584,
+              "decoded_duration_seconds": 0.24,
+              "peak_dbfs": -4.938,
+              "rms_dbfs": -21.699,
+              "dc_mean": -0.00011501,
+              "tail_15ms_rms_dbfs": -86.983,
+              "energy_95_percent_seconds": 0.042041,
+              "spectral_centroid_hz": 169.5,
+              "energy_below_300hz_percent": 92.408,
+              "last_sample_abs": 0.0,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "parquet-bounce",
+        "label_he": "כדור על פרקט",
+        "event": "bounce",
+        "description": "Rubber air-cavity pitch drop, woody contact, short early reflection",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.295011,
+        "suggested_gain": 0.85,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/parquet-bounce.ogg",
+            "bytes": 4119,
+            "sha256": "bd41d1a234095462b3281b267a8369e144ac760c541a9d68bdabbc26d4a081f2",
+            "metrics": {
+              "decoded_samples": 14016,
+              "decoded_duration_seconds": 0.317823,
+              "peak_dbfs": -4.499,
+              "rms_dbfs": -19.43,
+              "dc_mean": -0.0001724,
+              "tail_15ms_rms_dbfs": -102.927,
+              "energy_95_percent_seconds": 0.06415,
+              "spectral_centroid_hz": 150.7,
+              "energy_below_300hz_percent": 96.989,
+              "last_sample_abs": 0.0,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/parquet-bounce.mp3",
+            "bytes": 4408,
+            "sha256": "8377e5e92b4194afcc9321cc3d7eda0752c7b76cdc7edacd536f3474a1f5c0a2",
+            "metrics": {
+              "decoded_samples": 13010,
+              "decoded_duration_seconds": 0.295011,
+              "peak_dbfs": -4.859,
+              "rms_dbfs": -19.609,
+              "dc_mean": -2.581e-05,
+              "tail_15ms_rms_dbfs": -72.432,
+              "energy_95_percent_seconds": 0.064263,
+              "spectral_centroid_hz": 151.5,
+              "energy_below_300hz_percent": 96.9,
+              "last_sample_abs": 1e-08,
+              "clipped_samples": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "shoe-squeak",
+        "label_he": "חריקת נעלי כדורסל",
+        "event": "shoe",
+        "description": "Two short changing-pitch stick-slip contacts and rubber friction",
+        "loop": false,
+        "sample_rate_hz": 44100,
+        "channels": 1,
+        "duration_seconds": 0.375011,
+        "suggested_gain": 0.52,
+        "license": "CC0-1.0",
+        "source": "source/build-audio.py",
+        "files": {
+          "ogg": {
+            "path": "audio/shoe-squeak.ogg",
+            "bytes": 6213,
+            "sha256": "499cc42d3fab2282c67a5dbaf04a785dc7c99b9c89cf971c88fed18c8ee422fd",
+            "metrics": {
+              "decoded_samples": 16410,
+              "decoded_duration_seconds": 0.372109,
+              "peak_dbfs": -5.94,
+              "rms_dbfs": -18.803,
+              "dc_mean": -3.87e-06,
+              "tail_15ms_rms_dbfs": -105.376,
+              "energy_95_percent_seconds": 0.223946,
+              "spectral_centroid_hz": 1979.5,
+              "energy_below_300hz_percent": 0.026,
+              "last_sample_abs": 7.6e-07,
+              "clipped_samples": 0
+            }
+          },
+          "mp3": {
+            "path": "audio/shoe-squeak.mp3",
+            "bytes": 5349,
+            "sha256": "dc1d92118b78f09021273fc5218e7d1c2cf5eafbf5dbf48657ef49c67a80b2b5",
+            "metrics": {
+              "decoded_samples": 16538,
+              "decoded_duration_seconds": 0.375011,
+              "peak_dbfs": -4.908,
+              "rms_dbfs": -18.516,
+              "dc_mean": -3.13e-06,
+              "tail_15ms_rms_dbfs": -111.294,
+              "energy_95_percent_seconds": 0.224218,
+              "spectral_centroid_hz": 1969.8,
+              "energy_below_300hz_percent": 0.023,
+              "last_sample_abs": 0.0,
+              "clipped_samples": 0
+            }
+          }
+        }
+      }
+    ],
+    "total_bytes": 63354
+  },
+  "verification": {
+    "assets": "verification/validation.json",
+    "browser": "verification/browser.json"
+  },
+  "licenses": "LICENSES.md",
+  "report": "REPORT.md",
+  "inventoryRule": "All delivery files except manifest.json itself; byte budget includes manifest.json too.",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 4635,
+      "sha256": "4bd16a82f74e9fcddd654f5e51d1336d8479d2dc7e2b48449d17905845bafe5b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 11468,
+      "sha256": "0cd7fc61a5cd31fb87c4169310d9826bf5d76add94accaea1574be823bc0f5e6",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/NOTES.md",
+      "bytes": 3628,
+      "sha256": "6682bf6b560d4081ca6beefcb59e43dbde8952fd319333dad9cdd854d819370d",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/backboard-thud.mp3",
+      "bytes": 3781,
+      "sha256": "dc7b4da0db1e8d4452738242cb4f78dc60c0bbe58671e8b263ca154e5aa0ab52",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/backboard-thud.ogg",
+      "bytes": 4115,
+      "sha256": "18e411d43e9d130fcf80a949bc1756d1ae256321ce4f73ee8c077915484a16f9",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/catalog.json",
+      "bytes": 12557,
+      "sha256": "ff17c5c2d748e4b92e5858c862a5a1b115d069f13d9f5a8f251cb97b3e39c34b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/net-swish.mp3",
+      "bytes": 5349,
+      "sha256": "bf054e9e2c137674b1d1fcbec1a20951a0967acc6da494f4e31583f7e9d0a105",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/net-swish.ogg",
+      "bytes": 6614,
+      "sha256": "bfab3201337aaeb58980ca04105bba684b87e2cd6c3ce91048320f1b8034fcda",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/parquet-bounce.mp3",
+      "bytes": 4408,
+      "sha256": "8377e5e92b4194afcc9321cc3d7eda0752c7b76cdc7edacd536f3474a1f5c0a2",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/parquet-bounce.ogg",
+      "bytes": 4119,
+      "sha256": "bd41d1a234095462b3281b267a8369e144ac760c541a9d68bdabbc26d4a081f2",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-01.mp3",
+      "bytes": 3468,
+      "sha256": "c90e26e933b12f2eef91d6e871c2539619c8d546e7abd493508c2aaf07fffd9c",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-01.ogg",
+      "bytes": 4269,
+      "sha256": "36f96c1049becd3da6f5d8c2dc3e032e418c7bf328a9345ec1266c24a7123e94",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-02.mp3",
+      "bytes": 3781,
+      "sha256": "220ac20f2b52a3ce65ec3bcb38f2a0f51d79d03c4e1f1465f2c4820850a72bc5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-02.ogg",
+      "bytes": 4253,
+      "sha256": "a0c72a0aec12ca921b840a9024b8fc919cce4fef9bc9b7ee17d63283e39ad866",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-03.mp3",
+      "bytes": 3468,
+      "sha256": "ad2844479b37f6239d1db23c941dda92b9de8ec414f5ad8764f3a8dadefb1beb",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/rim-hit-03.ogg",
+      "bytes": 4167,
+      "sha256": "cd129392c4abc8aeef1bd1f695908b194f2fc3c3e26ae607dadb33eb2b870fbe",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/shoe-squeak.mp3",
+      "bytes": 5349,
+      "sha256": "dc1d92118b78f09021273fc5218e7d1c2cf5eafbf5dbf48657ef49c67a80b2b5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "audio/shoe-squeak.ogg",
+      "bytes": 6213,
+      "sha256": "499cc42d3fab2282c67a5dbaf04a785dc7c99b9c89cf971c88fed18c8ee422fd",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/NOTES.md",
+      "bytes": 4956,
+      "sha256": "3d717af62882da772cca484de1b30c50c7dbc05b7e24fadf54e2e5962ffd3458",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/catalog.json",
+      "bytes": 14918,
+      "sha256": "f7ac7031b8b74576436b5c8c2bce1594e7b354d420759b0766ac1a5265279efb",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-01-lod0.glb",
+      "bytes": 36920,
+      "sha256": "68d1f45c0cb881e846ac34cd28167aba18c3df6e6ed711d5690093d9e91b3fbe",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-01-lod1.glb",
+      "bytes": 31220,
+      "sha256": "facd906d20ccda6da6ce1f21ad18bd58be1c22d7412f3e5baa25bed9b6d658d9",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-01-lod2.glb",
+      "bytes": 27720,
+      "sha256": "ad18a8cd81af0fc0b8f83c0363357aeb169d40ec1d5f2dd78e18946f5208ef50",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-02-lod0.glb",
+      "bytes": 35656,
+      "sha256": "7a56684fd23032e13faf60d50c9da73f1be101984014ab8037299091f8b14177",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-02-lod1.glb",
+      "bytes": 30224,
+      "sha256": "af22cb4ded62f7e54b2992acff5cd6c1baa6a9fa9f04452d9173caa39c5a2d72",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-02-lod2.glb",
+      "bytes": 26720,
+      "sha256": "34046ab96e8fc119e3f70f698536bfc99f64a63825b041b34b3ecf780a05b988",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-03-lod0.glb",
+      "bytes": 37092,
+      "sha256": "cb231e6d98bea35fd236dbf315eb222857ec6bb8bd1e915814b28201e7248a7b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-03-lod1.glb",
+      "bytes": 31396,
+      "sha256": "445abb9a18c8bb46b5cbd4cf6b9a403a10dc96568642b4c1a45b4263255d24fe",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-03-lod2.glb",
+      "bytes": 27892,
+      "sha256": "d71b1f3fed7f00748fa045962f947d91d58970ac871442086ae10f071ab09d9b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-04-lod0.glb",
+      "bytes": 35968,
+      "sha256": "817e58855065dd31b57ac2c30dcbabab1e3b9b7d47399c81cd8f2238f7836e6d",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-04-lod1.glb",
+      "bytes": 30264,
+      "sha256": "ed42b798943f77c95dbb5abc6e84298fb2fc67e51505577fcf4ac6cd356389ce",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-04-lod2.glb",
+      "bytes": 26756,
+      "sha256": "e2083f818878179a574b6fd03421dd7879e85398eda30ed58719041e4c3a972f",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-05-lod0.glb",
+      "bytes": 36944,
+      "sha256": "66030bf2ddc6ef598ca3a9e4d9d0855174d3bb874bffcb5e0e7b2aff52091404",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-05-lod1.glb",
+      "bytes": 31248,
+      "sha256": "b059075527adaec390d329802a4a8bf693dcd6f2ecf6154798ecb26282c6e4df",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-05-lod2.glb",
+      "bytes": 27744,
+      "sha256": "e644e5b81b33b64f31e6e000f3e980186d1c9ebfb4b07e9821ec56db82ad9eff",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-06-lod0.glb",
+      "bytes": 35648,
+      "sha256": "4018bdd7c98652a92bd22de70d576a8e19eea4adefc11a03ff6e9c40ecaa510c",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-06-lod1.glb",
+      "bytes": 30220,
+      "sha256": "ebdc3f4582a400da1840c181fa132e4c0bbb02f5c6d9f55189d6d263ec2f730c",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-06-lod2.glb",
+      "bytes": 26708,
+      "sha256": "a9c044a860af6e384cd742ad7f3113cc244835fdd616ad88f6ef33547d794bbb",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-07-lod0.glb",
+      "bytes": 36000,
+      "sha256": "26acdcb8ea84887ab7ec7df463e8deaf329ef5cd08fcd8a60764c5cb169601d5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-07-lod1.glb",
+      "bytes": 30300,
+      "sha256": "0e73520a969acc140ff7b9e8ad7b3a4257d3fdb1a810dd057c051dd63aab1be4",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-07-lod2.glb",
+      "bytes": 26792,
+      "sha256": "dee8ee89efcba31ebaaac2990941e35af3c0d4a40d9e518e7bcda79e5a186c26",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-08-lod0.glb",
+      "bytes": 36896,
+      "sha256": "0b72a98c6618c874e40e9111b4652419167e5a0c79abe868830cc88a6bc713c2",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-08-lod1.glb",
+      "bytes": 31196,
+      "sha256": "f09401a552c223a11c41d123cd0c6a9810853a258ef2c774d32a970d44ecf1f9",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-08-lod2.glb",
+      "bytes": 27692,
+      "sha256": "e98d66a830c9ca6a8fae7988c07914bf50aaa90f07e6351d7a9271223b9f482c",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-09-lod0.glb",
+      "bytes": 35892,
+      "sha256": "3717fd81dbc74171931bbd1f17e93063a1f3d364af0185f03f6cc742354a5cef",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-09-lod1.glb",
+      "bytes": 30188,
+      "sha256": "828a6fe863fa9d8e66d9cd8ce90ab9429741c9261791f1146d0819bf1213dbdb",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-09-lod2.glb",
+      "bytes": 26680,
+      "sha256": "5097dee77265ef14b39de32673422add32c39c15b6bc573652bb199aa7d155e0",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-10-lod0.glb",
+      "bytes": 35624,
+      "sha256": "3ba3c7968968e9fb90747be6fbe1499325d5c0d583ffab10e9b271b654e6329d",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-10-lod1.glb",
+      "bytes": 30192,
+      "sha256": "a14631bd370b972396ff9ffd95ccd32ab9689389dfc6c25e696f060ffe087ae5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-10-lod2.glb",
+      "bytes": 26684,
+      "sha256": "8f1e4f3862c696d832b19f6d80bba99bf3074f717ea32d29ea05d6bac913b95c",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-11-lod0.glb",
+      "bytes": 37024,
+      "sha256": "61a63088e15ac1815a985647a4463a0e9957b56abc675509de33b779d0433acc",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-11-lod1.glb",
+      "bytes": 31324,
+      "sha256": "b39bb5e292fa20ffca919ddca0838f350e5c559a52fb0eb2861c3db6d5a8f8b5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-11-lod2.glb",
+      "bytes": 27824,
+      "sha256": "84e7b8f63925ca0383433400e6e9e4da42408a2dade242d3ac21f531b3b6f6f2",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-12-lod0.glb",
+      "bytes": 35992,
+      "sha256": "d02950c18f0e2bb84ee7c153de197db13b34eb9502370d3dd0ced2984e6d2c77",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-12-lod1.glb",
+      "bytes": 30288,
+      "sha256": "60c796d631f243d59d43a00d8790209a628c89be607192ca02c50fe7794439f9",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-12-lod2.glb",
+      "bytes": 26784,
+      "sha256": "47380573154481f1a4eb4cca56eb096d9061c64d25b35b27476429a3c4e3024f",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-13-lod0.glb",
+      "bytes": 36012,
+      "sha256": "7bfcdda451fb2a9f5300e88ef044c31f74ae1b616c832dca90c28fb044f34190",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-13-lod1.glb",
+      "bytes": 30312,
+      "sha256": "20b8787fd54f20e0d5d4c6b94e042f2cc22d29fb982a0c0cecf8f895715c8794",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-13-lod2.glb",
+      "bytes": 26804,
+      "sha256": "c3a29a36668084c3e181f26097de9414b98e7d513e0e72335aa11724dae8b612",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-14-lod0.glb",
+      "bytes": 35796,
+      "sha256": "de265bb428f950f52afe84dec4577797d2579a00c44bd0fef02327741e907e6e",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-14-lod1.glb",
+      "bytes": 30364,
+      "sha256": "30106727ec812d7233b1d9224ff38cb73122d5f217b2e303f52c7cf135cc7118",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-14-lod2.glb",
+      "bytes": 26856,
+      "sha256": "b016a0a40827ad38c47075217afb0803bf9f07bc6d0cc4f545a5af0320f3dcbf",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-15-lod0.glb",
+      "bytes": 36628,
+      "sha256": "4ddd1797fca745c0584600ed4088ceac14c3310925a7b848421cb1bb90e017b0",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-15-lod1.glb",
+      "bytes": 30932,
+      "sha256": "d4e07e2802a84866be4db98f056b9ea5b38ccb960991c70e561b41fd1e17c8ae",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-15-lod2.glb",
+      "bytes": 27428,
+      "sha256": "b528a57284f3769cd1c197583a30d5f0a2589b73a8848480169cce7a9855197f",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-16-lod0.glb",
+      "bytes": 35952,
+      "sha256": "e9dfc1e1a0b001cd9954ecd4e912f9126ea7188de3510f69dd2112757256827b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-16-lod1.glb",
+      "bytes": 30244,
+      "sha256": "b51eff2e9b128928b567c760f88b946bed23f87b8638ba0bbe8f94049d70e91a",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "crowd/fan-16-lod2.glb",
+      "bytes": 26740,
+      "sha256": "c4b511033971d4bf0904bb36d561c79eae62df1b8434c5e10963f6780dd2da37",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "players/NOTES.md",
+      "bytes": 5675,
+      "sha256": "c03ad82c5054e3b3d36cee8cfcac55139ca847f9f2b92fdcd4fd5078a2abf5ec",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/catalog.json",
+      "bytes": 5771,
+      "sha256": "8917b2713e5bd8630d9125f738bd83b22530cdce37deb9ea350d9ae19247c1ef",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/guard.glb",
+      "bytes": 493996,
+      "sha256": "36dbc1d381ad111c245a2b72f11489811bdcd3ad240c22d4b6533b891eb9f20f",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/masks/guard-team.png",
+      "bytes": 1306,
+      "sha256": "69a529448594251ba1368ae683a23464e6c7d3b584e0d279f9644eff23da3dbf",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/masks/power-team.png",
+      "bytes": 1288,
+      "sha256": "e41782e04b949469edf87884ae0da087fd3bb916e15f98b854cecacbda7383de",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/masks/shooter-team.png",
+      "bytes": 1243,
+      "sha256": "7b2494587ff5e404e5e40bc93b63f086935d60077ac476d8cf12f7c1a10670d3",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/masks/wing-team.png",
+      "bytes": 1268,
+      "sha256": "75e858d65ec4f5ee247ebfb3c6a7733a901f63d5ab7713478c6ede6aca5a0e57",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/power.glb",
+      "bytes": 497424,
+      "sha256": "c5dc2e9cc8637d6ec2af89343852e2b49c69450ad62fee4da4335c121325dbce",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/rig.json",
+      "bytes": 7392,
+      "sha256": "3294c6f878e9a368c552890bca59783aedcf0da7ff262d168347139aa5d6b934",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/shooter.glb",
+      "bytes": 498228,
+      "sha256": "4839a24516a8683b532b669f554cb6ce63d7aee1b49afd5f90f460acc3e49633",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "players/wing.glb",
+      "bytes": 546492,
+      "sha256": "40b758264f68a9201ae1cac9a9cf521625cf4a6a30eb90263da4b179351ecbc7",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 6736,
+      "sha256": "70e358f3253bb63fbe40e8b36cbf1d8d4101aa8deb9d2d2a079bf174f83f13c5",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 4282,
+      "sha256": "deaeb9bb365e9603043c08907ad3a5a875450f3725377bfbc5eb0ff3d321e012",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 18317,
+      "sha256": "18e128e14232bc69ae81a63192c6710b10cdfddcd007140aad509cfc56182dfa",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/build-audio.py",
+      "bytes": 9807,
+      "sha256": "9b6eb84eae69ef071b4115a635d9d9ee07950caa6b3b03025a161291b0380216",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/build-manifest.py",
+      "bytes": 3967,
+      "sha256": "7e10491b2f4d351c44bb6660b20ead01221afda117207b6b2250280a9d4aef22",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/check-preview.mjs",
+      "bytes": 8260,
+      "sha256": "e85521603b2195e74712a748e4890414da73480631b27575b503f20fbe8835d7",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/crowd-build.py",
+      "bytes": 23479,
+      "sha256": "5b5c322524671fdc9536d8cc1705a9aa1aef97782237eb753e23691c88e44bbc",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 497,
+      "sha256": "7c755d17870f425a0bf885f6607b04e887d60cc4ceef79b40286de16b471543b",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/players-apply-team.mjs",
+      "bytes": 2942,
+      "sha256": "4fe85eb6725feba96ad7bd0a98a8bf16e3f89298aa44f3af909e966398550e65",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/players-build.mjs",
+      "bytes": 14535,
+      "sha256": "b07c5612951c1bfceb5a1239ee3dd03d36efd45d2e1d4fc4c3a356ba340a199a",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/requirements.txt",
+      "bytes": 28,
+      "sha256": "e32056a5263b5972e789540468f3d3e1e8e2d1649d21ef65e814317727be4897",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 17695,
+      "sha256": "2dc04896562516fb0074320933816b272a6f7630b164bfd09cfbc41332572416",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "source/verify-crowd-motion.mjs",
+      "bytes": 12568,
+      "sha256": "e963c5be0b0fca614245f392e379a3c91c36366052b2ec1352c77e52eee87028",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 13866,
+      "sha256": "34ca4a99a7b9e17686e75e8cf0c1653e01b6a672692cf0d5fe20fcf936f8ba3e",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "verification/crowd-844x390.png",
+      "bytes": 116272,
+      "sha256": "77ec1ec3035989e152d0274da8af889b3c13967c556674b922d1c02e665b54e8",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/crowd-motion.json",
+      "bytes": 171720,
+      "sha256": "ae10456f1b34189ba4786b75774b9aa5940546d63f8c23b72353ed9ca4cfffbc",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "verification/crowd-motion.webp",
+      "bytes": 29872,
+      "sha256": "94ed189547dd9dc2512c502257fc9bf8e1548471b60419a97ad49b897a4bd230",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/face-844x390.png",
+      "bytes": 97825,
+      "sha256": "6bbc86b3d85a8dcdba230b425459a6c39952b5c954ed1cc230e650213ece14ed",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/lineup-390x844.png",
+      "bytes": 76192,
+      "sha256": "383ecebc0943567d3f1e6db503bf344f230c2b718bdec1b80a9bb3297ca6aa7f",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/lineup-844x390.png",
+      "bytes": 126749,
+      "sha256": "e3ed3c86dafa81223efd060a490d2d0ba183f774f9a8b027d73fc47cd2a5e78f",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/players-raised-arm.png",
+      "bytes": 131181,
+      "sha256": "6582d93f9535f29045cded6fbe22b19ba9cf7f62fe8a77b056ca8590c699e17c",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/players-three-quarter.png",
+      "bytes": 91217,
+      "sha256": "da4c5f4c59ef39f7585454ecf43c0299524e0205539ea1a84051df366198f37b",
+      "license": "SEE-LICENSES.md",
+      "provenance": "MakeHuman/MPFB anatomy from hoops-v7; canonical rebind and original realism-v2 additions; see LICENSES.md"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 3333,
+      "sha256": "ea70fd6642f48b15d3edd421a6dae483e2495838ebc911701728327bf35a7add",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    },
+    {
+      "path": "verification/validation.json",
+      "bytes": 467183,
+      "sha256": "8ec8926e589034f3c3f83bef901ea2a33138c68fddbfdadb955f6f10d7f4df05",
+      "license": "CC0-1.0",
+      "provenance": "Original hoops-realism-v2 production; referenced tool libraries remain outside this delivery"
+    }
+  ]
+}

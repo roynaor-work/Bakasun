@@ -1,0 +1,5856 @@
+{
+  "schemaVersion": 1,
+  "method": "Chromium + Three.js actual AnimationMixer and SkinnedMesh.getVertexPosition, 65 evenly-spaced samples per clip, all 48 final crowd GLBs",
+  "criteria": {
+    "floorMinMeters": -0.005,
+    "loopEndpointMaxError": 0.00001,
+    "clapCenterMinMaxHeightRatio": 0.025,
+    "clapOpenMinHeightRatio": 0.07,
+    "handMeshProximityMaxHeightRatio": 0.025,
+    "jumpBoundaryFloorToleranceMeters": 0.005,
+    "jumpApexHeightRatio": [
+      0.1,
+      0.18
+    ],
+    "browProximityMaxHeightRatio": 0.06,
+    "mouthProximityMaxHeightRatio": 0.07
+  },
+  "models": [
+    {
+      "fan": "fan-01",
+      "lod": 0,
+      "heightMeters": 1.18,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009049,
+          "floorMaxMeters": 0.009049,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.3532649,
+          "handCenterMaxMeters": 0.3532649,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0052011,
+          "floorMaxMeters": 0.0104022,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.297503,
+          "handCenterMaxMeters": 0.297503,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.0130027,
+          "handCenterMaxMeters": 0.1170248,
+          "handVertexToOppositeTriangleMinMeters": 0.0001935,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.1474402,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.1659391,
+          "handCenterMaxMeters": 0.1782602,
+          "apexLiftMeters": 0.1396385,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.5348334,
+          "handCenterMaxMeters": 0.5348334,
+          "leftHandToBrowProxyMinMeters": 0.0327135,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.0780165,
+          "handCenterMaxMeters": 0.0780165,
+          "worstHandToMouthProxyMinMeters": 0.0504685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-01",
+      "lod": 1,
+      "heightMeters": 1.18,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0103682,
+          "floorMaxMeters": 0.0103682,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.3532649,
+          "handCenterMaxMeters": 0.3532649,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0065014,
+          "floorMaxMeters": 0.0117025,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.297503,
+          "handCenterMaxMeters": 0.297503,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0091019,
+          "floorMaxMeters": 0.0091019,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.0130027,
+          "handCenterMaxMeters": 0.1170248,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0091019,
+          "floorMaxMeters": 0.1472685,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.1659391,
+          "handCenterMaxMeters": 0.1782602,
+          "apexLiftMeters": 0.1381666,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0091019,
+          "floorMaxMeters": 0.0091019,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.5348334,
+          "handCenterMaxMeters": 0.5348334,
+          "leftHandToBrowProxyMinMeters": 0.0327135,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0091019,
+          "floorMaxMeters": 0.0091019,
+          "restFloorMeters": 0.0091019,
+          "handCenterMinMeters": 0.0780165,
+          "handCenterMaxMeters": 0.0780165,
+          "worstHandToMouthProxyMinMeters": 0.0504685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-01",
+      "lod": 2,
+      "heightMeters": 1.18,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0090685,
+          "floorMaxMeters": 0.0090685,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.3532649,
+          "handCenterMaxMeters": 0.3532649,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0052011,
+          "floorMaxMeters": 0.0104022,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.297503,
+          "handCenterMaxMeters": 0.297503,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.0130027,
+          "handCenterMaxMeters": 0.1170248,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.1595846,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.1659391,
+          "handCenterMaxMeters": 0.1782602,
+          "apexLiftMeters": 0.1517829,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.5348334,
+          "handCenterMaxMeters": 0.5348334,
+          "leftHandToBrowProxyMinMeters": 0.0327135,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078016,
+          "floorMaxMeters": 0.0078016,
+          "restFloorMeters": 0.0078017,
+          "handCenterMinMeters": 0.0780165,
+          "handCenterMaxMeters": 0.0780165,
+          "worstHandToMouthProxyMinMeters": 0.0504685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-02",
+      "lod": 0,
+      "heightMeters": 1.26,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0096625,
+          "floorMaxMeters": 0.0096625,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.3627907,
+          "handCenterMaxMeters": 0.3627907,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0055537,
+          "floorMaxMeters": 0.0111074,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.3032331,
+          "handCenterMaxMeters": 0.3032331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.0138843,
+          "handCenterMaxMeters": 0.1249587,
+          "handVertexToOppositeTriangleMinMeters": 0.0000955,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.1574361,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.1628104,
+          "handCenterMaxMeters": 0.1759668,
+          "apexLiftMeters": 0.1491055,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.5689146,
+          "handCenterMaxMeters": 0.5689146,
+          "leftHandToBrowProxyMinMeters": 0.0349313,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.0833058,
+          "handCenterMaxMeters": 0.0833058,
+          "worstHandToMouthProxyMinMeters": 0.0538901,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-02",
+      "lod": 1,
+      "heightMeters": 1.26,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0110711,
+          "floorMaxMeters": 0.0110711,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.3627907,
+          "handCenterMaxMeters": 0.3627907,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0069422,
+          "floorMaxMeters": 0.0124958,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.3032331,
+          "handCenterMaxMeters": 0.3032331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009719,
+          "floorMaxMeters": 0.009719,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.0138843,
+          "handCenterMaxMeters": 0.1249587,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009719,
+          "floorMaxMeters": 0.1572528,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.1628104,
+          "handCenterMaxMeters": 0.1759668,
+          "apexLiftMeters": 0.1475338,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009719,
+          "floorMaxMeters": 0.009719,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.5689146,
+          "handCenterMaxMeters": 0.5689146,
+          "leftHandToBrowProxyMinMeters": 0.0349313,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009719,
+          "floorMaxMeters": 0.009719,
+          "restFloorMeters": 0.009719,
+          "handCenterMinMeters": 0.0833058,
+          "handCenterMaxMeters": 0.0833058,
+          "worstHandToMouthProxyMinMeters": 0.0538901,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-02",
+      "lod": 2,
+      "heightMeters": 1.26,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0096833,
+          "floorMaxMeters": 0.0096833,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.3627907,
+          "handCenterMaxMeters": 0.3627907,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0055537,
+          "floorMaxMeters": 0.0111074,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.3032331,
+          "handCenterMaxMeters": 0.3032331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.0138843,
+          "handCenterMaxMeters": 0.1249587,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.1704039,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.1628104,
+          "handCenterMaxMeters": 0.1759668,
+          "apexLiftMeters": 0.1620733,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.5689146,
+          "handCenterMaxMeters": 0.5689146,
+          "leftHandToBrowProxyMinMeters": 0.0349313,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0083305,
+          "floorMaxMeters": 0.0083305,
+          "restFloorMeters": 0.0083306,
+          "handCenterMinMeters": 0.0833058,
+          "handCenterMaxMeters": 0.0833058,
+          "worstHandToMouthProxyMinMeters": 0.0538901,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-03",
+      "lod": 0,
+      "heightMeters": 1.38,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0105827,
+          "floorMaxMeters": 0.0105827,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.4249889,
+          "handCenterMaxMeters": 0.4249889,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0060826,
+          "floorMaxMeters": 0.0121653,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.3597884,
+          "handCenterMaxMeters": 0.3597884,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.0152066,
+          "handCenterMaxMeters": 0.1368595,
+          "handVertexToOppositeTriangleMinMeters": 0.0001819,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.17243,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.2058755,
+          "handCenterMaxMeters": 0.2202849,
+          "apexLiftMeters": 0.163306,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.6273322,
+          "handCenterMaxMeters": 0.6273322,
+          "leftHandToBrowProxyMinMeters": 0.0382581,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.0912397,
+          "handCenterMaxMeters": 0.0912397,
+          "worstHandToMouthProxyMinMeters": 0.0590225,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-03",
+      "lod": 1,
+      "heightMeters": 1.38,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121255,
+          "floorMaxMeters": 0.0121255,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.4249889,
+          "handCenterMaxMeters": 0.4249889,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0076033,
+          "floorMaxMeters": 0.013686,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.3597884,
+          "handCenterMaxMeters": 0.3597884,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106446,
+          "floorMaxMeters": 0.0106446,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.0152066,
+          "handCenterMaxMeters": 0.1368595,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106446,
+          "floorMaxMeters": 0.1722292,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.2058755,
+          "handCenterMaxMeters": 0.2202849,
+          "apexLiftMeters": 0.1615846,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106446,
+          "floorMaxMeters": 0.0106446,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.6273322,
+          "handCenterMaxMeters": 0.6273322,
+          "leftHandToBrowProxyMinMeters": 0.0382581,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106446,
+          "floorMaxMeters": 0.0106446,
+          "restFloorMeters": 0.0106446,
+          "handCenterMinMeters": 0.0912397,
+          "handCenterMaxMeters": 0.0912397,
+          "worstHandToMouthProxyMinMeters": 0.0590225,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-03",
+      "lod": 2,
+      "heightMeters": 1.38,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106055,
+          "floorMaxMeters": 0.0106055,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.4249889,
+          "handCenterMaxMeters": 0.4249889,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0060826,
+          "floorMaxMeters": 0.0121653,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.3597884,
+          "handCenterMaxMeters": 0.3597884,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.0152066,
+          "handCenterMaxMeters": 0.1368595,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.1866328,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.2058755,
+          "handCenterMaxMeters": 0.2202849,
+          "apexLiftMeters": 0.1775088,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.6273322,
+          "handCenterMaxMeters": 0.6273322,
+          "leftHandToBrowProxyMinMeters": 0.0382581,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.009124,
+          "floorMaxMeters": 0.009124,
+          "restFloorMeters": 0.009124,
+          "handCenterMinMeters": 0.0912397,
+          "handCenterMaxMeters": 0.0912397,
+          "worstHandToMouthProxyMinMeters": 0.0590225,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-04",
+      "lod": 0,
+      "heightMeters": 1.43,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109661,
+          "floorMaxMeters": 0.0109661,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.4362944,
+          "handCenterMaxMeters": 0.4362944,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.006303,
+          "floorMaxMeters": 0.012606,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.3687273,
+          "handCenterMaxMeters": 0.3687273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.0157576,
+          "handCenterMaxMeters": 0.1418182,
+          "handVertexToOppositeTriangleMinMeters": 0.0002979,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.1786775,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.209255,
+          "handCenterMaxMeters": 0.2241866,
+          "apexLiftMeters": 0.1692229,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.6494171,
+          "handCenterMaxMeters": 0.6494171,
+          "leftHandToBrowProxyMinMeters": 0.0396443,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.0945454,
+          "handCenterMaxMeters": 0.0945454,
+          "worstHandToMouthProxyMinMeters": 0.061161,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-04",
+      "lod": 1,
+      "heightMeters": 1.43,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0125648,
+          "floorMaxMeters": 0.0125648,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.4362944,
+          "handCenterMaxMeters": 0.4362944,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078788,
+          "floorMaxMeters": 0.0141818,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.3687273,
+          "handCenterMaxMeters": 0.3687273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0110303,
+          "floorMaxMeters": 0.0110303,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.0157576,
+          "handCenterMaxMeters": 0.1418182,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0110303,
+          "floorMaxMeters": 0.1784695,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.209255,
+          "handCenterMaxMeters": 0.2241866,
+          "apexLiftMeters": 0.1674391,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0110303,
+          "floorMaxMeters": 0.0110303,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.6494171,
+          "handCenterMaxMeters": 0.6494171,
+          "leftHandToBrowProxyMinMeters": 0.0396443,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0110303,
+          "floorMaxMeters": 0.0110303,
+          "restFloorMeters": 0.0110303,
+          "handCenterMinMeters": 0.0945454,
+          "handCenterMaxMeters": 0.0945454,
+          "worstHandToMouthProxyMinMeters": 0.061161,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-04",
+      "lod": 2,
+      "heightMeters": 1.43,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109897,
+          "floorMaxMeters": 0.0109897,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.4362944,
+          "handCenterMaxMeters": 0.4362944,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.006303,
+          "floorMaxMeters": 0.012606,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.3687273,
+          "handCenterMaxMeters": 0.3687273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.0157576,
+          "handCenterMaxMeters": 0.1418182,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.1933949,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.209255,
+          "handCenterMaxMeters": 0.2241866,
+          "apexLiftMeters": 0.1839403,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.6494171,
+          "handCenterMaxMeters": 0.6494171,
+          "leftHandToBrowProxyMinMeters": 0.0396443,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094546,
+          "floorMaxMeters": 0.0094546,
+          "restFloorMeters": 0.0094545,
+          "handCenterMinMeters": 0.0945454,
+          "handCenterMaxMeters": 0.0945454,
+          "worstHandToMouthProxyMinMeters": 0.061161,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-05",
+      "lod": 0,
+      "heightMeters": 1.78,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0138718,
+          "floorMaxMeters": 0.0138718,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.6036685,
+          "handCenterMaxMeters": 0.6036685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0079731,
+          "floorMaxMeters": 0.0159463,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.5182531,
+          "handCenterMaxMeters": 0.5182531,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.0199328,
+          "handCenterMaxMeters": 0.1793953,
+          "handVertexToOppositeTriangleMinMeters": 0.0000287,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.2260211,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.3163075,
+          "handCenterMaxMeters": 0.3351953,
+          "apexLiftMeters": 0.2140614,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.8299721,
+          "handCenterMaxMeters": 0.8299721,
+          "leftHandToBrowProxyMinMeters": 0.0501487,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.1195969,
+          "handCenterMaxMeters": 0.1195969,
+          "worstHandToMouthProxyMinMeters": 0.0773667,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-05",
+      "lod": 1,
+      "heightMeters": 1.78,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0158941,
+          "floorMaxMeters": 0.0158941,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.6036685,
+          "handCenterMaxMeters": 0.6036685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0099664,
+          "floorMaxMeters": 0.0179395,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.5182531,
+          "handCenterMaxMeters": 0.5182531,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0139529,
+          "floorMaxMeters": 0.0139529,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.0199328,
+          "handCenterMaxMeters": 0.1793953,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0139529,
+          "floorMaxMeters": 0.2257579,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.3163075,
+          "handCenterMaxMeters": 0.3351953,
+          "apexLiftMeters": 0.2118049,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0139529,
+          "floorMaxMeters": 0.0139529,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.8299721,
+          "handCenterMaxMeters": 0.8299721,
+          "leftHandToBrowProxyMinMeters": 0.0501487,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0139529,
+          "floorMaxMeters": 0.0139529,
+          "restFloorMeters": 0.013953,
+          "handCenterMinMeters": 0.1195969,
+          "handCenterMaxMeters": 0.1195969,
+          "worstHandToMouthProxyMinMeters": 0.0773667,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-05",
+      "lod": 2,
+      "heightMeters": 1.78,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0139017,
+          "floorMaxMeters": 0.0139017,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.6036685,
+          "handCenterMaxMeters": 0.6036685,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0079731,
+          "floorMaxMeters": 0.0159463,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.5182531,
+          "handCenterMaxMeters": 0.5182531,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.0199328,
+          "handCenterMaxMeters": 0.1793953,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.2446381,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.3163075,
+          "handCenterMaxMeters": 0.3351953,
+          "apexLiftMeters": 0.2326784,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.8299721,
+          "handCenterMaxMeters": 0.8299721,
+          "leftHandToBrowProxyMinMeters": 0.0501487,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0119597,
+          "floorMaxMeters": 0.0119597,
+          "restFloorMeters": 0.0119597,
+          "handCenterMinMeters": 0.1195969,
+          "handCenterMaxMeters": 0.1195969,
+          "worstHandToMouthProxyMinMeters": 0.0773667,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-06",
+      "lod": 0,
+      "heightMeters": 1.69,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0131704,
+          "floorMaxMeters": 0.0131704,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.5436542,
+          "handCenterMaxMeters": 0.5436542,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.00757,
+          "floorMaxMeters": 0.01514,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.4625263,
+          "handCenterMaxMeters": 0.4625263,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.018925,
+          "handCenterMaxMeters": 0.1703247,
+          "handVertexToOppositeTriangleMinMeters": 0.0002308,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.214593,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.2709159,
+          "handCenterMaxMeters": 0.2888488,
+          "apexLiftMeters": 0.2032381,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.7830931,
+          "handCenterMaxMeters": 0.7830931,
+          "leftHandToBrowProxyMinMeters": 0.0476131,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.1135498,
+          "handCenterMaxMeters": 0.1135498,
+          "worstHandToMouthProxyMinMeters": 0.0734549,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-06",
+      "lod": 1,
+      "heightMeters": 1.69,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0150904,
+          "floorMaxMeters": 0.0150904,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.5436542,
+          "handCenterMaxMeters": 0.5436542,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0094625,
+          "floorMaxMeters": 0.0170325,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.4625263,
+          "handCenterMaxMeters": 0.4625263,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132475,
+          "floorMaxMeters": 0.0132475,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.018925,
+          "handCenterMaxMeters": 0.1703247,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132475,
+          "floorMaxMeters": 0.2143432,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.2709159,
+          "handCenterMaxMeters": 0.2888488,
+          "apexLiftMeters": 0.2010957,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132475,
+          "floorMaxMeters": 0.0132475,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.7830931,
+          "handCenterMaxMeters": 0.7830931,
+          "leftHandToBrowProxyMinMeters": 0.0476131,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132475,
+          "floorMaxMeters": 0.0132475,
+          "restFloorMeters": 0.0132475,
+          "handCenterMinMeters": 0.1135498,
+          "handCenterMaxMeters": 0.1135498,
+          "worstHandToMouthProxyMinMeters": 0.0734549,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-06",
+      "lod": 2,
+      "heightMeters": 1.69,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0131988,
+          "floorMaxMeters": 0.0131988,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.5436542,
+          "handCenterMaxMeters": 0.5436542,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.00757,
+          "floorMaxMeters": 0.01514,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.4625263,
+          "handCenterMaxMeters": 0.4625263,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.018925,
+          "handCenterMaxMeters": 0.1703247,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.2322687,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.2709159,
+          "handCenterMaxMeters": 0.2888488,
+          "apexLiftMeters": 0.2209138,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.7830931,
+          "handCenterMaxMeters": 0.7830931,
+          "leftHandToBrowProxyMinMeters": 0.0476131,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.011355,
+          "floorMaxMeters": 0.011355,
+          "restFloorMeters": 0.011355,
+          "handCenterMinMeters": 0.1135498,
+          "handCenterMaxMeters": 0.1135498,
+          "worstHandToMouthProxyMinMeters": 0.0734549,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-07",
+      "lod": 0,
+      "heightMeters": 1.84,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0143394,
+          "floorMaxMeters": 0.0143394,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.6882356,
+          "handCenterMaxMeters": 0.6882356,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0082419,
+          "floorMaxMeters": 0.0164838,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.600009,
+          "handCenterMaxMeters": 0.600009,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.0206047,
+          "handCenterMaxMeters": 0.1854423,
+          "handVertexToOppositeTriangleMinMeters": 0.0012004,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.2336398,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.3909851,
+          "handCenterMaxMeters": 0.4105096,
+          "apexLiftMeters": 0.2212769,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.869442,
+          "handCenterMaxMeters": 0.869442,
+          "leftHandToBrowProxyMinMeters": 0.0518391,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.1236282,
+          "handCenterMaxMeters": 0.1236282,
+          "worstHandToMouthProxyMinMeters": 0.0799746,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-07",
+      "lod": 1,
+      "heightMeters": 1.84,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0164298,
+          "floorMaxMeters": 0.0164298,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.6882356,
+          "handCenterMaxMeters": 0.6882356,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0103024,
+          "floorMaxMeters": 0.0185443,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.600009,
+          "handCenterMaxMeters": 0.600009,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0144233,
+          "floorMaxMeters": 0.0144233,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.0206047,
+          "handCenterMaxMeters": 0.1854423,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0144233,
+          "floorMaxMeters": 0.2333678,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.3909851,
+          "handCenterMaxMeters": 0.4105096,
+          "apexLiftMeters": 0.2189445,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0144233,
+          "floorMaxMeters": 0.0144233,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.869442,
+          "handCenterMaxMeters": 0.869442,
+          "leftHandToBrowProxyMinMeters": 0.0518391,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0144233,
+          "floorMaxMeters": 0.0144233,
+          "restFloorMeters": 0.0144233,
+          "handCenterMinMeters": 0.1236282,
+          "handCenterMaxMeters": 0.1236282,
+          "worstHandToMouthProxyMinMeters": 0.0799746,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-07",
+      "lod": 2,
+      "heightMeters": 1.84,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0143703,
+          "floorMaxMeters": 0.0143703,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.6882356,
+          "handCenterMaxMeters": 0.6882356,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0082419,
+          "floorMaxMeters": 0.0164838,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.600009,
+          "handCenterMaxMeters": 0.600009,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.0206047,
+          "handCenterMaxMeters": 0.1854423,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.2528843,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.3909851,
+          "handCenterMaxMeters": 0.4105096,
+          "apexLiftMeters": 0.2405215,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.869442,
+          "handCenterMaxMeters": 0.869442,
+          "leftHandToBrowProxyMinMeters": 0.0518391,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123628,
+          "floorMaxMeters": 0.0123628,
+          "restFloorMeters": 0.0123628,
+          "handCenterMinMeters": 0.1236282,
+          "handCenterMaxMeters": 0.1236282,
+          "worstHandToMouthProxyMinMeters": 0.0799746,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-08",
+      "lod": 0,
+      "heightMeters": 1.72,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134042,
+          "floorMaxMeters": 0.0134042,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.56331,
+          "handCenterMaxMeters": 0.56331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0077044,
+          "floorMaxMeters": 0.0154087,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.4807525,
+          "handCenterMaxMeters": 0.4807525,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.0192609,
+          "handCenterMaxMeters": 0.1733483,
+          "handVertexToOppositeTriangleMinMeters": 0.0005151,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.2184025,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.2856985,
+          "handCenterMaxMeters": 0.3039497,
+          "apexLiftMeters": 0.2068459,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.7986334,
+          "handCenterMaxMeters": 0.7986334,
+          "leftHandToBrowProxyMinMeters": 0.0484583,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.1155655,
+          "handCenterMaxMeters": 0.1155655,
+          "worstHandToMouthProxyMinMeters": 0.0747588,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-08",
+      "lod": 1,
+      "heightMeters": 1.72,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0153583,
+          "floorMaxMeters": 0.0153583,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.56331,
+          "handCenterMaxMeters": 0.56331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0096305,
+          "floorMaxMeters": 0.0173348,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.4807525,
+          "handCenterMaxMeters": 0.4807525,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134826,
+          "floorMaxMeters": 0.0134826,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.0192609,
+          "handCenterMaxMeters": 0.1733483,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134826,
+          "floorMaxMeters": 0.2181482,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.2856985,
+          "handCenterMaxMeters": 0.3039497,
+          "apexLiftMeters": 0.2046655,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134826,
+          "floorMaxMeters": 0.0134826,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.7986334,
+          "handCenterMaxMeters": 0.7986334,
+          "leftHandToBrowProxyMinMeters": 0.0484583,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134826,
+          "floorMaxMeters": 0.0134826,
+          "restFloorMeters": 0.0134826,
+          "handCenterMinMeters": 0.1155655,
+          "handCenterMaxMeters": 0.1155655,
+          "worstHandToMouthProxyMinMeters": 0.0747588,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-08",
+      "lod": 2,
+      "heightMeters": 1.72,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0134331,
+          "floorMaxMeters": 0.0134331,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.56331,
+          "handCenterMaxMeters": 0.56331,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0077044,
+          "floorMaxMeters": 0.0154087,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.4807525,
+          "handCenterMaxMeters": 0.4807525,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.0192609,
+          "handCenterMaxMeters": 0.1733483,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.2363919,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.2856985,
+          "handCenterMaxMeters": 0.3039497,
+          "apexLiftMeters": 0.2248354,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.7986334,
+          "handCenterMaxMeters": 0.7986334,
+          "leftHandToBrowProxyMinMeters": 0.0484583,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0115566,
+          "floorMaxMeters": 0.0115566,
+          "restFloorMeters": 0.0115566,
+          "handCenterMinMeters": 0.1155655,
+          "handCenterMaxMeters": 0.1155655,
+          "worstHandToMouthProxyMinMeters": 0.0747588,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-09",
+      "lod": 0,
+      "heightMeters": 1.76,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137159,
+          "floorMaxMeters": 0.0137159,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.6173613,
+          "handCenterMaxMeters": 0.6173613,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078836,
+          "floorMaxMeters": 0.0157671,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.5329272,
+          "handCenterMaxMeters": 0.5329272,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.0197088,
+          "handCenterMaxMeters": 0.1773796,
+          "handVertexToOppositeTriangleMinMeters": 0.0008681,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.2234815,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.3331642,
+          "handCenterMaxMeters": 0.3518399,
+          "apexLiftMeters": 0.2116562,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.8242,
+          "handCenterMaxMeters": 0.8242,
+          "leftHandToBrowProxyMinMeters": 0.0495853,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.1182531,
+          "handCenterMaxMeters": 0.1182531,
+          "worstHandToMouthProxyMinMeters": 0.0764974,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-09",
+      "lod": 1,
+      "heightMeters": 1.76,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0157155,
+          "floorMaxMeters": 0.0157155,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.6173613,
+          "handCenterMaxMeters": 0.6173613,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0098544,
+          "floorMaxMeters": 0.0177379,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.5329272,
+          "handCenterMaxMeters": 0.5329272,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137962,
+          "floorMaxMeters": 0.0137962,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.0197088,
+          "handCenterMaxMeters": 0.1773796,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137962,
+          "floorMaxMeters": 0.2232213,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.3331642,
+          "handCenterMaxMeters": 0.3518399,
+          "apexLiftMeters": 0.2094251,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137962,
+          "floorMaxMeters": 0.0137962,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.8242,
+          "handCenterMaxMeters": 0.8242,
+          "leftHandToBrowProxyMinMeters": 0.0495853,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137962,
+          "floorMaxMeters": 0.0137962,
+          "restFloorMeters": 0.0137962,
+          "handCenterMinMeters": 0.1182531,
+          "handCenterMaxMeters": 0.1182531,
+          "worstHandToMouthProxyMinMeters": 0.0764974,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-09",
+      "lod": 2,
+      "heightMeters": 1.76,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137455,
+          "floorMaxMeters": 0.0137455,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.6173613,
+          "handCenterMaxMeters": 0.6173613,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078836,
+          "floorMaxMeters": 0.0157671,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.5329272,
+          "handCenterMaxMeters": 0.5329272,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.0197088,
+          "handCenterMaxMeters": 0.1773796,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.2418893,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.3331642,
+          "handCenterMaxMeters": 0.3518399,
+          "apexLiftMeters": 0.230064,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.8242,
+          "handCenterMaxMeters": 0.8242,
+          "leftHandToBrowProxyMinMeters": 0.0495853,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0118253,
+          "floorMaxMeters": 0.0118253,
+          "restFloorMeters": 0.0118253,
+          "handCenterMinMeters": 0.1182531,
+          "handCenterMaxMeters": 0.1182531,
+          "worstHandToMouthProxyMinMeters": 0.0764974,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-10",
+      "lod": 0,
+      "heightMeters": 1.66,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0129366,
+          "floorMaxMeters": 0.0129366,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.5388316,
+          "handCenterMaxMeters": 0.5388316,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0074356,
+          "floorMaxMeters": 0.0148712,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.4591489,
+          "handCenterMaxMeters": 0.4591489,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.018589,
+          "handCenterMaxMeters": 0.1673012,
+          "handVertexToOppositeTriangleMinMeters": 0.0003635,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.2107837,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.2709195,
+          "handCenterMaxMeters": 0.2885341,
+          "apexLiftMeters": 0.1996303,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.7699797,
+          "handCenterMaxMeters": 0.7699797,
+          "leftHandToBrowProxyMinMeters": 0.0467679,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.1115342,
+          "handCenterMaxMeters": 0.1115342,
+          "worstHandToMouthProxyMinMeters": 0.072151,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-10",
+      "lod": 1,
+      "heightMeters": 1.66,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0148226,
+          "floorMaxMeters": 0.0148226,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.5388316,
+          "handCenterMaxMeters": 0.5388316,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0092945,
+          "floorMaxMeters": 0.0167301,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.4591489,
+          "handCenterMaxMeters": 0.4591489,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0130123,
+          "floorMaxMeters": 0.0130123,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.018589,
+          "handCenterMaxMeters": 0.1673012,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0130123,
+          "floorMaxMeters": 0.2105383,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.2709195,
+          "handCenterMaxMeters": 0.2885341,
+          "apexLiftMeters": 0.197526,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0130123,
+          "floorMaxMeters": 0.0130123,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.7699797,
+          "handCenterMaxMeters": 0.7699797,
+          "leftHandToBrowProxyMinMeters": 0.0467679,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0130123,
+          "floorMaxMeters": 0.0130123,
+          "restFloorMeters": 0.0130123,
+          "handCenterMinMeters": 0.1115342,
+          "handCenterMaxMeters": 0.1115342,
+          "worstHandToMouthProxyMinMeters": 0.072151,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-10",
+      "lod": 2,
+      "heightMeters": 1.66,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0129645,
+          "floorMaxMeters": 0.0129645,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.5388316,
+          "handCenterMaxMeters": 0.5388316,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0074356,
+          "floorMaxMeters": 0.0148712,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.4591489,
+          "handCenterMaxMeters": 0.4591489,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.018589,
+          "handCenterMaxMeters": 0.1673012,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.2281457,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.2709195,
+          "handCenterMaxMeters": 0.2885341,
+          "apexLiftMeters": 0.2169923,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.7699797,
+          "handCenterMaxMeters": 0.7699797,
+          "leftHandToBrowProxyMinMeters": 0.0467679,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0111534,
+          "floorMaxMeters": 0.0111534,
+          "restFloorMeters": 0.0111534,
+          "handCenterMinMeters": 0.1115342,
+          "handCenterMaxMeters": 0.1115342,
+          "worstHandToMouthProxyMinMeters": 0.072151,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-11",
+      "lod": 0,
+      "heightMeters": 1.81,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141056,
+          "floorMaxMeters": 0.0141056,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.6664858,
+          "handCenterMaxMeters": 0.6664858,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0081075,
+          "floorMaxMeters": 0.016215,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.5796865,
+          "handCenterMaxMeters": 0.5796865,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.0202688,
+          "handCenterMaxMeters": 0.1824188,
+          "handVertexToOppositeTriangleMinMeters": 0.0011203,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.2298305,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.374115,
+          "handCenterMaxMeters": 0.3933212,
+          "apexLiftMeters": 0.2176692,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.853311,
+          "handCenterMaxMeters": 0.853311,
+          "leftHandToBrowProxyMinMeters": 0.0509939,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.1216125,
+          "handCenterMaxMeters": 0.1216125,
+          "worstHandToMouthProxyMinMeters": 0.0786706,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-11",
+      "lod": 1,
+      "heightMeters": 1.81,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.016162,
+          "floorMaxMeters": 0.016162,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.6664858,
+          "handCenterMaxMeters": 0.6664858,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0101344,
+          "floorMaxMeters": 0.0182419,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.5796865,
+          "handCenterMaxMeters": 0.5796865,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141881,
+          "floorMaxMeters": 0.0141881,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.0202688,
+          "handCenterMaxMeters": 0.1824188,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141881,
+          "floorMaxMeters": 0.2295629,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.374115,
+          "handCenterMaxMeters": 0.3933212,
+          "apexLiftMeters": 0.2153748,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141881,
+          "floorMaxMeters": 0.0141881,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.853311,
+          "handCenterMaxMeters": 0.853311,
+          "leftHandToBrowProxyMinMeters": 0.0509939,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141881,
+          "floorMaxMeters": 0.0141881,
+          "restFloorMeters": 0.0141881,
+          "handCenterMinMeters": 0.1216125,
+          "handCenterMaxMeters": 0.1216125,
+          "worstHandToMouthProxyMinMeters": 0.0786706,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-11",
+      "lod": 2,
+      "heightMeters": 1.81,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.014136,
+          "floorMaxMeters": 0.014136,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.6664858,
+          "handCenterMaxMeters": 0.6664858,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0081075,
+          "floorMaxMeters": 0.016215,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.5796865,
+          "handCenterMaxMeters": 0.5796865,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.0202688,
+          "handCenterMaxMeters": 0.1824188,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.2487613,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.374115,
+          "handCenterMaxMeters": 0.3933212,
+          "apexLiftMeters": 0.2366,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.853311,
+          "handCenterMaxMeters": 0.853311,
+          "leftHandToBrowProxyMinMeters": 0.0509939,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0121612,
+          "floorMaxMeters": 0.0121612,
+          "restFloorMeters": 0.0121613,
+          "handCenterMinMeters": 0.1216125,
+          "handCenterMaxMeters": 0.1216125,
+          "worstHandToMouthProxyMinMeters": 0.0786706,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-12",
+      "lod": 0,
+      "heightMeters": 1.74,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0135601,
+          "floorMaxMeters": 0.0135601,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.6052851,
+          "handCenterMaxMeters": 0.6052851,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0077939,
+          "floorMaxMeters": 0.0155879,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.5218052,
+          "handCenterMaxMeters": 0.5218052,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.0194849,
+          "handCenterMaxMeters": 0.1753639,
+          "handVertexToOppositeTriangleMinMeters": 0.000649,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.220942,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.3243335,
+          "handCenterMaxMeters": 0.342797,
+          "apexLiftMeters": 0.2092511,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.8139454,
+          "handCenterMaxMeters": 0.8139454,
+          "leftHandToBrowProxyMinMeters": 0.0490218,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.1169093,
+          "handCenterMaxMeters": 0.1169093,
+          "worstHandToMouthProxyMinMeters": 0.0756281,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-12",
+      "lod": 1,
+      "heightMeters": 1.74,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0155369,
+          "floorMaxMeters": 0.0155369,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.6052851,
+          "handCenterMaxMeters": 0.6052851,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0097424,
+          "floorMaxMeters": 0.0175364,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.5218052,
+          "handCenterMaxMeters": 0.5218052,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0136394,
+          "floorMaxMeters": 0.0136394,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.0194849,
+          "handCenterMaxMeters": 0.1753639,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0136394,
+          "floorMaxMeters": 0.2206848,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.3243335,
+          "handCenterMaxMeters": 0.342797,
+          "apexLiftMeters": 0.2070454,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0136394,
+          "floorMaxMeters": 0.0136394,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.8139454,
+          "handCenterMaxMeters": 0.8139454,
+          "leftHandToBrowProxyMinMeters": 0.0490218,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0136394,
+          "floorMaxMeters": 0.0136394,
+          "restFloorMeters": 0.0136394,
+          "handCenterMinMeters": 0.1169093,
+          "handCenterMaxMeters": 0.1169093,
+          "worstHandToMouthProxyMinMeters": 0.0756281,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-12",
+      "lod": 2,
+      "heightMeters": 1.74,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0135893,
+          "floorMaxMeters": 0.0135893,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.6052851,
+          "handCenterMaxMeters": 0.6052851,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0077939,
+          "floorMaxMeters": 0.0155879,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.5218052,
+          "handCenterMaxMeters": 0.5218052,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.0194849,
+          "handCenterMaxMeters": 0.1753639,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.2391407,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.3243335,
+          "handCenterMaxMeters": 0.342797,
+          "apexLiftMeters": 0.2274498,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.8139454,
+          "handCenterMaxMeters": 0.8139454,
+          "leftHandToBrowProxyMinMeters": 0.0490218,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0116909,
+          "floorMaxMeters": 0.0116909,
+          "restFloorMeters": 0.0116909,
+          "handCenterMinMeters": 0.1169093,
+          "handCenterMaxMeters": 0.1169093,
+          "worstHandToMouthProxyMinMeters": 0.0756281,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-13",
+      "lod": 0,
+      "heightMeters": 1.7,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132483,
+          "floorMaxMeters": 0.0132483,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.5765374,
+          "handCenterMaxMeters": 0.5765374,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0076148,
+          "floorMaxMeters": 0.0152296,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.4949608,
+          "handCenterMaxMeters": 0.4949608,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.019037,
+          "handCenterMaxMeters": 0.1713326,
+          "handVertexToOppositeTriangleMinMeters": 0.0000274,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.2158629,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.3020914,
+          "handCenterMaxMeters": 0.3201304,
+          "apexLiftMeters": 0.2044407,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.79267,
+          "handCenterMaxMeters": 0.79267,
+          "leftHandToBrowProxyMinMeters": 0.0478949,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.1142217,
+          "handCenterMaxMeters": 0.1142217,
+          "worstHandToMouthProxyMinMeters": 0.0738895,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-13",
+      "lod": 1,
+      "heightMeters": 1.7,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0151797,
+          "floorMaxMeters": 0.0151797,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.5765374,
+          "handCenterMaxMeters": 0.5765374,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0095185,
+          "floorMaxMeters": 0.0171333,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.4949608,
+          "handCenterMaxMeters": 0.4949608,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0133259,
+          "floorMaxMeters": 0.0133259,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.019037,
+          "handCenterMaxMeters": 0.1713326,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0133259,
+          "floorMaxMeters": 0.2156116,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.3020914,
+          "handCenterMaxMeters": 0.3201304,
+          "apexLiftMeters": 0.2022857,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0133259,
+          "floorMaxMeters": 0.0133259,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.79267,
+          "handCenterMaxMeters": 0.79267,
+          "leftHandToBrowProxyMinMeters": 0.0478949,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0133259,
+          "floorMaxMeters": 0.0133259,
+          "restFloorMeters": 0.0133259,
+          "handCenterMinMeters": 0.1142217,
+          "handCenterMaxMeters": 0.1142217,
+          "worstHandToMouthProxyMinMeters": 0.0738895,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-13",
+      "lod": 2,
+      "heightMeters": 1.7,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0132769,
+          "floorMaxMeters": 0.0132769,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.5765374,
+          "handCenterMaxMeters": 0.5765374,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0076148,
+          "floorMaxMeters": 0.0152296,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.4949608,
+          "handCenterMaxMeters": 0.4949608,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.019037,
+          "handCenterMaxMeters": 0.1713326,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.2336432,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.3020914,
+          "handCenterMaxMeters": 0.3201304,
+          "apexLiftMeters": 0.222221,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.79267,
+          "handCenterMaxMeters": 0.79267,
+          "leftHandToBrowProxyMinMeters": 0.0478949,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0114222,
+          "floorMaxMeters": 0.0114222,
+          "restFloorMeters": 0.0114222,
+          "handCenterMinMeters": 0.1142217,
+          "handCenterMaxMeters": 0.1142217,
+          "worstHandToMouthProxyMinMeters": 0.0738895,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-14",
+      "lod": 0,
+      "heightMeters": 1.59,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0123911,
+          "floorMaxMeters": 0.0123911,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.5854765,
+          "handCenterMaxMeters": 0.5854765,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0071221,
+          "floorMaxMeters": 0.0142441,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.5092273,
+          "handCenterMaxMeters": 0.5092273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.0178052,
+          "handCenterMaxMeters": 0.1602464,
+          "handVertexToOppositeTriangleMinMeters": 0.0009307,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.2018953,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.3286425,
+          "handCenterMaxMeters": 0.3455142,
+          "apexLiftMeters": 0.1912122,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.7495937,
+          "handCenterMaxMeters": 0.7495937,
+          "leftHandToBrowProxyMinMeters": 0.0447958,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.1068309,
+          "handCenterMaxMeters": 0.1068309,
+          "worstHandToMouthProxyMinMeters": 0.0691084,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-14",
+      "lod": 1,
+      "heightMeters": 1.59,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0141975,
+          "floorMaxMeters": 0.0141975,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.5854765,
+          "handCenterMaxMeters": 0.5854765,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0089026,
+          "floorMaxMeters": 0.0160246,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.5092273,
+          "handCenterMaxMeters": 0.5092273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0124636,
+          "floorMaxMeters": 0.0124636,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.0178052,
+          "handCenterMaxMeters": 0.1602464,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0124636,
+          "floorMaxMeters": 0.2016602,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.3286425,
+          "handCenterMaxMeters": 0.3455142,
+          "apexLiftMeters": 0.1891966,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0124636,
+          "floorMaxMeters": 0.0124636,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.7495937,
+          "handCenterMaxMeters": 0.7495937,
+          "leftHandToBrowProxyMinMeters": 0.0447958,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0124636,
+          "floorMaxMeters": 0.0124636,
+          "restFloorMeters": 0.0124636,
+          "handCenterMinMeters": 0.1068309,
+          "handCenterMaxMeters": 0.1068309,
+          "worstHandToMouthProxyMinMeters": 0.0691084,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-14",
+      "lod": 2,
+      "heightMeters": 1.59,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0124178,
+          "floorMaxMeters": 0.0124178,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.5854765,
+          "handCenterMaxMeters": 0.5854765,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0071221,
+          "floorMaxMeters": 0.0142441,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.5092273,
+          "handCenterMaxMeters": 0.5092273,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.0178052,
+          "handCenterMaxMeters": 0.1602464,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.2185251,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.3286425,
+          "handCenterMaxMeters": 0.3455142,
+          "apexLiftMeters": 0.207842,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.7495937,
+          "handCenterMaxMeters": 0.7495937,
+          "leftHandToBrowProxyMinMeters": 0.0447958,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0106831,
+          "floorMaxMeters": 0.0106831,
+          "restFloorMeters": 0.0106831,
+          "handCenterMinMeters": 0.1068309,
+          "handCenterMaxMeters": 0.1068309,
+          "worstHandToMouthProxyMinMeters": 0.0691084,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-15",
+      "lod": 0,
+      "heightMeters": 1.75,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.013638,
+          "floorMaxMeters": 0.013638,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.6138535,
+          "handCenterMaxMeters": 0.6138535,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078387,
+          "floorMaxMeters": 0.0156775,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.5298992,
+          "handCenterMaxMeters": 0.5298992,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.0195969,
+          "handCenterMaxMeters": 0.1763718,
+          "handVertexToOppositeTriangleMinMeters": 0.0008399,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.2222118,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.3312712,
+          "handCenterMaxMeters": 0.3498408,
+          "apexLiftMeters": 0.2104536,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.819517,
+          "handCenterMaxMeters": 0.819517,
+          "leftHandToBrowProxyMinMeters": 0.0493035,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.1175812,
+          "handCenterMaxMeters": 0.1175812,
+          "worstHandToMouthProxyMinMeters": 0.0760627,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-15",
+      "lod": 1,
+      "heightMeters": 1.75,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0156262,
+          "floorMaxMeters": 0.0156262,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.6138535,
+          "handCenterMaxMeters": 0.6138535,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0097984,
+          "floorMaxMeters": 0.0176372,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.5298992,
+          "handCenterMaxMeters": 0.5298992,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137178,
+          "floorMaxMeters": 0.0137178,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.0195969,
+          "handCenterMaxMeters": 0.1763718,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137178,
+          "floorMaxMeters": 0.221953,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.3312712,
+          "handCenterMaxMeters": 0.3498408,
+          "apexLiftMeters": 0.2082352,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137178,
+          "floorMaxMeters": 0.0137178,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.819517,
+          "handCenterMaxMeters": 0.819517,
+          "leftHandToBrowProxyMinMeters": 0.0493035,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0137178,
+          "floorMaxMeters": 0.0137178,
+          "restFloorMeters": 0.0137178,
+          "handCenterMinMeters": 0.1175812,
+          "handCenterMaxMeters": 0.1175812,
+          "worstHandToMouthProxyMinMeters": 0.0760627,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-15",
+      "lod": 2,
+      "heightMeters": 1.75,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0136674,
+          "floorMaxMeters": 0.0136674,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.6138535,
+          "handCenterMaxMeters": 0.6138535,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0078387,
+          "floorMaxMeters": 0.0156775,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.5298992,
+          "handCenterMaxMeters": 0.5298992,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.0195969,
+          "handCenterMaxMeters": 0.1763718,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.240515,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.3312712,
+          "handCenterMaxMeters": 0.3498408,
+          "apexLiftMeters": 0.2287569,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.819517,
+          "handCenterMaxMeters": 0.819517,
+          "leftHandToBrowProxyMinMeters": 0.0493035,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0117581,
+          "floorMaxMeters": 0.0117581,
+          "restFloorMeters": 0.0117581,
+          "handCenterMinMeters": 0.1175812,
+          "handCenterMaxMeters": 0.1175812,
+          "worstHandToMouthProxyMinMeters": 0.0760627,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-16",
+      "lod": 0,
+      "heightMeters": 1.63,
+      "triangles": 210,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127028,
+          "floorMaxMeters": 0.0127028,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.5622792,
+          "handCenterMaxMeters": 0.5622792,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0073012,
+          "floorMaxMeters": 0.0146025,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.4840717,
+          "handCenterMaxMeters": 0.4840717,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.0182531,
+          "handCenterMaxMeters": 0.1642777,
+          "handVertexToOppositeTriangleMinMeters": 0.0004033,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true,
+            "handMeshProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.2069743,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.2991039,
+          "handCenterMaxMeters": 0.3164001,
+          "apexLiftMeters": 0.1960225,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.7616631,
+          "handCenterMaxMeters": 0.7616631,
+          "leftHandToBrowProxyMinMeters": 0.0459227,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.1095185,
+          "handCenterMaxMeters": 0.1095185,
+          "worstHandToMouthProxyMinMeters": 0.070847,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-16",
+      "lod": 1,
+      "heightMeters": 1.63,
+      "triangles": 90,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0145547,
+          "floorMaxMeters": 0.0145547,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.5622792,
+          "handCenterMaxMeters": 0.5622792,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0091265,
+          "floorMaxMeters": 0.0164278,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.4840717,
+          "handCenterMaxMeters": 0.4840717,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127771,
+          "floorMaxMeters": 0.0127771,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.0182531,
+          "handCenterMaxMeters": 0.1642777,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127771,
+          "floorMaxMeters": 0.2067334,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.2991039,
+          "handCenterMaxMeters": 0.3164001,
+          "apexLiftMeters": 0.1939562,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127771,
+          "floorMaxMeters": 0.0127771,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.7616631,
+          "handCenterMaxMeters": 0.7616631,
+          "leftHandToBrowProxyMinMeters": 0.0459227,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127771,
+          "floorMaxMeters": 0.0127771,
+          "restFloorMeters": 0.0127772,
+          "handCenterMinMeters": 0.1095185,
+          "handCenterMaxMeters": 0.1095185,
+          "worstHandToMouthProxyMinMeters": 0.070847,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "fan": "fan-16",
+      "lod": 2,
+      "heightMeters": 1.63,
+      "triangles": 24,
+      "duplicateFaces": 0,
+      "degenerateFaces": 0,
+      "clips": [
+        {
+          "name": "sit",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0127302,
+          "floorMaxMeters": 0.0127302,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.5622792,
+          "handCenterMaxMeters": 0.5622792,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "stand",
+          "durationSeconds": 3.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0073012,
+          "floorMaxMeters": 0.0146025,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.4840717,
+          "handCenterMaxMeters": 0.4840717,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true
+          },
+          "pass": true
+        },
+        {
+          "name": "clap",
+          "durationSeconds": 1.2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.0182531,
+          "handCenterMaxMeters": 0.1642777,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "handsClose": true,
+            "handsOpen": true
+          },
+          "pass": true
+        },
+        {
+          "name": "jump",
+          "durationSeconds": 1.6,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.2240225,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.2991039,
+          "handCenterMaxMeters": 0.3164001,
+          "apexLiftMeters": 0.2130706,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "groundedAtBoundary": true,
+            "apexLift": true
+          },
+          "pass": true
+        },
+        {
+          "name": "disappointed",
+          "durationSeconds": 2.8,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.7616631,
+          "handCenterMaxMeters": 0.7616631,
+          "leftHandToBrowProxyMinMeters": 0.0459227,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "browProximity": true
+          },
+          "pass": true
+        },
+        {
+          "name": "shout",
+          "durationSeconds": 2,
+          "samples": 65,
+          "loopEndpointMaxError": 0,
+          "floorMinMeters": 0.0109518,
+          "floorMaxMeters": 0.0109518,
+          "restFloorMeters": 0.0109518,
+          "handCenterMinMeters": 0.1095185,
+          "handCenterMaxMeters": 0.1095185,
+          "worstHandToMouthProxyMinMeters": 0.070847,
+          "checks": {
+            "loopEndpoints": true,
+            "floor": true,
+            "mouthProximity": true
+          },
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "limitations": [
+    "LOD0 is a 210-triangle stylized human suitable for stands, not close-up photorealism.",
+    "LOD1 uses crossed ribbons on neck and legs; no duplicate coplanar faces were detected. Pixel inspection confirmed removal of the earlier z-fighting artifact.",
+    "LOD2 is a 24-triangle double-sided skinned silhouette and is intended for distant frontal stands; it becomes thin side-on.",
+    "Mouth and brow distances use anatomical proxies relative to the Head joint, not scanned facial landmarks.",
+    "Hand mesh proximity measures vertex-to-opposite-triangle distances. It does not prove continuous collision-free palm contact.",
+    "The floor and contact checks are sampled at 65 times per clip and are not continuous collision proofs.",
+    "Human appearance and emotion readability were reviewed visually; that assessment is subjective, separate from the numerical pass criteria."
+  ],
+  "visualReview": {
+    "fans": [
+      1,
+      5,
+      13,
+      14
+    ],
+    "views": [
+      "front",
+      "three-quarter",
+      "side"
+    ],
+    "clips": [
+      "sit",
+      "stand",
+      "clap",
+      "jump",
+      "disappointed",
+      "shout"
+    ],
+    "lods": [
+      0,
+      1,
+      2
+    ],
+    "notes": "Shorter visible neck, sloped shoulders, connected elbow/knee loops, closed pelvis, close scalp, and actual shoe volume improved human readability over the initial draft."
+  },
+  "browserErrors": [],
+  "inputs": [
+    {
+      "path": "crowd/fan-01-lod0.glb",
+      "sha256": "68d1f45c0cb881e846ac34cd28167aba18c3df6e6ed711d5690093d9e91b3fbe"
+    },
+    {
+      "path": "crowd/fan-01-lod1.glb",
+      "sha256": "facd906d20ccda6da6ce1f21ad18bd58be1c22d7412f3e5baa25bed9b6d658d9"
+    },
+    {
+      "path": "crowd/fan-01-lod2.glb",
+      "sha256": "ad18a8cd81af0fc0b8f83c0363357aeb169d40ec1d5f2dd78e18946f5208ef50"
+    },
+    {
+      "path": "crowd/fan-02-lod0.glb",
+      "sha256": "7a56684fd23032e13faf60d50c9da73f1be101984014ab8037299091f8b14177"
+    },
+    {
+      "path": "crowd/fan-02-lod1.glb",
+      "sha256": "af22cb4ded62f7e54b2992acff5cd6c1baa6a9fa9f04452d9173caa39c5a2d72"
+    },
+    {
+      "path": "crowd/fan-02-lod2.glb",
+      "sha256": "34046ab96e8fc119e3f70f698536bfc99f64a63825b041b34b3ecf780a05b988"
+    },
+    {
+      "path": "crowd/fan-03-lod0.glb",
+      "sha256": "cb231e6d98bea35fd236dbf315eb222857ec6bb8bd1e915814b28201e7248a7b"
+    },
+    {
+      "path": "crowd/fan-03-lod1.glb",
+      "sha256": "445abb9a18c8bb46b5cbd4cf6b9a403a10dc96568642b4c1a45b4263255d24fe"
+    },
+    {
+      "path": "crowd/fan-03-lod2.glb",
+      "sha256": "d71b1f3fed7f00748fa045962f947d91d58970ac871442086ae10f071ab09d9b"
+    },
+    {
+      "path": "crowd/fan-04-lod0.glb",
+      "sha256": "817e58855065dd31b57ac2c30dcbabab1e3b9b7d47399c81cd8f2238f7836e6d"
+    },
+    {
+      "path": "crowd/fan-04-lod1.glb",
+      "sha256": "ed42b798943f77c95dbb5abc6e84298fb2fc67e51505577fcf4ac6cd356389ce"
+    },
+    {
+      "path": "crowd/fan-04-lod2.glb",
+      "sha256": "e2083f818878179a574b6fd03421dd7879e85398eda30ed58719041e4c3a972f"
+    },
+    {
+      "path": "crowd/fan-05-lod0.glb",
+      "sha256": "66030bf2ddc6ef598ca3a9e4d9d0855174d3bb874bffcb5e0e7b2aff52091404"
+    },
+    {
+      "path": "crowd/fan-05-lod1.glb",
+      "sha256": "b059075527adaec390d329802a4a8bf693dcd6f2ecf6154798ecb26282c6e4df"
+    },
+    {
+      "path": "crowd/fan-05-lod2.glb",
+      "sha256": "e644e5b81b33b64f31e6e000f3e980186d1c9ebfb4b07e9821ec56db82ad9eff"
+    },
+    {
+      "path": "crowd/fan-06-lod0.glb",
+      "sha256": "4018bdd7c98652a92bd22de70d576a8e19eea4adefc11a03ff6e9c40ecaa510c"
+    },
+    {
+      "path": "crowd/fan-06-lod1.glb",
+      "sha256": "ebdc3f4582a400da1840c181fa132e4c0bbb02f5c6d9f55189d6d263ec2f730c"
+    },
+    {
+      "path": "crowd/fan-06-lod2.glb",
+      "sha256": "a9c044a860af6e384cd742ad7f3113cc244835fdd616ad88f6ef33547d794bbb"
+    },
+    {
+      "path": "crowd/fan-07-lod0.glb",
+      "sha256": "26acdcb8ea84887ab7ec7df463e8deaf329ef5cd08fcd8a60764c5cb169601d5"
+    },
+    {
+      "path": "crowd/fan-07-lod1.glb",
+      "sha256": "0e73520a969acc140ff7b9e8ad7b3a4257d3fdb1a810dd057c051dd63aab1be4"
+    },
+    {
+      "path": "crowd/fan-07-lod2.glb",
+      "sha256": "dee8ee89efcba31ebaaac2990941e35af3c0d4a40d9e518e7bcda79e5a186c26"
+    },
+    {
+      "path": "crowd/fan-08-lod0.glb",
+      "sha256": "0b72a98c6618c874e40e9111b4652419167e5a0c79abe868830cc88a6bc713c2"
+    },
+    {
+      "path": "crowd/fan-08-lod1.glb",
+      "sha256": "f09401a552c223a11c41d123cd0c6a9810853a258ef2c774d32a970d44ecf1f9"
+    },
+    {
+      "path": "crowd/fan-08-lod2.glb",
+      "sha256": "e98d66a830c9ca6a8fae7988c07914bf50aaa90f07e6351d7a9271223b9f482c"
+    },
+    {
+      "path": "crowd/fan-09-lod0.glb",
+      "sha256": "3717fd81dbc74171931bbd1f17e93063a1f3d364af0185f03f6cc742354a5cef"
+    },
+    {
+      "path": "crowd/fan-09-lod1.glb",
+      "sha256": "828a6fe863fa9d8e66d9cd8ce90ab9429741c9261791f1146d0819bf1213dbdb"
+    },
+    {
+      "path": "crowd/fan-09-lod2.glb",
+      "sha256": "5097dee77265ef14b39de32673422add32c39c15b6bc573652bb199aa7d155e0"
+    },
+    {
+      "path": "crowd/fan-10-lod0.glb",
+      "sha256": "3ba3c7968968e9fb90747be6fbe1499325d5c0d583ffab10e9b271b654e6329d"
+    },
+    {
+      "path": "crowd/fan-10-lod1.glb",
+      "sha256": "a14631bd370b972396ff9ffd95ccd32ab9689389dfc6c25e696f060ffe087ae5"
+    },
+    {
+      "path": "crowd/fan-10-lod2.glb",
+      "sha256": "8f1e4f3862c696d832b19f6d80bba99bf3074f717ea32d29ea05d6bac913b95c"
+    },
+    {
+      "path": "crowd/fan-11-lod0.glb",
+      "sha256": "61a63088e15ac1815a985647a4463a0e9957b56abc675509de33b779d0433acc"
+    },
+    {
+      "path": "crowd/fan-11-lod1.glb",
+      "sha256": "b39bb5e292fa20ffca919ddca0838f350e5c559a52fb0eb2861c3db6d5a8f8b5"
+    },
+    {
+      "path": "crowd/fan-11-lod2.glb",
+      "sha256": "84e7b8f63925ca0383433400e6e9e4da42408a2dade242d3ac21f531b3b6f6f2"
+    },
+    {
+      "path": "crowd/fan-12-lod0.glb",
+      "sha256": "d02950c18f0e2bb84ee7c153de197db13b34eb9502370d3dd0ced2984e6d2c77"
+    },
+    {
+      "path": "crowd/fan-12-lod1.glb",
+      "sha256": "60c796d631f243d59d43a00d8790209a628c89be607192ca02c50fe7794439f9"
+    },
+    {
+      "path": "crowd/fan-12-lod2.glb",
+      "sha256": "47380573154481f1a4eb4cca56eb096d9061c64d25b35b27476429a3c4e3024f"
+    },
+    {
+      "path": "crowd/fan-13-lod0.glb",
+      "sha256": "7bfcdda451fb2a9f5300e88ef044c31f74ae1b616c832dca90c28fb044f34190"
+    },
+    {
+      "path": "crowd/fan-13-lod1.glb",
+      "sha256": "20b8787fd54f20e0d5d4c6b94e042f2cc22d29fb982a0c0cecf8f895715c8794"
+    },
+    {
+      "path": "crowd/fan-13-lod2.glb",
+      "sha256": "c3a29a36668084c3e181f26097de9414b98e7d513e0e72335aa11724dae8b612"
+    },
+    {
+      "path": "crowd/fan-14-lod0.glb",
+      "sha256": "de265bb428f950f52afe84dec4577797d2579a00c44bd0fef02327741e907e6e"
+    },
+    {
+      "path": "crowd/fan-14-lod1.glb",
+      "sha256": "30106727ec812d7233b1d9224ff38cb73122d5f217b2e303f52c7cf135cc7118"
+    },
+    {
+      "path": "crowd/fan-14-lod2.glb",
+      "sha256": "b016a0a40827ad38c47075217afb0803bf9f07bc6d0cc4f545a5af0320f3dcbf"
+    },
+    {
+      "path": "crowd/fan-15-lod0.glb",
+      "sha256": "4ddd1797fca745c0584600ed4088ceac14c3310925a7b848421cb1bb90e017b0"
+    },
+    {
+      "path": "crowd/fan-15-lod1.glb",
+      "sha256": "d4e07e2802a84866be4db98f056b9ea5b38ccb960991c70e561b41fd1e17c8ae"
+    },
+    {
+      "path": "crowd/fan-15-lod2.glb",
+      "sha256": "b528a57284f3769cd1c197583a30d5f0a2589b73a8848480169cce7a9855197f"
+    },
+    {
+      "path": "crowd/fan-16-lod0.glb",
+      "sha256": "e9dfc1e1a0b001cd9954ecd4e912f9126ea7188de3510f69dd2112757256827b"
+    },
+    {
+      "path": "crowd/fan-16-lod1.glb",
+      "sha256": "b51eff2e9b128928b567c760f88b946bed23f87b8638ba0bbe8f94049d70e91a"
+    },
+    {
+      "path": "crowd/fan-16-lod2.glb",
+      "sha256": "c4b511033971d4bf0904bb36d561c79eae62df1b8434c5e10963f6780dd2da37"
+    }
+  ],
+  "contactSheet": {
+    "path": "verification/crowd-motion.webp",
+    "bytes": 29872
+  }
+}

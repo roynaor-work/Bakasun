@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "repositoryTestsUnmodified": true,
+  "initial": {
+    "command": "npm test",
+    "exitCode": 1,
+    "summary": {
+      "tests": 4326,
+      "suites": 0,
+      "pass": 4261,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 64,
+      "todo": 0,
+      "duration_ms": 1227125.634374
+    },
+    "logSha256": "c3f0744933c9c94639d5a765f14f10257cdadbf141fdcc03478039737db9b504",
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "testLine": 91,
+      "launchLine": 93,
+      "name": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "cause": "The Playwright package expects chromium_headless_shell-1234, which is not installed. Chromium launch occurs after starting an HTTP server and before try/finally, leaving the worker alive after the launch failure.",
+      "cleanup": "Verified the worker ancestry belonged to this test run and terminated only that leaked worker with SIGTERM; no repository code or test assertion was changed."
+    }
+  },
+  "targetedRerun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/hoops-realism-tail-playwright.mjs timeout 115s node --test tests/workout-royiki.test.mjs tests/workout-together.test.mjs tests/workout-voice-copy.test.mjs tests/workout-voice.test.mjs tests/workout-weekly.test.mjs tests/workout.test.mjs",
+    "exitCode": 0,
+    "summary": {
+      "tests": 58,
+      "suites": 0,
+      "pass": 58,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 27799.419649
+    },
+    "files": [
+      "tests/workout-royiki.test.mjs",
+      "tests/workout-together.test.mjs",
+      "tests/workout-voice-copy.test.mjs",
+      "tests/workout-voice.test.mjs",
+      "tests/workout-weekly.test.mjs",
+      "tests/workout.test.mjs"
+    ],
+    "logSha256": "7f17dcb7b7aa50007c8da90682f085a3fc9d0a21218675764396f7b5394c1155",
+    "adapterSource": "// Diagnostic environment adapter only. Repository tests are unchanged.\nimport path from 'node:path';\nimport {pathToFileURL} from 'node:url';\nconst originalModule=path.resolve(path.dirname(process.execPath),'../node_modules/playwright/index.mjs');\nconst {chromium:original}=await import(pathToFileURL(originalModule).href);\nexport const chromium=new Proxy(original,{\n get(target,key){\n  if(key==='launch')return(options={})=>target.launch({...options,executablePath:'/usr/bin/chromium',args:[...(options.args||[]),'--no-sandbox','--enable-unsafe-swiftshader']});\n  const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;\n }\n});\n",
+    "adapterScope": "Reuses the same Playwright installation. Only launch executablePath and required system-browser arguments change; no test is omitted or rewritten.",
+    "previouslyFailingBrowserTest": "passed; actually exercised all 50 exercises, rep counting, persisted settings and fallback"
+  },
+  "combinedCoverage": {
+    "uniquePassedTests": 4262,
+    "baselineSkippedTests": 64,
+    "remainingKnownFailures": 0,
+    "explanation": "4261 passed in the original run; its one failing browser test passed in the targeted rerun. Other targeted cases overlap the original run. The original npm command itself exited 1 and is not reported as having passed."
+  }
+}

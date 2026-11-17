@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 1,
+  "rig": "CrowdHuman18",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "bindPose": "natural standing, arms lowered",
+  "clips": [
+    {
+      "name": "sit",
+      "duration": 3.2,
+      "loop": true
+    },
+    {
+      "name": "stand",
+      "duration": 3.2,
+      "loop": true
+    },
+    {
+      "name": "clap",
+      "duration": 1.2,
+      "loop": true
+    },
+    {
+      "name": "jump",
+      "duration": 1.6,
+      "loop": true
+    },
+    {
+      "name": "disappointed",
+      "duration": 2.8,
+      "loop": true
+    },
+    {
+      "name": "shout",
+      "duration": 2.0,
+      "loop": true
+    }
+  ],
+  "lodPolicy": {
+    "thresholdsMetres": [
+      0,
+      12,
+      25
+    ],
+    "triangles": [
+      210,
+      90,
+      24
+    ],
+    "lod1": "Volumetric head/torso with continuous triangular arm lofts and crossed leg/neck ribbons; intended for medium-distance stands",
+    "lod2": "24-triangle double-sided skinned silhouette for distant stands; no texture impostor"
+  },
+  "provenance": {
+    "geometry": "Original anatomical retopology informed by existing CC0 characters2 body and head surfaces; no copied geometry",
+    "textures": "Original 256x128 painted face and garment atlas per fan, embedded in GLB",
+    "numeralGlyphs": "Rasterized system DejaVu Sans Bold; font software is not included",
+    "license": "CC0-1.0 for original artwork; DejaVu glyph design retains its upstream license"
+  },
+  "fans": [
+    {
+      "id": "fan-01",
+      "label": "ילד · גופיית ענבר",
+      "ageGroup": "child",
+      "height": 1.18,
+      "skin": "#A66D47",
+      "hairColor": "#241A15",
+      "shirt": "#E3AB35",
+      "outfit": "team-jersey",
+      "hair": "curls",
+      "accessories": [],
+      "build": 0.88,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-01-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36920
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-01-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 31220
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-01-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27720
+        }
+      ]
+    },
+    {
+      "id": "fan-02",
+      "label": "ילדה · ג׳קט מנטה",
+      "ageGroup": "child",
+      "height": 1.26,
+      "skin": "#E5B997",
+      "hairColor": "#593D2B",
+      "shirt": "#4C9C96",
+      "outfit": "jacket",
+      "hair": "pony",
+      "accessories": [],
+      "build": 0.84,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-02-lod0.glb",
+          "triangles": 210,
+          "vertices": 166,
+          "bytes": 35656
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-02-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30224
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-02-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26720
+        }
+      ]
+    },
+    {
+      "id": "fan-03",
+      "label": "נער · כובע כחול",
+      "ageGroup": "child",
+      "height": 1.38,
+      "skin": "#68452F",
+      "hairColor": "#211B17",
+      "shirt": "#366A9D",
+      "outfit": "team-jersey",
+      "hair": "cap",
+      "accessories": [
+        "cap"
+      ],
+      "build": 0.91,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-03-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 37092
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-03-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 31396
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-03-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27892
+        }
+      ]
+    },
+    {
+      "id": "fan-04",
+      "label": "נערה · חולצה אלמוגית",
+      "ageGroup": "child",
+      "height": 1.43,
+      "skin": "#BF8B60",
+      "hairColor": "#30231D",
+      "shirt": "#CC6552",
+      "outfit": "t-shirt",
+      "hair": "bob",
+      "accessories": [
+        "glasses"
+      ],
+      "build": 0.9,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-04-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 35968
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-04-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30264
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-04-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26756
+        }
+      ]
+    },
+    {
+      "id": "fan-05",
+      "label": "אוהד · חולצת קבוצה סגולה",
+      "ageGroup": "adult",
+      "height": 1.78,
+      "skin": "#784E36",
+      "hairColor": "#1D1716",
+      "shirt": "#74559A",
+      "outfit": "team-jersey",
+      "hair": "crop",
+      "accessories": [],
+      "build": 1.0,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-05-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36944
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-05-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 31248
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-05-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27744
+        }
+      ]
+    },
+    {
+      "id": "fan-06",
+      "label": "אוהדת · ג׳קט כהה",
+      "ageGroup": "adult",
+      "height": 1.69,
+      "skin": "#D9AC85",
+      "hairColor": "#3A241B",
+      "shirt": "#3C5666",
+      "outfit": "jacket",
+      "hair": "bun",
+      "accessories": [],
+      "build": 0.94,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-06-lod0.glb",
+          "triangles": 210,
+          "vertices": 166,
+          "bytes": 35648
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-06-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30220
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-06-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26708
+        }
+      ]
+    },
+    {
+      "id": "fan-07",
+      "label": "אוהד · ג׳קט זית",
+      "ageGroup": "adult",
+      "height": 1.84,
+      "skin": "#E4C2A4",
+      "hairColor": "#49352B",
+      "shirt": "#7E8851",
+      "outfit": "jacket",
+      "hair": "crop",
+      "accessories": [
+        "glasses"
+      ],
+      "build": 1.12,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-07-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36000
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-07-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30300
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-07-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26792
+        }
+      ]
+    },
+    {
+      "id": "fan-08",
+      "label": "אוהדת · גופיית ענבר",
+      "ageGroup": "adult",
+      "height": 1.72,
+      "skin": "#563A2B",
+      "hairColor": "#191615",
+      "shirt": "#DB9D2E",
+      "outfit": "team-jersey",
+      "hair": "curls",
+      "accessories": [],
+      "build": 0.96,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-08-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36896
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-08-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 31196
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-08-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27692
+        }
+      ]
+    },
+    {
+      "id": "fan-09",
+      "label": "אוהד · כובע אדום",
+      "ageGroup": "adult",
+      "height": 1.76,
+      "skin": "#AE7650",
+      "hairColor": "#2C201A",
+      "shirt": "#AF4F4C",
+      "outfit": "t-shirt",
+      "hair": "cap",
+      "accessories": [
+        "cap"
+      ],
+      "build": 1.04,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-09-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 35892
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-09-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30188
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-09-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26680
+        }
+      ]
+    },
+    {
+      "id": "fan-10",
+      "label": "אוהדת · חולצה טורקיז",
+      "ageGroup": "adult",
+      "height": 1.66,
+      "skin": "#B28760",
+      "hairColor": "#211A17",
+      "shirt": "#39968D",
+      "outfit": "t-shirt",
+      "hair": "pony",
+      "accessories": [],
+      "build": 0.95,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-10-lod0.glb",
+          "triangles": 210,
+          "vertices": 166,
+          "bytes": 35624
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-10-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30192
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-10-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26684
+        }
+      ]
+    },
+    {
+      "id": "fan-11",
+      "label": "אוהד · גופייה כחולה",
+      "ageGroup": "adult",
+      "height": 1.81,
+      "skin": "#C38A5D",
+      "hairColor": "#241D19",
+      "shirt": "#3D70A4",
+      "outfit": "team-jersey",
+      "hair": "bald",
+      "accessories": [],
+      "build": 1.1,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-11-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 37024
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-11-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 31324
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-11-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27824
+        }
+      ]
+    },
+    {
+      "id": "fan-12",
+      "label": "אוהדת · ג׳קט שזיף",
+      "ageGroup": "adult",
+      "height": 1.74,
+      "skin": "#E7BD9A",
+      "hairColor": "#5A3522",
+      "shirt": "#865269",
+      "outfit": "jacket",
+      "hair": "bob",
+      "accessories": [
+        "glasses"
+      ],
+      "build": 1.03,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-12-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 35992
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-12-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30288
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-12-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26784
+        }
+      ]
+    },
+    {
+      "id": "fan-13",
+      "label": "סבא · סריג שנהב",
+      "ageGroup": "senior",
+      "height": 1.7,
+      "skin": "#DAB18B",
+      "hairColor": "#B9B6AB",
+      "shirt": "#D7C9AA",
+      "outfit": "sweater",
+      "hair": "silver",
+      "accessories": [
+        "glasses"
+      ],
+      "build": 1.0,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-13-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36012
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-13-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30312
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-13-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26804
+        }
+      ]
+    },
+    {
+      "id": "fan-14",
+      "label": "סבתא · ג׳קט כחול",
+      "ageGroup": "senior",
+      "height": 1.59,
+      "skin": "#996D4C",
+      "hairColor": "#C7C3B8",
+      "shirt": "#4F7692",
+      "outfit": "jacket",
+      "hair": "bun",
+      "accessories": [
+        "glasses"
+      ],
+      "build": 1.1,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-14-lod0.glb",
+          "triangles": 210,
+          "vertices": 166,
+          "bytes": 35796
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-14-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30364
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-14-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26856
+        }
+      ]
+    },
+    {
+      "id": "fan-15",
+      "label": "סבא · גופיית ענבר",
+      "ageGroup": "senior",
+      "height": 1.75,
+      "skin": "#694A36",
+      "hairColor": "#B5AEA0",
+      "shirt": "#D2A437",
+      "outfit": "team-jersey",
+      "hair": "bald",
+      "accessories": [],
+      "build": 1.04,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-15-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 36628
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-15-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30932
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-15-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 27428
+        }
+      ]
+    },
+    {
+      "id": "fan-16",
+      "label": "סבתא · סריג מרווה",
+      "ageGroup": "senior",
+      "height": 1.63,
+      "skin": "#D5A47B",
+      "hairColor": "#C7B6A0",
+      "shirt": "#91A18A",
+      "outfit": "sweater",
+      "hair": "bob",
+      "accessories": [],
+      "build": 1.02,
+      "lods": [
+        {
+          "level": 0,
+          "path": "crowd/fan-16-lod0.glb",
+          "triangles": 210,
+          "vertices": 170,
+          "bytes": 35952
+        },
+        {
+          "level": 1,
+          "path": "crowd/fan-16-lod1.glb",
+          "triangles": 90,
+          "vertices": 97,
+          "bytes": 30244
+        },
+        {
+          "level": 2,
+          "path": "crowd/fan-16-lod2.glb",
+          "triangles": 24,
+          "vertices": 52,
+          "bytes": 26740
+        }
+      ]
+    }
+  ],
+  "totalGlbBytes": 1503780
+}

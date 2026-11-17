@@ -1,0 +1,397 @@
+{
+  "pass": true,
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium headless / SwiftShader",
+  "targetViewport": [
+    844,
+    390
+  ],
+  "checks": [
+    {
+      "name": "asset controls and public API are safe during delayed initial loading",
+      "pass": true
+    },
+    {
+      "name": "initial local model loading",
+      "players": 4,
+      "crowd": 16,
+      "pass": true
+    },
+    {
+      "name": "newer LOD choice survives delayed completion of older request",
+      "pass": true
+    },
+    {
+      "name": "three team palettes change rendered uniforms",
+      "pass": true,
+      "canvasHashes": [
+        "91ed201bdbc36937cfca53b4920a6448fd5fb929a3180d67e357d04505e11d4d",
+        "baf68f82ae4afc20c1876551f0706eb8c2a963a6beca74fea36fabb674acf8f9",
+        "f1f95a8a0e0050e0d80a1ee6386a7a6c5c29e09d13c5d2ebf2f4fc6c0039cda9"
+      ]
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "sit",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "stand",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "clap",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "jump",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "disappointed",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "shout",
+      "lod": 0,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "sit",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "stand",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "clap",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "jump",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "disappointed",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "shout",
+      "lod": 1,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "sit",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "stand",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "clap",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "jump",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "disappointed",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "crowd clip/LOD render",
+      "clip": "shout",
+      "lod": 2,
+      "pass": true
+    },
+    {
+      "name": "all four player closeups selectable",
+      "pass": true
+    },
+    {
+      "name": "browser decodes every OGG and MP3",
+      "pass": true,
+      "files": [
+        {
+          "id": "rim-hit-01",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.22709750566893425
+        },
+        {
+          "id": "rim-hit-01",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.23
+        },
+        {
+          "id": "rim-hit-02",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.252108843537415
+        },
+        {
+          "id": "rim-hit-02",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.25501133786848074
+        },
+        {
+          "id": "rim-hit-03",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.21210884353741496
+        },
+        {
+          "id": "rim-hit-03",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.21501133786848073
+        },
+        {
+          "id": "net-swish",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.3874829931972789
+        },
+        {
+          "id": "net-swish",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.39
+        },
+        {
+          "id": "backboard-thud",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.23709750566893423
+        },
+        {
+          "id": "backboard-thud",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.24
+        },
+        {
+          "id": "parquet-bounce",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.2946031746031746
+        },
+        {
+          "id": "parquet-bounce",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.2950113378684807
+        },
+        {
+          "id": "shoe-squeak",
+          "format": "ogg",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.37210884353741497
+        },
+        {
+          "id": "shoe-squeak",
+          "format": "mp3",
+          "channels": 1,
+          "sampleRate": 44100,
+          "duration": 0.37501133786848073
+        }
+      ]
+    },
+    {
+      "name": "portrait layout without horizontal overflow",
+      "pass": true,
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "name": "no remote requests, console errors, missing files, or page errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/backboard-thud.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/backboard-thud.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/catalog.json",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/net-swish.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/net-swish.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/parquet-bounce.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/parquet-bounce.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-01.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-01.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-02.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-02.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-03.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/rim-hit-03.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/shoe-squeak.mp3",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/audio/shoe-squeak.ogg",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/catalog.json",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-01-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-01-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-01-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-02-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-02-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-02-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-03-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-03-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-03-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-04-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-04-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-04-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-05-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-05-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-05-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-06-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-06-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-06-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-07-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-07-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-07-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-08-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-08-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-08-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-09-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-09-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-09-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-10-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-10-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-10-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-11-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-11-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-11-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-12-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-12-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-12-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-13-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-13-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-13-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-14-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-14-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-14-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-15-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-15-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-15-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-16-lod0.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-16-lod1.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/crowd/fan-16-lod2.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/catalog.json",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/guard.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/masks/guard-team.png",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/masks/power-team.png",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/masks/shooter-team.png",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/masks/wing-team.png",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/power.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/shooter.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/players/wing.glb",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/preview.css",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/preview.html",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/preview.mjs",
+    "http://127.0.0.1:8765/workout/island/design/hoops-realism-v2/source/players-apply-team.mjs",
+    "http://127.0.0.1:8765/workout/island/vendor/BufferGeometryUtils.js",
+    "http://127.0.0.1:8765/workout/island/vendor/GLTFLoader.js",
+    "http://127.0.0.1:8765/workout/island/vendor/three.module.js"
+  ],
+  "finalState": {
+    "ready": true,
+    "mode": "lineup",
+    "clip": "stand",
+    "lod": 0,
+    "team": "mint",
+    "player": 3,
+    "paused": true,
+    "time": 0.4,
+    "loadedModels": 52,
+    "errors": [],
+    "loading": false,
+    "players": [
+      {
+        "id": "guard",
+        "number": "07",
+        "height": 1.78
+      },
+      {
+        "id": "shooter",
+        "number": "12",
+        "height": 1.9
+      },
+      {
+        "id": "wing",
+        "number": "24",
+        "height": 2
+      },
+      {
+        "id": "power",
+        "number": "35",
+        "height": 2.1
+      }
+    ],
+    "crowdLoaded": 16,
+    "loadedLODs": [
+      0,
+      1,
+      2
+    ],
+    "canvas": {
+      "width": 390,
+      "height": 674
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "drawCalls": 88,
+    "triangles": 49017
+  },
+  "limitation": "Software rendering is functional verification; this is not a physical-phone frame-rate measurement."
+}

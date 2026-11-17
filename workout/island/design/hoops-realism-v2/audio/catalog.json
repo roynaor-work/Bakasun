@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "license": "CC0-1.0",
+  "provenance": "Original deterministic procedural synthesis; no external audio samples",
+  "file_limit_bytes": 40000,
+  "sample_rate_hz": 44100,
+  "channels": 1,
+  "assets": [
+    {
+      "id": "rim-hit-01",
+      "label_he": "פגיעה בטבעת · רכה",
+      "event": "rim",
+      "description": "Short damped inharmonic metal tick, low soft ball contact",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.23,
+      "suggested_gain": 0.72,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/rim-hit-01.ogg",
+          "bytes": 4269,
+          "sha256": "36f96c1049becd3da6f5d8c2dc3e032e418c7bf328a9345ec1266c24a7123e94",
+          "metrics": {
+            "decoded_samples": 10015,
+            "decoded_duration_seconds": 0.227098,
+            "peak_dbfs": -4.529,
+            "rms_dbfs": -21.775,
+            "dc_mean": -0.00014209,
+            "tail_15ms_rms_dbfs": -60.433,
+            "energy_95_percent_seconds": 0.059138,
+            "spectral_centroid_hz": 787.6,
+            "energy_below_300hz_percent": 1.648,
+            "last_sample_abs": 2.885e-05,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/rim-hit-01.mp3",
+          "bytes": 3468,
+          "sha256": "c90e26e933b12f2eef91d6e871c2539619c8d546e7abd493508c2aaf07fffd9c",
+          "metrics": {
+            "decoded_samples": 10143,
+            "decoded_duration_seconds": 0.23,
+            "peak_dbfs": -4.676,
+            "rms_dbfs": -22.332,
+            "dc_mean": -0.00014218,
+            "tail_15ms_rms_dbfs": -63.083,
+            "energy_95_percent_seconds": 0.059116,
+            "spectral_centroid_hz": 791.0,
+            "energy_below_300hz_percent": 1.632,
+            "last_sample_abs": 5.3e-07,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rim-hit-02",
+      "label_he": "פגיעה בטבעת · מעט גבוהה",
+      "event": "rim",
+      "description": "Short alternate rim tick; no sustained bell resonance",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.255011,
+      "suggested_gain": 0.69,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/rim-hit-02.ogg",
+          "bytes": 4253,
+          "sha256": "a0c72a0aec12ca921b840a9024b8fc919cce4fef9bc9b7ee17d63283e39ad866",
+          "metrics": {
+            "decoded_samples": 11118,
+            "decoded_duration_seconds": 0.252109,
+            "peak_dbfs": -5.042,
+            "rms_dbfs": -21.306,
+            "dc_mean": -0.00012376,
+            "tail_15ms_rms_dbfs": -58.744,
+            "energy_95_percent_seconds": 0.067574,
+            "spectral_centroid_hz": 853.3,
+            "energy_below_300hz_percent": 1.625,
+            "last_sample_abs": 7.085e-05,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/rim-hit-02.mp3",
+          "bytes": 3781,
+          "sha256": "220ac20f2b52a3ce65ec3bcb38f2a0f51d79d03c4e1f1465f2c4820850a72bc5",
+          "metrics": {
+            "decoded_samples": 11246,
+            "decoded_duration_seconds": 0.255011,
+            "peak_dbfs": -5.022,
+            "rms_dbfs": -21.744,
+            "dc_mean": -0.00017832,
+            "tail_15ms_rms_dbfs": -61.574,
+            "energy_95_percent_seconds": 0.067007,
+            "spectral_centroid_hz": 860.3,
+            "energy_below_300hz_percent": 1.62,
+            "last_sample_abs": 6e-08,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "rim-hit-03",
+      "label_he": "פגיעה בטבעת · עמוקה",
+      "event": "rim",
+      "description": "Lower, tighter muted metal contact",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.215011,
+      "suggested_gain": 0.75,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/rim-hit-03.ogg",
+          "bytes": 4167,
+          "sha256": "cd129392c4abc8aeef1bd1f695908b194f2fc3c3e26ae607dadb33eb2b870fbe",
+          "metrics": {
+            "decoded_samples": 9354,
+            "decoded_duration_seconds": 0.212109,
+            "peak_dbfs": -4.284,
+            "rms_dbfs": -22.501,
+            "dc_mean": -0.00017453,
+            "tail_15ms_rms_dbfs": -64.904,
+            "energy_95_percent_seconds": 0.05059,
+            "spectral_centroid_hz": 732.9,
+            "energy_below_300hz_percent": 1.827,
+            "last_sample_abs": 4.511e-05,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/rim-hit-03.mp3",
+          "bytes": 3468,
+          "sha256": "ad2844479b37f6239d1db23c941dda92b9de8ec414f5ad8764f3a8dadefb1beb",
+          "metrics": {
+            "decoded_samples": 9482,
+            "decoded_duration_seconds": 0.215011,
+            "peak_dbfs": -4.978,
+            "rms_dbfs": -22.959,
+            "dc_mean": -0.00019437,
+            "tail_15ms_rms_dbfs": -67.609,
+            "energy_95_percent_seconds": 0.050454,
+            "spectral_centroid_hz": 732.3,
+            "energy_below_300hz_percent": 1.794,
+            "last_sample_abs": 4e-08,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "net-swish",
+      "label_he": "סווש רשת",
+      "event": "net",
+      "description": "Descending noisy cord friction with three tiny thread flicks",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.39,
+      "suggested_gain": 0.78,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/net-swish.ogg",
+          "bytes": 6614,
+          "sha256": "bfab3201337aaeb58980ca04105bba684b87e2cd6c3ce91048320f1b8034fcda",
+          "metrics": {
+            "decoded_samples": 18112,
+            "decoded_duration_seconds": 0.410703,
+            "peak_dbfs": -4.971,
+            "rms_dbfs": -24.511,
+            "dc_mean": -2.37e-06,
+            "tail_15ms_rms_dbfs": -79.26,
+            "energy_95_percent_seconds": 0.119932,
+            "spectral_centroid_hz": 4257.9,
+            "energy_below_300hz_percent": 0.013,
+            "last_sample_abs": 0.0,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/net-swish.mp3",
+          "bytes": 5349,
+          "sha256": "bf054e9e2c137674b1d1fcbec1a20951a0967acc6da494f4e31583f7e9d0a105",
+          "metrics": {
+            "decoded_samples": 17199,
+            "decoded_duration_seconds": 0.39,
+            "peak_dbfs": -4.978,
+            "rms_dbfs": -24.549,
+            "dc_mean": 1.77e-06,
+            "tail_15ms_rms_dbfs": -59.219,
+            "energy_95_percent_seconds": 0.119637,
+            "spectral_centroid_hz": 4232.9,
+            "energy_below_300hz_percent": 0.012,
+            "last_sample_abs": 1.713e-05,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "backboard-thud",
+      "label_he": "חבטה עמומה בלוח",
+      "event": "backboard",
+      "description": "Damped low panel and rubber impact, no glass-shatter sample",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.24,
+      "suggested_gain": 0.76,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/backboard-thud.ogg",
+          "bytes": 4115,
+          "sha256": "18e411d43e9d130fcf80a949bc1756d1ae256321ce4f73ee8c077915484a16f9",
+          "metrics": {
+            "decoded_samples": 10456,
+            "decoded_duration_seconds": 0.237098,
+            "peak_dbfs": -4.722,
+            "rms_dbfs": -21.183,
+            "dc_mean": 0.00020565,
+            "tail_15ms_rms_dbfs": -83.743,
+            "energy_95_percent_seconds": 0.042041,
+            "spectral_centroid_hz": 168.3,
+            "energy_below_300hz_percent": 92.539,
+            "last_sample_abs": 2.6e-07,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/backboard-thud.mp3",
+          "bytes": 3781,
+          "sha256": "dc7b4da0db1e8d4452738242cb4f78dc60c0bbe58671e8b263ca154e5aa0ab52",
+          "metrics": {
+            "decoded_samples": 10584,
+            "decoded_duration_seconds": 0.24,
+            "peak_dbfs": -4.938,
+            "rms_dbfs": -21.699,
+            "dc_mean": -0.00011501,
+            "tail_15ms_rms_dbfs": -86.983,
+            "energy_95_percent_seconds": 0.042041,
+            "spectral_centroid_hz": 169.5,
+            "energy_below_300hz_percent": 92.408,
+            "last_sample_abs": 0.0,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "parquet-bounce",
+      "label_he": "כדור על פרקט",
+      "event": "bounce",
+      "description": "Rubber air-cavity pitch drop, woody contact, short early reflection",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.295011,
+      "suggested_gain": 0.85,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/parquet-bounce.ogg",
+          "bytes": 4119,
+          "sha256": "bd41d1a234095462b3281b267a8369e144ac760c541a9d68bdabbc26d4a081f2",
+          "metrics": {
+            "decoded_samples": 14016,
+            "decoded_duration_seconds": 0.317823,
+            "peak_dbfs": -4.499,
+            "rms_dbfs": -19.43,
+            "dc_mean": -0.0001724,
+            "tail_15ms_rms_dbfs": -102.927,
+            "energy_95_percent_seconds": 0.06415,
+            "spectral_centroid_hz": 150.7,
+            "energy_below_300hz_percent": 96.989,
+            "last_sample_abs": 0.0,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/parquet-bounce.mp3",
+          "bytes": 4408,
+          "sha256": "8377e5e92b4194afcc9321cc3d7eda0752c7b76cdc7edacd536f3474a1f5c0a2",
+          "metrics": {
+            "decoded_samples": 13010,
+            "decoded_duration_seconds": 0.295011,
+            "peak_dbfs": -4.859,
+            "rms_dbfs": -19.609,
+            "dc_mean": -2.581e-05,
+            "tail_15ms_rms_dbfs": -72.432,
+            "energy_95_percent_seconds": 0.064263,
+            "spectral_centroid_hz": 151.5,
+            "energy_below_300hz_percent": 96.9,
+            "last_sample_abs": 1e-08,
+            "clipped_samples": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "shoe-squeak",
+      "label_he": "חריקת נעלי כדורסל",
+      "event": "shoe",
+      "description": "Two short changing-pitch stick-slip contacts and rubber friction",
+      "loop": false,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "duration_seconds": 0.375011,
+      "suggested_gain": 0.52,
+      "license": "CC0-1.0",
+      "source": "source/build-audio.py",
+      "files": {
+        "ogg": {
+          "path": "audio/shoe-squeak.ogg",
+          "bytes": 6213,
+          "sha256": "499cc42d3fab2282c67a5dbaf04a785dc7c99b9c89cf971c88fed18c8ee422fd",
+          "metrics": {
+            "decoded_samples": 16410,
+            "decoded_duration_seconds": 0.372109,
+            "peak_dbfs": -5.94,
+            "rms_dbfs": -18.803,
+            "dc_mean": -3.87e-06,
+            "tail_15ms_rms_dbfs": -105.376,
+            "energy_95_percent_seconds": 0.223946,
+            "spectral_centroid_hz": 1979.5,
+            "energy_below_300hz_percent": 0.026,
+            "last_sample_abs": 7.6e-07,
+            "clipped_samples": 0
+          }
+        },
+        "mp3": {
+          "path": "audio/shoe-squeak.mp3",
+          "bytes": 5349,
+          "sha256": "dc1d92118b78f09021273fc5218e7d1c2cf5eafbf5dbf48657ef49c67a80b2b5",
+          "metrics": {
+            "decoded_samples": 16538,
+            "decoded_duration_seconds": 0.375011,
+            "peak_dbfs": -4.908,
+            "rms_dbfs": -18.516,
+            "dc_mean": -3.13e-06,
+            "tail_15ms_rms_dbfs": -111.294,
+            "energy_95_percent_seconds": 0.224218,
+            "spectral_centroid_hz": 1969.8,
+            "energy_below_300hz_percent": 0.023,
+            "last_sample_abs": 0.0,
+            "clipped_samples": 0
+          }
+        }
+      }
+    }
+  ],
+  "total_bytes": 63354
+}

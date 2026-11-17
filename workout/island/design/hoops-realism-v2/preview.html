@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#131416">
+  <meta name="color-scheme" content="dark">
+  <title>אנשים על הפרקט · Hoops Realism 02</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main id="studio" aria-label="תצוגת נכסי כדורסל">
+    <header>
+      <div class="identity"><span class="brand-mark" aria-hidden="true">◉</span><div><h1>אנשים על הפרקט</h1><p>HOOPS REALISM <span>02</span></p></div></div>
+      <div class="summary"><span>16 אוהדים</span><i></i><span>4 מבני גוף</span><i></i><span>7 צלילים</span></div>
+      <a href="./REPORT.md" class="report-link">דוח מסירה <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 9 9 3M3 3h6v6" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </header>
+    <section id="stage" aria-label="תצוגה תלת־ממדית; גרירה מסובבת את המבט">
+      <canvas id="view" aria-label="שחקני כדורסל ואוהדים" tabindex="0"></canvas>
+      <div class="stage-caption"><span class="eyebrow" id="eyebrow">ארבעה על הפרקט</span><h2 id="scene-title">אופי. גוף. תנועה.</h2><p id="scene-subtitle">מדים ממוספרים, פנים אנושיות, פרופורציות של ספורטאים</p></div>
+      <div id="model-picker" class="model-picker" role="group" aria-label="בחירת שחקן"></div>
+      <div class="stage-meta"><span class="live-dot"></span><span id="asset-status" role="status">טוען נכסים…</span></div>
+      <div class="view-help"><span>גרירה לסיבוב</span><span aria-hidden="true">↔</span><button id="reset-view" aria-label="איפוס המבט">איפוס מבט</button></div>
+      <div id="loading" role="status"><span class="spinner" aria-hidden="true"></span><strong>מכינים את הפרקט</strong><span>טוענים את הדגמים המקומיים</span></div>
+      <div id="error" role="alert" hidden><strong>התצוגה לא נטענה</strong><span id="error-detail"></span><span>יש לפתוח דרך שרת HTTP מקומי משורש המאגר.</span></div>
+    </section>
+    <footer inert aria-disabled="true" aria-busy="true">
+      <nav class="tabs" aria-label="בחירת תצוגה"><button data-mode="lineup" aria-pressed="true">סגל</button><button data-mode="crowd" aria-pressed="false">קהל</button><button data-mode="closeup" aria-pressed="false">מקרוב</button></nav>
+      <label class="field clip-field"><span>תנועה</span><select id="clip" aria-label="תנועת הקהל"><option value="stand">עמידה</option><option value="sit">ישיבה</option><option value="clap">מחיאות כפיים</option><option value="jump">קפיצה בשמחה</option><option value="disappointed">אכזבה</option><option value="shout">צעקה</option></select></label>
+      <label class="field lod-field"><span>קהל</span><select id="lod" aria-label="רמת פירוט הקהל"><option value="0">210 △</option><option value="1">90 △</option><option value="2">24 △</option></select></label>
+      <div class="team-field" role="group" aria-label="צבעי הקבוצה"><button class="team-chip mint" data-team="mint" aria-label="קבוצה מנטה וקורל" aria-pressed="true"></button><button class="team-chip purple" data-team="purple" aria-label="קבוצה סגול וזהב" aria-pressed="false"></button><button class="team-chip blue" data-team="blue" aria-label="קבוצה כחול ולבן" aria-pressed="false"></button></div>
+      <div class="audio-field"><select id="sound" aria-label="בחירת צליל כדורסל"><option>צלילים…</option></select><button id="play-sound" aria-label="השמעת הצליל הנבחר">♪</button></div>
+      <button id="pause" class="icon-button" aria-label="השהיית האנימציה" aria-pressed="false">Ⅱ</button>
+    </footer>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

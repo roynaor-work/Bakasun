@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "rig": {
+    "path": "players/rig.json",
+    "bones": 18,
+    "canonical": true,
+    "axes": {
+      "up": "+Y",
+      "forward": "+Z",
+      "left": "+X"
+    },
+    "restPose": "arms-down, identity local rotations"
+  },
+  "players": [
+    {
+      "id": "guard",
+      "source": "../hoops-v7/characters/models/pg.glb",
+      "label": "רכז זריז",
+      "bodyType": "compact-lean",
+      "number": "07",
+      "heightMeters": 1.78,
+      "width": 0.98,
+      "depth": 0.96,
+      "primary": "#47b8bf",
+      "secondary": "#123f52",
+      "trim": "#f4dfba",
+      "model": "players/guard.glb",
+      "mask": "players/masks/guard-team.png",
+      "canonicalHeightMeters": 1.6433900194242597,
+      "scaleToPreferredHeight": 1.0831269381954747,
+      "groundOffsetMeters": -0.0065411729738116264,
+      "triangles": 11511,
+      "vertices": 7357,
+      "bytes": 493996,
+      "bounds": {
+        "min": [
+          -0.2509693503379822,
+          0.0065411729738116264,
+          -0.11273448914289474
+        ],
+        "max": [
+          0.24963077902793884,
+          1.6499311923980713,
+          0.1778816431760788
+        ]
+      },
+      "focusVertices": 1868,
+      "teamMaterials": {
+        "primary": [
+          "team_primary"
+        ],
+        "secondary": [
+          "team_secondary",
+          "compression"
+        ],
+        "trim": [
+          "team_trim"
+        ]
+      },
+      "atlasBytes": 119102,
+      "maskBytes": 1306,
+      "sourceSha256": "9cffb187cce91eb732b391039e314ae7d655c93bb07dd95785c78d9946aef7aa",
+      "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+    },
+    {
+      "id": "shooter",
+      "source": "../hoops-v7/characters/models/sg.glb",
+      "label": "קלע ארוך",
+      "bodyType": "long-lean",
+      "number": "12",
+      "heightMeters": 1.9,
+      "width": 0.97,
+      "depth": 0.96,
+      "primary": "#667bce",
+      "secondary": "#253557",
+      "trim": "#f4dfba",
+      "model": "players/shooter.glb",
+      "mask": "players/masks/shooter-team.png",
+      "canonicalHeightMeters": 1.660118455067277,
+      "scaleToPreferredHeight": 1.144496643718717,
+      "groundOffsetMeters": -0.003907209262251854,
+      "triangles": 12054,
+      "vertices": 7277,
+      "bytes": 498228,
+      "bounds": {
+        "min": [
+          -0.25710994005203247,
+          0.003907209262251854,
+          -0.12514962255954742
+        ],
+        "max": [
+          0.2571055591106415,
+          1.6640256643295288,
+          0.1937004029750824
+        ]
+      },
+      "focusVertices": 1826,
+      "teamMaterials": {
+        "primary": [
+          "team_primary"
+        ],
+        "secondary": [
+          "team_secondary",
+          "compression"
+        ],
+        "trim": [
+          "team_trim"
+        ]
+      },
+      "atlasBytes": 123270,
+      "maskBytes": 1243,
+      "sourceSha256": "881ced1dafff228a1286dff13a5c3fd4915fe49cd4491a3081eed8b2d176b5f9",
+      "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+    },
+    {
+      "id": "wing",
+      "source": "../hoops-v7/characters/models/sf.glb",
+      "label": "פורוורד אתלטי",
+      "bodyType": "balanced-athletic",
+      "number": "24",
+      "heightMeters": 2,
+      "width": 1.02,
+      "depth": 1.035,
+      "primary": "#d96848",
+      "secondary": "#512c37",
+      "trim": "#f4dfba",
+      "model": "players/wing.glb",
+      "mask": "players/masks/wing-team.png",
+      "canonicalHeightMeters": 1.6791313117719255,
+      "scaleToPreferredHeight": 1.1910920759910513,
+      "groundOffsetMeters": 0.000720543263014406,
+      "triangles": 12475,
+      "vertices": 8538,
+      "bytes": 546492,
+      "bounds": {
+        "min": [
+          -0.27929478883743286,
+          -0.000720543263014406,
+          -0.14229489862918854
+        ],
+        "max": [
+          0.2793160676956177,
+          1.6784107685089111,
+          0.22499534487724304
+        ]
+      },
+      "focusVertices": 1743,
+      "teamMaterials": {
+        "primary": [
+          "team_primary"
+        ],
+        "secondary": [
+          "team_secondary",
+          "compression"
+        ],
+        "trim": [
+          "team_trim"
+        ]
+      },
+      "atlasBytes": 118578,
+      "maskBytes": 1268,
+      "sourceSha256": "4787f93c548e153ddb5d25b2d380e786fc1f1e07e592c99fec40dfc16b63eefd",
+      "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+    },
+    {
+      "id": "power",
+      "source": "../hoops-v7/characters/models/pf.glb",
+      "label": "פאוור רחב",
+      "bodyType": "broad-muscular",
+      "number": "35",
+      "heightMeters": 2.1,
+      "width": 1.065,
+      "depth": 1.07,
+      "primary": "#5e9e78",
+      "secondary": "#183e3c",
+      "trim": "#f4dfba",
+      "model": "players/power.glb",
+      "mask": "players/masks/power-team.png",
+      "canonicalHeightMeters": 1.7033139918930829,
+      "scaleToPreferredHeight": 1.2328907118681247,
+      "groundOffsetMeters": 0.004721567500382662,
+      "triangles": 12149,
+      "vertices": 7236,
+      "bytes": 497424,
+      "bounds": {
+        "min": [
+          -0.31357038021087646,
+          -0.004721567500382662,
+          -0.1610426902770996
+        ],
+        "max": [
+          0.3135155737400055,
+          1.6985924243927002,
+          0.2706391215324402
+        ]
+      },
+      "focusVertices": 1787,
+      "teamMaterials": {
+        "primary": [
+          "team_primary"
+        ],
+        "secondary": [
+          "team_secondary",
+          "compression"
+        ],
+        "trim": [
+          "team_trim"
+        ]
+      },
+      "atlasBytes": 122528,
+      "maskBytes": 1288,
+      "sourceSha256": "bd9ec13349d21fd9ec1023d180ea013194d4c5f64c48e912063245d95718eb69",
+      "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262"
+    }
+  ]
+}
