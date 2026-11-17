@@ -1,0 +1,4525 @@
+{
+  "schemaVersion": 2,
+  "id": "city-buildings-v2",
+  "titleHe": "העיר שלי · אוסף מבנים 02",
+  "license": "CC0-1.0",
+  "units": "metres",
+  "axes": {
+    "up": "+Y",
+    "front": "+Z",
+    "pivot": "ground centre of reserved rectangular footprint"
+  },
+  "grid": {
+    "cellSize": 1,
+    "coordinates": "occupiedCells are [column,row] from the footprint's negative X/Z corner"
+  },
+  "stages": [
+    "foundation",
+    "half-built",
+    "complete"
+  ],
+  "palettes": [
+    {
+      "id": "sunrise",
+      "nameHe": "זריחה",
+      "colors": {
+        "wall": "f3dfb3",
+        "accent": "da795e",
+        "roof": "587d80",
+        "trim": "fff3d6",
+        "leaf": "719c78"
+      }
+    },
+    {
+      "id": "seabreeze",
+      "nameHe": "בריזה",
+      "colors": {
+        "wall": "beded0",
+        "accent": "547fa3",
+        "roof": "b27568",
+        "trim": "fff3d6",
+        "leaf": "638c78"
+      }
+    }
+  ],
+  "constraints": {
+    "minTrianglesPerGLB": 200,
+    "maxTrianglesPerGLB": 800,
+    "maxPackageBytes": 8000000,
+    "textures": false,
+    "extensions": [],
+    "externalRuntimeRequests": false
+  },
+  "openingEffect": {
+    "module": "effects.mjs",
+    "factory": "createOpeningEffect",
+    "anchorField": "asset.openingAnchor",
+    "particles": 64,
+    "durationSeconds": 1.65,
+    "respectsReducedMotion": true
+  },
+  "offline": {
+    "archive": "city-buildings-v2-offline.zip",
+    "launcher": "serve.py",
+    "entry": "preview.html",
+    "networkRequired": false
+  },
+  "buildings": [
+    {
+      "id": "school",
+      "nameHe": "בית ספר",
+      "category": "education",
+      "silhouette": "clock tower, classroom wings, pitched roofs",
+      "icon": "pencil",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 120,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.11,
+            0.57
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/school-sunrise-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18912,
+              "sha256": "cec7e9d46d1d5fdf66cb0d0317de8b9089cdb9c4dc95fc477caef0f735aad702",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/school-sunrise-half-built.glb",
+              "triangles": 416,
+              "vertices": 762,
+              "bytes": 25088,
+              "sha256": "82be075fded9a56e0ed52f25b1c96e42b4f6f80ff65c91194023d69537eba2b4",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/school-sunrise-complete.glb",
+              "triangles": 556,
+              "vertices": 1116,
+              "bytes": 35832,
+              "sha256": "e13e157801cfd364776b21a5c1d4fccbbec805d6b8bfe6a47df3635539746aee",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.27,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.42,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.11,
+            0.57
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/school-seabreeze-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18912,
+              "sha256": "039a8cf9da62a3b7df35b203336071b8cf6a02e556c328288d8684e13dd790a7",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/school-seabreeze-half-built.glb",
+              "triangles": 416,
+              "vertices": 762,
+              "bytes": 25092,
+              "sha256": "2eba7dd45d619fa59a3c6f456a030b470123ed7b932a2a937df04606fc508677",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/school-seabreeze-complete.glb",
+              "triangles": 556,
+              "vertices": 1116,
+              "bytes": 35836,
+              "sha256": "5da92dd560148b34177c6047e2333f8846a66e1f7a67f739392bafc0320035fa",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.27,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.42,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital",
+      "nameHe": "בית חולים",
+      "category": "civic",
+      "silhouette": "stepped clinic wings, rooftop services, covered entrance",
+      "icon": "heart",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 80,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            -0.36,
+            1.7,
+            0.74
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/hospital-sunrise-foundation.glb",
+              "triangles": 296,
+              "vertices": 584,
+              "bytes": 19380,
+              "sha256": "a4a24d1c53aba906720b7a8d7de422b32d872edcdf49f50d3dc5e2cb25f69ad5",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/hospital-sunrise-half-built.glb",
+              "triangles": 368,
+              "vertices": 672,
+              "bytes": 22288,
+              "sha256": "1701a3c354b8f4118a1948b6fc6145fc4bcd6dc1faad3b2d2ef95e8ab8683898",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/hospital-sunrise-complete.glb",
+              "triangles": 464,
+              "vertices": 920,
+              "bytes": 29796,
+              "sha256": "b0db85e0cdbe8dd86f9456dfdd474f83c3a3c42fa92c1e4dd72296e3d2b672be",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.365,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.515,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            -0.36,
+            1.7,
+            0.74
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/hospital-seabreeze-foundation.glb",
+              "triangles": 296,
+              "vertices": 584,
+              "bytes": 19384,
+              "sha256": "8bcf08fe2c7e744a60e2d11fb1fd3c772ca9b664398d666a30d25e819f6ff4b2",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/hospital-seabreeze-half-built.glb",
+              "triangles": 368,
+              "vertices": 672,
+              "bytes": 22288,
+              "sha256": "585dd6efa06ac143da10f0630311c50cb08cd0fc3d098492bf92e66f37232ddc",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/hospital-seabreeze-complete.glb",
+              "triangles": 464,
+              "vertices": 920,
+              "bytes": 29800,
+              "sha256": "8961fc933d8b13d558d7fcd49295993c9256ac6e0cc6ac3ac9067b1904fba980",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.365,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.515,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "fire-station",
+      "nameHe": "תחנת כיבוי",
+      "category": "civic",
+      "silhouette": "two garage bays, hose tower, rooftop beacons",
+      "icon": "flame",
+      "footprint": {
+        "columns": 3,
+        "rows": 2,
+        "width": 3,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "cellCount": 6,
+        "capacityPeople": 18,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0.36,
+            1.46,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/fire-station-sunrise-foundation.glb",
+              "triangles": 288,
+              "vertices": 570,
+              "bytes": 18952,
+              "sha256": "9a77cf3e0a1bec78f673c115152c8806361f04828a2e7e888cd185a76b17537d",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/fire-station-sunrise-half-built.glb",
+              "triangles": 312,
+              "vertices": 562,
+              "bytes": 18880,
+              "sha256": "f7a4eebe8d2168feb3ce60866a1b50152a20f0f1d061d44f931d05db87a2483c",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/fire-station-sunrise-complete.glb",
+              "triangles": 308,
+              "vertices": 606,
+              "bytes": 20088,
+              "sha256": "a81a7f4d7d21d74b95c637bd90d46c84dfd4f324a3d52afdb48cde209c6dc3ce",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  2.34,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.4899999999999998,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0.36,
+            1.46,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/fire-station-seabreeze-foundation.glb",
+              "triangles": 288,
+              "vertices": 570,
+              "bytes": 18956,
+              "sha256": "479b55849e56d8678ff4bd0af33d9a38c16cbebb296ed808daa15a286fdcaec8",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/fire-station-seabreeze-half-built.glb",
+              "triangles": 312,
+              "vertices": 562,
+              "bytes": 18884,
+              "sha256": "36fcf02ebe056e461254b363b98a79aba7d4036f509ac431ae85abde84b2e50d",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/fire-station-seabreeze-complete.glb",
+              "triangles": 308,
+              "vertices": 606,
+              "bytes": 20092,
+              "sha256": "7978e9264fb043d5fc5fab4bda331016048349e9dda5eeafaff81555e9cc1c25",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  2.34,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.4899999999999998,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "police-station",
+      "nameHe": "תחנת משטרה",
+      "category": "civic",
+      "silhouette": "radio mast, corner office, sheltered public entrance",
+      "icon": "radio",
+      "footprint": {
+        "columns": 2,
+        "rows": 2,
+        "width": 2,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cellCount": 4,
+        "capacityPeople": 20,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            -0.26,
+            1.76,
+            0.03
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/police-station-sunrise-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20616,
+              "sha256": "6bea7faad017daf256921ab221e1582f90f9066a5c0e13ea997c2bda4401f8ee",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/police-station-sunrise-half-built.glb",
+              "triangles": 288,
+              "vertices": 536,
+              "bytes": 18016,
+              "sha256": "c37ddb46332677ad41c8657e37f2485014fd7f3d66bf2e6b5c196a1bc338db8d",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/police-station-sunrise-complete.glb",
+              "triangles": 348,
+              "vertices": 696,
+              "bytes": 22844,
+              "sha256": "e4c9024d3536264d65c2fcaaf07ecd528837469dd1cf58db4c7d6041cf1eda4b",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.29,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.44,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            -0.26,
+            1.76,
+            0.03
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/police-station-seabreeze-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20616,
+              "sha256": "3598b824ca5feaa84c74cf94ea99943a5ddcb753fb8d2f8bb418d8849c616f06",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/police-station-seabreeze-half-built.glb",
+              "triangles": 288,
+              "vertices": 536,
+              "bytes": 18016,
+              "sha256": "86f5d9a4b0ad62dd887d49b6a90b819928b04fec33ed0c3e99f2c77b3a1c27ee",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/police-station-seabreeze-complete.glb",
+              "triangles": 348,
+              "vertices": 696,
+              "bytes": 22844,
+              "sha256": "66f8d0ef46fe3bfb2d71f65fe32d40594af2d344709683b87c213d59b44c0cd7",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.29,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.44,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "nameHe": "ספריה",
+      "category": "culture",
+      "silhouette": "sawtooth reading skylights and recessed bookcase windows",
+      "icon": "book",
+      "footprint": {
+        "columns": 3,
+        "rows": 2,
+        "width": 3,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "cellCount": 6,
+        "capacityPeople": 45,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            0.92,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/library-sunrise-foundation.glb",
+              "triangles": 288,
+              "vertices": 576,
+              "bytes": 19108,
+              "sha256": "79a5b29bc51899dd34dab321aa587549575b064dc27d21e106313689b955f35f",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/library-sunrise-half-built.glb",
+              "triangles": 264,
+              "vertices": 488,
+              "bytes": 16508,
+              "sha256": "e3332a88c81b9ea81e576821f2da1d9eda157ca252ac2a71a254c469c13532c8",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/library-sunrise-complete.glb",
+              "triangles": 408,
+              "vertices": 822,
+              "bytes": 26724,
+              "sha256": "df64160384c2b96145fcd6a714b8e1f34025a528601e54ee8afe19c18f95f9b0",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.66,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.8099999999999998,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            0.92,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/library-seabreeze-foundation.glb",
+              "triangles": 288,
+              "vertices": 576,
+              "bytes": 19108,
+              "sha256": "e116c78eaf769948157660b1280e7a572c3aa2fe8753a44f3c0126d2a46c4f72",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/library-seabreeze-half-built.glb",
+              "triangles": 264,
+              "vertices": 488,
+              "bytes": 16508,
+              "sha256": "bae79339b97f4ea2eecf01d1c34066b44bc2a6683d42f202324089c93966dcb8",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/library-seabreeze-complete.glb",
+              "triangles": 408,
+              "vertices": 822,
+              "bytes": 26724,
+              "sha256": "da36a0019454648894e2808db4410b5e0abc2147e7bb552d5a5255d47e9959c1",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.66,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.8099999999999998,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "museum",
+      "nameHe": "מוזיאון",
+      "category": "culture",
+      "silhouette": "pediment, four columns and sculpture court",
+      "icon": "vase",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 60,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.61,
+            0.97
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/museum-sunrise-foundation.glb",
+              "triangles": 300,
+              "vertices": 588,
+              "bytes": 19512,
+              "sha256": "26f687b1d630297e8a6803f0f90c0731bbde7eb81f7d7ce832677648bde19787",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/museum-sunrise-half-built.glb",
+              "triangles": 368,
+              "vertices": 668,
+              "bytes": 22168,
+              "sha256": "f449a12a30ff223a9b4dade6d5bba6d274bcc20f436cb44213580f0684e67919",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/museum-sunrise-complete.glb",
+              "triangles": 424,
+              "vertices": 816,
+              "bytes": 26632,
+              "sha256": "cb2d1afff16a723f56ac075db9dd372fc7785a4200be8a8aae6809a2c77a7e7e",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.0,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.15,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.61,
+            0.97
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/museum-seabreeze-foundation.glb",
+              "triangles": 300,
+              "vertices": 588,
+              "bytes": 19512,
+              "sha256": "dc328747e7cf0944df3d6c64de5806eaf23cb4fade60426231667ed9e72d8c39",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/museum-seabreeze-half-built.glb",
+              "triangles": 368,
+              "vertices": 668,
+              "bytes": 22172,
+              "sha256": "ace103f55766599aff40e380fc5bffdcc88af4ec255c4be41b841cd7a684c298",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/museum-seabreeze-complete.glb",
+              "triangles": 424,
+              "vertices": 816,
+              "bytes": 26636,
+              "sha256": "a745b85a632fb68d1e06f9510a861fefbc4b9da9486da06e7a57675545b46b3b",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.0,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.15,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "grocery",
+      "nameHe": "חנות מכולת",
+      "category": "shops",
+      "silhouette": "striped awning, produce crates and display window",
+      "icon": "basket",
+      "footprint": {
+        "columns": 2,
+        "rows": 2,
+        "width": 2,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cellCount": 4,
+        "capacityPeople": 18,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/grocery-sunrise-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20596,
+              "sha256": "396b2177d9d9f8e0e2a6cdabac93f9837823714a10b8d152b39eb309db32a8ea",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/grocery-sunrise-half-built.glb",
+              "triangles": 312,
+              "vertices": 584,
+              "bytes": 19484,
+              "sha256": "cb0296419024aae6a6bb2cfa8866f769497226281756b0010365cafc8071894a",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/grocery-sunrise-complete.glb",
+              "triangles": 432,
+              "vertices": 858,
+              "bytes": 27864,
+              "sha256": "07fd5b37772714fa2821ad930ec4031b7c18ba1ce15a4d489478858ae7b73e48",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.73,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.88,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/grocery-seabreeze-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20596,
+              "sha256": "1f90ef9e7c39dac74f84b9fdebc91c9517684041cd9aeecd4c08e376f865cd80",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/grocery-seabreeze-half-built.glb",
+              "triangles": 312,
+              "vertices": 584,
+              "bytes": 19484,
+              "sha256": "1dd55a8bed1c85de3ea2100e49adcb434c7835d2711b0cf45aebf089a0ebd103",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/grocery-seabreeze-complete.glb",
+              "triangles": 432,
+              "vertices": 858,
+              "bytes": 27868,
+              "sha256": "7222de47c852ee8653434193baa9d2995a31fba17a6c9d44693151314c0c8e73",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.73,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.88,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "bakery",
+      "nameHe": "מאפייה",
+      "category": "shops",
+      "silhouette": "tall oven chimney, gable roof and bread counter",
+      "icon": "loaf",
+      "footprint": {
+        "columns": 2,
+        "rows": 2,
+        "width": 2,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cellCount": 4,
+        "capacityPeople": 12,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/bakery-sunrise-foundation.glb",
+              "triangles": 308,
+              "vertices": 612,
+              "bytes": 20232,
+              "sha256": "1a86d3ab0e46ddc442a3d6529510db435a02659f9140a72aa128135b640ea2ae",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/bakery-sunrise-half-built.glb",
+              "triangles": 320,
+              "vertices": 596,
+              "bytes": 19864,
+              "sha256": "aaf66813f5d52c884da3a9b74172f571631b466880820b48bd64c7e49c40b42d",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/bakery-sunrise-complete.glb",
+              "triangles": 436,
+              "vertices": 858,
+              "bytes": 27888,
+              "sha256": "2b2602b4b707519956eaa910cdf89c2926e502d408c76e77d275db5417cd378f",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.335,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.485,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/bakery-seabreeze-foundation.glb",
+              "triangles": 308,
+              "vertices": 612,
+              "bytes": 20232,
+              "sha256": "2ac42d5a514c2a555388d271c12095e2778144a6357bab7ab083251d3460791d",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/bakery-seabreeze-half-built.glb",
+              "triangles": 320,
+              "vertices": 596,
+              "bytes": 19864,
+              "sha256": "20e2186475c71d8af58d1ede0b41bb28847d0ef510485ab69bb71e0110bca7ef",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/bakery-seabreeze-complete.glb",
+              "triangles": 436,
+              "vertices": 858,
+              "bytes": 27888,
+              "sha256": "1d0d6c35e2a98de82f1c439f4c9ae0654976c17da99b64010a2dca303a1521c3",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.335,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.485,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "patisserie",
+      "nameHe": "קונדיטוריה",
+      "category": "shops",
+      "silhouette": "scalloped canopy, tiered pastry display and corner turret",
+      "icon": "cupcake",
+      "footprint": {
+        "columns": 2,
+        "rows": 2,
+        "width": 2,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cellCount": 4,
+        "capacityPeople": 16,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/patisserie-sunrise-foundation.glb",
+              "triangles": 292,
+              "vertices": 582,
+              "bytes": 19308,
+              "sha256": "8b83246d1f0191d583b644d3a2cc671f0add9975c54f71e8ecaef67ef084eff5",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/patisserie-sunrise-half-built.glb",
+              "triangles": 320,
+              "vertices": 590,
+              "bytes": 19708,
+              "sha256": "6e801ffe8be6f9a70d776ab46d2c776e705c4d559287295f53c57d84d977c0f2",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/patisserie-sunrise-complete.glb",
+              "triangles": 454,
+              "vertices": 878,
+              "bytes": 28568,
+              "sha256": "80e01040b18e57d182d2c9488291e6cb973831ac5d8c46418e7a626b9e73d862",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.235,
+                  0.96
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.385,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.48,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/patisserie-seabreeze-foundation.glb",
+              "triangles": 292,
+              "vertices": 582,
+              "bytes": 19308,
+              "sha256": "faebd035cc9fe3962f1edd6f59830552596af230d70e0ad7581920c3c859da37",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/patisserie-seabreeze-half-built.glb",
+              "triangles": 320,
+              "vertices": 590,
+              "bytes": 19708,
+              "sha256": "71d636bf76655a4055c87233b7453c6e0b9bc17c0f2a80bf34974cd98bc35331",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/patisserie-seabreeze-complete.glb",
+              "triangles": 454,
+              "vertices": 878,
+              "bytes": 28568,
+              "sha256": "362fd6b9078bab40e9e4b579720162cb90fd2a9221cb8299bd2062f63ca72b98",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.235,
+                  0.96
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.385,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sports-park",
+      "nameHe": "ספורטק",
+      "category": "leisure",
+      "silhouette": "two-tone court, basketball hoops and bleachers",
+      "icon": "ball",
+      "footprint": {
+        "columns": 4,
+        "rows": 3,
+        "width": 4,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "cellCount": 12,
+        "capacityPeople": 30,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            1.44,
+            1.38,
+            1.13
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/sports-park-sunrise-foundation.glb",
+              "triangles": 324,
+              "vertices": 636,
+              "bytes": 21016,
+              "sha256": "343f0f4be0d95e65a5dfb4105cffb71702af79d230c50a6b2b97eeca86c1c107",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/sports-park-sunrise-half-built.glb",
+              "triangles": 336,
+              "vertices": 636,
+              "bytes": 21096,
+              "sha256": "043e45eab010d8992427ff5982286179458e8d52f845fecb046b88611652e2dc",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/sports-park-sunrise-complete.glb",
+              "triangles": 392,
+              "vertices": 756,
+              "bytes": 24792,
+              "sha256": "cbcff6c8f5752e5cf523206f7de22ab4f43ff5e1239251bc3ae4b604ce1a5d5b",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.63,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.7799999999999998,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            1.44,
+            1.38,
+            1.13
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/sports-park-seabreeze-foundation.glb",
+              "triangles": 324,
+              "vertices": 636,
+              "bytes": 21016,
+              "sha256": "eef3b4c80cdf5540f816b7a0dd35e553c28c023d61cd737b45ffcde47a3130e7",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/sports-park-seabreeze-half-built.glb",
+              "triangles": 336,
+              "vertices": 636,
+              "bytes": 21096,
+              "sha256": "9d417e191b598ce6364d2625399e3707267ba702ddbff8e40314b069e0f6aeeb",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/sports-park-seabreeze-complete.glb",
+              "triangles": 392,
+              "vertices": 756,
+              "bytes": 24792,
+              "sha256": "b0e7a4ec7a2b2a4919569695707fa433749c9b15f8a32d641feb7aecf2345ea7",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.63,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.7799999999999998,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "swimming-pool",
+      "nameHe": "בריכה",
+      "category": "leisure",
+      "silhouette": "recessed lap pool, lanes, ladder and changing cabin",
+      "icon": "waves",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 36,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            1.01,
+            1.12,
+            0.34
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/swimming-pool-sunrise-foundation.glb",
+              "triangles": 336,
+              "vertices": 672,
+              "bytes": 22100,
+              "sha256": "408f85bbe82e1c16c434dfae88680e9ce2dfdbda553f67de4e23d71ce7adc7cf",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/swimming-pool-sunrise-half-built.glb",
+              "triangles": 360,
+              "vertices": 680,
+              "bytes": 22476,
+              "sha256": "7b9f4c6f935e9dda1985e65532ce336bbcdaa933af21eadc4817212fc36c7fc2",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/swimming-pool-sunrise-complete.glb",
+              "triangles": 368,
+              "vertices": 738,
+              "bytes": 24136,
+              "sha256": "b714b38d02d3ff272f2c21567f0c1acf19dd4e1b5f7c5433330dc610506d6133",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.37,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.52,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            1.01,
+            1.12,
+            0.34
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/swimming-pool-seabreeze-foundation.glb",
+              "triangles": 336,
+              "vertices": 672,
+              "bytes": 22104,
+              "sha256": "ffe104c36e82b00bd04997a0b3e6e12e48bae9effefcdbbf865eddf26ed75e58",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/swimming-pool-seabreeze-half-built.glb",
+              "triangles": 360,
+              "vertices": 680,
+              "bytes": 22480,
+              "sha256": "a4b954912840ee2e1c2094c6afdc89a788d3b7440bb7ec78be15eb8b887dc173",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/swimming-pool-seabreeze-complete.glb",
+              "triangles": 368,
+              "vertices": 738,
+              "bytes": 24136,
+              "sha256": "6489f2038602eea86a92c9aa61f284d380b301d21002b948a50d6dbb07b75251",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.37,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.52,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "playground",
+      "nameHe": "גן שעשועים",
+      "category": "leisure",
+      "silhouette": "play tower with slide, A-frame swing and sandbox",
+      "icon": "slide",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 24,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            -0.03,
+            0.6,
+            1.19
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/playground-sunrise-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20604,
+              "sha256": "abd66e9ceada6eff88d596699d027177dc74190baa6ba798ed10ab02b0cbf9ea",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/playground-sunrise-half-built.glb",
+              "triangles": 360,
+              "vertices": 696,
+              "bytes": 22916,
+              "sha256": "917eaec42a8c142b800b5ea2afe83790aed5a4484e9b19517aed82cdc8963209",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/playground-sunrise-complete.glb",
+              "triangles": 344,
+              "vertices": 690,
+              "bytes": 22640,
+              "sha256": "1a06cb805ca904e83fec8d3c378a58f39f0c8cdd8daf4a7cc48a8ed481834203",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.94,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.09,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            -0.03,
+            0.6,
+            1.19
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/playground-seabreeze-foundation.glb",
+              "triangles": 312,
+              "vertices": 624,
+              "bytes": 20604,
+              "sha256": "70cb930157d1626b82fd46f6169f939131b3b8ab82642676c5f741ad46ca69b4",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/playground-seabreeze-half-built.glb",
+              "triangles": 360,
+              "vertices": 696,
+              "bytes": 22920,
+              "sha256": "b2d9fedf28c7e36d43222759b5cc143780611b3749ddcb8df03bc25851f1c1a0",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/playground-seabreeze-complete.glb",
+              "triangles": 344,
+              "vertices": 690,
+              "bytes": 22640,
+              "sha256": "79781f900eeaa0426282b0442339898dff871b64eedb620eec3c3740e2753479",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.94,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.09,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "park",
+      "nameHe": "פארק",
+      "category": "leisure",
+      "silhouette": "crossing paths, faceted trees, fountain and benches",
+      "icon": "tree",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 40,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            0.57,
+            1.23
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/park-sunrise-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18904,
+              "sha256": "c3705f936b347ea9d7c39244372ae700b2e47a6b77a34d6adb2ce69fd0e24392",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/park-sunrise-half-built.glb",
+              "triangles": 316,
+              "vertices": 594,
+              "bytes": 19776,
+              "sha256": "a36708f39ac39fc6ad6af43e93fdb52b61c033c3910a6848e05616bab9fb7245",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/park-sunrise-complete.glb",
+              "triangles": 396,
+              "vertices": 786,
+              "bytes": 25636,
+              "sha256": "60f211c642b0d3a2c594fa10cfdf1385d7797bb4ca087e351df9df55249347f8",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.6925,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.8424999999999998,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            0.57,
+            1.23
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/park-seabreeze-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18908,
+              "sha256": "a7e2a965ca0a2b0f30f8b1409b43acac00d01cc038630a054ec15ec0769633a1",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/park-seabreeze-half-built.glb",
+              "triangles": 316,
+              "vertices": 594,
+              "bytes": 19780,
+              "sha256": "5eb5f85f008ada2f3d91263536699a8eb6262916bdc2295299d2411cbc561577",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/park-seabreeze-complete.glb",
+              "triangles": 396,
+              "vertices": 786,
+              "bytes": 25640,
+              "sha256": "478099d70f4a7cd5564005400f5199e09ee57ca8d9c69ee41a58686a5b2c9642",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.6925,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.8424999999999998,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "train-station",
+      "nameHe": "תחנת רכבת",
+      "category": "transport",
+      "silhouette": "railway tracks, long platform canopy and station clock",
+      "icon": "train",
+      "footprint": {
+        "columns": 4,
+        "rows": 2,
+        "width": 4,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "cellCount": 8,
+        "capacityPeople": 60,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            -1.07,
+            1.02,
+            -0.17
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/train-station-sunrise-foundation.glb",
+              "triangles": 328,
+              "vertices": 648,
+              "bytes": 21380,
+              "sha256": "f0eedb4b64f3244bec0484f6841d5ba1db50b47d3c3361b79a221ebd158440ad",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/train-station-sunrise-half-built.glb",
+              "triangles": 448,
+              "vertices": 848,
+              "bytes": 27712,
+              "sha256": "506ce8b8457c7b5320559713d0eab699f9f7882406a9d67460d657e5709e9a2b",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  0.99
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/train-station-sunrise-complete.glb",
+              "triangles": 520,
+              "vertices": 1026,
+              "bytes": 33116,
+              "sha256": "0a4a77ac9a8f28f54412f9bb06f4f2a5995456a78524d5fa089bf578df919232",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.85,
+                  0.99
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            -1.07,
+            1.02,
+            -0.17
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/train-station-seabreeze-foundation.glb",
+              "triangles": 328,
+              "vertices": 648,
+              "bytes": 21384,
+              "sha256": "f1e9a081b84538f31310c5c0bc18d52b6f257e338b80847c956e3b801d8bb796",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/train-station-seabreeze-half-built.glb",
+              "triangles": 448,
+              "vertices": 848,
+              "bytes": 27716,
+              "sha256": "a4ca676a4ac49ed4ace6f9f38ce4f0eb7a4fe72f21fc20c6ab2f8a1f98f91ffb",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  0.99
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/train-station-seabreeze-complete.glb",
+              "triangles": 520,
+              "vertices": 1026,
+              "bytes": 33120,
+              "sha256": "94b3b7ac5df8d8e5f0eb91a2ffd120caa37ce6804186e45c57a50c91f6acb0c7",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.94,
+                  1.85,
+                  0.99
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.0,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "bus-stop",
+      "nameHe": "תחנת אוטובוס",
+      "category": "transport",
+      "silhouette": "open glass shelter, bench, timetable post and kerb",
+      "icon": "bus",
+      "footprint": {
+        "columns": 2,
+        "rows": 1,
+        "width": 2,
+        "depth": 1
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "cellCount": 2,
+        "capacityPeople": 8,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          0.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0.67,
+            1.57,
+            0.2
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/bus-stop-sunrise-foundation.glb",
+              "triangles": 328,
+              "vertices": 648,
+              "bytes": 21368,
+              "sha256": "74b83666b2340a26bc7d8d68922ded7599542b26dd3d5dd20759011fa045cd36",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.450016
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/bus-stop-sunrise-half-built.glb",
+              "triangles": 304,
+              "vertices": 576,
+              "bytes": 19212,
+              "sha256": "707e727da07182e6e53422cdf4e753216d0e74c5a21f1ead5cc227998a7a32bf",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.44
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/bus-stop-sunrise-complete.glb",
+              "triangles": 280,
+              "vertices": 552,
+              "bytes": 18384,
+              "sha256": "9a910145c06ea83f5f9abd76844a2e5882cf235bc41e10c6553f864e5919044b",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.455
+                ],
+                "max": [
+                  0.95,
+                  1.82,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.97,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0.67,
+            1.57,
+            0.2
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/bus-stop-seabreeze-foundation.glb",
+              "triangles": 328,
+              "vertices": 648,
+              "bytes": 21372,
+              "sha256": "c5e2107b9183bf37321ee877fe04869549a5f801c6df4c4cff73d982de64e1a1",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.450016
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/bus-stop-seabreeze-half-built.glb",
+              "triangles": 304,
+              "vertices": 576,
+              "bytes": 19216,
+              "sha256": "d0f5cadf95eb06c41c0619dcd9fdce0301689cc084fbed3e923b5c05617d6f5f",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.44
+                ],
+                "max": [
+                  0.94,
+                  1.382559,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.532559,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/bus-stop-seabreeze-complete.glb",
+              "triangles": 280,
+              "vertices": 552,
+              "bytes": 18388,
+              "sha256": "c81038e1fd1fe44f2fc85c5fb2ebf859117a17922fff11de55aa5fb3f9f5ef7b",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.455
+                ],
+                "max": [
+                  0.95,
+                  1.82,
+                  0.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.97,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lighthouse",
+      "nameHe": "מגדלור",
+      "category": "coast",
+      "silhouette": "tapered striped tower, lantern, gallery and keeper cottage",
+      "icon": "beam",
+      "footprint": {
+        "columns": 2,
+        "rows": 2,
+        "width": 2,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cellCount": 4,
+        "capacityPeople": 4,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0.52,
+            0.99,
+            0.67
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/lighthouse-sunrise-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18924,
+              "sha256": "767c1172e6da233313f37c124f7c3b3d7dffac5f159a088b3a309760f6e8baf9",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/lighthouse-sunrise-half-built.glb",
+              "triangles": 368,
+              "vertices": 662,
+              "bytes": 22012,
+              "sha256": "d59b57b8065bafc4ca57da8fd357e1e524756660686d07920a6404dac0c4d506",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.54495,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.69495,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/lighthouse-sunrise-complete.glb",
+              "triangles": 442,
+              "vertices": 820,
+              "bytes": 26868,
+              "sha256": "cfcabc5b8aea20ccfc45c74b20683cdcffc14e5d1d4046f13f8c43197496eed7",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.915,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                3.065,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0.52,
+            0.99,
+            0.67
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/lighthouse-seabreeze-foundation.glb",
+              "triangles": 284,
+              "vertices": 570,
+              "bytes": 18924,
+              "sha256": "6a1035ab858909f7339fd889947bac7fe77e98f12ae6bfa2383740b55cfbe22a",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/lighthouse-seabreeze-half-built.glb",
+              "triangles": 368,
+              "vertices": 662,
+              "bytes": 22012,
+              "sha256": "fc0a7c5ac917160b5ad29505fe60899bb83ade4cdc71159b6d1677b8a7d3cd99",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  1.54495,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.69495,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/lighthouse-seabreeze-complete.glb",
+              "triangles": 442,
+              "vertices": 820,
+              "bytes": 26872,
+              "sha256": "784f16026b36fedff16434514e16502c6c2a992ca54399032f01c0ef06bc3a01",
+              "bounds": {
+                "min": [
+                  -0.94,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  0.94,
+                  2.915,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                3.065,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "harbor",
+      "nameHe": "נמל",
+      "category": "coast",
+      "silhouette": "water basin, timber pier, cargo crane and mooring posts",
+      "icon": "anchor",
+      "footprint": {
+        "columns": 4,
+        "rows": 3,
+        "width": 4,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "cellCount": 12,
+        "capacityPeople": 32,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "shore",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            -1.46,
+            1.65,
+            -1.04
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/harbor-sunrise-foundation.glb",
+              "triangles": 332,
+              "vertices": 660,
+              "bytes": 21720,
+              "sha256": "58dfc98f756b420ec06530acc5d9a2d172a09c09cb6ae10e04786215e93ce2ef",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/harbor-sunrise-half-built.glb",
+              "triangles": 484,
+              "vertices": 924,
+              "bytes": 30036,
+              "sha256": "6c9293d8c87d043b5100ff163fed3458dec2a9560bb3812d8187ba576405ff09",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/harbor-sunrise-complete.glb",
+              "triangles": 428,
+              "vertices": 828,
+              "bytes": 26996,
+              "sha256": "fd0519b72c4c4f4e93335c4f436a17975ba8e4831cdfe05b991da5c914e62940",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.92,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.07,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            -1.46,
+            1.65,
+            -1.04
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/harbor-seabreeze-foundation.glb",
+              "triangles": 332,
+              "vertices": 660,
+              "bytes": 21720,
+              "sha256": "b3ed7f72e1ae8661115b6f2b8e6b62871362c528169ea5c8b1dd83805d120cd0",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/harbor-seabreeze-half-built.glb",
+              "triangles": 484,
+              "vertices": 924,
+              "bytes": 30036,
+              "sha256": "83d4116bcfc8edc7b23ea28c2cffc24c0e39e51e3342e05baefc6e0b052dc907",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.385837,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.535837,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/harbor-seabreeze-complete.glb",
+              "triangles": 428,
+              "vertices": 828,
+              "bytes": 26996,
+              "sha256": "69f7f6cd368bef0e46b468f210fc353aa1137f63003a6863944563e464d8d01f",
+              "bounds": {
+                "min": [
+                  -1.94,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.94,
+                  1.92,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.07,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "nameHe": "שוק",
+      "category": "shops",
+      "silhouette": "three striped market stalls, produce and central walkway",
+      "icon": "canopy",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 48,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.33,
+            0.99
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/market-sunrise-foundation.glb",
+              "triangles": 300,
+              "vertices": 600,
+              "bytes": 19848,
+              "sha256": "d1eddb092c7797d03ad6acfaf777471527dc5ff8b9837fc940e53544379d243c",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/market-sunrise-half-built.glb",
+              "triangles": 384,
+              "vertices": 744,
+              "bytes": 24392,
+              "sha256": "f760da07d441c4c4e36e1b99d2699503739e6527c40b58b7bb58175dc8c05f36",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/market-sunrise-complete.glb",
+              "triangles": 528,
+              "vertices": 1044,
+              "bytes": 33656,
+              "sha256": "a3b02d4285e79f8df5c12949ba5aec18da83d7b7dcd121b19df1a29d750f94e6",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.701256,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.851256,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.33,
+            0.99
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/market-seabreeze-foundation.glb",
+              "triangles": 300,
+              "vertices": 600,
+              "bytes": 19848,
+              "sha256": "8bfa3601d9d9ebd39e286a8f93a8e554e687352e582654977f5e0d7398f9df99",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/market-seabreeze-half-built.glb",
+              "triangles": 384,
+              "vertices": 744,
+              "bytes": 24396,
+              "sha256": "2d6aeb795542867e44e511454825c6f0e3fb801a16a0657d4d1dce4c8ab1bd00",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/market-seabreeze-complete.glb",
+              "triangles": 528,
+              "vertices": 1044,
+              "bytes": 33660,
+              "sha256": "cfe20849d238f232588b8c733065407833b2d07aadf0725c2eec2f67a7edeab0",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.701256,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.851256,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cinema",
+      "nameHe": "קולנוע",
+      "category": "culture",
+      "silhouette": "stepped art-deco facade, marquee and ticket kiosk",
+      "icon": "reel",
+      "footprint": {
+        "columns": 3,
+        "rows": 2,
+        "width": 3,
+        "depth": 2
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "cellCount": 6,
+        "capacityPeople": 72,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.0
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.66,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/cinema-sunrise-foundation.glb",
+              "triangles": 380,
+              "vertices": 732,
+              "bytes": 24024,
+              "sha256": "9bafade7409f70f1007f83291e091994ca2d432f0eda3f13ec651d11c8f86a19",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/cinema-sunrise-half-built.glb",
+              "triangles": 392,
+              "vertices": 716,
+              "bytes": 23656,
+              "sha256": "2cc89bd46147119e3e612fc42bed8b290abadab907d8512a316dd51266f7d272",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/cinema-sunrise-complete.glb",
+              "triangles": 452,
+              "vertices": 876,
+              "bytes": 28488,
+              "sha256": "f643aeacf3820afe3a27daa3ca4606f78693755e703c5ca6abfda4f30ff38e59",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  2.295,
+                  0.9875
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.445,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.66,
+            0.43
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/cinema-seabreeze-foundation.glb",
+              "triangles": 380,
+              "vertices": 732,
+              "bytes": 24028,
+              "sha256": "d606698c44760d792a700cbd13b1b1c4fdd8297480343fbce0d7674cd94d2738",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/cinema-seabreeze-half-built.glb",
+              "triangles": 392,
+              "vertices": 716,
+              "bytes": 23660,
+              "sha256": "0d3cb2462a698c2835a54555dab5ad82c3ec088a1da52009d387575fd7dbfab5",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  0.94
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/cinema-seabreeze-complete.glb",
+              "triangles": 452,
+              "vertices": 876,
+              "bytes": 28492,
+              "sha256": "61f4348df242991b510dcd2ee1944b2a478692f14df4b043d88d4d96a1945ea8",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -0.94
+                ],
+                "max": [
+                  1.44,
+                  2.295,
+                  0.9875
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.445,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "theatre",
+      "nameHe": "תיאטרון",
+      "category": "culture",
+      "silhouette": "fly tower, double-height stage house and columned foyer",
+      "icon": "curtains",
+      "footprint": {
+        "columns": 3,
+        "rows": 3,
+        "width": 3,
+        "depth": 3
+      },
+      "occupancy": {
+        "occupiedCells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "cellCount": 9,
+        "capacityPeople": 90,
+        "capacityMeaning": "proposed design capacity; not wired to game rules"
+      },
+      "placement": {
+        "surface": "land",
+        "entrance": [
+          0,
+          0.15,
+          1.5
+        ]
+      },
+      "variants": [
+        {
+          "palette": "sunrise",
+          "signAnchor": [
+            0,
+            1.96,
+            -0.12
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/theatre-sunrise-foundation.glb",
+              "triangles": 308,
+              "vertices": 612,
+              "bytes": 20236,
+              "sha256": "fb7bc6825c4bc7f582d1c09d8f05d7b4c410f5c685a0cf0336064efc515c5da5",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/theatre-sunrise-half-built.glb",
+              "triangles": 356,
+              "vertices": 668,
+              "bytes": 22100,
+              "sha256": "ce2294767ea07ae294d7fa043e5d3543d7251a74289134210f1baae570b8e6e5",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/theatre-sunrise-complete.glb",
+              "triangles": 356,
+              "vertices": 708,
+              "bytes": 23204,
+              "sha256": "ccaece29baa44d871435cc2b6da163f253c5b38257d6ce4bccaa649045ed279e",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.48,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.63,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "palette": "seabreeze",
+          "signAnchor": [
+            0,
+            1.96,
+            -0.12
+          ],
+          "assets": {
+            "foundation": {
+              "path": "models/theatre-seabreeze-foundation.glb",
+              "triangles": 308,
+              "vertices": 612,
+              "bytes": 20236,
+              "sha256": "5dbf4da7d068cac27d35d446606e314372e20941cca70e30d5617f128cbb3d84",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.09,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.24,
+                0
+              ]
+            },
+            "half-built": {
+              "path": "models/theatre-seabreeze-half-built.glb",
+              "triangles": 356,
+              "vertices": 668,
+              "bytes": 22100,
+              "sha256": "5f8b24224896d6b9caf0fa465e02a938baec1b99b636ad9005b2670eca619606",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  1.384783,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                1.534783,
+                0
+              ]
+            },
+            "complete": {
+              "path": "models/theatre-seabreeze-complete.glb",
+              "triangles": 356,
+              "vertices": 708,
+              "bytes": 23208,
+              "sha256": "af9252b40fc95a07fdf7d06b9a0cdddd4917e4d677701c8a4f7bd7a271e0c1ba",
+              "bounds": {
+                "min": [
+                  -1.44,
+                  0.0,
+                  -1.44
+                ],
+                "max": [
+                  1.44,
+                  2.48,
+                  1.44
+                ]
+              },
+              "openingAnchor": [
+                0,
+                2.63,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

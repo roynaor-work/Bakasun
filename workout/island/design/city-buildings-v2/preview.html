@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+<title>העיר שלי · אוסף מבנים חדש</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<main class="app">
+  <header>
+    <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><div><h1>העיר שלי</h1><p>מקומות קטנים. עיר שלמה.</p></div></div>
+    <div class="header-actions"><span class="edition">אוסף מבנים <b>02</b></span><a href="city-buildings-v2-offline.zip" download class="download">הורדה לאופליין <span aria-hidden="true">↓</span></a></div>
+  </header>
+  <section class="workspace" aria-label="תצוגת המבנים">
+    <nav class="catalog" aria-label="בחירת מבנה">
+      <div class="catalog-head"><strong>מקומות בעיר</strong><span>20</span></div>
+      <div id="building-list" class="building-list"></div>
+    </nav>
+    <div class="stage-area">
+      <div class="scene-label"><span class="eyebrow">בונים שכונה</span><h2 id="building-name">בית ספר</h2><p id="building-description">חצר, כיתות ומגדל שעון</p></div>
+      <canvas id="scene" tabindex="0" aria-label="דגם תלת ממדי. גרירה או חיצים לסיבוב, מקשי פלוס ומינוס לשינוי מרחק"></canvas>
+      <div id="load-state" role="status" aria-live="polite">טוענים את העיר…</div>
+      <div class="view-tools"><button id="view-mode" type="button" aria-pressed="false">כל העיר</button><button id="reset-view" type="button" aria-label="איפוס זווית צפייה">איפוס מבט ↺</button></div>
+      <div class="scene-bottom"><div class="metrics"><span id="footprint">3 × 3 תאים</span><span id="capacity">עד 120 אנשים</span><span id="triangles"></span></div><span class="orbit-hint">גררו כדי להסתכל מסביב</span></div>
+    </div>
+    <aside class="controls" aria-label="אפשרויות המבנה">
+      <div><span class="eyebrow">מהיסוד ועד הפתיחה</span><h3>שלב הבנייה</h3></div>
+      <div class="stage-buttons" role="group" aria-label="שלב בנייה">
+        <button data-stage="foundation" type="button" aria-pressed="false"><span>01</span>יסודות</button>
+        <button data-stage="half-built" type="button" aria-pressed="false"><span>02</span>חצי בנוי</button>
+        <button data-stage="complete" type="button" aria-pressed="true"><span>03</span>מוכן לפתיחה</button>
+      </div>
+      <div class="palette-section"><h3>צבע השכונה</h3><div class="palette-buttons" role="group" aria-label="גרסת צבע">
+        <button data-palette="sunrise" type="button" aria-pressed="true"><i class="swatch sunrise" aria-hidden="true"></i>זריחה</button>
+        <button data-palette="seabreeze" type="button" aria-pressed="false"><i class="swatch seabreeze" aria-hidden="true"></i>בריזה</button>
+      </div></div>
+      <button id="celebrate" class="celebrate" type="button">פותחים את המקום <span aria-hidden="true">✦</span></button>
+      <p class="control-note" id="control-note">עוד מקום לחוויות חדשות בעיר שלך.</p>
+    </aside>
+  </section>
+  <footer><span><i class="status-dot"></i>הכול כאן, גם בלי אינטרנט</span><span>20 מקומות · 3 שלבים · 2 צבעים</span><a href="REPORT.md">דוח האוסף ↗</a></footer>
+</main>
+<noscript>התצוגה דורשת JavaScript. להפעלה מקומית: חלצו את החבילה והריצו את serve.py.</noscript>
+<script type="module" src="preview.mjs"></script>
+</html>
