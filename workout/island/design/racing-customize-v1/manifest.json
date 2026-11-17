@@ -1,0 +1,1418 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "racing-customize-v1",
+  "name": "הסדנה · פורמולה",
+  "license": "CC0-1.0",
+  "units": "metres",
+  "coordinateSystem": {
+    "up": "+Y",
+    "forward": "+Z",
+    "left": "+X",
+    "handedness": "right"
+  },
+  "constraints": {
+    "maxBytes": 8000000,
+    "localOnly": true,
+    "wasm": false,
+    "compression": false,
+    "brands": false,
+    "decalText": false
+  },
+  "categories": [
+    {
+      "id": "front-wings",
+      "label": "כנף קדמית",
+      "count": 8,
+      "icon": "icons/categories/front-wings.svg"
+    },
+    {
+      "id": "rear-wings",
+      "label": "כנף אחורית",
+      "count": 8,
+      "icon": "icons/categories/rear-wings.svg"
+    },
+    {
+      "id": "wheels",
+      "label": "גלגלים",
+      "count": 6,
+      "icon": "icons/categories/wheels.svg"
+    },
+    {
+      "id": "decals",
+      "label": "מדבקות",
+      "count": 12,
+      "icon": "icons/categories/decals.svg"
+    },
+    {
+      "id": "paints",
+      "label": "צבעים",
+      "count": 10,
+      "icon": "icons/categories/paints.svg"
+    },
+    {
+      "id": "effects",
+      "label": "אפקטים",
+      "count": 6,
+      "icon": "icons/categories/effects.svg"
+    },
+    {
+      "id": "helmets",
+      "label": "קסדות",
+      "count": 8,
+      "icon": "icons/categories/helmets.svg"
+    }
+  ],
+  "items": [
+    {
+      "id": "front-sweep",
+      "label": "סחף",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-sweep.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/sweep.glb",
+      "slot": "frontWing",
+      "style": "sweep",
+      "assetBytes": 17288,
+      "assetSha256": "50c03b86a30f76b23c183f8182d0f6df7a3c7a7ba7101161674e8b88c91d1b0e",
+      "iconBytes": 350,
+      "iconSha256": "ce24c1838ee2e69e15a686006efb0a14fdbefce475c038bd5241a5f2924124d1"
+    },
+    {
+      "id": "front-delta",
+      "label": "דלתא",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-delta.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/delta.glb",
+      "slot": "frontWing",
+      "style": "delta",
+      "assetBytes": 19316,
+      "assetSha256": "98c2ce4adbad63aed69fcac962349683afa5578558657331b263769d8b101138",
+      "iconBytes": 350,
+      "iconSha256": "fbff9f89651679656ca58cf3426d8e8093a6f633c91b8432431b1f2022b8a23c"
+    },
+    {
+      "id": "front-cascade",
+      "label": "מדרגות",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-cascade.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/cascade.glb",
+      "slot": "frontWing",
+      "style": "cascade",
+      "assetBytes": 23780,
+      "assetSha256": "89af0ce816c20499f02a943d2a5af83371171b09094cb6fa9395f42ef2199a73",
+      "iconBytes": 392,
+      "iconSha256": "3e6fd344bbbad7eab575b8e958647bebc7b7d99adc708e8f06fc06c5e76c7488"
+    },
+    {
+      "id": "front-manta",
+      "label": "מנטה",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-manta.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/manta.glb",
+      "slot": "frontWing",
+      "style": "manta",
+      "assetBytes": 17276,
+      "assetSha256": "005d19e293258a8e534409e913c7d104d05ad7311b0053804ad0f869019c1c03",
+      "iconBytes": 435,
+      "iconSha256": "8372b75f37bbd4eece5bde259a871998ecf0a995893a8f92549a0480a09bce7a"
+    },
+    {
+      "id": "front-split",
+      "label": "מפוצלת",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-split.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/split.glb",
+      "slot": "frontWing",
+      "style": "split",
+      "assetBytes": 17348,
+      "assetSha256": "32eb329cfb096fe2e9160a7204488d59af6755008988d80da7b4e1f56798a647",
+      "iconBytes": 435,
+      "iconSha256": "0a8ce2e73207f83c1ba3d1c4de07441ab97e9059922482ec4deedadbe0089a53"
+    },
+    {
+      "id": "front-blade",
+      "label": "להב",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-blade.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/blade.glb",
+      "slot": "frontWing",
+      "style": "blade",
+      "assetBytes": 11672,
+      "assetSha256": "ac3a9bda9f8bf188d0e7bb148eca8a5f2f163ef74862bca87d6510a0f2b8073b",
+      "iconBytes": 350,
+      "iconSha256": "fbff9f89651679656ca58cf3426d8e8093a6f633c91b8432431b1f2022b8a23c"
+    },
+    {
+      "id": "front-wave",
+      "label": "גל",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-wave.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/wave.glb",
+      "slot": "frontWing",
+      "style": "wave",
+      "assetBytes": 24952,
+      "assetSha256": "9303cd2e5104bd3bccb014f7bb0a066fc517afe601fadadc8a84f28cf6bd8a54",
+      "iconBytes": 477,
+      "iconSha256": "e041e418fc59261612662f8d9c78180b1fb2f8000564b8272c6bfe5ac6a4b886"
+    },
+    {
+      "id": "front-arrow",
+      "label": "חץ",
+      "category": "front-wings",
+      "icon": "icons/front-wings/front-arrow.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/front-wings/arrow.glb",
+      "slot": "frontWing",
+      "style": "arrow",
+      "assetBytes": 19316,
+      "assetSha256": "d374691c5a500f94304154a572ecfc8d2022a4597da052646e2dacc0468d88b1",
+      "iconBytes": 350,
+      "iconSha256": "21c5e5fe14debdb0f07b6154fe9b27978d8d1425c33de71dd706e20eab7aa468"
+    },
+    {
+      "id": "rear-arc",
+      "label": "קשת",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-arc.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/arc.glb",
+      "slot": "rearWing",
+      "style": "arc",
+      "assetBytes": 17256,
+      "assetSha256": "ac591c0d3797730b048f932d19ed50088bf369bcfa815304ff43029123a0847c",
+      "iconBytes": 328,
+      "iconSha256": "4e3f303fc38a3d1d9f78aa46e9288249b8322ca4c654c00a05d41c96d53f0638"
+    },
+    {
+      "id": "rear-highline",
+      "label": "גבוהה",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-highline.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/highline.glb",
+      "slot": "rearWing",
+      "style": "highline",
+      "assetBytes": 22868,
+      "assetSha256": "67523473425ac4aa38f1901a709e9325b47aa01f3c040a8bed67c2acf3b124df",
+      "iconBytes": 370,
+      "iconSha256": "41130bae2720b382a527147c85fe24ecc2b9e35bf864f1aa6c990674d3aa5ade"
+    },
+    {
+      "id": "rear-swan",
+      "label": "ברבור",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-swan.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/swan.glb",
+      "slot": "rearWing",
+      "style": "swan",
+      "assetBytes": 19912,
+      "assetSha256": "d69bd9356b87c1bf7fd428a34f7c9a4e3992dc66bcc4a9a0d8a806450c8727bf",
+      "iconBytes": 328,
+      "iconSha256": "edca45c9b97adf249d753def694c65ef12e047e4e7c521d95ea99d8cfaad948c"
+    },
+    {
+      "id": "rear-box",
+      "label": "מסגרת",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-box.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/box.glb",
+      "slot": "rearWing",
+      "style": "box",
+      "assetBytes": 23640,
+      "assetSha256": "a682dd916dee4e2c675f80bc72d0651fb4d7440ad21008acadb2a202da968ba6",
+      "iconBytes": 370,
+      "iconSha256": "a4856a1314c499f6bb3b1f159fb149dd008138c6a04e16cf724112dcb4a0827c"
+    },
+    {
+      "id": "rear-split",
+      "label": "חצויה",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-split.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/split.glb",
+      "slot": "rearWing",
+      "style": "split",
+      "assetBytes": 17252,
+      "assetSha256": "4262aa6736e2dd605cffe6edc86e3d86e27b5d84a0ca7c55fdddfc0733ffaf38",
+      "iconBytes": 328,
+      "iconSha256": "d4ba276cb570e1b6d963e233d327b26734436a9382bf450d542a0ac30ace60e6"
+    },
+    {
+      "id": "rear-lowdrag",
+      "label": "זרימה",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-lowdrag.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/lowdrag.glb",
+      "slot": "rearWing",
+      "style": "lowdrag",
+      "assetBytes": 11648,
+      "assetSha256": "f2cc53ef41715eae1db53714be2044fd7c88a82d29b19f23927ba89c12d64a83",
+      "iconBytes": 371,
+      "iconSha256": "fdb5c2181c362a9a8dc2ba5d8f0f7ee796bd4cc052c11d625a650e0df8454f7f"
+    },
+    {
+      "id": "rear-vortex",
+      "label": "מערבולת",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-vortex.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/vortex.glb",
+      "slot": "rearWing",
+      "style": "vortex",
+      "assetBytes": 24948,
+      "assetSha256": "71cda871ba0224861e9231979022308d2a50918111ae6cf52e41ab1e1f6f64a3",
+      "iconBytes": 370,
+      "iconSha256": "fe9370c85345e3eee834ec4501c71ffea73921abef9de80626fb226daf59d94c"
+    },
+    {
+      "id": "rear-stepped",
+      "label": "מדורגת",
+      "category": "rear-wings",
+      "icon": "icons/rear-wings/rear-stepped.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/rear-wings/stepped.glb",
+      "slot": "rearWing",
+      "style": "stepped",
+      "assetBytes": 19288,
+      "assetSha256": "0b586e85674513a2d18dd84ea417a5edbc170fd305a0614418fc791eddc28225",
+      "iconBytes": 328,
+      "iconSha256": "d4ba276cb570e1b6d963e233d327b26734436a9382bf450d542a0ac30ace60e6"
+    },
+    {
+      "id": "wheel-five",
+      "label": "חמישה חישורים",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-five.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/five.glb",
+      "slot": "wheels",
+      "style": "five",
+      "assetBytes": 42204,
+      "assetSha256": "5542fd9de2309d905da2c7b2ea46f5b457df7c8c85baa59ffaf475c59f2d2a5f",
+      "iconBytes": 785,
+      "iconSha256": "0a9bf9b1ad0a182462dfc717add31361ad24c1143711c853063fe611f828368c"
+    },
+    {
+      "id": "wheel-turbine",
+      "label": "טורבינה",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-turbine.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/turbine.glb",
+      "slot": "wheels",
+      "style": "turbine",
+      "assetBytes": 48684,
+      "assetSha256": "8578a67cd902d6b49a19b6b835f0272930127580367de07236d6b1ce32b5935d",
+      "iconBytes": 1179,
+      "iconSha256": "924c057e00dea51195820359bfa31498366415f69dc7ce6cc1d517d347dcb8e2"
+    },
+    {
+      "id": "wheel-mesh",
+      "label": "רשת",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-mesh.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/mesh.glb",
+      "slot": "wheels",
+      "style": "mesh",
+      "assetBytes": 66832,
+      "assetSha256": "631bea035f58a8493c844f67392da672190001e821e4d4c018a858e4b8c03d75",
+      "iconBytes": 1336,
+      "iconSha256": "05712b8c47d9f8a36a551fceca73e17127eb0a805c060850d1145e9e304cb7d9"
+    },
+    {
+      "id": "wheel-aero",
+      "label": "דיסק אוויר",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-aero.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/aero.glb",
+      "slot": "wheels",
+      "style": "aero",
+      "assetBytes": 67524,
+      "assetSha256": "4dca4aab6326ceb49ec40c7742618172bb6f9994e384b25f60f078b559bbbe53",
+      "iconBytes": 487,
+      "iconSha256": "77e8738571f2735186245ed08c19b7b7360766431f182818175fd09bcf83f8a2"
+    },
+    {
+      "id": "wheel-split",
+      "label": "חישורים כפולים",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-split.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/split.glb",
+      "slot": "wheels",
+      "style": "split",
+      "assetBytes": 53872,
+      "assetSha256": "c423cc279a9711dea6a23245427e084e48ac005a230db9769a3824f2f1d6eb17",
+      "iconBytes": 1021,
+      "iconSha256": "5e0fd1a0753d6420eb1a3f40e42c557d184116cddbb5f1b715ed2842e557467b"
+    },
+    {
+      "id": "wheel-rally",
+      "label": "מסלול רטוב",
+      "category": "wheels",
+      "icon": "icons/wheels/wheel-rally.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/wheels/rally.glb",
+      "slot": "wheels",
+      "style": "rally",
+      "assetBytes": 74608,
+      "assetSha256": "13e7c05a656d614f02e83dad378e7d39f1d5e151fb622d99a1316a104eb4d468",
+      "iconBytes": 960,
+      "iconSha256": "c447e2fce159e99b08e457a6d87b3c563aed2a3451dcc05ae65bf0c2b4fcaccb"
+    },
+    {
+      "id": "helmet-classic",
+      "label": "קלאסית",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-classic.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/classic.glb",
+      "slot": "helmet",
+      "style": "classic",
+      "assetBytes": 18476,
+      "assetSha256": "0a017fd7eecc6be881b78eb221042c46a818103fad46fc497851232daf844c80",
+      "iconBytes": 392,
+      "iconSha256": "dd3f3ecfdbd9f0676b4ba3c83beb217cb854f1ddaa7192e0abaecdc8c89cfa34"
+    },
+    {
+      "id": "helmet-aero",
+      "label": "אווירודינמית",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-aero.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/aero.glb",
+      "slot": "helmet",
+      "style": "aero",
+      "assetBytes": 19052,
+      "assetSha256": "38927e0c59c23b9fd650065054293592d96377de3c2fa5a2d1010787184ee68a",
+      "iconBytes": 440,
+      "iconSha256": "88b3be7a52190f9abec03b34bc69ce873dd2b2d02ce1a52d8be46a365a276705"
+    },
+    {
+      "id": "helmet-ridge",
+      "label": "רכס",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-ridge.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/ridge.glb",
+      "slot": "helmet",
+      "style": "ridge",
+      "assetBytes": 19064,
+      "assetSha256": "006cf9a73fa8b1e9c681a30e923bb7291c596236fac44cfbfbe7204a36d4c90b",
+      "iconBytes": 434,
+      "iconSha256": "0648f6ba9b2065da44bf1f6f89af9e212111937a00a6fda75bb0b2f16bab5f43"
+    },
+    {
+      "id": "helmet-halo",
+      "label": "הילה",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-halo.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/halo.glb",
+      "slot": "helmet",
+      "style": "halo",
+      "assetBytes": 22312,
+      "assetSha256": "ef2803a3d7383b7f36791bb5eff08ef004723415b395b4fcd172861be9c44c6f",
+      "iconBytes": 467,
+      "iconSha256": "f28ca9e994fe6da5ec70723b035127e11a400a6d56342abd1aaa4e93e8b27c5a"
+    },
+    {
+      "id": "helmet-comet",
+      "label": "שביט",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-comet.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/comet.glb",
+      "slot": "helmet",
+      "style": "comet",
+      "assetBytes": 19716,
+      "assetSha256": "5327ab7215e232f08d1752169b3bf1c25dd946e54cdbfbdedca6824655410e5d",
+      "iconBytes": 434,
+      "iconSha256": "0648f6ba9b2065da44bf1f6f89af9e212111937a00a6fda75bb0b2f16bab5f43"
+    },
+    {
+      "id": "helmet-vent",
+      "label": "מאווררת",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-vent.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/vent.glb",
+      "slot": "helmet",
+      "style": "vent",
+      "assetBytes": 22308,
+      "assetSha256": "2b8ce4774f41ab7df3c1d704621091e56ae3323910e038a6bf78109eabd468b1",
+      "iconBytes": 449,
+      "iconSha256": "eb58171bdfd20795852af99d1720101dc3d1698e78f6b954634ef49a202934e3"
+    },
+    {
+      "id": "helmet-prism",
+      "label": "מנסרה",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-prism.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/prism.glb",
+      "slot": "helmet",
+      "style": "prism",
+      "assetBytes": 15892,
+      "assetSha256": "4f4433cb724d5982bfaa0b32b6aad5736e9d36cefa4cf1bc5ad6393959bcd4d2",
+      "iconBytes": 443,
+      "iconSha256": "f88327084735bda63d850b560b19fcd3b9c4227f519f5c91c266d7890ef0fcfe"
+    },
+    {
+      "id": "helmet-tail",
+      "label": "סנפיר",
+      "category": "helmets",
+      "icon": "icons/helmets/helmet-tail.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/helmets/tail.glb",
+      "slot": "helmet",
+      "style": "tail",
+      "assetBytes": 19052,
+      "assetSha256": "8cbaff35d600564f7d4b0202f8d2bd86d6f6207a173018cbb7af8a3946a29be5",
+      "iconBytes": 483,
+      "iconSha256": "09f755e428c9706a1dcc4be1aecaa8a2e3eff2993fe70959e4423c8c96cce75b"
+    },
+    {
+      "id": "decal-stripes-twin",
+      "label": "פסים כפולים",
+      "category": "decals",
+      "icon": "icons/decals/decal-stripes-twin.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stripes-twin.svg",
+      "slot": "decal",
+      "family": "stripes",
+      "format": "image/svg+xml",
+      "assetBytes": 164,
+      "assetSha256": "bba0461ab322e657d90e95ed4ab1bb2180d6ec364ffcaf15989945623ca2a285",
+      "iconBytes": 289,
+      "iconSha256": "b5529e8317d3a74f5b76dac89c3bd13a68634d78b0a41a55e2f5562ab910e7de"
+    },
+    {
+      "id": "decal-stripes-chevron",
+      "label": "פסי חץ",
+      "category": "decals",
+      "icon": "icons/decals/decal-stripes-chevron.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stripes-chevron.svg",
+      "slot": "decal",
+      "family": "stripes",
+      "format": "image/svg+xml",
+      "assetBytes": 201,
+      "assetSha256": "344d9fbaa8206a885e01b1d1f6ce6335fe70f9545bc8c2c0b250d5a8f9b86779",
+      "iconBytes": 326,
+      "iconSha256": "d74ab6417a59175b38eef82c9cddb07ff6b97f629085f7433ddde2d07526dca0"
+    },
+    {
+      "id": "decal-stripes-offset",
+      "label": "פסים מדורגים",
+      "category": "decals",
+      "icon": "icons/decals/decal-stripes-offset.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stripes-offset.svg",
+      "slot": "decal",
+      "family": "stripes",
+      "format": "image/svg+xml",
+      "assetBytes": 195,
+      "assetSha256": "aa12d0f7faf3d4d0d3d826eb9ce9540c201e2a28808f26c9bc49b96b89293fae",
+      "iconBytes": 320,
+      "iconSha256": "62e68cf067a145ffce980320ecba87aa922c09925175860b0587ea9853894417"
+    },
+    {
+      "id": "decal-stripes-speed",
+      "label": "פסי מהירות",
+      "category": "decals",
+      "icon": "icons/decals/decal-stripes-speed.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stripes-speed.svg",
+      "slot": "decal",
+      "family": "stripes",
+      "format": "image/svg+xml",
+      "assetBytes": 191,
+      "assetSha256": "04c732363cf31695e3a7cfd5a132c934e111ba366a7074e256f6117748ad70c9",
+      "iconBytes": 316,
+      "iconSha256": "d9cf7ba6db3d1041b8952a7eb4786d07b329d36ef169c5e100dfa344858d3254"
+    },
+    {
+      "id": "decal-stars-one",
+      "label": "כוכב יחיד",
+      "category": "decals",
+      "icon": "icons/decals/decal-stars-one.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stars-one.svg",
+      "slot": "decal",
+      "family": "stars",
+      "format": "image/svg+xml",
+      "assetBytes": 260,
+      "assetSha256": "a3895eadac3603bae198330282e15dc37186393c6ef93b610d1889134ddad78c",
+      "iconBytes": 385,
+      "iconSha256": "9834f767c69ea0c0c42fecfd22c0cd24e4f08718007246d801f465e438616ec1"
+    },
+    {
+      "id": "decal-stars-trio",
+      "label": "שלושה כוכבים",
+      "category": "decals",
+      "icon": "icons/decals/decal-stars-trio.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stars-trio.svg",
+      "slot": "decal",
+      "family": "stars",
+      "format": "image/svg+xml",
+      "assetBytes": 537,
+      "assetSha256": "141b5a9e7be230178837616238da5432bd0eba1f4f9fcdf2936b0d25cf4eed66",
+      "iconBytes": 662,
+      "iconSha256": "a56ff4a148fe441e6df2c716628a7a3fe4e9017d10bf892273f0ecb41dfcb09f"
+    },
+    {
+      "id": "decal-stars-orbit",
+      "label": "מסלול כוכבים",
+      "category": "decals",
+      "icon": "icons/decals/decal-stars-orbit.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stars-orbit.svg",
+      "slot": "decal",
+      "family": "stars",
+      "format": "image/svg+xml",
+      "assetBytes": 357,
+      "assetSha256": "c751452d8b78a3f83bea4a2824ef8f187eee32635b0343edd66e7b1b8939865c",
+      "iconBytes": 482,
+      "iconSha256": "eb68c8c9beeba67aeacbd48ad5b074c36a430ae45a3e13ac483245e37d716eb2"
+    },
+    {
+      "id": "decal-stars-burst",
+      "label": "כוכב מתפרץ",
+      "category": "decals",
+      "icon": "icons/decals/decal-stars-burst.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/stars-burst.svg",
+      "slot": "decal",
+      "family": "stars",
+      "format": "image/svg+xml",
+      "assetBytes": 331,
+      "assetSha256": "7cb3496bcb65174318ffca7622f94b0f2c742e9d05ec9c70d11ee1d1ce014281",
+      "iconBytes": 456,
+      "iconSha256": "febffe78f53dadeeedf75b452c2ac676e17bfeed3ebef97002ed6c8828d90ca8"
+    },
+    {
+      "id": "decal-flames-classic",
+      "label": "להבות זורמות",
+      "category": "decals",
+      "icon": "icons/decals/decal-flames-classic.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/flames-classic.svg",
+      "slot": "decal",
+      "family": "flames",
+      "format": "image/svg+xml",
+      "assetBytes": 225,
+      "assetSha256": "83b05c4b47e326bbe9481add17c40d1b50742478d7b20cbb58de7af50a780de8",
+      "iconBytes": 350,
+      "iconSha256": "c058896ee992189d440d2543aed6d4678d70778727abe20a9fbf7144eee4b623"
+    },
+    {
+      "id": "decal-flames-twin",
+      "label": "להבות כפולות",
+      "category": "decals",
+      "icon": "icons/decals/decal-flames-twin.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/flames-twin.svg",
+      "slot": "decal",
+      "family": "flames",
+      "format": "image/svg+xml",
+      "assetBytes": 248,
+      "assetSha256": "c8d00575ee7b4641ae7da19a5a1200768e8d7eebdc030033ed5d09e7d06d632d",
+      "iconBytes": 373,
+      "iconSha256": "8a91efe6cb8f1751411d9d2264eaab3d8c0798265f9ba95dfd0d14ca09e41ce8"
+    },
+    {
+      "id": "decal-flames-curl",
+      "label": "להבה מסתלסלת",
+      "category": "decals",
+      "icon": "icons/decals/decal-flames-curl.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/flames-curl.svg",
+      "slot": "decal",
+      "family": "flames",
+      "format": "image/svg+xml",
+      "assetBytes": 242,
+      "assetSha256": "41ea26f2240d81c08b7ae9be862071520d98f8a63eb78207a6750fe9b1b1e4da",
+      "iconBytes": 367,
+      "iconSha256": "0d6b9b85c1ea527db8dbd3f907646cf4b99156810b3f7e630f38ba3dd356f191"
+    },
+    {
+      "id": "decal-flames-sharp",
+      "label": "להבות חדות",
+      "category": "decals",
+      "icon": "icons/decals/decal-flames-sharp.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/decals/flames-sharp.svg",
+      "slot": "decal",
+      "family": "flames",
+      "format": "image/svg+xml",
+      "assetBytes": 204,
+      "assetSha256": "7fcc7502daff275b0e8e797cf6d04da4d880d8005e4ead11a72c07d93789e3ef",
+      "iconBytes": 329,
+      "iconSha256": "8f5a07b785776e5f814b7dabd2c3cee6aa3678df5e7aaf0750d1b100817ac904"
+    },
+    {
+      "id": "paint-lagoon",
+      "label": "לגונה",
+      "category": "paints",
+      "icon": "icons/paints/paint-lagoon.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#19bba9",
+      "stripes": "#f0ffd1",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "1a586a69d762f72234e16235ce56cdda74d2ec5adef574ce1498f9149dfe81b5"
+    },
+    {
+      "id": "paint-ember",
+      "label": "גחלת",
+      "category": "paints",
+      "icon": "icons/paints/paint-ember.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#f05b38",
+      "stripes": "#ffe8ab",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "e2c6d1d13b5488693ffde9410b0b091d4eab1bf718821c09e23dffe768d40001"
+    },
+    {
+      "id": "paint-cobalt",
+      "label": "קובלט",
+      "category": "paints",
+      "icon": "icons/paints/paint-cobalt.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#426df0",
+      "stripes": "#d1f4ff",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "53276242bc1b260bc2e69bfe8394331ba422f9a4664f477f61a0c7b8faede197"
+    },
+    {
+      "id": "paint-orchid",
+      "label": "סחלב",
+      "category": "paints",
+      "icon": "icons/paints/paint-orchid.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#9866e8",
+      "stripes": "#f6ddff",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "2e0892f8e704cfe4c3d08cf473e83dbe0b80f18a67a8b3eeb111853b7265616e"
+    },
+    {
+      "id": "paint-sun",
+      "label": "שמש",
+      "category": "paints",
+      "icon": "icons/paints/paint-sun.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#f1c54e",
+      "stripes": "#253346",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "4aaed0c06677afd4f75df64c5aea903d6acbaef181264e5ba57f946874a4d857"
+    },
+    {
+      "id": "paint-pearl",
+      "label": "פנינה",
+      "category": "paints",
+      "icon": "icons/paints/paint-pearl.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#edece2",
+      "stripes": "#218f91",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "9cb01b9497e5b7aad9de01b9613f2f54b49375300f54d106877b07a5a9e92dfb"
+    },
+    {
+      "id": "paint-cherry",
+      "label": "דובדבן",
+      "category": "paints",
+      "icon": "icons/paints/paint-cherry.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#ca355b",
+      "stripes": "#ffdbcf",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "0ce435b5690a418de9d789cbbbce79d99dfaaec79ee5adbf7f2176322a4519b5"
+    },
+    {
+      "id": "paint-forest",
+      "label": "יער",
+      "category": "paints",
+      "icon": "icons/paints/paint-forest.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#35765d",
+      "stripes": "#e3d3a2",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "5fc6de545c3ca1373050b81998ae301dd54b1494e9663804f389eacf17162a6c"
+    },
+    {
+      "id": "paint-graphite",
+      "label": "גרפיט",
+      "category": "paints",
+      "icon": "icons/paints/paint-graphite.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#394658",
+      "stripes": "#a9eece",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "5bc085d53a2f11b0b9ecd0450c256874255f07cc1a8ad40a5bace1a3cfb15be1"
+    },
+    {
+      "id": "paint-ice",
+      "label": "קרח",
+      "category": "paints",
+      "icon": "icons/paints/paint-ice.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "slot": "paint",
+      "body": "#8cceea",
+      "stripes": "#f5f4e8",
+      "selectableLayers": [
+        "body",
+        "stripes"
+      ],
+      "metallic": 0.48,
+      "roughness": 0.25,
+      "iconBytes": 309,
+      "iconSha256": "7f3556d3c9434a2ad73719a69eb6bfca6ffa8df513a27aecdb263da4f5705657"
+    },
+    {
+      "id": "effect-amber",
+      "label": "להבה ענברית",
+      "category": "effects",
+      "icon": "icons/effects/effect-amber.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/amber.glb",
+      "slot": "effect",
+      "kind": "flame",
+      "color": "#ff853f",
+      "particles": {
+        "count": 36,
+        "lifetime": 0.48,
+        "speed": 1.5,
+        "size": 0.055,
+        "additive": true,
+        "seed": 104729
+      },
+      "assetBytes": 15428,
+      "assetSha256": "8ba83ae5bf5a863383ad8df062a5edda256c1de68750cc261752cc636195a26c",
+      "iconBytes": 379,
+      "iconSha256": "99d4d32af3a3f29df7fcb80e73e12041211bd6612d127dde3d96556f015d835c"
+    },
+    {
+      "id": "effect-ion",
+      "label": "להבה כחולה",
+      "category": "effects",
+      "icon": "icons/effects/effect-ion.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/ion.glb",
+      "slot": "effect",
+      "kind": "flame",
+      "color": "#63d5ff",
+      "particles": {
+        "count": 36,
+        "lifetime": 0.48,
+        "speed": 1.5,
+        "size": 0.055,
+        "additive": true,
+        "seed": 104730
+      },
+      "assetBytes": 15428,
+      "assetSha256": "08b839089d7850abd64c6de9a9418dbfd91fd32f7f9fcfd9de5c4625abbe78c9",
+      "iconBytes": 379,
+      "iconSha256": "68d7bd77ee654934db046f160e2b81ee82dad559413f908651fa3f6b00731f2f"
+    },
+    {
+      "id": "effect-gold",
+      "label": "ניצוצות זהב",
+      "category": "effects",
+      "icon": "icons/effects/effect-gold.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/gold.glb",
+      "slot": "effect",
+      "kind": "sparks",
+      "color": "#ffd35d",
+      "particles": {
+        "count": 40,
+        "lifetime": 0.72,
+        "speed": 2.8,
+        "size": 0.055,
+        "additive": true,
+        "seed": 104731
+      },
+      "assetBytes": 15404,
+      "assetSha256": "98ac162ab55658c777ca45f0656cb9fdeb74bcb882e0363abf4a48f75d3e2fa0",
+      "iconBytes": 279,
+      "iconSha256": "c1388edf3ddd737e013833a10faa43d29c4e4c1f1d45966e862a0d18db28a231"
+    },
+    {
+      "id": "effect-electric",
+      "label": "ניצוצות סגולים",
+      "category": "effects",
+      "icon": "icons/effects/effect-electric.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/electric.glb",
+      "slot": "effect",
+      "kind": "sparks",
+      "color": "#bd9bff",
+      "particles": {
+        "count": 40,
+        "lifetime": 0.72,
+        "speed": 2.8,
+        "size": 0.055,
+        "additive": true,
+        "seed": 104732
+      },
+      "assetBytes": 15400,
+      "assetSha256": "ec22637f0de01584865b12cac6a4420a544b5255e823c1f365fe621c0726bce3",
+      "iconBytes": 279,
+      "iconSha256": "4d8951d1899935684b9899ec742ed8a92d45f8814a7ee9d6a52100e8831ba352"
+    },
+    {
+      "id": "effect-teal",
+      "label": "עשן טורקיז",
+      "category": "effects",
+      "icon": "icons/effects/effect-teal.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/teal.glb",
+      "slot": "effect",
+      "kind": "smoke",
+      "color": "#4fdbbb",
+      "particles": {
+        "count": 32,
+        "lifetime": 1.4,
+        "speed": 1.5,
+        "size": 0.18,
+        "additive": false,
+        "seed": 104733
+      },
+      "assetBytes": 16732,
+      "assetSha256": "14e403c89a7e1f217ec6a88c9865daf52c068e7ca36bdbb5b92a29a9d252dab2",
+      "iconBytes": 430,
+      "iconSha256": "14d94da92219e62969e932db73af664b9318db5eb3d9db7e0bad42540602744f"
+    },
+    {
+      "id": "effect-violet",
+      "label": "עשן ורוד",
+      "category": "effects",
+      "icon": "icons/effects/effect-violet.svg",
+      "compatibility": [
+        "island-formula-4.6-v1"
+      ],
+      "cosmetic": true,
+      "asset": "assets/effects/violet.glb",
+      "slot": "effect",
+      "kind": "smoke",
+      "color": "#ea8bd4",
+      "particles": {
+        "count": 32,
+        "lifetime": 1.4,
+        "speed": 1.5,
+        "size": 0.18,
+        "additive": false,
+        "seed": 104734
+      },
+      "assetBytes": 16728,
+      "assetSha256": "cf9d100c58b63a0b6ceb8e48d23533a00f0eff40a96e9a0067d17066dc1f8005",
+      "iconBytes": 430,
+      "iconSha256": "0e86e2b172583ef809acabe7b1cf07b699ee015ae445140762818bdac269e93c"
+    }
+  ],
+  "defaults": {
+    "frontWing": "front-sweep",
+    "rearWing": "rear-arc",
+    "wheels": "wheel-five",
+    "decal": "decal-stars-one",
+    "bodyPaint": "paint-lagoon",
+    "stripePaint": "paint-pearl",
+    "effect": "effect-amber",
+    "helmet": "helmet-classic"
+  },
+  "compatibility": {
+    "profile": "island-formula-4.6-v1",
+    "source": "../../assets/racing-formula/formula.glb",
+    "sourceSha256": "0fafed905c2d8a1274aad64bd9f569bcd303fc6365cec8086da4d1f1cb95883f",
+    "previewBase": "assets/base/formula-mounted.glb",
+    "root": "Formula",
+    "body": "Body",
+    "paintMaterial": "Paint 1",
+    "setupOrder": "Attach to the original named scene BEFORE racing-view.mergeFormula; that function merges away replaceable nodes.",
+    "player": true,
+    "rivals": false,
+    "physics": "Cosmetic only; preserve vehicle dimensions, collision shape, handling and save data.",
+    "unsupported": [
+      "racing-v7 coupes",
+      "racing-formula-cars-v1 rivals",
+      "createStandIn fallback"
+    ],
+    "transforms": "All mount rotations [0,0,0,1], scales [1,1,1]; wheel rear scaling is explicit below.",
+    "mounts": {
+      "frontWing": {
+        "node": "MountFrontWing",
+        "translation": [
+          0,
+          0.2,
+          1.98
+        ],
+        "replace": [
+          "FrontWing"
+        ],
+        "assetNode": "Mount"
+      },
+      "rearWing": {
+        "node": "MountRearWing",
+        "translation": [
+          0,
+          0.21,
+          -1.78
+        ],
+        "replace": [
+          "RearWing"
+        ],
+        "assetNode": "Mount"
+      },
+      "helmet": {
+        "node": "MountHelmet",
+        "translation": [
+          0,
+          0.695,
+          -0.235
+        ],
+        "replace": [
+          "Helmet"
+        ],
+        "assetNode": "Mount"
+      },
+      "effect": {
+        "node": "MountEffect",
+        "translation": [
+          0,
+          0.27,
+          -1.98
+        ],
+        "replace": [],
+        "assetNode": "Mount"
+      },
+      "wheels": {
+        "assetNode": "Mount",
+        "axle": "+X",
+        "frontRadius": 0.34,
+        "rearRadius": 0.36,
+        "instances": [
+          {
+            "node": "WheelFrontL",
+            "translation": [
+              0.85,
+              0.34,
+              1.25
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "node": "WheelFrontR",
+            "translation": [
+              -0.85,
+              0.34,
+              1.25
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "node": "WheelRearL",
+            "translation": [
+              0.83,
+              0.36,
+              -1.31
+            ],
+            "scale": [
+              1.206896551724138,
+              1.0588235294117645,
+              1.0588235294117645
+            ]
+          },
+          {
+            "node": "WheelRearR",
+            "translation": [
+              -0.83,
+              0.36,
+              -1.31
+            ],
+            "scale": [
+              1.206896551724138,
+              1.0588235294117645,
+              1.0588235294117645
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "paint": {
+    "bodyMaterial": "Paint 1",
+    "stripeMaterial": "Paint Stripes",
+    "independentLayers": true,
+    "stripeMask": "assets/paints/stripes.svg",
+    "projectors": [
+      {
+        "position": [
+          0,
+          0.51,
+          1.13
+        ],
+        "size": [
+          0.23,
+          1.72,
+          0.8
+        ]
+      },
+      {
+        "position": [
+          0.38,
+          0.53,
+          -0.52
+        ],
+        "size": [
+          0.075,
+          1.1,
+          0.7
+        ]
+      },
+      {
+        "position": [
+          -0.38,
+          0.53,
+          -0.52
+        ],
+        "size": [
+          0.075,
+          1.1,
+          0.7
+        ]
+      }
+    ],
+    "orientation": [
+      -1.5707963267948966,
+      0,
+      0
+    ]
+  },
+  "decals": {
+    "target": "Body",
+    "orientation": [
+      -1.5707963267948966,
+      0,
+      0
+    ],
+    "position": [
+      0,
+      0.56,
+      0.73
+    ],
+    "size": [
+      0.29,
+      0.4,
+      0.65
+    ],
+    "secondaryProjectors": [
+      {
+        "position": [
+          0.39,
+          0.53,
+          -0.53
+        ],
+        "size": [
+          0.2,
+          0.32,
+          0.7
+        ]
+      },
+      {
+        "position": [
+          -0.39,
+          0.53,
+          -0.53
+        ],
+        "size": [
+          0.2,
+          0.32,
+          0.7
+        ]
+      }
+    ],
+    "depthBias": -4,
+    "transparent": true,
+    "replacePrevious": true
+  },
+  "effects": {
+    "emitters": [
+      "EmitterL",
+      "EmitterR"
+    ],
+    "direction": [
+      0,
+      0,
+      -1
+    ],
+    "maxParticles": 40,
+    "reducedMotion": "Static accessory, no particles"
+  },
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390,
+    "selfContained": true,
+    "networkRequests": 0
+  },
+  "economy": {
+    "mode": "catalog-preview",
+    "currency": null,
+    "prices": null,
+    "description": "No invented prices or connection to the live wallet."
+  }
+}

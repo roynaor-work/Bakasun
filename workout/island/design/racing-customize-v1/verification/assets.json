@@ -1,0 +1,1598 @@
+{
+  "schemaVersion": 1,
+  "validatorVersion": "2.0.0-dev.3.10",
+  "passed": true,
+  "checks": 172,
+  "checkNames": [
+    "Exact category counts: 8 / 8 / 6 / 12 / 10 / 6 / 8",
+    "Unique ids and every item has a unique 96×96 SVG icon",
+    "front-sweep icon: bytes and SHA-256",
+    "front-sweep asset: bytes and SHA-256",
+    "front-sweep: clean SVG icon",
+    "front-delta icon: bytes and SHA-256",
+    "front-delta asset: bytes and SHA-256",
+    "front-delta: clean SVG icon",
+    "front-cascade icon: bytes and SHA-256",
+    "front-cascade asset: bytes and SHA-256",
+    "front-cascade: clean SVG icon",
+    "front-manta icon: bytes and SHA-256",
+    "front-manta asset: bytes and SHA-256",
+    "front-manta: clean SVG icon",
+    "front-split icon: bytes and SHA-256",
+    "front-split asset: bytes and SHA-256",
+    "front-split: clean SVG icon",
+    "front-blade icon: bytes and SHA-256",
+    "front-blade asset: bytes and SHA-256",
+    "front-blade: clean SVG icon",
+    "front-wave icon: bytes and SHA-256",
+    "front-wave asset: bytes and SHA-256",
+    "front-wave: clean SVG icon",
+    "front-arrow icon: bytes and SHA-256",
+    "front-arrow asset: bytes and SHA-256",
+    "front-arrow: clean SVG icon",
+    "rear-arc icon: bytes and SHA-256",
+    "rear-arc asset: bytes and SHA-256",
+    "rear-arc: clean SVG icon",
+    "rear-highline icon: bytes and SHA-256",
+    "rear-highline asset: bytes and SHA-256",
+    "rear-highline: clean SVG icon",
+    "rear-swan icon: bytes and SHA-256",
+    "rear-swan asset: bytes and SHA-256",
+    "rear-swan: clean SVG icon",
+    "rear-box icon: bytes and SHA-256",
+    "rear-box asset: bytes and SHA-256",
+    "rear-box: clean SVG icon",
+    "rear-split icon: bytes and SHA-256",
+    "rear-split asset: bytes and SHA-256",
+    "rear-split: clean SVG icon",
+    "rear-lowdrag icon: bytes and SHA-256",
+    "rear-lowdrag asset: bytes and SHA-256",
+    "rear-lowdrag: clean SVG icon",
+    "rear-vortex icon: bytes and SHA-256",
+    "rear-vortex asset: bytes and SHA-256",
+    "rear-vortex: clean SVG icon",
+    "rear-stepped icon: bytes and SHA-256",
+    "rear-stepped asset: bytes and SHA-256",
+    "rear-stepped: clean SVG icon",
+    "wheel-five icon: bytes and SHA-256",
+    "wheel-five asset: bytes and SHA-256",
+    "wheel-five: clean SVG icon",
+    "wheel-turbine icon: bytes and SHA-256",
+    "wheel-turbine asset: bytes and SHA-256",
+    "wheel-turbine: clean SVG icon",
+    "wheel-mesh icon: bytes and SHA-256",
+    "wheel-mesh asset: bytes and SHA-256",
+    "wheel-mesh: clean SVG icon",
+    "wheel-aero icon: bytes and SHA-256",
+    "wheel-aero asset: bytes and SHA-256",
+    "wheel-aero: clean SVG icon",
+    "wheel-split icon: bytes and SHA-256",
+    "wheel-split asset: bytes and SHA-256",
+    "wheel-split: clean SVG icon",
+    "wheel-rally icon: bytes and SHA-256",
+    "wheel-rally asset: bytes and SHA-256",
+    "wheel-rally: clean SVG icon",
+    "helmet-classic icon: bytes and SHA-256",
+    "helmet-classic asset: bytes and SHA-256",
+    "helmet-classic: clean SVG icon",
+    "helmet-aero icon: bytes and SHA-256",
+    "helmet-aero asset: bytes and SHA-256",
+    "helmet-aero: clean SVG icon",
+    "helmet-ridge icon: bytes and SHA-256",
+    "helmet-ridge asset: bytes and SHA-256",
+    "helmet-ridge: clean SVG icon",
+    "helmet-halo icon: bytes and SHA-256",
+    "helmet-halo asset: bytes and SHA-256",
+    "helmet-halo: clean SVG icon",
+    "helmet-comet icon: bytes and SHA-256",
+    "helmet-comet asset: bytes and SHA-256",
+    "helmet-comet: clean SVG icon",
+    "helmet-vent icon: bytes and SHA-256",
+    "helmet-vent asset: bytes and SHA-256",
+    "helmet-vent: clean SVG icon",
+    "helmet-prism icon: bytes and SHA-256",
+    "helmet-prism asset: bytes and SHA-256",
+    "helmet-prism: clean SVG icon",
+    "helmet-tail icon: bytes and SHA-256",
+    "helmet-tail asset: bytes and SHA-256",
+    "helmet-tail: clean SVG icon",
+    "decal-stripes-twin icon: bytes and SHA-256",
+    "decal-stripes-twin asset: bytes and SHA-256",
+    "decal-stripes-twin: clean SVG icon",
+    "decal-stripes-chevron icon: bytes and SHA-256",
+    "decal-stripes-chevron asset: bytes and SHA-256",
+    "decal-stripes-chevron: clean SVG icon",
+    "decal-stripes-offset icon: bytes and SHA-256",
+    "decal-stripes-offset asset: bytes and SHA-256",
+    "decal-stripes-offset: clean SVG icon",
+    "decal-stripes-speed icon: bytes and SHA-256",
+    "decal-stripes-speed asset: bytes and SHA-256",
+    "decal-stripes-speed: clean SVG icon",
+    "decal-stars-one icon: bytes and SHA-256",
+    "decal-stars-one asset: bytes and SHA-256",
+    "decal-stars-one: clean SVG icon",
+    "decal-stars-trio icon: bytes and SHA-256",
+    "decal-stars-trio asset: bytes and SHA-256",
+    "decal-stars-trio: clean SVG icon",
+    "decal-stars-orbit icon: bytes and SHA-256",
+    "decal-stars-orbit asset: bytes and SHA-256",
+    "decal-stars-orbit: clean SVG icon",
+    "decal-stars-burst icon: bytes and SHA-256",
+    "decal-stars-burst asset: bytes and SHA-256",
+    "decal-stars-burst: clean SVG icon",
+    "decal-flames-classic icon: bytes and SHA-256",
+    "decal-flames-classic asset: bytes and SHA-256",
+    "decal-flames-classic: clean SVG icon",
+    "decal-flames-twin icon: bytes and SHA-256",
+    "decal-flames-twin asset: bytes and SHA-256",
+    "decal-flames-twin: clean SVG icon",
+    "decal-flames-curl icon: bytes and SHA-256",
+    "decal-flames-curl asset: bytes and SHA-256",
+    "decal-flames-curl: clean SVG icon",
+    "decal-flames-sharp icon: bytes and SHA-256",
+    "decal-flames-sharp asset: bytes and SHA-256",
+    "decal-flames-sharp: clean SVG icon",
+    "paint-lagoon icon: bytes and SHA-256",
+    "paint-lagoon: clean SVG icon",
+    "paint-ember icon: bytes and SHA-256",
+    "paint-ember: clean SVG icon",
+    "paint-cobalt icon: bytes and SHA-256",
+    "paint-cobalt: clean SVG icon",
+    "paint-orchid icon: bytes and SHA-256",
+    "paint-orchid: clean SVG icon",
+    "paint-sun icon: bytes and SHA-256",
+    "paint-sun: clean SVG icon",
+    "paint-pearl icon: bytes and SHA-256",
+    "paint-pearl: clean SVG icon",
+    "paint-cherry icon: bytes and SHA-256",
+    "paint-cherry: clean SVG icon",
+    "paint-forest icon: bytes and SHA-256",
+    "paint-forest: clean SVG icon",
+    "paint-graphite icon: bytes and SHA-256",
+    "paint-graphite: clean SVG icon",
+    "paint-ice icon: bytes and SHA-256",
+    "paint-ice: clean SVG icon",
+    "effect-amber icon: bytes and SHA-256",
+    "effect-amber asset: bytes and SHA-256",
+    "effect-amber: clean SVG icon",
+    "effect-ion icon: bytes and SHA-256",
+    "effect-ion asset: bytes and SHA-256",
+    "effect-ion: clean SVG icon",
+    "effect-gold icon: bytes and SHA-256",
+    "effect-gold asset: bytes and SHA-256",
+    "effect-gold: clean SVG icon",
+    "effect-electric icon: bytes and SHA-256",
+    "effect-electric asset: bytes and SHA-256",
+    "effect-electric: clean SVG icon",
+    "effect-teal icon: bytes and SHA-256",
+    "effect-teal asset: bytes and SHA-256",
+    "effect-teal: clean SVG icon",
+    "effect-violet icon: bytes and SHA-256",
+    "effect-violet asset: bytes and SHA-256",
+    "effect-violet: clean SVG icon",
+    "37 embedded GLBs; no required extensions, texture codecs or external buffers",
+    "Exact source wheel pivots and additive mount translations verified",
+    "Original player-car source hash matches",
+    "Self-contained preview without network or decoder code",
+    "Every embedded resource matches its separate delivered file",
+    "Whole delivery is below 8,000,000 bytes"
+  ],
+  "models": [
+    {
+      "file": "assets/base/formula-mounted.glb",
+      "bytes": 337184,
+      "sha256": "fb1f59aa17bd362182511608c9a2c0d886d5c8dcf4bccc1def2ab2f00bc97621",
+      "triangles": 11868,
+      "vertices": 10637,
+      "localBounds": {
+        "min": [
+          -1,
+          -0.36000001430511475,
+          -2.299999952316284
+        ],
+        "max": [
+          1,
+          1.1080000400543213,
+          2.299999952316284
+        ]
+      },
+      "minimumTriangleArea": 5.131967380831051e-11,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 4,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/19"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/20"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/21"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/22"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/amber.glb",
+      "bytes": 15428,
+      "sha256": "8ba83ae5bf5a863383ad8df062a5edda256c1de68750cc261752cc636195a26c",
+      "triangles": 276,
+      "vertices": 456,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.04800000041723251,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.04800000041723251,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.00002012579043483969,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/electric.glb",
+      "bytes": 15400,
+      "sha256": "ec22637f0de01584865b12cac6a4420a544b5255e823c1f365fe621c0726bce3",
+      "triangles": 276,
+      "vertices": 456,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.035999998450279236,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.035999998450279236,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.000015094349803606477,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/gold.glb",
+      "bytes": 15404,
+      "sha256": "98ac162ab55658c777ca45f0656cb9fdeb74bcb882e0363abf4a48f75d3e2fa0",
+      "triangles": 276,
+      "vertices": 456,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.035999998450279236,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.035999998450279236,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.000015094349803606477,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/ion.glb",
+      "bytes": 15428,
+      "sha256": "08b839089d7850abd64c6de9a9418dbfd91fd32f7f9fcfd9de5c4625abbe78c9",
+      "triangles": 276,
+      "vertices": 456,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.04800000041723251,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.04800000041723251,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.00002012579043483969,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/teal.glb",
+      "bytes": 16732,
+      "sha256": "14e403c89a7e1f217ec6a88c9865daf52c068e7ca36bdbb5b92a29a9d252dab2",
+      "triangles": 300,
+      "vertices": 504,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.05700000002980232,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.05700000002980232,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.000023899390041989696,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/effects/violet.glb",
+      "bytes": 16728,
+      "sha256": "cf9d100c58b63a0b6ceb8e48d23533a00f0eff40a96e9a0067d17066dc1f8005",
+      "triangles": 300,
+      "vertices": 504,
+      "localBounds": {
+        "min": [
+          -0.33000001311302185,
+          -0.05700000002980232,
+          -0.13300000131130219
+        ],
+        "max": [
+          0.33000001311302185,
+          0.05700000002980232,
+          0.07000000029802322
+        ]
+      },
+      "minimumTriangleArea": 0.000023899390041989696,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/arrow.glb",
+      "bytes": 19316,
+      "sha256": "d374691c5a500f94304154a572ecfc8d2022a4597da052646e2dacc0468d88b1",
+      "triangles": 320,
+      "vertices": 608,
+      "localBounds": {
+        "min": [
+          -1.0299999713897705,
+          -0.04500000178813934,
+          -0.36500000953674316
+        ],
+        "max": [
+          1.0299999713897705,
+          0.18700000643730164,
+          0.30000001192092896
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/blade.glb",
+      "bytes": 11672,
+      "sha256": "ac3a9bda9f8bf188d0e7bb148eca8a5f2f163ef74862bca87d6510a0f2b8073b",
+      "triangles": 188,
+      "vertices": 352,
+      "localBounds": {
+        "min": [
+          -1.0099999904632568,
+          -0.04500000178813934,
+          -0.10999999940395355
+        ],
+        "max": [
+          1.0099999904632568,
+          0.18700000643730164,
+          0.3700000047683716
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/cascade.glb",
+      "bytes": 23780,
+      "sha256": "89af0ce816c20499f02a943d2a5af83371171b09094cb6fa9395f42ef2199a73",
+      "triangles": 404,
+      "vertices": 768,
+      "localBounds": {
+        "min": [
+          -0.9800000190734863,
+          -0.04500000178813934,
+          -0.3479999899864197
+        ],
+        "max": [
+          0.9800000190734863,
+          0.18700000643730164,
+          0.30000001192092896
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/delta.glb",
+      "bytes": 19316,
+      "sha256": "98c2ce4adbad63aed69fcac962349683afa5578558657331b263769d8b101138",
+      "triangles": 320,
+      "vertices": 608,
+      "localBounds": {
+        "min": [
+          -1.0199999809265137,
+          -0.04500000178813934,
+          -0.3499999940395355
+        ],
+        "max": [
+          1.0199999809265137,
+          0.18700000643730164,
+          0.30000001192092896
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/manta.glb",
+      "bytes": 17276,
+      "sha256": "005d19e293258a8e534409e913c7d104d05ad7311b0053804ad0f869019c1c03",
+      "triangles": 296,
+      "vertices": 560,
+      "localBounds": {
+        "min": [
+          -1.0399999618530273,
+          -0.04500000178813934,
+          -0.28999999165534973
+        ],
+        "max": [
+          1.0399999618530273,
+          0.18700000643730164,
+          0.3700000047683716
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/split.glb",
+      "bytes": 17348,
+      "sha256": "32eb329cfb096fe2e9160a7204488d59af6755008988d80da7b4e1f56798a647",
+      "triangles": 296,
+      "vertices": 560,
+      "localBounds": {
+        "min": [
+          -0.9700000286102295,
+          -0.04500000178813934,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.9700000286102295,
+          0.18700000643730164,
+          0.35499998927116394
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/sweep.glb",
+      "bytes": 17288,
+      "sha256": "50c03b86a30f76b23c183f8182d0f6df7a3c7a7ba7101161674e8b88c91d1b0e",
+      "triangles": 296,
+      "vertices": 560,
+      "localBounds": {
+        "min": [
+          -0.9900000095367432,
+          -0.04500000178813934,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.9900000095367432,
+          0.18700000643730164,
+          0.30000001192092896
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/front-wings/wave.glb",
+      "bytes": 24952,
+      "sha256": "9303cd2e5104bd3bccb014f7bb0a066fc517afe601fadadc8a84f28cf6bd8a54",
+      "triangles": 428,
+      "vertices": 816,
+      "localBounds": {
+        "min": [
+          -0.9950000047683716,
+          -0.04500000178813934,
+          -0.33799999952316284
+        ],
+        "max": [
+          0.9950000047683716,
+          0.19850000739097595,
+          0.30000001192092896
+        ]
+      },
+      "minimumTriangleArea": 0.000046599018186385556,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/aero.glb",
+      "bytes": 19052,
+      "sha256": "38927e0c59c23b9fd650065054293592d96377de3c2fa5a2d1010787184ee68a",
+      "triangles": 800,
+      "vertices": 477,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.17499999701976776
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1420000046491623,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/classic.glb",
+      "bytes": 18476,
+      "sha256": "0a017fd7eecc6be881b78eb221042c46a818103fad46fc497851232daf844c80",
+      "triangles": 788,
+      "vertices": 453,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1420000046491623,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/comet.glb",
+      "bytes": 19716,
+      "sha256": "5327ab7215e232f08d1752169b3bf1c25dd946e54cdbfbdedca6824655410e5d",
+      "triangles": 812,
+      "vertices": 501,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.17499999701976776
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1459999978542328,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/halo.glb",
+      "bytes": 22312,
+      "sha256": "ef2803a3d7383b7f36791bb5eff08ef004723415b395b4fcd172861be9c44c6f",
+      "triangles": 860,
+      "vertices": 597,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1420000046491623,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/prism.glb",
+      "bytes": 15892,
+      "sha256": "4f4433cb724d5982bfaa0b32b6aad5736e9d36cefa4cf1bc5ad6393959bcd4d2",
+      "triangles": 624,
+      "vertices": 389,
+      "localBounds": {
+        "min": [
+          -0.1288526952266693,
+          -0.1420000046491623,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.12903721630573273,
+          0.1459999978542328,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/ridge.glb",
+      "bytes": 19064,
+      "sha256": "006cf9a73fa8b1e9c681a30e923bb7291c596236fac44cfbfbe7204a36d4c90b",
+      "triangles": 800,
+      "vertices": 477,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1459999978542328,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/tail.glb",
+      "bytes": 19052,
+      "sha256": "8cbaff35d600564f7d4b0202f8d2bd86d6f6207a173018cbb7af8a3946a29be5",
+      "triangles": 800,
+      "vertices": 477,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.19499999284744263
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1420000046491623,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/helmets/vent.glb",
+      "bytes": 22308,
+      "sha256": "2b8ce4774f41ab7df3c1d704621091e56ae3323910e038a6bf78109eabd468b1",
+      "triangles": 860,
+      "vertices": 597,
+      "localBounds": {
+        "min": [
+          -0.12488799542188644,
+          -0.1420000046491623,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.1250668317079544,
+          0.1420000046491623,
+          0.1409672498703003
+        ]
+      },
+      "minimumTriangleArea": 0.000007455822398583223,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/arc.glb",
+      "bytes": 17256,
+      "sha256": "ac591c0d3797730b048f932d19ed50088bf369bcfa815304ff43029123a0847c",
+      "triangles": 296,
+      "vertices": 560,
+      "localBounds": {
+        "min": [
+          -0.6850000023841858,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.6850000023841858,
+          0.800000011920929,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.00004050025355795128,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/box.glb",
+      "bytes": 23640,
+      "sha256": "a682dd916dee4e2c675f80bc72d0651fb4d7440ad21008acadb2a202da968ba6",
+      "triangles": 404,
+      "vertices": 768,
+      "localBounds": {
+        "min": [
+          -0.7549999952316284,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.7549999952316284,
+          0.7850000262260437,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.000040500968814249916,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/highline.glb",
+      "bytes": 22868,
+      "sha256": "67523473425ac4aa38f1901a709e9325b47aa01f3c040a8bed67c2acf3b124df",
+      "triangles": 404,
+      "vertices": 768,
+      "localBounds": {
+        "min": [
+          -0.7250000238418579,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.7250000238418579,
+          0.9150000214576721,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.00004049828660512844,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/lowdrag.glb",
+      "bytes": 11648,
+      "sha256": "f2cc53ef41715eae1db53714be2044fd7c88a82d29b19f23927ba89c12d64a83",
+      "triangles": 188,
+      "vertices": 352,
+      "localBounds": {
+        "min": [
+          -0.675000011920929,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.675000011920929,
+          0.6800000071525574,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.00008370041673178008,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/split.glb",
+      "bytes": 17252,
+      "sha256": "4262aa6736e2dd605cffe6edc86e3d86e27b5d84a0ca7c55fdddfc0733ffaf38",
+      "triangles": 296,
+      "vertices": 560,
+      "localBounds": {
+        "min": [
+          -0.6949999928474426,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.6949999928474426,
+          0.8100000023841858,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.00004050025355795128,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/stepped.glb",
+      "bytes": 19288,
+      "sha256": "0b586e85674513a2d18dd84ea417a5edbc170fd305a0614418fc791eddc28225",
+      "triangles": 320,
+      "vertices": 608,
+      "localBounds": {
+        "min": [
+          -0.7749999761581421,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.7749999761581421,
+          0.8299999833106995,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.000040500968814249916,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/swan.glb",
+      "bytes": 19912,
+      "sha256": "d69bd9356b87c1bf7fd428a34f7c9a4e3992dc66bcc4a9a0d8a806450c8727bf",
+      "triangles": 352,
+      "vertices": 656,
+      "localBounds": {
+        "min": [
+          -0.7149999737739563,
+          -0.006723830476403236,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.7149999737739563,
+          0.8399999737739563,
+          0.02094731666147709
+        ]
+      },
+      "minimumTriangleArea": 0.000040500968814249916,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/rear-wings/vortex.glb",
+      "bytes": 24948,
+      "sha256": "71cda871ba0224861e9231979022308d2a50918111ae6cf52e41ab1e1f6f64a3",
+      "triangles": 428,
+      "vertices": 816,
+      "localBounds": {
+        "min": [
+          -0.7450000047683716,
+          -0.009967097081243992,
+          -0.5400000214576721
+        ],
+        "max": [
+          0.7450000047683716,
+          0.9700000286102295,
+          0.019612673670053482
+        ]
+      },
+      "minimumTriangleArea": 0.00004050025355795128,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 2,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          },
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/3"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/aero.glb",
+      "bytes": 67524,
+      "sha256": "4dca4aab6326ceb49ec40c7742618172bb6f9994e384b25f60f078b559bbbe53",
+      "triangles": 2104,
+      "vertices": 2136,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.000019516788657914332,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/five.glb",
+      "bytes": 42204,
+      "sha256": "5542fd9de2309d905da2c7b2ea46f5b457df7c8c85baa59ffaf475c59f2d2a5f",
+      "triangles": 1528,
+      "vertices": 1224,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.00016446280212131543,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/mesh.glb",
+      "bytes": 66832,
+      "sha256": "631bea035f58a8493c844f67392da672190001e821e4d4c018a858e4b8c03d75",
+      "triangles": 1984,
+      "vertices": 2136,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.00008099998631236449,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/rally.glb",
+      "bytes": 74608,
+      "sha256": "13e7c05a656d614f02e83dad378e7d39f1d5e151fb622d99a1316a104eb4d468",
+      "triangles": 2128,
+      "vertices": 2424,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.00003599986847405241,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/split.glb",
+      "bytes": 53872,
+      "sha256": "c423cc279a9711dea6a23245427e084e48ac005a230db9769a3824f2f1d6eb17",
+      "triangles": 1744,
+      "vertices": 1656,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.00008099996207949389,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    },
+    {
+      "file": "assets/wheels/turbine.glb",
+      "bytes": 48684,
+      "sha256": "8578a67cd902d6b49a19b6b835f0272930127580367de07236d6b1ce32b5935d",
+      "triangles": 1648,
+      "vertices": 1464,
+      "localBounds": {
+        "min": [
+          -0.16699999570846558,
+          -0.3400000035762787,
+          -0.3400000035762787
+        ],
+        "max": [
+          0.16699999570846558,
+          0.3400000035762787,
+          0.3400000035762787
+        ]
+      },
+      "minimumTriangleArea": 0.00016446280212131543,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "hints": 0,
+        "messages": [
+          {
+            "code": "NODE_EMPTY",
+            "message": "Empty node encountered.",
+            "severity": 2,
+            "pointer": "/nodes/2"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "models": 37,
+    "khronosErrors": 0,
+    "khronosWarnings": 0,
+    "modelBytes": 1249660,
+    "maxModelBytes": 337184,
+    "totalBytesAtValidation": 4779824
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "checks": 89,
+  "checkNames": [
+    "All interactions run offline with WebAssembly unavailable",
+    "844×390 layout fits exactly with visible stage and footer",
+    "UI front-sweep",
+    "UI front-delta",
+    "UI front-cascade",
+    "UI front-manta",
+    "UI front-split",
+    "UI front-blade",
+    "UI front-wave",
+    "UI front-arrow",
+    "Category front-wings: scrollable grid and save control remain visible",
+    "UI rear-arc",
+    "UI rear-highline",
+    "UI rear-swan",
+    "UI rear-box",
+    "UI rear-split",
+    "UI rear-lowdrag",
+    "UI rear-vortex",
+    "UI rear-stepped",
+    "Category rear-wings: scrollable grid and save control remain visible",
+    "UI wheel-five",
+    "UI wheel-turbine",
+    "UI wheel-mesh",
+    "UI wheel-aero",
+    "UI wheel-split",
+    "UI wheel-rally",
+    "Category wheels: scrollable grid and save control remain visible",
+    "UI decal-stripes-twin",
+    "UI decal-stripes-chevron",
+    "UI decal-stripes-offset",
+    "UI decal-stripes-speed",
+    "UI decal-stars-one",
+    "UI decal-stars-trio",
+    "UI decal-stars-orbit",
+    "UI decal-stars-burst",
+    "UI decal-flames-classic",
+    "UI decal-flames-twin",
+    "UI decal-flames-curl",
+    "UI decal-flames-sharp",
+    "Category decals: scrollable grid and save control remain visible",
+    "UI body paint-lagoon",
+    "UI body paint-ember",
+    "UI body paint-cobalt",
+    "UI body paint-orchid",
+    "UI body paint-sun",
+    "UI body paint-pearl",
+    "UI body paint-cherry",
+    "UI body paint-forest",
+    "UI body paint-graphite",
+    "UI body paint-ice",
+    "UI stripes paint-lagoon",
+    "UI stripes paint-ember",
+    "UI stripes paint-cobalt",
+    "UI stripes paint-orchid",
+    "UI stripes paint-sun",
+    "UI stripes paint-pearl",
+    "UI stripes paint-cherry",
+    "UI stripes paint-forest",
+    "UI stripes paint-graphite",
+    "UI stripes paint-ice",
+    "Category paints: scrollable grid and save control remain visible",
+    "UI effect-amber",
+    "UI effect-ion",
+    "UI effect-gold",
+    "UI effect-electric",
+    "UI effect-teal",
+    "UI effect-violet",
+    "Category effects: scrollable grid and save control remain visible",
+    "UI helmet-classic",
+    "UI helmet-aero",
+    "UI helmet-ridge",
+    "UI helmet-halo",
+    "UI helmet-comet",
+    "UI helmet-vent",
+    "UI helmet-prism",
+    "UI helmet-tail",
+    "Category helmets: scrollable grid and save control remain visible",
+    "All 100 independent body/stripe colour combinations match actual materials",
+    "Save stores the complete cosmetic selection locally",
+    "Saved selection survives reload",
+    "Corrupt saved data falls back to valid defaults",
+    "60 repeated swaps keep eight mounted objects and bounded renderer resources",
+    "Effect preview can be switched off and on",
+    "Pointer orbit and view reset respond without errors",
+    "Keyboard category navigation follows RTL order",
+    "Reduced-motion mode renders static accessories",
+    "390×844 portrait layout keeps all controls within the viewport",
+    "Downloaded HTML starts fresh, has seven tabs and equips assets with zero HTTP requests in a fresh offline context",
+    "No browser errors, asset HTTP requests or external network requests"
+  ],
+  "colourCombinations": 100,
+  "errors": [],
+  "documentRequests": 3,
+  "assetHTTPRequests": 0,
+  "externalHTTPRequests": 0,
+  "offlineDownloadHTTPRequests": 0,
+  "rendererBeforeSwaps": {
+    "calls": 57,
+    "triangles": 12018,
+    "geometries": 38,
+    "textures": 5
+  },
+  "rendererAfterSwaps": {
+    "calls": 50,
+    "triangles": 14190,
+    "geometries": 51,
+    "textures": 6
+  },
+  "finalMetrics": {
+    "ready": true,
+    "busy": 0,
+    "state": {
+      "bodyPaint": "paint-lagoon",
+      "stripePaint": "paint-pearl",
+      "frontWing": "front-sweep",
+      "rearWing": "rear-arc",
+      "wheels": "wheel-five",
+      "helmet": "helmet-classic",
+      "effect": "effect-amber",
+      "decal": "decal-stars-one"
+    },
+    "view": "front",
+    "paint": [
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint 1",
+        "color": "19bba9"
+      },
+      {
+        "name": "Paint Stripes",
+        "color": "edece2"
+      },
+      {
+        "name": "Paint Stripes",
+        "color": "edece2"
+      },
+      {
+        "name": "Paint Stripes",
+        "color": "edece2"
+      },
+      {
+        "name": "Paint Stripes",
+        "color": "edece2"
+      }
+    ],
+    "meshes": 76,
+    "customizer": {
+      "mountedObjects": 8,
+      "stripeMeshes": 3,
+      "decalMeshes": 3,
+      "hiddenOriginals": [
+        "FrontWing",
+        "RearWing",
+        "WheelFrontL",
+        "WheelFrontR",
+        "WheelRearL",
+        "WheelRearR",
+        "Helmet"
+      ],
+      "disposed": false
+    },
+    "effects": {
+      "kind": "flame",
+      "capacity": 40,
+      "count": 36,
+      "enabled": true
+    },
+    "renderer": {
+      "calls": 57,
+      "triangles": 12018,
+      "geometries": 51,
+      "textures": 6
+    }
+  },
+  "previewSha256": "b216cc33a84209a950085f4e19f63a62ed8388608e977578917e284ede9b77ae",
+  "browser": "151.0.7922.173",
+  "environment": "Chromium / SwiftShader on Linux; no physical-phone FPS claim",
+  "fileProtocol": "Machine policy blocks file:// navigation. The exact downloaded standalone HTML was instead loaded into a fresh offline document and exercised without HTTP."
+}

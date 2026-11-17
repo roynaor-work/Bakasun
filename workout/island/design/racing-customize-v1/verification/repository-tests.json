@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "command": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/racing-customize-v1/source/playwright-system.mjs\" node --test --test-force-exit tests/*.mjs",
+  "exitCode": 0,
+  "tests": 4238,
+  "pass": 4174,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 64,
+  "todo": 0,
+  "duration_ms": 464049.306989,
+  "systemChromium": "/usr/bin/chromium",
+  "existingTestsModified": false,
+  "initialAttempt": {
+    "command": "npm test",
+    "failure": "Playwright default headless Chromium binary is absent. The existing workout-royiki browser test left its server open after launch failed; the stuck worker was terminated. The complete suite was rerun with the existing browser hook and installed system Chromium.",
+    "resolution": "Final full run above passed."
+  },
+  "outputSha256": "3b5f0240080c9e8efa13373cf4505c022b9192a547bd5cfafbccc3fb9c122c5d"
+}
