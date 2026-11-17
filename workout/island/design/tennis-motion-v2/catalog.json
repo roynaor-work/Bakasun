@@ -1,0 +1,3414 @@
+{
+  "schemaVersion": 2,
+  "library": "tennis-motion-v2",
+  "asset": "tennis-motion-v2.glb",
+  "referenceAsset": "source/reference/grip-player.glb",
+  "assetKind": "skeletal-animation-library; bind clips to the canonical18 reference fixture or a compatible actor by name",
+  "fps": 30,
+  "nativeRate": 30,
+  "logicalClipCount": 24,
+  "units": "meters",
+  "coordinateSystem": {
+    "up": "+Y",
+    "forward": "+Z",
+    "left": "+X"
+  },
+  "rootMotion": false,
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "grip": {
+    "source": "tennis-grip-v1@a096e507b11389fc10272c38101f968820e89f7e",
+    "handleCenterInRightHand": [
+      0,
+      -0.055,
+      0.02
+    ],
+    "handFromRacket": [
+      0,
+      0,
+      -0.8803408430861305,
+      0.47434164901935494
+    ],
+    "gripNodeY": 0.2,
+    "primaryHandY": 0.065,
+    "headY": 0.5,
+    "headInRightHand": [
+      0.36329662467145096,
+      -0.2942500000048711,
+      0.02
+    ],
+    "racketMount": {
+      "translation": [
+        -0.05428570253711336,
+        -0.019249999999272134,
+        0.02
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.8803408430861305,
+        0.47434164901935494
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "variants": {
+    "medium": {
+      "asset": "tennis-motion-v2.glb",
+      "bytes": 1843716,
+      "sha256": "e3a7ed216d28a3135447dbb54f5c8ef9a6d08be49740304fc32663c9bdf37a0a",
+      "animationCount": 24
+    },
+    "low": {
+      "asset": "height-low.glb",
+      "bytes": 1843640,
+      "sha256": "bdb8f21cddd075e13f7dca05bbec3d0aa58d11aedebbecc90f67fbb391c7e4bb",
+      "animationCount": 24
+    },
+    "high": {
+      "asset": "height-high.glb",
+      "bytes": 1843668,
+      "sha256": "9eefcdc7a8167c7960831077c8f036a15f22cda1d30342f2e48b59bc6f674f0a",
+      "animationCount": 24
+    }
+  },
+  "clips": [
+    {
+      "id": "serve_toss",
+      "label": "הגשה · הטלה",
+      "duration": 2,
+      "phase": [
+        0,
+        2
+      ],
+      "release": 1.6,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 61,
+      "contactTime": null,
+      "releaseTime": 1.6,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "serve_whip",
+            "time": 0
+          }
+        },
+        "label": "הגשה · הטלה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "release",
+            "time": 1.6,
+            "bone": "LeftHand",
+            "local": [
+              0,
+              -0.075,
+              -0.0065
+            ],
+            "label": "הטלה"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "serve-continuation",
+        "contactHeights": []
+      },
+      "durationSeconds": 2,
+      "sheet": "sheets/serve_toss.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "serve_whip",
+      "label": "הגשה · הצלפה",
+      "duration": 1.2,
+      "phase": [
+        2,
+        3.2
+      ],
+      "contact": 1,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 37,
+      "contactTime": 1,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -0.22606910139483768,
+            1.9693021769104675,
+            0.1735331920435127
+          ],
+          "heightMeters": 1.9693021769104675,
+          "handPoint": [
+            -0.21999999999999972,
+            1.5034314575050758,
+            0.12999999999999998
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -0.2260691013948375,
+            2.10587071940539,
+            0.17353319204351264
+          ],
+          "heightMeters": 2.10587071940539,
+          "handPoint": [
+            -0.21999999999999997,
+            1.6399999999999988,
+            0.12999999999999995
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -0.226069101394838,
+            2.242439261900315,
+            0.17353319204351267
+          ],
+          "heightMeters": 2.242439261900315,
+          "handPoint": [
+            -0.22000000000000014,
+            1.7765685424949234,
+            0.12999999999999995
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "serve_toss",
+            "time": 2
+          },
+          "exit": {
+            "clip": "serve_land",
+            "time": 0
+          }
+        },
+        "label": "הגשה · הצלפה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.6400000000000001,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.6400000000000001,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "serve-continuation",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -0.22606910139483768,
+              1.9693021769104675,
+              0.1735331920435127
+            ],
+            "heightMeters": 1.9693021769104675,
+            "handPoint": [
+              -0.21999999999999972,
+              1.5034314575050758,
+              0.12999999999999998
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -0.2260691013948375,
+              2.10587071940539,
+              0.17353319204351264
+            ],
+            "heightMeters": 2.10587071940539,
+            "handPoint": [
+              -0.21999999999999997,
+              1.6399999999999988,
+              0.12999999999999995
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -0.226069101394838,
+              2.242439261900315,
+              0.17353319204351267
+            ],
+            "heightMeters": 2.242439261900315,
+            "handPoint": [
+              -0.22000000000000014,
+              1.7765685424949234,
+              0.12999999999999995
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 1.2,
+      "sheet": "sheets/serve_whip.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "serve_whip"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "serve_whip"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "serve_whip"
+        }
+      }
+    },
+    {
+      "id": "serve_land",
+      "label": "הגשה · נחיתה",
+      "duration": 1.6,
+      "phase": [
+        3.2,
+        4.8
+      ],
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 49,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "serve_whip",
+            "time": 1.2
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "הגשה · נחיתה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0.3039999999999998,
+            "end": 1.5999999999999996,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.5439999999999996,
+            "end": 1.5999999999999996,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "serve-continuation",
+        "contactHeights": []
+      },
+      "durationSeconds": 1.6,
+      "sheet": "sheets/serve_land.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "forehand",
+      "label": "פורהנד",
+      "duration": 2.4,
+      "contact": 1.2666666667,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 73,
+      "contactTime": 1.2666666666666666,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -0.7737605136985106,
+            1.0024699703830398,
+            0.5413078149074381
+          ],
+          "heightMeters": 1.0024699703830398,
+          "handPoint": [
+            -0.35139496558904176,
+            0.8590842741822193,
+            0.39983207177198354
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -0.7723771081744573,
+            1.1678497974568154,
+            0.5385665820783545
+          ],
+          "heightMeters": 1.1678497974568154,
+          "handPoint": [
+            -0.3513949655890418,
+            1.0178688944231962,
+            0.39983207177198354
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -0.7713456437391574,
+            1.3326256937003578,
+            0.5350415658487556
+          ],
+          "heightMeters": 1.3326256937003578,
+          "handPoint": [
+            -0.3513949655890415,
+            1.1766535146641726,
+            0.39983207177198343
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "פורהנד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.2666666666666666,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -0.7737605136985106,
+              1.0024699703830398,
+              0.5413078149074381
+            ],
+            "heightMeters": 1.0024699703830398,
+            "handPoint": [
+              -0.35139496558904176,
+              0.8590842741822193,
+              0.39983207177198354
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -0.7723771081744573,
+              1.1678497974568154,
+              0.5385665820783545
+            ],
+            "heightMeters": 1.1678497974568154,
+            "handPoint": [
+              -0.3513949655890418,
+              1.0178688944231962,
+              0.39983207177198354
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -0.7713456437391574,
+              1.3326256937003578,
+              0.5350415658487556
+            ],
+            "heightMeters": 1.3326256937003578,
+            "handPoint": [
+              -0.3513949655890415,
+              1.1766535146641726,
+              0.39983207177198343
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.4,
+      "sheet": "sheets/forehand.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "forehand"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "forehand"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "forehand"
+        }
+      }
+    },
+    {
+      "id": "backhand_two_handed",
+      "label": "בקהנד · שתי ידיים",
+      "duration": 2.6,
+      "contact": 1.3666666667,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 79,
+      "contactTime": 1.3666666666666667,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            0.5660624618141293,
+            1.0297876114356765,
+            0.45220176285826946
+          ],
+          "heightMeters": 1.0297876114356765,
+          "handPoint": [
+            0.11062307183686243,
+            0.931043714032297,
+            0.4098685042633848
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            0.5660624618141294,
+            1.1887516324467102,
+            0.4522017628582699
+          ],
+          "heightMeters": 1.1887516324467102,
+          "handPoint": [
+            0.11062307183686232,
+            1.0900077350433304,
+            0.40986850426338517
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            0.5657615204043315,
+            1.3483948911656167,
+            0.4538177117736738
+          ],
+          "heightMeters": 1.3483948911656167,
+          "handPoint": [
+            0.11062307183686242,
+            1.2489717560543632,
+            0.4098685042633849
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "בקהנד · שתי ידיים",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.3666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              0.5660624618141293,
+              1.0297876114356765,
+              0.45220176285826946
+            ],
+            "heightMeters": 1.0297876114356765,
+            "handPoint": [
+              0.11062307183686243,
+              0.931043714032297,
+              0.4098685042633848
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              0.5660624618141294,
+              1.1887516324467102,
+              0.4522017628582699
+            ],
+            "heightMeters": 1.1887516324467102,
+            "handPoint": [
+              0.11062307183686232,
+              1.0900077350433304,
+              0.40986850426338517
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              0.5657615204043315,
+              1.3483948911656167,
+              0.4538177117736738
+            ],
+            "heightMeters": 1.3483948911656167,
+            "handPoint": [
+              0.11062307183686242,
+              1.2489717560543632,
+              0.4098685042633849
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.6,
+      "sheet": "sheets/backhand_two_handed.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "backhand_two_handed"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "backhand_two_handed"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "backhand_two_handed"
+        }
+      }
+    },
+    {
+      "id": "backhand_one_handed",
+      "label": "בקהנד · יד אחת",
+      "duration": 2.6,
+      "contact": 1.3666666667,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 79,
+      "contactTime": 1.3666666666666667,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            0.6076539330918929,
+            1.0036082471464982,
+            0.42521567213164435
+          ],
+          "heightMeters": 1.0036082471464982,
+          "handPoint": [
+            0.15948196445966845,
+            0.9198899919958525,
+            0.31985609597748815
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            0.6076539330918931,
+            1.1625722681575306,
+            0.42521567213164424
+          ],
+          "heightMeters": 1.1625722681575306,
+          "handPoint": [
+            0.1594819644596685,
+            1.078854013006885,
+            0.3198560959774881
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            0.6062532231676481,
+            1.323411486174865,
+            0.4295680066384525
+          ],
+          "heightMeters": 1.323411486174865,
+          "handPoint": [
+            0.15948196445966828,
+            1.2378180340179181,
+            0.3198560959774881
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "בקהנד · יד אחת",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.3666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              0.6076539330918929,
+              1.0036082471464982,
+              0.42521567213164435
+            ],
+            "heightMeters": 1.0036082471464982,
+            "handPoint": [
+              0.15948196445966845,
+              0.9198899919958525,
+              0.31985609597748815
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              0.6076539330918931,
+              1.1625722681575306,
+              0.42521567213164424
+            ],
+            "heightMeters": 1.1625722681575306,
+            "handPoint": [
+              0.1594819644596685,
+              1.078854013006885,
+              0.3198560959774881
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              0.6062532231676481,
+              1.323411486174865,
+              0.4295680066384525
+            ],
+            "heightMeters": 1.323411486174865,
+            "handPoint": [
+              0.15948196445966828,
+              1.2378180340179181,
+              0.3198560959774881
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.6,
+      "sheet": "sheets/backhand_one_handed.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "backhand_one_handed"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "backhand_one_handed"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "backhand_one_handed"
+        }
+      }
+    },
+    {
+      "id": "volley_forehand",
+      "label": "וולי · פורהנד",
+      "duration": 1.8,
+      "contact": 0.9,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 55,
+      "contactTime": 0.9,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -0.40805915637490453,
+            1.496870870635494,
+            0.5130476596069861
+          ],
+          "heightMeters": 1.496870870635494,
+          "handPoint": [
+            -0.29000000000000015,
+            1.0500000000000003,
+            0.44000000000000017
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -0.40595499088603226,
+            1.6581028985566366,
+            0.5087439626025273
+          ],
+          "heightMeters": 1.6581028985566366,
+          "handPoint": [
+            -0.29000000000000004,
+            1.21,
+            0.44000000000000017
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -0.4051103898607057,
+            1.8186372254827385,
+            0.5066463656758697
+          ],
+          "heightMeters": 1.8186372254827385,
+          "handPoint": [
+            -0.29000000000000015,
+            1.3699999999999997,
+            0.4399999999999999
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "וולי · פורהנד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 0.9,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -0.40805915637490453,
+              1.496870870635494,
+              0.5130476596069861
+            ],
+            "heightMeters": 1.496870870635494,
+            "handPoint": [
+              -0.29000000000000015,
+              1.0500000000000003,
+              0.44000000000000017
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -0.40595499088603226,
+              1.6581028985566366,
+              0.5087439626025273
+            ],
+            "heightMeters": 1.6581028985566366,
+            "handPoint": [
+              -0.29000000000000004,
+              1.21,
+              0.44000000000000017
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -0.4051103898607057,
+              1.8186372254827385,
+              0.5066463656758697
+            ],
+            "heightMeters": 1.8186372254827385,
+            "handPoint": [
+              -0.29000000000000015,
+              1.3699999999999997,
+              0.4399999999999999
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 1.8,
+      "sheet": "sheets/volley_forehand.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "volley_forehand"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "volley_forehand"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "volley_forehand"
+        }
+      }
+    },
+    {
+      "id": "smash",
+      "label": "סמאש",
+      "duration": 2.8,
+      "contact": 1.5,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 85,
+      "contactTime": 1.5,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -0.23600122730056614,
+            1.9990659801761899,
+            0.16500313008803744
+          ],
+          "heightMeters": 1.9990659801761899,
+          "handPoint": [
+            -0.23186796521835204,
+            1.5316981440214954,
+            0.14224962765050297
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -0.23600122730056583,
+            2.157060213150735,
+            0.16500313008803735
+          ],
+          "heightMeters": 2.157060213150735,
+          "handPoint": [
+            -0.23186796521835185,
+            1.689692376996041,
+            0.14224962765050292
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -0.23600122730056577,
+            2.31505444612528,
+            0.16500313008803727
+          ],
+          "heightMeters": 2.31505444612528,
+          "handPoint": [
+            -0.2318679652183519,
+            1.8476866099705866,
+            0.14224962765050292
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "סמאש",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.5,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.84,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 2.1839999999999997,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.84,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 2.1839999999999997,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -0.23600122730056614,
+              1.9990659801761899,
+              0.16500313008803744
+            ],
+            "heightMeters": 1.9990659801761899,
+            "handPoint": [
+              -0.23186796521835204,
+              1.5316981440214954,
+              0.14224962765050297
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -0.23600122730056583,
+              2.157060213150735,
+              0.16500313008803735
+            ],
+            "heightMeters": 2.157060213150735,
+            "handPoint": [
+              -0.23186796521835185,
+              1.689692376996041,
+              0.14224962765050292
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -0.23600122730056577,
+              2.31505444612528,
+              0.16500313008803727
+            ],
+            "heightMeters": 2.31505444612528,
+            "handPoint": [
+              -0.2318679652183519,
+              1.8476866099705866,
+              0.14224962765050292
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.8,
+      "sheet": "sheets/smash.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "smash"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "smash"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "smash"
+        }
+      }
+    },
+    {
+      "id": "slice",
+      "label": "סלייס",
+      "duration": 2.6,
+      "contact": 1.3666666667,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 79,
+      "contactTime": 1.3666666666666667,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            0.5565006373435065,
+            0.976372537873572,
+            0.15792109622019648
+          ],
+          "heightMeters": 0.976372537873572,
+          "handPoint": [
+            0.13000000000000028,
+            0.8714395593117805,
+            0.3193329184522423
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            0.5571805280718207,
+            1.1373140530372152,
+            0.16104695173124756
+          ],
+          "heightMeters": 1.1373140530372152,
+          "handPoint": [
+            0.13000000000000023,
+            1.0304035803228135,
+            0.3193329184522423
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            0.5578569586759028,
+            1.2991256643428155,
+            0.1648690375037754
+          ],
+          "heightMeters": 1.2991256643428155,
+          "handPoint": [
+            0.13000000000000012,
+            1.1893676013338466,
+            0.31933291845224243
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "סלייס",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.3666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              0.5565006373435065,
+              0.976372537873572,
+              0.15792109622019648
+            ],
+            "heightMeters": 0.976372537873572,
+            "handPoint": [
+              0.13000000000000028,
+              0.8714395593117805,
+              0.3193329184522423
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              0.5571805280718207,
+              1.1373140530372152,
+              0.16104695173124756
+            ],
+            "heightMeters": 1.1373140530372152,
+            "handPoint": [
+              0.13000000000000023,
+              1.0304035803228135,
+              0.3193329184522423
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              0.5578569586759028,
+              1.2991256643428155,
+              0.1648690375037754
+            ],
+            "heightMeters": 1.2991256643428155,
+            "handPoint": [
+              0.13000000000000012,
+              1.1893676013338466,
+              0.31933291845224243
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.6,
+      "sheet": "sheets/slice.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "slice"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "slice"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "slice"
+        }
+      }
+    },
+    {
+      "id": "drop_shot",
+      "label": "דרופ שוט",
+      "duration": 2.2,
+      "contact": 1.1333333333,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 67,
+      "contactTime": 1.1333333333333333,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -0.7006327734908651,
+            1.1229778548368081,
+            0.3450140370048964
+          ],
+          "heightMeters": 1.1229778548368081,
+          "handPoint": [
+            -0.32097610038840513,
+            0.8593317594543288,
+            0.4179458336294053
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -0.6947947994614161,
+            1.2893644225332186,
+            0.3397558517703526
+          ],
+          "heightMeters": 1.2893644225332186,
+          "handPoint": [
+            -0.32097610038840513,
+            1.018969513260176,
+            0.4179458336294054
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -0.6853827210417711,
+            1.4622155831255224,
+            0.3421722373941587
+          ],
+          "heightMeters": 1.4622155831255224,
+          "handPoint": [
+            -0.32097610038840513,
+            1.1786072670660221,
+            0.4179458336294052
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "דרופ שוט",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.1333333333333333,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -0.7006327734908651,
+              1.1229778548368081,
+              0.3450140370048964
+            ],
+            "heightMeters": 1.1229778548368081,
+            "handPoint": [
+              -0.32097610038840513,
+              0.8593317594543288,
+              0.4179458336294053
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -0.6947947994614161,
+              1.2893644225332186,
+              0.3397558517703526
+            ],
+            "heightMeters": 1.2893644225332186,
+            "handPoint": [
+              -0.32097610038840513,
+              1.018969513260176,
+              0.4179458336294054
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -0.6853827210417711,
+              1.4622155831255224,
+              0.3421722373941587
+            ],
+            "heightMeters": 1.4622155831255224,
+            "handPoint": [
+              -0.32097610038840513,
+              1.1786072670660221,
+              0.4179458336294052
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 2.2,
+      "sheet": "sheets/drop_shot.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "drop_shot"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "drop_shot"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "drop_shot"
+        }
+      }
+    },
+    {
+      "id": "run_side",
+      "label": "ריצה צידה",
+      "duration": 1.6,
+      "loop": true,
+      "locomotion": true,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 49,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "ריצה צידה",
+        "loop": true,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": true,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.384,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 0.8,
+            "end": 1.184,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.4,
+            "end": 0.784,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 1.2000000000000002,
+            "end": 1.584,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "gait",
+        "referenceTravel": {
+          "speed": 0.5,
+          "direction": [
+            1,
+            0,
+            0
+          ],
+          "description": "Explicit external travel for in-place gait; Root remains unchanged."
+        },
+        "transitionSeconds": 0.3,
+        "transitionClass": "periodic-gait",
+        "contactHeights": []
+      },
+      "durationSeconds": 1.6,
+      "sheet": "sheets/run_side.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "run_forward",
+      "label": "ריצה קדימה",
+      "duration": 1.6,
+      "loop": true,
+      "locomotion": true,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 49,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "ריצה קדימה",
+        "loop": true,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": true,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.384,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 0.8,
+            "end": 1.184,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.4,
+            "end": 0.784,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 1.2000000000000002,
+            "end": 1.584,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "gait",
+        "referenceTravel": {
+          "speed": 0.5,
+          "direction": [
+            0,
+            0,
+            1
+          ],
+          "description": "Explicit external travel for in-place gait; Root remains unchanged."
+        },
+        "transitionSeconds": 0.3,
+        "transitionClass": "periodic-gait",
+        "contactHeights": []
+      },
+      "durationSeconds": 1.6,
+      "sheet": "sheets/run_forward.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "recover",
+      "label": "חזרה לעמידה",
+      "duration": 2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 61,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "חזרה לעמידה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 2,
+      "sheet": "sheets/recover.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "ready",
+      "label": "עמידת קבלה",
+      "duration": 2.4,
+      "loop": true,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 73,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "עמידת קבלה",
+        "loop": true,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 2.4,
+      "sheet": "sheets/ready.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "dive",
+      "label": "זינוק לכדור",
+      "duration": 3.4,
+      "contact": 1.7,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 103,
+      "contactTime": 1.7,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -1.3843869389796875,
+            1.049644705451359,
+            0.520418623453563
+          ],
+          "heightMeters": 1.049644705451359,
+          "handPoint": [
+            -0.96,
+            0.8800000000000001,
+            0.4200000000000001
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -1.383161750007759,
+            1.214860126315847,
+            0.5165689885818012
+          ],
+          "heightMeters": 1.214860126315847,
+          "handPoint": [
+            -0.96,
+            1.04,
+            0.41999999999999993
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -1.3822463960362308,
+            1.3792870239987303,
+            0.5123668991610542
+          ],
+          "heightMeters": 1.3792870239987303,
+          "handPoint": [
+            -0.96,
+            1.1999999999999997,
+            0.4199999999999999
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "זינוק לכדור",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.7,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.51,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 3.162,
+            "end": 3.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.51,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 3.162,
+            "end": 3.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -1.3843869389796875,
+              1.049644705451359,
+              0.520418623453563
+            ],
+            "heightMeters": 1.049644705451359,
+            "handPoint": [
+              -0.96,
+              0.8800000000000001,
+              0.4200000000000001
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -1.383161750007759,
+              1.214860126315847,
+              0.5165689885818012
+            ],
+            "heightMeters": 1.214860126315847,
+            "handPoint": [
+              -0.96,
+              1.04,
+              0.41999999999999993
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -1.3822463960362308,
+              1.3792870239987303,
+              0.5123668991610542
+            ],
+            "heightMeters": 1.3792870239987303,
+            "handPoint": [
+              -0.96,
+              1.1999999999999997,
+              0.4199999999999999
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 3.4,
+      "sheet": "sheets/dive.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "dive"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "dive"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "dive"
+        }
+      }
+    },
+    {
+      "id": "clay_slide",
+      "label": "החלקה על חימר",
+      "duration": 3.2,
+      "contact": 1.6666666667,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 97,
+      "contactTime": 1.6666666666666667,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            -1.0209630124746818,
+            0.8803077724835214,
+            0.4774632318790346
+          ],
+          "heightMeters": 0.8803077724835214,
+          "handPoint": [
+            -0.589994308925189,
+            0.7406922018887063,
+            0.3602413524840611
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            -1.0190769924444294,
+            1.0470279206948794,
+            0.4753092981064079
+          ],
+          "heightMeters": 1.0470279206948794,
+          "handPoint": [
+            -0.589994308925189,
+            0.900007790798611,
+            0.36024135248406103
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            -1.0175161688639347,
+            1.2132242319736974,
+            0.47207644065902715
+          ],
+          "heightMeters": 1.2132242319736974,
+          "handPoint": [
+            -0.5899943089251892,
+            1.059323379708516,
+            0.3602413524840609
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "החלקה על חימר",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.6666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.48,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 2.9760000000000004,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.48,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 2.9760000000000004,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [
+          {
+            "kind": "intentional-clay-skid",
+            "start": 0.576,
+            "end": 2.368,
+            "footBones": [
+              "LeftFoot",
+              "RightFoot"
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              -1.0209630124746818,
+              0.8803077724835214,
+              0.4774632318790346
+            ],
+            "heightMeters": 0.8803077724835214,
+            "handPoint": [
+              -0.589994308925189,
+              0.7406922018887063,
+              0.3602413524840611
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              -1.0190769924444294,
+              1.0470279206948794,
+              0.4753092981064079
+            ],
+            "heightMeters": 1.0470279206948794,
+            "handPoint": [
+              -0.589994308925189,
+              0.900007790798611,
+              0.36024135248406103
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              -1.0175161688639347,
+              1.2132242319736974,
+              0.47207644065902715
+            ],
+            "heightMeters": 1.2132242319736974,
+            "handPoint": [
+              -0.5899943089251892,
+              1.059323379708516,
+              0.3602413524840609
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 3.2,
+      "sheet": "sheets/clay_slide.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "clay_slide"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "clay_slide"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "clay_slide"
+        }
+      }
+    },
+    {
+      "id": "celebrate",
+      "label": "חגיגת נקודה",
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 97,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "חגיגת נקודה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 3.2,
+      "sheet": "sheets/celebrate.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "disappointed",
+      "label": "התאכזבות",
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 97,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "התאכזבות",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 3.2,
+      "sheet": "sheets/disappointed.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "handshake",
+      "label": "לחיצת ידיים ליד הרשת",
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 97,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "לחיצת ידיים ליד הרשת",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 3.2,
+      "sheet": "sheets/handshake.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "look_ball",
+      "label": "סיבוב מבט לכדור",
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 85,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "סיבוב מבט לכדור",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 2.8,
+      "sheet": "sheets/look_ball.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "serve_prepare_1",
+      "label": "הכנה להגשה · הקפצה",
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 85,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "הכנה להגשה · הקפצה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "bounce",
+            "time": 1.18,
+            "label": "הקפצת כדור",
+            "position": [
+              0.23,
+              0.0335,
+              0.28
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 2.8,
+      "sheet": "sheets/serve_prepare_1.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "serve_prepare_2",
+      "label": "הכנה להגשה · הנפת מחבט",
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 85,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "הכנה להגשה · הנפת מחבט",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 2.8,
+      "sheet": "sheets/serve_prepare_2.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "serve_prepare_3",
+      "label": "הכנה להגשה · העברת משקל",
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 97,
+      "contactTime": null,
+      "releaseTime": null,
+      "contactHeightVariants": [],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "הכנה להגשה · העברת משקל",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": []
+      },
+      "durationSeconds": 3.2,
+      "sheet": "sheets/serve_prepare_3.webp",
+      "heightVariants": null
+    },
+    {
+      "id": "volley_backhand",
+      "label": "וולי · בקהנד",
+      "duration": 1.8,
+      "contact": 0.9,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 55,
+      "contactTime": 0.9,
+      "releaseTime": null,
+      "contactHeightVariants": [
+        {
+          "height": "low",
+          "contactPoint": [
+            0.375988305364088,
+            1.4539207883731085,
+            0.41730328186193744
+          ],
+          "heightMeters": 1.4539207883731085,
+          "handPoint": [
+            0.12999999999999984,
+            1.06,
+            0.3599999999999999
+          ]
+        },
+        {
+          "height": "medium",
+          "contactPoint": [
+            0.3759883053640881,
+            1.6139207883731075,
+            0.41730328186193727
+          ],
+          "heightMeters": 1.6139207883731075,
+          "handPoint": [
+            0.12999999999999987,
+            1.2199999999999998,
+            0.35999999999999976
+          ]
+        },
+        {
+          "height": "high",
+          "contactPoint": [
+            0.37598830536408806,
+            1.7739207883731065,
+            0.41730328186193727
+          ],
+          "heightMeters": 1.7739207883731065,
+          "handPoint": [
+            0.12999999999999973,
+            1.3799999999999992,
+            0.3599999999999998
+          ]
+        }
+      ],
+      "metadata": {
+        "continuityReferences": {
+          "entry": {
+            "clip": "ready",
+            "time": 0
+          },
+          "exit": {
+            "clip": "ready",
+            "time": 0
+          }
+        },
+        "label": "וולי · בקהנד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 0.9,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "referenceTravel": null,
+        "transitionSeconds": 0.3,
+        "transitionClass": "ready",
+        "contactHeights": [
+          {
+            "height": "low",
+            "contactPoint": [
+              0.375988305364088,
+              1.4539207883731085,
+              0.41730328186193744
+            ],
+            "heightMeters": 1.4539207883731085,
+            "handPoint": [
+              0.12999999999999984,
+              1.06,
+              0.3599999999999999
+            ]
+          },
+          {
+            "height": "medium",
+            "contactPoint": [
+              0.3759883053640881,
+              1.6139207883731075,
+              0.41730328186193727
+            ],
+            "heightMeters": 1.6139207883731075,
+            "handPoint": [
+              0.12999999999999987,
+              1.2199999999999998,
+              0.35999999999999976
+            ]
+          },
+          {
+            "height": "high",
+            "contactPoint": [
+              0.37598830536408806,
+              1.7739207883731065,
+              0.41730328186193727
+            ],
+            "heightMeters": 1.7739207883731065,
+            "handPoint": [
+              0.12999999999999973,
+              1.3799999999999992,
+              0.3599999999999998
+            ]
+          }
+        ]
+      },
+      "durationSeconds": 1.8,
+      "sheet": "sheets/volley_backhand.webp",
+      "heightVariants": {
+        "low": {
+          "asset": "height-low.glb",
+          "animation": "volley_backhand"
+        },
+        "medium": {
+          "asset": "tennis-motion-v2.glb",
+          "animation": "volley_backhand"
+        },
+        "high": {
+          "asset": "height-high.glb",
+          "animation": "volley_backhand"
+        }
+      }
+    }
+  ],
+  "transitions": {
+    "runtime": "runtime.mjs",
+    "method": "Normalized quaternion and translation cubic Hermite bridge with shared endpoint derivatives",
+    "defaultDurationSeconds": 0.3,
+    "nativeAdjacent": [
+      {
+        "from": "serve_toss",
+        "to": "serve_whip"
+      },
+      {
+        "from": "serve_whip",
+        "to": "serve_land"
+      }
+    ]
+  },
+  "provenance": {
+    "baseCommit": "f5f2b408",
+    "gripCommit": "a096e507b11389fc10272c38101f968820e89f7e",
+    "gripPlayerSha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753",
+    "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+  },
+  "authorship": {
+    "method": "Original analytic IK tennis choreography; deterministic authored motion, not motion capture",
+    "license": "CC0-1.0"
+  }
+}

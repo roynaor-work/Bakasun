@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: a moving bridge joins incoming and outgoing translation and angular velocities
+ok 1 - a moving bridge joins incoming and outgoing translation and angular velocities
+  ---
+  duration_ms: 5.76984
+  type: 'test'
+  ...
+# Subtest: antipodal endpoint encodings preserve the physical path and nonzero velocity
+ok 2 - antipodal endpoint encodings preserve the physical path and nonzero velocity
+  ---
+  duration_ms: 2.408063
+  type: 'test'
+  ...
+# Subtest: normalization removes radial derivatives while preserving tangent motion
+ok 3 - normalization removes radial derivatives while preserving tangent motion
+  ---
+  duration_ms: 0.689302
+  type: 'test'
+  ...
+# Subtest: clamped times never extrapolate or alter caller-owned poses
+ok 4 - clamped times never extrapolate or alter caller-owned poses
+  ---
+  duration_ms: 1.300372
+  type: 'test'
+  ...
+# Subtest: invalid durations, quaternions, derivative values and equipment tracks fail early
+ok 5 - invalid durations, quaternions, derivative values and equipment tracks fail early
+  ---
+  duration_ms: 1.944046
+  type: 'test'
+  ...
+# Subtest: applying a bridge modifies exactly the canonical body and left hand morph
+ok 6 - applying a bridge modifies exactly the canonical body and left hand morph
+  ---
+  duration_ms: 1.5433
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 154.234425
