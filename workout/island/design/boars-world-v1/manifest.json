@@ -1,0 +1,790 @@
+{
+  "schemaVersion": 1,
+  "id": "boars-world-v1",
+  "title": "אחו החזירים",
+  "date": "2026-11-17",
+  "branch": "codex/boars-world-v1",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390,
+    "offline": true,
+    "serveOverHTTP": true,
+    "threeRevision": "160"
+  },
+  "limits": {
+    "packageMaxBytes": 4000000,
+    "boarTriangles": {
+      "min": 500,
+      "max": 900
+    },
+    "sampleRateHz": 30
+  },
+  "coordinates": {
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "handedness": "right",
+    "origin": "ground below belly",
+    "groundY": 0
+  },
+  "rig": {
+    "file": "skeleton.json",
+    "name": "Boar14",
+    "jointCount": 14,
+    "maxInfluences": 2,
+    "weights": "normalized UNSIGNED_BYTE",
+    "sharedAcrossAllBoars": true
+  },
+  "animations": {
+    "sampleRateHz": 30,
+    "interpolation": "LINEAR",
+    "rootMotion": false,
+    "clips": [
+      {
+        "name": "walk",
+        "duration": 1.2,
+        "loop": true,
+        "speed": 1,
+        "frames": 37
+      },
+      {
+        "name": "run",
+        "duration": 0.6,
+        "loop": true,
+        "speed": 2.8,
+        "frames": 19
+      },
+      {
+        "name": "fall",
+        "duration": 1.6,
+        "loop": false,
+        "speed": 0,
+        "frames": 49
+      },
+      {
+        "name": "panic",
+        "duration": 1.4,
+        "loop": false,
+        "speed": 0,
+        "frames": 43
+      }
+    ],
+    "fall": "One-shot gentle flop; holds the terminal pose. Reset/crossfade to walk or run outside the clip.",
+    "panic": "One-shot startle and comical hops; ends in the starting pose.",
+    "locomotion": "Walk and run loop in place. Apply forward translation to an external parent at the listed speed in meters/second."
+  },
+  "scene": "scene.json",
+  "assets": [
+    {
+      "id": "boar-peach",
+      "file": "models/boar-peach.glb",
+      "triangles": 770,
+      "vertices": 2310,
+      "bytes": 139096,
+      "bounds": {
+        "min": [
+          -0.44071,
+          0,
+          -0.84098
+        ],
+        "max": [
+          0.42108,
+          1.34648,
+          0.984
+        ]
+      },
+      "sha256": "99743c5746cfcfc8822e8bc365c162ffb2788e09a066c7ade9ce48b1160282e9",
+      "category": "boar",
+      "name": "פיץ׳",
+      "personality": "חיוך גדול ולחיים סמוקות",
+      "color": "#ed9b88",
+      "face": "smile",
+      "joints": 14,
+      "skinned": true,
+      "clips": [
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "speed": 1,
+          "frames": 37
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "speed": 2.8,
+          "frames": 19
+        },
+        {
+          "name": "fall",
+          "duration": 1.6,
+          "loop": false,
+          "speed": 0,
+          "frames": 49
+        },
+        {
+          "name": "panic",
+          "duration": 1.4,
+          "loop": false,
+          "speed": 0,
+          "frames": 43
+        }
+      ]
+    },
+    {
+      "id": "boar-caramel",
+      "file": "models/boar-caramel.glb",
+      "triangles": 814,
+      "vertices": 2442,
+      "bytes": 143868,
+      "bounds": {
+        "min": [
+          -0.4704,
+          0,
+          -0.84098
+        ],
+        "max": [
+          0.4704,
+          1.32616,
+          0.984
+        ]
+      },
+      "sha256": "230d33d2f63909fe39b2241033cc90c0a8e549467152690d4330c4231ba7005d",
+      "category": "boar",
+      "name": "טופי",
+      "personality": "גבה סקרנית ושן קטנטנה",
+      "color": "#b98b55",
+      "face": "curious",
+      "joints": 14,
+      "skinned": true,
+      "clips": [
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "speed": 1,
+          "frames": 37
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "speed": 2.8,
+          "frames": 19
+        },
+        {
+          "name": "fall",
+          "duration": 1.6,
+          "loop": false,
+          "speed": 0,
+          "frames": 49
+        },
+        {
+          "name": "panic",
+          "duration": 1.4,
+          "loop": false,
+          "speed": 0,
+          "frames": 43
+        }
+      ]
+    },
+    {
+      "id": "boar-lilac",
+      "file": "models/boar-lilac.glb",
+      "triangles": 772,
+      "vertices": 2316,
+      "bytes": 139316,
+      "bounds": {
+        "min": [
+          -0.42901,
+          0,
+          -0.84098
+        ],
+        "max": [
+          0.40823,
+          1.35883,
+          0.984
+        ]
+      },
+      "sha256": "a92a783ced49baa001666b4062bb96e871f3fbacea7dd363fc4f030aa01d99c9",
+      "category": "boar",
+      "name": "לולי",
+      "personality": "קריצה וציצית מתולתלת",
+      "color": "#b2a3c4",
+      "face": "wink",
+      "joints": 14,
+      "skinned": true,
+      "clips": [
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "speed": 1,
+          "frames": 37
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "speed": 2.8,
+          "frames": 19
+        },
+        {
+          "name": "fall",
+          "duration": 1.6,
+          "loop": false,
+          "speed": 0,
+          "frames": 49
+        },
+        {
+          "name": "panic",
+          "duration": 1.4,
+          "loop": false,
+          "speed": 0,
+          "frames": 43
+        }
+      ]
+    },
+    {
+      "id": "boar-cream",
+      "file": "models/boar-cream.glb",
+      "triangles": 782,
+      "vertices": 2346,
+      "bytes": 140396,
+      "bounds": {
+        "min": [
+          -0.44697,
+          0,
+          -0.84098
+        ],
+        "max": [
+          0.4452,
+          1.33366,
+          0.984
+        ]
+      },
+      "sha256": "b300784cd17c11e71bdc7062e2f019c6c043a73ce31bc7bd3cbbbd6589fac1d0",
+      "category": "boar",
+      "name": "וניל",
+      "personality": "עיניים חולמניות ולשון בחוץ",
+      "color": "#e7d9b0",
+      "face": "dreamy",
+      "joints": 14,
+      "skinned": true,
+      "clips": [
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "speed": 1,
+          "frames": 37
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "speed": 2.8,
+          "frames": 19
+        },
+        {
+          "name": "fall",
+          "duration": 1.6,
+          "loop": false,
+          "speed": 0,
+          "frames": 49
+        },
+        {
+          "name": "panic",
+          "duration": 1.4,
+          "loop": false,
+          "speed": 0,
+          "frames": 43
+        }
+      ]
+    },
+    {
+      "id": "boar-cocoa",
+      "file": "models/boar-cocoa.glb",
+      "triangles": 826,
+      "vertices": 2478,
+      "bytes": 145160,
+      "bounds": {
+        "min": [
+          -0.43532,
+          0,
+          -0.84098
+        ],
+        "max": [
+          0.41794,
+          1.35335,
+          0.984
+        ]
+      },
+      "sha256": "82712429e3264ee605eb4566c82fda985b09401f4f93deb9eea1b641e0769517",
+      "category": "boar",
+      "name": "קוקו",
+      "personality": "פרצוף מופתע וכתם קרם",
+      "color": "#8b7162",
+      "face": "surprised",
+      "joints": 14,
+      "skinned": true,
+      "clips": [
+        {
+          "name": "walk",
+          "duration": 1.2,
+          "loop": true,
+          "speed": 1,
+          "frames": 37
+        },
+        {
+          "name": "run",
+          "duration": 0.6,
+          "loop": true,
+          "speed": 2.8,
+          "frames": 19
+        },
+        {
+          "name": "fall",
+          "duration": 1.6,
+          "loop": false,
+          "speed": 0,
+          "frames": 49
+        },
+        {
+          "name": "panic",
+          "duration": 1.4,
+          "loop": false,
+          "speed": 0,
+          "frames": 43
+        }
+      ]
+    },
+    {
+      "id": "tree-oak",
+      "file": "models/tree-oak.glb",
+      "triangles": 316,
+      "vertices": 948,
+      "bytes": 27720,
+      "bounds": {
+        "min": [
+          -1.36,
+          0,
+          -0.83
+        ],
+        "max": [
+          1.42,
+          3.36,
+          1.25
+        ]
+      },
+      "sha256": "ecc7ace043243b4d8632d46622dac354e2ad477f95aac8514c25a0673b664701",
+      "name": "אלון עגלגל",
+      "category": "tree"
+    },
+    {
+      "id": "tree-birch",
+      "file": "models/tree-birch.glb",
+      "triangles": 320,
+      "vertices": 960,
+      "bytes": 28080,
+      "bounds": {
+        "min": [
+          -0.98,
+          0,
+          -0.52646
+        ],
+        "max": [
+          0.90256,
+          3.65,
+          0.87646
+        ]
+      },
+      "sha256": "f94f8da653623de60cbb2a1071782f6ccd166f45de4f13013dba769bcfd36e81",
+      "name": "ליבנה בהיר",
+      "category": "tree"
+    },
+    {
+      "id": "tree-pine",
+      "file": "models/tree-pine.glb",
+      "triangles": 120,
+      "vertices": 360,
+      "bytes": 11272,
+      "bounds": {
+        "min": [
+          -0.91,
+          0,
+          -0.91
+        ],
+        "max": [
+          0.91,
+          3.285,
+          0.91
+        ]
+      },
+      "sha256": "386aa03fac1b42cbe06c665412463cc34dffaa4b485b04948c009a96e718a7c0",
+      "name": "אורן רך",
+      "category": "tree"
+    },
+    {
+      "id": "bush-round",
+      "file": "models/bush-round.glb",
+      "triangles": 144,
+      "vertices": 432,
+      "bytes": 13292,
+      "bounds": {
+        "min": [
+          -0.84,
+          -0.04,
+          -0.48
+        ],
+        "max": [
+          0.78,
+          1.03,
+          0.56
+        ]
+      },
+      "sha256": "bb6170c1c598d665a1ff5f157e70a3de4672a97a6706f8288b4d571d540f1749",
+      "name": "שיח עגלגל",
+      "category": "bush"
+    },
+    {
+      "id": "bush-berry",
+      "file": "models/bush-berry.glb",
+      "triangles": 404,
+      "vertices": 1212,
+      "bytes": 35136,
+      "bounds": {
+        "min": [
+          -0.84,
+          -0.04,
+          -0.48
+        ],
+        "max": [
+          0.78,
+          1.03,
+          0.56
+        ]
+      },
+      "sha256": "e6a26c832a8c3aef9352cdeff1ae28f61dd9513cdc192c9ba8cb6e68b0fc4d52",
+      "name": "שיח פירות יער",
+      "category": "bush"
+    },
+    {
+      "id": "bush-fern",
+      "file": "models/bush-fern.glb",
+      "triangles": 448,
+      "vertices": 1344,
+      "bytes": 38828,
+      "bounds": {
+        "min": [
+          -0.58888,
+          0.04406,
+          -0.59384
+        ],
+        "max": [
+          0.58888,
+          0.40412,
+          0.55438
+        ]
+      },
+      "sha256": "7a9155f96591dd0a3d9b60ea0c9c66395dc03268e975040fb06006d21d3261d0",
+      "name": "שרך",
+      "category": "bush"
+    },
+    {
+      "id": "meadow",
+      "file": "models/meadow.glb",
+      "triangles": 2346,
+      "vertices": 7038,
+      "bytes": 198252,
+      "bounds": {
+        "min": [
+          -8.551,
+          -0.47,
+          -5.6839
+        ],
+        "max": [
+          8.551,
+          0.145,
+          5.6839
+        ]
+      },
+      "sha256": "8d63277933acf5f943106a9a2866e50bbda66c9123030fbd9d49e79946c5722e",
+      "name": "אחו ירוק",
+      "category": "ground"
+    },
+    {
+      "id": "fence",
+      "file": "models/fence.glb",
+      "triangles": 104,
+      "vertices": 312,
+      "bytes": 9916,
+      "bounds": {
+        "min": [
+          -1.09192,
+          0,
+          -0.09192
+        ],
+        "max": [
+          1.09192,
+          1.21,
+          0.09192
+        ]
+      },
+      "sha256": "b56528aaf8c625b7e6b50c25abb873745249520383e219bfa8f91bccba382395",
+      "name": "מקטע גדר",
+      "category": "fence"
+    },
+    {
+      "id": "cabin",
+      "file": "models/cabin.glb",
+      "triangles": 442,
+      "vertices": 1326,
+      "bytes": 38308,
+      "bounds": {
+        "min": [
+          -1.35,
+          0,
+          -1.16
+        ],
+        "max": [
+          1.35,
+          2.51,
+          1.345
+        ]
+      },
+      "sha256": "2afba482344a51af7019a88e785e02170efd741d371e1dc26c6cbc6240f1e880",
+      "name": "בקתה",
+      "category": "building"
+    },
+    {
+      "id": "mud-puddle",
+      "file": "models/mud-puddle.glb",
+      "triangles": 408,
+      "vertices": 1224,
+      "bytes": 35472,
+      "bounds": {
+        "min": [
+          -1.29904,
+          -0.011,
+          -0.78464
+        ],
+        "max": [
+          1.29904,
+          0.083,
+          0.78464
+        ]
+      },
+      "sha256": "1b061e0052114a9595bd26d6f27180d947c5b9ec7b4a7d1ea4d8aa9b4de57208",
+      "name": "שלולית בוץ",
+      "category": "mud"
+    },
+    {
+      "id": "rock-round",
+      "file": "models/rock-round.glb",
+      "triangles": 50,
+      "vertices": 150,
+      "bytes": 5392,
+      "bounds": {
+        "min": [
+          -0.40757,
+          -0.10455,
+          -0.35499
+        ],
+        "max": [
+          0.40757,
+          0.58455,
+          0.35499
+        ]
+      },
+      "sha256": "f7b31f7a3a9c4a526eed4a4e500ec12a826674d6afda2250c84fe3dd85f69dca",
+      "name": "סלע עגול",
+      "category": "rock"
+    },
+    {
+      "id": "rock-pair",
+      "file": "models/rock-pair.glb",
+      "triangles": 86,
+      "vertices": 258,
+      "bytes": 8412,
+      "bounds": {
+        "min": [
+          -0.62257,
+          -0.10455,
+          -0.35499
+        ],
+        "max": [
+          0.5575,
+          0.6545,
+          0.39086
+        ]
+      },
+      "sha256": "5f59edc2ac77d58eb368ac1c4e30786a23885822d700a23caa0bc4d177ab7c5f",
+      "name": "זוג אבנים",
+      "category": "rock"
+    },
+    {
+      "id": "rock-cluster",
+      "file": "models/rock-cluster.glb",
+      "triangles": 122,
+      "vertices": 366,
+      "bytes": 11448,
+      "bounds": {
+        "min": [
+          -0.83757,
+          -0.10455,
+          -0.35864
+        ],
+        "max": [
+          0.78539,
+          0.70406,
+          0.39086
+        ]
+      },
+      "sha256": "e71e26086a5d473e993eaedd8d3a1731fdc20d90854d8ac940f63aa66c6fad41",
+      "name": "מקבץ אבנים",
+      "category": "rock"
+    },
+    {
+      "id": "sky-morning",
+      "file": "models/sky-morning.glb",
+      "triangles": 1520,
+      "vertices": 4560,
+      "bytes": 128876,
+      "bounds": {
+        "min": [
+          -62,
+          -62,
+          -62
+        ],
+        "max": [
+          62,
+          62,
+          62
+        ]
+      },
+      "sha256": "a19f2822a908b505c8f63f10fae9fc76e97cee5d27dbd74722d1ea5b74f5a6b7",
+      "category": "sky",
+      "name": "בוקר",
+      "lighting": {
+        "id": "morning",
+        "name": "בוקר",
+        "top": "#9ec4ca",
+        "horizon": "#f4e2bc",
+        "sun": "#fff0c4",
+        "light": "#ffdfb0",
+        "intensity": 2.1,
+        "ambient": 1.55,
+        "sunPosition": [
+          -10,
+          15,
+          9
+        ],
+        "cloud": "#f9edcf"
+      }
+    },
+    {
+      "id": "sky-noon",
+      "file": "models/sky-noon.glb",
+      "triangles": 1520,
+      "vertices": 4560,
+      "bytes": 128868,
+      "bounds": {
+        "min": [
+          -62,
+          -62,
+          -62
+        ],
+        "max": [
+          62,
+          62,
+          62
+        ]
+      },
+      "sha256": "d0af4179a10256a742b603566f47da34e12f49eedd2d692f3a86dddde59f09ed",
+      "category": "sky",
+      "name": "צהריים",
+      "lighting": {
+        "id": "noon",
+        "name": "צהריים",
+        "top": "#85b8c9",
+        "horizon": "#d7dfc0",
+        "sun": "#fff6d5",
+        "light": "#fff1cf",
+        "intensity": 2.5,
+        "ambient": 1.65,
+        "sunPosition": [
+          -8,
+          20,
+          12
+        ],
+        "cloud": "#fff5d9"
+      }
+    },
+    {
+      "id": "sky-sunset",
+      "file": "models/sky-sunset.glb",
+      "triangles": 1520,
+      "vertices": 4560,
+      "bytes": 128872,
+      "bounds": {
+        "min": [
+          -62,
+          -62,
+          -62
+        ],
+        "max": [
+          62,
+          62,
+          62
+        ]
+      },
+      "sha256": "2ead2e92b065f25936354c4aca7feac7b81dbdacce8a81c51618c0b6f19f1768",
+      "category": "sky",
+      "name": "שעת זהב",
+      "lighting": {
+        "id": "sunset",
+        "name": "שעת זהב",
+        "top": "#b4b7cd",
+        "horizon": "#efc5a0",
+        "sun": "#ffdc9c",
+        "light": "#ffd0a0",
+        "intensity": 1.9,
+        "ambient": 1.5,
+        "sunPosition": [
+          -15,
+          9,
+          8
+        ],
+        "cloud": "#f3d6bd"
+      }
+    }
+  ],
+  "delivery": {
+    "standalone": true,
+    "textures": 0,
+    "externalRequests": 0,
+    "extensionsUsed": [
+      "KHR_materials_unlit"
+    ],
+    "extensionsRequired": [],
+    "compression": "none",
+    "licenses": "LICENSES.md",
+    "report": "REPORT.md",
+    "validation": "verification/validation.json",
+    "browserValidation": "verification/browser.json"
+  },
+  "counts": {
+    "boars": 5,
+    "vegetation": 6,
+    "trees": 3,
+    "bushes": 3,
+    "props": 7,
+    "skies": 3,
+    "glbs": 21
+  },
+  "assetBytes": 1555980
+}

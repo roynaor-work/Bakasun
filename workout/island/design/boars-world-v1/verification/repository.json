@@ -1,0 +1,38 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/boars-world-v1",
+  "scope": "workout/island/design/boars-world-v1/",
+  "existingFilesChanged": 0,
+  "changesOnlyNewFilesInAllowedFolder": true,
+  "diffCheckPassed": true,
+  "addedTrackedPaths": 55,
+  "newUntrackedPaths": 0,
+  "tests": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "environment": {
+      "node": "v24.19.0"
+    },
+    "log": "Authoring log stored outside the delivered package; this file retains the summary.",
+    "targetedRetry": {
+      "file": "tests/workout-royiki.test.mjs",
+      "exitCode": 0,
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "command": "node --test --test-force-exit tests/workout-royiki.test.mjs (temporary NODE_OPTIONS preload selects installed Chromium)",
+      "executablePath": "/usr/bin/chromium",
+      "browser": "Chromium 151.0.7922.173",
+      "adjustment": "Test-only chromium.launch wrapper selected executablePath plus --no-sandbox and --enable-unsafe-swiftshader; test bodies and app source unchanged."
+    },
+    "initialEnvironmentFailure": "Bundled Playwright Chromium headless shell is not installed. The failed browser launch left its existing test HTTP server open; the idle worker was terminated after all other test modules completed.",
+    "allNonSkippedCasesObservedPassingAcrossRuns": true,
+    "uniqueNonSkippedCasesCovered": 4262
+  }
+}

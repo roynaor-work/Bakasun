@@ -1,0 +1,253 @@
+{
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "renderer": "Chromium WebGL / SwiftShader (software; not phone performance)",
+  "errors": [],
+  "warnings": [],
+  "externalRequests": [],
+  "failedRequests": [],
+  "screenshots": [
+    "world-morning-844x390.webp",
+    "world-noon-844x390.webp",
+    "world-sunset-844x390.webp",
+    "boar-peach-844x390.webp",
+    "boar-caramel-844x390.webp",
+    "boar-lilac-844x390.webp",
+    "boar-cream-844x390.webp",
+    "boar-cocoa-844x390.webp",
+    "all-boars-all-clips.webp",
+    "world-morning-390x844.webp"
+  ],
+  "checks": {
+    "all21GLBsLoadedFromPackageOnly": true,
+    "fiveIndependentSkeletons": true,
+    "all20PosesRenderedFromGLB": true,
+    "fiveCharacterButtons": true,
+    "fourAnimationButtons": true,
+    "threeDistinctDayModes": true,
+    "fallHoldsTerminalPose": true,
+    "panicCompletesOnce": true,
+    "cameraDrag": true,
+    "cameraWheel": true,
+    "cameraReset": true,
+    "pauseStopsWebGLDraws": true,
+    "resumeAdvancesAnimation": true,
+    "offlineControlsAfterLoad": true,
+    "844x390NoOverflow": true,
+    "390x844NoOverflow": true,
+    "reducedMotionStartsPaused": true
+  },
+  "browser": "151.0.7922.173",
+  "worldRender": {
+    "frame": 9,
+    "calls": 40,
+    "triangles": 13380,
+    "points": 0,
+    "lines": 0,
+    "trianglesExcludeShadowPass": true
+  },
+  "poses": [
+    {
+      "model": "boar-peach",
+      "clip": "walk",
+      "time": 0.1,
+      "joints": 14,
+      "minY": 0.006000019164694795,
+      "maxY": 1.3950337899784608,
+      "actionTime": 0.1,
+      "visible": 1
+    },
+    {
+      "model": "boar-peach",
+      "clip": "run",
+      "time": 0.15,
+      "joints": 14,
+      "minY": 0.02310102602841463,
+      "maxY": 1.4173428504607974,
+      "actionTime": 0.15,
+      "visible": 1
+    },
+    {
+      "model": "boar-peach",
+      "clip": "fall",
+      "time": 1.3,
+      "joints": 14,
+      "minY": 0.006000018688157416,
+      "maxY": 1.081932083245286,
+      "actionTime": 1.3,
+      "visible": 1
+    },
+    {
+      "model": "boar-peach",
+      "clip": "panic",
+      "time": 0.32,
+      "joints": 14,
+      "minY": 0.018000977261042786,
+      "maxY": 1.4011012429183258,
+      "actionTime": 0.32,
+      "visible": 1
+    },
+    {
+      "model": "boar-caramel",
+      "clip": "walk",
+      "time": 0.1,
+      "joints": 14,
+      "minY": 0.006000019164694795,
+      "maxY": 1.380092339596277,
+      "actionTime": 0.1,
+      "visible": 1
+    },
+    {
+      "model": "boar-caramel",
+      "clip": "run",
+      "time": 0.15,
+      "joints": 14,
+      "minY": 0.02310102602841463,
+      "maxY": 1.4030231333298764,
+      "actionTime": 0.15,
+      "visible": 1
+    },
+    {
+      "model": "boar-caramel",
+      "clip": "fall",
+      "time": 1.3,
+      "joints": 14,
+      "minY": 0.006000018688157416,
+      "maxY": 1.0944322505250104,
+      "actionTime": 1.3,
+      "visible": 1
+    },
+    {
+      "model": "boar-caramel",
+      "clip": "panic",
+      "time": 0.32,
+      "joints": 14,
+      "minY": 0.018000977261042786,
+      "maxY": 1.3749105223789475,
+      "actionTime": 0.32,
+      "visible": 1
+    },
+    {
+      "model": "boar-lilac",
+      "clip": "walk",
+      "time": 0.1,
+      "joints": 14,
+      "minY": 0.006000019164694795,
+      "maxY": 1.4023307990473084,
+      "actionTime": 0.1,
+      "visible": 1
+    },
+    {
+      "model": "boar-lilac",
+      "clip": "run",
+      "time": 0.15,
+      "joints": 14,
+      "minY": 0.02310102602841463,
+      "maxY": 1.4239517847232253,
+      "actionTime": 0.15,
+      "visible": 1
+    },
+    {
+      "model": "boar-lilac",
+      "clip": "fall",
+      "time": 1.3,
+      "joints": 14,
+      "minY": 0.006000018688157416,
+      "maxY": 1.0650149343155293,
+      "actionTime": 1.3,
+      "visible": 1
+    },
+    {
+      "model": "boar-lilac",
+      "clip": "panic",
+      "time": 0.32,
+      "joints": 14,
+      "minY": 0.018000977261042786,
+      "maxY": 1.419075433290668,
+      "actionTime": 0.32,
+      "visible": 1
+    },
+    {
+      "model": "boar-cream",
+      "clip": "walk",
+      "time": 0.1,
+      "joints": 14,
+      "minY": 0.006000019164694795,
+      "maxY": 1.3858409644204173,
+      "actionTime": 0.1,
+      "visible": 1
+    },
+    {
+      "model": "boar-cream",
+      "clip": "run",
+      "time": 0.15,
+      "joints": 14,
+      "minY": 0.02310102602841463,
+      "maxY": 1.408583694298826,
+      "actionTime": 0.15,
+      "visible": 1
+    },
+    {
+      "model": "boar-cream",
+      "clip": "fall",
+      "time": 1.3,
+      "joints": 14,
+      "minY": 0.006000018688157416,
+      "maxY": 1.0910612961889645,
+      "actionTime": 1.3,
+      "visible": 1
+    },
+    {
+      "model": "boar-cream",
+      "clip": "panic",
+      "time": 0.32,
+      "joints": 14,
+      "minY": 0.018000977261042786,
+      "maxY": 1.384297678469005,
+      "actionTime": 0.32,
+      "visible": 1
+    },
+    {
+      "model": "boar-cocoa",
+      "clip": "walk",
+      "time": 0.1,
+      "joints": 14,
+      "minY": 0.006000019164694795,
+      "maxY": 1.3994030172840264,
+      "actionTime": 0.1,
+      "visible": 1
+    },
+    {
+      "model": "boar-cocoa",
+      "clip": "run",
+      "time": 0.15,
+      "joints": 14,
+      "minY": 0.02310102602841463,
+      "maxY": 1.421382867732964,
+      "actionTime": 0.15,
+      "visible": 1
+    },
+    {
+      "model": "boar-cocoa",
+      "clip": "fall",
+      "time": 1.3,
+      "joints": 14,
+      "minY": 0.006000018688157416,
+      "maxY": 1.0741310242657511,
+      "actionTime": 1.3,
+      "visible": 1
+    },
+    {
+      "model": "boar-cocoa",
+      "clip": "panic",
+      "time": 0.32,
+      "joints": 14,
+      "minY": 0.018000977261042786,
+      "maxY": 1.410747428494734,
+      "actionTime": 0.32,
+      "visible": 1
+    }
+  ]
+}

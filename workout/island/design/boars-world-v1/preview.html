@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e8e8cd">
+  <meta name="color-scheme" content="light">
+  <title>אחו החזירים — עולם קטן בחוץ</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main id="app" aria-label="תצוגת אחו החזירים">
+    <canvas id="world" aria-label="סביבה תלת ממדית עם חמישה חזירים ידידותיים. גררו לסיבוב והשתמשו בגלגלת להתקרבות."></canvas>
+    <header class="masthead">
+      <div class="identity"><span class="eyebrow">האי שלי · פינה בטבע</span><h1>אחו החזירים<span class="title-dot"></span></h1></div>
+      <div class="day-switch" role="group" aria-label="שעה ביום">
+        <button data-day="morning" aria-pressed="true"><span class="sun sunrise" aria-hidden="true"></span>בוקר</button>
+        <button data-day="noon" aria-pressed="false"><span class="sun" aria-hidden="true"></span>צהריים</button>
+        <button data-day="sunset" aria-pressed="false"><span class="sun sunset" aria-hidden="true"></span>שעת זהב</button>
+      </div>
+    </header>
+    <div id="loading" role="status"><span class="loader"></span>החברים בדרך לאחו…</div>
+    <div class="scene-caption"><span class="leaf" aria-hidden="true"></span><span id="caption">חמישה חברים. יום קטן בחוץ.</span></div>
+    <aside id="character-card" hidden><span id="character-name"></span><p id="character-personality"></p></aside>
+    <nav class="toolbar" aria-label="בקרי תצוגה">
+      <div class="view-controls" role="group" aria-label="סוג תצוגה">
+        <button id="view-world" aria-pressed="true" title="כל האחו">האחו</button>
+        <button id="view-studio" aria-pressed="false" title="היכרות מקרוב">מקרוב</button>
+      </div>
+      <div class="motion-controls" role="group" aria-label="תנועה">
+        <button data-clip="walk" aria-pressed="true">הליכה</button>
+        <button data-clip="run" aria-pressed="false">ריצה</button>
+        <button data-clip="fall" aria-pressed="false">נפילה</button>
+        <button data-clip="panic" aria-pressed="false">בהלה</button>
+      </div>
+      <button id="pause" class="pause" aria-label="השהיית התנועה" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+      <div id="characters" class="characters" role="group" aria-label="בחירת חזיר למבט מקרוב"></div>
+    </nav>
+    <span class="drag-hint">גררו לסיבוב · גלגלת לקירוב</span>
+    <button id="reset" title="איפוס המצלמה" aria-label="איפוס המצלמה"><svg width="17" height="17" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 5a6 6 0 1 1-1 6M4 1v4H0" stroke="currentColor" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div id="error" role="alert" hidden></div>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
