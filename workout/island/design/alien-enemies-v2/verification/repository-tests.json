@@ -1,0 +1,33 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "existingRepositoryFilesChanged": false,
+  "initialRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "durationMs": 1177615.985936,
+    "failedFile": "tests/workout-royiki.test.mjs",
+    "failure": "Playwright's chromium_headless_shell-1234 executable is not installed in this environment.",
+    "cleanup": "The test server stayed open after browser launch failed; its worker was terminated with SIGTERM after 740 seconds."
+  },
+  "targetedRetry": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/alien-v2-system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+    "adapter": "Temporary module using the repository's supported ISLAND_PLAYWRIGHT option. It selects /usr/bin/chromium and preserves the supplied launch options. No repository test or application code changed.",
+    "exitCode": 0,
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 24283.095591,
+    "browserTest": "All 50 exercise animations, rep counting, fallback, and persistent style selection passed."
+  },
+  "newPack": {
+    "assetValidation": "pass; verification/assets.json",
+    "previewValidation": "pass; verification/browser-checks.json"
+  }
+}

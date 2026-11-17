@@ -1,0 +1,320 @@
+{
+  "status": "pass",
+  "browser": "151.0.7922.173",
+  "viewports": [
+    [
+      844,
+      390
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "enemyCount": 12,
+  "damageStateChecks": 36,
+  "motionFramesChecked": 72,
+  "deathFramesChecked": 72,
+  "controlsWithin844x390": true,
+  "minimumButtonHeightPx": 40,
+  "pausedClock": true,
+  "reducedMotion": true,
+  "offline": true,
+  "offlineMethod": "browser offline=true; identical local assets fulfilled from memory",
+  "offlineAssetRequestsFulfilled": 19,
+  "fileOpenVerified": false,
+  "fileOpenLimitation": "Managed Chromium blocks file:// navigation (ERR_BLOCKED_BY_ADMINISTRATOR)",
+  "externalRequests": 0,
+  "pageErrors": [],
+  "httpErrors": [],
+  "checks": [
+    "UI selection of all 12 enemies",
+    "three distinct rendered damage states",
+    "all movement frames",
+    "interpolated path bounds and loop seams",
+    "windup before fire, locked aim, projectile counts",
+    "laser hold and 400ms duration",
+    "six-frame one-shot death and hazard cleanup",
+    "bounded split and child expiry",
+    "viewport bounds, touch targets, portrait layout",
+    "reduced motion and offline local assets"
+  ],
+  "enemies": [
+    {
+      "id": "small-saucer",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 700,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "ribbon-conveyor",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 800,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "diver",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 850,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "flying-eye",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 800,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "spiral",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1000,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "split-blob",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 900,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "shield",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1000,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "missile",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1100,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "laser",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1300,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "dodger",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 800,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "reinforced",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1200,
+      "aimLock": true,
+      "removedAfterDeath": true
+    },
+    {
+      "id": "cloud",
+      "damageStates": 3,
+      "motionFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "deathFrames": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "warningMs": 1000,
+      "aimLock": true,
+      "removedAfterDeath": true
+    }
+  ]
+}

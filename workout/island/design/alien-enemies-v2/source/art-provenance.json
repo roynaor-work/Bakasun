@@ -1,0 +1,102 @@
+{
+  "tool": "image_gen.imagegen",
+  "created": "2026-11-17",
+  "background": "transparent",
+  "sourceAtlasSize": [
+    1536,
+    1024
+  ],
+  "sourceFrames": [
+    6,
+    4
+  ],
+  "sharedPrompt": "Create one production-ready original 2D enemy sprite atlas for a friendly spaceship game for a seven-year-old. Premium illustrated clay-toy cartoon shading, rounded crisp dark navy outlines, soft highlights, a warm charming face, no brands or existing IP. Technical requirements: EXACT 1536x1024 px canvas, strictly 6 equal columns by 4 equal rows, each cell 256x256. Exactly 24 frames, centered in their own cell; entire silhouette and effects fit within x/y=26..230 in every cell. TRANSPARENT BACKGROUND, empty space must have alpha zero. No painted backdrop, gradients in the empty space, checkerboard, labels, grid lines, letters, shadows outside the sprite or objects crossing cell boundaries. Fixed upper-left lighting, orthographic front three-quarter view. Rows 1,2,3 each contain six consecutive looping motion poses of the SAME character with consistent size and anatomy. Row1 healthy. Row2 lightly scuffed mechanical equipment with one small peach patch. Row3 two peach patches and a dim accessory lamp. All states still smiling, no wounds, cracks in skin, broken glass, angry faces, teeth or scary imagery. Animate the characteristic appendages as well as a little hovering bob. Row4 exactly six consecutive disappearance frames: 1 squash of the damaged character plus tiny bubbles; 2 smaller gently fading character in bubbles; 3 character gone, expanding colored bubble ring plus round confetti; 4 wider thinner ring, scattered confetti; 5 sparse fading little confetti dots; 6 just two faint tiny twinkles. No flame, gore, skulls, sharp debris, heavy smoke or weapons pointing at camera. Ensure all six effects stay entirely inside their respective cell; no ambient glows across cell borders. CHARACTER: ",
+  "notes": "Original generated artwork. No third-party assets, brands or named characters. Only mechanical alpha normalization, uniform atlas packing and palette compression follow generation. Raw generations are retained in the authoring environment, excluded from the 4 MB deliverable.",
+  "enemies": [
+    {
+      "id": "small-saucer",
+      "sourceFile": "exec-014b2b71-390a-4552-8932-af5379e909e8.png",
+      "promptDetail": "Mint/coral little flying saucer with clear aqua dome and smiling lime alien. Six hovering poses in each of three damage rows: healthy, one peach patch and pale scuffs, two patches plus a dim lamp. Fourth row: squash, fade, bubble ring, wider ring, sparse confetti, two faint twinkles.",
+      "sourceSha256": "03be59c7b9a36f30518cbf4eb4bc00c1cab45e318d6d78ae0cdf51220f75e2ae"
+    },
+    {
+      "id": "ribbon-conveyor",
+      "sourceFile": "exec-859a4b9e-6f42-480b-993a-b7f28d197738.png",
+      "promptDetail": "A mint and yellow flying CONVEYOR BELT ALIEN: the whole horizontal rounded oval body is a tiny conveyor belt with soft coral belt treads, four circular toy rollers visibly inside the belt, little hovering fins. A compact mint head with two friendly eyes and a smile sits on the top middle, wearing a tiny coral cap. Overall horizontal racetrack silhouette, distinct from any saucer or humanoid. Belt treads advance across the six motion frames, rollers turn; head gently sways. Palette golden yellow, seafoam green, peach. Damage patches sit on the belt case, not face.",
+      "sourceSha256": "6d28d2b73d78d2363a0a1ab992fca13860410fcaa8b94ee504bbe74c8f7227f1"
+    },
+    {
+      "id": "diver",
+      "sourceFile": "exec-bb2c4bd3-2564-474f-8c5e-b7fd9b82613d.png",
+      "promptDetail": "A cute turquoise ALIEN DIVER in a round cream-and-coral diving helmet with clear blue face window, one soft curly air tube, little blue scuba tank on the back, two broad coral flippers and little rounded mitten arms. Lime-green smiling alien face visible inside helmet, no realistic human. Full body front three-quarter view, compact circular helmet and two swinging flippers. The six motion frames have alternate flipper kicks and an advancing small bubble above helmet, body bobs and arms paddle. No harpoon, no realistic heavy diving gear. Damage patches on helmet rim and air tank, no glass cracks.",
+      "sourceSha256": "eab112732638366aaca1f180640ae3437cf797547ca744f7c9552efaa0f1ef40"
+    },
+    {
+      "id": "flying-eye",
+      "sourceFile": "exec-ef1e6d65-92a9-43c0-834d-6ad6fba28315.png",
+      "promptDetail": "A friendly FLYING EYE alien: a single very large glossy indigo iris in a warm ivory round eyeball body, a friendly curved teal upper eyelid with no eyelashes, two tiny rounded lavender wings on each side, a little smiling mouth below iris, peach cheek dots. NOT anatomical, no veins, no tendrils, no red eye, no angry gaze. Toy round shape. Six frames gently flap the lavender wings and look slightly left/center/right while staying happily wide eyed. Tiny pastel aqua ring accessory sits beneath body; damage is peach tape on this ring, and small light teal freckles on body; no eye injuries.",
+      "sourceSha256": "15554c062e468277841cd97892afe74967bd3ffe1a641a18f5e8fbc0124d625b"
+    },
+    {
+      "id": "spiral",
+      "sourceFile": "exec-d13e7ac5-e1a6-4318-8255-c4da175b0b37.png",
+      "promptDetail": "A friendly SPIRAL alien shaped like a broad curled lavender-and-teal spiral seashell floating upright; the flat spiral faces camera, ending in a peach round head with two gentle shiny eyes, tiny cheek dots and little smile. Two short golden antennae with round ends. No humanoid body, no visible legs, no snail brand. Spiral windings gently flex/coil clockwise in six frames and small round antennae bounce, the face remains upright. Broad simple readable silhouette like a coiled ribbon candy. Damage patches are on a tiny mint harness around the outer coil.",
+      "sourceSha256": "b9990fe0d05f67dead05856c5b69c05685c11616cd3200bd8fef7eb913c08635"
+    },
+    {
+      "id": "split-blob",
+      "sourceFile": "exec-fe6bc6a6-211e-4fc9-b396-6c3c07bb5be2.png",
+      "promptDetail": "A friendly SPLITTING BLOB alien: soft plump coral-pink jelly bean body, two rounded small lobes on top and two stubby rounded feet, two shiny navy eyes and a small cheerful smile with blush cheeks, little cream jelly star badge. No slime dripping, no teeth, not anatomical. Six movement frames go from round blob to an elastic peanut shape with two round lobes pulling apart then recombining into one round bean, within the same cell; no extra unrelated characters. Damage indicated by one then two peach adhesive patches on a little teal belt, never wounds. Palette pastel coral, warm peach and mint.",
+      "sourceSha256": "3b8c47c45c1cf36759df666f22e55d3ae0149b9325daa726152c31c9820f52cd"
+    },
+    {
+      "id": "shield",
+      "sourceFile": "exec-faaae097-f0f8-4942-91fc-51a3ca17206b.png",
+      "promptDetail": "A friendly SHIELD alien: tiny seafoam-green smiling round creature in an ivory rounded space suit carrying a broad translucent aqua HEXAGONAL shield in front and to its left, shield has thick rounded mint edges and a central soft yellow circular jewel, two little navy space boots visible under shield, a pair of soft golden rounded antennae. Entire body readable behind shield, the shield is the dominant unique silhouette. Six motion poses raise and lower shield a little, jewel gently brightens without flashing. Damage states put peach patches and small scuffs on solid shield rim, never face or glass cracks.",
+      "sourceSha256": "ff845c3c7d15de2f7b74788f9b74112584a79cca6768f1224889997cfce8bcb4"
+    },
+    {
+      "id": "missile",
+      "sourceFile": "exec-2b2e87a2-3f51-438d-91cd-3c70e9433e60.png",
+      "promptDetail": "A friendly MISSILE alien spaceship: small friendly lime-green alien face inside a cream and teal central round cockpit, TWO very obvious chunky coral-and-yellow TOY ROCKET PODS mounted symmetrically at the sides, round rocket noses point DOWN toward bottom of each cell, soft fins, rounded buttons. No military marks, no sharp points, no angry face, no flames. Six hover poses alternate a gentle sidepod tilt and little cyan exhaust bubbles. Damage states small peach patches on cockpit rim and pod casing; two stages visible. This enemy's broad double-pod silhouette must be very different from a saucer.",
+      "sourceSha256": "a73e25b0606ef6b20698209d98be73f4f69175c42c715ee157992fdf01a07f63"
+    },
+    {
+      "id": "laser",
+      "sourceFile": "exec-486d5f79-61ac-47cc-a9ab-51c3c4bb6050.png",
+      "promptDetail": "A friendly LASER alien: tiny purple smiling alien face inside a round mint saucerless capsule standing over a prominent wide golden rounded geometric PRISM LENS with three glowing lavender facets, two stubby cream mechanical arms holding lens, a single rounded glowing pale aqua antenna on top. Elegant compact prism/lens robot silhouette, no sharp weapon or realistic gun. Six hover poses make the lens slowly rotate/flex and pale purple charge dots slowly shift around it; do not draw any beam outside the sprite. Damage patches on mint shell and golden lens holder, no broken glass or hurt face.",
+      "sourceSha256": "c137101d2d91209446a05d15c19cf8368c77a8616435c0e4cc1019388032a061"
+    },
+    {
+      "id": "dodger",
+      "sourceFile": "exec-14ca926a-0383-4b6a-b24b-4fc99a7393a0.png",
+      "promptDetail": "A friendly DODGING alien spaceship: a slim peach oval smiling alien body in a mint rounded racing helmet with a clear face visor, two large swept-back AQUA BOOMERANG FINS with soft rounded tips and yellow accents; two tiny rounded coral thruster bells behind. Streamlined asymmetric three-quarter pose but whole silhouette centered. Six motion poses bank a little left/right with fins flexing and short cyan bubble puffs, no long motion trails crossing cell. No teeth or brands. Damage patches appear on fin edge and helmet rim, no injuries or broken glass.",
+      "sourceSha256": "84c0f49686a953eb58f74ec9e51ce7a10b491bf6aede2ca1b5c7452232a38041"
+    },
+    {
+      "id": "reinforced",
+      "sourceFile": "exec-f64962e0-50ca-4654-b4cb-c16e16b84f32.png",
+      "promptDetail": "A friendly REINFORCED armored alien: squat broad golden-yellow rounded capsule ROBOT with turquoise smiling face window, two enormous cream layered rounded shoulder plates, wide coral segmented chest armor, two short navy-blue rounded boots and mitten hands, small mint dome on top. Two big rounded armor rivets and a tiny cheerful star badge. Thick heavy friendly toy silhouette, clearly more chunky than other enemies; no weapons, spikes or angry brows. Six frames do a slow bouncy heavy hover with plates and mittens rocking. Damage states add a peach patch then two patches to chest armor and a little dim round shoulder lamp; no cracks or injuries.",
+      "sourceSha256": "8d345fe8a6172b359b14e30366d421abc5b55b3194ff8e83da8958a159dac7fe"
+    },
+    {
+      "id": "cloud",
+      "sourceFile": "exec-e392e97e-270f-4134-8fe2-19c2282d6c92.png",
+      "promptDetail": "A friendly CLOUDS alien: three very fluffy rounded warm-ivory CLOUD PUFFS merged into one floating horizontal shape, central larger puff has two gentle shiny navy eyes, a little smiling mouth and coral cheeks, tiny mint flying goggles resting on top, two smaller aqua vapor puffs underneath like feet. No dark thundercloud, lightning, scary face or fog backdrop. Six poses have individual cloud puffs expanding/contracting softly and two tiny bubbles rising, silhouette stays entirely inside cell. Damage states are a peach adhesive patch on mint goggle strap then two patches and a little lavender scuff on a tiny pastel belt around the cloud, no wounds. Cream/seafoam/lavender palette.",
+      "sourceSha256": "c0239075516809c8f5675cb702e2591c9d8275bac3616db4fd4bdbef11ad3e68"
+    }
+  ],
+  "packaging": {
+    "paletteColors": 192,
+    "alphaLevelPercent": [
+      28,
+      99.6
+    ],
+    "alphaFloorOverridesPercent": {
+      "cloud": 70,
+      "dodger": 60
+    },
+    "cellScale": 0.875,
+    "transparentGutterPx": 16
+  }
+}

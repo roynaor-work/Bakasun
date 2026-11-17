@@ -1,0 +1,123 @@
+{
+  "status": "pass",
+  "enemyCount": 12,
+  "spritePngFiles": 48,
+  "motionFrames": 216,
+  "deathFrames": 72,
+  "totalFrames": 288,
+  "runtimeAtlasBytes": 2455831,
+  "bytesExcludingThisRecord": 3402140,
+  "budgetBytes": 4000000,
+  "checks": [
+    "PNG dimensions and SHA-256",
+    "real alpha in every PNG",
+    "16 px transparent gutters in all 288 frames",
+    "six distinct motion frames per state",
+    "three distinct damage posters",
+    "six-frame non-looping fade",
+    "JSON/browser data parity",
+    "closed movement loops",
+    "aim lock, warnings, projectile/beam/split caps",
+    "unambiguous HP state boundaries",
+    "original artwork provenance",
+    "whole-directory byte budget"
+  ],
+  "enemies": [
+    {
+      "id": "small-saucer",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 157536
+    },
+    {
+      "id": "ribbon-conveyor",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 217666
+    },
+    {
+      "id": "diver",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 232778
+    },
+    {
+      "id": "flying-eye",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 178346
+    },
+    {
+      "id": "spiral",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 231250
+    },
+    {
+      "id": "split-blob",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 203929
+    },
+    {
+      "id": "shield",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 238932
+    },
+    {
+      "id": "missile",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 205706
+    },
+    {
+      "id": "laser",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 182175
+    },
+    {
+      "id": "dodger",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 197201
+    },
+    {
+      "id": "reinforced",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 231775
+    },
+    {
+      "id": "cloud",
+      "pngFiles": 4,
+      "motionFrames": 18,
+      "deathFrames": 6,
+      "transparentGutterPx": 16,
+      "atlasBytes": 178537
+    }
+  ]
+}
