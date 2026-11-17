@@ -24,6 +24,28 @@ import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-16';
 import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-16';
 import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-16';
 
+import {pitAutoEnabled,racingV24Flags} from '../minigames/racing-v24.mjs?v=island-v2-20261107-16';
+import {navalRadarV241,navalAirEndV241} from '../minigames/naval-v241.mjs?v=island-v2-20261107-16';
+import {navalAimV24} from '../minigames/naval-v24.mjs?v=island-v2-20261107-16';
+import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-16';
+import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-16';
+import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-16';
+
+/** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
+function helpKeys(id){
+ const keys=[1,2,3].map(i=>`minigame.${id}.help.${i}`);
+ if(polishValue('reviewHelp')==='0')return keys;
+ if(id==='islandRacing'){
+  if(!racingV24Flags().pit)keys[1]+='.noPit';else if(!pitAutoEnabled())keys[1]+='.v24';
+ }
+ if(id==='navalDuel'){
+  if(!navalLockOn())keys[0]+='.noLock';
+  else if(!navalAimV24())keys[0]+='.v23';
+  else if(!navalRadarV241())keys[0]+='.v24';
+  if(!navalAirEndV241()||!navalAirEnabled())keys[2]+='.v24';
+ }
+ return keys;
+}
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
 // Today's-task lock: the kit's lock icon in place of the emoji pair; the label text stays in the button.
@@ -239,8 +261,8 @@ export class ActivityInterface {
     // Event countdown is the introduction; play opens directly and help stays reachable.
     this.launch(choice.gameId,choice.eventId,stage);
   }
-  narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
-  helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
+  narrateHelp(id) {for(const key of helpKeys(id)){this.engine.narration.announce(key);this.ui.narrate(key);}}
+  helpLines(id) {const lines=el('div','game-help-lines');for(const key of helpKeys(id))lines.append(el('p','',this.t(key)));return lines;}
   soccerHandedness(id='soccer'){
     const c=this.data.config.minigames[id].controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action=id+'-hand';
     let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}
