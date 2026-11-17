@@ -79,7 +79,7 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
  }finally{await t.csp.dispose();await t.context.close();await browser.close();await server.close();}
 });
 
-test('automatic download fills the device cache after open, and a data saver skips it',{skip:!enabled,timeout:600000},async()=>{
+test('automatic download fills the device cache after open, and a data saver skips it',{skip:!enabled,timeout:1500000},async()=>{/* 17/11 v25: the gentle download (one file at a time, 250 ms apart, 1,300 files) needs about 8 minutes on the slow swiftshader machine; the budget is a harness limit, not a behaviour */
  const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
  const saver=await open(browser,server,{saveData:true}),auto=await open(browser,server);
@@ -89,7 +89,7 @@ test('automatic download fills the device cache after open, and a data saver ski
   await auto.page.goto(server.url+'?dev=1&quality=high&autoIdleMs=2000',{waitUntil:'networkidle'});
   // A fresh profile opens the avatar dialog; the background download waits until it is closed (by design).
   await auto.page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:120000});if(await auto.page.locator('[data-action=avatar-start]').count())await auto.page.locator('[data-action=avatar-start]').click();
-  await auto.page.waitForFunction(()=>window.__offlineState?.state==='ready'||window.__offlineState?.state==='partial',null,{timeout:480000});
+  await auto.page.waitForFunction(()=>window.__offlineState?.state==='ready'||window.__offlineState?.state==='partial',null,{timeout:1200000});
   const state=await auto.page.evaluate(()=>window.__offlineState);assert.equal(state.state,'ready',JSON.stringify(state.result?.failed));
   const key=(await auto.page.evaluate(()=>caches.keys()))[0];assert.match(key,/^island-assets-/);
   await auto.csp.assertClean();
