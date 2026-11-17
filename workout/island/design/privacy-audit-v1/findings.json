@@ -1,0 +1,877 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-17",
+  "timezone": "Asia/Jerusalem",
+  "scope": {
+    "mode": "read-only audit; only two new deliverable files",
+    "baseline_commit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "branch": "codex/privacy-audit-v1",
+    "tracked_files": 22954,
+    "text_files_scanned": 6873,
+    "gzip_files_expanded": 185,
+    "text_bytes_scanned": 289404702,
+    "images_metadata_checked": 14350,
+    "history_blobs_scanned": 21172,
+    "history_bytes_scanned": 580381222,
+    "history_scope": "all locally reachable refs after fetching main; not all remote branches",
+    "remote_branches_observed": 504,
+    "public_artifacts": {
+      "tracked_artifact_files": 6226,
+      "artifacts_selected_by_pages_workflow": 4874,
+      "retained_images": 3535,
+      "retained_json": 870,
+      "examples": [
+        "north/brand-v1/verification/SHA256SUMS",
+        "north/brand-v1/verification/contact-1.webp",
+        "north/brand-v1/verification/contact-2.webp",
+        "north/brand-v1/verification/contact-3.webp",
+        "north/brand-v1/verification/copy-fallback.json",
+        "north/brand-v1/verification/delivery-audit.json"
+      ],
+      "model": "Static evaluation of copy/remove rules only, not deployment verification"
+    },
+    "ocr": {
+      "broad": {
+        "archives": 44,
+        "archive_members": 1307,
+        "archive_errors": [],
+        "artifact_images_total": 4267,
+        "ocr_sample_count": 120,
+        "successful_ocr": 120,
+        "ocr_candidate_locations": []
+      },
+      "targeted": {
+        "count": 44,
+        "successful": 44,
+        "candidate_locations": []
+      }
+    },
+    "pdf_files_text_extracted": 18,
+    "production_data_accessed": false,
+    "live_header_check": "blocked by environment proxy; not verified",
+    "live_supabase_policies_and_grants": "not accessed or verified",
+    "limitations": [
+      "Signature scans cannot prove absence of arbitrary secrets or personal names.",
+      "Not all images, audio, video, GLB metadata, historical binaries, remote branches, PR artifacts, forks or unreferenced objects were semantically inspected.",
+      "No device-specific browser speech traffic was captured.",
+      "Local browser markers verify policy behavior, not an exploitable injection path."
+    ]
+  },
+  "summary": {
+    "high": 3,
+    "medium": 12,
+    "low": 3,
+    "findings": 18
+  },
+  "redaction_policy": "Only source locations for any personal data or credentials. No raw values, source excerpts, screenshots or value fingerprints.",
+  "checks": {
+    "source_credential_classification": {
+      "current_jwt_occurrences": 2,
+      "current_jwt_roles": [
+        "anon"
+      ],
+      "history_jwt_occurrences": 12,
+      "history_jwt_roles": [
+        "anon"
+      ],
+      "recognized_private_or_server_secret_signatures": 0,
+      "additional_secret_signature_hits": 0,
+      "note": "Heuristic result only; public anon keys are not server secrets."
+    },
+    "commit_metadata": {
+      "commits_checked": 1676,
+      "commits_with_non_noreply_email": 1650,
+      "example_commit_locations": [
+        "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+        "63d8937eb893f5ba977f52fb39ac7668b1762ecf",
+        "0de67fccdd6f447f677fada8925cfe3f62de80e6",
+        "f58f6e30df4e9b42e1481830a73aefb23cbaf4a2",
+        "6388f7d79eccd8a5bd6e25a9e9004f99c6376ae1"
+      ]
+    },
+    "browser": {
+      "conditions": "Fresh isolated browser contexts; external requests blocked; no media permission granted; no production reads/writes; original CSP",
+      "pages": [
+        {
+          "path": "workout/island/index.html",
+          "external": 0,
+          "non_get": 0,
+          "page_errors": 0,
+          "localStorageKeys": [],
+          "databases": [],
+          "csp": true,
+          "inlineExecuted": false
+        },
+        {
+          "path": "workout/index.html",
+          "external": 0,
+          "non_get": 0,
+          "page_errors": 0,
+          "localStorageKeys": [
+            "kidfit.v1"
+          ],
+          "databases": [
+            "kidfit-vids"
+          ],
+          "csp": false,
+          "inlineExecuted": true
+        },
+        {
+          "path": "workout/index.html#/settings",
+          "external": 0,
+          "non_get": 0,
+          "page_errors": 0,
+          "localStorageKeys": [],
+          "databases": [
+            "kidfit-vids"
+          ],
+          "csp": false,
+          "inlineExecuted": true
+        },
+        {
+          "path": "workout/cam-lab/index.html",
+          "external": 0,
+          "non_get": 0,
+          "page_errors": 0,
+          "localStorageKeys": [],
+          "databases": [],
+          "csp": true,
+          "inlineExecuted": false
+        },
+        {
+          "path": "workout/voice-rec/index.html",
+          "external": 0,
+          "non_get": 0,
+          "page_errors": 0,
+          "localStorageKeys": [],
+          "databases": [
+            "kidfit-voice-recordings"
+          ],
+          "csp": false,
+          "inlineExecuted": true
+        }
+      ],
+      "same_origin_cross_path_read": true
+    },
+    "synthetic_source_probes": {
+      "conditions": "Local memory only; synthetic data; real source modules; no external calls",
+      "rootWorkerCachesNoStoreGet": true,
+      "islandWorkerCachesAssetOutsideIsland": true,
+      "islandWorkerCachesVerificationOnRequest": true,
+      "unapprovedCameraEndpointAccepted": true,
+      "learningFallsBackToRemoteVoice": true
+    },
+    "existing_tests": {
+      "command": "node --test tests/vids.test.mjs tests/cam-lab-upload.test.mjs tests/island-offline.test.mjs",
+      "passed": 65,
+      "failed": 0,
+      "skipped": 0
+    },
+    "dependency_advisories": {
+      "query_packages": 16,
+      "query_versions": 31,
+      "results": {
+        "sharp": [
+          {
+            "id": 1124066,
+            "url": "https://github.com/advisories/GHSA-f88m-g3jw-g9cj",
+            "title": "sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591",
+            "severity": "high",
+            "vulnerable_versions": "<0.35.0",
+            "cwe": [
+              "CWE-1395"
+            ],
+            "cvss": {
+              "score": 0,
+              "vectorString": null
+            }
+          },
+          {
+            "id": 1193725,
+            "url": "https://github.com/advisories/GHSA-rgj7-g3m4-5g8c",
+            "title": "sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545",
+            "severity": "high",
+            "vulnerable_versions": "<0.35.4",
+            "cwe": [
+              "CWE-122"
+            ],
+            "cvss": {
+              "score": 0,
+              "vectorString": null
+            }
+          },
+          {
+            "id": 1241331,
+            "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w",
+            "title": "sharp : Vulnerability in librsvg dependency CVE-2026-96889",
+            "severity": "high",
+            "vulnerable_versions": "<0.35.5",
+            "cwe": [
+              "CWE-416",
+              "CWE-1395"
+            ],
+            "cvss": {
+              "score": 0,
+              "vectorString": null
+            }
+          }
+        ],
+        "pdfjs-dist": [
+          {
+            "id": 1118732,
+            "url": "https://github.com/advisories/GHSA-wgrm-67xf-hhpq",
+            "title": "PDF.js vulnerable to arbitrary JavaScript execution upon opening a malicious PDF",
+            "severity": "high",
+            "vulnerable_versions": "<=4.1.392",
+            "cwe": [
+              "CWE-754"
+            ],
+            "cvss": {
+              "score": 8.8,
+              "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+            }
+          }
+        ]
+      },
+      "queried_versions": {
+        "playwright-core": [
+          "1.56.1",
+          "1.57.0"
+        ],
+        "pngjs": [
+          "7.0.0"
+        ],
+        "gltf-validator": [
+          "2.0.0-dev.3.10"
+        ],
+        "three": [
+          "0.160.0",
+          "0.180.0"
+        ],
+        "@playwright/test": [
+          "1.57.0"
+        ],
+        "playwright": [
+          "1.56.1",
+          "1.62.1",
+          "1.64.1"
+        ],
+        "sharp": [
+          "0.34.5",
+          "0.35.4",
+          "0.35.5"
+        ],
+        "meshoptimizer": [
+          "0.22.0",
+          "0.23.0",
+          "0.24.0",
+          "0.25.0",
+          "1.3.0"
+        ],
+        "@gltf-transform/core": [
+          "4.2.1",
+          "4.5.1"
+        ],
+        "@gltf-transform/extensions": [
+          "4.2.1",
+          "4.5.1"
+        ],
+        "draco3dgltf": [
+          "1.5.7",
+          "1.5.9"
+        ],
+        "@gltf-transform/functions": [
+          "4.2.1",
+          "4.5.1"
+        ],
+        "esbuild": [
+          "0.25.0",
+          "0.25.12"
+        ],
+        "pdfjs-dist": [
+          "3.11.174"
+        ],
+        "@mediapipe/tasks-vision": [
+          "0.10.32"
+        ],
+        "pdf-lib": [
+          "1.17.1"
+        ]
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "PA-001",
+      "severity": "high",
+      "status": "open",
+      "title": "מידע אישי ופרטי חשבון פורסמו בקוד, במסמכים ובהיסטוריית Git",
+      "observed": "נמצא מידע אישי ממשי במיקומים המפורטים. בהתאם לבקשה לא נשמרים כאן ערכים, קטעי מקור, צילומים או גיבובים של המידע. גם מטא־דאטה של קומיטים כוללים כתובות שאינן כתובות noreply. מחיקה מהענף הנוכחי לבדה אינה מסירה היסטוריה או עותקים ציבוריים.",
+      "locations": [
+        {
+          "path": "CLAUDE.md",
+          "line": 1
+        },
+        {
+          "path": "CLAUDE.md",
+          "line": 18
+        },
+        {
+          "path": "CLAUDE.md",
+          "line": 60
+        },
+        {
+          "path": "CLAUDE.md",
+          "line": 65
+        },
+        {
+          "path": "CLAUDE.md",
+          "line": 70
+        },
+        {
+          "path": "js/data/defaults.js",
+          "line": 3
+        },
+        {
+          "path": "js/data/defaults.js",
+          "line": 4
+        },
+        {
+          "path": "js/data/defaults.js",
+          "line": 8
+        },
+        {
+          "path": "js/data/defaults.js",
+          "line": 15
+        },
+        {
+          "path": "supabase/bootstrap.sql",
+          "line": 6
+        },
+        {
+          "path": "supabase/bootstrap.sql",
+          "line": 9
+        },
+        {
+          "path": "supabase/north.sql",
+          "line": 26
+        },
+        {
+          "path": "supabase/north.sql",
+          "line": 27
+        },
+        {
+          "path": "north/js/config.js",
+          "line": 7
+        },
+        {
+          "path": "north/js/config.js",
+          "line": 11
+        },
+        {
+          "path": "north/legal.html",
+          "line": 194
+        }
+      ],
+      "remediation": "להעביר הגדרות ופרטי זהות למאגר פרטי או לקונפיגורציה מאושרת; לפרסם דוגמאות סינתטיות בלבד. להכין בנפרד תוכנית ניקוי היסטוריה, ענפים וארטיפקטים, ושימוש בכתובות noreply לקומיטים. שכתוב היסטוריה ומחיקה דורשים משימת ביצוע נפרדת; לא בוצעו בביקורת.",
+      "verification": "סריקה חוזרת של כל המיקומים, ההיסטוריה וענפים ציבוריים; סקירה אנושית של שמות ופרטים שאינם ניתנים לזיהוי בחתימות.",
+      "limitations": "ממצאים עכשוויים אומתו ידנית. נסרקו refs מקומיים והיסטוריית main הזמינה; לא נשלפו כל הענפים המרוחקים, PR, forks או caches של צדדים אחרים."
+    },
+    {
+      "id": "PA-002",
+      "severity": "medium",
+      "status": "open",
+      "title": "קובצי verification וצילומי מסך נבחרים לפרסום ללא מסנן פרטיות",
+      "observed": "כללי ההעתקה וההחרגה של Pages משאירים 4,874 קובצי אימות/צילומים, ובהם 3,535 תמונות ו-870 קובצי JSON. source וחבילות סקירה מסוימות מוחרגים, אך verification אינו מוחרג ככלל. הסרת Markdown או noindex אינה הגנת גישה. זהו מסלול פרסום מוכח בקוד, ולא טענה שכל קובץ כולל מידע אישי. במדגמי OCR ובמטא־דאטה לא אומתה התאמה לפרטי המקור שנבדקו; אין בביקורת ממצא מאומת של צילום מסך עם מידע אישי.",
+      "locations": [
+        {
+          "path": ".github/workflows/pages.yml",
+          "line": 26
+        },
+        {
+          "path": ".github/workflows/pages.yml",
+          "line": 32
+        },
+        {
+          "path": "workout/island/verification/naval-shots/verification.json",
+          "line": 1
+        },
+        {
+          "path": "workout/voice-rec/index.html",
+          "line": 6
+        }
+      ],
+      "remediation": "לפרסם allowlist של קובצי runtime; לשמור ראיות פרטיות מחוץ לריפו הציבורי. לחסום פרסום קבצים עם מידע אישי באמצעות בדיקת טקסט, ארכיונים, OCR ומטא־דאטה, ולדרוש הקשר בדיקה חדש עם נתונים סינתטיים.",
+      "verification": "בניית staging בספרייה זמנית צריכה להראות שאין בו verification, snapshots או צילומי בדיקה; סריקת שארית הפרסום והיסטוריית Git.",
+      "limitations": "הספירה היא חישוב סטטי של ה-workflow. האתר החי נחסם ברשת הסביבה. נבדקו כל מטא־דאטת התמונות ומדגם OCR; אין כיסוי חזותי מלא לכל התמונות והמדיה."
+    },
+    {
+      "id": "PA-003",
+      "severity": "high",
+      "status": "open",
+      "title": "אפליקציית הילד והאפליקציות האחרות חולקות גבול אבטחה של origin",
+      "observed": "נתיבים שונים באותו hostname אינם מבודדים localStorage, IndexedDB או CacheStorage. קוד שרץ באפליקציה אחרת באותו origin יכול לקרוא מידע של הילד, קוד משפחה ותורי מדיה. מבחן דפדפן עם סמן סינתטי בלבד אישר קריאה בין נתיב האי לנתיב החנות. נדרשת מראש הרצת קוד באותו origin; לא הוכחה השתלטות מרחוק.",
+      "locations": [
+        {
+          "path": "js/store.js",
+          "line": 4
+        },
+        {
+          "path": "js/files.js",
+          "line": 3
+        },
+        {
+          "path": "workout/js/store.js",
+          "line": 3
+        },
+        {
+          "path": "workout/js/vids.js",
+          "line": 5
+        },
+        {
+          "path": "workout/cam-lab/upload.mjs",
+          "line": 1
+        }
+      ],
+      "remediation": "לארח את סביבת הילד ב-origin נפרד מסביבת העסק והחנות. עד אז לצמצם סקריפטים חיצוניים, שמירת יכולות גישה ונתוני מדיה. שינוי שם מפתח או תת־נתיב אינו בידוד.",
+      "verification": "סמן סינתטי ונתוני IndexedDB של העסק אינם נגישים מ-origin הילד ולהפך; לכל origin מדיניות CSP והרשאות נפרדת.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-004",
+      "severity": "medium",
+      "status": "open",
+      "title": "גרסת PDF.js בעלת חולשת אבטחה מוכרת נטענת ב-origin המשותף",
+      "observed": "האפליקציה הראשית טוענת PDF.js 3.11.174 ו-worker מ-CDN. מאגר npm והייעוץ GHSA-wgrm-67xf-hhpq מאשרים שהגרסה מושפעת מ-CVE-2024-4367. אין isEvalSupported:false בקריאות getDocument. ה-CSP הראשי אינו מתיר unsafe-eval ולכן מספק הקלה חשובה; לא נטען שהניצול הצליח או שהוא נגיש במסלול חילוץ הטקסט שנבדק.",
+      "locations": [
+        {
+          "path": "js/files.js",
+          "line": 32
+        },
+        {
+          "path": "js/files.js",
+          "line": 36
+        },
+        {
+          "path": "js/pdfedit.js",
+          "line": 14
+        },
+        {
+          "path": "js/pdfedit.js",
+          "line": 16
+        },
+        {
+          "path": "index.html",
+          "line": 10
+        }
+      ],
+      "remediation": "לשדרג לגרסה נתמכת ומתוקנת, לארח מקומית ולהצמיד קובץ/גיבוב; להגדיר isEvalSupported:false כהגנה נוספת ולשמר CSP ללא unsafe-eval. לבדוק מחדש את מסלולי פתיחת ה-PDF לפני שחרור.",
+      "verification": "בדיקת advisory על גרסת הקוד שהורדה בפועל, ורגרסיה עם קבצים סינתטיים בממשק הייבוא והעריכה תחת CSP המקורי.",
+      "limitations": "אישור גרסה פגיעה במאגר advisories, לא הוכחת exploit. לא הועלו או נפתחו מסמכים אמיתיים."
+    },
+    {
+      "id": "PA-005",
+      "severity": "medium",
+      "status": "open",
+      "title": "קוד המשפחה הוא יכולת גישה משותפת ללא הפרדת הורה/ילד או ביטול שרת",
+      "observed": "ללא התחברות, מי שמחזיק קוד רשום רשאי לקרוא ולכתוב אירועים ולקבל קישורי מדיה. הקוד שנוצר הוא שמונה תווים אקראיים, בערך 40 ביט; ה-PIN המקומי אינו נבדק ב-RPC. יצירת קוד חדש בטלפון אינה מבטלת את הישן בענן, ואין במיגרציה מנגנון תוקף, ביטול או מכשירים מורשים. גם Realtime משתמש בקוד בשם נושא ציבורי ללא private:true או אימות הורה.",
+      "locations": [
+        {
+          "path": "workout/js/cloud.js",
+          "line": 11
+        },
+        {
+          "path": "supabase/family.sql",
+          "line": 42
+        },
+        {
+          "path": "supabase/family.sql",
+          "line": 78
+        },
+        {
+          "path": "workout/js/net.js",
+          "line": 16
+        },
+        {
+          "path": "workout/js/net.js",
+          "line": 2
+        },
+        {
+          "path": "workout/js/app.js",
+          "line": 1198
+        }
+      ],
+      "remediation": "להוסיף זהות הורה מאומתת, שיוך מכשירים והרשאות נפרדות; לאפשר ביטול והחלפה בשרת. אם משמרים קוד, להגדיל אנטרופיה, להגביל ניסיונות ולהימנע משימוש בו כשם ערוץ; להשתמש ב-Realtime פרטי עם הרשאת שרת.",
+      "verification": "קוד או מכשיר שבוטל אינם קוראים, כותבים או מצטרפים לערוץ; לילד אין הרשאות הורה; קישור מדיה שכבר נחתם פג לפי ה-TTL.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-006",
+      "severity": "medium",
+      "status": "open",
+      "title": "קוד המשפחה נשמר גם כטקסט גלוי בצד השרת",
+      "observed": "למרות טבלת families המגובבת, family_push שומר את הקוד המנורמל ב-family_events.family_code. גם שמות אובייקטי המדיה מכילים את הקוד. חשיפה של שורת DB, נתיב קובץ, לוג או גיבוי עלולה לחשוף יכולת גישה, ולא רק מזהה משפחה.",
+      "locations": [
+        {
+          "path": "supabase/family.sql",
+          "line": 11
+        },
+        {
+          "path": "supabase/family.sql",
+          "line": 59
+        },
+        {
+          "path": "workout/js/vids-cloud.js",
+          "line": 66
+        },
+        {
+          "path": "supabase/vids-signed.sql",
+          "line": 34
+        }
+      ],
+      "remediation": "להשתמש במזהה משפחה פנימי אטום לנתוני אירועים ונתיבי Storage, ולהחזיק בנפרד גיבוב של יכולת הגישה. להסיר קודים ו-signed URLs מלוגים ומקובצי בדיקה.",
+      "verification": "גיבוי DB ונתיב Storage סינתטיים אינם מספיקים ליצירת בקשה מורשית או לשחזור קוד משפחה.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-007",
+      "severity": "medium",
+      "status": "open",
+      "title": "מחיקה מקומית אינה מוחקת עותקי ענן, מדיה ותורים",
+      "observed": "כפתור מחיקת הנתונים קורא store.wipe בלבד; הוא אינו מנקה את תור הענן, תמונות/הקלטות נפרדות, IndexedDB או הגדרת העלאת המצלמה. מחיקת סרטון היא מהמכשיר בלבד; גרסאות בענן נשמרות. family_remove מאפשר רק basketball ולא workout, ותור כתיבה עשוי להישאר לאחר מחיקה מקומית. אין מדיניות תפוגה לאירועים ולמדיה.",
+      "locations": [
+        {
+          "path": "workout/js/store.js",
+          "line": 61
+        },
+        {
+          "path": "workout/js/app.js",
+          "line": 1207
+        },
+        {
+          "path": "workout/js/vids.js",
+          "line": 69
+        },
+        {
+          "path": "workout/js/cloud.js",
+          "line": 40
+        },
+        {
+          "path": "supabase/family.sql",
+          "line": 75
+        }
+      ],
+      "remediation": "למפות עותקים ומשך שמירה לכל סוג מידע, להציע להורה מחיקה מאומתת לפי פריט, ולבטל גם העלאה ממתינה של אותו פריט. לדייק את נוסח המסך והגיבוי; לקבוע retention ולטפל בגרסאות ישנות בענן. כל מחיקה אמיתית תתבצע רק במשימת ביצוע מורשית.",
+      "verification": "מחיקת פריט סינתטי לא משאירה עותק בלתי צפוי ולא מאפשרת לתור להעלות אותו שוב לאחר חיבור; הממשק מסביר אילו עותקים נשארים.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-008",
+      "severity": "medium",
+      "status": "open",
+      "title": "RPC אנונימיים מקבלים רישום ו-payload ללא מכסות יישומיות",
+      "observed": "family_register פתוח ליצירת קודים, ו-family_push עובר על מערך jsonb ללא מגבלת כמות, גודל payload, קצב או תקופת שמירה ב-SQL. מגבלת 20 פריטים בלקוח ומגבלת 500 בקריאה אינן מגבלות כתיבה בשרת. קוד משפחה אינו מתן זכות בלתי מוגבלת לצריכת משאבי הפרויקט.",
+      "locations": [
+        {
+          "path": "supabase/family.sql",
+          "line": 46
+        },
+        {
+          "path": "supabase/family.sql",
+          "line": 57
+        },
+        {
+          "path": "workout/js/cloud.js",
+          "line": 32
+        }
+      ],
+      "remediation": "להגדיר מגבלת בקשה, מספר אירועים, סכמת payload, מכסה למשפחה וקצב לרישום/אימות בשרת. להחיל מינימום הרשאות ולבטל PUBLIC EXECUTE במפורש בפונקציות שנחשפות רק לתפקידים מסוימים.",
+      "verification": "בקשות סינתטיות שחורגות מהמכסות נדחות באופן אטומי לפני כתיבה; משפחה אחרת אינה מושפעת.",
+      "limitations": "לא בוצעה בדיקת עומס או יצירת משפחות בענן. הגנות ספק ו-API gateway בפריסה לא נבדקו."
+    },
+    {
+      "id": "PA-009",
+      "severity": "medium",
+      "status": "open",
+      "title": "ה-service worker הראשי שומר כל GET מאותו origin גם עם no-store",
+      "observed": "מסנן ה-fetch מסתפק ב-GET וב-prefix של origin, ומכניס כל Response ל-CacheStorage. אין allowlist, החרגת מידע אישי, בדיקת Cache-Control או status. שחזור בזיכרון אישר שמירת תשובה סינתטית עם private,no-store. אין טענה שתשובות Supabase עצמן נשמרות: הן מגיעות מ-origin אחר.",
+      "locations": [
+        {
+          "path": "sw.js",
+          "line": 2
+        },
+        {
+          "path": "sw.js",
+          "line": 31
+        },
+        {
+          "path": "sw.js",
+          "line": 32
+        }
+      ],
+      "remediation": "לשמור רק קובצי shell סטטיים מרשימה מפורשת ובתוך scope האתר; לבדוק origin באמצעות URL.origin, status ו-Cache-Control. להחריג שיתוף, מידע אישי וכתובות עם יכולות גישה. לשמר תור שיתוף בנפרד.",
+      "verification": "GET סינתטי של מידע פרטי או no-store אינו נכנס למטמון; קובצי shell מאושרים ממשיכים לעבוד ללא רשת.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-010",
+      "severity": "low",
+      "status": "open",
+      "title": "מטמון האי רחב מהמניפסט ואינו מגביל managed assets לנתיב האי",
+      "observed": "managed() בודק origin וסיומת תחת design/assets אך אינו בודק SCOPE_PATH או חברות במניפסט. לכן גם קובץ אימות בתוך design או נכס מנתיב אחר באותו origin נשמר אם דף בשליטת ה-worker מבקש אותו. הקוד מסיר query ממפתח המטמון. שני המסלולים אומתו עם נתונים סינתטיים בלבד; אין סריקה או שמירה יזומה של כל verification.",
+      "locations": [
+        {
+          "path": "workout/island/offline-sw.js",
+          "line": 16
+        },
+        {
+          "path": "workout/island/offline-sw.js",
+          "line": 23
+        },
+        {
+          "path": "workout/island/offline-sw.js",
+          "line": 22
+        },
+        {
+          "path": "workout/island/ui/offline.mjs",
+          "line": 12
+        }
+      ],
+      "remediation": "להגביל גם managed לנתיב האי ולרשימת runtime מפורשת, להחריג verification וכל מידע פרטי, ולהסיר query רק במשאבים סטטיים שידוע שאינו משנה את תוכנם.",
+      "verification": "בקשות סינתטיות מחוץ לאי או לראיות בדיקה אינן נשמרות; עדכון ושחזור offline ממשיכים לפעול.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-011",
+      "severity": "high",
+      "status": "open",
+      "title": "קישור הגדרת מצלמה מספיק להפעלת העלאת מדיה ליעד HTTPS לא מאושר",
+      "observed": "initializeUploadConfig מקבל endpoint מכל HTTPS ושומר הסכמה מתמשכת על סמך fragment בלבד, ללא שער הורה, הצגת זהות יעד לאישור או רשימת יעדים מאושרת. האפליקציה הראשית קוראת אותה הגדרה ומפעילה תורי retry. בקשות POST כוללות וידאו ללא קול, תמונות מפתח, שלד ואבחון. redirect:follow נבדק רק לאחר הבקשה, ולכן אינו מונע מסירת גוף בעת redirect ששומר POST. קבלת יעד סינתטי לא מאושר אומתה ללא שליחה.",
+      "locations": [
+        {
+          "path": "workout/cam-lab/upload.mjs",
+          "line": 36
+        },
+        {
+          "path": "workout/cam-lab/upload.mjs",
+          "line": 54
+        },
+        {
+          "path": "workout/cam-lab/upload.mjs",
+          "line": 357
+        },
+        {
+          "path": "workout/js/camera-session.mjs",
+          "line": 15
+        },
+        {
+          "path": "workout/cam-lab/app.mjs",
+          "line": 11
+        },
+        {
+          "path": "workout/upload-sw.js",
+          "line": 29
+        }
+      ],
+      "remediation": "להוסיף אישור הורה מאומת שמציג יעד והיקף מידע, allowlist של origins/paths, תפוגת הסכמה ואפשרות ביטול. לא לעקוב אחר redirects שמשנים יעד עבור גוף רגיש; להשתמש ב-endpoint קבוע שמאמת את ההפניה לפני העברת נתונים.",
+      "verification": "פתיחת קישור בלבד אינה מאפשרת העלאה; יעד לא מאושר והפניית 307/308 זדונית נחסמים לפני מסירת גוף; ביטול חוסם גם דף אחר ו-background sync.",
+      "limitations": "סיכון מותנה בפתיחת קישור ובהפעלת מצלמה/הרשאת דפדפן. לא הופעלה מצלמה ולא נשלחה מדיה אמיתית; לא שוחזר redirect מול שרת חיצוני."
+    },
+    {
+      "id": "PA-012",
+      "severity": "medium",
+      "status": "open",
+      "title": "זיהוי הספירה אינו מחייב עיבוד דיבור מקומי",
+      "observed": "listenCount מפעיל SpeechRecognition/webkitSpeechRecognition באופן רציף עם הפעלה חוזרת, ואינו מחייב processLocally או מנוע offline. בדפדפנים מסוימים אודיו נשלח לשירות של ספק הדפדפן. הרשאת מיקרופון אינה הסבר על יעד עיבוד; connect-src אינו מבטיח חסימת תעבורה פנימית של מנוע הדפדפן.",
+      "locations": [
+        {
+          "path": "workout/js/count.js",
+          "line": 47
+        },
+        {
+          "path": "workout/js/count.js",
+          "line": 52
+        },
+        {
+          "path": "workout/js/app.js",
+          "line": 1166
+        }
+      ],
+      "remediation": "להשאיר האזנה כבויה עד בחירה מודעת של הורה; להפעיל רק מנוע מקומי מאומת או להציע ספירה בלחיצה. אם אין עיבוד מקומי, לא ליפול בשקט לזיהוי רשת.",
+      "verification": "במכשיר ובדפדפן הנתמכים אין שליחת אודיו בעת ספירה, ובאין מנוע מקומי אין הפעלת SpeechRecognition מרוחק.",
+      "limitations": "זוהה מסלול שעשוי להיות מרוחק; ספק הדפדפן והמכשיר בפועל לא נבדקו ולא הוקלט קול."
+    },
+    {
+      "id": "PA-013",
+      "severity": "medium",
+      "status": "open",
+      "title": "הקראת טקסט עלולה לבחור קול מרוחק",
+      "observed": "קול הלמידה באי מעדיף localService אך נופל לכל קול עברי אם אין מקומי. באימון bestVoice מעדיף גם natural/neural/online, וטקסט מותאם עשוי לכלול שם פרופיל. המנוע עשוי להעביר טקסט לספק הקול; בדיקת adapter סינתטית אישרה בחירת קול מרוחק. speakLocal במצב מצלמה כבר מחייב קול מקומי, אך אינו חל על כל האפליקציה.",
+      "locations": [
+        {
+          "path": "workout/island/learning/voice.mjs",
+          "line": 16
+        },
+        {
+          "path": "workout/js/speech.js",
+          "line": 18
+        },
+        {
+          "path": "workout/js/speech.js",
+          "line": 45
+        },
+        {
+          "path": "workout/js/app.js",
+          "line": 61
+        }
+      ],
+      "remediation": "להשתמש בהקלטות מקומיות ובקולות localService בלבד בכל מסלולי הילד. בהיעדר קול מקומי להשאיר טקסט או צליל מקומי, ללא fallback רשת; לא למסור שם פרופיל לספק חיצוני.",
+      "verification": "כאשר זמינים רק קולות מרוחקים, לא נקרא synthesis.speak; באימון ובאי נשמרת חלופת תצוגה מקומית.",
+      "limitations": "הוכחה לוגית עם קול מדומה, לא מדידת תעבורת ספק TTS אמיתי. טקסטי האי שנבדקו הם תוכן לימודי, לא הקלטת מיקרופון."
+    },
+    {
+      "id": "PA-014",
+      "severity": "medium",
+      "status": "open",
+      "title": "מדיניות CSP אינה מכסה את כל דפי הילד",
+      "observed": "ב-workout/index.html, voice-rec/index.html ובמשחק boar העצמאי אין CSP ב-HTML. בדפדפן בדיקה מקומי סקריפט inline סינתטי רץ באימון ובהקלטת הקול ונחסם באי ובמעבדה. זוהי בדיקת מדיניות, לא הוכחת נתיב הזרקה. ה-CSP של האי מגביל script/connect/font ל-self; במעבדה connect-src פתוח לכל HTTPS.",
+      "locations": [
+        {
+          "path": "workout/index.html",
+          "line": 1
+        },
+        {
+          "path": "workout/voice-rec/index.html",
+          "line": 1
+        },
+        {
+          "path": "workout/island/minigames/boar-island/index.html",
+          "line": 1
+        },
+        {
+          "path": "workout/island/index.html",
+          "line": 11
+        },
+        {
+          "path": "workout/cam-lab/index.html",
+          "line": 8
+        }
+      ],
+      "remediation": "להחיל CSP מצומצם בכל דפי הילד וב-workers, ו-connect-src עם יעדים מדויקים. לקבוע ברמת HTTP גם frame-ancestors, Permissions-Policy ו-Referrer-Policy; במידת הצורך לבחור אירוח שתומך בכותרות. לא להתיר מיקרופון/מצלמה בדפי המשחק שאינם משתמשים בהם.",
+      "verification": "בדיקה מול כותרות האתר החי ולא רק localhost; markers של inline/רשת חיצונית נחסמים בכל דף והמצלמה פועלת רק במסכים המורשים.",
+      "limitations": "כותרות HTTP חיות לא אומתו: proxy הסביבה חסם את GitHub Pages. אין מסקנה שהשרת החי חסר כותרת מסוימת."
+    },
+    {
+      "id": "PA-015",
+      "severity": "medium",
+      "status": "open",
+      "title": "מצב הרשאות Storage תלוי במיגרציה חיצונית ואינו ניתן לשחזור מלא מהריפו",
+      "observed": "vids.sql יוצר bucket פרטי ומסיר מדיניויות ישנות, ו-vids-signed.sql מניח שגדר restrictive כבר קיימת. NOTES מתאר מצב קיים; בדיקת SQL בונה את הגדר בעצמה, אך קובץ המיגרציה אינו מתקין אותה. אין בדיקה חיה של pg_policies/GRANT/Vault. בנוסף schema.sql ו-north.sql יוצרים טבלאות ללא GRANT מפורש, בניגוד לכלל הריפו לפרויקט חדש; זה עשוי לחסום גישה, ולא מעיד כשלעצמו על דליפה.",
+      "locations": [
+        {
+          "path": "supabase/vids.sql",
+          "line": 1
+        },
+        {
+          "path": "supabase/vids-signed.sql",
+          "line": 1
+        },
+        {
+          "path": "NOTES.md",
+          "line": 3
+        },
+        {
+          "path": "tests/sql/vids-rls.mjs",
+          "line": 41
+        },
+        {
+          "path": "supabase/schema.sql",
+          "line": 7
+        },
+        {
+          "path": "supabase/north.sql",
+          "line": 2
+        }
+      ],
+      "remediation": "להוסיף בהמשך מיגרציה ניתנת לשחזור והצהרת GRANT/REVOKE מדויקת לכל משאב. לוודא בקטלוג מסד מורשה שה-bucket פרטי, שהגדר קיימת, שאין מדיניות permissive עוקפת ושפונקציות חתימה בלבד חשופות. אין להוסיף GRANT לטבלאות המשפחה שנחסמו בכוונה.",
+      "verification": "פריסה חדשה ומאגר בדיקה עם policy רחבה קיימת דוחים גישה ישירה ל-Storage ולטבלאות משפחה; RPC מורשים בלבד מצליחים. לבחון קטלוג הרשאות הייצור בקריאה בלבד.",
+      "limitations": "אין טענה שהגדר חסרה בפרויקט החי. לא הורץ SQL בייצור ולא נבדקו הרשאות ענן באמצעות קוד משפחה אמיתי."
+    },
+    {
+      "id": "PA-016",
+      "severity": "medium",
+      "status": "open",
+      "title": "תלויות עיבוד נכסים כוללות גרסאות sharp עם advisories",
+      "observed": "שאילתת npm החזירה advisories עבור sharp 0.34.5 ו-0.35.4. אלה תלויות של כלי עיצוב ועיבוד נכסים, ולא ספרייה שנטענת באי בדפדפן. 0.35.4 מושפעת מה-advisory האחרון; 0.34.5 גם מהקודמים. רוב חבילות הכלים אינן כוללות lockfile לצד package.json, ולכן כיסוי התלויות הטרנזיטיביות אינו שלם.",
+      "locations": [
+        {
+          "path": "workout/island/design/hoops-v7/characters/source/package.json",
+          "line": 15
+        },
+        {
+          "path": "workout/island/design/models2/source/package.json",
+          "line": 12
+        },
+        {
+          "path": "workout/island/design/skier3/tools/package.json",
+          "line": 11
+        },
+        {
+          "path": "workout/island/design/alien-fx-v1/source/package.json",
+          "line": 10
+        }
+      ],
+      "remediation": "לשדרג לגרסה נתמכת מתוקנת לפי advisories, לשמור lockfiles לכלי build ולהפעיל audit על הגרף הנעול. לעבד מדיה לא מוכרת בסביבת build מבודדת. להוסיף מלאי גרסאות וגיבובים גם ל-JS/WASM שהועתקו לריפו.",
+      "verification": "סריקת lockfiles ללא advisories רלוונטיים; קובצי runtime זהים למלאי הגרסאות; בדיקת עיבוד נכסים סינתטיים לאחר השדרוג.",
+      "limitations": "נבדקו גרסאות מוצהרות ותלויות runtime מזוהות מול npm, לא כל התלויות הטרנזיטיביות ולא קוד native מלא. חומרת הייעוץ high; חומרת הממצא כאן medium בשל היות המסלול כלי build."
+    },
+    {
+      "id": "PA-017",
+      "severity": "low",
+      "status": "open",
+      "title": "PIN ההורה הוא שער ממשק מקומי בלבד",
+      "observed": "PIN של 4–6 ספרות נשמר כ-SHA-256 עם prefix קבוע, ללא מלח אקראי, השהיית ניסיונות או נעילה. דגל הפתיחה נמצא ב-sessionStorage והקוד המשפחתי אינו תלוי ב-PIN. מי שיש לו גישת דפדפן/JavaScript באותו origin יכול לעקוף את השער או לנחש את ה-PIN offline.",
+      "locations": [
+        {
+          "path": "workout/js/parent.js",
+          "line": 15
+        },
+        {
+          "path": "workout/js/parent.js",
+          "line": 20
+        },
+        {
+          "path": "workout/js/parent.js",
+          "line": 25
+        }
+      ],
+      "remediation": "להציג במפורש שזהו שער נוחות ולא הרשאת ענן; לפעולות רגישות להשתמש באימות הורה עם הרשאת שרת. להוסיף הגבלת ניסיונות בממשק ולצמצם חשיפת הקוד המשותף.",
+      "verification": "שינוי דגל מקומי אינו נותן הרשאה לפעולות ענן רגישות; כשלי אימות מטופלים בשרת.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    },
+    {
+      "id": "PA-018",
+      "severity": "low",
+      "status": "open",
+      "title": "טלמטריה ודוחות מקומיים נשמרים וניתנים להעתקה ללא צמצום פרטיות",
+      "observed": "island.soccer.telemetry שומר עד 20 משחקים עם זמן, קושי, תוצאות ומדדי ביצועים; lastLoadReport כולל UA מלא, מסך, זמן ומצב רשת. אין בקוד שליחה אוטומטית לצד שלישי, אך העתקה לצ׳אט או לריפו יכולה להפוך נתוני מכשיר ופעילות לפומביים. שמירות .corrupt וגיבויים כוללים עותקים נוספים של מצב המשתמש.",
+      "locations": [
+        {
+          "path": "workout/island/minigames/soccer-telemetry.mjs",
+          "line": 5
+        },
+        {
+          "path": "workout/island/ui/load-report.mjs",
+          "line": 28
+        },
+        {
+          "path": "workout/island/engine/persistence.mjs",
+          "line": 210
+        }
+      ],
+      "remediation": "לקבוע TTL לדיאגנוסטיקה, להסיר UA מלא ונתוני זיהוי מדוחות לשיתוף, ולאפשר תצוגה ובחירה מודעת של הורה לפני ייצוא. להשתמש בנתונים סינתטיים בראיות הציבוריות.",
+      "verification": "דוח יצוא סינתטי אינו כולל שם, קוד, כתובת אישית, טוקן או טביעת מכשיר מפורטת; אין שליחת מדדים מחוץ למכשיר.",
+      "limitations": "אומת בקוד הנוכחי ובבדיקה מקומית; לא נבדקה פריסת הייצור."
+    }
+  ]
+}
