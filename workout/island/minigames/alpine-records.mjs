@@ -1,3 +1,6 @@
+import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-16';
+import {GHOST_KEY} from './alpine-league-ghost.mjs?v=island-v2-20261107-16';
+
 /** Alpine Rush personal records (best time per course) in their own local key.
  * The island save keeps stages, stars, wins and coins; this file never touches it.
  * Damaged data is copied aside once and never overwritten silently; a newer
@@ -45,4 +48,35 @@ export function recordRun(storage, cfg, state, result) {
 export function formatRaceTime(ms) {
   const total = Math.max(0, Math.round(ms / 10)), minutes = Math.floor(total / 6000), seconds = Math.floor(total / 100) % 60, hundredths = total % 100;
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+}
+
+/** The session and league timing display must identify the same effective rules. */
+export function alpineRunBalance(pageBalance, leagueN, search = globalThis.location?.search || '') {
+  const baseBalance = leagueN ? leagueBalance(pageBalance, leagueN) : pageBalance;
+  const q = new URLSearchParams(search), airOff = q.get('alpineAir') === '0', fallOff = q.get('alpineFall') === '0', obsOff = q.get('alpineObs') === '0';
+  const b = (airOff && baseBalance.physics.airBoost) || (fallOff && baseBalance.physics.fall) ? {...baseBalance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(baseBalance.physics)} : baseBalance;
+  return obsOff ? {...b, tracks: Object.fromEntries(Object.entries(b.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : b;
+}
+
+/** Personal times and ghosts must describe the same physics and generated course.
+ * This is a namespace, never a migration: old bytes remain available to rollback.
+ * alpineV241=0 (no physics.v241) and ?alpineHistoryFix=0 use the original keys. */
+export function alpineHistoryStorage(storage, balance, course, search = globalThis.location?.search || '') {
+  if (!storage || !balance.physics.v241 || new URLSearchParams(search).get('alpineHistoryFix') === '0') return storage;
+  // Two independent 32-bit lanes avoid large keys and run synchronously in browsers
+  // without a crypto/WASM dependency. Include the generated geometry, not just its id.
+  const identity = JSON.stringify({ruleset: 'alpine-v241-1', physics: balance.physics, course});
+  let a = 0x811c9dc5, b = 0x9e3779b9;
+  for (let i = 0; i < identity.length; i++) {
+    const c = identity.charCodeAt(i);
+    a = Math.imul(a ^ c, 0x01000193);
+    b = Math.imul(b ^ c, 0x85ebca6b);
+  }
+  const suffix = '.rules-v241-' + (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
+  const recordsKey = balance.records.storageKey;
+  const keyFor = key => key === recordsKey || key === GHOST_KEY ? key + suffix : key === recordsKey + '.corrupt' ? recordsKey + suffix + '.corrupt' : key;
+  return {
+    getItem: key => storage.getItem(keyFor(key)),
+    setItem: (key, value) => storage.setItem(keyFor(key), value),
+  };
 }

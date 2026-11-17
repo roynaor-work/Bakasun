@@ -32,7 +32,7 @@ function chip(id) { const c = el('span', 'al-chip'); c.style.background = colorO
 function stageStrip(engine, sum, themeIndex, go) {
   const theme = sum.themes[themeIndex - 1], list = el('ol', 'al-stages'); accent(list, theme.id); list.setAttribute('aria-label', `שלבי ${theme.name}`);
   for (let k = 0; k < PER_THEME; k++) {
-    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.state.best[n], open = n <= sum.stage, item = el('li', 'al-stage');
+    const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.stage(n)?.best, open = n <= sum.stage, item = el('li', 'al-stage');
     item.dataset.n = String(n); item.dataset.state = best?.stars ? 'done' : open ? 'next' : 'locked'; if (info.boss) item.dataset.boss = 'true';
     const b = button('', 'alpine-league-stage', () => go(n), 'al-stage-button'); b.disabled = !open; b.dataset.n = String(n);
     b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, ${best?.stars || 0} כוכבים` : ', נעול'}`);

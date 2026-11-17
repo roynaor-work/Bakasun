@@ -3,7 +3,7 @@ import {enhanceAlpineOpening} from './alpine-screen.mjs';
 import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-16';
 import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-16';
 import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-16';
-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261107-16';
+import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-16';
 import {createQualityGovernor} from './alpine-quality.mjs';
 import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-16';
 import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-16';
@@ -55,18 +55,14 @@ export function runAlpineSession(ctx) {
   const league = ctx.alpineLeague || null, leagueTheme = league ? THEME_LOOKS[league.theme] : null;
   // v24.1: ?alpineV241=0 runs v24 (the island strips the balance too, so the result check sees the same courses; stripping is idempotent).
   const pageBalance = balanceForPage(ctx.balance);
-  const baseBalance = league ? leagueBalance(pageBalance, league.n) : pageBalance;
-  // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
-  const urlQuery = new URLSearchParams(globalThis.location?.search || ''), airOff = urlQuery.get('alpineAir') === '0', fallOff = urlQuery.get('alpineFall') === '0', obsOff = urlQuery.get('alpineObs') === '0';
-  const balance0 = (airOff && baseBalance.physics.airBoost) || (fallOff && baseBalance.physics.fall) ? {...baseBalance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(baseBalance.physics)} : baseBalance,
-    // ?alpineObs=0 removes the narrow passages (warning signs come with them).
-    balance = obsOff ? {...balance0, tracks: Object.fromEntries(Object.entries(balance0.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : balance0, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+  const balance = alpineRunBalance(pageBalance, league?.n), stageNumber = ctx.level || 1, t = ctx.t || (key => key);
   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
   const level = engine.level, track = engine.track, v241 = !!balance.physics.v241;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
-  const records = loadRecords(storage, balance.records);
+  const historyStorage = alpineHistoryStorage(storage, balance, engine.course);
+  const records = loadRecords(historyStorage, balance.records);
   // League: the record run of this stage rides along as a ghost, and this run is recorded to become the next ghost if it is faster.
-  const ghostTrack = league ? loadGhost(storage, league.n) : null, ghostRecorder = league ? createGhostRecorder() : null;
+  const ghostTrack = league ? loadGhost(historyStorage, league.n) : null, ghostRecorder = league ? createGhostRecorder() : null;
   let ghostOutcome = null;
   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
   let kitHud=null;
@@ -368,9 +364,9 @@ export function runAlpineSession(ctx) {
     if (snap.result && !finished) {
       finished = true;
       const r = snap.result;
-      recordOutcome = recordRun(storage, balance.records, records, r);
+      recordOutcome = recordRun(historyStorage, balance.records, records, r);
       // League: a finished run faster than the stored ghost becomes the new ghost of this stage.
-      if (league && r.completed) ghostOutcome = saveGhost(storage, league.n, ghostRecorder.encode(r.elapsedMs));
+      if (league && r.completed) ghostOutcome = saveGhost(historyStorage, league.n, ghostRecorder.encode(r.elapsedMs));
       const summary = {...r, trackName, coinTotal: engine.course.coins, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest, ...(league ? {ghost: {saved: !!ghostOutcome?.saved, previousMs: ghostTrack?.ms ?? null}} : {})};
       ctx.onAlpineSummary?.(summary);
       const stats = league ? engine.leagueStats() : null;
@@ -382,3 +378,5 @@ export function runAlpineSession(ctx) {
   }
   return session;
 }
+
+export {alpineRunBalance,alpineHistoryStorage};
