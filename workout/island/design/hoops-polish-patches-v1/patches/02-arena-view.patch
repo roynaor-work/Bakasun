@@ -1,0 +1,569 @@
+diff --git a/workout/island/minigames/hoops-arena.mjs b/workout/island/minigames/hoops-arena.mjs
+index 44ce827b04d35505be5e1db3d38c358abe592cd1..294711f6db53e7012884905517a192693b80cc0a 100644
+--- a/workout/island/minigames/hoops-arena.mjs
++++ b/workout/island/minigames/hoops-arena.mjs
+@@ -3,6 +3,7 @@
+  * scorer's table, benches, tiered stands with an instanced crowd, LED ribbons, the centre
+  * scoreboard and the light rig. Built once from the court geometry; nothing here decides play. */
+ import * as THREE from '../vendor/three.module.js';
++import {markHoopsRim} from './hoops-polish-view.mjs';
+ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+ import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261107-18';
+ 
+@@ -25,7 +26,7 @@ function stripGeo(points,width){
+ const arc=(cx,cz,r,a0,a1,n=64)=>Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n;return {x:cx+Math.cos(a)*r,z:cz+Math.sin(a)*r};});
+ const seg=(x0,z0,x1,z1)=>[{x:x0,z:z0},{x:x1,z:z1}];
+ 
+-export function buildArena(court,{home,away,quality=2,anisotropy=8}){
++export function buildArena(court,{home,away,quality=2,anisotropy=8,rimMotion=false,softLighting=false}){
+  const root=new THREE.Group();root.name='arena';
+  const dyn={};                      // things the view updates every frame
+  const {hx,hz,rimX}=court;
+@@ -101,6 +102,7 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
+   const edgePad=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.12,bw+0.06),padMat);edgePad.position.set(bx,court.boardBottom-0.04,0);g.add(edgePad);
+   // rim + bracket
+   const rim=new THREE.Mesh(new THREE.TorusGeometry(court.rimR,0.011,10,40),orange);rim.rotation.x=Math.PI/2;rim.position.set(s*rimX,court.rimY,0);rim.castShadow=true;g.add(rim);
++  if(rimMotion)markHoopsRim(rim,s);
+   const bracket=new THREE.Mesh(new THREE.BoxGeometry(Math.abs(rimX-court.boardX)-court.rimR+0.02,0.04,0.12),orange);bracket.position.set(s*(court.boardX+rimX-court.rimR)/2-s*0.0,court.rimY-0.02,0);g.add(bracket);
+   // net: a lathe of strings that the view can swing
+   const net=buildNet(court.rimR,0.42);net.position.set(s*rimX,court.rimY,0);g.add(net);dyn.nets.push({mesh:net,side:s,swing:0,base:net.geometry.attributes.position.array.slice()});
+@@ -174,14 +176,14 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
+  // white back light from the far sideline rims the players against the floor. The fill used to
+  // match the key and washed the shadows out completely.
+  const lights=new THREE.Group();
+- lights.add(new THREE.HemisphereLight(0xffe9d2,0x0e1626,0.32));
+- const key=new THREE.DirectionalLight(0xfff1dc,3.1);key.position.set(5,24,7);key.target.position.set(0,0,0);
++ lights.add(new THREE.HemisphereLight(0xffe9d2,0x0e1626,softLighting?.39:.32));
++ const key=new THREE.DirectionalLight(0xfff1dc,softLighting?2.72:3.1);key.position.set(5,24,7);key.target.position.set(0,0,0);
+  key.castShadow=true;// A 1K filtered court shadow funds adult silhouettes without lowering screen resolution.
+  key.shadow.mapSize.set(quality>=3?2048:1024,quality>=3?2048:1024);
+  Object.assign(key.shadow.camera,{left:-hx-1.5,right:hx+1.5,top:hz+1.5,bottom:-hz-1.5,near:8,far:40});key.shadow.bias=-0.00025;key.shadow.normalBias=0.025;
+  lights.add(key,key.target);
+- const fill=new THREE.DirectionalLight(0xbfd0ff,0.42);fill.position.set(-8,14,-10);lights.add(fill);
+- const back=new THREE.DirectionalLight(0xf4f7ff,1.05);back.position.set(8,11,14);lights.add(back);
++ const fill=new THREE.DirectionalLight(0xbfd0ff,softLighting?.49:.42);fill.position.set(-8,14,-10);lights.add(fill);
++ const back=new THREE.DirectionalLight(0xf4f7ff,softLighting?.87:1.05);back.position.set(8,11,14);lights.add(back);
+  root.add(lights);
+  dyn.key=key;
+ 
+diff --git a/workout/island/minigames/hoops-models.mjs b/workout/island/minigames/hoops-models.mjs
+index aa99d87008c1ef33f6e277b06c4143e4eadabed2..d45581e178f00bea46d1b9ffcd18fc7e8d631e67 100644
+--- a/workout/island/minigames/hoops-models.mjs
++++ b/workout/island/minigames/hoops-models.mjs
+@@ -3,6 +3,7 @@
+ import * as THREE from '../vendor/three.module.js';
+ import {GLTFLoader} from '../vendor/GLTFLoader.js';
+ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
++import {markHoopsRim} from './hoops-polish-view.mjs';
+ import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
+ import {ballTexture} from './hoops-textures.mjs';
+ import {loadHoopsGLTF} from './hoops-gltf.mjs';
+@@ -27,18 +28,23 @@ function anchor(root,name){
+ /** Merge sibling meshes that share one vertex-coloured material into a single draw call,
+  * baking each mesh's flat material colour into COLOR_0 first (01/11: 27 static arena and
+  * basket meshes became 5). Returns the merged mesh, or null when nothing merged. */
+-export function mergeStaticMeshes(parent,names,material,{name='merged',castShadow=false,receiveShadow=true}={}){
+- const parts=[];
++export function mergeStaticMeshes(parent,names,material,{name='merged',castShadow=false,receiveShadow=true,rimSide=0}={}){
++ const parts=[];let nextVertex=0,rimRange=null;
+  for(const n of names){const m=parent.getObjectByName(n);if(!m?.isMesh||!m.geometry.attributes.position)continue;
+   const g=m.geometry.clone();for(const key of Object.keys(g.attributes))if(!['position','normal','color'].includes(key))g.deleteAttribute(key);
+   if(!g.attributes.normal)g.computeVertexNormals();
+   const count=g.attributes.position.count,c=g.attributes.color,tint=m.material.color||{r:1,g:1,b:1},useVertex=m.material.vertexColors!==false&&!!c,out=new Float32Array(count*3);
+   for(let i=0;i<count;i++){out[i*3]=(useVertex?c.getX(i):1)*tint.r;out[i*3+1]=(useVertex?c.getY(i):1)*tint.g;out[i*3+2]=(useVertex?c.getZ(i):1)*tint.b;}
+-  g.setAttribute('color',new THREE.BufferAttribute(out,3));m.updateMatrix();g.applyMatrix4(m.matrix);parts.push({mesh:m,geometry:g});}
++  g.setAttribute('color',new THREE.BufferAttribute(out,3));m.updateMatrix();g.applyMatrix4(m.matrix);parts.push({mesh:m,geometry:g});
++  if(rimSide&&n==='rim')rimRange={first:nextVertex,count};
++  nextVertex+=count;
++ }
+  if(!parts.length)return null;
+  const merged=mergeGeometries(parts.map(p=>p.geometry),false);for(const p of parts){p.geometry.dispose();p.mesh.parent?.remove(p.mesh);p.mesh.geometry.dispose();}
+  if(!merged)return null;
+- const mesh=new THREE.Mesh(merged,material);mesh.name=name;mesh.castShadow=castShadow;mesh.receiveShadow=receiveShadow;parent.add(mesh);return mesh;
++ const mesh=new THREE.Mesh(merged,material);mesh.name=name;mesh.castShadow=castShadow;mesh.receiveShadow=receiveShadow;parent.add(mesh);
++ if(rimRange)markHoopsRim(mesh,rimSide,rimRange.first,rimRange.count);
++ return mesh;
+ }
+ function mappedMaterial(mesh,map,{vertexColors=true,roughness=.85}={}){
+  const mat=mesh.material.clone();mat.map=map;mat.vertexColors=vertexColors;mat.color.set(0xffffff);mat.roughness=roughness;mesh.material=mat;return mat;
+@@ -110,7 +116,7 @@ function crowdSpots(court){
+  * court, court-apron, basket-1/basket--1, stands, arena-shell, arena-ceiling,
+  * arena-fixtures and arena-scoreboard. Court overlays and lighting are retained.
+  * All loading completes before the visible arena is changed. */
+-export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4,venue:venueSource}={}){
++export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4,venue:venueSource,rimMotion=false}={}){
+  const base=assetBase||new URL('../',import.meta.url);
+  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
+  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+@@ -189,7 +195,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
+    // the stanchion, arm, frame, target square, rim and mount share one lit material: one draw call
+    // per basket instead of nine (the glass board and the swinging net stay separate)
+    const stanchion=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.6,metalness:.25});owned.materials.add(stanchion);
+-   const mergedHoop=mergeStaticMeshes(hoop,['base','base_pad','post_pad','support_post','backboard_arm','backboard_frame','backboard_target','rim','rim_mount'],stanchion,{name:'basket-static',castShadow:quality>=1});
++   const mergedHoop=mergeStaticMeshes(hoop,['base','base_pad','post_pad','support_post','backboard_arm','backboard_frame','backboard_target','rim','rim_mount'],stanchion,{name:'basket-static',castShadow:quality>=1,rimSide:rimMotion?side:0});
+    if(mergedHoop)owned.geometries.add(mergedHoop.geometry);
+    const net=hoop.getObjectByName('net');
+    // The view's inexpensive net deformation uses rim-local vertices and y<=0.
+diff --git a/workout/island/minigames/hoops-polish-view.mjs b/workout/island/minigames/hoops-polish-view.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..8c3a8cc4d98a09fcdf60e390c7d12f4e03d174c4
+--- /dev/null
++++ b/workout/island/minigames/hoops-polish-view.mjs
+@@ -0,0 +1,200 @@
++import {DynamicDrawUsage,Euler,Matrix3,Matrix4,Vector3} from '../vendor/three.module.js';
++
++const clamp = (value,min,max) => Math.min(max,Math.max(min,value));
++const smooth = x => x*x*(3-2*x);
++
++/** Remember the rim's vertex range even when it shares a draw call with the stand. */
++export function markHoopsRim(mesh,side,first=0,count=mesh.geometry.attributes.position.count) {
++  (mesh.userData.hoopsRims ??= []).push({side,first,count});
++}
++
++function recordAttribute(attribute,first,count) {
++  const rest = new Float32Array(count*3);
++  for(let i=0;i<count;i++) {
++    const index=first+i;
++    rest[i*3]=attribute.getX(index);
++    rest[i*3+1]=attribute.getY(index);
++    rest[i*3+2]=attribute.getZ(index);
++  }
++  (attribute.isInterleavedBufferAttribute?attribute.data:attribute).setUsage(DynamicDrawUsage);
++  return {attribute,rest,first,count};
++}
++
++function upload({attribute,first,count}) {
++  if(attribute.isInterleavedBufferAttribute) {
++    attribute.data.addUpdateRange(first*attribute.data.stride,count*attribute.data.stride);
++  } else {
++    attribute.addUpdateRange(first*3,count*3);
++  }
++  attribute.needsUpdate=true;
++}
++
++function visible(mesh) {
++  for(let node=mesh;node;node=node.parent)if(!node.visible)return false;
++  return true;
++}
++
++function pulse(age,hz,decay,span) {
++  if(age<0||age>=span)return 0;
++  return Math.sin(age*2*Math.PI*hz)*Math.exp(-age*decay)*smooth(clamp((span-age)/.14,0,1));
++}
++
++/** Use simulation ticks for the elastic response, including during slow-motion replay. */
++export function createHoopsBasketMotion(arena,nets,court,{rim,net},reducedMotion) {
++  const sides=new Map([1,-1].map(side=>[side,{
++    pivot:new Vector3(side*(court.rimX+court.rimR),court.rimY,0),
++    deflection:new Matrix4(),rimParts:[],nets:[],pitch:0,twist:0,pull:0,flare:0,swayX:0,swayZ:0,
++  }]));
++  const impulses=[],rot=new Euler(),shift=new Vector3(),point=new Vector3(),local=new Matrix4(),normalMatrix=new Matrix3();
++  arena.updateMatrixWorld(true);
++  if(rim)arena.traverse(mesh=>{
++    for(const {side,first,count} of mesh.userData.hoopsRims||[]) {
++      const pos=recordAttribute(mesh.geometry.attributes.position,first,count);
++      const normal=mesh.geometry.attributes.normal;
++      const world=mesh.matrixWorld.clone();
++      sides.get(side).rimParts.push({mesh,pos,normal:normal?recordAttribute(normal,first,count):null,world,inverse:world.clone().invert(),moved:false});
++    }
++  });
++  for(const {mesh,side} of nets) {
++    const parent=mesh.parent.matrixWorld.clone(),worldToNet=mesh.matrixWorld.clone().invert();
++    const origin=new Vector3().applyMatrix4(worldToNet);
++    const center=new Vector3(side*court.rimX,court.rimY,0).applyMatrix4(worldToNet);
++    const xAxis=new Vector3(1,0,0).applyMatrix4(worldToNet).sub(origin);
++    const zAxis=new Vector3(0,0,1).applyMatrix4(worldToNet).sub(origin);
++    const localY=new Vector3(0,1,0).applyMatrix4(worldToNet).sub(origin).y;
++    const attribute=mesh.geometry.attributes.position;
++    const pos=net?recordAttribute(attribute,0,attribute.count):null;
++    let weights=null;
++    if(pos) {
++      // v8 stores court-space vertices; the older hoops store them under the rim.
++      // In either case, derive the pinned lip from the highest authored knot.
++      let top=-Infinity;
++      for(let i=0;i<pos.count;i++)top=Math.max(top,pos.rest[i*3+1]);
++      weights=new Float32Array(pos.count);
++      for(let i=0;i<pos.count;i++)weights[i]=smooth(clamp(((top-pos.rest[i*3+1])/localY-.028)/.36,0,1));
++    }
++    sides.get(side).nets.push({mesh,parent,inverse:parent.clone().invert(),restMatrix:mesh.matrix.clone(),
++      center,xAxis,zAxis,localY,pos,weights,moved:false,flexed:false});
++  }
++
++  function effects(events,snapshot) {
++    for(const event of events) {
++      const isRim=event.type==='contact'&&event.what==='rim';
++      const isScore=event.type==='score'&&!event.goaltend;
++      if(!isRim&&!isScore)continue;
++      const side=event.side??(isScore?snapshot?.dir?.[event.team]:Math.sign(event.x));
++      const tick=event.tick??snapshot?.tick;
++      if(!sides.has(side)||!Number.isFinite(tick))continue;
++      const power=(reducedMotion?.27:1)*(isRim?clamp(event.speed/5,.15,1):event.shotType==='dunk'?1:.73);
++      const vertical=clamp(event.ny??1,-1,1),z=clamp((event.z??0)/court.rimR,-1,1);
++      const x=clamp(((event.x??side*court.rimX)-side*court.rimX)/court.rimR,-1,1);
++      impulses.push({tick,side,
++        pitch:(isRim?side*Math.sign(vertical||1)*(.035+.055*Math.abs(vertical)):event.shotType==='dunk'?side*.072:0)*power,
++        twist:isRim?z*.052*power:0,
++        pull:(isRim?.035:.101)*power,flare:(isRim?.14:.31)*power,
++        swayX:(isRim?-x*.062:-side*.028)*power,swayZ:-z*.071*power});
++      // The engine records up to 12 seconds of replay. Keep the impacts for that window and bound the list in busy play.
++      if(impulses.length>128)impulses.shift();
++    }
++  }
++
++  function update(tick) {
++    for(const state of sides.values())state.pitch=state.twist=state.pull=state.flare=state.swayX=state.swayZ=0;
++    for(let i=impulses.length-1;i>=0;i--) {
++      const impulse=impulses[i],age=(tick-impulse.tick)/60;
++      if(age>=1.25)break;
++      if(age<0)continue;
++      const state=sides.get(impulse.side);
++      const ring=pulse(age,6.5,7,.86),pull=pulse(age,3.2,4.8,1.17),sway=pulse(age,3.8,4.2,1.25);
++      state.pitch+=impulse.pitch*ring;state.twist+=impulse.twist*ring;
++      state.pull+=impulse.pull*pull;state.flare+=impulse.flare*pull;
++      state.swayX+=impulse.swayX*sway;state.swayZ+=impulse.swayZ*sway;
++    }
++    for(const state of sides.values()) {
++      const {pivot,deflection}=state;
++      const turning=rim&&(state.pitch!==0||state.twist!==0);
++      if(turning) {
++        deflection.makeRotationFromEuler(rot.set(clamp(state.twist,-.05,.05),0,clamp(state.pitch,-.095,.095)));
++        shift.copy(pivot).sub(point.copy(pivot).applyMatrix4(deflection));
++        deflection.setPosition(shift);
++      }
++      for(const part of state.rimParts) {
++        if((!turning&&!part.moved)||!visible(part.mesh))continue;
++        if(turning) {
++          local.multiplyMatrices(part.inverse,deflection).multiply(part.world);
++          normalMatrix.getNormalMatrix(local);
++        }
++        for(const data of [part.pos,part.normal]) {
++          if(!data)continue;
++          const {attribute,rest,first,count}=data;
++          for(let i=0;i<count;i++) {
++            point.fromArray(rest,i*3);
++            if(turning) {
++              if(data===part.pos)point.applyMatrix4(local);
++              else point.applyMatrix3(normalMatrix);
++            }
++            attribute.setXYZ(first+i,point.x,point.y,point.z);
++          }
++          upload(data);
++        }
++        part.moved=turning;
++      }
++      const swayX=clamp(state.swayX,-.09,.09),swayZ=clamp(state.swayZ,-.09,.09);
++      const pull=clamp(state.pull,-.10,.10),flare=clamp(state.flare,-.27,.27);
++      const flexing=net&&(pull!==0||flare!==0||swayX!==0||swayZ!==0);
++      for(const data of state.nets) {
++        if(!visible(data.mesh))continue;
++        if(turning||data.moved) {
++          if(turning)local.multiplyMatrices(data.inverse,deflection).multiply(data.parent).multiply(data.restMatrix);
++          else local.copy(data.restMatrix);
++          local.decompose(data.mesh.position,data.mesh.quaternion,data.mesh.scale);
++          data.mesh.updateMatrix();data.moved=turning;
++        }
++        if(!flexing&&!data.flexed)continue;
++        const {attribute,rest,count}=data.pos;
++        const dx=data.xAxis.x*swayX+data.zAxis.x*swayZ,dz=data.xAxis.z*swayX+data.zAxis.z*swayZ;
++        for(let i=0;i<count;i++) {
++          const j=i*3,x=rest[j],y=rest[j+1],z=rest[j+2];
++          // Leave the top knots fixed. The basket lip moves the entire net separately.
++          const weight=data.weights[i];
++          attribute.setXYZ(i,x+((x-data.center.x)*flare+dx)*weight,y-pull*data.localY*weight,z+((z-data.center.z)*flare+dz)*weight);
++        }
++        upload(data.pos);data.flexed=flexing;
++      }
++    }
++  }
++  return {effects,update};
++}
++
++/** Shape the existing contact shadow using the same key direction as the arena. */
++export function updateHoopsBallShadow(shadow,ball,court,key,floorY) {
++  const {x,y,z}=ball.position,height=Math.max(0,y-court.ballR),projection=Math.min(3.6,height)/key.position.y;
++  const sx=x-key.position.x*projection,sz=z-key.position.z*projection;
++  const edge=Math.min(court.hx+1.25-Math.abs(sx),court.hz+1.25-Math.abs(sz));
++  const spread=1+Math.min(height,4)*.35;
++  shadow.position.set(sx,floorY,sz);
++  shadow.scale.set(spread,spread*(.92+Math.min(height,.8)*.1),1);
++  shadow.material.opacity=(.075+.50*Math.exp(-1.1*height))*smooth(clamp(edge/.55,0,1));
++  shadow.visible=ball.visible&&edge>0;
++}
++
++export function createHoopsBallHandoff(radius) {
++  const offset=new Vector3(),previous=new Vector3();
++  let lastState,lastOwner,lastReplay,lastTick,span=0,elapsed=0;
++  return (position,ball,tick,replay,dt)=>{
++    const next=ball.state,held=next==='held';
++    const continuous=lastState&&replay===lastReplay&&Math.abs(tick-lastTick)<=12&&
++      next!=='dead'&&next!=='toss'&&lastState!=='dead'&&lastState!=='toss';
++    if(!continuous)span=0;
++    else if(held!==(lastState==='held')||(held&&ball.owner!==lastOwner)) {
++      offset.copy(previous).sub(position);
++      span=offset.lengthSq()<=.75**2?(held?.135:.105):0;
++      elapsed=0;
++    } else elapsed+=dt;
++    if(elapsed<span) {
++      position.addScaledVector(offset,1-smooth(elapsed/span));
++      position.y=Math.max(radius,position.y);
++    }
++    previous.copy(position);lastState=next;lastOwner=ball.owner;lastReplay=replay;lastTick=tick;
++  };
++}
+diff --git a/workout/island/minigames/hoops-v5-venue.mjs b/workout/island/minigames/hoops-v5-venue.mjs
+index a6ad52abedae4a0e46b3abc8886be1450c5eac1c..b85a9fec9bbb2594601f904d4bf9458ee48e8d2b 100644
+--- a/workout/island/minigames/hoops-v5-venue.mjs
++++ b/workout/island/minigames/hoops-v5-venue.mjs
+@@ -5,6 +5,7 @@
+ import * as THREE from '../vendor/three.module.js';
+ import {GLTFLoader} from '../vendor/GLTFLoader.js';
+ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
++import {markHoopsRim} from './hoops-polish-view.mjs';
+ import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
+ import {loadHoopsGLTF} from './hoops-gltf.mjs';
+ import {mergeStaticMeshes,resources,release,mergeResources} from './hoops-models.mjs';
+@@ -91,7 +92,7 @@ function crowdController(mesh,clip,uniforms,{level,pinned,onLevel}){
+  };
+ }
+ 
+-export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v5,params,looks}={}){
++export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v5,params,looks,rimMotion=false}={}){
+  const base=assetBase||new URL('../',import.meta.url),dir=v5.base||'design/hoops-v5/models/',files={...V5_FILES,...(v5.files||{})};
+  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
+  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+@@ -156,9 +157,18 @@ export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,
+   const baskets=[],nets=[],clocks=[];
+   for(const [i,side] of [1,-1].entries()){
+    const g=new THREE.Group();g.name='v5-basket-'+side;
+-   const parts=['stanchion-pads','basket-support','basket-brace','board-frame','board-target','rim','shot-clock-case'].map(n=>sliceByX(hoopMeshes(n).geometry,side)).filter(Boolean);
+-   for(const p of parts)for(const key of Object.keys(p.attributes))if(!['position','normal','color'].includes(key))p.deleteAttribute(key);
++   const parts=[];let nextVertex=0,rimRange=null;
++   for(const name of ['stanchion-pads','basket-support','basket-brace','board-frame','board-target','rim','shot-clock-case']){
++    const part=sliceByX(hoopMeshes(name).geometry,side);
++    if(!part)continue;
++    for(const key of Object.keys(part.attributes))if(!['position','normal','color'].includes(key))part.deleteAttribute(key);
++    const count=part.attributes.position.count;
++    if(rimMotion&&name==='rim')rimRange={first:nextVertex,count};
++    nextVertex+=count;parts.push(part);
++   }
+    const merged=new THREE.Mesh(mergeGeometries(parts,false),stanchion);merged.name='basket-static';merged.castShadow=quality>=1;merged.receiveShadow=true;owned.geometries.add(merged.geometry);g.add(merged);
++   for(const part of parts)part.dispose();
++   if(rimRange)markHoopsRim(merged,side,rimRange.first,rimRange.count);
+    const glassSource=hoopMeshes('backboard-glass'),glass=new THREE.Mesh(sliceByX(glassSource.geometry,side),glassSource.material.clone());
+    glass.name='backboard';glass.material.transparent=true;glass.material.opacity=.3;glass.material.depthWrite=false;glass.material.roughness=.15;glass.material.forceSinglePass=true;glass.material.side=THREE.DoubleSide;owned.geometries.add(glass.geometry);owned.materials.add(glass.material);g.add(glass);
+    // the net is rim-local (y <= 0) so the view's swing keeps working
+diff --git a/workout/island/minigames/hoops-v8-venue.mjs b/workout/island/minigames/hoops-v8-venue.mjs
+index 6e59db4aba7d6169cce90e6466a2621c639ba719..ce62d73bca1028eaf08191f3004d67485a70c616 100644
+--- a/workout/island/minigames/hoops-v8-venue.mjs
++++ b/workout/island/minigames/hoops-v8-venue.mjs
+@@ -7,6 +7,7 @@
+ import * as THREE from '../vendor/three.module.js';
+ import {GLTFLoader} from '../vendor/GLTFLoader.js';
+ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
++import {markHoopsRim} from './hoops-polish-view.mjs';
+ import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
+ import {loadHoopsGLTF} from './hoops-gltf.mjs';
+ import {resources,release,mergeResources} from './hoops-models.mjs';
+@@ -55,7 +56,7 @@ function floatGeometry(source){
+ /** The shell has about forty meshes; the ones that share a material (bowl, steel, rims, stands, baskets) become one draw call each.
+  * Roof, lighting and walls stay apart (the cutaway hides them by name), as do the floor, the nets (they swing), the glass and the
+  * hanging scoreboard (hidden in portrait). Geometry is baked into the shell's space. Returns the number of draw calls saved. */
+-export function mergeShellStatic(shell,solid){
++export function mergeShellStatic(shell,solid,rimMotion=false){
+  shell.updateMatrixWorld(true);
+  const inverse=new THREE.Matrix4().copy(shell.matrixWorld).invert(),groups=new Map(),plain=[];
+  shell.traverse(o=>{
+@@ -77,6 +78,14 @@ export function mergeShellStatic(shell,solid){
+   const merged=mergeGeometries(parts,false);for(const g of parts)g.dispose();if(!merged)continue;
+   const material=key.endsWith('/solid')?solid:meshes[0].material,part=key.split('/')[0];
+   const mesh=new THREE.Mesh(merged,material);mesh.name=(part||'merged')+'__merged-'+key.split('/')[1];mesh.frustumCulled=false;shell.add(mesh);
++  if(rimMotion){
++   let first=0;
++   for(let i=0;i<meshes.length;i++){
++    const count=parts[i].attributes.position.count,side=rimSide(meshes[i].name);
++    if(side)markHoopsRim(mesh,side,first,count);
++    first+=count;
++   }
++  }
+   for(const m of meshes){m.parent.remove(m);m.geometry.dispose();}
+   saved+=meshes.length-1;
+  }
+@@ -132,7 +141,9 @@ function createScoreSurfaces(board,shot){
+  return {group,faces};
+ }
+ 
+-export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v8,params}={}){
++function rimSide(name){return name==='basket-home__rim'?-1:name==='basket-away__rim'?1:0;}
++
++export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v8,params,rimMotion=false,softLighting=false}={}){
+  const base=assetBase||new URL('../',import.meta.url),cfg=v8.arena,dir=cfg.base,files=cfg.files||V8_FILES,tex=cfg.textures;
+  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
+  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+@@ -151,7 +162,7 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
+   const [color,orm,normal,crowdAtlas,env]=images;
+   env.mapping=THREE.CubeUVReflectionMapping;env.colorSpace=THREE.LinearSRGBColorSpace;env.flipY=false;env.generateMipmaps=false;env.minFilter=env.magFilter=THREE.LinearFilter;env.needsUpdate=true;
+   // lacquered maple: the package's baked ceiling reflection instead of a live mirror pass of the players (quality 1: no clearcoat)
+-  const floorMat=new THREE.MeshPhysicalMaterial({map:color,roughnessMap:orm,normalMap:normal,normalScale:new THREE.Vector2(.18,.18),roughness:.63,metalness:0,clearcoat:quality>=2?.38:0,clearcoatRoughness:.2,envMap:env,envMapIntensity:.85});
++  const floorMat=new THREE.MeshPhysicalMaterial({map:color,roughnessMap:orm,normalMap:normal,normalScale:new THREE.Vector2(.18,.18),roughness:.63,metalness:0,clearcoat:quality>=2?(softLighting?.32:.38):0,clearcoatRoughness:softLighting?.24:.2,envMap:env,envMapIntensity:.85});
+   owned.materials.add(floorMat);
+   const group=new THREE.Group();group.name='hoops-arena-v8';
+   const boardMat=new THREE.MeshBasicMaterial({map:dyn.scoreboard.texture,toneMapped:false}),shotMat=new THREE.MeshBasicMaterial({map:dyn.shotClocks[0].texture,toneMapped:false});
+@@ -163,18 +174,21 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
+     o.castShadow=false;o.receiveShadow=false;
+     if(o.material.name==='parquet'){o.material=floorMat;o.name='court_surface';o.receiveShadow=true;}
+     else if(o.material.name==='glass'){o.material.depthWrite=false;o.material.forceSinglePass=true;}
+-    // the nets live in their rim groups (rim-local, hanging down from y = 0): the view's swing moves their vertices
++    // Keep the court-space net meshes separate for the view to deform.
+     if(/^basket-(home|away)__net$/.test(o.name)){const side=o.name.includes('home')?-1:1;nets.push({mesh:o,side,swing:0,base:o.geometry.attributes.position.array.slice()});}
+    });
+   }
+   const solidMat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.68,metalness:.12});owned.materials.add(solidMat);
+-  for(const shell of shells)mergeShellStatic(shell,solidMat);
++  for(const shell of shells){
++   mergeShellStatic(shell,solidMat,rimMotion);
++   if(rimMotion)shell.traverse(mesh=>{const side=rimSide(mesh.name);if(mesh.isMesh&&side)markHoopsRim(mesh,side);});
++  }
+   for(const shell of shells)shell.traverse(o=>{if(o.isMesh&&o.name.startsWith('scoreboard__'))boards.push(o);});
+   const populations=shells.map((s,i)=>createPopulation(i,crowdAtlas)),levels=shells.map((s,i)=>{const g=new THREE.Group();g.name='level-'+i;g.add(s,populations[i].group);group.add(g);return g;});
+   for(const p of populations)owned.materials.add(p.group.children[0].material),owned.materials.add(p.group.children[1].material);
+   const surfaces=createScoreSurfaces(boardMat,shotMat);surfaces.group.name='live-score-surfaces';group.add(surfaces.group);
+   // a warm fill so the lacquer and the stands read; the game's own key light (with shadows) is kept for the players
+-  const hemi=new THREE.HemisphereLight(0xb0c6df,0x4a3925,.9);hemi.name='bowl-ambient';group.add(hemi);
++  const hemi=new THREE.HemisphereLight(0xb0c6df,0x4a3925,softLighting?.82:.9);hemi.name='bowl-ambient';group.add(hemi);
+ 
+   // ---------- ball ----------
+   const ballMap=ballTexture(512);ballMap.anisotropy=Math.min(4,anisotropy);
+diff --git a/workout/island/minigames/hoops-view.mjs b/workout/island/minigames/hoops-view.mjs
+index 0df79ca813fa2172050da94d49a0b3b8d1763fab..e25423a77d55473e7d1cd73659cdd25bb31b4fb8 100644
+--- a/workout/island/minigames/hoops-view.mjs
++++ b/workout/island/minigames/hoops-view.mjs
+@@ -2,6 +2,8 @@
+  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
+  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
+ import * as THREE from '../vendor/three.module.js';
++import {readHoopsPolish} from './hoops-polish-flags.mjs';
++import {createHoopsBasketMotion,createHoopsBallHandoff,updateHoopsBallShadow} from './hoops-polish-view.mjs';
+ import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-18';
+ import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-18';
+ import {hoopsNumbersTexture} from './hoops-athlete.mjs';
+@@ -25,26 +27,26 @@ function releaseScene(scene){
+ const lerp=(a,b,t)=>a+(b-a)*t;
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ 
+-export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress,onFeelAudio}){
++export async function createHoopsView(canvas,config,{court,teams,quality=2,assetBase,insets,onProgress,onFeelAudio,polish=readHoopsPolish()}){
+  const V=config.view,mobile=/Android|iPhone|iPad|Mobile/i.test(globalThis.navigator?.userAgent||'');
+  // load-time breakdown (ms) for the perf page and the phone: where a slow start actually goes
+  const loadTimes={},tStart=performance.now();let tMark=tStart;const mark=name=>{const now=performance.now();loadTimes[name]=Math.round(now-tMark);tMark=now;};
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:quality>=2,powerPreference:'high-performance',preserveDrawingBuffer:!!V.preserve});
+  let loadingScene,loadingModels,loadingAssets,loadingVfx,loadingPm,loadingEnv,loadingFeel;
+  try{
+- renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=V.exposure;
++ renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=polish.lighting?V.exposure*.98:V.exposure;
+  renderer.shadowMap.enabled=quality>=1;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const scene=new THREE.Scene();loadingScene=scene;scene.background=new THREE.Color(0x05060a);scene.fog=new THREE.Fog(0x05060a,38,80);
+  const camera=new THREE.PerspectiveCamera(V.fov,1,0.1,200);
+  const looks=teams.map(t=>t.look);
+- const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
++ const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy()),rimMotion:polish.rim,softLighting:polish.lighting});
+  scene.add(arena);mark('arena');
+  // v4 assets (02/11) are an upgrade, never a requirement: any load failure falls back to the v3 venue and bodies
+  const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[];
+  // M4 presentation (11/11): automatic two-angle replay, teammate and defender reactions, crowd moods, live cuts; `?hoopsShow=0` restores the old presentation
+  const show=showEnabled(params),userTeam=0,showCounts={autoReplays:0,autoReplaysDone:0,skipped:0,liveCuts:0,casts:0};
+  const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
+- const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
++ const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy()),rimMotion:polish.rim,softLighting:polish.lighting};
+  let models=null;
+  // v8 (06/11): the new hall with the broadcast surfaces (15K triangles with the whole crowd); first choice, v5 stays as the fallback
+  if(v8ArenaEnabled(config.assets,quality,params)){
+@@ -137,6 +139,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+  const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null,casts:[]};
+  const v=new THREE.Vector3(),v2=new THREE.Vector3();
+  const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;mark('vfx');
++ const basketMotion=polish.rim||polish.net?createHoopsBasketMotion(arena,dyn.nets,court,polish,vfx.reducedMotion):null;
++ const handoff=polish.transitions?createHoopsBallHandoff(court.ballR):null;
+  const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
+  const replayCam=new THREE.PerspectiveCamera(),replayTarget=new THREE.Vector3();mark('feel');loadTimes.total=Math.round(performance.now()-tStart);
+ 
+@@ -186,7 +190,11 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+    if(state.cut){
+     const c=state.cut;c.t+=dt;const hold=SHOW.liveCut.hold,blend=SHOW.liveCut.blend;
+     if(c.t>=hold+blend)state.cut=null;
+-    else{const w=c.t<hold?1:1-smootherstep((c.t-hold)/blend);camera.updateMatrixWorld();camera.position.lerp(c.pos,w);camera.quaternion.slerp(c.quat,w);camera.fov=lerp(camera.fov,c.fov,w);}
++    else{
++     const entry=polish.transitions?smootherstep(c.t/.19):1;
++     const w=c.t<hold?entry:1-smootherstep((c.t-hold)/blend);
++     camera.updateMatrixWorld();camera.position.lerp(c.pos,w);camera.quaternion.slerp(c.quat,w);camera.fov=lerp(camera.fov,c.fov,w);
++    }
+    }
+   } else if(state.landscape&&V.mode==='behind'){
+    // behind the play (2K / NBA Live mobile style): low behind the ball, facing the basket the
+@@ -295,20 +303,27 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+     if(av.dribbleBallWorld?.(v)){bx=v.x;bz=v.z;by=Math.max(court.ballR,v.y);}
+    }
+   }
+-  // smooth the hand-off when the engine takes over (release, pass)
+-  if(state.ballVis&&b.state!=='held'&&state.ballVis.state==='held'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.18};}
+-  // a caught pass glides into the receiver's hands instead of jumping from the flight point to the hold point
+-  if(state.ballVis&&b.state==='held'&&state.ballVis.state==='pass'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.14,span:0.14};}
+-  if(state.ballOffset&&state.ballOffset.t>0){const k=state.ballOffset.t/(state.ballOffset.span||0.18);bx+=state.ballOffset.x*k;by+=state.ballOffset.y*k;bz+=state.ballOffset.z*k;state.ballOffset.t-=dt;}
+-  ball.position.set(bx,by,bz);ball.rotation.x+=dt*(b.state==='shot'?-12:b.state==='pass'?-9:0);
++  if(handoff){
++   ball.position.set(bx,by,bz);
++   handoff(ball.position,b,s.tick,state.replay,poseDt);
++   bx=ball.position.x;by=ball.position.y;bz=ball.position.z;
++  }else{
++   // The legacy offsets cover release and pass catches.
++   if(state.ballVis&&b.state!=='held'&&state.ballVis.state==='held'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.18};}
++   if(state.ballVis&&b.state==='held'&&state.ballVis.state==='pass'){state.ballOffset={x:state.ballVis.x-bx,y:state.ballVis.y-by,z:state.ballVis.z-bz,t:0.14,span:0.14};}
++   if(state.ballOffset&&state.ballOffset.t>0){const k=state.ballOffset.t/(state.ballOffset.span||0.18);bx+=state.ballOffset.x*k;by+=state.ballOffset.y*k;bz+=state.ballOffset.z*k;state.ballOffset.t-=dt;}
++   ball.position.set(bx,by,bz);
++  }
++  ball.rotation.x+=dt*(b.state==='shot'?-12:b.state==='pass'?-9:0);
+   state.ballVis={x:bx,y:by,z:bz,state:b.state};
+   ball.visible=b.state!=='dead'||!!handler||s.phase==='inbound'||s.phase==='freethrow';
+-  ballShadow.position.set(bx,FLOOR_Y,bz);ballShadow.material.opacity=clamp(0.55-by*0.1,0.1,0.55);const bs=1+by*0.25;ballShadow.scale.set(bs,bs,1);ballShadow.visible=ball.visible;
++  if(polish.shadow)updateHoopsBallShadow(ballShadow,ball,court,dyn.key,FLOOR_Y);
++  else {ballShadow.position.set(bx,FLOOR_Y,bz);ballShadow.material.opacity=clamp(0.55-by*0.1,0.1,0.55);const bs=1+by*0.25;ballShadow.scale.set(bs,bs,1);ballShadow.visible=ball.visible;}
+   // controlled player marker
+   if(me&&!state.replay){const mi=interp.get(me,alpha);ring.visible=true;ring.position.x=mi.x;ring.position.z=mi.z;glow.visible=true;glow.position.x=mi.x;glow.position.z=mi.z;const pulse=1+Math.sin(performance.now()*0.008)*0.06;ring.scale.setScalar(pulse);arrow.visible=true;arrow.position.set(mi.x,me.hasBall?2.75:2.6,mi.z);arrow.rotation.y+=dt*2;}
+   else {ring.visible=false;glow.visible=false;arrow.visible=false;}
+   // nets, LED, displays
+-  for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
++  if(!polish.net)for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
+   dyn.led.offset.x=(dyn.led.offset.x+dt*0.03)%1;
+   drawDisplays(dyn,s,looks.map(l=>l.primary));
+   // crowd moods (show): stand/arms up decays over SHOW.crowd.standSeconds, the groan over groanSeconds, the cheer wave sweeps the stands once
+@@ -323,6 +338,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+   const feedback=feel.update(presentationDt,s);
+   if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
+   models.arenaV8?.update(camera,now/1000,presentationDt||dt||1/60,state.cheer||0,mood);
++  if(basketMotion)basketMotion.update(state.replay?s.tick:lerp(p0?.tick??s.tick,s.tick,alpha));
+   // v24.1 3D fans: the budget follows the quality tier and the hall's level (its governor steps down on slow frames); no budget = the cards again
+   if(crowd3d){
+    const budget=state.crowdCards?null:crowd3dApi.hoopsCrowdBudget({mode:crowdMode,quality,arenaLod:models.arenaV8?.lod??0});
+@@ -401,12 +417,13 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+   vfx.effects(events,snapshot||state.lastSnapshot);
+   feel.effects(events,snapshot||state.lastSnapshot);
+   const snap=snapshot||state.lastSnapshot,triggers=show?replayTriggers(events,snap,{userTeam}):[];
++  basketMotion?.effects(events,snap);
+   for(const e of events){
+    referee?.event(e);
+    if(e.playerId&&(e.type!=='control'||(snapshot||state.lastSnapshot)?.players.find(p=>p.id===e.playerId)?.team!==(snapshot||state.lastSnapshot)?.possession))avatars.get(e.playerId)?.event(e);
+    if(e.type==='final'&&snapshot){const winner=e.won?0:1;for(const p of snapshot.players)if(p.team===winner)avatars.get(p.id)?.event('result_success');}
+    if(!vfx.reducedMotion&&e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
+-   if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;crowd3d?.onBasket({seconds:performance.now()/1000,team:e.team});}
++   if(e.type==='score'){if(!polish.net)for(const n of dyn.nets)n.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;crowd3d?.onBasket({seconds:performance.now()/1000,team:e.team});}
+    if(!vfx.reducedMotion&&(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3))state.shake=Math.max(state.shake,0.4);
+    if(!show||!snap)continue;
+    // show: the nearest teammate and the dunked-on defender react, the losers at the final (2.2 s clips, view only, the engine clock runs on)
+@@ -434,7 +451,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
+   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
+  }
+  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
+- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),show:show?{...showCounts,stand:+(state.stand||0).toFixed(2),groan:+(state.groan||0).toFixed(2),wave:state.waveT!=null,cut:!!state.cut}:null,motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState),
++ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',polish,characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),show:show?{...showCounts,stand:+(state.stand||0).toFixed(2),groan:+(state.groan||0).toFixed(2),wave:state.waveT!=null,cut:!!state.cut}:null,motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState),
+   v241:{flags:hoopsV241Flags(search),crowd3d:{...crowd3dState,...(crowd3d?crowd3d.metrics:{}),visible:!!crowd3d?.visible,cardsHidden:crowdCards?.hidden||0},bodyV2:!!assets.bodyV2,motionV13:assets.motionV13||null,referee:{...refereeState,...(referee?{...referee.metrics,x:+referee.x.toFixed(2),gesture:referee.gesture}:{})}}};}
+  function startReplay(frames,done,speed=0.6){
+   if(!frames?.length)return false;
