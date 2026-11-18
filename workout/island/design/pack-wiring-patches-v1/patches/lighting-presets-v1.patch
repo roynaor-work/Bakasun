@@ -1,0 +1,1947 @@
+diff --git a/tests/island-offline.test.mjs b/tests/island-offline.test.mjs
+index 45e1968f5b4d9069400b8321cc7e98405081c806..876c99d3babf00122073d5b683ccc70e421b5912 100644
+--- a/tests/island-offline.test.mjs
++++ b/tests/island-offline.test.mjs
+@@ -13,23 +13,120 @@ const read=file=>readFile(path.join(island,file),'utf8');
+ const manifest=JSON.parse(await read('offline-manifest.json'));
+ const bytesOf=async list=>{let n=0;for(const p of list)if(p)n+=(await stat(path.join(island,p))).size;return n;};
+
+-test('offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game',async()=>{
+- assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
++// Copy-plan inventories for the staged packs. Each selected pack has its own exact count and byte allowance.
++const STAGED_PACKS={
++ 'hoops-realism-v2':['hoops',76,3722297],
++ 'hoops-motion-v14':['hoops',28,12006563],
++ 'hoops-arena-v2':['hoops',8,2184032],
++ 'tennis-motion-v2':['tennis',8,7213613],
++ 'tennis-ui-v2':['tennis',61,293891],
++ 'soccer-crowd-people-v2':['soccer',50,2563087],
++ 'soccer-run-cycles-v3':['soccer',22,21883878],
++ 'soccer-keeper-motion-v3':['soccer',21,16789355],
++ 'soccer-celebrations-v1':['soccer',16,12055471],
++ 'fire-multifloor-v2':['fire',29,4293883],
++ 'fire-rescue-people-v2':['fire',14,5236481],
++ 'fire-fx-v2':['fire',3,433572],
++ 'alpine-runner-v1':['alpine',49,1732339],
++ 'alien-hits-v1':['alien',16,429283],
++ 'boars-weapons-v2':['boars',38,694540],
++ 'catch-vehicles-v2':['catch',17,3769619],
++ 'naval-sinking-v1':['naval',24,11189199],
++ 'racing-podium-v1':['racing',18,2154016],
++ 'city-citizens-v1':['city',45,5168586],
++ 'ui-sounds-v1':['core',56,358237],
++ 'lighting-presets-v1':['core',7,72700],
++};
++const TENNIS_UI_LIVE=/^assets\/tennis-ui-v2\/(?:button-(?:serve|smash|drop|lob)-(?:idle|pressed)|fx-(?:out|net))\.svg$/;
++const stagedPackFor=file=>{
++ const [root,id]=file.split('/');
++ return root==='assets'&&Object.hasOwn(STAGED_PACKS,id)&&!TENNIS_UI_LIVE.test(file)?id:undefined;
++};
++
++// Pack notices are download-only. Included JS/CSS helpers use the worker's existing shell route if requested.
++const STAGED_TEXT_PATHS=new Set([
++ 'assets/hoops-realism-v2/LICENSES.md',
++ 'assets/hoops-motion-v14/LICENSE',
++ 'assets/hoops-motion-v14/LICENSES.md',
++ 'assets/hoops-motion-v14/runtime/player.mjs',
++ 'assets/hoops-arena-v2/LICENSES.md',
++ 'assets/hoops-arena-v2/arena.mjs',
++ 'assets/tennis-motion-v2/LICENSES.md',
++ 'assets/tennis-motion-v2/runtime.mjs',
++ 'assets/tennis-ui-v2/LICENSE.txt',
++ 'assets/tennis-ui-v2/tennis-config.js',
++ 'assets/tennis-ui-v2/tennis-ui.css',
++ 'assets/tennis-ui-v2/tennis-ui.js',
++ 'assets/soccer-crowd-people-v2/LICENSES.md',
++ 'assets/soccer-run-cycles-v3/LICENSES.md',
++ 'assets/soccer-run-cycles-v3/runtime/player.mjs',
++ 'assets/soccer-keeper-motion-v3/LICENSES.md',
++ 'assets/soccer-keeper-motion-v3/runtime/player.mjs',
++ 'assets/soccer-celebrations-v1/LICENSES.md',
++ 'assets/fire-multifloor-v2/LICENSES.md',
++ 'assets/fire-multifloor-v2/runtime.mjs',
++ 'assets/fire-rescue-people-v2/LICENSES.md',
++ 'assets/fire-fx-v2/LICENSE.txt',
++ 'assets/alpine-runner-v1/LICENSES.md',
++ 'assets/alien-hits-v1/LICENSE.txt',
++ 'assets/boars-weapons-v2/LICENSE.txt',
++ 'assets/boars-weapons-v2/effects.mjs',
++ 'assets/catch-vehicles-v2/LICENSES.md',
++ 'assets/catch-vehicles-v2/vehicle-controller.mjs',
++ 'assets/naval-sinking-v1/LICENSE.txt',
++ 'assets/racing-podium-v1/LICENSES.md',
++ 'assets/city-citizens-v1/LICENSES.md',
++]);
++
++test('offline manifest: paths exist, belong to their intended lists and follow the worker routing rules',async()=>{
++ // The boars bucket reserves the adapter's paths. The current game selector still uses the shell.
++ const selectableGames=Object.keys(manifest.games).filter(game=>game!=='boars');
++ assert.deepEqual(selectableGames.sort(),Object.keys(OFFLINE_GAMES).sort());
++ assert.ok(!Object.hasOwn(OFFLINE_GAMES,'boars'));
+  for(const [game,list] of Object.entries(manifest.games)){
+-  assert.ok(list.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'||game==='city'||game==='catch'?5:40),game+' has a real asset list');/* small packs */
++  if(game==='boars'){
++   assert.ok(list.length>0&&list.every(file=>stagedPackFor(file)==='boars-weapons-v2'));
++  }else{
++   const active=list.filter(file=>!stagedPackFor(file));
++   assert.ok(active.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'||game==='city'||game==='catch'?5:40),game+' has a real asset list');/* small packs */
++  }
+   assert.equal(new Set(list).size,list.length,game+' has no duplicates');
+-  for(const p of list){await access(path.join(island,p));assert.ok(isManagedPath('/workout/island/'+p),p+' is served from the cache');}
++  for(const p of list){
++   await access(path.join(island,p));
++   assert.ok(isManagedPath('/workout/island/'+p)||STAGED_TEXT_PATHS.has(p),p+' is routed or declared package text');
++  }
+  }
+  for(const p of manifest.core){await access(path.join(island,p));}
+ });
+
++test('offline manifest: each staged pack is counted once in its assigned list at its audited size',async()=>{
++ const byPack=new Map();
++ for(const [bucket,list] of [['core',manifest.core],['shell',manifest.shell],...Object.entries(manifest.games)]){
++  assert.deepEqual(list,[...new Set(list)].sort(),bucket+' paths are sorted and unique');
++  for(const file of list){
++   const id=stagedPackFor(file);
++   if(!id)continue;
++   assert.equal(bucket,STAGED_PACKS[id][0],file);
++   if(!byPack.has(id))byPack.set(id,[]);
++   byPack.get(id).push(file);
++  }
++ }
++ for(const [id,files] of byPack){
++  const [,count,bytes]=STAGED_PACKS[id];
++  assert.equal(files.length,count,id+' file count');
++  assert.equal(await bytesOf(files),bytes,id+' audited bytes');
++ }
++});
++
+ test('offline manifest: sizes per game and for the island (reported in the release notes)',async()=>{
+  const sizes={};for(const [game,list] of Object.entries(manifest.games))sizes[game]=await bytesOf(list);
+  const union=pathsFor(manifest,undefined,{shell:false}),all=pathsFor(manifest,undefined,{shell:true});
+  const assetsMb=(await bytesOf(union))/1048576,allMb=(await bytesOf(all))/1048576;
+  console.log('offline MB',JSON.stringify(Object.fromEntries(Object.entries(sizes).map(([g,b])=>[g,Math.round(b/104857.6)/10])))+' assets '+assetsMb.toFixed(1)+' with app code '+allMb.toFixed(1));
+  /* v24.1 (15/11): the cap moved from 80 to 90 MB on purpose: the 3D fire rooms, the referees, the clips and the 3D crowd add 7.5 MB; the offline download is optional and a per-game download is next. */
+- assert.ok(assetsMb>10&&assetsMb<90,'game assets stay a phone-sized download: '+assetsMb);
++ // Keep the 90 MiB ceiling on the previous download. The staging test above budgets additions per pack.
++ const activeMb=(await bytesOf(union.filter(file=>!stagedPackFor(file))))/1048576;
++ assert.ok(activeMb>10&&activeMb<90,'existing game assets stay a phone-sized download: '+activeMb);
+ });
+
+ test('offline manifest: the basketball motion clips and the shell list are complete and up to date',async()=>{
+diff --git a/workout/island/ASSETS.md b/workout/island/ASSETS.md
+index 0d3e84f61f3df3b981b76a2441aa248928fd527e..e5ccbcc3948a41284f6c61624501ec378df94d79 100644
+--- a/workout/island/ASSETS.md
++++ b/workout/island/ASSETS.md
+@@ -238,3 +238,7 @@ integration; it requires separate visual approval.
+ - סקי, רוכב alpine-v7 (05.11.2026): `assets/alpine-v7/characters/` = שלושה GLB בלבד (`ski-male.glb` 19,916 משולשים, `-lod1` 9,890, `-lod2` 4,129; 0.79/0.75/0.72 MB, אטלס 1024 מוטמע, 18 עצמות, 14 קליפים). נטענים לפי רמת איכות ורמת פירוט (`minigames/alpine-v7.mjs`, `loadV7Characters` ב-`alpine-character.mjs`); כל כשל חוזר בשקט ל-`design/skier3`, ואז לרוכב הישן. מתג: `?alpineV7=0` ו-`data/config.json` ← `alpineRush.assets.v7.enabled`. החבילה `design/alpine-v7` עצמה לא נטענת מהמשחק. פירוט ומדידות: `verification/gpt-v7-ski-tennis-racing/ski/SKI.md`.
+ - תפוס את הפושע (07.11.2026, ענף `claude/catch-game-v1`): `assets/game-catch/models/` = 12 עותקים דחוסים של דגמי העיר מ-`workout/city-lab/models` (תחנת משטרה 29, בית 01, בניין 05, מכולת 09, בית קפה 11, עמוד תאורה 54, מכונית נמלטת 56, מחסום משטרה 57, רכב משוריין 58, ניידת 50, עץ 42, שיח 44). הדחיסה: ‏`weld`, פישוט משולשים, WebP עד 1024, קוונטיזציה (בלי meshopt, כי ה-CSP של העמוד חוסם WebAssembly). 2.6MB בסך הכול. המקור של הדגמים: Meshy, כפי שמתועד ב-`workout/city-lab/REPORT.md`. השוטרת והפושע הם `assets/models/adult-woman-rigged-512.glb` ו-`adult-man-rigged-512.glb` הקיימים, בלי שינוי בקבצים.
+ - תפוס את הפושע v2 (07.11.2026, ענף `claude/catch-game-v2`): נוספו ל-`assets/game-catch/models/` שלושה עותקים דחוסים של דגמי העיר לתנועה במרדף: מונית 52, משאית הובלה 48, אוטובוס 46 (טקסטורות 768, קוונטיזציה, בלי meshopt). סך הכול 15 דגמים, 3.2MB. מחסום משטרה 57, רכב משוריין 58, מכונית נמלטת 56 וניידת 50 כבר היו. קונוסים, רפידות טורבו וזוהר הסירנה הם צורות פשוטות ולא נכסים.
++
++## lighting-presets-v1
++
++הגדרות התאורה, הקוד והטקסטורות המחוללות תחת MIT. [LICENSES.md](assets/lighting-presets-v1/LICENSES.md) · [מקור](https://github.com/roynaor-work/Bakasun/tree/9b988d95df033312314cc4236fd069422b8a45d9/workout/island/design/lighting-presets-v1)
+diff --git a/workout/island/assets/lighting-presets-v1/LICENSES.md b/workout/island/assets/lighting-presets-v1/LICENSES.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..396d9cd23ffe59ff63359ca67aa78c8a5ffc0c6d
+GIT binary patch
+literal 3384
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/lighting.js b/workout/island/assets/lighting-presets-v1/lighting.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..72224046bd3d82c34782872234772076a612298e
+GIT binary patch
+literal 14260
+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
+YPe{MdvOKEHJ>K^0@8>?xGkRY0FW)Q3ZU6uP
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/manifest.json b/workout/island/assets/lighting-presets-v1/manifest.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..98fa0bfb530458fb468c62c67a115147a88f26d8
+GIT binary patch
+literal 2325
+zcma);QEyu}429qOD}p?)sVIsRwYP03umQt1w0j%&Ac<t`%}om1$yOBo@1t+ibZ9Qp
+z7={5~-fMk2JUsIIXJ=>Ux3)iQudmL(J%evf-^Yz!+VT5$M?1tdOv`Jj>~F4)+c);9
+zB!xK1QaRec$D93q1#_xtDfIo^Y;W%inM(uyf93U$-(})h=zLHrlZ>-^>rOPWqYRbS
+z0i1;#p&>y*7ci-8tr;N-5tf<<o-aS^+ug$bM{MQn?EUf?n|j-io6{n1_jbFre=au1
+zH@oG5(_QD|ZnH&j(O|iF*z`LxP_MlwwhELxE2RpZr47#62PbXBnlh_^+SJB_#o3d^
+zjcE=zUnoAD_#Q!;hr>gnT4ar=@`N^Qh{b}jWH3~R3f>LN45r2!N==f|dl^=_`JCvO
+zTim1aG@`#&fS@(5A9oVMeb%TnQRulDDvdmG&J0tll<ICaiCl71ErqJL1j$Es9g?Kh
+z*0B2HM7!<f=D5AOyjVplnHRTx(YC6kGRK>uFU=JbNG7i`EhS~BV<HwZO@P^8if|6+
+z;(##&ogPODCmrngT>G)FQW3!_mADq79(L)?ak>xkJO`@y7^4hKv-DiUb4rtEv+4zU
+zH8SYKNS{J=2%?zi`!;>@cTUV}cA}z!MP#7+%qdOtk~nqqG_d8I!Bh0pTIFiN)Ri49
+zRQH}z$zL(}&p-X}@|V{yUthe@he$EN<(~7iouK8>EoCWIA~P(yH*(3|T1sR?XZRRY
+zp_Mi>3qx)c)|}v$F{wSS(yN!h{rc+nRUTkUZ3QSoCs{8wA;n@5NS&v3k4S0*(CRFe
+za$tu0O%TKCFujD}NoYjvaiCkf((C<;<7RJmvAdpqx9Tb8MrBFdFRZSl;p!<<b1@1R
+z_a3$>Q`}@`s#GNvj?s-^3gK$i*=y}hu+yp8Polf)<HbVxu#=Ehqe?=SWD<)5x8W^<
+zQ6~@WXe?P%6`f<&h<Z{CA&WY-2y__kr!jaO?e5??yg2;*?)fpY|Kjb{<wLf7IyhFk
+z8Zp$Z4eZdxGb9L$F=!@9-D3vAbDnc*G8jXy!a4?1=`GDxqR&r+o4e~9J*=Z~!n{J(
+z+~UY79X&OW5Cum>JXI()q|>I{Nl00FRGb+4;;_aYq4%!%l>xYyZPRzx>s*=gnqrb7
+zyn7l|#i$NvqRe37snR^+Ae@z^n_EbgIs89IhoZA!=V);LielH-yXd9uZ=;d#9`=!G
+z`Sb9F`)fGdZR8;XI1Zf7xnOfSB^r=87M7TY2$Pm2h7t+2C_;_6L!^1f6vy+Q&ptf+
+E4~mUM_y7O^
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/presets.json b/workout/island/assets/lighting-presets-v1/presets.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..851487ba12e0ced692185ec8b91d5b8b298e6136
+GIT binary patch
+literal 20661
+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
+Lwm*CCPw)K?|D3(x
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/textures/clouds.png b/workout/island/assets/lighting-presets-v1/textures/clouds.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..1a79cf75782e35d1e314a94800bd07b06c368dc2
+GIT binary patch
+literal 6032
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/textures/halo.png b/workout/island/assets/lighting-presets-v1/textures/halo.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..950981451962405381d2ff7742e2923d3ea2978b
+GIT binary patch
+literal 2524
+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
+EKe^tK6951J
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/assets/lighting-presets-v1/textures/sky-tile.png b/workout/island/assets/lighting-presets-v1/textures/sky-tile.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..b83f0d581441ec99671c5cf52a04b89ceda4ef0e
+GIT binary patch
+literal 23514
+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
+Z{|DRGUe8G32Pyyn002ovPDHLkV1iDyOHKd)
+
+literal 0
+HcmV?d00001
+
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+index e613a217f7610f70d1a650a57a5bca96320604b9..f3037bf3c6346b19471c58ff68a325a4d4dc7f5d 100644
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -2,72 +2,42 @@
+  "schema": 2,
+  "note": "Single source for what the island keeps on the device. Edit here only: the service worker, the download button and the tests all read this file.",
+  "core": [
+-  "assets/icons/island.svg",
++  "assets/boot/boot-montage.mp4",
+   "assets/icons/apple-touch-icon.png",
+   "assets/icons/island-192.png",
+   "assets/icons/island-512.png",
+-  "assets/boot/boot-montage.mp4",
+-  "offline-manifest.json",
+-  "assets/models/palm-tree-512.glb",
+-  "assets/models/house-a-512.glb",
+-  "assets/models/apartment-block-512.glb",
+-  "assets/models/shop-corner-512.glb",
+-  "assets/models/fire-station-512.glb",
+-  "assets/models/hospital-512.glb",
++  "assets/icons/island.svg",
++  "assets/lighting-presets-v1/LICENSES.md",
++  "assets/lighting-presets-v1/lighting.js",
++  "assets/lighting-presets-v1/manifest.json",
++  "assets/lighting-presets-v1/presets.json",
++  "assets/lighting-presets-v1/textures/clouds.png",
++  "assets/lighting-presets-v1/textures/halo.png",
++  "assets/lighting-presets-v1/textures/sky-tile.png",
+   "assets/models/adult-man-rigged-512.glb",
+   "assets/models/adult-woman-rigged-512.glb",
++  "assets/models/apartment-block-512.glb",
+   "assets/models/car-a-512.glb",
+-  "assets/textures/naval-waternormals.jpg",
+-  "assets/textures/coastal-grass.jpg",
+-  "assets/textures/coastal-sand.jpg",
++  "assets/models/fire-station-512.glb",
++  "assets/models/hospital-512.glb",
++  "assets/models/house-a-512.glb",
++  "assets/models/palm-tree-512.glb",
++  "assets/models/shop-corner-512.glb",
+   "assets/textures/city-asphalt.jpg",
+   "assets/textures/city-pavers.jpg",
++  "assets/textures/coastal-grass.jpg",
++  "assets/textures/coastal-sand.jpg",
++  "assets/textures/naval-waternormals.jpg",
++  "assets/ultra-hub/alpine.webp",
+   "assets/ultra-hub/boars.webp",
+-  "assets/ultra-hub/space.webp",
++  "assets/ultra-hub/catch.webp",
+   "assets/ultra-hub/fire.webp",
+-  "assets/ultra-hub/naval.webp",
+   "assets/ultra-hub/football.webp",
+-  "assets/ultra-hub/tennis.webp",
+-  "assets/ultra-hub/racing.webp",
+   "assets/ultra-hub/hoops.webp",
+-  "assets/ultra-hub/alpine.webp",
+-  "assets/ultra-hub/catch.webp",
+-  "design/ui-kit-v2/intro/soccer.svg",
+-  "design/ui-kit-v2/intro/tennis.svg",
+-  "design/ui-kit-v2/intro/streetSlam.svg",
+-  "design/ui-kit-v2/intro/alpineRush.svg",
+-  "design/ui-kit-v2/intro/islandRacing.svg",
+-  "design/ui-kit-v2/intro/navalDuel.svg",
+-  "design/ui-kit-v2/intro/fireRescue.svg",
+-  "design/ui-kit-v2/intro/alienDefense.svg",
+-  "design/ui-kit-v2/intro/boarDefense.svg",
+-  "design/ui-kit-v2/icons/games/soccer.svg",
+-  "design/ui-kit-v2/icons/games/tennis.svg",
+-  "design/ui-kit-v2/icons/games/streetSlam.svg",
+-  "design/ui-kit-v2/icons/games/alpineRush.svg",
+-  "design/ui-kit-v2/icons/games/islandRacing.svg",
+-  "design/ui-kit-v2/icons/games/navalDuel.svg",
+-  "design/ui-kit-v2/icons/games/fireRescue.svg",
+-  "design/ui-kit-v2/icons/games/alienDefense.svg",
+-  "design/ui-kit-v2/icons/games/boarDefense.svg",
+-  "design/ui-kit-v2/icons/menu/lock.svg",
+-  "design/ui-kit-v2/icons/menu/check.svg",
+-  "design/ui-kit-v2/rewards/trophy.svg",
+-  "design/ui-kit-v2/rewards/star-filled.svg",
+-  "design/ui-kit-v2/rewards/star-empty.svg",
+-  "design/ui-kit-v2/buttons/icon-default.svg",
+-  "design/ui-kit-v2/buttons/icon-disabled.svg",
+-  "design/ui-kit-v2/buttons/icon-hover.svg",
+-  "design/ui-kit-v2/buttons/icon-pressed.svg",
+-  "design/ui-kit-v2/buttons/primary-default.svg",
+-  "design/ui-kit-v2/buttons/primary-disabled.svg",
+-  "design/ui-kit-v2/buttons/primary-hover.svg",
+-  "design/ui-kit-v2/buttons/primary-pressed.svg",
+-  "design/ui-kit-v2/buttons/secondary-default.svg",
+-  "design/ui-kit-v2/buttons/secondary-disabled.svg",
+-  "design/ui-kit-v2/buttons/secondary-hover.svg",
+-  "design/ui-kit-v2/buttons/secondary-pressed.svg",
+-  "design/ui-kit-v2/surfaces/result-panel.svg",
++  "assets/ultra-hub/naval.webp",
++  "assets/ultra-hub/racing.webp",
++  "assets/ultra-hub/space.webp",
++  "assets/ultra-hub/tennis.webp",
+   "assets/upgrade-offer/icons/accuracy.svg",
+   "assets/upgrade-offer/icons/aerodynamics.svg",
+   "assets/upgrade-offer/icons/armor.svg",
+@@ -89,7 +59,44 @@
+   "assets/upgrade-offer/icons/tennis-power.svg",
+   "assets/upgrade-offer/icons/throw-power.svg",
+   "assets/upgrade-offer/icons/tires.svg",
+-  "assets/upgrade-offer/icons/upgrade.svg"
++  "assets/upgrade-offer/icons/upgrade.svg",
++  "design/ui-kit-v2/buttons/icon-default.svg",
++  "design/ui-kit-v2/buttons/icon-disabled.svg",
++  "design/ui-kit-v2/buttons/icon-hover.svg",
++  "design/ui-kit-v2/buttons/icon-pressed.svg",
++  "design/ui-kit-v2/buttons/primary-default.svg",
++  "design/ui-kit-v2/buttons/primary-disabled.svg",
++  "design/ui-kit-v2/buttons/primary-hover.svg",
++  "design/ui-kit-v2/buttons/primary-pressed.svg",
++  "design/ui-kit-v2/buttons/secondary-default.svg",
++  "design/ui-kit-v2/buttons/secondary-disabled.svg",
++  "design/ui-kit-v2/buttons/secondary-hover.svg",
++  "design/ui-kit-v2/buttons/secondary-pressed.svg",
++  "design/ui-kit-v2/icons/games/alienDefense.svg",
++  "design/ui-kit-v2/icons/games/alpineRush.svg",
++  "design/ui-kit-v2/icons/games/boarDefense.svg",
++  "design/ui-kit-v2/icons/games/fireRescue.svg",
++  "design/ui-kit-v2/icons/games/islandRacing.svg",
++  "design/ui-kit-v2/icons/games/navalDuel.svg",
++  "design/ui-kit-v2/icons/games/soccer.svg",
++  "design/ui-kit-v2/icons/games/streetSlam.svg",
++  "design/ui-kit-v2/icons/games/tennis.svg",
++  "design/ui-kit-v2/icons/menu/check.svg",
++  "design/ui-kit-v2/icons/menu/lock.svg",
++  "design/ui-kit-v2/intro/alienDefense.svg",
++  "design/ui-kit-v2/intro/alpineRush.svg",
++  "design/ui-kit-v2/intro/boarDefense.svg",
++  "design/ui-kit-v2/intro/fireRescue.svg",
++  "design/ui-kit-v2/intro/islandRacing.svg",
++  "design/ui-kit-v2/intro/navalDuel.svg",
++  "design/ui-kit-v2/intro/soccer.svg",
++  "design/ui-kit-v2/intro/streetSlam.svg",
++  "design/ui-kit-v2/intro/tennis.svg",
++  "design/ui-kit-v2/rewards/star-empty.svg",
++  "design/ui-kit-v2/rewards/star-filled.svg",
++  "design/ui-kit-v2/rewards/trophy.svg",
++  "design/ui-kit-v2/surfaces/result-panel.svg",
++  "offline-manifest.json"
+  ],
+  "shell": [
+   "",
+@@ -696,119 +703,27 @@
+  ],
+  "games": {
+   "soccer": [
+-   "design/characters2/soccer-player.glb",
+-   "design/characters2/goalkeeper.glb",
+-   "design/characters2/regions.json",
+-   "design/characters/rig.json",
+-   "design/viewer/retarget-map.json",
+-   "design/motion/soccer.json",
+-   "design/motion2/soccer/throws-receives.json",
+-   "design/motion2/soccer/kicks-locomotion.json",
+-   "design/motion2/soccer/tackles-reactions.json",
+-   "design/models2/soccer-stadium.glb",
+-   "design/models/soccer-goal.glb",
+-   "assets/soccer-v6/goals.glb",
+-   "design/models/soccer-ball.glb",
+-   "design/environment/textures/grass-mown.webp",
+-   "design/environment/textures/stand-concrete.webp",
+-   "design/environment/textures/crowd-dots.webp",
+-   "design/environment/backgrounds/stadium-day-landscape.webp",
+-   "design/environment/backgrounds/stadium-day-portrait.webp",
+-   "design/vfx/atlases/goal-burst.json",
+-   "design/vfx/atlases/goal-burst.webp",
+-   "design/vfx/atlases/confetti.json",
+-   "design/vfx/atlases/confetti.webp",
+-   "design/vfx/atlases/landing-dust.json",
+-   "design/vfx/atlases/landing-dust.webp",
+-   "design/vfx/cameras/goal-replay-left.json",
+-   "design/vfx/cameras/goal-replay-right.json",
+-   "design/vfx/cameras/goal-replay-behind.json",
+-   "design/tactics/soccer.json",
+-   "design/controls/soccer.json",
+-   "design/controls/interaction.json",
+-   "design/audio/mix.json",
+-   "design/audio/soccer/ambience-loop.ogg",
+-   "design/audio/soccer/crowd-calm.ogg",
+-   "design/audio/soccer/crowd-excited.ogg",
+-   "design/audio/soccer/crowd-goal.ogg",
+-   "design/audio/soccer/kick.ogg",
+-   "design/audio/soccer/net.ogg",
+-   "design/audio/soccer/pass.ogg",
+-   "design/audio/soccer/whistle.ogg",
+-   "design/audio/scenes/opening.ogg",
+-   "design/audio/scenes/victory.ogg",
+-   "design/audio/scenes/defeat.ogg",
+-   "vendor/draco/draco_decoder.wasm",
+-   "vendor/draco/draco_wasm_wrapper.js",
+-   "assets/soccer-v4/turf-color-512.jpg",
+-   "assets/soccer-v4/turf-normal-512.jpg",
+-   "assets/soccer-realism/turf-albedo-1k.jpg",
+-   "assets/soccer-realism/turf-normal-gl-1k.jpg",
+-   "assets/athlete/athlete.glb",
+-   "assets/athlete-body-v22/models/soccer.glb",
+-   "assets/athlete-body-v22/textures/athlete-atlas.png",
++   "assets/athlete-body-v22/hair/afro.glb",
++   "assets/athlete-body-v22/hair/bun.glb",
+    "assets/athlete-body-v22/hair/buzz.glb",
+    "assets/athlete-body-v22/hair/crop.glb",
+-   "assets/athlete-body-v22/hair/side-part.glb",
+-   "assets/athlete-body-v22/hair/quiff.glb",
+    "assets/athlete-body-v22/hair/curls.glb",
+-   "assets/athlete-body-v22/hair/afro.glb",
++   "assets/athlete-body-v22/hair/quiff.glb",
++   "assets/athlete-body-v22/hair/side-part.glb",
+    "assets/athlete-body-v22/hair/swept-back.glb",
+-   "assets/athlete-body-v22/hair/bun.glb",
++   "assets/athlete-body-v22/models/soccer.glb",
++   "assets/athlete-body-v22/textures/athlete-atlas.png",
++   "assets/athlete/athlete.glb",
+    "assets/kid-full.glb",
+-   "assets/soccer-v5/teal-quiff.glb",
+-   "assets/soccer-v5/teal-curls.glb",
+-   "assets/soccer-v5/teal-knot.glb",
+-   "assets/soccer-v5/goalkeeper.glb",
+-   "design/soccer-v5/rig.json",
+-   "assets/soccer-v7/player-01-near.glb",
+-   "assets/soccer-v7/player-01-far.glb",
+-   "assets/soccer-v7/player-04-near.glb",
+-   "assets/soccer-v7/player-04-far.glb",
+-   "assets/soccer-v7/goalkeeper-near.glb",
+-   "assets/soccer-v7/goalkeeper-far.glb",
+-   "assets/soccer-v7/clips.json",
+-   "assets/soccer-v8/stadium-lod0.glb",
+-   "assets/soccer-v8/stadium-lod1.glb",
+-   "assets/soccer-v8/stadium-lod2.glb",
+-   "assets/soccer-v8/pitch.webp",
+-   "assets/soccer-v8/crowd-atlas.webp",
+-   "assets/soccer-v8/crowd-bed.webp",
+-   "assets/soccer-v8/goal-net.webp",
+-   "assets/soccer-v8/perimeter-led.webp",
+-   "assets/soccer-v8/evening-sky.webp",
+-   "assets/soccer-v8/lamp-glow.webp",
+-   "assets/soccer-v8/goal-shadow.webp",
+-   "assets/soccer-v8/crowd-distant.webp",
+-   "assets/soccer-v8/clips.json",
+-   "assets/soccer-v9/clips.json",
++   "assets/soccer-realism/turf-albedo-1k.jpg",
++   "assets/soccer-realism/turf-normal-gl-1k.jpg",
+    "assets/soccer-v10/clips.json",
+    "assets/soccer-v11/clips.json",
+    "assets/soccer-v12/clips.json",
+    "assets/soccer-v22/headers.json",
+    "assets/soccer-v22/keeper.json",
+-   "assets/soccer-v24/pitch/pitch.glb",
+-   "assets/soccer-v24/pitch/goal.glb",
+-   "assets/soccer-v24/pitch/corner_flag.glb",
+-   "assets/soccer-v24/pitch/ad_board.glb",
+-   "assets/soccer-v24/pitch/ball.glb",
+-   "assets/soccer-v24/pitch/atlas.png",
++   "assets/soccer-v24/body/models/soccer.glb",
+    "assets/soccer-v24/clips/clips.json",
+-   "assets/soccer-v24/fx/sprites/landing-turf.png",
+-   "assets/soccer-v24/fx/sprites/slide-turf.png",
+-   "assets/soccer-v24/fx/sprites/goal-confetti.png",
+-   "assets/soccer-v24/fx/sprites/goal-net-ripple.png",
+-   "assets/soccer-v24/fx/sprites/ball-trail.png",
+-   "assets/soccer-v24/fx/sprites/selected-player-ring.png",
+-   "assets/soccer-v24/fx/sprites/click-ring.png",
+-   "assets/soccer-v24/fx/sprites/power-kick.png",
+-   "assets/soccer-v24/fx/audio/kick-soft.ogg",
+-   "assets/soccer-v24/fx/audio/kick-strong.ogg",
+-   "assets/soccer-v24/fx/audio/post-hit.ogg",
+-   "assets/soccer-v24/fx/audio/crossbar-hit.ogg",
+-   "assets/soccer-v24/fx/audio/ball-land.ogg",
+-   "assets/soccer-v24/fx/audio/net-rustle.ogg",
+-   "assets/soccer-v24/fx/audio/keeper-catch.ogg",
+    "assets/soccer-v24/crowd/assets.json",
+    "assets/soccer-v24/crowd/lod-config.json",
+    "assets/soccer-v24/crowd/runtime/lod1/fan-01.glb",
+@@ -823,32 +738,127 @@
+    "assets/soccer-v24/crowd/runtime/lod2/fan-07.glb",
+    "assets/soccer-v24/crowd/runtime/lod2/fan-09.glb",
+    "assets/soccer-v24/crowd/runtime/lod2/fan-11.glb",
+-   "assets/soccer-v24/body/models/soccer.glb",
+-   "assets/soccer-v241/clips/tackle.json",
++   "assets/soccer-v24/fx/audio/ball-land.ogg",
++   "assets/soccer-v24/fx/audio/crossbar-hit.ogg",
++   "assets/soccer-v24/fx/audio/keeper-catch.ogg",
++   "assets/soccer-v24/fx/audio/kick-soft.ogg",
++   "assets/soccer-v24/fx/audio/kick-strong.ogg",
++   "assets/soccer-v24/fx/audio/net-rustle.ogg",
++   "assets/soccer-v24/fx/audio/post-hit.ogg",
++   "assets/soccer-v24/fx/sprites/ball-trail.png",
++   "assets/soccer-v24/fx/sprites/click-ring.png",
++   "assets/soccer-v24/fx/sprites/goal-confetti.png",
++   "assets/soccer-v24/fx/sprites/goal-net-ripple.png",
++   "assets/soccer-v24/fx/sprites/landing-turf.png",
++   "assets/soccer-v24/fx/sprites/power-kick.png",
++   "assets/soccer-v24/fx/sprites/selected-player-ring.png",
++   "assets/soccer-v24/fx/sprites/slide-turf.png",
++   "assets/soccer-v24/pitch/ad_board.glb",
++   "assets/soccer-v24/pitch/atlas.png",
++   "assets/soccer-v24/pitch/ball.glb",
++   "assets/soccer-v24/pitch/corner_flag.glb",
++   "assets/soccer-v24/pitch/goal.glb",
++   "assets/soccer-v24/pitch/pitch.glb",
++   "assets/soccer-v241/audio/whistle-foul.ogg",
++   "assets/soccer-v241/audio/whistle-fulltime.ogg",
++   "assets/soccer-v241/audio/whistle-halftime.ogg",
++   "assets/soccer-v241/audio/whistle-kickoff.ogg",
++   "assets/soccer-v241/audio/whistle-short.ogg",
+    "assets/soccer-v241/clips/aerial.json",
+    "assets/soccer-v241/clips/kicks.json",
+    "assets/soccer-v241/clips/loco.json",
+-   "assets/soccer-v241/audio/whistle-kickoff.ogg",
+-   "assets/soccer-v241/audio/whistle-foul.ogg",
+-   "assets/soccer-v241/audio/whistle-short.ogg",
+-   "assets/soccer-v241/audio/whistle-halftime.ogg",
+-   "assets/soccer-v241/audio/whistle-fulltime.ogg",
++   "assets/soccer-v241/clips/tackle.json",
+    "assets/soccer-v241/referee/referee.glb",
++   "assets/soccer-v4/turf-color-512.jpg",
++   "assets/soccer-v4/turf-normal-512.jpg",
++   "assets/soccer-v5/goalkeeper.glb",
++   "assets/soccer-v5/teal-curls.glb",
++   "assets/soccer-v5/teal-knot.glb",
++   "assets/soccer-v5/teal-quiff.glb",
++   "assets/soccer-v6/goals.glb",
++   "assets/soccer-v7/clips.json",
++   "assets/soccer-v7/goalkeeper-far.glb",
++   "assets/soccer-v7/goalkeeper-near.glb",
++   "assets/soccer-v7/player-01-far.glb",
++   "assets/soccer-v7/player-01-near.glb",
++   "assets/soccer-v7/player-04-far.glb",
++   "assets/soccer-v7/player-04-near.glb",
++   "assets/soccer-v8/clips.json",
++   "assets/soccer-v8/crowd-atlas.webp",
++   "assets/soccer-v8/crowd-bed.webp",
++   "assets/soccer-v8/crowd-distant.webp",
++   "assets/soccer-v8/evening-sky.webp",
++   "assets/soccer-v8/goal-net.webp",
++   "assets/soccer-v8/goal-shadow.webp",
++   "assets/soccer-v8/lamp-glow.webp",
++   "assets/soccer-v8/perimeter-led.webp",
++   "assets/soccer-v8/pitch.webp",
++   "assets/soccer-v8/stadium-lod0.glb",
++   "assets/soccer-v8/stadium-lod1.glb",
++   "assets/soccer-v8/stadium-lod2.glb",
++   "assets/soccer-v9/clips.json",
+    "design/athlete-lod-v1/models/soccer-lod1.glb",
+    "design/athlete-lod-v1/models/soccer-lod2.glb",
+-   "design/athlete-lod-v1/textures/number-23-mask.png"
++   "design/athlete-lod-v1/textures/number-23-mask.png",
++   "design/audio/mix.json",
++   "design/audio/scenes/defeat.ogg",
++   "design/audio/scenes/opening.ogg",
++   "design/audio/scenes/victory.ogg",
++   "design/audio/soccer/ambience-loop.ogg",
++   "design/audio/soccer/crowd-calm.ogg",
++   "design/audio/soccer/crowd-excited.ogg",
++   "design/audio/soccer/crowd-goal.ogg",
++   "design/audio/soccer/kick.ogg",
++   "design/audio/soccer/net.ogg",
++   "design/audio/soccer/pass.ogg",
++   "design/audio/soccer/whistle.ogg",
++   "design/characters/rig.json",
++   "design/characters2/goalkeeper.glb",
++   "design/characters2/regions.json",
++   "design/characters2/soccer-player.glb",
++   "design/controls/interaction.json",
++   "design/controls/soccer.json",
++   "design/environment/backgrounds/stadium-day-landscape.webp",
++   "design/environment/backgrounds/stadium-day-portrait.webp",
++   "design/environment/textures/crowd-dots.webp",
++   "design/environment/textures/grass-mown.webp",
++   "design/environment/textures/stand-concrete.webp",
++   "design/models/soccer-ball.glb",
++   "design/models/soccer-goal.glb",
++   "design/models2/soccer-stadium.glb",
++   "design/motion/soccer.json",
++   "design/motion2/soccer/kicks-locomotion.json",
++   "design/motion2/soccer/tackles-reactions.json",
++   "design/motion2/soccer/throws-receives.json",
++   "design/soccer-v5/rig.json",
++   "design/tactics/soccer.json",
++   "design/vfx/atlases/confetti.json",
++   "design/vfx/atlases/confetti.webp",
++   "design/vfx/atlases/goal-burst.json",
++   "design/vfx/atlases/goal-burst.webp",
++   "design/vfx/atlases/landing-dust.json",
++   "design/vfx/atlases/landing-dust.webp",
++   "design/vfx/cameras/goal-replay-behind.json",
++   "design/vfx/cameras/goal-replay-left.json",
++   "design/vfx/cameras/goal-replay-right.json",
++   "design/viewer/retarget-map.json",
++   "vendor/draco/draco_decoder.wasm",
++   "vendor/draco/draco_wasm_wrapper.js"
+   ],
+   "hoops": [
+-   "assets/athlete/athlete.glb",
+-   "assets/athlete-body-v22/textures/athlete-atlas.png",
++   "assets/athlete-body-v22/hair/afro.glb",
++   "assets/athlete-body-v22/hair/bun.glb",
+    "assets/athlete-body-v22/hair/buzz.glb",
+    "assets/athlete-body-v22/hair/crop.glb",
+-   "assets/athlete-body-v22/hair/side-part.glb",
+-   "assets/athlete-body-v22/hair/quiff.glb",
+    "assets/athlete-body-v22/hair/curls.glb",
+-   "assets/athlete-body-v22/hair/afro.glb",
++   "assets/athlete-body-v22/hair/quiff.glb",
++   "assets/athlete-body-v22/hair/side-part.glb",
+    "assets/athlete-body-v22/hair/swept-back.glb",
+-   "assets/athlete-body-v22/hair/bun.glb",
++   "assets/athlete-body-v22/models/center.glb",
++   "assets/athlete-body-v22/models/guard.glb",
++   "assets/athlete-body-v22/models/wing.glb",
++   "assets/athlete-body-v22/textures/athlete-atlas.png",
++   "assets/athlete/athlete.glb",
+    "assets/athletes-v1/gait-donor.json",
+    "assets/audio/g3h/kick.ogg",
+    "assets/audio/g3h/pass.ogg",
+@@ -858,6 +868,29 @@
+    "assets/hoops-tall/motion-v12.json",
+    "assets/hoops-tall/motion.json",
+    "assets/hoops-tall/wing.glb",
++   "assets/hoops-v241/body/models/center.glb",
++   "assets/hoops-v241/body/models/guard.glb",
++   "assets/hoops-v241/body/models/wing.glb",
++   "assets/hoops-v241/crowd/assets.json",
++   "assets/hoops-v241/crowd/lod-config.json",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-01.glb",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-02.glb",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-03.glb",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-04.glb",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-05.glb",
++   "assets/hoops-v241/crowd/runtime/lod1/fan-06.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-01.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-02.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-03.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-04.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-05.glb",
++   "assets/hoops-v241/crowd/runtime/lod2/fan-06.glb",
++   "assets/hoops-v241/motion/motion-v13.json",
++   "assets/hoops-v241/referee-audio/whistle-foul-long.mp3",
++   "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
++   "assets/hoops-v241/referee-audio/whistle-steal-short.mp3",
++   "assets/hoops-v241/referee-audio/whistle-steal-short.ogg",
++   "assets/hoops-v241/referee/referee.glb",
+    "assets/hoops-v7/c.glb",
+    "assets/hoops-v7/clips.json",
+    "assets/hoops-v7/pf.glb",
+@@ -953,62 +986,73 @@
+    "design/screens/kits/hoops/04-shirt.svg",
+    "design/screens/kits/hoops/04-shorts.svg",
+    "design/screens/kits/hoops/05-shirt.svg",
+-   "design/screens/kits/hoops/05-shorts.svg",
+-   "design/screens/kits/hoops/06-shirt.svg",
+-   "design/screens/kits/hoops/06-shorts.svg",
+-   "design/screens/manifest.json",
+-   "design/tactics/basketball.json",
+-   "design/vfx/atlases/burning-ball-glow.json",
+-   "design/vfx/atlases/burning-ball-glow.webp",
+-   "design/vfx/atlases/confetti.json",
+-   "design/vfx/atlases/confetti.webp",
+-   "design/vfx/atlases/landing-dust.json",
+-   "design/vfx/atlases/landing-dust.webp",
+-   "design/vfx/atlases/net-spark.json",
+-   "design/vfx/atlases/net-spark.webp",
+-   "design/vfx/atlases/speed-lines.json",
+-   "design/vfx/atlases/speed-lines.webp",
+-   "design/vfx/cameras/dunk-replay.json",
+-   "design/viewer/retarget-map.json",
+-   "vendor/draco/draco_decoder.wasm",
+-   "vendor/draco/draco_wasm_wrapper.js",
+-   "assets/athlete-body-v22/models/guard.glb",
+-   "assets/athlete-body-v22/models/wing.glb",
+-   "assets/athlete-body-v22/models/center.glb",
+-   "assets/hoops-v241/body/models/center.glb",
+-   "assets/hoops-v241/body/models/guard.glb",
+-   "assets/hoops-v241/body/models/wing.glb",
+-   "assets/hoops-v241/crowd/assets.json",
+-   "assets/hoops-v241/crowd/lod-config.json",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-01.glb",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-02.glb",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-03.glb",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-04.glb",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-05.glb",
+-   "assets/hoops-v241/crowd/runtime/lod1/fan-06.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-01.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-02.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-03.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-04.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-05.glb",
+-   "assets/hoops-v241/crowd/runtime/lod2/fan-06.glb",
+-   "assets/hoops-v241/motion/motion-v13.json",
+-   "assets/hoops-v241/referee-audio/whistle-foul-long.mp3",
+-   "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
+-   "assets/hoops-v241/referee-audio/whistle-steal-short.mp3",
+-   "assets/hoops-v241/referee-audio/whistle-steal-short.ogg",
+-   "assets/hoops-v241/referee/referee.glb"
++   "design/screens/kits/hoops/05-shorts.svg",
++   "design/screens/kits/hoops/06-shirt.svg",
++   "design/screens/kits/hoops/06-shorts.svg",
++   "design/screens/manifest.json",
++   "design/tactics/basketball.json",
++   "design/vfx/atlases/burning-ball-glow.json",
++   "design/vfx/atlases/burning-ball-glow.webp",
++   "design/vfx/atlases/confetti.json",
++   "design/vfx/atlases/confetti.webp",
++   "design/vfx/atlases/landing-dust.json",
++   "design/vfx/atlases/landing-dust.webp",
++   "design/vfx/atlases/net-spark.json",
++   "design/vfx/atlases/net-spark.webp",
++   "design/vfx/atlases/speed-lines.json",
++   "design/vfx/atlases/speed-lines.webp",
++   "design/vfx/cameras/dunk-replay.json",
++   "design/viewer/retarget-map.json",
++   "vendor/draco/draco_decoder.wasm",
++   "vendor/draco/draco_wasm_wrapper.js"
+   ],
+   "alpine": [
+    "assets/alpine-rush/granite-v5.webp",
+-   "assets/alpine-v7/characters/ski-male.glb",
+    "assets/alpine-v7/characters/ski-male-lod1.glb",
+    "assets/alpine-v7/characters/ski-male-lod2.glb",
++   "assets/alpine-v7/characters/ski-male.glb",
+    "design/alpine-track/models/flag-rope.glb",
+    "design/alpine-track/models/kicker.glb",
+    "design/alpine-track/textures/groomed-normal.webp",
+    "design/alpine-track/textures/groomed-snow.webp",
+    "design/alpine-track/textures/snow-ripples.webp",
++   "design/alpine-v5/atlases/landing-cloud.json",
++   "design/alpine-v5/atlases/landing-cloud.png",
++   "design/alpine-v5/atlases/powder-spray.json",
++   "design/alpine-v5/atlases/powder-spray.png",
++   "design/alpine-v5/atlases/snow-flecks.json",
++   "design/alpine-v5/atlases/snow-flecks.png",
++   "design/alpine-v5/backgrounds/fog-landscape.webp",
++   "design/alpine-v5/backgrounds/fog-portrait.webp",
++   "design/alpine-v5/backgrounds/night-floodlit-landscape.webp",
++   "design/alpine-v5/backgrounds/night-floodlit-portrait.webp",
++   "design/alpine-v5/backgrounds/sunset-landscape.webp",
++   "design/alpine-v5/backgrounds/sunset-portrait.webp",
++   "design/alpine-v5/decals/route-and-snow.json",
++   "design/alpine-v5/decals/route-and-snow.png",
++   "design/alpine-v5/effects/fog-ribbon.png",
++   "design/alpine-v5/effects/light-cone.png",
++   "design/alpine-v5/effects/light-pool.png",
++   "design/alpine-v5/environments/fog.json",
++   "design/alpine-v5/environments/night-floodlit.json",
++   "design/alpine-v5/environments/sunset.json",
++   "design/alpine-v5/models/floodlight-tower.glb",
++   "design/alpine-v5/models/route-marker-fog.glb",
++   "design/alpine-v5/models/route-marker-night-floodlit.glb",
++   "design/alpine-v5/models/route-marker-sunset.glb",
++   "design/alpine-v5/models/safety-fence-fog.glb",
++   "design/alpine-v5/models/safety-fence-night-floodlit.glb",
++   "design/alpine-v5/models/safety-fence-sunset.glb",
++   "design/alpine-v5/textures/snow-normal.webp",
++   "design/alpine-v5/textures/snow-roughness.webp",
++   "design/alpine-world/models/finish-gate.glb",
++   "design/alpine-world/models/ice-wall.glb",
++   "design/alpine-world/models/mogul.glb",
++   "design/alpine-world/models/rock-large.glb",
++   "design/alpine-world/models/rock-small.glb",
++   "design/alpine-world/models/snow-powder.glb",
++   "design/alpine-world/models/snow-sign.glb",
++   "design/alpine-world/models/start-gate.glb",
+    "design/audio/mix.json",
+    "design/audio/scenes/defeat.ogg",
+    "design/audio/scenes/opening.ogg",
+@@ -1038,6 +1082,7 @@
+    "design/motion/alpine.json",
+    "design/motion2/alpine/alpine.json",
+    "design/screens/intro/alpine.svg",
++   "design/skier3/skier.glb",
+    "design/vfx/atlases/landing-dust.json",
+    "design/vfx/atlases/landing-dust.webp",
+    "design/vfx/atlases/ski-scrape.json",
+@@ -1049,45 +1094,7 @@
+    "design/vfx/cameras/ski-fall.json",
+    "design/viewer/retarget-map.json",
+    "vendor/draco/draco_decoder.wasm",
+-   "vendor/draco/draco_wasm_wrapper.js",
+-   "design/alpine-world/models/rock-small.glb",
+-   "design/alpine-world/models/rock-large.glb",
+-   "design/alpine-world/models/snow-sign.glb",
+-   "design/alpine-world/models/mogul.glb",
+-   "design/alpine-world/models/ice-wall.glb",
+-   "design/alpine-world/models/start-gate.glb",
+-   "design/alpine-world/models/finish-gate.glb",
+-   "design/alpine-world/models/snow-powder.glb",
+-   "design/skier3/skier.glb",
+-   "design/alpine-v5/environments/sunset.json",
+-   "design/alpine-v5/environments/fog.json",
+-   "design/alpine-v5/environments/night-floodlit.json",
+-   "design/alpine-v5/backgrounds/sunset-landscape.webp",
+-   "design/alpine-v5/backgrounds/sunset-portrait.webp",
+-   "design/alpine-v5/backgrounds/fog-landscape.webp",
+-   "design/alpine-v5/backgrounds/fog-portrait.webp",
+-   "design/alpine-v5/backgrounds/night-floodlit-landscape.webp",
+-   "design/alpine-v5/backgrounds/night-floodlit-portrait.webp",
+-   "design/alpine-v5/models/safety-fence-sunset.glb",
+-   "design/alpine-v5/models/safety-fence-fog.glb",
+-   "design/alpine-v5/models/safety-fence-night-floodlit.glb",
+-   "design/alpine-v5/models/route-marker-sunset.glb",
+-   "design/alpine-v5/models/route-marker-fog.glb",
+-   "design/alpine-v5/models/route-marker-night-floodlit.glb",
+-   "design/alpine-v5/models/floodlight-tower.glb",
+-   "design/alpine-v5/textures/snow-normal.webp",
+-   "design/alpine-v5/textures/snow-roughness.webp",
+-   "design/alpine-v5/atlases/powder-spray.json",
+-   "design/alpine-v5/atlases/powder-spray.png",
+-   "design/alpine-v5/atlases/landing-cloud.json",
+-   "design/alpine-v5/atlases/landing-cloud.png",
+-   "design/alpine-v5/atlases/snow-flecks.json",
+-   "design/alpine-v5/atlases/snow-flecks.png",
+-   "design/alpine-v5/decals/route-and-snow.json",
+-   "design/alpine-v5/decals/route-and-snow.png",
+-   "design/alpine-v5/effects/fog-ribbon.png",
+-   "design/alpine-v5/effects/light-cone.png",
+-   "design/alpine-v5/effects/light-pool.png"
++   "vendor/draco/draco_wasm_wrapper.js"
+   ],
+   "alpineLeague": [
+    "assets/alpine-themes-v23/aurora/frost-boulder.glb",
+@@ -1148,27 +1155,22 @@
+    "assets/alpine-themes-v23/village/village-pine.glb"
+   ],
+   "tennis": [
+-   "assets/audio/g4e/racket.ogg",
+-   "assets/audio/g4e/bounce.ogg",
+-   "assets/audio/g4e/net.ogg",
+-   "assets/audio/g4e/applause.ogg",
+-   "assets/audio/g4e/applause-short.ogg",
+-   "assets/audio/g4e/applause-medium.ogg",
+    "assets/audio/g4e/applause-large.ogg",
+-   "assets/audio/g4e/stadium-bed.ogg",
+-   "assets/audio/g4e/near-point-oh.ogg",
++   "assets/audio/g4e/applause-medium.ogg",
++   "assets/audio/g4e/applause-short.ogg",
++   "assets/audio/g4e/applause.ogg",
++   "assets/audio/g4e/bounce.ogg",
++   "assets/audio/g4e/match-cheer.ogg",
+    "assets/audio/g4e/mistake-aw.ogg",
++   "assets/audio/g4e/near-point-oh.ogg",
++   "assets/audio/g4e/net.ogg",
+    "assets/audio/g4e/pre-serve-hush.ogg",
+-   "assets/audio/g4e/match-cheer.ogg",
+-   "assets/tennis-stadium-v1/stand-10m.glb",
+-   "assets/tennis-stadium-v1/ad-board.glb",
+-   "assets/tennis-stadium-v1/umpire-chair.glb",
+-   "assets/tennis-stadium-v1/player-bench.glb",
+-   "assets/tennis-stadium-v1/scoreboard.glb",
+-   "assets/tennis-stadium-v1/floodlight.glb",
+-   "assets/tennis-stadium-v1/crowd-atlas.webp",
+-   "assets/tennis-stadium-v1/evening-city.png",
+-   "assets/tennis-stadium-v1/score-display.png",
++   "assets/audio/g4e/racket.ogg",
++   "assets/audio/g4e/stadium-bed.ogg",
++   "assets/kid-full.glb",
++   "assets/models/adult-man-512.glb",
++   "assets/models/adult-woman-512.glb",
++   "assets/models/palm-tree-512.glb",
+    "assets/tennis-crowd-v22/assets.json",
+    "assets/tennis-crowd-v22/lod-config.json",
+    "assets/tennis-crowd-v22/runtime/lod0/fan-01.glb",
+@@ -1207,26 +1209,20 @@
+    "assets/tennis-crowd-v22/runtime/lod2/fan-10.glb",
+    "assets/tennis-crowd-v22/runtime/lod2/fan-11.glb",
+    "assets/tennis-crowd-v22/runtime/lod2/fan-12.glb",
+-   "assets/tennis-motion-v1/core.json",
+-   "assets/kid-full.glb",
+-   "assets/models/adult-man-512.glb",
+-   "assets/models/adult-woman-512.glb",
+-   "assets/models/palm-tree-512.glb",
+-   "vendor/draco/draco_decoder.wasm",
+-   "vendor/draco/draco_wasm_wrapper.js",
+-   "assets/tennis-v7/court-clay.glb",
+-   "assets/tennis-v7/court-hard.glb",
+-   "assets/tennis-v7/court-grass.glb",
+-   "assets/tennis-v7/venue.glb",
+-   "assets/tennis-v7/net.glb",
+-   "assets/tennis-v7/ball.glb",
+-   "assets/tennis-v7/crowd-prototypes.glb",
+-   "assets/tennis-v7/crew.glb",
+-   "assets/tennis-v7/crowd.json",
+    "assets/tennis-grip-v1/racket.glb",
++   "assets/tennis-motion-v1/core.json",
++   "assets/tennis-stadium-v1/ad-board.glb",
++   "assets/tennis-stadium-v1/crowd-atlas.webp",
++   "assets/tennis-stadium-v1/evening-city.png",
++   "assets/tennis-stadium-v1/floodlight.glb",
++   "assets/tennis-stadium-v1/player-bench.glb",
++   "assets/tennis-stadium-v1/score-display.png",
++   "assets/tennis-stadium-v1/scoreboard.glb",
++   "assets/tennis-stadium-v1/stand-10m.glb",
++   "assets/tennis-stadium-v1/umpire-chair.glb",
+    "assets/tennis-ui-fx-v1/out-cross.png",
+-   "assets/tennis-ui-fx-v1/serve-arrow-left.png",
+    "assets/tennis-ui-fx-v1/serve-arrow-center.png",
++   "assets/tennis-ui-fx-v1/serve-arrow-left.png",
+    "assets/tennis-ui-fx-v1/serve-arrow-right.png",
+    "assets/tennis-ui-fx-v1/sign-out.png",
+    "assets/tennis-ui-v2/button-drop-idle.svg",
+@@ -1238,7 +1234,18 @@
+    "assets/tennis-ui-v2/button-smash-idle.svg",
+    "assets/tennis-ui-v2/button-smash-pressed.svg",
+    "assets/tennis-ui-v2/fx-net.svg",
+-   "assets/tennis-ui-v2/fx-out.svg"
++   "assets/tennis-ui-v2/fx-out.svg",
++   "assets/tennis-v7/ball.glb",
++   "assets/tennis-v7/court-clay.glb",
++   "assets/tennis-v7/court-grass.glb",
++   "assets/tennis-v7/court-hard.glb",
++   "assets/tennis-v7/crew.glb",
++   "assets/tennis-v7/crowd-prototypes.glb",
++   "assets/tennis-v7/crowd.json",
++   "assets/tennis-v7/net.glb",
++   "assets/tennis-v7/venue.glb",
++   "vendor/draco/draco_decoder.wasm",
++   "vendor/draco/draco_wasm_wrapper.js"
+   ],
+   "racing": [
+    "assets/racing-audio-v2/engine-high.mp3",
+@@ -1422,33 +1429,33 @@
+    "design/racing-environment-v2/textures/gravel-runoff.webp"
+   ],
+   "naval": [
++   "assets/game-naval/audio/bubbles.ogg",
++   "assets/game-naval/audio/enemy-cannon.ogg",
++   "assets/game-naval/audio/incoming-shell.ogg",
++   "assets/game-naval/audio/sonar-ping.ogg",
++   "assets/game-naval/audio/torpedo-launch.ogg",
++   "assets/game-naval/audio/underwater-explosion.ogg",
++   "assets/game-naval/audio/vulcan-fire-loop.ogg",
++   "assets/game-naval/audio/vulcan-spin-down.ogg",
++   "assets/game-naval/audio/vulcan-spin-up.ogg",
++   "assets/game-naval/fx/bubble-trail.png",
++   "assets/game-naval/fx/enemy-warning-line.png",
++   "assets/game-naval/fx/launch-flash.png",
++   "assets/game-naval/fx/sonar-ring.png",
++   "assets/game-naval/fx/submarine-shadow.png",
++   "assets/game-naval/fx/underwater-explosion.png",
++   "assets/game-naval/fx/water-target.png",
++   "assets/game-naval/models/helicopter.glb",
++   "assets/game-naval/models/naval_atlas_1024.png",
++   "assets/game-naval/models/plane.glb",
++   "assets/game-naval/models/supply_buoy.glb",
+    "assets/naval-v7/ships/carrier-lod1.glb",
+    "assets/naval-v7/ships/corvette-lod1.glb",
+    "assets/naval-v7/ships/cruiser-lod1.glb",
+    "assets/naval-v7/ships/destroyer-lod0.glb",
+    "assets/naval-v7/textures/blank-1.png",
+    "assets/naval-v7/textures/fleet-ember-1024.png",
+-   "assets/naval-v7/textures/fleet-tide-1024.png",
+-   "assets/game-naval/audio/vulcan-spin-up.ogg",
+-   "assets/game-naval/audio/vulcan-fire-loop.ogg",
+-   "assets/game-naval/audio/vulcan-spin-down.ogg",
+-   "assets/game-naval/models/plane.glb",
+-   "assets/game-naval/models/helicopter.glb",
+-   "assets/game-naval/models/supply_buoy.glb",
+-   "assets/game-naval/models/naval_atlas_1024.png",
+-   "assets/game-naval/fx/water-target.png",
+-   "assets/game-naval/audio/enemy-cannon.ogg",
+-   "assets/game-naval/audio/incoming-shell.ogg",
+-   "assets/game-naval/fx/sonar-ring.png",
+-   "assets/game-naval/fx/submarine-shadow.png",
+-   "assets/game-naval/fx/underwater-explosion.png",
+-   "assets/game-naval/fx/bubble-trail.png",
+-   "assets/game-naval/fx/launch-flash.png",
+-   "assets/game-naval/fx/enemy-warning-line.png",
+-   "assets/game-naval/audio/torpedo-launch.ogg",
+-   "assets/game-naval/audio/underwater-explosion.ogg",
+-   "assets/game-naval/audio/sonar-ping.ogg",
+-   "assets/game-naval/audio/bubbles.ogg"
++   "assets/naval-v7/textures/fleet-tide-1024.png"
+   ],
+   "fire": [
+    "assets/fire-v23/crew-0.webp",
+@@ -1513,6 +1520,13 @@
+    "assets/fire-v23/victory-crew.webp",
+    "assets/fire-v23/victory-dog.webp",
+    "assets/fire-v23/victory-girl.webp",
++   "assets/fire-v24/friends/cat.glb",
++   "assets/fire-v24/friends/dog.glb",
++   "assets/fire-v24/friends/girl.glb",
++   "assets/fire-v24/rooms/bedroom.glb",
++   "assets/fire-v24/rooms/kitchen.glb",
++   "assets/fire-v24/rooms/living-room.glb",
++   "assets/fire-v24/rooms/palette-1024.png",
+    "assets/fire-v7/models/apartment-burning-lod.glb",
+    "assets/fire-v7/models/apartment-burning.glb",
+    "assets/fire-v7/models/apartment-intact-lod.glb",
+@@ -1543,40 +1557,33 @@
+    "assets/fire-v7/particles/smoke-256.png",
+    "assets/fire-v7/particles/steam-256.png",
+    "assets/fire-v7/particles/water-256.png",
+-   "assets/fire-v24/friends/cat.glb",
+-   "assets/fire-v24/friends/dog.glb",
+-   "assets/fire-v24/friends/girl.glb",
+-   "assets/fire-v24/rooms/bedroom.glb",
+-   "assets/fire-v24/rooms/kitchen.glb",
+-   "assets/fire-v24/rooms/living-room.glb",
+-   "assets/fire-v24/rooms/palette-1024.png",
+    "assets/models/firefighter-rigged-512.glb"
+   ],
+   "alien": [
++   "assets/alien-v24/overheat.ogg",
++   "assets/alien-v24/pickup-burst.png",
++   "assets/alien-v24/refill-pickup.ogg",
++   "assets/alien-v24/vulcan-magazine.png",
++   "assets/alien-v25/cooldown.mp3",
++   "assets/alien-v25/cooldown.ogg",
++   "assets/alien-v25/fire-loop.mp3",
++   "assets/alien-v25/fire-loop.ogg",
++   "assets/alien-v25/impact-256.png",
++   "assets/alien-v25/muzzle-256.png",
++   "assets/alien-v25/overheat.mp3",
++   "assets/alien-v25/overheat.ogg",
++   "assets/alien-v25/plasma-256.png",
++   "assets/alien-v25/spin-down.mp3",
++   "assets/alien-v25/spin-down.ogg",
++   "assets/alien-v25/spin-up.mp3",
++   "assets/alien-v25/spin-up.ogg",
++   "assets/alien-v25/steam-256.png",
+    "assets/defense-v7/alien-beetle-lod1.glb",
+    "assets/defense-v7/alien-boss-lod1.glb",
+    "assets/defense-v7/alien-carrier-lod1.glb",
+    "assets/defense-v7/alien-manta-lod1.glb",
+    "assets/defense-v7/alien-scout-lod1.glb",
+-   "assets/defense-v7/defender-plane.glb",
+-   "assets/alien-v24/vulcan-magazine.png",
+-   "assets/alien-v24/pickup-burst.png",
+-   "assets/alien-v24/refill-pickup.ogg",
+-   "assets/alien-v24/overheat.ogg",
+-   "assets/alien-v25/plasma-256.png",
+-   "assets/alien-v25/muzzle-256.png",
+-   "assets/alien-v25/impact-256.png",
+-   "assets/alien-v25/steam-256.png",
+-   "assets/alien-v25/fire-loop.ogg",
+-   "assets/alien-v25/fire-loop.mp3",
+-   "assets/alien-v25/spin-up.ogg",
+-   "assets/alien-v25/spin-up.mp3",
+-   "assets/alien-v25/spin-down.ogg",
+-   "assets/alien-v25/spin-down.mp3",
+-   "assets/alien-v25/overheat.ogg",
+-   "assets/alien-v25/overheat.mp3",
+-   "assets/alien-v25/cooldown.ogg",
+-   "assets/alien-v25/cooldown.mp3"
++   "assets/defense-v7/defender-plane.glb"
+   ],
+   "city": [
+    "assets/models/city/01-small-house-red-roof.glb",
+@@ -3119,6 +3126,34 @@
+    "8d4a630b3468ed55",
+    1473368
+   ],
++  "assets/lighting-presets-v1/LICENSES.md": [
++   "192bae0284e4649e",
++   3384
++  ],
++  "assets/lighting-presets-v1/lighting.js": [
++   "7d4766766581d9fd",
++   14260
++  ],
++  "assets/lighting-presets-v1/manifest.json": [
++   "4e214a3abc54b8d4",
++   2325
++  ],
++  "assets/lighting-presets-v1/presets.json": [
++   "54d83488b3ffc200",
++   20661
++  ],
++  "assets/lighting-presets-v1/textures/clouds.png": [
++   "9feaa04a3f09184d",
++   6032
++  ],
++  "assets/lighting-presets-v1/textures/halo.png": [
++   "80010a0b7d8e57bf",
++   2524
++  ],
++  "assets/lighting-presets-v1/textures/sky-tile.png": [
++   "0fbae9b3a1a8f210",
++   23514
++  ],
+   "assets/models/adult-man-512.glb": [
+    "951e88d622fda3c2",
+    319156
