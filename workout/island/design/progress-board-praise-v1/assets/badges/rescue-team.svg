@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="enamel" x2=".24" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#ffcdd1"/><stop offset="1" stop-color="#e37980"/>
+    </linearGradient>
+    <linearGradient id="face" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#fff1ed"/><stop offset="1" stop-color="#ffcdd1"/>
+    </linearGradient>
+  </defs>
+  <path d="M38 85h23l-2 30-10-7-12 3 1-26Zm29 0h23l1 26-12-3-10 7-2-30Z" fill="#bb5b70" stroke="#863f58" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M63 10c6-1 11 1 16 5l8 6 10 2c7 1 12 5 14 12l3 10 6 9c4 6 4 12 0 18l-6 9-3 10c-2 6-7 10-14 12l-10 2-8 6c-9 6-20 6-29 0l-9-6-10-2c-7-2-12-6-14-12l-3-10-6-9c-4-6-4-12 0-18l6-9 3-10c2-7 7-11 14-12l10-2 9-6c4-3 8-5 13-5Z" fill="#863f58" opacity=".24"/>
+  <path d="M64 7c6 0 11 2 15 5l8 6 10 2c7 2 11 6 13 12l3 10 6 9c4 6 4 12 0 18l-6 9-3 10c-2 6-6 10-13 12l-10 2-8 6c-9 6-21 6-30 0l-8-6-10-2c-7-2-11-6-13-12l-3-10-6-9c-4-6-4-12 0-18l6-9 3-10c2-6 6-10 13-12l10-2 8-6c5-3 10-5 15-5Z" fill="url(#enamel)" stroke="#863f58" stroke-width="2.5"/>
+  <circle cx="64" cy="61" r="41" fill="url(#face)" stroke="#863f58" stroke-width="2.2"/>
+  <path d="M36 53a29 29 0 0 1 22-21M72 97a37 37 0 0 0 13-6" fill="none" stroke="#fff1ed" stroke-width="2.6" stroke-linecap="round"/>
+  <g style="--ink:#863f58;--tint:#ffcdd1" fill="#fff1ed" stroke="#863f58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path fill-rule="evenodd" d="M64 39a25 25 0 1 0 0 50 25 25 0 0 0 0-50Zm0 15a10 10 0 1 1 0 20 10 10 0 0 1 0-20Z"/>
+      <path d="m45 49 10 8m18 15 10 8m0-31-10 8M55 72l-10 8" fill="none" stroke-width="5"/>
+  </g>
+  <circle cx="25" cy="63" r="2.2" fill="#fff1ed"/><circle cx="103" cy="63" r="2.2" fill="#fff1ed"/>
+</svg>

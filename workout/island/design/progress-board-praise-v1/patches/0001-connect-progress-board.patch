@@ -1,0 +1,266 @@
+diff --git a/workout/island/app.mjs b/workout/island/app.mjs
+--- a/workout/island/app.mjs
++++ b/workout/island/app.mjs
+@@ -51,6 +51,13 @@
+   const games=new ActivityInterface({ui,engine,activity,data,t});
+   const cityAccess=new CityAccess({ui,engine,games,learning});
+   ui.cityAccess=cityAccess;
++  if (!cityPreview && new URLSearchParams(location.search).get('progressBoard') !== '0') {
++    const progress = import('./design/progress-board-praise-v1/src/integration.mjs')
++      .then(({connectIsland}) => connectIsland({ui, cityAccess, games})).catch(() => null);
++    games.onProgressResult = (result, target) => {
++      void progress.then(board => board?.record(result, target));
++    };
++  }
+   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
+   const pressSamples=[];
+   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -325,6 +325,18 @@
+     this.navigation.game();
+     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
+     const eventBonuses=eventId?this.activity.bonuses():{};
++    const progressRun = this.onProgressResult ? {
++      runId: globalThis.crypto?.randomUUID?.() ?? `${this.now()}-${Math.random().toString(36).slice(2)}`,
++      played: false,
++    } : null;
++    if (progressRun) {
++      const remember = event => { if (event.isTrusted) progressRun.played = true; };
++      stage.addEventListener('pointerdown', remember, {passive: true});
++      controls.addEventListener('pointerdown', remember, {passive: true});
++      canvas.addEventListener('keydown', event => {
++        if (['Tab', 'Escape'].includes(event.key) === false) remember(event);
++      });
++    }
+     if(rescue.lite||isLowQuality())context.lite=true;
+     if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1}${next.total?` מתוך ${next.total}`:''} · ${next.track}${next.tags?.length?' · '+next.tags.join(' · '):''}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
+     // Ski league (v23): league stage n runs as game stage 3 + n; the engine builds the run from the league, not from the stage map.
+@@ -335,8 +347,20 @@
+         this.current=null;
+         this.shell?.dispose();this.shell=null;
+         if(result.cancelled){if(!this.closing)this.ui.closeModal();return;}
+-        if(eventId)this.activity.resolve(eventId,result);
+-        this.showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary);
++        const fireCall = progressRun && eventId && this.engine.state.events.active?.id === eventId &&
++          this.engine.state.events.active.typeId === 'fire';
++        const resolved = eventId ? this.activity.resolve(eventId,result) : null;
++        const target = this.showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary);
++        if (progressRun) {
++          this.onProgressResult({
++            ...progressRun, gameId: id, eventId, result, fireSummary, at: this.now(),
++            resolvedFireEvent: Boolean(fireCall && resolved?.ok),
++            drillAttempts: this.data.config.minigames.soccer.training.drillAttempts,
++            tennisDifficulty: this.engine.state.tennisDifficulty,
++            equipmentLevel: context.upgradeLevel,
++            hoopsProfile: this.engine.state.hoops?.profile,
++          }, target);
++        }
+       }
+     });
+     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
+@@ -366,10 +390,10 @@
+     dialog.append(el('p','soccer-outdoor-message',this.t(phrases[(index||0)%phrases.length])),button(this.t('soccer.practice.outdoor'),'soccer-outdoor',()=>{const r=this.engine.soccerOutdoorPractice();this.ui.toast(r.ok?'soccer.practice.outdoorThanks':r.reason);dialog.querySelector('[data-action=soccer-outdoor]').disabled=true;}));
+   }
+   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
+-    if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}
+-    if(id==='fireRescue'&&result.fireBonus){fireBonusResult(this,result,eventId);return;}
+-    if(id==='alpineRush'&&result.alpineLeague){this.alpineLeagueResult(result,alpineSummary);return;}
+-    if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return;}
++    if(id==='islandRacing'&&result.league)return this.racingLeagueResult(result);
++    if(id==='fireRescue'&&result.fireBonus)return fireBonusResult(this,result,eventId);
++    if(id==='alpineRush'&&result.alpineLeague)return this.alpineLeagueResult(result,alpineSummary);
++    if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return dialog;}
+     const game=this.engine.registry.minigames.get(id);
+     this.ui.modalCleanup=null;
+     const dialog=this.modal(result.outcome==='win'?'minigame.win':'minigame.lose','minigame.resultHint',eventId);
+@@ -399,6 +423,7 @@
+     this.offerUpgrade(id,result,host=>{if(panel.isConnected)panel.after(host);});
+     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
+     this.engine.narration.announce('minigame.result',result);
++    return dialog;
+   }
+   /** Upgrade offer after a stage (ui/upgrade-offer.mjs, loaded on first use). Silent on any failure; ?upgradeOffer=0 turns it off. */
+   offerUpgrade(id,result,place){
+@@ -418,7 +443,7 @@
+     this.leagueModule().then(m=>{if(!outer.isConnected)return;const card=m.leagueCard({engine:this.engine,...this.leagueActions()});outer.querySelector('.modal-subtitle')?.after(card);}).catch(()=>{});
+   }
+   racingLeagueScreen(kind,result){
+-    this.leagueModule().then(m=>{
++    return this.leagueModule().then(m=>{
+       const dialog=this.modal('minigame.islandRacing.title','minigame.subtitle');dialog.dataset.racingLeagueScreen=kind;
+       const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
+       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
+@@ -426,12 +451,14 @@
+       const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
+       dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
+       if(kind==='result')this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
++      return dialog;
+     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+   }
+   racingLeagueResult(result){
+     this.ui.modalCleanup=null;this.sound.play(result.outcome==='win'?'win':'lose');
+-    this.racingLeagueScreen('result',result);
++    const dialog = this.racingLeagueScreen('result',result);
+     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
++    return dialog;
+   }
+   /** Ski league (ui/alpine-league.mjs, loaded on first use). ?alpineLeague=0 removes every entry point: the ski game is then v22.1. */
+   alpineLeagueOn(){return Boolean(this.engine.alpineLeague?.enabled())&&this.data.featureFlags.minigames;}
+@@ -448,19 +475,21 @@
+     this.alpineLeagueModule().then(m=>{if(!outer.isConnected)return;const card=m.leagueCard({engine:this.engine,...this.alpineLeagueActions()});outer.querySelector('.modal-subtitle')?.after(card);}).catch(()=>{});
+   }
+   alpineLeagueScreen(kind,result,summary){
+-    this.alpineLeagueModule().then(m=>{
++    return this.alpineLeagueModule().then(m=>{
+       const dialog=this.modal('minigame.alpineRush.title','minigame.subtitle');dialog.dataset.alpineLeagueScreen=kind;
+       const titles={season:'ליגת הסקי · עונה וטבלה',shop:'ליגת הסקי · ציוד',result:'ליגת הסקי · תוצאת השלב'};
+       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
+       const actions=this.alpineLeagueActions(),again=()=>this.alpineLeagueGo(result?.alpineLeague?.n);
+       const body=kind==='shop'?m.shopBody({engine:this.engine,refresh:()=>this.alpineLeagueScreen('shop')}):kind==='result'?m.resultBody({engine:this.engine,result,summary,...actions,again}):m.seasonBody({...actions,engine:this.engine,refresh:()=>this.alpineLeagueScreen('season')});
+       dialog.append(body,button('חזרה לליגה','alpine-league-back',()=>this.stages('alpineRush'),'adventure-back'));
++      return dialog;
+     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+   }
+   alpineLeagueResult(result,summary){
+     this.ui.modalCleanup=null;this.sound.play(result.outcome==='win'?'win':'lose');
+-    this.alpineLeagueScreen('result',result,summary);
++    const dialog = this.alpineLeagueScreen('result',result,summary);
+     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
++    return dialog;
+   }
+   alpineResult(dialog,summary,a){
+     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
+diff --git a/workout/js/app.js b/workout/js/app.js
+--- a/workout/js/app.js
++++ b/workout/js/app.js
+@@ -6,7 +6,7 @@
+ import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
+ import { RoyikiStage, hasRoyiki } from './royiki.js?v=20261010-camera-1';
+ import { store } from './store.js?v=20261014-w2g-1';
+-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261014-w2g-1';
++import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor, workoutReward } from './logic.js?v=20261014-w2g-1';
+ import { beltCard } from './belts.js?v=20261014-w2g-1';
+ import { companionCard, companionKit } from './companion.js?v=20261010-camera-1';
+ import { restProgress, restCard, restBadges } from './rest-days.js?v=20261014-w2g-1';
+@@ -22,7 +22,7 @@
+ import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261014-w2g-1';
+ import { playIntro } from './intro.js?v=20261010-camera-1';
+ import { createVoiceCopy, ageBand, voiceCopyEnabled } from './voice-copy.js?v=20261010-camera-1';
+-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
++import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, speakLocal, SAY_UI } from './speech.js?v=20261014-w2g-1';
+ import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
+ import { SAY } from './say.js?v=20261010-camera-1';
+ import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
+@@ -31,6 +31,15 @@
+
+ const $ = s => document.querySelector(s);
+ const app = $('#app'), nav = $('#nav');
++const workoutBoardEnabled = new URLSearchParams(location.search).get('progressBoard') !== '0';
++let workoutBoard;
++const workoutProgress = () => workoutBoard ??= import('../island/design/progress-board-praise-v1/src/integration.mjs')
++  .then(({connectWorkout}) => connectWorkout({
++    speak: speakLocal,
++    profileAge: () => store.profile.age,
++    voiceEnabled: () => store.profile.voice !== false,
++  }))
++  .catch(() => { workoutBoard = null; return null; });
+ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+ const go = h => { location.hash = h; };
+ const plan = () => normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
+@@ -208,12 +217,13 @@
+
+ // ---- ניתוב ----
+ const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
++if (workoutBoardEnabled) routes.progress = progressScreen;
+ function route() {
+   if (setVideoFamily(store.profile.familyCode) && store.profile.familyCode) refreshCloud(store.profile.familyCode).then(softRoute);
+   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
+   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
+   (routes[path] || home)(arg);
+-  renderNav(path);
++  renderNav(workoutBoardEnabled && path === 'progress' ? 'history' : path);
+   const reminder = dadTestReminder(store.parent.dadTestDate);
+   if (!lastDadReminder && reminder && !['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) {
+     lastDadReminder = reminder.key;
+@@ -810,9 +820,14 @@
+ function playGame(g, onDone) {
+   mount('', true);
+   const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
++  const progressRun = workoutBoardEnabled ? uid() : null;
+   activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, recording: playVoiceRecording, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
+     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
+     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
++    onRoundResult: progressRun ? (result, target) => {
++      const input = {runId: progressRun, gameId: g.id, label: g.name, seconds: secs, result, at: Date.now()};
++      void workoutProgress().then(board => board?.recordArcade(input, target));
++    } : undefined,
+     onEnd({ score }) { store.recordGame(g.id, score, false, g.cost || 1); activeGame = null; onDone(score); } });
+ }
+
+@@ -969,6 +984,11 @@
+   </div>`, false);
+   wireCompanion(st.workouts);
+   wireOutdoor(s);
++  if (workoutBoardEnabled) {
++    const target = app.querySelector('.stack');
++    const summary = {stars: workoutReward(s.items).stars, label: workoutName(s)};
++    void workoutProgress().then(board => board?.recordWorkout(s, summary, target));
++  }
+   // mount עוצר הקראה קודמת. המשפט החדש נאמר אחרי שמסך הסיום מוצג.
+   if (testSuccess) speak(voiceText('dad-test-success'));
+   else speak(FRAGMENTS['companion-upgraded']);
+@@ -987,6 +1007,22 @@
+ }
+
+ // ---- מעקב ----
++function progressScreen() {
++  mount(`<div class="stack">
++    <button class="btn big" data-go="#/history">חזרה למעקב</button>
++    <div id="workout-progress-board" role="status">הלוח נטען</div>
++  </div>`);
++  const target = app.querySelector('#workout-progress-board');
++  void workoutProgress().then(board => {
++    if (board && target.isConnected) {
++      target.removeAttribute('role');
++      void board.mount(target);
++    } else if (target.isConnected) {
++      target.textContent = 'הלוח לא נטען. אפשר לפתוח אותו מחדש.';
++    }
++  });
++}
++
+ function history() {
+   const st = stats(store.sessions);
+   const rest = restProgress(store.sessions);
+@@ -997,6 +1033,7 @@
+   mount(`
+   <div class="stack">
+     <h1>המעקב שלי 📈</h1>
++    ${workoutBoardEnabled ? '<button class="btn primary big" data-go="#/progress">ההתקדמות שלי</button>' : ''}
+     ${beltCard(st.workouts)}
+     ${companionCard(st.workouts)}
+     ${restCard(rest)}
+diff --git a/workout/js/games/engine.js b/workout/js/games/engine.js
+--- a/workout/js/games/engine.js
++++ b/workout/js/games/engine.js
+@@ -34,7 +34,7 @@
+ // מוזיקת רקע: לופים CC0 מ-OpenGameArt ב-snd/music (battle, crazy, cunning, booxbep). לפי קבוצת המשחק, או def.music; המשחק יכול להחליף באמצע (r.music('crazy') בפקמן במצב כוח)
+ const MUSIC_URL = name => new URL(`../../snd/music/${name}.ogg`, import.meta.url).href;
+ const ALL_MUSIC = ['booxbep', 'battle', 'cunning', 'crazy']; let lastMusic = null; const pickMusic = () => { const opts = ALL_MUSIC.filter(m => m !== lastMusic); lastMusic = opts[Math.floor(Math.random() * opts.length)]; return lastMusic; };
+-export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, recording = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
++export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, recording = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true, onRoundResult = null }) {
+   host.innerHTML = `
+     <div class="gamewrap">
+       <div class="gamehud">
+@@ -180,6 +180,9 @@
+       if (reward.stars) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
+       overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `${reward.reasons.map(reason => `<p class="small">⭐ ${reason}</p>`).join('')}<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
+       overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score), stars: reward.stars, starReasons: reward.reasons });
++      if (onRoundResult && completed && reward.stars > 0) {
++        onRoundResult({score, stars: reward.stars, completed: true}, overlay.querySelector('.gmsg'));
++      }
+     };
+     if (newBest) {
+       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה

@@ -1,0 +1,31 @@
+export const BADGE_GROUPS = Object.freeze([
+  ['persistence', 'התמדה'],
+  ['improvement', 'שיפור'],
+  ['discovery', 'ניסיון חדש'],
+  ['help', 'עזרה לאחרים'],
+  ['expertise', 'מומחיות במשחק'],
+  ['courage', 'אומץ'],
+]);
+
+export const BADGES = Object.freeze([
+  ['first-step', 'persistence', 'צעד ראשון', 'פעילות ראשונה בלוח', 'activities', 1],
+  ['three-days', 'persistence', 'שלושה ימים שלי', 'פעילות בשלושה ימים שונים', 'activeDays', 3],
+  ['three-in-row', 'persistence', 'שלושה ברצף', 'פעילות בשלושה ימים רצופים', 'longestStreak', 3],
+  ['seven-in-row', 'persistence', 'שבוע בתנועה', 'פעילות בשבעה ימים רצופים', 'longestStreak', 7],
+  ['personal-step', 'improvement', 'שיפור ראשון', 'שיפור של תוצאה אישית בפעילות חוזרת', 'improvements', 1],
+  ['practice-progress', 'improvement', 'תרגול מתקדם', 'שני שיפורים אישיים באימון', 'workoutImprovements', 2],
+  ['game-progress', 'improvement', 'ניקוד בעלייה', 'שני שיפורים אישיים בניקוד של משחק', 'gameImprovements', 2],
+  ['many-paths', 'improvement', 'שיפור בכמה דרכים', 'שיפור אישי בשתי סדרות מדידה שונות', 'improvedTracks', 2],
+  ['new-game', 'discovery', 'משחק חדש בלוח', 'השלמת סבב ראשון במשחק בלוח', 'gameKinds', 1],
+  ['new-workout', 'discovery', 'אימון חדש בלוח', 'פעילות ראשונה באימון בלוח', 'workoutKinds', 1],
+  ['explorer', 'discovery', 'מפת תגליות', 'פעילות בחמישה משחקים או סוגי אימון שונים', 'activityKinds', 5],
+  ['rescue-hand', 'help', 'יד לעזרה', 'חילוץ דמות במשימת חילוץ באי', 'rescueRounds', 1],
+  ['rescue-team', 'help', 'צוות חילוץ', 'חילוץ דמות בשלושה סבבים שונים', 'rescueRounds', 3],
+  ['city-helper', 'help', 'עזרה לעיר', 'השלמה של שתי משימות כיבוי בעקבות קריאה מהעיר', 'helpMissions', 2],
+  ['three-stars', 'expertise', 'שלושה כוכבים', 'שלושה כוכבים בשלב של משחק באי', 'masteredStages', 1],
+  ['stage-collection', 'expertise', 'כוכבים בשלבים', 'שלושה כוכבים בכל אחד משלושה שלבים שונים באי', 'masteredStages', 3],
+  ['game-specialist', 'expertise', 'מיומנות במשחק', 'חמש השלמות מוצלחות באותו משחק באי', 'mostWins', 5],
+  ['try-again', 'courage', 'עוד ניסיון', 'סבב חוזר באותו שלב אחרי תוצאה שלא הצליחה', 'retries', 1],
+  ['honest-voice', 'courage', 'מילה כנה', 'שיתוף במסך הסיום שהאימון היה קשה', 'hardFeedback', 1],
+  ['keep-trying', 'courage', 'נותנים עוד הזדמנות', 'שלושה מקרים של חזרה לשלב אחרי תוצאה שלא הצליחה', 'retries', 3],
+].map(([id, group, title, rule, counter, minimum]) => Object.freeze({id, group, title, rule, counter, minimum})));
