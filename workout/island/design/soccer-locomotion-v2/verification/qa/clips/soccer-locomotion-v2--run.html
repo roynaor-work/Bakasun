@@ -1,0 +1,137 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>run</title><style>body{font:16px system-ui;background:#101d28;color:#e7edf2;margin:0 auto;padding:24px;max-width:1400px}a{color:#8de3cb}table{border-collapse:collapse;width:100%;background:#162838}th,td{border:1px solid #456;padding:10px;text-align:right}img{width:100%;height:auto;background:white}pre{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}.green{color:#8decbe}.yellow{color:#ffe18e}.red{color:#ff9696}.number{font-size:1.4em}</style><h1>run</h1><p><a href="../report.html">כל הקליפים</a> · <a href="../../../preview.html">תצוגת התנועה</a> · <a href="soccer-locomotion-v2--run.json">JSON המקור</a></p><p class="number">ציון 91.3 · כיסוי 100%</p><p>הסוליות נמדדות בתרחיש תנועה חיצוני מוצהר; Root בנכס נשאר קבוע. הרציפות משתמשת בפוזה המקומית.</p><img src="../sheets/soccer-locomotion-v2--run.svg" alt="שמונה פריימים: run"><table><thead><tr><th>מדד</th><th>מצב</th><th>ערך</th><th>ציון</th><th>ראיות</th></tr></thead><tbody><tr><th>החלקת רגליים</th><td class="green">ירוק</td><td>0.00013</td><td>99.74</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;coordinateSpace&quot;: &quot;native GLB plus explicitly declared external actor position and heading, applied once&quot;,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;windows&quot;: 3,
+  &quot;samples&quot;: 75,
+  &quot;maxDriftMeters&quot;: 0.00022,
+  &quot;p95SpeedMetersPerSecond&quot;: 0.015054,
+  &quot;worst&quot;: {
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;t&quot;: 0.15,
+    &quot;start&quot;: 0,
+    &quot;end&quot;: 0.16,
+    &quot;driftMeters&quot;: 0.00022
+  }
+}</pre></details></td></tr><tr><th>חדירה לרצפה</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;samples&quot;: 1820,
+  &quot;floorY&quot;: 0,
+  &quot;probeKind&quot;: &quot;declared sole probes plus skeletal joint centers (no mesh surfaces)&quot;,
+  &quot;maxDepthMeters&quot;: 0,
+  &quot;worst&quot;: {
+    &quot;t&quot;: 0,
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;depthMeters&quot;: 0,
+    &quot;y&quot;: 0.004
+  }
+}</pre></details></td></tr><tr><th>קפיצות פוזה</th><td class="yellow">צהוב</td><td>1.182028</td><td>76.36</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;adjacentPairs&quot;: 90,
+  &quot;observations&quot;: 1530,
+  &quot;maxDegrees60Hz&quot;: 11.474303,
+  &quot;maxMarkerStepHeight60Hz&quot;: 0.047281,
+  &quot;maxRootStepHeight60Hz&quot;: 0.021696,
+  &quot;worst&quot;: {
+    &quot;ratio&quot;: 1.1820280876604994,
+    &quot;t&quot;: 0.366667,
+    &quot;previousTime&quot;: 0.358333,
+    &quot;bone&quot;: &quot;LeftLeg&quot;,
+    &quot;markerStepHeight60Hz&quot;: 0.047281,
+    &quot;degrees60Hz&quot;: 5.341211
+  }
+}</pre></details></td></tr><tr><th>חריגות אנטומיות</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;testedFrames&quot;: 91,
+  &quot;affectedFrames&quot;: 0,
+  &quot;checks&quot;: 1547,
+  &quot;maxLimbFlexionDegrees&quot;: 113.23242,
+  &quot;maxRelativeSegmentLengthChange&quot;: 0,
+  &quot;hingeDirectionChecked&quot;: true,
+  &quot;axialTwistChecked&quot;: false,
+  &quot;violations&quot;: []
+}</pre></details></td></tr><tr><th>מגע בכדור</th><td class="not-applicable">לא חל</td><td>—</td><td>—</td><td><details><summary>ראיות מקוריות</summary><pre>{}</pre></details></td></tr><tr><th>כניסה ויציאה מול המתנה</th><td class="yellow">צהוב</td><td>1.816461</td><td>67.75</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;entry&quot;: {
+    &quot;ratio&quot;: 1.816460934218455,
+    &quot;t&quot;: 0,
+    &quot;idleTime&quot;: 3.866667,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.072658,
+    &quot;rmsRotationDegrees&quot;: 27.250477,
+    &quot;rmsVelocityHeightPerSecond&quot;: 1.120086,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;exit&quot;: {
+    &quot;ratio&quot;: 1.816460948061013,
+    &quot;t&quot;: 0.733333,
+    &quot;idleTime&quot;: 3.866667,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.072658,
+    &quot;rmsRotationDegrees&quot;: 27.250478,
+    &quot;rmsVelocityHeightPerSecond&quot;: 1.110665,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;worstEndpoint&quot;: &quot;exit&quot;,
+  &quot;alignment&quot;: &quot;horizontal root translation; raw asset poses used when provided&quot;
+}</pre></details></td></tr><tr><th>מהירות גוף מול צעדים</th><td class="green">ירוק</td><td>0.000205</td><td>99.98</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;rootSource&quot;: &quot;sampled presented root&quot;,
+  &quot;rootSpeedMetersPerSecond&quot;: 2.2,
+  &quot;observedRootSpeedMetersPerSecond&quot;: 2.2,
+  &quot;referenceRootSpeedMetersPerSecond&quot;: 2.2,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;backwardSweepSpeedMetersPerSecond&quot;: 2.200451,
+  &quot;cadenceStepsPerSecond&quot;: 4.090909,
+  &quot;impliedStrideMeters&quot;: 1.075776,
+  &quot;rootStrideMeters&quot;: 1.075556,
+  &quot;supportSweeps&quot;: [
+    {
+      &quot;bone&quot;: &quot;LeftFoot&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 0.16,
+      &quot;duration&quot;: 0.16,
+      &quot;sweepMeters&quot;: 0.352132,
+      &quot;speedMetersPerSecond&quot;: 2.200826
+    },
+    {
+      &quot;bone&quot;: &quot;LeftFoot&quot;,
+      &quot;start&quot;: 0.6,
+      &quot;end&quot;: 0.733333,
+      &quot;duration&quot;: 0.133333,
+      &quot;sweepMeters&quot;: 0.293333,
+      &quot;speedMetersPerSecond&quot;: 2.2
+    },
+    {
+      &quot;bone&quot;: &quot;RightFoot&quot;,
+      &quot;start&quot;: 0.233333,
+      &quot;end&quot;: 0.526667,
+      &quot;duration&quot;: 0.293333,
+      &quot;sweepMeters&quot;: 0.645466,
+      &quot;speedMetersPerSecond&quot;: 2.200451
+    }
+  ]
+}</pre></details></td></tr><tr><th>סימטריה</th><td class="green">ירוק</td><td>0</td><td>100</td><td><details><summary>ראיות מקוריות</summary><pre>{
+  &quot;mode&quot;: &quot;gait&quot;,
+  &quot;modeSource&quot;: &quot;declared&quot;,
+  &quot;structuralMismatch&quot;: 0,
+  &quot;segments&quot;: [
+    {
+      &quot;segment&quot;: &quot;Arm-ForeArm&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;ForeArm-Hand&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;UpLeg-Leg&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;Leg-Foot&quot;,
+      &quot;mismatch&quot;: 0
+    }
+  ],
+  &quot;motionRmsHeight&quot;: 0,
+  &quot;worstMotion&quot;: {
+    &quot;t&quot;: 0.333333,
+    &quot;errorHeight&quot;: 0
+  },
+  &quot;bilateralPoseRmsHeightUnscored&quot;: 0.194363,
+  &quot;note&quot;: &quot;Motion is mirrored in a pelvis-centred body basis.&quot;
+}</pre></details></td></tr></tbody></table></html>
