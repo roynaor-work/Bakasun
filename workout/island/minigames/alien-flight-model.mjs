@@ -220,7 +220,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   nova.targetX=target?.x??nova.x;nova.targetY=target?.y??nova.y-100;
   const x0=nova.x,y0=nova.y;steerMissile(nova,target,dt,{speed:v10.missileSpeed,turn:v10.missileTurn});
   nova.trail.push({x:x0,y:y0});if(nova.trail.length>v10.trailLength)nova.trail.shift();
-  let hit=null,tMin=1;for(const a of aliens){const t=segmentContact(x0,y0,nova.x,nova.y,a.x,a.y,a.radius+balance.nova.projectileRadius,aspect());if(t!==null&&(!hit||t<tMin)){hit=a;tMin=t;}}
+  let hit=null,tMin=1;const hull=hullOn&&model.hull?model.hull:null;/* v24.4: the missile too meets the drawn hull first */for(const a of aliens){const t=segmentContact(x0,y0,nova.x,nova.y,a.x,a.y,hull?hullContactRadius(a,{shotRadius:balance.nova.projectileRadius,pxPerUnit:hull.pxPerUnit}):a.radius+balance.nova.projectileRadius,aspect());if(t!==null&&(!hit||t<tMin)){hit=a;tMin=t;}}
   if(hit){nova.x=x0+(nova.x-x0)*tMin;nova.y=y0+(nova.y-y0)*tMin;detonate(hit);return;}
   nova.flight=Math.max(0,nova.flight-dt);
   if(nova.flight<=0||nova.y<-30||nova.x<-30||nova.x>config.width+30||nova.y>config.height+30)detonate(null);
