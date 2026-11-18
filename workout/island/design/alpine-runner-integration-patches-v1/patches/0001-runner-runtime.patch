@@ -1,0 +1,1589 @@
+diff --git a/workout/island/minigames/alpine-runner-engine.mjs b/workout/island/minigames/alpine-runner-engine.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..c02ec6b3b4306de1a2e53738152a592c0a6db28e
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-engine.mjs
+@@ -0,0 +1,177 @@
++import { EPOCH_SEGMENTS, generateCourse, MAX_SEGMENTS, SEGMENT_LENGTH_M } from './alpine-runner-generator/index.mjs';
++import { alpineRunnerScore } from './alpine-runner-rules.mjs';
++
++const STEP = 1 / 120;
++const LEAD_IN = 32;
++const LOOKAHEAD = 160;
++const LANE_WIDTH = 3;
++const JUMP_SECONDS = .96;
++const SLIDE_SECONDS = .94;
++const POWER_SECONDS = {magnet: 7, double: 8};
++const ACTIONS = new Set(['left', 'right', 'jump', 'slide']);
++const POWERUPS = ['shield', 'magnet', 'double'];
++const CONFIRMED_HAZARD = ['block', 'jump', 'slide'];
++
++const toward = (value, target, delta) => value + Math.sign(target - value) * Math.min(Math.abs(target - value), delta);
++const laneX = lane => (lane - 1) * LANE_WIDTH;
++const jumpHeightAt = remaining => remaining > 0 && remaining < JUMP_SECONDS
++  ? 1.5 * Math.sin(Math.PI * remaining / JUMP_SECONDS) : 0;
++
++export function createAlpineRunner({seed = 'alpine-runner', difficulty = 1, theme = 'pine'} = {}) {
++  const options = {seed, difficulty, theme};
++  const {physics} = generateCourse({...options, segmentCount: 0});
++  let seedForEra = seed, currentEra = 0;
++  let generated = 0, distance = 0, elapsed = 0, remainder = 0;
++  let lane = 1, lanePosition = 1, jump = 0, slide = 0, coins = 0;
++  let speed = physics.nominalSpeedMps - 3;
++  let status = 'running';
++  const powerups = {shield: false, magnet: 0, double: 0};
++  const pending = [];
++  const notifications = [];
++  let courseEvents = [], segments = [];
++
++  function extendCourse() {
++    while (LEAD_IN + generated * SEGMENT_LENGTH_M < distance + LOOKAHEAD) {
++      const era = Math.floor(generated / MAX_SEGMENTS);
++      const startSegment = generated % MAX_SEGMENTS;
++      if (era !== currentEra) {
++        currentEra = era;
++        // An epoch seam ends and begins in the centre lane, including between generator ranges.
++        seedForEra = ['continuation', era, seed].join(':').slice(0, 128);
++      }
++      const offset = LEAD_IN + era * MAX_SEGMENTS * SEGMENT_LENGTH_M;
++      const batch = generateCourse({...options, seed: seedForEra, startSegment, segmentCount: EPOCH_SEGMENTS});
++      for (const segment of batch.segments) {
++        const index = generated++;
++        const startM = segment.startM + offset;
++        segments.push({index, startM, endM: segment.endM + offset,
++          entryLane: segment.entryLane, exitLane: segment.exitLane,
++          moveStartM: segment.path.moveStartM + offset, moveEndM: segment.path.moveEndM + offset});
++        for (const obstacle of segment.obstacles) {
++          const kind = CONFIRMED_HAZARD[(index + Number(obstacle.id.split('o').at(-1))) % CONFIRMED_HAZARD.length];
++          const startDistance = obstacle.zStartM + offset, endDistance = obstacle.zEndM + offset;
++          courseEvents.push({id: `${era}:${obstacle.id}`, kind, lane: obstacle.lane, assetKind: obstacle.kind,
++            distance: (startDistance + endDistance) / 2, startDistance, endDistance, halfWidth: obstacle.halfWidthM});
++        }
++        // Marks on the entry lane give the rider a visible approach to each generated row.
++        for (const localDistance of [4, 9]) {
++          if (startM + localDistance >= segment.path.moveStartM + offset) break;
++          courseEvents.push({id: `${index}:c${localDistance}`, kind: 'coin', lane: segment.entryLane,
++            distance: startM + localDistance, radius: .26, value: 1});
++        }
++        for (const [ordinal, bonus] of segment.bonuses.entries()) {
++          const boost = index % 6 === 3 && ordinal === segment.bonuses.length - 1;
++          const kind = boost ? POWERUPS[Math.floor(index / 6) % POWERUPS.length] : 'coin';
++          courseEvents.push({id: `${era}:${bonus.id}`, kind, lane: bonus.lane, distance: bonus.zM + offset,
++            radius: bonus.radiusM, value: bonus.value});
++        }
++      }
++      courseEvents.sort((a, b) => a.distance - b.distance);
++    }
++  }
++
++  function command(action) {
++    if (!ACTIONS.has(action) || status !== 'running' || pending.length >= 4) return false;
++    pending.push(action);
++    return true;
++  }
++
++  function touches(x0, nextX, event, start, end, halfWidth, nextDistance) {
++    if (nextDistance < start || distance > end) return false;
++    const travel = nextDistance - distance;
++    const enter = Math.max(0, (start - distance) / travel);
++    const leave = Math.min(1, (end - distance) / travel);
++    const xEnter = x0 + (nextX - x0) * enter, xLeave = x0 + (nextX - x0) * leave;
++    const x = laneX(event.lane);
++    return Math.min(xEnter, xLeave) <= x + halfWidth && Math.max(xEnter, xLeave) >= x - halfWidth;
++  }
++
++  function advance() {
++    const wasJumping = jump;
++    jump = Math.max(0, jump - STEP);
++    slide = Math.max(0, slide - STEP);
++    powerups.magnet = Math.max(0, powerups.magnet - STEP);
++    powerups.double = Math.max(0, powerups.double - STEP);
++    for (const action of pending.splice(0)) {
++      if (action === 'left' || action === 'right') {
++        lane = Math.min(2, Math.max(0, lane + (action === 'left' ? -1 : 1)));
++      } else if (action === 'jump' && jump === 0 && slide === 0) {
++        jump = JUMP_SECONDS;
++      } else if (action === 'slide' && slide === 0) {
++        jump = 0;
++        slide = SLIDE_SECONDS;
++      }
++    }
++
++    const previousX = laneX(lanePosition);
++    lanePosition = toward(lanePosition, lane, STEP / physics.laneSwitchSeconds);
++    const nextX = laneX(lanePosition);
++    elapsed += STEP;
++    speed = Math.min(physics.maxSpeedMps, physics.nominalSpeedMps - 3 + elapsed * .115);
++    const nextDistance = distance + speed * STEP;
++    const length = physics.playerHalfLengthM;
++    const width = physics.playerHalfWidthM;
++    const retained = [];
++
++    for (const event of courseEvents) {
++      if (event.startDistance !== undefined) {
++        const end = event.endDistance + length + physics.longitudinalClearanceM;
++        if (end < distance) continue;
++        const start = event.startDistance - length - physics.longitudinalClearanceM;
++        const collisionWidth = event.halfWidth + width + physics.lateralClearanceM;
++        if (touches(previousX, nextX, event, start, end, collisionWidth, nextDistance)) {
++          const clearsJump = event.kind === 'jump' && Math.min(jumpHeightAt(jump), jumpHeightAt(wasJumping)) >= .38;
++          const clearsSlide = event.kind === 'slide' && slide > 0;
++          if (!clearsJump && !clearsSlide && status === 'running') {
++            const shielded = powerups.shield;
++            powerups.shield = false;
++            notifications.push({type: shielded ? 'shield' : 'crash', event: {...event}});
++            if (shielded) continue;
++            status = 'crashed';
++          }
++        }
++      } else {
++        const pickupReach = length + event.radius + (event.kind === 'coin' ? .3 : .15);
++        if (event.distance + pickupReach < distance) continue;
++        const pickupWidth = width + event.radius + (event.kind === 'coin' && powerups.magnet > 0 ? LANE_WIDTH : .28);
++        if (status === 'running' && touches(previousX, nextX, event, event.distance - pickupReach,
++          event.distance + pickupReach, pickupWidth, nextDistance)) {
++          if (event.kind === 'coin') coins += event.value * (powerups.double > 0 ? 2 : 1);
++          else if (event.kind === 'shield') powerups.shield = true;
++          else powerups[event.kind] = POWER_SECONDS[event.kind];
++          notifications.push({type: event.kind === 'coin' ? 'coin' : 'powerup', event: {...event}});
++          continue;
++        }
++      }
++      retained.push(event);
++    }
++
++    distance = nextDistance;
++    courseEvents = retained;
++    segments = segments.filter(segment => segment.endM + 3 >= distance);
++    if (status === 'running') extendCourse();
++  }
++
++  function step(seconds) {
++    if (status !== 'running' || !Number.isFinite(seconds) || seconds <= 0) return;
++    remainder += Math.min(seconds, .25);
++    while (remainder + 1e-9 >= STEP && status === 'running') {
++      remainder -= STEP;
++      advance();
++    }
++  }
++
++  function snapshot() {
++    return {
++      status, distance, elapsed, speed, lane, lanePosition, jumpHeight: jumpHeightAt(jump), sliding: slide > 0,
++      jumpProgress: jump ? 1 - jump / JUMP_SECONDS : 0, slideProgress: slide ? 1 - slide / SLIDE_SECONDS : 0,
++      stance: jump > 0 ? 'jump' : slide > 0 ? 'slide' : 'stand',
++      coins, score: alpineRunnerScore(distance, coins), difficulty, theme, powerups: {...powerups},
++      nextEvents: courseEvents.filter(event => event.distance < distance + LOOKAHEAD).map(event => ({...event})),
++      segments: segments.map(segment => ({...segment}))
++    };
++  }
++
++  extendCourse();
++  return {command, step, snapshot, clearCommands: () => { pending.length = 0; }, drainEvents: () => notifications.splice(0)};
++}
+diff --git a/workout/island/minigames/alpine-runner-generator/generate.mjs b/workout/island/minigames/alpine-runner-generator/generate.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..43182625d45d36aa595688549e19be263cdabaeb
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-generator/generate.mjs
+@@ -0,0 +1,118 @@
++import { API_VERSION, SEGMENT_LENGTH_M, EPOCH_SEGMENTS, MAX_SEGMENTS, MAX_BATCH_SEGMENTS,
++  LANES, DIFFICULTIES, THEMES, PATTERNS, configuration, integer, freeze, round } from './profiles.mjs';
++
++// FNV-1a over UTF-16 units, followed by Mulberry32. No ambient state or random source.
++function randomFor(config, epoch, domain) {
++  const text = JSON.stringify([API_VERSION, typeof config.seed, config.seed, config.difficulty, config.theme, epoch, domain]);
++  let state = 2166136261;
++  for (let i = 0; i < text.length; i++) state = Math.imul(state ^ text.charCodeAt(i), 16777619) >>> 0;
++  return () => {
++    state = (state + 0x6d2b79f5) >>> 0;
++    let n = state;
++    n = Math.imul(n ^ n >>> 15, n | 1);
++    n ^= n + Math.imul(n ^ n >>> 7, n | 61);
++    return ((n ^ n >>> 14) >>> 0) / 4294967296;
++  };
++}
++
++function weighted(random, candidates, weights) {
++  let pick = random() * weights.reduce((a, b) => a + b, 0);
++  for (let i = 0; i < candidates.length; i++) {
++    pick -= weights[i];
++    if (pick < 0) return candidates[i];
++  }
++  return candidates.at(-1);
++}
++
++function epochPlan(config, epoch) {
++  const p = DIFFICULTIES[config.difficulty], theme = THEMES[config.theme];
++  const routeRandom = randomFor(config, epoch, 'route'), patternRandom = randomFor(config, epoch, 'patterns');
++  const exits = [], patterns = [];
++  let lane = 1, repeat = 0, previousPattern = -1;
++  for (let i = 0; i < EPOCH_SEGMENTS; i++) {
++    let candidates = [0, 1, 2].filter(n => Math.abs(n - lane) <= 1 && (n !== lane || repeat < 2));
++    if (i === 0) candidates = [0, 2]; // Break the previous epoch's centre-lane run.
++    if (i === EPOCH_SEGMENTS - 2) candidates = candidates.filter(n => n !== 1 || lane !== 1);
++    if (i === EPOCH_SEGMENTS - 1) candidates = [1]; // Random-access seam anchor.
++    const turn = Math.min(.97, p.turnChance * theme.turnScale);
++    const next = weighted(routeRandom, candidates, candidates.map(n => n === lane ? 1 - turn : turn));
++    repeat = next === lane ? repeat + 1 : 1;
++    exits.push(next); lane = next;
++    const choices = [0, 1, 2, 3].filter(n => n !== previousPattern);
++    previousPattern = weighted(patternRandom, choices, choices.map(n => theme.patternWeights[n]));
++    patterns.push(PATTERNS[previousPattern]);
++  }
++  return { exits, patterns };
++}
++
++function builder(config) {
++  const epochs = new Map(), p = DIFFICULTIES[config.difficulty], theme = THEMES[config.theme];
++  const plan = i => {
++    const epoch = Math.floor(i / EPOCH_SEGMENTS);
++    if (!epochs.has(epoch)) epochs.set(epoch, epochPlan(config, epoch));
++    return epochs.get(epoch);
++  };
++  function raw(index) {
++    const offset = index % EPOCH_SEGMENTS, data = plan(index), exitLane = data.exits[offset];
++    const entryLane = offset === 0 ? 1 : data.exits[offset - 1];
++    const startM = index * SEGMENT_LENGTH_M, endM = startM + SEGMENT_LENGTH_M, pattern = data.patterns[offset];
++    const random = randomFor(config, index, 'objects'), obstacles = [];
++    const closed = [0, 1, 2].filter(lane => lane !== exitLane);
++    if (random() < .5) closed.reverse();
++    const blockedCount = random() < p.pairChance ? 2 : 1;
++    const makeObstacle = (lane, localStart, localEnd, role) => {
++      const halfWidthM = round(p.maxObstacleHalfWidthM - random() * .1);
++      obstacles.push({ id: `s${index}-o${obstacles.length}`, kind: theme.obstacleKinds[Math.floor(random() * theme.obstacleKinds.length)],
++        role, lane, xM: LANES[lane].xM, zStartM: round(startM + localStart), zEndM: round(startM + localEnd), halfWidthM });
++    };
++    const tail = pattern === 'long' ? 32 : round(31 + random());
++    for (let j = 0; j < blockedCount; j++) makeObstacle(closed[j], p.hazardStartM, tail, 'row');
++    const unused = [0, 1, 2].filter(lane => lane !== entryLane && lane !== exitLane);
++    const sideChance = Math.min(1, p.sideChance * theme.sideScale);
++    if (pattern === 'stagger' || (pattern !== 'reward' && random() < sideChance)) {
++      makeObstacle(unused[Math.floor(random() * unused.length)], 8 + random() * 2, 16 + random() * 2, 'side');
++    }
++    const noticeM = startM + 3;
++    const moveStartM = round(noticeM + p.maxSpeedMps * p.reactionSeconds);
++    const moveEndM = round(moveStartM + p.maxSpeedMps * p.laneSwitchSeconds);
++    const x0 = LANES[entryLane].xM, x1 = LANES[exitLane].xM;
++    const path = {
++      cueM: noticeM, moveStartM, moveEndM,
++      points: [ { zM: startM, xM: x0 }, { zM: noticeM, xM: x0 }, { zM: moveStartM, xM: x0 },
++        { zM: moveEndM, xM: x1 }, { zM: endM, xM: x1 }, { zM: endM + 3, xM: x1 } ],
++    };
++    const count = pattern === 'reward' ? 3 : pattern === 'stagger' ? 2 : 1;
++    const bonuses = Array.from({ length: count }, (_, j) => ({
++      id: `s${index}-b${j}`, kind: j === count - 1 && pattern === 'reward' ? theme.bonusKind : 'star',
++      lane: exitLane, xM: x1, zM: round(startM + [28, 29, 29.8][j]), radiusM: .18,
++      value: j === count - 1 && pattern === 'reward' ? 3 : 1,
++    }));
++    return { apiVersion: API_VERSION, index, startM, endM, theme: config.theme, difficulty: config.difficulty,
++      entryLane, exitLane, pattern, obstacles, bonuses, path };
++  }
++  return index => {
++    const segment = raw(index);
++    const carryIn = index === 0 ? [] : raw(index - 1).obstacles.filter(o => o.zEndM > segment.startM);
++    return { ...segment, carryIn };
++  };
++}
++
++/** A self-contained segment, including the previous row's seam-crossing obstacles. */
++export function generateSegment(options) {
++  const config = configuration(options, ['seed', 'difficulty', 'theme', 'index']);
++  const index = integer(options.index, 'index', 0, MAX_SEGMENTS - 1);
++  return freeze(builder(config)(index));
++}
++
++/** Stateless random-access range. Concatenated ranges have byte-identical segment data. */
++export function generateCourse(options) {
++  const config = configuration(options, ['seed', 'difficulty', 'theme', 'startSegment', 'segmentCount']);
++  const startSegment = integer(options.startSegment === undefined ? 0 : options.startSegment, 'startSegment', 0, MAX_SEGMENTS - 1);
++  const segmentCount = integer(options.segmentCount === undefined ? 12 : options.segmentCount, 'segmentCount', 0, MAX_BATCH_SEGMENTS);
++  if (startSegment + segmentCount > MAX_SEGMENTS) throw new RangeError(`range must end at or before segment ${MAX_SEGMENTS}`);
++  const build = builder(config);
++  return freeze({ apiVersion: API_VERSION, config, segmentLengthM: SEGMENT_LENGTH_M,
++    lanes: LANES, physics: DIFFICULTIES[config.difficulty],
++    range: { startSegment, segmentCount, startM: startSegment * SEGMENT_LENGTH_M, endM: (startSegment + segmentCount) * SEGMENT_LENGTH_M },
++    segments: Array.from({ length: segmentCount }, (_, i) => build(startSegment + i)) });
++}
+diff --git a/workout/island/minigames/alpine-runner-generator/index.mjs b/workout/island/minigames/alpine-runner-generator/index.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..59930a896cea84475c0b5094d15951588f16d92b
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-generator/index.mjs
+@@ -0,0 +1,4 @@
++export { API_VERSION, SEGMENT_LENGTH_M, MAX_SEGMENTS, MAX_BATCH_SEGMENTS, EPOCH_SEGMENTS,
++  LANES, DIFFICULTIES, THEMES, PATTERNS } from './profiles.mjs';
++export { generateCourse, generateSegment } from './generate.mjs';
++export { validateCourse } from './validate.mjs';
+diff --git a/workout/island/minigames/alpine-runner-generator/profiles.mjs b/workout/island/minigames/alpine-runner-generator/profiles.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ce72884b7af3aedd7195af70f79b490cf1f0dfe
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-generator/profiles.mjs
+@@ -0,0 +1,83 @@
++/** Versioned, dependency-free course rules. Distances are metres; times are seconds. */
++export const API_VERSION = 1;
++export const SEGMENT_LENGTH_M = 30;
++export const MAX_SEGMENTS = 1_000_000;
++export const MAX_BATCH_SEGMENTS = 1024;
++export const EPOCH_SEGMENTS = 8;
++
++export function freeze(value) {
++  if (value && typeof value === 'object' && !Object.isFrozen(value)) {
++    for (const child of Object.values(value)) freeze(child);
++    Object.freeze(value);
++  }
++  return value;
++}
++
++export const LANES = freeze([
++  { index: 0, xM: -3, widthM: 3 },
++  { index: 1, xM: 0, widthM: 3 },
++  { index: 2, xM: 3, widthM: 3 },
++]);
++
++// All difficulties reserve for the existing game's 31 m/s boost ceiling, not only nominal speed.
++export const DIFFICULTIES = freeze({
++  1: { id: 1, name: 'easy', nominalSpeedMps: 20, maxSpeedMps: 31, reactionSeconds: .4,
++    laneSwitchSeconds: .36, maxLateralSpeedMps: 3 / .36, playerHalfWidthM: .35,
++    playerHalfLengthM: .8, lateralClearanceM: .15, longitudinalClearanceM: .2,
++    hazardStartM: 29, maxObstacleHalfWidthM: .85, pairChance: 0, sideChance: .2, turnChance: .45 },
++  2: { id: 2, name: 'medium', nominalSpeedMps: 25, maxSpeedMps: 31, reactionSeconds: .35,
++    laneSwitchSeconds: .36, maxLateralSpeedMps: 3 / .36, playerHalfWidthM: .35,
++    playerHalfLengthM: .8, lateralClearanceM: .15, longitudinalClearanceM: .2,
++    hazardStartM: 28, maxObstacleHalfWidthM: 1, pairChance: .65, sideChance: .5, turnChance: .7 },
++  3: { id: 3, name: 'hard', nominalSpeedMps: 28, maxSpeedMps: 31, reactionSeconds: .3,
++    laneSwitchSeconds: .36, maxLateralSpeedMps: 3 / .36, playerHalfWidthM: .35,
++    playerHalfLengthM: .8, lateralClearanceM: .15, longitudinalClearanceM: .2,
++    hazardStartM: 27, maxObstacleHalfWidthM: 1.15, pairChance: 1, sideChance: .8, turnChance: .9 },
++});
++
++/** Theme IDs match alpine-league-theme.mjs; gameplay effects here are explicit, not hidden physics. */
++export const THEMES = freeze({
++  pine: { id: 'pine', label: 'Pine forest', accent: '#3f8f5a', background: '#e3eee7',
++    obstacleKinds: ['pine', 'rock'], patternWeights: [4, 3, 1, 2], turnScale: .9, sideScale: .8, bonusKind: 'star' },
++  ice: { id: 'ice', label: 'Ice canyon', accent: '#2f9fd6', background: '#deeff8',
++    obstacleKinds: ['ice-spire', 'ice-block'], patternWeights: [2, 1, 5, 2], turnScale: .8, sideScale: .6, bonusKind: 'shield' },
++  lava: { id: 'lava', label: 'Lava slopes', accent: '#e2683c', background: '#f3e0dc',
++    obstacleKinds: ['basalt', 'lava-rock'], patternWeights: [3, 5, 2, 1], turnScale: 1.1, sideScale: 1.2, bonusKind: 'energy' },
++  aurora: { id: 'aurora', label: 'Aurora night', accent: '#36c49a', background: '#dfe8f0',
++    obstacleKinds: ['moon-crystal', 'night-pine'], patternWeights: [2, 2, 2, 5], turnScale: .95, sideScale: .8, bonusKind: 'energy' },
++  village: { id: 'village', label: 'Snow village', accent: '#c98a2b', background: '#f1eadb',
++    obstacleKinds: ['snow-bank', 'crate'], patternWeights: [3, 2, 1, 5], turnScale: .85, sideScale: .7, bonusKind: 'star' },
++  peak: { id: 'peak', label: 'High peak', accent: '#5f8fc7', background: '#e2ebf2',
++    obstacleKinds: ['granite', 'snow-spire'], patternWeights: [3, 4, 4, 1], turnScale: 1.15, sideScale: 1.1, bonusKind: 'shield' },
++});
++
++export const PATTERNS = freeze(['gate', 'stagger', 'long', 'reward']);
++
++export function plainObject(value, name) {
++  if (!value || typeof value !== 'object' || Array.isArray(value) ||
++      ![Object.prototype, null].includes(Object.getPrototypeOf(value))) {
++    throw new TypeError(`${name} must be a plain object`);
++  }
++}
++
++export function integer(value, name, min, max) {
++  if (typeof value !== 'number' || !Number.isSafeInteger(value)) throw new TypeError(`${name} must be a safe integer`);
++  if (value < min || value > max) throw new RangeError(`${name} must be in ${min}..${max}`);
++  return value;
++}
++
++export function configuration(options, allowed) {
++  plainObject(options, 'options');
++  for (const key of Object.keys(options)) if (!allowed.includes(key)) throw new TypeError(`Unknown option: ${key}`);
++  const seed = options.seed;
++  if (typeof seed === 'number') integer(seed, 'seed', 0, 0xffffffff);
++  else if (typeof seed !== 'string' || seed.length < 1 || seed.length > 128 || !seed.trim()) {
++    throw new TypeError('seed must be a nonblank string of 1..128 UTF-16 code units or an unsigned 32-bit integer');
++  }
++  const difficulty = options.difficulty === undefined ? 1 : integer(options.difficulty, 'difficulty', 1, 3);
++  const theme = options.theme === undefined ? 'pine' : options.theme;
++  if (typeof theme !== 'string' || !Object.hasOwn(THEMES, theme)) throw new TypeError('theme must be one of pine, ice, lava, aurora, village, peak');
++  return { seed, difficulty, theme };
++}
++
++export const round = n => Math.round(n * 1_000_000) / 1_000_000;
+diff --git a/workout/island/minigames/alpine-runner-generator/validate.mjs b/workout/island/minigames/alpine-runner-generator/validate.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..1c24339c1c2e59b76fe8abc178844df5c3a2bd8e
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-generator/validate.mjs
+@@ -0,0 +1,173 @@
++import { API_VERSION, SEGMENT_LENGTH_M, MAX_SEGMENTS, MAX_BATCH_SEGMENTS, LANES, DIFFICULTIES,
++  THEMES, PATTERNS, configuration, freeze } from './profiles.mjs';
++
++const EPS = 1e-6;
++const finite = n => typeof n === 'number' && Number.isFinite(n);
++const int = (n, lo, hi) => Number.isSafeInteger(n) && n >= lo && n <= hi;
++const object = n => n !== null && typeof n === 'object' && !Array.isArray(n);
++const close = (a, b) => finite(a) && finite(b) && Math.abs(a - b) <= EPS;
++const sameObstacle = (a, b) => ['id', 'kind', 'role', 'lane', 'xM', 'zStartM', 'zEndM', 'halfWidthM'].every(k => a[k] === b[k]);
++
++function xAt(points, z) {
++  for (let i = 1; i < points.length; i++) {
++    const a = points[i - 1], b = points[i];
++    if (z >= a.zM - EPS && z <= b.zM + EPS) {
++      return a.xM + (b.xM - a.xM) * (z - a.zM) / (b.zM - a.zM);
++    }
++  }
++  return null;
++}
++
++// Exact intersection of a linearly moving, axis-aligned skier with an expanded obstacle rectangle.
++function pathHits(points, obstacle, longitudinal, lateral) {
++  const lo = obstacle.zStartM - longitudinal, hi = obstacle.zEndM + longitudinal;
++  const left = obstacle.xM - obstacle.halfWidthM - lateral, right = obstacle.xM + obstacle.halfWidthM + lateral;
++  for (let i = 1; i < points.length; i++) {
++    const a = points[i - 1], b = points[i];
++    const z0 = Math.max(a.zM, lo), z1 = Math.min(b.zM, hi);
++    if (z0 > z1 + EPS) continue;
++    const x0 = a.xM + (b.xM - a.xM) * (z0 - a.zM) / (b.zM - a.zM);
++    const x1 = a.xM + (b.xM - a.xM) * (z1 - a.zM) / (b.zM - a.zM);
++    if (Math.max(x0, x1) >= left - EPS && Math.min(x0, x1) <= right + EPS) return true;
++  }
++  return false;
++}
++
++/** Independent geometry/kinematics audit. Does not regenerate or compare against a seed oracle. */
++export function validateCourse(course) {
++  const errors = [], add = (code, message, segmentIndex = null, id = null) => errors.push({ code, message,
++    segmentIndex: Number.isSafeInteger(segmentIndex) ? segmentIndex : null, id: typeof id === 'string' ? id : null });
++  const stats = { segments: 0, obstacles: 0, bonuses: 0, laneChanges: 0, minimumReactionHeadroomSeconds: null,
++    maximumLateralSpeedMps: 0 };
++  const report = () => freeze({ apiVersion: API_VERSION, valid: errors.length === 0, errors, stats });
++  if (!object(course)) { add('SCHEMA', 'course must be an object'); return report(); }
++  if (course.apiVersion !== API_VERSION) add('VERSION', 'apiVersion must be 1');
++  let config;
++  try { config = configuration(course.config, ['seed', 'difficulty', 'theme']); }
++  catch (error) { add('CONFIG', error.message); return report(); }
++  const p = DIFFICULTIES[config.difficulty], r = course.range;
++  if (!object(r) || !int(r.startSegment, 0, MAX_SEGMENTS - 1) || !int(r.segmentCount, 0, MAX_BATCH_SEGMENTS) ||
++      r.startSegment + r.segmentCount > MAX_SEGMENTS || r.startM !== r.startSegment * SEGMENT_LENGTH_M ||
++      r.endM !== (r.startSegment + r.segmentCount) * SEGMENT_LENGTH_M) {
++    add('RANGE', 'range must describe consecutive 30 m segments within the API limits'); return report();
++  }
++  if (course.segmentLengthM !== SEGMENT_LENGTH_M) add('SEGMENT_LENGTH', 'segmentLengthM must be 30');
++  if (!Array.isArray(course.lanes) || course.lanes.length !== 3 || !Array.from(course.lanes).every((lane, i) =>
++    object(lane) && lane.index === i && lane.xM === LANES[i].xM && lane.widthM === 3)) add('LANES', 'exactly three 3 m lanes are required');
++  if (!object(course.physics) || Object.keys(course.physics).length !== Object.keys(p).length ||
++      !Object.keys(p).every(k => course.physics[k] === p[k])) add('PHYSICS', 'physics must equal the selected v1 difficulty profile');
++  if (!Array.isArray(course.segments) || course.segments.length !== r.segmentCount) {
++    add('SEGMENTS', 'segments length must match segmentCount'); return report();
++  }
++  const longitudinal = p.playerHalfLengthM + p.longitudinalClearanceM;
++  const lateral = p.playerHalfWidthM + p.lateralClearanceM;
++  const obstacles = [], ids = new Set(), usable = [], allBonuses = [];
++  function obstacle(o, owner, carry = false) {
++    const index = owner.index, start = owner.startM;
++    const boundsStart = carry ? start - 30 : start;
++    const boundsEnd = carry ? start + 2 : owner.endM + 2;
++    if (!object(o) || typeof o.id !== 'string' || !o.id || !THEMES[config.theme].obstacleKinds.includes(o.kind) ||
++        !['row', 'side'].includes(o.role) || !int(o.lane, 0, 2) || o.xM !== LANES[o.lane]?.xM ||
++        !finite(o.zStartM) || !finite(o.zEndM) || o.zStartM < boundsStart || o.zEndM > boundsEnd ||
++        o.zEndM <= o.zStartM || !finite(o.halfWidthM) || o.halfWidthM < .2 || o.halfWidthM > p.maxObstacleHalfWidthM ||
++        o.halfWidthM >= 1.5 || (carry && o.zEndM <= start)) {
++      add('OBSTACLE', 'obstacle has invalid kind, lane, width or longitudinal span', index, o?.id ?? null); return false;
++    }
++    return true;
++  }
++  for (let offset = 0; offset < course.segments.length; offset++) {
++    const s = course.segments[offset], index = r.startSegment + offset, start = index * 30, end = start + 30;
++    if (!object(s) || s.apiVersion !== 1 || s.index !== index || s.startM !== start || s.endM !== end ||
++        s.theme !== config.theme || s.difficulty !== config.difficulty || !int(s.entryLane, 0, 2) || !int(s.exitLane, 0, 2) ||
++        Math.abs(s.entryLane - s.exitLane) > 1 || !PATTERNS.includes(s.pattern) || !Array.isArray(s.obstacles) ||
++        !Array.isArray(s.carryIn) || !Array.isArray(s.bonuses) || s.obstacles.length < 1 || s.obstacles.length > 3 ||
++        s.carryIn.length > 2 || s.bonuses.length < 1 || s.bonuses.length > 3) {
++      add('SEGMENT', 'segment structure or lane transition is invalid', index); continue;
++    }
++    stats.segments++;
++    if (s.entryLane !== s.exitLane) stats.laneChanges++;
++    for (const o of s.obstacles) if (obstacle(o, s)) {
++      if (ids.has(o.id)) add('DUPLICATE_ID', 'obstacle id is repeated', index, o.id);
++      else { ids.add(o.id); obstacles.push(o); }
++    }
++    const carry = [];
++    for (const o of s.carryIn) if (obstacle(o, s, true)) carry.push(o);
++    if (index === 0 && carry.length) add('SEAM', 'the first course segment cannot have carry-in obstacles', index);
++    if (offset === 0) for (const o of carry) {
++      if (ids.has(o.id)) add('DUPLICATE_ID', 'carry-in obstacle id is repeated', index, o.id);
++      else { ids.add(o.id); obstacles.push(o); }
++    }
++    if (offset > 0) {
++      const previous = course.segments[offset - 1];
++      if (object(previous) && Array.isArray(previous.obstacles)) {
++        const expected = previous.obstacles.filter(o => object(o) && finite(o.zEndM) && o.zEndM > start);
++        if (expected.length !== carry.length || !expected.every((o, i) => sameObstacle(o, carry[i]))) add('SEAM', 'carryIn must contain the complete previous row in its original order', index);
++        if (previous.exitLane !== s.entryLane) add('SEAM', 'entry lane must continue the preceding exit lane', index);
++      }
++    }
++    const path = s.path;
++    if (!object(path) || !Array.isArray(path.points) || path.points.length < 2 || path.points.length > 12 ||
++        !Array.from(path.points).every(point => object(point) && finite(point.zM) && finite(point.xM) && point.xM >= -3 && point.xM <= 3) ||
++        !path.points.every((point, i) => i === 0 || point.zM > path.points[i - 1].zM) ||
++        !close(path.points[0].zM, start) || !close(path.points.at(-1).zM, end + 3) ||
++        !close(path.points[0].xM, LANES[s.entryLane].xM) || !close(path.points.at(-1).xM, LANES[s.exitLane].xM) ||
++        !finite(path.cueM) || !finite(path.moveStartM) || !finite(path.moveEndM) ||
++        path.cueM < start + 3 - EPS || path.moveStartM < path.cueM || path.moveEndM < path.moveStartM || path.moveEndM > end ||
++        !close(xAt(path.points, end), LANES[s.exitLane].xM)) {
++      add('ROUTE', 'path must be a finite forward polyline spanning the segment and its 3 m seam tail', index); continue;
++    }
++    let firstMove = null, lastMove = null;
++    for (let i = 1; i < path.points.length; i++) {
++      const a = path.points[i - 1], b = path.points[i];
++      const speed = Math.abs(b.xM - a.xM) / (b.zM - a.zM) * p.maxSpeedMps;
++      stats.maximumLateralSpeedMps = Math.max(stats.maximumLateralSpeedMps, speed);
++      if (speed > p.maxLateralSpeedMps + EPS) add('LATERAL_SPEED', 'path changes lanes faster than the permitted lateral speed', index);
++      if (!close(a.xM, b.xM)) { if (firstMove === null) firstMove = a.zM; lastMove = b.zM; }
++    }
++    const reaction = (path.moveStartM - path.cueM) / p.maxSpeedMps;
++    const headroom = reaction - p.reactionSeconds;
++    stats.minimumReactionHeadroomSeconds = stats.minimumReactionHeadroomSeconds === null ? headroom : Math.min(stats.minimumReactionHeadroomSeconds, headroom);
++    if (headroom < -EPS || (firstMove !== null && (firstMove < path.moveStartM - EPS || lastMove > path.moveEndM + EPS)) ||
++        carry.some(o => o.zEndM + longitudinal > path.cueM + EPS)) add('REACTION', 'lane movement begins before the full reaction interval or before the incoming row clears', index);
++    if (firstMove !== null && (lastMove - firstMove) / p.maxSpeedMps < p.laneSwitchSeconds - EPS) add('LANE_SWITCH', 'lane change is shorter than laneSwitchSeconds', index);
++    if (path.points.some(point => point.zM >= end - EPS && !close(point.xM, LANES[s.exitLane].xM))) add('SEAM', 'path must hold its exit lane over the seam tail', index);
++    usable.push(s);
++    for (const b of s.bonuses) {
++      if (!object(b) || typeof b.id !== 'string' || !b.id || !['star', 'energy', 'shield'].includes(b.kind) ||
++          !int(b.lane, 0, 2) || b.xM !== LANES[b.lane]?.xM || !finite(b.zM) || !finite(b.radiusM) || b.radiusM < .1 || b.radiusM > .3 ||
++          b.zM - b.radiusM < start || b.zM + b.radiusM > end || !int(b.value, 1, 3)) {
++        add('BONUS', 'bonus has invalid kind, lane, position, radius or value', index, b?.id ?? null); continue;
++      }
++      if (ids.has(b.id)) add('DUPLICATE_ID', 'bonus id is repeated', index, b.id); else ids.add(b.id);
++      if (!close(xAt(path.points, b.zM), b.xM)) add('BONUS_OFF_ROUTE', 'bonus is not on the certified continuous route', index, b.id);
++      allBonuses.push({ bonus: b, index });
++    }
++  }
++  stats.obstacles = obstacles.length; stats.bonuses = allBonuses.length;
++  // Check actual geometry, including incoming rows and end-of-range obstacle tails.
++  const stations = [...new Set(obstacles.flatMap(o => [o.zStartM - longitudinal, o.zEndM + longitudinal]))].sort((a, b) => a - b);
++  const checks = stations.flatMap((z, i) => i === 0 ? [z] : [(stations[i - 1] + z) / 2, z]);
++  let closedReported = false;
++  for (const z of checks) {
++    const active = obstacles.filter(o => z >= o.zStartM - longitudinal - EPS && z <= o.zEndM + longitudinal + EPS);
++    if (LANES.every(lane => active.some(o => Math.abs(lane.xM - o.xM) <= o.halfWidthM + lateral + EPS))) {
++      add('LANE_CLOSED', `all three lane centres are blocked at ${z} m, including skier clearance`); closedReported = true;
++    }
++    if (closedReported) break;
++  }
++  for (const s of usable) {
++    const near = obstacles.filter(o => o.zStartM - longitudinal <= s.endM + 3 && o.zEndM + longitudinal >= s.startM);
++    for (const o of near) if (pathHits(s.path.points, o, longitudinal, lateral)) add('PATH_COLLISION', 'certified continuous route intersects an expanded obstacle', s.index, o.id);
++  }
++  for (const { bonus: b, index } of allBonuses) {
++    if (obstacles.some(o => b.zM + b.radiusM >= o.zStartM - EPS && b.zM - b.radiusM <= o.zEndM + EPS &&
++        Math.abs(b.xM - o.xM) <= o.halfWidthM + b.radiusM + EPS)) add('BONUS_COLLISION', 'bonus intersects an obstacle', index, b.id);
++  }
++  for (let i = 2; i < course.segments.length; i++) {
++    const a = course.segments[i - 2], b = course.segments[i - 1], c = course.segments[i];
++    if (!object(a) || !object(b) || !object(c)) continue;
++    if (a.exitLane === b.exitLane && b.exitLane === c.exitLane) add('REPEAT', 'safe lane repeats more than twice', c.index);
++    if (a.pattern === b.pattern && b.pattern === c.pattern) add('REPEAT', 'pattern repeats more than twice', c.index);
++  }
++  return report();
++}
+diff --git a/workout/island/minigames/alpine-runner-rules.mjs b/workout/island/minigames/alpine-runner-rules.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..cbf213c6749b184ddfe29296da5b8692b128703d
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-rules.mjs
+@@ -0,0 +1,47 @@
++const STAGE_GOALS_M = Object.freeze([
++  [150, 225, 300],
++  [225, 325, 450],
++  [300, 450, 600],
++].map(Object.freeze));
++const THEMES = ['pine', 'ice', 'lava', 'aurora', 'village', 'peak'];
++const RESULT_KEYS = ['distance', 'elapsed', 'coins', 'score', 'theme', 'difficulty', 'crashed'];
++const MAX_SPEED_MPS = 31;
++const SEGMENT_LENGTH_M = 30;
++// Two approach coins plus three generated rewards of at most 1, 1, and 3, doubled by the bonus.
++const COINS_PER_SEGMENT = 14;
++const MAX_REWARD_COINS = 30;
++
++export function alpineRunnerEnabled(search = globalThis.location?.search ?? '') {
++  return new URLSearchParams(search).get('alpineRunner') !== '0';
++}
++
++export function alpineRunnerScore(distance, coins) {
++  return Math.floor(distance) + 5 * coins;
++}
++
++export function alpineRunnerGoals(difficulty) {
++  return STAGE_GOALS_M[difficulty - 1];
++}
++
++export function alpineRunnerProgress(distance, difficulty) {
++  const goals = alpineRunnerGoals(difficulty) ?? [];
++  const stars = goals.filter(goal => distance >= goal).length;
++  return {outcome: stars ? 'win' : 'lose', stars};
++}
++
++/** Distances are whole meters and elapsed time is milliseconds in the island result. */
++export function alpineRunnerResult(raw, ctx, balance) {
++  const run = raw?.runner;
++  if (!run || typeof run !== 'object' || Array.isArray(run) || Object.keys(run).length !== RESULT_KEYS.length || !RESULT_KEYS.every(key => Object.hasOwn(run, key))) return null;
++  const {distance, elapsed, coins, score, theme, difficulty, crashed} = run;
++  if (!Number.isInteger(difficulty) || difficulty !== ctx.level || !alpineRunnerGoals(difficulty) || !THEMES.includes(theme) || crashed !== true) return null;
++  if (!Number.isSafeInteger(elapsed) || elapsed <= 0 || !Number.isSafeInteger(distance) || distance < 0 || distance > Math.ceil(elapsed * (MAX_SPEED_MPS / 1000))) return null;
++  // Allow the segment immediately ahead for pickups pulled forward by a bonus.
++  const maxCoins = (Math.floor(distance / SEGMENT_LENGTH_M) + 2) * COINS_PER_SEGMENT;
++  if (!Number.isSafeInteger(coins) || coins < 0 || coins > maxCoins || !Number.isSafeInteger(score) || score !== alpineRunnerScore(distance, coins) || raw.score !== score) return null;
++  const {outcome, stars} = alpineRunnerProgress(distance, difficulty);
++  const level = balance.levels[difficulty - 1];
++  if (!level || raw.outcome !== outcome) return null;
++  const money = Math.min(coins, MAX_REWARD_COINS) + (stars ? level.winMoney : 0);
++  return {outcome, stars, score, money};
++}
+diff --git a/workout/island/minigames/alpine-runner-session.mjs b/workout/island/minigames/alpine-runner-session.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..d2e98a7b6b6567b25eea64238c2fb6e1a5edbef1
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-session.mjs
+@@ -0,0 +1,319 @@
++import {createAlpineRunner} from './alpine-runner-engine.mjs';
++import {alpineRunnerGoals, alpineRunnerProgress, alpineRunnerScore} from './alpine-runner-rules.mjs';
++import {createAlpineAudio} from './alpine-audio.mjs';
++import {createQualityGovernor} from './alpine-quality.mjs';
++import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-18';
++
++const BEST_KEY = 'island.alpine.runner.best.v1';
++const THEME_KEY = 'island.alpine.runner.theme.v1';
++const THEMES = {
++  pine: ['01-pine', 'יער אורנים'], ice: ['02-ice', 'קניון קרח'], lava: ['03-volcano', 'מורדות געשיים'],
++  aurora: ['04-aurora', 'זוהר צפוני'], village: ['05-village', 'כפר בשלג'], peak: ['06-summit', 'פסגה גבוהה']
++};
++const KEYS = {ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'jump', ArrowDown: 'slide', ' ': 'jump'};
++const ACTIONS = [
++  ['left', '‹', 'נתיב שמאלי', 'ArrowLeft'], ['right', '›', 'נתיב ימני', 'ArrowRight'],
++  ['jump', '↑', 'קפיצה', 'ArrowUp Space'], ['slide', '↓', 'החלקה מתחת למכשול', 'ArrowDown']
++];
++const formatter = new Intl.NumberFormat('he-IL');
++const format = value => formatter.format(Math.floor(value));
++
++function readBest(storage) {
++  try {
++    const best = JSON.parse(storage?.getItem(BEST_KEY));
++    if (best && Object.hasOwn(THEMES, best.theme) && [1, 2, 3].includes(best.difficulty) &&
++        ['score', 'distance', 'coins', 'elapsed'].every(key => Number.isSafeInteger(best[key]) && best[key] >= 0) &&
++        best.score === alpineRunnerScore(best.distance, best.coins)) return best;
++  } catch {}
++  return null;
++}
++
++function seedFor(ctx, params) {
++  const requested = params.get('alpineRunnerSeed');
++  if (requested?.trim()) return requested.slice(0, 128);
++  const fallback = String(ctx.seed ?? 'alpine-runner');
++  return fallback.trim() ? fallback.slice(0, 128) : 'alpine-runner';
++}
++
++export function runAlpineRunnerSession(ctx) {
++  const params = new URLSearchParams(globalThis.location?.search || '');
++  const seed = seedFor(ctx, params), difficulty = ctx.level || 1, goals = alpineRunnerGoals(difficulty);
++  const {canvas, controls, status} = ctx;
++  const doc = canvas?.ownerDocument, win = doc?.defaultView;
++  const screen = canvas?.closest('.game-screen'), stage = canvas?.parentElement;
++  let storage;
++  try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
++  let theme = 'pine', best = readBest(storage);
++  try {
++    const savedTheme = storage?.getItem(THEME_KEY);
++    if (Object.hasOwn(THEMES, savedTheme)) theme = savedTheme;
++  } catch {}
++  let engine = createAlpineRunner({seed, difficulty, theme});
++  let phase = 'menu', paused = false, disposed = false, error = null;
++  let view, audio, frame, loadingTimer, lastFrame, dom, pointer;
++  let quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
++  const governor = ctx.balance?.render ? createQualityGovernor(ctx.balance.render, quality) : null;
++  const abort = new AbortController();
++
++  function requestFrame() {
++    if (view && !disposed && !paused && !error && phase !== 'finished' && frame === undefined) frame = win.requestAnimationFrame(tick);
++  }
++
++  const session = {
++    get ready() { return (!canvas || Boolean(view)) && !error; },
++    get loadFailed() { return error; },
++    get snapshot() {
++      return {mode: 'runner', phase, paused, disposed, loaded: Boolean(view), error, quality, stage: difficulty,
++        frame: disposed ? null : engine.snapshot(), records: {best: best && {...best}},
++        renderMetrics: view?.metrics(), audioMetrics: audio?.metrics()};
++    },
++    start() {
++      if (disposed || paused || !session.ready || phase !== 'menu') return false;
++      phase = 'racing';
++      lastFrame = undefined;
++      if (screen) screen.dataset.alpinePhase = phase;
++      if (dom) { dom.menu.hidden = true; dom.hud.hidden = false; dom.buttons.hidden = false; }
++      audio?.unlock();
++      audio?.cue('go');
++      canvas?.focus({preventScroll: true});
++      requestFrame();
++      return true;
++    },
++    setPaused(value) {
++      if (disposed) return;
++      paused = Boolean(value);
++      lastFrame = pointer = undefined;
++      engine.clearCommands();
++      audio?.setPaused(paused);
++      if (paused && frame !== undefined) {
++        win.cancelAnimationFrame(frame);
++        frame = undefined;
++      }
++      if (!paused) requestFrame();
++    },
++    dispose() {
++      if (disposed) return;
++      disposed = true;
++      clearTimeout(loadingTimer);
++      if (frame !== undefined) win.cancelAnimationFrame(frame);
++      abort.abort();
++      audio?.dispose();
++      view?.dispose();
++      dom?.nodes.forEach(node => node.remove());
++      if (screen) {
++        delete screen.dataset.alpineMode;
++        delete screen.dataset.alpinePhase;
++      }
++    }
++  };
++
++  if (params.get('dev') === '1' || ctx.debug) {
++    session.debug = {get engine() { return engine; }, view: () => view, step: seconds => engine.step(seconds)};
++  }
++  if (!canvas) return session;
++
++  try { audio = createAlpineAudio({storage: storage ?? null}); }
++  catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
++
++  const signal = abort.signal;
++  const el = (tag, className = '', text = '') => {
++    const node = doc.createElement(tag);
++    if (className) node.className = className;
++    if (text) node.textContent = text;
++    return node;
++  };
++  const button = (action, text, className = '') => {
++    const node = el('button', className, text);
++    node.type = 'button';
++    node.dataset.action = action;
++    return node;
++  };
++
++  screen.dataset.alpineMode = 'runner';
++  screen.dataset.alpinePhase = phase;
++  canvas.setAttribute('aria-label', 'מסלול סקי אינסופי בשלושה נתיבים');
++  const css = el('link');
++  css.rel = 'stylesheet';
++  css.href = new URL('./alpine-runner.css', import.meta.url).href;
++
++  const menu = el('section', 'alpine-runner-menu');
++  const heading = el('h1', '', 'גלישה אינסופית');
++  const goal = el('p', 'alpine-runner-goal', `יעד שלב ${difficulty} · ${format(goals[0])} מטר לכוכב הראשון`);
++  const bestLine = el('p', 'alpine-runner-best', best ? `שיא אישי · ${format(best.score)} נקודות` : 'השיא האישי יישמר בסיום הגלישה');
++  const help = el('p', 'alpine-runner-help', 'החליקו ימינה או שמאלה למעבר נתיב, למעלה לקפיצה ולמטה להתכופפות.');
++  const loading = el('p', 'alpine-runner-loading', 'טוען את המסלול…');
++  loading.setAttribute('role', 'status');
++  const start = button('alpine-start', 'גלישה', 'primary-button alpine-runner-start');
++  start.disabled = true;
++  start.addEventListener('click', () => session.start(), {signal});
++
++  const themePicker = el('fieldset', 'alpine-runner-themes');
++  themePicker.append(el('legend', '', 'סביבת גלישה'));
++  function selectTheme(id) {
++    if (phase !== 'menu' || id === theme) return;
++    theme = id;
++    engine = createAlpineRunner({seed, difficulty, theme});
++    view?.setTheme(THEMES[theme][0]);
++    for (const item of themePicker.querySelectorAll('button')) item.setAttribute('aria-pressed', String(item.dataset.theme === theme));
++    try { storage?.setItem(THEME_KEY, theme); } catch {}
++  }
++  for (const [id, [, name]] of Object.entries(THEMES)) {
++    const item = button('alpine-runner-theme', name);
++    item.dataset.theme = id;
++    item.setAttribute('aria-pressed', String(id === theme));
++    item.addEventListener('click', () => selectTheme(id), {signal});
++    themePicker.append(item);
++  }
++
++  menu.append(heading, goal, bestLine, help, themePicker, loading, start);
++  const hud = el('section', 'alpine-runner-hud');
++  hud.setAttribute('aria-label', 'מצב הגלישה');
++  hud.hidden = true;
++  const fields = {};
++  for (const [key, title] of [['distance', 'מרחק'], ['coins', 'מטבעות'], ['score', 'ניקוד']]) {
++    const field = el('div');
++    const value = el('bdi', '', '0');
++    value.dataset.runnerHud = key;
++    field.append(el('span', '', title), value);
++    hud.append(field);
++    fields[key] = value;
++  }
++  const powers = el('p', 'alpine-runner-power');
++  powers.hidden = true;
++  const buttons = el('div', 'alpine-runner-input');
++  buttons.dir = 'ltr';
++  buttons.hidden = true;
++  const dispatch = action => !disposed && !paused && phase === 'racing' && engine.command(action);
++  for (const [action, icon, label, shortcut] of ACTIONS) {
++    const item = button('alpine-runner-' + action, icon);
++    item.setAttribute('aria-label', label);
++    item.setAttribute('aria-keyshortcuts', shortcut);
++    item.addEventListener('click', () => dispatch(action), {signal});
++    buttons.append(item);
++  }
++  stage.append(menu, hud, powers);
++  controls.append(buttons);
++  screen.append(css);
++  dom = {menu, hud, buttons, nodes: [menu, hud, powers, buttons, css]};
++
++  screen.addEventListener('keydown', event => {
++    if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
++        (event.key === ' ' && event.target.closest?.('button'))) return;
++    if (KEYS[event.key] && dispatch(KEYS[event.key])) event.preventDefault();
++  }, {signal});
++  canvas.addEventListener('pointerdown', event => {
++    if (paused || phase !== 'racing' || !event.isPrimary || event.button !== 0) return;
++    pointer = {id: event.pointerId, x: event.clientX, y: event.clientY};
++    canvas.setPointerCapture?.(event.pointerId);
++  }, {signal});
++  function swipe(event, ended) {
++    if (pointer?.id !== event.pointerId) return;
++    const dx = event.clientX - pointer.x, dy = event.clientY - pointer.y;
++    if (Math.max(Math.abs(dx), Math.abs(dy)) >= 25) {
++      dispatch(Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'jump' : 'slide'));
++      pointer = undefined;
++    }
++    if (ended) pointer = undefined;
++  }
++  canvas.addEventListener('pointermove', event => swipe(event, false), {signal});
++  canvas.addEventListener('pointerup', event => swipe(event, true), {signal});
++  for (const type of ['pointercancel', 'lostpointercapture']) {
++    canvas.addEventListener(type, event => { if (pointer?.id === event.pointerId) pointer = undefined; }, {signal});
++  }
++  canvas.addEventListener('webglcontextlost', event => {
++    event.preventDefault();
++    fail('webgl-context-lost');
++  }, {signal});
++
++  function fail(reason) {
++    if (disposed || error) return;
++    error = reason;
++    session.setPaused(true);
++    loading.textContent = 'טעינת המסלול נכשלה';
++    loading.hidden = false;
++    status.textContent = loading.textContent;
++    saveGameReport('alpineRunner', {status: 'failed', lines: ['runner: ' + reason]});
++  }
++
++  function complete(snap) {
++    phase = 'finished';
++    screen.dataset.alpinePhase = phase;
++    const {score, coins} = snap;
++    const result = {distance: Math.floor(snap.distance), elapsed: Math.round(snap.elapsed * 1000),
++      coins, score, theme, difficulty, crashed: true};
++    const latest = readBest(storage);
++    if (latest && (!best || latest.score > best.score)) best = latest;
++    const newBest = !best || score > best.score;
++    if (newBest) {
++      best = {...result};
++      try { storage?.setItem(BEST_KEY, JSON.stringify(best)); } catch {}
++    }
++    ctx.onAlpineSummary?.({mode: 'runner', ...result, best: best && {...best}, newBest});
++    const {outcome} = alpineRunnerProgress(result.distance, difficulty);
++    const settled = ctx.finish({outcome, score, runner: result});
++    if (settled?.ok === false && !disposed) {
++      ctx.onError?.(settled.reason);
++      ctx.cancel();
++    }
++  }
++
++  let lastHud = -Infinity;
++  function tick(at) {
++    frame = undefined;
++    if (disposed || paused || error || doc.hidden) return;
++    const delta = lastFrame === undefined ? 0 : at - lastFrame;
++    lastFrame = at;
++    if (phase === 'racing') {
++      engine.step(delta / 1000);
++      if (delta > 0 && governor?.observe(delta) === 'low' && quality !== 'low') {
++        quality = 'low';
++        view.setQuality(quality);
++      }
++    }
++    const snap = engine.snapshot();
++    view.render(snap);
++    if (phase === 'racing') {
++      for (const event of engine.drainEvents()) {
++        audio.cue({coin: 'coin', powerup: 'gate', shield: 'hit', crash: 'crash'}[event.type]);
++      }
++      audio.sync(snap.speed * 3.6, {airborne: snap.stance === 'jump', crashed: snap.status === 'crashed'});
++      if (snap.elapsed - lastHud >= .1 || snap.status === 'crashed') {
++        lastHud = snap.elapsed;
++        fields.distance.textContent = format(snap.distance) + ' מ׳';
++        fields.coins.textContent = format(snap.coins);
++        fields.score.textContent = format(snap.score);
++        const active = [
++          snap.powerups.shield ? 'מגן' : '',
++          snap.powerups.magnet ? `מגנט ${Math.ceil(snap.powerups.magnet)} שנ׳` : '',
++          snap.powerups.double ? `כפל מטבעות ${Math.ceil(snap.powerups.double)} שנ׳` : ''
++        ].filter(Boolean);
++        powers.hidden = !active.length;
++        powers.textContent = active.join(' · ');
++      }
++      if (snap.status === 'crashed') { complete(snap); return; }
++    }
++    requestFrame();
++  }
++
++  const loadStart = performance.now();
++  loadingTimer = setTimeout(() => fail('timeout'), 25000);
++  import('./alpine-runner-view.mjs').then(({createAlpineRunnerView}) =>
++    createAlpineRunnerView(stage, {canvas, quality, theme: THEMES[theme][0], isDisposed: () => disposed || Boolean(error)})
++  ).then(loaded => {
++    clearTimeout(loadingTimer);
++    if (disposed || error) { loaded.dispose(); return; }
++    view = loaded;
++    view.setTheme(THEMES[theme][0]);
++    view.render(engine.snapshot());
++    start.disabled = false;
++    loading.hidden = true;
++    saveGameReport('alpineRunner', {status: 'ready', ms: performance.now() - loadStart, lines: ['runner · ' + loaded.mode + ' · ' + quality]});
++    if (!paused) start.focus({preventScroll: true});
++    requestFrame();
++  }).catch(cause => {
++    clearTimeout(loadingTimer);
++    fail(String(cause?.message || cause));
++  });
++
++  return session;
++}
+diff --git a/workout/island/minigames/alpine-runner-view.mjs b/workout/island/minigames/alpine-runner-view.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..8ab59193b118198833c51470eabb055be1499bd2
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner-view.mjs
+@@ -0,0 +1,463 @@
++import * as THREE from '../vendor/three.module.js';
++import {GLTFLoader} from '../vendor/GLTFLoader.js';
++import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
++
++const ASSETS = new URL('../assets/alpine-runner/', import.meta.url);
++const SKIER = 'runner/characters/skier-coral.glb';
++const TILE_LENGTH = 30;
++const LANE_WIDTH = 2.4;
++const TILE_SEQUENCE = ['forest', 'gentle_turn', 'bridge', 'ice_tunnel', 'slope', 'village', 'forest', 'summit'];
++const MAX_VISIBLE_EVENTS = 144;
++const TILE_COUNT = 6;
++const THEMES = {
++  '01-pine': {fog: '#d7e4d9', bank: '#dce8e2', light: '#fff1dc', sky: '#b8d1d4'},
++  '02-ice': {fog: '#a8d4e3', bank: '#d0eaf4', light: '#deefff', sky: '#a8d4e3'},
++  '03-volcano': {fog: '#b9aab8', bank: '#d1c9d5', light: '#ffdbc3', sky: '#b9aab8'},
++  '04-aurora': {fog: '#758fa6', bank: '#a4bace', light: '#bfdaff', sky: '#758fa6'},
++  '05-village': {fog: '#e9dfcd', bank: '#eae4d8', light: '#ffe8ca', sky: '#e9dfcd'},
++  '06-summit': {fog: '#cbdde4', bank: '#dcebf0', light: '#eff4ff', sky: '#cbdde4'},
++};
++const PROP_MODELS = {
++  block: 'content/models/boulder.glb',
++  jump: 'runner/props/low_fence.glb',
++  slide: 'runner/props/high_beam.glb',
++  coin: 'runner/props/coin.glb',
++  shield: 'runner/props/shield.glb',
++  magnet: 'runner/props/magnet.glb',
++  double: 'content/models/double-coin.glb',
++};
++const PICKUPS = new Set(['coin', 'shield', 'magnet', 'double']);
++
++export const ALPINE_RUNNER_TRIANGLE_BUDGET = Object.freeze({low: 60_000, high: 100_000});
++
++function tileType(index) {
++  return index < 0 ? 'straight' : TILE_SEQUENCE[index % TILE_SEQUENCE.length];
++}
++
++function tileSurface(type, z) {
++  // The two non-flat source tiles have C1 ports at the same position and grade.
++  const angle = Math.PI * z / TILE_LENGTH;
++  const wave = Math.sin(angle) ** 2;
++  const slope = Math.PI / TILE_LENGTH * Math.sin(2 * angle);
++  return {
++    x: type === 'gentle_turn' ? 1.2 * wave : 0,
++    y: type === 'slope' ? 1.5 * wave : 0,
++    yaw: type === 'gentle_turn' ? Math.atan(1.2 * slope) : 0,
++    pitch: type === 'slope' ? -Math.atan(1.5 * slope) : 0,
++  };
++}
++
++function surfaceAt(distance) {
++  const tile = Math.floor(distance / TILE_LENGTH);
++  return tileSurface(tileType(tile), distance - tile * TILE_LENGTH);
++}
++
++function shoulderGeometry(type) {
++  const positions = [], indices = [];
++  const flank = [5.55, 7, 11, 21, 45];
++  const profile = [.34, .58, 1.05, .4, -6];
++  const columns = flank.length;
++  const rows = 7;
++  for (const side of [-1, 1]) {
++    const start = positions.length / 3;
++    for (let row = 0; row < rows; row++) {
++      const z = row / (rows - 1) * TILE_LENGTH;
++      const axis = tileSurface(type, z);
++      const gap = type === 'bridge' ? 6 * Math.sin(Math.PI * z / TILE_LENGTH) : 0;
++      flank.forEach((x, col) => {
++        positions.push(axis.x + side * x, axis.y + profile[col] - gap, z);
++      });
++    }
++    for (let row = 1; row < rows; row++) {
++      for (let col = 1; col < columns; col++) {
++        const d = start + row * columns + col;
++        const a = d - columns - 1, b = d - columns, c = d - 1;
++        if (side > 0) indices.push(a, c, b, b, c, d);
++        else indices.push(a, b, c, b, d, c);
++      }
++    }
++  }
++  const geometry = new THREE.BufferGeometry();
++  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
++  geometry.setIndex(indices);
++  geometry.computeVertexNormals();
++  return geometry;
++}
++
++function disposeModels(models) {
++  const geometries = new Set();
++  const materials = new Set();
++  for (const {scene} of models) {
++    scene.traverse(object => {
++      if (object.geometry) geometries.add(object.geometry);
++      if (object.material) {
++        for (const material of [object.material].flat()) materials.add(material);
++      }
++      if (object.isSkinnedMesh) object.skeleton.dispose();
++    });
++  }
++  for (const material of materials) material.dispose();
++  for (const geometry of geometries) geometry.dispose();
++}
++
++async function loadAssets(isDisposed) {
++  const modelLoader = new GLTFLoader(), textureLoader = new THREE.TextureLoader();
++  const paths = [SKIER, ...Object.values(PROP_MODELS), ...new Set(['straight', ...TILE_SEQUENCE])].map(
++    path => path.endsWith('.glb') ? path : `runner/tiles/${path}.glb`,
++  );
++  const loadTexture = async path => {
++    const texture = await textureLoader.loadAsync(new URL(path, ASSETS).href);
++    texture.colorSpace = THREE.SRGBColorSpace;
++    texture.generateMipmaps = false;
++    texture.minFilter = THREE.LinearFilter;
++    return texture;
++  };
++  const [models, textures] = await Promise.all([
++    Promise.allSettled(paths.map(path => modelLoader.loadAsync(new URL(path, ASSETS).href))),
++    Promise.allSettled([
++      ...Object.keys(THEMES).map(theme => loadTexture(`themes/${theme}/textures/sky.png`)),
++      loadTexture('content/effects/powder-particle.png'),
++    ]),
++  ]);
++  const failure = models.find(result => result.status === 'rejected');
++  if (failure || isDisposed()) {
++    disposeModels(models.flatMap(result => result.status === 'fulfilled' ? [result.value] : []));
++    textures.forEach(result => result.value?.dispose());
++    throw failure?.reason ?? Object.assign(new Error('alpine.runner.disposed'), {disposed: true});
++  }
++  const skies = Object.fromEntries(Object.keys(THEMES).map((id, i) => [id, textures[i].value ?? null]));
++  return {
++    models: Object.fromEntries(paths.map((path, i) => [path, models[i].value])),
++    skies,
++    powder: textures.at(-1).value ?? null,
++    missingTextures: textures.filter(result => result.status === 'rejected').length,
++  };
++}
++
++function bakeScenery(model, material) {
++  model.updateMatrixWorld(true);
++  const geometries = [];
++  model.traverse(object => {
++    if (!object.isMesh) return;
++    const source = object.geometry;
++    const part = source.clone().applyMatrix4(object.matrixWorld);
++    for (const attribute of Object.keys(part.attributes)) {
++      if (attribute !== 'position' && attribute !== 'normal') part.deleteAttribute(attribute);
++    }
++    if (!part.index) part.setIndex(Array.from({length: part.attributes.position.count}, (_, i) => i));
++    const color = object.material.color;
++    const tint = object.material.emissive, strength = object.material.emissiveIntensity * .35;
++    const colors = new Float32Array(part.attributes.position.count * 3);
++    for (let i = 0; i < colors.length; i += 3) {
++      colors[i] = color.r + tint.r * strength;
++      colors[i + 1] = color.g + tint.g * strength;
++      colors[i + 2] = color.b + tint.b * strength;
++    }
++    part.setAttribute('color', new THREE.BufferAttribute(colors, 3));
++    geometries.push(part);
++  });
++  const combined = mergeGeometries(geometries);
++  geometries.forEach(geometry => geometry.dispose());
++  if (!combined) throw new Error('alpine.runner.scenery.geometry');
++  return new THREE.Mesh(combined, material);
++}
++
++function createPropPool(scene, template) {
++  const instances = new THREE.InstancedMesh(template.geometry, template.material, MAX_VISIBLE_EVENTS);
++  instances.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
++  instances.count = 0;
++  instances.frustumCulled = false;
++  scene.add(instances);
++  return {instances, count: 0};
++}
++
++function createRiderAnimation(gltf) {
++  const mixer = new THREE.AnimationMixer(gltf.scene);
++  const root = gltf.scene.getObjectByName('Root');
++  const actions = new Map(gltf.animations.map(clip => [clip.name, mixer.clipAction(clip)]));
++  let current, lane = 1, laneStart = -1, laneClip, previous = 0;
++  return {
++    render(snapshot) {
++      const elapsed = snapshot.elapsed ?? 0;
++      const delta = Math.max(0, Math.min(.1, elapsed - previous));
++      if (elapsed < previous) {
++        laneStart = -1;
++        lane = snapshot.lane;
++      }
++      previous = elapsed;
++      if (snapshot.lane !== lane) {
++        laneClip = snapshot.lane < lane ? 'lane_left' : 'lane_right';
++        laneStart = elapsed;
++        lane = snapshot.lane;
++      }
++      let clip = 'glide', time = elapsed % 1.2;
++      if (snapshot.status === 'crashed') {
++        clip = 'fall_forward';
++        time = .65;
++      } else if (snapshot.stance === 'jump') {
++        // Sample the authored poses in sequence. World height comes from the simulation.
++        const t = snapshot.jumpProgress ?? 0;
++        clip = t < .3 ? 'jump_rise' : t < .6 ? 'jump_apex' : 'jump_land';
++        time = t < .3 ? t : t < .6 ? t - .3 : t - .6;
++      } else if (snapshot.sliding) {
++        clip = 'slide';
++        // A slide becomes effective immediately. Sample the source clip's crouched hold.
++        time = .2 + .4 * (snapshot.slideProgress ?? 0);
++      } else if (elapsed < laneStart + .4) {
++        clip = laneClip;
++        time = elapsed - laneStart;
++      }
++      const next = actions.get(clip) ?? actions.get('glide');
++      if (!next) return;
++      if (current !== next) {
++        current?.stop();
++        current = next.reset().play();
++        current.paused = true;
++      }
++      current.time = time;
++      mixer.update(delta);
++      if (snapshot.stance === 'jump' && root) root.position.y = 0;
++    },
++    dispose() {
++      mixer.stopAllAction();
++      mixer.uncacheRoot(gltf.scene);
++    },
++  };
++}
++
++export async function createAlpineRunnerView(host, {
++  canvas, quality: initialQuality = 'high', theme: initialTheme = '01-pine', isDisposed = () => false,
++} = {}) {
++  if (!host || !canvas) throw new TypeError('alpine.runner.canvas');
++  const {models, skies, powder, missingTextures} = await loadAssets(isDisposed);
++  let renderer;
++  try {
++    renderer = new THREE.WebGLRenderer({canvas, antialias: false, powerPreference: 'high-performance'});
++  } catch (error) {
++    disposeModels(Object.values(models));
++    for (const texture of [...Object.values(skies), powder]) texture?.dispose();
++    throw error;
++  }
++  renderer.outputColorSpace = THREE.SRGBColorSpace;
++  renderer.toneMapping = THREE.ACESFilmicToneMapping;
++  renderer.toneMappingExposure = 1.11;
++
++  const scene = new THREE.Scene();
++  const camera = new THREE.PerspectiveCamera(54, 1, .1, 185);
++  const hemi = new THREE.HemisphereLight('#effcff', '#557c92', 2.4);
++  const sun = new THREE.DirectionalLight('#fff1dc', 2.7);
++  sun.position.set(-10, 18, -8);
++  scene.add(hemi, sun);
++  const fog = new THREE.Fog('#d7e4d9', 32, 112);
++  scene.fog = fog;
++
++  const owned = [];
++  const own = object => (owned.push(object), object);
++  const bankMaterial = own(new THREE.MeshLambertMaterial({color: '#dce8e2'}));
++  const sceneryMaterial = own(new THREE.MeshLambertMaterial({vertexColors: true}));
++  const baked = path => {
++    const mesh = bakeScenery(models[path].scene, sceneryMaterial);
++    own(mesh.geometry);
++    return mesh;
++  };
++  const terrain = Object.fromEntries([...new Set(['straight', ...TILE_SEQUENCE])].map(type => {
++    const template = baked(`runner/tiles/${type}.glb`);
++    template.add(new THREE.Mesh(own(shoulderGeometry(type)), bankMaterial));
++    return [type, template];
++  }));
++  const slots = Array.from({length: TILE_COUNT}, () => ({tile: null, model: null}));
++  const props = Object.fromEntries(Object.entries(PROP_MODELS).map(([kind, path]) => [
++    kind, createPropPool(scene, baked(path)),
++  ]));
++  const rider = models[SKIER];
++  delete models[SKIER];
++  disposeModels(Object.values(models));
++
++  const player = new THREE.Group();
++  player.add(rider.scene);
++  scene.add(player);
++  const animation = createRiderAnimation(rider);
++  const shadow = new THREE.Mesh(
++    own(new THREE.CircleGeometry(.77, 16)),
++    own(new THREE.MeshBasicMaterial({color: '#3a6480', transparent: true, opacity: .24, depthWrite: false})),
++  );
++  scene.add(shadow);
++  const shield = new THREE.Mesh(
++    own(new THREE.SphereGeometry(1.08, 12, 8)),
++    own(new THREE.MeshBasicMaterial({color: '#46e1e0', transparent: true, opacity: .17, wireframe: true, depthWrite: false})),
++  );
++  shield.position.y = .85;
++  player.add(shield);
++
++  const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
++  const sprayCount = 28;
++  const sprayPositions = new Float32Array(sprayCount * 3);
++  const sprayGeometry = own(new THREE.BufferGeometry());
++  const sprayAttribute = new THREE.BufferAttribute(sprayPositions, 3).setUsage(THREE.DynamicDrawUsage);
++  sprayGeometry.setAttribute('position', sprayAttribute);
++  const spray = new THREE.Points(sprayGeometry, own(new THREE.PointsMaterial({
++    map: powder, size: .38, transparent: true, opacity: .74, depthWrite: false,
++  })));
++  spray.frustumCulled = false;
++  scene.add(spray);
++
++  let quality = initialQuality;
++  let theme = initialTheme;
++  let width = 1, height = 1;
++  let disposed = false;
++  let last = {triangles: 0, calls: 0, points: 0, tiles: 0, visibleEvents: 0};
++  const mobile = globalThis.matchMedia?.('(pointer: coarse)').matches ?? false;
++  const transform = new THREE.Object3D();
++  const propPools = Object.values(props);
++
++  function fitSky() {
++    const texture = scene.background;
++    if (!texture?.isTexture) return;
++    const aspect = camera.aspect;
++    const textureAspect = texture.image.width / texture.image.height;
++    const x = Math.min(1, aspect / textureAspect), y = Math.min(1, textureAspect / aspect);
++    texture.repeat.set(x, y);
++    texture.offset.set((1 - x) / 2, (1 - y) / 2);
++    texture.updateMatrix();
++  }
++
++  function resize() {
++    width = Math.max(1, host.clientWidth);
++    height = Math.max(1, host.clientHeight);
++    renderer.setSize(width, height, false);
++    camera.aspect = width / height;
++    camera.fov = camera.aspect < .8 ? 60 : 51;
++    camera.updateProjectionMatrix();
++    fitSky();
++  }
++
++  function setQuality(value) {
++    quality = value === 'low' ? 'low' : 'high';
++    renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? .8 : mobile ? 1.1 : 1.5));
++    resize();
++  }
++
++  function setTheme(value) {
++    theme = Object.hasOwn(THEMES, value) ? value : '01-pine';
++    const look = THEMES[theme];
++    scene.background = skies[theme] ?? new THREE.Color(look.sky);
++    fog.color.set(look.fog);
++    bankMaterial.color.set(look.bank);
++    sun.color.set(look.light);
++    sun.intensity = theme === '04-aurora' ? 1.7 : 2.7;
++    fitSky();
++  }
++
++  setQuality(initialQuality);
++  setTheme(initialTheme);
++  const observer = new ResizeObserver(resize);
++  observer.observe(host);
++
++  function syncTiles(distance) {
++    const first = Math.floor(distance / TILE_LENGTH) - 1;
++    for (let i = first; i < first + TILE_COUNT; i++) {
++      const slot = slots[(i + TILE_COUNT) % TILE_COUNT];
++      if (slot.tile !== i) {
++        if (slot.model) scene.remove(slot.model);
++        slot.tile = i;
++        slot.model = terrain[tileType(i)].clone(true);
++        scene.add(slot.model);
++      }
++      slot.model.position.z = i * TILE_LENGTH - distance;
++    }
++  }
++
++  function syncProps(events, distance, elapsed) {
++    const reach = quality === 'low' ? 94 : 116;
++    let rendered = 0;
++    for (const pool of propPools) pool.count = 0;
++    for (const event of events) {
++      const z = event.distance - distance;
++      const pool = props[event.kind];
++      if (!pool || z < -3 || z > reach) continue;
++      const ground = surfaceAt(event.distance);
++      transform.position.set(ground.x + (1 - event.lane) * LANE_WIDTH, ground.y, z);
++      transform.rotation.set(ground.pitch, ground.yaw, 0, 'YXZ');
++      transform.scale.setScalar(1);
++      if (event.kind === 'jump') transform.scale.y = .4;
++      if (PICKUPS.has(event.kind)) {
++        transform.position.y += .8 + .1 * Math.sin(elapsed * 3 + event.distance);
++        transform.rotation.y += elapsed * 2.3 + event.distance * .09;
++      }
++      transform.updateMatrix();
++      pool.instances.setMatrixAt(pool.count, transform.matrix);
++      pool.count++;
++      rendered++;
++      if (rendered >= MAX_VISIBLE_EVENTS) break;
++    }
++    for (const {instances, count} of propPools) {
++      instances.count = count;
++      if (count > 0) instances.instanceMatrix.needsUpdate = true;
++    }
++    return rendered;
++  }
++
++  function syncSpray(snapshot) {
++    spray.visible = !reducedMotion && snapshot.status === 'running' && snapshot.speed > 0 && !snapshot.jumpHeight;
++    if (!spray.visible) return;
++    const n = quality === 'low' ? 14 : sprayCount;
++    sprayGeometry.setDrawRange(0, n);
++    for (let i = 0; i < n; i++) {
++      const age = (snapshot.elapsed * 2.6 + i / n) % 1;
++      const t = i * 12.27;
++      const j = i * 3;
++      sprayPositions[j] = player.position.x + Math.sin(t) * (.24 + age * .67);
++      sprayPositions[j + 1] = player.position.y + .08 + age * .3;
++      sprayPositions[j + 2] = -age * 3.3 - .45;
++    }
++    sprayAttribute.needsUpdate = true;
++  }
++
++  function render(snapshot) {
++    if (disposed) return;
++    const distance = snapshot.distance ?? 0;
++    const ground = surfaceAt(distance);
++    const laneX = (1 - (snapshot.lanePosition ?? 1)) * LANE_WIDTH;
++    player.position.set(ground.x + laneX, ground.y + (snapshot.jumpHeight ?? 0), 0);
++    player.rotation.set(ground.pitch, ground.yaw, 0, 'YXZ');
++    animation.render(snapshot);
++    shield.visible = Boolean(snapshot.powerups?.shield);
++    shadow.position.set(player.position.x, ground.y + .026, 0);
++    shadow.rotation.set(-Math.PI / 2 + ground.pitch, 0, -ground.yaw);
++    shadow.material.opacity = .24 / (1 + (snapshot.jumpHeight ?? 0));
++    syncTiles(distance);
++    const visibleEvents = syncProps(snapshot.nextEvents ?? [], distance, snapshot.elapsed ?? 0);
++    syncSpray(snapshot);
++    const portrait = camera.aspect < .8;
++    const cameraDistance = portrait ? Math.max(9.2, 4.8 / camera.aspect) : 6.5;
++    const ahead = surfaceAt(distance + 13);
++    camera.position.set(ground.x + laneX * .23, ground.y + (portrait ? 4.2 : 3.5), -cameraDistance);
++    camera.lookAt(ahead.x, ahead.y + .9, 13);
++    renderer.render(scene, camera);
++    const {triangles, calls, points} = renderer.info.render;
++    last = {triangles, calls, points, tiles: TILE_COUNT, visibleEvents};
++  }
++
++  return {
++    mode: 'webgl',
++    render,
++    setQuality,
++    setTheme,
++    metrics: () => ({
++      ...last, quality, theme, width, height, pixelRatio: renderer.getPixelRatio(),
++      triangleBudget: ALPINE_RUNNER_TRIANGLE_BUDGET[quality], missingTextures,
++    }),
++    dispose() {
++      if (disposed) return;
++      disposed = true;
++      observer.disconnect();
++      animation.dispose();
++      for (const {instances} of propPools) instances.dispose();
++      disposeModels([rider]);
++      for (const resource of owned) resource.dispose();
++      for (const texture of [...Object.values(skies), powder]) texture?.dispose();
++      renderer.dispose();
++      renderer.forceContextLoss();
++    },
++  };
++}
+diff --git a/workout/island/minigames/alpine-runner.css b/workout/island/minigames/alpine-runner.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..faa0d4815e356b7c82e23c850c596794c2a173e7
+--- /dev/null
++++ b/workout/island/minigames/alpine-runner.css
+@@ -0,0 +1,151 @@
++.game-screen[data-alpine-mode="runner"] {
++  --runner-ink: #102d43;
++  --runner-snow: #f0f9ff;
++  --runner-accent: #ffd486;
++}
++
++.game-screen[data-alpine-mode="runner"] .minigame-canvas {
++  touch-action: none;
++  user-select: none;
++}
++
++.game-screen[data-alpine-mode="runner"] .game-status:empty { display: none; }
++.game-screen[data-alpine-mode="runner"] .game-controls.game-controls {
++  display: block;
++  inset: auto max(8px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
++  width: auto;
++  padding: 0;
++  overflow: visible;
++  background: transparent;
++  pointer-events: none;
++}
++
++.alpine-runner-menu {
++  position: absolute;
++  z-index: 2;
++  inset-inline: max(14px, env(safe-area-inset-left));
++  top: 50%;
++  transform: translateY(-50%);
++  width: min(26rem, calc(100% - 28px));
++  max-height: calc(100% - 7rem);
++  margin-inline: auto;
++  padding: clamp(12px, 3.8vw, 24px);
++  border: 1px solid #c4dae9;
++  border-radius: 20px;
++  overflow: auto;
++  background: #f0f9fff2;
++  color: var(--runner-ink);
++  text-align: start;
++  box-shadow: 0 14px 50px #12334b47;
++}
++
++.alpine-runner-menu h1 { margin: 0 0 .2em; font-size: clamp(1.6rem, 6vw, 2.55rem); line-height: 1.03; }
++.alpine-runner-menu p { margin: .5em 0; line-height: 1.35; }
++.alpine-runner-goal { font-weight: 800; }
++.alpine-runner-best, .alpine-runner-help { font-size: .9rem; }
++.alpine-runner-themes {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 6px;
++  min-width: 0;
++  width: 100%;
++  margin: .7em 0;
++  padding: 0;
++  border: 0;
++}
++.alpine-runner-themes legend { margin-block-end: 5px; padding: 0; font-size: .85rem; font-weight: 700; }
++.alpine-runner-themes button {
++  min-height: 38px;
++  padding: 3px 4px;
++  border: 1px solid #9db8c9;
++  border-radius: 7px;
++  background: #fff;
++  color: var(--runner-ink);
++  font: inherit;
++  font-size: .78rem;
++  line-height: 1.2;
++}
++.alpine-runner-themes button[aria-pressed="true"] {
++  border-color: #105879;
++  background: #105879;
++  color: #fff;
++}
++.alpine-runner-start.primary-button {
++  width: 100%;
++  min-height: 44px;
++  border-color: #c58a35;
++  background: var(--runner-accent);
++  color: var(--runner-ink);
++  font-weight: 800;
++}
++.alpine-runner-loading { font-size: .85rem; }
++
++.alpine-runner-hud {
++  position: absolute;
++  z-index: 1;
++  top: calc(env(safe-area-inset-top, 0px) + 72px);
++  inset-inline: 12px;
++  width: min(calc(100% - 24px), 23rem);
++  margin-inline: auto;
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 2px;
++  padding: 2px;
++  color: var(--runner-snow);
++  text-align: center;
++  pointer-events: none;
++}
++.alpine-runner-hud > div {
++  display: grid;
++  gap: 2px;
++  padding: 6px 3px;
++  border-radius: 7px;
++  background: #112d44db;
++}
++.alpine-runner-hud span { font-size: .76rem; }
++.alpine-runner-hud bdi { font-size: 1.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
++.alpine-runner-power {
++  position: absolute;
++  top: calc(env(safe-area-inset-top, 0px) + 128px);
++  left: 50%;
++  transform: translateX(-50%);
++  max-width: calc(100% - 30px);
++  width: max-content;
++  margin: 0;
++  padding: 4px 9px;
++  border-radius: 7px;
++  background: #65430b;
++  color: #fff0d0;
++  font-size: .8rem;
++  text-align: center;
++  pointer-events: none;
++}
++.alpine-runner-input {
++  display: flex;
++  justify-content: center;
++  gap: 8px;
++  pointer-events: none;
++}
++.alpine-runner-input button {
++  min-width: 44px;
++  min-height: 44px;
++  padding: 0;
++  border: 1px solid #c8e8f6;
++  border-radius: 11px;
++  background: #12354ddf;
++  color: #fff;
++  font: 700 1.22rem/1 system-ui, sans-serif;
++  pointer-events: auto;
++}
++.alpine-runner-menu[hidden], .alpine-runner-hud[hidden], .alpine-runner-input[hidden], .alpine-runner-power[hidden] { display: none; }
++
++@media (orientation: landscape) and (max-height: 520px) {
++  .alpine-runner-menu { width: min(23rem, calc(100% - 28px)); padding: 10px 15px; max-height: calc(100% - 5.2rem); top: calc(50% + 18px); }
++  .alpine-runner-menu h1 { font-size: 1.65rem; }
++  .alpine-runner-menu p { margin: .24em 0; }
++  .alpine-runner-themes { margin-block: .4em; }
++  .alpine-runner-themes button { min-height: 31px; }
++  .alpine-runner-hud { top: calc(env(safe-area-inset-top, 0px) + 12px); }
++  .alpine-runner-power { top: calc(env(safe-area-inset-top, 0px) + 68px); }
++  .alpine-runner-input { justify-content: flex-end; }
++}
