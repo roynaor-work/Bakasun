@@ -1,0 +1,396 @@
+diff --git a/workout/island/learning/banks.mjs b/workout/island/learning/banks.mjs
+index c4f8f6d..0acb815 100644
+--- a/workout/island/learning/banks.mjs
++++ b/workout/island/learning/banks.mjs
+@@ -37,16 +37,56 @@ export const ANIMALS = [
+  ['🦘','קֶנְגּוּרוּ','יַבָּשָׁה','צְמָחִים','גּוּר',false],
+  ['🐺','זְאֵב','יַבָּשָׁה','בָּשָׂר','גּוּר',true],
+ ].map(([icon,name,habitat,food,baby,local])=>({icon,name,habitat,food,baby,local}));
+-export const OPPOSITES=[['גדול','קטן'],['חם','קר'],['יום','לילה'],['למעלה','למטה'],['פתוח','סגור'],['מלא','ריק'],['מהיר','איטי'],['ארוך','קצר'],['קרוב','רחוק'],['שמח','עצוב'],['קל','כבד'],['חדש','ישן']];
+-export const SYNONYMS=[['שמח','עליז'],['יפה','נאה'],['גדול','ענק'],['חבר','ידיד'],['בית','מעון'],['מהיר','זריז'],['אור','זוהר'],['קטן','זעיר'],['דרך','שביל'],['שקט','דומם']];
++export const OPPOSITES=[
++ ['גדול','קטן','גָּדוֹל','קָטָן'],
++ ['חם','קר','חַם','קַר'],
++ ['יום','לילה','יוֹם','לַיְלָה'],
++ ['למעלה','למטה','לְמַעְלָה','לְמַטָּה'],
++ ['פתוח','סגור','פָּתוּחַ','סָגוּר'],
++ ['מלא','ריק','מָלֵא','רֵיק'],
++ ['מהיר','איטי','מָהִיר','אִטִּי'],
++ ['ארוך','קצר','אָרֹךְ','קָצָר'],
++ ['קרוב','רחוק','קָרוֹב','רָחוֹק'],
++ ['שמח','עצוב','שָׂמֵחַ','עָצוּב'],
++ ['קל','כבד','קַל','כָּבֵד'],
++ ['חדש','ישן','חָדָשׁ','יָשָׁן'],
++];
++export const SYNONYMS=[
++ ['שמח','עליז','שָׂמֵחַ','עַלִּיז'],
++ ['יפה','נאה','יָפֶה','נָאֶה'],
++ ['גדול','ענק','גָּדוֹל','עֲנָק'],
++ ['חבר','ידיד','חָבֵר','יָדִיד'],
++ ['בית','מעון','בַּיִת','מָעוֹן'],
++ ['מהיר','זריז','מָהִיר','זָרִיז'],
++ ['אור','זוהר','אוֹר','זֹהַר'],
++ ['קטן','זעיר','קָטָן','זָעִיר'],
++ ['דרך','שביל','דֶּרֶךְ','שְׁבִיל'],
++ ['שקט','דומם','שָׁקֵט','דּוֹמֵם'],
++];
+ export const FACTS=[
+- ['🐬','דולפין','הוא יונק ונושם אוויר','נושם אוויר','נושם רק במים','הוא צמח'],
+- ['🐘','פיל','משתמש בחדק כדי להריח ולשתות','חדק','כנפיים','סנפירים'],
+- ['🦔','קיפוד','מתכדרר והקוצים שלו מגינים עליו','קוצים','נוצות','קשקשים'],
+- ['🦅','נשר','דואה על זרמי אוויר ויש לו נוצות','נוצות','פרווה','קשקשים'],
+- ['🐟','דג','נושם במים בעזרת זימים','זימים','חדק','אוזניים'],
+- ['🦒','ג׳ירפה','מגיעה לעלים גבוהים בעזרת צוואר ארוך','צוואר ארוך','סנפיר גדול','כנפיים'],
+- ['🐔','תרנגולת','מטילה ביצים ומהן בוקעים אפרוחים','ביצים','גורים חיים','זרעים'],
+- ['🦘','קנגורו','נושא את הגור שלו בכיס','כיס','קן','שריון'],
++ ['🐬',
++  ['דולפין','הוא יונק ונושם אוויר','נושם אוויר','נושם רק במים','הוא צמח'],
++  ['דּוֹלְפִין','הוּא יוֹנֵק וְנוֹשֵׁם אֲוִיר','נוֹשֵׁם אֲוִיר','נוֹשֵׁם רַק בַּמַּיִם','הוּא צֶמַח']],
++ ['🐘',
++  ['פיל','משתמש בחדק כדי להריח ולשתות','חדק','כנפיים','סנפירים'],
++  ['פִּיל','מִשְׁתַּמֵּשׁ בְּחֵדֶק כְּדֵי לְהָרִיחַ וְלִשְׁתּוֹת','חֵדֶק','כְּנָפַיִם','סְנַפִּירִים']],
++ ['🦔',
++  ['קיפוד','מתכדרר והקוצים שלו מגינים עליו','קוצים','נוצות','קשקשים'],
++  ['קִפּוֹד','מִתְכַּדְרֵר וְהַקּוֹצִים שֶׁלּוֹ מְגִנִּים עָלָיו','קוֹצִים','נוֹצוֹת','קַשְׂקַשִּׂים']],
++ ['🦅',
++  ['נשר','דואה על זרמי אוויר ויש לו נוצות','נוצות','פרווה','קשקשים'],
++  ['נֶשֶׁר','דּוֹאֶה עַל זִרְמֵי אֲוִיר וְיֵשׁ לוֹ נוֹצוֹת','נוֹצוֹת','פַּרְוָה','קַשְׂקַשִּׂים']],
++ ['🐟',
++  ['דג','נושם במים בעזרת זימים','זימים','חדק','אוזניים'],
++  ['דָּג','נוֹשֵׁם בַּמַּיִם בְּעֶזְרַת זִימִים','זִימִים','חֵדֶק','אָזְנַיִם']],
++ ['🦒',
++  ['ג׳ירפה','מגיעה לעלים גבוהים בעזרת צוואר ארוך','צוואר ארוך','סנפיר גדול','כנפיים'],
++  ['גִּ׳ירָפָה','מַגִּיעָה לְעָלִים גְּבוֹהִים בְּעֶזְרַת צַוָּאר אָרֹךְ','צַוָּאר אָרֹךְ','סְנַפִּיר גָּדוֹל','כְּנָפַיִם']],
++ ['🐔',
++  ['תרנגולת','מטילה ביצים ומהן בוקעים אפרוחים','ביצים','גורים חיים','זרעים'],
++  ['תַּרְנְגֹלֶת','מְטִילָה בֵּיצִים וּמֵהֶן בּוֹקְעִים אֶפְרוֹחִים','בֵּיצִים','גּוּרִים חַיִּים','זְרָעִים']],
++ ['🦘',
++  ['קנגורו','נושא את הגור שלו בכיס','כיס','קן','שריון'],
++  ['קֶנְגּוּרוּ','נוֹשֵׂא אֶת הַגּוּר שֶׁלּוֹ בַּכִּיס','כִּיס','קֵן','שִׁרְיוֹן']],
+ ];
+ export const SOUNDS=[['🐶','כֶּלֶב','הַב הַב'],['🐱','חָתוּל','מְיָאוּ'],['🐄','פָּרָה','מוּ'],['🐑','כִּבְשָׂה','מֶה מֶה'],['🐔','תַּרְנְגֹלֶת','קוֹ קוֹ קוֹ'],['🐴','סוּס','הִי הִי'],['🐷','חֲזִיר','אוֹינְק אוֹינְק'],['🐤','אֶפְרוֹחַ','צִיף צִיף']];
+diff --git a/workout/island/learning/interface.mjs b/workout/island/learning/interface.mjs
+index 443475a..c95d151 100644
+--- a/workout/island/learning/interface.mjs
++++ b/workout/island/learning/interface.mjs
+@@ -1,6 +1,7 @@
+ import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-18';
+ import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-18';
+ import {unpoint} from './questions.mjs?v=island-v2-20261107-18';
++import {correctVoice,retryVoice,pictureRevealVoice,feedbackVoice,roundVoice} from './spoken-copy.mjs?v=island-v2-20261107-18';
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='learning-answer')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+ const phrase=(text,q)=>q.level<=4?text:unpoint(text);
+@@ -39,7 +40,7 @@ export class LearningInterface {
+     const dialog=this.ui.openModal('learning.daily','learning.dailyHint'),s=this.engine.learningStatus();dialog.dataset.dailyMission='true';dialog.classList.add('learning-daily');this.pauseMap();dialog.querySelector('.modal-subtitle').textContent=s.target===1?'סבב קצר של 5 שאלות פותח את המשחקים':'שני סבבים של 8 שאלות פותחים את המשחקים';
+     dialog.append(el('div','learning-daily-progress',`${s.complete?'✅':'📚'} ${Math.min(s.target,s.rounds)} / ${s.target}`));
+     const progress=el('progress');progress.max=s.target;progress.value=Math.min(s.target,s.rounds);progress.setAttribute('aria-label','סבבי לימוד היום');dialog.append(progress);
+-    dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד!':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
++    dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
+     const choices=el('div','learning-stations');
+     for(const [id,station]of Object.entries(STATIONS)){
+       const built=this.engine.state.buildings.some(b=>b.typeId===station.building),level=this.engine.state.learning.stations[id].level;
+@@ -52,7 +53,7 @@ export class LearningInterface {
+     const label=el('div','learning-parent'),input=button('','learning-required',()=>{this.engine.setLearningRequired(!this.engine.state.learning.required);render();},'learning-small');input.setAttribute('role','switch');input.setAttribute('aria-label','חובת משימת היום לפני משחקים');
+     const render=()=>{const required=this.engine.state.learning.required;input.textContent=required?'✓':'○';input.setAttribute('aria-checked',String(required));};render();label.append(input,el('span','','חובת משימת היום לפני משחקים'));dialog.append(label);
+     const ages=el('fieldset','learning-age');ages.append(el('legend','','גיל הילד או הילדה'));
+-    ages.append(el('p','','בחירת גיל קובעת את רמת ההתחלה בכל התחנות. לאחר מכן הרמה מסתגלת לתשובות.'));
++    ages.append(el('p','','הגיל קובע מאיזו רמה מתחילים בכל תחנה. אחר כך הרמה משתנה לפי התשובות.'));
+     for(let age=4;age<=10;age++){const b=button(String(age),'learning-age',()=>{this.engine.setLearningAge(age);for(const n of ages.querySelectorAll('button'))n.setAttribute('aria-pressed',String(Number(n.textContent)===age));},'learning-small');b.dataset.age=age;b.setAttribute('aria-label',`גיל ${age}, רמת התחלה ${levelForAge(age)}`);b.setAttribute('aria-pressed',String(this.engine.state.learning.age===age));ages.append(b);}dialog.append(ages);
+   }
+   start(station){
+@@ -76,7 +77,7 @@ export class LearningInterface {
+       this.body.append(this.visualNode=this.visual(q));const answers=el('div','learning-answers');
+       q.options.forEach(value=>{const b=button(value,'learning-answer',()=>this.answer(value));b.dataset.value=value;if(q.optionSizes)b.style.fontSize=q.optionSizes[value]+'px';answers.append(b);});this.body.append(answers);
+     }else if(q.kind==='word')this.word(q);else if(q.kind==='jigsaw')this.jigsaw(q);else this.memory(q);
+-    this.help=button(q.level<=2?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.level<=2?'💡':q.hint;this.voice.speak(q.hint);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
++    this.help=button(q.level<=2?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.level<=2?'💡':q.hint;this.voice.speak(q.hintVoice);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
+     const instance=this.engine.state.buildings.find(b=>b.typeId===STATIONS[round.station].building);if(instance){const manage=button('🏠','learning-building',()=>{this.ui.closeModal();this.ui.showInfo(instance.id,{manage:true});},'learning-small');manage.setAttribute('aria-label','ניהול מבנה הלימוד');this.footer.append(manage);}
+     this.voice.speak(q.voice);queueMicrotask(()=>prompt.focus());
+   }
+@@ -121,8 +122,10 @@ export class LearningInterface {
+   answer(value){
+     const round=this.engine.learningRound(),q=round?.question;if(!q)return;const result=this.engine.answerLearning(value);if(!result.ok)return;
+     this.feedback.dataset.state=result.correct?'correct':result.resolved?'revealed':'hint';
+-    const spoken=result.correct?phrase('⭐ כָּל הַכָּבוֹד! מַמְשִׁיכִים לִלְמֹד.',q):!result.resolved?`${phrase('נְנַסֶּה שׁוּב. ',q)}${result.hint}`:`${phrase('לוֹמְדִים בְּיַחַד. הַתְּשׁוּבָה: ',q)}${['memory','jigsaw'].includes(q.kind)?phrase('הִנֵּה הַתְּמוּנָה הַשְּׁלֵמָה.',q):(q.answerLabel||result.answer)}`;
+-    this.feedback.textContent=q.level<=2?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):spoken;this.voice.speak(!result.correct&&result.resolved&&q.level<=2?`${phrase('הַתְּשׁוּבָה הִיא: ',q)}${q.answerVoice}`:spoken);
++    const puzzle=q.kind==='memory'||q.kind==='jigsaw';
++    const display=result.correct?phrase('⭐ '+correctVoice,q):!result.resolved?`${phrase(retryVoice,q)} ${result.hint}`:puzzle?phrase(pictureRevealVoice,q):`${phrase('לוֹמְדִים בְּיַחַד. הַתְּשׁוּבָה: ',q)}${q.answerLabel||result.answer}`;
++    this.feedback.textContent=q.level<=2?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):display;
++    this.voice.speak(feedbackVoice(q,result));
+     if(!result.resolved){if(q.kind==='choice'){const b=[...this.body.querySelectorAll('[data-action=learning-answer]')].find(b=>b.dataset.value===value);if(b)b.disabled=true;}return;}
+     if(['memory','jigsaw'].includes(q.kind))this.revealPuzzle?.();
+     for(const b of this.body.querySelectorAll('button')){b.disabled=true;if(q.kind==='choice'&&b.dataset.value===q.answer)b.dataset.correct='true';}
+@@ -142,7 +145,7 @@ export class LearningInterface {
+       dialog.append(stars,el('h3','',f(STATIONS[result.station].title)),el('p','',f(`${result.firstTry} מִתּוֹךְ ${result.total} בַּנִּסָּיוֹן הָרִאשׁוֹן · ${result.retried} אַחֲרֵי רֶמֶז`)),money,el('p','',f(`רָמָה ${result.level} · ${Math.min(s.target,s.rounds)}/${s.target} סְבָבִים הַיּוֹם`)));
+     }
+     const daily=button(result.pictureOnly?'📚':'📚 משימת היום','learning-result-daily',()=>this.daily()),map=button(result.pictureOnly?'🏝️':'🏝️ חוזרים לעיר','learning-result-map',()=>this.ui.closeModal(),'learning-small');daily.setAttribute('aria-label','משימת היום');map.setAttribute('aria-label','חוזרים לעיר');dialog.append(daily,map);
+-    this.voice.speak(`כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.`);
++    this.voice.speak(roundVoice(result));
+   }
+   dispose(){this.clearQuestion();clearInterval(this.dayTimer);clearInterval(this.clockTimer);this.stopVoiceListener();this.voice.dispose();this.unsubscribe();this.panel.remove();}
+ }
+diff --git a/workout/island/learning/questions.mjs b/workout/island/learning/questions.mjs
+index 1d57040..5dffdc9 100644
+--- a/workout/island/learning/questions.mjs
++++ b/workout/island/learning/questions.mjs
+@@ -1,4 +1,5 @@
+ import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS} from './banks.mjs?v=island-v2-20261107-18';
++import {numberVoice,quantityVoice,pictureRevealVoice} from './spoken-copy.mjs?v=island-v2-20261107-18';
+ export const unpoint = s=>String(s).replace(/[\u0591-\u05c7]/g,'');
+ export function shuffled(items,rng=Math.random) {
+   const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;
+@@ -10,12 +11,16 @@ function choice(prompt,visual,correct,others,hint,rng) {
+   if(pool.length<2)throw Error('learning distractors');
+   return {kind:'choice',prompt,visual,answer,options:shuffled([answer,...shuffled(pool,rng).slice(0,2)],rng),hint};
+ }
++const letterNames={א:'אָלֶף',ב:'בֵּית',ג:'גִּימֶל',ד:'דָּלֶת',ה:'הֵא',ו:'וָו',ז:'זַיִן',ח:'חֵית',ט:'טֵית',י:'יוֹד',כ:'כָּף',ל:'לָמֶד',מ:'מֵם',נ:'נוּן',ס:'סָמֶךְ',ע:'עַיִן',פ:'פֵּא',צ:'צָדִי',ק:'קוּף',ר:'רֵישׁ',ש:'שִׁין',ת:'תָּו',ך:'כָּף סוֹפִית',ם:'מֵם סוֹפִית',ן:'נוּן סוֹפִית',ף:'פֵּא סוֹפִית',ץ:'צָדִי סוֹפִית'};
++const children=[['נועה','נֹעָה',true],['אורי','אוּרִי',false],['מיה','מִיָּה',true],['איתי','אִתַּי',false],['תמר','תָּמָר',true],['רון','רוֹן',false]];
++const places=[['ליד הבית','לְיַד הַבַּיִת'],['בגינה','בַּגִּנָּה'],['ליד הספרייה','לְיַד הַסִּפְרִיָּה'],['בדרך לבית הספר','בַּדֶּרֶךְ לְבֵית הַסֵּפֶר']];
++const symbolNames={'🔺':'מְשֻׁלָּשׁ','🟩':'רִבּוּעַ יָרֹק','🔵':'עִגּוּל כָּחֹל','🔴':'עִגּוּל אָדֹם','🟡':'עִגּוּל צָהֹב','⭐':'כּוֹכָב','◆':'מְעֻיָּן','♥':'לֵב','💜':'לֵב סָגֹל'};
+ const lowChoice=(prompt,visual,answer,others,hint,r)=>({...choice(prompt,visual,answer,others,hint,r),pictureOnly:true});
+ function language(level,r,index) {
+   const w=pick(WORDS.filter(w=>(level>3||w.word.length<=4)&&(level<=2||level>=5||unpoint(w.pointed)===w.word)),r),visual={symbols:w.icon};let q,type;
+   if(level<=2){
+     type=index%2?'letter-picture':'initial-sound';
+-    const letter=w.word[0],letterNames={א:'אָלֶף',ב:'בֵּית',ג:'גִּימֶל',ד:'דָּלֶת',ה:'הֵא',ו:'וָו',ז:'זַיִן',ח:'חֵית',ט:'טֵית',י:'יוֹד',כ:'כָּף',ל:'לָמֶד',מ:'מֵם',נ:'נוּן',ס:'סָמֶךְ',ע:'עַיִן',פ:'פֵּא',צ:'צָדִי',ק:'קוּף',ר:'רֵישׁ',ש:'שִׁין',ת:'תָּו'};
++    const letter=w.word[0];
+     q=lowChoice(type==='initial-sound'?`אֵיזוֹ תְּמוּנָה מַתְחִילָה כְּמוֹ ${w.pointed}?`:`אֵיזוֹ תְּמוּנָה מַתְחִילָה בָּאוֹת ${letterNames[letter]}?`,{letter,symbols:type==='initial-sound'?'👄':'✍️',fallback:w.icon},w.icon,WORDS.filter(x=>x.word[0]!==letter).map(x=>x.icon),`אִמְרוּ בְּקוֹל ${w.pointed}. הַקְשִׁיבוּ לַצְּלִיל הָרִאשׁוֹן.`,r);
+   }else if(level<=4){
+     type=['picture','missing','rhyme','word'][index%4];
+@@ -23,27 +28,37 @@ function language(level,r,index) {
+     if(type==='missing'){
+       const letters=w.pointed.match(/[א-ת][\u0591-\u05c7]*/gu),pos=number(0,letters.length-1,r);letters[pos]='＿';
+       q=choice('אֵיזוֹ אוֹת חֲסֵרָה?',{...visual,caption:letters.join('')},w.word[pos],[...'אבגדהוזחטיכלמנסעפצקרשת'],`הַמִּלָּה הַשְּׁלֵמָה הִיא ${w.pointed}.`,r);
++      q.answerVoice=letterNames[q.answer];
+     }
+     if(type==='rhyme'){const row=pick(RHYMES,r);q=choice(`מָה מִתְחָרֵז עִם ${row[2]}?`,{symbols:row[4]},row[3],['כֶּלֶב','שֶׁמֶשׁ','בַּיִת','מְכוֹנִית','רַכֶּבֶת'],`הַקְשִׁיבוּ לַצְּלִיל בְּסוֹף: ${row[2]}.`,r);}
+     if(type==='word')q={kind:'word',prompt:'בְּנוּ אֶת הַמִּלָּה מֵהָאוֹתִיּוֹת.',visual,answer:w.word,letters:shuffled([...w.word],r),hint:`הַמִּלָּה מַתְחִילָה בָּאוֹת ${w.word[0]}.`};
+   }else{
+     type=['sentence','opposite','synonym','sentence'][index%4];
+     if(type==='sentence'){
+-      const child=pick(['נועה','אורי','מיה','איתי','תמר','רון'],r),other=pick(WORDS.filter(x=>x.word!==w.word),r);
+-      const where=pick(['ליד הבית','בגינה','ליד הספרייה','בדרך לבית הספר'],r);
+-      q=choice(`${child} ראה ${w.word} ${where}. אחר כך צייר ${other.word}. מה ראה ${child}?`,{},w.word,WORDS.filter(x=>x.word!==other.word).map(x=>x.word),'חזרו לתחילת הסיפור: מה הופיע אחרי המילה ״ראה״?',r);
++      const [child,childVoice,feminine]=pick(children,r),other=pick(WORDS.filter(x=>x.word!==w.word),r);
++      const [where,whereVoice]=pick(places,r),saw=feminine?'ראתה':'ראה',drew=feminine?'ציירה':'צייר';
++      q=choice(`${child} ${saw} ${w.word} ${where}. אחר כך ${drew} ${other.word}. מה ${saw} ${child}?`,{},w.word,WORDS.filter(x=>x.word!==other.word).map(x=>x.word),'חוזרים למשפט הראשון. מה הדמות ראתה?',r);
++      const sawVoice=feminine?'רָאֲתָה':'רָאָה',drewVoice=feminine?'צִיְּרָה':'צִיֵּר';
++      q.voice=`${childVoice} ${sawVoice} ${w.pointed} ${whereVoice}. אַחַר כָּךְ ${drewVoice} ${other.pointed}. מָה ${sawVoice} ${childVoice}?`;
++      q.hintVoice='חוֹזְרִים לַמִּשְׁפָּט הָרִאשׁוֹן. מָה הַדְּמוּת רָאֲתָה?';
++      q.answerVoice=w.pointed;
++      q.identityPrompt=`${child} ראה ${w.word} ${where}. אחר כך צייר ${other.word}. מה ראה ${child}?`;
+     }else{
+-      const bank=type==='opposite'?OPPOSITES:SYNONYMS,[a,b]=pick(bank,r);
+-      q=choice(type==='opposite'?`מה ההפך של ״${a}״?`:`איזו מילה דומה במשמעותה ל״${a}״?`,{symbols:type==='opposite'?'↔️':'🟰'},b,bank.filter(x=>x[0]!==a).map(x=>x[1]),type==='opposite'?'דמיינו שני מצבים מנוגדים.':'חפשו מילה שאפשר להשתמש בה במקום המילה שבשאלה.',r);
++      const opposite=type==='opposite',bank=opposite?OPPOSITES:SYNONYMS,[a,b,aVoice,bVoice]=pick(bank,r);
++      q=choice(opposite?`מה ההפך של ״${a}״?`:`איזו מילה דומה במשמעותה ל״${a}״?`,{symbols:opposite?'↔️':'🟰'},b,bank.filter(x=>x[0]!==a).map(x=>x[1]),opposite?'דמיינו שני מצבים מנוגדים.':'חפשו מילה שאפשר להשתמש בה במקום המילה שבשאלה.',r);
++      q.voice=opposite?`מָה הַהֶפֶךְ שֶׁל ${aVoice}?`:`אֵיזוֹ מִלָּה אוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר כְּמוֹ ${aVoice}?`;
++      q.hintVoice=opposite?'דַּמְיְנוּ שְׁנֵי מַצָּבִים הֲפוּכִים.':'חַפְּשׂוּ מִלָּה שֶׁאוֹמֶרֶת כִּמְעַט אוֹתוֹ דָּבָר.';
++      q.answerVoice=bVoice;
+     }
+   }
++  if(type==='picture'||type==='word')q.hintVoice=`הַמִּלָּה מַתְחִילָה בָּאוֹת ${letterNames[w.word[0]]}.`;
+   if(level<=2)q.answerVoice=w.pointed;if(q.kind==='word')q.answerLabel=w.pointed;
+   return {...q,template:type};
+ }
+ function math(level,r,index) {
+   if(level<=2){
+     const type=['count','color','size','shape','count'][index%5];let q;
+-    if(type==='count'){const a=number(1,level===1?5:10,r),icon=pick(['🍎','🍓','⭐','🌸','🐟'],r);q=lowChoice('כַּמָּה חֲפָצִים יֵשׁ?',{symbols:Array(a).fill(icon).join(' ')},a,[a+1,a+2,Math.max(0,a-1)],'סִפְרוּ כָּל חֵפֶץ פַּעַם אַחַת.',r);q.answerVoice=String(a);}
++    if(type==='count'){const a=number(1,level===1?5:10,r),icon=pick(['🍎','🍓','⭐','🌸','🐟'],r);q=lowChoice('כַּמָּה חֲפָצִים יֵשׁ?',{symbols:Array(a).fill(icon).join(' ')},a,[a+1,a+2,Math.max(0,a-1)],'סִפְרוּ כָּל חֵפֶץ פַּעַם אַחַת.',r);q.answerVoice=numberVoice(a);}
+     if(type==='color'){const [icon,name]=pick([['🔴','אָדֹם'],['🔵','כָּחֹל'],['🟡','צָהֹב'],['🟢','יָרֹק']],r);q=lowChoice(`אֵיזֶה עִגּוּל הוּא ${name}?`,{symbols:icon},icon,['🔴','🔵','🟡','🟢'],'חַפְּשׂוּ אֶת אוֹתוֹ הַצֶּבַע.',r);q.answerVoice=name;}
+     if(type==='shape'){const [icon,name]=pick([['🔺','מְשֻׁלָּשׁ'],['🟩','רִבּוּעַ'],['🔵','עִגּוּל']],r);q=lowChoice(`אֵיזוֹ צוּרָה הִיא ${name}?`,{symbols:icon},icon,['🔺','🟩','🔵'],'הִסְתַּכְּלוּ עַל הַצּוּרָה שֶׁלְּמַעְלָה.',r);q.answerVoice=name;}
+     if(type==='size'){
+@@ -53,28 +68,70 @@ function math(level,r,index) {
+   }
+   const max=level<=4?20:100,icon=pick(['🍎','🍓','⭐','🟠','🌸','🐟'],r);
+   const type=(level<=4?['add','subtract','compare','picture']:['add','subtract','multiply','divide','picture','multiply','compare','divide'])[index% (level<=4?4:8)];
+-  let a=number(1,max-1,r),b=number(1,max-a,r),answer,prompt,visual,hint;
++  let a=number(1,max-1,r),b=number(1,max-a,r),answer,prompt,visual,hint,hintVoice,operationVoice;
+   if(type==='compare'){
+     b=number(1,max,r);answer=a>b?'גָּדוֹל מִ־':a<b?'קָטָן מִ־':'שָׁוֶה לְ־';
+-    return {...choice('הַמִּסְפָּר הָרִאשׁוֹן הוּא…',{equation:`${a}  ?  ${b}`},answer,['גָּדוֹל מִ־','קָטָן מִ־','שָׁוֶה לְ־'],'חִשְׁבוּ אֵיזֶה מִסְפָּר קָרוֹב יוֹתֵר לְאֶפֶס.',r),template:type};
++    const first=numberVoice(a),second=numberVoice(b);
++    return {
++      ...choice('הַמִּסְפָּר הָרִאשׁוֹן הוּא…',{equation:`${a}  ?  ${b}`},answer,['גָּדוֹל מִ־','קָטָן מִ־','שָׁוֶה לְ־'],'חִשְׁבוּ אֵיזֶה מִסְפָּר קָרוֹב יוֹתֵר לְאֶפֶס.',r),
++      voice:`מַשְׁוִים אֶת ${first} וְאֶת ${second}. הַאִם הַמִּסְפָּר הָרִאשׁוֹן גָּדוֹל יוֹתֵר, קָטָן יוֹתֵר אוֹ שָׁוֶה?`,
++      answerVoice:`${first} ${answer}${second}`,template:type,
++    };
+   }
+   if(type==='add'||type==='picture'){
+     if(type==='picture'){a=number(1,level<=4?6:9,r);b=number(1,level<=4?6:9,r);}
+     answer=a+b;prompt=type==='picture'?'מְצָרְפִים אֶת שְׁתֵּי הַקְּבוּצוֹת. כַּמָּה בְּיַחַד?':'כַּמָּה הֵם בְּיַחַד?';
+     visual=type==='picture'?{groups:[Array(a).fill(icon).join(' '),Array(b).fill(icon).join(' ')]}:{equation:`${a} + ${b} = ?`};hint=`הַתְחִילוּ בְּ־${a} וְהוֹסִיפוּ ${b}.`;
++    hintVoice=`הַתְחִילוּ בַּמִּסְפָּר ${numberVoice(a)} וְהוֹסִיפוּ ${numberVoice(b)}.`;
++    operationVoice='וְעוֹד';
+   }
+-  if(type==='subtract'){a=number(2,max,r);b=number(1,a,r);answer=a-b;prompt='כַּמָּה נִשְׁאַר?';visual={equation:`${a} − ${b} = ?`};hint=`הַתְחִילוּ בְּ־${a} וְסִפְרוּ ${b} צְעָדִים אָחוֹרָה.`;}
+-  if(type==='multiply'){a=number(2,level===5?5:10,r);b=number(2,level===5?5:10,r);answer=a*b;prompt='כַּמָּה הֵם בְּיַחַד?';visual={equation:`${a} × ${b} = ?`};hint=`חַבְּרוּ ${a} לְעַצְמוֹ ${b} פְּעָמִים.`;}
+-  if(type==='divide'){b=number(2,level===5?5:10,r);answer=number(1,level===5?5:10,r);a=b*answer;prompt='מְחַלְּקִים שָׁוֶה בְּשָׁוֶה. כַּמָּה בְּכָל קְבוּצָה?';visual={equation:`${a} ÷ ${b} = ?`};hint=`אֵיזֶה מִסְפָּר כָּפוּל ${b} נוֹתֵן ${a}?`;}
+-  return {...choice(prompt,visual,answer,[answer+1,answer+2,Math.max(0,answer-1),Math.max(0,answer-2)],hint,r),template:type};
++  if(type==='subtract'){
++    a=number(2,max,r);b=number(1,a,r);answer=a-b;prompt='כַּמָּה נִשְׁאַר?';visual={equation:`${a} − ${b} = ?`};
++    hint=`הַתְחִילוּ בְּ־${a} וְסִפְרוּ ${b} צְעָדִים אָחוֹרָה.`;
++    hintVoice=`הַתְחִילוּ בַּמִּסְפָּר ${numberVoice(a)} וְסִפְרוּ ${quantityVoice(b,'צַעַד','צְעָדִים',true)} אָחוֹרָה.`;
++    operationVoice='פָּחוֹת';
++  }
++  if(type==='multiply'){
++    a=number(2,level===5?5:10,r);b=number(2,level===5?5:10,r);answer=a*b;prompt='כַּמָּה הֵם בְּיַחַד?';visual={equation:`${a} × ${b} = ?`};
++    hint=`חַבְּרוּ ${a} לְעַצְמוֹ ${b} פְּעָמִים.`;
++    hintVoice=`חַבְּרוּ אֶת הַמִּסְפָּר ${numberVoice(a)} בְּסַךְ הַכֹּל ${quantityVoice(b,'פַּעַם','פְּעָמִים')}.`;
++    operationVoice='כָּפוּל';
++  }
++  if(type==='divide'){
++    b=number(2,level===5?5:10,r);answer=number(1,level===5?5:10,r);a=b*answer;
++    prompt='מְחַלְּקִים שָׁוֶה בְּשָׁוֶה. כַּמָּה בְּכָל קְבוּצָה?';visual={equation:`${a} ÷ ${b} = ?`};
++    hint=`אֵיזֶה מִסְפָּר כָּפוּל ${b} נוֹתֵן ${a}?`;
++    hintVoice=`אֵיזֶה מִסְפָּר כָּפוּל ${numberVoice(b)} נוֹתֵן ${numberVoice(a)}?`;
++    operationVoice='חֶלְקֵי';
++  }
++  return {
++    ...choice(prompt,visual,answer,[answer+1,answer+2,Math.max(0,answer-1),Math.max(0,answer-2)],hint,r),
++    voice:visual.equation?`${prompt} ${numberVoice(a)} ${operationVoice} ${numberVoice(b)} שָׁוֶה?`:prompt,
++    hintVoice,answerVoice:numberVoice(answer),template:type,
++  };
+ }
++const factQuestions={
++  'דולפין':['מה נכון לגבי הדולפין?','מָה נָכוֹן לְגַבֵּי הַדּוֹלְפִין?'],
++  'פיל':['מה עוזר לו?','מָה עוֹזֵר לוֹ?'],
++  'קיפוד':['מה עוזר לו?','מָה עוֹזֵר לוֹ?'],
++  'נשר':['מה מכסה את גופו?','מָה מְכַסֶּה אֶת גּוּפוֹ?'],
++  'דג':['בעזרת מה הוא נושם?','בְּעֶזְרַת מָה הוּא נוֹשֵׁם?'],
++  'ג׳ירפה':['מה עוזר לה?','מָה עוֹזֵר לָהּ?'],
++  'תרנגולת':['מה היא מטילה?','מָה הִיא מְטִילָה?'],
++  'קנגורו':['איפה נמצא הגור?','אֵיפֹה נִמְצָא הַגּוּר?'],
++};
+ function animals(level,r,index) {
+   const type=level<=2?['identify','sound','habitat'][index%3]:level<=4?['food','baby','habitat','baby'][index%4]:['fact','local','food','baby','fact','local','habitat','fact'][index%8],a=pick(ANIMALS,r);let q;
+   if(type==='identify'){q=lowChoice(`אֵיפֹה ${a.name}?`,{symbols:'🐾',fallback:a.icon},a.icon,ANIMALS.map(x=>x.icon),`חַפְּשׂוּ אֶת ${a.name}.`,r);q.answerVoice=a.name;}
+   if(type==='sound'){const [icon,name,sound]=pick(SOUNDS,r);q=lowChoice(`מִי אוֹמֵר ${sound}?`,{symbols:'👄 🎵',fallback:icon},icon,SOUNDS.map(x=>x[0]),`זֶה הַקּוֹל שֶׁל ${name}.`,r);q.answerVoice=name;}
+   if(type==='habitat'){
+-    const homes={'יָם':'🌊','יַבָּשָׁה':'🌳','אֲוִיר':'☁️'},hint=a.habitat==='יָם'?'הִיא שׂוֹחָה.':a.habitat==='אֲוִיר'?'הִיא עָפָה.':'הִיא הוֹלֶכֶת עַל הָאֲדָמָה.';
+-    q=level<=2?lowChoice(`אֵיפֹה ${a.name} נָעָה בְּעִקָּר?`,{symbols:a.icon},homes[a.habitat],Object.values(homes),hint,r):choice('אֵיפֹה הַחַיָּה נָעָה בְּעִקָּר?',{symbols:a.icon,caption:a.name},a.habitat,Object.keys(homes),hint,r);q.answerVoice=a.habitat;
++    const homes={'יָם':'🌊','יַבָּשָׁה':'🌳','אֲוִיר':'☁️'};
++    const movement=a.habitat==='יָם'?'שׂוֹחָה':a.habitat==='אֲוִיר'?'עָפָה':'הוֹלֶכֶת עַל הָאֲדָמָה';
++    const prompt='אֵיפֹה הַחַיָּה הַזֹּאת נָעָה בְּעִקָּר?',hint=`הַחַיָּה הַזֹּאת ${movement}.`;
++    q=level<=2?lowChoice(prompt,{symbols:a.icon},homes[a.habitat],Object.values(homes),hint,r):choice(prompt,{symbols:a.icon,caption:a.name},a.habitat,Object.keys(homes),hint,r);
++    q.voice=level<=2?`${a.name}. ${prompt}`:prompt;
++    q.answerVoice=a.habitat;
++    q.identityPrompt=level<=2?`אֵיפֹה ${a.name} נָעָה בְּעִקָּר?`:'אֵיפֹה הַחַיָּה נָעָה בְּעִקָּר?';
+   }
+   if(type==='food'){
+     const meat=a.food.includes('בָּשָׂר'),foods=meat?['עֵשֶׂב בִּלְבַד','עָלִים בִּלְבַד']:a.food==='עֵשֶׂב'||a.food==='צְמָחִים'||a.food==='עָלִים'?['בָּשָׂר','דָּגִים']:['עָלִים בִּלְבַד','פֵּרוֹת בִּלְבַד'];
+@@ -84,10 +141,18 @@ function animals(level,r,index) {
+   if(type==='local'){
+     const local=pick(ANIMALS.filter(x=>x.local),r),others=ANIMALS.filter(x=>!x.local&&['🐘','🦒','🦁','🦓','🦘'].includes(x.icon));
+     q=choice('איזו חיה חיה כיום בטבע בארץ ישראל?',{symbols:'🌳 ☀️ 🏞️'},`${local.icon} ${local.name}`,others.map(x=>`${x.icon} ${x.name}`),'בחרו חיה שאפשר לפגוש בטבע בארץ, גם בלי גן חיות.',r);
++    q.voice='אֵיזוֹ חַיָּה חַיָּה בַּטֶּבַע בְּיִשְׂרָאֵל?';
++    q.hintVoice='בִּחֲרוּ חַיָּה שֶׁאֶפְשָׁר לִפְגֹּשׁ בַּטֶּבַע בְּיִשְׂרָאֵל, גַּם מִחוּץ לְגַן חַיּוֹת.';
++    q.answerVoice=local.name;
+   }
+   if(type==='fact'){
+-    const f=pick(FACTS,r),prompt=`${f[1]}: ${f[2]}. `+(['פיל','ג׳ירפה','קיפוד'].includes(f[1])?'מה עוזר לו?':f[1]==='דג'?'בעזרת מה הוא נושם?':f[1]==='תרנגולת'?'מה היא מטילה?':f[1]==='קנגורו'?'איפה נמצא הגור?':f[1]==='נשר'?'מה מכסה את גופו?':'מה נכון לגבי הדולפין?');
+-    q=choice(prompt,{symbols:f[0]},f[3],f.slice(4),'קראו שוב את העובדה הקצרה בתחילת השאלה.',r);
++    const [icon,[name,fact,answer,...others],[nameVoice,factVoice,answerVoice]]=pick(FACTS,r);
++    const [followup,followupVoice]=factQuestions[name];
++    q=choice(`${name}: ${fact}. ${followup}`,{symbols:icon},answer,others,'קראו שוב את העובדה הקצרה בתחילת השאלה.',r);
++    q.voice=`${nameVoice}: ${factVoice}. ${followupVoice}`;
++    q.hintVoice='קִרְאוּ שׁוּב אֶת הַמִּשְׁפָּט הָרִאשׁוֹן.';
++    q.answerVoice=answerVoice;
++    if(name==='ג׳ירפה')q.identityPrompt=`${name}: ${fact}. מה עוזר לו?`;
+   }
+   return {...q,template:type};
+ }
+@@ -95,31 +160,33 @@ function puzzles(level,r,index) {
+   const type=(level<=2?['shadow','memory','jigsaw','shadow','jigsaw']:['sequence','memory','sequence','jigsaw','sequence','memory','sequence','sequence'])[index%(level<=2?5:8)];
+   if(type==='shadow'){
+     const icon=pick(['🔺','🟩','🔵','⭐','◆','♥'],r);
+-    return {...lowChoice('אֵיזוֹ צוּרָה מַתְאִימָה לַצֵּל?',{shadow:icon},icon,['🔺','🟩','🔵','⭐','◆','♥'],'חַפְּשׂוּ אֶת אוֹתוֹ הַמִּתְאָר.',r),template:type};
++    return {...lowChoice('אֵיזוֹ צוּרָה מַתְאִימָה לַצֵּל?',{shadow:icon},icon,['🔺','🟩','🔵','⭐','◆','♥'],'חַפְּשׂוּ אֶת אוֹתוֹ הַמִּתְאָר.',r),answerVoice:symbolNames[icon],template:type};
+   }
+   if(type==='sequence'){
+     const symbols=shuffled(['🔴','🟡','🔵','🟩','🔺','⭐','💜','◆'],r),patterns=level<=4?[[0,1],[0,0,1],[0,1,2]]:level===5?[[0,1,1,2],[0,0,1,2]]:[[0,1,2,2,1],[0,1,0,2],[0,0,1,2,1]],pattern=pick(patterns,r),length=number(level>=6?6:4,level>=6?9:7,r),sequence=Array.from({length},(_,i)=>symbols[pattern[i%pattern.length]]),answer=symbols[pattern[length%pattern.length]];
+-    return {...choice('מָה בָּא אַחֲרֵי הַסִּדְרָה?',{sequence:[...sequence,'?']},answer,symbols,'קִרְאוּ אֶת הַצּוּרוֹת מִשְּׂמֹאל לְיָמִין. חַפְּשׂוּ קְבוּצָה שֶׁחוֹזֶרֶת.',r),template:type};
++    return {...choice('מָה בָּא אַחֲרֵי הַסִּדְרָה?',{sequence:[...sequence,'?']},answer,symbols,'קִרְאוּ אֶת הַצּוּרוֹת מִשְּׂמֹאל לְיָמִין. חַפְּשׂוּ קְבוּצָה שֶׁחוֹזֶרֶת.',r),answerVoice:symbolNames[answer],template:type};
+   }
+   if(type==='memory'){
+     const icons=shuffled(WORDS.map(w=>w.icon),r).slice(0,level<=2?3:level<=4?6:8),cards=shuffled([...icons,...icons].map((icon,id)=>({icon,id})),r);
+-    return {kind:type,template:type,prompt:'מִצְאוּ אֶת כָּל הַזּוּגוֹת.',visual:{symbols:'🃏'},cards,answer:icons.slice().sort().join('|'),hint:'פִּתְחוּ שְׁנֵי קְלָפִים בְּכָל פַּעַם. זִכְרוּ אֵיפֹה כָּל תְּמוּנָה.'};
++    return {kind:type,template:type,prompt:'מִצְאוּ אֶת כָּל הַזּוּגוֹת.',visual:{symbols:'🃏'},cards,answer:icons.slice().sort().join('|'),answerVoice:pictureRevealVoice,hint:'פִּתְחוּ שְׁנֵי קְלָפִים בְּכָל פַּעַם. זִכְרוּ אֵיפֹה כָּל תְּמוּנָה.'};
+   }
+   const size=level===1?2:level<=3?3:level===4?4:5,tiles=Array.from({length:size*size},(_,i)=>i),order=[...tiles];
+   // A few swaps let young children complete a picture within a short round.
+   const positions=shuffled(tiles,r),swaps=level<=2?2:level<=4?4:8;
+   for(let i=0;i<Math.min(swaps,Math.floor(tiles.length/2));i++){const a=positions[i*2],b=positions[i*2+1];[order[a],order[b]]=[order[b],order[a]];}
+-  return {kind:type,template:type,prompt:'הַרְכִּיבוּ אֶת תְּמוּנַת הָעִיר.',visual:{symbols:'🏘️'},size,order,answer:tiles.join(','),scene:number(1,999999,r),hint:'לַחֲצוּ עַל שְׁנֵי חֲלָקִים כְּדֵי לְהַחְלִיף בֵּינֵיהֶם. הַשָּׁמַיִם לְמַעְלָה.'};
++  return {kind:type,template:type,prompt:'הַרְכִּיבוּ אֶת תְּמוּנַת הָעִיר.',visual:{symbols:'🏘️'},size,order,answer:tiles.join(','),answerVoice:pictureRevealVoice,scene:number(1,999999,r),hint:'לַחֲצוּ עַל שְׁנֵי חֲלָקִים כְּדֵי לְהַחְלִיף בֵּינֵיהֶם. הַשָּׁמַיִם לְמַעְלָה.'};
+ }
+ const generators={language,math,animals,puzzles};
+ export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[]}={}) {
+   if(!generators[station]||!Number.isInteger(level)||level<1||level>7)throw Error('learning station or level');
+   for(let attempt=0;attempt<400;attempt++){
+-    const q=generators[station](level,rng,index+Math.floor(attempt/50));
+-    q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2;q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
+-    if(q.visual.equation)q.voice+=' '+q.visual.equation.replace('−','פָּחוֹת').replace('+','וְעוֹד').replace('×','כָּפוּל').replace('÷','חֶלְקֵי').replace('=','שָׁוֶה').replace('?','');
++    const {identityPrompt,...q}=generators[station](level,rng,index+Math.floor(attempt/50));
++    q.level=level;q.station=station;q.pictureOnly=level<=2;
++    q.voice??=q.prompt;q.hintVoice??=q.hint;q.answerVoice??=q.answerLabel??q.answer;
+     if(level>=5){q.prompt=unpoint(q.prompt);q.hint=unpoint(q.hint);if(q.visual.caption)q.visual.caption=unpoint(q.visual.caption);if(q.kind==='choice'){q.answer=unpoint(q.answer);q.options=q.options.map(unpoint);}}
+-    q.id=JSON.stringify([q.template,q.prompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes]);
++    // The recent-question list in existing saves still recognizes the revised prompts.
++    const idPrompt=identityPrompt===undefined?q.prompt:level>=5?unpoint(identityPrompt):identityPrompt;
++    q.id=JSON.stringify([q.template,idPrompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes]);
+     if(!exclude.includes(q.id))return q;
+   }
+   throw Error('learning question pool exhausted');
+diff --git a/workout/island/learning/spoken-copy.mjs b/workout/island/learning/spoken-copy.mjs
+new file mode 100644
+index 0000000..bc928e5
+--- /dev/null
++++ b/workout/island/learning/spoken-copy.mjs
+@@ -0,0 +1,44 @@
++// The generators and round rewards use whole numbers from 0 to 100.
++const feminineUnits=['אֶפֶס','אַחַת','שְׁתַּיִם','שָׁלֹשׁ','אַרְבַּע','חָמֵשׁ','שֵׁשׁ','שֶׁבַע','שְׁמוֹנֶה','תֵּשַׁע','עֶשֶׂר'];
++const masculineUnits=['אֶפֶס','אֶחָד','שְׁנַיִם','שְׁלֹשָׁה','אַרְבָּעָה','חֲמִשָּׁה','שִׁשָּׁה','שִׁבְעָה','שְׁמוֹנָה','תִּשְׁעָה','עֲשָׂרָה'];
++const tens=['','','עֶשְׂרִים','שְׁלֹשִׁים','אַרְבָּעִים','חֲמִשִּׁים','שִׁשִּׁים','שִׁבְעִים','שְׁמוֹנִים','תִּשְׁעִים'];
++
++function and(text) {
++  return (/^[בומפ]|^[א-ת]ְ/u.test(text.normalize('NFD'))?'וּ':'וְ')+text;
++}
++
++export function numberVoice(value,masculine=false) {
++  const units=masculine?masculineUnits:feminineUnits;
++  if(value<=10)return units[value];
++  if(value<20){
++    const unit=value%10;
++    const first=unit===2?(masculine?'שְׁנֵים':'שְׁתֵּים'):units[unit];
++    return first+(masculine?' עָשָׂר':' עֶשְׂרֵה');
++  }
++  if(value===100)return 'מֵאָה';
++  const unit=value%10,ten=tens[Math.floor(value/10)];
++  return unit?ten+' '+and(units[unit]):ten;
++}
++
++export function quantityVoice(count,singular,plural,masculine=false) {
++  if(count===1)return singular+' '+numberVoice(1,masculine);
++  if(count===2)return (masculine?'שְׁנֵי':'שְׁתֵּי')+' '+plural;
++  return numberVoice(count,masculine)+' '+plural;
++}
++
++export const correctVoice='כָּל הַכָּבוֹד. מַמְשִׁיכִים לִלְמֹד.';
++export const retryVoice='נְנַסֶּה שׁוּב.';
++export const pictureRevealVoice='הִנֵּה הַתְּמוּנָה הַשְּׁלֵמָה.';
++
++export function feedbackVoice(question,{correct,resolved}) {
++  if(correct)return correctVoice;
++  if(!resolved)return `${retryVoice} ${question.hintVoice}`;
++  if(question.kind==='memory'||question.kind==='jigsaw')return pictureRevealVoice;
++  return `הַתְּשׁוּבָה הִיא: ${question.answerVoice}.`;
++}
++
++export function roundVoice({money,stars}) {
++  const coins=quantityVoice(money,'מַטְבֵּעַ','מַטְבְּעוֹת',true);
++  const points=quantityVoice(stars,'כוֹכָב','כּוֹכָבִים',true);
++  return `כָּל הַכָּבוֹד. סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${coins} ${and(points)}.`;
++}
