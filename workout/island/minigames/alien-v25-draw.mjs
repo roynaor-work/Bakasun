@@ -24,6 +24,7 @@ export function drawV25Shot(p,s,m,aspect=1,scale=1){
  const cfg=m.vulcanCfg||V25_DEFAULTS,distance=Math.max(0,(m.player?.y??s.y)-s.y),offsets=pelletOffsets(distance,cfg),atlas=alienV25Image(VULCAN_V25_ASSETS.plasma);
  p.save();p.translate(s.x,s.y);p.scale(1/aspect,1);p.rotate(Math.atan2(s.vx||0,-(s.vy||-1)));p.globalCompositeOperation='lighter';
  for(let i=0;i<offsets.length;i++){
+  if((s.pelletMask>>i)&1)continue;/* v24.4 (alien-hull.mjs): a side pellet that reached a ship stuck in it */
   const middle=i===(offsets.length-1)/2,h=(middle?34:26)*scale,w=h,x=offsets[i]*scale,y=middle?0:7*scale;
   if(atlas){const [sx,sy]=PLASMA[middle?2:1];p.drawImage(atlas,sx,sy,128,128,x-w/2,y-h/2,w,h);}
   else{const g=p.createLinearGradient(0,y-h*.4,0,y+h*.4);g.addColorStop(0,'rgba(255,250,214,.95)');g.addColorStop(.35,'rgba(255,183,72,.9)');g.addColorStop(1,'rgba(255,110,30,0)');p.strokeStyle=g;p.lineWidth=(middle?5:3.6)*scale;p.beginPath();p.moveTo(x,y-h*.38);p.lineTo(x,y+h*.4);p.stroke();}

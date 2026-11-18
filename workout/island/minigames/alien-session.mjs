@@ -57,6 +57,8 @@ export function runAlienSession(ctx,createModel,draw,createView){
  let shared,flight,vulcan,specialSwitch,resetting=false;
  let disposed=false,paused=false,frame,last,cssWidth=1,cssHeight=1,dpr=1,samples=0,frameMs=0;
  const view=createView?.({...ctx,art},model),renderContext={...ctx,art,quality,view};
+ // v24.4 hull contact (alien-hull.mjs, ?alienHull=0 keeps v24.3): rounds stop where the 3D ship is drawn; the canvas fallback draws the hit circle (0).
+ model.hull={get pxPerUnit(){return view&&view.mode==='three'?cssHeight/config.height:0;}};
  void loadOptionalArt(art,alienBakeSettings(b),()=>disposed);
  status.hidden=true;status.textContent='';ctx.upgradePanel?.remove();ctx.spreadButton?.remove();
  controls.classList.add('alien-controls');if(alienV9Enabled())controls.dataset.alienV9='true';
