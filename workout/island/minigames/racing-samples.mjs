@@ -31,7 +31,8 @@ export const V3_LOOPS=Object.freeze({'brake-squeal-loop':{gain:.025,loop:[0.05,1
 export const V4_LOOPS=Object.freeze([{id:'brake-loop-light',gain:.016},{id:'brake-loop-medium',gain:.024},{id:'brake-loop-hard',gain:.034}]);
 export const V4_SHOTS=Object.freeze({'car-bump-soft':.022,'car-bump-hard':.04,'side-scrape':.02});
 /** racing-v24 wind (Roy: "a background noise, like air or a hiss"): the v2 wind loop played at .012 standing still and .07 at speed, over the whole engine; now silent
- * under 12 m/s and at most .03 at the top. hiss='v23' keeps the old curve. */
+ * under 12 m/s and at most .03 at the top. hiss='v23' keeps the old curve. racing-v24.5 (Roy after v24.4: "a kind of noise, maybe the air you make while driving";
+ * air='v245', the session's default): silent at every speed; air='v244' keeps the v24 curve. */
 /** racing-v24 pit stop sounds (Codex package design/racing-pit-v1, CC0; assets/racing-pit-v1/audio): the jack at the stop, the wheel guns loosening, a wheel dropped and a
  * wheel attached, the guns tightening during the 2 s change, the crew's cheer and the engine leaving at the end. Loaded only in a race with stops (pit=true). */
 export const PIT_SHOTS=Object.freeze({wheel_gun_loosen:.03,wheel_gun_tighten:.03,jack:.026,wheel_drop:.024,wheel_attach:.024,crew_cheer:.026,engine_exit:.028});
@@ -54,10 +55,16 @@ export function v5PitMix(phase,speed=0,toBox=Infinity){
  const near=standing?1:phase==='lane'?Math.max(0,Math.min(1,1-toBox/30)):phase==='leave'?.6:0;
  return [1,moving&&speed>2?1:0,near,standing?1:near*.5];
 }
-export function windGain(speed,hiss='v24'){if(hiss==='v23')return Math.min(.07,.012+speed/55*.055);return speed<12?0:Math.min(.03,Math.pow((speed-12)/38,1.5)*.03);}
-export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null,v5=false,base5=base?new URL('../racing-audio-v5/',base):null}){
+/** racing-v24.5 rec (Roy's own engine recordings, assets/racing-rec, README there): the idling engine on the grid (a 2.7 s seamless loop) and an engine driving away
+ * (two 6 s takes) for the overtake; loaded only with rec=true (the session's default; ?racingRec=0 keeps the synthesis), all or nothing. The 12 s "accelerate and shift"
+ * take is not used: its shifts come at its own times and cannot follow the game's gearbox (README). Gains put the takes (about -18 LUFS) at the level of the synthesis
+ * they replace (measured RMS, the first 0.45 s of an overtake: synthesis -38.5 dBFS, takes -36.7 and -41.1; idle -48.3, take -48.3); a 3.2 kHz low-pass keeps
+ * the microphone's rasp out (no air). */
+export const REC=Object.freeze({idle:'engine-idle-loop',away:Object.freeze(['engine-away-1','engine-away-2']),idleGain:.033,passGain:.1,passLength:2.4,lowpass:3200});
+export function windGain(speed,hiss='v24',air='v244'){if(air==='v245')return 0;if(hiss==='v23')return Math.min(.07,.012+speed/55*.055);return speed<12?0:Math.min(.03,Math.pow((speed-12)/38,1.5)*.03);}
+export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',air='v244',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null,rec=false,baseRec=base?new URL('../racing-rec/',base):null,v5=false,base5=base?new URL('../racing-audio-v5/',base):null}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
-  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false,pitReady=false,v5Ready=false,sideNext=false;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0],surface:{},pit:[0,0,0,0],brake5:[0,0,0]};   // racing-v24: the levels last set (levels())
+  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false,pitReady=false,v5Ready=false,sideNext=false,recReady=false,recIdle=null,recBus=null,recPasses=0;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0],surface:{},pit:[0,0,0,0],brake5:[0,0,0]};   // racing-v24: the levels last set (levels())
   const bus=context.createGain();bus.gain.value=0;bus.connect(destination);nodes.push(bus);
   const target=(param,value,time,k=.06)=>{try{if(typeof param.setTargetAtTime==='function')param.setTargetAtTime(value,time,k);else param.value=value;}catch{}};
   async function load(){
@@ -77,6 +84,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     if(v4)await loadV4().catch(()=>{});   // racing-v24: the same, for the v4 brake loops and contact shots
     if(pit)await loadPit().catch(()=>{});   // racing-v24: the pit stop sounds, all or nothing
     if(v5)await loadV5().catch(()=>{});   // racing-v24.4: the v5 surface, brake and pit lane loops, all or nothing
+    if(rec)await loadRec().catch(()=>{});   // racing-v24.5: Roy's recordings (idle loop, engine driving away), all or nothing
   }
   const V5_IDS=[...V5_SURFACE.gravel,...V5_SURFACE.grass,...V5_BRAKE].map(e=>e[0]).concat(Object.keys(V5_PIT));
   async function loadV5(){
@@ -86,6 +94,15 @@ export function createRacingSamples({context,destination=context?.destination,ba
     for(const [id,buffer] of got){buffers.set(id,buffer);const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;source.loop=true;source.loopStart=V5_LOOP[0];source.loopEnd=V5_LOOP[1];
       gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0,V5_LOOP[0]);loops.set(id,{source,gain,spec:{id}});nodes.push(source,gain);}
     v5Ready=true;
+  }
+  async function loadRec(){
+    const ids=[REC.idle,...REC.away],got=new Map();
+    await Promise.all(ids.map(async id=>{const response=await fetchFn(new URL(`${id}.${ext}`,baseRec).href);if(!response.ok)throw new Error('sample '+id);got.set(id,await context.decodeAudioData(await response.arrayBuffer()));}));
+    if(disposed)return;for(const [id,buffer] of got)buffers.set(id,buffer);
+    // one low-passed bus for the takes (straight to the destination: the idle plays on the grid, before the sample bus is raised by the first update)
+    recBus=context.createBiquadFilter();recBus.type='lowpass';recBus.frequency.value=REC.lowpass;if(recBus.Q)recBus.Q.value=.6;recBus.connect(destination);nodes.push(recBus);
+    const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffers.get(REC.idle);source.loop=true;gain.gain.value=0;source.connect(gain);gain.connect(recBus);source.start(0);
+    recIdle={source,gain};nodes.push(source,gain);recReady=true;
   }
   async function loadPit(){
     const got=new Map();
@@ -139,7 +156,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     });
     const slip=drifting?.07+Math.abs(steer)*.05:braking&&speed>14&&!(v4Ready||v5Ready)?.03+Math.min(speed/45,1)*.03:0;  // racing-deep-m3: the squeal loop also under hard braking (racing-v24: not with the v4 brake loops)
     lv.squeal=offroad?0:slip;target(loops.get('tyre-squeal').gain.gain,lv.squeal,now,.08);
-    lv.wind=windGain(speed,hiss);target(loops.get('wind-speed').gain.gain,lv.wind,now,.15);
+    lv.wind=windGain(speed,hiss,air);target(loops.get('wind-speed').gain.gain,lv.wind,now,.15);
     target(loops.get('wind-speed').source.playbackRate,.85+Math.min(speed/60,1)*.35,now,.2);
     if(kerb>.5)shot('kerb-rumble',.05+.04*Math.min(1,speed/45),1,.7);
     // racing-audio-v3: hard braking at speed (not while drifting: the v2 tyre squeal covers that) fades the brake squeal in and out in 80 ms steps
@@ -161,6 +178,18 @@ export function createRacingSamples({context,destination=context?.destination,ba
     /** racing-v23 shift styles (racing-audio ?racingShift=b|c): the blow-off cut to its first 0.32 s, one exhaust crack, the down blips quieter */
     turbo(){shot('turbo-blowoff',.028,1.2,.45,.32);},crack(){shot(`exhaust-pop-${1+(pop++%3)}`,.03,1.05,.45);},shiftDownSoft(){shot('shift-down',.02,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
+    get recReady(){return recReady;},
+    /** racing-v24.5 rec: the recorded idle at `level` 0..1 (the synthesis' idle level), `rate` the playback rate (revs held up on the start lights) */
+    recIdle(level=0,rate=1){if(!recReady||disposed)return false;const now=context.currentTime;lv.recIdle=REC.idleGain*Math.max(0,Math.min(1,level));target(recIdle.gain.gain,lv.recIdle,now,.12);target(recIdle.source.playbackRate,Math.max(.7,Math.min(1.8,rate)),now,.08);return true;},
+    /** racing-v24.5 rec: the overtake = the passed car's engine driving away (the two takes in turn): the first REC.passLength s, in quickly and fading with the distance,
+     * the pitch falling 4% -> -6% (doppler), panned from its side towards the middle */
+    recPass({pan=.5,level=1}={}){if(!recReady||disposed)return false;const now=context.currentTime,len=REC.passLength,id=REC.away[recPasses++%REC.away.length],peak=REC.passGain*Math.max(0,Math.min(1,level));
+      const source=context.createBufferSource(),g=context.createGain(),p=context.createStereoPanner?context.createStereoPanner():null;source.buffer=buffers.get(id);
+      if(source.playbackRate.setValueAtTime&&source.playbackRate.linearRampToValueAtTime){source.playbackRate.setValueAtTime(1.04,now);source.playbackRate.linearRampToValueAtTime(.94,now+len);}else source.playbackRate.value=1;
+      g.gain.value=0;if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(peak,now+.08);g.gain.linearRampToValueAtTime(peak*.45,now+.7);g.gain.linearRampToValueAtTime(peak*.12,now+len*.75);g.gain.linearRampToValueAtTime(0,now+len);}else g.gain.value=peak*.5;
+      const p0=Math.max(-1,Math.min(1,Number(pan)||.5));if(p&&p.pan.setValueAtTime&&p.pan.linearRampToValueAtTime){p.pan.setValueAtTime(p0,now);p.pan.linearRampToValueAtTime(p0*.3,now+len);}
+      source.connect(g);if(p){g.connect(p);p.connect(recBus);}else g.connect(recBus);source.start(now);try{source.stop(now+len+.02);}catch{}
+      source.onended=()=>{try{source.disconnect();g.disconnect();p?.disconnect();}catch{}};lv.recPass={id,peak};return true;},
     get v3Ready(){return v3Ready;},get v4Ready(){return v4Ready;},get pitReady(){return pitReady;},get v5Ready(){return v5Ready;},
     /** racing-v24: the next 'bump' was a side-by-side contact (the engine marks it before the event) */
     contactSide(){sideNext=true;},
@@ -173,7 +202,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
       else if(type==='pitDone'){shot('crew_cheer',S.crew_cheer,1,.5);shot('engine_exit',S.engine_exit,1,.5,0,.25);}
       else return false;return true;},
     /** the levels the layer last set (for tests and the audio log): wind, the v2 tyre squeal, the v3 brake squeal, the three v4 brake loops */
-    levels:()=>({wind:lv.wind,squeal:lv.squeal,brakeSqueal:lv.brakeSqueal,brake:[...lv.brake],...(v5Ready?{surface:{...lv.surface},pit:[...lv.pit],brake5:[...lv.brake5]}:{})}),
+    levels:()=>({...(recReady?{recIdle:lv.recIdle??0,recPass:lv.recPass??null}:{}),wind:lv.wind,squeal:lv.squeal,brakeSqueal:lv.brakeSqueal,brake:[...lv.brake],...(v5Ready?{surface:{...lv.surface},pit:[...lv.pit],brake5:[...lv.brake5]}:{})}),
     /** a game event by the audio engine's names ('bump', 'wall', 'crash', 'crashRecover'); intensity 0..1. Does nothing until v3 is ready. */
     event(name,intensity=1,details={}){
       if(disposed)return;
