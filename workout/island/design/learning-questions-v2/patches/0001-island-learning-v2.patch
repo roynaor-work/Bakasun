@@ -1,0 +1,195 @@
+diff --git a/workout/island/app.mjs b/workout/island/app.mjs
+index 37ce8d9..1edeeee 100644
+--- a/workout/island/app.mjs
++++ b/workout/island/app.mjs
+@@ -33,7 +33,9 @@ try {
+   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
+   const cityPreview = previewMode();
+   if (cityPreview) storage = readOnlyStorage(storage);
+-  const engine = createEngine(data, { storage });
++  const learningV2 = new URLSearchParams(location.search).get('learningV2') === '0' ? null
++    : await import('./design/learning-questions-v2/src/integration.mjs').catch(() => null);
++  const engine = createEngine(data, { storage, installLearningV2: learningV2?.installLearningV2 });
+   let ui;
+   const view = new IslandView({
+     canvas: document.querySelector('#world'), data: { ...data, registry: engine.registry },
+@@ -47,7 +49,8 @@ try {
+   splash.end();
+   if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
+   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
+-  const learning=new LearningInterface({ui,engine});
++  const Learning = learningV2?.LearningV2Interface ?? LearningInterface;
++  const learning=new Learning({ui,engine});
+   const games=new ActivityInterface({ui,engine,activity,data,t});
+   const cityAccess=new CityAccess({ui,engine,games,learning});
+   ui.cityAccess=cityAccess;
+diff --git a/workout/island/data/strings.he.json b/workout/island/data/strings.he.json
+index 9d6cee8..8b23820 100644
+--- a/workout/island/data/strings.he.json
++++ b/workout/island/data/strings.he.json
+@@ -710,6 +710,9 @@
+  "reason.limit.shop": "יש מספיק חנויות לשלב הזה. אפשר לאסוף חלקים להרחבת העיר.",
+  "building.airbase": "בסיס חיל אוויר",
+  "building.cityHall": "עירייה",
++ "learning.v2.cityQuestion": "לִפְנֵי הַבְּנִיָּה עוֹנִים עַל שְׁאֵלָה.",
++ "learning.v2.cityPaid": "הַבִּנְיָן נִפְתַּח! קִבַּלְתֶּם שְׁנֵים עָשָׂר מַטְבְּעוֹת.",
++ "learning.v2.noQuestion": "אֵין כָּרֶגַע שְׁאֵלָה זְמִינָה. אֶפְשָׁר לְנַסּוֹת שׁוּב מְאוּחָר יוֹתֵר.",
+  "reason.limit.airbase": "כבר יש בסיס חיל אוויר בעיר. אפשר להזיז אותו.",
+  "reason.limit.cityHall": "יש עירייה אחת בעיר. אפשר להזיז אותה.",
+  "reason.cityHallPermanent": "העירייה נשארת בעיר. אפשר להזיז אותה.",
+diff --git a/workout/island/engine/engine.mjs b/workout/island/engine/engine.mjs
+index e32b1d9..b9e5276 100644
+--- a/workout/island/engine/engine.mjs
++++ b/workout/island/engine/engine.mjs
+@@ -195,6 +195,8 @@ export function createEngine(data, options = {}) {
+   const placeBuilding = (typeId, x, z, automatic=false) => {
+     const validation = check(typeId, x, z);
+     if (!validation.ok) return validation;
++    const learningAccess = engine.learningV2?.access(typeId, x, z, automatic);
++    if (learningAccess && !learningAccess.ok) return learningAccess;
+     const type = registry.buildings.get(typeId);
+     let id;
+     do { id = `building-${state.nextId++}`; } while (state.buildings.some(row => row.id === id));
+@@ -203,9 +205,13 @@ export function createEngine(data, options = {}) {
+     state.buildings.push(building);
+     if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
+     const reward = onPlaced(typeId);
+-    if(!automatic)changed('place', { id, reward });
++    const pendingLearningReward = learningAccess?.reward;
++    const learningReward = pendingLearningReward && grantReward(pendingLearningReward.id, pendingLearningReward)
++      ? pendingLearningReward.money : 0;
++    const learningResult = learningReward ? { learningReward } : {};
++    if(!automatic)changed('place', { id, reward, ...learningResult });
+     if (reward) narration.announce(reward.title, { reward: reward.reward });
+-    return { ok: true, reason: 'reason.placed', id, reward };
++    return { ok: true, reason: 'reason.placed', id, reward, ...learningResult };
+   };
+   engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
+   engine.buildReadyPlot = id => {
+@@ -537,6 +543,7 @@ export function createEngine(data, options = {}) {
+   };
+   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
+   installLearning(engine,changed);
++  if (options.installLearningV2) engine.learningV2 = options.installLearningV2(engine, { changed });
+   installCity(engine,{changed,notify,remember});
+   return engine;
+ }
+diff --git a/workout/island/index.html b/workout/island/index.html
+index a2c5cee..b78311a 100644
+--- a/workout/island/index.html
++++ b/workout/island/index.html
+@@ -20,6 +20,7 @@
+   <link rel="stylesheet" href="./ui/city-depth.css?v=island-v2-20261107-18">
+   <link rel="stylesheet" href="./presentation/adventure.css?v=island-v2-20261107-18">
+   <link rel="stylesheet" href="./learning/learning.css?v=island-v2-20261107-18">
++  <link rel="stylesheet" href="./design/learning-questions-v2/src/integration.css">
+   <link rel="stylesheet" href="./ui/clean-hud.css?v=island-v2-20261107-18">
+   <link rel="stylesheet" href="./ui/city-access.css?v=island-v2-20261107-18">
+   <link rel="stylesheet" href="./design/ui-kit-v2/ui-kit.css">
+diff --git a/workout/island/learning/state.mjs b/workout/island/learning/state.mjs
+index ef4cf7a..99d9f39 100644
+--- a/workout/island/learning/state.mjs
++++ b/workout/island/learning/state.mjs
+@@ -40,12 +40,22 @@ export function recordAnswer(s,correct) {
+ export function roundReward(firstTry,retried,total=8) {
+   return {money:12+firstTry*6+retried*3,stars:firstTry/total>=.85?3:firstTry/total>=.5?2:1};
+ }
+-export function completeDailyRound(l,now) {
+-  syncLearningDay(l,now);l.roundsToday=Math.min(Number.MAX_SAFE_INTEGER,l.roundsToday+1);if(l.roundsToday>=roundsForAge(l.age))l.lastMissionDate=l.missionDate;
++export function completeDailyRound(l,now,target=roundsForAge(l.age)) {
++  syncLearningDay(l,now);l.roundsToday=Math.min(Number.MAX_SAFE_INTEGER,l.roundsToday+1);if(l.roundsToday>=target)l.lastMissionDate=l.missionDate;
+ }
+ // Backup settings are restored; earned stars and completed days are merged additively.
+ export function mergeLearning(current,incoming,{restoreSettings=true}={}) {
+   if(restoreSettings){current.age=incoming.age;current.required=incoming.required;}
++  const profile = incoming.v2;
++  if (profile && integer(profile.age,4,12)) {
++    const local = current.v2 && integer(current.v2.age,4,12) ? current.v2 : null;
++    current.v2 = {
++      age: restoreSettings || !local ? profile.age : local.age,
++      adaptive: local?.adaptive ?? structuredClone(profile.adaptive),
++      generalStars: Math.max(integer(local?.generalStars,0) ? local.generalStars : 0,
++        integer(profile.generalStars,0) ? profile.generalStars : 0),
++    };
++  }
+   for(const id of Object.keys(STATIONS)){if(incoming.stations[id].stars>current.stations[id].stars)current.stations[id]=structuredClone(incoming.stations[id]);else current.stations[id].stars=Math.max(current.stations[id].stars,incoming.stations[id].stars);}
+   if(incoming.missionDate>current.missionDate){current.missionDate=incoming.missionDate;current.roundsToday=incoming.roundsToday;}
+   if(current.missionDate===incoming.missionDate)current.roundsToday=Math.max(current.roundsToday,incoming.roundsToday);
+diff --git a/workout/island/tools/offline-shell.mjs b/workout/island/tools/offline-shell.mjs
+index a13892c..fab1243 100644
+--- a/workout/island/tools/offline-shell.mjs
++++ b/workout/island/tools/offline-shell.mjs
+@@ -43,6 +43,12 @@ export async function buildShell(base=root){
+   // scan cannot see them: every data file is part of the shell.
+   for(const name of await readdir(path.join(base,'data')).catch(()=>[]))if(/\.json$/.test(name))seen.add('data/'+name);
+   for(const name of await readdir(path.join(base,'episodes')).catch(()=>[]))if(/\.json$/.test(name))seen.add('episodes/'+name);
++  const learningData = 'design/learning-questions-v2/data';
++  if (seen.has('design/learning-questions-v2/src/integration.mjs')) {
++    for (const name of await readdir(path.join(base,learningData))) {
++      if (/\.json$/.test(name)) seen.add(learningData+'/'+name);
++    }
++  }
+   return ['',...[...seen].sort()];
+ }
+ /** Hex prefix (16 chars = 64 bits) of the SHA-256 of a file: enough to tell "changed"
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index d657d3f..0250c7a 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -456,7 +456,13 @@ export class IslandInterface {
+     const { x, z } = this.currentGhost;
+     const before = this.engine.state.tutorial.step;
+     const zoning=Boolean(this.zoneKind);
++    if (!zoning && !this.movingId && this.learningInterface?.beforeBuild?.(
++      { typeId: this.selected, x, z }, result => this.finishPlacement(result, before, false),
++    )) return;
+     const result = zoning?this.engine.zone(this.zoneKind,x,z):this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
++    this.finishPlacement(result, before, zoning);
++  }
++  finishPlacement(result, before, zoning) {
+     if (result.ok) {
+       if(zoning){this.zoneSessionCount++;this.updateGhost(this.findCell(this.selected),false);this.placeButton.focus();return;}
+       this.cancelPlacement();
+@@ -494,7 +500,7 @@ export class IslandInterface {
+   currentInfoSignature() {
+     const state = this.engine.state;
+     const instance=state.buildings.find(row=>row.id===this.infoId);
+-    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
++    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics(),this.engine.learningV2?.age()>=6]:null,this.engine.learningStatus().locked]);
+   }
+   drawInfo() {
+     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
+@@ -524,6 +530,7 @@ export class IslandInterface {
+     if (record.capacity) effects.append(el('span', '', `${this.t('app.capacity')} ${summary ? summary.capacity.toLocaleString('he-IL') : amount(record.capacity)}`));
+     if (!effects.children.length) effects.append(el('span', '', this.t('app.explore')));
+     const actions = el('div', 'info-actions');
++    if (record.id === 'cityHall') this.learningInterface?.addCityHallActivity?.(actions);
+     const upgradeStatus = cityBuilding?.upgrade ?? upgradeAvailability(this.engine.state, this.engine.registry, instance.id);
+     const nextLevel = upgradeStatus.nextLevel;
+     const upgrade = button('', 'upgrade', 'primary-button');
+diff --git a/workout/island/ui/ready-plots.mjs b/workout/island/ui/ready-plots.mjs
+index 320eb270..3b3e5fab 100644
+--- a/workout/island/ui/ready-plots.mjs
++++ b/workout/island/ui/ready-plots.mjs
+@@ -41,12 +41,18 @@ export class ReadyPlotsInterface{
+     const title=node('h3','ready-plot-name',`${type.icon} ${ui.label(type,'building')}`),detail=node('p','ready-plot-number',ui.t('ready.plotNumber',{number:row.number}));
+     const price=node('strong','ready-plot-price'),status=node('p','ready-plot-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+     const actions=node('div','ready-plot-actions');let committed=false;
++    const finish=result=>{
++      if(result.ok){this.refresh();if(result.id)ui.view.highlightCityBuildings?.([result.id]);}
++      else{committed=false;ui.result(result);this.refresh();}
++    };
+     const confirm=button('','ready-plot-build',()=>{
+       if(committed)return;
+       const current=ui.engine.readyPlots().find(row=>row.id===id);if(!plotCanBuild(current)){this.refresh();return;}
+-      committed=true;confirm.disabled=true;const result=ui.engine.buildReadyPlot(id);
+-      if(result.ok){ui.closeModal();this.refresh();if(result.id)ui.view.highlightCityBuildings?.([result.id]);}
+-      else{committed=false;ui.result(result);this.refresh();}
++      committed=true;confirm.disabled=true;
++      if(ui.learningInterface?.beforeBuild?.({typeId:current.typeId,x:current.x,z:current.z,plotId:id},finish))return;
++      const result=ui.engine.buildReadyPlot(id);
++      if(result.ok)ui.closeModal();
++      finish(result);
+     },'primary-button');
+     const cancel=button(ui.t('app.cancel'),'ready-plot-cancel',()=>ui.closeModal());actions.append(confirm,cancel);
+     modal.append(title,detail,price,status,actions);
