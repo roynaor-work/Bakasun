@@ -1,0 +1,376 @@
+diff --git a/workout/island/data/strings.he.json b/workout/island/data/strings.he.json
+index 39107e3..d814dc2 100644
+--- a/workout/island/data/strings.he.json
++++ b/workout/island/data/strings.he.json
+@@ -1955,2 +1955,10 @@
+  "fire.v24.say.tapPet": "האש כבתה. נוגעים בחיה כדי לחלץ",
++ "fire.levels.rescue.tutorial": "כשהאש ליד החבר כבתה, לוחצים על כפתור החילוץ",
++ "fire.levels.rescue.ready": "אפשר לחלץ. לוחצים על הכפתור הירוק",
++ "fire.levels.rescue.running": "מחלצים…",
++ "fire.levels.rescue.lift-child": "מרימים את הילדה",
++ "fire.levels.rescue.carry-arms": "נושאים למקום בטוח",
++ "fire.levels.rescue.set-down": "מניחים בבטחה",
++ "fire.levels.rescue.lift-cat": "מרימים את החתול",
++ "fire.levels.rescue.clear-path": "מפנים דרך לכלב",
+  "fire.v24.say.clearKid": "קודם מכבים את האש ליד הילדה",
+diff --git a/workout/island/minigames/fire-levels-rescue-scene.mjs b/workout/island/minigames/fire-levels-rescue-scene.mjs
+new file mode 100644
+index 0000000..b6595fb
+--- /dev/null
++++ b/workout/island/minigames/fire-levels-rescue-scene.mjs
+@@ -0,0 +1,87 @@
++import * as T from '../vendor/three.module.js';
++
++const DEG = Math.PI / 180;
++const UP = new T.Vector3(0,1,0);
++const CHILD_HIP = .60;
++const smooth = t => t*t*(3-2*t);
++
++function sample(track,index){
++  const a=track[Math.min(track.length-1,Math.floor(index))];
++  const b=track[Math.min(track.length-1,Math.floor(index)+1)];
++  return a.map((v,i)=>T.MathUtils.lerp(v,b[i],index%1));
++}
++
++/** Sample the canonical body clip and prop tracks against the room-model clock. */
++export function createRescuePlayback(crew,root,clips,catalog,box){
++  const actions=new Map(catalog.actions.map(action=>[action.id,action]));
++  const clipById=new Map(clips.map(clip=>[clip.name,clip]));
++  for(const {id,timer}of actions.values()){
++    if(Math.abs((clipById.get(id)?.duration??-1)-timer.durationSeconds)>1e-5)throw new Error('Missing rescue clip '+id);
++  }
++  const mixer=new T.AnimationMixer(root);
++  const props=new T.Group();
++  crew.parent.add(props);
++  const obstacle=new T.Group(),seat=new T.Group();
++  props.add(obstacle,seat);
++  box(obstacle,.48,.35,.38,'#a37951',0,.175,0);
++  box(seat,.48,.09,.39,'#886243',0,.252,0);
++  for(const x of [-.18,.18])for(const z of [-.14,.14])box(seat,.06,.22,.06,'#614830',x,.11,z);
++  let playing=null;
++  const from=new T.Vector3(),to=new T.Vector3(),offset=new T.Vector3(),hip=new T.Vector3();
++  function place(object,frame,yaw){
++    object.position.set(...frame.slice(0,3)).applyAxisAngle(UP,yaw).add(crew.position);
++    object.rotation.set(frame[3]*DEG,frame[4]*DEG,frame[5]*DEG,'XYZ');
++    object.quaternion.premultiply(crew.quaternion);
++  }
++  function childPose(root,blend){
++    for(const side of ['L','R']){
++      const upper=root.getObjectByName('Thigh_'+side),lower=root.getObjectByName('Shin_'+side);
++      if(upper)upper.rotation.x=T.MathUtils.lerp(-.85,-.63,blend);
++      if(lower)lower.rotation.x=T.MathUtils.lerp(1.4,1.2,blend);
++    }
++  }
++  return {
++    update(pose,state,friend){
++      props.visible=Boolean(pose);
++      if(!pose){
++        if(playing){mixer.stopAllAction();playing=null;}
++        return false;
++      }
++      const {id,elapsed,duration,exitProgress}=pose,action=actions.get(id),tracks=action.propTracks;
++      const yaw=Math.atan2(state.exit[0]-state.pos[0],state.exit[2]-state.pos[2]);
++      const child=Boolean(tracks.child),cat=Boolean(tracks.cat);
++      const first=child ? .38 : cat ? .395 : .90;
++      from.fromArray(state.pos).sub(offset.set(0,0,first).applyAxisAngle(UP,yaw));
++      to.fromArray(state.exit).sub(offset.set(0,0,.45).applyAxisAngle(UP,yaw));
++      crew.position.copy(from);
++      if(id==='carry-arms')crew.position.lerp(to.sub(offset.set(0,0,.6).applyAxisAngle(UP,yaw)),smooth(elapsed/duration));
++      else if(id==='set-down')crew.position.copy(to);
++      else if(exitProgress)crew.position.lerp(to,smooth(exitProgress));
++      crew.rotation.y=yaw;
++      if(playing?.getClip().name!==id){
++        mixer.stopAllAction();
++        playing=mixer.clipAction(clipById.get(id));
++        playing.reset().setLoop(T.LoopOnce,1).play();
++        playing.paused=true;
++      }
++      playing.time=Math.min(playing.getClip().duration,elapsed);
++      mixer.update(0);
++      const frameIndex=elapsed*catalog.sampleRateHz;
++      obstacle.visible=Boolean(tracks.obstacle);
++      seat.visible=Boolean(tracks.seat);
++      if(obstacle.visible)place(obstacle,sample(tracks.obstacle,frameIndex),yaw);
++      if(seat.visible)place(seat,sample(tracks.seat,frameIndex),yaw);
++      if(friend&&(child||cat)){
++        if(friend.mode!=='rescue-action'){friend.mixer.stopAllAction();friend.mode='rescue-action';}
++        const frame=sample(tracks.child||tracks.cat,frameIndex);
++        place(friend.root,frame,yaw);
++        if(child){
++          friend.root.position.sub(hip.set(0,CHILD_HIP,0).applyQuaternion(friend.root.quaternion));
++          childPose(friend.root,frame[6]??0);
++        }
++      }
++      return true;
++    },
++    dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);}
++  };
++}
+diff --git a/workout/island/minigames/fire-levels-rescue.mjs b/workout/island/minigames/fire-levels-rescue.mjs
+new file mode 100644
+index 0000000..3925ab7
+--- /dev/null
++++ b/workout/island/minigames/fire-levels-rescue.mjs
+@@ -0,0 +1,59 @@
++const CLIP_FRAMES = {'clear-path':73,'lift-child':72,'carry-arms':78,'set-down':78,'lift-cat':75};
++const SEQUENCES = {
++  girl:['lift-child','carry-arms','set-down'],
++  cat:['lift-cat'],
++  dog:['clear-path'],
++};
++
++export const rescueAssetRoot = 'assets/fire-levels-v1/rescue/';
++export function rescueAssetFiles(){
++  return ['firefighter.glb','fire-rescue-actions.glb','catalog.json',...Object.keys(CLIP_FRAMES).map(id=>'icons/'+id+'.svg')]
++    .map(path=>rescueAssetRoot+path);
++}
++
++function action(id,elapsed,active){
++  return {id,elapsed,active,duration:CLIP_FRAMES[id]/30};
++}
++
++/** One press starts one uninterrupted action. Each room keeps its own sequence. */
++export function createInteriorRescue(){
++  const states=new WeakMap();
++  function available(room){
++    if(room.handover||room.friend.state!=='waiting')return null;
++    const adjacent=room.spots.find(spot=>spot.id===room.friend.near);
++    if(adjacent&&!adjacent.done)return null;
++    const state=states.get(room),id=SEQUENCES[room.friend.id]?.[state?.index??0];
++    return id?action(id,state?.elapsed??0,state?.elapsed!==null&&state?.elapsed!==undefined):null;
++  }
++  return {
++    available,
++    engaged:room=>states.has(room)&&room.friend.state==='waiting',
++    pose(room){
++      if(room.handover)return null;
++      const state=states.get(room);
++      if(!state)return null;
++      const {id}=room.friend;
++      if(room.friend.state==='walking'&&id==='cat')return {...state.previous,exitProgress:room.friend.t};
++      if(room.friend.state!=='waiting')return null;
++      return state.elapsed===null?state.previous:available(room);
++    },
++    update(room,dt,requested){
++      const next=available(room);
++      if(!next)return false;
++      let state=states.get(room);
++      if(!next.active){
++        if(requested!==next.id)return false;
++        state=state||{index:0,previous:null};
++        states.set(room,state);
++        state.elapsed=0;
++        return false;
++      }
++      state.elapsed=Math.min(next.duration,state.elapsed+dt);
++      if(state.elapsed<next.duration)return false;
++      state.previous=action(next.id,next.duration,false);
++      state.elapsed=null;
++      state.index++;
++      return state.index===SEQUENCES[room.friend.id].length;
++    }
++  };
++}
+diff --git a/workout/island/minigames/fire-v24-interior.mjs b/workout/island/minigames/fire-v24-interior.mjs
+index 70177db..0f5bee5 100644
+--- a/workout/island/minigames/fire-v24-interior.mjs
++++ b/workout/island/minigames/fire-v24-interior.mjs
+@@ -7,2 +7,3 @@ import {ROOMS,FRIENDS,EFFECT,V24_TUNING,roomSeconds,timeScore} from './fire-v24.
+ import {ROOM_FIRE_ANCHORS} from './fire-v24-anchors.mjs?v=island-v2-20261107-18';
++import {createInteriorRescue} from './fire-levels-rescue.mjs?v=island-v2-20261107-18';
+
+@@ -47,2 +48,3 @@ export function createInteriorModel({plan,sound=()=>{},tuning=V24_TUNING}){
+   const events=[];let sequence=0;
++  const rescue=plan.fireLevels?createInteriorRescue():null;
+   const room=()=>rooms[current];
+@@ -55,5 +57,6 @@ export function createInteriorModel({plan,sound=()=>{},tuning=V24_TUNING}){
+   function nearFriend(r,p){const f=r.friend,h=f.height;return f.state==='waiting'&&Math.hypot(p[0]-f.pos[0],p[2]-f.pos[2])<=Math.max(.75,h*.5)&&p[1]>=-.2&&p[1]<=h+.4;}
++  function rescueFriend(r,state){const f=r.friend;f.state=state;f.t=0;score+=tuning.points.rescue;r.score+=tuning.points.rescue;emit('rescue',{room:r.id,friend:f.id});sound('rescue');}
+   function tryRescue(r){const f=r.friend,near=r.spots.find(s=>s.id===f.near);
+     if(near&&!near.done){say(f.kind==='pet'?'fire.v24.say.clearPet':'fire.v24.say.clearKid');return false;}
+-    f.state='rescued';f.t=0;score+=tuning.points.rescue;r.score+=tuning.points.rescue;emit('rescue',{room:r.id,friend:f.id});sound('rescue');return true;}
++    rescueFriend(r,'rescued');return true;}
+   function finishRoom(r){r.clearedAt=time;const bonus=r.handover?0:Math.round(tuning.points.roomClear*timeScore(r.time,r.limit,tuning));score+=bonus;r.score+=bonus;phase='clear';phaseTime=0;emit('clear',{room:r.id,bonus,seconds:r.time});}
+@@ -66,2 +69,4 @@ export function createInteriorModel({plan,sound=()=>{},tuning=V24_TUNING}){
+     get empty(){return empty[tool]||false;},get inRoom(){return phase==='intro'||phase==='play'||phase==='handover'||phase==='clear';},
++    get rescueAction(){return phase==='play'?rescue?.available(room())??null:null;},
++    get rescuePose(){return rescue?.pose(room())??null;},
+     spotAt:p=>spotAt(room(),p),nearFriend:p=>nearFriend(room(),p),
+@@ -102,9 +107,14 @@ export function createInteriorModel({plan,sound=()=>{},tuning=V24_TUNING}){
+       for(const s of r.spots){s.flare=Math.max(0,s.flare-dt);s.spark=Math.max(0,s.spark-dt);}
+-      for(const k of ['water','extinguisher','foam']){const t=TANK[k];if(!(input.aim&&tool===k&&!empty[k])){tanks[k]=Math.min(1,tanks[k]+t.refill*dt);if(empty[k]&&tanks[k]>=t.restart)empty[k]=false;}}
+-      aim=input.aim?[...input.aim]:null;
+-      if(input.tap){const p=input.tap;
+-        if(nearFriend(r,p))tryRescue(r);
++      const rescuing=rescue?.engaged(r);
++      if(rescue?.update(r,dt,input.rescueAction))rescueFriend(r,f.id==='girl'?'out':'walking');
++      const rescueLocksInput=rescuing||rescue?.engaged(r);
++      const unlitFriend=rescue&&input.aim&&nearFriend(r,input.aim)&&!spotAt(r,input.aim);
++      const sprayAim=rescueLocksInput||unlitFriend?null:input.aim;
++      for(const k of ['water','extinguisher','foam']){const t=TANK[k];if(!(sprayAim&&tool===k&&!empty[k])){tanks[k]=Math.min(1,tanks[k]+t.refill*dt);if(empty[k]&&tanks[k]>=t.restart)empty[k]=false;}}
++      aim=sprayAim?[...sprayAim]:null;
++      if(input.tap&&!rescueLocksInput){const p=input.tap;
++        if(!rescue&&nearFriend(r,p))tryRescue(r);
+         else if(tool==='blanket'){const s=spotAt(r,p,.5);if(s&&s.kind==='oil'&&blankets>0){blankets--;done(s,'blanket');}else if(s)say('fire.v24.say.blanketOil');}
+       }
+-      if(aim&&tool!=='blanket'&&!(input.tap&&nearFriend(r,input.tap))){
++      if(aim&&tool!=='blanket'&&(rescue||!(input.tap&&nearFriend(r,input.tap)))){
+         const t=TANK[tool];if(tanks[tool]>0&&!empty[tool]){spraying=true;r.sprayTime+=dt;tanks[tool]=Math.max(0,tanks[tool]-t.drain*dt);if(tanks[tool]===0){empty[tool]=true;say(tool==='water'?'fire.v24.say.waterEmpty':'fire.v24.say.toolEmpty');}
+@@ -122,3 +132,3 @@ export function createInteriorModel({plan,sound=()=>{},tuning=V24_TUNING}){
+     snapshot(){const r=room();return {mode:'entry',phase,phaseTime,time,tool,tools:[...tools],tanks:{...tanks},blankets,score:Math.round(score),aim,spraying,hitSpot,feedback,result,
+-      roomIndex:current,roomCount:rooms.length,...(plan.fireLevels?{floor:room()?.floor??1,floorCount:plan.floorCount}:{}),
++      roomIndex:current,roomCount:rooms.length,rescueAction:model.rescueAction,...(plan.fireLevels?{floor:room()?.floor??1,floorCount:plan.floorCount}:{}),
+       room:r?{index:current,...(r.floor?{floor:r.floor}:{}),id:r.id,limit:r.limit,remaining:r.remaining,band:clockBand(r.remaining,r.limit,tuning),time:r.time,smoke:r.smoke,smokeLine:smokeLine(r,tuning),mistakes:r.mistakes,handover:r.handover,
+diff --git a/workout/island/minigames/fire-v24-scene.mjs b/workout/island/minigames/fire-v24-scene.mjs
+index 2143e78..1fe76f8 100644
+--- a/workout/island/minigames/fire-v24-scene.mjs
++++ b/workout/island/minigames/fire-v24-scene.mjs
+@@ -11,2 +11,4 @@ import {ROOMS,V24_TUNING,FLOOR_ASSET_DIR,floorAssetFile} from './fire-v24.mjs?v=
+ import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-18';
++import {rescueAssetRoot} from './fire-levels-rescue.mjs?v=island-v2-20261107-18';
++import {createRescuePlayback} from './fire-levels-rescue-scene.mjs?v=island-v2-20261107-18';
+
+@@ -156,5 +158,35 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
+   // ---- firefighter and friend ------------------------------------------------------------------------------------------------------------
+-  let crew=null,crewRig=null,crewYaw=Math.PI,friend=null;const friends=new Map();
++  let crew=null,crewRig=null,crewYaw=Math.PI,friend=null,rescuePlayback=null;const friends=new Map();
+   const GRIP={elbowX:.3,elbowY:.95,elbowZ:.22,handX:.12,handY:.98,handZ:.55};
+-  async function loadCrew(){try{const g=await loadGLB(V24_ASSETS.firefighter);if(disposed)return;const visual=fitModel(g.scene,{path:'firefighter',rotationY:0,scale:1},{height:1.78});visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;scene.add(visual);crew=visual;crewRig=createFireCrewRig(g.scene,g.animations,GRIP);}catch{crew=null;}}
++  async function loadCrew(){
++    if(model.plan.fireLevels){
++      const visual=new T.Group();
++      try{
++        const path='../'+rescueAssetRoot;
++        const [character,motion,catalog]=await Promise.all([
++          loadGLB(path+'firefighter.glb'),
++          loadGLB(path+'fire-rescue-actions.glb'),
++          fetch(url(path+'catalog.json')).then(response=>{
++            if(!response.ok)throw new Error('Fire rescue catalogue unavailable');
++            return response.json();
++          }),
++        ]);
++        if(disposed)return;
++        const root=character.scene;
++        root.getObjectByName('Character').scale.setScalar(1);
++        root.traverse(node=>{
++          if(!node.isSkinnedMesh)return;
++          node.frustumCulled=false;
++          if(['hose','extinguisher'].includes(node.userData.category))node.visible=false;
++        });
++        visual.add(root);scene.add(visual);
++        visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;
++        rescuePlayback=createRescuePlayback(visual,root,motion.animations,catalog,box);
++        crewRig=createFireCrewRig(root,character.animations,GRIP);
++        crew=visual;
++        return;
++      }catch{visual.removeFromParent();if(disposed)return;}
++    }
++    try{const g=await loadGLB(V24_ASSETS.firefighter);if(disposed)return;const visual=fitModel(g.scene,{path:'firefighter',rotationY:0,scale:1},{height:1.78});visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;scene.add(visual);crew=visual;crewRig=createFireCrewRig(g.scene,g.animations,GRIP);}catch{crew=null;}
++  }
+   async function friendObject(id){
+@@ -199,3 +231,3 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
+       else if(e.kind==='room'){void switchRoom(e.index);}
+-      else if(e.kind==='rescue'){friend?.play('rescued',true,1.7);if(friend)friend.mode='rescued';}
++      else if(e.kind==='rescue'&&!model.plan.fireLevels){friend?.play('rescued',true,1.7);if(friend)friend.mode='rescued';}
+       else if(e.kind==='clear'){cam.zoomExit=1;}
+@@ -234,3 +266,5 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
+     const spraying=model.spraying&&model.aim&&inRoom;let start=nozzle;
+-    if(crew){crew.position.y=Math.sin(time*1.6)*.015;if(model.aim){const dx=model.aim[0]-crew.position.x,dz=model.aim[2]-crew.position.z;const want=Math.atan2(dx,dz);crewYaw=damp(crewYaw,want,6,dt);}else crewYaw=damp(crewYaw,Math.PI,2,dt);crew.rotation.y=crewYaw;
++    const rescuePose=model.rescuePose,rescuePlaying=rescuePlayback?.update(rescuePose,room?.friend,friend);
++    if(crew&&!rescuePlaying){if(rescuePlayback){crew.position.x=damp(crew.position.x,-1.9,6,dt);crew.position.z=damp(crew.position.z,3.1,6,dt);}
++      crew.position.y=Math.sin(time*1.6)*.015;if(model.aim){const dx=model.aim[0]-crew.position.x,dz=model.aim[2]-crew.position.z;const want=Math.atan2(dx,dz);crewYaw=damp(crewYaw,want,6,dt);}else crewYaw=damp(crewYaw,Math.PI,2,dt);crew.rotation.y=crewYaw;
+       if(crewRig){crewRig.update(dt,false,Boolean(spraying));if(crewRig.hand(tmp2))start=tmp2;}}
+@@ -253,5 +287,5 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
+     if(friend&&room){const st=room.friend;friend.mixer.update(dt);
+-      if(st.state==='walking'||st.state==='team'){if(friend.mode!=='walking'){friend.play('walk',false,1.6);friend.mode='walking';}const t=smooth(st.t);friend.root.position.set(st.pos[0]+(st.exit[0]-st.pos[0])*t,0,st.pos[2]+(st.exit[2]-st.pos[2])*t);friend.root.rotation.y=Math.atan2(st.exit[0]-st.pos[0],st.exit[2]-st.pos[2]);friend.root.visible=st.t<.98;}
++      if((st.state==='walking'&&!rescuePlaying)||st.state==='team'){if(friend.mode!=='walking'){friend.play('walk',false,1.6);friend.mode='walking';}const t=smooth(st.t);friend.root.position.set(st.pos[0]+(st.exit[0]-st.pos[0])*t,0,st.pos[2]+(st.exit[2]-st.pos[2])*t);friend.root.rotation.y=Math.atan2(st.exit[0]-st.pos[0],st.exit[2]-st.pos[2]);friend.root.visible=st.t<.98;}
+       else if(st.state==='out')friend.root.visible=false;
+-      const near=room.spots.find(x=>x.id===st.near);friendRing.visible=st.state==='waiting'&&inRoom&&Boolean(!near||near.done);
++      const near=room.spots.find(x=>x.id===st.near);friendRing.visible=!rescuePose&&st.state==='waiting'&&inRoom&&Boolean(!near||near.done);
+       if(friendRing.visible){friendRing.position.set(st.pos[0],.03,st.pos[2]);friendRing.scale.setScalar(1.15+.15*Math.sin(time*3));ringMatFriend.opacity=.5+.3*Math.sin(time*3);}}
+@@ -268,4 +302,4 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
+   function render(){if(disposed||(roomBarrier&&!ready))return;renderer.render(scene,camera);}
+-  function metrics(){const info=renderer.info.render;let triangles=0,draws=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite||o.isPoints){const g=o.geometry;triangles+=g?Math.round((g.index?.count||g.attributes.position?.count||0)/3):2;draws++;}});return {triangles:info.triangles,drawCalls:info.calls,sceneTriangles:triangles,sceneObjects:draws,crew:Boolean(crew),friend:Boolean(friend),roomBuilt:Boolean(roomVisual?.userData.built),burnables:burnables.size,puffs:puffs.filter(p=>p.s.visible).length,lite,width,height,ready,loadFailed};}
+-  function dispose(){if(disposed)return;disposed=true;friend?.mixer.stopAllAction();crewRig?.dispose();
++  function metrics(){const info=renderer.info.render;let triangles=0,draws=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite||o.isPoints){const g=o.geometry;triangles+=g?Math.round((g.index?.count||g.attributes.position?.count||0)/3):2;draws++;}});return {triangles:info.triangles,drawCalls:info.calls,sceneTriangles:triangles,sceneObjects:draws,crew:Boolean(crew),rescueAnimation:Boolean(rescuePlayback),friend:Boolean(friend),roomBuilt:Boolean(roomVisual?.userData.built),burnables:burnables.size,puffs:puffs.filter(p=>p.s.visible).length,lite,width,height,ready,loadFailed};}
++  function dispose(){if(disposed)return;disposed=true;friend?.mixer.stopAllAction();crewRig?.dispose();rescuePlayback?.dispose();
+     const released=new Set(disposables);
+diff --git a/workout/island/minigames/fire-v24-session.mjs b/workout/island/minigames/fire-v24-session.mjs
+index 9f6fb7f..092ce10 100644
+--- a/workout/island/minigames/fire-v24-session.mjs
++++ b/workout/island/minigames/fire-v24-session.mjs
+@@ -4,3 +4,3 @@
+  * bar on the left, a three-step picture lesson on the first entry stage. Touch: one finger on the room aims and sprays (the water goes where
+- * the finger is, with help onto the nearest fire); a short tap on the friend carries them out. The model is fire-v24-interior.mjs, the
++ * the finger is, with help onto the nearest fire); the rescue button activates the next action when available. The model is fire-v24-interior.mjs, the
+  * picture is fire-v24-scene.mjs. Nothing is written to the save. */
+@@ -11,2 +11,3 @@ import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-18';
+ import {createCanvasInteriorScene} from './fire-levels-canvas.mjs?v=island-v2-20261107-18';
++import {rescueAssetRoot} from './fire-levels-rescue.mjs?v=island-v2-20261107-18';
+
+@@ -54,2 +55,17 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+   const events=new AbortController(),options={signal:events.signal};
++  const rescueButton=plan.fireLevels?el('button','fv24-rescue'):null;
++  const rescueIcon=rescueButton?el('img','fv24-rescue-icon'):null;
++  const rescueCaption=rescueButton?el('span','fv24-rescue-caption'):null;
++  const rescueTime=rescueButton?el('bdi','fv24-rescue-time'):null;
++  if(rescueButton){
++    rescueButton.type='button';rescueButton.hidden=true;rescueButton.dataset.gameControl='rescue';
++    rescueIcon.alt='';rescueTime.setAttribute('aria-hidden','true');
++    rescueButton.append(rescueIcon,rescueCaption,rescueTime);root.append(rescueButton);
++    rescueButton.addEventListener('click',()=>{
++      const action=model.rescueAction;
++      if(paused||!tutorialDone||!scene.ready||!action||action.active)return;
++      pointerId=null;delete input.aim;delete input.aimRaw;delete input.tap;
++      input.rescueAction=action.id;
++    },options);
++  }
+   const contextRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireContextRecovery')!=='0';
+@@ -74,3 +90,3 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+       // a tap near the friend on the screen is a tap on the friend (the pick ray would land on the floor behind them)
+-      if(f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
++      if(!plan.fireLevels&&f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
+       if(!input.tap){const world=scene.pick(l.x,l.y);if(world)input.tap=world;}}delete input.aim;delete input.aimRaw;},options);
+@@ -99,2 +115,15 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+       if(r.remaining<=10&&!tenSaid&&s.phase==='play'){tenSaid=true;ctx.engine?.narration?.announce?.('fire.v24.say.tenSeconds');}if(s.phase==='intro')tenSaid=false;}
++    if(rescueButton){
++      const action=s.rescueAction;
++      rescueButton.hidden=!(scene.ready&&tutorialDone&&action);
++      if(action){
++        if(rescueButton.dataset.rescueAction!==action.id){
++          rescueButton.dataset.rescueAction=action.id;
++          rescueIcon.src=new URL('../'+rescueAssetRoot+'icons/'+action.id+'.svg',import.meta.url).href;
++          rescueCaption.textContent=t('fire.levels.rescue.'+action.id);
++        }
++        rescueButton.setAttribute('aria-disabled',String(action.active));
++        rescueTime.textContent=action.active?String(Math.ceil(action.duration-action.elapsed)):'';
++      }
++    }
+     const level=s.tanks[s.tool]??1;gaugeFill.style.transform=`scaleY(${level})`;gauge.dataset.level=s.empty?'critical':level<.3?'low':'ok';gauge.setAttribute('aria-valuenow',String(Math.round(level*100)));
+@@ -103,6 +132,6 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+     // cards: the lesson (first entry stage) then the room card
+-    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend','fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,continueLabel());}
++    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend',plan.fireLevels?'fire.levels.rescue.tutorial':'fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,continueLabel());}
+     else if(tutorialDone&&s.phase==='intro'&&r){const id='room:'+r.id+':'+s.roomIndex;card.hidden=false;if(lastCard!==id){lastCard=id;card.dataset.card='room';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.room.'+r.id)),el('p','fv24-card-rule',t('fire.v24.intro',{room:t('fire.v24.room.'+r.id),friend:t('fire.v24.friend.'+r.friend.id)})),el('p','fv24-card-clock',t('fire.v24.introClock',{seconds:r.limit})),continueLabel());}}
+     else if(tutorialDone){if(keyboard&&!card.hidden&&card.contains(document.activeElement))canvas.focus({preventScroll:true});card.hidden=true;}
+-    const key=coachKey(s);if(key!==lastCoach){lastCoach=key;coachText.textContent=t(key);}
++    const key=s.rescueAction?(s.rescueAction.active?'fire.levels.rescue.running':'fire.levels.rescue.ready'):coachKey(s);if(key!==lastCoach){lastCoach=key;coachText.textContent=t(key);}
+     root.dataset.phase=s.phase;
+@@ -133,3 +162,3 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+       const running=scene.ready&&tutorialDone&&!paused&&dt>0&&fade.dataset.state!=='in';
+-      if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;model.update(dt,step);}
++      if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;delete input.rescueAction;model.update(dt,step);}
+       scene.update(paused?0:dt);
+diff --git a/workout/island/minigames/fire-v24.css b/workout/island/minigames/fire-v24.css
+index d66c7ba..de9e8b4 100644
+--- a/workout/island/minigames/fire-v24.css
++++ b/workout/island/minigames/fire-v24.css
+@@ -47,2 +47,8 @@
+ .fv24-tool:focus-visible{outline:3px solid #e6cf98;outline-offset:3px}
++.fv24-rescue{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);min-height:54px;display:flex;align-items:center;gap:8px;padding:6px 14px;border:2px solid #7cf0a8;border-radius:16px;background:#183d33f5;color:#f2fff6;box-shadow:0 6px 18px #080c15a0;font:inherit;font-weight:750;pointer-events:auto;touch-action:manipulation;cursor:pointer}
++.fv24-rescue[aria-disabled=true]{border-color:#7cf0a872;cursor:default}
++.fv24-rescue:focus-visible{outline:3px solid #fff2b4;outline-offset:3px}
++.fv24-rescue-icon{width:36px;height:36px}
++.fv24-rescue-time{min-width:1ch;font-variant-numeric:tabular-nums;color:#b4ffcd}
++.fv24-rescue-time:empty{display:none}
+ /* lesson and room cards: tap anywhere on them to go on */
