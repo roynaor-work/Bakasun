@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "instances": 800,
+  "units": "meters; camera, ball and seats in crowd root local coordinates",
+  "crowdTriangleLimit": 70000,
+  "packageByteLimit": 500000,
+  "levels": [
+    {"name": "LOD0", "triangles": 210, "maxTriangles": 220, "directory": "runtime/lod0"},
+    {"name": "LOD1", "triangles": 90, "maxTriangles": 90, "directory": "runtime/lod1"},
+    {"name": "LOD2", "triangles": 24, "maxTriangles": 24, "directory": "runtime/lod2"}
+  ],
+  "distanceThresholds": [16, 34],
+  "viewWeight": {"maxDistanceMultiplier": 2.5, "innerCosine": 0.97, "outerCosine": 0.80, "note": "Optional cameraForward prioritizes the viewing direction; all 800 fans still render and count."},
+  "transition": {"method": "complementary opaque screen-door dither", "overlapFraction": 0.2},
+  "budgetGuard": {"enabled": true, "method": "continuous common distance scale; reserve full cost of both LODs during overlap"},
+  "head": {"yawLimitRadians": 0.87, "pitchLimitRadians": 0.32},
+  "basket": {"durationSeconds": 3.2, "jumpMeters": 0.16, "staggerSeconds": 0.25},
+  "teamColors": ["#e55b3e", "#40aab6"],
+  "coordinateSystem": {"up": "+Y", "forward": "+Z", "feetY": 0},
+  "cameraSource": "minigames/hoops-view.mjs cameraFor and data/config.json minigames.streetSlam.view at d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+}
