@@ -4,13 +4,13 @@
  * on the button (green, yellow, red; red blink while locked). sample() is read once per simulation frame, and a press
  * that starts and ends between two frames still counts once. Only created when the model runs v23 (?alienFire=v15 keeps
  * the single v22 button). */
-import {vulcanLevel,vulcanBlink,V23_DEFAULTS} from './alien-v23.mjs?v=island-v2-20261107-17';
+import {vulcanLevel,vulcanBlink,V23_DEFAULTS} from './alien-v23.mjs?v=island-v2-20261107-18';
 
 const VULCAN_ICON='M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0M10.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M15.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M12.9 16.33a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M7.9 16.33a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M5.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M7.9 7.67a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M12.9 7.67a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0';
 let styled=false;
 function ensureStyle(doc){
  if(styled||!doc?.head)return;styled=true;
- const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v23.css?v=island-v2-20261107-17',import.meta.url).href;doc.head.append(link);
+ const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v23.css?v=island-v2-20261107-18',import.meta.url).href;doc.head.append(link);
 }
 export function vulcanIcon(doc=globalThis.document){
  const svg=doc.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');

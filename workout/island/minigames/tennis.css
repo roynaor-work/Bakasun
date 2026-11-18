@@ -141,3 +141,22 @@
 .game-screen[data-game=tennis] .tennis-out-sign bdi{position:absolute;left:18px;top:13px;width:91px;height:31px;display:grid;place-items:center;font:700 21px/1 system-ui,sans-serif;color:#f6efd8;direction:rtl;text-shadow:0 1px 2px #0008}
 .game-screen[data-game=tennis] .tennis-out-sign[hidden],.game-screen[data-game=tennis] .tennis-receive-hint[hidden]{display:none}
 .game-screen[data-game=tennis] .tennis-receive-hint{position:absolute;z-index:6;left:50%;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 6px);transform:translateX(-50%);padding:6px 14px;border-radius:14px;background:#0d2a24d9;color:#f3ecd2;font:600 15px/1.2 system-ui,sans-serif;direction:rtl;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px #0006}
+/* v24.4 line calls (tennis-callouts.mjs, ?tennisCallouts=0 off): a plate drawn here, the call word big, the Codex tennis-ui-v2 symbol at its side. */
+.game-screen[data-game=tennis] .tennis-out-sign.tennis-call{width:188px;height:62px;border-radius:14px;background:#173f36;border:2px solid #f5efdc;box-shadow:0 3px 10px #0007,inset 0 4px 0 #d9534a;animation:tennis-call-pop .22s ease-out}
+.game-screen[data-game=tennis] .tennis-out-sign.tennis-call[data-call=net]{box-shadow:0 3px 10px #0007,inset 0 4px 0 #d4bf82}
+.game-screen[data-game=tennis] .tennis-out-sign.tennis-call bdi{left:10px;top:9px;width:116px;height:42px;font:900 31px/1 system-ui,sans-serif;letter-spacing:1px;direction:ltr;color:#fff4dc}
+.game-screen[data-game=tennis] .tennis-call-icon{position:absolute;right:8px;top:5px;width:50px;height:50px;background:no-repeat center/contain}
+/* scale only (no fade-in): the plate is readable from its first frame even if the animation is held back */
+@keyframes tennis-call-pop{from{transform:translateX(-50%) scale(.78)}to{transform:translateX(-50%) scale(1)}}
+@media (prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .tennis-out-sign.tennis-call{animation:none}}
+/* v24.4 controls (tennis-ui2.mjs, ?tennisUi=v24 off): the Codex tennis-ui-v2 plates; positions and sizes are set inline from UI2. */
+.game-screen[data-game=tennis] .soccer-actions.tennis-ui2{right:max(44px,env(safe-area-inset-right));bottom:max(28px,env(safe-area-inset-bottom));width:208px;height:196px}
+/* !important: the v24 id rules (#shoot, #drop...) set their own fill, border and shadow. */
+.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 button{position:absolute;padding:0;border:0!important;border-radius:24%!important;background:var(--ui2-art) center/100% 100% no-repeat!important;box-shadow:none!important;backdrop-filter:none;overflow:visible}
+.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 button>svg{display:none}
+.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 button.held{background:var(--ui2-pressed) center/100% 100% no-repeat!important;transform:translateY(1px)}
+.game-screen.game-screen[data-game=tennis] .soccer-actions.tennis-ui2 [data-game-control] .tennis-control-caption{position:absolute;left:50%;top:calc(100% + 1px);transform:translateX(-50%);font-size:11px!important;line-height:13px;font-weight:700;color:#f5efdc;text-shadow:0 1px 2px #000c,0 0 4px #000a;pointer-events:none}
+.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 button.serve-ready{box-shadow:0 0 0 3px #e5e692aa,0 0 14px #e5e69288!important}
+.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 button#shoot.hit-ready{box-shadow:0 0 0 3px #ece7adaa,0 0 14px #ece7ad88!important}
+.game-screen[data-game=tennis] .soccer-actions.tennis-ui2 button:focus-visible{outline:3px solid #f5efdc;outline-offset:2px}
+.game-screen[data-game=tennis] .soccer-actions.tennis-ui2 button[hidden]{display:none}

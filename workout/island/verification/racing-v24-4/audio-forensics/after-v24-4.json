@@ -1,0 +1,503 @@
+{
+ "generatedAt": "2026-11-18T10:57:59.886Z",
+ "seconds": 60,
+ "games": {
+  "islandRacing": {
+   "game": "islandRacing",
+   "seconds": 60,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 5991,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:35863/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:35863/workout/island/ui/activity.mjs:66:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 6032,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:35863/workout/island/minigames/racing-audio.mjs:61:13) < unlock (http://127.0.0.1:35863/workout/island/minigames/racing-unlock.mjs:6:31)"
+    }
+   ],
+   "frames": 1214,
+   "phases": {
+    "(none)": {
+     "frames": 1,
+     "s25": 0,
+     "s12": 0.009,
+     "maxDb": -100.1,
+     "audible": 0
+    },
+    "countdown": {
+     "frames": 468,
+     "s25": 0.01,
+     "s12": 0.076,
+     "maxDb": -56.4,
+     "audible": 467
+    },
+    "racing": {
+     "frames": 745,
+     "s25": 0,
+     "s12": 0.006,
+     "maxDb": -50.3,
+     "audible": 745
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 7,
+     "live": 4,
+     "loop": 0,
+     "phases": {
+      "null": 3,
+      "racing": 4
+     }
+    },
+    "osc:custom": {
+     "count": 2,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 2
+     }
+    },
+    "generated:61739@44100": {
+     "count": 4,
+     "live": 3,
+     "loop": 1,
+     "phases": {
+      "null": 1,
+      "racing": 3
+     }
+    },
+    "assets/racing-audio-v2/tyre-squeal.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/wind-speed.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v3/brake-squeal-loop.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-light.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-medium.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-hard.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-gravel-low.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-gravel-high.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-grass-low.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-grass-medium.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-gravel-medium.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/offtrack-grass-high.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/brake-low.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/brake-medium.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/pit-engine-slow.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/brake-high.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/pit-limiter.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/pit-bay-proximity.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v5/pit-crew-background.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:triangle": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:sawtooth": {
+     "count": 7,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "null": 5,
+      "racing": 2
+     }
+    },
+    "osc:square": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v4/car-bump-soft.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    }
+   },
+   "oscillators": 19,
+   "filters": 12,
+   "segments": [],
+   "restartWhistles": 0,
+   "liveTones": [],
+   "liveGlides": [],
+   "liveHums": [],
+   "liveHiss": [],
+   "bands": {
+    "standing": {
+     "frames": 13,
+     "bands": [
+      0.7312,
+      0.2518,
+      0.0161,
+      0.001,
+      0,
+      0
+     ],
+     "flat": 0.024,
+     "lvl": -60.4,
+     "above2k": 0.001,
+     "db": [
+      -53.8,
+      -58.1,
+      -69.8,
+      -81.9,
+      null,
+      null
+     ],
+     "above2kDb": -81.9
+    },
+    "slow": {
+     "frames": 231,
+     "bands": [
+      0.7747,
+      0.2165,
+      0.0087,
+      0.0001,
+      0,
+      0
+     ],
+     "flat": 0.085,
+     "lvl": -56,
+     "above2k": 0.0001,
+     "db": [
+      -49.8,
+      -55.7,
+      -69,
+      -87.2,
+      null,
+      null
+     ],
+     "above2kDb": -87.2
+    },
+    "fast": {
+     "frames": 501,
+     "bands": [
+      0.7804,
+      0.2139,
+      0.0051,
+      0.0005,
+      0.0001,
+      0
+     ],
+     "flat": 0.243,
+     "lvl": -54.1,
+     "above2k": 0.0006,
+     "db": [
+      -48.4,
+      -54.2,
+      -69.8,
+      -80.4,
+      -88.6,
+      null
+     ],
+     "above2kDb": -79.8
+    }
+   },
+   "bandsAll": {
+    "all": {
+     "frames": 1,
+     "bands": [
+      0.7261,
+      0.2651,
+      0.0088,
+      0,
+      0,
+      0
+     ],
+     "flat": 0.191,
+     "lvl": -100.1,
+     "above2k": 0,
+     "db": [
+      -91.6,
+      -96,
+      -110.8,
+      null,
+      null,
+      null
+     ],
+     "above2kDb": null
+    },
+    "standing": {
+     "frames": 481,
+     "bands": [
+      0.5237,
+      0.3923,
+      0.0739,
+      0.0101,
+      0,
+      0
+     ],
+     "flat": 0.008,
+     "lvl": -59.6,
+     "above2k": 0.0101,
+     "db": [
+      -54.4,
+      -55.4,
+      -62.5,
+      -71.1,
+      null,
+      null
+     ],
+     "above2kDb": -71.1
+    },
+    "slow": {
+     "frames": 231,
+     "bands": [
+      0.7747,
+      0.2165,
+      0.0087,
+      0.0001,
+      0,
+      0
+     ],
+     "flat": 0.085,
+     "lvl": -56,
+     "above2k": 0.0001,
+     "db": [
+      -49.8,
+      -55.7,
+      -69,
+      -87.2,
+      null,
+      null
+     ],
+     "above2kDb": -87.2
+    },
+    "fast": {
+     "frames": 501,
+     "bands": [
+      0.7804,
+      0.2139,
+      0.0051,
+      0.0005,
+      0.0001,
+      0
+     ],
+     "flat": 0.243,
+     "lvl": -54.1,
+     "above2k": 0.0006,
+     "db": [
+      -48.4,
+      -54.2,
+      -69.8,
+      -80.4,
+      -88.6,
+      null
+     ],
+     "above2kDb": -79.8
+    }
+   },
+   "errors": [],
+   "timeline": [
+    {
+     "at": 13,
+     "what": "ready"
+    },
+    {
+     "at": 13,
+     "what": "intro closed {\"phase\":\"countdown\",\"paused\":false,\"intro\":false}"
+    },
+    {
+     "at": 13.2,
+     "what": "bot running"
+    },
+    {
+     "at": 18.2,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":9,\"starting\":\"false\"}"
+    },
+    {
+     "at": 23.2,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":17,\"starting\":\"false\"}"
+    },
+    {
+     "at": 28.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":24,\"starting\":\"false\"}"
+    },
+    {
+     "at": 33.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":31,\"starting\":\"false\"}"
+    },
+    {
+     "at": 38.4,
+     "what": "race {\"phase\":\"racing\",\"time\":0.2,\"paused\":false,\"hidden\":false,\"frames\":37,\"starting\":\"false\"}"
+    },
+    {
+     "at": 43.4,
+     "what": "race {\"phase\":\"racing\",\"time\":0.9,\"paused\":false,\"hidden\":false,\"frames\":44,\"starting\":\"false\"}"
+    },
+    {
+     "at": 48.5,
+     "what": "race {\"phase\":\"racing\",\"time\":1.6,\"paused\":false,\"hidden\":false,\"frames\":51,\"starting\":\"false\"}"
+    },
+    {
+     "at": 53.5,
+     "what": "race {\"phase\":\"racing\",\"time\":2.3,\"paused\":false,\"hidden\":false,\"frames\":58,\"starting\":\"false\"}"
+    },
+    {
+     "at": 58.6,
+     "what": "race {\"phase\":\"racing\",\"time\":2.9,\"paused\":false,\"hidden\":false,\"frames\":64,\"starting\":\"false\"}"
+    },
+    {
+     "at": 63.6,
+     "what": "race {\"phase\":\"racing\",\"time\":3.5,\"paused\":false,\"hidden\":false,\"frames\":70,\"starting\":\"false\"}"
+    },
+    {
+     "at": 68.6,
+     "what": "race {\"phase\":\"racing\",\"time\":4.3,\"paused\":false,\"hidden\":false,\"frames\":78,\"starting\":\"false\"}"
+    },
+    {
+     "at": 73.7,
+     "what": "race {\"phase\":\"racing\",\"time\":4.9,\"paused\":false,\"hidden\":false,\"frames\":84,\"starting\":\"false\"}"
+    },
+    {
+     "at": 73.8,
+     "what": "done"
+    }
+   ]
+  }
+ }
+}

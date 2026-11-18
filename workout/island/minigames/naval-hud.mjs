@@ -1,7 +1,7 @@
-import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-17';
-import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-17';
-import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-17';
-import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-17';
+import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-18';
+import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-18';
+import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-18';
+import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-18';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));

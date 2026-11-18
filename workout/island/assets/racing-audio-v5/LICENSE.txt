@@ -1,0 +1,43 @@
+Racing Audio v5 — original local synthesis, 2026
+
+AUDIO: CC0 1.0 Universal (CC0-1.0)
+
+To the extent possible under law, the authors dedicate all audio files in audio/
+to the public domain under the Creative Commons CC0 1.0 Universal dedication:
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+You may copy, modify, distribute and use these sounds, including commercially,
+without asking permission or providing attribution. No warranties are provided.
+
+All sounds are newly synthesized from deterministic mathematical excitation,
+filtered stochastic textures and envelopes by synthesize.py. No recordings,
+samples, stock audio, speech models or external generative services are used.
+The existing racing-audio-v4 files are measured read-only, never sampled into v5.
+Their own licenses continue to apply. Before/after plots are measurements, not
+redistributed copies of their audio.
+
+CODE AND DOCUMENTATION: MIT License
+
+Copyright (c) 2026 Bakasun contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+TOOLS: NumPy, SciPy, FFmpeg/libvorbis/libmp3lame are local build dependencies.
+They are not bundled by this package. Native browser codecs and Web Audio API
+play the encoded files. No WASM decoder, runtime library or external CDN is used.

@@ -266,5 +266,5 @@ test('offline: every v24 file of the default match is listed for soccer, the she
   for(const f of ['minigames/soccer-v24.mjs','minigames/soccer-v24-pitch.mjs','minigames/soccer-v24-fx.mjs','minigames/soccer-v24-crowd.mjs','minigames/athlete-body-v2.mjs']){
     const tags=[...(await read(f)).matchAll(/\?v=(island-v2-[0-9-]+)/g)].map(m=>m[1]);for(const tag of tags)assert.equal(tag,release.version,f);
   }
-  assert.equal(release.version,'island-v2-20261107-17','release.json is main\'s, not bumped here');
+  assert.equal(release.version,'island-v2-20261107-18','release.json is main\'s, not bumped here');
 });

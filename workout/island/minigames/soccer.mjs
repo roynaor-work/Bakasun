@@ -1,13 +1,13 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-17';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-18';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-17';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-17';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-17';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-17';
-import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-17';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-17';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-17';
-import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-17';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-18';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-18';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-18';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-18';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-18';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-18';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-18';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-18';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -17,10 +17,10 @@ import {resolveSoccerAI} from './soccer-ai-flag.mjs';
 import {resolveSoccerRules,slideFoul,foulRestart,penaltySpot,throughBallPoint,throughBallSpeed,throughMeetPoint,aiSlideAim} from './soccer-rules.mjs';
 import {resolveSoccerFeel,soccerFeelConfig,feelSwitchDwell} from './soccer-feel.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
-import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-17';
-import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-17';
+import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-18';
+import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-18';
 // v24.1 (soccer-r241.mjs): fouls on standing tackles and the carrier's fall or stumble, volley / header / scissor on a high ball, the shorter slide get-up.
-import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-17';
+import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-18';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);

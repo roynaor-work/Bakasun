@@ -2,7 +2,7 @@
  * drag = move the sight (yaw from the horizontal movement, pitch from the vertical, dragging up raises the aim);
  * the sight sways a little while you hold, more the longer you hold; lift the finger = the net flies. A tap that is too short cancels.
  * Keyboard: arrows move the sight, space or enter releases the net. Pure helpers (dragToAim, holdSway) are exported for tests. */
-import {assistInfo, ASSIST7, pick as pickStage, STRINGS as ASSIST_STRINGS} from './catch-assist.mjs?v=island-v2-20261107-17';
+import {assistInfo, ASSIST7, pick as pickStage, STRINGS as ASSIST_STRINGS} from './catch-assist.mjs?v=island-v2-20261107-18';
 export const BOW_CONTROLS = Object.freeze({yawPerPx: .11, anglePerPx: .11, finePerPx: .045, fineBelowPxPerSec: 60, minHoldSeconds: .15, cancelPx: 4, swayAfter: 1.8, swayMax: .9, swayAngleK: .7});
 export const STRINGS = Object.freeze({
   'catch.bow.hint': 'נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק',

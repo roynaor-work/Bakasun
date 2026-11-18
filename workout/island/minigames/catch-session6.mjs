@@ -1,9 +1,9 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-17';
-import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-17';
-import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-17';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-17';
-import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-17';
-import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-17';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-18';
+import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-18';
+import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-18';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-18';
+import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-18';
+import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-18';
 
 /** v7 (13/11, Roy after v22): a softer siren, tools from the first second, aim assist. Flags:
  * ?catchSiren=v6 the v6 siren, ?catchWeapons=0 the v6 tyre gun (armed after 14 s), ?catchAssist=0 the v6/v22 hitting
@@ -127,7 +127,7 @@ export function runCatchSession6(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({sirenScale, pack: assets7 ? 'v7' : null, v8: audio8, muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-17', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-18', import.meta.url).href; stageEl.append(css);
   const style6 = doc.createElement('style'); style6.textContent = STYLE6; stageEl.append(style6);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
@@ -257,7 +257,7 @@ export function runCatchSession6(ctx) {
   /** The archery HUD of catch-bow-hud.mjs when it exists; otherwise the v5 drag aim stays usable. */
   async function installBow() {
     try {
-      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-17');
+      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-18');
       bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio, stage: () => view?.bow, project: (x, y, z) => view.project(x, y, z), level: stage, assist: v7.assist ? {} : null});
       bowHud.show?.(true);
     } catch { bowHud = null; }
@@ -433,13 +433,13 @@ export function runCatchSession6(ctx) {
     refreshHud();
   }
 
-  import('./catch-view6.mjs?v=island-v2-20261107-17').then(async ({createCatchView6}) => {
+  import('./catch-view6.mjs?v=island-v2-20261107-18').then(async ({createCatchView6}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView6({canvas, balance, stage, chase, quality, assets7, burst8: v8.burst, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
     try {
-      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-17'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run', fix8: Boolean(chase8)}); }
-      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-17'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
+      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-18'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run', fix8: Boolean(chase8)}); }
+      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-18'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
       fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true;
     } catch { fireHud = null; }
     loading.hidden = true;

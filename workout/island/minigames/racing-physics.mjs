@@ -1,8 +1,8 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-17';
-import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-17';
-import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-17';
-import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-17';
-import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-17';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-18';
+import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-18';
+import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-18';
+import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-18';
+import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-18';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
@@ -106,6 +106,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const recovery=createRecovery({track,sector,event,restartLane,crashFx,minStrength:OFF?.minStrength??.5,fx:{min:CRASH_FX_MIN,max:CRASH_FX_MAX,peak:CRASH_FX_PEAK,time:CRASH_TIME}});
   const pitAutoOn=!!config.pitAuto;let stepSerial=0;
   const pitCrew=createPitCrew({track,stage,cars,random,event,passGates,sector,enabled:!!config.pit,auto:pitAutoOn});   // racing-v24.1: config.pitAuto (the session's default)
+  if(config.pitSeq)pitCrew.useSequence(true);   // racing-v24.4: config.pitSeq (the session's default), the player's stop without a tap
   function startCrash(car,reason) {
     if(!crashOn||car.crashT>0||car.finished)return;
     car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.grindT=0;car.passing=null;car.laneHold=0;
