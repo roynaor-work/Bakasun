@@ -55,3 +55,25 @@ export function attachGrip(T,{hand,fingers,template,cfg=GRIP_DEFAULTS,shadows=tr
  const thumb=fingers.Finger4_R;if(thumb){thumb.quaternion.premultiply(new T.Quaternion().setFromAxisAngle(t.shaft.clone().negate(),side*cfg.thumb));curled.push('Finger4_R');}
  return {racket,head:racket.getObjectByName('head'),correction:t.correction,headLocal:t.headLocal,curled,transform:t};
 }
+/** v24.4 ready stance (Roy, 18/11/2026, after v24.3: "the look of holding the racket at the side came back"). The grip itself held (the fist closes
+ * on the handle), but between strokes the game still held the racket the v24 way: shaft pointing down and out (handRotation [0,0,.6], the head
+ * .9 below the hand), so from the game camera it hung by the child's leg. Between strokes (not swinging, not preparing, not tossing; waiting to serve
+ * too, the ball then rests at the throat) the racket now comes up in front of the body, head up and forward toward the middle, the other hand on its throat, the way
+ * a player waits for the ball; it blends in and out in `blend` seconds, so the backswing and the serve are untouched.
+ * ?tennisReady=0 keeps the hanging racket. Directions are in the character's root space (+Y up, +Z forward, +X the racket hand's side). */
+export function tennisReadyEnabled(search=globalThis.location?.search||''){return param('tennisReady',search)!=='0';}
+export const READY_DEFAULTS=Object.freeze({dir:Object.freeze([-.38,.5,.78]),rightHand:Object.freeze([.24,1.33,.4]),rightElbow:Object.freeze([.36,1.36,.08]),throat:.27,leftElbow:Object.freeze([-.18,1.28,.3]),blend:.14});
+export function readyConfig(config){return {...READY_DEFAULTS,...(config?.animation?.readyHold||{})};}
+/** Is this player waiting between strokes (the ready stance applies)? */
+export function readyStance(player,{phase,server,index}){
+ if(player.swing>0||player.preparing)return false;
+ if(index===server&&phase==='toss')return false;/* waiting to serve: the ball rests in the other hand, at the racket's throat */
+ return true;
+}
+/** The racket's orientation in the ready stance (old-racket frame: shaft -Y toward the head, strings' normal +Z) and the hand targets. */
+export function readyHold(T,cfg=READY_DEFAULTS){
+ const d=new T.Vector3(...cfg.dir).normalize(),n=new T.Vector3(-d.z,0,d.x).normalize(),y=d.clone().negate(),x=new T.Vector3().crossVectors(y,n).normalize();
+ const quaternion=new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(x,y,n));
+ const right=new T.Vector3(...cfg.rightHand),left=right.clone().addScaledVector(d,cfg.throat);
+ return {quaternion,dir:d,rightHand:right.toArray(),rightElbow:[...cfg.rightElbow],leftHand:left.toArray(),leftElbow:[...cfg.leftElbow]};
+}

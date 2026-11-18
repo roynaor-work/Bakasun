@@ -1,6 +1,8 @@
 // Tennis owns its sample bank and lifecycle; the island's shared sound switch
 // remains authoritative. Impacts: Kenney CC0; applause: original CC0 synthesis
 // (source and listening evidence in notes/g4f-qa.md).
+// v24.4: call(kind) = the synthesised line call "OUT!" / "NET!" (tennis-callouts.mjs), through the same master and sound switch.
+import {playCall} from './tennis-callouts.mjs?v=island-v2-20261107-17';
 export function createTennisAudio({config,storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
  let context,master,paused=false,disposed=false,muted=false;const buffers=new Map(),active=new Set(),last=new Map(),played={};
  function sync(){try{muted=storage?.getItem('island.sound')==='off';}catch{}if(master)master.gain.value=muted||paused?0:config.volume;}
@@ -13,5 +15,6 @@ export function createTennisAudio({config,storage,AudioContext=globalThis.AudioC
   try{if(!bed){const source=context.createBufferSource(),gainNode=context.createGain();source.buffer=buffers.get(name);source.loop=true;gainNode.gain.value=0;source.connect(gainNode);gainNode.connect(master);source.start();bed={source,gainNode};}
    bedLevel+=(bedTarget-bedLevel)*.04;bed.gainNode.gain.value=bedLevel;}catch{}}
  function stop(){for(const s of active){try{s.stop();}catch{}}active.clear();if(bed){try{bed.source.stop();}catch{}bed.source.disconnect();bed.gainNode.disconnect();bed=null;bedLevel=0;}}
- return {unlock,play,ambient,sync,setPaused(value){paused=Boolean(value);sync();if(paused){stop();if(context?.state==='running')void context.suspend().catch(()=>{});}else unlock();},dispose(){disposed=true;stop();buffers.clear();if(context&&context.state!=='closed')void context.close().catch(()=>{});},metrics(){return {loaded:[...buffers.keys()].sort(),active:active.size,muted,paused,played:{...played}};}};
+ function call(kind){sync();if(disposed||paused||muted||!context||context.state!=='running')return false;const now=context.currentTime,key='call-'+kind;if(now-(last.get(key)??-10)<.6)return false;last.set(key,now);if(!playCall(context,master,kind))return false;played[key]=(played[key]||0)+1;return true;}
+ return {unlock,play,ambient,sync,call,setPaused(value){paused=Boolean(value);sync();if(paused){stop();if(context?.state==='running')void context.suspend().catch(()=>{});}else unlock();},dispose(){disposed=true;stop();buffers.clear();if(context&&context.state!=='closed')void context.close().catch(()=>{});},metrics(){return {loaded:[...buffers.keys()].sort(),active:active.size,muted,paused,played:{...played}};}};
 }

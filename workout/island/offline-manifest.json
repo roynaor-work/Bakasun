@@ -190,6 +190,7 @@
   "minigames/alien-flight-input-hud.mjs",
   "minigames/alien-flight-input.mjs",
   "minigames/alien-flight-model.mjs",
+  "minigames/alien-hull.mjs",
   "minigames/alien-move.mjs",
   "minigames/alien-session.mjs",
   "minigames/alien-ui.mjs",
@@ -567,6 +568,7 @@
   "minigames/soccer.mjs",
   "minigames/sound.mjs",
   "minigames/sports-audio-rules.mjs",
+  "minigames/tennis-callouts.mjs",
   "minigames/tennis-controls.mjs",
   "minigames/tennis-crowd.mjs",
   "minigames/tennis-draco-worker.mjs",
@@ -578,6 +580,7 @@
   "minigames/tennis-result.mjs",
   "minigames/tennis-session.mjs",
   "minigames/tennis-ui.mjs",
+  "minigames/tennis-ui2.mjs",
   "minigames/tennis-v11-stadium.mjs",
   "minigames/tennis-v12-stadium.mjs",
   "minigames/tennis-v7-venue.mjs",
@@ -1222,7 +1225,17 @@
    "assets/tennis-ui-fx-v1/serve-arrow-left.png",
    "assets/tennis-ui-fx-v1/serve-arrow-center.png",
    "assets/tennis-ui-fx-v1/serve-arrow-right.png",
-   "assets/tennis-ui-fx-v1/sign-out.png"
+   "assets/tennis-ui-fx-v1/sign-out.png",
+   "assets/tennis-ui-v2/button-drop-idle.svg",
+   "assets/tennis-ui-v2/button-drop-pressed.svg",
+   "assets/tennis-ui-v2/button-lob-idle.svg",
+   "assets/tennis-ui-v2/button-lob-pressed.svg",
+   "assets/tennis-ui-v2/button-serve-idle.svg",
+   "assets/tennis-ui-v2/button-serve-pressed.svg",
+   "assets/tennis-ui-v2/button-smash-idle.svg",
+   "assets/tennis-ui-v2/button-smash-pressed.svg",
+   "assets/tennis-ui-v2/fx-net.svg",
+   "assets/tennis-ui-v2/fx-out.svg"
   ],
   "racing": [
    "assets/racing-audio-v2/engine-high.mp3",
@@ -4364,6 +4377,46 @@
    "ddbc9999e979d968",
    2361
   ],
+  "assets/tennis-ui-v2/button-drop-idle.svg": [
+   "4a13049d23b28ece",
+   847
+  ],
+  "assets/tennis-ui-v2/button-drop-pressed.svg": [
+   "7531498f1b49326b",
+   894
+  ],
+  "assets/tennis-ui-v2/button-lob-idle.svg": [
+   "3a60f96dd0ee43ef",
+   731
+  ],
+  "assets/tennis-ui-v2/button-lob-pressed.svg": [
+   "2999f11404d8ad05",
+   731
+  ],
+  "assets/tennis-ui-v2/button-serve-idle.svg": [
+   "e86c6f6ad523ebf3",
+   971
+  ],
+  "assets/tennis-ui-v2/button-serve-pressed.svg": [
+   "846e8589345a39e6",
+   1018
+  ],
+  "assets/tennis-ui-v2/button-smash-idle.svg": [
+   "ddba6c2275fb7b4c",
+   643
+  ],
+  "assets/tennis-ui-v2/button-smash-pressed.svg": [
+   "92e9fee010f8dbd2",
+   690
+  ],
+  "assets/tennis-ui-v2/fx-net.svg": [
+   "b775711acb5d8378",
+   789
+  ],
+  "assets/tennis-ui-v2/fx-out.svg": [
+   "e5b9ba4345515b0f",
+   437
+  ],
   "assets/tennis-v7/ball.glb": [
    "8c936c7597214675",
    7260
@@ -4605,8 +4658,8 @@
    399
   ],
   "data/strings.he.json": [
-   "8a307774a12cb0f0",
-   136976
+   "35d78a74dd9ec83f",
+   137001
   ],
   "data/team.json": [
    "82a4168feca9f02a",
@@ -5845,16 +5898,20 @@
    6082
   ],
   "minigames/alien-flight-model.mjs": [
-   "9d7f7d5ddc9d808c",
-   46809
+   "b506f468339c487c",
+   48099
+  ],
+  "minigames/alien-hull.mjs": [
+   "facffe98204fbeeb",
+   2999
   ],
   "minigames/alien-move.mjs": [
    "dfa7550eb5e78800",
    3465
   ],
   "minigames/alien-session.mjs": [
-   "4d1c3caaca61913b",
-   14768
+   "0af6acde00c53db9",
+   15013
   ],
   "minigames/alien-ui.mjs": [
    "c7613c070656d100",
@@ -5945,8 +6002,8 @@
    6610
   ],
   "minigames/alien-v25-draw.mjs": [
-   "27b5fbfc0ac412be",
-   8898
+   "06ef997df08487b9",
+   9008
   ],
   "minigames/alien-v25-ui.mjs": [
    "857281fe28bd6192",
@@ -6513,8 +6570,8 @@
    1553
   ],
   "minigames/g4e-audio.mjs": [
-   "cc74f8ca7a8b9572",
-   3399
+   "8ea157baa02e993b",
+   3912
   ],
   "minigames/g4f-tennis.css": [
    "e6413b5d9e9c8c57",
@@ -7356,6 +7413,10 @@
    "342efd544f25bba7",
    2515
   ],
+  "minigames/tennis-callouts.mjs": [
+   "534b944e080b7dff",
+   4315
+  ],
   "minigames/tennis-controls.mjs": [
    "cec1e71f6693f6fb",
    11913
@@ -7393,12 +7454,16 @@
    1469
   ],
   "minigames/tennis-session.mjs": [
-   "90818dae3683c44d",
-   19223
+   "2e8d7c33b54c1bed",
+   20910
   ],
   "minigames/tennis-ui.mjs": [
    "42bc69c0b15a51d3",
    3132
+  ],
+  "minigames/tennis-ui2.mjs": [
+   "7fcac86acb88ef2e",
+   2883
   ],
   "minigames/tennis-v11-stadium.mjs": [
    "0439f6ad729bfa59",
@@ -7421,12 +7486,12 @@
    37991
   ],
   "minigames/tennis.css": [
-   "cd7bda057e6af896",
-   19558
+   "c70b71c9ec04b552",
+   22470
   ],
   "minigames/tennis.mjs": [
-   "e4383d0d6c7c9c9c",
-   48278
+   "bdc386789e62dbc7",
+   50261
   ],
   "minigames/ultra-alien-effects.mjs": [
    "da72154561d39ef0",
