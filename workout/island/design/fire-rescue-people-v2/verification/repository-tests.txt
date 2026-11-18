@@ -1,0 +1,23 @@
+Repository verification, 2026-11-17
+
+Initial command: node --test tests/*.mjs
+Result: 3334 tests, 3277 passed, 1 failed, 56 skipped.
+Failure: tests/workout-royiki.test.mjs:91 browserType.launch could not find the
+Playwright bundled Chromium headless shell. The test starts an HTTP server
+before launch and does not close it on this launch error; the stalled worker
+was stopped after more than 11 minutes to let the suite report.
+
+Environment repair: the Playwright browser download returned HTTP 403 Domain
+forbidden. A temporary browser-path alias under /tmp/fire-rescue-people-v2/
+browsers was pointed to the existing /usr/bin/chromium (151.0.7922.173).
+No test source or existing repository file was changed.
+
+Targeted rerun command:
+PLAYWRIGHT_BROWSERS_PATH=/tmp/fire-rescue-people-v2/browsers node --test tests/workout-royiki.test.mjs
+Result: 5 tests, 5 passed, 0 failed, duration 24.354 seconds.
+
+Distinct original suite cases: 3278 passed after the environment repair,
+56 skipped; no unresolved failure. The complete suite command was not repeated.
+
+The rescue pack has independent passing asset, motion, source-tool and browser
+checks in assets.json, motion-qa.json, summary.json and browser.json.

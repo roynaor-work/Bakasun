@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10212c">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' data: blob:; object-src 'none'; base-uri 'none'">
+  <title>אנשים לפני הכול · Fire Rescue v2</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main id="app">
+    <header class="masthead">
+      <div class="identity"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 36"><path d="M18 2c2 7 10 12 10 21a12 12 0 0 1-24 0c0-5 3-9 7-13-1 7 1 9 3 9 3-4 5-9 4-17Z"/><path class="core" d="M17 19c1 4 6 6 5 10a6 6 0 0 1-12-1c0-4 4-6 7-9Z"/></svg></span><div><p class="eyebrow">FIRE RESCUE <span>/ V2</span></p><h1>אנשים לפני הכול<span>.</span></h1></div></div>
+      <div class="edition"><span><strong>08</strong> אנשים להצלה</span><i></i><span><strong>03</strong> אנשי צוות</span></div>
+      <a class="report-link" href="REPORT.md" title="דוח הבדיקות והמסירה">דוח ↗</a>
+    </header>
+    <div class="workspace">
+      <aside class="library" aria-label="ספריית הדמויות">
+        <div class="library-heading"><span>בוחרים דמות</span><span class="counter" id="character-count">01 / 11</span></div>
+        <div class="roster" id="roster" role="group" aria-label="דמויות"></div>
+        <div class="clip-control"><label for="clip">תנועה</label><select id="clip" aria-label="בחירת תנועה"></select></div>
+        <button class="show-all" id="show-all" aria-pressed="false"><span class="grid-icon" aria-hidden="true">▦</span><span>כל הדמויות יחד</span><span aria-hidden="true">←</span></button>
+      </aside>
+      <section class="stage" aria-label="תצוגת הדמות">
+        <div class="viewport" id="viewport">
+          <canvas id="scene" tabindex="0" aria-label="תצוגת תלת־ממד. גרירה מסובבת, גלגלת מקרבת. מקשי החצים מסובבים את המצלמה."></canvas>
+          <div class="scene-heading"><span class="status-dot"></span><span id="scene-label">קומת החילוץ</span><span class="thin-rule"></span><span id="scene-detail">מרפסת · מבנה רב־קומות</span></div>
+          <div class="environment-switch" role="group" aria-label="סביבה"><button data-environment="balcony" aria-pressed="true">בבניין</button><button data-environment="outdoors" aria-pressed="false">בחוץ</button></div>
+          <div class="nameplate"><span id="role-label">אדם להצלה</span><strong id="character-label">טוענים דמויות</strong><span id="clip-label">נכסים מקומיים</span></div>
+          <div class="asset-info"><span id="triangle-count">—</span><span class="info-divider">/</span><span>30 Hz</span></div>
+          <span class="orbit-hint">גרירה לסיבוב · גלגלת לקירוב</span>
+          <div id="loading" role="status"><i class="spinner"></i><strong>מרכיבים את צוות החילוץ</strong><span id="load-status">טוענים נכסים מקומיים</span></div>
+          <div id="error" role="alert" hidden></div>
+        </div>
+        <footer class="transport" aria-label="בקרת אנימציה">
+          <button id="play" class="play-button" aria-label="השהיית תנועה" aria-pressed="true"><span aria-hidden="true">Ⅱ</span></button>
+          <input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="זמן האנימציה">
+          <output id="time">0.00 / 0.00</output>
+          <button id="skeleton" class="utility-button" aria-label="הצגת שלד" aria-pressed="false">שלד</button>
+          <button id="home" class="utility-button home" aria-label="איפוס מצלמה" title="איפוס מצלמה">↺</button>
+        </footer>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
