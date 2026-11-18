@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>גלישה, תגובה ושוער · ספריית תנועה</title>
+  <link rel="stylesheet" href="./preview.css">
+  <link rel="icon" href="data:,">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header><div><p class="eyebrow">כדורגל · ספריית תנועה</p><h1>חוזרים למשחק.</h1><p class="intro">גלישה, תגובות למגע ועצירות שוער, עם התאוששות קצרה.</p></div><a href="./REPORT.md">דוח המדידות ↖</a></header>
+  <main>
+    <aside><h2>בחירת תנועה</h2><div id="clips" aria-label="ספריית התנועות"></div><p class="small">שמאל וימין הם ביחס לדמות.</p></aside>
+    <section class="workspace">
+      <div class="stage-wrap">
+        <canvas id="stage" aria-label="תצוגת התנועה על הדמות התלת ממדית"></canvas>
+        <div class="stage-top"><strong id="stage-title">טוען…</strong><span id="phase">טוען…</span></div>
+        <div class="views" aria-label="זווית צפייה"><button data-view="three" aria-pressed="true">שלושת רבעי</button><button data-view="front" aria-pressed="false">מלפנים</button><button data-view="side" aria-pressed="false">מהצד</button></div>
+        <div id="error" role="alert" hidden></div>
+      </div>
+      <div class="transport"><button id="play" class="primary">השהיה</button><button id="restart">מהתחלה</button><label>מהירות <select id="speed"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select></label><output id="time" dir="ltr">0.000 / 0.000 s</output></div>
+      <input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="זמן בתנועה">
+      <div class="options"><label><input id="chain" type="checkbox" checked> המשך לקימה</label><label><input id="ball" type="checkbox" checked> כדור הדגמה</label><label><input id="skeleton" type="checkbox"> הצגת שלד</label><span>18 עצמות · 30 הרץ</span></div>
+      <div class="details"><div><h2 id="title">טוען את הספרייה</h2><p id="description"></p><p id="next" class="small"></p></div><div id="events" aria-label="רגעים בתנועה"></div></div>
+      <div class="links"><a id="sheet" href="./sheets/">גיליון שמונה פריימים ↖</a><a href="./LICENSES.md">מקורות ורישיון ↖</a></div>
+    </section>
+  </main>
+  <footer>תנועות מקוריות · CC0 · תצוגת סקירה</footer>
+  <script type="module" src="./source/preview.mjs"></script>
+</body>
+</html>

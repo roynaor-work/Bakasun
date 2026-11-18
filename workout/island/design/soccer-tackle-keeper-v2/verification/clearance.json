@@ -1,0 +1,5634 @@
+{
+  "method": "Serialized native samples; suggested vertical corrections are measurements only, never applied here.",
+  "skins": {
+    "field": {
+      "source": "runtime/reference/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "vertices": 5899,
+      "primitives": 5
+    },
+    "keeper": {
+      "source": "runtime/keeper-open.glb",
+      "sha256": "2314b1942ef5bc2534c25adb5ed40b2a8e9e406ab064096cdccacc1aa1fb13b9",
+      "vertices": 5868,
+      "primitives": 5
+    },
+    "keeperFist": {
+      "source": "runtime/keeper.glb",
+      "sha256": "56ccc07410c485d5cc99fa4ce4303c9a2621b1da643e5c16055f62fe2778d33b",
+      "vertices": 6255,
+      "primitives": 6
+    }
+  },
+  "clips": [
+    {
+      "id": "slide_tackle",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030402795636,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004994541069067104,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128050826263317,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.00492212858771067,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128014560263197,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0049769034806914775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128024512967441,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.005080002036911904,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128029743257365,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.005126160085017345,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.005128055048298358,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0019711308114064713,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.0009999799620768746,
+          "liftForOneMillimeter": 2.0037923125458545e-8
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0006961510833813633,
+          "liftForOneMillimeter": 0.0003038489166186367
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.0010000034246361589,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.015215068929496214,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.010261843209942292,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.0022172359552633664,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.013696298694918702,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0024448290089424257,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.008140793823510295,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0004999940589667518,
+          "liftForOneMillimeter": 0.0005000059410332483
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.004706298878219661,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.008097118352555166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.0009999980665722913,
+          "liftForOneMillimeter": 1.933427708732116e-9
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.0010526841130106268,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.000999993319260914,
+          "liftForOneMillimeter": 6.680739086072085e-9
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0010011736516324088,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.0010000015888019798,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.0010592018751226784,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.0009999979217643618,
+          "liftForOneMillimeter": 2.078235638268422e-9
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.000993366655372252,
+          "liftForOneMillimeter": 0.0000066333446277480265
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0009999863137503118,
+          "liftForOneMillimeter": 1.3686249688248109e-8
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.0009713528117219761,
+          "liftForOneMillimeter": 0.000028647188278023948
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.0010000145499198532,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.0009420152286370997,
+          "liftForOneMillimeter": 0.00005798477136290028
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.0010000085298461914,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0009263743132635338,
+          "liftForOneMillimeter": 0.00007362568673646621
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0010000074273260329,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.0009377454804403995,
+          "liftForOneMillimeter": 0.0000622545195596005
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.0010000031769207551,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.000967413365160541,
+          "liftForOneMillimeter": 0.000032586634839459026
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0010000081083391954,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.0009921917043852202,
+          "liftForOneMillimeter": 0.000007808295614779824
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.001000005948249505,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.000999760910109282,
+          "liftForOneMillimeter": 2.3908989071810133e-7
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0010000124786884723,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0010000049663192734,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "getup_fast",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0010000049663192734,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.0010000124790461307,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.01149655638835037,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.007654496642517938,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.008033367951781958,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.02272120070414975,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0005997913715839187,
+          "liftForOneMillimeter": 0.0004002086284160813
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.016266389718502167,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0018696360710738769,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.003938959567460126,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0005000048830225284,
+          "liftForOneMillimeter": 0.0004999951169774716
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.003739283407893354,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0021200306902559723,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.00218596548125094,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0005000143927689493,
+          "liftForOneMillimeter": 0.0004999856072310507
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.0021860312580628816,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0023200803710066165,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.0028242512610736764,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.003950500875802135,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.00512802555581493,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.004945421281959073,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.005128028558574749,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.004622560439427922,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.005128008559567132,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.004353025319628015,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.005128029129126993,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.004440421638680234,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.0051280167501746715,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.004804346232638937,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.005128047097060315,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.004796133610522932,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.005128053723730139,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.005049179193504755,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "stumble_light",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030402795636,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.00504444638935668,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128017219788283,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.005021851621636042,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128064843983274,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.005074878910375544,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128028984795252,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0051245873125020935,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128060824892866,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0051214303545326495,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.0051280619036839226,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.004913057606058355,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.0051280494335292776,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.004906982551846253,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.005128051538266162,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.00491172142761849,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.005128063784861248,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.005121383574714533,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.005128057962328125,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.005124556720827289,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.005128025112105791,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.005074535257326998,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.005128060014711763,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.005021224291402421,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.005128020536822389,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.005043990546357471,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.0051280354597217775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.005128030402795636,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "fall_soft",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.007128004786769365,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0077388978518528745,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.00834978582429556,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.0029805246938814783,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006049036865643523,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.0024763275238752214,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.008779937709246052,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0019752113656351655,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.007806602806565727,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0011967256552262717,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005247399795156191,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0007028008482002635,
+          "liftForOneMillimeter": 0.00029719915179973657
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.0023934598058331646,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.014332499218810302,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.029352969560990795,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.05258038010048987,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.0010000411674562842,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        }
+      ]
+    },
+    {
+      "id": "getup_soft",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0009999618006891046,
+          "liftForOneMillimeter": 3.8199310895426636e-8
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.03949519961553216,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.0551105197946852,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.03134225796228642,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.008841312529313555,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004771809283910591,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.017384892886839087,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.002763378778618597,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.013582166919266087,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0016137010667019863,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.006143755834309816,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0011834915053188372,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.0028640169042981056,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0005380123332903441,
+          "liftForOneMillimeter": 0.0004619876667096559
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.0017587971335117775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0027095385072545275,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.005053348311386777,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.004774490938575973,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.005128045781524607,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.004846106246911702,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.00512803545230868,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "fall_foul",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.007128004786769365,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.007128009879410188,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.007128009879410188,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.006922136595762782,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006331496484302132,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.0045591250882398154,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.003715795472630845,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0017301843189478083,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.0014815299400014331,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0004999841610925787,
+          "liftForOneMillimeter": 0.0005000158389074213
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.0014815267655877568,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0005198514110988928,
+          "liftForOneMillimeter": 0.00048014858890110725
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.0010000081897018898,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0006710050090994318,
+          "liftForOneMillimeter": 0.0003289949909005682
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.0010000129939307795,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0009284603300927785,
+          "liftForOneMillimeter": 0.00007153966990722151
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.001000012314725976,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0009978249836081476,
+          "liftForOneMillimeter": 0.0000021750163918523788
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.0010000029298393442,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.0009983877051158302,
+          "liftForOneMillimeter": 0.0000016122948841698279
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.0010000009599154952,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0009454481667238029,
+          "liftForOneMillimeter": 0.00005455183327619708
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.0010000189088492095,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0007725588792534405,
+          "liftForOneMillimeter": 0.00022744112074655955
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.0010482402220113318,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.0006242714773092017,
+          "liftForOneMillimeter": 0.0003757285226907983
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.0012968081351538707,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.0005787258800848405,
+          "liftForOneMillimeter": 0.0004212741199151595
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.0014059862600330625,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0005000080057054601,
+          "liftForOneMillimeter": 0.0004999919942945399
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.0011574456492100954,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.0021399673312836875,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.0010000129105110639,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.0006770778028844099,
+          "liftForOneMillimeter": 0.00032292219711559014
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0010000284187612063,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.0008982869626622952,
+          "liftForOneMillimeter": 0.00010171303733770478
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.00099998874158852,
+          "liftForOneMillimeter": 1.1258411479996011e-8
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.0009893736301637007,
+          "liftForOneMillimeter": 0.000010626369836299297
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.0009999689600231898,
+          "liftForOneMillimeter": 3.103997681021958e-8
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0009997325749763475,
+          "liftForOneMillimeter": 2.67425023652533e-7
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.001000013815475903,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.0009502751414678934,
+          "liftForOneMillimeter": 0.00004972485853210664
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.001025685050005623,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.0009127637683490619,
+          "liftForOneMillimeter": 0.0000872362316509381
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0018512171060650617,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.0007086188455299042,
+          "liftForOneMillimeter": 0.00029138115447009585
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.002242762108453561,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.0006222140646930108,
+          "liftForOneMillimeter": 0.00037778593530698925
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0014172306629831738,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.016979260815562038,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.035499987254157116,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.052851110046706555,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.052458531341409056,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.039996264319605145,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.016352968876489946,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.008661439855424904,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0010000066442252052,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0009999565378008449,
+          "liftForOneMillimeter": 4.346219915516911e-8
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.1166666666666667,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.1333333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.15,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.1666666666666667,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.1833333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 1.2,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        }
+      ]
+    },
+    {
+      "id": "getup_foul",
+      "skin": "runtime/reference/idle_relaxed.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0009999618006891046,
+          "liftForOneMillimeter": 3.8199310895426636e-8
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.0009999744023651805,
+          "liftForOneMillimeter": 2.559763481952207e-8
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.033447250133317286,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.03510902265082449,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.02738273945462287,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.010981945282596037,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004340149602087409,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.01866233955548209,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0025482739232619844,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.011782808078609514,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0012804645475957277,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.004804470703112074,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0008064976984445971,
+          "liftForOneMillimeter": 0.00019350230155540295
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.0018865247261393991,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0005206930578033897,
+          "liftForOneMillimeter": 0.0004793069421966103
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.0011845825207847105,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.002152567831833624,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.0019665696697833274,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.0004999966439023368,
+          "liftForOneMillimeter": 0.0005000033560976632
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.001966629783612492,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0009250940263970109,
+          "liftForOneMillimeter": 0.00007490597360298914
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.001000007399594438,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0022465542690034562,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.0037334449955701426,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.004428174413692754,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.0051227056403277405,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.00483465136197804,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.005128051554116733,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0050691541469181645,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.005128046099915393,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.00512470683436074,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.005128046721451646,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.005128001102584684,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0051280528730860975,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.005113614683353349,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.005128011336414842,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.005020644389915702,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.005128009698167443,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.004899263020230374,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.005128029871946771,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.004702879507767446,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.005128015861906893,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.004809619356316255,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.005128013591121847,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.005004334431187599,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.005128035479680382,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "dive_left",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004398742238298628,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128048242291711,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.003972350667520039,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128043317293662,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004587230510087803,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128001328208676,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.005102244126877778,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128003470862744,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.007274591554987511,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.008990723914929402,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007103394633521387,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.008223372326454662,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.00298997300582568,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.009426350952356846,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0005000192000093467,
+          "liftForOneMillimeter": 0.0004999807999906533
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.009185849578492306,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.04652683463878497,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.09576994991504252,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.12858073416863838,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.16451041998480465,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.17173395069417335,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.1790635131914371,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.18066384673533437,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.18235948646774344,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.18971132542096147,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.19836357784349415,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.20823492558806742,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.21924068226549298,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.22229003313371776,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.22540915257325603,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.22408787949200698,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.2227666871733836,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.21533606279263562,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.20790806607093598,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.19263492043741273,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.1773705671353748,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.15601697329309777,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.1346733355603416,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.11107234899245594,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.08747264760328052,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.06613241910511605,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.04478442828722193,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.02952546931886478,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.014258944155447123,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.007630628287294411,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0009999973774088428,
+          "liftForOneMillimeter": 2.622591157262766e-9
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0010000285696953604,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0009999871601216737,
+          "liftForOneMillimeter": 1.283987832636363e-8
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0029102851302678368,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.0050275140920203465,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.01598324712221967,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.021007741172113896,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.010969887976032731,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0009999983933921433,
+          "liftForOneMillimeter": 1.6066078567349151e-9
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        }
+      ]
+    },
+    {
+      "id": "dive_low_left",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0051280304028894635,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005748639008808593,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.006369242537842962,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.0004999862581651499,
+          "liftForOneMillimeter": 0.0005000137418348502
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006369225327631414,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.005368734102198805,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128014849668752,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.007301188444691048,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.009032243653028696,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.007320941990240179,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.008375001077501304,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.004823951768475776,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.013140491238400331,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.0032265254721948883,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.01488369969513463,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0016454337217711446,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.008009517536879118,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0008497052911644459,
+          "liftForOneMillimeter": 0.0001502947088355541
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.0025564789410423977,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.011272623102012408,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.021692417671487357,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.027195452416439975,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.032746933401747225,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.035499156044578026,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.03830389360925625,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.0490551118911888,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.05908656790985169,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.06973392056679624,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.06217998208216552,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.058026365793373016,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.05389670255187818,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.053181473580568926,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.052466249591188986,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.048732863343616775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0449996075779276,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.038138911180073724,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.03127867905213266,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.02315709593741066,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.015036170438715475,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.008177519468573046,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0013193442374220964,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.0011595995369332078,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.0010000049952422038,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.0009999975581378908,
+          "liftForOneMillimeter": 2.4418621092162085e-9
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0009999953524982884,
+          "liftForOneMillimeter": 4.647501711599333e-9
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.0009995783786705009,
+          "liftForOneMillimeter": 4.216213294991507e-7
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.0009999945822541682,
+          "liftForOneMillimeter": 5.417745831820531e-9
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.000996958422401351,
+          "liftForOneMillimeter": 0.0000030415775986490992
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0009999945713650344,
+          "liftForOneMillimeter": 5.428634965599227e-9
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0009996174009155906,
+          "liftForOneMillimeter": 3.8259908440941084e-7
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0009999929754616489,
+          "liftForOneMillimeter": 7.024538351170506e-9
+        }
+      ]
+    },
+    {
+      "id": "dive_high_left",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004848051749885451,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128022381101896,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004374943665921532,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128035038044709,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.00442270746551944,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128011420768436,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.00488813538270462,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128062636197472,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.005118389566411682,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.00512800348262045,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.00786528373086244,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.010719584111484229,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.014195887691369882,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.018037438770932085,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.027671168957258407,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.03975308215999512,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.061016377594939594,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.08761690220261213,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.12351687762892012,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.16639894086914153,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.2112374501605022,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.2618054400090705,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.3013821966336663,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.3437610397236856,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.36534892883441916,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.38756761738229606,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.39158235775043493,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.3956165642226058,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.3960055618758119,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.39645374294969904,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.3991789138278861,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.4030516889927413,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.41037496336219614,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.4197940899875422,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.4277015908872739,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.43656829847087086,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.438673655374446,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.4408240751021835,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.4393410308380796,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.43785829192285053,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.42914460452981984,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.4204415960008482,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.4014260150053835,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.38245882322041896,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.35369779637402937,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.32503759167358837,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.2896140851190008,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.254322274759492,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.21671480649809988,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.1792269939470661,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.1442636303008441,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.1093777770541967,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.08130316198528942,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0532635338913762,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.03484459900908285,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.016435911538127596,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.008717186535636107,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.001000007906421227,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0009999772149774655,
+          "liftForOneMillimeter": 2.278502253452025e-8
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0009999884480055288,
+          "liftForOneMillimeter": 1.155199447124694e-8
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.002910282966385208,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.00502750775649187,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.015983219276428734,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.021007813102094743,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1166666666666667,
+          "minimumY": 0.01096989870864978,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1333333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.15,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.1666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.1833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2166666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2333333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.25,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2666666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2833333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.3,
+          "minimumY": 0.0009999929754616489,
+          "liftForOneMillimeter": 7.024538351170506e-9
+        }
+      ]
+    },
+    {
+      "id": "getup_keeper_left",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0009999929754616489,
+          "liftForOneMillimeter": 7.024538351170506e-9
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.005819751531726536,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006107535923150456,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004542546174242157,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.007280301636758468,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0019181323680776824,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.009014923669143013,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0008181870001988667,
+          "liftForOneMillimeter": 0.00018181299980113332
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.003836236294986667,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.00537878803174395,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.010370197158777808,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.012314839644944925,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.014384892368771982,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.013840528097485288,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.01326007364182906,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.009608561368644006,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.006010041813573425,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.0024204759254364966,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.002140042761186692,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0004999905060029675,
+          "liftForOneMillimeter": 0.0005000094939970326
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.002140060506615915,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0014694287641683484,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.001000004160566878,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.001543739337919403,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.002240493161734594,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.0008592975994855534,
+          "liftForOneMillimeter": 0.00014070240051444662
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.0029590561767644658,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0006688810152714747,
+          "liftForOneMillimeter": 0.0003311189847285253
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.006300344398882746,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.005241568618769524,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.008967264406443812,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.007115905817179288,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.005127993964114522,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.005054715349451844,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.005128032076115091,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.003959658964436508,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.005128007597977838,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0038228662968689126,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.005128018756087038,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.005033558762712997,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.005128037524185017,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.005092211190515172,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0051280053949383925,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.004759756501116555,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "dive_right",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004398581613353991,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128037182985781,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.00397766807276069,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.00512806746971832,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004592115715805034,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128045209027293,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.005102567943458855,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.0051280115402626,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.006677956092082549,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.008472935083241637,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007026313995171896,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.008125421742072425,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0024997513773174357,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.008342568147015714,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0005000124239021297,
+          "liftForOneMillimeter": 0.0004999875760978703
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.009954109092253388,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.04740671346438195,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.09661115600445619,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.1290913380104347,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.16467792812751758,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.17183545086982777,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.17909916059632008,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.18070183733674947,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.1823999066018565,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.1897618527827044,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.1984254887649745,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.20830949787789366,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.21932918896182338,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.2223823862308806,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.2255054378640646,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.22418421810402472,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.22286307915237197,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.21543275600190703,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.2080050621633721,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.19273254483866592,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.17746882683230186,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.15611613389590995,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.1347734107284635,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.1111734516310747,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.08757479437195806,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.06623552419448431,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.04488850526684203,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.029630248945466744,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.014364433282080577,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.007683372037266531,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0009999973783599708,
+          "liftForOneMillimeter": 2.6216400291975694e-9
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0010000311281984642,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0009999924280232192,
+          "liftForOneMillimeter": 7.571976780827716e-9
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0029628722937067864,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.005132671239116579,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.01600598297525778,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.020983030375499204,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.010957455142745699,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0010000112487983568,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "dive_low_right",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0051280304028894635,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005738059184912742,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.00634808289005126,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.00050000300815288,
+          "liftForOneMillimeter": 0.00049999699184712
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006348121082373981,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.005362730770676213,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128022647952216,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0067027007550371775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.008510498560414262,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.007261736469459809,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.008311566549355373,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.004767866444608845,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.012930674319620417,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.003193581102205037,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.014684839743170156,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.0016425028527593255,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.007948966183602052,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0008449582918695353,
+          "liftForOneMillimeter": 0.00015504170813046472
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.002561782580250749,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.011382331074468816,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.02191634843967402,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.02737009714038023,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.03287292736952924,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0356251537298268,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.03842982703871517,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.04907775650190477,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.05910936008066976,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.06975681897698069,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.062167100150132486,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.05801620637571149,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.05388927037024295,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.05317400201026303,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.05245873862162333,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.04872514652631447,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.044991684626047634,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.038130608659412646,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.03126999601133921,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.023147961162688725,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.015026582628979239,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.008167548009329978,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0013089882237839546,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.0011544206626813822,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.00100000300026719,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.0010000000293062853,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.001000002280232717,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.000999585047674442,
+          "liftForOneMillimeter": 4.149523255580524e-7
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.000999998894671358,
+          "liftForOneMillimeter": 1.1053286419829278e-9
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.0009969716675119864,
+          "liftForOneMillimeter": 0.0000030283324880136554
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0009999994370269074,
+          "liftForOneMillimeter": 5.629730926229315e-10
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.000999627478433557,
+          "liftForOneMillimeter": 3.72521566443032e-7
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0010000058439533816,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "dive_high_right",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004847674290001866,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128048272876273,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.00437707432367497,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128056457458896,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004427303233084545,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128050758796909,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.004890543057263511,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005127992236801229,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.005118483401293603,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.005128011551987485,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007675908865115738,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.010330151785076902,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.014052189526508746,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.018290549282802784,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.028571293198893066,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.040990487159941316,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.06262022875956375,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.08945134295633665,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.12543768902758215,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.16822586110560211,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.21282908257360694,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.2630302527446808,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.30227373566436,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.3442690503631015,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.3656551817764071,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.3876637198564764,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.3916403228962523,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.3956361752126245,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.39602611812017313,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.39647527622710216,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.39920521925428754,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.4030834213251818,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.41041546124763784,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.4198446972448183,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.4277602103296785,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.4366356210797099,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.4387430148343094,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.44089550589507914,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.439412561535509,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.4379299226197918,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.4292168252099997,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.4205144100078397,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.40150013953265984,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.3825342741280894,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.353775294868074,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.32511717375923643,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.2896963013222,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.2544071789732094,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.2168026437040732,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.17931782364144835,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.14435731128711599,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.1094743593730552,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.08140211886715788,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.05336489665483789,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.03494756029687367,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.016540484398724395,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.008769466762139938,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0009999981903913158,
+          "liftForOneMillimeter": 1.809608684254227e-9
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0009999749208956382,
+          "liftForOneMillimeter": 2.507910436180122e-8
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.000999993753520792,
+          "liftForOneMillimeter": 6.246479208014966e-9
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.002962870073416418,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.005132664753200983,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.016005955128647206,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.020983102248726092,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1166666666666667,
+          "minimumY": 0.010957465862098137,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1333333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.15,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2166666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2333333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.25,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2666666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2833333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.3,
+          "minimumY": 0.0010000058439533816,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "getup_keeper_right",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.0010000058439533816,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.005805902753350358,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.006130438676865649,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004541243188257521,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.0072546759282415,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0019268765273331712,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.008984345867108445,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.0008122286079181029,
+          "liftForOneMillimeter": 0.0001877713920818971
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.0038537186041466276,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.005401464794370633,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.01039788231744794,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.012340958037688643,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.014409439375924843,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.013867822623891704,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.013289950296369785,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.009647944976133332,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.006055528682922334,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.002445745202809241,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.00213898982155869,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0004999996811668184,
+          "liftForOneMillimeter": 0.0005000003188331817
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.0021390006305068987,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0014689305905358219,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.0009999966465890353,
+          "liftForOneMillimeter": 3.3534109647112564e-9
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.0013992129106477347,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.0019244706024158093,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.0006073222985186338,
+          "liftForOneMillimeter": 0.0003926777014813662
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.0021390950506897516,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0007604032276876255,
+          "liftForOneMillimeter": 0.00023959677231237455
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.005812455223295904,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.005253046202629605,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.008446723730365813,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.0066303306483356805,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0051280115553608285,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.00505639481588753,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.005128013652154179,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.00397685789367766,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.005128049996913173,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0038303168702857604,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0051280412854185775,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.005033701614937783,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.005128037524185017,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.005092211190515172,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0051280053949383925,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.004759756501116555,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "catch_chest",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.005110138342015541,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128027178709957,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004962043076851719,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128015171557712,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004852254596223682,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.0051280588317342,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.004862552141172705,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128059208791627,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.004978669420930074,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.005128000065007049,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.005090241868907011,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.005128056849268273,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.005126791353183738,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.005128040344077975,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.005128040345749096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.007146151780494825,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.009280458206503556,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.008775137587142212,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.00829953311691324,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.006183327580594575,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.00568416738642917,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.00279048315935973,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.003209015877167931,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.0010294004038673282,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.0035995967370137383,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.0008026747801965495,
+          "liftForOneMillimeter": 0.00019732521980345055
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.0025756211451772176,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.0005323718666132293,
+          "liftForOneMillimeter": 0.0004676281333867707
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.0015168501765276399,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0006158610910530216,
+          "liftForOneMillimeter": 0.00038413890894697846
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0009999859969787722,
+          "liftForOneMillimeter": 1.4003021227802781e-8
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.0008677766325886627,
+          "liftForOneMillimeter": 0.00013222336741133735
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.0010000128237147715,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.0009961405769190745,
+          "liftForOneMillimeter": 0.000003859423080925482
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0009999945426425044,
+          "liftForOneMillimeter": 5.457357495596005e-9
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.0010229113746641066,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.0010853158043441363,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.0013359706819443817,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.00275725782393485,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0016005031153742827,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.004872902365774923,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.0012461907797652744,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.004693291590438672,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.000561518454758797,
+          "liftForOneMillimeter": 0.000438481545241203
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.0024923486966801633,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.006925195737925355,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.010869069404500997,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.011191717285242406,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0010000053283110559,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0009963178324238374,
+          "liftForOneMillimeter": 0.0000036821675761626593
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        }
+      ]
+    },
+    {
+      "id": "catch_high",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004871656349650394,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.0051280605285901615,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004429217785093156,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128046753565471,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004475576087795266,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128030349590265,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.004906539702155696,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.0051280454325828145,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0051191352211601565,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.005128014017382498,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007755667092444712,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.010449885653619331,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.014259563460057426,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.018206139484480702,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.026472613862669872,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.03517839661486273,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.04841950057447497,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.06293403492978764,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.08052291821146391,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.09977482283602702,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.11865118531743053,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.13895558892110949,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.1543511271354948,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.17049725819663658,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.1786192881960204,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.18692110210218585,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.18841568833464328,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.1899159792483166,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.18828317976611686,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.18666647670835862,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.17787150920639205,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.16958547143909047,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.15413568411931372,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.1408227560780041,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.12574120483557705,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.11473920735698095,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.10721061703586077,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.1044060049773694,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.10578315156006599,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.11071394592780553,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.1163165264169237,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.12357430350530448,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.12767829634729483,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.13214721752451575,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.13297913551971197,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.13382224212755295,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.1316548234323491,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.12952460879735744,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.11899430220512063,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.1094135568478149,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.09409600463394124,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.08144071575002022,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.06938999272222864,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.05869816097479691,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1166666666666667,
+          "minimumY": 0.051104674421076565,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1333333333333333,
+          "minimumY": 0.04418708742707181,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.15,
+          "minimumY": 0.03581693458788651,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1666666666666667,
+          "minimumY": 0.004131637032595514,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1833333333333333,
+          "minimumY": 0.002561341556767939,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2,
+          "minimumY": 0.0010000004785875836,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2166666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2333333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.25,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2666666666666666,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.2833333333333334,
+          "minimumY": 0.0009999960243167955,
+          "liftForOneMillimeter": 3.9756832045240165e-9
+        },
+        {
+          "time": 1.3,
+          "minimumY": 0.0009999929754616489,
+          "liftForOneMillimeter": 7.024538351170506e-9
+        }
+      ]
+    },
+    {
+      "id": "punch",
+      "skin": "runtime/keeper.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.0048759013549005414,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128024611682547,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.004440105626186838,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.0051280187431572005,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.004486774005039981,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.005128008254477914,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.004910758196384632,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.0051280371239327965,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.0051193143509895706,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.005128005773228361,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007180942139988156,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.009307244316870966,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.009898189172986988,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.01058578679117994,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.012436099676497711,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.014773323882620579,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.019296198961562525,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.024814180615733053,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.03340019640735113,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.04400056589723489,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.05763898704818064,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.07372137447817927,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.0910160334594913,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.11051758373130642,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.12785445210426252,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.14663561973165457,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.15976834692851083,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.17352101597398073,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.18000858257952207,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.1866243773920132,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.18776206390310216,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.18890343290640385,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.18836113524390402,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.18782287452557184,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.1847977084045358,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.18190584588165298,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.17618562806142557,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.17105858454749204,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.1645889044842646,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.15934924177403034,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.15469688213257043,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.15166539310330351,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.1501952601813465,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.1502233585836856,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.1513668555753967,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.15349172959586904,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.15547902330911656,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.1578872902680274,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.15915875019584397,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.16051823090792694,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.16076284383917946,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.161010047168371,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.15998708889541202,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.15896991298060684,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.15335420266302624,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.1479148891097825,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.1372559402047367,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1,
+          "minimumY": 0.12726954815040087,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.11432413036090902,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.10245422583249743,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.09040321453428919,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0787961352786556,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.06838928417510454,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.05833051367446872,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1166666666666667,
+          "minimumY": 0.05050199636166561,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1333333333333333,
+          "minimumY": 0.030164647796460983,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.15,
+          "minimumY": 0.01555813793937385,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1666666666666667,
+          "minimumY": 0.0009999936155114402,
+          "liftForOneMillimeter": 6.384488559791485e-9
+        },
+        {
+          "time": 1.1833333333333333,
+          "minimumY": 0.0009992500978413532,
+          "liftForOneMillimeter": 7.499021586468077e-7
+        },
+        {
+          "time": 1.2,
+          "minimumY": 0.001000008878393085,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2166666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2333333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.25,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2666666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.2833333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.3,
+          "minimumY": 0.0010000058439533816,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    },
+    {
+      "id": "save_with_foot",
+      "skin": "runtime/keeper-open.glb",
+      "perTime": [
+        {
+          "time": 0,
+          "minimumY": 0.005128030534776423,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.016666666666666666,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.03333333333333333,
+          "minimumY": 0.005128035627417246,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.05,
+          "minimumY": 0.004013239763216325,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.06666666666666667,
+          "minimumY": 0.005128038688889752,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.08333333333333333,
+          "minimumY": 0.00348875313655414,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.1,
+          "minimumY": 0.005128031379734069,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.11666666666666667,
+          "minimumY": 0.0043875123770921315,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.13333333333333333,
+          "minimumY": 0.0051280128920989515,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.15,
+          "minimumY": 0.005093569081264057,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.16666666666666666,
+          "minimumY": 0.005128053513153097,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.18333333333333332,
+          "minimumY": 0.006937248605940777,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2,
+          "minimumY": 0.008896267633505706,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.21666666666666667,
+          "minimumY": 0.007624573054950637,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.23333333333333334,
+          "minimumY": 0.007594654955593971,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.25,
+          "minimumY": 0.004962413753594394,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.26666666666666666,
+          "minimumY": 0.007574008132865545,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.2833333333333333,
+          "minimumY": 0.0021128883178640756,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.3,
+          "minimumY": 0.007079046081152673,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.31666666666666665,
+          "minimumY": 0.0008719839233164439,
+          "liftForOneMillimeter": 0.0001280160766835561
+        },
+        {
+          "time": 0.3333333333333333,
+          "minimumY": 0.00463940008277014,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.35,
+          "minimumY": 0.0007006521220984663,
+          "liftForOneMillimeter": 0.00029934787790153374
+        },
+        {
+          "time": 0.36666666666666664,
+          "minimumY": 0.0016458800823637432,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.38333333333333336,
+          "minimumY": 0.0008048062185275623,
+          "liftForOneMillimeter": 0.00019519378147243773
+        },
+        {
+          "time": 0.4,
+          "minimumY": 0.0009999788075304716,
+          "liftForOneMillimeter": 2.119246952838466e-8
+        },
+        {
+          "time": 0.4166666666666667,
+          "minimumY": 0.0009842840037250916,
+          "liftForOneMillimeter": 0.000015715996274908405
+        },
+        {
+          "time": 0.43333333333333335,
+          "minimumY": 0.0009999753450957577,
+          "liftForOneMillimeter": 2.4654904242325804e-8
+        },
+        {
+          "time": 0.45,
+          "minimumY": 0.0011250253597902965,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.4666666666666667,
+          "minimumY": 0.001303875905578858,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.48333333333333334,
+          "minimumY": 0.0017141478400228838,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5,
+          "minimumY": 0.003732242587556431,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5166666666666667,
+          "minimumY": 0.002103879998189867,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5333333333333333,
+          "minimumY": 0.006636058210747059,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.55,
+          "minimumY": 0.0015522655565802096,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "minimumY": 0.006312292569345873,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.5833333333333334,
+          "minimumY": 0.0007940549105588945,
+          "liftForOneMillimeter": 0.00020594508944110548
+        },
+        {
+          "time": 0.6,
+          "minimumY": 0.0034836148310135318,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.6166666666666667,
+          "minimumY": 0.0006280703096536999,
+          "liftForOneMillimeter": 0.0003719296903463001
+        },
+        {
+          "time": 0.6333333333333333,
+          "minimumY": 0.001379044856420833,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.65,
+          "minimumY": 0.0008376823134747663,
+          "liftForOneMillimeter": 0.00016231768652523373
+        },
+        {
+          "time": 0.6666666666666666,
+          "minimumY": 0.0009999797073884376,
+          "liftForOneMillimeter": 2.029261156246548e-8
+        },
+        {
+          "time": 0.6833333333333333,
+          "minimumY": 0.000989780203664553,
+          "liftForOneMillimeter": 0.000010219796335446917
+        },
+        {
+          "time": 0.7,
+          "minimumY": 0.0009999944673635963,
+          "liftForOneMillimeter": 5.532636403703106e-9
+        },
+        {
+          "time": 0.7166666666666667,
+          "minimumY": 0.0009977562529781547,
+          "liftForOneMillimeter": 0.000002243747021845287
+        },
+        {
+          "time": 0.7333333333333333,
+          "minimumY": 0.0009999881126569188,
+          "liftForOneMillimeter": 1.1887343081239121e-8
+        },
+        {
+          "time": 0.75,
+          "minimumY": 0.0009326819034336797,
+          "liftForOneMillimeter": 0.00006731809656632028
+        },
+        {
+          "time": 0.7666666666666667,
+          "minimumY": 0.0010000228928047916,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.7833333333333333,
+          "minimumY": 0.0007533160495037383,
+          "liftForOneMillimeter": 0.0002466839504962617
+        },
+        {
+          "time": 0.8,
+          "minimumY": 0.0010000010773782847,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8166666666666667,
+          "minimumY": 0.0008876909709401026,
+          "liftForOneMillimeter": 0.00011230902905989739
+        },
+        {
+          "time": 0.8333333333333334,
+          "minimumY": 0.0014928955656657306,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.85,
+          "minimumY": 0.00781806452812224,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8666666666666667,
+          "minimumY": 0.014027731388664422,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.8833333333333333,
+          "minimumY": 0.01943141640393456,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9,
+          "minimumY": 0.024058732305340863,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9166666666666666,
+          "minimumY": 0.027326427132626764,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9333333333333333,
+          "minimumY": 0.013253139701545374,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.95,
+          "minimumY": 0.007108575325558288,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 0.9666666666666667,
+          "minimumY": 0.0009999916306087592,
+          "liftForOneMillimeter": 8.369391240811708e-9
+        },
+        {
+          "time": 0.9833333333333333,
+          "minimumY": 0.0009994460353481244,
+          "liftForOneMillimeter": 5.539646518756651e-7
+        },
+        {
+          "time": 1,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0166666666666666,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0333333333333334,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.05,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0666666666666667,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.0833333333333333,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        },
+        {
+          "time": 1.1,
+          "minimumY": 0.0010000088827094881,
+          "liftForOneMillimeter": 0
+        }
+      ]
+    }
+  ]
+}

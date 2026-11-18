@@ -1,0 +1,914 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-tackle-keeper-v2",
+  "license": "CC0-1.0",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "canonicalBones": 18,
+  "fps": 30,
+  "rootMotion": false,
+  "compression": "none",
+  "clips": [
+    {
+      "id": "slide_tackle",
+      "duration": 1,
+      "asset": "runtime/clips/slide_tackle.glb",
+      "sheet": "sheets/slide_tackle.png",
+      "score": 93.8
+    },
+    {
+      "id": "getup_fast",
+      "duration": 0.6,
+      "asset": "runtime/clips/getup_fast.glb",
+      "sheet": "sheets/getup_fast.png",
+      "score": 89.7
+    },
+    {
+      "id": "stumble_light",
+      "duration": 0.5,
+      "asset": "runtime/clips/stumble_light.glb",
+      "sheet": "sheets/stumble_light.png",
+      "score": 96
+    },
+    {
+      "id": "fall_soft",
+      "duration": 0.3,
+      "asset": "runtime/clips/fall_soft.glb",
+      "sheet": "sheets/fall_soft.png",
+      "score": 89.8
+    },
+    {
+      "id": "getup_soft",
+      "duration": 0.4,
+      "asset": "runtime/clips/getup_soft.glb",
+      "sheet": "sheets/getup_soft.png",
+      "score": 88.5
+    },
+    {
+      "id": "fall_foul",
+      "duration": 1.2,
+      "asset": "runtime/clips/fall_foul.glb",
+      "sheet": "sheets/fall_foul.png",
+      "score": 94.8
+    },
+    {
+      "id": "getup_foul",
+      "duration": 0.8,
+      "asset": "runtime/clips/getup_foul.glb",
+      "sheet": "sheets/getup_foul.png",
+      "score": 88.8
+    },
+    {
+      "id": "dive_left",
+      "duration": 1.1,
+      "asset": "runtime/clips/dive_left.glb",
+      "sheet": "sheets/dive_left.png",
+      "score": 90
+    },
+    {
+      "id": "dive_low_left",
+      "duration": 1,
+      "asset": "runtime/clips/dive_low_left.glb",
+      "sheet": "sheets/dive_low_left.png",
+      "score": 89.6
+    },
+    {
+      "id": "dive_high_left",
+      "duration": 1.3,
+      "asset": "runtime/clips/dive_high_left.glb",
+      "sheet": "sheets/dive_high_left.png",
+      "score": 90.7
+    },
+    {
+      "id": "getup_keeper_left",
+      "duration": 0.8,
+      "asset": "runtime/clips/getup_keeper_left.glb",
+      "sheet": "sheets/getup_keeper_left.png",
+      "score": 92.6
+    },
+    {
+      "id": "dive_right",
+      "duration": 1.1,
+      "asset": "runtime/clips/dive_right.glb",
+      "sheet": "sheets/dive_right.png",
+      "score": 90
+    },
+    {
+      "id": "dive_low_right",
+      "duration": 1,
+      "asset": "runtime/clips/dive_low_right.glb",
+      "sheet": "sheets/dive_low_right.png",
+      "score": 89.7
+    },
+    {
+      "id": "dive_high_right",
+      "duration": 1.3,
+      "asset": "runtime/clips/dive_high_right.glb",
+      "sheet": "sheets/dive_high_right.png",
+      "score": 90.7
+    },
+    {
+      "id": "getup_keeper_right",
+      "duration": 0.8,
+      "asset": "runtime/clips/getup_keeper_right.glb",
+      "sheet": "sheets/getup_keeper_right.png",
+      "score": 92.6
+    },
+    {
+      "id": "catch_chest",
+      "duration": 1.1,
+      "asset": "runtime/clips/catch_chest.glb",
+      "sheet": "sheets/catch_chest.png",
+      "score": 94.1
+    },
+    {
+      "id": "catch_high",
+      "duration": 1.3,
+      "asset": "runtime/clips/catch_high.glb",
+      "sheet": "sheets/catch_high.png",
+      "score": 91.6
+    },
+    {
+      "id": "punch",
+      "duration": 1.3,
+      "asset": "runtime/clips/punch.glb",
+      "sheet": "sheets/punch.png",
+      "score": 93.6
+    },
+    {
+      "id": "save_with_foot",
+      "duration": 1.1,
+      "asset": "runtime/clips/save_with_foot.glb",
+      "sheet": "sheets/save_with_foot.png",
+      "score": 94.5
+    }
+  ],
+  "qaPass": true,
+  "measurePass": true,
+  "browserPass": true,
+  "inventory": [
+    {
+      "path": "LICENSE.txt",
+      "bytes": 822,
+      "sha256": "3ba40cdece1443a303d70baa8e1cb0230c5245b5e7f7efc4805cb04aab5cca22",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 4492,
+      "sha256": "70673f2e1422de0b1d53eea29ab1c5f19c49f4c8ecb687a274aaf2cd8de681fe",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6450,
+      "sha256": "ddda8fb96e5954425710a88aaee4fdbb1ce48668cbd46d677f322e17cbc2dfef",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 8797,
+      "sha256": "3f8e9b50c2c415d56a2b6cef9b8f2262c09c05686186d2079601e73ee2fdb7d4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 5490,
+      "sha256": "e2b3b2eca0bcd706045e7066c757da54956f8106bc7c5483b3179418ffe8d599",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 2891,
+      "sha256": "db0455a16cd15fd66ba5838a393abc925808d5ec119c2eecc32b40bbd32af38f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--catch_chest__with_recovery.html",
+      "bytes": 13360,
+      "sha256": "d601cee9ec06825f303d864b849fc2fb8d200ce33dbbdddbd9603285d5ddb1c6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--catch_chest__with_recovery.json",
+      "bytes": 13989,
+      "sha256": "08cb38c033f69aa5006ce1889dab28f2d3ae60e8d2c26c5b9e5c6558940f3d2d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--catch_high__with_recovery.html",
+      "bytes": 13372,
+      "sha256": "274f8af241c06823570a9c72d9eb969b1802c84606dc2d4d99f20145c070d3b3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--catch_high__with_recovery.json",
+      "bytes": 13826,
+      "sha256": "89fb989f1054d1987b64c8baba8c2d963cb4d8c847d60091acf3294d8ddc33d6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_high_left__with_recovery.html",
+      "bytes": 13496,
+      "sha256": "77bfdb05e47eb96aa7c90365c2e3fb7d792cab1756635f002a67ffedf20e1434",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_high_left__with_recovery.json",
+      "bytes": 14044,
+      "sha256": "82e3e2a9d1cb1561df24dbdf959ee21d46d0a360f1c9cf206c48f37f41a845af",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_high_right__with_recovery.html",
+      "bytes": 13507,
+      "sha256": "c495a98ef21ffecf4075aa8a7d21a4a033bc8ed25fe9177bba07dc6139b6ddf1",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_high_right__with_recovery.json",
+      "bytes": 14109,
+      "sha256": "6804ebac1a43b16bcf6e79e274b919cb5adbc0cd7756ff48003f856bef81dfdd",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_left__with_recovery.html",
+      "bytes": 13462,
+      "sha256": "5a26afdbe9fb28728e20d21bd34ec90f9e08fc241a38b8fc01dcaaa3a72470a7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_left__with_recovery.json",
+      "bytes": 14209,
+      "sha256": "dda01de96bebf725d967898872459c0efc5482549a42fdcb2035214b49e7baf5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_low_left__with_recovery.html",
+      "bytes": 13474,
+      "sha256": "f8a9215a3bf0642677cd2dc7f3290dccfd61d05d1cafe8255bb9f7dc4cb38c8c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_low_left__with_recovery.json",
+      "bytes": 13935,
+      "sha256": "f02ebc1d9b802f6480e0f90534ecc1a7b1ab2092b3afdce64bbc26ee075ad9d7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_low_right__with_recovery.html",
+      "bytes": 13480,
+      "sha256": "ac0f62048cda19af77bfa3a13b2d80c1b0b0be633ad506e771ee926740263eef",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_low_right__with_recovery.json",
+      "bytes": 13995,
+      "sha256": "cd30978c6d8b2cdee4b0b3dc6030cc034409f728f3e1f824ad630f0ca2de4e8a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_right__with_recovery.html",
+      "bytes": 13474,
+      "sha256": "d5e64f3fa3734fb7e4133bf72c5ae3fcc2d6f1fd8a7482c04565a2621f2b22d8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--dive_right__with_recovery.json",
+      "bytes": 14273,
+      "sha256": "b69389a02b28786aff1a5a57eebf822a3996a3a114ce708a27d08f833188b462",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--fall_foul__with_recovery.html",
+      "bytes": 12664,
+      "sha256": "d5fca70eb5e25b7e5770eb503e1d6c672b14910a4c0bba1a1c99eb21556e7ff3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--fall_foul__with_recovery.json",
+      "bytes": 12443,
+      "sha256": "9fc30c784c35914bc4e66c06309be7d54bd5bfc751f5f43f777051583aae5564",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--fall_soft__with_recovery.html",
+      "bytes": 12670,
+      "sha256": "6b9711259b0baab30b4f041eec1c9af9f4802fa0781ed45557a0ba336845b8c3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--fall_soft__with_recovery.json",
+      "bytes": 12337,
+      "sha256": "7aad1159b647eb7434fafbcecbae56568ca6f0f95a698738bee3f2212e0fab13",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--idle_relaxed_reference_field.html",
+      "bytes": 12655,
+      "sha256": "5c41f3b04d6c4e4e7943504279a73b0ee8aeca3a4aa483c7dabc6a538f38f028",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--idle_relaxed_reference_field.json",
+      "bytes": 9816,
+      "sha256": "fa8bfc66df4508556040a45445ac5670e939a4d213ecc5a149eb7cb59f53c109",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--idle_relaxed_reference_keeper.html",
+      "bytes": 12662,
+      "sha256": "9c888063404bbcf10ac4f1ecd7b4e89da5baa15ac9e660b767c134c5d956baba",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--idle_relaxed_reference_keeper.json",
+      "bytes": 9826,
+      "sha256": "3afc9df124b4ecd2f97a96b532e9bbb68dffdd6adf472544a8a5f26c115a6afa",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--punch__with_recovery.html",
+      "bytes": 13338,
+      "sha256": "68223cd7a273ff8ca6fe5248ec8cfc16e5a51d43cd779ff91cab3e5d1b696281",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--punch__with_recovery.json",
+      "bytes": 13847,
+      "sha256": "9a98c432655fa71880cde7443a2543fe3729a8372b3d8eeb3b4dc15c6007d079",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--save_with_foot__with_recovery.html",
+      "bytes": 13400,
+      "sha256": "99e3ec7d1a5c89015c4fcd8e52291ef5e6caed7274f255a6abbc2169e495f413",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--save_with_foot__with_recovery.json",
+      "bytes": 14195,
+      "sha256": "6bf2d7e1bbd43d3bc59eca9028da0d582d4c99610b67bdfa445ae25f16266d1d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--slide_tackle__with_recovery.html",
+      "bytes": 13387,
+      "sha256": "67c50fe369124c44048b4aceae1f77f9e6c8141bc372f3de34a7fe1167a6fdd9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--slide_tackle__with_recovery.json",
+      "bytes": 13207,
+      "sha256": "0f00511151a4b8221ba31eff4ad23910628f78849bbe14c1be3c9a117ae80043",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--stumble_light.html",
+      "bytes": 12527,
+      "sha256": "5f20a009348f4ef7672f280b26b4ab699ece9bdb0b0478fe79e64772199f1ac7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/clips/soccer-tackle-keeper-v2--stumble_light.json",
+      "bytes": 10968,
+      "sha256": "e715b0e857ca68a6209e9a51467d7166761ef3ebc27a808a3923fd76d862f53e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/raw-contextual.json",
+      "bytes": 130359,
+      "sha256": "1234301bfb9d2df2aca9607a4c4e1658aea5fa323ce9854532846e821f8b0307",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/report.html",
+      "bytes": 38420,
+      "sha256": "ab1f39c5c25a2c0b050b934fdaef661bd5e189255d606d29edff6517411210ae",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/report.json",
+      "bytes": 233442,
+      "sha256": "11817c8a83a78ab90e3d8c78ce0a71206b7961be40a2811531cb07507bf62c42",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--catch_chest__with_recovery.svg",
+      "bytes": 26719,
+      "sha256": "ae9a8a2a122275be89e18ad2fef4ea8f7240f3df39b0e4232f858332dc4cce81",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--catch_high__with_recovery.svg",
+      "bytes": 26708,
+      "sha256": "7abfa5b56b07ffd243f11453b6fc1ffb39206fe056591b12606fc7c21bbace22",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_high_left__with_recovery.svg",
+      "bytes": 26730,
+      "sha256": "be06077ca346635514e28889c0c2054599f265db0b81e1441f2fa2fc0dd241d3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_high_right__with_recovery.svg",
+      "bytes": 26721,
+      "sha256": "f14aeaa37dc3d7d58cdbe61e60c65abe9f6079ec1288176f64c26f5651e6f70e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_left__with_recovery.svg",
+      "bytes": 26720,
+      "sha256": "4c354953d0c6115fedfaacac942879099bf1cef36a668251038f3ffbb1ab839f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_low_left__with_recovery.svg",
+      "bytes": 26641,
+      "sha256": "b4443756273e63abca447eea8285bfc9d194a0d341d3d1bb2b859f2830b6dc2b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_low_right__with_recovery.svg",
+      "bytes": 26633,
+      "sha256": "e398c7a9e33bc54a7cf414698ac2eca8b49e07c29ac6614f9501a2547313e459",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--dive_right__with_recovery.svg",
+      "bytes": 26713,
+      "sha256": "8901ee44f1b026335599a2e4f709348b34685361c9093b6c1886f14ce2467b35",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--fall_foul__with_recovery.svg",
+      "bytes": 26259,
+      "sha256": "1cc9e0e7dcdbd8e88255d2425047fec689ba7af2e0b30573b9b7be98761905d6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--fall_soft__with_recovery.svg",
+      "bytes": 26257,
+      "sha256": "f3497cc0944383cb5bf782665c901226a72218f81f1c02292f7d1c5a1bd4a476",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--idle_relaxed_reference_field.svg",
+      "bytes": 26257,
+      "sha256": "49324e5bdf64822ab06f2dd456d7198208c5e85cafb0a7ccc302320068265424",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--idle_relaxed_reference_keeper.svg",
+      "bytes": 26259,
+      "sha256": "85631372f0fe4a7afdabb4e0da9ea34e8934a066dd8edade4c6415eedce4f5a9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--punch__with_recovery.svg",
+      "bytes": 26711,
+      "sha256": "f6f67248d1a2574ff5adb2a2376e86225e9840d8804415df38fdcc8044742f64",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--save_with_foot__with_recovery.svg",
+      "bytes": 26735,
+      "sha256": "b8cc29ebfefd1597bc9b0f0dfe7736311cf85d7925592eda186de1df2bdbbe78",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--slide_tackle__with_recovery.svg",
+      "bytes": 26731,
+      "sha256": "634281bb2bf0c2ab3f271eaec13686952d92c4204ada1b5f1db4203a7b2efe6e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/sheets/soccer-tackle-keeper-v2--stumble_light.svg",
+      "bytes": 26227,
+      "sha256": "742d066a6cb7126a6c1e23eacc4fde85d4c16eeb57d76909d73e0e1d31cfa8a0",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "qa/summary.json",
+      "bytes": 228082,
+      "sha256": "aff03495ca2e29061c98a4ccdebd4458996543d6e85eeff061444713fcda4b01",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/catalog.json",
+      "bytes": 67965,
+      "sha256": "5999ee77a2d9e95daf78f21f6b3888ae7a9e8b6003491005470defc563cdb136",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/catch_chest.glb",
+      "bytes": 18404,
+      "sha256": "0c809ed7e77bacd9233b8a72a50db1b915a1f85118cc7018afc24e6ac38c4808",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/catch_high.glb",
+      "bytes": 19784,
+      "sha256": "3706abf78af452e6ff95f879cdb44bbec2399e71e3e148fe79e47c13e52f8139",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_high_left.glb",
+      "bytes": 17844,
+      "sha256": "4bddf3d92bad8af7858ae95f7305de46dfebc0df628dbfedf2a3324efb0b2033",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_high_right.glb",
+      "bytes": 17852,
+      "sha256": "344c6ca2cc807723edc09fb854eaaace26a630cf651e9c07c83abdaf44d594d5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_left.glb",
+      "bytes": 16360,
+      "sha256": "b0f074356e79722e70c7c73ee39923291b81f3da35fa0d5202e2537ea6ffb5ec",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_low_left.glb",
+      "bytes": 15468,
+      "sha256": "275c8881ba7970a2aadea6ca894323fa6ed654a7615a6211a2398b85f3713132",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_low_right.glb",
+      "bytes": 15480,
+      "sha256": "2f4319878e8877949f157574e4c8cccc85ef2599a1cd4820066c8df8658ba2aa",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/dive_right.glb",
+      "bytes": 16372,
+      "sha256": "ac90f0ccdb18f15899396e7083c2c7cd7f02bf75b25c526a37b2f734b69b769d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/fall_foul.glb",
+      "bytes": 16772,
+      "sha256": "47144219fe658bd1c9c9fe975b1f2856e64a9bab072e148e223477b2a90a8d0c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/fall_soft.glb",
+      "bytes": 9384,
+      "sha256": "ea7872fd49d4b92900f1209dcd10a2da0d571f9c6b8080c4acd2ad2a149ff681",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/getup_fast.glb",
+      "bytes": 11912,
+      "sha256": "ebe96e4f21a0cfac57de4812bed58954151f68e008a87da15cd4acff283581c8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/getup_foul.glb",
+      "bytes": 13468,
+      "sha256": "f702fef6772b0088e09f15cc5f7c4de80edd2a89e452a33001317448c9fa7361",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/getup_keeper_left.glb",
+      "bytes": 14124,
+      "sha256": "75ce96dd11d8dbf9a39cb2cf4e8917e51d2b5de6b4f9c4a0f3bcaa90e6ec24a8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/getup_keeper_right.glb",
+      "bytes": 14132,
+      "sha256": "cb36d45162be2398bd67f411ba1616c7dcc46422c1a4b632a2b8d14d6359c901",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/getup_soft.glb",
+      "bytes": 10180,
+      "sha256": "2dc3ab93666c782844cab25981dbd720a7edeaf0b7be19996a55a32694b23949",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/punch.glb",
+      "bytes": 17780,
+      "sha256": "5995722276a81e555405b0684dd2aa4bcd5da00a1f8aa2e0b09b562dd1b7b48b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/save_with_foot.glb",
+      "bytes": 16320,
+      "sha256": "2d6284be7362a5683389ae83b1f0d930168cfb74346cd060f4c87f23cd4b5b6f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/slide_tackle.glb",
+      "bytes": 15740,
+      "sha256": "e6dcf2956c447b4dc706d6669af8c222443e2d7af9f17af3d279043efd059071",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/clips/stumble_light.glb",
+      "bytes": 9532,
+      "sha256": "a611f4d90e6c5fd43cdac6532efe46c49c58c07c5832a553766cc5502f603160",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/keeper-open.glb",
+      "bytes": 786928,
+      "sha256": "2314b1942ef5bc2534c25adb5ed40b2a8e9e406ab064096cdccacc1aa1fb13b9",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/motion-fix-v12/runtime/models/canonical-keeper.glb",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad"
+    },
+    {
+      "path": "runtime/keeper.glb",
+      "bytes": 800224,
+      "sha256": "56ccc07410c485d5cc99fa4ce4303c9a2621b1da643e5c16055f62fe2778d33b",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/runtime/keeper.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "runtime/motions.json",
+      "bytes": 674312,
+      "sha256": "1ec9253b4836548c905b8c0b159d8526c13ce31a6154fef8a1d28d5f7289cc3c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/player.mjs",
+      "bytes": 6808,
+      "sha256": "fc9db345de9a9a68f22567ab77ee13e5d3b2033b60edacd898c3d6b1f0a77d80",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-header-v1/runtime/reference/run.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "sheets/catch_chest.png",
+      "bytes": 249821,
+      "sha256": "c23473700a46f88a881a3517065f498918ad2c5aee4f7c9ffb3757bdace9a1a3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/catch_high.png",
+      "bytes": 263748,
+      "sha256": "f3d4a8e1ebd2532a0db577d11fd1cdb1302d7518f55ff8f0baf0cbf1466b06c5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_high_left.png",
+      "bytes": 256320,
+      "sha256": "033b9ce6898e1b704ba363504caa513be9cabc500a55682b541a6e14b39971dc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_high_right.png",
+      "bytes": 293555,
+      "sha256": "fe13ac73c10e0268cd5f3dbfcddb7883fc6d1ffbbc08e5b20794efae4e6b3501",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_left.png",
+      "bytes": 234362,
+      "sha256": "e43a57a77201be1d5e459acac5ae41a457c227f7aa869f3317be99191c443ac2",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_low_left.png",
+      "bytes": 240675,
+      "sha256": "2731b866400d6670b32bda572450db58d1f8538867969d3430cdf702a2c09e90",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_low_right.png",
+      "bytes": 262259,
+      "sha256": "23ee69ec14b60af83936027e2c954d6d9d92d791a47bbd47caca647e6166658c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive_right.png",
+      "bytes": 269964,
+      "sha256": "e02f0eec0e27188ff26795e64f9c3986771cd4479d28db15ca7c4f93444cbab6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/fall_foul.png",
+      "bytes": 241195,
+      "sha256": "ed451a2c993d9e8314585bfb03e566100e437f7e55143a70239f7ca2b1d93833",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/fall_soft.png",
+      "bytes": 256973,
+      "sha256": "65ae511525f9652bee67d69a65787c64d287a8208becbaf40b5cb4b18865feba",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/getup_fast.png",
+      "bytes": 250637,
+      "sha256": "e295508ce1c06b7d7f0474091a52b322496d020fb02d86be88b358a0f46c70ca",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/getup_foul.png",
+      "bytes": 247878,
+      "sha256": "df0ae240c03fc8c96ca66619a5d97c58576781f39db27beac8fda8731f6fdbe6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/getup_keeper_left.png",
+      "bytes": 240318,
+      "sha256": "c5b190c42fff74606ae800f495ecb3f0a6fc928ef551078bd1f9919ceb5ba5b5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/getup_keeper_right.png",
+      "bytes": 264090,
+      "sha256": "2faded87d621c9a4f4137d2be76ee14aeb67b7bcf8ad3c2f43223ef2bdb6276f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/getup_soft.png",
+      "bytes": 262674,
+      "sha256": "869bc7d382ad9f29bf39acce2f69b4986bf1fd60a297d847f3dfa82595590484",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/preview-390x844.png",
+      "bytes": 71363,
+      "sha256": "0ffd894d3753487b0e177aae253b6725ab5b0d0b39cfa60c5d718e2358edb6a1",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/preview-844x390.png",
+      "bytes": 99439,
+      "sha256": "d08361e9c44cfcc6076f19e16eac3565dca2ac79570f39348844904cf1879d22",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/punch.png",
+      "bytes": 284261,
+      "sha256": "cfc8cbf1a873f541903a7bf52a988f8419c609dcde88d5e0546b8e0ca291ff42",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/save_with_foot.png",
+      "bytes": 290484,
+      "sha256": "d5896dd20bae041b256feb74f402e1cc9cbd5a428145aaf26a16aed6af9a9a6e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/slide_tackle.png",
+      "bytes": 252778,
+      "sha256": "4b850e5085622c6c48282410d47ae41448b15a92cbd1f5aa7d2fddfdc2accbc2",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/stumble_light.png",
+      "bytes": 264636,
+      "sha256": "ee7dd3e4f0d6714d5dd5d96724fe4ea00d8c58ff1b4d361acbf6d97caeee87e5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 7862,
+      "sha256": "afc1da6451fa9abbdad6edd36461b216d9222b913371f1e0531e66c907f17009",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 7297,
+      "sha256": "f5187137f038cfa4e54a6edaf6044b18063fdd81e87e7d4dab2f2b6b00be059a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/field.mjs",
+      "bytes": 9179,
+      "sha256": "8092f4421dd8ff5e21df5ccb0d3ff351bef54e2c468f2a28f32644d6a03ac9ac",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/glb-writer.mjs",
+      "bytes": 4664,
+      "sha256": "46eed61301dcb808dab2bd2f62c5738271d8affe6fd0334fc4d2fe7262c8d79c",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/source/glb-writer.mjs",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "source/keeper.mjs",
+      "bytes": 16963,
+      "sha256": "8f57fa271b5579e319e3c928dc0c84057f6968832f4682d76f1542655e2a2a20",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/measure.mjs",
+      "bytes": 18303,
+      "sha256": "b57c43243f264d6d01f8c14989cef23d648286aac7176cc3dff296e701204895",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/preview.mjs",
+      "bytes": 14246,
+      "sha256": "4b5ca3f1ffda3c914da5e1dfda56a6c09abd6bbd3584c92b907dfdda07832bbb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-loader.mjs",
+      "bytes": 335,
+      "sha256": "ff93b5ca91887624ff3aac7644f92ae0619bebd6d4e0e77c28581a31bced510d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-sources.mjs",
+      "bytes": 10476,
+      "sha256": "c5a588dfc1b75e3d99d8b742ffb341017572101e49d9c87cbbbfb9be6bcf11ec",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/register-qa.mjs",
+      "bytes": 187,
+      "sha256": "3bc02e4a8606a43961376693b3c7edbe88b4a264a5e4b38169a2b5163bec8052",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/report.mjs",
+      "bytes": 13804,
+      "sha256": "542061283ba1af4ccba81ada3e1f09e4badf98761f20213c621cc15c0797f3dc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/rig.json",
+      "bytes": 5082,
+      "sha256": "4fafafe448028f3e4ba07a5d18448f3a0c336b1fb9d203541bc925c0bc2ec5f3",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/source/rig.json",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "license": "CC0-1.0",
+      "source": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a"
+    },
+    {
+      "path": "source/run-qa.mjs",
+      "bytes": 8705,
+      "sha256": "fa23e984bc4c9dbb71f53427441d37287a4e778ba5ae24da96f2ed17db493022",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "style.css",
+      "bytes": 5999,
+      "sha256": "1bdb33ee599ca2bee64457b0f684760f51eb353b5702806d2ce612a328187243",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 83978,
+      "sha256": "38134ac14ec1ff701ca7dd4d9a51d44a6550e3bd69a8ae7ef8d0f4497354f5bc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/clearance.json",
+      "bytes": 154023,
+      "sha256": "8a8d8003dd71d86ce5374ce9cbd783ae0e2884a6f530761be29a690f75c7f119",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/measurements.json",
+      "bytes": 367352,
+      "sha256": "4dc6e48a3336dd3d45f4af4e683b010960143a3ea2d57057cd0c591d48a6cc48",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/provenance.json",
+      "bytes": 4521,
+      "sha256": "5256e3ca2fcd8c4478f8db10d127f52e69459e4b771c4d8900bf28db32c025d2",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/repository-checks.json",
+      "bytes": 949,
+      "sha256": "1f50c67cc4a0aabcc22bf97a79d229033727b5d4f5844d738852fe94b6f84b47",
+      "license": "CC0-1.0"
+    }
+  ]
+}

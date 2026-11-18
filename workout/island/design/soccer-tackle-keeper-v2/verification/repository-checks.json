@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "command": "npm test",
+  "tests": 3970,
+  "passed": 3905,
+  "failed": 1,
+  "skipped": 64,
+  "sourceBase": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "failures": [
+    {
+      "test": "tests/workout-royiki.test.mjs:91",
+      "reason": "Playwright default chromium_headless_shell-1234 executable is absent; failure occurs at browserType.launch before loading the app.",
+      "cause": "environment browser installation, not the new motion package",
+      "openHandle": "The existing test starts an HTTP server before browser.launch and does not close it when launch fails; its worker was terminated after output stopped so the parent runner could finish."
+    }
+  ],
+  "logSha256": "52a1ad8871a4270069dee8f2e282fd24ab223e916dec11d81337b26e29fbf31b",
+  "packageBrowserVerification": "source/capture.mjs uses /usr/bin/chromium explicitly and passed both viewports with 342 pose checks.",
+  "existingFilesModified": false
+}
