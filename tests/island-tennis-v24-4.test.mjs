@@ -41,6 +41,12 @@ test('the copied Codex art is on disk, listed, offline, and licensed',()=>{
   assert.ok(readFileSync(new URL(path,root),'utf8').startsWith('<svg'),path);}
  assert.match(readFileSync(new URL('assets/tennis-ui-v2/LICENSES.md',root),'utf8'),/CC0/);
 });
+test('help text follows the controls: v24.4 names the serve plate and the bar on the right edge; ?tennisUi=v24 keeps the v24.3 wording',()=>{
+ const strings=JSON.parse(readFileSync(new URL('data/strings.he.json',root),'utf8')),activity=readFileSync(new URL('ui/activity.mjs',root),'utf8');
+ assert.match(strings['minigame.tennis.help.2'],/כפתור ההגשה/);assert.match(strings['minigame.tennis.help.1'],/בקצה הימני/);
+ assert.match(strings['minigame.tennis.help.2.v243'],/החצים העולים/);assert.match(strings['minigame.tennis.help.1.v243'],/המד שבצד ליד הכפתורים/);
+ assert.match(activity,/id==='tennis'&&polishValue\('tennisUi'\)==='v24'\)\{keys\[0\]\+='\.v243';keys\[1\]\+='\.v243';\}/);
+});
 test('ready stance: between strokes the racket is up and in front with the other hand on its throat; swings, backswing and toss untouched',async()=>{
  const T=await import('../workout/island/vendor/three.module.js');
  const {tennisReadyEnabled,readyStance,readyHold,READY_DEFAULTS}=await import('../workout/island/minigames/tennis-grip.mjs');

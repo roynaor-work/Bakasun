@@ -40,6 +40,8 @@ function helpKeys(id){
  if(id==='islandRacing'){
   if(!racingV24Flags().pit)keys[1]+='.noPit';else if(!pitAutoEnabled())keys[1]+='.v24';else if(!phoneFixOn('D'))keys[1]+='.v241';
  }
+ // v24.4: the tennis controls moved (tennis-ui2.mjs); `.v243` keeps the v24.3 wording for ?tennisUi=v24.
+ if(id==='tennis'&&polishValue('tennisUi')==='v24'){keys[0]+='.v243';keys[1]+='.v243';}
  if(id==='navalDuel'){
   if(!navalLockOn())keys[0]+='.noLock';
   else if(!navalAimV24())keys[0]+='.v23';
