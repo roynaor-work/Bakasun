@@ -1,0 +1,28 @@
+{
+  "command": "npm test",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "tests": "4326",
+  "suites": "0",
+  "pass": "4261",
+  "fail": "1",
+  "cancelled": "0",
+  "skipped": "64",
+  "todo": "0",
+  "duration_ms": "1395092.15133",
+  "complete": true,
+  "initialFailure": {
+    "file": "tests/workout-royiki.test.mjs",
+    "reason": "Configured Playwright Chromium executable missing; orphaned local HTTP server required terminating the test child after diagnosis."
+  },
+  "targetedRerun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/hoops-technique-system-browser.mjs node --test tests/workout-royiki.test.mjs",
+    "tests": "5",
+    "pass": "5",
+    "fail": "0",
+    "skipped": "0",
+    "duration_ms": "26465.779279",
+    "browser": "/usr/bin/chromium",
+    "repositoryFilesChanged": false
+  },
+  "scope": "Existing repository suite; no pre-existing files changed."
+}

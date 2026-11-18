@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "sampleEpsilonSeconds": 0.0001,
+  "scope": "Fine-time live controller FK and measured-skin reach audit plus actual source hand vertices at120Hz around release and reported quarter-key trouble spots. Independent exported GLB measurements are in motion-qa-v1.json.",
+  "sources": [
+    {
+      "file": "source/technique-poses.mjs",
+      "sha256": "0958e8f9463121d4556ea691ecf6a333ba6825e1ae80700d777003ae41752ec4"
+    },
+    {
+      "file": "source/motion.mjs",
+      "sha256": "869dacf08320924ce4ee6727b4f1d2d7b432ada4e5889b7f390f45a0f95a3533"
+    },
+    {
+      "file": "source/audit-technique.mjs",
+      "sha256": "9a09a41189e1371a7f4c2350de29b99b8a09ce89be58a63df2698666fd165508"
+    },
+    {
+      "file": "models/athlete-bind.glb",
+      "sha256": "4f9ee0fc5b7d08836981483d279dc7025b417501486268797995478b8a9dd651"
+    }
+  ],
+  "records": [
+    {
+      "id": "pass_chest",
+      "releaseFrame": 20,
+      "actualBallRelease": [
+        0,
+        1.3527999782562257,
+        0.6499999999999997
+      ],
+      "authoredBallRelease": [
+        0,
+        1.3527999782562257,
+        0.6499999999999997
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 5.467214348906571e-12,
+      "rightElbowDegrees": 146.72710600714248,
+      "rightKneeFlexionDegrees": 59.45400765434776,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.3265697856564496,
+        0.09050186740024072
+      ],
+      "rightElbow": [
+        -0.17560521735459733,
+        1.2430926454106228,
+        0.3330815427499816
+      ],
+      "rightWrist": [
+        -0.14097708463368014,
+        1.3089663207784912,
+        0.5912657571545277
+      ],
+      "handC0ResidualMeters": 1.4960304179759957e-10,
+      "palmResidualMeters": 9.71445146547012e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 26,
+        "maxHandVertexPenetrationMeters": 0.015896377128419015,
+        "maxNearestHandVertexGapMeters": 0.00028872121153181163,
+        "maxPalmResidualMeters": 2.220446049250313e-16,
+        "worstSkin": {
+          "frame": 17,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "pass_bounce",
+      "releaseFrame": 21,
+      "actualBallRelease": [
+        0,
+        1.08579998254776,
+        0.5800000000000003
+      ],
+      "authoredBallRelease": [
+        0,
+        1.08579998254776,
+        0.5800000000000003
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 4.9960036108132044e-12,
+      "rightElbowDegrees": 148.89859805586332,
+      "rightKneeFlexionDegrees": 64.6601865130992,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.3068594477729074,
+        0.09266720851041846
+      ],
+      "rightElbow": [
+        -0.18010779134962351,
+        1.1177648152139636,
+        0.26646992921829304
+      ],
+      "rightWrist": [
+        -0.1409770846336801,
+        1.0419663250700253,
+        0.521265757154528
+      ],
+      "handC0ResidualMeters": 0.0018159271264874706,
+      "palmResidualMeters": 1.249000902703301e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 26,
+        "maxHandVertexPenetrationMeters": 0.01589637712841893,
+        "maxNearestHandVertexGapMeters": 0.0002887212115317006,
+        "maxPalmResidualMeters": 1.5265566588595902e-16,
+        "worstSkin": {
+          "frame": 18.75,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "pass_overhead",
+      "releaseFrame": 21,
+      "actualBallRelease": [
+        0,
+        1.7265999722480774,
+        0.49000000000000044
+      ],
+      "authoredBallRelease": [
+        0,
+        1.7265999722480774,
+        0.49000000000000044
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 8.473409486550036e-12,
+      "rightElbowDegrees": 146.31605516852625,
+      "rightKneeFlexionDegrees": 59.782796253688275,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.3258303967520413,
+        0.08037542339477508
+      ],
+      "rightElbow": [
+        -0.1705954828269191,
+        1.4468570950249438,
+        0.3060973594757006
+      ],
+      "rightWrist": [
+        -0.1409770846336803,
+        1.6827663147703427,
+        0.4312657571545282
+      ],
+      "handC0ResidualMeters": 1.5347648985624348e-10,
+      "palmResidualMeters": 1.5265566588595902e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 26,
+        "maxHandVertexPenetrationMeters": 0.01589637712841882,
+        "maxNearestHandVertexGapMeters": 0.00028872121153192265,
+        "maxPalmResidualMeters": 3.7470027081099033e-16,
+        "worstSkin": {
+          "frame": 20.25,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "pass_behind_back_right",
+      "releaseFrame": 24,
+      "actualBallRelease": [
+        0.0250000000000003,
+        1.2281999802589416,
+        -0.22999999999999987
+      ],
+      "authoredBallRelease": [
+        0.0250000000000003,
+        1.2281999802589416,
+        -0.22999999999999987
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 4.0463250680971606e-12,
+      "rightElbowDegrees": 141.75682239229093,
+      "rightKneeFlexionDegrees": 58.82943409289736,
+      "rightShoulder": [
+        -0.17485509970986232,
+        1.3233211466447543,
+        0.12767727040163185
+      ],
+      "rightElbow": [
+        -0.12283082955264213,
+        1.1307897798244184,
+        -0.03480201824471807
+      ],
+      "rightWrist": [
+        -0.014995553252674779,
+        1.0814412561551565,
+        -0.27591156522881277
+      ],
+      "handC0ResidualMeters": 1.4960269771807433e-10,
+      "palmResidualMeters": 2.0816681711721685e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 34,
+        "maxHandVertexPenetrationMeters": 0.012899960729156917,
+        "maxNearestHandVertexGapMeters": 0.0003397619020893694,
+        "maxPalmResidualMeters": 0.0000035147994945639027,
+        "worstSkin": {
+          "frame": 6.25,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "pass_behind_back_left",
+      "releaseFrame": 24,
+      "actualBallRelease": [
+        -0.0250000000000003,
+        1.2281999802589416,
+        -0.22999999999999987
+      ],
+      "authoredBallRelease": [
+        -0.0250000000000003,
+        1.2281999802589416,
+        -0.22999999999999987
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 4.0463250680971606e-12,
+      "rightElbowDegrees": 71.08317808162575,
+      "rightKneeFlexionDegrees": 59.46875339231123,
+      "rightShoulder": [
+        -0.20658016325050016,
+        1.3322043033770454,
+        0.050417390036684204
+      ],
+      "rightElbow": [
+        -0.24783411464471383,
+        1.0783134385535869,
+        0.053868677866209545
+      ],
+      "rightWrist": [
+        -0.3915999937057495,
+        1.1925999808311463,
+        0.25
+      ],
+      "handC0ResidualMeters": 2.9893669801409083e-16,
+      "palmResidualMeters": 5.551115123125783e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 34,
+        "maxHandVertexPenetrationMeters": 0.012899960729156848,
+        "maxNearestHandVertexGapMeters": 0.0003433716762608202,
+        "maxPalmResidualMeters": 0.0000035148017108604934,
+        "worstSkin": {
+          "frame": 4,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "pass_jump",
+      "releaseFrame": 25,
+      "actualBallRelease": [
+        0,
+        1.5697869570828773,
+        0.6499999999999997
+      ],
+      "authoredBallRelease": [
+        0,
+        1.5697869570828773,
+        0.6499999999999997
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 5.467214348906571e-12,
+      "rightElbowDegrees": 147.81312512723383,
+      "rightKneeFlexionDegrees": 58.43889156776456,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.5474834858254403,
+        0.08924232494739634
+      ],
+      "rightElbow": [
+        -0.1754320452579754,
+        1.464488048609253,
+        0.3319736133123127
+      ],
+      "rightWrist": [
+        -0.14097708463368008,
+        1.525953299605143,
+        0.5912657571545277
+      ],
+      "handC0ResidualMeters": 0.0004414211873552995,
+      "palmResidualMeters": 1.8041124150158794e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 26,
+        "maxHandVertexPenetrationMeters": 0.01589637712841889,
+        "maxNearestHandVertexGapMeters": 0.0002887212115317006,
+        "maxPalmResidualMeters": 1.8041124150158794e-16,
+        "worstSkin": {
+          "frame": 22,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "alley_oop_pass",
+      "releaseFrame": 23,
+      "actualBallRelease": [
+        0,
+        1.601999974250793,
+        0.5899999999999996
+      ],
+      "authoredBallRelease": [
+        0,
+        1.601999974250793,
+        0.5899999999999996
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 9.883479487474063e-12,
+      "rightElbowDegrees": 144.15992543516543,
+      "rightKneeFlexionDegrees": 58.91621028938529,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.3285214540837265,
+        0.08987642111881358
+      ],
+      "rightElbow": [
+        -0.17255526390729575,
+        1.3691379647325743,
+        0.3429345649198807
+      ],
+      "rightWrist": [
+        -0.1409770846336801,
+        1.5581663167730586,
+        0.5312657571545276
+      ],
+      "handC0ResidualMeters": 1.4960308629747265e-10,
+      "palmResidualMeters": 2.3592239273284576e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 26,
+        "maxHandVertexPenetrationMeters": 0.01589637712841889,
+        "maxNearestHandVertexGapMeters": 0.0002887212115318394,
+        "maxPalmResidualMeters": 2.3592239273284576e-16,
+        "worstSkin": {
+          "frame": 21,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "alley_oop_dunk",
+      "releaseFrame": 35,
+      "actualBallRelease": [
+        -0.075,
+        3.1,
+        0.32770597265624996
+      ],
+      "authoredBallRelease": [
+        -0.075,
+        3.1,
+        0.32770597265624996
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 4.4430599737083416e-12,
+      "rightElbowDegrees": 143.73343234644108,
+      "rightKneeFlexionDegrees": 76.45605751740217,
+      "rightShoulder": [
+        -0.1946062514768493,
+        2.48096260356143,
+        0.13824438451608095
+      ],
+      "rightElbow": [
+        -0.13725795779771308,
+        2.6854367792947267,
+        0.28341964344267156
+      ],
+      "rightWrist": [
+        -0.0956060116435067,
+        2.9508090616473313,
+        0.2770789502283428
+      ],
+      "handC0ResidualMeters": 0.000026872427137901014,
+      "palmResidualMeters": 4.440892098500626e-16,
+      "catchAudit": {
+        "frame": 20,
+        "handC0StepMeters": 0.00039097634004234684,
+        "handC1ResidualMetersPerSecond": 0.000030824532360944487,
+        "gripC0Step": 0,
+        "pass": true
+      },
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 30,
+        "maxHandVertexPenetrationMeters": 0.013851839546179426,
+        "maxNearestHandVertexGapMeters": 0.0004177769492207384,
+        "maxPalmResidualMeters": 8.881784197001252e-16,
+        "worstSkin": {
+          "frame": 32.25,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "shot_jump",
+      "releaseFrame": 28,
+      "actualBallRelease": [
+        -0.1362243760337945,
+        2.309404976488684,
+        0.13999999999999982
+      ],
+      "authoredBallRelease": [
+        -0.1362243760337945,
+        2.309404976488684,
+        0.13999999999999982
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 3.5544479789666732e-12,
+      "rightElbowDegrees": 146.42283357479388,
+      "rightKneeFlexionDegrees": 22.694457834465,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.6640481739718136,
+        0.043633062917819265
+      ],
+      "rightElbow": [
+        -0.14018189815019175,
+        1.8981822407676332,
+        0.13524965347186646
+      ],
+      "rightWrist": [
+        -0.12652282234799261,
+        2.161400074709614,
+        0.08302572415758569
+      ],
+      "handC0ResidualMeters": 1.4179649379027244e-10,
+      "palmResidualMeters": 5.551115123125783e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.01589637712841889,
+        "maxNearestHandVertexGapMeters": 0.00019878309968481,
+        "maxPalmResidualMeters": 5.134781488891349e-16,
+        "worstSkin": {
+          "frame": 25.75,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "shot_three",
+      "releaseFrame": 29,
+      "actualBallRelease": [
+        -0.1362243760337945,
+        2.316762995137311,
+        0.13999999999999974
+      ],
+      "authoredBallRelease": [
+        -0.1362243760337945,
+        2.316762995137311,
+        0.13999999999999974
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 5.089373637225985e-12,
+      "rightElbowDegrees": 146.42283357479369,
+      "rightKneeFlexionDegrees": 22.700196131224402,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.6714061926204409,
+        0.043633062917819265
+      ],
+      "rightElbow": [
+        -0.1401818981501916,
+        1.9055402594162603,
+        0.13524965347186674
+      ],
+      "rightWrist": [
+        -0.12652282234799253,
+        2.168758093358241,
+        0.08302572415758544
+      ],
+      "handC0ResidualMeters": 1.4179687106494704e-10,
+      "palmResidualMeters": 6.938893903907228e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.015896377128418945,
+        "maxNearestHandVertexGapMeters": 0.00019878309968446306,
+        "maxPalmResidualMeters": 4.996003610813204e-16,
+        "worstSkin": {
+          "frame": 29,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "shot_fadeaway",
+      "releaseFrame": 31,
+      "actualBallRelease": [
+        -0.1362243760337945,
+        2.3546749461021053,
+        -0.0015771613256384265
+      ],
+      "authoredBallRelease": [
+        -0.1362243760337945,
+        2.3546749461021053,
+        -0.0015771613256384265
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 5.340089118684826e-12,
+      "rightElbowDegrees": 148.93044808811223,
+      "rightKneeFlexionDegrees": 22.417153965677045,
+      "rightShoulder": [
+        -0.1920108286123803,
+        1.707624942480599,
+        -0.11725539174727945
+      ],
+      "rightElbow": [
+        -0.1437630517787007,
+        1.9411909760845647,
+        -0.020852948255214637
+      ],
+      "rightWrist": [
+        -0.12652282234799234,
+        2.2066700443230354,
+        -0.05855143716805265
+      ],
+      "handC0ResidualMeters": 0.00004765989598394135,
+      "palmResidualMeters": 4.163336342344337e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.015896377128419,
+        "maxNearestHandVertexGapMeters": 0.00019878309968461572,
+        "maxPalmResidualMeters": 4.996003610813204e-16,
+        "worstSkin": {
+          "frame": 28.75,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "shot_stepback",
+      "releaseFrame": 35,
+      "actualBallRelease": [
+        -0.1362243760337945,
+        2.2776382386090916,
+        -0.29000000000000015
+      ],
+      "authoredBallRelease": [
+        -0.1362243760337945,
+        2.2776382386090916,
+        -0.29000000000000015
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 1.1226435567921846e-11,
+      "rightElbowDegrees": 146.4228335747937,
+      "rightKneeFlexionDegrees": 22.66986470656417,
+      "rightShoulder": [
+        -0.1946062514768493,
+        1.6322814360922215,
+        -0.3863669370821807
+      ],
+      "rightElbow": [
+        -0.1401818981501917,
+        1.866415502888041,
+        -0.29475034652813326
+      ],
+      "rightWrist": [
+        -0.12652282234799264,
+        2.1296333368300218,
+        -0.34697427584241447
+      ],
+      "handC0ResidualMeters": 1.4179682076162109e-10,
+      "palmResidualMeters": 8.326672684688674e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.01589637712841871,
+        "maxNearestHandVertexGapMeters": 0.0001987830996845047,
+        "maxPalmResidualMeters": 1.6653345369377348e-16,
+        "worstSkin": {
+          "frame": 32,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "layup_right",
+      "releaseFrame": 33,
+      "actualBallRelease": [
+        -0.095,
+        2.233586657353956,
+        0.462445533575201
+      ],
+      "authoredBallRelease": [
+        -0.095,
+        2.233586657353956,
+        0.462445533575201
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 7.820967653285532e-12,
+      "rightElbowDegrees": 131.45173689163184,
+      "rightKneeFlexionDegrees": 97.86502330584138,
+      "rightShoulder": [
+        -0.19962124133607226,
+        1.7085829050346966,
+        0.1415649080808617
+      ],
+      "rightElbow": [
+        -0.1195706702877606,
+        1.8231396392228665,
+        0.3575348871545801
+      ],
+      "rightWrist": [
+        -0.07957362254764949,
+        2.08204584213719,
+        0.41724545166760346
+      ],
+      "handC0ResidualMeters": 0.00005508638038816692,
+      "palmResidualMeters": 4.996003610813204e-16,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.015896377128419237,
+        "maxNearestHandVertexGapMeters": 0.00019878309968414387,
+        "maxPalmResidualMeters": 4.996003610813204e-16,
+        "worstSkin": {
+          "frame": 32.25,
+          "side": "right"
+        }
+      }
+    },
+    {
+      "id": "layup_left",
+      "releaseFrame": 33,
+      "actualBallRelease": [
+        0.095,
+        2.233586657353956,
+        0.462445533575201
+      ],
+      "authoredBallRelease": [
+        0.095,
+        2.233586657353956,
+        0.462445533575201
+      ],
+      "releaseCorrectionMeters": 0,
+      "ballC1ResidualMetersPerSecond": 7.820967653285532e-12,
+      "rightElbowDegrees": 91.54734238605185,
+      "rightKneeFlexionDegrees": 56.30067965316417,
+      "rightShoulder": [
+        -0.1880160147041153,
+        1.7056130265988927,
+        0.1764204672702546
+      ],
+      "rightElbow": [
+        -0.29143935734495796,
+        1.4813960680008411,
+        0.2485643430197359
+      ],
+      "rightWrist": [
+        -0.4449999928474426,
+        1.6030693034878585,
+        0.4324455335752012
+      ],
+      "handC0ResidualMeters": 0.00008070787284016295,
+      "palmResidualMeters": 2.7755575615628914e-17,
+      "catchAudit": null,
+      "sourceSurfaceAudit": {
+        "sampleHz": 120,
+        "samples": 13,
+        "maxHandVertexPenetrationMeters": 0.015888324930163233,
+        "maxNearestHandVertexGapMeters": 0.0002887212115322141,
+        "maxPalmResidualMeters": 4.996003610813204e-16,
+        "worstSkin": {
+          "frame": 30,
+          "side": "left"
+        }
+      }
+    }
+  ],
+  "pass": true
+}

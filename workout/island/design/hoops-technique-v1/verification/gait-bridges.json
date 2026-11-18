@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "method": "Four full-cycle running/dribble transitions retain the reference lower-body gait, its world travel and main-clip endpoint derivatives.",
+  "records": [
+    {
+      "id": "run_to__dribble_run_right",
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "rootTravelMeters": [
+        0,
+        0,
+        1.7599999904632568
+      ]
+    },
+    {
+      "id": "dribble_run_right__to_run",
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "dribble_run_right",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "rootTravelMeters": [
+        0,
+        0,
+        1.7599999904632568
+      ]
+    },
+    {
+      "id": "run_to__dribble_run_left",
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "ref_run",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "rootTravelMeters": [
+        0,
+        0,
+        1.7599999904632568
+      ]
+    },
+    {
+      "id": "dribble_run_left__to_run",
+      "durationSeconds": 0.8,
+      "from": {
+        "animation": "dribble_run_left",
+        "timeSeconds": 0.8,
+        "rootOffsetMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      "to": {
+        "animation": "ref_run",
+        "timeSeconds": 0,
+        "rootOffsetMeters": [
+          0,
+          0,
+          3.5199999809265137
+        ]
+      },
+      "rootTravelMeters": [
+        0,
+        0,
+        1.7599999904632568
+      ]
+    }
+  ]
+}
