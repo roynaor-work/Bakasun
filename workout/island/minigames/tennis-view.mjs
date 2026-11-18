@@ -1,13 +1,15 @@
-import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-3';
+import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-18';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=island-v2-20261107-3';
-import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-3';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-3';
-import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-3';
+import {seededRandom} from './tennis.mjs?v=island-v2-20261107-18';
+import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-18';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-18';
+import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-18';
+import {tennisGripEnabled,gripConfig,loadGripRacket,attachGrip,tennisReadyEnabled,readyConfig,readyStance,readyHold} from './tennis-grip.mjs?v=island-v2-20261107-18';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-3',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-18',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -26,9 +28,26 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   // Tennis v7 (design/tennis-v7, copied to assets/tennis-v7): court surface, net, ball, venue, officials and the instanced crowd.
   // It is an upgrade, never a requirement: ?tennisV7=0, the config switch or any load failure keeps the previous court and crowd.
   const params=new URLSearchParams(globalThis.location?.search||''),v7Fallbacks=[];let v7=null;
+  // v25 grip (?tennisGrip=0 keeps the v24 racket): the package racket starts downloading now, in parallel with the venue; a failure keeps the old racket.
+  // v25 load (Roy, 14/11/2026: "10+ seconds to load, twice"; ?tennisLoad=v24 keeps the v24 order). v24 waited for each stage before asking for the next
+  // (venue, then the stadium and its 36 crowd fans one by one, then the 1.4 MB player model last), so on a phone the requests queued behind each other.
+  // v25: the player model, the stadium pieces, the racket and the motion clips start downloading at once; the 3D crowd fans come after the first
+  // frame (the billboard fans stand in until then); the player model is parsed once and cloned for the opponent.
+  const lazyLoad=params.get('tennisLoad')!=='v24',prefetched=new Map(),loadMarks={start:globalThis.performance?.now?.()??0};
+  const prefetch=url=>{const key=String(url);if(!prefetched.has(key)){const p=fetch(key).then(res=>{if(!res.ok)throw Error(key+' '+res.status);return res.arrayBuffer();});p.catch(()=>{});prefetched.set(key,p);}return prefetched.get(key);};
+  class PrefetchGLTFLoader extends GLTFLoader{loadAsync(url,onProgress){const hit=prefetched.get(String(url));return hit?hit.then(buffer=>this.parseAsync(buffer,new URL('./',url).href)):super.loadAsync(url,onProgress);}}
+  let motion=null;const motionApi={};
+  const startMotion=()=>import('./tennis-motion.mjs?v=island-v2-20261107-18').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;});
+  const characterBuffer=lazyLoad?prefetch(new URL(characterUrl).href):null;
+  // The motion clips and the 3D crowd fans wait for the player model's bytes, so they do not share the link with it.
+  const modelArrived=lazyLoad?characterBuffer.then(()=>{},()=>{}):null;
+  if(lazyLoad){modelArrived.then(startMotion);import('./tennis-v12-stadium.mjs?v=island-v2-20261107-18').then(m=>{for(const n of m.STADIUM_FILES)prefetch(new URL(`../assets/tennis-stadium-v1/${n}.glb?v=island-v2-20261107-18`,import.meta.url).href);}).catch(()=>{});}
+  // v24.4 ready stance (?tennisReady=0 off): between strokes the racket is held up in front with both hands (tennis-grip.mjs readyHold).
+  const readyOn=tennisReadyEnabled(),readyCfg=readyConfig(config),readyPose=readyOn?readyHold(T,readyCfg):null;
+  const gripCfg=gripConfig(config),gripTemplate=tennisGripEnabled()?loadGripRacket({GLTFLoader,base:import.meta.url,buffer:lazyLoad?prefetch(new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-18',import.meta.url).href):undefined}).catch(()=>{v7Fallbacks.push('tennis grip racket');return null;}):null;
   if(v7Enabled(config.environment,0,params)){
     try{
-      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-3');
+      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-18');
       v7=await createTennisV7({scene,config,keep,params,surface:surfaceFor(config.environment.v7,config.stage,params),quality:0,camera});
       if(disposed){v7.dispose();v7=null;}
     }catch(error){v7=null;v7Fallbacks.push('tennis v7 venue');}
@@ -37,6 +56,10 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     scene.add(v7.root);const look=v7.look;scene.background=new T.Color(look.background);scene.fog.color.set(look.fog);
     hemi.color.set(look.hemi[0]);hemi.groundColor.set(look.hemi[1]);hemi.intensity=look.hemi[2];sun.color.set(look.sun[0]);sun.intensity=look.sun[1];sun.position.fromArray(look.sun[2]);renderer.toneMappingExposure=look.exposure;
   }
+  // v11: evening sky, skyline, sponsor boards, glow and a billboard crowd between the 3D spectators (?tennisStadium=0 removes it).
+  let stadium12=null,stadium11=null;
+  if(v7){try{const {createTennisV12Stadium}=await import('./tennis-v12-stadium.mjs?v=island-v2-20261107-18'),{GLTFLoader:Imported}=await import('../vendor/GLTFLoader.js'),Loader=lazyLoad?PrefetchGLTFLoader:Imported;stadium12=await createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,lateCrowd:lazyLoad?modelArrived:false,GLTFLoader:Loader,base:import.meta.url,camera});if(disposed&&stadium12){stadium12.dispose();stadium12=null;}}catch(error){stadium12=null;v7Fallbacks.push('tennis v12 stadium');}}
+  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-18');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly:Boolean(stadium12)});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
   const courtPresentation=v7?{metrics:v7.courtMetrics}:createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
   const environment=v7||await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
   const ball=v7?v7.ball:new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);
@@ -50,6 +73,14 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const faultMark=new T.Group(),faultMat=basic('#ff604f');
   for(const angle of [-Math.PI/4,Math.PI/4]){const bar=new T.Mesh(keep(new T.BoxGeometry(.75,.035,.10)),faultMat);bar.rotation.y=angle;faultMark.add(bar);}
   const faultRing=new T.Mesh(keep(new T.RingGeometry(.45,.51,24)),faultMat);faultRing.rotation.x=-Math.PI/2;faultMark.add(faultRing);scene.add(faultMark);
+  // v25 court decals from the Codex tennis-ui-fx-v1 package (assets/tennis-ui-fx-v1, CC0): the red X on the landing point of an out ball for 1.5 s
+  // (marks with an id come from the model's stopDead mode; ?tennisOut=v24 keeps the old mark), and the arrow that shows where the child will stand
+  // to receive the serve (state.receive, ?tennisReceive=0 has none). Textures load in the background; until then the drawn mark stands in.
+  const decalUrl=name=>new URL(`../assets/tennis-ui-fx-v1/${name}.png?v=island-v2-20261107-18`,import.meta.url).href,texLoader=new T.TextureLoader();
+  const decal=(size,order)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(size,size)),keep(new T.MeshBasicMaterial({transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2,toneMapped:false})));m.rotation.x=-Math.PI/2;m.renderOrder=order;m.visible=false;scene.add(m);return m;};
+  const outX=decal(1.9,3),receiveArrow=decal(1.5,3),decalTex={};let outShown=null,outAge=0,lastMarkId=null;
+  for(const name of ['out-cross','serve-arrow-left','serve-arrow-center','serve-arrow-right'])texLoader.loadAsync(decalUrl(name)).then(t=>{if(disposed){t.dispose();return;}t.colorSpace=T.SRGBColorSpace;decalTex[name]=keep(t);}).catch(()=>{v7Fallbacks.push('tennis decal '+name);});
+  const receiveDots=[0,1,2].map(()=>{const d=new T.Mesh(keep(new T.RingGeometry(.12,.2,20)),keep(new T.MeshBasicMaterial({color:'#f3ecd2',transparent:true,opacity:.75,depthWrite:false})));d.rotation.x=-Math.PI/2;d.visible=false;scene.add(d);return d;});
   // Fixed particle pool: one draw, no geometry creation during play.
   const positions=new Float32Array(r.particles*3),particleData=Array.from({length:r.particles},()=>({vx:0,vy:0,vz:0,life:0}));
   const particleGeometry=keep(new T.BufferGeometry());particleGeometry.setAttribute('position',new T.BufferAttribute(positions,3));
@@ -57,9 +88,11 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const holders=[new T.Group(),new T.Group()];holders.forEach(h=>scene.add(h));const characters=[];
   // Parse the same existing GLB twice to get independent skeletons, without a new helper dependency.
   try{
-    const buffer=await (await fetch(characterUrl)).arrayBuffer();
+    loadMarks.venue=(globalThis.performance?.now?.()??0)-loadMarks.start;
+    const buffer=lazyLoad?await characterBuffer:await (await fetch(characterUrl)).arrayBuffer();let pristine=null;
     for(let index=0;index<2;index++){
-      const gltf=await new GLTFLoader().parseAsync(buffer.slice(0),'');
+      // v25: one parse; the opponent is a skinned clone of the untouched first copy (v24 parsed the 1.4 MB file twice).
+      let gltf;if(lazyLoad&&index===1&&pristine)gltf=pristine;else{gltf=await new GLTFLoader().parseAsync(lazyLoad?buffer:buffer.slice(0),'');if(lazyLoad&&index===0)pristine={scene:cloneSkinned(gltf.scene),animations:gltf.animations};}
       if(disposed){gltf.scene.traverse(disposeObject);continue;}
       const root=gltf.scene;const oldBall=root.getObjectByName('Ball');if(oldBall){oldBall.removeFromParent();disposeObject(oldBall);}root.scale.setScalar(r.characterScale);holders[index].add(root);
       const mixer=new T.AnimationMixer(root),actions={};for(const name of ['stand','run']){const clip=gltf.animations.find(c=>c.name===name);if(clip){const legs=clip.tracks.filter(track=>/^(UpperLeg|LowerLeg|Foot|Toe)_/.test(track.name));actions[name]=mixer.clipAction(new T.AnimationClip(name,clip.duration,legs)).play();}}
@@ -78,9 +111,13 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
       const throatGeometry=keep(mergeGeometries(throatParts,false));throatParts.forEach(g=>g.dispose());racket.add(new T.Mesh(throatGeometry,frameMat));
       const gripParts=[];for(let n=0;n<8;n++){const g=new T.TorusGeometry(.037,.006,3,8);g.rotateX(Math.PI/2);g.translate(0,-.09-n*.034,0);gripParts.push(g);}
       const gripGeometry=keep(mergeGeometries(gripParts,false));gripParts.forEach(g=>g.dispose());racket.add(new T.Mesh(gripGeometry,material('#ddd7be')));
-      characters[index].hand?.add(racket);characters[index].racketHead=frame;
+      characters[index].hand?.add(racket);characters[index].racketHead=frame;characters[index].oldRacket=racket;
     }
-    characterLoaded=characters.length===2;
+    characterLoaded=characters.length===2;loadMarks.characters=(globalThis.performance?.now?.()??0)-loadMarks.start;
+    // v25: swap in the held racket (fixed grip contract, fingers closed); the v24 racket stays if the package racket did not load.
+    const template=gripTemplate?await gripTemplate:null;
+    if(template&&!disposed)for(const ch of characters){if(!ch.hand)continue;const fingers=Object.fromEntries(['Finger0_R','Finger1_R','Finger2_R','Finger3_R','Finger4_R'].map(n=>[n,ch.root.getObjectByName(n)]));
+      const grip=attachGrip(T,{hand:ch.hand,fingers,template,cfg:gripCfg});ch.oldRacket.visible=false;ch.grip=grip;ch.racketHead=grip.head;}
   }catch(error){dispose();throw error;}
   function disposeObject(o){if(o.isSkinnedMesh)o.skeleton?.dispose();o.geometry?.dispose();for(const mat of (Array.isArray(o.material)?o.material:[o.material]))if(mat){for(const value of Object.values(mat))if(value?.isTexture)value.dispose();mat.dispose();}}
   observer=new ResizeObserver(resize);observer.observe(canvas);
@@ -89,6 +126,39 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   function setQuality(q){quality=Math.min(r.pixelRatios.length-1,q);renderer.shadowMap.enabled=r.shadowEnabled[quality];sun.castShadow=r.shadowEnabled[quality];environment.setQuality(quality);resize();onQuality(quality);}
   function observeFrame(milliseconds){if(disposed)return;v7?.observe(milliseconds);qualityAge+=milliseconds/1000;if(milliseconds>r.slowFrameMs)slow++;else slow=Math.max(0,slow-1);if(slow>=r.slowSamples&&qualityAge>=r.qualityCooldown&&quality<r.pixelRatios.length-1){slow=0;qualityAge=0;setQuality(quality+1);}}
   function burst(x,z){for(let i=0;i<r.particles;i++){const p=particleData[i];p.life=r.particleSeconds;p.vx=(rand()-.5)*5;p.vy=2+rand()*4;p.vz=(rand()-.5)*5;positions.set([x,.4,z],i*3);}particles.visible=true;}
+  // tennis motion v1 (Codex clips): thighs, shins and spine follow the clip; arms and racket stay with the contact IK.
+  if(!lazyLoad)startMotion();
+  const LEG_MAP=[['Spine','Spine','Chest'],['Chest','Chest',null],['LeftUpLeg','UpperLeg_L','LowerLeg_L'],['LeftLeg','LowerLeg_L','Foot_L'],['RightUpLeg','UpperLeg_R','LowerLeg_R'],['RightLeg','LowerLeg_R','Foot_R']];
+  function applyMotion(ch,i,state,p,dt){
+    if(!motion)return;
+    const name=motionApi.clipFor({index:i,player:p,phase:state.phase,serving:p.serving,tossing:state.phase==='toss'&&state.server===i,winner:state.event?.winner},motion.clips),m=ch.motion||(ch.motion={name:null,time:0,from:null,blend:1,dirs:null,w:0});
+    // Clips the package did not admit (standing, running right, celebration) return null: the game's own pose is kept, and the clip pose is faded in/out
+    // over 0.15 s against the pose the bones already hold, so nothing pops on entering or leaving a clip.
+    m.w=T.MathUtils.clamp(m.w+(name?1:-1)*dt/.15,0,1);
+    if(name){
+      const clip=motion.clips[name];
+      if(m.name!==name){m.from=m.dirs;m.name=name;m.time=0;m.blend=m.from?0:1;}
+      const stroke=p.swing>0&&state.phase==='rally'&&!p.serving&&/^(forehand|backhand)/.test(name);
+      if(stroke)m.time=motionApi.strokeTime(clip,1-p.swing/(p.swingDuration||config.player.swingSeconds),config.animation.contactFraction);
+      else if(name==='serve_toss')m.time=Math.min(clip.dur,(state.tossProgress||0)*clip.dur);
+      else m.time+=dt*(/^run/.test(name)?T.MathUtils.clamp(Math.hypot(p.vx||0,p.vz||0)/3.5,.6,1.6):1);
+      m.blend=Math.min(1,m.blend+dt/.15);
+      const dirs=motionApi.segmentDirections(motion.bones,motionApi.sampleClip(clip,m.time));m.dirs=dirs;m.shown=m.from&&m.blend<1?motionApi.blendDirections(m.from,dirs,T.MathUtils.smoothstep(m.blend,0,1)):dirs;
+    }else if(m.name){m.name=null;m.from=null;}
+    ch.motionName=name;
+    if(m.w<=0||!m.shown)return;
+    const rootQ=ch.root.getWorldQuaternion(new T.Quaternion()),rootInv=rootQ.clone().invert(),weight=T.MathUtils.smoothstep(m.w,0,1);
+    for(const [key,boneName,childName] of LEG_MAP){
+      const bone=ch.bones[boneName];if(!bone)continue;
+      const child=childName?ch.bones[childName]:(ch.bones.UpperChest||ch.bones.Neck);if(!child)continue;
+      bone.parent.updateWorldMatrix(true,false);bone.updateWorldMatrix(false,false);child.updateWorldMatrix(true,false);
+      const own=child.getWorldPosition(new T.Vector3()).sub(bone.getWorldPosition(new T.Vector3())).applyQuaternion(rootInv).normalize(),
+        goal=new T.Vector3(...m.shown[key]).lerp(own,1-weight).normalize(),
+        parentQ=bone.parent.getWorldQuaternion(new T.Quaternion()),rest=ch.rest[boneName],restDir=child.position.clone().normalize().applyQuaternion(rest),
+        target=goal.applyQuaternion(rootQ).applyQuaternion(parentQ.clone().invert());
+      bone.quaternion.copy(new T.Quaternion().setFromUnitVectors(restDir,target.normalize()).multiply(rest));bone.updateMatrixWorld(true);
+    }
+  }
   function render(state,dt=0){
     if(disposed)return;
     if(!cameraInspected&&dt>0){const target=T.MathUtils.clamp(state.players[0].x*.35+state.ball.x*.12,-.65,.65),change=(target-cameraFollow)*(1-Math.exp(-dt*2.8));cameraFollow+=T.MathUtils.clamp(change,-dt*.8,dt*.8);positionCamera();}
@@ -107,9 +177,13 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
       for(const [name,bone]of Object.entries(ch.bones))if(bone)bone.quaternion.copy(ch.rest[name]);
       const reachGait=Math.min(.4,ch.reachSpeed/3.2*.4);ch.actions.run?.setEffectiveWeight(p.running?1:reachGait);ch.actions.stand?.setEffectiveWeight(0);if(p.running||reachGait>.01)ch.mixer.update(dt);
       const pose=tennisPose(p,config,{toss:state.phase==='toss'&&state.server===i,tossProgress:state.tossProgress||0});
+      // v24.4: ease into the ready hold between strokes and out of it for the backswing, the serve and the toss.
+      if(readyPose){const goal=readyStance(p,{phase:state.phase,server:state.server,index:i})?1:0;ch.readyW=T.MathUtils.clamp((ch.readyW??goal)+Math.sign(goal-(ch.readyW??goal))*Math.max(0,dt)/readyCfg.blend,0,1);
+        const w=ch.readyW*ch.readyW*(3-2*ch.readyW);if(w>0)for(const k of ['rightHand','rightElbow','leftHand','leftElbow'])pose[k]=pose[k].map((v,j)=>v+(readyPose[k][j]-v)*w);ch.readyEase=w;}
       ch.root.position.set(0,0,pose.step);
       if(!p.running){ch.bones.UpperLeg_L.rotation.x-=pose.step*1.6;ch.bones.LowerLeg_L.rotation.x+=pose.knee;ch.bones.Foot_L.rotation.x-=pose.knee*.5;ch.bones.LowerLeg_R.rotation.x+=pose.knee*.5;}
       ch.bones.Chest.rotation.y+=pose.chest;ch.root.updateWorldMatrix(true,true);
+      applyMotion(ch,i,state,p,dt);ch.root.updateWorldMatrix(true,true);
       const rk=config.animation.racket,u=1-p.swing/(p.swingDuration||config.player.swingSeconds);
       const base=p.serving||state.phase==='toss'&&state.server===i?rk.serveRotation:p.stroke==='backhand'?rk.backhandRotation:rk.handRotation,rotation=[...base];
       if(p.swing>0){let follow=T.MathUtils.clamp((u-config.animation.contactFraction)/(config.animation.recoveryFraction-config.animation.contactFraction),0,1);follow=follow*follow*(3-2*follow);const end=p.serving?rk.serveFollowAngle:(p.stroke==='backhand'?-1:1)*rk.followAngle;rotation[2]=T.MathUtils.lerp(base[2],end,follow);}
@@ -125,13 +199,15 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
       // original forearm's reach. Anticipate/recover this rotation continuously.
       const localDepth=contact?ch.root.worldToLocal(new T.Vector3(contact.x,(contact.y??config.ball.hitHeight)+.09,contact.z)).z:0,targetPitch=contact?-T.MathUtils.clamp((localDepth-.3)*.32,0,.35):0,pitchChange=(targetPitch-ch.racketPitch)*(1-Math.exp(-Math.max(0,dt)*18));
       ch.racketPitch+=T.MathUtils.clamp(pitchChange,-Math.max(0,dt)*2,Math.max(0,dt)*2);rotation[0]+=ch.racketPitch;
-      const handRotation=new T.Quaternion().setFromEuler(new T.Euler(...rotation));
+      const handRotation=new T.Quaternion().setFromEuler(new T.Euler(...rotation));if(readyPose&&ch.readyEase>0)handRotation.slerp(readyPose.quaternion,ch.readyEase);
+      // v25 grip: `rotation` is still the racket's orientation; the hand is turned so the racket held in it points there, and the IK aims the real head.
+      if(ch.grip)handRotation.multiply(ch.grip.correction);const headOffset=()=>ch.grip?ch.grip.headLocal.clone():new T.Vector3(...rk.headOffset);
       if(contact){
         // The wrist target must be reachable by the original arm lengths.
         // Solve the horizontal deficit at this height, including the racket
         // head offset, instead of estimating a step from the authored pose.
         const shoulder=ch.bones.UpperArm_R.getWorldPosition(new T.Vector3()),elbow=ch.bones.LowerArm_R.getWorldPosition(new T.Vector3()),palm=ch.hand.getWorldPosition(new T.Vector3()),armLength=shoulder.distanceTo(elbow)+elbow.distanceTo(palm)-config.animation.ikEpsilon;
-        const wristLocal=ch.root.worldToLocal(new T.Vector3(contact.x,(contact.y??config.ball.hitHeight)+.09,contact.z)).sub(new T.Vector3(...rk.headOffset).applyQuaternion(handRotation)),wrist=ch.root.localToWorld(wristLocal),dy=wrist.y-shoulder.y;
+        const wristLocal=ch.root.worldToLocal(new T.Vector3(contact.x,(contact.y??config.ball.hitHeight)+.09,contact.z)).sub(headOffset().applyQuaternion(handRotation)),wrist=ch.root.localToWorld(wristLocal),dy=wrist.y-shoulder.y;
         const horizontal=Math.hypot(wrist.x-shoulder.x,wrist.z-shoulder.z),available=Math.sqrt(Math.max(0,armLength*armLength-dy*dy)),deficit=Math.max(0,horizontal-available);
         if(deficit>.005)reachTarget.set(wrist.x-shoulder.x,0,wrist.z-shoulder.z).setLength(Math.min(.55,deficit+.065));
       }
@@ -143,7 +219,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
         const wrist=new T.Vector3(...hand);
         if(suffix==='R'&&contactWeight>0){
           const hit=ch.root.worldToLocal(new T.Vector3(p.contactPoint.x,p.contactPoint.y+.09,p.contactPoint.z));
-          const offset=new T.Vector3(...rk.headOffset).applyQuaternion(handRotation);
+          const offset=headOffset().applyQuaternion(handRotation);
           wrist.lerp(hit.sub(offset),contactIKWeight);
         }
         poseArm(ch.bones['UpperArm_'+suffix],ch.bones['LowerArm_'+suffix],ch.bones['Hand_'+suffix],ch.root.localToWorld(new T.Vector3(...elbow)),ch.root.localToWorld(wrist));
@@ -155,8 +231,17 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     // The ball rests in the original off-hand before the real toss begins.
     // Rally/toss coordinates, contact IK and all shot timing stay model-owned.
     if(state.phase==='serve'&&characters[state.server]){characters[state.server].bones.Hand_L.getWorldPosition(ball.position);ball.position.y+=config.ball.radius*.65;}
-    faultMark.visible=Boolean(state.faultMark);if(state.faultMark)faultMark.position.set(state.faultMark.x,.13,state.faultMark.z);
-    environment.render(state,dt);effects.update(state,dt,camera);
+    // v25: a mark with an id (stopDead) shows the Codex X on an out's landing point for its own 1.5 s; v24 marks keep the drawn X until the next shot.
+    const mark=state.faultMark;if(mark?.id!==undefined&&mark.id!==lastMarkId){lastMarkId=mark.id;outShown=mark.reason==='out'?{...mark}:null;outAge=0;}/* each mark once: the model keeps it through the second serve */
+    if(outShown){outAge+=dt;if(outAge>=1.5)outShown=null;}
+    const xTex=decalTex['out-cross'],showX=Boolean(outShown);outX.visible=showX&&Boolean(xTex);if(outX.visible){outX.material.map=xTex;outX.material.needsUpdate=outX.material.map!==outX.userData.map;outX.userData.map=xTex;outX.position.set(outShown.x,.1,outShown.z);}
+    faultMark.visible=mark?.id!==undefined?showX&&!xTex:Boolean(mark);if(faultMark.visible){const at=mark?.id!==undefined?outShown:mark;faultMark.position.set(at.x,.13,at.z);}
+    // v25: where the child will stand to receive: the arrow in front of the chosen spot (pointing at the net) and three dots on the baseline.
+    const rc=state.receive,choosing=Boolean(rc?.active)&&['serve','toss'].includes(state.phase)&&state.server===1;
+    const arrowTex=choosing?decalTex[['serve-arrow-left','serve-arrow-center','serve-arrow-right'][rc.slot]]:null;receiveArrow.visible=Boolean(arrowTex);
+    if(arrowTex){if(receiveArrow.material.map!==arrowTex){receiveArrow.material.map=arrowTex;receiveArrow.material.needsUpdate=true;}const z=config.court.halfLength+config.serve.baselineMargin-1.75;receiveArrow.position.set(rc.x,.1,z);}
+    receiveDots.forEach((d,k)=>{d.visible=choosing;if(choosing){d.position.set(rc.slots[k],.1,config.court.halfLength+config.serve.baselineMargin+.05);d.material.opacity=k===rc.slot?.95:.45;d.scale.setScalar(k===rc.slot?1.25:1);}});
+    environment.render(state,dt);stadium12?.update(state,dt);effects.update(state,dt,camera);
     if(state.event.id!==lastEvent){lastEvent=state.event.id;if(state.event.ace||state.event.type==='complete'&&state.result?.won)burst(state.players[0].x,state.players[0].z);}
     let active=0;for(let i=0;i<particleData.length;i++){const p=particleData[i];if(p.life>0){p.life-=dt;positions[i*3]+=p.vx*dt;positions[i*3+1]+=p.vy*dt;positions[i*3+2]+=p.vz*dt;p.vy-=5*dt;active++;}else positions[i*3+1]=-10;}
     particles.visible=active>0;if(active)particleGeometry.attributes.position.needsUpdate=true;
@@ -177,8 +262,8 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     const direction=target.sub(origin).normalize().applyQuaternion(parent.invert());
     bone.quaternion.setFromUnitVectors(child.position.clone().normalize(),direction);bone.updateWorldMatrix(false,true);
   }
-  function metrics(){return {tennisV7:false,v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
-  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();v7?.dispose();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
+  function metrics(){return {decals:{outX:outX.visible,outXAt:outX.visible?[+outX.position.x.toFixed(2),+outX.position.z.toFixed(2)]:null,drawnX:faultMark.visible,receiveArrow:receiveArrow.visible,receiveArrowX:receiveArrow.visible?+receiveArrow.position.x.toFixed(2):null},load:{mode:lazyLoad?'v25':'v24',venueMs:Math.round(loadMarks.venue??-1),charactersMs:Math.round(loadMarks.characters??-1),prefetched:prefetched.size,crowd:stadium12?.metrics?.crowd??null,crowdLate:stadium12?.metrics?.crowdLate??null},grip:characters.map(c=>c.grip?{curled:c.grip.curled.length,racket:'tennis-grip-v1'}:null),ready:characters.map(c=>{const hand=c.hand?.getWorldPosition(new T.Vector3()),head=c.racketHead?.getWorldPosition(new T.Vector3());return {on:Boolean(readyPose),ease:+(c.readyEase||0).toFixed(2),headAboveHand:hand&&head?+(head.y-hand.y).toFixed(3):null};}),tennisV7:false,stadium11:stadium11?.metrics??null,stadium12:stadium12?.metrics??null,motion:{loaded:Boolean(motion),clips:characters.map(c=>c.motionName||null)},v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
+  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();v7?.dispose();stadium11?.dispose();stadium12?.dispose();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
   setQuality(0);resize();
   return {render,observeFrame,metrics,dispose,setQuality,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
 }

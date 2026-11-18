@@ -3,7 +3,7 @@
  * for games the child does not play. Nothing here copies a real team, player or brand. */
 
 export const TEAMS=[
- {id:'waves',name:'גלי האי',wordmark:'גלים',primary:'#1446a0',secondary:'#f2c230',trim:'#ffffff',shoe:'#e9edf5',darkText:false,strength:0},
+ {id:'waves',name:'גלי העיר',wordmark:'גלים',primary:'#1446a0',secondary:'#f2c230',trim:'#ffffff',shoe:'#e9edf5',darkText:false,strength:0},
  {id:'eagles',name:'נשרי הצוק',wordmark:'נשרים',primary:'#b3122e',secondary:'#111111',trim:'#ffffff',shoe:'#202020',darkText:false,strength:3},
  {id:'storm',name:'סערת המפרץ',wordmark:'סערה',primary:'#5b2a86',secondary:'#f2c230',trim:'#ffffff',shoe:'#efe7fb',darkText:false,strength:2},
  {id:'lions',name:'אריות הנמל',wordmark:'אריות',primary:'#e0661b',secondary:'#14213d',trim:'#ffffff',shoe:'#14213d',darkText:false,strength:1},

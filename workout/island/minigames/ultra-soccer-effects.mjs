@@ -20,7 +20,7 @@ export function createUltraSoccerEffects(scene,config,track){
   function cue(x,z,scale=1,tint='#e8e5c7'){
     const item=nodes[cursor++%nodes.length];item.age=0;item.mesh.position.set(x,.045,z);item.scale=scale;item.mesh.material.color.set(tint);item.mesh.visible=true;
   }
-  return {update(s,dt,quality){
+  return {update(s,dt,quality,{ribbon:ribbonOn=true}={}){ // v24: `ribbon:false` while the soccer-fx-v1 trail draws the flight cue
     const b=s.ball,speed=hypot2(b.vx,b.vz),event=s.event;
     if(s.eventId!==lastEvent){lastEvent=s.eventId;
       if(['shot','pass','header','save','post','steal'].includes(event?.type)){const p=s.players[event.player??b.lastPlayer];cue(p?.x??b.x,p?.z??b.z,event.type==='shot'?1.2:.8,event.type==='save'?'#b3e0df':'#e7dfbd');}
@@ -28,7 +28,7 @@ export function createUltraSoccerEffects(scene,config,track){
     if(previousBall&&previousBall.y>config.physics.ballRadius+.16&&b.y<=config.physics.ballRadius+.035&&b.owner===null)cue(b.x,b.z,.7);
     previousBall={y:b.y};visibleCues=0;
     for(const item of nodes){item.age+=dt;item.mesh.visible=item.age<item.life;if(item.mesh.visible){const u=item.age/item.life;item.mesh.scale.setScalar(item.scale*(.5+u*1.4));item.mesh.material.opacity=(1-u)*.25;visibleCues++;}}
-    ribbon.visible=quality<2&&b.owner===null&&speed>12;
+    ribbon.visible=ribbonOn&&quality<2&&b.owner===null&&speed>12;
     if(ribbon.visible){
       const ux=-b.vz/(speed||1),uz=b.vx/(speed||1);let at=0;
       for(let i=0;i<8;i++){

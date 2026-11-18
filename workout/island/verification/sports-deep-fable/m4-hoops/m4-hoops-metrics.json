@@ -1,0 +1,438 @@
+{
+ "sim-fast-on": {
+  "mode": "fast",
+  "ticks": 26400,
+  "gameMinutes": 7.3,
+  "quarter": 4,
+  "phase": "final",
+  "score": [
+   13,
+   26
+  ],
+  "show": {
+   "enabled": true,
+   "dunks": 2,
+   "alleyoops": 0,
+   "buzzer": 0,
+   "winner": 0,
+   "triggers": 2,
+   "replays": 2,
+   "replaysDone": 2,
+   "replayWall": [
+    3.87,
+    3.86
+   ],
+   "skipped": 0,
+   "pending": false
+  },
+  "replayDurations": [
+   3.87,
+   3.86
+  ],
+  "replayReasons": {
+   "dunk": 2
+  },
+  "render": {
+   "liveFrames": 880,
+   "replayFrames": 55,
+   "over33Live": 630,
+   "over33Replay": 0,
+   "p50Live": 101.1,
+   "p50Replay": 4.7,
+   "p95Live": 229,
+   "p95Replay": 8.2,
+   "calls": 45,
+   "triangles": 74025
+  },
+  "viewShow": {
+   "autoReplays": 2,
+   "autoReplaysDone": 2,
+   "skipped": 0,
+   "liveCuts": 18,
+   "casts": 25,
+   "stand": 0,
+   "groan": 0.99,
+   "wave": false,
+   "cut": false
+  },
+  "errors": [],
+  "seed": 4242,
+  "extra": ""
+ },
+ "sim-fast-on2": {
+  "mode": "fast",
+  "replayTraces": [
+   [
+    0.04,
+    0.26,
+    0.29,
+    0.32,
+    0.34,
+    0.38,
+    "…",
+    1.61,
+    1.74,
+    1.76,
+    null
+   ],
+   [
+    0.03,
+    0.06,
+    0.08,
+    0.1,
+    0.12,
+    0.15,
+    "…",
+    2.89,
+    3.18,
+    3.2,
+    null
+   ]
+  ],
+  "replayPlans": [
+   {
+    "frames": 180,
+    "contact": 5.633333333333334,
+    "total": 3.0666666666666664
+   },
+   {
+    "frames": 180,
+    "contact": 5.5,
+    "total": 3.2666666666666675
+   }
+  ],
+  "ticks": 26730,
+  "gameMinutes": 7.4,
+  "quarter": 4,
+  "phase": "final",
+  "score": [
+   29,
+   21
+  ],
+  "show": {
+   "enabled": true,
+   "dunks": 2,
+   "alleyoops": 0,
+   "buzzer": 0,
+   "winner": 0,
+   "triggers": 2,
+   "replays": 2,
+   "replaysDone": 2,
+   "replayWall": [
+    7.46,
+    10.72
+   ],
+   "skipped": 0,
+   "pending": false
+  },
+  "replayDurations": [
+   7.46,
+   10.72
+  ],
+  "replayReasons": {
+   "dunk": 2
+  },
+  "render": {
+   "liveFrames": 891,
+   "replayFrames": 60,
+   "over33Live": 198,
+   "over33Replay": 18,
+   "p50Live": 5,
+   "p50Replay": 7,
+   "p95Live": 362.4,
+   "p95Replay": 335.8,
+   "calls": 42,
+   "triangles": 73868
+  },
+  "viewShow": {
+   "autoReplays": 2,
+   "autoReplaysDone": 2,
+   "skipped": 0,
+   "liveCuts": 24,
+   "casts": 31,
+   "stand": 0.99,
+   "groan": 0.81,
+   "wave": true,
+   "cut": true
+  },
+  "errors": [],
+  "seed": 777,
+  "extra": ""
+ },
+ "sim-live-on": {
+  "mode": "live",
+  "gameClock": 40.92,
+  "quarter": 1,
+  "steps": 3288,
+  "score": [
+   0,
+   4
+  ],
+  "show": {
+   "enabled": true,
+   "dunks": 1,
+   "alleyoops": 0,
+   "buzzer": 0,
+   "winner": 0,
+   "triggers": 1,
+   "replays": 1,
+   "replaysDone": 1,
+   "replayWall": [
+    3.9
+   ],
+   "skipped": 0,
+   "pending": false
+  },
+  "frames": {
+   "live": 567,
+   "replay": 40,
+   "over33Live": 550,
+   "over33Replay": 39,
+   "p50Live": 99.9,
+   "p50Replay": 99.9,
+   "p95Live": 149.9,
+   "p95Replay": 150.1
+  },
+  "render": {
+   "calls": 47,
+   "triangles": 74039,
+   "frameMs": 4.2
+  },
+  "viewShow": {
+   "autoReplays": 1,
+   "autoReplaysDone": 1,
+   "skipped": 0,
+   "liveCuts": 2,
+   "casts": 3,
+   "stand": 0,
+   "groan": 0,
+   "wave": false,
+   "cut": false
+  },
+  "errors": [],
+  "seed": 4242,
+  "extra": ""
+ },
+ "sim-live-off": {
+  "mode": "live",
+  "gameClock": 36.33,
+  "quarter": 1,
+  "steps": 3563,
+  "score": [
+   0,
+   4
+  ],
+  "show": {
+   "enabled": false,
+   "dunks": 1,
+   "alleyoops": 0,
+   "buzzer": 0,
+   "winner": 0,
+   "triggers": 0,
+   "replays": 0,
+   "replaysDone": 0,
+   "replayWall": [],
+   "skipped": 0,
+   "pending": false
+  },
+  "frames": {
+   "live": 617,
+   "replay": 0,
+   "over33Live": 602,
+   "over33Replay": 0,
+   "p50Live": 100,
+   "p50Replay": 0,
+   "p95Live": 133.3,
+   "p95Replay": 0
+  },
+  "render": {
+   "calls": 48,
+   "triangles": 74051,
+   "frameMs": 3.5
+  },
+  "viewShow": null,
+  "errors": [],
+  "seed": 4242,
+  "extra": "hoopsShow=0"
+ },
+ "perf-off": {
+  "loadMs": 6854,
+  "fps": 4.65,
+  "frameMs": {
+   "avg": 213.32,
+   "p50": 200,
+   "p95": 383.3,
+   "p99": 450,
+   "max": 616.6
+  },
+  "over33": 133,
+  "over50": 133,
+  "frames": 140,
+  "tickMs": {
+   "avg": 13.25,
+   "p50": 5.5,
+   "p95": 10.5,
+   "max": 621.9
+  },
+  "renderMs": {
+   "avg": 11.78,
+   "p95": 8.6
+  },
+  "allocMBps": 2.37,
+  "gcs": 25,
+  "longTasks": 2,
+  "steps": 1118,
+  "replays": 0,
+  "show": null
+ },
+ "perf-on": {
+  "loadMs": 6981,
+  "fps": 4.82,
+  "frameMs": {
+   "avg": 206.36,
+   "p50": 200,
+   "p95": 266.7,
+   "p99": 400,
+   "max": 566.7
+  },
+  "over33": 140,
+  "over50": 140,
+  "frames": 144,
+  "tickMs": {
+   "avg": 12.95,
+   "p50": 5.8,
+   "p95": 11,
+   "max": 566.7
+  },
+  "renderMs": {
+   "avg": 11.4,
+   "p95": 8.8
+  },
+  "allocMBps": 2.61,
+  "gcs": 17,
+  "longTasks": 2,
+  "steps": 1152,
+  "replays": 0,
+  "show": {
+   "autoReplays": 1,
+   "autoReplaysDone": 0,
+   "skipped": 0,
+   "liveCuts": 1,
+   "casts": 2,
+   "stand": 0,
+   "groan": 0.16,
+   "wave": false,
+   "cut": false
+  }
+ },
+ "shots": {
+  "found": {
+   "i": 920,
+   "lastScore": {
+    "team": 1,
+    "points": 2,
+    "shooter": "stars-4",
+    "type": "dunk",
+    "tick": 1101,
+    "shotId": 2
+   },
+   "show": {
+    "enabled": true,
+    "dunks": 1,
+    "alleyoops": 0,
+    "buzzer": 0,
+    "winner": 0,
+    "triggers": 1,
+    "replays": 0,
+    "replaysDone": 0,
+    "replayWall": [],
+    "skipped": 0,
+    "pending": true
+   }
+  },
+  "celebration": {
+   "x": -12.031,
+   "z": 0.59,
+   "motion": [
+    "waves-1:idle_ready",
+    "waves-2:walk",
+    "waves-3:idle_ready",
+    "waves-4:block_two_hands",
+    "waves-5:idle_ready",
+    "stars-1:idle_ready",
+    "stars-2:idle_ready",
+    "stars-3:idle_ready",
+    "stars-4:dunk_two_hands",
+    "stars-5:celebrate_point"
+   ],
+   "show": {
+    "autoReplays": 0,
+    "autoReplaysDone": 0,
+    "skipped": 0,
+    "liveCuts": 1,
+    "casts": 2,
+    "stand": 0,
+    "groan": 0.98,
+    "wave": false,
+    "cut": true
+   }
+  },
+  "celebration2": {
+   "x": -12.032,
+   "z": 0.588,
+   "motion": [
+    "waves-1:idle_ready",
+    "waves-2:idle_ready",
+    "waves-3:idle_ready",
+    "waves-4:idle_ready",
+    "waves-5:idle_ready",
+    "stars-1:idle_ready",
+    "stars-2:idle_ready",
+    "stars-3:idle_ready",
+    "stars-4:dunk_two_hands",
+    "stars-5:celebrate_point"
+   ]
+  },
+  "replayStart": {
+   "show": true,
+   "reason": "dunk",
+   "cam": "baseline",
+   "scale": 1,
+   "wall": 0.012600000000093132
+  },
+  "baseline": {
+   "show": true,
+   "reason": "dunk",
+   "cam": "baseline",
+   "scale": 1,
+   "wall": 0.6493000000000465
+  },
+  "chase": {
+   "show": true,
+   "reason": "dunk",
+   "cam": "chase",
+   "scale": 0.5,
+   "wall": 2.3865
+  },
+  "back": null,
+  "after": null,
+  "tagHidden": true,
+  "homeDunk": {
+   "autoReplays": 1,
+   "autoReplaysDone": 1,
+   "skipped": 0,
+   "liveCuts": 2,
+   "casts": 4,
+   "stand": 0.99,
+   "groan": 0.72,
+   "wave": true,
+   "cut": true
+  },
+  "shotClock": {
+   "i": 100,
+   "shotClock": 4.18,
+   "low": "true"
+  },
+  "errors": []
+ }
+}

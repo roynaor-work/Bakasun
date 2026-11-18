@@ -1,0 +1,120 @@
+{
+ "done": true,
+ "result": {
+  "viewport": {
+   "width": 844,
+   "height": 390
+  },
+  "devicePixelRatio": 1,
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "seed": 7,
+  "level": 1,
+  "pinnedQuality": 0,
+  "warmupSeconds": 3,
+  "seconds": 25.02,
+  "frames": 210,
+  "fps": 8.4,
+  "frameMs": {
+   "mean": 119.12,
+   "p50": 100,
+   "p95": 350,
+   "p99": 400,
+   "max": 650
+  },
+  "over33": 179,
+  "over50": 173,
+  "tickMs": {
+   "mean": 0.36,
+   "p50": 0,
+   "p95": 1.5,
+   "p99": 3.5,
+   "max": 6.6
+  },
+  "renderMs": {
+   "mean": 10.57,
+   "p50": 3.4,
+   "p95": 9,
+   "p99": 381.8,
+   "max": 593.2
+  },
+  "glMs": {
+   "mean": 6.59,
+   "p50": 2,
+   "p95": 6.4,
+   "p99": 33.7,
+   "max": 401.3
+  },
+  "animMs": {
+   "mean": 3.98,
+   "p50": 0.9,
+   "p95": 4.9,
+   "p99": 7.3,
+   "max": 559.5
+  },
+  "programsCompiled": 0,
+  "allocByPhaseMB": {
+   "tick": 46.3,
+   "render": 20.6,
+   "gl": 17.8,
+   "other": -0.6
+  },
+  "longTasks": 4,
+  "longTaskMs": 1558,
+  "heap": {
+   "startMB": 67.4,
+   "endMB": 44,
+   "allocatedMB": 84.1,
+   "allocatedMBPerSecond": 3.36,
+   "gcCount": 5
+  },
+  "assetReadyMs": 2273,
+  "warmup": {
+   "programs": 68,
+   "ms": 555
+  },
+  "quality": {
+   "final": 3,
+   "pixelRatio": 0.85,
+   "changes": [
+    {
+     "atSeconds": 1.5,
+     "quality": 2
+    },
+    {
+     "atSeconds": 4.1,
+     "quality": 3
+    }
+   ],
+   "crowdCount": 0,
+   "shadows": false,
+   "triangles": 89454,
+   "drawCalls": 50,
+   "assetStatus": "ready",
+   "turf": {
+    "turfStatus": "ready",
+    "turfMaps": 1,
+    "source": "design/environment"
+   },
+   "lod": 1
+  },
+  "match": {
+   "score": [
+    2,
+    0
+   ],
+   "elapsed": 10.9,
+   "phase": "goal",
+   "events": {
+    "goal": 2,
+    "shot": 2,
+    "pass": 2,
+    "loft": 0,
+    "header": 0,
+    "steal": 0,
+    "save": 0
+   }
+  },
+  "extra": "quality=0&athleteBody=0",
+  "consoleErrors": []
+ }
+}

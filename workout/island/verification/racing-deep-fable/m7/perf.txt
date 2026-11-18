@@ -1,0 +1,18 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 260000ms exceeded.
+    at /home/user/Bakasun/.claude/worktrees/agent-ac88e13456c3871fa/workout/island/tools/perf-racing.mjs:34:23 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.4
+844x390 load 8526 ms | frame p50 899.9 p95 1033.3 ms (60 frames/55.07s) | tick 42.92 ms | calls 188.16 | tris 153460 | cold MB 4.07 (assets 2.65, 44 files) | car racing-v7 v7 true
+844x390 console errors: [
+  'Failed to load resource: the server responded with a status of 404 (Not Found)',
+  'Failed to load resource: the server responded with a status of 404 (Not Found)',
+  'Failed to load resource: the server responded with a status of 404 (Not Found)'
+]
+PERF-DONE

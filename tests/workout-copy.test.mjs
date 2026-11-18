@@ -60,8 +60,9 @@ test('all 25 exercise names change exactly as approved, retaining exercise IDs',
 test('catalog display copy is unpointed, each Hebrew line has separate pointed TTS and every ID is retained', () => {
   const cameraIds = Object.entries(CAMERA_LINES).flatMap(([group, entries]) => Object.keys(entries).map(id => `camera-${group}-${id}`));
   const finishIds = [...Object.keys(OUTDOOR_LINES).map(id => `outdoor-${id}`), 'outdoor-done', ...Object.keys(DAD_TEST_LINES).map(id => `dad-test-${id}`)];
-  assert.equal(VOICE_LINES.length, 202 + cameraIds.length + finishIds.length);
-  assert.equal(new Set(VOICE_LINES.map(line => line.id)).size, 202 + cameraIds.length + finishIds.length);
+  const baseLines = VOICE_LINES.filter(line => !line.id.startsWith('copy-')); // נוסחים חדשים: voice-copy.js, נבדקים ב-workout-voice-copy.test.mjs
+  assert.equal(baseLines.length, 202 + cameraIds.length + finishIds.length);
+  assert.equal(new Set(baseLines.map(line => line.id)).size, 202 + cameraIds.length + finishIds.length);
   const expectedIds = [
     ...cameraIds,
     ...finishIds,
@@ -77,7 +78,7 @@ test('catalog display copy is unpointed, each Hebrew line has separate pointed T
     ...Object.keys(FRAGMENTS),
     ...['goal', 'dunk', 'three', 'sprint'].map(id => `celebration-${id}`),
   ];
-  assert.deepEqual(VOICE_LINES.map(line => line.id).sort(), expectedIds.sort());
+  assert.deepEqual(baseLines.map(line => line.id).sort(), expectedIds.sort());
   for (const line of VOICE_LINES) {
     plainCopy(line.text);
     assert.ok(line.tts, line.id);

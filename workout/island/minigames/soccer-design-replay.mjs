@@ -8,17 +8,18 @@ const smooth=x=>{x=clamp(x,0,1);return x*x*x*(x*(x*6-15)+10);};
 const playerFields=['x','z','vx','vz','fx','fz','kickTime','stealTime','slideTime','recover','headerTime','throwTime','diveTime','catchTime','diveZ','turnLean','request','sprinting','hands','hold'];
 const ballFields=['x','y','z','vx','vy','vz','curve','owner','lastTeam','lastPlayer','grace'];
 const stateFields=['elapsed','halfElapsed','controlled','attackDir','charge','charging','selectionTime','half'];
-const capacity=64,frequency=30,historySeconds=2.1;
+const frequency=30,DEFAULT_CAPACITY=64,DEFAULT_HISTORY=2.1,OFF_GRACE=.3;
 
 function hermite(a,b,ma,mb,u,d){const u2=u*u,u3=u2*u;return (2*u3-3*u2+1)*a+(u3-2*u2+u)*d*ma+(-2*u3+3*u2)*b+(u3-u2)*d*mb;}
 
 /** A bounded render recording; it never writes to the model or extends a goal. */
-export function createSoccerDesignReplay({config,fetcher=globalThis.fetch,reducedMotion=reduced}={}){
+/** `historySeconds`/`capacity` size the ring buffer (soccerShow v1 asks for 4.6 s; the default 2.1 s / 64 is the previous presentation). */
+export function createSoccerDesignReplay({config,fetcher=globalThis.fetch,reducedMotion=reduced,historySeconds=DEFAULT_HISTORY,capacity=DEFAULT_CAPACITY}={}){
   const rosterCount=config?.players?.roster?.length||8,playerWidth=playerFields.length,ballOffset=rosterCount*playerWidth,stateOffset=ballOffset+ballFields.length,extraOffset=stateOffset+stateFields.length,stride=extraOffset+14;
   const values=new Float32Array(capacity*stride),times=new Float64Array(capacity),controller=new AbortController(),paths={};
   const directionVector=new T.Vector3(),lookTarget=new T.Vector3(),livePosition=[0,0,0],liveTarget=[0,0,0],startPosition=[0,0,0],startTarget=[0,0,0],pathPosition=[0,0,0],pathTarget=[0,0,0];
   const flight={fromX:0,fromZ:0,x:0,z:0,height:0},shot={shooter:0};
-  let rendered=null,write=0,count=0,clock=0,lastWrite=-100,recordedSinceSample=false,disposed=false,active=false,path=null,elapsed=0,total=0,pathDuration=0,contactClock=0,contactPathTime=0,anchorX=0,direction=1,baseFov=50,startFov=50,startAspect=1,visualStart=0,lastPhase=null,lastCamera=null,starts=0,reason='idle',recordTime=0;
+  let rendered=null,write=0,count=0,clock=0,lastWrite=-100,recordedSinceSample=false,disposed=false,active=false,held=false,offSeconds=0,path=null,elapsed=0,total=0,pathDuration=0,contactClock=0,contactPathTime=0,anchorX=0,direction=1,baseFov=50,startFov=50,startAspect=1,visualStart=0,lastPhase=null,lastCamera=null,starts=0,reason='idle',recordTime=0;
   const ready=Promise.all(['left','right','behind'].map(async side=>{try{const response=await fetcher(new URL(`goal-replay-${side}.json`,root),{signal:controller.signal});if(response.ok){const data=await response.json();if(!disposed)paths[side]=data;}}catch{/* A replay is optional presentation. */}}));
 
   function ensureState(state){
@@ -39,9 +40,22 @@ export function createSoccerDesignReplay({config,fetcher=globalThis.fetch,reduce
     while(count>1&&clock-times[(write-count+capacity)%capacity]>historySeconds)count--;
   }
   function record(state,dt=0){
-    if(disposed)return;recordedSinceSample=true;clock+=Math.max(0,Number.isFinite(dt)?dt:0);
-    if(state.phase==='playing'||state.phase==='goal')store(state);
-    else {count=0;lastWrite=-100;}
+    if(disposed)return;recordedSinceSample=true;if(held)return;clock+=Math.max(0,Number.isFinite(dt)?dt:0);
+    if(state.phase==='playing'||state.phase==='goal'){store(state);offSeconds=0;}
+    // Out of play empties the buffer, after a short grace: a short replay of a shot off the post is asked for in the frame the ball goes out.
+    else if((offSeconds+=Math.max(0,dt))>=OFF_GRACE||!count){count=0;lastWrite=-100;}
+  }
+  /** soccerShow v1 raw access (the buffer and its clock in recorded seconds). */
+  const index=i=>(write-count+i+capacity)%capacity,ballAt0=rosterCount*playerWidth;
+  function strike(playerIndex,contact){
+    // Last rise of the scorer's kick or header clock at or before `contact` (soccer-show.strikeTime, inlined over the buffer).
+    const k=playerIndex*playerWidth+6,h=playerIndex*playerWidth+10;let found=null;
+    for(let i=1;i<count;i++){const a=index(i-1)*stride,b=index(i)*stride,tb=times[index(i)];if(tb>contact+1e-6)break;if(values[b+k]>values[a+k]+1e-3||values[b+h]>values[a+h]+1e-3)found=tb;}
+    return found;
+  }
+  function ballAt(time,out){
+    if(!count){out.x=out.y=out.z=0;return out;}
+    let i=count-1;while(i>0&&times[index(i)]>time)i--;const at=index(i)*stride+ballAt0;out.x=values[at];out.y=values[at+1];out.z=values[at+2];return out;
   }
   function capture(camera){
     livePosition[0]=camera.position.x;livePosition[1]=camera.position.y;livePosition[2]=camera.position.z;
@@ -107,6 +121,11 @@ export function createSoccerDesignReplay({config,fetcher=globalThis.fetch,reduce
   }
   return {
     ready,record,skip,get active(){return active;},
+    get held(){return held;},set held(value){held=Boolean(value);},get clock(){return clock;},get count(){return count;},
+    get oldest(){return count?times[index(0)]:clock;},get latest(){return count?times[index(count-1)]:clock;},
+    strike,ballAt,
+    /** The recorded state at `time`, written into the reused presentation copy (phase 'playing', so the strike replays as live play). */
+    readAt(time,live){if(disposed||!rendered||!count)return live;const out=read(time,live,1);out.replay=true;return out;},
     sample(state,dt=0,camera){
       if(disposed)return state;if(!recordedSinceSample)record(state,dt);recordedSinceSample=false;
       const enteredGoal=state.phase==='goal'&&lastPhase!=='goal';lastPhase=state.phase;

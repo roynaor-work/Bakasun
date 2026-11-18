@@ -6,7 +6,10 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-18';
+import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-18';
+import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-18';
+import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,PHONE_FIX_F,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);
 const QA=new URLSearchParams(location.search).has('qa');
@@ -15,8 +18,59 @@ const ISLAND=new URLSearchParams(location.search).has('island');
 const LEGACY=new URLSearchParams(location.search).get('boar')==='v1';
 if(LEGACY){setLegacy(true);WEAPON_ORDER.length=4;}
 let lastStandUsed=false,lowWarned=false;
+// 07/11/2026 (Roy): on touch the aim is the left stick and a screen touch never fires; only the big fire button shoots. `?boar=v1` restores touch-to-aim-and-fire.
+const AIMSTICK=!LEGACY&&(TOUCH||new URLSearchParams(location.search).get('touch')==='1');
+let aimStick=null,firePointer=null,aimZone=null,fireBtn=null,aimShots=0;
+// 11/11/2026 (Roy, after v20 on the phone): on touch the fire button is the only thing that fires. The scene ignores every pointer type,
+// F does not fire, a stray touch on the scene cannot release the held button, and the ability buttons leave the stick zone. `?boarFire=v20` restores v20.
+const FIRE_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarFire')!=='v20';
+let fireSource='none';const shotsBy={button:0,scene:0,keyboard:0,mouse:0,auto:0,qa:0,unknown:0},abilityBy={rocket:0,frost:0,fury:0};let stickNoButton=0,abilityFromLeft=0;
+function setFiring(on,source){pointer.down=on;fireSource=on?source:'none';}
+// 11/11/2026 (Roy, phone): the HUD hid the water where the boars come out. Compact HUD: one weapon-switch button, small round ability buttons in the right column,
+// coins/defence as thin strips in the top corners, a small wave counter, no bottom bar. `?boarHud=v20` restores the v20 cards.
+const HUD_V21=!LEGACY&&new URLSearchParams(location.search).get('boarHud')!=='v20';
+// 12/11/2026 (QA 3): the crosshair moved 2.7x faster sideways than up in screen pixels, so a 45-degree push went at 20 degrees.
+// Now the stick's direction is kept on screen; pure sideways and pure up/down pushes keep their speeds. `?boarAim=axes` restores the per-axis scaling.
+const AIM_TRUE=new URLSearchParams(location.search).get('boarAim')!=='axes';
+let weaponBtn=null,frames=0;
+// 11/11/2026 (Roy, phone: "הג'ויסטיק לא מספיק מדויק"): dead zone 8%, power curve (small tilt = fine aim, full tilt = fast), light smoothing while held
+// (time constant 45 ms) and an immediate stop on release, floating radius 80 px, a direction arrow on the crosshair, precision mode with a second finger
+// on the stick zone (x0.35), and a sensitivity setting (localStorage `boar-island-aim`, not part of the save). `?boarStick=v20` restores the v20 stick.
+const STICK_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarStick')!=='v20';
+// 11/11/2026 (Roy, v21 on the phone: "עדיין לא זז חלק"): the response starts linear (slope STICK_LIN at the dead-zone edge, no jump) and grows to the full speed at full tilt;
+// the crosshair moves with a compositor transform, and the adaptive resolution never changes while the stick is held (each change re-sizes the renderer = a hitch).
+const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_LIN=.3,STICK_TAU=.045,STICK_PRECISE=.35,AIM_SPEED_X=1.6,AIM_SPEED_Y=1.3;
+let trace=null,moveCount=0,resChanges=0;
+// 14/11/2026 (Roy after v22.1: "היכולת להזיז את הכיוון ירי לא מספיק טובה ... לכוון מדויק יותר ולהזיז בקלות יותר"): v24 aim, see aim-v24.mjs. `?boarAim=v23` restores v23.
+const AIM_V24=STICK_V21&&AIM_TRUE&&new URLSearchParams(location.search).get('boarAim')!=='v23';
+// 14/11/2026 (v24.1, Roy: "אולי טיפה לשפר עוד את הרגישות בכיוון"): a more sensitive start of the stick curve with a firmer slowdown over a boar
+// (AIM241 in aim-v24.mjs). `?boarAim=v24` keeps the v24 stick (AIM24).
+const AIM_V241=AIM_V24&&new URLSearchParams(location.search).get('boarAim')!=='v24';
+const AIM_MODE=AIM_V241?'v241':AIM_V24?'v24':STICK_V21?(AIM_TRUE?'v23':'axes'):AIMSTICK?'v20':'mouse';
+const aim24=AIM_V24?createAimAssist(AIM_V241?AIM241:AIM24):null;let aim24State=null;
+// 14/11/2026 (v24.1, Roy: "לכל נשק צריך שיהיה משהו שונה / נגיד לקלע כדורים של ירי / בתותח פגזים"): every weapon its own round, look and sound
+// (weapon-fx.mjs: bullets, pellets, shells on an arc, bolts). Only the look and the sound change. `?boarFx=v24` keeps the v24 tracers and sounds.
+const FX_V241=!LEGACY&&new URLSearchParams(location.search).get('boarFx')!=='v24';const fxLog=[];
+const AIM_SENS={low:.7,mid:1,high:1.4},AIM_SENS_NAME={low:'נמוכה',mid:'בינונית',high:'גבוהה'};
+let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AIM_SENS)aimSens=v;}catch{}
+function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ))),lin=AIM_V241?AIM241.LIN:STICK_LIN;return STICK_V21?mag*(lin+(1-lin)*mag):mag;}
+function aimSensButton(){const b=document.createElement('button');b.className='text-btn';b.id='aim-sens';const label=()=>{b.textContent=`רגישות כוונון: ${AIM_SENS_NAME[aimSens]}`;};label();
+  b.onclick=()=>{const keys=Object.keys(AIM_SENS);aimSens=keys[(keys.indexOf(aimSens)+1)%keys.length];try{localStorage.setItem('boar-island-aim',aimSens);}catch{}label();};document.querySelector('.menu-links').append(b);}
+function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
+function buildCompactHud(){
+  $('game').classList.add('hudv21');
+  weaponBtn=document.createElement('button');weaponBtn.id='weapon-btn';weaponBtn.type='button';weaponBtn.setAttribute('aria-label','החלפת נשק');
+  weaponBtn.innerHTML='<b class="wicon"></b><strong class="wname"></strong><small class="wammo"></small><i class="wbar"></i>';weaponBtn.onclick=nextWeapon;touchTap(weaponBtn,()=>weaponBtn.onclick?.());
+  $('battle-ui').append(weaponBtn);
+}
+function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCache[current],s=wstate[current];weaponBtn.querySelector('.wicon').textContent=w.icon;weaponBtn.querySelector('.wname').textContent=w.short;
+  if(!ws||!s)return;const bar=weaponBtn.querySelector('.wbar');
+  if(ws.mode==='heat'){weaponBtn.querySelector('.wammo').textContent=s.overheated?'מתקרר':`חום ${Math.round(s.heat)}%`;bar.style.width=`${s.heat}%`;bar.style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';}
+  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוען':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
+  weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
+function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
-let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
+let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false,qaHold=false;// qaHold: QA only (__boar.hold), the touch bot stops the clock while it "thinks"
 const SAVE_KEY='boar-island-v1';
 let save;try{save=sanitizeSave(JSON.parse(localStorage.getItem(SAVE_KEY)));}catch{save=freshSave();}
 function persist(){if(benchActive)return;try{localStorage.setItem(SAVE_KEY,JSON.stringify(save));}catch{$('save-note').textContent='השמירה אינה זמינה בדפדפן הזה';}}
@@ -48,12 +102,23 @@ const sfx={ctx:null,master:null,noise:null,last:{},teslaNode:null,
     this.rainGain.gain.value=.11*level;},
   play(type,vol=1){
     if(!soundEnabled)return;try{this.init();if(!this.ctx)return;if(this.ctx.state==='suspended')this.ctx.resume();const t=this.ctx.currentTime;
-      const gap={mg:.045,hit:.04,ping:.05,tesla:.06,splash:.08,crit:.05}[type]||0;if(gap&&t-(this.last[type]||0)<gap)return;this.last[type]=t;const p=rand(.92,1.08);
+      const gap={mg:.045,mg2:.05,mg3:.035,hit:.04,ping:.05,tesla:.06,tesla2:.06,tesla3:.06,splash:.08,crit:.05,shellWhistle:.25,mortarWhistle:.3}[type]||0;if(gap&&t-(this.last[type]||0)<gap)return;this.last[type]=t;const p=rand(.92,1.08);
       switch(type){
         case 'mg':this.noiseHit(t,.07,'bandpass',2200*p,700,.42*vol,.7);this.tone(t,.08,'sine',140*p,45,.38*vol);this.noiseHit(t,.025,'highpass',5000,3000,.12*vol);break;
         case 'shotgun':this.noiseHit(t,.32,'lowpass',3200,420,.85*vol);this.tone(t,.2,'sine',95,32,.7*vol);this.noiseHit(t+.32,.03,'highpass',2600,2000,.25);this.noiseHit(t+.42,.035,'highpass',1900,1500,.25);break;
         case 'cannon':this.tone(t,.55,'sine',70,24,.95*vol);this.noiseHit(t,.5,'lowpass',1400,160,.75*vol);this.noiseHit(t,.04,'highpass',6000,4000,.3*vol);break;
         case 'tesla':this.noiseHit(t,.05,'highpass',3200*p,6000,.13*vol);this.tone(t,.06,'sawtooth',90*p,60,.06*vol);break;
+        // v24.1 (weapon-fx.mjs): a sound of its own for every weapon of the chain, and the whistle of a shell in flight.
+        case 'mg2':this.noiseHit(t,.09,'bandpass',1500*p,520,.5*vol,.8);this.tone(t,.1,'sine',105*p,38,.45*vol);this.noiseHit(t+.035,.06,'bandpass',1700*p,600,.3*vol,.8);break;
+        case 'mg3':this.noiseHit(t,.04,'bandpass',3400*p,1500,.32*vol,1.2);this.tone(t,.045,'square',210*p,120,.07*vol);break;
+        case 'shotgun2':this.noiseHit(t,.42,'lowpass',2400,300,.95*vol);this.tone(t,.28,'sine',72,26,.85*vol);this.noiseHit(t+.4,.035,'highpass',2400,1900,.25);this.noiseHit(t+.52,.04,'highpass',1700,1400,.25);break;
+        case 'shotgun3':this.noiseHit(t,.18,'bandpass',4200,1200,.7*vol,.9);this.tone(t,.12,'triangle',180,70,.4*vol);this.noiseHit(t+.06,.12,'highpass',6500,4200,.18*vol);break;
+        case 'cannon2':this.tone(t,.75,'sine',52,18,1*vol);this.noiseHit(t,.7,'lowpass',1000,120,.85*vol);this.noiseHit(t,.05,'highpass',5000,3500,.3*vol);break;
+        case 'cannon3':this.tone(t,.32,'sine',140,48,.8*vol);this.noiseHit(t,.26,'lowpass',900,160,.6*vol);this.tone(t+.03,.08,'square',90,60,.08*vol);break;
+        case 'tesla2':this.noiseHit(t,.06,'highpass',2600*p,5200,.15*vol);this.tone(t,.07,'sawtooth',70*p,52,.08*vol);this.tone(t+.02,.05,'square',1800*p,2600,.03*vol);break;
+        case 'tesla3':this.noiseHit(t,.12,'bandpass',1800*p,4800,.22*vol,.6);this.tone(t,.1,'sawtooth',55*p,40,.1*vol);this.noiseHit(t+.05,.18,'lowpass',900,200,.2*vol);break;
+        case 'shellWhistle':this.tone(t+.05,.9,'sine',1250,620,.05*vol);this.tone(t+.05,.9,'sine',1880,930,.018*vol);break;
+        case 'mortarWhistle':this.tone(t+.35,1.1,'sine',1500,480,.055*vol);break;
         case 'ping':this.tone(t,.22,'sine',2300*p,2100,.11*vol);this.tone(t,.16,'sine',3400*p,3300,.06*vol);break;
         case 'hit':this.tone(t,.06,'triangle',320*p,120,.12*vol);break;
         case 'crit':this.tone(t,.09,'square',880*p,1500,.06*vol);this.tone(t,.12,'sine',1320,1800,.07*vol);break;
@@ -85,7 +150,7 @@ function setMode(next){
   mode=next;$('game').dataset.mode=next;for(const id of ['menu','shop','pause-screen','gameover','help-screen'])$(id).hidden=true;
   const map={menu:'menu',shop:'shop',paused:'pause-screen',dead:'gameover',help:'help-screen'};if(map[next])$(map[next]).hidden=false;
   $('battle-ui').hidden=!['battle','paused'].includes(next);$('pause').hidden=next!=='battle';$('crosshair').hidden=next!=='battle';$('boss-hud').hidden=next!=='battle'||!boss;
-  pointer.down=false;touchAim=null;keys.clear();updateHud();
+  releaseFire();touchAim=null;aimStick=null;keys.clear();if(aimZone){aimZone.hidden=fireBtn.hidden=next!=='battle';}updateHud();
 }
 function announce(title,subtitle='',time=3){$('banner').innerHTML=`${title}<small>${subtitle}</small>`;bannerUntil=elapsed+time;$('banner').style.opacity=1;}
 function toast(text){$('toast').textContent=text;$('toast').style.opacity=1;toastUntil=elapsed+2.4;}
@@ -113,15 +178,33 @@ function ring(pos,radius,life,color='#ffffff',opacity=.8){
   const m=new THREE.Mesh(geo('ring',()=>new THREE.RingGeometry(.82,1,40).rotateX(-Math.PI/2)),new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:THREE.DoubleSide}));
   m.position.copy(pos);m.scale.setScalar(.2);scene.add(m);rings.push({m,life,max:life,radius,opacity});
 }
-function tracer(from,to,{speed=320,len=7,width=.07,kind='tracer',life=1}={}){
+function tracer(from,to,{speed=320,len=7,width=.07,kind='tracer',life=1,mat=null}={}){
   const dir=tmp.copy(to).sub(from);const dist=dir.length();if(dist<.5)return;dir.normalize();
-  const m=new THREE.Mesh(PGEO,PMAT[kind]);m.quaternion.setFromUnitVectors(ZAX,dir);scene.add(m);
+  const m=new THREE.Mesh(PGEO,mat||PMAT[kind]);m.quaternion.setFromUnitVectors(ZAX,dir);scene.add(m);
   tracers.push({m,sx:from.x,sy:from.y,sz:from.z,dx:dir.x,dy:dir.y,dz:dir.z,dist,travel:0,speed,len,width,life});
 }
-function bolt(from,to,kind='tracerTesla',width=.09){ // jagged lightning made of short glowing segments, lives one tick
+function bolt(from,to,kind='tracerTesla',width=.09,mat=null){ // jagged lightning made of short glowing segments, lives one tick
   const n=7;let prev=from.clone();const dist=from.distanceTo(to);
-  for(let i=1;i<=n;i++){const p=from.clone().lerp(to,i/n);if(i<n)p.add(new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).multiplyScalar(dist*.035));tracer(prev,p,{speed:1e5,len:999,width,kind,life:.07});prev=p;}
+  for(let i=1;i<=n;i++){const p=from.clone().lerp(to,i/n);if(i<n)p.add(new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).multiplyScalar(dist*.035));tracer(prev,p,{speed:1e5,len:999,width,kind,life:.07,mat});prev=p;}
 }
+// ---------- v24.1 weapon looks (weapon-fx.mjs) ----------
+const FXMAT=new Map();
+function fxMat(color,opacity=1){const k=color+opacity;if(!FXMAT.has(k))FXMAT.set(k,new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,blending:add,toneMapped:false}));return FXMAT.get(k);}
+/** A bullet, a pellet or a dart: a coloured glow and a white-hot core flying together (one round). */
+function fxRound(look,from,to){tracer(from,to,{speed:look.speed,len:look.len*1.35,width:look.glowWidth,mat:fxMat(look.glow,.55)});tracer(from,to,{speed:look.speed,len:look.len,width:look.width,mat:fxMat(look.core)});}
+/** A shell for the cannon family: a case, a pointed nose (a finned round bomb for the mortar) and a burning tracer at the base. */
+function fxShellMesh(key,look){
+  const g=new THREE.Group(),r=look.radius,L=look.length;
+  // Object3D.lookAt turns a mesh's +Z toward the point, so the nose is at +Z (the flight direction) and the tracer burns at -Z.
+  if(look.mortar){mesh(g,geo('fxMortar'+key,()=>new THREE.SphereGeometry(r,14,10).scale(1,1,1.35)),mat(look.body,.5,.45),[0,0,0]);
+    for(let i=0;i<4;i++){const a=i*Math.PI/2,f=mesh(g,geo('fxFin'+key,()=>new THREE.BoxGeometry(r*.1,r*.9,r*1.0)),mat(look.nose,.4,.5),[Math.cos(a)*r*.5,Math.sin(a)*r*.5,-r*1.35]);f.rotation.z=a+Math.PI/2;}}
+  else{mesh(g,geo('fxCase'+key,()=>new THREE.CylinderGeometry(r,r,L*.62,14).rotateX(Math.PI/2)),mat(look.body,.95,.28),[0,0,-L*.12]);
+    mesh(g,geo('fxNose'+key,()=>new THREE.ConeGeometry(r,L*.42,14).rotateX(Math.PI/2)),mat(look.nose,.6,.4),[0,0,L*.4]);
+    mesh(g,geo('fxBand'+key,()=>new THREE.CylinderGeometry(r*1.04,r*1.04,L*.07,14).rotateX(Math.PI/2)),mat('#c27b3d',1,.3),[0,0,L*.12]);}
+  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX.fire,color:look.tracer,transparent:true,depthWrite:false,blending:add,toneMapped:false}));glow.scale.setScalar(r*9);glow.position.z=look.mortar?-r*1.7:-L*.46;g.add(glow);g.userData.glow=glow;
+  g.traverse(o=>{if(o.isMesh)o.castShadow=false;});return g;
+}
+function fxNote(key,kind,sound){if(QA){fxLog.push({key,kind,sound,t:+elapsed.toFixed(3)});if(fxLog.length>80)fxLog.shift();}}
 function floatText(pos,text,cls=''){
   const el=document.createElement('div');el.className='dmg '+cls;el.textContent=text;$('enemy-labels').append(el);
   floaters.push({el,pos:pos.clone(),life:.8,max:.8,vx:rand(-.6,.6)});if(floaters.length>36){const f=floaters.shift();f.el.remove();}
@@ -160,6 +243,10 @@ function init(){
   for(const [x,z,k,y] of [[-8,-3,'scout'],[0,-8,'crab'],[7.5,-4,'runner'],[5,-18,'manta',9.5]]){const e=makeEnemy(k);e.root.position.set(x,y??groundY(x,z),z);e.baseX=x;e.root.rotation.y=-x*.03;scene.add(e.root);showcase.push(e);}
   updateQualityLabel();
   setMode('menu');resize();updateStartLabel();
+  if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
+  // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
+  // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
+  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
@@ -514,6 +601,18 @@ function castShot(ray,assist=1){
     return {miss:true,point:p,water:groundY(p.x,p.z)<seaY(p.x,p.z)};}
   return {miss:true,point:ray.at(220,new THREE.Vector3()),sky:true};
 }
+// 14/11/2026 (v24): the live enemies as circles on the screen (CSS px): every hittable zone with the same radius the shot test uses (touch assist
+// included), and the aim point the bot and the turret pick (eyes first). Used by the v24 aim assist and, read-only, by the QA view.
+const camUp=new THREE.Vector3(),zoneP=new THREE.Vector3();let qaSeq=0;
+function screenTargets(){
+  const W=innerWidth,H=innerHeight,assist=TOUCH?1.35:1,out=[];camUp.set(0,1,0).applyQuaternion(camera.quaternion);
+  for(const e of enemies){if(e.dead||e.state==='retreat')continue;const sc=e.root.scale.x,zs=[];
+    for(const z of e.zones){if(!zoneHittable(e,z))continue;z.obj.getWorldPosition(zoneP);projected.copy(zoneP).project(camera);if(projected.z>1||projected.z<-1)continue;
+      const x=(projected.x*.5+.5)*W,y=(-projected.y*.5+.5)*H,rr=z.r*sc*(z.crit?Math.min(assist,1.15):assist);projected.copy(zoneP).addScaledVector(camUp,rr).project(camera);
+      zs.push({x,y,r:Math.hypot((projected.x*.5+.5)*W-x,(-projected.y*.5+.5)*H-y),crit:!!z.crit,part:!!z.part,shield:!!z.shield});}
+    if(!zs.length)continue;const a=zs.find(z=>z.crit)||zs.find(z=>z.part)||zs.find(z=>!z.shield)||zs[0];out.push({e,id:e.qa||(e.qa=++qaSeq),kind:e.kind,x:a.x,y:a.y,zones:zs});}
+  return out;
+}
 function muzzleWorld(model,i){return model.muzzles[i%model.muzzles.length].getWorldPosition(new THREE.Vector3());}
 function flashMuzzle(model,i,scale=1){const f=model.flashes[i%Math.max(1,model.flashes.length)];if(f){f.visible=true;f.rotation.z=rand(0,6.28);f.scale.setScalar(scale*rand(.8,1.2));f.userData.until=elapsed+.045;}muzzleLight.intensity=18*scale;model.muzzles[i%model.muzzles.length].getWorldPosition(tmp);camera.worldToLocal(muzzleLight.position.copy(tmp));}
 function ejectCasing(model,type){
@@ -531,20 +630,28 @@ function impactFx(hit,kind){
 }
 function fireWeapon(){
   const ws=wsCache[current],model=gunModels[fam(current)],st=wstate[current];shotCount++;roundShots++;lastShotAt=elapsed;firedSince++;
+  {const src=pointer.down?fireSource:keys.has('KeyF')?'keyboard':'unknown';shotsBy[src in shotsBy?src:'unknown']++;if(aimStick&&firePointer===null)stickNoButton++;}
   const furyMul=furyTimer>0?1.5:1;const assist=TOUCH?1.35:1;
   if(fam(current)==='cannon'){
     const ray=aimRay(ws.spread);const from=muzzleWorld(model,0);const target=castShot(ray,assist).point;const dir=target.clone().sub(from).normalize();
+    // v24.1: a real shell on a visible arc that is solved to land where the crosshair points (weapon-fx.mjs); v24's capsule flew straight.
+    if(FX_V241){const look=weaponFx(current),shell=fxShellMesh(current,look),v=shellLaunch(from,target,look.speed,look.gravity);shell.position.copy(from);scene.add(shell);
+      projectiles.push({mesh:shell,vel:new THREE.Vector3(v.vx,v.vy,v.vz),g:look.gravity,look,spin:0,life:0,ws,furyMul,fx:true,from:from.clone(),v0:v});
+      flashMuzzle(model,0,look.mortar?1.2:1.6+look.radius);recoil+=.55;recoilRot+=.12;trauma=Math.min(1,trauma+.18);sfx.play(look.sound);sfx.play(look.whistle,.9);ejectCasing(model,'shell');fxNote(current,'shell',look.sound);return;}
     const shell=new THREE.Group();mesh(shell,geo('cshell',()=>new THREE.CapsuleGeometry(.14,.35,4,8).rotateX(Math.PI/2)),mat('#ffcf7a',.4,.3,'#ff8a2a',2.5));shell.position.copy(from);scene.add(shell);
     projectiles.push({mesh:shell,vel:dir.multiplyScalar(170),life:0,ws,furyMul});
     flashMuzzle(model,0,1.6);recoil+=.55;recoilRot+=.12;trauma=Math.min(1,trauma+.18);sfx.play('cannon');ejectCasing(model,'shell');
     return;
   }
   if(fam(current)==='tesla'){teslaTick(ws,furyMul,assist);return;}
+  const look=FX_V241?weaponFx(current):null;
   const pellets=ws.pellets;let anyHit=false;const perEnemy=new Map();
   const mi=model.muzzleIndex++;const from=muzzleWorld(model,mi);
   for(let i=0;i<pellets;i++){
     const ray=aimRay(ws.spread*(pellets>1?1:1+heatSpread()));const hit=castShot(ray,assist);
-    if(fam(current)==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
+    // v24.1: a bullet per shot (the double gun a pair, one per barrel), every pellet of a shotgun visible; v24: one streak (every other pellet).
+    if(look){fxRound(look,from,hit.point);if(look.pair&&i===0)fxRound(look,muzzleWorld(model,mi+1),hit.point);}
+    else if(fam(current)==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
     if(hit.e){anyHit=true;const prev=perEnemy.get(hit.e)||{dmg:0,crit:false,point:hit.point};prev.dmg+=ws.damage*furyMul*(hit.shield?.25:1);prev.crit=prev.crit||hit.crit;perEnemy.set(hit.e,prev);}
     if(i<4||hit.e||hit.shell)impactFx(hit,current);
   }
@@ -552,32 +659,41 @@ function fireWeapon(){
     if(perk==='chain'&&shotCount%4===0&&!tgt.dead){const n=enemies.find(o=>o!==tgt&&!o.dead&&o.root.position.distanceTo(tgt.root.position)<22);if(n){bolt(v.point,n.zones[0].obj.getWorldPosition(new THREE.Vector3()));damageEnemy(n,v.dmg*.8,{quiet:true});}}}
   if(anyHit)roundHits++;
   flashMuzzle(model,mi,fam(current)==='shotgun'?1.4:1);
-  if(fam(current)==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play('mg');ejectCasing(model,'brass');}
-  else{recoil+=.38;recoilRot+=.09;trauma=Math.min(1,trauma+.15);sfx.play('shotgun');ejectCasing(model,'shell');}
+  if(fam(current)==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play(look?look.sound:'mg');ejectCasing(model,'brass');}
+  else{recoil+=.38;recoilRot+=.09;trauma=Math.min(1,trauma+.15);sfx.play(look?look.sound:'shotgun');ejectCasing(model,'shell');}
+  if(look)fxNote(current,look.kind,look.sound);
 }
 function heatSpread(){const s=wstate[current];return s?s.heat/100*1.6:0;}
 function teslaTick(ws,furyMul,assist){
   const model=gunModels.tesla;const ray=aimRay(0);let hit=castShot(ray,assist*2.3);let target=hit.e;
   if(!target){let bestA=.07;for(const e of enemies){if(e.dead)continue;e.zones[0].obj.getWorldPosition(tmp);const a=tmp.sub(ray.origin).normalize().angleTo(ray.direction);if(a<bestA){bestA=a;target=e;}}if(target){target.zones[0].obj.getWorldPosition(tmp);hit={e:target,point:tmp.clone(),crit:false};}}
   const from=muzzleWorld(model,0);model.glow.scale.setScalar(rand(.5,.8));
-  if(!target||hit.shell){const end=hit.point.clone();if(from.distanceTo(end)>40)end.copy(from).add(ray.direction.clone().multiplyScalar(40));bolt(from,end,'tracerTesla',.03);if(hit.shell){destroyShell(hit.shell,true);explode(hit.point,.6,{light:false});}sfx.play('tesla',.6);return;}
-  roundHits++;bolt(from,hit.point,'tracerTesla',.045);bolt(from,hit.point,'tracerTesla',.022);sparks(hit.point,3,'blue',5,.07);
+  // v24.1: each lightning weapon its own colour, strands and sound (weapon-fx.mjs); the storm leaves a plasma ball where it strikes.
+  const look=FX_V241?weaponFx(current):null,bm=look?fxMat(look.color,.9):null,snd=look?look.sound:'tesla';if(look)fxNote(current,'bolt',snd);
+  if(!target||hit.shell){const end=hit.point.clone();if(from.distanceTo(end)>40)end.copy(from).add(ray.direction.clone().multiplyScalar(40));bolt(from,end,'tracerTesla',.03,bm);if(hit.shell){destroyShell(hit.shell,true);explode(hit.point,.6,{light:false});}sfx.play(snd,.6);return;}
+  roundHits++;if(look){for(let k=0;k<look.strands;k++)bolt(from,hit.point,'tracerTesla',look.width*(k?.55:1),bm);bolt(from,hit.point,'tracerTesla',look.width*.45,fxMat('#ffffff',.9));if(look.orb&&Math.random()<.35)sprite(TEX.glow,hit.point,1.6,.18,{color:look.orb,grow:1.4});}
+  else{bolt(from,hit.point,'tracerTesla',.045);bolt(from,hit.point,'tracerTesla',.022);}sparks(hit.point,3,'blue',5,.07);
   const done=new Set([target]);damageEnemy(target,ws.damage*furyMul,{crit:hit.crit,point:hit.point,shield:hit.shield&&Math.random()<.5});fury=clamp(fury+(perk==='charge'?1.6:.8),0,100);
   let src=hit.point.clone();let srcE=target;for(let c=0;c<ws.chain;c++){let n=null,nd=18;for(const e of enemies){if(e.dead||done.has(e))continue;const d=e.root.position.distanceTo(srcE.root.position);if(d<nd){nd=d;n=e;}}if(!n)break;done.add(n);const np=n.zones[0].obj.getWorldPosition(new THREE.Vector3());bolt(src,np,'tracerTesla',.05);damageEnemy(n,ws.damage*.6*furyMul,{point:np});src=np;srcE=n;}
-  if(hit.crit)sfx.play('crit');sfx.play('tesla');$('hit-marker').className=hit.crit?'crit':'';$('hit-marker').style.opacity=1;hitUntil=elapsed+.08;
+  if(hit.crit)sfx.play('crit');sfx.play(snd);$('hit-marker').className=hit.crit?'crit':'';$('hit-marker').style.opacity=1;hitUntil=elapsed+.08;
 }
 function updateProjectiles(dt){
-  for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i];const prev=p.mesh.position.clone();p.vel.y-=6*dt;p.mesh.position.addScaledVector(p.vel,dt);p.mesh.lookAt(tmp.copy(p.mesh.position).add(p.vel));p.life+=dt;
-    if(Math.random()<.7)sprite(TEX.smoke,prev,.7,.35,{additive:false,grow:1.6,opacity:.35,color:'#d8d8d8'});
-    const seg=new THREE.Ray(prev,p.vel.clone().normalize());const segLen=prev.distanceTo(p.mesh.position);let hitE=null,crit=false,hitShell=null;
+  for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i];const prev=p.mesh.position.clone();
+    // v24.1 shells fly their launch exactly (shellAt: the same landing point at any frame rate); v24's capsule keeps its frame step.
+    if(p.fx){const q=shellAt(p.from,p.v0,p.g,p.life+dt);p.mesh.position.set(q.x,q.y,q.z);p.vel.set(q.vx,q.vy,q.vz);}else{p.vel.y-=6*dt;p.mesh.position.addScaledVector(p.vel,dt);}
+    p.mesh.lookAt(tmp.copy(p.mesh.position).add(p.vel));p.life+=dt;
+    // v24.1 shell: it spins about its own axis, its tracer flickers, and its smoke trail is the weapon's own (bigger for the heavy shells).
+    if(p.fx){p.spin+=(p.look.spin||0)*dt;p.mesh.rotateZ(p.spin);const gl=p.mesh.userData.glow;if(gl)gl.material.opacity=.75+.25*Math.random();if(Math.random()<.85)sprite(TEX.smoke,prev,p.look.smokeSize,.5,{additive:false,grow:1.9,opacity:.42,color:p.look.smoke});}
+    else if(Math.random()<.7)sprite(TEX.smoke,prev,.7,.35,{additive:false,grow:1.6,opacity:.35,color:'#d8d8d8'});
+    const seg=new THREE.Ray(prev,p.fx?p.mesh.position.clone().sub(prev).normalize():p.vel.clone().normalize());const segLen=prev.distanceTo(p.mesh.position);let hitE=null,crit=false,hitShell=null;
     for(const e of enemies){if(e.dead)continue;const sc=e.root.scale.x;for(const z of e.zones){z.obj.getWorldPosition(tmp);const along=tmp2.copy(tmp).sub(prev).dot(seg.direction);if(along<-1||along>segLen+1)continue;if(seg.distanceSqToPoint(tmp)<(z.r*sc*1.1)**2){hitE=e;crit=crit||z.crit;}}if(hitE)break;}
     if(!hitE)for(const s of shells)if(s.mesh.position.distanceTo(p.mesh.position)<2){hitShell=s;break;}
     const pos=p.mesh.position;const below=pos.y<surfaceY(pos.x,pos.z);
     if(hitE||hitShell||below||p.life>3){
-      const ws=p.ws;explode(pos.clone(),1.5);if(below&&groundY(pos.x,pos.z)<seaY(pos.x,pos.z))splash(pos,true);
+      const ws=p.ws;explode(pos.clone(),p.fx?1.5*Math.max(1,ws.splash/6.5):1.5);if(below&&groundY(pos.x,pos.z)<seaY(pos.x,pos.z))splash(pos,true);
       if(hitShell)destroyShell(hitShell,true);let hits=0;
       for(const e of [...enemies]){if(e.dead)continue;e.zones[0].obj.getWorldPosition(tmp);const d=Math.max(0,tmp.distanceTo(pos)-e.zones[0].r*e.root.scale.x);if(e===hitE||d<ws.splash){hits++;const fall=e===hitE?1:1-.5*d/ws.splash;damageEnemy(e,ws.damage*p.furyMul*fall,{explosive:true,crit:e===hitE&&crit,point:e===hitE?pos.clone():tmp.clone()});}}
-      if(hits)roundHits++;if(hitE&&crit)roundCrits++;scene.remove(p.mesh);projectiles.splice(i,1);}
+      if(hits)roundHits++;if(hitE&&crit)roundCrits++;scene.remove(p.mesh);p.mesh.userData.glow?.material.dispose();projectiles.splice(i,1);}
   }
 }
 function updateShells(dt){
@@ -618,18 +734,18 @@ function activateFury(){if(mode!=='battle'||fury<100||furyTimer>0)return;fury=0;
 // The renderer now lowers its internal resolution until it holds ~50+ FPS, and raises it back when there is headroom.
 // As a last step it turns off sun shadows. The menu shows the current render scale.
 let shadowTick=0,basePR=1,resScale=1,adaptMs=0,adaptN=0,adaptCalm=0,shadowsOff=false;const ADAPT=!QA||new URLSearchParams(location.search).has('adapt');
-function adapt(ms){if(!ADAPT||ms>2500)return;adaptMs+=ms;adaptN++;if(adaptMs<1500)return;const fps=adaptN*1000/adaptMs;adaptMs=0;adaptN=0;if(adaptCalm>0){adaptCalm--;return;}
+function adapt(ms){if(!ADAPT||ms>2500)return;if(STICK_V21&&aimStick){adaptMs=0;adaptN=0;return;}adaptMs+=ms;adaptN++;if(adaptMs<1500)return;const fps=adaptN*1000/adaptMs;adaptMs=0;adaptN=0;if(adaptCalm>0){adaptCalm--;return;}
   if(fps<50&&resScale>.5){resScale=Math.max(.5,resScale*(fps<35?.8:.9));applyRes();}
   else if(fps<42&&resScale<=.5&&!shadowsOff){shadowsOff=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;adaptCalm=2;updateQualityLabel();}
   else if(fps>58&&resScale<1){resScale=Math.min(1,resScale*1.06);applyRes();}}
-function applyRes(){renderer.setPixelRatio(basePR*resScale);renderer.setSize(innerWidth,innerHeight);adaptCalm=1;updateQualityLabel();}
+function applyRes(){resChanges++;renderer.setPixelRatio(basePR*resScale);renderer.setSize(innerWidth,innerHeight);adaptCalm=1;updateQualityLabel();}
 function updateQualityLabel(){$('quality').textContent=`איכות גרפיקה: ${HIGH?'גבוהה':'רגילה'}${resScale<.99?` · חדות ${Math.round(resScale*100)}%`:''}${shadowsOff?' · צללים חסכוניים':''}`;}
 function refreshWeaponCache(){for(const k of WEAPON_ORDER){wsCache[k]=weaponStats(save,k);if(wsCache[k].chain)wsCache[k].chain+=WEATHER[weatherKind].chain;}}
 function resetWeaponState(){refreshWeaponCache();for(const k of WEAPON_ORDER)wstate[k]={heat:0,overheated:false,ammo:wsCache[k].mag,reload:0,cool:0};}
 function switchWeapon(k){if(!save.weapons[k]||k===current||mode!=='battle'&&mode!=='paused')return;current=k;swapTimer=.32;sfx.play('swap');buildWeaponBar();}
 function startReload(k=current){const s=wstate[k],ws=wsCache[k];if(ws.mode!=='mag'||s.reload>0||s.ammo>=ws.mag)return;s.reload=ws.reload*(perk==='cool'?.75:1)/(furyTimer>0?3:1);s.reloadMax=s.reload;if(k===current)sfx.play('reload');}
 function updateWeapons(dt){
-  const st=stats(save);const firingInput=(pointer.down||keys.has('KeyF'))&&swapTimer<=0;
+  const st=stats(save);const firingInput=(pointer.down||(!FIRE_V21&&keys.has('KeyF')))&&swapTimer<=0;
   for(const k of WEAPON_ORDER){const s=wstate[k],ws=wsCache[k];if(!save.weapons[k])continue;s.cool-=dt;
     if(ws.mode==='heat'){const firing=k===current&&firingInput&&!s.overheated;const ht=tickHeat(s.heat,dt,firing,st.cooling*WEATHER[weatherKind].cooling,furyTimer>0,perk,ws.heatPerShot*ws.rate);s.heat=ht.heat;
       if(ht.overheated&&!s.overheated){s.overheated=true;if(k===current){toast('הנשק התחמם · תנו לו להתקרר');sfx.play('overheat');for(let i=0;i<8;i++)sprite(TEX.smoke,muzzleWorld(gunModels[k],i),.6,.8,{additive:false,grow:2.5,rise:1.5,opacity:.4,color:'#cfd6da'});}}
@@ -651,7 +767,7 @@ function beginWave(){
   perk=selectedPerk;selectedPerk='';plan=wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
   $('battle-hint').hidden=wave>2;
-  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML='גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>';$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
+  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
   weatherKind=waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
   announce(`גל ${String(wave).padStart(2,'0')}`,plan.some(p=>isBoss(p.kind))?'פלישת בוס · החזיקו את קו ההגנה':waveHint(wave));sfx.play('start');
   const wk=weatherKind;if(wk!=='clear')later(3.4,()=>{if(mode==='battle'&&weatherKind===wk)toast(`${WEATHER[wk].name} · ${WEATHER[wk].rule}`);});
@@ -659,7 +775,7 @@ function beginWave(){
 function waveHint(w){return {1:'זוהתה פלישה · כוונו לעיניים הזוהרות',2:'רצים מהירים בדרך',3:'רחפנים באוויר',4:'רפסודות ומשוריינים · נסו את התותח',6:'כרישי פלדה במים · הפילו את הטורפדו לפני החוף',7:'סרטני מצור · הצבת בולעת כדורים, כוונו לעיניים',8:'מנטות צוללות לעמדה · הפילו אותן באוויר',9:'כל הכוחות יחד',11:'פרק 2 · כרישים ורפסודות מתוך הערפל',12:'מצור בגשם · סרטנים ומרגמות',13:'נחיל מהיר · רצים, רחפנים ומנטות',14:'סערה ראשונה · הכול בבת אחת',16:'האוויר מלא · מנטות ורחפנים בערפל',17:'קו מצור כבד · התותח עובר את הצבתות',18:'להקת כרישים בסערה · הפילו טורפדו',19:'הגל האחרון לפני הלווייתן'}[w]||'זוהתה פלישה · הגנו על החוף';}
 function returnToMenu(){clearBattlefield();weatherKind='clear';weather.set('clear');refreshWeaponCache();for(const e of showcase)e.root.visible=true;setMode('menu');updateStartLabel();}
 function completeWave(){const bonus=waveBonus(wave);save.coins+=bonus;roundCoins+=bonus;save.bestWave=Math.max(save.bestWave,wave);save.nextWave=wave+1;persist();sfx.play('buy');openShop('win');}
-function defeat(){pointer.down=false;save.bestWave=Math.max(save.bestWave,wave-1);persist();$('result').textContent=`הפלתם ${killed} רובוטים בגל ${wave} וצברתם ${roundCoins} מטבעות. המטבעות והשדרוגים נשמרו. נסו לשדרג נשק או לפתוח את התותח.`;setMode('dead');sfx.play('boom');}
+function defeat(){releaseFire();save.bestWave=Math.max(save.bestWave,wave-1);persist();$('result').textContent=`הפלתם ${killed} רובוטים בגל ${wave} וצברתם ${roundCoins} מטבעות. המטבעות והשדרוגים נשמרו. נסו לשדרג נשק או לפתוח את התותח.`;setMode('dead');sfx.play('boom');}
 function remaining(){return plan.length-spawnIndex+enemies.filter(e=>!e.dead&&e.state!=='retreat').length;}
 function updateBattle(dt){
   for(let i=timers.length-1;i>=0;i--){timers[i].t-=dt;if(timers[i].t<=0){const f=timers[i].fn;timers.splice(i,1);f();}}
@@ -667,6 +783,7 @@ function updateBattle(dt){
   while(spawnIndex<plan.length&&waveTime>=plan[spawnIndex].time){const it=plan[spawnIndex++];if(it.pulse){toast(`מתקפה ${it.pulse} מתוך 3`);sfx.play('ping');}spawn(it.kind);}
   if(keys.has('ArrowLeft'))pointer.x=clamp(pointer.x-dt*.9,-.95,.95);if(keys.has('ArrowRight'))pointer.x=clamp(pointer.x+dt*.9,-.95,.95);if(keys.has('ArrowUp'))pointer.y=clamp(pointer.y+dt*.8,-.85,.85);if(keys.has('ArrowDown'))pointer.y=clamp(pointer.y-dt*.8,-.85,.85);
   if(bot)runBot(dt);
+  aimStickStep(dt);
   updateWeapons(dt);updateProjectiles(dt);updateShells(dt);updateMissiles(dt);
   // support turrets
   const tl=save.upgrades.turret;for(let i=0;i<turrets.length;i++){const active=tl>=(i===0?1:3);turrets[i].visible=active;if(!active)continue;turretTimers[i]-=dt;const t=turrets[i];
@@ -698,6 +815,45 @@ function updateEffects(dt){
 }
 
 // ---------- HUD ----------
+
+function buildAimControls(){
+  const g=$('game');g.classList.add('aimstick');if(FIRE_V21)g.classList.add('firev21');
+  aimZone=document.createElement('div');aimZone.id='aim-zone';aimZone.setAttribute('aria-label','כוונון: גררו כדי להזיז את הכוונת');
+  const ring=document.createElement('div');ring.id='aim-ring';const knob=document.createElement('i');ring.append(knob);aimZone.append(ring);
+  const rest=document.createElement('div');rest.id='aim-rest';aimZone.append(rest);
+  fireBtn=document.createElement('button');fireBtn.id='fire-btn';fireBtn.type='button';fireBtn.setAttribute('aria-label','ירי');fireBtn.innerHTML='<b>◎</b><span>ירי</span>';
+  g.append(aimZone,fireBtn);aimZone.hidden=fireBtn.hidden=true;
+  const R=STICK_R;if(STICK_V21){ring.classList.add('v21');g.classList.add('stickv21');const arrow=document.createElement('u');$('crosshair').append(arrow);aimSensButton();}
+  aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle')return;e.preventDefault();if(aimStick){if(STICK_V21&&aimStick.precise===null){aimStick.precise=e.pointerId;ring.classList.add('precise');try{aimZone.setPointerCapture(e.pointerId);}catch{}}return;}aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0,sx:0,sy:0,precise:null};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';if(AIM_V24){aimStick.lx=e.clientX;aimStick.ly=e.clientY;ring.style.transform='';aim24.reset();}try{aimZone.setPointerCapture(e.pointerId);}catch{}});
+  aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;moveCount++;if(AIM_V24){stickMove24(e,ring,knob,R);return;}let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,mag=stickMag(m);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&aimStick.precise===e.pointerId){aimStick.precise=null;ring.classList.remove('precise');return;}if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on','precise');rest.hidden=false;$('crosshair').classList.remove('moving');if(AIM_V24){aim24.reset();aim24State=null;ring.style.transform='';}});
+  fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;setFiring(true,'button');fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;releaseFire();});
+  if(FIRE_V21){for(const el of [aimZone,fireBtn])el.addEventListener('contextmenu',e=>e.preventDefault());
+    // a press on an ability button that starts inside the stick zone is counted (the test proves the buttons are out of the zone)
+    for(const [id,key] of [['rocket','rocket'],['frost','frost'],['fury','fury']])$(id).addEventListener('pointerdown',e=>{const r=aimZone.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)abilityFromLeft++;});}
+}
+function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;
+  if(!STICK_V21){pointer.x=clamp(pointer.x+aimStick.vx*dt*AIM_SPEED_X,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*AIM_SPEED_Y,-.85,.85);return;}
+  const k=1-Math.exp(-dt/STICK_TAU);aimStick.sx+=(aimStick.vx-aimStick.sx)*k;aimStick.sy+=(aimStick.vy-aimStick.sy)*k;
+  const g=AIM_SENS[aimSens]*(aimStick.precise!==null?STICK_PRECISE:1);
+  if(AIM_V24)aimStep24(dt,g);
+  else if(AIM_TRUE){const W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(aimStick.sx,aimStick.sy);if(m>1e-6){const ux=aimStick.sx/m,uy=aimStick.sy/m,px=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g*dt;pointer.x=clamp(pointer.x+ux*px/W,-.95,.95);pointer.y=clamp(pointer.y-uy*px/H,-.85,.85);}}
+  else{pointer.x=clamp(pointer.x+aimStick.sx*dt*AIM_SPEED_X*g,-.95,.95);pointer.y=clamp(pointer.y-aimStick.sy*dt*AIM_SPEED_Y*g,-.85,.85);}
+  const moving=Math.hypot(aimStick.sx,aimStick.sy)>.02,ch=$('crosshair');ch.classList.toggle('moving',moving);if(moving)ch.style.setProperty('--dir',`${Math.atan2(aimStick.sx,-aimStick.sy)*180/Math.PI}deg`);}
+// 14/11/2026 (v24, aim-v24.mjs): the same stick, then the aim help on its velocity in screen px (slowdown over a boar, a pull to its eyes,
+// following a walking boar), only while the thumb is on the stick; and the ring follows the thumb past its edge.
+function aimStep24(dt,g){
+  const s=aimStick,W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(s.sx,s.sy);let vx=0,vy=0;
+  if(m>1e-6){const ux=s.sx/m,uy=s.sy/m,sp=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g;vx=ux*sp;vy=uy*sp;}
+  const o=aim24.step({dt,cx:(pointer.x*.5+.5)*innerWidth,cy:(-pointer.y*.5+.5)*innerHeight,vx,vy,held:true,tilt:m,targets:screenTargets()});aim24State=o.info;
+  pointer.x=clamp(pointer.x+o.vx*dt/W,-.95,.95);pointer.y=clamp(pointer.y-o.vy*dt/H,-.85,.85);
+}
+function stickMove24(e,ring,knob,R){
+  const s=aimStick,{dx,dy,d,moved}=followAnchor(s,e.clientX,e.clientY,R);
+  if(moved)ring.style.transform=`translate3d(${(s.ox-s.lx).toFixed(1)}px,${(s.oy-s.ly).toFixed(1)}px,0)`;
+  knob.style.transform=`translate(${dx}px,${dy}px)`;const mag=stickMag(d/R);s.vx=d?dx/d*mag:0;s.vy=d?dy/d*mag:0;
+}
 function buildWeaponBar(){
   const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
   WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).forEach((k,i)=>{const w=WEAPONS[k],lv=save.weapons[k];const b=document.createElement('button');b.className='wslot'+(k===current?' active':'')+(lv?'':' locked');b.dataset.key=k;b.setAttribute('aria-label',`${w.name}${lv?'':' · נעול'}`);
@@ -718,6 +874,7 @@ function updateHud(){
   $('rocket').querySelector('i').style.width=`${(1-rocketCooldown/st.rocketCd)*100}%`;$('frost').querySelector('i').style.width=`${(1-frostCooldown/st.frostCd)*100}%`;
   $('fury-text').textContent=furyTimer>0?`${Math.ceil(furyTimer)} שנ׳`:fury>=100?'מוכן':`${Math.floor(fury)}%`;$('fury').disabled=fury<100||furyTimer>0;$('fury').classList.toggle('ready',fury>=100);$('fury').querySelector('i').style.width=`${furyTimer>0?furyTimer/7*100:fury}%`;
   $('frost-veil').style.opacity=frostTimer>0?1:0;
+  updateWeaponBtn();
 }
 
 // ---------- shop ----------
@@ -738,7 +895,7 @@ function renderShop(){
   for(const k of WEAPON_ORDER){const w=WEAPONS[k],lv=save.weapons[k],cost=weaponCost(save,k);const ws=weaponStats(save,k);const dps=Math.round(sustainedDps(ws,st.cooling));const hit=Math.round(ws.damage*ws.pellets);
     const card=document.createElement('article');card.className='weapon-card'+(lv?'':' locked');
     const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'דרגה מרבית':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
-    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}</p>
+    card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}${PHONE_FIX_F&&fam(k)==='mg'?' כל דרגת נשק מפחיתה התחממות ב־4%.':''}</p>
       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
       <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;
     card.querySelector('button').onclick=()=>{if(buyWeapon(save,k)){persist();sfx.play('buy');refreshWeaponCache();showWeapon(current);buildWeaponBar();renderShop();toast(lv===0?`${w.name} נפתח · מקש ${WEAPON_ORDER.indexOf(k)+1} בקרב`:`${w.name} · דרגה ${save.weapons[k]}`);if(lv===0){current=k;showWeapon(k);buildWeaponBar();}}};
@@ -746,7 +903,7 @@ function renderShop(){
   const ug=$('upgrade-grid');ug.replaceChildren();
   for(const [key,d] of Object.entries(UPGRADE_DEFS)){const lv=save.upgrades[key],cost=upgradeCost(save,key),max=lv>=d.max;const card=document.createElement('article');card.className='upgrade-card';
     card.innerHTML=`<div class="upgrade-top"><span class="upgrade-icon">${d.icon}</span><span class="upgrade-level">דרגה ${lv} / ${d.max}</span></div><h3>${d.name}</h3><p>${d.desc}</p><button ${max||save.coins<cost?'disabled':''} aria-label="שדרוג ${d.name}, ${cost} מטבעות">${max?'מקסימום':`שדרוג · ${cost} ◆`}</button>`;
-    card.querySelector('button').onclick=()=>{if(buyUpgrade(save,key)){persist();sfx.play('buy');renderShop();toast(`השדרוג נרכש · ${d.name} · דרגה ${save.upgrades[key]}`);}};ug.append(card);}
+    card.querySelector('button').onclick=()=>{if(buyUpgrade(save,key)){persist();sfx.play('buy');if(PHONE_FIX_F&&key==='cooling')refreshWeaponCache();renderShop();toast(`השדרוג נרכש · ${d.name} · דרגה ${save.upgrades[key]}`);}};ug.append(card);}
   updateHud();
 }
 
@@ -755,7 +912,8 @@ let shakeT=0,basePitch=-.075,frozenCam=false;
 function frame(t){
   if(islandDisposed)return;
   islandFrame=requestAnimationFrame(frame);
-  if(islandPaused){lastTime=t;return;}
+  if(islandPaused||qaHold){lastTime=t;return;}
+  frames++;
   if(visible&&lastTime)adapt(t-lastTime);const raw=Math.min(.05,(t-lastTime)/1000||.016);lastTime=t;if(!visible)return;
   slowmo=Math.max(0,slowmo-raw);const dt=raw*(slowmo>0?.35:1);elapsed+=dt;world.update(elapsed);weather.update(raw);
   if(mode==='battle'){for(let i=0;i<timeScale;i++){updateBattle(dt);if(mode!=='battle')break;}}
@@ -767,7 +925,8 @@ function frame(t){
   trauma=Math.max(0,trauma-dt*1.7);shakeT+=dt*30;const sh=trauma*trauma;if(!frozenCam){camera.position.x=Math.sin(shakeT*1.3)*.32*sh;camera.position.y=8.6+Math.sin(shakeT*1.7+1)*.26*sh;camera.rotation.z=Math.sin(shakeT*1.1+2)*.012*sh;}
   updateGunRig(dt);
   // crosshair state
-  const cx=(pointer.x*.5+.5)*innerWidth,cy=(-pointer.y*.5+.5)*innerHeight;for(const id of ['crosshair','hit-marker']){$(id).style.left=`${cx}px`;$(id).style.top=`${cy}px`;}
+  const cx=(pointer.x*.5+.5)*innerWidth,cy=(-pointer.y*.5+.5)*innerHeight;for(const id of ['crosshair','hit-marker']){if(STICK_V21)$(id).style.transform=`translate3d(${cx.toFixed(2)}px,${cy.toFixed(2)}px,0) translate(-50%,-50%)`;else{$(id).style.left=`${cx}px`;$(id).style.top=`${cy}px`;}}
+  if(trace&&trace.length<6000)trace.push({t:+t.toFixed(1),dt:+dt.toFixed(4),x:+pointer.x.toFixed(5),y:+pointer.y.toFixed(5),m:moveCount,s:aimStick?1:0,v:aimStick?+Math.hypot(STICK_V21?aimStick.sx:aimStick.vx,STICK_V21?aimStick.sy:aimStick.vy).toFixed(4):0,r:resChanges});
   if(mode==='battle'&&Math.floor(elapsed*20)!==Math.floor((elapsed-dt)*20)){const h=castShot(aimRay(),TOUCH?1.35:1);$('crosshair').classList.toggle('on-target',!!(h.e||h.shell));$('crosshair').classList.toggle('crit',!!h.crit);}
   if(elapsed>bannerUntil)$('banner').style.opacity=0;if(elapsed>toastUntil)$('toast').style.opacity=0;if(elapsed>hitUntil)$('hit-marker').style.opacity=0;if(elapsed>damageUntil)$('damage-flash').style.opacity=lowPulse();
   if(mode==='battle'||mode==='paused')updateLabels();
@@ -793,15 +952,16 @@ function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWi
 
 // ---------- input ----------
 function pointAbs(e){const r=$('scene').getBoundingClientRect();pointer.x=clamp((e.clientX-r.left)/r.width*2-1,-1,1);pointer.y=clamp(-((e.clientY-r.top)/r.height)*2+1,-1,1);}
-$('scene').addEventListener('pointermove',e=>{if(mode!=='battle')return;
+const sceneIgnores=e=>FIRE_V21||AIMSTICK&&e.pointerType==='touch';
+$('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||sceneIgnores(e))return;
   if(e.pointerType==='touch'){if(!touchAim||touchAim.id!==e.pointerId)return;const r=$('scene').getBoundingClientRect();pointer.x=clamp(pointer.x+(e.clientX-touchAim.x)/r.width*2*1.5,-.95,.95);pointer.y=clamp(pointer.y-(e.clientY-touchAim.y)/r.height*2*1.5,-.85,.85);touchAim.x=e.clientX;touchAim.y=e.clientY;}
   else pointAbs(e);});
-$('scene').addEventListener('pointerdown',e=>{if(mode!=='battle')return;e.preventDefault();sfx.init();
+$('scene').addEventListener('pointerdown',e=>{if(mode!=='battle'||sceneIgnores(e))return;e.preventDefault();sfx.init();
   if(e.pointerType==='touch'){if(touchAim)return;touchAim={id:e.pointerId,x:e.clientX,y:e.clientY};}else pointAbs(e);
-  pointer.down=true;try{$('scene').setPointerCapture(e.pointerId);}catch{}});
-for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(touchAim&&e.pointerId!==touchAim.id)return;pointer.down=false;touchAim=null;});
+  setFiring(true,e.pointerType==='touch'?'scene':'mouse');try{$('scene').setPointerCapture(e.pointerId);}catch{}});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(FIRE_V21||touchAim&&e.pointerId!==touchAim.id)return;setFiring(false,'none');touchAim=null;});
 $('scene').addEventListener('wheel',e=>{if(mode!=='battle')return;const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);const i=owned.indexOf(current);switchWeapon(owned[(i+(e.deltaY>0?1:-1)+owned.length)%owned.length]);},{passive:true});
-window.addEventListener('blur',()=>{if(QA)return;pointer.down=false;touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
+window.addEventListener('blur',()=>{if(QA)return;releaseFire();touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
 document.addEventListener('visibilitychange',()=>{if(QA)return;visible=!document.hidden;if(!visible&&!ISLAND&&mode==='battle')setMode('paused');lastTime=performance.now();});
 window.addEventListener('resize',()=>{if(renderer)resize();});
 window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();keys.add(e.code);if(e.repeat)return;
@@ -809,7 +969,16 @@ window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return
   if(mode!=='battle')return;if(e.code==='KeyQ')rocket();if(e.code==='KeyE')frost();if(e.code==='Space')activateFury();if(e.code==='KeyR')startReload();
   const n=['Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9'].indexOf(e.code);if(n>=0){const k=WEAPON_ORDER.filter(x=>save.weapons[x]||BASE_WEAPONS.includes(x))[n];if(k&&save.weapons[k])switchWeapon(k);else if(k)toast(`${WEAPONS[k].name} נפתח במוסך`);}});
 window.addEventListener('keyup',e=>keys.delete(e.code));
-$('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=rocket;$('frost').onclick=frost;$('fury').onclick=activateFury;
+$('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=()=>{abilityBy.rocket++;rocket();};$('frost').onclick=()=>{abilityBy.frost++;frost();};$('fury').onclick=()=>{abilityBy.fury++;activateFury();};
+// 12/11/2026 (QA 3): with the left thumb on the stick, a tap on the weapon or ability buttons is a second finger, and browsers send it
+// pointer events but no click, so nothing happened. These buttons act on the pointerup of a touch that ends on them; the click that
+// follows a one-finger tap is swallowed so nothing runs twice. Mouse and keyboard keep the click. `?boarHud=v20` keeps the v20 buttons.
+function touchTap(el,act){if(!el)return;let id=null,until=0;
+ el.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||mode!=='battle')return;id=e.pointerId;try{el.setPointerCapture(e.pointerId);}catch{}});
+ el.addEventListener('pointerup',e=>{if(e.pointerId!==id)return;id=null;const r=el.getBoundingClientRect();if(e.clientX>=r.left-6&&e.clientX<=r.right+6&&e.clientY>=r.top-6&&e.clientY<=r.bottom+6){until=performance.now()+700;act();}});
+ el.addEventListener('pointercancel',e=>{if(e.pointerId===id)id=null;});
+ el.addEventListener('click',e=>{if(performance.now()<until){until=0;e.preventDefault();e.stopImmediatePropagation();}},true);}
+if(HUD_V21)for(const id of ['rocket','frost','fury'])touchTap($(id),()=>$(id).onclick?.());// the weapon button is made in init (buildCompactHud) and hooked there
 $('tab-weapons').onclick=()=>setShopTab('weapons');$('tab-upgrades').onclick=()=>setShopTab('upgrades');
 $('help').onclick=()=>{previousMode=mode;setMode('help');};
 $('quality').onclick=()=>{setQuality(HIGH?'normal':'high');location.reload();};$('help-close').onclick=()=>setMode(previousMode);
@@ -822,9 +991,9 @@ function runBot(dt){
   for(const s of shells){const sc=100+s.t;if(sc>score){score=sc;pick={shell:s};}}
   for(const e of live){if(!aimPoint(e))continue;const sc=e.root.position.z+(isBoss(e.kind)?40:0)+(e.zones.some(z=>z.part&&!z.dead)?60:0)+(e.state==='retreat'?-200:0)+(e.kind==='manta'&&e.state!=='advance'?160:0);if(sc>score){score=sc;pick={e};}}
   bot.pick=pick;}
-  if(!pick){pointer.down=false;return;}
+  if(!pick){setFiring(false,'none');return;}
   const p=pick.shell?pick.shell.mesh.position.clone():(aimPoint(pick.e)||pick.e.root.position.clone());projected.copy(p).project(camera);
-  const err=bot.error||0;pointer.x=clamp(projected.x+rand(-err,err),-.98,.98);pointer.y=clamp(projected.y+rand(-err,err),-.98,.98);pointer.down=true;
+  const err=bot.error||0;pointer.x=clamp(projected.x+rand(-err,err),-.98,.98);pointer.y=clamp(projected.y+rand(-err,err),-.98,.98);setFiring(true,'auto');
   const s=wstate[current];if(bot.stay){}else if(wsCache[current].mode==='heat'&&s.overheated){const alt=WEAPON_ORDER.find(k=>k!==current&&save.weapons[k]&&(wsCache[k].mode==='mag'?wstate[k].reload<=0:!wstate[k].overheated));if(alt)switchWeapon(alt);}
   if(!bot.stay&&wsCache[current].mode==='mag'&&s.reload>0){const alt=WEAPON_ORDER.find(k=>k!==current&&save.weapons[k]&&(wsCache[k].mode==='heat'?!wstate[k].overheated:wstate[k].ammo>0));if(alt)switchWeapon(alt);}
   if(bot.abilities){if(live.length>=4&&rocketCooldown<=0)rocket();if(live.filter(e=>e.root.position.z>-25).length>=3&&frostCooldown<=0)frost();if(fury>=100)activateFury();}
@@ -866,18 +1035,27 @@ async function runBench(){
     msg.textContent=`${i+1} מתוך ${steps.length}: ${name} · מודד 10 שניות`;
     const r=await benchMeasure(10);rows.push({q,name,fps:+r.fps.toFixed(1),worst:r.worst,res:Math.round(resScale*100),sh:shadowsOff?'חסכוניים':'רגילים'});
     try{localStorage.setItem(BENCH_KEY,JSON.stringify(rows));}catch{}benchDraw();}
-  bot=false;pointer.down=false;returnToMenu();save=backup;benchActive=false;persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();
+  bot=false;setFiring(false,'none');returnToMenu();save=backup;benchActive=false;persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();
   box.classList.remove('running');const both=new Set(rows.map(r=>r.q)).size>1;
   msg.textContent=both?'המדידה הסתיימה בשתי האיכויות. צלמו את המסך ושלחו לקלוד.':`המדידה באיכות ${q} הסתיימה. עכשיו לחצו על המעבר לאיכות ${HIGH?'רגילה':'גבוהה'} ואז שוב על התחלת מדידה.`;
   $('bench-q').hidden=both;$('bench-clear').hidden=false;$('bench-go').hidden=false;$('bench-go').textContent=`מדידה חוזרת · איכות ${q}`;
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY,AIM_V24,AIM_V241,FX_V241},aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,anchor:aimStick?{x:+aimStick.ox.toFixed(1),y:+aimStick.oy.toFixed(1)}:null,frames,elapsed:+elapsed.toFixed(3),aimSens,stickR:STICK_R,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
-    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){pointer.down=on;},weapon(k){switchWeapon(k);},
-    bot(on,opts={}){bot=on?{...opts}:false;if(!on)pointer.down=false;},speed(n){timeScale=n;},
+    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},record(on){trace=on?[]:null;},trace(){const t=trace||[];if(trace)trace=[];return t;},weapon(k){switchWeapon(k);},
+    // v24.1 (read only): which round and sound each shot used, and what flies now (bullet/pellet streaks by colour, shells with their height).
+    fx(){const streaks={};for(const t of tracers){const c='#'+t.m.material.color.getHexString();streaks[c]=(streaks[c]||0)+1;}return {on:FX_V241,log:fxLog.slice(-40),streaks,shells:projectiles.map(p=>({fx:!!p.fx,y:+p.mesh.position.y.toFixed(2),z:+p.mesh.position.z.toFixed(1),vy:+p.vel.y.toFixed(1)}))};},
+    // 14/11/2026 (v24): read-only eyes for the touch bot (what a child sees: the crosshair and the boars on the screen); nothing here changes the game.
+    // hold(true) stops the frame loop (no update, no render; input events still arrive), so a slow test machine adds no input delay in game time
+    hold(on){qaHold=!!on;},clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},
+    view(){camera.updateMatrixWorld();const h=castShot(aimRay(),TOUCH?1.35:1),W=innerWidth,H=innerHeight,f=v=>+v.toFixed(1);
+      return {t:+elapsed.toFixed(4),frames,mode,shots:roundShots,hits:roundHits,crits:roundCrits,killed,heat:+(wstate[current]?.heat||0).toFixed(1),overheated:!!wstate[current]?.overheated,cx:+((pointer.x*.5+.5)*W).toFixed(2),cy:+((-pointer.y*.5+.5)*H).toFixed(2),
+        on:h.e?(h.e.qa||(h.e.qa=++qaSeq)):0,crit:!!h.crit,fireHeld:firePointer!==null,stick:aimStick?{ox:f(aimStick.ox),oy:f(aimStick.oy)}:null,aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,alive:enemies.filter(e=>!e.dead).map(e=>e.qa||(e.qa=++qaSeq)),
+        targets:screenTargets().map(t=>({id:t.id,kind:t.kind,x:f(t.x),y:f(t.y),hp:Math.round(t.e.hp),z:+t.e.root.position.z.toFixed(1),zones:t.zones.map(z=>({x:f(z.x),y:f(z.y),r:f(z.r),c:z.crit?1:0,s:z.shield?1:0}))}))};},
+    bot(on,opts={}){bot=on?{...opts}:false;if(!on)setFiring(false,'none');},speed(n){timeScale=n;},
     rocket,frost,fury:()=>{fury=100;activateFury();},killAll(){for(const e of [...enemies])damageEnemy(e,1e6,{explosive:true});},
     sim(sec,step=1/30){camera.updateMatrixWorld();let n=Math.round(sec/step);while(n-->0&&mode==='battle'){elapsed+=step;updateBattle(step);updateEffects(step);}return mode;},
     buy(t,k){const ok=t==='w'?buyWeapon(save,k):buyUpgrade(save,k);if(ok){persist();refreshWeaponCache();showWeapon(current);buildWeaponBar();}return ok;},
@@ -921,10 +1099,10 @@ if(ISLAND){
   window.__boarIsland={
     get ready(){return islandReady;},
     get snapshot(){return {mode,wave,time:waveTime,hp,coins:save.coins,bestWave:save.bestWave,nextWave:save.nextWave,muted:!soundEnabled,paused:islandPaused};},
-    setPaused(value){islandPaused=Boolean(value);pointer.down=false;touchAim=null;keys.clear();lastTime=performance.now();if(islandPaused&&sfx.ctx?.state==='running')void sfx.ctx.suspend().catch(()=>{});else if(!islandPaused&&soundEnabled&&sfx.ctx?.state==='suspended')void sfx.ctx.resume().catch(()=>{});},
+    setPaused(value){islandPaused=Boolean(value);releaseFire();touchAim=null;keys.clear();lastTime=performance.now();if(islandPaused&&sfx.ctx?.state==='running')void sfx.ctx.suspend().catch(()=>{});else if(!islandPaused&&soundEnabled&&sfx.ctx?.state==='suspended')void sfx.ctx.resume().catch(()=>{});},
     setMuted(value){soundEnabled=!value;if(sfx.master)sfx.master.gain.value=value?0:.75;if(value&&sfx.rainGain)sfx.rainGain.gain.value=0;},
-    dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;pointer.down=false;touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
+    dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;releaseFire();touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
     onExit:null,onPause:null
   };
-  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לאי';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
+  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לעיר';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
 }

@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-12",
+  "baseCommit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "checks": [
+    {
+      "file": "car-bump.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "car-bump.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "wall-scrape-short.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "wall-scrape-short.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "wall-scrape-long.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "wall-scrape-long.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "crash-roll.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "crash-roll.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "engine-restart.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "engine-restart.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "brake-squeal-loop.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "brake-squeal-loop.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "shift-light-beep.ogg",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -15.9,
+      "finiteUnclippedPcm": true
+    },
+    {
+      "file": "shift-light-beep.mp3",
+      "sha256Matches": true,
+      "exactDecodedDuration": true,
+      "ebur128Lufs": -16.0,
+      "finiteUnclippedPcm": true
+    }
+  ],
+  "browser": {
+    "name": "Chromium",
+    "version": "151.0.7922.173",
+    "sampleRate": 44100,
+    "decodeAudioData": [
+      {
+        "name": "brake-squeal-loop.mp3",
+        "samples": 88200,
+        "duration": 2,
+        "first": 0.0008255786378867924,
+        "last": -3.9974594983505085e-05,
+        "seam": 0.0012307409197092056,
+        "loopRender": {
+          "seconds": 6,
+          "boundariesSamples": [
+            85995,
+            169785,
+            253575
+          ],
+          "maxSeamStep": 0.0012307409197092056
+        }
+      },
+      {
+        "name": "brake-squeal-loop.ogg",
+        "samples": 88200,
+        "duration": 2,
+        "first": 0.00022079245536588132,
+        "last": -5.691162004950456e-05,
+        "seam": 0.003905694931745529,
+        "loopRender": {
+          "seconds": 6,
+          "boundariesSamples": [
+            85995,
+            169785,
+            253575
+          ],
+          "maxSeamStep": 0.003905694931745529
+        }
+      },
+      {
+        "name": "car-bump.mp3",
+        "samples": 11025,
+        "duration": 0.25,
+        "first": -0.00045065488666296005,
+        "last": 9.417053661309183e-07,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "car-bump.ogg",
+        "samples": 11025,
+        "duration": 0.25,
+        "first": -0.00010097229824168608,
+        "last": 0.0008889778982847929,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "crash-roll.mp3",
+        "samples": 52920,
+        "duration": 1.2,
+        "first": 0.000562525587156415,
+        "last": 5.077719379187329e-06,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "crash-roll.ogg",
+        "samples": 52920,
+        "duration": 1.2,
+        "first": -5.981969661661424e-05,
+        "last": 0.0001428847317583859,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "engine-restart.mp3",
+        "samples": 26460,
+        "duration": 0.6,
+        "first": 0.00035400933120399714,
+        "last": 0.00019527901895344257,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "engine-restart.ogg",
+        "samples": 26460,
+        "duration": 0.6,
+        "first": -4.548214565147646e-05,
+        "last": 0.00020044593838974833,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "shift-light-beep.mp3",
+        "samples": 3528,
+        "duration": 0.08,
+        "first": 6.661788211204112e-05,
+        "last": -5.040981704951264e-06,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "shift-light-beep.ogg",
+        "samples": 3528,
+        "duration": 0.08,
+        "first": -8.929637988330796e-05,
+        "last": 0.00025901058688759804,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "wall-scrape-long.mp3",
+        "samples": 39690,
+        "duration": 0.9,
+        "first": -0.0005554007948376238,
+        "last": -7.39897441235371e-05,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "wall-scrape-long.ogg",
+        "samples": 39690,
+        "duration": 0.9,
+        "first": -0.0003848063061013818,
+        "last": 0.005122337490320206,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "wall-scrape-short.mp3",
+        "samples": 13230,
+        "duration": 0.3,
+        "first": -0.001559764496050775,
+        "last": -5.14768689754419e-05,
+        "seam": null,
+        "loopRender": null
+      },
+      {
+        "name": "wall-scrape-short.ogg",
+        "samples": 13230,
+        "duration": 0.3,
+        "first": 9.278355719288811e-05,
+        "last": -0.0012445216998457909,
+        "seam": null,
+        "loopRender": null
+      }
+    ],
+    "allExactDurations": true,
+    "sixSecondLoopRenderPassedBothFormats": true
+  },
+  "scope": "New files only in workout/island/design/racing-audio-v3/",
+  "budget": {
+    "limitBytes": 400000,
+    "totalBytes": 165648,
+    "fileCount": 18
+  },
+  "limitations": [
+    "Sub-400ms files use the repeated-cue measurement method documented in README.md.",
+    "Automated signal/browser verification; subjective listening and phone integration review remain."
+  ]
+}

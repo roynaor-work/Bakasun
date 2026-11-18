@@ -61,7 +61,8 @@ test('wide play: a wide carrier in the final third sends one runner into the box
 });
 
 test('wide play: rival wings cross and the receiver heads, from crossFromStage only',()=>{
- const count=stage=>{let lofts=0,headers=0;for(const seed of [1,2,3]){const g=createSoccer({config:c,stage,seed});for(let i=0;i<60*120&&!g.result;i++){g.update(dt);for(const e of g.drainEvents())if(e.team===1||g.getState().players[e.player]?.team===1){if(e.type==='loft')lofts++;if(e.type==='header')headers++;}}}return {lofts,headers};};
+ // Measured on the legacy flow: rules v1 (through balls, rival slides) reshuffles these three seeded matches.
+ const count=stage=>{let lofts=0,headers=0;for(const seed of [1,2,3]){const g=createSoccer({config:c,stage,seed,rulesVersion:'off'});for(let i=0;i<60*120&&!g.result;i++){g.update(dt);for(const e of g.drainEvents())if(e.team===1||g.getState().players[e.player]?.team===1){if(e.type==='loft')lofts++;if(e.type==='header')headers++;}}}return {lofts,headers};};
  const early=count(1),late=count(8);assert.equal(early.lofts,0,JSON.stringify(early));assert.ok(late.lofts>=3&&late.headers>=2,JSON.stringify(late));
 });
 

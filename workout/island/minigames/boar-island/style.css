@@ -122,3 +122,96 @@
 /* 06/11/2026: touch players get a one-line hint (the desktop hint is hidden on small screens). */
 .battle-hint.touch-hint{display:block;top:92px;font-size:12px;text-align:center}.battle-hint.touch-hint span{display:block;opacity:.8}
 .weapons.many{flex-wrap:wrap;justify-content:flex-end;align-content:flex-end;max-height:calc(100vh - 150px)}
+
+/* 09/11/2026: touch = left aim stick + one big fire button; touching the scene never fires. */
+#aim-zone{position:absolute;z-index:3;left:0;bottom:0;width:48%;height:78%;touch-action:none;-webkit-user-select:none;user-select:none}
+#aim-zone[hidden],#fire-btn[hidden]{display:none}
+#aim-rest{position:absolute;left:max(24px,env(safe-area-inset-left));bottom:max(24px,env(safe-area-inset-bottom));width:132px;height:132px;border-radius:50%;border:2px dashed #cfddd35c;background:radial-gradient(circle,#9bbac714 0 30%,transparent 31%);pointer-events:none}
+#aim-rest:after{content:'כוונון';position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:#cfddd3aa}
+#aim-ring{position:absolute;width:132px;height:132px;margin:-66px 0 0 -66px;border-radius:50%;border:2px solid #cfddd37a;background:radial-gradient(circle,#9bbac71a 0 30%,#141f2d66 31%);display:none;pointer-events:none}
+#aim-ring.on{display:block}
+#aim-ring i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#c4d2d8,#7f919c 70%);box-shadow:0 4px 10px #0007}
+#fire-btn{position:absolute;z-index:5;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));width:108px;height:108px;border-radius:50%;border:3px solid #ffd78a;background:radial-gradient(circle at 38% 28%,#f2a24b,#b8581b 72%);color:#fff7e0;display:grid;place-items:center;align-content:center;font:700 15px Heebo,Arial,sans-serif;box-shadow:0 6px 18px #0009,inset 0 1px #fff5;touch-action:none}
+#fire-btn b{font-size:34px;line-height:1}
+#fire-btn.held{transform:scale(.94);background:radial-gradient(circle at 38% 28%,#ffc36e,#d0651f 72%)}
+.aimstick .weapons{bottom:140px}
+.aimstick .abilities{bottom:140px}
+/* 11/11/2026 (Roy): the ability buttons leave the stick zone. Landscape: one compact row on the right (weapons + abilities) above the fire button; the stick zone keeps the left 36%. `?boarFire=v20` keeps the v20 layout. */
+.aimstick.firev21 #aim-zone{width:36%;-webkit-touch-callout:none}
+.aimstick.firev21 #fire-btn{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.aimstick.firev21 .ammo-panel{pointer-events:none}
+.aimstick.firev21 .weapons{right:18px;bottom:140px;gap:6px}
+.aimstick.firev21 .wslot{width:62px;height:60px;border-radius:10px}
+.aimstick.firev21 .wslot strong,.aimstick.firev21 .wslot kbd,.aimstick.firev21 .ability strong,.aimstick.firev21 .ability kbd{display:none}
+.aimstick.firev21 .wslot b{font-size:20px;line-height:22px}
+.aimstick.firev21 .abilities{left:auto;right:136px;bottom:18px;flex-direction:row;gap:6px}
+.aimstick.firev21 .ammo-panel{left:36%;transform:none;width:196px;bottom:80px}
+.aimstick.firev21 .ability{width:62px;height:60px;border-radius:10px}
+.aimstick.firev21 .ability-icon{font-size:22px;line-height:24px}
+@media(max-width:700px){
+  .aimstick.firev21 #aim-zone{width:48%}
+  .aimstick.firev21 .weapons{right:10px;bottom:140px;flex-direction:column;gap:7px}
+  .aimstick.firev21 .wslot{height:56px}
+  .aimstick.firev21 .abilities{left:auto;right:80px;bottom:140px;flex-direction:column;gap:7px}
+}
+
+/* 11/11/2026 (Roy, phone): compact HUD. The cards left the middle of the screen: one weapon-switch button and a column of small round ability buttons on the right,
+   thin strips for coins and island defence in the top corners, a small wave counter, no bottom bar. `?boarHud=v20` restores the cards. */
+#game.hudv21 #weapons,#game.hudv21 .ammo-panel{display:none}
+#game[data-mode=battle].hudv21 .brand,#game[data-mode=paused].hudv21 .brand{display:none}
+#game.hudv21 #hud{padding:8px 12px}
+#game.hudv21 .combat-hud{margin:0;position:static;display:block}
+/* 12/11/2026 (QA 3): the compact battle HUD stays hidden in the game menu, like the v20 HUD (same specificity let it show over the menu text). */
+#game.hudv21[data-mode=menu] .combat-hud{display:none}
+#game.hudv21 .coin-block{position:absolute;top:8px;left:12px;grid-template-columns:auto auto;column-gap:6px;padding:4px 10px;min-height:30px;border-radius:15px;background:#10242db8}
+#game.hudv21 .coin-block .coin{font-size:16px;grid-row:auto}
+#game.hudv21 .coin-block b{font-size:15px;line-height:1}
+#game.hudv21 .coin-block small{display:none}
+#game.hudv21 .health-block{position:absolute;top:8px;right:72px;width:150px;padding:4px 10px;border-radius:15px;background:#10242db8}
+#game.hudv21 .health-block>div:first-child{font-size:10px;margin-bottom:3px}
+#game.hudv21 .health-block .bar{height:4px}
+#game.hudv21 .wave-block{top:6px;min-width:0;display:flex;gap:8px;align-items:baseline;white-space:nowrap;text-shadow:0 1px 4px #000}
+#game.hudv21 .wave-block small{display:inline;font-size:10px;letter-spacing:0}
+#game.hudv21 .wave-block b{display:inline;font-size:20px;line-height:1}
+#game.hudv21 .wave-block span{font-size:11px}
+#game.hudv21 .battle-hint,#game.hudv21 .battle-hint.touch-hint{top:34px;left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:88%;font-size:11px;padding:0 8px}
+#game.hudv21 #boss-hud{top:56px}
+#game.hudv21 .abilities{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column;gap:8px}
+#game.hudv21 .ability{width:52px;height:52px;border-radius:50%;border:1px solid #ffffff55;background:#10283aa6;box-shadow:0 2px 8px #0006;display:grid;place-items:center;align-content:center;padding:0}
+#game.hudv21 .ability strong,#game.hudv21 .ability kbd{display:none}
+#game.hudv21 .ability-icon{font-size:20px;line-height:20px}
+#game.hudv21 .ability small{font-size:10px;line-height:1;color:#cfe3ea}
+#game.hudv21 .ability i{height:2px}
+#game.hudv21 .ability.fury{background:#4a3a1fa6}
+#weapon-btn{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px;border-radius:14px;border:1px solid #ffd06b80;background:#12273ab8;color:#f4f3e9;display:grid;place-items:center;align-content:center;gap:1px;padding:3px;overflow:hidden;box-shadow:0 3px 10px #0007;touch-action:manipulation;-webkit-touch-callout:none;user-select:none}
+#weapon-btn .wicon{font-size:20px;line-height:22px;color:var(--gold)}
+#weapon-btn .wname{font-size:10px;line-height:1.1}
+#weapon-btn .wammo{font-size:10px;color:#b9dde6;line-height:1.1}
+#weapon-btn .wbar{position:absolute;bottom:0;left:0;height:3px;width:100%;background:#ffd06b;transition:width .15s}
+#weapon-btn.hot .wammo{color:#ffb067}
+/* with the aim stick: weapon button left of the fire button, abilities in the column above the fire button */
+#game.aimstick.hudv21 #weapon-btn{right:136px;bottom:40px}
+#game.aimstick.hudv21 .abilities{right:46px;bottom:140px}
+#game.aimstick.hudv21 #aim-rest{width:110px;height:110px;border-color:#cfddd399;background:none}
+#game.aimstick.hudv21 #aim-rest:after{font-size:12px;color:#cfddd3cc}
+/* desktop (no stick): the weapon button sits in the corner, the ability column above it */
+#game.hudv21:not(.aimstick) .abilities{bottom:96px}
+@media(max-width:700px){
+  #game.aimstick.hudv21 #weapon-btn{right:10px;bottom:140px}
+  #game.aimstick.hudv21 .abilities{right:84px;bottom:140px}
+  /* portrait: the defence strip and the wave counter cannot share the top line */
+  #game.hudv21 .health-block{width:120px}
+  #game.hudv21 .wave-block{top:44px}
+  #game.hudv21 .battle-hint,#game.hudv21 .battle-hint.touch-hint{top:70px}
+  /* 12/11/2026 (QA 3): portrait boss waves: the boss bar goes under the wave counter instead of over it */
+  #game.hudv21 #boss-hud{top:72px}
+}
+
+/* 11/11/2026 (Roy, phone): precise stick. Bigger floating ring, a precision label with a second finger, a direction arrow on the crosshair. `?boarStick=v20` restores the v20 stick. */
+#aim-ring.v21{width:168px;height:168px;margin:-84px 0 0 -84px}
+#aim-ring.v21 i{width:60px;height:60px;margin:-30px 0 0 -30px}
+#aim-ring.v21.precise{border-color:#ffd06b}
+#aim-ring.v21.precise:after{content:'דיוק';position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:12px;color:#ffd06b}
+#crosshair u{position:absolute;left:50%;top:50%;width:0;height:0;border:6px solid transparent;border-bottom:11px solid #ffd06b;transform-origin:50% 100%;transform:translate(-50%,-100%) rotate(var(--dir,0deg)) translateY(-18px);opacity:0;transition:opacity .1s;filter:drop-shadow(0 0 2px #000)}
+#crosshair.moving u{opacity:1}
+#game.stickv21 #crosshair,#game.stickv21 #hit-marker{left:0;top:0;will-change:transform}

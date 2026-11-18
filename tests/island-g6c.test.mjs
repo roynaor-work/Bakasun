@@ -6,7 +6,8 @@ import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt} from '..
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {createNavalInput} from '../workout/island/minigames/naval-controls.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,b=config.navalDuel;
-const make=(level=1,seed=0)=>createNavalModel({config,balance:b,level,seed,random:seededRandom(seed)});
+/* v24 (14/11): the diving submarine changed on purpose; these G6c checks keep v23 with its switch */
+const make=(level=1,seed=0)=>{globalThis.location={search:'?navalEnemyFire=v23&navalSub=v23'};try{return createNavalModel({config,balance:b,level,seed,random:seededRandom(seed)});}finally{delete globalThis.location;}};
 const advance=(m,seconds,input={})=>{for(let i=0;i<Math.ceil(seconds/.02);i++)m.update(.02,input);};
 const near=(a,z)=>assert.ok(Math.abs(a-z)<1e-7,`${a} != ${z}`);
 function navalInputHarness(t){

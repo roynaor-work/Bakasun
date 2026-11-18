@@ -22,14 +22,16 @@ export const CITY_MAP=Object.freeze({
 /** Cars on the road network, in the order they are dealt out. */
 export const CITY_CARS=Object.freeze([47,52,50,51]);
 export const cityModelsEnabled=(search=globalThis.location?.search||'',flags={})=>flags.cityModels!==false&&!/[?&]cityModels=0(?:&|$)/.test(search);
-export const cityModelPath=id=>CITY_FILES[id]?CITY_DIR+CITY_FILES[id][0]+'.glb':null;
+/** `lod` picks the light copy (about a third of the triangles, 256 px texture) built by tools/city-models-lod.mjs. */
+export const LOD_DIR=CITY_DIR+'lod/';
+export const cityModelPath=(id,lod=false)=>CITY_FILES[id]?(lod?LOD_DIR:CITY_DIR)+CITY_FILES[id][0]+'.glb':null;
 export const modelIdFor=(buildingId,level=1)=>{const list=CITY_MAP[buildingId];return list?list[Math.min(Math.max(1,level),list.length)-1]:null;};
 
 /** Spec for one building at one level: sized from the model's own bounds so it fits its plot. */
-export function citySpec(record,level=1,old=null){
-  const id=modelIdFor(record.id,level),path=id&&cityModelPath(id);if(!path)return null;
-  const [w,d]=record.footprint||[1,1],meters=CITY_FILES[id][1];
-  return {path,rotationY:0,scale:1,fit:{box:{length:meters/TILE_METERS,w:w*FOOTPRINT_MARGIN,d:d*FOOTPRINT_MARGIN,h:MAX_HEIGHT_TILES}},...(old?{fallback:old}:{})};
+export function citySpec(record,level=1,old=null,lod=false){
+  const id=modelIdFor(record.id,level),path=id&&cityModelPath(id,lod);if(!path)return null;
+  const [w,d]=record.footprint||[1,1],meters=CITY_FILES[id][1],margin=record.footprintMargin??FOOTPRINT_MARGIN;
+  return {path,rotationY:0,scale:1,fit:{box:{length:meters/TILE_METERS,w:w*margin,d:d*margin,h:MAX_HEIGHT_TILES}},...(old?{fallback:old}:{})};
 }
 /** Vehicles face -X like the original car, so the same quarter turn applies. */
 export function carSpec(id,old=null){
@@ -41,11 +43,18 @@ export class CityModels{
   constructor(models,{enabled=true}={}){this.models=models;this.enabled=enabled;this.requested=new Set();this.onLoaded=()=>{};}
   maps(buildingId){return this.enabled&&Boolean(CITY_MAP[buildingId]);}
   oldSpec(record,level){return record.levels?.[level-1]?.model??record.model??null;}
-  spec(record,level=1){return this.maps(record.id)?citySpec(record,level,this.oldSpec(record,level)):null;}
+  /** With `lod` on, the light copy is wanted; until it has loaded the full one (if already here) keeps standing, and the other way round. */
+  spec(record,level=1){
+    if(!this.maps(record.id))return null;
+    const old=this.oldSpec(record,level),want=citySpec(record,level,old,this.lod);
+    if(!want||this.models.assets.has(want.path))return want;
+    const other=citySpec(record,level,old,!this.lod);
+    return other&&this.models.assets.has(other.path)?{...other,wanted:want}:want;
+  }
   /** Starts loading the model once; calls onLoaded when it (or its fallback) is ready. */
   request(record,level=1){
-    const spec=this.spec(record,level);if(!spec||this.requested.has(spec.path))return;
-    this.requested.add(spec.path);this.models.load(spec).then(ok=>{if(ok)this.onLoaded(spec);});
+    const spec=this.spec(record,level),target=spec?.wanted||spec;if(!target||this.requested.has(target.path))return;
+    this.requested.add(target.path);this.models.load(target).then(ok=>{if(ok)this.onLoaded(target);});
   }
   /** Which file is actually drawn now: '' while loading (procedural) or when nothing is mapped. */
   key(record,level=1){

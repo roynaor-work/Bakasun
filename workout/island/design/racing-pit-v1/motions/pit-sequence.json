@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "kind": "asset-integration-proposal",
+  "productionGameModified": false,
+  "intent": "On long races, every competitor must enter the pits after completing lap two and replace all four tires.",
+  "racePolicy": {
+    "longRaceDefinition": "supplied by the game",
+    "requestAfterCompletedLap": 2,
+    "appliesTo": ["player", "all_ai_competitors"],
+    "satisfiedBy": "one full four-wheel replacement",
+    "repeatEveryTwoLaps": false,
+    "pitLaneSpeed": "supplied by the game; sign is a text-free low-speed symbol"
+  },
+  "safetyGates": {
+    "entry": ["pit_lane_available"],
+    "startService": ["car_stopped_in_box", "exit_light_red"],
+    "lowerCar": ["all_four_wheels_mounted", "all_four_fasteners_confirmed"],
+    "releaseCar": ["all_four_wheels_mounted", "all_four_fasteners_confirmed", "jack_lowered_and_clear", "all_crew_clear", "exit_lane_clear"],
+    "ifAnyGateMissing": "hold exit light red; do not release on elapsed time alone"
+  },
+  "previewDurationSeconds": 21.8,
+  "previewOnly": true,
+  "timeline": [
+    {"start": 0, "duration": 1, "clip": "idle_wait", "roles": "all"},
+    {"start": 1, "duration": 2.8, "clip": "rush_in", "roles": "service_crew"},
+    {"start": 3.8, "duration": 2.8, "clip": "jack_up", "roles": ["jack_operator"]},
+    {"start": 6.6, "duration": 3.2, "clip": "remove_wheel", "roles": "four_wheel_changers", "concurrent": {"screen_cleaner": "wipe_screen"}},
+    {"start": 9.8, "duration": 3.2, "clip": "mount_wheel", "roles": "four_wheel_changers"},
+    {"start": 13, "duration": 2.8, "clip": "jack_down", "roles": ["jack_operator"]},
+    {"start": 15.8, "duration": 2.4, "clip": "thumbs_up", "roles": "service_crew"},
+    {"start": 18.2, "duration": 2.4, "clip": "step_back", "roles": "service_crew"},
+    {"start": 20.6, "duration": 1.2, "clip": "signal_release", "roles": ["light_controller"], "event": "car_exit"}
+  ],
+  "rootMotion": {
+    "rush_in": [0, 0, 0.96],
+    "step_back": [0, 0, -0.64],
+    "units": "meters, actor local coordinates",
+    "handling": "baked into Root; transfer the endpoint to the instance transform once when switching to a stationary clip"
+  },
+  "tireWearUI": {
+    "normalizedRange": [0, 1],
+    "levelThresholds": [0, 0.25, 0.5, 0.75],
+    "iconFiles": ["icons/tire_wear_0.svg", "icons/tire_wear_1.svg", "icons/tire_wear_2.svg", "icons/tire_wear_3.svg"],
+    "afterFullService": 0
+  },
+  "note": "The preview uses deterministic timings to review assets. Actual game logic must evaluate the release gates, pit lane occupancy, lap progress, AI routing and penalties."
+}

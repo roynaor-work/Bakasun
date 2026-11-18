@@ -1,0 +1,136 @@
+{
+ "counts": {
+  "total": 25,
+  "traffic": 12,
+  "barrier": 7,
+  "oil": [
+   {
+    "s": 315,
+    "d": 3.6
+   }
+  ],
+  "parked": 4,
+  "cone": 1
+ },
+ "crash": {
+  "kind": "traffic",
+  "model": "truck",
+  "obstacleS": 121,
+  "lane": -3.6,
+  "hits": 1,
+  "vBefore": 22,
+  "vAfterHit": 11,
+  "stun": 0.7,
+  "t": 10.52,
+  "speedEveryHalfSecond": [
+   18.1,
+   22,
+   22,
+   22,
+   22,
+   18.8
+  ],
+  "events": [
+   {
+    "type": "crash",
+    "id": 0,
+    "kind": "traffic",
+    "t": 7.47
+   },
+   {
+    "type": "nearMiss",
+    "id": 1,
+    "kind": "traffic",
+    "t": 8.17
+   },
+   {
+    "type": "scrape",
+    "side": 1,
+    "t": 10.4
+   }
+  ]
+ },
+ "oil": {
+  "oilS": 315,
+  "oilLane": 3.6,
+  "carS": 296,
+  "carD": 4.47,
+  "curvatureAtOil": 0,
+  "hitAt": {
+   "s": 377,
+   "oil": 0,
+   "d": 2.2,
+   "v": 22
+  },
+  "dBefore": 4.47,
+  "trace": [
+   {
+    "f": 15,
+    "oil": 0,
+    "slide": -2.88,
+    "d": 1.48,
+    "v": 22,
+    "scraping": false
+   },
+   {
+    "f": 30,
+    "oil": 0,
+    "slide": -2.88,
+    "d": 0.76,
+    "v": 22,
+    "scraping": false
+   },
+   {
+    "f": 45,
+    "oil": 0,
+    "slide": -2.88,
+    "d": 0.04,
+    "v": 22,
+    "scraping": false
+   },
+   {
+    "f": 60,
+    "oil": 0,
+    "slide": -2.88,
+    "d": -0.68,
+    "v": 22,
+    "scraping": false
+   },
+   {
+    "f": 75,
+    "oil": 0,
+    "slide": -2.88,
+    "d": -1.4,
+    "v": 22,
+    "scraping": false
+   },
+   {
+    "f": 90,
+    "oil": 0,
+    "slide": -2.88,
+    "d": -2.12,
+    "v": 22,
+    "scraping": false
+   }
+  ],
+  "events": [
+   {
+    "type": "scrape",
+    "side": 1,
+    "t": 11.02
+   },
+   {
+    "type": "scrape",
+    "side": 1,
+    "t": 11.48
+   }
+  ],
+  "grip": "oil>0 → .15 (C.oilSeconds 1.1, oilDrift 3.5)"
+ },
+ "oilSteer": {
+  "maxDeviationWithCounterSteer": 1.83,
+  "scraping": false,
+  "v": 22
+ },
+ "errors": []
+}

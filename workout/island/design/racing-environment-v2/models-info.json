@@ -1,0 +1,372 @@
+{
+  "license": "CC0-1.0",
+  "source": "Original geometry authored in build_models.py and model_architecture.py; embedded original texture sources in build_textures.py.",
+  "models": [
+    {
+      "file": "runtime/grandstand.glb",
+      "type": "model/gltf-binary",
+      "bytes": 111692,
+      "triangles": 1166,
+      "bounds": {
+        "min": [
+          -10.0,
+          0.0,
+          -3.8
+        ],
+        "max": [
+          10.0,
+          5.62,
+          3.8
+        ]
+      },
+      "dimensions_m": [
+        20.0,
+        5.62,
+        7.6
+      ],
+      "root": "Grandstand",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "Terraces",
+        "Structure",
+        "Seats",
+        "Railings",
+        "Canopy",
+        "CanopyTrim",
+        "CrowdRow1",
+        "CrowdRow2",
+        "CrowdRow3",
+        "CrowdRow4",
+        "CrowdRow5",
+        "CrowdRow6",
+        "CrowdRow7",
+        "Grandstand"
+      ],
+      "materials": [
+        "Concrete",
+        "Steel",
+        "DarkSteel",
+        "Orange",
+        "Roof",
+        "PaintedCrowd"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/pit-building.glb",
+      "type": "model/gltf-binary",
+      "bytes": 133172,
+      "triangles": 1776,
+      "bounds": {
+        "min": [
+          -10.3,
+          0.0,
+          -3.8
+        ],
+        "max": [
+          10.3,
+          6.5625,
+          3.8
+        ]
+      },
+      "dimensions_m": [
+        20.6,
+        6.5625,
+        7.6
+      ],
+      "root": "PitBuilding",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "PitConcrete",
+        "PitCreamWalls",
+        "PitRailings",
+        "GarageInteriors",
+        "ObservationGlazing",
+        "PitOrangeTrim",
+        "PitBayNumerals",
+        "PitRoof",
+        "WindowFrames",
+        "PitBuilding"
+      ],
+      "materials": [
+        "Concrete",
+        "Cream",
+        "Steel",
+        "DarkSteel",
+        "Glass",
+        "Orange",
+        "White",
+        "Roof",
+        "Black"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/start-gantry.glb",
+      "type": "model/gltf-binary",
+      "bytes": 109904,
+      "triangles": 1274,
+      "bounds": {
+        "min": [
+          -7.875,
+          0.0,
+          -0.95
+        ],
+        "max": [
+          7.875,
+          7.07639,
+          0.95
+        ]
+      },
+      "dimensions_m": [
+        15.75,
+        7.07639,
+        1.9
+      ],
+      "root": "StartGantry",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "GantryStructure",
+        "GantryTrim",
+        "GantryLattice",
+        "Header",
+        "SignalHousings",
+        "Light1",
+        "Light2",
+        "Light3",
+        "Light4",
+        "Light5",
+        "RaceHeader",
+        "StartGantry"
+      ],
+      "materials": [
+        "Steel",
+        "DarkSteel",
+        "Orange",
+        "Roof",
+        "Black",
+        "SignalRed",
+        "HeaderRace"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/control-tower.glb",
+      "type": "model/gltf-binary",
+      "bytes": 97500,
+      "triangles": 1252,
+      "bounds": {
+        "min": [
+          -3.2,
+          0.0,
+          -3.2
+        ],
+        "max": [
+          3.2,
+          9.02,
+          3.2
+        ]
+      },
+      "dimensions_m": [
+        6.4,
+        9.02,
+        6.4
+      ],
+      "root": "ControlTower",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "TowerFoundation",
+        "TowerBoothShell",
+        "TowerStructure",
+        "TowerStairs",
+        "TowerGlazing",
+        "TowerRoof",
+        "TowerTrim",
+        "TowerWindowFrames",
+        "TowerDetails",
+        "ControlTower"
+      ],
+      "materials": [
+        "Concrete",
+        "Cream",
+        "Steel",
+        "DarkSteel",
+        "Glass",
+        "Orange",
+        "White",
+        "Roof",
+        "Black"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/tire-barrier.glb",
+      "type": "model/gltf-binary",
+      "bytes": 146128,
+      "triangles": 2040,
+      "bounds": {
+        "min": [
+          -2.9,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          2.9,
+          0.8525,
+          0.5
+        ]
+      },
+      "dimensions_m": [
+        5.8,
+        0.8525,
+        1.0
+      ],
+      "root": "TireBarrier",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "TireBase",
+        "Tires",
+        "SafetyBands",
+        "TireBarrier"
+      ],
+      "materials": [
+        "DarkSteel",
+        "Orange",
+        "Black"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/chainlink-fence.glb",
+      "type": "model/gltf-binary",
+      "bytes": 61888,
+      "triangles": 804,
+      "bounds": {
+        "min": [
+          -3.16,
+          0.0,
+          -0.24
+        ],
+        "max": [
+          3.16,
+          2.7,
+          0.24
+        ]
+      },
+      "dimensions_m": [
+        6.32,
+        2.7,
+        0.48
+      ],
+      "root": "ChainlinkFence",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "FencePosts",
+        "DiamondMesh",
+        "FenceFeet",
+        "ChainlinkFence"
+      ],
+      "materials": [
+        "Concrete",
+        "Steel",
+        "DarkSteel"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    },
+    {
+      "file": "runtime/sponsor-board.glb",
+      "type": "model/gltf-binary",
+      "bytes": 14368,
+      "triangles": 110,
+      "bounds": {
+        "min": [
+          -2.56,
+          0.0,
+          -0.6
+        ],
+        "max": [
+          2.56,
+          2.47,
+          0.6
+        ]
+      },
+      "dimensions_m": [
+        5.12,
+        2.47,
+        1.2
+      ],
+      "root": "SponsorBoard",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "front": "+Z",
+      "up": "+Y",
+      "units": "metres",
+      "nodes": [
+        "BoardSupports",
+        "BoardFrame",
+        "BoardBack",
+        "RacePanel",
+        "SponsorBoard"
+      ],
+      "materials": [
+        "DarkSteel",
+        "Orange",
+        "Roof",
+        "RaceGraphic"
+      ],
+      "compression": "none",
+      "uvs": "Disjoint padded polygon charts per mesh; painted panels have independent non-overlapping atlas bands."
+    }
+  ]
+}

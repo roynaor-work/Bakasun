@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>השוואת רמות פירוט — גוף השחקן</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">ATHLETE / LOD V1</p><h1>אותו שחקן. פחות משולשים.</h1>
+      <p>18 עצמות משותפות · חמש תנועות קיימות · השוואה מסונכרנת</p></div>
+    <a href="REPORT.md">דוח הנכס</a>
+  </header>
+  <main>
+    <section class="controls" aria-label="בחירת גוף ואנימציה">
+      <label>גוף<select id="profile"><option value="soccer">שחקן כדורגל · 1.80 מ׳</option><option value="guard">רכז · 1.78 מ׳</option><option value="wing">קיצוני · 1.94 מ׳</option><option value="center">סנטר · 2.08 מ׳</option></select></label>
+      <label>תנועה<select id="clip"></select></label>
+      <button id="play" type="button">השהיה</button>
+      <label class="timeline">מיקום בתנועה<input id="time" type="range" min="0" max="1" step=".001" value="0"></label>
+      <output id="seconds">0.00 שנ׳</output>
+    </section>
+    <section class="toolbar" aria-label="תצוגה וצבעים">
+      <div class="views"><button data-yaw="0" type="button">חזית</button><button data-yaw="3.141592654" type="button">גב ומספר</button><button data-yaw="1.570796327" type="button">צד</button></div>
+      <label><input id="wireframe" type="checkbox"> רשת משולשים</label>
+      <label><input id="skeleton" type="checkbox"> שלד</label>
+      <label>ראשי<input id="primary" type="color" value="#187e83" aria-label="uniform_primary"></label>
+      <label>משני<input id="secondary" type="color" value="#16363b" aria-label="uniform_secondary"></label>
+      <label>עיטור ומספר<input id="trim" type="color" value="#e7dbb9" aria-label="uniform_trim"></label>
+      <label>קירוב<input id="zoom" type="range" min="2.6" max="6" step=".1" value="4.1"></label>
+    </section>
+    <div id="status" role="status">טוען את הגופים והקליפים…</div>
+    <section id="comparison" aria-label="שלוש רמות הפירוט זו לצד זו">
+      <canvas id="canvas" aria-label="השוואת גופי שחקן בתלת ממד; גרירה מסובבת את כולם יחד"></canvas>
+      <div id="panels">
+        <article class="panel"><div class="badge">LOD 0 <span>מקור פעיל</span></div><div class="stats" id="stats0"></div></article>
+        <article class="panel"><div class="badge">LOD 1 <span>מרחק בינוני</span></div><div class="stats" id="stats1"></div></article>
+        <article class="panel"><div class="badge">LOD 2 <span>מרחק גדול</span></div><div class="stats" id="stats2"></div></article>
+      </div>
+    </section>
+    <section class="summary"><p id="budget"></p><p>ספים מומלצים: 12 מ׳ ו־30 מ׳ · אזורי מעבר בחפיפה של 20%: 10.8–13.2 מ׳ ו־27–33 מ׳.</p></section>
+    <p class="hint">גררו כדי לסובב. המספר הוא מסכת אלפא. המונים כוללים גוף ומסכת מספר; תסרוקות הן אביזר נפרד.</p>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

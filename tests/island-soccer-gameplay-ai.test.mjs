@@ -41,7 +41,9 @@ function digest(opt){
   return out;
 }
 test('aiVersion v1 reproduces the pre-gameplay-1 model exactly; v2 differs',()=>{
-  assert.deepEqual(digest({aiVersion:'v1'}),MAIN_DIGESTS);
+  // Rules v1 (M3: fouls, through balls, rival slides) and feel v2 (M3: reactions, turnover switch) are separate flags; the legacy digest is the match with all three off.
+  // v23 (13/11/2026): the switch burst and the air controls (soccer-v23.mjs) are two more flags; the legacy digest has them at v22.
+  assert.deepEqual(digest({aiVersion:'v1',rulesVersion:'off',feelVersion:'0',switchVersion:'v22',airVersion:'v22'}),MAIN_DIGESTS);
   assert.notDeepEqual(digest({aiVersion:'v2'}),MAIN_DIGESTS);
 });
 

@@ -1,20 +1,22 @@
-import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-3';
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-3';
-import './view/learning-buildings.mjs?v=island-v2-20261107-3';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-3';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-3';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-3';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-3';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-3';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-3';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-3';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-3';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-3';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-3';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-3';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-3';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-3';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-3';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-18';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-18';
+import './view/learning-buildings.mjs?v=island-v2-20261107-18';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-18';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-18';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-18';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-18';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-18';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-18';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-18';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-18';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-18';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-18';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-18';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-18';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-18';
+import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-18';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease,v25On,switchRelease,packsForGames} from './ui/offline.mjs?v=island-v2-20261107-18';
+import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-18';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -29,6 +31,8 @@ try {
   const data = await loadData();
   let storage;
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
+  const cityPreview = previewMode();
+  if (cityPreview) storage = readOnlyStorage(storage);
   const engine = createEngine(data, { storage });
   let ui;
   const view = new IslandView({
@@ -41,6 +45,7 @@ try {
   });
   ui = new IslandInterface({ root, engine, view, data, t });
   splash.end();
+  if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
@@ -49,16 +54,23 @@ try {
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
-  const releaseWatch=watchRelease({version:DATA_VERSION,onPending:version=>{prefetchRelease(version).catch(()=>{});},
+  // Offline v25 (`?offlineV25=0` restores v24): a new release is first prepared on the device (only the
+  // changed files are downloaded, the rest copied from the current cache), and only then, from an idle
+  // island, its worker takes over and the page reloads; the old cache is dropped by the new worker.
+  const offlineV25=v25On();let pendingRelease=null,readyRelease=null;
+  const releaseWatch=watchRelease({version:DATA_VERSION,onPending:version=>{pendingRelease=version;prefetchRelease(version,{gate:async()=>!engine.isMinigameActive()}).then(r=>{window.__releasePrefetch=r;},()=>{}).finally(()=>{readyRelease=version;});},
     check:async()=>{const response=await fetch(new URL('./release.json?check='+Date.now(),import.meta.url),{cache:'no-store'});if(!response.ok)return null;return (await response.json()).version;},
-    canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected&&!navigationActive(view)&&ui.cityAccess?.mapPanel?.hidden!==false,
-    save:()=>engine.save(),refresh:version=>{const url=new URL(location.href);url.searchParams.set('release',version);location.replace(url.href);},
+    canRefresh:()=>!document.hidden&&!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!ui.selected&&!navigationActive(view)&&ui.cityAccess?.mapPanel?.hidden!==false&&(!offlineV25||readyRelease===pendingRelease),
+    save:()=>engine.save(),refresh:version=>{const url=new URL(location.href);url.searchParams.set('release',version);if(offlineV25)switchRelease(version).then(ok=>{window.__releaseSwitch=ok;});else location.replace(url.href);},
     listen:check=>{const resume=()=>{if(!document.hidden)check();};document.addEventListener('visibilitychange',resume);return ()=>document.removeEventListener('visibilitychange',resume);}
   });
   // Every open: look for a newer release at once, keep the asset worker registered and
   // fill the device cache in the background (skipped on a data saver, paused during a game).
-  releaseWatch.poll();registerOfflineWorker();
-  const stopAutoDownload=startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
+  releaseWatch.poll();if(!cityPreview)registerOfflineWorker();
+  // The frame-rate probe samples the first 10 seconds in the city (not during a game); a weak device downloads only by the button.
+  if(new URLSearchParams(location.search).get('quality')==='auto')resetMeasured();
+  if(!cityPreview)startFpsProbe({busy:()=>engine.isMinigameActive()||Boolean(ui.modalRoot.children.length)});
+  const stopAutoDownload=cityPreview?()=>{}:startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!document.hidden,allowed:()=>!isLowQuality(),idleMs:Number(new URLSearchParams(location.search).get('autoIdleMs'))>=0&&new URLSearchParams(location.search).has('autoIdleMs')?Number(new URLSearchParams(location.search).get('autoIdleMs')):60000,onState:state=>{window.__offlineState=state;},selectPacks:()=>packsForGames([...(engine.state.instructionsSeen||[]),...Object.keys(engine.state.minigameWins||{})])});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{

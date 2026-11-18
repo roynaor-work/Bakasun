@@ -1,0 +1,2287 @@
+{
+ "mode": "v20",
+ "tag": "",
+ "steps_filter": [],
+ "query": "index.html?dev=1&adapt=1&boarFire=v20&boarHud=v20&boarStick=v20",
+ "viewport": [
+  844,
+  390
+ ],
+ "steps": {
+  "C1_sceneTaps": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "frames": 31,
+   "game": 1.55,
+   "weapon": "mg"
+  },
+  "C1_sceneDrag": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "frames": 53,
+   "game": 2.6,
+   "weapon": "mg"
+  },
+  "C1_stickDrag2s": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.9586,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.078
+   },
+   "frames": 54,
+   "game": 2.617,
+   "weapon": "mg",
+   "stickWhileHeld": true,
+   "firingWhileHeld": false,
+   "enemiesInRange": 3,
+   "midStick": true
+  },
+  "C2_leftThumbSpots": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 2,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.9586,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.078
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "frames": 141,
+   "game": 6.916,
+   "weapon": "mg",
+   "per": [
+    {
+     "spot": [
+      76,
+      209
+     ],
+     "tap": {
+      "abilities": 0,
+      "abilityBy": {
+       "rocket": 0,
+       "frost": 0,
+       "fury": 0
+      },
+      "shots": 0,
+      "aimMove": 0
+     },
+     "drag": {
+      "abilities": 0,
+      "shots": 0,
+      "aimMove": 0,
+      "stickDuringDrag": false
+     }
+    },
+    {
+     "spot": [
+      184,
+      209
+     ],
+     "tap": {
+      "abilities": 1,
+      "abilityBy": {
+       "rocket": 0,
+       "frost": 1,
+       "fury": 0
+      },
+      "shots": 0,
+      "aimMove": 0
+     },
+     "drag": {
+      "abilities": 0,
+      "shots": 0,
+      "aimMove": 0,
+      "stickDuringDrag": false
+     }
+    },
+    {
+     "spot": [
+      292,
+      209
+     ],
+     "tap": {
+      "abilities": 1,
+      "abilityBy": {
+       "rocket": 1,
+       "frost": 1,
+       "fury": 0
+      },
+      "shots": 0,
+      "aimMove": 0
+     },
+     "drag": {
+      "abilities": 0,
+      "shots": 0,
+      "aimMove": 0,
+      "stickDuringDrag": false
+     }
+    }
+   ]
+  },
+  "C2_fireButtonHold": {
+   "shots": 10,
+   "button": 10,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "frames": 38,
+   "game": 1.834,
+   "weapon": "mg",
+   "heldFiring": true,
+   "heldShots": 8,
+   "heldByButton": 8,
+   "firingAfterRelease": false,
+   "shotsAfterRelease6f": 0,
+   "aimMoveWhileHeld": 0
+  },
+  "C2_twoFingers": {
+   "shots": 13,
+   "button": 13,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 1.2768,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 57,
+   "game": 2.833,
+   "weapon": "mg",
+   "held": {
+    "firing": true,
+    "stick": true,
+    "shots": 11,
+    "byButton": 11,
+    "aimMove": 0.7822
+   },
+   "afterFireRelease": {
+    "firing": false,
+    "stick": true,
+    "shots6f": 0,
+    "aimMove6f": 0.3514
+   },
+   "afterStickRelease": {
+    "aimDrift4f": 0
+   }
+  },
+  "C2_strayTapWhileFiring": {
+   "shots": 4,
+   "button": 4,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 22,
+   "game": 1.1,
+   "weapon": "mg",
+   "firingBeforeTap": true,
+   "firingAfterStrayTap": false,
+   "fireHeldAfterStrayTap": true,
+   "shots6fAfterTap": 0,
+   "overheated": false
+  },
+  "C3_weaponSwitchTap": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 8,
+   "game": 0.4,
+   "weapon": "mg->shotgun",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    }
+   },
+   "control": "card shotgun",
+   "size": [
+    74,
+    82
+   ],
+   "weaponBefore": "mg",
+   "weaponAfter": "shotgun",
+   "switched": true
+  },
+  "C3_weaponSwitchWhileStickHeld": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 24,
+   "game": 1.167,
+   "weapon": "shotgun",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "card-mg": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    }
+   },
+   "control": "card mg",
+   "stickHeld": true,
+   "weaponBefore": "shotgun",
+   "weaponAfter": "shotgun",
+   "switched": false
+  },
+  "C3_abilityTap": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 8,
+   "game": 0.4,
+   "weapon": "shotgun",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "card-mg": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 3,
+      "pointerup": 2,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "card-mg": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    }
+   },
+   "rocketRect": [
+    244,
+    168,
+    96,
+    82
+   ],
+   "rocketPresses": 0,
+   "bullets": 0
+  },
+  "C3_abilityWhileStickHeld": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "frames": 23,
+   "game": 1.15,
+   "weapon": "shotgun",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 3,
+      "pointerup": 2,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "card-mg": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "fury": {
+      "pointerdown": 2,
+      "pointerup": 1,
+      "click": 0
+     },
+     "frost": {
+      "pointerdown": 3,
+      "pointerup": 2,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 3,
+      "pointerup": 2,
+      "click": 1
+     },
+     "fire-btn": {
+      "pointerdown": 3,
+      "pointerup": 3,
+      "click": 1
+     },
+     "card-shotgun": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "card-mg": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    }
+   },
+   "frostRect": [
+    136,
+    168,
+    96,
+    82
+   ],
+   "frostInsideStickZone": false,
+   "stickHeld": true,
+   "frostPresses": 0
+  },
+  "C5_speedCurve": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 1.1054,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.803
+   },
+   "aimTo": {
+    "x": 0.247,
+    "y": -0.05
+   },
+   "frames": 285,
+   "game": 14.116,
+   "weapon": "shotgun",
+   "R": 62,
+   "rows": [
+    {
+     "thumbPx": 5,
+     "tiltPct": 8,
+     "unitsPerS": 0,
+     "pxPerS": 0,
+     "crossScreenS": null,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 7,
+     "tiltPct": 11,
+     "unitsPerS": 0,
+     "pxPerS": 0,
+     "crossScreenS": null,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 8,
+     "tiltPct": 13,
+     "unitsPerS": 0.0167,
+     "pxPerS": 7,
+     "crossScreenS": 114,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 10,
+     "tiltPct": 16,
+     "unitsPerS": 0.075,
+     "pxPerS": 31.6,
+     "crossScreenS": 25.3,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 12,
+     "tiltPct": 19,
+     "unitsPerS": 0.1329,
+     "pxPerS": 56.1,
+     "crossScreenS": 14.3,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 16,
+     "tiltPct": 26,
+     "unitsPerS": 0.25,
+     "pxPerS": 105.5,
+     "crossScreenS": 7.6,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 20,
+     "tiltPct": 32,
+     "unitsPerS": 0.3683,
+     "pxPerS": 155.4,
+     "crossScreenS": 5.2,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 24,
+     "tiltPct": 39,
+     "unitsPerS": 0.4866,
+     "pxPerS": 205.3,
+     "crossScreenS": 3.9,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 32,
+     "tiltPct": 52,
+     "unitsPerS": 0.72,
+     "pxPerS": 303.8,
+     "crossScreenS": 2.6,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 40,
+     "tiltPct": 65,
+     "unitsPerS": 0.955,
+     "pxPerS": 403,
+     "crossScreenS": 2,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 50,
+     "tiltPct": 81,
+     "unitsPerS": 1.2496,
+     "pxPerS": 527.3,
+     "crossScreenS": 1.5,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 62,
+     "tiltPct": 100,
+     "unitsPerS": 1.6003,
+     "pxPerS": 675.3,
+     "crossScreenS": 1.2,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    },
+    {
+     "thumbPx": 80,
+     "tiltPct": 100,
+     "unitsPerS": 1.5997,
+     "pxPerS": 675.1,
+     "crossScreenS": 1.2,
+     "clamped": false,
+     "yDrift": 0,
+     "shots": 0
+    }
+   ],
+   "releaseDrift": 0,
+   "stickAfterRelease": null
+  },
+  "C5_nudges": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.601,
+   "aimFrom": {
+    "x": 0.247,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": -0.354,
+    "y": -0.05
+   },
+   "frames": 52,
+   "game": 2.583,
+   "weapon": "shotgun",
+   "rows": [
+    {
+     "thumbPx": 10,
+     "heldGame": 0.2,
+     "movedPx": 11,
+     "afterReleasePx": 0
+    },
+    {
+     "thumbPx": 16,
+     "heldGame": 0.2,
+     "movedPx": 37.1,
+     "afterReleasePx": 0
+    },
+    {
+     "thumbPx": 24,
+     "heldGame": 0.2,
+     "movedPx": 61.6,
+     "afterReleasePx": 0
+    }
+   ]
+  },
+  "C5_precisionFinger": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.4576,
+   "aimFrom": {
+    "x": -0.354,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": 0.24
+   },
+   "frames": 94,
+   "game": 4.634,
+   "weapon": "shotgun",
+   "fullUnitsPerS": 1.3,
+   "preciseUnitsPerS": 1.2978,
+   "ratio": 0.998,
+   "preciseFlag": false,
+   "ring": {
+    "cls": "on",
+    "label": "none"
+   },
+   "afterSecondFingerLifts": 1.3023,
+   "firstLiftsSecondStays": {
+    "stick": false,
+    "aimMoveWhenSecondDrags": 0
+   }
+  },
+  "C5_edgeThumb": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.2961,
+   "aimFrom": {
+    "x": 0,
+    "y": 0.24
+   },
+   "aimTo": {
+    "x": -0.06,
+    "y": -0.05
+   },
+   "frames": 49,
+   "game": 2.45,
+   "weapon": "shotgun",
+   "rows": [
+    {
+     "label": "thumb lands 40 px from the left edge, pushes left to the edge",
+     "start": [
+      40,
+      320
+     ],
+     "to": [
+      0,
+      320
+     ],
+     "unitsPerS": -0.954
+    },
+    {
+     "label": "thumb on the rest-ring centre, pushes left to the edge",
+     "start": [
+      90,
+      300
+     ],
+     "to": [
+      0,
+      300
+     ],
+     "unitsPerS": -1.6
+    }
+   ]
+  },
+  "C4_slowDragRight": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 1.0405,
+   "aimFrom": {
+    "x": -0.06,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": -0.3
+   },
+   "frames": 135,
+   "game": 7.433,
+   "weapon": "shotgun",
+   "thumb": "1 px every 2 game frames to 24 px, hold 30 frames",
+   "dtMedian": 0.05,
+   "sentMoves": 24,
+   "receivedMoves": 24,
+   "firstMoveAfterThumbPx": 8,
+   "firstStepPx": 0.346,
+   "firstSpeedPxS": 6.9,
+   "rampFrames": 71,
+   "rampFlatFrames": 52,
+   "rampSpeedDrops": 1,
+   "maxSpeedJumpPxS": 12.5,
+   "maxSpeedJumpPctOfHold": 6.1,
+   "stallMaxFrames": 0,
+   "movedWithoutPointermove": 85,
+   "holdFrames": 26,
+   "holdSpeedPxS": 204.9,
+   "holdSpeedCvPct": 0.02,
+   "resChanges": 0,
+   "speeds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6.9,
+    6.9,
+    6.9,
+    7.1,
+    6.9,
+    6.9,
+    19.3,
+    19.2,
+    19.3,
+    19.3,
+    31.7,
+    31.7,
+    31.7,
+    31.7,
+    31.7,
+    44.1,
+    44.1,
+    44.1,
+    44.1,
+    44.1,
+    56.4,
+    56.5,
+    56.5,
+    56.4,
+    68.8,
+    68.8,
+    68.9,
+    68.8,
+    81.2,
+    81.2,
+    81.2,
+    81.1,
+    81.2,
+    93.6,
+    93.5,
+    93.6,
+    93.5,
+    93.6,
+    105.9,
+    105.9,
+    105.9,
+    105.9,
+    118.3,
+    118.3,
+    118.3,
+    118.2,
+    118.3,
+    130.7,
+    130.7,
+    130.7,
+    130.7,
+    143.1,
+    143.1,
+    143.1,
+    143.1,
+    155.4,
+    155.5,
+    155.4,
+    167.9,
+    167.8,
+    167.8,
+    167.9,
+    167.8,
+    180.2,
+    180.2,
+    180.2,
+    192.5,
+    192.6,
+    192.5,
+    192.6,
+    192.5,
+    204.9,
+    204.9,
+    205,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    205,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    205,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    205,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    204.9,
+    205,
+    204.9,
+    204.9
+   ],
+   "moves": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    9,
+    9,
+    9,
+    9,
+    10,
+    10,
+    10,
+    10,
+    10,
+    11,
+    11,
+    11,
+    11,
+    11,
+    12,
+    12,
+    12,
+    12,
+    13,
+    13,
+    13,
+    13,
+    14,
+    14,
+    14,
+    14,
+    14,
+    15,
+    15,
+    15,
+    15,
+    15,
+    16,
+    16,
+    16,
+    16,
+    17,
+    17,
+    17,
+    17,
+    17,
+    18,
+    18,
+    18,
+    18,
+    19,
+    19,
+    19,
+    19,
+    20,
+    20,
+    20,
+    21,
+    21,
+    21,
+    21,
+    21,
+    22,
+    22,
+    22,
+    23,
+    23,
+    23,
+    23,
+    23,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24
+   ],
+   "driftAfterRelease10f": 0
+  },
+  "C4_slowDragUp": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 1.2862,
+   "aimFrom": {
+    "x": 0.95,
+    "y": -0.3
+   },
+   "aimTo": {
+    "x": 0,
+    "y": 0.567
+   },
+   "frames": 133,
+   "game": 7.25,
+   "weapon": "shotgun",
+   "thumb": "1 px every 2 game frames to 24 px, hold 30 frames",
+   "dtMedian": 0.05,
+   "sentMoves": 24,
+   "receivedMoves": 24,
+   "firstMoveAfterThumbPx": 8,
+   "firstStepPx": 0.131,
+   "firstSpeedPxS": 2.6,
+   "rampFrames": 66,
+   "rampFlatFrames": 46,
+   "rampSpeedDrops": 0,
+   "maxSpeedJumpPxS": 4.7,
+   "maxSpeedJumpPctOfHold": 6.1,
+   "stallMaxFrames": 0,
+   "movedWithoutPointermove": 83,
+   "holdFrames": 29,
+   "holdSpeedPxS": 76.9,
+   "holdSpeedCvPct": 0.02,
+   "resChanges": 0,
+   "speeds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2.6,
+    2.6,
+    2.6,
+    2.6,
+    7.3,
+    7.3,
+    7.2,
+    7.3,
+    7.3,
+    11.9,
+    11.9,
+    11.9,
+    11.9,
+    11.9,
+    16.5,
+    16.5,
+    16.5,
+    16.6,
+    21.2,
+    21.2,
+    21.2,
+    21.2,
+    25.8,
+    25.8,
+    25.9,
+    25.8,
+    30.5,
+    30.5,
+    30.5,
+    30.5,
+    35.1,
+    35.1,
+    35.1,
+    35.1,
+    39.8,
+    39.8,
+    39.8,
+    39.8,
+    44.4,
+    44.4,
+    44.4,
+    44.4,
+    49.1,
+    49.1,
+    49.1,
+    49.1,
+    49.1,
+    53.7,
+    53.7,
+    53.7,
+    53.7,
+    58.4,
+    58.3,
+    58.3,
+    63,
+    63,
+    63,
+    63,
+    63,
+    67.6,
+    67.7,
+    67.7,
+    67.6,
+    72.3,
+    72.3,
+    72.3,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9,
+    76.9
+   ],
+   "moves": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    9,
+    9,
+    9,
+    9,
+    9,
+    10,
+    10,
+    10,
+    10,
+    10,
+    11,
+    11,
+    11,
+    11,
+    12,
+    12,
+    12,
+    12,
+    13,
+    13,
+    13,
+    13,
+    14,
+    14,
+    14,
+    14,
+    15,
+    15,
+    15,
+    15,
+    16,
+    16,
+    16,
+    16,
+    17,
+    17,
+    17,
+    17,
+    18,
+    18,
+    18,
+    18,
+    18,
+    19,
+    19,
+    19,
+    19,
+    20,
+    20,
+    20,
+    21,
+    21,
+    21,
+    21,
+    21,
+    22,
+    22,
+    22,
+    22,
+    23,
+    23,
+    23,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24
+   ],
+   "driftAfterRelease10f": 0
+  },
+  "C4_circle": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.1952,
+   "aimFrom": {
+    "x": 0,
+    "y": 0.567
+   },
+   "aimTo": {
+    "x": 0.068,
+    "y": 0.384
+   },
+   "frames": 211,
+   "game": 10.717,
+   "weapon": "shotgun",
+   "thumb": "circle radius 16 px, one move every 2 game frames (48 per turn)",
+   "headingSteps": 197,
+   "zeroTurnFrames": 135,
+   "maxTurnDeg": 19.3,
+   "turnSdDeg": 4.17,
+   "speedCvPct": 30.1,
+   "turns": [
+    0,
+    0,
+    0,
+    2.8,
+    0,
+    0,
+    0,
+    2.9,
+    0,
+    0,
+    0,
+    3.1,
+    0,
+    0,
+    0,
+    0,
+    3.4,
+    0,
+    0,
+    0,
+    3.8,
+    0,
+    0,
+    0,
+    4.5,
+    0,
+    0,
+    5.5,
+    0,
+    0,
+    0,
+    0,
+    7,
+    -0.1,
+    0,
+    0,
+    9.2,
+    0,
+    0,
+    0,
+    12.3,
+    0,
+    0,
+    0,
+    16.3,
+    -0.1,
+    0,
+    0,
+    0,
+    19.3,
+    0,
+    0,
+    19.3,
+    0,
+    0,
+    0,
+    -0.1,
+    16.3,
+    0,
+    0,
+    0,
+    12.3,
+    0,
+    0,
+    0,
+    9.2,
+    0,
+    0,
+    -0.1,
+    7,
+    0,
+    0,
+    5.5,
+    0,
+    0,
+    0,
+    0,
+    4.5,
+    0,
+    0,
+    3.9,
+    0,
+    0,
+    0,
+    3.4,
+    0,
+    0,
+    0,
+    0,
+    3.1,
+    0,
+    0,
+    2.9,
+    0,
+    0,
+    0,
+    0,
+    2.8,
+    0,
+    0,
+    0,
+    2.8,
+    0,
+    0,
+    0,
+    2.9,
+    0,
+    0,
+    3.1,
+    0,
+    0,
+    0,
+    3.4,
+    0,
+    0,
+    0,
+    0,
+    3.9,
+    0,
+    0,
+    0,
+    4.5,
+    0,
+    0,
+    0,
+    5.5,
+    0,
+    0,
+    6.9,
+    0,
+    0,
+    0.1,
+    -0.1,
+    9.2,
+    -0.1,
+    0.1,
+    0,
+    12.3,
+    0,
+    0,
+    16.2,
+    0.1,
+    -0.1,
+    0,
+    0,
+    19.3,
+    0,
+    0,
+    19.3,
+    0,
+    0,
+    -0.1,
+    0.1,
+    16.2,
+    0,
+    0,
+    12.3,
+    0,
+    0.1,
+    -0.1,
+    0,
+    9.2,
+    0,
+    0,
+    0,
+    6.9,
+    0,
+    0,
+    0,
+    5.5,
+    0,
+    0,
+    4.5,
+    0,
+    0,
+    0,
+    3.8,
+    0,
+    0,
+    0,
+    3.4,
+    0,
+    0,
+    0,
+    3.1,
+    0,
+    0,
+    0,
+    2.9,
+    0,
+    0,
+    0,
+    2.8,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "C4_flick": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.4354,
+   "aimFrom": {
+    "x": 0.068,
+    "y": 0.384
+   },
+   "aimTo": {
+    "x": 0.033,
+    "y": -0.05
+   },
+   "frames": 24,
+   "game": 1.2,
+   "weapon": "shotgun",
+   "thumb": "one jump to 48 px, hold 12 frames",
+   "speeds": [
+    0,
+    0,
+    0,
+    501.9,
+    501.9,
+    502,
+    501.9,
+    501.9,
+    501.9,
+    501.9,
+    502,
+    501.9,
+    501.9,
+    501.9,
+    502,
+    501.9,
+    501.9
+   ],
+   "firstFramePctOfTop": 100,
+   "framesTo90pct": 0,
+   "gameMsTo90pct": 50,
+   "topPxS": 502
+  },
+  "pauseResume": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.8128,
+   "aimFrom": {
+    "x": 0.033,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.786,
+    "y": 0.256
+   },
+   "frames": 47,
+   "game": 2.19,
+   "weapon": "shotgun",
+   "pauseBtn": [
+    808,
+    36,
+    56,
+    56
+   ],
+   "pausedFlag": true,
+   "resumeFound": true,
+   "resumedFlag": false,
+   "afterResume": {
+    "aimMove": 0.7599,
+    "shots": 0
+   },
+   "blurCount": 1
+  }
+ },
+ "notes": [
+  "after the layout capture the battle runs as a sandbox wave 1 (hp 999, the wave never ends); targets spawned"
+ ],
+ "intro": [
+  "מכוונים בעכבר ומחזיקים לחיצה לירי. בטלפון גוררים אצבע כדי לכוון ולירות.",
+  "במוסך קונים ומשדרגים ארבעה נשקים, ביצורים ויכולות. המטבעות של החווה נשמרים בנפרד ממטבעות העיר.",
+  "מגינים על החוף מול גלי פלישה ובוסים. השהיה וחזרה לעיר זמינות בכפתור העליון."
+ ],
+ "frameBox": {
+  "x": 0,
+  "y": 0,
+  "width": 844,
+  "height": 390
+ },
+ "frameUrl": "http://127.0.0.1:41787/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-10&island=1&qa=1&boarFire=v20&boarHud=v20&boarStick=v20&adapt=1",
+ "menu": {
+  "buttons": [
+   "start: הגנו על האי ←",
+   "garage: מוסך ונשקים ⚙",
+   "help: איך משחקים?",
+   "quality: איכות גרפיקה: רגילה",
+   "island-back: חזרה לעיר"
+  ],
+  "aimSens": null,
+  "help": "כוונו בעכבר והחזיקו לחיצה כדי לירות. בטלפון: מניחים אצבע בכל מקום וגוררים, הכוונת זזה יחד עם האצבע בלי שהאצבע תסתיר את המטרה. אפשר לכוון גם עם החצים ולירות עם F.",
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": false,
+   "HUD_V21": false,
+   "STICK_V21": false,
+   "LEGACY": false
+  },
+  "coarse": true,
+  "maxTouchPoints": 5
+ },
+ "load": {
+  "framesPerWallSecond": 0.47,
+  "gameSecondsPerWallSecond": 0.024
+ },
+ "env": {
+  "mode": "battle",
+  "frames": 80,
+  "elapsed": 3.75,
+  "aim": {
+   "x": 0,
+   "y": -0.05
+  },
+  "firing": false,
+  "fireHeld": false,
+  "stick": false,
+  "stickInfo": null,
+  "shots": 0,
+  "shotsBy": {
+   "button": 0,
+   "scene": 0,
+   "keyboard": 0,
+   "mouse": 0,
+   "auto": 0,
+   "qa": 0,
+   "unknown": 0
+  },
+  "stickNoButton": 0,
+  "abilityBy": {
+   "rocket": 0,
+   "frost": 0,
+   "fury": 0
+  },
+  "abilityFromLeft": 0,
+  "heat": 0,
+  "overheated": false,
+  "current": "mg",
+  "hp": 100,
+  "enemies": 5,
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": false,
+   "HUD_V21": false,
+   "STICK_V21": false,
+   "LEGACY": false
+  },
+  "stickR": 62,
+  "aimSens": "mid",
+  "paused": false,
+  "wave": 1,
+  "qa3": {
+   "blur": 0,
+   "focus": 0,
+   "vis": 0,
+   "raf": 77,
+   "ev": {
+    "start": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    }
+   }
+  }
+ },
+ "layout": {
+  "aim-zone": [
+   0,
+   86,
+   405,
+   304
+  ],
+  "aim-rest": [
+   24,
+   234,
+   132,
+   132
+  ],
+  "fire-btn": [
+   718,
+   264,
+   108,
+   108
+  ],
+  "weapon-btn": null,
+  "rocket": [
+   244,
+   168,
+   96,
+   82
+  ],
+  "frost": [
+   136,
+   168,
+   96,
+   82
+  ],
+  "fury": [
+   28,
+   168,
+   96,
+   82
+  ],
+  "boss-hud": null,
+  "battle-hint": [
+   0,
+   92,
+   844,
+   36
+  ],
+  "coins": [
+   38,
+   101,
+   98,
+   58
+  ],
+  "health": [
+   606,
+   102,
+   200,
+   56
+  ],
+  "wave": [
+   357,
+   32,
+   130,
+   84
+  ],
+  "weapons": [
+   496,
+   168,
+   320,
+   82
+  ],
+  "ammo": [
+   302,
+   317,
+   240,
+   51
+  ],
+  "under": {
+   "76,209": "fury",
+   "184,209": "frost",
+   "292,209": "rocket",
+   "60,200": "fury",
+   "110,320": "aim-zone",
+   "79,311": "aim-zone",
+   "150,290": "aim-zone",
+   "450,140": "scene",
+   "620,110": "SPAN",
+   "520,60": "scene"
+  },
+  "leftThumbGrid": {
+   "points": 361,
+   "onStick": 276,
+   "other": {
+    "fury": 30,
+    "abilities": 6,
+    "frost": 29,
+    "rocket": 20
+   }
+  },
+  "fonts": {
+   "abilitySmall": [
+    "9px",
+    "9px",
+    "9px"
+   ],
+   "weaponName": null,
+   "weaponAmmo": null
+  },
+  "rest": {
+   "border": "rgba(207, 221, 211, 0.36)",
+   "label": "\"כוונון\""
+  },
+  "crosshairMode": "left/top",
+  "hint": "גררו משמאל כדי לכוון · לחצו על ירי מגע על המסך לא יורה"
+ },
+ "origin": [
+  90,
+  300
+ ],
+ "hasFire": true,
+ "final": {
+  "mode": "battle",
+  "frames": 1654,
+  "elapsed": 81.357,
+  "aim": {
+   "x": 0.786,
+   "y": 0.256
+  },
+  "firing": false,
+  "fireHeld": false,
+  "stick": false,
+  "stickInfo": null,
+  "shots": 27,
+  "shotsBy": {
+   "button": 27,
+   "scene": 0,
+   "keyboard": 0,
+   "mouse": 0,
+   "auto": 0,
+   "qa": 0,
+   "unknown": 0
+  },
+  "stickNoButton": 0,
+  "abilityBy": {
+   "rocket": 1,
+   "frost": 1,
+   "fury": 0
+  },
+  "abilityFromLeft": 0,
+  "heat": 0,
+  "overheated": false,
+  "current": "shotgun",
+  "hp": 674.2000000000025,
+  "enemies": 2,
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": false,
+   "HUD_V21": false,
+   "STICK_V21": false,
+   "LEGACY": false
+  },
+  "stickR": 62,
+  "aimSens": "mid",
+  "paused": false,
+  "wave": 1,
+  "qa3": {
+   "blur": 1,
+   "focus": 1,
+   "vis": 0,
+   "raf": 1667,
+   "ev": {
+    "start": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    },
+    "fury": {
+     "pointerdown": 2,
+     "pointerup": 1,
+     "click": 0
+    },
+    "frost": {
+     "pointerdown": 3,
+     "pointerup": 2,
+     "click": 1
+    },
+    "rocket": {
+     "pointerdown": 3,
+     "pointerup": 2,
+     "click": 1
+    },
+    "fire-btn": {
+     "pointerdown": 3,
+     "pointerup": 3,
+     "click": 1
+    },
+    "card-shotgun": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    },
+    "card-mg": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 0
+    },
+    "card-tesla": {
+     "pointerdown": 0,
+     "pointerup": 0,
+     "click": 1
+    }
+   }
+  }
+ },
+ "focus": {
+  "blur": 1,
+  "focus": 1,
+  "vis": 0,
+  "raf": 1667,
+  "ev": {
+   "start": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 1
+   },
+   "fury": {
+    "pointerdown": 2,
+    "pointerup": 1,
+    "click": 0
+   },
+   "frost": {
+    "pointerdown": 3,
+    "pointerup": 2,
+    "click": 1
+   },
+   "rocket": {
+    "pointerdown": 3,
+    "pointerup": 2,
+    "click": 1
+   },
+   "fire-btn": {
+    "pointerdown": 3,
+    "pointerup": 3,
+    "click": 1
+   },
+   "card-shotgun": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 1
+   },
+   "card-mg": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 0
+   },
+   "card-tesla": {
+    "pointerdown": 0,
+    "pointerup": 0,
+    "click": 1
+   }
+  }
+ },
+ "exit": {
+  "exitFound": true,
+  "frameGone": true
+ },
+ "save": {
+  "keys": [
+   "bestWave",
+   "coins",
+   "kills",
+   "nextWave",
+   "upgrades",
+   "version",
+   "weapons"
+  ],
+  "weapons": [
+   "cannon",
+   "cannon2",
+   "cannon3",
+   "mg",
+   "mg2",
+   "mg3",
+   "shotgun",
+   "shotgun2",
+   "shotgun3",
+   "tesla",
+   "tesla2",
+   "tesla3"
+  ],
+  "upgrades": [
+   "armor",
+   "cooling",
+   "frost",
+   "rocket",
+   "turret"
+  ],
+  "otherBoarKeys": [
+   "boar-island-quality",
+   "boar-island-v1"
+  ],
+  "aimKey": null
+ },
+ "saveExpected": {
+  "keys": [
+   "bestWave",
+   "coins",
+   "kills",
+   "nextWave",
+   "upgrades",
+   "version",
+   "weapons"
+  ],
+  "weapons": [
+   "cannon",
+   "cannon2",
+   "cannon3",
+   "mg",
+   "mg2",
+   "mg3",
+   "shotgun",
+   "shotgun2",
+   "shotgun3",
+   "tesla",
+   "tesla2",
+   "tesla3"
+  ],
+  "upgrades": [
+   "armor",
+   "cooling",
+   "frost",
+   "rocket",
+   "turret"
+  ]
+ },
+ "saveNewFields": {
+  "top": [],
+  "weapons": [],
+  "upgrades": []
+ },
+ "csp": "clean",
+ "errors": [],
+ "frameLost": false,
+ "wallSeconds": 1435
+}

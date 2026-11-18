@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>שוער וקהל · תצוגת נכסים</title>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="preview.css">
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<header><p>כדורגל · חבילת תגובות</p><h1>השוער והיציע</h1><nav><a href="REPORT.md">דוח מדידות</a><a href="qa/report.html">דוח QA</a><a href="LICENSES.md">מקורות ורישיונות</a></nav></header>
+<main>
+<section aria-labelledby="motion-title"><div class="section-head"><h2 id="motion-title">תגובות השוער</h2><span id="clip-info"></span></div>
+<div class="controls"><label>קליפ <select id="clip"></select></label><button id="play" type="button">השהיה</button><button id="restart" type="button">התחלה</button><label>זווית <select id="view"><option value="threeQuarter">שלושה רבעים</option><option value="front">חזית</option><option value="side">צד</option></select></label></div>
+<div id="stage"><canvas id="canvas" aria-label="תצוגת תנועת השוער"></canvas><span id="time" dir="ltr"></span></div>
+<label class="seek">זמן <input id="seek" type="range" min="0" max="1" step="0.001" value="0"></label>
+<p id="status" role="status">טוען את השוער…</p><p id="events"></p>
+<div class="sheets"><a href="sheets/keeper_after_goal.png">8 פריימים · אחרי שער</a><a href="sheets/disappointed.png">8 פריימים · אכזבה</a><a href="sheets/keeper_celebrate.png">8 פריימים · חגיגה</a></div>
+</section>
+<section aria-labelledby="crowd-title"><div class="section-head"><h2 id="crowd-title">ידיים למעלה</h2><span>16 וריאציות · 256×256 לתא</span></div><p>בכל זוג: התא המקורי ותא החגיגה התואם. כל שלושת האוהדים בתא החדש מרימים שתי ידיים.</p><div id="crowd-grid"></div><details><summary>האטלס המלא · 1024×2048</summary><img class="atlas" src="runtime/crowd-atlas.png" width="1024" height="2048" alt="אטלס בן 32 תאים: 16 מקוריים ותחתיהם מיפוי לתאי החגיגה התואמים"><a href="runtime/crowd-manifest.json">מניפסט: תאים ו־UV</a></details></section>
+</main><footer>נכסים מקוריים ו־CC0 · ללא מותגים · תצוגה מקומית</footer>
+<script type="module" src="source/preview.mjs"></script>
+</html>

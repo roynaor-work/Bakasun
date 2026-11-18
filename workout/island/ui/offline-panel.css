@@ -1,0 +1,16 @@
+/* Offline v25 panel (ui/offline-panel.mjs): package rows, storage line, install hint */
+.offline-panel-v25 .offline-packs{display:grid;gap:6px}
+.offline-pack{display:grid;grid-template-columns:1fr auto auto auto;align-items:center;gap:8px;padding:6px 10px;border-radius:12px;background:rgba(255,255,255,.55);min-height:48px}
+.offline-pack[data-complete="true"]::before{content:none}
+.offline-pack-name{font-weight:700}
+.offline-pack-size{font-variant-numeric:tabular-nums;opacity:.8;direction:ltr;unicode-bidi:isolate}
+.offline-pack-state{font-size:.9rem;opacity:.9}
+.offline-pack[data-state="ready"] .offline-pack-state{color:#1b7f3a}
+.offline-pack[data-state="update"] .offline-pack-state{color:#9a5b00}
+.offline-pack[data-state="downloading"] .offline-pack-state{color:#0b5fa5}
+.offline-panel-v25 .offline-pack-action{min-height:40px;padding:4px 12px;font-size:.9rem}
+.offline-panel-v25 .offline-pack-action.offline-danger{background:#b3261e;color:#fff;border-color:#b3261e}
+.offline-storage,.offline-install-hint{margin:0;font-size:.9rem;opacity:.9}
+.offline-actions{display:flex;flex-wrap:wrap;gap:8px}
+.offline-actions button{flex:1 1 180px}
+@media (max-width:600px){.offline-pack{grid-template-columns:1fr auto;grid-template-areas:"name size" "state action"}.offline-pack-name{grid-area:name}.offline-pack-size{grid-area:size}.offline-pack-state{grid-area:state}.offline-pack-action{grid-area:action;justify-self:end}}

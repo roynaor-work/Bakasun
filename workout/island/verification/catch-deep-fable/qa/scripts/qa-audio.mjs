@@ -1,0 +1,10 @@
+import {writeFile} from 'node:fs/promises';
+import {launch, BASE} from './common.mjs';
+const browser = await launch(['--autoplay-policy=no-user-gesture-required']);
+const page = await browser.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
+await page.goto(`${BASE}tools/catch-audio-probe.html?auto=1`);
+await page.waitForFunction('window.done===true', null, {timeout: 240000});
+const report = await page.evaluate(() => window.report);
+console.log(JSON.stringify(report, null, 1)); console.log('errors', errors);
+await writeFile(new URL('../measurements-audio.json', import.meta.url), JSON.stringify({report, errors}, null, 1));
+await browser.close();

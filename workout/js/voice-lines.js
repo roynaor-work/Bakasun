@@ -3,6 +3,7 @@ import { SAY, SAY_TTS } from './say.js?v=20261010-camera-1';
 import { SAY_UI, SAY_UI_TTS } from './say-ui.js?v=20261010-camera-1';
 import { EXERCISES } from './exercises.js?v=20261010-camera-1';
 import { numWord, numWordTts } from './count.js?v=20261010-camera-1';
+import { COPY_LINES, CHEER_TEXTS } from './voice-copy.js?v=20261010-camera-1';
 import { PLACEMENT_LINES } from '../cam-lab/placement-lines.mjs?v=20261010-camera-1';
 
 export const VOICE_VERSION = '20261010-camera-1';
@@ -144,6 +145,15 @@ for (const [id, text] of Object.entries(FRAGMENTS)) {
 for (const [id, text, tts, lang] of [['goal', 'Gooooooooooool!', 'Gooooooooooool!', 'pt-BR'], ['dunk', 'בום!', 'בּוּם!', 'he-IL'], ['three', 'סל!', 'סַל!', 'he-IL'], ['sprint', 'מקום ראשון!', 'מָקוֹם רִאשׁוֹן!', 'he-IL']])
   add(`celebration-${id}`, text, tts, `workout/js/games/celebrate.js / celebrate3d.js: say; הקלטה קיימת workout/snd/${id}.mp4`, lang);
 
+// נוסחים חדשים (voice-copy.js); מדלגים על משפט שכבר קיים בקטלוג באותו טקסט, כדי לא להקליט פעמיים
+{
+  const seen = new Set(lines.map(l => normalizeVoice(l.text)));
+  for (const c of COPY_LINES) {
+    if (seen.has(normalizeVoice(c.text))) continue;
+    seen.add(normalizeVoice(c.text));
+    add(c.id, c.text, c.tts, `workout/js/voice-copy.js: COPY.${c.key}; workout/js/app.js`);
+  }
+}
 export const VOICE_LINES = Object.freeze(lines);
 export const VOICE_BY_ID = Object.freeze(Object.fromEntries(lines.map(line => [line.id, line])));
 const exact = new Map(lines.flatMap(line => [
@@ -191,8 +201,11 @@ export function splitVoiceText(text, lang = 'he-IL') {
   if (streak) return [...numberParts(Number(streak[1])), part('streak-after'), ...splitVoiceText(streak[2])];
   if (text.startsWith(FRAGMENTS['first-workout']))
     return [part('first-workout'), ...splitVoiceText(text.slice(FRAGMENTS['first-workout'].length))];
-  if (text.endsWith(FRAGMENTS.encourage))
-    return [...splitVoiceText(stripEdge(text.slice(0, -FRAGMENTS.encourage.length))), part('encourage')];
+  for (const cheer of CHEER_TEXTS) {
+    if (!text.endsWith(cheer) || text.length === cheer.length) continue;
+    const cheerLine = exact.get(`he-IL:${normalizeVoice(cheer)}`);
+    return [...splitVoiceText(stripEdge(text.slice(0, -cheer.length))), part(cheerLine.id)];
+  }
   return [{ id: null, text }];
 }
 

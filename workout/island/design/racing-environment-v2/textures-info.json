@@ -1,0 +1,363 @@
+{
+  "generator": "build_textures.py",
+  "seed": 20261107,
+  "license": "CC0-1.0",
+  "textures": [
+    {
+      "file": "textures/asphalt-clean.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        4,
+        4
+      ],
+      "roughness": 0.94,
+      "bytes": 18134,
+      "edgeMaxDelta": 0,
+      "sha256": "1e60fe993d8cf90fc74b705c079b5d93e1d697b9414fac19262e122d00892f3f",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic 4/18/92-cell value noise and quantized mineral aggregate."
+    },
+    {
+      "file": "textures/asphalt-skid.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        4,
+        4
+      ],
+      "roughness": 0.92,
+      "bytes": 23770,
+      "edgeMaxDelta": 0,
+      "sha256": "9492b635c8c6dcc0b82ca96b06340d37f8849bafdeaf940a109a9db778111085",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Clean asphalt plus two periodic sinusoidal rubber tracks with tread interruptions."
+    },
+    {
+      "file": "textures/asphalt-pits.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        4,
+        4
+      ],
+      "roughness": 0.9,
+      "bytes": 25244,
+      "edgeMaxDelta": 0,
+      "sha256": "766e535849bc9d6774c781a153997d8a9a412035bbc0f8f4ecdd985e848a27e4",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic compacted aggregate with low contrast oil stains; no painted branding."
+    },
+    {
+      "file": "textures/kerb-red-white.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        1
+      ],
+      "roughness": 0.82,
+      "bytes": 22010,
+      "edgeMaxDelta": 0,
+      "sha256": "693aa3061f6a2f1ad0f2673572f6f4987a0752e10ca2599799426c1707587d3b",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Four alternating periodic paint bands with concrete grain; stripes cross U."
+    },
+    {
+      "file": "textures/kerb-normal.webp",
+      "width": 256,
+      "height": 256,
+      "type": "normal",
+      "colorSpace": "linear",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        1
+      ],
+      "roughness": 0.82,
+      "bytes": 26880,
+      "edgeMaxDelta": 0,
+      "sha256": "436fee8775c9555a3baf352f9dbf9df4f133a20e134b684b7177033364f7b1b3",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Analytic derivative of periodic kerb ribs; RGB tangent normal, positive green Y."
+    },
+    {
+      "file": "textures/gravel-runoff.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        2
+      ],
+      "roughness": 0.99,
+      "bytes": 21912,
+      "edgeMaxDelta": 0,
+      "sha256": "24af869a848a42976229a4567b85a8c888da14f107a73aeb7fb1016fb4fb0eff",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "1,450 original toroidally wrapped pebble ellipses over periodic sand."
+    },
+    {
+      "file": "textures/grass-01.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        2
+      ],
+      "roughness": 0.99,
+      "bytes": 26742,
+      "edgeMaxDelta": 0,
+      "sha256": "fd4f349ea8f06f17451bd0365b70fcfd15202d1116e8c5e1fb5ee1a577b67d99",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic low frequency turf field plus 3,800 independently drawn wrapped grass blades."
+    },
+    {
+      "file": "textures/grass-02.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        2
+      ],
+      "roughness": 0.99,
+      "bytes": 26542,
+      "edgeMaxDelta": 0,
+      "sha256": "02937614ba51591f86e97175be5559d4beb78c8f02025cb67827613900054d0a",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic low frequency turf field plus 3,800 independently drawn wrapped grass blades."
+    },
+    {
+      "file": "textures/grass-03.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        2,
+        2
+      ],
+      "roughness": 0.99,
+      "bytes": 26598,
+      "edgeMaxDelta": 0,
+      "sha256": "6f5aa3744143902f53835f449f37892b0f32ab6e4f5446843f820c1e5d5b133f",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic low frequency turf field plus 3,800 independently drawn wrapped grass blades."
+    },
+    {
+      "file": "textures/concrete-barrier.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        4,
+        2
+      ],
+      "roughness": 0.97,
+      "bytes": 16318,
+      "edgeMaxDelta": 0,
+      "sha256": "0a3edd93ebc22bff818690cd1f7dcd357e1421908c15b9252a92ac7b9a03890a",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic cement mottling, pores and shallow casting seams, no baked directional light."
+    },
+    {
+      "file": "textures/tire-barrier.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        1,
+        1
+      ],
+      "roughness": 0.94,
+      "bytes": 14166,
+      "edgeMaxDelta": 0,
+      "sha256": "f01b073f5603866f31b46070256834b02815a5bc9c9625a1d73f3dd018b72fc7",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Periodic four-column chevron tread with original rubber grain; no sidewall lettering."
+    },
+    {
+      "file": "textures/paint-white.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        1,
+        1
+      ],
+      "roughness": 0.86,
+      "bytes": 22946,
+      "edgeMaxDelta": 0,
+      "sha256": "2fcbed6ac547ed303dadc0079070e594926fae2685d42d4055b2fc7c047c5ee1",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Original periodic worn paint surface; use on a narrow strip mesh, not an alpha decal."
+    },
+    {
+      "file": "textures/paint-yellow.webp",
+      "width": 256,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": true,
+      "tileMeters": [
+        1,
+        1
+      ],
+      "roughness": 0.86,
+      "bytes": 22946,
+      "edgeMaxDelta": 0,
+      "sha256": "147ab945799ef3de84f50caed15bfb5fbbded49d5268edd3701a1c936f2305a1",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Original periodic worn paint surface; use on a narrow strip mesh, not an alpha decal."
+    },
+    {
+      "file": "textures/crowd-atlas.webp",
+      "width": 512,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": false,
+      "tileMeters": null,
+      "roughness": 0.96,
+      "bytes": 8676,
+      "edgeMaxDelta": null,
+      "sha256": "f415a0ba750f4242d8c31b6ae85633b3c037f4cf9422ffda95cb641b1c1a4b71",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "196 invented ink-and-flat-colour spectators drawn from primitive strokes; no photos or real identities. Seven 32px bands begin at image y=16.",
+      "bandsTopLeftPixels": [
+        [
+          0,
+          16,
+          512,
+          48
+        ],
+        [
+          0,
+          48,
+          512,
+          80
+        ],
+        [
+          0,
+          80,
+          512,
+          112
+        ],
+        [
+          0,
+          112,
+          512,
+          144
+        ],
+        [
+          0,
+          144,
+          512,
+          176
+        ],
+        [
+          0,
+          176,
+          512,
+          208
+        ],
+        [
+          0,
+          208,
+          512,
+          240
+        ]
+      ],
+      "gltfVRange": [
+        [
+          0.0625,
+          0.1875
+        ],
+        [
+          0.1875,
+          0.3125
+        ],
+        [
+          0.3125,
+          0.4375
+        ],
+        [
+          0.4375,
+          0.5625
+        ],
+        [
+          0.5625,
+          0.6875
+        ],
+        [
+          0.6875,
+          0.8125
+        ],
+        [
+          0.8125,
+          0.9375
+        ]
+      ]
+    },
+    {
+      "file": "textures/sponsor-race.webp",
+      "width": 512,
+      "height": 256,
+      "type": "baseColor",
+      "colorSpace": "sRGB",
+      "tileable": false,
+      "tileMeters": null,
+      "roughness": 0.8,
+      "bytes": 1418,
+      "edgeMaxDelta": null,
+      "sha256": "bf07cf40aafaf3c48cbd2b61bc1ed5d922388d09fc19df5e695c022ef5861864",
+      "source": "build_textures.py",
+      "license": "CC0-1.0",
+      "recipe": "Original navy/orange geometry and bespoke RACE letter strokes; no font file, brand or external source."
+    }
+  ],
+  "totalBytes": 304302,
+  "normalConvention": "OpenGL tangent space +Y; do not apply sRGB decoding",
+  "edgeMethod": "Inclusive periodic noise lattice and wrapped raster features; lossless encoding retains identical opposite border pixels."
+}

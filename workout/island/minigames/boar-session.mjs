@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-3';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-18';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */
@@ -25,8 +25,20 @@ export function runBoarSession(ctx) {
   frame=doc.createElement('iframe');frame.className='boar-game-frame';
   frame.title='אי החזירים — הגנת החווה';frame.setAttribute('allow','autoplay; fullscreen');
   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
+  // Forward F's kill switches into the embedded campaign, including when launched from the island URL.
+  {const q=new URLSearchParams(globalThis.location?.search);for(const key of ['phoneFixes','phoneFixF'])if(q.has(key))url.searchParams.set(key,q.get(key));}
   if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
+  // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
+  if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');
+  if(new URLSearchParams(globalThis.location?.search).get('boarHud')==='v20')url.searchParams.set('boarHud','v20');
+  if(new URLSearchParams(globalThis.location?.search).get('boarStick')==='v20')url.searchParams.set('boarStick','v20');
+  // 14/11/2026: `?boarAim=v23` (the v23 stick, no v24 aim help) and `?boarAim=axes` (the per-axis speeds before QA 3) reach the frame too.
+  {const aim=new URLSearchParams(globalThis.location?.search).get('boarAim');if(aim==='v23'||aim==='axes')url.searchParams.set('boarAim',aim);}
+  // 14/11/2026 v24.1: `?boarAim=v24` (the v24 stick, before the v24.1 sensitivity) and `?boarFx=v24` (the v24 tracers and four sounds) reach the frame too.
+  {const q=new URLSearchParams(globalThis.location?.search);if(q.get('boarAim')==='v24')url.searchParams.set('boarAim','v24');if(q.get('boarFx')==='v24')url.searchParams.set('boarFx','v24');}
+  // QA only: `?adapt=1` on the island URL keeps the game's adaptive resolution running under `?qa=1` (it is off there by default), to measure re-size hitches.
+  if(new URLSearchParams(globalThis.location?.search).get('adapt')==='1')url.searchParams.set('adapt','1');
   const failed=()=>{if(disposed)return;error='reason.gameStart';ctx.warning.hidden=false;ctx.warning.textContent=ctx.t('boar.loadError');};
   listen(frame,'load',()=>{
     if(disposed)return;

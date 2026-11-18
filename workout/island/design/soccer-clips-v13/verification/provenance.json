@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      }
+    },
+    {
+      "path": "README.md",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 5442,
+      "sha256": "039a74ab86e84c928dedb10b47bb2d0c45dcdb78a17462bf12d3e0380f169387"
+    },
+    {
+      "path": "REPORT.md",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 8026,
+      "sha256": "7a98a439daec433f46cb9fd046904cac1a12c5be696e2df32742299c03d34753"
+    },
+    {
+      "path": "measure.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/measure.mjs"
+      },
+      "bytes": 10267,
+      "sha256": "9dbb289b655ce745a70b169dc4078cfbdd43fd210980c025d4ab5617f785bbba"
+    },
+    {
+      "path": "preview.css",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/preview.css"
+      },
+      "bytes": 7974,
+      "sha256": "2f8a300c5b83f2620864e6c55e9615694c52c8762ff3edebbe18cab3d9256fc6"
+    },
+    {
+      "path": "preview.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/preview.html"
+      },
+      "bytes": 3803,
+      "sha256": "4e8848bb9c2c9c9c5edfdd5c8c31515ebfcca5ceda934935b6b2142add9151de"
+    },
+    {
+      "path": "preview.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/preview.mjs"
+      },
+      "bytes": 13568,
+      "sha256": "739df86c9272456f5f130e3efca879e67833fe230980710ec3e62ef2aaa30e9b"
+    },
+    {
+      "path": "qa-register.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/qa-register.mjs"
+      },
+      "bytes": 716,
+      "sha256": "469478b7a010e5cd0f525fa9effd31b56e92903461126104540fb7757ce2eba5"
+    },
+    {
+      "path": "qa-report.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/qa-report.mjs"
+      },
+      "bytes": 4336,
+      "sha256": "dd4799b3ec24f0cec6e6aab7aaf284fe37e23fe14b16963ecfc6e60960ca0865"
+    },
+    {
+      "path": "qa-sources.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/qa-sources.mjs"
+      },
+      "bytes": 4987,
+      "sha256": "eae57d3b3cae91a83b47b5bcde12a5bf8f2abe9922099fd873bd682fdc6cd3ab"
+    },
+    {
+      "path": "runtime/catalog.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 79135,
+      "sha256": "f25188903ea5520628bf00ca2350a8c03a9964376545e29b2624b247c0d94e2c"
+    },
+    {
+      "path": "runtime/clips/chest_control.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 780440,
+      "sha256": "e26e0afef856fdd0ccc3cc87ad28a3b37d37b675c501f6c239dd3b9845557389"
+    },
+    {
+      "path": "runtime/clips/goal_kick.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 784328,
+      "sha256": "37ccbc42d2fd8f2f398d61d625db62af6ddaefef0fee3a24a43503124255eda8"
+    },
+    {
+      "path": "runtime/clips/keeper_celebrate.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 785744,
+      "sha256": "654a0cecce7930e0afcd701c2591c5fccdb8a0dccd57be2b3eb849d95883255c"
+    },
+    {
+      "path": "runtime/clips/keeper_throw.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 780480,
+      "sha256": "72e2971883f87716691dcc333c8c360540466b45e39f1430ac2453bafcdb18ec"
+    },
+    {
+      "path": "runtime/clips/lob_pass.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 780444,
+      "sha256": "801c98d550084d9b43e856db27729af5f1cf9d266a94f140737850cae4f70008"
+    },
+    {
+      "path": "runtime/clips/slide_tackle.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 778892,
+      "sha256": "112781973d042fbbdea19719e0d43c3e13dbc088934c57e7a0bf0d8e862788e4"
+    },
+    {
+      "path": "runtime/clips/throw_in.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 782564,
+      "sha256": "8934a57db6fe9b39a2c3d2a7ff85f460f3480ac01cb3a709b5b8fa12d0f021ae"
+    },
+    {
+      "path": "runtime/clips/volley.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 motion; CC0 fictional mesh/skin/materials from soccer-header-v1/runtime/reference/idle_relaxed.glb",
+        "generator": "source/author.mjs + source/bake.mjs"
+      },
+      "bytes": 780440,
+      "sha256": "ea5612e1f3ba15590c9e8a569052134879d12f2b3435b65d0cbc633c0301ca19"
+    },
+    {
+      "path": "runtime/motions.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 414538,
+      "sha256": "16444ae8add07b022a479d911f685a23da19dfc73fe34535b31d3609f6193175"
+    },
+    {
+      "path": "runtime/player.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 copy",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/runtime/player.mjs"
+      },
+      "bytes": 6354,
+      "sha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79"
+    },
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 copy",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb"
+      },
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 copy",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/runtime/reference/run.glb"
+      },
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934"
+    },
+    {
+      "path": "source/author.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 14914,
+      "sha256": "ad6c5ef3c9346eb5f13fedb87884fc0d98f4ee7fdebf70658ca24b3ff1a7839d"
+    },
+    {
+      "path": "source/bake.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/source/bake.mjs"
+      },
+      "bytes": 3293,
+      "sha256": "01b90e36bb720f5b2dd65d06dce17a5319c86a687e771580b852e12ed9bee8ef"
+    },
+    {
+      "path": "source/capture.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 3648,
+      "sha256": "2697ee9f3e4d44307627a418e8108383e1fe2008d46646fa8a3f526480d34bfa"
+    },
+    {
+      "path": "source/compose-sheets.py",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 1318,
+      "sha256": "52726f9d08645a91dbe69d2ff1d608ef808c0ce1af5a462dd7dea04d3a312d8b"
+    },
+    {
+      "path": "source/glb.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 copy",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/source/glb.mjs"
+      },
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "source/measure-transitions.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 adaptation",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/source/measure-transitions.mjs"
+      },
+      "bytes": 8647,
+      "sha256": "0e3c6e79771aed6bec9ce315346aebf60740239d8362e0f12adc731143798103"
+    },
+    {
+      "path": "source/report.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 14033,
+      "sha256": "9c2e9083f7910c514a9b6156b77d2d3c07b502770dc1cdd8860f0403a970f067"
+    },
+    {
+      "path": "source/rig.mjs",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "CC0 copy",
+        "commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+        "path": "workout/island/design/soccer-header-v1/source/rig.mjs"
+      },
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "verification/browser.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 2674,
+      "sha256": "d81960344f64f9584ddcecedb2633f480d5a7edb764d6bc300c9c797e25a8ec3"
+    },
+    {
+      "path": "verification/preview-desktop.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 148862,
+      "sha256": "5cf2d88cc5650421b90439607fe311d0d8ddbff5b70e4f93c0fc1942c45be048"
+    },
+    {
+      "path": "verification/preview-mobile.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 81115,
+      "sha256": "2571590cdda52caa5d70d00373250bcdbe696da2c59dcabc3a154a651e8e2624"
+    },
+    {
+      "path": "verification/provenance.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      }
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--chest_control.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6803,
+      "sha256": "8b2288bb97b3e9649085b5d6e3cc4ac86c25a5cab4cb395b0535e65db8611d46"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--chest_control.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 11185,
+      "sha256": "5ae176c02765e9fa015c0a5d3cf7143be72d3375529780df27d062a231d66d7a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--goal_kick.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6786,
+      "sha256": "e818d08012a6c4e5a55f9bb7801e172834064cf9c75ec4357e86570391159bf1"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--goal_kick.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 12272,
+      "sha256": "eeb85f7b79d5fa6360e782517410b79fcf67276947e35cd58537eabf24024e02"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--idle_keeper.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6213,
+      "sha256": "5eca33a2fb109c09b3915e311a16b993529632153bb6130624a3a725fe42182e"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--idle_keeper.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 9270,
+      "sha256": "9fc76b9e7953c7e1e0a0ac9927e2ce7873146bde867d6cb73c6bef24b1be1a34"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--idle_relaxed.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6219,
+      "sha256": "3a2171d5b22a5d335df6cc973a79e79af4376f111bcb8f0cf54dcd68c65555bd"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--idle_relaxed.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 9277,
+      "sha256": "a9266ec5af67bbbbfa010ee8a1f87b31c260a3b0d7364ec8e36d4472a3f69387"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--keeper_celebrate.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6150,
+      "sha256": "29c0abe7e87d0ae27b913471280a1a243ee4976c2da12edd2895b7d506e8679c"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--keeper_celebrate.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 10522,
+      "sha256": "c55f515eb55a622a5aa28bb70d084590c306bd268745b4ab870dcfea277a84de"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--keeper_throw.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6813,
+      "sha256": "d2c5c3b6f8a03b2b2031b8fbe77e77e696435ce97271aff93344afffbab4dae6"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--keeper_throw.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 12152,
+      "sha256": "ca128764373466f80614e1a256e758f071508a77267c0180e0ddc9306cc0e75d"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--lob_pass.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6773,
+      "sha256": "bba6c387ebfe85d1b248f0cd1e125393b6c925667bfe34ea7cf43f634d364e75"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--lob_pass.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 11712,
+      "sha256": "e5de91e8aa1df4ccda2e2e193e74d0f2b3e6d42a6ec832667e20e4f63c59a204"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--slide_tackle.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 11997,
+      "sha256": "2256072a54c1ef3b3acf8e30349ccb3460e0efdac0ee773b33a1f74e736688f1"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--slide_tackle.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 15381,
+      "sha256": "1aae0a9f3bc1668ef33e937882184f6648b945e9bc9a9d8fa4d826e3bf354831"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--throw_in.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 7248,
+      "sha256": "2bf79daddd50cdfa9acd8aa4d62e9809f607605188fae277820197971c0076b8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--throw_in.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 12071,
+      "sha256": "9d0320908d8f721a2683c8e65029ce08200d6a1d5e85be52538a506deef31cde"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--volley.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 6769,
+      "sha256": "a7f8f7263df834518b9d3881c9cbe2c8171ba6d079b273c87298743449040914"
+    },
+    {
+      "path": "verification/qa/clips/soccer-clips-v13--volley.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 12217,
+      "sha256": "79c9bdfc2e5c5c7a1faf19ad890806f8b093a968a390f334a62937951893695b"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 9807,
+      "sha256": "f578ed9944b83629a34bf8b0ecafa3bf5e228396c6d99ea00844713b768ab1e6"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 126846,
+      "sha256": "55c5ab5767c4125fed0433051e636fe282ec533c998a19bfadcb3c3ed954ab4e"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--chest_control.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26965,
+      "sha256": "ef489a7c277cec163fb9e814445a25ae8c84a2e028598eac24d05a1bbaf715b9"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--goal_kick.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26963,
+      "sha256": "e89ebe2c86afe80df3aa4ba942d8c1753c2dc2fa9c33a803b2ccf7f924fa7527"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--idle_keeper.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26223,
+      "sha256": "05e4a965f0f2b996a7689f21c6e76a5ea903322d11ec3c90913ace6ffd788fc4"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--idle_relaxed.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26225,
+      "sha256": "5ab6591ba1fd3b0a8f647a44be4da5b85dc5ff88a85a29ff4bf03cc14f5aa391"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--keeper_celebrate.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26233,
+      "sha256": "2e464ec435bad43bf3de54279e0b01e44367968bb229a02d200584a716359ab9"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--keeper_throw.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26969,
+      "sha256": "03c2cd29b82bbc5d91c7c40be232e74bfd023f326b709d7031765603bd39ba5e"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--lob_pass.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26969,
+      "sha256": "d2de31895dbcb3bc53c11b5c580264bc3c85410c15632212a0c984a942fcfdc7"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--slide_tackle.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26969,
+      "sha256": "609ca4ac0b07729f6b6e1d9414f7400ceb7678673e0343703b8ff1e56915d8e3"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--throw_in.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26961,
+      "sha256": "f877a846912231a9588b17c48c7561011ad6fda3d10952e59fa90c6e855db73d"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-clips-v13--volley.svg",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original asset measurement; pinned CC0 motion-qa-v1 output",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+      },
+      "bytes": 26957,
+      "sha256": "5c1de385ba4d20c3f8cefd9d6054492e7472b770b455a7b4703bc0ce3081cd84"
+    },
+    {
+      "path": "verification/requirements.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 26135,
+      "sha256": "c1391a6169866c06903bea1005d2419712c280f5e4e7e88caf25cc0ce6edab50"
+    },
+    {
+      "path": "verification/sheets/chest_control.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 120112,
+      "sha256": "44a44108ee8dd1125ec189e1f5b74882027f84f16b029f5960678424d6520ac5"
+    },
+    {
+      "path": "verification/sheets/goal_kick.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 124545,
+      "sha256": "4c3c84d1dd4decd55e3583bf63c65da32f1dba2601155379258994f11464f9d6"
+    },
+    {
+      "path": "verification/sheets/keeper_celebrate.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 117636,
+      "sha256": "9a29f09fddcdd4284c24f38232a3c8bc08e251f1407b8c446ee2c8ee18106af0"
+    },
+    {
+      "path": "verification/sheets/keeper_throw.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 117696,
+      "sha256": "ccd0fc39a52e8bc1503c4c09d8e251713adee876487a444403460aec2b0f036e"
+    },
+    {
+      "path": "verification/sheets/lob_pass.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 123997,
+      "sha256": "65c97cea22da17e9b2540c4a686cb84e965544a87bf8cfcf5e95e493670e1128"
+    },
+    {
+      "path": "verification/sheets/slide_tackle.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 126214,
+      "sha256": "07ef9f035f8891cfa286aa1ce6f57362c2e2ad0f52a93ee439d28d3a7decc3c4"
+    },
+    {
+      "path": "verification/sheets/throw_in.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 118504,
+      "sha256": "cfee1300a8f24e6e5c3fb9b71e2344ed391141d4e82b5843c298d91d94ca7610"
+    },
+    {
+      "path": "verification/sheets/volley.png",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original Chromium render of CC0 assets; eight frames composed without external imagery",
+        "generator": "source/capture.mjs + source/compose-sheets.py"
+      },
+      "bytes": 123626,
+      "sha256": "c75f521051b250b52a39266c1b277a8fa963208e82da9313bc43227aa076497b"
+    },
+    {
+      "path": "verification/transitions.json",
+      "license": "CC0-1.0",
+      "source": {
+        "kind": "Original CC0 task code, documentation, motion data or measurement evidence"
+      },
+      "bytes": 85924,
+      "sha256": "4d5e74adfb187de0d1edac051f37f4ab598d3c3e18066bac3e04e2c8aafeef66"
+    }
+  ]
+}

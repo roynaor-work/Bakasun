@@ -74,13 +74,13 @@ export function createTennisControls({root,config,onGesture=()=>{},onCancel=()=>
 
 /** Deliver buffered edges at zero simulation time, then one continuous sample.
  * A press/release entirely between frames therefore never becomes a lost tap. */
-export function applyTennisSample(model,sample,dt){
+export function applyTennisSample(model,sample,dt,{pressFires=false}={}){
  const active={...sample.previousHolding},base={move:sample.moveX,moveZ:sample.moveZ};
  const input=(extra={})=>({...base,serve:Boolean(active.serve),prepare:Boolean(active.hit||active.lob||active.drop),lob:Boolean(active.lob),drop:Boolean(active.drop),aim:sample.passAim,...extra});
  for(const event of sample.events){
   active[event.action]=event.type==='press';
   if(event.action==='serve')model.update(0,input({aim:event.aim}));
-  else if(event.type==='release'){model.update(0,input({swing:true,lob:event.action==='lob',drop:event.action==='drop',aim:event.aim}));model.update(0,input({swing:false}));}
+  else if(pressFires?event.type==='press':event.type==='release'){/* pressFires (v15 return meter): the stroke is judged the moment the finger lands, like the serve */model.update(0,input({swing:true,lob:event.action==='lob',drop:event.action==='drop',aim:event.aim}));model.update(0,input({swing:false}));}
  }
  Object.assign(active,sample.holding);
  const length=Math.hypot(sample.moveX,sample.moveZ),stickAim={x:sample.moveX,z:sample.moveZ,manual:length>0};

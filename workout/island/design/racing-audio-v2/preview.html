@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>מעבדת צלילי מירוץ</title>
+<style>
+:root{font-family:system-ui,sans-serif;background:#0b1015;color:#eff4f6;--lime:#d9ff64;--muted:#9aaebc}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:40px 24px 60px}
+header{border-top:3px solid var(--lime);padding:24px 0 30px;display:flex;justify-content:space-between;gap:20px;align-items:start}
+h1{font-size:clamp(30px,5vw,52px);margin:5px 0 12px;letter-spacing:-1.5px}p{color:var(--muted);line-height:1.6;margin:8px 0}
+.tag{font-size:12px;color:var(--lime);letter-spacing:2px}.badge{border:1px solid #3a4b34;padding:9px 14px;color:var(--lime);white-space:nowrap;border-radius:30px;font-size:12px}
+.panel{background:#141d25;border:1px solid #2a3946;border-radius:16px;padding:24px;margin-bottom:18px}
+.dashboard{display:grid;grid-template-columns:1fr 170px;gap:32px}.value{font-size:clamp(44px,7vw,76px);font-variant-numeric:tabular-nums;line-height:1.2;font-weight:750;display:block;direction:ltr;text-align:right}
+.gear .value{color:var(--lime)}label{display:block;color:var(--muted);font-size:14px}input[type=range]{width:100%;accent-color:var(--lime);min-height:44px;margin:12px 0 0;cursor:pointer}button,select{font:inherit;border:1px solid #405160;background:#22303b;color:#fff;border-radius:8px;padding:11px 17px;min-height:44px;cursor:pointer}
+button:hover{border-color:var(--lime)}button:disabled{opacity:.4;cursor:default}button[aria-pressed=true],.primary{background:var(--lime);color:#17200a;border-color:var(--lime)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #69cfff;outline-offset:4px}
+.row{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.row.spread{justify-content:space-between}.transport{margin-top:22px}#status{font-size:14px;min-height:24px;color:var(--lime)}.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}.level{font-size:12px;color:var(--muted)}.level:after{content:'';display:block;margin-top:10px;height:5px;background:linear-gradient(to left,var(--lime) var(--fill,0%),#2c3944 var(--fill,0%));border-radius:3px}
+.ambience{display:grid;grid-template-columns:1fr 1fr;gap:26px}.mix{max-width:200px}.library{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}article{padding:18px;background:#141d25;border:1px solid #2a3946;border-radius:12px}h2{font-size:21px;margin:30px 0 14px}h3{font-size:16px;margin:0}article p{font-size:12px;min-height:38px}article button{padding:7px 13px;font-size:13px}.formats{display:inline-flex;gap:10px;margin-right:12px;font-size:11px}a{color:#a8c9dc}footer{margin-top:26px;font-size:13px;line-height:1.8;color:var(--muted)}.small{font-size:12px}
+@media(max-width:760px){main{padding:20px 16px 40px}.library{grid-template-columns:repeat(2,1fr)}.dashboard{grid-template-columns:1fr 100px;gap:18px}.panel{padding:18px}.ambience{grid-template-columns:1fr}header{display:block}.badge{display:inline-block;margin-top:10px}.levels{gap:5px}.level{font-size:10px}.formats{margin-right:8px;gap:8px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+<main>
+  <header><div><div class="tag">חבילת אודיו מקורית · 02</div><h1>לשמוע את המירוץ.</h1><p>חמישה מצבי מנוע. שבעה הילוכים. כל שכבות המסלול.</p></div><span class="badge">16 צלילים · CC0</span></header>
+  <section class="panel" aria-label="סימולטור מנוע">
+    <div class="dashboard">
+      <div><label for="rpm">סיבובים לדקה</label><output id="rpmValue" class="value" for="rpm">4,000</output><input id="rpm" aria-label="סל״ד" type="range" min="4000" max="15000" step="50" value="4000"></div>
+      <div class="gear"><label for="gear">הילוך</label><output id="gearValue" class="value" for="gear">1</output><input id="gear" aria-label="הילוך" type="range" min="1" max="7" value="1"></div>
+    </div>
+    <div class="levels" aria-label="משקל לולאות המנוע"><div id="level-0" class="level">סרק</div><div id="level-1" class="level">נמוך</div><div id="level-2" class="level">בינוני</div><div id="level-3" class="level">גבוה</div><div id="level-4" class="level">קו אדום</div></div>
+    <div class="row spread transport"><div class="row"><button id="start" class="primary" disabled>הפעלת מנוע</button><button id="stop" disabled>עצירה</button><button id="up">הילוך +</button><button id="down">הילוך −</button></div><div class="row"><label for="format">פורמט</label><select id="format"><option value="ogg">OGG</option><option value="mp3">MP3</option></select><button id="resetFormat">החלפת פורמט</button></div></div>
+    <p id="status" role="status" aria-live="polite">טוען מניפסט…</p>
+    <p class="small">מעבר הדרגתי בין לולאות סמוכות, עם שינוי גובה הצליל. החלפת הילוך משנה סל״ד ומשמיעה קטיעה או מכת פליטה.</p>
+  </section>
+  <section class="panel ambience" aria-label="שכבות וערבול">
+    <div><div class="row spread"><label for="speed">מהירות רוח · <output id="speedValue" for="speed">160</output> קמ״ש</label><button id="wind" aria-pressed="false">רוח</button><button id="tyre" aria-pressed="false">חריקת צמיגים</button></div><input id="speed" type="range" min="0" max="320" value="160" aria-label="מהירות רוח"></div>
+    <div class="mix"><label for="volume">עוצמת האזנה</label><input id="volume" type="range" min="0" max="0.3" step="0.01" value="0.16"><p class="small">מרווח עוצמה לערבוב כמה צלילים יחד.</p></div>
+  </section>
+  <h2>ספריית הצלילים</h2><p class="small">השמעה בודדת לכל צליל; לולאות מנוגנות למחזור אחד. הקישורים מורידים את שני הפורמטים.</p>
+  <section id="assets" class="library" aria-label="כל 16 הצלילים"></section>
+  <footer>סינתזה מקורית בלבד, ללא הקלטות, מותגים או קולות אנושיים.<br><a href="REPORT.md">דוח מדידות והוראות</a> · <a href="manifest.json">מניפסט ונקודות לולאה</a> · <a href="LICENSES.md">מקורות ורישיונות</a><br>לפתיחה מקומית: להפעיל שרת HTTP בתיקייה ולפתוח את הדף. האודיו מתחיל לאחר לחיצה.</footer>
+</main>
+<script type="module" src="preview.mjs"></script>
+</html>

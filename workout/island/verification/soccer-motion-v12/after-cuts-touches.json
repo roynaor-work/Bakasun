@@ -1,0 +1,439 @@
+{
+ "mode": "v10 cuts and first touches (after) against v7 turns and no first touch (before)",
+ "cuts": [
+  {
+   "before": {
+    "angle": 45,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_right > v9_run"
+   },
+   "after": {
+    "angle": 45,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.8,
+    "worst": {
+     "pop": 19.8,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_right > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": 45,
+    "clip": "v10_cut_45_left",
+    "clipSeconds": 0.4,
+    "popMaxDeg": 29.8,
+    "worst": {
+     "pop": 29.8,
+     "bone": "LeftArm",
+     "state": "v10_cut_45_left",
+     "frame": 90
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_45_left > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": -45,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_left > v9_run"
+   },
+   "after": {
+    "angle": -45,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.8,
+    "worst": {
+     "pop": 19.8,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_left > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": -45,
+    "clip": "v10_cut_45_right",
+    "clipSeconds": 0.4,
+    "popMaxDeg": 15.7,
+    "worst": {
+     "pop": 15.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 1
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_45_right > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": 90,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_right > v9_run"
+   },
+   "after": {
+    "angle": 90,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.7,
+    "worst": {
+     "pop": 19.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_right > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": 90,
+    "clip": "v10_cut_90_left",
+    "clipSeconds": 0.467,
+    "popMaxDeg": 29.8,
+    "worst": {
+     "pop": 29.8,
+     "bone": "LeftArm",
+     "state": "v10_cut_90_left",
+     "frame": 90
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_90_left > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": -90,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_left > v9_run"
+   },
+   "after": {
+    "angle": -90,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.7,
+    "worst": {
+     "pop": 19.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_left > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": -90,
+    "clip": "v10_cut_90_right",
+    "clipSeconds": 0.467,
+    "popMaxDeg": 15.7,
+    "worst": {
+     "pop": 15.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 1
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_90_right > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": 135,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_right > v9_run"
+   },
+   "after": {
+    "angle": 135,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.7,
+    "worst": {
+     "pop": 19.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_right > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": 135,
+    "clip": "v10_cut_135_left",
+    "clipSeconds": 0.55,
+    "popMaxDeg": 29.8,
+    "worst": {
+     "pop": 29.8,
+     "bone": "LeftArm",
+     "state": "v10_cut_135_left",
+     "frame": 90
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_135_left > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": -135,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_left > v9_run"
+   },
+   "after": {
+    "angle": -135,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 19.7,
+    "worst": {
+     "pop": 19.7,
+     "bone": "LeftArm",
+     "state": "v10_run",
+     "frame": 112
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > turn_left > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": -135,
+    "clip": "v10_cut_135_right",
+    "clipSeconds": 0.55,
+    "popMaxDeg": 18.7,
+    "worst": {
+     "pop": 18.7,
+     "bone": "Root",
+     "state": "v10_run",
+     "frame": 126
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_135_right > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": 180,
+    "clip": "turn_right",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_right > v9_run"
+   },
+   "after": {
+    "angle": 180,
+    "clip": "v10_cut_180_left",
+    "clipSeconds": 0.6,
+    "popMaxDeg": 29.8,
+    "worst": {
+     "pop": 29.8,
+     "bone": "LeftArm",
+     "state": "v10_cut_180_left",
+     "frame": 90
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_180_left > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": 180,
+    "clip": "v10_cut_180_left",
+    "clipSeconds": 0.6,
+    "popMaxDeg": 29.8,
+    "worst": {
+     "pop": 29.8,
+     "bone": "LeftArm",
+     "state": "v10_cut_180_left",
+     "frame": 90
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_180_left > v10_run"
+   }
+  },
+  {
+   "before": {
+    "angle": -180,
+    "clip": "turn_left",
+    "clipSeconds": 0.36700000000000005,
+    "popMaxDeg": 21.7,
+    "worst": {
+     "pop": 21.7,
+     "bone": "LeftForeArm",
+     "state": "v9_run",
+     "frame": 5
+    },
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run > turn_left > v9_run"
+   },
+   "after": {
+    "angle": -180,
+    "clip": "v10_cut_180_right",
+    "clipSeconds": 0.6,
+    "popMaxDeg": 25,
+    "worst": {
+     "pop": 25,
+     "bone": "Root",
+     "state": "v10_run",
+     "frame": 132
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_180_right > v10_run"
+   },
+   "afterAllCuts": {
+    "angle": -180,
+    "clip": "v10_cut_180_right",
+    "clipSeconds": 0.6,
+    "popMaxDeg": 25,
+    "worst": {
+     "pop": 25,
+     "bone": "Root",
+     "state": "v10_run",
+     "frame": 132
+    },
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_cut_180_right > v10_run"
+   }
+  }
+ ],
+ "touches": [
+  {
+   "before": {
+    "running": true,
+    "height": 1.3,
+    "popMaxDeg": 21.4,
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run"
+   },
+   "after": {
+    "running": true,
+    "height": 1.3,
+    "popMaxDeg": 24.2,
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_first_touch_chest_running_quick > v10_run"
+   }
+  },
+  {
+   "before": {
+    "running": true,
+    "height": 0.7,
+    "popMaxDeg": 21.4,
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run"
+   },
+   "after": {
+    "running": true,
+    "height": 0.7,
+    "popMaxDeg": 16.5,
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_first_touch_thigh_running_quick > v10_run"
+   }
+  },
+  {
+   "before": {
+    "running": true,
+    "height": 0.11,
+    "popMaxDeg": 21.4,
+    "hipsStepMaxCm": 1.2,
+    "path": "v9_run"
+   },
+   "after": {
+    "running": true,
+    "height": 0.11,
+    "popMaxDeg": 24.2,
+    "hipsStepMaxCm": 1,
+    "path": "v10_run > v10_first_touch_inside_running_quick > v10_run"
+   }
+  },
+  {
+   "before": {
+    "running": false,
+    "height": 1.3,
+    "popMaxDeg": 10,
+    "hipsStepMaxCm": 0.5,
+    "path": "v9_idle_relaxed"
+   },
+   "after": {
+    "running": false,
+    "height": 1.3,
+    "popMaxDeg": 4.2,
+    "hipsStepMaxCm": 0.5,
+    "path": "v10_idle_relaxed > v10_first_touch_chest_standing_quick > v10_idle_relaxed"
+   }
+  },
+  {
+   "before": {
+    "running": false,
+    "height": 0.11,
+    "popMaxDeg": 10,
+    "hipsStepMaxCm": 0.5,
+    "path": "v9_idle_relaxed"
+   },
+   "after": {
+    "running": false,
+    "height": 0.11,
+    "popMaxDeg": 11.7,
+    "hipsStepMaxCm": 0.8,
+    "path": "v10_idle_relaxed > v10_first_touch_inside_standing_quick > v10_idle_relaxed"
+   }
+  }
+ ]
+}

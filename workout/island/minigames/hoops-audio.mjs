@@ -1,10 +1,35 @@
 /** Basketball presentation audio. The authored mix supplies gains, filters, layer
  * recipes and voice limits. Sound never changes the match or saved club state. */
-export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
+import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
+import {scoreCrowdSample} from './hoops-show.mjs';
+import {hoopsWhistleV241Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from './hoops-v241.mjs?v=island-v2-20261107-18';
+const phoneFixAEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?.search||'');return p.get('phoneFixes')!=='0'&&p.get('phoneFixA')!=='0';}catch{return true;}};
+/** A short, damped rim/ball impact. One deterministic PCM buffer per audio context, JavaScript only.
+ * Three inharmonic steel modes decay inside 180 ms, with an 8 ms contact transient and a short ball thump. */
+export function createBasketballRimBuffer(context){
+ const rate=context.sampleRate||44100,buffer=context.createBuffer(1,Math.round(rate*.18),rate),samples=buffer.getChannelData(0);let seed=1979,peak=0;
+ for(let i=0;i<samples.length;i++){const t=i/rate;seed=(Math.imul(seed,1664525)+1013904223)>>>0;const noise=(seed/4294967296)*2-1;
+  const metal=(.48*Math.sin(2*Math.PI*730*t)+.24*Math.sin(2*Math.PI*1213*t)+.12*Math.sin(2*Math.PI*2247*t))*Math.exp(-t/.025);
+  const contact=.28*noise*Math.exp(-t/.008),ball=.23*Math.sin(2*Math.PI*155*t)*Math.exp(-t/.018);
+  const end=Math.min(1,(samples.length-i)/(rate*.012));samples[i]=(metal+contact+ball)*end;peak=Math.max(peak,Math.abs(samples[i]));}
+ if(peak)for(let i=0;i<samples.length;i++)samples[i]*=.85/peak;
+ return buffer;
+}
+const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
+// Sneaker squeak on every fast dribble: basketball/shoes.ogg is a 1.7 kHz lead-in that drops
+// to a pure 1.08 kHz tone (audio-forensics 11/11/2026: 34 squeaks in 3 minutes of live play,
+// the loudest thing in the frame). Roy heard it as "a strange whistle during play".
+// Off by default; ?hoopsSqueak=1 restores it. Steals and feel cues keep the sample.
+const squeakOn=()=>{try{return new URLSearchParams(globalThis.location?.search||'').get('hoopsSqueak')==='1';}catch{return false;}};
+// v24.1 (Roy: "a referee whistle on a steal"): `refereeWhistles` plays the Codex pack's short whistle on a steal or an intercepted pass and its long
+// whistle on a foul (hoops-v241.mjs); `?hoopsWhistleV241=0` restores v24 (a shoe squeak on a steal, the old sample on fouls).
+export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,clock=wallClock,dribbleSqueak=squeakOn(),refereeWhistles=hoopsWhistleV241Enabled(),phoneFix=phoneFixAEnabled()}={}){
  const mixURL=new URL('../design/audio/mix.json',import.meta.url);
  const aliases={bounce:'basketball/bounce',swish:'basketball/swish',rim:'basketball/rim',shoes:'basketball/shoes',buzzer:'basketball/buzzer',crowd:'basketball/crowd-excited',calm:'basketball/crowd-calm',ambience:'basketball/ambience-loop',opening:'scenes/opening',victory:'scenes/victory',defeat:'scenes/defeat'};
- const buffers=new Map(),specs=new Map(),active=new Set(),last=new Map(),played={};
- let context,master,bedGain,limiter,pauseTimer,duckTimer,bed=null,mix=null,paused=false,disposed=false,muted=false,decoded=false,openingPlayed=false,final=false,holds=[];
+ const buffers=new Map(),specs=new Map(),active=new Set(),last=new Map(),played={},altDecoded=[],referee={steal:0,foul:0,fallback:0,gated:0};
+ let context,master,bedGain,limiter,pauseTimer,duckTimer,bed=null,mix=null,paused=false,disposed=false,muted=false,decoded=false,openingPlayed=false,final=false,holds=[],jumpBalls=0;
+ // Whistle spacing runs on the wall clock (the context may not exist yet).
+ const gate=createWhistleGate(WHISTLE_SPACING.hoops);
  const db=n=>Math.pow(10,n/20),fade=()=>Math.max(.001,(mix?.playback?.start_stop_fade_ms??40)/1000);
  const files=(async()=>{
   try{
@@ -15,7 +40,9 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
   // these three existing local samples rather than substituting a buzzer.
   for(const name of ['pass','board','whistle'])if(config.samples?.[name])specs.set(name,{url:new URL('../'+config.samples[name],import.meta.url),recommended_gain_linear:.5,max_voices:2,cooldown_ms:100});
   if(!mix)for(const [name,path] of Object.entries(config.samples||{}))if(!specs.has(aliases[name]||name))specs.set(aliases[name]||name,{url:new URL('../'+path,import.meta.url),recommended_gain_linear:.5,max_voices:2,cooldown_ms:100});
-  return Promise.all([...specs].map(async([name,spec])=>{try{const res=await fetcher(spec.url);if(!res.ok)return null;return [name,await res.arrayBuffer()];}catch{return null;}}));
+  // v24.1 referee whistles: OGG, and the MP3 of the same pack when the OGG does not decode (decode loop below); one voice each
+  if(refereeWhistles)for(const [kind,w] of Object.entries(HOOPS_REFEREE_WHISTLES)){const dir='../assets/hoops-v241/referee-audio/'+w.id;specs.set('ref:'+kind,{url:new URL(dir+'.ogg',import.meta.url),alt:new URL(dir+'.mp3',import.meta.url),recommended_gain_linear:w.volume,max_voices:1,cooldown_ms:250});}
+  return Promise.all([...specs].filter(([,spec])=>spec.url).map(async([name,spec])=>{try{const res=await fetcher(spec.url);if(!res.ok)return null;return [name,await res.arrayBuffer()];}catch{return null;}}));
  })();
  function ramp(param,value,seconds=fade(),delay=0){
   if(!context||!param)return;const now=context.currentTime;
@@ -62,14 +89,21 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
   if(disposed||paused||!AudioContext)return;
   try{
    if(!context){
-    context=new AudioContext();master=context.createGain();master.gain.value=0;bedGain=context.createGain();bedGain.connect(master);
+    context=new AudioContext();
+    if(phoneFix){buffers.set('phone:rim',createBasketballRimBuffer(context));specs.set('phone:rim',{recommended_gain_linear:.5,max_voices:2,cooldown_ms:90,filters:{highpass_hz:100,lowpass_hz:5000}});}
+    master=context.createGain();master.gain.value=0;bedGain=context.createGain();bedGain.connect(master);
     // Catch overlap without raising any of the authored sample gains.
     if(context.createDynamicsCompressor){limiter=context.createDynamicsCompressor();limiter.threshold.value=mix?.master?.suggested_limiter_ceiling_dbtp??-1;limiter.knee.value=0;limiter.ratio.value=20;limiter.attack.value=.003;limiter.release.value=.15;master.connect(limiter);limiter.connect(context.destination);}else master.connect(context.destination);
     const decodingContext=context;
     void files.then(async entries=>{
      for(const entry of entries.filter(Boolean)){
       if(disposed||context!==decodingContext)return;
-      try{const buffer=await decodingContext.decodeAudioData(entry[1].slice(0));if(!disposed&&context===decodingContext)buffers.set(entry[0],buffer);}catch{}
+      try{const buffer=await decodingContext.decodeAudioData(entry[1].slice(0));if(!disposed&&context===decodingContext)buffers.set(entry[0],buffer);}
+      catch{
+       // a sample with a second format (the v24.1 whistles: MP3 beside the OGG) tries it once; anything else stays silent as before
+       const alt=specs.get(entry[0])?.alt;
+       if(alt)try{const res=await fetcher(alt);if(res.ok){const buffer=await decodingContext.decodeAudioData(await res.arrayBuffer());if(!disposed&&context===decodingContext){buffers.set(entry[0],buffer);altDecoded.push(entry[0]);}}}catch{}
+      }
      }
      if(disposed||context!==decodingContext)return;decoded=true;sync();ensureBed();
     });
@@ -78,7 +112,7 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
   }catch{}
  }
  function play(name,{volume=1,rate=1,delay=0,layerName=null,priority=0}={}){
-  sync();const key=aliases[name]||name,spec=specs.get(key),buffer=buffers.get(key);
+  sync();const key=phoneFix&&(name==='rim'||name===aliases.rim)?'phone:rim':aliases[name]||name,spec=specs.get(key),buffer=buffers.get(key);
   if(disposed||paused||muted||!context||context.state!=='running'||!buffer||!spec)return false;
   const loop=!!spec.loop,now=context.currentTime;
   if(loop&&bed)return false;
@@ -101,26 +135,51 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
    for(const [type,freq] of [['highpass',spec.filters?.highpass_hz],['lowpass',spec.filters?.lowpass_hz]])if(freq){const filter=context.createBiquadFilter();filter.type=type;filter.frequency.value=freq;filter.Q.value=spec.filters.q??.7071;tail.connect(filter);tail=filter;nodes.push(filter);}
    tail.connect(gain);gain.connect(loop?bedGain:master);gain.gain.value=0;
    voice={source,gain,nodes,key,loop,layerName,priority,startAt:now+delay,ended:false,stopping:false};active.add(voice);if(loop)bed=voice;
-   source.onended=()=>disconnect(voice);ramp(gain.gain,volume*(spec.recommended_gain_linear??db(spec.recommended_gain_db??0)),fade(),delay);source.start(now+delay);
+   source.onended=()=>disconnect(voice);ramp(gain.gain,volume*(spec.recommended_gain_linear??db(spec.recommended_gain_db??0)),key==='phone:rim'?.002:fade(),delay);source.start(now+delay);
    last.set(key,now);const metricName=Object.keys(aliases).find(alias=>aliases[alias]===key)||name;played[metricName]=(played[metricName]||0)+1;return true;
   }catch{if(voice)disconnect(voice);return false;}
  }
- const map={floor:['bounce',.8],rim:['rim',.75],board:['board',.9],pad:['board',.5],pass:['pass',.8],release:['pass',.45],steal:['shoes',.6],interception:['shoes',.6],block:['board',1],foul:['whistle',.9],violation:['whistle',.9],buzzer:['buzzer',1],quarterEnd:['buzzer',1],jumpBall:['whistle',.7],timeout:['whistle',.8],goaltending:['whistle',.9]};
+ const map={floor:['bounce',.8],rim:['rim',.75],board:['board',.9],pad:['board',.5],pass:['pass',.8],release:['pass',.45],steal:['shoes',.6],interception:['shoes',.6],block:['board',1],buzzer:['buzzer',1],quarterEnd:['buzzer',1]};
+ // Referee whistle: foul, violation (out of bounds quieter), goaltending, timeout
+ // and the opening tip only; inbounds and quarter starts are silent or the horn.
+ // Two calls close together (out then foul) sound as one whistle.
+ function whistle(e){
+  // phone A: only rule infringements, ball out, and expired possession/game clocks earn a call. Timeouts and the opening tip stay quiet.
+  if(phoneFix&&!['foul','violation','goaltending'].includes(e.type))return false;
+  const gain=hoopsWhistleGain(e.type,e,{jumpBalls});if(e.type==='jumpBall')jumpBalls++;
+  if(!gain||!gate.allow(clock()))return false;
+  return play('whistle',{volume:gain});
+ }
+ // v24.1: the referee's own whistles. A steal or an intercepted pass blows the short one (in place of the v24 shoe squeak), a foul the long one
+ // (at the v24 foul gain). The same 2.5 s gate as every call, so a steal and a foul right after it sound once. A whistle whose file did not
+ // load falls back to v24: the old sample for a foul, the squeak for a steal.
+ function refereeWhistle(kind,e){
+  const key='ref:'+kind;
+  if(!buffers.has(key)){referee.fallback++;return kind==='foul'?whistle(e):play('shoes',{volume:.6});}
+  if(!gate.allow(clock())){referee.gated++;return false;}
+  const ok=play(key,{volume:kind==='foul'?hoopsWhistleGain('foul',e):1,priority:1});if(ok)referee[kind]++;return ok;
+ }
  return {
   unlock,play,sync,
-  events(list){for(const e of list){
+  // show (M4): the visitors' basket gets the swish and the calm crowd instead of the excited layer (same cooldowns, one voice, no bed)
+  events(list,{show=false,userTeam=0}={}){for(const e of list){
    if(e.type==='final'){final=true;stop(true);layer(e.won?'victory':'defeat');continue;}
-   if(e.type==='score'){if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
+   if(e.type==='score'){if(show&&scoreCrowdSample(e,{show,userTeam})==='calm'){play('swish');play('calm');}else if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
+   // A clean possession change never blows a whistle or consumes the call spacing gate.
+   if(phoneFix&&(e.type==='steal'||e.type==='interception'))continue;
+   const ref=refereeWhistles?hoopsRefereeWhistle(e):null;
+   if(ref){refereeWhistle(ref,e);continue;}
+   if(e.type==='foul'||e.type==='violation'||e.type==='goaltending'||e.type==='timeout'||e.type==='jumpBall'){whistle(e);continue;}
    const type=e.type==='contact'?e.what:e.type,m=map[type];if(!m)continue;
    const v=e.speed?Math.min(1,.35+e.speed*.12):1;play(m[0],{volume:m[1]*v,rate:type==='floor'?1+Math.min(.3,(e.speed||0)*.03):1});
   }},
-  dribble(speed){play('bounce',{volume:.35+Math.min(.3,speed*.05),rate:1.05,layerName:'basketball_play'});if(speed>3)play('shoes',{volume:.4,layerName:'basketball_play'});},
+  dribble(speed){play('bounce',{volume:.35+Math.min(.3,speed*.05),rate:1.05,layerName:'basketball_play'});if(dribbleSqueak&&speed>3)play('shoes',{volume:.4,layerName:'basketball_play'});},
   setPaused(value){
    paused=!!value;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];sync();
    if(paused){stop();pauseTimer=setTimeout(()=>{if(paused&&!disposed&&context?.state==='running')void context.suspend().catch(()=>{});},fade()*1000);}
    else {stop(true);if(bedGain)bedGain.gain.value=1;unlock();}
   },
-  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
+  metrics(){return {phoneFixA:phoneFix,rim:phoneFix?{source:'javascript',seconds:.18}:null,context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,whistle:{last:gate.last,blocked:gate.blocked,jumpBalls,v241:refereeWhistles,referee:{...referee,ready:['steal','foul'].filter(k=>buffers.has('ref:'+k)),mp3:altDecoded.slice()}},dribbleSqueak,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
   dispose(){if(disposed)return;disposed=true;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];stop(true);buffers.clear();for(const node of [bedGain,master,limiter])try{node?.disconnect();}catch{}if(context&&context.state!=='closed')void context.close().catch(()=>{});context=null;},
  };
 }

@@ -66,7 +66,7 @@ await verify('naval-aim',sizes,async({page,context,viewport,tick,snap,start,exit
  await page.evaluate(()=>window.__island.games.current.session.debug.view.degrade());await tick(200);s=await snap();assert.equal(s.renderMetrics.quality,'low');const lowFire=await center('#shoot');if(phone)await touch('touchStart',[lowFire]);else{await page.mouse.move(lowFire.x,lowFire.y);await page.mouse.down();}await tick(400);s=await snap();assert.ok(s.aiming&&s.renderMetrics.aimArc.points>0,'light quality keeps the arc');await capture('6-light-quality');if(phone)await touch('touchEnd');else await page.mouse.up();await tick(1500);
  await exit();
  // Exit keeps the save valid and unchanged in shape.
- const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,18);report.saveVersion=saved.version;
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,19);report.saveVersion=saved.version;
  if(viewport.width===844){
   // A saved 'left' hand is ignored: stick stays on the left, fire and pad on the right.
   await page.evaluate(()=>localStorage.setItem('island.naval.hand','left'));await fresh();const fire=await page.locator('#shoot').boundingBox(),pad=await page.locator('.naval-aim-zone').boundingBox(),stickZone=await page.locator('.naval-stick-zone').boundingBox();

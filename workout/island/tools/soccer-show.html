@@ -1,0 +1,36 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>בדיקת השידור: כדורגל</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    html,body{margin:0;height:100%;background:#0f2a24;color:#f5f8fa;direction:rtl;text-align:right;unicode-bidi:embed;font-family:system-ui,sans-serif}
+    .perf-shell{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:6px;padding:6px;box-sizing:border-box}
+    .perf-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;min-height:28px}
+    .perf-bar button{min-height:40px;padding-inline:14px;border-radius:10px;border:0;background:#b8f65b;color:#09131c;font-weight:700}
+    .game-screen{width:100%;height:100%;padding:0}
+    .game-stage{border-radius:12px}
+    .perf-report{font-size:12px;line-height:1.4;max-height:40vh;overflow:auto;background:#091826;border-radius:10px;padding:8px}
+    .perf-report[hidden]{display:none}
+    .perf-report pre{direction:ltr;text-align:left;font-size:11px;white-space:pre-wrap;word-break:break-all;color:#c8d3dd}
+  </style>
+</head>
+<body>
+  <div class="perf-shell">
+    <div class="perf-bar">
+      <button id="show-start" type="button">התחלת הבדיקה</button>
+      <span id="show-status">לפני הבדיקה. שני משחקי ליגה עם בוט, ובסוף דוח של השידור החוזר.</span>
+    </div>
+    <section class="game-screen" data-game="soccer">
+      <div class="game-status" id="show-live"></div>
+      <div class="game-stage"><canvas class="minigame-canvas" id="show-canvas" tabindex="-1"></canvas></div>
+      <div class="game-controls" id="show-controls"></div>
+    </section>
+    <section class="perf-report" id="show-report" hidden></section>
+  </div>
+  <script type="module" src="./soccer-show-page.mjs"></script>
+</body>
+</html>

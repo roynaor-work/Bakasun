@@ -1,23 +1,28 @@
-import {installCity} from './city-runtime.mjs?v=island-v2-20261107-3';
-import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-3';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-3';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-3';
-import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-3';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-3';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-3';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-3';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-3';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-3';
-import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-3';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-3';
-import { createRegistry } from './registry.mjs?v=island-v2-20261107-3';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-3';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-3';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-3';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-3';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-3';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-3';
-import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-3';
+import {installCity} from './city-runtime.mjs?v=island-v2-20261107-18';
+import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-18';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-18';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-18';
+import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-18';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-18';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-18';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-18';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-18';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-18';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-18';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-18';
+import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-18';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-18';
+import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-18';
+import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-18';
+import { createRegistry } from './registry.mjs?v=island-v2-20261107-18';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-18';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-18';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-18';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-18';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-18';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-18';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-18';
+import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-18';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -388,6 +393,20 @@ export function createEngine(data, options = {}) {
       if(patch.defense!==undefined){if(!['man','zone'].includes(patch.defense))return {ok:false,reason:'reason.invalid'};h.tactics.defense=patch.defense;}
       changed('hoops-settings');return {ok:true};},
   };
+  // Racing league (07/11/2026): own state (islandRacingLeague), own result path in startMinigame, refused while a game runs.
+  const leagueBusy=()=>activeMinigame?{ok:false,reason:'reason.gameBusy'}:null;
+  engine.racingLeague={
+    enabled:()=>leagueEnabled(),
+    summary:()=>leagueSummary(state.islandRacingLeague),
+    next:()=>leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null,
+    buy:name=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-upgrade');return r;})(leagueBuy(state.islandRacingLeague,name))),
+    nextSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-season');return r;})(leagueNext(state.islandRacingLeague))),
+    // racing-deep-m6: replay a season that ended below the gate; league setting "short races" (one lap less)
+    restartSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-restart');return r;})(leagueRestart(state.islandRacingLeague))),
+    setShortRaces:on=>leagueBusy()||((r=>{changed('racing-league-settings');return r;})(leagueShort(state.islandRacingLeague,on))),
+  };
+  // Ski league (v23): 30 stages after the three ski stages, in its own key (island.alpine.league.v1); the island save never changes.
+  installAlpineLeague(engine,{storage,config,flags,busy:leagueBusy,notify});
   engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
   engine.startMinigame = (id, context = {}) => {
     const minigame = registry.minigames.get(id);
@@ -398,12 +417,27 @@ export function createEngine(data, options = {}) {
     const customAvailable=minigame.availability?.(state);
     if(customAvailable&&!customAvailable.ok)return customAvailable;
     if (!engine.canPlay()) return { ok: false, reason: 'reason.playTime' };
-    const progress=state.minigameProgress[id],stage=context.level??progress?.stage;
-    if(progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
+    // A league race picks its own circuit from the season, so it neither needs nor changes the regular stage progress.
+    const leagueRun=id==='islandRacing'&&context.league===true&&leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null;
+    if(id==='islandRacing'&&context.league===true&&!leagueRun)return {ok:false,reason:'reason.invalid'};
+    // 13/11/2026 fire v23: a bonus mission (water targets, inside a building) is gated by campaign progress and runs on stage 1 data;
+    // its result pays coins only (see finish), so no save field changes. `?fireTargets=0` / `?fireInterior=0` refuse it.
+    const fireBonus=id==='fireRescue'&&context.fireMode!==undefined?fireBonusMission(context.fireMode,context.fireBonusLevel,state.minigameProgress.fireRescue):null;
+    if(fireBonus&&!fireBonus.ok)return {ok:false,reason:fireBonus.reason};
+    // Ski league: game stage 3 + n, set up by the league; the regular ski stages and their progress are not involved.
+    const alpineRun=id==='alpineRush'&&context.alpineLeague!=null?engine.alpineLeague.setup(context.alpineLeague):null;
+    if(id==='alpineRush'&&context.alpineLeague!=null&&!alpineRun)return {ok:false,reason:'reason.invalid'};
+    const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:alpineRun?alpineRun.number:fireBonus?1:(context.level??progress?.stage);
+    if(!leagueRun&&!alpineRun&&progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    if(fireBonus){ctx.fireMode=fireBonus.mode;ctx.fireBonusLevel=fireBonus.level;}else{delete ctx.fireMode;delete ctx.fireBonusLevel;}
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
+    if(leagueRun){ctx.league=leagueRun;ctx.equipment=leagueRun.equipment;}
+    else delete ctx.league;
+    if(alpineRun){ctx.alpineLeague=alpineRun;ctx.equipment=alpineRun.equipment;ctx.power=1;}
+    else delete ctx.alpineLeague;
     if(id==='streetSlam'){ctx.hoops=clone(state.hoops);const g=hoopsNextGame(state.hoops);ctx.hoopsGame=g?{id:g.id,home:g.home,away:g.away,round:g.round}:null;}
     if(id==='soccer'){if(ctx.drill&&!['targets','penalties','cones'].includes(ctx.drill))return {ok:false,reason:'reason.invalid'};ctx.difficulty=state.soccerCard.difficulty;ctx.soccerCard=clone(state.soccerCard);ctx.role=state.soccerRoster.role;
       // League ladder (29/10/2026): the match number decides the difficulty, the child always plays in the field.
@@ -411,6 +445,36 @@ export function createEngine(data, options = {}) {
     const finish = (raw, cancelled = false) => {
       if (ended) return { ok: false, reason: 'reason.duplicate' };
       let result;
+      if (!cancelled && ctx.league) {
+        // League race: validated by its own contract, applied to islandRacingLeague only (no stars, stage progress, island money or highscore).
+        let lr; try { lr = racingLeagueResult(raw, ctx, config.minigames.islandRacing); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!lr) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        const league = leagueApply(state.islandRacingLeague, { order: lr.order, fastestLapId: lr.fastestLapId });
+        result = Object.freeze({ outcome: lr.outcome, score: lr.score, money: 0, parts: 0, stars: 0, stage, league: Object.freeze({ ...league, season: ctx.league.season, race: ctx.league.race, track: ctx.league.track, laps: ctx.league.laps, order: lr.order }) });
+        changed('racing-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled && fireBonus) {
+        // Fire bonus mission: coins only. No stars, stage progress, certificate, wins, parts or high score are recorded.
+        let bonus; try { bonus = fireBonusResult(raw, fireBonus.mode, fireBonus.level, config.minigames.fireRescue); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!bonus || !Number.isSafeInteger(bonus.money) || bonus.money < 0 || !Number.isFinite(state.money + bonus.money)) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        state.money += bonus.money;
+        const summary = raw?.summary && typeof raw.summary === 'object' ? Object.freeze(Object.fromEntries(Object.entries(raw.summary).filter(([, v]) => Number.isSafeInteger(v)))) : null;
+        result = Object.freeze({ outcome: bonus.outcome, score: bonus.score, money: bonus.money, parts: 0, stars: bonus.stars, stage, fireBonus: Object.freeze({ mode: fireBonus.mode, level: fireBonus.level, number: fireBonusNumber(fireBonus.mode, fireBonus.level, config.minigames.fireRescue.levels.length), summary }) });
+        changed('minigame', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled && ctx.alpineLeague) {
+        // Ski league run: checked and applied to the league's own key only (no island money, stars, stage progress or high score).
+        const run = engine.alpineLeague.finish(raw, ctx);
+        if (!run) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        result = Object.freeze({ outcome: run.passed ? 'win' : 'lose', score: run.score, money: 0, parts: 0, stars: run.stars, stage, alpineLeague: Object.freeze(run) });
+        notify('alpine-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
       if (!cancelled) {
         try { result = minigame.onResult(raw, ctx); } catch { return { ok: false, reason: 'reason.invalid' }; }
         if (!result || !['win', 'lose'].includes(result.outcome) || !Number.isSafeInteger(result.score) || result.score < 0 || !Number.isSafeInteger(result.money) || result.money < 0 || !Number.isFinite(state.money + result.money)) return { ok: false, reason: 'reason.invalid' };

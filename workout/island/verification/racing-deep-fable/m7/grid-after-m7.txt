@@ -1,0 +1,24 @@
+ai             deep-m2
+tracks         default
+5 cars         {"avgMsPerStep":0.077,"playerCrashesPerRace":0,"rivalCrashesPerRace":0,"overtakesPerRace":151}
+10 cars        {"avgMsPerStep":0.138,"playerCrashesPerRace":0,"rivalCrashesPerRace":0,"overtakesPerRace":386}
+12 cars        {"avgMsPerStep":0.175,"playerCrashesPerRace":0,"rivalCrashesPerRace":0,"overtakesPerRace":474}
+shiftMap on    {"shiftsPerLap":30.5}
+shiftMap off   {"shiftsPerLap":34.5}
+behaviour      {"races":24,"passesPerRace":69.92,"rivalCrashesPerRace":0,"slowSecondsPerCar":0,"worstSlowCar":0,"spread60m":85.17,"minSpread60m":64,"longestLockS":0,"bumpsPerRace":20.71}
+node:internal/fs/promises:639
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/home/user/Bakasun/.claude/worktrees/agent-ac88e13456c3871fa/workout/island/island/verification/racing-deep-fable/m7/grid-after-m7.json'
+    at async open (node:internal/fs/promises:639:25)
+    at async writeFile (node:internal/fs/promises:1222:14)
+    at async file:///home/user/Bakasun/.claude/worktrees/agent-ac88e13456c3871fa/workout/island/tools/racing-grid-measure.mjs:57:20 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/user/Bakasun/.claude/worktrees/agent-ac88e13456c3871fa/workout/island/island/verification/racing-deep-fable/m7/grid-after-m7.json'
+}
+
+Node.js v22.23.4
+GRID-DONE

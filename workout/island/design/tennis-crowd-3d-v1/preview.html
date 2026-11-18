@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; worker-src 'none'">
+<title>יציע חי — קהל טניס בתלת־ממד</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23d7ed9d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="preview.css">
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<main>
+  <header><span class="eyebrow">מחקר נכסים / טניס באי / 01</span><h1>יציע חי.</h1><p>600 אוהדים. 12 דמויות. נפח אמיתי מכל כיוון.</p></header>
+  <section class="stage" aria-label="תצוגת יציע תלת ממדית"><canvas id="view" aria-label="יציע עם 600 אוהדים יושבים"></canvas><div id="caption">מצלמת המשחק — רוחב</div><div class="badge">תלת־ממד · צבעי קודקוד</div></section>
+  <nav aria-label="זוויות מצלמה">
+    <button data-camera="landscape" aria-pressed="true">משחק · רוחב</button><button data-camera="portrait">משחק · גובה</button><button data-camera="side">צד</button><button data-camera="rear">מאחור</button><button data-camera="close">תקריב</button><button data-camera="roster">12 דמויות</button>
+  </nav>
+  <div class="controls"><button id="cheer">חגיגה</button><label><input type="checkbox" id="auto" checked> חגיגה מחזורית</label><label><input type="checkbox" id="baseline"> השוואה: האטלס הקיים</label><button id="benchmark">מדידת לפני / אחרי</button></div>
+  <section class="numbers" aria-live="polite"><div><strong id="fans">—</strong><span>אוהדים</span></div><div><strong id="triangles">—</strong><span>משולשי קהל</span></div><div><strong id="fps">—</strong><span>FPS חי</span></div><div><strong id="weight">—</strong><span>KB לכל המודלים</span></div><div><strong id="draws">—</strong><span>קריאות ציור לקהל</span></div></section>
+  <p id="status" role="status">טוען את כל 12 קובצי ה־GLB…</p>
+  <pre id="results" hidden></pre>
+  <footer>גאומטריה מקורית · CC0 · ללא טקסטורות · ללא WebAssembly <a href="REPORT.md">דוח ומפרט חיבור</a></footer>
+</main><script type="module" src="preview.mjs"></script>
+</html>

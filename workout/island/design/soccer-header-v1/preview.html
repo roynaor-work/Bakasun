@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>מעבדת נגיחות · תצוגת תנועה</title>
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="page-head">
+    <div><p class="eyebrow">תנועת כדורגל · ספריית נגיחות</p><h1>ברגע המגע.</h1><p class="intro">שש נגיחות, מההכנה ועד החזרה למשחק.</p></div>
+    <a class="report-link" href="./REPORT.md">דוח המדידות <span aria-hidden="true">↖</span></a>
+  </header>
+  <main class="layout">
+    <aside class="library" aria-label="בחירת נגיחה">
+      <p class="section-label">התנועות <span>01 — 06</span></p>
+      <div id="clips" class="clip-list"></div>
+      <div class="library-note"><span class="note-dot"></span><p>הדמות נשארת במקום.<br>הכדור מציג את מסלול ההדגמה בלבד.</p></div>
+    </aside>
+    <section class="workspace" aria-label="תצוגה תלת ממדית">
+      <div class="stage">
+        <canvas id="stage" aria-label="דמות תלת ממדית מבצעת נגיחה"></canvas>
+        <div class="stage-top"><span class="stage-label">תצוגת התנועה</span><span id="phase" class="phase">טוען…</span></div>
+        <div class="view-controls" aria-label="זווית צפייה"><button type="button" data-view="three" aria-pressed="true">שלושת רבעי</button><button type="button" data-view="front" aria-pressed="false">מלפנים</button><button type="button" data-view="side" aria-pressed="false">מהצד</button></div>
+        <div class="stage-bottom"><span>רצפה · 0 מ׳</span><span class="axis-key"><i></i> קדימה +Z <b>·</b> שמאל הדמות +X</span></div>
+        <p id="error" class="error" hidden></p>
+      </div>
+      <div class="transport">
+        <div class="transport-main"><button id="play" class="play" type="button" aria-label="השהיה">השהיה <span aria-hidden="true">Ⅱ</span></button><button id="restart" class="text-button" type="button">מהתחלה ↺</button><label class="speed-label" for="speed">מהירות <select id="speed"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select></label><output id="time" class="time">0.00 / 0.00</output></div>
+        <div class="timeline"><div id="core" class="core-band"></div><input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="פריים בתנועה"><div id="markers" class="markers"></div></div>
+        <div class="timeline-caption"><span><i class="core-key"></i> טווח הליבה</span><span id="frame">פריים 0</span></div>
+      </div>
+      <div class="clip-detail"><div><p class="section-label">התנועה הנבחרת</p><h2 id="title">טוען את הספרייה…</h2><p id="description"></p></div><div id="events" class="events" aria-label="אירועים בתנועה"></div></div>
+      <div class="display-options"><label><input id="ball" type="checkbox" checked> כדור הדגמה</label><label><input id="soles" type="checkbox" checked> סמני סוליות</label><label><input id="skeleton" type="checkbox"> שלד</label><span>30 הרץ · 18 עצמות</span></div>
+    </section>
+  </main>
+  <footer>נכסי תנועה מקוריים · CC0 · ללא חיבור למשחק <a href="./LICENSES.md">מקורות ורישיונות</a></footer>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

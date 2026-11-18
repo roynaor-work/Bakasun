@@ -6,3 +6,5 @@ import '../workout/island/tests/racing-controls.test.mjs';
 import '../workout/island/tests/racing-scenery.test.mjs';
 import '../workout/island/tests/racing-effects.test.mjs';
 import '../workout/island/tests/racing-v7.test.mjs';
+import '../workout/island/tests/racing-league.test.mjs';
+import '../workout/island/tests/racing-league-integration.test.mjs';

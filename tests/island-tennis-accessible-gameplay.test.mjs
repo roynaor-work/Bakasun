@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createTennis,predictLanding} from '../workout/island/minigames/tennis.mjs';
 
-const base=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis;
+const base=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis;base.v9.dropFix.enabled=false;// pins the original drop footwork; v14 has its own tests
 const dt=base.simulation.step;
 const advance=(m,seconds,input={})=>{for(let i=0;i<Math.ceil(seconds/dt);i++)m.update(dt,input);};
 const tap=(m,extra={})=>{m.update(0,{...extra,swing:true});m.update(0,{});};
@@ -25,7 +25,7 @@ test('accessible tennis: physical return reach is radial, including diagonal and
 });
 
 test('accessible tennis: an early press expires before a ball enters reach substantially later',()=>{
- const m=incoming({at:.30,y:1.5,z:8.8,vz:-5,serving:true});tap(m);advance(m,.32);assert.equal(returned(m),false,'the ball arrives after the short input buffer has expired');
+ const m=incoming({config:{...base,v9:{...base.v9,deep:{...base.v9.deep,enabled:false}}},at:.30,y:1.5,z:8.8,vz:-5,serving:true});tap(m);advance(m,.32);assert.equal(returned(m),false,'the ball arrives after the short input buffer has expired (the wider easy buffer of tennis-deep is off here)');
 });
 
 test('accessible tennis: contact remains available at different physical heights after the predicted instant',()=>{

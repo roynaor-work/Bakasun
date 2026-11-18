@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "version": "athlete-body-v1",
+  "license": "CC0-1.0",
+  "models": [
+    {
+      "id": "soccer",
+      "label": "כדורגל",
+      "path": "runtime/models/soccer.glb",
+      "height": 1.8,
+      "heightMeters": 1.8,
+      "scale": 1.0401614549962521,
+      "canonicalFloorY": 0.0051280115731060505,
+      "canonicalHeightMeters": 1.73050057888031,
+      "triangles": 5080,
+      "vertices": 3944,
+      "bytes": 478588,
+      "sha256": "450da150f615e8db179b7bb10eb69e641305c68be9c3424028b95eadadc8ba7a",
+      "morphs": [
+        "basketball",
+        "hockey",
+        "tennis"
+      ],
+      "regions": {
+        "skin": 1141,
+        "uniform_primary": 930,
+        "uniform_secondary": 934,
+        "uniform_trim": 356,
+        "shoe_upper": 102,
+        "shoe_sole": 171,
+        "eyes": 148,
+        "hair": 0,
+        "sock": 162
+      },
+      "uvSha256": "6d7ae159dabff2c2840dbe1ea75e5b13b7b503accc01a6850faf51fcf011b06e",
+      "bodyShape": {
+        "width": 1.0,
+        "depth": 1.0
+      }
+    },
+    {
+      "id": "guard",
+      "label": "רכז",
+      "path": "runtime/models/guard.glb",
+      "height": 1.78,
+      "heightMeters": 1.78,
+      "scale": 1.0286041054962938,
+      "canonicalFloorY": 0.0051280115731060505,
+      "canonicalHeightMeters": 1.73050057888031,
+      "triangles": 5080,
+      "vertices": 3944,
+      "bytes": 478588,
+      "sha256": "78f872e572588123f722e4776699a9e38ca36f7b0cb7265e9ab86132a11d9a57",
+      "morphs": [
+        "basketball",
+        "hockey",
+        "tennis"
+      ],
+      "regions": {
+        "skin": 1141,
+        "uniform_primary": 930,
+        "uniform_secondary": 934,
+        "uniform_trim": 356,
+        "shoe_upper": 102,
+        "shoe_sole": 171,
+        "eyes": 148,
+        "hair": 0,
+        "sock": 162
+      },
+      "uvSha256": "6d7ae159dabff2c2840dbe1ea75e5b13b7b503accc01a6850faf51fcf011b06e",
+      "bodyShape": {
+        "width": 0.97,
+        "depth": 0.98
+      }
+    },
+    {
+      "id": "wing",
+      "label": "קיצוני",
+      "path": "runtime/models/wing.glb",
+      "height": 1.94,
+      "heightMeters": 1.94,
+      "scale": 1.1210629014959608,
+      "canonicalFloorY": 0.0051280115731060505,
+      "canonicalHeightMeters": 1.73050057888031,
+      "triangles": 5080,
+      "vertices": 3944,
+      "bytes": 478592,
+      "sha256": "1f396d80319a7ca57f532fcccbb93daee10e221442de3d3d0a3cbef7ea09debd",
+      "morphs": [
+        "basketball",
+        "hockey",
+        "tennis"
+      ],
+      "regions": {
+        "skin": 1141,
+        "uniform_primary": 930,
+        "uniform_secondary": 934,
+        "uniform_trim": 356,
+        "shoe_upper": 102,
+        "shoe_sole": 171,
+        "eyes": 148,
+        "hair": 0,
+        "sock": 162
+      },
+      "uvSha256": "6d7ae159dabff2c2840dbe1ea75e5b13b7b503accc01a6850faf51fcf011b06e",
+      "bodyShape": {
+        "width": 1.045,
+        "depth": 1.035
+      }
+    },
+    {
+      "id": "center",
+      "label": "סנטר",
+      "path": "runtime/models/center.glb",
+      "height": 2.08,
+      "heightMeters": 2.08,
+      "scale": 1.2019643479956692,
+      "canonicalFloorY": 0.0051280115731060505,
+      "canonicalHeightMeters": 1.73050057888031,
+      "triangles": 5080,
+      "vertices": 3944,
+      "bytes": 478588,
+      "sha256": "935b0f7d387b8b48f67fc1e75f50bef4e3358ae017eab34100251d6c18fd4594",
+      "morphs": [
+        "basketball",
+        "hockey",
+        "tennis"
+      ],
+      "regions": {
+        "skin": 1141,
+        "uniform_primary": 930,
+        "uniform_secondary": 934,
+        "uniform_trim": 356,
+        "shoe_upper": 102,
+        "shoe_sole": 171,
+        "eyes": 148,
+        "hair": 0,
+        "sock": 162
+      },
+      "uvSha256": "6d7ae159dabff2c2840dbe1ea75e5b13b7b503accc01a6850faf51fcf011b06e",
+      "bodyShape": {
+        "width": 1.12,
+        "depth": 1.09
+      }
+    }
+  ],
+  "regions": {
+    "skin": 0,
+    "uniform_primary": 1,
+    "uniform_secondary": 2,
+    "uniform_trim": 3,
+    "shoe_upper": 4,
+    "shoe_sole": 5,
+    "eyes": 6,
+    "hair": 7,
+    "sock": 8
+  },
+  "regionEncoding": "_REGION uint8 scalar; COLOR_0 linear RGBA; texture sRGB",
+  "skinTones": [
+    "#f2c6a0",
+    "#d9a17b",
+    "#bd8058",
+    "#9a6041",
+    "#70422d",
+    "#44291f"
+  ],
+  "skinPalette": [
+    "#f2c6a0",
+    "#d9a17b",
+    "#bd8058",
+    "#9a6041",
+    "#70422d",
+    "#44291f"
+  ],
+  "defaultColors": {
+    "skin": "#c38d69",
+    "uniform_primary": "#187e83",
+    "uniform_secondary": "#16363b",
+    "uniform_trim": "#e7dbb9",
+    "shoe_upper": "#253540",
+    "shoe_sole": "#d4d5cb",
+    "eyes": "#e0e0e0",
+    "hair": "#442d22",
+    "sock": "#e7dbb9"
+  },
+  "sports": [
+    {
+      "id": "soccer",
+      "label": "כדורגל",
+      "morph": null
+    },
+    {
+      "id": "basketball",
+      "label": "כדורסל",
+      "morph": "basketball"
+    },
+    {
+      "id": "tennis",
+      "label": "טניס",
+      "morph": "tennis"
+    },
+    {
+      "id": "hockey",
+      "label": "הוקי",
+      "morph": "hockey"
+    }
+  ],
+  "hair": [
+    {
+      "id": "buzz",
+      "label": "קצוץ",
+      "path": "runtime/hair/buzz.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17520,
+      "sha256": "af72f659f2b13099c722c1a897faa79c3466bb733bc30432d8e8d7957ec80d9a",
+      "boundsHeadLocal": [
+        [
+          -0.0873020738363266,
+          0.07573944330215454,
+          -0.10794798284769058
+        ],
+        [
+          0.0873020738363266,
+          0.27399998903274536,
+          0.12272729724645615
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "crop",
+      "label": "קצוץ עם פוני",
+      "path": "runtime/hair/crop.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17548,
+      "sha256": "694291441c9937b0b010832f1c2c6fbeefe0319283c5addafac2b7c790566a2c",
+      "boundsHeadLocal": [
+        [
+          -0.08879867941141129,
+          0.07573944330215454,
+          -0.10794798284769058
+        ],
+        [
+          0.08879867941141129,
+          0.2919999957084656,
+          0.12908130884170532
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "side-part",
+      "label": "שביל בצד",
+      "path": "runtime/hair/side-part.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17556,
+      "sha256": "bb1cf2184cbe9f8c2176db0d9d78443b073b6ce0a4bf998fc47af80ce5157998",
+      "boundsHeadLocal": [
+        [
+          -0.08865924924612045,
+          0.07573944330215454,
+          -0.10794798284769058
+        ],
+        [
+          0.08893811702728271,
+          0.30754977464675903,
+          0.12272729724645615
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "quiff",
+      "label": "בלורית",
+      "path": "runtime/hair/quiff.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17532,
+      "sha256": "7f24084950400003fbd419277eb11a284e12fd16ff069ae5fe47bf02afe16ad9",
+      "boundsHeadLocal": [
+        [
+          -0.08855728805065155,
+          0.07573944330215454,
+          -0.10794798284769058
+        ],
+        [
+          0.08906757086515427,
+          0.31257298588752747,
+          0.128170445561409
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "curls",
+      "label": "תלתלים",
+      "path": "runtime/hair/curls.glb",
+      "triangles": 656,
+      "vertices": 377,
+      "bytes": 25804,
+      "sha256": "1a023760d6f0287c93b2d32039018b1ebf30b5dadd8e5be47db01443121e3dc9",
+      "boundsHeadLocal": [
+        [
+          -0.08926796913146973,
+          0.07573944330215454,
+          -0.10743977129459381
+        ],
+        [
+          0.08926796913146973,
+          0.29282504320144653,
+          0.1338299959897995
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "afro",
+      "label": "אפרו",
+      "path": "runtime/hair/afro.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17520,
+      "sha256": "3704d20be57c0e84d4375ce936ce311ba36594f6bded0af4d51bef67f652e925",
+      "boundsHeadLocal": [
+        [
+          -0.10706577450037003,
+          0.06927145272493362,
+          -0.11119978874921799
+        ],
+        [
+          0.10706577450037003,
+          0.30399999022483826,
+          0.12340941280126572
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "swept-back",
+      "label": "מסורק לאחור",
+      "path": "runtime/hair/swept-back.glb",
+      "triangles": 456,
+      "vertices": 241,
+      "bytes": 17572,
+      "sha256": "2cf66e1a4063fcb5636afa6c0fa0e26ab041d1c587561dd8daeea9c3dea77e41",
+      "boundsHeadLocal": [
+        [
+          -0.08879867941141129,
+          0.07552240043878555,
+          -0.10860440880060196
+        ],
+        [
+          0.08879867941141129,
+          0.29600000381469727,
+          0.11637695133686066
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    },
+    {
+      "id": "bun",
+      "label": "אסוף",
+      "path": "runtime/hair/bun.glb",
+      "triangles": 368,
+      "vertices": 197,
+      "bytes": 14700,
+      "sha256": "74d84aa2a39e72dc6814ef3ed687b932ff761e13be7a9f4ae10aa94e3b54c3c0",
+      "boundsHeadLocal": [
+        [
+          -0.08855728805065155,
+          0.07573944330215454,
+          -0.13897204399108887
+        ],
+        [
+          0.08855728805065155,
+          0.2800000011920929,
+          0.12091291695833206
+        ]
+      ],
+      "attachmentBone": "Head",
+      "region": 7,
+      "license": "CC0-1.0",
+      "source": "tools/build-hair.py; original authored geometry, no external mesh input"
+    }
+  ],
+  "texture": {
+    "path": "runtime/textures/athlete-atlas.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 474663,
+    "sha256": "7024031216a0af3bd15d6295d4bb4d525f01322f9d93b2cc2121e2975eb2c8fc",
+    "uvLayout": "shared source UV; original sleeves use neutral cloth tile"
+  },
+  "canonicalBones": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "source": {
+    "path": "workout/island/design/motion-fix-v12/runtime/models/canonical-player-01.glb",
+    "ref": "codex/motion-fix-v12",
+    "sha256": "d6c8ac7d103a51fb7a48875641a88623173e466c05e87c52cf1cec2b6366b122",
+    "license": "CC0-1.0",
+    "originalActorSource": {
+      "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+      "path": "workout/island/design/soccer-motion-v11/runtime/clips/celebrate_player.glb",
+      "sha256": "b723711ad5c46afca7ef3651e80fba2effcf439f91639418f2527433250ea85a"
+    }
+  },
+  "processing": {
+    "sourceTriangles": 5781,
+    "sourceHairTrianglesRemoved": 1076,
+    "sourceSleeveTrianglesRemoved": 329,
+    "originalCanonicalSleeveTrianglesAdded": 704,
+    "sourceFaceSkinEyesUVAndWeightsPreserved": true,
+    "bindChanges": 0,
+    "meshopt": false,
+    "draco": false,
+    "heightDefinition": "skin/skinned-body sole-to-scalp; hairstyles may add height",
+    "hockeyScope": "long-sleeve jersey; no pads or ice skates requested"
+  },
+  "runtime": {
+    "material": "athlete_shared",
+    "roughness": 0.88,
+    "metallic": 0,
+    "hairAttachmentBone": "Head",
+    "outlineMeters": 0.003,
+    "hairAttachmentScale": "Head-local scale [bodyShape.width, 1, bodyShape.depth]; actor wrapper supplies stature",
+    "sportSelection": "set one named morph to1, others0; soccer all0",
+    "recolor": "replace COLOR_0 RGB for vertices with matching _REGION"
+  }
+}

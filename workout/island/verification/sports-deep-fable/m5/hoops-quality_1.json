@@ -1,0 +1,175 @@
+[
+ {
+  "seconds": 24.91,
+  "frames": 114,
+  "fps": 4.58,
+  "frameMs": {
+   "avg": 218.41,
+   "p50": 200,
+   "p95": 449.9,
+   "p99": 616.6,
+   "max": 733.3
+  },
+  "over33": 93,
+  "over50": 91,
+  "tickMs": {
+   "avg": 10.44,
+   "p50": 4.5,
+   "p95": 9.8,
+   "max": 612.2
+  },
+  "renderMs": {
+   "avg": 9.35,
+   "p95": 8
+  },
+  "allocMBps": 2.6,
+  "gcs": 3,
+  "longTasks": 1,
+  "longTaskMs": 615,
+  "replays": 0,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 1,
+   "landscape": true
+  },
+  "render": {
+   "calls": 45,
+   "triangles": 79253,
+   "frameMs": 3.6,
+   "players": 10,
+   "avatars": 10,
+   "pending": 14,
+   "crowd": 1936,
+   "crowdLevel": 1,
+   "v5": false,
+   "v8": true,
+   "v8Motion": true,
+   "tall": true,
+   "quality": 1,
+   "textures": 57,
+   "geometries": 62,
+   "landscape": true,
+   "dpr": 1,
+   "bufferWidth": 844,
+   "bufferHeight": 390,
+   "style": "v2-broadcast",
+   "characterVersion": 10,
+   "athleteBody": true,
+   "motionSource": "v12",
+   "dunks": {
+    "guard": {
+     "dunk_one_hand": {
+      "palmMax": 3.16,
+      "lift": 1.057,
+      "scale": 1.133
+     },
+     "dunk_two_hands": {
+      "palmMax": 3.204,
+      "lift": 1.136,
+      "scale": 1.084
+     }
+    },
+    "wing": {
+     "dunk_one_hand": {
+      "palmMax": 3.328,
+      "lift": 1.113,
+      "scale": 0.975
+     },
+     "dunk_two_hands": {
+      "palmMax": 3.375,
+      "lift": 1.197,
+      "scale": 0.937
+     }
+    },
+    "center": {
+     "dunk_one_hand": {
+      "palmMax": 3.496,
+      "lift": 1.169,
+      "scale": 0.832
+     },
+     "dunk_two_hands": {
+      "palmMax": 3.545,
+      "lift": 1.257,
+      "scale": 0.805
+     }
+    }
+   },
+   "retargetMs": 364.59999999962747,
+   "lods": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "arenaSource": "assets/hoops-v8/arena/",
+   "crowd3d": true,
+   "v4Fallbacks": [],
+   "clipCount": 0,
+   "loadTimes": {
+    "arena": 433,
+    "models": 132,
+    "environment": 31,
+    "crowd": 0,
+    "playerAssets": 548,
+    "avatars": 11,
+    "vfx": 976,
+    "feel": 4,
+    "total": 2136,
+    "firstFrame": 809
+   },
+   "arenaVersion": 4,
+   "baked": [],
+   "reflection": null,
+   "feel": {
+    "authored": true,
+    "queued": 0,
+    "fov": 1.493,
+    "seen": 0
+   },
+   "vfx": {
+    "missingAtlases": [],
+    "sprites": 0,
+    "residentAtlases": 0,
+    "loadedAtlases": 5,
+    "reducedMotion": false
+   },
+   "show": {
+    "autoReplays": 0,
+    "autoReplaysDone": 0,
+    "skipped": 0,
+    "liveCuts": 0,
+    "casts": 0,
+    "stand": 0,
+    "groan": 0,
+    "wave": false,
+    "cut": false
+   },
+   "motion": [
+    "run",
+    "run",
+    "run",
+    "run",
+    "run",
+    "run",
+    "run",
+    "run",
+    "dribble:run_ball",
+    "run"
+   ]
+  },
+  "steps": 794,
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "quality": 1,
+  "profile": "quick",
+  "loadMs": 3532,
+  "errors": [],
+  "viewportLabel": "844x390"
+ }
+]

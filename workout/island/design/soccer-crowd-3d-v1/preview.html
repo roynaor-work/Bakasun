@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+<title>קהל כדורגל · 3D v1</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<main>
+  <header><span class="eyebrow">מעבדת נכסים · כדורגל</span><h1>יציע עם עומק</h1><p>1,200 אוהדים · 12 וריאציות · שתי קבוצות · שלוש רמות פירוט</p></header>
+  <section class="controls" aria-label="בקרי היציע">
+    <label>תצוגה<select id="mode"><option value="after">אחרי · תלת־ממד</option><option value="before">לפני · אטלס קיים</option></select></label>
+    <label>מצלמה<select id="camera"><option value="soccer">מצלמת כדורגל · קו רחוק</option><option value="overview">כל האצטדיון</option><option value="close">תקריב יציע</option><option value="rear">גב היציע</option></select></label>
+    <label>תנועת ידיים<select id="pose"><option value="-1">קהל מעורב</option><option value="0">ידיים למטה</option><option value="1">ידיים למעלה</option><option value="2">מחיאת כפיים</option></select></label>
+    <label>בית<input id="home" type="color" value="#2868ee"></label><label>חוץ<input id="away" type="color" value="#e94d51"></label>
+    <button id="goal">חגיגת שער</button><button id="pause">עצירת תנועה</button>
+  </section>
+  <section class="stats" aria-label="מדדים חיים"><span><b id="instances">—</b> אוהדים</span><span><b id="triangles">—</b> / 80,000 משולשי קהל</span><span><b id="draws">—</b> קריאות קהל</span><span><b id="fps">—</b> FPS חי</span><span id="lod">טוען GLB…</span></section>
+  <div class="stage"><canvas id="view" aria-label="יציע הכדורגל עם הקהל"></canvas><span class="badge" id="viewLabel">מצלמת המשחק · 42°</span></div>
+  <p id="status" role="status">טוען 36 מודלים מקומיים…</p>
+  <section class="measurement"><div><h2>לפני ואחרי, באותה מצלמה</h2><p>האטלס הפעיל מול הקהל החדש, באותם 1,200 מושבים. ארבעה סבבים בסדר ABBA, עם חימום. זו מדידת תצוגת נכסים; תוצאות תוכנה מצורפות ב־REPORT.</p></div><button id="measure" disabled>מדידת FPS מקומית</button><button id="download" disabled>הורדת מדידה</button></section>
+  <div class="tablewrap"><table><thead><tr><th>מצב</th><th>משולשי קהל</th><th>משולשי סצנה</th><th>קריאות סצנה</th><th>FPS</th><th>p95 פריים</th></tr></thead><tbody id="results"><tr><td colspan="6">טרם נמדד בדפדפן הזה</td></tr></tbody></table></div>
+  <section class="catalog"><h2>בדיקת המודלים מקרוב</h2><div class="controls"><label>וריאציה<select id="variant"></select></label><label>סיבוב<input id="angle" type="range" min="0" max="360" value="0"></label><label>פוזה<select id="catalogPose"><option value="0">למטה</option><option value="1">למעלה</option><option value="2">מחיאה</option></select></label></div><canvas id="catalog" aria-label="שלוש רמות הפירוט באותו קנה מידה"></canvas><p>משמאל לימין: LOD0 · 210, LOD1 · 90, LOD2 · 24 משולשים. וריאציות 1–6 יושבות, 7–12 עומדות.</p></section>
+  <footer><a href="REPORT.md">דוח ומדידות תוכנה</a> · <a href="LICENSES.md">מקורות ורישיון CC0</a> · <a href="lod-config.json">הגדרות LOD</a></footer>
+</main><script type="module" src="preview.mjs"></script>
+</html>

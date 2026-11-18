@@ -13,11 +13,15 @@ import {createAlpineControls} from '../workout/island/minigames/alpine-controls.
 import {createAlpineAudio} from '../workout/island/minigames/alpine-audio.mjs';
 import {gameArtwork} from '../workout/island/ui/adventure-emblems.mjs';
 import {ActivityInterface} from '../workout/island/ui/activity.mjs';
+import {withoutV241} from '../workout/island/minigames/alpine-v241.mjs';
 
 const root=new URL('../workout/island/',import.meta.url);
 const data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
 const strings=JSON.parse(await readFile(new URL('data/strings.he.json',root),'utf8'));
 const balance=data.config.minigames.alpineRush,P=balance.physics,PIPE=pipeProfile(P);
+// v24.1 changed the turn feel on purpose (the player's line holds through a turn): the v24 turn-push rule is checked on the v24 balance
+// (?alpineV241=0); the v24.1 rule is in tests/island-alpine-v241.test.mjs.
+const V24=withoutV241(balance);
 const memory=(entries=new Map())=>({entries,getItem:key=>entries.has(key)?entries.get(key):null,setItem(key,value){entries.set(key,String(value));},removeItem(key){entries.delete(key);}});
 
 /** Scripted player: same lane logic for every test, steering in simulation time only. */
@@ -37,8 +41,8 @@ function race(stage,seed,{pilot=lanePilot,dt=1/60,maxFrames=30000}={}){
   return {engine:e,result:e.snapshot().result,events};
 }
 /** A tiny hand-made course for rule tests. Riders 2..6 are parked far behind on the grid. */
-function ruleEngine(objects,{length=400,stage=1,ai=null,grid=null,path=null}={}){
-  const b=structuredClone(balance);b.physics.grid=grid||[{s:0,x:0},...Array.from({length:5},(_,i)=>({s:-200-i*5,x:i*2-4}))];
+function ruleEngine(objects,{length=400,stage=1,ai=null,grid=null,path=null,v24=false}={}){
+  const b=structuredClone(v24?V24:balance);b.physics.grid=grid||[{s:0,x:0},...Array.from({length:5},(_,i)=>({s:-200-i*5,x:i*2-4}))];
   if(ai)b.levels[stage-1].ai=b.levels[stage-1].ai.map(r=>({...r,...ai}));
   const course={id:'test',length,objects:objects.map((o,i)=>({id:o.id||`t-${i}`,...o})).sort((a,c)=>a.s-c.s),rows:[],path,coins:objects.filter(o=>o.type==='coin').length};
   const e=createAlpineEngine({balance:b,stage,seed:9,course});e.command({type:'start'});while(e.phase==='countdown')e.step(1/60);e.drainEvents();return e;
@@ -315,8 +319,8 @@ test('turns: the centreline is continuous, turns go both ways, and a turn pushes
     assert.ok(right>40&&left>40,`${level.trackId} turns both ways (${right}/${left})`);
     for(let i=0;i<t.calmStart&&i<p.count;i++)assert.ok(Math.abs(p.kappa[i])<.002||i>=t.turns.firstStraight[0],'the start is straight');}
   const n=1200,path={count:n,kappa:new Float64Array(n).fill(1/90)};
-  const drift=ruleEngine([],{path});run(drift,5);const dx=drift.debug()[0].x;assert.ok(dx<-2.5,`no steering: pushed toward the outer wall (${dx})`);assert.ok(dx>=-PIPE.lip);
-  const hold=ruleEngine([],{path});for(let i=0;i<240;i++){const d=hold.debug()[0];const lean=d.speed*d.speed/90*P.turnPush/(P.lateralResponse*P.lateralSpeed);hold.command({type:'steer',value:Math.max(-1,Math.min(1,(0-d.x)*.7+lean))});hold.step(1/60);}
+  const drift=ruleEngine([],{path,v24:true});run(drift,5);const dx=drift.debug()[0].x;assert.ok(dx<-2.5,`no steering: pushed toward the outer wall (${dx})`);assert.ok(dx>=-PIPE.lip);
+  const hold=ruleEngine([],{path,v24:true});for(let i=0;i<240;i++){const d=hold.debug()[0];const lean=d.speed*d.speed/90*P.turnPush/(P.lateralResponse*P.lateralSpeed);hold.command({type:'steer',value:Math.max(-1,Math.min(1,(0-d.x)*.7+lean))});hold.step(1/60);}
   assert.ok(Math.abs(hold.debug()[0].x)<1,'steering into the turn holds the line');
 });
 

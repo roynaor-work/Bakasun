@@ -1,0 +1,219 @@
+{
+ "cruise": {
+  "takeoffSpeed": 20,
+  "landSpeed": 20,
+  "gainPct": 0,
+  "air": 1.0333333333333332,
+  "drift": 0,
+  "landVx": 0,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "slowRamp": {
+  "takeoffSpeed": 16.574999999999946,
+  "landSpeed": 20,
+  "gainPct": 20.663650075415173,
+  "air": 0.9500000000000002,
+  "drift": 0,
+  "landVx": 0,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "midRamp": {
+  "takeoffSpeed": 20,
+  "landSpeed": 20,
+  "gainPct": 0,
+  "air": 1.0333333333333337,
+  "drift": 0,
+  "landVx": 0,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "boosted": {
+  "takeoffSpeed": 21.300000000000047,
+  "landSpeed": 20,
+  "gainPct": -6.103286384976736,
+  "air": 1.0666666666666673,
+  "drift": 0,
+  "landVx": 0,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "boost-start",
+   "boost-end",
+   "takeoff",
+   "land"
+  ]
+ },
+ "cruiseSteerRight": {
+  "takeoffSpeed": 20,
+  "landSpeed": 18.400000000000002,
+  "gainPct": -7.999999999999985,
+  "air": 1.0333333333333332,
+  "drift": 7.050756075557091,
+  "landVx": 8.448229171006485,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "boostedSteerRight": {
+  "takeoffSpeed": 21.300000000000047,
+  "landSpeed": 18.400000000000002,
+  "gainPct": -13.615023474178589,
+  "air": 1.0499999999999998,
+  "drift": 7.180338318195358,
+  "landVx": 8.451963244629315,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "boost-start",
+   "boost-end",
+   "takeoff",
+   "land"
+  ]
+ },
+ "cruiseSteerHalf": {
+  "takeoffSpeed": 20,
+  "landSpeed": 20,
+  "gainPct": 0,
+  "air": 1.0333333333333332,
+  "drift": 3.2208915943104293,
+  "landVx": 3.808320588976698,
+  "speed16": 19,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "cruiseSteerLate": {
+  "takeoffSpeed": 20,
+  "landSpeed": 18.400000000000002,
+  "gainPct": -7.999999999999985,
+  "air": 1.0333333333333332,
+  "drift": 2.016177841184251,
+  "landVx": 7.367767785125647,
+  "speed16": 20,
+  "crashes": 0,
+  "events": [
+   "takeoff",
+   "land"
+  ]
+ },
+ "stages": [
+  {
+   "stage": 1,
+   "rivalBest": [
+    72.98,
+    73.15,
+    74.78
+   ],
+   "rivalMedian": [
+    77.62,
+    76.77,
+    75.68
+   ],
+   "floorRamps": {
+    "t": 84.32,
+    "crashes": 0,
+    "ramps": 3
+   },
+   "floorNoRamps": {
+    "t": 84.55,
+    "crashes": 0,
+    "ramps": 0
+   },
+   "floorRampsBoost": {
+    "t": 76.1,
+    "crashes": 0,
+    "ramps": 3
+   },
+   "floorNoRampsBoost": {
+    "t": 76.47,
+    "crashes": 0,
+    "ramps": 0
+   }
+  },
+  {
+   "stage": 2,
+   "rivalBest": [
+    75.72,
+    77.45,
+    76.47
+   ],
+   "rivalMedian": [
+    78.67,
+    80.63,
+    78.22
+   ],
+   "floorRamps": {
+    "t": 91.6,
+    "crashes": 0,
+    "ramps": 7
+   },
+   "floorNoRamps": {
+    "t": 92.03,
+    "crashes": 0,
+    "ramps": 0
+   },
+   "floorRampsBoost": {
+    "t": 82.5,
+    "crashes": 0,
+    "ramps": 7
+   },
+   "floorNoRampsBoost": {
+    "t": 82.68,
+    "crashes": 0,
+    "ramps": 0
+   }
+  },
+  {
+   "stage": 3,
+   "rivalBest": [
+    84.4,
+    85.23,
+    85.42
+   ],
+   "rivalMedian": [
+    87.93,
+    87.78,
+    86.3
+   ],
+   "floorRamps": {
+    "t": 98.2,
+    "crashes": 0,
+    "ramps": 19
+   },
+   "floorNoRamps": {
+    "t": 99.53,
+    "crashes": 0,
+    "ramps": 0
+   },
+   "floorRampsBoost": {
+    "t": 88.73,
+    "crashes": 0,
+    "ramps": 19
+   },
+   "floorNoRampsBoost": {
+    "t": 89.93,
+    "crashes": 0,
+    "ramps": 0
+   }
+  }
+ ]
+}

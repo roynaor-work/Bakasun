@@ -1,0 +1,540 @@
+{
+ "label": "show",
+ "query": "",
+ "date": "2026-11-11T18:48:37.652Z",
+ "shots": [
+  {
+   "file": "show-A-cut.png",
+   "caption": "live behind-goal angle (cut), ball rolling in",
+   "phase": "goal",
+   "phaseTime": 1.82,
+   "elapsed": 4.72,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "cut",
+    "hold": false,
+    "elapsed": 0.37,
+    "reason": "goal",
+    "wall": null,
+    "cuts": null,
+    "mood": {
+     "cheer": 0.917,
+     "groan": 0,
+     "excitement": 0.812
+    },
+    "recording": {
+     "seconds": 4.6,
+     "samples": 74
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "celebrate",
+     "clip": "celebrate_arms_up"
+    },
+    {
+     "id": 10,
+     "role": "run",
+     "clip": "v10_run"
+    },
+    {
+     "id": 6,
+     "role": "run",
+     "clip": "v10_run"
+    },
+    {
+     "id": 5,
+     "role": "dive",
+     "clip": "v11_keeper_dive_right"
+    }
+   ]
+  },
+  {
+   "file": "show-B-replay-wide.png",
+   "caption": "replay, wide build-up",
+   "phase": "goal",
+   "phaseTime": 1.48,
+   "elapsed": 4.72,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "replay",
+    "hold": true,
+    "elapsed": 0.9,
+    "reason": "replay",
+    "wall": 4.5,
+    "cuts": [
+     {
+      "cam": "wide",
+      "span": 2.55,
+      "rate": 1.3421052631578936,
+      "wall": 1.9
+     },
+     {
+      "cam": "close",
+      "span": 1.6,
+      "rate": 0.6153846153846154,
+      "wall": 2.6
+     }
+    ],
+    "mood": {
+     "cheer": 0.85,
+     "groan": 0,
+     "excitement": 0.976
+    },
+    "recording": {
+     "seconds": 4.6,
+     "samples": 82
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "שידור חוזר · נגיעה במגרש לדילוג",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "run",
+     "clip": "celebrate_arms_up"
+    },
+    {
+     "id": 10,
+     "role": "run",
+     "clip": "v10_run"
+    },
+    {
+     "id": 6,
+     "role": "sprint",
+     "clip": "v9_sprint"
+    },
+    {
+     "id": 5,
+     "role": "idle",
+     "clip": "v9_goalkeeper_ready"
+    }
+   ]
+  },
+  {
+   "file": "show-C-replay-close.png",
+   "caption": "replay, low close angle at half speed",
+   "phase": "goal",
+   "phaseTime": 1.48,
+   "elapsed": 4.72,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "replay",
+    "hold": true,
+    "elapsed": 2.7,
+    "reason": "replay",
+    "wall": 4.5,
+    "cuts": [
+     {
+      "cam": "wide",
+      "span": 2.55,
+      "rate": 1.3421052631578936,
+      "wall": 1.9
+     },
+     {
+      "cam": "close",
+      "span": 1.6,
+      "rate": 0.6153846153846154,
+      "wall": 2.6
+     }
+    ],
+    "mood": {
+     "cheer": 0.85,
+     "groan": 0,
+     "excitement": 0.999
+    },
+    "recording": {
+     "seconds": 4.6,
+     "samples": 82
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "שידור חוזר · נגיעה במגרש לדילוג",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "kick",
+     "clip": "v8_pass_long"
+    },
+    {
+     "id": 10,
+     "role": "sprint",
+     "clip": "v10_cut_180_right"
+    },
+    {
+     "id": 6,
+     "role": "run",
+     "clip": "v10_run"
+    },
+    {
+     "id": 5,
+     "role": "run",
+     "clip": "v9_walk"
+    }
+   ]
+  },
+  {
+   "file": "show-D-celebrate.png",
+   "caption": "celebration: scorer running to the corner",
+   "phase": "goal",
+   "phaseTime": 1.48,
+   "elapsed": 4.72,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "celebrate",
+    "hold": true,
+    "elapsed": 1.4,
+    "reason": "complete",
+    "wall": 4.5,
+    "cuts": [
+     {
+      "cam": "wide",
+      "span": 2.55,
+      "rate": 1.3421052631578936,
+      "wall": 1.9
+     },
+     {
+      "cam": "close",
+      "span": 1.6,
+      "rate": 0.6153846153846154,
+      "wall": 2.6
+     }
+    ],
+    "mood": {
+     "cheer": 0.85,
+     "groan": 0,
+     "excitement": 1
+    },
+    "recording": {
+     "seconds": 4.6,
+     "samples": 82
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "run",
+     "clip": "v10_run"
+    },
+    {
+     "id": 10,
+     "role": "sprint",
+     "clip": "v10_run"
+    },
+    {
+     "id": 6,
+     "role": "sprint",
+     "clip": "v10_run"
+    },
+    {
+     "id": 5,
+     "role": "dejected",
+     "clip": "v10_idle_weight_shift"
+    }
+   ]
+  },
+  {
+   "file": "show-E-celebrate-2.png",
+   "caption": "celebration: mates arrived, keeper beaten",
+   "phase": "goal",
+   "phaseTime": 0.98,
+   "elapsed": 4.72,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "celebrate",
+    "hold": false,
+    "elapsed": 2.7,
+    "reason": "complete",
+    "wall": 4.5,
+    "cuts": [
+     {
+      "cam": "wide",
+      "span": 2.55,
+      "rate": 1.3421052631578936,
+      "wall": 1.9
+     },
+     {
+      "cam": "close",
+      "span": 1.6,
+      "rate": 0.6153846153846154,
+      "wall": 2.6
+     }
+    ],
+    "mood": {
+     "cheer": 0.85,
+     "groan": 0,
+     "excitement": 1
+    },
+    "recording": {
+     "seconds": 4.467,
+     "samples": 94
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "celebrate",
+     "clip": "celebrate_arms_up"
+    },
+    {
+     "id": 10,
+     "role": "sprint",
+     "clip": "v10_run"
+    },
+    {
+     "id": 6,
+     "role": "sprint",
+     "clip": "v10_run"
+    },
+    {
+     "id": 5,
+     "role": "dejected",
+     "clip": "v10_idle_weight_shift"
+    }
+   ]
+  },
+  {
+   "file": "show-F-kickoff.png",
+   "caption": "kickoff after the show, live camera back",
+   "phase": "playing",
+   "phaseTime": -0.02,
+   "elapsed": 5.15,
+   "score": [
+    1,
+    0
+   ],
+   "show": {
+    "phase": "live",
+    "hold": false,
+    "elapsed": 0.43,
+    "reason": "kickoff",
+    "wall": 4.5,
+    "cuts": [
+     {
+      "cam": "wide",
+      "span": 2.55,
+      "rate": 1.3421052631578936,
+      "wall": 1.9
+     },
+     {
+      "cam": "close",
+      "span": 1.6,
+      "rate": 0.6153846153846154,
+      "wall": 2.6
+     }
+    ],
+    "mood": {
+     "cheer": 0.72,
+     "groan": 0,
+     "excitement": 0.459
+    },
+    "recording": {
+     "seconds": 4.567,
+     "samples": 126
+    }
+   },
+   "replay": {
+    "active": false,
+    "reason": "resize"
+   },
+   "banner": "",
+   "half": "מחצית 1",
+   "states": [
+    {
+     "id": 0,
+     "role": "idle",
+     "clip": "celebrate_arms_up"
+    },
+    {
+     "id": 10,
+     "role": "run",
+     "clip": "decelerate"
+    },
+    {
+     "id": 6,
+     "role": "run",
+     "clip": "v10_cut_180_left"
+    },
+    {
+     "id": 5,
+     "role": "idle",
+     "clip": "v9_goalkeeper_ready"
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "before": {
+  "controlled": 0,
+  "x": 18.5,
+  "z": 1.2,
+  "attackDir": 1,
+  "recording": {
+   "seconds": 4.016,
+   "samples": 43
+  }
+ },
+ "goalAt": {
+  "phase": "goal",
+  "phaseTime": 2.18,
+  "elapsed": 4.72,
+  "score": [
+   1,
+   0
+  ],
+  "show": {
+   "phase": "cut",
+   "hold": false,
+   "elapsed": 0,
+   "reason": "goal",
+   "wall": null,
+   "cuts": null,
+   "mood": {
+    "cheer": 0,
+    "groan": 0,
+    "excitement": 0.654
+   },
+   "recording": {
+    "seconds": 4.5,
+    "samples": 64
+   }
+  },
+  "replay": {
+   "active": false,
+   "reason": "resize"
+  },
+  "banner": "",
+  "half": "מחצית 1",
+  "states": [
+   {
+    "id": 0,
+    "role": "celebrate",
+    "clip": "celebrate_arms_up"
+   },
+   {
+    "id": 10,
+    "role": "run",
+    "clip": "v10_run"
+   },
+   {
+    "id": 6,
+    "role": "run",
+    "clip": "v10_run"
+   },
+   {
+    "id": 5,
+    "role": "dive",
+    "clip": "v11_keeper_dive_right"
+   }
+  ]
+ },
+ "after": {
+  "phase": "playing",
+  "phaseTime": -0.02,
+  "elapsed": 5.15,
+  "score": [
+   1,
+   0
+  ],
+  "show": {
+   "phase": "live",
+   "hold": false,
+   "elapsed": 0.43,
+   "reason": "kickoff",
+   "wall": 4.5,
+   "cuts": [
+    {
+     "cam": "wide",
+     "span": 2.55,
+     "rate": 1.3421052631578936,
+     "wall": 1.9
+    },
+    {
+     "cam": "close",
+     "span": 1.6,
+     "rate": 0.6153846153846154,
+     "wall": 2.6
+    }
+   ],
+   "mood": {
+    "cheer": 0.72,
+    "groan": 0,
+    "excitement": 0.459
+   },
+   "recording": {
+    "seconds": 4.567,
+    "samples": 126
+   }
+  },
+  "replay": {
+   "active": false,
+   "reason": "resize"
+  },
+  "banner": "",
+  "half": "מחצית 1",
+  "states": [
+   {
+    "id": 0,
+    "role": "idle",
+    "clip": "celebrate_arms_up"
+   },
+   {
+    "id": 10,
+    "role": "run",
+    "clip": "decelerate"
+   },
+   {
+    "id": 6,
+    "role": "run",
+    "clip": "v10_cut_180_left"
+   },
+   {
+    "id": 5,
+    "role": "idle",
+    "clip": "v9_goalkeeper_ready"
+   }
+  ]
+ }
+}

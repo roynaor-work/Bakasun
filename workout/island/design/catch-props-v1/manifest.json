@@ -1,0 +1,894 @@
+{
+  "schemaVersion": 1,
+  "name": "catch-props-v1",
+  "license": "CC0-1.0",
+  "coordinates": {
+    "forward": "+Z",
+    "up": "+Y",
+    "units": "metres",
+    "origin": "bottom-centre"
+  },
+  "triangleLimit": 1500,
+  "compression": "none",
+  "atlas": {
+    "path": "atlas-1024.png",
+    "width": 1024,
+    "height": 1024,
+    "sha256": "d66dfc9b6ef29b38fc2860750d0c6086ce1a1282c0eb49cb8f65ac5a1d09f0a9",
+    "embedding": "Identical PNG embedded in each standalone GLB; one shared atlas design."
+  },
+  "palette": {
+    "cream": {
+      "color": "#fff0cc",
+      "tile": 0,
+      "uv": [
+        0.0625,
+        0.0625
+      ]
+    },
+    "sand": {
+      "color": "#dfbf83",
+      "tile": 1,
+      "uv": [
+        0.1875,
+        0.0625
+      ]
+    },
+    "ochre": {
+      "color": "#ba854f",
+      "tile": 2,
+      "uv": [
+        0.3125,
+        0.0625
+      ]
+    },
+    "wood": {
+      "color": "#795444",
+      "tile": 3,
+      "uv": [
+        0.4375,
+        0.0625
+      ]
+    },
+    "orange": {
+      "color": "#ef884b",
+      "tile": 4,
+      "uv": [
+        0.5625,
+        0.0625
+      ]
+    },
+    "orange_light": {
+      "color": "#ffb36a",
+      "tile": 5,
+      "uv": [
+        0.6875,
+        0.0625
+      ]
+    },
+    "red": {
+      "color": "#d56351",
+      "tile": 6,
+      "uv": [
+        0.8125,
+        0.0625
+      ]
+    },
+    "coral": {
+      "color": "#ec9277",
+      "tile": 7,
+      "uv": [
+        0.9375,
+        0.0625
+      ]
+    },
+    "yellow": {
+      "color": "#f7ca62",
+      "tile": 8,
+      "uv": [
+        0.0625,
+        0.1875
+      ]
+    },
+    "gold": {
+      "color": "#dca541",
+      "tile": 9,
+      "uv": [
+        0.1875,
+        0.1875
+      ]
+    },
+    "mint": {
+      "color": "#83bfa0",
+      "tile": 10,
+      "uv": [
+        0.3125,
+        0.1875
+      ]
+    },
+    "green": {
+      "color": "#458e7a",
+      "tile": 11,
+      "uv": [
+        0.4375,
+        0.1875
+      ]
+    },
+    "teal": {
+      "color": "#4b9d9d",
+      "tile": 12,
+      "uv": [
+        0.5625,
+        0.1875
+      ]
+    },
+    "teal_light": {
+      "color": "#8acec1",
+      "tile": 13,
+      "uv": [
+        0.6875,
+        0.1875
+      ]
+    },
+    "blue": {
+      "color": "#527b9b",
+      "tile": 14,
+      "uv": [
+        0.8125,
+        0.1875
+      ]
+    },
+    "blue_light": {
+      "color": "#8bafbf",
+      "tile": 15,
+      "uv": [
+        0.9375,
+        0.1875
+      ]
+    },
+    "navy": {
+      "color": "#304e67",
+      "tile": 16,
+      "uv": [
+        0.0625,
+        0.3125
+      ]
+    },
+    "glass": {
+      "color": "#3c6e80",
+      "tile": 17,
+      "uv": [
+        0.1875,
+        0.3125
+      ]
+    },
+    "glass_light": {
+      "color": "#78a8b2",
+      "tile": 18,
+      "uv": [
+        0.3125,
+        0.3125
+      ]
+    },
+    "glass_shine": {
+      "color": "#c5ded1",
+      "tile": 19,
+      "uv": [
+        0.4375,
+        0.3125
+      ]
+    },
+    "rubber": {
+      "color": "#353d42",
+      "tile": 20,
+      "uv": [
+        0.5625,
+        0.3125
+      ]
+    },
+    "rubber_light": {
+      "color": "#515957",
+      "tile": 21,
+      "uv": [
+        0.6875,
+        0.3125
+      ]
+    },
+    "metal": {
+      "color": "#afb8ae",
+      "tile": 22,
+      "uv": [
+        0.8125,
+        0.3125
+      ]
+    },
+    "metal_dark": {
+      "color": "#758b8a",
+      "tile": 23,
+      "uv": [
+        0.9375,
+        0.3125
+      ]
+    },
+    "oil": {
+      "color": "#403e49",
+      "tile": 24,
+      "uv": [
+        0.0625,
+        0.4375
+      ]
+    },
+    "oil_edge": {
+      "color": "#59515b",
+      "tile": 25,
+      "uv": [
+        0.1875,
+        0.4375
+      ]
+    },
+    "oil_sheen": {
+      "color": "#77717d",
+      "tile": 26,
+      "uv": [
+        0.3125,
+        0.4375
+      ]
+    },
+    "oil_warm": {
+      "color": "#8d7772",
+      "tile": 27,
+      "uv": [
+        0.4375,
+        0.4375
+      ]
+    },
+    "water": {
+      "color": "#6eafbd",
+      "tile": 28,
+      "uv": [
+        0.5625,
+        0.4375
+      ]
+    },
+    "water_edge": {
+      "color": "#a4ced0",
+      "tile": 29,
+      "uv": [
+        0.6875,
+        0.4375
+      ]
+    },
+    "water_shine": {
+      "color": "#d0e5d9",
+      "tile": 30,
+      "uv": [
+        0.8125,
+        0.4375
+      ]
+    },
+    "water_deep": {
+      "color": "#5895ab",
+      "tile": 31,
+      "uv": [
+        0.9375,
+        0.4375
+      ]
+    }
+  },
+  "assets": [
+    {
+      "id": "nitro-bottle",
+      "path": "models/nitro-bottle.glb",
+      "triangles": 328,
+      "bytes": 32536,
+      "sha256": "e191556d56389dc1654a9b1b1c99ac04ac0960bd3b5914347526ff52c4dca1b2",
+      "bounds": {
+        "min": [
+          -0.2785,
+          0.0,
+          -0.277
+        ],
+        "max": [
+          0.2785,
+          1.28,
+          0.277
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "nitro-bottle",
+        "mesh"
+      ],
+      "label": "בקבוק מהירות",
+      "group": "pickups",
+      "previewPosition": [
+        -3.6,
+        0,
+        -4
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "repair-wheel",
+      "path": "models/repair-wheel.glb",
+      "triangles": 676,
+      "bytes": 59800,
+      "sha256": "6b64c36c0e16fdc411f6dd9727fbc749b66f7ec765420836ae9d64f656a302b2",
+      "bounds": {
+        "min": [
+          -0.56,
+          0.0,
+          -0.235
+        ],
+        "max": [
+          0.56,
+          1.12,
+          0.235
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "repair-wheel",
+        "mesh"
+      ],
+      "label": "גלגל תיקון",
+      "group": "pickups",
+      "previewPosition": [
+        0.2,
+        0,
+        -4
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "oil-slick-a",
+      "path": "models/oil-slick-a.glb",
+      "triangles": 54,
+      "bytes": 17352,
+      "sha256": "cf6804e280d2e5ae40a4af8d9acce48dc209ef5d77662e1e4920fdc9d5069e33",
+      "bounds": {
+        "min": [
+          -1.51631,
+          0.0,
+          -0.94439
+        ],
+        "max": [
+          1.51631,
+          0.0,
+          0.94439
+        ]
+      },
+      "decal": true,
+      "nodes": [
+        "oil-slick-a",
+        "mesh"
+      ],
+      "label": "שמן · רחב",
+      "group": "hazards",
+      "previewPosition": [
+        -3.9,
+        0,
+        3
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "oil-slick-b",
+      "path": "models/oil-slick-b.glb",
+      "triangles": 66,
+      "bytes": 18324,
+      "sha256": "665892395a51f20524d41d7af128168b8c0bf5b3547409a7380cfe3bf653377c",
+      "bounds": {
+        "min": [
+          -1.14485,
+          0.0,
+          -1.3866
+        ],
+        "max": [
+          1.14485,
+          0.0,
+          1.3866
+        ]
+      },
+      "decal": true,
+      "nodes": [
+        "oil-slick-b",
+        "mesh"
+      ],
+      "label": "שמן · ארוך",
+      "group": "hazards",
+      "previewPosition": [
+        -0.1,
+        0,
+        3
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "puddle-a",
+      "path": "models/puddle-a.glb",
+      "triangles": 54,
+      "bytes": 17348,
+      "sha256": "d3d90217d309a43815f7f1c15a98c8ed724aa25182da6b013de6d91e19ae5748",
+      "bounds": {
+        "min": [
+          -1.51631,
+          0.0,
+          -0.94439
+        ],
+        "max": [
+          1.51631,
+          0.0,
+          0.94439
+        ]
+      },
+      "decal": true,
+      "nodes": [
+        "puddle-a",
+        "mesh"
+      ],
+      "label": "שלולית · רחבה",
+      "group": "hazards",
+      "previewPosition": [
+        3.8,
+        0,
+        3
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "puddle-b",
+      "path": "models/puddle-b.glb",
+      "triangles": 66,
+      "bytes": 18320,
+      "sha256": "9e03d809fb12bf9f389f0f4454be4be62d2b78c7a351d5b27a580965d2c25bdd",
+      "bounds": {
+        "min": [
+          -1.14485,
+          0.0,
+          -1.3866
+        ],
+        "max": [
+          1.14485,
+          0.0,
+          1.3866
+        ]
+      },
+      "decal": true,
+      "nodes": [
+        "puddle-b",
+        "mesh"
+      ],
+      "label": "שלולית · ארוכה",
+      "group": "hazards",
+      "previewPosition": [
+        3.8,
+        0,
+        8
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "warning-sign",
+      "path": "models/warning-sign.glb",
+      "triangles": 40,
+      "bytes": 15840,
+      "sha256": "d46c015aabdbafefc4b20267ee9f228bf8eadd2fd8de98f422cb075aeaa41943",
+      "bounds": {
+        "min": [
+          -0.68,
+          0.0,
+          -0.315
+        ],
+        "max": [
+          0.68,
+          2.07,
+          0.315
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "warning-sign",
+        "mesh"
+      ],
+      "label": "שלט אזהרה",
+      "group": "hazards",
+      "previewPosition": [
+        6.1,
+        0,
+        3
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "short-ramp",
+      "path": "models/short-ramp.glb",
+      "triangles": 48,
+      "bytes": 16204,
+      "sha256": "0cc92f38f8ee3e90880afd87b5a086f29b48b31d5d0dbde64def49424f2dbc00",
+      "bounds": {
+        "min": [
+          -1.55,
+          0,
+          -1.8
+        ],
+        "max": [
+          1.55,
+          0.906,
+          1.8
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "short-ramp",
+        "mesh"
+      ],
+      "label": "רמפה קצרה",
+      "group": "jumps",
+      "previewPosition": [
+        -3.6,
+        0,
+        13
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "jump-bridge",
+      "path": "models/jump-bridge.glb",
+      "triangles": 240,
+      "bytes": 29692,
+      "sha256": "c62a11af17a3bfbad29b52ad10d040fb86d781afb4b0d0c8583553c2e31fcdb4",
+      "bounds": {
+        "min": [
+          -1.715,
+          0,
+          -4.2
+        ],
+        "max": [
+          1.715,
+          1.60614,
+          4.2
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "jump-bridge",
+        "mesh"
+      ],
+      "label": "גשר קפיצה",
+      "group": "jumps",
+      "previewPosition": [
+        2.4,
+        0,
+        16
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-helicopter",
+      "path": "models/police-helicopter.glb",
+      "triangles": 590,
+      "bytes": 52432,
+      "sha256": "d74a741935c8527d230c59a7451747d1e8649619fe856d5de5a3f3485dafcbbe",
+      "bounds": {
+        "min": [
+          -2.04,
+          0.0,
+          -2.48
+        ],
+        "max": [
+          2.04,
+          2.28,
+          2.48
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "police-helicopter",
+        "body",
+        "rotor"
+      ],
+      "label": "מסוק משטרה",
+      "group": "vehicles",
+      "previewPosition": [
+        4.4,
+        4.1,
+        29
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "civilian-hatchback",
+      "path": "models/civilian-hatchback.glb",
+      "triangles": 680,
+      "bytes": 56120,
+      "sha256": "8a851d0a82effebb285d753f3fc7546bbdf63882d26920b9df804301f2ccb537",
+      "bounds": {
+        "min": [
+          -1.05,
+          0.0,
+          -1.925
+        ],
+        "max": [
+          1.05,
+          1.62,
+          1.925
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "civilian-hatchback",
+        "mesh"
+      ],
+      "label": "מכונית קומפקטית",
+      "group": "vehicles",
+      "previewPosition": [
+        -3.9,
+        0,
+        24
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "civilian-sedan",
+      "path": "models/civilian-sedan.glb",
+      "triangles": 680,
+      "bytes": 56116,
+      "sha256": "9d62adc140d0df6d411545d7446f8242639b1363e44cfd77cf3f6c12faf82208",
+      "bounds": {
+        "min": [
+          -1.05,
+          0.0,
+          -2.225
+        ],
+        "max": [
+          1.05,
+          1.53,
+          2.225
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "civilian-sedan",
+        "mesh"
+      ],
+      "label": "מכונית משפחתית",
+      "group": "vehicles",
+      "previewPosition": [
+        -0.15,
+        0,
+        28
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "taxi",
+      "path": "models/taxi.glb",
+      "triangles": 836,
+      "bytes": 67040,
+      "sha256": "d6ae82db6a1263d8479b7efc6f5084f57edc5fe06efa1d33e8aa47345080e377",
+      "bounds": {
+        "min": [
+          -1.05,
+          0.0,
+          -2.225
+        ],
+        "max": [
+          1.05,
+          1.71,
+          2.225
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "taxi",
+        "mesh"
+      ],
+      "label": "מונית",
+      "group": "vehicles",
+      "previewPosition": [
+        -3.8,
+        0,
+        32
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "motorcycle",
+      "path": "models/motorcycle.glb",
+      "triangles": 476,
+      "bytes": 43280,
+      "sha256": "e02c9c26d837a23b5756bfba3b90f804d9c0f11fe87fb9fc07842603979162d2",
+      "bounds": {
+        "min": [
+          -0.48,
+          0.0,
+          -1.185
+        ],
+        "max": [
+          0.48,
+          1.21,
+          1.185
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "motorcycle",
+        "mesh"
+      ],
+      "label": "אופנוע",
+      "group": "vehicles",
+      "previewPosition": [
+        3.3,
+        0,
+        25
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-barrel",
+      "path": "models/police-barrel.glb",
+      "triangles": 336,
+      "bytes": 32596,
+      "sha256": "b42a507fa88d6425665df871945f2dabbb3a770855fb4f34c060cb7cd3164c04",
+      "bounds": {
+        "min": [
+          -0.4,
+          0.0,
+          -0.4
+        ],
+        "max": [
+          0.4,
+          0.968,
+          0.4
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "police-barrel",
+        "mesh"
+      ],
+      "label": "חבית משטרה",
+      "group": "barriers",
+      "previewPosition": [
+        -5.3,
+        0,
+        39
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-barrier",
+      "path": "models/police-barrier.glb",
+      "triangles": 720,
+      "bytes": 55456,
+      "sha256": "ee01ca9bcf1c9e97a7ba58116bc96cd792f7bc7eafaf5268d66627efd72380c9",
+      "bounds": {
+        "min": [
+          -2.075,
+          0.0,
+          -0.4
+        ],
+        "max": [
+          2.075,
+          0.968,
+          0.4
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "police-barrier",
+        "mesh"
+      ],
+      "label": "מחסום משטרה",
+      "group": "barriers",
+      "previewPosition": [
+        -1.9,
+        0,
+        40
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "construction-barrier",
+      "path": "models/construction-barrier.glb",
+      "triangles": 264,
+      "bytes": 30064,
+      "sha256": "1efef30840d2b8dc55d0583dfb34eaf40967693b962be22a40661230ab5a8f9f",
+      "bounds": {
+        "min": [
+          -1.525,
+          0.0,
+          -0.57
+        ],
+        "max": [
+          1.525,
+          1.25,
+          0.57
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "construction-barrier",
+        "mesh"
+      ],
+      "label": "מחסום בנייה",
+      "group": "barriers",
+      "previewPosition": [
+        3.1,
+        0,
+        40
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "traffic-cone",
+      "path": "models/traffic-cone.glb",
+      "triangles": 140,
+      "bytes": 21412,
+      "sha256": "714069c862b673b58ab3f94c70acff36896066ea17c381cf6257de511d15205d",
+      "bounds": {
+        "min": [
+          -0.35,
+          0,
+          -0.35
+        ],
+        "max": [
+          0.35,
+          0.88,
+          0.35
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "traffic-cone",
+        "mesh"
+      ],
+      "label": "קונוס",
+      "group": "roadside",
+      "previewPosition": [
+        5.1,
+        0,
+        -3.8
+      ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "guardrail",
+      "path": "models/guardrail.glb",
+      "triangles": 120,
+      "bytes": 21248,
+      "sha256": "8b14e4662dd24e05fdcd6a088057b6d439486363ce00a1e1a4bcc3d5f189a34f",
+      "bounds": {
+        "min": [
+          -0.21,
+          0.0,
+          -2.54
+        ],
+        "max": [
+          0.21,
+          1.005,
+          2.54
+        ]
+      },
+      "decal": false,
+      "nodes": [
+        "guardrail",
+        "mesh"
+      ],
+      "label": "מעקה",
+      "group": "roadside",
+      "previewPosition": [
+        -6.4,
+        0,
+        11
+      ],
+      "license": "CC0-1.0"
+    }
+  ],
+  "totals": {
+    "assets": 19,
+    "triangles": 6414,
+    "glbBytes": 661180
+  }
+}

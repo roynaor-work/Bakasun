@@ -1,0 +1,89 @@
+{
+  "method": "FFmpeg 7.1 loudnorm, EBU R128 / ITU-R BS.1770, measured after decoding each delivered file with 400 ms analysis-only trailing silence; gating active. Analysis padding is not written into files. Vorbis tail compensation preserves the requested decoded duration. Short cues use integrated loudness, not momentary LUFS.",
+  "sounds": [
+    {
+      "id": "vulcan-burst",
+      "durationSeconds": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/vulcan-burst.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.0,
+          "truePeakDbtp": -2.49,
+          "decodedSamples": 24000,
+          "decodedDurationSeconds": 0.5
+        },
+        {
+          "path": "audio/vulcan-burst.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.03,
+          "truePeakDbtp": -2.75,
+          "decodedSamples": 24000,
+          "decodedDurationSeconds": 0.5
+        }
+      ]
+    },
+    {
+      "id": "overheat",
+      "durationSeconds": 0.4,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/overheat.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.01,
+          "truePeakDbtp": -3.34,
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4
+        },
+        {
+          "path": "audio/overheat.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -3.71,
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4
+        }
+      ]
+    },
+    {
+      "id": "boss-explosion",
+      "durationSeconds": 1.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/boss-explosion.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -2.98,
+          "decodedSamples": 72000,
+          "decodedDurationSeconds": 1.5
+        },
+        {
+          "path": "audio/boss-explosion.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.03,
+          "truePeakDbtp": -3.63,
+          "decodedSamples": 72000,
+          "decodedDurationSeconds": 1.5
+        }
+      ]
+    }
+  ]
+}

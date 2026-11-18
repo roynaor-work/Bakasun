@@ -1,0 +1,37 @@
+{
+ "best": [
+  3,
+  "narrow",
+  0
+ ],
+ "phases": [
+  {
+   "ph": "throw",
+   "clock": 0.22,
+   "catches": 0,
+   "bossHp": 2
+  },
+  {
+   "ph": "flight",
+   "clock": 0.5,
+   "catches": 0,
+   "bossHp": 2
+  },
+  {
+   "ph": "impact",
+   "clock": 1.15,
+   "catches": 0,
+   "bossHp": 2
+  }
+ ],
+ "catches": 0,
+ "bossHp": 2,
+ "after": {
+  "phase": "flee",
+  "catches": 1,
+  "bossHp": 1,
+  "thrown": 1,
+  "hitsNeeded": 2
+ },
+ "errors": []
+}

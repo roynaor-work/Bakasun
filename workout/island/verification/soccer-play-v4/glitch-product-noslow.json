@@ -1,0 +1,98 @@
+{
+ "slide-straight": {
+  "popMaxDeg": 56.84,
+  "at": "slide-straight-miss/RightForeArm",
+  "hipsStepMaxCm": 5.77,
+  "p99": 50.57,
+  "states": [
+   "v10_run",
+   "slide-straight",
+   "slide-straight-miss",
+   "v10_idle_relaxed"
+  ]
+ },
+ "slide-side": {
+  "popMaxDeg": 18.28,
+  "at": "recover/LeftLeg",
+  "hipsStepMaxCm": 4.23,
+  "p99": 17.14,
+  "states": [
+   "v10_run",
+   "fall",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ },
+ "slide-left": {
+  "popMaxDeg": 18.28,
+  "at": "recover/LeftLeg",
+  "hipsStepMaxCm": 4.23,
+  "p99": 17.14,
+  "states": [
+   "v10_run",
+   "fall",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ },
+ "slide-right": {
+  "popMaxDeg": 18.28,
+  "at": "recover/LeftLeg",
+  "hipsStepMaxCm": 4.23,
+  "p99": 17.14,
+  "states": [
+   "v10_run",
+   "fall",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ },
+ "dive-left-hands": [
+  -1.08,
+  -1.19
+ ],
+ "dive-left": {
+  "popMaxDeg": 31.76,
+  "at": "v8_keeper_dive_low_right/LeftHand",
+  "hipsStepMaxCm": 4.4,
+  "p99": 29.94,
+  "states": [
+   "v10_idle_relaxed",
+   "v8_keeper_dive_low_right",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ },
+ "dive-right-hands": [
+  -1.08,
+  -1.19
+ ],
+ "dive-right": {
+  "popMaxDeg": 31.76,
+  "at": "v8_keeper_dive_low_left/RightHand",
+  "hipsStepMaxCm": 4.4,
+  "p99": 29.93,
+  "states": [
+   "v10_idle_relaxed",
+   "v8_keeper_dive_low_left",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ },
+ "dive-high-left-hands": [
+  -1.08,
+  -1.19
+ ],
+ "dive-high-left": {
+  "popMaxDeg": 31.76,
+  "at": "v8_keeper_dive_low_right/LeftHand",
+  "hipsStepMaxCm": 4.4,
+  "p99": 29.94,
+  "states": [
+   "v10_idle_relaxed",
+   "v8_keeper_dive_low_right",
+   "recover",
+   "v10_idle_relaxed"
+  ]
+ }
+}

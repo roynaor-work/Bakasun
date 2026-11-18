@@ -1,0 +1,177 @@
+{
+ "mode": "before (no Codex v9 clips)",
+ "strideMatch": [
+  {
+   "speed": 0.8,
+   "state": "run_1",
+   "clipSpeedMps": 1.6,
+   "rate": 0.5,
+   "impliedMps": 0.8,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1,
+   "state": "run_1",
+   "clipSpeedMps": 1.6,
+   "rate": 0.63,
+   "impliedMps": 1,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1.3,
+   "state": "run_1",
+   "clipSpeedMps": 1.6,
+   "rate": 0.81,
+   "impliedMps": 1.3,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1.6,
+   "state": "run_1",
+   "clipSpeedMps": 1.6,
+   "rate": 1,
+   "impliedMps": 1.6,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2,
+   "state": "run_2",
+   "clipSpeedMps": 2.4,
+   "rate": 0.83,
+   "impliedMps": 2,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2.4,
+   "state": "run_2",
+   "clipSpeedMps": 2.4,
+   "rate": 1,
+   "impliedMps": 2.4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2.8,
+   "state": "run_3",
+   "clipSpeedMps": 3.2,
+   "rate": 0.87,
+   "impliedMps": 2.8,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 3.2,
+   "state": "run_3",
+   "clipSpeedMps": 3.2,
+   "rate": 1,
+   "impliedMps": 3.2,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 4,
+   "state": "run_4",
+   "clipSpeedMps": 4.2,
+   "rate": 0.95,
+   "impliedMps": 4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 4.5,
+   "state": "run_4",
+   "clipSpeedMps": 4.2,
+   "rate": 1.07,
+   "impliedMps": 4.5,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 5.4,
+   "state": "run_5",
+   "clipSpeedMps": 5.4,
+   "rate": 1,
+   "impliedMps": 5.4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 6.5,
+   "state": "sprint",
+   "clipSpeedMps": 7.2,
+   "rate": 0.9,
+   "impliedMps": 6.5,
+   "mismatchPct": 0
+  }
+ ],
+ "sequence": {
+  "states": [
+   "idle",
+   "run_1",
+   "run_2",
+   "run_4",
+   "sprint",
+   "decelerate",
+   "idle",
+   "run_2",
+   "decelerate",
+   "idle"
+  ],
+  "popMaxDeg": 53.97,
+  "popP99Deg": 17.73,
+  "hipsStepMaxM": 0.03,
+  "hipsStepP99M": 0.01
+ },
+ "runs": [
+  {
+   "speed": 3.2,
+   "state": "run_3",
+   "rate": 1,
+   "stepsPerSecond": 2.86,
+   "leanDeg": 6.8,
+   "elbowFlexMinDeg": 49.8,
+   "elbowFlexMaxDeg": 80.2,
+   "hipsBobCm": 1.61
+  },
+  {
+   "speed": 4.2,
+   "state": "run_4",
+   "rate": 1,
+   "stepsPerSecond": 3.33,
+   "leanDeg": 8.07,
+   "elbowFlexMinDeg": 48.8,
+   "elbowFlexMaxDeg": 81.21,
+   "hipsBobCm": 1.56
+  },
+  {
+   "speed": 5.3,
+   "state": "run_5",
+   "rate": 0.98,
+   "stepsPerSecond": 3.68,
+   "leanDeg": 9.33,
+   "elbowFlexMinDeg": 47.62,
+   "elbowFlexMaxDeg": 82.39,
+   "hipsBobCm": 1.6
+  },
+  {
+   "speed": 6,
+   "state": "run_5",
+   "rate": 1.11,
+   "stepsPerSecond": 4.17,
+   "leanDeg": 9.33,
+   "elbowFlexMinDeg": 47.6,
+   "elbowFlexMaxDeg": 82.4,
+   "hipsBobCm": 1.61
+  },
+  {
+   "speed": 6.5,
+   "state": "sprint",
+   "rate": 0.9,
+   "stepsPerSecond": 3.87,
+   "leanDeg": 12.49,
+   "elbowFlexMinDeg": 45.85,
+   "elbowFlexMaxDeg": 84.16,
+   "hipsBobCm": 1.52
+  }
+ ],
+ "idle": {
+  "idle": {
+   "abdMax": 12.3,
+   "flexMin": 39.1
+  }
+ }
+}

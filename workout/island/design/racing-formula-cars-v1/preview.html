@@ -1,0 +1,81 @@
+<!doctype html>
+<!-- Original CC0-1.0. Source and dedication: LICENSES.md. -->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="מכונית פורמולה מקורית בשלוש רמות פירוט, עם 12 צבעים וחלקים נפרדים להנפשה.">
+  <title>פורמולה — שלוש רמות פירוט</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow"><span class="signal"></span> חבילת עיצוב / מרוצים / 01</div>
+      <div class="headline"><h1>פורמולה, בכל מרחק.</h1><p>אותה מכונית. אותה צללית.<br>שלוש רמות פירוט ל־12 מכוניות על המסלול.</p></div>
+      <div class="specs"><span>אורך <b dir="ltr">5.2 m</b></span><span>חרטום <b dir="ltr">+Z</b></span><span>ללא טקסטורות</span><span>מקורי · CC0</span></div>
+    </header>
+
+    <section class="workbench" aria-label="השוואת רמות הפירוט">
+      <div class="toolbar">
+        <div class="section-title"><span class="index">01</span><h2>מקרוב ועד האופק</h2></div>
+        <div class="view-buttons" role="group" aria-label="זווית צפייה">
+          <button type="button" data-angle="front" aria-pressed="true">קדמי</button>
+          <button type="button" data-angle="rear" aria-pressed="false">אחורי</button>
+          <button type="button" data-angle="side" aria-pressed="false">צד</button>
+          <button type="button" data-angle="top" aria-pressed="false">עליון</button>
+        </div>
+      </div>
+      <div class="lod-grid" dir="ltr">
+        <figure class="lod-card" dir="rtl">
+          <figcaption><span class="lod-name" dir="ltr">LOD 0</span><span class="tag">קרוב</span></figcaption>
+          <div class="viewport" data-view="0" role="img" aria-label="מכונית פורמולה ברמת הפירוט הגבוהה; גרירה לסיבוב וגלילה לקירוב" tabindex="0"></div>
+          <div class="card-footer"><div><strong data-count="0">—</strong><span>משולשים / עד 6,000</span></div><span class="distance" data-distance="0">—</span></div>
+        </figure>
+        <figure class="lod-card" dir="rtl">
+          <figcaption><span class="lod-name" dir="ltr">LOD 1</span><span class="tag">ביניים</span></figcaption>
+          <div class="viewport" data-view="1" role="img" aria-label="מכונית פורמולה ברמת הפירוט הבינונית; גרירה לסיבוב וגלילה לקירוב" tabindex="0"></div>
+          <div class="card-footer"><div><strong data-count="1">—</strong><span>משולשים / עד 2,000</span></div><span class="distance" data-distance="1">—</span></div>
+        </figure>
+        <figure class="lod-card" dir="rtl">
+          <figcaption><span class="lod-name" dir="ltr">LOD 2</span><span class="tag">רחוק</span></figcaption>
+          <div class="viewport" data-view="2" role="img" aria-label="מכונית פורמולה ברמת הפירוט הנמוכה; גרירה לסיבוב וגלילה לקירוב" tabindex="0"></div>
+          <div class="card-footer"><div><strong data-count="2">—</strong><span>משולשים / עד 500</span></div><span class="distance" data-distance="2">—</span></div>
+        </figure>
+      </div>
+      <div class="comparison-options"><label><input type="checkbox" id="equal-scale"> קנה מידה אחיד להשוואת הצורה</label><span>גרירה או מקשי חצים לסיבוב · גלילה או + / − לקירוב</span></div>
+    </section>
+
+    <section class="controls" aria-label="צביעה וחלקים נעים">
+      <div class="palette-block"><div class="section-title"><span class="index">02</span><h2>12 צבעים, גוף אחד</h2></div><div id="palette" class="palette" role="group" aria-label="בחירת צבע מכונית"></div><p>צבע הגוף וצבע הכנפיים נפרדים. הצמיגים נשארים כהים.</p></div>
+      <div class="motion-block">
+        <label class="slider-label" for="steering">היגוי קדמי <output id="steering-value">0°</output></label><input id="steering" type="range" min="-26" max="26" value="0" step="1" dir="ltr">
+        <label class="slider-label" for="explosion">פירוק חלקים <output id="explosion-value">0%</output></label><input id="explosion" type="range" min="0" max="100" value="0" step="1" dir="ltr">
+        <div class="motion-toggles"><label><input id="rolling" type="checkbox"> גלגול גלגלים</label><label><input id="rollover" type="checkbox"> התהפכות</label><button id="reset" type="button">איפוס</button></div>
+      </div>
+    </section>
+
+    <section class="fleet-section" aria-label="תצוגת 12 מכוניות">
+      <div class="toolbar">
+        <div class="section-title"><span class="index">03</span><h2>כל הגריד נראה פורמולה</h2></div>
+        <div class="fleet-options">
+          <label for="fleet-lod">רמת פירוט</label>
+          <select id="fleet-lod">
+            <option value="auto">לפי מרחק</option>
+            <option value="0">LOD 0</option>
+            <option value="1">LOD 1</option>
+            <option value="2">LOD 2</option>
+          </select>
+        </div>
+      </div>
+      <div class="fleet-view viewport" data-view="fleet" role="img" aria-label="12 מכוניות פורמולה ב־12 צבעים; הרמות מתחלפות לפי המרחק מהמצלמה" tabindex="0"></div>
+      <div class="fleet-footer"><strong id="fleet-count">טוען מכוניות…</strong><span id="fleet-levels"></span><span>12 מכוניות · ארבעה גלגלים חשופים לכל אחת</span></div>
+    </section>
+    <footer><span id="status" role="status" aria-live="polite">טוען את שלוש רמות הפירוט…</span><nav><a href="./REPORT.md">דוח ומדריך חיבור</a><a href="./LICENSES.md">מקורות ורישיונות</a><a href="./manifest.json">נתוני הנכסים</a></nav></footer>
+    <noscript>נדרש JavaScript להצגת המודלים התלת־ממדיים.</noscript>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+{
+ "flags": {
+  "TOUCH": true,
+  "AIMSTICK": false,
+  "FIRE_V21": false,
+  "HUD_V21": false,
+  "STICK_V21": false,
+  "LEGACY": true
+ },
+ "gestures": [
+  {
+   "label": "tap on the sea",
+   "from": [
+    300,
+    240
+   ],
+   "to": [
+    300,
+    240
+   ],
+   "under": "scene",
+   "sceneEvents": {
+    "down": 1,
+    "move": 0,
+    "up": 1,
+    "cancel": 0
+   },
+   "firingWhileHeld": true,
+   "shots": 7,
+   "shotsBy": {
+    "button": 0,
+    "scene": 7,
+    "keyboard": 0,
+    "mouse": 0,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "aimMove": 0,
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   }
+  },
+  {
+   "label": "drag on the sea, left half",
+   "from": [
+    150,
+    250
+   ],
+   "to": [
+    260,
+    215
+   ],
+   "under": "scene",
+   "sceneEvents": {
+    "down": 1,
+    "move": 8,
+    "up": 1,
+    "cancel": 0
+   },
+   "firingWhileHeld": true,
+   "shots": 11,
+   "shotsBy": {
+    "button": 0,
+    "scene": 18,
+    "keyboard": 0,
+    "mouse": 0,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "aimMove": 0.4746,
+   "aimTo": {
+    "x": 0.391,
+    "y": 0.219
+   }
+  },
+  {
+   "label": "drag on the sea, right half",
+   "from": [
+    560,
+    240
+   ],
+   "to": [
+    680,
+    200
+   ],
+   "under": "scene",
+   "sceneEvents": {
+    "down": 1,
+    "move": 8,
+    "up": 1,
+    "cancel": 0
+   },
+   "firingWhileHeld": true,
+   "shots": 11,
+   "shotsBy": {
+    "button": 0,
+    "scene": 29,
+    "keyboard": 0,
+    "mouse": 0,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "aimMove": 0.5265,
+   "aimTo": {
+    "x": 0.427,
+    "y": 0.258
+   }
+  },
+  {
+   "label": "drag where the v20 stick rests",
+   "from": [
+    90,
+    250
+   ],
+   "to": [
+    180,
+    215
+   ],
+   "under": "scene",
+   "sceneEvents": {
+    "down": 1,
+    "move": 8,
+    "up": 1,
+    "cancel": 0
+   },
+   "firingWhileHeld": true,
+   "shots": 5,
+   "shotsBy": {
+    "button": 0,
+    "scene": 34,
+    "keyboard": 0,
+    "mouse": 0,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "aimMove": 0.418,
+   "aimTo": {
+    "x": 0.32,
+    "y": 0.219
+   }
+  }
+ ],
+ "errors": [],
+ "csp": "clean"
+}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createTennis} from '../workout/island/minigames/tennis.mjs';
 import {synthesizeApplause} from '../workout/island/assets/audio/g4e/applause-source.mjs';
-const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis,dt=config.simulation.step;
+const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis,dt=config.simulation.step;config.v9.dropFix.enabled=false;// this file pins the original drop physics; v14 has its own tests (island-tennis-v14)
 const advance=(m,t,input={})=>{for(let n=0;n<Math.round(t/dt);n++)m.update(dt,input);};
 const press=(m,key,input={})=>{m.update(0,{...input,[key]:true});m.update(0,{});};
 function incoming(difficulty='normal',z=6,v9){const m=createTennis({config,difficulty,v9}),s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=z;s.contact={side:0,at:0};Object.assign(s.ball,{x:0,z,y:config.ball.hitHeight,lastHitter:1,bounces:1});return m;}
@@ -42,8 +42,8 @@ test('G4f hold charges power; exceeding the difficulty threshold physically goes
  }
 });
 test('G4f release samples the latest joystick direction and keeps early-shot power and aim',()=>{
- const m=incoming(),s=m.getState();charge(m,.65,{aim:{x:1,z:0,manual:true}});const held=s.charge;s.contact.at=s.elapsed+.1;press(m,'swing',{aim:{x:-1,z:-.5,manual:true}});advance(m,.11,{aim:{x:1,z:1,manual:true}});assert.equal(s.shot.side,0);assert.ok(s.shot.targetX<0);assert.ok(s.shot.charge===held);assert.ok(Math.abs(s.shot.targetZ)>config.ball.depth);
- const cancelled=incoming();charge(cancelled,.8);cancelled.update(0,{cancelCharge:true});assert.equal(cancelled.getState().charge,0);press(cancelled,'swing');assert.equal(cancelled.getState().shot.charge,0);
+ const m=incoming('normal',6,false),s=m.getState();charge(m,.65,{aim:{x:1,z:0,manual:true}});const held=s.charge;s.contact.at=s.elapsed+.1;press(m,'swing',{aim:{x:-1,z:-.5,manual:true}});advance(m,.11,{aim:{x:1,z:1,manual:true}});assert.equal(s.shot.side,0);assert.ok(s.shot.targetX<0);assert.ok(s.shot.charge===held);assert.ok(Math.abs(s.shot.targetZ)>config.ball.depth);
+ const cancelled=incoming('normal',6,false);charge(cancelled,.8);cancelled.update(0,{cancelCharge:true});assert.equal(cancelled.getState().charge,0);press(cancelled,'swing');assert.equal(cancelled.getState().shot.charge,0);
 });
 test('G4f centre band gives a faster, accurate serve; all outer green releases stay legal on either meter direction',()=>{
  for(const difficulty of ['easy','normal','hard'])for(const rank of [1,5]){

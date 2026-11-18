@@ -1,0 +1,86 @@
+{
+ "part": "aim",
+ "flag": "",
+ "errors": [],
+ "search": "?dev=1",
+ "fireBox": {
+  "x": 734,
+  "y": 280,
+  "width": 88,
+  "height": 88
+ },
+ "right": {
+  "label": "a right 60px hold 1.5s",
+  "dx": 60,
+  "holdMs": 1500,
+  "fireX": 778,
+  "fireToRightEdge": 66,
+  "aimingWhenHeld": true,
+  "yawAfterMoveDeg": 6.6,
+  "yawDeg": 138.4,
+  "maxStepDeg": 9.8,
+  "landingSamples": 15,
+  "landingOffscreen": 0,
+  "arrowsWhenOff": 0,
+  "midLanding": {
+   "x": 453,
+   "y": 189,
+   "front": true,
+   "arrow": null
+  },
+  "firedWhileHeld": 0,
+  "firedAfterRelease": 1,
+  "driftAfterReleaseDeg": 0
+ },
+ "left": {
+  "label": "b left 60px hold 1.5s",
+  "dx": -60,
+  "holdMs": 1500,
+  "fireX": 778,
+  "fireToRightEdge": 66,
+  "aimingWhenHeld": true,
+  "yawAfterMoveDeg": -7.4,
+  "yawDeg": -138,
+  "maxStepDeg": 9.8,
+  "landingSamples": 15,
+  "landingOffscreen": 0,
+  "arrowsWhenOff": 0,
+  "midLanding": {
+   "x": 348,
+   "y": 187,
+   "front": true,
+   "arrow": null
+  },
+  "firedWhileHeld": 0,
+  "firedAfterRelease": 1,
+  "driftAfterReleaseDeg": 0
+ },
+ "fine": {
+  "label": "c tiny 10px right hold 1s",
+  "dx": 10,
+  "holdMs": 1000,
+  "fireX": 778,
+  "fireToRightEdge": 66,
+  "aimingWhenHeld": true,
+  "yawAfterMoveDeg": 1.2,
+  "yawDeg": 0.5,
+  "maxStepDeg": 0.6,
+  "landingSamples": 10,
+  "landingOffscreen": 0,
+  "arrowsWhenOff": 0,
+  "midLanding": {
+   "x": 423,
+   "y": 187,
+   "front": true,
+   "arrow": null
+  },
+  "firedWhileHeld": 0,
+  "firedAfterRelease": 1,
+  "driftAfterReleaseDeg": 0
+ },
+ "tapHold": {
+  "firedBeforeRelease": 0,
+  "firedAfterRelease": 1
+ },
+ "csp": "clean"
+}

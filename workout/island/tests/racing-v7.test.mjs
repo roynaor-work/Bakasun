@@ -116,13 +116,23 @@ test('crowd: spectators stand clear of the road on every track and stage, determ
  assert.equal(CROWD_CAP[2],0,'the lowest tier draws no crowd');assert.ok(CROWD_CAP[0]>CROWD_CAP[1]);
 });
 
-test('offline: racing is a game group with exactly the v7 files, all cacheable, and the shell lists the new modules',async()=>{
+const AUDIO_FILES=["engine-high.mp3", "engine-high.ogg", "engine-idle.mp3", "engine-idle.ogg", "engine-low.mp3", "engine-low.ogg", "engine-mid.mp3", "engine-mid.ogg", "engine-redline.mp3", "engine-redline.ogg", "exhaust-pop-1.mp3", "exhaust-pop-1.ogg", "exhaust-pop-2.mp3", "exhaust-pop-2.ogg", "exhaust-pop-3.mp3", "exhaust-pop-3.ogg", "kerb-rumble.mp3", "kerb-rumble.ogg", "pass-whoosh.mp3", "pass-whoosh.ogg", "shift-down.mp3", "shift-down.ogg", "shift-up.mp3", "shift-up.ogg", "turbo-blowoff.mp3", "turbo-blowoff.ogg", "tyre-squeal.mp3", "tyre-squeal.ogg", "wind-speed.mp3", "wind-speed.ogg"].map(f=>'assets/racing-audio-v2/'+f);
+test('offline: racing is a game group with exactly the v7 files and the formula car, all cacheable, and the shell lists the new modules',async()=>{
  assert.equal(OFFLINE_GAMES.racing,'מרוצים');
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
- assert.deepEqual([...manifest.games.racing].sort(),v7FileList().map(f=>'assets/racing-v7/'+f).sort());
+ const V22=manifest.games.racing.filter(p=>/^assets\/(racing-crash-fx-v1|racing-broadcast-v1|racing-league-v1|racing-audio-v3)\//.test(p));   // the v22 Codex packages, listed one by one in tests/island-racing-assets-v22.test.mjs
+ assert.ok(V22.length>=45);
+ const V24=manifest.games.racing.filter(p=>/^assets\/(racing-audio-v4|racing-formula-cars-v1|racing-pit-v1)\//.test(p));   // the v24 Codex packages, listed one by one in tests/island-racing-v24.test.mjs
+ assert.equal(V24.length,43);
+ // v24.4: the Codex v5 surface/brake/pit loops and the pit sequence v2 (31 files: 26 sounds, sequence.json, the clips, the jack, the spare wheel, the gun), listed one by one in tests/island-racing-v24-4.test.mjs
+ const V244=manifest.games.racing.filter(p=>/^assets\/(racing-audio-v5|racing-pit-seq-v2)\//.test(p));
+ assert.equal(V244.length,31);
+ // v24.2 (offline v25): the racing environment models and textures the game already loads were missing from the offline list; they are listed one by one here.
+ const ENV=manifest.games.racing.filter(p=>/^design\/racing-environment-v2\/(runtime|textures)\//.test(p));assert.ok(ENV.length>=10,'the racing environment v2 runtime files are in the offline list');
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22,...V24,...V244,...ENV].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===17);
+ assert.ok(pathsFor(manifest,['racing']).length===48+V22.length+V24.length+V244.length+ENV.length);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 

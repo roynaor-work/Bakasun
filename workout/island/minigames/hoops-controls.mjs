@@ -7,7 +7,8 @@
 import {create as createActionButton} from '../design/hud-kit/action-button.mjs';
 import {validateHoopsControlsProfile} from './hoops-controls-profile.mjs';
 export {loadHoopsControlsProfile} from './hoops-controls-profile.mjs';
-const DEFAULTS={deadZone:.1,curve:1.15,fullTilt:.78,autoSprint:.93,longPass:.32,longMove:.32,swipeMin:24,swipeDominance:1.25,cancelOutside:24,sprintOff:.75,sprintHoldMs:0};
+// doubleTap: a second pass tap within this window (seconds) marks the edge `passDouble` (M3: bounce pass)
+const DEFAULTS={deadZone:.1,curve:1.15,fullTilt:.78,autoSprint:.93,longPass:.32,longMove:.32,swipeMin:24,swipeDominance:1.25,cancelOutside:24,sprintOff:.75,sprintHoldMs:0,doubleTap:.26};
 const HUD_ICONS={shoot:'shot',pass:'pass',move:'trick',fake:'block',block:'block',steal:'steal',switch:'play',sprint:'boost',timeout:'pause'};
 const STATE={ball:'attack',offense:'off_ball',defense:'defense',inbound:'inbound',free_throw:'free_throw'};
 const BUTTON_FOR={shoot:'shoot',pass:'pass',trick:'move',screen:'fake',call:'pass',play:'move',block:'block',steal:'steal',switch:'switch',sprint:'sprint'};
@@ -25,7 +26,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  root.classList.add('ih-kit');root.dataset.theme='hoops';
  if(doc.head&&!doc.querySelector?.('[data-hoops-hud-kit]')){const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;css.dataset.hoopsHudKit='true';doc.head.append(css);}
  const pad=node('div','hoops-actions hoops-authored-actions'),top=node('div','hoops-topbar');pad.dir=top.dir='ltr';
- const help=node('p','hoops-input-help');help.id='hoops-pass-help-'+(++controlsId);help.dir='rtl';help.textContent='מסירה: נגיעה לקרוב · החזקה לרחוק';
+ const help=node('p','hoops-input-help');help.id='hoops-pass-help-'+(++controlsId);help.dir='rtl';help.textContent='מסירה: נגיעה לקרוב · נגיעה כפולה לקרקע · החזקה לרחוק או לאלי-הופ';
  const elements={zone,ring,knob,pad,top};
  const all=['shoot','pass','move','fake','block','steal','switch','sprint','timeout'];
  for(const key of all){
@@ -102,7 +103,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
   if(disposed)return;profileData=validateHoopsControlsProfile(value);const thresholds=profileData.interaction.gesture_thresholds;
   K.deadZone=thresholds.stick_dead_zone;K.longPass=K.longMove=thresholds.hold_from_ms/1000;K.swipeMin=thresholds.swipe_min_distance_px;K.swipeDominance=thresholds.swipe_axis_dominance;K.cancelOutside=thresholds.cancel_outside_action_px;
   K.autoSprint=thresholds.one_finger_sprint_on;K.sprintOff=thresholds.one_finger_sprint_off;K.sprintHoldMs=thresholds.one_finger_sprint_hold_ms;
-  root.dataset.controlsProfile='design/controls/hoops.json';help.textContent='מסירה: קצרה בנגיעה · רחוקה בהחזקה';
+  root.dataset.controlsProfile='design/controls/hoops.json';help.textContent='מסירה: קצרה בנגיעה · קרקע בנגיעה כפולה · רחוקה בהחזקה';
   paintedMode=null;setMode(mode);layout();
  }
  function sprintVisual(){
@@ -127,7 +128,10 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
   // A later cancelled hold must not erase an earlier completed tap on this button.
   if(cancelled){clearEdges(source);if(shotSource===source)cancelShot=true;}
   else if(key==='shoot'||key==='block')press('shootUp',source);
-  else if(key==='pass'&&(mode==='ball'||mode==='inbound')){press(elapsed>=K.longPass*1000?'passLong':'passPress',source);edges[edges.length-1].passAim=aim;}
+  else if(key==='pass'&&(mode==='ball'||mode==='inbound')){
+   const long=elapsed>=K.longPass*1000,t=now(),double=!long&&record.lastTap!=null&&t-record.lastTap<=K.doubleTap*1000;record.lastTap=long?null:t;
+   press(long?'passLong':'passPress',source);const e=edges[edges.length-1];e.passAim=aim;if(double)e.passDouble=true;
+  }
   else if(key==='move'&&record.role==='play'){playIndex=(playIndex+1)%3;press('call'+(playIndex+1),source);}
   else if(key==='move')press(aim||elapsed>=K.longMove*1000?'spinPress':'movePress',source);
   else if(key==='sprint'&&!record.sampled)sprintTap=true;
@@ -237,7 +241,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
    else if(!autoSprinting)sprintSince=null;
    const auto=autoSprinting;
    for(const record of records.values())if(busy(record)&&(record.key==='pass'||record.key==='move'))renderRecord(record);
-   const frame={move:{x:s.x*b.rx+s.y*b.ux,z:s.x*b.rz+s.y*b.uz},sprint:sprintAvailable&&(auto||sprintKeys.size>0||busy(records.get('sprint'))||sprintTap),shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDir:null,altPress:false,switchPress:false,movePress:false,spinPress:false,fakePress:false,timeoutPress:false,call:null};
+   const frame={move:{x:s.x*b.rx+s.y*b.ux,z:s.x*b.rz+s.y*b.uz},sprint:sprintAvailable&&(auto||sprintKeys.size>0||busy(records.get('sprint'))||sprintTap),shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDouble:false,passDir:null,altPress:false,switchPress:false,movePress:false,spinPress:false,fakePress:false,timeoutPress:false,call:null};
    sprintTap=false;records.get('sprint').sampled=true;
    if(!enabled||disposed){frame.move={x:0,z:0};frame.sprint=false;}
    if(cancelShot){frame.shootCancel=true;cancelShot=false;shotSource=null;return frame;}
@@ -246,7 +250,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
    if(edge.type==='passLong'){frame.passPress=true;frame.passLong=true;}
    else if(edge.type.startsWith('call')&&edge.type.length===5)frame.call=['motion','pnr','iso'][+edge.type.slice(4)-1];
    else frame[edge.type]=true;
-   if(edge.passAim)frame.passDir=edge.passAim;
+   if(edge.passAim)frame.passDir=edge.passAim;if(edge.passDouble)frame.passDouble=true;
    if(edge.type==='shootDown')shotSource=edge.source;else if(edge.type==='shootUp')shotSource=null;
    return frame;
   },

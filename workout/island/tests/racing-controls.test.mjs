@@ -22,7 +22,7 @@ const fire=(target,type,values={})=>{const event=new Event(type,{cancelable:true
 function controlsFixture(t){
   const doc=new EventTarget();doc.defaultView=new EventTarget();doc.hidden=false;
   doc.createElement=tag=>new Element(tag,doc);doc.createElementNS=(_,tag)=>new Element(tag,doc);
-  const root=doc.createElement('div'),canvas=doc.createElement('canvas'),controls=createRacingControls({root,canvas,t:key=>key});
+  const root=doc.createElement('div'),canvas=doc.createElement('canvas'),controls=createRacingControls({root,canvas,t:key=>key,automatic:true});
   t.after(()=>controls.dispose());
   const walk=element=>[element,...element.children.flatMap(walk)],elements=walk(root);
   const slider=elements.find(element=>element.className==='racing-steer'),wheel=elements.find(element=>element.className==='racing-wheel');
@@ -34,7 +34,7 @@ function controlsFixture(t){
 }
 
 function raceAtHeading(heading,stage){
-  const race=createRacing({stage,seed:17,config:{countdown:0,steeringAssist:false}});
+  const race=createRacing({stage,seed:17,config:{countdown:0,steeringAssist:false,engine:false,ers:false}});
   const distance=race.track.length*.24,point=race.track.sample(distance),player=race.state.player;
   const checkpoints=Math.floor(distance/(race.track.length/race.track.checkpoints.length));
   // An isolated, credited section avoids AI collisions and shortcut recovery in the short measurement.
@@ -56,7 +56,7 @@ function driverSideMovement(input,heading,stage){
 }
 
 function straightRace(t,speed=0){
-  const race=createRacing({seed:17,config:{countdown:0,steeringAssist:false,stage:{opponents:0}}});
+  const race=createRacing({seed:17,config:{countdown:0,steeringAssist:false,engine:false,ers:false,stage:{opponents:0}}});
   const distance=race.track.length-2,point=race.track.sample(distance),checkpoints=15;
   Object.assign(race.state.player,{x:point.x,y:point.y,z:point.z,heading:point.heading,speed,
     s:point.s,routeS:distance,previousS:distance,progress:distance,lateral:0,offroad:false,checkpoints,nextCheckpoint:checkpoints+1});

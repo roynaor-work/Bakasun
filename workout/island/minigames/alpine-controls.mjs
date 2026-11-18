@@ -10,10 +10,14 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   const abort = new AbortController(), options = {signal: abort.signal}, doc = canvas.ownerDocument, win = doc.defaultView;
   const keys = new Set(), metresPerWidth = config.dragMetresPerWidth ?? 22, half = config.trackHalfWidth ?? 10;
   let enabled = true, drag = null, joy = null, shift = {x: 0, y: 0}, boostQueued = false, trickQueued = null, lastX = 0, lastLean = 0;
-  const steerKeys = new Set(['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD']);
+  // v24.1 (config.brake, only when the balance has physics.v241): the stick pulled down toward the player is a snowplough brake, 0..1 past
+  // a dead zone; a mostly sideways thumb never brakes. ArrowDown / S on a keyboard. Without config.brake the stick reads sideways only (v24).
+  const brakeOn = !!config.brake, brakeDead = config.brake?.deadzone ?? .35;
+  const steerKeys = new Set(['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD', ...(brakeOn ? ['ArrowDown', 'KeyS'] : [])]);
   const actionButtons = [boostButton, ...trickButtons];
   const knob = joystick?.querySelector('[data-joystick-knob]');
-  function setKnob(value) { if (knob) knob.style.transform = `translate(calc(-50% + ${(value * 70).toFixed(1)}%), -50%)`; if (joystick) { joystick.dataset.active = String(value !== 0 || !!joy); joystick.setAttribute('aria-valuenow', value.toFixed(2)); } }
+  const brakeOf = (dx, dy, radius) => brakeOn && dy > 0 && dy > Math.abs(dx) * .5 ? Math.max(0, Math.min(1, (dy / radius - brakeDead) / (1 - brakeDead))) : 0;
+  function setKnob(value, brake = 0) { if (knob) knob.style.transform = brakeOn ? `translate(calc(-50% + ${(value * 70).toFixed(1)}%), calc(-50% + ${(brake * 45).toFixed(1)}%))` : `translate(calc(-50% + ${(value * 70).toFixed(1)}%), -50%)`; if (joystick) { joystick.dataset.active = String(value !== 0 || !!joy); if (brakeOn) joystick.dataset.brake = String(brake > 0); joystick.setAttribute('aria-valuenow', value.toFixed(2)); } }
   function releaseDrag() {
     const pointer = drag; drag = null; canvas.dataset.steering = 'false';
     if (pointer && canvas.hasPointerCapture?.(pointer.id)) { try { canvas.releasePointerCapture(pointer.id); } catch {} }
@@ -43,13 +47,13 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   function startFloating(event) {
     const box = joystick.getBoundingClientRect(), home = {x: (box.left || 0) + (box.width || 0) / 2 - shift.x, y: (box.top || 0) + (box.height || 0) / 2 - shift.y};
     try { canvas.setPointerCapture(event.pointerId); } catch {}
-    joy = {id: event.pointerId, value: 0, floating: true, originX: event.clientX, home};
+    joy = {id: event.pointerId, value: 0, brake: 0, floating: true, originX: event.clientX, originY: event.clientY, home};
     joystick.dataset.floating = 'true'; placeStick(event, home); readFloating(event);
   }
   function readFloating(event) {
     const radius = reach(), limit = radius * 1.25; let dx = event.clientX - joy.originX;
     if (Math.abs(dx) > limit) { joy.originX = event.clientX - Math.sign(dx) * limit; dx = Math.sign(dx) * limit; }
-    joy.value = Math.max(-1, Math.min(1, dx / radius)); setKnob(joy.value);
+    joy.value = Math.max(-1, Math.min(1, dx / radius)); joy.brake = brakeOf(dx, event.clientY - joy.originY, radius); setKnob(joy.value, joy.brake);
   }
   function cancel() {
     releaseDrag(); releaseJoystick(); keys.clear(); boostQueued = false; trickQueued = null;
@@ -79,14 +83,14 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
   }, options);
   if (joystick) {
     // The stick deflects sideways only; its value is the steering command itself.
-    const read = event => { const box = joystick.getBoundingClientRect(), radius = Math.max(1, (box.width / 2 - 8) * (config.joystickReach ?? .62)); joy.value = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / radius)); setKnob(joy.value); };
+    const read = event => { const box = joystick.getBoundingClientRect(), radius = Math.max(1, (box.width / 2 - 8) * (config.joystickReach ?? .62)), dx = event.clientX - (box.left + box.width / 2); joy.value = Math.max(-1, Math.min(1, dx / radius)); joy.brake = brakeOf(dx, event.clientY - (box.top + box.height / 2), radius); setKnob(joy.value, joy.brake); };
     joystick.style.touchAction = 'none';
     joystick.addEventListener('pointerdown', event => {
       event.preventDefault(); event.stopPropagation();
       if (!enabled || joy || (event.pointerType === 'mouse' && event.button !== 0)) return;
       releaseDrag();
       try { joystick.setPointerCapture(event.pointerId); } catch {}
-      joy = {id: event.pointerId, value: 0}; read(event);
+      joy = {id: event.pointerId, value: 0, brake: 0}; read(event);
     }, options);
     joystick.addEventListener('pointermove', event => { if (joy && event.pointerId === joy.id) read(event); }, options);
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) joystick.addEventListener(type, event => { if (joy && event.pointerId === joy.id) releaseJoystick(); }, options);
@@ -115,7 +119,7 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
     /** Steering value [-1,1] for this frame plus one-shot boost and trick requests. */
     sample(player) {
       lastX = player?.x ?? lastX; lastLean = player?.lean ?? lastLean;
-      if (!enabled) return {steer: 0, boost: false, trick: null};
+      if (!enabled) return brakeOn ? {steer: 0, boost: false, trick: null, brake: 0} : {steer: 0, boost: false, trick: null};
       const direction = (keys.has('ArrowRight') || keys.has('KeyD') ? 1 : 0) - (keys.has('ArrowLeft') || keys.has('KeyA') ? 1 : 0);
       let steer = direction;
       // Opposite keys intentionally cancel; they do not hand control back to a
@@ -123,7 +127,11 @@ export function createAlpineControls({canvas, boostButton, joystick = null, tric
       if (!keys.size && joy) steer = joy.value;
       else if (!keys.size && drag) steer = Math.max(-1, Math.min(1, (drag.targetX - lastX) * .8 - lastLean * .55));
       const boost = boostQueued, trick = trickQueued; boostQueued = false; trickQueued = null;
-      return {steer: Math.abs(steer) < .02 ? 0 : steer, boost, trick};
+      if (!brakeOn) return {steer: Math.abs(steer) < .02 ? 0 : steer, boost, trick};
+      // A brake key is held on its own; with only the brake key down the stick still steers.
+      const brakeKey = keys.has('ArrowDown') || keys.has('KeyS');
+      if (brakeKey && !direction && joy) steer = joy.value;
+      return {steer: Math.abs(steer) < .02 ? 0 : steer, boost, trick, brake: brakeKey ? 1 : joy?.brake ?? 0};
     },
     cancel,
     setEnabled(value) { enabled = !!value; if (boostButton) boostButton.disabled = !enabled; for (const b of trickButtons) b.disabled = !enabled; cancel(); },

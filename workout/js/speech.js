@@ -55,9 +55,11 @@ const player = createVoicePlayer({
 });
 // הקבצים אופציונליים. הטעינה מתחילה מראש; כל חלקי אמירה מוכנים לפני הניגון.
 void player.preload();
+// טון חם: גובה קול קצת מעל הרגיל (ניתן לכבות בהגדרות: גובה הקול ← רגיל)
+export const warmPitch = (extra = 0) => (store.profile.voiceTone === 'plain' ? 1 : 1.07) + extra;
 export function speak(text, { force = false } = {}) {
   if ((!force && store.profile.voice === false) || !canSpeak()) return false;
-  return player.play(clean(text), { rate: store.profile.speechRate || 0.92, pitch: 1 });
+  return player.play(clean(text), { rate: store.profile.speechRate || 0.92, pitch: warmPitch() });
 }
 export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}) {
   if (store.profile.voice === false || !canSpeak()) return false;
@@ -65,7 +67,7 @@ export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}
 }
 export function sayQuick(text, { rate = 1.05 } = {}) {
   if (store.profile.voice === false || !canSpeak()) return false;
-  return player.play(clean(text), { quick: true, rate, pitch: 1.05 });
+  return player.play(clean(text), { quick: true, rate, pitch: warmPitch(0.04) });
 }
 export const spokeRecently = ms => player.spokeRecently(ms);
 export const stopSpeak = () => player.stop();

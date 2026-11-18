@@ -1,0 +1,262 @@
+{
+  "url": "http://127.0.0.1:8765/workout/island/design/soccer-keeper-crowd-v1/preview.html",
+  "engine": "Chromium + three.js r160, native GLTFLoader / AnimationMixer; no Draco or WebAssembly",
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390,
+      "horizontalOverflow": false,
+      "crowdPairs": 16,
+      "checks": [
+        {
+          "id": "keeper_after_goal",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 0.625,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 1.25,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 1.875,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 2.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 0.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 1,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 1.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 2,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0.45,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0.9,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 1.35,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 1.8,
+          "bones": 18,
+          "finite": true
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false,
+      "crowdPairs": 16,
+      "checks": [
+        {
+          "id": "keeper_after_goal",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 0.625,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 1.25,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 1.875,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_after_goal",
+          "time": 2.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 0.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 1,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 1.5,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "disappointed",
+          "time": 2,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0.45,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 0.9,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 1.35,
+          "bones": 18,
+          "finite": true
+        },
+        {
+          "id": "keeper_celebrate",
+          "time": 1.8,
+          "bones": 18,
+          "finite": true
+        }
+      ]
+    }
+  ],
+  "sheets": [
+    {
+      "id": "keeper_after_goal",
+      "file": "sheets/keeper_after_goal.png",
+      "frames": 8,
+      "times": [
+        0,
+        0.35,
+        0.65,
+        0.9,
+        1.2,
+        1.6,
+        2.05,
+        2.5
+      ],
+      "width": 1280,
+      "height": 740,
+      "kind": "actual canonical keeper mesh, native serialized animation"
+    },
+    {
+      "id": "disappointed",
+      "file": "sheets/disappointed.png",
+      "frames": 8,
+      "times": [
+        0,
+        0.37,
+        0.58,
+        0.73,
+        1,
+        1.315,
+        1.63,
+        2
+      ],
+      "width": 1280,
+      "height": 740,
+      "kind": "actual canonical keeper mesh, native serialized animation"
+    },
+    {
+      "id": "keeper_celebrate",
+      "file": "sheets/keeper_celebrate.png",
+      "frames": 8,
+      "times": [
+        0,
+        0.3,
+        0.5,
+        0.7,
+        0.9,
+        1.05,
+        1.35,
+        1.8
+      ],
+      "width": 1280,
+      "height": 740,
+      "kind": "actual canonical keeper mesh, native serialized animation"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "requestCount": 16,
+  "pass": true
+}

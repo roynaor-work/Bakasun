@@ -1,0 +1,184 @@
+{
+ "mode": "Codex clips incl. v9 run and sprint",
+ "strideMatch": [
+  {
+   "speed": 0.8,
+   "state": "v9_walk",
+   "clipSpeedMps": 1,
+   "rate": 0.8,
+   "impliedMps": 0.8,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1,
+   "state": "v9_walk",
+   "clipSpeedMps": 1,
+   "rate": 1,
+   "impliedMps": 1,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1.3,
+   "state": "v9_walk",
+   "clipSpeedMps": 1,
+   "rate": 1.3,
+   "impliedMps": 1.3,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 1.6,
+   "state": "v9_jog",
+   "clipSpeedMps": 2.6,
+   "rate": 0.62,
+   "impliedMps": 1.6,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2,
+   "state": "v9_jog",
+   "clipSpeedMps": 2.6,
+   "rate": 0.77,
+   "impliedMps": 2,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2.4,
+   "state": "v9_jog",
+   "clipSpeedMps": 2.6,
+   "rate": 0.92,
+   "impliedMps": 2.4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 2.8,
+   "state": "v9_jog",
+   "clipSpeedMps": 2.6,
+   "rate": 1.08,
+   "impliedMps": 2.8,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 3.2,
+   "state": "v9_jog",
+   "clipSpeedMps": 2.6,
+   "rate": 1.23,
+   "impliedMps": 3.2,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 4,
+   "state": "v9_run",
+   "clipSpeedMps": 4.5,
+   "rate": 0.89,
+   "impliedMps": 4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 4.5,
+   "state": "v9_run",
+   "clipSpeedMps": 4.5,
+   "rate": 1,
+   "impliedMps": 4.5,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 5.4,
+   "state": "v9_run",
+   "clipSpeedMps": 4.5,
+   "rate": 1.2,
+   "impliedMps": 5.4,
+   "mismatchPct": 0
+  },
+  {
+   "speed": 6.5,
+   "state": "v9_sprint",
+   "clipSpeedMps": 7.2,
+   "rate": 0.9,
+   "impliedMps": 6.5,
+   "mismatchPct": 0
+  }
+ ],
+ "sequence": {
+  "states": [
+   "v9_idle_relaxed",
+   "v9_walk",
+   "v9_jog",
+   "v9_run",
+   "v9_sprint",
+   "v9_run_brake",
+   "v9_idle_relaxed",
+   "v9_jog",
+   "v9_idle_relaxed"
+  ],
+  "popMaxDeg": 23.92,
+  "popP99Deg": 20.46,
+  "hipsStepMaxM": 0.01,
+  "hipsStepP99M": 0.01
+ },
+ "runs": [
+  {
+   "speed": 3.2,
+   "state": "v9_jog",
+   "rate": 1.23,
+   "stepsPerSecond": 3.36,
+   "leanDeg": 5.42,
+   "elbowFlexMinDeg": 107.57,
+   "elbowFlexMaxDeg": 146.9,
+   "hipsBobCm": 2.97
+  },
+  {
+   "speed": 4.2,
+   "state": "v9_run",
+   "rate": 0.93,
+   "stepsPerSecond": 3.11,
+   "leanDeg": 9.41,
+   "elbowFlexMinDeg": 104.54,
+   "elbowFlexMaxDeg": 147.23,
+   "hipsBobCm": 3.46
+  },
+  {
+   "speed": 5.3,
+   "state": "v9_run",
+   "rate": 1.18,
+   "stepsPerSecond": 3.93,
+   "leanDeg": 9.41,
+   "elbowFlexMinDeg": 104.57,
+   "elbowFlexMaxDeg": 147.15,
+   "hipsBobCm": 3.45
+  },
+  {
+   "speed": 6,
+   "state": "v9_sprint",
+   "rate": 0.83,
+   "stepsPerSecond": 3.13,
+   "leanDeg": 14.22,
+   "elbowFlexMinDeg": 99.33,
+   "elbowFlexMaxDeg": 147.48,
+   "hipsBobCm": 2.47
+  },
+  {
+   "speed": 6.5,
+   "state": "v9_sprint",
+   "rate": 0.9,
+   "stepsPerSecond": 3.39,
+   "leanDeg": 14.22,
+   "elbowFlexMinDeg": 99.4,
+   "elbowFlexMaxDeg": 147.19,
+   "hipsBobCm": 2.46
+  }
+ ],
+ "idle": {
+  "v9_idle_relaxed": {
+   "abdMax": 11.7,
+   "flexMin": 42.5
+  },
+  "v9_idle_scan": {
+   "abdMax": 11.7,
+   "flexMin": 49.9
+  },
+  "v9_idle_weight_shift": {
+   "abdMax": 12.8,
+   "flexMin": 41.4
+  }
+ }
+}

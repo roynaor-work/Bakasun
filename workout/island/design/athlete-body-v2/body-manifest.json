@@ -1,0 +1,299 @@
+{
+  "version": "athlete-body-v2",
+  "license": "CC0-1.0",
+  "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "source": "workout/island/assets/athlete-body-v22",
+  "models": [
+    {
+      "id": "soccer",
+      "path": "runtime/models/soccer.glb",
+      "heightMeters": 1.8,
+      "bodyShape": {
+        "width": 1.0,
+        "depth": 1.0
+      },
+      "trianglesBefore": 5080,
+      "trianglesAfter": 5188,
+      "triangleDelta": 108,
+      "handTriangles": 236,
+      "replacedSourceFaces": 212,
+      "retainedAndClippedTriangles": 4912,
+      "vertices": 4100,
+      "sourceVertices": 3944,
+      "bytes": 612268,
+      "sha256": "0e1c1783d1402238f32a711bfcf8c534344e1c0cd294a1e9aa1ad0b4256fe0d2",
+      "sourceSha256": "450da150f615e8db179b7bb10eb69e641305c68be9c3424028b95eadadc8ba7a"
+    },
+    {
+      "id": "guard",
+      "path": "runtime/models/guard.glb",
+      "heightMeters": 1.78,
+      "bodyShape": {
+        "width": 0.97,
+        "depth": 0.98
+      },
+      "trianglesBefore": 5080,
+      "trianglesAfter": 5188,
+      "triangleDelta": 108,
+      "handTriangles": 236,
+      "replacedSourceFaces": 212,
+      "retainedAndClippedTriangles": 4912,
+      "vertices": 4100,
+      "sourceVertices": 3944,
+      "bytes": 612264,
+      "sha256": "e136c3348565359571a55bfa9474846919d4ff576a75a1489bbd2eda46b1930e",
+      "sourceSha256": "78f872e572588123f722e4776699a9e38ca36f7b0cb7265e9ab86132a11d9a57"
+    },
+    {
+      "id": "wing",
+      "path": "runtime/models/wing.glb",
+      "heightMeters": 1.94,
+      "bodyShape": {
+        "width": 1.045,
+        "depth": 1.035
+      },
+      "trianglesBefore": 5080,
+      "trianglesAfter": 5188,
+      "triangleDelta": 108,
+      "handTriangles": 236,
+      "replacedSourceFaces": 212,
+      "retainedAndClippedTriangles": 4912,
+      "vertices": 4100,
+      "sourceVertices": 3944,
+      "bytes": 612272,
+      "sha256": "f2f4fad89a714de5ce68f507bf8ed640c2ac40e25be1ee435994e6b7f70f0ab8",
+      "sourceSha256": "1f396d80319a7ca57f532fcccbb93daee10e221442de3d3d0a3cbef7ea09debd"
+    },
+    {
+      "id": "center",
+      "path": "runtime/models/center.glb",
+      "heightMeters": 2.08,
+      "bodyShape": {
+        "width": 1.12,
+        "depth": 1.09
+      },
+      "trianglesBefore": 5080,
+      "trianglesAfter": 5188,
+      "triangleDelta": 108,
+      "handTriangles": 236,
+      "replacedSourceFaces": 212,
+      "retainedAndClippedTriangles": 4912,
+      "vertices": 4100,
+      "sourceVertices": 3944,
+      "bytes": 612268,
+      "sha256": "9bec85f4464c7a0d546240b831601975b4424a2f545b92d2283452d3ef1d8170",
+      "sourceSha256": "935b0f7d387b8b48f67fc1e75f50bef4e3358ae017eab34100251d6c18fd4594"
+    }
+  ],
+  "canonicalBones": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "regions": {
+    "skin": 0,
+    "uniform_primary": 1,
+    "uniform_secondary": 2,
+    "uniform_trim": 3,
+    "shoe_upper": 4,
+    "shoe_sole": 5,
+    "eyes": 6,
+    "hair": 7,
+    "sock": 8
+  },
+  "defaultColors": {
+    "skin": "#c38d69",
+    "uniform_primary": "#187e83",
+    "uniform_secondary": "#16363b",
+    "uniform_trim": "#e7dbb9",
+    "shoe_upper": "#253540",
+    "shoe_sole": "#d4d5cb",
+    "eyes": "#e0e0e0",
+    "hair": "#442d22",
+    "sock": "#e7dbb9"
+  },
+  "morphs": [
+    "basketball",
+    "hockey",
+    "tennis",
+    "goalkeeper_gloves"
+  ],
+  "gloves": {
+    "attribute": "_GLOVE",
+    "color": "uniform_secondary",
+    "newBones": 0
+  },
+  "numbers": {
+    "range": [
+      0,
+      99
+    ],
+    "color": "uniform_trim",
+    "method": "analytic seven-segment rest-space shader"
+  },
+  "crest": {
+    "method": "geometric shield mask in rest space",
+    "realLogo": false
+  },
+  "draco": false,
+  "meshopt": false
+}

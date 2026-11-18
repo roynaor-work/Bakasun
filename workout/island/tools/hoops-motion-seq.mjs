@@ -40,8 +40,8 @@ function installFixture(){
    for(const q of a.onCourt(1))e.debug.place(q.id,-side*10,q.z);
    if(kind==='dunk'||kind==='layup'||kind==='shot'){
     if(kind==='dunk'){p=home.filter(q=>q.r.dunk>=a.C.shot.dunkMinRating).sort((x,y)=>y.r.dunk-x.r.dunk)[0]||p;}
-    const dist=kind==='dunk'?1.2:kind==='layup'?1.6:5.2;
-    e.debug.place(p.id,side*(e.court.rimX-dist),kind==='layup'?.35:0);e.debug.give(p.id);S.controlled=p.id;p.face=Math.atan2(side*e.court.rimX-p.x,-p.z);p.vx=kind==='shot'?0:side*3.5;p.vz=0;
+    const dist=kind==='dunk'?1.9:kind==='layup'?2.8:5.2;
+    e.debug.place(p.id,side*(e.court.rimX-dist),kind==='layup'?.35:0);e.debug.give(p.id);S.controlled=p.id;p.face=Math.atan2(side*e.court.rimX-p.x,-p.z);p.vx=kind==='shot'?0:side*4.5;p.vz=0;
     a.startShot(p,kind==='shot');
    } else if(kind==='block'){
     // the user's player guards the shooter and jumps as the shot goes up
@@ -83,7 +83,7 @@ const report={};
 try{
  const context=await browser.newContext({viewport:{width:vw,height:vh},hasTouch:true,isMobile:true,deviceScaleFactor:1.5});context.setDefaultTimeout(300000);
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
- await page.goto(`${base}?dev=1&dur=3600&seed=4242&hoopsAuto=0&hoopsQuality=2&hoopsProfile=quick`,{waitUntil:'load'});
+ await page.goto(`${base}?dev=1&dur=3600&seed=4242&hoopsAuto=0&hoopsQuality=2&hoopsProfile=quick${args.extra?'&'+args.extra:''}`,{waitUntil:'load'});
  await page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||s.renderMetrics?.calls>0&&s.stepsRun>30);});
  const err=await page.evaluate(()=>window.__session.snapshot.error);if(err)throw Error(err);
  await page.evaluate(()=>{document.getElementById('perf').hidden=true;});await page.evaluate(installFixture);
@@ -91,8 +91,8 @@ try{
   await page.evaluate(k=>{window.__seq.script=null;window.__seq.start(k);},kind);report[kind]=[];
   for(let i=0;i<frames;i++){
    const f=await page.evaluate(()=>window.__seq.frame());report[kind].push(f);
-   const cx=f.x+Math.sin(f.face+1.25)*3.6,cz=f.z+Math.cos(f.face+1.25)*3.6;
-   await page.evaluate(([pos,look])=>{const v=window.__session.debug.view;v.setCameraOverride(pos,look,34);v.snapCamera();window.__session.debug.render();},[{x:cx,y:1.5,z:cz},{x:f.x,y:1.05,z:f.z}]);
+   const R=Number(args.radius||3.6),cx=f.x+Math.sin(f.face+1.25)*R,cz=f.z+Math.cos(f.face+1.25)*R,camY=Number(args.camY||1.5),lookY=Number(args.lookY||1.05),camFov=Number(args.fov||34);
+   await page.evaluate(([pos,look,fv])=>{const v=window.__session.debug.view;v.setCameraOverride(pos,look,fv);v.snapCamera();window.__session.debug.render();},[{x:cx,y:camY,z:cz},{x:f.x,y:lookY,z:f.z},camFov]);
    await page.waitForTimeout(80);
    await page.screenshot({path:path.join(out,`${kind}-${String(i).padStart(2,'0')}.jpg`),type:'jpeg',quality:80,timeout:120000,animations:'disabled'});
    // foot slide: a foot inside its authored support window in two consecutive frames (same clip)

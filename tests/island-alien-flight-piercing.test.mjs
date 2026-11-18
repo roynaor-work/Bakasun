@@ -1,4 +1,6 @@
-globalThis.__alienV9=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+// Historical piercing is retained only under the rollback switch; tests/island-phone-fix-c.test.mjs covers the default.
+globalThis.location={search:'?phoneFixC=0'};
+globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

@@ -7,10 +7,12 @@ export function alienFlightHudStatus(model,mode='touch',manualFire=alienV9Enable
  const laser=model.powerup===1||(model.upgrades?.laser||0)>0||(model.equipment?.weapon||0)>=2,rapid=model.powerup===2,spread=model.spreadTime>0;
  const weapon=spread?'spread':laser?'laser':rapid?'rapid':'normal';
  const names={normal:'תותח',spread:'ירי מניפה',laser:'לייזר',rapid:'ירי מהיר'};
- const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');
- const wings=model.wings?.filter(w=>w.active).length||0;if(wings)extras.push(wings===1?'מלווה':`${wings} מלווים`);
- return {weapon,weaponText:`נשק: ${names[weapon]}${extras.length?' · '+extras.join(' · '):''}`,
-  controlText:mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
+ const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');if(model.v23&&model.vulcanLocked)extras.push('וולקן מתקרר');if(model.refillCold>0)extras.push(`וולקן קר ${Math.ceil(model.refillCold)}ש׳`);
+ const wings=model.wings?.filter(w=>w.active).length||0;if(wings)extras.push((wings===1?'מלווה':`${wings} מלווים`)+(model.v10&&model.wingTime>0?` ${Math.ceil(model.wingTime)}ש׳`:''));
+ const left=model.spreadTime>0?model.spreadTime:model.powerup>=0&&model.powerTime>0?model.powerTime:0,timer=model.v11&&left>0?` · ${Math.ceil(left)}ש׳`:'';
+ return {weapon,weaponText:`נשק: ${names[weapon]}${extras.length?' · '+extras.join(' · '):''}${timer}`,
+  // v23: two fire buttons (steady cannon, Vulcan) and two keys (Space, Z).
+  controlText:model.v23?(mode==='keyboard'?'חצים לתנועה · רווח ירי רגיל · Z וולקן':mode==='mouse'?'גרירה לתנועה · רווח ירי רגיל · Z וולקן':'סטיק לתנועה · ירי רגיל · וולקן'):mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
 }
 
 export function alienFlightFeedbackText(feedback){
@@ -20,6 +22,10 @@ export function alienFlightFeedbackText(feedback){
  if(feedback.kind==='wave')return {id:feedback.id,text:`גל ${feedback.value}`,pickup:null};
  if(feedback.kind==='boss-phase')return {id:feedback.id,text:'הבוס משנה התקפה',pickup:null};
  if(feedback.kind==='player-hit')return {id:feedback.id,text:'פגיעה בחללית',pickup:null};
+ // v24: a Vulcan magazine was picked up (the gauge is empty and stays cold a few seconds).
+ if(feedback.kind==='refill')return {id:feedback.id,text:'מחסנית וולקן · הוולקן קר',pickup:null};
+ // v25 arsenal: an ammo token was taken (value = the weapon it filled).
+ if(feedback.kind==='ammo')return {id:feedback.id,text:['תחמושת · טילים','תחמושת · ברק שרשרת','תחמושת · גל הלם'][feedback.value]||'תחמושת',pickup:null};
  return null;
 }
 

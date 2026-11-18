@@ -1,0 +1,159 @@
+{
+ "default": {
+  "fast10hz": {
+   "taps": 60,
+   "downMs": 40,
+   "upMs": 60,
+   "seconds": 6.176,
+   "projectiles": 60,
+   "lasers": 0,
+   "perSec": 9.72,
+   "cannonPerSec": 9.72,
+   "overheats": 0,
+   "burstPulls": 60,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 237,
+    "burst": 150
+   },
+   "maxHeat": 0.048,
+   "heatEnd": 0,
+   "heldFrames": 150,
+   "frames": 387
+  },
+  "tap6hz": {
+   "taps": 38,
+   "downMs": 64,
+   "upMs": 96,
+   "seconds": 6.256,
+   "projectiles": 38,
+   "lasers": 0,
+   "perSec": 6.07,
+   "cannonPerSec": 6.07,
+   "overheats": 0,
+   "burstPulls": 38,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 240,
+    "burst": 152
+   },
+   "maxHeat": 0.053,
+   "heatEnd": 0,
+   "heldFrames": 152,
+   "frames": 392
+  },
+  "tap3hz": {
+   "taps": 20,
+   "downMs": 112,
+   "upMs": 192,
+   "seconds": 6.256,
+   "projectiles": 40,
+   "lasers": 0,
+   "perSec": 6.39,
+   "cannonPerSec": 6.39,
+   "overheats": 0,
+   "burstPulls": 40,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 252,
+    "burst": 140
+   },
+   "maxHeat": 0.093,
+   "heatEnd": 0,
+   "heldFrames": 140,
+   "frames": 392
+  },
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1"
+   },
+   "url": "http://127.0.0.1:46467/workout/island/index.html?dev=1"
+  }
+ },
+ "v15off": {
+  "fast10hz": {
+   "taps": 60,
+   "downMs": 40,
+   "upMs": 60,
+   "seconds": 6.192,
+   "projectiles": 60,
+   "lasers": 0,
+   "perSec": 9.69,
+   "cannonPerSec": 9.69,
+   "overheats": 0,
+   "burstPulls": 0,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 388
+   },
+   "maxHeat": 0.014,
+   "heatEnd": 0,
+   "heldFrames": 150,
+   "frames": 388
+  },
+  "tap6hz": {
+   "taps": 38,
+   "downMs": 64,
+   "upMs": 96,
+   "seconds": 6.256,
+   "projectiles": 38,
+   "lasers": 0,
+   "perSec": 6.07,
+   "cannonPerSec": 6.07,
+   "overheats": 0,
+   "burstPulls": 0,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 392
+   },
+   "maxHeat": 0.018,
+   "heatEnd": 0,
+   "heldFrames": 152,
+   "frames": 392
+  },
+  "tap3hz": {
+   "taps": 20,
+   "downMs": 112,
+   "upMs": 192,
+   "seconds": 6.256,
+   "projectiles": 40,
+   "lasers": 0,
+   "perSec": 6.39,
+   "cannonPerSec": 6.39,
+   "overheats": 0,
+   "burstPulls": 0,
+   "steadyPulls": 0,
+   "framesByMode": {
+    "idle": 392
+   },
+   "maxHeat": 0.032,
+   "heatEnd": 0,
+   "heldFrames": 140,
+   "frames": 392
+  },
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1&alienV15=0"
+   },
+   "url": "http://127.0.0.1:46467/workout/island/index.html?dev=1&alienV15=0"
+  }
+ }
+}

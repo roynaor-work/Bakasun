@@ -31,7 +31,7 @@ export class CityAccess{
     this.canvas.onclick=e=>{const r=this.canvas.getBoundingClientRect(),size=engine.state.world.size;this.goTo(Math.max(0,Math.min(size-1,(e.clientX-r.left-this.canvas.clientLeft)/this.canvas.clientWidth*size)),Math.max(0,Math.min(size-1,(e.clientY-r.top-this.canvas.clientTop)/this.canvas.clientHeight*size)));};
     this.canvas.onkeydown=e=>{const delta={ArrowLeft:[-2,0],ArrowRight:[2,0],ArrowUp:[0,-2],ArrowDown:[0,2]}[e.key],size=engine.state.world.size;if(delta){e.preventDefault();this.mapCursor={x:Math.max(0,Math.min(size-1,(this.mapCursor?.x??size/2)+delta[0])),z:Math.max(0,Math.min(size-1,(this.mapCursor?.z??size/2)+delta[1]))};this.drawMap();}if(e.key==='Enter'&&this.mapCursor){e.preventDefault();this.goTo(this.mapCursor.x,this.mapCursor.z);}};
     this.destinations=node('div','city-map-destinations');
-    this.mapPanel.append(heading,this.canvas,node('p','city-map-hint','לחצו במפה או בחרו מקום בעיר'),this.destinations,button('כל האי','city-overview',()=>{ui.view.overview();this.toggleMap(false);}));ui.root.append(this.mapPanel);
+    this.mapPanel.append(heading,this.canvas,node('p','city-map-hint','לחצו במפה או בחרו מקום בעיר'),this.destinations,button('כל העיר','city-overview',()=>{ui.view.overview();this.toggleMap(false);}));ui.root.append(this.mapPanel);
     this.tourHint=node('div','city-tour-hint');this.tourHint.hidden=true;this.tourHint.setAttribute('role','status');this.tourText=node('span','','נוגעים ברחוב כדי לבחור לאן ללכת');this.followButton=button('חזרה לדמות','city-tour-follow',()=>{ui.view.followTour();this.render();});this.followButton.hidden=true;this.tourHint.append(this.tourText,this.followButton,button('סיום טיול','city-tour-stop',()=>{ui.view.setTour(false);this.render();}));ui.root.append(this.tourHint);
     ui.view.canvas.addEventListener('pointerdown',()=>this.toggleMap(false),{signal:this.events.signal});
     document.addEventListener('pointerdown',()=>{this.keyboardInput=false;},{capture:true,signal:this.events.signal});
@@ -44,7 +44,7 @@ export class CityAccess{
   training(){
     const dialog=this.ui.openModal('access.training','access.trainingHint');dialog.dataset.trainingHub='true';
     for(const [title,detail,route]of [['האימון של היום','בוחרים תוכנית ומתאמנים','#/home'],['אימון חופשי','בוחרים בעצמכם את התרגילים','#/free'],['איך עושים תרגיל?','אנימציה והסבר לכל תרגיל','#/exercises']]){const a=node('a','city-training-link');a.href=new URL('../../'+route,import.meta.url).href;a.append(node('strong','',title),node('span','',detail));a.onclick=e=>{const saved=this.engine.save();if(!saved.ok){e.preventDefault();this.ui.result(saved);}};dialog.append(a);}
-    dialog.append(button('תרגול כדורגל באי','access-soccer-training',()=>this.games.training()));
+    dialog.append(button('תרגול כדורגל בעיר','access-soccer-training',()=>this.games.training()));
   }
   scores(){
     const dialog=this.ui.openModal('access.scores','access.scoresHint');dialog.dataset.personalScores='true';

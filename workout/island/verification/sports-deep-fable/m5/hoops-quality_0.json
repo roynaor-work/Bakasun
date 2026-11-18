@@ -1,0 +1,157 @@
+[
+ {
+  "seconds": 24.8,
+  "frames": 166,
+  "fps": 6.69,
+  "frameMs": {
+   "avg": 147.28,
+   "p50": 133.4,
+   "p95": 283.3,
+   "p99": 416.6,
+   "max": 483.3
+  },
+  "over33": 154,
+  "over50": 146,
+  "tickMs": {
+   "avg": 6.95,
+   "p50": 3.8,
+   "p95": 10.4,
+   "max": 307.3
+  },
+  "renderMs": {
+   "avg": 5.83,
+   "p95": 9
+  },
+  "allocMBps": 2.4,
+  "gcs": 8,
+  "longTasks": 1,
+  "longTaskMs": 310,
+  "replays": 0,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 1,
+   "landscape": true
+  },
+  "render": {
+   "calls": 44,
+   "triangles": 80259,
+   "frameMs": 2.9,
+   "players": 10,
+   "avatars": 10,
+   "pending": 14,
+   "crowd": 493,
+   "crowdLevel": null,
+   "v5": false,
+   "v8": false,
+   "v8Motion": false,
+   "tall": false,
+   "quality": 0,
+   "textures": 38,
+   "geometries": 67,
+   "landscape": true,
+   "dpr": 1,
+   "bufferWidth": 844,
+   "bufferHeight": 390,
+   "style": "v2-broadcast",
+   "characterVersion": 4,
+   "athleteBody": false,
+   "motionSource": null,
+   "dunks": null,
+   "retargetMs": null,
+   "lods": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "arenaSource": "design/models2/basketball-arena.glb",
+   "crowd3d": false,
+   "v4Fallbacks": [],
+   "clipCount": 25,
+   "loadTimes": {
+    "arena": 495,
+    "models": 170,
+    "environment": 35,
+    "crowd": 7,
+    "playerAssets": 896,
+    "avatars": 361,
+    "vfx": 33,
+    "feel": 10,
+    "total": 2007,
+    "firstFrame": 1301
+   },
+   "arenaVersion": 2,
+   "baked": [
+    {
+     "name": "beams",
+     "matched": 792,
+     "total": 792,
+     "applied": true
+    },
+    {
+     "name": "roof",
+     "matched": 384,
+     "total": 384,
+     "applied": true
+    },
+    {
+     "name": "scoreboard",
+     "matched": 720,
+     "total": 720,
+     "applied": true
+    }
+   ],
+   "reflection": null,
+   "feel": {
+    "authored": true,
+    "queued": 0,
+    "fov": 0,
+    "seen": 1
+   },
+   "vfx": {
+    "missingAtlases": [],
+    "sprites": 0,
+    "residentAtlases": 0,
+    "loadedAtlases": 5,
+    "reducedMotion": false
+   },
+   "show": {
+    "autoReplays": 0,
+    "autoReplaysDone": 0,
+    "skipped": 0,
+    "liveCuts": 1,
+    "casts": 2,
+    "stand": 0,
+    "groan": 0.67,
+    "wave": false,
+    "cut": true
+   },
+   "motion": [
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "idle",
+    "layup",
+    "idle"
+   ]
+  },
+  "steps": 1137,
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "quality": 0,
+  "profile": "quick",
+  "loadMs": 6193,
+  "errors": [],
+  "viewportLabel": "844x390"
+ }
+]

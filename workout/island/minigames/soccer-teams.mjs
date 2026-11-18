@@ -6,13 +6,16 @@
  * but not proportionally longer. Exponents were tuned in the headless simulation (gameplay-2 report). */
 export const SOCCER_TEAM_PRESETS={
  '6':{extras:2,length:48,width:30},
+ '7':{extras:3,length:58,width:36},
  '8':{extras:4,length:68,width:42},
  '11':{extras:7,length:105,width:68,tune:{speedExp:.7}}
 };
-export function resolveSoccerTeams(option){
+/** The product default (session) is 7-a-side on 58x36; the model's own default stays 6 so every contract is unchanged. `?soccerTeams=6` restores today's game. */
+export const SOCCER_PRODUCT_TEAMS='8';
+export function resolveSoccerTeams(option,fallback='6'){
  const pick=v=>Object.hasOwn(SOCCER_TEAM_PRESETS,String(v))?String(v):null;
  const search=globalThis.location?.search;
- return pick(option)||(typeof search==='string'?pick(new URLSearchParams(search).get('soccerTeams')):null)||'6';
+ return pick(option)||(typeof search==='string'?pick(new URLSearchParams(search).get('soccerTeams')):null)||fallback;
 }
 const map=(list,f)=>Array.isArray(list)?list.map(f):list;
 export function applySoccerTeams(config,option,override={}){
@@ -42,5 +45,12 @@ export function applySoccerTeams(config,option,override={}){
    wideAttack:config.tactics.wideAttack&&{...config.tactics.wideAttack,width:round(config.tactics.wideAttack.width*kw),range:round(config.tactics.wideAttack.range*P(.8))}},
   view:config.view&&{...config.view,camera:config.view.camera&&{...config.view.camera,nearDistance:round(config.view.camera.nearDistance*P(.7)),portraitNearDistance:round(config.view.camera.portraitNearDistance*P(.7)),portraitFollowRange:round(config.view.camera.portraitFollowRange*P(.7)),speedZoom:round(config.view.camera.speedZoom*P(.7)),farPlane:round(config.view.camera.farPlane*kl)}}
  };
+ // Product preset only: a ground pass the player aims arrives at about 10 m/s instead of 14 (measured, pass-bench: -4 points of intended
+ // receiver, +2 points intercepted, in return for a first touch that looks like a pass and not a shot).
+ if(key===SOCCER_PRODUCT_TEAMS&&scaled.assistance?.passing)scaled.assistance={...scaled.assistance,passing:{...scaled.assistance.passing,travelBaseSeconds:.45,travelPerMetre:.03}};
+ // Product preset: a slide takes about half a second longer to get up from. The authored fall and get-up are 2.6 s of clip; in 0.6 s they were
+ // played at up to 3x (pops of 53-57 degrees per frame). With 1.1 s they play at about 1.5x and the body is upright when control returns.
+ if(key===SOCCER_PRODUCT_TEAMS&&scaled.slide)scaled.slide={...scaled.slide,recoverSeconds:round(scaled.slide.recoverSeconds+.5),maxTotalSeconds:round((scaled.slide.maxTotalSeconds??1.2)+.5),
+  variants:scaled.slide.variants&&Object.fromEntries(Object.entries(scaled.slide.variants).map(([name,v])=>[name,{...v,recoverSeconds:round(v.recoverSeconds+.5)}]))};
  return scaled;
 }

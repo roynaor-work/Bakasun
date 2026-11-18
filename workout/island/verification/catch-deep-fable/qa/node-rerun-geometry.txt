@@ -1,0 +1,54 @@
+--- check 1: track per stage (seed 3) ---
+stage curve arcs S-bends minR maxR length  heading30s(deg) arcsPassed30s dist30s
+    1   0.3    7       1   94  133   1319              29             1     136  slide 3.7 scrape 0 end caught
+    2   0.4    7       2   92  127   1313             263             5     766  slide 5.22 scrape 0 run 
+    3   0.5    8       2   92  118   1469               0             0      61  slide 0 scrape 0 end caught
+    4   0.6    9       2   79  114   1483              69             1     188  slide 4.42 scrape 0 end caught
+    5   0.7    8       2   69  106   1500             308             5     771  slide 5.28 scrape 0 run 
+    6   0.8    9       2   62   96   1562              79             1     182  slide 6.35 scrape 0 end caught
+    7   0.9   11       3   55   87   1734             171             3     397  slide 5.93 scrape 0 end caught
+    8     1   11       2   58   78   1686             187             3     391  slide 4.17 scrape 0 end caught
+    9     1   11       3   50   76   1748             265             5     633  slide 7.17 scrape 0 run 
+   10     1   12       3   52   76   1842             318             4     647  slide 8.28 scrape 0 run 
+  stage 1 turn total 333° S70 L130/32° S90 R110/45° S67 L94/67° S61 R94/50° S28 L133/43° S96 R113/30° S82 L101/67° S78 S120
+  stage 2 turn total 389° S70 L98/60° S65 L110/59° S63 L118/60° S22 R92/50° S66 L102/49° S51 R127/62° S20 L95/50° S88 S142.97122616949855
+  stage 3 turn total 422° S70 R114/36° S98 L110/77° S59 L94/51° S65 R114/35° S24 L118/56° S65 R92/42° S85 L107/60° S30 R113/66° S56 S120
+  stage 4 turn total 518° S70 R85/69° S75 L108/34° S56 R114/40° S24 L86/36° S54 L90/63° S78 L103/80° S22 R79/80° S62 L109/48° S53 R84/66° S24 S120
+  stage 5 turn total 539° S70 L98/41° S54 L106/52° S53 R91/94° S68 L85/80° S19 R103/72° S89 R73/58° S86 L69/48° S21 R104/94° S51 S122.9897849783747
+  stage 6 turn total 649° S70 R72/79° S82 L66/71° S50 L70/84° S25 R78/87° S90 L77/81° S53 R81/32° S24 L64/48° S86 R62/75° S49 R96/91° S45 S142.84988657984377
+  stage 7 turn total 763° S70 R81/47° S63 L65/93° S47 R84/73° S26 L73/43° S83 L87/91° S64 R55/78° S31 L57/65° S74 R59/53° S47 R83/30° S22 L85/102° S51 R61/89° S82 S120
+  stage 8 turn total 756° S70 L58/90° S46 L62/37° S45 R64/59° S70 R64/91° S49 L75/45° S22 R61/50° S66 L69/101° S73 R78/97° S19 L70/42° S68 L61/98° S84 R77/46° S31 S162.07568968824467
+  stage 9 turn total 717° S70 L73/53° S71 R67/58° S83 R54/43° S27 L71/100° S73 R50/28° S84 L74/98° S48 R76/91° S30 L58/81° S84 R66/53° S80 L75/76° S29 R52/37° S47 S175.35457437116474
+  stage 10 turn total 861° S70 R58/95° S55 R72/78° S81 L73/106° S74 L56/64° S29 R66/35° S55 R57/67° S70 L52/80° S19 R61/54° S82 L62/63° S51 R59/54° S67 L56/65° S20 R76/98° S77 S142.68167822515488
+
+--- check 2: first bend, steer 0 vs counter-steer (same seed) ---
+stage 1 first bend R=130 zero: {"maxD":5.45,"scrapeSeconds":0.72,"vIn":31,"vMin":13.2,"vOut":13.2,"crashesInBend":0} counter: {"maxD":2.42,"scrapeSeconds":0,"vIn":31,"vMin":0,"vOut":0,"crashesInBend":0}
+stage 2 first bend R=98 zero: {"maxD":5.57,"scrapeSeconds":2.9,"vIn":22,"vMin":10.4,"vOut":11.8,"crashesInBend":0} counter: {"maxD":0.42,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"crashesInBend":0}
+stage 3 first bend R=114 zero: {"maxD":0,"scrapeSeconds":0,"vIn":0,"vMin":99,"vOut":1.8,"crashesInBend":0} counter: {"maxD":0,"scrapeSeconds":0,"vIn":0,"vMin":99,"vOut":1.8,"crashesInBend":0}
+stage 5 first bend R=98 zero: {"maxD":5.57,"scrapeSeconds":1.17,"vIn":22,"vMin":5.9,"vOut":11.8,"crashesInBend":1} counter: {"maxD":0.42,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"crashesInBend":0}
+stage 8 first bend R=58 zero: {"maxD":6.09,"scrapeSeconds":4.87,"vIn":22,"vMin":7.6,"vOut":9.9,"crashesInBend":0} counter: {"maxD":1.45,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"crashesInBend":0}
+stage 10 first bend R=58 zero: {"maxD":6.05,"scrapeSeconds":5.2,"vIn":22,"vMin":7.6,"vOut":9.9,"crashesInBend":0} counter: {"maxD":1.45,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"crashesInBend":0}
+
+--- check 3: obstacles by kind per stage ---
+stage 1 density 0.35 total 4 inBend 2 {"traffic":3,"cone":1}
+stage 2 density 0.45 total 7 inBend 5 {"pad":1,"traffic":3,"barrier":1,"parked":1,"oil":1}
+stage 3 density 0.55 total 10 inBend 6 {"cone":2,"traffic":3,"parked":1,"pad":1,"barrier":2,"oil":1}
+stage 4 density 0.65 total 16 inBend 8 {"cone":3,"traffic":8,"barrier":3,"parked":2}
+stage 5 density 0.75 total 13 inBend 9 {"barrier":2,"traffic":6,"cone":1,"parked":4}
+stage 6 density 0.85 total 17 inBend 8 {"parked":1,"barrier":2,"pad":2,"traffic":8,"cone":4}
+stage 7 density 0.95 total 25 inBend 16 {"traffic":12,"barrier":7,"oil":1,"parked":4,"cone":1}
+stage 8 density 1.05 total 26 inBend 14 {"traffic":9,"barrier":8,"oil":1,"pad":3,"cone":5}
+stage 9 density 1.15 total 33 inBend 14 {"traffic":16,"barrier":7,"cone":2,"pad":2,"parked":5,"oil":1}
+stage 10 density 1.25 total 37 inBend 20 {"pad":5,"oil":1,"traffic":14,"cone":5,"parked":4,"barrier":8}
+
+--- check 6: throwsTotal / hitsNeeded per stage (engine, arch v2, mods from a tyre stop = closeness 1) ---
+{"stage":1,"throwsTotal":6,"throwsTotalRoadblock":5,"hitsNeeded":2,"crew":1,"dist":15.75,"distAfterStop":15.8,"distAfterRoadblock":27.3,"wind":0,"extraThrows":1}
+{"stage":2,"throwsTotal":6,"throwsTotalRoadblock":5,"hitsNeeded":2,"crew":1,"dist":15,"distAfterStop":15,"distAfterRoadblock":26,"wind":0,"extraThrows":1}
+{"stage":3,"throwsTotal":6,"throwsTotalRoadblock":5,"hitsNeeded":2,"crew":1,"dist":18.75,"distAfterStop":18.8,"distAfterRoadblock":32.5,"wind":0.24,"extraThrows":1}
+{"stage":4,"throwsTotal":6,"throwsTotalRoadblock":5,"hitsNeeded":2,"crew":1,"dist":15.75,"distAfterStop":15.8,"distAfterRoadblock":27.3,"wind":0.36,"extraThrows":1}
+{"stage":5,"throwsTotal":7,"throwsTotalRoadblock":6,"hitsNeeded":3,"crew":1,"dist":10.5,"distAfterStop":10.5,"distAfterRoadblock":18.2,"wind":0.48,"extraThrows":1}
+{"stage":6,"throwsTotal":7,"throwsTotalRoadblock":6,"hitsNeeded":1,"crew":2,"dist":24,"distAfterStop":24,"distAfterRoadblock":41.6,"wind":0.6,"extraThrows":1}
+{"stage":7,"throwsTotal":7,"throwsTotalRoadblock":6,"hitsNeeded":1,"crew":2,"dist":24,"distAfterStop":24,"distAfterRoadblock":41.6,"wind":0.72,"extraThrows":1}
+{"stage":8,"throwsTotal":8,"throwsTotalRoadblock":7,"hitsNeeded":1,"crew":3,"dist":24,"distAfterStop":24,"distAfterRoadblock":41.6,"wind":0.84,"extraThrows":1}
+{"stage":9,"throwsTotal":8,"throwsTotalRoadblock":7,"hitsNeeded":1,"crew":3,"dist":24,"distAfterStop":24,"distAfterRoadblock":41.6,"wind":0.96,"extraThrows":1}
+{"stage":10,"throwsTotal":7,"throwsTotalRoadblock":6,"hitsNeeded":3,"crew":1,"dist":12.75,"distAfterStop":12.8,"distAfterRoadblock":22.1,"wind":1.08,"extraThrows":1}

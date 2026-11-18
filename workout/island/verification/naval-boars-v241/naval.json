@@ -1,0 +1,192 @@
+{
+ "part": "naval-boars-v241",
+ "date": "2026-11-14",
+ "browser": "Chromium / SwiftShader 153.0.8010.12",
+ "viewport": "844x390 isMobile hasTouch",
+ "clock": "fake page.clock; times are model time",
+ "input": "CDP Input.dispatchTouchEvent only",
+ "sources": {
+  "radar": "naval-r1.json",
+  "range": "naval-r2-final.json",
+  "hint": "naval-r2-r5-first.json",
+  "sky": "naval-r4-r5-final.json",
+  "submarine": "naval-r4-r5-final.json"
+ },
+ "results": {
+  "radar": {
+   "v241": {
+    "search": "default",
+    "distance": 220,
+    "lockedAtTap": false,
+    "seconds": 1.15,
+    "need": 1.1022369810756263,
+    "mid": {
+     "progress": 0.40644617055292065,
+     "need": 1.1022369810756263,
+     "hud": {
+      "index": 0,
+      "progress": 0.41,
+      "need": 1.1,
+      "queued": false,
+      "x": 378,
+      "y": 182,
+      "r": 24,
+      "box": {
+       "w": 95,
+       "h": 49
+      },
+      "offscreen": false
+     }
+    },
+    "button": {
+     "radar": "acquiring",
+     "fill": "0.39"
+    },
+    "shells": 0
+   },
+   "v24": {
+    "search": "?navalRadar=v24",
+    "lockedAtTap": true
+   }
+  },
+  "range": {
+   "locked": true,
+   "broke": {
+    "seconds": 9.922000000000008,
+    "distance": 359,
+    "reason": "lost",
+    "unlocked": "range",
+    "hud": {
+     "index": 0,
+     "reason": "lost",
+     "word": "הנעילה אבדה",
+     "box": {
+      "x": 370,
+      "y": 188,
+      "w": 93,
+      "h": 21
+     }
+    },
+    "ring": 340
+   },
+   "refused": {
+    "radar": false,
+    "reason": "range"
+   },
+   "range": 340,
+   "margin": 15
+  },
+  "hint": {
+   "v241": {
+    "search": "default",
+    "hint": {
+     "index": 0,
+     "x": 490,
+     "y": 198,
+     "color": "#CFF3FF",
+     "chance": null,
+     "arrow": false,
+     "word": null
+    }
+   },
+   "v24": {
+    "search": "&navalHint=v24",
+    "hint": {
+     "index": 0,
+     "x": 403,
+     "y": 191,
+     "color": "#5CF29A",
+     "chance": 1,
+     "arrow": true,
+     "word": "פגיעה"
+    }
+   }
+  },
+  "sky": {
+   "v241": {
+    "search": "default",
+    "fleetDown": true,
+    "heliUp": true,
+    "ended": "win",
+    "waited": 6,
+    "clock": 0,
+    "banner": "מסוק באוויר · הפילו אותו בוולקן",
+    "shotDown": true,
+    "kills": 1,
+    "finale": true,
+    "closedAt": 17.1
+   },
+   "v24": {
+    "search": "&navalAirEnd=v24",
+    "fleetDown": true,
+    "heliUp": true,
+    "ended": "win",
+    "waited": 0,
+    "clock": null,
+    "banner": null,
+    "shotDown": false,
+    "kills": 0,
+    "finale": false,
+    "closedAt": 6.9
+   }
+  },
+  "submarine": {
+   "v241": {
+    "search": "default",
+    "samples": 200,
+    "surfaced": 0,
+    "deep": true,
+    "torpedoHit": true,
+    "torpedoes": 4
+   },
+   "v24": {
+    "search": "&navalSub=v24",
+    "samples": 200,
+    "surfaced": 55,
+    "deep": false,
+    "torpedoHit": null,
+    "torpedoes": 5
+   }
+  }
+ },
+ "fails": [],
+ "note": "R2 of the first run (naval-r2-r5-first.json) was measured before the range ring was drawn for the visible segments only (ring null); R4 of that run failed on detection only (the session closes when a stage ends and the win was read from stage stars that the earlier win had already set). Both were fixed in the script and rerun: naval-r2-final.json, naval-r4-r5-final.json.",
+ "checks": {
+  "radar": [
+   "during the acquisition: the gauge on the hull and the Lock button rim fill",
+   "the lock comes after 0.8-1.5 s of model time",
+   "the tap fired nothing",
+   "?navalRadar=v24: locked at the tap (v24)"
+  ],
+  "range": [
+   "sailing away the lock breaks past 340 + 15 with the reason and the range ring",
+   "a tap on the far hull is refused"
+  ],
+  "hint": [
+   "v24.1: the aim ring has no word and one neutral colour",
+   "?navalHint=v24: the v24 word under the ring"
+  ],
+  "sky": [
+   "the fleet down with the helicopter up: the stage waits, the clock stands still, banner",
+   "the stage is won once the sky is clear",
+   "?navalAirEnd=v24: the stage ends with the helicopter up (v24)"
+  ],
+  "submarine": [
+   "v24.1: under water in all samples over 40 s",
+   "a tap on the Torpedo button hits it under water",
+   "?navalSub=v24: it surfaces"
+  ]
+ },
+ "consoleErrors": {
+  "naval-r1.json": 0,
+  "naval-r2-final.json": 0,
+  "naval-r2-r5-first.json": 0,
+  "naval-r4-r5-final.json": 0
+ },
+ "cspViolations": {
+  "naval-r1.json": 0,
+  "naval-r2-final.json": 0,
+  "naval-r2-r5-first.json": 0,
+  "naval-r4-r5-final.json": 0
+ }
+}

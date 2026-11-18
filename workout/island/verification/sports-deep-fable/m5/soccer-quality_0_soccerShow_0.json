@@ -1,0 +1,120 @@
+{
+ "done": true,
+ "result": {
+  "viewport": {
+   "width": 844,
+   "height": 390
+  },
+  "devicePixelRatio": 1,
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "seed": 7,
+  "level": 1,
+  "pinnedQuality": 0,
+  "warmupSeconds": 3,
+  "seconds": 25.1,
+  "frames": 211,
+  "fps": 8.4,
+  "frameMs": {
+   "mean": 118.95,
+   "p50": 100,
+   "p95": 216.7,
+   "p99": 416.7,
+   "max": 516.7
+  },
+  "over33": 191,
+  "over50": 179,
+  "tickMs": {
+   "mean": 0.92,
+   "p50": 0.6,
+   "p95": 3.3,
+   "p99": 6.4,
+   "max": 9.5
+  },
+  "renderMs": {
+   "mean": 6.64,
+   "p50": 3.8,
+   "p95": 11.1,
+   "p99": 22.9,
+   "max": 200.9
+  },
+  "glMs": {
+   "mean": 5.14,
+   "p50": 2.3,
+   "p95": 7.9,
+   "p99": 15.5,
+   "max": 199.7
+  },
+  "animMs": {
+   "mean": 1.5,
+   "p50": 1,
+   "p95": 4.9,
+   "p99": 7.8,
+   "max": 8.9
+  },
+  "programsCompiled": 0,
+  "allocByPhaseMB": {
+   "tick": 92.6,
+   "render": 20.5,
+   "gl": 27,
+   "other": -4.3
+  },
+  "longTasks": 4,
+  "longTaskMs": 695,
+  "heap": {
+   "startMB": 56.6,
+   "endMB": 65.6,
+   "allocatedMB": 135.8,
+   "allocatedMBPerSecond": 5.41,
+   "gcCount": 6
+  },
+  "assetReadyMs": 3315,
+  "warmup": {
+   "programs": 66,
+   "ms": 552
+  },
+  "quality": {
+   "final": 3,
+   "pixelRatio": 0.85,
+   "changes": [
+    {
+     "atSeconds": 1.4,
+     "quality": 2
+    },
+    {
+     "atSeconds": 2.9,
+     "quality": 3
+    }
+   ],
+   "crowdCount": 0,
+   "shadows": false,
+   "triangles": 83321,
+   "drawCalls": 68,
+   "assetStatus": "ready",
+   "turf": {
+    "turfStatus": "ready",
+    "turfMaps": 1,
+    "source": "design/environment"
+   },
+   "lod": 1
+  },
+  "match": {
+   "score": [
+    2,
+    0
+   ],
+   "elapsed": 21.4,
+   "phase": "playing",
+   "events": {
+    "goal": 2,
+    "shot": 3,
+    "pass": 6,
+    "loft": 0,
+    "header": 0,
+    "steal": 0,
+    "save": 0
+   }
+  },
+  "extra": "quality=0&soccerShow=0",
+  "consoleErrors": []
+ }
+}

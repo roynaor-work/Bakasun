@@ -17,6 +17,16 @@ export function fireIndicators(model,ctx,projectTarget,truckScreen){
   model.rescues.forEach((r,index)=>{if(!r.rescued&&!r.expired)targets.push({kind:'rescue',index,x:r.x,y:r.y,world:r.world});});
   if(model.water/model.maxWater<=b.hydrant.lowWaterRatio&&!model.atHydrant){const hp=[...b.city.hydrants].sort((a,c)=>Math.hypot(a[0]-model.truck.x,a[2]-model.truck.z)-Math.hypot(c[0]-model.truck.x,c[2]-model.truck.z))[0];targets.push({kind:'hydrant',index:0,x:b.render.logicalCenter[0]+hp[0]/b.render.worldScale,y:b.render.logicalCenter[1]+hp[2]/b.render.worldScale,world:hp});}
   const inset=36,top=76,bottom=height-28,left=inset,right=width-inset,markers=[];
+  // 12/11/2026 (QA): HUD boxes the arrows must not hide under (the water gauge at the top left, the hydrant button on the right),
+  // in canvas pixels, set by the session (none with `?fireArrows=v20`). The top row starts right of a box that sits in it; a side
+  // column stays below a box at its top end or above a box further down. Without boxes the layout is exactly as before.
+  const pad=31,minY={left:top+54,right:top+54},maxY={left:height-180,right:height-180};let topLeft=left;
+  for(const r of ctx.hudAvoid||[]){
+    if(r.top<top+pad&&r.bottom>top-pad&&r.left<left+pad)topLeft=Math.max(topLeft,Math.min(right,r.right+pad));
+    for(const edge of ['left','right']){const x=edge==='left'?left:right;if(r.right<x-pad||r.left>x+pad)continue;
+      if(r.top-pad<=minY[edge]){if(r.bottom+pad<=maxY[edge])minY[edge]=Math.max(minY[edge],r.bottom+pad);}
+      else maxY[edge]=Math.min(maxY[edge],r.top-pad);}
+  }
   for(const t of targets){
     const p=projectTarget(t.x,t.y);
     if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x>=0&&p.x<=width&&p.y>=0&&p.y<=height)continue;
@@ -27,23 +37,23 @@ export function fireIndicators(model,ctx,projectTarget,truckScreen){
     let edge=Math.abs(y-top)<.001?'top':Math.abs(x-left)<.001?'left':'right';
     // Lower-edge markers use a side above the touch controls.
     if(Math.abs(y-bottom)<.001)edge=x<width/2?'left':'right';
-    if(edge==='top')y=top;else{x=edge==='left'?left:right;y=clamp(y,top,height-180);}
+    if(edge==='top'){y=top;x=clamp(x,topLeft,right);}else{x=edge==='left'?left:right;y=clamp(y,top,height-180);}
     const distance=Math.hypot(model.truck.x-t.world[0],model.truck.z-t.world[2]),near=clamp(1-distance/b.city.extent,0,1),size=17+near*6;
     markers.push({...t,x,y,edge,angle,distance,size,color:t.kind==='hydrant'?'#8edcfa':t.kind==='rescue'?'#8df2d7':`hsl(${Math.round(18+near*26)} 96% ${Math.round(58+near*8)}%)`,targetScreen:{...p}});
   }
   // Pack each edge with exact coordinates. Floating point ray intersections
   // must not turn a top-edge marker into a marker in the middle of the scene.
-  const groups={top:[],left:[],right:[]},gap=54,sideMin=top+54;
-  for(const marker of markers)if(marker.edge!=='top')marker.y=clamp(marker.y,sideMin,height-180);
+  const groups={top:[],left:[],right:[]},gap=54;
+  for(const marker of markers)if(marker.edge!=='top')marker.y=clamp(marker.y,minY[marker.edge],maxY[marker.edge]);
   for(const marker of markers)groups[marker.edge].push(marker);
-  const capacity={top:Math.floor((right-left)/gap)+1,left:Math.floor((height-180-sideMin)/gap)+1,right:Math.floor((height-180-sideMin)/gap)+1};
+  const capacity={top:Math.floor((right-topLeft)/gap)+1,left:Math.floor((maxY.left-minY.left)/gap)+1,right:Math.floor((maxY.right-minY.right)/gap)+1};
   for(const edge of ['left','right','top'])while(groups[edge].length>capacity[edge]){
     const marker=groups[edge].pop(),other=['top','left','right'].find(key=>groups[key].length<capacity[key]);
     if(!other){groups[edge].push(marker);break;}
-    marker.edge=other;marker.x=other==='left'?left:other==='right'?right:clamp(marker.x,left,right);marker.y=other==='top'?top:clamp(marker.y,sideMin,height-180);groups[other].push(marker);
+    marker.edge=other;marker.x=other==='left'?left:other==='right'?right:clamp(marker.x,topLeft,right);marker.y=other==='top'?top:clamp(marker.y,minY[other],maxY[other]);groups[other].push(marker);
   }
   for(const [edge,items]of Object.entries(groups)){
-    const key=edge==='top'?'x':'y',min=edge==='top'?left:sideMin,max=edge==='top'?right:height-180;
+    const key=edge==='top'?'x':'y',min=edge==='top'?topLeft:minY[edge],max=edge==='top'?right:maxY[edge];
     items.sort((a,b)=>a[key]-b[key]);
     for(let i=1;i<items.length;i++)items[i][key]=Math.max(items[i][key],items[i-1][key]+gap);
     const overflow=Math.max(0,(items.at(-1)?.[key]??max)-max);for(const item of items)item[key]-=overflow;

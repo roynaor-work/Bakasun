@@ -1,0 +1,39 @@
+-- easy
+hold 0.1s n=500: on target 95% | short 0% | long/out 0% | net/out error 5% | bar: green 100% yellow 0% red 0% | no bar (tap) 0%
+hold 0.2s n=500: on target 95% | short 0% | long/out 0% | net/out error 5% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.3s n=500: on target 95% | short 0% | long/out 0% | net/out error 5% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.5s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 0.8s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.0s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.2s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.5s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.8s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.0s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.2s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.5s n=500: on target 0% | short 0% | long/out 95% | net/out error 5% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+-- normal
+hold 0.1s n=500: on target 94% | short 0% | long/out 0% | net/out error 6% | bar: green 100% yellow 0% red 0% | no bar (tap) 0%
+hold 0.2s n=500: on target 94% | short 0% | long/out 0% | net/out error 6% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.3s n=500: on target 94% | short 0% | long/out 0% | net/out error 6% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.5s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 0.8s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.0s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.2s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.5s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.8s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.0s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.2s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.5s n=500: on target 0% | short 0% | long/out 94% | net/out error 6% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+-- hard
+hold 0.1s n=500: on target 92% | short 0% | long/out 0% | net/out error 8% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.2s n=500: on target 92% | short 0% | long/out 0% | net/out error 8% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.3s n=500: on target 81% | short 0% | long/out 11% | net/out error 8% | bar: green 0% yellow 100% red 0% | no bar (tap) 0%
+hold 0.5s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 0.8s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.0s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.2s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.5s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 1.8s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.0s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.2s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%
+hold 2.5s n=500: on target 0% | short 0% | long/out 92% | net/out error 8% | bar: green 0% yellow 0% red 100% | no bar (tap) 0%

@@ -1,0 +1,93 @@
+{
+ "before": {
+  "pitchHz": {
+   "mean": 187.0012,
+   "sd": 0.405,
+   "min": 186.4286,
+   "max": 187.5714,
+   "distinct": 190
+  },
+  "level": {
+   "mean": 0.0224,
+   "sd": 0,
+   "min": 0.0224,
+   "max": 0.0224,
+   "distinct": 1
+  },
+  "limiterCuts": 0
+ },
+ "after": {
+  "pitchHz": {
+   "mean": 186.374,
+   "sd": 4.6095,
+   "min": 174.4782,
+   "max": 195.7659,
+   "distinct": 190
+  },
+  "level": {
+   "mean": 0.0219,
+   "sd": 0.0029,
+   "min": 0.0092,
+   "max": 0.0244,
+   "distinct": 10
+  },
+  "limiterCuts": 4
+ },
+ "laps": {
+  "coast": {
+   "lapS": 61.7,
+   "maxPitchHz": 205.2,
+   "longestNearTopS": 0.27,
+   "shareNearTop": 0.4,
+   "shareGear7": 98.1,
+   "topSpeedReached": 97.8,
+   "longestSteadyPitchS": 0.23
+  },
+  "jungle": {
+   "lapS": 41.1,
+   "maxPitchHz": 197.9,
+   "longestNearTopS": 0.7,
+   "shareNearTop": 5.1,
+   "shareGear7": 98.7,
+   "topSpeedReached": 101.6,
+   "longestSteadyPitchS": 0.15
+  },
+  "volcano": {
+   "lapS": 34.8,
+   "maxPitchHz": 210.9,
+   "longestNearTopS": 0.78,
+   "shareNearTop": 2.6,
+   "shareGear7": 100,
+   "topSpeedReached": 104.2,
+   "longestSteadyPitchS": 0.02
+  },
+  "harbor": {
+   "lapS": 61.9,
+   "maxPitchHz": 213.4,
+   "longestNearTopS": 0.65,
+   "shareNearTop": 1.1,
+   "shareGear7": 100,
+   "topSpeedReached": 102.9,
+   "longestSteadyPitchS": 0.18
+  },
+  "summit": {
+   "lapS": 38.4,
+   "maxPitchHz": 201.7,
+   "longestNearTopS": 0.2,
+   "shareNearTop": 3.2,
+   "shareGear7": 100,
+   "topSpeedReached": 98,
+   "longestSteadyPitchS": 0.1
+  },
+  "ruins": {
+   "lapS": 61.1,
+   "maxPitchHz": 203.8,
+   "longestNearTopS": 0.07,
+   "shareNearTop": 0.1,
+   "shareGear7": 100,
+   "topSpeedReached": 97.3,
+   "longestSteadyPitchS": 0.25
+  }
+ },
+ "topCap": true
+}

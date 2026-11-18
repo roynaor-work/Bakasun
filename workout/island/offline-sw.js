@@ -8,17 +8,25 @@
  * Plain classic worker: the island's script-src 'self' policy covers it; nothing is
  * evaluated from text. On a cache miss the network fetch has a timeout and one retry,
  * so a stalled connection ends in a clear failure the game can fall back from instead
- * of an endless wait. */
-const VERSION=new URL(self.location.href).searchParams.get('v')||'dev';
+ * of an endless wait.
+ * Offline v25 (registered with &v25=1): the app shell is answered from the device first and
+ * from the network only when the file is missing (then saved). Fresh code arrives by the
+ * release check in the page (release.json is never cached): the next release's cache is
+ * filled in the background, the new worker is registered and this one, with its cache, is
+ * dropped. The manifest asked with another version's ?v= always goes to the network, so the
+ * page can read the next release's file list while this cache still serves the current one. */
+const PARAMS=new URL(self.location.href).searchParams;
+const VERSION=PARAMS.get('v')||'dev';
+const V25=PARAMS.get('v25')==='1';
 const CACHE='island-assets-'+VERSION.replace(/[^\w.-]/g,'_');
 let MISS_TIMEOUT_MS=45000;
 const CODE_TIMEOUT_MS=6000;
-const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
+const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
 const SCOPE_PATH=new URL('./',self.location.href).pathname;
 /** App shell: pages, modules, styles and data of the island, answered from the network
  * first (fresh code always wins) and from the device when the network is gone or slow. */
 const SHELL=/\.(?:mjs|js|css|html|webmanifest)$|\/(?:data|episodes)\/[^/]+\.json$|\/offline-manifest\.json$/;
-const shell=url=>url.origin===self.location.origin&&url.pathname.startsWith(SCOPE_PATH)&&!url.pathname.includes('..')&&url.pathname!==SCOPE_PATH+'offline-sw.js'&&url.pathname!==SCOPE_PATH+'release.json'&&(url.pathname===SCOPE_PATH||url.pathname===SCOPE_PATH+'index.html'||SHELL.test(url.pathname));
+const shell=url=>url.origin===self.location.origin&&url.pathname.startsWith(SCOPE_PATH)&&!url.pathname.includes('..')&&url.pathname!==SCOPE_PATH+'offline-sw.js'&&url.pathname!==SCOPE_PATH+'release.json'&&!(url.pathname===SCOPE_PATH+'offline-manifest.json'&&url.searchParams.has('v')&&url.searchParams.get('v')!==VERSION)&&(url.pathname===SCOPE_PATH||url.pathname===SCOPE_PATH+'index.html'||SHELL.test(url.pathname));
 const bare=url=>url.origin+url.pathname;
 const managed=url=>url.origin===self.location.origin&&!url.pathname.includes('..')&&MANAGED.test(url.pathname);
 /** Media elements ask for byte ranges (Safari insists on a 206). Serve a slice of the cached copy. */
@@ -54,6 +62,9 @@ async function networkFirstTry(request){
 self.addEventListener('fetch',event=>{
   const request=event.request;if(request.method!=='GET')return;
   let url;try{url=new URL(request.url);}catch{return;}
+  // The page's own download for the next release asks with ?v25fresh=1: it must reach the
+  // server, not this cache (which holds the current release's copy of the same file).
+  if(url.searchParams.has('v25fresh'))return;
   if(managed(url)){
     event.respondWith((async()=>{
       const cache=await caches.open(CACHE),hit=await cache.match(bare(url),{ignoreSearch:true});
@@ -67,6 +78,7 @@ self.addEventListener('fetch',event=>{
   if(!shell(url))return;
   event.respondWith((async()=>{
     const cache=await caches.open(CACHE),key=bare(url).endsWith('/index.html')?bare(url).slice(0,-10):bare(url),hit=await cache.match(key,{ignoreSearch:true});
+    if(V25&&hit)return hit;
     try{
       const response=await fetchWithTimeout(request,hit?CODE_TIMEOUT_MS:MISS_TIMEOUT_MS);
       if(response.status===200&&response.type==='basic')cache.put(key,response.clone()).catch(()=>{});

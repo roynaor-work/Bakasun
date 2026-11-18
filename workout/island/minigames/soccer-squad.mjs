@@ -15,11 +15,13 @@ export const SOCCER_EXTRAS=[
  * ranks, training and migration contracts are never expanded or rewritten. */
 export function expandSoccerConfig(config){
  const extras=config.squad?.extraPlayersPerTeam??0;
- if(!Number.isInteger(extras)||extras<0||extras>SOCCER_EXTRAS.length)throw new RangeError('Soccer extraPlayersPerTeam must be an integer from 0 to '+SOCCER_EXTRAS.length);
+ // Soccer full (soccer-full.mjs): the 4-4-2 / 4-3-3 squad brings its own seven extras and the roles of the four card slots; without it, as before.
+ const list=Array.isArray(config.squad?.extras)?config.squad.extras:SOCCER_EXTRAS,slots=Array.isArray(config.squad?.baseRoles)?config.squad.baseRoles:ROLE_BY_SLOT;
+ if(!Number.isInteger(extras)||extras<0||extras>list.length)throw new RangeError('Soccer extraPlayersPerTeam must be an integer from 0 to '+list.length);
  if(config[prepared]===extras)return config;
  const original=config.players.roster.filter(entry=>!entry.soccerExtra);
- const roster=original.map(entry=>({...entry,tacticalRole:entry.tacticalRole||ROLE_BY_SLOT[entry.template]}));
- for(let i=0;i<extras;i++)for(const team of [0,1]){const e=SOCCER_EXTRAS[i];roster.push({team,role:e.role,template:e.template,tacticalRole:e.tacticalRole,soccerExtra:true,matchNumber:e.matchNumber});}
+ const roster=original.map(entry=>({...entry,tacticalRole:entry.tacticalRole||slots[entry.template]}));
+ for(let i=0;i<extras;i++)for(const team of [0,1]){const e=list[i];roster.push({team,role:e.role,template:e.template,tacticalRole:e.tacticalRole,soccerExtra:true,matchNumber:e.matchNumber});}
  const lengthen=list=>Array.isArray(list)?Array.from({length:roster.length},(_,i)=>list[i%list.length]):list;
  const appearance=Object.fromEntries(Object.entries(config.view.appearance||{}).map(([key,value])=>[key,lengthen(value)]));
  return {...config,[prepared]:extras,players:{...config.players,roster},view:{...config.view,appearance,athlete:{...config.view.athlete,profiles:lengthen(config.view.athlete?.profiles)}}};

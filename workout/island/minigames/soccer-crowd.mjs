@@ -82,14 +82,15 @@ export function soccerCrowd(T,scene,config,track){
  const put=(mesh,i,p,x,y,z,rz=0,sx=1,sy=1,sz=1)=>{
   const scale=p.hidden?0:p.scale;dummy.position.set(p.x+(x*p.cos+z*p.sin)*scale,p.y+y*scale,p.z+(z*p.cos-x*p.sin)*scale);dummy.rotation.set(0,p.yaw,rz);dummy.scale.set(scale*sx,scale*sy,scale*sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);
  };
- function update(time,cheering,direction=nearSide){
+ function update(time,cheering,direction=nearSide,groan=0){
   setNearSide(direction);
   // Supporters do not require the simulation's frame rate. Twenty updates per
   // second keep calm rows still and celebration waves smooth on mobile.
-  const frame=Math.floor(time*(cheering?24:12));if(frame===lastFrame&&cheering===lastCheering)return;lastFrame=frame;lastCheering=cheering;
+  const frame=Math.floor(time*(cheering||groan>0?24:12));if(frame===lastFrame&&cheering===lastCheering&&!groan)return;lastFrame=frame;lastCheering=cheering;
   let flagIndex=0;
   for(let i=0;i<count;i++){
-   const p=supporters[i],wave=Math.sin(time*6.1+i*.79),bounce=cheering?Math.max(0,wave)*Math.min(c.cheerHeight,.25)*.36:Math.sin(time*1.5+i)*.005;
+   // soccerShow v1: a rival goal sags the rows (groan 0..1) instead of the cheer bounce.
+   const p=supporters[i],wave=Math.sin(time*6.1+i*.79),bounce=cheering?Math.max(0,wave)*Math.min(c.cheerHeight,.25)*.36:Math.sin(time*1.5+i)*.005-groan*.06;
    const hip=.38+p.offset+bounce,bodyY=hip+bh/2;
    put(parts.body,i,p,0,bodyY,0,cheering?Math.sin(time*4+i)*.035:0);
    put(parts.head,i,p,0,hip+bh+hr,.015);

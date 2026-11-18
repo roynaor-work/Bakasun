@@ -61,7 +61,8 @@ export function selectTeamPass(p,s,c){
   const destination=teamPassPoint(member,c);
   const range=distance(p,destination);let clearance=6,lane=5,movingLane=5;
   for(const o of opponents){clearance=Math.min(clearance,distance(o,destination));lane=Math.min(lane,passLaneClearance(o,p,destination));movingLane=Math.min(movingLane,passInterceptionClearance(o,p,destination,c.passing.groundTravelSeconds));}
-  const advance=clamp((destination.x-p.x)*d,-6,10);
+  // ai.passAdvanceCap (soccer full, 105 m): a pass that gains more than 10 m is worth more there; the small match keeps 10
+  const advance=clamp((destination.x-p.x)*d,-6,c.ai.passAdvanceCap??10);
   const tooClose=Math.max(0,c.ai.requestDistance-range),tooFar=Math.max(0,range-maxDistance);
   const value=lane*2.7+clearance*1.15+advance*c.ai.passSelectionAdvanceWeight-range*.09-tooClose*3-tooFar*2-Math.max(0,lane-movingLane)*.8;
   if(value>best||value===best&&member.id<target.id){target=member;best=value;}
@@ -110,9 +111,9 @@ export function keeperTarget(p,s,c){
   if(time>0&&time<.8)z=b.z+b.vz*time;
  }
  const ballDistance=distance(p,b);let opposition=Infinity;for(const q of s.players)if(q.team!==p.team)opposition=Math.min(opposition,distance(q,b));
- if(!owner&&b.y<=c.rules.pickupHeight&&Math.hypot(b.vx,b.vz)<a.keeperFastBall&&b.x*d<-hx+a.keeperChaseDistance&&Math.abs(b.z)<c.pitch.penaltyWidth/2-k.areaInset&&ballDistance<a.keeperChaseRadius&&opposition>ballDistance+.6){x=b.x;z=b.z;duty='keeper-sweep';}
- const limit=duty==='keeper-sweep'?c.pitch.penaltyWidth/2-k.areaInset:c.pitch.goalWidth/2-a.keeperPostInset;
- return {x:d*clamp(x*d,-hx+k.areaInset,-hx+c.pitch.penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
+ if(!owner&&b.y<=c.rules.pickupHeight&&Math.hypot(b.vx,b.vz)<a.keeperFastBall&&b.x*d<-hx+a.keeperChaseDistance&&Math.abs(b.z)<(c.pitch.play||c.pitch).penaltyWidth/2-k.areaInset&&ballDistance<a.keeperChaseRadius&&opposition>ballDistance+.6){x=b.x;z=b.z;duty='keeper-sweep';}
+ const limit=duty==='keeper-sweep'?(c.pitch.play||c.pitch).penaltyWidth/2-k.areaInset:(c.pitch.play||c.pitch).goalWidth/2-a.keeperPostInset;
+ return {x:d*clamp(x*d,-hx+k.areaInset,-hx+(c.pitch.play||c.pitch).penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
 }
 
 /** How many passes a rival may make in one possession before it must dribble or shoot.

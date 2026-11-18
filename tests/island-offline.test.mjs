@@ -28,7 +28,8 @@ test('offline manifest: sizes per game and for the island (reported in the relea
  const union=pathsFor(manifest,undefined,{shell:false}),all=pathsFor(manifest,undefined,{shell:true});
  const assetsMb=(await bytesOf(union))/1048576,allMb=(await bytesOf(all))/1048576;
  console.log('offline MB',JSON.stringify(Object.fromEntries(Object.entries(sizes).map(([g,b])=>[g,Math.round(b/104857.6)/10])))+' assets '+assetsMb.toFixed(1)+' with app code '+allMb.toFixed(1));
- assert.ok(assetsMb>10&&assetsMb<80,'game assets stay a phone-sized download: '+assetsMb);
+ /* v24.1 (15/11): the cap moved from 80 to 90 MB on purpose: the 3D fire rooms, the referees, the clips and the 3D crowd add 7.5 MB; the offline download is optional and a per-game download is next. */
+ assert.ok(assetsMb>10&&assetsMb<90,'game assets stay a phone-sized download: '+assetsMb);
 });
 
 test('offline manifest: the basketball motion clips and the shell list are complete and up to date',async()=>{
@@ -45,7 +46,7 @@ test('offline worker: classic script with the same managed rule as the page, ver
  assert.ok(!/^\s*(import|export)\s/m.test(source),'classic worker, not a module');
  assert.ok(source.includes(MANAGED.source),'worker carries the same managed pattern as ui/offline.mjs');
  assert.ok(source.includes("'island-assets-'+VERSION"));
- assert.equal(cacheName('island-v2-20261107-3'),'island-assets-island-v2-20261107-3');
+ assert.equal(cacheName('island-v2-20261107-18'),'island-assets-island-v2-20261107-18');
 });
 
 function runWorker(version='v1'){

@@ -1,0 +1,247 @@
+{
+ "cues": {
+  "siren-first-call": {
+   "peak": 0.1024,
+   "mean": 0.0877
+  },
+  "siren-loop-0": {
+   "peak": 0.1017,
+   "mean": 0.0899
+  },
+  "siren-loop-1": {
+   "peak": 0.1019,
+   "mean": 0.0998
+  },
+  "siren-loop-2": {
+   "peak": 0.1015,
+   "mean": 0.0998
+  },
+  "siren-far": {
+   "peak": 0.0998,
+   "mean": 0.0669
+  },
+  "siren-crew": {
+   "peak": 0.1023,
+   "mean": 0.0862
+  },
+  "engine-idle-4": {
+   "peak": 0.0433,
+   "mean": 0.022
+  },
+  "engine-20": {
+   "peak": 0.0525,
+   "mean": 0.0353
+  },
+  "engine-31-boost": {
+   "peak": 0.0555,
+   "mean": 0.0435
+  },
+  "engine+siren": {
+   "peak": 0.1158,
+   "mean": 0.0995
+  },
+  "shot": {
+   "peak": 0.0716,
+   "mean": 0.0053
+  },
+  "shotHit": {
+   "peak": 0.05,
+   "mean": 0.0049
+  },
+  "turn": {
+   "peak": 0.0164,
+   "mean": 0.002
+  },
+  "flat": {
+   "peak": 0.0458,
+   "mean": 0.0134
+  },
+  "skid": {
+   "peak": 0.0584,
+   "mean": 0.0113
+  },
+  "twang": {
+   "peak": 0.0508,
+   "mean": 0.0045
+  },
+  "whistle": {
+   "peak": 0.0384,
+   "mean": 0.007
+  },
+  "whoosh": {
+   "peak": 0.0318,
+   "mean": 0.0064
+  },
+  "hitBody": {
+   "peak": 0.0597,
+   "mean": 0.0061
+  },
+  "hitHead": {
+   "peak": 0.045,
+   "mean": 0.0115
+  },
+  "catch": {
+   "peak": 0.0605,
+   "mean": 0.0148
+  },
+  "perfect": {
+   "peak": 0.063,
+   "mean": 0.024
+  },
+  "crash": {
+   "peak": 0.0437,
+   "mean": 0.0053
+  },
+  "scrape": {
+   "peak": 0.0238,
+   "mean": 0.0027
+  },
+  "ram": {
+   "peak": 0.0441,
+   "mean": 0.004
+  },
+  "thud": {
+   "peak": 0.0648,
+   "mean": 0.0058
+  },
+  "count": {
+   "peak": 0.0233,
+   "mean": 0.0017
+  },
+  "go": {
+   "peak": 0.0344,
+   "mean": 0.0061
+  },
+  "tool": {
+   "peak": 0.0174,
+   "mean": 0.0013
+  },
+  "miss": {
+   "peak": 0.0381,
+   "mean": 0.0044
+  },
+  "near": {
+   "peak": 0.0341,
+   "mean": 0.0039
+  },
+  "brake": {
+   "peak": 0.0118,
+   "mean": 0.0022
+  },
+  "nitro": {
+   "peak": 0.0053,
+   "mean": 0.0009
+  },
+  "draw": {
+   "peak": 0.027,
+   "mean": 0.0183
+  },
+  "stack-shot+siren+engine": {
+   "peak": 0.1207,
+   "mean": 0.0963
+  }
+ },
+ "siren": {},
+ "status": {
+  "afterGesture": {
+   "state": "running",
+   "sirenBuffer": null,
+   "sirenDecoded": {
+    "twoTone": null,
+    "yelp": null
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "decoded": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenFirst": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenLoop": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": true,
+   "sirenGain": 0.62,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenAfterHold": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "engine": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": true,
+   "boosting": true,
+   "draw": false,
+   "limiter": true
+  },
+  "final": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": true,
+   "limiter": true
+  }
+ }
+}
+errors []
+exit 0

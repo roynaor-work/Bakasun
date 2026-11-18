@@ -30,19 +30,22 @@ export function measureTriangles(root,{visibleOnly=true}={}) {
   visit(root);return {total:[...parts.values()].reduce((a,b)=>a+b,0),parts:Object.fromEntries(parts)};
 }
 
-function makeCrowd(level,texture,uniform,resources) {
+function makeCrowd(level,texture,uniform,resources,mood,rank=null) {
   const root=new THREE.Group();root.name='Crowd';
   const placements=crowdPlacements(level),dummy=new THREE.Object3D();
   // Eight bounded sections can be frustum culled independently.
   for(let section=0;section<8;section++){
-    const people=placements.filter(p=>p.section===section);
+    let people=placements.filter(p=>p.section===section),hideable=0;
+    // Soccer v24 3D fans (`rank`, LOD0 only): the cards they can stand in for go last, the most important last of all, so hiding the top
+    // m of them is drawing `count - m` instances (setCrowdHidden). Without `rank` the order and the look are exactly as before.
+    if(rank){const keep=[],swap=[];for(const p of people){const r=rank(p);if(r===null||r===undefined)keep.push(p);else swap.push({p,r});}swap.sort((a,b)=>b.r-a.r);hideable=swap.length;people=[...keep,...swap.map(e=>e.p)];}
     const geometry=new THREE.PlaneGeometry(1,1);geometry.translate(0,.5,0);
     geometry.setAttribute('atlasVariant',new THREE.InstancedBufferAttribute(new Float32Array(people.map(p=>p.variant)),1));
     geometry.setAttribute('wavePhase',new THREE.InstancedBufferAttribute(new Float32Array(people.map(p=>p.phase)),1));
     const material=new THREE.MeshBasicMaterial({map:texture,color:'#c5d0d4',side:THREE.DoubleSide,alphaTest:.4,alphaToCoverage:true,transparent:false,depthWrite:true,fog:true});
     material.onBeforeCompile=shader=>{
-      shader.uniforms.stadiumTime=uniform;
-      shader.vertexShader='attribute float atlasVariant; attribute float wavePhase; uniform float stadiumTime;\n'+shader.vertexShader;
+      shader.uniforms.stadiumTime=uniform;shader.uniforms.stadiumMood=mood;
+      shader.vertexShader='attribute float atlasVariant; attribute float wavePhase; uniform float stadiumTime; uniform vec2 stadiumMood;\n'+shader.vertexShader;
       const uvChunk='#include <uv_vertex>';
       if(!shader.vertexShader.includes(uvChunk))throw new Error('Stadium crowd requires the three.js r160 uv_vertex shader chunk');
       shader.vertexShader=shader.vertexShader.replace(uvChunk,
@@ -55,15 +58,18 @@ function makeCrowd(level,texture,uniform,resources) {
         vec3 stadiumUp = normalize(stadiumWorld[1].xyz);
         vec3 stadiumToCamera = cameraPosition - stadiumCentre;
         vec3 stadiumRight = normalize(cross(stadiumUp,stadiumToCamera) + vec3(0.00001,0.0,0.0));
+        // soccerShow v1 crowd mood (x = cheer, y = groan): a bounce wave travelling along the stands on a home goal, a sag on a rival goal.
+        float stadiumBob = stadiumMood.x * max(0.0, sin(stadiumTime*7.0 + wavePhase*2.3 - stadiumCentre.x*0.11)) * 0.09 * uv.y;
+        float stadiumSag = stadiumMood.y * (0.07 + 0.015*sin(wavePhase)) * uv.y;
         vec3 stadiumPosition = stadiumCentre
           + stadiumRight * transformed.x * length(stadiumWorld[0].xyz)
-          + stadiumUp * transformed.y * length(stadiumWorld[1].xyz);
+          + stadiumUp * (transformed.y + stadiumBob - stadiumSag) * length(stadiumWorld[1].xyz);
         vec4 mvPosition = viewMatrix * vec4(stadiumPosition,1.0);
         gl_Position = projectionMatrix * mvPosition;
       `);
     };
-    material.customProgramCacheKey=()=> 'stadium-crowd-atlas-r160-v3';
-    const mesh=new THREE.InstancedMesh(geometry,material,people.length);mesh.name='Crowd_'+section;mesh.userData.part='Crowd';
+    material.customProgramCacheKey=()=> 'stadium-crowd-atlas-r160-v4';
+    const mesh=new THREE.InstancedMesh(geometry,material,people.length);mesh.name='Crowd_'+section;mesh.userData.part='Crowd';mesh.userData.section=section;mesh.userData.hideable=hideable;mesh.userData.total=people.length;
     for(let i=0;i<people.length;i++){
       const p=people[i];dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.yaw,0);dummy.scale.set(p.width,p.height,1);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);
     }
@@ -77,14 +83,14 @@ function makeCrowd(level,texture,uniform,resources) {
  * decoder come from the game's own vendor folder (one three.js instance), assets from assets/soccer-v8. Otherwise unchanged.
  * Load the exact local runtime files; no CDN, bundler, network API or textures
  * larger than 1024. Caller owns scene, renderer, RAF, players and game logic. */
-export async function loadStadium({scene,baseURL=URL_BASE,initialLOD=0,signal,omitParts=[]}={}) {
+export async function loadStadium({scene,baseURL=URL_BASE,initialLOD=0,signal,omitParts=[],crowdRank=null}={}) {
   if(!scene?.isScene)throw new TypeError('loadStadium requires a THREE.Scene');
   if(!Number.isInteger(initialLOD)||initialLOD<0||initialLOD>2)throw new RangeError('LOD must be 0, 1 or 2');
   if(!Array.isArray(omitParts)||omitParts.some(p=>typeof p!=='string'))throw new TypeError('omitParts must be an array of part names');
   const omitted=new Set(omitParts);
   signal?.throwIfAborted();
   if(occupiedScenes.has(scene))throw new Error('This scene already has a stadium loading or mounted');
-  const base=new URL(baseURL,URL_BASE),resources=new Set(),time={value:0},root=new THREE.Group();root.name='SoccerStadiumV8';
+  const base=new URL(baseURL,URL_BASE),resources=new Set(),time={value:0},mood={value:new THREE.Vector2(0,0)},root=new THREE.Group();root.name='SoccerStadiumV8';
   const roofPlane={value:new THREE.Vector4(0,0,0,-1)};let roofCutawayActive=false;
   const manager=new THREE.LoadingManager(),textures=new THREE.TextureLoader(manager);
   // The game's own static Draco worker and decoder (CSP: same origin, no blob workers).
@@ -150,7 +156,7 @@ export async function loadStadium({scene,baseURL=URL_BASE,initialLOD=0,signal,om
           if(m.name==='Steel'){m.roughness=.72;m.metalness=.12;}
         }
       });
-      const crowd=makeCrowd(LEVELS[i],atlas,time,resources);crowd.visible=!omitted.has('Crowd');group.add(crowd);group.visible=i===lod;root.add(group);
+      const crowd=makeCrowd(LEVELS[i],atlas,time,resources,mood,i===0?crowdRank:null);crowd.visible=!omitted.has('Crowd');group.add(crowd);group.visible=i===lod;root.add(group);
     }
     const lamps=new THREE.Group();lamps.name='Halos';
     // Four camera-facing halos share one instanced draw, including at corners
@@ -192,6 +198,11 @@ export async function loadStadium({scene,baseURL=URL_BASE,initialLOD=0,signal,om
       root,levels,lights:{hemi,key,fill},textures:maps,
       get lod(){return lod;},setLOD,
       get roofCutawayActive(){return roofCutawayActive;},
+      /** Crowd mood for the billboard shader (soccerShow v1): cheer 0..1 bounces, groan 0..1 sags; reduced motion flattens both. */
+      setMood(cheer=0,groan=0,reducedMotion=false){mood.value.set(reducedMotion?0:Math.max(0,Math.min(1,cheer)),reducedMotion?0:Math.max(0,Math.min(1,groan)));},
+      /** Soccer v24: hide the top `m` rankable cards of each LOD0 section (Map section -> m; a missing section shows all its cards). */
+      setCrowdHidden(hidden=new Map()){let cards=0;levels[0]?.traverse(o=>{if(!o.isInstancedMesh||o.userData.part!=='Crowd')return;const m=Math.min(o.userData.hideable||0,Math.max(0,hidden.get(o.userData.section)||0));o.count=o.userData.total-m;cards+=m;});return cards;},
+      get mood(){return {cheer:mood.value.x,groan:mood.value.y};},
       update(camera,seconds=0,{autoLOD=true,reducedMotion=false,roofCutaway=true}={}){
         if(disposed)return;time.value=reducedMotion?0:seconds;
         if(camera){

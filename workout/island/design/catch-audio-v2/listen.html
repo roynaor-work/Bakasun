@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מרדף — האזנה לאודיו v2</title>
+<style>
+  :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101923;color:#edf4fa}
+  body{max-width:1100px;margin:auto;padding:24px;line-height:1.65}
+  h1,h2{line-height:1.25}h1{color:#9ee6cd}a{color:#a7dbff}
+  button,select,input{font:inherit}button,select{padding:9px 14px;border:1px solid #557184;border-radius:8px;background:#203441;color:inherit;min-height:44px}
+  button{cursor:pointer}button:hover{background:#34566b}button:disabled{opacity:.45;cursor:wait}
+  button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffe09b;outline-offset:3px}
+  .panel,article{border:1px solid #34515e;border-radius:14px;padding:18px;background:#172631}
+  .panel{margin:18px 0}.controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  article h3{margin:0 0 12px;font-size:1rem}article p{font-size:.86rem;color:#c2d3de;direction:ltr;text-align:right}
+  article button,article a{margin:4px}small{color:#c2d3de}#status{min-height:1.8em}input[type=range]{width:210px}
+  .sticky{position:sticky;top:0;z-index:1;box-shadow:0 8px 18px #101923}
+  #stop{background:#713d38}section{scroll-margin-top:150px}output{font-variant-numeric:tabular-nums}
+  @media(max-width:500px){body{padding:12px}.sticky{position:static}.grid{grid-template-columns:1fr}}
+</style>
+<h1>מרדף — חבילת אודיו v2</h1>
+<p>V6 נעים, פתיחה קצרה וצרורות לכלים. 46 צלילים מקוריים · CC0 · OGG/Opus ו־MP3.</p>
+<p><a href="REPORT.md">דוח ספקטרום</a> · <a href="manifest.json">מניפסט ומדידות</a> · <a href="LICENSE.txt">רישיון CC0</a></p>
+<div class="panel sticky">
+  <div class="controls">
+    <button id="stop" type="button">עצירת כל הצלילים</button>
+    <label>פורמט <select id="format"><option value="ogg">OGG · Opus</option><option value="mp3">MP3</option></select></label>
+    <label>מצב <select id="level"><option value="recommended">עוצמות מומלצות</option><option value="normalized">השוואה ב־‎−18 LUFS</option></select></label>
+    <label>עוצמה ראשית <input id="volume" type="range" min="0" max="1" step=".01" value=".7"><output id="volumeValue">70%</output></label>
+  </div>
+  <div id="status" role="status" aria-live="polite">טוען מניפסט…</div>
+</div>
+<div class="panel">
+  <h2>נסיעת מבחן — הכלאת סל״ד</h2>
+  <div class="controls">
+    <label>מכונית <select id="vehicle"><option value="v6">V6 טבעי</option><option value="police">ניידת עמוקה</option><option value="fugitive">נמלט חד</option></select></label>
+    <label>סל״ד <input id="rpm" type="range" min="0" max="2" step=".01" value="0"><output id="rpmValue">נמוך</output></label>
+    <button id="drive" type="button" disabled>הפעלת מנוע משולב</button>
+  </div>
+  <small>שלוש שכבות מסונכרנות, מעבר רך בין סל״ד נמוך, בינוני וגבוה. הסירנות ניתנות להוספה ברקע.</small>
+</div>
+<nav aria-label="קבוצות צלילים"><a href="#engine">מנועים</a> · <a href="#opening">פתיחה</a> · <a href="#shift">הילוך</a> · <a href="#burst">צרורות</a> · <a href="#siren">סירנות</a></nav>
+<p>הצרור הארוך מכיל שני מקטעים של חמש יריות כדי לשמור על מגבלת 10 היריות וקצב 12 הרץ. פירוט בדוח.</p>
+<main id="assets"></main>
+<noscript>יש להפעיל JavaScript להצגת רשימת הצלילים.</noscript>
+<script type="module">
+const $ = id => document.getElementById(id);
+const status = message => { $('status').textContent = message; };
+let manifest, context, master, epoch = 0, driving = null;
+const cache = new Map(), voices = new Set();
+const groups = {engine:'מנועים — לולאות 2 שנ׳', opening:'פתיחה — 1.5 שנ׳', shift:'החלפת הילוך', burst:'צרורות — 0.5 / 0.8 / 1.2 שנ׳', siren:'סירנת רקע — לולאות 3 שנ׳'};
+async function audio() {
+  if (!context) {
+    context = new AudioContext({sampleRate:48000});
+    master = context.createGain(); master.gain.value = Number($('volume').value);
+    master.connect(context.destination);
+  }
+  await context.resume();
+}
+async function buffer(asset, format) {
+  const key = asset.files[format].path;
+  if (!cache.has(key)) cache.set(key, (async () => {
+    const response = await fetch(key);
+    if (!response.ok) throw Error(`הקובץ לא נטען: ${key}`);
+    return context.decodeAudioData(await response.arrayBuffer());
+  })().catch(error => {cache.delete(key); throw error;}));
+  return cache.get(key);
+}
+const gainFor = asset => $('level').value === 'normalized' ? 1 : asset.recommended_gain;
+function start(asset, data, gain = gainFor(asset), at = context.currentTime) {
+  const source = context.createBufferSource(), amp = context.createGain();
+  source.buffer = data;
+  if (asset.loop) {source.loop = true;source.loopStart = asset.loop.start_s;source.loopEnd = asset.loop.end_s;}
+  amp.gain.setValueAtTime(0, at);amp.gain.linearRampToValueAtTime(gain, at + .010);
+  source.connect(amp);amp.connect(master);
+  const voice = {source,amp,asset};voices.add(voice);
+  source.onended = () => {voices.delete(voice);source.disconnect();amp.disconnect();};
+  source.start(at);return voice;
+}
+function stopVoice(v) {
+  if (v.stopping) return;
+  v.stopping = true;
+  v.amp.gain.cancelScheduledValues(context.currentTime);
+  v.amp.gain.setValueAtTime(v.amp.gain.value, context.currentTime);
+  v.amp.gain.linearRampToValueAtTime(0, context.currentTime + .030);
+  v.source.stop(context.currentTime + .035);
+}
+function stop() {epoch++;driving = null;for(const v of voices) stopVoice(v);status('כל הצלילים נעצרו.');}
+$('stop').onclick = stop;
+$('volume').oninput = () => {
+  const value = Number($('volume').value);$('volumeValue').value = `${Math.round(value * 100)}%`;
+  if(master) master.gain.setTargetAtTime(value, context.currentTime, .010);
+};
+$('format').onchange = stop;
+$('level').onchange = () => {for(const v of voices) if(!v.stopping) v.amp.gain.setTargetAtTime(gainFor(v.asset),context.currentTime,.030);mix();};
+$('vehicle').onchange = stop;
+document.addEventListener('visibilitychange', () => {if(document.hidden) stop();});
+function mix() {
+  const x = Number($('rpm').value);$('rpmValue').value = x < .5 ? 'נמוך' : x > 1.5 ? 'גבוה' : 'בינוני';
+  if(!driving) return;
+  const left = Math.min(Math.floor(x),1), f = x-left;
+  const weights = [0,0,0];weights[left] = Math.cos(f*Math.PI/2);weights[left+1] = Math.sin(f*Math.PI/2);
+  driving.forEach((v,i) => {
+    const now = context.currentTime;
+    v.amp.gain.cancelScheduledValues(now);v.amp.gain.setValueAtTime(v.amp.gain.value,now);
+    v.amp.gain.linearRampToValueAtTime(weights[i]*gainFor(v.asset),now+.180);
+  });
+}
+$('rpm').oninput = mix;
+$('drive').onclick = async () => {
+  stop();const ticket = epoch;const format = $('format').value, vehicle = $('vehicle').value;
+  try {
+    await audio();
+    const assets = ['low','mid','high'].map(layer => manifest.assets.find(a=>a.id===`engine-${vehicle}-${layer}`));
+    const data = await Promise.all(assets.map(a=>buffer(a,format)));
+    if(ticket!==epoch) return;
+    const at = context.currentTime+.030;
+    driving = assets.map((a,i)=>start(a,data[i],0,at));mix();status('מנוע משולב פועל — אפשר לשנות סל״ד.');
+  } catch(error) {status(`הניגון נכשל: ${error.message}. אפשר לנסות את הפורמט השני.`);}
+};
+async function play(asset) {
+  // New bursts supersede an old burst; background engine/siren can coexist.
+  const ticket = ++epoch, format = $('format').value;
+  try {
+    await audio();const data = await buffer(asset,format);if(ticket!==epoch) return;
+    for(const v of voices) if(v.asset.id===asset.id || (asset.category==='burst' && v.asset.category==='burst')) stopVoice(v);
+    start(asset,data);status(`מנגן: ${asset.label_he}${asset.loop?' · לולאה':''}`);
+  } catch(error) {status(`הניגון נכשל: ${error.message}. אפשר לנסות את הפורמט השני.`);}
+}
+try {
+  const response = await fetch('manifest.json');if(!response.ok) throw Error('manifest.json');
+  manifest = await response.json();
+  for(const [category,title] of Object.entries(groups)) {
+    const section = document.createElement('section');section.id=category;
+    const heading = document.createElement('h2');heading.textContent=title;section.append(heading);
+    const grid = document.createElement('div');grid.className='grid';section.append(grid);
+    for(const asset of manifest.assets.filter(a=>a.category===category)) {
+      const card = document.createElement('article'), h=document.createElement('h3'), button=document.createElement('button'), info=document.createElement('p');
+      h.textContent=asset.label_he;button.type='button';button.textContent=asset.loop?'ניגון בלולאה':'ניגון';
+      button.setAttribute('aria-label',`ניגון ${asset.label_he}`);button.onclick=()=>play(asset);
+      info.textContent=`${asset.duration_s}s · gain ${asset.recommended_gain} · ${asset.files.ogg.lufs} / ${asset.files.mp3.lufs} LUFS`;
+      card.append(h,button,info);
+      for(const fmt of ['ogg','mp3']) {
+        const a=document.createElement('a');a.href=asset.files[fmt].path;a.download=asset.files[fmt].path;a.textContent=`${fmt.toUpperCase()} ↓`;a.setAttribute('aria-label',`הורדת ${asset.label_he} ${fmt}`);card.append(a);
+      }
+      grid.append(card);
+    }
+    $('assets').append(section);
+  }
+  $('drive').disabled=false;status('מוכן להאזנה. אין ניגון אוטומטי.');
+} catch(error) {status(`לא ניתן לטעון את החבילה (${error.message}). יש לפתוח את התיקייה דרך שרת HTTP.`);}
+</script>
+</html>

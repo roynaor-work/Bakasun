@@ -1,0 +1,524 @@
+{
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "toolFiles": [
+    {
+      "path": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/preview.mjs",
+      "sha256": "73b873bea9b16f8aedd2ad9ac3ceb55b149bf28d81bf850303035f0ee385eadd"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/report.mjs",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/run.mjs",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.json",
+      "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.mjs",
+      "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/style.css",
+      "sha256": "1bdb33ee599ca2bee64457b0f684760f51eb353b5702806d2ce612a328187243"
+    }
+  ],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--import",
+    "/workspace/Bakasun/workout/island/design/soccer-keeper-crowd-v1/source/register-qa.mjs",
+    "/tmp/bakasun-keeper-qa-v1/workout/island/design/motion-qa-v1/run.mjs",
+    "--out",
+    "/workspace/Bakasun/workout/island/design/soccer-keeper-crowd-v1/qa",
+    "--library",
+    "soccer-keeper-crowd-v1",
+    "--fps",
+    "60"
+  ],
+  "adapter": "source/qa-sources.mjs replaces only the CLI input inventory; run.mjs, glb.mjs, metrics.mjs, report.mjs and sheets.mjs are byte-identical to the pinned QA branch.",
+  "minimumRequired": 88,
+  "pass": true,
+  "clips": [
+    {
+      "id": "keeper_after_goal",
+      "score": 96.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000319,
+          "status": "green",
+          "score": 99.36,
+          "evidence": {
+            "coordinateSpace": "native GLB world; Root lift applied once",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 302,
+            "maxDriftMeters": 0.000539,
+            "p95SpeedMetersPerSecond": 0.026968,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.683333,
+              "start": 0,
+              "end": 2.5,
+              "driftMeters": 0.000539
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000273,
+          "status": "green",
+          "score": 98.91,
+          "evidence": {
+            "samples": 3020,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000461,
+            "worst": {
+              "t": 0.55,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000461,
+              "y": -0.000461
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.63723,
+          "status": "green",
+          "score": 87.26,
+          "evidence": {
+            "adjacentPairs": 150,
+            "observations": 2550,
+            "maxDegrees60Hz": 6.951997,
+            "maxMarkerStepHeight60Hz": 0.025489,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.63722971968997,
+              "t": 0.666667,
+              "previousTime": 0.65,
+              "bone": "Head",
+              "markerStepHeight60Hz": 0.025489,
+              "degrees60Hz": 2.118398
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 151,
+            "affectedFrames": 0,
+            "checks": 2567,
+            "maxLimbFlexionDegrees": 149.904919,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.01634,
+          "status": "green",
+          "score": 99.67,
+          "evidence": {
+            "entry": {
+              "ratio": 0.016340466050950426,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.012255,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.01081100867881075,
+              "t": 2.5,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.008108,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "structural default for intentional asymmetry",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.077271,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      }
+    },
+    {
+      "id": "disappointed",
+      "score": 96,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "native GLB world; Root lift applied once",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 250,
+            "maxDriftMeters": 0.000004,
+            "p95SpeedMetersPerSecond": 0.000236,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.216667,
+              "start": 0,
+              "end": 2,
+              "driftMeters": 0.000004
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000006,
+          "status": "green",
+          "score": 99.98,
+          "evidence": {
+            "samples": 2500,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.00001,
+            "worst": {
+              "t": 1.783333,
+              "bone": "LeftFoot",
+              "depthMeters": 0.00001,
+              "y": -0.00001
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.881454,
+          "status": "green",
+          "score": 82.37,
+          "evidence": {
+            "adjacentPairs": 124,
+            "observations": 2108,
+            "maxDegrees60Hz": 12.636127,
+            "maxMarkerStepHeight60Hz": 0.035258,
+            "maxRootStepHeight60Hz": 0,
+            "worst": {
+              "ratio": 0.8814540492481048,
+              "t": 0.566667,
+              "previousTime": 0.55,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.035258,
+              "degrees60Hz": 0.148814
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 125,
+            "affectedFrames": 0,
+            "checks": 2125,
+            "maxLimbFlexionDegrees": 116.390458,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "entry": {
+              "ratio": 3.31312839893087e-8,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 3.31312839893087e-8,
+              "t": 2,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "structural default for intentional asymmetry",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.173604,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      }
+    },
+    {
+      "id": "keeper_celebrate",
+      "score": 96.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000076,
+          "status": "green",
+          "score": 99.85,
+          "evidence": {
+            "coordinateSpace": "native GLB world; Root lift applied once",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 172,
+            "maxDriftMeters": 0.000129,
+            "p95SpeedMetersPerSecond": 0.005918,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.95,
+              "start": 0.9,
+              "end": 1.8,
+              "driftMeters": 0.000129
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000299,
+          "status": "green",
+          "score": 98.8,
+          "evidence": {
+            "samples": 2180,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000505,
+            "worst": {
+              "t": 0.95,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000505,
+              "y": -0.000505
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.774919,
+          "status": "green",
+          "score": 84.5,
+          "evidence": {
+            "adjacentPairs": 108,
+            "observations": 1836,
+            "maxDegrees60Hz": 8.842831,
+            "maxMarkerStepHeight60Hz": 0.030997,
+            "maxRootStepHeight60Hz": 0.007396,
+            "worst": {
+              "ratio": 0.7749193032602806,
+              "t": 0.566667,
+              "previousTime": 0.55,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.030997,
+              "degrees60Hz": 0.257841
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 109,
+            "affectedFrames": 0,
+            "checks": 1853,
+            "maxLimbFlexionDegrees": 116.340321,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.046651,
+          "status": "green",
+          "score": 99.07,
+          "evidence": {
+            "entry": {
+              "ratio": 0.04665057953377821,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.034988,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.011196316340183282,
+              "t": 1.8,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.008397,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "structural default for intentional asymmetry",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.110491,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      }
+    }
+  ]
+}

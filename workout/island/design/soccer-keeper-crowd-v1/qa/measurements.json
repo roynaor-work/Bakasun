@@ -1,0 +1,422 @@
+{
+  "pass": true,
+  "clips": [
+    {
+      "id": "keeper_after_goal",
+      "bytes": 27756,
+      "sha256": "1d7155e0cff3852be6bcb3426dab4b589ca2f77bd66d8640163dcc64b3740a35",
+      "durationSeconds": 2.5,
+      "authorFps": 30,
+      "authorFrames": 76,
+      "auditFrames": 151,
+      "boneCount": 18,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.5,
+          "anchor": [
+            0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 151,
+          "maxAnchorErrorMeters": 0.0005710481979994817,
+          "maxHeightErrorMeters": 0.0004609838321519705
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.5,
+          "anchor": [
+            -0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 151,
+          "maxAnchorErrorMeters": 0.0005710481979994817,
+          "maxHeightErrorMeters": 0.0004609838321519705
+        },
+        {
+          "bone": "RightHand",
+          "start": 0.9,
+          "end": 1.2,
+          "anchor": [
+            -0.29,
+            0,
+            0.39
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 19,
+          "maxAnchorErrorMeters": 9.418460948746826e-9,
+          "maxHeightErrorMeters": 8.685092603433198e-9
+        }
+      ],
+      "endpointJointDeltaMeters": 2.7755575615628914e-17,
+      "endpointVelocityDeltaMetersPerSecond": 0.058865581429368125,
+      "maxRootHeightMeters": 0
+    },
+    {
+      "id": "disappointed",
+      "bytes": 23532,
+      "sha256": "8dd59488dfd5368d23d966194d052922be2b0ec459c4990c0dc548cc1afca4df",
+      "durationSeconds": 2,
+      "authorFps": 30,
+      "authorFrames": 61,
+      "auditFrames": 121,
+      "boneCount": 18,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2,
+          "anchor": [
+            0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 121,
+          "maxAnchorErrorMeters": 0.000011019352302468046,
+          "maxHeightErrorMeters": 0.000010288882394737797
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2,
+          "anchor": [
+            -0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 121,
+          "maxAnchorErrorMeters": 0.000011019352302468046,
+          "maxHeightErrorMeters": 0.000010288882394737797
+        }
+      ],
+      "endpointJointDeltaMeters": 0,
+      "endpointVelocityDeltaMetersPerSecond": 3.540549790926218e-14,
+      "maxRootHeightMeters": 0
+    },
+    {
+      "id": "keeper_celebrate",
+      "bytes": 23076,
+      "sha256": "ea40ceebe3cd29988d1334dcf8745903997db1b2c1d5e159da08a076647bb98e",
+      "durationSeconds": 1.7999999523162842,
+      "authorFps": 30,
+      "authorFrames": 55,
+      "auditFrames": 109,
+      "boneCount": 18,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.5,
+          "anchor": [
+            0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 31,
+          "maxAnchorErrorMeters": 0.000406644375885208,
+          "maxHeightErrorMeters": 0.00039450158570641936
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.5,
+          "anchor": [
+            -0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 31,
+          "maxAnchorErrorMeters": 0.000406644375885208,
+          "maxHeightErrorMeters": 0.00039450158570641936
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.9,
+          "end": 1.8,
+          "anchor": [
+            0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 55,
+          "maxAnchorErrorMeters": 0.0005214682001994853,
+          "maxHeightErrorMeters": 0.0005053276330759388
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.9,
+          "end": 1.8,
+          "anchor": [
+            -0.18,
+            0,
+            0
+          ],
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 55,
+          "maxAnchorErrorMeters": 0.0005214682001994853,
+          "maxHeightErrorMeters": 0.0005053276330759388
+        }
+      ],
+      "endpointJointDeltaMeters": 0,
+      "endpointVelocityDeltaMetersPerSecond": 0.2010907055945998,
+      "maxRootHeightMeters": 0.10000000149011612
+    }
+  ],
+  "crowd": {
+    "bytes": 690148,
+    "width": 1024,
+    "height": 2048,
+    "decodedBytes": 8388608,
+    "sourceDecodedBytes": 4194304,
+    "originalPixelsEqual": true,
+    "cells": 32,
+    "raisedVariants": 16,
+    "raisedHands": 96,
+    "cellMargins": [
+      {
+        "variant": 0,
+        "alphaBounds": [
+          11,
+          26,
+          236,
+          231
+        ],
+        "minimumGutterPixels": 11,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 1,
+        "alphaBounds": [
+          7,
+          24,
+          244,
+          231
+        ],
+        "minimumGutterPixels": 7,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 2,
+        "alphaBounds": [
+          9,
+          32,
+          238,
+          231
+        ],
+        "minimumGutterPixels": 9,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 3,
+        "alphaBounds": [
+          10,
+          30,
+          242,
+          231
+        ],
+        "minimumGutterPixels": 10,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 4,
+        "alphaBounds": [
+          5,
+          25,
+          242,
+          231
+        ],
+        "minimumGutterPixels": 5,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 5,
+        "alphaBounds": [
+          7,
+          25,
+          241,
+          231
+        ],
+        "minimumGutterPixels": 7,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 6,
+        "alphaBounds": [
+          9,
+          36,
+          237,
+          231
+        ],
+        "minimumGutterPixels": 9,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 7,
+        "alphaBounds": [
+          7,
+          29,
+          238,
+          231
+        ],
+        "minimumGutterPixels": 7,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 8,
+        "alphaBounds": [
+          10,
+          30,
+          236,
+          231
+        ],
+        "minimumGutterPixels": 10,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 9,
+        "alphaBounds": [
+          13,
+          28,
+          243,
+          231
+        ],
+        "minimumGutterPixels": 12,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 10,
+        "alphaBounds": [
+          6,
+          43,
+          239,
+          231
+        ],
+        "minimumGutterPixels": 6,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 11,
+        "alphaBounds": [
+          11,
+          24,
+          236,
+          231
+        ],
+        "minimumGutterPixels": 11,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 12,
+        "alphaBounds": [
+          5,
+          31,
+          237,
+          231
+        ],
+        "minimumGutterPixels": 5,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 13,
+        "alphaBounds": [
+          6,
+          25,
+          244,
+          231
+        ],
+        "minimumGutterPixels": 6,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 14,
+        "alphaBounds": [
+          6,
+          31,
+          239,
+          231
+        ],
+        "minimumGutterPixels": 6,
+        "supporters": 3,
+        "raisedHands": 6
+      },
+      {
+        "variant": 15,
+        "alphaBounds": [
+          11,
+          41,
+          237,
+          231
+        ],
+        "minimumGutterPixels": 11,
+        "supporters": 3,
+        "raisedHands": 6
+      }
+    ]
+  },
+  "limitations": [
+    "Skeletal sole and palm points are measured, rather than every mesh vertex.",
+    "The 18-bone rig has no finger channels; the bundled model has a permanently closed right glove.",
+    "Native 30 Hz interpolation is audited at 60 Hz, without runtime IK or blending."
+  ]
+}

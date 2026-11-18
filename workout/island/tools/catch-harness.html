@@ -10,7 +10,7 @@ const q=new URLSearchParams(location.search),stage=+(q.get('stage')||1);
 const config=await (await fetch('../data/config.json')).json(),strings=await (await fetch('../data/strings.he.json')).json();
 const balance=config.minigames.catchCriminal;
 const t=(k,v)=>String(strings[k]??k).replace(/{(\w+)}/g,(_,x)=>v?.[x]??`{${x}}`);
-localStorage.setItem('island.catch.help',q.get('help')==='1'?'0':'1');
+localStorage.setItem('island.catch.help2',q.get('help')==='1'?'0':'1');
 window.finished=null;
 const session=runCatchSession({balance,level:stage,seed:+(q.get('seed')||3),equipment:{},state:{buildings:[]},t,canvas:document.getElementById('cv'),controls:document.getElementById('ctl'),warning:document.createElement('p'),finish:r=>{window.finished=r;return {ok:true}},cancel:()=>{window.cancelled=true},sound:()=>{},debug:true});
 window.session=session;

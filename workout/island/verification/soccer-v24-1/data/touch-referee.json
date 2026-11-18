@@ -1,0 +1,148 @@
+{
+ "tag": "referee",
+ "query": "",
+ "stage": 6,
+ "frameMs": 33,
+ "loadSeconds": 57.849,
+ "wallSeconds": 409.186,
+ "gameSeconds": 21.1,
+ "score": [
+  1,
+  0
+ ],
+ "radar": false,
+ "events": {
+  "loft": 2,
+  "possession": 6,
+  "slide": 2,
+  "distribution-windup": 1,
+  "pass": 5,
+  "steal": 1,
+  "slide-contact": 1,
+  "header-armed": 2,
+  "header": 1,
+  "goal": 1
+ },
+ "prompts": [
+  {
+   "key": "volley/header",
+   "at": 18.667,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 18.783,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "header/",
+   "at": 19.517,
+   "shown": [
+    "נגיחה",
+    "עף"
+   ],
+   "dataAir": [
+    "header",
+    "alt-volley"
+   ]
+  }
+ ],
+ "strikes": [
+  {
+   "type": "header",
+   "team": 0,
+   "player": 0,
+   "kind": null,
+   "aerial": null,
+   "restart": null,
+   "penalty": null,
+   "won": null,
+   "elapsed": 19.57
+  }
+ ],
+ "fouls": [],
+ "audio": {
+  "audio": {
+   "v241/whistle-kickoff": 1,
+   "whistle": 1,
+   "v24/kick-soft": 8,
+   "excited": 5,
+   "v24/keeper-catch": 1,
+   "v24/net-rustle": 1,
+   "soccer/crowd-goal": 1
+  },
+  "whistleV1": true,
+  "loaded": [
+   "v241/whistle-kickoff",
+   "v241/whistle-short",
+   "v241/whistle-foul",
+   "v241/whistle-halftime",
+   "v241/whistle-fulltime",
+   "soccer/whistle"
+  ],
+  "referee": {
+   "clip": "jog",
+   "calls": 1,
+   "triangles": 1227,
+   "x": 12.64,
+   "z": -17.45,
+   "speed": 2.6
+  },
+  "triangles": 28965,
+  "drawCalls": 47,
+  "quality": 2
+ },
+ "clips": {
+  "v10": 3687,
+  "v9": 2201,
+  "defensive_jockey": 592,
+  "decelerate": 561,
+  "turn_left": 290,
+  "dribble_run": 150,
+  "v241_walk": 92,
+  "v241_slide": 73,
+  "turn_right": 60,
+  "v24": 45,
+  "celebrate": 34,
+  "v241_idle_relaxed": 25,
+  "v22": 22,
+  "v241_short_inside_pass": 20,
+  "v241_long_pass": 11,
+  "v241_through_pass": 10,
+  "v241_stumble": 9,
+  "v8": 8,
+  "recover": 4,
+  "v241_keeper_dive_low_right": 1
+ },
+ "pops": {
+  "over20": 3611,
+  "over30": 1690,
+  "over45": 453,
+  "frames": 7883,
+  "max": 179.7,
+  "over30PerMinute": 478.32,
+  "over45PerMinute": 128.21
+ },
+ "churnPerPlayerMinute": 96.51,
+ "shots": {
+  "kickoff": 0.767,
+  "prompt": 18.667,
+  "prompt-alt": 18.667,
+  "strike-header": 19.75
+ },
+ "errors": []
+}

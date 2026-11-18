@@ -1253,7 +1253,18 @@
    }
   },
   "alienDefense": {
-   "v9": {"hpBase": 2, "hpPerStage": 0.06, "hpMax": 3.5, "bonusKillsMult": 4, "extraWaves": 2, "secondsMult": 3, "livesAdd": 1, "boltSecondsMult": 1.3, "wavePauseSeconds": 1.2, "upgradeHp": 2.5},
+   "arsenal25": {"missile": {"max": 4, "refill": 1}, "lightning": {"charges": 3, "max": 5, "refill": 1, "damage": 2, "falloff": 0.85, "jumps": 3, "firstRange": 460, "jumpRange": 160, "seconds": 0.32}, "shockwave": {"charges": 1, "max": 3, "refill": 1, "damage": 1.4, "speed": 520, "maxRadius": 420, "seconds": 0.8}, "drops": {"chance": 0.12, "bigChance": 0.45, "bigKinds": [1, 4], "gapSeconds": 7, "pitySeconds": 16, "speed": 100, "radius": 24, "maxOnScreen": 1}, "enemyFire": {"cadence": 0.8, "bulletCapAdd": 2}},
+   "v25": {"vulcanInterval": 0.0666667, "heatShots": 54, "lockSeconds": 2, "restSeconds": 0.15, "coolSeconds": 1.6, "vulcanDamage": 0.4, "pellets": 3, "pelletSpread": 0.035, "capPerSecond": 18, "capBurst": 4, "wingEvery": 3},
+   "v24": {"refill": {"bigKinds": [1, 4], "chance": 0.12, "usedSeconds": 10, "pityOverheats": 3, "gapSeconds": 8, "maxOnScreen": 1, "speed": 105, "radius": 24, "coldSeconds": 5, "hudSeconds": 6}},
+   "v23": {"vulcanInterval": 0.1, "heatShots": 12, "lockSeconds": 2, "restSeconds": 0.5, "coolSeconds": 2, "regularDamage": 0.8, "vulcanDamage": 0.45, "yellowAt": 0.5, "redAt": 0.8, "vulcanKey": "KeyZ"},
+   "v15": {"normalInterval": 0.18, "minInterval": 0.167, "rapidMinInterval": 0.13, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "restSeconds": 1, "pressShots": 1, "warmHeat": 0.35, "normalDamage": 0.8, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
+   "move": {"maxSpeed": 265, "accelSeconds": 0.11, "reverseSeconds": 0.05, "driftSeconds": 0.08, "dragSpring": 24, "bankSeconds": 0.08, "bankMax": 1, "recoilSeconds": 0.14, "recoilPixels": 3},
+   "v14": {"rateMult": 0.28, "damageTrim": 1.45, "minInterval": 0.055, "heatSeconds": 3.5, "coolSeconds": 1.6, "resumeHeat": 0.25, "shieldGap": 0.26, "gearExp": 1.0},
+   "v13": {"shipScale": 1.3, "cannonOffset": 11.3, "muzzleForward": 28, "loopGain": 1.5, "spinGain": 1.2, "flashGain": 0.6, "spinUpOverlap": 0.15},
+   "v12": {"rateMult": 0.15, "damageTrim": 0.9, "cannonOffset": 11, "sparkCool": 0.1, "hitSoundGap": 0.12, "pulseHz": 66, "maxShotsMult": 3, "spinRate": 70, "flashSeconds": 0.045},
+   "v11": {"shotSecondsMult": 0.72, "laserEvery": [5, 6], "laserShots": [2, 4], "laserGap": 0.1, "laserDamage": 1.5, "laserPierce": 2, "blastHp": 3, "blastEvery": 5, "blastCooldown": 1.0, "earlyBolt": [0.66, 0.9, 0.95], "boltSpeed": [0.8, 0.85, 0.9], "bulletCap": [6, 5, 5], "volleyChance": [0.2, 0.05, 0.05], "bonusSeconds": 10, "pityKills": 28, "pitySeconds": 40},
+   "v10": {"wingSeconds": 12, "wingBlinkSeconds": 2.5, "missileSpeed": 420, "missileTurn": 9, "missileFlightMult": 2.2, "trailLength": 14, "earlyBolt": [0.75, 0.8, 0.85]},
+   "v9": {"hpBase": 3.6, "hpPerStage": 0.06, "hpMax": 4, "bonusKillsMult": 4, "extraWaves": 2, "secondsMult": 3, "livesAdd": 1, "boltSecondsMult": 1.3, "wavePauseSeconds": 1.2, "upgradeHp": 3.5},
    "playerBottom": 38.4,
    "playerRadius": 18,
    "playerSpeed": 221,
@@ -5337,6 +5348,7 @@
     },
     {
      "difficulty": 3,
+     "air": {"from": 18, "every": 42, "count": 1, "kinds": ["heli", "plane"], "hpScale": 1},
      "lives": 8,
      "enemyLives": 2,
      "enemyAimError": 0.17,
@@ -5382,6 +5394,7 @@
     },
     {
      "difficulty": 4,
+     "air": {"from": 20, "every": 40, "count": 1, "kinds": ["plane", "heli"], "hpScale": 1},
      "lives": 8,
      "enemyLives": 3,
      "enemyAimError": 0.155,
@@ -5427,6 +5440,7 @@
     },
     {
      "difficulty": 5,
+     "base": {"variant": "coast", "guns": 2, "towers": 1, "gate": false, "depot": true, "armor": 1, "reload": 9},
      "lives": 8,
      "enemyLives": 3,
      "enemyAimError": 0.14,
@@ -5473,6 +5487,7 @@
     },
     {
      "difficulty": 6,
+     "air": {"from": 18, "every": 38, "count": 2, "kinds": ["heli", "plane"], "hpScale": 1},
      "lives": 8,
      "enemyLives": 3,
      "enemyAimError": 0.125,
@@ -5571,6 +5586,7 @@
     },
     {
      "difficulty": 8,
+     "air": {"from": 16, "every": 36, "count": 2, "kinds": ["plane", "heli"], "hpScale": 1},
      "lives": 9,
      "enemyLives": 4,
      "enemyAimError": 0.095,
@@ -5620,6 +5636,7 @@
     },
     {
      "difficulty": 9,
+     "air": {"from": 16, "every": 34, "count": 2, "kinds": ["heli", "plane"], "hpScale": 1.1},
      "lives": 9,
      "enemyLives": 4,
      "enemyAimError": 0.08,
@@ -5796,6 +5813,16 @@
      "drift": 17.35,
      "concurrent": 3,
      "seconds": 218,
+     "air": {
+      "from": 25,
+      "every": 34,
+      "count": 2,
+      "kinds": [
+       "plane",
+       "heli"
+      ],
+      "hpScale": 1
+     },
      "feature": "feature.naval.12",
      "ammunition": [
       40,
@@ -5882,6 +5909,7 @@
     },
     {
      "difficulty": 14,
+     "air": {"from": 16, "every": 32, "count": 2, "kinds": ["plane", "heli"], "hpScale": 1.2},
      "lives": 10,
      "enemyLives": 4.2,
      "enemyAimError": 0.1155,
@@ -5935,6 +5963,7 @@
     },
     {
      "difficulty": 15,
+     "base": {"variant": "palace", "guns": 3, "towers": 2, "gate": true, "depot": true, "armor": 1.15, "reload": 8},
      "lives": 11,
      "enemyLives": 4.8,
      "enemyAimError": 0.114,
@@ -5989,6 +6018,7 @@
     },
     {
      "difficulty": 16,
+     "air": {"from": 14, "every": 32, "count": 2, "kinds": ["heli", "plane"], "hpScale": 1.2},
      "lives": 11,
      "enemyLives": 4.5,
      "enemyAimError": 0.1125,
@@ -6115,6 +6145,7 @@
     },
     {
      "difficulty": 18,
+     "air": {"from": 14, "every": 30, "count": 3, "kinds": ["plane", "heli", "plane"], "hpScale": 1.3},
      "lives": 11,
      "enemyLives": 5,
      "enemyAimError": 0.1095,
@@ -6237,6 +6268,16 @@
      "drift": 20.15,
      "concurrent": 3,
      "seconds": 254,
+     "air": {
+      "from": 22,
+      "every": 30,
+      "count": 2,
+      "kinds": [
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.2
+     },
      "feature": "feature.naval.20",
      "ammunition": [
       48,
@@ -6340,6 +6381,7 @@
     },
     {
      "difficulty": 22,
+     "air": {"from": 14, "every": 28, "count": 3, "kinds": ["heli", "plane", "heli"], "hpScale": 1.3},
      "lives": 12,
      "enemyLives": 5.5,
      "enemyAimError": 0.1035,
@@ -6454,6 +6496,7 @@
     },
     {
      "difficulty": 24,
+     "air": {"from": 12, "every": 28, "count": 3, "kinds": ["plane", "heli", "plane"], "hpScale": 1.4},
      "lives": 12,
      "enemyLives": 6,
      "enemyAimError": 0.1005,
@@ -6524,6 +6567,7 @@
     },
     {
      "difficulty": 25,
+     "base": {"variant": "subpen", "guns": 4, "towers": 2, "gate": true, "depot": true, "armor": 1.45, "reload": 7},
      "lives": 14,
      "enemyLives": 6,
      "enemyAimError": 0.099,
@@ -6586,6 +6630,7 @@
     },
     {
      "difficulty": 26,
+     "air": {"from": 12, "every": 26, "count": 3, "kinds": ["heli", "plane", "plane"], "hpScale": 1.4},
      "lives": 14,
      "enemyLives": 6.2,
      "enemyAimError": 0.0975,
@@ -6659,6 +6704,17 @@
      "drift": 22.6,
      "concurrent": 3,
      "seconds": 282,
+     "air": {
+      "from": 20,
+      "every": 28,
+      "count": 3,
+      "kinds": [
+       "plane",
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.4
+     },
      "feature": "feature.naval.27",
      "ammunition": [
       56,
@@ -6769,6 +6825,7 @@
     },
     {
      "difficulty": 29,
+     "air": {"from": 10, "every": 24, "count": 3, "kinds": ["plane", "heli", "plane"], "hpScale": 1.5},
      "lives": 14,
      "enemyLives": 6.5,
      "enemyAimError": 0.093,
@@ -7470,6 +7527,10 @@
      "lowAngle": 10,
      "powerSpan": 14
     },
+    "wide": {
+     "fine": 0.12,
+     "grow": 0.001
+    },
     "assist": {
      "yawRangeDeg": 4,
      "yawPull": 0.45,
@@ -7480,9 +7541,35 @@
     },
     "follow": {
      "yawFixed": 0.12,
-     "maxLeadDegrees": 14,
+     "maxLeadDegrees": 34,
      "rate": 3.5
+    },
+    "spin": {
+     "finePerPx": 0.12,
+     "finePx": 22,
+     "deadPx": 22,
+     "spanPx": 56,
+     "maxDegPerSecond": 150,
+     "curve": 1.4,
+     "followRate": 7,
+     "followLeadDegrees": 30
     }
+   },
+   "ammoLimit": {
+    "shellShare": 0.45,
+    "shellMin": 12,
+    "shellMax": 24,
+    "belt": 160,
+    "lowShells": 3,
+    "lowBelt": 30,
+    "waveShare": 0.6,
+    "near": 45,
+    "far": 70,
+    "spread": 0.7,
+    "collect": 16,
+    "driftAfter": 2,
+    "driftSpeed": 16,
+    "refill": {"guided": 1, "torpedo": 4, "mine": 2, "salvo": 2}
    },
    "patrol": {
     "table": [[1, 5, 12], [3, 8, 24], [10, 14, 48], [20, 18, 65]],
@@ -8595,6 +8682,14 @@
     "passSelectionAdvanceWeight": 0.3,
     "keeperStealRate": 12,
     "sprintFromStage": 6,
+    "slide": {
+     "rate": 2.5,
+     "minDistance": 0.8,
+     "maxDistance": 1.8,
+     "minHoldSeconds": 0.35,
+     "fromStage": 2,
+     "cooldownSeconds": 3
+    },
       "catchUpDistance": 8,
       "catchUpBoost": 0.45,
     "sprintSeconds": 0.65,
@@ -8656,6 +8751,11 @@
     "sideInset": 0,
     "sideGoalInset": 2,
     "restartSpace": 2.2,
+    "freeKickSpace": 9.15,
+    "foul": {
+     "reach": 1.3,
+     "frontChance": 0.6
+    },
     "restartPushX": 2.5,
     "restartPushZ": 2,
     "restartPlayerInset": 0.5,
@@ -9545,6 +9645,53 @@
     ]
    },
    "autoSwitchAdvantage": 0,
+   "feel": {
+    "version": "v2",
+    "reaction": {
+     "easy": 0.24,
+     "normal": 0.18,
+     "hard": 0.12
+    },
+    "switchTurnoverSeconds": 0.12,
+    "turnoverWindow": 1,
+    "receiveRunDistance": 9,
+    "rivalRunsFromStage": 3,
+    "rivalRunSpace": 4,
+    "laneFraction": 0.55,
+    "laneGoalSide": 0.9,
+    "laneTeam0": false,
+    "teamReaction": 0.3
+   },
+   "show": {
+    "version": "v1",
+    "cutSeconds": 0.7,
+    "replay": {
+     "before": 3,
+     "recordSeconds": 4.6,
+     "strikeLead": 0.55,
+     "closeMaxBefore": 1.15,
+     "after": 0.45,
+     "slowRate": 0.5,
+     "maxWideSeconds": 1.9,
+     "maxCloseSeconds": 2.6,
+     "minRecording": 1
+    },
+    "celebrate": {
+     "holdSeconds": 2.2,
+     "runSpeed": 4.6,
+     "maxRun": 10
+    },
+    "fulltimeSeconds": 3,
+    "camera": {
+     "boxZoom": 3,
+     "cutBlend": 0.35,
+     "exitBlend": 0.6
+    },
+    "short": {
+     "enabled": true,
+     "cooldown": 20
+    }
+   },
    "chargeSpeedMultiplier": 0.5,
    "passing": {
     "minDistance": 5,
@@ -9556,6 +9703,10 @@
     "groundTravelSeconds": 0.55,
     "groundConeDegrees": 80,
     "leadSeconds": 0.32,
+    "throughLeadSeconds": 0.75,
+    "throughSpeed": 3.5,
+    "throughLaneRadius": 1.2,
+    "throughArrivalRatio": 1.15,
     "loftMinSeconds": 1.05,
     "loftExtraSeconds": 0.45,
     "loftMinHeight": 2.8,
@@ -11159,7 +11310,15 @@
      "hit": "assets/audio/g4e/racket.ogg",
      "bounce": "assets/audio/g4e/bounce.ogg",
      "net": "assets/audio/g4e/net.ogg",
-     "applause": "assets/audio/g4e/applause.ogg"
+     "applause": "assets/audio/g4e/applause.ogg",
+     "applauseShort": "assets/audio/g4e/applause-short.ogg",
+     "applauseMedium": "assets/audio/g4e/applause-medium.ogg",
+     "applauseLarge": "assets/audio/g4e/applause-large.ogg",
+     "crowdBed": "assets/audio/g4e/stadium-bed.ogg",
+     "crowdOoh": "assets/audio/g4e/near-point-oh.ogg",
+     "crowdAw": "assets/audio/g4e/mistake-aw.ogg",
+     "crowdHush": "assets/audio/g4e/pre-serve-hush.ogg",
+     "matchCheer": "assets/audio/g4e/match-cheer.ogg"
     }
    },
    "opponent": {
@@ -11174,6 +11333,15 @@
    "maximumSeconds": 3600,
    "v9": {
     "enabled": true,
+    "dropFix": {"enabled": true, "fadeFromStage": 20, "fadeToStage": 30, "flightScale": 1.15, "missScale": {"easy": 0.15, "normal": 0.2, "hard": 0.4}, "shortDelay": {"easy": 0.12, "normal": 0.08, "hard": 0.05}, "shortRun": {"easy": {"mul": 1, "min": 4, "max": 5.4}, "normal": {"mul": 1, "min": 4.6, "max": 6}, "hard": {"mul": 1, "min": 5.2, "max": 6.6}}},
+    "deep": {"enabled": true, "errorScale": {"easy": 0.35, "normal": 0.7, "hard": 1.1}, "buffer": {"easy": 0.5, "normal": 0.38, "hard": 0.24}, "aiMissScale": {"easy": 0.55, "normal": 1, "hard": 1},
+     "assist": {"easy": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "normal": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "hard": {"radius": 2.05, "step": 0.55, "speed": 1.65, "lead": 0.7}},
+     "rating": {"perfect": 0.25, "good": 0.6}},
+    "hold": {"enabled": true, "carry": {"enabled": true, "releaseWait": 1.6, "needleWeight": 0.7, "needlePower": 0.3}, "seconds": 3, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.28, "normal": 0.24, "hard": 0.18}},
+    "meter": {"enabled": true, "bar": true, "place": "side", "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
+    "returnMeter": {"enabled": true, "widthScale": 0.6, "wait": 1.1, "power": {"green": 0.3, "yellow": 0, "red": -0.15}, "shortError": {"green": 0, "yellow": 0.15, "red": 0.45}},
+    "receive": {"enabled": true, "slots": [0.55, 1.65, 3.05], "extraWait": 1, "arriveWait": 0.35, "maxWait": 3.2, "flick": 0.55, "release": 0.25, "repeat": 0.45},
+    "softDrop": {"enabled": true, "flight": {"easy": 1.8, "normal": 1.75, "hard": 1.7}, "flightJitter": 0.1, "depth": [1.3, 2.1], "bounce": 0.45, "horizontalBounce": 0.4, "reach": {"easy": 0.9, "normal": 0.6, "hard": 0.4}, "zoneReach": {"green": 0, "yellow": 0.2, "red": 0.35}, "readRepeat": 0.35, "putAwaySide": 0.55, "putAwayDepth": 3.9, "putAwayPower": 0.35, "aiHitVy": 0.4, "aiMinHeight": 0.3, "spare": 0.25, "maxRun": 7.5, "fakeBack": 0.7, "fakeSpeed": 1.3, "lateMargin": 0.3, "deadBall": true, "deadBounce": 0.5, "deadFriction": 0.8, "deadStop": 0.7, "roll": 1.4},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
     "shortDelay": {"easy": 0.4, "normal": 0.34, "hard": 0.27},
@@ -11628,6 +11796,7 @@
       "knee": 0.16
      }
     ],
+    "grip": {"scale": 1.15, "tilt": 0.6, "palm": [0.012, -0.074, 0], "palmSide": 1, "inset": 0.028, "handY": 0.065, "curl": 1.35, "thumb": 0.75},
     "racket": {
      "headOffset": [
       0,
@@ -11859,6 +12028,22 @@
     "laneRadius": 0.9,
     "lanePenalty": 1.6,
     "lobAbove": 11
+   },
+   "play": {
+    "enabled": true,
+    "oopRadius": 3.2,
+    "oopBox": 0.9,
+    "oopApproach": 0.6,
+    "oopNear": 1.8,
+    "oopDunkRadius": 1.6,
+    "oopBonus": 0.15,
+    "oopTargetBonus": 2.5,
+    "oopCatchHeight": 2.75,
+    "aiOopChance": 0.08,
+    "lobFar": 7.0,
+    "spacingRadius": 2.5,
+    "spacingMax": 2,
+    "doubleTapMs": 260
    },
    "jump": {
     "duration": 0.72,
@@ -12326,6 +12511,30 @@
      "minQuality": 1,
      "base": "design/hoops-v5/models/"
     },
+    "tall": {
+     "athletes": {"enabled": true, "donor": "assets/athletes-v1/gait-donor.json"},
+     "enabled": true,
+     "minQuality": 1,
+     "base": "assets/hoops-tall/",
+     "motion": "motion.json",
+     "profiles": {
+      "guard": "guard.glb",
+      "wing": "wing.glb",
+      "center": "center.glb"
+     },
+     "posProfile": {
+      "PG": "guard",
+      "SG": "guard",
+      "SF": "wing",
+      "PF": "center",
+      "C": "center"
+     },
+     "baseHeights": {
+      "guard": 188,
+      "wing": 198,
+      "center": 208
+     }
+    },
     "v8": {
      "enabled": true,
      "minQuality": 1,
@@ -12444,6 +12653,9 @@
     "steerBoostSoften": 0.3,
     "lateralBoostDamp": 0.05,
     "airControl": 0.4,
+      "airBoost": {"accel": 2.2, "maxGain": 0.08, "control": 0.55, "steerPenalty": 0.5, "refVy": 6.6},
+      "warnAhead": 30,
+      "fall": {"ramp": {"seconds": 1.2, "loss": 0.45}, "gate": {"seconds": 0.9, "loss": 0.35}},
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
     "hitGraceSeconds": 0.35,
@@ -12495,6 +12707,7 @@
     "lipKick": 2.6,
     "pipeReturnSpeed": 6,
     "aiWallCost": 1.2,
+    "v241": {"curveAssist": 0.9, "grip": 1.8, "brake": {"cut": 0.45, "decel": 15, "min": 9, "deadzone": 0.35}},
     "tricks": {
      "grab": {
       "seconds": 0.45,
@@ -12622,6 +12835,7 @@
       "light": 1,
       "trees": 1
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"stars": 1.2, "jumps": 1.2, "movers": 0.8}, "length": [70, 95]}, "mover": "snowball", "moverAmp": [2, 2.4], "moverPeriod": [3.8, 4.6], "snowmen": 0.1, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.35},
      "opening": [
       "gate",
       "pad",
@@ -12654,6 +12868,7 @@
      ],
      "reachFactor": 0.75,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.2, "gapScale": 0.88},
      "rockPitch": 3.2,
      "rockDensity": 0.75,
      "rockRadius": [
@@ -12698,6 +12913,7 @@
       "light": 0.92,
       "trees": 1.7
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"ice": 1.3, "movers": 1.1, "stars": 0.8, "powder": 0.6}, "length": [75, 100]}, "mover": "penguin", "moverAmp": [2.3, 2.8], "moverPeriod": [3.4, 4.2], "snowmen": 0.15, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.3},
      "opening": [
       "gate",
       "rocks"
@@ -12729,6 +12945,7 @@
      ],
      "reachFactor": 0.72,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.35, "gapScale": 0.86},
      "rockPitch": 3,
      "rockDensity": 0.85,
      "rockRadius": [
@@ -12776,6 +12993,7 @@
       "light": 0.72,
       "trees": 1.2
      },
+     "content": {"sections": {"count": [3, 3], "kinds": {"jumps": 1.2, "speed": 1.1, "powder": 1, "movers": 0.9}, "length": [75, 105]}, "mover": "snowball", "moverAmp": [2.5, 3], "moverPeriod": [3, 3.8], "snowmen": 0, "powerups": {"magnet": 1, "shield": 2}, "stars": 0.3},
      "opening": [
       "pad",
       "ramp"
@@ -13115,7 +13333,7 @@
    }
   },
   "catchCriminal": {
-   "version": 1,
+   "version": 2,
    "requiresBuilding": null,
    "maximumScore": 1000,
    "pointsPerCoin": 5,
@@ -13142,7 +13360,9 @@
     "escapeRun": 0.72,
     "throwSeconds": 0.26,
     "impactSeconds": 0.9,
-    "caughtSeconds": 2.2
+    "caughtSeconds": 2.2,
+    "rearmSeconds": 1.4,
+    "yawMax": 24
    },
    "tools": {
     "narrow": {
@@ -13195,7 +13415,9 @@
     "stageBonus": 0.08,
     "perfCatch": 0.35,
     "perfLeft": 0.3,
-    "perfPerfect": 0.35
+    "perfPerfect": 0.35,
+    "perCrew": 30,
+    "boss": 60
    },
    "city": {
     "policeRadiusPerLevel": 0.04,
@@ -13217,11 +13439,17 @@
    "levels": [
     {
      "stage": 1,
+     "v6": {
+      "dist": 19,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.1",
      "difficulty": 1,
      "winMoney": 30,
      "winParts": 0,
-     "radiusScale": 0.5,
+     "radiusScale": 2.359,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13233,22 +13461,53 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.4,
      "tools": [
       "narrow",
       "wide"
      ],
      "theme": "day",
      "decor": "street",
-     "obstacles": []
+     "obstacles": [],
+     "chase": {
+      "seconds": 32,
+      "crimSpeed": 19.7,
+      "density": 0.35,
+      "crimBoost": 999,
+      "skill": 0.55,
+      "gap": 34.4,
+      "curve": 0.3
+     },
+     "crew": 1,
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.703,
+      "preview": 0.54
+     },
+     "zmove": {
+      "kind": "stand"
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.505,
+      "preview": 0.4
+     }
     },
     {
      "stage": 2,
+     "v6": {
+      "dist": 21,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.2",
      "difficulty": 2,
      "winMoney": 38,
      "winParts": 0,
-     "radiusScale": 0.55,
+     "radiusScale": 2.558,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13260,7 +13519,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.4,
      "tools": [
       "narrow",
       "wide"
@@ -13274,15 +13533,48 @@
        "w": 1.8,
        "h": 1.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 34,
+      "crimSpeed": 19.7,
+      "density": 0.45,
+      "crimBoost": 999,
+      "skill": 0.6,
+      "gap": 35.3,
+      "curve": 0.4
+     },
+     "crew": 1,
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.649,
+      "preview": 0.5
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.0,
+      "period": 5.0
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.504,
+      "preview": 0.4
+     }
     },
     {
      "stage": 3,
+     "v6": {
+      "dist": 24,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.3",
      "difficulty": 3,
      "winMoney": 46,
      "winParts": 0,
-     "radiusScale": 0.66,
+     "radiusScale": 2.855,
      "wobble": {
       "angle": 0.25,
       "power": 0.005
@@ -13294,7 +13586,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 1.0,
+     "preview": 0.43,
      "tools": [
       "narrow",
       "wide",
@@ -13309,15 +13601,48 @@
        "w": 1.8,
        "h": 1.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 36,
+      "crimSpeed": 19.7,
+      "density": 0.55,
+      "crimBoost": 10,
+      "skill": 0.65,
+      "gap": 28.9,
+      "curve": 0.5
+     },
+     "crew": 1,
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.946,
+      "preview": 0.7
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.4,
+      "period": 4.6
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.547,
+      "preview": 0.43
+     }
     },
     {
      "stage": 4,
+     "v6": {
+      "dist": 27,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.4",
      "difficulty": 4,
      "winMoney": 54,
      "winParts": 0,
-     "radiusScale": 0.912,
+     "radiusScale": 2.673,
      "wobble": {
       "angle": 0.35,
       "power": 0.007
@@ -13331,7 +13656,7 @@
       "period": 4.0
      },
      "pop": null,
-     "preview": 0.95,
+     "preview": 0.63,
      "tools": [
       "narrow",
       "wide",
@@ -13346,15 +13671,48 @@
        "w": 5.4,
        "h": 2.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 38,
+      "crimSpeed": 19.7,
+      "density": 0.65,
+      "crimBoost": 9,
+      "skill": 0.7,
+      "gap": 28.3,
+      "curve": 0.6
+     },
+     "crew": 1,
+     "gust": 0.3,
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.97,
+      "preview": 0.71
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.0,
+      "period": 4.2
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.85,
+      "preview": 0.63
+     }
     },
     {
      "stage": 5,
+     "v6": {
+      "dist": 20,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.5",
      "difficulty": 5,
      "winMoney": 64,
      "winParts": 0,
-     "radiusScale": 0.685,
+     "radiusScale": 3.97,
      "wobble": {
       "angle": 0.5,
       "power": 0.01
@@ -13368,7 +13726,7 @@
       "period": 3.4
      },
      "pop": null,
-     "preview": 0.68,
+     "preview": 0.57,
      "tools": [
       "narrow",
       "wide",
@@ -13378,27 +13736,59 @@
      "decor": "avenue",
      "obstacles": [
       {
-       "model": "tree",
+       "model": "roadblock",
        "x": 9.5,
-       "w": 3.0,
-       "h": 6.2,
-       "y0": 2.8
-      },
-      {
-       "model": "lamp",
-       "x": 13.6,
-       "w": 0.35,
-       "h": 5.4
+       "w": 2.6,
+       "h": 1.15
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 40,
+      "crimSpeed": 19.7,
+      "density": 0.75,
+      "crimBoost": 8,
+      "skill": 0.72,
+      "gap": 28,
+      "curve": 0.7
+     },
+     "crew": 1,
+     "boss": {
+      "hits": 2
+     },
+     "gust": 0.4,
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.941,
+      "preview": 0.69
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.4,
+      "period": 3.8
+     },
+     "hits": 3,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 0.757,
+      "preview": 0.57
+     }
     },
     {
      "stage": 6,
+     "v6": {
+      "dist": 32,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.6,
+      "zmove": {"kind": "dash", "amp": 2.6, "speed": 4.5, "pause": 0.5}
+     },
      "feature": "feature.catchCriminal.6",
      "difficulty": 6,
      "winMoney": 76,
      "winParts": 0,
-     "radiusScale": 0.655,
+     "radiusScale": 2.667,
      "wobble": {
       "angle": 0.6,
       "power": 0.012
@@ -13434,15 +13824,64 @@
        "w": 5.4,
        "h": 2.2
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 42,
+      "crimSpeed": 19.7,
+      "density": 0.85,
+      "crimBoost": 7.5,
+      "skill": 0.75,
+      "gap": 28,
+      "curve": 0.8
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.5,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 7,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 2.2,
+       "min": 4,
+       "max": 11
+      }
+     ],
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.946,
+      "preview": 0.7
+     },
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.4,
+      "speed": 3.0,
+      "pause": 0.8
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 0.876,
+      "preview": 0.65
+     }
     },
     {
      "stage": 7,
+     "v6": {
+      "dist": 32,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 2.6, "period": 3.0}
+     },
      "feature": "feature.catchCriminal.7",
      "difficulty": 7,
      "winMoney": 90,
      "winParts": 0,
-     "radiusScale": 0.82,
+     "radiusScale": 2.394,
      "wobble": {
       "angle": 0.75,
       "power": 0.014
@@ -13457,7 +13896,7 @@
       "up": 2.4,
       "down": 1.0
      },
-     "preview": 0.9,
+     "preview": 0.85,
      "tools": [
       "narrow",
       "wide",
@@ -13484,15 +13923,48 @@
        "w": 2.6,
        "h": 1.15
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 44,
+      "crimSpeed": 19.7,
+      "density": 0.95,
+      "crimBoost": 7,
+      "skill": 0.78,
+      "gap": 28,
+      "curve": 0.9
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.6,
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.6,
+      "period": 3.8
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.17,
+      "preview": 0.85
+     }
     },
     {
      "stage": 8,
+     "v6": {
+      "dist": 32,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "crew": 3,
+      "throws": 6,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 3.0, "period": 2.8}
+     },
      "feature": "feature.catchCriminal.8",
      "difficulty": 8,
      "winMoney": 106,
      "winParts": 0,
-     "radiusScale": 0.766,
+     "radiusScale": 2.342,
      "wobble": {
       "angle": 0.9,
       "power": 0.016
@@ -13509,7 +13981,7 @@
       "up": 2.2,
       "down": 1.0
      },
-     "preview": 0.78,
+     "preview": 0.99,
      "tools": [
       "narrow",
       "wide",
@@ -13543,21 +14015,64 @@
        "h": 6.2,
        "y0": 2.8
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 46,
+      "crimSpeed": 19.7,
+      "density": 1.05,
+      "crimBoost": 6.5,
+      "skill": 0.8,
+      "gap": 28.3,
+      "curve": 1.0
+     },
+     "crew": 2,
+     "crewGap": 5.5,
+     "gust": 0.7,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 6,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 2.6,
+       "min": 4,
+       "max": 11
+      }
+     ],
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.4,
+      "period": 3.4
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.379,
+      "preview": 0.99
+     }
     },
     {
      "stage": 9,
+     "v6": {
+      "dist": 32,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "wind": 2.2,
+      "throws": 5,
+      "zmove": {"kind": "dash", "amp": 2.8, "speed": 5.0, "pause": 0.4}
+     },
      "feature": "feature.catchCriminal.9",
      "difficulty": 9,
      "winMoney": 124,
      "winParts": 0,
-     "radiusScale": 0.695,
+     "radiusScale": 2.502,
      "wobble": {
       "angle": 1.0,
       "power": 0.018
      },
      "dist": 19,
-     "flee": 5.0,
+     "flee": 3.4,
      "wind": 1.6,
      "move": {
       "kind": "dash",
@@ -13565,11 +14080,8 @@
       "speed": 3.0,
       "pause": 0.7
      },
-     "pop": {
-      "up": 2.2,
-      "down": 1.0
-     },
-     "preview": 0.69,
+     "pop": null,
+     "preview": 1,
      "tools": [
       "narrow",
       "wide",
@@ -13603,15 +14115,56 @@
        "h": 6.2,
        "y0": 2.8
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 48,
+      "crimSpeed": 19.7,
+      "density": 1.15,
+      "crimBoost": 6,
+      "skill": 0.82,
+      "gap": 24,
+      "curve": 1.0
+     },
+     "crew": 3,
+     "crewGap": 3.2,
+     "gust": 0.3,
+     "movers": [
+      {
+       "model": "van",
+       "x": 6,
+       "w": 5.4,
+       "h": 2.2,
+       "v": 2.4,
+       "min": 4,
+       "max": 11
+      }
+     ],
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.6,
+      "speed": 3.2,
+      "pause": 0.7
+     },
+     "hits": 1,
+     "throws": 7,
+     "v4": {
+      "radiusScale": 1.396,
+      "preview": 1
+     }
     },
     {
      "stage": 10,
+     "v6": {
+      "dist": 28,
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.10",
      "difficulty": 10,
      "winMoney": 150,
      "winParts": 0,
-     "radiusScale": 0.672,
+     "radiusScale": 4.628,
      "wobble": {
       "angle": 1.1,
       "power": 0.02
@@ -13629,7 +14182,7 @@
       "up": 2.0,
       "down": 1.1
      },
-     "preview": 0.67,
+     "preview": 0.84,
      "tools": [
       "narrow",
       "wide",
@@ -13663,7 +14216,53 @@
        "h": 6.2,
        "y0": 2.8
       }
-     ]
+     ],
+     "chase": {
+      "seconds": 51,
+      "crimSpeed": 19.7,
+      "density": 1.25,
+      "crimBoost": 5.5,
+      "skill": 0.85,
+      "gap": 32.6,
+      "curve": 1.0
+     },
+     "crew": 1,
+     "boss": {
+      "hits": 2
+     },
+     "gust": 0.9,
+     "movers": [
+      {
+       "model": "taxi",
+       "x": 6,
+       "w": 4.4,
+       "h": 1.5,
+       "v": 3,
+       "min": 4,
+       "max": 11
+      },
+      {
+       "model": "policeCar",
+       "x": 11,
+       "w": 4.4,
+       "h": 1.5,
+       "v": -2.2,
+       "min": 7,
+       "max": 14
+      }
+     ],
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.8,
+      "speed": 3.6,
+      "pause": 0.6
+     },
+     "hits": 3,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.153,
+      "preview": 0.84
+     }
     }
    ],
    "equipment": {
@@ -13711,6 +14310,54 @@
       }
      ]
     }
+   },
+   "crewThrows": 3,
+   "chase": {
+    "countdownSeconds": 2.5,
+    "startGap": 26,
+    "catchGap": 7,
+    "baseSpeed": 20,
+    "boostSpeed": 8,
+    "contactLen": 4.2,
+    "contactWidth": 1.8,
+    "sideZone": 0.6,
+    "sideBonus": 1.8,
+    "ramRate": 0.24,
+    "crimPush": 1.6,
+    "ramDrag": 0.8,
+    "crimFlee": 16,
+    "brakeSpeed": 9,
+    "accel": 14,
+    "decel": 22,
+    "boostSeconds": 3.0,
+    "rechargePerSecond": 0.1,
+    "padCharge": 0.4,
+    "steerSpeed": 2.1,
+    "steerResponse": 9,
+    "laneCenter": 1.3,
+    "laneWidth": 1.9,
+    "hitLateral": 1.5,
+    "crashKeep": 0.45,
+    "stunSeconds": 0.7,
+    "crimBoostSpeed": 6,
+    "crimBoostSeconds": 1.3,
+    "crimSteer": 1.9,
+    "crimSlowSeconds": 1.0,
+    "trafficSpeed": [
+     9,
+     13
+    ],
+    "farFactor": 1.3,
+    "nearFactor": 0.75,
+    "windFar": 1.25,
+    "windNear": 0.6,
+    "bonusThrowAt": 0.85,
+    "policeCar": "policeCar",
+    "getaway": "getawayCar",
+    "period": 66,
+    "curveDrift": 1.4,
+    "scrapeDrag": 2.2,
+    "laneLimit": 1.35
    }
   },
   "boarDefense": {

@@ -1,3 +1,4 @@
+import {soccerSwitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-18';
 const normalize=(x,z)=>{const length=Math.hypot(x,z)||1;return {x:x/length,z:z/length};};
 const channels={primary:'kick',secondary:'pass',sprint:'sprint',trick:'switch'};
 
@@ -64,15 +65,26 @@ export function shapeStick(raw,thresholds,feel){
   return Math.min(1,(m-dead)/(sat-dead))**(feel.expo??1);
 }
 
-export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=>{}}){
+/** `autoSprint:false` = the sprint button is the only way to sprint (a full-tilt stick no longer latches a sprint on); `sprintTapMs` = a tap on
+ * the sprint button sprints for at least that long (a plain tap used to be one 1/60 s tick, which does nothing). Defaults keep the old behaviour. */
+/** Sprint on the button only (default): `?soccerAutoSprint=1` brings back the full-tilt stick latch. A tap sprints for 0.45 s. */
+export const soccerSprintMode=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerAutoSprint')==='1'?{autoSprint:true,sprintTapMs:0}:{autoSprint:false,sprintTapMs:450};
+/** v23 (`?soccerSwitch=v22` restores both): `switchOnPress` fires the switch on the press, not the release; `keepStick` keeps a held stick
+ * across a change of control state (attack <-> defence, a restart), cancelling only the buttons. */
+export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=>{},autoSprint:allowAuto=true,sprintTapMs=0,switchOnPress=false,keepStick=false}){
+  let sprintUntil=0;
   let enabled=false,key='',allowed=new Set(),stick=null,movement={x:0,z:0},sprintSince=null,autoSprint=false,switchPulse=false;
   const actions=new Map(),arrows=new Set();
-  const reset=()=>{stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;switchPulse=false;actions.clear();arrows.clear();onCancel();};
-  const setState=(value,available)=>{const next=[...available].sort().join(',');if(value!==key||next!==[...allowed].sort().join(',')){reset();key=value;allowed=new Set(available);}};
+  const reset=()=>{sprintUntil=0;stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;switchPulse=false;actions.clear();arrows.clear();onCancel();};
+  // A state change keeps the thumb's stick (when the new state has one) and drops every button: a held button never carries into the new state.
+  const softReset=()=>{sprintUntil=0;switchPulse=false;actions.clear();if(stick?.mode==='action')stick=null;onCancel();};
+  const setState=(value,available)=>{const next=[...available].sort().join(',');if(value!==key||next!==[...allowed].sort().join(',')){if(keepStick&&stick&&available.includes('stick')&&allowed.has('stick'))softReset();else reset();key=value;allowed=new Set(available);}};
   const actionByPointer=id=>[...actions.values()].find(action=>action.pointer===id&&action.held);
   const begin=(action,pointer,x,y,rect,time)=>{
     if(!enabled||!allowed.has(action)||actions.get(action)?.held)return false;
-    actions.set(action,{action,pointer,x,y,dx:0,dy:0,rect,time,held:true,pulse:action!=='switch',transferred:false});return true;
+    actions.set(action,{action,pointer,x,y,dx:0,dy:0,rect,time,held:true,pulse:action!=='switch',transferred:false});
+    if(action==='switch'&&switchOnPress)switchPulse=true;
+    return true;
   };
   const cancelAction=()=>reset();
   const moveAction=(action,x,y)=>{
@@ -88,7 +100,8 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
     movement=shaped===0?{x:0,z:0}:{x:dx/length*shaped,z:dz/length*shaped};
     // One-finger sprint keeps the contract's geometry: it reads the physical tilt, not the curve.
     const magnitude=Math.min(1,length/radius);
-    if(magnitude>=thresholds.one_finger_sprint_on){if(sprintSince===null)sprintSince=time;}
+    if(!allowAuto){sprintSince=null;autoSprint=false;}
+    else if(magnitude>=thresholds.one_finger_sprint_on){if(sprintSince===null)sprintSince=time;}
     else if(!autoSprint||magnitude<thresholds.one_finger_sprint_off){sprintSince=null;if(magnitude<thresholds.one_finger_sprint_off)autoSprint=false;}
     const hit=zones.find(zone=>allowed.has(zone.action)&&x>=zone.rect.left&&x<=zone.rect.right&&y>=zone.rect.top&&y<=zone.rect.bottom);
     if(!hit){stick.candidate=null;return;}
@@ -108,8 +121,8 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
     beginStick(pointer,x,y,rect,time){if(!enabled||!allowed.has('stick')||stick)return false;stick={pointer,rect,mode:'move',candidate:null};updateStick(x,y,time);return true;},
     move(pointer,x,y,time,zones){if(stick?.pointer===pointer){updateStick(x,y,time,zones);transfer(time);return;}const action=actionByPointer(pointer);if(action)moveAction(action,x,y);},
     end(pointer,x,y,time){
-      if(stick?.pointer===pointer){if(stick.mode==='move')updateStick(x,y,time);else{const action=actionByPointer(pointer);if(action){moveAction(action,x,y);if(actions.has(action.action)){action.held=false;if(action.action==='switch')switchPulse=true;}}}stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;return;}
-      const action=actionByPointer(pointer);if(!action)return;moveAction(action,x,y);if(!actions.has(action.action))return;action.held=false;if(action.action==='switch')switchPulse=true;
+      if(stick?.pointer===pointer){if(stick.mode==='move')updateStick(x,y,time);else{const action=actionByPointer(pointer);if(action){moveAction(action,x,y);if(actions.has(action.action)){action.held=false;if(action.action==='switch'&&!switchOnPress)switchPulse=true;}}}stick=null;movement={x:0,z:0};sprintSince=null;autoSprint=false;return;}
+      const action=actionByPointer(pointer);if(!action)return;moveAction(action,x,y);if(!actions.has(action.action))return;action.held=false;if(action.action==='switch'&&!switchOnPress)switchPulse=true;if(action.action==='sprint'&&sprintTapMs>0)sprintUntil=Math.max(sprintUntil,action.time+sprintTapMs);
     },
     cancelPointer(pointer){if(stick?.pointer===pointer||actionByPointer(pointer))reset();},
     arrow(code,down){if(!enabled)return;if(down)arrows.add(code);else arrows.delete(code);},
@@ -122,6 +135,7 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
         const action=actions.get(name);if(!action)continue;
         input[`${name}Held`]=Boolean(action.held||action.pulse)||input[`${name}Held`];action.pulse=false;
       }
+      if(sprintTapMs>0&&time<sprintUntil&&allowed.has('sprint'))input.sprintHeld=true;
       for(const name of ['kick','pass']){
         const action=actions.get(name),length=Math.hypot(action?.dx||0,action?.dy||0),manual=length>=thresholds.swipe_min_distance_px;
         const aim=manual?normalize(action.dx,action.dy):action?.transferAim;
@@ -134,14 +148,16 @@ export function createSoccerGestureRecognizer({thresholds,feel=null,onCancel=()=
 }
 
 /** Soccer owns this recognizer; other games keep the shared controls module. */
-export function createSoccerDesignInput({root,nodes,config,interaction,onGesture=()=>{},onCancel=()=>{},autoAim,now=()=>performance.now()}){
-  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,feel:config.stick||null,onCancel}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
+export function createSoccerDesignInput({root,nodes,config,interaction,onGesture=()=>{},onCancel=()=>{},autoAim,now=()=>performance.now(),switchV23=soccerSwitchVersion()==='v23'}){
+  const abort=new AbortController(),options={signal:abort.signal},recognizer=createSoccerGestureRecognizer({thresholds:interaction.gesture_thresholds,feel:config.stick||null,onCancel,...soccerSprintMode(),switchOnPress:switchV23,keepStick:switchV23}),captures=new Map(),keys=new Map(),suppressed=new WeakMap();
   const window=root.ownerDocument.defaultView,document=root.ownerDocument,stick=root.querySelector('#joystick'),knob=root.querySelector('#knob');
   let allowed=new Set(),enabled=false,viewportWidth=window.innerWidth,viewportHeight=window.innerHeight;
   const point=event=>[event.clientX??0,event.clientY??0];
   const capture=(node,id)=>{try{node.setPointerCapture(id);captures.set(id,node);}catch{}};
   const release=id=>{const node=captures.get(id);captures.delete(id);try{if(node?.hasPointerCapture(id))node.releasePointerCapture(id);}catch{}};
   function reset(){recognizer.reset();keys.clear();for(const id of [...captures.keys()])release(id);for(const node of Object.values(nodes))node?.classList?.remove('held');if(knob)knob.style.transform='translate(0px,0px)';if(floating)home();}
+  /** v23 control-state change: the buttons are released, the stick (its pointer capture and its floating place) stays under the thumb. */
+  function buttonsReset(){keys.clear();for(const [id,node] of [...captures])if(node!==pad)release(id);for(const [slot,node] of Object.entries(nodes))if(slot!=='stick'&&slot!=='pad')node?.classList?.remove('held');}
   const zones=()=>Object.entries(channels).filter(([slot,name])=>allowed.has(name)&&nodes[slot]&&!nodes[slot].hidden&&!nodes[slot].disabled).map(([slot,action])=>({action,rect:nodes[slot].getBoundingClientRect()}));
   const zone=nodes.stick,pad=nodes.pad||zone,floating=pad!==zone;
   // Floating stick: any touch inside the left pad puts the stick under the thumb (kept inside the
@@ -191,7 +207,7 @@ export function createSoccerDesignInput({root,nodes,config,interaction,onGesture
   for(const type of ['resize','orientationchange'])window.addEventListener(type,reset,options);
   for(const type of ['contextmenu','selectstart','dragstart'])root.addEventListener(type,event=>event.preventDefault(),options);
   return {
-    setPlan(plan){const signature=plan.key+':'+plan.allowed.join(',');if(root.dataset.designState!==signature){reset();root.dataset.designState=signature;}allowed=new Set(plan.allowed);recognizer.setState(signature,plan.allowed);},
+    setPlan(plan){const signature=plan.key+':'+plan.allowed.join(',');if(root.dataset.designState!==signature){if(switchV23&&recognizer.snapshot.stickMode==='move'&&plan.allowed.includes('stick'))buttonsReset();else reset();root.dataset.designState=signature;}allowed=new Set(plan.allowed);recognizer.setState(signature,plan.allowed);},
     setEnabled(value){if(enabled!==Boolean(value)){reset();enabled=Boolean(value);recognizer.setEnabled(enabled);}},reset,
     setHanded(value){root.classList.toggle('left-handed',!value);reset();},
     sample(direction=1){

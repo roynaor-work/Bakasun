@@ -1,0 +1,490 @@
+{
+  "date": "2026-11-12T07:23:54.956877+00:00",
+  "browserErrors": [],
+  "failedRequests": [],
+  "cameras": [
+    {
+      "camera": "landscape",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "landscape",
+      "celebration": 1,
+      "rendered": true
+    },
+    {
+      "camera": "portrait",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "portrait",
+      "celebration": 1,
+      "rendered": true
+    },
+    {
+      "camera": "side",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "side",
+      "celebration": 1,
+      "rendered": true
+    },
+    {
+      "camera": "rear",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "rear",
+      "celebration": 1,
+      "rendered": true
+    },
+    {
+      "camera": "close",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "close",
+      "celebration": 1,
+      "rendered": true
+    },
+    {
+      "camera": "roster",
+      "celebration": 0,
+      "rendered": true
+    },
+    {
+      "camera": "roster",
+      "celebration": 1,
+      "rendered": true
+    }
+  ],
+  "filesFetched": [
+    {
+      "file": "assets.json",
+      "bytes": 4506,
+      "sha256": "24a35e8f01c4c2b94ae4fb18d99fb76458cc94f97faf85685d0fced6a0215329"
+    },
+    {
+      "file": "browser-check.py",
+      "bytes": 6547,
+      "sha256": "4a55d0a65fcdc51bd1bc1494458fc0bcbde84a6de43f43c13701c24d776f7df6"
+    },
+    {
+      "file": "load-check.mjs",
+      "bytes": 2625,
+      "sha256": "9b09f8a7a8610719759f80918133cc5255449c5515dee79c795094887d932e6f"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 2485,
+      "sha256": "c90c02be2110de0fa75acc159815d60bd68b2c4135f9ad6067e643ada2a305ba"
+    },
+    {
+      "file": "preview.html",
+      "bytes": 2666,
+      "sha256": "9f52f35b1fdfe9e22b72acf78b585ad2713d8c4ff3c977eca5b54c190e7df4d1"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 13355,
+      "sha256": "6e43805938a78f79987113dee549e82f6f78f4bba4eb6018e087f6b409c18573"
+    },
+    {
+      "file": "runtime/crowd.mjs",
+      "bytes": 4433,
+      "sha256": "5438a7bb79911a76fe60d64c9dc45435e7c2700dc1f6c3a7c8ad13ad14b56792"
+    },
+    {
+      "file": "runtime/fan-01.glb",
+      "bytes": 17604,
+      "sha256": "7fdecaa0bb264931fa8dda07f8a9b9180f13d2768c11173c96a19076a9efecf0"
+    },
+    {
+      "file": "runtime/fan-02.glb",
+      "bytes": 17592,
+      "sha256": "465ea82248bb63a9bc10d5817136aa85df816cc0bcc594f67b615bb5faf7a103"
+    },
+    {
+      "file": "runtime/fan-03.glb",
+      "bytes": 17596,
+      "sha256": "ac34c56ba1d59402fb50e982ce3d8cd5f0b011c8814e0fcb2b20a2e3c21f5cc1"
+    },
+    {
+      "file": "runtime/fan-04.glb",
+      "bytes": 17620,
+      "sha256": "84cce13594613ac61348460b1743c7059a456f285b7417d3a5f8d33c7bf65cf1"
+    },
+    {
+      "file": "runtime/fan-05.glb",
+      "bytes": 17604,
+      "sha256": "b5f832bbeba92e68bc5032946399ae00ac25da881b25b47e97704be2894a6574"
+    },
+    {
+      "file": "runtime/fan-06.glb",
+      "bytes": 17592,
+      "sha256": "2fcd988e2fb9d34b3fce1b92532f18fc4dea8de5de7ce2fce56d6797faa8092c"
+    },
+    {
+      "file": "runtime/fan-07.glb",
+      "bytes": 17592,
+      "sha256": "d8b565acc965daeec56647210485e2294ce34b4ae6175d441dafcdd12efb26f5"
+    },
+    {
+      "file": "runtime/fan-08.glb",
+      "bytes": 17620,
+      "sha256": "574d5a43e021e41cfd68341c17cf066f8c848f158f0cbf123c3734c443629149"
+    },
+    {
+      "file": "runtime/fan-09.glb",
+      "bytes": 17604,
+      "sha256": "cbe792b24ecf346e7f8ecd6127459b4d8fee57dae4a71ca19b4cbf1b11e65a03"
+    },
+    {
+      "file": "runtime/fan-10.glb",
+      "bytes": 17592,
+      "sha256": "f6c6fd5517cc784bfb9fb86e19e3358e27d2ce48afd56caba8244df9c4df1922"
+    },
+    {
+      "file": "runtime/fan-11.glb",
+      "bytes": 17596,
+      "sha256": "bbd86472e49c270f37717449af73e9527b953b666d7dc7a3c96e10f3742b2d28"
+    },
+    {
+      "file": "runtime/fan-12.glb",
+      "bytes": 17616,
+      "sha256": "ee6a672684dc379522c71c6e38fcbee41c8f2b3db23f482973c5632c3e715e29"
+    },
+    {
+      "file": "source/build.py",
+      "bytes": 10683,
+      "sha256": "5db315f5912e23fe1cb5ebe827989234c9e8ec583c98add89fb1bab836eace15"
+    },
+    {
+      "file": "verify.py",
+      "bytes": 2825,
+      "sha256": "abcadf7964f41a6c4187432f074312abf908ea2e92120b824fa227ca3c9141eb"
+    }
+  ],
+  "status": {
+    "ready": true,
+    "errors": [],
+    "modelsLoaded": 12,
+    "softwareRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "benchmark": null,
+    "dependencies": [
+      "existing:stand-10m.glb",
+      "existing:crowd-atlas.webp"
+    ],
+    "metrics": {
+      "instances": 600,
+      "draws": 12,
+      "triangles": 126000,
+      "payloadBytes": 211228,
+      "textures": 0,
+      "wasm": false
+    },
+    "wasmBlocked": true
+  },
+  "wasmCompilationBlocked": true,
+  "models": [
+    {
+      "file": "runtime/fan-01.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6890000104904175,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-02.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.718999981880188,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-03.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6690000295639038,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-04.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.7390000820159912,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-05.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6890000104904175,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-06.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.718999981880188,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-07.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6690000295639038,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-08.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.7390000820159912,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-09.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6890000104904175,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-10.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.718999981880188,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-11.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.6690000295639038,
+      "nativeMorphAnimation": true
+    },
+    {
+      "file": "runtime/fan-12.glb",
+      "triangles": 210,
+      "vertices": 444,
+      "headVertices": 108,
+      "movingVertices": 132,
+      "raisedMaxY": 1.7390000820159912,
+      "nativeMorphAnimation": true
+    }
+  ],
+  "benchmark": {
+    "date": "2026-11-12T07:26:39.514Z",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "camera": "landscape",
+    "viewport": [
+      1370,
+      660
+    ],
+    "devicePixelRatio": 1,
+    "runs": [
+      {
+        "mode": "atlas",
+        "samples": 120,
+        "warmup": 30,
+        "fps": 5.180653712154276,
+        "medianFrameMs": 194.39999999990687,
+        "p95FrameMs": 367.89999999990687,
+        "medianSubmitMs": 0.6999999999534339,
+        "sceneDrawCalls": 62,
+        "sceneTriangles": 22340,
+        "crowdTriangles": 1200,
+        "crowdDrawCalls": 1
+      },
+      {
+        "mode": "3d",
+        "samples": 120,
+        "warmup": 30,
+        "fps": 3.2173996975644323,
+        "medianFrameMs": 301.69999999995343,
+        "p95FrameMs": 637.7000000001863,
+        "medianSubmitMs": 0.8000000000465661,
+        "sceneDrawCalls": 73,
+        "sceneTriangles": 147140,
+        "crowdTriangles": 126000,
+        "crowdDrawCalls": 12
+      },
+      {
+        "mode": "3d",
+        "samples": 120,
+        "warmup": 30,
+        "fps": 3.2564538845424353,
+        "medianFrameMs": 301.10000000009313,
+        "p95FrameMs": 588.4000000001397,
+        "medianSubmitMs": 0.6000000000931323,
+        "sceneDrawCalls": 73,
+        "sceneTriangles": 147140,
+        "crowdTriangles": 126000,
+        "crowdDrawCalls": 12
+      },
+      {
+        "mode": "atlas",
+        "samples": 120,
+        "warmup": 30,
+        "fps": 5.304969430113648,
+        "medianFrameMs": 192.30000000004657,
+        "p95FrameMs": 355.89999999990687,
+        "medianSubmitMs": 0.4000000001396984,
+        "sceneDrawCalls": 62,
+        "sceneTriangles": 22340,
+        "crowdTriangles": 1200,
+        "crowdDrawCalls": 1
+      }
+    ],
+    "note": "Crowd A/B in the same preview scene, not a full-game or phone benchmark. RAF FPS includes vsync; submit time is CPU submission, not GPU time."
+  },
+  "mobileLayout": {
+    "viewport": [
+      390,
+      844
+    ],
+    "rendered": true,
+    "hardwareDeviceTest": false
+  },
+  "externalRequests": [],
+  "khronosValidator": [
+    {
+      "file": "fan-01.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-02.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-03.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-04.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-05.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-06.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-07.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-08.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-09.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-10.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-11.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    {
+      "file": "fan-12.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    }
+  ]
+}

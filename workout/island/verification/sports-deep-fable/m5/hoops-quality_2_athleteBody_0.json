@@ -1,0 +1,138 @@
+[
+ {
+  "seconds": 24.97,
+  "frames": 86,
+  "fps": 3.44,
+  "frameMs": {
+   "avg": 290.3,
+   "p50": 266.6,
+   "p95": 550,
+   "p99": 600,
+   "max": 716.5
+  },
+  "over33": 69,
+  "over50": 69,
+  "tickMs": {
+   "avg": 10.37,
+   "p50": 3,
+   "p95": 6.9,
+   "max": 593.2
+  },
+  "renderMs": {
+   "avg": 9.15,
+   "p95": 4.4
+  },
+  "allocMBps": 1.42,
+  "gcs": 3,
+  "longTasks": 1,
+  "longTaskMs": 595,
+  "replays": 0,
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 1,
+   "landscape": true
+  },
+  "render": {
+   "calls": 35,
+   "triangles": 78053,
+   "frameMs": 2.7,
+   "players": 10,
+   "avatars": 10,
+   "pending": 14,
+   "crowd": 2084,
+   "crowdLevel": 0,
+   "v5": false,
+   "v8": true,
+   "v8Motion": true,
+   "tall": true,
+   "quality": 2,
+   "textures": 25,
+   "geometries": 50,
+   "landscape": true,
+   "dpr": 1,
+   "bufferWidth": 844,
+   "bufferHeight": 390,
+   "style": "v2-broadcast",
+   "characterVersion": 9,
+   "athleteBody": false,
+   "motionSource": null,
+   "dunks": null,
+   "retargetMs": null,
+   "lods": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "arenaSource": "assets/hoops-v8/arena/",
+   "crowd3d": true,
+   "v4Fallbacks": [],
+   "clipCount": 0,
+   "loadTimes": {
+    "arena": 416,
+    "models": 150,
+    "environment": 37,
+    "crowd": 0,
+    "playerAssets": 1525,
+    "avatars": 7,
+    "vfx": 18,
+    "feel": 3,
+    "total": 2156,
+    "firstFrame": 686
+   },
+   "arenaVersion": 4,
+   "baked": [],
+   "reflection": null,
+   "feel": {
+    "authored": true,
+    "queued": 0,
+    "fov": 0,
+    "seen": 0
+   },
+   "vfx": {
+    "missingAtlases": [],
+    "sprites": 0,
+    "residentAtlases": 0,
+    "loadedAtlases": 5,
+    "reducedMotion": false
+   },
+   "show": {
+    "autoReplays": 0,
+    "autoReplaysDone": 0,
+    "skipped": 0,
+    "liveCuts": 0,
+    "casts": 0,
+    "stand": 0,
+    "groan": 0,
+    "wave": false,
+    "cut": false
+   },
+   "motion": [
+    "walk",
+    "walk",
+    "walk",
+    "run",
+    "idle_ready",
+    "idle_ready",
+    "defensive_slide_left",
+    "defensive_slide_right",
+    "idle_ready",
+    "defensive_slide_right"
+   ]
+  },
+  "steps": 607,
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "quality": 2,
+  "profile": "quick",
+  "loadMs": 3507,
+  "errors": [],
+  "viewportLabel": "844x390"
+ }
+]

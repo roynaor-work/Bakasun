@@ -146,7 +146,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     // with no external request; then the same page with every v4 file blocked must silently fall back to the v3
     // bodies and the v3 venue (sprite crowd) and still start.
     // v5 (04/11) is the default venue now, so the v4 checks pin it off with ?hoopsV5=0 and v5 has its own checks below
-    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
+    const hoopsBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsV7=0&hoopsV8=0&hoopsTall=0',hoopsUrl=hoopsBase+'&hoopsV5=0';
     // v7 (05/11) is the default body set now: the v4/v5 checks pin it off with ?hoopsV7=0 and v7 has its own checks after the v5 ones
     const hoopsV7Base=hoopsBase.replace('&hoopsV7=0','');
     const hoopsReady=page=>page.waitForFunction(()=>{const s=window.__session?.snapshot;return s&&(s.error||(s.renderMetrics?.calls>0&&s.stepsRun>10));},null,{timeout:120000}).then(()=>page.evaluate(()=>({error:window.__session.snapshot.error,m:window.__session.snapshot.renderMetrics})));
@@ -230,7 +230,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     }finally{await v5v3.close();await v5v3.csp.assertClean();}
     // Basketball v8 (06/11, GPT hoops-arena-v8 + hoops-motion-v8): the hall and the authored passes under the production CSP, nothing from design/;
     // then the hall blocked (falls back to v5) and the motion pack blocked (v7 arm-IK passes, the hall stays).
-    const v8Base='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    const v8Base='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242&hoopsTall=0';
     const v8=await fixture('hoops-v8-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       const requests=[];v8.page.on('request',r=>requests.push(r.url()));
@@ -259,6 +259,71 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.equal(live.error,null,'a missing motion pack never stops the game');assert.equal(live.m.v8Motion,false);assert.equal(live.m.v8,true);assert.deepEqual(live.m.v4Fallbacks,['v8 motion']);assert.equal(live.m.characterVersion,7);
       await v8motion.csp.assertClean();reports.push({name:'hoops-v8-fallback-motion-result',...live.m,loadTimes:undefined});
     }finally{await v8motion.close();await v8motion.csp.assertClean();}
+    // The shared athlete body (11/11, sports-deep-fable M1/M2): the default basketball players are assets/athlete/athlete.glb with its textures and
+    // the repaired v12 motion pack, under the production CSP, from assets/ only; two draw calls per body (skin, kit).
+    const tallBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    // v24.1 (14/11) changed the default bodies (athlete-body-v2), motion (v13), crowd and referee: this v24 check pins them off with ?hoopsV241=0
+    const athlete=await fixture('hoops-athlete-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];athlete.page.on('request',r=>requests.push(r.url()));
+      await athlete.page.goto(server.url+tallBase+'&hoopsV241=0',{waitUntil:'load'});
+      const live=await hoopsReady(athlete.page);
+      assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.athleteBody,true);assert.equal(live.m.characterVersion,10);assert.equal(live.m.motionSource,'v12');assert.deepEqual(live.m.v4Fallbacks,[]);
+      assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the shared body (v22, Codex)');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/')),'its textures');
+      assert.ok(requests.some(u=>u.includes('assets/hoops-tall/motion-v12.json')),'the repaired motion pack');assert.ok(!requests.some(u=>/assets\/hoops-tall\/(guard|wing|center)\.glb/.test(u)),'the tall bodies are not downloaded');
+      assert.ok(!requests.some(u=>/\/design\/(hoops-(tall|motion)|motion-fix)/.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(live.m.calls<=52,'two draw calls per body: '+live.m.calls);
+      await athlete.csp.assertClean();reports.push({name:'hoops-athlete-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await athlete.close();await athlete.csp.assertClean();}
+    // v24.1 defaults: the athlete-body-v2 bodies, the v13 clips, the 3D fans, the referee and the referee whistles, all from assets/hoops-v241
+    // under the production CSP (nothing from the unpublished design folder), the cards replaced on the hall's lower tier, a bounded draw count.
+    const v241=await fixture('hoops-v241-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];v241.page.on('request',r=>requests.push(r.url()));
+      await v241.page.goto(server.url+tallBase,{waitUntil:'load'});
+      const live=await hoopsReady(v241.page);
+      assert.equal(live.error,null);assert.equal(live.m.athleteBody,true);assert.equal(live.m.v241.bodyV2,true);assert.deepEqual(live.m.v4Fallbacks,[]);
+      assert.ok(live.m.v241.motionV13?.clips?.includes('run'),'v13 clips: '+JSON.stringify(live.m.v241.motionV13));
+      for(const f of ['body/models/guard.glb','motion/motion-v13.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-v241/'+f)),f);
+      assert.ok(!requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the v22 bodies are not downloaded');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/athlete-atlas.png')),'the one shared atlas');
+      await v241.page.waitForFunction(()=>{const v=window.__session?.snapshot?.renderMetrics?.v241;return v&&v.crowd3d.status!=='loading'&&v.referee.status!=='loading';},null,{timeout:120000});
+      const m=await v241.page.evaluate(()=>window.__session.snapshot.renderMetrics);
+      assert.equal(m.v241.crowd3d.status,'ready');assert.ok(m.v241.crowd3d.cardsHidden>=796,'cards replaced: '+m.v241.crowd3d.cardsHidden);assert.equal(m.v241.referee.status,'ready');
+      assert.ok(requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod2/')),'crowd level 2');assert.ok(!requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod0/')),'no level 0 in the budget mode');
+      assert.ok(!requests.some(u=>/\/design\/hoops-(crowd-3d|motion-v13|ref-scoreboard|referee-audio)/.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(m.calls<=52+15,'the 3D fans (12 calls at most) and the referee (two meshes and his shadow): '+m.calls);
+      await v241.csp.assertClean();reports.push({name:'hoops-v241-session-start-result',...m,loadTimes:undefined});
+    }finally{await v241.close();await v241.csp.assertClean();}
+    // ?athleteBody=0: the tall bodies + the v9 library (08/11, Codex) as before. Its draw-call ceiling is the v24 scene: ?hoopsV241=0 (the
+    // v24.1 fans and referee add their own calls, measured in the check above)
+    const tall=await fixture('hoops-tall-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];tall.page.on('request',r=>requests.push(r.url()));
+      await tall.page.goto(server.url+tallBase+'&athleteBody=0&hoopsV241=0',{waitUntil:'load'});
+      const live=await hoopsReady(tall.page);
+      assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.characterVersion,9);assert.deepEqual(live.m.v4Fallbacks,[]);
+      for(const f of ['guard.glb','wing.glb','center.glb','motion.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-tall/'+f)),f);
+      assert.ok(!requests.some(u=>/\/design\/hoops-(tall|motion)/.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(live.m.calls<=45,'one draw call per body: '+live.m.calls);
+      await tall.csp.assertClean();reports.push({name:'hoops-tall-session-start-result',...live.m,loadTimes:undefined});
+    }finally{await tall.close();await tall.csp.assertClean();}
+    // a missing athlete GLB falls back to the tall bodies; a missing tall folder (motion packs and bodies) falls back to v7
+    const athleteFallback=await fixture('hoops-athlete-fallback-tall',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await athleteFallback.page.route(/assets\/athlete\//,route=>route.abort());
+      await athleteFallback.page.goto(server.url+tallBase+'&athleteBodyV22=0',{waitUntil:'load'});
+      const live=await hoopsReady(athleteFallback.page);
+      assert.equal(live.error,null,'a missing athlete body never stops the game');assert.equal(live.m.athleteBody,false);assert.equal(live.m.characterVersion,9);assert.ok(live.m.v4Fallbacks.includes('players-athlete'));
+      await athleteFallback.csp.assertClean();reports.push({name:'hoops-athlete-fallback-tall-result',...live.m,loadTimes:undefined});
+    }finally{await athleteFallback.close();await athleteFallback.csp.assertClean();}
+    const tallFallback=await fixture('hoops-tall-fallback-v7',{contextOptions:{viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      await tallFallback.page.route(/assets\/hoops-tall\//,route=>route.abort());
+      await tallFallback.page.goto(server.url+tallBase,{waitUntil:'load'});
+      const live=await hoopsReady(tallFallback.page);
+      assert.equal(live.error,null,'a missing tall body never stops the game');assert.equal(live.m.tall,false);assert.equal(live.m.characterVersion,7);assert.ok(live.m.v4Fallbacks.includes('players-tall'));assert.ok(live.m.v4Fallbacks.includes('players-athlete'));
+      await tallFallback.csp.assertClean();reports.push({name:'hoops-tall-fallback-v7-result',...live.m,loadTimes:undefined});
+    }finally{await tallFallback.close();await tallFallback.csp.assertClean();}
   }finally{
     await browser.close();await server.close();
     if(process.env.ISLAND_CSP_AUDIT_DIR){await mkdir(process.env.ISLAND_CSP_AUDIT_DIR,{recursive:true});await writeFile(path.join(process.env.ISLAND_CSP_AUDIT_DIR,'csp-negative-fixtures.json'),JSON.stringify(reports,null,2)+'\n');}

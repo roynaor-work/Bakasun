@@ -1,3 +1,4 @@
+import {drawV10Pickup} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;
 const clamp=(n,lo=0,hi=1)=>Math.max(lo,Math.min(hi,Number.isFinite(n)?n:lo));
 export const ALIEN_PICKUPS=Object.freeze([
@@ -38,12 +39,13 @@ function line(p,points){p.beginPath();for(let i=0;i<points.length;i++)i?p.lineTo
 
 /** Canvas glyphs remain readable when color cannot be distinguished. No GLB
  * material or gameplay entity is modified to show a collectible. */
-export function drawAlienPickupGlyph(p,value,x,y,r=12,aspect=1,alpha=1){
+export function drawAlienPickupGlyph(p,value,x,y,r=12,aspect=1,alpha=1,opts=null){
  const item=alienPickup(value);if(!item)return false;
  p.save();p.translate(x,y);p.scale(r/12/aspect,r/12);p.globalAlpha=alpha;
- p.fillStyle='#091a2be8';p.strokeStyle=item.color;p.lineWidth=1.5;p.lineJoin='round';p.lineCap='round';
- polygon(p,[[0,-14],[11,-7],[11,7],[0,14],[-11,7],[-11,-7]]);p.fill();p.stroke();
- p.strokeStyle=item.color;p.fillStyle=item.color;p.lineWidth=1.7;
+ const color=opts?.color||item.color;
+ if(!opts?.round){p.fillStyle='#091a2be8';p.strokeStyle=item.color;p.lineWidth=1.5;p.lineJoin='round';p.lineCap='round';
+ polygon(p,[[0,-14],[11,-7],[11,7],[0,14],[-11,7],[-11,-7]]);p.fill();p.stroke();}
+ p.lineJoin='round';p.lineCap='round';p.strokeStyle=color;p.fillStyle=color;p.lineWidth=1.7;
  if(item.id==='spread'){
   for(const side of [-1,0,1]){const x=side*6;line(p,[[side*2,6],[x,-6]]);line(p,[[x-2,-3],[x,-7],[x+2,-3]]);}
  }else if(item.id==='laser'){
@@ -146,7 +148,7 @@ export function drawAlienFeedback(p,m,balance,aspect=1,config={width:640,height:
  p.save();
  bossGuardField(p,m,aspect,config,scale,balance.balance?.minBossSeconds??16);
  telegraphs(p,m,aspect,scale);
- for(const pickup of m.pickups||[])drawAlienPickupGlyph(p,pickup.kind,pickup.x,pickup.y,12*scale,aspect);
+ for(const pickup of m.pickups||[]){if(m.v10)drawV10Pickup(p,pickup,m.time||0,aspect,scale,drawAlienPickupGlyph);else drawAlienPickupGlyph(p,pickup.kind,pickup.x,pickup.y,12*scale,aspect);}
  let guardImpact=false;for(const event of alienFeedbackEvents(m)){
   if(event.kind==='player-hit'||event.kind==='enemy-hit'||event.kind==='shield-hit')impact(p,event,aspect,scale);
   if(event.kind==='boss-guard'&&!guardImpact){impact(p,event,aspect,scale);guardImpact=true;}

@@ -1,0 +1,155 @@
+{
+  "browser": "Chromium",
+  "formats": {
+    "ogg": {
+      "decodedFiles": 16,
+      "loops": [
+        {
+          "id": "engine-idle",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0008298754692077637,
+            0.0008298754692077637
+          ]
+        },
+        {
+          "id": "engine-low",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0002643167972564697,
+            0.0002643167972564697
+          ]
+        },
+        {
+          "id": "engine-mid",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.00016294419765472412,
+            0.00016294419765472412
+          ]
+        },
+        {
+          "id": "engine-high",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.00017723441123962402,
+            0.00017723441123962402
+          ]
+        },
+        {
+          "id": "engine-redline",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.00028717517852783203,
+            0.00028717517852783203
+          ]
+        },
+        {
+          "id": "tyre-squeal",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0008164346218109131,
+            0.0008164346218109131
+          ]
+        },
+        {
+          "id": "wind-speed",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0026227086782455444,
+            0.0026227086782455444
+          ]
+        }
+      ],
+      "crossfade": {
+        "seconds": 10,
+        "automationEvents": 71,
+        "peak": 0.3930355906486511,
+        "min20msRms": 0.09808160441326406,
+        "max20msRms": 0.20220024043847898,
+        "maxAdjacentStep": 0.503172367811203,
+        "maxControlBoundaryStep": 0.1821804642677307
+      },
+      "gearShifts": 12,
+      "auditionButtons": 16
+    },
+    "mp3": {
+      "decodedFiles": 16,
+      "loops": [
+        {
+          "id": "engine-idle",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0005249977111816406,
+            0.0005249977111816406
+          ]
+        },
+        {
+          "id": "engine-low",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0015238076448440552,
+            0.0015238076448440552
+          ]
+        },
+        {
+          "id": "engine-mid",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0018279403448104858,
+            0.0018279403448104858
+          ]
+        },
+        {
+          "id": "engine-high",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0014899522066116333,
+            0.0014899522066116333
+          ]
+        },
+        {
+          "id": "engine-redline",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0008746981620788574,
+            0.0008746981620788574
+          ]
+        },
+        {
+          "id": "tyre-squeal",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.0005422532558441162,
+            0.0005422532558441162
+          ]
+        },
+        {
+          "id": "wind-speed",
+          "decodedSamples": 145530,
+          "renderedSeamJumps": [
+            0.00010757148265838623,
+            0.00010757148265838623
+          ]
+        }
+      ],
+      "crossfade": {
+        "seconds": 10,
+        "automationEvents": 71,
+        "peak": 0.39938366413116455,
+        "min20msRms": 0.09777273932708311,
+        "max20msRms": 0.20115085209410777,
+        "maxAdjacentStep": 0.4900870770215988,
+        "maxControlBoundaryStep": 0.18032319843769073
+      },
+      "gearShifts": 12,
+      "auditionButtons": 16
+    }
+  },
+  "errors": [],
+  "responsiveWidths": [
+    390,
+    1280
+  ],
+  "status": "PASS"
+}

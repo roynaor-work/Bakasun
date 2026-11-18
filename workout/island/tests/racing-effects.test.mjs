@@ -24,7 +24,7 @@ function renderedSnapshot(f){return meshes(f).map(mesh=>({count:mesh.count,matri
 test('hundreds of racing-effect frames reuse fixed buffers and registered resources',()=>{
  const f=fixture(),buffers=meshes(f).map(mesh=>mesh.instanceMatrix),arrays=buffers.map(buffer=>buffer.array),registered=[...f.resources];
  try{
-  assert.deepEqual(f.effects.metrics().capacity,{smoke:32,skidMarks:128,sparks:20});
+  assert.deepEqual(f.effects.metrics().capacity,{smoke:32,skidMarks:128,sparks:20,debris:24,tyres:4});   // racing-deep-m7: crash debris and the flying tyre
   for(let i=0;i<720;i++){
    f.state.events=i%11===0?[{type:'bump',car:'player'}]:[];
    f.step(1/60,Math.floor(i/120)%3);
@@ -32,7 +32,7 @@ test('hundreds of racing-effect frames reuse fixed buffers and registered resour
    meshes(f).forEach((mesh,index)=>{assert.equal(mesh.instanceMatrix,buffers[index]);assert.equal(mesh.instanceMatrix.array,arrays[index]);assert.ok(mesh.instanceMatrix.array.every(Number.isFinite));});
   }
   assert.deepEqual([...f.resources],registered,'frames must not allocate more owner-managed GPU resources');
-  assert.equal(f.root.children.length,3);
+  assert.equal(f.root.children.length,5);
   for(const mesh of meshes(f)){
    assert.ok(f.resources.has(mesh.geometry));assert.ok(f.resources.has(mesh.material));
    if(mesh.material.map)assert.ok(f.resources.has(mesh.material.map));

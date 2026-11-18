@@ -21,6 +21,7 @@ import { initParent, parentGate, parentHome, parentTogether, parentWeek, lockPar
 import { normalizePlan } from './weekly.js?v=20261014-w2g-1';
 import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261014-w2g-1';
 import { playIntro } from './intro.js?v=20261010-camera-1';
+import { createVoiceCopy, ageBand, voiceCopyEnabled } from './voice-copy.js?v=20261010-camera-1';
 import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
@@ -54,6 +55,11 @@ const cameraUploads = new CameraUploads({ onStatus: status => {
 void cameraUploads.retry();
 window.addEventListener('online', () => { cameraUploads.refresh(); void cameraUploads.retry(); });
 window.addEventListener('focus', () => { cameraUploads.refresh(); void cameraUploads.retry(); });
+// נוסחי דיבור חדשים (voice-copy.js): וריאציות לפי גיל, שם ושעה. כיבוי: הגדרות ← "דיבור חם", או ?voiceV1=0
+const VC = createVoiceCopy();
+const vcOn = () => voiceCopyEnabled(store.profile, location.search);
+const vcCtx = () => ({ band: ageBand(store.profile), name: store.profile.name || '', hour: new Date().getHours() });
+const vline = (key, legacy) => vcOn() ? VC.pick(key, vcCtx()) : { text: legacy, tts: legacy };
 window.addEventListener('storage', event => { if (event.key === 'camlab.upload') { cameraUploads.refresh(); void cameraUploads.retry(); } });
 function mount(html, full = false) {
   if (activeCamera) { const camera = activeCamera; activeCamera = null; camera.leave('exit'); }
@@ -565,7 +571,7 @@ function minuteScreen(id) {
       <button class="btn ghost big" data-go="#/home">לדף הבית 🏠</button>
     </div>`);
     $('#minute-again').onclick = () => minuteScreen(ex.id);
-    if (result) sayQuick(FRAGMENTS['minute-end']);
+    if (result) sayQuick(vline('minuteEnd', FRAGMENTS['minute-end']).tts);
   };
   const paint = () => {
     if (!state || finished) return;
@@ -578,7 +584,7 @@ function minuteScreen(id) {
     const sec = Math.ceil(((running ? state.endAt : state.readyAt) - performance.now()) / 1000);
     $('#minute-clock').textContent = running ? fmtTime(sec) : sec;
     $('#minute-status').textContent = running ? 'אחרי כל חזרה לוחצים על המספר. בקצב שלך.' : 'מתכוננים יחד…';
-    if (running && lastCue !== 'running') { lastCue = 'running'; mainFig.play(ex, 1); beep(880, 160); sayQuick(FRAGMENTS['minute-start']); }
+    if (running && lastCue !== 'running') { lastCue = 'running'; mainFig.play(ex, 1); beep(880, 160); sayQuick(vline('minuteStart', FRAGMENTS['minute-start']).tts); }
     else if (!running && lastCue !== sec) { lastCue = sec; sayQuick(numWord(sec)); beep(520, 90); }
   };
   $('#minute-start').onclick = () => {
@@ -698,7 +704,7 @@ function wireReps(it, ex, mainFig) {
     // כל חזרה: המספר עולה ונאמר בקול (סופרים יחד). fromChild: הילד אמר את המספר קודם, אז לא חוזרים אחריו, רק מסנכרנים את הדמות
     const step = (fromChild = false) => {
       n++; show();
-      if (n >= it.target) { stopCount(); fanfare(); if (voiceOn) sayQuick(`${numWord(n)}! ${FRAGMENTS.encourage}`); $('#did').classList.add('pop'); return; }
+      if (n >= it.target) { stopCount(); fanfare(); if (voiceOn) sayQuick(`${numWord(n)}! ${vline('cheer', FRAGMENTS.encourage).text}`); $('#did').classList.add('pop'); return; }
       if (fromChild) { mainFig.onRep = null; mainFig.play(ex, 1); mainFig.onRep = () => step(); } // הדמות מתחילה סיבוב חדש יחד איתו
       else if (voiceOn) sayQuick(numWord(n)); else beep(780, 70);
     };
@@ -741,13 +747,13 @@ function wireTimer(it) {
   const voiceOn = canSpeak() && store.profile.voice !== false;
   const run = () => {
     T.running = true; T.endAt = Date.now() + T.left * 1000; $('#startstop').textContent = '⏸️ עצור';
-    if (voiceOn && T.left >= it.target) sayQuick(FRAGMENTS.start);
+    if (voiceOn && T.left >= it.target) sayQuick(vline('start', FRAGMENTS.start).tts);
     tick = setInterval(() => {
       const prev = T.left; T.left = Math.max(0, (T.endAt - Date.now()) / 1000); paint();
       const sec = Math.ceil(T.left), changed = Math.ceil(prev) > sec;
       // בקול: "עוד 20 שניות" כל 10 שניות, וב-10 האחרונות סופרים לאחור יחד; בלי קול: צפצוף ב-3 האחרונות
       if (changed && T.left > 0) { const cue = voiceOn && sec < it.target ? timeCue(sec, it.target) : null; if (cue) sayQuick(cue); else if (sec <= 3) beep(660, 90); }
-      if (T.left <= 0) { stop(); fanfare(); if (voiceOn) sayQuick(`${FRAGMENTS.finished} ${FRAGMENTS.encourage}`); finishItem(it.target, false); }
+      if (T.left <= 0) { stop(); fanfare(); if (voiceOn) sayQuick(vcOn() ? `${VC.pick('finished', vcCtx()).text} ${VC.pick('cheer', vcCtx()).text}` : `${FRAGMENTS.finished} ${FRAGMENTS.encourage}`); finishItem(it.target, false); }
     }, 200);
   };
   $('#startstop').onclick = () => T.running ? stop() : run();
@@ -866,7 +872,12 @@ function adjustDifficulty(program, val) {
   if (!programById[program.id]) return null;
   const cur = store.progBoost(program.id);
   const order = ['easy', 'normal', 'hard', 'pro'], li = order.indexOf(store.profile.level);
-  const spokenName = SAY_UI.programs[program.id] || program.name, A = SAY_UI.adjust;
+  const spokenName = SAY_UI.programs[program.id] || program.name, A = vcOn() ? {
+    ...SAY_UI.adjust, boost: () => VC.pick('easyBoost', vcCtx()).text, swaps: () => VC.pick('easySwaps', vcCtx()).text,
+    level: () => VC.pick('levelUp', vcCtx()).text, top: VC.pick('top', vcCtx()).text, ok: VC.pick('adjustOk', vcCtx()).text,
+    downSwaps: VC.pick('hardDown', vcCtx()).text, downBoost: VC.pick('hardDown', vcCtx()).text, downLevel: () => VC.pick('hardDown', vcCtx()).text,
+    bottom: VC.pick('bottom', vcCtx()).text,
+  } : SAY_UI.adjust;
   if (val === 'easy') {
     if (cur.boost < 2) { store.setProgBoost(program.id, { ...cur, boost: cur.boost + 1 }); return { change: 'boost', msg: A.boost(spokenName), say: A.boost(spokenName) }; }
     if (cur.swaps < MAX_SWAPS) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps + 1 }); return { change: 'swaps', msg: A.swaps(spokenName), say: A.swaps(spokenName) }; }
@@ -875,8 +886,8 @@ function adjustDifficulty(program, val) {
     return { change: '', msg: A.top, say: A.top };
   }
   if (val === 'hard') {
-    if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍', say: A.downSwaps }; }
-    if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍', say: A.downBoost }; }
+    if (cur.swaps) { store.setProgBoost(program.id, { ...cur, swaps: cur.swaps - 1 }); return { change: 'down', msg: vcOn() ? A.downSwaps : 'היה קשה? בפעם הבאה חוזרים לתרגילים הרגילים. 👍', say: A.downSwaps }; }
+    if (cur.boost) { store.setProgBoost(program.id, { ...cur, boost: cur.boost - 1 }); return { change: 'down', msg: vcOn() ? A.downBoost : 'היה קשה? הורדתי קצת. בפעם הבאה יהיה נוח יותר. 👍', say: A.downBoost }; }
     if (li > 0) { store.setProfile({ level: order[li - 1] }); return { change: 'down', msg: A.downLevel(SAY_UI.levels[order[li - 1]]), say: A.downLevel(SAY_UI.levels[order[li - 1]]) }; }
     return { change: '', msg: A.bottom, say: A.bottom };
   }
@@ -897,13 +908,15 @@ function askFeedback(s, program, gamesPlayed, then) {
       </div>
     </div>
   </div>`, true);
-  speak(SAY_UI.howWas);
+  const hw = vcOn() ? VC.howWas(vcCtx()) : { text: SAY_UI.howWas, tts: SAY_UI.howWas };
+  speak(hw.tts);
   app.querySelectorAll('[data-fb]').forEach(b => b.onclick = () => {
     stopSpeak();
-    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.', say: FRAGMENTS.thanks };
+    const val = b.dataset.fb, adj = adjustDifficulty(program, val) || { change: '', msg: 'תודה, רשמתי.', say: vline('thanks', FRAGMENTS.thanks).text };
     s.feedback = val; s.change = adj.change; store.save();
     if (store.profile.familyCode) cloud.push(store.profile.familyCode, 'workout', s.id, { ...s, name: store.profile.name, gamesPlayed, level: store.profile.level, games: gamesSummary() });
-    speak(adj.say + ' ' + SAY_UI.perseverance(stats(store.sessions)));
+    const pers = vcOn() ? VC.perseverance(stats(store.sessions), vcCtx()) : { text: SAY_UI.perseverance(stats(store.sessions)) };
+    W.persLine = pers.text; speak(adj.say + ' ' + (pers.tts || pers.text));
     then(adj.msg);
   });
 }
@@ -933,7 +946,7 @@ function donePhase() {
       ${sum.starReasons.map(reason => `<p class="small">⭐ ${esc(reason)}</p>`).join('')}
     </section>
     ${outdoorCard(s)}
-    <div class="card center" style="border:2px solid var(--accent)"><b>${esc(perseveranceLine(st))}</b></div>
+    <div class="card center" style="border:2px solid var(--accent)"><b>${esc(W.persLine || perseveranceLine(st))}</b></div>
     ${beltCard(st.workouts, { previousWorkouts: st.workouts - 1 })}
     ${companionCard(st.workouts, { fresh: true })}
     ${restCard(rest)}
@@ -1047,8 +1060,8 @@ function arcade() {
       return;
     }
     const cost = gameById[id].cost || 1;
-    if (store.tokens < cost) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); if (cost > 1 && store.tokens) speak(SAY_UI.costTwo); return; }
-    if (cost > 1) speak(SAY_UI.costTwo); /* רועי: להגיד גם בקול */
+    if (store.tokens < cost) { c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500); if (cost > 1 && store.tokens) speak(vline('costTwo', SAY_UI.costTwo).tts); return; }
+    if (cost > 1) speak(vline('costTwo', SAY_UI.costTwo).tts); /* רועי: להגיד גם בקול */
     playGame(gameById[id], () => arcade());
   });
 }
@@ -1076,6 +1089,9 @@ function settings() {
       <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
       <label class="field">קצב דיבור<select id="speechRate">${[[0.8, 'לאט'], [0.92, 'רגיל'], [1.05, 'מהיר']].map(([v, n]) => `<option value="${v}" ${Math.abs(v - (p.speechRate || 0.92)) < 0.01 ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">גובה הקול<select id="voiceTone">${[['warm', 'חם ורך (מומלץ)'], ['plain', 'רגיל']].map(([v, n]) => `<option value="${v}" ${(p.voiceTone || 'warm') === v ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+      <label class="field">גיל הילד (מתאים את הניסוחים)<select id="kidAge"><option value="0">לא הוגדר (8-10)</option>${[6, 7, 8, 9, 10, 11, 12].map(a => `<option value="${a}" ${p.age === a ? 'selected' : ''}>${a}</option>`).join('')}</select></label>
+      <div class="toggle"><b>דיבור חם וטבעי (ניסוחים מגוונים)</b><input type="checkbox" id="voiceV1" ${p.voiceV1 !== false ? 'checked' : ''}></div>
       <button class="btn chip" id="voicetest">🔊 בדיקת קול</button>
       <p class="muted small">הקול הוא של המכשיר. ${canSpeak() ? (hebrewVoices().length ? `נמצאו ${hebrewVoices().length} קולות בעברית. נבחר: ${esc(bestVoice()?.name || '')}. אם יש כמה, נסו כל אחד עם "בדיקת קול" ובחרו את הטבעי ביותר. באנדרואיד כדאי להוריד את הקול העברי המשופר: הגדרות, ניהול כללי, המרת טקסט לדיבור, מנוע גוגל, התקנת נתוני קול, עברית.` : 'לא נמצא קול עברי. באנדרואיד: הגדרות, שפה, המרת טקסט לדיבור, להוריד עברית. באייפון: הגדרות, נגישות, תוכן מדובר, קולות, עברית.') : 'המכשיר לא תומך בהקראה.'}</p>
     </div>
@@ -1161,8 +1177,11 @@ function settings() {
   app.querySelectorAll('[data-delvid]').forEach(b => b.onclick = async () => { const id = b.dataset.delvid; if (!confirm(`למחוק מהטלפון הזה את הסרטון של "${byId[id].name}"?`)) return; await deleteVideo(id); settings(); });
   $('#intro').onchange = e => store.setProfile({ intro: e.target.checked });
   $('#animstyle').onchange = e => store.setProfile({ animStyle: e.target.value, stage3d: e.target.value !== 'stick' }); /* מקלות = טלפון איטי / בלי WebGL; stage3d נשמר להתאמה לאחור */
-  $('#voicetest').onclick = () => { if (!speak(SAY_UI.test, { force: true })) alert('אין הקראה במכשיר הזה.'); };
-  $('#voiceName').onchange = e => store.setProfile({ voiceName: e.target.value });
+  $('#voicetest').onclick = () => { if (!speak(vline('test', SAY_UI.test).tts, { force: true })) alert('אין הקראה במכשיר הזה.'); };
+  $('#voiceName').onchange = e => { store.setProfile({ voiceName: e.target.value }); speak(vline('test', SAY_UI.test).tts, { force: true }); }; /* הדגמה מיד בבחירה */
+  $('#voiceTone').onchange = e => { store.setProfile({ voiceTone: e.target.value }); speak(vline('test', SAY_UI.test).tts, { force: true }); };
+  $('#kidAge').onchange = e => store.setProfile({ age: +e.target.value || 0 });
+  $('#voiceV1').onchange = e => store.setProfile({ voiceV1: e.target.checked });
   $('#speechRate').onchange = e => store.setProfile({ speechRate: +e.target.value });
   window.speechSynthesis?.addEventListener?.('voiceschanged', () => { if (location.hash.includes('settings') && $('#voiceName') && $('#voiceName').options.length <= 1) settings(); }, { once: true });
   $('#tokenMinutes').onchange = e => store.setProfile({ tokenMinutes: +e.target.value });

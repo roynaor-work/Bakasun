@@ -65,7 +65,8 @@ test('dive clip: side from the keeper\'s own left, row from ball height; plan sk
 
 test('kits: the HUD and rings use what the v7 meshes wear; the two keepers differ and neither matches an outfield kit',()=>{
  const base={team:{colors:['#2868ee','#ffcf69']},opponent:{colors:['#e94d51','#fff4d9']}};
- const v7=withSoccerV7Kits(base,'');
+ const v7=withSoccerV7Kits(base,'?soccerChars=v7');
+ assert.equal(withSoccerV7Kits(base,''),base,'the shared athlete body (default since 11/11) wears the configured colours');
  assert.deepEqual(v7.team.colors,SOCCER_V7_KITS[0].colors);assert.deepEqual(v7.opponent.colors,SOCCER_V7_KITS[1].colors);
  assert.equal(withSoccerV7Kits(base,'?soccerChars=v4'),base,'other sets keep the configured colours');
  assert.notEqual(SOCCER_V7_KITS[0].colors[0],SOCCER_V7_KITS[1].colors[0]);

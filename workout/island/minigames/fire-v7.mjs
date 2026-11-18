@@ -1,4 +1,4 @@
-import {polishLegacy,polishValue} from './polish-flag.mjs';
+import {polishLegacy,polishValue,fireV21} from './polish-flag.mjs';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
@@ -21,6 +21,8 @@ export const buildingFile=(type,stage,near)=>`models/${type}-${stage}${near&&has
 export const NEAR_ENTER=9,NEAR_EXIT=10.5,CREW_FAR=24,CREW_FAR_EXIT=26.9; // metres from the camera focus, ±12% hysteresis
 export const ATLAS_FILES=Object.freeze({flames:'particles/flame-256.png',smoke:'particles/smoke-256.png',embers:'particles/ember-256.png',drops:'particles/water-256.png',mist:'particles/steam-256.png'});
 
+/** Pure: how far the v7 pumper file (nose +Z) is turned so its nose points along the game's forward (-Z at yaw 0). */
+export const pumperFileTurn=fixed=>fixed?Math.PI:-Math.PI/2;
 export function fireV7Enabled(search=globalThis.location?.search||'',flag=globalThis.__fireV7){
   if(flag===false)return false;
   return new URLSearchParams(search).get('fireV7')!=='0';
@@ -249,15 +251,16 @@ export function createFireV7({scene,balance,model,adapters={},canAdd=()=>true,lo
     const object=gltf.scene,box=new T.Box3().setFromObject(object),size=box.getSize(new T.Vector3()),k=balance.vehicle.length/Math.max(size.x,size.z,.01);
     const rootGroup=new T.Group(),turret=new T.Group(),muzzle=new T.Object3D(),inner=new T.Group();
     inner.add(object);object.scale.setScalar(k);object.position.set(-(box.min.x+box.max.x)/2*k,-box.min.y*k,-(box.min.z+box.max.z)/2*k);
-    // v7 engine's nose is +X in its file (waterOutlet x +1.45); the game's engine faces +Z at yaw 0.
-    inner.rotation.y=-Math.PI/2;rootGroup.add(inner);
+    // 11/11/2026: the file's `front` marker sits at +Z (the waterOutlet at +X is the side pump panel, not the nose) and the game drives
+    // toward -Z at yaw 0, so the file is turned half a circle. `?fireHeading=v20` keeps the old quarter turn (nose on the side).
+    inner.rotation.y=pumperFileTurn(fireV21('fireHeading'));rootGroup.add(inner);
     let outlet=new T.Vector3(0,1.3,1.5);
     object.updateWorldMatrix(true,true);const node=object.getObjectByName('waterOutlet');
     if(node){inner.updateMatrixWorld(true);rootGroup.updateMatrixWorld(true);node.getWorldPosition(outlet);}
     // The pumper has no turret: the nozzle origin stays on the real outlet and the aim yaw only turns an empty pivot.
     turret.position.copy(outlet);rootGroup.add(turret);turret.add(muzzle);muzzle.position.set(0,0,.35);
     object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
-    return {root:rootGroup,turret,muzzle,wheels:[],cannonFaces:1,height:size.y*k,dispose(){rootGroup.removeFromParent();rootGroup.clear();}};
+    return {root:rootGroup,turret,muzzle,wheels:[],cannonFaces:1,height:size.y*k,kind:'v7',dispose(){rootGroup.removeFromParent();rootGroup.clear();}};
   }
 
   // ---- particle atlases -------------------------------------------------------------------------------------

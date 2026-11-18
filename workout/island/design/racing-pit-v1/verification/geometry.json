@@ -1,0 +1,694 @@
+{
+  "date": "2026-11-14T15:22:22.674Z",
+  "canonicalRigMatchesExistingCrowdExactly": true,
+  "canonicalReference": "../racing-v7/assets/crowd/rig.json",
+  "method": "Independently load all delivered GLBs with the existing Three.js GLTFLoader. For all 70 clips, apply every skinned vertex at 25 uniformly spaced times including endpoints; examine actual world Y. This is sampled mesh verification, not a continuous collision proof.",
+  "floorToleranceMeters": 0.002,
+  "noTextures": true,
+  "noDraco": true,
+  "noExternalBuffers": true,
+  "actors": [
+    {
+      "file": "models/wheel_front_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/wheel_front_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/wheel_rear_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/wheel_rear_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3624,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/jack_operator.glb",
+      "triangles": 1180,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3540,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/screen_cleaner.glb",
+      "triangles": 1192,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3576,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    },
+    {
+      "file": "models/light_controller.glb",
+      "triangles": 1200,
+      "joints": 18,
+      "skin": "one canonical skin; single-bone rigid articulation",
+      "vertexColors": true,
+      "teamMask": true,
+      "sampled": [
+        {
+          "clip": "idle_wait",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "rush_in",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -0.0004789369420809126,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "remove_wheel",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "mount_wheel",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -3.4991754089330114e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_up",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "jack_down",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -0.0002918907101450569,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "thumbs_up",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.6675000292220523,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "step_back",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -2.5935618259772388e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "wipe_screen",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": -2.412201712048616e-8,
+          "maxVertexYMeters": 1.6675000047683715,
+          "verticesBelowMinus2mm": 0
+        },
+        {
+          "clip": "signal_release",
+          "samples": 25,
+          "verticesPerSample": 3600,
+          "minVertexYMeters": 1.178741975821075e-8,
+          "maxVertexYMeters": 1.667499990463257,
+          "verticesBelowMinus2mm": 0
+        }
+      ]
+    }
+  ],
+  "props": [
+    {
+      "file": "models/spare_wheel.glb",
+      "triangles": 504,
+      "vertexColors": true
+    },
+    {
+      "file": "models/tire_stack.glb",
+      "triangles": 1808,
+      "vertexColors": true
+    },
+    {
+      "file": "models/wheel_gun.glb",
+      "triangles": 144,
+      "vertexColors": true
+    },
+    {
+      "file": "models/jack.glb",
+      "triangles": 368,
+      "vertexColors": true
+    },
+    {
+      "file": "models/stop_star.glb",
+      "triangles": 112,
+      "vertexColors": true
+    },
+    {
+      "file": "models/pit_light_entry.glb",
+      "triangles": 456,
+      "vertexColors": true
+    },
+    {
+      "file": "models/pit_light_exit.glb",
+      "triangles": 456,
+      "vertexColors": true
+    },
+    {
+      "file": "models/pit_lane_arrows.glb",
+      "triangles": 72,
+      "vertexColors": true
+    },
+    {
+      "file": "models/speed_limit_symbol.glb",
+      "triangles": 105,
+      "vertexColors": true
+    },
+    {
+      "file": "models/cleaning_cloth.glb",
+      "triangles": 24,
+      "vertexColors": true
+    }
+  ]
+}

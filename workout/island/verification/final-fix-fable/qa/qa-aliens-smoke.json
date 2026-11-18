@@ -1,0 +1,296 @@
+{
+ "default": {
+  "intro": [
+   "מזיזים בעדינות עם הג׳ויסטיק או בגרירה. לוחצים על כפתור הירי: בהתחלה פרץ וולקן קצר, ואז ירי יציב; כשהמד מתחמם הקנים נחים רגע. בונוס מניפה נותן ירי משולש לזמן קצר.",
+   "מתקנים, משדרגים וצובעים בהאנגר לפני הקרב. שדרוג קטן נוסף אחרי ניצחון.",
+   "עיגול מסמן את אזור הפגיעה. הטיל עף אליו ופוגע בחלק מהמערך. מתחילים כל שלב עם שני טילים."
+  ],
+  "geometry": {
+   "canvas": {
+    "x": 0,
+    "y": 0,
+    "w": 844,
+    "h": 390
+   },
+   "shoot": {
+    "x": 714,
+    "y": 186,
+    "w": 108,
+    "h": 108
+   },
+   "stick": {
+    "x": 78,
+    "y": 266,
+    "w": 100,
+    "h": 100
+   },
+   "pass": {
+    "x": 624,
+    "y": 202,
+    "w": 76,
+    "h": 76
+   },
+   "effectAspect": 2.885,
+   "v15": true,
+   "moveV15": true,
+   "v14": true,
+   "shipV13": true,
+   "cannonOffset": 11.3,
+   "search": "?dev=1",
+   "hudControl": "סטיק לתנועה · כפתור ירי לירי",
+   "hudWeapon": "נשק: תותח"
+  },
+  "renderMode": "three",
+  "renderMetrics": {
+   "shipV13": true,
+   "playerLoaded": true
+  },
+  "artModels": {
+   "requested": 6,
+   "loaded": 6,
+   "failed": 0
+  },
+  "timeAtStart": 0.1,
+  "level": 1,
+  "lives": 6,
+  "equipment": {
+   "equipment": {
+    "damage": 1,
+    "rate": 1,
+    "shield": 0,
+    "weapon": 0
+   },
+   "upgrades": {
+    "laser": 0,
+    "rapid": 0,
+    "shield": 0,
+    "wing": 0,
+    "damage": 0
+   },
+   "hangar": {
+    "damage": 0,
+    "coins": 0,
+    "paint": 0,
+    "rapid": 0,
+    "shield": 0,
+    "credits": 0,
+    "spent": 0
+   },
+   "settingsSeconds": 270
+  },
+  "timeAfter500": 0.5960000000000004,
+  "fireMode": "idle",
+  "v15": true,
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1"
+   },
+   "url": "http://127.0.0.1:42725/workout/island/index.html?dev=1"
+  }
+ },
+ "v15off": {
+  "intro": [
+   "מזיזים בעדינות עם הג׳ויסטיק או בגרירה. לוחצים על כפתור הירי: בהתחלה פרץ וולקן קצר, ואז ירי יציב; כשהמד מתחמם הקנים נחים רגע. בונוס מניפה נותן ירי משולש לזמן קצר.",
+   "מתקנים, משדרגים וצובעים בהאנגר לפני הקרב. שדרוג קטן נוסף אחרי ניצחון.",
+   "עיגול מסמן את אזור הפגיעה. הטיל עף אליו ופוגע בחלק מהמערך. מתחילים כל שלב עם שני טילים."
+  ],
+  "geometry": {
+   "canvas": {
+    "x": 0,
+    "y": 0,
+    "w": 844,
+    "h": 390
+   },
+   "shoot": {
+    "x": 714,
+    "y": 186,
+    "w": 108,
+    "h": 108
+   },
+   "stick": {
+    "x": 78,
+    "y": 266,
+    "w": 100,
+    "h": 100
+   },
+   "pass": {
+    "x": 624,
+    "y": 202,
+    "w": 76,
+    "h": 76
+   },
+   "effectAspect": 2.885,
+   "v15": false,
+   "moveV15": false,
+   "v14": true,
+   "shipV13": true,
+   "cannonOffset": 11.3,
+   "search": "?dev=1&alienV15=0",
+   "hudControl": "סטיק לתנועה · כפתור ירי לירי",
+   "hudWeapon": "נשק: תותח"
+  },
+  "renderMode": "three",
+  "renderMetrics": {
+   "shipV13": true,
+   "playerLoaded": true
+  },
+  "artModels": {
+   "requested": 6,
+   "loaded": 6,
+   "failed": 0
+  },
+  "timeAtStart": 0.085,
+  "level": 1,
+  "lives": 6,
+  "equipment": {
+   "equipment": {
+    "damage": 1,
+    "rate": 1,
+    "shield": 0,
+    "weapon": 0
+   },
+   "upgrades": {
+    "laser": 0,
+    "rapid": 0,
+    "shield": 0,
+    "wing": 0,
+    "damage": 0
+   },
+   "hangar": {
+    "damage": 0,
+    "coins": 0,
+    "paint": 0,
+    "rapid": 0,
+    "shield": 0,
+    "credits": 0,
+    "spent": 0
+   },
+   "settingsSeconds": 180
+  },
+  "timeAfter500": 0.5970000000000004,
+  "fireMode": "idle",
+  "v15": false,
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1&alienV15=0"
+   },
+   "url": "http://127.0.0.1:42725/workout/island/index.html?dev=1&alienV15=0"
+  }
+ },
+ "movev20": {
+  "intro": [
+   "מזיזים בעדינות עם הג׳ויסטיק או בגרירה. לוחצים על כפתור הירי: בהתחלה פרץ וולקן קצר, ואז ירי יציב; כשהמד מתחמם הקנים נחים רגע. בונוס מניפה נותן ירי משולש לזמן קצר.",
+   "מתקנים, משדרגים וצובעים בהאנגר לפני הקרב. שדרוג קטן נוסף אחרי ניצחון.",
+   "עיגול מסמן את אזור הפגיעה. הטיל עף אליו ופוגע בחלק מהמערך. מתחילים כל שלב עם שני טילים."
+  ],
+  "geometry": {
+   "canvas": {
+    "x": 0,
+    "y": 0,
+    "w": 844,
+    "h": 390
+   },
+   "shoot": {
+    "x": 714,
+    "y": 186,
+    "w": 108,
+    "h": 108
+   },
+   "stick": {
+    "x": 78,
+    "y": 266,
+    "w": 100,
+    "h": 100
+   },
+   "pass": {
+    "x": 624,
+    "y": 202,
+    "w": 76,
+    "h": 76
+   },
+   "effectAspect": 2.885,
+   "v15": true,
+   "moveV15": false,
+   "v14": true,
+   "shipV13": true,
+   "cannonOffset": 11.3,
+   "search": "?dev=1&alienMove=v20",
+   "hudControl": "סטיק לתנועה · כפתור ירי לירי",
+   "hudWeapon": "נשק: תותח"
+  },
+  "renderMode": "three",
+  "renderMetrics": {
+   "shipV13": true,
+   "playerLoaded": true
+  },
+  "artModels": {
+   "requested": 6,
+   "loaded": 6,
+   "failed": 0
+  },
+  "timeAtStart": 0.09000000000000001,
+  "level": 1,
+  "lives": 6,
+  "equipment": {
+   "equipment": {
+    "damage": 1,
+    "rate": 1,
+    "shield": 0,
+    "weapon": 0
+   },
+   "upgrades": {
+    "laser": 0,
+    "rapid": 0,
+    "shield": 0,
+    "wing": 0,
+    "damage": 0
+   },
+   "hangar": {
+    "damage": 0,
+    "coins": 0,
+    "paint": 0,
+    "rapid": 0,
+    "shield": 0,
+    "credits": 0,
+    "spent": 0
+   },
+   "settingsSeconds": 270
+  },
+  "timeAfter500": 0.5860000000000004,
+  "fireMode": "idle",
+  "v15": true,
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1&alienMove=v20"
+   },
+   "url": "http://127.0.0.1:42725/workout/island/index.html?dev=1&alienMove=v20"
+  }
+ }
+}

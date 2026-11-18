@@ -1,0 +1,24 @@
+-- easy
+hold 0.2 s n=0 (no hit: 100): good NaN% medium NaN% weak NaN% | error net/out NaN% | avg power NaN
+hold 0.5 s n=100: good 0% medium 94% weak 6% | error net/out 15% | avg power 0.54
+hold 0.8 s n=100: good 0% medium 100% weak 0% | error net/out 16% | avg power 0.61
+hold 1.0 s n=100: good 14% medium 86% weak 0% | error net/out 13% | avg power 0.66
+hold 1.2 s n=100: good 83% medium 17% weak 0% | error net/out 5% | avg power 0.69
+hold 1.4 s n=100: good 83% medium 17% weak 0% | error net/out 5% | avg power 0.72
+hold whole flight (auto-fire) n=100: good 75% medium 21% weak 4% | error net/out 6% | avg power 0.77
+-- normal
+hold 0.2 s n=0 (no hit: 100): good NaN% medium NaN% weak NaN% | error net/out NaN% | avg power NaN
+hold 0.5 s n=100: good 0% medium 12% weak 88% | error net/out 35% | avg power 0.51
+hold 0.8 s n=100: good 0% medium 100% weak 0% | error net/out 30% | avg power 0.57
+hold 1.0 s n=100: good 5% medium 95% weak 0% | error net/out 29% | avg power 0.62
+hold 1.2 s n=100: good 72% medium 28% weak 0% | error net/out 12% | avg power 0.65
+hold 1.4 s n=100: good 72% medium 28% weak 0% | error net/out 12% | avg power 0.68
+hold whole flight (auto-fire) n=100: good 58% medium 38% weak 4% | error net/out 14% | avg power 0.73
+-- hard
+hold 0.2 s n=0 (no hit: 100): good NaN% medium NaN% weak NaN% | error net/out NaN% | avg power NaN
+hold 0.5 s n=100: good 0% medium 0% weak 100% | error net/out 55% | avg power 0.47
+hold 0.8 s n=100: good 0% medium 100% weak 0% | error net/out 44% | avg power 0.53
+hold 1.0 s n=100: good 0% medium 100% weak 0% | error net/out 44% | avg power 0.58
+hold 1.2 s n=100: good 52% medium 48% weak 0% | error net/out 24% | avg power 0.62
+hold 1.4 s n=100: good 80% medium 20% weak 0% | error net/out 16% | avg power 0.65
+hold whole flight (auto-fire) n=100: good 64% medium 32% weak 4% | error net/out 20% | avg power 0.74
