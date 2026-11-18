@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>פעולות חילוץ | כיבוי אש</title>
+  <script type="importmap">
+    {"imports":{"three":"../../vendor/three.module.js"}}
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      font: 14px/1.35 system-ui, sans-serif;
+      background: #10161b;
+      color: #edf2f4;
+      --line: #39454e;
+      --muted: #afbec7;
+      --accent: #ffd161;
+      --panel: #1a242c;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    button, input { font: inherit; }
+    button:focus-visible, input:focus-visible { outline: 2px solid #fff1b6; outline-offset: 2px; }
+    .app {
+      inline-size: min(100%, 1080px);
+      block-size: 390px;
+      margin: auto;
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: 288px minmax(0, 1fr);
+      grid-template-rows: 37px minmax(0, 1fr);
+      gap: 8px 10px;
+    }
+    .masthead {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding-inline: 3px;
+    }
+    .masthead::before {
+      content: "";
+      width: 8px;
+      height: 21px;
+      border-radius: 2px;
+      background: repeating-linear-gradient(-48deg, #ffd161 0 4px, #79531d 4px 6px);
+    }
+    h1 { font-size: 20px; margin: 0; line-height: 1; }
+    .masthead p {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 2px 2px 0 0;
+    }
+    .choices, .stage {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      overflow: hidden;
+    }
+    .choices {
+      display: flex;
+      flex-direction: column;
+      padding: 9px;
+      background: var(--panel);
+    }
+    .selection {
+      margin-block-end: 8px;
+      padding-inline: 3px;
+      min-block-size: 41px;
+    }
+    .selection h2 { font-size: 16px; color: var(--accent); margin: 0 0 2px; }
+    .selection p { font-size: 11px; color: var(--muted); margin: 0; min-height: 16px; }
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: minmax(54px, 1fr);
+      gap: 5px;
+      flex: 1;
+    }
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      padding: 2px 1px;
+      color: #dce7ed;
+      background: #25313a;
+      border: 1px solid #3b4b57;
+      border-radius: 6px;
+      cursor: pointer;
+      line-height: 1.1;
+      min-inline-size: 0;
+    }
+    .action img { display: block; width: 34px; height: 34px; pointer-events: none; flex: none; }
+    .action span { font-size: 9.5px; font-weight: 650; text-align: center; white-space: nowrap; }
+    .action:hover { border-color: #a79665; background: #2f3d46; }
+    .action[aria-pressed="true"] {
+      background: #403824;
+      border-color: var(--accent);
+      color: #fff1cd;
+      box-shadow: inset 0 0 0 1px #ffd16131;
+    }
+    .stage {
+      display: grid;
+      position: relative;
+      grid-template-rows: minmax(0, 1fr) 39px;
+      background: #1b2b31;
+    }
+    .scene {
+      position: relative;
+      overflow: hidden;
+      min-height: 255px;
+      direction: ltr;
+    }
+    canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; }
+    .scene-status {
+      position: absolute;
+      inset: 10px 12px auto auto;
+      margin: 0;
+      padding: 3px 9px;
+      border: 1px solid #66818888;
+      border-radius: 4px;
+      color: #f5f7ee;
+      background: #132327e8;
+      font-size: 11px;
+      pointer-events: none;
+      direction: rtl;
+    }
+    .scene-status[data-complete="true"] { color: #d7f9e4; border-color: #79b19097; }
+    .timer {
+      position: absolute;
+      inset: 11px auto auto 12px;
+      display: grid;
+      place-items: center;
+      width: 57px;
+      height: 57px;
+      background: #121d21eb;
+      border: 1px solid #61767c;
+      border-radius: 50%;
+      font: 750 13px/1 system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+      color: #fff0c6;
+    }
+    .timer svg { position: absolute; inset: 4px; width: calc(100% - 8px); overflow: visible; }
+    .dial { fill: none; stroke-width: 2.5; }
+    .dial-base { stroke: #557076; opacity: .65; }
+    .dial-value { stroke: var(--accent); stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; }
+    .controls {
+      display: grid;
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 6px;
+      padding-inline: 7px;
+      background: #172128;
+      border-block-start: 1px solid var(--line);
+    }
+    .control {
+      padding: 4px 7px;
+      border: 1px solid #475762;
+      border-radius: 4px;
+      color: #f0f4f6;
+      background: #26343e;
+      cursor: pointer;
+      font-size: 11px;
+      min-inline-size: 46px;
+      min-block-size: 26px;
+    }
+    .control[data-primary] { background: var(--accent); color: #252010; border-color: var(--accent); font-weight: 750; }
+    .control:hover { filter: brightness(1.15); }
+    .control:disabled { cursor: default; opacity: .55; }
+    input[type="range"] { width: 100%; margin: 0; direction: ltr; accent-color: var(--accent); cursor: pointer; }
+    .elapsed { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; direction: ltr; white-space: nowrap; }
+    @media (max-width: 650px) {
+      .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; block-size: auto; padding: 8px; }
+      .masthead { min-height: 30px; }
+      .stage { grid-row: 2; }
+      .scene { min-height: 245px; }
+      .choices-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="masthead">
+      <h1>פעולות חילוץ</h1>
+      <p>כיבוי אש</p>
+    </header>
+    <section class="choices" aria-label="בחירת פעולה">
+      <div class="selection">
+        <h2 id="action-title">בחירת פעולה</h2>
+        <p id="action-description">טוען פעולות חילוץ</p>
+      </div>
+      <div class="choices-grid" id="actions"></div>
+    </section>
+    <section class="stage" aria-label="תצוגת פעולה">
+      <div class="scene" id="scene">
+        <canvas id="viewport" aria-label="תצוגה תלת־ממדית של פעולת החילוץ"></canvas>
+        <p id="stage-status" class="scene-status" role="status">טוען תצוגה</p>
+        <div class="timer" aria-label="זמן שנותר">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="dial dial-base" cx="24" cy="24" r="21"></circle>
+            <circle id="dial" class="dial dial-value" cx="24" cy="24" r="21" pathLength="1" stroke-dasharray="1 1"></circle>
+          </svg>
+          <span id="remaining" dir="ltr">—</span>
+        </div>
+      </div>
+      <div class="controls">
+        <button type="button" class="control" id="play" data-primary disabled>הפעלה</button>
+        <button type="button" class="control" id="reset" disabled>איפוס</button>
+        <input id="time" type="range" min="0" max="1" step="any" value="0" aria-label="ציר הזמן בשניות" disabled>
+        <output id="elapsed" class="elapsed" for="time">0.00 / 0.00</output>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

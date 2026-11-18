@@ -1,0 +1,1785 @@
+{
+  "tool": "motion-qa-v1",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "toolHashes": {
+    "motion-qa-v1/glb.mjs": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+    "motion-qa-v1/metrics.mjs": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+    "soccer-motion-v8/runtime/vendor/three.module.js": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+  },
+  "assetSha256": "f6528fe8e7f19b8a1b7d860dd6995c69475d58701fb36f87ccc8ef9aa4a53ec3",
+  "nativeHz": 30,
+  "sampleRates": [
+    60,
+    120
+  ],
+  "minimumExclusive": 88,
+  "referenceStances": {
+    "ready": {
+      "asset": "fire-rescue-people-v2/models/young-firefighter.glb",
+      "clip": "idle",
+      "scale": 1.03
+    },
+    "cradle": {
+      "asset": "firefighter-v1/motions/firefighter-clips.glb",
+      "clip": "rescued_handoff",
+      "interval": [
+        0,
+        0.12
+      ]
+    },
+    "shoulder-loaded": {
+      "asset": "fire-rescue-people-v2/models/female-firefighter.glb",
+      "clip": "rescue_carry",
+      "interval": [
+        1.55,
+        3.95
+      ]
+    },
+    "cat-loaded": {
+      "asset": "firefighter-v1/motions/firefighter-clips.glb",
+      "clip": "carry_cat"
+    }
+  },
+  "allChecksPassed": true,
+  "passedChecks": 120,
+  "minimumScore": 91.2,
+  "meanScore": 93.92,
+  "maximumSoleDriftMeters": 0.000503,
+  "maximumSoleOrJointFloorDepthMeters": 0.000368,
+  "maximumEngagedGripErrorMeters": 0.000007772997796986734,
+  "failedChecks": [],
+  "clips": [
+    {
+      "id": "clear-path",
+      "duration": 2.433333333333333,
+      "nativeFrames": 74,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94.2,
+          "coverage": 1,
+          "sampleCount": 148,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000114
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000131
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.46671
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.521922
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000193,
+          "soleOrJointFloorDepthMeters": 0.000222,
+          "floorProbeWorst": {
+            "t": 1.85,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000222,
+            "y": -0.000222
+          }
+        },
+        "120": {
+          "score": 94.2,
+          "coverage": 1,
+          "sampleCount": 294,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000114
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000131
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.468927
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.521922
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000193,
+          "soleOrJointFloorDepthMeters": 0.000222,
+          "floorProbeWorst": {
+            "t": 1.85,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000222,
+            "y": -0.000222
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "obstacle",
+          "sampleCount": 26,
+          "worst": {
+            "time": 1.1,
+            "errorMeters": 0.000004949142807287136
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "obstacle",
+          "sampleCount": 26,
+          "worst": {
+            "time": 1.1,
+            "errorMeters": 0.000004951623767615268
+          }
+        }
+      ]
+    },
+    {
+      "id": "force-door",
+      "duration": 2.3666666666666667,
+      "nativeFrames": 72,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94.5,
+          "coverage": 1,
+          "sampleCount": 150,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000035
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.00005
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.444355
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.444743
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000059,
+          "soleOrJointFloorDepthMeters": 0.000085,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "RightFoot",
+            "depthMeters": 0.000085,
+            "y": -0.000085
+          }
+        },
+        "120": {
+          "score": 94.5,
+          "coverage": 1,
+          "sampleCount": 292,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000035
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.00005
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.445465
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.444743
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000059,
+          "soleOrJointFloorDepthMeters": 0.000085,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "RightFoot",
+            "depthMeters": 0.000085,
+            "y": -0.000085
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "door",
+          "sampleCount": 25,
+          "worst": {
+            "time": 1.0666666666666667,
+            "errorMeters": 6.896022965211492e-8
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "door",
+          "sampleCount": 16,
+          "worst": {
+            "time": 1.0666666666666667,
+            "errorMeters": 5.647427703204208e-8
+          }
+        }
+      ]
+    },
+    {
+      "id": "cut-tool",
+      "duration": 2.8,
+      "nativeFrames": 85,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94,
+          "coverage": 1,
+          "sampleCount": 171,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000008
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000017
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.48566
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.675289
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000013,
+          "soleOrJointFloorDepthMeters": 0.000029,
+          "floorProbeWorst": {
+            "t": 0.216667,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000029,
+            "y": -0.000029
+          }
+        },
+        "120": {
+          "score": 94,
+          "coverage": 1,
+          "sampleCount": 339,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000008
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000017
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.486344
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.675289
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000013,
+          "soleOrJointFloorDepthMeters": 0.000029,
+          "floorProbeWorst": {
+            "t": 0.216667,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000029,
+            "y": -0.000029
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "RightHand",
+          "prop": "cutter",
+          "sampleCount": 77,
+          "worst": {
+            "time": 2.6333333333333333,
+            "errorMeters": 0.00000672837862083516
+          }
+        },
+        {
+          "bone": "LeftHand",
+          "prop": "cutter",
+          "sampleCount": 46,
+          "worst": {
+            "time": 1.7333333333333334,
+            "errorMeters": 0.000006605223190614
+          }
+        }
+      ]
+    },
+    {
+      "id": "lift-child",
+      "duration": 2.4,
+      "nativeFrames": 73,
+      "entryStance": "ready",
+      "exitStance": "cradle",
+      "measures": {
+        "60": {
+          "score": 94.1,
+          "coverage": 1,
+          "sampleCount": 148,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000128
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000193
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.581026
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.273298
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000217,
+          "soleOrJointFloorDepthMeters": 0.000326,
+          "floorProbeWorst": {
+            "t": 0.416667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000326,
+            "y": -0.000326
+          }
+        },
+        "120": {
+          "score": 94.1,
+          "coverage": 1,
+          "sampleCount": 292,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000128
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000193
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.587014
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.273298
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000217,
+          "soleOrJointFloorDepthMeters": 0.000326,
+          "floorProbeWorst": {
+            "t": 0.416667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000326,
+            "y": -0.000326
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "child",
+          "sampleCount": 36,
+          "worst": {
+            "time": 1.2999999523162842,
+            "errorMeters": 0.000006668922129137025
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "child",
+          "sampleCount": 36,
+          "worst": {
+            "time": 1.2999999523162842,
+            "errorMeters": 0.000006676290164658344
+          }
+        }
+      ]
+    },
+    {
+      "id": "carry-shoulder",
+      "duration": 2.6,
+      "nativeFrames": 79,
+      "entryStance": "shoulder-loaded",
+      "exitStance": "shoulder-loaded",
+      "measures": {
+        "60": {
+          "score": 95.4,
+          "coverage": 1,
+          "sampleCount": 161,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000068
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000029
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.313985
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.074981
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.086989
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000116,
+          "soleOrJointFloorDepthMeters": 0.000049,
+          "floorProbeWorst": {
+            "t": 0.75,
+            "bone": "RightFoot",
+            "depthMeters": 0.000049,
+            "y": -0.000049
+          }
+        },
+        "120": {
+          "score": 95.4,
+          "coverage": 1,
+          "sampleCount": 317,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000068
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000029
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.314281
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.074981
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.086989
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000116,
+          "soleOrJointFloorDepthMeters": 0.000049,
+          "floorProbeWorst": {
+            "t": 0.75,
+            "bone": "RightFoot",
+            "depthMeters": 0.000049,
+            "y": -0.000049
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "child",
+          "sampleCount": 79,
+          "worst": {
+            "time": 1.5333333015441895,
+            "errorMeters": 0.0000071232829101500156
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "child",
+          "sampleCount": 79,
+          "worst": {
+            "time": 0.7333333333333333,
+            "errorMeters": 0.0000071085065285703485
+          }
+        }
+      ]
+    },
+    {
+      "id": "carry-arms",
+      "duration": 2.6,
+      "nativeFrames": 79,
+      "entryStance": "cradle",
+      "exitStance": "cradle",
+      "measures": {
+        "60": {
+          "score": 95.2,
+          "coverage": 1,
+          "sampleCount": 161,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000067
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000034
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.31395
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.223121
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.086977
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000113,
+          "soleOrJointFloorDepthMeters": 0.000057,
+          "floorProbeWorst": {
+            "t": 0.75,
+            "bone": "RightFoot",
+            "depthMeters": 0.000057,
+            "y": -0.000057
+          }
+        },
+        "120": {
+          "score": 95.2,
+          "coverage": 1,
+          "sampleCount": 317,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000067
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000034
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.314229
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.223121
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.086977
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000113,
+          "soleOrJointFloorDepthMeters": 0.000057,
+          "floorProbeWorst": {
+            "t": 0.75,
+            "bone": "RightFoot",
+            "depthMeters": 0.000057,
+            "y": -0.000057
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "child",
+          "sampleCount": 79,
+          "worst": {
+            "time": 0.16666666666666666,
+            "errorMeters": 0.000007772997796986734
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "child",
+          "sampleCount": 79,
+          "worst": {
+            "time": 0.16666666666666666,
+            "errorMeters": 0.000007751919087347077
+          }
+        }
+      ]
+    },
+    {
+      "id": "set-down",
+      "duration": 2.6,
+      "nativeFrames": 79,
+      "entryStance": "cradle",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94,
+          "coverage": 1,
+          "sampleCount": 159,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000146
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000218
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.585823
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.273298
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000246,
+          "soleOrJointFloorDepthMeters": 0.000368,
+          "floorProbeWorst": {
+            "t": 2.216667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000368,
+            "y": -0.000368
+          }
+        },
+        "120": {
+          "score": 94,
+          "coverage": 1,
+          "sampleCount": 315,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000146
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000218
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.58672
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.273298
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000246,
+          "soleOrJointFloorDepthMeters": 0.000368,
+          "floorProbeWorst": {
+            "t": 2.216667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000368,
+            "y": -0.000368
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "child",
+          "sampleCount": 46,
+          "worst": {
+            "time": 1.2,
+            "errorMeters": 0.000006727883154
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "child",
+          "sampleCount": 41,
+          "worst": {
+            "time": 1.2,
+            "errorMeters": 0.000006739845902294488
+          }
+        }
+      ]
+    },
+    {
+      "id": "wrap-blanket",
+      "duration": 2.466666666666667,
+      "nativeFrames": 75,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94.9,
+          "coverage": 1,
+          "sampleCount": 150,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000007
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000022
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.285005
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.68345
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000011,
+          "soleOrJointFloorDepthMeters": 0.000037,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000037,
+            "y": -0.000037
+          }
+        },
+        "120": {
+          "score": 94.8,
+          "coverage": 1,
+          "sampleCount": 298,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000007
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000022
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.285924
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.68345
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000011,
+          "soleOrJointFloorDepthMeters": 0.000037,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000037,
+            "y": -0.000037
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "blanket",
+          "sampleCount": 36,
+          "worst": {
+            "time": 1.2333333333333334,
+            "errorMeters": 0.000005601844695407083
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "blanket",
+          "sampleCount": 33,
+          "worst": {
+            "time": 1.2333333333333334,
+            "errorMeters": 0.000005623242002247851
+          }
+        }
+      ]
+    },
+    {
+      "id": "assist-walk",
+      "duration": 2.8666666666666667,
+      "nativeFrames": 87,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 91.3,
+          "coverage": 1,
+          "sampleCount": 182,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.0001
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000023
+            },
+            "posePops": {
+              "status": "yellow",
+              "value": 1.221191
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.364526
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.076894
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000169,
+          "soleOrJointFloorDepthMeters": 0.00004,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.00004,
+            "y": -0.00004
+          }
+        },
+        "120": {
+          "score": 91.2,
+          "coverage": 1,
+          "sampleCount": 354,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.0001
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000023
+            },
+            "posePops": {
+              "status": "yellow",
+              "value": 1.22466
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.364526
+            },
+            "bodySliding": {
+              "status": "green",
+              "value": 0.076894
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000169,
+          "soleOrJointFloorDepthMeters": 0.00004,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.00004,
+            "y": -0.00004
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "civilian",
+          "sampleCount": 62,
+          "worst": {
+            "time": 0.6333333253860474,
+            "errorMeters": 0.00000682767730374183
+          }
+        }
+      ]
+    },
+    {
+      "id": "pull-under-table",
+      "duration": 3,
+      "nativeFrames": 91,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 91.5,
+          "coverage": 1,
+          "sampleCount": 188,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000298
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000161
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.550553
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.547352
+            },
+            "bodySliding": {
+              "status": "yellow",
+              "value": 0.298089
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000503,
+          "soleOrJointFloorDepthMeters": 0.000273,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000273,
+            "y": -0.000273
+          }
+        },
+        "120": {
+          "score": 91.5,
+          "coverage": 1,
+          "sampleCount": 368,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000298
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000161
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.554417
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.547352
+            },
+            "bodySliding": {
+              "status": "yellow",
+              "value": 0.298089
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000503,
+          "soleOrJointFloorDepthMeters": 0.000273,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000273,
+            "y": -0.000273
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "civilian",
+          "sampleCount": 50,
+          "worst": {
+            "time": 0.7666666507720947,
+            "errorMeters": 0.0000065798060307490416
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "civilian",
+          "sampleCount": 50,
+          "worst": {
+            "time": 0.7666666507720947,
+            "errorMeters": 0.000006579806030749077
+          }
+        }
+      ]
+    },
+    {
+      "id": "lift-cat",
+      "duration": 2.5,
+      "nativeFrames": 76,
+      "entryStance": "ready",
+      "exitStance": "cat-loaded",
+      "measures": {
+        "60": {
+          "score": 94.4,
+          "coverage": 1,
+          "sampleCount": 153,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000098
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000186
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.439088
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.44304
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000166,
+          "soleOrJointFloorDepthMeters": 0.000314,
+          "floorProbeWorst": {
+            "t": 0.416667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000314,
+            "y": -0.000314
+          }
+        },
+        "120": {
+          "score": 94.4,
+          "coverage": 1,
+          "sampleCount": 303,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000098
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000186
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.439523
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.44304
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000166,
+          "soleOrJointFloorDepthMeters": 0.000314,
+          "floorProbeWorst": {
+            "t": 0.416667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000314,
+            "y": -0.000314
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "cat",
+          "sampleCount": 38,
+          "worst": {
+            "time": 1.2,
+            "errorMeters": 0.000007476179712944171
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "cat",
+          "sampleCount": 38,
+          "worst": {
+            "time": 1.2,
+            "errorMeters": 0.00000747362049168351
+          }
+        }
+      ]
+    },
+    {
+      "id": "open-cage",
+      "duration": 2.6,
+      "nativeFrames": 79,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 94.2,
+          "coverage": 1,
+          "sampleCount": 159,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000165
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000153
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.450244
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.533886
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.00028,
+          "soleOrJointFloorDepthMeters": 0.000258,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "RightFoot",
+            "depthMeters": 0.000258,
+            "y": -0.000258
+          }
+        },
+        "120": {
+          "score": 94.2,
+          "coverage": 1,
+          "sampleCount": 315,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000165
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000153
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.45236
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.533886
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.00028,
+          "soleOrJointFloorDepthMeters": 0.000258,
+          "floorProbeWorst": {
+            "t": 0.15,
+            "bone": "RightFoot",
+            "depthMeters": 0.000258,
+            "y": -0.000258
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "gate",
+          "sampleCount": 11,
+          "worst": {
+            "time": 1.2,
+            "errorMeters": 7.418149965712797e-8
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "cage",
+          "sampleCount": 23,
+          "worst": {
+            "time": 1.4333332777023315,
+            "errorMeters": 3.4142605171107524e-8
+          }
+        }
+      ]
+    },
+    {
+      "id": "signal-clear",
+      "duration": 1.9,
+      "nativeFrames": 58,
+      "entryStance": "ready",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 93.9,
+          "coverage": 1,
+          "sampleCount": 118,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000003
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000017
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.666389
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.296902
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000005,
+          "soleOrJointFloorDepthMeters": 0.000029,
+          "floorProbeWorst": {
+            "t": 0.116667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000029,
+            "y": -0.000029
+          }
+        },
+        "120": {
+          "score": 93.9,
+          "coverage": 1,
+          "sampleCount": 232,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000003
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000017
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.666412
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.296902
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000005,
+          "soleOrJointFloorDepthMeters": 0.000029,
+          "floorProbeWorst": {
+            "t": 0.116667,
+            "bone": "RightFoot",
+            "depthMeters": 0.000029,
+            "y": -0.000029
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "RightHand",
+          "prop": "radio",
+          "sampleCount": 58,
+          "worst": {
+            "time": 0.9666666388511658,
+            "errorMeters": 0.000007530575101435801
+          }
+        }
+      ]
+    },
+    {
+      "id": "handoff-medic",
+      "duration": 2.6666666666666665,
+      "nativeFrames": 81,
+      "entryStance": "cradle",
+      "exitStance": "ready",
+      "measures": {
+        "60": {
+          "score": 93.5,
+          "coverage": 1,
+          "sampleCount": 164,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000003
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000012
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.747826
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.281242
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000005,
+          "soleOrJointFloorDepthMeters": 0.000021,
+          "floorProbeWorst": {
+            "t": 1.55,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000021,
+            "y": -0.000021
+          }
+        },
+        "120": {
+          "score": 93.5,
+          "coverage": 1,
+          "sampleCount": 324,
+          "redMetrics": 0,
+          "metrics": {
+            "footSliding": {
+              "status": "green",
+              "value": 0.000003
+            },
+            "floorPenetration": {
+              "status": "green",
+              "value": 0.000012
+            },
+            "posePops": {
+              "status": "green",
+              "value": 0.757145
+            },
+            "anatomy": {
+              "status": "green",
+              "value": 0
+            },
+            "ballContact": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "continuity": {
+              "status": "yellow",
+              "value": 1.281242
+            },
+            "bodySliding": {
+              "status": "not-applicable",
+              "value": null
+            },
+            "symmetry": {
+              "status": "green",
+              "value": 0
+            }
+          },
+          "footDriftMeters": 0.000005,
+          "soleOrJointFloorDepthMeters": 0.000021,
+          "floorProbeWorst": {
+            "t": 1.55,
+            "bone": "LeftFoot",
+            "depthMeters": 0.000021,
+            "y": -0.000021
+          }
+        }
+      },
+      "grips": [
+        {
+          "bone": "LeftHand",
+          "prop": "child",
+          "sampleCount": 37,
+          "worst": {
+            "time": 0.4,
+            "errorMeters": 0.0000074569709839681665
+          }
+        },
+        {
+          "bone": "RightHand",
+          "prop": "child",
+          "sampleCount": 37,
+          "worst": {
+            "time": 0.4,
+            "errorMeters": 0.000007448134423263804
+          }
+        }
+      ]
+    }
+  ]
+}
