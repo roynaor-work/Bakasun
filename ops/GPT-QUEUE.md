@@ -9,7 +9,7 @@
 - לא לשלוח הודעות, מיילים או פוסטים בשם רועי. לא לאשר רכישות, קרדיטים או שדרוג תוכנית.
 - אם מופיעה בקשת אישור, התחברות, תשלום או הודעת "הגעת למגבלה": לעצור ולדווח לרועי. לא להמשיך.
 - אם משהו נראה שונה מהמצופה (ממשק שהשתנה, שגיאה): לעצור אחרי ניסיון אחד, לרשום מה קרה.
-- לרוץ לפחות 5 שעות רצוף או עד שרועי כותב "הגעתי וחזרתי". לא יותר מ-12 משימות בסך הכול.
+- לרוץ לפחות 5 שעות רצוף או עד שרועי כותב "הגעתי וחזרתי". לא יותר מ-25 משימות בסך הכול (עודכן 18/11: רועי אישר ריצה רצופה ויש לו איפוס נוסף).
 
 ## נוהל כל 30 דקות
 1. פתיחת https://github.com/roynaor-work/Bakasun/branches (או `git ls-remote`) ובדיקה אם הענף של המשימה הנוכחית `codex/<שם>` קיים.
@@ -135,4 +135,55 @@ repo roynaor-work/Bakasun, ענף חדש codex/boars-levels-v1. רמת חשיב�
 רקע (ציטוט רועי): "מעולה כולל מסכי גשם וערפל, אפשר לשפר עוד את המסכים בהמשך, ואחרי זה לעלות רמת קושי / ועוד שלבים עם רמות קושי עולות / עוד שיפורי נשקים להמשך".
 מטרה: חבילת תוכן לחזירים ב-workout/island מעל codex/boars-world-v1 ו-boars-weapons-v2: 20 שלבים נוספים (JSON: גלים, סוגי חזירים, פריסה, מזג אוויר, יעד), 6 מסכי מזג משופרים (גשם, ערפל, שלג, לילה, סערה, שקיעה) כטקסטורות ושכבות אור, 12 שדרוגי נשק חדשים (שם, אפקט, מחיר, אייקון SVG 96), טבלת התקדמות קושי הדרגתית (פרמטרים בלבד).
 תיקייה חדשה בלבד: workout/island/design/boars-levels-v1/ עם levels.json, weather/, upgrades.json, icons/, preview.html (844x390), REPORT.md, LICENSES.md. עד 6MB. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+
+## תוספת 18/11 (ערב): משימות שחוסכות עבודה ל-Claude/Fable (תוצר: patches מוכנים להחלה, לא נכסים)
+כלל לכל המשימות כאן: לבנות את ה-patches מול `origin/main` העדכני ביום הריצה (git fetch לפני), להריץ `apply.sh` על עותק נקי ולוודא שהבדיקות הממוקדות עוברות (כולל `node workout/island/tools/offline-shell.mjs`), רשימות האופליין ממוינות, בלי WASM, כל שינוי מאחורי דגל URL שמחזיר את הקודם, בלי לשנות קבצים קיימים (תוצר patch בלבד), ובדוח: לפני/אחרי נמדד, סיכון וסדר החלה.
+
+### 15. codex/naval-battle-patches-v1 (ultra)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/naval-battle-patches-v1. רמת חשיבה: ultra.
+רקע (ציטוט רועי): "ספינות עובד מעולה / אפשר להגדיל את הכמות אויבים בהתחלה מאחר ויש הרבה חיים ואת כמות הירי שלהם גם / לא להקשות יותר מידי אבל להגדיל את הנפח קרב והאורך שלו".
+מטרה: patch לכוונון משחק הספינות ב-workout/island (קרא workout/island/minigames/naval*.mjs ואת workout/island/data/config.json): יותר אויבים בהתחלת השלב, יותר ירי אויב, קרב ארוך ועמוס יותר, בלי להקשות מדי. מדידה בבוטי ילד (שלוש רמות) לפני/אחרי: אחוזי ניצחון (יעד: שלב 1 בין 80% ל-90%, שלבים מאוחרים 40%-60%), אורך קרב (יעד: פי 1.5 עד פי 2), כמות יריות. חבר את codex/naval-sinking-v1 (טביעה ופגיעות) ו-codex/naval-sea-v2 (ים) אם יש בהם תועלת, בנפילה שקטה. דגל חזרה `?navalBattle=0`.
+תוצר: workout/island/design/naval-battle-patches-v1/ עם patches/, tests/, sim/, REPORT.md, apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+### 16. codex/fire-levels-patches-v1 (ultra)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/fire-levels-patches-v1. רמת חשיבה: ultra.
+רקע (ציטוט רועי): "צריך עוד כל שלוש שלבים כניסה לבניין ורמת קושי עולה כולל עוד קומות / בחילוץ צריך גם פעולת חילוץ ולא לחיצה על ירי מים / המרחק שהכבאית יורה מים צריך להיות קצר יותר / המשחק מתחיל עם כבאית במראה ישן ומתחלף אחרי כמה שניות".
+מטרה: patch למשחק כיבוי האש ב-workout/island (קרא workout/island/minigames/fire*.mjs ו-fire-v24*.mjs): (א) כניסה לבניין בכל שלב שלישי עם קושי עולה, עוד קומות (3 עד 10) מנכסי codex/fire-multifloor-v2 ו-codex/fire-interiors-v3, (ב) פעולת חילוץ אמיתית (לא ירי מים) לפי codex/fire-rescue-actions-v1 עם כפתור פעולה לפי מצב, (ג) טווח המים של הכבאית קצר יותר, (ד) המשאית נטענת פעם אחת ובאיכות הסופית: אין החלפה מישן לחדש אחרי כמה שניות (מצא את סיבת ההחלפה: טעינה ברמות איכות? תקן בטעינה מוקדמת או בדגם אחד), (ה) מדידה בבוט (ילד סבלני מנצח, ילד שלא עושה כלום כוכב אחד). דגל חזרה `?fireLevels=0`.
+תוצר: workout/island/design/fire-levels-patches-v1/ עם patches/, tests/, sim/, REPORT.md, apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+### 17. codex/hoops-polish-patches-v1 (max)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/hoops-polish-patches-v1. רמת חשיבה: max.
+רקע (ציטוט רועי): "כדורסל תקין, צריך שיפור במראה עדין / פגיעה בטבעת צריכה גם שיפור".
+מטרה: patch לשיפור מראה עדין ופגיעה בטבעת בכדורסל ב-workout/island: טבעת שרועדת ומתנדנדת בפגיעה (פיזיקה קלה: קפיצה, ריחוף כדור על הטבעת), רשת שזזה וחוזרת לצורה, צליל נקי לכל סוג פגיעה (מתוך codex/hoops-realism-v2 ו-hoops-referee-audio-v1), תאורה עדינה יותר, צל כדור, ליטוש מעברים. לכל שיפור דגל ומדידת עלות ביצועים (משולשים, קריאות ציור). דגל חזרה `?hoopsPolish=0`.
+תוצר: workout/island/design/hoops-polish-patches-v1/ עם patches/, tests/, REPORT.md, apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+### 18. codex/boars-levels-patches-v1 (ultra)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/boars-levels-patches-v1. רמת חשיבה: ultra.
+רקע (ציטוט רועי): "חזירים מעולה כולל מסכי גשם וערפל, אפשר לשפר עוד את המסכים בהמשך ואחרי זה לעלות רמת קושי אם ממשיכים ועוברים, ועוד שלבים עם רמות קושי עולות, ועוד שיפורי נשקים".
+מטרה: patch שמחבר את codex/boars-levels-v1 (20 שלבים, 6 מסכי מזג, 12 שדרוגי נשק) למשחק החזירים ב-workout/island/minigames/boar-island/: קבצי נתונים, מסך בחירת שלב, מזג אוויר, מסך שדרוגים, קושי עולה (פרמטרים). בדיקות ובוט (שלוש רמות). דגל `?boarsLevels=0`.
+תוצר: workout/island/design/boars-levels-patches-v1/ עם patches/, tests/, sim/, REPORT.md, apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+### 19. codex/pack-wiring-patches-v1 (max)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/pack-wiring-patches-v1. רמת חשיבה: max.
+מטרה: patch שמעתיק ורושם את כל חבילות הנכסים החדשות בצורה מכנית (בלי שינוי התנהגות משחק): לכל חבילה ב-codex/asset-adapters-v1 (copy-plan.sh ו-offline-entries.json): העתקה ל-workout/island/assets/<pack>/ (בלי מקורות וצילומים), רישום ברשימת workout/island/offline-manifest.json (שומר על רשימות ממוינות), רישיון ב-workout/island/ASSETS.md, ועדכון בדיקות סופרות קבצים (racing-v7 ודומיהן) בכוונה ובהסבר. לפי חבילות בלבד: hoops-realism-v2, hoops-motion-v14, hoops-arena-v2, tennis-motion-v2, tennis-ui-v2, soccer-crowd-people-v2, soccer-run-cycles-v3, soccer-keeper-motion-v3, soccer-celebrations-v1, fire-multifloor-v2, fire-rescue-people-v2, fire-fx-v2, alpine-runner-v1, alien-hits-v1, boars-weapons-v2, catch-vehicles-v2, naval-sinking-v1, racing-podium-v1, city-citizens-v1, ui-sounds-v1, lighting-presets-v1. מדידת גודל כולל לכל משחק (יעד: לא יותר מ-30MB למשחק) והצעת חלוקה.
+תוצר: workout/island/design/pack-wiring-patches-v1/ עם patches/ (patch לכל חבילה), tests/, REPORT.md (גדלים לפני/אחרי לכל משחק), apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
+```
+
+### 20. codex/alpine-runner-integration-patches-v1 (ultra)
+```
+repo roynaor-work/Bakasun, ענף חדש codex/alpine-runner-integration-patches-v1. רמת חשיבה: ultra (תן לזה זמן ארוך).
+רקע (ציטוט רועי): "הסקי: שהמסלול יהיה קצת יותר ארוך ויהיה בנוי בצורה של Subway Surfers, להמשיך בדיוק על אותו קו, פשוט לשנות אותו למשחק הזה."
+מטרה: patch שמחליף את מצב ה"ראנר" במשחק הסקי ב-workout/island/minigames/alpine-*.mjs בראנר אינסופי בשלושה נתיבים (מכניקה בלבד, נכסים מקוריים): שימוש במחולל המסלול מ-codex/logic-modules-v1 (runner-course-generator) ובנכסי codex/alpine-runner-v1, alpine-runner-themes-v2 ו-alpine-content-v1. שליטה בנגיעה (החלפת נתיב בהחלקה, קפיצה, החלקה), מכשולים, מטבעות, בונוסים, ליגה קיימת נשמרת (דגל `?alpineRunner=0` מחזיר את המשחק הקיים בדיוק), שמירת שיא. בדיקות, מדידת FPS ותקציב משולשים, ובוטים (שלוש רמות).
+תוצר: workout/island/design/alpine-runner-integration-patches-v1/ עם patches/, tests/, sim/, REPORT.md, apply.sh. אסור לערוך קבצים קיימים. push בסוף והדוח.
 ```
