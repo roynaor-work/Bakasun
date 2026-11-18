@@ -1,0 +1,398 @@
+diff --git a/tests/helpers/island-browser.mjs b/tests/helpers/island-browser.mjs
+index 6475a717a158e3c7055e2b5e42b326f49e839615..82bdd25d4746eedf691ef640ca6390dcfff9cb55 100644
+--- a/tests/helpers/island-browser.mjs
++++ b/tests/helpers/island-browser.mjs
+@@ -1,5 +1,6 @@
+ import { createServer } from 'node:http';
+-import { readFile, stat } from 'node:fs/promises';
++import { mkdir, mkdtemp, readFile, stat } from 'node:fs/promises';
++import { tmpdir } from 'node:os';
+ import path from 'node:path';
+ import { fileURLToPath, pathToFileURL } from 'node:url';
+
+@@ -203,3 +204,25 @@ export async function serveIsland(prefix = '/Bakasun/workout/island/') {
+     async close() { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); },
+   };
+ }
++
++/** Put generated evidence where a test run cannot overwrite a checked-in baseline. */
++export async function browserArtifacts(name) {
++  const base = process.env.ISLAND_CSP_AUDIT_DIR;
++  if (!base) return (await mkdtemp(path.join(tmpdir(), `${path.basename(name)}-`))) + path.sep;
++  const directory = path.resolve(base, name);
++  await mkdir(directory, {recursive: true});
++  return directory + path.sep;
++}
++
++/** Register cleanup before acquiring resources, and release them in reverse order. */
++export function browserCleanup(testContext) {
++  const cleanup = [];
++  testContext.after(async () => {
++    const errors = [];
++    for (const close of cleanup.reverse()) {
++      try { await close(); } catch (error) { errors.push(error); }
++    }
++    if (errors.length) throw new AggregateError(errors, 'Browser fixture cleanup failed');
++  });
++  return close => cleanup.push(close);
++}
+diff --git a/tests/island-alpine-ctrl-ski.test.mjs b/tests/island-alpine-ctrl-ski.test.mjs
+index 9914a58d0f29f4058294aec7a8de51b97520c011..a35e1384e12b1d84b60cd582299a88b3f513f60e 100644
+--- a/tests/island-alpine-ctrl-ski.test.mjs
++++ b/tests/island-alpine-ctrl-ski.test.mjs
+@@ -1,29 +1,29 @@
+ import assert from 'node:assert/strict';
+ import test from 'node:test';
+-import {mkdir} from 'node:fs/promises';
+-import {fileURLToPath} from 'node:url';
+-import {serveIsland, islandChromium, installIslandCspMonitor} from './helpers/island-browser.mjs';
++import {browserArtifacts, browserCleanup, serveIsland, islandChromium, installIslandCspMonitor} from './helpers/island-browser.mjs';
+
+ /** Alpine Rush control layout and multi-touch in the real island page (ISLAND_CSP_BROWSER=1), both phone orientations.
+  * - The steering stick sits in the left half of the screen, boost and every trick button in the right half.
+  * - Real touches (CDP Input.dispatchTouchEvent): a thumb landing on the left half of the slope floats the stick under it,
+  *   a second finger presses boost at the same time, steering keeps going, release clears everything.
+- * Screenshots land in workout/island/verification/ctrl-ski/. */
+-const out = fileURLToPath(new URL('../workout/island/verification/ctrl-ski/', import.meta.url));
++ * Screenshots go to the browser artifact directory. */
+
+ test('browser: stick left / actions right in both orientations, floating stick with boost under a second finger',
+-  {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 600000}, async () => {
+-  await mkdir(out, {recursive: true});
+-  const server = await serveIsland(), chromium = await islandChromium();
+-  try {
++  {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 600000}, async t => {
++  const out = await browserArtifacts('ctrl-ski');
++  const defer = browserCleanup(t);
++  const chromium = await islandChromium();
++  const server = await serveIsland();
++  defer(() => server.close());
+     for (const [width, height] of [[844, 390], [390, 844]]) {
+       const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader']});
+-      const context = await browser.newContext({viewport: {width, height}, hasTouch: true, deviceScaleFactor: 1, timezoneId: 'Asia/Jerusalem'});
+-      const csp = await installIslandCspMonitor(context);
+-      await context.route('**/data/featureFlags.json*', async route => { const response = await route.fetch(); await route.fulfill({response, json: {...await response.json(), events: false}}); });
+-      const page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
+-      page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/missing-alpine-rider|404/.test(m.text())) errors.push(m.text()); });
++      let csp;
+       try {
++        const context = await browser.newContext({viewport: {width, height}, hasTouch: true, deviceScaleFactor: 1, timezoneId: 'Asia/Jerusalem'});
++        csp = await installIslandCspMonitor(context);
++        await context.route('**/data/featureFlags.json*', async route => { const response = await route.fetch(); await route.fulfill({response, json: {...await response.json(), events: false}}); });
++        const page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
++        page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/missing-alpine-rider|404/.test(m.text())) errors.push(m.text()); });
+         await page.goto(server.url + '?dev=1', {waitUntil: 'networkidle'});
+         await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded);
+         await page.locator('[data-action=avatar-start]').tap();
+@@ -68,7 +68,9 @@ test('browser: stick left / actions right in both orientations, floating stick w
+         assert.equal(await page.evaluate(() => document.querySelector('.alpine-joystick').dataset.floating), undefined);
+         assert.equal(await page.evaluate(() => document.querySelector('.alpine-joystick').style.transform), '', 'the stick goes home');
+         assert.deepEqual(errors, []);
+-      } finally { await csp.assertClean().catch(() => {}); await browser.close(); await csp.dispose(); }
++        await csp.assertClean();
++      } finally {
++        try { await csp?.dispose(); } finally { await browser.close(); }
++      }
+     }
+-  } finally { await server.close(); }
+ });
+diff --git a/tests/workout-royiki.test.mjs b/tests/workout-royiki.test.mjs
+index d2b0beb72b99e536490ee38b096e367328c0616e..389ffbb234e723de12629a3b1a6e0fb868de41d6 100644
+--- a/tests/workout-royiki.test.mjs
++++ b/tests/workout-royiki.test.mjs
+@@ -9,7 +9,7 @@ import { ROYIKI, ROYIKI_SPEED } from '../workout/js/royiki-data.js';
+ import { ROYIKI_IDS, hasRoyiki, uniqueIds } from '../workout/js/royiki.js';
+ import { EXERCISES } from '../workout/js/exercises.js';
+ import { cycleMs } from '../workout/js/figure.js';
+-import { islandChromium } from './helpers/island-browser.mjs';
++import { browserCleanup, islandChromium } from './helpers/island-browser.mjs';
+
+ const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+ const W = path.join(root, 'workout');
+@@ -69,10 +69,8 @@ test('the two design catalogs together list the same 50 animations, with the sam
+   for (const e of list) { assert.equal(ROYIKI[e.id].ms, e.durationMs, e.id); assert.equal(ROYIKI[e.id].src, e.sourceCycleMs, e.id); }
+ });
+
+-// ---- דפדפן: מסך תרגיל ב-390×844 (דורש Playwright; בלעדיו מדלגים) ----
+-let chromium = null;
+-try { chromium = await islandChromium(); } catch { /* בלי Playwright */ }
+-const browserTest = chromium ? test : test.skip;
++// ---- דפדפן: מסך תרגיל ב-390×844 ----
++const browserEnabled = process.env.ISLAND_WORKOUT_BROWSER === '1';
+
+ async function serve() {
+   const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.mp4': 'video/mp4', '.ogg': 'audio/ogg', '.wav': 'audio/wav' };
+@@ -84,17 +82,34 @@ async function serve() {
+       res.writeHead(200, { 'content-type': types[path.extname(file)] || 'application/octet-stream', 'cache-control': 'no-store' }); res.end(await readFile(file));
+     } catch { res.writeHead(404).end(); }
+   });
+-  await new Promise(r => server.listen(0, '127.0.0.1', r));
+-  return { url: `http://127.0.0.1:${server.address().port}/workout/index.html`, close: () => new Promise(r => server.close(r)) };
++  await new Promise((resolve, reject) => {
++    server.once('error', reject);
++    server.listen(0, '127.0.0.1', resolve);
++  });
++  return {
++    url: `http://127.0.0.1:${server.address().port}/workout/index.html`,
++    close() {
++      return new Promise((resolve, reject) => {
++        server.close(error => error ? reject(error) : resolve());
++        server.closeAllConnections();
++      });
++    },
++  };
+ }
+
+-browserTest('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists', { timeout: 600000 }, async () => {
+-  const srv = await serve();
+-  const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--no-proxy-server'] });
+-  try {
+-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
++test('exercise screen shows the royiki animation, counts reps, falls back and the style choice persists',
++  { skip: !browserEnabled, timeout: 600000 }, async tctx => {
++    const defer = browserCleanup(tctx);
++    const chromium = await islandChromium();
++    const srv = await serve();
++    defer(() => srv.close());
++    const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined,
++      args: ['--use-gl=angle', '--use-angle=swiftshader', '--no-proxy-server'] });
++    defer(() => browser.close());
++    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, serviceWorkers: 'block' });
++    defer(() => ctx.close());
+     const page = await ctx.newPage();
+-    page.setDefaultTimeout(90000); page.setDefaultNavigationTimeout(90000); // npm test מריץ קבצי דפדפן במקביל; swiftshader איטי בעומס
++    page.setDefaultTimeout(90000); page.setDefaultNavigationTimeout(90000);
+     const errors = []; page.on('pageerror', e => errors.push(String(e)));
+     const external = []; page.on('request', r => { const u = new URL(r.url()); if (!['127.0.0.1', ''].includes(u.hostname) && u.protocol.startsWith('http')) external.push(r.url()); });
+     await page.goto(srv.url + '#/home');
+@@ -102,10 +117,11 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
+     for (const id of WANTED) {
+       await page.goto(srv.url + '#/exercise/' + id);
+       await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"] svg.royiki-svg', { timeout: 15000 });
+-      const t = () => page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime());
+-      const a = await t(); let b = a;
+-      for (let i = 0; i < 25 && b === a; i++) { await page.waitForTimeout(200); b = await t(); } // בעומס (npm test במקביל) המסגרת הראשונה מתעכבת
+-      assert.notEqual(a, b, id + ' did not animate'); /* ציר הזמן של ה-SMIL מתקדם (צילום פיקסלים איטי מדי ב-swiftshader) */
++      const initial = await page.locator('.exmedia.royiki svg').evaluate(svg => svg.getCurrentTime());
++      await page.waitForFunction(value => {
++        const svg = document.querySelector('.exmedia.royiki svg');
++        return svg && svg.getCurrentTime() !== value;
++      }, initial, { timeout: 5000 }).catch(error => { throw new Error(id + ' did not animate', {cause: error}); });
+     }
+     assert.equal(await page.locator('.exmedia.stage3d').count(), 0);
+     // ספירת חזרות: onRep לפי מחזור ה-SVG
+@@ -123,8 +139,11 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
+     await page.goto(srv.url + '#/exercise/squats');
+     await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"]');
+     await page.click('#help'); await page.waitForSelector('#helpbox .helpcard');
+-    const h1 = await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()); await page.waitForTimeout(400);
+-    assert.notEqual(h1, await page.evaluate(() => document.querySelector('.exmedia.royiki svg').getCurrentTime()));
++    const helpTime = await page.locator('.exmedia.royiki svg').evaluate(svg => svg.getCurrentTime());
++    await page.waitForFunction(value => {
++      const svg = document.querySelector('.exmedia.royiki svg');
++      return svg && svg.getCurrentTime() !== value;
++    }, helpTime, { timeout: 5000 });
+     // הגדרה: מעבר לתלת-ממד ולמקלות, נשמר אחרי טעינה מחדש
+     await page.goto(srv.url + '#/settings');
+     await page.selectOption('#animstyle', 'stick');
+@@ -139,11 +158,15 @@ browserTest('exercise screen shows the royiki animation, counts reps, falls back
+     await page.goto(srv.url + '#/exercise/push-ups'); await page.reload();
+     await page.waitForSelector('.exmedia.royiki[data-royiki-ready="true"]');
+     // כשל טעינה: נופלים לדמות הקיימת
+-    await page.evaluate(() => caches.delete('workout-royiki-v1')); /* אחרת הקובץ מגיע מהמטמון ולא מהרשת */
+-    await page.route('**/workout/royiki/burpees.svg', r => r.abort());
++    await page.evaluate(() => caches.delete('workout-royiki-v1'));
++    let blocked = 0;
++    await page.route('**/workout/royiki/burpees.svg*', route => {
++      blocked++;
++      return route.abort();
++    });
+     await page.goto(srv.url + '#/exercise/burpees'); await page.reload();
+     await page.waitForSelector('.exmedia.stage3d canvas, svg.figure', { timeout: 15000 });
+     assert.equal(await page.locator('.exmedia.royiki').count(), 0);
++    assert.ok(blocked > 0, 'the missing SVG request was intercepted');
+     assert.deepEqual(external, []); assert.deepEqual(errors, []);
+-  } finally { await browser.close(); await srv.close(); }
+ });
+diff --git a/workout/island/tests/aliens-naval-v24-browser.mjs b/workout/island/tests/aliens-naval-v24-browser.mjs
+index 91bfba8282281d8561ff291eb05e71a215974370..a64bc6fa5a13fdc5e99ab6dcb52d93c8818b4183 100644
+--- a/workout/island/tests/aliens-naval-v24-browser.mjs
++++ b/workout/island/tests/aliens-naval-v24-browser.mjs
+@@ -14,8 +14,9 @@
+ //   that hits it under water. Frames and verification.json go to verification/aliens-naval-v24/.
+ // Run: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js CHROMIUM_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome node workout/island/tests/aliens-naval-v24-browser.mjs
+ import {verify} from './night-browser.mjs';
+-import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/aliens-naval-v24/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++import {pathToFileURL} from 'node:url';
++import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
++const frames=pathToFileURL(await browserArtifacts('frames'));
+ const SHOTS=Number(process.env.SHOTS||20),only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+ let failures=[];
+diff --git a/workout/island/tests/boar-fx-v241-browser.mjs b/workout/island/tests/boar-fx-v241-browser.mjs
+index faa93b0c36428e2ec2ef47a7a8ada83864a5c759..36d178e13f8d95e84b9fa406193ff7263d51366e 100644
+--- a/workout/island/tests/boar-fx-v241-browser.mjs
++++ b/workout/island/tests/boar-fx-v241-browser.mjs
+@@ -7,12 +7,14 @@
+ // one standing boar, and the crosshair placed on it. The game is read only (__boar.fx/state/clock: which round and sound each shot used,
+ // what flies now). The container renders about a frame a second, so the frame loop is held while a frame is photographed.
+ // Frames and boar-fx.json go to verification/naval-boars-v241/.
+-import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
++import {browserArtifacts, serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ const FX=process.env.FX||'v241',T0=Date.now(),log=(...a)=>console.error(`[${FX} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
+-const out=new URL('../verification/naval-boars-v241/',import.meta.url).pathname;await mkdir(out+'frames/',{recursive:true});
+-const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
+-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
++const out=await browserArtifacts('boar-fx');await mkdir(out+'frames/',{recursive:true});
++const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
++let browser;
++try {
++browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
+ await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','on');}catch{}});
+ const page=await ctx.newPage();page.setDefaultTimeout(600000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+@@ -54,6 +56,6 @@ for(const key of order){
+ const state=await frame.evaluate(()=>({shotsBy:window.__boar.state.shotsBy,audio:window.__boar.state.audio}));
+ const result={fx:FX,env,rows,shotsBy:state.shotsBy,errors};await writeFile(`${out}boar-fx-${FX}.json`,JSON.stringify(result,null,1)+'\n');
+ console.log(JSON.stringify({fx:FX,rows:rows.map(r=>({key:r.key,shots:r.shots,kinds:r.kinds,sounds:r.sounds,colours:Object.keys(r.streaks||{}),fxShells:r.fxShells})),errors}));
+-await browser.close();await server.close();
+ const nonButton=Object.entries(state.shotsBy||{}).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
+-if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,state.shotsBy);process.exit(1);}
++if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,state.shotsBy);process.exitCode=1;}
++} finally { try { await browser?.close(); } finally { await server.close(); } }
+diff --git a/workout/island/tests/fire-v24-browser.mjs b/workout/island/tests/fire-v24-browser.mjs
+index bfbdfc70f7b85b02c26c1025ead55c68535a190c..e5c5d4060c63f9c244c56fa3f4821888dfe4d9e5 100644
+--- a/workout/island/tests/fire-v24-browser.mjs
++++ b/workout/island/tests/fire-v24-browser.mjs
+@@ -8,13 +8,15 @@
+ //   CHROMIUM_PATH=... ISLAND_PLAYWRIGHT=... node workout/island/tests/fire-v24-browser.mjs
+ import {mkdir,writeFile,stat,readFile} from 'node:fs/promises';
+ import {fileURLToPath} from 'node:url';
+-import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
++import {browserArtifacts, serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
+ import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
+
+-const directory=fileURLToPath(new URL('../verification/fire-v24/',import.meta.url)),shots=directory+'shots/';await mkdir(shots,{recursive:true});
++const directory=await browserArtifacts('fire-v24'),shots=directory+'shots/';await mkdir(shots,{recursive:true});
+ const island=fileURLToPath(new URL('../',import.meta.url));
+ const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
+-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium-1243/chrome-linux64/chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
++let browser;
++try {
++browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+ const report={startedAt:new Date().toISOString(),viewport:'844x390 hasTouch isMobile, SwiftShader',runs:{},checks:{}};let failures=0;
+ const check=(name,pass,detail={})=>{report.checks[name]={pass:Boolean(pass),...detail};if(!pass){failures++;console.log('FAIL',name,JSON.stringify(detail).slice(0,500));}else console.log('ok  ',name);};
+
+@@ -186,5 +188,5 @@ try{
+ }catch(error){failures++;report.error=String(error.stack||error).slice(0,2000);console.log(report.error);}
+ report.failures=failures;report.finishedAt=new Date().toISOString();
+ await writeFile(directory+'fire-v24-browser.json',JSON.stringify(report,null,1)+'\n');
+-await browser.close();await server.close?.();
+-console.log(failures?`${failures} failed`:'all passed');process.exit(failures?1:0);
++console.log(failures?`${failures} failed`:'all passed');process.exitCode=failures?1:0;
++} finally { try { await browser?.close(); } finally { await server.close(); } }
+diff --git a/workout/island/tests/naval-v241-browser.mjs b/workout/island/tests/naval-v241-browser.mjs
+index 87abfaa499cb514917d55b9f8cdd3486e1e925d4..ccceb5a62216169f2c5f0b6c793b81aff4fb94e3 100644
+--- a/workout/island/tests/naval-v241-browser.mjs
++++ b/workout/island/tests/naval-v241-browser.mjs
+@@ -13,8 +13,9 @@
+ // Frames and verification.json go to verification/naval-boars-v241/ (prefix naval-).
+ // Run: PLAYWRIGHT_MODULE=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tests/naval-v241-browser.mjs
+ import {verify} from './night-browser.mjs';
+-import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/naval-boars-v241/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++import {pathToFileURL} from 'node:url';
++import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
++const frames=pathToFileURL(await browserArtifacts('frames'));
+ const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ let failures=[];
+ await verify('naval-boars-v241',[{width:844,height:390,isMobile:true}],async({page,context,viewport,tick,snap,start,exit,nav})=>{
+diff --git a/workout/island/tests/naval-v7-browser.mjs b/workout/island/tests/naval-v7-browser.mjs
+index 4b1822dad881a6e2acb37dcacd5284ed0dc53646..37c3b070f7aad3c71ab315388695ebeb58f33b9c 100644
+--- a/workout/island/tests/naval-v7-browser.mjs
++++ b/workout/island/tests/naval-v7-browser.mjs
+@@ -2,9 +2,9 @@
+ // NAVAL_V7_MODE=blocked blocks assets/naval-v7/ so the game must fall back to the earlier Meshy boats (the "before" picture and the silent-fallback test).
+ // Writes verification/gpt-v7-naval-fire-defense/naval-<mode>.json and naval-<mode>.png.
+ import {verify} from './night-browser.mjs';
+-import {writeFile,mkdir} from 'node:fs/promises';
+-import {fileURLToPath} from 'node:url';
+-const mode=process.env.NAVAL_V7_MODE||'on',out=fileURLToPath(new URL('../verification/gpt-v7-naval-fire-defense/',import.meta.url));await mkdir(out,{recursive:true});
++import {writeFile} from 'node:fs/promises';
++import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
++const mode=process.env.NAVAL_V7_MODE||'on',out=await browserArtifacts('naval-v7');
+ await verify('gpt-v7-naval-fire-defense/run-'+mode,[{width:844,height:390}],async({page,tick,snap,start,assert})=>{
+  // The island service worker answers asset requests itself, so page.route cannot see them: fail the two loaders in the page (GLB fetch, atlas image).
+  if(mode==='blocked')await page.evaluate(()=>{const f=window.fetch.bind(window);window.fetch=(u,...a)=>String(u?.url||u).includes('/naval-v7/')?Promise.reject(new TypeError('blocked')):f(u,...a);const d=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');Object.defineProperty(HTMLImageElement.prototype,'src',{...d,set(v){if(String(v).includes('/naval-v7/')){setTimeout(()=>this.dispatchEvent(new Event('error')),0);return;}d.set.call(this,v);}});});
+diff --git a/workout/island/tests/night-browser.mjs b/workout/island/tests/night-browser.mjs
+index 45497987753f082d2df7cf5afc21544b5dd0a9ee..f7ca12cef1f895ebbcce7ab06a48bd2033a341d0 100644
+--- a/workout/island/tests/night-browser.mjs
++++ b/workout/island/tests/night-browser.mjs
+@@ -1,15 +1,18 @@
+ import assert from 'node:assert/strict';
+ import {createRequire} from 'node:module';
+-import {mkdir,writeFile} from 'node:fs/promises';
+-import {fileURLToPath} from 'node:url';
+-import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
++import {writeFile} from 'node:fs/promises';
++import {browserArtifacts,islandChromium,serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
+ import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
+-const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
++const require=createRequire(import.meta.url);
+ export async function verify(part,viewports,scenario){
+- const directory=process.env.ISLAND_CSP_AUDIT_DIR?process.env.ISLAND_CSP_AUDIT_DIR.replace(/[\\/]$/,'')+'/'+part+'/':fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(directory,{recursive:true});
++ const directory=await browserArtifacts(part);
+  const prefix=part.toUpperCase(),width=Number(process.env[prefix+'_WIDTH']);if(width)viewports=[{width,height:Number(process.env[prefix+'_HEIGHT'])||390}];
+- const server=await serveIsland('/workout/island/'),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});const reports=[];
+- try{for(const viewport of viewports){const {isMobile=false,...size}=viewport,context=await browser.newContext({viewport:size,hasTouch:true,isMobile:Boolean(isMobile),deviceScaleFactor:1});context.setDefaultTimeout(240000);const csp=await installIslandCspMonitor(context),page=await context.newPage(),errors=[],outside=[],shots=[];await csp.attachPage(page);
++ const chromium=process.env.PLAYWRIGHT_MODULE?require(process.env.PLAYWRIGHT_MODULE).chromium:await islandChromium();
++ const server=await serveIsland('/workout/island/'),reports=[];
++ let browser;
++ try{
++  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
++ for(const viewport of viewports){const {isMobile=false,...size}=viewport,context=await browser.newContext({viewport:size,hasTouch:true,isMobile:Boolean(isMobile),deviceScaleFactor:1});context.setDefaultTimeout(240000);const csp=await installIslandCspMonitor(context),page=await context.newPage(),errors=[],outside=[],shots=[];await csp.attachPage(page);
+   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});
+   await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=undefined;Object.defineProperty(screen.orientation,'lock',{configurable:true,value:async()=>{throw Error('unsupported');}});});
+   const tick=ms=>page.clock.runFor(ms),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot),tap=async s=>{const target=page.locator(s);if(s.includes('data-ammo-index')&&!await target.isVisible()&&await page.locator('.naval-weapon-picker').count()){await page.locator('.naval-weapon-picker').tap();await page.clock.runFor(200);}await target.tap();},nav=()=>waitForGameNavigation(page),ready=()=>waitForGameStart(page);
+@@ -29,5 +32,5 @@ export async function verify(part,viewports,scenario){
+    try{await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await csp.dispose();}
+    if(!suiteError&&auditError)throw auditError;
+   }
+- }await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{await browser.close();await server.close();}
++ }await writeFile(directory+(width?`${width}-verification.json`:'verification.json'),JSON.stringify({part,browser:'Chromium / SwiftShader',browserVersion:browser.version(),physicalPhone:false,iPhone:false,phoneFPS:false,reports})+'\n');}finally{try{await browser?.close();}finally{await server.close();}}
+ }
+diff --git a/workout/island/tests/racing-v24-touch-browser.mjs b/workout/island/tests/racing-v24-touch-browser.mjs
+index 16ea43bd891b638dad4505fa47de04381b94cbcd..288aa387a4fbb2ba6e93e38188c758a95b777856 100644
+--- a/workout/island/tests/racing-v24-touch-browser.mjs
++++ b/workout/island/tests/racing-v24-touch-browser.mjs
+@@ -16,10 +16,10 @@
+ // Usage: CHROMIUM_PATH=/opt/pw-browsers/chromium PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js RV24_SCENARIO=turbo RV24_PART=racing-v24-fixes/turbo-after \
+ //        [RV24_QUERY='racingTurbo=v23'] [RV24_FPS=30] node workout/island/tests/racing-v24-touch-browser.mjs
+ import {mkdir,writeFile} from 'node:fs/promises';
+-import {fileURLToPath} from 'node:url';
++import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
+ import {verify} from './night-browser.mjs';
+ const scenario=process.env.RV24_SCENARIO||'turbo',part=process.env.RV24_PART||'racing-v24-fixes/'+scenario,extra=process.env.RV24_QUERY||'',FPS=Number(process.env.RV24_FPS)||30;
+-const dir=fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(dir+'frames/',{recursive:true});
++const dir=await browserArtifacts(part);await mkdir(dir+'frames/',{recursive:true});
+ const FRAME=Math.round(1000/FPS);
+
+ /** In-page audio log, installed before the race session creates its AudioContext: one-shots (buffer sources without loop, oscillators) with the race time,
+diff --git a/workout/island/tests/tennis-aliens-v24-1-browser.mjs b/workout/island/tests/tennis-aliens-v24-1-browser.mjs
+index 23187e0da7c15db21de5f4996b498ebba31d6c13..c3ada914facc71c027dbbb0d9d08a0ca778273b4 100644
+--- a/workout/island/tests/tennis-aliens-v24-1-browser.mjs
++++ b/workout/island/tests/tennis-aliens-v24-1-browser.mjs
+@@ -11,8 +11,9 @@
+ //      ONLY=aliens|tennis node workout/island/tests/tennis-aliens-v24-1-browser.mjs   (frames and verification.json: verification/tennis-aliens-v24-1/)
+ // The load time before/after is measured on a real clock by workout/island/tools/tennis-load-ab.mjs.
+ import {verify} from './night-browser.mjs';
+-import {mkdir} from 'node:fs/promises';
+-const frames=new URL('../verification/tennis-aliens-v24-1/frames/',import.meta.url);await mkdir(frames,{recursive:true});
++import {pathToFileURL} from 'node:url';
++import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
++const frames=pathToFileURL(await browserArtifacts('frames'));
+ const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
+ const V24={aliens:'&alienVulcan=v24&alienHud=v24&alienArsenal=0&alienEnemyFire=v24',tennis:'&tennisGrip=0&tennisOut=v24&tennisReceive=0&tennisLoad=v24'};
+ let failures=[];
