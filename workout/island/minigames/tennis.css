@@ -146,7 +146,8 @@
 .game-screen[data-game=tennis] .tennis-out-sign.tennis-call[data-call=net]{box-shadow:0 3px 10px #0007,inset 0 4px 0 #d4bf82}
 .game-screen[data-game=tennis] .tennis-out-sign.tennis-call bdi{left:10px;top:9px;width:116px;height:42px;font:900 31px/1 system-ui,sans-serif;letter-spacing:1px;direction:ltr;color:#fff4dc}
 .game-screen[data-game=tennis] .tennis-call-icon{position:absolute;right:8px;top:5px;width:50px;height:50px;background:no-repeat center/contain}
-@keyframes tennis-call-pop{from{transform:translateX(-50%) scale(.6);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+/* scale only (no fade-in): the plate is readable from its first frame even if the animation is held back */
+@keyframes tennis-call-pop{from{transform:translateX(-50%) scale(.78)}to{transform:translateX(-50%) scale(1)}}
 @media (prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .tennis-out-sign.tennis-call{animation:none}}
 /* v24.4 controls (tennis-ui2.mjs, ?tennisUi=v24 off): the Codex tennis-ui-v2 plates; positions and sizes are set inline from UI2. */
 .game-screen[data-game=tennis] .soccer-actions.tennis-ui2{right:max(44px,env(safe-area-inset-right));bottom:max(28px,env(safe-area-inset-bottom));width:208px;height:196px}

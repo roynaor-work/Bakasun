@@ -43,7 +43,7 @@ test('the copied Codex art is on disk, listed, offline, and licensed',()=>{
 });
 test('help text follows the controls: v24.4 names the serve plate and the bar on the right edge; ?tennisUi=v24 keeps the v24.3 wording',()=>{
  const strings=JSON.parse(readFileSync(new URL('data/strings.he.json',root),'utf8')),activity=readFileSync(new URL('ui/activity.mjs',root),'utf8');
- assert.match(strings['minigame.tennis.help.2'],/כפתור ההגשה/);assert.match(strings['minigame.tennis.help.1'],/בקצה הימני/);
+ assert.match(strings['minigame.tennis.help.2'],/כפתור ההגשה/);assert.match(strings['minigame.tennis.help.1'],/בצד ימין/);
  assert.match(strings['minigame.tennis.help.2.v243'],/החצים העולים/);assert.match(strings['minigame.tennis.help.1.v243'],/המד שבצד ליד הכפתורים/);
  assert.match(activity,/id==='tennis'&&polishValue\('tennisUi'\)==='v24'\)\{keys\[0\]\+='\.v243';keys\[1\]\+='\.v243';\}/);
 });
