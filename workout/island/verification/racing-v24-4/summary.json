@@ -1,0 +1,380 @@
+{
+ "pitseq": {
+  "query": "",
+  "playerPitEvents": [
+   {
+    "t": 5.033,
+    "type": "pitRequest",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 96.433,
+    "type": "pitIn",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 101.233,
+    "type": "pitStop",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 101.333,
+    "type": "pitChange",
+    "car": "player"
+   },
+   {
+    "t": 103.733,
+    "type": "pitDone",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 114.933,
+    "type": "pitExit",
+    "car": "player",
+    "lap": 2
+   }
+  ],
+  "stopSeconds": 2.5,
+  "crewAtChange": {
+   "actors": 6,
+   "visible": true,
+   "t": 0.4727777777777778,
+   "lift": 0.0018758093278463644,
+   "light": "red",
+   "solves": 13,
+   "wheels": {
+    "front_left": {
+     "old": "Hub/front_left",
+     "fresh": "racing-pit-seq",
+     "own": false
+    },
+    "front_right": {
+     "old": "Hub/front_right",
+     "fresh": "racing-pit-seq",
+     "own": false
+    },
+    "rear_left": {
+     "old": "Hub/rear_left",
+     "fresh": "racing-pit-seq",
+     "own": false
+    },
+    "rear_right": {
+     "old": "Hub/rear_right",
+     "fresh": "racing-pit-seq",
+     "own": false
+    }
+   },
+   "stage": "jack_up",
+   "replaced": 0
+  },
+  "kerbRumbleShotsInPit": 0,
+  "pitOneShots": [
+   "jack.ogg",
+   "wheel_gun_loosen.ogg",
+   "wheel_drop.ogg",
+   "wheel_attach.ogg",
+   "wheel_gun_tighten.ogg",
+   "crew_cheer.ogg",
+   "engine_exit.ogg"
+  ],
+  "loopPeakLevelsInPit": {
+   "generated:61739": 0.0265,
+   "racing-audio-v2/tyre-squeal.ogg": 1,
+   "racing-audio-v5/pit-engine-slow.ogg": 0.0253,
+   "racing-audio-v5/pit-limiter.ogg": 0.0101,
+   "racing-audio-v2/wind-speed.ogg": 0.0096,
+   "racing-audio-v5/pit-bay-proximity.ogg": 0.0042,
+   "racing-audio-v5/pit-crew-background.ogg": 0.0032
+  },
+  "cars": [
+   {
+    "id": "player",
+    "rank": 10,
+    "lap": 2,
+    "tyre": 0.992,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-1",
+    "rank": 2,
+    "lap": 2,
+    "tyre": 0.95,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-2",
+    "rank": 7,
+    "lap": 2,
+    "tyre": 0.982,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-3",
+    "rank": 1,
+    "lap": 2,
+    "tyre": 0.944,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-4",
+    "rank": 4,
+    "lap": 2,
+    "tyre": 0.968,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-5",
+    "rank": 8,
+    "lap": 2,
+    "tyre": 0.985,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-6",
+    "rank": 3,
+    "lap": 2,
+    "tyre": 0.955,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-7",
+    "rank": 9,
+    "lap": 2,
+    "tyre": 0.987,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-8",
+    "rank": 5,
+    "lap": 2,
+    "tyre": 0.974,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-9",
+    "rank": 6,
+    "lap": 2,
+    "tyre": 0.979,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   }
+  ]
+ },
+ "pitseq-before": {
+  "query": "racingPitSeq=0&racingAudioV5=0&racingIdle=0&racingPass=v24",
+  "playerPitEvents": [
+   {
+    "t": 5.033,
+    "type": "pitRequest",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 96.433,
+    "type": "pitIn",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 101.133,
+    "type": "pitStop",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 101.933,
+    "type": "pitChange",
+    "car": "player"
+   },
+   {
+    "t": 103.933,
+    "type": "pitDone",
+    "car": "player",
+    "lap": 1
+   },
+   {
+    "t": 115.733,
+    "type": "pitExit",
+    "car": "player",
+    "lap": 2
+   }
+  ],
+  "stopSeconds": 2.8,
+  "crewAtChange": {
+   "actors": 6,
+   "visible": true,
+   "phase": "change",
+   "lamp": "red"
+  },
+  "kerbRumbleShotsInPit": 45,
+  "pitOneShots": [
+   "jack.ogg",
+   "wheel_gun_loosen.ogg",
+   "wheel_drop.ogg",
+   "wheel_attach.ogg",
+   "wheel_gun_tighten.ogg",
+   "crew_cheer.ogg",
+   "engine_exit.ogg"
+  ],
+  "loopPeakLevelsInPit": {
+   "racing-audio-v2/tyre-squeal.ogg": 1,
+   "generated:61739": 0.0241,
+   "racing-audio-v2/wind-speed.ogg": 0.0092
+  },
+  "cars": [
+   {
+    "id": "player",
+    "rank": 10,
+    "lap": 2,
+    "tyre": 0.991,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-1",
+    "rank": 1,
+    "lap": 2,
+    "tyre": 0.941,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-2",
+    "rank": 3,
+    "lap": 2,
+    "tyre": 0.956,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-3",
+    "rank": 2,
+    "lap": 2,
+    "tyre": 0.947,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-4",
+    "rank": 5,
+    "lap": 2,
+    "tyre": 0.974,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-5",
+    "rank": 9,
+    "lap": 2,
+    "tyre": 0.987,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-6",
+    "rank": 7,
+    "lap": 2,
+    "tyre": 0.982,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-7",
+    "rank": 8,
+    "lap": 2,
+    "tyre": 0.985,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-8",
+    "rank": 4,
+    "lap": 2,
+    "tyre": 0.968,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   },
+   {
+    "id": "ai-9",
+    "rank": 6,
+    "lap": 2,
+    "tyre": 0.979,
+    "pits": 1,
+    "pitLaps": [
+     1
+    ],
+    "cancelled": false
+   }
+  ]
+ }
+}

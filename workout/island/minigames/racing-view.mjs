@@ -260,7 +260,11 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
  // and the Codex pit crew at the player's box (racing-pit-crew.mjs, 3.5 MB): loaded in the background, never on a weak device, ?racingPitCrew=0 never
  let pitCrew=null;
  if(f1Look&&!disposed){try{const pv=await import('./racing-pit-view.mjs?v=island-v2-20261107-17');if(pitsOn!==undefined?pitsOn:pv.pitBoxesOn(stage)){pv.paintPitBoxes({T,scene,track,keep,count:carCount,colors:carColors});
-  if(!lite)import('./racing-pit-crew.mjs?v=island-v2-20261107-17').then(m=>m.pitCrewEnabled()?m.loadPitCrew({T,GLTFLoader,track,count:carCount,team:carColors[0],keep}):null).then(c=>{if(!c)return;if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-crew');console.warn('pit crew',e?.message||e);});}}
+  // racing-v24.4: the Codex pit sequence v2 (racing-pit-seq.mjs: four old wheels off, four new on, two jacks) on the player's formula car; ?racingPitSeq=0, a car
+  // without the formula wheels or any load problem: the v1 crew below
+  const crewV1=()=>{if(!lite)import('./racing-pit-crew.mjs?v=island-v2-20261107-17').then(m=>m.pitCrewEnabled()?m.loadPitCrew({T,GLTFLoader,track,count:carCount,team:carColors[0],keep}):null).then(c=>{if(!c)return;if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-crew');console.warn('pit crew',e?.message||e);});};
+  if(!lite&&cars[0]?.formula&&new URLSearchParams(globalThis.location?.search||'').get('racingPitSeq')!=='0'&&new URLSearchParams(globalThis.location?.search||'').get('racingPitCrew')!=='0')import('./racing-pit-seq.mjs?v=island-v2-20261107-17').then(m=>m.loadPitSeq({T,GLTFLoader,track,count:carCount,team:carColors[0],keep,car:cars[0]})).then(c=>{if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-seq');console.warn('pit seq',e?.message||e);crewV1();});
+  else crewV1();}}
   catch(e){failures.push('pit-boxes');console.warn('pit boxes',e?.message||e);}}
  const nearRank=new Map(),FULL_RIVALS=4;
  const camTarget=new T.Vector3(),desired=new T.Vector3(),look=new T.Vector3(),carPosition=new T.Vector3(),cameraOffset=new T.Vector3(),lookOffset=new T.Vector3();

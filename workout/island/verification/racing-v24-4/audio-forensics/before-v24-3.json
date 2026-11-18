@@ -1,0 +1,406 @@
+{
+ "generatedAt": "2026-11-18T10:59:18.448Z",
+ "seconds": 60,
+ "games": {
+  "islandRacing": {
+   "game": "islandRacing",
+   "seconds": 60,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 6330,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:39993/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:39993/workout/island/ui/activity.mjs:66:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 6372,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:39993/workout/island/minigames/racing-audio.mjs:61:13) < unlock (http://127.0.0.1:39993/workout/island/minigames/racing-unlock.mjs:6:31)"
+    }
+   ],
+   "frames": 1217,
+   "phases": {
+    "(none)": {
+     "frames": 3,
+     "s25": 0,
+     "s12": 0.001,
+     "maxDb": -59.7,
+     "audible": 3
+    },
+    "countdown": {
+     "frames": 459,
+     "s25": 0,
+     "s12": 0.001,
+     "maxDb": -59.7,
+     "audible": 459
+    },
+    "racing": {
+     "frames": 755,
+     "s25": 0.003,
+     "s12": 0.007,
+     "maxDb": -49.8,
+     "audible": 755
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 5,
+     "live": 4,
+     "loop": 0,
+     "phases": {
+      "null": 1,
+      "racing": 4
+     }
+    },
+    "osc:custom": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "generated:61739@44100": {
+     "count": 3,
+     "live": 2,
+     "loop": 1,
+     "phases": {
+      "null": 1,
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v2/tyre-squeal.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/wind-speed.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v3/brake-squeal-loop.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-light.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-medium.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v4/brake-loop-hard.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:triangle": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:sawtooth": {
+     "count": 5,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 5
+     }
+    },
+    "assets/racing-audio-v2/pass-whoosh.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    },
+    "assets/racing-audio-v4/car-bump-soft.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v4/side-scrape.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    }
+   },
+   "oscillators": 12,
+   "filters": 8,
+   "segments": [],
+   "restartWhistles": 0,
+   "liveTones": [],
+   "liveGlides": [],
+   "liveHums": [],
+   "liveHiss": [],
+   "bands": {
+    "standing": {
+     "frames": 13,
+     "bands": [
+      0.6952,
+      0.3038,
+      0.001,
+      0,
+      0,
+      0
+     ],
+     "flat": 0.128,
+     "lvl": -62,
+     "above2k": 0,
+     "db": [
+      -55.6,
+      -59.4,
+      -84.4,
+      null,
+      null,
+      null
+     ],
+     "above2kDb": null
+    },
+    "slow": {
+     "frames": 241,
+     "bands": [
+      0.7911,
+      0.2004,
+      0.0084,
+      0.0001,
+      0,
+      0
+     ],
+     "flat": 0.081,
+     "lvl": -54.8,
+     "above2k": 0.0001,
+     "db": [
+      -49,
+      -55.2,
+      -68.4,
+      -86.5,
+      null,
+      null
+     ],
+     "above2kDb": -86.5
+    },
+    "fast": {
+     "frames": 501,
+     "bands": [
+      0.7839,
+      0.2017,
+      0.0067,
+      0.0039,
+      0.0034,
+      0.0004
+     ],
+     "flat": 0.233,
+     "lvl": -53.7,
+     "above2k": 0.0078,
+     "db": [
+      -47.8,
+      -53.7,
+      -67.6,
+      -68.4,
+      -68.7,
+      -77.4
+     ],
+     "above2kDb": -65.3
+    }
+   },
+   "bandsAll": {
+    "all": {
+     "frames": 3,
+     "bands": [
+      0.5074,
+      0.4918,
+      0.0008,
+      0,
+      0,
+      0
+     ],
+     "flat": 0.094,
+     "lvl": -64.2,
+     "above2k": 0,
+     "db": [
+      -61.5,
+      -55.3,
+      -84.4,
+      null,
+      null,
+      null
+     ],
+     "above2kDb": null
+    },
+    "standing": {
+     "frames": 472,
+     "bands": [
+      0.6916,
+      0.3075,
+      0.0009,
+      0,
+      0,
+      0
+     ],
+     "flat": 0.126,
+     "lvl": -62.4,
+     "above2k": 0,
+     "db": [
+      -55.9,
+      -59.6,
+      -84.6,
+      null,
+      null,
+      null
+     ],
+     "above2kDb": null
+    },
+    "slow": {
+     "frames": 241,
+     "bands": [
+      0.7911,
+      0.2004,
+      0.0084,
+      0.0001,
+      0,
+      0
+     ],
+     "flat": 0.081,
+     "lvl": -54.8,
+     "above2k": 0.0001,
+     "db": [
+      -49,
+      -55.2,
+      -68.4,
+      -86.5,
+      null,
+      null
+     ],
+     "above2kDb": -86.5
+    },
+    "fast": {
+     "frames": 501,
+     "bands": [
+      0.7839,
+      0.2017,
+      0.0067,
+      0.0039,
+      0.0034,
+      0.0004
+     ],
+     "flat": 0.233,
+     "lvl": -53.7,
+     "above2k": 0.0078,
+     "db": [
+      -47.8,
+      -53.7,
+      -67.6,
+      -68.4,
+      -68.7,
+      -77.4
+     ],
+     "above2kDb": -65.3
+    }
+   },
+   "errors": [],
+   "timeline": [
+    {
+     "at": 13.9,
+     "what": "ready"
+    },
+    {
+     "at": 14,
+     "what": "intro closed {\"phase\":\"countdown\",\"paused\":false,\"intro\":false}"
+    },
+    {
+     "at": 14.1,
+     "what": "bot running"
+    },
+    {
+     "at": 19.1,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":9,\"starting\":\"false\"}"
+    },
+    {
+     "at": 24.2,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":17,\"starting\":\"false\"}"
+    },
+    {
+     "at": 29.2,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":24,\"starting\":\"false\"}"
+    },
+    {
+     "at": 34.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":31,\"starting\":\"false\"}"
+    },
+    {
+     "at": 39.3,
+     "what": "race {\"phase\":\"racing\",\"time\":0.3,\"paused\":false,\"hidden\":false,\"frames\":38,\"starting\":\"false\"}"
+    },
+    {
+     "at": 44.4,
+     "what": "race {\"phase\":\"racing\",\"time\":0.9,\"paused\":false,\"hidden\":false,\"frames\":44,\"starting\":\"false\"}"
+    },
+    {
+     "at": 49.4,
+     "what": "race {\"phase\":\"racing\",\"time\":1.6,\"paused\":false,\"hidden\":false,\"frames\":51,\"starting\":\"false\"}"
+    },
+    {
+     "at": 54.5,
+     "what": "race {\"phase\":\"racing\",\"time\":2.3,\"paused\":false,\"hidden\":false,\"frames\":58,\"starting\":\"false\"}"
+    },
+    {
+     "at": 59.5,
+     "what": "race {\"phase\":\"racing\",\"time\":3,\"paused\":false,\"hidden\":false,\"frames\":65,\"starting\":\"false\"}"
+    },
+    {
+     "at": 64.6,
+     "what": "race {\"phase\":\"racing\",\"time\":3.7,\"paused\":false,\"hidden\":false,\"frames\":72,\"starting\":\"false\"}"
+    },
+    {
+     "at": 69.6,
+     "what": "race {\"phase\":\"racing\",\"time\":4.4,\"paused\":false,\"hidden\":false,\"frames\":79,\"starting\":\"false\"}"
+    },
+    {
+     "at": 74.7,
+     "what": "race {\"phase\":\"racing\",\"time\":5.1,\"paused\":false,\"hidden\":false,\"frames\":86,\"starting\":\"false\"}"
+    },
+    {
+     "at": 74.8,
+     "what": "done"
+    }
+   ]
+  }
+ }
+}

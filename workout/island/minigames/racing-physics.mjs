@@ -106,6 +106,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const recovery=createRecovery({track,sector,event,restartLane,crashFx,minStrength:OFF?.minStrength??.5,fx:{min:CRASH_FX_MIN,max:CRASH_FX_MAX,peak:CRASH_FX_PEAK,time:CRASH_TIME}});
   const pitAutoOn=!!config.pitAuto;let stepSerial=0;
   const pitCrew=createPitCrew({track,stage,cars,random,event,passGates,sector,enabled:!!config.pit,auto:pitAutoOn});   // racing-v24.1: config.pitAuto (the session's default)
+  if(config.pitSeq)pitCrew.useSequence(true);   // racing-v24.4: config.pitSeq (the session's default), the player's stop without a tap
   function startCrash(car,reason) {
     if(!crashOn||car.crashT>0||car.finished)return;
     car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.grindT=0;car.passing=null;car.laneHold=0;

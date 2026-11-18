@@ -474,6 +474,8 @@
   "minigames/racing-offtrack.mjs",
   "minigames/racing-physics.mjs",
   "minigames/racing-pit-crew.mjs",
+  "minigames/racing-pit-seq.mjs",
+  "minigames/racing-pit-sequence.mjs",
   "minigames/racing-pit-ui.mjs",
   "minigames/racing-pit-view.mjs",
   "minigames/racing-pit.mjs",
@@ -487,6 +489,7 @@
   "minigames/racing-tower.mjs",
   "minigames/racing-tracks.mjs",
   "minigames/racing-unlock.mjs",
+  "minigames/racing-v24-4.mjs",
   "minigames/racing-v24.css",
   "minigames/racing-v24.mjs",
   "minigames/racing-v7-assets.mjs",
@@ -1294,6 +1297,32 @@
    "assets/racing-audio-v4/car-bump-soft.ogg",
    "assets/racing-audio-v4/side-scrape.mp3",
    "assets/racing-audio-v4/side-scrape.ogg",
+   "assets/racing-audio-v5/brake-high.mp3",
+   "assets/racing-audio-v5/brake-high.ogg",
+   "assets/racing-audio-v5/brake-low.mp3",
+   "assets/racing-audio-v5/brake-low.ogg",
+   "assets/racing-audio-v5/brake-medium.mp3",
+   "assets/racing-audio-v5/brake-medium.ogg",
+   "assets/racing-audio-v5/offtrack-grass-high.mp3",
+   "assets/racing-audio-v5/offtrack-grass-high.ogg",
+   "assets/racing-audio-v5/offtrack-grass-low.mp3",
+   "assets/racing-audio-v5/offtrack-grass-low.ogg",
+   "assets/racing-audio-v5/offtrack-grass-medium.mp3",
+   "assets/racing-audio-v5/offtrack-grass-medium.ogg",
+   "assets/racing-audio-v5/offtrack-gravel-high.mp3",
+   "assets/racing-audio-v5/offtrack-gravel-high.ogg",
+   "assets/racing-audio-v5/offtrack-gravel-low.mp3",
+   "assets/racing-audio-v5/offtrack-gravel-low.ogg",
+   "assets/racing-audio-v5/offtrack-gravel-medium.mp3",
+   "assets/racing-audio-v5/offtrack-gravel-medium.ogg",
+   "assets/racing-audio-v5/pit-bay-proximity.mp3",
+   "assets/racing-audio-v5/pit-bay-proximity.ogg",
+   "assets/racing-audio-v5/pit-crew-background.mp3",
+   "assets/racing-audio-v5/pit-crew-background.ogg",
+   "assets/racing-audio-v5/pit-engine-slow.mp3",
+   "assets/racing-audio-v5/pit-engine-slow.ogg",
+   "assets/racing-audio-v5/pit-limiter.mp3",
+   "assets/racing-audio-v5/pit-limiter.ogg",
    "assets/racing-broadcast-v1/card-frame.svg",
    "assets/racing-broadcast-v1/leaderboard-strip.svg",
    "assets/racing-broadcast-v1/podium.webp",
@@ -1331,6 +1360,11 @@
    "assets/racing-league-v1/teams/silver.svg",
    "assets/racing-league-v1/trophies/driver-champion.svg",
    "assets/racing-league-v1/trophies/team-champion.svg",
+   "assets/racing-pit-seq-v2/jack.glb",
+   "assets/racing-pit-seq-v2/pit-actions.glb",
+   "assets/racing-pit-seq-v2/sequence.json",
+   "assets/racing-pit-seq-v2/spare_wheel.glb",
+   "assets/racing-pit-seq-v2/wheel_gun.glb",
    "assets/racing-pit-v1/audio/crew_cheer.mp3",
    "assets/racing-pit-v1/audio/crew_cheer.ogg",
    "assets/racing-pit-v1/audio/engine_exit.mp3",
@@ -3489,6 +3523,110 @@
    "6b32fbacc55021e5",
    5793
   ],
+  "assets/racing-audio-v5/brake-high.mp3": [
+   "798392ce7085791d",
+   23616
+  ],
+  "assets/racing-audio-v5/brake-high.ogg": [
+   "f8ff0aaab08c449e",
+   10237
+  ],
+  "assets/racing-audio-v5/brake-low.mp3": [
+   "30281633ae53f69e",
+   23616
+  ],
+  "assets/racing-audio-v5/brake-low.ogg": [
+   "46a67c26c3889c51",
+   10190
+  ],
+  "assets/racing-audio-v5/brake-medium.mp3": [
+   "f6dd08fa64708c45",
+   23616
+  ],
+  "assets/racing-audio-v5/brake-medium.ogg": [
+   "d600e8dde11ebd4f",
+   10354
+  ],
+  "assets/racing-audio-v5/offtrack-grass-high.mp3": [
+   "3775ccd7d4ba2f40",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-grass-high.ogg": [
+   "06aa8ccfd60186f9",
+   10397
+  ],
+  "assets/racing-audio-v5/offtrack-grass-low.mp3": [
+   "b202707171b32910",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-grass-low.ogg": [
+   "6328b9881393eccd",
+   10273
+  ],
+  "assets/racing-audio-v5/offtrack-grass-medium.mp3": [
+   "997e02f99d3a7f5f",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-grass-medium.ogg": [
+   "291b616b0e93774f",
+   10123
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-high.mp3": [
+   "f085fb19b385b71b",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-high.ogg": [
+   "66c595aec2984eea",
+   10396
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-low.mp3": [
+   "dbcf0349ebd7272c",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-low.ogg": [
+   "c2e7a04a59538002",
+   10580
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-medium.mp3": [
+   "b7bf4db0a0e5042e",
+   23616
+  ],
+  "assets/racing-audio-v5/offtrack-gravel-medium.ogg": [
+   "816ea0cabc9ae119",
+   10607
+  ],
+  "assets/racing-audio-v5/pit-bay-proximity.mp3": [
+   "60d75171589f7bc4",
+   23616
+  ],
+  "assets/racing-audio-v5/pit-bay-proximity.ogg": [
+   "e38fc5d69cd26849",
+   10097
+  ],
+  "assets/racing-audio-v5/pit-crew-background.mp3": [
+   "9d987dcab9e13aa5",
+   23616
+  ],
+  "assets/racing-audio-v5/pit-crew-background.ogg": [
+   "19ccfde9f433d589",
+   10404
+  ],
+  "assets/racing-audio-v5/pit-engine-slow.mp3": [
+   "34febae2a668e7a9",
+   23616
+  ],
+  "assets/racing-audio-v5/pit-engine-slow.ogg": [
+   "7de5c24da54c1861",
+   10311
+  ],
+  "assets/racing-audio-v5/pit-limiter.mp3": [
+   "57d2855305548876",
+   23616
+  ],
+  "assets/racing-audio-v5/pit-limiter.ogg": [
+   "9f12e18e01b28c56",
+   10326
+  ],
   "assets/racing-broadcast-v1/card-frame.svg": [
    "e56260efad34f620",
    572
@@ -3636,6 +3774,26 @@
   "assets/racing-league-v1/trophies/team-champion.svg": [
    "5119eba635ff25e6",
    1431
+  ],
+  "assets/racing-pit-seq-v2/jack.glb": [
+   "5cff483e929bca10",
+   49404
+  ],
+  "assets/racing-pit-seq-v2/pit-actions.glb": [
+   "c1e2311c90527dda",
+   825412
+  ],
+  "assets/racing-pit-seq-v2/sequence.json": [
+   "d7741dc51177c3e3",
+   64838
+  ],
+  "assets/racing-pit-seq-v2/spare_wheel.glb": [
+   "06612121e956c036",
+   61764
+  ],
+  "assets/racing-pit-seq-v2/wheel_gun.glb": [
+   "2de3c1cd3d4030c6",
+   18536
   ],
   "assets/racing-pit-v1/audio/crew_cheer.mp3": [
    "af15ae4461296416",
@@ -6974,8 +7132,8 @@
    809
   ],
   "minigames/racing-audio.mjs": [
-   "4db088bae7209a0e",
-   21420
+   "ba2ff3e2e34335fa",
+   28678
   ],
   "minigames/racing-broadcast-art.mjs": [
    "ffe86a8e4210e07c",
@@ -7030,24 +7188,32 @@
    3140
   ],
   "minigames/racing-physics.mjs": [
-   "acfc9ad48635c8ff",
-   53119
+   "8706046b41c432dd",
+   53255
   ],
   "minigames/racing-pit-crew.mjs": [
    "687bfb2f81c5f85f",
    7245
   ],
+  "minigames/racing-pit-seq.mjs": [
+   "57ca38b899aab261",
+   21350
+  ],
+  "minigames/racing-pit-sequence.mjs": [
+   "420b006f041de5a0",
+   23354
+  ],
   "minigames/racing-pit-ui.mjs": [
-   "ec82a23be9714aba",
-   7044
+   "ee6a593c9e86f86d",
+   7394
   ],
   "minigames/racing-pit-view.mjs": [
    "3e820dd9eda47f75",
    2027
   ],
   "minigames/racing-pit.mjs": [
-   "2af7cfce07b6843c",
-   11321
+   "9c4781d28e490ec4",
+   11937
   ],
   "minigames/racing-recover.mjs": [
    "c0f3871e562b9795",
@@ -7062,16 +7228,16 @@
    14436
   ],
   "minigames/racing-samples.mjs": [
-   "bb440f423c3829c0",
-   16120
+   "904db2618937d4d9",
+   20898
   ],
   "minigames/racing-scenery.mjs": [
    "9a6ec54f6710aa65",
    7082
   ],
   "minigames/racing-session.mjs": [
-   "c0da2890e85b283e",
-   19328
+   "2f524e31bb79b775",
+   20194
   ],
   "minigames/racing-speedometer.mjs": [
    "589c478a61dba093",
@@ -7088,6 +7254,10 @@
   "minigames/racing-unlock.mjs": [
    "a49f7face3a1f921",
    1333
+  ],
+  "minigames/racing-v24-4.mjs": [
+   "f4b2185c5df075e7",
+   3229
   ],
   "minigames/racing-v24.css": [
    "8e684f663b138ad1",
@@ -7106,8 +7276,8 @@
    4718
   ],
   "minigames/racing-view.mjs": [
-   "8f56491c283ccbe3",
-   48407
+   "639e4d98627bdb6a",
+   49176
   ],
   "minigames/racing.css": [
    "18fa9a640fcec8c8",

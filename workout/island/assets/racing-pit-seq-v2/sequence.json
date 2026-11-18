@@ -1,0 +1,2890 @@
+{
+  "schemaVersion": 2,
+  "id": "racing-pit-sequence-v2",
+  "apiVersion": "1.0.0",
+  "duration": 2.88,
+  "timeUnit": "seconds",
+  "timeSemantics": "half-open [start,end), terminal end inclusive; game clock at 1x",
+  "base": {
+    "branch": "codex/racing-pit-v1",
+    "commit": "13f387931b2f54e48dfab3d5b02258ef535dfc77"
+  },
+  "rig": "../racing-pit-v1/rig.json",
+  "coordinateSystem": {
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "car": {
+    "asset": "../racing-formula/formula.glb",
+    "stopPosition": [
+      0,
+      0,
+      0
+    ],
+    "entryPosition": [
+      0,
+      0,
+      -6
+    ],
+    "exitPosition": [
+      0,
+      0,
+      7
+    ],
+    "liftMeters": 0.16
+  },
+  "stages": [
+    {
+      "id": "enter",
+      "label": "כניסה לתא",
+      "start": 0,
+      "end": 0.38,
+      "dependsOn": [],
+      "participants": []
+    },
+    {
+      "id": "stop",
+      "label": "עצירה על הסימון",
+      "start": 0.38,
+      "end": 0.46,
+      "dependsOn": [
+        "enter"
+      ],
+      "participants": []
+    },
+    {
+      "id": "jack_up",
+      "label": "הרמת שני הג׳קים",
+      "start": 0.46,
+      "end": 0.66,
+      "dependsOn": [
+        "stop"
+      ],
+      "participants": [
+        "jack_front",
+        "jack_rear"
+      ]
+    },
+    {
+      "id": "loosen",
+      "label": "ניתוק ארבעת האומים",
+      "start": 0.66,
+      "end": 0.88,
+      "dependsOn": [
+        "jack_up"
+      ],
+      "participants": [
+        "wheel_front_left",
+        "wheel_front_right",
+        "wheel_rear_left",
+        "wheel_rear_right"
+      ]
+    },
+    {
+      "id": "remove_old",
+      "label": "הוצאת הגלגלים הישנים",
+      "start": 0.88,
+      "end": 1.24,
+      "dependsOn": [
+        "loosen"
+      ],
+      "participants": [
+        "wheel_front_left",
+        "wheel_front_right",
+        "wheel_rear_left",
+        "wheel_rear_right"
+      ]
+    },
+    {
+      "id": "mount_new",
+      "label": "הכנסת הגלגלים החדשים",
+      "start": 1.24,
+      "end": 1.62,
+      "dependsOn": [
+        "remove_old"
+      ],
+      "participants": [
+        "wheel_front_left",
+        "wheel_front_right",
+        "wheel_rear_left",
+        "wheel_rear_right"
+      ]
+    },
+    {
+      "id": "tighten",
+      "label": "הידוק ואישור האומים",
+      "start": 1.62,
+      "end": 1.88,
+      "dependsOn": [
+        "mount_new"
+      ],
+      "participants": [
+        "wheel_front_left",
+        "wheel_front_right",
+        "wheel_rear_left",
+        "wheel_rear_right"
+      ]
+    },
+    {
+      "id": "green",
+      "label": "אור ירוק: הטיפול הושלם",
+      "start": 1.88,
+      "end": 1.96,
+      "dependsOn": [
+        "tighten"
+      ],
+      "participants": []
+    },
+    {
+      "id": "jack_down",
+      "label": "הורדת הג׳קים ופינוי",
+      "start": 1.96,
+      "end": 2.1,
+      "dependsOn": [
+        "green"
+      ],
+      "participants": [
+        "jack_front",
+        "jack_rear"
+      ]
+    },
+    {
+      "id": "signal",
+      "label": "הרמת יד ואישור יציאה",
+      "start": 2.1,
+      "end": 2.3,
+      "dependsOn": [
+        "jack_down"
+      ],
+      "participants": [
+        "jack_front"
+      ]
+    },
+    {
+      "id": "exit",
+      "label": "יציאה מהתא",
+      "start": 2.3,
+      "end": 2.88,
+      "dependsOn": [
+        "signal"
+      ],
+      "participants": []
+    }
+  ],
+  "actors": [
+    {
+      "id": "wheel_front_left",
+      "role": "wheel_mechanic",
+      "wheel": "front_left",
+      "model": "../racing-pit-v1/models/wheel_front_left.glb",
+      "position": [
+        1.4,
+        0,
+        1.25
+      ],
+      "yaw": -1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "loosen",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.21999999999999997,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "remove_old",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.36,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "mount_new",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3800000000000001,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "tighten",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2599999999999998,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.08,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.08,
+          "clipEnd": 0.22,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        }
+      ],
+      "rootMotionBaked": true,
+      "rootMotionRule": "Root translation is baked into clips; apply base position once and never add rootOffset to the instance.",
+      "rootMotionKeys": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 0.96,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 1.08,
+          "position": [
+            0,
+            0,
+            -0.11020408163265323
+          ]
+        },
+        {
+          "time": 1.24,
+          "position": [
+            -0.35,
+            0,
+            -0.28
+          ]
+        },
+        {
+          "time": 1.6,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 2.88,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rootMotionAxes": {
+        "x": [
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.35
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.35,
+            "to": 0
+          }
+        ],
+        "z": [
+          {
+            "start": 0.96,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.28
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.28,
+            "to": 0
+          }
+        ]
+      },
+      "poseAdjustment": {
+        "kind": "constant-parent-local-euler-after-glb-before-ik",
+        "sourceTorsoLeanRadians": 0.32,
+        "torsoLeanRadians": 0.75,
+        "bones": {
+          "Spine": [
+            0.258,
+            0,
+            0
+          ],
+          "Chest": [
+            0.172,
+            0,
+            0
+          ],
+          "Neck": [
+            -0.129,
+            0,
+            0
+          ]
+        },
+        "intent": "Keep the knees and knee pads outside the tire volume while preserving reachable outer-rim grips; do not scale bones or alter baked Root motion."
+      }
+    },
+    {
+      "id": "wheel_front_right",
+      "role": "wheel_mechanic",
+      "wheel": "front_right",
+      "model": "../racing-pit-v1/models/wheel_front_right.glb",
+      "position": [
+        -1.4,
+        0,
+        1.25
+      ],
+      "yaw": 1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "loosen",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.21999999999999997,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "remove_old",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.36,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "mount_new",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3800000000000001,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "tighten",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2599999999999998,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.08,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.08,
+          "clipEnd": 0.22,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        }
+      ],
+      "rootMotionBaked": true,
+      "rootMotionRule": "Root translation is baked into clips; apply base position once and never add rootOffset to the instance.",
+      "rootMotionKeys": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 0.96,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 1.08,
+          "position": [
+            0,
+            0,
+            -0.11020408163265323
+          ]
+        },
+        {
+          "time": 1.24,
+          "position": [
+            -0.35,
+            0,
+            -0.28
+          ]
+        },
+        {
+          "time": 1.6,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 2.88,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rootMotionAxes": {
+        "x": [
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.35
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.35,
+            "to": 0
+          }
+        ],
+        "z": [
+          {
+            "start": 0.96,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.28
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.28,
+            "to": 0
+          }
+        ]
+      },
+      "poseAdjustment": {
+        "kind": "constant-parent-local-euler-after-glb-before-ik",
+        "sourceTorsoLeanRadians": 0.32,
+        "torsoLeanRadians": 0.75,
+        "bones": {
+          "Spine": [
+            0.258,
+            0,
+            0
+          ],
+          "Chest": [
+            0.172,
+            0,
+            0
+          ],
+          "Neck": [
+            -0.129,
+            0,
+            0
+          ]
+        },
+        "intent": "Keep the knees and knee pads outside the tire volume while preserving reachable outer-rim grips; do not scale bones or alter baked Root motion."
+      }
+    },
+    {
+      "id": "wheel_rear_left",
+      "role": "wheel_mechanic",
+      "wheel": "rear_left",
+      "model": "../racing-pit-v1/models/wheel_rear_left.glb",
+      "position": [
+        1.4,
+        0,
+        -1.31
+      ],
+      "yaw": -1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "loosen",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.21999999999999997,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "remove_old",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.36,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "mount_new",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3800000000000001,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "tighten",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2599999999999998,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.08,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.08,
+          "clipEnd": 0.22,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        }
+      ],
+      "rootMotionBaked": true,
+      "rootMotionRule": "Root translation is baked into clips; apply base position once and never add rootOffset to the instance.",
+      "rootMotionKeys": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 0.96,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 1.08,
+          "position": [
+            0,
+            0,
+            -0.11020408163265323
+          ]
+        },
+        {
+          "time": 1.24,
+          "position": [
+            -0.35,
+            0,
+            -0.28
+          ]
+        },
+        {
+          "time": 1.6,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 2.88,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rootMotionAxes": {
+        "x": [
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.35
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.35,
+            "to": 0
+          }
+        ],
+        "z": [
+          {
+            "start": 0.96,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.28
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.28,
+            "to": 0
+          }
+        ]
+      },
+      "poseAdjustment": {
+        "kind": "constant-parent-local-euler-after-glb-before-ik",
+        "sourceTorsoLeanRadians": 0.32,
+        "torsoLeanRadians": 0.75,
+        "bones": {
+          "Spine": [
+            0.258,
+            0,
+            0
+          ],
+          "Chest": [
+            0.172,
+            0,
+            0
+          ],
+          "Neck": [
+            -0.129,
+            0,
+            0
+          ]
+        },
+        "intent": "Keep the knees and knee pads outside the tire volume while preserving reachable outer-rim grips; do not scale bones or alter baked Root motion."
+      }
+    },
+    {
+      "id": "wheel_rear_right",
+      "role": "wheel_mechanic",
+      "wheel": "rear_right",
+      "model": "../racing-pit-v1/models/wheel_rear_right.glb",
+      "position": [
+        -1.4,
+        0,
+        -1.31
+      ],
+      "yaw": 1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "idle_work",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "loosen",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.21999999999999997,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "remove_old",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.36,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "mount_new",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3800000000000001,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "tighten",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2599999999999998,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.08,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "withdraw",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.08,
+          "clipEnd": 0.22,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "idle_clear",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        }
+      ],
+      "rootMotionBaked": true,
+      "rootMotionRule": "Root translation is baked into clips; apply base position once and never add rootOffset to the instance.",
+      "rootMotionKeys": [
+        {
+          "time": 0,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 0.96,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 1.08,
+          "position": [
+            0,
+            0,
+            -0.11020408163265323
+          ]
+        },
+        {
+          "time": 1.24,
+          "position": [
+            -0.35,
+            0,
+            -0.28
+          ]
+        },
+        {
+          "time": 1.6,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "time": 2.88,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rootMotionAxes": {
+        "x": [
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.35
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.35,
+            "to": 0
+          }
+        ],
+        "z": [
+          {
+            "start": 0.96,
+            "end": 1.24,
+            "from": 0,
+            "to": -0.28
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "from": -0.28,
+            "to": 0
+          }
+        ]
+      },
+      "poseAdjustment": {
+        "kind": "constant-parent-local-euler-after-glb-before-ik",
+        "sourceTorsoLeanRadians": 0.32,
+        "torsoLeanRadians": 0.75,
+        "bones": {
+          "Spine": [
+            0.258,
+            0,
+            0
+          ],
+          "Chest": [
+            0.172,
+            0,
+            0
+          ],
+          "Neck": [
+            -0.129,
+            0,
+            0
+          ]
+        },
+        "intent": "Keep the knees and knee pads outside the tire volume while preserving reachable outer-rim grips; do not scale bones or alter baked Root motion."
+      }
+    },
+    {
+      "id": "jack_front",
+      "role": "front_jack_and_release_signal",
+      "model": "../racing-pit-v1/models/jack_operator.glb",
+      "position": [
+        1.35,
+        0,
+        2.29
+      ],
+      "yaw": -1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "ready_jack",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "ready_jack",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "jack_down",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.14000000000000012,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "signal",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "signal_hold",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        }
+      ],
+      "stationMode": "side-operated jack, clear of the car travel corridor",
+      "entryHandReach": {
+        "start": 0.2,
+        "end": 0.46,
+        "target": "service Handle crossbar grips",
+        "interpolation": "smoothstep"
+      }
+    },
+    {
+      "id": "jack_rear",
+      "role": "rear_jack",
+      "model": "../racing-pit-v1/models/jack_operator.glb",
+      "position": [
+        -1.27,
+        0,
+        -1.97
+      ],
+      "yaw": 1.5707963267948966,
+      "tracks": [
+        {
+          "stage": "enter",
+          "start": 0,
+          "end": 0.38,
+          "clip": "ready_jack",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "stop",
+          "start": 0.38,
+          "end": 0.46,
+          "clip": "ready_jack",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.3,
+          "loop": true,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_up",
+          "start": 0.46,
+          "end": 0.66,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "loosen",
+          "start": 0.66,
+          "end": 0.88,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "remove_old",
+          "start": 0.88,
+          "end": 1.24,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "mount_new",
+          "start": 1.24,
+          "end": 1.62,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "tighten",
+          "start": 1.62,
+          "end": 1.88,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "green",
+          "start": 1.88,
+          "end": 1.96,
+          "clip": "jack_up",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.2,
+          "clipEnd": 0.2,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "jack_down",
+          "start": 1.96,
+          "end": 2.1,
+          "clip": "jack_down",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0,
+          "clipEnd": 0.14000000000000012,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "signal",
+          "start": 2.1,
+          "end": 2.3,
+          "clip": "jack_down",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.14,
+          "clipEnd": 0.14,
+          "loop": false,
+          "blendSeconds": 0
+        },
+        {
+          "stage": "exit",
+          "start": 2.3,
+          "end": 2.88,
+          "clip": "jack_down",
+          "clipFile": "clips/pit-actions.glb",
+          "clipStart": 0.14,
+          "clipEnd": 0.14,
+          "loop": false,
+          "blendSeconds": 0
+        }
+      ],
+      "stationMode": "side-operated jack, clear of the car travel corridor",
+      "entryHandReach": {
+        "start": 0.2,
+        "end": 0.46,
+        "target": "service Handle crossbar grips",
+        "interpolation": "smoothstep"
+      }
+    }
+  ],
+  "wheels": [
+    {
+      "id": "front_left",
+      "actor": "wheel_front_left",
+      "carNode": "WheelFrontL",
+      "hub": [
+        0.85,
+        0.34,
+        1.25
+      ],
+      "axle": [
+        1,
+        0,
+        0
+      ],
+      "oldId": "old_front_left",
+      "newId": "new_front_left",
+      "radiusMeters": 0.34,
+      "widthMeters": 0.3,
+      "oldRack": [
+        1.9,
+        0.34,
+        1.67
+      ],
+      "newRack": [
+        1.18,
+        0.85,
+        0.73
+      ],
+      "events": {
+        "nutLoose": 0.74,
+        "detach": 0.9,
+        "oldRacked": 1.24,
+        "newGripped": 1.24,
+        "mounted": 1.6,
+        "torqued": 1.88,
+        "oldReleased": 1.08,
+        "secondaryGripReleased": 1.5,
+        "nutSeated": 1.81
+      },
+      "gripLocalLeft": [
+        0.145,
+        0,
+        0.24
+      ],
+      "gripLocalRight": [
+        0.145,
+        0,
+        -0.24
+      ]
+    },
+    {
+      "id": "front_right",
+      "actor": "wheel_front_right",
+      "carNode": "WheelFrontR",
+      "hub": [
+        -0.85,
+        0.34,
+        1.25
+      ],
+      "axle": [
+        -1,
+        0,
+        0
+      ],
+      "oldId": "old_front_right",
+      "newId": "new_front_right",
+      "radiusMeters": 0.34,
+      "widthMeters": 0.3,
+      "oldRack": [
+        -1.9,
+        0.34,
+        0.8300000000000001
+      ],
+      "newRack": [
+        -1.18,
+        0.85,
+        1.77
+      ],
+      "events": {
+        "nutLoose": 0.74,
+        "detach": 0.9,
+        "oldRacked": 1.24,
+        "newGripped": 1.24,
+        "mounted": 1.6,
+        "torqued": 1.88,
+        "oldReleased": 1.08,
+        "secondaryGripReleased": 1.5,
+        "nutSeated": 1.81
+      },
+      "gripLocalLeft": [
+        -0.145,
+        0,
+        -0.24
+      ],
+      "gripLocalRight": [
+        -0.145,
+        0,
+        0.24
+      ]
+    },
+    {
+      "id": "rear_left",
+      "actor": "wheel_rear_left",
+      "carNode": "WheelRearL",
+      "hub": [
+        0.83,
+        0.36,
+        -1.31
+      ],
+      "axle": [
+        1,
+        0,
+        0
+      ],
+      "oldId": "old_rear_left",
+      "newId": "new_rear_left",
+      "radiusMeters": 0.36,
+      "widthMeters": 0.3,
+      "oldRack": [
+        1.9,
+        0.36,
+        -0.8900000000000001
+      ],
+      "newRack": [
+        1.18,
+        0.85,
+        -1.83
+      ],
+      "events": {
+        "nutLoose": 0.74,
+        "detach": 0.9,
+        "oldRacked": 1.24,
+        "newGripped": 1.24,
+        "mounted": 1.6,
+        "torqued": 1.88,
+        "oldReleased": 1.08,
+        "secondaryGripReleased": 1.5,
+        "nutSeated": 1.81
+      },
+      "gripLocalLeft": [
+        0.145,
+        0,
+        0.24
+      ],
+      "gripLocalRight": [
+        0.145,
+        0,
+        -0.24
+      ]
+    },
+    {
+      "id": "rear_right",
+      "actor": "wheel_rear_right",
+      "carNode": "WheelRearR",
+      "hub": [
+        -0.83,
+        0.36,
+        -1.31
+      ],
+      "axle": [
+        -1,
+        0,
+        0
+      ],
+      "oldId": "old_rear_right",
+      "newId": "new_rear_right",
+      "radiusMeters": 0.36,
+      "widthMeters": 0.3,
+      "oldRack": [
+        -1.9,
+        0.36,
+        -1.73
+      ],
+      "newRack": [
+        -1.18,
+        0.85,
+        -0.79
+      ],
+      "events": {
+        "nutLoose": 0.74,
+        "detach": 0.9,
+        "oldRacked": 1.24,
+        "newGripped": 1.24,
+        "mounted": 1.6,
+        "torqued": 1.88,
+        "oldReleased": 1.08,
+        "secondaryGripReleased": 1.5,
+        "nutSeated": 1.81
+      },
+      "gripLocalLeft": [
+        -0.145,
+        0,
+        -0.24
+      ],
+      "gripLocalRight": [
+        -0.145,
+        0,
+        0.24
+      ]
+    }
+  ],
+  "props": {
+    "attachments": [
+      {
+        "id": "old_front_left",
+        "asset": "car:WheelFrontL",
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.9,
+            "parent": "car",
+            "socket": "WheelFrontL"
+          },
+          {
+            "start": 0.9,
+            "end": 1.08,
+            "parent": "wheel_front_left",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "gripLocalLeft": [
+              0.145,
+              0,
+              0.24
+            ],
+            "gripLocalRight": [
+              0.145,
+              0,
+              -0.24
+            ],
+            "localTransform": {
+              "translation": [
+                -0.145,
+                0,
+                -0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "parent": "world",
+            "mode": "ballistic_roll",
+            "from": [
+              1.25,
+              0.46556800000000004,
+              1.37
+            ],
+            "to": [
+              1.9,
+              0.34,
+              1.67
+            ],
+            "gravityMetersPerSecondSquared": 9.81
+          },
+          {
+            "start": 1.24,
+            "end": 2.88,
+            "parent": "world",
+            "position": [
+              1.9,
+              0.34,
+              1.67
+            ]
+          }
+        ],
+        "gripLocalLeft": [
+          0.145,
+          0,
+          0.24
+        ],
+        "gripLocalRight": [
+          0.145,
+          0,
+          -0.24
+        ]
+      },
+      {
+        "id": "new_front_left",
+        "asset": "../racing-pit-v1/models/spare_wheel.glb",
+        "windows": [
+          {
+            "start": 0,
+            "end": 1.24,
+            "parent": "world",
+            "position": [
+              1.18,
+              0.85,
+              0.73
+            ]
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "parent": "wheel_front_left",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "secondaryGripEnd": 1.5,
+            "gripLocalLeft": [
+              0.145,
+              0,
+              0.24
+            ],
+            "gripLocalRight": [
+              0.145,
+              0,
+              -0.24
+            ],
+            "localTransform": {
+              "translation": [
+                -0.145,
+                0,
+                -0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.6,
+            "end": 2.88,
+            "parent": "car",
+            "socket": "WheelFrontL"
+          }
+        ],
+        "gripLocalLeft": [
+          0.145,
+          0,
+          0.24
+        ],
+        "gripLocalRight": [
+          0.145,
+          0,
+          -0.24
+        ]
+      },
+      {
+        "id": "gun_front_left",
+        "asset": "../racing-pit-v1/models/wheel_gun.glb",
+        "gripLocal": [
+          0,
+          -0.07,
+          -0.02
+        ],
+        "socketLocal": [
+          0,
+          0,
+          0.28
+        ],
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.8,
+            "parent": "wheel_front_left",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 0.8,
+            "end": 1.62,
+            "parent": "wheel_front_left",
+            "bone": "Hips",
+            "mode": "holster"
+          },
+          {
+            "start": 1.62,
+            "end": 1.88,
+            "parent": "wheel_front_left",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 1.88,
+            "end": 2.88,
+            "parent": "wheel_front_left",
+            "bone": "Hips",
+            "mode": "holster"
+          }
+        ],
+        "contactWindows": [
+          {
+            "start": 0.66,
+            "end": 0.74,
+            "operation": "loosen"
+          },
+          {
+            "start": 1.69,
+            "end": 1.81,
+            "operation": "tighten"
+          }
+        ]
+      },
+      {
+        "id": "old_front_right",
+        "asset": "car:WheelFrontR",
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.9,
+            "parent": "car",
+            "socket": "WheelFrontR"
+          },
+          {
+            "start": 0.9,
+            "end": 1.08,
+            "parent": "wheel_front_right",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "gripLocalLeft": [
+              -0.145,
+              0,
+              -0.24
+            ],
+            "gripLocalRight": [
+              -0.145,
+              0,
+              0.24
+            ],
+            "localTransform": {
+              "translation": [
+                0.145,
+                0,
+                0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "parent": "world",
+            "mode": "ballistic_roll",
+            "from": [
+              -1.25,
+              0.46556800000000004,
+              1.13
+            ],
+            "to": [
+              -1.9,
+              0.34,
+              0.8300000000000001
+            ],
+            "gravityMetersPerSecondSquared": 9.81
+          },
+          {
+            "start": 1.24,
+            "end": 2.88,
+            "parent": "world",
+            "position": [
+              -1.9,
+              0.34,
+              0.8300000000000001
+            ]
+          }
+        ],
+        "gripLocalLeft": [
+          -0.145,
+          0,
+          -0.24
+        ],
+        "gripLocalRight": [
+          -0.145,
+          0,
+          0.24
+        ]
+      },
+      {
+        "id": "new_front_right",
+        "asset": "../racing-pit-v1/models/spare_wheel.glb",
+        "windows": [
+          {
+            "start": 0,
+            "end": 1.24,
+            "parent": "world",
+            "position": [
+              -1.18,
+              0.85,
+              1.77
+            ]
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "parent": "wheel_front_right",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "secondaryGripEnd": 1.5,
+            "gripLocalLeft": [
+              -0.145,
+              0,
+              -0.24
+            ],
+            "gripLocalRight": [
+              -0.145,
+              0,
+              0.24
+            ],
+            "localTransform": {
+              "translation": [
+                0.145,
+                0,
+                0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.6,
+            "end": 2.88,
+            "parent": "car",
+            "socket": "WheelFrontR"
+          }
+        ],
+        "gripLocalLeft": [
+          -0.145,
+          0,
+          -0.24
+        ],
+        "gripLocalRight": [
+          -0.145,
+          0,
+          0.24
+        ]
+      },
+      {
+        "id": "gun_front_right",
+        "asset": "../racing-pit-v1/models/wheel_gun.glb",
+        "gripLocal": [
+          0,
+          -0.07,
+          -0.02
+        ],
+        "socketLocal": [
+          0,
+          0,
+          0.28
+        ],
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.8,
+            "parent": "wheel_front_right",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 0.8,
+            "end": 1.62,
+            "parent": "wheel_front_right",
+            "bone": "Hips",
+            "mode": "holster"
+          },
+          {
+            "start": 1.62,
+            "end": 1.88,
+            "parent": "wheel_front_right",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 1.88,
+            "end": 2.88,
+            "parent": "wheel_front_right",
+            "bone": "Hips",
+            "mode": "holster"
+          }
+        ],
+        "contactWindows": [
+          {
+            "start": 0.66,
+            "end": 0.74,
+            "operation": "loosen"
+          },
+          {
+            "start": 1.69,
+            "end": 1.81,
+            "operation": "tighten"
+          }
+        ]
+      },
+      {
+        "id": "old_rear_left",
+        "asset": "car:WheelRearL",
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.9,
+            "parent": "car",
+            "socket": "WheelRearL"
+          },
+          {
+            "start": 0.9,
+            "end": 1.08,
+            "parent": "wheel_rear_left",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "gripLocalLeft": [
+              0.145,
+              0,
+              0.24
+            ],
+            "gripLocalRight": [
+              0.145,
+              0,
+              -0.24
+            ],
+            "localTransform": {
+              "translation": [
+                -0.145,
+                0,
+                -0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "parent": "world",
+            "mode": "ballistic_roll",
+            "from": [
+              1.25,
+              0.485568,
+              -1.19
+            ],
+            "to": [
+              1.9,
+              0.36,
+              -0.8900000000000001
+            ],
+            "gravityMetersPerSecondSquared": 9.81
+          },
+          {
+            "start": 1.24,
+            "end": 2.88,
+            "parent": "world",
+            "position": [
+              1.9,
+              0.36,
+              -0.8900000000000001
+            ]
+          }
+        ],
+        "gripLocalLeft": [
+          0.145,
+          0,
+          0.24
+        ],
+        "gripLocalRight": [
+          0.145,
+          0,
+          -0.24
+        ]
+      },
+      {
+        "id": "new_rear_left",
+        "asset": "../racing-pit-v1/models/spare_wheel.glb",
+        "windows": [
+          {
+            "start": 0,
+            "end": 1.24,
+            "parent": "world",
+            "position": [
+              1.18,
+              0.85,
+              -1.83
+            ]
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "parent": "wheel_rear_left",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "secondaryGripEnd": 1.5,
+            "gripLocalLeft": [
+              0.145,
+              0,
+              0.24
+            ],
+            "gripLocalRight": [
+              0.145,
+              0,
+              -0.24
+            ],
+            "localTransform": {
+              "translation": [
+                -0.145,
+                0,
+                -0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.6,
+            "end": 2.88,
+            "parent": "car",
+            "socket": "WheelRearL"
+          }
+        ],
+        "gripLocalLeft": [
+          0.145,
+          0,
+          0.24
+        ],
+        "gripLocalRight": [
+          0.145,
+          0,
+          -0.24
+        ]
+      },
+      {
+        "id": "gun_rear_left",
+        "asset": "../racing-pit-v1/models/wheel_gun.glb",
+        "gripLocal": [
+          0,
+          -0.07,
+          -0.02
+        ],
+        "socketLocal": [
+          0,
+          0,
+          0.28
+        ],
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.8,
+            "parent": "wheel_rear_left",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 0.8,
+            "end": 1.62,
+            "parent": "wheel_rear_left",
+            "bone": "Hips",
+            "mode": "holster"
+          },
+          {
+            "start": 1.62,
+            "end": 1.88,
+            "parent": "wheel_rear_left",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 1.88,
+            "end": 2.88,
+            "parent": "wheel_rear_left",
+            "bone": "Hips",
+            "mode": "holster"
+          }
+        ],
+        "contactWindows": [
+          {
+            "start": 0.66,
+            "end": 0.74,
+            "operation": "loosen"
+          },
+          {
+            "start": 1.69,
+            "end": 1.81,
+            "operation": "tighten"
+          }
+        ]
+      },
+      {
+        "id": "old_rear_right",
+        "asset": "car:WheelRearR",
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.9,
+            "parent": "car",
+            "socket": "WheelRearR"
+          },
+          {
+            "start": 0.9,
+            "end": 1.08,
+            "parent": "wheel_rear_right",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "gripLocalLeft": [
+              -0.145,
+              0,
+              -0.24
+            ],
+            "gripLocalRight": [
+              -0.145,
+              0,
+              0.24
+            ],
+            "localTransform": {
+              "translation": [
+                0.145,
+                0,
+                0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.08,
+            "end": 1.24,
+            "parent": "world",
+            "mode": "ballistic_roll",
+            "from": [
+              -1.25,
+              0.485568,
+              -1.4300000000000002
+            ],
+            "to": [
+              -1.9,
+              0.36,
+              -1.73
+            ],
+            "gravityMetersPerSecondSquared": 9.81
+          },
+          {
+            "start": 1.24,
+            "end": 2.88,
+            "parent": "world",
+            "position": [
+              -1.9,
+              0.36,
+              -1.73
+            ]
+          }
+        ],
+        "gripLocalLeft": [
+          -0.145,
+          0,
+          -0.24
+        ],
+        "gripLocalRight": [
+          -0.145,
+          0,
+          0.24
+        ]
+      },
+      {
+        "id": "new_rear_right",
+        "asset": "../racing-pit-v1/models/spare_wheel.glb",
+        "windows": [
+          {
+            "start": 0,
+            "end": 1.24,
+            "parent": "world",
+            "position": [
+              -1.18,
+              0.85,
+              -0.79
+            ]
+          },
+          {
+            "start": 1.24,
+            "end": 1.6,
+            "parent": "wheel_rear_right",
+            "bone": "LeftHand",
+            "mode": "grip_preserve_world",
+            "secondaryBone": "RightHand",
+            "secondaryGripEnd": 1.5,
+            "gripLocalLeft": [
+              -0.145,
+              0,
+              -0.24
+            ],
+            "gripLocalRight": [
+              -0.145,
+              0,
+              0.24
+            ],
+            "localTransform": {
+              "translation": [
+                0.145,
+                0,
+                0.24
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "start": 1.6,
+            "end": 2.88,
+            "parent": "car",
+            "socket": "WheelRearR"
+          }
+        ],
+        "gripLocalLeft": [
+          -0.145,
+          0,
+          -0.24
+        ],
+        "gripLocalRight": [
+          -0.145,
+          0,
+          0.24
+        ]
+      },
+      {
+        "id": "gun_rear_right",
+        "asset": "../racing-pit-v1/models/wheel_gun.glb",
+        "gripLocal": [
+          0,
+          -0.07,
+          -0.02
+        ],
+        "socketLocal": [
+          0,
+          0,
+          0.28
+        ],
+        "windows": [
+          {
+            "start": 0,
+            "end": 0.8,
+            "parent": "wheel_rear_right",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 0.8,
+            "end": 1.62,
+            "parent": "wheel_rear_right",
+            "bone": "Hips",
+            "mode": "holster"
+          },
+          {
+            "start": 1.62,
+            "end": 1.88,
+            "parent": "wheel_rear_right",
+            "bone": "RightHand",
+            "mode": "grip"
+          },
+          {
+            "start": 1.88,
+            "end": 2.88,
+            "parent": "wheel_rear_right",
+            "bone": "Hips",
+            "mode": "holster"
+          }
+        ],
+        "contactWindows": [
+          {
+            "start": 0.66,
+            "end": 0.74,
+            "operation": "loosen"
+          },
+          {
+            "start": 1.69,
+            "end": 1.81,
+            "operation": "tighten"
+          }
+        ]
+      },
+      {
+        "id": "jack_front",
+        "asset": "../racing-pit-v1/models/jack.glb",
+        "operator": "jack_front",
+        "gripBone": "RightHand",
+        "gripNode": "Handle",
+        "carContactNode": "LiftPad",
+        "contactPosition": [
+          0,
+          0.149363634,
+          2.29
+        ],
+        "liftNode": "LiftPad",
+        "restPadY": 0.124363634,
+        "liftMeters": 0.16,
+        "raised": [
+          0.66,
+          1.96
+        ],
+        "loweredAt": 2.04,
+        "clearAt": 2.1,
+        "position": [
+          0.08,
+          0,
+          2.29
+        ],
+        "yaw": -1.5707963267948966,
+        "contactSpace": "car-local, before adding current car lift",
+        "padLocal": [
+          0,
+          0.124363634,
+          0.08
+        ],
+        "clearanceMotion": {
+          "start": 2.04,
+          "end": 2.1,
+          "translation": [
+            1.4,
+            0,
+            0
+          ],
+          "interpolation": "smoothstep"
+        },
+        "groundedAt": 2.04,
+        "handleAdjustment": {
+          "node": "Handle",
+          "localPositionZ": -0.57,
+          "extensionMeters": 0.33,
+          "extensionAxis": [
+            0,
+            0,
+            -1
+          ],
+          "grip": "real Handle crossbar, one hand on each side",
+          "pressedAngleRadians": -0.5,
+          "pressedUntil": 2.04,
+          "returnStart": 2.04,
+          "returnEnd": 2.25
+        },
+        "contactMesh": "FrontWing",
+        "contactReason": "ray-triangle underside y=.149363634 at x=0,z=2.29",
+        "padTopLocal": [
+          0,
+          0.025,
+          0
+        ],
+        "padRadiusMeters": 0.12,
+        "padScale": [
+          1,
+          1,
+          1
+        ],
+        "linkage": {
+          "hideSourceNode": "LiftArm",
+          "runtimeReplacement": "telescopic piston below pad; source LiftArm protrudes into chassis"
+        },
+        "valveTripAt": 2,
+        "gripReleaseAt": 2,
+        "handBlendStart": 2,
+        "handBlendEnd": 2.1
+      },
+      {
+        "id": "jack_rear",
+        "asset": "../racing-pit-v1/models/jack.glb",
+        "operator": "jack_rear",
+        "gripBone": "RightHand",
+        "gripNode": "Handle",
+        "carContactNode": "LiftPad",
+        "contactPosition": [
+          0.08,
+          0.147,
+          -1.97
+        ],
+        "liftNode": "LiftPad",
+        "restPadY": 0.122,
+        "liftMeters": 0.16,
+        "raised": [
+          0.66,
+          1.96
+        ],
+        "loweredAt": 2.04,
+        "clearAt": 2.1,
+        "position": [
+          0,
+          0,
+          -1.97
+        ],
+        "yaw": 1.5707963267948966,
+        "contactSpace": "car-local, before adding current car lift",
+        "padLocal": [
+          0,
+          0.122,
+          0.08
+        ],
+        "clearanceMotion": {
+          "start": 2.04,
+          "end": 2.1,
+          "translation": [
+            -1.4,
+            0,
+            0
+          ],
+          "interpolation": "smoothstep"
+        },
+        "groundedAt": 2.04,
+        "handleAdjustment": {
+          "node": "Handle",
+          "localPositionZ": -0.57,
+          "extensionMeters": 0.33,
+          "extensionAxis": [
+            0,
+            0,
+            -1
+          ],
+          "grip": "real Handle crossbar, one hand on each side",
+          "pressedAngleRadians": -0.5,
+          "pressedUntil": 2.04,
+          "returnStart": 2.04,
+          "returnEnd": 2.25
+        },
+        "entryMotion": {
+          "start": 0.3,
+          "end": 0.46,
+          "waitOffset": [
+            -1.4,
+            0,
+            0
+          ],
+          "interpolation": "smoothstep"
+        },
+        "contactMesh": "Diffuser",
+        "contactReason": "flat Diffuser underside y=.147 at x=.08,z=-1.97; narrow pad avoids central fin",
+        "padTopLocal": [
+          0,
+          0.025,
+          0
+        ],
+        "padRadiusMeters": 0.06,
+        "padScale": [
+          0.5,
+          1,
+          0.5
+        ],
+        "linkage": {
+          "hideSourceNode": "LiftArm",
+          "runtimeReplacement": "telescopic piston below pad; source LiftArm protrudes into chassis"
+        },
+        "valveTripAt": 2,
+        "gripReleaseAt": 2,
+        "handBlendStart": 2,
+        "handBlendEnd": 2.1
+      }
+    ],
+    "stopMarker": {
+      "asset": "../racing-pit-v1/models/stop_star.glb",
+      "position": [
+        0.74,
+        0,
+        2.85
+      ]
+    },
+    "trafficLight": {
+      "asset": "../racing-pit-v1/models/pit_light_exit.glb",
+      "position": [
+        3.45,
+        0,
+        2.9
+      ],
+      "greenMeaning": "service complete; departure still gated on jacks clear, hand signal and lane clear"
+    }
+  },
+  "gates": {
+    "serviceComplete": [
+      "all_four_old_wheels_racked",
+      "all_four_new_wheels_mounted",
+      "all_four_fasteners_confirmed"
+    ],
+    "release": [
+      "service_complete",
+      "both_jacks_lowered_and_clear",
+      "all_crew_clear",
+      "hand_signal_complete",
+      "exit_lane_clear"
+    ],
+    "ifBlocked": "hold game timeline at gate; do not release on elapsed time alone"
+  },
+  "events": [
+    {
+      "time": 0.38,
+      "type": "car_stopped",
+      "actor": "car"
+    },
+    {
+      "time": 0.66,
+      "type": "jacks_raised",
+      "actors": [
+        "jack_front",
+        "jack_rear"
+      ]
+    },
+    {
+      "time": 0.74,
+      "type": "nutLoose",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 0.74,
+      "type": "nutLoose",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 0.74,
+      "type": "nutLoose",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 0.74,
+      "type": "nutLoose",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 0.9,
+      "type": "detach",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 0.9,
+      "type": "detach",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 0.9,
+      "type": "detach",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 0.9,
+      "type": "detach",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.08,
+      "type": "oldReleased",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.08,
+      "type": "oldReleased",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.08,
+      "type": "oldReleased",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.08,
+      "type": "oldReleased",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.24,
+      "type": "oldRacked",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.24,
+      "type": "newGripped",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.24,
+      "type": "oldRacked",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.24,
+      "type": "newGripped",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.24,
+      "type": "oldRacked",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.24,
+      "type": "newGripped",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.24,
+      "type": "oldRacked",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.24,
+      "type": "newGripped",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.5,
+      "type": "secondaryGripReleased",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.5,
+      "type": "secondaryGripReleased",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.5,
+      "type": "secondaryGripReleased",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.5,
+      "type": "secondaryGripReleased",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.6,
+      "type": "mounted",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.6,
+      "type": "mounted",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.6,
+      "type": "mounted",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.6,
+      "type": "mounted",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.81,
+      "type": "nutSeated",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.81,
+      "type": "nutSeated",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.81,
+      "type": "nutSeated",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.81,
+      "type": "nutSeated",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.88,
+      "type": "torqued",
+      "wheel": "front_left",
+      "actor": "wheel_front_left"
+    },
+    {
+      "time": 1.88,
+      "type": "torqued",
+      "wheel": "front_right",
+      "actor": "wheel_front_right"
+    },
+    {
+      "time": 1.88,
+      "type": "torqued",
+      "wheel": "rear_left",
+      "actor": "wheel_rear_left"
+    },
+    {
+      "time": 1.88,
+      "type": "torqued",
+      "wheel": "rear_right",
+      "actor": "wheel_rear_right"
+    },
+    {
+      "time": 1.88,
+      "type": "service_complete"
+    },
+    {
+      "time": 1.96,
+      "type": "lower_start"
+    },
+    {
+      "time": 2.04,
+      "type": "car_grounded"
+    },
+    {
+      "time": 2.1,
+      "type": "jacks_clear"
+    },
+    {
+      "time": 2.3,
+      "type": "hand_signal_complete",
+      "actor": "jack_front"
+    },
+    {
+      "time": 2.3,
+      "type": "release"
+    },
+    {
+      "time": 2.88,
+      "type": "complete"
+    }
+  ]
+}
