@@ -1,0 +1,2741 @@
+{
+  "limits": {
+    "max_bytes": 60000,
+    "lufs_i": -18.0,
+    "lufs_tolerance": 0.25,
+    "max_dbtp": -1.0,
+    "tone_min_prominence_db": 12.0,
+    "tone_max_width_hz": 30.0,
+    "tone_min_relative_db": -55.0,
+    "max_seam_step_ratio": 1.5,
+    "max_seam_curvature_ratio": 2.0,
+    "max_guard_error_dbfs": -42.0
+  },
+  "ffmpeg_version": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "analysis_sample_rate_hz": 32000,
+  "fft_size": 8192,
+  "v6": [
+    {
+      "id": "launch-idle",
+      "format": "ogg",
+      "path": "assets/launch-idle.ogg",
+      "bytes": 15048,
+      "sha256": "0a96703b18a0eeb99e7df12222be2fb95394c7340135e5610a24b3833f543f1e",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.06,
+      "true_peak_dbtp": -4.92,
+      "spectrum": {
+        "centroid_hz": 195.691,
+        "above_2khz_energy_db": -109.4918,
+        "above_2khz_energy_percent": 1.1241477194346114e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -68.3859,
+        "step_ratio": 0.021353,
+        "curvature_ratio": 0.356424,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "launch-idle",
+      "format": "mp3",
+      "path": "assets/launch-idle.mp3",
+      "bytes": 48716,
+      "sha256": "14ef5923f6941caa6a8c95798409d58e8f6a3e63af9944124880d5c1598d354e",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -4.94,
+      "spectrum": {
+        "centroid_hz": 196.295,
+        "above_2khz_energy_db": -98.7154,
+        "above_2khz_energy_percent": 1.3441756513313152e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -92.547,
+        "step_ratio": 0.001283,
+        "curvature_ratio": 0.009487,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "start-lights",
+      "format": "ogg",
+      "path": "assets/start-lights.ogg",
+      "bytes": 12214,
+      "sha256": "7734265e7b6e36ec6c40de15868807f1cebbb1c5c8d0f98fbacfd2c5981ef218",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 151200,
+      "decoded_seconds": 3.15,
+      "integrated_lufs": -18.04,
+      "true_peak_dbtp": -1.4,
+      "spectrum": {
+        "centroid_hz": 321.168,
+        "above_2khz_energy_db": -109.9665,
+        "above_2khz_energy_percent": 1.007745599873369e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "start-lights",
+      "format": "mp3",
+      "path": "assets/start-lights.mp3",
+      "bytes": 38636,
+      "sha256": "96b06d1bc84120a01ad1fc97d5e408ec95227310042cd076f7398b21b37484c8",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 151200,
+      "decoded_seconds": 3.15,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -1.54,
+      "spectrum": {
+        "centroid_hz": 323.631,
+        "above_2khz_energy_db": -99.5355,
+        "above_2khz_energy_percent": 1.1128779415470358e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "launch",
+      "format": "ogg",
+      "path": "assets/launch.ogg",
+      "bytes": 8357,
+      "sha256": "9e418723e42ba65117b46d301478ff0818a8bd18f1ef8de090e246ac24ebbdaf",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 74400,
+      "decoded_seconds": 1.55,
+      "integrated_lufs": -18.04,
+      "true_peak_dbtp": -6.91,
+      "spectrum": {
+        "centroid_hz": 539.246,
+        "above_2khz_energy_db": -102.168,
+        "above_2khz_energy_percent": 6.070220272921156e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "launch",
+      "format": "mp3",
+      "path": "assets/launch.mp3",
+      "bytes": 19340,
+      "sha256": "26c34d8475cdac4ec279a8a3f32821b3bb3262bae210d1af44e1b0e5a219aecc",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 74400,
+      "decoded_seconds": 1.55,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -6.83,
+      "spectrum": {
+        "centroid_hz": 538.386,
+        "above_2khz_energy_db": -97.9762,
+        "above_2khz_energy_percent": 1.5936001040788814e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "engine-low",
+      "format": "ogg",
+      "path": "assets/engine-low.ogg",
+      "bytes": 21840,
+      "sha256": "f79d1075ef10dc5aa4f2bdd61560862264014e9f06e55bb7742ad9b3ad98e7fd",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -17.97,
+      "true_peak_dbtp": -5.39,
+      "spectrum": {
+        "centroid_hz": 398.284,
+        "above_2khz_energy_db": -105.2206,
+        "above_2khz_energy_percent": 3.005692745377653e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -64.3688,
+        "step_ratio": 0.023341,
+        "curvature_ratio": 0.321699,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "engine-low",
+      "format": "mp3",
+      "path": "assets/engine-low.mp3",
+      "bytes": 58220,
+      "sha256": "6a9ed05a909ceff350679acc40e8510552f7fc343100774f58ccd97eacb47c17",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -5.25,
+      "spectrum": {
+        "centroid_hz": 398.787,
+        "above_2khz_energy_db": -98.5977,
+        "above_2khz_energy_percent": 1.3811214181059064e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -108.7772,
+        "step_ratio": 0.000141,
+        "curvature_ratio": 0.011753,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "engine-medium",
+      "format": "ogg",
+      "path": "assets/engine-medium.ogg",
+      "bytes": 25102,
+      "sha256": "9a42c7030627fdedcd835fe220bdcc5ffe005ce75ae6eeddd0d707c3a62f376f",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -17.95,
+      "true_peak_dbtp": -6.02,
+      "spectrum": {
+        "centroid_hz": 511.816,
+        "above_2khz_energy_db": -102.8161,
+        "above_2khz_energy_percent": 5.228655383150412e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -69.7525,
+        "step_ratio": 0.011006,
+        "curvature_ratio": 0.111342,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "engine-medium",
+      "format": "mp3",
+      "path": "assets/engine-medium.mp3",
+      "bytes": 58220,
+      "sha256": "4b890bd15baaec4b64bae8bace0f8f5404a04cc3035b5feb1232f26324450a6d",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -6.04,
+      "spectrum": {
+        "centroid_hz": 511.421,
+        "above_2khz_energy_db": -98.148,
+        "above_2khz_energy_percent": 1.531807793118646e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -91.158,
+        "step_ratio": 0.000902,
+        "curvature_ratio": 0.00587,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "engine-high",
+      "format": "ogg",
+      "path": "assets/engine-high.ogg",
+      "bytes": 18633,
+      "sha256": "100e97b30880836b4c4ec425d855c9b6f2b5515cb3b3a4eadc97204549e3d5b1",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -6.59,
+      "spectrum": {
+        "centroid_hz": 585.322,
+        "above_2khz_energy_db": -102.1327,
+        "above_2khz_energy_percent": 6.119713862603849e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -72.2618,
+        "step_ratio": 0.007208,
+        "curvature_ratio": 0.074539,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "engine-high",
+      "format": "mp3",
+      "path": "assets/engine-high.mp3",
+      "bytes": 58220,
+      "sha256": "e869724703e633fd678cbbe8983466dc8b5154b753e44459d61386d8291354c8",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 230400,
+      "decoded_seconds": 4.8,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -6.55,
+      "spectrum": {
+        "centroid_hz": 585.47,
+        "above_2khz_energy_db": -97.6329,
+        "above_2khz_energy_percent": 1.7247021966819975e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 230400,
+        "period_samples": 230400,
+        "period_seconds": 4.8,
+        "bounds_match_manifest": true,
+        "step_dbfs": -87.0483,
+        "step_ratio": 0.001295,
+        "curvature_ratio": 0.011095,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "overtake-near",
+      "format": "ogg",
+      "path": "assets/overtake-near.ogg",
+      "bytes": 9651,
+      "sha256": "6ce9613f69ab0e303b85195683d1f34ac225f664e926493bc0a49ab180f2e42f",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 52800,
+      "decoded_seconds": 1.1,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -4.18,
+      "spectrum": {
+        "centroid_hz": 545.72,
+        "above_2khz_energy_db": -102.8015,
+        "above_2khz_energy_percent": 5.2462852788035665e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 562.725,
+          "above_2khz_energy_db": -102.673,
+          "above_2khz_energy_percent": 5.403865644172429e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 531.505,
+          "above_2khz_energy_db": -102.7901,
+          "above_2khz_energy_percent": 5.26002886365315e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "overtake-near",
+      "format": "mp3",
+      "path": "assets/overtake-near.mp3",
+      "bytes": 18476,
+      "sha256": "526b07884039f6e9b7a7b04ce7e91ecc256a3de56d60767539d265dc32a2b85a",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 52800,
+      "decoded_seconds": 1.1,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -4.13,
+      "spectrum": {
+        "centroid_hz": 544.612,
+        "above_2khz_energy_db": -95.8056,
+        "above_2khz_energy_percent": 2.626869190021785e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 559.839,
+          "above_2khz_energy_db": -95.0309,
+          "above_2khz_energy_percent": 3.139875089645962e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 531.503,
+          "above_2khz_energy_db": -95.1461,
+          "above_2khz_energy_percent": 3.057630519842245e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "overtake-wide",
+      "format": "ogg",
+      "path": "assets/overtake-wide.ogg",
+      "bytes": 10696,
+      "sha256": "f7c1044dfc92d34151d62c3e7fc926c45ab3ac34b13e092a333b77390c181090",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 62400,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -17.97,
+      "true_peak_dbtp": -5.17,
+      "spectrum": {
+        "centroid_hz": 503.884,
+        "above_2khz_energy_db": -102.5295,
+        "above_2khz_energy_percent": 5.585397553480509e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 497.547,
+          "above_2khz_energy_db": -102.5975,
+          "above_2khz_energy_percent": 5.49857554511576e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 510.423,
+          "above_2khz_energy_db": -102.5039,
+          "above_2khz_energy_percent": 5.618314617213229e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "overtake-wide",
+      "format": "mp3",
+      "path": "assets/overtake-wide.mp3",
+      "bytes": 21932,
+      "sha256": "9f5951285daa67424bd9b83c319d4b5b8c3dba3b800cb64fa4c09faf225a94f9",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 62400,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -5.04,
+      "spectrum": {
+        "centroid_hz": 504.72,
+        "above_2khz_energy_db": -97.4711,
+        "above_2khz_energy_percent": 1.790164492623483e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 498.643,
+          "above_2khz_energy_db": -96.3891,
+          "above_2khz_energy_percent": 2.2966355520258104e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 511.265,
+          "above_2khz_energy_db": -95.9684,
+          "above_2khz_energy_percent": 2.5302537666558267e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "overtake-fast",
+      "format": "ogg",
+      "path": "assets/overtake-fast.ogg",
+      "bytes": 8953,
+      "sha256": "82423771b4fbbd0ea6c23341c94a134d7195589464f15f094a7f70871af329a5",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 45600,
+      "decoded_seconds": 0.95,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -4.25,
+      "spectrum": {
+        "centroid_hz": 583.063,
+        "above_2khz_energy_db": -103.994,
+        "above_2khz_energy_percent": 3.986544295028868e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 566.966,
+          "above_2khz_energy_db": -104.9501,
+          "above_2khz_energy_percent": 3.198824009003064e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 600.48,
+          "above_2khz_energy_db": -103.0483,
+          "above_2khz_energy_percent": 4.95642291658529e-09,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "overtake-fast",
+      "format": "mp3",
+      "path": "assets/overtake-fast.mp3",
+      "bytes": 16172,
+      "sha256": "d21ea43c2ddf5f75f92d68dfd1ef76b8a2cfd64a9d4220c425801b92b7e2307d",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "decoded_frames": 45600,
+      "decoded_seconds": 0.95,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -4.12,
+      "spectrum": {
+        "centroid_hz": 584.896,
+        "above_2khz_energy_db": -94.7821,
+        "above_2khz_energy_percent": 3.325022678709102e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "channel_spectra": [
+        {
+          "centroid_hz": 568.786,
+          "above_2khz_energy_db": -94.0966,
+          "above_2khz_energy_percent": 3.8934702645927866e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        },
+        {
+          "centroid_hz": 602.039,
+          "above_2khz_energy_db": -92.1773,
+          "above_2khz_energy_percent": 6.057161888425482e-08,
+          "strongest_narrow_line": null,
+          "significant_narrow_line": false
+        }
+      ],
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "track-edge",
+      "format": "ogg",
+      "path": "assets/track-edge.ogg",
+      "bytes": 13798,
+      "sha256": "5c8a29dfbff692efd9d8d36cdc0f1b8d22e89a9e6c76c4f9fbc47a0be65d98cc",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -4.28,
+      "spectrum": {
+        "centroid_hz": 165.644,
+        "above_2khz_energy_db": -111.0989,
+        "above_2khz_energy_percent": 7.764485061290783e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -62.0877,
+        "step_ratio": 0.071087,
+        "curvature_ratio": 1.550777,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "track-edge",
+      "format": "mp3",
+      "path": "assets/track-edge.mp3",
+      "bytes": 48716,
+      "sha256": "5f3dc3ee1216ee374861ac5b7994805a0a74439f8a45d68c1cc32a941a5f0a0e",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -4.29,
+      "spectrum": {
+        "centroid_hz": 165.923,
+        "above_2khz_energy_db": -99.5762,
+        "above_2khz_energy_percent": 1.1024915741798344e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -134.5719,
+        "step_ratio": 1.7e-05,
+        "curvature_ratio": 0.007752,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "pit-limiter",
+      "format": "ogg",
+      "path": "assets/pit-limiter.ogg",
+      "bytes": 15288,
+      "sha256": "341a5aae965d191518fa157c1c6d8264d63b066765214e33b2297fc428470faa",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.06,
+      "true_peak_dbtp": -5.74,
+      "spectrum": {
+        "centroid_hz": 264.844,
+        "above_2khz_energy_db": -106.3633,
+        "above_2khz_energy_percent": 2.31032820294286e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -63.6897,
+        "step_ratio": 0.023353,
+        "curvature_ratio": 0.239952,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "pit-limiter",
+      "format": "mp3",
+      "path": "assets/pit-limiter.mp3",
+      "bytes": 48716,
+      "sha256": "ce72111046ee81a2304ee6fe20135dea9e9a7ecc046108014b8f4fe88d4fb915",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -17.98,
+      "true_peak_dbtp": -5.44,
+      "spectrum": {
+        "centroid_hz": 265.353,
+        "above_2khz_energy_db": -98.4857,
+        "above_2khz_energy_percent": 1.4171931965898512e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -113.5508,
+        "step_ratio": 7.5e-05,
+        "curvature_ratio": 0.010536,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "pit-ambience",
+      "format": "ogg",
+      "path": "assets/pit-ambience.ogg",
+      "bytes": 14070,
+      "sha256": "09263b31523af83cb782bfa44cae1ddd0b0eb1f9c5e37ad33d1bbd5953f76d1b",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -5.69,
+      "spectrum": {
+        "centroid_hz": 186.614,
+        "above_2khz_energy_db": -110.4004,
+        "above_2khz_energy_percent": 9.119252168332936e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -60.6682,
+        "step_ratio": 0.067018,
+        "curvature_ratio": 1.345566,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "pit-ambience",
+      "format": "mp3",
+      "path": "assets/pit-ambience.mp3",
+      "bytes": 48716,
+      "sha256": "ccd81b50d8e2b683bcad555c33de3d5602126b1796f8b5ffee41646ea9b6c804",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 192000,
+      "decoded_seconds": 4.0,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -5.3,
+      "spectrum": {
+        "centroid_hz": 187.634,
+        "above_2khz_energy_db": -99.5917,
+        "above_2khz_energy_percent": 1.0985787962602074e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 0,
+        "end_sample_exclusive": 192000,
+        "period_samples": 192000,
+        "period_seconds": 4.0,
+        "bounds_match_manifest": true,
+        "step_dbfs": -105.3321,
+        "step_ratio": 0.000396,
+        "curvature_ratio": 0.008242,
+        "guard_error_dbfs": null
+      },
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true,
+        "loop_bounds": true,
+        "loop_seam": true
+      }
+    },
+    {
+      "id": "brake",
+      "format": "ogg",
+      "path": "assets/brake.ogg",
+      "bytes": 7721,
+      "sha256": "afc79dc6d97ab2a95b05b80f6f99a40802773e1969514a6fbbf85361e1057647",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 69600,
+      "decoded_seconds": 1.45,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -2.5,
+      "spectrum": {
+        "centroid_hz": 284.621,
+        "above_2khz_energy_db": -107.3461,
+        "above_2khz_energy_percent": 1.842409116127044e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "brake",
+      "format": "mp3",
+      "path": "assets/brake.mp3",
+      "bytes": 18188,
+      "sha256": "07d8e412538bd8d9c4daa2b7c09986e4a9f29e8ccdf4a9a65f4ab44bda31cedb",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 69600,
+      "decoded_seconds": 1.45,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -2.47,
+      "spectrum": {
+        "centroid_hz": 288.449,
+        "above_2khz_energy_db": -98.9827,
+        "above_2khz_energy_percent": 1.2639579209364346e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "tire-scrub",
+      "format": "ogg",
+      "path": "assets/tire-scrub.ogg",
+      "bytes": 7448,
+      "sha256": "ec2364fea090dab9d9bce55b3de8ecb3fdebb44bca758eef51e35e7ff15e29c7",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 62400,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -4.7,
+      "spectrum": {
+        "centroid_hz": 684.792,
+        "above_2khz_energy_db": -100.1922,
+        "above_2khz_energy_percent": 9.566985702752512e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    },
+    {
+      "id": "tire-scrub",
+      "format": "mp3",
+      "path": "assets/tire-scrub.mp3",
+      "bytes": 16460,
+      "sha256": "7924dede14ae563252fada01c4152499bc482c28dc74a2bbd394aedd5ca56423",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "decoded_frames": 62400,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -5.04,
+      "spectrum": {
+        "centroid_hz": 691.543,
+        "above_2khz_energy_db": -98.3399,
+        "above_2khz_energy_percent": 1.4655961565859368e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null,
+      "declared_duration_frames_error": 0,
+      "checks": {
+        "codec": true,
+        "sample_rate": true,
+        "channels": true,
+        "bytes": true,
+        "integrated_lufs": true,
+        "true_peak": true,
+        "decoded_duration": true,
+        "no_narrow_line": true
+      }
+    }
+  ],
+  "failures": [],
+  "v5_commit": "43975a996bff7baa4c1f90ede6b25d78e0fc7a66",
+  "v5": [
+    {
+      "id": "pit-engine-slow",
+      "format": "ogg",
+      "path": "audio/pit-engine-slow.ogg",
+      "bytes": 10311,
+      "sha256": "7de5c24da54c186132f3be62d3a92fa19679a04d9041c0a5f6b326f97d771e9d",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.08,
+      "true_peak_dbtp": -5.34,
+      "spectrum": {
+        "centroid_hz": 244.196,
+        "above_2khz_energy_db": -116.1798,
+        "above_2khz_energy_percent": 2.410023158468979e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -26.5418,
+        "step_ratio": 0.841337,
+        "curvature_ratio": 0.494191,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-engine-slow",
+      "format": "mp3",
+      "path": "audio/pit-engine-slow.mp3",
+      "bytes": 23616,
+      "sha256": "34febae2a668e7a9432e8f64d1ab40bf4b5e4b9fc071f95c5fd1f7079d8aa627",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -5.55,
+      "spectrum": {
+        "centroid_hz": 245.142,
+        "above_2khz_energy_db": -97.9461,
+        "above_2khz_energy_percent": 1.6046832602871026e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -26.1884,
+        "step_ratio": 0.853672,
+        "curvature_ratio": 0.455529,
+        "guard_error_dbfs": -89.8707
+      }
+    },
+    {
+      "id": "pit-limiter",
+      "format": "ogg",
+      "path": "audio/pit-limiter.ogg",
+      "bytes": 10326,
+      "sha256": "9f12e18e01b28c56868a5bf079a6d90241d249b8dd187eb9fa612b6d0fbc0a99",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.05,
+      "true_peak_dbtp": -4.91,
+      "spectrum": {
+        "centroid_hz": 264.747,
+        "above_2khz_energy_db": -116.2184,
+        "above_2khz_energy_percent": 2.3886890155303065e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -24.6038,
+        "step_ratio": 0.946629,
+        "curvature_ratio": 0.509931,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-limiter",
+      "format": "mp3",
+      "path": "audio/pit-limiter.mp3",
+      "bytes": 23616,
+      "sha256": "57d285530554887652abe452f96a1861521962ce3769f6acdd037acf02fa3107",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -5.1,
+      "spectrum": {
+        "centroid_hz": 266.919,
+        "above_2khz_energy_db": -97.8045,
+        "above_2khz_energy_percent": 1.657880391935929e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -24.5996,
+        "step_ratio": 0.941407,
+        "curvature_ratio": 0.502452,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-bay-proximity",
+      "format": "ogg",
+      "path": "audio/pit-bay-proximity.ogg",
+      "bytes": 10097,
+      "sha256": "e38fc5d69cd2684997f7a62fd881bd1594201bbc152032328f1ace1746d709a1",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.07,
+      "true_peak_dbtp": -8.74,
+      "spectrum": {
+        "centroid_hz": 233.493,
+        "above_2khz_energy_db": -120.2995,
+        "above_2khz_energy_percent": 9.333618826056893e-11,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -68.3143,
+        "step_ratio": 0.013017,
+        "curvature_ratio": 0.154176,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-bay-proximity",
+      "format": "mp3",
+      "path": "audio/pit-bay-proximity.mp3",
+      "bytes": 23616,
+      "sha256": "60d75171589f7bc4a8cbbe7b41722e98c6cb2c0facb1f8df1df43264490a3014",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -8.6,
+      "spectrum": {
+        "centroid_hz": 234.851,
+        "above_2khz_energy_db": -97.5639,
+        "above_2khz_energy_percent": 1.752324683584415e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -91.9881,
+        "step_ratio": 0.000818,
+        "curvature_ratio": 0.15658,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-crew-background",
+      "format": "ogg",
+      "path": "audio/pit-crew-background.ogg",
+      "bytes": 10404,
+      "sha256": "19ccfde9f433d5896eed97ac8708cfb384cd5d000dd8d5f35e512837b13d74cb",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -6.17,
+      "spectrum": {
+        "centroid_hz": 525.733,
+        "above_2khz_energy_db": -114.3787,
+        "above_2khz_energy_percent": 3.648662021453947e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -36.0237,
+        "step_ratio": 0.279381,
+        "curvature_ratio": 0.243943,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "pit-crew-background",
+      "format": "mp3",
+      "path": "audio/pit-crew-background.mp3",
+      "bytes": 23616,
+      "sha256": "9d987dcab9e13aa5dc31d9e58ea9012c3f1576c53d50e0e0a083992365ea2343",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.98,
+      "true_peak_dbtp": -6.99,
+      "spectrum": {
+        "centroid_hz": 528.251,
+        "above_2khz_energy_db": -97.6334,
+        "above_2khz_energy_percent": 1.7244743094918834e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -39.2874,
+        "step_ratio": 0.186554,
+        "curvature_ratio": 0.153473,
+        "guard_error_dbfs": -81.8476
+      }
+    },
+    {
+      "id": "offtrack-gravel-low",
+      "format": "ogg",
+      "path": "audio/offtrack-gravel-low.ogg",
+      "bytes": 10580,
+      "sha256": "c2e7a04a59538002222341c37cd67cfc5490d3ec6f46fa4f6eb138c503b8509a",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -4.76,
+      "spectrum": {
+        "centroid_hz": 345.002,
+        "above_2khz_energy_db": -88.7495,
+        "above_2khz_energy_percent": 1.3336614448945095e-07,
+        "strongest_narrow_line": {
+          "frequency_hz": 2078.125,
+          "prominence_db": 13.502723758716062,
+          "relative_db": -85.09758963686261,
+          "width_hz": 19.53125,
+          "window_center_seconds": 1.92
+        },
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -54.9446,
+        "step_ratio": 0.029636,
+        "curvature_ratio": 0.203332,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-gravel-low",
+      "format": "mp3",
+      "path": "audio/offtrack-gravel-low.mp3",
+      "bytes": 23616,
+      "sha256": "dbcf0349ebd7272c01ccb58c82dcbb4eb4c15fa1a9a3d961a6c188832feb231a",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -4.81,
+      "spectrum": {
+        "centroid_hz": 345.648,
+        "above_2khz_energy_db": -97.6386,
+        "above_2khz_energy_percent": 1.7224394102692242e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -51.4126,
+        "step_ratio": 0.043318,
+        "curvature_ratio": 0.173847,
+        "guard_error_dbfs": -88.2813
+      }
+    },
+    {
+      "id": "offtrack-gravel-medium",
+      "format": "ogg",
+      "path": "audio/offtrack-gravel-medium.ogg",
+      "bytes": 10607,
+      "sha256": "816ea0cabc9ae11908a8c7099e07e6b965fa158ca4ff9e6188384dffaad0d640",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -5.03,
+      "spectrum": {
+        "centroid_hz": 384.574,
+        "above_2khz_energy_db": -113.0147,
+        "above_2khz_energy_percent": 4.994880974952856e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -37.6398,
+        "step_ratio": 0.219011,
+        "curvature_ratio": 0.125964,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-gravel-medium",
+      "format": "mp3",
+      "path": "audio/offtrack-gravel-medium.mp3",
+      "bytes": 23616,
+      "sha256": "b7bf4db0a0e5042e8ba485ca47e799e7c04bab96a1fe9d3922b312aa41143bc3",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.98,
+      "true_peak_dbtp": -5.03,
+      "spectrum": {
+        "centroid_hz": 385.468,
+        "above_2khz_energy_db": -97.5108,
+        "above_2khz_energy_percent": 1.7738489160913956e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -37.6123,
+        "step_ratio": 0.215504,
+        "curvature_ratio": 0.107763,
+        "guard_error_dbfs": -102.1822
+      }
+    },
+    {
+      "id": "offtrack-gravel-high",
+      "format": "ogg",
+      "path": "audio/offtrack-gravel-high.ogg",
+      "bytes": 10396,
+      "sha256": "66c595aec2984eeab3ee69d9e1d1791b328b9bb060b6cf46d7c7b58f144fa25b",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -5.43,
+      "spectrum": {
+        "centroid_hz": 427.797,
+        "above_2khz_energy_db": -112.6391,
+        "above_2khz_energy_percent": 5.44614566472726e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -39.2075,
+        "step_ratio": 0.180533,
+        "curvature_ratio": 0.006691,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-gravel-high",
+      "format": "mp3",
+      "path": "audio/offtrack-gravel-high.mp3",
+      "bytes": 23616,
+      "sha256": "f085fb19b385b71b2abb7d8223ec87623bb826cb6ffd7740cb1add9b1b8b5794",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -5.36,
+      "spectrum": {
+        "centroid_hz": 430.041,
+        "above_2khz_energy_db": -97.3815,
+        "above_2khz_energy_percent": 1.8274544341886555e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -39.4918,
+        "step_ratio": 0.175076,
+        "curvature_ratio": 0.067409,
+        "guard_error_dbfs": -87.9981
+      }
+    },
+    {
+      "id": "offtrack-grass-low",
+      "format": "ogg",
+      "path": "audio/offtrack-grass-low.ogg",
+      "bytes": 10273,
+      "sha256": "6328b9881393eccd0247b1163659030a71ad01effaabecdbd2b4a6f62bd51fe5",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -9.2,
+      "spectrum": {
+        "centroid_hz": 356.536,
+        "above_2khz_energy_db": -118.0355,
+        "above_2khz_energy_percent": 1.5719991850261373e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -43.7995,
+        "step_ratio": 0.184769,
+        "curvature_ratio": 0.464756,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-grass-low",
+      "format": "mp3",
+      "path": "audio/offtrack-grass-low.mp3",
+      "bytes": 23616,
+      "sha256": "b202707171b32910897c594f742d662a912b9e8c5e7a3d842e7514f6eb925024",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -9.26,
+      "spectrum": {
+        "centroid_hz": 356.679,
+        "above_2khz_energy_db": -97.6157,
+        "above_2khz_energy_percent": 1.731540820636833e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -44.3982,
+        "step_ratio": 0.167023,
+        "curvature_ratio": 0.442282,
+        "guard_error_dbfs": -94.6043
+      }
+    },
+    {
+      "id": "offtrack-grass-medium",
+      "format": "ogg",
+      "path": "audio/offtrack-grass-medium.ogg",
+      "bytes": 10123,
+      "sha256": "291b616b0e93774faf2f85f9ed14755b5601487624e1a2c7d75e3a15eb806c79",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -8.5,
+      "spectrum": {
+        "centroid_hz": 386.922,
+        "above_2khz_energy_db": -117.795,
+        "above_2khz_energy_percent": 1.6614884486054788e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -39.8826,
+        "step_ratio": 0.242197,
+        "curvature_ratio": 0.478847,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-grass-medium",
+      "format": "mp3",
+      "path": "audio/offtrack-grass-medium.mp3",
+      "bytes": 23616,
+      "sha256": "997e02f99d3a7f5fbbd86426d28813e9dc891b65004a9e6b6778eed1124e45c6",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -8.94,
+      "spectrum": {
+        "centroid_hz": 388.224,
+        "above_2khz_energy_db": -97.5714,
+        "above_2khz_energy_percent": 1.7492906124130216e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -40.7038,
+        "step_ratio": 0.23283,
+        "curvature_ratio": 0.439356,
+        "guard_error_dbfs": -85.6369
+      }
+    },
+    {
+      "id": "offtrack-grass-high",
+      "format": "ogg",
+      "path": "audio/offtrack-grass-high.ogg",
+      "bytes": 10397,
+      "sha256": "06aa8ccfd60186f95611f672794be01e1c3ac5d4c14837ded5efcdc3703c0d61",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -9.0,
+      "spectrum": {
+        "centroid_hz": 410.352,
+        "above_2khz_energy_db": -116.527,
+        "above_2khz_energy_percent": 2.2248253717426809e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -34.8107,
+        "step_ratio": 0.449867,
+        "curvature_ratio": 0.743095,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "offtrack-grass-high",
+      "format": "mp3",
+      "path": "audio/offtrack-grass-high.mp3",
+      "bytes": 23616,
+      "sha256": "3775ccd7d4ba2f40ace1b663f93c31b7c3dec78b766a0873d58204876f4932e6",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -9.08,
+      "spectrum": {
+        "centroid_hz": 410.792,
+        "above_2khz_energy_db": -97.655,
+        "above_2khz_energy_percent": 1.7159216023469358e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -34.8589,
+        "step_ratio": 0.449725,
+        "curvature_ratio": 0.656805,
+        "guard_error_dbfs": -117.1659
+      }
+    },
+    {
+      "id": "brake-low",
+      "format": "ogg",
+      "path": "audio/brake-low.ogg",
+      "bytes": 10190,
+      "sha256": "46a67c26c3889c51453249a7ec2eaba3d2a0718a5beed77831237d4c52fe6684",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.98,
+      "true_peak_dbtp": -8.49,
+      "spectrum": {
+        "centroid_hz": 443.858,
+        "above_2khz_energy_db": -117.9096,
+        "above_2khz_energy_percent": 1.6182366926853603e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -30.6489,
+        "step_ratio": 0.673038,
+        "curvature_ratio": 0.343232,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "brake-low",
+      "format": "mp3",
+      "path": "audio/brake-low.mp3",
+      "bytes": 23616,
+      "sha256": "30281633ae53f69e715d07de0eb85bf1085363b0eb3b8bc1a0a0777b9ffc9d3e",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -8.69,
+      "spectrum": {
+        "centroid_hz": 444.482,
+        "above_2khz_energy_db": -97.5779,
+        "above_2khz_energy_percent": 1.7466770661207567e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -30.3338,
+        "step_ratio": 0.703963,
+        "curvature_ratio": 0.321936,
+        "guard_error_dbfs": -96.9083
+      }
+    },
+    {
+      "id": "brake-medium",
+      "format": "ogg",
+      "path": "audio/brake-medium.ogg",
+      "bytes": 10354,
+      "sha256": "d600e8dde11ebd4f099df1b10b85afe13221b2df26e0029e20a15ec90f098c67",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -8.82,
+      "spectrum": {
+        "centroid_hz": 507.151,
+        "above_2khz_energy_db": -115.9316,
+        "above_2khz_energy_percent": 2.5517716391034296e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -46.4487,
+        "step_ratio": 0.113309,
+        "curvature_ratio": 0.083268,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "brake-medium",
+      "format": "mp3",
+      "path": "audio/brake-medium.mp3",
+      "bytes": 23616,
+      "sha256": "f6dd08fa64708c451d7c6c2000971e17367dd35dbdf03b16c7d5c1435845f156",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -9.04,
+      "spectrum": {
+        "centroid_hz": 507.729,
+        "above_2khz_energy_db": -97.6381,
+        "above_2khz_energy_percent": 1.7226163201414883e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -44.9968,
+        "step_ratio": 0.134382,
+        "curvature_ratio": 0.11244,
+        "guard_error_dbfs": -97.9574
+      }
+    },
+    {
+      "id": "brake-high",
+      "format": "ogg",
+      "path": "audio/brake-high.ogg",
+      "bytes": 10237,
+      "sha256": "f8ff0aaab08c449ed35ddc0c8c796b5de4a57815ffb805487318158a59eed2d3",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -8.47,
+      "spectrum": {
+        "centroid_hz": 576.545,
+        "above_2khz_energy_db": -114.9994,
+        "above_2khz_energy_percent": 3.162715239408546e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -34.8134,
+        "step_ratio": 0.369842,
+        "curvature_ratio": 0.256239,
+        "guard_error_dbfs": -600.0
+      }
+    },
+    {
+      "id": "brake-high",
+      "format": "mp3",
+      "path": "audio/brake-high.mp3",
+      "bytes": 23616,
+      "sha256": "798392ce7085791dff745c9557fe98d502d9d8dc14d7ab693be91d064602474f",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 92160,
+      "decoded_seconds": 2.88,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -8.73,
+      "spectrum": {
+        "centroid_hz": 578.258,
+        "above_2khz_energy_db": -97.5801,
+        "above_2khz_energy_percent": 1.7457721812875755e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": {
+        "start_sample": 9216,
+        "end_sample_exclusive": 82944,
+        "period_samples": 73728,
+        "period_seconds": 2.304,
+        "bounds_match_manifest": true,
+        "step_dbfs": -33.7236,
+        "step_ratio": 0.408366,
+        "curvature_ratio": 0.210349,
+        "guard_error_dbfs": -92.1419
+      }
+    },
+    {
+      "id": "decel-downshift-01",
+      "format": "ogg",
+      "path": "audio/decel-downshift-01.ogg",
+      "bytes": 5754,
+      "sha256": "d5298ceacd094f7423e7c326a3a895162107a8655b1334d578798adac4432b1f",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 30976,
+      "decoded_seconds": 0.968,
+      "integrated_lufs": -18.06,
+      "true_peak_dbtp": -5.95,
+      "spectrum": {
+        "centroid_hz": 319.631,
+        "above_2khz_energy_db": -116.9607,
+        "above_2khz_energy_percent": 2.0134113990042822e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-01",
+      "format": "mp3",
+      "path": "audio/decel-downshift-01.mp3",
+      "bytes": 8352,
+      "sha256": "e4404f3f55b79f6a5333d0e2fb638b7d3dfb71dc8cbfbac7e6a4f4de8176b982",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 31104,
+      "decoded_seconds": 0.972,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -6.02,
+      "spectrum": {
+        "centroid_hz": 321.16,
+        "above_2khz_energy_db": -96.9417,
+        "above_2khz_energy_percent": 2.0222051780084013e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-02",
+      "format": "ogg",
+      "path": "audio/decel-downshift-02.ogg",
+      "bytes": 6037,
+      "sha256": "35daa93b27d36e5666a8538ec20a44aaf343a4ec5cc403c3d65396d95ee7898e",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 34560,
+      "decoded_seconds": 1.08,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -5.8,
+      "spectrum": {
+        "centroid_hz": 314.321,
+        "above_2khz_energy_db": -114.5601,
+        "above_2khz_energy_percent": 3.499335780667332e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-02",
+      "format": "mp3",
+      "path": "audio/decel-downshift-02.mp3",
+      "bytes": 9216,
+      "sha256": "13836220447987ee4b0544ebb8a4675f92db2430053d261488d46591c8a9b532",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 34560,
+      "decoded_seconds": 1.08,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -6.05,
+      "spectrum": {
+        "centroid_hz": 316.338,
+        "above_2khz_energy_db": -97.1491,
+        "above_2khz_energy_percent": 1.9279103416069102e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-03",
+      "format": "ogg",
+      "path": "audio/decel-downshift-03.ogg",
+      "bytes": 6227,
+      "sha256": "27c18ec42a93e98a20dbb9808772f0d5f9a3f78796b17f14830bebefecb30012",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 36864,
+      "decoded_seconds": 1.152,
+      "integrated_lufs": -18.01,
+      "true_peak_dbtp": -5.97,
+      "spectrum": {
+        "centroid_hz": 313.194,
+        "above_2khz_energy_db": -116.1899,
+        "above_2khz_energy_percent": 2.4044047736409904e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-03",
+      "format": "mp3",
+      "path": "audio/decel-downshift-03.mp3",
+      "bytes": 9792,
+      "sha256": "c6ecf18c8c3c4b8be6af95facbeeb8b5ecf398a20898c90c6affd0db4b455cd2",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 36864,
+      "decoded_seconds": 1.152,
+      "integrated_lufs": -17.99,
+      "true_peak_dbtp": -6.22,
+      "spectrum": {
+        "centroid_hz": 315.352,
+        "above_2khz_energy_db": -97.2481,
+        "above_2khz_energy_percent": 1.8844697577818398e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-04",
+      "format": "ogg",
+      "path": "audio/decel-downshift-04.ogg",
+      "bytes": 5835,
+      "sha256": "c31cff077b182bfe250bd1f24af98d86a51b216ac33bf9902ec5185cd6a088af",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 32128,
+      "decoded_seconds": 1.004,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -6.07,
+      "spectrum": {
+        "centroid_hz": 326.406,
+        "above_2khz_energy_db": -115.5559,
+        "above_2khz_energy_percent": 2.782314217248474e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "decel-downshift-04",
+      "format": "mp3",
+      "path": "audio/decel-downshift-04.mp3",
+      "bytes": 8640,
+      "sha256": "8cc771de95224d14734bab85ceac809d590ec8e9f82cd6c58df4877fe3b13263",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 32256,
+      "decoded_seconds": 1.008,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -6.19,
+      "spectrum": {
+        "centroid_hz": 327.942,
+        "above_2khz_energy_db": -97.2806,
+        "above_2khz_energy_percent": 1.8704290887374684e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-01",
+      "format": "ogg",
+      "path": "audio/shift-up-01.ogg",
+      "bytes": 5217,
+      "sha256": "7e3f2d7a26a2e49b4e0bf7f2154264adc32a7b74c8451495b89eebe0ed1ea356",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 22912,
+      "decoded_seconds": 0.716,
+      "integrated_lufs": -18.07,
+      "true_peak_dbtp": -6.53,
+      "spectrum": {
+        "centroid_hz": 315.788,
+        "above_2khz_energy_db": -114.6261,
+        "above_2khz_energy_percent": 3.4466326628458543e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-01",
+      "format": "mp3",
+      "path": "audio/shift-up-01.mp3",
+      "bytes": 6336,
+      "sha256": "c7127a905e5491d6aebcf5c3b9492b71df1dfc7b175ae09e5109d907ddc40ced",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 23040,
+      "decoded_seconds": 0.72,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -6.71,
+      "spectrum": {
+        "centroid_hz": 317.5,
+        "above_2khz_energy_db": -96.9681,
+        "above_2khz_energy_percent": 2.009962277604164e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-02",
+      "format": "ogg",
+      "path": "audio/shift-up-02.ogg",
+      "bytes": 5346,
+      "sha256": "88ef3a2775d0dcd1ba060fa76df6a8e81ebcd1837dbdec4f90be7d696d0f1976",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 25216,
+      "decoded_seconds": 0.788,
+      "integrated_lufs": -18.02,
+      "true_peak_dbtp": -6.6,
+      "spectrum": {
+        "centroid_hz": 321.533,
+        "above_2khz_energy_db": -114.8849,
+        "above_2khz_energy_percent": 3.247230653962847e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-02",
+      "format": "mp3",
+      "path": "audio/shift-up-02.mp3",
+      "bytes": 6912,
+      "sha256": "d67af76c2f068481fc75323b38ba583b6d4f599dd85b492fece88123138257d5",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 25344,
+      "decoded_seconds": 0.792,
+      "integrated_lufs": -17.97,
+      "true_peak_dbtp": -6.73,
+      "spectrum": {
+        "centroid_hz": 323.224,
+        "above_2khz_energy_db": -96.6611,
+        "above_2khz_energy_percent": 2.1571843758184703e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-03",
+      "format": "ogg",
+      "path": "audio/shift-up-03.ogg",
+      "bytes": 5548,
+      "sha256": "8d5a4734e576ee414c08b781c755170fc6de3a2a238acc53123842fbb4c92090",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 27520,
+      "decoded_seconds": 0.86,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -6.63,
+      "spectrum": {
+        "centroid_hz": 318.017,
+        "above_2khz_energy_db": -117.5993,
+        "above_2khz_energy_percent": 1.738090891517834e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-up-03",
+      "format": "mp3",
+      "path": "audio/shift-up-03.mp3",
+      "bytes": 7488,
+      "sha256": "2b6c1bf96eade8595325509ab8f02952c0eb5021f259992ca04597e2911222c3",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 27648,
+      "decoded_seconds": 0.864,
+      "integrated_lufs": -18.03,
+      "true_peak_dbtp": -6.9,
+      "spectrum": {
+        "centroid_hz": 319.827,
+        "above_2khz_energy_db": -97.0728,
+        "above_2khz_energy_percent": 1.962111987933811e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-01",
+      "format": "ogg",
+      "path": "audio/shift-down-01.ogg",
+      "bytes": 5473,
+      "sha256": "cddedd223a314046734103c8bfb2c7748dc0062829ccf9ed508572276f0b6e4f",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 25216,
+      "decoded_seconds": 0.788,
+      "integrated_lufs": -18.05,
+      "true_peak_dbtp": -7.0,
+      "spectrum": {
+        "centroid_hz": 303.413,
+        "above_2khz_energy_db": -112.8441,
+        "above_2khz_energy_percent": 5.195047061912385e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-01",
+      "format": "mp3",
+      "path": "audio/shift-down-01.mp3",
+      "bytes": 6912,
+      "sha256": "08da3d007f13022993c8c5e1c39bb88e7e5d3bb525cff1fb9d88498bf7555955",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 25344,
+      "decoded_seconds": 0.792,
+      "integrated_lufs": -17.97,
+      "true_peak_dbtp": -7.06,
+      "spectrum": {
+        "centroid_hz": 304.04,
+        "above_2khz_energy_db": -97.1757,
+        "above_2khz_energy_percent": 1.916150881023369e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-02",
+      "format": "ogg",
+      "path": "audio/shift-down-02.ogg",
+      "bytes": 5561,
+      "sha256": "d9973fd667f226bba2e123f4b050959b29bf189b50625b8065223d5e60a9f4db",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 27520,
+      "decoded_seconds": 0.86,
+      "integrated_lufs": -18.08,
+      "true_peak_dbtp": -7.02,
+      "spectrum": {
+        "centroid_hz": 314.173,
+        "above_2khz_energy_db": -109.1388,
+        "above_2khz_energy_percent": 1.2193346865616627e-09,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-02",
+      "format": "mp3",
+      "path": "audio/shift-down-02.mp3",
+      "bytes": 7488,
+      "sha256": "8fe5316c0afb030c90158a7b4347d72bdef465c5d8a30bfecb8578105e98610f",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 27648,
+      "decoded_seconds": 0.864,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -7.22,
+      "spectrum": {
+        "centroid_hz": 315.991,
+        "above_2khz_energy_db": -96.9806,
+        "above_2khz_energy_percent": 2.004195823988666e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-03",
+      "format": "ogg",
+      "path": "audio/shift-down-03.ogg",
+      "bytes": 5730,
+      "sha256": "805756ff5bfd34b40193bbac0edc42abc85edda6e5ce67a865d040fc49979fe1",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 30912,
+      "decoded_seconds": 0.966,
+      "integrated_lufs": -18.05,
+      "true_peak_dbtp": -7.09,
+      "spectrum": {
+        "centroid_hz": 330.358,
+        "above_2khz_energy_db": -115.2836,
+        "above_2khz_energy_percent": 2.9623995179421233e-10,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "shift-down-03",
+      "format": "mp3",
+      "path": "audio/shift-down-03.mp3",
+      "bytes": 8064,
+      "sha256": "fb47ec4e8a8b61f48526107e685228afe9a654732e775e2436abc4691f6569a2",
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "decoded_frames": 29952,
+      "decoded_seconds": 0.936,
+      "integrated_lufs": -18.0,
+      "true_peak_dbtp": -7.09,
+      "spectrum": {
+        "centroid_hz": 331.58,
+        "above_2khz_energy_db": -97.1212,
+        "above_2khz_energy_percent": 1.940327959625289e-08,
+        "strongest_narrow_line": null,
+        "significant_narrow_line": false
+      },
+      "loop_seam": null
+    }
+  ],
+  "v5_branch_legacy_v2": [
+    {
+      "id": "engine-idle",
+      "format": "ogg",
+      "path": "engine-idle.ogg",
+      "bytes": 121723,
+      "sha256": "03f340a14f32c58a3eb113db92fd2417ee6737c135f9a79e3d4eae521bf12ede",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.95,
+      "true_peak_dbtp": -9.55,
+      "spectrum": {
+        "centroid_hz": 783.457,
+        "above_2khz_energy_db": -9.9829,
+        "above_2khz_energy_percent": 10.039368890299315,
+        "strongest_narrow_line": {
+          "frequency_hz": 2199.21875,
+          "prominence_db": 29.293064510277667,
+          "relative_db": -13.81046223793273,
+          "width_hz": 3.90625,
+          "window_center_seconds": 2.304
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-idle",
+      "format": "mp3",
+      "path": "engine-idle.mp3",
+      "bytes": 67440,
+      "sha256": "440cd309798d85e3eba6f455f6e0a46a5e97ea28f8dd685e53694da28bdd39a6",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.96,
+      "true_peak_dbtp": -9.55,
+      "spectrum": {
+        "centroid_hz": 786.596,
+        "above_2khz_energy_db": -9.9661,
+        "above_2khz_energy_percent": 10.078270549550911,
+        "strongest_narrow_line": {
+          "frequency_hz": 2199.21875,
+          "prominence_db": 29.325852706301234,
+          "relative_db": -13.921585065421397,
+          "width_hz": 3.90625,
+          "window_center_seconds": 2.304
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-low",
+      "format": "ogg",
+      "path": "engine-low.ogg",
+      "bytes": 55068,
+      "sha256": "926155df384f71c15671931ec5fb85e5ece6b117ecf9ab79307167c138bd2270",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.98,
+      "true_peak_dbtp": -10.08,
+      "spectrum": {
+        "centroid_hz": 1026.421,
+        "above_2khz_energy_db": -7.9063,
+        "above_2khz_energy_percent": 16.19446353442393,
+        "strongest_narrow_line": {
+          "frequency_hz": 2101.5625,
+          "prominence_db": 35.447638575303564,
+          "relative_db": -9.396480254282036,
+          "width_hz": 3.90625,
+          "window_center_seconds": 1.344
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-low",
+      "format": "mp3",
+      "path": "engine-low.mp3",
+      "bytes": 67440,
+      "sha256": "44a7f594dfb37ccb8eb29bfddcae616489123c8e7aba0b8c66c5f0736dce4cc9",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -16.03,
+      "true_peak_dbtp": -9.99,
+      "spectrum": {
+        "centroid_hz": 1048.198,
+        "above_2khz_energy_db": -7.7957,
+        "above_2khz_energy_percent": 16.612433383729726,
+        "strongest_narrow_line": {
+          "frequency_hz": 2101.5625,
+          "prominence_db": 33.78595987502112,
+          "relative_db": -9.3606540179656,
+          "width_hz": 3.90625,
+          "window_center_seconds": 1.92
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-mid",
+      "format": "ogg",
+      "path": "engine-mid.ogg",
+      "bytes": 57118,
+      "sha256": "ad5c6c03894f7bdd4af4c0691d7e64138d0afcde52a24ae9ab2f6d3fbbba085d",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -10.66,
+      "spectrum": {
+        "centroid_hz": 1377.938,
+        "above_2khz_energy_db": -6.8384,
+        "above_2khz_energy_percent": 20.709034792628074,
+        "strongest_narrow_line": {
+          "frequency_hz": 2250.0,
+          "prominence_db": 36.88923513816059,
+          "relative_db": -5.720324755262078,
+          "width_hz": 3.90625,
+          "window_center_seconds": 1.984
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-mid",
+      "format": "mp3",
+      "path": "engine-mid.mp3",
+      "bytes": 67440,
+      "sha256": "dbbb9989f0be3780aea57762e1f3928c5313308748ce648be0a284ac2dbefd59",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -10.72,
+      "spectrum": {
+        "centroid_hz": 1394.557,
+        "above_2khz_energy_db": -6.7773,
+        "above_2khz_energy_percent": 21.002453501096834,
+        "strongest_narrow_line": {
+          "frequency_hz": 2250.0,
+          "prominence_db": 37.71032954168854,
+          "relative_db": -5.639768866994352,
+          "width_hz": 3.90625,
+          "window_center_seconds": 1.984
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-high",
+      "format": "ogg",
+      "path": "engine-high.ogg",
+      "bytes": 57465,
+      "sha256": "bd5b84951c4bb31a9f07d326f2d7be45502fb235d9a6666a6879716b684e9e86",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.95,
+      "true_peak_dbtp": -11.41,
+      "spectrum": {
+        "centroid_hz": 1655.262,
+        "above_2khz_energy_db": -6.6571,
+        "above_2khz_energy_percent": 21.59181364526141,
+        "strongest_narrow_line": {
+          "frequency_hz": 2398.4375,
+          "prominence_db": 38.64763974784971,
+          "relative_db": -3.8664598645047423,
+          "width_hz": 7.8125,
+          "window_center_seconds": 1.024
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "engine-high",
+      "format": "mp3",
+      "path": "engine-high.mp3",
+      "bytes": 67440,
+      "sha256": "398d2db676d9bca9e932eaf14eed15cdee5acc48feda756896dfb304e0f7b1f1",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.96,
+      "true_peak_dbtp": -11.34,
+      "spectrum": {
+        "centroid_hz": 1669.364,
+        "above_2khz_energy_db": -6.603,
+        "above_2khz_energy_percent": 21.862699025059587,
+        "strongest_narrow_line": {
+          "frequency_hz": 2398.4375,
+          "prominence_db": 36.928419045264135,
+          "relative_db": -3.9235207276956405,
+          "width_hz": 7.8125,
+          "window_center_seconds": 1.024
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "pass-whoosh",
+      "format": "ogg",
+      "path": "pass-whoosh.ogg",
+      "bytes": 20038,
+      "sha256": "ba8ded6db5aef90f3fa4bee445d8e292606dbf0adc7bec9c18459f164d160f91",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 57330,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -9.17,
+      "spectrum": {
+        "centroid_hz": 3842.188,
+        "above_2khz_energy_db": -2.0448,
+        "above_2khz_energy_percent": 62.44807929347911,
+        "strongest_narrow_line": {
+          "frequency_hz": 3644.53125,
+          "prominence_db": 13.457039116866893,
+          "relative_db": -5.296388954960076,
+          "width_hz": 7.8125,
+          "window_center_seconds": 0.256
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "pass-whoosh",
+      "format": "mp3",
+      "path": "pass-whoosh.mp3",
+      "bytes": 27211,
+      "sha256": "50100abebd6d20a242a98ef7c117382a044dbf9c9a5e0b459f4de8e426489863",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 57330,
+      "decoded_seconds": 1.3,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -10.31,
+      "spectrum": {
+        "centroid_hz": 3899.775,
+        "above_2khz_energy_db": -1.9651,
+        "above_2khz_energy_percent": 63.605528086516685,
+        "strongest_narrow_line": {
+          "frequency_hz": 3644.53125,
+          "prominence_db": 14.036658183406331,
+          "relative_db": -5.089334656949369,
+          "width_hz": 7.8125,
+          "window_center_seconds": 0.256
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "tyre-squeal",
+      "format": "ogg",
+      "path": "tyre-squeal.ogg",
+      "bytes": 44033,
+      "sha256": "12cdb5b9f188ce037c9452ce928956d35c80b3ccbb8bcf8637baaa57790d341f",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -16.07,
+      "true_peak_dbtp": -11.37,
+      "spectrum": {
+        "centroid_hz": 2108.922,
+        "above_2khz_energy_db": -5.7682,
+        "above_2khz_energy_percent": 26.49625298090936,
+        "strongest_narrow_line": {
+          "frequency_hz": 2351.5625,
+          "prominence_db": 25.760131904443465,
+          "relative_db": -5.407798940385041,
+          "width_hz": 3.90625,
+          "window_center_seconds": 2.688
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    },
+    {
+      "id": "tyre-squeal",
+      "format": "mp3",
+      "path": "tyre-squeal.mp3",
+      "bytes": 67440,
+      "sha256": "895ec9e2b4810d7458a0a2826e6ed236388916a340d274aadf7575fa9e862b1f",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_frames": 145530,
+      "decoded_seconds": 3.3,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -12.2,
+      "spectrum": {
+        "centroid_hz": 2143.087,
+        "above_2khz_energy_db": -5.6051,
+        "above_2khz_energy_percent": 27.510228682314008,
+        "strongest_narrow_line": {
+          "frequency_hz": 2351.5625,
+          "prominence_db": 24.967236168965638,
+          "relative_db": -5.418625537370802,
+          "width_hz": 3.90625,
+          "window_center_seconds": 2.688
+        },
+        "significant_narrow_line": true
+      },
+      "loop_seam": null
+    }
+  ]
+}
