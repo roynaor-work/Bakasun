@@ -1,6 +1,7 @@
 import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-18';
 /** Original, instanced roadside scenery. The view owns every registered resource. */
 // racing-v23: clear>0 (no walls) keeps bushes, rocks, tufts and the grass mounds that far beyond the asphalt; 0 = the old layout
+// racing-v24.5: a mound keeps its whole rotated footprint (the diagonal of sx, sz) out of the zone: on the round circuits one mound's corner reached 8.2 m (ruins, tier 1)
 export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center,clear=0}){
  let word=(seed>>>0)^0x734af21;const random=()=>((word=(Math.imul(word,1664525)+1013904223)>>>0)/4294967296);
  const root=new T.Group();root.name='racing-original-scenery';scene.add(root);
@@ -29,7 +30,7 @@ export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center
    if(Math.floor(distance/18)%3===0){bushRows.push({x,y:y+.28,z,sx:1+random()*.8,sy:.5+random()*.4,sz:.8+random()*.9,angle:random()*6.28});rockRows.push({x:x+sign*2,y:y+.22,z:z+1,sx:.4+random()*.8,sy:.3+random()*.5,sz:.5+random()*.9,angle:random()*6.28});}
    for(let i=0;i<2;i++){const tx=x+(random()-.5)*spread,tz=z+(random()-.5)*spread;tuftRows.push({x:tx,y:ground(tx,tz)+.03,z:tz,sx:.7+random()*.6,sy:.45+random()*.65,sz:.7+random()*.6,angle:random()*6.28});if(i===0&&track.theme!=='volcano')flowerRows.push({x:tx,y:ground(tx,tz)+.35+random()*.2,z:tz,sx:.8,sy:1,sz:.8,color:['#f4d78c','#e5aa9d','#f0e5bc'][Math.floor(random()*3)]});}
   }
-  if(Math.floor(distance/18)%4===0){const sign=random()<.5?-1:1,lane=sign*(track.width/2+19+random()*23),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(safe(x,z,15)){const m={x,y:ground(x,z)-.15,z,sx:5+random()*7,sy:1.2+random()*3,sz:5+random()*10,angle:random()*6.28};if(!clear||safe(x,z,clear+.6+Math.max(m.sx,m.sz)))moundRows.push(m);}}
+  if(Math.floor(distance/18)%4===0){const sign=random()<.5?-1:1,lane=sign*(track.width/2+19+random()*23),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(safe(x,z,15)){const m={x,y:ground(x,z)-.15,z,sx:5+random()*7,sy:1.2+random()*3,sz:5+random()*10,angle:random()*6.28};if(!clear||safe(x,z,clear+.6+Math.hypot(m.sx,m.sz)))moundRows.push(m);}}
  }
  const hemisphere=new T.SphereGeometry(1,10,4,0,Math.PI*2,0,Math.PI/2);
  batch(hemisphere,grassMaterial,limit(moundRows,16));

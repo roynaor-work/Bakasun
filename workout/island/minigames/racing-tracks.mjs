@@ -1,4 +1,5 @@
 // Original island circuits. Distances are metres, Y is up, heading 0 faces +Z.
+import { ROUND, racingRoundOn } from './racing-v24-5.mjs?v=island-v2-20261107-18';
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap = (v, length) => ((v % length) + length) % length;
@@ -136,14 +137,14 @@ function straightRuns(points) {
   }
   return runs;
 }
-function kinkStraights(points, { min = 110, period: fullPeriod = 70, amp: fullAmp = KINK_AMP, margin = 22, keepLongest = !KINK_ALL, short = SHORT_KINK ? 78 : Infinity } = {}) {
+function kinkStraights(points, { min = 110, period: fullPeriod = 70, amp: fullAmp = KINK_AMP, margin = 22, keepLongest = !KINK_ALL, short = SHORT_KINK ? 78 : Infinity, shortR = SHORT_R } = {}) {
   const out = points.map(p => p.slice()), runs = straightRuns(points);
   const longest = runs.reduce((best, r) => r.length > (best?.length || 0) ? r : best, null);
   for (const { run, d, length, heading: h } of runs) {
     if (length < Math.min(min, short) || (keepLongest && run === longest?.run)) continue;
     // racing-deep-m2: a medium straight (78-110 m raw, 115-165 m on the island) gets one gentler S (the same 13 m raw radius at the sine peaks as the long ones);
     // without it a skilled driver spent only 31-38% of the lap under 85% of top speed on jungle and volcano (target 40%).
-    const period = length >= min ? fullPeriod : Math.min(fullPeriod, length - 2 * margin), amp = length >= min ? fullAmp : Math.min(fullAmp, (period / (2 * Math.PI)) ** 2 / SHORT_R);
+    const period = length >= min ? fullPeriod : Math.min(fullPeriod, length - 2 * margin), amp = length >= min ? fullAmp : Math.min(fullAmp, (period / (2 * Math.PI)) ** 2 / shortR);
     const periods = Math.floor((length - 2 * margin) / period); if (periods < 1 || period < 30) continue;
     const from = (length - periods * period) / 2, nx = Math.cos(h), nz = -Math.sin(h);
     // racing-deep-m2: a C1 fade (raised cosine over 20 m) instead of the linear min(1, u/15, ...) hinge. The hinge put a 0.6 rad cusp (radius about 5 m) in the centre line
@@ -162,9 +163,34 @@ function startOnMainStraight(points) {
   const k = longest.run[Math.min(longest.run.length - 1, Math.round(0.62 * (longest.run.length - 1)))], ring = points.slice(k).concat(points.slice(0, k)), x0 = ring[0][0], z0 = ring[0][2];
   return ring.map(([x, y, z]) => [x - x0, y, z - z0]);
 }
+// racing-v24.5 (Roy after v24.4: "more long round corners"): the v2 circuits were hairpins (12 m raw) joined by chicane wiggles on every straight (tools/racing-track-report:
+// 4-9 hairpins and 4-13 chicanes a circuit). With ROUND (default; ?racingRound=v244 keeps the v24.4 shape) the raw centre line is smoothed with a Gaussian of ROUND.sigma raw
+// metres (a closed ring, x/y/z alike), which opens every hairpin into a long round corner and keeps the straights straight, and the long straights (except the main one)
+// get one long sweeper (ROUND.period raw metres, ROUND.amp) instead of the 70 m chicane periods; the medium straights stay straight. ?racingRoundSigma= tunes it.
+const ROUND_ON = racingRoundOn();
+const ROUND_SIGMA = Number(new URLSearchParams(globalThis.location?.search || '').get('racingRoundSigma')) || ROUND.sigma;
+// The main straight (the longest straight run: grid, pit lane with twelve boxes, start line) keeps its raw points, and the smoothing fades in over ROUND.keepFade raw
+// metres beyond each of its ends (raised cosine): the straight keeps its full length for the pit lane and the grid, and joins the opened corners without a kink.
+function smoothRing(points, sigma) {
+  const n = points.length; let mean = 0; for (let i = 0; i < n; i++) mean += Math.hypot(points[(i + 1) % n][0] - points[i][0], points[(i + 1) % n][2] - points[i][2]); mean /= n;
+  const r = Math.max(1, Math.round(3 * sigma / mean)), w = Array.from({ length: 2 * r + 1 }, (_, k) => Math.exp(-(((k - r) * mean) ** 2) / (2 * sigma * sigma))), W = w.reduce((a, b) => a + b, 0);
+  const keep = new Float64Array(n), runs = straightRuns(points), main = runs.reduce((best, run) => run.length > (best?.length || 0) ? run : best, null);
+  if (main) {
+    for (const index of main.run) keep[index] = 1;
+    // walk out of both ends of the run: the raw shape fades out over keepFade raw metres (the corners at the ends of the main straight stay a little tighter: turn 1)
+    for (const dir of [1, -1]) { let i = dir > 0 ? main.run[main.run.length - 1] : main.run[0], d = 0;
+      for (let step = 0; step < n; step++) { const j = (i + dir + n) % n; d += Math.hypot(points[j][0] - points[i][0], points[j][2] - points[i][2]); i = j; if (d >= ROUND.keepFade || keep[j] === 1) break; keep[j] = Math.max(keep[j], .5 + .5 * Math.cos(Math.PI * d / ROUND.keepFade)); } }
+  }
+  return points.map((p, i) => [0, 1, 2].map(axis => { let v = 0; for (let k = -r; k <= r; k++) v += points[(i + k + n) % n][axis] * w[k + r]; return p[axis] * keep[i] + v / W * (1 - keep[i]); }));
+}
+const ringLength = points => points.reduce((n, p, i) => { const q = points[(i + 1) % points.length]; return n + Math.hypot(q[0] - p[0], q[2] - p[2]); }, 0);
 function codexTrack(spec, base) {
   const lift = Math.max(0, 1 - Math.min(...spec.points.map(p => p[1])));
-  const shaped = V2_KINK.has(spec.id) && NO_KINK !== '0' ? kinkStraights(spec.points) : spec.points, placed = KINK_ALL ? shaped : startOnMainStraight(shaped);
+  const kinked = !V2_KINK.has(spec.id) || NO_KINK === '0' ? spec.points : ROUND_ON ? kinkStraights(smoothRing(spec.points, ROUND_SIGMA), { min: Infinity, short: ROUND.min, period: ROUND.period, amp: ROUND.amp, shortR: ROUND.minR }) : kinkStraights(spec.points);
+  let shaped = ROUND_ON && kinked === spec.points ? smoothRing(spec.points, ROUND_SIGMA) : kinked;
+  // racing-v24.5 round: the opened corners cut the lap by 5-7%; the XZ plan is scaled back to the v24.4 lap length (the league race times, the 2.0-2.3 km circuits)
+  if (ROUND_ON && V2_KINK.has(spec.id) && NO_KINK !== '0') { const old = ringLength(kinkStraights(spec.points)), now = ringLength(shaped), k = old / now; shaped = shaped.map(([x, y, z]) => [x * k, y, z * k]); }
+  const placed = KINK_ALL ? shaped : startOnMainStraight(shaped);
   // f1: true gives the v2 circuits the Formula 1 trackside (pits, gantry, kerb paint) of racing-f1.mjs; set: 'v2' marks the data source
   // samples 4 per control point (the data has a point every 4 m raw): 1.5 m segments, a sagitta under 2 cm at a 10 m radius, and track.project scans half the segments of the 0.75 m sampling
   return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: V2_SAMPLES, f1: true, set: 'v2', points: placed.map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
@@ -180,7 +206,9 @@ export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS :
 // without upgrades champion in season 1 and 5th in season 2). Tier 0 is also the regular stages 1-6 that skilled driving must win outright (racing-physics tests), so the
 // table keeps tier 0 gentler and lands seasons 2-3 at 0.97: [tier 0..4]. ?racingAiCorner=a,b,c,d,e tunes it; ?racingAiCorner=0 restores the old law.
 const AI_CORNER_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingAiCorner');
-const V2_AI_CORNER = RACING_TRACK_SET !== 'v2' || AI_CORNER_PARAM === '0' ? null : (AI_CORNER_PARAM && AI_CORNER_PARAM.split(',').length === 5 ? AI_CORNER_PARAM.split(',').map(Number) : [23, 27, 31.8, 32.4, 33]);
+// racing-v24.5 round: the computer's corner law gains more from the opened corners than the player (its speed is sqrt(aiCorner R)), so a child on the automatic gas
+// finished 2nd-5th instead of 1st in tiers 0-1 (tools/racing-v24-5-sim.mjs field); the table is scaled by ROUND.aiCorner on the round circuits (x0.85: 1st again).
+const V2_AI_CORNER = RACING_TRACK_SET !== 'v2' || AI_CORNER_PARAM === '0' ? null : (AI_CORNER_PARAM && AI_CORNER_PARAM.split(',').length === 5 ? AI_CORNER_PARAM.split(',').map(Number) : [23, 27, 31.8, 32.4, 33].map(v => ROUND_ON ? +(v * ROUND.aiCorner).toFixed(2) : v));
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
 const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
 export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index) => {
