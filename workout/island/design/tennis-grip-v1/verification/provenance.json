@@ -1,0 +1,62 @@
+{
+  "baseMainCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "sources": [
+    {
+      "path": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "use": "Calibrated fictional body, materials and images; derived in player.glb.",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "license": "CC0-1.0",
+      "use": "Canonical solver copied with arm reach constraint in the new copy.",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/glb.mjs",
+      "license": "CC0-1.0",
+      "use": "Read-only GLB utility copied without modification.",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "workout/island/design/motion/soccer.json",
+      "license": "CC0-1.0",
+      "use": "Exact canonical rest translations and hierarchy.",
+      "bytes": 945091,
+      "sha256": "0fefbf459a03ef468801dc0c83c3e77855985dd8ae5830a9d9fde4058e66f83b"
+    },
+    {
+      "path": "workout/island/minigames/tennis-view.mjs",
+      "license": "Repository source; read-only",
+      "use": "Current procedural attachment and world hand rotation inspection.",
+      "bytes": 30455,
+      "sha256": "96a810e89b8d8f323709e4a7b1846bae7550068d879076e0c71fc4827e278659"
+    },
+    {
+      "path": "workout/island/minigames/tennis-pose.mjs",
+      "license": "Repository source; read-only",
+      "use": "Current target-pose sampling inspection.",
+      "bytes": 1210,
+      "sha256": "fdaccb0ad6d8cb78837c3a0008afa7c90573da49fcba6078a6d21ecb91c4a273"
+    },
+    {
+      "path": "workout/island/design/tennis-v7/rig.json",
+      "license": "CC0-1.0",
+      "use": "Compared calibrated T-pose bind against canonical neutral bind.",
+      "bytes": 5828,
+      "sha256": "9612a8d7cbdf812b1ed24ab6f94439375e2f62f392c395d235e6185d42e70560"
+    },
+    {
+      "path": "workout/island/design/tennis-v7/source/motions.mjs",
+      "license": "CC0-1.0",
+      "use": "Inspected existing tennis choreography; new movements are authored in this package.",
+      "bytes": 10847,
+      "sha256": "c8ae8316652ec9ec47122e533941fb43dedb5a7450cb1d42af574fb09868737b"
+    }
+  ]
+}

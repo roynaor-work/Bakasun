@@ -1,0 +1,892 @@
+{
+  "schemaVersion": 1,
+  "library": "tennis-grip-v1",
+  "license": "CC0-1.0",
+  "fileCount": 147,
+  "totalBytes": 5211090,
+  "note": "All files except this manifest are hashed; existing MIT runtime dependencies are linked, not copied.",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3912,
+      "sha256": "2bba37004ba04f83b2904a6a64e3ef1b3981244819d3d147eab095549f356b2e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6815,
+      "sha256": "2dfaf8fec2008e6c286548548af27448b189afdac2935a35e9033ac32e224703",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 8504,
+      "sha256": "44f5d90a4cab4d73b38f15c0870f06edb1d8db0a1b9dae4e1ec6f86a8a7f68f4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "contact-sheet.webp",
+      "bytes": 334560,
+      "sha256": "667b5f981e2ee26fb7930dafb11043d95f507d6b1905eb0b3cf79df24e38753b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-1.webp",
+      "bytes": 5920,
+      "sha256": "06f345c14125c81e74cd64685f880caf3b707e6aeb878c791336fae68b156de4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-2.webp",
+      "bytes": 5936,
+      "sha256": "fde922f1b0ef889976a808b093388b685777b5aeeac5ea0d925b1ada37c8b6c6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-3.webp",
+      "bytes": 5870,
+      "sha256": "a9146e9ce3a1ab135618e77b11c3672cfe06da2ee3c3c713fe09057778d0887c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-4.webp",
+      "bytes": 6168,
+      "sha256": "e4ad38d5fa708aa1229e7bb4b4a787f2ead0a045c560fcc3bd84181261ca1aef",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-5.webp",
+      "bytes": 6138,
+      "sha256": "9812afa0c9e5f24cee3242dcd15f683a1414d880c0ae515c330266daf15b486a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-6.webp",
+      "bytes": 5830,
+      "sha256": "12fa42a5e9a1cbc5d9ec6762c0225073fdcd81b4854a5be834cc87ae3188123a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/backhand-grip.webp",
+      "bytes": 20088,
+      "sha256": "5962c40eb8102e2d7529f6bff93f05034f0b845f9321b3d01351214549d3cd10",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-1.webp",
+      "bytes": 6190,
+      "sha256": "1597ada4b95e1c6783b004bdbdc82eb1c4a582187fc544e207831d6f3e03aa7e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-2.webp",
+      "bytes": 6112,
+      "sha256": "be74ce9bff9eaa73da47f058e9ab52a9dc56ef20d1500ae1190a9df44ab2d0b3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-3.webp",
+      "bytes": 5982,
+      "sha256": "ce002c45f398b51ff177411cfa82add57da0557fee08c0149d5ac0aee92c8891",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-4.webp",
+      "bytes": 5992,
+      "sha256": "f6b7f6f11192e1cb60bbd48ff4db9128f911c76456a579f87cb06ff32051089b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-5.webp",
+      "bytes": 6136,
+      "sha256": "e86be427c9560a15fc71645d2f3bcd5fe8a247884af4122e7b4c95bc9e0e7ed3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-6.webp",
+      "bytes": 5886,
+      "sha256": "b686e785295dc99e52f9ab298050d4410a21d8095c90a0b4ebcec3f83a9bcf9c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/drop_shot-grip.webp",
+      "bytes": 22782,
+      "sha256": "0461d94d0a98c2758b2b1eee2409501ed65c870cf80973941bd81d48fbd55d21",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-1.webp",
+      "bytes": 6182,
+      "sha256": "70fc5f806ca47f7d7c42151b116502dd17e85dc8373dc748bad19844214619a0",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-2.webp",
+      "bytes": 6182,
+      "sha256": "c77bdafa22dede42812ca2b81d24983c1a781e163db4c9831658c50ebcb1a801",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-3.webp",
+      "bytes": 5842,
+      "sha256": "7a90a9da8bedc5844bb5a5ee387f461abc7490e45ecaf531ba9a608da4d7e137",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-4.webp",
+      "bytes": 5802,
+      "sha256": "55566ba28ecdf7200c6b744fd6e79cc8bdfa27bee1b51f19975affe16d728e16",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-5.webp",
+      "bytes": 6118,
+      "sha256": "b2dbdec038cc3911ffa32a03c6876b560a022233deb41dc4e23c5195b8181149",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-6.webp",
+      "bytes": 5952,
+      "sha256": "c3b79988228342ac7c08822a2bdfb84bb32baf9270aaca20ead9231fc10a8f0b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/forehand-grip.webp",
+      "bytes": 22828,
+      "sha256": "bd097749153ab6fa59b256c8c21a0fde2387ca64826838fee46847e260630aa9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-1.webp",
+      "bytes": 5752,
+      "sha256": "b18b37957801c0bc8d9ff2acbb12d2e1fddae6d11c65762098dcbc095cd1a60c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-2.webp",
+      "bytes": 5738,
+      "sha256": "b89bbf915b1316cca0b73631de0928aee05c73774bd56d8d9449d03130490226",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-3.webp",
+      "bytes": 5724,
+      "sha256": "c92687802137dd365119140b3ef91b05a2f76f417608245598ffa5d34d770064",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-4.webp",
+      "bytes": 5724,
+      "sha256": "c92687802137dd365119140b3ef91b05a2f76f417608245598ffa5d34d770064",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-5.webp",
+      "bytes": 5738,
+      "sha256": "b89bbf915b1316cca0b73631de0928aee05c73774bd56d8d9449d03130490226",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-6.webp",
+      "bytes": 5752,
+      "sha256": "b18b37957801c0bc8d9ff2acbb12d2e1fddae6d11c65762098dcbc095cd1a60c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/idle-grip.webp",
+      "bytes": 19184,
+      "sha256": "572e2ac27713853c15bf935e615f886ac7cc488f4d878177a9438dfdf6166a91",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-1.webp",
+      "bytes": 6180,
+      "sha256": "e9a0b326181030c960774cb0aa0a31a144ffaf1fcc479444f3a28af242c74ade",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-2.webp",
+      "bytes": 5928,
+      "sha256": "fbb5047d6b56eba31670a3ee717dd8e86f757103a210a1d05fc650a3595544ba",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-3.webp",
+      "bytes": 5866,
+      "sha256": "649c4ce4f388b011f8d3512ab49c35852ac9fa8c775bf1f795b99e7140ebc12c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-4.webp",
+      "bytes": 6086,
+      "sha256": "f539ff2c9171da459fa668a9d94bb04660c43df87d12698e1e203ce089e5595c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-5.webp",
+      "bytes": 5888,
+      "sha256": "fcd206e5c226c79104008fb05a483acb9f192975d49180f9537c308b85ca908c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-6.webp",
+      "bytes": 5898,
+      "sha256": "a34d00bc64b1b1336d60c253c01a1d8bd22ef8dbf44e04536314f6d1613145b1",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/lob-grip.webp",
+      "bytes": 22018,
+      "sha256": "30db9b63dbdcdd737985fcbd26f6b5e633a791280e9acea18534db994db9fde7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-1.webp",
+      "bytes": 5778,
+      "sha256": "777c284e7969769554535f29a6687e3d3bda2f14a90ac5baf125fba993a002cc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-2.webp",
+      "bytes": 5810,
+      "sha256": "28b6e4e192ce82926fa49bdd3e756de664f2f4030e20b76d552359b70e87451e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-3.webp",
+      "bytes": 5836,
+      "sha256": "d6618d68584c39dccb1886f217437f047624bff8e4a8c078a5421e8eab8f34d9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-4.webp",
+      "bytes": 5874,
+      "sha256": "35c8fd01dfacb41bfd954fa3388474dd9bf6b117d681d47c21973fa4442538f9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-5.webp",
+      "bytes": 5728,
+      "sha256": "a08b0069bc22b881b6b0d05913e21d5a9415263aed52f5b1131bef9302131ec4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-6.webp",
+      "bytes": 5742,
+      "sha256": "c110b3dc8fb78761d9aecbb1792fb7436afbdebc2c5ca052f1e36a468671d1c3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/recover-grip.webp",
+      "bytes": 21502,
+      "sha256": "050f25fcfd11659bf1418571777782c1298dd060fe7ab769debd2e2155173581",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-0.webp",
+      "bytes": 5758,
+      "sha256": "cbf2d456e553bc54ec1ad1a968ee4d66340ad009d828a7680dd183ef050ee754",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-1.webp",
+      "bytes": 5728,
+      "sha256": "6aea0b73de23d25182eb5eebc289eae55c30e8e20edd5bf0dd0cb626f285f347",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-2.webp",
+      "bytes": 5664,
+      "sha256": "0cace244465d628dc1f64a4df05682beb975c85fbe5e345e63639bb1914bde1c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-3.webp",
+      "bytes": 5724,
+      "sha256": "7c9bc1c7f0227651f70ce3ce06e18ceaf96aa8f8a634190304036c699884ae46",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-4.webp",
+      "bytes": 5786,
+      "sha256": "0434afdf1ad1a3d9b023ed6c84fcef0e0e322e31d6c6a279fefeb29971cc68b8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-5.webp",
+      "bytes": 5656,
+      "sha256": "1a3e36b7e6c5cc288b9006e24cf722872a82b46dfc2752b598751aef54090158",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-6.webp",
+      "bytes": 5730,
+      "sha256": "af9b0d9d4d771a45b0b1ada055d093aea1beaf649879b25e23561f2c264437c7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-7.webp",
+      "bytes": 5758,
+      "sha256": "cbf2d456e553bc54ec1ad1a968ee4d66340ad009d828a7680dd183ef050ee754",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/run_side-grip.webp",
+      "bytes": 18560,
+      "sha256": "18dcb3ffbe8c8c17cfebbcc1a04a7c1b39870c2697738286663d14cd45a94d96",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-0.webp",
+      "bytes": 3888,
+      "sha256": "14a93e32c5b8640922368faee4f7d0ad6e81cd6fb1b07c06759573fa326b54ac",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-1.webp",
+      "bytes": 4126,
+      "sha256": "4c7786d635a428526ad605e854f0bc0d9b0716a505047d581d7111da58c9d3bb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-2.webp",
+      "bytes": 4534,
+      "sha256": "f7075928f3992add32eccd8470f724c3fef6bf9928c63ce2ff83d568f82f93ca",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-3.webp",
+      "bytes": 4530,
+      "sha256": "e9f672f102d14ecc1bde9ad4f9093d554c84c7edaacc38becd1654c90bba2bf8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-4.webp",
+      "bytes": 4416,
+      "sha256": "42f647a9eae9ad3380118ae4f930da78dafc40fba314efc79347014e9efd2b3b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-5.webp",
+      "bytes": 4044,
+      "sha256": "a778b20388d988ca97ce18e08ff3f2b9ad3aa534d746fc4848d32ecb48de1e11",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-6.webp",
+      "bytes": 4114,
+      "sha256": "1dca2fd6b5b8c3c483905ac4d7e42ef16876a852c2082cf57d73054865b1b3f4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-7.webp",
+      "bytes": 3876,
+      "sha256": "42f9b60e4e54d388eced0b40106544ed8f04a565704dfea55f8cd8e603c0d16f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/serve-grip.webp",
+      "bytes": 16324,
+      "sha256": "7f6062b71e128c49650ffd7924543460ddccae6b68ba4753d5c48f99d6f84c5f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-0.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-1.webp",
+      "bytes": 5980,
+      "sha256": "fdd490635922aaa6e38431f010ad264fc25f6458da35e48bbe66a171020b306d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-2.webp",
+      "bytes": 6086,
+      "sha256": "ce4d6c91e20f4796e75a85d3f234680265d92f3f38575e93d8bd6ac0eff4da45",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-3.webp",
+      "bytes": 6090,
+      "sha256": "d04a3bcf26a7f31216ae986fa846ef7923b314a6c721be4c5be7f9c623747880",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-4.webp",
+      "bytes": 6040,
+      "sha256": "3b2c4c4a359ada1b948d4e5512744ed9312e53e72088393d562a3e98e3958aaf",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-5.webp",
+      "bytes": 6148,
+      "sha256": "34298a7183120edec5fcb164bb04d301e4339df85cc3dbfdb43ffd099ed649db",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-6.webp",
+      "bytes": 5878,
+      "sha256": "6d3234ebce02a58d592e4ac813a85b109e49ad5c16c159aa64e4c31073159351",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-7.webp",
+      "bytes": 5768,
+      "sha256": "b5223d89d398a3aa860ebf116ff63804d3170e5c5aa8f4db3f2d58f597b7ac77",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "frames/volley-grip.webp",
+      "bytes": 20332,
+      "sha256": "b636bade47b4e09d02adb5bf253da6b6415c39352b2397387269301bfdcca8ee",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 4025,
+      "sha256": "462847e14f1531460b18c826904c3e6a27cf01e9bb1a48879ae0242c91e00c90",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 2810,
+      "sha256": "79a272ad46d9afda8bff5cf2c44769ba60275f7aa1f2219ddd37092c81fef81a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 7067,
+      "sha256": "eb10cddc378e2e07fc023a5d1afc63f80556032e751add5349832c6e07d50f8d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/attach.mjs",
+      "bytes": 1115,
+      "sha256": "ec83db1ac03f30334feba069b38cf03fe88236f71b4b3d40105bd78ff2072f3a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/catalog.json",
+      "bytes": 16798,
+      "sha256": "2bfa717e6ccc362da558650d1131e601f5074c84997c860604fd20eba070fb95",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/motions.json",
+      "bytes": 1109657,
+      "sha256": "7f60a77c133e625caa8339adea6ee23853e99526a5b7cfceaf67eccc317f410c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/player.glb",
+      "bytes": 1576624,
+      "sha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/pose-mask.json",
+      "bytes": 1535,
+      "sha256": "59a480ebca54bcf585a9e3e0ac13d91155df1cccc951abaf2077ec0d2255de78",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/racket.glb",
+      "bytes": 163616,
+      "sha256": "28847e35f39737eac39c2d21bc77db19cd53f31d2a036d55c20806fc6f1bb781",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/right-hand-grip.glb",
+      "bytes": 81972,
+      "sha256": "b10a957892302f94b5835061fa7fe282588e93eb8384ce44e0c4dc0d89fe3afc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/author.mjs",
+      "bytes": 12665,
+      "sha256": "554de6d72e0ea62fca8293c1a55dd46ed0a2a41df86f349798675cbc3123efcf",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 15115,
+      "sha256": "d25587acaa90f62d27f3ecc4e3b16cedbbdedb2f9090f2100763d077802c1789",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 5833,
+      "sha256": "fcf6bc85e0d360936c20e6c4ed48dc79669f13ab36eb50a01ff7c621f435dda3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/inventory.mjs",
+      "bytes": 2822,
+      "sha256": "0953b9f9ec4599f13b8c5b74b795cad3915f0eb2399b19a851766733f1c0dc86",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/measure.mjs",
+      "bytes": 3432,
+      "sha256": "de6f3218a3d7d124f31700530c66d48904d7c27d95e8accd6d71125893600ca2",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-register.mjs",
+      "bytes": 466,
+      "sha256": "a5b80a63fa329eea8fab9fef33ff8db51a33da54dec29067d13f63803bc09925",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-sources.mjs",
+      "bytes": 2180,
+      "sha256": "c20fb70e12a9b704fe9337c6126f8879c5c9b1f5261c0d96c88fb2e75f085b2d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-ui.mjs",
+      "bytes": 1063,
+      "sha256": "b80156d921ff458eccaf037348f0b6e238f27c8be7f38e6a774bc0b4b27b3942",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5250,
+      "sha256": "bb1e4b3416ff682a3460f5e70d21256205e9f8d6c265130c8b3263180faa7f6c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/sheets.py",
+      "bytes": 1319,
+      "sha256": "611d786efada0ab0bc8414f07dd489a92a3b5ab73c86aa993ad095b62c7dd43a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/validate-glb.mjs",
+      "bytes": 932,
+      "sha256": "f10421a67a9b96de9a151d82bf54890308cc1c724e2eae8d496b80717ad5622a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/verify.mjs",
+      "bytes": 5843,
+      "sha256": "ac03427c01be04271a4d573a00d0e8d5ee4de9fa71d55c06c8a80c9966c5cfda",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/asset-checks.json",
+      "bytes": 3537,
+      "sha256": "f05573728b934860a3b7043b868d2f5a6fde20d2493dd5c4af24698073e04b26",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 80198,
+      "sha256": "659253c711cfecc6ffa6a094b373c9206af933bc67068eceb96f5d1ca51eb3a4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/desktop.png",
+      "bytes": 194850,
+      "sha256": "6add7eb1cbc52c70cb4e8f962429ca91feb9dd0ad5ce8581604a761864664679",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/gltf-validation.json",
+      "bytes": 4707,
+      "sha256": "26201fa5952184dc846467adc9fb088e6bc972a538ed34e8a252ee1880498087",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 114259,
+      "sha256": "9f8ca23c233db546a6c3b2d50b25e1c8cb2c85c075df49629d1fcc9416b45228",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 213469,
+      "sha256": "67f28ba88621f5b721ace51e21b56b99346fc0d44e153899d66c4d630096c740",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/provenance.json",
+      "bytes": 2507,
+      "sha256": "65c9fd602423757df8cfd3b192e6970bef7b43df5575472ea7932ee819eb44f7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa-summary.json",
+      "bytes": 49564,
+      "sha256": "aeb0a9007644ee7c895d639de987dd91f36379640550abf389e56bf050748fa6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--backhand.html",
+      "bytes": 12918,
+      "sha256": "fabea4d44fdd7ad5f10f36e8a9893b9923afb241432c0c60a2c270d31f693c86",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--backhand.json",
+      "bytes": 10143,
+      "sha256": "cbc1884abf58d6e633f30c77b2ef9cacf8d073a0b016c0cf1d630d4ca2c9ac6b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--drop_shot.html",
+      "bytes": 12933,
+      "sha256": "f3537a513a799e1250755ad1dfd95a4136df9be6c1150980dfca0fa9e69b1007",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--drop_shot.json",
+      "bytes": 10140,
+      "sha256": "f5535e50400266b17d135636c9a0547f74a1c1f7f35ac41aadc63b34abe2fa09",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--forehand.html",
+      "bytes": 13016,
+      "sha256": "89f43cc9646f9c666f8e103d257ea4f30be74c5b9805362afdfbbbaf2020fa65",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--forehand.json",
+      "bytes": 10630,
+      "sha256": "f152ef50012924e053ba7460613e2ed987668b12d076b5f9f141c6a4a38cfbc0",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--idle.html",
+      "bytes": 12241,
+      "sha256": "7b28ada5a9a6498b653f1d9836426907c6f51f22f4315b48403214f47bcce066",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--idle.json",
+      "bytes": 8901,
+      "sha256": "337dfba29e6e1181534483761264b5d81bb6428294baf3ddd94d16b434262a51",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--lob.html",
+      "bytes": 12930,
+      "sha256": "8afa16233d562516de9221ff539bc060df69fd71f7a1d4cb1ab517b13c62b5d3",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--lob.json",
+      "bytes": 10245,
+      "sha256": "af749c4de811701b1b2d9734c1d6fe60226a6207fb3ea8b316bffe3d1b2d1b9e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--recover.html",
+      "bytes": 12294,
+      "sha256": "8d2a9824f43f5f38c6be74a08e713997ff1dbff51d75f6dcf2368748b33e6c07",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--recover.json",
+      "bytes": 9289,
+      "sha256": "4df6aa4071ba58f9fd3aac33e05a376bb3449de058d6feef76c068e74ef72c43",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--run_side.html",
+      "bytes": 13948,
+      "sha256": "9aca425621dc2efee214230e4f69200e6dd0ba2518affb9b62ae89a6ec8fb8eb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--run_side.json",
+      "bytes": 11049,
+      "sha256": "6bdb4f79800a93ad45d6bdd2ee8a04b71b49ac2937eccb39975d7bc66ee44e17",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--serve.html",
+      "bytes": 13432,
+      "sha256": "735d677f01dde1421fb05bed37d4917c8b6791bec9572566acd73061970d4f3f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--serve.json",
+      "bytes": 10546,
+      "sha256": "9a8fb0be2e880f37132f36749e6785730d0e49edf06b4e80fc01023bbfbee7dd",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--volley.html",
+      "bytes": 12903,
+      "sha256": "adddb4b5b75fabca68bd38e9c1b403c2cf486c1b186bd08002c7575964c8237e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/clips/tennis-grip-v1--volley.json",
+      "bytes": 10088,
+      "sha256": "6a58f977f1549157d1590cc8b4897886a338d37d753d49a8d8b38309e50073ce",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "bytes": 22582,
+      "sha256": "f1c33e34aae28187a9ee2846a7b7663ad310902f5807b437227e062f51052e1e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "bytes": 83658,
+      "sha256": "23d86f480aca639170665340941823ce0ffb770b94b55bede5d141bfb560e429",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--backhand.svg",
+      "bytes": 26961,
+      "sha256": "3445c35e22fae1039d55726b339204f29da29019b3fa946d37416c2495d65294",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--drop_shot.svg",
+      "bytes": 26963,
+      "sha256": "93bc0d7eddbfdcf8f95c73ae81fb9a02e33b4efce46d6740d7d809cfd7a7a6b6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--forehand.svg",
+      "bytes": 26961,
+      "sha256": "e59746e8694269d600eec9a6aa85e91540d095aac2c0bcc2d6ddb1ed32271b73",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--idle.svg",
+      "bytes": 26953,
+      "sha256": "517df1cf47b2ffe1a4110e27e9291bb40febcb14105000f480e6273a8c6b69d5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--lob.svg",
+      "bytes": 26951,
+      "sha256": "f49bd09b8e0719e5681e04a32b706c39d51576069ad1b41d6fcc512a17cee29f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--recover.svg",
+      "bytes": 26959,
+      "sha256": "e15d782aaa252e0c237e820fa2938b9e2ddbd5c8dd0db940dd45afd8e023c812",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--run_side.svg",
+      "bytes": 26961,
+      "sha256": "a9dc2f376c60e296d3f9b3c61b23050e59bc5525404746f19d3f13d352989cda",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--serve.svg",
+      "bytes": 26955,
+      "sha256": "4df0cbfb9c17c92f495927d9dcf6f9669d72f8c75241fec42ce0fb2fcdeeeeea",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa/sheets/tennis-grip-v1--volley.svg",
+      "bytes": 26957,
+      "sha256": "1a9bd4afa952cc6cb8170fcaf9bf2654fa783f19c74f125fb1dfea2686af41f6",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/scope.json",
+      "bytes": 10716,
+      "sha256": "2ba1098a5eeec7e784072e1e924b0bd156029f7ab41baa3c40254631f3e4d884",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/style.css",
+      "bytes": 5999,
+      "sha256": "1bdb33ee599ca2bee64457b0f684760f51eb353b5702806d2ce612a328187243",
+      "license": "CC0-1.0"
+    }
+  ]
+}

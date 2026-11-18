@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>טניס · אחיזה טבעית</title>
+<link rel="stylesheet" href="preview.css">
+<link rel="icon" href="data:,">
+<script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+<header><div><p class="eyebrow">TENNIS / GRIP STUDY 01</p><h1>האחיזה מובילה את התנועה</h1><p>מחבט באורך 68 ס״מ, חיבור קבוע לכף היד ותשע תנועות על אותו שלד.</p></div><a href="REPORT.md">דוח המסירה ↗</a></header>
+<main>
+ <section class="viewer" aria-label="תצוגת הדמות"><canvas id="stage" aria-label="דמות ומחבט בתלת ממד"></canvas><div class="corner"><span class="dot"></span><span id="status" role="status">טוען את הדמות…</span></div><div class="hint">גרירה לסיבוב · גלילה להגדלה</div><div class="clip-name"><small id="category">היכון</small><h2 id="clip-title">שתי ידיים על המחבט</h2></div></section>
+ <aside><div class="section-label">01 / תנועה</div><nav id="clips" aria-label="בחירת קליפ"></nav><div class="section-label">02 / נקודת מבט</div><div id="views"><button data-view="three" aria-pressed="true">שלושת רבעי</button><button data-view="front">מלפנים</button><button data-view="side">מהצד</button><button data-view="back">מאחור</button><button data-view="grip">תקריב אחיזה</button></div><p class="note">יד ימין נשארת סגורה סביב הידית. יד שמאל תומכת בעמידת ההיכון ובבקהנד, ומשתחררת בהגשה.</p><a href="contact-sheet.webp">גיליון 8 פריימים לכל תנועה ↗</a><a href="verification/qa/report.html">תוצאות מדידת התנועה ↗</a></aside>
+ <section class="transport"><button id="play" aria-label="עצירה">עצירה</button><input id="time" type="range" min="0" max="1" step=".001" value="0" aria-label="זמן בקליפ"><output id="timestamp">0.00 / 2.40</output><label>מהירות <select id="speed"><option value=".35">×0.35</option><option value=".65">×0.65</option><option value="1" selected>×1</option></select></label></section>
+ <section class="film"><div class="section-label">03 / שמונה רגעים לאורך התנועה <span>לחיצה קופצת לפריים</span></div><div id="filmstrip"></div></section>
+ <footer><span>CC0 · מקוריים ומקורות מורשים</span><span>18 עצמות · 30 פריימים לשנייה · ללא תנועת שורש</span><a href="LICENSES.md">מקורות ורישיון</a></footer>
+</main><script type="module" src="preview.mjs"></script>
+</html>
