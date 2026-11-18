@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "currency": "coins",
+  "weaponLabels": {
+    "shotgun": "רסס סערה",
+    "cannon": "תותח נפץ",
+    "shotgun2": "רסס כבד",
+    "cannon2": "תותח כבד",
+    "shotgun3": "תותח רסס",
+    "cannon3": "מרגמת נפץ"
+  },
+  "upgrades": [
+    {
+      "id": "reef-choke",
+      "name": "חבק שונית",
+      "weapon": "shotgun",
+      "cost": 420,
+      "unlockStage": 21,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/reef-choke.svg",
+      "effect": {
+        "description": "פיזור הרסיסים קטן ב־14%.",
+        "stat": "spread",
+        "operation": "multiply",
+        "value": 0.86
+      }
+    },
+    {
+      "id": "brass-fuse",
+      "name": "פתיל פליז",
+      "weapon": "cannon",
+      "cost": 460,
+      "unlockStage": 21,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/brass-fuse.svg",
+      "effect": {
+        "description": "רדיוס הפיצוץ גדל ב־12%.",
+        "stat": "splash",
+        "operation": "multiply",
+        "value": 1.12
+      }
+    },
+    {
+      "id": "quick-latch",
+      "name": "בריח זריז",
+      "weapon": "shotgun",
+      "cost": 580,
+      "unlockStage": 23,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/quick-latch.svg",
+      "effect": {
+        "description": "זמן הטעינה מתקצר ב־12%.",
+        "stat": "reload",
+        "operation": "multiply",
+        "value": 0.88
+      }
+    },
+    {
+      "id": "return-spring",
+      "name": "קפיץ החזרה",
+      "weapon": "cannon",
+      "cost": 660,
+      "unlockStage": 24,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/return-spring.svg",
+      "effect": {
+        "description": "קצב הירי עולה ב־10%.",
+        "stat": "rate",
+        "operation": "multiply",
+        "value": 1.1
+      }
+    },
+    {
+      "id": "double-tray",
+      "name": "מגש כפול",
+      "weapon": "shotgun2",
+      "cost": 830,
+      "unlockStage": 26,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/double-tray.svg",
+      "effect": {
+        "description": "המחסנית מכילה עוד שתי יריות.",
+        "stat": "mag",
+        "operation": "add",
+        "value": 2
+      }
+    },
+    {
+      "id": "bronze-core",
+      "name": "ליבת ברונזה",
+      "weapon": "cannon2",
+      "cost": 960,
+      "unlockStage": 27,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/bronze-core.svg",
+      "effect": {
+        "description": "נזק הפגז גדל ב־12%.",
+        "stat": "damage",
+        "operation": "multiply",
+        "value": 1.12
+      }
+    },
+    {
+      "id": "ember-pellet",
+      "name": "רסיס גחלת",
+      "weapon": "shotgun2",
+      "cost": 1100,
+      "unlockStage": 29,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/ember-pellet.svg",
+      "effect": {
+        "description": "כל רסיס גורם ל־10% יותר נזק.",
+        "stat": "damage",
+        "operation": "multiply",
+        "value": 1.1
+      }
+    },
+    {
+      "id": "twin-cradle",
+      "name": "עריסת פגזים",
+      "weapon": "cannon2",
+      "cost": 1250,
+      "unlockStage": 30,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/twin-cradle.svg",
+      "effect": {
+        "description": "המחסנית מכילה עוד פגז אחד.",
+        "stat": "mag",
+        "operation": "add",
+        "value": 1
+      }
+    },
+    {
+      "id": "needle-fan",
+      "name": "מניפת מחטים",
+      "weapon": "shotgun3",
+      "cost": 1460,
+      "unlockStage": 32,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/needle-fan.svg",
+      "effect": {
+        "description": "עוד רסיס אחד בכל ירייה.",
+        "stat": "pellets",
+        "operation": "add",
+        "value": 1
+      }
+    },
+    {
+      "id": "wide-halo",
+      "name": "טבעת הדף",
+      "weapon": "cannon3",
+      "cost": 1580,
+      "unlockStage": 33,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/wide-halo.svg",
+      "effect": {
+        "description": "רדיוס הפיצוץ גדל ב־10%.",
+        "stat": "splash",
+        "operation": "multiply",
+        "value": 1.1
+      }
+    },
+    {
+      "id": "silk-slide",
+      "name": "מסילת משי",
+      "weapon": "shotgun3",
+      "cost": 1760,
+      "unlockStage": 35,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/silk-slide.svg",
+      "effect": {
+        "description": "פיזור הרסיסים קטן ב־10%.",
+        "stat": "spread",
+        "operation": "multiply",
+        "value": 0.9
+      }
+    },
+    {
+      "id": "mortar-elevator",
+      "name": "מעלית פגזים",
+      "weapon": "cannon3",
+      "cost": 1950,
+      "unlockStage": 36,
+      "requiredWeaponLevel": 1,
+      "icon": "icons/mortar-elevator.svg",
+      "effect": {
+        "description": "זמן הטעינה של המרגמה מתקצר ב־12%.",
+        "stat": "reload",
+        "operation": "multiply",
+        "value": 0.88
+      }
+    }
+  ]
+}

@@ -1,0 +1,2591 @@
+{
+  "schemaVersion": 1,
+  "campaign": {
+    "id": "boars-levels-v1",
+    "firstStage": 21,
+    "lastStage": 40,
+    "chapters": [
+      {
+        "name": "חזרה לנמל",
+        "firstStage": 21,
+        "lastStage": 25
+      },
+      {
+        "name": "הגאות הקרה",
+        "firstStage": 26,
+        "lastStage": 30
+      },
+      {
+        "name": "הרכס החשוף",
+        "firstStage": 31,
+        "lastStage": 35
+      },
+      {
+        "name": "הגל האחרון",
+        "firstStage": 36,
+        "lastStage": 40
+      }
+    ]
+  },
+  "enemyTypes": {
+    "scout": {
+      "label": "חזרזיר",
+      "approach": "ground",
+      "worldModel": "boar-peach"
+    },
+    "runner": {
+      "label": "רץ",
+      "approach": "ground",
+      "worldModel": "boar-caramel"
+    },
+    "heavy": {
+      "label": "משוריין",
+      "approach": "ground",
+      "worldModel": "boar-cocoa"
+    },
+    "drone": {
+      "label": "רחפן",
+      "approach": "air"
+    },
+    "raft": {
+      "label": "רפסודה",
+      "approach": "water"
+    },
+    "mortar": {
+      "label": "מרגמה",
+      "approach": "ground",
+      "worldModel": "boar-cream"
+    },
+    "shark": {
+      "label": "כריש פלדה",
+      "approach": "water"
+    },
+    "manta": {
+      "label": "מנטה מעופפת",
+      "approach": "air"
+    },
+    "crab": {
+      "label": "סרטן מצור",
+      "approach": "water"
+    },
+    "king": {
+      "label": "מלך הברזל",
+      "approach": "ground",
+      "worldModel": "boar-lilac"
+    },
+    "hive": {
+      "label": "ספינת הכוורת",
+      "approach": "air"
+    },
+    "turtle": {
+      "label": "צב המבצר",
+      "approach": "water"
+    },
+    "leviathan": {
+      "label": "לווייתן הפלדה",
+      "approach": "water"
+    }
+  },
+  "layouts": {
+    "breakwater": {
+      "label": "שובר הגלים",
+      "lanes": {
+        "left": {
+          "xMeters": -22,
+          "zMeters": -98,
+          "halfWidthMeters": 2
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -93,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 22,
+          "zMeters": -98,
+          "halfWidthMeters": 2
+        }
+      }
+    },
+    "reed-inlet": {
+      "label": "מפרץ הקנים",
+      "lanes": {
+        "left": {
+          "xMeters": -21,
+          "zMeters": -101,
+          "halfWidthMeters": 2
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -98,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 17,
+          "zMeters": -88,
+          "halfWidthMeters": 2
+        }
+      }
+    },
+    "wet-pier": {
+      "label": "המזח הרטוב",
+      "lanes": {
+        "left": {
+          "xMeters": -17,
+          "zMeters": -88,
+          "halfWidthMeters": 2
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -97,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 22,
+          "zMeters": -102,
+          "halfWidthMeters": 2
+        }
+      }
+    },
+    "ice-channel": {
+      "label": "תעלת הקרח",
+      "lanes": {
+        "left": {
+          "xMeters": -14,
+          "zMeters": -93,
+          "halfWidthMeters": 2
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -85,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 14,
+          "zMeters": -93,
+          "halfWidthMeters": 2
+        }
+      }
+    },
+    "outer-reef": {
+      "label": "השונית החיצונית",
+      "lanes": {
+        "left": {
+          "xMeters": -25,
+          "zMeters": -102,
+          "halfWidthMeters": 1
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -95,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 25,
+          "zMeters": -102,
+          "halfWidthMeters": 1
+        }
+      }
+    },
+    "lantern-cove": {
+      "label": "מפרץ הפנסים",
+      "lanes": {
+        "left": {
+          "xMeters": -19,
+          "zMeters": -91,
+          "halfWidthMeters": 2
+        },
+        "center": {
+          "xMeters": 0,
+          "zMeters": -101,
+          "halfWidthMeters": 2
+        },
+        "right": {
+          "xMeters": 19,
+          "zMeters": -91,
+          "halfWidthMeters": 2
+        }
+      }
+    }
+  },
+  "difficulty": {
+    "statReferenceWave": 20,
+    "rows": [
+      {
+        "stage": 21,
+        "plannedEnemies": 43,
+        "enemyHpMultiplier": 1.03,
+        "enemySpeedMultiplier": 1.0,
+        "enemyDamageMultiplier": 1.0,
+        "spawnGapSeconds": 1.2,
+        "interWaveSeconds": 7.25,
+        "clearBonusCoins": 375
+      },
+      {
+        "stage": 22,
+        "plannedEnemies": 45,
+        "enemyHpMultiplier": 1.056,
+        "enemySpeedMultiplier": 1.007,
+        "enemyDamageMultiplier": 1.009,
+        "spawnGapSeconds": 1.185,
+        "interWaveSeconds": 7.125,
+        "clearBonusCoins": 390
+      },
+      {
+        "stage": 23,
+        "plannedEnemies": 47,
+        "enemyHpMultiplier": 1.082,
+        "enemySpeedMultiplier": 1.014,
+        "enemyDamageMultiplier": 1.018,
+        "spawnGapSeconds": 1.17,
+        "interWaveSeconds": 7.0,
+        "clearBonusCoins": 405
+      },
+      {
+        "stage": 24,
+        "plannedEnemies": 49,
+        "enemyHpMultiplier": 1.108,
+        "enemySpeedMultiplier": 1.021,
+        "enemyDamageMultiplier": 1.027,
+        "spawnGapSeconds": 1.155,
+        "interWaveSeconds": 6.875,
+        "clearBonusCoins": 420
+      },
+      {
+        "stage": 25,
+        "plannedEnemies": 51,
+        "enemyHpMultiplier": 1.134,
+        "enemySpeedMultiplier": 1.028,
+        "enemyDamageMultiplier": 1.036,
+        "spawnGapSeconds": 1.14,
+        "interWaveSeconds": 6.75,
+        "clearBonusCoins": 435,
+        "bossHp": 9500
+      },
+      {
+        "stage": 26,
+        "plannedEnemies": 53,
+        "enemyHpMultiplier": 1.16,
+        "enemySpeedMultiplier": 1.035,
+        "enemyDamageMultiplier": 1.045,
+        "spawnGapSeconds": 1.125,
+        "interWaveSeconds": 6.625,
+        "clearBonusCoins": 450
+      },
+      {
+        "stage": 27,
+        "plannedEnemies": 55,
+        "enemyHpMultiplier": 1.186,
+        "enemySpeedMultiplier": 1.042,
+        "enemyDamageMultiplier": 1.054,
+        "spawnGapSeconds": 1.11,
+        "interWaveSeconds": 6.5,
+        "clearBonusCoins": 465
+      },
+      {
+        "stage": 28,
+        "plannedEnemies": 57,
+        "enemyHpMultiplier": 1.212,
+        "enemySpeedMultiplier": 1.049,
+        "enemyDamageMultiplier": 1.063,
+        "spawnGapSeconds": 1.095,
+        "interWaveSeconds": 6.375,
+        "clearBonusCoins": 480
+      },
+      {
+        "stage": 29,
+        "plannedEnemies": 59,
+        "enemyHpMultiplier": 1.238,
+        "enemySpeedMultiplier": 1.056,
+        "enemyDamageMultiplier": 1.072,
+        "spawnGapSeconds": 1.08,
+        "interWaveSeconds": 6.25,
+        "clearBonusCoins": 495
+      },
+      {
+        "stage": 30,
+        "plannedEnemies": 61,
+        "enemyHpMultiplier": 1.264,
+        "enemySpeedMultiplier": 1.063,
+        "enemyDamageMultiplier": 1.081,
+        "spawnGapSeconds": 1.065,
+        "interWaveSeconds": 6.125,
+        "clearBonusCoins": 510,
+        "bossHp": 11000
+      },
+      {
+        "stage": 31,
+        "plannedEnemies": 63,
+        "enemyHpMultiplier": 1.29,
+        "enemySpeedMultiplier": 1.07,
+        "enemyDamageMultiplier": 1.09,
+        "spawnGapSeconds": 1.05,
+        "interWaveSeconds": 6.0,
+        "clearBonusCoins": 525
+      },
+      {
+        "stage": 32,
+        "plannedEnemies": 65,
+        "enemyHpMultiplier": 1.316,
+        "enemySpeedMultiplier": 1.077,
+        "enemyDamageMultiplier": 1.099,
+        "spawnGapSeconds": 1.035,
+        "interWaveSeconds": 5.875,
+        "clearBonusCoins": 540
+      },
+      {
+        "stage": 33,
+        "plannedEnemies": 67,
+        "enemyHpMultiplier": 1.342,
+        "enemySpeedMultiplier": 1.084,
+        "enemyDamageMultiplier": 1.108,
+        "spawnGapSeconds": 1.02,
+        "interWaveSeconds": 5.75,
+        "clearBonusCoins": 555
+      },
+      {
+        "stage": 34,
+        "plannedEnemies": 69,
+        "enemyHpMultiplier": 1.368,
+        "enemySpeedMultiplier": 1.091,
+        "enemyDamageMultiplier": 1.117,
+        "spawnGapSeconds": 1.005,
+        "interWaveSeconds": 5.625,
+        "clearBonusCoins": 570
+      },
+      {
+        "stage": 35,
+        "plannedEnemies": 71,
+        "enemyHpMultiplier": 1.394,
+        "enemySpeedMultiplier": 1.098,
+        "enemyDamageMultiplier": 1.126,
+        "spawnGapSeconds": 0.99,
+        "interWaveSeconds": 5.5,
+        "clearBonusCoins": 585,
+        "bossHp": 12500
+      },
+      {
+        "stage": 36,
+        "plannedEnemies": 73,
+        "enemyHpMultiplier": 1.42,
+        "enemySpeedMultiplier": 1.105,
+        "enemyDamageMultiplier": 1.135,
+        "spawnGapSeconds": 0.975,
+        "interWaveSeconds": 5.375,
+        "clearBonusCoins": 600
+      },
+      {
+        "stage": 37,
+        "plannedEnemies": 75,
+        "enemyHpMultiplier": 1.446,
+        "enemySpeedMultiplier": 1.112,
+        "enemyDamageMultiplier": 1.144,
+        "spawnGapSeconds": 0.96,
+        "interWaveSeconds": 5.25,
+        "clearBonusCoins": 615
+      },
+      {
+        "stage": 38,
+        "plannedEnemies": 77,
+        "enemyHpMultiplier": 1.472,
+        "enemySpeedMultiplier": 1.119,
+        "enemyDamageMultiplier": 1.153,
+        "spawnGapSeconds": 0.945,
+        "interWaveSeconds": 5.125,
+        "clearBonusCoins": 630
+      },
+      {
+        "stage": 39,
+        "plannedEnemies": 79,
+        "enemyHpMultiplier": 1.498,
+        "enemySpeedMultiplier": 1.126,
+        "enemyDamageMultiplier": 1.162,
+        "spawnGapSeconds": 0.93,
+        "interWaveSeconds": 5.0,
+        "clearBonusCoins": 645
+      },
+      {
+        "stage": 40,
+        "plannedEnemies": 81,
+        "enemyHpMultiplier": 1.524,
+        "enemySpeedMultiplier": 1.133,
+        "enemyDamageMultiplier": 1.171,
+        "spawnGapSeconds": 0.915,
+        "interWaveSeconds": 4.875,
+        "clearBonusCoins": 660,
+        "bossHp": 14000
+      }
+    ]
+  },
+  "levels": [
+    {
+      "stage": 21,
+      "id": "golden-watch",
+      "title": "משמרת הזהב",
+      "weather": "sunset",
+      "layout": "breakwater",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הדפו שלוש מתקפות בשובר הגלים",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 65
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 22,
+      "id": "reeds-in-the-mist",
+      "title": "תנועה בין הקנים",
+      "weather": "fog",
+      "layout": "reed-inlet",
+      "objective": {
+        "type": "clear_waves",
+        "label": "עצרו את הפשיטה על מפרץ הקנים",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 60
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 23,
+      "id": "tin-rain",
+      "title": "גשם על הפח",
+      "weather": "rain",
+      "layout": "wet-pier",
+      "objective": {
+        "type": "clear_waves",
+        "label": "החזיקו את המזח מול מתקפות משני האגפים",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 100
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 24,
+      "id": "lantern-line",
+      "title": "קו הפנסים",
+      "weather": "night",
+      "layout": "lantern-cove",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הגנו על המפרץ מפני מתקפה מהאוויר ומהים",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 65
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 3
+            },
+            {
+              "kind": "crab",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 1
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 25,
+      "id": "king-of-the-breakwater",
+      "title": "מלך בשובר הגלים",
+      "weather": "storm",
+      "layout": "breakwater",
+      "objective": {
+        "type": "clear_waves_and_boss",
+        "label": "הדפו את מתקפות הליווי והפילו את מלך הברזל",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 45
+        },
+        "boss": "king"
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 2
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "king",
+              "lane": "center",
+              "count": 1
+            },
+            {
+              "kind": "mortar",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 26,
+      "id": "first-flurry",
+      "title": "שלג ראשון בנמל",
+      "weather": "snow",
+      "layout": "ice-channel",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הגנו על פתח התעלה מול גל מהיר במרכז",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 104
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 2
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 27,
+      "id": "tide-pools",
+      "title": "שביל השלוליות",
+      "weather": "rain",
+      "layout": "wet-pier",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הדפו את הרפסודות ושמרו על שני האגפים",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 55
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 28,
+      "id": "white-channel",
+      "title": "התעלה הלבנה",
+      "weather": "snow",
+      "layout": "ice-channel",
+      "objective": {
+        "type": "clear_waves",
+        "label": "עצרו את הטור המשוריין בתעלה",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 55
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "center",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 29,
+      "id": "shadows-on-the-reef",
+      "title": "צללים על השונית",
+      "weather": "night",
+      "layout": "outer-reef",
+      "objective": {
+        "type": "clear_waves",
+        "label": "בלמו את מתקפת הלילה משני קצות השונית",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 108
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 1
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 30,
+      "id": "storm-hive",
+      "title": "כוורת בסערה",
+      "weather": "storm",
+      "layout": "outer-reef",
+      "objective": {
+        "type": "clear_waves_and_boss",
+        "label": "נקו את הגלים והפילו את ספינת הכוורת",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 45
+        },
+        "boss": "hive"
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "hive",
+              "lane": "center",
+              "count": 1
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 31,
+      "id": "amber-ridge",
+      "title": "הרכס הענברי",
+      "weather": "sunset",
+      "layout": "breakwater",
+      "objective": {
+        "type": "clear_waves",
+        "label": "בלמו מתקפה מכיוון הסוללה והשונית",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 60
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 32,
+      "id": "snow-on-the-dike",
+      "title": "שלג על הסוללה",
+      "weather": "snow",
+      "layout": "ice-channel",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הגנו על הסוללה מול טור מהיר ומשוריינים",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 114
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 33,
+      "id": "three-approaches",
+      "title": "שלוש דרכי גישה",
+      "weather": "rain",
+      "layout": "wet-pier",
+      "objective": {
+        "type": "clear_waves",
+        "label": "החזיקו מעמד מול שלוש דרכי הגישה למזח",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 55
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 34,
+      "id": "watch-after-dark",
+      "title": "משמרת אחרי חושך",
+      "weather": "night",
+      "layout": "lantern-cove",
+      "objective": {
+        "type": "clear_waves",
+        "label": "עצרו את הנחילים לפני שהם מגיעים לפנסים",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 118
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 6
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 2
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "manta",
+              "lane": "center",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 1
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "id": "fortress-in-fog",
+      "title": "מבצר בערפל",
+      "weather": "fog",
+      "layout": "reed-inlet",
+      "objective": {
+        "type": "clear_waves_and_boss",
+        "label": "נקו את הגלים והפילו את צב המבצר",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 40
+        },
+        "boss": "turtle"
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "turtle",
+              "lane": "center",
+              "count": 1
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 1
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 36,
+      "id": "copper-sky",
+      "title": "שמיים של נחושת",
+      "weather": "sunset",
+      "layout": "outer-reef",
+      "objective": {
+        "type": "clear_waves",
+        "label": "בלמו נחיתות חוזרות בשני קצות השונית",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 120
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 6
+            },
+            {
+              "kind": "raft",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 37,
+      "id": "last-flurry",
+      "title": "סופת השלג האחרונה",
+      "weather": "snow",
+      "layout": "ice-channel",
+      "objective": {
+        "type": "clear_waves",
+        "label": "עצרו את המצור בתעלה ושמרו על החומה",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 55
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 1
+            },
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 38,
+      "id": "cross-tide",
+      "title": "גאות צולבת",
+      "weather": "rain",
+      "layout": "wet-pier",
+      "objective": {
+        "type": "clear_waves",
+        "label": "הדפו מתקפה משולבת מהים ומהאוויר",
+        "medal": {
+          "metric": "clearSeconds",
+          "operator": "lte",
+          "value": 124
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 6
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "manta",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 39,
+      "id": "lights-out",
+      "title": "כיבוי אורות",
+      "weather": "night",
+      "layout": "lantern-cove",
+      "objective": {
+        "type": "clear_waves",
+        "label": "שרדו את הפלישה הלילית ושמרו על קו ההגנה",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 50
+        }
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 1
+            },
+            {
+              "kind": "mortar",
+              "lane": "center",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "runner",
+              "lane": "center",
+              "count": 6
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 3
+            },
+            {
+              "kind": "heavy",
+              "lane": "left",
+              "count": 4
+            },
+            {
+              "kind": "drone",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "scout",
+              "lane": "left",
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 40,
+      "id": "steel-from-the-deep",
+      "title": "פלדה מן המצולות",
+      "weather": "storm",
+      "layout": "outer-reef",
+      "objective": {
+        "type": "clear_waves_and_boss",
+        "label": "הדפו את המתקפות והפילו את לווייתן הפלדה",
+        "medal": {
+          "metric": "baseHealthPct",
+          "operator": "gte",
+          "value": 40
+        },
+        "boss": "leviathan"
+      },
+      "waves": [
+        {
+          "groups": [
+            {
+              "kind": "shark",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 6
+            },
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "raft",
+              "lane": "center",
+              "count": 4
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "manta",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 3
+            },
+            {
+              "kind": "crab",
+              "lane": "left",
+              "count": 1
+            },
+            {
+              "kind": "heavy",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "runner",
+              "lane": "right",
+              "count": 6
+            },
+            {
+              "kind": "shark",
+              "lane": "center",
+              "count": 5
+            },
+            {
+              "kind": "mortar",
+              "lane": "right",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "groups": [
+            {
+              "kind": "drone",
+              "lane": "left",
+              "count": 5
+            },
+            {
+              "kind": "leviathan",
+              "lane": "center",
+              "count": 1
+            },
+            {
+              "kind": "manta",
+              "lane": "right",
+              "count": 5
+            },
+            {
+              "kind": "runner",
+              "lane": "left",
+              "count": 6
+            },
+            {
+              "kind": "raft",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "crab",
+              "lane": "right",
+              "count": 2
+            },
+            {
+              "kind": "scout",
+              "lane": "right",
+              "count": 4
+            },
+            {
+              "kind": "shark",
+              "lane": "left",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

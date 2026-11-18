@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10191c">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' file: data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'">
+  <title>אי החזירים · שלבים 21–40</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, "Arial", sans-serif;
+      background: #10191c;
+      color: #eff4ec;
+      --muted: #afbfb9;
+      --accent: #d4e7af;
+      --edge: #344749;
+      --panel: #1b292c;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(ellipse at 77% 0, #263637, transparent 57%); }
+    button, select, input { font: inherit; }
+    button, select {
+      color: inherit;
+      background: #223236;
+      border: 1px solid var(--edge);
+      border-radius: 8px;
+    }
+    button { padding: 0 .65rem; cursor: pointer; }
+    button[aria-pressed="true"], button[aria-selected="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #182821;
+      font-weight: 720;
+    }
+    button:disabled { opacity: .45; cursor: default; }
+    :focus-visible { outline: 2px solid #ffcc9a; outline-offset: 2px; }
+    [hidden] { display: none !important; }
+    h1, h2, p, figure, dl, dd { margin: 0; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    img { display: block; max-inline-size: 100%; }
+
+    main {
+      max-inline-size: 1120px;
+      margin-inline: auto;
+      padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-block-end: 10px;
+      min-block-size: 44px;
+    }
+    .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    h1 { font-size: clamp(19px, 3vw, 26px); letter-spacing: -.045em; line-height: 1; }
+    .brand p { font-size: 11px; color: var(--muted); }
+    .tabs { display: flex; gap: 4px; padding: 3px; background: #152124; border: 1px solid var(--edge); border-radius: 10px; }
+    .tabs button { min-block-size: 35px; border: 0; background: transparent; padding-inline: 12px; font-size: 13px; white-space: nowrap; }
+    .tabs button[aria-selected="true"] { background: var(--accent); }
+
+    .workbench {
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .details, .scene, .catalog {
+      border: 1px solid var(--edge);
+      border-radius: 14px;
+      background: var(--panel);
+      min-inline-size: 0;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      min-block-size: 0;
+      block-size: 100%;
+      overflow: hidden;
+    }
+    .details > p:first-child { color: var(--accent); font-size: 11px; font-weight: 700; }
+    h2 { font-size: 23px; line-height: 1.08; letter-spacing: -.035em; margin-block: 4px 5px; }
+    .description { color: #d9e3dc; font-size: 13px; line-height: 1.4; }
+    .stage-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      padding-block: 8px;
+      margin-block-start: 7px;
+      border-block: 1px solid var(--edge);
+    }
+    dt { font-size: 10px; color: var(--muted); line-height: 1.2; }
+    dd { font-size: 15px; font-weight: 730; margin-block-start: 2px; }
+    .wave-picker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      margin-block: 6px;
+    }
+    .wave-picker > span { font-size: 12px; font-weight: 650; }
+    .wave-picker button { min-inline-size: 35px; min-block-size: 32px; font-size: 13px; }
+    .wave-groups {
+      flex: 1;
+      min-block-size: 0;
+      overflow-y: auto;
+      padding-inline: 2px 5px;
+      scrollbar-width: thin;
+      scrollbar-color: #566b66 transparent;
+    }
+    .wave-groups li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.5;
+      min-block-size: 21px;
+      color: #dae5df;
+      font-size: 12px;
+    }
+    .wave-groups time { margin-inline-start: auto; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+    .lane-dot { flex: 0 0 6px; block-size: 6px; background: #8ec9d1; border-radius: 50%; }
+    [data-lane="center"] .lane-dot { background: #e0d595; }
+    [data-lane="right"] .lane-dot { background: #c5bbe6; }
+
+    .scene {
+      position: relative;
+      isolation: isolate;
+      aspect-ratio: 844 / 390;
+      overflow: hidden;
+      background: #354c52;
+    }
+    .scene img {
+      position: absolute;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: fill;
+      pointer-events: none;
+    }
+    .scene figcaption { position: absolute; inset: 10px 10px auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .scene-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 99px;
+      border: 1px solid #a4b9b440;
+      background: #122027ec;
+      color: #edf3ee;
+      font-size: 11px;
+      font-weight: 650;
+    }
+    .weather-tag::before { content: ""; block-size: 6px; inline-size: 6px; border-radius: 50%; background: var(--weather, var(--accent)); }
+    .medal {
+      position: absolute;
+      inset: auto 10px 9px;
+      width: fit-content;
+      max-inline-size: calc(100% - 20px);
+      border-radius: 7px;
+      padding: 4px 8px;
+      background: #122027ec;
+      color: #f7ebd5;
+      font-size: 11px;
+      font-weight: 650;
+    }
+    .level-controls, .weather-options { margin-block-start: 8px; }
+    .level-controls {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-block-size: 44px;
+    }
+    .stage-picker { display: flex; gap: 5px; }
+    .stage-picker select { block-size: 42px; min-inline-size: 0; max-inline-size: 222px; padding-inline: 7px 16px; font-weight: 650; font-size: 13px; }
+    .stage-picker button { min-inline-size: 40px; block-size: 42px; padding: 0; font-size: 23px; line-height: 1; }
+    .progress-chart {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 9px;
+      border-inline-start: 1px solid var(--edge);
+      padding-inline-start: 11px;
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .bars { flex: 1; display: flex; align-items: end; gap: 3px; block-size: 28px; }
+    .bars span { min-inline-size: 2px; flex: 1; block-size: var(--bar); border-radius: 2px 2px 0 0; background: #668480; }
+    .bars .active { background: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+    #weather-panel .details { justify-content: flex-start; }
+    #weather-panel .details h2 { font-size: 32px; margin-block: 6px; }
+    .layer-picker { display: grid; gap: 4px; margin-block: auto 0; }
+    .layer-picker legend { padding: 0; color: var(--muted); font-size: 11px; }
+    .layer-picker label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--edge);
+      border-radius: 8px;
+      padding: 4px 9px;
+      min-block-size: 40px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .layer-picker input { margin: 0; accent-color: var(--accent); inline-size: 18px; block-size: 18px; }
+    fieldset { border: none; padding: 0; min-inline-size: 0; }
+    .weather-options { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+    .weather-options button { min-block-size: 44px; display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 13px; }
+    .weather-options button::before {
+      content: ""; inline-size: 7px; block-size: 7px; background: var(--swatch); border: 1px solid #203436; border-radius: 50%;
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      padding: 7px;
+    }
+    .upgrade-button {
+      min-block-size: 86px;
+      padding: 3px 2px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 1px;
+      background: #202e32;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .upgrade-button img { inline-size: 49px; block-size: 49px; }
+    .upgrade-summary { gap: 3px; }
+    .upgrade-summary h2 { font-size: 25px; }
+    .upgrade-summary > img { inline-size: 73px; block-size: 73px; margin-block-end: 2px; }
+    .upgrade-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-block-start: 1px solid var(--edge);
+      margin-block-start: auto;
+      padding-block-start: 9px;
+    }
+    .upgrade-meta dd { font-size: 14px; }
+    #feedback { padding: 14px; }
+
+    @media (min-width: 701px) {
+      .details { contain: size; }
+    }
+    @media (max-width: 700px) {
+      .workbench { grid-template-columns: minmax(0, 1fr); }
+      .scene { grid-row: 1; }
+      .details { min-block-size: 215px; }
+      .wave-groups { max-block-size: 122px; }
+      .layer-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block-start: auto; }
+      #weather-panel .details { min-block-size: 158px; }
+      .catalog { grid-row: 2; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .upgrade-summary { min-block-size: 211px; }
+      .weather-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 460px) {
+      main { padding-inline: 10px; }
+      header { flex-wrap: wrap; }
+      .tabs { inline-size: 100%; }
+      .tabs button { flex: 1; }
+      .level-controls { flex-wrap: wrap; }
+      .stage-picker { inline-size: 100%; }
+      .stage-picker select { flex: 1; max-inline-size: none; }
+      .progress-chart { inline-size: 100%; padding-inline-start: 0; border-inline: 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <h1>אי החזירים</h1>
+      <p>שלבים <bdi dir="ltr">21–40</bdi></p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="מדורי התצוגה">
+      <button type="button" id="tab-levels" role="tab" aria-selected="true" aria-controls="levels-panel">שלבים</button>
+      <button type="button" id="tab-weather" role="tab" aria-selected="false" aria-controls="weather-panel" tabindex="-1">מזג אוויר</button>
+      <button type="button" id="tab-upgrades" role="tab" aria-selected="false" aria-controls="upgrades-panel" tabindex="-1">שדרוגים</button>
+    </div>
+  </header>
+
+  <section id="levels-panel" role="tabpanel" aria-labelledby="tab-levels" hidden>
+    <div class="workbench">
+      <aside class="details">
+        <p id="chapter-name"></p>
+        <h2 id="stage-title" aria-live="polite"></h2>
+        <p class="description" id="objective"></p>
+        <dl class="stage-meta">
+          <div><dt>אויבים</dt><dd id="enemy-count"></dd></div>
+          <div><dt>מכפיל חיים</dt><dd id="enemy-hp"></dd></div>
+          <div><dt>מרווח (ש׳)</dt><dd id="spawn-gap"></dd></div>
+        </dl>
+        <div class="wave-picker">
+          <span>מתקפה</span>
+          <div role="group" aria-label="בחירת מתקפה">
+            <button type="button" data-wave="0" aria-label="מתקפה 1" aria-pressed="true">1</button>
+            <button type="button" data-wave="1" aria-label="מתקפה 2" aria-pressed="false">2</button>
+            <button type="button" data-wave="2" aria-label="מתקפה 3" aria-pressed="false">3</button>
+          </div>
+        </div>
+        <ul id="wave-groups" class="wave-groups" aria-label="קבוצות לפי נתיב וזמן הופעה מתחילת המתקפה" tabindex="0"></ul>
+      </aside>
+      <figure class="scene" id="level-scene"></figure>
+    </div>
+    <div class="level-controls">
+      <div class="stage-picker">
+        <button type="button" id="prev-stage" aria-label="שלב קודם">›</button>
+        <select id="stage-select" aria-label="בחירת שלב"></select>
+        <button type="button" id="next-stage" aria-label="שלב הבא">‹</button>
+      </div>
+      <div class="progress-chart">
+        <span>אויבים בכל שלב</span>
+        <div class="bars" id="difficulty-bars" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="weather-panel" role="tabpanel" aria-labelledby="tab-weather" hidden>
+    <div class="workbench">
+      <aside class="details">
+        <p>מזג האוויר באחו</p>
+        <h2 id="weather-name" aria-live="polite"></h2>
+        <p class="description" id="weather-description"></p>
+        <fieldset class="layer-picker">
+          <legend>שכבות</legend>
+          <label><input type="checkbox" id="show-light" checked> אור</label>
+          <label><input type="checkbox" id="show-texture" checked> מרקם</label>
+        </fieldset>
+      </aside>
+      <figure class="scene" id="weather-scene"></figure>
+    </div>
+    <div class="weather-options" id="weather-options" role="group" aria-label="בחירת מזג אוויר"></div>
+  </section>
+
+  <section id="upgrades-panel" role="tabpanel" aria-labelledby="tab-upgrades" hidden>
+    <div class="workbench">
+      <aside class="details upgrade-summary">
+        <p id="weapon-name"></p>
+        <img id="upgrade-icon" width="73" height="73" alt="">
+        <h2 id="upgrade-name" aria-live="polite"></h2>
+        <p class="description" id="upgrade-effect"></p>
+        <dl class="upgrade-meta">
+          <div><dt>מחיר במטבעות</dt><dd id="upgrade-cost"></dd></div>
+          <div><dt>פתיחה משלב</dt><dd id="upgrade-stage"></dd></div>
+        </dl>
+      </aside>
+      <div class="catalog" id="upgrade-list" role="group" aria-label="בחירת שדרוג"></div>
+    </div>
+  </section>
+  <p id="feedback" role="alert" hidden>שגיאה בטעינת חבילת התצוגה.</p>
+  <noscript><p>נדרש JavaScript כדי לבחור שלבים, מזג אוויר ושדרוגים.</p></noscript>
+
+  <template id="scene-layers">
+    <img class="arena" alt="" width="1688" height="780">
+    <img class="light" alt="" width="1688" height="780">
+    <img class="texture" alt="" width="1688" height="780">
+    <p class="medal" hidden></p>
+    <figcaption><span class="scene-tag weather-tag"></span><span class="scene-tag layout-tag" hidden></span></figcaption>
+  </template>
+</main>
+
+<script id="local-data" type="application/json">
+[
+{"schemaVersion":1,"campaign":{"id":"boars-levels-v1","firstStage":21,"lastStage":40,"chapters":[{"name":"חזרה לנמל","firstStage":21,"lastStage":25},{"name":"הגאות הקרה","firstStage":26,"lastStage":30},{"name":"הרכס החשוף","firstStage":31,"lastStage":35},{"name":"הגל האחרון","firstStage":36,"lastStage":40}]},"enemyTypes":{"scout":{"label":"חזרזיר","approach":"ground","worldModel":"boar-peach"},"runner":{"label":"רץ","approach":"ground","worldModel":"boar-caramel"},"heavy":{"label":"משוריין","approach":"ground","worldModel":"boar-cocoa"},"drone":{"label":"רחפן","approach":"air"},"raft":{"label":"רפסודה","approach":"water"},"mortar":{"label":"מרגמה","approach":"ground","worldModel":"boar-cream"},"shark":{"label":"כריש פלדה","approach":"water"},"manta":{"label":"מנטה מעופפת","approach":"air"},"crab":{"label":"סרטן מצור","approach":"water"},"king":{"label":"מלך הברזל","approach":"ground","worldModel":"boar-lilac"},"hive":{"label":"ספינת הכוורת","approach":"air"},"turtle":{"label":"צב המבצר","approach":"water"},"leviathan":{"label":"לווייתן הפלדה","approach":"water"}},"layouts":{"breakwater":{"label":"שובר הגלים","lanes":{"left":{"xMeters":-22,"zMeters":-98,"halfWidthMeters":2},"center":{"xMeters":0,"zMeters":-93,"halfWidthMeters":2},"right":{"xMeters":22,"zMeters":-98,"halfWidthMeters":2}}},"reed-inlet":{"label":"מפרץ הקנים","lanes":{"left":{"xMeters":-21,"zMeters":-101,"halfWidthMeters":2},"center":{"xMeters":0,"zMeters":-98,"halfWidthMeters":2},"right":{"xMeters":17,"zMeters":-88,"halfWidthMeters":2}}},"wet-pier":{"label":"המזח הרטוב","lanes":{"left":{"xMeters":-17,"zMeters":-88,"halfWidthMeters":2},"center":{"xMeters":0,"zMeters":-97,"halfWidthMeters":2},"right":{"xMeters":22,"zMeters":-102,"halfWidthMeters":2}}},"ice-channel":{"label":"תעלת הקרח","lanes":{"left":{"xMeters":-14,"zMeters":-93,"halfWidthMeters":2},"center":{"xMeters":0,"zMeters":-85,"halfWidthMeters":2},"right":{"xMeters":14,"zMeters":-93,"halfWidthMeters":2}}},"outer-reef":{"label":"השונית החיצונית","lanes":{"left":{"xMeters":-25,"zMeters":-102,"halfWidthMeters":1},"center":{"xMeters":0,"zMeters":-95,"halfWidthMeters":2},"right":{"xMeters":25,"zMeters":-102,"halfWidthMeters":1}}},"lantern-cove":{"label":"מפרץ הפנסים","lanes":{"left":{"xMeters":-19,"zMeters":-91,"halfWidthMeters":2},"center":{"xMeters":0,"zMeters":-101,"halfWidthMeters":2},"right":{"xMeters":19,"zMeters":-91,"halfWidthMeters":2}}}},"difficulty":{"statReferenceWave":20,"rows":[{"stage":21,"plannedEnemies":43,"enemyHpMultiplier":1.03,"enemySpeedMultiplier":1.0,"enemyDamageMultiplier":1.0,"spawnGapSeconds":1.2,"interWaveSeconds":7.25,"clearBonusCoins":375},{"stage":22,"plannedEnemies":45,"enemyHpMultiplier":1.056,"enemySpeedMultiplier":1.007,"enemyDamageMultiplier":1.009,"spawnGapSeconds":1.185,"interWaveSeconds":7.125,"clearBonusCoins":390},{"stage":23,"plannedEnemies":47,"enemyHpMultiplier":1.082,"enemySpeedMultiplier":1.014,"enemyDamageMultiplier":1.018,"spawnGapSeconds":1.17,"interWaveSeconds":7.0,"clearBonusCoins":405},{"stage":24,"plannedEnemies":49,"enemyHpMultiplier":1.108,"enemySpeedMultiplier":1.021,"enemyDamageMultiplier":1.027,"spawnGapSeconds":1.155,"interWaveSeconds":6.875,"clearBonusCoins":420},{"stage":25,"plannedEnemies":51,"enemyHpMultiplier":1.134,"enemySpeedMultiplier":1.028,"enemyDamageMultiplier":1.036,"spawnGapSeconds":1.14,"interWaveSeconds":6.75,"clearBonusCoins":435,"bossHp":9500},{"stage":26,"plannedEnemies":53,"enemyHpMultiplier":1.16,"enemySpeedMultiplier":1.035,"enemyDamageMultiplier":1.045,"spawnGapSeconds":1.125,"interWaveSeconds":6.625,"clearBonusCoins":450},{"stage":27,"plannedEnemies":55,"enemyHpMultiplier":1.186,"enemySpeedMultiplier":1.042,"enemyDamageMultiplier":1.054,"spawnGapSeconds":1.11,"interWaveSeconds":6.5,"clearBonusCoins":465},{"stage":28,"plannedEnemies":57,"enemyHpMultiplier":1.212,"enemySpeedMultiplier":1.049,"enemyDamageMultiplier":1.063,"spawnGapSeconds":1.095,"interWaveSeconds":6.375,"clearBonusCoins":480},{"stage":29,"plannedEnemies":59,"enemyHpMultiplier":1.238,"enemySpeedMultiplier":1.056,"enemyDamageMultiplier":1.072,"spawnGapSeconds":1.08,"interWaveSeconds":6.25,"clearBonusCoins":495},{"stage":30,"plannedEnemies":61,"enemyHpMultiplier":1.264,"enemySpeedMultiplier":1.063,"enemyDamageMultiplier":1.081,"spawnGapSeconds":1.065,"interWaveSeconds":6.125,"clearBonusCoins":510,"bossHp":11000},{"stage":31,"plannedEnemies":63,"enemyHpMultiplier":1.29,"enemySpeedMultiplier":1.07,"enemyDamageMultiplier":1.09,"spawnGapSeconds":1.05,"interWaveSeconds":6.0,"clearBonusCoins":525},{"stage":32,"plannedEnemies":65,"enemyHpMultiplier":1.316,"enemySpeedMultiplier":1.077,"enemyDamageMultiplier":1.099,"spawnGapSeconds":1.035,"interWaveSeconds":5.875,"clearBonusCoins":540},{"stage":33,"plannedEnemies":67,"enemyHpMultiplier":1.342,"enemySpeedMultiplier":1.084,"enemyDamageMultiplier":1.108,"spawnGapSeconds":1.02,"interWaveSeconds":5.75,"clearBonusCoins":555},{"stage":34,"plannedEnemies":69,"enemyHpMultiplier":1.368,"enemySpeedMultiplier":1.091,"enemyDamageMultiplier":1.117,"spawnGapSeconds":1.005,"interWaveSeconds":5.625,"clearBonusCoins":570},{"stage":35,"plannedEnemies":71,"enemyHpMultiplier":1.394,"enemySpeedMultiplier":1.098,"enemyDamageMultiplier":1.126,"spawnGapSeconds":0.99,"interWaveSeconds":5.5,"clearBonusCoins":585,"bossHp":12500},{"stage":36,"plannedEnemies":73,"enemyHpMultiplier":1.42,"enemySpeedMultiplier":1.105,"enemyDamageMultiplier":1.135,"spawnGapSeconds":0.975,"interWaveSeconds":5.375,"clearBonusCoins":600},{"stage":37,"plannedEnemies":75,"enemyHpMultiplier":1.446,"enemySpeedMultiplier":1.112,"enemyDamageMultiplier":1.144,"spawnGapSeconds":0.96,"interWaveSeconds":5.25,"clearBonusCoins":615},{"stage":38,"plannedEnemies":77,"enemyHpMultiplier":1.472,"enemySpeedMultiplier":1.119,"enemyDamageMultiplier":1.153,"spawnGapSeconds":0.945,"interWaveSeconds":5.125,"clearBonusCoins":630},{"stage":39,"plannedEnemies":79,"enemyHpMultiplier":1.498,"enemySpeedMultiplier":1.126,"enemyDamageMultiplier":1.162,"spawnGapSeconds":0.93,"interWaveSeconds":5.0,"clearBonusCoins":645},{"stage":40,"plannedEnemies":81,"enemyHpMultiplier":1.524,"enemySpeedMultiplier":1.133,"enemyDamageMultiplier":1.171,"spawnGapSeconds":0.915,"interWaveSeconds":4.875,"clearBonusCoins":660,"bossHp":14000}]},"levels":[{"stage":21,"id":"golden-watch","title":"משמרת הזהב","weather":"sunset","layout":"breakwater","objective":{"type":"clear_waves","label":"הדפו שלוש מתקפות בשובר הגלים","medal":{"metric":"baseHealthPct","operator":"gte","value":65}},"waves":[{"groups":[{"kind":"scout","lane":"center","count":4},{"kind":"runner","lane":"left","count":4},{"kind":"scout","lane":"right","count":4}]},{"groups":[{"kind":"scout","lane":"left","count":5},{"kind":"drone","lane":"right","count":3},{"kind":"heavy","lane":"center","count":2},{"kind":"runner","lane":"right","count":4}]},{"groups":[{"kind":"raft","lane":"right","count":3},{"kind":"scout","lane":"center","count":4},{"kind":"shark","lane":"left","count":3},{"kind":"runner","lane":"right","count":4},{"kind":"mortar","lane":"center","count":3}]}]},{"stage":22,"id":"reeds-in-the-mist","title":"תנועה בין הקנים","weather":"fog","layout":"reed-inlet","objective":{"type":"clear_waves","label":"עצרו את הפשיטה על מפרץ הקנים","medal":{"metric":"baseHealthPct","operator":"gte","value":60}},"waves":[{"groups":[{"kind":"scout","lane":"center","count":5},{"kind":"runner","lane":"left","count":4},{"kind":"shark","lane":"right","count":4}]},{"groups":[{"kind":"manta","lane":"right","count":4},{"kind":"scout","lane":"left","count":4},{"kind":"heavy","lane":"center","count":3},{"kind":"runner","lane":"left","count":4}]},{"groups":[{"kind":"drone","lane":"left","count":4},{"kind":"raft","lane":"center","count":3},{"kind":"runner","lane":"right","count":5},{"kind":"shark","lane":"right","count":3},{"kind":"heavy","lane":"left","count":2}]}]},{"stage":23,"id":"tin-rain","title":"גשם על הפח","weather":"rain","layout":"wet-pier","objective":{"type":"clear_waves","label":"החזיקו את המזח מול מתקפות משני האגפים","medal":{"metric":"clearSeconds","operator":"lte","value":100}},"waves":[{"groups":[{"kind":"scout","lane":"left","count":5},{"kind":"runner","lane":"right","count":4},{"kind":"mortar","lane":"center","count":2},{"kind":"heavy","lane":"center","count":3}]},{"groups":[{"kind":"scout","lane":"right","count":5},{"kind":"shark","lane":"left","count":3},{"kind":"runner","lane":"center","count":4},{"kind":"mortar","lane":"right","count":3}]},{"groups":[{"kind":"raft","lane":"left","count":3},{"kind":"runner","lane":"right","count":4},{"kind":"heavy","lane":"center","count":4},{"kind":"scout","lane":"left","count":4},{"kind":"drone","lane":"right","count":3}]}]},{"stage":24,"id":"lantern-line","title":"קו הפנסים","weather":"night","layout":"lantern-cove","objective":{"type":"clear_waves","label":"הגנו על המפרץ מפני מתקפה מהאוויר ומהים","medal":{"metric":"baseHealthPct","operator":"gte","value":65}},"waves":[{"groups":[{"kind":"heavy","lane":"center","count":2},{"kind":"scout","lane":"center","count":2},{"kind":"drone","lane":"left","count":4},{"kind":"runner","lane":"right","count":4},{"kind":"manta","lane":"right","count":2}]},{"groups":[{"kind":"drone","lane":"right","count":4},{"kind":"mortar","lane":"left","count":4},{"kind":"manta","lane":"center","count":4},{"kind":"shark","lane":"right","count":4}]},{"groups":[{"kind":"manta","lane":"left","count":4},{"kind":"runner","lane":"right","count":5},{"kind":"raft","lane":"center","count":3},{"kind":"crab","lane":"center","count":2},{"kind":"heavy","lane":"center","count":1},{"kind":"drone","lane":"left","count":4}]}]},{"stage":25,"id":"king-of-the-breakwater","title":"מלך בשובר הגלים","weather":"storm","layout":"breakwater","objective":{"type":"clear_waves_and_boss","label":"הדפו את מתקפות הליווי והפילו את מלך הברזל","medal":{"metric":"baseHealthPct","operator":"gte","value":45},"boss":"king"},"waves":[{"groups":[{"kind":"scout","lane":"right","count":5},{"kind":"runner","lane":"left","count":5},{"kind":"mortar","lane":"center","count":2},{"kind":"heavy","lane":"center","count":3}]},{"groups":[{"kind":"raft","lane":"left","count":3},{"kind":"drone","lane":"right","count":4},{"kind":"heavy","lane":"right","count":3},{"kind":"runner","lane":"left","count":4},{"kind":"scout","lane":"center","count":3}]},{"groups":[{"kind":"runner","lane":"center","count":4},{"kind":"king","lane":"center","count":1},{"kind":"mortar","lane":"left","count":3},{"kind":"scout","lane":"right","count":4},{"kind":"heavy","lane":"right","count":3},{"kind":"drone","lane":"left","count":4}]}]},{"stage":26,"id":"first-flurry","title":"שלג ראשון בנמל","weather":"snow","layout":"ice-channel","objective":{"type":"clear_waves","label":"הגנו על פתח התעלה מול גל מהיר במרכז","medal":{"metric":"clearSeconds","operator":"lte","value":104}},"waves":[{"groups":[{"kind":"scout","lane":"center","count":6},{"kind":"runner","lane":"center","count":5},{"kind":"manta","lane":"left","count":2},{"kind":"heavy","lane":"right","count":2},{"kind":"drone","lane":"right","count":1}]},{"groups":[{"kind":"runner","lane":"left","count":4},{"kind":"heavy","lane":"right","count":3},{"kind":"drone","lane":"right","count":4},{"kind":"mortar","lane":"center","count":3},{"kind":"scout","lane":"left","count":3}]},{"groups":[{"kind":"shark","lane":"left","count":4},{"kind":"scout","lane":"right","count":5},{"kind":"runner","lane":"center","count":5},{"kind":"crab","lane":"right","count":2},{"kind":"drone","lane":"left","count":4}]}]},{"stage":27,"id":"tide-pools","title":"שביל השלוליות","weather":"rain","layout":"wet-pier","objective":{"type":"clear_waves","label":"הדפו את הרפסודות ושמרו על שני האגפים","medal":{"metric":"baseHealthPct","operator":"gte","value":55}},"waves":[{"groups":[{"kind":"scout","lane":"left","count":5},{"kind":"runner","lane":"right","count":5},{"kind":"raft","lane":"left","count":3},{"kind":"drone","lane":"right","count":3}]},{"groups":[{"kind":"mortar","lane":"right","count":3},{"kind":"runner","lane":"center","count":5},{"kind":"crab","lane":"left","count":3},{"kind":"scout","lane":"right","count":4},{"kind":"manta","lane":"right","count":3}]},{"groups":[{"kind":"raft","lane":"right","count":4},{"kind":"heavy","lane":"left","count":3},{"kind":"scout","lane":"center","count":5},{"kind":"shark","lane":"left","count":4},{"kind":"runner","lane":"right","count":5}]}]},{"stage":28,"id":"white-channel","title":"התעלה הלבנה","weather":"snow","layout":"ice-channel","objective":{"type":"clear_waves","label":"עצרו את הטור המשוריין בתעלה","medal":{"metric":"baseHealthPct","operator":"gte","value":55}},"waves":[{"groups":[{"kind":"scout","lane":"right","count":5},{"kind":"runner","lane":"left","count":4},{"kind":"heavy","lane":"center","count":4},{"kind":"drone","lane":"center","count":4}]},{"groups":[{"kind":"heavy","lane":"left","count":3},{"kind":"runner","lane":"right","count":4},{"kind":"shark","lane":"center","count":4},{"kind":"mortar","lane":"right","count":3},{"kind":"scout","lane":"left","count":4}]},{"groups":[{"kind":"shark","lane":"right","count":3},{"kind":"scout","lane":"center","count":5},{"kind":"heavy","lane":"right","count":4},{"kind":"drone","lane":"left","count":4},{"kind":"runner","lane":"left","count":4},{"kind":"manta","lane":"right","count":2}]}]},{"stage":29,"id":"shadows-on-the-reef","title":"צללים על השונית","weather":"night","layout":"outer-reef","objective":{"type":"clear_waves","label":"בלמו את מתקפת הלילה משני קצות השונית","medal":{"metric":"clearSeconds","operator":"lte","value":108}},"waves":[{"groups":[{"kind":"runner","lane":"left","count":5},{"kind":"scout","lane":"right","count":5},{"kind":"drone","lane":"left","count":4},{"kind":"manta","lane":"right","count":4}]},{"groups":[{"kind":"shark","lane":"right","count":4},{"kind":"manta","lane":"left","count":4},{"kind":"mortar","lane":"center","count":3},{"kind":"heavy","lane":"left","count":3},{"kind":"scout","lane":"left","count":1},{"kind":"drone","lane":"right","count":4}]},{"groups":[{"kind":"manta","lane":"right","count":4},{"kind":"runner","lane":"left","count":5},{"kind":"crab","lane":"right","count":3},{"kind":"drone","lane":"center","count":5},{"kind":"shark","lane":"left","count":3},{"kind":"heavy","lane":"right","count":2}]}]},{"stage":30,"id":"storm-hive","title":"כוורת בסערה","weather":"storm","layout":"outer-reef","objective":{"type":"clear_waves_and_boss","label":"נקו את הגלים והפילו את ספינת הכוורת","medal":{"metric":"baseHealthPct","operator":"gte","value":45},"boss":"hive"},"waves":[{"groups":[{"kind":"scout","lane":"center","count":5},{"kind":"drone","lane":"right","count":4},{"kind":"manta","lane":"left","count":4},{"kind":"runner","lane":"left","count":5}]},{"groups":[{"kind":"manta","lane":"right","count":4},{"kind":"shark","lane":"left","count":4},{"kind":"drone","lane":"left","count":4},{"kind":"scout","lane":"right","count":4},{"kind":"heavy","lane":"center","count":4}]},{"groups":[{"kind":"drone","lane":"left","count":5},{"kind":"hive","lane":"center","count":1},{"kind":"manta","lane":"right","count":5},{"kind":"runner","lane":"right","count":5},{"kind":"mortar","lane":"left","count":3},{"kind":"scout","lane":"right","count":4}]}]},{"stage":31,"id":"amber-ridge","title":"הרכס הענברי","weather":"sunset","layout":"breakwater","objective":{"type":"clear_waves","label":"בלמו מתקפה מכיוון הסוללה והשונית","medal":{"metric":"baseHealthPct","operator":"gte","value":60}},"waves":[{"groups":[{"kind":"scout","lane":"left","count":6},{"kind":"runner","lane":"right","count":5},{"kind":"shark","lane":"left","count":4},{"kind":"mortar","lane":"center","count":4}]},{"groups":[{"kind":"raft","lane":"center","count":4},{"kind":"drone","lane":"left","count":4},{"kind":"heavy","lane":"right","count":4},{"kind":"scout","lane":"right","count":4},{"kind":"runner","lane":"left","count":4}]},{"groups":[{"kind":"runner","lane":"right","count":5},{"kind":"raft","lane":"left","count":3},{"kind":"manta","lane":"right","count":5},{"kind":"heavy","lane":"left","count":4},{"kind":"scout","lane":"center","count":4},{"kind":"shark","lane":"right","count":3}]}]},{"stage":32,"id":"snow-on-the-dike","title":"שלג על הסוללה","weather":"snow","layout":"ice-channel","objective":{"type":"clear_waves","label":"הגנו על הסוללה מול טור מהיר ומשוריינים","medal":{"metric":"clearSeconds","operator":"lte","value":114}},"waves":[{"groups":[{"kind":"scout","lane":"center","count":6},{"kind":"runner","lane":"center","count":6},{"kind":"drone","lane":"left","count":4},{"kind":"heavy","lane":"right","count":4}]},{"groups":[{"kind":"heavy","lane":"left","count":4},{"kind":"runner","lane":"right","count":5},{"kind":"mortar","lane":"center","count":4},{"kind":"manta","lane":"left","count":4},{"kind":"drone","lane":"right","count":4}]},{"groups":[{"kind":"heavy","lane":"right","count":3},{"kind":"runner","lane":"center","count":6},{"kind":"shark","lane":"left","count":4},{"kind":"scout","lane":"right","count":5},{"kind":"heavy","lane":"left","count":4},{"kind":"drone","lane":"right","count":2}]}]},{"stage":33,"id":"three-approaches","title":"שלוש דרכי גישה","weather":"rain","layout":"wet-pier","objective":{"type":"clear_waves","label":"החזיקו מעמד מול שלוש דרכי הגישה למזח","medal":{"metric":"baseHealthPct","operator":"gte","value":55}},"waves":[{"groups":[{"kind":"scout","lane":"left","count":6},{"kind":"runner","lane":"right","count":5},{"kind":"raft","lane":"center","count":4},{"kind":"manta","lane":"right","count":5}]},{"groups":[{"kind":"shark","lane":"left","count":4},{"kind":"heavy","lane":"center","count":4},{"kind":"scout","lane":"right","count":5},{"kind":"drone","lane":"left","count":5},{"kind":"mortar","lane":"right","count":4}]},{"groups":[{"kind":"runner","lane":"left","count":6},{"kind":"raft","lane":"right","count":4},{"kind":"manta","lane":"center","count":5},{"kind":"heavy","lane":"left","count":4},{"kind":"scout","lane":"right","count":4},{"kind":"crab","lane":"right","count":2}]}]},{"stage":34,"id":"watch-after-dark","title":"משמרת אחרי חושך","weather":"night","layout":"lantern-cove","objective":{"type":"clear_waves","label":"עצרו את הנחילים לפני שהם מגיעים לפנסים","medal":{"metric":"clearSeconds","operator":"lte","value":118}},"waves":[{"groups":[{"kind":"drone","lane":"left","count":5},{"kind":"runner","lane":"right","count":6},{"kind":"heavy","lane":"left","count":2},{"kind":"scout","lane":"left","count":3},{"kind":"manta","lane":"center","count":5}]},{"groups":[{"kind":"manta","lane":"right","count":5},{"kind":"crab","lane":"right","count":2},{"kind":"shark","lane":"right","count":3},{"kind":"mortar","lane":"center","count":4},{"kind":"runner","lane":"left","count":5},{"kind":"drone","lane":"right","count":4}]},{"groups":[{"kind":"drone","lane":"left","count":5},{"kind":"runner","lane":"center","count":6},{"kind":"crab","lane":"right","count":3},{"kind":"raft","lane":"right","count":1},{"kind":"heavy","lane":"right","count":4},{"kind":"manta","lane":"left","count":4},{"kind":"scout","lane":"right","count":2}]}]},{"stage":35,"id":"fortress-in-fog","title":"מבצר בערפל","weather":"fog","layout":"reed-inlet","objective":{"type":"clear_waves_and_boss","label":"נקו את הגלים והפילו את צב המבצר","medal":{"metric":"baseHealthPct","operator":"gte","value":40},"boss":"turtle"},"waves":[{"groups":[{"kind":"scout","lane":"center","count":6},{"kind":"runner","lane":"left","count":5},{"kind":"shark","lane":"right","count":3},{"kind":"drone","lane":"right","count":4},{"kind":"shark","lane":"left","count":4}]},{"groups":[{"kind":"raft","lane":"right","count":4},{"kind":"scout","lane":"left","count":5},{"kind":"mortar","lane":"center","count":4},{"kind":"heavy","lane":"right","count":4},{"kind":"manta","lane":"right","count":5}]},{"groups":[{"kind":"runner","lane":"left","count":5},{"kind":"drone","lane":"left","count":4},{"kind":"turtle","lane":"center","count":1},{"kind":"scout","lane":"right","count":5},{"kind":"raft","lane":"left","count":3},{"kind":"crab","lane":"left","count":1},{"kind":"shark","lane":"right","count":5},{"kind":"mortar","lane":"right","count":3}]}]},{"stage":36,"id":"copper-sky","title":"שמיים של נחושת","weather":"sunset","layout":"outer-reef","objective":{"type":"clear_waves","label":"בלמו נחיתות חוזרות בשני קצות השונית","medal":{"metric":"clearSeconds","operator":"lte","value":120}},"waves":[{"groups":[{"kind":"runner","lane":"right","count":6},{"kind":"raft","lane":"left","count":4},{"kind":"scout","lane":"left","count":5},{"kind":"manta","lane":"right","count":4},{"kind":"heavy","lane":"center","count":3}]},{"groups":[{"kind":"shark","lane":"left","count":5},{"kind":"raft","lane":"right","count":4},{"kind":"drone","lane":"left","count":5},{"kind":"mortar","lane":"center","count":4},{"kind":"scout","lane":"right","count":5}]},{"groups":[{"kind":"runner","lane":"left","count":6},{"kind":"heavy","lane":"right","count":4},{"kind":"manta","lane":"center","count":5},{"kind":"crab","lane":"left","count":3},{"kind":"scout","lane":"right","count":5},{"kind":"shark","lane":"right","count":5}]}]},{"stage":37,"id":"last-flurry","title":"סופת השלג האחרונה","weather":"snow","layout":"ice-channel","objective":{"type":"clear_waves","label":"עצרו את המצור בתעלה ושמרו על החומה","medal":{"metric":"baseHealthPct","operator":"gte","value":55}},"waves":[{"groups":[{"kind":"scout","lane":"center","count":6},{"kind":"runner","lane":"center","count":6},{"kind":"drone","lane":"right","count":5},{"kind":"crab","lane":"left","count":3},{"kind":"heavy","lane":"left","count":1},{"kind":"manta","lane":"left","count":2}]},{"groups":[{"kind":"crab","lane":"right","count":4},{"kind":"runner","lane":"left","count":6},{"kind":"mortar","lane":"right","count":4},{"kind":"drone","lane":"center","count":5},{"kind":"shark","lane":"right","count":5}]},{"groups":[{"kind":"runner","lane":"center","count":6},{"kind":"heavy","lane":"left","count":4},{"kind":"drone","lane":"left","count":5},{"kind":"raft","lane":"right","count":4},{"kind":"manta","lane":"right","count":5},{"kind":"scout","lane":"left","count":4}]}]},{"stage":38,"id":"cross-tide","title":"גאות צולבת","weather":"rain","layout":"wet-pier","objective":{"type":"clear_waves","label":"הדפו מתקפה משולבת מהים ומהאוויר","medal":{"metric":"clearSeconds","operator":"lte","value":124}},"waves":[{"groups":[{"kind":"scout","lane":"left","count":6},{"kind":"shark","lane":"right","count":5},{"kind":"runner","lane":"right","count":6},{"kind":"drone","lane":"left","count":4},{"kind":"raft","lane":"center","count":3}]},{"groups":[{"kind":"crab","lane":"left","count":4},{"kind":"manta","lane":"right","count":5},{"kind":"mortar","lane":"center","count":4},{"kind":"heavy","lane":"right","count":4},{"kind":"runner","lane":"left","count":5},{"kind":"drone","lane":"right","count":3}]},{"groups":[{"kind":"raft","lane":"right","count":4},{"kind":"shark","lane":"left","count":5},{"kind":"runner","lane":"right","count":5},{"kind":"manta","lane":"center","count":5},{"kind":"scout","lane":"right","count":4},{"kind":"heavy","lane":"left","count":3},{"kind":"drone","lane":"left","count":2}]}]},{"stage":39,"id":"lights-out","title":"כיבוי אורות","weather":"night","layout":"lantern-cove","objective":{"type":"clear_waves","label":"שרדו את הפלישה הלילית ושמרו על קו ההגנה","medal":{"metric":"baseHealthPct","operator":"gte","value":50}},"waves":[{"groups":[{"kind":"drone","lane":"right","count":5},{"kind":"runner","lane":"left","count":6},{"kind":"scout","lane":"left","count":5},{"kind":"manta","lane":"right","count":5},{"kind":"crab","lane":"right","count":3}]},{"groups":[{"kind":"manta","lane":"left","count":5},{"kind":"heavy","lane":"right","count":3},{"kind":"raft","lane":"right","count":1},{"kind":"mortar","lane":"center","count":4},{"kind":"drone","lane":"left","count":5},{"kind":"runner","lane":"right","count":5},{"kind":"heavy","lane":"right","count":2}]},{"groups":[{"kind":"runner","lane":"center","count":6},{"kind":"crab","lane":"right","count":2},{"kind":"shark","lane":"right","count":3},{"kind":"heavy","lane":"left","count":4},{"kind":"drone","lane":"center","count":5},{"kind":"manta","lane":"right","count":5},{"kind":"scout","lane":"left","count":5}]}]},{"stage":40,"id":"steel-from-the-deep","title":"פלדה מן המצולות","weather":"storm","layout":"outer-reef","objective":{"type":"clear_waves_and_boss","label":"הדפו את המתקפות והפילו את לווייתן הפלדה","medal":{"metric":"baseHealthPct","operator":"gte","value":40},"boss":"leviathan"},"waves":[{"groups":[{"kind":"shark","lane":"right","count":5},{"kind":"runner","lane":"left","count":6},{"kind":"scout","lane":"right","count":6},{"kind":"drone","lane":"left","count":5},{"kind":"raft","lane":"center","count":4}]},{"groups":[{"kind":"manta","lane":"left","count":5},{"kind":"shark","lane":"left","count":3},{"kind":"crab","lane":"left","count":1},{"kind":"heavy","lane":"right","count":4},{"kind":"runner","lane":"right","count":6},{"kind":"shark","lane":"center","count":5},{"kind":"mortar","lane":"right","count":3}]},{"groups":[{"kind":"drone","lane":"left","count":5},{"kind":"leviathan","lane":"center","count":1},{"kind":"manta","lane":"right","count":5},{"kind":"runner","lane":"left","count":6},{"kind":"raft","lane":"right","count":2},{"kind":"crab","lane":"right","count":2},{"kind":"scout","lane":"right","count":4},{"kind":"shark","lane":"left","count":3}]}]}]},
+{"schemaVersion":1,"resolution":{"width":1688,"height":780},"referenceViewport":{"width":844,"height":390},"colorSpace":"srgb","alpha":"straight","blend":"source-over","previewBase":"arena.webp","profiles":[{"id":"rain","name":"גשם","accent":"#87cfe1","description":"גשם אלכסוני, אדוות בשלוליות ואור רך על הקרקע.","layers":[{"role":"light","file":"rain-light.webp"},{"role":"texture","file":"rain-texture.webp"}]},{"id":"fog","name":"ערפל","accent":"#b4dccc","description":"שכבות אובך נמוכות, עם מרווח ראות במרכז האחו.","layers":[{"role":"light","file":"fog-light.webp"},{"role":"texture","file":"fog-texture.webp"}]},{"id":"snow","name":"שלג","accent":"#c4e6fc","description":"פתיתים בשלושה מישורי עומק ותאורה קרה.","layers":[{"role":"light","file":"snow-light.webp"},{"role":"texture","file":"snow-texture.webp"}]},{"id":"night","name":"לילה","accent":"#b9c3ff","description":"אור ירח כחול וזוהר חם ליד החלון.","layers":[{"role":"light","file":"night-light.webp"},{"role":"texture","file":"night-texture.webp"}]},{"id":"storm","name":"סערה","accent":"#c3caff","description":"גשם כבד וברק קבוע בשולי השמיים.","layers":[{"role":"light","file":"storm-light.webp"},{"role":"texture","file":"storm-texture.webp"}]},{"id":"sunset","name":"שקיעה","accent":"#ffbd81","description":"שמש נמוכה, פסי ענן דקים ואור ענברי.","layers":[{"role":"light","file":"sunset-light.webp"},{"role":"texture","file":"sunset-texture.webp"}]}]},
+{"schemaVersion":1,"currency":"coins","weaponLabels":{"shotgun":"רסס סערה","cannon":"תותח נפץ","shotgun2":"רסס כבד","cannon2":"תותח כבד","shotgun3":"תותח רסס","cannon3":"מרגמת נפץ"},"upgrades":[{"id":"reef-choke","name":"חבק שונית","weapon":"shotgun","cost":420,"unlockStage":21,"requiredWeaponLevel":1,"icon":"icons/reef-choke.svg","effect":{"description":"פיזור הרסיסים קטן ב־14%.","stat":"spread","operation":"multiply","value":0.86}},{"id":"brass-fuse","name":"פתיל פליז","weapon":"cannon","cost":460,"unlockStage":21,"requiredWeaponLevel":1,"icon":"icons/brass-fuse.svg","effect":{"description":"רדיוס הפיצוץ גדל ב־12%.","stat":"splash","operation":"multiply","value":1.12}},{"id":"quick-latch","name":"בריח זריז","weapon":"shotgun","cost":580,"unlockStage":23,"requiredWeaponLevel":1,"icon":"icons/quick-latch.svg","effect":{"description":"זמן הטעינה מתקצר ב־12%.","stat":"reload","operation":"multiply","value":0.88}},{"id":"return-spring","name":"קפיץ החזרה","weapon":"cannon","cost":660,"unlockStage":24,"requiredWeaponLevel":1,"icon":"icons/return-spring.svg","effect":{"description":"קצב הירי עולה ב־10%.","stat":"rate","operation":"multiply","value":1.1}},{"id":"double-tray","name":"מגש כפול","weapon":"shotgun2","cost":830,"unlockStage":26,"requiredWeaponLevel":1,"icon":"icons/double-tray.svg","effect":{"description":"המחסנית מכילה עוד שתי יריות.","stat":"mag","operation":"add","value":2}},{"id":"bronze-core","name":"ליבת ברונזה","weapon":"cannon2","cost":960,"unlockStage":27,"requiredWeaponLevel":1,"icon":"icons/bronze-core.svg","effect":{"description":"נזק הפגז גדל ב־12%.","stat":"damage","operation":"multiply","value":1.12}},{"id":"ember-pellet","name":"רסיס גחלת","weapon":"shotgun2","cost":1100,"unlockStage":29,"requiredWeaponLevel":1,"icon":"icons/ember-pellet.svg","effect":{"description":"כל רסיס גורם ל־10% יותר נזק.","stat":"damage","operation":"multiply","value":1.1}},{"id":"twin-cradle","name":"עריסת פגזים","weapon":"cannon2","cost":1250,"unlockStage":30,"requiredWeaponLevel":1,"icon":"icons/twin-cradle.svg","effect":{"description":"המחסנית מכילה עוד פגז אחד.","stat":"mag","operation":"add","value":1}},{"id":"needle-fan","name":"מניפת מחטים","weapon":"shotgun3","cost":1460,"unlockStage":32,"requiredWeaponLevel":1,"icon":"icons/needle-fan.svg","effect":{"description":"עוד רסיס אחד בכל ירייה.","stat":"pellets","operation":"add","value":1}},{"id":"wide-halo","name":"טבעת הדף","weapon":"cannon3","cost":1580,"unlockStage":33,"requiredWeaponLevel":1,"icon":"icons/wide-halo.svg","effect":{"description":"רדיוס הפיצוץ גדל ב־10%.","stat":"splash","operation":"multiply","value":1.1}},{"id":"silk-slide","name":"מסילת משי","weapon":"shotgun3","cost":1760,"unlockStage":35,"requiredWeaponLevel":1,"icon":"icons/silk-slide.svg","effect":{"description":"פיזור הרסיסים קטן ב־10%.","stat":"spread","operation":"multiply","value":0.9}},{"id":"mortar-elevator","name":"מעלית פגזים","weapon":"cannon3","cost":1950,"unlockStage":36,"requiredWeaponLevel":1,"icon":"icons/mortar-elevator.svg","effect":{"description":"זמן הטעינה של המרגמה מתקצר ב־12%.","stat":"reload","operation":"multiply","value":0.88}}]}
+]
+</script>
+<script>
+  const byId = id => document.getElementById(id);
+  const countFormat = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 3 });
+  const secondsFormat = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 2 });
+  const laneLabels = { left: 'שמאל', center: 'מרכז', right: 'ימין' };
+
+  function button(label, onClick) {
+    const control = document.createElement('button');
+    control.type = 'button';
+    control.textContent = label;
+    control.addEventListener('click', onClick);
+    return control;
+  }
+
+  async function readPack() {
+    const files = ['levels.json', 'weather/manifest.json', 'upgrades.json'];
+    if (location.protocol === 'file:') return JSON.parse(byId('local-data').textContent);
+    return Promise.all(files.map(async path => {
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(path);
+      return response.json();
+    }));
+  }
+
+  function setupScene(id, baseFile) {
+    const figure = byId(id);
+    figure.append(byId('scene-layers').content.cloneNode(true));
+    const element = selector => figure.querySelector(selector);
+    element('.arena').src = 'weather/' + baseFile;
+    return ({ profile, layout = '', medal = '', showLight = true, showTexture = true }) => {
+      const weatherTag = element('.weather-tag');
+      weatherTag.textContent = profile.name;
+      weatherTag.style.setProperty('--weather', profile.accent);
+      const layoutTag = element('.layout-tag');
+      layoutTag.textContent = layout;
+      layoutTag.hidden = !layout;
+      const medalTag = element('.medal');
+      medalTag.textContent = medal;
+      medalTag.hidden = !medal;
+      for (const layer of profile.layers) {
+        const image = element('.' + layer.role);
+        const path = 'weather/' + layer.file;
+        if (image.getAttribute('src') !== path) image.src = path;
+        image.hidden = layer.role === 'light' ? !showLight : !showTexture;
+      }
+      figure.setAttribute('aria-label', 'אחו החזירים · ' + profile.name);
+    };
+  }
+
+  function setupTabs(onChange) {
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    function activate(index, focus) {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', selected);
+        tab.tabIndex = selected ? 0 : -1;
+        byId(tab.getAttribute('aria-controls')).hidden = !selected;
+      });
+      onChange(index);
+      if (focus) tabs[index].focus();
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index, false));
+      tab.addEventListener('keydown', event => {
+        const targets = { ArrowLeft: index + 1, ArrowRight: index - 1, Home: 0, End: tabs.length - 1 };
+        if (!(event.key in targets)) return;
+        event.preventDefault();
+        activate((targets[event.key] + tabs.length) % tabs.length, true);
+      });
+    });
+    activate(0, false);
+  }
+
+  function setupPreview([campaign, weather, shop]) {
+    const { levels, layouts, enemyTypes, difficulty } = campaign;
+    const profiles = new Map(weather.profiles.map(profile => [profile.id, profile]));
+    const rows = new Map(difficulty.rows.map(row => [row.stage, row]));
+    const drawLevelScene = setupScene('level-scene', weather.previewBase);
+    const drawWeatherScene = setupScene('weather-scene', weather.previewBase);
+    const levelSelect = byId('stage-select');
+    const waveChoices = [...document.querySelectorAll('[data-wave]')];
+    const list = byId('wave-groups');
+    const light = byId('show-light');
+    const texture = byId('show-texture');
+    let levelIndex = 0;
+    let waveIndex = 0;
+    let weatherId = levels[0].weather;
+    let upgradeIndex = 0;
+
+    for (const chapter of campaign.campaign.chapters) {
+      const group = document.createElement('optgroup');
+      group.label = chapter.name;
+      levels.forEach((level, index) => {
+        if (level.stage < chapter.firstStage || level.stage > chapter.lastStage) return;
+        group.append(new Option(level.stage + ' · ' + level.title, index));
+      });
+      levelSelect.append(group);
+    }
+
+    const maxEnemies = Math.max(...difficulty.rows.map(row => row.plannedEnemies));
+    const bars = difficulty.rows.map(row => {
+      const bar = document.createElement('span');
+      bar.style.setProperty('--bar', 100 * row.plannedEnemies / maxEnemies + '%');
+      bar.title = row.stage + ' · ' + row.plannedEnemies;
+      return bar;
+    });
+    byId('difficulty-bars').append(...bars);
+
+    function showWave() {
+      const level = levels[levelIndex];
+      const { spawnGapSeconds } = rows.get(level.stage);
+      waveChoices.forEach((choice, index) => choice.setAttribute('aria-pressed', index === waveIndex));
+      let offset = 0;
+      list.replaceChildren(...level.waves[waveIndex].groups.map(group => {
+        const item = document.createElement('li');
+        const marker = document.createElement('span');
+        const label = document.createElement('span');
+        const timing = document.createElement('time');
+        item.dataset.lane = group.lane;
+        marker.className = 'lane-dot';
+        marker.setAttribute('aria-hidden', 'true');
+        label.textContent = laneLabels[group.lane] + ' · ' + enemyTypes[group.kind].label + ' ×' + group.count;
+        timing.textContent = secondsFormat.format(offset * spawnGapSeconds) + ' ש׳';
+        timing.dateTime = 'PT' + (offset * spawnGapSeconds).toFixed(3) + 'S';
+        offset += group.count;
+        item.append(marker, label, timing);
+        return item;
+      }));
+      list.scrollTop = 0;
+    }
+
+    function showLevel(index) {
+      if (levelIndex !== index) waveIndex = 0;
+      levelIndex = index;
+      const level = levels[levelIndex];
+      const params = rows.get(level.stage);
+      const chapter = campaign.campaign.chapters.find(ch => level.stage >= ch.firstStage && level.stage <= ch.lastStage);
+      const target = level.objective.medal;
+      const medal = target.metric === 'baseHealthPct'
+        ? 'יעד בונוס · לפחות ' + target.value + '% הגנה'
+        : 'יעד בונוס · עד ' + target.value + ' שניות';
+
+      levelSelect.value = index;
+      byId('prev-stage').disabled = index === 0;
+      byId('next-stage').disabled = index === levels.length - 1;
+      byId('chapter-name').textContent = chapter.name;
+      byId('stage-title').textContent = level.title;
+      byId('objective').textContent = level.objective.label;
+      byId('enemy-count').textContent = params.plannedEnemies;
+      byId('enemy-hp').textContent = countFormat.format(params.enemyHpMultiplier);
+      byId('spawn-gap').textContent = countFormat.format(params.spawnGapSeconds);
+      bars.forEach((bar, i) => bar.classList.toggle('active', i === index));
+      drawLevelScene({ profile: profiles.get(level.weather), layout: layouts[level.layout].label, medal });
+      showWave();
+    }
+
+    const weatherButtons = weather.profiles.map(profile => {
+      const control = button(profile.name, () => {
+        weatherId = profile.id;
+        showWeather();
+      });
+      control.dataset.weather = profile.id;
+      control.style.setProperty('--swatch', profile.accent);
+      return control;
+    });
+    byId('weather-options').append(...weatherButtons);
+
+    function showWeather() {
+      const profile = profiles.get(weatherId);
+      byId('weather-name').textContent = profile.name;
+      byId('weather-description').textContent = profile.description;
+      weatherButtons.forEach(control => control.setAttribute('aria-pressed', control.dataset.weather === weatherId));
+      drawWeatherScene({ profile, showLight: light.checked, showTexture: texture.checked });
+    }
+
+    const upgradeButtons = shop.upgrades.map((upgrade, index) => {
+      const control = button(upgrade.name, () => showUpgrade(index));
+      const icon = new Image(49, 49);
+      icon.alt = '';
+      icon.loading = 'lazy';
+      icon.src = upgrade.icon;
+      control.className = 'upgrade-button';
+      control.prepend(icon);
+      return control;
+    });
+    byId('upgrade-list').append(...upgradeButtons);
+
+    function showUpgrade(index) {
+      upgradeIndex = index;
+      const upgrade = shop.upgrades[index];
+      upgradeButtons.forEach((control, i) => control.setAttribute('aria-pressed', i === index));
+      byId('weapon-name').textContent = shop.weaponLabels[upgrade.weapon];
+      byId('upgrade-icon').src = upgrade.icon;
+      byId('upgrade-name').textContent = upgrade.name;
+      byId('upgrade-effect').textContent = upgrade.effect.description;
+      byId('upgrade-cost').textContent = countFormat.format(upgrade.cost);
+      byId('upgrade-stage').textContent = upgrade.unlockStage;
+    }
+
+    byId('prev-stage').addEventListener('click', () => showLevel(levelIndex - 1));
+    byId('next-stage').addEventListener('click', () => showLevel(levelIndex + 1));
+    levelSelect.addEventListener('change', () => showLevel(Number(levelSelect.value)));
+    waveChoices.forEach(choice => choice.addEventListener('click', () => {
+      waveIndex = Number(choice.dataset.wave);
+      showWave();
+    }));
+    light.addEventListener('change', showWeather);
+    texture.addEventListener('change', showWeather);
+
+    setupTabs(index => {
+      if (index === 0) showLevel(levelIndex);
+      if (index === 1) showWeather();
+      if (index === 2) showUpgrade(upgradeIndex);
+    });
+  }
+
+  readPack().then(setupPreview).catch(error => {
+    byId('feedback').hidden = false;
+    console.error(error);
+  });
+</script>
+</body>
+</html>

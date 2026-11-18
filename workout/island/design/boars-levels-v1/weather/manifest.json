@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "resolution": {
+    "width": 1688,
+    "height": 780
+  },
+  "referenceViewport": {
+    "width": 844,
+    "height": 390
+  },
+  "colorSpace": "srgb",
+  "alpha": "straight",
+  "blend": "source-over",
+  "previewBase": "arena.webp",
+  "profiles": [
+    {
+      "id": "rain",
+      "name": "גשם",
+      "accent": "#87cfe1",
+      "description": "גשם אלכסוני, אדוות בשלוליות ואור רך על הקרקע.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "rain-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "rain-texture.webp"
+        }
+      ]
+    },
+    {
+      "id": "fog",
+      "name": "ערפל",
+      "accent": "#b4dccc",
+      "description": "שכבות אובך נמוכות, עם מרווח ראות במרכז האחו.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "fog-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "fog-texture.webp"
+        }
+      ]
+    },
+    {
+      "id": "snow",
+      "name": "שלג",
+      "accent": "#c4e6fc",
+      "description": "פתיתים בשלושה מישורי עומק ותאורה קרה.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "snow-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "snow-texture.webp"
+        }
+      ]
+    },
+    {
+      "id": "night",
+      "name": "לילה",
+      "accent": "#b9c3ff",
+      "description": "אור ירח כחול וזוהר חם ליד החלון.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "night-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "night-texture.webp"
+        }
+      ]
+    },
+    {
+      "id": "storm",
+      "name": "סערה",
+      "accent": "#c3caff",
+      "description": "גשם כבד וברק קבוע בשולי השמיים.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "storm-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "storm-texture.webp"
+        }
+      ]
+    },
+    {
+      "id": "sunset",
+      "name": "שקיעה",
+      "accent": "#ffbd81",
+      "description": "שמש נמוכה, פסי ענן דקים ואור ענברי.",
+      "layers": [
+        {
+          "role": "light",
+          "file": "sunset-light.webp"
+        },
+        {
+          "role": "texture",
+          "file": "sunset-texture.webp"
+        }
+      ]
+    }
+  ]
+}

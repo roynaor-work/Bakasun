@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">מעלית פגזים</title>
+  <defs>
+    <linearGradient id="frame" x2="0" y2="1">
+      <stop stop-color="#303e4a"/>
+      <stop offset="1" stop-color="#161b24"/>
+    </linearGradient>
+    <linearGradient id="steel" x2="0.3" y2="1">
+      <stop stop-color="#e0e9e7"/>
+      <stop offset=".45" stop-color="#879ca5"/>
+      <stop offset="1" stop-color="#415364"/>
+    </linearGradient>
+    <linearGradient id="accent" x2=".2" y2="1">
+      <stop stop-color="#ffe1a3"/>
+      <stop offset="1" stop-color="#aa5434"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="6" width="88" height="88" rx="18" fill="#12171d"/>
+  <rect x="4" y="3" width="88" height="88" rx="18" fill="url(#frame)" stroke="#ffe1a3" stroke-opacity=".65" stroke-width="1.5"/>
+  <rect x="10" y="9" width="76" height="76" rx="13" fill="#aa5434" fill-opacity=".15" stroke="#121920" stroke-width="2"/>
+  <path d="M16 23v-3q0-5 5-5h8m38 64h8q5 0 5-5v-3" fill="none" stroke="#ffe1a3" stroke-opacity=".53" stroke-width="2" stroke-linecap="round"/>
+  <path d="M16 74h5m54-54h5" stroke="#ffe1a3" stroke-opacity=".44" stroke-width="2" stroke-linecap="round"/>
+  <g stroke="#211d27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 39v29h40V39" fill="none" stroke="#a8948b" stroke-width="5"/>
+      <path d="M24 67h48v7H24z" fill="url(#steel)"/>
+      <path d="M41 63V45l7-11 7 11v18z" fill="url(#accent)"/>
+      <path d="M42 53h12" stroke="#ffdfa1" stroke-width="2"/>
+      <path d="M48 32V20m-7 6 7-7 7 7m-24 28 4-4m31 4-4-4" stroke="#ffe1a3" stroke-width="2.6" fill="none"/>
+  </g>
+</svg>
