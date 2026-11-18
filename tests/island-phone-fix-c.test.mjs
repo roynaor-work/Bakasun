@@ -11,7 +11,9 @@ const {createAlienModel}=await moduleAt('workout/island/minigames/alien-flight-m
 const {drawV25Fx}=await moduleAt('workout/island/minigames/alien-v25-draw.mjs');
 const config=JSON.parse(await readFile(path.join(root,'workout/island/data/config.json'),'utf8')).minigames;
 const step=1/60;
-function fixture(search='',kind=1){
+// v24.5: the cannon's laser pierces again by default (alien-laser.mjs); these fix-C contracts are the v24.4 laser, kept under ?alienLaser=0.
+// The new default is covered by tests/island-alien-laser-v24-5.test.mjs (plain and Vulcan rounds still stop there too).
+function fixture(search='?alienLaser=0',kind=1){
  globalThis.location={search};
  const balance=structuredClone(config.alienDefense);
  Object.assign(balance.levels[0],{rows:1,columns:2,waves:1,enemyRoster:[0],enemyKinds:1});
@@ -36,7 +38,7 @@ test('C upgraded cannon stops on the front hull; the aligned rear hull is unharm
  assert.equal(model.shots.length,0,'the projectile disappears at the first hull');assert.equal(model.snapshot().hits,1);
 });
 test('C a fast segment that crosses two hulls hits only the earliest contact, independent of array order',()=>{
- for(const kind of [0,1,2]){const {model,front,rear,shot}=fixture('',kind);shot.vy=-6000;model.update(.04,{});
+ for(const kind of [0,1,2]){const {model,front,rear,shot}=fixture('?alienLaser=0',kind);shot.vy=-6000;model.update(.04,{});
   assert.equal(front.hp,99,`kind ${kind}: front damage`);assert.equal(rear.hp,100,`kind ${kind}: rear damage`);assert.equal(model.shots.length,0);
   assert.ok(shot.y>=front.y&&shot.y<=front.y+front.radius+config.alienDefense.shotRadius+.01,'released projectile ends at the hull, not beyond it');
  }
@@ -68,7 +70,7 @@ for(const flag of ['?phoneFixC=0','?phoneFixes=0'])test(`C rollback ${flag} rest
  assert.equal(model.vulcanImpacts.length,0);assert.equal(model.shots.length,1);
 });
 
-function weaponValue({rank=0,weapon=0,search='',temporary=false}={}){
+function weaponValue({rank=0,weapon=0,search='?alienLaser=0',temporary=false}={}){
  globalThis.location={search};const balance=structuredClone(config.alienDefense);
  balance.stageBehaviors[0]={...balance.stageBehaviors[0],motion:'static',shoots:false,diveEverySeconds:0,shield:0};
  balance.v11.laserEvery=[0,0];

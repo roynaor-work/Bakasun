@@ -20,7 +20,7 @@ test('flight no idle fire, early enemy shots follow a visible warning and respec
 });
 test('flight all six pickups announce their identity and alter their intended capability',()=>{
  for(let kind=0;kind<6;kind++){const m=make(),charges=m.novaCharges;m.pickups.push({kind,x:m.player.x,y:m.player.y,vy:0});m.update(.02,{firing:true});assert.equal(m.feedback.kind,'pickup');assert.equal(m.feedback.value,kind);
-  if(kind===0)assert.ok(m.spreadTime>0);else if(kind===5)assert.equal(m.novaCharges,charges+1);else assert.equal(m.powerup,kind);
+  if(kind===0)assert.ok(m.spreadTime>0);else if(kind===1&&m.laser25)assert.ok(Math.abs(m.laserTime-m.laser25.seconds)<.05&&m.powerup!==1);/* v24.5: the laser's own clock */else if(kind===5)assert.equal(m.novaCharges,charges+1);else assert.equal(m.powerup,kind);
   advance(m,.5,{firing:true});if(kind===1)assert.ok(m.shots.some(s=>s.kind===1));if(kind===4)assert.ok(m.wings.some(w=>w.active));
  }
 });

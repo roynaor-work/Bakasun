@@ -5,6 +5,7 @@ import {drawV12Cannons,drawV12Tracer} from './alien-v12-draw.mjs';
 import {drawV25Shot} from './alien-v25-draw.mjs?v=island-v2-20261107-18';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
+import {drawLaserBeam,drawLaserHits,drawLaserTimer} from './alien-laser.mjs?v=island-v2-20261107-18';
 const TAU=Math.PI*2;
 const threatColors={needle:'#ff8298',orb:'#ffbf8b',diamond:'#ffabd0',fork:'#dc9fff',ring:'#ffa58c'};
 const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`;};
@@ -29,6 +30,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  if(m.v11)drawV11Tells(p,m,pixelAspect,screenScale);
  for(const s of m.shots){
   if(s.kind===2){drawV11Laser(p,s,pixelAspect,screenScale);continue;}
+  if(s.beam25){drawLaserBeam(p,s,pixelAspect,screenScale,m.laser25,m.time);continue;}/* v24.5: the piercing laser beam (?alienLaser=0: the v24.4 streak) */
   if(m.v25&&s.vulcan){drawV25Shot(p,s,m,pixelAspect,screenScale);continue;}/* v25: plasma pellets for the Vulcan (?alienVulcan=v24: the tracer) */
   if(m.v12&&s.kind===0){drawV12Tracer(p,s,pixelAspect,screenScale);continue;}
   const laser=s.kind===1,color=s.wing?'#c5b2ff':laser?'#65eeff':'#93dbff';glow(p,s.x,s.y,laser?17:11,color,pixelAspect,laser?.72:.55);
@@ -54,6 +56,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  const n=m.nova;
  if(m.v12){p.save();p.globalCompositeOperation='source-over';drawV12Cannons(p,m,pixelAspect,screenScale);drawV14Heat(p,m,pixelAspect,screenScale);p.restore();}
  if(m.v11){p.save();p.globalCompositeOperation='source-over';drawV11Blasts(p,m,pixelAspect,screenScale);drawV11BonusTimer(p,m,pixelAspect,screenScale);p.restore();}
+ if(m.laser25){p.save();p.globalCompositeOperation='source-over';drawLaserHits(p,m,pixelAspect,screenScale);drawLaserTimer(p,m,pixelAspect,screenScale,m.laser25);p.restore();}
  if(m.v10){p.save();p.globalCompositeOperation='source-over';drawV10Missile(p,m,pixelAspect,screenScale);drawV10WingTimer(p,m,pixelAspect,screenScale,m.v10Blink);p.restore();}
  else if(n.flight>0){
   for(let i=1;i<=12;i++)glow(p,n.x+Math.sin(i*2+m.time)*i*.12/pixelAspect,n.y+i*5,8+i*.6,'#ffb777',pixelAspect,(1-i/13)*.5);
