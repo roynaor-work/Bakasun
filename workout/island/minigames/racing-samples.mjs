@@ -58,8 +58,9 @@ export function v5PitMix(phase,speed=0,toBox=Infinity){
 /** racing-v24.5 rec (Roy's own engine recordings, assets/racing-rec, README there): the idling engine on the grid (a 2.7 s seamless loop) and an engine driving away
  * (two 6 s takes) for the overtake; loaded only with rec=true (the session's default; ?racingRec=0 keeps the synthesis), all or nothing. The 12 s "accelerate and shift"
  * take is not used: its shifts come at its own times and cannot follow the game's gearbox (README). Gains put the takes (about -18 LUFS) at the level of the synthesis
- * they replace; a 3.2 kHz low-pass keeps the phone microphone's rasp out (no air). */
-export const REC=Object.freeze({idle:'engine-idle-loop',away:Object.freeze(['engine-away-1','engine-away-2']),idleGain:.045,passGain:.1,passLength:2.4,lowpass:3200});
+ * they replace (measured RMS, the first 0.45 s of an overtake: synthesis -38.5 dBFS, takes -36.7 and -41.1; idle -48.3, take -48.3); a 3.2 kHz low-pass keeps
+ * the microphone's rasp out (no air). */
+export const REC=Object.freeze({idle:'engine-idle-loop',away:Object.freeze(['engine-away-1','engine-away-2']),idleGain:.033,passGain:.1,passLength:2.4,lowpass:3200});
 export function windGain(speed,hiss='v24',air='v244'){if(air==='v245')return 0;if(hiss==='v23')return Math.min(.07,.012+speed/55*.055);return speed<12?0:Math.min(.03,Math.pow((speed-12)/38,1.5)*.03);}
 export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',air='v244',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null,rec=false,baseRec=base?new URL('../racing-rec/',base):null,v5=false,base5=base?new URL('../racing-audio-v5/',base):null}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
