@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "firstTrialStarterMaterialsPerMinute": 3,
+  "finalStarterMaterialsPerMinute": 4,
+  "findings": [
+    {
+      "profile": "builder",
+      "before": {
+        "builds": 34,
+        "upgrades": 20,
+        "assetTypesBuilt": 13,
+        "profileChoiceBlockedDecisions": 40,
+        "materialBlocks": 0,
+        "materialBlockers": [],
+        "unbuiltAvailableTypes": [
+          "playground",
+          "police",
+          "school",
+          "hospital",
+          "pool",
+          "sportsPark",
+          "theatre"
+        ],
+        "satisfaction": 59
+      },
+      "after": {
+        "builds": 34,
+        "upgrades": 20,
+        "assetTypesBuilt": 13,
+        "profileChoiceBlockedDecisions": 40,
+        "materialBlocks": 0,
+        "materialBlockers": [],
+        "unbuiltAvailableTypes": [
+          "playground",
+          "police",
+          "school",
+          "hospital",
+          "pool",
+          "sportsPark",
+          "theatre"
+        ],
+        "satisfaction": 59
+      }
+    },
+    {
+      "profile": "caretaker",
+      "before": {
+        "builds": 26,
+        "upgrades": 17,
+        "assetTypesBuilt": 12,
+        "profileChoiceBlockedDecisions": 72,
+        "materialBlocks": 59,
+        "materialBlockers": [
+          {
+            "target": "museum",
+            "occurrences": 33
+          },
+          {
+            "target": "theatre",
+            "occurrences": 26
+          }
+        ],
+        "unbuiltAvailableTypes": [],
+        "satisfaction": 84
+      },
+      "after": {
+        "builds": 27,
+        "upgrades": 20,
+        "assetTypesBuilt": 13,
+        "profileChoiceBlockedDecisions": 69,
+        "materialBlocks": 52,
+        "materialBlockers": [
+          {
+            "target": "theatre",
+            "occurrences": 26
+          },
+          {
+            "target": "school",
+            "occurrences": 15
+          },
+          {
+            "target": "museum",
+            "occurrences": 8
+          },
+          {
+            "target": "hospital",
+            "occurrences": 3
+          }
+        ],
+        "unbuiltAvailableTypes": [
+          "bakery",
+          "lighthouse",
+          "patisserie"
+        ],
+        "satisfaction": 91
+      }
+    },
+    {
+      "profile": "explorer",
+      "before": {
+        "builds": 23,
+        "upgrades": 4,
+        "assetTypesBuilt": 16,
+        "profileChoiceBlockedDecisions": 0,
+        "materialBlocks": 0,
+        "materialBlockers": [],
+        "unbuiltAvailableTypes": [
+          "fireStation",
+          "police",
+          "school"
+        ],
+        "satisfaction": 43
+      },
+      "after": {
+        "builds": 22,
+        "upgrades": 5,
+        "assetTypesBuilt": 15,
+        "profileChoiceBlockedDecisions": 0,
+        "materialBlocks": 0,
+        "materialBlockers": [],
+        "unbuiltAvailableTypes": [
+          "fireStation"
+        ],
+        "satisfaction": 40
+      }
+    }
+  ]
+}

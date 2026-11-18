@@ -1,0 +1,645 @@
+diff --git a/workout/island/app.mjs b/workout/island/app.mjs
+index 9b2c7bd1..925d379a 100644
+--- a/workout/island/app.mjs
++++ b/workout/island/app.mjs
+@@ -22,17 +22,28 @@ const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
+   if (!r.ok) throw new Error('strings');
+   return r.json();
+ });
+-const t = createTranslator(strings);
++let t = createTranslator(strings);
+ document.title = t('app.title');
+ const root = document.querySelector('#interface');
+ root.textContent = t('app.loading');
+ splash.text(t('app.loading'));
+ try {
++  const cityPreview = previewMode();
++  let cityProgress = null;
++  if (!cityPreview && new URLSearchParams(location.search).get('cityProgress') !== '0') {
++    try {
++      cityProgress = await import('./design/city-progression-v1/src/island-adapter.mjs');
++      t = createTranslator({...strings, ...cityProgress.progressStrings});
++    } catch (error) {
++      console.warn('City progression package could not load', error);
++    }
++  }
+   const data = await loadData();
++  cityProgress?.prepareCityProgressData(data);
+   let storage;
+   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
+-  const cityPreview = previewMode();
+   if (cityPreview) storage = readOnlyStorage(storage);
++  if (cityProgress) storage = cityProgress.cityProgressStorage(storage);
+   const engine = createEngine(data, { storage });
+   let ui;
+   const view = new IslandView({
+diff --git a/workout/island/engine/city-depth.mjs b/workout/island/engine/city-depth.mjs
+index 5e67e2bf..64a2e6bf 100644
+--- a/workout/island/engine/city-depth.mjs
++++ b/workout/island/engine/city-depth.mjs
+@@ -34,25 +34,37 @@ export function productionMultiplier(state, buildingId, city) {
+ /** Pure, detached report. No DOM, clock reads, mutation, random choices or saves. */
+ export function cityReport(state, registry, config, city, management = null) {
+   const damaged = row => state.events?.repairs?.[row.id] > state.updatedAt;
++  const operating = row => registry.cityProgress?.isOperational(state, row.id) !== false;
++  const available = row => !damaged(row) && operating(row);
+   const buildings = state.buildings.map(row => {
+     const type = registry.buildings.get(row.typeId);
+-    const status = damaged(row) ? 'damaged' : 'ready';
++    const status = damaged(row) ? 'damaged' : !operating(row) ? 'construction' : 'ready';
++    const factor = levelFactor(row, config);
++    const explicitRates = type.cityProgressAsset && type.levels[row.level - 1]?.resources;
++    const rates = explicitRates || type.resources || {};
++    const productionFactor = explicitRates ? 1 : factor;
++    const income = building => type.cityProgressAsset ? levelValue(building, type, 'income', config) : (type.income || 0) * levelFactor(building, config);
+     const report = {id: row.id, typeId: row.typeId, status, water: null, service: null, production: null,
+       upgrade: JSON.parse(JSON.stringify(upgradeAvailability(state, registry, row.id))), repair: {ok: status === 'damaged' && state.money >= config.events.repairCost, cost: config.events.repairCost}};
+     if (row.typeId === 'waterTower') report.service = {radius: type.radius * levelFactor(row, config), capacity: levelValue(row, type, 'supply', config), used: 0, serves: []};
+     if (city.production.types.includes(row.typeId)) {
+       const tier = productionTier(state, row.id), next = city.production.tiers[tier];
+-      report.production = {tier, multiplier: productionMultiplier(state, row.id, city), perMinute: Object.fromEntries(Object.entries(type.resources ?? {}).map(([resource, amount]) => [resource, status === 'damaged' ? 0 : amount * levelFactor(row, config) * productionMultiplier(state, row.id, city)])),
+-        investment: {ok: status !== 'damaged' && Boolean(next) && state.money >= next.cost, cost: next?.cost ?? null, reason: status === 'damaged' ? 'damaged' : !next ? 'max-tier' : state.money < next.cost ? 'money' : null}};
++      report.production = {tier, multiplier: productionMultiplier(state, row.id, city), perMinute: Object.fromEntries(Object.entries(rates).map(([resource, amount]) => [resource, !available(row) ? 0 : amount * productionFactor * productionMultiplier(state, row.id, city)])),
++        investment: {ok: available(row) && Boolean(next) && state.money >= next.cost, cost: next?.cost ?? null, reason: status === 'damaged' ? 'damaged' : !next ? 'max-tier' : state.money < next.cost ? 'money' : null}};
++    }
++    const next=report.upgrade.nextLevel, nextRow={...row,level:row.level+1};
++    report.summary={population:levelValue(row,type,'population',config),supply:levelValue(row,type,'supply',config),income:available(row)?income(row):0,capacity:(type.capacity||0)*factor,radius:(type.radius||0)*factor,effects:Object.fromEntries(Object.entries(type.effects||{}).map(([id,value])=>[id,value*factor])),resources:report.production?.perMinute??Object.fromEntries(Object.entries(rates).map(([key,value])=>[key,available(row)?value*productionFactor:0])),next:next?{population:levelValue(nextRow,type,'population',config)-levelValue(row,type,'population',config),supply:levelValue(nextRow,type,'supply',config)-levelValue(row,type,'supply',config),income:income(nextRow)}:null};
++    if (!operating(row)) {
++      for (const field of ['population','capacity','supply','radius']) report.summary[field] = 0;
++      report.summary.effects = {};
++      report.summary.resources = {};
+     }
+-    const factor=levelFactor(row,config), next=report.upgrade.nextLevel, nextRow={...row,level:row.level+1};
+-    report.summary={population:levelValue(row,type,'population',config),supply:levelValue(row,type,'supply',config),income:status==='damaged'?0:(type.income||0)*factor,capacity:(type.capacity||0)*factor,radius:(type.radius||0)*factor,effects:Object.fromEntries(Object.entries(type.effects||{}).map(([id,value])=>[id,value*factor])),resources:report.production?.perMinute??Object.fromEntries(Object.entries(type.resources||{}).map(([key,value])=>[key,status==='damaged'?0:value*factor])),next:next?{population:levelValue(nextRow,type,'population',config)-levelValue(row,type,'population',config),supply:levelValue(nextRow,type,'supply',config)-levelValue(row,type,'supply',config),income:(type.income||0)*levelFactor(nextRow,config)}:null};
+     return report;
+   });
+   const byId = new Map(buildings.map(row => [row.id, row]));
+   const sorted = [...state.buildings].sort((a, b) => a.id.localeCompare(b.id, 'en'));
+-  const towers = sorted.filter(row => row.typeId === 'waterTower' && !damaged(row));
+-  const houses=sorted.filter(row => levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0);
++  const towers = sorted.filter(row => row.typeId === 'waterTower' && available(row));
++  const houses=sorted.filter(row => operating(row) && levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0);
+   for (const house of management ? [] : houses) {
+     const row = byId.get(house.id), demand = levelValue(house, registry.buildings.get(house.typeId), 'population', config), center = buildingCenter(house, registry);
+     const nearby = towers.filter(tower => {const p = buildingCenter(tower, registry); return Math.hypot(center.x - p.x, center.z - p.z) <= byId.get(tower.id).service.radius;});
+@@ -80,6 +92,6 @@ export function cityReport(state, registry, config, city, management = null) {
+   }
+   const progress = {served: buildings.filter(row => row.water?.served).length, invested: buildings.filter(row => row.production?.tier > 1).length, delivered: state.city.delivered};
+   const goals = city.goals.map(goal => ({...goal, progress: Math.min(goal.target, progress[goal.kind]), claimed: state.city.claimedGoals.includes(goal.id), ready: progress[goal.kind] >= goal.target && !state.city.claimedGoals.includes(goal.id)}));
+-  const slots = state.city.port.slots.map(slot => ({...slot, deliverable: slot.state === 'offered' && state.city.delivered < Number.MAX_SAFE_INTEGER && state.buildings.some(b=>b.id===slot.harborId&&!damaged(b)) && state.resources[slot.resource] >= slot.amount}));
+-  return {buildings, goals, port: {slots, readyAt: state.city.port.readyAt, canOffer: state.city.port.cycle < Number.MAX_SAFE_INTEGER && !slots.some(slot => slot.state === 'offered') && state.playSeconds >= state.city.port.readyAt && state.buildings.some(b => b.typeId === 'harbor' && !damaged(b))}, emergency: state.events.active ? {...state.events.active} : null};
++  const slots = state.city.port.slots.map(slot => ({...slot, deliverable: slot.state === 'offered' && state.city.delivered < Number.MAX_SAFE_INTEGER && state.buildings.some(b=>b.id===slot.harborId&&available(b)) && state.resources[slot.resource] >= slot.amount}));
++  return {buildings, goals, port: {slots, readyAt: state.city.port.readyAt, canOffer: state.city.port.cycle < Number.MAX_SAFE_INTEGER && !slots.some(slot => slot.state === 'offered') && state.playSeconds >= state.city.port.readyAt && state.buildings.some(b => b.typeId === 'harbor' && available(b))}, emergency: state.events.active ? {...state.events.active} : null};
+ }
+diff --git a/workout/island/engine/city-management.mjs b/workout/island/engine/city-management.mjs
+index 5aa2344f..c25d4f98 100644
+--- a/workout/island/engine/city-management.mjs
++++ b/workout/island/engine/city-management.mjs
+@@ -52,6 +52,7 @@ export function validCityManagement(value,state,registry){
+ }
+ 
+ export function municipalBudget(state,registry,config){
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   const policy=state.cityManagement,cfg=config.cityManagement;
+   const connections=policy?.enabled?cityConnections(state,registry):null;
+   const jobs=state.buildings.filter(row=>active(state,row)&&(!connections||connections.hasAccess(row))).reduce((sum,row)=>sum+(cfg?.jobs[row.typeId]||0)*levelFactor(row,config),0);
+@@ -71,6 +72,7 @@ export function municipalBudget(state,registry,config){
+ }
+ 
+ function serviceCoverage(state,registry,config,connections){
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   const policy=state.cityManagement,homes=state.buildings.filter(row=>levelValue(row,registry.buildings.get(row.typeId),'population',config)>0),total=population(state,registry,config);
+   const result={};
+   for(const department of CITY_DEPARTMENTS){
+@@ -114,7 +116,8 @@ function allocateCoverage(providers,homes){
+ 
+ export function cityReport(state,registry,config,income={money:0},{includeZones=true}={}){
+   const policy=state.cityManagement,cfg=config.cityManagement,connections=cityConnections(state,registry),residents=population(state,registry,config),budget=municipalBudget(state,registry,config),services=serviceCoverage(state,registry,config,connections);
+-  const jobs=budget.jobs,commercialJobs=state.buildings.filter(row=>row.typeId==='shop'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.shop*levelFactor(row,config),0),industrialJobs=state.buildings.filter(row=>row.typeId==='factory'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.factory*levelFactor(row,config),0);
++  const operational = registry.cityProgress?.operatingState(state) ?? state;
++  const jobs=budget.jobs,commercialJobs=operational.buildings.filter(row=>row.typeId==='shop'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.shop*levelFactor(row,config),0),industrialJobs=operational.buildings.filter(row=>row.typeId==='factory'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.factory*levelFactor(row,config),0);
+   const quality=CITY_DEPARTMENTS.reduce((sum,id)=>sum+services[id].coverage,0)/CITY_DEPARTMENTS.length,taxPenalty=(policy.taxRate-9)*5;
+   const demand={residential:clamp(50+jobs*3-residents*2+(quality-50)*.35-taxPenalty),commercial:clamp(residents*5-commercialJobs*6+15-taxPenalty),industrial:clamp(residents*3-industrialJobs*3+20-taxPenalty*.5)};
+   const context={connections,residents,jobs,services,demand};
+diff --git a/workout/island/engine/city-runtime.mjs b/workout/island/engine/city-runtime.mjs
+index 89c26d78..6b7da733 100644
+--- a/workout/island/engine/city-runtime.mjs
++++ b/workout/island/engine/city-runtime.mjs
+@@ -24,7 +24,7 @@ export function installCity(engine, {changed, notify, remember}) {
+   function offer() {
+     if (!report().port.canOffer) return fail('port-unavailable');
+     return transaction('city-port', () => {
+-      const port = state.city.port, harbor = [...state.buildings].sort((a,b) => a.id.localeCompare(b.id, 'en')).find(b => b.typeId === 'harbor' && !(state.events.repairs[b.id] > state.updatedAt));
++      const port = state.city.port, harbor = [...state.buildings].sort((a,b) => a.id.localeCompare(b.id, 'en')).find(b => b.typeId === 'harbor' && registry.cityProgress?.isOperational(state, b.id) !== false && !(state.events.repairs[b.id] > state.updatedAt));
+       port.slots = Array.from({length: config.port.slots}, (_, index) => ({...config.port.orders[(port.cycle * config.port.slots + index) % config.port.orders.length], id: `order-${port.cycle}-${index}`, harborId: harbor.id, state: 'offered'}));
+       port.cycle++; port.readyAt = state.playSeconds + config.port.cooldownSeconds;
+     });
+diff --git a/workout/island/engine/economy.mjs b/workout/island/engine/economy.mjs
+index bda8adf7..5ac3202f 100644
+--- a/workout/island/engine/economy.mjs
++++ b/workout/island/engine/economy.mjs
+@@ -1,9 +1,11 @@
+-import { levelFactor, population } from './metrics.mjs?v=island-v2-20261107-15';
++import { levelFactor, levelValue, population } from './metrics.mjs?v=island-v2-20261107-15';
+ import {productionMultiplier} from './city-depth.mjs?v=island-v2-20261107-15';
+ import {municipalBudget} from './city-management.mjs?v=island-v2-20261107-15';
+ 
+ /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
+ export function calculateIncome(state, registry, config, city) {
++  const fullState = state;
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   const active = state.buildings.filter(row => !(state.events?.repairs?.[row.id] > state.updatedAt));
+   const result = { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
+   const add = (id, resource, amount) => {
+@@ -19,9 +21,19 @@ export function calculateIncome(state, registry, config, city) {
+       const parks = active.filter(row => row.typeId === 'park').length;
+       add(source.id, source.resource, source.basePerMinute + population(state, registry, config) * source.populationRate + parks * source.parkRate);
+     } else if (source.kind === 'buildingIncome') {
+-      for (const row of active) add(source.id, source.resource, (registry.buildings.get(row.typeId)?.income || 0) * levelFactor(row, config));
++      for (const row of active) {
++        const type = registry.buildings.get(row.typeId);
++        add(source.id, source.resource, type?.cityProgressAsset
++          ? levelValue(row, type, 'income', config)
++          : (type?.income || 0) * levelFactor(row, config));
++      }
+     } else if (source.kind === 'production') {
+-      for (const row of active) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config) * productionMultiplier(state, row.id, city));
++      for (const row of active) {
++        const type = registry.buildings.get(row.typeId);
++        const explicit = type?.cityProgressAsset && type.levels[row.level - 1]?.resources;
++        const multiplier = (explicit ? 1 : levelFactor(row, config)) * productionMultiplier(state, row.id, city);
++        for (const [resource, amount] of Object.entries(explicit || type?.resources || {})) add(source.id, resource, amount * multiplier);
++      }
+     } else if (source.kind === 'constant') {
+       add(source.id, source.resource, source.perMinute);
+     }
+@@ -31,7 +43,7 @@ export function calculateIncome(state, registry, config, city) {
+     result.municipal=municipal;result.money+=municipal.net;
+     result.sources.push({id:'municipalTaxes',resource:'money',amount:municipal.taxes},{id:'municipalServices',resource:'money',amount:-municipal.expenses});
+   }
+-  return result;
++  return registry.cityProgress?.income(fullState, registry, result) ?? result;
+ }
+ 
+ export function accrueIncome(state, registry, config, seconds, city) {
+diff --git a/workout/island/engine/engine.mjs b/workout/island/engine/engine.mjs
+index 655d42b3..21779ed3 100644
+--- a/workout/island/engine/engine.mjs
++++ b/workout/island/engine/engine.mjs
+@@ -29,6 +29,8 @@ const clone = value => JSON.parse(JSON.stringify(value));
+ /** Pure game state and commands. No DOM, Three.js, timers, network, or audio. */
+ export function createEngine(data, options = {}) {
+   const registry = createRegistry(data);
++  const progress = data.cityProgress;
++  if (progress) registry.cityProgress = progress;
+   const config = data.config;
+   const flags = data.featureFlags || {};
+   const now = options.now || Date.now;
+@@ -36,6 +38,11 @@ export function createEngine(data, options = {}) {
+   if (storage === undefined) { try { storage = globalThis.localStorage; } catch { storage = null; } }
+   const loaded = loadWorld(storage, data, registry, now());
+   const state = loaded.ok && loaded.state ? loaded.state : createInitialState(data, now());
++  if (progress) {
++    const migrating = !Object.hasOwn(state, 'cityProgress');
++    progress.init(state, registry);
++    if (migrating && state.readyPlan && flags.readyPlots) prepareReadyPlan(state, registry, flags);
++  }
+   const listeners = new Set(), history = [];
+   let activeMinigame = null;
+   let saveBlocked = !loaded.ok && loaded.reason !== 'reason.storage';
+@@ -145,6 +152,7 @@ export function createEngine(data, options = {}) {
+   engine.readyPlotAt = (x,z) => {const cell=typeof x==='object'?x:{x,z};return cell?findReadyCell(state,registry,cell.x,cell.z,flags):null;};
+   engine.reset = ({ keepAvatar = false } = {}) => {
+     const fresh = createInitialState(data, now());
++    progress?.init(fresh, registry);
+     if (keepAvatar) fresh.avatar = clone(state.avatar);
+     if(state.readyPlan&&flags.readyPlots){const prepared=prepareIsland(fresh);if(!prepared.ok)return prepared;}
+     const result = resetWorld(storage, fresh);
+@@ -158,6 +166,7 @@ export function createEngine(data, options = {}) {
+   engine.validatePlacement = check;
+   engine.nextObjective = nextObjective;
+   engine.population = () => population(state, registry, config);
++  engine.cityProgress = () => progress?.report(state, registry) ?? null;
+   engine.metrics = () => {
+     if (!flags.metrics) return {};
+     const values = calculateMetrics(state, registry, config);
+@@ -201,12 +210,18 @@ export function createEngine(data, options = {}) {
+     state.money -= type.cost;
+     const building = { id, typeId, x, z, level: 1 };
+     state.buildings.push(building);
+-    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
++    const resourcesDelta = progress && startConstruction(building);
++    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost, resourcesDelta });
+     const reward = onPlaced(typeId);
+     if(!automatic)changed('place', { id, reward });
+     if (reward) narration.announce(reward.title, { reward: reward.reward });
+     return { ok: true, reason: 'reason.placed', id, reward };
+   };
++  function startConstruction(building, upgrade = false) {
++    const before = {...state.resources};
++    progress.start(state, registry, building, {upgrade});
++    return Object.fromEntries(Object.entries(before).map(([key, value]) => [key, state.resources[key] - value]));
++  }
+   engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
+   engine.buildReadyPlot = id => {
+     if(typeof id!=='string'||!state.readyPlan)return {ok:false,reason:'reason.invalid'};
+@@ -240,6 +255,7 @@ export function createEngine(data, options = {}) {
+     const index = state.buildings.findIndex(row => row.id === id);
+     const building = state.buildings[index];
+     const type = registry.buildings.get(building.typeId);
++    if (progress?.isPending(state, id)) return {ok: false, reason: 'progress.pending'};
+     const investment = type.cost + type.levels.slice(1, building.level).reduce((sum, level) => sum + level.cost, 0);
+     const refund = Math.floor(investment * config.removeRefundRatio);
+     remember({ kind: 'remove', building: clone(building), index, moneyDelta: refund });
+@@ -252,10 +268,14 @@ export function createEngine(data, options = {}) {
+     if (!validation.ok) return validation;
+     const building = state.buildings.find(row => row.id === id);
+     const nextLevel = validation.nextLevel;
+-    remember({ kind: 'upgrade', id, previousLevel: building.level, moneyDelta: -nextLevel.cost });
+-    state.money -= nextLevel.cost; building.level++;
++    const previousLevel = building.level;
++    const scheduled = progress?.managesUpgrade(building.typeId, previousLevel) === true;
++    const resourcesDelta = scheduled ? startConstruction(building, true) : undefined;
++    remember({ kind: 'upgrade', id, previousLevel, moneyDelta: -nextLevel.cost, resourcesDelta });
++    state.money -= nextLevel.cost;
++    if (!scheduled) building.level++;
+     changed('upgrade', { id });
+-    return { ok: true, reason: 'reason.upgraded', id };
++    return { ok: true, reason: scheduled ? 'progress.foundation' : 'reason.upgraded', id };
+   };
+   engine.undo = () => {
+     const action = history.at(-1);
+@@ -264,6 +284,7 @@ export function createEngine(data, options = {}) {
+     const restored=action.kind==='remove'?action.building:action.kind==='move'?{...state.buildings.find(row=>row.id===action.id),...action.previous}:null;
+     if(restored){const keys=new Set(cellsFor(registry.buildings.get(restored.typeId),restored.x,restored.z).map(cell=>cell.join(',')));if(state.buildings.some(row=>row.id!==restored.id&&cellsFor(registry.buildings.get(row.typeId),row.x,row.z).some(cell=>keys.has(cell.join(',')))))return {ok:false,reason:'reason.occupied'};}
+     history.pop();
++    if (action.kind === 'place' || action.kind === 'upgrade') progress?.cancel(state, action.id);
+     const building = state.buildings.find(row => row.id === action.id);
+     if(action.kind==='city-policy')Object.assign(state.cityManagement,action.previous);
+     if(action.kind==='city-zone')state.cityManagement.zones=state.cityManagement.zones.filter(row=>row.id!==action.id);
+@@ -284,21 +305,33 @@ export function createEngine(data, options = {}) {
+     if (!Number.isFinite(seconds) || seconds <= 0) return { ok: false, reason: 'reason.invalid' };
+     const duration = Math.min(seconds, config.maxTickSeconds);
+     state.updatedAt = now();
+-    let gained={},developed=[];
+-    if(flags.economy){
+-      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration,data.city);
+-      else{
+-        let remaining=duration;
+-        while(remaining>0){
+-          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds,data.city);
+-          for(const [resource,value]of Object.entries(step))gained[resource]=(gained[resource]||0)+value;
+-          developed.push(...advanceCity(state,registry,config,seconds,(typeId,x,z)=>placeBuilding(typeId,x,z,true)));remaining-=seconds;
++    const gained = {};
++    const developed = [], progressEvents = [];
++    let remaining = duration;
++    do {
++      const grows = flags.economy && state.cityManagement.enabled;
++      const cityUntil = grows ? config.cityManagement.growthInterval - state.cityManagement.growthSeconds : Infinity;
++      const progressUntil = progress?.nextEvent(state) ?? Infinity;
++      const seconds = Math.min(remaining, cityUntil, progressUntil);
++      if (flags.economy) {
++        const step = accrueIncome(state, registry, config, seconds, data.city);
++        for (const [resource, value] of Object.entries(step)) gained[resource] = (gained[resource] || 0) + value;
++      }
++      if (progress) {
++        progressEvents.push(...progress.advance(state, registry, seconds));
++        const group = data.world.partGroup, parts = progress.parts(state, registry);
++        if (parts > (state.parts[group] ?? 0)) {
++          state.parts[group] = parts;
++          expand();
+         }
+       }
+-    }
++      if (grows) developed.push(...advanceCity(state, registry, config, seconds, (typeId, x, z) => placeBuilding(typeId, x, z, true)));
++      remaining -= seconds;
++    } while (remaining > 0);
+     state.playSeconds += duration;
+-    changed('tick', { gained,developed });
+-    return { ok: true, gained,developed };
++    const result = progress ? {gained, developed, progressEvents} : {gained, developed};
++    changed('tick', result);
++    return {ok: true, ...result};
+   };
+   engine.setAvatar = input => {
+     if (!input || typeof input !== 'object') return { ok: false, reason: 'reason.invalid' };
+diff --git a/workout/island/engine/metrics.mjs b/workout/island/engine/metrics.mjs
+index 71f81c85..13c65629 100644
+--- a/workout/island/engine/metrics.mjs
++++ b/workout/island/engine/metrics.mjs
+@@ -15,11 +15,13 @@ export function levelValue(building, type, field, config) {
+ }
+ 
+ export function population(state, registry, config) {
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   return state.buildings.reduce((sum, row) => sum + levelValue(row, registry.buildings.get(row.typeId), 'population', config), 0);
+ }
+ 
+ /** Service radius is measured between footprint centers, including its boundary. */
+ export function coverageForBuilding(state, registry, id, config = { levelMultiplier: 0 },connections) {
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   const building = state.buildings.find(row => row.id === id);
+   if (!building) return [];
+   const type = registry.buildings.get(building.typeId);
+@@ -38,6 +40,8 @@ export function coverageForBuilding(state, registry, id, config = { levelMultipl
+ 
+ /** City values are population-weighted service coverage; no per-citizen needs are stored. */
+ export function calculateMetrics(state, registry, config) {
++  const fullState = state;
++  state = registry.cityProgress?.operatingState(state) ?? state;
+   const connections=state.cityManagement?.enabled?cityConnections(state,registry):null;
+   const households = state.buildings.filter(row => levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0);
+   const totalPopulation = population(state, registry, config);
+@@ -59,5 +63,5 @@ export function calculateMetrics(state, registry, config) {
+     if (typeof metric.calculate === 'function') score = metric.calculate({ state, registry, config, score, population: totalPopulation });
+     values[metric.id] = Math.round(Math.min(config.metricMax, Math.max(config.metricMin, score)));
+   }
+-  return values;
++  return registry.cityProgress?.metrics(fullState, registry, values) ?? values;
+ }
+diff --git a/workout/island/engine/persistence.mjs b/workout/island/engine/persistence.mjs
+index c47b7114..c6c96d36 100644
+--- a/workout/island/engine/persistence.mjs
++++ b/workout/island/engine/persistence.mjs
+@@ -156,6 +156,7 @@ export function validateSave(state, data, registry) {
+   const invalid = () => ({ ok: false, reason: 'reason.invalid' });
+   if(state?.cityDepthVersion!==1||!validCity(state?.city, state, data))return invalid();
+   if(!validCityManagement(state?.cityManagement,state,registry))return invalid();
++  if(registry.cityProgress && !registry.cityProgress.valid(state))return invalid();
+   if(!validLearning(state?.learning))return invalid();
+   if(!validFireCertificates(state?.fireCertificates,data))return invalid();
+   if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
+@@ -275,10 +276,14 @@ export function importWorld(raw, current, data, registry) {
+     if(row.typeId==='cityHall'&&merged.buildings.some(b=>b.typeId==='cityHall'))continue;
+     if (ids.has(row.id)) {
+       const existing = merged.buildings.find(item => item.id === row.id);
+-      if (existing.typeId === row.typeId) existing.level = Math.max(existing.level, row.level);
+-      else conflicts++;
++      if (existing.typeId === row.typeId) {
++        // Keep the local paid upgrade and its stage in preference to an imported level.
++        if (!registry.cityProgress?.isPending(merged, row.id)) existing.level = Math.max(existing.level, row.level);
++      } else conflicts++;
+       continue;
+     }
++    // An unfinished imported foundation belongs to its source city's clock.
++    if (registry.cityProgress?.isOperational(incoming, row.id) === false) { conflicts++; continue; }
+     const cells = cellsFor(registry.buildings.get(row.typeId), row.x, row.z).map(cell => cell.join(','));
+     if (cells.some(key => occupied.has(key))) { conflicts++; continue; }
+     merged.buildings.push(clone(row));
+diff --git a/workout/island/engine/ready-plots.mjs b/workout/island/engine/ready-plots.mjs
+index d4079304..3f6e3ee1 100644
+--- a/workout/island/engine/ready-plots.mjs
++++ b/workout/island/engine/ready-plots.mjs
+@@ -57,7 +57,7 @@ export function readyPlots(state,registry,flags={}){
+   state.readyPlan.lots.forEach((lot,i)=>{
+     if(lotState(lot,state,registry,index)!=='vacant')return;
+     const type=registry.buildings.get(lot.typeId),result=atCapacity?{ok:false,reason:'ready.limit'}:type.category==='sports'&&!flags.sportFacilities?{ok:false,reason:'reason.locked'}:validatePlacement(state,registry,lot.typeId,lot.x,lot.z,undefined,flags);
+-    rows.push({...lot,w:type.footprint[0],d:type.footprint[1],color:lot.typeId==='powerPlant'?'#e5bf63':siteColor(lot.typeId),number:i+1,ok:result.ok,status:result.ok?'available':result.reason==='reason.locked'?'locked':'unavailable',reason:result.reason});
++    rows.push({...lot,w:type.footprint[0],d:type.footprint[1],color:lot.typeId==='powerPlant'?'#e5bf63':siteColor(lot.typeId),number:i+1,ok:result.ok,status:result.ok?'available':result.reason==='reason.locked'?'locked':'unavailable',reason:result.reason,...(result.reason?.startsWith('progress.')?{gate:result}:{})});
+   });
+   return rows;
+ }
+diff --git a/workout/island/engine/rules.mjs b/workout/island/engine/rules.mjs
+index 8ff944d8..e70493b1 100644
+--- a/workout/island/engine/rules.mjs
++++ b/workout/island/engine/rules.mjs
+@@ -6,7 +6,9 @@ export function placementAvailability(state, registry, typeId) {
+   const type = registry.buildings.get(typeId);
+   if (!type) return { ok: false, reason: 'reason.invalid' };
+   if((state.world.stage||0)<(type.minWorldStage||0))return {ok:false,reason:'reason.futureDistrict'};
+-  if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter))return {ok:false,reason:'reason.learningOrder'};
++  if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter && registry.cityProgress?.isOperational(state, b.id) !== false))return {ok:false,reason:'reason.learningOrder'};
++  const progression = registry.cityProgress?.availability(state, registry, typeId);
++  if (progression && !progression.ok) return progression;
+   const limit = type.limit;
+   if (!limit || limit.kind === 'free') return { ok: true, reason: 'reason.allowed' };
+   const stage = state.world.stage ?? 0;
+@@ -32,6 +34,8 @@ export function upgradeAvailability(state, registry, id) {
+   const nextLevel = type.levels[building.level];
+   if (!nextLevel) return { ok: false, reason: 'reason.maxLevel' };
+   if (building.level >= type.maxLevelByStage?.[state.world.stage]) return { ok: false, reason: 'reason.stageLevel', nextLevel };
++  const progression = registry.cityProgress?.upgradeAvailability(state, registry, id);
++  if (progression && !progression.ok) return {...progression, nextLevel};
+   if (state.money < nextLevel.cost) return { ok: false, reason: 'reason.money', nextLevel };
+   return { ok: true, reason: 'reason.allowed', nextLevel };
+ }
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+index 6b0dbd79..d44d0388 100644
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -127,6 +127,10 @@
+   "data/team.json",
+   "data/tutorial.json",
+   "data/world.json",
++  "design/city-progression-v1/data/catalog.mjs",
++  "design/city-progression-v1/src/island-adapter.mjs",
++  "design/city-progression-v1/src/progression.mjs",
++  "design/city-progression-v1/src/storage.mjs",
+   "design/hud-kit/action-button.mjs",
+   "design/hud-kit/event-banner.mjs",
+   "design/hud-kit/hud.css",
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index 679af563..39b34729 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -48,7 +48,13 @@ export class IslandInterface {
+     this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
+     this.cityManagement=new CityManagementInterface(this);
+     this.cityManagement.addEntry(this.cityDetails);
+-    this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();if(event.developed?.length)this.cityManagement.onGrowth(event.developed);});
++    this.unsubscribe = engine.subscribe((state,event) => {
++      if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;
++      this.refresh();
++      if(event.developed?.length)this.cityManagement.onGrowth(event.developed);
++      const completed = event.progressEvents?.filter(result => result.stage === 'complete').map(result => result.id);
++      if (completed?.length) this.view.highlightCityBuildings?.(completed);
++    });
+     this.refresh();
+     if (!engine.state.avatar.created) this.showAvatar();
+   }
+@@ -235,7 +241,14 @@ export class IslandInterface {
+     this.catalogHint.hidden = !open;
+     if (open) {this.view.setTour?.(false);this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
+   }
+-  drawCityToggle(money){this.cityToggle.replaceChildren(compactStat('●',Math.floor(money).toLocaleString('he-IL'),this.t('app.money')));this.cityToggle.setAttribute('aria-label',`${this.t('app.city')} · ${Math.floor(money).toLocaleString('he-IL')} ${this.t('app.money')}`);}
++  drawCityToggle(money, progression) {
++    const amount = Math.floor(money).toLocaleString('he-IL');
++    const label = `${this.t('app.city')} · ${amount} ${this.t('app.money')}`;
++    this.cityToggle.replaceChildren(compactStat('●', amount, this.t('app.money')));
++    const day = progression ? this.t('progress.currentDay', {day: progression.day}) : '';
++    if (progression) this.cityToggle.append(compactStat('☀', String(progression.day), day));
++    this.cityToggle.setAttribute('aria-label', day ? `${label} · ${day}` : label);
++  }
+   syncPlacementLayout() {
+     this.dock.dataset.placing = String(Boolean(this.selected));
+     if (this.selected) { this.closeDetails(); this.setDockOpen(false); }
+@@ -257,7 +270,15 @@ export class IslandInterface {
+     const population = this.engine.population?.() ?? s.buildings.reduce((sum, b) => sum + (this.getBuilding(b.typeId)?.population ?? 0) * b.level, 0);
+     const pop = el('div', 'population', `♟ ${Math.round(population)} ${this.t('app.population')}`);
+     this.wallet.append(money, pop);
+-    this.drawCityToggle(s.money);
++    const progression = this.engine.cityProgress?.();
++    if (progression) {
++      const status = el('small', 'city-progress-status', this.t('progress.currentDay', {day: progression.day}));
++      status.dataset.cityProgress = String(progression.day);
++      const satisfaction = this.t('progress.satisfaction', {value: Math.round(progression.satisfaction)});
++      status.textContent += ` · ${satisfaction}`;
++      this.wallet.append(status);
++    }
++    this.drawCityToggle(s.money, progression);
+     this.metricsNode.replaceChildren();
+     const values = this.engine.metrics();
+     for (const metric of this.engine.registry.metrics.values()) {
+@@ -343,6 +364,8 @@ export class IslandInterface {
+       const b = button('', 'select-building', 'building-card');
+       b.dataset.building = building.id;
+       b.append(el('span', 'building-icon', building.icon), el('strong', '', this.label(building, 'building')), el('span', 'building-cost', building.locked ? `🔒 ${this.t('app.locked')}` : `● ${building.cost}`));
++      const goods = this.data.cityProgress?.costText(building.id, this.t);
++      if (goods) b.append(el('small', 'building-cost', goods));
+       b.append(el('span', 'building-hint'));
+       b.onclick = () => this.selectBuilding(building.id);
+       this.catalog.append(b);
+@@ -364,15 +387,16 @@ export class IslandInterface {
+       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
+       const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
+       const noSpace=record.id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
+-      if(['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
++      const progressionLocked = !availability.ok && (availability.reason?.startsWith('progress.') || (record.cityProgressAsset && availability.reason === 'reason.money'));
++      if(progressionLocked || ['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
+       const hint = b.querySelector('.building-hint');
+-      const label = noSpace || (record.locked ? null : !availability.ok ? availability.reason==='reason.futureDistrict' ? availability.reason : record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null);
+-      hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?this.t(label):'';
++      const label = noSpace || (record.locked ? null : !availability.ok ? progressionLocked || availability.reason==='reason.futureDistrict' ? availability.reason : record.limit?.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null);
++      hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?(progressionLocked ? this.data.cityProgress.gateText(availability, this.t) : this.t(label)):'';
+       if (!record.locked && !availability.ok && availability.reason!=='reason.learningOrder' && record.limit.kind === 'unique' && record.levels.length>1) hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
+       hint.hidden = !label;
+       b.dataset.limit = record.limit?.kind ?? 'free';
+       b.dataset.availability = noSpace?'no-space':!availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
+-      b.title = noSpace?this.t(noSpace):!record.locked && !availability.ok ? this.t(availability.reason) : '';
++      b.title = noSpace?this.t(noSpace):!record.locked && !availability.ok ? progressionLocked ? hint.textContent : this.t(availability.reason) : '';
+     }
+   }
+   selectBuilding(id,{manual=false}={}) {
+@@ -382,8 +406,8 @@ export class IslandInterface {
+     const noSpace=id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
+     if(noSpace){this.toast(noSpace);return;}
+     const availability=placementAvailability(this.engine.state,this.engine.registry,id);
+-    if(availability.reason==='reason.futureDistrict'){this.toast(availability.reason);return;}
+-    if(this.readyPlots?.active&&!manual){this.category=building.category;this.readyPlots.chooseType(id);return;}
++    if(availability.reason==='reason.futureDistrict'||(!availability.ok&&availability.reason?.startsWith('progress.'))){this.toast(availability.reason);return;}
++    if(this.readyPlots?.active&&!manual){this.category=building.category;if(this.readyPlots.chooseType(id))return;}
+     if (building.locked) { this.toast('reason.locked'); return; }
+     if(availability.reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
+     this.closeInfo();
+@@ -494,7 +518,8 @@ export class IslandInterface {
+   currentInfoSignature() {
+     const state = this.engine.state;
+     const instance=state.buildings.find(row=>row.id===this.infoId);
+-    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
++    const project = this.engine.cityProgress?.()?.projects.find(row => row.id === this.infoId);
++    return JSON.stringify([instance, project?.stage, project?.remainingSeconds, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
+   }
+   drawInfo() {
+     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
+@@ -512,6 +537,13 @@ export class IslandInterface {
+     const currentLevel = record.levels[instance.level - 1];
+     this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
+     const effects = el('div', 'info-effects');
++    const project = this.engine.cityProgress?.()?.projects.find(row => row.id === instance.id);
++    if (project) {
++      const remaining = this.t('progress.remaining', {seconds: Math.ceil(project.remainingSeconds)});
++      const construction = el('span', 'city-progress-construction', `${this.t(`progress.${project.stage}`)} · ${remaining}`);
++      construction.dataset.constructionStage = project.stage;
++      effects.append(construction);
++    }
+     for (const [id, value] of Object.entries(summary?.effects ?? record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
+     const residents = summary?.population ?? levelValue(instance, record, 'population', this.data.config);
+     if (residents) effects.append(el('span', '', `♟ ${residents.toLocaleString('he-IL')} ${this.t('app.population')}`));
+@@ -528,7 +560,9 @@ export class IslandInterface {
+     const nextLevel = upgradeStatus.nextLevel;
+     const upgrade = button('', 'upgrade', 'primary-button');
+     upgrade.append(el('span', '', `✦ ${this.t('app.upgrade')}`), el('small', '', nextLevel ? `● ${nextLevel.cost}` : this.t('app.maxLevel')));
+-    if (!upgradeStatus.ok && nextLevel) upgrade.append(el('small', 'upgrade-reason', this.t(upgradeStatus.reason)));
++    const goods = this.data.cityProgress?.costText(instance.typeId, this.t, instance.level + 1);
++    if (nextLevel && goods) upgrade.append(el('small', '', goods));
++    if (!upgradeStatus.ok && nextLevel) upgrade.append(el('small', 'upgrade-reason', this.data.cityProgress?.gateText(upgradeStatus, this.t) ?? this.t(upgradeStatus.reason)));
+     upgrade.disabled = !upgradeStatus.ok;
+     upgrade.onclick = () => this.result(this.engine.upgrade(instance.id));
+     const move = button(`↔ ${this.t('app.move')}`, 'move', 'secondary-button');
+diff --git a/workout/island/ui/ready-plots.mjs b/workout/island/ui/ready-plots.mjs
+index a2fb8437..ef19fa77 100644
+--- a/workout/island/ui/ready-plots.mjs
++++ b/workout/island/ui/ready-plots.mjs
+@@ -16,7 +16,10 @@ export class ReadyPlotsInterface{
+     ui.view.setReadyPlots?.(this.rows.map(row=>{const type=ui.getBuilding(row.typeId);return {...row,icon:type?.icon||'◇',label:ui.label(type,'building')};}));
+     this.updateConfirmation?.();this.updateList?.();
+   }
+-  reason(row){return this.ui.t(plotCanBuild(row)?'ready.available':row?.reason||`ready.${row?.status||'unavailable'}`);}
++  reason(row){
++    if (row?.gate) return this.ui.data.cityProgress.gateText(row.gate, this.ui.t);
++    return this.ui.t(plotCanBuild(row)?'ready.available':row?.reason||`ready.${row?.status||'unavailable'}`);
++  }
+   focus(row){if(!row)return;this.focusedId=row.id;const view=this.ui.view;if(view.focusReadyPlot)view.focusReadyPlot(row);else view.focusCell?.(row.x+(row.w-1)/2,row.z+(row.d-1)/2);view.setReadyPlotSelection?.(row.id);}
+   focusType(typeId){const row=this.ui.engine.readyPlotForType?.(typeId)||this.rows.find(row=>row.typeId===typeId);this.focus(row);return row;}
+   chooseType(typeId){
+@@ -26,6 +29,8 @@ export class ReadyPlotsInterface{
+     if(typeId==='road'){this.openList();return true;}
+     const built=this.ui.engine.state.buildings.find(row=>row.typeId===typeId);
+     if(built){this.ui.showInfo(built.id);return true;}
++    // An older prepared city can have no reserved lot for a new blueprint.
++    if (this.ui.getBuilding(typeId)?.cityProgressAsset) return false;
+     this.ui.toast('ready.noPlot');return true;
+   }
+   selectCell(cell){
+@@ -52,7 +57,8 @@ export class ReadyPlotsInterface{
+     modal.append(title,detail,price,status,actions);
+     this.updateConfirmation=()=>{
+       const current=this.rows.find(row=>row.id===id),priceText=ui.t('ready.price',{cost:Number(type.cost||0).toLocaleString('he-IL')}),statusText=current?this.reason(current):ui.t('ready.occupied'),confirmText=ui.t('ready.confirm',{cost:Number(type.cost||0).toLocaleString('he-IL')});
+-      if(price.textContent!==priceText)price.textContent=priceText;if(status.textContent!==statusText)status.textContent=statusText;if(confirm.textContent!==confirmText)confirm.textContent=confirmText;
++      const goods=ui.data.cityProgress?.costText(type.id,ui.t),total=goods?`${priceText} · ${goods}`:priceText;
++      if(price.textContent!==total)price.textContent=total;if(status.textContent!==statusText)status.textContent=statusText;if(confirm.textContent!==confirmText)confirm.textContent=confirmText;
+       confirm.disabled=committed||!plotCanBuild(current);modal.dataset.status=current?.status||'occupied';
+     };
+     ui.modalCleanup=()=>{this.updateConfirmation=null;if(this.focusedId===id){this.focusedId=null;ui.view.setReadyPlotSelection?.(null);}};this.updateConfirmation();this.focus(row);
+diff --git a/workout/island/view/island-view.mjs b/workout/island/view/island-view.mjs
+index 43cf8141..5cf83180 100644
+--- a/workout/island/view/island-view.mjs
++++ b/workout/island/view/island-view.mjs
+@@ -90,7 +90,15 @@ export class IslandView {
+   }
+   decorateBeach(){const group=new T.Group();beachDetails(group,this.size,this.data.config.cityView.beach);batchMeshes(group);this.environment.land.add(group);}
+   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
+-  makeBuilding(record,level=1) {this.cityModels.request(record,level);return createBuilding(this.cityModels.recordFor(record,level),level,this.models);}
++  makeBuilding(record, level = 1, construction = null) {
++    if (construction && this.models.assets.has(construction.path)) {
++      const levels = record.levels.map((row, index) => index === level - 1 ? {...row, model: construction} : row);
++      return createBuilding({...record, model: construction, levels}, level, this.models);
++    }
++    if (construction) return createBuilding(record, level);
++    this.cityModels.request(record, level);
++    return createBuilding(this.cityModels.recordFor(record, level), level, this.models);
++  }
+   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
+   setWorld(state,force=false) {
+     this.state=state;if(!this.renderer)return;
+@@ -101,10 +109,18 @@ export class IslandView {
+     for(const b of buildings) {
+       const record=this.definition(b.typeId||b.type);if(!record)continue;
+       let item=this.groups.get(b.id);
+-      const cityKey=this.cityModels.key(record,b.level||1);
++      const construction = this.data.cityProgress?.model(state, b, record);
++      if (construction && !this.cityModels.requested.has(construction.path)) {
++        this.cityModels.requested.add(construction.path);
++        this.models.load(construction).then(ok => { if (ok) this.cityModels.onLoaded(); });
++      }
++      const cityKey = construction
++        ? `${construction.stage}:${this.models.assets.has(construction.path) ? construction.path : ''}`
++        : this.cityModels.key(record,b.level||1);
+       if(!item||item.level!==b.level||item.typeId!==(b.typeId||b.type)||item.cityKey!==cityKey) {
+         if(item){this.buildingRoot.remove(item.group);disposeBuilding(item.group);}
+-        const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level);
++        const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level,construction);
++        if (construction) group.userData.constructionStage = construction.stage;
+         group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type,cityKey};this.groups.set(b.id,item);
+       }
+       item.group.position.copy(this.worldPosition(b.x,b.z,record.footprint));
