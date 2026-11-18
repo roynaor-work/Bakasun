@@ -7,9 +7,9 @@
  * The shader below is the pack's runtime/appearance.mjs masks, applied to the v22 instance instead of a deep clone of the whole scene
  * (decorateAthlete clones every attribute and the four morphs per player: about 0.7 MB a player; here only the colour attribute is
  * per player, as in v22). The chest crest mask is off (no team mark yet). */
-import {V22_BASE,V22_HAIR,V22_BODIES,V22_REGION,v22Colors} from './athlete-body-v22.mjs?v=island-v2-20261107-18';
+import {V22_BASE,V22_HAIR,V22_BODIES,V22_REGION,v22Colors} from './athlete-body-v22.mjs?v=island-v2-20261107-19';
 import {athleteRig} from './athlete-body.mjs';
-import {soccerV24Url,soccerShirtNumber} from './soccer-v24.mjs?v=island-v2-20261107-18';
+import {soccerV24Url,soccerShirtNumber} from './soccer-v24.mjs?v=island-v2-20261107-19';
 
 export const V2_BODY_URL=()=>soccerV24Url('body/models/soccer.glb');
 const CANON18=['Root','Hips','Spine','Chest','Neck','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand','LeftUpLeg','LeftLeg','LeftFoot','RightUpLeg','RightLeg','RightFoot'];

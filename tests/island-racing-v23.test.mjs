@@ -1,5 +1,6 @@
 // racing-v23 (Roy after v22 on the phone): no walls by default (?racingWalls=1 brings them back), the off-track flip back to the centre line at speed 0
 // (?racingOffTrack=0 = the old recovery), the camera NaN that made "the screen disappear" at a fence hit, posts that stay solid, a clear trackside, the shift sound.
+import './helpers/racing-round-v244.mjs';   // racing-v24.5: this file measures the v24.4 circuits (?racingRound=v244)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

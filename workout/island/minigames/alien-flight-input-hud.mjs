@@ -4,7 +4,7 @@ const pickupNames=['ירי מניפה','לייזר','ירי מהיר','מגן','
 
 /** Optional presentation readers; no model mutation or saved equipment changes. */
 export function alienFlightHudStatus(model,mode='touch',manualFire=alienV9Enabled()){
- const laser=model.powerup===1||(model.upgrades?.laser||0)>0||(model.equipment?.weapon||0)>=2,rapid=model.powerup===2,spread=model.spreadTime>0;
+ const laser=model.powerup===1||(model.laserTime||0)>0||(model.upgrades?.laser||0)>0||(model.equipment?.weapon||0)>=2,rapid=model.powerup===2,spread=model.spreadTime>0;
  const weapon=spread?'spread':laser?'laser':rapid?'rapid':'normal';
  const names={normal:'תותח',spread:'ירי מניפה',laser:'לייזר',rapid:'ירי מהיר'};
  const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');if(model.v23&&model.vulcanLocked)extras.push('וולקן מתקרר');if(model.refillCold>0)extras.push(`וולקן קר ${Math.ceil(model.refillCold)}ש׳`);

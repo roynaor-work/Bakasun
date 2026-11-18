@@ -1,4 +1,4 @@
-import {racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-18';
+import {racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-19';
 /** Procedural sport engine; no downloaded samples. Shared app mute is authoritative.
  * sync(speed, boosting, {drifting, offroad, steer, throttle}) keeps the two-argument API.
  * Noise and custom harmonics are optional so minimal/headless audio contexts still work.
@@ -20,7 +20,11 @@ export const shiftStyle=(search=globalThis.location?.search||'')=>{const v=new U
  * and no wind loop standing still or slow (Roy: "a background noise, like air or a hiss"; ?racingHiss=v23). v4: the Codex v4 brake loops, bumps and scrape replace the
  * squeals under braking ("a metal noise instead of a braking noise"; ?racingAudioV4=0). */
 const SHIFT={v22:{dip:.18,len:.14,vol:.3,pop:.09,noise:.055,blip:0},a:{dip:.1,len:.08,vol:.12,pop:0,noise:0,blip:.06},b:{dip:.12,len:.1,vol:.15,pop:0,noise:0,blip:.06},c:{dip:.16,len:.09,vol:.55,pop:0,noise:0,blip:0}};
-export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle(),blowoff:blowoffOn=racingV24Flags().turbo==='v23',hiss:hissMode=racingV24Flags().hiss,v4:v4On=racingV24Flags().audioV4,pit:pitOn=false,v5=false,idle:idleOn=false,pass:passMode='v24'}={}){
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle(),blowoff:blowoffOn=racingV24Flags().turbo==='v23',hiss:hissMode=racingV24Flags().hiss,v4:v4On=racingV24Flags().audioV4,pit:pitOn=false,v5=false,idle:idleOn=false,pass:passMode='v24',air:airMode='v244',rec=false,layer:layerOption=null}={}){
+ // racing-v24.5 rec (the session passes it unless ?racingRec=0): Roy's recorded idle replaces the synthesized one on the grid and his engine-driving-away take the
+ // synthesized doppler overtake, once the takes decoded (racing-samples REC); until then, or if they fail, the synthesis plays as before
+ // racing-v24.5 air (racing-v24-5.mjs; the session passes 'v245', the default here is v24.4): no white-noise air bed while driving (road and exhaust hiss, the top-speed
+ // wind, the v2 wind loop); the road is a low tyre rumble under 300 Hz and the boost a short soft low push instead of a .33 hiss
  // racing-v24.4 (racing-v24-4.mjs; the session passes them, the defaults here are v24.3): v5 = the Codex v5 surface/brake/pit loops and no procedural gravel noise,
  // idleOn = the idling engine on the grid and standing still, passMode 'v244' = the doppler overtake and doppler rival voices
  const SH=SHIFT[shiftName]||SHIFT.a,style=SHIFT[shiftName]?shiftName:'a';let blipUntil=0,shifts=0,blowoffs=0,noiseLevel=0;
@@ -72,7 +76,8 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();
     createNoise();lastTime=context.currentTime;
     // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
-    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-18').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url),v5,base5:new URL('../assets/racing-audio-v5/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
+    if(layerOption)samples=layerOption;   // tests: a ready sample layer instead of the dynamic import
+    else if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-19').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,air:airMode,rec,baseRec:new URL('../assets/racing-rec/',import.meta.url),pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url),v5,base5:new URL('../assets/racing-audio-v5/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}
@@ -122,9 +127,9 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   if(idleOn)idleUpdate(now,real);
   if(noiseGain){
    // racing-v24 hiss: the road noise grows with the square of the speed, the exhaust noise only with throttle and revs (v23: a floor of .02 that hissed standing still)
-   const quiet=hissMode!=='v23',road=quiet?Math.pow(Math.min(speed/55,1),2)*.03:Math.min(speed/55,1)*.045;
-   const air=boosting?.33:0,brakeNoise=braking&&!(v4On&&samples?.v4Ready),slip=drift?.11+steering*.1:brakeNoise?.05+Math.min(speed/40,1)*.05:0,gravel=offroad&&!v5?.2:0;   // racing-v24.4 v5: no white-noise gravel bed (Roy: "an annoying noise when the car goes a little off"); the v5 surface loops instead
-   const wind=top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(quiet?throttle*revs*.035:.02+throttle*revs*.07):0;
+   const quiet=hissMode!=='v23',calm=airMode==='v245',road=calm?Math.pow(Math.min(speed/55,1),2)*.012:quiet?Math.pow(Math.min(speed/55,1),2)*.03:Math.min(speed/55,1)*.045;
+   const air=boosting?(calm?.04:.33):0,brakeNoise=braking&&!(v4On&&samples?.v4Ready),slip=drift?.11+steering*.1:brakeNoise?.05+Math.min(speed/40,1)*.05:0,gravel=offroad&&!v5?.2:0;   // racing-v24.4 v5: no white-noise gravel bed (Roy: "an annoying noise when the car goes a little off"); the v5 surface loops instead
+   const wind=calm?0:top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real&&!calm?(quiet?throttle*revs*.035:.02+throttle*revs*.07):0;
    if(backfire&&!paused&&!disposed)samples?.backfire();
    if(wasBoosting&&!boosting&&!paused&&!disposed&&blowoffOn){blowoffs++;samples?.blowoff();}wasBoosting=boosting;
    lastThrottle=throttle;
@@ -132,7 +137,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
    if(samples?.ready)samples.update({rpm:real?revs:rpm,throttle,speed,drifting:drift,braking,brakePedal:!!extras.brake&&!drift&&!offroad,steer:steering,kerb:number(extras.kerb),offroad,surface:extras.surface,pitPhase:extras.pitPhase||'',toBox:number(extras.toBox,Infinity),level:paused||muted||disposed?0:1});
    noiseLevel=paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*SH.noise+pop+backfire+exhaust+wind);
    target(noiseGain.gain,noiseLevel,now,boosting?.045:.09);
-   target(noiseFilter.frequency,(offroad&&!v5?620:drift?1550+steering*850:braking?1900+speed*10:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
+   target(noiseFilter.frequency,calm?(offroad&&!v5?620:drift?1550+steering*850:braking?1900+speed*10:boosting?420:150+speed*3):(offroad&&!v5?620:drift?1550+steering*850:braking?1900+speed*10:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
   }
   lastSpeed=speed;lastTime=now;
@@ -163,7 +168,8 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   idleRev=grid?(lamps>0?.42+.04*lamps+Math.sin(now*5.3)*.03:cycle<.3?.35*Math.sin(cycle/.3*Math.PI):0):0;
   idleLevel=paused||muted||disposed?0:(grid?1:still);
   target(idle.osc.frequency,IDLE_HZ*(1+1.5*idleRev),now,idleRev>.3?.05:.1);target(idle.lp.frequency,650+idleRev*1500,now,.06);
-  target(idle.g.gain,idleLevel*(.013+idleRev*.008),now,paused||muted||disposed?.02:.12);
+  const recorded=rec&&samples?.recReady&&samples.recIdle(idleLevel*(.72+.45*idleRev),1+.8*idleRev);   // racing-v24.5: Roy's idle take instead of the synthesis
+  target(idle.g.gain,recorded?0:idleLevel*(.013+idleRev*.008),now,paused||muted||disposed?.02:.12);
  }
  // racing-v11 rivals: at most MAX_RIVAL_VOICES live engines (the nearest cars, panned and quieter with distance); the rest share one background voice.
  const MAX_RIVAL_VOICES=3,rivals=[];let pack=null,rivalList=[],lastOpp=0,passes=0;const lastDist=[];
@@ -267,7 +273,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
  }
  function event(name,details={}){
   readMute();if(paused||muted||disposed)return;
-  if(name==='pass'){passes++;if(passMode!=='v24'&&dopplerPass(details))return;if(samples?.ready)samples.pass();else cue('pass',1);return;}
+  if(name==='pass'){passes++;if(rec&&passMode!=='v24'&&samples?.recReady&&samples.recPass({pan:details?.pan}))return;if(passMode!=='v24'&&dopplerPass(details))return;if(samples?.ready)samples.pass();else cue('pass',1);return;}
   if(name==='pit'){if(!samples?.pitCue?.(details?.type,details?.seconds||2,!!details?.seq)&&details?.type==='pitChange')wheelGun();return;}   // racing-v24: the Codex pit sounds, or the procedural guns
   if(samples?.ready&&details?.side)samples.contactSide?.();   // racing-v24: the next bump was side by side (the v4 scrape joins it)
   if(samples?.ready)samples.event?.(name,clamp(number(details?.intensity,1),0,1));   // racing-audio-v3 layer (a no-op until its files decoded); the procedural cue below always plays
@@ -281,7 +287,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed,contextState:context?.state,gain:gain?.gain?.value}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0),shiftStyle:style,shifts,blowoffs,noise:noiseLevel,hiss:hissMode,blowoff:blowoffOn,v4:v4On,v5,v5Ready:!!samples?.v5Ready,idle:idleOn?{level:idleLevel,rev:idleRev,hz:idle?.osc?.frequency?.value??null}:null,pass:passMode,passes,samples:samples?.levels?.()||null}),
+  engine:()=>({air:airMode,rec:rec?!!samples?.recReady:false,gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0),shiftStyle:style,shifts,blowoffs,noise:noiseLevel,hiss:hissMode,blowoff:blowoffOn,v4:v4On,v5,v5Ready:!!samples?.v5Ready,idle:idleOn?{level:idleLevel,rev:idleRev,hz:idle?.osc?.frequency?.value??null}:null,pass:passMode,passes,samples:samples?.levels?.()||null}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}

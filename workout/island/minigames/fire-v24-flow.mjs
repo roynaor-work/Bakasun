@@ -2,10 +2,10 @@
  * run exactly as in v23); this wrapper adds, on an entry stage: the building the engine drives to (a door marker and an edge arrow on the
  * street picture), an "enter" button when the engine is parked at the door, the frozen street while the firefighter is inside (the room
  * session draws over it), and the merged raw result (score, performance, rescues) handed to the engine. `?fireFlow=v23` never reaches here. */
-import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-18';
-import {entryPlan,entryBuilding,arrivedAtBuilding,doorDistance,mergeResults,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-18';
+import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-19';
+import {entryPlan,entryBuilding,arrivedAtBuilding,doorDistance,mergeResults,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-19';
 
-const loadInteriorModule=()=>import('./fire-v24-session.mjs?v=island-v2-20261107-18');
+const loadInteriorModule=()=>import('./fire-v24-session.mjs?v=island-v2-20261107-19');
 
 /** Marker and arrow for the building door on the street picture (config px, after the 3D frame). Pure drawing. */
 export function drawDoorMarker(p,{x,y},{state,time,width,height,label,enterLabel}){
@@ -66,7 +66,7 @@ export function startFireEntry(ctx,createModel,draw,createView,{runSession=runFi
   const {dialog,canvas}=ctx,events=new AbortController(),options={signal:events.signal};
   const enterButton=document.createElement('button');enterButton.type='button';enterButton.id='fire-enter';enterButton.className='fire-v24-enter';enterButton.dataset.action='fire-enter';enterButton.hidden=true;enterButton.setAttribute('aria-label',t('fire.v24.enter'));
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d','M5 21V4l9-1v18M14 21h5V6h-5M11 12v1');svg.append(path);const cap=document.createElement('span');cap.className='fire-v24-enter-label';cap.textContent=t('fire.v24.enter');enterButton.append(svg,cap);dialog.append(enterButton);
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-18',import.meta.url).href;document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-19',import.meta.url).href;document.head.append(link);
   enterButton.addEventListener('click',()=>{if(!shellPaused&&flow.state==='ready'&&!flow.inside&&!flow.done)flow.enterRequested=true;},options);
   const stage=canvas.parentElement;
   stage?.addEventListener('pointerdown',e=>{ // a tap on the door marker enters too; the street never sees that tap

@@ -1,3 +1,4 @@
+import './helpers/racing-round-v244.mjs';   // racing-v24.5: this file measures the v24.4 circuits (?racingRound=v244)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRacing, RACING_NUMBERS} from '../workout/island/minigames/racing-physics.mjs';

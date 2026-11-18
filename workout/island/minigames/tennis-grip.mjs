@@ -37,7 +37,7 @@ export function gripTransform(T,cfg=GRIP_DEFAULTS){
 }
 /** Load the package racket once (no decoders). Resolves the template scene; rejects on any failure (the caller keeps the v24 racket). */
 export async function loadGripRacket({GLTFLoader,base,fetcher=globalThis.fetch,buffer}){
- const url=new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-18',base).href;
+ const url=new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-19',base).href;
  const data=buffer?await buffer:await (await fetcher(url)).arrayBuffer();
  const gltf=await new GLTFLoader().parseAsync(data,'');const scene=gltf.scene;
  if(!scene.getObjectByName('grip')||!scene.getObjectByName('head'))throw Error('tennis grip racket is missing grip/head');
@@ -76,4 +76,39 @@ export function readyHold(T,cfg=READY_DEFAULTS){
  const quaternion=new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(x,y,n));
  const right=new T.Vector3(...cfg.rightHand),left=right.clone().addScaledVector(d,cfg.throat);
  return {quaternion,dir:d,rightHand:right.toArray(),rightElbow:[...cfg.rightElbow],leftHand:left.toArray(),leftElbow:[...cfg.leftElbow]};
+}
+/** v24.5 racket poses (Roy, 18/11/2026, after v24.4: "the racket indeed is not seen in front, but it should be seen going up in the serve, and held
+ * a little to the side when he tries to return a ball on the other side"). Two holds on top of the v24.4 ready stance, eased in and out:
+ *  - trophy: while the server tosses, the racket rises from the ready hold to beside and above the head (the trophy position of a real serve:
+ *    racket hand up at the side, elbow high, the head of the racket up and out past the hair: the game camera is high behind the child,
+ *    and a racket straight above the head hides in his big hair, as v24.4's toss pose did), slowly enough to be seen (`tossRise` s); the
+ *    serve swing takes over from there as before (contact IK unchanged);
+ *  - backhand: while the ball comes to this player on the backhand side (the game's own forehand/backhand rule on the predicted contact), the
+ *    racket is held a little to the other side with both hands (a short unit turn, the chest turned a little), not straight in front; it eases
+ *    back out for the swing, so the backswing and the contact are untouched.
+ * ?tennisPose=0 keeps v24.4. Positions in the character's root space (+Y up, +Z forward, +X the racket hand's side). */
+export function tennisPoseEnabled(search=globalThis.location?.search||''){return param('tennisPose',search)!=='0';}
+export const POSE25_DEFAULTS=Object.freeze({
+ blend:.16,tossRise:.42,
+ trophy:Object.freeze({dir:Object.freeze([.75,1,-.05]),rightHand:Object.freeze([.5,1.85,-.05]),rightElbow:Object.freeze([.56,1.56,-.02])}),
+ backhand:Object.freeze({dir:Object.freeze([-.86,.46,.3]),rightHand:Object.freeze([-.18,1.3,.32]),rightElbow:Object.freeze([.16,1.3,.12]),throat:.27,leftElbow:Object.freeze([-.42,1.24,.2]),chest:.26})
+});
+export function pose25Config(config){const c=config?.animation?.pose25||{};return {...POSE25_DEFAULTS,...c,trophy:{...POSE25_DEFAULTS.trophy,...(c.trophy||{})},backhand:{...POSE25_DEFAULTS.backhand,...(c.backhand||{})}};}
+/** The game's stroke side for a ball at x (tennis.mjs: forehand when (x - player.x) x (index 0 ? -1 : 1) >= 0). */
+export function strokeSide(player,x,index){return (x-player.x)*(index===0?-1:1)>=0?'forehand':'backhand';}
+/** Which v24.5 hold applies now: 'trophy' | 'backhand' | null. */
+export function pose25Mode(player,{phase,server,index,contact,lastHitter}){
+ if(player.swing>0)return null;
+ if(phase==='toss'&&index===server)return 'trophy';
+ if(player.preparing)return null;
+ if(phase==='rally'&&contact&&contact.side===index&&lastHitter!==index&&Number.isFinite(contact.x)&&strokeSide(player,contact.x,index)==='backhand')return 'backhand';
+ return null;
+}
+/** A hold's racket orientation (old-racket frame, as readyHold: shaft -Y toward the head) and arm targets; the left hand on the throat when `throat` is set. */
+export function hold25(T,h){
+ const d=new T.Vector3(...h.dir).normalize(),y=d.clone().negate();let n=new T.Vector3(-d.z,0,d.x);if(n.length()<.2)n.set(0,0,1);
+ n.addScaledVector(d,-n.dot(d)).normalize();const x=new T.Vector3().crossVectors(y,n).normalize();
+ const quaternion=new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(x,y,n)),out={quaternion,dir:d,rightHand:[...h.rightHand],rightElbow:[...h.rightElbow],chest:h.chest||0};
+ if(h.throat){out.leftHand=new T.Vector3(...h.rightHand).addScaledVector(d,h.throat).toArray();out.leftElbow=[...h.leftElbow];}
+ return out;
 }
