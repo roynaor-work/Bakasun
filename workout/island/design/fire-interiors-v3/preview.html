@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>פנים בניין הכיבוי</title>
+  <link rel="icon" href="../../assets/icons/island-192.png" type="image/png">
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <main class="app" id="app" aria-busy="true">
+    <header class="topbar">
+      <div class="identity">
+        <span class="building-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <h1>פנים בניין הכיבוי</h1>
+      </div>
+      <nav class="views" aria-label="מבט">
+        <button type="button" data-view="room" aria-pressed="true">חדר</button>
+        <button type="button" data-view="floor" aria-pressed="false">קומה</button>
+        <button type="button" data-view="corridor" aria-pressed="false">מסדרון</button>
+        <button type="button" data-view="building" aria-pressed="false">בניין</button>
+        <button type="button" data-view="roof" aria-pressed="false">גג</button>
+      </nav>
+    </header>
+    <div class="workbench">
+      <section class="stage" aria-label="תצוגת תלת־ממד">
+        <canvas id="scene" tabindex="0" aria-label="בניין הכיבוי בתלת־ממד. חיצים לסיבוב, פלוס ומינוס לקירוב, ומקש הבית לאיפוס"></canvas>
+        <div class="view-title">
+          <h2 id="view-title">חדר ילדים</h2>
+          <p id="view-context">קומה 7 · מערב</p>
+        </div>
+        <div class="camera-controls">
+          <button id="reset-camera" type="button" aria-label="איפוס מצלמה" title="איפוס מצלמה">↺</button>
+        </div>
+        <p id="loading" class="loading" role="status">טוען את המבנה…</p>
+        <nav id="floors" class="floor-strip" aria-label="בחירת קומה"></nav>
+      </section>
+      <aside class="inspector" aria-label="בקרת תצוגה">
+        <div class="selectors" id="room-selectors">
+          <label class="field" for="space"><span>חלל</span><select id="space"></select></label>
+          <label class="field" for="object"><span>חפץ</span><select id="object"></select></label>
+        </div>
+        <div class="section-controls" id="room-controls">
+          <fieldset id="burn-controls">
+            <legend>מצב שריפה</legend>
+            <div class="segment">
+              <button type="button" data-state="intact" aria-pressed="true">שלם</button>
+              <button type="button" data-state="burning" aria-pressed="false">בוער</button>
+              <button type="button" data-state="burnt" aria-pressed="false">מפויח</button>
+            </div>
+          </fieldset>
+          <fieldset id="smoke-controls">
+            <legend>עשן</legend>
+            <div class="segment smoke-options" id="smoke-options"></div>
+          </fieldset>
+          <div id="flood-controls" class="flood-control">
+            <div class="field flood-label">
+              <label for="flood">גובה הצפה</label>
+              <output id="depth" for="flood">0 ס״מ</output>
+            </div>
+            <input id="flood" type="range" min="0" max="32" step="1" value="0">
+          </div>
+        </div>
+        <dl id="structure-details" class="structure-details" hidden></dl>
+        <div class="access-controls" id="access-controls">
+          <button id="doors" type="button" aria-pressed="true">דלתות פתוחות</button>
+          <button id="lift" type="button" aria-pressed="false">מעלית</button>
+        </div>
+        <p class="lift-status" id="lift-status" role="status" hidden></p>
+      </aside>
+    </div>
+    <footer class="statusbar">
+      <p id="status" role="status">טוען נכסים מקומיים…</p>
+      <p class="gesture">גרירה לסיבוב · גלילה לקירוב</p>
+    </footer>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

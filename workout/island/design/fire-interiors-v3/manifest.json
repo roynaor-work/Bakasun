@@ -1,0 +1,3379 @@
+{
+  "schemaVersion": 3,
+  "id": "fire-interiors-v3",
+  "license": "CC0-1.0",
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "base": {
+    "ref": "codex/fire-multifloor-v2",
+    "commit": "8979e5557380bd9944b631f6844fe056a26de8cc",
+    "floorNumbers": [
+      1,
+      2,
+      3
+    ],
+    "models": [
+      {
+        "id": "building-floor-1",
+        "path": "../fire-multifloor-v2/models/building-floor-1.glb",
+        "kind": "interior-floor",
+        "bytes": 851608,
+        "sha256": "d72f9b663e53cd978119c63c9b80ed00190cfda63e647c97bf4b6dc5cb1ff4b3",
+        "triangles": 12477,
+        "visibleTriangles": 7348
+      },
+      {
+        "id": "building-floor-2",
+        "path": "../fire-multifloor-v2/models/building-floor-2.glb",
+        "kind": "interior-floor",
+        "bytes": 851608,
+        "sha256": "458c85d36497c062efe2c4494b5a313b39a1f9418d6d0d36f4ae8ec507fd44ab",
+        "triangles": 12477,
+        "visibleTriangles": 7348
+      },
+      {
+        "id": "building-floor-3",
+        "path": "../fire-multifloor-v2/models/building-floor-3.glb",
+        "kind": "interior-floor",
+        "bytes": 851608,
+        "sha256": "071cb005fa01dd63521cc8ce03d0447004558d86ba9f583e2df081a516e7366b",
+        "triangles": 12477,
+        "visibleTriangles": 7348
+      },
+      {
+        "id": "building-shell",
+        "path": "../fire-multifloor-v2/models/building-shell.glb",
+        "kind": "architecture",
+        "bytes": 352224,
+        "sha256": "ee2831d67407c2e50c97f312ddc67e17ca358415b9876934fc7d431f3b4927d0",
+        "triangles": 5692,
+        "visibleTriangles": 5692
+      }
+    ]
+  },
+  "preview": {
+    "path": "preview.html",
+    "viewport": [
+      844,
+      390
+    ],
+    "network": "same-origin",
+    "modules": [
+      "../../vendor/three.module.js",
+      "../../vendor/GLTFLoader.js",
+      "../../vendor/BufferGeometryUtils.js",
+      "../fire-multifloor-v2/runtime.mjs",
+      "preview.mjs",
+      "effects.mjs"
+    ],
+    "icon": "../../assets/icons/island-192.png"
+  },
+  "limits": {
+    "packageBytes": 8000000,
+    "roomTotalTriangles": 6000
+  },
+  "assets": [
+    {
+      "id": "kids-room",
+      "path": "models/kids-room.glb",
+      "bytes": 346320,
+      "sha256": "c9b86df578c008de2dbf44388f915ee8b33653611e4975054f6387cc5be011bb",
+      "nodeCount": 45,
+      "storedTriangles": 5340,
+      "sceneTriangles": 5340,
+      "intactTriangles": 2916
+    },
+    {
+      "id": "office",
+      "path": "models/office.glb",
+      "bytes": 319096,
+      "sha256": "445ac75b9039d8a2317f87f31838cf9366f6a0fb07907b15b2740cde59ff4952",
+      "nodeCount": 45,
+      "storedTriangles": 4812,
+      "sceneTriangles": 4812,
+      "intactTriangles": 2652
+    },
+    {
+      "id": "shop",
+      "path": "models/shop.glb",
+      "bytes": 367300,
+      "sha256": "b90f79728910b0d244595a6569c66a52ca5071b23f2b77f35b9885d3717751e6",
+      "nodeCount": 49,
+      "storedTriangles": 5588,
+      "sceneTriangles": 5588,
+      "intactTriangles": 3012
+    },
+    {
+      "id": "restaurant-kitchen",
+      "path": "models/restaurant-kitchen.glb",
+      "bytes": 369344,
+      "sha256": "9fb3f5f318577fd33825cebc6d3e07043210a694ea09d6c3b6305b74914402cd",
+      "nodeCount": 46,
+      "storedTriangles": 5648,
+      "sceneTriangles": 5648,
+      "intactTriangles": 3392
+    },
+    {
+      "id": "storage",
+      "path": "models/storage.glb",
+      "bytes": 332152,
+      "sha256": "67176aee7b256f18c841d6f1d25aca8f158eb54e098bef9294beffc3e67261a0",
+      "nodeCount": 46,
+      "storedTriangles": 4912,
+      "sceneTriangles": 4912,
+      "intactTriangles": 2758
+    },
+    {
+      "id": "stairwell",
+      "path": "models/stairwell.glb",
+      "bytes": 154336,
+      "sha256": "b5220641e2ba34d73892be861eb0e236678f2782330d3269f8543f11970d747c",
+      "nodeCount": 30,
+      "storedTriangles": 2334,
+      "sceneTriangles": 2388,
+      "intactTriangles": 1976
+    },
+    {
+      "id": "upper-shell",
+      "path": "models/upper-shell.glb",
+      "bytes": 242464,
+      "sha256": "e406fdd458cdc860da28c9a96ab85673877d0290c99c94eaa82561072cae5edc",
+      "nodeCount": 107,
+      "storedTriangles": 3491,
+      "sceneTriangles": 11081,
+      "intactTriangles": 11081
+    },
+    {
+      "id": "roof",
+      "path": "models/roof.glb",
+      "bytes": 144504,
+      "sha256": "7702302f38630d9c558b05a9fc4763c5aae00945b4c3b1996494da9a233a4c20",
+      "nodeCount": 11,
+      "storedTriangles": 2305,
+      "sceneTriangles": 2305,
+      "intactTriangles": 2305
+    }
+  ],
+  "rooms": [
+    {
+      "id": "kids-room",
+      "label": "חדר ילדים",
+      "model": "kids-room",
+      "size": [
+        6.64,
+        3.04,
+        4.84
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -3.32,
+          -0.168,
+          -2.42
+        ],
+        [
+          3.32,
+          3.117,
+          2.485
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        2.31,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        1.29,
+        0,
+        1.58
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          6.31,
+          4.49
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת החדר",
+          "category": "wood",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.69,
+            1.1,
+            0.02
+          ],
+          "fireRoom": [
+            2.572,
+            1.1,
+            1.7227
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "bed",
+          "label": "מיטה ושמיכה",
+          "category": "fabric",
+          "parent": "burn_bed",
+          "intact": "intact_bed",
+          "burnt": "burnt_bed",
+          "fire": "fire_bed",
+          "fireLocal": [
+            0.21,
+            0.64,
+            0.42
+          ],
+          "fireRoom": [
+            -1.66,
+            0.64,
+            -0.55
+          ],
+          "triangles": {
+            "intact": 372,
+            "burnt": 408
+          }
+        },
+        {
+          "id": "toy_cubby",
+          "label": "שידת משחקים",
+          "category": "wood",
+          "parent": "burn_toy_cubby",
+          "intact": "intact_toy_cubby",
+          "burnt": "burnt_toy_cubby",
+          "fire": "fire_toy_cubby",
+          "fireLocal": [
+            0.46,
+            0.95,
+            0.3
+          ],
+          "fireRoom": [
+            1.04,
+            0.95,
+            -1.57
+          ],
+          "triangles": {
+            "intact": 320,
+            "burnt": 356
+          }
+        },
+        {
+          "id": "play_rug",
+          "label": "שטיח משחק",
+          "category": "fabric",
+          "parent": "burn_play_rug",
+          "intact": "intact_play_rug",
+          "burnt": "burnt_play_rug",
+          "fire": "fire_play_rug",
+          "fireLocal": [
+            0.1,
+            0.05,
+            0.46
+          ],
+          "fireRoom": [
+            0.1,
+            0.05,
+            1.0
+          ],
+          "triangles": {
+            "intact": 492,
+            "burnt": 528
+          }
+        },
+        {
+          "id": "toy_rocket",
+          "label": "טיל צעצוע וקוביות",
+          "category": "wood",
+          "parent": "burn_toy_rocket",
+          "intact": "intact_toy_rocket",
+          "burnt": "burnt_toy_rocket",
+          "fire": "fire_toy_rocket",
+          "fireLocal": [
+            0.12,
+            0.16,
+            0.03
+          ],
+          "fireRoom": [
+            0.34,
+            0.22,
+            0.51
+          ],
+          "triangles": {
+            "intact": 348,
+            "burnt": 384
+          }
+        },
+        {
+          "id": "craft_table",
+          "label": "שולחן יצירה",
+          "category": "paper",
+          "parent": "burn_craft_table",
+          "intact": "intact_craft_table",
+          "burnt": "burnt_craft_table",
+          "fire": "fire_craft_table",
+          "fireLocal": [
+            -0.25,
+            0.65,
+            0.09
+          ],
+          "fireRoom": [
+            -2.23,
+            0.65,
+            1.37
+          ],
+          "triangles": {
+            "intact": 192,
+            "burnt": 228
+          }
+        },
+        {
+          "id": "stool",
+          "label": "שרפרף",
+          "category": "wood",
+          "parent": "burn_stool",
+          "intact": "intact_stool",
+          "burnt": "burnt_stool",
+          "fire": "fire_stool",
+          "fireLocal": [
+            0,
+            0.4,
+            0.1
+          ],
+          "fireRoom": [
+            -1.18,
+            0.4,
+            1.46
+          ],
+          "triangles": {
+            "intact": 104,
+            "burnt": 140
+          }
+        },
+        {
+          "id": "art_prints",
+          "label": "ציורים ממוסגרים",
+          "category": "paper",
+          "parent": "burn_art_prints",
+          "intact": "intact_art_prints",
+          "burnt": "burnt_art_prints",
+          "fire": "fire_art_prints",
+          "fireLocal": [
+            0,
+            0,
+            0.08
+          ],
+          "fireRoom": [
+            1.44,
+            2.05,
+            -2.14
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "label": "משרד",
+      "model": "office",
+      "size": [
+        6.64,
+        3.04,
+        4.84
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -3.32,
+          -0.168,
+          -2.42
+        ],
+        [
+          3.32,
+          3.117,
+          2.485
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        2.31,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        1.44,
+        0,
+        1.42
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          6.31,
+          4.49
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת החדר",
+          "category": "wood",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.69,
+            1.1,
+            0.02
+          ],
+          "fireRoom": [
+            2.572,
+            1.1,
+            1.7227
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "desk",
+          "label": "שולחן עבודה",
+          "category": "wood",
+          "parent": "burn_desk",
+          "intact": "intact_desk",
+          "burnt": "burnt_desk",
+          "fire": "fire_desk",
+          "fireLocal": [
+            0.46,
+            0.78,
+            0.3
+          ],
+          "fireRoom": [
+            0.73,
+            0.78,
+            -0.06
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "workstation",
+          "label": "מסכים ומקלדת",
+          "category": "electrical",
+          "parent": "burn_workstation",
+          "intact": "intact_workstation",
+          "burnt": "burnt_workstation",
+          "fire": "fire_workstation",
+          "fireLocal": [
+            0,
+            0.38,
+            0.05
+          ],
+          "fireRoom": [
+            0.27,
+            1.2,
+            -0.31
+          ],
+          "triangles": {
+            "intact": 240,
+            "burnt": 276
+          }
+        },
+        {
+          "id": "chair",
+          "label": "כיסא עבודה",
+          "category": "fabric",
+          "parent": "burn_chair",
+          "intact": "intact_chair",
+          "burnt": "burnt_chair",
+          "fire": "fire_chair",
+          "fireLocal": [
+            0,
+            0.7,
+            -0.21
+          ],
+          "fireRoom": [
+            0.3635,
+            0.7,
+            0.5927
+          ],
+          "triangles": {
+            "intact": 420,
+            "burnt": 456
+          }
+        },
+        {
+          "id": "file_cabinet",
+          "label": "ארון תיוק ומדפסת",
+          "category": "paper",
+          "parent": "burn_file_cabinet",
+          "intact": "intact_file_cabinet",
+          "burnt": "burnt_file_cabinet",
+          "fire": "fire_file_cabinet",
+          "fireLocal": [
+            -0.25,
+            0.83,
+            0.2
+          ],
+          "fireRoom": [
+            -1.99,
+            0.83,
+            -1.69
+          ],
+          "triangles": {
+            "intact": 256,
+            "burnt": 292
+          }
+        },
+        {
+          "id": "planning_board",
+          "label": "לוח תכנון",
+          "category": "paper",
+          "parent": "burn_planning_board",
+          "intact": "intact_planning_board",
+          "burnt": "burnt_planning_board",
+          "fire": "fire_planning_board",
+          "fireLocal": [
+            -0.3,
+            -0.07,
+            0.1
+          ],
+          "fireRoom": [
+            1.27,
+            1.98,
+            -2.13
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        },
+        {
+          "id": "waiting_bench",
+          "label": "ספת המתנה",
+          "category": "fabric",
+          "parent": "burn_waiting_bench",
+          "intact": "intact_waiting_bench",
+          "burnt": "burnt_waiting_bench",
+          "fire": "fire_waiting_bench",
+          "fireLocal": [
+            0.34,
+            0.45,
+            0.22
+          ],
+          "fireRoom": [
+            -2.51,
+            0.45,
+            0.38
+          ],
+          "triangles": {
+            "intact": 312,
+            "burnt": 348
+          }
+        },
+        {
+          "id": "plant",
+          "label": "עציץ",
+          "category": "fabric",
+          "parent": "burn_plant",
+          "intact": "intact_plant",
+          "burnt": "burnt_plant",
+          "fire": "fire_plant",
+          "fireLocal": [
+            0.06,
+            0.44,
+            0
+          ],
+          "fireRoom": [
+            2.69,
+            0.44,
+            -1.74
+          ],
+          "triangles": {
+            "intact": 172,
+            "burnt": 208
+          }
+        }
+      ]
+    },
+    {
+      "id": "shop",
+      "label": "חנות",
+      "model": "shop",
+      "size": [
+        6.64,
+        3.04,
+        4.84
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -3.32,
+          -0.168,
+          -2.42
+        ],
+        [
+          3.32,
+          3.117,
+          2.485
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        2.31,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        1.22,
+        0,
+        1.45
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          6.31,
+          4.49
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת החדר",
+          "category": "wood",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.69,
+            1.1,
+            0.02
+          ],
+          "fireRoom": [
+            2.572,
+            1.1,
+            1.7227
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "display_left",
+          "label": "מדף תצוגה",
+          "category": "wood",
+          "parent": "burn_display_left",
+          "intact": "intact_display_left",
+          "burnt": "burnt_display_left",
+          "fire": "fire_display_left",
+          "fireLocal": [
+            0,
+            1.28,
+            0.29
+          ],
+          "fireRoom": [
+            -2.08,
+            1.28,
+            -1.54
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        },
+        {
+          "id": "goods_left",
+          "label": "מוצרים ארוזים",
+          "category": "paper",
+          "parent": "burn_goods_left",
+          "intact": "intact_goods_left",
+          "burnt": "burnt_goods_left",
+          "fire": "fire_goods_left",
+          "fireLocal": [
+            0.21,
+            0.9,
+            0.16
+          ],
+          "fireRoom": [
+            -1.87,
+            0.9,
+            -1.67
+          ],
+          "triangles": {
+            "intact": 476,
+            "burnt": 512
+          }
+        },
+        {
+          "id": "display_right",
+          "label": "מדף תצוגה",
+          "category": "wood",
+          "parent": "burn_display_right",
+          "intact": "intact_display_right",
+          "burnt": "burnt_display_right",
+          "fire": "fire_display_right",
+          "fireLocal": [
+            0,
+            1.28,
+            0.29
+          ],
+          "fireRoom": [
+            -0.16,
+            1.28,
+            -1.54
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        },
+        {
+          "id": "goods_right",
+          "label": "מוצרים ארוזים",
+          "category": "paper",
+          "parent": "burn_goods_right",
+          "intact": "intact_goods_right",
+          "burnt": "burnt_goods_right",
+          "fire": "fire_goods_right",
+          "fireLocal": [
+            0.21,
+            0.9,
+            0.16
+          ],
+          "fireRoom": [
+            0.05,
+            0.9,
+            -1.67
+          ],
+          "triangles": {
+            "intact": 476,
+            "burnt": 512
+          }
+        },
+        {
+          "id": "checkout",
+          "label": "דלפק קופה",
+          "category": "wood",
+          "parent": "burn_checkout",
+          "intact": "intact_checkout",
+          "burnt": "burnt_checkout",
+          "fire": "fire_checkout",
+          "fireLocal": [
+            0.23,
+            0.8,
+            0.25
+          ],
+          "fireRoom": [
+            1.37,
+            0.8,
+            -0.62
+          ],
+          "triangles": {
+            "intact": 260,
+            "burnt": 296
+          }
+        },
+        {
+          "id": "register",
+          "label": "מסוף תשלום",
+          "category": "electrical",
+          "parent": "burn_register",
+          "intact": "intact_register",
+          "burnt": "burnt_register",
+          "fire": "fire_register",
+          "fireLocal": [
+            -0.05,
+            0.13,
+            0.1
+          ],
+          "fireRoom": [
+            1.35,
+            1.163,
+            -0.81
+          ],
+          "triangles": {
+            "intact": 92,
+            "burnt": 128
+          }
+        },
+        {
+          "id": "island_display",
+          "label": "תצוגה מרכזית",
+          "category": "paper",
+          "parent": "burn_island_display",
+          "intact": "intact_island_display",
+          "burnt": "burnt_island_display",
+          "fire": "fire_island_display",
+          "fireLocal": [
+            0,
+            0.72,
+            0.18
+          ],
+          "fireRoom": [
+            -1.1433,
+            0.72,
+            0.8985
+          ],
+          "triangles": {
+            "intact": 280,
+            "burnt": 316
+          }
+        },
+        {
+          "id": "awning",
+          "label": "סוכך תצוגה",
+          "category": "fabric",
+          "parent": "burn_awning",
+          "intact": "intact_awning",
+          "burnt": "burnt_awning",
+          "fire": "fire_awning",
+          "fireLocal": [
+            0,
+            -0.03,
+            0.23
+          ],
+          "fireRoom": [
+            -1.34,
+            2.71,
+            -1.7
+          ],
+          "triangles": {
+            "intact": 216,
+            "burnt": 252
+          }
+        }
+      ]
+    },
+    {
+      "id": "restaurant-kitchen",
+      "label": "מטבח מסעדה",
+      "model": "restaurant-kitchen",
+      "size": [
+        6.64,
+        3.04,
+        4.84
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -3.32,
+          -0.168,
+          -2.42
+        ],
+        [
+          3.32,
+          3.117,
+          2.485
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        2.31,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        1.4,
+        0,
+        1.47
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          6.31,
+          4.49
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת החדר",
+          "category": "wood",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.69,
+            1.1,
+            0.02
+          ],
+          "fireRoom": [
+            2.572,
+            1.1,
+            1.7227
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "range",
+          "label": "כיריים תעשייתיות",
+          "category": "metal",
+          "parent": "burn_range",
+          "intact": "intact_range",
+          "burnt": "burnt_range",
+          "fire": "fire_range",
+          "fireLocal": [
+            0.45,
+            0.96,
+            0.17
+          ],
+          "fireRoom": [
+            -0.82,
+            0.96,
+            -1.6
+          ],
+          "triangles": {
+            "intact": 524,
+            "burnt": 524
+          }
+        },
+        {
+          "id": "stockpot",
+          "label": "סיר בישול",
+          "category": "cooking_oil",
+          "parent": "burn_stockpot",
+          "intact": "intact_stockpot",
+          "burnt": "burnt_stockpot",
+          "fire": "fire_stockpot",
+          "fireLocal": [
+            0.07,
+            0.36,
+            0.04
+          ],
+          "fireRoom": [
+            -1.7,
+            1.36,
+            -1.94
+          ],
+          "triangles": {
+            "intact": 156,
+            "burnt": 156
+          }
+        },
+        {
+          "id": "extractor",
+          "label": "קולט אדים",
+          "category": "electrical",
+          "parent": "burn_extractor",
+          "intact": "intact_extractor",
+          "burnt": "burnt_extractor",
+          "fire": "fire_extractor",
+          "fireLocal": [
+            0.55,
+            0.11,
+            0.26
+          ],
+          "fireRoom": [
+            -0.72,
+            2.34,
+            -1.5
+          ],
+          "triangles": {
+            "intact": 244,
+            "burnt": 280
+          }
+        },
+        {
+          "id": "prep_station",
+          "label": "עמדת הכנה",
+          "category": "wood",
+          "parent": "burn_prep_station",
+          "intact": "intact_prep_station",
+          "burnt": "burnt_prep_station",
+          "fire": "fire_prep_station",
+          "fireLocal": [
+            -0.45,
+            0.99,
+            0.1
+          ],
+          "fireRoom": [
+            -1.17,
+            0.99,
+            0.59
+          ],
+          "triangles": {
+            "intact": 252,
+            "burnt": 288
+          }
+        },
+        {
+          "id": "cold_storage",
+          "label": "מקרר תעשייתי",
+          "category": "electrical",
+          "parent": "burn_cold_storage",
+          "intact": "intact_cold_storage",
+          "burnt": "burnt_cold_storage",
+          "fire": "fire_cold_storage",
+          "fireLocal": [
+            0.31,
+            0.62,
+            0.44
+          ],
+          "fireRoom": [
+            2.82,
+            0.62,
+            -1.35
+          ],
+          "triangles": {
+            "intact": 228,
+            "burnt": 264
+          }
+        },
+        {
+          "id": "wash_station",
+          "label": "כיור שטיפה",
+          "category": "metal",
+          "parent": "burn_wash_station",
+          "intact": "intact_wash_station",
+          "burnt": "burnt_wash_station",
+          "fire": "fire_wash_station",
+          "fireLocal": [
+            0.47,
+            0.66,
+            0.41
+          ],
+          "fireRoom": [
+            1.0,
+            0.66,
+            -1.43
+          ],
+          "triangles": {
+            "intact": 188,
+            "burnt": 188
+          }
+        },
+        {
+          "id": "utensil_rack",
+          "label": "מדף כלי מטבח",
+          "category": "wood",
+          "parent": "burn_utensil_rack",
+          "intact": "intact_utensil_rack",
+          "burnt": "burnt_utensil_rack",
+          "fire": "fire_utensil_rack",
+          "fireLocal": [
+            0.04,
+            1.29,
+            0.17
+          ],
+          "fireRoom": [
+            -2.69,
+            1.29,
+            0.59
+          ],
+          "triangles": {
+            "intact": 320,
+            "burnt": 356
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "label": "מחסן",
+      "model": "storage",
+      "size": [
+        6.64,
+        3.04,
+        4.84
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -3.32,
+          -0.168,
+          -2.42
+        ],
+        [
+          3.32,
+          3.117,
+          2.485
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        2.31,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        1.35,
+        0,
+        1.53
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          6.31,
+          4.49
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת החדר",
+          "category": "wood",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.69,
+            1.1,
+            0.02
+          ],
+          "fireRoom": [
+            2.572,
+            1.1,
+            1.7227
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 200
+          }
+        },
+        {
+          "id": "rack_1",
+          "label": "מדפי מחסן",
+          "category": "metal",
+          "parent": "burn_rack_1",
+          "intact": "intact_rack_1",
+          "burnt": "burnt_rack_1",
+          "fire": "fire_rack_1",
+          "fireLocal": [
+            0.58,
+            0.95,
+            0.4
+          ],
+          "fireRoom": [
+            -0.72,
+            0.95,
+            -1.32
+          ],
+          "triangles": {
+            "intact": 488,
+            "burnt": 488
+          }
+        },
+        {
+          "id": "cartons_1",
+          "label": "קרטונים על מדפים",
+          "category": "paper",
+          "parent": "burn_cartons_1",
+          "intact": "intact_cartons_1",
+          "burnt": "burnt_cartons_1",
+          "fire": "fire_cartons_1",
+          "fireLocal": [
+            0.36,
+            1.14,
+            0.31
+          ],
+          "fireRoom": [
+            -0.94,
+            1.14,
+            -1.41
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        },
+        {
+          "id": "rack_2",
+          "label": "מדפי מחסן",
+          "category": "metal",
+          "parent": "burn_rack_2",
+          "intact": "intact_rack_2",
+          "burnt": "burnt_rack_2",
+          "fire": "fire_rack_2",
+          "fireLocal": [
+            0.58,
+            0.95,
+            0.4
+          ],
+          "fireRoom": [
+            -2.26,
+            0.95,
+            -0.46
+          ],
+          "triangles": {
+            "intact": 488,
+            "burnt": 488
+          }
+        },
+        {
+          "id": "cartons_2",
+          "label": "קרטונים על מדפים",
+          "category": "paper",
+          "parent": "burn_cartons_2",
+          "intact": "intact_cartons_2",
+          "burnt": "burnt_cartons_2",
+          "fire": "fire_cartons_2",
+          "fireLocal": [
+            0.36,
+            1.14,
+            0.31
+          ],
+          "fireRoom": [
+            -2.35,
+            1.14,
+            -0.24
+          ],
+          "triangles": {
+            "intact": 144,
+            "burnt": 180
+          }
+        },
+        {
+          "id": "pallet",
+          "label": "משטח ארגזים",
+          "category": "paper",
+          "parent": "burn_pallet",
+          "intact": "intact_pallet",
+          "burnt": "burnt_pallet",
+          "fire": "fire_pallet",
+          "fireLocal": [
+            0.3,
+            0.47,
+            0.3
+          ],
+          "fireRoom": [
+            1.6914,
+            0.47,
+            -1.0011
+          ],
+          "triangles": {
+            "intact": 150,
+            "burnt": 186
+          }
+        },
+        {
+          "id": "hand_truck",
+          "label": "עגלת משא",
+          "category": "metal",
+          "parent": "burn_hand_truck",
+          "intact": "intact_hand_truck",
+          "burnt": "burnt_hand_truck",
+          "fire": "fire_hand_truck",
+          "fireLocal": [
+            0,
+            0.45,
+            0.13
+          ],
+          "fireRoom": [
+            2.6403,
+            0.45,
+            -0.8562
+          ],
+          "triangles": {
+            "intact": 184,
+            "burnt": 184
+          }
+        },
+        {
+          "id": "lockers",
+          "label": "לוקרים לציוד",
+          "category": "metal",
+          "parent": "burn_lockers",
+          "intact": "intact_lockers",
+          "burnt": "burnt_lockers",
+          "fire": "fire_lockers",
+          "fireLocal": [
+            0.31,
+            1.14,
+            0.27
+          ],
+          "fireRoom": [
+            1.69,
+            1.14,
+            -1.73
+          ],
+          "triangles": {
+            "intact": 248,
+            "burnt": 248
+          }
+        }
+      ]
+    },
+    {
+      "id": "stairwell",
+      "label": "חדר מדרגות",
+      "model": "stairwell",
+      "size": [
+        4.17,
+        4.16,
+        5.26
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        [
+          -1.61,
+          -0.17,
+          -2.05
+        ],
+        [
+          2.56,
+          4.16,
+          3.21
+        ]
+      ],
+      "doorExit": "door_exit",
+      "doorLocal": [
+        -1.45,
+        0,
+        2.42
+      ],
+      "rescue": "rescue_spot",
+      "rescueLocal": [
+        0.11,
+        0,
+        2.7
+      ],
+      "smokeNodes": {
+        "ceiling": "smoke_ceiling",
+        "mid": "smoke_mid",
+        "low": "smoke_low"
+      },
+      "flood": {
+        "node": "flood_surface",
+        "origin": [
+          0.1,
+          0,
+          2.49
+        ],
+        "size": [
+          3.02,
+          1.16
+        ]
+      },
+      "items": [
+        {
+          "id": "door",
+          "label": "דלת אש",
+          "category": "metal",
+          "parent": "burn_door",
+          "intact": "intact_door",
+          "burnt": "burnt_door",
+          "fire": "fire_door",
+          "fireLocal": [
+            -0.48,
+            1.08,
+            0.04
+          ],
+          "fireRoom": [
+            -0.9433,
+            1.08,
+            1.949
+          ],
+          "triangles": {
+            "intact": 164,
+            "burnt": 164
+          }
+        },
+        {
+          "id": "notice_board",
+          "label": "לוח חדר מדרגות",
+          "category": "paper",
+          "parent": "burn_notice_board",
+          "intact": "intact_notice_board",
+          "burnt": "burnt_notice_board",
+          "fire": "fire_notice_board",
+          "fireLocal": [
+            0,
+            0,
+            0.1
+          ],
+          "fireRoom": [
+            -0.55,
+            2.32,
+            -1.81
+          ],
+          "triangles": {
+            "intact": 72,
+            "burnt": 108
+          }
+        },
+        {
+          "id": "service_cabinet",
+          "label": "ארון שירות מתחת למדרגות",
+          "category": "electrical",
+          "parent": "burn_service_cabinet",
+          "intact": "intact_service_cabinet",
+          "burnt": "burnt_service_cabinet",
+          "fire": "fire_service_cabinet",
+          "fireLocal": [
+            0.1,
+            0.74,
+            0.2
+          ],
+          "fireRoom": [
+            -0.73,
+            0.74,
+            -1.28
+          ],
+          "triangles": {
+            "intact": 104,
+            "burnt": 140
+          }
+        }
+      ]
+    }
+  ],
+  "building": {
+    "floorHeight": 3.2,
+    "upperFloorNumbers": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "floorShellModel": "upper-shell",
+    "footprintXZ": [
+      [
+        -10.08,
+        -4.06
+      ],
+      [
+        14.08,
+        3.25
+      ]
+    ],
+    "floors": [
+      {
+        "number": 4,
+        "label": "מסחר",
+        "elevation": 9.6,
+        "shellNode": "shell_floor_4",
+        "rooms": [
+          {
+            "id": "f4_room_1",
+            "type": "shop",
+            "model": "shop",
+            "translation": [
+              -6.64,
+              9.6,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              9.6,
+              0.92
+            ],
+            "rescue": [
+              -5.42,
+              9.6,
+              -0.05
+            ]
+          },
+          {
+            "id": "f4_room_2",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              0,
+              9.6,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              9.6,
+              0.92
+            ],
+            "rescue": [
+              1.35,
+              9.6,
+              0.03
+            ]
+          },
+          {
+            "id": "f4_room_3",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              6.64,
+              9.6,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              9.6,
+              0.92
+            ],
+            "rescue": [
+              8.08,
+              9.6,
+              -0.08
+            ]
+          }
+        ],
+        "stairwell": "stairs_4_to_5",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              9.6,
+              2.42
+            ],
+            [
+              10.02,
+              9.6,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f4",
+          "panels": [
+            "elevator_door_left_f4",
+            "elevator_door_right_f4"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              9.6,
+              2.42
+            ],
+            [
+              13.44,
+              9.6,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 5,
+        "label": "מסעדה",
+        "elevation": 12.8,
+        "shellNode": "shell_floor_5",
+        "rooms": [
+          {
+            "id": "f5_room_1",
+            "type": "restaurant-kitchen",
+            "model": "restaurant-kitchen",
+            "translation": [
+              -6.64,
+              12.8,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              12.8,
+              0.92
+            ],
+            "rescue": [
+              -5.24,
+              12.8,
+              -0.03
+            ]
+          },
+          {
+            "id": "f5_room_2",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              0,
+              12.8,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              12.8,
+              0.92
+            ],
+            "rescue": [
+              1.35,
+              12.8,
+              0.03
+            ]
+          },
+          {
+            "id": "f5_room_3",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              6.64,
+              12.8,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              12.8,
+              0.92
+            ],
+            "rescue": [
+              8.08,
+              12.8,
+              -0.08
+            ]
+          }
+        ],
+        "stairwell": "stairs_5_to_6",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              12.8,
+              2.42
+            ],
+            [
+              10.02,
+              12.8,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f5",
+          "panels": [
+            "elevator_door_left_f5",
+            "elevator_door_right_f5"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              12.8,
+              2.42
+            ],
+            [
+              13.44,
+              12.8,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 6,
+        "label": "משרדים",
+        "elevation": 16.0,
+        "shellNode": "shell_floor_6",
+        "rooms": [
+          {
+            "id": "f6_room_1",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              -6.64,
+              16.0,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              16.0,
+              0.92
+            ],
+            "rescue": [
+              -5.2,
+              16.0,
+              -0.08
+            ]
+          },
+          {
+            "id": "f6_room_2",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              0,
+              16.0,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              16.0,
+              0.92
+            ],
+            "rescue": [
+              1.44,
+              16.0,
+              -0.08
+            ]
+          },
+          {
+            "id": "f6_room_3",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              6.64,
+              16.0,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              16.0,
+              0.92
+            ],
+            "rescue": [
+              7.99,
+              16.0,
+              0.03
+            ]
+          }
+        ],
+        "stairwell": "stairs_6_to_7",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              16.0,
+              2.42
+            ],
+            [
+              10.02,
+              16.0,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f6",
+          "panels": [
+            "elevator_door_left_f6",
+            "elevator_door_right_f6"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              16.0,
+              2.42
+            ],
+            [
+              13.44,
+              16.0,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 7,
+        "label": "חדרי ילדים",
+        "elevation": 19.2,
+        "shellNode": "shell_floor_7",
+        "rooms": [
+          {
+            "id": "f7_room_1",
+            "type": "kids-room",
+            "model": "kids-room",
+            "translation": [
+              -6.64,
+              19.2,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              19.2,
+              0.92
+            ],
+            "rescue": [
+              -5.35,
+              19.2,
+              0.08
+            ]
+          },
+          {
+            "id": "f7_room_2",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              0,
+              19.2,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              19.2,
+              0.92
+            ],
+            "rescue": [
+              1.44,
+              19.2,
+              -0.08
+            ]
+          },
+          {
+            "id": "f7_room_3",
+            "type": "kids-room",
+            "model": "kids-room",
+            "translation": [
+              6.64,
+              19.2,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              19.2,
+              0.92
+            ],
+            "rescue": [
+              7.93,
+              19.2,
+              0.08
+            ]
+          }
+        ],
+        "stairwell": "stairs_7_to_8",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              19.2,
+              2.42
+            ],
+            [
+              10.02,
+              19.2,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f7",
+          "panels": [
+            "elevator_door_left_f7",
+            "elevator_door_right_f7"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              19.2,
+              2.42
+            ],
+            [
+              13.44,
+              19.2,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 8,
+        "label": "חדרי ילדים",
+        "elevation": 22.4,
+        "shellNode": "shell_floor_8",
+        "rooms": [
+          {
+            "id": "f8_room_1",
+            "type": "kids-room",
+            "model": "kids-room",
+            "translation": [
+              -6.64,
+              22.4,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              22.4,
+              0.92
+            ],
+            "rescue": [
+              -5.35,
+              22.4,
+              0.08
+            ]
+          },
+          {
+            "id": "f8_room_2",
+            "type": "kids-room",
+            "model": "kids-room",
+            "translation": [
+              0,
+              22.4,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              22.4,
+              0.92
+            ],
+            "rescue": [
+              1.29,
+              22.4,
+              0.08
+            ]
+          },
+          {
+            "id": "f8_room_3",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              6.64,
+              22.4,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              22.4,
+              0.92
+            ],
+            "rescue": [
+              7.99,
+              22.4,
+              0.03
+            ]
+          }
+        ],
+        "stairwell": "stairs_8_to_9",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              22.4,
+              2.42
+            ],
+            [
+              10.02,
+              22.4,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f8",
+          "panels": [
+            "elevator_door_left_f8",
+            "elevator_door_right_f8"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              22.4,
+              2.42
+            ],
+            [
+              13.44,
+              22.4,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 9,
+        "label": "משרדים",
+        "elevation": 25.6,
+        "shellNode": "shell_floor_9",
+        "rooms": [
+          {
+            "id": "f9_room_1",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              -6.64,
+              25.6,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              25.6,
+              0.92
+            ],
+            "rescue": [
+              -5.2,
+              25.6,
+              -0.08
+            ]
+          },
+          {
+            "id": "f9_room_2",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              0,
+              25.6,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              25.6,
+              0.92
+            ],
+            "rescue": [
+              1.44,
+              25.6,
+              -0.08
+            ]
+          },
+          {
+            "id": "f9_room_3",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              6.64,
+              25.6,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              25.6,
+              0.92
+            ],
+            "rescue": [
+              7.99,
+              25.6,
+              0.03
+            ]
+          }
+        ],
+        "stairwell": "stairs_9_to_10",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              25.6,
+              2.42
+            ],
+            [
+              10.02,
+              25.6,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f9",
+          "panels": [
+            "elevator_door_left_f9",
+            "elevator_door_right_f9"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              25.6,
+              2.42
+            ],
+            [
+              13.44,
+              25.6,
+              -1.71
+            ]
+          ]
+        }
+      },
+      {
+        "number": 10,
+        "label": "שירות וניהול",
+        "elevation": 28.8,
+        "shellNode": "shell_floor_10",
+        "rooms": [
+          {
+            "id": "f10_room_1",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              -6.64,
+              28.8,
+              -1.5
+            ],
+            "door": [
+              -4.33,
+              28.8,
+              0.92
+            ],
+            "rescue": [
+              -5.2,
+              28.8,
+              -0.08
+            ]
+          },
+          {
+            "id": "f10_room_2",
+            "type": "storage",
+            "model": "storage",
+            "translation": [
+              0,
+              28.8,
+              -1.5
+            ],
+            "door": [
+              2.31,
+              28.8,
+              0.92
+            ],
+            "rescue": [
+              1.35,
+              28.8,
+              0.03
+            ]
+          },
+          {
+            "id": "f10_room_3",
+            "type": "office",
+            "model": "office",
+            "translation": [
+              6.64,
+              28.8,
+              -1.5
+            ],
+            "door": [
+              8.95,
+              28.8,
+              0.92
+            ],
+            "rescue": [
+              8.08,
+              28.8,
+              -0.08
+            ]
+          }
+        ],
+        "stairwell": "stairs_10_to_roof",
+        "corridor": {
+          "clearWidth": 2.2,
+          "centerline": [
+            [
+              -9.86,
+              28.8,
+              2.42
+            ],
+            [
+              10.02,
+              28.8,
+              2.42
+            ]
+          ]
+        },
+        "elevator": {
+          "threshold": "elevator_threshold_f10",
+          "panels": [
+            "elevator_door_left_f10",
+            "elevator_door_right_f10"
+          ],
+          "evacuation": false,
+          "approach": [
+            [
+              13.44,
+              28.8,
+              2.42
+            ],
+            [
+              13.44,
+              28.8,
+              -1.71
+            ]
+          ]
+        }
+      }
+    ],
+    "groundExit": [
+      13.1,
+      0,
+      4
+    ],
+    "stairs": {
+      "risersPerStorey": 16,
+      "riseMeters": 0.2,
+      "goingMeters": 0.31,
+      "flightWidthMeters": 1.18,
+      "turnLandingDepthMeters": 1.32,
+      "stops": [
+        {
+          "id": "stairs_3_to_4",
+          "from": 3,
+          "to": 4,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            6.4,
+            0
+          ],
+          "hideNodes": [
+            "stair_front_landing"
+          ],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              6.514,
+              2.51
+            ],
+            [
+              10.75,
+              6.6,
+              1.665
+            ],
+            [
+              10.75,
+              6.8,
+              1.355
+            ],
+            [
+              10.75,
+              7.0,
+              1.045
+            ],
+            [
+              10.75,
+              7.2,
+              0.735
+            ],
+            [
+              10.75,
+              7.4,
+              0.425
+            ],
+            [
+              10.75,
+              7.6,
+              0.115
+            ],
+            [
+              10.75,
+              7.8,
+              -0.195
+            ],
+            [
+              10.75,
+              8.0,
+              -0.505
+            ],
+            [
+              10.75,
+              8.0,
+              -1.32
+            ],
+            [
+              12.13,
+              8.0,
+              -1.32
+            ],
+            [
+              12.13,
+              8.2,
+              -0.505
+            ],
+            [
+              12.13,
+              8.4,
+              -0.195
+            ],
+            [
+              12.13,
+              8.6,
+              0.115
+            ],
+            [
+              12.13,
+              8.8,
+              0.425
+            ],
+            [
+              12.13,
+              9.0,
+              0.735
+            ],
+            [
+              12.13,
+              9.2,
+              1.045
+            ],
+            [
+              12.13,
+              9.4,
+              1.355
+            ],
+            [
+              12.13,
+              9.6,
+              1.665
+            ],
+            [
+              12.13,
+              9.6,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_4_to_5",
+          "from": 4,
+          "to": 5,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            9.6,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              9.6,
+              2.51
+            ],
+            [
+              10.75,
+              9.8,
+              1.665
+            ],
+            [
+              10.75,
+              10.0,
+              1.355
+            ],
+            [
+              10.75,
+              10.2,
+              1.045
+            ],
+            [
+              10.75,
+              10.4,
+              0.735
+            ],
+            [
+              10.75,
+              10.6,
+              0.425
+            ],
+            [
+              10.75,
+              10.8,
+              0.115
+            ],
+            [
+              10.75,
+              11.0,
+              -0.195
+            ],
+            [
+              10.75,
+              11.2,
+              -0.505
+            ],
+            [
+              10.75,
+              11.2,
+              -1.32
+            ],
+            [
+              12.13,
+              11.2,
+              -1.32
+            ],
+            [
+              12.13,
+              11.4,
+              -0.505
+            ],
+            [
+              12.13,
+              11.6,
+              -0.195
+            ],
+            [
+              12.13,
+              11.8,
+              0.115
+            ],
+            [
+              12.13,
+              12.0,
+              0.425
+            ],
+            [
+              12.13,
+              12.2,
+              0.735
+            ],
+            [
+              12.13,
+              12.4,
+              1.045
+            ],
+            [
+              12.13,
+              12.6,
+              1.355
+            ],
+            [
+              12.13,
+              12.8,
+              1.665
+            ],
+            [
+              12.13,
+              12.8,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_5_to_6",
+          "from": 5,
+          "to": 6,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            12.8,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              12.8,
+              2.51
+            ],
+            [
+              10.75,
+              13.0,
+              1.665
+            ],
+            [
+              10.75,
+              13.2,
+              1.355
+            ],
+            [
+              10.75,
+              13.4,
+              1.045
+            ],
+            [
+              10.75,
+              13.6,
+              0.735
+            ],
+            [
+              10.75,
+              13.8,
+              0.425
+            ],
+            [
+              10.75,
+              14.0,
+              0.115
+            ],
+            [
+              10.75,
+              14.2,
+              -0.195
+            ],
+            [
+              10.75,
+              14.4,
+              -0.505
+            ],
+            [
+              10.75,
+              14.4,
+              -1.32
+            ],
+            [
+              12.13,
+              14.4,
+              -1.32
+            ],
+            [
+              12.13,
+              14.6,
+              -0.505
+            ],
+            [
+              12.13,
+              14.8,
+              -0.195
+            ],
+            [
+              12.13,
+              15.0,
+              0.115
+            ],
+            [
+              12.13,
+              15.2,
+              0.425
+            ],
+            [
+              12.13,
+              15.4,
+              0.735
+            ],
+            [
+              12.13,
+              15.6,
+              1.045
+            ],
+            [
+              12.13,
+              15.8,
+              1.355
+            ],
+            [
+              12.13,
+              16.0,
+              1.665
+            ],
+            [
+              12.13,
+              16.0,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_6_to_7",
+          "from": 6,
+          "to": 7,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            16.0,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              16.0,
+              2.51
+            ],
+            [
+              10.75,
+              16.2,
+              1.665
+            ],
+            [
+              10.75,
+              16.4,
+              1.355
+            ],
+            [
+              10.75,
+              16.6,
+              1.045
+            ],
+            [
+              10.75,
+              16.8,
+              0.735
+            ],
+            [
+              10.75,
+              17.0,
+              0.425
+            ],
+            [
+              10.75,
+              17.2,
+              0.115
+            ],
+            [
+              10.75,
+              17.4,
+              -0.195
+            ],
+            [
+              10.75,
+              17.6,
+              -0.505
+            ],
+            [
+              10.75,
+              17.6,
+              -1.32
+            ],
+            [
+              12.13,
+              17.6,
+              -1.32
+            ],
+            [
+              12.13,
+              17.8,
+              -0.505
+            ],
+            [
+              12.13,
+              18.0,
+              -0.195
+            ],
+            [
+              12.13,
+              18.2,
+              0.115
+            ],
+            [
+              12.13,
+              18.4,
+              0.425
+            ],
+            [
+              12.13,
+              18.6,
+              0.735
+            ],
+            [
+              12.13,
+              18.8,
+              1.045
+            ],
+            [
+              12.13,
+              19.0,
+              1.355
+            ],
+            [
+              12.13,
+              19.2,
+              1.665
+            ],
+            [
+              12.13,
+              19.2,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_7_to_8",
+          "from": 7,
+          "to": 8,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            19.2,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              19.2,
+              2.51
+            ],
+            [
+              10.75,
+              19.4,
+              1.665
+            ],
+            [
+              10.75,
+              19.6,
+              1.355
+            ],
+            [
+              10.75,
+              19.8,
+              1.045
+            ],
+            [
+              10.75,
+              20.0,
+              0.735
+            ],
+            [
+              10.75,
+              20.2,
+              0.425
+            ],
+            [
+              10.75,
+              20.4,
+              0.115
+            ],
+            [
+              10.75,
+              20.6,
+              -0.195
+            ],
+            [
+              10.75,
+              20.8,
+              -0.505
+            ],
+            [
+              10.75,
+              20.8,
+              -1.32
+            ],
+            [
+              12.13,
+              20.8,
+              -1.32
+            ],
+            [
+              12.13,
+              21.0,
+              -0.505
+            ],
+            [
+              12.13,
+              21.2,
+              -0.195
+            ],
+            [
+              12.13,
+              21.4,
+              0.115
+            ],
+            [
+              12.13,
+              21.6,
+              0.425
+            ],
+            [
+              12.13,
+              21.8,
+              0.735
+            ],
+            [
+              12.13,
+              22.0,
+              1.045
+            ],
+            [
+              12.13,
+              22.2,
+              1.355
+            ],
+            [
+              12.13,
+              22.4,
+              1.665
+            ],
+            [
+              12.13,
+              22.4,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_8_to_9",
+          "from": 8,
+          "to": 9,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            22.4,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              22.4,
+              2.51
+            ],
+            [
+              10.75,
+              22.6,
+              1.665
+            ],
+            [
+              10.75,
+              22.8,
+              1.355
+            ],
+            [
+              10.75,
+              23.0,
+              1.045
+            ],
+            [
+              10.75,
+              23.2,
+              0.735
+            ],
+            [
+              10.75,
+              23.4,
+              0.425
+            ],
+            [
+              10.75,
+              23.6,
+              0.115
+            ],
+            [
+              10.75,
+              23.8,
+              -0.195
+            ],
+            [
+              10.75,
+              24.0,
+              -0.505
+            ],
+            [
+              10.75,
+              24.0,
+              -1.32
+            ],
+            [
+              12.13,
+              24.0,
+              -1.32
+            ],
+            [
+              12.13,
+              24.2,
+              -0.505
+            ],
+            [
+              12.13,
+              24.4,
+              -0.195
+            ],
+            [
+              12.13,
+              24.6,
+              0.115
+            ],
+            [
+              12.13,
+              24.8,
+              0.425
+            ],
+            [
+              12.13,
+              25.0,
+              0.735
+            ],
+            [
+              12.13,
+              25.2,
+              1.045
+            ],
+            [
+              12.13,
+              25.4,
+              1.355
+            ],
+            [
+              12.13,
+              25.6,
+              1.665
+            ],
+            [
+              12.13,
+              25.6,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_9_to_10",
+          "from": 9,
+          "to": 10,
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            25.6,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              25.6,
+              2.51
+            ],
+            [
+              10.75,
+              25.8,
+              1.665
+            ],
+            [
+              10.75,
+              26.0,
+              1.355
+            ],
+            [
+              10.75,
+              26.2,
+              1.045
+            ],
+            [
+              10.75,
+              26.4,
+              0.735
+            ],
+            [
+              10.75,
+              26.6,
+              0.425
+            ],
+            [
+              10.75,
+              26.8,
+              0.115
+            ],
+            [
+              10.75,
+              27.0,
+              -0.195
+            ],
+            [
+              10.75,
+              27.2,
+              -0.505
+            ],
+            [
+              10.75,
+              27.2,
+              -1.32
+            ],
+            [
+              12.13,
+              27.2,
+              -1.32
+            ],
+            [
+              12.13,
+              27.4,
+              -0.505
+            ],
+            [
+              12.13,
+              27.6,
+              -0.195
+            ],
+            [
+              12.13,
+              27.8,
+              0.115
+            ],
+            [
+              12.13,
+              28.0,
+              0.425
+            ],
+            [
+              12.13,
+              28.2,
+              0.735
+            ],
+            [
+              12.13,
+              28.4,
+              1.045
+            ],
+            [
+              12.13,
+              28.6,
+              1.355
+            ],
+            [
+              12.13,
+              28.8,
+              1.665
+            ],
+            [
+              12.13,
+              28.8,
+              2.51
+            ]
+          ]
+        },
+        {
+          "id": "stairs_10_to_roof",
+          "from": 10,
+          "to": "roof",
+          "roomType": "stairwell",
+          "model": "stairwell",
+          "translation": [
+            11.44,
+            28.8,
+            0
+          ],
+          "hideNodes": [],
+          "anchors": [
+            "stair_bottom",
+            "stair_turn",
+            "stair_top"
+          ],
+          "path": [
+            [
+              10.75,
+              28.8,
+              2.51
+            ],
+            [
+              10.75,
+              29.0,
+              1.665
+            ],
+            [
+              10.75,
+              29.2,
+              1.355
+            ],
+            [
+              10.75,
+              29.4,
+              1.045
+            ],
+            [
+              10.75,
+              29.6,
+              0.735
+            ],
+            [
+              10.75,
+              29.8,
+              0.425
+            ],
+            [
+              10.75,
+              30.0,
+              0.115
+            ],
+            [
+              10.75,
+              30.2,
+              -0.195
+            ],
+            [
+              10.75,
+              30.4,
+              -0.505
+            ],
+            [
+              10.75,
+              30.4,
+              -1.32
+            ],
+            [
+              12.13,
+              30.4,
+              -1.32
+            ],
+            [
+              12.13,
+              30.6,
+              -0.505
+            ],
+            [
+              12.13,
+              30.8,
+              -0.195
+            ],
+            [
+              12.13,
+              31.0,
+              0.115
+            ],
+            [
+              12.13,
+              31.2,
+              0.425
+            ],
+            [
+              12.13,
+              31.4,
+              0.735
+            ],
+            [
+              12.13,
+              31.6,
+              1.045
+            ],
+            [
+              12.13,
+              31.8,
+              1.355
+            ],
+            [
+              12.13,
+              32.0,
+              1.665
+            ],
+            [
+              12.13,
+              32.0,
+              2.51
+            ]
+          ]
+        }
+      ],
+      "lowerFlightsModel": "building-shell"
+    },
+    "roof": {
+      "model": "roof",
+      "translation": [
+        0,
+        32,
+        0
+      ],
+      "arrival": "roof_stair_arrival",
+      "exit": "roof_exit",
+      "destination": "roof_assembly_point",
+      "path": [
+        [
+          12.13,
+          32,
+          2.51
+        ],
+        [
+          10.02,
+          32,
+          2.42
+        ],
+        [
+          6.35,
+          32,
+          1.78
+        ]
+      ]
+    },
+    "elevator": {
+      "floors": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "car": "elevator_car_parked",
+      "parkedAt": 4,
+      "evacuation": false,
+      "lockedDuringFire": true
+    }
+  },
+  "stateContract": {
+    "parent": "burn_<name>",
+    "intact": "intact_<name>",
+    "burnt": "burnt_<name>",
+    "fire": "fire_<name>",
+    "default": "intact",
+    "burningUses": "intact",
+    "burntStoredScale": [
+      0,
+      0,
+      0
+    ],
+    "burntActiveScale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "effects": {
+    "flame": {
+      "atlas": "../fire-multifloor-v2/effects/fire.png",
+      "frames": 8,
+      "framePixels": 128,
+      "fps": 12
+    },
+    "smoke": {
+      "atlas": "../fire-multifloor-v2/effects/smoke.png",
+      "frames": 8,
+      "framePixels": 128,
+      "fps": 8,
+      "layers": [
+        "ceiling",
+        "mid",
+        "low"
+      ],
+      "modes": [
+        {
+          "id": "off",
+          "label": "ללא",
+          "opacity": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "light",
+          "label": "קל",
+          "opacity": [
+            0.3,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "medium",
+          "label": "בינוני",
+          "opacity": [
+            0.47,
+            0.27,
+            0
+          ]
+        },
+        {
+          "id": "heavy",
+          "label": "כבד",
+          "opacity": [
+            0.66,
+            0.55,
+            0.42
+          ]
+        }
+      ]
+    },
+    "flood": {
+      "module": "effects.mjs",
+      "anchor": "flood_surface",
+      "maxDepthMeters": 0.32,
+      "fillMetersPerSecond": 0.18
+    }
+  }
+}
