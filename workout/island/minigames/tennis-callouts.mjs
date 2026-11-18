@@ -34,3 +34,40 @@ export function playCall(context,destination,kind,{level=.85,random=Math.random}
   return end+.035+v.burst-context.currentTime;
  }catch{return 0;}
 }
+/** v24.5 recorded calls (Roy, 18/11/2026, after v24.4: "it sounds a bit processed and not good... like in a real tennis match... if needed we
+ * will record"). The synthesised voice is not tuned further: this is the hook for real recordings. Drop up to three takes per call in
+ * assets/tennis-callouts-rec/ as out-1..3 and net-1..3 (.ogg and/or .mp3) and list them in that folder's takes.json (the list keeps the game from
+ * asking the server for files that are not there; add each file to offline-manifest.json games.tennis too, then run tools/offline-shell.mjs,
+ * so the phone keeps it offline). Each call plays one recorded take at random, never the same take twice in a row while there are two or more
+ * (a shuffled bag); a call with no take that decodes keeps the synthesised voice, as does ?tennisCalloutRec=0 (or ?tennisCallouts=0). */
+export function tennisCalloutRecEnabled(search=globalThis.location?.search||''){return param('tennisCalloutRec',search)!=='0'&&tennisCalloutsEnabled(search);}
+export const CALLOUT_REC_DIR='assets/tennis-callouts-rec/';
+export const CALLOUT_REC_LIST=CALLOUT_REC_DIR+'takes.json';
+export const CALLOUT_REC_TAKES=3;
+const TAKE=/^(out|net)-([1-9])\.(ogg|mp3)$/;
+/** From the names in takes.json: per call, per take number, the files to try in order (the playable format first). */
+export function recordedTakes(names,{ogg=true}={}){
+ const found={out:new Map(),net:new Map()};
+ for(const name of Array.isArray(names)?names:[]){const m=TAKE.exec(String(name).split('/').pop());if(!m||+m[2]>CALLOUT_REC_TAKES)continue;const list=found[m[1]].get(+m[2])||[];if(!list.some(f=>f.ext===m[3]))list.push({ext:m[3],path:CALLOUT_REC_DIR+m[0]});found[m[1]].set(+m[2],list);}
+ const order=f=>(f.ext==='ogg')===ogg?0:1,out={};
+ for(const kind of ['out','net'])out[kind]=[...found[kind].entries()].sort((a,b)=>a[0]-b[0]).map(([take,files])=>({take,files:files.sort((a,b)=>order(a)-order(b)).map(f=>f.path)}));
+ return out;
+}
+/** A shuffled bag: every take once in random order, then a new bag that never starts with the take just played. */
+export function createTakeBag(count,random=Math.random){
+ let bag=[],last=-1;
+ return {next(){if(count<=0)return -1;if(count===1)return last=0;if(!bag.length){bag=Array.from({length:count},(_,i)=>i);for(let i=bag.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]];}if(bag[bag.length-1]===last)[bag[0],bag[bag.length-1]]=[bag[bag.length-1],bag[0]];}return last=bag.pop();}};
+}
+/** Load the recorded takes into AudioBuffers: {out:[AudioBuffer], net:[AudioBuffer]} (empty lists when there are none or nothing decodes).
+ * `base` is this module's URL (the paths are relative to the island root). One take = its first file that loads and decodes. */
+export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,ogg=true,version='island-v2-20261107-18'}={}){
+ const out={out:[],net:[]};
+ try{
+  const response=await fetcher(new URL('../'+CALLOUT_REC_LIST+'?v='+version,base));if(!response?.ok)return out;
+  const list=await response.json(),takes=recordedTakes(list?.takes,{ogg});
+  for(const kind of ['out','net'])for(const {files} of takes[kind])for(const path of files){
+   try{const file=await fetcher(new URL('../'+path+'?v='+version,base));if(!file?.ok)continue;out[kind].push(await context.decodeAudioData(await file.arrayBuffer()));break;}catch{}
+  }
+ }catch{}
+ return out;
+}
