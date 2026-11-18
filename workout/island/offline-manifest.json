@@ -1149,28 +1149,31 @@
    "assets/alpine-themes-v23/village/village-pine.glb"
   ],
   "tennis": [
-   "assets/audio/g4e/racket.ogg",
-   "assets/audio/g4e/bounce.ogg",
-   "assets/audio/g4e/net.ogg",
-   "assets/audio/g4e/applause.ogg",
-   "assets/audio/g4e/applause-short.ogg",
-   "assets/audio/g4e/applause-medium.ogg",
    "assets/audio/g4e/applause-large.ogg",
-   "assets/audio/g4e/stadium-bed.ogg",
-   "assets/audio/g4e/near-point-oh.ogg",
-   "assets/audio/g4e/mistake-aw.ogg",
-   "assets/audio/g4e/pre-serve-hush.ogg",
+   "assets/audio/g4e/applause-medium.ogg",
+   "assets/audio/g4e/applause-short.ogg",
+   "assets/audio/g4e/applause.ogg",
+   "assets/audio/g4e/bounce.ogg",
    "assets/audio/g4e/match-cheer.ogg",
+   "assets/audio/g4e/mistake-aw.ogg",
+   "assets/audio/g4e/near-point-oh.ogg",
+   "assets/audio/g4e/net.ogg",
+   "assets/audio/g4e/pre-serve-hush.ogg",
+   "assets/audio/g4e/racket.ogg",
+   "assets/audio/g4e/stadium-bed.ogg",
+   "assets/kid-full.glb",
+   "assets/models/adult-man-512.glb",
+   "assets/models/adult-woman-512.glb",
+   "assets/models/palm-tree-512.glb",
+   "assets/tennis-callouts-rec/net-1.mp3",
+   "assets/tennis-callouts-rec/net-1.ogg",
+   "assets/tennis-callouts-rec/net-2.mp3",
+   "assets/tennis-callouts-rec/net-2.ogg",
+   "assets/tennis-callouts-rec/net-3.mp3",
+   "assets/tennis-callouts-rec/net-3.ogg",
+   "assets/tennis-callouts-rec/out-1.mp3",
+   "assets/tennis-callouts-rec/out-1.ogg",
    "assets/tennis-callouts-rec/takes.json",
-   "assets/tennis-stadium-v1/stand-10m.glb",
-   "assets/tennis-stadium-v1/ad-board.glb",
-   "assets/tennis-stadium-v1/umpire-chair.glb",
-   "assets/tennis-stadium-v1/player-bench.glb",
-   "assets/tennis-stadium-v1/scoreboard.glb",
-   "assets/tennis-stadium-v1/floodlight.glb",
-   "assets/tennis-stadium-v1/crowd-atlas.webp",
-   "assets/tennis-stadium-v1/evening-city.png",
-   "assets/tennis-stadium-v1/score-display.png",
    "assets/tennis-crowd-v22/assets.json",
    "assets/tennis-crowd-v22/lod-config.json",
    "assets/tennis-crowd-v22/runtime/lod0/fan-01.glb",
@@ -1209,26 +1212,20 @@
    "assets/tennis-crowd-v22/runtime/lod2/fan-10.glb",
    "assets/tennis-crowd-v22/runtime/lod2/fan-11.glb",
    "assets/tennis-crowd-v22/runtime/lod2/fan-12.glb",
-   "assets/tennis-motion-v1/core.json",
-   "assets/kid-full.glb",
-   "assets/models/adult-man-512.glb",
-   "assets/models/adult-woman-512.glb",
-   "assets/models/palm-tree-512.glb",
-   "vendor/draco/draco_decoder.wasm",
-   "vendor/draco/draco_wasm_wrapper.js",
-   "assets/tennis-v7/court-clay.glb",
-   "assets/tennis-v7/court-hard.glb",
-   "assets/tennis-v7/court-grass.glb",
-   "assets/tennis-v7/venue.glb",
-   "assets/tennis-v7/net.glb",
-   "assets/tennis-v7/ball.glb",
-   "assets/tennis-v7/crowd-prototypes.glb",
-   "assets/tennis-v7/crew.glb",
-   "assets/tennis-v7/crowd.json",
    "assets/tennis-grip-v1/racket.glb",
+   "assets/tennis-motion-v1/core.json",
+   "assets/tennis-stadium-v1/ad-board.glb",
+   "assets/tennis-stadium-v1/crowd-atlas.webp",
+   "assets/tennis-stadium-v1/evening-city.png",
+   "assets/tennis-stadium-v1/floodlight.glb",
+   "assets/tennis-stadium-v1/player-bench.glb",
+   "assets/tennis-stadium-v1/score-display.png",
+   "assets/tennis-stadium-v1/scoreboard.glb",
+   "assets/tennis-stadium-v1/stand-10m.glb",
+   "assets/tennis-stadium-v1/umpire-chair.glb",
    "assets/tennis-ui-fx-v1/out-cross.png",
-   "assets/tennis-ui-fx-v1/serve-arrow-left.png",
    "assets/tennis-ui-fx-v1/serve-arrow-center.png",
+   "assets/tennis-ui-fx-v1/serve-arrow-left.png",
    "assets/tennis-ui-fx-v1/serve-arrow-right.png",
    "assets/tennis-ui-fx-v1/sign-out.png",
    "assets/tennis-ui-v2/button-drop-idle.svg",
@@ -1240,7 +1237,18 @@
    "assets/tennis-ui-v2/button-smash-idle.svg",
    "assets/tennis-ui-v2/button-smash-pressed.svg",
    "assets/tennis-ui-v2/fx-net.svg",
-   "assets/tennis-ui-v2/fx-out.svg"
+   "assets/tennis-ui-v2/fx-out.svg",
+   "assets/tennis-v7/ball.glb",
+   "assets/tennis-v7/court-clay.glb",
+   "assets/tennis-v7/court-grass.glb",
+   "assets/tennis-v7/court-hard.glb",
+   "assets/tennis-v7/crew.glb",
+   "assets/tennis-v7/crowd-prototypes.glb",
+   "assets/tennis-v7/crowd.json",
+   "assets/tennis-v7/net.glb",
+   "assets/tennis-v7/venue.glb",
+   "vendor/draco/draco_decoder.wasm",
+   "vendor/draco/draco_wasm_wrapper.js"
   ],
   "racing": [
    "assets/racing-audio-v2/engine-high.mp3",
@@ -4313,9 +4321,41 @@
    "27d622586eee9fae",
    361053
   ],
+  "assets/tennis-callouts-rec/net-1.mp3": [
+   "f28646c753fa7cff",
+   6195
+  ],
+  "assets/tennis-callouts-rec/net-1.ogg": [
+   "364da496cb8fe9ac",
+   9512
+  ],
+  "assets/tennis-callouts-rec/net-2.mp3": [
+   "84506ddd05bb1f52",
+   6143
+  ],
+  "assets/tennis-callouts-rec/net-2.ogg": [
+   "183f4733b30cf4ca",
+   9145
+  ],
+  "assets/tennis-callouts-rec/net-3.mp3": [
+   "0ccfc0a11125f4fd",
+   8854
+  ],
+  "assets/tennis-callouts-rec/net-3.ogg": [
+   "dfe49acc70a4e93e",
+   11634
+  ],
+  "assets/tennis-callouts-rec/out-1.mp3": [
+   "96319c8dec259744",
+   7576
+  ],
+  "assets/tennis-callouts-rec/out-1.ogg": [
+   "c0b36b3b03bc6c2d",
+   10292
+  ],
   "assets/tennis-callouts-rec/takes.json": [
-   "e53d666032a43c65",
-   338
+   "8d04ec52714a0d8e",
+   536
   ],
   "assets/tennis-crowd-v22/assets.json": [
    "cdfb1c7ed5fa0a56",
