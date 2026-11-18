@@ -1,17 +1,17 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-17';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-17';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-18';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-18';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-17';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-17';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-17';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-17';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-17';
-import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-17';
-import {createNavalSupplyView} from './naval-supply-view.mjs?v=island-v2-20261107-17';
-import {createNavalStructure,createNavalBasePlate,navalBaseLightSea} from './naval-base-view.mjs?v=island-v2-20261107-17';
-import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-17';
-import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-17';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-18';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-18';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-18';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-18';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-18';
+import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-18';
+import {createNavalSupplyView} from './naval-supply-view.mjs?v=island-v2-20261107-18';
+import {createNavalStructure,createNavalBasePlate,navalBaseLightSea} from './naval-base-view.mjs?v=island-v2-20261107-18';
+import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-18';
+import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-18';
 import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.

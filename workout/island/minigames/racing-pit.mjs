@@ -9,8 +9,8 @@
 //  stop   kinematic and identical for everybody: the entry ramp from the end of the last corner into the pit lane (fast lane 6.2 m beyond the asphalt) at 20 m/s, the
 //         car's own box (working lane, 9 m out), a 2.2-2.8 s stop for the computer; the player taps the tyre change (2 s; it starts by itself after 0.8 s), then the
 //         lane and the exit ramp back onto the road. The line is crossed inside the pit lane, gates count as usual; a stop never starts on the last lap.
-import {PIT,PIT_AUTO,autoStopLap,pitLane,tyreWorn,ease,easeSlope} from './racing-v24.mjs?v=island-v2-20261107-17';
-import {PIT_SEQ} from './racing-v24-4.mjs?v=island-v2-20261107-17';
+import {PIT,PIT_AUTO,autoStopLap,pitLane,tyreWorn,ease,easeSlope} from './racing-v24.mjs?v=island-v2-20261107-18';
+import {PIT_SEQ} from './racing-v24-4.mjs?v=island-v2-20261107-18';
 const phoneFixDEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?.search||'');return p.get('phoneFixes')!=='0'&&p.get('phoneFixD')!=='0';}catch{return true;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // racing-v24.1 (`auto`: the model's config.pitAuto, which the session sets unless ?racingPitAuto=0): stops in every race of PIT_AUTO.distance metres or more (two

@@ -151,6 +151,6 @@ test('wiring: the session sends the flags, the view loads the sequence on the fo
  const session=await read('minigames/racing-session.mjs'),view=await read('minigames/racing-view.mjs'),seq=await read('minigames/racing-pit-seq.mjs'),audio=await read('minigames/racing-audio.mjs');
  assert.match(session,/pitSeq:v244\.pitSeq/);assert.match(session,/changeButton:!model\.pit\.seq/);assert.match(session,/v5:v244\.audioV5,idle:v244\.idle&&engineOn,pass:v244\.pass/);
  assert.match(session,/kerb:v244\.audioV5\?0:/,'the kerb rumble (also all along the pit lane) is off with v5');
- assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=island-v2-20261107-17'\)/);assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
- assert.match(seq,/racing-pit-sequence\.mjs\?v=island-v2-20261107-17/);assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
+ assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=island-v2-20261107-18'\)/);assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
+ assert.match(seq,/racing-pit-sequence\.mjs\?v=island-v2-20261107-18/);assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
 });

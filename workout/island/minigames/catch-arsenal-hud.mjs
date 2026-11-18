@@ -5,7 +5,7 @@
  * where he will be when he reaches the strip and the dot is where the strip lands. A "close time" chip while he slows.
  * Pure presentation: rules in catch-weapons.mjs, keys (f / x fire, q / c tool) in the session. The pure helpers
  * (zoneWorld, dotWorld, toolLabel, pipStates7) are exported for the tests. Strings fall back to this module. */
-import {STRINGS as TOOL_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-17';
+import {STRINGS as TOOL_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-18';
 
 export const STRINGS = Object.freeze({...TOOL_STRINGS,
   'catch.fire': 'ירי', 'catch.fireHint7': 'ירי בכלי שנבחר', 'catch.ammo7': 'נשאר: {count}', 'catch.reticle7': 'אזור המטרה של הכלי',

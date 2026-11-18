@@ -53,7 +53,7 @@ function partMaterial(T,colors){
 }
 
 /** Loads the three levels (GLTFLoader passed in, like the other trackside loaders) and builds the shared geometries. */
-export async function loadFormulaAll({T,GLTFLoader,base=new URL('../assets/racing-formula-cars-v1/',import.meta.url),version='island-v2-20261107-17'}){
+export async function loadFormulaAll({T,GLTFLoader,base=new URL('../assets/racing-formula-cars-v1/',import.meta.url),version='island-v2-20261107-18'}){
  const loader=new GLTFLoader(),scale=FA.scale;
  const levels=await Promise.all([0,1,2].map(async level=>{const gltf=await loader.loadAsync(new URL(`formula-lod${level}.glb?v=${version}`,base).href);const root=gltf.scene.getObjectByName('formula_car')||gltf.scene;return root;}));
  return levels.map((root,level)=>{
