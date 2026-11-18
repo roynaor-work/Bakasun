@@ -129,10 +129,11 @@ test('offline: racing is a game group with exactly the v7 files and the formula 
  assert.equal(V244.length,31);
  // v24.2 (offline v25): the racing environment models and textures the game already loads were missing from the offline list; they are listed one by one here.
  const ENV=manifest.games.racing.filter(p=>/^design\/racing-environment-v2\/(runtime|textures)\//.test(p));assert.ok(ENV.length>=10,'the racing environment v2 runtime files are in the offline list');
- assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22,...V24,...V244,...ENV].sort());
+ const REC=manifest.games.racing.filter(p=>/^assets\/racing-rec\//.test(p));assert.ok(REC.length>=6,'the recorded engine clips are in the offline list');
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22,...V24,...V244,...ENV,...REC].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===48+V22.length+V24.length+V244.length+ENV.length);
+ assert.ok(pathsFor(manifest,['racing']).length===48+V22.length+V24.length+V244.length+ENV.length+REC.length);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 
