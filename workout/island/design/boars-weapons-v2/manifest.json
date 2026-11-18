@@ -1,0 +1,1166 @@
+{
+  "schemaVersion": 1,
+  "pack": "boars-weapons-v2",
+  "license": "CC0-1.0",
+  "sourceLicense": "MIT",
+  "seed": 240117,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "scope": "Design assets and isolated preview only; no game integration",
+  "coordinates": {
+    "units": "game meters; scale by existing weapon radius",
+    "up": "+Y",
+    "forward": "+Z",
+    "origin": "shell visual center"
+  },
+  "limits": {
+    "shellTriangles": 400,
+    "audioBytesPerFile": 50000,
+    "atlasBytes": 600000
+  },
+  "models": {
+    "cannon": {
+      "file": "models/shell-regular.glb",
+      "triangles": 288,
+      "bounds": {
+        "min": [
+          -0.16899999976158142,
+          -0.16899999976158142,
+          -0.44999998807907104
+        ],
+        "max": [
+          0.16899999976158142,
+          0.16899999976158142,
+          0.46000000834465027
+        ]
+      }
+    },
+    "cannon2": {
+      "file": "models/shell-large.glb",
+      "triangles": 320,
+      "bounds": {
+        "min": [
+          -0.23999999463558197,
+          -0.23999999463558197,
+          -0.5899999737739563
+        ],
+        "max": [
+          0.23999999463558197,
+          0.23999999463558197,
+          0.5899999737739563
+        ]
+      }
+    },
+    "cannon3": {
+      "file": "models/shell-mortar.glb",
+      "triangles": 248,
+      "bounds": {
+        "min": [
+          -0.23000000417232513,
+          -0.23000000417232513,
+          -0.47999998927116394
+        ],
+        "max": [
+          0.23000000417232513,
+          0.23000000417232513,
+          0.38499999046325684
+        ]
+      }
+    },
+    "crater": {
+      "file": "models/ground-crater.glb",
+      "triangles": 140,
+      "bounds": {
+        "min": [
+          -1.0,
+          -0.1899999976158142,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.054999999701976776,
+          1.0
+        ]
+      }
+    }
+  },
+  "atlas": {
+    "file": "textures/weapons-atlas.png",
+    "width": 1024,
+    "height": 2048,
+    "tileSize": 128,
+    "gutterPixels": 4,
+    "alpha": "straight",
+    "colorSpace": "sRGB",
+    "origin": "top-left",
+    "sequences": {
+      "explosion-regular": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 768,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 896,
+            "y": 0,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 16,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.5
+      },
+      "explosion-large": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 768,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 896,
+            "y": 128,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 16,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.5
+      },
+      "explosion-mortar": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 768,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 896,
+            "y": 256,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 16,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.5
+      },
+      "cannon-smoke": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 384,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 12,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.5
+      },
+      "shell-trail": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 512,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 16,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.375
+      },
+      "shotgun-cloud": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 512,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 640,
+            "y": 640,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 24,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.25
+      },
+      "shotgun-impact-1": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 768,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 768,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 768,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 768,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 24,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.16666666666666666
+      },
+      "shotgun-impact-2": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 896,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 896,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 896,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 896,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 24,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.16666666666666666
+      },
+      "shotgun-impact-3": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1024,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1024,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1024,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 1024,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 24,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.16666666666666666
+      },
+      "shotgun-impact-4": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1152,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1152,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1152,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 1152,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 24,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 0.16666666666666666
+      },
+      "shotgun-muzzle": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1280,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1280,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1280,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 1280,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 40,
+        "loop": false,
+        "blend": "additive",
+        "pivot": [
+          0.25,
+          0.5
+        ],
+        "durationSeconds": 0.1
+      },
+      "ground-crater": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1408,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1408,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1408,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 1,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 3.0,
+        "staticVariants": true
+      },
+      "pellet": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1536,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1536,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1536,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 1,
+        "loop": false,
+        "blend": "normal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "durationSeconds": 3.0,
+        "staticVariants": true
+      },
+      "cannon-muzzle": {
+        "frames": [
+          {
+            "x": 0,
+            "y": 1664,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 128,
+            "y": 1664,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 256,
+            "y": 1664,
+            "w": 128,
+            "h": 128
+          },
+          {
+            "x": 384,
+            "y": 1664,
+            "w": 128,
+            "h": 128
+          }
+        ],
+        "fps": 32,
+        "loop": false,
+        "blend": "additive",
+        "pivot": [
+          0.25,
+          0.5
+        ],
+        "durationSeconds": 0.125
+      }
+    }
+  },
+  "audio": {
+    "cannon": {
+      "sources": {
+        "ogg": "audio/cannon.ogg",
+        "mp3": "audio/cannon.mp3"
+      },
+      "sourceDurationSeconds": 1.05,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240117,
+      "provenance": "original procedural synthesis"
+    },
+    "cannon2": {
+      "sources": {
+        "ogg": "audio/cannon2.ogg",
+        "mp3": "audio/cannon2.mp3"
+      },
+      "sourceDurationSeconds": 1.35,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240218,
+      "provenance": "original procedural synthesis"
+    },
+    "cannon3": {
+      "sources": {
+        "ogg": "audio/cannon3.ogg",
+        "mp3": "audio/cannon3.mp3"
+      },
+      "sourceDurationSeconds": 0.72,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240319,
+      "provenance": "original procedural synthesis"
+    },
+    "shotgun": {
+      "sources": {
+        "ogg": "audio/shotgun.ogg",
+        "mp3": "audio/shotgun.mp3"
+      },
+      "sourceDurationSeconds": 0.56,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240420,
+      "provenance": "original procedural synthesis"
+    },
+    "shotgun2": {
+      "sources": {
+        "ogg": "audio/shotgun2.ogg",
+        "mp3": "audio/shotgun2.mp3"
+      },
+      "sourceDurationSeconds": 0.73,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240521,
+      "provenance": "original procedural synthesis"
+    },
+    "shotgun3": {
+      "sources": {
+        "ogg": "audio/shotgun3.ogg",
+        "mp3": "audio/shotgun3.mp3"
+      },
+      "sourceDurationSeconds": 0.42,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240622,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-cannon": {
+      "sources": {
+        "ogg": "audio/impact-cannon.ogg",
+        "mp3": "audio/impact-cannon.mp3"
+      },
+      "sourceDurationSeconds": 0.82,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240723,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-cannon2": {
+      "sources": {
+        "ogg": "audio/impact-cannon2.ogg",
+        "mp3": "audio/impact-cannon2.mp3"
+      },
+      "sourceDurationSeconds": 1.1,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240824,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-cannon3": {
+      "sources": {
+        "ogg": "audio/impact-cannon3.ogg",
+        "mp3": "audio/impact-cannon3.mp3"
+      },
+      "sourceDurationSeconds": 0.94,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -2.62,
+      "seed": 240925,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-shotgun-1": {
+      "sources": {
+        "ogg": "audio/impact-shotgun-1.ogg",
+        "mp3": "audio/impact-shotgun-1.mp3"
+      },
+      "sourceDurationSeconds": 0.19,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -3.88,
+      "seed": 241026,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-shotgun-2": {
+      "sources": {
+        "ogg": "audio/impact-shotgun-2.ogg",
+        "mp3": "audio/impact-shotgun-2.mp3"
+      },
+      "sourceDurationSeconds": 0.215,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -3.88,
+      "seed": 241127,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-shotgun-3": {
+      "sources": {
+        "ogg": "audio/impact-shotgun-3.ogg",
+        "mp3": "audio/impact-shotgun-3.mp3"
+      },
+      "sourceDurationSeconds": 0.24,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -3.88,
+      "seed": 241228,
+      "provenance": "original procedural synthesis"
+    },
+    "impact-shotgun-4": {
+      "sources": {
+        "ogg": "audio/impact-shotgun-4.ogg",
+        "mp3": "audio/impact-shotgun-4.mp3"
+      },
+      "sourceDurationSeconds": 0.265,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -3.88,
+      "seed": 241329,
+      "provenance": "original procedural synthesis"
+    },
+    "shellWhistle": {
+      "sources": {
+        "ogg": "audio/shellWhistle.ogg",
+        "mp3": "audio/shellWhistle.mp3"
+      },
+      "sourceDurationSeconds": 0.65,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.87,
+      "seed": 241430,
+      "provenance": "original procedural synthesis"
+    },
+    "mortarWhistle": {
+      "sources": {
+        "ogg": "audio/mortarWhistle.ogg",
+        "mp3": "audio/mortarWhistle.mp3"
+      },
+      "sourceDurationSeconds": 0.93,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.87,
+      "seed": 241531,
+      "provenance": "original procedural synthesis"
+    }
+  },
+  "weapons": {
+    "cannon": {
+      "model": "cannon",
+      "fireAudio": "cannon",
+      "flightAudio": "shellWhistle",
+      "impactAudio": "impact-cannon",
+      "explosion": "explosion-regular",
+      "smoke": "cannon-smoke",
+      "trail": "shell-trail",
+      "muzzle": "cannon-muzzle",
+      "crater": "ground-crater",
+      "craterVariant": 0,
+      "preview": {
+        "flightSeconds": 0.7,
+        "arcHeight": 0.7,
+        "effectScale": 1
+      }
+    },
+    "cannon2": {
+      "model": "cannon2",
+      "fireAudio": "cannon2",
+      "flightAudio": "shellWhistle",
+      "impactAudio": "impact-cannon2",
+      "explosion": "explosion-large",
+      "smoke": "cannon-smoke",
+      "trail": "shell-trail",
+      "muzzle": "cannon-muzzle",
+      "crater": "ground-crater",
+      "craterVariant": 1,
+      "preview": {
+        "flightSeconds": 0.82,
+        "arcHeight": 0.85,
+        "effectScale": 1.35
+      }
+    },
+    "cannon3": {
+      "model": "cannon3",
+      "fireAudio": "cannon3",
+      "flightAudio": "mortarWhistle",
+      "impactAudio": "impact-cannon3",
+      "explosion": "explosion-mortar",
+      "smoke": "cannon-smoke",
+      "trail": "shell-trail",
+      "muzzle": "cannon-muzzle",
+      "crater": "ground-crater",
+      "craterVariant": 2,
+      "preview": {
+        "flightSeconds": 1.12,
+        "arcHeight": 1.85,
+        "effectScale": 1.12
+      }
+    },
+    "shotgun": {
+      "fireAudio": "shotgun",
+      "cloud": "shotgun-cloud",
+      "pellet": "pellet",
+      "pelletVariant": 0,
+      "muzzle": "shotgun-muzzle",
+      "impactVariations": [
+        "shotgun-impact-1",
+        "shotgun-impact-2",
+        "shotgun-impact-3",
+        "shotgun-impact-4"
+      ],
+      "impactAudioVariations": [
+        "impact-shotgun-1",
+        "impact-shotgun-2",
+        "impact-shotgun-3",
+        "impact-shotgun-4"
+      ],
+      "preview": {
+        "pellets": 8,
+        "flightSeconds": 0.24,
+        "effectScale": 1
+      }
+    },
+    "shotgun2": {
+      "fireAudio": "shotgun2",
+      "cloud": "shotgun-cloud",
+      "pellet": "pellet",
+      "pelletVariant": 1,
+      "muzzle": "shotgun-muzzle",
+      "impactVariations": [
+        "shotgun-impact-1",
+        "shotgun-impact-2",
+        "shotgun-impact-3",
+        "shotgun-impact-4"
+      ],
+      "impactAudioVariations": [
+        "impact-shotgun-1",
+        "impact-shotgun-2",
+        "impact-shotgun-3",
+        "impact-shotgun-4"
+      ],
+      "preview": {
+        "pellets": 8,
+        "flightSeconds": 0.27,
+        "effectScale": 1.2
+      }
+    },
+    "shotgun3": {
+      "fireAudio": "shotgun3",
+      "cloud": "shotgun-cloud",
+      "pellet": "pellet",
+      "pelletVariant": 2,
+      "muzzle": "shotgun-muzzle",
+      "impactVariations": [
+        "shotgun-impact-1",
+        "shotgun-impact-2",
+        "shotgun-impact-3",
+        "shotgun-impact-4"
+      ],
+      "impactAudioVariations": [
+        "impact-shotgun-1",
+        "impact-shotgun-2",
+        "impact-shotgun-3",
+        "impact-shotgun-4"
+      ],
+      "preview": {
+        "pellets": 8,
+        "flightSeconds": 0.21,
+        "effectScale": 0.85
+      }
+    }
+  },
+  "preview": {
+    "html": "preview.html",
+    "viewport": [
+      844,
+      390
+    ],
+    "module": "preview.mjs",
+    "dependencies": [
+      "../../vendor/three.module.js",
+      "../../vendor/GLTFLoader.js",
+      "../../vendor/DRACOLoader.js",
+      "../../vendor/draco/draco_wasm_wrapper.js",
+      "../../vendor/draco/draco_decoder.wasm",
+      "../defense-v7/models/boar-amber-lod1.glb"
+    ],
+    "note": "Dependencies are read-only repository references; serve the repository root via HTTP."
+  },
+  "files": {
+    "models/ground-crater.glb": {
+      "bytes": 11544,
+      "sha256": "af01396d3eaf9e602f14b46007a90a80e99b7cbbec966b3311f7677b2642f673"
+    },
+    "models/shell-large.glb": {
+      "bytes": 25200,
+      "sha256": "5e8537a3eefc55f5275e333d74a59e2c65234661c8244feb5282e91756b91904"
+    },
+    "models/shell-mortar.glb": {
+      "bytes": 20024,
+      "sha256": "1de76b15de21a441f3c4b0ceedd03c51fa2a9755fd15653575a555664e37d6c3"
+    },
+    "models/shell-regular.glb": {
+      "bytes": 22848,
+      "sha256": "af75fa39b5455df2e33dddad618b34219b18dfdc3317411927ad5b93ea62fe58"
+    },
+    "textures/weapons-atlas.png": {
+      "bytes": 420930,
+      "sha256": "b957b919961ee9444ec9009042b7a116e181d4b8c1ee71b0d0a91e90456807ea"
+    },
+    "audio/cannon.mp3": {
+      "bytes": 6783,
+      "sha256": "8fed5cd359f61a4937e55a930ce82467be9d13c86cfce2f583ffeda83f69161e"
+    },
+    "audio/cannon.ogg": {
+      "bytes": 7031,
+      "sha256": "680ba892d3ee535ea7f76562ed5e6da73332f3442dd9878fa2d06561b5b66d76"
+    },
+    "audio/cannon2.mp3": {
+      "bytes": 8507,
+      "sha256": "a74e9c6805c50f5ceb07d974deb38b14d560dbc3e010de6e9186bd3a98fe34cd"
+    },
+    "audio/cannon2.ogg": {
+      "bytes": 7501,
+      "sha256": "6e88cc3cd49f573ed351cb4795891a0bcf5c5eb6a25c697d842f7844e64d476d"
+    },
+    "audio/cannon3.mp3": {
+      "bytes": 4746,
+      "sha256": "4db009dbfff14dc4249d104566cb87b4c5a98a0a414fb2792b88bf70eccc04ca"
+    },
+    "audio/cannon3.ogg": {
+      "bytes": 5655,
+      "sha256": "5d645b0411dba772220ff720167c12deddc2922fbec2f58a871baa2b33fb80b0"
+    },
+    "audio/impact-cannon.mp3": {
+      "bytes": 5373,
+      "sha256": "b616fd69bf1816c397028ab0f609f4019b05058ae0f30f81a096469f52a2502d"
+    },
+    "audio/impact-cannon.ogg": {
+      "bytes": 6500,
+      "sha256": "194436d52d687d81491874aa801ee126696521ac87957e78f36ed53cb9c5c4d1"
+    },
+    "audio/impact-cannon2.mp3": {
+      "bytes": 7097,
+      "sha256": "7a60362725b2a707d35419d7eec38525e20b89bce0878de56032814be1d5249d"
+    },
+    "audio/impact-cannon2.ogg": {
+      "bytes": 7174,
+      "sha256": "50a5f480866202bf74c076421e6c970fe727b0fee500012a7f4f7e1ccaaaa015"
+    },
+    "audio/impact-cannon3.mp3": {
+      "bytes": 6000,
+      "sha256": "3b57bb1a8b08dfdcde846d00a46acb1d1cbb14910e9e76670b644b8a63827672"
+    },
+    "audio/impact-cannon3.ogg": {
+      "bytes": 7104,
+      "sha256": "bbfc7e3c4ae089b5e3d88a7c40368c894f74e795b58e823291c8f52820cac5ca"
+    },
+    "audio/impact-shotgun-1.mp3": {
+      "bytes": 1611,
+      "sha256": "bb5d139fe2a935c10cf4ba5e6b84b2c8e4ffe5b99e2e786b599808fb15126ab1"
+    },
+    "audio/impact-shotgun-1.ogg": {
+      "bytes": 4422,
+      "sha256": "6907c91a8b69468963b5c951891cf8499b434b3685f17451991cd242555e160e"
+    },
+    "audio/impact-shotgun-2.mp3": {
+      "bytes": 1768,
+      "sha256": "8c8f3423bf0c26c95f0e627daf767e1c917d1638ba67fe09190dd9ad12dc2675"
+    },
+    "audio/impact-shotgun-2.ogg": {
+      "bytes": 4526,
+      "sha256": "6d564c719082f201c38fdc0d49bf9ae5c594f863d2ddca905af1b1e6361f10f7"
+    },
+    "audio/impact-shotgun-3.mp3": {
+      "bytes": 1925,
+      "sha256": "dbea39aba38eba6babe5b7761ceec611f242db7e6e994c978634adbf5a77802f"
+    },
+    "audio/impact-shotgun-3.ogg": {
+      "bytes": 4658,
+      "sha256": "eb319448415ec8a147c88d07b6ef898925fb71314d30ede85dfa4a183c2c5014"
+    },
+    "audio/impact-shotgun-4.mp3": {
+      "bytes": 2081,
+      "sha256": "5eca3e04298d414394531ce36a6b2456f895b25cc566a31924fc9d517544c3ed"
+    },
+    "audio/impact-shotgun-4.ogg": {
+      "bytes": 4779,
+      "sha256": "9d693b61057865f3cf47a59f730f19eaad581764828f742354373286ff1f609d"
+    },
+    "audio/mortarWhistle.mp3": {
+      "bytes": 6000,
+      "sha256": "f49b0d38dd8a408a2555c50d6cc6f055a4c4d4da90b48d15ffd7dab6e4637f70"
+    },
+    "audio/mortarWhistle.ogg": {
+      "bytes": 7117,
+      "sha256": "61e60a3ac0a58996253573047cc0f0c421b44fde94389dd18798270815447f71"
+    },
+    "audio/shellWhistle.mp3": {
+      "bytes": 4276,
+      "sha256": "ba02271e214a2370b14981c2fb1efb3b3bc0206cb90e14a16ff64e383e6c6928"
+    },
+    "audio/shellWhistle.ogg": {
+      "bytes": 6183,
+      "sha256": "716ce1dd01dafd32f12a6434b32ccf0762c77460afe63aedde34702683e1387d"
+    },
+    "audio/shotgun.mp3": {
+      "bytes": 3805,
+      "sha256": "4772bf08c7082ebbae8cd750e61a254adcf36d2111b8550e3dd2dde3e4a91ca5"
+    },
+    "audio/shotgun.ogg": {
+      "bytes": 6218,
+      "sha256": "6a80efcd151e1eaf2b1d8fc368a37f55c41124570ec879c783f3e53d1f7b2cbc"
+    },
+    "audio/shotgun2.mp3": {
+      "bytes": 4746,
+      "sha256": "236db1f9d851492bb34b031973c1133753a176c0b0992bd9ee7c7cc6f18d699f"
+    },
+    "audio/shotgun2.ogg": {
+      "bytes": 6960,
+      "sha256": "f4f98bf0bc26dfd07e601748c46cf1d8b503b1a12fbff8763c6d016b2eef97dd"
+    },
+    "audio/shotgun3.mp3": {
+      "bytes": 3022,
+      "sha256": "9de1a3d6da5f24d55c99d03d6143126060f8a442921a292cab6a1ee0f33dc17f"
+    },
+    "audio/shotgun3.ogg": {
+      "bytes": 5637,
+      "sha256": "35fa08e7b5b41bfd546877b136f668de57b949a3ce4de5c80c9482fef404b05f"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "existingRepositoryFilesModified": false,
+  "initialRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 717876.790502,
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "line": 93,
+      "reason": "Playwright Chromium headless-shell executable is not installed in its default cache path"
+    },
+    "cleanup": "The failed browser launch left its HTTP server open; only that test worker was terminated after the other workers completed."
+  },
+  "targetedRerun": {
+    "command": "node --import ./workout/island/design/boars-weapons-v2/verification/system-chromium.mjs --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "systemChromium": "/usr/bin/chromium",
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 24066.807369
+  },
+  "interpretation": "All asset-pack checks pass. The one failed repository browser test passed in the targeted rerun using the installed browser. A second full npm test run was not performed."
+}
