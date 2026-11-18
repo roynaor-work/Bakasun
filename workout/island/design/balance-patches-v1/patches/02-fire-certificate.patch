@@ -1,0 +1,84 @@
+diff --git a/workout/island/activity/fire-certificates.mjs b/workout/island/activity/fire-certificates.mjs
+index 0912774..c010153 100644
+--- a/workout/island/activity/fire-certificates.mjs
++++ b/workout/island/activity/fire-certificates.mjs
+@@ -1,5 +1,13 @@
+-/** A certificate contains the three observed achievements of one completed run. */
+-export function fireCertificate({won,time,seconds,rescued,wasted,used},config){const fast=Boolean(won&&time<=seconds*config.quickFraction),rescue=Boolean(rescued),careful=Boolean(won&&wasted<=Math.max(1,used)*config.wasteFraction);return {fast,rescue,careful,stars:Number(fast)+Number(rescue)+Number(careful)};}
++export const fireCertificateBalanceEnabled=()=>new URLSearchParams(globalThis.location?.search).get('balanceFireCertificate')==='1';
++
++/** Keep the four-field save format. On a stage without rescue targets, a flagged
++ * win earns the completion criterion. The result summary still counts real people. */
++export function fireCertificate({won,time,seconds,rescued,rescueCount,wasted,used},config){
++  const fast=Boolean(won&&time<=seconds*config.quickFraction);
++  const careful=Boolean(won&&wasted<=Math.max(1,used)*config.wasteFraction);
++  const rescue=rescueCount===0&&fireCertificateBalanceEnabled()?Boolean(won):Boolean(rescued);
++  return {fast,rescue,careful,stars:Number(fast)+Number(rescue)+Number(careful)};
++}
+ export function validCertificate(c){return c&&Object.keys(c).length===4&&['fast','rescue','careful'].every(k=>typeof c[k]==='boolean')&&Number.isInteger(c.stars)&&c.stars===Number(c.fast)+Number(c.rescue)+Number(c.careful);}
+ export function initialFireCertificates(data){return Array(data.config.minigames.fireRescue.levels.length).fill(null);}
+ export function validFireCertificates(list,data){return Array.isArray(list)&&list.length===data.config.minigames.fireRescue.levels.length&&list.every(c=>c===null||validCertificate(c));}
+diff --git a/workout/island/data/strings.he.json b/workout/island/data/strings.he.json
+index d6e5222..9b1da3c 100644
+--- a/workout/island/data/strings.he.json
++++ b/workout/island/data/strings.he.json
+@@ -879,6 +879,8 @@
+  "fire.certificateName": "כל הכבוד, {name}",
+  "fire.fast": "כיבוי מהיר",
+  "fire.rescue": "הצלה ועזרה",
++ "fire.noRescueGoal": "אין משימת חילוץ בשלב הזה",
++ "fire.completedWithoutRescue": "השלמת השלב (אין צורך בחילוץ)",
+  "fire.careful": "שמירה על המים",
+  "fire.noCertificates": "עוד מעט תתווסף התעודה הראשונה",
+  "fire.finish": "לתעודה",
+diff --git a/workout/island/minigames/fire.mjs b/workout/island/minigames/fire.mjs
+index 8e893be..0e47a26 100644
+--- a/workout/island/minigames/fire.mjs
++++ b/workout/island/minigames/fire.mjs
+@@ -108,7 +108,7 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
+       if(requiredLost)result={outcome:'lose',score,reason:'rescue'};
+       else if(model.canFinish&&(!pending||input.finish||remaining<=0))result={outcome:'win',score,performance:.6*Math.min(1,remaining/timeTarget)+.4*Math.min(1,(water+reserve)/waterTarget)};
+       else if(remaining<=0)result={outcome:'lose',score};
+-      if(result)result.certificate=fireCertificate({won:result.outcome==='win',time:(fireDoneAt??time)-balance.startGrace,seconds:settings.seconds,rescued:rescues.some(r=>r.rescued),wasted:waterWasted,used:waterUsed},balance.certificate);
++      if(result)result.certificate=fireCertificate({won:result.outcome==='win',time:(fireDoneAt??time)-balance.startGrace,seconds:settings.seconds,rescued:rescuedCount>0,rescueCount:rescues.length,wasted:waterWasted,used:waterUsed},balance.certificate);
+       if(result)result.summary={out,rescued:rescues.filter(r=>r.rescued).length,water:Math.floor(water)};
+     },
+     snapshot(){return {navigation:{...navigator.state,target:navigator.state.target?{...navigator.state.target}:null,path:navigator.state.path.map(p=>({...p}))},selectedObjective:navigator.selected?{...navigator.selected}:null,guidance:{...model.guidance},coolingTarget:model.coolingTarget,coolingPower:model.coolingPower,requiredRescues,canFinish:model.canFinish,camera:{...camera},ladder:{...model.ladder,target:model.ladder.target?{...model.ladder.target,world:[...model.ladder.target.world]}:null,targets:model.ladder.targets.map(r=>({...r,world:[...r.world]}))},refilling:model.refilling,graceRemaining:model.graceRemaining,connection,firesOut:model.firesOut,hintId:model.hintId,hintCount:model.hintCount,waterUsed,waterWasted,atHydrant:model.atHydrant,inRange:model.inRange,hydrantDistance:fireHydrantDistance(truck,balance),firefighter:{...firefighter},roads:{nodes:driver.roads.nodes.map(n=>({x:n.x,z:n.z})),edges:driver.roads.edges.map(e=>({a:{x:e.a.x,z:e.a.z},b:{x:e.b.x,z:e.b.z}}))},hose:{start:{...nozzle},truck:{...truck},connected:hose.connected,worldStart:{...hose.start},worldEnd:{...hose.end}},maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r,world:[...r.world]})),rescue:rescue?{...rescue,world:[...rescue.world]}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 9dbd650..219858a 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -1,6 +1,7 @@
+ import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-15';
+ import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-15';
+ import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-15';
++import {fireCertificateBalanceEnabled} from '../activity/fire-certificates.mjs?v=island-v2-20261107-15';
+ import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-15';
+ import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-15';
+ import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-15';
+@@ -162,7 +163,24 @@ export class ActivityInterface {
+     }
+     dialog.append(list,this.playButton(id,'equipment-play',()=>this.stages(id)));
+   }
+-  certificateCard(c,stage){const card=el('article','fire-certificate');card.dataset.certificate=String(stage);card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),(()=>{const st=el('strong','certificate-stars');st.append(kitRating(c.stars,{label:this.t('minigame.stageStars',{stage,stars:c.stars}),size:28}));return st;})());for(const key of ['fast','rescue','careful'])card.append(el('p',c[key]?'earned':'',this.t('fire.'+key)));return card;}
++  certificateCard(c,stage){
++    const card=el('article','fire-certificate'),stars=el('strong','certificate-stars');
++    card.dataset.certificate=String(stage);
++    stars.append(kitRating(c.stars,{label:this.t('minigame.stageStars',{stage,stars:c.stars}),size:28}));
++    card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),stars);
++    // A credited rescue bit on a stage with no citizens identifies a saved
++    // completion star, even when its owner reopens the collection without the flag.
++    const noRescueGoal=this.data.config.minigames.fireRescue.levels[stage-1]?.rescueCount===0;
++    for(const key of ['fast','rescue','careful']){
++      let label='fire.'+key;
++      if(key==='rescue'&&noRescueGoal){
++        if(c.rescue)label='fire.completedWithoutRescue';
++        else if(fireCertificateBalanceEnabled())label='fire.noRescueGoal';
++      }
++      card.append(el('p',c[key]?'earned':'',this.t(label)));
++    }
++    return card;
++  }
+   certificates(){const dialog=this.modal('fire.certificates','minigame.progressHint');let count=0;for(const [i,c]of this.engine.state.fireCertificates.entries())if(c){dialog.append(this.certificateCard(c,i+1));count++;}if(!count)dialog.append(el('p','',this.t('fire.noCertificates')));dialog.append(this.playButton('fireRescue','certificate-play',()=>this.stages('fireRescue')));}
+   hangar(){
+     const dialog=this.modal('hangar.title','hangar.hint'),h=this.engine.state.hangar,c=this.data.config.minigames.alienDefense,canvas=el('canvas','hangar-preview');dialog.dataset.hangar='true';canvas.width=canvas.height=c.hangar.previewSize;

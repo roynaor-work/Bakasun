@@ -1,0 +1,2362 @@
+{
+  "schemaVersion": 1,
+  "auditedGameCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "node": "v24.19.0",
+  "samplesPerCell": 16,
+  "flagOffTrialsEqual": 1248,
+  "pairedTrials": 1248,
+  "totalTrials": 3744,
+  "patches": {
+    "01-fire.patch": "d9c50f840d690fdd152375f4ba8228170adc6bfa5bb0076fc1a2dca561453a5f",
+    "02-fire-certificate.patch": "6dc13aea27437e823457a0e7d3e3fce4705e9ccc8303bd3a67a9b529b10c075f",
+    "03-catch-reward.patch": "f7926d3c743da06a767f59aac225381d2aca827cd456c0399b3dd40706666367",
+    "04-soccer-goals.patch": "8311094488804faf0857c353eede204578145b39f786705fefe0f5827b15de90",
+    "05-hoops-quick-quarters.patch": "b5d9cdd69a039bd62db979a7ece73b19006b3bce01a657a5a78ac4039a027cad",
+    "06-naval-stage-24-base.patch": "2e4b1d1d03551ef7f00923e0bb039283031ad6c6b2ff0c7491aa761214e66538",
+    "07-alien-stage-10-lives.patch": "92414c3972039fcf5c7cf5d3a701e5afb9df89478e9d07b68237d12fd42c8294",
+    "08-alpine-league-time-goal.patch": "7a9198fabd6e10d2bcbb29df6384873c248461365fcc2cda54eb04d217bfd72b"
+  },
+  "adapters": {
+    "fire": "723627307d190bc40437caf78fcfc98732f7e37d7b1aa2272dd57ff1fc0309e0",
+    "criminal": "0aa295560db9f7488fa96bcb2a8c51db65f123f664904d1bd0d4c361c7624cd3",
+    "soccer": "85f6acbab2567a9c8a3355f9a03808694dda902b0852f48e65270aea73973d34",
+    "hoops": "9b10ccd892b91cf465880b7895cd8cfcfbffc1ede80a59c071636ce6dc46fc2a",
+    "naval": "5226cd093955a8a5a4a56f4424f627471663d099650d98bb7e315b775e77087c",
+    "aliens": "8933cb3389ed43a4aaee13635774b30afbb38e74c87998ddfd0cbef8e9e8b5ce",
+    "alpine": "d72c5778d1110c858d065b2453582dbde663553622c26bf7b5afb647a0e4b3ee"
+  },
+  "profiles": [
+    {
+      "id": "impatient",
+      "name": "ילד חסר סבלנות",
+      "reactionSeconds": 0.45,
+      "aimError": 0.22,
+      "lapseProbability": 0.16,
+      "patienceSeconds": 90
+    },
+    {
+      "id": "regular",
+      "name": "ילד רגיל",
+      "reactionSeconds": 0.25,
+      "aimError": 0.1,
+      "lapseProbability": 0.06,
+      "patienceSeconds": 180
+    },
+    {
+      "id": "skilled",
+      "name": "ילד מיומן",
+      "reactionSeconds": 0.1,
+      "aimError": 0.03,
+      "lapseProbability": 0.015,
+      "patienceSeconds": 300
+    }
+  ],
+  "experiments": [
+    {
+      "id": "fire",
+      "adapter": "fire",
+      "flag": "balanceFire",
+      "stages": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "seedStart": 1801
+    },
+    {
+      "id": "fire-certificate",
+      "adapter": "fire",
+      "flag": "balanceFireCertificate",
+      "stages": [
+        1,
+        2,
+        4,
+        11,
+        13
+      ],
+      "seedStart": 1801
+    },
+    {
+      "id": "catch",
+      "adapter": "criminal",
+      "flag": "balanceCatch",
+      "stages": [
+        1,
+        5,
+        10
+      ],
+      "seedStart": 1701
+    },
+    {
+      "id": "soccer",
+      "adapter": "soccer",
+      "flag": "balanceSoccerGoals",
+      "stages": [
+        1,
+        8,
+        13,
+        15
+      ],
+      "seedStart": 1701
+    },
+    {
+      "id": "hoops",
+      "adapter": "hoops",
+      "flag": "balanceHoops",
+      "stages": [
+        1,
+        5,
+        10
+      ],
+      "seedStart": 1001
+    },
+    {
+      "id": "naval",
+      "adapter": "naval",
+      "flag": "balanceNaval",
+      "stages": [
+        24
+      ],
+      "seedStart": 10001
+    },
+    {
+      "id": "alien",
+      "adapter": "aliens",
+      "flag": "balanceAlien",
+      "stages": [
+        10
+      ],
+      "seedStart": 10001
+    },
+    {
+      "id": "alpine",
+      "adapter": "alpine",
+      "flag": "balanceAlpine",
+      "stages": [
+        14,
+        19,
+        29,
+        33
+      ],
+      "seedStart": 3701
+    },
+    {
+      "id": "alpine-gear",
+      "adapter": "alpine",
+      "flag": "balanceAlpine",
+      "stages": [
+        19
+      ],
+      "seedStart": 3701,
+      "variant": {
+        "gearProgress": true
+      }
+    }
+  ],
+  "cells": [
+    {
+      "experiment": "fire",
+      "stage": 7,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 75.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 73.0771,
+        "meanStars": 0.5625,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.375
+      },
+      "gainedWins": 6,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 7,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 75.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 59.8521,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 16,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 7,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 2,
+        "timeouts": 0,
+        "meanSeconds": 74.7052,
+        "meanStars": 0.125,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.125
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 57.3906,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 14,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 8,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 79.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 79.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 8,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 79.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 8,
+        "timeouts": 0,
+        "meanSeconds": 77.4427,
+        "meanStars": 0.5625,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.5
+      },
+      "gainedWins": 8,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 8,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 79.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 70.1739,
+        "meanStars": 1.4375,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 16,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 9,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 104.7489,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0.6875
+      },
+      "after": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 129.6094,
+        "meanStars": 0.5,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.25
+      },
+      "gainedWins": 4,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 9,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 102.6989,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 123.8719,
+        "meanStars": 1.875,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.9375
+      },
+      "gainedWins": 15,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 9,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 101.5271,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 111.5854,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 16,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 10,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 87.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 113.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0.6875
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 10,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 87.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0
+      },
+      "after": {
+        "wins": 9,
+        "timeouts": 0,
+        "meanSeconds": 110.9386,
+        "meanStars": 0.5625,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.5625
+      },
+      "gainedWins": 9,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire",
+      "stage": 10,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 87.0167,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 102.2438,
+        "meanStars": 1.75,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 16,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 1,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 19.5323,
+        "meanStars": 2.5625,
+        "threeStars": 9,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 19.5323,
+        "meanStars": 2.5625,
+        "threeStars": 9,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 1,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 9.65,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 9.65,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 1,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 8.6188,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 8.6188,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 2,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 12,
+        "timeouts": 0,
+        "meanSeconds": 43.5979,
+        "meanStars": 1.3125,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 0.8125
+      },
+      "after": {
+        "wins": 12,
+        "timeouts": 0,
+        "meanSeconds": 43.5979,
+        "meanStars": 1.3125,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 1,
+        "meanCertificateStars": 1.5625
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 2,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 34.1344,
+        "meanStars": 2.0625,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.5625
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 34.1344,
+        "meanStars": 2.0625,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "threeCertificateStars": 9,
+        "meanCertificateStars": 2.5625
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 2,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 30.6219,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.9375
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 30.6219,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 15,
+        "meanCertificateStars": 2.9375
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 4,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 59.5219,
+        "meanStars": 1.25,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.875
+      },
+      "after": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 59.5219,
+        "meanStars": 1.25,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 1.875
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 4,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 51.0708,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 51.0708,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 4,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 45.6802,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 45.6802,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 11,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 24.426,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 24.426,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 11,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 21.5229,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 21.5229,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 11,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 18.8333,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 18.8333,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 13,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 29.3969,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 29.3969,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 13,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 22.6344,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 22.6344,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "fire-certificate",
+      "stage": 13,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 17.4282,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 0,
+        "meanCertificateStars": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 17.4282,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "threeCertificateStars": 16,
+        "meanCertificateStars": 3
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 1,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 48.126,
+        "meanStars": 1.375,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 48.126,
+        "meanStars": 2.125,
+        "threeStars": 7,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 1,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 32.4708,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 32.4708,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 1,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 30.3771,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 30.3771,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 5,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 75.85,
+        "meanStars": 0.5,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 75.85,
+        "meanStars": 0.6875,
+        "threeStars": 1,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 5,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 52.5667,
+        "meanStars": 1.5,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 52.5667,
+        "meanStars": 2,
+        "threeStars": 5,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 5,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 38.7177,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 38.7177,
+        "meanStars": 2.8125,
+        "threeStars": 13,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 10,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 5,
+        "timeouts": 0,
+        "meanSeconds": 91.95,
+        "meanStars": 0.375,
+        "threeStars": 0,
+        "withinPatience": 5
+      },
+      "after": {
+        "wins": 5,
+        "timeouts": 0,
+        "meanSeconds": 91.95,
+        "meanStars": 0.4375,
+        "threeStars": 0,
+        "withinPatience": 5
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 10,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 66.4667,
+        "meanStars": 1.75,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 66.4667,
+        "meanStars": 2.0625,
+        "threeStars": 5,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "catch",
+      "stage": 10,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 53.1375,
+        "meanStars": 2,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 53.1375,
+        "meanStars": 2.5625,
+        "threeStars": 9,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 1,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 207.0781,
+        "meanStars": 2.625,
+        "threeStars": 11,
+        "withinPatience": 0,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 2
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 207.0781,
+        "meanStars": 2.625,
+        "threeStars": 11,
+        "withinPatience": 0,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 2
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 1,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 221.8083,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 4
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 221.8083,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 4
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 1,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 224.1229,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 7
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 224.1229,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "objective": "goals",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 7
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 8,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 9,
+        "timeouts": 0,
+        "meanSeconds": 200.1042,
+        "meanStars": 1.25,
+        "threeStars": 4,
+        "withinPatience": 0,
+        "objective": "tackles",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 3
+      },
+      "after": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 201.9969,
+        "meanStars": 0.375,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "objective": "lofts",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 16,
+        "headers": 2
+      },
+      "gainedWins": 2,
+      "lostWins": 7
+    },
+    {
+      "experiment": "soccer",
+      "stage": 8,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 201.5875,
+        "meanStars": 1.375,
+        "threeStars": 3,
+        "withinPatience": 0,
+        "objective": "tackles",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 8
+      },
+      "after": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 200.1031,
+        "meanStars": 1.6875,
+        "threeStars": 6,
+        "withinPatience": 0,
+        "objective": "lofts",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 16,
+        "headers": 10
+      },
+      "gainedWins": 3,
+      "lostWins": 3
+    },
+    {
+      "experiment": "soccer",
+      "stage": 8,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 203.8167,
+        "meanStars": 2.125,
+        "threeStars": 6,
+        "withinPatience": 16,
+        "objective": "tackles",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 5
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 204.1615,
+        "meanStars": 2.6875,
+        "threeStars": 11,
+        "withinPatience": 16,
+        "objective": "lofts",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 16,
+        "lofts": 16,
+        "headers": 4
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 13,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 197.1448,
+        "meanStars": 0.0625,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 14,
+        "lofts": 0,
+        "headers": 7
+      },
+      "after": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 197.1448,
+        "meanStars": 0.0625,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "objective": "headers",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 6,
+        "lofts": 0,
+        "headers": 7
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 13,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 3,
+        "timeouts": 0,
+        "meanSeconds": 195.7188,
+        "meanStars": 0.4375,
+        "threeStars": 2,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 21
+      },
+      "after": {
+        "wins": 3,
+        "timeouts": 0,
+        "meanSeconds": 195.7188,
+        "meanStars": 0.4375,
+        "threeStars": 2,
+        "withinPatience": 0,
+        "objective": "headers",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 11,
+        "lofts": 0,
+        "headers": 21
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 13,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 204.2011,
+        "meanStars": 1.5,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 10
+      },
+      "after": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 204.2011,
+        "meanStars": 1.5,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "objective": "headers",
+        "objectiveTarget": 1,
+        "objectiveCompleted": 9,
+        "lofts": 0,
+        "headers": 10
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 15,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 197.3,
+        "meanStars": 0.0625,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 14,
+        "lofts": 0,
+        "headers": 10
+      },
+      "after": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 197.3,
+        "meanStars": 0.0625,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 14,
+        "lofts": 0,
+        "headers": 10
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 15,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 3,
+        "timeouts": 0,
+        "meanSeconds": 199.4615,
+        "meanStars": 0.375,
+        "threeStars": 1,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 24
+      },
+      "after": {
+        "wins": 3,
+        "timeouts": 0,
+        "meanSeconds": 199.4615,
+        "meanStars": 0.375,
+        "threeStars": 1,
+        "withinPatience": 0,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 24
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "soccer",
+      "stage": 15,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 7,
+        "timeouts": 0,
+        "meanSeconds": 200.8094,
+        "meanStars": 0.6875,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 10
+      },
+      "after": {
+        "wins": 7,
+        "timeouts": 0,
+        "meanSeconds": 200.8094,
+        "meanStars": 0.6875,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "objective": "shots",
+        "objectiveTarget": 2,
+        "objectiveCompleted": 16,
+        "lofts": 0,
+        "headers": 10
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "hoops",
+      "stage": 1,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 463.0696,
+        "meanStars": 0.75,
+        "threeStars": 1,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 250.4937,
+        "meanStars": 0.8125,
+        "threeStars": 3,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 270
+      },
+      "gainedWins": 5,
+      "lostWins": 5
+    },
+    {
+      "experiment": "hoops",
+      "stage": 1,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 463.9853,
+        "meanStars": 2.8125,
+        "threeStars": 15,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 243.2468,
+        "meanStars": 2.3125,
+        "threeStars": 9,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 225
+      },
+      "gainedWins": 1,
+      "lostWins": 1
+    },
+    {
+      "experiment": "hoops",
+      "stage": 1,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 481.324,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 244.2323,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 180
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "hoops",
+      "stage": 5,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 465.9021,
+        "meanStars": 0.5625,
+        "threeStars": 2,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 405
+      },
+      "after": {
+        "wins": 5,
+        "timeouts": 0,
+        "meanSeconds": 247.7459,
+        "meanStars": 0.5,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 225
+      },
+      "gainedWins": 4,
+      "lostWins": 3
+    },
+    {
+      "experiment": "hoops",
+      "stage": 5,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 469.849,
+        "meanStars": 2.625,
+        "threeStars": 14,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 12,
+        "timeouts": 0,
+        "meanSeconds": 245.3207,
+        "meanStars": 2.1875,
+        "threeStars": 11,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 225
+      },
+      "gainedWins": 1,
+      "lostWins": 3
+    },
+    {
+      "experiment": "hoops",
+      "stage": 5,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 486.1322,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 241.9959,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 180
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "hoops",
+      "stage": 10,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 7,
+        "timeouts": 0,
+        "meanSeconds": 465.2114,
+        "meanStars": 0.875,
+        "threeStars": 2,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 240.4991,
+        "meanStars": 0.875,
+        "threeStars": 4,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 180
+      },
+      "gainedWins": 2,
+      "lostWins": 3
+    },
+    {
+      "experiment": "hoops",
+      "stage": 10,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 473.1386,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 13,
+        "timeouts": 0,
+        "meanSeconds": 261.9093,
+        "meanStars": 2,
+        "threeStars": 7,
+        "withinPatience": 0,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 270
+      },
+      "gainedWins": 0,
+      "lostWins": 3
+    },
+    {
+      "experiment": "hoops",
+      "stage": 10,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 478.2771,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 0,
+        "gameSecondsMin": 360,
+        "gameSecondsMax": 360
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 243.9645,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "gameSecondsMin": 180,
+        "gameSecondsMax": 180
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "naval",
+      "stage": 24,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 26.0083,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 25.8417,
+        "meanStars": 0.125,
+        "threeStars": 0,
+        "withinPatience": 16
+      },
+      "gainedWins": 1,
+      "lostWins": 0
+    },
+    {
+      "experiment": "naval",
+      "stage": 24,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 36.3448,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 28.2281,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "naval",
+      "stage": 24,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 26.0437,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 22.2458,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alien",
+      "stage": 10,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 97.2219,
+        "meanStars": 1.75,
+        "threeStars": 1,
+        "withinPatience": 4,
+        "maxLives": 6
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 97.2219,
+        "meanStars": 2,
+        "threeStars": 1,
+        "withinPatience": 4,
+        "maxLives": 7
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alien",
+      "stage": 10,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 85.1896,
+        "meanStars": 1.8125,
+        "threeStars": 1,
+        "withinPatience": 16,
+        "maxLives": 6
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 85.2573,
+        "meanStars": 2,
+        "threeStars": 1,
+        "withinPatience": 16,
+        "maxLives": 7
+      },
+      "gainedWins": 1,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alien",
+      "stage": 10,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 15,
+        "timeouts": 0,
+        "meanSeconds": 76.9292,
+        "meanStars": 1.9375,
+        "threeStars": 1,
+        "withinPatience": 16,
+        "maxLives": 6
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 76.9823,
+        "meanStars": 2.0625,
+        "threeStars": 2,
+        "withinPatience": 16,
+        "maxLives": 7
+      },
+      "gainedWins": 1,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 14,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 65.1553,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 61000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 65.1553,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 61500,
+        "timeGoalMet": 1
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 14,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 61.5068,
+        "meanStars": 0.6875,
+        "threeStars": 3,
+        "withinPatience": 16,
+        "targetMs": 61000,
+        "timeGoalMet": 4
+      },
+      "after": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 61.5068,
+        "meanStars": 0.75,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "targetMs": 61500,
+        "timeGoalMet": 7
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 14,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 61.0608,
+        "meanStars": 0.75,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "targetMs": 61000,
+        "timeGoalMet": 8
+      },
+      "after": {
+        "wins": 4,
+        "timeouts": 0,
+        "meanSeconds": 61.0608,
+        "meanStars": 0.75,
+        "threeStars": 4,
+        "withinPatience": 16,
+        "targetMs": 61500,
+        "timeGoalMet": 14
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 19,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 69.3221,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 69.3221,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 19,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 64.7121,
+        "meanStars": 0.75,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 6,
+        "timeouts": 0,
+        "meanSeconds": 64.7121,
+        "meanStars": 0.75,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 19,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 63.1595,
+        "meanStars": 1.375,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 11,
+        "timeouts": 0,
+        "meanSeconds": 63.1595,
+        "meanStars": 1.9375,
+        "threeStars": 9,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 13
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 29,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 69.6434,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 65000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 69.6434,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 66000,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 29,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 66.7224,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 65000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 66.7224,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 66000,
+        "timeGoalMet": 5
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 29,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 67.4724,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 65000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 67.4724,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 66000,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 33,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 103.2187,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "targetMs": 92000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 103.2187,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 0,
+        "targetMs": 94000,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 33,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 95.7186,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 92000,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 95.7186,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 94000,
+        "timeGoalMet": 2
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine",
+      "stage": 33,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 94.0305,
+        "meanStars": 0.125,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 92000,
+        "timeGoalMet": 3
+      },
+      "after": {
+        "wins": 1,
+        "timeouts": 0,
+        "meanSeconds": 94.0305,
+        "meanStars": 0.1875,
+        "threeStars": 1,
+        "withinPatience": 16,
+        "targetMs": 94000,
+        "timeGoalMet": 7
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine-gear",
+      "stage": 19,
+      "profile": "impatient",
+      "pairs": 16,
+      "before": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 67.5032,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 0
+      },
+      "after": {
+        "wins": 0,
+        "timeouts": 0,
+        "meanSeconds": 67.5032,
+        "meanStars": 0,
+        "threeStars": 0,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 0
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine-gear",
+      "stage": 19,
+      "profile": "regular",
+      "pairs": 16,
+      "before": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 62.2237,
+        "meanStars": 2.375,
+        "threeStars": 10,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 10
+      },
+      "after": {
+        "wins": 14,
+        "timeouts": 0,
+        "meanSeconds": 62.2237,
+        "meanStars": 2.625,
+        "threeStars": 14,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 15
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    },
+    {
+      "experiment": "alpine-gear",
+      "stage": 19,
+      "profile": "skilled",
+      "pairs": 16,
+      "before": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 60.8167,
+        "meanStars": 2.875,
+        "threeStars": 14,
+        "withinPatience": 16,
+        "targetMs": 62500,
+        "timeGoalMet": 14
+      },
+      "after": {
+        "wins": 16,
+        "timeouts": 0,
+        "meanSeconds": 60.8167,
+        "meanStars": 3,
+        "threeStars": 16,
+        "withinPatience": 16,
+        "targetMs": 63500,
+        "timeGoalMet": 16
+      },
+      "gainedWins": 0,
+      "lostWins": 0
+    }
+  ]
+}
