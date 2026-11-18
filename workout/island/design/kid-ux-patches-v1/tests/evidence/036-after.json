@@ -1,0 +1,94 @@
+{
+  "id": "036",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "targets": [
+          [
+            92,
+            76.1875,
+            14,
+            10.639514921186954
+          ],
+          [
+            92,
+            76.1875,
+            14,
+            14.926288555365572
+          ]
+        ],
+        "illustrations": [
+          "M5 18L59 11L59 25Z",
+          "M5 18L40 3L40 33Z"
+        ],
+        "labels": [
+          "לטווח ארוך",
+          "לטווח קרוב"
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "selected": "wide"
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: catchCriminal, stage 1.",
+    "Synthetic chase completion using the existing developer hook. Net choice uses trusted touch during the real capture phase.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.catch-kid-skip').first()",
+      "x": 370,
+      "y": 266,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "catch-kid-skip",
+        "x": 370,
+        "y": 266
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.catch-tool[data-tool=wide]').first()",
+      "x": 580,
+      "y": 337.90625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "catch-tool",
+        "x": 580,
+        "y": 337.90625
+      }
+    }
+  ],
+  "screenshots": [
+    "036-after-wide-net-selected.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

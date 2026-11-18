@@ -1,0 +1,19 @@
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index a98e4c28..f38afa92 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -29,6 +29,14 @@ kidUxStyle('009', `
+   .island-ui.clean-hud .city-quick-button strong{white-space:normal}
+ `);
+ 
++kidUxStyle('010', `
++  .island-ui.clean-hud .city-map-heading{position:sticky;top:0;z-index:1;background:#f7f4e9}
++  .island-ui.clean-hud .city-map-close{min-width:48px;min-height:48px}
++  .island-ui.clean-hud .city-map-destinations{gap:8px}
++  .island-ui.clean-hud .city-map-destinations button,.island-ui.clean-hud [data-action=city-overview]{min-width:48px;min-height:48px;font-size:14px;color:#203b36}
++  .island-ui.clean-hud .city-map-hint{font-size:14px;color:#203b36}
++`);
++
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+   node.className = className;

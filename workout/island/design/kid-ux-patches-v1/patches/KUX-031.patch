@@ -1,0 +1,81 @@
+diff --git a/workout/island/minigames/fire-v24-session.mjs b/workout/island/minigames/fire-v24-session.mjs
+index 34790cd3..28825e9c 100644
+--- a/workout/island/minigames/fire-v24-session.mjs
++++ b/workout/island/minigames/fire-v24-session.mjs
+@@ -4,11 +4,28 @@
+  * bar on the left, a three-step picture lesson on the first entry stage. Touch: one finger on the room aims and sprays (the water goes where
+  * the finger is, with help onto the nearest fire); a short tap on the friend carries them out. The model is fire-v24-interior.mjs, the
+  * picture is fire-v24-scene.mjs. Nothing is written to the save. */
++import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-15';
+ import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-15';
+ import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-15';
+ import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-15';
+ import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-15';
+ 
++const toolDemo = {
++  water: ['💧 → 🔥', 'מַחֲזִיקִים עַל אֵשׁ רְגִילָה וּמַתִּיזִים מַיִם.'],
++  extinguisher: ['🧯 → ⚡', 'מַחֲזִיקִים עַל אֵשׁ מֵחַשְׁמַל וּמְכַבִּים בְּמַטָּף.'],
++  blanket: ['🛟 → 🍳', 'נוֹגְעִים בַּמַּחֲבַת כְּדֵי לְכַסּוֹת אוֹתָהּ בִּשְׂמִיכָה.'],
++  foam: ['🫧 → 🔥', 'מַחֲזִיקִים עַל אֵשׁ גְּדוֹלָה וּמַתִּיזִים קֶצֶף.'],
++};
++const fireKidToolStyle = `
++.fv24[data-kid-tools] .fv24-tools{top:calc(max(12px,env(safe-area-inset-top)) + 60px)}
++.fv24[data-kid-tools] .fv24-tool{width:106px;height:56px;background:#152a3c;color:#fff;box-sizing:border-box}
++.fv24[data-kid-tools] .fv24-tool.active{background:#21486a}
++.fv24[data-kid-tools] .fv24-tool-label{font-size:14px;line-height:17px;overflow:visible;max-width:none}
++.fv24[data-kid-tools] .fv24-tool-count{font-size:14px;min-width:20px;height:20px;line-height:20px}
++.fv24-kid-tool-demo{pointer-events:none;position:absolute;right:126px;bottom:max(10px,env(safe-area-inset-bottom));max-width:min(290px,52vw);padding:6px 12px;border-radius:10px;background:#152a3c;color:#fff;text-align:center;font:700 14px/1.35 system-ui}
++.fv24-kid-tool-demo span{display:block;direction:ltr;font-size:24px}
++`;
++
+ const NS='http://www.w3.org/2000/svg';
+ const ICONS={...FIRE_V23_ICONS,clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',hand:'M8 13V5a1.5 1.5 0 0 1 3 0v6V4a1.5 1.5 0 0 1 3 0v7V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0',hold:'M12 3a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Zm0 4v3M5 20h14',friend:'M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 10a6 6 0 0 1 12 0M4 9l2-2m14 2-2-2'};
+ function icon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(NS,'path');p.setAttribute('d',ICONS[name]||ICONS.star);svg.append(p);return svg;}
+@@ -25,6 +42,11 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+   const hidden=[...dialog.children].filter(n=>!n.classList.contains('game-header')&&!n.classList.contains('game-stage')&&!n.classList.contains('shell-countdown')).map(n=>[n,n.style.visibility]);
+   for(const [n]of hidden)n.style.visibility='hidden';
+   const root=el('div','fv24');root.dataset.fireV24='inside';dialog.append(root);
++  const kidTools=Boolean(kidUx('031'));
++  if(kidTools){
++    root.dataset.kidTools='';
++    kidUxStyle('031',fireKidToolStyle);
++  }
+   // ---- HUD -----------------------------------------------------------------------------------------------------------------------------
+   const clock=el('div','fv24-clock');clock.setAttribute('role','timer');clock.setAttribute('aria-label',t('fire.v24.clock'));
+   const ring=document.createElementNS(NS,'svg');ring.setAttribute('viewBox','0 0 100 100');ring.classList.add('fv24-ring');const track=document.createElementNS(NS,'circle'),arc=document.createElementNS(NS,'circle');
+@@ -34,10 +56,25 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+   const coach=el('div','fv24-coach');coach.setAttribute('role','status');coach.setAttribute('aria-live','polite');const coachText=el('span','fv24-coach-text','');coach.append(coachText);
+   const gauge=el('div','fv24-gauge');gauge.setAttribute('role','meter');gauge.setAttribute('aria-label',t('fire.v24.pressure'));gauge.setAttribute('aria-valuemin','0');gauge.setAttribute('aria-valuemax','100');const gaugeTrack=el('span','fv24-gauge-track'),gaugeFill=el('i','fv24-gauge-fill');gaugeTrack.append(gaugeFill);gauge.append(icon('spray'),gaugeTrack);
+   const tools=el('div','fv24-tools');tools.setAttribute('role','group');tools.setAttribute('aria-label',t('fire.v24.tools'));const toolButtons={};
+-  if(model.tools.length>1)for(const tool of model.tools){const b=el('button','fv24-tool');b.type='button';b.dataset.tool=tool;b.setAttribute('aria-label',t('fire.v23.tool.'+tool));b.append(icon(tool),el('span','fv24-tool-label',t('fire.v23.tool.'+tool)));const count=el('bdi','fv24-tool-count','');b.append(count);tools.append(b);toolButtons[tool]=b;b.addEventListener('click',()=>{if(!paused)input.tool=tool;});}
++  const toolPreview=kidTools&&model.tools.length>1?el('div','fv24-kid-tool-demo'):null;
++  if(toolPreview)toolPreview.hidden=true;
++  let toolPreviewUntil=0;
++  function chooseTool(tool){
++    if(paused)return;
++    input.tool=tool;
++    if(toolPreview){
++      const [illustration,description]=toolDemo[tool];
++      const picture=el('span','',illustration);picture.setAttribute('aria-hidden','true');
++      toolPreview.replaceChildren(picture,document.createTextNode(description));
++      toolPreviewUntil=model.time+3;
++      try { if(localStorage.getItem('island.sound')!=='off')kidSpeak(description); } catch { /* visual preview remains */ }
++    }
++  }
++  if(model.tools.length>1)for(const tool of model.tools){const b=el('button','fv24-tool');b.type='button';b.dataset.tool=tool;b.setAttribute('aria-label',t('fire.v23.tool.'+tool));b.append(icon(tool),el('span','fv24-tool-label',t('fire.v23.tool.'+tool)));const count=el('bdi','fv24-tool-count','');b.append(count);tools.append(b);toolButtons[tool]=b;b.addEventListener('click',()=>chooseTool(tool));}
+   const card=el('div','fv24-card');card.hidden=true;card.setAttribute('role','dialog');
+   const fade=el('div','fv24-fade');fade.dataset.state='in';const fadeText=el('p','fv24-fade-text',t('fire.v24.loading'));fade.append(fadeText);
+   root.append(clock,chips,coach,gauge,tools,card,fade);
++  if(toolPreview)root.append(toolPreview);
+   // ---- input -------------------------------------------------------------------------------------------------------------------------------
+   const input={};let pointerId=null,downAt=0,downPoint=null,moved=false,paused=false,disposed=false,frame=0,last,W=1,H=1,dpr=1,tutorialShown=false,tutorialDone=!tutorial,lowQuality=Boolean(ctx.lite);
+   const scene=createScene({model,canvas,lite:lowQuality});
+@@ -69,7 +106,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
+     return 'fire.v24.say.aim';}
+   function updateHud(){const s=model.snapshot(),r=s.room;
+     scoreChip.lastChild.textContent=String(s.score);roomChip.lastChild.textContent=t('fire.v24.roomOf',{n:s.roomIndex+1,total:s.roomCount});
+-    const inRoom=model.inRoom&&r;clock.hidden=!inRoom;gauge.hidden=!inRoom||s.phase!=='play';tools.hidden=!inRoom||s.phase!=='play';
++    const inRoom=model.inRoom&&r;clock.hidden=!inRoom;gauge.hidden=!inRoom||s.phase!=='play';tools.hidden=!inRoom||s.phase!=='play';if(toolPreview)toolPreview.hidden=tools.hidden||model.time>=toolPreviewUntil;
+     if(r){const frac=r.remaining/Math.max(1,r.limit);arc.setAttribute('stroke-dashoffset',String((RING*(1-Math.max(0,Math.min(1,frac)))).toFixed(1)));clockText.textContent=String(Math.ceil(r.remaining));clock.dataset.band=s.phase==='handover'?'critical':clockBand(r.remaining,r.limit);clock.setAttribute('aria-valuenow',String(Math.ceil(r.remaining)));
+       if(r.remaining<=10&&!tenSaid&&s.phase==='play'){tenSaid=true;ctx.engine?.narration?.announce?.('fire.v24.say.tenSeconds');}if(s.phase==='intro')tenSaid=false;}
+     const level=s.tanks[s.tool]??1;gaugeFill.style.transform=`scaleY(${level})`;gauge.dataset.level=s.empty?'critical':level<.3?'low':'ok';gauge.setAttribute('aria-valuenow',String(Math.round(level*100)));

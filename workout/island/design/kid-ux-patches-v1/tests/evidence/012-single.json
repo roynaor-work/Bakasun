@@ -1,0 +1,109 @@
+{
+  "id": "012",
+  "mode": "single",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "illustratedCityHall": true,
+        "fingerAnimation": "kid-city-hall-tap"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "speechButton": [
+          52.2,
+          48
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "confirmation": "✓ הגעתם לעירייה!",
+        "cityHallOpened": true
+      }
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 422,
+      "y": 340,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 422,
+        "y": 340
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-tasks\"]').first()",
+      "x": 551.5234375,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-tasks",
+        "x": 551.5234375,
+        "y": 30
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"tutorial-city-hall-hear\"]').first()",
+      "x": 555.1015625,
+      "y": 168.59375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "tutorial-city-hall-hear",
+        "x": 555.1015625,
+        "y": 168.59375
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"tutorial-city-hall\"]').first()",
+      "x": 706.1015625,
+      "y": 168.59375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "tutorial-city-hall",
+        "x": 706.1015625,
+        "y": 168.59375
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "complete applied series"
+}

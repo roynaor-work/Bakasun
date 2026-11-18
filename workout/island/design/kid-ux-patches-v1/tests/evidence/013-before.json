@@ -1,0 +1,74 @@
+{
+  "id": "013",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "subtitle": "עיר קטנה. הרפתקה גדולה.",
+        "fontPx": 11,
+        "contrast": 3.11
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "metrics": {
+          "all": 5,
+          "visible": 5
+        },
+        "disclosure": null
+      }
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 422,
+      "y": 340,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 422,
+        "y": 340
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-city\"]').first()",
+      "x": 615,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-city",
+        "x": 615,
+        "y": 30
+      }
+    }
+  ],
+  "screenshots": [
+    "013-before-city-summary.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

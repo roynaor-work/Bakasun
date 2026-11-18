@@ -1,0 +1,73 @@
+{
+  "id": "006",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "initial": 0,
+        "speech": []
+      }
+    },
+    {
+      "pass": false,
+      "observation": "The same button shows a playable visual demonstration when there is no Hebrew device voice."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The real replay control receives trusted touch. The browser voice API fixture exercises Hebrew available, then unavailable.",
+    "Programmatic repositioning for setup: locator('[data-action=\"game-help-again\"]').first()",
+    "Programmatic repositioning for setup: locator('[data-action=\"game-help-again\"]').first()"
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-help-again\"]').first()",
+      "x": 584.890625,
+      "y": 329.03125,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-help-again",
+        "x": 584.890625,
+        "y": 329.03125
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-help-again\"]').first()",
+      "x": 584.890625,
+      "y": 329.03125,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-help-again",
+        "x": 584.890625,
+        "y": 329.03125
+      }
+    }
+  ],
+  "screenshots": [
+    "006-before-trusted-replay.png",
+    "006-before-without-hebrew-voice.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

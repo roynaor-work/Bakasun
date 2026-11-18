@@ -1,0 +1,115 @@
+{
+  "id": "011",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "previewHeight": 100,
+        "name": [
+          56,
+          48
+        ],
+        "nameVisible": 48,
+        "gender": [
+          56,
+          48
+        ],
+        "genderVisible": 48
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "legendFontsPx": [
+          14,
+          14
+        ],
+        "scrollHint": "↓ עוד אפשרויות למטה"
+      }
+    },
+    {
+      "pass": true,
+      "observation": "A visible name choice is selected by touch."
+    },
+    {
+      "pass": true,
+      "observation": "A visible gender choice is selected by touch."
+    },
+    {
+      "pass": true,
+      "observation": "A vertical touch swipe reveals the remaining choices."
+    },
+    {
+      "pass": true,
+      "observation": {
+        "startAfterSwipe": [
+          474.58,
+          48
+        ],
+        "contrast": 7.36
+      }
+    }
+  ],
+  "notes": [
+    "The test draws one frame using the real avatar preview renderer while the decorative world is paused."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-field=\"nameId\"]').nth(1).first()",
+      "x": 635.7109375,
+      "y": 134.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-option",
+        "x": 635.7109375,
+        "y": 134.390625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-field=\"gender\"]').nth(1).first()",
+      "x": 638,
+      "y": 216.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "avatar-option",
+        "x": 638,
+        "y": 216.390625
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 422,
+      "y": 302,
+      "endX": 422,
+      "endY": 60,
+      "steps": 6
+    }
+  ],
+  "screenshots": [
+    "011-after-avatar.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

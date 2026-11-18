@@ -1,0 +1,73 @@
+{
+  "id": "032",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "labels": [
+          [
+            "וולקן",
+            10,
+            8.485027982878375
+          ],
+          [
+            "ירי רגיל",
+            10,
+            8.268596198776006
+          ],
+          [
+            "גל 1",
+            11,
+            9.742802831704381
+          ]
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "specialTarget": [
+          56,
+          46
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: alienDefense, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.alien-special-switch').first()",
+      "x": 730,
+      "y": 202,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "special-switch",
+        "x": 730,
+        "y": 202
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

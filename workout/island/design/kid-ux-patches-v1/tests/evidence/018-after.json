@@ -1,0 +1,71 @@
+{
+  "id": "018",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "normal": {
+          "text": "חבטה",
+          "fontPx": 14,
+          "ratio": 8.57,
+          "width": 37.859375,
+          "height": 16.796875,
+          "visibleWidth": 37.859375,
+          "visibleHeight": 16.796875
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "held": {
+          "text": "חבטה",
+          "fontPx": 14,
+          "ratio": 7.96,
+          "width": 35.96636962890625,
+          "height": 15.95703125,
+          "visibleWidth": 35.96636962890625,
+          "visibleHeight": 15.95703125
+        },
+        "pointer": {
+          "type": "pointerdown",
+          "trusted": true,
+          "pointerType": "touch",
+          "pointerCount": 1,
+          "action": "hit",
+          "x": 778,
+          "y": 330
+        },
+        "transitions": [
+          "border-color",
+          "box-shadow"
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: tennis, stage 1.",
+    "Used the game’s Canvas renderer fallback to keep the live touch controls responsive in software rendering."
+  ],
+  "touch": [],
+  "screenshots": [
+    "018-after-tennis-shot-held.png",
+    "018-after-tennis-shot.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

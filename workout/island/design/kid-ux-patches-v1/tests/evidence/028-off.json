@@ -1,0 +1,82 @@
+{
+  "id": "028",
+  "mode": "off",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "route": null,
+        "stages": [],
+        "speaker": null
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Synthetic later-day gate with two required rounds, age seven. The first seven answers in each round are set through the normal model so the final answer and navigation can be touched."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"quick-games\"]').first()",
+      "x": 561.125,
+      "y": 349.6015625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "quick-games",
+        "x": 561.125,
+        "y": 349.6015625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"tennis\"]').first()",
+      "x": 736,
+      "y": 338.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-enter",
+        "x": 736,
+        "y": 338.171875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-play\"]').first()",
+      "x": 209.515625,
+      "y": 124.84375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "game-play",
+        "x": 209.515625,
+        "y": 124.84375
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "feature-group applied series"
+}

@@ -1,0 +1,119 @@
+{
+  "id": "031",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "labels": [
+          [
+            "צינור מים",
+            14,
+            9.546608634883095
+          ],
+          [
+            "מטף",
+            14,
+            14.702582372820096
+          ],
+          [
+            "שמיכת כיבוי",
+            14,
+            14.702582372820096
+          ]
+        ],
+        "targets": [
+          [
+            106,
+            56
+          ],
+          [
+            106,
+            56
+          ],
+          [
+            106,
+            56
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "selected": "extinguisher",
+        "preview": "🧯 → ⚡\nמַחֲזִיקִים עַל אֵשׁ מֵחַשְׁמַל וּמְכַבִּים בְּמַטָּף."
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Synthetic stage unlock and truck parked at the real entrance through the developer API. The door and tool selection use touch.",
+    "Dev launch used to set up the live game: fireRescue, stage 12."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('#fire-enter').first()",
+      "x": 422,
+      "y": 337,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "fire-enter",
+        "x": 422,
+        "y": 337
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.fv24-card[data-card=room]:visible').first()",
+      "x": 422,
+      "y": 195,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "fv24-card-rule",
+        "x": 422,
+        "y": 195
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.fv24-tool[data-tool=extinguisher]').first()",
+      "x": 779,
+      "y": 164,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "fv24-tool hint",
+        "x": 779,
+        "y": 164
+      }
+    }
+  ],
+  "screenshots": [
+    "031-after-tool-selected.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

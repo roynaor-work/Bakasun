@@ -1,0 +1,196 @@
+{
+  "id": "009",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "home",
+          "toggle-more"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            44,
+            44
+          ],
+          [
+            44,
+            44
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "toggle-city",
+          "toggle-tasks"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            82,
+            44
+          ],
+          [
+            91.05,
+            44
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "city-map",
+          "city-tour"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            74,
+            44
+          ],
+          [
+            74,
+            44
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "quick-games",
+          "quick-scores"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            85.5,
+            53.09
+          ],
+          [
+            85.5,
+            53.09
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "quick-scores",
+          "quick-training"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            85.5,
+            53.09
+          ],
+          [
+            85.5,
+            53.09
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "pair": [
+          "quick-training",
+          "quick-learning"
+        ],
+        "gapPx": 8,
+        "dimensions": [
+          [
+            85.5,
+            53.09
+          ],
+          [
+            85.5,
+            53.09
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": "The nearby tour action opens the tour without opening the map."
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 347.2890625,
+      "y": 348,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 347.2890625,
+        "y": 348
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-tour\"]').first()",
+      "x": 45,
+      "y": 81,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "city-tour",
+        "x": 45,
+        "y": 81
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-tour-stop\"]').first()",
+      "x": 332.265625,
+      "y": 271,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "city-tour-stop",
+        "x": 332.265625,
+        "y": 271
+      }
+    }
+  ],
+  "screenshots": [
+    "009-after-navigation.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

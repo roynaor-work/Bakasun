@@ -1,0 +1,33 @@
+diff --git a/workout/island/minigames/alpine-session.mjs b/workout/island/minigames/alpine-session.mjs
+index 41f8f1ac..ba333337 100644
+--- a/workout/island/minigames/alpine-session.mjs
++++ b/workout/island/minigames/alpine-session.mjs
+@@ -117,6 +117,14 @@ export function runAlpineSession(ctx) {
+   const trackName = league ? league.name : t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
+   // HUD
+   const hud = el('section', 'alpine-hud'); hud.setAttribute('aria-label', t('alpine.hud'));
++  const kidGoal=Boolean(league)&&kidUx('030');
++  if(kidGoal)screen.dataset.kidAlpineGoal='true';
++  if(kidGoal)kidUxStyle('030',
++    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place]{font-size:14px;background:#f5fbfd;color:#173748}' +
++    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place] b{display:grid;gap:1px;white-space:nowrap}' +
++    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-flight-cue:empty{display:none}' +
++    '@media(max-height:500px){.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-kit-speed>.alpine-flight-cue{top:auto;bottom:0;left:calc(100% + 8px)}}'
++  );
+   const rank = el('strong', 'alpine-rank', '06'), position = el('div', 'alpine-position'), of = el('span', 'alpine-of'); of.append(ltr('/ 06'), el('small', '', t('alpine.position')));
+   position.append(rank, of);
+   const info = el('div', 'alpine-race-info'), trackLine = el('span', 'alpine-track-line'); trackLine.append(t('alpine.trackLabel', {number: trackNumber}), el('i'), trackName);
+@@ -370,11 +378,11 @@ export function runAlpineSession(ctx) {
+     if (stats) { gatesSeen = stats.gates; crashesSeen = stats.crashes; }
+     for (const [kind, g] of Object.entries(goalNodes)) {
+       let text = '', state = 'open';
+-      if (kind === 'place') { text = `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
++      if (kind === 'place') { text = kidGoal ? 'עכשיו מקום '+snap.rank+'|למעבר: מקום '+g.goal.target+' או טוב יותר' : `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
+       else if (kind === 'time') { text = goalClock(g.goal.ms); state = snap.timeMs > g.goal.ms ? 'lost' : racing ? 'ok' : 'open'; }
+       else if (kind === 'gates') { text = `${gatesSeen}/${g.goal.count}`; state = gatesSeen >= g.goal.count ? 'ok' : 'open'; }
+       else { text = crashesSeen ? 'נפילה' : 'נקי'; state = crashesSeen ? 'lost' : racing ? 'ok' : 'open'; }
+-      const key = text + state; if (key !== g.shown) { g.shown = key; g.value.textContent = text; g.node.dataset.state = state; }
++      const key = text + state; if (key !== g.shown) { g.shown = key; if(kidGoal&&kind==='place')g.value.replaceChildren(...text.split('|').map(line=>el('span','',line)));else g.value.textContent = text; g.node.dataset.state = state; }
+     }
+     if (ghostTrack && racing) {
+       const at = ghostTimeAt(ghostTrack, snap.distanceM), gap = at === null ? '' : ((snap.timeMs - at) / 1000).toFixed(1);

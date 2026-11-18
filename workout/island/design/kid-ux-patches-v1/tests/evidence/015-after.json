@@ -1,0 +1,62 @@
+{
+  "id": "015",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "instructions": "בְּמַפַּת הַלִּיגָה בּוֹחֲרִים מִשְׂחָק פָּתוּחַ. אֶפְשָׁר לְהִתְאַמֵּן בְּ״אִמּוּן שַׂחְקָן״ וּלְהַכִּיר אֶת הַשַּׂחְקָנִים בְּכַרְטִיסֵי הַקְּבוּצוֹת."
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Actual league actions match the revised instructions."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The soccer introduction and the real league map are reached by the dev API. A trusted touch expands optional instructions when present."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.kid-ux-intro-details summary').first()",
+      "x": 422,
+      "y": 288,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "",
+        "x": 422,
+        "y": 288
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 424,
+      "y": 300,
+      "endX": 424,
+      "endY": 110,
+      "steps": 6
+    }
+  ],
+  "screenshots": [
+    "015-after-soccer-league-help.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

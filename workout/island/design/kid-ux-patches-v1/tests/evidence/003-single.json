@@ -1,0 +1,54 @@
+{
+  "id": "003",
+  "mode": "single",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "columns": 4,
+        "namePx": 16,
+        "enterPx": 14,
+        "badgePx": 14
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted swipes reach the last game card."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 424,
+      "y": 300,
+      "endX": 424,
+      "endY": 110,
+      "steps": 6
+    },
+    {
+      "type": "swipe",
+      "x": 424,
+      "y": 300,
+      "endX": 424,
+      "endY": 110,
+      "steps": 6
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "complete applied series"
+}

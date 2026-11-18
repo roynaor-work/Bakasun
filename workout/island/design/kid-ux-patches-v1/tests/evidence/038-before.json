@@ -1,0 +1,76 @@
+{
+  "id": "038",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": "Demo target absent"
+    },
+    {
+      "pass": true,
+      "observation": "The example left the actual puzzle order intact"
+    },
+    {
+      "pass": true,
+      "observation": "First touch selected the first tile"
+    },
+    {
+      "pass": true,
+      "observation": "Second touch swapped the two original tiles"
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Level-4 jigsaw, age 7. Earlier questions advanced in the development fixture. Replay and both tile selections use trusted touches."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-tile\"]').first().first()",
+      "x": 195.375,
+      "y": 107.96875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "learning-tile",
+        "x": 195.375,
+        "y": 107.96875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-tile\"]').nth(1).first()",
+      "x": 255.125,
+      "y": 107.96875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "learning-tile",
+        "x": 255.125,
+        "y": 107.96875
+      }
+    }
+  ],
+  "screenshots": [
+    "038-before-screen.png",
+    "038-before-swapped.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

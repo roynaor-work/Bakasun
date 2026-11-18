@@ -1,0 +1,22 @@
+diff --git a/workout/island/learning/interface.mjs b/workout/island/learning/interface.mjs
+index d2a44e74..31a18463 100644
+--- a/workout/island/learning/interface.mjs
++++ b/workout/island/learning/interface.mjs
+@@ -266,3 +266,17 @@ export class LearningInterface {
+   }
+   dispose(){this.clearQuestion();clearInterval(this.dayTimer);clearInterval(this.clockTimer);this.stopVoiceListener();this.voice.dispose();this.unsubscribe();this.panel.remove();}
+ }
++
++kidUxStyle('037', `
++  .learning-memory { gap: 8px; }
++  .learning-screen .learning-memory button { min-height: 52px; min-width: 44px; }
++  @media (orientation: landscape) and (max-height: 600px) {
++    .learning-memory { max-width: 280px; }
++    .learning-screen .learning-memory button { height: 52px; }
++    .learning-screen .learning-memory:has(button:nth-child(6):last-child) button { height: 64px; }
++  }
++  @media (max-width: 380px) {
++    .learning-screen .learning-memory { grid-template-columns: repeat(4, minmax(44px, 1fr)); }
++    .learning-screen .learning-memory:has(button:nth-child(6):last-child) { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
++  }
++`);

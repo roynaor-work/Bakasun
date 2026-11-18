@@ -1,0 +1,275 @@
+{
+  "id": "028",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "route": "tennis",
+        "stages": [
+          {
+            "dots": 8,
+            "finished": "false"
+          },
+          {
+            "dots": 8,
+            "finished": "false"
+          }
+        ],
+        "speaker": [
+          62.2,
+          48
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "nextRound": [
+          260,
+          48
+        ],
+        "visible": 48
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "completedAfterFirstRound": 1
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "resume": "🎾 חוזרים לטניס בעיר",
+        "dimensions": [
+          528,
+          48
+        ],
+        "locked": false
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "returnedTo": "tennis"
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Synthetic later-day gate with two required rounds, age seven. The first seven answers in each round are set through the normal model so the final answer and navigation can be touched."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"quick-games\"]').first()",
+      "x": 562.25,
+      "y": 348.453125,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "quick-games",
+        "x": 562.25,
+        "y": 348.453125
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"tennis\"]').first()",
+      "x": 736,
+      "y": 338.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-enter",
+        "x": 736,
+        "y": 338.171875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-play\"]').first()",
+      "x": 209.515625,
+      "y": 124.84375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "game-play",
+        "x": 209.515625,
+        "y": 124.84375
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"kid-daily-hear\"]').first()",
+      "x": 129.1015625,
+      "y": 141.953125,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "kid-daily-hear",
+        "x": 129.1015625,
+        "y": 141.953125
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"daily-station\"][data-station=\"math\"]').first()",
+      "x": 258,
+      "y": 218.421875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 5,
+        "action": "daily-station",
+        "x": 258,
+        "y": 218.421875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-answer\"]').and(getByText('10', { exact: true })).first().first()",
+      "x": 422.0078125,
+      "y": 249.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 6,
+        "action": "learning-answer",
+        "x": 422.0078125,
+        "y": 249.75
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-next\"]').first()",
+      "x": 422,
+      "y": 356.6015625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 7,
+        "action": "learning-next",
+        "x": 422,
+        "y": 356.6015625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-result-daily\"]').first()",
+      "x": 556,
+      "y": 199.796875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 8,
+        "action": "learning-result-daily",
+        "x": 556,
+        "y": 199.796875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"daily-station\"][data-station=\"math\"]').first()",
+      "x": 258,
+      "y": 218.421875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 9,
+        "action": "daily-station",
+        "x": 258,
+        "y": 218.421875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-answer\"]').and(getByText('6', { exact: true })).first().first()",
+      "x": 171.3359375,
+      "y": 249.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 10,
+        "action": "learning-answer",
+        "x": 171.3359375,
+        "y": 249.75
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-next\"]').first()",
+      "x": 422,
+      "y": 356.6015625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 11,
+        "action": "learning-next",
+        "x": 422,
+        "y": 356.6015625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"kid-daily-resume\"]').first()",
+      "x": 422,
+      "y": 199.796875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 12,
+        "action": "kid-daily-resume",
+        "x": 422,
+        "y": 199.796875
+      }
+    }
+  ],
+  "screenshots": [
+    "028-after-two-rounds.png",
+    "028-after-second-round.png",
+    "028-after-return-to-game.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

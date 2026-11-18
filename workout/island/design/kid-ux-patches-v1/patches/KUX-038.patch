@@ -1,0 +1,75 @@
+diff --git a/workout/island/learning/interface.mjs b/workout/island/learning/interface.mjs
+index 31a18463..b259f416 100644
+--- a/workout/island/learning/interface.mjs
++++ b/workout/island/learning/interface.mjs
+@@ -137,6 +137,7 @@ export class LearningInterface {
+     this.ui.closeModal();this.ui.closeInfo();this.ui.cancelPlacement();this.ui.closeDetails();this.ui.setDockOpen(false);
+     const r=this.engine.startLearning(station,{languagePictures:kidUx('027')&&station==='language'&&!this.voice.available});if(!r.ok){this.ui.result(r);return;}
+     const dialog=this.ui.openModal('learning.title','learning.subtitle');dialog.classList.add('learning-screen');dialog.dataset.learning=station;this.dialog=dialog;this.ui.view.paused=true;
++    if(kidUx('038'))this.jigsawDemoShown=false;
+     this.ui.modalCleanup=()=>{this.clearQuestion();clearInterval(this.clockTimer);this.voice.stop();this.engine.cancelLearning();this.ui.view.paused=false;this.dialog=null;};
+     const header=el('header','learning-header'),heading=dialog.querySelector('h2');heading.textContent=`${STATIONS[station].icon} ${STATIONS[station].title}`;
+     this.speaker=button('🔊','learning-replay',()=>{const q=this.engine.learningRound()?.question;if(q)this.voice.speak(q.voice);},'learning-speaker');this.speaker.setAttribute('aria-label','השמעת השאלה שוב');
+@@ -199,11 +200,45 @@ export class LearningInterface {
+     const undo=button(phrase('↶ מְנַסִּים שׁוּב',q),'learning-word-clear',()=>{chosen.length=0;for(const b of letters.children)b.disabled=false;render();},'learning-small');
+     this.body.append(row,letters,undo);this.footer.append(button(q.level<=2?'✓':phrase('בּוֹדְקִים',q),'learning-check',()=>this.answer(chosen.map(i=>q.letters[i]).join(''))));
+   }
++  jigsawDemo(){
++    const demo=button('','learning-jigsaw-demo',replay,'learning-small learning-jigsaw-demo');
++    demo.dir='ltr';
++    demo.setAttribute('aria-label','הדגמה חוזרת של שתי נגיעות להחלפת חלקים');
++    const before=el('span','learning-jigsaw-example'),after=el('span','learning-jigsaw-example');
++    const first=el('span','learning-jigsaw-example-tile','🟦'),second=el('span','learning-jigsaw-example-tile','🟨');
++    const tapHints=el('span','learning-jigsaw-example-taps');
++    const hands=[el('span','','👆'),el('span','','👆')];
++    tapHints.append(...hands);
++    before.append(first,second,tapHints);
++    after.append(el('span','learning-jigsaw-example-tile','🟨'),el('span','learning-jigsaw-example-tile','🟦'));
++    const arrow=el('span','','→');
++    for(const part of [before,arrow,after])part.setAttribute('aria-hidden','true');
++    demo.append(before,arrow,after);
++
++    function replay(){
++      if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
++      demo.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
++      const timing={duration:1450,easing:'linear'};
++      hands[0].animate([{opacity:1,transform:'translateY(5px)'},{opacity:1,transform:'none',offset:.14},{opacity:.25,offset:.24},{opacity:.25,offset:.87},{opacity:1}],timing);
++      hands[1].animate([{opacity:.25},{opacity:.25,offset:.28},{opacity:1,transform:'translateY(5px)',offset:.31},{opacity:1,transform:'none',offset:.43},{opacity:.25,offset:.55},{opacity:.25,offset:.87},{opacity:1}],timing);
++      for(const [tile,shift] of [[first,'100%'],[second,'-100%']]){
++        tile.animate([{transform:'none'},{transform:'none',offset:.55},{transform:`translateX(${shift})`,offset:.82},{transform:`translateX(${shift})`}],timing);
++      }
++      after.animate([{opacity:.45},{opacity:.45,offset:.8},{opacity:1}],timing);
++    }
++    if(!this.jigsawDemoShown){
++      this.jigsawDemoShown=true;
++      queueMicrotask(()=>{if(demo.isConnected)replay();});
++    }
++    return demo;
++  }
+   jigsaw(q){
+     const image=townImage(q.scene),wrap=el('div','learning-jigsaw-wrap'),reference=el('img','learning-jigsaw-reference');reference.src=image;reference.alt='תמונת העיר השלמה להרכבה';
+     const grid=el('div','learning-jigsaw');grid.dir='ltr';grid.style.setProperty('--grid',q.size);this.tileOrder=[...q.order];let selected=null;
+     const render=()=>{grid.replaceChildren();this.tileOrder.forEach((tile,pos)=>{const b=button('','learning-tile',()=>{if(selected===null){selected=pos;render();return;}[this.tileOrder[pos],this.tileOrder[selected]]=[this.tileOrder[selected],this.tileOrder[pos]];selected=null;render();});b.style.backgroundImage=`url("${image}")`;b.style.backgroundSize=`${q.size*100}% ${q.size*100}%`;b.style.backgroundPosition=`${tile%q.size/(q.size-1)*100}% ${Math.floor(tile/q.size)/(q.size-1)*100}%`;b.setAttribute('aria-label',`מקום ${pos+1}, חלק ${tile+1}`);b.setAttribute('aria-pressed',String(pos===selected));b.dataset.tile=tile;b.dataset.position=pos;grid.append(b);});};render();
+-    wrap.append(reference,grid);this.body.append(wrap);this.footer.append(button(q.level<=2?'✓':phrase('בּוֹדְקִים',q),'learning-check',()=>this.answer(this.tileOrder.join(','))));
++    wrap.append(reference,grid);
++    if(kidUx('038'))wrap.append(this.jigsawDemo());
++    this.body.append(wrap);this.footer.append(button(q.level<=2?'✓':phrase('בּוֹדְקִים',q),'learning-check',()=>this.answer(this.tileOrder.join(','))));
+     this.revealPuzzle=()=>{this.tileOrder=Array.from({length:q.size*q.size},(_,i)=>i);selected=null;render();};
+   }
+   memory(q){
+@@ -280,3 +315,15 @@ kidUxStyle('037', `
+     .learning-screen .learning-memory:has(button:nth-child(6):last-child) { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
+   }
+ `);
++
++kidUxStyle('038', `
++  .learning-jigsaw-demo { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 64px; padding: 8px; font-size: 20px; direction: ltr; background: #fff9ed; color: #234c59; }
++  .learning-jigsaw-example { position: relative; display: flex; padding-bottom: 10px; }
++  .learning-jigsaw-example-tile { display: block; width: 24px; line-height: 24px; }
++  .learning-jigsaw-example-taps { position: absolute; inset: 16px 0 auto; display: flex; font-size: 14px; text-align: center; }
++  .learning-jigsaw-example-taps > span { width: 24px; }
++  @media (orientation: landscape) and (max-height: 600px) {
++    .learning-screen[data-kind=jigsaw] .learning-jigsaw-wrap { gap: 12px; }
++    .learning-screen[data-kind=jigsaw] .learning-jigsaw-demo { flex-shrink: 0; }
++  }
++`);

@@ -1,0 +1,133 @@
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index b5e39049..74036e3f 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -24,7 +24,7 @@ import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-15';
+ import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-15';
+ import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-15';
+ import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-15';
+-import { gameGuide } from './kid-ux-help.mjs?v=island-v2-20261107-15';
++import { gameGuide, helpReplay } from './kid-ux-help.mjs?v=island-v2-20261107-15';
+ 
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+@@ -280,7 +280,22 @@ export class ActivityInterface {
+       }
+       dialog.append(this.helpLines(id),play,again);
+     }
+-    this.narrateHelp(id);
++    if(kidUx('006')){
++      const stop=helpReplay({
++        dialog,gameId:id,guide,play,again,
++        isMuted:()=>this.sound.muted,
++        readText:()=>[...dialog.querySelectorAll('.game-help-lines p')].map(line=>line.textContent).join(' '),
++      });
++      const cleanup=this.ui.modalCleanup;
++      this.stopHelp=stop;
++      this.ui.modalCleanup=()=>{
++        stop();
++        this.stopHelp=null;
++        cleanup();
++      };
++    }else{
++      this.narrateHelp(id);
++    }
+   }
+   start(id,eventId,stage) {
+     if(this.requireBuilding(id))return;
+@@ -290,6 +305,8 @@ export class ActivityInterface {
+     if(id==='navalDuel')ensureNavalTheme();
+     if(this.requireBuilding(id))return;
+     // Switching from instructions must retain the event's playing state.
++    this.stopHelp?.();
++    this.stopHelp=null;
+     this.ui.modalCleanup=null;
+     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+     dialog.classList.add('game-screen');dialog.dataset.game=id;
+diff --git a/workout/island/ui/kid-ux-help.mjs b/workout/island/ui/kid-ux-help.mjs
+index 948efc49..2f6cb733 100644
+--- a/workout/island/ui/kid-ux-help.mjs
++++ b/workout/island/ui/kid-ux-help.mjs
+@@ -94,6 +94,14 @@ const guideCSS = `
+ `;
+ kidUxStyle('005', guideCSS);
+ 
++const replayCSS = `
++  .modal[data-intro] [data-action="game-help-again"] { min-width: 44px; min-height: 44px; font-size: 15px; }
++  .kid-ux-help-feedback { color: #fff8e8; background: #16313b; text-align: center; padding: 6px; font-size: 14px; }
++  .kid-ux-help-feedback:empty { display: none; }
++  .modal[data-kid-ux-help] > .ik-opening-small { display: none; }
++`;
++kidUxStyle('006', guideCSS + replayCSS);
++
+ const node = (tag, className, text = '') => {
+   const element = document.createElement(tag);
+   element.className = className;
+@@ -168,3 +176,67 @@ export function gameGuide(gameId) {
+   show();
+   return { node: guide, sentence: () => scenes[step][4] };
+ }
++
++export function helpReplay({ dialog, gameId, guide, play, again, isMuted, readText }) {
++  again.textContent = '🔊 לשמוע הוראות';
++  const feedback = node('p', 'kid-ux-help-feedback');
++  feedback.setAttribute('role', 'status');
++  again.after(feedback);
++  let current;
++
++  function showGuide(message) {
++    feedback.textContent = message;
++    if (guide) return;
++    guide = gameGuide(gameId);
++    if (!guide) return;
++    const lines = dialog.querySelector('.game-help-lines');
++    const details = node('details', 'kid-ux-intro-details');
++    details.append(node('summary', '', 'הוראות נוספות'), lines);
++    const actions = node('div', 'kid-ux-intro-actions');
++    actions.append(play, again, feedback);
++    dialog.dataset.kidUxHelp = '';
++    dialog.append(guide.node, details, actions);
++  }
++
++  function stop() {
++    if (!current) return;
++    current = null;
++    try { globalThis.speechSynthesis.cancel(); } catch {}
++  }
++
++  again.onclick = () => {
++    stop();
++    if (isMuted()) {
++      showGuide('הצליל כבוי. אפשר לצפות בהדגמה.');
++      return;
++    }
++    try {
++      const synthesis = globalThis.speechSynthesis;
++      const hebrew = (synthesis?.getVoices() ?? []).filter(v => /^(he|iw)([-_]|$)/i.test(v.lang));
++      if (!hebrew.length || !globalThis.SpeechSynthesisUtterance) {
++        showGuide('אין קול עברי זמין. אפשר לצפות בהדגמה.');
++        return;
++      }
++      const utterance = new SpeechSynthesisUtterance(guide?.sentence() ?? readText());
++      utterance.lang = 'he-IL';
++      utterance.voice = hebrew.find(v => v.localService) ?? hebrew[0];
++      utterance.rate = .86;
++      utterance.onend = () => { if (current === utterance) current = null; };
++      utterance.onerror = () => {
++        if (current !== utterance) return;
++        current = null;
++        showGuide('ההקראה לא זמינה. אפשר לצפות בהדגמה.');
++      };
++      current = utterance;
++      feedback.textContent = '';
++      synthesis.speak(utterance);
++    } catch {
++      current = null;
++      showGuide('ההקראה לא זמינה. אפשר לצפות בהדגמה.');
++    }
++  };
++  dialog.querySelector('.sound-toggle')?.addEventListener('click', () => {
++    if (isMuted()) stop();
++  });
++  return stop;
++}

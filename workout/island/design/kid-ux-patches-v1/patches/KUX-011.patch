@@ -1,0 +1,41 @@
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index f38afa92..120028a1 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -37,6 +37,25 @@ kidUxStyle('010', `
+   .island-ui.clean-hud .city-map-hint{font-size:14px;color:#203b36}
+ `);
+ 
++kidUxStyle('011', `
++  .avatar-modal .avatar-field legend,.avatar-modal .avatar-field .choice,.avatar-modal .modal-subtitle,.avatar-modal .avatar-start{font-size:14px}
++  .avatar-modal .avatar-field .choice,.avatar-modal .avatar-start{min-height:48px}
++  .avatar-modal .avatar-field legend,.avatar-modal .modal-subtitle{color:#233e37}
++  .avatar-modal .kid-avatar-scroll-hint{margin:0;color:#233e37;font-size:14px;font-weight:700}
++  @media(orientation:landscape) and (min-width:580px) and (max-height:600px){
++    .avatar-modal .avatar-scroll{display:grid;grid-template-columns:minmax(0,1fr) minmax(144px,.46fr);align-items:start;align-content:start;column-gap:14px;padding:14px 16px}
++    .avatar-modal .avatar-scroll>h2,.avatar-modal .avatar-scroll>.modal-subtitle{grid-column:1/-1}
++    .avatar-modal .avatar-scroll>.modal-subtitle{margin:4px 0 9px}
++    .avatar-modal .avatar-preview{grid-column:2;grid-row:3/span 2;height:100px;margin:0}
++    .avatar-modal .avatar-field{margin:0 0 6px}
++    .avatar-modal .avatar-field:nth-of-type(-n+2){grid-column:1}
++    .avatar-modal .avatar-field:nth-of-type(n+3){grid-column:1/-1}
++    .avatar-modal .avatar-field legend{margin-bottom:4px}
++    .avatar-modal .avatar-footer{display:flex;align-items:center;gap:12px;padding-block:8px}
++    .avatar-modal .avatar-start{flex:1;width:auto;background:#285f54;color:#fff}
++  }
++`);
++
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+   node.className = className;
+@@ -747,7 +766,9 @@ export class IslandInterface {
+     }
+     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
+     start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal();this.toast('tutorial.welcome'); };
+-    const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
++    const footer = el('footer', 'avatar-footer');
++    if (kidUx('011')) footer.append(el('p', 'kid-avatar-scroll-hint', '↓ עוד אפשרויות למטה'));
++    footer.append(start); modal.append(footer);
+   }
+   exportBackup() {
+     const blob = new Blob([this.engine.exportJSON()], { type: 'application/json' });

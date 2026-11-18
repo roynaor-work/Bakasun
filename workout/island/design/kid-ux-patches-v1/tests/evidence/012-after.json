@@ -1,0 +1,121 @@
+{
+  "id": "012",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "illustratedCityHall": true,
+        "fingerAnimation": "kid-city-hall-tap"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "speechButton": [
+          52.2,
+          48
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "hallHighlighted": true
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "confirmation": "✓ הגעתם לעירייה!",
+        "cityHallOpened": true
+      }
+    }
+  ],
+  "notes": [
+    "The test draws one frame of the paused world to capture the normal City Hall highlight."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 347.2890625,
+      "y": 348,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 347.2890625,
+        "y": 348
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-tasks\"]').first()",
+      "x": 551.5234375,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-tasks",
+        "x": 551.5234375,
+        "y": 30
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"tutorial-city-hall-hear\"]').first()",
+      "x": 555.1015625,
+      "y": 168.59375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "tutorial-city-hall-hear",
+        "x": 555.1015625,
+        "y": 168.59375
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"tutorial-city-hall\"]').first()",
+      "x": 706.1015625,
+      "y": 168.59375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "tutorial-city-hall",
+        "x": 706.1015625,
+        "y": 168.59375
+      }
+    }
+  ],
+  "screenshots": [
+    "012-after-tutorial.png",
+    "012-after-city-hall-open.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

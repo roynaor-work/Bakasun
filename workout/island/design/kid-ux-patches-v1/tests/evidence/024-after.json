@@ -1,0 +1,134 @@
+{
+  "id": "024",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "helpQualitySensitivityExit": [
+          {
+            "width": 132.7,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "איך משחקים?",
+            "contrast": 15.61
+          },
+          {
+            "width": 132.7,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "איכות גרפיקה: רגילה",
+            "contrast": 15.61
+          },
+          {
+            "width": 132.7,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "רגישות כוונון: בינונית",
+            "contrast": 15.61
+          },
+          {
+            "width": 94.4,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "⌂ חזרה לאי",
+            "contrast": 12.09
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "save": {
+          "width": 414.1,
+          "height": 20.3,
+          "fontPx": 14,
+          "centerHit": true,
+          "text": "ההתקדמות נשמרת אוטומטית במכשיר הזה",
+          "contrast": 16.17
+        },
+        "exit": {
+          "width": 94.4,
+          "height": 48,
+          "fontPx": 14,
+          "centerHit": true,
+          "text": "⌂ חזרה לאי",
+          "contrast": 12.09
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "touchReturnsToIsland": true
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The embedded campaign is the same-origin game iframe. The QA hold freezes its decorative rendering after the menu has loaded.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 649.9453125,
+      "y": 297,
+      "endX": 649.9453125,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-understood\"]').first()",
+      "x": 649.9453125,
+      "y": 328.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-understood",
+        "x": 649.9453125,
+        "y": 328.75
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#island-back').first()",
+      "x": 737.7421875,
+      "y": 337.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "island-back",
+        "x": 737.7421875,
+        "y": 337.6875
+      }
+    }
+  ],
+  "screenshots": [
+    "024-after-campaign-menu.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

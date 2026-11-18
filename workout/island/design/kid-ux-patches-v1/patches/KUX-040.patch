@@ -1,0 +1,49 @@
+diff --git a/workout/island/minigames/hoops-session.mjs b/workout/island/minigames/hoops-session.mjs
+index 423fa9b3..bc253faa 100644
+--- a/workout/island/minigames/hoops-session.mjs
++++ b/workout/island/minigames/hoops-session.mjs
+@@ -84,7 +84,20 @@ export function startHoops(ctx){
+  // show: the broadcast tag during a replay (Hebrew, no words otherwise on the game screen), gone the moment live play returns
+  const replayTag=node('div','hoops-replay-tag','שידור חוזר');replayTag.dir='rtl';replayTag.hidden=true;replayTag.setAttribute('aria-live','polite');
+  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
+- const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
++ const childBench=kidUx('040');
++ kidUxStyle('040',`
++  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench{
++   box-sizing:border-box;max-width:calc(100% - 24px);padding:10px;bottom:max(10px,env(safe-area-inset-bottom));
++   background:#0c111c
++  }
++  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench .hoops-bench-close{
++   position:static;justify-self:center;display:flex;align-items:center;justify-content:center;gap:8px;
++   box-sizing:border-box;width:auto;min-width:48px;min-height:48px;padding:6px 16px;border-radius:12px;
++   color:#13213c;background:#f9e8b7;font-size:16px;font-weight:700;direction:rtl
++  }
++  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench .hoops-bench-close svg{width:20px;height:20px}
++ `);
++ const benchPanel=node('div',childBench?'hoops-bench kid-bench':'hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
+  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה ועצירת כדרור (אחריו אין כדרור, עד 2 צעדים)'));
+  const stepEl=node('div','hoops-steps');stepEl.hidden=true;stepEl.setAttribute('role','status');
+  const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
+@@ -183,7 +196,12 @@ export function startHoops(ctx){
+    const num=node('bdi','hoops-card-num',String(p.number)),bar=node('span','hoops-card-energy');bar.style.setProperty('--e',String(p.energy));const fouls=node('span','hoops-card-fouls');for(let k=0;k<p.fouls;k++)fouls.append(node('i'));
+    b.append(num,bar,fouls);b.onclick=()=>{if(!pick){pick=p;b.classList.add('picked');return;}const a=pick.onCourt?pick:p,c=pick.onCourt?p:pick;pick=null;if(a.onCourt&&!c.onCourt){engine.substitute(0,a.id,c.id);}openBench();};r.append(b);}return r;};
+   benchPanel.append(row(roster.filter(p=>p.onCourt),'court'),row(roster.filter(p=>!p.onCourt),'bench'));
+-  const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));close.onclick=()=>{benchPanel.hidden=true;};benchPanel.append(close);
++  const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));
++  if(childBench){
++   close.setAttribute('aria-label','חזרה למשחק');
++   close.append(node('span','','חזרה למשחק'));
++  }
++  close.onclick=()=>{benchPanel.hidden=true;if(childBench)controls.elements.timeout.focus();};benchPanel.append(close);
+  }
+ 
+  const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
+@@ -216,7 +234,7 @@ export function startHoops(ctx){
+   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
+   if(autoReplay&&now>=autoReplay.at&&view&&!view.replaying&&!session.debug?.holdReplay)startAutoReplay(now);
+   setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);
+-  if(s.phase!=='timeout'&&!benchPanel.hidden&&s.phase==='live')benchPanel.hidden=true;
++  if(s.phase!=='timeout'&&!benchPanel.hidden&&(childBench||timeoutFeedback||s.phase==='live'))benchPanel.hidden=true;
+   setData(screenEl,'hoopsPhase',s.phase);
+  }
+ 

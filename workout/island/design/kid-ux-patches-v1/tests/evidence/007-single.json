@@ -1,0 +1,162 @@
+{
+  "id": "007",
+  "mode": "single",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "text": "\"השהיה\" / \"\"",
+        "fontPx": 14,
+        "visible": true,
+        "direction": "column",
+        "width": 56,
+        "textWidth": 43.6094
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "exit": {
+          "x": 248,
+          "y": 163.25,
+          "width": 110.671875,
+          "height": 65.5,
+          "top": 163.25,
+          "right": 358.671875,
+          "bottom": 228.75,
+          "left": 248,
+          "rect": {
+            "x": 248,
+            "y": 163.25,
+            "width": 110.671875,
+            "height": 65.5,
+            "top": 163.25,
+            "right": 358.671875,
+            "bottom": 228.75,
+            "left": 248
+          },
+          "visibleRect": {
+            "x": 248,
+            "y": 163.25,
+            "width": 110.671875,
+            "height": 65.5
+          },
+          "visibleWidth": 110.671875,
+          "visibleHeight": 65.5,
+          "centerHit": true,
+          "visible": true,
+          "fontPx": 14,
+          "ratio": 8.352188966418268,
+          "contrast": 8.352188966418268,
+          "complexBackground": false,
+          "color": "rgb(255, 248, 232)",
+          "background": [
+            130,
+            45,
+            53
+          ],
+          "text": "לחזור לאי"
+        },
+        "label": {
+          "x": 273.03125,
+          "y": 203.25,
+          "width": 60.609375,
+          "height": 17.5,
+          "top": 203.25,
+          "right": 333.640625,
+          "bottom": 220.75,
+          "left": 273.03125,
+          "rect": {
+            "x": 273.03125,
+            "y": 203.25,
+            "width": 60.609375,
+            "height": 17.5,
+            "top": 203.25,
+            "right": 333.640625,
+            "bottom": 220.75,
+            "left": 273.03125
+          },
+          "visibleRect": {
+            "x": 273.03125,
+            "y": 203.25,
+            "width": 60.609375,
+            "height": 17.5
+          },
+          "visibleWidth": 60.609375,
+          "visibleHeight": 17.5,
+          "centerHit": true,
+          "visible": true,
+          "fontPx": 14,
+          "ratio": 8.352188966418268,
+          "contrast": 8.352188966418268,
+          "complexBackground": false,
+          "color": "rgb(255, 248, 232)",
+          "background": [
+            130,
+            45,
+            53
+          ],
+          "text": "לחזור לאי"
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted pause and exit taps returned to the island and disposed the session."
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Uses the live soccer game with its low graphics profile for software rendering.",
+    "Dev launch used to set up the live game: soccer, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-pause\"]').first()",
+      "x": 40,
+      "y": 40,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-pause",
+        "x": 40,
+        "y": 40
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-exit\"]').first()",
+      "x": 303.3359375,
+      "y": 196,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-exit",
+        "x": 303.3359375,
+        "y": 196
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}
