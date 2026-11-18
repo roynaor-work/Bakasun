@@ -1,0 +1,1417 @@
+{
+  "seed": 1701,
+  "mode": "campaign",
+  "baseline": false,
+  "fixedHz": 30,
+  "sampleHz": 3,
+  "limitSeconds": 180,
+  "profiles": {
+    "novice": {
+      "error": 0.18,
+      "reaction": 0.8,
+      "stay": true,
+      "abilities": false
+    },
+    "regular": {
+      "error": 0.075,
+      "reaction": 0.32,
+      "stay": false,
+      "abilities": true
+    },
+    "expert": {
+      "error": 0.015,
+      "reaction": 0.12,
+      "stay": false,
+      "abilities": true
+    }
+  },
+  "runs": [
+    {
+      "profile": "novice",
+      "wave": 1,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 54.43,
+      "kills": 10,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 77,
+      "shots": 216,
+      "hits": 23,
+      "crits": 7,
+      "firstKillSeconds": 19.33,
+      "firstDamageSeconds": 22.33,
+      "peakEnemies": 7,
+      "bosses": [],
+      "coinsEarned": 185,
+      "equipment": {
+        "weapons": {
+          "mg": 1
+        },
+        "upgrades": {},
+        "specials": []
+      },
+      "unlocked": 2
+    },
+    {
+      "profile": "novice",
+      "wave": 2,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 57.83,
+      "kills": 15,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 26,
+      "shots": 365,
+      "hits": 38,
+      "crits": 6,
+      "firstKillSeconds": 11.33,
+      "firstDamageSeconds": 23.67,
+      "peakEnemies": 8,
+      "bosses": [],
+      "coinsEarned": 319,
+      "equipment": {
+        "weapons": {
+          "mg": 3
+        },
+        "upgrades": {
+          "cooling": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 3
+    },
+    {
+      "profile": "novice",
+      "wave": 3,
+      "weather": "breeze",
+      "result": "won",
+      "seconds": 60.5,
+      "kills": 21,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 39,
+      "shots": 434,
+      "hits": 52,
+      "crits": 5,
+      "firstKillSeconds": 18,
+      "firstDamageSeconds": 20,
+      "peakEnemies": 11,
+      "bosses": [],
+      "coinsEarned": 372,
+      "equipment": {
+        "weapons": {
+          "mg": 4
+        },
+        "upgrades": {
+          "cooling": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 4
+    },
+    {
+      "profile": "novice",
+      "wave": 4,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 80.37,
+      "kills": 28,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 16,
+      "shots": 553,
+      "hits": 92,
+      "crits": 16,
+      "firstKillSeconds": 14,
+      "firstDamageSeconds": 26.33,
+      "peakEnemies": 15,
+      "bosses": [],
+      "coinsEarned": 527,
+      "equipment": {
+        "weapons": {
+          "mg": 5
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 5
+    },
+    {
+      "profile": "novice",
+      "wave": 5,
+      "weather": "clear",
+      "result": "lost",
+      "seconds": 73.63,
+      "kills": 15,
+      "remaining": 6,
+      "hpStart": 150,
+      "hpEnd": 0,
+      "shots": 519,
+      "hits": 69,
+      "crits": 20,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": 20.67,
+      "peakEnemies": 9,
+      "bosses": [
+        "king"
+      ],
+      "coinsEarned": 235,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 2,
+          "cooling": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 5
+    },
+    {
+      "profile": "regular",
+      "wave": 1,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 46.67,
+      "kills": 10,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 100,
+      "shots": 185,
+      "hits": 25,
+      "crits": 0,
+      "firstKillSeconds": 3,
+      "firstDamageSeconds": null,
+      "peakEnemies": 4,
+      "bosses": [],
+      "coinsEarned": 185,
+      "equipment": {
+        "weapons": {
+          "mg": 1
+        },
+        "upgrades": {},
+        "specials": []
+      },
+      "unlocked": 2
+    },
+    {
+      "profile": "regular",
+      "wave": 2,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 40.37,
+      "kills": 15,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 100,
+      "shots": 301,
+      "hits": 23,
+      "crits": 6,
+      "firstKillSeconds": 1,
+      "firstDamageSeconds": null,
+      "peakEnemies": 6,
+      "bosses": [],
+      "coinsEarned": 259,
+      "equipment": {
+        "weapons": {
+          "mg": 3
+        },
+        "upgrades": {
+          "cooling": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 3
+    },
+    {
+      "profile": "regular",
+      "wave": 3,
+      "weather": "breeze",
+      "result": "won",
+      "seconds": 49.2,
+      "kills": 21,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 424,
+      "hits": 39,
+      "crits": 4,
+      "firstKillSeconds": 5.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 7,
+      "bosses": [],
+      "coinsEarned": 372,
+      "equipment": {
+        "weapons": {
+          "mg": 4
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 4
+    },
+    {
+      "profile": "regular",
+      "wave": 4,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 62.33,
+      "kills": 26,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 536,
+      "hits": 84,
+      "crits": 9,
+      "firstKillSeconds": 5,
+      "firstDamageSeconds": null,
+      "peakEnemies": 9,
+      "bosses": [],
+      "coinsEarned": 519,
+      "equipment": {
+        "weapons": {
+          "mg": 5
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 1,
+          "rocket": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 5
+    },
+    {
+      "profile": "regular",
+      "wave": 5,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 42.87,
+      "kills": 24,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 414,
+      "hits": 135,
+      "crits": 27,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 8,
+      "bosses": [
+        "king"
+      ],
+      "coinsEarned": 828,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 1,
+          "rocket": 1,
+          "frost": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 6
+    },
+    {
+      "profile": "regular",
+      "wave": 6,
+      "weather": "heat",
+      "result": "won",
+      "seconds": 56.23,
+      "kills": 28,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 647,
+      "hits": 41,
+      "crits": 6,
+      "firstKillSeconds": 1.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 7,
+      "bosses": [],
+      "coinsEarned": 648,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 3,
+          "rocket": 1,
+          "frost": 1,
+          "turret": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 7
+    },
+    {
+      "profile": "regular",
+      "wave": 7,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 57.67,
+      "kills": 27,
+      "remaining": 0,
+      "hpStart": 150,
+      "hpEnd": 150,
+      "shots": 553,
+      "hits": 81,
+      "crits": 7,
+      "firstKillSeconds": 2.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 4,
+      "bosses": [],
+      "coinsEarned": 714,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 2,
+          "cooling": 3,
+          "rocket": 1,
+          "frost": 1,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 8
+    },
+    {
+      "profile": "regular",
+      "wave": 8,
+      "weather": "breeze",
+      "result": "won",
+      "seconds": 47,
+      "kills": 29,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 437,
+      "hits": 30,
+      "crits": 3,
+      "firstKillSeconds": 2.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 3,
+      "bosses": [],
+      "coinsEarned": 951,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 2,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 9
+    },
+    {
+      "profile": "regular",
+      "wave": 9,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 64.3,
+      "kills": 42,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 745,
+      "hits": 125,
+      "crits": 4,
+      "firstKillSeconds": 2.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 10,
+      "bosses": [],
+      "coinsEarned": 1167,
+      "equipment": {
+        "weapons": {
+          "mg": 7
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 10
+    },
+    {
+      "profile": "regular",
+      "wave": 10,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 48.73,
+      "kills": 40,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 569,
+      "hits": 150,
+      "crits": 39,
+      "firstKillSeconds": 2,
+      "firstDamageSeconds": null,
+      "peakEnemies": 10,
+      "bosses": [
+        "hive"
+      ],
+      "coinsEarned": 1436,
+      "equipment": {
+        "weapons": {
+          "mg": 8
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 11
+    },
+    {
+      "profile": "regular",
+      "wave": 11,
+      "weather": "fog",
+      "result": "won",
+      "seconds": 54.67,
+      "kills": 34,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 599,
+      "hits": 68,
+      "crits": 8,
+      "firstKillSeconds": 3.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 6,
+      "bosses": [],
+      "coinsEarned": 963,
+      "equipment": {
+        "weapons": {
+          "mg": 9,
+          "shotgun": 1
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 12
+    },
+    {
+      "profile": "regular",
+      "wave": 12,
+      "weather": "rain",
+      "result": "won",
+      "seconds": 55.97,
+      "kills": 32,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 626,
+      "hits": 126,
+      "crits": 16,
+      "firstKillSeconds": 1.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 7,
+      "bosses": [],
+      "coinsEarned": 1110,
+      "equipment": {
+        "weapons": {
+          "mg": 9,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 13
+    },
+    {
+      "profile": "regular",
+      "wave": 13,
+      "weather": "heat",
+      "result": "won",
+      "seconds": 52,
+      "kills": 42,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 536,
+      "hits": 42,
+      "crits": 8,
+      "firstKillSeconds": 2,
+      "firstDamageSeconds": null,
+      "peakEnemies": 7,
+      "bosses": [],
+      "coinsEarned": 1137,
+      "equipment": {
+        "weapons": {
+          "mg": 9,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 14
+    },
+    {
+      "profile": "regular",
+      "wave": 14,
+      "weather": "storm",
+      "result": "won",
+      "seconds": 71.5,
+      "kills": 47,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 824,
+      "hits": 159,
+      "crits": 15,
+      "firstKillSeconds": 3.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 11,
+      "bosses": [],
+      "coinsEarned": 1486,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 15
+    },
+    {
+      "profile": "regular",
+      "wave": 15,
+      "weather": "rain",
+      "result": "lost",
+      "seconds": 68.73,
+      "kills": 17,
+      "remaining": 10,
+      "hpStart": 175,
+      "hpEnd": 0,
+      "shots": 799,
+      "hits": 290,
+      "crits": 12,
+      "firstKillSeconds": 3.33,
+      "firstDamageSeconds": 58,
+      "peakEnemies": 14,
+      "bosses": [
+        "turtle"
+      ],
+      "coinsEarned": 392,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 15
+    },
+    {
+      "profile": "expert",
+      "wave": 1,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 31.47,
+      "kills": 10,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 100,
+      "shots": 33,
+      "hits": 26,
+      "crits": 3,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 185,
+      "equipment": {
+        "weapons": {
+          "mg": 1
+        },
+        "upgrades": {},
+        "specials": []
+      },
+      "unlocked": 2
+    },
+    {
+      "profile": "expert",
+      "wave": 2,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 35.13,
+      "kills": 15,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 100,
+      "shots": 45,
+      "hits": 31,
+      "crits": 12,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 319,
+      "equipment": {
+        "weapons": {
+          "mg": 3
+        },
+        "upgrades": {
+          "cooling": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 3
+    },
+    {
+      "profile": "expert",
+      "wave": 3,
+      "weather": "breeze",
+      "result": "won",
+      "seconds": 41.47,
+      "kills": 21,
+      "remaining": 0,
+      "hpStart": 100,
+      "hpEnd": 100,
+      "shots": 61,
+      "hits": 44,
+      "crits": 9,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 372,
+      "equipment": {
+        "weapons": {
+          "mg": 4
+        },
+        "upgrades": {
+          "cooling": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 4
+    },
+    {
+      "profile": "expert",
+      "wave": 4,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 43.1,
+      "kills": 26,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 139,
+      "hits": 88,
+      "crits": 24,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 2,
+      "bosses": [],
+      "coinsEarned": 519,
+      "equipment": {
+        "weapons": {
+          "mg": 5
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 5
+    },
+    {
+      "profile": "expert",
+      "wave": 5,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 38.13,
+      "kills": 24,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 148,
+      "hits": 126,
+      "crits": 58,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 9,
+      "bosses": [
+        "king"
+      ],
+      "coinsEarned": 804,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 2,
+          "rocket": 1
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 6
+    },
+    {
+      "profile": "expert",
+      "wave": 6,
+      "weather": "heat",
+      "result": "won",
+      "seconds": 47.87,
+      "kills": 28,
+      "remaining": 0,
+      "hpStart": 125,
+      "hpEnd": 125,
+      "shots": 130,
+      "hits": 56,
+      "crits": 9,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 2,
+      "bosses": [],
+      "coinsEarned": 642,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 1,
+          "cooling": 3,
+          "rocket": 1,
+          "frost": 1,
+          "turret": 2
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 7
+    },
+    {
+      "profile": "expert",
+      "wave": 7,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 45.7,
+      "kills": 27,
+      "remaining": 0,
+      "hpStart": 150,
+      "hpEnd": 150,
+      "shots": 142,
+      "hits": 84,
+      "crits": 29,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 2,
+      "bosses": [],
+      "coinsEarned": 714,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 2,
+          "cooling": 3,
+          "rocket": 1,
+          "frost": 1,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 8
+    },
+    {
+      "profile": "expert",
+      "wave": 8,
+      "weather": "breeze",
+      "result": "won",
+      "seconds": 45.97,
+      "kills": 29,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 54,
+      "hits": 40,
+      "crits": 10,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 749,
+      "equipment": {
+        "weapons": {
+          "mg": 6
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 1,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 9
+    },
+    {
+      "profile": "expert",
+      "wave": 9,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 57.07,
+      "kills": 42,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 311,
+      "hits": 153,
+      "crits": 28,
+      "firstKillSeconds": 1,
+      "firstDamageSeconds": null,
+      "peakEnemies": 4,
+      "bosses": [],
+      "coinsEarned": 1167,
+      "equipment": {
+        "weapons": {
+          "mg": 7
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket"
+        ]
+      },
+      "unlocked": 10
+    },
+    {
+      "profile": "expert",
+      "wave": 10,
+      "weather": "clear",
+      "result": "won",
+      "seconds": 46.4,
+      "kills": 29,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 185,
+      "hits": 159,
+      "crits": 66,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 4,
+      "bosses": [
+        "hive"
+      ],
+      "coinsEarned": 1306,
+      "equipment": {
+        "weapons": {
+          "mg": 8
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 11
+    },
+    {
+      "profile": "expert",
+      "wave": 11,
+      "weather": "fog",
+      "result": "won",
+      "seconds": 49.57,
+      "kills": 34,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 180,
+      "hits": 94,
+      "crits": 13,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 3,
+      "bosses": [],
+      "coinsEarned": 963,
+      "equipment": {
+        "weapons": {
+          "mg": 9
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 12
+    },
+    {
+      "profile": "expert",
+      "wave": 12,
+      "weather": "rain",
+      "result": "won",
+      "seconds": 47.77,
+      "kills": 32,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 212,
+      "hits": 154,
+      "crits": 49,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 2,
+      "bosses": [],
+      "coinsEarned": 1110,
+      "equipment": {
+        "weapons": {
+          "mg": 9,
+          "shotgun": 3
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 13
+    },
+    {
+      "profile": "expert",
+      "wave": 13,
+      "weather": "heat",
+      "result": "won",
+      "seconds": 47.3,
+      "kills": 42,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 90,
+      "hits": 53,
+      "crits": 7,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 1137,
+      "equipment": {
+        "weapons": {
+          "mg": 9,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 14
+    },
+    {
+      "profile": "expert",
+      "wave": 14,
+      "weather": "storm",
+      "result": "won",
+      "seconds": 60.57,
+      "kills": 47,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 283,
+      "hits": 146,
+      "crits": 35,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 3,
+      "bosses": [],
+      "coinsEarned": 1486,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 15
+    },
+    {
+      "profile": "expert",
+      "wave": 15,
+      "weather": "rain",
+      "result": "won",
+      "seconds": 43.57,
+      "kills": 27,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 229,
+      "hits": 201,
+      "crits": 40,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 6,
+      "bosses": [
+        "turtle"
+      ],
+      "coinsEarned": 1593,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 16
+    },
+    {
+      "profile": "expert",
+      "wave": 16,
+      "weather": "fog",
+      "result": "won",
+      "seconds": 49.07,
+      "kills": 38,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 95,
+      "hits": 63,
+      "crits": 9,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 1,
+      "bosses": [],
+      "coinsEarned": 1228,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 17
+    },
+    {
+      "profile": "expert",
+      "wave": 17,
+      "weather": "rain",
+      "result": "won",
+      "seconds": 52.17,
+      "kills": 38,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 351,
+      "hits": 235,
+      "crits": 66,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 3,
+      "bosses": [],
+      "coinsEarned": 1557,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 18
+    },
+    {
+      "profile": "expert",
+      "wave": 18,
+      "weather": "storm",
+      "result": "won",
+      "seconds": 54.8,
+      "kills": 43,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 335,
+      "hits": 148,
+      "crits": 17,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 4,
+      "bosses": [],
+      "coinsEarned": 1512,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 19
+    },
+    {
+      "profile": "expert",
+      "wave": 19,
+      "weather": "storm",
+      "result": "won",
+      "seconds": 70.07,
+      "kills": 65,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 501,
+      "hits": 283,
+      "crits": 80,
+      "firstKillSeconds": 0.33,
+      "firstDamageSeconds": null,
+      "peakEnemies": 5,
+      "bosses": [],
+      "coinsEarned": 2389,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 20
+    },
+    {
+      "profile": "expert",
+      "wave": 20,
+      "weather": "storm",
+      "result": "won",
+      "seconds": 43.3,
+      "kills": 23,
+      "remaining": 0,
+      "hpStart": 175,
+      "hpEnd": 175,
+      "shots": 557,
+      "hits": 542,
+      "crits": 15,
+      "firstKillSeconds": 0.67,
+      "firstDamageSeconds": null,
+      "peakEnemies": 7,
+      "bosses": [
+        "leviathan"
+      ],
+      "coinsEarned": 1870,
+      "equipment": {
+        "weapons": {
+          "mg": 10,
+          "shotgun": 4
+        },
+        "upgrades": {
+          "armor": 3,
+          "cooling": 3,
+          "rocket": 3,
+          "frost": 2,
+          "turret": 3
+        },
+        "specials": [
+          "mg-jacket",
+          "mg-rounds"
+        ]
+      },
+      "unlocked": 20
+    }
+  ],
+  "chromium": "151.0.7922.173"
+}
