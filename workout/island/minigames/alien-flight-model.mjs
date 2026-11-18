@@ -1,22 +1,22 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-18';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-18';
-import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-18';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-19';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-19';
+import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-19';
 import {alienV9Enabled,alienV9Hp} from './alien-v9.mjs';
 import {alienV12Enabled} from './alien-v12.mjs';
 import {alienV13Enabled} from './alien-v13.mjs';
 import {alienV14Enabled,gearFactor,heatStep} from './alien-v14.mjs';
-import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-18';
-import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-18';
-import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-18';
-import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-18';
-import {alienVulcanV25Enabled,v25Config} from './alien-v25.mjs?v=island-v2-20261107-18';
-import {alienArsenalEnabled,alienEnemyFireV25Enabled,arsenalConfig,nextSpecial,ammoDropKind,shouldDropAmmo,ammoRefill,lightningChain,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-18';
+import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-19';
+import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-19';
+import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-19';
+import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-19';
+import {alienVulcanV25Enabled,v25Config} from './alien-v25.mjs?v=island-v2-20261107-19';
+import {alienArsenalEnabled,alienEnemyFireV25Enabled,arsenalConfig,nextSpecial,ammoDropKind,shouldDropAmmo,ammoRefill,lightningChain,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-19';
 import {alienV11Enabled,blastRule} from './alien-v11.mjs';
 import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
-import {alienHullEnabled,hullContactRadius} from './alien-hull.mjs?v=island-v2-20261107-18';
-import {pelletOffsets} from './alien-v25.mjs?v=island-v2-20261107-18';
-import {alienLaserV25Enabled,laser25Config,laserPierceCount,shotPierces} from './alien-laser.mjs?v=island-v2-20261107-18';
+import {alienHullEnabled,hullContactRadius} from './alien-hull.mjs?v=island-v2-20261107-19';
+import {pelletOffsets} from './alien-v25.mjs?v=island-v2-20261107-19';
+import {alienLaserV25Enabled,laser25Config,laserPierceCount,shotPierces} from './alien-laser.mjs?v=island-v2-20261107-19';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){

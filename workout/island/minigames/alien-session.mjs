@@ -1,25 +1,25 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-18';
-import {createControls} from './controls.mjs?v=island-v2-20261107-18';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-18';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-18';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-19';
+import {createControls} from './controls.mjs?v=island-v2-20261107-19';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-19';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-19';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-18';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-19';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-18';
-import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-18';
-import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-18';
-import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-18';
-import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-18';
-import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-18';
-import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-18';
-import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-18';
-import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-18';
-import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-18';
-import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-18';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-19';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-19';
+import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-19';
+import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-19';
+import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-19';
+import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-19';
+import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-19';
+import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-19';
+import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-19';
+import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-19';
+import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-19';
 let v24Styled=false;
 /** v24 HUD stylesheet, once per page. */
-function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-18',import.meta.url).href;document.head.append(link);}
+function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-19',import.meta.url).href;document.head.append(link);}
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */

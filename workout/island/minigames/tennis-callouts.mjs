@@ -60,7 +60,7 @@ export function createTakeBag(count,random=Math.random){
 }
 /** Load the recorded takes into AudioBuffers: {out:[AudioBuffer], net:[AudioBuffer]} (empty lists when there are none or nothing decodes).
  * `base` is this module's URL (the paths are relative to the island root). One take = its first file that loads and decodes. */
-export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,ogg=true,version='island-v2-20261107-18'}={}){
+export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,ogg=true,version='island-v2-20261107-19'}={}){
  const out={out:[],net:[]};
  try{
   const response=await fetcher(new URL('../'+CALLOUT_REC_LIST+'?v='+version,base));if(!response?.ok)return out;

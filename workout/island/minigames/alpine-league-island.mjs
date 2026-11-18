@@ -1,10 +1,10 @@
-import {leagueEnabled,leagueSummary,stageSetup,applyStage,buyGear,stageInfo,engineStageOf,STAGE_COUNT} from './alpine-league-core.mjs?v=island-v2-20261107-18';
-import {createLeagueStore} from './alpine-league-store.mjs?v=island-v2-20261107-18';
-import {alpineLeagueResult} from './alpine-league-result.mjs?v=island-v2-20261107-18';
-import {stageGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-18';
-import {balanceForPage} from './alpine-v241.mjs?v=island-v2-20261107-18';
-import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-18';
-import {loadRecords,recordRun,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-18';
+import {leagueEnabled,leagueSummary,stageSetup,applyStage,buyGear,stageInfo,engineStageOf,STAGE_COUNT} from './alpine-league-core.mjs?v=island-v2-20261107-19';
+import {createLeagueStore} from './alpine-league-store.mjs?v=island-v2-20261107-19';
+import {alpineLeagueResult} from './alpine-league-result.mjs?v=island-v2-20261107-19';
+import {stageGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-19';
+import {balanceForPage} from './alpine-v241.mjs?v=island-v2-20261107-19';
+import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-19';
+import {loadRecords,recordRun,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-19';
 
 /** Ski league v23 on the island engine: `engine.alpineLeague`. The league state lives in its own key (alpine-league-store.mjs), so
  * nothing here reads or writes the island save. A league run starts through engine.startMinigame('alpineRush', {alpineLeague: n}) and

@@ -1,4 +1,4 @@
-import {soccerSwitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-18';
+import {soccerSwitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-19';
 const normalize=(x,z)=>{const length=Math.hypot(x,z)||1;return {x:x/length,z:z/length};};
 const channels={primary:'kick',secondary:'pass',sprint:'sprint',trick:'switch'};
 

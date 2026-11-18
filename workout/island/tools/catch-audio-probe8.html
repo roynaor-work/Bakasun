@@ -8,7 +8,7 @@
 <style>body{font:14px system-ui;margin:16px;background:#111;color:#eee}pre{white-space:pre-wrap}</style>
 <body><pre id="out"></pre>
 <script type="module">
-import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-18';
+import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-19';
 const out = document.getElementById('out'), log = s => { out.textContent += s + '\n'; };
 // ?v=7, ?v=8 (the v8 sounds with the Codex pack for the engine and the opening, as the game plays them) or ?v=8s (v8 synthesized only)
 const ver = new URLSearchParams(location.search).get('v') || '7', v8 = ver.startsWith('8');

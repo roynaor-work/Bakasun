@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-18';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-18';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-18';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-18';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-18';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-19';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-19';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-19';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-19';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-19';
 import {createSoccerSurround} from './soccer-surround.mjs';
 import {soccerV8Enabled} from './soccer-v8.mjs';
 import {loadStadium as loadV8Stadium} from './soccer-v8-stadium.mjs';
@@ -18,29 +18,29 @@ import {soccerShowEnabled,soccerShowConfig} from './soccer-show.mjs';
 import {createSoccerShowView} from './soccer-show-view.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-18';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-19';
 import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL,withSoccerV7Kits} from './soccer-v7.mjs';
-import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-18';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-18';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-18';
-import {passDestination} from './soccer.mjs?v=island-v2-20261107-18';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-18';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-18';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-19';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-19';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-19';
+import {passDestination} from './soccer.mjs?v=island-v2-20261107-19';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-19';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-19';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-18';
-import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-18';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-19';
+import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-19';
 // v24 (13/11): Codex pitch kit, effects, 3D fans (each behind its own switch, see soccer-v24.mjs)
-import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-18';
-import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-18';
-import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-18';
+import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-19';
+import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-19';
+import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-19';
 // v24.1 (14/11): the referee on the pitch (`?soccerReferee=0` = none), full match only
-import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-18';
-import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-18';
-import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-18';
+import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-19';
+import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-19';
+import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-19';
 import {crowdPlacements,LEVELS as V8_LEVELS,TIERS as V8_TIERS} from './soccer-v8-layout.mjs';
 // Soccer full (14/11): the 11 against 11 broadcast camera and the distance LOD / off-camera culling of the 22 bodies (`?soccerFull=0` = none of it).
-import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-18';
+import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-19';
 const FX_REPLACED=new Set(['confetti','landing-dust']);
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 

@@ -4,7 +4,7 @@
  * draw call). Rig, rest pose, hair caps, atlas and region colours are the v22 ones: the pack measured 249 basketball clips x 3 bodies with 0 m
  * difference on the original vertices, so every motion library plays unchanged. The bodies' atlas is byte for byte the v22 atlas: the loader
  * is pointed at that file (one download, one texture). `?hoopsBodyV2=0` keeps the v22 bodies exactly. */
-import {V22_BASE,V22_HAIR,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-18';
+import {V22_BASE,V22_HAIR,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-19';
 import {athleteRig} from './athlete-body.mjs';
 
 export const HOOPS_V2_BODIES=Object.freeze(['guard','wing','center']);

@@ -37,7 +37,7 @@ export function gripTransform(T,cfg=GRIP_DEFAULTS){
 }
 /** Load the package racket once (no decoders). Resolves the template scene; rejects on any failure (the caller keeps the v24 racket). */
 export async function loadGripRacket({GLTFLoader,base,fetcher=globalThis.fetch,buffer}){
- const url=new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-18',base).href;
+ const url=new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-19',base).href;
  const data=buffer?await buffer:await (await fetcher(url)).arrayBuffer();
  const gltf=await new GLTFLoader().parseAsync(data,'');const scene=gltf.scene;
  if(!scene.getObjectByName('grip')||!scene.getObjectByName('head'))throw Error('tennis grip racket is missing grip/head');
