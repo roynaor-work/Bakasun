@@ -1,0 +1,4369 @@
+{
+  "schemaVersion": 3,
+  "library": "tennis-motion-v3",
+  "asset": "tennis-motion-v3.glb",
+  "referenceAsset": "../tennis-motion-v2/source/reference/grip-player.glb",
+  "bytes": 1557464,
+  "sha256": "28a9956ae1f5ae07726257238d3f8a08f2d21a0548041dd3864929f8c64dea7d",
+  "assetKind": "skeletal-animation-library",
+  "fps": 30,
+  "nativeRate": 30,
+  "logicalClipCount": 18,
+  "units": "meters",
+  "coordinateSystem": {
+    "up": "+Y",
+    "forward": "+Z",
+    "left": "+X"
+  },
+  "rootMotion": false,
+  "motionTranslation": "Hips stores the complete authored path in clip space, including lateral and backward travel.",
+  "nativeAdjacent": [
+    {
+      "from": "court_fall",
+      "to": "court_get_up"
+    }
+  ],
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "grip": {
+    "source": "tennis-grip-v1@a096e507b11389fc10272c38101f968820e89f7e",
+    "handleCenterInRightHand": [
+      0,
+      -0.055,
+      0.02
+    ],
+    "handFromRacket": [
+      0,
+      0,
+      -0.8803408430861305,
+      0.47434164901935494
+    ],
+    "gripNodeY": 0.2,
+    "primaryHandY": 0.065,
+    "headY": 0.5,
+    "headInRightHand": [
+      0.36329662467145096,
+      -0.2942500000048711,
+      0.02
+    ],
+    "racketMount": {
+      "translation": [
+        -0.05428570253711336,
+        -0.019249999999272134,
+        0.02
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.8803408430861305,
+        0.47434164901935494
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "provenance": {
+    "baseCommit": "993d242155bac0917e77883416452366abd0ff81",
+    "gripCommit": "a096e507b11389fc10272c38101f968820e89f7e",
+    "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "baseGLBSha256": "e3a7ed216d28a3135447dbb54f5c8ef9a6d08be49740304fc32663c9bdf37a0a",
+    "referenceAssetSha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753"
+  },
+  "authorship": {
+    "method": "Original keyed choreography, analytic IK, and ballistic tennis-ball paths",
+    "license": "CC0-1.0"
+  },
+  "clips": [
+    {
+      "id": "volley_low",
+      "label": "וולי נמוך",
+      "category": "משחק ליד הרשת",
+      "description": "צעד אלכסוני לפנים, הורדת האגן וחסימה קצרה של כדור מתחת לגובה הרשת.",
+      "related": [
+        "volley_forehand"
+      ],
+      "distinction": "הברכיים סופגות את הירידה. המחבט נשאר לפני הגוף ופניו פתוחים מעט במגע הנמוך.",
+      "duration": 1.6666666666666667,
+      "durationSeconds": 1.6666666666666667,
+      "frameCount": 51,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.7,
+      "events": [
+        {
+          "frame": 13,
+          "type": "plant",
+          "label": "נחיתה על הרגל הקדמית",
+          "time": 0.43333333333333335
+        },
+        {
+          "frame": 21,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.7,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.8481205544588366,
+            0.7691662054490369,
+            0.5426152969574135
+          ]
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 3,
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 13,
+          "endFrame": 34,
+          "start": 0.43333333333333335,
+          "end": 1.1333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 48,
+          "endFrame": 50,
+          "start": 1.6,
+          "end": 1.6666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 50,
+          "start": 0,
+          "end": 1.6666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/volley_low.webp",
+      "metadata": {
+        "label": "וולי נמוך",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 13,
+            "type": "plant",
+            "label": "נחיתה על הרגל הקדמית",
+            "time": 0.43333333333333335
+          },
+          {
+            "frame": 21,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.7,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.8481205544588366,
+              0.7691662054490369,
+              0.5426152969574135
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 3,
+            "start": 0,
+            "end": 0.1,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 13,
+            "endFrame": 34,
+            "start": 0.43333333333333335,
+            "end": 1.1333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 48,
+            "endFrame": 50,
+            "start": 1.6,
+            "end": 1.6666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 50,
+            "start": 0,
+            "end": 1.6666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "volley_high",
+      "label": "וולי גבוה",
+      "category": "משחק ליד הרשת",
+      "description": "פנייה קצרה מהכתפיים ויירוט של כדור גבוה לפני הגוף, עם סיומת לפנים ולמטה.",
+      "related": [
+        "volley_forehand",
+        "smash"
+      ],
+      "distinction": "היד עולה מעל הכתף והראש של המחבט נשאר גבוה במגע. ההמשך יורד בזווית אל תוך המגרש.",
+      "duration": 1.6333333333333333,
+      "durationSeconds": 1.6333333333333333,
+      "frameCount": 50,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.6666666666666666,
+      "events": [
+        {
+          "frame": 20,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.6666666666666666,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.5614490097838674,
+            1.798447773292244,
+            0.5046695388039871
+          ]
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 4,
+          "start": 0,
+          "end": 0.13333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 14,
+          "endFrame": 32,
+          "start": 0.4666666666666667,
+          "end": 1.0666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 46,
+          "endFrame": 49,
+          "start": 1.5333333333333334,
+          "end": 1.6333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 49,
+          "start": 0,
+          "end": 1.6333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/volley_high.webp",
+      "metadata": {
+        "label": "וולי גבוה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 20,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.6666666666666666,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.5614490097838674,
+              1.798447773292244,
+              0.5046695388039871
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 4,
+            "start": 0,
+            "end": 0.13333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 14,
+            "endFrame": 32,
+            "start": 0.4666666666666667,
+            "end": 1.0666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 46,
+            "endFrame": 49,
+            "start": 1.5333333333333334,
+            "end": 1.6333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 49,
+            "start": 0,
+            "end": 1.6333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "half_volley",
+      "label": "חצי וולי",
+      "category": "משחק ליד הרשת",
+      "description": "שקיעה עמוקה אל הניתור ואיסוף הכדור מיד עם עלייתו, בתנופה קצרה לפני הברך.",
+      "related": [
+        "volley_forehand",
+        "drop_shot"
+      ],
+      "distinction": "הכדור נוגע במגרש לפני החבטה. המחבט מתחיל סמוך לנעל ועולה עם הכדור מתוך כפיפת ברכיים.",
+      "duration": 1.7666666666666666,
+      "durationSeconds": 1.7666666666666666,
+      "frameCount": 54,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.8,
+      "events": [
+        {
+          "frame": 16,
+          "type": "bounce",
+          "label": "ניתור הכדור מהמגרש",
+          "time": 0.5333333333333333,
+          "position": [
+            -0.8629645996352749,
+            0.0335,
+            2.62251323447594
+          ]
+        },
+        {
+          "frame": 24,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.8,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.7734802791054494,
+            0.3978258486771369,
+            0.5108657008847363
+          ]
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 4,
+          "start": 0,
+          "end": 0.13333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 13,
+          "endFrame": 37,
+          "start": 0.43333333333333335,
+          "end": 1.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 51,
+          "endFrame": 53,
+          "start": 1.7,
+          "end": 1.7666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 53,
+          "start": 0,
+          "end": 1.7666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/half_volley.webp",
+      "metadata": {
+        "label": "חצי וולי",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 16,
+            "type": "bounce",
+            "label": "ניתור הכדור מהמגרש",
+            "time": 0.5333333333333333,
+            "position": [
+              -0.8629645996352749,
+              0.0335,
+              2.62251323447594
+            ]
+          },
+          {
+            "frame": 24,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.8,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.7734802791054494,
+              0.3978258486771369,
+              0.5108657008847363
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 4,
+            "start": 0,
+            "end": 0.13333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 13,
+            "endFrame": 37,
+            "start": 0.43333333333333335,
+            "end": 1.2333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 51,
+            "endFrame": 53,
+            "start": 1.7,
+            "end": 1.7666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 53,
+            "start": 0,
+            "end": 1.7666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "lob",
+      "label": "לוב",
+      "category": "חבטות קו אחורי",
+      "description": "הורדת ראש המחבט מתחת לכדור והארכת התנועה כלפי מעלה כדי לעבור מעל שחקן הרשת.",
+      "related": [
+        "forehand",
+        "drop_shot"
+      ],
+      "distinction": "פני המחבט פונים מעלה והיד מסיימת בגובה הרקה. המבט עוקב אחר המסלול הגבוה.",
+      "duration": 2.2666666666666666,
+      "durationSeconds": 2.2666666666666666,
+      "frameCount": 69,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.9666666666666667,
+      "events": [
+        {
+          "frame": 29,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.9666666666666667,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.7926156457386835,
+            0.9384596668827803,
+            0.47486809666932783
+          ]
+        },
+        {
+          "frame": 44,
+          "type": "track",
+          "label": "מעקב אחר הכדור העולה",
+          "time": 1.4666666666666666
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 22,
+          "endFrame": 48,
+          "start": 0.7333333333333333,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 65,
+          "endFrame": 68,
+          "start": 2.1666666666666665,
+          "end": 2.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 68,
+          "start": 0,
+          "end": 2.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/lob.webp",
+      "metadata": {
+        "label": "לוב",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 29,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.9666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.7926156457386835,
+              0.9384596668827803,
+              0.47486809666932783
+            ]
+          },
+          {
+            "frame": 44,
+            "type": "track",
+            "label": "מעקב אחר הכדור העולה",
+            "time": 1.4666666666666666
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 9,
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 22,
+            "endFrame": 48,
+            "start": 0.7333333333333333,
+            "end": 1.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 65,
+            "endFrame": 68,
+            "start": 2.1666666666666665,
+            "end": 2.2666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 68,
+            "start": 0,
+            "end": 2.2666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "overhead_backward",
+      "label": "סמאש בנסיגה",
+      "category": "התמודדות עם לוב",
+      "description": "שני צעדי נסיגה מתחת ללוב, הצבעה ביד החופשית והחלפת רגליים באוויר במכה מעל הראש.",
+      "related": [
+        "smash",
+        "serve_whip"
+      ],
+      "distinction": "האגן נסוג לפני ההמראה. הרגל האחורית עוברת לפנים במהלך המכה והנחיתה בולמת את הנסיגה.",
+      "duration": 2.7333333333333334,
+      "durationSeconds": 2.7333333333333334,
+      "frameCount": 83,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 1.2333333333333334,
+      "events": [
+        {
+          "frame": 26,
+          "type": "load",
+          "label": "טעינה על הרגל האחורית",
+          "time": 0.8666666666666667
+        },
+        {
+          "frame": 34,
+          "type": "takeoff",
+          "label": "החלפת רגליים באוויר",
+          "time": 1.1333333333333333
+        },
+        {
+          "frame": 37,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 1.2333333333333334,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.24438223902670853,
+            2.122794817379087,
+            -0.1685711973771656
+          ]
+        },
+        {
+          "frame": 41,
+          "type": "land",
+          "label": "נחיתה",
+          "time": 1.3666666666666667
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 19,
+          "endFrame": 31,
+          "start": 0.6333333333333333,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 41,
+          "endFrame": 56,
+          "start": 1.3666666666666667,
+          "end": 1.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 71,
+          "endFrame": 82,
+          "start": 2.3666666666666667,
+          "end": 2.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 2,
+          "start": 0,
+          "end": 0.06666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 11,
+          "endFrame": 16,
+          "start": 0.36666666666666664,
+          "end": 0.5333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 26,
+          "endFrame": 33,
+          "start": 0.8666666666666667,
+          "end": 1.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 45,
+          "endFrame": 67,
+          "start": 1.5,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 80,
+          "endFrame": 82,
+          "start": 2.6666666666666665,
+          "end": 2.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/overhead_backward.webp",
+      "metadata": {
+        "label": "סמאש בנסיגה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 26,
+            "type": "load",
+            "label": "טעינה על הרגל האחורית",
+            "time": 0.8666666666666667
+          },
+          {
+            "frame": 34,
+            "type": "takeoff",
+            "label": "החלפת רגליים באוויר",
+            "time": 1.1333333333333333
+          },
+          {
+            "frame": 37,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 1.2333333333333334,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.24438223902670853,
+              2.122794817379087,
+              -0.1685711973771656
+            ]
+          },
+          {
+            "frame": 41,
+            "type": "land",
+            "label": "נחיתה",
+            "time": 1.3666666666666667
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 9,
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 19,
+            "endFrame": 31,
+            "start": 0.6333333333333333,
+            "end": 1.0333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 41,
+            "endFrame": 56,
+            "start": 1.3666666666666667,
+            "end": 1.8666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 71,
+            "endFrame": 82,
+            "start": 2.3666666666666667,
+            "end": 2.7333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 2,
+            "start": 0,
+            "end": 0.06666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 11,
+            "endFrame": 16,
+            "start": 0.36666666666666664,
+            "end": 0.5333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 26,
+            "endFrame": 33,
+            "start": 0.8666666666666667,
+            "end": 1.1,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 45,
+            "endFrame": 67,
+            "start": 1.5,
+            "end": 2.2333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 80,
+            "endFrame": 82,
+            "start": 2.6666666666666665,
+            "end": 2.7333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "serve_return_aggressive",
+      "label": "החזר הגשה חזק",
+      "category": "החזרות הגשה",
+      "description": "קפיצת הכנה, נחיתה בפיסוק וחבטה עולה אל תוך ההגשה בתנועה קצרה ומהירה.",
+      "related": [
+        "forehand",
+        "ready"
+      ],
+      "distinction": "הטיית הגוף לפנים והעברת המשקל מתחילות כבר בנחיתת הפיסוק. ההנפה לאחור קצרה כדי להקדים כדור מהיר.",
+      "duration": 1.7,
+      "durationSeconds": 1.7,
+      "frameCount": 52,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.7333333333333333,
+      "events": [
+        {
+          "frame": 8,
+          "type": "split_land",
+          "label": "נחיתה בפיסוק",
+          "time": 0.26666666666666666
+        },
+        {
+          "frame": 22,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.7333333333333333,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.786393607901963,
+            1.1086186467342445,
+            0.6476102757762731
+          ]
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 1,
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 8,
+          "endFrame": 11,
+          "start": 0.26666666666666666,
+          "end": 0.36666666666666664,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 20,
+          "endFrame": 37,
+          "start": 0.6666666666666666,
+          "end": 1.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 50,
+          "endFrame": 51,
+          "start": 1.6666666666666667,
+          "end": 1.7,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 1,
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 8,
+          "endFrame": 31,
+          "start": 0.26666666666666666,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 44,
+          "endFrame": 51,
+          "start": 1.4666666666666666,
+          "end": 1.7,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/serve_return_aggressive.webp",
+      "metadata": {
+        "label": "החזר הגשה חזק",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 8,
+            "type": "split_land",
+            "label": "נחיתה בפיסוק",
+            "time": 0.26666666666666666
+          },
+          {
+            "frame": 22,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.7333333333333333,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.786393607901963,
+              1.1086186467342445,
+              0.6476102757762731
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 1,
+            "start": 0,
+            "end": 0.03333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 8,
+            "endFrame": 11,
+            "start": 0.26666666666666666,
+            "end": 0.36666666666666664,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 20,
+            "endFrame": 37,
+            "start": 0.6666666666666666,
+            "end": 1.2333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 50,
+            "endFrame": 51,
+            "start": 1.6666666666666667,
+            "end": 1.7,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 1,
+            "start": 0,
+            "end": 0.03333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 8,
+            "endFrame": 31,
+            "start": 0.26666666666666666,
+            "end": 1.0333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 44,
+            "endFrame": 51,
+            "start": 1.4666666666666666,
+            "end": 1.7,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "defensive_slice",
+      "label": "חיתוך מגן",
+      "category": "משחק הגנה",
+      "description": "צעד רחב לצד הבקהנד, הושטת יד אחת וחיתוך פתוח שמחזיר כדור עמוק ומאפשר התאוששות.",
+      "related": [
+        "slice",
+        "backhand_one_handed"
+      ],
+      "distinction": "הרגל החיצונית בולמת את התנועה הצדה והיד החופשית נפתחת לאחור. מסלול המיתרים יורד ונמשך קדימה.",
+      "duration": 2.2,
+      "durationSeconds": 2.2,
+      "frameCount": 67,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 0.9666666666666667,
+      "events": [
+        {
+          "frame": 19,
+          "type": "plant",
+          "label": "בלימה ברגל החיצונית",
+          "time": 0.6333333333333333
+        },
+        {
+          "frame": 29,
+          "type": "contact",
+          "label": "מגע במרכז המיתרים",
+          "time": 0.9666666666666667,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            0.8976349336044619,
+            0.9398773307727162,
+            0.21400827918888224
+          ]
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 3,
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 19,
+          "endFrame": 44,
+          "start": 0.6333333333333333,
+          "end": 1.4666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 62,
+          "endFrame": 66,
+          "start": 2.066666666666667,
+          "end": 2.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 17,
+          "start": 0,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 27,
+          "endFrame": 36,
+          "start": 0.9,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 49,
+          "endFrame": 66,
+          "start": 1.6333333333333333,
+          "end": 2.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/defensive_slice.webp",
+      "metadata": {
+        "label": "חיתוך מגן",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 19,
+            "type": "plant",
+            "label": "בלימה ברגל החיצונית",
+            "time": 0.6333333333333333
+          },
+          {
+            "frame": 29,
+            "type": "contact",
+            "label": "מגע במרכז המיתרים",
+            "time": 0.9666666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              0.8976349336044619,
+              0.9398773307727162,
+              0.21400827918888224
+            ]
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 3,
+            "start": 0,
+            "end": 0.1,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 19,
+            "endFrame": 44,
+            "start": 0.6333333333333333,
+            "end": 1.4666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 62,
+            "endFrame": 66,
+            "start": 2.066666666666667,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 17,
+            "start": 0,
+            "end": 0.5666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 27,
+            "endFrame": 36,
+            "start": 0.9,
+            "end": 1.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 49,
+            "endFrame": 66,
+            "start": 1.6333333333333333,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "lateral_crossover_run",
+      "label": "ריצת הצלבה לצד",
+      "category": "עבודת רגליים",
+      "description": "מרדף לצד שמאל בסדרת צעדי הצלבה. הרגל הימנית חוצה מלפנים והחזה ממשיך לפנות אל המגרש.",
+      "related": [
+        "run_side"
+      ],
+      "distinction": "במהלך ההצלבה הנעל הימנית עוברת שמאלה מעבר לנעל השמאלית. הריצה מסתיימת בעמדת היכון במרחק של מטר מנקודת היציאה.",
+      "duration": 2.3,
+      "durationSeconds": 2.3,
+      "frameCount": 70,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 18,
+          "type": "crossover",
+          "label": "הרגל הימנית חוצה מלפנים",
+          "time": 0.6
+        },
+        {
+          "frame": 39,
+          "type": "crossover",
+          "label": "הצלבה שנייה",
+          "time": 1.3
+        },
+        {
+          "frame": 61,
+          "type": "settle",
+          "label": "חזרה לפיסוק",
+          "time": 2.033333333333333
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 1,
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 9,
+          "endFrame": 20,
+          "start": 0.3,
+          "end": 0.6666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 31,
+          "endFrame": 42,
+          "start": 1.0333333333333334,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 52,
+          "endFrame": 69,
+          "start": 1.7333333333333334,
+          "end": 2.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 20,
+          "endFrame": 31,
+          "start": 0.6666666666666666,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 42,
+          "endFrame": 52,
+          "start": 1.4,
+          "end": 1.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 61,
+          "endFrame": 69,
+          "start": 2.033333333333333,
+          "end": 2.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/lateral_crossover_run.webp",
+      "metadata": {
+        "label": "ריצת הצלבה לצד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": true,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 18,
+            "type": "crossover",
+            "label": "הרגל הימנית חוצה מלפנים",
+            "time": 0.6
+          },
+          {
+            "frame": 39,
+            "type": "crossover",
+            "label": "הצלבה שנייה",
+            "time": 1.3
+          },
+          {
+            "frame": 61,
+            "type": "settle",
+            "label": "חזרה לפיסוק",
+            "time": 2.033333333333333
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 1,
+            "start": 0,
+            "end": 0.03333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 9,
+            "endFrame": 20,
+            "start": 0.3,
+            "end": 0.6666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 31,
+            "endFrame": 42,
+            "start": 1.0333333333333334,
+            "end": 1.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 52,
+            "endFrame": 69,
+            "start": 1.7333333333333334,
+            "end": 2.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 9,
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 20,
+            "endFrame": 31,
+            "start": 0.6666666666666666,
+            "end": 1.0333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 42,
+            "endFrame": 52,
+            "start": 1.4,
+            "end": 1.7333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 61,
+            "endFrame": 69,
+            "start": 2.033333333333333,
+            "end": 2.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "change_direction",
+      "label": "בלימה ושינוי כיוון",
+      "category": "עבודת רגליים",
+      "description": "שני צעדי התקרבות לצד שמאל, עצירה בשוליים החיצוניים של הבסיס ודחיפה חזרה לצד ימין.",
+      "related": [
+        "run_side",
+        "recover"
+      ],
+      "distinction": "הרגל השמאלית נשארת נטועה בזמן שהאגן עובר ממהירות שמאלה לימינה. הצעד הראשון בחזרה יוצא מעמידה נמוכה.",
+      "duration": 2.2333333333333334,
+      "durationSeconds": 2.2333333333333334,
+      "frameCount": 68,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 26,
+          "type": "outside_plant",
+          "label": "נטיעת רגל שמאל לבלימה",
+          "time": 0.8666666666666667
+        },
+        {
+          "frame": 30,
+          "type": "reverse",
+          "label": "היפוך כיוון האגן",
+          "time": 1
+        },
+        {
+          "frame": 38,
+          "type": "push_off",
+          "label": "יציאה חזרה ימינה",
+          "time": 1.2666666666666666
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 1,
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 9,
+          "endFrame": 17,
+          "start": 0.3,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 26,
+          "endFrame": 38,
+          "start": 0.8666666666666667,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 48,
+          "endFrame": 55,
+          "start": 1.6,
+          "end": 1.8333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 65,
+          "endFrame": 67,
+          "start": 2.1666666666666665,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 17,
+          "endFrame": 27,
+          "start": 0.5666666666666667,
+          "end": 0.9,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 37,
+          "endFrame": 47,
+          "start": 1.2333333333333334,
+          "end": 1.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 56,
+          "endFrame": 67,
+          "start": 1.8666666666666667,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/change_direction.webp",
+      "metadata": {
+        "label": "בלימה ושינוי כיוון",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": true,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 26,
+            "type": "outside_plant",
+            "label": "נטיעת רגל שמאל לבלימה",
+            "time": 0.8666666666666667
+          },
+          {
+            "frame": 30,
+            "type": "reverse",
+            "label": "היפוך כיוון האגן",
+            "time": 1
+          },
+          {
+            "frame": 38,
+            "type": "push_off",
+            "label": "יציאה חזרה ימינה",
+            "time": 1.2666666666666666
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 1,
+            "start": 0,
+            "end": 0.03333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 9,
+            "endFrame": 17,
+            "start": 0.3,
+            "end": 0.5666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 26,
+            "endFrame": 38,
+            "start": 0.8666666666666667,
+            "end": 1.2666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 48,
+            "endFrame": 55,
+            "start": 1.6,
+            "end": 1.8333333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 65,
+            "endFrame": 67,
+            "start": 2.1666666666666665,
+            "end": 2.2333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 9,
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 17,
+            "endFrame": 27,
+            "start": 0.5666666666666667,
+            "end": 0.9,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 37,
+            "endFrame": 47,
+            "start": 1.2333333333333334,
+            "end": 1.5666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 56,
+            "endFrame": 67,
+            "start": 1.8666666666666667,
+            "end": 2.2333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "slide_to_ball",
+      "label": "החלקה אל כדור רחב",
+      "category": "תנועה במגרש",
+      "description": "דחיפה מרגל שמאל, החלקת סוליות הצידה וחבטה נמוכה מתוך פישוק. הבלימה מסתיימת בעמידת מוצא במקום החדש.",
+      "related": [
+        "clay_slide"
+      ],
+      "distinction": "ההחלקה עוברת הצידה ונגמרת בעמדה החדשה. הרגל האחורית נאספת רק אחרי העצירה.",
+      "duration": 2.4,
+      "durationSeconds": 2.4,
+      "frameCount": 73,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 1,
+      "events": [
+        {
+          "frame": 10,
+          "type": "push_off",
+          "label": "דחיפה מרגל שמאל",
+          "time": 0.3333333333333333
+        },
+        {
+          "frame": 17,
+          "type": "skid_begin",
+          "label": "תחילת ההחלקה",
+          "time": 0.5666666666666667
+        },
+        {
+          "frame": 30,
+          "type": "contact",
+          "label": "חבטה נמוכה תוך כדי החלקה",
+          "time": 1,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -1.3828211827987977,
+            0.8068634244177745,
+            0.5596900224028248
+          ]
+        },
+        {
+          "frame": 41,
+          "type": "brake",
+          "label": "בלימת הסוליה המובילה",
+          "time": 1.3666666666666667
+        },
+        {
+          "frame": 56,
+          "type": "recover_step",
+          "label": "איסוף הרגל האחורית",
+          "time": 1.8666666666666667
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 13,
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 6,
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 41,
+          "endFrame": 72,
+          "start": 1.3666666666666667,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 62,
+          "endFrame": 72,
+          "start": 2.066666666666667,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/slide_to_ball.webp",
+      "metadata": {
+        "label": "החלקה אל כדור רחב",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 10,
+            "type": "push_off",
+            "label": "דחיפה מרגל שמאל",
+            "time": 0.3333333333333333
+          },
+          {
+            "frame": 17,
+            "type": "skid_begin",
+            "label": "תחילת ההחלקה",
+            "time": 0.5666666666666667
+          },
+          {
+            "frame": 30,
+            "type": "contact",
+            "label": "חבטה נמוכה תוך כדי החלקה",
+            "time": 1,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -1.3828211827987977,
+              0.8068634244177745,
+              0.5596900224028248
+            ]
+          },
+          {
+            "frame": 41,
+            "type": "brake",
+            "label": "בלימת הסוליה המובילה",
+            "time": 1.3666666666666667
+          },
+          {
+            "frame": 56,
+            "type": "recover_step",
+            "label": "איסוף הרגל האחורית",
+            "time": 1.8666666666666667
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 13,
+            "start": 0,
+            "end": 0.43333333333333335,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 6,
+            "start": 0,
+            "end": 0.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 41,
+            "endFrame": 72,
+            "start": 1.3666666666666667,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 62,
+            "endFrame": 72,
+            "start": 2.066666666666667,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [
+          {
+            "kind": "intentional-clay-skid",
+            "startFrame": 17,
+            "endFrame": 41,
+            "footBones": [
+              "RightFoot",
+              "LeftFoot"
+            ],
+            "start": 0.5666666666666667,
+            "end": 1.3666666666666667
+          }
+        ],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "court_fall",
+      "label": "נפילה על הצד",
+      "category": "תנועה במגרש",
+      "description": "הרגל השמאלית מועדת. הברכיים מתכופפות, כף היד החופשית נשלחת לקרקע, והמשקל יורד לישיבה על צד שמאל.",
+      "related": [
+        "dive"
+      ],
+      "distinction": "הנפילה מסתיימת על הקרקע ויוצרת תנוחת פתיחה לקימה.",
+      "duration": 1.6,
+      "durationSeconds": 1.6,
+      "frameCount": 49,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 8,
+          "type": "stumble",
+          "label": "מעידה ברגל שמאל",
+          "time": 0.26666666666666666
+        },
+        {
+          "frame": 19,
+          "type": "brace",
+          "label": "היד נשלחת לתמיכה",
+          "time": 0.6333333333333333
+        },
+        {
+          "frame": 27,
+          "type": "palm_plant",
+          "label": "כף יד שמאל על המגרש",
+          "time": 0.9
+        },
+        {
+          "frame": 35,
+          "type": "hip_down",
+          "label": "התיישבות על הצד",
+          "time": 1.1666666666666667
+        }
+      ],
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 48,
+          "start": 0,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 7,
+          "start": 0,
+          "end": 0.23333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 21,
+          "endFrame": 48,
+          "start": 0.7,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/court_fall.webp",
+      "metadata": {
+        "label": "נפילה על הצד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 8,
+            "type": "stumble",
+            "label": "מעידה ברגל שמאל",
+            "time": 0.26666666666666666
+          },
+          {
+            "frame": 19,
+            "type": "brace",
+            "label": "היד נשלחת לתמיכה",
+            "time": 0.6333333333333333
+          },
+          {
+            "frame": 27,
+            "type": "palm_plant",
+            "label": "כף יד שמאל על המגרש",
+            "time": 0.9
+          },
+          {
+            "frame": 35,
+            "type": "hip_down",
+            "label": "התיישבות על הצד",
+            "time": 1.1666666666666667
+          }
+        ],
+        "supports": [
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 48,
+            "start": 0,
+            "end": 1.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 7,
+            "start": 0,
+            "end": 0.23333333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 21,
+            "endFrame": 48,
+            "start": 0.7,
+            "end": 1.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "court_get_up",
+      "label": "קימה מהמגרש",
+      "category": "תנועה במגרש",
+      "description": "מישיבה על הצד השחקן נשען על יד שמאל, מביא רגל מתחת לגוף, מעביר אליה משקל ומתרומם לעמידת קבלה.",
+      "related": [
+        "recover",
+        "dive"
+      ],
+      "distinction": "הקימה מתחילה בדיוק בתנוחת הסיום של הנפילה. סדר התמיכות כולל כף יד, כריעה ודחיפה דרך רגל שמאל.",
+      "duration": 2.533333333333333,
+      "durationSeconds": 2.533333333333333,
+      "frameCount": 77,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 10,
+          "type": "palm_push",
+          "label": "דחיפה בכף היד",
+          "time": 0.3333333333333333
+        },
+        {
+          "frame": 27,
+          "type": "foot_under",
+          "label": "רגל שמאל נכנסת מתחת לגוף",
+          "time": 0.9
+        },
+        {
+          "frame": 38,
+          "type": "palm_lift",
+          "label": "שחרור כף היד",
+          "time": 1.2666666666666666
+        },
+        {
+          "frame": 53,
+          "type": "rise",
+          "label": "התרוממות מעל הרגל הקדמית",
+          "time": 1.7666666666666666
+        },
+        {
+          "frame": 69,
+          "type": "ready",
+          "label": "התייצבות",
+          "time": 2.3
+        }
+      ],
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 42,
+          "start": 0,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 59,
+          "endFrame": 76,
+          "start": 1.9666666666666666,
+          "end": 2.533333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 13,
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 27,
+          "endFrame": 76,
+          "start": 0.9,
+          "end": 2.533333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/court_get_up.webp",
+      "metadata": {
+        "label": "קימה מהמגרש",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 10,
+            "type": "palm_push",
+            "label": "דחיפה בכף היד",
+            "time": 0.3333333333333333
+          },
+          {
+            "frame": 27,
+            "type": "foot_under",
+            "label": "רגל שמאל נכנסת מתחת לגוף",
+            "time": 0.9
+          },
+          {
+            "frame": 38,
+            "type": "palm_lift",
+            "label": "שחרור כף היד",
+            "time": 1.2666666666666666
+          },
+          {
+            "frame": 53,
+            "type": "rise",
+            "label": "התרוממות מעל הרגל הקדמית",
+            "time": 1.7666666666666666
+          },
+          {
+            "frame": 69,
+            "type": "ready",
+            "label": "התייצבות",
+            "time": 2.3
+          }
+        ],
+        "supports": [
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 42,
+            "start": 0,
+            "end": 1.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 59,
+            "endFrame": 76,
+            "start": 1.9666666666666666,
+            "end": 2.533333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 13,
+            "start": 0,
+            "end": 0.43333333333333335,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 27,
+            "endFrame": 76,
+            "start": 0.9,
+            "end": 2.533333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "point_win",
+      "label": "ניצחון בנקודה",
+      "category": "תגובות",
+      "description": "רגע של הכרה בניצחון, אגרוף שמאל עולה אל הלחי ונמשך מטה בתנועה אחת. הרגליים נשארות על המגרש.",
+      "related": [
+        "celebrate"
+      ],
+      "distinction": "משיכת אגרוף יחידה אל החזה, עם הכנה והדגשה קצרות על רגל שמאל.",
+      "duration": 2.033333333333333,
+      "durationSeconds": 2.033333333333333,
+      "frameCount": 62,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 11,
+          "type": "recognition",
+          "label": "מבט אל הכדור שסיים את הנקודה",
+          "time": 0.36666666666666664
+        },
+        {
+          "frame": 22,
+          "type": "fist_raise",
+          "label": "הרמת האגרוף",
+          "time": 0.7333333333333333
+        },
+        {
+          "frame": 30,
+          "type": "fist_pump",
+          "label": "משיכה אל החזה",
+          "time": 1
+        },
+        {
+          "frame": 45,
+          "type": "exhale",
+          "label": "נשיפה ושחרור",
+          "time": 1.5
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 61,
+          "start": 0,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 61,
+          "start": 0,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/point_win.webp",
+      "metadata": {
+        "label": "ניצחון בנקודה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 11,
+            "type": "recognition",
+            "label": "מבט אל הכדור שסיים את הנקודה",
+            "time": 0.36666666666666664
+          },
+          {
+            "frame": 22,
+            "type": "fist_raise",
+            "label": "הרמת האגרוף",
+            "time": 0.7333333333333333
+          },
+          {
+            "frame": 30,
+            "type": "fist_pump",
+            "label": "משיכה אל החזה",
+            "time": 1
+          },
+          {
+            "frame": 45,
+            "type": "exhale",
+            "label": "נשיפה ושחרור",
+            "time": 1.5
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 61,
+            "start": 0,
+            "end": 2.033333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 61,
+            "start": 0,
+            "end": 2.033333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "childlike_joy",
+      "label": "שמחה ילדותית",
+      "category": "תגובות",
+      "description": "שתי קפיצות קטנות בגבהים שונים, ראש מוטה הצידה ויד חופשית שנפתחת כלפי מעלה. כל נחיתה נספגת בברכיים.",
+      "related": [
+        "celebrate"
+      ],
+      "distinction": "שתי קפיצות עם שלבי מעוף ותמיכה נפרדים ופתיחת יד רחבה מעל הראש.",
+      "duration": 2.466666666666667,
+      "durationSeconds": 2.466666666666667,
+      "frameCount": 75,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 13,
+          "type": "takeoff",
+          "label": "ניתור ראשון",
+          "time": 0.43333333333333335
+        },
+        {
+          "frame": 25,
+          "type": "land",
+          "label": "נחיתה ראשונה",
+          "time": 0.8333333333333334
+        },
+        {
+          "frame": 38,
+          "type": "takeoff",
+          "label": "ניתור שני",
+          "time": 1.2666666666666666
+        },
+        {
+          "frame": 53,
+          "type": "land",
+          "label": "נחיתה שנייה",
+          "time": 1.7666666666666666
+        },
+        {
+          "frame": 66,
+          "type": "settle",
+          "label": "הירגעות",
+          "time": 2.2
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 13,
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 13,
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 25,
+          "endFrame": 38,
+          "start": 0.8333333333333334,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 25,
+          "endFrame": 38,
+          "start": 0.8333333333333334,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 53,
+          "endFrame": 74,
+          "start": 1.7666666666666666,
+          "end": 2.466666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 53,
+          "endFrame": 74,
+          "start": 1.7666666666666666,
+          "end": 2.466666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/childlike_joy.webp",
+      "metadata": {
+        "label": "שמחה ילדותית",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 13,
+            "type": "takeoff",
+            "label": "ניתור ראשון",
+            "time": 0.43333333333333335
+          },
+          {
+            "frame": 25,
+            "type": "land",
+            "label": "נחיתה ראשונה",
+            "time": 0.8333333333333334
+          },
+          {
+            "frame": 38,
+            "type": "takeoff",
+            "label": "ניתור שני",
+            "time": 1.2666666666666666
+          },
+          {
+            "frame": 53,
+            "type": "land",
+            "label": "נחיתה שנייה",
+            "time": 1.7666666666666666
+          },
+          {
+            "frame": 66,
+            "type": "settle",
+            "label": "הירגעות",
+            "time": 2.2
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 13,
+            "start": 0,
+            "end": 0.43333333333333335,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 13,
+            "start": 0,
+            "end": 0.43333333333333335,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 25,
+            "endFrame": 38,
+            "start": 0.8333333333333334,
+            "end": 1.2666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 25,
+            "endFrame": 38,
+            "start": 0.8333333333333334,
+            "end": 1.2666666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 53,
+            "endFrame": 74,
+            "start": 1.7666666666666666,
+            "end": 2.466666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 53,
+            "endFrame": 74,
+            "start": 1.7666666666666666,
+            "end": 2.466666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "point_disappointment",
+      "label": "אכזבה אחרי הנקודה",
+      "category": "תגובות",
+      "description": "המבט נשאר על מקום ההחטאה, המחבט שוקע לצד הירך, הסנטר יורד והיד החופשית נחה על המותן. אחרי נשיפה המבט חוזר למגרש.",
+      "related": [
+        "disappointed"
+      ],
+      "distinction": "המבט נעצר, המחבט פונה כלפי מטה והיד נחה על המותן לפני האיפוס.",
+      "duration": 3,
+      "durationSeconds": 3,
+      "frameCount": 91,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 10,
+          "type": "look",
+          "label": "מבט אל מקום ההחטאה",
+          "time": 0.3333333333333333
+        },
+        {
+          "frame": 32,
+          "type": "racket_lower",
+          "label": "הורדת המחבט",
+          "time": 1.0666666666666667
+        },
+        {
+          "frame": 47,
+          "type": "exhale",
+          "label": "נשיפה והורדת הראש",
+          "time": 1.5666666666666667
+        },
+        {
+          "frame": 71,
+          "type": "reset",
+          "label": "הרמת המבט",
+          "time": 2.3666666666666667
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 90,
+          "start": 0,
+          "end": 3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 90,
+          "start": 0,
+          "end": 3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/point_disappointment.webp",
+      "metadata": {
+        "label": "אכזבה אחרי הנקודה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 10,
+            "type": "look",
+            "label": "מבט אל מקום ההחטאה",
+            "time": 0.3333333333333333
+          },
+          {
+            "frame": 32,
+            "type": "racket_lower",
+            "label": "הורדת המחבט",
+            "time": 1.0666666666666667
+          },
+          {
+            "frame": 47,
+            "type": "exhale",
+            "label": "נשיפה והורדת הראש",
+            "time": 1.5666666666666667
+          },
+          {
+            "frame": 71,
+            "type": "reset",
+            "label": "הרמת המבט",
+            "time": 2.3666666666666667
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 90,
+            "start": 0,
+            "end": 3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 90,
+            "start": 0,
+            "end": 3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "match_handshake",
+      "label": "לחיצת ידיים בסיום",
+      "category": "תגובות",
+      "description": "השחקנים מתקדמים לרשת, משאירים את המחבט לצד הירך, מושיטים יד שמאל זה לזה, לוחצים ומרפים.",
+      "related": [
+        "handshake"
+      ],
+      "distinction": "שני שחקנים זה מול זה נוגעים באותה נקודה מעל הרשת ושומרים מגע לאורך הלחיצה.",
+      "partner": {
+        "animation": "match_handshake",
+        "translation": [
+          0.169397,
+          0,
+          1.072568
+        ],
+        "rotationY": 3.141592653589793,
+        "scale": 1
+      },
+      "duration": 2.8666666666666667,
+      "durationSeconds": 2.8666666666666667,
+      "frameCount": 87,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 15,
+          "type": "step_in",
+          "label": "צעד אל הרשת",
+          "time": 0.5
+        },
+        {
+          "frame": 35,
+          "type": "clasp",
+          "label": "מפגש כפות הידיים",
+          "time": 1.1666666666666667
+        },
+        {
+          "frame": 48,
+          "type": "shake",
+          "label": "לחיצת יד",
+          "time": 1.6
+        },
+        {
+          "frame": 58,
+          "type": "release_hand",
+          "label": "שחרור הידיים",
+          "time": 1.9333333333333333
+        },
+        {
+          "frame": 72,
+          "type": "step_back",
+          "label": "צעד לאחור",
+          "time": 2.4
+        }
+      ],
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 86,
+          "start": 0,
+          "end": 2.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 9,
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 21,
+          "endFrame": 61,
+          "start": 0.7,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 77,
+          "endFrame": 86,
+          "start": 2.566666666666667,
+          "end": 2.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/match_handshake.webp",
+      "metadata": {
+        "label": "לחיצת ידיים בסיום",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 15,
+            "type": "step_in",
+            "label": "צעד אל הרשת",
+            "time": 0.5
+          },
+          {
+            "frame": 35,
+            "type": "clasp",
+            "label": "מפגש כפות הידיים",
+            "time": 1.1666666666666667
+          },
+          {
+            "frame": 48,
+            "type": "shake",
+            "label": "לחיצת יד",
+            "time": 1.6
+          },
+          {
+            "frame": 58,
+            "type": "release_hand",
+            "label": "שחרור הידיים",
+            "time": 1.9333333333333333
+          },
+          {
+            "frame": 72,
+            "type": "step_back",
+            "label": "צעד לאחור",
+            "time": 2.4
+          }
+        ],
+        "supports": [
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 86,
+            "start": 0,
+            "end": 2.8666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 9,
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 21,
+            "endFrame": 61,
+            "start": 0.7,
+            "end": 2.033333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 77,
+            "endFrame": 86,
+            "start": 2.566666666666667,
+            "end": 2.8666666666666667,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "coach_serve_demo",
+      "label": "המאמן מדגים הגשה",
+      "category": "הדרכה",
+      "description": "המאמן פונה לילד, מציג את עמידת המוצא ועוצר כדי להראות את מסלול המחבט. אחר כך הוא מטיל כדור, מגיש ומפנה לילד את התור.",
+      "related": [
+        "serve_prepare_2",
+        "serve_toss",
+        "serve_whip",
+        "serve_land"
+      ],
+      "distinction": "המאמן מסמן ועוצר להדגמה, מבצע הגשה שלמה ואז פונה להתבונן בחזרה של הילד.",
+      "partner": {
+        "animation": "child_serve_rehearsal",
+        "translation": [
+          1,
+          0,
+          0.04
+        ],
+        "rotationY": -0.24,
+        "scale": 0.78
+      },
+      "duration": 7.4,
+      "durationSeconds": 7.4,
+      "frameCount": 223,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": true,
+      "contactTime": 2.966666666666667,
+      "events": [
+        {
+          "frame": 19,
+          "type": "invite",
+          "label": "הפניית תשומת הלב של הילד",
+          "time": 0.6333333333333333
+        },
+        {
+          "frame": 42,
+          "type": "racket_path",
+          "label": "הצגת מסלול המחבט",
+          "time": 1.4
+        },
+        {
+          "frame": 57,
+          "type": "set",
+          "label": "התכוננות להטלה",
+          "time": 1.9
+        },
+        {
+          "frame": 68,
+          "type": "release",
+          "label": "שחרור הכדור מיד שמאל",
+          "time": 2.2666666666666666,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.075,
+            -0.006500000000000002
+          ],
+          "position": [
+            0.10440662318866792,
+            1.4349229840107791,
+            0.2754740381560863
+          ]
+        },
+        {
+          "frame": 89,
+          "type": "contact",
+          "label": "מפגש המחבט והכדור",
+          "time": 2.966666666666667,
+          "bone": "RightHand",
+          "local": [
+            0.36329662467145096,
+            -0.2942500000048711,
+            0.02
+          ],
+          "position": [
+            -0.19501529038872492,
+            2.1241278550947373,
+            0.23768340472125726
+          ]
+        },
+        {
+          "frame": 122,
+          "type": "your_turn",
+          "label": "סימון לילד לנסות",
+          "time": 4.066666666666666
+        },
+        {
+          "frame": 176,
+          "type": "watch",
+          "label": "התבוננות בחזרה של הילד",
+          "time": 5.866666666666666
+        },
+        {
+          "frame": 201,
+          "type": "nod",
+          "label": "הנהון",
+          "time": 6.7
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 15,
+          "start": 0,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 30,
+          "endFrame": 202,
+          "start": 1,
+          "end": 6.733333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 211,
+          "endFrame": 222,
+          "start": 7.033333333333333,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 88,
+          "start": 0,
+          "end": 2.933333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 111,
+          "endFrame": 208,
+          "start": 3.7,
+          "end": 6.933333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 217,
+          "endFrame": 222,
+          "start": 7.233333333333333,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/coach_serve_demo.webp",
+      "metadata": {
+        "label": "המאמן מדגים הגשה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 19,
+            "type": "invite",
+            "label": "הפניית תשומת הלב של הילד",
+            "time": 0.6333333333333333
+          },
+          {
+            "frame": 42,
+            "type": "racket_path",
+            "label": "הצגת מסלול המחבט",
+            "time": 1.4
+          },
+          {
+            "frame": 57,
+            "type": "set",
+            "label": "התכוננות להטלה",
+            "time": 1.9
+          },
+          {
+            "frame": 68,
+            "type": "release",
+            "label": "שחרור הכדור מיד שמאל",
+            "time": 2.2666666666666666,
+            "bone": "LeftHand",
+            "local": [
+              0,
+              -0.075,
+              -0.006500000000000002
+            ],
+            "position": [
+              0.10440662318866792,
+              1.4349229840107791,
+              0.2754740381560863
+            ]
+          },
+          {
+            "frame": 89,
+            "type": "contact",
+            "label": "מפגש המחבט והכדור",
+            "time": 2.966666666666667,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "position": [
+              -0.19501529038872492,
+              2.1241278550947373,
+              0.23768340472125726
+            ]
+          },
+          {
+            "frame": 122,
+            "type": "your_turn",
+            "label": "סימון לילד לנסות",
+            "time": 4.066666666666666
+          },
+          {
+            "frame": 176,
+            "type": "watch",
+            "label": "התבוננות בחזרה של הילד",
+            "time": 5.866666666666666
+          },
+          {
+            "frame": 201,
+            "type": "nod",
+            "label": "הנהון",
+            "time": 6.7
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 15,
+            "start": 0,
+            "end": 0.5,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 30,
+            "endFrame": 202,
+            "start": 1,
+            "end": 6.733333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 211,
+            "endFrame": 222,
+            "start": 7.033333333333333,
+            "end": 7.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 88,
+            "start": 0,
+            "end": 2.933333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 111,
+            "endFrame": 208,
+            "start": 3.7,
+            "end": 6.933333333333334,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 217,
+            "endFrame": 222,
+            "start": 7.233333333333333,
+            "end": 7.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "ballContacts": [
+          {
+            "bone": "LeftHand",
+            "local": [
+              0,
+              -0.075,
+              -0.006500000000000002
+            ],
+            "start": 0,
+            "end": 2.2666666666666666
+          }
+        ],
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    },
+    {
+      "id": "child_serve_rehearsal",
+      "label": "הילד מתרגל הגשה",
+      "category": "הדרכה",
+      "description": "הילד עוקב במבט אחר ההדגמה, נענה לסימן של המאמן ומתרגל הגשה ללא כדור. הוא בודק את ההנפה בפעם הראשונה ומשלים אותה בפעם השנייה.",
+      "related": [
+        "serve_prepare_2",
+        "serve_whip"
+      ],
+      "distinction": "חזרה לימודית עם מבט למאמן, ניסיון הכנה קצר והגשת צל של הילד בקצב משלו.",
+      "duration": 7.4,
+      "durationSeconds": 7.4,
+      "frameCount": 223,
+      "loop": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "ball": false,
+      "contactTime": null,
+      "events": [
+        {
+          "frame": 23,
+          "type": "watch",
+          "label": "מבט אל המאמן",
+          "time": 0.7666666666666667
+        },
+        {
+          "frame": 72,
+          "type": "track_toss",
+          "label": "מעקב אחר ההטלה",
+          "time": 2.4
+        },
+        {
+          "frame": 118,
+          "type": "take_turn",
+          "label": "קבלת התור",
+          "time": 3.933333333333333
+        },
+        {
+          "frame": 147,
+          "type": "check_pose",
+          "label": "בדיקת העמדה מול המאמן",
+          "time": 4.9
+        },
+        {
+          "frame": 163,
+          "type": "shadow_toss",
+          "label": "תרגול הטלה ללא כדור",
+          "time": 5.433333333333334
+        },
+        {
+          "frame": 179,
+          "type": "shadow_reach",
+          "label": "הנפה לעבר נקודת מגע דמיונית",
+          "time": 5.966666666666667
+        },
+        {
+          "frame": 198,
+          "type": "look_back",
+          "label": "פנייה למאמן",
+          "time": 6.6
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "startFrame": 0,
+          "endFrame": 118,
+          "start": 0,
+          "end": 3.933333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 136,
+          "endFrame": 197,
+          "start": 4.533333333333333,
+          "end": 6.566666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "startFrame": 212,
+          "endFrame": 222,
+          "start": 7.066666666666666,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "startFrame": 0,
+          "endFrame": 222,
+          "start": 0,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "sheet": "sheets/child_serve_rehearsal.webp",
+      "metadata": {
+        "label": "הילד מתרגל הגשה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "frame": 23,
+            "type": "watch",
+            "label": "מבט אל המאמן",
+            "time": 0.7666666666666667
+          },
+          {
+            "frame": 72,
+            "type": "track_toss",
+            "label": "מעקב אחר ההטלה",
+            "time": 2.4
+          },
+          {
+            "frame": 118,
+            "type": "take_turn",
+            "label": "קבלת התור",
+            "time": 3.933333333333333
+          },
+          {
+            "frame": 147,
+            "type": "check_pose",
+            "label": "בדיקת העמדה מול המאמן",
+            "time": 4.9
+          },
+          {
+            "frame": 163,
+            "type": "shadow_toss",
+            "label": "תרגול הטלה ללא כדור",
+            "time": 5.433333333333334
+          },
+          {
+            "frame": 179,
+            "type": "shadow_reach",
+            "label": "הנפה לעבר נקודת מגע דמיונית",
+            "time": 5.966666666666667
+          },
+          {
+            "frame": 198,
+            "type": "look_back",
+            "label": "פנייה למאמן",
+            "time": 6.6
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "startFrame": 0,
+            "endFrame": 118,
+            "start": 0,
+            "end": 3.933333333333333,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 136,
+            "endFrame": 197,
+            "start": 4.533333333333333,
+            "end": 6.566666666666666,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "startFrame": 212,
+            "endFrame": 222,
+            "start": 7.066666666666666,
+            "end": 7.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "startFrame": 0,
+            "endFrame": 222,
+            "start": 0,
+            "end": 7.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "groundContacts": [],
+        "symmetryMode": "structural",
+        "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+      }
+    }
+  ]
+}

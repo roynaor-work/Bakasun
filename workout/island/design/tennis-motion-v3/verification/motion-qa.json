@@ -1,0 +1,5456 @@
+{
+  "schemaVersion": 1,
+  "tool": "motion-qa-v1",
+  "toolCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "provenance": "verification/qa-provenance.json",
+  "asset": "tennis-motion-v3.glb",
+  "assetSha256": "28a9956ae1f5ae07726257238d3f8a08f2d21a0548041dd3864929f8c64dea7d",
+  "nativeRateHz": 30,
+  "measurementRateHz": 120,
+  "minimumExclusiveScore": 88,
+  "minimumScore": 93.2,
+  "averageScore": 96.22,
+  "pass": true,
+  "errors": [],
+  "seatedTransition": {
+    "from": "court_fall",
+    "to": "court_get_up",
+    "joints": 18,
+    "maxMarkerDifferenceMeters": 0,
+    "maxLocalRotationDegrees": 0.000002,
+    "seatedHipHeightMeters": 0.165,
+    "bracedLeftWristHeightMeters": 0.055,
+    "pass": true
+  },
+  "metricDefinitions": {
+    "footSliding": {
+      "label": "החלקת רגליים",
+      "unit": "height ratio",
+      "green": 0.01,
+      "yellow": 0.035,
+      "weight": 18,
+      "description": "Maximum horizontal sole displacement from the first sample of each declared support window, divided by character height. Inferred support is used only when no windows were supplied."
+    },
+    "floorPenetration": {
+      "label": "חדירה לרצפה",
+      "unit": "height ratio",
+      "green": 0.005,
+      "yellow": 0.02,
+      "weight": 15,
+      "description": "Maximum depth of the supplied sole probe points and all skeletal joint centers below the declared floor plane, divided by height. Sole probes are not a mesh collision audit."
+    },
+    "posePops": {
+      "label": "קפיצות פוזה",
+      "unit": "discontinuity ratio",
+      "green": 1,
+      "yellow": 2.5,
+      "weight": 18,
+      "description": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+    },
+    "anatomy": {
+      "label": "חריגות אנטומיות",
+      "unit": "% affected frames",
+      "green": 0.5,
+      "yellow": 3,
+      "weight": 14,
+      "description": "Percentage of frames with elbow or knee flexion above 165 degrees, neck bend above 80 degrees, or a segment length changing by more than 5%. Optional calibrated hinge checks detect reverse knee flexion above 8 degrees. Conservative marker limits do not diagnose axial joint twist."
+    },
+    "ballContact": {
+      "label": "מגע בכדור",
+      "unit": "height ratio",
+      "green": 0.015,
+      "yellow": 0.05,
+      "weight": 13,
+      "description": "Maximum absolute distance from the ball surface to the sampled, bone-transformed declared contact point, divided by height. Events are evaluated at their exact declared times by interpolation."
+    },
+    "continuity": {
+      "label": "כניסה ויציאה מול המתנה",
+      "unit": "continuity ratio",
+      "green": 1,
+      "yellow": 3,
+      "weight": 10,
+      "description": "Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable."
+    },
+    "bodySliding": {
+      "label": "מהירות גוף מול צעדים",
+      "unit": "relative speed error",
+      "green": 0.2,
+      "yellow": 0.5,
+      "weight": 8,
+      "description": "Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion."
+    },
+    "symmetry": {
+      "label": "סימטריה",
+      "unit": "relative mismatch",
+      "green": 0.03,
+      "yellow": 0.1,
+      "weight": 4,
+      "description": "Maximum bilateral segment-length mismatch. Looping locomotion additionally compares reflected half-cycle leg markers; explicit pose symmetry compares simultaneous bilateral markers. One-sided actions retain unscored motion diagnostics, so a valid kick or dribble arm is not penalized for intentional asymmetry."
+    }
+  },
+  "measurement": [
+    "Decoded published GLB, sampled at 120 Hz plus native keys, authored contacts, support boundaries and normalized fingerprint phases.",
+    "The fixed Root is validated against v2 separately. Motion QA receives world-space joint, ball and sole positions and the horizontal Hips marker as the presented actor origin. The vendor compares measured support and net travel along one axis across a locomotion clip; braking and reversal contribute to the recorded score.",
+    "Rally endpoints use an independent two-handed ready take. Court and social endpoints use an independent open-hand ready take. The seated fall exit and get-up entrance use each other. Each reference retains neighboring samples for the vendor velocity check.",
+    "The weighted score screens marker motion. Floor probes test soles and skeletal centers; support evidence includes every declared ground-contact interval. Neither full deformed surface collision nor human visual preference is measured."
+  ],
+  "clips": [
+    {
+      "id": "volley_low",
+      "nativeFrameCount": 51,
+      "measuredSamples": 225,
+      "durationSeconds": 1.666667,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_high",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_high",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 14,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.43333333333333335,
+          "end": 1.1333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 95,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.6,
+          "end": 1.6666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 10,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.6666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 225,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        }
+      ],
+      "score": 96.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 345,
+            "maxDriftMeters": 0.000001,
+            "p95SpeedMetersPerSecond": 0.000034,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.616667,
+              "start": 0,
+              "end": 1.666667,
+              "driftMeters": 0.000001
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 4500,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0.616667,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.968564,
+          "status": "green",
+          "score": 80.63,
+          "evidence": {
+            "adjacentPairs": 224,
+            "observations": 3808,
+            "maxDegrees60Hz": 14.528454,
+            "maxMarkerStepHeight60Hz": 0.034406,
+            "maxRootStepHeight60Hz": 0.003373,
+            "worst": {
+              "ratio": 0.9685635800730902,
+              "t": 0.191667,
+              "previousTime": 0.183333,
+              "bone": "LeftArm",
+              "markerStepHeight60Hz": 0.00586,
+              "degrees60Hz": 14.528454
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 225,
+            "affectedFrames": 0,
+            "checks": 3825,
+            "maxLimbFlexionDegrees": 143.697801,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.7,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.848121,
+                  0.769166,
+                  0.542615
+                ],
+                "ballCenter": [
+                  -0.841939,
+                  0.782863,
+                  0.572556
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.036553,
+          "status": "green",
+          "score": 99.27,
+          "evidence": {
+            "entry": {
+              "ratio": 0.018046195845347095,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.013535,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.036552516520120544,
+              "t": 1.666667,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.027414,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.101183,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "volley_low",
+      "sport": "tennis"
+    },
+    {
+      "id": "volley_high",
+      "nativeFrameCount": 50,
+      "measuredSamples": 225,
+      "durationSeconds": 1.633333,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.13333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 19,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.4666666666666667,
+          "end": 1.0666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 83,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.5333333333333334,
+          "end": 1.6333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 14,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.6333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 225,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 97.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 341,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.00002,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.483333,
+              "start": 0.466667,
+              "end": 1.066667,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 4500,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0.75,
+              "bone": "LeftFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.720064,
+          "status": "green",
+          "score": 85.6,
+          "evidence": {
+            "adjacentPairs": 224,
+            "observations": 3808,
+            "maxDegrees60Hz": 10.800963,
+            "maxMarkerStepHeight60Hz": 0.024755,
+            "maxRootStepHeight60Hz": 0.002029,
+            "worst": {
+              "ratio": 0.7200642021636073,
+              "t": 0.191667,
+              "previousTime": 0.183333,
+              "bone": "LeftArm",
+              "markerStepHeight60Hz": 0.002935,
+              "degrees60Hz": 10.800963
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 225,
+            "affectedFrames": 0,
+            "checks": 3825,
+            "maxLimbFlexionDegrees": 146.07422,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.666667,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.561449,
+                  1.798448,
+                  0.50467
+                ],
+                "ballCenter": [
+                  -0.561639,
+                  1.794316,
+                  0.537913
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.035902,
+          "status": "green",
+          "score": 99.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.018046195845347095,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.013535,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.03590209188088133,
+              "t": 1.633333,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.026927,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.091306,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "volley_high",
+      "sport": "tennis"
+    },
+    {
+      "id": "half_volley",
+      "nativeFrameCount": 54,
+      "measuredSamples": 241,
+      "durationSeconds": 1.766667,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.13333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 19,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.43333333333333335,
+          "end": 1.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 110,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000004
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.7,
+          "end": 1.7666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 10,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.7666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 241,
+          "minHeightMeters": -0.000003,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000005
+        }
+      ],
+      "score": 96.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000003,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 380,
+            "maxDriftMeters": 0.000005,
+            "p95SpeedMetersPerSecond": 0.000054,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.75,
+              "start": 0,
+              "end": 1.766667,
+              "driftMeters": 0.000005
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 4820,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000003,
+            "worst": {
+              "t": 0.75,
+              "bone": "RightFoot",
+              "depthMeters": 0.000003,
+              "y": -0.000003
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.962275,
+          "status": "green",
+          "score": 80.75,
+          "evidence": {
+            "adjacentPairs": 240,
+            "observations": 4080,
+            "maxDegrees60Hz": 14.434127,
+            "maxMarkerStepHeight60Hz": 0.024748,
+            "maxRootStepHeight60Hz": 0.002869,
+            "worst": {
+              "ratio": 0.9622751621436162,
+              "t": 0.386458,
+              "previousTime": 0.383333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.012909,
+              "degrees60Hz": 14.434127
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 241,
+            "affectedFrames": 0,
+            "checks": 4097,
+            "maxLimbFlexionDegrees": 145.37917,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.8,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.77348,
+                  0.397826,
+                  0.510866
+                ],
+                "ballCenter": [
+                  -0.769631,
+                  0.408115,
+                  0.542513
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.040655,
+          "status": "green",
+          "score": 99.19,
+          "evidence": {
+            "entry": {
+              "ratio": 0.01383567639781741,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.010377,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.040654757978584366,
+              "t": 1.766667,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.030491,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.087096,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "half_volley",
+      "sport": "tennis"
+    },
+    {
+      "id": "lob",
+      "nativeFrameCount": 69,
+      "measuredSamples": 289,
+      "durationSeconds": 2.266667,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 39,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.7333333333333333,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 111,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.1666666666666665,
+          "end": 2.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 14,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 289,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 96.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 453,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000024,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 1.083333,
+              "start": 0.733333,
+              "end": 1.6,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 5780,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000001,
+            "worst": {
+              "t": 1.15,
+              "bone": "RightFoot",
+              "depthMeters": 0.000001,
+              "y": -0.000001
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.962919,
+          "status": "green",
+          "score": 80.74,
+          "evidence": {
+            "adjacentPairs": 288,
+            "observations": 4896,
+            "maxDegrees60Hz": 14.44379,
+            "maxMarkerStepHeight60Hz": 0.019684,
+            "maxRootStepHeight60Hz": 0.002938,
+            "worst": {
+              "ratio": 0.9629193318760568,
+              "t": 0.216667,
+              "previousTime": 0.2125,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.011124,
+              "degrees60Hz": 14.44379
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 289,
+            "affectedFrames": 0,
+            "checks": 4913,
+            "maxLimbFlexionDegrees": 145.890841,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.966667,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.792616,
+                  0.93846,
+                  0.474868
+                ],
+                "ballCenter": [
+                  -0.784435,
+                  0.958344,
+                  0.500558
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.034166,
+          "status": "green",
+          "score": 99.32,
+          "evidence": {
+            "entry": {
+              "ratio": 0.017080869507138993,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.012811,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.034165562973629694,
+              "t": 2.266667,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.025624,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.100002,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "lob",
+      "sport": "tennis"
+    },
+    {
+      "id": "overhead_backward",
+      "nativeFrameCount": 83,
+      "measuredSamples": 353,
+      "durationSeconds": 2.733333,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 40,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.6333333333333333,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 52,
+          "minHeightMeters": -0.000003,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.3666666666666667,
+          "end": 1.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 65,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.3666666666666667,
+          "end": 2.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 48,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.06666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 9,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.36666666666666664,
+          "end": 0.5333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 23,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.8666666666666667,
+          "end": 1.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 30,
+          "minHeightMeters": -0.000003,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.5,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 96,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 2.6666666666666665,
+          "end": 2.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 9,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 95.6,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 9,
+            "samples": 373,
+            "maxDriftMeters": 0.000002,
+            "p95SpeedMetersPerSecond": 0.000102,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.883333,
+              "start": 0.633333,
+              "end": 1.033333,
+              "driftMeters": 0.000002
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 7060,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000003,
+            "worst": {
+              "t": 1.05,
+              "bone": "RightFoot",
+              "depthMeters": 0.000003,
+              "y": -0.000003
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.102393,
+          "status": "yellow",
+          "score": 77.95,
+          "evidence": {
+            "adjacentPairs": 352,
+            "observations": 5984,
+            "maxDegrees60Hz": 16.535891,
+            "maxMarkerStepHeight60Hz": 0.041666,
+            "maxRootStepHeight60Hz": 0.00463,
+            "worst": {
+              "ratio": 1.102392701383396,
+              "t": 1.316667,
+              "previousTime": 1.308333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.035718,
+              "degrees60Hz": 16.535891
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 353,
+            "affectedFrames": 0,
+            "checks": 6001,
+            "maxLimbFlexionDegrees": 147.450426,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 1.233333,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.244382,
+                  2.122795,
+                  -0.168571
+                ],
+                "ballCenter": [
+                  -0.243911,
+                  2.119478,
+                  -0.135239
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.03139,
+          "status": "green",
+          "score": 99.37,
+          "evidence": {
+            "entry": {
+              "ratio": 0.01709438973056945,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.012821,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.03138955515660034,
+              "t": 2.733333,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.023542,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.092447,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.102393,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "overhead_backward",
+      "sport": "tennis"
+    },
+    {
+      "id": "serve_return_aggressive",
+      "nativeFrameCount": 52,
+      "measuredSamples": 233,
+      "durationSeconds": 1.7,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 5,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.26666666666666666,
+          "end": 0.36666666666666664,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 14,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0.000004,
+          "maxHorizontalDriftMeters": 0.000004
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.6666666666666666,
+          "end": 1.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 79,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.6666666666666667,
+          "end": 1.7,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 5,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 5,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.26666666666666666,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 105,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000005,
+          "maxHorizontalDriftMeters": 0.000003
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.4666666666666666,
+          "end": 1.7,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 33,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 95.6,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 7,
+            "samples": 247,
+            "maxDriftMeters": 0.000004,
+            "p95SpeedMetersPerSecond": 0.000134,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.283333,
+              "start": 0.266667,
+              "end": 0.366667,
+              "driftMeters": 0.000004
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 4660,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000002,
+            "worst": {
+              "t": 0.683333,
+              "bone": "RightFoot",
+              "depthMeters": 0.000002,
+              "y": -0.000002
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.086354,
+          "status": "yellow",
+          "score": 78.27,
+          "evidence": {
+            "adjacentPairs": 232,
+            "observations": 3944,
+            "maxDegrees60Hz": 16.295315,
+            "maxMarkerStepHeight60Hz": 0.03092,
+            "maxRootStepHeight60Hz": 0.00439,
+            "worst": {
+              "ratio": 1.0863543063157366,
+              "t": 0.25,
+              "previousTime": 0.241667,
+              "bone": "LeftForeArm",
+              "markerStepHeight60Hz": 0.025923,
+              "degrees60Hz": 16.295315
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 233,
+            "affectedFrames": 0,
+            "checks": 3961,
+            "maxLimbFlexionDegrees": 143.067043,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.733333,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -0.786394,
+                  1.108619,
+                  0.64761
+                ],
+                "ballCenter": [
+                  -0.786301,
+                  1.086954,
+                  0.673162
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.050596,
+          "status": "green",
+          "score": 98.99,
+          "evidence": {
+            "entry": {
+              "ratio": 0.05059552298092799,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.037947,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.03709710055727148,
+              "t": 1.7,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.027823,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.113823,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.086354,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "serve_return_aggressive",
+      "sport": "tennis"
+    },
+    {
+      "id": "defensive_slice",
+      "nativeFrameCount": 67,
+      "measuredSamples": 289,
+      "durationSeconds": 2.2,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 14,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.6333333333333333,
+          "end": 1.4666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 110,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.066666666666667,
+          "end": 2.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 18,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 75,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.9,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 40,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.6333333333333333,
+          "end": 2.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 75,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 97.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 6,
+            "samples": 333,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000017,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.416667,
+              "start": 0,
+              "end": 0.566667,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 5780,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0.55,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.648056,
+          "status": "green",
+          "score": 87.04,
+          "evidence": {
+            "adjacentPairs": 288,
+            "observations": 4896,
+            "maxDegrees60Hz": 9.720835,
+            "maxMarkerStepHeight60Hz": 0.019999,
+            "maxRootStepHeight60Hz": 0.005386,
+            "worst": {
+              "ratio": 0.6480556383357033,
+              "t": 0.191667,
+              "previousTime": 0.183333,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.009558,
+              "degrees60Hz": 9.720835
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 289,
+            "affectedFrames": 0,
+            "checks": 4913,
+            "maxLimbFlexionDegrees": 143.837523,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 0.966667,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  0.897635,
+                  0.939877,
+                  0.214008
+                ],
+                "ballCenter": [
+                  0.900824,
+                  0.961374,
+                  0.239504
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.03754,
+          "status": "green",
+          "score": 99.25,
+          "evidence": {
+            "entry": {
+              "ratio": 0.03753968261561977,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.028155,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.035346395083665376,
+              "t": 2.2,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.02651,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.132896,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "defensive_slice",
+      "sport": "tennis"
+    },
+    {
+      "id": "lateral_crossover_run",
+      "nativeFrameCount": 70,
+      "measuredSamples": 305,
+      "durationSeconds": 2.3,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 5,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.6666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 49,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.0333333333333334,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 49,
+          "minHeightMeters": -0.000003,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.7333333333333334,
+          "end": 2.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 76,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 41,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.6666666666666666,
+          "end": 1.0333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 50,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000005
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.4,
+          "end": 1.7333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 45,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 2.033333333333333,
+          "end": 2.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 36,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 94.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000003,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 8,
+            "samples": 353,
+            "maxDriftMeters": 0.000005,
+            "p95SpeedMetersPerSecond": 0.000172,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.983333,
+              "start": 0.666667,
+              "end": 1.033333,
+              "driftMeters": 0.000005
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 6100,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000003,
+            "worst": {
+              "t": 1.35,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000003,
+              "y": -0.000003
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.114072,
+          "status": "yellow",
+          "score": 77.72,
+          "evidence": {
+            "adjacentPairs": 304,
+            "observations": 5168,
+            "maxDegrees60Hz": 16.711074,
+            "maxMarkerStepHeight60Hz": 0.020397,
+            "maxRootStepHeight60Hz": 0.008708,
+            "worst": {
+              "ratio": 1.114071589433768,
+              "t": 0.608333,
+              "previousTime": 0.6,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.006686,
+              "degrees60Hz": 16.711074
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 305,
+            "affectedFrames": 0,
+            "checks": 5185,
+            "maxLimbFlexionDegrees": 143.218698,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.0358,
+          "status": "green",
+          "score": 99.28,
+          "evidence": {
+            "entry": {
+              "ratio": 0.016934588917495694,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.012701,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.03580013432632629,
+              "t": 2.3,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.02685,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": 0.043114,
+          "status": "green",
+          "score": 95.69,
+          "evidence": {
+            "rootSource": "sampled presented root",
+            "rootSpeedMetersPerSecond": 0.466653,
+            "observedRootSpeedMetersPerSecond": 0.466653,
+            "referenceRootSpeedMetersPerSecond": 0,
+            "supportSource": "declared",
+            "backwardSweepSpeedMetersPerSecond": 0.487679,
+            "cadenceStepsPerSecond": 2.727278,
+            "impliedStrideMeters": 0.35763,
+            "rootStrideMeters": 0.342211,
+            "supportSweeps": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.666667,
+                "duration": 0.366667,
+                "sweepMeters": 0.28246,
+                "speedMetersPerSecond": 0.770347
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.033333,
+                "end": 1.4,
+                "duration": 0.366667,
+                "sweepMeters": 0.207223,
+                "speedMetersPerSecond": 0.565153
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.733333,
+                "end": 2.3,
+                "duration": 0.566667,
+                "sweepMeters": 0.058252,
+                "speedMetersPerSecond": 0.102797
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.3,
+                "duration": 0.3,
+                "sweepMeters": 0.106961,
+                "speedMetersPerSecond": 0.356538
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.666667,
+                "end": 1.033333,
+                "duration": 0.366667,
+                "sweepMeters": 0.232544,
+                "speedMetersPerSecond": 0.634211
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.4,
+                "end": 1.733333,
+                "duration": 0.333333,
+                "sweepMeters": 0.16256,
+                "speedMetersPerSecond": 0.487679
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.033333,
+                "end": 2.3,
+                "duration": 0.266667,
+                "sweepMeters": 0.008411,
+                "speedMetersPerSecond": 0.031543
+              }
+            ]
+          }
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.094996,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.114072,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 87,
+        "measuredWeight": 87,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "lateral_crossover_run",
+      "sport": "tennis"
+    },
+    {
+      "id": "change_direction",
+      "nativeFrameCount": 68,
+      "measuredSamples": 297,
+      "durationSeconds": 2.233333,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "volley_low",
+          "time": 0
+        },
+        "exit": {
+          "clip": "volley_low",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 5,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 36,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.8666666666666667,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 54,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.6,
+          "end": 1.8333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 32,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.1666666666666665,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 9,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 41,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.5666666666666667,
+          "end": 0.9,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 45,
+          "minHeightMeters": -0.000004,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000006
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.2333333333333334,
+          "end": 1.5666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 46,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.8666666666666667,
+          "end": 2.2333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 50,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        }
+      ],
+      "score": 93.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000004,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 9,
+            "samples": 321,
+            "maxDriftMeters": 0.000006,
+            "p95SpeedMetersPerSecond": 0.000093,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.816667,
+              "start": 0.566667,
+              "end": 0.9,
+              "driftMeters": 0.000006
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 5940,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000004,
+            "worst": {
+              "t": 0.816667,
+              "bone": "RightFoot",
+              "depthMeters": 0.000004,
+              "y": -0.000004
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.483444,
+          "status": "green",
+          "score": 90.33,
+          "evidence": {
+            "adjacentPairs": 296,
+            "observations": 5032,
+            "maxDegrees60Hz": 7.251664,
+            "maxMarkerStepHeight60Hz": 0.017233,
+            "maxRootStepHeight60Hz": 0.006933,
+            "worst": {
+              "ratio": 0.4834442748993979,
+              "t": 0.141667,
+              "previousTime": 0.139583,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.011639,
+              "degrees60Hz": 7.251664
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 297,
+            "affectedFrames": 0,
+            "checks": 5049,
+            "maxLimbFlexionDegrees": 140.585634,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.040366,
+          "status": "green",
+          "score": 99.19,
+          "evidence": {
+            "entry": {
+              "ratio": 0.01680754472741891,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.012606,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.04036631816139615,
+              "t": 2.233333,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.030275,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": 0.529323,
+          "status": "red",
+          "score": 48.53,
+          "evidence": {
+            "rootSource": "sampled presented root",
+            "rootSpeedMetersPerSecond": 0.462547,
+            "observedRootSpeedMetersPerSecond": 0.462547,
+            "referenceRootSpeedMetersPerSecond": 0,
+            "supportSource": "declared",
+            "backwardSweepSpeedMetersPerSecond": 0.21771,
+            "cadenceStepsPerSecond": 3.333333,
+            "impliedStrideMeters": 0.130626,
+            "rootStrideMeters": 0.277528,
+            "supportSweeps": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.566667,
+                "duration": 0.266667,
+                "sweepMeters": -0.155892,
+                "speedMetersPerSecond": 0
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.866667,
+                "end": 1.266667,
+                "duration": 0.4,
+                "sweepMeters": 0.12,
+                "speedMetersPerSecond": 0.3
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.6,
+                "end": 1.833333,
+                "duration": 0.233333,
+                "sweepMeters": 0.132278,
+                "speedMetersPerSecond": 0.566904
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.3,
+                "duration": 0.3,
+                "sweepMeters": -0.105021,
+                "speedMetersPerSecond": 0
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.566667,
+                "end": 0.9,
+                "duration": 0.333333,
+                "sweepMeters": -0.181533,
+                "speedMetersPerSecond": 0
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.233333,
+                "end": 1.566667,
+                "duration": 0.333333,
+                "sweepMeters": 0.205472,
+                "speedMetersPerSecond": 0.616417
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.866667,
+                "end": 2.233333,
+                "duration": 0.366667,
+                "sweepMeters": 0.079827,
+                "speedMetersPerSecond": 0.21771
+              }
+            ]
+          }
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.105419,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "bodySliding",
+          "label": "מהירות גוף מול צעדים",
+          "status": "red",
+          "value": 0.529323,
+          "unit": "relative speed error",
+          "reason": "Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 87,
+        "measuredWeight": 87,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "change_direction",
+      "sport": "tennis"
+    },
+    {
+      "id": "slide_to_ball",
+      "nativeFrameCount": 73,
+      "measuredSamples": 289,
+      "durationSeconds": 2.4,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 53,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000002
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 25,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.3666666666666667,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 125,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.066666666666667,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 41,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "intentional-clay-skid",
+          "bone": "RightFoot",
+          "start": 0.5666666666666667,
+          "end": 1.3666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 97,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.451774
+        },
+        {
+          "kind": "intentional-clay-skid",
+          "bone": "LeftFoot",
+          "start": 0.5666666666666667,
+          "end": 1.3666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 97,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.456755
+        }
+      ],
+      "score": 97.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 244,
+            "maxDriftMeters": 0.000002,
+            "p95SpeedMetersPerSecond": 0.000095,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.116667,
+              "start": 0,
+              "end": 0.433333,
+              "driftMeters": 0.000002
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 5780,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000002,
+            "worst": {
+              "t": 0.383333,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000002,
+              "y": -0.000002
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.642533,
+          "status": "green",
+          "score": 87.15,
+          "evidence": {
+            "adjacentPairs": 288,
+            "observations": 4896,
+            "maxDegrees60Hz": 9.638001,
+            "maxMarkerStepHeight60Hz": 0.022148,
+            "maxRootStepHeight60Hz": 0.010388,
+            "worst": {
+              "ratio": 0.642533382958396,
+              "t": 0.166667,
+              "previousTime": 0.158333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.012216,
+              "degrees60Hz": 9.638001
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 289,
+            "affectedFrames": 0,
+            "checks": 4913,
+            "maxLimbFlexionDegrees": 147.574196,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 1,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 1,
+                "bone": "RightHand",
+                "gapMeters": 0,
+                "signedGapMeters": 0,
+                "centerDistanceMeters": 0.0335,
+                "contactPoint": [
+                  -1.382821,
+                  0.806863,
+                  0.55969
+                ],
+                "ballCenter": [
+                  -1.382407,
+                  0.777486,
+                  0.575784
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": false,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.032633,
+          "status": "green",
+          "score": 99.35,
+          "evidence": {
+            "entry": {
+              "ratio": 0.03263323479614358,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.024475,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.003682736338219006,
+              "t": 2.4,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0.000001,
+              "rmsVelocityHeightPerSecond": 0.002762,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.108286,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "slide_to_ball",
+      "sport": "tennis"
+    },
+    {
+      "id": "court_fall",
+      "nativeFrameCount": 49,
+      "measuredSamples": 193,
+      "durationSeconds": 1.6,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "court_get_up",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 193,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000008
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.23333333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 29,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.7,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 109,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0.000002,
+          "maxHorizontalDriftMeters": 0.000011
+        }
+      ],
+      "score": 96.5,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000006,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 3,
+            "samples": 331,
+            "maxDriftMeters": 0.000011,
+            "p95SpeedMetersPerSecond": 0.000343,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.85,
+              "start": 0.7,
+              "end": 1.6,
+              "driftMeters": 0.000011
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 3860,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000002,
+            "worst": {
+              "t": 0.883333,
+              "bone": "RightFoot",
+              "depthMeters": 0.000002,
+              "y": -0.000002
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.759438,
+          "status": "green",
+          "score": 84.81,
+          "evidence": {
+            "adjacentPairs": 192,
+            "observations": 3264,
+            "maxDegrees60Hz": 4.518084,
+            "maxMarkerStepHeight60Hz": 0.030378,
+            "maxRootStepHeight60Hz": 0.005827,
+            "worst": {
+              "ratio": 0.7594375360413166,
+              "t": 0.733333,
+              "previousTime": 0.725,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.030378,
+              "degrees60Hz": 1.609877
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 193,
+            "affectedFrames": 0,
+            "checks": 3281,
+            "maxLimbFlexionDegrees": 145.731273,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.007816,
+          "status": "green",
+          "score": 99.84,
+          "evidence": {
+            "entry": {
+              "ratio": 0.00781572674014654,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.005862,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 3.64197016341165e-12,
+              "t": 1.6,
+              "idleTime": 0.008333,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.217378,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "court_fall",
+      "sport": "tennis"
+    },
+    {
+      "id": "court_get_up",
+      "nativeFrameCount": 77,
+      "measuredSamples": 321,
+      "durationSeconds": 2.533333,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "court_fall",
+          "time": "end"
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 178,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.9666666666666666,
+          "end": 2.533333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 73,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 56,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.9,
+          "end": 2.533333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 207,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0.000001
+        }
+      ],
+      "score": 97.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 515,
+            "maxDriftMeters": 0.000001,
+            "p95SpeedMetersPerSecond": 0.00003,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.216667,
+              "start": 0,
+              "end": 0.433333,
+              "driftMeters": 0.000001
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 6420,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 1.316667,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.51008,
+          "status": "green",
+          "score": 89.8,
+          "evidence": {
+            "adjacentPairs": 320,
+            "observations": 5440,
+            "maxDegrees60Hz": 6.044364,
+            "maxMarkerStepHeight60Hz": 0.020403,
+            "maxRootStepHeight60Hz": 0.001774,
+            "worst": {
+              "ratio": 0.5100797244008758,
+              "t": 0.758333,
+              "previousTime": 0.75,
+              "bone": "LeftLeg",
+              "markerStepHeight60Hz": 0.020403,
+              "degrees60Hz": 5.00183
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 321,
+            "affectedFrames": 0,
+            "checks": 5457,
+            "maxLimbFlexionDegrees": 158.185328,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.004106,
+          "status": "green",
+          "score": 99.92,
+          "evidence": {
+            "entry": {
+              "ratio": 3.64197016341165e-12,
+              "t": 0,
+              "idleTime": 1.591667,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.0041063925528301215,
+              "t": 2.533333,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.00308,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.182998,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "court_get_up",
+      "sport": "tennis"
+    },
+    {
+      "id": "point_win",
+      "nativeFrameCount": 62,
+      "measuredSamples": 273,
+      "durationSeconds": 2.033333,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 273,
+          "minHeightMeters": -0.000003,
+          "maxHeightMeters": 0.000001,
+          "maxHorizontalDriftMeters": 0.000001
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 273,
+          "minHeightMeters": -0.000002,
+          "maxHeightMeters": 0.000003,
+          "maxHorizontalDriftMeters": 0.000001
+        }
+      ],
+      "score": 97.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 546,
+            "maxDriftMeters": 0.000001,
+            "p95SpeedMetersPerSecond": 0.000036,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.916667,
+              "start": 0,
+              "end": 2.033333,
+              "driftMeters": 0.000001
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000002,
+          "status": "green",
+          "score": 99.99,
+          "evidence": {
+            "samples": 5460,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000003,
+            "worst": {
+              "t": 0.883333,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000003,
+              "y": -0.000003
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.636961,
+          "status": "green",
+          "score": 87.26,
+          "evidence": {
+            "adjacentPairs": 272,
+            "observations": 4624,
+            "maxDegrees60Hz": 9.554408,
+            "maxMarkerStepHeight60Hz": 0.025062,
+            "maxRootStepHeight60Hz": 0.002699,
+            "worst": {
+              "ratio": 0.6369605257096728,
+              "t": 0.933333,
+              "previousTime": 0.925,
+              "bone": "LeftArm",
+              "markerStepHeight60Hz": 0.005428,
+              "degrees60Hz": 9.554408
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 273,
+            "affectedFrames": 0,
+            "checks": 4641,
+            "maxLimbFlexionDegrees": 138.646374,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.008325,
+          "status": "green",
+          "score": 99.83,
+          "evidence": {
+            "entry": {
+              "ratio": 0.006721380646322884,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.005041,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.008325244882195486,
+              "t": 2.033333,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.006244,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.083458,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "point_win",
+      "sport": "tennis"
+    },
+    {
+      "id": "childlike_joy",
+      "nativeFrameCount": 75,
+      "measuredSamples": 321,
+      "durationSeconds": 2.466667,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 57,
+          "minHeightMeters": -0.000038,
+          "maxHeightMeters": 0.00001,
+          "maxHorizontalDriftMeters": 0.000006
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 57,
+          "minHeightMeters": -0.000044,
+          "maxHeightMeters": 0.00001,
+          "maxHorizontalDriftMeters": 0.000008
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.8333333333333334,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 57,
+          "minHeightMeters": -0.000093,
+          "maxHeightMeters": 0.000018,
+          "maxHorizontalDriftMeters": 0.000011
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0.8333333333333334,
+          "end": 1.2666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 57,
+          "minHeightMeters": -0.000065,
+          "maxHeightMeters": 0.000078,
+          "maxHorizontalDriftMeters": 0.000017
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1.7666666666666666,
+          "end": 2.466666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 92,
+          "minHeightMeters": -0.000025,
+          "maxHeightMeters": 0.000007,
+          "maxHorizontalDriftMeters": 0.000004
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 1.7666666666666666,
+          "end": 2.466666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 92,
+          "minHeightMeters": -0.000027,
+          "maxHeightMeters": 0.000007,
+          "maxHorizontalDriftMeters": 0.000004
+        }
+      ],
+      "score": 96.1,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.00001,
+          "status": "green",
+          "score": 99.98,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 6,
+            "samples": 414,
+            "maxDriftMeters": 0.000017,
+            "p95SpeedMetersPerSecond": 0.000503,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 1.25,
+              "start": 0.833333,
+              "end": 1.266667,
+              "driftMeters": 0.000017
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0.000055,
+          "status": "green",
+          "score": 99.78,
+          "evidence": {
+            "samples": 6420,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000093,
+            "worst": {
+              "t": 0.85,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000093,
+              "y": -0.000093
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.828131,
+          "status": "green",
+          "score": 83.44,
+          "evidence": {
+            "adjacentPairs": 320,
+            "observations": 5440,
+            "maxDegrees60Hz": 10.017849,
+            "maxMarkerStepHeight60Hz": 0.033125,
+            "maxRootStepHeight60Hz": 0.001767,
+            "worst": {
+              "ratio": 0.8281310000897448,
+              "t": 0.508333,
+              "previousTime": 0.5,
+              "bone": "LeftHand",
+              "markerStepHeight60Hz": 0.033125,
+              "degrees60Hz": 0.00598
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 321,
+            "affectedFrames": 0,
+            "checks": 5457,
+            "maxLimbFlexionDegrees": 140.921486,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.045579,
+          "status": "green",
+          "score": 99.09,
+          "evidence": {
+            "entry": {
+              "ratio": 0.045578540761539964,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.034184,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.016027696424340383,
+              "t": 2.466667,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.012021,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.059726,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "childlike_joy",
+      "sport": "tennis"
+    },
+    {
+      "id": "point_disappointment",
+      "nativeFrameCount": 91,
+      "measuredSamples": 385,
+      "durationSeconds": 3,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_win",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_win",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 385,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 385,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 98.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 2,
+            "samples": 770,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000002,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 0.8,
+              "start": 0,
+              "end": 3,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 7700,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 2.25,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.332322,
+          "status": "green",
+          "score": 93.35,
+          "evidence": {
+            "adjacentPairs": 384,
+            "observations": 6528,
+            "maxDegrees60Hz": 4.98483,
+            "maxMarkerStepHeight60Hz": 0.009348,
+            "maxRootStepHeight60Hz": 0.001271,
+            "worst": {
+              "ratio": 0.3323220201857362,
+              "t": 2.833333,
+              "previousTime": 2.825,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.006244,
+              "degrees60Hz": 4.98483
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 385,
+            "affectedFrames": 0,
+            "checks": 6545,
+            "maxLimbFlexionDegrees": 120.236136,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.0176,
+          "status": "green",
+          "score": 99.65,
+          "evidence": {
+            "entry": {
+              "ratio": 0.006721380646322884,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.005041,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.017600330429991755,
+              "t": 3,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.0132,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.045725,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "point_disappointment",
+      "sport": "tennis"
+    },
+    {
+      "id": "match_handshake",
+      "nativeFrameCount": 87,
+      "measuredSamples": 369,
+      "durationSeconds": 2.866667,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 369,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 40,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0.7,
+          "end": 2.033333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 172,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 2.566666666666667,
+          "end": 2.8666666666666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 40,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 97.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 622,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000004,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 0.383333,
+              "start": 0,
+              "end": 2.866667,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 7380,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 0.416667,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 0.613034,
+          "status": "green",
+          "score": 87.74,
+          "evidence": {
+            "adjacentPairs": 368,
+            "observations": 6256,
+            "maxDegrees60Hz": 9.195513,
+            "maxMarkerStepHeight60Hz": 0.014368,
+            "maxRootStepHeight60Hz": 0.004122,
+            "worst": {
+              "ratio": 0.6130341723877931,
+              "t": 2.475,
+              "previousTime": 2.466667,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.006695,
+              "degrees60Hz": 9.195513
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 369,
+            "affectedFrames": 0,
+            "checks": 6273,
+            "maxLimbFlexionDegrees": 145.086235,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.014479,
+          "status": "green",
+          "score": 99.71,
+          "evidence": {
+            "entry": {
+              "ratio": 0.014479467498769522,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.01086,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.011009618965480446,
+              "t": 2.866667,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.008257,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "entry",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.122905,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "match_handshake",
+      "sport": "tennis"
+    },
+    {
+      "id": "coach_serve_demo",
+      "nativeFrameCount": 223,
+      "measuredSamples": 913,
+      "durationSeconds": 7.4,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 63,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 1,
+          "end": 6.733333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 708,
+          "minHeightMeters": -0.000001,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 7.033333333333333,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 46,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.933333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 362,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 3.7,
+          "end": 6.933333333333334,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 399,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 7.233333333333333,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 21,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 94.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 6,
+            "samples": 1600,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000015,
+            "worst": {
+              "bone": "LeftFoot",
+              "t": 2.85,
+              "start": 1,
+              "end": 6.733333,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 18260,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0.000001,
+            "worst": {
+              "t": 3.25,
+              "bone": "LeftFoot",
+              "depthMeters": 0.000001,
+              "y": -0.000001
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.247227,
+          "status": "yellow",
+          "score": 75.06,
+          "evidence": {
+            "adjacentPairs": 912,
+            "observations": 15504,
+            "maxDegrees60Hz": 18.708407,
+            "maxMarkerStepHeight60Hz": 0.028908,
+            "maxRootStepHeight60Hz": 0.002163,
+            "worst": {
+              "ratio": 1.2472271468281966,
+              "t": 2.383333,
+              "previousTime": 2.375,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.004061,
+              "degrees60Hz": 18.708407
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 913,
+            "affectedFrames": 0,
+            "checks": 15521,
+            "maxLimbFlexionDegrees": 149.533447,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": 0.001051,
+          "status": "green",
+          "score": 98.6,
+          "evidence": {
+            "radiusMeters": 0.0335,
+            "samples": 282,
+            "missed": [],
+            "contacts": [
+              {
+                "t": 1.916667,
+                "bone": "LeftHand",
+                "gapMeters": 0.001776,
+                "signedGapMeters": 0.001776,
+                "centerDistanceMeters": 0.035276,
+                "contactPoint": [
+                  0.124408,
+                  0.917483,
+                  0.216504
+                ],
+                "ballCenter": [
+                  0.124407,
+                  0.933224,
+                  0.248074
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.083333,
+                "bone": "LeftHand",
+                "gapMeters": 0.001424,
+                "signedGapMeters": 0.001424,
+                "centerDistanceMeters": 0.034924,
+                "contactPoint": [
+                  0.12398,
+                  1.051671,
+                  0.264872
+                ],
+                "ballCenter": [
+                  0.123666,
+                  1.06937,
+                  0.294978
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.08125,
+                "bone": "LeftHand",
+                "gapMeters": 0.001416,
+                "signedGapMeters": 0.001416,
+                "centerDistanceMeters": 0.034916,
+                "contactPoint": [
+                  0.124071,
+                  1.048638,
+                  0.264931
+                ],
+                "ballCenter": [
+                  0.123758,
+                  1.066314,
+                  0.29504
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.25,
+                "bone": "LeftHand",
+                "gapMeters": 0.001393,
+                "signedGapMeters": -0.001393,
+                "centerDistanceMeters": 0.032107,
+                "contactPoint": [
+                  0.104789,
+                  1.404536,
+                  0.246974
+                ],
+                "ballCenter": [
+                  0.105147,
+                  1.414671,
+                  0.277437
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.908333,
+                "bone": "LeftHand",
+                "gapMeters": 0.001373,
+                "signedGapMeters": 0.001373,
+                "centerDistanceMeters": 0.034873,
+                "contactPoint": [
+                  0.124408,
+                  0.916205,
+                  0.21547
+                ],
+                "ballCenter": [
+                  0.124407,
+                  0.931573,
+                  0.246774
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.925,
+                "bone": "LeftHand",
+                "gapMeters": 0.001285,
+                "signedGapMeters": 0.001285,
+                "centerDistanceMeters": 0.034785,
+                "contactPoint": [
+                  0.124407,
+                  0.919552,
+                  0.218146
+                ],
+                "ballCenter": [
+                  0.124407,
+                  0.934874,
+                  0.249374
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.883333,
+                "bone": "LeftHand",
+                "gapMeters": 0.001116,
+                "signedGapMeters": 0.001116,
+                "centerDistanceMeters": 0.034616,
+                "contactPoint": [
+                  0.124796,
+                  0.917359,
+                  0.215648
+                ],
+                "ballCenter": [
+                  0.125164,
+                  0.933009,
+                  0.246522
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.258333,
+                "bone": "LeftHand",
+                "gapMeters": 0.001116,
+                "signedGapMeters": -0.001116,
+                "centerDistanceMeters": 0.032384,
+                "contactPoint": [
+                  0.104501,
+                  1.41375,
+                  0.246015
+                ],
+                "ballCenter": [
+                  0.104777,
+                  1.424797,
+                  0.276455
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.075,
+                "bone": "LeftHand",
+                "gapMeters": 0.001092,
+                "signedGapMeters": 0.001092,
+                "centerDistanceMeters": 0.034592,
+                "contactPoint": [
+                  0.124288,
+                  1.040226,
+                  0.265056
+                ],
+                "ballCenter": [
+                  0.124036,
+                  1.057147,
+                  0.295226
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.55,
+                "bone": "LeftHand",
+                "gapMeters": 0.001066,
+                "signedGapMeters": -0.001066,
+                "centerDistanceMeters": 0.032434,
+                "contactPoint": [
+                  0.189013,
+                  1.179175,
+                  0.304568
+                ],
+                "ballCenter": [
+                  0.18865,
+                  1.191837,
+                  0.334426
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.95,
+                "bone": "LeftHand",
+                "gapMeters": 0.001063,
+                "signedGapMeters": 0.001063,
+                "centerDistanceMeters": 0.034563,
+                "contactPoint": [
+                  0.124405,
+                  0.930055,
+                  0.225916
+                ],
+                "ballCenter": [
+                  0.124407,
+                  0.945425,
+                  0.256874
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.241667,
+                "bone": "LeftHand",
+                "gapMeters": 0.00106,
+                "signedGapMeters": -0.00106,
+                "centerDistanceMeters": 0.03244,
+                "contactPoint": [
+                  0.10526,
+                  1.393309,
+                  0.247987
+                ],
+                "ballCenter": [
+                  0.105518,
+                  1.404545,
+                  0.278418
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.05,
+                "bone": "LeftHand",
+                "gapMeters": 0.001044,
+                "signedGapMeters": -0.001044,
+                "centerDistanceMeters": 0.032456,
+                "contactPoint": [
+                  0.12441,
+                  1.013971,
+                  0.263715
+                ],
+                "ballCenter": [
+                  0.124407,
+                  1.028225,
+                  0.292874
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.091667,
+                "bone": "LeftHand",
+                "gapMeters": 0.001004,
+                "signedGapMeters": 0.001004,
+                "centerDistanceMeters": 0.034504,
+                "contactPoint": [
+                  0.123528,
+                  1.064867,
+                  0.264552
+                ],
+                "ballCenter": [
+                  0.123296,
+                  1.081594,
+                  0.29473
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.216667,
+                "bone": "LeftHand",
+                "gapMeters": 0.000955,
+                "signedGapMeters": -0.000955,
+                "centerDistanceMeters": 0.032545,
+                "contactPoint": [
+                  0.107525,
+                  1.349493,
+                  0.251208
+                ],
+                "ballCenter": [
+                  0.10774,
+                  1.361147,
+                  0.281594
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.85,
+                "bone": "LeftHand",
+                "gapMeters": 0.000888,
+                "signedGapMeters": 0.000888,
+                "centerDistanceMeters": 0.034388,
+                "contactPoint": [
+                  0.127703,
+                  0.929205,
+                  0.219674
+                ],
+                "ballCenter": [
+                  0.127996,
+                  0.944557,
+                  0.250444
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.583333,
+                "bone": "LeftHand",
+                "gapMeters": 0.000857,
+                "signedGapMeters": -0.000857,
+                "centerDistanceMeters": 0.032643,
+                "contactPoint": [
+                  0.18611,
+                  1.167327,
+                  0.300546
+                ],
+                "ballCenter": [
+                  0.185817,
+                  1.180289,
+                  0.330504
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.891667,
+                "bone": "LeftHand",
+                "gapMeters": 0.000847,
+                "signedGapMeters": 0.000847,
+                "centerDistanceMeters": 0.034347,
+                "contactPoint": [
+                  0.124505,
+                  0.91617,
+                  0.215247
+                ],
+                "ballCenter": [
+                  0.124785,
+                  0.931466,
+                  0.245998
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 1.941667,
+                "bone": "LeftHand",
+                "gapMeters": 0.00084,
+                "signedGapMeters": 0.00084,
+                "centerDistanceMeters": 0.03434,
+                "contactPoint": [
+                  0.124406,
+                  0.925884,
+                  0.222927
+                ],
+                "ballCenter": [
+                  0.124407,
+                  0.940975,
+                  0.253774
+                ],
+                "declaredLocalPoint": true
+              },
+              {
+                "t": 2.058333,
+                "bone": "LeftHand",
+                "gapMeters": 0.000828,
+                "signedGapMeters": -0.000828,
+                "centerDistanceMeters": 0.032672,
+                "contactPoint": [
+                  0.124408,
+                  1.022369,
+                  0.264752
+                ],
+                "ballCenter": [
+                  0.124407,
+                  1.036574,
+                  0.294174
+                ],
+                "declaredLocalPoint": true
+              }
+            ],
+            "contactDetailsTruncated": true,
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed"
+          }
+        },
+        "continuity": {
+          "value": 0.005268,
+          "status": "green",
+          "score": 99.89,
+          "evidence": {
+            "entry": {
+              "ratio": 0.0034538056980722587,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.00259,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.005267774869837747,
+              "t": 7.4,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.003951,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.08128,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.247227,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 92,
+        "measuredWeight": 92,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "coach_serve_demo",
+      "sport": "tennis"
+    },
+    {
+      "id": "child_serve_rehearsal",
+      "nativeFrameCount": 223,
+      "measuredSamples": 913,
+      "durationSeconds": 7.4,
+      "statureProxyMeters": 1.69,
+      "continuityReferences": {
+        "entry": {
+          "clip": "point_disappointment",
+          "time": 0
+        },
+        "exit": {
+          "clip": "point_disappointment",
+          "time": 0
+        }
+      },
+      "support": [
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 3.933333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 486,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 4.533333333333333,
+          "end": 6.566666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 251,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "LeftFoot",
+          "start": 7.066666666666666,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 42,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        },
+        {
+          "kind": "plant",
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 7.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "samples": 913,
+          "minHeightMeters": 0,
+          "maxHeightMeters": 0,
+          "maxHorizontalDriftMeters": 0
+        }
+      ],
+      "score": 94.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "coordinateSpace": "clip space; Hips carries authored translation and Root remains fixed",
+            "supportSource": "declared",
+            "windows": 4,
+            "samples": 1693,
+            "maxDriftMeters": 0,
+            "p95SpeedMetersPerSecond": 0.000012,
+            "worst": {
+              "bone": "RightFoot",
+              "t": 6.483333,
+              "start": 0,
+              "end": 7.4,
+              "driftMeters": 0
+            }
+          }
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "samples": 18260,
+            "floorY": 0,
+            "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+            "maxDepthMeters": 0,
+            "worst": {
+              "t": 5.85,
+              "bone": "RightFoot",
+              "depthMeters": 0,
+              "y": 0
+            }
+          }
+        },
+        "posePops": {
+          "value": 1.215458,
+          "status": "yellow",
+          "score": 75.69,
+          "evidence": {
+            "adjacentPairs": 912,
+            "observations": 15504,
+            "maxDegrees60Hz": 18.231874,
+            "maxMarkerStepHeight60Hz": 0.033981,
+            "maxRootStepHeight60Hz": 0.002752,
+            "worst": {
+              "ratio": 1.2154582559836953,
+              "t": 4.491667,
+              "previousTime": 4.483333,
+              "bone": "RightHand",
+              "markerStepHeight60Hz": 0.009657,
+              "degrees60Hz": 18.231874
+            }
+          }
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "testedFrames": 913,
+            "affectedFrames": 0,
+            "checks": 15521,
+            "maxLimbFlexionDegrees": 146.720214,
+            "maxRelativeSegmentLengthChange": 0,
+            "hingeDirectionChecked": true,
+            "axialTwistChecked": false,
+            "violations": []
+          }
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action explicitly has no visible ball or declared ball contact.",
+          "evidence": {}
+        },
+        "continuity": {
+          "value": 0.006692,
+          "status": "green",
+          "score": 99.87,
+          "evidence": {
+            "entry": {
+              "ratio": 0.00476298585775622,
+              "t": 0,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.003572,
+              "velocityEvaluated": true
+            },
+            "exit": {
+              "ratio": 0.006691778196849567,
+              "t": 7.4,
+              "idleTime": 0,
+              "markers": 17,
+              "rmsPositionHeight": 0,
+              "rmsRotationDegrees": 0,
+              "rmsVelocityHeightPerSecond": 0.005019,
+              "velocityEvaluated": true
+            },
+            "worstEndpoint": "exit",
+            "alignment": "horizontal root translation; raw asset poses used when provided"
+          }
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable",
+          "score": null,
+          "reason": "This action is not declared locomotion.",
+          "evidence": {}
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green",
+          "score": 100,
+          "evidence": {
+            "mode": "structural",
+            "modeSource": "declared",
+            "structuralMismatch": 0,
+            "segments": [
+              {
+                "segment": "Arm-ForeArm",
+                "mismatch": 0
+              },
+              {
+                "segment": "ForeArm-Hand",
+                "mismatch": 0
+              },
+              {
+                "segment": "UpLeg-Leg",
+                "mismatch": 0
+              },
+              {
+                "segment": "Leg-Foot",
+                "mismatch": 0
+              }
+            ],
+            "motionRmsHeight": null,
+            "worstMotion": null,
+            "bilateralPoseRmsHeightUnscored": 0.074621,
+            "note": "One-sided authored actions are checked for structural symmetry only."
+          }
+        }
+      },
+      "reasons": [
+        {
+          "metric": "posePops",
+          "label": "קפיצות פוזה",
+          "status": "yellow",
+          "value": 1.215458,
+          "unit": "discontinuity ratio",
+          "reason": "Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold."
+        }
+      ],
+      "scoring": {
+        "kind": "weighted reproducible screening proxy",
+        "applicableWeight": 79,
+        "measuredWeight": 79,
+        "missingApplicableMetricsScoreZero": true
+      },
+      "clipId": "child_serve_rehearsal",
+      "sport": "tennis"
+    }
+  ]
+}
