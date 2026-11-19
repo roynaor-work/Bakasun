@@ -1,0 +1,3849 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07",
+  "originalsUnchanged": true,
+  "experiments": [
+    {
+      "id": "baseline",
+      "parameters": []
+    },
+    {
+      "id": "perfect-region-11",
+      "parameters": [
+        {
+          "path": "minigames.catchCriminal.tools.narrow.perfectY",
+          "before": 1.5,
+          "after": 1.1
+        },
+        {
+          "path": "minigames.catchCriminal.tools.narrow.perfectX",
+          "before": 0.5,
+          "after": 0.75
+        }
+      ]
+    },
+    {
+      "id": "perfect-region-09",
+      "parameters": [
+        {
+          "path": "minigames.catchCriminal.tools.narrow.perfectY",
+          "before": 1.5,
+          "after": 0.9
+        },
+        {
+          "path": "minigames.catchCriminal.tools.narrow.perfectX",
+          "before": 0.5,
+          "after": 0.75
+        }
+      ]
+    }
+  ],
+  "stages": [
+    1,
+    5,
+    10
+  ],
+  "seeds": [
+    1701,
+    1702,
+    1703,
+    1704,
+    1705,
+    1706,
+    1707,
+    1708,
+    1709,
+    1710,
+    1711,
+    1712,
+    1713,
+    1714,
+    1715,
+    1716
+  ],
+  "hypothesis": "Assist aims at chest height 1.0 while perfect shots require narrow.perfectY=1.5 and perfectX=.5. Test reward recognition around the existing assisted hit; physics and hit probability stay unchanged.",
+  "limitation": "Three-star reward reachability for these synthetic lead-marker controllers; not proof that a human cannot obtain three stars by aiming elsewhere.",
+  "rows": [
+    {
+      "experiment": "baseline",
+      "stage": 1,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 14,
+      "winRate": 0.875,
+      "threeStarWins": 0,
+      "meanStars": 1.375,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 36.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 39.2833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 49.9167,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 38.3333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 57.4167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 48.2667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 36.4833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 54.85,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 37.8833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 46.8333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 42.15,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 58.7,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.35
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 59.0333,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 62.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 66.7,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.35
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.65,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 1,
+      "profile": "regular",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 0,
+      "meanStars": 2,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 26.3833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.3667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 28.0167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 39.3833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 34.75,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 28.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 32.45,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 35.75,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 36.1833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 40.85,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 32.6667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 31.6,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 30.1,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 31.9167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.53
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 1,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 0,
+      "meanStars": 2,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 27.9667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.35,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 29.4,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 33.0667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 37.4833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 33.0167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 27.45,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 31.75,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 27.35,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 27.2167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 32.85,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 34.1333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 28.2333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 29.6833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 32.6167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 25.4667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.59
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 5,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 6,
+      "winRate": 0.375,
+      "threeStarWins": 0,
+      "meanStars": 0.5,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 81.2167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 76.6833,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 74.4667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 89.35,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 69.4333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 67.9833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 67.6667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 72.1667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 82.8667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "lose",
+          "seconds": 88.0333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1711,
+          "outcome": "lose",
+          "seconds": 84.8167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 79.2,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 61.8167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 86.6333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 5,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 0,
+      "meanStars": 1.5,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.9,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 49.9,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 67.6,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 46.0333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 40.65,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 41.95,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 53.6833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 50.4167,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 56.4667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 53.3667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 62.6667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 61.0167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 46.1833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.7333,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 45.4167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 36.0833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 5,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 0,
+      "meanStars": 2,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 39.8333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 40.1333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 36.7667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 41.2167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.0667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 35.3667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 42.8333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 36.4667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 32.4,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 38.4333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 41.4833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 38,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 37.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 39.1167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 41.05,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.7333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 10,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 5,
+      "winRate": 0.3125,
+      "threeStarWins": 0,
+      "meanStars": 0.375,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 92.3667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 96.8667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 96.4,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 99.9,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 92.2167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.65,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 95.7833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 98.55,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 105.8833,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 81.6167,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 75.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 88.85,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "lose",
+          "seconds": 97.35,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 91.2667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 97.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 88.9833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39999999999999997
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 10,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 0,
+      "meanStars": 1.75,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.7167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 86.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 55.7,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 75.15,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 53.2333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.1,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 77.9667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 64.55,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 58.85,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 63.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 71.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 47.6833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 69.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 59.7667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 59.9333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 81.2833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        }
+      ]
+    },
+    {
+      "experiment": "baseline",
+      "stage": 10,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 0,
+      "meanStars": 2,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 51.7,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 58.7333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 44.1,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 61.0167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.1667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 47.1333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 56.5667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 48.7667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 53.1833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 56.0667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 50.6167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 57.55,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 51.4667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 50.4667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 49.9833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 1,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 14,
+      "winRate": 0.875,
+      "threeStarWins": 7,
+      "meanStars": 2.125,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 36.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 39.2833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 49.9167,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 38.3333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 57.4167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 48.2667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 36.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 54.85,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 37.8833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 46.8333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 42.15,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 58.7,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 59.0333,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 62.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 66.7,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.65,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 1,
+      "profile": "regular",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 26.3833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.3667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 28.0167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 39.3833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 34.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 28.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 32.45,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 35.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 36.1833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 40.85,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 32.6667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 31.6,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 30.1,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 31.9167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 1,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 27.9667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.35,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 29.4,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 33.0667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 37.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 33.0167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 27.45,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 31.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 27.35,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 27.2167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 32.85,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 34.1333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 28.2333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 29.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 32.6167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 25.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 5,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 6,
+      "winRate": 0.375,
+      "threeStarWins": 1,
+      "meanStars": 0.6875,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 81.2167,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 76.6833,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 74.4667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 89.35,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 69.4333,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 67.9833,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 67.6667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 72.1667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 82.8667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "lose",
+          "seconds": 88.0333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1711,
+          "outcome": "lose",
+          "seconds": 84.8167,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 79.2,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 61.8167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 86.6333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 5,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 5,
+      "meanStars": 2,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.9,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 49.9,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 67.6,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 46.0333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 40.65,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 41.95,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 53.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 50.4167,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 56.4667,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 53.3667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 62.6667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 61.0167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 46.1833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.7333,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 45.4167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 36.0833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 5,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 13,
+      "meanStars": 2.8125,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 39.8333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 40.1333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 36.7667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 41.2167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.0667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 35.3667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 42.8333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 36.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 32.4,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 38.4333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 41.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 38,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 37.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 39.1167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 41.05,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.7333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 10,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 5,
+      "winRate": 0.3125,
+      "threeStarWins": 0,
+      "meanStars": 0.4375,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 92.3667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 96.8667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 96.4,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 99.9,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 92.2167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.65,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 95.7833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 98.55,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 105.8833,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 81.6167,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 75.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 88.85,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "lose",
+          "seconds": 97.35,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 91.2667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 97.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 88.9833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39999999999999997
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 10,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 5,
+      "meanStars": 2.0625,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.7167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 86.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 55.7,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 75.15,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 53.2333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.1,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 77.9667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 64.55,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 58.85,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 63.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 71.5333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 47.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 69.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 59.7667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 59.9333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 81.2833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-11",
+      "stage": 10,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 9,
+      "meanStars": 2.5625,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 51.7,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 58.7333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 44.1,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 61.0167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.1667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 47.1333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 56.5667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 48.7667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 53.1833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 56.0667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 50.6167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 57.55,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 51.4667,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 50.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 49.9833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 1,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 14,
+      "winRate": 0.875,
+      "threeStarWins": 7,
+      "meanStars": 2.125,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 36.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 39.2833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 49.9167,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 38.3333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 57.4167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 48.2667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 36.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 54.85,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.76
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 37.8833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 46.8333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 42.15,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 58.7,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 59.0333,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.41
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 62.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 66.7,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.65,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 1,
+      "profile": "regular",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 26.3833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.3667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 28.0167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 39.3833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 34.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 28.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 32.45,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 35.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 36.1833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 31.2667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 40.85,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 32.6667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 31.6,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 30.1,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 31.9167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.88
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 1,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 27.9667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 28.35,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 29.4,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 33.0667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 37.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 33.0167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 27.45,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 31.75,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 27.35,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 27.2167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 32.85,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 34.1333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 28.2333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 29.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 32.6167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 25.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.94
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 5,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 6,
+      "winRate": 0.375,
+      "threeStarWins": 2,
+      "meanStars": 0.875,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 81.2167,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 76.6833,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 74.4667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 89.35,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 69.4333,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 67.9833,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 67.6667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 72.1667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 82.8667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "lose",
+          "seconds": 88.0333,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1711,
+          "outcome": "lose",
+          "seconds": 84.8167,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 79.2,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 61.8167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 86.6333,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 5,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 9,
+      "meanStars": 2.4375,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.9,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 49.9,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 67.6,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 46.0333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 40.65,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 41.95,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 53.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 50.4167,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 56.4667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 53.3667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 62.6667,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 61.0167,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 46.1833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 62.7333,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 45.4167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 36.0833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 5,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 39.8333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 40.1333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 36.7667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 41.2167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.0667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 35.3667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 42.8333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 36.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 32.4,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 38.4333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 41.4833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 38,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 37.5833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 39.1167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 41.05,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 34.7333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 10,
+      "profile": "impatient",
+      "n": 16,
+      "wins": 5,
+      "winRate": 0.3125,
+      "threeStarWins": 0,
+      "meanStars": 0.5,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "lose",
+          "seconds": 92.3667,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 96.8667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "lose",
+          "seconds": 96.4,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1704,
+          "outcome": "lose",
+          "seconds": 99.9,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1705,
+          "outcome": "lose",
+          "seconds": 92.2167,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.65,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 95.7833,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7428571428571429
+        },
+        {
+          "seed": 1708,
+          "outcome": "lose",
+          "seconds": 98.55,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1709,
+          "outcome": "lose",
+          "seconds": 105.8833,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 81.6167,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39285714285714285
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 75.5833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1712,
+          "outcome": "lose",
+          "seconds": 88.85,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1713,
+          "outcome": "lose",
+          "seconds": 97.35,
+          "stars": 0,
+          "perfect": true,
+          "performance": 0
+        },
+        {
+          "seed": 1714,
+          "outcome": "lose",
+          "seconds": 91.2667,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1715,
+          "outcome": "lose",
+          "seconds": 97.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 88.9833,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.39999999999999997
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 10,
+      "profile": "regular",
+      "n": 16,
+      "wins": 15,
+      "winRate": 0.9375,
+      "threeStarWins": 9,
+      "meanStars": 2.375,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 66.7167,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5642857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "lose",
+          "seconds": 86.9333,
+          "stars": 0,
+          "perfect": false,
+          "performance": 0
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 55.7,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 75.15,
+          "stars": 1,
+          "perfect": false,
+          "performance": 0.43571428571428567
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 53.2333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 71.1,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 77.9667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 64.55,
+          "stars": 2,
+          "perfect": true,
+          "performance": 0.7857142857142856
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 58.85,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.5214285714285714
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 63.5333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 71.5333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 47.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 69.5333,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 59.7667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8285714285714285
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 59.9333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.8714285714285713
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 81.2833,
+          "stars": 2,
+          "perfect": false,
+          "performance": 0.47857142857142854
+        }
+      ]
+    },
+    {
+      "experiment": "perfect-region-09",
+      "stage": 10,
+      "profile": "skilled",
+      "n": 16,
+      "wins": 16,
+      "winRate": 1,
+      "threeStarWins": 16,
+      "meanStars": 3,
+      "trials": [
+        {
+          "seed": 1701,
+          "outcome": "win",
+          "seconds": 51.7,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1702,
+          "outcome": "win",
+          "seconds": 58.7333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1703,
+          "outcome": "win",
+          "seconds": 44.1,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1704,
+          "outcome": "win",
+          "seconds": 61.0167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1705,
+          "outcome": "win",
+          "seconds": 44.1667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1706,
+          "outcome": "win",
+          "seconds": 47.1333,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1707,
+          "outcome": "win",
+          "seconds": 56.5667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1708,
+          "outcome": "win",
+          "seconds": 48.7667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1709,
+          "outcome": "win",
+          "seconds": 53.1833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1710,
+          "outcome": "win",
+          "seconds": 56.0667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1711,
+          "outcome": "win",
+          "seconds": 50.6167,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1712,
+          "outcome": "win",
+          "seconds": 57.55,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1713,
+          "outcome": "win",
+          "seconds": 51.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1714,
+          "outcome": "win",
+          "seconds": 50.4667,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1715,
+          "outcome": "win",
+          "seconds": 68.6833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        },
+        {
+          "seed": 1716,
+          "outcome": "win",
+          "seconds": 49.9833,
+          "stars": 3,
+          "perfect": true,
+          "performance": 0.9142857142857143
+        }
+      ]
+    }
+  ]
+}
