@@ -1,13 +1,13 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-20';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-20';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-20';
-import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-20';
-import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-20';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-20';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-20';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-20';
-import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-20';
-import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-20';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-21';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-21';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-21';
+import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-21';
+import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-21';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-21';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-21';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-21';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-21';
+import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-21';
 
 kidUxStyle('012', `
   .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
@@ -68,7 +68,7 @@ kidUxStyle('013', `
   .kid-city-stats-more .metrics{gap:6px}
 `);
 
-import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-20';
+import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-21';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

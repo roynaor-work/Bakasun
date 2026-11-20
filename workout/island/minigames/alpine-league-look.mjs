@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {THEME_LOOKS,ALPINE_THEME_ASSETS} from './alpine-league-theme.mjs?v=island-v2-20261107-20';
+import {THEME_LOOKS,ALPINE_THEME_ASSETS} from './alpine-league-theme.mjs?v=island-v2-20261107-21';
 
 /** Ski league v23: the look of a theme on top of the regular ski view (loaded by alpine-view.mjs only for a league stage).
  * The art is Codex's theme pack (alpine-league-theme.mjs maps every file; alpine-design-world.mjs loads the models and tiles): here the

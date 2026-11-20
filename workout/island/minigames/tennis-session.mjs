@@ -1,14 +1,14 @@
-import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
-import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-20';
-import {gameContext} from './context.mjs?v=island-v2-20261107-20';
-import {createTennis} from './tennis.mjs?v=island-v2-20261107-20';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-20';
-import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-20';
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-21';
+import {gameContext} from './context.mjs?v=island-v2-20261107-21';
+import {createTennis} from './tennis.mjs?v=island-v2-20261107-21';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-21';
+import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-21';
 // v15: with the sweeping return meter the stroke is judged the moment the finger lands (like the serve); the model still receives the real dt.
 const applyTennisSample=(model,sample,dt)=>applySampleBase(model,sample,dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});
-import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-20';
-import {tennisCalloutsEnabled,calloutFor,CALL_WORD,CALL_SECONDS,tennisCalloutPackEnabled,CALLOUT_PACK} from './tennis-callouts.mjs?v=island-v2-20261107-20';
-import {tennisUi2Enabled,applyTennisUi2,ui2MeterBox} from './tennis-ui2.mjs?v=island-v2-20261107-20';
+import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-21';
+import {tennisCalloutsEnabled,calloutFor,CALL_WORD,CALL_SECONDS,tennisCalloutPackEnabled,CALLOUT_PACK} from './tennis-callouts.mjs?v=island-v2-20261107-21';
+import {tennisUi2Enabled,applyTennisUi2,ui2MeterBox} from './tennis-ui2.mjs?v=island-v2-20261107-21';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  const phoneParams=new URLSearchParams(globalThis.location?.search||''),phoneFixE=phoneParams.get('phoneFixes')!=='0'&&phoneParams.get('phoneFixE')!=='0';
@@ -24,7 +24,7 @@ export function startTennis(ctx){
  const session={get ready(){return Boolean(view);},get loadFailed(){return null;},dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
- const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-20',import.meta.url);screen.append(powerStyle);
+ const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-21',import.meta.url);screen.append(powerStyle);
  screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls||'';return n;};
  const zone=node('div','soccer-stick-zone'),stick=node('div','soccer-joystick'),knob=node('span','soccer-knob'),home=node('div','tennis-stick-home');
@@ -85,7 +85,7 @@ export function startTennis(ctx){
   const padLeft=actionsBox.left+actionsBox.width/2<stageBox.left+stageBox.width/2/* buttons on the left (left-handed layout, if it comes back): the bar goes on their inner side */,left=Math.max(6,Math.min(stageBox.width-mw-6,padLeft?actionsBox.right-stageBox.left+16:actionsBox.left-stageBox.left-mw-16)),top=Math.max(6,Math.min(stageBox.height-mh-6,actionsBox.top-stageBox.top+(actionsBox.height-mh)/2));meter.style.right='auto';meter.style.bottom='auto';meter.style.left=`${left}px`;meter.style.top=`${top}px`;}
  const rating=node('div','tennis-rating');rating.setAttribute('aria-hidden','true');rating.hidden=true;screen.append(rating);
  // v25: the out sign (Codex sign-out.png background, live text) for 1.5 s on an out, and a one-line hint while the child picks where to stand.
- const outSign=node('div','tennis-out-sign'),outText=node('bdi','');outSign.setAttribute('role','status');outSign.setAttribute('aria-live','polite');outSign.style.backgroundImage=`url(${new URL('../assets/tennis-ui-fx-v1/sign-out.png?v=island-v2-20261107-20',import.meta.url).href})`;outSign.append(outText);outSign.hidden=true;screen.append(outSign);let outLeft=0,outMarkId=null;
+ const outSign=node('div','tennis-out-sign'),outText=node('bdi','');outSign.setAttribute('role','status');outSign.setAttribute('aria-live','polite');outSign.style.backgroundImage=`url(${new URL('../assets/tennis-ui-fx-v1/sign-out.png?v=island-v2-20261107-21',import.meta.url).href})`;outSign.append(outText);outSign.hidden=true;screen.append(outSign);let outLeft=0,outMarkId=null;
  // v24.4 line calls (?tennisCallouts=0 off): the plate says OUT! or NET! with the Codex symbol, and the line judge shouts it (tennis-callouts.mjs).
  const callouts=tennisCalloutsEnabled(),callIcon=node('span','tennis-call-icon');if(callouts){outSign.classList.add('tennis-call');outSign.style.backgroundImage='';callIcon.setAttribute('aria-hidden','true');outSign.prepend(callIcon);}
  // v24.7 (?tennisCalloutPack=0 off): the plate is the Codex club plaque (assets/tennis-callouts-v1), which carries its own symbol.
@@ -119,7 +119,7 @@ export function startTennis(ctx){
   cells.forEach((row,i)=>{row.dot.dataset.serving=String(s.server===i);row.games.textContent=s.score.games[i];row.points.textContent=points[i];});
   const label=t('tennis.score',{home:s.score.games[0],away:s.score.games[1]})+'; '+s.pointLabels.map(v=>typeof v==='string'&&v?t('tennis.'+v):v).join(' : ');board.setAttribute('aria-label',label);status.textContent=label;
   /* v25: a new out mark (a rally ball or a serve, the second serve of a double fault too) shows the sign for 1.5 s */if(s.faultMark?.id!==undefined&&s.faultMark.id!==outMarkId){outMarkId=s.faultMark.id;const call=callouts?calloutFor(s.faultMark):null;
-   if(call){outSign.dataset.call=call;if(callPack){outSign.style.backgroundImage=`url(${new URL(`../${CALLOUT_PACK.signs[call]}?v=island-v2-20261107-20`,import.meta.url).href})`;outText.style.color=CALLOUT_PACK.labelColors[call];}else callIcon.style.backgroundImage=`url(${new URL(`../assets/tennis-ui-v2/fx-${call}.svg?v=island-v2-20261107-20`,import.meta.url).href})`;outText.textContent=CALL_WORD[call];outSign.setAttribute('aria-label',t('tennis.'+(call==='out'?'out':'net')));outSign.hidden=false;outLeft=CALL_SECONDS;audio.call(call);}
+   if(call){outSign.dataset.call=call;if(callPack){outSign.style.backgroundImage=`url(${new URL(`../${CALLOUT_PACK.signs[call]}?v=island-v2-20261107-21`,import.meta.url).href})`;outText.style.color=CALLOUT_PACK.labelColors[call];}else callIcon.style.backgroundImage=`url(${new URL(`../assets/tennis-ui-v2/fx-${call}.svg?v=island-v2-20261107-21`,import.meta.url).href})`;outText.textContent=CALL_WORD[call];outSign.setAttribute('aria-label',t('tennis.'+(call==='out'?'out':'net')));outSign.hidden=false;outLeft=CALL_SECONDS;audio.call(call);}
    else if(!callouts&&s.faultMark.reason==='out'){outText.textContent=t('tennis.out');outSign.hidden=false;outLeft=1.5;}}
   if(s.event.id!==eventId){eventId=s.event.id;if(s.event.type==='hit'){audio.play('hit');if(s.event.rating){rating.dataset.rating=s.event.rating;rating.innerHTML=ratingIcon(s.event.rating);rating.hidden=false;ratingLeft=.75;rating.classList.remove('pop');void rating.offsetWidth;rating.classList.add('pop');if(s.event.rating==='perfect')stopLeft=.07;}}else if(s.event.type==='bounce'||s.event.reason==='doubleBounce')audio.play('bounce');else if(s.event.reason==='net'||s.event.impact==='net')audio.play('net');if(['point','game','complete'].includes(s.event.type)){if(!crowdAudio)audio.play('applause');else{const e=s.event,mine=e.winner===0,myError=!mine&&(e.reason==='net'||e.reason==='out')&&s.ball.lastHitter===0;
     if(e.type==='complete')audio.play(mine?'matchCheer':'applauseLarge',{gain:mine?.85:.5});else if(e.type==='game')audio.play('applauseLarge',{gain:mine?.8:.45});else if(myError)audio.play('crowdAw',{gain:.65});else audio.play(s.rallyHits>=8?'applauseMedium':'applauseShort',{gain:mine?(s.rallyHits>=8?.72:.65):.4});

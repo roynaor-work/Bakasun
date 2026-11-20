@@ -1,6 +1,6 @@
 import {whistleFor,whistleAllowedInPhase,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
-import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-20';
-import {soccerWhistleV1Enabled,SOCCER_WHISTLE_V1,soccerWhistleCue} from './soccer-r241.mjs?v=island-v2-20261107-20';
+import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-21';
+import {soccerWhistleV1Enabled,SOCCER_WHISTLE_V1,soccerWhistleCue} from './soccer-r241.mjs?v=island-v2-20261107-21';
 /** v24.1 referee whistles (Codex soccer-whistle-crowd-v1, assets/soccer-v241/audio, -23 LUFS like the shipped bank): played at the shipped
  * whistle's gain, one voice each; the spacing gate and the rule table stay the ones below. `?soccerWhistleV1=0` = the single shipped whistle. */
 export function soccerV241WhistleAssets(gainDb=-4){

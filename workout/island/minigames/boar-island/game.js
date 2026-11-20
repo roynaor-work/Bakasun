@@ -1,15 +1,15 @@
 // אי החזירים — הגנת החווה · v0.4
 // Fixed first-person beach turret vs. robot boars. All models, textures and sounds are generated in code.
-import {kidUx, kidUxStyle, kidSpeak} from '../../kid-ux.mjs?v=island-v2-20261107-20';
+import {kidUx, kidUxStyle, kidSpeak} from '../../kid-ux.mjs?v=island-v2-20261107-21';
 import * as THREE from './vendor/three.module.js';
 import {clamp,rand,damp,TOUCH,QUALITY,HIGH,setQuality,shoreZ,groundY,seaWave,setRenderer,mat,geo,rb,cyl,cylZ,sph,mesh,radial,compact,compactTree,T,worn} from './kit.js';
 import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-20';
-import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-20';
-import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-20';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-21';
+import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-21';
+import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-21';
 import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,PHONE_FIX_F,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 import {

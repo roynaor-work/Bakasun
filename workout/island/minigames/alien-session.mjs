@@ -1,23 +1,23 @@
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-20';
-import {createControls} from './controls.mjs?v=island-v2-20261107-20';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-20';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-20';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-21';
+import {createControls} from './controls.mjs?v=island-v2-20261107-21';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-21';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-21';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-20';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-21';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-20';
-import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-20';
-import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-20';
-import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-20';
-import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-20';
-import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-20';
-import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-20';
-import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-20';
-import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-20';
-import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-20';
-import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-20';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-21';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-21';
+import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-21';
+import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-21';
+import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-21';
+import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-21';
+import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-21';
+import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-21';
+import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-21';
+import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-21';
+import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-21';
 const alienKidStyle = `
 .game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] :is(#shoot,#vulcan,#pass,.alien-special-switch){opacity:1!important}
 .game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] #pass:disabled{opacity:1;border-color:#a4b0c0;color:#a4b0c0}
@@ -47,7 +47,7 @@ const alienKidDemo={
 };
 let v24Styled=false;
 /** v24 HUD stylesheet, once per page. */
-function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-20',import.meta.url).href;document.head.append(link);}
+function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-21',import.meta.url).href;document.head.append(link);}
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */

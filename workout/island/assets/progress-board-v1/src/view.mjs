@@ -1,5 +1,5 @@
-import {BADGES, BADGE_GROUPS} from '../data/badges.mjs?v=island-v2-20261107-20';
-import {praiseCopy} from './progress.mjs?v=island-v2-20261107-20';
+import {BADGES, BADGE_GROUPS} from '../data/badges.mjs?v=island-v2-20261107-21';
+import {praiseCopy} from './progress.mjs?v=island-v2-20261107-21';
 
 const assets = new URL('../art/', import.meta.url);
 const badgeById = new Map(BADGES.map(badge => [badge.id, badge]));

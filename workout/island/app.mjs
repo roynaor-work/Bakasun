@@ -1,22 +1,22 @@
-import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-20';
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-20';
-import './view/learning-buildings.mjs?v=island-v2-20261107-20';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-20';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-20';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-20';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-20';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-20';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-20';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-20';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-20';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-20';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-20';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-20';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-20';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-20';
-import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-20';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease,v25On,switchRelease,packsForGames} from './ui/offline.mjs?v=island-v2-20261107-20';
-import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-20';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-21';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-21';
+import './view/learning-buildings.mjs?v=island-v2-20261107-21';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-21';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-21';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-21';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-21';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-21';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-21';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-21';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-21';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-21';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-21';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-21';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-21';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-21';
+import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-21';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease,v25On,switchRelease,packsForGames} from './ui/offline.mjs?v=island-v2-20261107-21';
+import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-21';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -38,9 +38,9 @@ try {
   // ?cityMissions=0 brings back the older missions and events; ?cityProgression=1 turns the staged city on (opt-in: it forks the save into its own copy).
   const optional = (on, load) => on ? load().catch(error => { console.warn(error); return undefined; }) : undefined;
   const missions = optional(!cityPreview && query.get('cityMissions') !== '0',
-    () => import('./assets/city-missions-v1/runtime.mjs?v=island-v2-20261107-20'));
+    () => import('./assets/city-missions-v1/runtime.mjs?v=island-v2-20261107-21'));
   const progression = optional(!cityPreview && (query.get('cityProgression') === '1' || query.get('cityProgress') === '1'),
-    () => import('./assets/city-progression-v1/island-adapter.mjs?v=island-v2-20261107-20'));
+    () => import('./assets/city-progression-v1/island-adapter.mjs?v=island-v2-20261107-21'));
   const [data, missionsModule, cityProgress] = await Promise.all([loadData(), missions, progression]);
   let createCityMissions;
   try { createCityMissions = missionsModule?.loadCityMissions(); } catch (error) { console.warn(error); }
@@ -50,7 +50,7 @@ try {
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
   if (cityPreview) storage = readOnlyStorage(storage);
   const learningV2 = query.get('learningV2') === '0' ? null
-    : await import('./assets/learning-v2/src/integration.mjs?v=island-v2-20261107-20').catch(() => null);
+    : await import('./assets/learning-v2/src/integration.mjs?v=island-v2-20261107-21').catch(() => null);
   if (cityProgress) storage = cityProgress.cityProgressStorage(storage);
   const engine = createEngine(data, { storage, createCityMissions, installLearningV2: learningV2?.installLearningV2 });
   let ui;
@@ -73,7 +73,7 @@ try {
   ui.cityAccess=cityAccess;
   const stopCityMissions=engine.cityMissions?.announceRewards(ui);
   if (!cityPreview && query.get('progressBoard') !== '0') {
-    const progress = import('./assets/progress-board-v1/src/integration.mjs?v=island-v2-20261107-20')
+    const progress = import('./assets/progress-board-v1/src/integration.mjs?v=island-v2-20261107-21')
       .then(({connectIsland}) => connectIsland({ui, cityAccess, games})).catch(() => null);
     games.onProgressResult = (result, target) => {
       void progress.then(board => board?.record(result, target));

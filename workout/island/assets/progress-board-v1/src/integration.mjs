@@ -1,10 +1,10 @@
-import {arcadeEvent, islandEvent, workoutEvent} from './events.mjs?v=island-v2-20261107-20';
+import {arcadeEvent, islandEvent, workoutEvent} from './events.mjs?v=island-v2-20261107-21';
 
 let runtime;
 let styles;
 
 function loadRuntime() {
-  return runtime ??= Promise.all([import('./store.mjs?v=island-v2-20261107-20'), import('./view.mjs?v=island-v2-20261107-20')])
+  return runtime ??= Promise.all([import('./store.mjs?v=island-v2-20261107-21'), import('./view.mjs?v=island-v2-20261107-21')])
     .then(async ([storage, view]) => ({store: await storage.createStore(), view}))
     .catch(error => {
       runtime = null;
@@ -16,7 +16,7 @@ function loadStyles() {
   return styles ??= new Promise((resolve, reject) => {
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = new URL('./board.css?v=island-v2-20261107-20', import.meta.url).href;
+    css.href = new URL('./board.css?v=island-v2-20261107-21', import.meta.url).href;
     css.onload = resolve;
     css.onerror = () => {
       css.remove();

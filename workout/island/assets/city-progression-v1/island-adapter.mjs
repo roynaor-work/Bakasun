@@ -1,11 +1,11 @@
-import {BUILDINGS} from './catalog.mjs?v=island-v2-20261107-20';
+import {BUILDINGS} from './catalog.mjs?v=island-v2-20261107-21';
 import {
   advanceProgress, cancelProgressProject, constructionStage, initProgress, isOperational, operatingState,
   progressAvailability, progressIncome, progressMetrics, progressPartTarget, progressReport,
   secondsUntilProgressEvent, startProgressProject, upgradeProgressAvailability, validProgress,
-} from './progression.mjs?v=island-v2-20261107-20';
+} from './progression.mjs?v=island-v2-20261107-21';
 
-export {cityProgressEnabled, cityProgressStorage} from './storage.mjs?v=island-v2-20261107-20';
+export {cityProgressEnabled, cityProgressStorage} from './storage.mjs?v=island-v2-20261107-21';
 
 const CATEGORIES = {
   basic: 'basic', commercial: 'basic', transport: 'basic', transit: 'basic', coastal: 'basic',

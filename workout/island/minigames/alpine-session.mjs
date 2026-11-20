@@ -1,18 +1,18 @@
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
 import {createAlpineHud} from './alpine-hud.mjs';
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-20';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-20';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-20';
-import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-20';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-21';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-21';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-21';
+import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-21';
 import {createQualityGovernor} from './alpine-quality.mjs';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-20';
-import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-20';
-import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-20';
-import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-20';
-import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-20';
-import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-20';
-import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-20';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-21';
+import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-21';
+import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-21';
+import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-21';
+import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-21';
+import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-21';
+import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-21';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -101,12 +101,12 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-20', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-20', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-21', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-21', import.meta.url).href;
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const kitCss=el('link');kitCss.rel='stylesheet';kitCss.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;
   const feelCss=el('link');feelCss.rel='stylesheet';feelCss.href=new URL('./alpine-feel.css',import.meta.url).href;
-  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-20',import.meta.url).href;
+  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-21',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -188,7 +188,7 @@ export function runAlpineSession(ctx) {
   // Start lights (Formula 1 style) instead of the big number; ?alpineStartLights=0 keeps the number. A beep for every lamp and the start
   // cue at green replace the per-second countdown cues.
   const lightsOn = startLightsEnabled(), lights = lightsOn ? createStartLights(doc, {totalMs: balance.physics.countdownSeconds * 1000, onLamp: () => { audio.cue('countdown'); ctx.sound?.('button'); }}) : null;
-  const lightsCss = lightsOn ? el('link') : null; if (lightsCss) { lightsCss.rel = 'stylesheet'; lightsCss.href = new URL('./alpine-start-lights.css?v=island-v2-20261107-20', import.meta.url).href; }
+  const lightsCss = lightsOn ? el('link') : null; if (lightsCss) { lightsCss.rel = 'stylesheet'; lightsCss.href = new URL('./alpine-start-lights.css?v=island-v2-20261107-21', import.meta.url).href; }
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
   const loading = el('div', 'alpine-loading'), loadingText = el('p', '', t('alpine.loading')); loading.append(el('span', 'alpine-spinner'), loadingText);
   // Footer controls (inside the island controls region)
@@ -260,8 +260,8 @@ export function runAlpineSession(ctx) {
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);
   dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, cleanCss, app]};
   if (lights) { screen.append(lightsCss); dom.nodes.push(lights.node, lightsCss); app.dataset.startLights = 'true'; }
-  if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-20', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
-  if (v241) { const v241Css = el('link'); v241Css.rel = 'stylesheet'; v241Css.href = new URL('./alpine-v241.css?v=island-v2-20261107-20', import.meta.url).href; screen.append(v241Css); dom.nodes.push(v241Css); screen.dataset.alpineV241 = 'true'; }
+  if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-21', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
+  if (v241) { const v241Css = el('link'); v241Css.rel = 'stylesheet'; v241Css.href = new URL('./alpine-v241.css?v=island-v2-20261107-21', import.meta.url).href; screen.append(v241Css); dom.nodes.push(v241Css); screen.dataset.alpineV241 = 'true'; }
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
@@ -284,7 +284,7 @@ export function runAlpineSession(ctx) {
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   const loadStart = performance.now();
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: timeout 25 s']}); fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-v2-20261107-20').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {}), ...(ghostTrack ? {ghost: ghostTrack} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-v2-20261107-21').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {}), ...(ghostTrack ? {ghost: ghostTrack} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
