@@ -8,7 +8,7 @@
  * it lit), follows the ship, and every BURST.tick it hits every ship it crosses (the drawn hull, alien-hull.mjs, the same contact as a round), with
  * BURST.tickDamage x the damage of one cannon laser round. A shield takes a charge on a tick instead of the damage. The purchased laser and the
  * hangar's weapon 2 (a permanent laser) do not light the beam: only the short bonus does, as Roy asked. The v24.5 piercing rounds stay as they are.
- * Pure rules plus one canvas draw function; numbers: config.json alienDefense.laserBurst (BURST is the fallback). */
+ * Pure rules plus one canvas draw function; numbers: BURST (config.json alienDefense.laserBurst may override any of them). */
 const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}catch{return null;}};
 export function alienLaserBurstEnabled(search=globalThis.location?.search||''){return param('alienLaserBurst',search)!=='0';}
 export const BURST=Object.freeze({

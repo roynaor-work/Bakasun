@@ -6,6 +6,7 @@ import {drawV25Shot} from './alien-v25-draw.mjs?v=island-v2-20261107-19';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
 import {drawLaserBeam,drawLaserHits,drawLaserTimer} from './alien-laser.mjs?v=island-v2-20261107-19';
+import {drawLaserBurst} from './alien-laser-burst.mjs?v=island-v2-20261107-19';
 const TAU=Math.PI*2;
 const threatColors={needle:'#ff8298',orb:'#ffbf8b',diamond:'#ffabd0',fork:'#dc9fff',ring:'#ffa58c'};
 const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`;};
@@ -28,6 +29,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  thruster(p,m.player.x,m.player.y+playerLength*.48,m.time,pixelAspect,false,.85*screenScale);
  for(const a of m.aliens)if(a.y>0&&a.y<config.height){thruster(p,a.x,a.y-a.radius*.8,m.time+a.phase,pixelAspect,true,a.boss?.8:.33);if(a.hitTime>0)glow(p,a.x,a.y,19,'#fff2b7',pixelAspect,a.hitTime/balance.hitFlashSeconds*.5);}
  if(m.v11)drawV11Tells(p,m,pixelAspect,screenScale);
+ drawLaserBurst(p,m,pixelAspect,screenScale);/* v24.6: the laser bonus beam (?alienLaserBurst=0: none) */
  for(const s of m.shots){
   if(s.kind===2){drawV11Laser(p,s,pixelAspect,screenScale);continue;}
   if(s.beam25){drawLaserBeam(p,s,pixelAspect,screenScale,m.laser25,m.time);continue;}/* v24.5: the piercing laser beam (?alienLaser=0: the v24.4 streak) */
