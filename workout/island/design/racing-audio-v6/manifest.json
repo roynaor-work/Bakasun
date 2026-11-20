@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "name": "Bakasun Island Racing Audio v6",
+  "audio_license": "CC0-1.0",
+  "source_license": "MIT",
+  "sample_rate_hz": 48000,
+  "target_lufs_i": -18,
+  "max_bytes_per_file": 60000,
+  "master_gain_db": -6,
+  "baseline": {
+    "branch": "codex/racing-audio-v5",
+    "commit": "43975a996bff7baa4c1f90ede6b25d78e0fc7a66",
+    "directory": "workout/island/design/racing-audio-v5"
+  },
+  "assets": [
+    {
+      "id": "launch-idle",
+      "title": "מנוע עומד על הגריד",
+      "description": "בעירה בסל״ד נמוך עם רטט של השלדה לפני שחרור הזינוק.",
+      "group": "start",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.0,
+      "mix_gain_db": -12,
+      "files": { "ogg": "assets/launch-idle.ogg", "mp3": "assets/launch-idle.mp3" }
+    },
+    {
+      "id": "start-lights",
+      "title": "רמזור הזינוק",
+      "description": "חמש פעימות קצרות וסימון כיבוי, בתזמון מקוצר להדגמה.",
+      "group": "start",
+      "channels": 1,
+      "loop": false,
+      "duration_seconds": 3.15,
+      "mix_gain_db": -8,
+      "files": { "ogg": "assets/start-lights.ogg", "mp3": "assets/start-lights.mp3" }
+    },
+    {
+      "id": "launch",
+      "title": "זינוק",
+      "description": "שחרור מהגריד, אחיזה ראשונית ועלייה מהירה בסל״ד.",
+      "group": "start",
+      "channels": 1,
+      "loop": false,
+      "duration_seconds": 1.55,
+      "mix_gain_db": -5,
+      "files": { "ogg": "assets/launch.ogg", "mp3": "assets/launch.mp3" }
+    },
+    {
+      "id": "engine-low",
+      "title": "מנוע בעומס נמוך",
+      "description": "עלייה וירידה בסל״ד בפתיחת מצערת מתונה.",
+      "group": "engine",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.8,
+      "mix_gain_db": -13,
+      "files": { "ogg": "assets/engine-low.ogg", "mp3": "assets/engine-low.mp3" }
+    },
+    {
+      "id": "engine-medium",
+      "title": "מנוע בעומס בינוני",
+      "description": "האצה ושחרור מצערת, עם גוף מפלט בולט יותר.",
+      "group": "engine",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.8,
+      "mix_gain_db": -8,
+      "files": { "ogg": "assets/engine-medium.ogg", "mp3": "assets/engine-medium.mp3" }
+    },
+    {
+      "id": "engine-high",
+      "title": "מנוע בעומס גבוה",
+      "description": "משיכה לסל״ד גבוה, ירידות גובה קצרות בהחלפה והרפיה בסוף המחזור.",
+      "group": "engine",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.8,
+      "mix_gain_db": -4,
+      "files": { "ogg": "assets/engine-high.ogg", "mp3": "assets/engine-high.mp3" }
+    },
+    {
+      "id": "overtake-near",
+      "title": "עקיפה קרובה",
+      "description": "מעבר קצר מצד לצד עם שינוי גובה דופלר ומשב קרוב.",
+      "group": "overtake",
+      "channels": 2,
+      "loop": false,
+      "duration_seconds": 1.10,
+      "mix_gain_db": -8,
+      "files": { "ogg": "assets/overtake-near.ogg", "mp3": "assets/overtake-near.mp3" }
+    },
+    {
+      "id": "overtake-wide",
+      "title": "עקיפה בנתיב רחב",
+      "description": "מעבר מרוחק יותר, עם רוח רחבה ותנועה רכה בסטריאו.",
+      "group": "overtake",
+      "channels": 2,
+      "loop": false,
+      "duration_seconds": 1.30,
+      "mix_gain_db": -10,
+      "files": { "ogg": "assets/overtake-wide.ogg", "mp3": "assets/overtake-wide.mp3" }
+    },
+    {
+      "id": "overtake-fast",
+      "title": "עקיפה מהירה",
+      "description": "מעבר חד בזמן עם שינוי גובה מהיר ומשב קצר.",
+      "group": "overtake",
+      "channels": 2,
+      "loop": false,
+      "duration_seconds": 0.95,
+      "mix_gain_db": -7,
+      "files": { "ogg": "assets/overtake-fast.ogg", "mp3": "assets/overtake-fast.mp3" }
+    },
+    {
+      "id": "track-edge",
+      "title": "קצה אספלט",
+      "description": "חיכוך עמום ופעימות מגע רכות בחריגה קלה מהמסלול.",
+      "group": "track",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.0,
+      "mix_gain_db": -22,
+      "files": { "ogg": "assets/track-edge.ogg", "mp3": "assets/track-edge.mp3" }
+    },
+    {
+      "id": "pit-limiter",
+      "title": "מנוע בנתיב הפיט",
+      "description": "מנוע נמוך עם קטיעות מומנט מעוגלות של המגביל, ללא צפצוף.",
+      "group": "pit",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.0,
+      "mix_gain_db": -15,
+      "files": { "ogg": "assets/pit-limiter.ogg", "mp3": "assets/pit-limiter.mp3" }
+    },
+    {
+      "id": "pit-ambience",
+      "title": "רקע בנתיב הפיט",
+      "description": "אוורור עמום והדי פעילות רחוקים בשכבה עדינה.",
+      "group": "pit",
+      "channels": 1,
+      "loop": true,
+      "duration_seconds": 4.0,
+      "mix_gain_db": -28,
+      "files": { "ogg": "assets/pit-ambience.ogg", "mp3": "assets/pit-ambience.mp3" }
+    },
+    {
+      "id": "brake",
+      "title": "בלימה רכה",
+      "description": "חיכוך שמתגבר בהדרגה, יורד בגובה ונרגע בשחרור הבלם.",
+      "group": "braking",
+      "channels": 1,
+      "loop": false,
+      "duration_seconds": 1.45,
+      "mix_gain_db": -15,
+      "files": { "ogg": "assets/brake.ogg", "mp3": "assets/brake.mp3" }
+    },
+    {
+      "id": "tire-scrub",
+      "title": "חריקת צמיג רכה",
+      "description": "שפשוף גומי שמתכופף בגובה ודועך במהירות.",
+      "group": "braking",
+      "channels": 1,
+      "loop": false,
+      "duration_seconds": 1.30,
+      "mix_gain_db": -16,
+      "files": { "ogg": "assets/tire-scrub.ogg", "mp3": "assets/tire-scrub.mp3" }
+    }
+  ]
+}

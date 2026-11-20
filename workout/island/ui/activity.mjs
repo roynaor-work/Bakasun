@@ -10,6 +10,7 @@ import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-
 import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-20';
 import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-20';
 import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-20';
+import {racingStageFeature} from '../minigames/racing-v24-7.mjs?v=island-v2-20261107-20';
 import {gameContext} from '../minigames/context.mjs?v=island-v2-20261107-20';
 import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-20';
 import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261107-20';
@@ -287,7 +288,7 @@ export class ActivityInterface {
     p.stars.forEach((stars,i)=>{
       const stage=i+1,locked=stage>p.stage;
       const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
-      node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+      node.title=this.t(this.data.config.minigames[id].levels[i].feature);if(id==='islandRacing')node.title=racingStageFeature(stage,node.title);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
     });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);(clubLayout?.actions||outer).append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
   autoLaunch(choice) {

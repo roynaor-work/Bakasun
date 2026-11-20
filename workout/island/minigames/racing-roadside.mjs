@@ -84,7 +84,8 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   for(let i=0;i<10;i++){const s=(track.length-70+i*16)%track.length,side=i%2?1:-1,site=siteAt(s,side*(track.width/2+(zone?zone+.3:2.3)));if(!clear(site,.2,6,zone?zone:.9))continue;site.y=site.p.y;box('masonry',site,0,1.5,0,.18,1.3,12,boards[i%boards.length],1);}
  }
  // Retaining walls and two-height steel rails follow the outside of risky bends.
- for(let s=8;s<track.length&&!zone;s+=6*stretch){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
+ // racing-v24.7: the v3 circuits climb more (cloud-pass: 33 m), so more of the lap asks for a guardrail: wider spacing there keeps the walls layout in its triangle budget
+ for(let s=8;s<track.length&&!zone;s+=6*stretch*(track.v3?1.6:1)){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
   if(Math.abs(turn)<.16&&Math.abs(p.tangent.y)<.044)continue;
   const side=turn>.04?-1:turn<-.04?1:Math.floor(s/6)%2?1:-1,site=siteAt(s,side*(track.width/2+2.65));if(!valid(site,.25))continue;
   // racing-deep-m2: the chicanes of the Codex circuits bend down to a 7 m radius; the ends of a straight 6 m beam placed on such a bend reached the asphalt, so every corner is checked

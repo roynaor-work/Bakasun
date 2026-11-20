@@ -1,5 +1,6 @@
 // Original island circuits. Distances are metres, Y is up, heading 0 faces +Z.
 import { ROUND, racingRoundOn } from './racing-v24-5.mjs?v=island-v2-20261107-20';
+import { racingV247Flags } from './racing-v24-7.mjs?v=island-v2-20261107-20';
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap = (v, length) => ((v % length) + length) % length;
@@ -209,13 +210,27 @@ const AI_CORNER_PARAM = new URLSearchParams(globalThis.location?.search || '').g
 // racing-v24.5 round: the computer's corner law gains more from the opened corners than the player (its speed is sqrt(aiCorner R)), so a child on the automatic gas
 // finished 2nd-5th instead of 1st in tiers 0-1 (tools/racing-v24-5-sim.mjs field); the table is scaled by ROUND.aiCorner on the round circuits (x0.85: 1st again).
 const V2_AI_CORNER = RACING_TRACK_SET !== 'v2' || AI_CORNER_PARAM === '0' ? null : (AI_CORNER_PARAM && AI_CORNER_PARAM.split(',').length === 5 ? AI_CORNER_PARAM.split(',').map(Number) : [23, 27, 31.8, 32.4, 33].map(v => ROUND_ON ? +(v * ROUND.aiCorner).toFixed(2) : v));
+// racing-v24.7 tracks v3 (Codex, design/racing-tracks-v3; the runtime copy is assets/racing-tracks-v3, built by tools/racing-tracks-v3-build.mjs): six more circuits,
+// already in metres (no V2 scale, no smoothing: their corners are designed, 19-52 m radius), each with its own sky, colours and trackside models (racing-tracks-v3-env.mjs).
+// They take the odd tiers: stages 7-12 and 19-24 (the league races on those stages too); the other tiers keep the v2 circuits. ?racingTracksV3=0 keeps v2 everywhere.
+// Only with the default v2 set (not with ?racingTracks=v1|f1). The computer's corner law is the same table as on the round v2 circuits.
+const V3_ON = RACING_TRACK_SET === 'v2' && racingV247Flags().tracksV3;
+const CODEX_V3 = V3_ON ? (await import('../assets/racing-tracks-v3/tracks.mjs')).default : null;
+// The package's laps are 1.70-1.93 km; the plan (x, z) is scaled so every lap is V3_LAP metres, like the 2.0-2.3 km v2 circuits: a two-lap race is then long enough for
+// the automatic tyre stop (PIT_AUTO.distance) and the league race times stay where they were. Heights and road widths are not scaled; the corners become 19-62 m.
+export const V3_LAP = 2100;
+export const TRACKS_V3 = Object.freeze((CODEX_V3 || []).map(track => { const k = +(V3_LAP / track.v3.lengthM).toFixed(4);
+  return Object.freeze({ ...track, v3: Object.freeze({ ...track.v3, scale: k }), points: Object.freeze(track.points.map(([x, y, z]) => Object.freeze([+(x * k).toFixed(2), y, +(z * k).toFixed(2)]))) }); }));
+/** The circuit of a stage index (0..29): the v3 circuits on the odd tiers when they are on. */
+const circuitOf = index => TRACKS_V3.length === 6 && Math.floor(index / 6) % 2 === 1 ? TRACKS_V3[index % 6] : TRACKS[index % 6];
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
-const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
+const TRACK_LENGTHS = new Map([...TRACKS, ...TRACKS_V3].map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
 export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index) => {
-  const tier = Math.floor(index / 6), circuit = TRACKS[index % 6];
+  const tier = Math.floor(index / 6), circuit = circuitOf(index);
   const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
-    timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
+    timeOfDay: circuit.v3 ? (circuit.v3.night ? 'night' : 'day') : TIMES[tier], reverse: tier === 3,   // racing-v24.7: a v3 circuit has its own light (its sky)
+     widthScale: 1 - tier * 0.025,
     aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: V2_AI_CORNER ? V2_AI_CORNER[tier] : 17 + tier * 2.2,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
     // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
@@ -251,7 +266,7 @@ function sampleCircuit(controls, per = 40) {
 /** A closed, arc-length sampled track. sample() accepts unwrapped race metres. */
 export function createTrack(value = 1) {
   const stage = typeof value === 'object' && value.trackId ? value : typeof value === 'number' ? getRacingStage(value) : null;
-  const definition = (value && typeof value === 'object' && value.points && !value.trackId) ? value : TRACKS.find((item) => item.id === (stage?.trackId || value)) || TRACKS[0];
+  const definition = (value && typeof value === 'object' && value.points && !value.trackId) ? value : TRACKS.find((item) => item.id === (stage?.trackId || value)) || TRACKS_V3.find((item) => item.id === (stage?.trackId || value)) || TRACKS[0];
   const controls = stage?.reverse ? [definition.points[0], ...definition.points.slice(1).reverse()] : definition.points;
   const {points,distances,length}=sampleCircuit(controls,definition.samples||40);
   const width = definition.width * (stage?.widthScale ?? 1);

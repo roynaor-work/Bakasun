@@ -564,11 +564,13 @@
   "minigames/racing-session.mjs",
   "minigames/racing-speedometer.mjs",
   "minigames/racing-tower.mjs",
+  "minigames/racing-tracks-v3-env.mjs",
   "minigames/racing-tracks.mjs",
   "minigames/racing-unlock.mjs",
   "minigames/racing-v24-4.mjs",
   "minigames/racing-v24-5.mjs",
   "minigames/racing-v24-6.mjs",
+  "minigames/racing-v24-7.mjs",
   "minigames/racing-v24.css",
   "minigames/racing-v24.mjs",
   "minigames/racing-v7-assets.mjs",
@@ -1437,6 +1439,12 @@
    "assets/racing-audio-v5/pit-engine-slow.ogg",
    "assets/racing-audio-v5/pit-limiter.mp3",
    "assets/racing-audio-v5/pit-limiter.ogg",
+   "assets/racing-audio-v6/brake.mp3",
+   "assets/racing-audio-v6/brake.ogg",
+   "assets/racing-audio-v6/pit-limiter.mp3",
+   "assets/racing-audio-v6/pit-limiter.ogg",
+   "assets/racing-audio-v6/tire-scrub.mp3",
+   "assets/racing-audio-v6/tire-scrub.ogg",
    "assets/racing-broadcast-v1/card-frame.svg",
    "assets/racing-broadcast-v1/leaderboard-strip.svg",
    "assets/racing-broadcast-v1/podium.webp",
@@ -1513,6 +1521,60 @@
    "assets/racing-rec/engine-away-2.ogg",
    "assets/racing-rec/engine-idle-loop.mp3",
    "assets/racing-rec/engine-idle-loop.ogg",
+   "assets/racing-tracks-v3/props/cedar-bend/cedar-grove.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/fern-clump.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/log-stack.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/moss-boulder.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/ranger-tower.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/saplings.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/trail-board.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/trail-shelter.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/alpine-chalet.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/avalanche-fence.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/cable-tower.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/cairn.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/granite-needle.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/juniper-cluster.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/lookout-deck.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/spillway-box.glb",
+   "assets/racing-tracks-v3/props/frostline/ice-spires.glb",
+   "assets/racing-tracks-v3/props/frostline/plow-depot.glb",
+   "assets/racing-tracks-v3/props/frostline/ski-patrol-hut.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-cannon.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-fence.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-spruce.glb",
+   "assets/racing-tracks-v3/props/frostline/trail-lanterns.glb",
+   "assets/racing-tracks-v3/props/frostline/weather-mast.glb",
+   "assets/racing-tracks-v3/props/neon-quay/glass-towers.glb",
+   "assets/racing-tracks-v3/props/neon-quay/metro-entrance.glb",
+   "assets/racing-tracks-v3/props/neon-quay/neon-pylon.glb",
+   "assets/racing-tracks-v3/props/neon-quay/service-block.glb",
+   "assets/racing-tracks-v3/props/neon-quay/signal-frame.glb",
+   "assets/racing-tracks-v3/props/neon-quay/streetlight.glb",
+   "assets/racing-tracks-v3/props/neon-quay/transit-shelter.glb",
+   "assets/racing-tracks-v3/props/neon-quay/water-tower.glb",
+   "assets/racing-tracks-v3/props/red-mesa/cistern.glb",
+   "assets/racing-tracks-v3/props/red-mesa/dune-grass.glb",
+   "assets/racing-tracks-v3/props/red-mesa/mesa-stack.glb",
+   "assets/racing-tracks-v3/props/red-mesa/saguaro.glb",
+   "assets/racing-tracks-v3/props/red-mesa/sand-fence.glb",
+   "assets/racing-tracks-v3/props/red-mesa/sandstone-arch.glb",
+   "assets/racing-tracks-v3/props/red-mesa/shade-station.glb",
+   "assets/racing-tracks-v3/props/red-mesa/survey-mast.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/beach-umbrella.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/buoy-pair.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/dune-fence.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/fishing-pier.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/lifeguard-hut.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/lighthouse.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/palm-cluster.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/sailboat.glb",
+   "assets/racing-tracks-v3/skies/cedar-bend.webp",
+   "assets/racing-tracks-v3/skies/cloud-pass.webp",
+   "assets/racing-tracks-v3/skies/frostline.webp",
+   "assets/racing-tracks-v3/skies/neon-quay.webp",
+   "assets/racing-tracks-v3/skies/red-mesa.webp",
+   "assets/racing-tracks-v3/skies/saltwater-bay.webp",
    "assets/racing-v7/cars/apex-lod0.glb",
    "assets/racing-v7/cars/apex-lod1.glb",
    "assets/racing-v7/cars/apex-lod2.glb",
@@ -4503,6 +4565,30 @@
    "9f12e18e01b28c56",
    10326
   ],
+  "assets/racing-audio-v6/brake.mp3": [
+   "07d8e412538bd8d9",
+   18188
+  ],
+  "assets/racing-audio-v6/brake.ogg": [
+   "afc79dc6d97ab2a9",
+   7721
+  ],
+  "assets/racing-audio-v6/pit-limiter.mp3": [
+   "ce72111046ee81a2",
+   48716
+  ],
+  "assets/racing-audio-v6/pit-limiter.ogg": [
+   "341a5aae965d1915",
+   15288
+  ],
+  "assets/racing-audio-v6/tire-scrub.mp3": [
+   "7924dede14ae5632",
+   16460
+  ],
+  "assets/racing-audio-v6/tire-scrub.ogg": [
+   "ec2364fea090dab9",
+   7448
+  ],
   "assets/racing-broadcast-v1/card-frame.svg": [
    "e56260efad34f620",
    572
@@ -4806,6 +4892,226 @@
   "assets/racing-rec/engine-idle-loop.ogg": [
    "ae0e40f4ee111854",
    36121
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/cedar-grove.glb": [
+   "d771918626f9888b",
+   16760
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/fern-clump.glb": [
+   "54d136a165b5068e",
+   38308
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/log-stack.glb": [
+   "05d12dc1853d416a",
+   40800
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/moss-boulder.glb": [
+   "72adfafa505d6527",
+   13976
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/ranger-tower.glb": [
+   "74cf894e54f2ae80",
+   8092
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/saplings.glb": [
+   "3ef19dc0b572e9ca",
+   12036
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/trail-board.glb": [
+   "6af9c437040e93bd",
+   6404
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/trail-shelter.glb": [
+   "90372d0ba00437c2",
+   6832
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/alpine-chalet.glb": [
+   "05c70234a0e5da05",
+   6980
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/avalanche-fence.glb": [
+   "0a6d5a57f4286b50",
+   8776
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/cable-tower.glb": [
+   "7f48fab5136f3810",
+   13748
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/cairn.glb": [
+   "d9fb70b2e31e26cb",
+   10616
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/granite-needle.glb": [
+   "62eacea831866f82",
+   12880
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/juniper-cluster.glb": [
+   "d851fa33d40386bb",
+   16736
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/lookout-deck.glb": [
+   "11832ad978be157b",
+   8796
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/spillway-box.glb": [
+   "0953ba3f8330c27c",
+   5804
+  ],
+  "assets/racing-tracks-v3/props/frostline/ice-spires.glb": [
+   "40d9fa5b22d57cf3",
+   6648
+  ],
+  "assets/racing-tracks-v3/props/frostline/plow-depot.glb": [
+   "b59d008715169bf4",
+   7756
+  ],
+  "assets/racing-tracks-v3/props/frostline/ski-patrol-hut.glb": [
+   "d90976ee2ea0fac9",
+   5544
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-cannon.glb": [
+   "d073c50d279093a5",
+   11656
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-fence.glb": [
+   "93f1223010dfcb78",
+   7408
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-spruce.glb": [
+   "986b4ae788a840e6",
+   18584
+  ],
+  "assets/racing-tracks-v3/props/frostline/trail-lanterns.glb": [
+   "3bfad4f887e8c61e",
+   6496
+  ],
+  "assets/racing-tracks-v3/props/frostline/weather-mast.glb": [
+   "dc8b4df606069a31",
+   11388
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/glass-towers.glb": [
+   "6a8d79c66fbbf326",
+   177608
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/metro-entrance.glb": [
+   "0e2444461ccb4a7e",
+   6736
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/neon-pylon.glb": [
+   "be0be1e25c5b721c",
+   7096
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/service-block.glb": [
+   "ddf688b7fe14fecb",
+   10708
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/signal-frame.glb": [
+   "ee8204c0b48d459c",
+   7956
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/streetlight.glb": [
+   "45e67cfc4bb0d4fe",
+   5988
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/transit-shelter.glb": [
+   "cb29d2d99d32ff0c",
+   9624
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/water-tower.glb": [
+   "83798d9b2f2bee3f",
+   13512
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/cistern.glb": [
+   "9156877e43c741db",
+   10500
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/dune-grass.glb": [
+   "885ac395cbc949e9",
+   7220
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/mesa-stack.glb": [
+   "e1faa61e21185134",
+   17796
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/saguaro.glb": [
+   "430a9015adce8f88",
+   10664
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/sand-fence.glb": [
+   "7eca16f2ab16e53d",
+   7396
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/sandstone-arch.glb": [
+   "bb26a13735357176",
+   23536
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/shade-station.glb": [
+   "cc023334fa0c13f3",
+   6812
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/survey-mast.glb": [
+   "40f457e28175093d",
+   7384
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/beach-umbrella.glb": [
+   "ea61983eb31cd9e4",
+   5420
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/buoy-pair.glb": [
+   "793c0c67566af97b",
+   12276
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/dune-fence.glb": [
+   "2a64d618076eab12",
+   7396
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/fishing-pier.glb": [
+   "80ca474398db4deb",
+   18300
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/lifeguard-hut.glb": [
+   "f6576d5afc2de061",
+   8096
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/lighthouse.glb": [
+   "aa8275c4f9afc878",
+   28836
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/palm-cluster.glb": [
+   "ad8360fedc57e901",
+   22564
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/sailboat.glb": [
+   "5c2a6d64c22560b9",
+   5524
+  ],
+  "assets/racing-tracks-v3/skies/cedar-bend.webp": [
+   "87b3478514be1623",
+   22434
+  ],
+  "assets/racing-tracks-v3/skies/cloud-pass.webp": [
+   "37a1f461af892029",
+   25974
+  ],
+  "assets/racing-tracks-v3/skies/frostline.webp": [
+   "42945e6844ae95a6",
+   23464
+  ],
+  "assets/racing-tracks-v3/skies/neon-quay.webp": [
+   "9b0e9055013e1771",
+   14220
+  ],
+  "assets/racing-tracks-v3/skies/red-mesa.webp": [
+   "6f1f27ab3fc322bf",
+   15352
+  ],
+  "assets/racing-tracks-v3/skies/saltwater-bay.webp": [
+   "2767f4fd63ae04c9",
+   25792
+  ],
+  "assets/racing-tracks-v3/tracks.mjs": [
+   "435cbb69faf05765",
+   43680
   ],
   "assets/racing-v7/cars/apex-lod0.glb": [
    "fafc077c9f3f88d4",
@@ -8184,8 +8490,8 @@
    809
   ],
   "minigames/racing-audio.mjs": [
-   "168e34e4df00ee0d",
-   30627
+   "8fb1b4c7786bca8c",
+   31053
   ],
   "minigames/racing-broadcast-art.mjs": [
    "39fd6ee113c8586c",
@@ -8240,8 +8546,8 @@
    3140
   ],
   "minigames/racing-physics.mjs": [
-   "f15f93a370d06110",
-   56818
+   "a8acf5e167da4a7d",
+   57943
   ],
   "minigames/racing-pit-crew.mjs": [
    "8fa8a4bdb2fa4e25",
@@ -8276,12 +8582,12 @@
    1636
   ],
   "minigames/racing-roadside.mjs": [
-   "1a2ba6715e8b8624",
-   14436
+   "97bd62324e4de4e1",
+   14625
   ],
   "minigames/racing-samples.mjs": [
-   "265954f19a15782b",
-   25409
+   "f1a847fa0d3212a2",
+   30241
   ],
   "minigames/racing-scenery.mjs": [
    "8528f773fe5f575b",
@@ -8299,9 +8605,13 @@
    "7f95169d7ac7fb16",
    6026
   ],
+  "minigames/racing-tracks-v3-env.mjs": [
+   "03b7835f6fa6e0a5",
+   4348
+  ],
   "minigames/racing-tracks.mjs": [
-   "43ee6b089eeefe94",
-   30809
+   "7afbdac62a0ed8d6",
+   32816
   ],
   "minigames/racing-unlock.mjs": [
    "a49f7face3a1f921",
@@ -8318,6 +8628,10 @@
   "minigames/racing-v24-6.mjs": [
    "ac1d4921b10f24dc",
    2152
+  ],
+  "minigames/racing-v24-7.mjs": [
+   "7e12612ec59b30a8",
+   4278
   ],
   "minigames/racing-v24.css": [
    "8e684f663b138ad1",
@@ -8336,8 +8650,8 @@
    4718
   ],
   "minigames/racing-view.mjs": [
-   "1bb149ef7691b27a",
-   49176
+   "d5f05043a1f767e2",
+   50224
   ],
   "minigames/racing.css": [
    "18fa9a640fcec8c8",

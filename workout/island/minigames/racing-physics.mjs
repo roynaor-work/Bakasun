@@ -2,6 +2,7 @@ import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LO
 import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-20';
 import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-20';
 import { TYRE, tyreWear, CARRY, shoulderOf, GEARS as LIFT } from './racing-v24-5.mjs?v=island-v2-20261107-20';
+import { BRAKE_DOWN, TIGHT } from './racing-v24-7.mjs?v=island-v2-20261107-20';
 import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-20';
 import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-20';
 
@@ -65,6 +66,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // racing-v24.5 (racing-v24-5.mjs; each one off unless the config asks, the session asks unless the address says v244): tyreFeel = the player's control fades with the
   // tyre wear; carry = the inertia slide in a long corner; shoulder = the run-off beside the asphalt keeps the speed (off-road starts SHOULDER m out); gears = the lift and
   // downshifts before a tight corner (the player's car on the gas)
+  // racing-v24.7 (racing-v24-7.mjs): brakeDown = the box comes down a gear every BRAKE_DOWN s while the player brakes; tight = understeer above the tyre's grip
+  const brakeDownOn=!!config.brakeDown,tightA=config.tight===true?TIGHT.aLat:finite(config.tight,0),tightOn=tightA>0;
   const tyreFeelOn=!!config.tyreFeel,carryOn=!!config.carry,gearsOn=!!config.gears&&config.engine!==false,offEdge=track.width*.5+(config.shoulder?shoulderOf(track):.4);
   const EXTRA_NAMES=['נועה','רום','דור','ים','אור','שקד','גל','טל','לב','עמית','פז'];
   // racing-deep-m2: a staggered two-by-N grid on the main straight (track.gridSlots); the player's slot is stage.grid (3rd or 5th). config.grid=false (?racingGrid=0) keeps the old line-up.
@@ -81,7 +84,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,gearT:1,gearInit:false,rpm:.2,shiftT:0,charging:0,ersRate:0,ersUsed:0,ersHarvested:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      number:RACING_NUMBERS[index%RACING_NUMBERS.length],gridSlot:slot,grindT:0,passing:null,passes:0,braking:false,aiStyle:random(),farT:0,offTracks:0,offFlight:null,postHits:0,kx:0,kz:0,slowOffT:0,hidden:false,dropY:0,carryT:0,lifting:false,liftTo:0,
+      number:RACING_NUMBERS[index%RACING_NUMBERS.length],gridSlot:slot,grindT:0,passing:null,passes:0,braking:false,aiStyle:random(),farT:0,offTracks:0,offFlight:null,postHits:0,kx:0,kz:0,slowOffT:0,hidden:false,dropY:0,carryT:0,lifting:false,liftTo:0,wide:0,
       maxSpeed:stage.aiSpeed*skill*(index>stage.opponents?.93+random()*.07:drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
@@ -331,6 +334,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       car.gearT+=dt;let g=car.gear;
       if(!car.gearInit){g=up;car.gearInit=true;}
       else if(up>g&&car.gearT>=.35){g++;car.gearT=0;}
+      else if(brakeDownOn&&car.isPlayer&&input.brake&&down<g&&car.gearT>=BRAKE_DOWN){g--;car.gearT=0;}   // racing-v24.7: the player's own brake brings the gears down
       else if(down<g&&car.gearT>=.6){g--;car.gearT=0;}
       else if(liftGear&&g>liftGear&&car.gearT>=LIFT.downDwell){g--;car.gearT=0;}   // racing-v24.5 gears: down to the corner's gear while lifting
       // gear 7 ends at the natural top (TOP_CAP) so the revs read near the limiter there; beyond it (slipstream, boost) the rpm stays at the limiter
@@ -354,6 +358,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1)*(1-TYRE.steer*tw);
     // Soft cap on cornering force at speed (about 4 g): full lock stops snapping the car around at 40+ m/s but keeps its authority.
     if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp*pitCrew.gripOf(car)*(1-TYRE.grip*tw)/car.speed;yaw=limit*Math.tanh(yaw/limit);}
+    // racing-v24.7 tight (Roy: "I want it to be necessary to lower the speed in some of the corners"): above the tyre's grip the front pushes wide: the yaw rate is
+    // capped at TIGHT.aLat / speed, so a corner tighter than v^2 / aLat cannot be held at speed v and the car runs out of it. No speed is taken away here.
+    car.wide=0;
+    if(tightOn&&car.isPlayer&&car.speed>10&&!drifting&&!car.offroad){const limit=tightA*aeroUp*pitCrew.gripOf(car)*(1-TYRE.grip*tw)/car.speed,ask=Math.abs(yaw);if(ask>limit){car.wide=clamp((ask-limit)*car.speed/TIGHT.full,0,1);yaw=Math.sign(yaw)*limit;}}
     // racing-look-v1 cornering scrub (player only; ?racingLook=0 or config.scrub=false removes it): lateral acceleration above 20 m/s^2 bleeds speed (a drift bleeds at half the rate),
     // so a corner of radius R settles near sqrt(20 R). Without it the car held top speed round every bend (Roy: the engine sound stuck at the top).
     let scrubbed=0;
