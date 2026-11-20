@@ -1,0 +1,87 @@
+{
+ "scenario": "braker",
+ "query": "",
+ "viewport": "844x390 touch mobile",
+ "stages": [
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "name": "רציף ניאון",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "city-night",
+    "sky": true,
+    "models": 8,
+    "triangles": 3040,
+    "draws": 16
+   },
+   "failures": [],
+   "drawCalls": 77,
+   "triangles": 81282,
+   "quality": 2,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 14,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-2",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 40,
+   "maxSpeed": 36.9,
+   "autoSlowSeconds": 0.7,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 14,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  }
+ ]
+}

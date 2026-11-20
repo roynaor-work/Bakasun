@@ -1,0 +1,556 @@
+{
+ "scenario": "look",
+ "query": "",
+ "viewport": "844x390 touch mobile",
+ "stages": [
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "name": "מפרץ המגדלור",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "coast",
+    "sky": true,
+    "models": 8,
+    "triangles": 1244,
+    "draws": 10
+   },
+   "failures": [],
+   "drawCalls": 95,
+   "triangles": 99270,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-1",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 29,
+   "autoSlowSeconds": 0.1,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "name": "סיבוב הארזים",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "forest",
+    "sky": true,
+    "models": 8,
+    "triangles": 1738,
+    "draws": 9
+   },
+   "failures": [],
+   "drawCalls": 96,
+   "triangles": 88920,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-2",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 29.7,
+   "autoSlowSeconds": 0.07,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "name": "מכתש הנחושת",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "desert",
+    "sky": true,
+    "models": 8,
+    "triangles": 1036,
+    "draws": 10
+   },
+   "failures": [],
+   "drawCalls": 100,
+   "triangles": 103326,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-1",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 27.6,
+   "autoSlowSeconds": 0.1,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "name": "רציף ניאון",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "city-night",
+    "sky": true,
+    "models": 8,
+    "triangles": 3040,
+    "draws": 16
+   },
+   "failures": [],
+   "drawCalls": 100,
+   "triangles": 90498,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-1",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 27.4,
+   "autoSlowSeconds": 0.13,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "name": "מעבר העננים",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "mountain",
+    "sky": true,
+    "models": 8,
+    "triangles": 914,
+    "draws": 10
+   },
+   "failures": [],
+   "drawCalls": 108,
+   "triangles": 103714,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-1",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 28.1,
+   "autoSlowSeconds": 0.13,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "name": "קו הקרח",
+   "length": 2100,
+   "reverse": false,
+   "envV3": {
+    "env": "snow",
+    "sky": true,
+    "models": 8,
+    "triangles": 800,
+    "draws": 12
+   },
+   "failures": [],
+   "drawCalls": 103,
+   "triangles": 102684,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-1",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 27,
+   "autoSlowSeconds": 0.13,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "stage": 19,
+   "track": "saltwater-bay",
+   "name": "מפרץ המגדלור",
+   "length": 2100,
+   "reverse": true,
+   "envV3": {
+    "env": "coast",
+    "sky": true,
+    "models": 8,
+    "triangles": 1244,
+    "draws": 10
+   },
+   "failures": [],
+   "drawCalls": 99,
+   "triangles": 93666,
+   "quality": 1,
+   "v6": true,
+   "v6Ready": true,
+   "v246": true,
+   "rec": true,
+   "noise": 0,
+   "levels": {
+    "limiter6": 0,
+    "brakes6": 0,
+    "scrubs6": 0,
+    "recIdle": 0,
+    "recPass": {
+     "id": "engine-away-2",
+     "peak": 0.1
+    },
+    "wind": 0,
+    "squeal": 0,
+    "brakeSqueal": 0,
+    "brake": [
+     0,
+     0,
+     0
+    ],
+    "surface": {
+     "offtrack-gravel-low": 0,
+     "offtrack-gravel-medium": 0,
+     "offtrack-gravel-high": 0,
+     "offtrack-grass-low": 0,
+     "offtrack-grass-medium": 0,
+     "offtrack-grass-high": 0
+    },
+    "pit": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "brake5": [
+     0,
+     0,
+     0
+    ]
+   },
+   "events": [],
+   "raceSeconds": 7,
+   "maxSpeed": 30.8,
+   "autoSlowSeconds": 0.17,
+   "lifts": 0,
+   "liftingFrames": 0,
+   "beyondAsphaltSeconds": 0,
+   "gravelSeconds": 0,
+   "scrubSeconds": 0,
+   "flips": 0,
+   "brakePresses": 0,
+   "gears": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  }
+ ]
+}
