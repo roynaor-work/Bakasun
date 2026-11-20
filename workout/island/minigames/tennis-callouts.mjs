@@ -1,5 +1,5 @@
 /** Tennis v24.4 line calls (Roy, 18/11/2026, after v24.3 on the phone: "if it is out, a shout of OUT; if it is stuck in the net, NET").
- * No callout package exists from Codex (codex/tennis-callouts-v1 is not on origin), so both parts are made here:
+ * At v24.4 no callout package existed from Codex, so both parts were made here (v24.7 connects codex/tennis-callouts-v1, see the end of the file):
  *  - the sign: the v24.1 out plate at the top centre now carries a big call word ("OUT!" / "NET!") next to the Codex tennis-ui-v2 symbol
  *    (fx-out.svg: the red X, fx-net.svg: the ball in the net, CC0, copied to assets/tennis-ui-v2), for 1.5 s, on a serve fault and on a rally point;
  *  - the shout: a short line judge's call synthesised with Web Audio (no recording, no speech engine, works offline): a sawtooth voice whose
@@ -70,4 +70,35 @@ export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,o
   }
  }catch{}
  return out;
+}
+/** v24.7 Codex callout pack (codex/tennis-callouts-v1, CC0; the design package stays in design/tennis-callouts-v1, the game loads only the
+ * copies in assets/tennis-callouts-v1). Two parts are connected, both off with ?tennisCalloutPack=0 (or ?tennisCallouts=0):
+ *  - the sign: the "club" plaque of the pack (out-club.svg terracotta, net-club.svg green, each with its own symbol and a brass rim) is the
+ *    plate of the call, the live word OUT! / NET! sits on its text anchor in the pack's label colour;
+ *  - the voice: the pack's synthesised umpire takes (one audio sprite, three takes per call) replace the v24.4 Web Audio voice, but only for
+ *    a call that has no recorded take. Roy's own recordings (assets/tennis-callouts-rec) always win, so while both calls have a recorded
+ *    take the sprite is not even downloaded.
+ * Not connected (the engine gives no event for them): the GOOD and FAULT calls, the four crowd reactions and the line flash. */
+export function tennisCalloutPackEnabled(search=globalThis.location?.search||''){return param('tennisCalloutPack',search)!=='0'&&tennisCalloutsEnabled(search);}
+export const CALLOUT_PACK_DIR='assets/tennis-callouts-v1/';
+/** From design/tennis-callouts-v1/manifest.json: sprite ranges [start seconds, seconds] per take, the plaque per call, the text anchor (0..1 of
+ * the 256 px art) and the label colours. */
+export const CALLOUT_PACK=Object.freeze({
+ files:Object.freeze({ogg:CALLOUT_PACK_DIR+'callouts.ogg',mp3:CALLOUT_PACK_DIR+'callouts.mp3'}),
+ takes:Object.freeze({out:Object.freeze([[.032,.543],[.671,.543],[1.31,.543]]),net:Object.freeze([[1.949,.489],[2.534,.489],[3.119,.489]])}),
+ signs:Object.freeze({out:CALLOUT_PACK_DIR+'out-club.svg',net:CALLOUT_PACK_DIR+'net-club.svg'}),
+ textAnchor:Object.freeze([.586,.492]),labelColors:Object.freeze({out:'#411c18',net:'#102e2b'})
+});
+/** The sprite as one AudioBuffer, the playable format first and the other as a fallback; null when neither loads and decodes. */
+export async function loadCalloutPack(context,{base,fetcher=globalThis.fetch,opus=true,version='island-v2-20261107-20'}={}){
+ for(const path of opus?[CALLOUT_PACK.files.ogg,CALLOUT_PACK.files.mp3]:[CALLOUT_PACK.files.mp3,CALLOUT_PACK.files.ogg]){
+  try{const file=await fetcher(new URL('../'+path+'?v='+version,base));if(!file?.ok)continue;return await context.decodeAudioData(await file.arrayBuffer());}catch{}
+ }
+ return null;
+}
+/** Play take `index` of a call from the sprite into `destination`. Returns the seconds it lasts (0 when it could not start). */
+export function playPackCall(context,destination,buffer,kind,index=0,{level=1}={}){
+ const takes=CALLOUT_PACK.takes[kind],range=takes?.[((index%takes.length)+takes.length)%takes.length];
+ if(!range||!context||!destination||!buffer||range[0]+range[1]>buffer.duration+.05)return 0;
+ try{const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;gain.gain.value=level;source.connect(gain);gain.connect(destination);source.onended=()=>{try{source.disconnect();gain.disconnect();}catch{}};source.start(0,range[0],range[1]);return range[1];}catch{return 0;}
 }
