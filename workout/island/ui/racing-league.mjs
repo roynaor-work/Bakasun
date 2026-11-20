@@ -4,6 +4,7 @@
  * racing-deep-m6 (long league): a scrolling calendar of 12-18 races with circuit, time of day, direction and length tags; a drivers' table of
  * twelve with team colours and the player's row marked; a teams' table of six; the rival box ("היריב שלכם"); the season podium with the prize at
  * the end of a season; a replay of a season that missed its gate; the "short races" setting. Numbers are large for a seven-year-old. */
+import {kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-20';
 import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-20';
 import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-20';
@@ -16,6 +17,10 @@ const num=v=>{const n=el('bdi','',String(v));n.dir='ltr';return n;};
 export const SHOP=Object.freeze([
   ['engine','האצה ומהירות שיא'],['brakes','בלימה מאוחרת לפני פניות'],['aero','יציבות במהירות גבוהה'],['steering','תגובת הגה'],['tires','אחיזה בפניות'],['ers','מאגר אנרגיה גדול יותר לניטרו']]);
 export function ensureLeagueStyle(root=document.head){
+  kidUxStyle('023',
+    '.rl-table .rl-chip{min-width:36px;height:28px;padding:2px 4px}' +
+    '.rl-table .rl-chip .rl-chip-no{min-width:24px;padding:2px 3px;border-radius:4px;background:#101b29;color:#fff;text-shadow:none;font-size:14px;text-align:center}'
+  );
   if(document.querySelector('link[data-racing-league-css]'))return;
   const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-20',import.meta.url).href;root.append(link);
 }

@@ -1,6 +1,6 @@
 /** Replace this adapter with licensed recordings without changing station UI. */
-export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance}={}) {
-  let voices=[],previous=false,failed=false;const listeners=new Set();
+export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance,monitorErrors=false}={}) {
+  let voices=[],previous=false,failed=false,active;const listeners=new Set();
   const refresh=()=>{
     voices=(synthesis?.getVoices?.()||[]).filter(v=>/^he(?:[-_]|$)/i.test(v.lang)||/^iw(?:[-_]|$)/i.test(v.lang));
     const available=voices.length>0&&Boolean(Utterance)&&!failed;
@@ -13,10 +13,20 @@ export function createLearningVoice({synthesis=globalThis.speechSynthesis,Uttera
     speak(text){
       refresh();if(!voices.length||!Utterance||failed)return false;
       try{
-        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices.find(v=>v.localService)||voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;synthesis.speak(utterance);return true;
+        active=null;
+        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices.find(v=>v.localService)||voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;
+        if(monitorErrors){
+          active=utterance;
+          utterance.onend=()=>{if(active===utterance)active=null;};
+          utterance.onerror=event=>{
+            if(active!==utterance||['canceled','interrupted'].includes(event.error))return;
+            active=null;failed=true;refresh();
+          };
+        }
+        synthesis.speak(utterance);return true;
       }catch{failed=true;refresh();return false;}
     },
-    stop(){try{synthesis?.cancel?.();}catch{}},
+    stop(){active=null;try{synthesis?.cancel?.();}catch{}},
     subscribe(fn){listeners.add(fn);return ()=>listeners.delete(fn);},
     dispose(){try{synthesis?.cancel?.();}catch{}synthesis?.removeEventListener?.('voiceschanged',voicesChanged);listeners.clear();},
   };

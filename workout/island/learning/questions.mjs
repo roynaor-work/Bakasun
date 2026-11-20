@@ -1,4 +1,4 @@
-import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS} from './banks.mjs?v=island-v2-20261107-20';
+import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS,PICTURE_LANGUAGE} from './banks.mjs?v=island-v2-20261107-20';
 export const unpoint = s=>String(s).replace(/[\u0591-\u05c7]/g,'');
 export function shuffled(items,rng=Math.random) {
   const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;
@@ -11,6 +11,15 @@ function choice(prompt,visual,correct,others,hint,rng) {
   return {kind:'choice',prompt,visual,answer,options:shuffled([answer,...shuffled(pool,rng).slice(0,2)],rng),hint};
 }
 const lowChoice=(prompt,visual,answer,others,hint,r)=>({...choice(prompt,visual,answer,others,hint,r),pictureOnly:true});
+function visualLanguage(rng){
+  const [[scene,objects],...distractors]=shuffled(PICTURE_LANGUAGE,rng);
+  return {
+    ...choice('אֵיזוֹ תְּמוּנָה מַתְאִימָה?',{symbols:scene},pick(objects,rng),
+      distractors.slice(0,2).map(([,icons])=>pick(icons,rng)),
+      'חַפְּשׂוּ מַשֶּׁהוּ שֶׁמַּתְאִים לַתְּמוּנָה לְמַעְלָה.',rng),
+    template:'picture-association',visualLanguage:true,
+  };
+}
 function language(level,r,index) {
   const w=pick(WORDS.filter(w=>(level>3||w.word.length<=4)&&(level<=2||level>=5||unpoint(w.pointed)===w.word)),r),visual={symbols:w.icon};let q,type;
   if(level<=2){
@@ -112,11 +121,11 @@ function puzzles(level,r,index) {
   return {kind:type,template:type,prompt:'הַרְכִּיבוּ אֶת תְּמוּנַת הָעִיר.',visual:{symbols:'🏘️'},size,order,answer:tiles.join(','),scene:number(1,999999,r),hint:'לַחֲצוּ עַל שְׁנֵי חֲלָקִים כְּדֵי לְהַחְלִיף בֵּינֵיהֶם. הַשָּׁמַיִם לְמַעְלָה.'};
 }
 const generators={language,math,animals,puzzles};
-export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[]}={}) {
+export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[],languagePictures=false}={}) {
   if(!generators[station]||!Number.isInteger(level)||level<1||level>7)throw Error('learning station or level');
   for(let attempt=0;attempt<400;attempt++){
-    const q=generators[station](level,rng,index+Math.floor(attempt/50));
-    q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2;q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
+    const q=languagePictures&&station==='language'&&level>=3?visualLanguage(rng):generators[station](level,rng,index+Math.floor(attempt/50));
+    q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2||Boolean(q.visualLanguage);q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
     if(q.visual.equation)q.voice+=' '+q.visual.equation.replace('−','פָּחוֹת').replace('+','וְעוֹד').replace('×','כָּפוּל').replace('÷','חֶלְקֵי').replace('=','שָׁוֶה').replace('?','');
     if(level>=5){q.prompt=unpoint(q.prompt);q.hint=unpoint(q.hint);if(q.visual.caption)q.visual.caption=unpoint(q.visual.caption);if(q.kind==='choice'){q.answer=unpoint(q.answer);q.options=q.options.map(unpoint);}}
     q.id=JSON.stringify([q.template,q.prompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes]);

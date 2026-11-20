@@ -1,6 +1,7 @@
 /** Island Pro Basketball club screen (menu, not the court): next game and table, the starting
  * five, training with its cost and result shown before buying, and match settings. Every
  * change goes through engine.hoops, which saves and refuses while a game is running. */
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {DRILLS} from '../minigames/hoops-league.mjs?v=island-v2-20261107-20';
 import {positionName,abilitySummary} from '../minigames/hoops-roles.mjs';
 
@@ -10,7 +11,7 @@ const POS=['PG','SG','SF','PF','C'];
 
 /** The simple start: who we play next, where we stand, and one big button. Everything else
  * (lineup, training, settings, stages) waits behind "manage the team". */
-export function hoopsStartCard({engine,t,play}){
+export function hoopsStartCard({engine,t,play,actionBar}){
  const h=engine.state.hoops,sum=engine.hoops.summary(),root=el('section','hoops-start');root.dataset.hoopsStart='true';
  const teamName=id=>sum.teams.find(x=>x.id===id)?.name||id;
  const crest=(id,team)=>{const c=el('span','hoops-club-crest');const look=sum.teams.find(x=>x.id===id)||team;if(look?.primary){c.style.setProperty('--team',look.primary);c.style.setProperty('--team2',look.secondary);}return c;};
@@ -27,8 +28,46 @@ export function hoopsStartCard({engine,t,play}){
  if(place)root.append(el('p','hoops-start-place',t('hoops.start.place',{place,teams:sum.table.length})));
  const go=button(t('hoops.start.play'),'hoops-play-next',play,'primary-button hoops-start-play');
  if(!sum.next){go.textContent=t('hoops.club.newSeason');go.dataset.action='hoops-new-season';go.onclick=()=>{const r=engine.hoops.newSeason();if(r?.ok)play.refresh?.();};}
- root.append(go);
+ if(actionBar){
+  root.classList.add('kid-hoops-next-game');
+  actionBar.prepend(go);
+ }else root.append(go);
  return root;
+}
+
+/** Keep the primary and return actions in view while the management pane scrolls. */
+export function prepareHoopsClubLayout(dialog){
+ if(!kidUx('020'))return null;
+ dialog.classList.add('kid-hoops-club-layout');
+ kidUxStyle('020',`
+  .modal[data-stage-map=streetSlam].kid-hoops-club-layout{max-height:100%;overflow:hidden;display:grid;
+   grid-template-rows:auto auto minmax(0,1fr) auto;gap:6px;padding:12px}
+  .modal[data-stage-map=streetSlam].kid-hoops-club-layout > .modal-close{position:absolute;top:6px;right:auto;left:6px}
+  .modal.kid-hoops-club-layout > [data-action=shell-install]{position:absolute;top:6px;left:68px;margin:0;min-width:48px;min-height:48px}
+  .modal[data-stage-map=streetSlam].kid-hoops-club-layout > h2{grid-row:1;padding-top:0;margin:0 0 0 204px}
+  .modal.kid-hoops-club-layout > .modal-subtitle{grid-row:2;font-size:14px;margin:0 0 0 204px}
+  .modal.kid-hoops-club-layout > .sound-toggle{position:absolute;top:6px;left:122px;right:auto;min-height:48px;max-width:80px;font-size:14px}
+  .modal.kid-hoops-club-layout > .shell-install-help{position:absolute;z-index:6;top:54px;right:8px;left:8px;
+   max-height:calc(100% - 116px);overflow:auto;margin:0;color:#182c3d}
+  .kid-hoops-club-scroll{grid-row:3;overflow:auto;overscroll-behavior:contain;padding:0 5px 10px;min-height:0}
+  .kid-hoops-club-actions{grid-row:4;display:flex;justify-content:center;gap:8px;padding:4px 0}
+  @media(max-width:440px){
+   .modal[data-stage-map=streetSlam].kid-hoops-club-layout > h2{padding-top:48px;margin-left:0}
+   .modal.kid-hoops-club-layout > .modal-subtitle{margin-left:0}
+  }
+  .modal.kid-hoops-club-layout .kid-hoops-club-actions > button{
+   margin:0;min-width:48px;min-height:48px;font-size:16px;padding:6px 13px;color:#172b3a;background:#f2e3ae;
+   border:1px solid #e6d5ad
+  }
+  .modal.kid-hoops-club-layout .kid-hoops-club-actions > .adventure-back{color:#fff;background:#24495d;border-color:#c8e0eb}
+  .modal.kid-hoops-club-layout .kid-hoops-next-game{gap:5px;padding:6px 8px;color:#fff;background:#142d40}
+  .modal.kid-hoops-club-layout .kid-hoops-next-game :is(.hoops-start-place,.hoops-start-line){font-size:14px;opacity:1}
+  .kid-hoops-club-layout .hoops-more > summary{display:list-item;min-height:48px;font-size:16px;color:#fff}
+  .kid-hoops-club-layout :is(.hoops-club-pos,.hoops-club-line){font-size:14px;opacity:1}
+ `);
+ const scroll=el('div','kid-hoops-club-scroll'),actions=el('div','kid-hoops-club-actions');
+ dialog.append(scroll,actions);
+ return {scroll,actions};
 }
 
 export function hoopsClubPanel({engine,t,refresh,result=()=>{}}){

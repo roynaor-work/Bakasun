@@ -7,6 +7,66 @@ import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-2026110
 import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-20';
 import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-20';
 import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-20';
+import { kidUx, kidUxStyle, kidSpeak } from '../kid-ux.mjs?v=island-v2-20261107-20';
+
+kidUxStyle('012', `
+  .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
+  .kid-city-hall-instruction .kid-city-hall-demo{position:relative;min-height:86px;min-width:44px;flex:1;display:grid;place-items:center;gap:3px;padding:9px;background:#e8f4da;color:#183c33;font-size:14px;line-height:1.3}
+  .kid-city-hall-picture{isolation:isolate;position:relative;display:grid;place-items:center;width:58px;height:50px;border-radius:12px;background:#f5dd96;font-size:31px}
+  .kid-city-hall-finger{position:absolute;inset-inline-end:0;bottom:-5px;font-size:24px;animation:kid-city-hall-tap 1.65s ease-in-out infinite}
+  .kid-city-hall-instruction button[data-action=tutorial-city-hall-hear]{min-width:48px;min-height:48px;align-self:center;font-size:21px}
+  .kid-city-hall-confirmed{padding:5px 8px;border-radius:8px;background:#e4f1df;color:#183c33;font-size:14px;font-weight:700}
+  .island-ui.clean-hud .hud-tasks-toggle:has(.kid-city-hall-tasks-icon){font-size:14px}
+  @keyframes kid-city-hall-tap{0%,100%{transform:translate(-6px,5px)}40%,60%{transform:translate(6px,-6px)}}
+  @media(prefers-reduced-motion:reduce){.kid-city-hall-finger{animation:none}}
+`);
+
+
+kidUxStyle('009', `
+  .island-ui.clean-hud :is(.hud-summary,.camera-primary,.hud-more-controls,.city-map-controls,.city-zoom,.city-quick-access){gap:8px}
+  .island-ui.clean-hud .hud-more-controls{top:53px}
+  .island-ui.clean-hud .hud-tasks-toggle,.island-ui.clean-hud .city-quick-button strong,.island-ui.clean-hud .city-map-controls>.city-map-button{font-size:14px}
+  .island-ui.clean-hud .city-quick-button strong{white-space:normal}
+`);
+
+kidUxStyle('010', `
+  .island-ui.clean-hud .city-map-heading{position:sticky;top:0;z-index:1;background:#f7f4e9}
+  .island-ui.clean-hud .city-map-close{min-width:48px;min-height:48px}
+  .island-ui.clean-hud .city-map-destinations{gap:8px}
+  .island-ui.clean-hud .city-map-destinations button,.island-ui.clean-hud [data-action=city-overview]{min-width:48px;min-height:48px;font-size:14px;color:#203b36}
+  .island-ui.clean-hud .city-map-hint{font-size:14px;color:#203b36}
+`);
+
+kidUxStyle('011', `
+  .avatar-modal .avatar-field legend,.avatar-modal .avatar-field .choice,.avatar-modal .modal-subtitle,.avatar-modal .avatar-start{font-size:14px}
+  .avatar-modal .avatar-field .choice,.avatar-modal .avatar-start{min-height:48px}
+  .avatar-modal .avatar-field legend,.avatar-modal .modal-subtitle{color:#233e37}
+  .avatar-modal .kid-avatar-scroll-hint{margin:0;color:#233e37;font-size:14px;font-weight:700}
+  @media(orientation:landscape) and (min-width:580px) and (max-height:600px){
+    .avatar-modal .avatar-scroll{display:grid;grid-template-columns:minmax(0,1fr) minmax(144px,.46fr);align-items:start;align-content:start;column-gap:14px;padding:14px 16px}
+    .avatar-modal .avatar-scroll>h2,.avatar-modal .avatar-scroll>.modal-subtitle{grid-column:1/-1}
+    .avatar-modal .avatar-scroll>.modal-subtitle{margin:4px 0 9px}
+    .avatar-modal .avatar-preview{grid-column:2;grid-row:3/span 2;height:100px;margin:0}
+    .avatar-modal .avatar-field{margin:0 0 6px}
+    .avatar-modal .avatar-field:nth-of-type(-n+2){grid-column:1}
+    .avatar-modal .avatar-field:nth-of-type(n+3){grid-column:1/-1}
+    .avatar-modal .avatar-field legend{margin-bottom:4px}
+    .avatar-modal .avatar-footer{display:flex;align-items:center;gap:12px;padding-block:8px}
+    .avatar-modal .avatar-start{flex:1;width:auto;background:#285f54;color:#fff}
+  }
+`);
+
+kidUxStyle('013', `
+  .island-ui.clean-hud .city-details{background:#f8f5ea;color:#213b35}
+  .island-ui.clean-hud .city-details .brand p,.island-ui.clean-hud .city-details .wallet,.island-ui.clean-hud .city-details .metric-label,.island-ui.clean-hud .city-details .resources{font-size:14px;color:#213b35}
+  .kid-city-stats-primary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .kid-city-stats-primary .metric{background:#e9f0e2;padding:8px;border-radius:9px}
+  .kid-city-stats-primary .metric-label{flex-direction:column;gap:4px}
+  .kid-city-stats-more>summary{display:flex;align-items:center;min-height:48px;padding-inline:8px;cursor:pointer;font-size:14px;color:#213b35;font-weight:700}
+  .kid-city-stats-more>summary::before{content:'＋';margin-inline-end:7px}
+  .kid-city-stats-more[open]>summary::before{content:'−'}
+  .kid-city-stats-more .metrics{gap:6px}
+`);
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
@@ -115,7 +175,16 @@ export class IslandInterface {
     this.cityToggle.setAttribute('aria-controls', 'city-details');
     this.cityToggle.onclick = () => this.toggleDetails('city');
     this.cityDetails = el('div', 'city-details'); this.cityDetails.id = 'city-details'; this.cityDetails.hidden = true;
-    this.cityDetails.append(header, cityTitle, this.metricsNode, this.resourcesNode);
+    this.cityDetails.append(header, cityTitle, this.metricsNode);
+    if (kidUx('013')) {
+      this.metricsNode.className = 'kid-city-stats-primary';
+      this.extendedMetrics = el('div', 'metrics');
+      const more = el('details', 'kid-city-stats-more');
+      more.append(el('summary', '', 'עוד מדדים ומשאבים'), this.extendedMetrics, this.resourcesNode);
+      this.cityDetails.append(more);
+    } else {
+      this.cityDetails.append(this.resourcesNode);
+    }
     this.city.append(this.cityToggle, this.cityDetails);
 
     this.mission = el('aside', 'mission panel');this.mission.hidden=true;
@@ -224,6 +293,13 @@ export class IslandInterface {
     this[`${name}Toggle`].setAttribute('aria-expanded', String(open));
     if(this.tasksToggle){if(name==='mission'){this.mission.hidden=!open;this.tasksToggle.setAttribute('aria-expanded',String(open));}if(open)this.root.dataset.hudPanel=name;}
     this.setMoreOpen(false);
+    if (kidUx('012') && open && name==='mission' && this.missionSignature==='cityHallIntro') {
+      const hall = this.engine.state.buildings.find(b=>b.typeId==='cityHall');
+      if (hall) {
+        this.view.focusCell(hall.x, hall.z);
+        this.view.highlightCityBuildings?.([hall.id]);
+      }
+    }
   }
   setMoreOpen(open,restoreFocus=false){if(!this.morePanel)return;const wasOpen=!this.morePanel.hidden;if(open){this.closeDetails();this.setDockOpen(false);}this.morePanel.hidden=!open;this.moreToggle.setAttribute('aria-expanded',String(open));if(!open&&wasOpen&&restoreFocus)this.moreToggle.focus();}
   setDockOpen(open) {
@@ -259,6 +335,7 @@ export class IslandInterface {
     this.wallet.append(money, pop);
     this.drawCityToggle(s.money);
     this.metricsNode.replaceChildren();
+    this.extendedMetrics?.replaceChildren();
     const values = this.engine.metrics();
     for (const metric of this.engine.registry.metrics.values()) {
       if (!this.data.featureFlags.metrics || (metric.featureFlag && !this.data.featureFlags[metric.featureFlag])) continue;
@@ -268,7 +345,10 @@ export class IslandInterface {
       label.append(el('span', '', `${metric.icon} ${this.label(metric, 'metric')}`), el('b', '', value));
       const track = el('div', 'metric-track');
       const fill = el('span'); fill.style.width = `${Math.min(100, value)}%`; fill.style.background = metric.color;
-      track.append(fill); row.append(label, track); this.metricsNode.append(row);
+      track.append(fill);
+      row.append(label, track);
+      const destination = this.extendedMetrics && this.metricsNode.childElementCount >= 3 ? this.extendedMetrics : this.metricsNode;
+      destination.append(row);
     }
     this.resourcesNode.replaceChildren();
     for (const [key, icon] of [['food', '🌽'], ['materials', '🧱'], ['energy', '⚡']]) {
@@ -297,8 +377,31 @@ export class IslandInterface {
       this.missionDetails.replaceChildren(el('p','',this.t('tutorial.cityHallHint')));
       const start=button(this.t('tutorial.cityHallContinue'),'tutorial-city-hall','primary-button');
       start.onclick=()=>{this.cityHallIntro=false;this.missionSignature=null;this.drawMission();const hall=this.engine.state.buildings.find(b=>b.typeId==='cityHall');if(hall){this.view.focusCell(hall.x,hall.z);this.showInfo(hall.id);}};
-      this.missionDetails.append(start);return;
+      if (kidUx('012')) {
+        const mark = el('span', 'kid-city-hall-tasks-icon', '🏛️ ');
+        mark.setAttribute('aria-hidden', 'true');
+        this.tasksToggle.replaceChildren(mark, document.createTextNode(this.t('hud.tasks')));
+        const instruction = el('div', 'kid-city-hall-instruction');
+        const picture = el('span', 'kid-city-hall-picture', '🏛️');
+        picture.setAttribute('aria-hidden', 'true');
+        picture.append(el('span', 'kid-city-hall-finger', '👆'));
+        start.classList.add('kid-city-hall-demo');
+        start.replaceChildren(picture, el('span', '', 'נוגעים בעירייה'));
+        start.onclick = () => {
+          const hall = this.engine.state.buildings.find(b=>b.typeId==='cityHall');
+          if (hall) this.showInfo(hall.id);
+        };
+        const hear = button('🔊', 'tutorial-city-hall-hear', 'secondary-button');
+        hear.setAttribute('aria-label', 'שמיעת ההוראה');
+        hear.onclick = () => kidSpeak('נִגְּעוּ בָּעִירִיָּה.');
+        instruction.append(start, hear);
+        this.missionDetails.replaceChildren(instruction);
+      } else {
+        this.missionDetails.append(start);
+      }
+      return;
     }
+    if (this.tasksToggle.querySelector('.kid-city-hall-tasks-icon')) this.tasksToggle.textContent = this.t('hud.tasks');
     const objective = step ?? this.engine.nextObjective?.();
     const signature = JSON.stringify([objective, this.selected === step?.buildType, this.engine.state.tutorial.step]);
     if (signature === this.missionSignature) return;
@@ -487,10 +590,17 @@ export class IslandInterface {
       return;
     }
     this.closeDetails(); this.setDockOpen(false);
+    if (kidUx('012') && instance?.typeId==='cityHall' && this.missionSignature==='cityHallIntro') {
+      this.cityHallIntro = false;
+      this.cityHallTutorialConfirmed = true;
+      this.missionSignature = null;
+      this.drawMission();
+      this.view.highlightCityBuildings?.([instance.id]);
+    }
     this.infoId = id;
     this.drawInfo();
   }
-  closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); this.view.setCityReport?.(this.engine.city?.report(), null); }
+  closeInfo() { if (this.cityHallTutorialConfirmed) this.cityHallTutorialConfirmed = false; this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); this.view.setCityReport?.(this.engine.city?.report(), null); }
   currentInfoSignature() {
     const state = this.engine.state;
     const instance=state.buildings.find(row=>row.id===this.infoId);
@@ -511,6 +621,11 @@ export class IslandInterface {
     title.append(el('span', 'building-icon', record.icon), el('h2', '', this.label(record, 'building')), close);
     const currentLevel = record.levels[instance.level - 1];
     this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
+    if (record.id==='cityHall' && this.cityHallTutorialConfirmed) {
+      const confirmed = el('p', 'kid-city-hall-confirmed', '✓ הגעתם לעירייה!');
+      confirmed.setAttribute('role', 'status');
+      this.info.append(confirmed);
+    }
     const effects = el('div', 'info-effects');
     for (const [id, value] of Object.entries(summary?.effects ?? record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
     const residents = summary?.population ?? levelValue(instance, record, 'population', this.data.config);
@@ -676,7 +791,9 @@ export class IslandInterface {
     }
     const start = button(this.t('avatar.start'), 'avatar-start', 'primary-button avatar-start');
     start.onclick = () => { this.engine.setAvatar({ ...draft, created: true }); this.closeModal();this.toast('tutorial.welcome'); };
-    const footer = el('footer', 'avatar-footer'); footer.append(start); modal.append(footer);
+    const footer = el('footer', 'avatar-footer');
+    if (kidUx('011')) footer.append(el('p', 'kid-avatar-scroll-hint', '↓ עוד אפשרויות למטה'));
+    footer.append(start); modal.append(footer);
   }
   exportBackup() {
     const blob = new Blob([this.engine.exportJSON()], { type: 'application/json' });

@@ -1,3 +1,4 @@
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
 import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-20';
 import {createSoccer} from './soccer.mjs?v=island-v2-20261107-20';
@@ -100,6 +101,8 @@ export function startSoccer(ctx) {
     }catch{}
   }
   const events=new AbortController(),options={signal:events.signal};
+  let touchCueTimer;
+  events.signal.addEventListener('abort',()=>clearTimeout(touchCueTimer),{once:true});
   function dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);events.abort();audio.dispose({finish:Boolean(model.result&&!context.drill)});input?.dispose();model.clearInput();view?.dispose();if(canvas)canvas.width=canvas.height=0;}
   function setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused&&contractsReady&&!view?.loading()&&(typeof document==='undefined'||!document.hidden));model.clearInput();if(!paused)canvas?.focus();}
   const session={dispose,setPaused,get ready(){return Boolean(view)&&contractsReady&&!view.loading();},get loadFailed(){return contractsError;},get snapshot(){return {...model.snapshot(),team,opponent,paused,disposed,audio:audio.snapshot,contractsStatus:contractsError?'error':contractsReady?'ready':'loading',contractsError,controlsState:input?.snapshot,renderMetrics:view?.metrics()};}};
@@ -147,6 +150,45 @@ export function startSoccer(ctx) {
     const banner=element('div','soccer-goal-banner','⚽');banner.hidden=true;banner.setAttribute('aria-label',t('soccer.goal'));banner.setAttribute('role','status');canvas.after(banner);
     const phaseBanner=element('div','soccer-phase-banner');phaseBanner.hidden=true;phaseBanner.setAttribute('role','status');canvas.after(phaseBanner);
     const edge=element('span','soccer-edge-arrow','➤');edge.hidden=true;edge.setAttribute('aria-hidden','true');canvas.after(edge);
+    if(kidUx('016')){
+      kidUxStyle('016',`
+        .game-screen[data-game=soccer] .soccer-controls .soccer-actions button:is([data-game-control],#soccer-switch) > .soccer-action-label{
+          max-width:100%;font-size:14px!important;line-height:1.15;white-space:normal;text-align:center;
+          border-radius:5px;padding:1px 3px;color:#fff;background:#152b33
+        }
+        .game-screen[data-game=soccer] .soccer-fixture{font-size:14px;white-space:normal;background:#10232c;color:#fff}
+        @media(orientation:landscape){
+          .game-screen[data-game=soccer] .soccer-fixture{left:auto;right:max(14px,env(safe-area-inset-right));transform:none}
+        }
+        .game-screen[data-game=soccer] .soccer-fixture .soccer-objective{font-size:14px;color:#f9efd2}
+        .game-screen[data-game=soccer] .soccer-fixture .soccer-objective[data-complete=true]{color:#a5e9bd}
+        .game-screen[data-game=soccer] .kid-soccer-touch-cue{
+          position:absolute;right:max(14px,env(safe-area-inset-right));top:calc(82px + env(safe-area-inset-top));
+          z-index:4;border-radius:10px;padding:6px 10px;background:#152b33;color:#fff;font-size:16px;font-weight:700;
+          pointer-events:none
+        }
+        .game-screen[data-game=soccer]:is([data-paused=true],[data-starting=true],[data-orientation-blocked=true]) .kid-soccer-touch-cue{display:none}
+      `);
+      const cue=element('div','kid-soccer-touch-cue');
+      cue.hidden=true;cue.setAttribute('aria-hidden','true');canvas.after(cue);
+      let touchId=null;
+      actions.addEventListener('pointerdown',event=>{
+        if(event.pointerType!=='touch'||paused||touchId!==null)return;
+        const target=event.target.closest('button');
+        const label=target?.querySelector('.soccer-action-label');
+        if(!label||target.disabled||target.getAttribute('aria-disabled')==='true')return;
+        clearTimeout(touchCueTimer);touchId=event.pointerId;
+        cue.textContent=label.textContent;cue.hidden=false;
+      },{...options,capture:true});
+      const releaseCue=event=>{
+        if(event.pointerId!==touchId)return;
+        touchId=null;
+        if(event.type==='pointercancel')cue.hidden=true;
+        else touchCueTimer=setTimeout(()=>{cue.hidden=true;},650);
+      };
+      window.addEventListener('pointerup',releaseCue,{...options,capture:true});
+      window.addEventListener('pointercancel',releaseCue,{...options,capture:true});
+    }
     const fixture=element('div','soccer-fixture'),stageLabel=element('span'),objectiveLabel=element('span','soccer-objective');fixture.append(stageLabel,objectiveLabel);canvas.after(fixture);fixture.hidden=Boolean(context.drill);
     const feedback=element('div','soccer-action-feedback');feedback.hidden=true;feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');canvas.after(feedback);let feedbackTime=0;
     // Full match radar (top right): the whole pitch, both teams, the ball, the selected player ringed and what the camera shows; 10 Hz with the HUD.
