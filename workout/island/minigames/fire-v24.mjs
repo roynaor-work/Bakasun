@@ -71,7 +71,36 @@ export const ENTRY_PLANS=Object.freeze([
   {level:27,rooms:[{room:'hallway',fires:['coat_rack','boxes','bench'],friend:'dog'},{room:'kitchen',fires:['oil_pot','kitchen_table','refrigerator','power_strip'],friend:'cat'},{room:'bedroom',fires:['mattress','curtain_left','computer'],friend:'girl'}],tools:['water','extinguisher','blanket','foam'],seconds:44},
   {level:30,rooms:[{room:'stairwell',fires:['mailboxes','stroller','stair_rail','bin'],friend:'cat'},{room:'living',fires:['sofa','rug','television','curtain_left'],friend:'dog'},{room:'bedroom',fires:['mattress','wardrobe','computer','desk'],friend:'girl'}],tools:['water','extinguisher','blanket','foam'],seconds:44},
 ]);
-export function entryPlan(level){return ENTRY_PLANS.find(p=>p.level===level)||null;}
+// Use three sourced floor layouts cyclically above their original third storey.
+export const FLOOR_ASSET_PATH='../assets/fire-levels-v1/interiors/building-floors.glb';
+const FLOOR_ROOMS=[
+  ['living','dog','sofa','rug','television','curtain_left','coffee_table'],
+  ['kitchen','cat','kitchen_table','base_cabinet','oil_pot','power_strip','refrigerator'],
+  ['bedroom','girl','curtain_left','desk','mattress','computer','nightstand'],
+  ['living','cat','floor_lamp','sofa','television','coffee_table','rug'],
+  ['bedroom','dog','desk','nightstand','wardrobe','computer','curtain_left'],
+  ['kitchen','girl','chair_left','base_cabinet','oil_pot','power_strip','refrigerator'],
+  ['bedroom','cat','curtain_left','nightstand','mattress','wardrobe','computer'],
+  ['living','dog','rug','curtain_left','television','floor_lamp','sofa'],
+  ['kitchen','cat','refrigerator','chair_left','oil_pot','power_strip','kitchen_table'],
+  ['bedroom','girl','desk','curtain_left','mattress','wardrobe','computer'],
+];
+const FIRE_TOOL={normal:'water',electric:'extinguisher',oil:'blanket',heavy:'foam'};
+const MULTIFLOOR_PLANS=ENTRY_PLANS.map((plan,tier)=>{
+  const floorCount=Math.min(10,tier+3);
+  const rooms=FLOOR_ROOMS.slice(0,floorCount).map(([room,friend,...candidates],index)=>{
+    const playable=candidates.filter(id=>plan.tools.includes(FIRE_TOOL[ROOMS[room].spots[id].kind]));
+    const perFloor=2+Number(tier>=2)+Number(tier>=5)+Number(tier>=8);
+    return {room,friend,floor:index+1,assetFloor:index%3+1,
+      fires:playable.slice(0,perFloor),heatScale:1+tier*.035+index*.012,
+      smokeScale:1+tier*.048+index*.025};
+  });
+  return {...plan,rooms,floorCount,seconds:50-tier,fireLevels:true};
+});
+export function entryPlan(level,{fireLevels=false}={}){
+  const plans=fireLevels?MULTIFLOOR_PLANS:ENTRY_PLANS;
+  return plans.find(p=>p.level===level)||null;
+}
 /** Seconds on the room clock: the plan's base plus 5 per fire beyond the second. */
 export function roomSeconds(plan,roomIndex){const r=plan.rooms[roomIndex];return plan.seconds+Math.max(0,r.fires.length-2)*5;}
 
@@ -108,7 +137,9 @@ export function mergeResults(streetRaw,inside,balance,tuning=V24_TUNING){
   if(!streetRaw||streetRaw.outcome!=='win'||!inside)return streetRaw;
   const score=Math.min(balance.maximumScore,Math.max(0,Math.round((streetRaw.score||0)+(inside.score||0))));
   const sp=Number.isFinite(streetRaw.performance)?Math.max(0,Math.min(1,streetRaw.performance)):0,ip=Math.max(0,Math.min(1,inside.performance||0));
-  const performance=tuning.weight.street*sp+tuning.weight.inside*ip;
+  const idleInside=inside.floors>0&&inside.handovers===inside.floors&&inside.score===0;
+  const performance=idleInside?0:tuning.weight.street*sp+tuning.weight.inside*ip;
   const summary={...(streetRaw.summary||{}),rescued:(streetRaw.summary?.rescued||0)+(inside.rescued||0),rooms:inside.rooms||0,insideSeconds:Math.round(inside.seconds||0),insideStars:insideStars(ip)};
+  if(inside.floors)summary.floors=inside.floors;
   return {...streetRaw,score,performance,summary,inside:{...inside}};
 }

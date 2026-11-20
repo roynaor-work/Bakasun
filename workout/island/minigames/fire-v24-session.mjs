@@ -8,6 +8,7 @@ import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2
 import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-19';
 import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-19';
 import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-19';
+import {createCanvasInteriorScene} from './fire-levels-canvas.mjs?v=island-v2-20261107-19';
 
 const NS='http://www.w3.org/2000/svg';
 const ICONS={...FIRE_V23_ICONS,clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',hand:'M8 13V5a1.5 1.5 0 0 1 3 0v6V4a1.5 1.5 0 0 1 3 0v7V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0',hold:'M12 3a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Zm0 4v3M5 20h14',friend:'M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 10a6 6 0 0 1 12 0M4 9l2-2m14 2-2-2'};
@@ -18,7 +19,7 @@ function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className
 export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel,loadTimeoutMs=15000}){
   const {dialog,t}=ctx,host=ctx.canvas.parentElement||dialog,audio=createG2nAudio();audio.unlock();
   const model=createModel({plan,sound:e=>audio.play(e)});
-  const canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
+  let canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
   const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-19',import.meta.url).href;document.head.append(link);
   dialog.classList.add('fire-v24-inside');
   // the street HUD and controls step aside while we are inside (visibility only; the street session keeps its nodes)
@@ -42,7 +43,14 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   root.append(clock,chips,coach,gauge,tools,card,fade);
   // ---- input -------------------------------------------------------------------------------------------------------------------------------
   const input={};let pointerId=null,downAt=0,downPoint=null,moved=false,paused=false,disposed=false,frame=0,last,W=1,H=1,dpr=1,tutorialShown=false,tutorialDone=!tutorial,lowQuality=Boolean(ctx.lite);
-  const scene=createScene({model,canvas,lite:lowQuality});
+  let scene;
+  try{scene=createScene({model,canvas,lite:lowQuality});}
+  catch(error){
+    if(!plan.fireLevels)throw error;
+    const replacement=canvas.cloneNode(false);
+    canvas.replaceWith(replacement);canvas=replacement;
+    scene=createCanvasInteriorScene({model,canvas});
+  }
   const events=new AbortController(),options={signal:events.signal};
   const contextRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireContextRecovery')!=='0';
   let contextLost=false,contextTimer=null;
@@ -77,14 +85,15 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   // ---- HUD text -----------------------------------------------------------------------------------------------------------------------------
   let lastCoach='',lastCard='',tenSaid=false;
   function continueLabel(){const node=el(keyboard?'button':'p','fv24-card-tap',t('fire.v24.tutorial.go'));if(keyboard){node.type='button';queueMicrotask(()=>{if(!disposed&&!card.hidden)node.focus({preventScroll:true});});}return node;}
-  function coachKey(s){const f=model.feedback;if(f&&model.time-f.at<2.6)return f.key;
+  function coachKey(s){if(s.phase==='stairs')return 'fire.levels.stairs';const f=model.feedback;if(f&&model.time-f.at<2.6)return f.key;
     const p=s.phase;if(p==='enter')return 'fire.v24.loading';if(p==='leave')return 'fire.v24.say.leave';if(p==='clear')return 'fire.v24.say.roomClear';if(p==='handover')return 'fire.v24.say.handover';
     const r=s.room;if(!r)return 'fire.v24.loading';const fr=r.friend,near=r.spots.find(x=>x.id===fr.near);
     if(fr.state==='waiting'&&(!near||near.done))return fr.kind==='pet'?'fire.v24.say.tapPet':'fire.v24.say.tapKid';
     if(fr.state!=='waiting'&&r.spots.some(x=>!x.done))return 'fire.v24.say.friendOut';
     return 'fire.v24.say.aim';}
   function updateHud(){const s=model.snapshot(),r=s.room;
-    scoreChip.lastChild.textContent=String(s.score);roomChip.lastChild.textContent=t('fire.v24.roomOf',{n:s.roomIndex+1,total:s.roomCount});
+    scoreChip.lastChild.textContent=String(s.score);
+    roomChip.lastChild.textContent=s.floorCount?t('fire.levels.floorOf',{n:s.floor,total:s.floorCount}):t('fire.v24.roomOf',{n:s.roomIndex+1,total:s.roomCount});
     const inRoom=model.inRoom&&r;clock.hidden=!inRoom;gauge.hidden=!inRoom||s.phase!=='play';tools.hidden=!inRoom||s.phase!=='play';
     if(r){const frac=r.remaining/Math.max(1,r.limit);arc.setAttribute('stroke-dashoffset',String((RING*(1-Math.max(0,Math.min(1,frac)))).toFixed(1)));clockText.textContent=String(Math.ceil(r.remaining));clock.dataset.band=s.phase==='handover'?'critical':clockBand(r.remaining,r.limit);clock.setAttribute('aria-valuenow',String(Math.ceil(r.remaining)));
       if(r.remaining<=10&&!tenSaid&&s.phase==='play'){tenSaid=true;ctx.engine?.narration?.announce?.('fire.v24.say.tenSeconds');}if(s.phase==='intro')tenSaid=false;}

@@ -329,6 +329,8 @@
   "minigames/fire-crew.mjs",
   "minigames/fire-interior.mjs",
   "minigames/fire-ladder.mjs",
+  "minigames/fire-levels-canvas.mjs",
+  "minigames/fire-levels-v1.mjs",
   "minigames/fire-navigation.mjs",
   "minigames/fire-roads.mjs",
   "minigames/fire-session.mjs",
@@ -1567,7 +1569,8 @@
    "assets/fire-v24/rooms/kitchen.glb",
    "assets/fire-v24/rooms/living-room.glb",
    "assets/fire-v24/rooms/palette-1024.png",
-   "assets/models/firefighter-rigged-512.glb"
+   "assets/models/firefighter-rigged-512.glb",
+   "assets/fire-levels-v1/interiors/building-floors.glb"
   ],
   "alien": [
    "assets/defense-v7/alien-beetle-lod1.glb",
@@ -2391,6 +2394,10 @@
   "assets/defense-v7/defender-plane.glb": [
    "74281e05ccb91afe",
    24928
+  ],
+  "assets/fire-levels-v1/interiors/building-floors.glb": [
+   "6d8bf9036c7e4b78",
+   687560
   ],
   "assets/fire-v23/crew-0.webp": [
    "5a76f390df7bca37",
@@ -4893,8 +4900,8 @@
    399
   ],
   "data/strings.he.json": [
-   "f5445654c1706674",
-   138130
+   "a19ddc47be70f5d4",
+   138282
   ],
   "data/team.json": [
    "82a4168feca9f02a",
@@ -5961,8 +5968,8 @@
    3301
   ],
   "engine/engine.mjs": [
-   "f120aa56a51256ce",
-   39322
+   "d1b0af9d953f420a",
+   39480
   ],
   "engine/episodes.mjs": [
    "fbc9c1bebf54a287",
@@ -6053,8 +6060,8 @@
    93
   ],
   "extensions/fire-rescue.mjs": [
-   "274d8fa5fd234071",
-   383
+   "176b17f1de1e3365",
+   521
   ],
   "extensions/island-events.mjs": [
    "4b5d2e11199ec371",
@@ -6657,8 +6664,8 @@
    8095
   ],
   "minigames/fire-assistance.mjs": [
-   "a10df13b81121db2",
-   6267
+   "f37e56537f166126",
+   6897
   ],
   "minigames/fire-bonus-draw.mjs": [
    "e7959677171151b0",
@@ -6691,6 +6698,14 @@
   "minigames/fire-ladder.mjs": [
    "b4dd7decd8c4172a",
    5403
+  ],
+  "minigames/fire-levels-canvas.mjs": [
+   "35a8ce1d9e580398",
+   2853
+  ],
+  "minigames/fire-levels-v1.mjs": [
+   "54d0d76727d2a44f",
+   143
   ],
   "minigames/fire-navigation.mjs": [
    "731d1df66d5ca8ea",
@@ -6733,28 +6748,28 @@
    1431
   ],
   "minigames/fire-v24-flow.mjs": [
-   "b7573ceec37a7d64",
-   10008
+   "2bafefd5f1f9cf2f",
+   12019
   ],
   "minigames/fire-v24-interior.mjs": [
-   "6b362524efe33d28",
-   11943
+   "c1a72db4ed0e86b0",
+   12746
   ],
   "minigames/fire-v24-scene.mjs": [
-   "246986b3cbedd788",
-   29823
+   "b4317fd64c926746",
+   31300
   ],
   "minigames/fire-v24-session.mjs": [
-   "50a79c90b58ab17f",
-   18731
+   "d898abef8c0c2750",
+   19170
   ],
   "minigames/fire-v24.css": [
    "7158b3c53e1b19a5",
    8006
   ],
   "minigames/fire-v24.mjs": [
-   "5e1d285fb9a12b6c",
-   12038
+   "a809f3d25bac5383",
+   13958
   ],
   "minigames/fire-v7.mjs": [
    "06ef1aba177148c7",
@@ -6769,8 +6784,8 @@
    8428
   ],
   "minigames/fire.mjs": [
-   "a96379baf9a5c8a1",
-   18244
+   "389c3f1540222db3",
+   18782
   ],
   "minigames/g2m-audio.mjs": [
    "4f551b7e2416c995",
