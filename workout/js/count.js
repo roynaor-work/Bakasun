@@ -1,3 +1,4 @@
+import { legacyPrivacy } from './privacy-flag.js';
 // ספירה בקול: המספרים בעברית עם ניקוד (הקול קורא נכון), רמזי זמן לתרגילי זמן, והקשבה לילד שסופר (זיהוי דיבור של המכשיר).
 const ONES = ['', 'אַחַת', 'שְׁתַּיִם', 'שָׁלוֹשׁ', 'אַרְבַּע', 'חָמֵשׁ', 'שֵׁשׁ', 'שֶׁבַע', 'שְׁמוֹנֶה', 'תֵּשַׁע', 'עֶשֶׂר'];
 const TEENS = ['', 'אַחַת עֶשְׂרֵה', 'שְׁתֵּים עֶשְׂרֵה', 'שְׁלוֹשׁ עֶשְׂרֵה', 'אַרְבַּע עֶשְׂרֵה', 'חֲמֵשׁ עֶשְׂרֵה', 'שֵׁשׁ עֶשְׂרֵה', 'שְׁבַע עֶשְׂרֵה', 'שְׁמוֹנֶה עֶשְׂרֵה', 'תְּשַׁע עֶשְׂרֵה'];
@@ -42,19 +43,43 @@ export function parseCount(text) {
   }
   return last;
 }
-// הקשבה לילד: זיהוי דיבור של הדפדפן (כרום באנדרואיד). onNumber(n) בכל מספר שנשמע. מחזיר פונקציית עצירה, או null אם אין תמיכה
-export const canListen = () => !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+// Only start a recognizer after the browser confirms an installed local language.
+const localRecognition = () => {
+  const SR = globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition;
+  if (SR && legacyPrivacy()) return SR;
+  return typeof SR?.available === 'function' && 'processLocally' in SR.prototype ? SR : null;
+};
+export const canListen = () => Boolean(localRecognition());
 export function listenCount(onNumber, lang = 'he-IL') {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR) return null;
-  let on = true, rec = null;
+  const SR = localRecognition();
+  if (!SR) return null;
+  let on = true, rec = null, restart;
   const start = () => {
     if (!on) return;
-    rec = new SR(); rec.lang = lang; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 1;
-    rec.onresult = e => { for (let i = e.resultIndex; i < e.results.length; i++) { const n = parseCount(e.results[i][0].transcript); if (n != null) onNumber(n, e.results[i].isFinal); } };
-    rec.onend = () => { if (on) setTimeout(start, 250); }; // הדפדפן עוצר לבד אחרי שקט, מתחילים שוב
-    rec.onerror = ev => { if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') on = false; };
-    try { rec.start(); } catch { /* כבר רץ */ }
+    rec = new SR();
+    if (!legacyPrivacy()) {
+      rec.processLocally = true;
+      if (rec.processLocally !== true) return;
+    }
+    rec.lang = lang; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 1;
+    rec.onresult = e => {
+      if (!on) return;
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const n = parseCount(e.results[i][0].transcript);
+        if (n != null) onNumber(n, e.results[i].isFinal);
+      }
+    };
+    rec.onend = () => { if (on) restart = setTimeout(start, 250); };
+    rec.onerror = ev => { if (ev.error !== 'no-speech') on = false; };
+    try { rec.start(); } catch { on = false; }
   };
-  start();
-  return () => { on = false; try { rec && rec.stop(); } catch { /* */ } };
+  const startLocal = async () => {
+    if (legacyPrivacy() || await SR.available({ langs: [lang], processLocally: true }) === 'available') start();
+  };
+  void startLocal().catch(() => { on = false; });
+  return () => {
+    on = false;
+    clearTimeout(restart);
+    try { rec?.abort(); } catch { /* The recognizer may have stopped. */ }
+  };
 }

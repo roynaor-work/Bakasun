@@ -2,9 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { setImmediate as yieldToIO } from 'node:timers/promises';
+import { mockApprovedUploadEndpoint } from './helpers/approved-upload-endpoints.mjs';
 import { pose } from './cam-lab-fixtures.js';
 
 test('automatic attempts finalize and upload with granted, denied, and unsupported zoom permission; revocation stops sends', async () => {
+  const hook = mockApprovedUploadEndpoint('https://upload.example.invalid/receive');
   const saved = new Map(), globals = (key,value) => {
     saved.set(key,Object.getOwnPropertyDescriptor(globalThis,key));
     Object.defineProperty(globalThis,key,{value,configurable:true,writable:true});
@@ -47,6 +49,7 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
   }};
   const flush=async()=>{for(let i=0;i<20;i++)await yieldToIO();};
   try {
+    globals('confirm', () => true);
     globals('document',{hidden:false,getElementById:get,createElement:()=>new Element(),addEventListener(){}});
     globals('window',{location,history:{state:null,replaceState(){location.hash='';}},innerHeight:1280,innerWidth:720,
       isSecureContext:true,Worker:FakeWorker,OffscreenCanvas:class{},createImageBitmap(){},addEventListener(){}});
@@ -138,12 +141,13 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
     assert.equal(unsupported.camera.ptz.requested,false);assert.equal(unsupported.camera.ptz.granted,null);
     assert.equal(unsupported.camera.ptz.state,'unsupported');assert.equal(unsupported.camera.ptz.actualZoom,null);
     get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});await get('upload-disable').onclick();
-    assert.equal(values.has('camlab.upload'),false);get('finish').onclick();await flush();assert.equal(requests.length,12);
+    assert.equal(values.has('camlab.upload.v2'),false);get('finish').onclick();await flush();assert.equal(requests.length,12);
     get('again').onclick();await get('settings').handlers.submit({preventDefault(){}});
     worker.onerror();await flush();assert.equal(get('error').hidden,false);
     const recovering=get('settings').handlers.submit({preventDefault(){}});await flush();assert.equal(workerCount,2);workerInit();await recovering;
     assert.equal(get('model-status').textContent,'מודל הזיהוי: מוכן');get('stop').onclick();
-  } finally {for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
+  } finally {
+    hook.deregister();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
 });
 
 test('camera setup explains the movement and zoom permission before the camera button',async()=>{

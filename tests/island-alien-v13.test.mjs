@@ -22,5 +22,5 @@ test('v13 Vulcan audio: four OGG files present, CC0 licence files shipped, total
 });
 test('v13 config and published-pack exclusion',async()=>{
  assert.ok(config.v13.cannonOffset>config.v12.cannonOffset&&config.v13.muzzleForward>0&&config.v13.shipScale>=1);
- const pages=await readFile(new URL('../.github/workflows/pages.yml',import.meta.url),'utf8');assert.match(pages,/ship-chase-models-v1 sirens-vulcan-audio-v1/);
+ const pages=await readFile(new URL('../.github/scripts/stage-pages.py',import.meta.url),'utf8');assert.match(pages,/ship-chase-models-v1 sirens-vulcan-audio-v1/);
 });

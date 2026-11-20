@@ -96,13 +96,13 @@ test('brief jitter, frame loss and centered return never leave a stale arrow on 
   assert.equal(coach.update(standing(.5).p, 3100), null);
 });
 
-test('only Hebrew voices are eligible: local before network, even when a network voice was selected', () => {
+test('only local Hebrew voices are eligible even when a network voice was selected', () => {
   const english = { name: 'English local', lang: 'en-US', localService: true, default: true };
   const alternate = { name: 'Second local', lang: 'he-IL', localService: true };
   const hebrew = { name: 'Hebrew local', lang: 'he_IL', localService: true };
   const remote = { name: 'Network Hebrew', lang: 'he-IL', localService: false };
   assert.equal(selectHebrewVoice([]), null); assert.equal(selectHebrewVoice([english]), null);
-  assert.equal(selectHebrewVoice([english, remote]), remote);
+  assert.equal(selectHebrewVoice([english, remote]), null);
   assert.equal(selectHebrewVoice([english, remote, hebrew], voiceId(remote)), hebrew);
   assert.equal(selectHebrewVoice([english, hebrew, alternate], voiceId(alternate)), alternate);
   const legacy = { ...hebrew, lang: 'iw-IL' }; assert.equal(selectHebrewVoice([english, legacy]), legacy);
@@ -137,7 +137,8 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew 
   const english = { name: 'English local', lang: 'en-US', localService: true, default: true };
   const other = { name: 'Other local', lang: 'he-IL', localService: true };
   const remote = { name: 'Remote', lang: 'he-IL', localService: false };
-  let voices = [english, remote];
+  const local = { name: 'Local', lang: 'he-IL', localService: true };
+  let voices = [english, remote, local];
   class FakeWorker {
     constructor() { worker = this; } terminate() {}
     postMessage(m) {
@@ -162,7 +163,7 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew 
     replace('localStorage', { getItem: () => null, setItem() { assert.fail('unexpected write'); } });
     replace('fetch', () => assert.fail('unexpected network')); replace('indexedDB', { open() { assert.fail('unexpected storage'); } });
     await import('../workout/cam-lab/app.mjs?placement-guidance-test');
-    assert.match(get('voice-status').textContent, /עברית ברשת/);
+    assert.match(get('voice-status').textContent, /עברית מקומית/);
     assert.equal(get('voice-select').children.length, 2);
     await get('settings').handlers.submit({ preventDefault() {} });
     const frame = async (sample, step = 100) => {
@@ -173,7 +174,7 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew 
     };
     for (let i = 0; i < 6; i++) await frame(standing(.72));
     assert.equal(get('direction-arrow').hidden, false); assert.equal(get('direction-arrow').textContent, '→');
-    assert.equal(speech.at(-1).text, PLACEMENT_LINES.right.tts); assert.equal(speech.at(-1).voice, remote);
+    assert.equal(speech.at(-1).text, PLACEMENT_LINES.right.tts); assert.equal(speech.at(-1).voice, local);
     assert.equal(get('start').disabled, true);
     for (let i = 0; i < 6; i++) await frame(standing(.80));
     assert.equal(get('placement-hint').textContent, PLACEMENT_LINES['wrong-side'].text);

@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mockApprovedUploadEndpoint } from './helpers/approved-upload-endpoints.mjs';
 import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('../workout/cam-lab/index.html', import.meta.url), 'utf8');
 const warning = html.match(/id="upload-off-banner"[^>]*>([^<]+)/)[1];
 
-test('upload warning is spoken once for disabled uploads with a Hebrew local or network voice', async () => {
+test('upload warning is spoken once for disabled uploads only with a local Hebrew voice', async () => {
+  const hook = mockApprovedUploadEndpoint('https://upload.example.invalid/receive');
   const saved = new Map();
   const replace = (key, value) => {
     if (!saved.has(key)) saved.set(key, Object.getOwnPropertyDescriptor(globalThis, key));
@@ -15,7 +17,7 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or 
     for (const [name, config, initialVoices] of [
       ['delayed-local', null, []],
       ['remote-only', null, [{ lang: 'he-IL', localService: false }]],
-      ['active', { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-key', consentId: 'synthetic-consent' }, [{ lang: 'he-IL', localService: true }]],
+      ['active', { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 }, [{ lang: 'he-IL', localService: true }]],
     ]) {
       const elements = new Map(), speech = [], handlers = {};
       let voices = initialVoices;
@@ -38,7 +40,7 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or 
       await import(`../workout/cam-lab/app.mjs?warning=${name}`);
       assert.equal(get('upload-off-banner').hidden, !!config);
       assert.equal(get('upload-on-banner').hidden, !config);
-      assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
+      assert.equal(speech.length, 0);
       if (name === 'delayed-local') {
         voices = [{ lang: 'he_IL', localService: true }];
         handlers.voiceschanged(); handlers.voiceschanged();
@@ -48,10 +50,11 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or 
         assert.equal(speech[0].voice.localService, true);
       } else {
         handlers.voiceschanged();
-        assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
+        assert.equal(speech.length, 0);
       }
     }
   } finally {
+    hook.deregister();
     for (const [key, descriptor] of saved) {
       if (descriptor) Object.defineProperty(globalThis, key, descriptor); else delete globalThis[key];
     }

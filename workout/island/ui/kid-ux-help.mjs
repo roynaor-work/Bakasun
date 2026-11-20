@@ -1,4 +1,4 @@
-import { kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-20';
+import { kidUxStyle, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-20';
 
 // Each scene connects a visible control and its gesture with a visible game outcome.
 const steps = {
@@ -212,14 +212,14 @@ export function helpReplay({ dialog, gameId, guide, play, again, isMuted, readTe
     }
     try {
       const synthesis = globalThis.speechSynthesis;
-      const hebrew = (synthesis?.getVoices() ?? []).filter(v => /^(he|iw)([-_]|$)/i.test(v.lang));
+      const hebrew = localHebrewVoices(synthesis);
       if (!hebrew.length || !globalThis.SpeechSynthesisUtterance) {
         showGuide('אין קול עברי זמין. אפשר לצפות בהדגמה.');
         return;
       }
       const utterance = new SpeechSynthesisUtterance(guide?.sentence() ?? readText());
       utterance.lang = 'he-IL';
-      utterance.voice = hebrew.find(v => v.localService) ?? hebrew[0];
+      utterance.voice = hebrew[0];
       utterance.rate = .86;
       utterance.onend = () => { if (current === utterance) current = null; };
       utterance.onerror = () => {

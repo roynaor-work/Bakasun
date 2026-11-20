@@ -7,7 +7,7 @@ import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-2026110
 import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-20';
 import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-20';
 import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-20';
-import { kidUx, kidUxStyle, kidSpeak } from '../kid-ux.mjs?v=island-v2-20261107-20';
+import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-20';
 
 kidUxStyle('012', `
   .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
@@ -507,7 +507,7 @@ export class IslandInterface {
     this.placeHelp.classList.add('placement-cue');this.placeButton.classList.remove('placement-confirm-cue');
     if(!this.placementHints.has(id)){
       this.placementHints.add(id);try{localStorage.setItem(this.data.config.ui.placementHintsKey,JSON.stringify([...this.placementHints]));}catch{}
-      const voice=globalThis.speechSynthesis?.getVoices?.().find(v=>/^he(?:-|$)/i.test(v.lang));
+      const voice=localHebrewVoices()[0];
       if(voice&&!this.activityInterface?.sound.muted&&globalThis.SpeechSynthesisUtterance){const utterance=new SpeechSynthesisUtterance(this.t('placement.voiceHint'));utterance.lang='he-IL';utterance.voice=voice;speechSynthesis.speak(utterance);}
     }
   }

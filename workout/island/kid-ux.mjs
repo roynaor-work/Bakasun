@@ -34,9 +34,18 @@ export function kidUxStyle(id, css) {
   document.head.append(style);
 }
 
+// privacy-fixes-patches-v1 (PA-014): only Hebrew voices installed on the device read aloud, so the text never leaves it.
+// ?privacy=v246 restores network voices for one visit.
+export function localHebrewVoices(engine = globalThis.speechSynthesis, search = globalThis.location?.search) {
+  const legacy = new URLSearchParams(search || '').get('privacy') === 'v246';
+  try {
+    return (engine?.getVoices?.() ?? []).filter(v => /^(he|iw)([-_]|$)/i.test(v.lang) && (v.localService === true || legacy));
+  } catch { return []; }
+}
+
 export function kidSpeak(text, onUnavailable = () => {}) {
   const engine = globalThis.speechSynthesis;
-  const voice = engine?.getVoices().find(({ lang }) => /^(he|iw)([-_]|$)/i.test(lang));
+  const voice = localHebrewVoices(engine)[0];
   if (!text || !voice || !globalThis.SpeechSynthesisUtterance) {
     onUnavailable();
     return false;

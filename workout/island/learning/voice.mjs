@@ -1,8 +1,10 @@
 /** Replace this adapter with licensed recordings without changing station UI. */
-export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance,monitorErrors=false}={}) {
+// privacy-fixes-patches-v1: only voices installed on the device read aloud; ?privacy=v246 restores network voices for one visit.
+const legacyFlag=()=>{try{return new URLSearchParams(globalThis.location?.search||'').get('privacy')==='v246';}catch{return false;}};
+export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance,monitorErrors=false,legacyVoices=legacyFlag()}={}) {
   let voices=[],previous=false,failed=false,active;const listeners=new Set();
   const refresh=()=>{
-    voices=(synthesis?.getVoices?.()||[]).filter(v=>/^he(?:[-_]|$)/i.test(v.lang)||/^iw(?:[-_]|$)/i.test(v.lang));
+    voices=(synthesis?.getVoices?.()||[]).filter(v=>(v.localService===true||legacyVoices)&&/^(?:he|iw)(?:[-_]|$)/i.test(v.lang));
     const available=voices.length>0&&Boolean(Utterance)&&!failed;
     if(available!==previous){previous=available;for(const fn of listeners)fn(available);}
   };

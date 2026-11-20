@@ -12,30 +12,34 @@ import { KeyFrameRecorder } from '../cam-lab/keyframes.mjs?v=20261013-frames-1';
 export const APP_VERSION = '20261013-frames-1';
 export const cameraAvailable = (profile, id) => profile.camera === true && EXERCISES.includes(id);
 // Never pass the application's router fragment to the lab initializer.
-export const readCameraConsent = storage => initializeUploadConfig({ storage, location: { hash: '' } }).config;
+export const readCameraConsent = (storage, endpoints) => initializeUploadConfig({ storage, endpoints, context: 'workout', location: { hash: '' } }).config;
 export const cameraPrivacy = enabled => enabled ? 'הסרטון ותמונות המפתח נשלחים לבדיקה בסיום' : 'הסרטון לא נשמר ולא יוצא מהטלפון';
 
 export class CameraUploads {
-  constructor({ storage, onStatus = () => {}, queueFactory = options => new UploadQueue(options) } = {}) {
-    this.storage = storage; this.onStatus = onStatus; this.queueFactory = queueFactory; this.unsaved = new Map(); this.saving = new Map(); this.videoMissing = new Set();
+  constructor({ storage, endpoints, onStatus = () => {}, queueFactory = options => new UploadQueue(options) } = {}) {
+    this.storage = storage; this.endpoints = endpoints; this.onStatus = onStatus; this.queueFactory = queueFactory; this.unsaved = new Map(); this.saving = new Map(); this.videoMissing = new Set();
     this.refresh();
   }
   refresh() {
-    const config = readCameraConsent(this.storage);
+    const config = readCameraConsent(this.storage, this.endpoints);
     if (JSON.stringify(config) === JSON.stringify(this.config)) return;
-    const disabling = this.queue?.disable();
-    const removing = this.background?.remove();
-    this.ready = Promise.allSettled([this.ready, disabling, removing]);
+    this.queue?.stop();
+    this.background?.detach();
     this.unsaved.clear(); this.videoMissing.clear(); this.config = config;
-    this.queue = config ? this.queueFactory({ config, persistConfig: false, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
+    this.queue = config ? this.queueFactory({ config, context: 'workout', endpoints: this.endpoints, persistConfig: false, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
       { ...status, state: 'error', message: 'הסרטון חסר. נסה שוב עם המצלמה' } :
       { ...status, backgroundMessage: this.background?.supported ? '' : NEXT_OPEN_MESSAGE }) }) : null;
-    // Wait for old revocation before copying the replacement configuration.
     const queue = this.queue;
-    this.ready = this.ready.then(async () => {
+    this.ready = Promise.resolve(this.ready).then(async () => {
       if (queue !== this.queue) return;
-      if (queue) { await queue.ready; await queue.store.setConfig?.(config); }
-      this.background = new BackgroundUploads({ queue });
+      if (queue) {
+        await queue.ready;
+        if (queue !== this.queue || JSON.stringify(readCameraConsent(this.storage, this.endpoints)) !== JSON.stringify(config)) {
+          queue.stop(); return;
+        }
+        await queue.store.setConfig?.(config);
+      }
+      this.background = new BackgroundUploads({ queue, context: 'workout' });
       return this.background.ready;
     }).catch(() => this.onStatus({ state: 'error', message: 'לא נשמר. השאר פתוח ונסה שוב' }));
   }
