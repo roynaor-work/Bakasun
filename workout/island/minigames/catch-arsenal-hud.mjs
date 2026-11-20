@@ -8,8 +8,8 @@
 import {STRINGS as TOOL_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-20';
 
 export const STRINGS = Object.freeze({...TOOL_STRINGS,
-  'catch.fire': 'ירי', 'catch.fireHint7': 'ירי בכלי שנבחר', 'catch.ammo7': 'נשאר: {count}', 'catch.reticle7': 'אזור המטרה של הכלי',
-  'catch.lockHint7': 'מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי', 'catch.hitChance': 'סיכוי לפגיעה {percent}%',
+  'catch.fire': 'ירי', 'catch.fireHint7': 'ירי בכלי שנבחר', 'catch.ammo7': 'מלאי: {count}', 'catch.reticle7': 'אזור המטרה של הכלי',
+  'catch.lockHint7': 'מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי', 'catch.hitChance': 'סיכוי לפגיעה {percent}%',
 });
 const SVG = 'http://www.w3.org/2000/svg';
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));

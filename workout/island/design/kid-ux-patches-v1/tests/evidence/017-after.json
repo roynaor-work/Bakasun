@@ -1,0 +1,96 @@
+{
+  "id": "017",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "labels": [
+          {
+            "text": "חבטה",
+            "fontPx": 14,
+            "inkWidth": 37.86,
+            "targetWidth": 84,
+            "inside": true
+          },
+          {
+            "text": "הגשה",
+            "fontPx": 14,
+            "inkWidth": 36.63,
+            "targetWidth": 64,
+            "inside": true
+          },
+          {
+            "text": "הגבהה",
+            "fontPx": 14,
+            "inkWidth": 44.06,
+            "targetWidth": 64,
+            "inside": true
+          },
+          {
+            "text": "קצרה",
+            "fontPx": 14,
+            "inkWidth": 34.8,
+            "targetWidth": 64,
+            "inside": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "shortName": "קצרה",
+        "target": {
+          "text": "קצרה",
+          "fontPx": 0,
+          "ratio": 6.22,
+          "width": 64,
+          "height": 64,
+          "visibleWidth": 64,
+          "visibleHeight": 64
+        }
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: tennis, stage 1.",
+    "Used the game’s Canvas renderer fallback to keep the live touch controls responsive in software rendering."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('#drop').first()",
+      "x": 688,
+      "y": 240,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "drop",
+        "x": 688,
+        "y": 240
+      }
+    }
+  ],
+  "screenshots": [
+    "017-after-tennis-captions.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

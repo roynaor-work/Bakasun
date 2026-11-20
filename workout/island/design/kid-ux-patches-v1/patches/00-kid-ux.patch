@@ -1,0 +1,52 @@
+diff --git a/workout/island/kid-ux.mjs b/workout/island/kid-ux.mjs
+new file mode 100644
+index 00000000..d33f4591
+--- /dev/null
++++ b/workout/island/kid-ux.mjs
+@@ -0,0 +1,46 @@
++// Opt-in prototype. Each finding can also be previewed independently.
++const query = new URLSearchParams(globalThis.location?.search);
++const value = query.get('kidUx');
++const selected = new Set(value?.split(',').filter(id => /^\d{3}$/.test(id)));
++
++export function kidUx(id) {
++  return value === '1' || selected.has(String(id).padStart(3, '0'));
++}
++
++const installedStyles = new Set();
++export function kidUxStyle(id, css) {
++  if (!kidUx(id)) return;
++  const key = String(id).padStart(3, '0') + ':' + css;
++  if (installedStyles.has(key)) return;
++  installedStyles.add(key);
++  const style = document.createElement('style');
++  style.dataset.kidUx = String(id).padStart(3, '0');
++  style.textContent = css;
++  document.head.append(style);
++}
++
++export function kidSpeak(text, onUnavailable = () => {}) {
++  const engine = globalThis.speechSynthesis;
++  const voice = engine?.getVoices().find(({ lang }) => /^(he|iw)([-_]|$)/i.test(lang));
++  if (!text || !voice || !globalThis.SpeechSynthesisUtterance) {
++    onUnavailable();
++    return false;
++  }
++
++  const utterance = new SpeechSynthesisUtterance(text);
++  utterance.lang = 'he-IL';
++  utterance.voice = voice;
++  utterance.rate = 0.9;
++  utterance.addEventListener('error', ({ error }) => {
++    if (error !== 'canceled' && error !== 'interrupted') onUnavailable();
++  }, { once: true });
++
++  try {
++    engine.cancel();
++    engine.speak(utterance);
++    return true;
++  } catch {
++    onUnavailable();
++    return false;
++  }
++}

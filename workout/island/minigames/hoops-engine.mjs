@@ -39,7 +39,7 @@ export function passLaneBlocked(p,q,defenders,laneRadius){
 /** Effective rating 0..1 (fatigue lowers everything a little). */
 function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
 
-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play,rimPhysics=false,impactDetails=false}={}){
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play,rimPhysics=false,impactDetails=false,timeoutFeedback=false}={}){
  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
  const ballOptions={rimPhysics,impactDetails};
  // M3 gameplay layer (alley-oops, pass kinds, spacing, cuts): config.play, on unless `play:false` (?hoopsPlay=0)
@@ -300,10 +300,15 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
 
  function timeout(teamIdx){
   const t=team(teamIdx);
-  const ok=t.timeouts>0&&(['dead','inbound','break','freethrow'].includes(S.phase)||(S.phase==='live'&&S.possession===teamIdx&&S.ball.state==='held'));
-  if(!ok)return {ok:false};
+  const stopped=['dead','inbound','break','freethrow'].includes(S.phase);
+  const allowed=stopped||(S.phase==='live'&&S.possession===teamIdx&&S.ball.state==='held');
+  if(t.timeouts<=0||!allowed){
+   if(!timeoutFeedback)return {ok:false};
+   return {ok:false,reason:t.timeouts<=0?'used':S.phase==='live'?'possession':'phase'};
+  }
   t.timeouts--;
-  const resume=S.phase==='live'?(()=>{const h=holder();const spot=sidelineSpot(h?h.x:0,teamIdx);startInbound(teamIdx,spot,'keep');}):S.pending?.next||(()=>{});
+  const prior={phase:S.phase,phaseT:S.phaseT,pending:S.pending};
+  const resume=S.phase==='live'?(()=>{const h=holder();const spot=sidelineSpot(h?h.x:0,teamIdx);startInbound(teamIdx,spot,'keep');}):timeoutFeedback?(()=>{S.phase=prior.phase;S.phaseT=prior.phaseT;S.pending=prior.pending;}):S.pending?.next||(()=>{});
   S.phase='timeout';S.phaseT=0;S.pending={next:resume,delay:C.timing.timeout};
   for(const tt of S.teams)for(const p of tt.roster)p.energy=Math.min(1,p.energy+C.fatigue.timeoutRecover);
   emit({type:'timeout',team:teamIdx,left:t.timeouts});
@@ -708,7 +713,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   if((inp.switchPress||inp.altPress)&&!hasBall){
    switchPlayer(p);
   }
-  if(inp.timeoutPress)timeout(p.team);
+  if(inp.timeoutPress&&!timeoutFeedback)timeout(p.team);
   if(inp.call==='defense'){const t=team(p.team);t.tactics.defense=t.tactics.defense==='zone'?'man':'zone';emit({type:'tactics',team:p.team,defense:t.tactics.defense});}
   else if(inp.call){team(p.team).call=inp.call;team(p.team).callT=0;team(p.team).tactics.offense=inp.call;emit({type:'playCall',team:p.team,play:inp.call});}
  }
@@ -1161,6 +1166,10 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   step(inp=NO_INPUT){
    if(disposed||S.phase==='final')return;
    S.tick++;const dt=HOOPS_DT;
+   if(timeoutFeedback&&inp?.timeoutPress){
+    const request=timeout(S.userTeam);
+    if(!request.ok)emit({type:'timeoutRejected',team:S.userTeam,reason:request.reason});
+   }
    if(S.phase!=='live'){
     if(runPhase(dt,inp)){recordHistory();return;}
     if(S.phase!=='live'){recordHistory();return;}

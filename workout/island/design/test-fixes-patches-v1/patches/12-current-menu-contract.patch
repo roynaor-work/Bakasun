@@ -1,0 +1,66 @@
+diff --git a/tests/island-alpine-env.test.mjs b/tests/island-alpine-env.test.mjs
+index b7737c697706d72dad0349f7ef30081e8ecb7ae0..3991e0083a8e0cd52a51f9c8fcb1543fc6c107e2 100644
+--- a/tests/island-alpine-env.test.mjs
++++ b/tests/island-alpine-env.test.mjs
+@@ -70,10 +70,10 @@ test('source contract: silent fallbacks and no game logic in the kit helpers', a
+   assert.equal(resolveEnvironmentId({environment: 'nope'}, ''), null); assert.equal(resolveEnvironmentId({}, ''), null);
+ });
+
+-test('browser: environments per stage, rotate, offline list, silent fallbacks, kit screens',
+-  {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 1_500_000}, async t => {
++const browserEnabled = process.env.ISLAND_CSP_BROWSER === '1';
++
++async function alpineBrowser(t) {
+   const shots = process.env.ALPINE_ENV_SHOTS ? path.resolve(process.env.ALPINE_ENV_SHOTS) : null; if (shots) await mkdir(shots, {recursive: true});
+-  const allowed = new Set([...manifest.core, ...manifest.shell, ...manifest.games.alpine, ...manifest.games.soccer, ...manifest.games.hoops]);
+   const defer = browserCleanup(t);
+   const chromium = await islandChromium(), server = await serveIsland();
+   defer(() => server.close());
+@@ -98,9 +98,16 @@ test('browser: environments per stage, rotate, offline list, silent fallbacks, k
+       throw error;
+     }
+   }
++  const shot = async (p, name) => { if (shots) await p.screenshot({path: path.join(shots, name + '.png')}); };
++  return {open, shot};
++}
++
++test('browser: environments per stage, rotate, offline list and silent fallbacks',
++  {skip: !browserEnabled, timeout: 1_200_000}, async t => {
++  const {open, shot} = await alpineBrowser(t);
++  const allowed = new Set([...manifest.core, ...manifest.shell, ...manifest.games.alpine, ...manifest.games.soccer, ...manifest.games.hoops]);
+   const loaded = p => p.waitForFunction(() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error, null, {timeout: 150000});
+   const metrics = p => p.evaluate(() => window.__perfSession.snapshot.renderMetrics);
+-  const shot = async (p, name) => { if (shots) await p.screenshot({path: path.join(shots, name + '.png')}); };
+   // 1. Each stage, both orientations: its own environment, no console errors, no outside requests, every file listed.
+   for (const viewport of [{width: 844, height: 390}, {width: 390, height: 844}]) for (const stage of [1, 2, 3]) {
+     const g = await open(viewport, {query: `?autostart=1&seconds=60&stage=${stage}`});
+@@ -147,7 +154,11 @@ test('browser: environments per stage, rotate, offline list, silent fallbacks, k
+     assert.equal(m.environment.id, 'night-floodlit'); assert.ok(!m.environment.atlases.includes('powder-spray')); assert.equal(m.environment.towers, 0); assert.equal(m.environment.decalQuads, 0);
+     assert.equal(m.designAssets.powder, true, 'the earlier powder remains the crash effect'); assert.deepEqual(noFx.errors, []);
+   } finally { await noFx.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noFx.close(); }
+-  // 4. Island menu, opening card, stage map and result screen use the kit (both orientations), under CSP, nothing external.
++});
++
++test('browser: the ten game cards and Alpine kit screens in both orientations',
++  {skip: !browserEnabled, timeout: 300_000}, async t => {
++  const {open, shot} = await alpineBrowser(t);
+   for (const viewport of [{width: 390, height: 844}, {width: 844, height: 390}]) {
+     const ui = await open(viewport, {query: '?dev=1', page: ''});
+     try {
+@@ -155,9 +166,13 @@ test('browser: environments per stage, rotate, offline list, silent fallbacks, k
+       await ui.p.evaluate(() => { const e = window.__island.engine; e.skipTutorial(); e.tick = () => ({ok: true}); if (!e.state.instructionsSeen.includes('alpineRush')) e.state.instructionsSeen.push('alpineRush'); });
+       const tag = `${viewport.width}x${viewport.height}`;
+       await ui.p.evaluate(() => window.__island.ui.activityInterface.menu());
+-      await ui.p.waitForFunction(() => document.querySelectorAll('.adventure-game-card .ik-game-icon').length >= 9);
+-      await ui.p.waitForFunction(() => [...document.querySelectorAll('.adventure-game-card .ik-game-icon')].every(i => i.complete && i.naturalWidth > 0));
+-      assert.equal(await ui.p.locator('.adventure-game-card').count(), 9); await shot(ui.p, `menu-${tag}`);
++      const shown = await ui.p.locator('.adventure-game-card').evaluateAll(cards => cards.map(card => card.dataset.game).sort());
++      assert.deepEqual(shown, [...GAMES, 'catchCriminal'].sort(), 'one card for each of the ten current games');
++      await ui.p.waitForFunction(ids => ids.every(id => {
++        const image = document.querySelector(`.adventure-game-card[data-game="${id}"] .ik-game-icon`);
++        return image?.complete && image.naturalWidth > 0;
++      }), GAMES);
++      await shot(ui.p, `menu-${tag}`);
+       await ui.p.evaluate(() => window.__island.ui.activityInterface.gameHome('alpineRush'));
+       await ui.p.waitForFunction(() => { const i = document.querySelector('.modal[data-game-home] .ik-intro'); return i?.complete && i.naturalWidth > 0; });
+       assert.equal(await ui.p.locator('.modal[data-game-home] [data-action=game-play]').evaluate(n => n.classList.contains('ik-primary')), true); await shot(ui.p, `opening-${tag}`);

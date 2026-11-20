@@ -1,6 +1,6 @@
 /** Tennis v24.4 line calls (Roy, 18/11/2026, after v24.3 on the phone: "if it is out, a shout of OUT; if it is stuck in the net, NET").
  * At v24.4 no callout package existed from Codex, so both parts were made here (v24.7 connects codex/tennis-callouts-v1, see the end of the file):
- *  - the sign: the v24.1 out plate at the top centre now carries a big call word ("OUT!" / "NET!") next to the Codex tennis-ui-v2 symbol
+ *  - the sign: the v24.1 out plate at the top centre now carries a big call word ("OUT" / "NET") next to the Codex tennis-ui-v2 symbol
  *    (fx-out.svg: the red X, fx-net.svg: the ball in the net, CC0, copied to assets/tennis-ui-v2), for 1.5 s, on a serve fault and on a rally point;
  *  - the shout: a short line judge's call synthesised with Web Audio (no recording, no speech engine, works offline): a sawtooth voice whose
  *    pitch falls like a shout, through three formant band-passes that glide through the vowel ("aa-oo" for OUT, "e" for NET, with a nasal
@@ -10,7 +10,7 @@ const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}ca
 export function tennisCalloutsEnabled(search=globalThis.location?.search||''){return param('tennisCallouts',search)!=='0';}
 /** Which call a new fault mark makes: 'out' | 'net' | null (only out and net are called). */
 export function calloutFor(mark){return mark?.reason==='out'||mark?.reason==='net'?mark.reason:null;}
-export const CALL_WORD=Object.freeze({out:'OUT!',net:'NET!'});
+export const CALL_WORD=Object.freeze({out:'OUT',net:'NET'});
 export const CALL_SECONDS=1.5;
 /** The voice of one call: f0 [start, end] Hz, formants [[from, to, bandwidth, gain]...], vowel seconds, a nasal start (seconds), the "t" burst. */
 export const VOICES=Object.freeze({

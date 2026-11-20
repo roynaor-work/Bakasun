@@ -9,14 +9,18 @@
 // one boar spawned at a time, and the crosshair placed 140-320 px from it before each boar (as after the previous boar).
 // The container renders about one frame a second, so everything is measured in game time (the game's dt is capped at 0.05 s);
 // the kinematics match a phone, frame rate aside. The same child (boar-kid-bot.mjs) runs in the offline model in tests/island-boars-v24.test.mjs.
-import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+import {browserArtifacts,serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+import {assertAimRun} from './boar-aim-acceptance.mjs';
 import {createKidBot,rng} from './boar-kid-bot.mjs';
 import {stickCurve,topSpeed,V23,AIM24,AIM241} from '../minigames/boar-island/aim-v24.mjs';
 import {writeFile} from 'node:fs/promises';
 const AIM=process.env.AIM||'v241',TRIALS=+(process.env.TRIALS||16),SIGMA=+(process.env.SIGMA||10),SEED=+(process.env.SEED||1),T0=Date.now();
 const log=(...a)=>console.error(`[${AIM} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
-const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+if(!Number.isInteger(TRIALS)||TRIALS<1)throw Error('TRIALS must be a positive integer');
+const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
+let browser;
+try {
+browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(600000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
@@ -109,8 +113,11 @@ results.summary={};for(const k of ['all','standing','moving']){const rs=results.
   results.summary[k]={n:rs.length,hitRate:shots?+(hits/shots).toFixed(3):null,shots,hits,aimMedian:+med(aim).toFixed(3),aimMean:+(sum(aim,x=>x)/aim.length).toFixed(3),reached:rs.filter(x=>x.aimTime!==null).length,strokes:+(sum(rs.filter(x=>x.strokes!==null),x=>x.strokes)/Math.max(1,rs.filter(x=>x.strokes!==null).length)).toFixed(2),killed:rs.filter(x=>x.killed).length};}
 results.final=await frame.evaluate(()=>{const s=window.__boar.state;return {shotsBy:s.shotsBy,stickNoButton:s.stickNoButton,errors:0};});
 log('summary',JSON.stringify(results.summary));log('shotsBy',JSON.stringify(results.final.shotsBy),'errors',errors.length);
-if(process.env.OUT)await writeFile(process.env.OUT,JSON.stringify(results,null,1)+'\n');
+const out=process.env.OUT||(process.env.ISLAND_CSP_AUDIT_DIR
+  ? (await browserArtifacts('boar-aim'))+'results.json' : null);
+if(out)await writeFile(out,JSON.stringify(results,null,1)+'\n');
 console.log(JSON.stringify({aim:AIM,stick:results.stick,summary:results.summary,shotsBy:results.final.shotsBy,stickNoButton:results.final.stickNoButton,errors}));
-await browser.close();await server.close();
-const nonButton=Object.entries(results.final.shotsBy||{}).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
-if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,results.final.shotsBy);process.exit(1);}
+assertAimRun(results,TRIALS);
+} finally {
+  try { await browser?.close(); } finally { await server.close(); }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "021",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "pit": {
+          "width": 116,
+          "height": 48,
+          "fontPx": 14,
+          "centerHit": true,
+          "text": "פיטס",
+          "contrast": 10.37
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "verticalGapToGasAndNitro": 39
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "persistentNoticeOutsideTouchTarget": {
+          "width": 194.2,
+          "height": 32.2,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "✓ ביקשתם להחליף צמיגים",
+          "contrast": 17.34
+        },
+        "pitRequestAccepted": true
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Repository racing performance page with the stock race session, HUD and controls, and Hebrew translations. Stage 13 runs three laps with five cars and simplified scenery for software WebGL. The fixture advances the stock countdown without player input."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"racing-pit\"]').first()",
+      "x": 766,
+      "y": 190,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "racing-pit",
+        "x": 766,
+        "y": 190
+      }
+    }
+  ],
+  "screenshots": [
+    "021-after-pit-request.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

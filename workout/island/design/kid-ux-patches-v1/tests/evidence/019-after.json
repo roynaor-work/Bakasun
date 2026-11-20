@@ -1,0 +1,159 @@
+{
+  "id": "019",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "roles": [
+          {
+            "name": "כנף",
+            "fontPx": 14
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "demoEntry": "🏀 מסירות"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "tap",
+        "illustration": {
+          "step": "tap",
+          "animation": "true",
+          "hand": "👆",
+          "path": "M60 88H276",
+          "paused": true
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "double",
+        "illustration": {
+          "step": "double",
+          "animation": "true",
+          "hand": "👆",
+          "path": "M60 88L168 131L276 88",
+          "paused": true
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "hold",
+        "illustration": {
+          "step": "hold",
+          "animation": "true",
+          "hand": "👆",
+          "path": "M60 88Q168 -24 276 88",
+          "paused": true
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "uniquePaths": 3,
+        "returnedToPlay": true
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Existing Bakasun perf-hoops fixture mounts the real basketball session in a minimal game shell. Game backing-store scale 0.35; viewport and touch remain 844×390.",
+    "Used the app’s low graphics profile for software rendering. Game rules and touch controls were active.",
+    "Held only the rendered court frame during the touch-controlled passing illustrations."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.kid-hoops-pass-launch').first()",
+      "x": 784.703125,
+      "y": 176,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "kid-hoops-pass-launch",
+        "x": 784.703125,
+        "y": 176
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.kid-hoops-pass-next').first()",
+      "x": 420.40625,
+      "y": 298,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "kid-hoops-pass-next",
+        "x": 420.40625,
+        "y": 298
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.kid-hoops-pass-next').first()",
+      "x": 420.40625,
+      "y": 298,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "kid-hoops-pass-next",
+        "x": 420.40625,
+        "y": 298
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.kid-hoops-pass-next').first()",
+      "x": 420.40625,
+      "y": 298,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "kid-hoops-pass-next",
+        "x": 420.40625,
+        "y": 298
+      }
+    }
+  ],
+  "screenshots": [
+    "019-after-pass-tap.png",
+    "019-after-pass-double.png",
+    "019-after-pass-hold.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 0.35,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

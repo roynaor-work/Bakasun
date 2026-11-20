@@ -1,0 +1,83 @@
+diff --git a/tests/island-boar-aim-acceptance.test.mjs b/tests/island-boar-aim-acceptance.test.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..547ebaf0cb8a15d9f33c8e224a9759cb18665960
+--- /dev/null
++++ b/tests/island-boar-aim-acceptance.test.mjs
+@@ -0,0 +1,16 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {assertAimRun} from '../workout/island/tests/boar-aim-acceptance.mjs';
++
++const earned={trials:[{},{}],summary:{all:{shots:2,reached:1,hits:1}},final:{shotsBy:{button:2}},errors:[]};
++
++test('aim acceptance requires complete trials, target acquisition and successful button shots',()=>{
++  assert.doesNotThrow(()=>assertAimRun(earned,2));
++  assert.throws(()=>assertAimRun(earned,0),/positive number/);
++  assert.throws(()=>assertAimRun({...earned,trials:[{}]},2),/all requested/);
++  for(const [key,message] of [['shots','exercise shooting'],['reached','acquire a target'],['hits','hit a boar']]){
++    assert.throws(()=>assertAimRun({...earned,summary:{all:{...earned.summary.all,[key]:0}}},2),new RegExp(message));
++  }
++  assert.throws(()=>assertAimRun({...earned,final:{shotsBy:{button:1,stick:1}}},2),/only the fire button/);
++  assert.throws(()=>assertAimRun({...earned,errors:['page failure']},2),/no page errors/);
++});
+diff --git a/workout/island/tests/boar-aim-acceptance.mjs b/workout/island/tests/boar-aim-acceptance.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..035288703d359947bcec55efa8d656c6059971eb
+--- /dev/null
++++ b/workout/island/tests/boar-aim-acceptance.mjs
+@@ -0,0 +1,13 @@
++import assert from 'node:assert/strict';
++
++export function assertAimRun({trials, summary, final, errors}, expectedTrials){
++  assert.ok(Number.isInteger(expectedTrials)&&expectedTrials>0,'a positive number of trials is required');
++  assert.equal(trials.length,expectedTrials,'all requested boar trials must run');
++  assert.deepEqual(errors,[],'the browser must report no page errors');
++  const shots=final.shotsBy||{};
++  const otherShots=Object.entries(shots).filter(([source,count])=>source!=='button'&&count!==0);
++  assert.deepEqual(otherShots,[],'only the fire button may shoot');
++  assert.ok(shots.button>0 && summary.all?.shots>0,'the trials must exercise shooting');
++  assert.ok(summary.all?.reached>0,'the bot must acquire a target');
++  assert.ok(summary.all?.hits>0,'the bot must hit a boar');
++}
+diff --git a/workout/island/tests/boar-aim-v24-browser.mjs b/workout/island/tests/boar-aim-v24-browser.mjs
+index c12e362bb21877e462bbbc18d5db01aa2081fe50..686ecf7c4bd29a3735bd3a87687ee75d49e48a94 100644
+--- a/workout/island/tests/boar-aim-v24-browser.mjs
++++ b/workout/island/tests/boar-aim-v24-browser.mjs
+@@ -9,14 +9,18 @@
+ // one boar spawned at a time, and the crosshair placed 140-320 px from it before each boar (as after the previous boar).
+ // The container renders about one frame a second, so everything is measured in game time (the game's dt is capped at 0.05 s);
+ // the kinematics match a phone, frame rate aside. The same child (boar-kid-bot.mjs) runs in the offline model in tests/island-boars-v24.test.mjs.
+-import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
++import {browserArtifacts,serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
++import {assertAimRun} from './boar-aim-acceptance.mjs';
+ import {createKidBot,rng} from './boar-kid-bot.mjs';
+ import {stickCurve,topSpeed,V23,AIM24,AIM241} from '../minigames/boar-island/aim-v24.mjs';
+ import {writeFile} from 'node:fs/promises';
+ const AIM=process.env.AIM||'v241',TRIALS=+(process.env.TRIALS||16),SIGMA=+(process.env.SIGMA||10),SEED=+(process.env.SEED||1),T0=Date.now();
+ const log=(...a)=>console.error(`[${AIM} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
+-const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
+-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
++if(!Number.isInteger(TRIALS)||TRIALS<1)throw Error('TRIALS must be a positive integer');
++const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
++let browser;
++try {
++browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
+ await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
+ const page=await ctx.newPage();page.setDefaultTimeout(600000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+@@ -109,8 +113,11 @@ results.summary={};for(const k of ['all','standing','moving']){const rs=results.
+   results.summary[k]={n:rs.length,hitRate:shots?+(hits/shots).toFixed(3):null,shots,hits,aimMedian:+med(aim).toFixed(3),aimMean:+(sum(aim,x=>x)/aim.length).toFixed(3),reached:rs.filter(x=>x.aimTime!==null).length,strokes:+(sum(rs.filter(x=>x.strokes!==null),x=>x.strokes)/Math.max(1,rs.filter(x=>x.strokes!==null).length)).toFixed(2),killed:rs.filter(x=>x.killed).length};}
+ results.final=await frame.evaluate(()=>{const s=window.__boar.state;return {shotsBy:s.shotsBy,stickNoButton:s.stickNoButton,errors:0};});
+ log('summary',JSON.stringify(results.summary));log('shotsBy',JSON.stringify(results.final.shotsBy),'errors',errors.length);
+-if(process.env.OUT)await writeFile(process.env.OUT,JSON.stringify(results,null,1)+'\n');
++const out=process.env.OUT||(process.env.ISLAND_CSP_AUDIT_DIR
++  ? (await browserArtifacts('boar-aim'))+'results.json' : null);
++if(out)await writeFile(out,JSON.stringify(results,null,1)+'\n');
+ console.log(JSON.stringify({aim:AIM,stick:results.stick,summary:results.summary,shotsBy:results.final.shotsBy,stickNoButton:results.final.stickNoButton,errors}));
+-await browser.close();await server.close();
+-const nonButton=Object.entries(results.final.shotsBy||{}).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
+-if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,results.final.shotsBy);process.exit(1);}
++assertAimRun(results,TRIALS);
++} finally {
++  try { await browser?.close(); } finally { await server.close(); }
++}

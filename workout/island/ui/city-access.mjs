@@ -22,8 +22,8 @@ export class CityAccess{
     this.tourButton=button('לטיול','city-tour',()=>{this.mapPanel.hidden=true;this.mapButton.setAttribute('aria-expanded','false');this.ui.cancelPlacement();this.ui.closeInfo();this.ui.closeDetails();this.ui.setDockOpen(false);this.ui.view.setTour(!this.ui.view.touring);this.render();},'city-map-button');
     const zoom=node('div','city-zoom');for(const [label,factor,name]of [['+',1.25,'התקרבות'],['−',.8,'התרחקות']]){const b=button(label,'city-zoom-'+(factor>1?'in':'out'),()=>ui.view.zoomCenter(factor),'city-map-button');b.setAttribute('aria-label',name);zoom.append(b);}
     this.controls.append(this.mapButton,this.tourButton,zoom);ui.cameraControls.append(this.controls);
-    this.rotateButton=button('סיבוב המפה בגרירה','city-rotate',()=>{ui.view.cameraMode=ui.view.cameraMode==='orbit'?'pan':'orbit';ui.view.setTour(false);ui.setMoreOpen(false);this.render();});ui.morePanel.append(this.rotateButton);
-    this.cameraHelp=node('small','city-camera-help','גרירה או חצים לתנועה · +/− לזום');ui.morePanel.append(this.cameraHelp);
+    this.rotateButton=button('סיבוב המפה','city-rotate',()=>{ui.view.cameraMode=ui.view.cameraMode==='orbit'?'pan':'orbit';ui.view.setTour(false);ui.setMoreOpen(false);this.render();});ui.morePanel.append(this.rotateButton);
+    this.cameraHelp=node('small','city-camera-help','גרירה או חצים לתנועה · +/− להתקרבות ולהתרחקות');ui.morePanel.append(this.cameraHelp);
     this.panButton=button('חזרה לתנועה','city-pan-mode',()=>{ui.view.cameraMode='pan';this.render();},'city-map-button');this.panButton.hidden=true;this.controls.append(this.panButton);
     this.mapPanel=node('aside','city-map-panel panel');this.mapPanel.id='city-map-panel';this.mapPanel.hidden=true;this.mapPanel.setAttribute('aria-label','מפת העיר');
     const heading=node('div','city-map-heading');heading.append(node('strong','','לאן נלך?'),button('×','city-map-close',()=>this.toggleMap(false),'city-map-close'));heading.lastChild.setAttribute('aria-label','סגירת המפה');
@@ -55,10 +55,10 @@ export class CityAccess{
   }
   render(){
     this.controls.hidden=!this.ui.morePanel.hidden;
-    const orbit=this.ui.view.cameraMode==='orbit';this.panButton.hidden=!orbit;this.rotateButton.setAttribute('aria-pressed',String(orbit));this.rotateButton.textContent=orbit?'תנועה במפה בגרירה':'סיבוב המפה בגרירה';
+    const orbit=this.ui.view.cameraMode==='orbit';this.panButton.hidden=!orbit;this.rotateButton.setAttribute('aria-pressed',String(orbit));this.rotateButton.textContent=orbit?'הזזת המפה':'סיבוב המפה';
     const touring=Boolean(this.ui.view.touring),tourLabel=touring?'בטיול':'לטיול';if(this.tourButton.textContent!==tourLabel)this.tourButton.textContent=tourLabel;if(this.tourButton.getAttribute('aria-pressed')!==String(touring))this.tourButton.setAttribute('aria-pressed',String(touring));this.tourHint.hidden=!touring||this.ui.modalRoot.children.length>0;
     this.followButton.hidden=!touring||this.ui.view.following;
-    const message=this.ui.view.tourDestination?(this.ui.view.route.length?'בדרך! אפשר לגעת ברחוב ולשנות יעד':'הגענו! בחרו יעד נוסף בעיר'):'נוגעים ברחוב כדי לבחור לאן ללכת';if(this.tourText.textContent!==message)this.tourText.textContent=message;
+    const message=this.ui.view.tourDestination?(this.ui.view.route.length?'בדרך. אפשר לגעת ברחוב ולשנות יעד':'הגענו. בחרו יעד נוסף בעיר'):'נוגעים ברחוב כדי לבחור לאן ללכת';if(this.tourText.textContent!==message)this.tourText.textContent=message;
     if(this.mapPanel.hidden)return;
     const state=this.engine.state,signature=JSON.stringify([state.world.size,state.buildings.map(b=>[b.id,b.typeId,b.x,b.z])]);
     if(signature!==this.mapSignature){this.mapSignature=signature;this.destinations.replaceChildren();const seen=new Set();for(const b of state.buildings){const type=this.ui.getBuilding(b.typeId);if(!type||type.isRoad||seen.has(b.typeId))continue;seen.add(b.typeId);this.destinations.append(button(`${type.icon} ${this.ui.label(type,'building')}`,'city-go-'+b.typeId,()=>{const [w,d]=type.footprint;this.goTo(b.x+(w-1)/2,b.z+(d-1)/2);}));}}

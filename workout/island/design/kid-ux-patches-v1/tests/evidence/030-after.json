@@ -1,0 +1,64 @@
+{
+  "id": "030",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "liveRank": 6,
+        "placeGoalChip": {
+          "width": 204.3,
+          "height": 43.4,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "עכשיו מקום 6\nלמעבר: מקום 3 או טוב יותר",
+          "contrast": 11.99
+        },
+        "labels": [
+          "עכשיו מקום 6",
+          "למעבר: מקום 3 או טוב יותר"
+        ],
+        "overlapsFlight": false
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Development API opens the live snowboarding league and a trusted touchscreen gesture presses its start button."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"alpine-start\"]').first()",
+      "x": 588.578125,
+      "y": 155.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "alpine-start",
+        "x": 588.578125,
+        "y": 155.390625
+      }
+    }
+  ],
+  "screenshots": [
+    "030-after-place-goal.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

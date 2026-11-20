@@ -1,0 +1,47 @@
+{
+  "id": "019",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "roles": [
+          {
+            "name": "SF",
+            "fontPx": 10
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "demoEntry": null
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Existing Bakasun perf-hoops fixture mounts the real basketball session in a minimal game shell. Game backing-store scale 0.35; viewport and touch remain 844×390.",
+    "Used the app’s low graphics profile for software rendering. Game rules and touch controls were active.",
+    "Held only the rendered court frame during the touch-controlled passing illustrations.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [],
+  "screenshots": [
+    "019-before-screen.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 0.35,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

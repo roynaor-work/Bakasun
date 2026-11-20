@@ -132,7 +132,7 @@ export const UPGRADES = Object.freeze({
   tires: { name: 'צמיגים', perLevel: 0.03, key: 'grip', cap: 1.16 },
   steering: { name: 'היגוי', perLevel: 0.02, key: 'steer', cap: 1.12 },
   brakes: { name: 'בלמים', perLevel: 0.05, key: 'brakes', cap: 1.3 },
-  aero: { name: 'אירו', perLevel: 0.04, key: 'aero', cap: 1.25 },
+  aero: { name: 'כנפיים', perLevel: 0.04, key: 'aero', cap: 1.25 },
   // racing-deep-m6: ERS (equipment.nitro in racing-physics: a bigger store, cheaper use, a bigger harvest cap). Optional in the save: normalizeLeague adds level 0.
   ers: { name: 'ERS', perLevel: 0.03, key: 'nitro', cap: 1.16 }
 });

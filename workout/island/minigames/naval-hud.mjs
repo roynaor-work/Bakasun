@@ -1,3 +1,4 @@
+import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-20';
 import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-20';
 import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-20';
@@ -6,12 +7,43 @@ const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const translated=(t,key,fallback)=>{const value=t?.(key);return value&&value!==key?value:fallback;};
-const feedbackCopy={hit:'פגיעה במטרה',miss:'פספוס · הקדימו מטרה נעה',damage:'נפגענו · המשיכו לשוט',evaded:'הירי חלף לידנו',mine:'מוקש נפרס בנתיב',repair:'גוף הספינה תוקן',full:'גוף הספינה כבר מלא',resupply:'מלאי הפגזים חודש'};
-const objectiveCopy={fleet:'הטביעו את כל הצי',flagship:'הטביעו את ספינת הדגל',intercept:'יירטו את סירות האגף',subhunt:'הטביעו את הצוללות'};
-const weaponHints=['ירי מהיר · הקדימו מטרה נעה','עוקב אחרי היעד · גם בצלילה','על פני המים · טוב מקרוב','נפרס בכוונת · חוסם נתיב','שלושה פגזים · מכסה שטח','מתקן רבע גוף · ללא ירי'];
+const feedbackCopy={hit:'פגיעה במטרה',miss:'פספוס · מכוונים לפני הספינה הנעה',damage:'נפגענו · המשיכו לשוט',evaded:'הירי חלף לידנו',mine:'מוקש נפרס בנתיב',repair:'גוף הספינה תוקן',full:'הספינה כבר מתוקנת',resupply:'מלאי הפגזים חודש'};
+const objectiveCopy={fleet:'הטביעו את כל הצי',flagship:'הטביעו את ספינת הדגל',intercept:'עוצרים את הסירות שבצדדים',subhunt:'הטביעו את הצוללות'};
+const weaponHints=['ירי מהיר · מכוונים לפני המטרה הנעה','עוקב אחרי היעד · גם בצלילה','על פני המים · טוב מקרוב','נפרס בכוונת · חוסם נתיב','שלושה פגזים · מכסה שטח','מחזיר רבע ממד החיים של הספינה · ללא ירי'];
+const weaponPictures = ['● → 💥', '🚀 → 🎯', '→ ≈ ⛴', '◆ → ⛴', '●●● → 💥', '+ → ⛴'];
+const weaponSpeech = [
+ 'פָּגָז אֶחָד עָף מַהֵר.', 'הַטִּיל עוֹקֵב אַחֲרֵי הַמַּטָּרָה.', 'הַטּוֹרְפֵּדוֹ שָׁט עַל הַמַּיִם.',
+ 'הַמּוֹקֵשׁ מְחַכֶּה בַּנָּתִיב.', 'שְׁלוֹשָׁה פְגָזִים מְכַסִּים שֶׁטַח רָחָב.', 'עֶרְכַּת הַתִּקּוּן מְתַקֶּנֶת אֶת הַסְּפִינָה.',
+];
+const navalKidPickerStyle = `
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .naval-picked-name{display:block;font-size:14px;line-height:17px;color:white}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .naval-weapon-picker{width:146px;min-width:146px;background:#092a3c}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .naval-weapon-hint{display:block;width:min(295px,45vw);font-size:14px;line-height:20px;color:white;background:#092a3c}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker].left-handed .naval-weapon-hint{right:auto;left:128px}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker][data-weapon-menu=true] .naval-weapon-hint{visibility:hidden;transition:none}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack{
+ inset:auto auto max(8px,env(safe-area-inset-bottom)) 50%;
+ width:min(516px,calc(100% - 220px));max-width:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+ gap:6px;padding:7px;box-sizing:border-box;background:#092a3c;
+ transform:translateX(-50%);transition:none;
+}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker][data-weapon-menu=true] .ammo-rack{transform:translate(-50%,0)}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker][data-weapon-menu=true] .naval-weapon-picker{
+ bottom:calc(max(8px,env(safe-area-inset-bottom)) + 106px);
+}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack button{box-sizing:border-box;width:100%;min-width:44px;height:84px;min-height:44px;padding:3px;gap:1px;color:white}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack button:disabled{opacity:1;color:#c5d4d6;border-style:dashed}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack .game-icon{width:23px;height:23px}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack .naval-ammo-name{font:700 14px/15px system-ui;font-size:14px!important;color:inherit;white-space:normal;text-align:center}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack .naval-ammo-purpose{direction:ltr;font:700 14px/16px system-ui;font-size:14px!important;order:3;color:#e5f4ff;white-space:nowrap}
+@media(max-width:620px){
+ .game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .ammo-rack{grid-template-columns:repeat(3,minmax(0,1fr));width:min(270px,calc(100% - 72px))}
+ .game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker][data-weapon-menu=true] .naval-weapon-picker{bottom:calc(max(8px,env(safe-area-inset-bottom)) + 194px)}
+}
+`;
 function clippedText(p,text,x,y,maxWidth){let copy=String(text);while(copy.length>1&&p.measureText(copy).width>maxWidth)copy=copy.slice(0,-2)+'…';p.fillText(copy,x,y);}
 function panel(p,x,y,w,h,r=12){p.beginPath();p.roundRect(x,y,w,h,r);p.fill();}
-function glass(p,x,y,w,h,r=12){p.fillStyle='#092a3ce0';panel(p,x,y,w,h,r);p.strokeStyle='#d3e4df36';p.lineWidth=1;p.stroke();p.strokeStyle='#d8bd7a55';p.beginPath();p.moveTo(x+r,y+.5);p.lineTo(x+w-r,y+.5);p.stroke();}
+function glass(p,x,y,w,h,r=12){p.fillStyle=kidUx('033')?'#092a3c':'#092a3ce0';panel(p,x,y,w,h,r);p.strokeStyle='#d3e4df36';p.lineWidth=1;p.stroke();p.strokeStyle='#d8bd7a55';p.beginPath();p.moveTo(x+r,y+.5);p.lineTo(x+w-r,y+.5);p.stroke();}
 function bar(p,x,y,w,h,value,max,color='#8edcc7'){p.fillStyle='#020f1c80';panel(p,x,y,w,h,h/2);if(value<=0)return;p.fillStyle=color;panel(p,x,y,Math.max(h,w*Math.max(0,Math.min(1,value/max))),h,h/2);}
 function vesselMark(p,x,y){p.save();p.translate(x,y);p.strokeStyle='#e3d2a5';p.fillStyle='#bccdd0';p.lineWidth=1.4;p.beginPath();p.moveTo(-14,4);p.lineTo(13,4);p.lineTo(9,11);p.lineTo(-8,11);p.closePath();p.fill();p.stroke();p.fillStyle='#5c7f8b';p.fillRect(-7,-2,11,6);p.strokeRect(-7,-2,11,6);p.beginPath();p.moveTo(-1,-2);p.lineTo(-1,-12);p.lineTo(5,-7);p.lineTo(-1,-7);p.moveTo(-17,15);p.quadraticCurveTo(-11,12,-5,15);p.quadraticCurveTo(1,18,7,15);p.quadraticCurveTo(11,13,16,15);p.stroke();p.restore();}
 
@@ -31,7 +63,7 @@ function drawDanger(p,marks,time,width,height){
   for(const mark of marks){
     p.save();p.strokeStyle=mark.incoming?'#ffad76':'#ffc27b';p.fillStyle='#f39a4d12';p.lineWidth=1.5;p.globalAlpha=.75+Math.sin(time*7)*.15;p.beginPath();for(let i=0;i<mark.points.length;i++){const q=mark.points[i];if(i)p.lineTo(q.x,q.y);else p.moveTo(q.x,q.y);}p.closePath();p.fill();p.stroke();
     const {x,y}=mark.q;p.beginPath();p.moveTo(x-4,y);p.lineTo(x+4,y);p.moveTo(x,y-3);p.lineTo(x,y+3);p.stroke();p.globalAlpha=1;
-    const bx=clamp(x,30,width-30),by=clamp(y-25,99,height-131);p.fillStyle='#3d2c1ff0';panel(p,bx-22,by-10,44,19,5);p.strokeStyle='#ffc27b88';p.lineWidth=.8;p.stroke();p.fillStyle='#ffce99';p.font='bold 10px sans-serif';p.direction='ltr';p.textAlign='center';p.fillText((mark.incoming?'↓ ':'! ')+mark.seconds.toFixed(1)+'s',bx,by+3);p.restore();
+    const bx=clamp(x,30,width-30),by=clamp(y-25,99,height-131);p.fillStyle='#3d2c1ff0';panel(p,bx-22,by-10,44,19,5);p.strokeStyle='#ffc27b88';p.lineWidth=.8;p.stroke();p.fillStyle='#ffce99';p.font='bold 10px sans-serif';p.direction='ltr';p.textAlign='center';p.fillText((mark.incoming?'↓ ':'◆ ')+mark.seconds.toFixed(1)+'s',bx,by+3);p.restore();
   }
 }
 
@@ -75,7 +107,7 @@ export function drawNavalAmmoHud(p,m,balance,project,width,height){
   p.save();glass(p,16,72,196,30,10);
   // Shell icon, count over magazine, bar.
   p.save();p.translate(36,87);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(-4,7);p.lineTo(-4,-3);p.quadraticCurveTo(-4,-9,0,-9);p.quadraticCurveTo(4,-9,4,-3);p.lineTo(4,7);p.closePath();p.fill();p.stroke();p.restore();
-  p.direction='ltr';p.textAlign='left';p.font='bold 13px sans-serif';p.fillStyle='#f3e2b3';p.fillText(`${count}/${max}`,48,92);
+  p.direction='ltr';p.textAlign='left';p.font=kidUx('033')?'bold 15px sans-serif':'bold 13px sans-serif';p.fillStyle='#f3e2b3';p.fillText(`${count}/${max}`,48,92);
   bar(p,100,83,70,7,count,max,color);
   // Vulcan belt beside it when the gun exists.
   if(m.vulcan&&Number.isFinite(m.belt)){const bc=m.belt<=0?'#ff7a66':m.belt<=30?'#ffb060':'#ffe27a';p.fillStyle=bc;p.fillRect(178,80,3,12);p.fillRect(183,80,3,12);p.fillRect(188,80,3,12);bar(p,176,95,30,4,m.belt,mags.belt,bc);shown.belt=m.belt;}
@@ -135,13 +167,13 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   p.save();glass(p,16,16,196,50,12);p.save();p.translate(40,38);p.scale(1.15,1.15);vesselMark(p,0,0);p.restore();
   const shield=m.playerShip?.maxShield>0?m.playerShip.shield/m.playerShip.maxShield:0;shieldMark(p,72,40,shield);
   bar(p,88,34,104,8,m.lives,m.maxLives,m.lives/m.maxLives<.35?'#e4a184':'#8edcc7');
-  p.direction='ltr';p.textAlign='right';p.font='11px sans-serif';p.fillStyle='#c5d4d6';text(percent(m.lives,m.maxLives)+'%',192,58);shown.icons.push('hull','shield');
+  p.direction='ltr';p.textAlign='right';p.font=kidUx('033')?'bold 15px sans-serif':'11px sans-serif';p.fillStyle='#c5d4d6';text(percent(m.lives,m.maxLives)+'%',192,58);shown.icons.push('hull','shield');
   let missionRect;
   if(width>=620){
     // One objective icon, the counter and the clock. The title and duplicate hull pips are gone.
     const w=112,x=(width+96-w)/2;missionRect={x,y:16,w,h:50};glass(p,x,16,w,50,12);
     targetMark(p,x+26,41);p.direction='ltr';p.textAlign='left';p.fillStyle='#f3e2b3';p.font='bold 18px sans-serif';text(`${missionState.completed}/${missionState.total}`,x+50,49);shown.icons.push('objective');
-    p.fillStyle='#abc5cb';p.font='10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+50,30);
+    p.fillStyle='#abc5cb';p.font=kidUx('033')?'bold 15px sans-serif':'10px sans-serif';p.textAlign='left';const seconds=Math.max(0,Math.ceil(m.remaining));text(`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,x+50,kidUx('033')?32:30);
   }
   const targets=[];
   for(const enemy of m.enemies){
@@ -182,15 +214,26 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
 /** All six original weapon buttons remain in an expandable dock. */
 export function mountNavalWeaponPicker(ctx,getModel){
   const controls=ctx.controls,rack=controls.querySelector('.ammo-rack');if(!rack)return {update(){},dispose(){}};
+  const kidPicker=kidUx('034');
+  if(kidPicker){kidUxStyle('034',navalKidPickerStyle);controls.dataset.kidPicker='';}
   const fireIcon=controls.querySelector('#shoot .game-icon'),originalFire=fireIcon?.innerHTML;if(fireIcon)fireIcon.innerHTML='<path d="m20 29 29-17 5 8-29 17Z" fill="currentColor"/><path d="m45 10 4-2 8 13-4 2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22 36h12l8 14H12Z" fill="currentColor"/><path d="M10 53h36" stroke="currentColor" stroke-width="3"/><path d="m55 8 5-5M57 29l6 1" stroke="currentColor" stroke-width="2"/>';
   const events=new AbortController(),picker=document.createElement('button'),icon=document.createElement('span'),count=document.createElement('span'),name=document.createElement('span'),copy=document.createElement('span'),arrow=document.createElement('span'),hint=document.createElement('span'),fire=controls.querySelector('#shoot'),originalFireLabel=fire?.getAttribute('aria-label'),originalButtons=[];
   picker.type='button';picker.className='naval-weapon-picker';icon.className='naval-picked-icon';count.className='naval-picked-count';name.className='naval-picked-name';copy.className='naval-picked-copy';copy.append(name,count);arrow.textContent='⌃';arrow.className='naval-picker-arrow';picker.append(icon,copy,arrow);hint.className='naval-weapon-hint';hint.id='naval-weapon-hint';picker.setAttribute('aria-describedby',hint.id);controls.append(picker,hint);controls.classList.add('naval-adventure-controls');
-  for(const [index,button] of [...rack.querySelectorAll('[data-ammo-index]')].entries()){const title=document.createElement('span');title.className='naval-ammo-name';title.textContent=ctx.t(ctx.balance.ammo[index].title);button.append(title);originalButtons.push({button,title:button.getAttribute('title'),description:button.getAttribute('aria-description')});const text=translated(ctx.t,'naval.weapon.hint.'+ctx.balance.ammo[index].id,weaponHints[index]);button.title=title.textContent+' · '+text;button.setAttribute('aria-description',text);}
+  for(const [index,button] of [...rack.querySelectorAll('[data-ammo-index]')].entries()){const title=document.createElement('span');title.className='naval-ammo-name';title.textContent=ctx.t(ctx.balance.ammo[index].title);button.append(title);
+    if(kidPicker){const example=document.createElement('span');example.className='naval-ammo-purpose';example.textContent=weaponPictures[index];example.setAttribute('aria-hidden','true');button.append(example);}
+    originalButtons.push({button,title:button.getAttribute('title'),description:button.getAttribute('aria-description')});const text=translated(ctx.t,'naval.weapon.hint.'+ctx.balance.ammo[index].id,weaponHints[index]);button.title=title.textContent+' · '+text;button.setAttribute('aria-description',text);}
   rack.id='naval-weapon-dock';picker.setAttribute('aria-controls',rack.id);let open=false,last='',lastWeapon=-1;
   function expand(value){if(!value&&rack.contains(document.activeElement))picker.focus();open=value;controls.dataset.weaponMenu=String(value);picker.setAttribute('aria-expanded',String(value));rack.inert=!value;}
   picker.addEventListener('click',()=>expand(!open),{signal:events.signal});
-  rack.addEventListener('pointerup',()=>expand(false),{signal:events.signal});
-  rack.addEventListener('click',event=>{if(event.target.closest('[data-ammo-index]'))expand(false);},{signal:events.signal});
+  function choose(event) {
+    const button=event.target.closest('[data-ammo-index]');
+    if(kidPicker&&button&&!button.disabled&&open){
+      try { if(localStorage.getItem('island.sound')!=='off')kidSpeak(weaponSpeech[Number(button.dataset.ammoIndex)]); } catch { /* drawings remain */ }
+    }
+    if(button||event.type==='pointerup')expand(false);
+  }
+  rack.addEventListener('pointerup',choose,{signal:events.signal});
+  rack.addEventListener('click',choose,{signal:events.signal});
   controls.addEventListener('keydown',event=>{if(event.key==='Escape'&&open){event.stopPropagation();expand(false);picker.focus();}},{signal:events.signal});expand(false);
   for(const type of ['keydown','keyup'])controls.addEventListener(type,event=>{if(event.code==='Space'&&event.target.closest('.naval-weapon-picker,.ammo-rack'))event.stopPropagation();},{signal:events.signal});
   return {update(){
@@ -199,6 +242,6 @@ export function mountNavalWeaponPicker(ctx,getModel){
     if(lastWeapon!==index){const button=rack.querySelector(`[data-ammo-index="${index}"]`),drawing=button?.querySelector('.game-icon');icon.replaceChildren(...(drawing?[drawing.cloneNode(true)]:[]));name.textContent=ctx.t(ctx.balance.ammo[index].title);picker.style.setProperty('--naval-weapon',button?.style.getPropertyValue('--naval-weapon')||'#ffcf79');lastWeapon=index;}count.textContent=String(shownCount);picker.setAttribute('aria-label',name.textContent+', '+count.textContent+', בחירת נשק');
     hint.textContent=cooldown>0?translated(ctx.t,'naval.weapon.reloading','טוענים')+' · '+cooldown.toFixed(1)+'s':model.resupplyTime>0?translated(ctx.t,'naval.feedback.resupplying','אספקה בדרך'):translated(ctx.t,'naval.weapon.hint.'+ctx.balance.ammo[index].id,weaponHints[index]);hint.dataset.reloading=String(cooldown>0);controls.dataset.weaponReady=String(ready);controls.dataset.reloading=String(cooldown>0);fire?.setAttribute('aria-label',name.textContent+' · '+hint.textContent);
    },
-    dispose(){events.abort();rack.inert=false;if(fireIcon)fireIcon.innerHTML=originalFire;for(const {button,title,description}of originalButtons){if(title===null)button.removeAttribute('title');else button.setAttribute('title',title);if(description===null)button.removeAttribute('aria-description');else button.setAttribute('aria-description',description);}if(fire){if(originalFireLabel===null)fire.removeAttribute('aria-label');else fire.setAttribute('aria-label',originalFireLabel);}rack.querySelectorAll('.naval-ammo-name').forEach(n=>n.remove());picker.remove();hint.remove();controls.classList.remove('naval-adventure-controls');delete controls.dataset.weaponMenu;delete controls.dataset.weaponReady;delete controls.dataset.reloading;},
+    dispose(){events.abort();rack.inert=false;if(fireIcon)fireIcon.innerHTML=originalFire;for(const {button,title,description}of originalButtons){if(title===null)button.removeAttribute('title');else button.setAttribute('title',title);if(description===null)button.removeAttribute('aria-description');else button.setAttribute('aria-description',description);}if(fire){if(originalFireLabel===null)fire.removeAttribute('aria-label');else fire.setAttribute('aria-label',originalFireLabel);}rack.querySelectorAll('.naval-ammo-name,.naval-ammo-purpose').forEach(n=>n.remove());delete controls.dataset.kidPicker;picker.remove();hint.remove();controls.classList.remove('naval-adventure-controls');delete controls.dataset.weaponMenu;delete controls.dataset.weaponReady;delete controls.dataset.reloading;},
   };
 }

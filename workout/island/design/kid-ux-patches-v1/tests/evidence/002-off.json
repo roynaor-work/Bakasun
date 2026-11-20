@@ -1,0 +1,109 @@
+{
+  "id": "002",
+  "mode": "off",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "screen": "library",
+        "close": [
+          40,
+          40
+        ],
+        "sound": [
+          64.609375,
+          40
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "screen": "soccer home",
+        "close": [
+          40,
+          40
+        ],
+        "sound": [
+          64.609375,
+          40
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap changes mute state."
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap closes the game home."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"soccer\"]').first()",
+      "x": 108,
+      "y": 188.984375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-enter",
+        "x": 108,
+        "y": 188.984375
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-sound\"]').first()",
+      "x": 199.3046875,
+      "y": 41.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-sound",
+        "x": 199.3046875,
+        "y": 41.171875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"close-modal\"]').first()",
+      "x": 139,
+      "y": 41.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "close-modal",
+        "x": 139,
+        "y": 41.171875
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "complete applied series"
+}

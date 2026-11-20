@@ -17,7 +17,7 @@ export class CityDepthView {
       if (kind === 'water') {
         c.fillStyle = value === 'capacity' ? '#d58b27' : '#3298b8'; c.beginPath(); c.moveTo(43,17); c.bezierCurveTo(32,36,22,42,22,55); c.bezierCurveTo(22,82,64,82,64,55); c.bezierCurveTo(64,42,53,32,43,17); c.fill();
         c.strokeStyle = '#fff'; c.lineWidth = 7; c.beginPath(); c.moveTo(28,69); c.lineTo(58,40); c.stroke();
-        c.fillStyle = '#294e54'; c.font = 'bold 25px sans-serif'; c.textAlign = 'center'; c.fillText(value === 'capacity' ? '!' : '↔',75,37);
+        c.fillStyle = '#294e54'; c.font = 'bold 25px sans-serif'; c.textAlign = 'center'; c.fillText(value === 'capacity' ? '◆' : '↔',75,37);
       } else {
         c.fillStyle = '#286c51'; c.font = 'bold 58px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(value),48,49);
       }

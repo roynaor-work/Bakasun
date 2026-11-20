@@ -1,3 +1,4 @@
+import {releaseVersion} from './helpers/island-release.mjs';
 // 11/11/2026 final fix (Fable), ships: spin aim (reach, smoothness, stop, flags), camera follow for spin, edge hint,
 // anti-air model (aircraft fall into the sea, Vulcan start/stop sounds, stages with attacks) and the air audio contract.
 import test from 'node:test';
@@ -108,7 +109,12 @@ test('air audio: ignores other sound names, needs an unlocked context, start the
  let flag='on';const storage={getItem:k=>k==='island.sound'?flag:null};
  const audio=createNavalAirAudio({storage,AudioContext:FakeContext,fetch:fetcher});
  assert.equal(audio.play('vulcanStart'),false,'locked: nothing plays');audio.unlock();await new Promise(r=>setTimeout(r,5));
- assert.equal(audio.metrics().loaded.length,3);assert.ok(fetched.every(u=>u.includes('assets/game-naval/audio/')&&u.includes('?v=island-v2-20261107-20')),'tagged asset urls');
+ assert.equal(audio.metrics().loaded.length,3);assert.equal(fetched.length,3);
+ for(const path of fetched){
+  const url=new URL(path);
+  assert.match(url.pathname,/\/assets\/game-naval\/audio\//);
+  assert.deepEqual(url.searchParams.getAll('v'),[releaseVersion]);
+ }
  assert.equal(audio.play('cannon'),false,'other names are ignored');
  assert.equal(audio.play('vulcanStart'),true);assert.ok(audio.metrics().looping);assert.equal(audio.play('vulcanStart'),false,'already looping');
  assert.equal(audio.play('vulcanStop'),true);assert.ok(!audio.metrics().looping);assert.equal(audio.play('vulcanStop'),false,'nothing to stop');

@@ -1,3 +1,4 @@
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-20';
 import {gameContext} from './context.mjs?v=island-v2-20261107-20';
 import {createTennis} from './tennis.mjs?v=island-v2-20261107-20';
@@ -30,6 +31,30 @@ export function startTennis(ctx){
  stick.id='joystick';knob.id='knob';stick.append(knob);home.setAttribute('aria-hidden','true');home.innerHTML='<svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="15" fill="#ffffff88"/><path d="M40 7V19M34 13 40 7 46 13M40 61V73M34 67 40 73 46 67M7 40H19M13 34 7 40 13 46M61 40H73M67 34 73 40 67 46"/></svg>';
  zone.append(home,stick);zone.setAttribute('aria-label',t('tennis.joystick'));const actions=node('div','soccer-actions');
  for(const [id,key]of [['shoot','hit'],['pass','serve'],['sprint','lob'],['drop','drop']]){const b=node('button','secondary-button'),caption=node('span','tennis-control-caption');b.id=id;b.type='button';b.dataset.gameControl=key;b.setAttribute('aria-label',t('tennis.'+key));caption.textContent=t('tennis.'+key);caption.setAttribute('aria-hidden','true');b.append(tennisIcon(key),caption);actions.append(b);}
+ if(kidUx('017')){
+  actions.querySelector('#drop .tennis-control-caption').textContent='קצרה';
+  kidUxStyle('017',`
+   .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions [data-game-control] .tennis-control-caption{
+    max-width:100%;font-size:14px!important;line-height:1.2;text-align:center;white-space:normal
+   }
+   /* v24.4 plates (tennis-ui2): the caption sits under its button, so it gets the larger type on a solid chip */
+   .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 [data-game-control] .tennis-control-caption{
+    max-width:none;font-size:14px!important;line-height:16px;white-space:nowrap;padding:0 5px;border-radius:7px;background:#14202e;color:#fff;text-shadow:none
+   }
+  `);
+ }
+ kidUxStyle('018',`
+  .game-screen[data-game=tennis] .soccer-actions #shoot{transition-property:border-color,box-shadow}
+  .game-screen[data-game=tennis] .soccer-actions #shoot:not(.held){
+   background:#763c2b;color:#fff;text-shadow:none
+  }
+  .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions #shoot .tennis-control-caption{
+   font-size:14px!important;line-height:1.2
+  }
+  .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 #shoot .tennis-control-caption{
+   font-size:14px!important;line-height:16px;white-space:nowrap;padding:0 5px;border-radius:7px;background:#14202e;color:#fff;text-shadow:none
+  }
+ `);
  const serveIcon=actions.querySelector('#pass svg');serveIcon.classList.add('tennis-serve-hint');
  controls.classList.add('soccer-controls');controls.append(zone,actions);status.classList.add('soccer-live-status');
  // Phone E: a compact thumb cluster leaves an outer-right rail for the timing bar.

@@ -76,7 +76,7 @@ export const SOCCER_AIR_V241=Object.freeze({
   altGrace:.2,
 });
 /** Labels and icons the buttons show (the session owns the DOM). */
-export const SOCCER_AIR_LABELS=Object.freeze({volley:'עף',header:'נגיחה',scissor:'מספרת'});
+export const SOCCER_AIR_LABELS=Object.freeze({volley:'בעיטת עף',header:'נגיחה',scissor:'מספרת'});
 /** The two ways to meet the high ball, from where each action can meet it (`meets`: the earliest point of its height band he can reach):
  *  - he can reach it at scissor height: a high ball, the header first and the scissor kick second ("אם המסירה גבוהה גם לעשות מספרת");
  *  - he can head it from chest height up: the header first and the volley second ("גם כאשר יש הגבהה והיא לא גבוהה אפשר גם במקום לנגוח ... לבעוט");

@@ -1,3 +1,4 @@
+import {assertReleaseReference} from './helpers/island-release.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -57,7 +58,8 @@ test('the gantry DOM: red lamps on, then green; spoken numbers; the flag ?alpine
 
 test('every ski stage gets the lights from the session, with a beep per lamp and the start cue at green; the flag keeps the old number and cues', async () => {
   const session = await readFile(new URL('minigames/alpine-session.mjs', root), 'utf8'), css = await readFile(new URL('minigames/alpine-start-lights.css', root), 'utf8');
-  assert.match(session, /import \{createStartLights,startLightsEnabled\} from '\.\/alpine-start-lights\.mjs\?v=island-v2-20261107-20'/);
+  assert.match(session, /import \{createStartLights,startLightsEnabled\} from '\.\/alpine-start-lights\.mjs\?v=/);
+  assertReleaseReference(session,'./alpine-start-lights.mjs');
   assert.match(session, /const lightsOn = startLightsEnabled\(\), lights = lightsOn \? createStartLights\(doc/);
   assert.match(session, /if \(lightsOn\) \{ if \(e\.value === 0\) audio\.cue\('go'\); \} else \{ audio\.cue\(e\.value > 0 \? 'countdown' : 'go'\)/);
   assert.match(session, /countdown\.hidden = !count \|\| lightsOn;/);

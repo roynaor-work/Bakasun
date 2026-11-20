@@ -2,5 +2,9 @@
   "name": "bakasun",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test tests/*.mjs" }
+  "scripts": {
+    "test": "node --test tests/*.mjs",
+    "test:browser": "node tests/helpers/run-browser-suites.mjs",
+    "test:v24-browser": "node tests/helpers/run-browser-suites.mjs v24"
+  }
 }

@@ -1,0 +1,20 @@
+diff --git a/workout/island/minigames/tennis-session.mjs b/workout/island/minigames/tennis-session.mjs
+index 7e1fca57..7dcb0eeb 100644
+--- a/workout/island/minigames/tennis-session.mjs
++++ b/workout/island/minigames/tennis-session.mjs
+@@ -34,6 +34,15 @@ export function startTennis(ctx){
+    }
+   `);
+  }
++ kidUxStyle('018',`
++  .game-screen[data-game=tennis] .soccer-actions #shoot{transition-property:border-color,box-shadow}
++  .game-screen[data-game=tennis] .soccer-actions #shoot:not(.held){
++   background:#763c2b;color:#fff;text-shadow:none
++  }
++  .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions #shoot .tennis-control-caption{
++   font-size:14px!important;line-height:1.2
++  }
++ `);
+  const serveIcon=actions.querySelector('#pass svg');serveIcon.classList.add('tennis-serve-hint');
+  controls.classList.add('soccer-controls');controls.append(zone,actions);status.classList.add('soccer-live-status');
+  const board=node('div','soccer-scoreboard tennis-board'),cells=[];

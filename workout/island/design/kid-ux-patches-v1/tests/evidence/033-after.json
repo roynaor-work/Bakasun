@@ -1,0 +1,97 @@
+{
+  "id": "033",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "clock": {
+          "text": "2:00",
+          "x": 464,
+          "y": 32,
+          "cssFontPx": 15,
+          "canvasClass": "minigame-canvas",
+          "font": "bold 15px sans-serif",
+          "color": "#abc5cb"
+        },
+        "hull": {
+          "text": "100%",
+          "x": 192,
+          "y": 58,
+          "cssFontPx": 15,
+          "canvasClass": "minigame-canvas",
+          "font": "bold 15px sans-serif",
+          "color": "#c5d4d6"
+        },
+        "ammo": {
+          "text": "13/13",
+          "x": 48,
+          "y": 92,
+          "cssFontPx": 15,
+          "canvasClass": "minigame-canvas",
+          "font": "bold 15px sans-serif",
+          "color": "#f3e2b3"
+        },
+        "lock": {
+          "text": "געו בספינה או בכפתור הנעילה",
+          "x": 422,
+          "y": 122.36805358386792,
+          "cssFontPx": 15,
+          "canvasClass": "minigame-canvas",
+          "font": "bold 15px sans-serif",
+          "color": "#f3f0e2"
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "lockButton": "naval-lock-btn",
+        "lockModel": {
+          "index": 0,
+          "at": 0.3366000000000058,
+          "need": 1.1373099724103837,
+          "progress": 0,
+          "queued": false
+        }
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: navalDuel, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.naval-lock-btn').first()",
+      "x": 696,
+      "y": 214,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "naval-lock-btn",
+        "x": 696,
+        "y": 214
+      }
+    }
+  ],
+  "screenshots": [
+    "033-after-canvas-hud.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

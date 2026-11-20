@@ -1,0 +1,5649 @@
+{
+  "schemaVersion": 1,
+  "auditId": "kid-ux-audit-v1",
+  "date": "2026-11-17",
+  "timezone": "Asia/Jerusalem",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/kid-ux-audit-v1",
+  "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "release": "island-v2-20261107-15",
+  "method": {
+    "viewportCssPx": {
+      "width": 844,
+      "height": 390
+    },
+    "deviceScaleFactor": 1,
+    "browser": "151.0.7922.173",
+    "input": "Playwright + CDP Input.dispatchTouchEvent; trusted touch events; up to two simultaneous touches",
+    "targetMinimumCssPx": 44,
+    "recommendedSpacingCssPx": 8,
+    "contrastNormalText": 4.5,
+    "thumbRadiusAssumptionCssPx": 32,
+    "sourceFilesModified": false,
+    "childParticipant": false,
+    "realPhone": false,
+    "decorativeBackgroundFrozenForStillMenus": true,
+    "timingFromExclusiveSeparateRun": true,
+    "serviceWorkers": "blocked; offline-install reliability excluded",
+    "fixtures": "Only disposable synthetic local browser storage; game result displays, unlocked progression, parked truck and accelerated game models are labelled per screenshot."
+  },
+  "severityDefinitions": {
+    "P1": "חסם משמעותי להבנת הפעולה או לביצועה ללא קריאה; טיפול ראשון",
+    "P2": "קושי חוזר: יעד קטן, קריאות, צפיפות או יציאה לא ברורה",
+    "P3": "ליטוש או פגיעה מוגבלת"
+  },
+  "summary": {
+    "findingCount": 40,
+    "bySeverity": {
+      "P2": 35,
+      "P1": 5
+    },
+    "screenshotCount": 441,
+    "screensByGame": {
+      "island": 82,
+      "soccer": 35,
+      "library": 2,
+      "streetSlam": 35,
+      "tennis": 25,
+      "alpineRush": 37,
+      "islandRacing": 39,
+      "learning": 26,
+      "navalDuel": 30,
+      "alienDefense": 26,
+      "fireRescue": 51,
+      "catchCriminal": 26,
+      "boarDefense": 27
+    },
+    "verifiedExits": {
+      "soccer": true,
+      "alpineRush": true,
+      "catchCriminal": true,
+      "boarDefense": true,
+      "streetSlam": true,
+      "navalDuel": true,
+      "alienDefense": true,
+      "tennis": true,
+      "fireRescue": true,
+      "islandRacing": true
+    }
+  },
+  "findings": [
+    {
+      "id": "KUX-001",
+      "game": "library",
+      "gameLabel": "ספריית המשחקים",
+      "screenLabel": "ספריית המשחקים",
+      "screens": [
+        "games-library"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target"
+      ],
+      "title": "כל עשרת כפתורי הכניסה נמוכים מהרף",
+      "observation": "עשרת כפתורי הכניסה נמדדו 132×34 פיקסלי CSS. כל הכרטיס אינו יעד חלופי: הפעולה מחוברת לכפתור שבתוכו. ההקטנה חלה דווקא בטלפון לרוחב.",
+      "proposedFix": "גובה פעיל 48 לפחות; אפשר להפוך גם את הכרטיס ליעד כניסה יחיד וברור.",
+      "acceptance": "ב־844×390 כל כפתור כניסה הוא לפחות 44×44 וניתן להפעילו בנגיעה סמוך לשוליו.",
+      "sources": [
+        "presentation/adventure.css:61",
+        "ui/activity.mjs:118"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-002",
+      "game": "shared",
+      "gameLabel": "משותף למשחקים",
+      "screenLabel": "הספרייה ומסך הבית",
+      "screens": [
+        "games-library",
+        "soccer-home",
+        "tennis-home",
+        "streetSlam-home"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target"
+      ],
+      "title": "הסגירה והצליל במסכי הבית קטנים",
+      "observation": "במראה הכהה של הספרייה ומסכי הבית הסגירה היא 40×40 והצליל 64.61×40. במסכי המשחק עצמם כפתורי ההשהיה גדולים יותר.",
+      "proposedFix": "להחיל מינימום 48×48 על רכיבי המסגרת גם במצב לרוחב.",
+      "acceptance": "גובה ורוחב פעילים של 44 לפחות בכל מסכי הבית והספרייה.",
+      "sources": [
+        "presentation/adventure.css:55"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-003",
+      "game": "library",
+      "gameLabel": "ספריית המשחקים",
+      "screenLabel": "ספריית המשחקים",
+      "screens": [
+        "games-library"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography"
+      ],
+      "title": "שמות המשחקים קטנים וצפופים",
+      "observation": "שמות המשחקים וכפתורי הכניסה הם 12 פיקסלים, תג חדש הוא 11; עשרה משחקים נדחסים לחמש עמודות. שם משחק רב מילים נשבר לשורות קצרות.",
+      "proposedFix": "שמות 16–18 פיקסלים, שלוש או ארבע עמודות עם איור מוכר; להשאיר גלילה ברורה.",
+      "acceptance": "ילד יכול לזהות משחק לפי איור ושם קריא בלי להגדיל את הדף.",
+      "sources": [
+        "presentation/adventure.css:61"
+      ],
+      "confidence": "observed-layout; child-comprehension-needs-playtest"
+    },
+    {
+      "id": "KUX-004",
+      "game": "library",
+      "gameLabel": "ספריית המשחקים",
+      "screenLabel": "הורדה למכשיר",
+      "screens": [
+        "games-library--scroll-01"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "contrast"
+      ],
+      "title": "הטקסט באזור ההורדה כמעט נבלע ברקע",
+      "observation": "צבע הטקסט הוא RGB(237,242,236). הרקע הנראה בצילום הוא בערך RGB(186,192,194): יחס כ־1.6:1. זהו רקע שקוף מעל ערכת עיצוב כהה, ולכן יחס חישוב אוטומטי מתוך CSS לבדו אינו מספיק.",
+      "proposedFix": "לקבוע במפורש צבע דיו כהה לפאנל ההורדה הבהיר, או להשתמש בפאנל כהה אטום עם טקסט בהיר.",
+      "acceptance": "יחס 4.5:1 לפחות לטקסט רגיל בכל ערכת עיצוב, לפי הרקע המרונדר.",
+      "sources": [
+        "styles.css:368",
+        "ui/offline-panel.mjs:23"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-005",
+      "game": "shared",
+      "gameLabel": "משותף למשחקים",
+      "screenLabel": "הוראות פתיחה",
+      "screens": [
+        "soccer-instructions",
+        "tennis-instructions",
+        "streetSlam-instructions",
+        "islandRacing-instructions",
+        "alpineRush-instructions",
+        "boarDefense-instructions"
+      ],
+      "severity": "P1",
+      "dimensions": [
+        "instruction",
+        "non-reading"
+      ],
+      "title": "שער הכניסה למשחק דורש קריאת פסקאות",
+      "observation": "ההסבר הראשוני מבוסס על שלוש פסקאות, לרוב בגופן 13 פיקסלים, ואיור סטטי. כפתור ההתחלה נמצא מתחת לקפל בחלק מהמסכים. אין באותו שער הדגמת פעולה באמצעות אצבע, והטקסט כולל מושגים כמו ג׳ויסטיק, מסירה ארוכה והגבהה.",
+      "proposedFix": "להציג הדגמה קצרה של פעולה אחת בכל צעד: אצבע, תנועה ותוצאה, עם משפט קולי קצר וכפתור התחלה קבוע.",
+      "acceptance": "ניתן ללמוד את פעולת הבסיס בלי לקרוא; ההתחלה והיציאה נשארות נראות בכל צעד.",
+      "sources": [
+        "ui/activity.mjs:243",
+        "ui/activity.mjs:250"
+      ],
+      "confidence": "observed-layout; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-006",
+      "game": "shared",
+      "gameLabel": "משותף למשחקים",
+      "screenLabel": "שמיעה חוזרת",
+      "screens": [
+        "soccer-instructions-replay",
+        "tennis-instructions-replay",
+        "streetSlam-instructions-replay",
+        "boarDefense-instructions-replay"
+      ],
+      "severity": "P1",
+      "dimensions": [
+        "audio",
+        "instruction",
+        "non-reading"
+      ],
+      "title": "כפתור שמיעת ההוראות אינו מקריא אותן",
+      "observation": "לאחר נגיעת CDP בכפתור ההשמעה החוזרת נרשם צליל לחיצה, אך לא בקשת דיבור. narrateHelp קורא ל־ui.narrate, שמשגר אירוע island:narrate; לא נמצא באפליקציה מאזין שמנגן את ההסבר. אין להסיק מכך שכל צלילי המשחק חסרים.",
+      "proposedFix": "לחבר את הכפתור להקלטה עברית או למקריא זמין, ולספק הדגמה חזותית כשאין קול.",
+      "acceptance": "נגיעה מהימנה בכפתור מפעילה את משפט ההוראה עצמו, עם מצב טעינה/כשל גלוי ובלי להסתמך על צליל לחיצה.",
+      "sources": [
+        "ui/activity.mjs:242",
+        "ui/interface.mjs:83",
+        "app.mjs:81"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-007",
+      "game": "shared",
+      "gameLabel": "משותף למשחקים",
+      "screenLabel": "השהיה ויציאה",
+      "screens": [
+        "soccer-pause",
+        "tennis-pause",
+        "streetSlam-pause",
+        "islandRacing-pause",
+        "alpineRush-pause"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "exit",
+        "instruction"
+      ],
+      "title": "היציאה קיימת אך דורשת לזהות שתי צלמיות",
+      "observation": "במשחק מופיעה צלמית השהיה. אחריה מוצגים המשך, צליל ויציאה כצלמיות ללא כיתוב נראה; השם לחזור לעיר קיים במאפיין הנגישות בלבד. נבדקה חזרה אמיתית לאי באמצעות שתי נגיעות.",
+      "proposedFix": "להוסיף כיתוב נראה לחזור לאי ליד דלת היציאה, וכיתוב השהיה/בית בשלב הכניסה.",
+      "acceptance": "הפעולה מובנת גם לילד שאינו מכיר את סמל הדלת; החזרה לאי משחררת את המשחק.",
+      "sources": [
+        "ui/game-shell.mjs:155",
+        "ui/game-shell.mjs:168"
+      ],
+      "confidence": "observed-flow; recognizability-heuristic"
+    },
+    {
+      "id": "KUX-008",
+      "game": "shared",
+      "gameLabel": "משותף למשחקים",
+      "screenLabel": "תוצאות הצלחה וכישלון",
+      "screens": [
+        "soccer-result-win",
+        "soccer-result-win--scroll-02",
+        "tennis-result-win",
+        "streetSlam-result-lose"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "exit",
+        "layout",
+        "typography"
+      ],
+      "title": "הפעולות הבאות במסכי הסיום יורדות מתחת לקפל",
+      "observation": "כותרת, כרטיס פרס ונתונים תופסים את גובה החלון. צריך לגלול כדי להגיע שוב, שלבים או יציאה; בסיום הכדורגל נדרשו מספר תצוגות גלילה. אלה צילומי תבנית תוצאה מנתוני בדיקה, לא ניצחונות ששוחקו.",
+      "proposedFix": "שורת פעולות קבועה בתחתית: שוב ולחזור לאי; לקפל פירוט פרסים והצעות שדרוג.",
+      "acceptance": "בסיום הצלחה וכישלון יש יציאה ופעולה ראשית נראות ב־844×390 ללא גלילה.",
+      "sources": [
+        "ui/activity.mjs:341",
+        "ui/activity.mjs:361"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-009",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "מפת האי וניווט",
+      "screens": [
+        "island-02-first-city",
+        "island-06-map"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "spacing"
+      ],
+      "title": "רווחי הניווט קטנים לאצבע של ילד",
+      "observation": "בין מרכז העיר לעוד פעולות ובין כסף למשימות נמדדו 2 פיקסלים; בין מפה לטיול ובין קיצורי הדרך התחתונים כ־5. היעדים הראשיים עצמם עומדים ב־44.",
+      "proposedFix": "רווח 8–12 פיקסלים בין פעולות נפרדות, ויותר בין פעולות שקל לבלבל ביניהן.",
+      "acceptance": "מרווח לפחות 8 לפי כלל הביקורת; זהו כלל עיצוב לילד, לא טענה לכשל WCAG כשלעצמו.",
+      "sources": [
+        "styles.css:9",
+        "ui/city-access.mjs:16"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-010",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "מפת יעדים",
+      "screens": [
+        "island-06-map"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target",
+        "exit"
+      ],
+      "title": "סגירת המפה ויעדי המקום קטנים",
+      "observation": "סגירת המפה נמדדה 36×36; כפתור העירייה 67.38×38. שני היעדים נראים וניתנים לפגיעה במרכז, אך קטנים מדרישת 44.",
+      "proposedFix": "סגירה 48×48 ושורות יעדים בגובה 48, עם שם ואיור.",
+      "acceptance": "כל יעד מקום וסגירה במפה לפחות 44×44.",
+      "sources": [
+        "ui/city-access.mjs:30"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-011",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "יצירת דמות",
+      "screens": [
+        "island-01-avatar-first-use",
+        "island-01-avatar-first-use--scroll-01"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "layout",
+        "typography"
+      ],
+      "title": "בחירת הדמות נראית חתוכה בתחילת הדרך",
+      "observation": "תצוגת הדמות בגובה 120 משאירה מעט מקום לבחירה: שורת השמות נחתכת ליד הכפתור הקבוע, ושאר השדות דורשים שלוש גלילות. כותרות השדות הן 12 פיקסלים. יעדי הבחירה עצמם 56 ומעלה.",
+      "proposedFix": "לקצר את התצוגה המקדימה לרוחב, לחשוף לפחות שתי קבוצות בחירה ולהוסיף סימן גלילה או צעדים מאוירים.",
+      "acceptance": "ברור שיש עוד אפשרויות, והכפתור הקבוע אינו מסתיר את טקסט האפשרות בשורת הבחירה.",
+      "sources": [
+        "ui/interface.mjs:632",
+        "styles.css:41"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-012",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "הדרכה ראשונה",
+      "screens": [
+        "island-03-tutorial-tasks"
+      ],
+      "severity": "P1",
+      "dimensions": [
+        "instruction",
+        "non-reading",
+        "audio"
+      ],
+      "title": "ההתחלה בעיר מוסברת בטקסט בלבד",
+      "observation": "ההדרכה הראשונה אומרת זו העירייה שלך ומתחילים בעירייה, אך אינה מדגימה אצבע שנוגעת במבנה או מקריאה את הפעולה. העזרה במפה מוצגת כהודעת טקסט חולפת.",
+      "proposedFix": "אצבע מודגמת, הדגשת המבנה ומשפט מוקלט אחד; לתת לילד לחזור על הפעולה ולקבל אישור ברור.",
+      "acceptance": "אפשר להשלים את פעולת הפתיחה בלי לקרוא את הפסקה ובלי להכיר את המושג עירייה.",
+      "sources": [
+        "ui/interface.mjs:290",
+        "ui/interface.mjs:83"
+      ],
+      "confidence": "observed-flow; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-013",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "מדדי העיר",
+      "screens": [
+        "island-08-city-stats"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "contrast"
+      ],
+      "title": "נתוני העיר צפופים וחלקם בהירים מדי",
+      "observation": "טקסט המשנה עיר קטנה. הרפתקה גדולה. נמדד 11 פיקסלים וביחס 3.11:1. התפריט כולל מספר רב של מדדים ומשאבים בגובה חלון מוגבל.",
+      "proposedFix": "טקסט משני 14–16, ניגודיות 4.5:1, ושלושה מדדים מאוירים עיקריים עם פירוט נפתח.",
+      "acceptance": "אין טקסט הדרכתי חיוני מתחת ל־14, והמדד מסביר לילד פעולה ולא רק מספר.",
+      "sources": [
+        "styles.css:14",
+        "ui/interface.mjs:243"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-014",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "העירייה: תכנון ותקציב",
+      "screens": [
+        "island-18-city-blueprint",
+        "island-18-city-budget"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target",
+        "instruction",
+        "non-reading"
+      ],
+      "title": "ניהול העיר מציע ממשק עמוס של מבוגר",
+      "observation": "כפתור התחלת ניהול עיר הוא 120×40. בלוח יש תכנון, שירותים, תקציבים, אחוזי מימון ומיסוי; אין דרך מאוירת קצרה שמסבירה לילד מה כדאי לעשות עכשיו.",
+      "proposedFix": "גובה 48 לפעולה הראשית; מסלול ילד עם פעולה מומלצת אחת ותחזית מאוירת, ופירוט ניהול בלשונית משנית.",
+      "acceptance": "הפעולה הראשית עומדת ברף 44; ילד יכול להבין תוצאה צפויה לפני אישור בלי לפענח תקציב.",
+      "sources": [
+        "ui/city-management.mjs:28",
+        "ui/city-management.mjs:80"
+      ],
+      "confidence": "observed-layout; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-015",
+      "game": "soccer",
+      "gameLabel": "ליגת העיר בכדורגל",
+      "screenLabel": "הוראות ומפת הליגה",
+      "screens": [
+        "soccer-instructions",
+        "soccer-stages"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction"
+      ],
+      "title": "ההסבר מציע בחירת שוער שאינה במסך הליגה",
+      "observation": "ההוראות מציינות אפשר לבחור להיות השוער לפני המשחק. מסך הליגה הנוכחי מציג בחירת משחק, אימונים והרכבים; בחירת תפקיד השוער נמצאת בענף ממשק ישן שאינו מוצג כשיש ליגות.",
+      "proposedFix": "לעדכן את ההוראה למסלול הפעיל, או להציג כניסה ברורה לבחירת התפקיד אם עדיין תומכים בו.",
+      "acceptance": "כל פעולה המתוארת בהסבר ניתנת לאיתור במסך הבא.",
+      "sources": [
+        "ui/activity.mjs:210",
+        "data/strings.he.json"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-016",
+      "game": "soccer",
+      "gameLabel": "ליגת העיר בכדורגל",
+      "screenLabel": "משחק",
+      "screens": [
+        "soccer-playing",
+        "soccer-touch-held"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "thumb"
+      ],
+      "title": "כיתובי פעולות ומטרת המשחק קטנים",
+      "observation": "בעיטה, מסירה וריצה נמדדו 11 פיקסלים, הגבהה 10 ומטרת השער 11. הכפתורים עצמם גדולים, 64–80. במודל אגודל ברדיוס 32, הכיתוב שבתחתית הכפתור המוחזק מכוסה; לא נמדדה חפיפה לכפתור השכן.",
+      "proposedFix": "כיתוב 14–16, סמל שקל לזהות, ומשוב הפעולה גם מעל האצבע או ליד השחקן.",
+      "acceptance": "הילד רואה איזה מצב מופעל גם במהלך החזקה. מסקנת האגודל נשארת הערכה גאומטרית עד בדיקת מכשיר.",
+      "sources": [
+        "minigames/soccer-session.mjs",
+        "minigames/soccer-controls.css"
+      ],
+      "confidence": "observed-fonts; thumb-geometry-heuristic"
+    },
+    {
+      "id": "KUX-017",
+      "game": "tennis",
+      "gameLabel": "טניס בעיר",
+      "screenLabel": "משחק",
+      "screens": [
+        "tennis-playing"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "layout"
+      ],
+      "title": "הכיתוב מכה קצרה לרשת רחב מכפתורו",
+      "observation": "כל תוויות הפעולה הן 10 פיקסלים. הכיתוב מכה קצרה לרשת נמדד כ־76.67 פיקסלים בתוך כפתור שרוחבו 64, ולכן גולש לשוליו.",
+      "proposedFix": "סמל מובחן ושם קצר כמו קצרה, 14–16 פיקסלים; להגדיל יעד או לשבור לשתי שורות מתוכננות.",
+      "acceptance": "הכיתוב נשאר בתוך הכפתור ואינו דורש גופן 10 כדי להתאים.",
+      "sources": [
+        "minigames/tennis-session.mjs"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-018",
+      "game": "tennis",
+      "gameLabel": "טניס בעיר",
+      "screenLabel": "משחק",
+      "screens": [
+        "tennis-playing"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "contrast"
+      ],
+      "title": "כיתוב החבטה לא מגיע לניגודיות הנדרשת",
+      "observation": "התווית חבטה בגודל 10 פיקסלים נמדדה ביחס 3.40:1 על הרקע המלא של כפתורה.",
+      "proposedFix": "להכהות את כפתור החבטה או לשנות את צבע הכיתוב, יחד עם הגדלת הגופן.",
+      "acceptance": "יחס 4.5:1 לפחות לטקסט הפעולה במצב זמין ובמצב לחוץ.",
+      "sources": [
+        "minigames/tennis-session.mjs"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-019",
+      "game": "streetSlam",
+      "gameLabel": "ליגת העיר בכדורסל",
+      "screenLabel": "משחק והסבר מחוות",
+      "screens": [
+        "streetSlam-playing",
+        "streetSlam-after-controls"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction",
+        "typography",
+        "non-reading"
+      ],
+      "title": "שלוש מחוות למסירה נלמדות ממשפט קטן",
+      "observation": "מסירה קצרה בנגיעה, מסירת קרקע בנגיעה כפולה ורחוקה בהחזקה מוסברות בהודעה בגופן 12. שמות התפקידים על המגרש מופיעים גם כקיצורים באנגלית בגופן 10.",
+      "proposedFix": "ללמד מחווה אחת בכל שלב באימון מאויר, עם קו מסירה ותוצאה; להציע שמות/סמלים פשוטים לתפקידים.",
+      "acceptance": "אפשר לגלות ולתרגל כל מחווה בלי לקרוא משפט מרובה תנאים בזמן משחק.",
+      "sources": [
+        "minigames/hoops-session.mjs",
+        "minigames/hoops-controls.mjs"
+      ],
+      "confidence": "observed-instructions; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-020",
+      "game": "streetSlam",
+      "gameLabel": "ליגת העיר בכדורסל",
+      "screenLabel": "ניהול המועדון",
+      "screens": [
+        "streetSlam-club",
+        "streetSlam-club--scroll-07"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "layout",
+        "instruction",
+        "exit"
+      ],
+      "title": "ניהול הקבוצה מחייב גלילה ארוכה מאוד",
+      "observation": "פתיחת ניהול הקבוצה חושפת כרטיסים, מיקומים, עייפות ושדרוגים על פני שמונה תצוגות לפחות; פעולת משחק וניווט אינם נשמרים יחד באזור קבוע.",
+      "proposedFix": "להפריד כרטיס ילד קצר עם בחירה מומלצת מניהול מלא, ולהשאיר לשחק וחזרה גלויים.",
+      "acceptance": "ניתן להתחיל משחק או לצאת מהניהול בלי לגלול דרך כל שחקני הספסל.",
+      "sources": [
+        "ui/activity.mjs:198",
+        "ui/hoops-club.mjs"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-021",
+      "game": "islandRacing",
+      "gameLabel": "מרוצי העיר",
+      "screenLabel": "מרוץ",
+      "screens": [
+        "islandRacing-touch-held"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target"
+      ],
+      "title": "כפתור הכניסה לפיטס נמוך מהרף",
+      "observation": "כניסה לפיטס להחלפת צמיגים נמדד 96×40. זהו כפתור פעולה תוך כדי נהיגה, ולכן גובהו חשוב יותר מהגובה של קישור קרדיט משני.",
+      "proposedFix": "גובה 48 לפחות, מרחק 8 מההאצה והניטרו, וחיווי בקשה שאינו מוסתר באגודל.",
+      "acceptance": "הכפתור הזמין במהלך מרוץ הוא לפחות 44×44.",
+      "sources": [
+        "minigames/racing-pit-ui.mjs"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-022",
+      "game": "islandRacing",
+      "gameLabel": "מרוצי העיר",
+      "screenLabel": "לוח המשחק",
+      "screens": [
+        "islandRacing-touch-held"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "instruction"
+      ],
+      "title": "מד המהירות וההסברים זעירים וכוללים קיצורים",
+      "observation": "קמ״ש בגופן 8, האצה אוטומטית 9, ERS וטיפ ההיגוי 10. קיצורים ומונחי נהיגה מופיעים לצד כמה פעולות בו זמנית.",
+      "proposedFix": "תווית מרכזית 14–16, מטען מאויר במקום קיצור לא מוסבר, ולימוד האצה/היגוי/בלימה בצעדים.",
+      "acceptance": "הוראות חיוניות אינן קטנות מ־14, ואין צורך להבין קיצור באנגלית כדי להתחיל.",
+      "sources": [
+        "minigames/racing-speedometer.mjs",
+        "minigames/racing-controls.mjs"
+      ],
+      "confidence": "observed-fonts; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-023",
+      "game": "islandRacing",
+      "gameLabel": "מרוצי העיר",
+      "screenLabel": "טבלת העונה",
+      "screens": [
+        "islandRacing-league-season--scroll-01",
+        "islandRacing-league-season--scroll-02"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "contrast"
+      ],
+      "title": "מספרי נהגים בהירים על צבעי קבוצה בהירים",
+      "observation": "מספרי חולצות/נהגים בטבלת העונה נמדדו בין היתר 1.26:1, 1.68:1 ו־1.81:1 בגודל 15.2. לא כל הצבעים שומרים על קריאות אחידה.",
+      "proposedFix": "לבחור דיו כהה/בהיר לפי בהירות צבע הקבוצה או להציב את המספר על תג אטום קבוע.",
+      "acceptance": "יחס לפחות 4.5:1 לכל המספרים בכל צבעי הקבוצות.",
+      "sources": [
+        "ui/racing-league.mjs"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-024",
+      "game": "boarDefense",
+      "gameLabel": "אי החזירים",
+      "screenLabel": "תפריט ראשי",
+      "screens": [
+        "boarDefense-campaign-menu"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target",
+        "exit"
+      ],
+      "title": "העזרה, הרגישות והחזרה לעיר בגובה 32 בלבד",
+      "observation": "בתפריט הפנימי נמדדו איך משחקים, איכות, רגישות וחזרה לעיר בגובה 32. חזרה לעיר ברוחב כ־50, וכותרות/הערת השמירה מגיעות ל־9–10 פיקסלים.",
+      "proposedFix": "שורות קישורים בגובה 48, פיצול לשתי שורות ברוחב זה, והפרדה בולטת של החזרה לעיר.",
+      "acceptance": "היציאה והעזרה עומדות ב־44×44 ומובחנות מהגדרות טכניות.",
+      "sources": [
+        "minigames/boar-island/index.html:26",
+        "minigames/boar-island/game.js:1107",
+        "minigames/boar-island/style.css"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-025",
+      "game": "boarDefense",
+      "gameLabel": "אי החזירים",
+      "screenLabel": "מוסך ונשקים",
+      "screens": [
+        "boarDefense-shop",
+        "boarDefense-shop--scroll-04"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target",
+        "layout",
+        "exit"
+      ],
+      "title": "במוסך כפתורי הקנייה והלשוניות קטנים ונחתכים",
+      "observation": "הלשוניות נשקים וביצורים הן בגובה 39 וכפתורי קנייה 38. בתצוגה העליונה נשארו כ־15.8 פיקסלים נראים מכפתורי הקנייה של השורה הראשונה. הכפתור לגל הבא וחזרה נמצאים בסוף מסמך גלילה בגובה 1471.",
+      "proposedFix": "גובה 48 ללשוניות ולרכישה, ושורת פעולות קבועה לגל הבא/חזרה; להציג פחות נתוני נשק בכרטיס הראשי.",
+      "acceptance": "אפשר לקנות, לחזור או להתחיל גל בלי לחפש כפתור חתוך ובלי לעבור דרך כל הכרטיסים.",
+      "sources": [
+        "minigames/boar-island/index.html:29",
+        "minigames/boar-island/style.css"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-026",
+      "game": "boarDefense",
+      "gameLabel": "אי החזירים",
+      "screenLabel": "תדריך פנימי",
+      "screens": [
+        "boarDefense-help",
+        "boarDefense-help--scroll-01"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction",
+        "typography",
+        "non-reading"
+      ],
+      "title": "התדריך הנייד כולל עומס של מקשי מחשב",
+      "observation": "בתדריך הפנימי נדרשת גלילה דרך פסקאות וטבלת מקשים כגון Q, E, R ורווח. ההסבר לטלפון הוא משפט מילולי על ג׳ויסטיק וירי, ללא הדגמה פעילה של שתי אצבעות.",
+      "proposedFix": "תדריך נייד נפרד: ציור אגודל שמאל מכוון וימין יורה, הדגמת פגיעה וקול קצר; מקשי המחשב רק במחשב.",
+      "acceptance": "ילד מצליח להבין את חלוקת הידיים בלי לקרוא הוראות מקלדת.",
+      "sources": [
+        "minigames/boar-island/index.html:37"
+      ],
+      "confidence": "observed-help; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-027",
+      "game": "learning",
+      "gameLabel": "למידה",
+      "screenLabel": "שאלת שפה",
+      "screens": [
+        "learning-language-question"
+      ],
+      "severity": "P1",
+      "dimensions": [
+        "audio",
+        "instruction",
+        "non-reading"
+      ],
+      "title": "אין מסלול ללא קריאה כשחסר קול עברי בגיל 7",
+      "observation": "בגיל 7 רמת הפתיחה היא 4. בהרצה ללא קול עברי זמין הופיעה שאלת שפה עם תשובות כתובות וכפתור רמקול, ללא הקראת שאלה בפועל. החלופה החזותית בקוד מוגבלת לרמות 1–2.",
+      "proposedFix": "הקלטות מוכנות לשאלות החיוניות, או חלופה חזותית גם ברמה 4; להראות בבירור כשקול אינו זמין.",
+      "acceptance": "במכשיר ללא קול עברי אפשר להבין מה נדרש בלי להסתמך על כפתור רמקול שאינו משמיע את השאלה.",
+      "sources": [
+        "learning/interface.mjs:83",
+        "learning/voice.mjs",
+        "learning/state.mjs:8"
+      ],
+      "confidence": "observed-with-no-Hebrew-voice; device-dependent"
+    },
+    {
+      "id": "KUX-028",
+      "game": "island",
+      "gameLabel": "האי והעיר",
+      "screenLabel": "נעילת משחקים יומית",
+      "screens": [
+        "island-26-daily-locked"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction",
+        "non-reading"
+      ],
+      "title": "נעילת המשחקים מוסברת כהוראה ארוכה",
+      "observation": "במצב יום נוסף בגיל 7, המשחקים דורשים שני סבבים של שמונה שאלות. הסיבה והכמות מוסברות בטקסט 13 פיקסלים; אין רצף מאויר של שני סבבים שמוביל למשחק שבחר הילד.",
+      "proposedFix": "להציג שני צעדים מאוירים והבטחה ברורה לחזרה למשחק שנבחר, עם הסבר קולי קצר.",
+      "acceptance": "הילד מבין למה המשחק נעול, כמה נשאר ואיך חוזרים אליו, בלי לקרוא פסקה.",
+      "sources": [
+        "learning/interface.mjs:38",
+        "learning/state.mjs:11"
+      ],
+      "confidence": "observed-flow; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-029",
+      "game": "alpineRush",
+      "gameLabel": "מרוץ סנובורד",
+      "screenLabel": "מסלול ליגה",
+      "screens": [
+        "alpineRush-league-live"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography"
+      ],
+      "title": "שמות הטריקים הם בגודל 9 פיקסלים",
+      "observation": "תפיסה, סיבוב, סלטה ושילוב נמדדו 9; הסבר טריקים באוויר 11. יעדי הטריקים עצמם כ־67×67, כך שהקושי הוא קריאה ולימוד ולא גודל הלחיצה.",
+      "proposedFix": "שמות 14–16 ודמות קטנה שמדגימה את הטריק לפני הפעלתו; להדגיש רק את הפעולה הזמינה כעת.",
+      "acceptance": "אין צורך לפענח כיתוב זעיר בזמן קפיצה.",
+      "sources": [
+        "minigames/alpine-hud.mjs",
+        "minigames/alpine-session.mjs:205"
+      ],
+      "confidence": "observed-fonts; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-030",
+      "game": "alpineRush",
+      "gameLabel": "מרוץ סנובורד",
+      "screenLabel": "לוח יעדי הליגה",
+      "screens": [
+        "alpineRush-league-live"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "rtl",
+        "instruction"
+      ],
+      "title": "היעד מקום 6/3 נראה כשבר לא הגיוני",
+      "observation": "בחיווי יעד הליגה הופיע מקום 6/3: מיקום נוכחי 6 מול יעד 3. שתי המשמעויות אינן כתובות, והשימוש בלוכסן נראה כמו מקום שישי מתוך שלושה. זהו קושי במשמעות המספרים, לא הוכחה שכל כיוון העברית הפוך.",
+      "proposedFix": "להפריד במילים או סמלים: עכשיו מקום 6; כדי לעבור — מקום 3 ומעלה.",
+      "acceptance": "ברור איזה מספר הוא המצב הנוכחי ואיזה הוא תנאי ההצלחה.",
+      "sources": [
+        "minigames/alpine-session.mjs",
+        "minigames/alpine-league-stages.mjs"
+      ],
+      "confidence": "observed-label; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-031",
+      "game": "fireRescue",
+      "gameLabel": "כיבוי שריפה",
+      "screenLabel": "חדר כיבוי רב כלים",
+      "screens": [
+        "fireRescue-entry-12-clock"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "instruction"
+      ],
+      "title": "תוויות כלי הכיבוי בתוך הבניין זעירות",
+      "observation": "צינור מים, מטף ושמיכת כיבוי נמדדו 9 פיקסלים. הכפתורים עצמם 56×56 ויש סמלים, אך ההבחנה בין כלים חדשים נשענת גם על התווית.",
+      "proposedFix": "תוויות 14 לפחות או כרטיס כלי מוגדל בהחלפה, עם הקראה והדגמת שימוש; לשמור על הגדלים הטובים של היעדים.",
+      "acceptance": "ניתן לזהות כלי חדש לפני לחיצה בלי לקרוא טקסט בגודל 9.",
+      "sources": [
+        "minigames/fire-v24-session.mjs:36",
+        "minigames/fire-v24.css"
+      ],
+      "confidence": "observed-fonts; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-032",
+      "game": "alienDefense",
+      "gameLabel": "הגנה מפני חייזרים",
+      "screenLabel": "משחק",
+      "screens": [
+        "alienDefense-playing"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "instruction"
+      ],
+      "title": "שמות הנשקים והגל קטנים בזמן הטיסה",
+      "observation": "ירי רגיל וולקן מופיעים בגופן 10, ומספר הגל 11. בכפתורים יש סמלים וצבעים, אך ההבדל בין ירי רגיל, ירי מיוחד ומתג נשק אינו נלמד בהדגמה באותו מסך.",
+      "proposedFix": "תווית נשק 14–16, חיווי תחמושת ברור ליד האצבע והיכרות חזותית עם כל נשק בתורו.",
+      "acceptance": "אפשר להבין מה יירה ומה יתחלף לפני מגע, בלי לקרוא כיתוב 10 פיקסלים בזמן טיסה.",
+      "sources": [
+        "minigames/alien-session.mjs",
+        "minigames/alien-flight-input-hud.mjs"
+      ],
+      "confidence": "observed-fonts; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-033",
+      "game": "navalDuel",
+      "gameLabel": "קרב ספינות",
+      "screenLabel": "לוח המשחק",
+      "screens": [
+        "navalDuel-canvas-text"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "instruction"
+      ],
+      "title": "השעון וההכוונה בספינות מצוירים קטנים",
+      "observation": "מדידת קריאות ציור הקנבס מצאה שעון 10 פיקסלים, אחוזי גוף הספינה 11, מלאי 13 וההוראה געו בספינה או בכפתור הנעילה 12. אלה מידות CSS לאחר התמרת הקנבס, ולא רק גדלי טקסט ב־DOM.",
+      "proposedFix": "הוראות 14–16 ושעון ברור יותר, עם חיווי חזותי/קולי לנעילה לפני ירי.",
+      "acceptance": "טקסט ההכוונה קריא בזמן תנועה ואינו מחייב להבחין בתווית 10–12 פיקסלים.",
+      "sources": [
+        "minigames/naval-hud.mjs:78",
+        "minigames/naval-hud.mjs:34"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-034",
+      "game": "navalDuel",
+      "gameLabel": "קרב ספינות",
+      "screenLabel": "בחירת תחמושת",
+      "screens": [
+        "navalDuel-weapon-picker",
+        "navalDuel-weapon-changed"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction",
+        "non-reading",
+        "layout"
+      ],
+      "title": "בחירת התחמושת נשענת על סמלים ומספרים בלבד",
+      "observation": "מגירת התחמושת מציגה שישה סמלים ומספרי מלאי, בלי שם או הדגמה נראים. שמות קיימים במאפייני הנגישות/ריחוף. המגירה נמצאת גם על אזור הספינה היריבה במבט שנבדק.",
+      "proposedFix": "להוסיף תצוגה קצרה של מה הנשק עושה, עם משפט מוקלט ובחירה נראית; למקם את המגירה כך שאינה מכסה את המטרה.",
+      "acceptance": "אפשר להבדיל בין סוגי ירי חדשים בלי ריחוף עכבר ובלי לנחש מה מספר המלאי מסביר.",
+      "sources": [
+        "minigames/naval-hud.mjs:185"
+      ],
+      "confidence": "observed-layout; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-035",
+      "game": "catchCriminal",
+      "gameLabel": "תפוס את הפושע",
+      "screenLabel": "הדרכה פנימית למרדף",
+      "screens": [
+        "catchCriminal-in-game-help"
+      ],
+      "severity": "P1",
+      "dimensions": [
+        "instruction",
+        "non-reading"
+      ],
+      "title": "לפני המרדף מופיע תדריך ארוך מרובה מחוות",
+      "observation": "תדריך הפתיחה הפנימי כולל ארבע פסקאות: היגוי, כיוון הטיה, טורבו/בלם, שישה כלים, טבעות מיקוד והשלכה בהחזקה ושחרור. אין בו אימון קצר שמאפשר לבצע פעולה אחת לפני שמתחילים.",
+      "proposedFix": "שלושה צעדים מעשיים: היגוי, כלי אחד ולכידה; בכל צעד אצבע מונפשת, תוצאה וקול. להציג כלים נוספים בהדרגה.",
+      "acceptance": "ילד שאינו קורא יכול להתחיל מרדף ולבצע לכידה בסיסית בלי לפענח את הפסקאות.",
+      "sources": [
+        "minigames/catch-session6.mjs:159"
+      ],
+      "confidence": "observed-help; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-036",
+      "game": "catchCriminal",
+      "gameLabel": "תפוס את הפושע",
+      "screenLabel": "שלב לכידה",
+      "screens": [
+        "catchCriminal-capture-aim"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "typography",
+        "instruction"
+      ],
+      "title": "הבחירה בין רשת צרה לרחבה קטנה ומוסברת רק בטקסט עזר",
+      "observation": "שמות רשת צרה ורשת רחבה נמדדו 11 פיקסלים בתוך יעדים בגובה כ־54. ההבדל בטווח ובדיוק נמצא בתיאור הנגישות/הוראות; הסמלים דומים.",
+      "proposedFix": "להציג קונוס/טווח לדוגמה בכל בחירה, תווית 14 לפחות ומשפט קצר שמסביר למה לבחור בכל כלי.",
+      "acceptance": "לפני השלכה נראים ההבדלים בין הרשתות בלי להסתמך על טקסט 11 או על ריחוף.",
+      "sources": [
+        "minigames/catch-session6.mjs:151"
+      ],
+      "confidence": "observed-fonts; comprehension-heuristic"
+    },
+    {
+      "id": "KUX-037",
+      "game": "learning",
+      "gameLabel": "למידה",
+      "screenLabel": "משחק זיכרון",
+      "screens": [
+        "learning-variant-memory"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "spacing"
+      ],
+      "title": "קלפי הזיכרון עומדים במינימום אך כמעט צמודים",
+      "observation": "בגיל 7 וברמה 4 נמדדו 12 קלפים בגודל 62×44 ורווח 4 בלבד, אופקית ואנכית. הם עומדים במינימום הלחיצה המבוקש, אך אין מרווח סלחני לילד.",
+      "proposedFix": "רווח 8 וגובה 52–56 לקלפים, תוך שמירת הלוח והיציאה באותו חלון.",
+      "acceptance": "לפחות 8 בין קלפים לפי כלל הביקורת; משוב פתיחת הקלף נשאר מיידי.",
+      "sources": [
+        "learning/learning.css:14"
+      ],
+      "confidence": "observed-spacing; child-motor-heuristic"
+    },
+    {
+      "id": "KUX-038",
+      "game": "learning",
+      "gameLabel": "למידה",
+      "screenLabel": "פאזל",
+      "screens": [
+        "learning-variant-jigsaw",
+        "learning-variant-jigsaw-touched"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "instruction",
+        "non-reading"
+      ],
+      "title": "הפאזל אינו מדגים שמחליפים חלקים בשתי לחיצות",
+      "observation": "הכותרת אומרת להרכיב את תמונת העיר, אך הפעולה היא בחירת שני חלקים להחלפה, ולא גרירה של חלק למקומו. ההסבר המדויק מופיע ברמז כתוב/קולי, ובמכשיר ללא קול אינו נלמד ללא קריאה.",
+      "proposedFix": "להדגים פעם אחת שתי נגיעות והחלפה, או לאפשר גם גרירה טבעית עם יעד נחיתה מודגש.",
+      "acceptance": "אפשר לגלות את המחווה בלי לקרוא רמז; החלק הראשון שנבחר נשאר מודגש.",
+      "sources": [
+        "learning/interface.mjs:103"
+      ],
+      "confidence": "observed-interaction; discoverability-heuristic"
+    },
+    {
+      "id": "KUX-039",
+      "game": "streetSlam",
+      "gameLabel": "ליגת העיר בכדורסל",
+      "screenLabel": "בקשת פסק זמן",
+      "screens": [
+        "streetSlam-timeout"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "feedback",
+        "instruction"
+      ],
+      "title": "פסק זמן נראה זמין אך הבקשה נדחית בלי הסבר",
+      "observation": "בבדיקת נגיעה, פסק זמן נשאר כפתור זמין אך לא נפתח ספסל: המצב שנשמר היה משחק חי, הכדור בידי היריב, ונותרו 7 פסקי זמן. המנוע מחזיר ok:false בתנאי זה בלי סיבת דחייה, והכפתור אינו מסביר את תנאי ההחזקה.",
+      "proposedFix": "להציג סיבה קצרה כמו פסק זמן רק כשהכדור שלכם, או מצב לא זמין מוסבר עם חיווי מיידי לאחר בקשה.",
+      "acceptance": "נגיעה שאינה חוקית נותנת הסבר ולא נראית ככפתור שאינו מגיב. במצב החזקה חוקי נפתח הספסל.",
+      "sources": [
+        "minigames/hoops-engine.mjs:300",
+        "minigames/hoops-controls.mjs:216",
+        "minigames/hoops-session.mjs:154"
+      ],
+      "confidence": "observed"
+    },
+    {
+      "id": "KUX-040",
+      "game": "streetSlam",
+      "gameLabel": "ליגת העיר בכדורסל",
+      "screenLabel": "ספסל חילופים בזמן פסק זמן",
+      "screens": [
+        "streetSlam-timeout-bench"
+      ],
+      "severity": "P2",
+      "dimensions": [
+        "touch-target",
+        "exit"
+      ],
+      "title": "סגירת ספסל החילופים צרה מדרישת המינימום",
+      "observation": "במצב פסק זמן חוקי נמדדה סגירת הספסל 40×56. זוהי צלמית ללא כיתוב נראה, ליד כרטיסי שחקנים בגודל נדיב יותר. המסך הוצג ממצב מנוע חוקי בדיוני מוקפא; נגיעות החלפה נבדקו בפועל בתוך מצב זה.",
+      "proposedFix": "רוחב 48 לפחות וכיתוב חזרה למשחק, כדי להבדיל מסגירת המשחק וחזרה לאי.",
+      "acceptance": "יעד הסגירה לפחות 44×44 וניתן לזהות שהוא מחזיר למגרש.",
+      "sources": [
+        "minigames/hoops-session.mjs:161",
+        "minigames/hoops-session.mjs:168"
+      ],
+      "confidence": "observed"
+    }
+  ],
+  "feedbackMeasurements": [
+    {
+      "game": "alienDefense",
+      "count": 12,
+      "primaryControl": "#shoot",
+      "medianMs": 114.0,
+      "p95Ms": 296.3,
+      "maxMs": 296.3,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "fireRescue",
+      "count": 12,
+      "primaryControl": "#shoot",
+      "medianMs": 256.5,
+      "p95Ms": 894.8,
+      "maxMs": 894.8,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "navalDuel",
+      "count": 12,
+      "primaryControl": "#shoot",
+      "medianMs": 158.4,
+      "p95Ms": 519.7,
+      "maxMs": 519.7,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "soccer",
+      "count": 12,
+      "primaryControl": "#shoot",
+      "medianMs": 103.9,
+      "p95Ms": 169.9,
+      "maxMs": 169.9,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "tennis",
+      "count": 12,
+      "primaryControl": "#shoot",
+      "medianMs": 210.6,
+      "p95Ms": 246.5,
+      "maxMs": 246.5,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "islandRacing",
+      "count": 12,
+      "primaryControl": "[data-game-control=nitro]",
+      "medianMs": 1088.6,
+      "p95Ms": 1164.4,
+      "maxMs": 1164.4,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "streetSlam",
+      "count": 8,
+      "primaryControl": null,
+      "medianMs": 282.6,
+      "p95Ms": 377.6,
+      "maxMs": 377.6,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "alpineRush",
+      "count": 12,
+      "primaryControl": "[data-game-control=boost]",
+      "medianMs": 756.7,
+      "p95Ms": 1170.4,
+      "maxMs": 1170.4,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "boarDefense",
+      "count": 8,
+      "primaryControl": null,
+      "medianMs": 913.3,
+      "p95Ms": 1350.5,
+      "maxMs": 1350.5,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    },
+    {
+      "game": "catchCriminal",
+      "count": 8,
+      "primaryControl": null,
+      "medianMs": 141.6,
+      "p95Ms": 176.5,
+      "maxMs": 176.5,
+      "metric": "built-in pointerdown-to-press-feedback RAF callback; software renderer, not hardware latency"
+    }
+  ],
+  "screens": [
+    {
+      "id": "island-01-avatar-first-use",
+      "game": "island",
+      "state": "island-01-avatar-first-use",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-01-avatar-first-use.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-011"
+      ]
+    },
+    {
+      "id": "island-01-avatar-first-use--scroll-01",
+      "game": "island",
+      "state": "island-01-avatar-first-use--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-01-avatar-first-use--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": [
+        "KUX-011"
+      ]
+    },
+    {
+      "id": "island-01-avatar-first-use--scroll-02",
+      "game": "island",
+      "state": "island-01-avatar-first-use--scroll-02",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-01-avatar-first-use--scroll-02.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "island-01-avatar-first-use--scroll-03",
+      "game": "island",
+      "state": "island-01-avatar-first-use--scroll-03",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-01-avatar-first-use--scroll-03.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "island-02-first-city",
+      "game": "island",
+      "state": "island-02-first-city",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-02-first-city.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": [
+        "KUX-009"
+      ]
+    },
+    {
+      "id": "island-03-tutorial-tasks",
+      "game": "island",
+      "state": "island-03-tutorial-tasks",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-03-tutorial-tasks.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": [
+        "KUX-012"
+      ]
+    },
+    {
+      "id": "island-04-more",
+      "game": "island",
+      "state": "island-04-more",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-04-more.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "island-05-help-toast",
+      "game": "island",
+      "state": "island-05-help-toast",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-05-help-toast.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "island-06-map",
+      "game": "island",
+      "state": "island-06-map",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-06-map.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": [
+        "KUX-009",
+        "KUX-010"
+      ]
+    },
+    {
+      "id": "island-06-map--scroll-01",
+      "game": "island",
+      "state": "island-06-map--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-06-map--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "island-07-tour",
+      "game": "island",
+      "state": "island-07-tour",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-07-tour.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "island-08-city-stats",
+      "game": "island",
+      "state": "island-08-city-stats",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-08-city-stats.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": [
+        "KUX-013"
+      ]
+    },
+    {
+      "id": "island-08-city-stats--scroll-01",
+      "game": "island",
+      "state": "island-08-city-stats--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-08-city-stats--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "island-09-scores",
+      "game": "island",
+      "state": "island-09-scores",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-09-scores.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "island-09-scores--scroll-01",
+      "game": "island",
+      "state": "island-09-scores--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-09-scores--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "island-10-training-hub",
+      "game": "island",
+      "state": "island-10-training-hub",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-10-training-hub.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "island-10-training-hub--scroll-01",
+      "game": "island",
+      "state": "island-10-training-hub--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-10-training-hub--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "island-11-first-daily",
+      "game": "island",
+      "state": "island-11-first-daily",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-11-first-daily.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "island-11-first-daily--scroll-01",
+      "game": "island",
+      "state": "island-11-first-daily--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-11-first-daily--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "island-12-parent-settings",
+      "game": "island",
+      "state": "island-12-parent-settings",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-12-parent-settings.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "island-12-parent-settings--scroll-01",
+      "game": "island",
+      "state": "island-12-parent-settings--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-12-parent-settings--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "island-12-parent-settings--scroll-02",
+      "game": "island",
+      "state": "island-12-parent-settings--scroll-02",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-12-parent-settings--scroll-02.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "island-13-parent-age-7",
+      "game": "island",
+      "state": "island-13-parent-age-7",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-13-parent-age-7.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "island-14-reset-confirmation",
+      "game": "island",
+      "state": "island-14-reset-confirmation",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-14-reset-confirmation.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "island-14-reset-confirmation--scroll-01",
+      "game": "island",
+      "state": "island-14-reset-confirmation--scroll-01",
+      "fixture": "fresh-install",
+      "screenshot": "screenshots/island-14-reset-confirmation--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "island-15-progressed-city",
+      "game": "island",
+      "state": "island-15-progressed-city",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-15-progressed-city.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "island-16-avatar-edit",
+      "game": "island",
+      "state": "island-16-avatar-edit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-16-avatar-edit.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": []
+    },
+    {
+      "id": "island-16-avatar-edit--scroll-01",
+      "game": "island",
+      "state": "island-16-avatar-edit--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-16-avatar-edit--scroll-01.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "island-16-avatar-edit--scroll-02",
+      "game": "island",
+      "state": "island-16-avatar-edit--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-16-avatar-edit--scroll-02.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 28,
+      "findingIds": []
+    },
+    {
+      "id": "island-16-avatar-edit--scroll-03",
+      "game": "island",
+      "state": "island-16-avatar-edit--scroll-03",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-16-avatar-edit--scroll-03.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 29,
+      "findingIds": []
+    },
+    {
+      "id": "island-17-catalog-basic",
+      "game": "island",
+      "state": "island-17-catalog-basic",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-17-catalog-basic.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 30,
+      "findingIds": []
+    },
+    {
+      "id": "island-17-catalog-services",
+      "game": "island",
+      "state": "island-17-catalog-services",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-17-catalog-services.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 31,
+      "findingIds": []
+    },
+    {
+      "id": "island-17-catalog-sports",
+      "game": "island",
+      "state": "island-17-catalog-sports",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-17-catalog-sports.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 32,
+      "findingIds": []
+    },
+    {
+      "id": "island-17-catalog-defense",
+      "game": "island",
+      "state": "island-17-catalog-defense",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-17-catalog-defense.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 33,
+      "findingIds": []
+    },
+    {
+      "id": "island-17-catalog-learning",
+      "game": "island",
+      "state": "island-17-catalog-learning",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-17-catalog-learning.png",
+      "evidenceFile": "evidence-island.json",
+      "evidenceScreenIndex": 34,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-instructions",
+      "game": "soccer",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-instructions.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005",
+        "KUX-015"
+      ]
+    },
+    {
+      "id": "soccer-instructions--scroll-01",
+      "game": "soccer",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-instructions--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-instructions-replay",
+      "game": "soccer",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-instructions-replay.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": [
+        "KUX-006"
+      ]
+    },
+    {
+      "id": "soccer-home",
+      "game": "soccer",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-home.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": [
+        "KUX-002"
+      ]
+    },
+    {
+      "id": "soccer-stages",
+      "game": "soccer",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-stages.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": [
+        "KUX-015"
+      ]
+    },
+    {
+      "id": "soccer-stages--scroll-01",
+      "game": "soccer",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-stages--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-upgrades",
+      "game": "soccer",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-upgrades.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-upgrades--scroll-01",
+      "game": "soccer",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-equipment",
+      "game": "soccer",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-equipment.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-equipment--scroll-01",
+      "game": "soccer",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-equipment--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-training",
+      "game": "soccer",
+      "state": "training",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-training.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-training--scroll-01",
+      "game": "soccer",
+      "state": "training",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-training--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-rosters",
+      "game": "soccer",
+      "state": "rosters",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-rosters.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-rosters--scroll-01",
+      "game": "soccer",
+      "state": "rosters",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-rosters--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-rosters--scroll-02",
+      "game": "soccer",
+      "state": "rosters",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-rosters--scroll-02.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-team",
+      "game": "soccer",
+      "state": "team",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-team.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-team--scroll-01",
+      "game": "soccer",
+      "state": "team",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-team--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-team--scroll-02",
+      "game": "soccer",
+      "state": "team",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-team--scroll-02.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-starting",
+      "game": "soccer",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-starting.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-playing",
+      "game": "soccer",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-playing.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": [
+        "KUX-016"
+      ]
+    },
+    {
+      "id": "soccer-touch-held",
+      "game": "soccer",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-touch-held.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": [
+        "KUX-016"
+      ]
+    },
+    {
+      "id": "soccer-after-controls",
+      "game": "soccer",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-after-controls.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-pause",
+      "game": "soccer",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-pause.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": [
+        "KUX-007"
+      ]
+    },
+    {
+      "id": "soccer-after-exit",
+      "game": "soccer",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-after-exit.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-result-win",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/soccer-result-win.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": [
+        "KUX-008"
+      ]
+    },
+    {
+      "id": "soccer-result-win--scroll-01",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/soccer-result-win--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-result-win--scroll-02",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/soccer-result-win--scroll-02.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": [
+        "KUX-008"
+      ]
+    },
+    {
+      "id": "soccer-result-lose",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/soccer-result-lose.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-result-lose--scroll-01",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/soccer-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 28,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-result-lose--scroll-02",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/soccer-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 29,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-result-lose--scroll-03",
+      "game": "soccer",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/soccer-result-lose--scroll-03.png",
+      "evidenceFile": "evidence-soccer.json",
+      "evidenceScreenIndex": 30,
+      "findingIds": []
+    },
+    {
+      "id": "games-library",
+      "game": "library",
+      "state": "games-library",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/games-library.png",
+      "evidenceFile": "evidence-library.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-001",
+        "KUX-002",
+        "KUX-003"
+      ]
+    },
+    {
+      "id": "games-library--scroll-01",
+      "game": "library",
+      "state": "games-library--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/games-library--scroll-01.png",
+      "evidenceFile": "evidence-library.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": [
+        "KUX-004"
+      ]
+    },
+    {
+      "id": "streetSlam-instructions",
+      "game": "streetSlam",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-instructions.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005"
+      ]
+    },
+    {
+      "id": "streetSlam-instructions--scroll-01",
+      "game": "streetSlam",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-instructions--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-instructions-replay",
+      "game": "streetSlam",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-instructions-replay.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": [
+        "KUX-006"
+      ]
+    },
+    {
+      "id": "streetSlam-home",
+      "game": "streetSlam",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-home.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": [
+        "KUX-002"
+      ]
+    },
+    {
+      "id": "streetSlam-stages",
+      "game": "streetSlam",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-stages.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-stages--scroll-01",
+      "game": "streetSlam",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-stages--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-upgrades",
+      "game": "streetSlam",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-upgrades.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-upgrades--scroll-01",
+      "game": "streetSlam",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-equipment",
+      "game": "streetSlam",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-equipment.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-equipment--scroll-01",
+      "game": "streetSlam",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-equipment--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": [
+        "KUX-020"
+      ]
+    },
+    {
+      "id": "streetSlam-club--scroll-01",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-02",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-02.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-03",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-03.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-04",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-04.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-05",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-05.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-06",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-06.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-club--scroll-07",
+      "game": "streetSlam",
+      "state": "club management",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-club--scroll-07.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": [
+        "KUX-020"
+      ]
+    },
+    {
+      "id": "streetSlam-starting",
+      "game": "streetSlam",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-starting.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-playing",
+      "game": "streetSlam",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-playing.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": [
+        "KUX-019"
+      ]
+    },
+    {
+      "id": "streetSlam-touch-held",
+      "game": "streetSlam",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-touch-held.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-after-controls",
+      "game": "streetSlam",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-after-controls.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": [
+        "KUX-019"
+      ]
+    },
+    {
+      "id": "streetSlam-pause",
+      "game": "streetSlam",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-pause.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": [
+        "KUX-007"
+      ]
+    },
+    {
+      "id": "streetSlam-after-exit",
+      "game": "streetSlam",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-after-exit.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-result-win",
+      "game": "streetSlam",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/streetSlam-result-win.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-result-win--scroll-01",
+      "game": "streetSlam",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/streetSlam-result-win--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-result-lose",
+      "game": "streetSlam",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/streetSlam-result-lose.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": [
+        "KUX-008"
+      ]
+    },
+    {
+      "id": "streetSlam-result-lose--scroll-01",
+      "game": "streetSlam",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/streetSlam-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-result-lose--scroll-02",
+      "game": "streetSlam",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/streetSlam-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-streetSlam.json",
+      "evidenceScreenIndex": 28,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-instructions",
+      "game": "tennis",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-instructions.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005"
+      ]
+    },
+    {
+      "id": "tennis-instructions--scroll-01",
+      "game": "tennis",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-instructions--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-instructions-replay",
+      "game": "tennis",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-instructions-replay.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": [
+        "KUX-006"
+      ]
+    },
+    {
+      "id": "tennis-home",
+      "game": "tennis",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-home.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": [
+        "KUX-002"
+      ]
+    },
+    {
+      "id": "tennis-stages",
+      "game": "tennis",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-stages.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-stages--scroll-01",
+      "game": "tennis",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-stages--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-stages--scroll-02",
+      "game": "tennis",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-stages--scroll-02.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-stages--scroll-03",
+      "game": "tennis",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-stages--scroll-03.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-stages--scroll-04",
+      "game": "tennis",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-stages--scroll-04.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-upgrades",
+      "game": "tennis",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-upgrades.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-upgrades--scroll-01",
+      "game": "tennis",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-equipment",
+      "game": "tennis",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-equipment.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-equipment--scroll-01",
+      "game": "tennis",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-equipment--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-starting",
+      "game": "tennis",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-starting.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-playing",
+      "game": "tennis",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-playing.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": [
+        "KUX-017",
+        "KUX-018"
+      ]
+    },
+    {
+      "id": "tennis-touch-held",
+      "game": "tennis",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-touch-held.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-after-controls",
+      "game": "tennis",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-after-controls.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-pause",
+      "game": "tennis",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-pause.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": [
+        "KUX-007"
+      ]
+    },
+    {
+      "id": "tennis-after-exit",
+      "game": "tennis",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/tennis-after-exit.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-result-win",
+      "game": "tennis",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/tennis-result-win.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": [
+        "KUX-008"
+      ]
+    },
+    {
+      "id": "tennis-result-win--scroll-01",
+      "game": "tennis",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/tennis-result-win--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-result-lose",
+      "game": "tennis",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/tennis-result-lose.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-result-lose--scroll-01",
+      "game": "tennis",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/tennis-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "tennis-result-lose--scroll-02",
+      "game": "tennis",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/tennis-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-tennis.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-instructions",
+      "game": "alpineRush",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-instructions.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005"
+      ]
+    },
+    {
+      "id": "alpineRush-instructions--scroll-01",
+      "game": "alpineRush",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-instructions--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-instructions-replay",
+      "game": "alpineRush",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-instructions-replay.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-home",
+      "game": "alpineRush",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-home.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-stages",
+      "game": "alpineRush",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-stages.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-stages--scroll-01",
+      "game": "alpineRush",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-stages--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-stages--scroll-02",
+      "game": "alpineRush",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-stages--scroll-02.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-upgrades",
+      "game": "alpineRush",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-upgrades.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-upgrades--scroll-01",
+      "game": "alpineRush",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-equipment",
+      "game": "alpineRush",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-equipment.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-equipment--scroll-01",
+      "game": "alpineRush",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-equipment--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-season",
+      "game": "alpineRush",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-season.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-season--scroll-01",
+      "game": "alpineRush",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-season--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-season--scroll-02",
+      "game": "alpineRush",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-season--scroll-02.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-season--scroll-03",
+      "game": "alpineRush",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-season--scroll-03.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-shop",
+      "game": "alpineRush",
+      "state": "league shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-shop.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-shop--scroll-01",
+      "game": "alpineRush",
+      "state": "league shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-shop--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-starting",
+      "game": "alpineRush",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-starting.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-playing",
+      "game": "alpineRush",
+      "state": "internal start card before downhill run",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-playing.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-touch-held",
+      "game": "alpineRush",
+      "state": "internal start card before downhill run",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-touch-held.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-after-controls",
+      "game": "alpineRush",
+      "state": "internal start card before downhill run",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-after-controls.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-pause",
+      "game": "alpineRush",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-pause.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": [
+        "KUX-007"
+      ]
+    },
+    {
+      "id": "alpineRush-after-exit",
+      "game": "alpineRush",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-after-exit.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-result-win",
+      "game": "alpineRush",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/alpineRush-result-win.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-result-win--scroll-01",
+      "game": "alpineRush",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/alpineRush-result-win--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-result-lose",
+      "game": "alpineRush",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alpineRush-result-lose.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-result-lose--scroll-01",
+      "game": "alpineRush",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alpineRush-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-result-lose--scroll-02",
+      "game": "alpineRush",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alpineRush-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-alpineRush.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-instructions",
+      "game": "islandRacing",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-instructions.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005"
+      ]
+    },
+    {
+      "id": "islandRacing-instructions--scroll-01",
+      "game": "islandRacing",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-instructions--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-instructions-replay",
+      "game": "islandRacing",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-instructions-replay.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-home",
+      "game": "islandRacing",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-home.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-stages",
+      "game": "islandRacing",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-stages.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-stages--scroll-01",
+      "game": "islandRacing",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-stages--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-upgrades",
+      "game": "islandRacing",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-upgrades.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-upgrades--scroll-01",
+      "game": "islandRacing",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-equipment",
+      "game": "islandRacing",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-equipment.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-equipment--scroll-01",
+      "game": "islandRacing",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-equipment--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-season",
+      "game": "islandRacing",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-season.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-season--scroll-01",
+      "game": "islandRacing",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-season--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": [
+        "KUX-023"
+      ]
+    },
+    {
+      "id": "islandRacing-league-season--scroll-02",
+      "game": "islandRacing",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-season--scroll-02.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": [
+        "KUX-023"
+      ]
+    },
+    {
+      "id": "islandRacing-league-season--scroll-03",
+      "game": "islandRacing",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-season--scroll-03.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-season--scroll-04",
+      "game": "islandRacing",
+      "state": "league season",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-season--scroll-04.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-shop",
+      "game": "islandRacing",
+      "state": "league shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-shop.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-shop--scroll-01",
+      "game": "islandRacing",
+      "state": "league shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-shop--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-starting",
+      "game": "islandRacing",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-starting.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-playing",
+      "game": "islandRacing",
+      "state": "race introduction / start countdown and controls",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-playing.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-touch-held",
+      "game": "islandRacing",
+      "state": "race introduction / start countdown and controls",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-touch-held.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": [
+        "KUX-021",
+        "KUX-022"
+      ]
+    },
+    {
+      "id": "islandRacing-after-controls",
+      "game": "islandRacing",
+      "state": "race introduction / start countdown and controls",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-after-controls.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-pause",
+      "game": "islandRacing",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-pause.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": [
+        "KUX-007"
+      ]
+    },
+    {
+      "id": "islandRacing-after-exit",
+      "game": "islandRacing",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-after-exit.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-result-win",
+      "game": "islandRacing",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/islandRacing-result-win.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-result-win--scroll-01",
+      "game": "islandRacing",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/islandRacing-result-win--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-result-lose",
+      "game": "islandRacing",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/islandRacing-result-lose.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-result-lose--scroll-01",
+      "game": "islandRacing",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/islandRacing-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-result-lose--scroll-02",
+      "game": "islandRacing",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/islandRacing-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-islandRacing.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint",
+      "game": "island",
+      "state": "island-18-city-blueprint",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-014"
+      ]
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-01",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-02",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-02.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-03",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-03",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-03.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-04",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-04",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-04.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-05",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-05",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-05.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-06",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-06",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-06.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-07",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-07",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-07.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-08",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-08",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-08.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-blueprint--scroll-09",
+      "game": "island",
+      "state": "island-18-city-blueprint--scroll-09",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-blueprint--scroll-09.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-overview",
+      "game": "island",
+      "state": "island-18-city-overview",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-overview.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-overview--scroll-01",
+      "game": "island",
+      "state": "island-18-city-overview--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-overview--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-overview--scroll-02",
+      "game": "island",
+      "state": "island-18-city-overview--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-overview--scroll-02.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-overview--scroll-03",
+      "game": "island",
+      "state": "island-18-city-overview--scroll-03",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-overview--scroll-03.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-budget",
+      "game": "island",
+      "state": "island-18-city-budget",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-budget.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": [
+        "KUX-014"
+      ]
+    },
+    {
+      "id": "island-18-city-budget--scroll-01",
+      "game": "island",
+      "state": "island-18-city-budget--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-budget--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-budget--scroll-02",
+      "game": "island",
+      "state": "island-18-city-budget--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-budget--scroll-02.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-budget--scroll-03",
+      "game": "island",
+      "state": "island-18-city-budget--scroll-03",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-budget--scroll-03.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-budget--scroll-04",
+      "game": "island",
+      "state": "island-18-city-budget--scroll-04",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-budget--scroll-04.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-zones",
+      "game": "island",
+      "state": "island-18-city-zones",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-zones.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "island-18-city-zones--scroll-01",
+      "game": "island",
+      "state": "island-18-city-zones--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-18-city-zones--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots",
+      "game": "island",
+      "state": "island-19-ready-plots",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-01",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-02",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-02.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-03",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-03",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-03.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-04",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-04",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-04.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 25,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-05",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-05",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-05.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 26,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-06",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-06",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-06.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 27,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-07",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-07",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-07.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 28,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-08",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-08",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-08.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 29,
+      "findingIds": []
+    },
+    {
+      "id": "island-19-ready-plots--scroll-09",
+      "game": "island",
+      "state": "island-19-ready-plots--scroll-09",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-19-ready-plots--scroll-09.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 30,
+      "findingIds": []
+    },
+    {
+      "id": "island-20-ready-build-confirm",
+      "game": "island",
+      "state": "island-20-ready-build-confirm",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-20-ready-build-confirm.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 31,
+      "findingIds": []
+    },
+    {
+      "id": "island-21-building-info",
+      "game": "island",
+      "state": "island-21-building-info",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-21-building-info.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 32,
+      "findingIds": []
+    },
+    {
+      "id": "island-21-building-info--scroll-01",
+      "game": "island",
+      "state": "island-21-building-info--scroll-01",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-21-building-info--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 33,
+      "findingIds": []
+    },
+    {
+      "id": "island-21-building-info--scroll-02",
+      "game": "island",
+      "state": "island-21-building-info--scroll-02",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-21-building-info--scroll-02.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 34,
+      "findingIds": []
+    },
+    {
+      "id": "island-22-placement-valid",
+      "game": "island",
+      "state": "island-22-placement-valid",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-22-placement-valid.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 35,
+      "findingIds": []
+    },
+    {
+      "id": "island-23-placement-invalid",
+      "game": "island",
+      "state": "island-23-placement-invalid",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-23-placement-invalid.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 36,
+      "findingIds": []
+    },
+    {
+      "id": "island-24-coverage-water",
+      "game": "island",
+      "state": "island-24-coverage-water",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-24-coverage-water.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 37,
+      "findingIds": []
+    },
+    {
+      "id": "island-24-coverage-health",
+      "game": "island",
+      "state": "island-24-coverage-health",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-24-coverage-health.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 38,
+      "findingIds": []
+    },
+    {
+      "id": "island-24-coverage-education",
+      "game": "island",
+      "state": "island-24-coverage-education",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-24-coverage-education.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 39,
+      "findingIds": []
+    },
+    {
+      "id": "island-24-coverage-safety",
+      "game": "island",
+      "state": "island-24-coverage-safety",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-24-coverage-safety.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 40,
+      "findingIds": []
+    },
+    {
+      "id": "island-25-exit-confirm",
+      "game": "island",
+      "state": "island-25-exit-confirm",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-25-exit-confirm.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 41,
+      "findingIds": []
+    },
+    {
+      "id": "island-26-daily-locked",
+      "game": "island",
+      "state": "island-26-daily-locked",
+      "fixture": "synthetic-next-day-locked-age-7",
+      "screenshot": "screenshots/island-26-daily-locked.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 42,
+      "findingIds": [
+        "KUX-028"
+      ]
+    },
+    {
+      "id": "island-26-daily-locked--scroll-01",
+      "game": "island",
+      "state": "island-26-daily-locked--scroll-01",
+      "fixture": "synthetic-next-day-locked-age-7",
+      "screenshot": "screenshots/island-26-daily-locked--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 43,
+      "findingIds": []
+    },
+    {
+      "id": "learning-language-question",
+      "game": "learning",
+      "state": "learning-language-question",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-language-question.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 44,
+      "findingIds": [
+        "KUX-027"
+      ]
+    },
+    {
+      "id": "learning-language-wrong",
+      "game": "learning",
+      "state": "learning-language-wrong",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-language-wrong.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 45,
+      "findingIds": []
+    },
+    {
+      "id": "learning-language-correct",
+      "game": "learning",
+      "state": "learning-language-correct",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-language-correct.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 46,
+      "findingIds": []
+    },
+    {
+      "id": "learning-language-result",
+      "game": "learning",
+      "state": "learning-language-result",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-language-result.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 47,
+      "findingIds": []
+    },
+    {
+      "id": "learning-language-result--scroll-01",
+      "game": "learning",
+      "state": "learning-language-result--scroll-01",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-language-result--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 48,
+      "findingIds": []
+    },
+    {
+      "id": "learning-math-question",
+      "game": "learning",
+      "state": "learning-math-question",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-math-question.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 49,
+      "findingIds": []
+    },
+    {
+      "id": "learning-math-wrong",
+      "game": "learning",
+      "state": "learning-math-wrong",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-math-wrong.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 50,
+      "findingIds": []
+    },
+    {
+      "id": "learning-math-correct",
+      "game": "learning",
+      "state": "learning-math-correct",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-math-correct.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 51,
+      "findingIds": []
+    },
+    {
+      "id": "learning-math-result",
+      "game": "learning",
+      "state": "learning-math-result",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-math-result.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 52,
+      "findingIds": []
+    },
+    {
+      "id": "learning-math-result--scroll-01",
+      "game": "learning",
+      "state": "learning-math-result--scroll-01",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-math-result--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 53,
+      "findingIds": []
+    },
+    {
+      "id": "learning-animals-question",
+      "game": "learning",
+      "state": "learning-animals-question",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-animals-question.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 54,
+      "findingIds": []
+    },
+    {
+      "id": "learning-animals-wrong",
+      "game": "learning",
+      "state": "learning-animals-wrong",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-animals-wrong.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 55,
+      "findingIds": []
+    },
+    {
+      "id": "learning-animals-correct",
+      "game": "learning",
+      "state": "learning-animals-correct",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-animals-correct.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 56,
+      "findingIds": []
+    },
+    {
+      "id": "learning-animals-result",
+      "game": "learning",
+      "state": "learning-animals-result",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-animals-result.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 57,
+      "findingIds": []
+    },
+    {
+      "id": "learning-animals-result--scroll-01",
+      "game": "learning",
+      "state": "learning-animals-result--scroll-01",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-animals-result--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 58,
+      "findingIds": []
+    },
+    {
+      "id": "learning-puzzles-question",
+      "game": "learning",
+      "state": "learning-puzzles-question",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-puzzles-question.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 59,
+      "findingIds": []
+    },
+    {
+      "id": "learning-puzzles-wrong",
+      "game": "learning",
+      "state": "learning-puzzles-wrong",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-puzzles-wrong.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 60,
+      "findingIds": []
+    },
+    {
+      "id": "learning-puzzles-correct",
+      "game": "learning",
+      "state": "learning-puzzles-correct",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/learning-puzzles-correct.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 61,
+      "findingIds": []
+    },
+    {
+      "id": "learning-puzzles-result",
+      "game": "learning",
+      "state": "learning-puzzles-result",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-puzzles-result.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 62,
+      "findingIds": []
+    },
+    {
+      "id": "learning-puzzles-result--scroll-01",
+      "game": "learning",
+      "state": "learning-puzzles-result--scroll-01",
+      "fixture": "synthetic-learning-completion-age-7",
+      "screenshot": "screenshots/learning-puzzles-result--scroll-01.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 63,
+      "findingIds": []
+    },
+    {
+      "id": "island-27-event-fire",
+      "game": "island",
+      "state": "island-27-event-fire",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-27-event-fire.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 64,
+      "findingIds": []
+    },
+    {
+      "id": "island-27-event-aliens",
+      "game": "island",
+      "state": "island-27-event-aliens",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-27-event-aliens.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 65,
+      "findingIds": []
+    },
+    {
+      "id": "island-27-event-ship",
+      "game": "island",
+      "state": "island-27-event-ship",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/island-27-event-ship.png",
+      "evidenceFile": "evidence-island-rest.json",
+      "evidenceScreenIndex": 66,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-instructions",
+      "game": "navalDuel",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-instructions.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-instructions--scroll-01",
+      "game": "navalDuel",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-instructions--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-instructions--scroll-02",
+      "game": "navalDuel",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-instructions--scroll-02.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-instructions-replay",
+      "game": "navalDuel",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-instructions-replay.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-home",
+      "game": "navalDuel",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-home.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-stages",
+      "game": "navalDuel",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-stages.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-stages--scroll-01",
+      "game": "navalDuel",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-stages--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-stages--scroll-02",
+      "game": "navalDuel",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-stages--scroll-02.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-stages--scroll-03",
+      "game": "navalDuel",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-stages--scroll-03.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-upgrades",
+      "game": "navalDuel",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-upgrades.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-upgrades--scroll-01",
+      "game": "navalDuel",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-equipment",
+      "game": "navalDuel",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-equipment.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-equipment--scroll-01",
+      "game": "navalDuel",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-equipment--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-equipment--scroll-02",
+      "game": "navalDuel",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-equipment--scroll-02.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-equipment--scroll-03",
+      "game": "navalDuel",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-equipment--scroll-03.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-starting",
+      "game": "navalDuel",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-starting.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-playing",
+      "game": "navalDuel",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-playing.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-touch-held",
+      "game": "navalDuel",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-touch-held.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-after-controls",
+      "game": "navalDuel",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-after-controls.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-pause",
+      "game": "navalDuel",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-pause.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-after-exit",
+      "game": "navalDuel",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/navalDuel-after-exit.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-result-win",
+      "game": "navalDuel",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/navalDuel-result-win.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-result-win--scroll-01",
+      "game": "navalDuel",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/navalDuel-result-win--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-result-lose",
+      "game": "navalDuel",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/navalDuel-result-lose.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-result-lose--scroll-01",
+      "game": "navalDuel",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/navalDuel-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-navalDuel.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-instructions",
+      "game": "alienDefense",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-instructions.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-instructions--scroll-01",
+      "game": "alienDefense",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-instructions--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-instructions-replay",
+      "game": "alienDefense",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-instructions-replay.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-home",
+      "game": "alienDefense",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-home.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-stages",
+      "game": "alienDefense",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-stages.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-stages--scroll-01",
+      "game": "alienDefense",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-stages--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-stages--scroll-02",
+      "game": "alienDefense",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-stages--scroll-02.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-stages--scroll-03",
+      "game": "alienDefense",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-stages--scroll-03.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-stages--scroll-04",
+      "game": "alienDefense",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-stages--scroll-04.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-upgrades",
+      "game": "alienDefense",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-upgrades.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-upgrades--scroll-01",
+      "game": "alienDefense",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-equipment",
+      "game": "alienDefense",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-equipment.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-equipment--scroll-01",
+      "game": "alienDefense",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-equipment--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-hangar",
+      "game": "alienDefense",
+      "state": "hangar",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-hangar.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-starting",
+      "game": "alienDefense",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-starting.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-playing",
+      "game": "alienDefense",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-playing.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": [
+        "KUX-032"
+      ]
+    },
+    {
+      "id": "alienDefense-touch-held",
+      "game": "alienDefense",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-touch-held.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-after-controls",
+      "game": "alienDefense",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-after-controls.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-pause",
+      "game": "alienDefense",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-pause.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-after-exit",
+      "game": "alienDefense",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alienDefense-after-exit.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-result-win",
+      "game": "alienDefense",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/alienDefense-result-win.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-result-win--scroll-01",
+      "game": "alienDefense",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/alienDefense-result-win--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-result-lose",
+      "game": "alienDefense",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alienDefense-result-lose.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-result-lose--scroll-01",
+      "game": "alienDefense",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alienDefense-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "alienDefense-result-lose--scroll-02",
+      "game": "alienDefense",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/alienDefense-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-alienDefense.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-instructions",
+      "game": "fireRescue",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-instructions.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-instructions--scroll-01",
+      "game": "fireRescue",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-instructions--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-instructions-replay",
+      "game": "fireRescue",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-instructions-replay.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-home",
+      "game": "fireRescue",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-home.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-stages",
+      "game": "fireRescue",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-stages.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-stages--scroll-01",
+      "game": "fireRescue",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-stages--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-stages--scroll-02",
+      "game": "fireRescue",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-stages--scroll-02.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-stages--scroll-03",
+      "game": "fireRescue",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-stages--scroll-03.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-stages--scroll-04",
+      "game": "fireRescue",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-stages--scroll-04.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-upgrades",
+      "game": "fireRescue",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-upgrades.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-upgrades--scroll-01",
+      "game": "fireRescue",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-equipment",
+      "game": "fireRescue",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-equipment.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-equipment--scroll-01",
+      "game": "fireRescue",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-equipment--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-certificates",
+      "game": "fireRescue",
+      "state": "certificates",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-certificates.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-starting",
+      "game": "fireRescue",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-starting.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-playing",
+      "game": "fireRescue",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-playing.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-touch-held",
+      "game": "fireRescue",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-touch-held.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-after-controls",
+      "game": "fireRescue",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-after-controls.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-pause",
+      "game": "fireRescue",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-pause.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-after-exit",
+      "game": "fireRescue",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/fireRescue-after-exit.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-result-win",
+      "game": "fireRescue",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/fireRescue-result-win.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-result-win--scroll-01",
+      "game": "fireRescue",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/fireRescue-result-win--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-result-lose",
+      "game": "fireRescue",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/fireRescue-result-lose.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-result-lose--scroll-01",
+      "game": "fireRescue",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/fireRescue-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-result-lose--scroll-02",
+      "game": "fireRescue",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/fireRescue-result-lose--scroll-02.png",
+      "evidenceFile": "evidence-fireRescue.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-street",
+      "game": "fireRescue",
+      "state": "entry building on street",
+      "fixture": "synthetic-unlocked-progress-age-7",
+      "screenshot": "screenshots/fireRescue-entry-3-street.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-ready",
+      "game": "fireRescue",
+      "state": "entry button",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-ready.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-lesson",
+      "game": "fireRescue",
+      "state": "early interior transition; visible lesson captured separately",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-lesson.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-room",
+      "game": "fireRescue",
+      "state": "early interior transition; visible lesson captured separately",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-room.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-spray",
+      "game": "fireRescue",
+      "state": "direct touch on fire",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-spray.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-clock",
+      "game": "fireRescue",
+      "state": "clock near timeout",
+      "fixture": "synthetic-clock-near-timeout",
+      "screenshot": "screenshots/fireRescue-entry-3-clock.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-pause",
+      "game": "fireRescue",
+      "state": "pause inside building",
+      "fixture": "synthetic-clock-near-timeout",
+      "screenshot": "screenshots/fireRescue-entry-3-pause.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-street",
+      "game": "fireRescue",
+      "state": "entry building on street",
+      "fixture": "synthetic-clock-near-timeout",
+      "screenshot": "screenshots/fireRescue-entry-12-street.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-ready",
+      "game": "fireRescue",
+      "state": "entry button",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-ready.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-lesson",
+      "game": "fireRescue",
+      "state": "early interior transition; visible lesson captured separately",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-lesson.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-room",
+      "game": "fireRescue",
+      "state": "early interior transition; visible lesson captured separately",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-room.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-spray",
+      "game": "fireRescue",
+      "state": "direct touch on fire",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-spray.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-clock",
+      "game": "fireRescue",
+      "state": "clock near timeout",
+      "fixture": "synthetic-clock-near-timeout",
+      "screenshot": "screenshots/fireRescue-entry-12-clock.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": [
+        "KUX-031"
+      ]
+    },
+    {
+      "id": "fireRescue-entry-12-pause",
+      "game": "fireRescue",
+      "state": "pause inside building",
+      "fixture": "synthetic-clock-near-timeout",
+      "screenshot": "screenshots/fireRescue-entry-12-pause.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-targets-intro",
+      "game": "fireRescue",
+      "state": "bonus targets introduction",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-targets-intro.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-targets-play",
+      "game": "fireRescue",
+      "state": "bonus targets live",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-targets-play.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-targets-pause",
+      "game": "fireRescue",
+      "state": "bonus targets pause",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-targets-pause.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-interior-intro",
+      "game": "fireRescue",
+      "state": "bonus interior introduction",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-interior-intro.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-interior-play",
+      "game": "fireRescue",
+      "state": "bonus interior live",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-interior-play.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-bonus-interior-pause",
+      "game": "fireRescue",
+      "state": "bonus interior pause",
+      "fixture": "synthetic-unlocked-fire-bonus",
+      "screenshot": "screenshots/fireRescue-bonus-interior-pause.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-drill-targets",
+      "game": "soccer",
+      "state": "practice targets",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-drill-targets.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-drill-penalties",
+      "game": "soccer",
+      "state": "practice penalties",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-drill-penalties.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "soccer-drill-cones",
+      "game": "soccer",
+      "state": "practice cones",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/soccer-drill-cones.png",
+      "evidenceFile": "evidence-advanced.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-internal-start-card",
+      "game": "alpineRush",
+      "state": "internal start card",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-internal-start-card.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-live",
+      "game": "alpineRush",
+      "state": "live league stage",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-live.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": [
+        "KUX-029",
+        "KUX-030"
+      ]
+    },
+    {
+      "id": "alpineRush-league-touch-held",
+      "game": "alpineRush",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-touch-held.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-after-controls",
+      "game": "alpineRush",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-after-controls.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-pause",
+      "game": "alpineRush",
+      "state": "league pause",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/alpineRush-league-pause.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-internal-start-card",
+      "game": "islandRacing",
+      "state": "internal start card",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-internal-start-card.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-live",
+      "game": "islandRacing",
+      "state": "verified live league race",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-live.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-touch-held",
+      "game": "islandRacing",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-touch-held.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-after-controls",
+      "game": "islandRacing",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-after-controls.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-racing-auto",
+      "game": "islandRacing",
+      "state": "racing-auto",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-racing-auto.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-racing-pit",
+      "game": "islandRacing",
+      "state": "racing-pit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-racing-pit.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-pause",
+      "game": "islandRacing",
+      "state": "live league pause",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/islandRacing-league-pause.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-shot-two-thumbs",
+      "game": "streetSlam",
+      "state": "actual shot and movement",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-shot-two-thumbs.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-uniform-picker",
+      "game": "streetSlam",
+      "state": "uniform picker",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-uniform-picker.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-timeout",
+      "game": "streetSlam",
+      "state": "timeout request rejected while opponent holds ball",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/streetSlam-timeout.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": [
+        "KUX-039"
+      ]
+    },
+    {
+      "id": "islandRacing-league-result",
+      "game": "islandRacing",
+      "state": "league result fixture",
+      "fixture": "synthetic-result-display-league",
+      "screenshot": "screenshots/islandRacing-league-result.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "islandRacing-league-result--scroll-01",
+      "game": "islandRacing",
+      "state": "league result fixture",
+      "fixture": "synthetic-result-display-league",
+      "screenshot": "screenshots/islandRacing-league-result--scroll-01.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-result",
+      "game": "alpineRush",
+      "state": "league result fixture",
+      "fixture": "synthetic-result-display-league",
+      "screenshot": "screenshots/alpineRush-league-result.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "alpineRush-league-result--scroll-01",
+      "game": "alpineRush",
+      "state": "league result fixture",
+      "fixture": "synthetic-result-display-league",
+      "screenshot": "screenshots/alpineRush-league-result--scroll-01.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "learning-variant-word",
+      "game": "learning",
+      "state": "word",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-word.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "learning-variant-word-touched",
+      "game": "learning",
+      "state": "word touched",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-word-touched.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "learning-variant-memory",
+      "game": "learning",
+      "state": "memory",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-memory.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": [
+        "KUX-037"
+      ]
+    },
+    {
+      "id": "learning-variant-memory-touched",
+      "game": "learning",
+      "state": "memory touched",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-memory-touched.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "learning-variant-jigsaw",
+      "game": "learning",
+      "state": "jigsaw",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-jigsaw.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": [
+        "KUX-038"
+      ]
+    },
+    {
+      "id": "learning-variant-jigsaw-touched",
+      "game": "learning",
+      "state": "jigsaw touched",
+      "fixture": "synthetic-learning-age-7-level-4",
+      "screenshot": "screenshots/learning-variant-jigsaw-touched.png",
+      "evidenceFile": "evidence-advanced-rest.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": [
+        "KUX-038"
+      ]
+    },
+    {
+      "id": "catchCriminal-instructions",
+      "game": "catchCriminal",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-instructions.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-instructions-replay",
+      "game": "catchCriminal",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-instructions-replay.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-home",
+      "game": "catchCriminal",
+      "state": "home",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-home.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-stages",
+      "game": "catchCriminal",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-stages.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-stages--scroll-01",
+      "game": "catchCriminal",
+      "state": "stages / league entry",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-stages--scroll-01.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-upgrades",
+      "game": "catchCriminal",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-upgrades.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-upgrades--scroll-01",
+      "game": "catchCriminal",
+      "state": "upgrades",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-upgrades--scroll-01.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-equipment",
+      "game": "catchCriminal",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-equipment.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-equipment--scroll-01",
+      "game": "catchCriminal",
+      "state": "equipment",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-equipment--scroll-01.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-starting",
+      "game": "catchCriminal",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-starting.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-playing",
+      "game": "catchCriminal",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-playing.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-in-game-help",
+      "game": "catchCriminal",
+      "state": "first chase help",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-in-game-help.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": [
+        "KUX-035"
+      ]
+    },
+    {
+      "id": "catchCriminal-touch-held",
+      "game": "catchCriminal",
+      "state": "two thumbs / live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-touch-held.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-after-controls",
+      "game": "catchCriminal",
+      "state": "control feedback",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-after-controls.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-chase-controls",
+      "game": "catchCriminal",
+      "state": "chase controls",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-chase-controls.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-stop-transition",
+      "game": "catchCriminal",
+      "state": "chase to capture transition",
+      "fixture": "synthetic-accelerated-chase-completion",
+      "screenshot": "screenshots/catchCriminal-stop-transition.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-capture-aim",
+      "game": "catchCriminal",
+      "state": "capture aim",
+      "fixture": "synthetic-accelerated-chase-completion",
+      "screenshot": "screenshots/catchCriminal-capture-aim.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": [
+        "KUX-036"
+      ]
+    },
+    {
+      "id": "catchCriminal-capture-held",
+      "game": "catchCriminal",
+      "state": "capture drag held",
+      "fixture": "synthetic-accelerated-chase-completion",
+      "screenshot": "screenshots/catchCriminal-capture-held.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-capture-release",
+      "game": "catchCriminal",
+      "state": "capture release",
+      "fixture": "synthetic-accelerated-chase-completion",
+      "screenshot": "screenshots/catchCriminal-capture-release.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-pause",
+      "game": "catchCriminal",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-pause.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-after-exit",
+      "game": "catchCriminal",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/catchCriminal-after-exit.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-result-win",
+      "game": "catchCriminal",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/catchCriminal-result-win.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-result-win--scroll-01",
+      "game": "catchCriminal",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-win",
+      "screenshot": "screenshots/catchCriminal-result-win--scroll-01.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-result-lose",
+      "game": "catchCriminal",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/catchCriminal-result-lose.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "catchCriminal-result-lose--scroll-01",
+      "game": "catchCriminal",
+      "state": "result display fixture",
+      "fixture": "synthetic-result-display-lose",
+      "screenshot": "screenshots/catchCriminal-result-lose--scroll-01.png",
+      "evidenceFile": "evidence-catchCriminal.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-instructions",
+      "game": "boarDefense",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-instructions.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-005"
+      ]
+    },
+    {
+      "id": "boarDefense-instructions--scroll-01",
+      "game": "boarDefense",
+      "state": "instructions",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-instructions--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-instructions-replay",
+      "game": "boarDefense",
+      "state": "instructions replay",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-instructions-replay.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": [
+        "KUX-006"
+      ]
+    },
+    {
+      "id": "boarDefense-starting",
+      "game": "boarDefense",
+      "state": "startup",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-starting.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-playing",
+      "game": "boarDefense",
+      "state": "live play",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-playing.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-campaign-menu",
+      "game": "boarDefense",
+      "state": "embedded campaign menu",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-campaign-menu.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": [
+        "KUX-024"
+      ]
+    },
+    {
+      "id": "boarDefense-campaign-menu--scroll-01",
+      "game": "boarDefense",
+      "state": "embedded campaign menu",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-campaign-menu--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-help",
+      "game": "boarDefense",
+      "state": "help",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-help.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": [
+        "KUX-026"
+      ]
+    },
+    {
+      "id": "boarDefense-help--scroll-01",
+      "game": "boarDefense",
+      "state": "help",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-help--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": [
+        "KUX-026"
+      ]
+    },
+    {
+      "id": "boarDefense-shop",
+      "game": "boarDefense",
+      "state": "shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-shop.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": [
+        "KUX-025"
+      ]
+    },
+    {
+      "id": "boarDefense-shop--scroll-01",
+      "game": "boarDefense",
+      "state": "shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-shop--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-shop--scroll-02",
+      "game": "boarDefense",
+      "state": "shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-shop--scroll-02.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-shop--scroll-03",
+      "game": "boarDefense",
+      "state": "shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-shop--scroll-03.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-shop--scroll-04",
+      "game": "boarDefense",
+      "state": "shop",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-shop--scroll-04.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": [
+        "KUX-025"
+      ]
+    },
+    {
+      "id": "boarDefense-fortifications",
+      "game": "boarDefense",
+      "state": "fortifications",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-fortifications.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-fortifications--scroll-01",
+      "game": "boarDefense",
+      "state": "fortifications",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-fortifications--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-fortifications--scroll-02",
+      "game": "boarDefense",
+      "state": "fortifications",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-fortifications--scroll-02.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-battle",
+      "game": "boarDefense",
+      "state": "embedded live battle",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-battle.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 17,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-battle-touch",
+      "game": "boarDefense",
+      "state": "embedded live touch",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-battle-touch.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 18,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-defeat",
+      "game": "boarDefense",
+      "state": "campaign defeat",
+      "fixture": "synthetic-accelerated-boar-loss",
+      "screenshot": "screenshots/boarDefense-defeat.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 19,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-defeat-shop",
+      "game": "boarDefense",
+      "state": "shop after defeat",
+      "fixture": "synthetic-accelerated-boar-loss",
+      "screenshot": "screenshots/boarDefense-defeat-shop.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 20,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-wave-result",
+      "game": "boarDefense",
+      "state": "campaign between waves",
+      "fixture": "synthetic-accelerated-boar-win",
+      "screenshot": "screenshots/boarDefense-wave-result.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 21,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-wave-result--scroll-01",
+      "game": "boarDefense",
+      "state": "campaign between waves",
+      "fixture": "synthetic-accelerated-boar-win",
+      "screenshot": "screenshots/boarDefense-wave-result--scroll-01.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 22,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-pause",
+      "game": "boarDefense",
+      "state": "pause and exit",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-pause.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 23,
+      "findingIds": []
+    },
+    {
+      "id": "boarDefense-after-exit",
+      "game": "boarDefense",
+      "state": "returned to island",
+      "fixture": "synthetic-progressed-city-age-7",
+      "screenshot": "screenshots/boarDefense-after-exit.png",
+      "evidenceFile": "evidence-boarDefense.json",
+      "evidenceScreenIndex": 24,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-visible-card",
+      "game": "fireRescue",
+      "state": "visible tutorial / room instruction",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-visible-card.png",
+      "evidenceFile": "evidence-fire-cards.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-3-visible-play",
+      "game": "fireRescue",
+      "state": "visible interior play",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-3-visible-play.png",
+      "evidenceFile": "evidence-fire-cards.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-visible-card",
+      "game": "fireRescue",
+      "state": "visible tutorial / room instruction",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-visible-card.png",
+      "evidenceFile": "evidence-fire-cards.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-visible-room-card",
+      "game": "fireRescue",
+      "state": "visible room card",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-visible-room-card.png",
+      "evidenceFile": "evidence-fire-cards.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "fireRescue-entry-12-visible-play",
+      "game": "fireRescue",
+      "state": "visible interior play",
+      "fixture": "synthetic-truck-parked-at-entry-door",
+      "screenshot": "screenshots/fireRescue-entry-12-visible-play.png",
+      "evidenceFile": "evidence-fire-cards.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "navalDuel-canvas-text",
+      "game": "navalDuel",
+      "state": "canvas HUD text measurements",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/navalDuel-canvas-text.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-033"
+      ]
+    },
+    {
+      "id": "navalDuel-weapon-picker",
+      "game": "navalDuel",
+      "state": "expanded weapon choices",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/navalDuel-weapon-picker.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": [
+        "KUX-034"
+      ]
+    },
+    {
+      "id": "navalDuel-weapon-changed",
+      "game": "navalDuel",
+      "state": "weapon selected by trusted touch",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/navalDuel-weapon-changed.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 2,
+      "findingIds": [
+        "KUX-034"
+      ]
+    },
+    {
+      "id": "navalDuel-lock-action",
+      "game": "navalDuel",
+      "state": "lock feedback",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/navalDuel-lock-action.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 3,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-alienDefense",
+      "game": "alienDefense",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-alienDefense.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 4,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-fireRescue",
+      "game": "fireRescue",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-fireRescue.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 5,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-navalDuel",
+      "game": "navalDuel",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-navalDuel.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 6,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-soccer",
+      "game": "soccer",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-soccer.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 7,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-tennis",
+      "game": "tennis",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-tennis.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 8,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-islandRacing-internal-start-card",
+      "game": "islandRacing",
+      "state": "internal start card",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-islandRacing-internal-start-card.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 9,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-islandRacing",
+      "game": "islandRacing",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-islandRacing.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 10,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-streetSlam",
+      "game": "streetSlam",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-streetSlam.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 11,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-alpineRush-internal-start-card",
+      "game": "alpineRush",
+      "state": "internal start card",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-alpineRush-internal-start-card.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 12,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-alpineRush",
+      "game": "alpineRush",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-alpineRush.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 13,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-boarDefense-firing",
+      "game": "boarDefense",
+      "state": "actual two-finger aiming and firing",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-boarDefense-firing.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 14,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-boarDefense",
+      "game": "boarDefense",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-boarDefense.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 15,
+      "findingIds": []
+    },
+    {
+      "id": "feedback-catchCriminal",
+      "game": "catchCriminal",
+      "state": "isolated feedback probe",
+      "fixture": "isolated-software-renderer-feedback-probe",
+      "screenshot": "screenshots/feedback-catchCriminal.png",
+      "evidenceFile": "evidence-feedback.json",
+      "evidenceScreenIndex": 16,
+      "findingIds": []
+    },
+    {
+      "id": "streetSlam-timeout-bench",
+      "game": "streetSlam",
+      "state": "timeout bench display from legal model state",
+      "fixture": "synthetic-legal-timeout-bench-display-frozen-model",
+      "screenshot": "screenshots/streetSlam-timeout-bench.png",
+      "evidenceFile": "evidence-hoops-detail.json",
+      "evidenceScreenIndex": 0,
+      "findingIds": [
+        "KUX-040"
+      ]
+    },
+    {
+      "id": "streetSlam-timeout-substitution",
+      "game": "streetSlam",
+      "state": "trusted touches select a substitution in the fixture",
+      "fixture": "synthetic-legal-timeout-bench-display-frozen-model",
+      "screenshot": "screenshots/streetSlam-timeout-substitution.png",
+      "evidenceFile": "evidence-hoops-detail.json",
+      "evidenceScreenIndex": 1,
+      "findingIds": []
+    }
+  ]
+}

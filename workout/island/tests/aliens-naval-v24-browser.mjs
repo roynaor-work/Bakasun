@@ -14,8 +14,9 @@
 //   that hits it under water. Frames and verification.json go to verification/aliens-naval-v24/.
 // Run: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js CHROMIUM_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome node workout/island/tests/aliens-naval-v24-browser.mjs
 import {verify} from './night-browser.mjs';
-import {mkdir} from 'node:fs/promises';
-const frames=new URL('../verification/aliens-naval-v24/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+import {pathToFileURL} from 'node:url';
+import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
+const frames=pathToFileURL(await browserArtifacts('frames'));
 const SHOTS=Number(process.env.SHOTS||20),only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
 let failures=[];

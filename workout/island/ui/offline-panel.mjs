@@ -1,13 +1,13 @@
 // The island's one download panel: "download all games to the device", progress,
 // honest per-game status counted from the cache, a manual "check for update and
-// download" and the last load report of each game with a copy button.
+// download". Technical reports are shown in the parent panel.
 // Offline v25 (17/11/2026): a row per game package with its size, state (not on device /
 // downloading / ready / update available), its own download and delete buttons, storage
 // usage and quota with persistent storage, and "install the app". `?offlineV25=0` shows
 // the v24 panel.
 import {OFFLINE_GAMES,offlineStatus,downloadGames,checkAndDownload,offlineSupported,megabytes,v25On,deletePack,downloadBusy,persistStorage,storageInfo,loadManifest,pathsFor,bytesFor,prefetchRelease} from './offline.mjs';
 import {installState,promptInstall,onInstallChange,INSTALL_TEXT} from './offline-install.mjs';
-import {reportPanel} from './load-report.mjs';
+import {saveGameReport} from './load-report.mjs';
 import {DATA_VERSION} from '../release.mjs';
 
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
@@ -62,6 +62,16 @@ async function pendingUpdates(fetcher=globalThis.fetch){
   return {latest,packs:packUpdates(current,next)};
 }
 
+const downloadFailed='ההורדה לא הושלמה. אפשר לנסות שוב.';
+const statusFailed='לא ניתן לבדוק אילו קבצים נשמרו. אפשר לנסות שוב.';
+function reportIssue(operation,error,latest) {
+  const lines=Array.isArray(error)
+    ?error.slice(0,20).map(failure=>`${failure.href}: ${failure.reason}`)
+    :[String(error?.message??error)];
+  if(latest)lines.push('release: '+latest);
+  saveGameReport('offline',{status:operation,lines});
+}
+
 export function offlinePanel(options={}){return v25On()?offlinePanel25(options):offlinePanel24(options);}
 
 function offlinePanel24({onChange=()=>{}}={}){
@@ -70,7 +80,7 @@ function offlinePanel24({onChange=()=>{}}={}){
   const status=node('p','offline-status','בודק מה שמור במכשיר...');status.setAttribute('role','status');
   const bar=node('progress','offline-progress');bar.max=100;bar.value=0;bar.hidden=true;
   const games=node('ul','offline-games');
-  const download=node('button','primary-button','הורדת כל המשחקים למכשיר');download.type='button';download.dataset.action='offline-download-all';
+  const download=node('button','primary-button','הורדת המשחקים');download.type='button';download.dataset.action='offline-download-all';
   const check=node('button','secondary-button','בדיקת עדכון והורדה');check.type='button';check.dataset.action='offline-check-update';
   const versionRow=node('p','offline-version',versionLine());versionRow.dataset.appVersion='';
   panel.append(heading,status,bar,games,download,check,versionRow);
@@ -79,10 +89,8 @@ function offlinePanel24({onChange=()=>{}}={}){
     try{
       const s=await offlineStatus();status.textContent=describeStatus(s);panel.dataset.complete=String(Boolean(s.complete));
       games.replaceChildren(...Object.entries(OFFLINE_GAMES).map(([id,name])=>{const g=s.games[id],li=node('li','',`${name}: ${g?`${g.have} מתוך ${g.total}`:'לא זמין'}`);li.dataset.game=id;li.dataset.complete=String(Boolean(g?.complete));return li;}));
-      download.textContent=s.complete?'הורדה מחדש (בדיקת קבצים)':'הורדת כל המשחקים למכשיר';
-    }catch(error){status.textContent='לא ניתן לבדוק מה שמור: '+(error?.message||error);}
-    panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
-    for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
+      download.textContent=s.complete?'הורדה מחדש':'הורדת המשחקים';
+    }catch(error){reportIssue('status',error);status.textContent=statusFailed;}
     onChange();
   }
   const progress=p=>{status.textContent=describeProgress(p);bar.value=p.percent;};
@@ -93,10 +101,10 @@ function offlinePanel24({onChange=()=>{}}={}){
       const r=await job();
       const sizeNote=r.bytes?` (${megabytes(r.bytes)} MB הורדו עכשיו)`:'';
       await refresh();
-      if(r.failed.length)status.textContent=`${r.total-r.failed.length} מתוך ${r.total} נשמרו. ${r.failed.length} קבצים לא ירדו (${r.failed[0].reason}). המשחק יעלה גם בלי הקבצים האלה, אפשר לנסות שוב.`;
-      else if(r.newer)status.textContent+=` יצאה גרסה חדשה (${r.latest}). היא תותקן ברקע ותוחלף בפתיחה הבאה.`;
+      if(r.failed.length){reportIssue('download',r.failed,r.latest);status.textContent=downloadFailed;}
+      else if(r.newer)status.textContent+=' יצאה גרסה חדשה. היא תותקן ברקע ותיפתח בכניסה הבאה.';
       else status.textContent+=sizeNote;
-    }catch(error){status.textContent='ההורדה נכשלה ('+(error?.message||error)+'). המשחקים ייטענו מהרשת.';}
+    }catch(error){reportIssue('download',error);status.textContent=downloadFailed;}
     busy(false);
   }
   download.addEventListener('click',()=>run(()=>downloadGames({onProgress:progress})));
@@ -114,7 +122,7 @@ function offlinePanel25({onChange=()=>{}}={}){
   const persistBtn=btn('שמירה קבועה במכשיר','offline-persist');persistBtn.hidden=true;
   const games=node('ul','offline-games offline-packs');
   const actions=node('div','offline-actions');
-  const download=btn('הורדת כל המשחקים למכשיר','offline-download-all','primary-button');
+  const download=btn('הורדת המשחקים','offline-download-all','primary-button');
   const check=btn('בדיקת עדכון והורדה','offline-check-update');
   const install=btn('התקנת האפליקציה','offline-install');
   const installHint=node('p','offline-install-hint','');installHint.hidden=true;installHint.dataset.installHint='';
@@ -142,12 +150,10 @@ function offlinePanel25({onChange=()=>{}}={}){
     try{
       const s=await offlineStatus();status.textContent=describeStatus25(s)+(note?' '+note:'');panel.dataset.complete=String(Boolean(s.complete));
       games.replaceChildren(...Object.entries(OFFLINE_GAMES).map(([id,name])=>row(id,name,s.games[id],pending?.packs?.[id])));
-      download.textContent=s.complete?'הורדה מחדש (בדיקת קבצים)':'הורדת כל המשחקים למכשיר';
+      download.textContent=s.complete?'הורדה מחדש':'הורדת המשחקים';
       const info=await storageInfo();storageRow.textContent=describeStorage(info);storageRow.hidden=!storageRow.textContent;persistBtn.hidden=info.persisted!==false;
-    }catch(error){status.textContent='לא ניתן לבדוק מה שמור: '+(error?.message||error);}
+    }catch(error){reportIssue('status',error);status.textContent=statusFailed;}
     renderInstall();
-    panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
-    for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
     onChange();
   }
   const progress=p=>{status.textContent=describeProgress(p);bar.value=p.percent;};
@@ -157,20 +163,21 @@ function offlinePanel25({onChange=()=>{}}={}){
     try{
       const r=await job();
       const sizeNote=r.bytes?` ${megabytes(r.bytes)} MB הורדו עכשיו.`:'';
-      if(r.failed?.length)note=`${r.failed.length} קבצים לא ירדו (${r.failed[0].reason}). המשחק יעלה גם בלי הקבצים האלה, אפשר לנסות שוב.`;
-      else if(r.newer)note=r.prepared?`יצאה גרסה חדשה (${r.latest}): ${r.prepared.downloaded.total} קבצים ירדו ו-${r.prepared.copied} הועתקו מהגרסה הנוכחית. היא תוחלף כשחוזרים לעיר.`:`יצאה גרסה חדשה (${r.latest}). רק הקבצים שהשתנו יורדים ברקע, והיא תוחלף בפתיחה הבאה.`;
+      const failed=r.failed?.length?r.failed:(r.prepared?.downloaded??r.prepared)?.failed;
+      if(failed?.length){reportIssue('download',failed,r.latest);note=downloadFailed;}
+      else if(r.newer)note=r.prepared?'גרסה חדשה תיפתח בחזרה לעיר.':'יצאה גרסה חדשה. הקבצים שהשתנו יורדים ברקע.';
       else if(r.bad)note=`${r.bad} קבצים פגומים הוחלפו.${sizeNote}`;
       else note=sizeNote.trim();
       await refresh();
       if(r.fresh&&!r.failed?.length)persistStorage().then(()=>refresh()).catch(()=>{});
-    }catch(error){note='ההורדה נכשלה ('+(error?.message||error)+'). המשחקים ייטענו מהרשת.';await refresh();}
+    }catch(error){note=downloadFailed;await refresh();reportIssue('download',error);}
     busy(false);
   }
   download.addEventListener('click',()=>run(()=>downloadGames({onProgress:progress,verify:panel.dataset.complete==='true'})));
   check.addEventListener('click',()=>run(async()=>{
     try{pending=await pendingUpdates();}catch{pending=null;}
     const r=await checkAndDownload({onProgress:progress});
-    if(r.newer){status.textContent='מכין את הגרסה החדשה: מעתיק מה שלא השתנה ומוריד רק את השינויים...';try{r.prepared=await prefetchRelease(r.latest,{onProgress:progress});}catch{}}
+    if(r.newer){status.textContent='מכין את הגרסה החדשה: מעתיק מה שלא השתנה ומוריד רק את השינויים...';r.prepared=await prefetchRelease(r.latest,{onProgress:progress});}
     return r;}));
   persistBtn.addEventListener('click',async()=>{const ok=await persistStorage();storageRow.textContent=describeStorage(await storageInfo())+(ok===false?' · הדפדפן סירב לשמירה קבועה. בדרך כלל עוזר להתקין את האפליקציה.':'');persistBtn.hidden=ok!==false;});
   install.addEventListener('click',async()=>{
@@ -187,8 +194,8 @@ function offlinePanel25({onChange=()=>{}}={}){
       delete packProgress[id];await refresh();
     }else if(b.dataset.action==='offline-pack-delete'){
       if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='בטוח? מחיקה';b.classList.add('offline-danger');return;}
-      busy(true);try{if(downloadBusy())throw Error('הורדה פעילה');const r=await deletePack(id);note=`${OFFLINE_GAMES[id]} נמחק מהמכשיר (${r.removed} קבצים, ${megabytes(r.bytes)} MB). השמירה של המשחק לא נגעה.`;}
-      catch(error){note='המחיקה נכשלה ('+(error?.message||error)+').';}
+      busy(true);try{if(downloadBusy())throw Error('הורדה פעילה');const r=await deletePack(id);note=`${OFFLINE_GAMES[id]}: הוסרו ${r.removed} קבצים מהמכשיר (${megabytes(r.bytes)} MB). ההתקדמות נשמרה.`;}
+      catch(error){reportIssue('delete',error);note='המחיקה לא הושלמה. אפשר לנסות שוב.';}
       await refresh();busy(false);
     }
   });

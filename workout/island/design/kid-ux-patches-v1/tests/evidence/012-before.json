@@ -1,0 +1,100 @@
+{
+  "id": "012",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "illustratedCityHall": false,
+        "fingerAnimation": null
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "speechButton": null
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "hallHighlighted": false
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "confirmation": null,
+        "cityHallOpened": true
+      }
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 422,
+      "y": 340,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 422,
+        "y": 340
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-tasks\"]').first()",
+      "x": 539,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-tasks",
+        "x": 539,
+        "y": 30
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"tutorial-city-hall\"]').first()",
+      "x": 751.2890625,
+      "y": 178,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "tutorial-city-hall",
+        "x": 751.2890625,
+        "y": 178
+      }
+    }
+  ],
+  "screenshots": [
+    "012-before-tutorial.png",
+    "012-before-city-hall-open.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

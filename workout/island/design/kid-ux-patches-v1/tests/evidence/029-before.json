@@ -1,0 +1,115 @@
+{
+  "id": "029",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "trickLabels": [
+          {
+            "width": 38,
+            "height": 12.6,
+            "fontPx": 9,
+            "centerHit": true,
+            "text": "תפיסה",
+            "contrast": 9.6
+          },
+          {
+            "width": 32.3,
+            "height": 12.6,
+            "fontPx": 9,
+            "centerHit": true,
+            "text": "סיבוב",
+            "contrast": 9.6
+          },
+          {
+            "width": 33.2,
+            "height": 12.6,
+            "fontPx": 9,
+            "centerHit": true,
+            "text": "סלטה",
+            "contrast": 9.6
+          },
+          {
+            "width": 33,
+            "height": 12.6,
+            "fontPx": 9,
+            "centerHit": true,
+            "text": "שילוב",
+            "contrast": 9.6
+          }
+        ],
+        "caption": {
+          "width": 122.3,
+          "height": 22.4,
+          "fontPx": 11,
+          "centerHit": false,
+          "text": "טריקים באוויר",
+          "contrast": 9.1
+        }
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "groundedTouchShowsAnimatedTrick": false,
+        "preview": null
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Development API opens the live snowboarding league and a trusted touchscreen gesture presses its start button.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"alpine-start\"]').first()",
+      "x": 588.578125,
+      "y": 155.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "alpine-start",
+        "x": 588.578125,
+        "y": 155.390625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-trick=\"spin\"]').first()",
+      "x": 647.8500061035156,
+      "y": 262.6000061035156,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "alpine-trick",
+        "x": 647.8499755859375,
+        "y": 262.6000061035156
+      }
+    }
+  ],
+  "screenshots": [
+    "029-before-trick-preview.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

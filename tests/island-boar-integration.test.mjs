@@ -44,12 +44,12 @@ test('existing schema-18 city saves remain byte-for-byte valid without adding fa
   assert.equal(Object.hasOwn(migrated.state.minigameProgress,'boarDefense'),false);
 });
 
-test('the imported weapons, wave logic, artwork generators and Three runtime preserve the shipped source bytes',async()=>{
+test('bundled Boar sources match the upstream or localized checksum',async()=>{
   const base=new URL('minigames/boar-island/',root),source=JSON.parse(await readFile(new URL('source.json',base)));
   assert.equal(source.commit,'4d6674b9ceebc63b08886009cf9ae727bd0cfed3');
   for(const [path,original] of Object.entries(source.originalFiles)){
     if(['game.js','style.css'].includes(path))continue;
     const bytes=await readFile(new URL(path,base));
-    assert.equal(createHash('sha256').update(bytes).digest('hex'),original.sha256,path);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),source.localizedSha256?.[path]??original.sha256,path);
   }
 });

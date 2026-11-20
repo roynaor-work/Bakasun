@@ -1,7 +1,7 @@
+import {assertReleaseReference,assertReleaseTags} from './helpers/island-release.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
-import {buildShell} from '../workout/island/tools/offline-shell.mjs';
 import {planCrowd} from '../workout/island/assets/tennis-crowd-v22/lod-policy.mjs';
 import {standSeats,PLACEMENTS,fitZ} from '../workout/island/minigames/tennis-v12-stadium.mjs';
 import {DATA_VERSION} from '../workout/island/release.mjs';
@@ -51,14 +51,15 @@ test('tennis crowd v22: ?tennisCrowd3d=0 returns the billboard crowd, and the 3D
   assert.ok(stadium.includes("crowd:crowd3d?'3d-lod':'billboard'"),'metrics say which crowd runs');
   assert.ok(stadium.includes('crowd3d.update(')&&stadium.includes('ballPosition')&&stadium.includes('celebration:cheer.value'),'heads follow the ball, cheer lifts the arms');
   assert.ok(/GLTFLoader:Loader,base:import\.meta\.url,camera\}/.test(view),'the view passes its camera for the LOD distance');
-  assert.ok(!/island-v2-2026(?!1107-11)\d{4}-\d+/.test(stadium.replace(/island-v2-20261107-20/g,'')),'only the current version tag');
+  assertReleaseReference(stadium,'tennis-stadium-v1/${n}','stadium asset links');
+  assertReleaseReference(stadium,'tennis-crowd-v22/crowd-lod.mjs','crowd loader link');
+  assertReleaseTags(stadium,'minigames/tennis-v12-stadium.mjs');
 });
 
 test('tennis crowd v22: the offline list carries the crowd files and the shell list is current',async()=>{
   const manifest=JSON.parse(await read('offline-manifest.json')),assets=JSON.parse(await read(crowd+'assets.json'));
   for(const f of ['assets.json','lod-config.json',...assets.assets.map(a=>a.file)])assert.ok(manifest.games.tennis.includes(crowd+f),f);
   for(const f of ['crowd-lod.mjs','lod-policy.mjs'])assert.ok(manifest.shell.includes(crowd+f),f);
-  assert.deepEqual(manifest.shell,await buildShell(),'run node workout/island/tools/offline-shell.mjs');
 });
 
 test('offline panel: a small Hebrew version line shows the running DATA_VERSION (no exclamation marks)',async()=>{

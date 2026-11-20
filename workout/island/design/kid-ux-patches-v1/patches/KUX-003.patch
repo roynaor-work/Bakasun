@@ -1,0 +1,31 @@
+diff --git a/workout/island/ui/kid-ux-library.mjs b/workout/island/ui/kid-ux-library.mjs
+index 9b86cb2e..dfe59585 100644
+--- a/workout/island/ui/kid-ux-library.mjs
++++ b/workout/island/ui/kid-ux-library.mjs
+@@ -24,3 +24,26 @@ kidUxStyle('002', `
+     margin-inline-end: 150px;
+   }
+ `);
++
++kidUxStyle('003', `
++  .modal.modal[data-game-library] .adventure-game-grid {
++    grid-template-columns: repeat(4, minmax(0, 1fr));
++    gap: 10px;
++  }
++  .modal.modal[data-game-library] .adventure-game-card h3 {
++    min-height: 2.4em;
++    font-size: 16px;
++    line-height: 1.25;
++  }
++  .modal.modal[data-game-library] :is(.adventure-enter, .adventure-new, .adventure-game-category, .modal-subtitle) {
++    font-size: 14px;
++  }
++  .modal[data-game-library] .adventure-emblem[data-preview=unavailable]::after {
++    font-size: 14px;
++  }
++  @media (max-width: 640px) {
++    .modal.modal[data-game-library] .adventure-game-grid {
++      grid-template-columns: repeat(2, minmax(0, 1fr));
++    }
++  }
++`);

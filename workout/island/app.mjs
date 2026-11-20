@@ -22,6 +22,10 @@ const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
   return r.json();
 });
+// strings-patches-v1 (v24.7): ?strings=v246 puts the previous wording of the catalog back (online only; the overlay holds only the changed keys).
+if (new URLSearchParams(location.search).get('strings') === 'v246') {
+  try { Object.assign(strings, await fetch(dataURL('./data/strings.he.v246.json')).then(r => r.ok ? r.json() : {})); } catch {}
+}
 const t = createTranslator(strings);
 document.title = t('app.title');
 const root = document.querySelector('#interface');

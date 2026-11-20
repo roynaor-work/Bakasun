@@ -1,0 +1,129 @@
+{
+  "id": "029",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "trickLabels": [
+          {
+            "width": 59.1,
+            "height": 19.6,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "תפיסה",
+            "contrast": 12.21
+          },
+          {
+            "width": 50.2,
+            "height": 19.6,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "סיבוב",
+            "contrast": 12.21
+          },
+          {
+            "width": 51.6,
+            "height": 19.6,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "סלטה",
+            "contrast": 12.21
+          },
+          {
+            "width": 51.4,
+            "height": 19.6,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "שילוב",
+            "contrast": 12.21
+          }
+        ],
+        "caption": {
+          "width": 148.8,
+          "height": 28,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "טריקים באוויר",
+          "contrast": 13.19
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "groundedTouchShowsAnimatedTrick": true,
+        "count": 1,
+        "event": {
+          "ready": "false",
+          "selected": "spin",
+          "hidden": false,
+          "trusted": true
+        },
+        "preview": {
+          "width": 134.4,
+          "height": 85,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "🏂\nסיבוב",
+          "contrast": 13.19
+        }
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Development API opens the live snowboarding league and a trusted touchscreen gesture presses its start button.",
+    "The fixture holds the already-reached grounded model frame while the real touch activates the trick illustration."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"alpine-start\"]').first()",
+      "x": 588.578125,
+      "y": 155.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "alpine-start",
+        "x": 588.578125,
+        "y": 155.390625
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-trick=\"spin\"]').first()",
+      "x": 647.8500061035156,
+      "y": 262.6000061035156,
+      "hold": 0,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "alpine-trick",
+        "x": 647.8499755859375,
+        "y": 262.6000061035156
+      }
+    }
+  ],
+  "screenshots": [
+    "029-after-trick-preview.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

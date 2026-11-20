@@ -1,0 +1,18 @@
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index aa1ac5bf..a98e4c28 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -22,6 +22,13 @@ kidUxStyle('012', `
+ `);
+ 
+ 
++kidUxStyle('009', `
++  .island-ui.clean-hud :is(.hud-summary,.camera-primary,.hud-more-controls,.city-map-controls,.city-zoom,.city-quick-access){gap:8px}
++  .island-ui.clean-hud .hud-more-controls{top:53px}
++  .island-ui.clean-hud .hud-tasks-toggle,.island-ui.clean-hud .city-quick-button strong,.island-ui.clean-hud .city-map-controls>.city-map-button{font-size:14px}
++  .island-ui.clean-hud .city-quick-button strong{white-space:normal}
++`);
++
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+   node.className = className;

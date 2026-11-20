@@ -1,0 +1,50 @@
+{
+  "id": "035",
+  "mode": "off",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "firstChaseParagraphs": 4,
+        "illustratedExercise": 0
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: catchCriminal, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.catch-help-ok').first()",
+      "x": 422,
+      "y": 319.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "catch-help-ok",
+        "x": 422,
+        "y": 319.75
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "complete applied series"
+}

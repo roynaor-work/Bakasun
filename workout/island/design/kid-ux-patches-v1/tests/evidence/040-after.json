@@ -1,0 +1,65 @@
+{
+  "id": "040",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "benchClose": {
+          "text": "חזרה למשחק",
+          "fontPx": 16,
+          "ratio": 13.17,
+          "width": 157.609375,
+          "height": 48,
+          "visibleWidth": 157.609375,
+          "visibleHeight": 48
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "benchClosed": true
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Used the existing perf-hoops.html test entry with the production basketball session, base CSS and synthetic roster. The backing canvas is scaled to 0.35 for software rendering. The browser and touch viewport remain 844×390.",
+    "Synthetic legal timeout with the model held while the bench is inspected."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.hoops-bench-close').first()",
+      "x": 421.9921875,
+      "y": 345,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "hoops-bench-close",
+        "x": 421.9921875,
+        "y": 345
+      }
+    }
+  ],
+  "screenshots": [
+    "040-after-timeout-bench.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

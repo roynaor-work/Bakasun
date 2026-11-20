@@ -1,0 +1,577 @@
+{
+  "id": "008",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "game": "soccer",
+        "outcome": "win",
+        "actions": {
+          "game-again": {
+            "x": 542.921875,
+            "y": 325,
+            "width": 186.078125,
+            "height": 44,
+            "top": 325,
+            "right": 729,
+            "bottom": 369,
+            "left": 542.921875,
+            "rect": {
+              "x": 542.921875,
+              "y": 325,
+              "width": 186.078125,
+              "height": 44,
+              "top": 325,
+              "right": 729,
+              "bottom": 369,
+              "left": 542.921875
+            },
+            "visibleRect": {
+              "x": 542.921875,
+              "y": 325,
+              "width": 186.078125,
+              "height": 44
+            },
+            "visibleWidth": 186.078125,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 11.116676129280618,
+            "contrast": 11.116676129280618,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              199,
+              245,
+              169
+            ],
+            "text": "עוד פעם"
+          },
+          "game-stages": {
+            "x": 316.921875,
+            "y": 325,
+            "width": 218,
+            "height": 44,
+            "top": 325,
+            "right": 534.921875,
+            "bottom": 369,
+            "left": 316.921875,
+            "rect": {
+              "x": 316.921875,
+              "y": 325,
+              "width": 218,
+              "height": 44,
+              "top": 325,
+              "right": 534.921875,
+              "bottom": 369,
+              "left": 316.921875
+            },
+            "visibleRect": {
+              "x": 316.921875,
+              "y": 325,
+              "width": 218,
+              "height": 44
+            },
+            "visibleWidth": 218,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "מפת השלבים"
+          },
+          "game-exit": {
+            "x": 115,
+            "y": 325,
+            "width": 193.921875,
+            "height": 44,
+            "top": 325,
+            "right": 308.921875,
+            "bottom": 369,
+            "left": 115,
+            "rect": {
+              "x": 115,
+              "y": 325,
+              "width": 193.921875,
+              "height": 44,
+              "top": 325,
+              "right": 308.921875,
+              "bottom": 369,
+              "left": 115
+            },
+            "visibleRect": {
+              "x": 115,
+              "y": 325,
+              "width": 193.921875,
+              "height": 44
+            },
+            "visibleWidth": 193.921875,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "לחזור לאי"
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "game": "soccer",
+        "outcome": "lose",
+        "actions": {
+          "game-again": {
+            "x": 542.921875,
+            "y": 325,
+            "width": 186.078125,
+            "height": 44,
+            "top": 325,
+            "right": 729,
+            "bottom": 369,
+            "left": 542.921875,
+            "rect": {
+              "x": 542.921875,
+              "y": 325,
+              "width": 186.078125,
+              "height": 44,
+              "top": 325,
+              "right": 729,
+              "bottom": 369,
+              "left": 542.921875
+            },
+            "visibleRect": {
+              "x": 542.921875,
+              "y": 325,
+              "width": 186.078125,
+              "height": 44
+            },
+            "visibleWidth": 186.078125,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 11.116676129280618,
+            "contrast": 11.116676129280618,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              199,
+              245,
+              169
+            ],
+            "text": "עוד פעם"
+          },
+          "game-stages": {
+            "x": 316.921875,
+            "y": 325,
+            "width": 218,
+            "height": 44,
+            "top": 325,
+            "right": 534.921875,
+            "bottom": 369,
+            "left": 316.921875,
+            "rect": {
+              "x": 316.921875,
+              "y": 325,
+              "width": 218,
+              "height": 44,
+              "top": 325,
+              "right": 534.921875,
+              "bottom": 369,
+              "left": 316.921875
+            },
+            "visibleRect": {
+              "x": 316.921875,
+              "y": 325,
+              "width": 218,
+              "height": 44
+            },
+            "visibleWidth": 218,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "מפת השלבים"
+          },
+          "game-exit": {
+            "x": 115,
+            "y": 325,
+            "width": 193.921875,
+            "height": 44,
+            "top": 325,
+            "right": 308.921875,
+            "bottom": 369,
+            "left": 115,
+            "rect": {
+              "x": 115,
+              "y": 325,
+              "width": 193.921875,
+              "height": 44,
+              "top": 325,
+              "right": 308.921875,
+              "bottom": 369,
+              "left": 115
+            },
+            "visibleRect": {
+              "x": 115,
+              "y": 325,
+              "width": 193.921875,
+              "height": 44
+            },
+            "visibleWidth": 193.921875,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "לחזור לאי"
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "game": "tennis",
+        "outcome": "win",
+        "actions": {
+          "game-again": {
+            "x": 532.921875,
+            "y": 325,
+            "width": 166.078125,
+            "height": 44,
+            "top": 325,
+            "right": 699,
+            "bottom": 369,
+            "left": 532.921875,
+            "rect": {
+              "x": 532.921875,
+              "y": 325,
+              "width": 166.078125,
+              "height": 44,
+              "top": 325,
+              "right": 699,
+              "bottom": 369,
+              "left": 532.921875
+            },
+            "visibleRect": {
+              "x": 532.921875,
+              "y": 325,
+              "width": 166.078125,
+              "height": 44
+            },
+            "visibleWidth": 166.078125,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 11.116676129280618,
+            "contrast": 11.116676129280618,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              199,
+              245,
+              169
+            ],
+            "text": "עוד פעם"
+          },
+          "game-stages": {
+            "x": 326.921875,
+            "y": 325,
+            "width": 198,
+            "height": 44,
+            "top": 325,
+            "right": 524.921875,
+            "bottom": 369,
+            "left": 326.921875,
+            "rect": {
+              "x": 326.921875,
+              "y": 325,
+              "width": 198,
+              "height": 44,
+              "top": 325,
+              "right": 524.921875,
+              "bottom": 369,
+              "left": 326.921875
+            },
+            "visibleRect": {
+              "x": 326.921875,
+              "y": 325,
+              "width": 198,
+              "height": 44
+            },
+            "visibleWidth": 198,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "מפת השלבים"
+          },
+          "game-exit": {
+            "x": 145,
+            "y": 325,
+            "width": 173.921875,
+            "height": 44,
+            "top": 325,
+            "right": 318.921875,
+            "bottom": 369,
+            "left": 145,
+            "rect": {
+              "x": 145,
+              "y": 325,
+              "width": 173.921875,
+              "height": 44,
+              "top": 325,
+              "right": 318.921875,
+              "bottom": 369,
+              "left": 145
+            },
+            "visibleRect": {
+              "x": 145,
+              "y": 325,
+              "width": 173.921875,
+              "height": 44
+            },
+            "visibleWidth": 173.921875,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "לחזור לאי"
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "game": "tennis",
+        "outcome": "lose",
+        "actions": {
+          "game-again": {
+            "x": 532.921875,
+            "y": 325,
+            "width": 166.078125,
+            "height": 44,
+            "top": 325,
+            "right": 699,
+            "bottom": 369,
+            "left": 532.921875,
+            "rect": {
+              "x": 532.921875,
+              "y": 325,
+              "width": 166.078125,
+              "height": 44,
+              "top": 325,
+              "right": 699,
+              "bottom": 369,
+              "left": 532.921875
+            },
+            "visibleRect": {
+              "x": 532.921875,
+              "y": 325,
+              "width": 166.078125,
+              "height": 44
+            },
+            "visibleWidth": 166.078125,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 11.116676129280618,
+            "contrast": 11.116676129280618,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              199,
+              245,
+              169
+            ],
+            "text": "עוד פעם"
+          },
+          "game-stages": {
+            "x": 326.921875,
+            "y": 325,
+            "width": 198,
+            "height": 44,
+            "top": 325,
+            "right": 524.921875,
+            "bottom": 369,
+            "left": 326.921875,
+            "rect": {
+              "x": 326.921875,
+              "y": 325,
+              "width": 198,
+              "height": 44,
+              "top": 325,
+              "right": 524.921875,
+              "bottom": 369,
+              "left": 326.921875
+            },
+            "visibleRect": {
+              "x": 326.921875,
+              "y": 325,
+              "width": 198,
+              "height": 44
+            },
+            "visibleWidth": 198,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "מפת השלבים"
+          },
+          "game-exit": {
+            "x": 145,
+            "y": 325,
+            "width": 173.921875,
+            "height": 44,
+            "top": 325,
+            "right": 318.921875,
+            "bottom": 369,
+            "left": 145,
+            "rect": {
+              "x": 145,
+              "y": 325,
+              "width": 173.921875,
+              "height": 44,
+              "top": 325,
+              "right": 318.921875,
+              "bottom": 369,
+              "left": 145
+            },
+            "visibleRect": {
+              "x": 145,
+              "y": 325,
+              "width": 173.921875,
+              "height": 44
+            },
+            "visibleWidth": 173.921875,
+            "visibleHeight": 44,
+            "centerHit": true,
+            "visible": true,
+            "fontPx": 14,
+            "ratio": 12.25875813343847,
+            "contrast": 12.25875813343847,
+            "complexBackground": false,
+            "color": "rgb(23, 49, 57)",
+            "background": [
+              255,
+              242,
+              203
+            ],
+            "text": "לחזור לאי"
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted exit touch dismissed the result without a scroll."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Success and failure use synthetic result data displayed through the original ActivityInterface.showResult. Exit is a trusted touch."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-exit\"]').first()",
+      "x": 231.9609375,
+      "y": 347,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-exit",
+        "x": 231.9609375,
+        "y": 347
+      }
+    }
+  ],
+  "screenshots": [
+    "008-after-win.png",
+    "008-after-lose.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

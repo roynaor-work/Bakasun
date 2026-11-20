@@ -1,0 +1,115 @@
+{
+  "id": "034",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "fontPx": [
+          14,
+          14,
+          14,
+          14,
+          14,
+          14
+        ],
+        "examples": [
+          "● → 💥",
+          "🚀 → 🎯",
+          "→ ≈ ⛴",
+          "◆ → ⛴",
+          "●●● → 💥",
+          "+ → ⛴"
+        ],
+        "widths": [
+          78.328125,
+          78.328125,
+          78.34375,
+          78.328125,
+          78.328125,
+          78.34375
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "rack": [
+          164,
+          282,
+          516,
+          100
+        ],
+        "visibleEnemyCenters": [
+          {
+            "x": 422.54278780329355,
+            "y": 178.24677569732344,
+            "obscured": false
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "selected": "טיל מונחה",
+        "fontPx": 14
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: navalDuel, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.naval-weapon-picker').first()",
+      "x": 643,
+      "y": 335,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "naval-weapon-picker",
+        "x": 643,
+        "y": 335
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.ammo-rack [data-ammo-index=\"1\"]:enabled').first()",
+      "x": 548.5078125,
+      "y": 332,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "control-ammo-select",
+        "x": 548.5078125,
+        "y": 332
+      }
+    }
+  ],
+  "screenshots": [
+    "034-after-six-illustrated-choices.png",
+    "034-after-selected-weapon.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

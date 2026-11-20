@@ -1,0 +1,46 @@
+{
+  "id": "015",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "instructions": "אֶפְשָׁר לִבְחֹר לִהְיוֹת הַשּׁוֹעֵר לִפְנֵי הַמִּשְׂחָק: זוֹזִים עַל הַקַּו וְצוֹלְלִים בַּכַּפְתּוֹר הַגָּדוֹל. עִם כַּדּוּר בַּיָּדַיִם אֶפְשָׁר לָנוּעַ בָּרְחָבָה, לְכַוֵּן וְלִמְסֹר אוֹ לִבְעֹט. הַכַּדּוּר יוֹצֵא אַחֲרֵי חָמֵשׁ שְׁנִיּוֹת. תִּרְגּוּל קָצָר מְשַׁפֵּר אֶת הַכַּרְטִיס לְאַט."
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Actual league actions match the revised instructions."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The soccer introduction and the real league map are reached by the dev API. A trusted touch expands optional instructions when present."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 424,
+      "y": 300,
+      "endX": 424,
+      "endY": 110,
+      "steps": 6
+    }
+  ],
+  "screenshots": [
+    "015-before-soccer-league-help.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

@@ -1,0 +1,808 @@
+diff --git a/tests/cam-lab-auto-ui.test.mjs b/tests/cam-lab-auto-ui.test.mjs
+index c99fe025..e4223d6e 100644
+--- a/tests/cam-lab-auto-ui.test.mjs
++++ b/tests/cam-lab-auto-ui.test.mjs
+@@ -4,0 +5 @@ import { setImmediate as yieldToIO } from 'node:timers/promises';
++import { mockApprovedUploadEndpoint } from './helpers/approved-upload-endpoints.mjs';
+@@ -7,0 +9 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
++  const hook = mockApprovedUploadEndpoint('https://upload.example.invalid/receive');
+@@ -49,0 +52 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
++    globals('confirm', () => true);
+@@ -141 +144 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
+-    assert.equal(values.has('camlab.upload'),false);get('finish').onclick();await flush();assert.equal(requests.length,12);
++    assert.equal(values.has('camlab.upload.v2'),false);get('finish').onclick();await flush();assert.equal(requests.length,12);
+@@ -146 +149,2 @@ test('automatic attempts finalize and upload with granted, denied, and unsupport
+-  } finally {for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
++  } finally {
++    hook.deregister();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}}
+diff --git a/tests/cam-lab-background.test.mjs b/tests/cam-lab-background.test.mjs
+index d5c3f26d..72af1269 100644
+--- a/tests/cam-lab-background.test.mjs
++++ b/tests/cam-lab-background.test.mjs
+@@ -7,2 +7,3 @@ import { uploadIndexedDB } from './helpers/upload-idb.mjs';
+-const config = { endpoint: 'https://upload.example.invalid/exec', secret: 'synthetic-background-key', consentId: 'synthetic-consent' };
+-const storePair = () => { const indexedDB = uploadIndexedDB({ legacy: true }); return [new IndexedDBUploadStore({ indexedDB }), new IndexedDBUploadStore({ indexedDB }), indexedDB]; };
++const config = { endpoint: 'https://upload.example.invalid/exec', secret: 'synthetic-background-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
++const endpoints = [config.endpoint];
++const storePair = () => { const indexedDB = uploadIndexedDB({ legacy: true }); return [new IndexedDBUploadStore({ indexedDB, endpoints }), new IndexedDBUploadStore({ indexedDB, endpoints }), indexedDB]; };
+@@ -63 +64 @@ test('page retry waits for worker activation and delegates once without starting
+-  const queue = new UploadQueue({ config, store, fetchImpl: () => { throw Error('page must not post'); } });
++  const queue = new UploadQueue({ endpoints, config, store, fetchImpl: () => { throw Error('page must not post'); } });
+@@ -78 +79 @@ test('a bounded drain checkpoints a video chunk; the worker resumes without repe
+-  const page = new UploadQueue({ config, store, locks: null, now: () => time, fetchImpl });
++  const page = new UploadQueue({ endpoints, config, store, locks: null, now: () => time, fetchImpl });
+@@ -82 +83 @@ test('a bounded drain checkpoints a video chunk; the worker resumes without repe
+-  const worker = new UploadQueue({ config: await other.getConfig(), store: other, actor: 'sw', locks: null,
++  const worker = new UploadQueue({ endpoints, config: await other.getConfig(), store: other, actor: 'sw', locks: null,
+@@ -96 +97 @@ test('page and worker queues use the same fallback lease and read checkpoints af
+-  const page = new UploadQueue({ config, store, locks: null, fetchImpl });
++  const page = new UploadQueue({ endpoints, config, store, locks: null, fetchImpl });
+@@ -99 +100 @@ test('page and worker queues use the same fallback lease and read checkpoints af
+-  const sw = new UploadQueue({ config, store: other, actor: 'sw', persistConfig: false, locks: null, fetchImpl });
++  const sw = new UploadQueue({ endpoints, config, store: other, actor: 'sw', persistConfig: false, locks: null, fetchImpl });
+@@ -106 +107 @@ test('pagehide snapshot waits for the final recorder write; only the final video
+-  const sent = [], queue = new UploadQueue({ config, store, actor: 'sw', locks: null, now: () => time,
++  const sent = [], queue = new UploadQueue({ endpoints, config, store, actor: 'sw', locks: null, now: () => time,
+@@ -148,3 +149,3 @@ test('both lifecycle hooks register the same sync tag, including a write complet
+-        assert.match(url, /workout\/upload-sw\.js\?v=20261013-frames-1$/);
+-        assert.ok(options.scope.endsWith('/workout/')); assert.equal(options.type, 'module'); assert.equal(options.updateViaCache, 'none');
+-        return { active: {}, sync: { async register(tag) { tags.push(tag); } } };
++        assert.match(url, /workout\/upload-sw\.js\?v=privacy-consent-2&app=lab$/);
++        assert.ok(options.scope.endsWith('/workout/cam-lab/')); assert.equal(options.type, 'module'); assert.equal(options.updateViaCache, 'none');
++        return { active: { scriptURL: url }, sync: { async register(tag) { tags.push(tag); } } };
+diff --git a/tests/cam-lab-guidance.test.mjs b/tests/cam-lab-guidance.test.mjs
+index 59c86166..d8910cbc 100644
+--- a/tests/cam-lab-guidance.test.mjs
++++ b/tests/cam-lab-guidance.test.mjs
+@@ -99 +99 @@ test('brief jitter, frame loss and centered return never leave a stale arrow on
+-test('only Hebrew voices are eligible: local before network, even when a network voice was selected', () => {
++test('only local Hebrew voices are eligible even when a network voice was selected', () => {
+@@ -105 +105 @@ test('only Hebrew voices are eligible: local before network, even when a network
+-  assert.equal(selectHebrewVoice([english, remote]), remote);
++  assert.equal(selectHebrewVoice([english, remote]), null);
+@@ -140 +140,2 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew
+-  let voices = [english, remote];
++  const local = { name: 'Local', lang: 'he-IL', localService: true };
++  let voices = [english, remote, local];
+@@ -165 +166 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew
+-    assert.match(get('voice-status').textContent, /עברית ברשת/);
++    assert.match(get('voice-status').textContent, /עברית מקומית/);
+@@ -176 +177 @@ test('live lab corrects two wrong steps, acknowledges arrival once, uses Hebrew
+-    assert.equal(speech.at(-1).text, PLACEMENT_LINES.right.tts); assert.equal(speech.at(-1).voice, remote);
++    assert.equal(speech.at(-1).text, PLACEMENT_LINES.right.tts); assert.equal(speech.at(-1).voice, local);
+diff --git a/tests/cam-lab-keyframes.test.mjs b/tests/cam-lab-keyframes.test.mjs
+index a66560a7..c558073e 100644
+--- a/tests/cam-lab-keyframes.test.mjs
++++ b/tests/cam-lab-keyframes.test.mjs
+@@ -126 +126,2 @@ test('frames chunks resume across a new worker queue; older three-part records s
+-  const config = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-key', consentId: 'test' };
++  const config = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-key', consentId: 'test', expiresAt: Date.now() + 60 * 60 * 1000 };
++  const endpoints = [config.endpoint];
+@@ -136 +137 @@ test('frames chunks resume across a new worker queue; older three-part records s
+-  const queue = new UploadQueue({ config, store, fetchImpl });
++  const queue = new UploadQueue({ config, endpoints, store, fetchImpl });
+@@ -141 +142 @@ test('frames chunks resume across a new worker queue; older three-part records s
+-  const sw = new UploadQueue({ config, store, fetchImpl, actor: 'sw' }); assert.equal(await sw.retry(), true);
++  const sw = new UploadQueue({ config, endpoints, store, fetchImpl, actor: 'sw' }); assert.equal(await sw.retry(), true);
+diff --git a/tests/cam-lab-speech.test.mjs b/tests/cam-lab-speech.test.mjs
+index b92106ca..6d2e95a3 100644
+--- a/tests/cam-lab-speech.test.mjs
++++ b/tests/cam-lab-speech.test.mjs
+@@ -47 +47 @@ test('an existing catalog WAV plays before every Hebrew voice and reports the re
+-test('missing or invalid recordings fall back to local Hebrew before network Hebrew', async () => {
++test('missing or invalid recordings use local Hebrew or text', async () => {
+@@ -57 +57 @@ test('missing or invalid recordings fall back to local Hebrew before network Heb
+-  assert.equal(f.spoken[0].voice, remote); assert.equal(f.speech.snapshot().lastSource, 'hebrew-network');
++  assert.equal(f.spoken.length, 0); assert.equal(f.speech.snapshot().lastSource, 'text-only');
+@@ -85 +85 @@ test('diagnostics are bounded, contain only catalog IDs and sources, and reset p
+-  const f = fixture({ voices: [remote] });
++  const f = fixture({ voices: [local] });
+@@ -88 +88 @@ test('diagnostics are bounded, contain only catalog IDs and sources, and reset p
+-  assert.equal(snapshot.sources['hebrew-network'], 35); assert.equal(snapshot.events.length, 30);
++  assert.equal(snapshot.sources['hebrew-local'], 35); assert.equal(snapshot.events.length, 30);
+@@ -91 +91 @@ test('diagnostics are bounded, contain only catalog IDs and sources, and reset p
+-  assert.ok(!JSON.stringify(snapshot).includes(remote.name)); assert.ok(!JSON.stringify(snapshot).includes(PLACEMENT_LINES.near.tts));
++  assert.ok(!JSON.stringify(snapshot).includes(local.name)); assert.ok(!JSON.stringify(snapshot).includes(PLACEMENT_LINES.near.tts));
+diff --git a/tests/cam-lab-ui.test.mjs b/tests/cam-lab-ui.test.mjs
+index cdfcbb44..90c712f0 100644
+--- a/tests/cam-lab-ui.test.mjs
++++ b/tests/cam-lab-ui.test.mjs
+@@ -176 +176 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled
+-    await frame(pose()); assert.ok(speech.length > spokenBefore); assert.equal(speech.at(-1).voice.localService, false);
++    await frame(pose()); assert.equal(speech.length, spokenBefore);
+diff --git a/tests/cam-lab-upload-warning.test.mjs b/tests/cam-lab-upload-warning.test.mjs
+index 1eb5b796..93a6d50d 100644
+--- a/tests/cam-lab-upload-warning.test.mjs
++++ b/tests/cam-lab-upload-warning.test.mjs
+@@ -2,0 +3 @@ import assert from 'node:assert/strict';
++import { mockApprovedUploadEndpoint } from './helpers/approved-upload-endpoints.mjs';
+@@ -8 +9,2 @@ const warning = html.match(/id="upload-off-banner"[^>]*>([^<]+)/)[1];
+-test('upload warning is spoken once for disabled uploads with a Hebrew local or network voice', async () => {
++test('upload warning is spoken once for disabled uploads only with a local Hebrew voice', async () => {
++  const hook = mockApprovedUploadEndpoint('https://upload.example.invalid/receive');
+@@ -18 +20 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or
+-      ['active', { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-key', consentId: 'synthetic-consent' }, [{ lang: 'he-IL', localService: true }]],
++      ['active', { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 }, [{ lang: 'he-IL', localService: true }]],
+@@ -41 +43 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or
+-      assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
++      assert.equal(speech.length, 0);
+@@ -51 +53 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or
+-        assert.equal(speech.length, name === 'remote-only' ? 1 : 0);
++        assert.equal(speech.length, 0);
+@@ -54,0 +57 @@ test('upload warning is spoken once for disabled uploads with a Hebrew local or
++    hook.deregister();
+diff --git a/tests/cam-lab-upload.test.mjs b/tests/cam-lab-upload.test.mjs
+index 8d519af3..aedebd99 100644
+--- a/tests/cam-lab-upload.test.mjs
++++ b/tests/cam-lab-upload.test.mjs
+@@ -4 +4 @@ import { UPLOAD_STORAGE_KEY, MAX_UPLOAD_BYTES, initializeUploadConfig, disableUp
+-  createSessionId, UploadQueue as NativeUploadQueue, IndexedDBUploadStore, blobToBase64, VIDEO_CHUNK_BYTES, requestTimeoutMs, UPLOAD_LOG_KEY, readUploadLog } from '../workout/cam-lab/upload.mjs';
++  createSessionId, UploadQueue as BaseUploadQueue, IndexedDBUploadStore, blobToBase64, VIDEO_CHUNK_BYTES, requestTimeoutMs, UPLOAD_LOG_KEY, readUploadLog } from '../workout/cam-lab/upload.mjs';
+@@ -6 +6,5 @@ import { UPLOAD_STORAGE_KEY, MAX_UPLOAD_BYTES, initializeUploadConfig, disableUp
+-const config = { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent' };
++const config = { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
++const endpoints = [config.endpoint, 'https://other.example.invalid/'];
++class NativeUploadQueue extends BaseUploadQueue {
++  constructor(options = {}) { super({ endpoints, ...options }); }
++}
+@@ -40 +44 @@ function setupLink(endpoint = config.endpoint, secret = config.secret, storage =
+-  return { location, history, storage };
++  return { location, history, storage, endpoints, approve: () => true };
+@@ -72 +76 @@ for (const endpoint of ['http://upload.example.invalid/receive', 'javascript:ale
+-test('localhost HTTP works for local tests and duplicate/missing setup fields fail', () => {
++test('plain HTTP and duplicate or missing setup fields are rejected', () => {
+@@ -74 +78 @@ test('localhost HTTP works for local tests and duplicate/missing setup fields fa
+-    assert.equal(initializeUploadConfig(setupLink(endpoint)).error, null);
++    assert.equal(initializeUploadConfig(setupLink(endpoint)).config, null);
+@@ -121 +125 @@ test('three files are durable before POST, with exact text/plain contract and no
+-    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'follow'); assert.equal(options.referrerPolicy, 'no-referrer');
++    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'manual'); assert.equal(options.referrerPolicy, 'no-referrer');
+@@ -142,19 +146,6 @@ test('video MIME parameters are stripped at send time without changing queued by
+-test('HTTPS redirects to Apps Script response host or configured host acknowledge all three parts', async () => {
+-  for (const url of ['https://script.googleusercontent.com/macros/echo?test=synthetic',
+-    'https://upload.example.invalid/response']) {
+-    const store = new MemoryStore(), parts = [];
+-    const queue = new UploadQueue({ config, store, fetchImpl: async (_, options) => {
+-      assert.equal(options.redirect, 'follow'); parts.push(JSON.parse(options.body).part);
+-      return { ...goodResponse(), redirected: true, url };
+-    } });
+-    await queue.enqueue(input()); assert.equal(await queue.retry(), true);
+-    assert.deepEqual(parts, ['diagnostics', 'skeleton', 'video']); assert.equal(store.records.size, 0);
+-  }
+-});
+-
+-test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read and retain queued files', async () => {
+-  for (const url of ['https://foreign.example.invalid/response',
+-    'https://script.googleusercontent.com.foreign.example.invalid/response',
+-    'http://script.googleusercontent.com/response', 'http://upload.example.invalid/response', 'invalid']) {
+-    const store = new MemoryStore(), statuses = []; let calls = 0, jsonReads = 0;
+-    const queue = new UploadQueue({ config, store, onStatus: status => statuses.push(status), fetchImpl: async () => {
++test('redirect responses are terminal and retain the synthetic queued files', async () => {
++  for (const status of [0, 302, 307, 308]) {
++    const store = new MemoryStore(), results = [];
++    let calls = 0, jsonReads = 0;
++    const queue = new UploadQueue({ config, store, onStatus: value => results.push(value), fetchImpl: async (_, options) => {
++      assert.equal(options.redirect, 'manual');
+@@ -162 +153 @@ test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read a
+-      return { ok: true, redirected: true, url, json: async () => { jsonReads++; return { ok: true }; } };
++      return { status, type: status === 0 ? 'opaqueredirect' : 'basic', json: async () => { jsonReads++; } };
+@@ -164,6 +155,6 @@ test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read a
+-    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
+-    assert.equal(calls, 1); assert.equal(jsonReads, 0); assert.equal(store.records.size, 1);
+-    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
+-    assert.equal(statuses.at(-1).state, 'error');
+-    assert.match(statuses.at(-1).message, /השליחה לבדיקה נכשלה/);
+-    assert.equal(JSON.stringify(statuses).includes(url), false);
++    await queue.enqueue(input());
++    assert.equal(await queue.retry(), false);
++    assert.equal(calls, 1);
++    assert.equal(jsonReads, 0);
++    assert.equal(store.records.size, 1);
++    assert.equal(results.at(-1).error, 'redirect');
+@@ -173,5 +164,4 @@ test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read a
+-test('allowed redirect still requires successful HTTP and JSON ok strictly true', async () => {
+-  for (const [ok, result] of [[false, { ok: true }], [true, { ok: false, error: 'secret' }], [true, { ok: 'true' }]]) {
+-    const store = new MemoryStore();
+-    const queue = new UploadQueue({ config, store, fetchImpl: async () => ({
+-      ok, redirected: true, url: 'https://script.googleusercontent.com/macros/echo?test=synthetic', json: async () => result,
++test('a direct acknowledgement requires successful HTTP and JSON ok strictly true', async () => {
++  for (const [ok, result] of [[false, { ok: true }], [true, { ok: 1 }], [true, {}]]) {
++    const queue = new UploadQueue({ config, store: new MemoryStore(), fetchImpl: async () => ({
++      ok, json: async () => result,
+@@ -179,2 +169,2 @@ test('allowed redirect still requires successful HTTP and JSON ok strictly true'
+-    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
+-    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
++    await queue.enqueue(input());
++    assert.equal(await queue.retry(), false);
+diff --git a/tests/helpers/approved-upload-endpoints.mjs b/tests/helpers/approved-upload-endpoints.mjs
+new file mode 100644
+index 00000000..5df8b73f
+--- /dev/null
++++ b/tests/helpers/approved-upload-endpoints.mjs
+@@ -0,0 +1,15 @@
++import { registerHooks } from 'node:module';
++
++// Use an allowlist for this isolated test process. Production stays closed.
++export function mockApprovedUploadEndpoint(endpoint) {
++  return registerHooks({
++    load(url, context, next) {
++      const result = next(url, context);
++      if (!new URL(url).pathname.endsWith('/cam-lab/upload-endpoints.mjs')) return result;
++      const source = result.source.toString();
++      const policy = 'Object.freeze([])';
++      if (!source.includes(policy)) throw new Error('Cannot install the synthetic allowlist');
++      return { ...result, source: source.replace(policy, `Object.freeze(${JSON.stringify([endpoint])})`) };
++    },
++  });
++}
+diff --git a/tests/island-l1.test.mjs b/tests/island-l1.test.mjs
+index d4d5649b..05a8eae7 100644
+--- a/tests/island-l1.test.mjs
++++ b/tests/island-l1.test.mjs
+@@ -77 +77 @@ test('L1 a device speech failure switches to the picture fallback without throwi
+- const synthesis={getVoices:()=>[{lang:'he-IL'}],cancel(){},speak(){throw Error('unavailable');}},voice=createLearningVoice({synthesis,Utterance:class{}}),changes=[];voice.subscribe(v=>changes.push(v));assert.equal(voice.available,true);assert.equal(voice.speak('שָׁלוֹם'),false);assert.equal(voice.available,false);assert.equal(voice.speak('שׁוּב'),false);assert.deepEqual(changes,[false]);voice.dispose();
++ const synthesis={getVoices:()=>[{lang:'he-IL',localService:true}],cancel(){},speak(){throw Error('unavailable');}},voice=createLearningVoice({synthesis,Utterance:class{}}),changes=[];voice.subscribe(v=>changes.push(v));assert.equal(voice.available,true);assert.equal(voice.speak('שָׁלוֹם'),false);assert.equal(voice.available,false);assert.equal(voice.speak('שׁוּב'),false);assert.deepEqual(changes,[false]);voice.dispose();
+diff --git a/tests/workout-camera.test.mjs b/tests/workout-camera.test.mjs
+index 10d782d6..ea3035f7 100644
+--- a/tests/workout-camera.test.mjs
++++ b/tests/workout-camera.test.mjs
+@@ -9 +9 @@ import { honestTime } from '../workout/js/logic.js';
+-import { UploadQueue } from '../workout/cam-lab/upload.mjs';
++import { UploadQueue, UPLOAD_CONTEXTS } from '../workout/cam-lab/upload.mjs';
+@@ -12,2 +12,3 @@ import { pose } from './cam-lab-fixtures.js';
+-const consent = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent' };
+-const storage = config => ({ getItem: key => key === 'camlab.upload' ? JSON.stringify(config) : null });
++const consent = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
++const endpoints = [consent.endpoint];
++const storage = config => ({ getItem: key => key === UPLOAD_CONTEXTS.workout.key ? JSON.stringify(config) : null });
+@@ -17 +18 @@ function harness({ enabled = true, target = 3, initialCount = 0, onEnd } = {}) {
+-  const uploads = new CameraUploads({ storage: storage(enabled ? consent : null), onStatus: s => statuses.push(s),
++  const uploads = new CameraUploads({ storage: storage(enabled ? consent : null), endpoints, onStatus: s => statuses.push(s),
+@@ -46,2 +47,2 @@ test('camera is opt-in for exactly the seven lab exercise identifiers; saved con
+-  assert.deepEqual(readCameraConsent(storage(consent)), consent);
+-  assert.equal(readCameraConsent(storage({ ...consent, consentId: null })), null);
++  assert.deepEqual(readCameraConsent(storage(consent), endpoints), consent);
++  assert.equal(readCameraConsent(storage({ ...consent, consentId: null }), endpoints), null);
+diff --git a/workout/cam-lab/app.mjs b/workout/cam-lab/app.mjs
+index c1a375e9..bad7e16f 100644
+--- a/workout/cam-lab/app.mjs
++++ b/workout/cam-lab/app.mjs
+@@ -11 +11 @@ import { SkeletonRecorder } from './recording.mjs';
+-import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs?v=20261013-frames-1';
++import { initializeUploadConfig, disableUploadConfig, confirmCameraUpload, UploadQueue, createSessionId, UPLOAD_STORAGE_KEY } from './upload.mjs?v=20261013-frames-1';
+@@ -34 +34 @@ const spoken = {
+-  uploadOff: 'הַשְּׁלִיחָה לִבְדִיקָה כְּבוּיָה בַּטֵּלֵפוֹן הַזֶּה. הַנִּיסָּיוֹן יִישָּׁאֵר רַק בַּטֵּלֵפוֹן וְלֹא יַגִּיעַ לִבְדִיקָה. כְּדֵי לְהַפְעִיל, פּוֹתְחִים פַּעַם אַחַת אֶת קִישּׁוּר הַהַגְדָּרָה.',
++  uploadOff: 'הַשְּׁלִיחָה לִבְדִיקָה כְּבוּיָה בַּטֵּלֵפוֹן הַזֶּה. הַנִּיסָּיוֹן יִישָּׁאֵר רַק בַּטֵּלֵפוֹן וְלֹא יַגִּיעַ לִבְדִיקָה. כְּדֵי לְהַפְעִיל, פּוֹתְחִים אֶת קִישּׁוּר הַהַגְדָּרָה וּמְאַשְּׁרִים אֶת הַיַּעַד.',
+@@ -70 +70 @@ let workerLoading = null, workerLoaded = false, configureWaiter = null, workerLo
+-const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history });
++const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history, approve: confirmCameraUpload });
+@@ -90 +90 @@ function paintUploadConfig() {
+-  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד, האבחון ותמונות מפתח חדות. בסיום הנתונים נשלחים ליעד שהוגדר בקישור. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
++  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד, האבחון ותמונות מפתח חדות. בסיום הנתונים נשלחים ליעד שאושר. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
+@@ -113 +113 @@ window.addEventListener('storage', event => {
+-  if (event.key !== 'camlab.upload') return;
++  if (event.key !== UPLOAD_STORAGE_KEY) return;
+@@ -148 +148 @@ function voiceStatus() {
+-    `הקלטה בעברית קודמת להקראה. קול הגיבוי: ${voice.name || voice.lang} — ${voice.localService ? 'עברית מקומית' : 'עברית ברשת למשפטי ההכוונה הקבועים'}.`;
++    `הקלטה בעברית קודמת להקראה. קול הגיבוי: ${voice.name || voice.lang} — עברית מקומית.`;
+diff --git a/workout/cam-lab/index.html b/workout/cam-lab/index.html
+index 1c97f82a..f041046f 100644
+--- a/workout/cam-lab/index.html
++++ b/workout/cam-lab/index.html
+@@ -8 +8 @@
+-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self' https: http://localhost:* http://127.0.0.1:*; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
++  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+@@ -15 +15 @@
+-  <p id="upload-off-banner" class="upload-banner upload-off">השליחה לבדיקה כבויה בטלפון הזה. הניסיון יישאר רק בטלפון ולא יגיע לבדיקה. כדי להפעיל, פותחים פעם אחת את קישור ההגדרה.</p>
++  <p id="upload-off-banner" class="upload-banner upload-off">השליחה לבדיקה כבויה בטלפון הזה. הניסיון יישאר רק בטלפון ולא יגיע לבדיקה. כדי להפעיל, פותחים את קישור ההגדרה ומאשרים את היעד.</p>
+diff --git a/workout/cam-lab/speech.mjs b/workout/cam-lab/speech.mjs
+index 1c7118c6..1fde5455 100644
+--- a/workout/cam-lab/speech.mjs
++++ b/workout/cam-lab/speech.mjs
+@@ -30 +30 @@ export function createLabSpeech({ synth, Utterance, context, fetchFile, now = ()
+-        job.onSource(voice.localService === true ? 'hebrew-local' : 'hebrew-network', splitVoiceText(job.text).map(p => p.id));
++        job.onSource('hebrew-local', splitVoiceText(job.text).map(p => p.id));
+diff --git a/workout/cam-lab/upload-background.mjs b/workout/cam-lab/upload-background.mjs
+index 6dae046c..238349a4 100644
+--- a/workout/cam-lab/upload-background.mjs
++++ b/workout/cam-lab/upload-background.mjs
+@@ -1 +1 @@
+-import { IndexedDBUploadStore, UPLOAD_TAG, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261013-frames-1';
++import { IndexedDBUploadStore, UPLOAD_CONTEXTS, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261013-frames-1';
+@@ -4,2 +4,2 @@ export const NEXT_OPEN_MESSAGE = 'השליחה תמשיך בפתיחה הבאה'
+-const workerURL = new URL(`../upload-sw.js?v=${UPLOAD_VERSION}`, import.meta.url);
+-const scopeURL = new URL('../', import.meta.url);
++const workoutScope = new URL('../', import.meta.url);
++const workerURL = new URL('../upload-sw.js', import.meta.url);
+@@ -7,2 +7,18 @@ const scopeURL = new URL('../', import.meta.url);
+-// One registration for both /workout/ and /workout/cam-lab/. No credentials
+-// travel in messages, the worker URL, diagnostics or registration options.
++// Disable the former shared authorization without removing queued media.
++async function retireLegacyUploads(sw) {
++  try { globalThis.localStorage?.removeItem('camlab.upload'); } catch { /* IndexedDB is checked separately. */ }
++  const registrations = await sw?.getRegistrations?.() || [];
++  const legacy = registrations.find(registration => registration.scope === workoutScope.href &&
++    [registration.active, registration.waiting, registration.installing].some(worker => {
++      if (!worker) return false;
++      const url = new URL(worker.scriptURL);
++      return url.pathname === workerURL.pathname && !url.searchParams.has('app');
++    }));
++  const databases = await globalThis.indexedDB?.databases?.();
++  if (legacy || databases?.some(db => db.name === 'camlab.upload.queue')) {
++    await new IndexedDBUploadStore({ name: 'camlab.upload.queue' }).clearConfig('camlab.upload');
++  }
++  if (legacy) await legacy.unregister();
++}
++
++// Each app gets its own service-worker scope, queue and consent.
+@@ -11,2 +27,5 @@ export class BackgroundUploads {
+-    window = globalThis.window, onSupport = () => {} } = {}) {
+-    Object.assign(this, { queue, navigator, document, window, onSupport });
++    window = globalThis.window, context = queue?.context || 'lab', onSupport = () => {} } = {}) {
++    Object.assign(this, { queue, navigator, document, window, context, onSupport });
++    this.scopeURL = context === 'workout' ? workoutScope : new URL('./', import.meta.url);
++    this.workerURL = new URL(workerURL);
++    this.workerURL.search = new URLSearchParams({ v: UPLOAD_VERSION, app: context });
+@@ -18 +37 @@ export class BackgroundUploads {
+-      if (data?.type !== 'camlab-upload-status' || !this.queue?.enabled) return;
++      if (data?.type !== 'camlab-upload-status' || data.app !== this.context || !this.queue?.enabled) return;
+@@ -38 +56,0 @@ export class BackgroundUploads {
+-    if (!this.queue?.enabled) { await this.remove(); return; }
+@@ -39,0 +58,2 @@ export class BackgroundUploads {
++      await retireLegacyUploads(sw);
++      if (!this.queue?.enabled) return;
+@@ -43 +63 @@ export class BackgroundUploads {
+-      const registration = await sw.register(workerURL.href, { scope: scopeURL.pathname, type: 'module', updateViaCache: 'none' });
++      const registration = await sw.register(this.workerURL.href, { scope: this.scopeURL.pathname, type: 'module', updateViaCache: 'none' });
+@@ -45 +65 @@ export class BackgroundUploads {
+-      if (!registration.active) await new Promise((resolve, reject) => {
++      if (registration.active?.scriptURL !== this.workerURL.href) await new Promise((resolve, reject) => {
+@@ -47 +67 @@ export class BackgroundUploads {
+-        if (!worker) { reject(new Error('worker')); return; }
++        if (worker?.scriptURL !== this.workerURL.href) { reject(new Error('worker')); return; }
+@@ -53 +73 @@ export class BackgroundUploads {
+-      if (!this.queue.enabled) { await this.remove(); return; }
++      if (!this.queue.enabled) return;
+@@ -73 +93 @@ export class BackgroundUploads {
+-    try { await this.registration.sync.register(UPLOAD_TAG); registered = true; }
++    try { await this.registration.sync.register(UPLOAD_CONTEXTS[this.context].tag); registered = true; }
+@@ -91 +111 @@ export class BackgroundUploads {
+-      try { this.registration.active.postMessage({ type: 'camlab-upload-start' }, [channel.port2]); }
++      try { this.registration.active.postMessage({ type: 'camlab-upload-start', app: this.context }, [channel.port2]); }
+@@ -105 +124,0 @@ export class BackgroundUploads {
+-    // A fresh private visit never creates an upload database or worker.
+@@ -107,2 +125,0 @@ export class BackgroundUploads {
+-      const databases = await globalThis.indexedDB?.databases?.();
+-      if (databases?.some(db => db.name === 'camlab.upload.queue')) await new IndexedDBUploadStore().revoke();
+@@ -110 +127 @@ export class BackgroundUploads {
+-        if (registration.scope !== scopeURL.href) continue;
++        if (registration.scope !== this.scopeURL.href) continue;
+@@ -112,2 +129,2 @@ export class BackgroundUploads {
+-        if (worker && new URL(worker.scriptURL).pathname === workerURL.pathname) {
+-          worker.postMessage({ type: 'camlab-upload-revoked' });
++        if (worker?.scriptURL === this.workerURL.href) {
++          worker.postMessage({ type: 'camlab-upload-revoked', app: this.context });
+@@ -117 +134 @@ export class BackgroundUploads {
+-    } catch { /* Private mode still never activates an uploader. */ }
++    } catch { /* The changed consent is also checked by the queue before each send. */ }
+diff --git a/workout/cam-lab/upload-endpoints.mjs b/workout/cam-lab/upload-endpoints.mjs
+new file mode 100644
+index 00000000..b24d2c2a
+--- /dev/null
++++ b/workout/cam-lab/upload-endpoints.mjs
+@@ -0,0 +1,12 @@
++// Review exact HTTPS origin + pathname pairs before adding them here.
++// The ingestion endpoint must return the JSON acknowledgement directly.
++export const APPROVED_UPLOAD_ENDPOINTS = Object.freeze([]);
++
++export function approvedUploadEndpoint(value, endpoints = APPROVED_UPLOAD_ENDPOINTS) {
++  if (typeof value !== 'string' || value.length > 4096) return null;
++  try {
++    const url = new URL(value);
++    if (url.protocol !== 'https:' || value !== url.origin + url.pathname) return null;
++    return endpoints.includes(value) ? value : null;
++  } catch { return null; }
++}
+diff --git a/workout/cam-lab/upload.mjs b/workout/cam-lab/upload.mjs
+index 439b0fda..b3eb299c 100644
+--- a/workout/cam-lab/upload.mjs
++++ b/workout/cam-lab/upload.mjs
+@@ -1 +1,8 @@
+-export const UPLOAD_STORAGE_KEY = 'camlab.upload';
++import { approvedUploadEndpoint } from './upload-endpoints.mjs';
++
++export const UPLOAD_CONTEXTS = Object.freeze({
++  lab: Object.freeze({ key: 'camlab.upload.v2', database: 'camlab.upload.queue.v2', tag: 'camlab-upload-v2' }),
++  workout: Object.freeze({ key: 'kidfit.cameraUpload.v2', database: 'kidfit.cameraUpload.queue.v2', tag: 'kidfit-camera-upload-v2' }),
++});
++export const UPLOAD_STORAGE_KEY = UPLOAD_CONTEXTS.lab.key;
++export const CONSENT_TTL_MS = 24 * 60 * 60 * 1000;
+@@ -7 +14 @@ export const RETRY_DELAYS_MS = [2000, 5000, 15000];
+-export const UPLOAD_TAG = 'camlab-upload';
++export const UPLOAD_TAG = UPLOAD_CONTEXTS.lab.tag;
+@@ -9 +16 @@ export const UPLOAD_DB_VERSION = 2;
+-export const UPLOAD_VERSION = '20261013-frames-1';
++export const UPLOAD_VERSION = 'privacy-consent-2';
+@@ -36,11 +43,2 @@ const uniqueToken = () => globalThis.crypto?.randomUUID?.() || `${Date.now().toS
+-function validEndpoint(value) {
+-  if (typeof value !== 'string' || value.length > 4096) return null;
+-  try {
+-    const url = new URL(value);
+-    const local = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
+-    if ((url.protocol !== 'https:' && !(url.protocol === 'http:' && local)) || url.username || url.password || url.hash) return null;
+-    return url.href;
+-  } catch { return null; }
+-}
+-function validConfig(value) {
+-  const endpoint = validEndpoint(value?.endpoint);
++function validConfig(value, endpoints, now = Date.now()) {
++  const endpoint = approvedUploadEndpoint(value?.endpoint, endpoints);
+@@ -48,2 +46,9 @@ function validConfig(value) {
+-    typeof value.consentId === 'string' && value.consentId.length > 0 && value.consentId.length <= 128 ?
+-    { endpoint, secret: value.secret, consentId: value.consentId } : null;
++    typeof value.consentId === 'string' && value.consentId.length > 0 && value.consentId.length <= 128 &&
++    Number.isSafeInteger(value.expiresAt) && value.expiresAt > now && value.expiresAt <= now + CONSENT_TTL_MS ?
++    { endpoint, secret: value.secret, consentId: value.consentId, expiresAt: value.expiresAt } : null;
++}
++
++export function confirmCameraUpload(endpoint) {
++  return globalThis.confirm?.(`האם לאשר שליחת וידאו ללא קול, תמונות מפתח, שלד ואבחון לכתובת הבאה למשך 24 שעות?
++
++${endpoint}`) === true;
+@@ -52,3 +57,3 @@ function validConfig(value) {
+-// The fragment is erased before parsing or storage access. Neither errors nor
+-// queue records contain the endpoint or the secret from the parent's link.
+-export function initializeUploadConfig({ location = globalThis.location, history = globalThis.history, storage } = {}) {
++// Remove the fragment before reading storage or asking for explicit consent.
++export function initializeUploadConfig({ location = globalThis.location, history = globalThis.history,
++  storage, context = 'lab', endpoints, approve = () => false, now = Date.now } = {}) {
+@@ -65,0 +71 @@ export function initializeUploadConfig({ location = globalThis.location, history
++    const key = UPLOAD_CONTEXTS[context].key;
+@@ -67 +73 @@ export function initializeUploadConfig({ location = globalThis.location, history
+-    try { previous = validConfig(JSON.parse(storage?.getItem(UPLOAD_STORAGE_KEY) || 'null')); } catch { /* Invalid saved settings do not grant consent. */ }
++    try { previous = validConfig(JSON.parse(storage?.getItem(key) || 'null'), endpoints, now()); } catch { /* Invalid settings confer no consent. */ }
+@@ -69 +75 @@ export function initializeUploadConfig({ location = globalThis.location, history
+-    const endpoint = validEndpoint(params.get('upload')), secret = params.get('key');
++    const endpoint = approvedUploadEndpoint(params.get('upload'), endpoints), secret = params.get('key');
+@@ -71 +77 @@ export function initializeUploadConfig({ location = globalThis.location, history
+-      return { config: null, error: 'קישור השליחה אינו תקין. נדרשים כתובת HTTPS ומפתח בדיקה.' };
++      return { config: previous, error: 'קישור השליחה אינו תקין או שהיעד טרם אושר.' };
+@@ -73,3 +79,5 @@ export function initializeUploadConfig({ location = globalThis.location, history
+-    const config = { endpoint, secret, consentId: previous?.endpoint === endpoint && previous.secret === secret ? previous.consentId : uniqueToken() };
+-    if (!storage?.setItem) return { config: null, error: storageError };
+-    storage.setItem(UPLOAD_STORAGE_KEY, JSON.stringify(config));
++    if (approve(endpoint) !== true) return { config: previous, error: null };
++    const consentId = previous?.endpoint === endpoint && previous.secret === secret ? previous.consentId : uniqueToken();
++    const config = { endpoint, secret, consentId, expiresAt: now() + CONSENT_TTL_MS };
++    if (!storage?.setItem) return { config: previous, error: storageError };
++    storage.setItem(key, JSON.stringify(config));
+@@ -80,2 +88,2 @@ export function initializeUploadConfig({ location = globalThis.location, history
+-export function disableUploadConfig(storage) {
+-  try { (storage || globalThis.localStorage)?.removeItem(UPLOAD_STORAGE_KEY); return true; }
++export function disableUploadConfig(storage, context = 'lab') {
++  try { (storage || globalThis.localStorage)?.removeItem(UPLOAD_CONTEXTS[context].key); return true; }
+@@ -97,2 +105,8 @@ export class IndexedDBUploadStore {
+-  constructor({ indexedDB = globalThis.indexedDB, name = 'camlab.upload.queue' } = {}) {
+-    this.indexedDB = indexedDB; this.name = name; this.database = null;
++  constructor({ indexedDB = globalThis.indexedDB, context = 'lab', name = UPLOAD_CONTEXTS[context].database, endpoints } = {}) {
++    Object.assign(this, { indexedDB, name, context, endpoints });
++    this.database = null;
++  }
++  get key() { return UPLOAD_CONTEXTS[this.context].key; }
++  get tag() { return UPLOAD_CONTEXTS[this.context].tag; }
++  clearConfig(key = this.key) {
++    return this.transaction('readwrite', store => store.delete(key), 'state');
+@@ -135,3 +149,7 @@ export class IndexedDBUploadStore {
+-  getConfig() { return this.transaction('readonly', store => store.get(UPLOAD_STORAGE_KEY), 'state').then(validConfig); }
+-  setConfig(config) { return this.transaction('readwrite', store => validConfig(config) ?
+-    store.put(validConfig(config), UPLOAD_STORAGE_KEY) : store.delete(UPLOAD_STORAGE_KEY), 'state'); }
++  getConfig() {
++    return this.transaction('readonly', store => store.get(this.key), 'state').then(value => validConfig(value, this.endpoints));
++  }
++  setConfig(config) {
++    const approved = validConfig(config, this.endpoints);
++    return this.transaction('readwrite', store => approved ? store.put(approved, this.key) : store.delete(this.key), 'state');
++  }
+@@ -160 +178 @@ export class IndexedDBUploadStore {
+-  acquireLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => !lease || lease.expires <= now || lease.owner === owner ?
++  acquireLease(owner, now, ttl) { return this.updateState(this.tag, lease => !lease || lease.expires <= now || lease.owner === owner ?
+@@ -162 +180 @@ export class IndexedDBUploadStore {
+-  renewLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner && lease.expires > now ?
++  renewLease(owner, now, ttl) { return this.updateState(this.tag, lease => lease?.owner === owner && lease.expires > now ?
+@@ -164 +182 @@ export class IndexedDBUploadStore {
+-  releaseLease(owner) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner ? { value: null } : {}); }
++  releaseLease(owner) { return this.updateState(this.tag, lease => lease?.owner === owner ? { value: null } : {}); }
+@@ -170 +188 @@ export class IndexedDBUploadStore {
+-      tx.objectStore('state').delete(UPLOAD_STORAGE_KEY); tx.objectStore('sessions').clear();
++      tx.objectStore('state').delete(this.key); tx.objectStore('sessions').clear();
+@@ -179 +197 @@ export class IndexedDBUploadStore {
+-      const request = tx.objectStore('state').get(UPLOAD_STORAGE_KEY);
++      const request = tx.objectStore('state').get(this.key);
+@@ -181 +199 @@ export class IndexedDBUploadStore {
+-        if (request.result?.consentId !== record.consentId) return;
++        if (validConfig(request.result, this.endpoints)?.consentId !== record.consentId) return;
+@@ -183 +201 @@ export class IndexedDBUploadStore {
+-        const lease = tx.objectStore('state').get(UPLOAD_TAG);
++        const lease = tx.objectStore('state').get(this.tag);
+@@ -198 +216 @@ export class UploadLock {
+-    if (this.locks?.request) return this.locks.request(UPLOAD_TAG, { ifAvailable }, lock => lock ? operation() : false);
++    if (this.locks?.request) return this.locks.request(this.store?.tag || UPLOAD_TAG, { ifAvailable }, lock => lock ? operation() : false);
+@@ -230 +248,2 @@ export class UploadQueue {
+-  constructor({ config = null, store = new IndexedDBUploadStore(), fetchImpl = globalThis.fetch,
++  constructor({ config = null, context = 'lab', endpoints,
++    store = new IndexedDBUploadStore({ context, endpoints }), fetchImpl = globalThis.fetch,
+@@ -234 +253,2 @@ export class UploadQueue {
+-    this.config = validConfig(config); this.store = store;
++    this.context = context;
++    this.config = validConfig(config, endpoints); this.store = store;
+@@ -251 +271 @@ export class UploadQueue {
+-  get enabled() { return this.config != null; }
++  get enabled() { return Boolean(this.config && Date.now() < this.config.expiresAt); }
+@@ -317 +337,4 @@ export class UploadQueue {
+-    if (this.store.getConfig && (await this.store.getConfig())?.consentId !== config.consentId) return false;
++    if (this.store.getConfig) {
++      const current = await this.store.getConfig();
++      if (current?.consentId !== config.consentId || current.endpoint !== config.endpoint || current.secret !== config.secret) return false;
++    }
+@@ -331 +354 @@ export class UploadQueue {
+-  async post(config, record, part, chunk = null) {
++  async post(config, record, part, chunk, epoch) {
+@@ -343 +366 @@ export class UploadQueue {
+-      if (!this.enabled || this.config !== config) return false;
++      if (!await this.canSend(epoch, config) || controller.signal.aborted) return false;
+@@ -357 +380 @@ export class UploadQueue {
+-        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'follow',
++        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'manual',
+@@ -359,5 +382,2 @@ export class UploadQueue {
+-        if (response.redirected) {
+-          let url;
+-          try { url = new URL(response.url); } catch { throw new UploadError('redirect'); }
+-          if (url.protocol !== 'https:' ||
+-            (url.hostname !== 'script.googleusercontent.com' && url.hostname !== new URL(config.endpoint).hostname)) throw new UploadError('redirect');
++        if (response.type === 'opaqueredirect' || response.redirected || (response.status >= 300 && response.status < 400)) {
++          throw new UploadError('redirect');
+@@ -391 +411 @@ export class UploadQueue {
+-      try { return await this.post(config, record, part, chunk); }
++      try { return await this.post(config, record, part, chunk, epoch); }
+diff --git a/workout/cam-lab/voice-selection.mjs b/workout/cam-lab/voice-selection.mjs
+index dbc7a1f4..502cd7cf 100644
+--- a/workout/cam-lab/voice-selection.mjs
++++ b/workout/cam-lab/voice-selection.mjs
+@@ -4,4 +4 @@ export const hebrewVoices = voices => (voices || []).filter(isHebrewVoice);
+-export const preferredHebrewVoices = voices => {
+-  const hebrew = hebrewVoices(voices), local = hebrew.filter(v => v.localService === true);
+-  return local.length ? local : hebrew;
+-};
++export const preferredHebrewVoices = voices => hebrewVoices(voices).filter(v => v.localService === true);
+diff --git a/workout/index.html b/workout/index.html
+index f94dde0f..fac924b4 100644
+--- a/workout/index.html
++++ b/workout/index.html
+@@ -4,0 +5 @@
++  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://ckfezrtrmfyqepozdzzp.supabase.co wss://ckfezrtrmfyqepozdzzp.supabase.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+diff --git a/workout/island/learning/voice.mjs b/workout/island/learning/voice.mjs
+index cc64fc74..55835cb4 100644
+--- a/workout/island/learning/voice.mjs
++++ b/workout/island/learning/voice.mjs
+@@ -5 +5 @@ export function createLearningVoice({synthesis=globalThis.speechSynthesis,Uttera
+-    voices=(synthesis?.getVoices?.()||[]).filter(v=>/^he(?:[-_]|$)/i.test(v.lang)||/^iw(?:[-_]|$)/i.test(v.lang));
++    voices=(synthesis?.getVoices?.()||[]).filter(v=>v.localService===true&&/^(?:he|iw)(?:[-_]|$)/i.test(v.lang));
+@@ -16 +16 @@ export function createLearningVoice({synthesis=globalThis.speechSynthesis,Uttera
+-        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices.find(v=>v.localService)||voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;synthesis.speak(utterance);return true;
++        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;synthesis.speak(utterance);return true;
+diff --git a/workout/island/minigames/boar-island/index.html b/workout/island/minigames/boar-island/index.html
+index 7a438788..ab511930 100644
+--- a/workout/island/minigames/boar-island/index.html
++++ b/workout/island/minigames/boar-island/index.html
+@@ -4,0 +5 @@
++  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+diff --git a/workout/js/app.js b/workout/js/app.js
+index 34209b6d..fdf2e882 100644
+--- a/workout/js/app.js
++++ b/workout/js/app.js
+@@ -29,0 +30 @@ import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from
++import { confirmCameraUpload, disableUploadConfig, initializeUploadConfig, UPLOAD_CONTEXTS } from '../cam-lab/upload.mjs?v=20261013-frames-1';
+@@ -42,0 +44,5 @@ const cameraFailed = new Set();
++const setupCameraUpload = () => {
++  const setup = initializeUploadConfig({ context: 'workout', approve: confirmCameraUpload });
++  if (setup.error) alert(setup.error);
++};
++setupCameraUpload();
+@@ -63 +69 @@ const vline = (key, legacy) => vcOn() ? VC.pick(key, vcCtx()) : { text: legacy,
+-window.addEventListener('storage', event => { if (event.key === 'camlab.upload') { cameraUploads.refresh(); void cameraUploads.retry(); } });
++window.addEventListener('storage', event => { if (event.key === UPLOAD_CONTEXTS.workout.key) { cameraUploads.refresh(); void cameraUploads.retry(); } });
+@@ -227 +233,6 @@ function renderNav(path) {
+-window.addEventListener('hashchange', route);
++window.addEventListener('hashchange', () => {
++  setupCameraUpload();
++  cameraUploads.refresh();
++  void cameraUploads.retry();
++  route();
++});
+@@ -718 +729 @@ function wireReps(it, ex, mainFig) {
+-      if (store.profile.listen !== false && canListen()) stopListen = listenCount(m => { if (!counting || spokeRecently(700)) return; if (m === n + 1 || m === n + 2) { if (m === n + 2) { n++; show(); } step(true); } });
++      if (store.profile.listenLocal === true && canListen()) stopListen = listenCount(m => { if (!counting || spokeRecently(700)) return; if (m === n + 1 || m === n + 2) { if (m === n + 2) { n++; show(); } step(true); } });
+@@ -1087,3 +1098,4 @@ function settings() {
+-      <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. הגדרת שליחה נעשית רק דרך קישור המעבדה.</p>
+-      <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
+-      <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
++      ${readCameraConsent() ? '<button class="btn chip" id="camera-upload-off">כיבוי שליחת נתוני מצלמה</button>' : ''}
++      <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. כדי לאשר שליחה מהאימון, פותחים קישור הגדרה לאפליקציית האימון.</p>
++      <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listenLocal === true ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
++      <p class="muted small">${canListen() ? 'באישור הורה, אפשר להפעיל ספירה במיקרופון אם מותקנת במכשיר שפת זיהוי מקומית. אפשר לספור גם בלחיצה.' : 'זיהוי דיבור מקומי אינו זמין בדפדפן הזה. אפשר לספור בלחיצה.'}</p>
+@@ -1166 +1178 @@ function settings() {
+-  $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
++  $('#listen').onchange = e => store.setProfile({ listenLocal: e.target.checked });
+@@ -1167,0 +1180,8 @@ function settings() {
++  if ($('#camera-upload-off')) $('#camera-upload-off').onclick = async () => {
++    if (!disableUploadConfig(undefined, 'workout')) { alert('לא ניתן לעדכן את הגדרת השליחה במכשיר.'); return; }
++    const { queue, background } = cameraUploads;
++    await queue?.disable();
++    await background?.remove();
++    cameraUploads.refresh();
++    settings();
++  };
+diff --git a/workout/js/camera-session.mjs b/workout/js/camera-session.mjs
+index f068f7c7..0d33dbc7 100644
+--- a/workout/js/camera-session.mjs
++++ b/workout/js/camera-session.mjs
+@@ -15 +15 @@ export const cameraAvailable = (profile, id) => profile.camera === true && EXERC
+-export const readCameraConsent = storage => initializeUploadConfig({ storage, location: { hash: '' } }).config;
++export const readCameraConsent = (storage, endpoints) => initializeUploadConfig({ storage, endpoints, context: 'workout', location: { hash: '' } }).config;
+@@ -19,2 +19,2 @@ export class CameraUploads {
+-  constructor({ storage, onStatus = () => {}, queueFactory = options => new UploadQueue(options) } = {}) {
+-    this.storage = storage; this.onStatus = onStatus; this.queueFactory = queueFactory; this.unsaved = new Map(); this.saving = new Map(); this.videoMissing = new Set();
++  constructor({ storage, endpoints, onStatus = () => {}, queueFactory = options => new UploadQueue(options) } = {}) {
++    this.storage = storage; this.endpoints = endpoints; this.onStatus = onStatus; this.queueFactory = queueFactory; this.unsaved = new Map(); this.saving = new Map(); this.videoMissing = new Set();
+@@ -24 +24 @@ export class CameraUploads {
+-    const config = readCameraConsent(this.storage);
++    const config = readCameraConsent(this.storage, this.endpoints);
+@@ -26,3 +26,2 @@ export class CameraUploads {
+-    const disabling = this.queue?.disable();
+-    const removing = this.background?.remove();
+-    this.ready = Promise.allSettled([this.ready, disabling, removing]);
++    this.queue?.stop();
++    this.background?.detach();
+@@ -30 +29 @@ export class CameraUploads {
+-    this.queue = config ? this.queueFactory({ config, persistConfig: false, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
++    this.queue = config ? this.queueFactory({ config, context: 'workout', endpoints: this.endpoints, persistConfig: false, onStatus: status => this.onStatus(status.state === 'sent' && this.videoMissing.has(status.session) ?
+@@ -33 +31,0 @@ export class CameraUploads {
+-    // Wait for old revocation before copying the replacement configuration.
+@@ -35 +33 @@ export class CameraUploads {
+-    this.ready = this.ready.then(async () => {
++    this.ready = Promise.resolve(this.ready).then(async () => {
+@@ -37,2 +35,8 @@ export class CameraUploads {
+-      if (queue) { await queue.ready; await queue.store.setConfig?.(config); }
+-      this.background = new BackgroundUploads({ queue });
++      if (queue) {
++        await queue.ready;
++        if (queue !== this.queue || JSON.stringify(readCameraConsent(this.storage, this.endpoints)) !== JSON.stringify(config)) {
++          queue.stop(); return;
++        }
++        await queue.store.setConfig?.(config);
++      }
++      this.background = new BackgroundUploads({ queue, context: 'workout' });
+diff --git a/workout/js/count.js b/workout/js/count.js
+index ab73d993..5e2988e4 100644
+--- a/workout/js/count.js
++++ b/workout/js/count.js
+@@ -45,2 +45,6 @@ export function parseCount(text) {
+-// הקשבה לילד: זיהוי דיבור של הדפדפן (כרום באנדרואיד). onNumber(n) בכל מספר שנשמע. מחזיר פונקציית עצירה, או null אם אין תמיכה
+-export const canListen = () => !!(window.SpeechRecognition || window.webkitSpeechRecognition);
++// Only start a recognizer after the browser confirms an installed local language.
++const localRecognition = () => {
++  const SR = globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition;
++  return typeof SR?.available === 'function' && 'processLocally' in SR.prototype ? SR : null;
++};
++export const canListen = () => Boolean(localRecognition());
+@@ -48,2 +52,3 @@ export function listenCount(onNumber, lang = 'he-IL') {
+-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition; if (!SR) return null;
+-  let on = true, rec = null;
++  const SR = localRecognition();
++  if (!SR) return null;
++  let on = true, rec = null, restart;
+@@ -52,5 +57,23 @@ export function listenCount(onNumber, lang = 'he-IL') {
+-    rec = new SR(); rec.lang = lang; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 1;
+-    rec.onresult = e => { for (let i = e.resultIndex; i < e.results.length; i++) { const n = parseCount(e.results[i][0].transcript); if (n != null) onNumber(n, e.results[i].isFinal); } };
+-    rec.onend = () => { if (on) setTimeout(start, 250); }; // הדפדפן עוצר לבד אחרי שקט, מתחילים שוב
+-    rec.onerror = ev => { if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') on = false; };
+-    try { rec.start(); } catch { /* כבר רץ */ }
++    rec = new SR();
++    rec.processLocally = true;
++    if (rec.processLocally !== true) return;
++    rec.lang = lang; rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 1;
++    rec.onresult = e => {
++      if (!on) return;
++      for (let i = e.resultIndex; i < e.results.length; i++) {
++        const n = parseCount(e.results[i][0].transcript);
++        if (n != null) onNumber(n, e.results[i].isFinal);
++      }
++    };
++    rec.onend = () => { if (on) restart = setTimeout(start, 250); };
++    rec.onerror = ev => { if (ev.error !== 'no-speech') on = false; };
++    try { rec.start(); } catch { on = false; }
++  };
++  const startLocal = async () => {
++    if (await SR.available({ langs: [lang], processLocally: true }) === 'available') start();
++  };
++  void startLocal().catch(() => { on = false; });
++  return () => {
++    on = false;
++    clearTimeout(restart);
++    try { rec?.abort(); } catch { /* The recognizer may have stopped. */ }
+@@ -58,2 +80,0 @@ export function listenCount(onNumber, lang = 'he-IL') {
+-  start();
+-  return () => { on = false; try { rec && rec.stop(); } catch { /* */ } };
+diff --git a/workout/js/speech.js b/workout/js/speech.js
+index 55ac1a40..b95fd485 100644
+--- a/workout/js/speech.js
++++ b/workout/js/speech.js
+@@ -10 +10 @@ let voices = [];
+-const refresh = () => { try { voices = (synth?.getVoices() || []).filter(v => /^he|iw/i.test(v.lang)); } catch { voices = []; } };
++const refresh = () => { try { voices = (synth?.getVoices() || []).filter(v => v.localService === true && /^(?:he|iw)(?:[-_]|$)/i.test(v.lang)); } catch { voices = []; } };
+@@ -14 +14 @@ if (synth) synth.addEventListener?.('voiceschanged', refresh);
+-export const canSpeak = () => !!synth || player.buffers.size > 0;
++export const canSpeak = () => hebrewVoices().length > 0 || player.buffers.size > 0;
+@@ -17,2 +17,2 @@ export const hebrewVoices = () => { if (!voices.length) refresh(); return voices
+-// סדר עדיפות: הקול שנבחר בהגדרות, אחר כך קולות "טבעיים"/רשת, אחר כך כרמית, אחר כך כל קול עברי
+-const PREFER = [/natural/i, /neural/i, /wavenet/i, /online/i, /enhanced|premium/i, /google/i, /carmit/i, /microsoft/i];
++// סדר עדיפות: הקול שנבחר בהגדרות, אחר כך קול עברי מקומי מועדף
++const PREFER = [/enhanced|premium/i, /carmit/i];
+@@ -45,5 +45,5 @@ const player = createVoicePlayer({
+-      const v = options.localOnly ? hebrewVoices().find(v => v.localService === true) : options.lang === 'he-IL' ? bestVoice() :
+-        (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)) && /natural|neural|online|google|samantha|daniel/i.test(v.name)) ||
+-        (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)));
+-      if (options.localOnly && !v) return false;
+-      if (v) u.voice = v;
++      const lang = options.lang.toLowerCase().split(/[-_]/)[0];
++      const v = lang === 'he' ? bestVoice() : (synth.getVoices() || []).find(voice =>
++        voice.localService === true && voice.lang.toLowerCase().split(/[-_]/)[0] === lang);
++      if (!v) return false;
++      u.voice = v;
+@@ -65 +65 @@ export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}
+-  if (store.profile.voice === false || !canSpeak()) return false;
++  if (store.profile.voice === false) return false;
+diff --git a/workout/upload-sw.js b/workout/upload-sw.js
+index e0c3e7bb..3463d449 100644
+--- a/workout/upload-sw.js
++++ b/workout/upload-sw.js
+@@ -1 +1 @@
+-import { IndexedDBUploadStore, UploadQueue, UPLOAD_TAG } from './cam-lab/upload.mjs?v=20261013-frames-1';
++import { IndexedDBUploadStore, UploadQueue, UPLOAD_CONTEXTS } from './cam-lab/upload.mjs?v=20261013-frames-1';
+@@ -5,0 +6,10 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
++const context = new URL(self.location.href).searchParams.get('app');
++const uploadContext = context === 'lab' || context === 'workout' ? UPLOAD_CONTEXTS[context] : null;
++const inApp = client => {
++  if (!client?.url || !uploadContext) return false;
++  const url = new URL(client.url);
++  const scope = new URL(self.registration.scope);
++  if (url.origin !== scope.origin) return false;
++  return context === 'lab' ? url.pathname.startsWith(scope.pathname) :
++    url.pathname === scope.pathname || url.pathname === scope.pathname + 'index.html';
++};
+@@ -8 +18,2 @@ self.addEventListener('message', event => {
+-  if (event.data?.type === 'camlab-upload-revoked') event.waitUntil(queue?.disable() || Promise.resolve());
++  if (event.data?.app !== context || !inApp(event.source)) return;
++  if (event.data?.type === 'camlab-upload-revoked') queue?.stop();
+@@ -19,2 +30 @@ async function notify(status) {
+-    if (new URL(client.url).pathname.startsWith(new URL(self.registration.scope).pathname))
+-      client.postMessage({ type: 'camlab-upload-status', status });
++    if (inApp(client)) client.postMessage({ type: 'camlab-upload-status', app: context, status });
+@@ -24 +34 @@ async function upload() {
+-  const store = new IndexedDBUploadStore(), config = await store.getConfig();
++  const store = new IndexedDBUploadStore({ context }), config = await store.getConfig();
+@@ -26 +36 @@ async function upload() {
+-  queue = new UploadQueue({ config, store, actor: 'sw', persistConfig: false, onStatus: status => { void notify(status).catch(() => {}); } });
++  queue = new UploadQueue({ config, store, context, actor: 'sw', persistConfig: false, onStatus: status => { void notify(status).catch(() => {}); } });
+@@ -32 +42 @@ async function upload() {
+-    await self.registration.sync.register(UPLOAD_TAG);
++    await self.registration.sync.register(uploadContext.tag);
+@@ -39 +49 @@ self.addEventListener('sync', event => {
+-  if (event.tag === UPLOAD_TAG) {
++  if (event.tag === uploadContext?.tag) {
+diff --git a/workout/voice-rec/index.html b/workout/voice-rec/index.html
+index 0ad70338..4b42c9bb 100644
+--- a/workout/voice-rec/index.html
++++ b/workout/voice-rec/index.html
+@@ -4,0 +5 @@
++  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">

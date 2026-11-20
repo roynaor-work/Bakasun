@@ -113,18 +113,18 @@
       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
     },
     "sprint": {
-      "label": "ריצה",
-      "aria_label": "ריצה",
+      "label": "סיבולת",
+      "aria_label": "סיבולת",
       "hud_kit": {
         "module": "../hud-kit/action-button.mjs",
         "export": "create",
         "options": {
           "primary": false,
-          "label": "ריצה",
+          "label": "סיבולת",
           "icon": "boost"
         },
         "update": {
-          "label": "ריצה",
+          "label": "סיבולת",
           "icon": "boost",
           "disabled": false,
           "loading": false,
@@ -167,18 +167,18 @@
       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
     },
     "screen": {
-      "label": "מסך",
-      "aria_label": "מסך",
+      "label": "חסימה",
+      "aria_label": "חסימה",
       "hud_kit": {
         "module": "../hud-kit/action-button.mjs",
         "export": "create",
         "options": {
           "primary": false,
-          "label": "מסך",
+          "label": "חסימה",
           "icon": "block"
         },
         "update": {
-          "label": "מסך",
+          "label": "חסימה",
           "icon": "block",
           "disabled": false,
           "loading": false,

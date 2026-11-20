@@ -12,6 +12,7 @@ export function assetSources(entries=globalThis.performance?.getEntriesByType?.(
   for(const entry of entries){let pathname;try{pathname=new URL(entry.name).pathname;}catch{continue;}if(!isManagedPath(pathname))continue;(entry.workerStart>0&&entry.transferSize===0?cache++:network++);}
   return {cache,network};
 }
+const reportName=game=>game==='offline'?'הורדה למכשיר':(OFFLINE_GAMES[game]||game);
 const manualLines={};
 /** A manual restart ("אתחול ידני N") goes into the stored report at once and into the next
  * report this page writes for the game, because the restarted session overwrites it. */
@@ -25,7 +26,7 @@ export const manualReportLines=game=>[...(manualLines[game]||[])];
 export function saveGameReport(game,{status,ms,lines=[]}){
   try{
     const {cache,network}=assetSources();
-    const head=[`${OFFLINE_GAMES[game]||game} · island ${DATA_VERSION} · ${new Date().toISOString()}`,`status ${status}${ms!==undefined?` · ${Math.round(ms)} ms`:''} · assets from device ${cache} · from network ${network}`,`screen ${globalThis.innerWidth}x${globalThis.innerHeight} @${globalThis.devicePixelRatio} · saveData ${Boolean(navigator.connection?.saveData)} · online ${navigator.onLine}`,`ua ${navigator.userAgent}`];
+    const head=[`${reportName(game)} · island ${DATA_VERSION} · ${new Date().toISOString()}`,`status ${status}${ms!==undefined?` · ${Math.round(ms)} ms`:''} · assets from device ${cache} · from network ${network}`,`screen ${globalThis.innerWidth}x${globalThis.innerHeight} @${globalThis.devicePixelRatio} · saveData ${Boolean(navigator.connection?.saveData)} · online ${navigator.onLine}`,`ua ${navigator.userAgent}`];
     const text=[...head,...lines,...(manualLines[game]||[])].join('\n');store()?.setItem(reportKey(game),text);return text;
   }catch{return null;}
 }
@@ -34,9 +35,15 @@ export const readGameReport=game=>{try{return store()?.getItem(reportKey(game))|
 export function reportPanel(game,doc=document){
   const text=readGameReport(game);if(!text)return null;
   const details=doc.createElement('details');details.className='load-report';details.dataset.report=game;
-  const summary=doc.createElement('summary');summary.textContent=`דוח הטעינה האחרון · ${OFFLINE_GAMES[game]||game}`;
+  const summary=doc.createElement('summary');summary.textContent=`דוח הטעינה האחרון · ${reportName(game)}`;
   const copy=doc.createElement('button');copy.type='button';copy.className='secondary-button';copy.dataset.action='report-copy';copy.textContent='העתקה';
   copy.addEventListener('click',()=>{navigator.clipboard?.writeText(text).then(()=>{copy.textContent='הועתק';},()=>{copy.textContent='בחרו את הטקסט והעתיקו';});});
   const pre=doc.createElement('pre');pre.textContent=text;pre.dir='ltr';
   details.append(summary,copy,pre);return details;
+}
+export function appendLoadReports(parent) {
+  for(const game of ['offline',...Object.keys(OFFLINE_GAMES)]){
+    const report=reportPanel(game,parent.ownerDocument);
+    if(report)parent.append(report);
+  }
 }

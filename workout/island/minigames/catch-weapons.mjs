@@ -61,14 +61,14 @@ const DEG = 180 / Math.PI;
 
 export const STRINGS = Object.freeze({
   'catch.weapon': 'כלי', 'catch.weapon.next': 'החלפת כלי, עכשיו {name}',
-  'catch.weapon.tyres': 'פנצ׳ר', 'catch.weapon.net': 'רשת דבק', 'catch.weapon.spikes': 'קוצים', 'catch.weapon.emp': 'פולס', 'catch.weapon.mark': 'סימון',
+  'catch.weapon.tyres': 'ירי לגלגל', 'catch.weapon.net': 'רשת דבק', 'catch.weapon.spikes': 'קוצים', 'catch.weapon.emp': 'גל חשמלי', 'catch.weapon.mark': 'סימון למעקב',
   'catch.weapon.tyres.hint': 'מכוונים לגלגל האחורי', 'catch.weapon.net.hint': 'מכוונים לגג, הרשת תוקעת את המנוע', 'catch.weapon.spikes.hint': 'נוסעים בנתיב שלו, הקוצים נוחתים לפניו',
-  'catch.weapon.emp.hint': 'מתקרבים ממש, הפולס עוצר את הרכב לרגע', 'catch.weapon.mark.hint': 'מסמנים את תא המטען, המסוק עוקב אחריו',
-  'catch.damage7': 'נזק לרכב', 'catch.pop.down': 'הרכב נפל, הפושע בורח ברגל',
+  'catch.weapon.emp.hint': 'מתקרבים מאוד. הגל החשמלי עוצר את הרכב לרגע', 'catch.weapon.mark.hint': 'מסמנים את תא המטען, המסוק עוקב אחריו',
+  'catch.damage7': 'נזק לרכב', 'catch.pop.down': 'הרכב נעצר. הפושע בורח ברגל',
   'catch.pop.net': 'רשת דבק על הגג, המנוע נתקע', 'catch.pop.spikesOut': 'קוצים על הכביש', 'catch.pop.spikes': 'עלה על הקוצים',
-  'catch.pop.spikesMiss': 'הוא עקף את הקוצים', 'catch.pop.emp': 'פולס, הרכב נעצר לרגע', 'catch.pop.mark': 'מסומן, המסוק עוקב',
-  'catch.pop.close': 'זמן קרוב, הוא מאט', 'catch.pop.toolMiss': 'החטאה, מתקרבים ומנסים שוב', 'catch.pop.toolEmpty': 'אין עוד, מחליפים כלי',
-  'catch.chase.down': 'הרכב נפל, הפושע בורח ברגל. זריקות: {throws}',
+  'catch.pop.spikesMiss': 'הוא עקף את הקוצים', 'catch.pop.emp': 'גל חשמלי. הרכב נעצר לרגע', 'catch.pop.mark': 'מסומן, המסוק עוקב',
+  'catch.pop.close': 'הילוך איטי. הפושע מאט', 'catch.pop.toolMiss': 'החטאה, מתקרבים ומנסים שוב', 'catch.pop.toolEmpty': 'הכלי התרוקן. מחליפים כלי',
+  'catch.chase.down': 'הרכב נעצר. הפושע בורח ברגל. זריקות: {throws}',
   // v8: what each tool aims at (under the ring), why a tap did not fire, and the switch line
   'catch.target.tyres': 'גלגל', 'catch.target.net': 'גג', 'catch.target.spikes': 'הכביש לפניו', 'catch.target.emp': 'כל הרכב', 'catch.target.mark': 'תא המטען',
   'catch.range.far': 'רחוק מדי', 'catch.range.near': 'קרוב מדי', 'catch.range.side': 'לא בקו', 'catch.range.behind': 'הוא מאחוריך',

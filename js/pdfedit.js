@@ -13,7 +13,7 @@ async function lib(url, globalName) {
 async function findNumbers(buf, wanted) {
   const pdfjs = await lib('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js', 'pdfjsLib');
   pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  const pdf = await pdfjs.getDocument({ data: buf.slice(0) }).promise;
+  const pdf = await pdfjs.getDocument({ data: buf.slice(0), isEvalSupported: false }).promise;
   const want = new Set(wanted.map(n => String(n).replace(/[^\d]/g, '')));
   const hits = [];
   for (let p = 1; p <= pdf.numPages; p++) {

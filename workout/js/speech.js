@@ -1,21 +1,22 @@
 // דיבור בעברית: הקול של המכשיר (Web Speech API), עם בחירת הקול הטוב ביותר, קצב מכוון, וטקסטים מנוקדים.
 // למה ניקוד: מנועי הדיבור (גוגל באנדרואיד, "כרמית" באייפון) מנחשים הגייה של מילים בלי ניקוד וטועים. עם ניקוד הם קוראים נכון.
 import { store } from './store.js?v=20261014-w2g-1';
+import { legacyPrivacy } from './privacy-flag.js?v=20261010-camera-1';
 
 import { createVoicePlayer } from './voice-player.js?v=20261014-w2g-1';
 import { VOICE_BY_ID } from './voice-lines.js?v=20261014-w2g-1';
 
 const synth = window.speechSynthesis;
 let voices = [];
-const refresh = () => { try { voices = (synth?.getVoices() || []).filter(v => /^he|iw/i.test(v.lang)); } catch { voices = []; } };
+const refresh = () => { try { voices = (synth?.getVoices() || []).filter(v => (v.localService === true || legacyPrivacy()) && /^(?:he|iw)(?:[-_]|$)/i.test(v.lang)); } catch { voices = []; } };
 refresh();
 if (synth) synth.addEventListener?.('voiceschanged', refresh);
 
-export const canSpeak = () => !!synth || player.buffers.size > 0;
+export const canSpeak = () => hebrewVoices().length > 0 || player.buffers.size > 0;
 export const hebrewVoices = () => { if (!voices.length) refresh(); return voices; };
 
-// סדר עדיפות: הקול שנבחר בהגדרות, אחר כך קולות "טבעיים"/רשת, אחר כך כרמית, אחר כך כל קול עברי
-const PREFER = [/natural/i, /neural/i, /wavenet/i, /online/i, /enhanced|premium/i, /google/i, /carmit/i, /microsoft/i];
+// סדר עדיפות: הקול שנבחר בהגדרות, אחר כך קול עברי מקומי מועדף
+const PREFER = [/enhanced|premium/i, /carmit/i];
 export function bestVoice() {
   const list = hebrewVoices(); if (!list.length) return null;
   const want = store.profile.voiceName; const chosen = want && list.find(v => v.name === want); if (chosen) return chosen;
@@ -42,11 +43,11 @@ const player = createVoicePlayer({
     try {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = options.lang; u.rate = options.rate; u.pitch = options.pitch;
-      const v = options.localOnly ? hebrewVoices().find(v => v.localService === true) : options.lang === 'he-IL' ? bestVoice() :
-        (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)) && /natural|neural|online|google|samantha|daniel/i.test(v.name)) ||
-        (synth.getVoices() || []).find(v => v.lang.startsWith(options.lang.slice(0, 2)));
-      if (options.localOnly && !v) return false;
-      if (v) u.voice = v;
+      const lang = options.lang.toLowerCase().split(/[-_]/)[0];
+      const v = lang === 'he' ? bestVoice() : (synth.getVoices() || []).find(voice =>
+        voice.localService === true && voice.lang.toLowerCase().split(/[-_]/)[0] === lang);
+      if (!v) return false;
+      u.voice = v;
       let ended = false;
       const finish = () => { if (!ended) { ended = true; onDone(); } };
       u.onend = finish; u.onerror = finish; synth.speak(u); return true;
@@ -62,7 +63,7 @@ export function speak(text, { force = false } = {}) {
   return player.play(clean(text), { rate: store.profile.speechRate || 0.92, pitch: warmPitch() });
 }
 export function speakLang(text, lang = 'en-US', { rate = 0.9, pitch = 1.1 } = {}) {
-  if (store.profile.voice === false || !canSpeak()) return false;
+  if (store.profile.voice === false) return false;
   return player.play(clean(text), { lang, rate, pitch });
 }
 export function sayQuick(text, { rate = 1.05 } = {}) {

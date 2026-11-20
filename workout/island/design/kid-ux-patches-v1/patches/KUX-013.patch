@@ -1,0 +1,61 @@
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index 120028a1..f0800526 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -56,6 +56,18 @@ kidUxStyle('011', `
+   }
+ `);
+ 
++kidUxStyle('013', `
++  .island-ui.clean-hud .city-details{background:#f8f5ea;color:#213b35}
++  .island-ui.clean-hud .city-details .brand p,.island-ui.clean-hud .city-details .wallet,.island-ui.clean-hud .city-details .metric-label,.island-ui.clean-hud .city-details .resources{font-size:14px;color:#213b35}
++  .kid-city-stats-primary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
++  .kid-city-stats-primary .metric{background:#e9f0e2;padding:8px;border-radius:9px}
++  .kid-city-stats-primary .metric-label{flex-direction:column;gap:4px}
++  .kid-city-stats-more>summary{display:flex;align-items:center;min-height:48px;padding-inline:8px;cursor:pointer;font-size:14px;color:#213b35;font-weight:700}
++  .kid-city-stats-more>summary::before{content:'＋';margin-inline-end:7px}
++  .kid-city-stats-more[open]>summary::before{content:'−'}
++  .kid-city-stats-more .metrics{gap:6px}
++`);
++
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+   node.className = className;
+@@ -163,7 +175,16 @@ export class IslandInterface {
+     this.cityToggle.setAttribute('aria-controls', 'city-details');
+     this.cityToggle.onclick = () => this.toggleDetails('city');
+     this.cityDetails = el('div', 'city-details'); this.cityDetails.id = 'city-details'; this.cityDetails.hidden = true;
+-    this.cityDetails.append(header, cityTitle, this.metricsNode, this.resourcesNode);
++    this.cityDetails.append(header, cityTitle, this.metricsNode);
++    if (kidUx('013')) {
++      this.metricsNode.className = 'kid-city-stats-primary';
++      this.extendedMetrics = el('div', 'metrics');
++      const more = el('details', 'kid-city-stats-more');
++      more.append(el('summary', '', 'עוד מדדים ומשאבים'), this.extendedMetrics, this.resourcesNode);
++      this.cityDetails.append(more);
++    } else {
++      this.cityDetails.append(this.resourcesNode);
++    }
+     this.city.append(this.cityToggle, this.cityDetails);
+ 
+     this.mission = el('aside', 'mission panel');this.mission.hidden=true;
+@@ -314,6 +335,7 @@ export class IslandInterface {
+     this.wallet.append(money, pop);
+     this.drawCityToggle(s.money);
+     this.metricsNode.replaceChildren();
++    this.extendedMetrics?.replaceChildren();
+     const values = this.engine.metrics();
+     for (const metric of this.engine.registry.metrics.values()) {
+       if (!this.data.featureFlags.metrics || (metric.featureFlag && !this.data.featureFlags[metric.featureFlag])) continue;
+@@ -323,7 +345,10 @@ export class IslandInterface {
+       label.append(el('span', '', `${metric.icon} ${this.label(metric, 'metric')}`), el('b', '', value));
+       const track = el('div', 'metric-track');
+       const fill = el('span'); fill.style.width = `${Math.min(100, value)}%`; fill.style.background = metric.color;
+-      track.append(fill); row.append(label, track); this.metricsNode.append(row);
++      track.append(fill);
++      row.append(label, track);
++      const destination = this.extendedMetrics && this.metricsNode.childElementCount >= 3 ? this.extendedMetrics : this.metricsNode;
++      destination.append(row);
+     }
+     this.resourcesNode.replaceChildren();
+     for (const [key, icon] of [['food', '🌽'], ['materials', '🧱'], ['energy', '⚡']]) {

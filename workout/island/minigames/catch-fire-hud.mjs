@@ -6,7 +6,7 @@
 
 export const STRINGS = Object.freeze({
   'catch.fire': 'ירי', 'catch.fireHint': 'ירי לגלגל של הרכב הנמלט', 'catch.ammo': 'כדורים: {count}',
-  'catch.lockHint': 'כשהכוונת ירוקה לוחצים ירי', 'catch.reloading': 'טוען', 'catch.reticle': 'כוונת על הרכב הנמלט',
+  'catch.lockHint': 'כשהכוונת ירוקה לוחצים ירי', 'catch.reloading': 'טוענים', 'catch.reticle': 'כוונת על הרכב הנמלט',
   'catch.hitChance': 'סיכוי לפגיעה {percent}%',
 });
 const SVG = 'http://www.w3.org/2000/svg';

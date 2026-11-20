@@ -1,0 +1,79 @@
+{
+  "id": "037",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": "12 hittable cards with minimum visible size 64×52px"
+    },
+    {
+      "pass": true,
+      "observation": "Horizontal / vertical gap 8px / 8px"
+    },
+    {
+      "pass": true,
+      "observation": "Visible exit 56×56px"
+    },
+    {
+      "pass": true,
+      "observation": "Touched card reveals 🐟"
+    },
+    {
+      "pass": true,
+      "observation": "Exit touch returned to the island"
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Level-4 memory board, age 7. Earlier question advanced in the development fixture. A card and the existing exit are touched at their actual positions."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-memory-card\"]').first().first()",
+      "x": 217.625,
+      "y": 139,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "learning-memory-card",
+        "x": 217.625,
+        "y": 139
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.learning-close').first()",
+      "x": 44,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "close-modal",
+        "x": 44,
+        "y": 36
+      }
+    }
+  ],
+  "screenshots": [
+    "037-after-screen.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

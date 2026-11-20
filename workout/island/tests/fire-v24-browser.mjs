@@ -8,13 +8,15 @@
 //   CHROMIUM_PATH=... ISLAND_PLAYWRIGHT=... node workout/island/tests/fire-v24-browser.mjs
 import {mkdir,writeFile,stat,readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
+import {browserArtifacts, serveIsland,islandChromium,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 
-const directory=fileURLToPath(new URL('../verification/fire-v24/',import.meta.url)),shots=directory+'shots/';await mkdir(shots,{recursive:true});
+const directory=await browserArtifacts('fire-v24'),shots=directory+'shots/';await mkdir(shots,{recursive:true});
 const island=fileURLToPath(new URL('../',import.meta.url));
 const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium-1243/chrome-linux64/chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+let browser;
+try {
+browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const report={startedAt:new Date().toISOString(),viewport:'844x390 hasTouch isMobile, SwiftShader',runs:{},checks:{}};let failures=0;
 const check=(name,pass,detail={})=>{report.checks[name]={pass:Boolean(pass),...detail};if(!pass){failures++;console.log('FAIL',name,JSON.stringify(detail).slice(0,500));}else console.log('ok  ',name);};
 
@@ -186,5 +188,5 @@ try{
 }catch(error){failures++;report.error=String(error.stack||error).slice(0,2000);console.log(report.error);}
 report.failures=failures;report.finishedAt=new Date().toISOString();
 await writeFile(directory+'fire-v24-browser.json',JSON.stringify(report,null,1)+'\n');
-await browser.close();await server.close?.();
-console.log(failures?`${failures} failed`:'all passed');process.exit(failures?1:0);
+console.log(failures?`${failures} failed`:'all passed');process.exitCode=failures?1:0;
+} finally { try { await browser?.close(); } finally { await server.close(); } }

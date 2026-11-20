@@ -33,7 +33,7 @@ export async function pdfText(file) {
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
   const buf = await file.arrayBuffer();
-  const pdf = await window.pdfjsLib.getDocument({ data: buf }).promise;
+  const pdf = await window.pdfjsLib.getDocument({ data: buf, isEvalSupported: false }).promise;
   const out = [];
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i); const content = await page.getTextContent();

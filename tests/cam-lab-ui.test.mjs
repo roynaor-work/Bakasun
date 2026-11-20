@@ -173,7 +173,7 @@ test('app shows and exports attempt diagnostics; local-only speech is throttled 
     assert.equal(stopped, 3); assert.equal(terminated, 0); assert.equal(get('record-download').disabled, true);
     const spokenBefore = speech.length; voices = [{ lang: 'he-IL', localService: false }];
     now += 7000; get('again').click(); await get('settings').handlers.submit({ preventDefault() {} });
-    await frame(pose()); assert.ok(speech.length > spokenBefore); assert.equal(speech.at(-1).voice.localService, false);
+    await frame(pose()); assert.equal(speech.length, spokenBefore);
     get('stop').click(); assert.equal(stopped, 4); assert.equal(terminated, 0);
     cameraMode = 'nozoom';
     await get('settings').handlers.submit({ preventDefault() {} });

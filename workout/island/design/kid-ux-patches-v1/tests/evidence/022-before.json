@@ -1,0 +1,102 @@
+{
+  "id": "022",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "speedAutoEnergyTip": [
+          {
+            "width": 22.5,
+            "height": 8,
+            "fontPx": 8,
+            "centerHit": false,
+            "text": "קמ״ש",
+            "contrast": 9.89
+          },
+          {
+            "width": 88,
+            "height": 44,
+            "fontPx": 9,
+            "centerHit": true,
+            "text": "האצה אוטומטית",
+            "contrast": 16.05
+          },
+          {
+            "width": 23,
+            "height": 14,
+            "fontPx": 10,
+            "centerHit": false,
+            "text": "ERS",
+            "contrast": 13.32
+          },
+          {
+            "width": 422,
+            "height": 23,
+            "fontPx": 10,
+            "centerHit": false,
+            "text": "גררו אגודל בצד שמאל להיגוי · לחצו על הגז · בלמו לפני הפניות · ניטרו מימין",
+            "contrast": 15.6
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "energyLabel": "ERS"
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "steps": []
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "touchTogglesAutomaticAcceleration": true,
+        "before": "false",
+        "after": "true"
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Repository racing performance page with the stock race session, HUD and controls, and Hebrew translations. Stage 13 runs three laps with five cars and simplified scenery for software WebGL. The fixture advances the stock countdown without player input."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"racing-auto\"]').first()",
+      "x": 780,
+      "y": 259,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "racing-auto",
+        "x": 780,
+        "y": 259
+      }
+    }
+  ],
+  "screenshots": [
+    "022-before-driving-tip.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

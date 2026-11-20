@@ -34,7 +34,7 @@ test('naval warning and travelling shot expose their announced landing point wit
  const m=fixture({enemies:[{index:0,x:310,z:0,active:true,hp:2,maxHp:2,attack:{x:80,z:12,fireTime:21.8},warning:1.8}],enemyShots:[{targetX:100,targetZ:24,duration:1.2,age:.3}]});
  const marks=navalDangerMarks(m,balance,project,844,390);assert.equal(marks.length,2);assert.equal(marks[0].incoming,false);assert.ok(Math.abs(marks[0].seconds-1.8)<1e-9);assert.equal(marks[1].incoming,true);assert.ok(Math.abs(marks[1].seconds-.9)<1e-9);assert.deepEqual(marks[0].q,project(80,12,.1));
  for(const mark of marks)assert.ok(mark.points.every(point=>Math.hypot(point.x-mark.q.x,point.y-mark.q.y)<=32.0001));
- const record=paint(),shown=drawNavalHud(record.p,m,{config:{...config,width:844,height:390},balance,art:{},t},project);assert.equal(shown.marks,2);assert.equal(record.text().includes(strings['naval.hud.evade']),false);assert.ok(record.text().some(text=>String(text).startsWith('! ')));assert.ok(record.text().some(text=>String(text).startsWith('↓ ')));
+ const record=paint(),shown=drawNavalHud(record.p,m,{config:{...config,width:844,height:390},balance,art:{},t},project);assert.equal(shown.marks,2);assert.equal(record.text().includes(strings['naval.hud.evade']),false);assert.ok(record.text().some(text=>String(text).startsWith('◆ ')));assert.ok(record.text().some(text=>String(text).startsWith('↓ ')));
 });
 test('naval landing footprint remains bounded at extreme close-up and excludes points behind the camera',()=>{
  const m=fixture({enemies:[{active:true,hp:1,attack:{x:80,z:0,fireTime:21}}]});

@@ -1,3 +1,4 @@
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 import {createAlpineHud} from './alpine-hud.mjs';
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
 import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-20';
@@ -112,6 +113,14 @@ export function runAlpineSession(ctx) {
   const trackName = league ? league.name : t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
   // HUD
   const hud = el('section', 'alpine-hud'); hud.setAttribute('aria-label', t('alpine.hud'));
+  const kidGoal=Boolean(league)&&kidUx('030');
+  if(kidGoal)screen.dataset.kidAlpineGoal='true';
+  if(kidGoal)kidUxStyle('030',
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place]{font-size:14px;background:#f5fbfd;color:#173748}' +
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place] b{display:grid;gap:1px;white-space:nowrap}' +
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-flight-cue:empty{display:none}' +
+    '@media(max-height:500px){.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-kit-speed>.alpine-flight-cue{top:auto;bottom:0;left:calc(100% + 8px)}}'
+  );
   const rank = el('strong', 'alpine-rank', '06'), position = el('div', 'alpine-position'), of = el('span', 'alpine-of'); of.append(ltr('/ 06'), el('small', '', t('alpine.position')));
   position.append(rank, of);
   const info = el('div', 'alpine-race-info'), trackLine = el('span', 'alpine-track-line'); trackLine.append(t('alpine.trackLabel', {number: trackNumber}), el('i'), trackName);
@@ -209,6 +218,42 @@ export function runAlpineSession(ctx) {
   const boostCaption = el('span', 'alpine-boost-caption', t('alpine.boostReady')); boostCaption.setAttribute('aria-hidden', 'true'); boostCaption.hidden = true;
   actions.append(boostArrow, boostCaption);
   const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
+  const kidTricks=kidUx('029');
+  let trickPreview, trickAnimation;
+  if(kidTricks){
+    screen.dataset.kidAlpineTricks='true';
+    kidUxStyle('029',
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick .alpine-trick-label{font-size:14px;color:#103349;opacity:1}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick[data-ready=false]{opacity:1;background:#edf8fc}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick[data-ready=true]{background:#ffae73;color:#102536}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick-caption{font-size:14px;color:#fff;background:#103349;opacity:1}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick-caption[data-ready=true]{color:#102536;background:#ffae73}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview{position:absolute;right:100%;bottom:36px;margin-inline-start:12px;display:grid;justify-items:center;min-width:96px;padding:6px 12px;border-radius:10px;background:#103349;color:#fff;font-size:14px;line-height:1.2;pointer-events:none;white-space:nowrap}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview[hidden]{display:none}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview .rider{font-size:29px;line-height:1.1}'
+    );
+    trickPreview=el('div','kid-alpine-preview');
+    const rider=el('span','rider','🏂'),move=el('b');
+    rider.setAttribute('aria-hidden','true');trickPreview.append(rider,move);trickPreview.hidden=true;actions.append(trickPreview);
+    const poses={grab:'translateY(-7px) rotate(-24deg) scale(.77)',spin:'rotateY(360deg)',flip:'rotate(-360deg)',combo:'rotateY(360deg) rotate(-360deg)'};
+    const diagrams={grab:'↑ 🏂',spin:'⟳ 🏂',flip:'↶ 🏂',combo:'⟳ ↶ 🏂'};
+    actions.addEventListener('pointerdown',event=>{
+      const button=event.target.closest?.('button[data-trick]');
+      if(!button||button.dataset.ready==='true')return;
+      const id=button.dataset.trick;
+      trickAnimation?.cancel();
+      if(!trickPreview.hidden&&trickPreview.dataset.trick===id){trickPreview.hidden=true;return;}
+      move.textContent=t('alpine.trick.'+id);
+      trickPreview.dataset.trick=id;trickPreview.hidden=false;
+      if(!rider.animate||doc.defaultView.matchMedia('(prefers-reduced-motion: reduce)').matches)rider.textContent=diagrams[id];
+      else{
+        rider.textContent='🏂';
+        const frames=id==='grab'?['none',poses[id],'none']:['none',poses[id]];
+        trickAnimation=rider.animate(frames.map(transform=>({transform})),{duration:1000,iterations:Infinity});
+      }
+    },{capture:true,signal:abort.signal});
+    abort.signal.addEventListener('abort',()=>trickAnimation?.cancel(),{once:true});
+  }
   const center = el('div', 'alpine-center'); center.append(speed, hint, ...(brakeHint ? [brakeHint] : []));
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading); if (lights) stage.append(lights.node);
@@ -259,7 +304,7 @@ export function runAlpineSession(ctx) {
     if (e.objectType === 'ring') { audio.cue('ring'); showCallout('ring', now, 'טבעת', `+${e.value}`); return; }
     audio.cue('power');
     if (e.objectType === 'magnet') { showCallout('power', now, 'מגנט', 'מטבעות וכוכבים נמשכים אליכם'); status.textContent = 'מגנט: מטבעות וכוכבים נמשכים אליכם'; }
-    else { showCallout('power', now, 'מגן', 'הנפילה הבאה לא תפיל'); status.textContent = 'מגן: הנפילה הבאה לא תפיל'; }
+    else { showCallout('power', now, 'מגן', 'המגן מונע את הנפילה הבאה'); status.textContent = 'מגן: מונע את הנפילה הבאה'; }
   }
   let coinPulse = 0;
   function handleEvents(snap, now) {
@@ -293,6 +338,9 @@ export function runAlpineSession(ctx) {
     const boostFull = !!(snap.boostReady && snap.boostFraction >= .98 && !snap.player?.boosting);
     boostArrow.hidden = boostCaption.hidden = !boostFull; boostButton.dataset.full = String(boostFull);
     trickCaption.dataset.ready = String(!!snap.trickReady);
+    if(snap.trickReady&&trickPreview&&!trickPreview.hidden){
+      trickPreview.hidden=true;trickAnimation?.cancel();
+    }
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count || lightsOn; }
@@ -326,11 +374,11 @@ export function runAlpineSession(ctx) {
     if (stats) { gatesSeen = stats.gates; crashesSeen = stats.crashes; }
     for (const [kind, g] of Object.entries(goalNodes)) {
       let text = '', state = 'open';
-      if (kind === 'place') { text = `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
+      if (kind === 'place') { text = kidGoal ? 'עכשיו מקום '+snap.rank+'|למעבר: מקום '+g.goal.target+' או טוב יותר' : `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
       else if (kind === 'time') { text = goalClock(g.goal.ms); state = snap.timeMs > g.goal.ms ? 'lost' : racing ? 'ok' : 'open'; }
       else if (kind === 'gates') { text = `${gatesSeen}/${g.goal.count}`; state = gatesSeen >= g.goal.count ? 'ok' : 'open'; }
       else { text = crashesSeen ? 'נפילה' : 'נקי'; state = crashesSeen ? 'lost' : racing ? 'ok' : 'open'; }
-      const key = text + state; if (key !== g.shown) { g.shown = key; g.value.textContent = text; g.node.dataset.state = state; }
+      const key = text + state; if (key !== g.shown) { g.shown = key; if(kidGoal&&kind==='place')g.value.replaceChildren(...text.split('|').map(line=>el('span','',line)));else g.value.textContent = text; g.node.dataset.state = state; }
     }
     if (ghostTrack && racing) {
       const at = ghostTimeAt(ghostTrack, snap.distanceM), gap = at === null ? '' : ((snap.timeMs - at) / 1000).toFixed(1);

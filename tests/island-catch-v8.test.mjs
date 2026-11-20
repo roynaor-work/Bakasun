@@ -234,7 +234,7 @@ test('v8 burst changes no rule: one roll and the v7 damage per tap; the view, no
 test('v8 strings and offline: every new key is in the island strings (no exclamation marks, no Arabic), the new modules are in the shell', async () => {
   const island = JSON.parse(await readFile(new URL('data/strings.he.json', root), 'utf8'));
   for (const k of [...Object.keys(TOOL_STRINGS), 'catch.help8.2']) { assert.ok(Object.hasOwn(island, k), k); assert.equal(/[!؀-ۿ]/.test(island[k]), false, k); assert.ok(/[א-ת]/.test(island[k]), k); }
-  assert.match(island['catch.help8.2'], /הכביש לפניו/, 'the v8 help says where each tool aims');
+  assert.match(island['catch.help8.2'], /הכביש לפני הרכב/, 'the v8 help says where each tool aims');
   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
   for (const f of ['minigames/catch-audio8.mjs', 'minigames/catch-burst8.mjs']) assert.ok(manifest.shell.includes(f), f);
   for (const f of ['catch-audio8.mjs', 'catch-burst8.mjs']) { const s = await readFile(new URL('minigames/' + f, root), 'utf8'); assert.equal(/[؀-ۿ]/.test(s), false, f); }

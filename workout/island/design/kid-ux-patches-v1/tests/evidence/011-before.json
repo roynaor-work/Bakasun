@@ -1,0 +1,95 @@
+{
+  "id": "011",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "previewHeight": 120,
+        "name": [
+          56,
+          56
+        ],
+        "nameVisible": 29.203125,
+        "gender": [
+          56,
+          56
+        ],
+        "genderVisible": 0
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "legendFontsPx": [
+          12,
+          12
+        ],
+        "scrollHint": null
+      }
+    },
+    {
+      "pass": true,
+      "observation": "A visible name choice is selected by touch."
+    },
+    {
+      "pass": true,
+      "observation": "A vertical touch swipe reveals the remaining choices."
+    },
+    {
+      "pass": false,
+      "observation": {
+        "startAfterSwipe": [
+          624,
+          56
+        ],
+        "contrast": 4.07
+      }
+    }
+  ],
+  "notes": [
+    "The test draws one frame using the real avatar preview renderer while the decorative world is paused."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-field=\"nameId\"]').nth(1).first()",
+      "x": 636.875,
+      "y": 297.796875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-option",
+        "x": 636.875,
+        "y": 297.796875
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 422,
+      "y": 290,
+      "endX": 422,
+      "endY": 60,
+      "steps": 6
+    }
+  ],
+  "screenshots": [
+    "011-before-avatar.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

@@ -1,0 +1,77 @@
+{
+  "id": "032",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "labels": [
+          [
+            "וולקן",
+            14,
+            16.079510553030556
+          ],
+          [
+            "ירי רגיל",
+            14,
+            16.079510553030556
+          ],
+          [
+            "גל 1",
+            14,
+            16.079510553030556
+          ]
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "specialTarget": [
+          56,
+          46
+        ],
+        "selected": "ברק שרשרת",
+        "demonstration": "🚀 ϟ → 🛸 ↝ 🛸\nברק שרשרת"
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: alienDefense, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.alien-special-switch').first()",
+      "x": 730,
+      "y": 202,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "special-switch",
+        "x": 730,
+        "y": 202
+      }
+    }
+  ],
+  "screenshots": [
+    "032-after-wave-and-controls.png",
+    "032-after-weapon-demo-after-switch.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

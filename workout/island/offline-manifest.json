@@ -125,6 +125,7 @@
   "data/players.json",
   "data/sports.json",
   "data/strings.he.json",
+  "data/strings.he.v246.json",
   "data/team.json",
   "data/tutorial.json",
   "data/world.json",
@@ -177,11 +178,13 @@
   "extensions/street-slam.mjs",
   "extensions/tennis.mjs",
   "index.html",
+  "kid-ux.mjs",
   "learning/banks.mjs",
   "learning/interface.mjs",
   "learning/learning.css",
   "learning/questions.mjs",
   "learning/runtime.mjs",
+  "learning/spoken-copy.mjs",
   "learning/state.mjs",
   "learning/voice.mjs",
   "manifest.webmanifest",
@@ -314,6 +317,7 @@
   "minigames/catch-engine.mjs",
   "minigames/catch-fire-hud.mjs",
   "minigames/catch-gfx.mjs",
+  "minigames/catch-kid-practice.mjs",
   "minigames/catch-props7.mjs",
   "minigames/catch-session.mjs",
   "minigames/catch-session6.mjs",
@@ -427,6 +431,7 @@
   "minigames/hoops-view.mjs",
   "minigames/hoops.css",
   "minigames/icons.mjs",
+  "minigames/kid-hoops-pass-demo.mjs",
   "minigames/model-art.mjs",
   "minigames/naval-aim-flag.mjs",
   "minigames/naval-aim-view.mjs",
@@ -652,6 +657,9 @@
   "ui/hangar-preview.mjs",
   "ui/hoops-club.mjs",
   "ui/interface.mjs",
+  "ui/kid-ux-help.mjs",
+  "ui/kid-ux-library.mjs",
+  "ui/kid-ux-result.mjs",
   "ui/load-report.mjs",
   "ui/load-rescue.mjs",
   "ui/offline-install.mjs",
@@ -1769,8 +1777,8 @@
  },
  "files": {
   "": [
-   "4e3321dafb713145",
-   2715
+   "1b9ea44acc506896",
+   2704
   ],
   "activity/alien-upgrades.mjs": [
    "e0da13756f40f19f",
@@ -1821,8 +1829,8 @@
    4546
   ],
   "app.mjs": [
-   "4de18a07167eaeca",
-   7942
+   "87874881e0b7aca9",
+   8289
   ],
   "assets/alien-v24/overheat.ogg": [
    "6d01d7168b98edda",
@@ -5197,8 +5205,12 @@
    399
   ],
   "data/strings.he.json": [
-   "24b798437fd0d710",
-   139158
+   "5e327ff0681343fe",
+   138904
+  ],
+  "data/strings.he.v246.json": [
+   "f2ea30ad0477cc2a",
+   30931
   ],
   "data/team.json": [
    "82a4168feca9f02a",
@@ -5537,16 +5549,16 @@
    101256
   ],
   "design/controls/hoops.json": [
-   "1ff0b9513bb2303e",
-   21962
+   "3b7e495ef5040c53",
+   21994
   ],
   "design/controls/interaction.json": [
    "f008c0acf34dca7a",
    7474
   ],
   "design/controls/soccer.json": [
-   "3cd3d4b96497ade5",
-   28840
+   "fc0e73c2253a2b0e",
+   28890
   ],
   "design/environment/backgrounds/ski-mountains-landscape.webp": [
    "4ba4cb8ef4c0307a",
@@ -6385,36 +6397,44 @@
    400
   ],
   "index.html": [
-   "4e3321dafb713145",
-   2715
+   "1b9ea44acc506896",
+   2704
+  ],
+  "kid-ux.mjs": [
+   "891b6c5afe2ed742",
+   2556
   ],
   "learning/banks.mjs": [
-   "1d33ea3a11c29f5a",
-   5650
+   "61ff05db2fc248c0",
+   8214
   ],
   "learning/interface.mjs": [
-   "c0741cde35b1fc16",
-   20350
+   "9f63a8f3d2d73109",
+   31485
   ],
   "learning/learning.css": [
    "5fe66e202ff5f769",
    10071
   ],
   "learning/questions.mjs": [
-   "47ab052e186332e2",
-   15281
+   "625b0ed3ccaf74ac",
+   20766
   ],
   "learning/runtime.mjs": [
-   "54d71c88e5270efc",
-   3403
+   "d5ff97cec75c6539",
+   4065
+  ],
+  "learning/spoken-copy.mjs": [
+   "67ea6581449bb082",
+   2458
   ],
   "learning/state.mjs": [
    "cdaad0caf8d0d3f2",
    3996
   ],
   "learning/voice.mjs": [
-   "3f7e753dd3d006af",
-   1443
+   "a16db91ffe57872c",
+   2139
   ],
   "manifest.webmanifest": [
    "f7908be552b15abf",
@@ -6457,8 +6477,8 @@
    3465
   ],
   "minigames/alien-session.mjs": [
-   "0a17ebc6c991bb75",
-   15013
+   "2df87996ba9c2f20",
+   19563
   ],
   "minigames/alien-ui.mjs": [
    "a57ed537daf455cf",
@@ -6653,8 +6673,8 @@
    1944
   ],
   "minigames/alpine-league-core.mjs": [
-   "0a88e0c779bc3726",
-   16164
+   "fa6a4c70c6269897",
+   16162
   ],
   "minigames/alpine-league-ghost.mjs": [
    "c39b124e53b77d8f",
@@ -6717,8 +6737,8 @@
    1173
   ],
   "minigames/alpine-session.mjs": [
-   "0b3cb31689b9c11f",
-   37498
+   "0f0cb5e084b91349",
+   41473
   ],
   "minigames/alpine-start-lights.css": [
    "f19f7a763dcf5736",
@@ -6789,28 +6809,28 @@
    9415
   ],
   "minigames/boar-island/chain.mjs": [
-   "90174a36a38c56e8",
-   5702
+   "984041b68763dae1",
+   5700
   ],
   "minigames/boar-island/core.mjs": [
-   "877bc7679bd38cd1",
-   13274
+   "bb2ca38f4ab3bb30",
+   13327
   ],
   "minigames/boar-island/creatures.js": [
    "df07c43bbb162f62",
    20402
   ],
   "minigames/boar-island/game.js": [
-   "3a3b62ca83d71850",
-   144643
+   "e4cface7928d6919",
+   151643
   ],
   "minigames/boar-island/guns.js": [
    "14a972a0df710e2b",
    18509
   ],
   "minigames/boar-island/index.html": [
-   "0699efe7b528cc14",
-   8756
+   "0f7aa021c1940e47",
+   9115
   ],
   "minigames/boar-island/kit.js": [
    "5eb913afd656067c",
@@ -6873,8 +6893,8 @@
    23262
   ],
   "minigames/boar-session.mjs": [
-   "9f98d178289526f5",
-   4988
+   "1d5bbdab0ac411b8",
+   5390
   ],
   "minigames/canvas-session.mjs": [
    "32a5cbb64a97cadc",
@@ -6885,12 +6905,12 @@
    11584
   ],
   "minigames/catch-arsenal-hud.mjs": [
-   "067b6e0aa969b3f5",
-   23040
+   "f0fe76576996a7f5",
+   23045
   ],
   "minigames/catch-assist.mjs": [
-   "1b79632a02f1d2f4",
-   8489
+   "1d787cb1d8b6d7a3",
+   8493
   ],
   "minigames/catch-audio.mjs": [
    "4f92c72ef6e3d782",
@@ -6929,12 +6949,16 @@
    20080
   ],
   "minigames/catch-fire-hud.mjs": [
-   "c7b98b34b83ea134",
-   15406
+   "e76fea725abec382",
+   15410
   ],
   "minigames/catch-gfx.mjs": [
    "3275704b8d76e028",
    8967
+  ],
+  "minigames/catch-kid-practice.mjs": [
+   "5255a3798c850068",
+   7725
   ],
   "minigames/catch-props7.mjs": [
    "ff237764ceac068f",
@@ -6945,8 +6969,8 @@
    27761
   ],
   "minigames/catch-session6.mjs": [
-   "356391d1153d758f",
-   44819
+   "edee86312f503ae9",
+   47693
   ],
   "minigames/catch-track.mjs": [
    "a1903969329ef91d",
@@ -6969,8 +6993,8 @@
    39101
   ],
   "minigames/catch-weapons.mjs": [
-   "c17dba25f15f4c04",
-   22222
+   "f934f17545983a6d",
+   22285
   ],
   "minigames/catch.css": [
    "338003e01f465dc5",
@@ -7089,8 +7113,8 @@
    33056
   ],
   "minigames/fire-v24-session.mjs": [
-   "006eb5d181b5a7e2",
-   20938
+   "1dc3b9b0a35592bb",
+   23279
   ],
   "minigames/fire-v24.css": [
    "d2ab5edd6318c496",
@@ -7205,8 +7229,8 @@
    1778
   ],
   "minigames/hoops-controls.mjs": [
-   "8c7e98c8ccb4e613",
-   23455
+   "312c63e6882daf23",
+   23469
   ],
   "minigames/hoops-court.mjs": [
    "1a10df3683057e7c",
@@ -7225,8 +7249,8 @@
    1952
   ],
   "minigames/hoops-engine.mjs": [
-   "386bade9cbbe6d9f",
-   70055
+   "e7b072df6e656695",
+   70578
   ],
   "minigames/hoops-feel.mjs": [
    "7d59f78d5d63028d",
@@ -7309,20 +7333,20 @@
    2645
   ],
   "minigames/hoops-role-labels.mjs": [
-   "e6d436d5d7e9f165",
-   3797
+   "0d1d67db490222d1",
+   4251
   ],
   "minigames/hoops-roles.mjs": [
-   "826c8c0214f756e6",
-   1990
+   "6fe422ae3eac2016",
+   1943
   ],
   "minigames/hoops-screens.mjs": [
    "91f253249af598db",
    5458
   ],
   "minigames/hoops-session.mjs": [
-   "e5af69fef7414d40",
-   24246
+   "c18cc92ab8903c53",
+   26306
   ],
   "minigames/hoops-show.mjs": [
    "caf45c3a7bea9c51",
@@ -7387,6 +7411,10 @@
   "minigames/icons.mjs": [
    "fd5785388f151457",
    3801
+  ],
+  "minigames/kid-hoops-pass-demo.mjs": [
+   "fe51767eae2bef32",
+   6989
   ],
   "minigames/model-art.mjs": [
    "835f5461aa52a39b",
@@ -7457,8 +7485,8 @@
    3690
   ],
   "minigames/naval-hud.mjs": [
-   "018bd45d37856001",
-   29328
+   "1386b5e83334bd44",
+   33670
   ],
   "minigames/naval-icons.mjs": [
    "485eba3728746c6b",
@@ -7473,8 +7501,8 @@
    2610
   ],
   "minigames/naval-lockon-hud.mjs": [
-   "2e86169ec5664df5",
-   6974
+   "4fba4b6a852721be",
+   7339
   ],
   "minigames/naval-lockon.mjs": [
    "22d097614c99a29a",
@@ -7621,8 +7649,8 @@
    9892
   ],
   "minigames/racing-league-core.mjs": [
-   "b0621da23c1275cd",
-   28761
+   "791646be67548200",
+   28765
   ],
   "minigames/racing-league-result.mjs": [
    "ef8bf2f5f150ec26",
@@ -7653,8 +7681,8 @@
    23354
   ],
   "minigames/racing-pit-ui.mjs": [
-   "ee6a593c9e86f86d",
-   7394
+   "71c28ccd1f4243fc",
+   9201
   ],
   "minigames/racing-pit-view.mjs": [
    "ab60d19562015b44",
@@ -7685,8 +7713,8 @@
    7256
   ],
   "minigames/racing-session.mjs": [
-   "0d82ca70232a2a14",
-   20565
+   "06e0223e1133da36",
+   22969
   ],
   "minigames/racing-speedometer.mjs": [
    "589c478a61dba093",
@@ -7901,8 +7929,8 @@
    11034
   ],
   "minigames/soccer-r241.mjs": [
-   "74885064bc246e10",
-   29534
+   "e0785148e22a7610",
+   29545
   ],
   "minigames/soccer-referee.mjs": [
    "00d1f4caeef84925",
@@ -7937,8 +7965,8 @@
    8049
   ],
   "minigames/soccer-session.mjs": [
-   "10fac1691a7bb445",
-   31660
+   "6bcce9f015eae92a",
+   34270
   ],
   "minigames/soccer-shot.mjs": [
    "eac60656cb0ab90c",
@@ -8129,7 +8157,7 @@
    2839
   ],
   "minigames/ultra-alien-feedback.mjs": [
-   "fa75cbd4354dbfaa",
+   "60015db0c5356faa",
    11566
   ],
   "minigames/ultra-alien-fleet.mjs": [
@@ -8197,8 +8225,8 @@
    62159
   ],
   "ui/activity.mjs": [
-   "f491f4d5f9c06ae9",
-   56921
+   "f1d091be0387e5bd",
+   60088
   ],
   "ui/adventure-emblems.mjs": [
    "82977f552ab5239d",
@@ -8209,8 +8237,8 @@
    7466
   ],
   "ui/alpine-league.mjs": [
-   "cf134f8798a1126b",
-   17039
+   "a176f91465a16a4a",
+   17055
   ],
   "ui/boot-splash-start.mjs": [
    "254438957fab1e08",
@@ -8229,24 +8257,24 @@
    5834
   ],
   "ui/city-access.mjs": [
-   "a96c66ef158d96ac",
-   12041
+   "a959f8656c962119",
+   12027
   ],
   "ui/city-depth.css": [
    "113846d32d712655",
    700
   ],
   "ui/city-depth.mjs": [
-   "6fd5e3d87e118c65",
-   5090
+   "5b15d9b2d7dfabff",
+   5079
   ],
   "ui/city-management.css": [
    "9658889140c2f4b9",
    7211
   ],
   "ui/city-management.mjs": [
-   "6d489fd22f52c96f",
-   18075
+   "e15bf54998c386cc",
+   21696
   ],
   "ui/city-planning.css": [
    "8f268d614651bd62",
@@ -8273,24 +8301,36 @@
    4511
   ],
   "ui/game-shell.mjs": [
-   "5a332f97df42011d",
-   14620
+   "392c4844d4aa1fb3",
+   16503
   ],
   "ui/hangar-preview.mjs": [
    "22a05387a688a759",
    6231
   ],
   "ui/hoops-club.mjs": [
-   "11869e305f2b7d0d",
-   8653
+   "c133924acc73f7a3",
+   11333
   ],
   "ui/interface.mjs": [
-   "005e8b01b5477a8e",
-   52951
+   "0e9149736ee7a964",
+   60413
+  ],
+  "ui/kid-ux-help.mjs": [
+   "69ca2309dbdb60cb",
+   14092
+  ],
+  "ui/kid-ux-library.mjs": [
+   "cfae193d73a1003e",
+   1977
+  ],
+  "ui/kid-ux-result.mjs": [
+   "f99df99eeb100858",
+   5863
   ],
   "ui/load-report.mjs": [
-   "613f0a9e66c786eb",
-   3292
+   "5f5de13b0f021068",
+   3577
   ],
   "ui/load-rescue.mjs": [
    "92c17a04a9fc56c3",
@@ -8305,8 +8345,8 @@
    1427
   ],
   "ui/offline-panel.mjs": [
-   "eb62f09d34faf2ae",
-   16136
+   "fc93c9d60af78c11",
+   15631
   ],
   "ui/offline.mjs": [
    "b036b52548a57afd",
@@ -8325,8 +8365,8 @@
    8644
   ],
   "ui/racing-league.mjs": [
-   "80a81579c8dbfa8b",
-   18533
+   "d3eb4bd8d24b483f",
+   18877
   ],
   "ui/ready-plots.css": [
    "fa846d037c8519f5",
@@ -8341,8 +8381,8 @@
    937
   ],
   "ui/soccer-card.mjs": [
-   "3fc4dcdb81d7be80",
-   6238
+   "8d4021ad7ff674e3",
+   6085
   ],
   "ui/translate.mjs": [
    "9956cdc9c6ffe175",
@@ -8357,8 +8397,8 @@
    4685
   ],
   "ui/upgrade-offer-core.mjs": [
-   "2c97fff119150c4f",
-   6269
+   "162226579326ad1d",
+   6267
   ],
   "ui/upgrade-offer.mjs": [
    "06248014abca312f",
@@ -8413,8 +8453,8 @@
    5399
   ],
   "view/city-depth.mjs": [
-   "423bb5141d171f16",
-   7088
+   "dd9b312880e5fe3e",
+   7090
   ],
   "view/city-growth.mjs": [
    "495e0b44f5e35bab",

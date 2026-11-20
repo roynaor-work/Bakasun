@@ -70,7 +70,7 @@ async function activateWorker() {
   const source = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
   const currentCache = source.match(/const CACHE = '([^']+)'/)[1];
   const keys = [currentCache, 'bakasun-v0', 'bakasun-share', 'b3-other-app-cache', 'island-assets-audit', 'workout-royiki-v1', 'island-offline-v3'];
-  runInNewContext(source, { self: { addEventListener: (name, fn) => { handlers[name] = fn; }, clients: { claim: async () => {} } },
+  runInNewContext(source, { URL, self: { registration: { scope: 'https://app.invalid/Bakasun/' }, addEventListener: (name, fn) => { handlers[name] = fn; }, clients: { claim: async () => {} } },
     caches: { keys: async () => keys, delete: async key => { deleted.push(key); return true; } } });
   let pending; handlers.activate({ waitUntil(promise) { pending = promise; } }); await pending;
   return deleted;

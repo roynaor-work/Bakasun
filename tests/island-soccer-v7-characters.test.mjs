@@ -21,7 +21,7 @@ test('v7 runtime files are light, offline-listed and not published from design/'
  assert.ok(manifest.games.soccer.includes('assets/soccer-v7/clips.json'));assert.ok(manifest.shell.includes('minigames/soccer-v7.mjs'));
  assert.ok(total<2_500_000,`v7 runtime is ${total} bytes (the three GPT identities with LOD0 and LOD1 were 8.1 MB)`);
  assert.ok(!manifest.games.soccer.some(p=>p.startsWith('design/soccer-v7')),'nothing is loaded from design/soccer-v7');
- const pages=await readFile(new URL('../../.github/workflows/pages.yml',root),'utf8');
+ const pages=await readFile(new URL('../../.github/scripts/stage-pages.py',root),'utf8');
  assert.match(pages,/soccer-v7/,'design/soccer-v7 is excluded from the published site');
 });
 

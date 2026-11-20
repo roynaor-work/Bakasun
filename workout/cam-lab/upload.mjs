@@ -1,12 +1,19 @@
-export const UPLOAD_STORAGE_KEY = 'camlab.upload';
+import { approvedUploadEndpoint } from './upload-endpoints.mjs';
+
+export const UPLOAD_CONTEXTS = Object.freeze({
+  lab: Object.freeze({ key: 'camlab.upload.v2', database: 'camlab.upload.queue.v2', tag: 'camlab-upload-v2' }),
+  workout: Object.freeze({ key: 'kidfit.cameraUpload.v2', database: 'kidfit.cameraUpload.queue.v2', tag: 'kidfit-camera-upload-v2' }),
+});
+export const UPLOAD_STORAGE_KEY = UPLOAD_CONTEXTS.lab.key;
+export const CONSENT_TTL_MS = 24 * 60 * 60 * 1000;
 export const MAX_UPLOAD_BYTES = 40_000_000;
 export const UPLOAD_PARTS = ['diagnostics', 'skeleton', 'frames', 'video'];
 export const VIDEO_CHUNK_BYTES = 1_572_864;
 export const UPLOAD_LOG_KEY = 'camlab.upload.log';
 export const RETRY_DELAYS_MS = [2000, 5000, 15000];
-export const UPLOAD_TAG = 'camlab-upload';
+export const UPLOAD_TAG = UPLOAD_CONTEXTS.lab.tag;
 export const UPLOAD_DB_VERSION = 2;
-export const UPLOAD_VERSION = '20261013-frames-1';
+export const UPLOAD_VERSION = 'privacy-consent-2';
 const storageError = 'לא ניתן לשמור את ההגדרה במכשיר. אפשרו אחסון באתר ופתחו שוב את קישור ההגדרה.';
 const queueError = 'לא ניתן לשמור את הניסיון במכשיר. פנו מקום באחסון ונסו שוב; הניסיון עדיין לא נשלח.';
 const sendError = 'השליחה לבדיקה נכשלה';
@@ -33,25 +40,23 @@ export async function readUploadLog(store = new IndexedDBUploadStore()) {
 }
 const uniqueToken = () => globalThis.crypto?.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 
-function validEndpoint(value) {
-  if (typeof value !== 'string' || value.length > 4096) return null;
-  try {
-    const url = new URL(value);
-    const local = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
-    if ((url.protocol !== 'https:' && !(url.protocol === 'http:' && local)) || url.username || url.password || url.hash) return null;
-    return url.href;
-  } catch { return null; }
-}
-function validConfig(value) {
-  const endpoint = validEndpoint(value?.endpoint);
+function validConfig(value, endpoints, now = Date.now()) {
+  const endpoint = approvedUploadEndpoint(value?.endpoint, endpoints);
   return endpoint && typeof value.secret === 'string' && value.secret.length > 0 && value.secret.length <= 4096 &&
-    typeof value.consentId === 'string' && value.consentId.length > 0 && value.consentId.length <= 128 ?
-    { endpoint, secret: value.secret, consentId: value.consentId } : null;
+    typeof value.consentId === 'string' && value.consentId.length > 0 && value.consentId.length <= 128 &&
+    Number.isSafeInteger(value.expiresAt) && value.expiresAt > now && value.expiresAt <= now + CONSENT_TTL_MS ?
+    { endpoint, secret: value.secret, consentId: value.consentId, expiresAt: value.expiresAt } : null;
 }
 
-// The fragment is erased before parsing or storage access. Neither errors nor
-// queue records contain the endpoint or the secret from the parent's link.
-export function initializeUploadConfig({ location = globalThis.location, history = globalThis.history, storage } = {}) {
+export function confirmCameraUpload(endpoint) {
+  return globalThis.confirm?.(`האם לאשר שליחת וידאו ללא קול, תמונות מפתח, שלד ואבחון לכתובת הבאה למשך 24 שעות?
+
+${endpoint}`) === true;
+}
+
+// Remove the fragment before reading storage or asking for explicit consent.
+export function initializeUploadConfig({ location = globalThis.location, history = globalThis.history,
+  storage, context = 'lab', endpoints, approve = () => false, now = Date.now } = {}) {
   const params = new URLSearchParams(location?.hash?.replace(/^#/, '') || '');
   const configuring = params.has('upload') || params.has('key');
   if (configuring) {
@@ -63,22 +68,25 @@ export function initializeUploadConfig({ location = globalThis.location, history
   }
   try {
     storage ??= globalThis.localStorage;
+    const key = UPLOAD_CONTEXTS[context].key;
     let previous = null;
-    try { previous = validConfig(JSON.parse(storage?.getItem(UPLOAD_STORAGE_KEY) || 'null')); } catch { /* Invalid saved settings do not grant consent. */ }
+    try { previous = validConfig(JSON.parse(storage?.getItem(key) || 'null'), endpoints, now()); } catch { /* Invalid settings confer no consent. */ }
     if (!configuring) return { config: previous, error: null };
-    const endpoint = validEndpoint(params.get('upload')), secret = params.get('key');
+    const endpoint = approvedUploadEndpoint(params.get('upload'), endpoints), secret = params.get('key');
     if (!endpoint || !secret || secret.length > 4096 || params.getAll('upload').length !== 1 || params.getAll('key').length !== 1) {
-      return { config: null, error: 'קישור השליחה אינו תקין. נדרשים כתובת HTTPS ומפתח בדיקה.' };
+      return { config: previous, error: 'קישור השליחה אינו תקין או שהיעד טרם אושר.' };
     }
-    const config = { endpoint, secret, consentId: previous?.endpoint === endpoint && previous.secret === secret ? previous.consentId : uniqueToken() };
-    if (!storage?.setItem) return { config: null, error: storageError };
-    storage.setItem(UPLOAD_STORAGE_KEY, JSON.stringify(config));
+    if (approve(endpoint) !== true) return { config: previous, error: null };
+    const consentId = previous?.endpoint === endpoint && previous.secret === secret ? previous.consentId : uniqueToken();
+    const config = { endpoint, secret, consentId, expiresAt: now() + CONSENT_TTL_MS };
+    if (!storage?.setItem) return { config: previous, error: storageError };
+    storage.setItem(key, JSON.stringify(config));
     return { config, error: null };
   } catch { return { config: null, error: storageError }; }
 }
 
-export function disableUploadConfig(storage) {
-  try { (storage || globalThis.localStorage)?.removeItem(UPLOAD_STORAGE_KEY); return true; }
+export function disableUploadConfig(storage, context = 'lab') {
+  try { (storage || globalThis.localStorage)?.removeItem(UPLOAD_CONTEXTS[context].key); return true; }
   catch { return false; }
 }
 
@@ -94,8 +102,14 @@ export function createSessionId(exercise, date = new Date()) {
 // Resolve writes on transaction completion, not request success: a request can
 // succeed and the surrounding transaction can still abort (quota, disk, etc.).
 export class IndexedDBUploadStore {
-  constructor({ indexedDB = globalThis.indexedDB, name = 'camlab.upload.queue' } = {}) {
-    this.indexedDB = indexedDB; this.name = name; this.database = null;
+  constructor({ indexedDB = globalThis.indexedDB, context = 'lab', name = UPLOAD_CONTEXTS[context].database, endpoints } = {}) {
+    Object.assign(this, { indexedDB, name, context, endpoints });
+    this.database = null;
+  }
+  get key() { return UPLOAD_CONTEXTS[this.context].key; }
+  get tag() { return UPLOAD_CONTEXTS[this.context].tag; }
+  clearConfig(key = this.key) {
+    return this.transaction('readwrite', store => store.delete(key), 'state');
   }
   open() {
     if (!this.database) this.database = new Promise((resolve, reject) => {
@@ -132,9 +146,13 @@ export class IndexedDBUploadStore {
   list() { return this.transaction('readonly', store => store.getAll()); }
   remove(session) { return this.transaction('readwrite', store => store.delete(session)); }
   clear() { return this.transaction('readwrite', store => store.clear()); }
-  getConfig() { return this.transaction('readonly', store => store.get(UPLOAD_STORAGE_KEY), 'state').then(validConfig); }
-  setConfig(config) { return this.transaction('readwrite', store => validConfig(config) ?
-    store.put(validConfig(config), UPLOAD_STORAGE_KEY) : store.delete(UPLOAD_STORAGE_KEY), 'state'); }
+  getConfig() {
+    return this.transaction('readonly', store => store.get(this.key), 'state').then(value => validConfig(value, this.endpoints));
+  }
+  setConfig(config) {
+    const approved = validConfig(config, this.endpoints);
+    return this.transaction('readwrite', store => approved ? store.put(approved, this.key) : store.delete(this.key), 'state');
+  }
   readLog() { return this.transaction('readonly', store => store.get(UPLOAD_LOG_KEY), 'state'); }
   // All read/modify/write operations run in a single serialized IDB transaction.
   async updateState(key, update) {
@@ -157,17 +175,17 @@ export class IndexedDBUploadStore {
   appendLog(event) { return this.updateState(UPLOAD_LOG_KEY, entries => {
     const log = safeUploadLog([...(entries || []), event]); return { value: log, result: log };
   }); }
-  acquireLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => !lease || lease.expires <= now || lease.owner === owner ?
+  acquireLease(owner, now, ttl) { return this.updateState(this.tag, lease => !lease || lease.expires <= now || lease.owner === owner ?
     { value: { owner, expires: now + ttl }, result: true } : { result: false }); }
-  renewLease(owner, now, ttl) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner && lease.expires > now ?
+  renewLease(owner, now, ttl) { return this.updateState(this.tag, lease => lease?.owner === owner && lease.expires > now ?
     { value: { owner, expires: now + ttl }, result: true } : { result: false }); }
-  releaseLease(owner) { return this.updateState(UPLOAD_TAG, lease => lease?.owner === owner ? { value: null } : {}); }
+  releaseLease(owner) { return this.updateState(this.tag, lease => lease?.owner === owner ? { value: null } : {}); }
   async revoke() {
     const db = await this.open();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(['state', 'sessions'], 'readwrite');
       tx.oncomplete = resolve; tx.onabort = tx.onerror = () => reject(new UploadError('storage'));
-      tx.objectStore('state').delete(UPLOAD_STORAGE_KEY); tx.objectStore('sessions').clear();
+      tx.objectStore('state').delete(this.key); tx.objectStore('sessions').clear();
     });
   }
   async putCurrent(record, owner = null, now = Date.now()) {
@@ -176,11 +194,11 @@ export class IndexedDBUploadStore {
       let saved = false;
       const tx = db.transaction(['state', 'sessions'], 'readwrite');
       tx.oncomplete = () => resolve(saved); tx.onabort = tx.onerror = () => reject(new UploadError('storage'));
-      const request = tx.objectStore('state').get(UPLOAD_STORAGE_KEY);
+      const request = tx.objectStore('state').get(this.key);
       request.onsuccess = () => {
-        if (request.result?.consentId !== record.consentId) return;
+        if (validConfig(request.result, this.endpoints)?.consentId !== record.consentId) return;
         if (!owner) { tx.objectStore('sessions').put(record); saved = true; return; }
-        const lease = tx.objectStore('state').get(UPLOAD_TAG);
+        const lease = tx.objectStore('state').get(this.tag);
         lease.onsuccess = () => {
           if (lease.result?.owner === owner && lease.result.expires > now) { tx.objectStore('sessions').put(record); saved = true; }
         };
@@ -195,7 +213,7 @@ export class UploadLock {
     Object.assign(this, { store, locks, now, ttl, setTimer, clearTimer, onLost }); this.owner = uniqueToken();
   }
   async run(operation, { ifAvailable = false } = {}) {
-    if (this.locks?.request) return this.locks.request(UPLOAD_TAG, { ifAvailable }, lock => lock ? operation() : false);
+    if (this.locks?.request) return this.locks.request(this.store?.tag || UPLOAD_TAG, { ifAvailable }, lock => lock ? operation() : false);
     // In-memory test stores have no cross-context persistence. Production always
     // uses the atomic IDB lease when Web Locks is unavailable.
     if (!this.store.acquireLease) return operation();
@@ -227,11 +245,13 @@ function asBlob(value, part) {
 }
 
 export class UploadQueue {
-  constructor({ config = null, store = new IndexedDBUploadStore(), fetchImpl = globalThis.fetch,
+  constructor({ config = null, context = 'lab', endpoints,
+    store = new IndexedDBUploadStore({ context, endpoints }), fetchImpl = globalThis.fetch,
     onStatus = () => {}, timeoutMs = 0,
     setTimer = setTimeout, clearTimer = clearTimeout, actor = 'page', locks = globalThis.navigator?.locks,
     now = Date.now, persistConfig = true, onQueued = () => {} } = {}) {
-    this.config = validConfig(config); this.store = store;
+    this.context = context;
+    this.config = validConfig(config, endpoints); this.store = store;
     // Native browser methods require their Window/Worker receiver, even when
     // dependency injection stores them on another object's property.
     this.fetchImpl = (...args) => fetchImpl.call(globalThis, ...args);
@@ -248,7 +268,7 @@ export class UploadQueue {
     this.ready.catch(() => {});
     this.running = null; this.controller = null; this.pending = 0; this.writes = new Set();
   }
-  get enabled() { return this.config != null; }
+  get enabled() { return Boolean(this.config && Date.now() < this.config.expiresAt); }
   status(state, message, extra = {}) { this.onStatus({ state, message, pending: this.pending, total: 4, ...extra }); }
   stop() { this.config = null; this.epoch++; this.controller?.abort(); this.pending = 0; }
   async disable() {
@@ -314,7 +334,10 @@ export class UploadQueue {
   async canSend(epoch, config) {
     if (!this.isCurrent(epoch, config)) return false;
     if (this.now() >= this.deadline) { this.pausedForBudget = true; return false; }
-    if (this.store.getConfig && (await this.store.getConfig())?.consentId !== config.consentId) return false;
+    if (this.store.getConfig) {
+      const current = await this.store.getConfig();
+      if (current?.consentId !== config.consentId || current.endpoint !== config.endpoint || current.secret !== config.secret) return false;
+    }
     if (!this.lock.locks?.request && this.store.renewLease &&
       !await this.store.renewLease(this.lock.owner, this.now(), this.lock.ttl)) return false;
     return this.isCurrent(epoch, config);
@@ -328,7 +351,7 @@ export class UploadQueue {
     });
     if (this.controller === controller) this.controller = null;
   }
-  async post(config, record, part, chunk = null) {
+  async post(config, record, part, chunk, epoch) {
     const controller = new AbortController(); this.controller = controller;
     let timer, bodyBytes = 0;
     const started = Date.now();
@@ -340,7 +363,7 @@ export class UploadQueue {
         ...(chunk == null ? {} : { chunk, chunks: Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)), totalBytes: part.blob.size }),
         data: await blobToBase64(blob) });
       bodyBytes = new TextEncoder().encode(body).length;
-      if (!this.enabled || this.config !== config) return false;
+      if (!await this.canSend(epoch, config) || controller.signal.aborted) return false;
       // The final video request also waits for assembly of the entire file.
       const finalChunk = chunk != null && chunk === Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)) - 1;
       const fullTimeout = Math.max(this.timeoutMs, requestTimeoutMs(bodyBytes), finalChunk ? 5000 * part.blob.size / 1_000_000 : 0);
@@ -354,13 +377,10 @@ export class UploadQueue {
       });
       const { response, result } = await Promise.race([this.fetchImpl(config.endpoint, {
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body, signal: controller.signal,
-        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'follow',
+        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'manual',
       }).then(async response => {
-        if (response.redirected) {
-          let url;
-          try { url = new URL(response.url); } catch { throw new UploadError('redirect'); }
-          if (url.protocol !== 'https:' ||
-            (url.hostname !== 'script.googleusercontent.com' && url.hostname !== new URL(config.endpoint).hostname)) throw new UploadError('redirect');
+        if (response.type === 'opaqueredirect' || response.redirected || (response.status >= 300 && response.status < 400)) {
+          throw new UploadError('redirect');
         }
         let result;
         try { result = await response.json(); } catch { throw new UploadError('response'); }
@@ -388,7 +408,7 @@ export class UploadQueue {
         `שולח ${partNames[part.part]}: חלק ${chunk + 1} מתוך ${Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES))}`,
       { part: UPLOAD_PARTS.filter(name => name !== 'frames' || record.parts.some(p => p.part === 'frames')).indexOf(part.part) + 1, partName: part.part, session: record.session, total: record.parts.length,
         chunk, chunks: chunk == null ? null : Math.max(1, Math.ceil(part.blob.size / VIDEO_CHUNK_BYTES)), attempt: attempt + 1 });
-      try { return await this.post(config, record, part, chunk); }
+      try { return await this.post(config, record, part, chunk, epoch); }
       catch (error) {
         if (!this.isCurrent(epoch, config)) return false;
         error.chunk = chunk;

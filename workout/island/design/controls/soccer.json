@@ -113,18 +113,18 @@
       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
     },
     "sprint": {
-      "label": "ריצה",
-      "aria_label": "ריצה",
+      "label": "סיבולת",
+      "aria_label": "סיבולת",
       "hud_kit": {
         "module": "../hud-kit/action-button.mjs",
         "export": "create",
         "options": {
           "primary": false,
-          "label": "ריצה",
+          "label": "סיבולת",
           "icon": "boost"
         },
         "update": {
-          "label": "ריצה",
+          "label": "סיבולת",
           "icon": "boost",
           "disabled": false,
           "loading": false,
@@ -216,18 +216,18 @@
       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
     },
     "throw": {
-      "label": "אאוט",
-      "aria_label": "אאוט",
+      "label": "הוצאת חוץ",
+      "aria_label": "הוצאת חוץ",
       "hud_kit": {
         "module": "../hud-kit/action-button.mjs",
         "export": "create",
         "options": {
           "primary": true,
-          "label": "אאוט",
+          "label": "הוצאת חוץ",
           "icon": "pass"
         },
         "update": {
-          "label": "אאוט",
+          "label": "הוצאת חוץ",
           "icon": "pass",
           "disabled": false,
           "loading": false,
@@ -688,7 +688,7 @@
       "two_fingers": "אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת."
     },
     "throw_in": {
-      "label": "הוצאת אאוט",
+      "label": "הוצאת חוץ",
       "note": "כדור בידיים · כיוון ונמען גלויים · אין גלישה או בעיטה",
       "controls": [
         {

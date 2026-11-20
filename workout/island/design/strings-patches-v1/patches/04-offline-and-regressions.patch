@@ -1,0 +1,639 @@
+diff --git a/tests/island-aliens-naval-v24.test.mjs b/tests/island-aliens-naval-v24.test.mjs
+index f312634..bfc3f17 100644
+--- a/tests/island-aliens-naval-v24.test.mjs
++++ b/tests/island-aliens-naval-v24.test.mjs
+@@ -302,8 +302,8 @@ test('the child bot (human noise: reaction, missed warnings, taps at its own rhy
+ });
+
+ // ---------------------------------------------------------------- Data and wiring
+-test('words, styles and the offline list: help texts describe the magazine, the tap lock, the red decal and the torpedo; the new modules and Codex copies are cached offline with their licences',async()=>{
+- assert.match(strings['minigame.alienDefense.help.1'],/מחסנית וולקן/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/סימון אדום/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);
++test('words, styles and the offline list: help texts describe the magazine, the tap lock, the flashing marker and the torpedo; the new modules and Codex copies are cached offline with their licences',async()=>{
++ assert.match(strings['minigame.alienDefense.help.1'],/מחסנית וולקן/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/סימון מהבהב על המים/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);
+  const manifest=JSON.parse(await read('../workout/island/offline-manifest.json'));
+  for(const f of ['minigames/alien-v24.mjs','minigames/alien-v24-draw.mjs','minigames/alien-v24-audio.mjs','minigames/alien-v24.css','minigames/naval-v24.mjs','minigames/naval-v24-hud.mjs','minigames/naval-v24-audio.mjs','minigames/naval-v24.css'])assert.ok(manifest.shell.includes(f),f);
+  for(const f of ['assets/alien-v24/vulcan-magazine.png','assets/alien-v24/pickup-burst.png','assets/alien-v24/refill-pickup.ogg','assets/alien-v24/overheat.ogg'])assert.ok(manifest.games.alien.includes(f),f);
+diff --git a/tests/island-aliens-v23.test.mjs b/tests/island-aliens-v23.test.mjs
+index f0bf861..ea383b3 100644
+--- a/tests/island-aliens-v23.test.mjs
++++ b/tests/island-aliens-v23.test.mjs
+@@ -173,7 +173,7 @@ test('heat bar next to the ship: hidden when cold and open, green/yellow/red by
+
+ test('words for the child: help text and the in-game line describe the two buttons; the v22 help text is kept for ?alienFire=v15',async()=>{
+  const help=strings['minigame.alienDefense.help.1'];
+- for(const word of ['ברק','הירי הרגיל','קצב קבוע','וולקן','ירוק','צהוב','אדום','שתי שניות','מהבהב'])assert.ok(help.includes(word),word);
++ for(const word of ['ברק','לירי רגיל ורצוף','הירי הרגיל','וולקן','ירוק','צהוב','אדום','שתי שניות','מהבהב'])assert.ok(help.includes(word),word);
+  assert.doesNotMatch(help,/!/);assert.doesNotMatch(help,/פרץ/,'no burst on the fire button any more');
+  assert.match(strings['minigame.alienDefense.help.1.v15'],/פרץ וולקן קצר/);assert.equal(strings['minigame.vulcan'],'וולקן');assert.ok(strings['minigame.vulcanLocked']);assert.ok(strings['minigame.fireRegular']);
+  const base={powerup:-1,upgrades:{},equipment:{},spreadTime:0,wings:[],v23:true,vulcanLocked:false};
+diff --git a/tests/island-boar-integration.test.mjs b/tests/island-boar-integration.test.mjs
+index 6b0803b..1d7e5b6 100644
+--- a/tests/island-boar-integration.test.mjs
++++ b/tests/island-boar-integration.test.mjs
+@@ -44,12 +44,12 @@ test('existing schema-18 city saves remain byte-for-byte valid without adding fa
+   assert.equal(Object.hasOwn(migrated.state.minigameProgress,'boarDefense'),false);
+ });
+
+-test('the imported weapons, wave logic, artwork generators and Three runtime preserve the shipped source bytes',async()=>{
++test('bundled Boar sources match the upstream or localized checksum',async()=>{
+   const base=new URL('minigames/boar-island/',root),source=JSON.parse(await readFile(new URL('source.json',base)));
+   assert.equal(source.commit,'4d6674b9ceebc63b08886009cf9ae727bd0cfed3');
+   for(const [path,original] of Object.entries(source.originalFiles)){
+     if(['game.js','style.css'].includes(path))continue;
+     const bytes=await readFile(new URL(path,base));
+-    assert.equal(createHash('sha256').update(bytes).digest('hex'),original.sha256,path);
++    assert.equal(createHash('sha256').update(bytes).digest('hex'),source.localizedSha256?.[path]??original.sha256,path);
+   }
+ });
+diff --git a/tests/island-boars-v24.test.mjs b/tests/island-boars-v24.test.mjs
+index 38df5cd..a5f40b5 100644
+--- a/tests/island-boars-v24.test.mjs
++++ b/tests/island-boars-v24.test.mjs
+@@ -110,5 +110,5 @@ test('boars v24: wired into game.js behind ?boarAim=v23, forwarded by the island
+   assert.ok(src.indexOf('hold(on){qaHold=!!on;}')>src.indexOf('function installQA(){'),'hold() is part of installQA (only with ?qa)');
+   assert.match(session,/if\(aim==='v23'\|\|aim==='axes'\)url\.searchParams\.set\('boarAim',aim\);/);
+   assert.ok(offline.shell.includes('minigames/boar-island/aim-v24.mjs'),'offline shell lists aim-v24.mjs');
+-  assert.match(src,/AIM_V24\?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק\. ':''/,'the in-game help tells the child');
++  assert.match(src,/AIM_V24\?'כשהכוונת קרובה לחזיר, היא עוזרת לכוון לעיניים שלו\. היא עוקבת אחריו כל עוד האגודל על הג׳ויסטיק\. ':''/,'the in-game help tells the child');
+ });
+diff --git a/tests/island-boot-splash.test.mjs b/tests/island-boot-splash.test.mjs
+index beaaed0..e6d30de 100644
+--- a/tests/island-boot-splash.test.mjs
++++ b/tests/island-boot-splash.test.mjs
+@@ -87,7 +87,7 @@ test('splash: reduced motion shows only the static screen',()=>{
+
+ test('the shipped page: static splash markup, own script before the app, clip inside budget and cached offline',async()=>{
+   const html=await readFile(new URL('index.html',root),'utf8');
+-  assert.match(html,/data-boot-splash[^>]*role="status"/);assert.match(html,/העיר שלי מתעוררת/);
++  assert.match(html,/data-boot-splash[^>]*role="status"/);assert.match(html,/האי מתעורר/);
+   assert.ok(html.indexOf('boot-splash-start.mjs')<html.indexOf('app.mjs'));
+   assert.doesNotMatch(html,/<video/,'no video in the first HTML');
+   const css=await readFile(new URL('ui/boot-splash.css',root),'utf8');
+diff --git a/tests/island-catch-v7.test.mjs b/tests/island-catch-v7.test.mjs
+index 86db3a9..48e4528 100644
+--- a/tests/island-catch-v7.test.mjs
++++ b/tests/island-catch-v7.test.mjs
+@@ -227,7 +227,7 @@ test('v7 HUD: tool button, fire button, zone ring and aim dot in a fake DOM; Heb
+   ch.state.crim.s = ch.state.s + 12; ch.state.crim.d = ch.state.d + .9; ch.state.crim.targetD = ch.state.crim.d; ch.step(1 / 60); ch.drainEvents();
+   const aim = ch.gun.aimInfo(); assert.ok(aim.inRange);
+   const z = zoneWorld(ch.track, ch, aim), d = dotWorld(ch.track, ch, aim); assert.ok(Number.isFinite(z.x) && Number.isFinite(d.x) && z.y === aim.zoneY);
+-  assert.deepEqual(toolLabel(ch.gun.state, k => resolveText(k => k, k)), {name: 'פנצ׳ר', left: `${ARSENAL.tools.tyres.ammo}/${ARSENAL.tools.tyres.ammo}`});
++  assert.deepEqual(toolLabel(ch.gun.state, k => resolveText(k => k, k)), {name: 'ירי לגלגל', left: `${ARSENAL.tools.tyres.ammo}/${ARSENAL.tools.tyres.ammo}`});
+   // fake DOM, enough for the HUD
+   const el = tag => { const n = {tag, children: [], dataset: {}, style: {setProperty() {}, removeProperty() {}}, attrs: {}, listeners: {}, hidden: false, className: '', classList: {add() {}, remove() {}}, offsetWidth: 1,
+     append(...k) { for (const c of k) { c.parent = n; n.children.push(c); } }, prepend(...k) { n.append(...k); }, remove() { if (n.parent) n.parent.children = n.parent.children.filter(c => c !== n); }, replaceChildren(...k) { n.children = []; n.append(...k); },
+diff --git a/tests/island-catch-v8.test.mjs b/tests/island-catch-v8.test.mjs
+index 9295269..1885b44 100644
+--- a/tests/island-catch-v8.test.mjs
++++ b/tests/island-catch-v8.test.mjs
+@@ -197,7 +197,7 @@ test('v8 HUD: the ring shows where the tool aims (grey with the reason out of ra
+   ch.state.crim.s = ch.state.s + 40; ch.state.crim.d = ch.state.d; ch.step(1 / 60); ch.drainEvents(); api.refresh();
+   assert.equal(ret.hidden, false, 'far away: the ring still shows'); assert.equal(ret.dataset.q, 'off'); assert.match(text(ret), /רחוק מדי/, 'with the reason'); assert.match(text(ret), /גלגל/, 'and the target');
+   ch.state.crim.s = ch.state.s + 11; ch.step(1 / 60); ch.drainEvents(); api.refresh(); assert.notEqual(ret.dataset.q, 'off'); assert.match(text(ret), /%/, 'in range: the chance');
+-  ch.cycle(); ch.cycle(); ch.step(1 / 60); ch.drainEvents(); api.refresh(); assert.equal(ret.dataset.tool, 'spikes'); assert.match(text(ret), /הכביש לפניו/, 'the spike ring is named for the road');
++  ch.cycle(); ch.cycle(); ch.step(1 / 60); ch.drainEvents(); api.refresh(); assert.equal(ret.dataset.tool, 'spikes'); assert.match(text(ret), /הכביש לפני הרכב/, 'the spike ring is named for the road');
+   assert.ok(parseFloat(ret.style.height) < parseFloat(ret.style.width), 'and lies flat');
+   ch.state.crim.s = ch.state.s - 6; ch.step(1 / 60); ch.drainEvents(); api.refresh(); assert.equal(chip.hidden, false, 'behind: the chip'); assert.equal(ret.hidden, true);
+   api.dispose(); assert.equal(hud.children.length, 0);
+@@ -234,7 +234,7 @@ test('v8 burst changes no rule: one roll and the v7 damage per tap; the view, no
+ test('v8 strings and offline: every new key is in the island strings (no exclamation marks, no Arabic), the new modules are in the shell', async () => {
+   const island = JSON.parse(await readFile(new URL('data/strings.he.json', root), 'utf8'));
+   for (const k of [...Object.keys(TOOL_STRINGS), 'catch.help8.2']) { assert.ok(Object.hasOwn(island, k), k); assert.equal(/[!؀-ۿ]/.test(island[k]), false, k); assert.ok(/[א-ת]/.test(island[k]), k); }
+-  assert.match(island['catch.help8.2'], /הכביש לפניו/, 'the v8 help says where each tool aims');
++  assert.match(island['catch.help8.2'], /הכביש לפני הרכב/, 'the v8 help says where each tool aims');
+   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
+   for (const f of ['minigames/catch-audio8.mjs', 'minigames/catch-burst8.mjs']) assert.ok(manifest.shell.includes(f), f);
+   for (const f of ['catch-audio8.mjs', 'catch-burst8.mjs']) { const s = await readFile(new URL('minigames/' + f, root), 'utf8'); assert.equal(/[؀-ۿ]/.test(s), false, f); }
+diff --git a/tests/island-g2j.test.mjs b/tests/island-g2j.test.mjs
+index abc33f2..2a13d80 100644
+--- a/tests/island-g2j.test.mjs
++++ b/tests/island-g2j.test.mjs
+@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
+ const strings=JSON.parse(await readFile(new URL('../workout/island/data/strings.he.json',import.meta.url),'utf8'));
+ const root=new URL('../workout/island/',import.meta.url),data=await loadData(root,async u=>({ok:true,json:async()=>JSON.parse(await readFile(u,'utf8'))})),config=data.config.minigames,balance=config.fireRescue,make=(level=3)=>createFireModel({config,balance,level,random:seededRandom(3)}),advance=(m,s,input={})=>{for(let i=0;i<s/.02&&!m.result;i++)m.update(.02,input);};
+ const park=(m,near=true)=>{const r=m.rescue;if(near)Object.assign(m.truck,{x:r.world[0],z:r.world[2],targetX:r.world[0],targetZ:r.world[2]});m.update(.02,{});};
+-test('G2j a single truck hint uses the new Hebrew wording even with many distant fires',()=>{const m=make(10);m.update(.02,{firing:true,x:999,y:0});assert.equal(m.hintId,'minigame.tooFar');assert.equal(m.hintCount,1);assert.equal(strings['minigame.tooFar'],'תתקרב עם המשאית');});
++test('G2j a single truck hint uses the new Hebrew wording even with many distant fires',()=>{const m=make(10);m.update(.02,{firing:true,x:999,y:0});assert.equal(m.hintId,'minigame.tooFar');assert.equal(m.hintCount,1);assert.equal(strings['minigame.tooFar'],'מתקרבים עם המשאית');});
+ test('G2j initial grace blocks heat growth and spread, then the configured clock releases it',()=>{const m=make(1),f=m.flames[0],heat=f.heat,count=m.flames.filter(f=>f.active).length;advance(m,balance.startGrace-.1);assert.equal(f.heat,heat);assert.equal(m.flames.filter(f=>f.active).length,count);assert.ok(m.graceRemaining>0);advance(m,.3);assert.ok(f.heat>heat);});
+ test('G2j hydrant connection precedes metered refill and driving away detaches it',()=>{const m=make(1);advance(m,1,{firing:true,x:999,y:0});const water=m.water;Object.assign(m.truck,{x:balance.hydrant.position[0],z:balance.hydrant.position[2],targetX:balance.hydrant.position[0],targetZ:balance.hydrant.position[2]});advance(m,balance.hydrant.connectSeconds/2);assert.equal(m.water,water);advance(m,.4);assert.ok(m.water>water);m.update(.02,{truckX:balance.vehicle.minX,truckZ:balance.vehicle.minZ});assert.equal(m.refilling,false);});
+ test('G2j ladder blocks distance and hot window, then rescues once when parked and safe',()=>{const m=make(),r=m.rescue;advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,false);park(m);advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,false);m.flames[r.fireIndex].heat=balance.rescue.safeHeat/2;advance(m,r.seconds+.1,{rescue:true,x:r.x,y:r.y});assert.ok(r.rescued);const score=m.score;advance(m,.2,{rescue:true,x:r.x,y:r.y});assert.equal(m.score,score);});
+diff --git a/tests/island-offline-v25.test.mjs b/tests/island-offline-v25.test.mjs
+index 5747f92..1ff4c55 100644
+--- a/tests/island-offline-v25.test.mjs
++++ b/tests/island-offline-v25.test.mjs
+@@ -155,7 +155,7 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
+  const app=await read('app.mjs'),panel=await read('ui/offline-panel.mjs'),offline=await read('ui/offline.mjs'),install=await read('ui/offline-install.mjs'),sw=await read('offline-sw.js'),html=await read('index.html');
+  assert.ok(app.includes('v25On()')&&app.includes('switchRelease(')&&app.includes('selectPacks:')&&app.includes('readyRelease===pendingRelease'),'app: flag, release switch after prefetch, packs by games played');
+  assert.ok(app.includes('prefetchRelease(')&&app.includes('startAutoDownload(')&&app.includes('registerOfflineWorker()'),'v24 wiring kept');
+- for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת כל המשחקים למכשיר','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
++ for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת המשחקים','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
+  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
+  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
+  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');
+diff --git a/tests/island-offline.test.mjs b/tests/island-offline.test.mjs
+index 45e1968..1fa2c78 100644
+--- a/tests/island-offline.test.mjs
++++ b/tests/island-offline.test.mjs
+@@ -131,12 +131,12 @@ test('save data safety: the offline code never clears or deletes game saves',asy
+ });
+
+ test('wiring: one panel in the main games menu, automatic download and release check on every open, reports for all three games',async()=>{
+- const activity=await read('ui/activity.mjs'),app=await read('app.mjs'),hoops=await read('minigames/hoops-session.mjs'),alpine=await read('minigames/alpine-session.mjs'),soccer=await read('minigames/soccer-session.mjs'),card=await read('ui/soccer-card.mjs'),panel=await read('ui/offline-panel.mjs');
++ const activity=await read('ui/activity.mjs'),app=await read('app.mjs'),hoops=await read('minigames/hoops-session.mjs'),alpine=await read('minigames/alpine-session.mjs'),soccer=await read('minigames/soccer-session.mjs'),parent=await read('ui/interface.mjs'),panel=await read('ui/offline-panel.mjs');
+  assert.ok(activity.includes('dialog.append(cards,offlinePanel())'));
+- assert.ok(panel.includes("dataset.action='offline-download-all'")&&panel.includes("dataset.action='offline-check-update'")&&panel.includes('הורדת כל המשחקים למכשיר')&&panel.includes('בדיקת עדכון והורדה'));
++ assert.ok(panel.includes("dataset.action='offline-download-all'")&&panel.includes("dataset.action='offline-check-update'")&&panel.includes('הורדת המשחקים')&&panel.includes('בדיקת עדכון והורדה'));
+  assert.ok(app.includes('releaseWatch.poll()')&&app.includes('startAutoDownload(')&&app.includes('prefetchRelease(')&&app.includes('registerOfflineWorker()'));
+  assert.ok(app.includes('canRun:()=>!engine.isMinigameActive()'),'the background download waits while a game runs');
+- assert.ok(hoops.includes("saveGameReport('hoops'")&&alpine.includes("saveGameReport('alpine'")&&soccer.includes("'island.soccer.lastLoadReport'")&&card.includes("reportPanel('soccer')"));
++ assert.ok(hoops.includes("saveGameReport('hoops'")&&alpine.includes("saveGameReport('alpine'")&&soccer.includes("'island.soccer.lastLoadReport'")&&parent.includes('appendLoadReports(modal)'));
+  assert.equal(reportKey('soccer'),'island.soccer.lastLoadReport');assert.equal(reportKey('hoops'),'island.hoops.lastLoadReport');
+  assert.ok(hoops.includes('timeout 45 s'),'basketball load has a clear timeout');
+ });
+diff --git a/tests/island-racing-v24-1.test.mjs b/tests/island-racing-v24-1.test.mjs
+index dc07e3b..0179790 100644
+--- a/tests/island-racing-v24-1.test.mjs
++++ b/tests/island-racing-v24-1.test.mjs
+@@ -105,23 +105,23 @@ function fakeDocument(){
+ test('pit HUD: the button pulses "automatic" from the start of the stop lap and a tap cancels; a hand request can be cancelled too; v24 keeps its button',()=>{
+  for(const auto of [true,false]){
+   const doc=fakeDocument(),stage=doc.createElement('div'),controls=doc.createElement('div'),calls=[];
+-  const ui=createPitUi({stage,controls,document:doc,auto,onRequest:()=>calls.push('request'),onCancel:()=>calls.push('cancel'),onTap:()=>calls.push('tap')});
++  const ui=createPitUi({stage,controls,document:doc,auto,phoneFix:false,onRequest:()=>calls.push('request'),onCancel:()=>calls.push('cancel'),onTap:()=>calls.push('tap')});
+   const button=controls.children.find(c=>c.dataset.action==='racing-pit');
+   const player={tyre:.9,lap:2,pits:0,pit:null,pitRequest:true,pitAuto:true,pitGo:false};ui.update({player,laps:3,cars:[player]});
+   if(auto){assert.equal(button.dataset.state,'auto');assert.match(button.children.at(-1).textContent,/אוטומטי/);assert.match(button.getAttribute('aria-label'),/מבטלת/);
+    button.press();assert.deepEqual(calls,['cancel']);
+    ui.update({player:{...player,pitGo:true},laps:3,cars:[player]});assert.equal(button.hidden,true,'committed: no button');
+    ui.update({player:{...player,pitAuto:false},laps:3,cars:[player]});assert.equal(button.dataset.state,'requested');button.press();assert.deepEqual(calls,['cancel','cancel']);
+-   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'הפיטס בוטל');assert.match(ui.toast({car:'player',type:'pitRequest',auto:true}),/אוטומטי/);}
++   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'עצירת הצמיגים בוטלה');assert.match(ui.toast({car:'player',type:'pitRequest',auto:true}),/אוטומטי/);}
+   else{assert.equal(button.dataset.state,'requested','v24 shows its automatic stop as a request');button.press();assert.deepEqual(calls,[],'and a tap does nothing, as in v24');
+-   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'הפיטס בוטל');assert.equal(ui.toast({car:'player',type:'pitRequest',auto:true}),'בסוף ההקפה: פיטס להחלפת צמיגים');}
++   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'עצירת הצמיגים בוטלה');assert.equal(ui.toast({car:'player',type:'pitRequest',auto:true}),'בסוף ההקפה: עצירת צמיגים להחלפת צמיגים');}
+   ui.update({player:{...player,pitRequest:false,pitAuto:false},laps:3,cars:[player]});assert.equal(button.dataset.state,'idle');button.press();assert.equal(calls.at(-1),'request');
+  }
+ });
+
+ test('session, view and style carry v24.1',async()=>{
+  const session=await read('minigames/racing-session.mjs');
+- assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
++ assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,phoneFix:false,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
+  assert.match(session,/pits:!!model\.pit\?\.on\}/,'the view paints the boxes when the model has stops (two-lap races too)');
+  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
+  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
+diff --git a/tests/island-tennis-v24-4.test.mjs b/tests/island-tennis-v24-4.test.mjs
+index f8e2966..f3089e5 100644
+--- a/tests/island-tennis-v24-4.test.mjs
++++ b/tests/island-tennis-v24-4.test.mjs
+@@ -10,7 +10,7 @@ const root=new URL('../workout/island/',import.meta.url);
+
+ test('line calls: out and net only, words, flags',()=>{
+  assert.equal(calloutFor({reason:'out'}),'out');assert.equal(calloutFor({reason:'net'}),'net');assert.equal(calloutFor({reason:'doubleBounce'}),null);assert.equal(calloutFor(null),null);
+- assert.equal(CALL_WORD.out,'OUT!');assert.equal(CALL_WORD.net,'NET!');
++ assert.equal(CALL_WORD.out,'OUT');assert.equal(CALL_WORD.net,'NET');
+  assert.equal(tennisCalloutsEnabled(''),true);assert.equal(tennisCalloutsEnabled('?tennisCallouts=0'),false);
+ });
+ test('the shout is synthesised: a falling voice through three formants and a "t" burst, all nodes released',()=>{
+diff --git a/tests/island-upgrade-offer-browser.test.mjs b/tests/island-upgrade-offer-browser.test.mjs
+index e15af2b..a035c7b 100644
+--- a/tests/island-upgrade-offer-browser.test.mjs
++++ b/tests/island-upgrade-offer-browser.test.mjs
+@@ -73,7 +73,7 @@ test('racing league: a finished race with enough league coins offers a car part
+       window.__island.ui.activityInterface.showResult('islandRacing',undefined,{outcome:'win',score:5,money:0,parts:0,stars:0,stage:1,league:{place:1,points:25,coins:220,seasonDone:false,season:1,race:0,track:'x',laps:4,order:['player','ai-1','ai-2','ai-3','ai-4']}});});
+     await t.page.waitForSelector('.uo-card');
+     assert.equal(await t.page.locator('.uo-card').count(),1);
+-    assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המירוצים/);
++    assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המרוצים/);
+     if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/league-offer-390x844.png`});}
+     await t.page.locator('.uo-primary').click();
+     await t.page.waitForFunction(()=>document.querySelector('.uo-card')?.dataset.state==='purchased');
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+index e613a21..dad61f4 100644
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -182,6 +182,7 @@
+   "learning/learning.css",
+   "learning/questions.mjs",
+   "learning/runtime.mjs",
++  "learning/spoken-copy.mjs",
+   "learning/state.mjs",
+   "learning/voice.mjs",
+   "manifest.webmanifest",
+@@ -1676,8 +1677,8 @@
+  },
+  "files": {
+   "": [
+-   "8fa621084988a200",
+-   2715
++   "d5e3089789fbbff4",
++   2704
+   ],
+   "activity/alien-upgrades.mjs": [
+    "e0da13756f40f19f",
+@@ -4816,8 +4817,8 @@
+    399
+   ],
+   "data/strings.he.json": [
+-   "f5445654c1706674",
+-   138130
++   "cf364b5f3dd32fc5",
++   137876
+   ],
+   "data/team.json": [
+    "82a4168feca9f02a",
+@@ -5156,16 +5157,16 @@
+    101256
+   ],
+   "design/controls/hoops.json": [
+-   "1ff0b9513bb2303e",
+-   21962
++   "3b7e495ef5040c53",
++   21994
+   ],
+   "design/controls/interaction.json": [
+    "f008c0acf34dca7a",
+    7474
+   ],
+   "design/controls/soccer.json": [
+-   "3cd3d4b96497ade5",
+-   28840
++   "fc0e73c2253a2b0e",
++   28890
+   ],
+   "design/environment/backgrounds/ski-mountains-landscape.webp": [
+    "4ba4cb8ef4c0307a",
+@@ -6004,29 +6005,33 @@
+    400
+   ],
+   "index.html": [
+-   "8fa621084988a200",
+-   2715
++   "d5e3089789fbbff4",
++   2704
+   ],
+   "learning/banks.mjs": [
+-   "1d33ea3a11c29f5a",
+-   5650
++   "9861b7e7d0105074",
++   7808
+   ],
+   "learning/interface.mjs": [
+-   "df68d8d6bcd5186d",
+-   20350
++   "235b971a52ba06f3",
++   20136
+   ],
+   "learning/learning.css": [
+    "5fe66e202ff5f769",
+    10071
+   ],
+   "learning/questions.mjs": [
+-   "92d22bd8b2e35c1c",
+-   15281
++   "5e2d9304d7080192",
++   20165
+   ],
+   "learning/runtime.mjs": [
+    "eac3661af31be959",
+    3403
+   ],
++  "learning/spoken-copy.mjs": [
++   "67ea6581449bb082",
++   2458
++  ],
+   "learning/state.mjs": [
+    "cdaad0caf8d0d3f2",
+    3996
+@@ -6264,8 +6269,8 @@
+    1944
+   ],
+   "minigames/alpine-league-core.mjs": [
+-   "0a88e0c779bc3726",
+-   16164
++   "fa6a4c70c6269897",
++   16162
+   ],
+   "minigames/alpine-league-ghost.mjs": [
+    "c39b124e53b77d8f",
+@@ -6328,8 +6333,8 @@
+    1173
+   ],
+   "minigames/alpine-session.mjs": [
+-   "ab73f94a8edf69a9",
+-   37498
++   "665ecc76fd373348",
++   37507
+   ],
+   "minigames/alpine-start-lights.css": [
+    "f19f7a763dcf5736",
+@@ -6400,28 +6405,28 @@
+    9415
+   ],
+   "minigames/boar-island/chain.mjs": [
+-   "90174a36a38c56e8",
+-   5702
++   "984041b68763dae1",
++   5700
+   ],
+   "minigames/boar-island/core.mjs": [
+-   "877bc7679bd38cd1",
+-   13274
++   "bb2ca38f4ab3bb30",
++   13327
+   ],
+   "minigames/boar-island/creatures.js": [
+    "df07c43bbb162f62",
+    20402
+   ],
+   "minigames/boar-island/game.js": [
+-   "44f93d9d403cf3be",
+-   139285
++   "80c1fc1badac542f",
++   139296
+   ],
+   "minigames/boar-island/guns.js": [
+    "14a972a0df710e2b",
+    18509
+   ],
+   "minigames/boar-island/index.html": [
+-   "0699efe7b528cc14",
+-   8756
++   "9d31afdc3de96d83",
++   8859
+   ],
+   "minigames/boar-island/kit.js": [
+    "5eb913afd656067c",
+@@ -6476,12 +6481,12 @@
+    11584
+   ],
+   "minigames/catch-arsenal-hud.mjs": [
+-   "07d60c3fc7617ebd",
+-   23040
++   "0b979ece4bb35e1f",
++   23045
+   ],
+   "minigames/catch-assist.mjs": [
+-   "1b79632a02f1d2f4",
+-   8489
++   "1d787cb1d8b6d7a3",
++   8493
+   ],
+   "minigames/catch-audio.mjs": [
+    "1328ec579900f6dd",
+@@ -6520,8 +6525,8 @@
+    19839
+   ],
+   "minigames/catch-fire-hud.mjs": [
+-   "c7b98b34b83ea134",
+-   15406
++   "e76fea725abec382",
++   15410
+   ],
+   "minigames/catch-gfx.mjs": [
+    "3275704b8d76e028",
+@@ -6536,8 +6541,8 @@
+    27761
+   ],
+   "minigames/catch-session6.mjs": [
+-   "e319f68a39affc69",
+-   44819
++   "68cd677af5f92a21",
++   44793
+   ],
+   "minigames/catch-track.mjs": [
+    "a1903969329ef91d",
+@@ -6560,8 +6565,8 @@
+    39101
+   ],
+   "minigames/catch-weapons.mjs": [
+-   "395d0d41ecbd36cb",
+-   22222
++   "efae7ca2ad880442",
++   22285
+   ],
+   "minigames/catch.css": [
+    "338003e01f465dc5",
+@@ -6780,8 +6785,8 @@
+    1778
+   ],
+   "minigames/hoops-controls.mjs": [
+-   "8c7e98c8ccb4e613",
+-   23455
++   "312c63e6882daf23",
++   23469
+   ],
+   "minigames/hoops-court.mjs": [
+    "1a10df3683057e7c",
+@@ -6876,8 +6881,8 @@
+    3797
+   ],
+   "minigames/hoops-roles.mjs": [
+-   "826c8c0214f756e6",
+-   1990
++   "6fe422ae3eac2016",
++   1943
+   ],
+   "minigames/hoops-screens.mjs": [
+    "91f253249af598db",
+@@ -7016,8 +7021,8 @@
+    3690
+   ],
+   "minigames/naval-hud.mjs": [
+-   "61077ea724ac35e2",
+-   29328
++   "83010c2d1c8cb1f9",
++   29402
+   ],
+   "minigames/naval-icons.mjs": [
+    "485eba3728746c6b",
+@@ -7172,8 +7177,8 @@
+    9892
+   ],
+   "minigames/racing-league-core.mjs": [
+-   "b0621da23c1275cd",
+-   28761
++   "791646be67548200",
++   28765
+   ],
+   "minigames/racing-league-result.mjs": [
+    "8f133e542fd5342c",
+@@ -7204,8 +7209,8 @@
+    23354
+   ],
+   "minigames/racing-pit-ui.mjs": [
+-   "ee6a593c9e86f86d",
+-   7394
++   "f18e6a8a34813b2e",
++   7566
+   ],
+   "minigames/racing-pit-view.mjs": [
+    "24c7e694158cfc64",
+@@ -7236,8 +7241,8 @@
+    7082
+   ],
+   "minigames/racing-session.mjs": [
+-   "fc71ca4cba8b1876",
+-   20194
++   "90974986a765c12b",
++   20192
+   ],
+   "minigames/racing-speedometer.mjs": [
+    "589c478a61dba093",
+@@ -7444,8 +7449,8 @@
+    11034
+   ],
+   "minigames/soccer-r241.mjs": [
+-   "a94b63251c075fd8",
+-   29534
++   "c91c4f0511287a27",
++   29545
+   ],
+   "minigames/soccer-referee.mjs": [
+    "506843dc7f6820f7",
+@@ -7480,8 +7485,8 @@
+    8049
+   ],
+   "minigames/soccer-session.mjs": [
+-   "0f1a4bea9571f2e6",
+-   31660
++   "ded0bf58f20622ef",
++   31656
+   ],
+   "minigames/soccer-shot.mjs": [
+    "eac60656cb0ab90c",
+@@ -7584,8 +7589,8 @@
+    2515
+   ],
+   "minigames/tennis-callouts.mjs": [
+-   "534b944e080b7dff",
+-   4315
++   "0f1ac4bb6c8454a7",
++   4311
+   ],
+   "minigames/tennis-controls.mjs": [
+    "cec1e71f6693f6fb",
+@@ -7672,7 +7677,7 @@
+    2839
+   ],
+   "minigames/ultra-alien-feedback.mjs": [
+-   "fa75cbd4354dbfaa",
++   "60015db0c5356faa",
+    11566
+   ],
+   "minigames/ultra-alien-fleet.mjs": [
+@@ -7740,8 +7745,8 @@
+    62159
+   ],
+   "ui/activity.mjs": [
+-   "c65cf2a33f3f93c7",
+-   56325
++   "c8e777ef7f613dea",
++   56618
+   ],
+   "ui/adventure-emblems.mjs": [
+    "09227d199b1a151e",
+@@ -7752,8 +7757,8 @@
+    7466
+   ],
+   "ui/alpine-league.mjs": [
+-   "9c91b462d153fe05",
+-   17039
++   "3d5505b6bf8209d1",
++   17055
+   ],
+   "ui/boot-splash-start.mjs": [
+    "2c2504e10cc7acc6",
+@@ -7772,16 +7777,16 @@
+    5834
+   ],
+   "ui/city-access.mjs": [
+-   "a96c66ef158d96ac",
+-   12041
++   "a959f8656c962119",
++   12027
+   ],
+   "ui/city-depth.css": [
+    "113846d32d712655",
+    700
+   ],
+   "ui/city-depth.mjs": [
+-   "6fd5e3d87e118c65",
+-   5090
++   "5b15d9b2d7dfabff",
++   5079
+   ],
+   "ui/city-management.css": [
+    "9658889140c2f4b9",
+@@ -7828,12 +7833,12 @@
+    8653
+   ],
+   "ui/interface.mjs": [
+-   "d505832c7dd2859a",
+-   52951
++   "a187c1fa4eb4a486",
++   53059
+   ],
+   "ui/load-report.mjs": [
+-   "613f0a9e66c786eb",
+-   3292
++   "5f5de13b0f021068",
++   3577
+   ],
+   "ui/load-rescue.mjs": [
+    "92c17a04a9fc56c3",
+@@ -7848,8 +7853,8 @@
+    1427
+   ],
+   "ui/offline-panel.mjs": [
+-   "eb62f09d34faf2ae",
+-   16136
++   "fc93c9d60af78c11",
++   15631
+   ],
+   "ui/offline.mjs": [
+    "002b7614c24da510",
+@@ -7868,8 +7873,8 @@
+    8644
+   ],
+   "ui/racing-league.mjs": [
+-   "e85bfc65b87c7b1d",
+-   18533
++   "b3f1e3460353f0a8",
++   18548
+   ],
+   "ui/ready-plots.css": [
+    "fa846d037c8519f5",
+@@ -7884,8 +7889,8 @@
+    937
+   ],
+   "ui/soccer-card.mjs": [
+-   "b64d8325be44ef1e",
+-   6238
++   "4a789ca8633f4afe",
++   6084
+   ],
+   "ui/translate.mjs": [
+    "9956cdc9c6ffe175",
+@@ -7900,8 +7905,8 @@
+    4685
+   ],
+   "ui/upgrade-offer-core.mjs": [
+-   "05cc4b797b44ea91",
+-   6269
++   "1edc525f204e8cb9",
++   6267
+   ],
+   "ui/upgrade-offer.mjs": [
+    "14ec6265c03c500b",
+@@ -7956,8 +7961,8 @@
+    5399
+   ],
+   "view/city-depth.mjs": [
+-   "71f13caf9d8e0798",
+-   7088
++   "b17054b0054291f8",
++   7090
+   ],
+   "view/city-growth.mjs": [
+    "495e0b44f5e35bab",

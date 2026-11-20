@@ -10,7 +10,7 @@ const root=new URL('../workout/island/',import.meta.url);
 
 test('line calls: out and net only, words, flags',()=>{
  assert.equal(calloutFor({reason:'out'}),'out');assert.equal(calloutFor({reason:'net'}),'net');assert.equal(calloutFor({reason:'doubleBounce'}),null);assert.equal(calloutFor(null),null);
- assert.equal(CALL_WORD.out,'OUT!');assert.equal(CALL_WORD.net,'NET!');
+ assert.equal(CALL_WORD.out,'OUT');assert.equal(CALL_WORD.net,'NET');
  assert.equal(tennisCalloutsEnabled(''),true);assert.equal(tennisCalloutsEnabled('?tennisCallouts=0'),false);
 });
 test('the shout is synthesised: a falling voice through three formants and a "t" burst, all nodes released',()=>{

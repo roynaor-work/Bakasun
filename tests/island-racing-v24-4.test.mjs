@@ -1,3 +1,4 @@
+import {assertReleaseReference} from './helpers/island-release.mjs';
 // racing-v24.4 (Roy after v24.3 on the phone): the overtake, the idle engine on the grid, the real wheel change (Codex pit sequence v2), no change button, and the
 // v5 sounds instead of the annoying noise just off the track and in the pit lane. Every behaviour has an address flag that brings v24.3 back (racing-v24-4.mjs).
 import test from 'node:test';
@@ -151,6 +152,6 @@ test('wiring: the session sends the flags, the view loads the sequence on the fo
  const session=await read('minigames/racing-session.mjs'),view=await read('minigames/racing-view.mjs'),seq=await read('minigames/racing-pit-seq.mjs'),audio=await read('minigames/racing-audio.mjs');
  assert.match(session,/pitSeq:v244\.pitSeq/);assert.match(session,/changeButton:!model\.pit\.seq/);assert.match(session,/v5:v244\.audioV5,idle:v244\.idle&&engineOn,pass:v244\.pass/);
  assert.match(session,/kerb:v244\.audioV5\?0:/,'the kerb rumble (also all along the pit lane) is off with v5');
- assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=island-v2-20261107-20'\)/);assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
- assert.match(seq,/racing-pit-sequence\.mjs\?v=island-v2-20261107-20/);assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
+ assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=/);assertReleaseReference(view,'./racing-pit-seq.mjs');assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
+ assertReleaseReference(seq,'racing-pit-sequence.mjs');assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
 });
