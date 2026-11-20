@@ -1,0 +1,324 @@
+{
+ "query": "tennisAudioV246=0",
+ "seconds": 90,
+ "racingFirst": 20,
+ "racingRunning": [
+  "running",
+  "running"
+ ],
+ "afterRacingExit": [
+  "suspended",
+  "closed"
+ ],
+ "tennisRunning": [
+  "running",
+  "closed",
+  "running"
+ ],
+ "tennisEnd": [
+  "running",
+  "closed",
+  "running"
+ ],
+ "contexts": [
+  {
+   "id": 1,
+   "stack": "Object.unlock (http://127.0.0.1:42793/workout/island/minigames/sound.mjs:11:28)"
+  },
+  {
+   "id": 2,
+   "stack": "Object.unlock (http://127.0.0.1:42793/workout/island/minigames/racing-audio.mjs:68:13)"
+  },
+  {
+   "id": 3,
+   "stack": "unlock (http://127.0.0.1:42793/workout/island/minigames/g4e-audio.mjs:23:87)"
+  }
+ ],
+ "audioMetrics": {
+  "loaded": [
+   "applause",
+   "applauseLarge",
+   "applauseMedium",
+   "applauseShort",
+   "bounce",
+   "crowdAw",
+   "crowdBed",
+   "crowdHush",
+   "crowdOoh",
+   "hit",
+   "matchCheer",
+   "net"
+  ],
+  "active": 2,
+  "muted": false,
+  "paused": false,
+  "played": {
+   "hit": 31,
+   "bounce": 39,
+   "applauseShort": 8,
+   "crowdHush": 12,
+   "applauseLarge": 1,
+   "rec-net": 2,
+   "call-net": 2,
+   "net": 2,
+   "rec-out": 1,
+   "call-out": 1,
+   "crowdAw": 2,
+   "crowdOoh": 1
+  },
+  "callouts": {
+   "recorded": true,
+   "listLoaded": true,
+   "takes": {
+    "out": 1,
+    "net": 3
+   }
+  },
+  "v246": false,
+  "bed": true
+ },
+ "calls": [
+  {
+   "at": 62.25,
+   "source": "tennis-callouts-rec/net-2.ogg",
+   "phase": "fault",
+   "alongside": [
+    {
+     "dt": -0.12,
+     "source": "audio/g4e/racket.ogg",
+     "path": "gain(0.32)>gain(1)"
+    },
+    {
+     "dt": 0,
+     "source": "audio/g4e/net.ogg",
+     "path": "gain(0.32)>gain(1)"
+    },
+    {
+     "dt": 0.12,
+     "source": "audio/g4e/bounce.ogg",
+     "path": "gain(0.45)>gain(0.32)>gain(1)"
+    },
+    {
+     "dt": 0.78,
+     "source": "audio/g4e/bounce.ogg",
+     "path": "gain(0.45)>gain(0.32)>gain(1)"
+    }
+   ]
+  },
+  {
+   "at": 73.92,
+   "source": "tennis-callouts-rec/out-1.ogg",
+   "phase": "point",
+   "alongside": [
+    {
+     "dt": 0,
+     "source": "audio/g4e/mistake-aw.ogg",
+     "path": "gain(0.65)>gain(0.32)>gain(1)"
+    }
+   ]
+  },
+  {
+   "at": 101.68,
+   "source": "tennis-callouts-rec/net-3.ogg",
+   "phase": "point",
+   "alongside": [
+    {
+     "dt": -0.28,
+     "source": "audio/g4e/racket.ogg",
+     "path": "gain(0.32)>gain(1)"
+    },
+    {
+     "dt": 0,
+     "source": "audio/g4e/net.ogg",
+     "path": "gain(0.32)>gain(1)"
+    },
+    {
+     "dt": 0,
+     "source": "audio/g4e/mistake-aw.ogg",
+     "path": "gain(0.65)>gain(0.32)>gain(1)"
+    }
+   ]
+  }
+ ],
+ "tennisSources": {
+  "audio/g4e/stadium-bed.ogg (loop)": 1,
+  "audio/g4e/racket.ogg": 31,
+  "audio/g4e/bounce.ogg": 39,
+  "audio/g4e/applause-short.ogg": 8,
+  "audio/g4e/pre-serve-hush.ogg": 12,
+  "audio/g4e/applause-large.ogg": 1,
+  "tennis-callouts-rec/net-2.ogg": 1,
+  "audio/g4e/net.ogg": 2,
+  "tennis-callouts-rec/out-1.ogg": 1,
+  "audio/g4e/mistake-aw.ogg": 2,
+  "audio/g4e/near-point-oh.ogg": 1,
+  "tennis-callouts-rec/net-3.ogg": 1
+ },
+ "loops": [
+  "audio/g4e/stadium-bed.ogg"
+ ],
+ "olderSourcesStillPlaying": [
+  {
+   "ctx": 2,
+   "source": "osc:custom",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "generated:61739@44100",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v2/tyre-squeal.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v2/wind-speed.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v3/brake-squeal-loop.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-light.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-hard.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-limiter.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-bay-proximity.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-engine-slow.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-crew-background.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-rec/engine-idle-loop.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "osc:triangle",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:custom",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sine",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sine",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  }
+ ],
+ "soundingContextsDuringTennis": {
+  "3": {
+   "frames": 1718,
+   "maxDb": -29.6
+  }
+ },
+ "errors": []
+}

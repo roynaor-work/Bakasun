@@ -3,8 +3,9 @@
  * scorer's table, benches, tiered stands with an instanced crowd, LED ribbons, the centre
  * scoreboard and the light rig. Built once from the court geometry; nothing here decides play. */
 import * as THREE from '../vendor/three.module.js';
+import {markHoopsRim} from './hoops-polish-view.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261107-19';
+import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261107-20';
 
 const LINE=0.05;
 
@@ -25,7 +26,7 @@ function stripGeo(points,width){
 const arc=(cx,cz,r,a0,a1,n=64)=>Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n;return {x:cx+Math.cos(a)*r,z:cz+Math.sin(a)*r};});
 const seg=(x0,z0,x1,z1)=>[{x:x0,z:z0},{x:x1,z:z1}];
 
-export function buildArena(court,{home,away,quality=2,anisotropy=8}){
+export function buildArena(court,{home,away,quality=2,anisotropy=8,rimMotion=false,softLighting=false}){
  const root=new THREE.Group();root.name='arena';
  const dyn={};                      // things the view updates every frame
  const {hx,hz,rimX}=court;
@@ -101,6 +102,7 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
   const edgePad=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.12,bw+0.06),padMat);edgePad.position.set(bx,court.boardBottom-0.04,0);g.add(edgePad);
   // rim + bracket
   const rim=new THREE.Mesh(new THREE.TorusGeometry(court.rimR,0.011,10,40),orange);rim.rotation.x=Math.PI/2;rim.position.set(s*rimX,court.rimY,0);rim.castShadow=true;g.add(rim);
+  if(rimMotion)markHoopsRim(rim,s);
   const bracket=new THREE.Mesh(new THREE.BoxGeometry(Math.abs(rimX-court.boardX)-court.rimR+0.02,0.04,0.12),orange);bracket.position.set(s*(court.boardX+rimX-court.rimR)/2-s*0.0,court.rimY-0.02,0);g.add(bracket);
   // net: a lathe of strings that the view can swing
   const net=buildNet(court.rimR,0.42);net.position.set(s*rimX,court.rimY,0);g.add(net);dyn.nets.push({mesh:net,side:s,swing:0,base:net.geometry.attributes.position.array.slice()});
@@ -174,14 +176,14 @@ export function buildArena(court,{home,away,quality=2,anisotropy=8}){
  // white back light from the far sideline rims the players against the floor. The fill used to
  // match the key and washed the shadows out completely.
  const lights=new THREE.Group();
- lights.add(new THREE.HemisphereLight(0xffe9d2,0x0e1626,0.32));
- const key=new THREE.DirectionalLight(0xfff1dc,3.1);key.position.set(5,24,7);key.target.position.set(0,0,0);
+ lights.add(new THREE.HemisphereLight(0xffe9d2,0x0e1626,softLighting?.39:.32));
+ const key=new THREE.DirectionalLight(0xfff1dc,softLighting?2.72:3.1);key.position.set(5,24,7);key.target.position.set(0,0,0);
  key.castShadow=true;// A 1K filtered court shadow funds adult silhouettes without lowering screen resolution.
  key.shadow.mapSize.set(quality>=3?2048:1024,quality>=3?2048:1024);
  Object.assign(key.shadow.camera,{left:-hx-1.5,right:hx+1.5,top:hz+1.5,bottom:-hz-1.5,near:8,far:40});key.shadow.bias=-0.00025;key.shadow.normalBias=0.025;
  lights.add(key,key.target);
- const fill=new THREE.DirectionalLight(0xbfd0ff,0.42);fill.position.set(-8,14,-10);lights.add(fill);
- const back=new THREE.DirectionalLight(0xf4f7ff,1.05);back.position.set(8,11,14);lights.add(back);
+ const fill=new THREE.DirectionalLight(0xbfd0ff,softLighting?.49:.42);fill.position.set(-8,14,-10);lights.add(fill);
+ const back=new THREE.DirectionalLight(0xf4f7ff,softLighting?.87:1.05);back.position.set(8,11,14);lights.add(back);
  root.add(lights);
  dyn.key=key;
 

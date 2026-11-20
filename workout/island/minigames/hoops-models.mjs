@@ -3,6 +3,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {markHoopsRim} from './hoops-polish-view.mjs';
 import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
 import {ballTexture} from './hoops-textures.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
@@ -27,18 +28,23 @@ function anchor(root,name){
 /** Merge sibling meshes that share one vertex-coloured material into a single draw call,
  * baking each mesh's flat material colour into COLOR_0 first (01/11: 27 static arena and
  * basket meshes became 5). Returns the merged mesh, or null when nothing merged. */
-export function mergeStaticMeshes(parent,names,material,{name='merged',castShadow=false,receiveShadow=true}={}){
- const parts=[];
+export function mergeStaticMeshes(parent,names,material,{name='merged',castShadow=false,receiveShadow=true,rimSide=0}={}){
+ const parts=[];let nextVertex=0,rimRange=null;
  for(const n of names){const m=parent.getObjectByName(n);if(!m?.isMesh||!m.geometry.attributes.position)continue;
   const g=m.geometry.clone();for(const key of Object.keys(g.attributes))if(!['position','normal','color'].includes(key))g.deleteAttribute(key);
   if(!g.attributes.normal)g.computeVertexNormals();
   const count=g.attributes.position.count,c=g.attributes.color,tint=m.material.color||{r:1,g:1,b:1},useVertex=m.material.vertexColors!==false&&!!c,out=new Float32Array(count*3);
   for(let i=0;i<count;i++){out[i*3]=(useVertex?c.getX(i):1)*tint.r;out[i*3+1]=(useVertex?c.getY(i):1)*tint.g;out[i*3+2]=(useVertex?c.getZ(i):1)*tint.b;}
-  g.setAttribute('color',new THREE.BufferAttribute(out,3));m.updateMatrix();g.applyMatrix4(m.matrix);parts.push({mesh:m,geometry:g});}
+  g.setAttribute('color',new THREE.BufferAttribute(out,3));m.updateMatrix();g.applyMatrix4(m.matrix);parts.push({mesh:m,geometry:g});
+  if(rimSide&&n==='rim')rimRange={first:nextVertex,count};
+  nextVertex+=count;
+ }
  if(!parts.length)return null;
  const merged=mergeGeometries(parts.map(p=>p.geometry),false);for(const p of parts){p.geometry.dispose();p.mesh.parent?.remove(p.mesh);p.mesh.geometry.dispose();}
  if(!merged)return null;
- const mesh=new THREE.Mesh(merged,material);mesh.name=name;mesh.castShadow=castShadow;mesh.receiveShadow=receiveShadow;parent.add(mesh);return mesh;
+ const mesh=new THREE.Mesh(merged,material);mesh.name=name;mesh.castShadow=castShadow;mesh.receiveShadow=receiveShadow;parent.add(mesh);
+ if(rimRange)markHoopsRim(mesh,rimSide,rimRange.first,rimRange.count);
+ return mesh;
 }
 function mappedMaterial(mesh,map,{vertexColors=true,roughness=.85}={}){
  const mat=mesh.material.clone();mat.map=map;mat.vertexColors=vertexColors;mat.color.set(0xffffff);mat.roughness=roughness;mesh.material=mat;return mat;
@@ -110,7 +116,7 @@ function crowdSpots(court){
  * court, court-apron, basket-1/basket--1, stands, arena-shell, arena-ceiling,
  * arena-fixtures and arena-scoreboard. Court overlays and lighting are retained.
  * All loading completes before the visible arena is changed. */
-export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4,venue:venueSource}={}){
+export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,anisotropy=4,venue:venueSource,rimMotion=false}={}){
  const base=assetBase||new URL('../',import.meta.url);
  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
@@ -189,7 +195,7 @@ export async function replaceArenaAssets(arena,dyn,court,{assetBase,quality=2,an
    // the stanchion, arm, frame, target square, rim and mount share one lit material: one draw call
    // per basket instead of nine (the glass board and the swinging net stay separate)
    const stanchion=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.6,metalness:.25});owned.materials.add(stanchion);
-   const mergedHoop=mergeStaticMeshes(hoop,['base','base_pad','post_pad','support_post','backboard_arm','backboard_frame','backboard_target','rim','rim_mount'],stanchion,{name:'basket-static',castShadow:quality>=1});
+   const mergedHoop=mergeStaticMeshes(hoop,['base','base_pad','post_pad','support_post','backboard_arm','backboard_frame','backboard_target','rim','rim_mount'],stanchion,{name:'basket-static',castShadow:quality>=1,rimSide:rimMotion?side:0});
    if(mergedHoop)owned.geometries.add(mergedHoop.geometry);
    const net=hoop.getObjectByName('net');
    // The view's inexpensive net deformation uses rim-local vertices and y<=0.

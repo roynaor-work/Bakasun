@@ -7,6 +7,8 @@
  * x runs down the street, y is up. Everything is a function of the clock, so the
  * flight that is resolved at release is exactly the flight that is replayed. */
 
+import {polishValue} from './polish-flag.mjs';
+
 export const PHASES = Object.freeze(['aim', 'throw', 'flight', 'impact', 'flee', 'caught', 'escape', 'done']);
 
 /** Seeded generator local to the game (wind and the thief's phase). */
@@ -69,6 +71,13 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
   const aimHelp = v2 ? (level.aimHelp || 0) : 0; // early stages: a longer arc, a landing ring and a green ring when the throw would catch
   const previewFraction = clamp(level.preview + (Number(equipment.scope) || 0) + .15 * aimHelp, 0.15, 1);
   const tools = level.tools.map(id => toolValues(balance, id, bonus));
+  if (polishValue('balanceCatch') === '1') {
+    const narrow = tools.find(tool => tool.id === 'narrow');
+    if (narrow) {
+      narrow.perfectY = 1.1;
+      narrow.perfectX = 0.75;
+    }
+  }
   const aim = {angle: P.angle.start, power: P.powerStart, yaw: 0, tool: tools[0].id};
   const YAW = (P.yawMax ?? 24);
   const events = [];

@@ -1,14 +1,19 @@
-import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-v2-20261107-19';
+import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-v2-20261107-20';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 /** A selected objective and a road route are round-local, never saved. The
  * navigator sends ordinary steering input through the same collision driver. */
-export function createFireNavigation({balance,truck,flames,rescues,roads}){
+export function createFireNavigation({balance,truck,flames,rescues,roads,fireLevels=false}){
   const state={active:false,kind:null,targetIndex:null,target:null,path:[]};
   let selected=null;
   function objective(kind,index=0){
-    if(!['fire','rescue','hydrant'].includes(kind)||!Number.isInteger(index)||index<0)return null;
+    if(!Number.isInteger(index)||index<0)return null;
+    if(kind==='building'&&index===0&&balance.fireLevelsBuilding){
+      const world=balance.fireLevelsBuilding.front,render=balance.render;
+      return {kind,index,world,x:render.logicalCenter[0]+world[0]/render.worldScale,y:render.logicalCenter[1]+world[2]/render.worldScale};
+    }
+    if(!['fire','rescue','hydrant'].includes(kind))return null;
     const source=kind==='fire'?flames[index]:kind==='rescue'?rescues[index]:balance.city.hydrants[index];
     if(!source)return null;
     const world=kind==='fire'?balance.render.sites[index]:kind==='rescue'?source.world:source;
@@ -38,7 +43,11 @@ export function createFireNavigation({balance,truck,flames,rescues,roads}){
     const goal=state.path[0]||state.target,d=distance(goal,truck),last=state.path.length<=1;
     if(last&&d<.36){if(truck.speed<.18)cancel();return {...input,moveX:0,moveZ:0,assisted:true};}
     const wantedSpeed=last?Math.min(balance.vehicle.speed,Math.max(1.4,(d-.25)*5)):balance.vehicle.speed;
-    const throttle=balance.controls.deadzone+(1-balance.controls.deadzone)*Math.sqrt(clamp(wantedSpeed/balance.vehicle.speed,0,1));
+    // Brake as the wheel turns toward a missed waypoint. At cruising speed the
+    // truck can otherwise circle a junction without crossing its arrival radius.
+    const heading=Math.atan2(truck.x-goal.x,truck.z-goal.z);
+    const turnSpeed=fireLevels?Math.max(.08,Math.cos(heading-truck.yaw)):1;
+    const throttle=balance.controls.deadzone+(1-balance.controls.deadzone)*Math.sqrt(clamp(wantedSpeed*turnSpeed/balance.vehicle.speed,0,1));
     return {...input,moveX:(goal.x-truck.x)/Math.max(.01,d)*throttle,moveZ:(goal.z-truck.z)/Math.max(.01,d)*throttle,assisted:true,navigationDriving:true};
   }
   return {state,objective,select,navigate,cancel,update,get selected(){return selected;}};

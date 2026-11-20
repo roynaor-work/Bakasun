@@ -5,6 +5,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {markHoopsRim} from './hoops-polish-view.mjs';
 import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
 import {mergeStaticMeshes,resources,release,mergeResources} from './hoops-models.mjs';
@@ -91,7 +92,7 @@ function crowdController(mesh,clip,uniforms,{level,pinned,onLevel}){
  };
 }
 
-export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v5,params,looks}={}){
+export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v5,params,looks,rimMotion=false}={}){
  const base=assetBase||new URL('../',import.meta.url),dir=v5.base||'design/hoops-v5/models/',files={...V5_FILES,...(v5.files||{})};
  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
@@ -156,9 +157,18 @@ export async function replaceArenaAssetsV5(arena,dyn,court,{assetBase,quality=2,
   const baskets=[],nets=[],clocks=[];
   for(const [i,side] of [1,-1].entries()){
    const g=new THREE.Group();g.name='v5-basket-'+side;
-   const parts=['stanchion-pads','basket-support','basket-brace','board-frame','board-target','rim','shot-clock-case'].map(n=>sliceByX(hoopMeshes(n).geometry,side)).filter(Boolean);
-   for(const p of parts)for(const key of Object.keys(p.attributes))if(!['position','normal','color'].includes(key))p.deleteAttribute(key);
+   const parts=[];let nextVertex=0,rimRange=null;
+   for(const name of ['stanchion-pads','basket-support','basket-brace','board-frame','board-target','rim','shot-clock-case']){
+    const part=sliceByX(hoopMeshes(name).geometry,side);
+    if(!part)continue;
+    for(const key of Object.keys(part.attributes))if(!['position','normal','color'].includes(key))part.deleteAttribute(key);
+    const count=part.attributes.position.count;
+    if(rimMotion&&name==='rim')rimRange={first:nextVertex,count};
+    nextVertex+=count;parts.push(part);
+   }
    const merged=new THREE.Mesh(mergeGeometries(parts,false),stanchion);merged.name='basket-static';merged.castShadow=quality>=1;merged.receiveShadow=true;owned.geometries.add(merged.geometry);g.add(merged);
+   for(const part of parts)part.dispose();
+   if(rimRange)markHoopsRim(merged,side,rimRange.first,rimRange.count);
    const glassSource=hoopMeshes('backboard-glass'),glass=new THREE.Mesh(sliceByX(glassSource.geometry,side),glassSource.material.clone());
    glass.name='backboard';glass.material.transparent=true;glass.material.opacity=.3;glass.material.depthWrite=false;glass.material.roughness=.15;glass.material.forceSinglePass=true;glass.material.side=THREE.DoubleSide;owned.geometries.add(glass.geometry);owned.materials.add(glass.material);g.add(glass);
    // the net is rim-local (y <= 0) so the view's swing keeps working

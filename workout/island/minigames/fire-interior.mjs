@@ -5,7 +5,7 @@
  *   bedroom - crawl under the smoke with a long press down (foam opens, for the heavy fire of the bed and the wardrobe).
  * A mistake shows why and costs a star at most; smoke that reaches the floor sends a second crew for the child (no points).
  * Pure and deterministic: scene px of each room picture (1600x740), no DOM. */
-import {roomAnchor,streetAnchor,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-19';
+import {roomAnchor,streetAnchor,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-20';
 
 export const INTERIOR_TUNING=Object.freeze({
   arriveSeconds:2.4,enterSeconds:.7,introSeconds:3.2,clearSeconds:1.6,leaveSeconds:1.7,victorySeconds:7,

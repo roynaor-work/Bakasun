@@ -1,7 +1,8 @@
-import {STAGE_COUNT,BASE_STAGES,stageInfo,engineStageOf,RIVALS} from './alpine-league-core.mjs?v=island-v2-20261107-19';
-import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-19';
-import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-19';
-import {leagueContent} from './alpine-v241.mjs?v=island-v2-20261107-19';
+import {STAGE_COUNT,BASE_STAGES,stageInfo,engineStageOf,RIVALS} from './alpine-league-core.mjs?v=island-v2-20261107-20';
+import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-20';
+import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-20';
+import {leagueContent} from './alpine-v241.mjs?v=island-v2-20261107-20';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-20';
 
 /** Ski league v23: the 30 courses, their rivals and goals, built from one difficulty curve plus each theme's flavour. Pure (no DOM, no
  * three.js); the island engine, the session, the result check, the screens and the bot simulation all build the same stage from here.
@@ -142,7 +143,11 @@ export function courseFacts(base, n) {
 }
 /** The three goals of stage n: place (required), time, and gates or a clean run. Time = course length at the stage's reference pace. */
 export function stageGoals(base, n) {
-  const info = stageInfo(n), d = difficultyOf(n), f = courseFacts(base, n), b = leagueBalance(base, n), gp = b.physics.v241 ? GOAL_PACE_V241 : GOAL_PACE;
+  const info = stageInfo(n), d = difficultyOf(n), f = courseFacts(base, n), b = leagueBalance(base, n);
+  let gp = GOAL_PACE;
+  if (b.physics.v241) {
+    gp = polishValue('balanceAlpine') === '1' ? GOAL_PACE_BASE_GEAR_V241 : GOAL_PACE_V241;
+  }
   const pace = b.physics.baseSpeed * lerp(gp[0], gp[1], d);
   const goals = [{kind: 'place', target: info.targetRank}, {kind: 'time', ms: Math.ceil(f.length / pace * 2) * 500}];
   goals.push(info.goals[2] === 'gates' && f.gates > 0 ? {kind: 'gates', count: Math.max(1, Math.round(f.gates * lerp(CURVE.goals.gates[0], CURVE.goals.gates[1], d))), total: f.gates} : {kind: 'clean'});
@@ -154,6 +159,7 @@ export const GOAL_PACE = Object.freeze([1.19, 1.25]);
 /** v24.1: the same rule on the v24.1 game, where the bot falls less and rides faster (a line fitted through its median pace on all 30
  * stages, 40 races each; the same fit gives [1.19, 1.25] on v24). Without it the time star went to 98% of runs. */
 export const GOAL_PACE_V241 = Object.freeze([1.25, 1.33]);
+const GOAL_PACE_BASE_GEAR_V241 = Object.freeze([1.25, 1.30]);
 /** Checks a verified race against the goals: [{kind, ok, ...}] in the goal order. */
 export function judgeGoals(goals, {completed, rank, elapsedMs, gates, crashes}) {
   return goals.map(g => ({...g, ok: g.kind === 'place' ? completed && rank <= g.target : g.kind === 'time' ? completed && elapsedMs <= g.ms : g.kind === 'gates' ? gates >= g.count : completed && crashes === 0}));

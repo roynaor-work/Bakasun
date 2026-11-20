@@ -4,7 +4,7 @@
  * telegraphed by a landing marker, and an automatic Vulcan with heat so it comes in bursts. A hit aircraft falls into the sea
  * (`state:'down'`) rather than vanishing. Deterministic for the model's random stream. `?navalAir=off` removes the whole
  * mechanic. Stages with attacks (11/11/2026): 3, 4, 6, 8, 9, 12, 14, 16, 18, 20, 22, 24, 26, 27, 29 (`air` in the stage data). */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-19';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-20';
 export const navalAirEnabled=search=>polishValue('navalAir',search)!=='off';
 /** 11/11/2026 (Roy, phone): "שמדיע מסוק אז שיהיה איך לכוון עליו עם וולקן ולא ירי אוטומטי". Manual Vulcan by default:
  * the gun fires only while the Vulcan button is held, along the player's sky crosshair; a hit needs the crosshair within
@@ -65,7 +65,7 @@ export function createNavalAir(cfg,balance){
     if(time-a.born>c.leaveAfter){a.vx=c.speed;a.state='out';}
    }
    a.x+=a.vx*dt;a.z+=a.vz*dt;a.hit=Math.max(0,a.hit-dt);
-   if(a.attack&&time>=a.attack.fireTime){
+   if(a.attack&&time>=a.attack.fireTime&&(ctx.canEnemyFire?.()??true)){
     enemyShots.push({x:a.x,z:a.z,fromX:a.x,fromZ:a.z,targetX:a.attack.x,targetZ:a.attack.z,age:0,duration:.9,kind:0,ammo:0,owner:'enemy',air:true,damage:settings.damage*c.damage});
     a.attack=null;a.fireAt=time+(c.every||99);if(a.kind==='plane')a.passed=true;ctx.sound?.('cannon');
    }

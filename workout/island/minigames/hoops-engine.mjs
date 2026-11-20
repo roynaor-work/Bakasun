@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-19';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-19';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-19';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-20';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-20';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-20';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
@@ -39,8 +39,9 @@ export function passLaneBlocked(p,q,defenders,laneRadius){
 /** Effective rating 0..1 (fatigue lowers everything a little). */
 function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
 
-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play}={}){
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play,rimPhysics=false,impactDetails=false}={}){
  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
+ const ballOptions={rimPhysics,impactDetails};
  // M3 gameplay layer (alley-oops, pass kinds, spacing, cuts): config.play, on unless `play:false` (?hoopsPlay=0)
  const PL=play===false?null:(play&&typeof play==='object'?play:(C.play&&C.play.enabled!==false?C.play:null));
  const prof=R.profiles[profile]||R.profiles.standard,diff=C.ai.difficulty[difficulty]||C.ai.difficulty.normal;
@@ -916,8 +917,12 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    return;
   }
   if(b.state==='shot'||b.state==='loose'){
-   const res=stepBall(b,dt,court,cols,P);
-   for(const e of res.events){emit({type:'contact',what:e.type,speed:+e.speed.toFixed(2)});if(e.type==='rim'||e.type==='board')b.touchedRim=b.touchedRim||e.type==='rim';}
+   const res=stepBall(b,dt,court,cols,P,ballOptions);
+   for(const e of res.events){
+    const data=impactDetails?e:null;
+    emit({...data,type:'contact',what:e.type,speed:+e.speed.toFixed(2)});
+    if(e.type==='rim')b.touchedRim=true;
+   }
    if(res.touchedRim)b.touchedRim=true;
    const sh=b.shot;
    if(sh&&!sh.blocked){
@@ -951,7 +956,12 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    for(const c of res.crossings){
     if(sh&&!sh.scored&&!sh.blocked&&c.side===sh.side){score(sh,false);return;}
     if(!sh&&b.state==='loose'){ // a tip-in from a loose ball
-     const last=b.lastTouch,s=side(last);if(c.side===s){team(last).score+=2;emit({type:'score',team:last,points:2,kind:'tip'});afterScore(last);return;}
+     const last=b.lastTouch,s=side(last);
+     if(c.side===s){
+      team(last).score+=2;
+      emit({type:'score',team:last,points:2,kind:'tip',score:[team(0).score,team(1).score],...(impactDetails?{side:c.side}:null)});
+      afterScore(last);return;
+     }
     }
    }
    if(b.state==='shot'&&sh){
@@ -1007,7 +1017,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   if(sh.type!=='ft'&&S.lastPasser&&S.tick-S.lastPasser.tick<C.timing.assistTicks){const a=byId(S.lastPasser.id);if(a&&a.team===sh.team&&a.id!==sh.shooter)a.stats.ast++;}
   S.lastPasser=null;
   S.lastScore={team:sh.team,points:sh.points,shooter:sh.shooter,type:sh.type,tick:S.tick,shotId:sh.id};
-  emit({type:'score',team:sh.team,points:sh.points,playerId:sh.shooter,shotType:sh.type,shotId:sh.id,goaltend:!!goaltend,score:[team(0).score,team(1).score]});
+  emit({type:'score',team:sh.team,points:sh.points,playerId:sh.shooter,shotType:sh.type,shotId:sh.id,goaltend:!!goaltend,score:[team(0).score,team(1).score],...(impactDetails?{side:sh.side}:null)});
   if(sh.oop)emit({type:'alleyoop',from:sh.oop.from,to:sh.shooter,team:sh.team,shotType:sh.type,result:'score'});
   b.state='dead';b.shot=null;
   if(sh.type==='ft'){afterFreeThrow(true);return;}

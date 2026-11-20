@@ -8,8 +8,8 @@
  *  - the plan is redone at most four times a second (the game camera moves every frame; the pack re-plans on every change);
  *  - budget mode keeps the fans on the stand the camera faces: the crowd turns half a turn with the camera at half time.
  * Presentation only. */
-import {planCrowd} from '../assets/soccer-v24/crowd/runtime/lod-policy.mjs?v=island-v2-20261107-19';
-import {soccerV24Url,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-19';
+import {planCrowd} from '../assets/soccer-v24/crowd/runtime/lod-policy.mjs?v=island-v2-20261107-20';
+import {soccerV24Url,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-20';
 
 const LEVEL_COSTS=[210,90,24];
 /** Fans and triangle limit for the measured scene: `scene` = triangles the match draws without the 3D fans (cards they replace still

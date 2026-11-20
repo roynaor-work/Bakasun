@@ -26,13 +26,13 @@ export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=
 export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,camera,lateCrowd=false}){
  const flag=params?.get?.('tennisStadium');
  if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
- const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-19`,base);
+ const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-20`,base);
  const use3dFlag=params?.get?.('tennisCrowd3d')!=='0';
  const crowdBase=new URL('../assets/tennis-crowd-v22/',base);
  const [models,city,crowdModule]=await Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
   new T.TextureLoader().loadAsync(url('evening-city.png').href),
-  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-19').catch(()=>null):null]);
+  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-20').catch(()=>null):null]);
  const library=new Map(models),halfLength=config.court.halfLength,group=new T.Group();group.name='tennis-v12-stadium';
  const disposables=[city],track=o=>{disposables.push(o);return o;};
  city.colorSpace=T.SRGBColorSpace;

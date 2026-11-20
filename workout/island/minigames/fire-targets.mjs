@@ -2,7 +2,7 @@
  * the other holds the hose button. A pressure gauge empties while spraying and fills while resting; under a third of a tank the jet
  * sags and falls short. Wind pushes the jet sideways. Points for every hit, nothing is ever taken away, and the stage ends when every
  * target is done. Pure and deterministic: scene px of street.webp, no DOM. */
-import {streetAnchor,crewNozzle} from './fire-v23-assets.mjs?v=island-v2-20261107-19';
+import {streetAnchor,crewNozzle} from './fire-v23-assets.mjs?v=island-v2-20261107-20';
 
 export const TARGET_TUNING=Object.freeze({
   drain:.2,refill:.34,restart:.32,          // pressure per second; an empty tank waits for `restart` before it sprays again

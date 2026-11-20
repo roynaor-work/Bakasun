@@ -33,7 +33,7 @@ test('v25 packages: every playable game maps to packages that exist, the hub is 
  for(const id of games)assert.ok(id in PACKS_OF,id+' has a package list (may be empty)');
  for(const packs of Object.values(PACKS_OF))for(const p of packs)assert.ok(p in OFFLINE_GAMES&&p in manifest.games,p);
  assert.deepEqual(packsForGames([]),Object.keys(OFFLINE_GAMES).filter(p=>[...ALWAYS_PACKS,...DEFAULT_PACKS].includes(p)));
- assert.deepEqual(packsForGames(['tennis','tennis','boarDefense']),['tennis','city']);
+ assert.deepEqual(packsForGames(['tennis','tennis','boarDefense']),['tennis','boar','city']);
  assert.deepEqual(packsForGames(['alpineRush']),['alpine','alpineLeague','city']);
  assert.ok(packsForGames(['streetSlam']).includes('hoops')&&!packsForGames(['streetSlam']).includes('soccer'));
 });
@@ -143,7 +143,7 @@ test('v25 panel texts: package states, summary and storage line',()=>{
  assert.equal(describePack({complete:true},{downloading:{percent:40}}),'בהורדה · 40%');
  assert.equal(describePack({complete:true},{update:{changed:2,bytes:3*1048576}}),'יש עדכון (2 קבצים, 3 MB)');
  const games=Object.fromEntries(Object.keys(OFFLINE_GAMES).map(g=>[g,{complete:g==='soccer'}]));
- assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 11 משחקים מוכנים · 20 מתוך 97 MB/);
+ assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 12 משחקים מוכנים · 20 מתוך 97 MB/);
  assert.match(describeStatus25({supported:true,complete:true,bytes:97*1048576,games}),/שמור לגרסה הזו: כל המשחקים במכשיר \(97 MB\)/);
  assert.equal(describeStatus25({supported:false,games:{}}),'ההורדה למכשיר לא זמינה בדפדפן הזה. המשחקים נטענים מהרשת.');
  assert.equal(describeStorage({usage:null,quota:null,persisted:null}),'');
@@ -159,7 +159,7 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');
- assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-19'));
+ assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-20'));
  for(const [file,source] of [['ui/offline.mjs',offline],['ui/offline-panel.mjs',panel],['ui/offline-install.mjs',install],['offline-sw.js',sw]]){
   for(const banned of ['localStorage.clear','removeItem','indexedDB','.clear()','sessionStorage','new Worker','createObjectURL','new Blob(','eval(','new Function','innerHTML'])assert.ok(!source.includes(banned),file+' uses '+banned);
  }

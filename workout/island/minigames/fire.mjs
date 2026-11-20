@@ -1,32 +1,36 @@
-import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-19';
-import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-19';
-import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-19';
-import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-19';
-import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-19';
-import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-19';
+import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-20';
+import {fireLevelsEnabled} from './fire-levels-v1.mjs?v=island-v2-20261107-20';
+import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-20';
+import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-20';
+import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-20';
+import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-20';
+import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-20';
 import {polishLegacy,polishValue} from './polish-flag.mjs';
-import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-19';
-import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-19';
-import {createFireView} from './fire-view.mjs?v=island-v2-20261107-19';
-import {fireFlowV24,isEntryStage} from './fire-v24.mjs?v=island-v2-20261107-19';
-import {startFireEntry} from './fire-v24-flow.mjs?v=island-v2-20261107-19';
+import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-20';
+import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-20';
+import {createFireView} from './fire-view.mjs?v=island-v2-20261107-20';
+import {fireFlowV24,isEntryStage} from './fire-v24.mjs?v=island-v2-20261107-20';
+import {startFireEntry} from './fire-v24-flow.mjs?v=island-v2-20261107-20';
 export function fireHydrantDistance(truck,balance){return Math.min(...(balance.city?.hydrants||[balance.hydrant.position]).map(p=>Math.hypot(truck.x-p[0],truck.z-p[2])));}
 const EMPTY=Object.freeze({});
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0,coolingAge:0,damaged:false,reignitions:0};}
-export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,sound=()=>{}}) {
+export function createFireModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,sound=()=>{},fireLevels=false}) {
   balance=fireScenario(balance,level);
   const crewV9=!polishLegacy('fireTruck')&&polishValue('fireCrew')!=='v8'&&Boolean(balance.crew?.v9);
   const settings=balance.levels[level-1],flames=[];
-  const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1),range=balance.range*(equipment.range||1),aimRadius=balance.aimRadius*(equipment.range||1);
+  const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1);
+  const rangeMultiplier=equipment.range||1;
+  // 20/11/2026: shorter jet (270 -> 210) with the fire levels; `?fireRange=v24` keeps the v24 reach.
+  const range=balance.range*(fireLevels&&polishValue('fireRange')!=='v24'?7/9:1)*rangeMultiplier,aimRadius=balance.aimRadius*rangeMultiplier;
   let water=maxWater,pressure=maxPressure,remaining=settings.seconds+(bonuses.fireTime||0)+balance.startGrace,score=0,out=0,result,reserve=settings.refillWater,time=0,charge=0,eruption=settings.eruptionSeconds,pressureEmpty=false;
-  let connection=0,waterUsed=0,waterWasted=0,fireDoneAt=null;
+  let connection=0,waterUsed=0,waterWasted=0,fireDoneAt=null,acted=false;
   const timeTarget=Math.max(1,remaining-settings.parSeconds),waterTarget=Math.max(1,water+reserve-settings.parWater),aim={x:config.width/2,y:config.height/2},impact={x:aim.x,y:aim.y};
   const vehicle=balance.vehicle,truck={x:vehicle.x,z:vehicle.z,targetX:vehicle.x,targetZ:vehicle.z},nozzle={x:balance.nozzleX,y:balance.nozzleY};
   const driver=createFireDriver(truck,balance),camera={x:truck.x,z:truck.z},firefighter={state:'seated',progress:0,x:truck.x,z:truck.z,visible:false},hose={connected:false,start:null,end:null};
   const rescues=balance.rescueSites.slice(0,settings.rescueCount).map(site=>({...balance.rescue,...site,rescued:false,expired:false,remaining:site.timeoutSeconds??balance.rescue.timeoutSeconds,progress:0,lastRescueAt:-100,descent:0,feedback:0,walkX:site.x,walkY:site.y})),rescue=rescues[0],crew=balance.crew,extraHose=equipment.hose||0,status={seconds:0,reserve:0,out:0,total:settings.flames,rescued:0};
   for(let i=0;i<settings.flames+settings.spreadCount;i++)flames.push(createFireEntity(balance.sites[i],i%settings.fireKinds,i<settings.flames,i<settings.flames?balance.initialHeatBase+random()*balance.initialHeatRange:0,i));
   const ladderControl=createFireLadder(settings,rescues,flames,balance);
-  const navigator=createFireNavigation({balance,truck,flames,rescues,roads:driver.roads}),requiredRescues=settings.mission?.requiredRescues||0;
+  const navigator=createFireNavigation({balance,truck,flames,rescues,roads:driver.roads,fireLevels}),requiredRescues=settings.mission?.requiredRescues||0;
   function activeCount(){let n=0;for(const f of flames)if(f.active)n++;return n;}
   const model={balance,navigation:navigator.state,get selectedObjective(){return navigator.selected;},cancelNavigation(){navigator.cancel();},get guidance(){return fireGuidance(model,balance,navigator);},coolingTarget:null,coolingPower:0,get requiredRescues(){return requiredRescues;},get canFinish(){return fireDoneAt!==null&&rescues.filter(r=>r.rescued).length>=requiredRescues;},ladder:ladderControl.state,settings,flames,aim,impact,truck,camera,nozzle,firefighter,hose,roads:driver.roads,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',atHydrant:false,inRange:true,spraying:false,refilling:false,charging:false,rescuing:false,
     get graceRemaining(){return Math.max(0,balance.startGrace-time);},get connection(){return connection;},get firesOut(){return fireDoneAt!==null;},
@@ -35,6 +39,11 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
     statusValues(){status.seconds=Math.ceil(remaining);status.reserve=Math.floor(reserve);status.out=out;status.total=activeCount();status.rescued=0;for(const r of rescues)status.rescued+=Number(r.rescued);return status;},
     update(dt,input=EMPTY){
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;remaining=Math.max(0,remaining-dt);
+      if(fireLevels&&!acted){
+        acted=Boolean(input.firing||input.rescue||input.refill||input.select||input.navigate||input.finish||
+          Math.hypot(input.moveX||0,input.moveZ||0)>balance.controls.deadzone||
+          (Number.isFinite(input.truckX)&&Number.isFinite(input.truckZ)));
+      }
       const stabilizing=ladderControl.prepare(dt,time,input,truck);
       const steering=navigator.update({...input,stabilizing});
       const moveStep=driver.update(dt,stabilizing?{...steering,moveX:0,moveZ:0,truckX:undefined,truckZ:undefined}:steering);
@@ -108,7 +117,8 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
       if(requiredLost)result={outcome:'lose',score,reason:'rescue'};
       else if(model.canFinish&&(!pending||input.finish||remaining<=0))result={outcome:'win',score,performance:.6*Math.min(1,remaining/timeTarget)+.4*Math.min(1,(water+reserve)/waterTarget)};
       else if(remaining<=0)result={outcome:'lose',score};
-      if(result)result.certificate=fireCertificate({won:result.outcome==='win',time:(fireDoneAt??time)-balance.startGrace,seconds:settings.seconds,rescued:rescues.some(r=>r.rescued),wasted:waterWasted,used:waterUsed},balance.certificate);
+      if(fireLevels&&result?.outcome==='lose'&&!acted)result.reason='fireIdle';
+      else if(result)result.certificate=fireCertificate({won:result.outcome==='win',time:(fireDoneAt??time)-balance.startGrace,seconds:settings.seconds,rescued:rescuedCount>0,rescueCount:rescues.length,wasted:waterWasted,used:waterUsed},balance.certificate);
       if(result)result.summary={out,rescued:rescues.filter(r=>r.rescued).length,water:Math.floor(water)};
     },
     snapshot(){return {navigation:{...navigator.state,target:navigator.state.target?{...navigator.state.target}:null,path:navigator.state.path.map(p=>({...p}))},selectedObjective:navigator.selected?{...navigator.selected}:null,guidance:{...model.guidance},coolingTarget:model.coolingTarget,coolingPower:model.coolingPower,requiredRescues,canFinish:model.canFinish,camera:{...camera},ladder:{...model.ladder,target:model.ladder.target?{...model.ladder.target,world:[...model.ladder.target.world]}:null,targets:model.ladder.targets.map(r=>({...r,world:[...r.world]}))},refilling:model.refilling,graceRemaining:model.graceRemaining,connection,firesOut:model.firesOut,hintId:model.hintId,hintCount:model.hintCount,waterUsed,waterWasted,atHydrant:model.atHydrant,inRange:model.inRange,hydrantDistance:fireHydrantDistance(truck,balance),firefighter:{...firefighter},roads:{nodes:driver.roads.nodes.map(n=>({x:n.x,z:n.z})),edges:driver.roads.edges.map(e=>({a:{x:e.a.x,z:e.a.z},b:{x:e.b.x,z:e.b.z}}))},hose:{start:{...nozzle},truck:{...truck},connected:hose.connected,worldStart:{...hose.start},worldEnd:{...hose.end}},maxWater,maxPressure,warningId:model.warningId,pressureEmpty,score,result,extraHose,equipment:{...equipment},water,pressure,remaining,reserve,time,charge,range,truck:{...truck},nozzle:{...nozzle},rescueProgress:model.rescueProgress,rescues:rescues.map(r=>({...r,world:[...r.world]})),rescue:rescue?{...rescue,world:[...rescue.world]}:null,flames:flames.map(f=>({...f})),aim:{...aim},impact:{...impact},spraying:model.spraying,rescuing:model.rescuing};}
@@ -116,13 +126,13 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
 }
 export function drawFire(p,m,ctx) {if(!ctx.view?.draw(p))drawFireCity(p,m,ctx);}
 export function startFire(ctx){if(ctx.fireMode)return startFireBonus(ctx);
-  const session={...ctx,balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}};
+  const session={...ctx,fireLevels:fireLevelsEnabled(),balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}};
   // 14/11/2026 fire v24: every third stage from 3 drives to a burning building and the firefighter goes in (`?fireFlow=v23` = the v23 stage).
   if(fireFlowV24()&&isEntryStage(ctx.level,ctx.balance.levels.length))return startFireEntry(session,createFireModel,drawFire,createFireView);
   return runFireSession(session,createFireModel,drawFire,createFireView);}
 /** 13/11/2026 fire v23: the bonus missions (water targets, inside a building) load their own module on first use. Until it runs,
  * the session says it is loading through the shared `ready` contract, so "stuck? restart" works the same as for every game. */
-export function startFireBonus(ctx,load=()=>import('./fire-bonus-session.mjs?v=island-v2-20261107-19')){
+export function startFireBonus(ctx,load=()=>import('./fire-bonus-session.mjs?v=island-v2-20261107-20')){
   let session=null,disposed=false,paused=false,failed=false;
   const proxy={get ready(){return Boolean(session?.ready);},get loadFailed(){return failed||Boolean(session?.loadFailed);},
     get snapshot(){return session?session.snapshot:{mode:ctx.fireMode,level:ctx.fireBonusLevel,loading:true};},

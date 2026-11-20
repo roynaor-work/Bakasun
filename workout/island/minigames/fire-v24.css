@@ -45,6 +45,12 @@
 .fv24-tool.active{border-color:#8fdcf0;box-shadow:0 0 0 3px #8fdcf055,0 6px 18px #020a154d;color:#fff}
 .fv24-tool.hint{border-color:#ffd76a;animation:fv24-breathe 1s ease-in-out infinite}
 .fv24-tool:focus-visible{outline:3px solid #e6cf98;outline-offset:3px}
+.fv24-rescue{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);min-height:54px;display:flex;align-items:center;gap:8px;padding:6px 14px;border:2px solid #7cf0a8;border-radius:16px;background:#183d33f5;color:#f2fff6;box-shadow:0 6px 18px #080c15a0;font:inherit;font-weight:750;pointer-events:auto;touch-action:manipulation;cursor:pointer}
+.fv24-rescue[aria-disabled=true]{border-color:#7cf0a872;cursor:default}
+.fv24-rescue:focus-visible{outline:3px solid #fff2b4;outline-offset:3px}
+.fv24-rescue-icon{width:36px;height:36px}
+.fv24-rescue-time{min-width:1ch;font-variant-numeric:tabular-nums;color:#b4ffcd}
+.fv24-rescue-time:empty{display:none}
 /* lesson and room cards: tap anywhere on them to go on */
 .fv24-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,78vw);padding:16px 20px;border:1px solid #ffd76a55;border-radius:22px;background:linear-gradient(160deg,#1f2a36f2,#0e1722f4);color:#eef1e9;text-align:center;box-shadow:0 18px 50px #00000080;pointer-events:auto;backdrop-filter:blur(10px)}
 .fv24-card-title{margin:0 0 8px;font-size:22px;font-weight:800;color:#ffd76a}

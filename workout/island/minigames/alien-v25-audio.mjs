@@ -9,7 +9,7 @@ export function createAlienV25Audio({storage=globalThis.localStorage,AudioContex
  let context,master,paused=false,disposed=false,loaded=false,loop=null,loopGain=null,on=false;const buffers=new Map(),counts={starts:0,stops:0,overheat:0};
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  async function decode(name){
-  for(const ext of ['ogg','mp3']){try{const response=await fetcher(new URL(`../assets/alien-v25/${name}.${ext}?v=island-v2-20261107-19`,import.meta.url));if(!response.ok)continue;const decoded=await context.decodeAudioData(await response.arrayBuffer());if(!disposed)buffers.set(name,decoded);return;}catch{}}
+  for(const ext of ['ogg','mp3']){try{const response=await fetcher(new URL(`../assets/alien-v25/${name}.${ext}?v=island-v2-20261107-20`,import.meta.url));if(!response.ok)continue;const decoded=await context.decodeAudioData(await response.arrayBuffer());if(!disposed)buffers.set(name,decoded);return;}catch{}}
  }
  async function load(){if(loaded||!fetcher)return;loaded=true;await Promise.all(ALIEN_V25_AUDIO.map(decode));}
  function unlock(){if(disposed||paused||!AudioContext)return;try{if(!context){context=new AudioContext();master=context.createGain();master.gain.value=.34;master.connect(context.destination);void load();}if(context.state!=='running')void context.resume().catch(()=>{});}catch{}}
