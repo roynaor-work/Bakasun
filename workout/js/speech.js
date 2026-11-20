@@ -1,7 +1,7 @@
 // דיבור בעברית: הקול של המכשיר (Web Speech API), עם בחירת הקול הטוב ביותר, קצב מכוון, וטקסטים מנוקדים.
 // למה ניקוד: מנועי הדיבור (גוגל באנדרואיד, "כרמית" באייפון) מנחשים הגייה של מילים בלי ניקוד וטועים. עם ניקוד הם קוראים נכון.
 import { store } from './store.js?v=20261014-w2g-1';
-import { legacyPrivacy } from './privacy-flag.js';
+import { legacyPrivacy } from './privacy-flag.js?v=20261010-camera-1';
 
 import { createVoicePlayer } from './voice-player.js?v=20261014-w2g-1';
 import { VOICE_BY_ID } from './voice-lines.js?v=20261014-w2g-1';

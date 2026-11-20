@@ -223,6 +223,6 @@ test('boars v24.1 wiring: game.js draws the rounds and plays the sounds behind ?
  assert.match(session,/if\(q\.get\('boarAim'\)==='v24'\)url\.searchParams\.set\('boarAim','v24'\);if\(q\.get\('boarFx'\)==='v24'\)url\.searchParams\.set\('boarFx','v24'\);/);
  for(const f of ['minigames/boar-island/weapon-fx.mjs','minigames/naval-v241.mjs','minigames/naval-v241-hud.mjs','minigames/naval-v241.css'])assert.ok(offline.shell.includes(f),'offline '+f);
  const naval=await read('../workout/island/minigames/naval.mjs');assert.ok(naval.includes(`from './naval-v241.mjs?v=${tag}';`)&&naval.includes(`from './naval-v241-hud.mjs?v=${tag}';`)&&naval.includes(`./naval-v241.css?v=${tag}`));
- assert.match(strings['minigame.navalDuel.help.1'],/המכ״ם/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/תמיד מתחת למים/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);assert.match(strings['minigame.navalDuel.help.3'],/סימון אדום/);
+ assert.match(strings['minigame.navalDuel.help.1'],/המכ״ם/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו פוגע בצוללת/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);assert.match(strings['minigame.navalDuel.help.3'],/סימון מהבהב/);
  assert.doesNotMatch(strings['naval.mission.brief.subhunt'],/טיל מונחה פוגע/);
 });

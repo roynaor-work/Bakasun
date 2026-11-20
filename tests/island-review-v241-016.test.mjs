@@ -38,7 +38,7 @@ test('V241-016: radar and aerial-end rollback flags select matching displayed an
   const model=naval(search),lines=help(search,'navalDuel'),s=model.snapshot();
   if(!s.v241.radarOn)assert.doesNotMatch(lines[0],/המכ״ם|מתמלאת בשנייה/,'no timed radar under '+search);else assert.match(lines[0],/המכ״ם/);
   if(search.includes('navalLock=0'))assert.doesNotMatch(lines[0],/נועל|ננעל/);
-  if(!s.v241.airEnd||search.includes('navalAir=off'))assert.doesNotMatch(lines[2],/השלב מחכה/);else assert.match(lines[2],/השלב מחכה/);
+  if(!s.v241.airEnd||search.includes('navalAir=off'))assert.doesNotMatch(lines[2],/מחכים שיעופו/);else assert.match(lines[2],/מחכים שיעופו/);
  }
 });
 test('V241-016: reviewHelp=0 restores the original help keys and unrelated games retain their text',()=>{

@@ -22,7 +22,7 @@ import { normalizePlan } from './weekly.js?v=20261014-w2g-1';
 import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261014-w2g-1';
 import { playIntro } from './intro.js?v=20261010-camera-1';
 import { createVoiceCopy, ageBand, voiceCopyEnabled } from './voice-copy.js?v=20261010-camera-1';
-import { legacyPrivacy } from './privacy-flag.js';
+import { legacyPrivacy } from './privacy-flag.js?v=20261010-camera-1';
 import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';

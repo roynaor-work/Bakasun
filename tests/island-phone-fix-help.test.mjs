@@ -24,7 +24,7 @@ function help(search,id){
 
 test('phone fix B help: the default describes the slow radar lock that is released after every shot',()=>{
  const line=help('','navalDuel')[0];
- assert.match(line,/שלוש וחצי שניות/);assert.match(line,/אחרי כל ירייה הנעילה מתבטלת/);assert.match(line,/כפתור הנעילה/);
+ assert.match(line,/שלוש וחצי שניות/);assert.match(line,/הנעילה מתבטלת אחרי ירייה/);assert.match(line,/כפתור הנעילה/);
  assert.doesNotMatch(line,/בשנייה בערך/);
  for(const q of ['?phoneFixB=0','?phoneFixes=0']){const old=help(q,'navalDuel')[0];assert.match(old,/בשנייה בערך/,q);assert.doesNotMatch(old,/אחרי כל ירייה/,q);}
  assert.match(help('?navalRadar=v24','navalDuel')[0],/נגיעה בספינת אויב נועלת עליה/,'the older rollbacks keep their own lines');
@@ -32,6 +32,6 @@ test('phone fix B help: the default describes the slow radar lock that is releas
 test('phone fix D help: the default no longer offers a pit cancel; the rollback does',()=>{
  const line=help('','islandRacing')[1];
  assert.match(line,/נכנסת לבד/);assert.doesNotMatch(line,/מבטלת/);
- for(const q of ['?phoneFixD=0','?phoneFixes=0'])assert.match(help(q,'islandRacing')[1],/„פיטס” מבטלת/,q);
+ for(const q of ['?phoneFixD=0','?phoneFixes=0'])assert.match(help(q,'islandRacing')[1],/מבטלת את העצירה/,q);
  assert.match(help('?racingPitAuto=0','islandRacing')[1],/שלוש הקפות/);
 });

@@ -37,7 +37,7 @@ test('five runtime profiles retain full role names, six visible abilities and tr
  assert.ok(profiles.PF.rebound>profiles.SF.rebound&&profiles.PF.defense>profiles.PG.defense);
  assert.ok(profiles.C.rebound>profiles.PF.rebound&&profiles.C.dunk>profiles.PG.dunk);
  assert.equal(new Set(Object.values(profiles).map(JSON.stringify)).size,5);
- assert.equal(positionName('PG'),'פוינט גארד');assert.equal(positionName('SG'),'שוטינג גארד');
+ assert.equal(positionName('PG'),'רכז');assert.equal(positionName('SG'),'קלע');
  for(const card of cards){assert.equal(card.positionName,positionName(card.pos));assert.match(abilitySummary(card),/קליעה \d+ · הטבעה \d+ · ריבאונד \d+ · הגנה \d+ · מסירה \d+ · מהירות \d+/);}
  const trained={pos:'SG',ratings:{...uniform(),three:96}},copy=structuredClone(trained);assert.equal(runtimeRatings(trained).three,99);assert.deepEqual(trained,copy);
  const {e,p}=fixture(1,'PG'),snap=e.snapshot().players.find(q=>q.id===p.id);assert.equal(snap.pos,'PG');assert.equal(snap.positionName,positionName('PG'));assert.deepEqual(snap.abilities,p.abilities);
