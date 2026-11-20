@@ -66,7 +66,7 @@ let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AI
 function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ))),lin=AIM_V241?AIM241.LIN:STICK_LIN;return STICK_V21?mag*(lin+(1-lin)*mag):mag;}
 function aimSensButton(){const b=document.createElement('button');b.className='text-btn';b.id='aim-sens';const label=()=>{b.textContent=`רגישות כוונון: ${AIM_SENS_NAME[aimSens]}`;};label();
   b.onclick=()=>{const keys=Object.keys(AIM_SENS);aimSens=keys[(keys.indexOf(aimSens)+1)%keys.length];try{localStorage.setItem('boar-island-aim',aimSens);}catch{}label();};document.querySelector('.menu-links').append(b);}
-function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
+function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('כלי נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
 function buildCompactHud(){
   $('game').classList.add('hudv21');
   weaponBtn=document.createElement('button');weaponBtn.id='weapon-btn';weaponBtn.type='button';weaponBtn.setAttribute('aria-label','החלפת נשק');
@@ -76,7 +76,7 @@ function buildCompactHud(){
 function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCache[current],s=wstate[current];weaponBtn.querySelector('.wicon').textContent=w.icon;weaponBtn.querySelector('.wname').textContent=w.short;
   if(!ws||!s)return;const bar=weaponBtn.querySelector('.wbar');
   if(ws.mode==='heat'){weaponBtn.querySelector('.wammo').textContent=s.overheated?'מתקרר':`חום ${Math.round(s.heat)}%`;bar.style.width=`${s.heat}%`;bar.style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';}
-  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוען':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
+  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוענים':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
   weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
 function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
@@ -276,7 +276,7 @@ function init(){
   if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
   // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
   // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
-  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
+  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת קרובה לחזיר, היא עוזרת לכוון לעיניים שלו. היא עוקבת אחריו כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
   if(kidUx('026')&&AIMSTICK)prepareKidBoarHelp();
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
@@ -851,7 +851,7 @@ function beginWave(number=save.nextWave){
   perk=selectedPerk;selectedPerk='';plan=CAMPAIGN_ENABLED?levelPlan(wave):wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
   $('battle-hint').hidden=wave>2;
-  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
+  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'מכוונים בג׳ויסטיק משמאל · יורים בכפתור הימני':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
   weatherKind=CAMPAIGN_ENABLED?levelWeather(wave):waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
   const level=CAMPAIGN_ENABLED?levelFor(wave):null;
   const title=level?`שלב ${wave} · ${level.name}`:`גל ${String(wave).padStart(2,'0')}`;
@@ -969,7 +969,7 @@ function updateHud(){
     if(ws.mode==='heat'){$('heat-fill').parentElement.hidden=false;$('heat-fill').style.width=`${s.heat}%`;$('heat-fill').style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';$('heat-text').textContent=s.overheated?'מתקרר…':furyTimer>0?'כוח אש פעיל':`חום ${Math.round(s.heat)}%`;$('ammo-pips').replaceChildren();panel.classList.remove('reloading');}
     else{$('heat-fill').parentElement.hidden=s.reload<=0;$('heat-fill').style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:0}%`;$('heat-fill').style.background='#ffb067';$('heat-text').textContent=s.reload>0?'טוען…':`${s.ammo} / ${ws.mag}`;panel.classList.toggle('reloading',s.reload>0);
       const pips=$('ammo-pips');if(pips.childElementCount!==ws.mag)pips.replaceChildren(...Array.from({length:ws.mag},()=>document.createElement('i')));[...pips.children].forEach((p,i)=>p.classList.toggle('empty',i>=s.ammo));}
-    for(const b of $('weapons').children){const k=b.dataset.key,ws2=wsCache[k],s2=wstate[k];if(!save.weapons[k]||!s2)continue;b.querySelector('small').textContent=ws2.mode==='mag'?(s2.reload>0?'טוען':`${s2.ammo}/${ws2.mag}`):(s2.overheated?'חם':`${Math.round(s2.heat)}%`);}
+    for(const b of $('weapons').children){const k=b.dataset.key,ws2=wsCache[k],s2=wstate[k];if(!save.weapons[k]||!s2)continue;b.querySelector('small').textContent=ws2.mode==='mag'?(s2.reload>0?'טוענים':`${s2.ammo}/${ws2.mag}`):(s2.overheated?'חם':`${Math.round(s2.heat)}%`);}
   }
   $('rocket-cd').textContent=rocketCooldown>0?`${Math.ceil(rocketCooldown)} שנ׳`:'מוכן';$('frost-cd').textContent=frostCooldown>0?`${Math.ceil(frostCooldown)} שנ׳`:'מוכן';$('rocket').disabled=rocketCooldown>0;$('frost').disabled=frostCooldown>0;
   $('rocket').querySelector('i').style.width=`${(1-rocketCooldown/st.rocketCd)*100}%`;$('frost').querySelector('i').style.width=`${(1-frostCooldown/st.frostCd)*100}%`;
@@ -1066,7 +1066,7 @@ function openShop(from){
   const label=CAMPAIGN_ENABLED&&levelFor(next)?'שלב':'גל';
   const finishedLabel=CAMPAIGN_ENABLED&&levelFor(wave)?'שלב':'גל';
   $('shop-title').textContent=from==='win'?`${finishedLabel} ${wave} הושלם`:'מוסך החוף';$('shop-eyebrow').textContent=from==='win'?'החוף שלנו · לעת עתה':'חוזרים לקרב חזקים יותר';
-  $('shop-subtitle').textContent=from==='win'?`בחרו שדרוגים ויתרון ל${label} ${next}.`:'נשקים ושדרוגים קבועים ונשמרים במכשיר הזה.';
+  $('shop-subtitle').textContent=from==='win'?`בחרו שדרוגים ויתרון ל${label} ${next}.`:'כלי הנשק והשדרוגים נשמרים במכשיר הזה.';
   $('wave-stats').hidden=from!=='win';if(from==='win'){const acc=roundShots?Math.round(roundHits/roundShots*100):0;$('wave-stats').innerHTML=`<div><b>${killed}</b><small>רובוטים הופלו</small></div><div><b>${acc}%</b><small>דיוק</small></div><div><b>${roundCrits}</b><small>פגיעות בעין</small></div><div><b>+${roundCoins}</b><small>מטבעות</small></div><div><b>${Math.round(damageTaken)}</b><small>נזק שספגנו</small></div>`;}
   $('perk-section').hidden=from!=='win';$('next-wave').textContent=`ל${label} ${next} ←`;$('shop-back').hidden=from==='win'&&!kidShop;
   if(from==='win'){const choices=[...PERKS].sort(()=>Math.random()-.5).slice(0,3);$('perks').replaceChildren();for(const p of choices){const b=document.createElement('button');b.className='perk';b.innerHTML=`<strong>${p.name}</strong><small>${p.desc}</small>`;b.onclick=()=>{selectedPerk=p.id;for(const c of $('perks').children)c.classList.toggle('selected',c===b);$('shop-message').textContent=`${p.name} פעיל בגל הבא`;$('next-wave').disabled=false;};$('perks').append(b);}$('next-wave').disabled=true;$('shop-message').textContent='בחרו יתרון אחד כדי להמשיך';}
@@ -1079,7 +1079,7 @@ function renderShop(){
   const wg=$('weapon-grid');wg.replaceChildren();const maxDps=320;
   for(const k of WEAPON_ORDER){const w=WEAPONS[k],lv=save.weapons[k],cost=weaponCost(save,k);const ws=equippedWeaponStats(k);const dps=Math.round(sustainedDps(ws,st.cooling));const hit=Math.round(ws.damage*ws.pellets);
     const card=document.createElement('article');card.className='weapon-card'+(lv?'':' locked');
-    const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'דרגה מרבית':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
+    const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'הרמה הגבוהה ביותר':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
     card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}${PHONE_FIX_F&&fam(k)==='mg'?' כל דרגת נשק מפחיתה התחממות ב־4%.':''}</p>
       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
       <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;

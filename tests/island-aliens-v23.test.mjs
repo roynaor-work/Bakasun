@@ -173,7 +173,7 @@ test('heat bar next to the ship: hidden when cold and open, green/yellow/red by 
 
 test('words for the child: help text and the in-game line describe the two buttons; the v22 help text is kept for ?alienFire=v15',async()=>{
  const help=strings['minigame.alienDefense.help.1'];
- for(const word of ['ברק','הירי הרגיל','קצב קבוע','וולקן','ירוק','צהוב','אדום','שתי שניות','מהבהב'])assert.ok(help.includes(word),word);
+ for(const word of ['ברק','לירי רגיל ורצוף','הירי הרגיל','וולקן','ירוק','צהוב','אדום','שתי שניות','מהבהב'])assert.ok(help.includes(word),word);
  assert.doesNotMatch(help,/!/);assert.doesNotMatch(help,/פרץ/,'no burst on the fire button any more');
  assert.match(strings['minigame.alienDefense.help.1.v15'],/פרץ וולקן קצר/);assert.equal(strings['minigame.vulcan'],'וולקן');assert.ok(strings['minigame.vulcanLocked']);assert.ok(strings['minigame.fireRegular']);
  const base={powerup:-1,upgrades:{},equipment:{},spreadTime:0,wings:[],v23:true,vulcanLocked:false};

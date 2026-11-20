@@ -47,7 +47,7 @@ export const GEAR_COST = Object.freeze([70, 130, 200, 290, 400]);
 export const GEAR = Object.freeze({
   skis: Object.freeze({name: 'מגלשיים', key: 'wax', perLevel: .01, what: 'גלישה מהירה יותר'}),
   helmet: Object.freeze({name: 'קסדה', key: 'helmet', perLevel: .06, what: 'קמים מהר יותר אחרי נפילה'}),
-  goggles: Object.freeze({name: 'משקפיים', key: 'goggles', perLevel: .08, what: 'הרוח מזיזה פחות, ושער ממלא יותר את המיכל'})
+  goggles: Object.freeze({name: 'משקפיים', key: 'goggles', perLevel: .08, what: 'הרוח מזיזה פחות, ושער ממלא יותר את המכל'})
 });
 export const HISTORY_CAP = 60;
 const GOAL_THIRD = Object.freeze(['gates', 'clean', 'gates', 'clean', 'gates']);

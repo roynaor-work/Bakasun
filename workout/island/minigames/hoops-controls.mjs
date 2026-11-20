@@ -31,7 +31,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
  const all=['shoot','pass','move','fake','block','steal','switch','sprint','timeout'];
  for(const key of all){
   const host=node('div','hoops-control-host hoops-host-'+key);
-  const render={label:key==='move'?'תרגיל':key==='fake'?'פייק':key==='sprint'?'ריצה':label(key),icon:HUD_ICONS[key],disabled:false,loading:false,charge:0,visible:true};
+  const render={label:key==='move'?'תרגיל':key==='fake'?'הטעיה':key==='sprint'?'סיבולת':label(key),icon:HUD_ICONS[key],disabled:false,loading:false,charge:0,visible:true};
   const hud=createActionButton(host,{primary:key==='shoot'||key==='block',label:render.label,icon:render.icon,initial:render});
   const button=host.children[0];button.classList.add('hoops-action','hoops-'+key);if(key==='timeout')button.classList.add('hoops-small');
   button.type='button';button.dataset.gameControl=key;button.dataset.hoopsControl=key;
@@ -222,8 +222,8 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
    record.host.hidden=!visible.includes(record.key);
    const icon=record.key==='move'?'cross':record.key==='shoot'&&mode==='offense'?'jump':record.key;
    const text=record.key==='shoot'&&mode==='offense'?label('jump'):record.key==='pass'&&mode==='offense'?label('callForBall'):label(record.key);
-   record.baseLabel=source?.label||(record.key==='move'?'תרגיל':record.key==='fake'?'פייק':record.key==='sprint'?'ריצה':text);
-   if(record.role==='fake')record.baseLabel='פייק';record.ariaLabel=record.key==='pass'&&record.role==='pass'&&(mode==='ball'||mode==='inbound')?'מסירה קצרה בנגיעה; החזקה למסירה רחוקה':record.key==='move'&&mode==='ball'?label('move'):source?.aria_label||text;
+   record.baseLabel=source?.label||(record.key==='move'?'תרגיל':record.key==='fake'?'הטעיה':record.key==='sprint'?'סיבולת':text);
+   if(record.role==='fake')record.baseLabel='הטעיה';record.ariaLabel=record.key==='pass'&&record.role==='pass'&&(mode==='ball'||mode==='inbound')?'מסירה קצרה בנגיעה; החזקה למסירה רחוקה':record.key==='move'&&mode==='ball'?label('move'):source?.aria_label||text;
    record.render.icon=source?.hud_kit.update.icon||HUD_ICONS[record.key];record.button.dataset.action=icon;renderRecord(record);
   }
   help.hidden=mode!=='ball'&&mode!=='inbound';sprintVisual();layout();

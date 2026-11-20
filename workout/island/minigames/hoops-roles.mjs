@@ -1,5 +1,5 @@
 /** Basketball position profiles are derived for a match; saved ratings stay untouched. */
-export const POSITION_NAMES=Object.freeze({PG:'פוינט גארד',SG:'שוטינג גארד',SF:'סמול פורוורד',PF:'פאוור פורוורד',C:'סנטר'});
+export const POSITION_NAMES=Object.freeze({PG:'רכז',SG:'קלע',SF:'קיצוני',PF:'שחקן פנים',C:'סנטר'});
 export const ABILITY_NAMES=Object.freeze({shooting:'קליעה',dunk:'הטבעה',rebound:'ריבאונד',defense:'הגנה',passing:'מסירה',speed:'מהירות'});
 const FOCUS=Object.freeze({
  PG:{speed:1.06,pass:1.1,handle:1.06,three:1.01,dunk:.86,rebound:.88,block:.85},

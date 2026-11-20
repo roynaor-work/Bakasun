@@ -187,9 +187,14 @@ export class ActivityInterface {
     const list=el('div','equipment-list');
     for(const [key,track]of Object.entries(this.data.config.minigames[id].equipment)){
       const rank=this.engine.state.minigameEquipment[id][key],offer=equipmentOffer(this.engine.state,this.data,id,key),row=el('article','equipment-row');
-      const buy=button(this.t(offer.cost!==undefined?'equipment.buy':'equipment.owned',{title:this.t(track.title),level:offer.rank||rank,cost:offer.cost}),'equipment-buy',()=>{
+      const title=this.t(track.title),hasUpgrade=offer.cost!==undefined;
+      const price=hasUpgrade?offer.cost.toLocaleString('he-IL'):undefined;
+      const buy=button(this.t(hasUpgrade?'equipment.buyShort':'equipment.ownedShort',{cost:price}),'equipment-buy',()=>{
         const result=this.activity.upgrade(id,key);if(result.ok){this.equipment(id);this.ui.toast('equipment.bought');}else this.ui.result(result);
-      });buy.dataset.track=key;buy.disabled=!offer.ok;row.append(buy,el('p','',this.t(track.description)));
+      });
+      buy.setAttribute('aria-label',this.t(hasUpgrade?'equipment.buy':'equipment.owned',{title,level:offer.rank??rank,cost:price}));
+      buy.dataset.track=key;buy.disabled=!offer.ok;
+      row.append(el('h3','',this.t('equipment.nameRank',{title,level:rank})),buy,el('p','',this.t(track.description)));
       if(!offer.ok&&offer.reason==='reason.money')row.append(el('p','',this.t(offer.reason)));
       if(offer.stars>this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0))row.append(el('p','',this.t('equipment.locked',{stars:offer.stars})));
       list.append(row);
@@ -508,7 +513,7 @@ export class ActivityInterface {
   racingLeagueScreen(kind,result){
     this.leagueModule().then(m=>{
       const dialog=this.modal('minigame.islandRacing.title','minigame.subtitle');dialog.dataset.racingLeagueScreen=kind;
-      const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
+      const titles={season:'ליגת המרוצים · עונה וטבלה',shop:'ליגת המרוצים · שדרוג הרכב',result:'ליגת המרוצים · תוצאת המרוץ'};
       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
       const again={engine:this.engine,...this.leagueActions()};
       const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});

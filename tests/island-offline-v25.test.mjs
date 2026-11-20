@@ -155,7 +155,7 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
  const app=await read('app.mjs'),panel=await read('ui/offline-panel.mjs'),offline=await read('ui/offline.mjs'),install=await read('ui/offline-install.mjs'),sw=await read('offline-sw.js'),html=await read('index.html');
  assert.ok(app.includes('v25On()')&&app.includes('switchRelease(')&&app.includes('selectPacks:')&&app.includes('readyRelease===pendingRelease'),'app: flag, release switch after prefetch, packs by games played');
  assert.ok(app.includes('prefetchRelease(')&&app.includes('startAutoDownload(')&&app.includes('registerOfflineWorker()'),'v24 wiring kept');
- for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת כל המשחקים למכשיר','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
+ for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת המשחקים','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');

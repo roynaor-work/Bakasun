@@ -1,4 +1,4 @@
-const resources = {food: 'מזון', materials: 'חומרים', energy: 'אנרגיה'};
+const resources = {food: 'אוכל', materials: 'חומרים', energy: 'אנרגיה'};
 const number = value => value.toLocaleString('he-IL',{maximumFractionDigits:1});
 const reasons = {'out-of-range': 'הבית מחוץ לטווח מגדל מים', capacity: 'המגדלים בטווח מלאים', disconnected: 'הבית אינו מחובר לרשת הכבישים', damaged: 'דרוש תיקון', 'max-tier': 'דרגת הייצור הגבוהה ביותר', money: 'אין מספיק מטבעות', 'port-unavailable': 'עדיין אין הזמנות חדשות', 'order-unavailable': 'המשלוח אינו זמין כרגע', 'goal-unavailable': 'היעד עדיין אינו מוכן', invalid: 'הפעולה אינה זמינה'};
 const node = (tag, className, text) => {const n = document.createElement(tag); n.className = className; if (text != null) n.textContent = text; return n;};
@@ -42,7 +42,7 @@ export class CityDepthInterface {
       for (const slot of report.port.slots.filter(slot => slot.harborId === instance.id)) {
         const order = node('div', 'city-order'); order.dataset.cityOrder = slot.id; order.dataset.state = slot.state;
         order.append(node('p', '', `${resources[slot.resource]} × ${slot.amount} · תמורה ● ${slot.reward}`));
-        if (slot.state === 'offered') order.append(this.action('שליחת משלוח', 'city-deliver', slot.deliverable, () => ui.engine.city.deliver(slot.id)), this.action('דילוג', 'city-skip', true, () => ui.engine.city.skip(slot.id)));
+        if (slot.state === 'offered') order.append(this.action('שליחה', 'city-deliver', slot.deliverable, () => ui.engine.city.deliver(slot.id)), this.action('דילוג', 'city-skip', true, () => ui.engine.city.skip(slot.id)));
         else order.append(node('small', '', slot.state === 'delivered' ? 'המשלוח נשלח' : 'דילגנו על ההזמנה'));
         panel.append(order);
       }

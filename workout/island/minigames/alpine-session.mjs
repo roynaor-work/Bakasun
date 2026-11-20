@@ -304,7 +304,7 @@ export function runAlpineSession(ctx) {
     if (e.objectType === 'ring') { audio.cue('ring'); showCallout('ring', now, 'טבעת', `+${e.value}`); return; }
     audio.cue('power');
     if (e.objectType === 'magnet') { showCallout('power', now, 'מגנט', 'מטבעות וכוכבים נמשכים אליכם'); status.textContent = 'מגנט: מטבעות וכוכבים נמשכים אליכם'; }
-    else { showCallout('power', now, 'מגן', 'הנפילה הבאה לא תפיל'); status.textContent = 'מגן: הנפילה הבאה לא תפיל'; }
+    else { showCallout('power', now, 'מגן', 'המגן מונע את הנפילה הבאה'); status.textContent = 'מגן: מונע את הנפילה הבאה'; }
   }
   let coinPulse = 0;
   function handleEvents(snap, now) {

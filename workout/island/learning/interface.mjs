@@ -1,6 +1,7 @@
 import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-20';
 import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-20';
 import {unpoint} from './questions.mjs?v=island-v2-20261107-20';
+import {correctVoice,retryVoice,pictureRevealVoice,feedbackVoice,roundVoice} from './spoken-copy.mjs?v=island-v2-20261107-20';
 import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-20';
 
 kidUxStyle('027', `
@@ -115,7 +116,7 @@ export class LearningInterface {
     } else {
       dialog.append(el('div','learning-daily-progress',`${s.complete?'✅':'📚'} ${Math.min(s.target,s.rounds)} / ${s.target}`));
       const progress=el('progress');progress.max=s.target;progress.value=Math.min(s.target,s.rounds);progress.setAttribute('aria-label','סבבי לימוד היום');dialog.append(progress);
-      dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד!':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
+      dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
     }
     const choices=el('div','learning-stations');
     for(const [id,station]of Object.entries(STATIONS)){
@@ -129,7 +130,7 @@ export class LearningInterface {
     const label=el('div','learning-parent'),input=button('','learning-required',()=>{this.engine.setLearningRequired(!this.engine.state.learning.required);render();},'learning-small');input.setAttribute('role','switch');input.setAttribute('aria-label','חובת משימת היום לפני משחקים');
     const render=()=>{const required=this.engine.state.learning.required;input.textContent=required?'✓':'○';input.setAttribute('aria-checked',String(required));};render();label.append(input,el('span','','חובת משימת היום לפני משחקים'));dialog.append(label);
     const ages=el('fieldset','learning-age');ages.append(el('legend','','גיל הילד או הילדה'));
-    ages.append(el('p','','בחירת גיל קובעת את רמת ההתחלה בכל התחנות. לאחר מכן הרמה מסתגלת לתשובות.'));
+    ages.append(el('p','','הגיל קובע מאיזו רמה מתחילים בכל תחנה. אחר כך הרמה משתנה לפי התשובות.'));
     for(let age=4;age<=10;age++){const b=button(String(age),'learning-age',()=>{this.engine.setLearningAge(age);for(const n of ages.querySelectorAll('button'))n.setAttribute('aria-pressed',String(Number(n.textContent)===age));},'learning-small');b.dataset.age=age;b.setAttribute('aria-label',`גיל ${age}, רמת התחלה ${levelForAge(age)}`);b.setAttribute('aria-pressed',String(this.engine.state.learning.age===age));ages.append(b);}dialog.append(ages);
   }
   start(station, gameId=null){
@@ -170,7 +171,7 @@ export class LearningInterface {
       this.body.append(this.visualNode=this.visual(q));const answers=el('div','learning-answers');
       q.options.forEach(value=>{const b=button(value,'learning-answer',()=>this.answer(value));b.dataset.value=value;if(q.optionSizes)b.style.fontSize=q.optionSizes[value]+'px';answers.append(b);});this.body.append(answers);
     }else if(q.kind==='word')this.word(q);else if(q.kind==='jigsaw')this.jigsaw(q);else this.memory(q);
-    this.help=button(q.pictureOnly?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.pictureOnly?'💡':q.hint;this.voice.speak(q.hint);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
+    this.help=button(q.pictureOnly?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.pictureOnly?'💡':q.hint;this.voice.speak(q.hintVoice);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
     const instance=this.engine.state.buildings.find(b=>b.typeId===STATIONS[round.station].building);if(instance){const manage=button('🏠','learning-building',()=>{this.ui.closeModal();this.ui.showInfo(instance.id,{manage:true});},'learning-small');manage.setAttribute('aria-label','ניהול מבנה הלימוד');this.footer.append(manage);}
     this.voice.speak(q.voice);queueMicrotask(()=>prompt.focus());
   }
@@ -255,9 +256,11 @@ export class LearningInterface {
   answer(value){
     const round=this.engine.learningRound(),q=round?.question;if(!q)return;const result=this.engine.answerLearning(value);if(!result.ok)return;
     this.feedback.dataset.state=result.correct?'correct':result.resolved?'revealed':'hint';
-    const spoken=result.correct?phrase('⭐ כָּל הַכָּבוֹד! מַמְשִׁיכִים לִלְמֹד.',q):!result.resolved?`${phrase('נְנַסֶּה שׁוּב. ',q)}${result.hint}`:`${phrase('לוֹמְדִים בְּיַחַד. הַתְּשׁוּבָה: ',q)}${['memory','jigsaw'].includes(q.kind)?phrase('הִנֵּה הַתְּמוּנָה הַשְּׁלֵמָה.',q):(q.answerLabel||result.answer)}`;
+    const puzzle=q.kind==='memory'||q.kind==='jigsaw';
+    const display=result.correct?phrase('⭐ '+correctVoice,q):!result.resolved?`${phrase(retryVoice,q)} ${result.hint}`:puzzle?phrase(pictureRevealVoice,q):`${phrase('לוֹמְדִים בְּיַחַד. הַתְּשׁוּבָה: ',q)}${q.answerLabel||result.answer}`;
     if(kidUx('027')&&q.station==='language')this.updateLanguageVoice(q);
-    this.feedback.textContent=q.pictureOnly?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):spoken;this.voice.speak(!result.correct&&result.resolved&&q.pictureOnly?`${phrase('הַתְּשׁוּבָה הִיא: ',q)}${q.answerVoice}`:spoken);
+    this.feedback.textContent=q.pictureOnly?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):display;
+    this.voice.speak(feedbackVoice(q,result));
     if(!result.resolved){if(q.kind==='choice'){const b=[...this.body.querySelectorAll('[data-action=learning-answer]')].find(b=>b.dataset.value===value);if(b)b.disabled=true;}return;}
     if(['memory','jigsaw'].includes(q.kind))this.revealPuzzle?.();
     for(const b of this.body.querySelectorAll('button')){b.disabled=true;if(q.kind==='choice'&&b.dataset.value===q.answer)b.dataset.correct='true';}
@@ -297,7 +300,7 @@ export class LearningInterface {
     } else {
       dialog.append(daily,map);
     }
-    this.voice.speak(`כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.`);
+    this.voice.speak(roundVoice(result));
   }
   dispose(){this.clearQuestion();clearInterval(this.dayTimer);clearInterval(this.clockTimer);this.stopVoiceListener();this.voice.dispose();this.unsubscribe();this.panel.remove();}
 }

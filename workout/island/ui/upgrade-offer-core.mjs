@@ -52,7 +52,7 @@ export function leagueCandidates(league){
   const out=[];if(!league||!league.upgrades)return out;
   for(const [key,spec] of Object.entries(UPGRADES)){
     const level=league.upgrades[key];if(!int(level)||level>=MAX_LEVEL)continue;
-    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המירוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
+    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המרוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
   }
   return out;
 }

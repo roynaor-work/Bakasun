@@ -213,7 +213,7 @@ export function startSoccer(ctx) {
       // Full match: the referee lets play go on after a foul (Law 5); the free kick comes back only if the ball is lost within a few seconds.
       if(event.type==='advantage'){feedback.textContent='יתרון · ממשיכים';feedback.dataset.action='advantage';feedback.hidden=false;feedbackTime=1.6;return;}
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
-      if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial]+'!';feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
+      if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial];feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
       if(!key)return;
       // Ordinary AI touches stay quiet; the selected player's actions get a cue.

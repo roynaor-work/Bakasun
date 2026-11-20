@@ -68,6 +68,8 @@ kidUxStyle('013', `
   .kid-city-stats-more .metrics{gap:6px}
 `);
 
+import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-20';
+
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);
   node.className = className;
@@ -622,7 +624,7 @@ export class IslandInterface {
     const currentLevel = record.levels[instance.level - 1];
     this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
     if (record.id==='cityHall' && this.cityHallTutorialConfirmed) {
-      const confirmed = el('p', 'kid-city-hall-confirmed', '✓ הגעתם לעירייה!');
+      const confirmed = el('p', 'kid-city-hall-confirmed', '✓ הגעתם לעירייה');
       confirmed.setAttribute('role', 'status');
       this.info.append(confirmed);
     }
@@ -855,6 +857,7 @@ export class IslandInterface {
     reset.onclick = () => this.showReset();
     const controls = el('div', 'parent-controls'); controls.append(exportButton, importButton, copy, restart, edit, reset, file);
     modal.append(controls, el('p', '', this.t('parent.importHint')), el('small', '', `${this.t('parent.version')} ${this.engine.state.version}`));
+    appendLoadReports(modal);
     if (this.dev && this.data.featureFlags.devParts) {
       const dev = button(this.t('dev.parts'), 'dev-parts', 'secondary-button');
       dev.onclick = () => { window.islandApi.grantParts(this.data.world.partGroup, this.data.config.devGrantParts); this.toast('dev.granted'); };

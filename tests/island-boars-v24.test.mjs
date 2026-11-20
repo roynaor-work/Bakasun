@@ -110,5 +110,5 @@ test('boars v24: wired into game.js behind ?boarAim=v23, forwarded by the island
   assert.ok(src.indexOf('hold(on){qaHold=!!on;}')>src.indexOf('function installQA(){'),'hold() is part of installQA (only with ?qa)');
   assert.match(session,/if\(aim==='v23'\|\|aim==='axes'\)url\.searchParams\.set\('boarAim',aim\);/);
   assert.ok(offline.shell.includes('minigames/boar-island/aim-v24.mjs'),'offline shell lists aim-v24.mjs');
-  assert.match(src,/AIM_V24\?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק\. ':''/,'the in-game help tells the child');
+  assert.match(src,/AIM_V24\?'כשהכוונת קרובה לחזיר, היא עוזרת לכוון לעיניים שלו\. היא עוקבת אחריו כל עוד האגודל על הג׳ויסטיק\. ':''/,'the in-game help tells the child');
 });

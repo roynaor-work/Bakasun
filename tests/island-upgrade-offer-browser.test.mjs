@@ -73,7 +73,7 @@ test('racing league: a finished race with enough league coins offers a car part 
       window.__island.ui.activityInterface.showResult('islandRacing',undefined,{outcome:'win',score:5,money:0,parts:0,stars:0,stage:1,league:{place:1,points:25,coins:220,seasonDone:false,season:1,race:0,track:'x',laps:4,order:['player','ai-1','ai-2','ai-3','ai-4']}});});
     await t.page.waitForSelector('.uo-card');
     assert.equal(await t.page.locator('.uo-card').count(),1);
-    assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המירוצים/);
+    assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המרוצים/);
     if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/league-offer-390x844.png`});}
     await t.page.locator('.uo-primary').click();
     await t.page.waitForFunction(()=>document.querySelector('.uo-card')?.dataset.state==='purchased');

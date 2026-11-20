@@ -105,23 +105,23 @@ function fakeDocument(){
 test('pit HUD: the button pulses "automatic" from the start of the stop lap and a tap cancels; a hand request can be cancelled too; v24 keeps its button',()=>{
  for(const auto of [true,false]){
   const doc=fakeDocument(),stage=doc.createElement('div'),controls=doc.createElement('div'),calls=[];
-  const ui=createPitUi({stage,controls,document:doc,auto,onRequest:()=>calls.push('request'),onCancel:()=>calls.push('cancel'),onTap:()=>calls.push('tap')});
+  const ui=createPitUi({stage,controls,document:doc,auto,phoneFix:false,onRequest:()=>calls.push('request'),onCancel:()=>calls.push('cancel'),onTap:()=>calls.push('tap')});
   const button=controls.children.find(c=>c.dataset.action==='racing-pit');
   const player={tyre:.9,lap:2,pits:0,pit:null,pitRequest:true,pitAuto:true,pitGo:false};ui.update({player,laps:3,cars:[player]});
   if(auto){assert.equal(button.dataset.state,'auto');assert.match(button.children.at(-1).textContent,/אוטומטי/);assert.match(button.getAttribute('aria-label'),/מבטלת/);
    button.press();assert.deepEqual(calls,['cancel']);
    ui.update({player:{...player,pitGo:true},laps:3,cars:[player]});assert.equal(button.hidden,true,'committed: no button');
    ui.update({player:{...player,pitAuto:false},laps:3,cars:[player]});assert.equal(button.dataset.state,'requested');button.press();assert.deepEqual(calls,['cancel','cancel']);
-   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'הפיטס בוטל');assert.match(ui.toast({car:'player',type:'pitRequest',auto:true}),/אוטומטי/);}
+   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'עצירת הצמיגים בוטלה');assert.match(ui.toast({car:'player',type:'pitRequest',auto:true}),/אוטומטי/);}
   else{assert.equal(button.dataset.state,'requested','v24 shows its automatic stop as a request');button.press();assert.deepEqual(calls,[],'and a tap does nothing, as in v24');
-   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'הפיטס בוטל');assert.equal(ui.toast({car:'player',type:'pitRequest',auto:true}),'בסוף ההקפה: פיטס להחלפת צמיגים');}
+   assert.equal(ui.toast({car:'player',type:'pitCancel'}),'עצירת הצמיגים בוטלה');assert.equal(ui.toast({car:'player',type:'pitRequest',auto:true}),'בסוף ההקפה: עצירת צמיגים להחלפת צמיגים');}
   ui.update({player:{...player,pitRequest:false,pitAuto:false},laps:3,cars:[player]});assert.equal(button.dataset.state,'idle');button.press();assert.equal(calls.at(-1),'request');
  }
 });
 
 test('session, view and style carry v24.1',async()=>{
  const session=await read('minigames/racing-session.mjs');
- assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
+ assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,phoneFix:false,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
  assert.match(session,/pits:!!model\.pit\?\.on\}/,'the view paints the boxes when the model has stops (two-lap races too)');
  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
