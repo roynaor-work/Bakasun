@@ -18,7 +18,10 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   balance=fireScenario(balance,level);
   const crewV9=!polishLegacy('fireTruck')&&polishValue('fireCrew')!=='v8'&&Boolean(balance.crew?.v9);
   const settings=balance.levels[level-1],flames=[];
-  const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1),range=balance.range*(equipment.range||1),aimRadius=balance.aimRadius*(equipment.range||1);
+  const maxWater=(settings.water+(bonuses.fireWater||0))*power*(equipment.tank||1),maxPressure=balance.initialPressure*(equipment.pressure||1);
+  const rangeMultiplier=equipment.range||1;
+  // 20/11/2026: shorter jet (270 -> 210) with the fire levels; `?fireRange=v24` keeps the v24 reach.
+  const range=balance.range*(fireLevels&&polishValue('fireRange')!=='v24'?7/9:1)*rangeMultiplier,aimRadius=balance.aimRadius*rangeMultiplier;
   let water=maxWater,pressure=maxPressure,remaining=settings.seconds+(bonuses.fireTime||0)+balance.startGrace,score=0,out=0,result,reserve=settings.refillWater,time=0,charge=0,eruption=settings.eruptionSeconds,pressureEmpty=false;
   let connection=0,waterUsed=0,waterWasted=0,fireDoneAt=null,acted=false;
   const timeTarget=Math.max(1,remaining-settings.parSeconds),waterTarget=Math.max(1,water+reserve-settings.parWater),aim={x:config.width/2,y:config.height/2},impact={x:aim.x,y:aim.y};

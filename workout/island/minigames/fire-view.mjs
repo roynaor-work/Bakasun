@@ -228,7 +228,9 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   let renderer;
   try{renderer=createRenderer({canvas,antialias:true,alpha:false,powerPreference:'low-power'});}catch{return null;}
   const surface=renderer.domElement||canvas;
-  let world,disposed=false,low=false,failed=false;
+  let world,disposed=false,low=false,failed=false,truckPending=false;
+  // 20/11/2026: `?fireTruckLoad=v24` = the v24 order (built-in truck first, the model swaps in later).
+  const stableTruck=ctx.fireLevels===true&&polishValue('fireTruckLoad')!=='v24';
   const gov={level:2,pinned:/^[012]$/.test(new URLSearchParams(globalThis.location?.search||'').get('fireLevel')||'x'),ema:0,slow:0,gap:0,last:0,changes:0};
   if(gov.pinned)gov.level=Number(new URLSearchParams(globalThis.location.search).get('fireLevel'));
   const onLost=event=>{event.preventDefault();failed=true;dispose();};
@@ -237,15 +239,27 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     renderer.setPixelRatio(r.dpr);renderer.setSize(r.width,r.height,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;if(renderer.shadowMap){renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;}
     world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);if(gov.level!==2)world.setQuality(gov.level);
     if(globalThis.document){
+      const v7Enabled=fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7);
+      const loadMeshy=()=>loadFireTruck(ctx.balance).then(visual=>Boolean(visual&&world.setTruck(visual)));
       const earlier=(skip=null)=>{
-        if(!skip?.truck)void loadFireTruck(ctx.balance).then(visual=>{if(!(visual&&world.setTruck(visual))&&meshyFirst)return world.loadV7Truck();}).catch(()=>{if(meshyFirst)void world.loadV7Truck();});
+        if(disposed)return;
+        if(!stableTruck&&!skip?.truck)void loadMeshy().then(loaded=>{if(!loaded&&meshyFirst)return world.loadV7Truck();}).catch(()=>{if(meshyFirst)void world.loadV7Truck();});
         if(!skip?.hydrant)void world.loadHydrant();
         void world.loadCity(skip);
       };
-      // Fire v7 first; each piece it could not place (blocked file, budget, no Draco) loads from the earlier art instead.
-      // 11/11/2026 (Roy: a regular fire engine, use the Meshy one): the Meshy fire engine is the first choice and the v7 pumper the fallback (`?fireTruckModel=v20` = pumper first).
-      if(fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7)){
-        world.loadV7({skipTruck:meshyFirst}).then(earlier,()=>earlier());
+      // Pick the truck before the first frame. A failed load keeps the built-in
+      // truck for this round. The rest of the city loads independently.
+      if(stableTruck){
+        truckPending=true;
+        const usePumper=v7Enabled&&!meshyFirst;
+        const meshy=usePumper?null:loadMeshy();
+        const cityArt=v7Enabled?world.loadV7({skipTruck:true}):Promise.resolve();
+        const truck=meshy??world.loadV7Truck();
+        void truck.catch(()=>false).finally(()=>{truckPending=false;});
+        void cityArt.then(earlier,()=>earlier());
+      }else if(v7Enabled){
+        // The original path draws the built-in truck until the art arrives.
+        void world.loadV7({skipTruck:meshyFirst}).then(earlier,()=>earlier());
       }else earlier();
     }
   }catch{failed=true;dispose();return null;}
@@ -259,9 +273,9 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
   }
   const pointer=new T.Vector2(),ray=new T.Raycaster(),ground=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3(),point=new T.Vector3(),screen={x:0,y:0};
   const devMode=new URLSearchParams(globalThis.location?.search||'').get('dev')==='1';
-  const view={get mode(){return failed?'canvas':'three';},get world(){return devMode&&!disposed?world:null;},
-    metrics(){return {...world.metrics(),low,avatarLoaded:world.cityMetrics().firefighterLoaded,avatarPosition:model.firefighter.visible?{x:model.firefighter.x,y:0,z:model.firefighter.z}:null,ladder:{stowed:model.ladder.extension===0,extension:model.ladder.extension,sway:model.ladder.sway,mode:model.ladder.mode},city:world.cityMetrics(),fireV7:{enabled:fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7),level:gov.level,pinned:gov.pinned,governorSteps:gov.changes,...(world.v7Metrics()||{}),effects:world.effectsMetrics()},rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
-    capturePreview({hero=false}={}){if(disposed)return null;world.animate();const camera=hero?world.camera.clone():world.camera;if(hero){camera.position.x+=3;camera.position.z-=1;camera.zoom*=1.85;camera.updateProjectionMatrix();camera.updateMatrixWorld();}renderer.render(world.scene,camera);return surface.toDataURL('image/png');},
+  const view={get mode(){return failed?'canvas':'three';},get world(){return devMode&&!disposed?world:null;},get ready(){return failed||!truckPending;},
+    metrics(){return {...world.metrics(),low,avatarLoaded:world.cityMetrics().firefighterLoaded,avatarPosition:model.firefighter.visible?{x:model.firefighter.x,y:0,z:model.firefighter.z}:null,ladder:{stowed:model.ladder.extension===0,extension:model.ladder.extension,sway:model.ladder.sway,mode:model.ladder.mode},city:world.cityMetrics(),fireV7:{enabled:fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7),level:gov.level,pinned:gov.pinned,governorSteps:gov.changes,...(world.v7Metrics()||{}),effects:world.effectsMetrics()},rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:{...world.truckMetrics(),pending:truckPending&&!failed},hydrant:world.hydrantMetrics()};},
+    capturePreview({hero=false}={}){if(disposed||truckPending)return null;world.animate();const camera=hero?world.camera.clone():world.camera;if(hero){camera.position.x+=3;camera.position.z-=1;camera.zoom*=1.85;camera.updateProjectionMatrix();camera.updateMatrixWorld();}renderer.render(world.scene,camera);return surface.toDataURL('image/png');},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);}},dispose,
     resize(w=ctx.config.width,h=ctx.config.height){if(disposed)return;renderer.setSize(w*(low?r.resolutionScale:1),h*(low?r.resolutionScale:1),false);world.resize(w,h);},
     projectTarget(x,y){if(disposed)return null;world.worldPoint(x,y,point);world.project(point,screen);return {x:screen.x,y:screen.y};},
@@ -282,6 +296,7 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     },
     draw(p){
       if(disposed||failed)return false;
+      if(truckPending)return true;
       try{
         governor();
         world.animate();
