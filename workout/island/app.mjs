@@ -33,7 +33,9 @@ try {
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
   const cityPreview = previewMode();
   if (cityPreview) storage = readOnlyStorage(storage);
-  const engine = createEngine(data, { storage });
+  const learningV2 = new URLSearchParams(location.search).get('learningV2') === '0' ? null
+    : await import('./assets/learning-v2/src/integration.mjs?v=island-v2-20261107-20').catch(() => null);
+  const engine = createEngine(data, { storage, installLearningV2: learningV2?.installLearningV2 });
   let ui;
   const view = new IslandView({
     canvas: document.querySelector('#world'), data: { ...data, registry: engine.registry },
@@ -47,10 +49,18 @@ try {
   splash.end();
   if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
   const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
-  const learning=new LearningInterface({ui,engine});
+  const Learning = learningV2?.LearningV2Interface ?? LearningInterface;
+  const learning=new Learning({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   const cityAccess=new CityAccess({ui,engine,games,learning});
   ui.cityAccess=cityAccess;
+  if (!cityPreview && new URLSearchParams(location.search).get('progressBoard') !== '0') {
+    const progress = import('./assets/progress-board-v1/src/integration.mjs?v=island-v2-20261107-20')
+      .then(({connectIsland}) => connectIsland({ui, cityAccess, games})).catch(() => null);
+    games.onProgressResult = (result, target) => {
+      void progress.then(board => board?.record(result, target));
+    };
+  }
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});

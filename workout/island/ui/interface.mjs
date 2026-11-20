@@ -456,7 +456,13 @@ export class IslandInterface {
     const { x, z } = this.currentGhost;
     const before = this.engine.state.tutorial.step;
     const zoning=Boolean(this.zoneKind);
+    if (!zoning && !this.movingId && this.learningInterface?.beforeBuild?.(
+      { typeId: this.selected, x, z }, result => this.finishPlacement(result, before, false),
+    )) return;
     const result = zoning?this.engine.zone(this.zoneKind,x,z):this.movingId ? this.engine.move(this.movingId, x, z) : this.engine.place(this.selected, x, z);
+    this.finishPlacement(result, before, zoning);
+  }
+  finishPlacement(result, before, zoning) {
     if (result.ok) {
       if(zoning){this.zoneSessionCount++;this.updateGhost(this.findCell(this.selected),false);this.placeButton.focus();return;}
       this.cancelPlacement();
@@ -494,7 +500,7 @@ export class IslandInterface {
   currentInfoSignature() {
     const state = this.engine.state;
     const instance=state.buildings.find(row=>row.id===this.infoId);
-    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
+    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics(),this.engine.learningV2?.age()>=6]:null,this.engine.learningStatus().locked]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
@@ -524,6 +530,7 @@ export class IslandInterface {
     if (record.capacity) effects.append(el('span', '', `${this.t('app.capacity')} ${summary ? summary.capacity.toLocaleString('he-IL') : amount(record.capacity)}`));
     if (!effects.children.length) effects.append(el('span', '', this.t('app.explore')));
     const actions = el('div', 'info-actions');
+    if (record.id === 'cityHall') this.learningInterface?.addCityHallActivity?.(actions);
     const upgradeStatus = cityBuilding?.upgrade ?? upgradeAvailability(this.engine.state, this.engine.registry, instance.id);
     const nextLevel = upgradeStatus.nextLevel;
     const upgrade = button('', 'upgrade', 'primary-button');

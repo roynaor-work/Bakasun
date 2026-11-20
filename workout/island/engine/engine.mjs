@@ -195,6 +195,8 @@ export function createEngine(data, options = {}) {
   const placeBuilding = (typeId, x, z, automatic=false) => {
     const validation = check(typeId, x, z);
     if (!validation.ok) return validation;
+    const learningAccess = engine.learningV2?.access(typeId, x, z, automatic);
+    if (learningAccess && !learningAccess.ok) return learningAccess;
     const type = registry.buildings.get(typeId);
     let id;
     do { id = `building-${state.nextId++}`; } while (state.buildings.some(row => row.id === id));
@@ -203,9 +205,13 @@ export function createEngine(data, options = {}) {
     state.buildings.push(building);
     if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
     const reward = onPlaced(typeId);
-    if(!automatic)changed('place', { id, reward });
+    const pendingLearningReward = learningAccess?.reward;
+    const learningReward = pendingLearningReward && grantReward(pendingLearningReward.id, pendingLearningReward)
+      ? pendingLearningReward.money : 0;
+    const learningResult = learningReward ? { learningReward } : {};
+    if(!automatic)changed('place', { id, reward, ...learningResult });
     if (reward) narration.announce(reward.title, { reward: reward.reward });
-    return { ok: true, reason: 'reason.placed', id, reward };
+    return { ok: true, reason: 'reason.placed', id, reward, ...learningResult };
   };
   engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
   engine.buildReadyPlot = id => {
@@ -538,6 +544,7 @@ export function createEngine(data, options = {}) {
   };
   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
   installLearning(engine,changed);
+  if (options.installLearningV2) engine.learningV2 = options.installLearningV2(engine, { changed });
   installCity(engine,{changed,notify,remember});
   return engine;
 }
