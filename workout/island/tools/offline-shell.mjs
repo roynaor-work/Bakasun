@@ -43,6 +43,11 @@ export async function buildShell(base=root){
   // scan cannot see them: every data file is part of the shell.
   for(const name of await readdir(path.join(base,'data')).catch(()=>[]))if(/\.json$/.test(name))seen.add('data/'+name);
   for(const name of await readdir(path.join(base,'episodes')).catch(()=>[]))if(/\.json$/.test(name))seen.add('episodes/'+name);
+  // Learning bank and progress board (v24.7): their data and art live under assets/ next to their code,
+  // which the scan treats as game packs. They belong to the shell whenever their module is reachable.
+  const walk=async dir=>{const out=[];for(const e of await readdir(path.join(base,dir),{withFileTypes:true}).catch(()=>[]))out.push(...(e.isDirectory()?await walk(dir+'/'+e.name):[dir+'/'+e.name]));return out;};
+  for(const [module,dir,kind] of [['assets/learning-v2/src/integration.mjs','assets/learning-v2/data',/\.json$/],['assets/progress-board-v1/src/integration.mjs','assets/progress-board-v1/art',/\.svg$/]])
+    if(seen.has(module))for(const file of await walk(dir))if(kind.test(file))seen.add(file);
   return ['',...[...seen].sort()];
 }
 /** Hex prefix (16 chars = 64 bits) of the SHA-256 of a file: enough to tell "changed"

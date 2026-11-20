@@ -35,11 +35,11 @@ try {
   const cityPreview = previewMode();
   const query = new URLSearchParams(location.search);
   // City packages (v24.7). Each one is optional: a failed load or its URL flag leaves the older city.
-  // ?cityMissions=0 brings back the older missions and events; ?cityProgression=0 (or ?cityProgress=0) the ordinary city save.
+  // ?cityMissions=0 brings back the older missions and events; ?cityProgression=1 turns the staged city on (opt-in: it forks the save into its own copy).
   const optional = (on, load) => on ? load().catch(error => { console.warn(error); return undefined; }) : undefined;
   const missions = optional(!cityPreview && query.get('cityMissions') !== '0',
     () => import('./assets/city-missions-v1/runtime.mjs?v=island-v2-20261107-20'));
-  const progression = optional(!cityPreview && query.get('cityProgression') !== '0' && query.get('cityProgress') !== '0',
+  const progression = optional(!cityPreview && (query.get('cityProgression') === '1' || query.get('cityProgress') === '1'),
     () => import('./assets/city-progression-v1/island-adapter.mjs?v=island-v2-20261107-20'));
   const [data, missionsModule, cityProgress] = await Promise.all([loadData(), missions, progression]);
   let createCityMissions;
@@ -49,8 +49,10 @@ try {
   let storage;
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
   if (cityPreview) storage = readOnlyStorage(storage);
+  const learningV2 = query.get('learningV2') === '0' ? null
+    : await import('./assets/learning-v2/src/integration.mjs?v=island-v2-20261107-20').catch(() => null);
   if (cityProgress) storage = cityProgress.cityProgressStorage(storage);
-  const engine = createEngine(data, { storage, createCityMissions });
+  const engine = createEngine(data, { storage, createCityMissions, installLearningV2: learningV2?.installLearningV2 });
   let ui;
   const view = new IslandView({
     canvas: document.querySelector('#world'), data: { ...data, registry: engine.registry },
@@ -64,11 +66,19 @@ try {
   splash.end();
   if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
   const activity=createActivity(engine,{scheduling:!engine.cityMissions,blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
-  const learning=new LearningInterface({ui,engine});
+  const Learning = learningV2?.LearningV2Interface ?? LearningInterface;
+  const learning=new Learning({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   const cityAccess=new CityAccess({ui,engine,games,learning});
   ui.cityAccess=cityAccess;
   const stopCityMissions=engine.cityMissions?.announceRewards(ui);
+  if (!cityPreview && query.get('progressBoard') !== '0') {
+    const progress = import('./assets/progress-board-v1/src/integration.mjs?v=island-v2-20261107-20')
+      .then(({connectIsland}) => connectIsland({ui, cityAccess, games})).catch(() => null);
+    games.onProgressResult = (result, target) => {
+      void progress.then(board => board?.record(result, target));
+    };
+  }
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});

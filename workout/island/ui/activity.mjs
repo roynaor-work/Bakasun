@@ -408,6 +408,9 @@ export class ActivityInterface {
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
+    // Progress board (assets/progress-board-v1, `?progressBoard=0` leaves this hook unset): one record per finished run the child really played.
+    const progressRun=this.onProgressResult?{runId:globalThis.crypto?.randomUUID?.()??`${this.now()}-${Math.random().toString(36).slice(2)}`,played:false}:null;
+    if(progressRun){const remember=event=>{if(event.isTrusted)progressRun.played=true;};stage.addEventListener('pointerdown',remember,{passive:true});controls.addEventListener('pointerdown',remember,{passive:true});canvas.addEventListener('keydown',event=>{if(!['Tab','Escape'].includes(event.key))remember(event);});}
     if(rescue.lite||isLowQuality())context.lite=true;
     if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1}${next.total?` מתוך ${next.total}`:''} · ${next.track}${next.tags?.length?' · '+next.tags.join(' · '):''}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
     // Ski league (v23): league stage n runs as game stage 3 + n; the engine builds the run from the league, not from the stage map.
@@ -418,8 +421,10 @@ export class ActivityInterface {
         this.current=null;
         this.shell?.dispose();this.shell=null;
         if(result.cancelled){if(!this.closing)this.ui.closeModal();return;}
-        if(eventId)this.activity.resolve(eventId,result);
+        const fireCall=progressRun&&eventId&&this.engine.state.events.active?.id===eventId&&this.engine.state.events.active.typeId==='fire';
+        const resolved=eventId?this.activity.resolve(eventId,result):null;
         this.showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary);
+        if(progressRun)this.onProgressResult({...progressRun,gameId:id,eventId,result,fireSummary,at:this.now(),resolvedFireEvent:Boolean(fireCall&&resolved?.ok),drillAttempts:this.data.config.minigames.soccer.training.drillAttempts,tennisDifficulty:this.engine.state.tennisDifficulty,equipmentLevel:context.upgradeLevel,hoopsProfile:this.engine.state.hoops?.profile},this.progressTarget(id,result));
       }
     });
     if(!response.ok){this.ui.closeModal();this.ui.result(response);return;}
@@ -447,6 +452,11 @@ export class ActivityInterface {
   outdoorPrompt(dialog){
     const phrases=this.data.config.minigames.soccer.training.outdoorMessages,index=this.engine.state.soccerRoster.training.completed+(this.engine.state.minigameWins.soccer||0);
     dialog.append(el('p','soccer-outdoor-message',this.t(phrases[(index||0)%phrases.length])),button(this.t('soccer.practice.outdoor'),'soccer-outdoor',()=>{const r=this.engine.soccerOutdoorPractice();this.ui.toast(r.ok?'soccer.practice.outdoorThanks':r.reason);dialog.querySelector('[data-action=soccer-outdoor]').disabled=true;}));
+  }
+  /** The dialog that shows a finished result, where the progress board puts its ribbon (league screens open once their module has loaded). */
+  progressTarget(id,result){
+    const dialog=()=>this.ui.modalRoot.querySelector('.modal'),pending=id==='islandRacing'&&result.league?this.leagueLoad:id==='alpineRush'&&result.alpineLeague?this.alpineLeagueLoad:null;
+    return pending?pending.then(dialog,()=>null):dialog();
   }
   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
     if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}

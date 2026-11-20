@@ -46,12 +46,18 @@ export class ReadyPlotsInterface{
     const title=node('h3','ready-plot-name',`${type.icon} ${ui.label(type,'building')}`),detail=node('p','ready-plot-number',ui.t('ready.plotNumber',{number:row.number}));
     const price=node('strong','ready-plot-price'),status=node('p','ready-plot-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
     const actions=node('div','ready-plot-actions');let committed=false;
+    const finish=result=>{
+      if(result.ok){this.refresh();if(result.id)ui.view.highlightCityBuildings?.([result.id]);}
+      else{committed=false;ui.result(result);this.refresh();}
+    };
     const confirm=button('','ready-plot-build',()=>{
       if(committed)return;
       const current=ui.engine.readyPlots().find(row=>row.id===id);if(!plotCanBuild(current)){this.refresh();return;}
-      committed=true;confirm.disabled=true;const result=ui.engine.buildReadyPlot(id);
-      if(result.ok){ui.closeModal();this.refresh();if(result.id)ui.view.highlightCityBuildings?.([result.id]);}
-      else{committed=false;ui.result(result);this.refresh();}
+      committed=true;confirm.disabled=true;
+      if(ui.learningInterface?.beforeBuild?.({typeId:current.typeId,x:current.x,z:current.z,plotId:id},finish))return;
+      const result=ui.engine.buildReadyPlot(id);
+      if(result.ok)ui.closeModal();
+      finish(result);
     },'primary-button');
     const cancel=button(ui.t('app.cancel'),'ready-plot-cancel',()=>ui.closeModal());actions.append(confirm,cancel);
     modal.append(title,detail,price,status,actions);

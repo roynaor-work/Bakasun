@@ -6,7 +6,7 @@ import { refreshVideos, refreshCloud, cloudUpload, setVideoFamily, cloudVideos, 
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
 import { RoyikiStage, hasRoyiki } from './royiki.js?v=20261010-camera-1';
 import { store } from './store.js?v=20261014-w2g-1';
-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261014-w2g-1';
+import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor, workoutReward } from './logic.js?v=20261014-w2g-1';
 import { beltCard } from './belts.js?v=20261014-w2g-1';
 import { companionCard, companionKit } from './companion.js?v=20261010-camera-1';
 import { restProgress, restCard, restBadges } from './rest-days.js?v=20261014-w2g-1';
@@ -23,7 +23,7 @@ import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.
 import { playIntro } from './intro.js?v=20261010-camera-1';
 import { createVoiceCopy, ageBand, voiceCopyEnabled } from './voice-copy.js?v=20261010-camera-1';
 import { legacyPrivacy } from './privacy-flag.js?v=20261010-camera-1';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, speakLocal, SAY_UI } from './speech.js?v=20261014-w2g-1';
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
@@ -33,6 +33,15 @@ import { cameraScreen } from './camera-screen.mjs?v=20261014-w2g-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
+const workoutBoardEnabled = new URLSearchParams(location.search).get('progressBoard') !== '0';
+let workoutBoard;
+const workoutProgress = () => workoutBoard ??= import('../island/assets/progress-board-v1/src/integration.mjs?v=20261010-camera-1')
+  .then(({connectWorkout}) => connectWorkout({
+    speak: speakLocal,
+    profileAge: () => store.profile.age,
+    voiceEnabled: () => store.profile.voice !== false,
+  }))
+  .catch(() => { workoutBoard = null; return null; });
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const go = h => { location.hash = h; };
 const plan = () => normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
@@ -215,12 +224,13 @@ function confetti() {
 
 // ---- ניתוב ----
 const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
+if (workoutBoardEnabled) routes.progress = progressScreen;
 function route() {
   if (setVideoFamily(store.profile.familyCode) && store.profile.familyCode) refreshCloud(store.profile.familyCode).then(softRoute);
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
-  renderNav(path);
+  renderNav(workoutBoardEnabled && path === 'progress' ? 'history' : path);
   const reminder = dadTestReminder(store.parent.dadTestDate);
   if (!lastDadReminder && reminder && !['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) {
     lastDadReminder = reminder.key;
@@ -822,9 +832,14 @@ function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { second
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
+  const progressRun = workoutBoardEnabled ? uid() : null;
   activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, recording: playVoiceRecording, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
+    onRoundResult: progressRun ? (result, target) => {
+      const input = {runId: progressRun, gameId: g.id, label: g.name, seconds: secs, result, at: Date.now()};
+      void workoutProgress().then(board => board?.recordArcade(input, target));
+    } : undefined,
     onEnd({ score }) { store.recordGame(g.id, score, false, g.cost || 1); activeGame = null; onDone(score); } });
 }
 
@@ -981,6 +996,11 @@ function donePhase() {
   </div>`, false);
   wireCompanion(st.workouts);
   wireOutdoor(s);
+  if (workoutBoardEnabled) {
+    const target = app.querySelector('.stack');
+    const summary = {stars: workoutReward(s.items).stars, label: workoutName(s)};
+    void workoutProgress().then(board => board?.recordWorkout(s, summary, target));
+  }
   // mount עוצר הקראה קודמת. המשפט החדש נאמר אחרי שמסך הסיום מוצג.
   if (testSuccess) speak(voiceText('dad-test-success'));
   else speak(FRAGMENTS['companion-upgraded']);
@@ -999,6 +1019,22 @@ function quit() {
 }
 
 // ---- מעקב ----
+function progressScreen() {
+  mount(`<div class="stack">
+    <button class="btn big" data-go="#/history">חזרה למעקב</button>
+    <div id="workout-progress-board" role="status">הלוח נטען</div>
+  </div>`);
+  const target = app.querySelector('#workout-progress-board');
+  void workoutProgress().then(board => {
+    if (board && target.isConnected) {
+      target.removeAttribute('role');
+      void board.mount(target);
+    } else if (target.isConnected) {
+      target.textContent = 'הלוח לא נטען. אפשר לפתוח אותו מחדש.';
+    }
+  });
+}
+
 function history() {
   const st = stats(store.sessions);
   const rest = restProgress(store.sessions);
@@ -1009,6 +1045,7 @@ function history() {
   mount(`
   <div class="stack">
     <h1>המעקב שלי 📈</h1>
+    ${workoutBoardEnabled ? '<button class="btn primary big" data-go="#/progress">ההתקדמות שלי</button>' : ''}
     ${beltCard(st.workouts)}
     ${companionCard(st.workouts)}
     ${restCard(rest)}
