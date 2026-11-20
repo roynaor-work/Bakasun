@@ -24,7 +24,7 @@ export function installCity(engine, {changed, notify, remember}) {
   function offer() {
     if (!report().port.canOffer) return fail('port-unavailable');
     return transaction('city-port', () => {
-      const port = state.city.port, harbor = [...state.buildings].sort((a,b) => a.id.localeCompare(b.id, 'en')).find(b => b.typeId === 'harbor' && !(state.events.repairs[b.id] > state.updatedAt));
+      const port = state.city.port, harbor = [...state.buildings].sort((a,b) => a.id.localeCompare(b.id, 'en')).find(b => b.typeId === 'harbor' && registry.cityProgress?.isOperational(state, b.id) !== false && !(state.events.repairs[b.id] > state.updatedAt));
       port.slots = Array.from({length: config.port.slots}, (_, index) => ({...config.port.orders[(port.cycle * config.port.slots + index) % config.port.orders.length], id: `order-${port.cycle}-${index}`, harborId: harbor.id, state: 'offered'}));
       port.cycle++; port.readyAt = state.playSeconds + config.port.cooldownSeconds;
     });

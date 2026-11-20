@@ -6,7 +6,9 @@ export function placementAvailability(state, registry, typeId) {
   const type = registry.buildings.get(typeId);
   if (!type) return { ok: false, reason: 'reason.invalid' };
   if((state.world.stage||0)<(type.minWorldStage||0))return {ok:false,reason:'reason.futureDistrict'};
-  if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter))return {ok:false,reason:'reason.learningOrder'};
+  if(type.unlockAfter&&!state.buildings.some(b=>b.typeId===type.unlockAfter && registry.cityProgress?.isOperational(state, b.id) !== false))return {ok:false,reason:'reason.learningOrder'};
+  const progression = registry.cityProgress?.availability(state, registry, typeId);
+  if (progression && !progression.ok) return progression;
   const limit = type.limit;
   if (!limit || limit.kind === 'free') return { ok: true, reason: 'reason.allowed' };
   const stage = state.world.stage ?? 0;
@@ -32,6 +34,8 @@ export function upgradeAvailability(state, registry, id) {
   const nextLevel = type.levels[building.level];
   if (!nextLevel) return { ok: false, reason: 'reason.maxLevel' };
   if (building.level >= type.maxLevelByStage?.[state.world.stage]) return { ok: false, reason: 'reason.stageLevel', nextLevel };
+  const progression = registry.cityProgress?.upgradeAvailability(state, registry, id);
+  if (progression && !progression.ok) return {...progression, nextLevel};
   if (state.money < nextLevel.cost) return { ok: false, reason: 'reason.money', nextLevel };
   return { ok: true, reason: 'reason.allowed', nextLevel };
 }

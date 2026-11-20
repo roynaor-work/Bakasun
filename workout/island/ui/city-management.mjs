@@ -43,7 +43,10 @@ export class CityManagementInterface{
     this.growthNotice=node('aside','city-growth-notice panel');this.growthNotice.hidden=true;this.growthNotice.setAttribute('role','status');this.growthNotice.setAttribute('aria-live','polite');ui.root.append(this.growthNotice);
     this.overlayUnsubscribe=this.engine.subscribe(()=>{if(this.overlay)this.updateOverlay();this.updatePulse();});this.updatePulse();
   }
-  addEntry(parent){parent.append(button(this.t('city.open'),'city-management',()=>this.open(kidUx('014')?'kid':'blueprint'),'primary-button city-management-entry'));}
+  addEntry(parent){
+    parent.append(button(this.t('city.open'),'city-management',()=>this.open(kidUx('014')?'kid':'blueprint'),'primary-button city-management-entry'));
+    if (this.engine.cityMissions) parent.append(this.engine.cityMissions.createEntry(this.ui));
+  }
   open(tab='overview'){
     const {ui,engine,t}=this;ui.cancelPlacement();ui.closeInfo();
     const modal=ui.openModal('city.title','city.subtitle',{blocking:false});modal.classList.add('city-management-modal');modal.parentElement.classList.add('city-planning-overlay');ui.root.dataset.cityPlanning='true';this.panel=modal;

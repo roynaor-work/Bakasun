@@ -38,4 +38,4 @@ export function installPressFeedback({target=document,onFrame=()=>{},compatibili
   return ()=>{abort.abort();for(const {node}of pressed.values())delete node.dataset.pressed;pressed.clear();};
 }
 
-export function nativeShellAction(action){return ['stage-play','game-understood','soccer-drill','game-again','game-next-stage','event-play','shell-install'].includes(action);}
+export function nativeShellAction(action){return ['stage-play','game-understood','soccer-drill','game-again','game-next-stage','event-play','city-mission-go','shell-install'].includes(action);}

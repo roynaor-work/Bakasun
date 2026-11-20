@@ -110,7 +110,13 @@ export class IslandInterface {
     this.cityInterface = engine.city ? new CityDepthInterface(this) : null;
     this.cityManagement=new CityManagementInterface(this);
     this.cityManagement.addEntry(this.cityDetails);
-    this.unsubscribe = engine.subscribe((state,event) => {if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;this.refresh();if(event.developed?.length)this.cityManagement.onGrowth(event.developed);});
+    this.unsubscribe = engine.subscribe((state,event) => {
+      if(event.type==='tutorial'&&state.tutorial.step===0&&!state.tutorial.skipped)this.cityHallIntro=true;
+      this.refresh();
+      if(event.developed?.length)this.cityManagement.onGrowth(event.developed);
+      const completed = event.progressEvents?.filter(result => result.stage === 'complete').map(result => result.id);
+      if (completed?.length) this.view.highlightCityBuildings?.(completed);
+    });
     this.refresh();
     if (!engine.state.avatar.created) this.showAvatar();
   }
@@ -313,7 +319,14 @@ export class IslandInterface {
     this.catalogHint.hidden = !open;
     if (open) {this.view.setTour?.(false);this.closeDetails();this.closeInfo();this.setMoreOpen(false);}
   }
-  drawCityToggle(money){this.cityToggle.replaceChildren(compactStat('●',Math.floor(money).toLocaleString('he-IL'),this.t('app.money')));this.cityToggle.setAttribute('aria-label',`${this.t('app.city')} · ${Math.floor(money).toLocaleString('he-IL')} ${this.t('app.money')}`);}
+  drawCityToggle(money, progression) {
+    const amount = Math.floor(money).toLocaleString('he-IL');
+    const label = `${this.t('app.city')} · ${amount} ${this.t('app.money')}`;
+    this.cityToggle.replaceChildren(compactStat('●', amount, this.t('app.money')));
+    const day = progression ? this.t('progress.currentDay', {day: progression.day}) : '';
+    if (progression) this.cityToggle.append(compactStat('☀', String(progression.day), day));
+    this.cityToggle.setAttribute('aria-label', day ? `${label} · ${day}` : label);
+  }
   syncPlacementLayout() {
     this.dock.dataset.placing = String(Boolean(this.selected));
     if (this.selected) { this.closeDetails(); this.setDockOpen(false); }
@@ -323,7 +336,7 @@ export class IslandInterface {
     this.view.setWorld(s);
     this.readyPlots?.refresh();
     this.view.setCityReport?.(this.engine.city?.report(), this.infoId);
-    const activeStep = this.tutorialStep() ?? this.engine.nextObjective?.();
+    const activeStep = this.guidedObjective();
     if (activeStep && this.activeStepId !== activeStep.id) {
       this.activeStepId = activeStep.id;
       if (activeStep.buildType) this.category = this.getBuilding(activeStep.buildType).category;
@@ -335,7 +348,15 @@ export class IslandInterface {
     const population = this.engine.population?.() ?? s.buildings.reduce((sum, b) => sum + (this.getBuilding(b.typeId)?.population ?? 0) * b.level, 0);
     const pop = el('div', 'population', `♟ ${Math.round(population)} ${this.t('app.population')}`);
     this.wallet.append(money, pop);
-    this.drawCityToggle(s.money);
+    const progression = this.engine.cityProgress?.();
+    if (progression) {
+      const status = el('small', 'city-progress-status', this.t('progress.currentDay', {day: progression.day}));
+      status.dataset.cityProgress = String(progression.day);
+      const satisfaction = this.t('progress.satisfaction', {value: Math.round(progression.satisfaction)});
+      status.textContent += ` · ${satisfaction}`;
+      this.wallet.append(status);
+    }
+    this.drawCityToggle(s.money, progression);
     this.metricsNode.replaceChildren();
     this.extendedMetrics?.replaceChildren();
     const values = this.engine.metrics();
@@ -369,8 +390,16 @@ export class IslandInterface {
     if (this.infoId && this.infoSignature !== this.currentInfoSignature()) this.drawInfo();
     this.updateCatalogState();
   }
+  guidedObjective() {
+    return this.tutorialStep() ?? (this.engine.cityMissions?.ready()
+      ? this.engine.cityMissions.buildObjective() : this.engine.nextObjective?.());
+  }
   drawMission() {
     const step = this.tutorialStep();
+    if (!step && this.engine.cityMissions?.ready()) {
+      this.engine.cityMissions.render(this);
+      return;
+    }
     if(step&&this.engine.state.tutorial.step===0&&this.cityHallIntro){
       if(this.missionSignature==='cityHallIntro')return;
       this.missionSignature='cityHallIntro';
@@ -448,6 +477,8 @@ export class IslandInterface {
       const b = button('', 'select-building', 'building-card');
       b.dataset.building = building.id;
       b.append(el('span', 'building-icon', building.icon), el('strong', '', this.label(building, 'building')), el('span', 'building-cost', building.locked ? `🔒 ${this.t('app.locked')}` : `● ${building.cost}`));
+      const goods = this.data.cityProgress?.costText(building.id, this.t);
+      if (goods) b.append(el('small', 'building-cost', goods));
       b.append(el('span', 'building-hint'));
       b.onclick = () => this.selectBuilding(building.id);
       this.catalog.append(b);
@@ -455,7 +486,7 @@ export class IslandInterface {
     this.updateCatalogState();
   }
   updateCatalogState() {
-    const step = this.tutorialStep() ?? this.engine.nextObjective?.();
+    const step = this.guidedObjective();
     for (const b of this.categories.children) {
       b.setAttribute('aria-current', String(b.dataset.category === this.category));
       const required = step && this.getBuilding(step.buildType)?.category === b.dataset.category;
@@ -469,15 +500,16 @@ export class IslandInterface {
       b.setAttribute('aria-pressed', String(b.dataset.building === this.selected));
       const availability = placementAvailability(this.engine.state, this.engine.registry, record.id);
       const noSpace=record.id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
-      if(['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
+      const progressionLocked = !availability.ok && (availability.reason?.startsWith('progress.') || (record.cityProgressAsset && availability.reason === 'reason.money'));
+      if(progressionLocked || ['reason.learningOrder','reason.futureDistrict'].includes(availability.reason))b.classList.add('locked');
       const hint = b.querySelector('.building-hint');
-      const label = noSpace || (record.locked ? null : !availability.ok ? availability.reason==='reason.futureDistrict' ? availability.reason : record.limit.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null);
-      hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?this.t(label):'';
+      const label = noSpace || (record.locked ? null : !availability.ok ? progressionLocked || availability.reason==='reason.futureDistrict' ? availability.reason : record.limit?.kind === 'capacity' && availability.reason === record.limit.reason ? 'app.noNeed' : 'app.atLimit' : availability.recommended ? 'app.recommended' : null);
+      hint.textContent = availability.reason==='reason.learningOrder'?`${this.t('reason.learningOrder')}: ${this.label(this.getBuilding(record.unlockAfter),'building')}`:label?(progressionLocked ? this.data.cityProgress.gateText(availability, this.t) : this.t(label)):'';
       if (!record.locked && !availability.ok && availability.reason!=='reason.learningOrder' && record.limit.kind === 'unique' && record.levels.length>1) hint.textContent += ` · ${this.t('app.upgradeExisting')}`;
       hint.hidden = !label;
       b.dataset.limit = record.limit?.kind ?? 'free';
       b.dataset.availability = noSpace?'no-space':!availability.ok ? 'limited' : availability.recommended ? 'recommended' : 'available';
-      b.title = noSpace?this.t(noSpace):!record.locked && !availability.ok ? this.t(availability.reason) : '';
+      b.title = noSpace?this.t(noSpace):!record.locked && !availability.ok ? progressionLocked ? hint.textContent : this.t(availability.reason) : '';
     }
   }
   selectBuilding(id,{manual=false}={}) {
@@ -487,8 +519,8 @@ export class IslandInterface {
     const noSpace=id==='airport'?airportSpaceReason(this.engine.state,this.engine.registry,this.data.featureFlags):null;
     if(noSpace){this.toast(noSpace);return;}
     const availability=placementAvailability(this.engine.state,this.engine.registry,id);
-    if(availability.reason==='reason.futureDistrict'){this.toast(availability.reason);return;}
-    if(this.readyPlots?.active&&!manual){this.category=building.category;this.readyPlots.chooseType(id);return;}
+    if(availability.reason==='reason.futureDistrict'||(!availability.ok&&availability.reason?.startsWith('progress.'))){this.toast(availability.reason);return;}
+    if(this.readyPlots?.active&&!manual){this.category=building.category;if(this.readyPlots.chooseType(id))return;}
     if (building.locked) { this.toast('reason.locked'); return; }
     if(availability.reason==='reason.learningOrder'){this.toast('reason.learningOrder');return;}
     this.closeInfo();
@@ -606,7 +638,8 @@ export class IslandInterface {
   currentInfoSignature() {
     const state = this.engine.state;
     const instance=state.buildings.find(row=>row.id===this.infoId);
-    return JSON.stringify([instance, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
+    const project = this.engine.cityProgress?.()?.projects.find(row => row.id === this.infoId);
+    return JSON.stringify([instance, project?.stage, project?.remainingSeconds, this.engine.city?.report(), state.events?.repairs?.[this.infoId], state.world.stage, this.engine.population(), upgradeAvailability(state, this.engine.registry, this.infoId).reason,instance?.typeId==='cityHall'?[state.team,this.engine.metrics()]:null,this.engine.learningStatus().locked]);
   }
   drawInfo() {
     const instance = this.engine.state.buildings.find(b => b.id === this.infoId);
@@ -629,6 +662,13 @@ export class IslandInterface {
       this.info.append(confirmed);
     }
     const effects = el('div', 'info-effects');
+    const project = this.engine.cityProgress?.()?.projects.find(row => row.id === instance.id);
+    if (project) {
+      const remaining = this.t('progress.remaining', {seconds: Math.ceil(project.remainingSeconds)});
+      const construction = el('span', 'city-progress-construction', `${this.t(`progress.${project.stage}`)} · ${remaining}`);
+      construction.dataset.constructionStage = project.stage;
+      effects.append(construction);
+    }
     for (const [id, value] of Object.entries(summary?.effects ?? record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
     const residents = summary?.population ?? levelValue(instance, record, 'population', this.data.config);
     if (residents) effects.append(el('span', '', `♟ ${residents.toLocaleString('he-IL')} ${this.t('app.population')}`));
@@ -645,7 +685,9 @@ export class IslandInterface {
     const nextLevel = upgradeStatus.nextLevel;
     const upgrade = button('', 'upgrade', 'primary-button');
     upgrade.append(el('span', '', `✦ ${this.t('app.upgrade')}`), el('small', '', nextLevel ? `● ${nextLevel.cost}` : this.t('app.maxLevel')));
-    if (!upgradeStatus.ok && nextLevel) upgrade.append(el('small', 'upgrade-reason', this.t(upgradeStatus.reason)));
+    const goods = this.data.cityProgress?.costText(instance.typeId, this.t, instance.level + 1);
+    if (nextLevel && goods) upgrade.append(el('small', '', goods));
+    if (!upgradeStatus.ok && nextLevel) upgrade.append(el('small', 'upgrade-reason', this.data.cityProgress?.gateText(upgradeStatus, this.t) ?? this.t(upgradeStatus.reason)));
     upgrade.disabled = !upgradeStatus.ok;
     upgrade.onclick = () => this.result(this.engine.upgrade(instance.id));
     const move = button(`↔ ${this.t('app.move')}`, 'move', 'secondary-button');
@@ -670,7 +712,7 @@ export class IslandInterface {
     if(record.learningStation){const learn=button(`${record.icon} לומדים`,'building-learn','primary-button');learn.onclick=()=>this.learningInterface.start(record.learningStation);actions.append(learn);}
     if(record.id==='cityHall'){
       this.cityManagement.addEntry(this.info);this.view.showRadius(null);
-      const objective=this.tutorialStep()??this.engine.nextObjective?.();
+      const objective=this.guidedObjective();
       if(this.readyPlots?.active&&objective?.buildType&&objective.buildType!=='road')this.info.append(Object.assign(button(this.t('ready.objective'),'ready-next-building','primary-button'),{onclick:()=>this.selectBuilding(objective.buildType)}));
       return;
     }

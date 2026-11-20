@@ -52,6 +52,7 @@ export function validCityManagement(value,state,registry){
 }
 
 export function municipalBudget(state,registry,config){
+  state = registry.cityProgress?.operatingState(state) ?? state;
   const policy=state.cityManagement,cfg=config.cityManagement;
   const connections=policy?.enabled?cityConnections(state,registry):null;
   const jobs=state.buildings.filter(row=>active(state,row)&&(!connections||connections.hasAccess(row))).reduce((sum,row)=>sum+(cfg?.jobs[row.typeId]||0)*levelFactor(row,config),0);
@@ -71,6 +72,7 @@ export function municipalBudget(state,registry,config){
 }
 
 function serviceCoverage(state,registry,config,connections){
+  state = registry.cityProgress?.operatingState(state) ?? state;
   const policy=state.cityManagement,homes=state.buildings.filter(row=>levelValue(row,registry.buildings.get(row.typeId),'population',config)>0),total=population(state,registry,config);
   const result={};
   for(const department of CITY_DEPARTMENTS){
@@ -114,7 +116,8 @@ function allocateCoverage(providers,homes){
 
 export function cityReport(state,registry,config,income={money:0},{includeZones=true}={}){
   const policy=state.cityManagement,cfg=config.cityManagement,connections=cityConnections(state,registry),residents=population(state,registry,config),budget=municipalBudget(state,registry,config),services=serviceCoverage(state,registry,config,connections);
-  const jobs=budget.jobs,commercialJobs=state.buildings.filter(row=>row.typeId==='shop'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.shop*levelFactor(row,config),0),industrialJobs=state.buildings.filter(row=>row.typeId==='factory'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.factory*levelFactor(row,config),0);
+  const operational = registry.cityProgress?.operatingState(state) ?? state;
+  const jobs=budget.jobs,commercialJobs=operational.buildings.filter(row=>row.typeId==='shop'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.shop*levelFactor(row,config),0),industrialJobs=operational.buildings.filter(row=>row.typeId==='factory'&&active(state,row)&&connections.hasAccess(row)).reduce((sum,row)=>sum+cfg.jobs.factory*levelFactor(row,config),0);
   const quality=CITY_DEPARTMENTS.reduce((sum,id)=>sum+services[id].coverage,0)/CITY_DEPARTMENTS.length,taxPenalty=(policy.taxRate-9)*5;
   const demand={residential:clamp(50+jobs*3-residents*2+(quality-50)*.35-taxPenalty),commercial:clamp(residents*5-commercialJobs*6+15-taxPenalty),industrial:clamp(residents*3-industrialJobs*3+20-taxPenalty*.5)};
   const context={connections,residents,jobs,services,demand};

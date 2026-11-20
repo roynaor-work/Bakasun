@@ -57,7 +57,7 @@ export function readyPlots(state,registry,flags={}){
   state.readyPlan.lots.forEach((lot,i)=>{
     if(lotState(lot,state,registry,index)!=='vacant')return;
     const type=registry.buildings.get(lot.typeId),result=atCapacity?{ok:false,reason:'ready.limit'}:type.category==='sports'&&!flags.sportFacilities?{ok:false,reason:'reason.locked'}:validatePlacement(state,registry,lot.typeId,lot.x,lot.z,undefined,flags);
-    rows.push({...lot,w:type.footprint[0],d:type.footprint[1],color:lot.typeId==='powerPlant'?'#e5bf63':siteColor(lot.typeId),number:i+1,ok:result.ok,status:result.ok?'available':result.reason==='reason.locked'?'locked':'unavailable',reason:result.reason});
+    rows.push({...lot,w:type.footprint[0],d:type.footprint[1],color:lot.typeId==='powerPlant'?'#e5bf63':siteColor(lot.typeId),number:i+1,ok:result.ok,status:result.ok?'available':result.reason==='reason.locked'?'locked':'unavailable',reason:result.reason,...(result.reason?.startsWith('progress.')?{gate:result}:{})});
   });
   return rows;
 }
