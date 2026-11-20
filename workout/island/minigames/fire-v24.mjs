@@ -97,9 +97,10 @@ const MULTIFLOOR_PLANS=ENTRY_PLANS.map((plan,tier)=>{
   });
   return {...plan,rooms,floorCount,seconds:50-tier,fireLevels:true};
 });
-export function entryPlan(level,{fireLevels=false}={}){
+export function entryPlan(level,{fireLevels=false,rescueActions=true}={}){
   const plans=fireLevels?MULTIFLOOR_PLANS:ENTRY_PLANS;
-  return plans.find(p=>p.level===level)||null;
+  const plan=plans.find(p=>p.level===level)||null;
+  return plan&&fireLevels?{...plan,rescueActions:Boolean(rescueActions)}:plan;
 }
 /** Seconds on the room clock: the plan's base plus 5 per fire beyond the second. */
 export function roomSeconds(plan,roomIndex){const r=plan.rooms[roomIndex];return plan.seconds+Math.max(0,r.fires.length-2)*5;}

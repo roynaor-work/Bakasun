@@ -89,7 +89,7 @@ function interiorPilot(model) {
   }
   const rescue = model.rescueAction;
   if (rescue && !rescue.active) return {rescueAction: rescue.id};
-  if (!model.plan.fireLevels && model.room.friend.state === 'waiting') {
+  if (!model.plan.rescueActions && model.room.friend.state === 'waiting') {
     const [x, , z] = model.room.friend.pos;
     return {tap: [x, .5, z]};
   }

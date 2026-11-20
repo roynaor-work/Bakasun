@@ -4,6 +4,7 @@
  * session draws over it), and the merged raw result (score, performance, rescues) handed to the engine. `?fireFlow=v23` never reaches here. */
 import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-19';
 import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-19';
+import {fireRescueActionsEnabled} from './fire-levels-rescue.mjs?v=island-v2-20261107-19';
 import {entryPlan,entryBuilding,arrivedAtBuilding,doorDistance,mergeResults,V24_TUNING} from './fire-v24.mjs?v=island-v2-20261107-19';
 
 const loadInteriorModule=()=>import('./fire-v24-session.mjs?v=island-v2-20261107-19');
@@ -34,7 +35,7 @@ export function drawDoorMarker(p,{x,y},{state,time,width,height,label,enterLabel
 }
 
 export function startFireEntry(ctx,createModel,draw,createView,{runSession=runFireSession,loadInterior=loadInteriorModule,tuning=V24_TUNING}={}){
-  const fireLevels=ctx.fireLevels===true,plan=entryPlan(ctx.level,{fireLevels}),building=entryBuilding(ctx.balance,ctx.level),t=ctx.t||(k=>k);
+  const fireLevels=ctx.fireLevels===true,plan=entryPlan(ctx.level,{fireLevels,rescueActions:fireRescueActionsEnabled()}),building=entryBuilding(ctx.balance,ctx.level),t=ctx.t||(k=>k);
   if(!plan||!building)return runSession(ctx,createModel,draw,createView);
   const flow={state:'drive',inside:false,done:false,result:null,enterRequested:false,building,plan,enteredAt:null,markerKind:null,doorScreen:null,doorHit:null,navigateRequested:false};
   let street=null,interior=null,shellPaused=false,disposed=false,streetModel=null,noWebGL=false;

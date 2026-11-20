@@ -9,6 +9,8 @@ import {fitModel} from '../view/local-models.mjs?v=island-v2-20261107-19';
 import {createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-19';
 import {ROOMS,V24_TUNING,FLOOR_ASSET_PATH} from './fire-v24.mjs?v=island-v2-20261107-19';
 import {ROOM_HEIGHT,ROOM_WIDTH,ROOM_DEPTH,smokeLine} from './fire-v24-interior.mjs?v=island-v2-20261107-19';
+import {rescueAssetRoot} from './fire-levels-rescue.mjs?v=island-v2-20261107-19';
+import {createRescuePlayback} from './fire-levels-rescue-scene.mjs?v=island-v2-20261107-19';
 
 const VERSION='island-v2-20261107-19';
 const url=(path)=>new URL(path+'?v='+VERSION,import.meta.url).href;
@@ -152,9 +154,39 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   const drops=new T.Points(dropG,own(new T.PointsMaterial({map:disc,color:'#dff6ff',size:.11,transparent:true,opacity:.9,depthWrite:false,sizeAttenuation:true,fog:false})));drops.frustumCulled=false;drops.visible=false;scene.add(drops);
   const nozzle=new T.Vector3(-1.5,1.1,2.8),impact=new T.Vector3(),tmp=new T.Vector3(),tmp2=new T.Vector3();
   // ---- firefighter and friend ------------------------------------------------------------------------------------------------------------
-  let crew=null,crewRig=null,crewYaw=Math.PI,friend=null;const friends=new Map();
+  let crew=null,crewRig=null,crewYaw=Math.PI,friend=null,rescuePlayback=null;const friends=new Map();
   const GRIP={elbowX:.3,elbowY:.95,elbowZ:.22,handX:.12,handY:.98,handZ:.55};
-  async function loadCrew(){try{const g=await loadGLB(V24_ASSETS.firefighter);if(disposed)return;const visual=fitModel(g.scene,{path:'firefighter',rotationY:0,scale:1},{height:1.78});visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;scene.add(visual);crew=visual;crewRig=createFireCrewRig(g.scene,g.animations,GRIP);}catch{crew=null;}}
+  async function loadCrew(){
+    if(model.plan.rescueActions){
+      const visual=new T.Group();
+      try{
+        const path='../'+rescueAssetRoot;
+        const [character,motion,catalog]=await Promise.all([
+          loadGLB(path+'firefighter.glb'),
+          loadGLB(path+'fire-rescue-actions.glb'),
+          fetch(url(path+'catalog.json')).then(response=>{
+            if(!response.ok)throw new Error('Fire rescue catalogue unavailable');
+            return response.json();
+          }),
+        ]);
+        if(disposed)return;
+        const root=character.scene;
+        root.getObjectByName('Character').scale.setScalar(1);
+        root.traverse(node=>{
+          if(!node.isSkinnedMesh)return;
+          node.frustumCulled=false;
+          if(['hose','extinguisher'].includes(node.userData.category))node.visible=false;
+        });
+        visual.add(root);scene.add(visual);
+        visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;
+        rescuePlayback=createRescuePlayback(visual,root,motion.animations,catalog,box);
+        crewRig=createFireCrewRig(root,character.animations,GRIP);
+        crew=visual;
+        return;
+      }catch{visual.removeFromParent();if(disposed)return;}
+    }
+    try{const g=await loadGLB(V24_ASSETS.firefighter);if(disposed)return;const visual=fitModel(g.scene,{path:'firefighter',rotationY:0,scale:1},{height:1.78});visual.position.set(-1.9,0,3.1);visual.rotation.y=Math.PI;scene.add(visual);crew=visual;crewRig=createFireCrewRig(g.scene,g.animations,GRIP);}catch{crew=null;}
+  }
   async function friendObject(id){
     if(!friends.has(id)){
       const pending=loadGLB(V24_ASSETS.friends+id+'.glb').then(g=>{const clips=new Map();for(const c of g.animations){if(c.name==='walk_out'){const w=c.clone();w.tracks=w.tracks.filter(t=>!/^Root\.position/.test(t.name));clips.set('walk',w);}clips.set(c.name,c);}return {root:g.scene,clips};});friends.set(id,pending);
@@ -195,7 +227,7 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   function consumeEvents(){for(const e of model.events){if(e.sequence<=lastEvent)continue;lastEvent=e.sequence;
       if(e.kind==='out'){const spot=model.room?.spots.find(s=>s.id===e.id);if(spot){burst(spot.pos);char(spot.id);}}
       else if(e.kind==='room'){void switchRoom(e.index);}
-      else if(e.kind==='rescue'){friend?.play('rescued',true,1.7);if(friend)friend.mode='rescued';}
+      else if(e.kind==='rescue'&&!model.plan.rescueActions){friend?.play('rescued',true,1.7);if(friend)friend.mode='rescued';}
       else if(e.kind==='clear'){cam.zoomExit=1;}
       else if(e.kind==='feedback'&&e.key==='fire.v24.say.electric'){sparkT=.6;}
     }}
@@ -230,7 +262,9 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
     if(room){const line=smokeLine(room,tuning),dense=clamp(room.smoke);smokeTop.position.y=line;smokeLow.position.y=Math.max(tuning.smokeFloor-.2,line-.45);smokeMat.opacity=.12+.62*dense;smokeLow.material.opacity=.3*dense;scene.fog.near=9-dense*3.5;scene.fog.far=26-dense*8;}
     // water / tool stream
     const spraying=model.spraying&&model.aim&&inRoom;let start=nozzle;
-    if(crew){crew.position.y=Math.sin(time*1.6)*.015;if(model.aim){const dx=model.aim[0]-crew.position.x,dz=model.aim[2]-crew.position.z;const want=Math.atan2(dx,dz);crewYaw=damp(crewYaw,want,6,dt);}else crewYaw=damp(crewYaw,Math.PI,2,dt);crew.rotation.y=crewYaw;
+    const rescuePose=model.rescuePose,rescuePlaying=rescuePlayback?.update(rescuePose,room?.friend,friend);
+    if(crew&&!rescuePlaying){if(rescuePlayback){crew.position.x=damp(crew.position.x,-1.9,6,dt);crew.position.z=damp(crew.position.z,3.1,6,dt);}
+      crew.position.y=Math.sin(time*1.6)*.015;if(model.aim){const dx=model.aim[0]-crew.position.x,dz=model.aim[2]-crew.position.z;const want=Math.atan2(dx,dz);crewYaw=damp(crewYaw,want,6,dt);}else crewYaw=damp(crewYaw,Math.PI,2,dt);crew.rotation.y=crewYaw;
       if(crewRig){crewRig.update(dt,false,Boolean(spraying));if(crewRig.hand(tmp2))start=tmp2;}}
     jet.visible=Boolean(spraying)&&model.tool!=='extinguisher';drops.visible=Boolean(spraying)&&model.tool==='water';splash.visible=Boolean(spraying)&&model.tool==='water';foam.visible=Boolean(spraying)&&model.tool==='foam';reticle.visible=Boolean(model.aim)&&inRoom;
     if(model.aim){impact.fromArray(model.aim);reticle.position.copy(impact);reticle.position.y+=.05;reticle.material.opacity=.6+.3*Math.sin(time*6);reticle.scale.setScalar(.6+.08*Math.sin(time*6));}
@@ -249,9 +283,9 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
     if(sparkT>0){sparkT-=dt;const s=room?.spots.find(x=>x.spark>0)||room?.spots.find(x=>x.kind==='electric');if(s){sparks.visible=true;sparks.position.fromArray(s.pos);sparks.position.y+=.3;sparks.userData.frame(Math.floor(time*16));}}else sparks.visible=false;
     // friend: scared while waiting, jumps when rescued, walks out through the door, a ring under them when they can be reached
     if(friend&&room){const st=room.friend;friend.mixer.update(dt);
-      if(st.state==='walking'||st.state==='team'){if(friend.mode!=='walking'){friend.play('walk',false,1.6);friend.mode='walking';}const t=smooth(st.t);friend.root.position.set(st.pos[0]+(st.exit[0]-st.pos[0])*t,0,st.pos[2]+(st.exit[2]-st.pos[2])*t);friend.root.rotation.y=Math.atan2(st.exit[0]-st.pos[0],st.exit[2]-st.pos[2]);friend.root.visible=st.t<.98;}
+      if((st.state==='walking'&&!rescuePlaying)||st.state==='team'){if(friend.mode!=='walking'){friend.play('walk',false,1.6);friend.mode='walking';}const t=smooth(st.t);friend.root.position.set(st.pos[0]+(st.exit[0]-st.pos[0])*t,0,st.pos[2]+(st.exit[2]-st.pos[2])*t);friend.root.rotation.y=Math.atan2(st.exit[0]-st.pos[0],st.exit[2]-st.pos[2]);friend.root.visible=st.t<.98;}
       else if(st.state==='out')friend.root.visible=false;
-      const near=room.spots.find(x=>x.id===st.near);friendRing.visible=st.state==='waiting'&&inRoom&&Boolean(!near||near.done);
+      const near=room.spots.find(x=>x.id===st.near);friendRing.visible=!rescuePose&&st.state==='waiting'&&inRoom&&Boolean(!near||near.done);
       if(friendRing.visible){friendRing.position.set(st.pos[0],.03,st.pos[2]);friendRing.scale.setScalar(1.15+.15*Math.sin(time*3));ringMatFriend.opacity=.5+.3*Math.sin(time*3);}}
   }
   // ---- picking and projection ----------------------------------------------------------------------------------------------------------
@@ -264,8 +298,8 @@ export function createInteriorScene({model,canvas,lite=false,createRenderer=o=>n
   function project(p){tmp.fromArray(p).project(camera);return {x:(tmp.x+1)*width/2,y:(1-tmp.y)*height/2};}
   function resize(w,h,dpr){width=Math.max(1,w);height=Math.max(1,h);renderer.setPixelRatio(dpr);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();}
   function render(){if(disposed||(roomBarrier&&!ready))return;renderer.render(scene,camera);}
-  function metrics(){const info=renderer.info.render;let triangles=0,draws=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite||o.isPoints){const g=o.geometry;triangles+=g?Math.round((g.index?.count||g.attributes.position?.count||0)/3):2;draws++;}});return {triangles:info.triangles,drawCalls:info.calls,sceneTriangles:triangles,sceneObjects:draws,crew:Boolean(crew),friend:Boolean(friend),roomBuilt:Boolean(roomVisual?.userData.built),burnables:burnables.size,puffs:puffs.filter(p=>p.s.visible).length,lite,width,height,ready,loadFailed};}
-  function dispose(){if(disposed)return;disposed=true;friend?.mixer.stopAllAction();crewRig?.dispose();
+  function metrics(){const info=renderer.info.render;let triangles=0,draws=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite||o.isPoints){const g=o.geometry;triangles+=g?Math.round((g.index?.count||g.attributes.position?.count||0)/3):2;draws++;}});return {triangles:info.triangles,drawCalls:info.calls,sceneTriangles:triangles,sceneObjects:draws,crew:Boolean(crew),rescueAnimation:Boolean(rescuePlayback),friend:Boolean(friend),roomBuilt:Boolean(roomVisual?.userData.built),burnables:burnables.size,puffs:puffs.filter(p=>p.s.visible).length,lite,width,height,ready,loadFailed};}
+  function dispose(){if(disposed)return;disposed=true;friend?.mixer.stopAllAction();crewRig?.dispose();rescuePlayback?.dispose();
     const released=new Set(disposables);
     const release=resource=>{if(resource&&!released.has(resource)){released.add(resource);resource.dispose?.();}};
     function releaseObject(object){object.traverse(o=>{release(o.geometry);const ms=Array.isArray(o.material)?o.material:[o.material];for(const m of ms)if(m){for(const v of Object.values(m))if(v?.isTexture)release(v);release(m);}});}
