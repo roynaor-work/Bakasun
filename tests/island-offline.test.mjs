@@ -29,7 +29,8 @@ test('offline manifest: sizes per game and for the island (reported in the relea
  const assetsMb=(await bytesOf(union))/1048576,allMb=(await bytesOf(all))/1048576;
  console.log('offline MB',JSON.stringify(Object.fromEntries(Object.entries(sizes).map(([g,b])=>[g,Math.round(b/104857.6)/10])))+' assets '+assetsMb.toFixed(1)+' with app code '+allMb.toFixed(1));
  /* v24.1 (15/11): the cap moved from 80 to 90 MB on purpose: the 3D fire rooms, the referees, the clips and the 3D crowd add 7.5 MB; the offline download is optional and a per-game download is next. */
- assert.ok(assetsMb>10&&assetsMb<90,'game assets stay a phone-sized download: '+assetsMb);
+ /* v24.6 (20/11): 90 -> 92 MB on purpose: the fire truck model was never in the fire pack (+0.3 MB, it now has to be there before the first frame), the fire floors and rescue clips (+1.6 MB) and the new boar pack (weather layers and upgrade icons, +0.8 MB) end at about 91 MB. */
+ assert.ok(assetsMb>10&&assetsMb<92,'game assets stay a phone-sized download: '+assetsMb);
 });
 
 test('offline manifest: the basketball motion clips and the shell list are complete and up to date',async()=>{
