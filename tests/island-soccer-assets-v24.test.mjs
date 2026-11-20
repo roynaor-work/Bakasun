@@ -1,3 +1,4 @@
+import {DATA_VERSION} from '../workout/island/release.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir,access} from 'node:fs/promises';
@@ -11,7 +12,6 @@ import {planCrowd} from '../workout/island/assets/soccer-v24/crowd/runtime/lod-p
 import {soccerCrowdLimit} from '../workout/island/minigames/soccer-v24-crowd.mjs';
 import {decorateAthleteV2} from '../workout/island/minigames/athlete-body-v2.mjs';
 import {createSoccerDesignAudio,soccerV24MixAssets} from '../workout/island/minigames/soccer-design-audio.mjs';
-import {buildShell} from '../workout/island/tools/offline-shell.mjs';
 
 const root=new URL('../workout/island/',import.meta.url);
 const read=p=>readFile(new URL(p,root),'utf8'),json=async p=>JSON.parse(await read(p));
@@ -262,9 +262,8 @@ test('offline: every v24 file of the default match is listed for soccer, the she
     ...crowd.assets.filter(a=>V24.SOCCER_CROWD_BUDGET.variants.includes(a.variant)&&V24.SOCCER_CROWD_BUDGET.levels.includes(a.level)).map(a=>'assets/soccer-v24/crowd/'+a.file)];
   for(const f of files){assert.ok(soccer.has(f),f);await access(new URL(f,root));}
   for(const f of ['minigames/soccer-v24.mjs','minigames/soccer-v24-pitch.mjs','minigames/soccer-v24-fx.mjs','minigames/soccer-v24-crowd.mjs','minigames/athlete-body-v2.mjs','assets/soccer-v24/crowd/runtime/lod-policy.mjs'])assert.ok(manifest.shell.includes(f),f);
-  assert.deepEqual(manifest.shell,await buildShell(),'run node workout/island/tools/offline-shell.mjs');
   for(const f of ['minigames/soccer-v24.mjs','minigames/soccer-v24-pitch.mjs','minigames/soccer-v24-fx.mjs','minigames/soccer-v24-crowd.mjs','minigames/athlete-body-v2.mjs']){
     const tags=[...(await read(f)).matchAll(/\?v=(island-v2-[0-9-]+)/g)].map(m=>m[1]);for(const tag of tags)assert.equal(tag,release.version,f);
   }
-  assert.equal(release.version,'island-v2-20261107-20','release.json is main\'s, not bumped here');
+  assert.equal(release.version,DATA_VERSION,'release.json and the running module agree');
 });

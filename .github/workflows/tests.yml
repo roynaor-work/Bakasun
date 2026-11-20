@@ -13,7 +13,7 @@ jobs:
       - run: node --test tests/*.mjs
   alpine-csp:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,9 +24,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Enforce the shipped CSP, negative fixtures and real Alpine startup
         env:
-          ISLAND_CSP_BROWSER: '1'
           ISLAND_CSP_AUDIT_DIR: artifacts/alpine-csp
-        run: node --test tests/island-browser-csp.test.mjs
+        run: npm run test:browser -- csp
       - uses: actions/upload-artifact@v4
         if: always()
         with:

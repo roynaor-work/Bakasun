@@ -13,8 +13,9 @@
 // Frames and verification.json go to verification/naval-boars-v241/ (prefix naval-).
 // Run: PLAYWRIGHT_MODULE=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tests/naval-v241-browser.mjs
 import {verify} from './night-browser.mjs';
-import {mkdir} from 'node:fs/promises';
-const frames=new URL('../verification/naval-boars-v241/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+import {pathToFileURL} from 'node:url';
+import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
+const frames=pathToFileURL(await browserArtifacts('frames'));
 const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
 let failures=[];
 await verify('naval-boars-v241',[{width:844,height:390,isMobile:true}],async({page,context,viewport,tick,snap,start,exit,nav})=>{

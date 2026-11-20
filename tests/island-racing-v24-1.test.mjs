@@ -1,3 +1,4 @@
+import {assertReleaseReference,assertReleaseTags} from './helpers/island-release.mjs';
 // Historical optional pit cancellation remains available under rollback; tests/island-phone-fix-d.test.mjs checks mandatory automatic entry.
 globalThis.location={search:'?phoneFixD=0'};
 // racing-v24.1 (Roy after v24 on the phone: "a tyre change on only one track, I did not notice whether it went there by itself; the goal is that it goes in for
@@ -121,10 +122,16 @@ test('pit HUD: the button pulses "automatic" from the start of the stop lap and 
 
 test('session, view and style carry v24.1',async()=>{
  const session=await read('minigames/racing-session.mjs');
- assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,phoneFix:false,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
+ assert.match(session,/v24PhysicsConfig\(v24\),pitAuto:pitAutoEnabled\(\)/);assert.match(session,/auto:!!model\.pit\.auto,onRequest:/);assert.match(session,/onCancel:\(\)=>\{model\.cancelPit\?\.\(\);\}/);
  assert.match(session,/pits:!!model\.pit\?\.on\}/,'the view paints the boxes when the model has stops (two-lap races too)');
  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
  const physics=await read('minigames/racing-physics.mjs');assert.match(physics,/const pitAutoOn=!!config\.pitAuto;/);assert.match(physics,/enabled:!!config\.pit,auto:pitAutoOn\}/);assert.match(physics,/state\.events=pitAutoOn\?state\.events\.filter\(e=>e\.id>stepSerial&&\/\^pit\/\.test\(e\.type\)\):\[\];/);assert.match(physics,/pitCrew\.watch\(car,state\.time\)/);
- for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-17/,f+' carries the current tag');
+ const pit=await read('minigames/racing-pit.mjs');
+ assertReleaseReference(pit,'./racing-v24.mjs','racing-pit.mjs');
+ assertReleaseReference(session,'./racing-pit-ui.mjs','racing-session.mjs');
+ for(const name of ['racing-pit','racing-v24','racing-session','racing-pit-ui']){
+  const file=`minigames/${name}.mjs`;
+  assertReleaseTags(await read(file),file,{required:name==='racing-pit'||name==='racing-session'});
+ }
 });

@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {browserCleanup,serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
+test('racing v24 default: every rival uses a loaded formula LOD; the legacy v7 LOD field is not the active renderer',{skip:process.env.ISLAND_CSP_BROWSER!=='1',timeout:300000},async t=>{
+ const defer=browserCleanup(t);
+ const chromium=await islandChromium(),server=await serveIsland();
+ defer(()=>server.close());
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});defer(()=>browser.close());
+ const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1,serviceWorkers:'block'});
+ defer(()=>context.close());
+ const audit=await installIslandCspMonitor(context);
+ defer(()=>audit.dispose());
+ const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await audit.attachPage(page);
+ await page.goto(server.url+'tools/perf-racing.html?dev=1&hold=1&at=0.01&shot=1&dpr=0.2');
+ await page.waitForFunction(()=>window.__perf,null,{timeout:180000});
+ const {render:m,cars}=await page.evaluate(()=>({render:window.__perf.render,cars:window.__session.snapshot.cars.length}));
+ assert.ok(cars>=5);assert.equal(m.modelLoaded,true);assert.ok(m.formulaAll,'the current default loads the formula-all pack');assert.equal(m.formulaAll.cars,cars-1);
+ assert.ok(m.formulaAll.lods.reduce((a,b)=>a+b,0)>0,'at least one rival is drawn');assert.equal(m.formulaAll.levels.length,3);assert.ok(m.formulaAll.levels.every(n=>n>0&&n<=5000));
+ assert.ok(m.v7.lods.every(lod=>lod===-1),'the rivals are drawn by the formula renderer');
+ assert.deepEqual(m.failures,[]);assert.deepEqual(errors,[]);await audit.assertClean();
+});

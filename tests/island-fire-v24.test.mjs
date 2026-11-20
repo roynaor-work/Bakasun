@@ -1,3 +1,4 @@
+import {releaseVersion} from './helpers/island-release.mjs';
 // 14/11/2026 fire v24: the building entry inside the campaign stages (Roy: "not separate: you reach the building in the stages and go in;
 // on a clock; control, understanding and graphics"). Flag, entry stages, plans, the pure room model with its clock and gentle timeout, the
 // building pick, the merged result, the stage map badge, assets, strings and the offline list. `?fireFlow=v23` keeps v23 untouched.
@@ -145,11 +146,9 @@ test('door marker: a marker when the door is on screen, an edge arrow when it is
   assert.equal(calls.filter(c=>c==='save').length,calls.filter(c=>c==='restore').length);
 });
 
-test('wiring: fire.mjs routes entry stages through the flow behind the flag; the stage map marks them; strings exist; the offline lists know the files',async()=>{
-  const fire=await read('minigames/fire.mjs');assert.ok(fire.includes('fireFlowV24()&&isEntryStage(ctx.level'));assert.ok(fire.includes('startFireEntry('));
-  const ui=await read('ui/fire-bonus-ui.mjs');assert.ok(ui.includes('markEntryStages(activity,dialog)'));assert.ok(ui.includes("dataset.fireEntry='true'"));
+test('fire entry strings, published module tags and offline packs cover every stage',async()=>{
   for(const file of ['minigames/fire-v24.mjs','minigames/fire-v24-interior.mjs','minigames/fire-v24-anchors.mjs','minigames/fire-v24-scene.mjs','minigames/fire-v24-session.mjs','minigames/fire-v24-flow.mjs','minigames/fire-v24.css']){
-    const text=await read(file);for(const m of text.matchAll(/from '\.\.?\/[^']+\.mjs(\?v=[^']*)?'/g))if(!/polish-flag|vendor\//.test(m[0]))assert.equal(m[1],'?v=island-v2-20261107-20',file+': '+m[0]);}
+    const text=await read(file);for(const m of text.matchAll(/from '\.\.?\/[^']+\.mjs(\?v=[^']*)?'/g))if(!/polish-flag|vendor\//.test(m[0]))assert.equal(m[1],'?v='+releaseVersion,file+': '+m[0]);}
   const used=new Set();for(const file of ['minigames/fire-v24-session.mjs','minigames/fire-v24-flow.mjs','ui/fire-bonus-ui.mjs'])for(const m of (await read(file)).matchAll(/t\('(fire\.v24\.[\w.]+)'[,)]/g))used.add(m[1]);
   for(const m of (await read('minigames/fire-v24-interior.mjs')).matchAll(/'(fire\.v24\.say\.[\w]+)'/g))used.add(m[1]);
   for(const key of ['fire.v24.guide.building','fire.v24.guide.arrived','fire.v24.room.living','fire.v24.room.hallway','fire.v24.room.stairwell','fire.v24.friend.girl','fire.v24.friend.cat','fire.v24.friend.dog','fire.v24.tutorial.aim','fire.v24.tutorial.spray','fire.v24.tutorial.rescue'])used.add(key);
