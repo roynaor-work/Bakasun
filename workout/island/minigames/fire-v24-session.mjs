@@ -2,12 +2,14 @@
  * game dialog: its own canvas on top of the street canvas, a clear room clock (ring + seconds, green/amber/red, "ten seconds" in voice and
  * colour), score and room chips, a coach line in simple Hebrew, slim tool buttons on the right only when the stage teaches a tool, a pressure
  * bar on the left, a three-step picture lesson on the first entry stage. Touch: one finger on the room aims and sprays (the water goes where
- * the finger is, with help onto the nearest fire); a short tap on the friend carries them out. The model is fire-v24-interior.mjs, the
+ * the finger is, with help onto the nearest fire); the rescue button activates the next action when available. The model is fire-v24-interior.mjs, the
  * picture is fire-v24-scene.mjs. Nothing is written to the save. */
 import {createInteriorModel,clockBand} from './fire-v24-interior.mjs?v=island-v2-20261107-19';
 import {createInteriorScene} from './fire-v24-scene.mjs?v=island-v2-20261107-19';
 import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-19';
 import {FIRE_V23_ICONS} from './fire-v23-assets.mjs?v=island-v2-20261107-19';
+import {createCanvasInteriorScene} from './fire-levels-canvas.mjs?v=island-v2-20261107-19';
+import {rescueAssetRoot} from './fire-levels-rescue.mjs?v=island-v2-20261107-19';
 
 const NS='http://www.w3.org/2000/svg';
 const ICONS={...FIRE_V23_ICONS,clock:'M12 7v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',hand:'M8 13V5a1.5 1.5 0 0 1 3 0v6V4a1.5 1.5 0 0 1 3 0v7V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-12 0v-3a1.5 1.5 0 0 1 3 0',hold:'M12 3a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Zm0 4v3M5 20h14',friend:'M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 10a6 6 0 0 1 12 0M4 9l2-2m14 2-2-2'};
@@ -18,7 +20,7 @@ function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className
 export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=createInteriorScene,createModel=createInteriorModel,loadTimeoutMs=15000}){
   const {dialog,t}=ctx,host=ctx.canvas.parentElement||dialog,audio=createG2nAudio();audio.unlock();
   const model=createModel({plan,sound:e=>audio.play(e)});
-  const canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
+  let canvas=el('canvas','fire-v24-canvas');canvas.setAttribute('aria-label',t('fire.v24.doorLabel'));host.append(canvas);
   const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./fire-v24.css?v=island-v2-20261107-19',import.meta.url).href;document.head.append(link);
   dialog.classList.add('fire-v24-inside');
   // the street HUD and controls step aside while we are inside (visibility only; the street session keeps its nodes)
@@ -42,8 +44,30 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   root.append(clock,chips,coach,gauge,tools,card,fade);
   // ---- input -------------------------------------------------------------------------------------------------------------------------------
   const input={};let pointerId=null,downAt=0,downPoint=null,moved=false,paused=false,disposed=false,frame=0,last,W=1,H=1,dpr=1,tutorialShown=false,tutorialDone=!tutorial,lowQuality=Boolean(ctx.lite);
-  const scene=createScene({model,canvas,lite:lowQuality});
+  let scene;
+  try{scene=createScene({model,canvas,lite:lowQuality});}
+  catch(error){
+    if(!plan.fireLevels)throw error;
+    const replacement=canvas.cloneNode(false);
+    canvas.replaceWith(replacement);canvas=replacement;
+    scene=createCanvasInteriorScene({model,canvas});
+  }
   const events=new AbortController(),options={signal:events.signal};
+  const rescueButton=plan.rescueActions?el('button','fv24-rescue'):null;
+  const rescueIcon=rescueButton?el('img','fv24-rescue-icon'):null;
+  const rescueCaption=rescueButton?el('span','fv24-rescue-caption'):null;
+  const rescueTime=rescueButton?el('bdi','fv24-rescue-time'):null;
+  if(rescueButton){
+    rescueButton.type='button';rescueButton.hidden=true;rescueButton.dataset.gameControl='rescue';
+    rescueIcon.alt='';rescueTime.setAttribute('aria-hidden','true');
+    rescueButton.append(rescueIcon,rescueCaption,rescueTime);root.append(rescueButton);
+    rescueButton.addEventListener('click',()=>{
+      const action=model.rescueAction;
+      if(paused||!tutorialDone||!scene.ready||!action||action.active)return;
+      pointerId=null;delete input.aim;delete input.aimRaw;delete input.tap;
+      input.rescueAction=action.id;
+    },options);
+  }
   const contextRecovery=new URLSearchParams(globalThis.location?.search||'').get('fireContextRecovery')!=='0';
   let contextLost=false,contextTimer=null;
   canvas.addEventListener('webglcontextlost',e=>{
@@ -64,7 +88,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,e=>{if(e.pointerId!==pointerId)return;pointerId=null;
     if(type==='pointerup'&&!moved&&performance.now()-downAt<320){const l=local(e),r=model.room,f=r?.friend;
       // a tap near the friend on the screen is a tap on the friend (the pick ray would land on the floor behind them)
-      if(f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
+      if(!plan.rescueActions&&f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
       if(!input.tap){const world=scene.pick(l.x,l.y);if(world)input.tap=world;}}delete input.aim;delete input.aimRaw;},options);
   card.addEventListener(keyboard?'click':'pointerdown',e=>{if(!keyboard)e.preventDefault();if(paused)return;if(!tutorialDone){tutorialDone=true;card.hidden=true;if(keyboard)canvas.focus({preventScroll:true});return;}input.skip=true;if(keyboard)canvas.focus({preventScroll:true});},options);
   events.signal.addEventListener('abort',()=>{if(keyboard&&previousFocus?.isConnected)previousFocus.focus({preventScroll:true});},{once:true});
@@ -77,25 +101,39 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
   // ---- HUD text -----------------------------------------------------------------------------------------------------------------------------
   let lastCoach='',lastCard='',tenSaid=false;
   function continueLabel(){const node=el(keyboard?'button':'p','fv24-card-tap',t('fire.v24.tutorial.go'));if(keyboard){node.type='button';queueMicrotask(()=>{if(!disposed&&!card.hidden)node.focus({preventScroll:true});});}return node;}
-  function coachKey(s){const f=model.feedback;if(f&&model.time-f.at<2.6)return f.key;
+  function coachKey(s){if(s.phase==='stairs')return 'fire.levels.stairs';const f=model.feedback;if(f&&model.time-f.at<2.6)return f.key;
     const p=s.phase;if(p==='enter')return 'fire.v24.loading';if(p==='leave')return 'fire.v24.say.leave';if(p==='clear')return 'fire.v24.say.roomClear';if(p==='handover')return 'fire.v24.say.handover';
     const r=s.room;if(!r)return 'fire.v24.loading';const fr=r.friend,near=r.spots.find(x=>x.id===fr.near);
     if(fr.state==='waiting'&&(!near||near.done))return fr.kind==='pet'?'fire.v24.say.tapPet':'fire.v24.say.tapKid';
     if(fr.state!=='waiting'&&r.spots.some(x=>!x.done))return 'fire.v24.say.friendOut';
     return 'fire.v24.say.aim';}
   function updateHud(){const s=model.snapshot(),r=s.room;
-    scoreChip.lastChild.textContent=String(s.score);roomChip.lastChild.textContent=t('fire.v24.roomOf',{n:s.roomIndex+1,total:s.roomCount});
+    scoreChip.lastChild.textContent=String(s.score);
+    roomChip.lastChild.textContent=s.floorCount?t('fire.levels.floorOf',{n:s.floor,total:s.floorCount}):t('fire.v24.roomOf',{n:s.roomIndex+1,total:s.roomCount});
     const inRoom=model.inRoom&&r;clock.hidden=!inRoom;gauge.hidden=!inRoom||s.phase!=='play';tools.hidden=!inRoom||s.phase!=='play';
     if(r){const frac=r.remaining/Math.max(1,r.limit);arc.setAttribute('stroke-dashoffset',String((RING*(1-Math.max(0,Math.min(1,frac)))).toFixed(1)));clockText.textContent=String(Math.ceil(r.remaining));clock.dataset.band=s.phase==='handover'?'critical':clockBand(r.remaining,r.limit);clock.setAttribute('aria-valuenow',String(Math.ceil(r.remaining)));
       if(r.remaining<=10&&!tenSaid&&s.phase==='play'){tenSaid=true;ctx.engine?.narration?.announce?.('fire.v24.say.tenSeconds');}if(s.phase==='intro')tenSaid=false;}
+    if(rescueButton){
+      const action=s.rescueAction;
+      rescueButton.hidden=!(scene.ready&&tutorialDone&&action);
+      if(action){
+        if(rescueButton.dataset.rescueAction!==action.id){
+          rescueButton.dataset.rescueAction=action.id;
+          rescueIcon.src=new URL('../'+rescueAssetRoot+'icons/'+action.id+'.svg',import.meta.url).href;
+          rescueCaption.textContent=t('fire.levels.rescue.'+action.id);
+        }
+        rescueButton.setAttribute('aria-disabled',String(action.active));
+        rescueTime.textContent=action.active?String(Math.ceil(action.duration-action.elapsed)):'';
+      }
+    }
     const level=s.tanks[s.tool]??1;gaugeFill.style.transform=`scaleY(${level})`;gauge.dataset.level=s.empty?'critical':level<.3?'low':'ok';gauge.setAttribute('aria-valuenow',String(Math.round(level*100)));
     for(const [tool,b]of Object.entries(toolButtons)){b.classList.toggle('active',s.tool===tool);b.setAttribute('aria-pressed',String(s.tool===tool));const lvl=tool==='blanket'?(s.blankets?1:0):(s.tanks[tool]??1);b.style.setProperty('--fv24-level',String(lvl));b.querySelector('.fv24-tool-count').textContent=tool==='blanket'?String(s.blankets):'';
       const wants=r&&s.phase==='play'&&r.spots.some(x=>!x.done&&((x.kind==='electric'&&tool==='extinguisher')||(x.kind==='oil'&&tool==='blanket')||(x.kind==='heavy'&&tool==='foam')));b.classList.toggle('hint',Boolean(wants)&&s.tool!==tool);}
     // cards: the lesson (first entry stage) then the room card
-    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend','fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,continueLabel());}
+    if(!tutorialDone&&scene.ready&&!tutorialShown){tutorialShown=true;card.hidden=false;card.dataset.card='tutorial';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.tutorial.title')));const steps=el('div','fv24-steps');for(const [ic,key]of [['hand','fire.v24.tutorial.aim'],['hold','fire.v24.tutorial.spray'],['friend',plan.rescueActions?'fire.levels.rescue.tutorial':'fire.v24.tutorial.rescue']]){const st=el('div','fv24-step');st.append(icon(ic),el('span','',t(key)));steps.append(st);}card.append(steps,continueLabel());}
     else if(tutorialDone&&s.phase==='intro'&&r){const id='room:'+r.id+':'+s.roomIndex;card.hidden=false;if(lastCard!==id){lastCard=id;card.dataset.card='room';card.replaceChildren(el('h3','fv24-card-title',t('fire.v24.room.'+r.id)),el('p','fv24-card-rule',t('fire.v24.intro',{room:t('fire.v24.room.'+r.id),friend:t('fire.v24.friend.'+r.friend.id)})),el('p','fv24-card-clock',t('fire.v24.introClock',{seconds:r.limit})),continueLabel());}}
     else if(tutorialDone){if(keyboard&&!card.hidden&&card.contains(document.activeElement))canvas.focus({preventScroll:true});card.hidden=true;}
-    const key=coachKey(s);if(key!==lastCoach){lastCoach=key;coachText.textContent=t(key);}
+    const key=s.rescueAction?(s.rescueAction.active?'fire.levels.rescue.running':'fire.levels.rescue.ready'):coachKey(s);if(key!==lastCoach){lastCoach=key;coachText.textContent=t(key);}
     root.dataset.phase=s.phase;
   }
   // ---- audio adapter ---------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +160,7 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
       if(loadRecovery&&watchLoading())return;
       if(scene.ready&&fade.dataset.state==='in'){fadeT+=dt;if(fadeT>.35)fade.dataset.state='clear';}
       const running=scene.ready&&tutorialDone&&!paused&&dt>0&&fade.dataset.state!=='in';
-      if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;model.update(dt,step);}
+      if(running){const step={...input};delete input.tap;delete input.skip;delete input.tool;delete input.rescueAction;model.update(dt,step);}
       scene.update(paused?0:dt);
       if(new URLSearchParams(globalThis.location?.search||'').get('fireRoomBarrier')!=='0'&&!scene.ready){fade.dataset.state='in';fadeText.textContent=t('fire.v24.loading');fadeT=0;clear();}
       scene.render();updateAudio();updateHud();

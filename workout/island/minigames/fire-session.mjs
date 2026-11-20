@@ -14,7 +14,8 @@ export function runFireSession(source,createModel,draw,createView){
   const ctx={...source,sound:audio.play,config:{...source.config}},model=createModel(ctx),{canvas,controls,dialog,config,balance}=ctx;
   const paint=canvas.getContext('2d');if(!paint)throw Error('reason.gameStart');
   const ui=installFireUI(ctx),view=createView?.(ctx,model),events=new AbortController(),options={signal:events.signal};
-  const shared=createControls({root:controls,config:balance.controls});shared.setHanded(true);shared.setEnabled(true);
+  let waitingForTruck=view?.ready===false;
+  const shared=createControls({root:controls,config:balance.controls});shared.setHanded(true);shared.setEnabled(!waitingForTruck);
   const input={},keyboardActions=new Set(),quality={low:false};let disposed=false,paused=false,frame,last,width=0,height=0,dpr=1,samples=0,frameMs=0,refill=false,pointer=null,gesture=null,manualAim=false,rescueLatch=false,ladderCompleted=0,zoneTap=null;const rescueTap=fireV21('fireRescue');
   dialog.addEventListener('pointerdown',audio.unlock,options);dialog.addEventListener('keydown',audio.unlock,options);
   const clear=()=>{shared.reset();keyboardActions.clear();refill=false;rescueLatch=false;pointer=null;gesture=null;zoneTap=null;for(const key of Object.keys(input))delete input[key];};
@@ -60,14 +61,19 @@ export function runFireSession(source,createModel,draw,createView){
   function resize(){if(disposed)return;const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;config.width=width;config.height=height;dpr=Math.min(globalThis.devicePixelRatio||1,quality.low?config.lowDpr:config.maxDpr);canvas.width=Math.max(1,Math.round(width*dpr));canvas.height=Math.max(1,Math.round(height*dpr));view?.resize(width,height);hudBoxes();}
   const observer=new ResizeObserver(resize);observer.observe(canvas);const hudObserver=new ResizeObserver(hudBoxes);for(const node of [ui.gauge,ui.refill])if(node)hudObserver.observe(node);resize();
   const session={
+    get ready(){return ctx.fireLevels?view?.ready!==false:undefined;},
     dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();hudObserver.disconnect();shared.dispose();audio.dispose();view?.dispose();ui.dispose();canvas.width=canvas.height=0;},
     cancel:ctx.cancel,
-    setPaused(value){paused=Boolean(value);audio.setPaused(paused);shared.setEnabled(!paused);clear();last=undefined;},
+    setPaused(value){paused=Boolean(value);audio.setPaused(paused);shared.setEnabled(!paused&&!waitingForTruck);clear();last=undefined;},
     get snapshot(){const s=model.snapshot(),project=(x,y)=>view?.mode==='three'?view.projectTarget(x,y):drawFireCity.project(x,y,model,ctx);const truckScreen=()=>view?.mode==='three'?view.truckScreen():drawFireCity.projectWorld(model.truck,model,ctx);return {...s,indicators:fireIndicators(model,ctx,project,truckScreen),audio:audio.snapshot(),paused,viewport:{scale:width/config.width,scaleY:height/config.height,offsetX:0,offsetY:0,width:config.width,height:config.height,modelWidth:config.width,modelHeight:config.height},flameScreens:model.flames.map(f=>({...project(f.x,f.y),heat:f.heat,active:f.active})),rescueScreens:model.rescues.map(r=>({...project(r.x,r.y),rescued:r.rescued,expired:r.expired})),truckScreen:view?.mode==='three'?view.truckScreen():drawFireCity.projectWorld(model.truck,model,ctx),aimScreen:project(model.aim.x,model.aim.y),impactScreen:project(model.impact.x,model.impact.y),renderMode:view?.mode||'canvas',renderMetrics:view?.metrics(),ui:{textFree:false,guided:true}};}
   };
   if(new URLSearchParams(location.search).get('dev')==='1')session.debug={model,view,audio,get rescueLatch(){return rescueLatch;}};
   function tick(now){
     if(disposed)return;
+    if(waitingForTruck){
+      if(view.ready===false){frame=requestAnimationFrame(tick);return;}
+      waitingForTruck=false;clear();manualAim=false;shared.setEnabled(!paused);
+    }
     const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(config.maxFrameSeconds,elapsed/1000);last=now;
     if(dt>0){samples++;frameMs+=elapsed;if(samples>=balance.render.fallbackSampleFrames){if(frameMs/samples>balance.render.fallbackFrameMs){if(!quality.low){quality.low=true;view?.degrade();resize();}else view?.degrade(true);}samples=frameMs=0;}}
     try{

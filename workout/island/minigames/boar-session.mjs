@@ -25,6 +25,7 @@ export function runBoarSession(ctx) {
   frame=doc.createElement('iframe');frame.className='boar-game-frame';
   frame.title='אי החזירים — הגנת החווה';frame.setAttribute('allow','autoplay; fullscreen');
   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
+  {const v=new URLSearchParams(globalThis.location?.search).get('boarsLevels');if(v==='0'||v==='20')url.searchParams.set('boarsLevels',v);}
   // Forward F's kill switches into the embedded campaign, including when launched from the island URL.
   {const q=new URLSearchParams(globalThis.location?.search);for(const key of ['phoneFixes','phoneFixF'])if(q.has(key))url.searchParams.set(key,q.get(key));}
   if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');

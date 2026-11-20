@@ -481,7 +481,8 @@ export function createEngine(data, options = {}) {
         const wins = (state.minigameWins[id] || 0) + Number(result.outcome === 'win');
         const periodicParts = result.outcome === 'win' && config.minigames?.partEveryWins && wins % config.minigames.partEveryWins === 0 ? config.minigames.winParts : 0;
         const won=result.outcome==='win',settings=config.minigames?.[id]?.levels[stage-1];
-        const stars=progress&&won?result.stars:0;
+        // A fire idle loss can show a participation star without awarding stage progress.
+        const stars=progress&&(won||(id==='fireRescue'&&result.stars===1&&raw?.reason==='fireIdle'))?result.stars:0;
         if(progress&&won&&(!Number.isInteger(stars)||stars<1||stars>3))return {ok:false,reason:'reason.invalid'};
         const parts=periodicParts+(won?(settings?.winParts||0):0);
         result = Object.freeze({ outcome: result.outcome, score: result.score, money: result.money, parts,stars,stage,
