@@ -5238,6 +5238,166 @@
    }
   },
   "navalDuel": {
+   "battleV1": {
+    "defaults": {
+     "extraFleetShips": 1,
+     "escortKind": 0,
+     "openingShips": 3,
+     "openingTimeScale": 0.92,
+     "fireIntervalScale": 0.88,
+     "enemyDamageScale": 0.59,
+     "enemyHpScale": 1.42,
+     "priorityHpScale": 1,
+     "timerScale": 1
+    },
+    "profiles": [
+     {
+      "throughStage": 1,
+      "escortKind": 2,
+      "openingShips": 2,
+      "openingTimeScale": 0.73,
+      "fireIntervalScale": 0.31,
+      "enemyDamageScale": 0.98,
+      "enemyHpScale": 1,
+      "salvoFromStage": 1,
+      "salvoEvery": 2
+     },
+     {
+      "throughStage": 2,
+      "escortKind": 2,
+      "openingShips": 2,
+      "openingTimeScale": 0.83,
+      "fireIntervalScale": 0.81,
+      "enemyDamageScale": 0.86,
+      "enemyHpScale": 1
+     },
+     {
+      "throughStage": 3,
+      "openingShips": 2,
+      "openingTimeScale": 0.83,
+      "fireIntervalScale": 0.81,
+      "enemyDamageScale": 0.85,
+      "enemyHpScale": 1.13
+     },
+     {
+      "throughStage": 6,
+      "openingShips": 2,
+      "openingTimeScale": 0.9,
+      "fireIntervalScale": 0.82,
+      "enemyDamageScale": 0.73,
+      "enemyHpScale": 1.23
+     },
+     {
+      "throughStage": 10,
+      "fireIntervalScale": 0.86,
+      "enemyDamageScale": 0.62,
+      "enemyHpScale": 1.45
+     },
+     {
+      "throughStage": 13,
+      "fireIntervalScale": 0.85,
+      "enemyDamageScale": 0.65,
+      "enemyHpScale": 1.28,
+      "priorityHpScale": 1.45
+     },
+     {
+      "throughStage": 14,
+      "enemyDamageScale": 0.58,
+      "enemyHpScale": 1.43,
+      "priorityHpScale": 1.12
+     },
+     {
+      "throughStage": 15,
+      "enemyDamageScale": 0.49,
+      "enemyHpScale": 1.43,
+      "priorityHpScale": 1.12,
+      "timerScale": 1.15
+     },
+     {
+      "throughStage": 18,
+      "enemyDamageScale": 0.58,
+      "enemyHpScale": 1.43,
+      "priorityHpScale": 1.12
+     },
+     {
+      "throughStage": 19,
+      "enemyDamageScale": 0.58,
+      "enemyHpScale": 1.43,
+      "priorityHpScale": 1.62
+     },
+     {
+      "throughStage": 20,
+      "enemyDamageScale": 0.7,
+      "enemyHpScale": 1.5,
+      "priorityHpScale": 1.32
+     },
+     {
+      "throughStage": 21,
+      "enemyDamageScale": 0.6,
+      "enemyHpScale": 1.5,
+      "priorityHpScale": 1.19,
+      "timerScale": 1.25
+     },
+     {
+      "throughStage": 22,
+      "enemyDamageScale": 0.84,
+      "priorityHpScale": 1.75,
+      "timerScale": 1.25
+     },
+     {
+      "throughStage": 23,
+      "enemyDamageScale": 0.57,
+      "priorityHpScale": 1.19,
+      "timerScale": 1.25
+     },
+     {
+      "throughStage": 24,
+      "enemyDamageScale": 0.525,
+      "enemyHpScale": 1.6,
+      "priorityHpScale": 1.19,
+      "timerScale": 1.25
+     },
+     {
+      "throughStage": 25,
+      "fireIntervalScale": 0.86,
+      "enemyDamageScale": 0.34,
+      "enemyHpScale": 1.16,
+      "priorityHpScale": 1.12,
+      "timerScale": 1.43
+     },
+     {
+      "throughStage": 26,
+      "enemyDamageScale": 0.88,
+      "priorityHpScale": 1.68,
+      "timerScale": 1.21
+     },
+     {
+      "throughStage": 27,
+      "enemyDamageScale": 0.83,
+      "priorityHpScale": 1.8,
+      "timerScale": 1.21
+     },
+     {
+      "throughStage": 28,
+      "priorityHpScale": 1.15,
+      "timerScale": 1.21
+     },
+     {
+      "throughStage": 29,
+      "enemyDamageScale": 0.595,
+      "enemyHpScale": 1.54,
+      "priorityHpScale": 1.15,
+      "timerScale": 1.21
+     },
+     {
+      "throughStage": 30,
+      "enemyDamageScale": 0.605,
+      "enemyHpScale": 1.5,
+      "priorityHpScale": 1.27,
+      "timerScale": 1.21
+     }
+    ]
+   },
    "shipX": 60,
    "enemyX": 340,
    "waterY": 362,

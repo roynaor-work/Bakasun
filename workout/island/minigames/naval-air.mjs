@@ -65,7 +65,7 @@ export function createNavalAir(cfg,balance){
     if(time-a.born>c.leaveAfter){a.vx=c.speed;a.state='out';}
    }
    a.x+=a.vx*dt;a.z+=a.vz*dt;a.hit=Math.max(0,a.hit-dt);
-   if(a.attack&&time>=a.attack.fireTime){
+   if(a.attack&&time>=a.attack.fireTime&&(ctx.canEnemyFire?.()??true)){
     enemyShots.push({x:a.x,z:a.z,fromX:a.x,fromZ:a.z,targetX:a.attack.x,targetZ:a.attack.z,age:0,duration:.9,kind:0,ammo:0,owner:'enemy',air:true,damage:settings.damage*c.damage});
     a.attack=null;a.fireAt=time+(c.every||99);if(a.kind==='plane')a.passed=true;ctx.sound?.('cannon');
    }
