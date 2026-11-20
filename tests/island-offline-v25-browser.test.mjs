@@ -62,18 +62,18 @@ test('v25: the background download keeps the shell and the main games only; the 
   assert.deepEqual(auto.wanted,['soccer','hoops','alpine','alpineLeague','city'],'nothing played yet: the three main games and the hub');
   let s=await status(t.page);
   assert.equal(s.shell,true);for(const g of ['soccer','hoops','alpine','alpineLeague','city'])assert.equal(s.games[g],true,g);
-  for(const g of ['tennis','racing','naval','fire','alien','catch'])assert.equal(s.games[g],false,g+' is not downloaded before it was played');
+  for(const g of ['tennis','racing','naval','boar','fire','alien','catch'])assert.equal(s.games[g],false,g+' is not downloaded before it was played');
   assert.equal((await t.page.evaluate(()=>caches.keys())).length,1);
   // The panel: v25 rows with size and state, storage line, install button or hint.
   await t.page.evaluate(()=>window.__island.ui.activityInterface.menu());
   await t.page.waitForFunction(()=>document.querySelector('[data-offline-panel][data-v25] .offline-pack[data-game=soccer][data-state=ready]'));
   const rows=await t.page.evaluate(()=>[...document.querySelectorAll('.offline-pack')].map(li=>({game:li.dataset.game,state:li.dataset.state,size:li.querySelector('.offline-pack-size').textContent,action:li.querySelector('button')?.dataset.action})));
-  assert.equal(rows.length,11);
+  assert.equal(rows.length,12);
   assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:'24 MB',action:'offline-pack-delete'});
   const tennis=rows.find(r=>r.game==='tennis');assert.ok(['missing','partial'].includes(tennis.state),'tennis is not ready (files shared with the main games may already be there): '+JSON.stringify(tennis));
   assert.equal(tennis.size,'4.7 MB');assert.equal(tennis.action,'offline-pack-download');
   const texts=await t.page.evaluate(()=>({status:document.querySelector('.offline-status').textContent,storage:document.querySelector('[data-offline-storage]').textContent,install:document.querySelector('[data-action=offline-install]').textContent,installState:document.querySelector('[data-offline-panel]').dataset.install}));
-  assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 11 משחקים מוכנים/);
+  assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 12 משחקים מוכנים/);
   assert.match(texts.storage,/באחסון המכשיר: [\d.]+ MB/);assert.match(texts.storage,/שמירה קבועה: (כן|לא)/);
   assert.ok(['prompt','manual','ios','installed'].includes(texts.installState),texts.installState);
   if(texts.installState!=='installed'){await t.page.locator('[data-action=offline-install]').click();await t.page.waitForFunction(()=>!document.querySelector('[data-install-hint]').hidden);assert.match(await t.page.evaluate(()=>document.querySelector('[data-install-hint]').textContent),/הוספה למסך הבית|התקנת אפליקציה|מותקנת/);}

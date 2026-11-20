@@ -1,0 +1,86 @@
+#boar-levels-panel {
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  color: inherit;
+  direction: rtl;
+}
+
+#boar-levels-panel::backdrop { background: transparent; }
+
+#boar-levels-panel .shop-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: min(90dvh, 100%);
+  overflow: hidden;
+}
+
+#boar-levels-panel .panel-heading {
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 12px;
+}
+
+#boar-levels-panel .levels-wallet { font-size: 16px; direction: rtl; }
+#boar-levels-panel .shop-footer { margin-top: 12px; }
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 205px), 1fr));
+  gap: 10px;
+  padding: 5px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #688993 #102731;
+}
+
+.levels-survival { grid-column: 1 / -1; }
+
+.levels-choice {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #698c98;
+  border-radius: 10px;
+  background: #1c3c4a;
+  text-align: start;
+}
+
+.levels-choice:enabled:hover { background: #294e5c; }
+.levels-choice[aria-current="true"] { border-color: var(--gold); }
+.levels-choice:disabled { background: #132d3b; border-color: #3b5662; color: #b4c7ce; }
+.levels-card-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 10px; color: #c0d9df; font-size: 12px; }
+.levels-state { color: var(--gold); }
+.levels-choice:disabled .levels-state { color: #b4c7ce; }
+.levels-name { font-size: 19px; }
+.levels-weather { color: #d1e8ec; font-size: 13px; }
+.levels-detail { color: #b6cbd1; font-size: 12px; }
+
+.levels-upgrade { display: flex; flex-direction: column; }
+.levels-upgrade .levels-card-header { font-size: 12px; }
+.levels-upgrade p { flex: 1; }
+#boar-levels-panel .levels-upgrade button { min-height: 44px; }
+#boar-levels-panel .levels-upgrade button:disabled { color: #bacecf; border-color: #4c6570; background: #102e39; opacity: 1; }
+
+@media (max-width: 600px), (max-height: 500px) {
+  #boar-levels-panel .shop-panel { padding: 12px; max-height: 100%; }
+  #boar-levels-panel h2 { margin: 0; font-size: 22px; }
+  #boar-levels-panel .panel-heading { margin-bottom: 5px; }
+  #boar-levels-panel .shop-footer { margin-top: 5px; }
+  #boar-levels-panel .shop-footer button { min-height: 44px; padding: 6px 18px; }
+}
+
+/* boars-levels-v1 upgrade icons (96x96 SVG shown at 48) */
+.levels-upgrade-icon{display:block;width:48px;height:48px;margin:0 0 6px;}

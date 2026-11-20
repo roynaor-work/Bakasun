@@ -283,6 +283,11 @@
   "minigames/boar-island/guns.js",
   "minigames/boar-island/index.html",
   "minigames/boar-island/kit.js",
+  "minigames/boar-island/levels-ui.css",
+  "minigames/boar-island/levels-ui.js",
+  "minigames/boar-island/levels-v1-data.mjs",
+  "minigames/boar-island/levels-weather.js",
+  "minigames/boar-island/levels.mjs",
   "minigames/boar-island/style.css",
   "minigames/boar-island/vendor/BufferGeometryUtils.js",
   "minigames/boar-island/vendor/RoundedBoxGeometry.js",
@@ -1471,6 +1476,32 @@
    "assets/game-naval/audio/sonar-ping.ogg",
    "assets/game-naval/audio/bubbles.ogg"
   ],
+  "boar": [
+   "assets/boars-levels-v1/icons/brass-fuse.svg",
+   "assets/boars-levels-v1/icons/bronze-core.svg",
+   "assets/boars-levels-v1/icons/double-tray.svg",
+   "assets/boars-levels-v1/icons/ember-pellet.svg",
+   "assets/boars-levels-v1/icons/mortar-elevator.svg",
+   "assets/boars-levels-v1/icons/needle-fan.svg",
+   "assets/boars-levels-v1/icons/quick-latch.svg",
+   "assets/boars-levels-v1/icons/reef-choke.svg",
+   "assets/boars-levels-v1/icons/return-spring.svg",
+   "assets/boars-levels-v1/icons/silk-slide.svg",
+   "assets/boars-levels-v1/icons/twin-cradle.svg",
+   "assets/boars-levels-v1/icons/wide-halo.svg",
+   "assets/boars-levels-v1/weather/fog-light.webp",
+   "assets/boars-levels-v1/weather/fog-texture.webp",
+   "assets/boars-levels-v1/weather/night-light.webp",
+   "assets/boars-levels-v1/weather/night-texture.webp",
+   "assets/boars-levels-v1/weather/rain-light.webp",
+   "assets/boars-levels-v1/weather/rain-texture.webp",
+   "assets/boars-levels-v1/weather/snow-light.webp",
+   "assets/boars-levels-v1/weather/snow-texture.webp",
+   "assets/boars-levels-v1/weather/storm-light.webp",
+   "assets/boars-levels-v1/weather/storm-texture.webp",
+   "assets/boars-levels-v1/weather/sunset-light.webp",
+   "assets/boars-levels-v1/weather/sunset-texture.webp"
+  ],
   "fire": [
    "assets/fire-v23/crew-0.webp",
    "assets/fire-v23/crew-1.webp",
@@ -2193,6 +2224,102 @@
   "assets/audio/g4e/stadium-bed.ogg": [
    "8d4a2e110610d538",
    92340
+  ],
+  "assets/boars-levels-v1/icons/brass-fuse.svg": [
+   "ffc9e22ad9d20f5b",
+   1775
+  ],
+  "assets/boars-levels-v1/icons/bronze-core.svg": [
+   "bd46dbc9402b9ee3",
+   1715
+  ],
+  "assets/boars-levels-v1/icons/double-tray.svg": [
+   "224327c1e8dbecdd",
+   1749
+  ],
+  "assets/boars-levels-v1/icons/ember-pellet.svg": [
+   "189ef606b28152f5",
+   1762
+  ],
+  "assets/boars-levels-v1/icons/mortar-elevator.svg": [
+   "45ca42edb171e858",
+   1725
+  ],
+  "assets/boars-levels-v1/icons/needle-fan.svg": [
+   "9add0b3022065676",
+   1710
+  ],
+  "assets/boars-levels-v1/icons/quick-latch.svg": [
+   "1d9158aaf8c0f553",
+   1749
+  ],
+  "assets/boars-levels-v1/icons/reef-choke.svg": [
+   "e575e2b62ffba0a8",
+   1718
+  ],
+  "assets/boars-levels-v1/icons/return-spring.svg": [
+   "3d83139ada7022fa",
+   1738
+  ],
+  "assets/boars-levels-v1/icons/silk-slide.svg": [
+   "3ea370d56780a259",
+   1713
+  ],
+  "assets/boars-levels-v1/icons/twin-cradle.svg": [
+   "109618a72a7e57f9",
+   1741
+  ],
+  "assets/boars-levels-v1/icons/wide-halo.svg": [
+   "3d8c719780d11340",
+   1790
+  ],
+  "assets/boars-levels-v1/weather/fog-light.webp": [
+   "e4621467e727ae1c",
+   28904
+  ],
+  "assets/boars-levels-v1/weather/fog-texture.webp": [
+   "d58c028e3fda9af0",
+   97984
+  ],
+  "assets/boars-levels-v1/weather/night-light.webp": [
+   "d5a9c9ebd5859ecf",
+   61306
+  ],
+  "assets/boars-levels-v1/weather/night-texture.webp": [
+   "e5f7aa9d37466801",
+   4460
+  ],
+  "assets/boars-levels-v1/weather/rain-light.webp": [
+   "682688ae03a839e1",
+   40026
+  ],
+  "assets/boars-levels-v1/weather/rain-texture.webp": [
+   "79b0be9c2df73142",
+   54926
+  ],
+  "assets/boars-levels-v1/weather/snow-light.webp": [
+   "c22020d81bdf1679",
+   23382
+  ],
+  "assets/boars-levels-v1/weather/snow-texture.webp": [
+   "328766fa03780410",
+   74698
+  ],
+  "assets/boars-levels-v1/weather/storm-light.webp": [
+   "7037fb4264c206cb",
+   108552
+  ],
+  "assets/boars-levels-v1/weather/storm-texture.webp": [
+   "d5f47cca9ba32f86",
+   107324
+  ],
+  "assets/boars-levels-v1/weather/sunset-light.webp": [
+   "a5a44e5b91907b01",
+   81776
+  ],
+  "assets/boars-levels-v1/weather/sunset-texture.webp": [
+   "5233718fdb73a1d7",
+   47442
   ],
   "assets/boot/boot-montage.mp4": [
    "3da660237db4394f",
@@ -6547,8 +6674,8 @@
    20402
   ],
   "minigames/boar-island/game.js": [
-   "298457df9dc3a24f",
-   139285
+   "b749fb3d1cd11786",
+   144643
   ],
   "minigames/boar-island/guns.js": [
    "14a972a0df710e2b",
@@ -6561,6 +6688,26 @@
   "minigames/boar-island/kit.js": [
    "5eb913afd656067c",
    15476
+  ],
+  "minigames/boar-island/levels-ui.css": [
+   "d7118c05ff890f96",
+   2759
+  ],
+  "minigames/boar-island/levels-ui.js": [
+   "84243617245b0453",
+   7537
+  ],
+  "minigames/boar-island/levels-v1-data.mjs": [
+   "c0f8d4cb922521c0",
+   19596
+  ],
+  "minigames/boar-island/levels-weather.js": [
+   "8704a6a6939a476b",
+   3384
+  ],
+  "minigames/boar-island/levels.mjs": [
+   "327fc27ded6f29e2",
+   11985
   ],
   "minigames/boar-island/style.css": [
    "a8a295a70346522f",
@@ -6599,8 +6746,8 @@
    23262
   ],
   "minigames/boar-session.mjs": [
-   "e448c0e32b9e0180",
-   4848
+   "6ca6652ef76c6917",
+   4988
   ],
   "minigames/canvas-session.mjs": [
    "075613fde1bfef44",
@@ -8007,8 +8154,8 @@
    16136
   ],
   "ui/offline.mjs": [
-   "002b7614c24da510",
-   25681
+   "b036b52548a57afd",
+   25787
   ],
   "ui/press.mjs": [
    "c1c9ae632a225d2e",
