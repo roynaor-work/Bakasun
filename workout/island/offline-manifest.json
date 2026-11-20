@@ -106,6 +106,14 @@
   "activity/soccer-team.mjs",
   "activity/state.mjs",
   "app.mjs",
+  "assets/city-missions-v1/board.mjs",
+  "assets/city-missions-v1/catalog.mjs",
+  "assets/city-missions-v1/logic.mjs",
+  "assets/city-missions-v1/runtime.mjs",
+  "assets/city-progression-v1/catalog.mjs",
+  "assets/city-progression-v1/island-adapter.mjs",
+  "assets/city-progression-v1/progression.mjs",
+  "assets/city-progression-v1/storage.mjs",
   "assets/hoops-v241/crowd/runtime/lod-policy.mjs",
   "assets/racing/credits.html",
   "assets/soccer-v24/crowd/runtime/lod-policy.mjs",
@@ -1689,7 +1697,67 @@
    "assets/models/city/49-fire-truck.glb",
    "assets/models/city/50-police-car.glb",
    "assets/models/city/51-ambulance.glb",
-   "assets/models/city/52-taxi.glb"
+   "assets/models/city/52-taxi.glb",
+   "assets/city-buildings-v2/bakery-complete.glb",
+   "assets/city-buildings-v2/bakery-foundation.glb",
+   "assets/city-buildings-v2/bakery-half-built.glb",
+   "assets/city-buildings-v2/bus-stop-complete.glb",
+   "assets/city-buildings-v2/bus-stop-foundation.glb",
+   "assets/city-buildings-v2/bus-stop-half-built.glb",
+   "assets/city-buildings-v2/cinema-complete.glb",
+   "assets/city-buildings-v2/cinema-foundation.glb",
+   "assets/city-buildings-v2/cinema-half-built.glb",
+   "assets/city-buildings-v2/fire-station-complete.glb",
+   "assets/city-buildings-v2/fire-station-foundation.glb",
+   "assets/city-buildings-v2/fire-station-half-built.glb",
+   "assets/city-buildings-v2/grocery-complete.glb",
+   "assets/city-buildings-v2/grocery-foundation.glb",
+   "assets/city-buildings-v2/grocery-half-built.glb",
+   "assets/city-buildings-v2/harbor-complete.glb",
+   "assets/city-buildings-v2/harbor-foundation.glb",
+   "assets/city-buildings-v2/harbor-half-built.glb",
+   "assets/city-buildings-v2/hospital-complete.glb",
+   "assets/city-buildings-v2/hospital-foundation.glb",
+   "assets/city-buildings-v2/hospital-half-built.glb",
+   "assets/city-buildings-v2/library-complete.glb",
+   "assets/city-buildings-v2/library-foundation.glb",
+   "assets/city-buildings-v2/library-half-built.glb",
+   "assets/city-buildings-v2/lighthouse-complete.glb",
+   "assets/city-buildings-v2/lighthouse-foundation.glb",
+   "assets/city-buildings-v2/lighthouse-half-built.glb",
+   "assets/city-buildings-v2/market-complete.glb",
+   "assets/city-buildings-v2/market-foundation.glb",
+   "assets/city-buildings-v2/market-half-built.glb",
+   "assets/city-buildings-v2/museum-complete.glb",
+   "assets/city-buildings-v2/museum-foundation.glb",
+   "assets/city-buildings-v2/museum-half-built.glb",
+   "assets/city-buildings-v2/park-complete.glb",
+   "assets/city-buildings-v2/park-foundation.glb",
+   "assets/city-buildings-v2/park-half-built.glb",
+   "assets/city-buildings-v2/patisserie-complete.glb",
+   "assets/city-buildings-v2/patisserie-foundation.glb",
+   "assets/city-buildings-v2/patisserie-half-built.glb",
+   "assets/city-buildings-v2/playground-complete.glb",
+   "assets/city-buildings-v2/playground-foundation.glb",
+   "assets/city-buildings-v2/playground-half-built.glb",
+   "assets/city-buildings-v2/police-station-complete.glb",
+   "assets/city-buildings-v2/police-station-foundation.glb",
+   "assets/city-buildings-v2/police-station-half-built.glb",
+   "assets/city-buildings-v2/school-complete.glb",
+   "assets/city-buildings-v2/school-foundation.glb",
+   "assets/city-buildings-v2/school-half-built.glb",
+   "assets/city-buildings-v2/sports-park-complete.glb",
+   "assets/city-buildings-v2/sports-park-foundation.glb",
+   "assets/city-buildings-v2/sports-park-half-built.glb",
+   "assets/city-buildings-v2/swimming-pool-complete.glb",
+   "assets/city-buildings-v2/swimming-pool-foundation.glb",
+   "assets/city-buildings-v2/swimming-pool-half-built.glb",
+   "assets/city-buildings-v2/theatre-complete.glb",
+   "assets/city-buildings-v2/theatre-foundation.glb",
+   "assets/city-buildings-v2/theatre-half-built.glb",
+   "assets/city-buildings-v2/train-station-complete.glb",
+   "assets/city-buildings-v2/train-station-foundation.glb",
+   "assets/city-buildings-v2/train-station-half-built.glb"
   ],
   "catch": [
    "assets/catch-v7/audio/barrier-break.mp3",
@@ -1794,8 +1862,8 @@
    2080
   ],
   "activity/runtime.mjs": [
-   "f4c36c137d413c29",
-   8325
+   "93fa3b1d1dd9ac24",
+   8378
   ],
   "activity/soccer-card.mjs": [
    "5cca2e53ea175548",
@@ -1814,8 +1882,8 @@
    4546
   ],
   "app.mjs": [
-   "4de18a07167eaeca",
-   7942
+   "9aa032678dcb8819",
+   9357
   ],
   "assets/alien-v24/overheat.ogg": [
    "6d01d7168b98edda",
@@ -2532,6 +2600,278 @@
   "assets/catch-v8/audio/gear-shift.ogg": [
    "84675551be699551",
    1363
+  ],
+  "assets/city-buildings-v2/bakery-complete.glb": [
+   "b5340cd23f971e5d",
+   7384
+  ],
+  "assets/city-buildings-v2/bakery-foundation.glb": [
+   "43c3a2308a08d4b0",
+   5592
+  ],
+  "assets/city-buildings-v2/bakery-half-built.glb": [
+   "d1315dc1b2dab1bb",
+   5576
+  ],
+  "assets/city-buildings-v2/bus-stop-complete.glb": [
+   "98c0db49a0e5ccf2",
+   5260
+  ],
+  "assets/city-buildings-v2/bus-stop-foundation.glb": [
+   "cc3d9337ed02b3d1",
+   5916
+  ],
+  "assets/city-buildings-v2/bus-stop-half-built.glb": [
+   "a486b186238b37b9",
+   5476
+  ],
+  "assets/city-buildings-v2/cinema-complete.glb": [
+   "f395cdc551e77e64",
+   7564
+  ],
+  "assets/city-buildings-v2/cinema-foundation.glb": [
+   "80b6c930f89acaef",
+   6540
+  ],
+  "assets/city-buildings-v2/cinema-half-built.glb": [
+   "36188f65ce5fd3c8",
+   6524
+  ],
+  "assets/city-buildings-v2/fire-station-complete.glb": [
+   "419804a1eba3c8a9",
+   5628
+  ],
+  "assets/city-buildings-v2/fire-station-foundation.glb": [
+   "104b826921b90356",
+   5356
+  ],
+  "assets/city-buildings-v2/fire-station-half-built.glb": [
+   "c7f08d0c7d60e340",
+   5416
+  ],
+  "assets/city-buildings-v2/grocery-complete.glb": [
+   "9eea20409f38375b",
+   7320
+  ],
+  "assets/city-buildings-v2/grocery-foundation.glb": [
+   "f5792c696233fe77",
+   5668
+  ],
+  "assets/city-buildings-v2/grocery-half-built.glb": [
+   "19970741868587f4",
+   5484
+  ],
+  "assets/city-buildings-v2/harbor-complete.glb": [
+   "000c94292fe8314e",
+   7208
+  ],
+  "assets/city-buildings-v2/harbor-foundation.glb": [
+   "a1d6b9cf10e60976",
+   5964
+  ],
+  "assets/city-buildings-v2/harbor-half-built.glb": [
+   "4a37a3356716a376",
+   7944
+  ],
+  "assets/city-buildings-v2/hospital-complete.glb": [
+   "f20b51d8fcd5eb31",
+   7732
+  ],
+  "assets/city-buildings-v2/hospital-foundation.glb": [
+   "9c717c5491dd6a4c",
+   5384
+  ],
+  "assets/city-buildings-v2/hospital-half-built.glb": [
+   "ee3c5e86df59ea04",
+   6112
+  ],
+  "assets/city-buildings-v2/library-complete.glb": [
+   "9243a18c96bd9f27",
+   7076
+  ],
+  "assets/city-buildings-v2/library-foundation.glb": [
+   "356865ec3c4aa097",
+   5364
+  ],
+  "assets/city-buildings-v2/library-half-built.glb": [
+   "83c2a9e4bd441798",
+   4848
+  ],
+  "assets/city-buildings-v2/lighthouse-complete.glb": [
+   "f84bb18cf4f02af5",
+   7252
+  ],
+  "assets/city-buildings-v2/lighthouse-foundation.glb": [
+   "fac23bbbaa2e0d07",
+   5292
+  ],
+  "assets/city-buildings-v2/lighthouse-half-built.glb": [
+   "2c2d617a3c71400f",
+   6140
+  ],
+  "assets/city-buildings-v2/market-complete.glb": [
+   "1742145e69d7deb5",
+   8644
+  ],
+  "assets/city-buildings-v2/market-foundation.glb": [
+   "27c72aaff3c3debb",
+   5496
+  ],
+  "assets/city-buildings-v2/market-half-built.glb": [
+   "a5ed06286affcd91",
+   6588
+  ],
+  "assets/city-buildings-v2/museum-complete.glb": [
+   "653cd48cbf26919c",
+   7096
+  ],
+  "assets/city-buildings-v2/museum-foundation.glb": [
+   "762296014b037031",
+   5448
+  ],
+  "assets/city-buildings-v2/museum-half-built.glb": [
+   "5926251fff96272d",
+   6156
+  ],
+  "assets/city-buildings-v2/park-complete.glb": [
+   "9e9806900dac8751",
+   6752
+  ],
+  "assets/city-buildings-v2/park-foundation.glb": [
+   "728d8e24d2cfe446",
+   5276
+  ],
+  "assets/city-buildings-v2/park-half-built.glb": [
+   "27fddb8b595345e0",
+   5572
+  ],
+  "assets/city-buildings-v2/patisserie-complete.glb": [
+   "f7e5457e52e07bbb",
+   7580
+  ],
+  "assets/city-buildings-v2/patisserie-foundation.glb": [
+   "be284b5f362f5c07",
+   5388
+  ],
+  "assets/city-buildings-v2/patisserie-half-built.glb": [
+   "3b3f09562c631d5c",
+   5564
+  ],
+  "assets/city-buildings-v2/playground-complete.glb": [
+   "90b39828c4b20bf8",
+   6124
+  ],
+  "assets/city-buildings-v2/playground-foundation.glb": [
+   "66ede84f9cc9e0a1",
+   5676
+  ],
+  "assets/city-buildings-v2/playground-half-built.glb": [
+   "8b12f37773a7dfd9",
+   6264
+  ],
+  "assets/city-buildings-v2/police-station-complete.glb": [
+   "01355ad79cee9ecf",
+   6224
+  ],
+  "assets/city-buildings-v2/police-station-foundation.glb": [
+   "5ea4420e740848aa",
+   5688
+  ],
+  "assets/city-buildings-v2/police-station-half-built.glb": [
+   "9409b689ed7bfded",
+   5168
+  ],
+  "assets/city-buildings-v2/school-complete.glb": [
+   "6f4b3f0b29e62aa4",
+   9068
+  ],
+  "assets/city-buildings-v2/school-foundation.glb": [
+   "5d038dc8318fe734",
+   5280
+  ],
+  "assets/city-buildings-v2/school-half-built.glb": [
+   "6acc63a2436674cd",
+   6756
+  ],
+  "assets/city-buildings-v2/sports-park-complete.glb": [
+   "998b421f40954536",
+   6732
+  ],
+  "assets/city-buildings-v2/sports-park-foundation.glb": [
+   "a3c9199e9dbf320a",
+   5836
+  ],
+  "assets/city-buildings-v2/sports-park-half-built.glb": [
+   "edcaae17f3bbb3d2",
+   5916
+  ],
+  "assets/city-buildings-v2/swimming-pool-complete.glb": [
+   "6ed1bf639c2a0d02",
+   6476
+  ],
+  "assets/city-buildings-v2/swimming-pool-foundation.glb": [
+   "eb4a91a9d2c2da29",
+   6024
+  ],
+  "assets/city-buildings-v2/swimming-pool-half-built.glb": [
+   "f5c5a731065863df",
+   6176
+  ],
+  "assets/city-buildings-v2/theatre-complete.glb": [
+   "94ad8dcfeb865d38",
+   6260
+  ],
+  "assets/city-buildings-v2/theatre-foundation.glb": [
+   "bd22157348b4287a",
+   5596
+  ],
+  "assets/city-buildings-v2/theatre-half-built.glb": [
+   "11c506c263c1b75c",
+   6088
+  ],
+  "assets/city-buildings-v2/train-station-complete.glb": [
+   "9ee89bab203f218b",
+   8592
+  ],
+  "assets/city-buildings-v2/train-station-foundation.glb": [
+   "85a014dc2d22e5b2",
+   5912
+  ],
+  "assets/city-buildings-v2/train-station-half-built.glb": [
+   "2b0a6c48557ac438",
+   7432
+  ],
+  "assets/city-missions-v1/board.mjs": [
+   "a072e3b1b4e0b14a",
+   5672
+  ],
+  "assets/city-missions-v1/catalog.mjs": [
+   "6510c50c3c454a51",
+   6866
+  ],
+  "assets/city-missions-v1/logic.mjs": [
+   "34b5192227feb50f",
+   12500
+  ],
+  "assets/city-missions-v1/runtime.mjs": [
+   "3ac3ebb8d9924e7a",
+   11817
+  ],
+  "assets/city-progression-v1/catalog.mjs": [
+   "a78a89175ec8ba23",
+   9769
+  ],
+  "assets/city-progression-v1/island-adapter.mjs": [
+   "3723f5829bf060fd",
+   6980
+  ],
+  "assets/city-progression-v1/progression.mjs": [
+   "b1250e0966460f58",
+   12123
+  ],
+  "assets/city-progression-v1/storage.mjs": [
+   "40787ba573ae5a50",
+   1689
   ],
   "assets/defense-v7/alien-beetle-lod1.glb": [
    "953ec12e7352057d",
@@ -6206,32 +6546,32 @@
    1389
   ],
   "engine/city-depth.mjs": [
-   "9389565e7fdcebd2",
-   8563
+   "7ef3a41b57da3644",
+   9259
   ],
   "engine/city-hall.mjs": [
    "76de0aa46775f5c2",
    1618
   ],
   "engine/city-management.mjs": [
-   "6f1f40f2f97940e1",
-   14193
+   "5e7d2d2043c47219",
+   14412
   ],
   "engine/city-runtime.mjs": [
-   "79772e535a167299",
-   3993
+   "bcac7fb698d71459",
+   4056
   ],
   "engine/city-sites.mjs": [
    "b43c0be5051b857a",
    6043
   ],
   "engine/economy.mjs": [
-   "de8c2ba5650ccdc0",
-   3301
+   "e13cc48c578016b3",
+   3804
   ],
   "engine/engine.mjs": [
-   "09af46eef2588fd7",
-   39480
+   "c5bfc9da32dcfcd7",
+   42126
   ],
   "engine/episodes.mjs": [
    "fbc9c1bebf54a287",
@@ -6246,32 +6586,32 @@
    2561
   ],
   "engine/metrics.mjs": [
-   "c977ab3bfba36c4b",
-   3861
+   "307007f92595b23a",
+   4146
   ],
   "engine/paths.mjs": [
    "88833b65b6d5bcff",
    2081
   ],
   "engine/persistence.mjs": [
-   "3e9a4aab07579249",
-   26502
+   "662c35cafa81c446",
+   26989
   ],
   "engine/placement-help.mjs": [
    "2bcd9403852b15eb",
    2501
   ],
   "engine/ready-plots.mjs": [
-   "2c22699c039cdf48",
-   16660
+   "a50a32bc0f1f7788",
+   16721
   ],
   "engine/registry.mjs": [
    "cf1b6e747fe3b54f",
    2810
   ],
   "engine/rules.mjs": [
-   "3a5d7f757a428987",
-   5609
+   "c2ead64cccb2acee",
+   5975
   ],
   "episodes/example-first-visit.json": [
    "d9a595ea0697eb6e",
@@ -8162,8 +8502,8 @@
    62159
   ],
   "ui/activity.mjs": [
-   "f491f4d5f9c06ae9",
-   56921
+   "f58489677892da07",
+   56993
   ],
   "ui/adventure-emblems.mjs": [
    "82977f552ab5239d",
@@ -8210,8 +8550,8 @@
    7211
   ],
   "ui/city-management.mjs": [
-   "6d489fd22f52c96f",
-   18075
+   "dddc283a60e1fbe4",
+   18179
   ],
   "ui/city-planning.css": [
    "8f268d614651bd62",
@@ -8250,8 +8590,8 @@
    8653
   ],
   "ui/interface.mjs": [
-   "005e8b01b5477a8e",
-   52951
+   "09aec6889ef63ccb",
+   55455
   ],
   "ui/load-report.mjs": [
    "613f0a9e66c786eb",
@@ -8278,8 +8618,8 @@
    25787
   ],
   "ui/press.mjs": [
-   "c1c9ae632a225d2e",
-   3905
+   "8aa8a502d8ca750c",
+   3923
   ],
   "ui/racing-league-art.mjs": [
    "4fcb88be275eec83",
@@ -8298,8 +8638,8 @@
    3008
   ],
   "ui/ready-plots.mjs": [
-   "99f14ba3e536370f",
-   6569
+   "e3e5847fc15ba48b",
+   6911
   ],
   "ui/release-watch.mjs": [
    "51800606a2dd2090",
@@ -8442,8 +8782,8 @@
    4856
   ],
   "view/island-view.mjs": [
-   "1cbece62659eb994",
-   36073
+   "0aa0c3ee36e10d8a",
+   36991
   ],
   "view/learning-buildings.mjs": [
    "c490569e24b14380",

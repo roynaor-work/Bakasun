@@ -1,0 +1,210 @@
+// Missions and city events (Codex package city-missions-events-v1). A module, not JSON: no extra request at start.
+export default {
+  "pacing": {
+    "firstEventAfter": 90,
+    "eventCooldown": 150,
+    "minMissionsBetweenEvents": 1
+  },
+  "missions": [
+    {
+      "id": "build-house",
+      "kind": "build",
+      "title": "בית למשפחה חדשה",
+      "description": "בנו בית כדי שעוד משפחה תוכל לגור בעיר.",
+      "target": "house",
+      "reward": { "money": 25, "materials": 3 }
+    },
+    {
+      "id": "upgrade-house",
+      "kind": "upgrade",
+      "title": "יותר מקום בבית",
+      "description": "בחרו בית ושדרגו אותו כדי שיותר אנשים יוכלו לגור בו.",
+      "target": "house",
+      "reward": { "money": 30 }
+    },
+    {
+      "id": "connect-neighbor",
+      "kind": "connect",
+      "title": "דרך לשכנים",
+      "description": "חברו אחד מהמבנים לרשת הכבישים של העיר.",
+      "minDisconnected": 1,
+      "reward": { "money": 20, "materials": 3 }
+    },
+    {
+      "id": "play-fire-training",
+      "kind": "play",
+      "title": "הכירו את צוות הכיבוי",
+      "description": "סיימו סיבוב בכיבוי אש כדי להתאמן עם הצוות.",
+      "gameIds": ["fireRescue"],
+      "requiresTypes": ["fireStation"],
+      "stageOffset": -1,
+      "reward": { "money": 22 }
+    },
+    {
+      "id": "build-farm",
+      "kind": "build",
+      "title": "חווה לעיר",
+      "description": "בנו חווה שמספקת אוכל לתושבים.",
+      "target": "farm",
+      "reward": { "money": 25, "food": 3 }
+    },
+    {
+      "id": "collect-food",
+      "kind": "collect",
+      "title": "אוכל מהחווה",
+      "description": "אספו 4 יחידות אוכל. האוכל נאסף בזמן שהעיר פתוחה.",
+      "target": "food",
+      "amount": 4,
+      "requiresTypes": ["farm"],
+      "reward": { "money": 18, "materials": 2 }
+    },
+    {
+      "id": "play-sport",
+      "kind": "play",
+      "title": "סיבוב במגרש",
+      "description": "סיימו משחק במגרש העירוני.",
+      "gameIds": ["soccer", "streetSlam", "tennis"],
+      "stageOffset": -1,
+      "reward": { "money": 24 }
+    },
+    {
+      "id": "build-police",
+      "kind": "build",
+      "title": "תחנת משטרה",
+      "description": "בנו תחנת משטרה כדי שצוות העיר יוכל לעזור כשצריך.",
+      "target": "police",
+      "reward": { "money": 30 }
+    },
+    {
+      "id": "build-fire-station",
+      "kind": "build",
+      "title": "תחנה לצוות הכיבוי",
+      "description": "בנו תחנת כיבוי אש כדי לפתוח את המשחק של צוות הכיבוי.",
+      "target": "fireStation",
+      "reward": { "money": 26 }
+    },
+    {
+      "id": "build-park",
+      "kind": "build",
+      "title": "פארק לשכונה",
+      "description": "בנו פארק כדי שלילדים יהיה מקום לשחק.",
+      "target": "park",
+      "reward": { "money": 20, "food": 3 }
+    },
+    {
+      "id": "build-factory",
+      "kind": "build",
+      "title": "מפעל לחומרי בנייה",
+      "description": "בנו מפעל שמכין חומרי בנייה לעיר.",
+      "target": "factory",
+      "reward": { "money": 30, "materials": 3 }
+    },
+    {
+      "id": "collect-materials",
+      "kind": "collect",
+      "title": "חומרים לבנייה",
+      "description": "אספו 3 יחידות חומרי בנייה. המפעל ממלא את המחסן בזמן שהעיר פתוחה.",
+      "target": "materials",
+      "amount": 3,
+      "requiresTypes": ["factory"],
+      "reward": { "money": 20 }
+    },
+    {
+      "id": "build-harbor",
+      "kind": "build",
+      "title": "נמל לספינות",
+      "description": "בנו נמל ליד הים כדי שספינות יוכלו לצאת ממנו.",
+      "target": "harbor",
+      "reward": { "money": 35, "materials": 4 }
+    },
+    {
+      "id": "upgrade-park",
+      "kind": "upgrade",
+      "title": "פארק גדול יותר",
+      "description": "בחרו פארק ושדרגו אותו.",
+      "target": "park",
+      "reward": { "money": 24, "energy": 2 }
+    },
+    {
+      "id": "collect-energy",
+      "kind": "collect",
+      "title": "אנרגיה לעיר",
+      "description": "אספו 3 יחידות אנרגיה בזמן שהעיר פתוחה.",
+      "target": "energy",
+      "amount": 3,
+      "reward": { "money": 20, "materials": 2 }
+    },
+    {
+      "id": "play-race",
+      "kind": "play",
+      "title": "סיבוב במסלול",
+      "description": "סיימו מרוץ אחד באי.",
+      "gameIds": ["islandRacing"],
+      "stageOffset": -1,
+      "reward": { "money": 24 }
+    },
+    {
+      "id": "event-fire",
+      "kind": "rescue",
+      "event": true,
+      "title": "שריפה בעיר",
+      "description": "צאו עם צוות הכיבוי וכבו את האש.",
+      "requiresTypes": ["fireStation"],
+      "minBuildings": 2,
+      "gameIds": ["fireRescue"],
+      "minGameStage": 2,
+      "stageOffset": -1,
+      "weight": 3,
+      "reward": { "money": 48, "materials": 5 }
+    },
+    {
+      "id": "event-crime",
+      "kind": "rescue",
+      "event": true,
+      "title": "עזרו לתפוס את הפושע",
+      "description": "צוות המשטרה צריך עזרה. תפסו את הפושע במשחק.",
+      "requiresTypes": ["police"],
+      "minBuildings": 2,
+      "gameIds": ["catchCriminal"],
+      "stageOffset": -1,
+      "weight": 2,
+      "reward": { "money": 45, "materials": 4 }
+    },
+    {
+      "id": "event-sports",
+      "kind": "play",
+      "event": true,
+      "title": "יום ספורט בעיר",
+      "description": "כולם באים לעודד. סיימו משחק ביום הספורט.",
+      "gameIds": ["soccer", "streetSlam", "tennis"],
+      "stageOffset": -1,
+      "weight": 2,
+      "reward": { "money": 38, "food": 4 }
+    },
+    {
+      "id": "event-storm",
+      "kind": "rescue",
+      "event": true,
+      "title": "סערה ליד הנמל",
+      "description": "צאו מהנמל וסיימו את השלב בספינות בהצלחה.",
+      "requiresTypes": ["harbor"],
+      "gameIds": ["navalDuel"],
+      "stageOffset": -1,
+      "weight": 2,
+      "reward": { "money": 48, "energy": 4 }
+    },
+    {
+      "id": "event-racing",
+      "kind": "play",
+      "event": true,
+      "title": "מרוץ האי",
+      "description": "תושבי העיר מעודדים מהיציע. סיימו מרוץ אחד.",
+      "minCityStage": 1,
+      "requiresTypes": ["park"],
+      "gameIds": ["islandRacing"],
+      "stageOffset": -1,
+      "weight": 1,
+      "reward": { "money": 36, "food": 3 }
+    }
+  ]
+};

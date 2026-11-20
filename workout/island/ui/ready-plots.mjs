@@ -16,7 +16,10 @@ export class ReadyPlotsInterface{
     ui.view.setReadyPlots?.(this.rows.map(row=>{const type=ui.getBuilding(row.typeId);return {...row,icon:type?.icon||'◇',label:ui.label(type,'building')};}));
     this.updateConfirmation?.();this.updateList?.();
   }
-  reason(row){return this.ui.t(plotCanBuild(row)?'ready.available':row?.reason||`ready.${row?.status||'unavailable'}`);}
+  reason(row){
+    if (row?.gate) return this.ui.data.cityProgress.gateText(row.gate, this.ui.t);
+    return this.ui.t(plotCanBuild(row)?'ready.available':row?.reason||`ready.${row?.status||'unavailable'}`);
+  }
   focus(row){if(!row)return;this.focusedId=row.id;const view=this.ui.view;if(view.focusReadyPlot)view.focusReadyPlot(row);else view.focusCell?.(row.x+(row.w-1)/2,row.z+(row.d-1)/2);view.setReadyPlotSelection?.(row.id);}
   focusType(typeId){const row=this.ui.engine.readyPlotForType?.(typeId)||this.rows.find(row=>row.typeId===typeId);this.focus(row);return row;}
   chooseType(typeId){
@@ -26,6 +29,8 @@ export class ReadyPlotsInterface{
     if(typeId==='road'){this.openList();return true;}
     const built=this.ui.engine.state.buildings.find(row=>row.typeId===typeId);
     if(built){this.ui.showInfo(built.id);return true;}
+    // An older prepared city can have no reserved lot for a new blueprint.
+    if (this.ui.getBuilding(typeId)?.cityProgressAsset) return false;
     this.ui.toast('ready.noPlot');return true;
   }
   selectCell(cell){
@@ -52,7 +57,8 @@ export class ReadyPlotsInterface{
     modal.append(title,detail,price,status,actions);
     this.updateConfirmation=()=>{
       const current=this.rows.find(row=>row.id===id),priceText=ui.t('ready.price',{cost:Number(type.cost||0).toLocaleString('he-IL')}),statusText=current?this.reason(current):ui.t('ready.occupied'),confirmText=ui.t('ready.confirm',{cost:Number(type.cost||0).toLocaleString('he-IL')});
-      if(price.textContent!==priceText)price.textContent=priceText;if(status.textContent!==statusText)status.textContent=statusText;if(confirm.textContent!==confirmText)confirm.textContent=confirmText;
+      const goods=ui.data.cityProgress?.costText(type.id,ui.t),total=goods?`${priceText} · ${goods}`:priceText;
+      if(price.textContent!==total)price.textContent=total;if(status.textContent!==statusText)status.textContent=statusText;if(confirm.textContent!==confirmText)confirm.textContent=confirmText;
       confirm.disabled=committed||!plotCanBuild(current);modal.dataset.status=current?.status||'occupied';
     };
     ui.modalCleanup=()=>{this.updateConfirmation=null;if(this.focusedId===id){this.focusedId=null;ui.view.setReadyPlotSelection?.(null);}};this.updateConfirmation();this.focus(row);

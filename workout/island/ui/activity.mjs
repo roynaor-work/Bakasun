@@ -490,6 +490,7 @@ export class ActivityInterface {
     for(const [key,value]of rows){const row=el('p','result-row');row.dataset.alpineSummary=key;const v=el('bdi','',value);v.dir='ltr';row.append(el('span','',this.t(`alpine.result.${key}`)),v);summary.append(row);}
   }
   render() {
+    if (this.engine.cityMissions) { this.panel.hidden = true; return; }
     const event=this.engine.state.events.active;this.panel.hidden=!event||!this.data.featureFlags.events||(event&&!this.data.featureFlags[this.data.config.events.types[event.typeId].featureFlag]);
     if(!event){this.eventOpen=false;this.signature=null;return;}
     const type=this.data.config.events.types[event.typeId],seconds=Math.max(0,Math.ceil((event.warningUntil-this.now())/this.data.config.events.millisecondsPerSecond));

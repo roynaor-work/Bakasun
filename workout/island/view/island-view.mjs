@@ -90,7 +90,15 @@ export class IslandView {
   }
   decorateBeach(){const group=new T.Group();beachDetails(group,this.size,this.data.config.cityView.beach);batchMeshes(group);this.environment.land.add(group);}
   worldPosition(x,z,footprint=[1,1]) {return new T.Vector3(x+(footprint[0]-1)/2-(this.size-1)/2,GROUND,z+(footprint[1]-1)/2-(this.size-1)/2);}
-  makeBuilding(record,level=1) {this.cityModels.request(record,level);return createBuilding(this.cityModels.recordFor(record,level),level,this.models);}
+  makeBuilding(record, level = 1, construction = null) {
+    if (construction && this.models.assets.has(construction.path)) {
+      const levels = record.levels.map((row, index) => index === level - 1 ? {...row, model: construction} : row);
+      return createBuilding({...record, model: construction, levels}, level, this.models);
+    }
+    if (construction) return createBuilding(record, level);
+    this.cityModels.request(record, level);
+    return createBuilding(this.cityModels.recordFor(record, level), level, this.models);
+  }
   setBuildingFactory(factory) {this.buildingFactory=factory;if(this.state)this.setWorld(this.state,true);}
   setWorld(state,force=false) {
     this.state=state;if(!this.renderer)return;
@@ -101,10 +109,18 @@ export class IslandView {
     for(const b of buildings) {
       const record=this.definition(b.typeId||b.type);if(!record)continue;
       let item=this.groups.get(b.id);
-      const cityKey=this.cityModels.key(record,b.level||1);
+      const construction = this.data.cityProgress?.model(state, b, record);
+      if (construction && !this.cityModels.requested.has(construction.path)) {
+        this.cityModels.requested.add(construction.path);
+        this.models.load(construction).then(ok => { if (ok) this.cityModels.onLoaded(); });
+      }
+      const cityKey = construction
+        ? `${construction.stage}:${this.models.assets.has(construction.path) ? construction.path : ''}`
+        : this.cityModels.key(record,b.level||1);
       if(!item||item.level!==b.level||item.typeId!==(b.typeId||b.type)||item.cityKey!==cityKey) {
         if(item){this.buildingRoot.remove(item.group);disposeBuilding(item.group);}
-        const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level);
+        const group=this.buildingFactory?this.buildingFactory(record,b.level||1):this.makeBuilding(record,b.level,construction);
+        if (construction) group.userData.constructionStage = construction.stage;
         group.userData.buildingId=b.id;group.traverse(o=>{if(o.isMesh)o.userData.buildingId=b.id;});this.buildingRoot.add(group);item={group,level:b.level,typeId:b.typeId||b.type,cityKey};this.groups.set(b.id,item);
       }
       item.group.position.copy(this.worldPosition(b.x,b.z,record.footprint));

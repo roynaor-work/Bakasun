@@ -22,18 +22,31 @@ const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
   return r.json();
 });
-const t = createTranslator(strings);
+let t = createTranslator(strings);
 document.title = t('app.title');
 const root = document.querySelector('#interface');
 root.textContent = t('app.loading');
 splash.text(t('app.loading'));
 try {
-  const data = await loadData();
+  const cityPreview = previewMode();
+  const query = new URLSearchParams(location.search);
+  // City packages (v24.7). Each one is optional: a failed load or its URL flag leaves the older city.
+  // ?cityMissions=0 brings back the older missions and events; ?cityProgression=0 (or ?cityProgress=0) the ordinary city save.
+  const optional = (on, load) => on ? load().catch(error => { console.warn(error); return undefined; }) : undefined;
+  const missions = optional(!cityPreview && query.get('cityMissions') !== '0',
+    () => import('./assets/city-missions-v1/runtime.mjs?v=island-v2-20261107-20'));
+  const progression = optional(!cityPreview && query.get('cityProgression') !== '0' && query.get('cityProgress') !== '0',
+    () => import('./assets/city-progression-v1/island-adapter.mjs?v=island-v2-20261107-20'));
+  const [data, missionsModule, cityProgress] = await Promise.all([loadData(), missions, progression]);
+  let createCityMissions;
+  try { createCityMissions = missionsModule?.loadCityMissions(); } catch (error) { console.warn(error); }
+  if (createCityMissions || cityProgress) t = createTranslator({...strings, ...(createCityMissions ? missionsModule.missionStrings : {}), ...cityProgress?.progressStrings});
+  cityProgress?.prepareCityProgressData(data);
   let storage;
   try { storage = window.localStorage; } catch { storage = { getItem() { throw new Error('storage'); }, setItem() { throw new Error('storage'); } }; }
-  const cityPreview = previewMode();
   if (cityPreview) storage = readOnlyStorage(storage);
-  const engine = createEngine(data, { storage });
+  if (cityProgress) storage = cityProgress.cityProgressStorage(storage);
+  const engine = createEngine(data, { storage, createCityMissions });
   let ui;
   const view = new IslandView({
     canvas: document.querySelector('#world'), data: { ...data, registry: engine.registry },
@@ -46,11 +59,12 @@ try {
   ui = new IslandInterface({ root, engine, view, data, t });
   splash.end();
   if (cityPreview) window.__cityPreview = installCityPreview({ view, engine, mode: cityPreview });
-  const activity=createActivity(engine,{blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
+  const activity=createActivity(engine,{scheduling:!engine.cityMissions,blocked:()=>Boolean(ui.modalRoot.children.length||navigationActive(view)||ui.cityAccess?.mapPanel?.hidden===false),onLaunch:choice=>games.autoLaunch(choice)});
   const learning=new LearningInterface({ui,engine});
   const games=new ActivityInterface({ui,engine,activity,data,t});
   const cityAccess=new CityAccess({ui,engine,games,learning});
   ui.cityAccess=cityAccess;
+  const stopCityMissions=engine.cityMissions?.announceRewards(ui);
   const stopShell=installGameShell({games,ui,t,countdownStepMs:data.config.ui.economyTickMs,orientationOf:id=>data.config.gameShell.games[id]?.orientation||'landscape'});
   const pressSamples=[];
   const stopPress=installPressFeedback({compatibilityClickMs:data.config.ui.compatibilityClickMs,onFrame:(milliseconds,action)=>{pressSamples.push({milliseconds,action});if(pressSamples.length>data.config.ui.pressSampleLimit)pressSamples.shift();}});
@@ -90,7 +104,7 @@ try {
   const persist = () => engine.save();
   document.addEventListener('visibilitychange', persist);
   window.addEventListener('pagehide', persist);
-  window.addEventListener('beforeunload', () => { clearInterval(tick);releaseWatch.dispose();stopAutoDownload();stopShell();stopPress();stopGameShortcut();cityAccess.dispose();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
+  window.addEventListener('beforeunload', () => { clearInterval(tick);stopCityMissions?.();releaseWatch.dispose();stopAutoDownload();stopShell();stopPress();stopGameShortcut();cityAccess.dispose();ui.cityManagement.dispose();learning.dispose();games.dispose();activity.dispose();persist();view.dispose(); }, { once: true });
   if (new URLSearchParams(location.search).get('dev') === '1') {
     window.__island = { engine, view, ui, data, activity, games,learning,pressSamples };
   }
