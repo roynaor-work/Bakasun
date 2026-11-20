@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>קריאות טניס · האזנה</title>
+  <link rel="stylesheet" href="assets/studio.css">
+  <script src="assets/manifest.js" defer></script>
+  <script src="assets/player.js" defer></script>
+  <script src="assets/listen.js" defer></script>
+</head>
+<body class="listen-page">
+  <main class="listen">
+    <header class="listen-header">
+      <a class="back-link" href="preview.html">תצוגת מגרש <span aria-hidden="true">←</span></a>
+      <h1>קריאות טניס</h1>
+      <p>בכל קריאת שופט משולבת תגובת קהל. אפשר להאזין גם לקהל לבדו.</p>
+    </header>
+    <div class="transport">
+      <label for="format">פורמט</label>
+      <select id="format" dir="ltr"></select>
+      <button id="stop" type="button" disabled>עצירה</button>
+      <output id="playback-status" role="status">בחרו קטע להאזנה</output>
+    </div>
+    <div id="tracks"></div>
+    <footer class="listen-footer">
+      <p id="budget"></p>
+      <a href="manifest.json">מניפסט</a>
+    </footer>
+    <audio id="sprite" preload="auto" hidden></audio>
+  </main>
+</body>
+</html>
