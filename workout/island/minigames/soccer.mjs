@@ -52,7 +52,8 @@ export function canHead(player,ball,config){return canContactBall(player,ball,co
 export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false,aiVersion,rulesVersion,feelVersion,switchVersion,airVersion,v241:v241Option}={}) {
   if (!config?.stages?.length || !Number.isFinite(config.match?.fixedStep) || config.match.fixedStep<=0) throw Error('Invalid soccer config');
   config=expandSoccerConfig(config);
-  seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);config=campaignConfig(config,stage);
+  seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);
+  config=campaignConfig(config,stage,ladder);
   const aiV2=resolveSoccerAI(aiVersion)==='v2';
   // Rules v1 (M3): fouls on slide tackles, free kicks, penalties, through balls, rival slides. `?soccerRules=0` = the old match.
   const rulesV1=resolveSoccerRules(rulesVersion)==='v1';

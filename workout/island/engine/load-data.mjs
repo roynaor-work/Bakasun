@@ -1,7 +1,16 @@
 import {DATA_VERSION,dataURL} from '../release.mjs?v=island-v2-20261107-19';
 import { configureBuilding } from './registry.mjs?v=island-v2-20261107-19';
+import { polishValue } from '../minigames/polish-flag.mjs?v=island-v2-20261107-19';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
+
+/** Configure a freshly decoded settings file before the session and result validator share it. */
+export function applyHoopsBalance(config, search) {
+  if (polishValue('balanceHoops', search) === '1') {
+    config.minigames.streetSlam.rules.profiles.quick.quarterSeconds = 45;
+  }
+  return config;
+}
 
 /** Reads only local, bundled content. No CDN, analytics, account, or remote request. */
 export async function loadData(base = new URL('../', import.meta.url), fetcher = globalThis.fetch) {
@@ -13,6 +22,7 @@ export async function loadData(base = new URL('../', import.meta.url), fetcher =
   };
   const values = await Promise.all(FILES.map(name => read(`data/${name}.json`)));
   const data = Object.fromEntries(FILES.map((name, index) => [name, values[index]]));
+  applyHoopsBalance(data.config);
   const [episodeManifest, extensionManifest] = await Promise.all([read('episodes/index.json'), read('data/extensions.json')]);
   data.extensions = extensionManifest.records || {};
   data.episodes = await Promise.all(episodeManifest.episodes.map(path => read(`episodes/${path}`)));

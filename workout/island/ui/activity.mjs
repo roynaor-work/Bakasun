@@ -1,6 +1,7 @@
 import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-19';
 import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-19';
 import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-19';
+import {fireCertificateBalanceEnabled} from '../activity/fire-certificates.mjs?v=island-v2-20261107-19';
 import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-19';
 import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-19';
 import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-19';
@@ -189,7 +190,24 @@ export class ActivityInterface {
     }
     dialog.append(list,this.playButton(id,'equipment-play',()=>this.stages(id)));
   }
-  certificateCard(c,stage){const card=el('article','fire-certificate');card.dataset.certificate=String(stage);card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),(()=>{const st=el('strong','certificate-stars');st.append(kitRating(c.stars,{label:this.t('minigame.stageStars',{stage,stars:c.stars}),size:28}));return st;})());for(const key of ['fast','rescue','careful'])card.append(el('p',c[key]?'earned':'',this.t('fire.'+key)));return card;}
+  certificateCard(c,stage){
+    const card=el('article','fire-certificate'),stars=el('strong','certificate-stars');
+    card.dataset.certificate=String(stage);
+    stars.append(kitRating(c.stars,{label:this.t('minigame.stageStars',{stage,stars:c.stars}),size:28}));
+    card.append(el('h3','',this.t('fire.certificate')),el('p','',this.t('fire.certificateName',{name:this.engine.state.avatar.name||this.t(this.engine.state.avatar.nameId)})),el('p','',this.t('minigame.stage',{stage})),stars);
+    // A credited rescue bit on a stage with no citizens identifies a saved
+    // completion star, even when its owner reopens the collection without the flag.
+    const noRescueGoal=this.data.config.minigames.fireRescue.levels[stage-1]?.rescueCount===0;
+    for(const key of ['fast','rescue','careful']){
+      let label='fire.'+key;
+      if(key==='rescue'&&noRescueGoal){
+        if(c.rescue)label='fire.completedWithoutRescue';
+        else if(fireCertificateBalanceEnabled())label='fire.noRescueGoal';
+      }
+      card.append(el('p',c[key]?'earned':'',this.t(label)));
+    }
+    return card;
+  }
   certificates(){const dialog=this.modal('fire.certificates','minigame.progressHint');let count=0;for(const [i,c]of this.engine.state.fireCertificates.entries())if(c){dialog.append(this.certificateCard(c,i+1));count++;}if(!count)dialog.append(el('p','',this.t('fire.noCertificates')));dialog.append(this.playButton('fireRescue','certificate-play',()=>this.stages('fireRescue')));}
   hangar(){
     const dialog=this.modal('hangar.title','hangar.hint'),h=this.engine.state.hangar,c=this.data.config.minigames.alienDefense,canvas=el('canvas','hangar-preview');dialog.dataset.hangar='true';canvas.width=canvas.height=c.hangar.previewSize;

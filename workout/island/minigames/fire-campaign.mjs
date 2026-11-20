@@ -1,6 +1,14 @@
+import {polishValue} from './polish-flag.mjs';
+
 /** Scenario presentation and routes belong to Fire Rescue. The persisted stage,
  * equipment and certificate records keep their existing shape. */
 const CITY_PLANS=Object.freeze({compact:[1,1],eastAvenue:[1.12,1],northAvenue:[1,1.12],district:[1.08,1.08]});
+const FIRE_TUNING={
+  7:{resistance:1.15},
+  8:{resistance:1.25},
+  9:{resistance:1.4,seconds:104},
+  10:{resistance:1.55,seconds:108},
+};
 const nearest=(values,value)=>values.reduce((best,next)=>Math.abs(next-value)<Math.abs(best-value)?next:best);
 const logical=(world,render)=>({x:world[0]/render.worldScale+render.logicalCenter[0],y:world[2]/render.worldScale+render.logicalCenter[1]});
 
@@ -10,6 +18,9 @@ const logical=(world,render)=>({x:world[0]/render.worldScale+render.logicalCente
 export function fireScenario(balance,level){
   if(!Number.isInteger(level)||!balance.levels[level-1])throw new RangeError('Unknown fire stage');
   const derived=structuredClone(balance);
+  if(FIRE_TUNING[level]&&polishValue('balanceFire')==='1'){
+    Object.assign(derived.levels[level-1],FIRE_TUNING[level]);
+  }
   if(balance.scenario?.level===level)return derived;
   const mission=derived.levels[level-1].mission;
   if(!mission)return derived;
