@@ -159,7 +159,7 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');
- assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-19'));
+ assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-20'));
  for(const [file,source] of [['ui/offline.mjs',offline],['ui/offline-panel.mjs',panel],['ui/offline-install.mjs',install],['offline-sw.js',sw]]){
   for(const banned of ['localStorage.clear','removeItem','indexedDB','.clear()','sessionStorage','new Worker','createObjectURL','new Blob(','eval(','new Function','innerHTML'])assert.ok(!source.includes(banned),file+' uses '+banned);
  }

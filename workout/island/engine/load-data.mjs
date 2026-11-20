@@ -1,6 +1,6 @@
-import {DATA_VERSION,dataURL} from '../release.mjs?v=island-v2-20261107-19';
-import { configureBuilding } from './registry.mjs?v=island-v2-20261107-19';
-import { polishValue } from '../minigames/polish-flag.mjs?v=island-v2-20261107-19';
+import {DATA_VERSION,dataURL} from '../release.mjs?v=island-v2-20261107-20';
+import { configureBuilding } from './registry.mjs?v=island-v2-20261107-20';
+import { polishValue } from '../minigames/polish-flag.mjs?v=island-v2-20261107-20';
 
 const FILES = ['config', 'city', 'buildings', 'categories', 'metrics', 'avatar', 'team', 'players', 'world', 'tutorial', 'featureFlags', 'sports', 'missions'];
 

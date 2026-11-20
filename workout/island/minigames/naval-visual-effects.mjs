@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-19';
-import {SINKING_BUBBLES, WATER_COLUMN} from './naval-visual-atlases.mjs?v=island-v2-20261107-19';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-20';
+import {SINKING_BUBBLES, WATER_COLUMN} from './naval-visual-atlases.mjs?v=island-v2-20261107-20';
 
 const MAX_SINKING_SHIPS = 3;
 const NEAR_MISS_RADIUS = 6;

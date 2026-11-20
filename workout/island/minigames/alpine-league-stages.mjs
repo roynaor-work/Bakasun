@@ -1,8 +1,8 @@
-import {STAGE_COUNT,BASE_STAGES,stageInfo,engineStageOf,RIVALS} from './alpine-league-core.mjs?v=island-v2-20261107-19';
-import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-19';
-import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-19';
-import {leagueContent} from './alpine-v241.mjs?v=island-v2-20261107-19';
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-19';
+import {STAGE_COUNT,BASE_STAGES,stageInfo,engineStageOf,RIVALS} from './alpine-league-core.mjs?v=island-v2-20261107-20';
+import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-20';
+import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-20';
+import {leagueContent} from './alpine-v241.mjs?v=island-v2-20261107-20';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-20';
 
 /** Ski league v23: the 30 courses, their rivals and goals, built from one difficulty curve plus each theme's flavour. Pure (no DOM, no
  * three.js); the island engine, the session, the result check, the screens and the bot simulation all build the same stage from here.
