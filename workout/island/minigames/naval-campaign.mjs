@@ -30,7 +30,13 @@ export function navalStagePressure(stage=1){
 
 /** Resolve a content-owned fleet without using the simulation's random stream. */
 export function navalCampaignStage(balance,stage,seed=0,previousFleet=''){
- const n=clamp(integer(stage),1,balance.levels.length),settings=balance.levels[n-1];
+ const n=clamp(integer(stage),1,balance.levels.length);
+ let settings=balance.levels[n-1];
+ if(n===24 && settings.fleet?.[5]?.behavior==='base' && polishValue('balanceNaval')==='1'){
+  const fleet=settings.fleet.slice();
+  fleet[5]={...fleet[5],hpScale:3};
+  settings={...settings,fleet};
+ }
  const count=integer(settings.waves),kinds=balance.shipTypes.length;
  let fleet;
  if(Array.isArray(settings.fleet)&&settings.fleet.length===count){

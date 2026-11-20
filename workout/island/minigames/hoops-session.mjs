@@ -1,6 +1,7 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
+import {readHoopsPolish} from './hoops-polish-flags.mjs';
 import {createHoopsScreens} from './hoops-screens.mjs';
 import {gameContext} from './context.mjs?v=island-v2-20261107-19';
 import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-19';
@@ -33,18 +34,20 @@ export function startHoops(ctx){
  if(ctx.engine)ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'streetSlam',ctx.level),...ctx};
  const balance=ctx.balance,t=ctx.t||(k=>k),seed=ctx.seed>>>0,stage=ctx.level||1;
  const params=typeof location!=='undefined'?new URLSearchParams(location.search):new URLSearchParams();
+ const polish=readHoopsPolish(params);
  const storage=(()=>{try{return globalThis.localStorage;}catch{return null;}})();
  const setup=matchTeams(balance,ctx.hoops,{stage,equipment:ctx.equipment||{},power:ctx.power||1,game:ctx.hoopsGame});
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
  // M4 presentation (11/11): automatic replay after dunks, alley-oops and buzzer/winning threes, reactions, crowd moods, HUD polish; `?hoopsShow=0` restores today
  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined});
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined,
+  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
  const abort=new AbortController(),on={signal:abort.signal};let audio;
- try{audio=createHoopsAudio({config:balance.audio,storage});}catch{audio=createHoopsAudio({config:balance.audio,storage:null});}
+ try{audio=createHoopsAudio({config:balance.audio,storage,impactPolish:polish.audio});}catch{audio=createHoopsAudio({config:balance.audio,storage:null,impactPolish:polish.audio});}
  const session={
   setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
   dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
@@ -112,7 +115,7 @@ export function startHoops(ctx){
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
   const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-19');
-  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
+  Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,polish,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}
    clearTimeout(loadTimer);saveGameReport('hoops',{status:'ready',ms:performance.now()-loadStart,lines:['characters v'+(Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1))]});view=loaded;if(selectedKit)view.setKit(selectedKit.team,selectedKit.kit);const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);loading.hidden=true;last=0;loop.reset();

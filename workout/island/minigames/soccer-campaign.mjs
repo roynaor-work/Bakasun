@@ -31,14 +31,19 @@ const objectiveRows=[
   [['passes',6],['headers',2],['tackles',4],['shots',5],['goals',3]]
 ];
 const keeperObjectives=[['saves',2],['passes',2],['passes',3],['saves',3],['cleanSheet',1]];
+// Fixture IDs are distinct from the fractional campaign tuning shared by multiple matches.
+const leagueBonusObjectives={8:['lofts',1,'lofts.one'],13:['headers',1,'headers.one']};
 const statKeys={goals:'goals',passes:'completedPasses',shots:'shots',lofts:'lofts',headers:'headers',tackles:'tackles',saves:'saves',clearances:'clearances'};
-const objective=(row)=>({id:row[0],nameId:`soccer.campaign.objective.${row[0]}`,target:row[1],optional:true});
+const objective=([id,target,label=id])=>({id,nameId:`soccer.campaign.objective.${label}`,target,optional:true});
 
 /** Finite, detached profile for menu, simulation and the in-match objective HUD. */
-export function campaignStage(stage=1,config={}){
+export function campaignStage(stage=1,config={},fixture){
   stage=clamp(Math.round(finite(stage))||1,1,SOCCER_CAMPAIGN_STAGES);
   const region=Math.floor((stage-1)/5),index=(stage-1)%5,formation=formations[region][index];
   const teams=config.opponents?.teams||[],configured=config.campaign?.stages?.[stage-1];
+  const bonus=fixture?.leagues&&leagueBonusObjectives[fixture.stage];
+  const fieldObjective=bonus&&new URLSearchParams(globalThis.location?.search).get('balanceSoccerGoals')==='1'
+    ? bonus : objectiveRows[region][index];
   return {
     stage,region:region+1,round:index+1,
     nameId:`soccer.campaign.stage.${stage}`,regionId:`soccer.campaign.region.${region+1}`,
@@ -46,7 +51,7 @@ export function campaignStage(stage=1,config={}){
     formation,formationId:`soccer.campaign.formation.${formation}`,
     pace:styles[formation].pace,
     difficulty:round((stage-1)/(SOCCER_CAMPAIGN_STAGES-1)),
-    objective:objective(objectiveRows[region][index]),
+    objective:objective(fieldObjective),
     keeperObjective:objective(keeperObjectives[index]),
     ...(configured&&typeof configured==='object'?{
       // Presentation may override labels, never numeric difficulty or save data.
@@ -70,12 +75,12 @@ export function campaignOpponent(config,stage){
 
 /** Runtime clone: city ranks, saved roster, match duration and result economics
  * remain byte-for-byte values. AI timing and spacing make each fixture different. */
-export function campaignConfig(config,stage=1){
+export function campaignConfig(config,stage=1,fixture){
   // A session may pass its already tuned view config to the pure model. Always
   // derive tuning from its original values rather than multiplying it twice.
   config=config[campaignBase]||config;
   // Fractional league tuning keeps every continuous curve continuous; labels round.
-  const profile=campaignStage(stage,config),n=clamp(finite(stage)||1,1,SOCCER_CAMPAIGN_STAGES),style=styles[profile.formation],early=clamp((n-1)/9,0,1),late=clamp((n-10)/20,0,1);
+  const profile=campaignStage(stage,config,fixture),n=clamp(finite(stage)||1,1,SOCCER_CAMPAIGN_STAGES),style=styles[profile.formation],early=clamp((n-1)/9,0,1),late=clamp((n-10)/20,0,1);
   const ai={...config.ai,attack:{}};
   for(const [key,value] of Object.entries(config.ai.attack)){
     ai.attack[key]={...value,

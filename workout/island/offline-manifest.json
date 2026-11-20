@@ -392,6 +392,9 @@
   "minigames/hoops-perf.mjs",
   "minigames/hoops-players-v1.mjs",
   "minigames/hoops-players.mjs",
+  "minigames/hoops-polish-audio.mjs",
+  "minigames/hoops-polish-flags.mjs",
+  "minigames/hoops-polish-view.mjs",
   "minigames/hoops-referee.mjs",
   "minigames/hoops-reflection.mjs",
   "minigames/hoops-result.mjs",
@@ -425,6 +428,7 @@
   "minigames/naval-assets.mjs",
   "minigames/naval-ballistics.mjs",
   "minigames/naval-base-view.mjs",
+  "minigames/naval-battle.mjs",
   "minigames/naval-camera.mjs",
   "minigames/naval-campaign.mjs",
   "minigames/naval-controls.mjs",
@@ -454,6 +458,8 @@
   "minigames/naval-v241.mjs",
   "minigames/naval-v7.mjs",
   "minigames/naval-view.mjs",
+  "minigames/naval-visual-atlases.mjs",
+  "minigames/naval-visual-effects.mjs",
   "minigames/naval-water.mjs",
   "minigames/naval.css",
   "minigames/naval.mjs",
@@ -1001,7 +1007,23 @@
    "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
    "assets/hoops-v241/referee-audio/whistle-steal-short.mp3",
    "assets/hoops-v241/referee-audio/whistle-steal-short.ogg",
-   "assets/hoops-v241/referee/referee.glb"
+   "assets/hoops-v241/referee/referee.glb",
+   "assets/hoops-polish-v1/audio/backboard-thud.mp3",
+   "assets/hoops-polish-v1/audio/backboard-thud.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-hard.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-hard.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-medium.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-medium.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-soft.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-soft.ogg",
+   "assets/hoops-polish-v1/audio/net-swish.mp3",
+   "assets/hoops-polish-v1/audio/net-swish.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-01.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-01.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-02.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-02.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-03.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-03.ogg"
   ],
   "alpine": [
    "assets/alpine-rush/granite-v5.webp",
@@ -1715,8 +1737,8 @@
    1721
   ],
   "activity/fire-certificates.mjs": [
-   "f8e6012cd52fb536",
-   1152
+   "c9199df83afd0fb3",
+   1470
   ],
   "activity/hangar.mjs": [
    "10b9600b8f2f4963",
@@ -2941,6 +2963,70 @@
   "assets/game-naval/models/supply_buoy.glb": [
    "1ddb865af083ec1f",
    44876
+  ],
+  "assets/hoops-polish-v1/audio/backboard-thud.mp3": [
+   "dc7b4da0db1e8d44",
+   3781
+  ],
+  "assets/hoops-polish-v1/audio/backboard-thud.ogg": [
+   "18e411d43e9d130f",
+   4115
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-hard.mp3": [
+   "33436d432cbd560e",
+   4512
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-hard.ogg": [
+   "5008205d72535d42",
+   5524
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-medium.mp3": [
+   "6d13d7f28813b32c",
+   4080
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-medium.ogg": [
+   "511533564dd43372",
+   5441
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-soft.mp3": [
+   "1651a39602d5ee31",
+   4080
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-soft.ogg": [
+   "43bd919f665f3dc9",
+   5125
+  ],
+  "assets/hoops-polish-v1/audio/net-swish.mp3": [
+   "bf054e9e2c137674",
+   5349
+  ],
+  "assets/hoops-polish-v1/audio/net-swish.ogg": [
+   "bfab3201337aaeb5",
+   6614
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-01.mp3": [
+   "c90e26e933b12f2e",
+   3468
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-01.ogg": [
+   "36f96c1049becd3d",
+   4269
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-02.mp3": [
+   "220ac20f2b52a3ce",
+   3781
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-02.ogg": [
+   "a0c72a0aec12ca92",
+   4253
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-03.mp3": [
+   "ad2844479b37f623",
+   3468
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-03.ogg": [
+   "cd129392c4abc8ae",
+   4167
   ],
   "assets/hoops-tall/center.glb": [
    "68c770f5f93126cb",
@@ -4867,8 +4953,8 @@
    825
   ],
   "data/config.json": [
-   "14b56dfd76fb657a",
-   283484
+   "c997bbaec4bdc31d",
+   287047
   ],
   "data/extensions.json": [
    "49f688bb9d26a3c1",
@@ -4895,8 +4981,8 @@
    399
   ],
   "data/strings.he.json": [
-   "f5445654c1706674",
-   138130
+   "c1f4e98092ddd2f2",
+   138426
   ],
   "data/team.json": [
    "82a4168feca9f02a",
@@ -5975,8 +6061,8 @@
    499
   ],
   "engine/load-data.mjs": [
-   "0a072a498d9bd118",
-   2141
+   "8764ae91986b6522",
+   2561
   ],
   "engine/metrics.mjs": [
    "8183f67abec7cc8d",
@@ -6371,8 +6457,8 @@
    2121
   ],
   "minigames/alpine-league-stages.mjs": [
-   "5bb2a25b4bf41c2a",
-   14673
+   "ace37ece2c9cee7f",
+   14897
   ],
   "minigames/alpine-league-store.mjs": [
    "c22ce52a1527101f",
@@ -6603,8 +6689,8 @@
    28800
   ],
   "minigames/catch-engine.mjs": [
-   "2e9624885ed69a62",
-   19839
+   "831633d8bcb6c608",
+   20080
   ],
   "minigames/catch-fire-hud.mjs": [
    "c7b98b34b83ea134",
@@ -6679,8 +6765,8 @@
    6576
   ],
   "minigames/fire-campaign.mjs": [
-   "f13650d24d1a3853",
-   4799
+   "d038638853298cad",
+   5113
   ],
   "minigames/fire-canvas.mjs": [
    "558efd20c6fff895",
@@ -6775,8 +6861,8 @@
    8428
   ],
   "minigames/fire.mjs": [
-   "a96379baf9a5c8a1",
-   18244
+   "ef9188dd52ab1d37",
+   18259
   ],
   "minigames/g2m-audio.mjs": [
    "4f551b7e2416c995",
@@ -6839,24 +6925,24 @@
    24973
   ],
   "minigames/hoops-arena.mjs": [
-   "1a317d894a62f842",
-   16827
+   "93e4113f04ebce62",
+   17019
   ],
   "minigames/hoops-athlete.mjs": [
    "bbc75f657ff88b16",
    17347
   ],
   "minigames/hoops-audio.mjs": [
-   "c577e34c68c867ce",
-   16253
+   "13430de816c8ce16",
+   17753
   ],
   "minigames/hoops-baked.mjs": [
    "7f240cc78e7d8cc6",
    3934
   ],
   "minigames/hoops-ball.mjs": [
-   "bb137957a58f4aaf",
-   4593
+   "e316045eb6fef8bc",
+   6314
   ],
   "minigames/hoops-body-v2.mjs": [
    "592a37a1010d6977",
@@ -6887,8 +6973,8 @@
    1952
   ],
   "minigames/hoops-engine.mjs": [
-   "b020a5a0ac9815c1",
-   69796
+   "5efc8388d057abbf",
+   70055
   ],
   "minigames/hoops-feel.mjs": [
    "7d59f78d5d63028d",
@@ -6923,8 +7009,8 @@
    871
   ],
   "minigames/hoops-models.mjs": [
-   "f58fdae411346f8d",
-   19390
+   "2b9b21bf5628ed12",
+   19681
   ],
   "minigames/hoops-motion-v13.mjs": [
    "264649407960c941",
@@ -6945,6 +7031,18 @@
   "minigames/hoops-players.mjs": [
    "8a9335f075e22bcb",
    15860
+  ],
+  "minigames/hoops-polish-audio.mjs": [
+   "cb81b3356231c063",
+   1690
+  ],
+  "minigames/hoops-polish-flags.mjs": [
+   "90e70bb90dd1ce2d",
+   546
+  ],
+  "minigames/hoops-polish-view.mjs": [
+   "13a30d47e91678e2",
+   9541
   ],
   "minigames/hoops-referee.mjs": [
    "dcda21622eb87753",
@@ -6971,8 +7069,8 @@
    5458
   ],
   "minigames/hoops-session.mjs": [
-   "d09393df98cef367",
-   24010
+   "945d02a017980320",
+   24246
   ],
   "minigames/hoops-show.mjs": [
    "caf45c3a7bea9c51",
@@ -7003,8 +7101,8 @@
    2753
   ],
   "minigames/hoops-v5-venue.mjs": [
-   "5f8ec79d17d6adc0",
-   15045
+   "f1eaf5dc095af4d2",
+   15450
   ],
   "minigames/hoops-v5.mjs": [
    "ceaa235eb5b4abdc",
@@ -7019,16 +7117,16 @@
    9381
   ],
   "minigames/hoops-v8-venue.mjs": [
-   "1140386b983a4d2a",
-   18778
+   "b570c6d67c7e652e",
+   19346
   ],
   "minigames/hoops-vfx.mjs": [
    "af1bd2ca19465dc7",
    11390
   ],
   "minigames/hoops-view.mjs": [
-   "a5a240ca4bfc46a9",
-   47777
+   "72bd582bc2f62612",
+   48629
   ],
   "minigames/hoops.css": [
    "6279c61f2bc1a0c4",
@@ -7063,8 +7161,8 @@
    8424
   ],
   "minigames/naval-air.mjs": [
-   "41302aa682ef1eb6",
-   8853
+   "e481720a6b283772",
+   8883
   ],
   "minigames/naval-assets.mjs": [
    "14bf5766136a2e10",
@@ -7078,13 +7176,17 @@
    "b8185b539851cc44",
    8198
   ],
+  "minigames/naval-battle.mjs": [
+   "4b237cd5603a509d",
+   2027
+  ],
   "minigames/naval-camera.mjs": [
    "6aa72c8e467a8cfc",
    8289
   ],
   "minigames/naval-campaign.mjs": [
-   "fedd1cb421de734a",
-   6442
+   "0cdcff710afd3dfe",
+   6649
   ],
   "minigames/naval-controls.mjs": [
    "e3b621f8d3069907",
@@ -7191,8 +7293,16 @@
    5488
   ],
   "minigames/naval-view.mjs": [
-   "c3968e5e89874ef0",
-   36464
+   "0349ba475447b408",
+   36906
+  ],
+  "minigames/naval-visual-atlases.mjs": [
+   "ccf431beafeb0d17",
+   145386
+  ],
+  "minigames/naval-visual-effects.mjs": [
+   "daf04585bef07e4e",
+   6556
   ],
   "minigames/naval-water.mjs": [
    "0303bb0ecef8fb0b",
@@ -7203,8 +7313,8 @@
    15335
   ],
   "minigames/naval.mjs": [
-   "a622747bdb7b1e6e",
-   77545
+   "ede050cddf66665f",
+   78560
   ],
   "minigames/patrol-boat.mjs": [
    "f55a391d24a34fbd",
@@ -7415,8 +7525,8 @@
    2568
   ],
   "minigames/soccer-campaign.mjs": [
-   "e1df4c5c588fd42a",
-   9361
+   "2fd67db5aed744e3",
+   9778
   ],
   "minigames/soccer-codex-motion.mjs": [
    "a16c34d8d09135fd",
@@ -7667,8 +7777,8 @@
    76303
   ],
   "minigames/soccer.mjs": [
-   "27c720fb9d3d0255",
-   102443
+   "2a8641ce7a10ba76",
+   102453
   ],
   "minigames/sound.mjs": [
    "522b4b41e74b348d",
@@ -7835,8 +7945,8 @@
    62159
   ],
   "ui/activity.mjs": [
-   "6c55287969cc9d9e",
-   56325
+   "c6e67abcb033131b",
+   56921
   ],
   "ui/adventure-emblems.mjs": [
    "0557f66ad8b73acc",

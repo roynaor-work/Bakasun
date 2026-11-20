@@ -1,4 +1,5 @@
 import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-19';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-19';
 import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-19';
 import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-19';
 import {alienV9Enabled,alienV9Hp} from './alien-v9.mjs';
@@ -30,7 +31,9 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  // v24.6 (?alienLaserBurst=0 keeps v24.5): while the pickup laser runs, every press of a fire button lights a beam for a few seconds (alien-laser-burst.mjs).
  const beamCfg=laser25&&alienLaserBurstEnabled()?burstConfig(balance):null;let burstDown=false,burstTick=0;const burstState={left:0,x:0,y:0,top:beamCfg?.top??-40,halfWidth:beamCfg?.halfWidth??7,presses:0,ticks:0,hits:0,kills:0,lit:0};
  level=clamp(Math.floor(level)||1,1,balance.levels.length);
- const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,v11=balance.v11&&alienV11Enabled()?balance.v11:null,v12=balance.v12&&alienV12Enabled()?balance.v12:null,v13=balance.v13&&alienV13Enabled()?balance.v13:null,v14=balance.v14&&alienV14Enabled()?balance.v14:null,v15=v14&&alienV15Enabled()?v15Config(balance):null,move=v15&&alienMoveEnabled()?moveConfig(balance):null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
+ const settings={...balance.levels[level-1]};
+ if(level===10 && polishValue('balanceAlien')==='1') settings.lives=6;
+ const campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,v11=balance.v11&&alienV11Enabled()?balance.v11:null,v12=balance.v12&&alienV12Enabled()?balance.v12:null,v13=balance.v13&&alienV13Enabled()?balance.v13:null,v14=balance.v14&&alienV14Enabled()?balance.v14:null,v15=v14&&alienV15Enabled()?v15Config(balance):null,move=v15&&alienMoveEnabled()?moveConfig(balance):null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
  if(v11)settings.shotSeconds*=v11.shotSecondsMult;
  if(v15)settings.seconds=Math.round(settings.seconds*v15.secondsMult);
  // v23 (13/11/2026): two weapons on two buttons (steady cannon on input.firing, Vulcan on input.vulcan). Built on v15; ?alienFire=v15 keeps the v22 gate.
