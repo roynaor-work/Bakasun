@@ -1,0 +1,104 @@
+{
+ "before": {
+  "passes": 2,
+  "pass": {
+   "flat150to2k": 0.0745,
+   "floor300to1500Db": -71.9,
+   "frames": 477,
+   "hiDbfs": -65.9,
+   "hiShareDb": -28.0,
+   "hiPeakDbfs": -55.5,
+   "flat2to8k": 0.065,
+   "rmsDbfs": -37.9
+  },
+  "flags": {
+   "v246": false,
+   "air": "v245",
+   "rec": true,
+   "v5": true
+  },
+  "engine": {
+   "v246": false,
+   "backfires": 14,
+   "blips": 19,
+   "silentUps": 0,
+   "shifts": 24
+  },
+  "lifts": 18,
+  "cruise": {
+   "flat150to2k": 0.0617,
+   "floor300to1500Db": -72.2,
+   "frames": 6016,
+   "hiDbfs": -75.8,
+   "hiShareDb": -38.1,
+   "hiPeakDbfs": -63.0,
+   "flat2to8k": 0.024,
+   "rmsDbfs": -37.7
+  },
+  "lift": {
+   "flat150to2k": 0.0539,
+   "floor300to1500Db": -73.4,
+   "frames": 2116,
+   "hiDbfs": -55.0,
+   "hiShareDb": -16.4,
+   "hiPeakDbfs": -42.7,
+   "flat2to8k": 0.026,
+   "rmsDbfs": -38.7
+  },
+  "liftJerks": 12,
+  "jerksWholeRun": 20,
+  "pitchBlips": 18,
+  "peak": 0.055844828486442566
+ },
+ "after": {
+  "passes": 2,
+  "pass": {
+   "flat150to2k": 0.0745,
+   "floor300to1500Db": -71.9,
+   "frames": 477,
+   "hiDbfs": -65.9,
+   "hiShareDb": -28.0,
+   "hiPeakDbfs": -55.5,
+   "flat2to8k": 0.066,
+   "rmsDbfs": -37.9
+  },
+  "flags": {
+   "v246": true,
+   "air": "v245",
+   "rec": true,
+   "v5": true
+  },
+  "engine": {
+   "v246": true,
+   "backfires": 0,
+   "blips": 0,
+   "silentUps": 3,
+   "shifts": 21
+  },
+  "lifts": 18,
+  "cruise": {
+   "flat150to2k": 0.0612,
+   "floor300to1500Db": -72.2,
+   "frames": 6016,
+   "hiDbfs": -75.8,
+   "hiShareDb": -38.1,
+   "hiPeakDbfs": -63.0,
+   "flat2to8k": 0.023,
+   "rmsDbfs": -37.7
+  },
+  "lift": {
+   "flat150to2k": 0.0483,
+   "floor300to1500Db": -74.2,
+   "frames": 2116,
+   "hiDbfs": -78.5,
+   "hiShareDb": -39.6,
+   "hiPeakDbfs": -65.2,
+   "flat2to8k": 0.016,
+   "rmsDbfs": -39.0
+  },
+  "liftJerks": 0,
+  "jerksWholeRun": 7,
+  "pitchBlips": 10,
+  "peak": 0.05584452673792839
+ }
+}

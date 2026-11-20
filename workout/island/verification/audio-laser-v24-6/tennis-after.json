@@ -1,0 +1,261 @@
+{
+ "query": "",
+ "seconds": 90,
+ "racingFirst": 20,
+ "racingRunning": [
+  "running",
+  "running"
+ ],
+ "afterRacingExit": [
+  "suspended",
+  "closed"
+ ],
+ "tennisRunning": [
+  "running",
+  "closed",
+  "running"
+ ],
+ "tennisEnd": [
+  "running",
+  "closed",
+  "running"
+ ],
+ "contexts": [
+  {
+   "id": 1,
+   "stack": "Object.unlock (http://127.0.0.1:32893/workout/island/minigames/sound.mjs:11:28)"
+  },
+  {
+   "id": 2,
+   "stack": "Object.unlock (http://127.0.0.1:32893/workout/island/minigames/racing-audio.mjs:68:13)"
+  },
+  {
+   "id": 3,
+   "stack": "unlock (http://127.0.0.1:32893/workout/island/minigames/g4e-audio.mjs:23:87)"
+  }
+ ],
+ "audioMetrics": {
+  "loaded": [
+   "applause",
+   "applauseLarge",
+   "applauseMedium",
+   "applauseShort",
+   "bounce",
+   "crowdAw",
+   "crowdBed",
+   "crowdHush",
+   "crowdOoh",
+   "hit",
+   "matchCheer",
+   "net"
+  ],
+  "active": 1,
+  "muted": false,
+  "paused": false,
+  "played": {
+   "hit": 39,
+   "bounce": 43,
+   "applauseShort": 4,
+   "crowdHush": 9,
+   "rec-out": 1,
+   "call-out": 1,
+   "awSkipped": 1,
+   "applauseMedium": 2,
+   "crowdOoh": 2,
+   "applauseLarge": 2
+  },
+  "callouts": {
+   "recorded": true,
+   "listLoaded": true,
+   "takes": {
+    "out": 1,
+    "net": 3
+   }
+  },
+  "v246": true,
+  "bed": false
+ },
+ "calls": [
+  {
+   "at": 28.58,
+   "source": "tennis-callouts-rec/out-1.ogg",
+   "phase": "point",
+   "alongside": []
+  }
+ ],
+ "tennisSources": {
+  "audio/g4e/racket.ogg": 39,
+  "audio/g4e/bounce.ogg": 43,
+  "audio/g4e/applause-short.ogg": 4,
+  "audio/g4e/pre-serve-hush.ogg": 9,
+  "tennis-callouts-rec/out-1.ogg": 1,
+  "audio/g4e/applause-medium.ogg": 2,
+  "audio/g4e/near-point-oh.ogg": 2,
+  "audio/g4e/applause-large.ogg": 2
+ },
+ "loops": [],
+ "olderSourcesStillPlaying": [
+  {
+   "ctx": 2,
+   "source": "osc:custom",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "generated:61739@44100",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v2/tyre-squeal.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v2/wind-speed.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v3/brake-squeal-loop.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-light.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v4/brake-loop-hard.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-gravel-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/offtrack-grass-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-low.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-medium.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-engine-slow.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/brake-high.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-limiter.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-bay-proximity.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-audio-v5/pit-crew-background.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "racing-rec/engine-idle-loop.ogg",
+   "loop": true
+  },
+  {
+   "ctx": 2,
+   "source": "osc:triangle",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:custom",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sine",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sine",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  },
+  {
+   "ctx": 2,
+   "source": "osc:sawtooth",
+   "loop": false
+  }
+ ],
+ "soundingContextsDuringTennis": {
+  "3": {
+   "frames": 1025,
+   "maxDb": -29.6
+  }
+ },
+ "errors": []
+}
