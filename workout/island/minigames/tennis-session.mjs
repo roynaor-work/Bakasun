@@ -37,6 +37,10 @@ export function startTennis(ctx){
    .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions [data-game-control] .tennis-control-caption{
     max-width:100%;font-size:14px!important;line-height:1.2;text-align:center;white-space:normal
    }
+   /* v24.4 plates (tennis-ui2): the caption sits under its button, so it gets the larger type on a solid chip */
+   .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 [data-game-control] .tennis-control-caption{
+    max-width:none;font-size:14px!important;line-height:16px;white-space:nowrap;padding:0 5px;border-radius:7px;background:#14202e;color:#fff;text-shadow:none
+   }
   `);
  }
  kidUxStyle('018',`
@@ -46,6 +50,9 @@ export function startTennis(ctx){
   }
   .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions #shoot .tennis-control-caption{
    font-size:14px!important;line-height:1.2
+  }
+  .game-screen.game-screen[data-game=tennis] .soccer-controls .soccer-actions.tennis-ui2 #shoot .tennis-control-caption{
+   font-size:14px!important;line-height:16px;white-space:nowrap;padding:0 5px;border-radius:7px;background:#14202e;color:#fff;text-shadow:none
   }
  `);
  const serveIcon=actions.querySelector('#pass svg');serveIcon.classList.add('tennis-serve-hint');

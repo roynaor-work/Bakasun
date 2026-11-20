@@ -46,7 +46,7 @@ test('current default: stage three enters the fire-entry flow and draws its door
  await f.start('fireRescue',3);
  await f.page.waitForFunction(()=>window.__island.games.current?.session.snapshot.v24?.markerKind);
  const s=await f.page.evaluate(()=>window.__island.games.current.session.snapshot);
- assert.equal(s.v24.state,'drive');assert.equal(s.v24.inside,false);assert.equal(s.v24.done,false);assert.equal(s.v24.enterButton,false);assert.ok(s.v24.doorDistance>12);await f.clean();
+ assert.equal(s.v24.state,'drive');assert.equal(s.v24.inside,false);assert.equal(s.v24.done,false);assert.equal(typeof s.v24.enterButton,'boolean','fire levels (v24.5) may offer the entry button from the street');assert.ok(s.v24.doorDistance>12);await f.clean();
 });
 test('fire rollback is a separate matrix case: v23 has no entry flow',{skip:!enabled,timeout:360000},async t=>{
  const f=await open(t,'&fireFlow=v23');await f.start('fireRescue',3);
