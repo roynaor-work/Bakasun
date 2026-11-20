@@ -7,6 +7,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {markHoopsRim} from './hoops-polish-view.mjs';
 import {HoopsDRACOLoader as DRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
 import {resources,release,mergeResources} from './hoops-models.mjs';
@@ -55,7 +56,7 @@ function floatGeometry(source){
 /** The shell has about forty meshes; the ones that share a material (bowl, steel, rims, stands, baskets) become one draw call each.
  * Roof, lighting and walls stay apart (the cutaway hides them by name), as do the floor, the nets (they swing), the glass and the
  * hanging scoreboard (hidden in portrait). Geometry is baked into the shell's space. Returns the number of draw calls saved. */
-export function mergeShellStatic(shell,solid){
+export function mergeShellStatic(shell,solid,rimMotion=false){
  shell.updateMatrixWorld(true);
  const inverse=new THREE.Matrix4().copy(shell.matrixWorld).invert(),groups=new Map(),plain=[];
  shell.traverse(o=>{
@@ -77,6 +78,14 @@ export function mergeShellStatic(shell,solid){
   const merged=mergeGeometries(parts,false);for(const g of parts)g.dispose();if(!merged)continue;
   const material=key.endsWith('/solid')?solid:meshes[0].material,part=key.split('/')[0];
   const mesh=new THREE.Mesh(merged,material);mesh.name=(part||'merged')+'__merged-'+key.split('/')[1];mesh.frustumCulled=false;shell.add(mesh);
+  if(rimMotion){
+   let first=0;
+   for(let i=0;i<meshes.length;i++){
+    const count=parts[i].attributes.position.count,side=rimSide(meshes[i].name);
+    if(side)markHoopsRim(mesh,side,first,count);
+    first+=count;
+   }
+  }
   for(const m of meshes){m.parent.remove(m);m.geometry.dispose();}
   saved+=meshes.length-1;
  }
@@ -132,7 +141,9 @@ function createScoreSurfaces(board,shot){
  return {group,faces};
 }
 
-export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v8,params}={}){
+function rimSide(name){return name==='basket-home__rim'?-1:name==='basket-away__rim'?1:0;}
+
+export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,anisotropy=4,v8,params,rimMotion=false,softLighting=false}={}){
  const base=assetBase||new URL('../',import.meta.url),cfg=v8.arena,dir=cfg.base,files=cfg.files||V8_FILES,tex=cfg.textures;
  const draco=new DRACOLoader();draco.setDecoderPath(new URL('../vendor/draco/',import.meta.url).href);draco.setWorkerLimit(1);
  const loader=new GLTFLoader();loader.setDRACOLoader(draco);
@@ -151,7 +162,7 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
   const [color,orm,normal,crowdAtlas,env]=images;
   env.mapping=THREE.CubeUVReflectionMapping;env.colorSpace=THREE.LinearSRGBColorSpace;env.flipY=false;env.generateMipmaps=false;env.minFilter=env.magFilter=THREE.LinearFilter;env.needsUpdate=true;
   // lacquered maple: the package's baked ceiling reflection instead of a live mirror pass of the players (quality 1: no clearcoat)
-  const floorMat=new THREE.MeshPhysicalMaterial({map:color,roughnessMap:orm,normalMap:normal,normalScale:new THREE.Vector2(.18,.18),roughness:.63,metalness:0,clearcoat:quality>=2?.38:0,clearcoatRoughness:.2,envMap:env,envMapIntensity:.85});
+  const floorMat=new THREE.MeshPhysicalMaterial({map:color,roughnessMap:orm,normalMap:normal,normalScale:new THREE.Vector2(.18,.18),roughness:.63,metalness:0,clearcoat:quality>=2?(softLighting?.32:.38):0,clearcoatRoughness:softLighting?.24:.2,envMap:env,envMapIntensity:.85});
   owned.materials.add(floorMat);
   const group=new THREE.Group();group.name='hoops-arena-v8';
   const boardMat=new THREE.MeshBasicMaterial({map:dyn.scoreboard.texture,toneMapped:false}),shotMat=new THREE.MeshBasicMaterial({map:dyn.shotClocks[0].texture,toneMapped:false});
@@ -163,18 +174,21 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
     o.castShadow=false;o.receiveShadow=false;
     if(o.material.name==='parquet'){o.material=floorMat;o.name='court_surface';o.receiveShadow=true;}
     else if(o.material.name==='glass'){o.material.depthWrite=false;o.material.forceSinglePass=true;}
-    // the nets live in their rim groups (rim-local, hanging down from y = 0): the view's swing moves their vertices
+    // Keep the court-space net meshes separate for the view to deform.
     if(/^basket-(home|away)__net$/.test(o.name)){const side=o.name.includes('home')?-1:1;nets.push({mesh:o,side,swing:0,base:o.geometry.attributes.position.array.slice()});}
    });
   }
   const solidMat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.68,metalness:.12});owned.materials.add(solidMat);
-  for(const shell of shells)mergeShellStatic(shell,solidMat);
+  for(const shell of shells){
+   mergeShellStatic(shell,solidMat,rimMotion);
+   if(rimMotion)shell.traverse(mesh=>{const side=rimSide(mesh.name);if(mesh.isMesh&&side)markHoopsRim(mesh,side);});
+  }
   for(const shell of shells)shell.traverse(o=>{if(o.isMesh&&o.name.startsWith('scoreboard__'))boards.push(o);});
   const populations=shells.map((s,i)=>createPopulation(i,crowdAtlas)),levels=shells.map((s,i)=>{const g=new THREE.Group();g.name='level-'+i;g.add(s,populations[i].group);group.add(g);return g;});
   for(const p of populations)owned.materials.add(p.group.children[0].material),owned.materials.add(p.group.children[1].material);
   const surfaces=createScoreSurfaces(boardMat,shotMat);surfaces.group.name='live-score-surfaces';group.add(surfaces.group);
   // a warm fill so the lacquer and the stands read; the game's own key light (with shadows) is kept for the players
-  const hemi=new THREE.HemisphereLight(0xb0c6df,0x4a3925,.9);hemi.name='bowl-ambient';group.add(hemi);
+  const hemi=new THREE.HemisphereLight(0xb0c6df,0x4a3925,softLighting?.82:.9);hemi.name='bowl-ambient';group.add(hemi);
 
   // ---------- ball ----------
   const ballMap=ballTexture(512);ballMap.anisotropy=Math.min(4,anisotropy);

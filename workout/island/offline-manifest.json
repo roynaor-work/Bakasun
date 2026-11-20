@@ -391,6 +391,9 @@
   "minigames/hoops-perf.mjs",
   "minigames/hoops-players-v1.mjs",
   "minigames/hoops-players.mjs",
+  "minigames/hoops-polish-audio.mjs",
+  "minigames/hoops-polish-flags.mjs",
+  "minigames/hoops-polish-view.mjs",
   "minigames/hoops-referee.mjs",
   "minigames/hoops-reflection.mjs",
   "minigames/hoops-result.mjs",
@@ -1002,7 +1005,23 @@
    "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
    "assets/hoops-v241/referee-audio/whistle-steal-short.mp3",
    "assets/hoops-v241/referee-audio/whistle-steal-short.ogg",
-   "assets/hoops-v241/referee/referee.glb"
+   "assets/hoops-v241/referee/referee.glb",
+   "assets/hoops-polish-v1/audio/backboard-thud.mp3",
+   "assets/hoops-polish-v1/audio/backboard-thud.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-hard.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-hard.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-medium.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-medium.ogg",
+   "assets/hoops-polish-v1/audio/ball-parquet-soft.mp3",
+   "assets/hoops-polish-v1/audio/ball-parquet-soft.ogg",
+   "assets/hoops-polish-v1/audio/net-swish.mp3",
+   "assets/hoops-polish-v1/audio/net-swish.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-01.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-01.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-02.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-02.ogg",
+   "assets/hoops-polish-v1/audio/rim-hit-03.mp3",
+   "assets/hoops-polish-v1/audio/rim-hit-03.ogg"
   ],
   "alpine": [
    "assets/alpine-rush/granite-v5.webp",
@@ -2942,6 +2961,70 @@
   "assets/game-naval/models/supply_buoy.glb": [
    "1ddb865af083ec1f",
    44876
+  ],
+  "assets/hoops-polish-v1/audio/backboard-thud.mp3": [
+   "dc7b4da0db1e8d44",
+   3781
+  ],
+  "assets/hoops-polish-v1/audio/backboard-thud.ogg": [
+   "18e411d43e9d130f",
+   4115
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-hard.mp3": [
+   "33436d432cbd560e",
+   4512
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-hard.ogg": [
+   "5008205d72535d42",
+   5524
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-medium.mp3": [
+   "6d13d7f28813b32c",
+   4080
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-medium.ogg": [
+   "511533564dd43372",
+   5441
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-soft.mp3": [
+   "1651a39602d5ee31",
+   4080
+  ],
+  "assets/hoops-polish-v1/audio/ball-parquet-soft.ogg": [
+   "43bd919f665f3dc9",
+   5125
+  ],
+  "assets/hoops-polish-v1/audio/net-swish.mp3": [
+   "bf054e9e2c137674",
+   5349
+  ],
+  "assets/hoops-polish-v1/audio/net-swish.ogg": [
+   "bfab3201337aaeb5",
+   6614
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-01.mp3": [
+   "c90e26e933b12f2e",
+   3468
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-01.ogg": [
+   "36f96c1049becd3d",
+   4269
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-02.mp3": [
+   "220ac20f2b52a3ce",
+   3781
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-02.ogg": [
+   "a0c72a0aec12ca92",
+   4253
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-03.mp3": [
+   "ad2844479b37f623",
+   3468
+  ],
+  "assets/hoops-polish-v1/audio/rim-hit-03.ogg": [
+   "cd129392c4abc8ae",
+   4167
   ],
   "assets/hoops-tall/center.glb": [
    "68c770f5f93126cb",
@@ -6836,24 +6919,24 @@
    24973
   ],
   "minigames/hoops-arena.mjs": [
-   "1a317d894a62f842",
-   16827
+   "93e4113f04ebce62",
+   17019
   ],
   "minigames/hoops-athlete.mjs": [
    "bbc75f657ff88b16",
    17347
   ],
   "minigames/hoops-audio.mjs": [
-   "c577e34c68c867ce",
-   16253
+   "13430de816c8ce16",
+   17753
   ],
   "minigames/hoops-baked.mjs": [
    "7f240cc78e7d8cc6",
    3934
   ],
   "minigames/hoops-ball.mjs": [
-   "bb137957a58f4aaf",
-   4593
+   "e316045eb6fef8bc",
+   6314
   ],
   "minigames/hoops-body-v2.mjs": [
    "592a37a1010d6977",
@@ -6884,8 +6967,8 @@
    1952
   ],
   "minigames/hoops-engine.mjs": [
-   "b020a5a0ac9815c1",
-   69796
+   "5efc8388d057abbf",
+   70055
   ],
   "minigames/hoops-feel.mjs": [
    "7d59f78d5d63028d",
@@ -6920,8 +7003,8 @@
    871
   ],
   "minigames/hoops-models.mjs": [
-   "f58fdae411346f8d",
-   19390
+   "2b9b21bf5628ed12",
+   19681
   ],
   "minigames/hoops-motion-v13.mjs": [
    "264649407960c941",
@@ -6942,6 +7025,18 @@
   "minigames/hoops-players.mjs": [
    "8a9335f075e22bcb",
    15860
+  ],
+  "minigames/hoops-polish-audio.mjs": [
+   "cb81b3356231c063",
+   1690
+  ],
+  "minigames/hoops-polish-flags.mjs": [
+   "90e70bb90dd1ce2d",
+   546
+  ],
+  "minigames/hoops-polish-view.mjs": [
+   "13a30d47e91678e2",
+   9541
   ],
   "minigames/hoops-referee.mjs": [
    "dcda21622eb87753",
@@ -6968,8 +7063,8 @@
    5458
   ],
   "minigames/hoops-session.mjs": [
-   "d09393df98cef367",
-   24010
+   "945d02a017980320",
+   24246
   ],
   "minigames/hoops-show.mjs": [
    "caf45c3a7bea9c51",
@@ -7000,8 +7095,8 @@
    2753
   ],
   "minigames/hoops-v5-venue.mjs": [
-   "5f8ec79d17d6adc0",
-   15045
+   "f1eaf5dc095af4d2",
+   15450
   ],
   "minigames/hoops-v5.mjs": [
    "ceaa235eb5b4abdc",
@@ -7016,16 +7111,16 @@
    9381
   ],
   "minigames/hoops-v8-venue.mjs": [
-   "1140386b983a4d2a",
-   18778
+   "b570c6d67c7e652e",
+   19346
   ],
   "minigames/hoops-vfx.mjs": [
    "af1bd2ca19465dc7",
    11390
   ],
   "minigames/hoops-view.mjs": [
-   "a5a240ca4bfc46a9",
-   47777
+   "72bd582bc2f62612",
+   48629
   ],
   "minigames/hoops.css": [
    "6279c61f2bc1a0c4",
