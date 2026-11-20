@@ -1,0 +1,103 @@
+{
+  "id": "001",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "targets": {
+          "soccer": [
+            169,
+            48
+          ],
+          "tennis": [
+            169,
+            48
+          ],
+          "streetSlam": [
+            169,
+            48
+          ],
+          "islandRacing": [
+            169,
+            48
+          ],
+          "boarDefense": [
+            169,
+            48
+          ],
+          "alienDefense": [
+            169,
+            48
+          ],
+          "fireRescue": [
+            169,
+            48
+          ],
+          "navalDuel": [
+            169,
+            48
+          ],
+          "alpineRush": [
+            169,
+            48
+          ],
+          "catchCriminal": [
+            169,
+            48
+          ]
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap opens the tennis home from its own card."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 520.5,
+      "y": 297,
+      "endX": 520.5,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"tennis\"]').first()",
+      "x": 520.5,
+      "y": 226.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-enter",
+        "x": 520.5,
+        "y": 226.6875
+      }
+    }
+  ],
+  "screenshots": [
+    "001-after-library.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

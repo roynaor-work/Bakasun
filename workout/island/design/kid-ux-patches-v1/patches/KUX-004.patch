@@ -1,0 +1,32 @@
+diff --git a/workout/island/ui/kid-ux-library.mjs b/workout/island/ui/kid-ux-library.mjs
+index dfe59585..791effae 100644
+--- a/workout/island/ui/kid-ux-library.mjs
++++ b/workout/island/ui/kid-ux-library.mjs
+@@ -47,3 +47,27 @@ kidUxStyle('003', `
+     }
+   }
+ `);
++
++kidUxStyle('004', `
++  .modal[data-game-library] .offline-panel {
++    background: #f4f0e4;
++    color: #17333c;
++    font-size: 14px;
++  }
++  .modal[data-game-library] .offline-panel :is(.offline-status, .offline-version, .offline-games, .load-report) {
++    color: #17333c;
++    font-size: 14px;
++    opacity: 1;
++  }
++  .modal[data-game-library] .offline-panel :is(button, pre) {
++    font-size: 14px;
++  }
++  .modal[data-game-library] .offline-panel .primary-button {
++    background: #12695d;
++    color: #fffdf2;
++  }
++  .modal[data-game-library] .offline-panel .secondary-button {
++    background: #e5edeb;
++    color: #17333c;
++  }
++`);

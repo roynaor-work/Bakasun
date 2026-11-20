@@ -1,0 +1,49 @@
+diff --git a/workout/island/minigames/boar-island/game.js b/workout/island/minigames/boar-island/game.js
+index c936815d..ef046880 100644
+--- a/workout/island/minigames/boar-island/game.js
++++ b/workout/island/minigames/boar-island/game.js
+@@ -1,5 +1,6 @@
+ // אי החזירים — הגנת החווה · v0.4
+ // Fixed first-person beach turret vs. robot boars. All models, textures and sounds are generated in code.
++import {kidUx, kidUxStyle} from '../../kid-ux.mjs?v=island-v2-20261107-15';
+ import * as THREE from './vendor/three.module.js';
+ import {clamp,rand,damp,TOUCH,QUALITY,HIGH,setQuality,shoreZ,groundY,seaWave,setRenderer,mat,geo,rb,cyl,cylZ,sph,mesh,radial,compact,compactTree,T,worn} from './kit.js';
+ import {createWorld} from './world.js';
+@@ -1096,6 +1097,13 @@ try{init();islandReady=true;}catch(e){console.error(e);$('error-screen').hidden=
+ // Local island adapter only: the campaign, weapons and economy above stay intact.
+ if(ISLAND){
+   document.documentElement.dataset.island='true';
++  kidUxStyle('024',
++    '#menu .menu-content .menu-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-block:8px}' +
++    '#menu .menu-content .menu-links>button{min-height:48px;min-width:48px;padding:4px 6px;font-size:14px;line-height:1.1;background:#112631;color:#fff;border:1px solid #8fb1c0;border-radius:8px;text-decoration:none}' +
++    '#menu .menu-content .menu-links>#island-back{grid-column:1/-1;justify-self:start;background:#ffe088;color:#152534;border-color:#ffe088;padding-inline:14px}' +
++    '#menu .menu-content .save-note,#menu .menu-content .eyebrow,#menu .menu-content .menu-meta span{font-size:14px;color:#fff}' +
++    '@media(max-height:450px){#menu .menu-content{padding-block:6px}#menu .menu-content h1{font-size:42px;line-height:1}#menu .menu-content .intro{font-size:14px;line-height:1.3;margin:4px 0}#menu .menu-content .menu-line{margin:4px 0}#menu .menu-content .menu-meta{display:none}#menu .menu-content .menu-actions>button{min-height:48px;padding-block:6px}}'
++  );
+   window.__boarIsland={
+     get ready(){return islandReady;},
+     get snapshot(){return {mode,wave,time:waveTime,hp,coins:save.coins,bestWave:save.bestWave,nextWave:save.nextWave,muted:!soundEnabled,paused:islandPaused};},
+@@ -1104,5 +1112,5 @@ if(ISLAND){
+     dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;releaseFire();touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
+     onExit:null,onPause:null
+   };
+-  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לעיר';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
++  const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent=kidUx('024')?'⌂ חזרה לאי':'חזרה לעיר';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);
+ }
+diff --git a/workout/island/minigames/boar-session.mjs b/workout/island/minigames/boar-session.mjs
+index e0e3e29b..a290b13b 100644
+--- a/workout/island/minigames/boar-session.mjs
++++ b/workout/island/minigames/boar-session.mjs
+@@ -26,7 +26,11 @@ export function runBoarSession(ctx) {
+   frame=doc.createElement('iframe');frame.className='boar-game-frame';
+   frame.title='אי החזירים — הגנת החווה';frame.setAttribute('allow','autoplay; fullscreen');
+   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
+-  if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
++  const urlFlags=new URLSearchParams(globalThis.location?.search);
++  const kidValue=urlFlags.get('kidUx'),selected=kidValue?.split(',')||[];
++  const boarFlags=['024','025','026'].filter(id=>kidValue==='1'||selected.includes(id));
++  if(boarFlags.length)url.searchParams.set('kidUx',boarFlags.join(','));
++  if(urlFlags.get('dev')==='1')url.searchParams.set('qa','1');
+   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
+   // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
+   if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');

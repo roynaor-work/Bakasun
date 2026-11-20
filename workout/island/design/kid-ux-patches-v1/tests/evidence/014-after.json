@@ -1,0 +1,150 @@
+{
+  "id": "014",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "recommendation": "התחלת ניהול עיר",
+        "forecast": "🏙️▶️\nהעיר תתחיל להתפתח כשיש כבישים ואזורי בנייה.",
+        "recommendationHeight": 48,
+        "recommendationContrast": 7.36,
+        "baselinePrimaryHeight": 0
+      }
+    },
+    {
+      "pass": true,
+      "observation": "The recommended start changes the city engine policy."
+    },
+    {
+      "pass": true,
+      "observation": {
+        "advancedStart": [
+          138.28,
+          48
+        ],
+        "contrast": 7.36
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Budget is still available in the full management view."
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 347.2890625,
+      "y": 348,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 347.2890625,
+        "y": 348
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-city\"]').first()",
+      "x": 646.046875,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-city",
+        "x": 646.046875,
+        "y": 30
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-management\"]').first()",
+      "x": 676,
+      "y": 320,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "city-management",
+        "x": 676,
+        "y": 320
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"kid-city-next\"]').first()",
+      "x": 668,
+      "y": 248,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "kid-city-next",
+        "x": 668,
+        "y": 248
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"kid-city-mode-toggle\"]').first()",
+      "x": 666,
+      "y": 83,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 5,
+        "action": "kid-city-mode-toggle",
+        "x": 666,
+        "y": 83
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-tab-budget\"]').first()",
+      "x": 626.25,
+      "y": 203,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 6,
+        "action": "city-tab-budget",
+        "x": 626.25,
+        "y": 203
+      }
+    }
+  ],
+  "screenshots": [
+    "014-after-recommendation.png",
+    "014-after-budget.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

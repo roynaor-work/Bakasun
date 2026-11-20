@@ -1,0 +1,134 @@
+{
+  "id": "024",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "helpQualitySensitivityExit": [
+          {
+            "width": 69,
+            "height": 32,
+            "fontPx": 12,
+            "centerHit": true,
+            "text": "איך משחקים?",
+            "contrast": 11.97
+          },
+          {
+            "width": 101.2,
+            "height": 32,
+            "fontPx": 12,
+            "centerHit": true,
+            "text": "איכות גרפיקה: רגילה",
+            "contrast": 11.97
+          },
+          {
+            "width": 101.8,
+            "height": 32,
+            "fontPx": 12,
+            "centerHit": true,
+            "text": "רגישות כוונון: בינונית",
+            "contrast": 11.97
+          },
+          {
+            "width": 50.1,
+            "height": 32,
+            "fontPx": 12,
+            "centerHit": true,
+            "text": "חזרה לעיר",
+            "contrast": 11.97
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "save": {
+          "width": 376.1,
+          "height": 13,
+          "fontPx": 9,
+          "centerHit": true,
+          "text": "ההתקדמות נשמרת אוטומטית במכשיר הזה",
+          "contrast": 5.12
+        },
+        "exit": {
+          "width": 50.1,
+          "height": 32,
+          "fontPx": 12,
+          "centerHit": true,
+          "text": "חזרה לעיר",
+          "contrast": 11.97
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "touchReturnsToIsland": true
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The embedded campaign is the same-origin game iframe. The QA hold freezes its decorative rendering after the menu has loaded.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 649.9453125,
+      "y": 297,
+      "endX": 649.9453125,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-understood\"]').first()",
+      "x": 649.9453125,
+      "y": 328.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-understood",
+        "x": 649.9453125,
+        "y": 328.75
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#island-back').first()",
+      "x": 433.859375,
+      "y": 354.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "island-back",
+        "x": 433.859375,
+        "y": 354.390625
+      }
+    }
+  ],
+  "screenshots": [
+    "024-before-campaign-menu.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

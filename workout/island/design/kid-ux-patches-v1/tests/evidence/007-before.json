@@ -1,0 +1,125 @@
+{
+  "id": "007",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "text": "none",
+        "fontPx": 0,
+        "visible": true,
+        "direction": "row",
+        "width": 48,
+        "textWidth": null
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "exit": {
+          "x": 274,
+          "y": 156,
+          "width": 80,
+          "height": 80,
+          "top": 156,
+          "right": 354,
+          "bottom": 236,
+          "left": 274,
+          "rect": {
+            "x": 274,
+            "y": 156,
+            "width": 80,
+            "height": 80,
+            "top": 156,
+            "right": 354,
+            "bottom": 236,
+            "left": 274
+          },
+          "visibleRect": {
+            "x": 274,
+            "y": 156,
+            "width": 80,
+            "height": 80
+          },
+          "visibleWidth": 80,
+          "visibleHeight": 80,
+          "centerHit": true,
+          "visible": true,
+          "fontPx": 0,
+          "ratio": 9.020388750143994,
+          "contrast": 9.020388750143994,
+          "complexBackground": false,
+          "color": "rgb(242, 212, 204)",
+          "background": [
+            60,
+            48,
+            55
+          ],
+          "text": ""
+        },
+        "label": null
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted pause and exit taps returned to the island and disposed the session."
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Uses the live soccer game with its low graphics profile for software rendering.",
+    "Dev launch used to set up the live game: soccer, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-pause\"]').first()",
+      "x": 36,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-pause",
+        "x": 36,
+        "y": 36
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-exit\"]').first()",
+      "x": 314,
+      "y": 196,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-exit",
+        "x": 314,
+        "y": 196
+      }
+    }
+  ],
+  "screenshots": [
+    "007-before-live-pause.png",
+    "007-before-pause-exit.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

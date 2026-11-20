@@ -1,0 +1,66 @@
+diff --git a/workout/island/minigames/boar-island/game.js b/workout/island/minigames/boar-island/game.js
+index 2b84724a..1de8604e 100644
+--- a/workout/island/minigames/boar-island/game.js
++++ b/workout/island/minigames/boar-island/game.js
+@@ -1,6 +1,6 @@
+ // אי החזירים — הגנת החווה · v0.4
+ // Fixed first-person beach turret vs. robot boars. All models, textures and sounds are generated in code.
+-import {kidUx, kidUxStyle} from '../../kid-ux.mjs?v=island-v2-20261107-15';
++import {kidUx, kidUxStyle, kidSpeak} from '../../kid-ux.mjs?v=island-v2-20261107-15';
+ import * as THREE from './vendor/three.module.js';
+ import {clamp,rand,damp,TOUCH,QUALITY,HIGH,setQuality,shoreZ,groundY,seaWave,setRenderer,mat,geo,rb,cyl,cylZ,sph,mesh,radial,compact,compactTree,T,worn} from './kit.js';
+ import {createWorld} from './world.js';
+@@ -248,10 +248,53 @@ function init(){
+   // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
+   // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
+   const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
++  if(kidUx('026')&&AIMSTICK)prepareKidBoarHelp();
+   if(QA)installQA();
+   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
+   islandFrame=requestAnimationFrame(frame);
+ }
++function prepareKidBoarHelp(){
++  const panel=$('help-screen').querySelector('.help-panel');
++  const intro=document.createElement('div'),art=document.createElement('div'),copy=document.createElement('p');
++  intro.className='kid-boar-help';
++  art.className='kid-boar-gesture';
++  art.dir='ltr';
++  art.setAttribute('aria-hidden','true');
++  for(const [name,icon] of [['aim','◉'],['target','🐗'],['action','✷'],['left','👆'],['right','👆']]){
++    const item=document.createElement('span');
++    item.className=name;item.textContent=icon;art.append(item);
++  }
++  copy.textContent='גררו באגודל שמאל כדי לכוון. החזיקו באגודל ימין כדי לירות.';
++  const audio=document.createElement('button');
++  audio.type='button';audio.className='secondary';audio.textContent='🔊 שמעו את ההוראות';
++  const speechStatus=document.createElement('p');speechStatus.setAttribute('role','status');speechStatus.hidden=true;
++  audio.addEventListener('click',()=>{speechStatus.hidden=true;kidSpeak('גִּרְרוּ בָּאַגּוּדָל הַשְּׂמָאלִי כְּדֵי לְכַוֵּן. הַחֲזִיקוּ בָּאַגּוּדָל הַיְמָנִי כְּדֵי לִירוֹת.',()=>{speechStatus.textContent='אין קול עברי זמין במכשיר.';speechStatus.hidden=false;});});
++  intro.append(art,copy,speechStatus);
++  panel.querySelectorAll(':scope>p').forEach(p=>p.hidden=true);
++  panel.insertBefore(intro,$('help-close'));
++  const actions=document.createElement('div');actions.className='kid-boar-help-actions';
++  panel.append(actions);actions.append(audio,$('help-close'));
++  kidUxStyle('026',
++    '#help-screen .help-panel>p[hidden]{display:none}' +
++    '#help-screen .help-panel{padding:12px;max-height:100%;overflow:auto}' +
++    '#help-screen .kid-boar-help p{color:#fff;font-size:16px;margin:8px 0}' +
++    '#help-screen .kid-boar-gesture{height:98px;position:relative;background:#0c2230;border-radius:10px;color:#ffe086;font:700 30px/1 system-ui;overflow:hidden}' +
++    '#help-screen .kid-boar-gesture span{display:grid;place-items:center;position:absolute;width:48px;height:48px;margin-left:-24px}' +
++    '#help-screen .kid-boar-gesture .aim,#help-screen .kid-boar-gesture .action{top:35px;border:1px solid #ffe086;border-radius:50%}' +
++    '#help-screen .kid-boar-gesture .aim,#help-screen .kid-boar-gesture .left{left:18%}' +
++    '#help-screen .kid-boar-gesture .target{left:58%;top:10px;animation:kid-boar-hit 2.6s infinite}' +
++    '#help-screen .kid-boar-gesture .action,#help-screen .kid-boar-gesture .right{left:84%}' +
++    '#help-screen .kid-boar-gesture .left{top:50px;animation:kid-boar-aim 2.6s infinite}' +
++    '#help-screen .kid-boar-gesture .right{top:63px;animation:kid-boar-fire 2.6s infinite}' +
++    '#help-screen .kid-boar-help-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}' +
++    '#help-screen .kid-boar-help-actions>button{width:auto;min-height:48px;min-width:48px;margin:0;padding:5px 8px;font-size:14px}' +
++    '#help-screen .kid-boar-help-actions #help-close{background:#ffe088;color:#152534}' +
++    '@keyframes kid-boar-aim{35%,65%{transform:translate(14px,-2px)}}' +
++    '@keyframes kid-boar-fire{50%,75%{transform:translateY(-13px)}}' +
++    '@keyframes kid-boar-hit{65%{background:#dc702f;transform:scale(1.15);border-radius:50%}}' +
++    '@media(prefers-reduced-motion:reduce){#help-screen .kid-boar-gesture span{animation:none!important}}'
++  );
++}
+ function updateStartLabel(){$('start').innerHTML=`${save.nextWave>1?'ממשיכים לגל '+save.nextWave:'הגנו על האי'} <span>←</span>`;}
+ 
+ let shownWeapon='mg';

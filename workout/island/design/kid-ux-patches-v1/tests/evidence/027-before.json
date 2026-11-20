@@ -1,0 +1,87 @@
+{
+  "id": "027",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": true,
+      "observation": "Age 7, question level 4"
+    },
+    {
+      "pass": false,
+      "observation": "Template picture; visible written prompt true; choices אֲבַטִּיחַ / רַכֶּבֶת / תַּפּוּחַ"
+    },
+    {
+      "pass": false,
+      "observation": "Visual association example absent"
+    },
+    {
+      "pass": false,
+      "observation": "Hebrew audio availability undisclosed"
+    },
+    {
+      "pass": true,
+      "observation": "Visible answer 238.65625×52px"
+    },
+    {
+      "pass": true,
+      "observation": "Answer touch result ⭐ כָּל הַכָּבוֹד! מַמְשִׁיכִים לִלְמֹד."
+    },
+    {
+      "pass": false,
+      "observation": "Continued to item 2, level 4, missing"
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Level 4, age 7. Browser Hebrew voice inventory is empty. Dev entry opens the normal language-round screen. Answers and progress use trusted touches."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-answer\"]').first().first()",
+      "x": 672.671875,
+      "y": 260.25,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "learning-answer",
+        "x": 672.671875,
+        "y": 260.25
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-next\"]').first()",
+      "x": 422,
+      "y": 356.6015625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "learning-next",
+        "x": 422,
+        "y": 356.6015625
+      }
+    }
+  ],
+  "screenshots": [
+    "027-before-screen.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

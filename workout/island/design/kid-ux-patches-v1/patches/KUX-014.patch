@@ -1,0 +1,110 @@
+diff --git a/workout/island/ui/city-management.mjs b/workout/island/ui/city-management.mjs
+index bb9774ba..f2e66ad5 100644
+--- a/workout/island/ui/city-management.mjs
++++ b/workout/island/ui/city-management.mjs
+@@ -1,5 +1,30 @@
+ import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-v2-20261107-15';
+ import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-15';
++import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++kidUxStyle('014', `
++  .city-planning-overlay .city-mode button,.city-planning-overlay .city-tab{min-height:48px;font-size:14px}
++  .city-planning-overlay .city-mode strong,.city-planning-overlay .city-instructions,.city-planning-overlay .city-hint{font-size:14px;color:#233f37}
++  .city-planning-overlay .city-tabs[hidden],.city-planning-overlay .city-mode[hidden],.city-planning-overlay .city-instructions[hidden]{display:none}
++  .city-planning-overlay .kid-city-mode-toggle{flex:none;min-height:44px;margin-bottom:8px;font-size:14px;color:#233f37}
++  .kid-city-next-card{display:grid;gap:7px;padding:10px;background:#e7f0dd;border:1px solid #c2d7bb;border-radius:12px;color:#233f37}
++  .kid-city-next-card h3{font-size:17px;margin:0}
++  .kid-city-next-card :is(p,strong){font-size:14px;margin:0;line-height:1.35}
++  .kid-city-next-card .kid-city-forecast{display:flex;align-items:center;gap:7px;padding:6px;border-radius:8px;background:#f9f7e9}
++  .kid-city-next-card .kid-city-forecast-icon{min-width:45px;font-size:23px;text-align:center}
++  .kid-city-next-card button{min-height:48px;font-size:14px}
++  .city-planning-overlay :is(.city-mode,.kid-city-next-card) .primary-button{background:#285f54;color:#fff}
++`);
++
++const childForecast = {
++  start: ['🏙️▶️', 'העיר תתחיל להתפתח כשיש כבישים ואזורי בנייה.'],
++  roads: ['🛣️🏠', 'כביש יכול לחבר את הבתים והשירותים.'],
++  water: ['💧🏠', 'במפה רואים לאילו בתים המים מגיעים.'],
++  jobs: ['🏪👥', 'אזור מסחר יכול להוסיף מקומות עבודה.'],
++  grow: ['📍🏗️', 'אזור שסימנו יכול להפוך לבניין.'],
++  service: ['🏠✨', 'במפה רואים למי מגיע השירות.']
++};
++
+ 
+ const node=(tag,className='',text='')=>{const item=document.createElement(tag);item.className=className;item.textContent=text;return item;};
+ const button=(text,action,handler,className='secondary-button')=>{const item=node('button',className,text);item.type='button';item.dataset.action=action;item.onclick=handler;return item;};
+@@ -11,14 +36,14 @@ export class CityManagementInterface{
+   constructor(ui){
+     this.ui=ui;this.engine=ui.engine;this.t=ui.t;
+     this.legend=node('aside','city-map-legend panel');this.legend.hidden=true;ui.root.append(this.legend);
+-    this.pulse=button('','city-command',()=>this.open('blueprint'),'city-command-button');
++    this.pulse=button('','city-command',()=>this.open(kidUx('014')?'kid':'blueprint'),'city-command-button');
+     this.pulse.append(node('span','city-command-icon','🏙'),node('strong','',this.t('city.open')));this.pulseBalance=node('span','city-command-balance');this.pulseBars=node('span','city-command-bars');
+     for(const id of CITY_ZONES){const bar=node('i');bar.style.setProperty('--zone-color',ui.data.config.cityManagement.zones[id].color);this.pulseBars.append(bar);}
+     this.pulse.append(this.pulseBalance,this.pulseBars);ui.root.append(this.pulse);
+     this.growthNotice=node('aside','city-growth-notice panel');this.growthNotice.hidden=true;this.growthNotice.setAttribute('role','status');this.growthNotice.setAttribute('aria-live','polite');ui.root.append(this.growthNotice);
+     this.overlayUnsubscribe=this.engine.subscribe(()=>{if(this.overlay)this.updateOverlay();this.updatePulse();});this.updatePulse();
+   }
+-  addEntry(parent){parent.append(button(this.t('city.open'),'city-management',()=>this.open('blueprint'),'primary-button city-management-entry'));}
++  addEntry(parent){parent.append(button(this.t('city.open'),'city-management',()=>this.open(kidUx('014')?'kid':'blueprint'),'primary-button city-management-entry'));}
+   open(tab='overview'){
+     const {ui,engine,t}=this;ui.cancelPlacement();ui.closeInfo();
+     const modal=ui.openModal('city.title','city.subtitle',{blocking:false});modal.classList.add('city-management-modal');modal.parentElement.classList.add('city-planning-overlay');ui.root.dataset.cityPlanning='true';this.panel=modal;
+@@ -33,10 +58,41 @@ export class CityManagementInterface{
+       control.setAttribute('aria-controls',`city-page-${id}`);navigation.append(control);
+       const page=node('section','city-page');page.id=`city-page-${id}`;page.setAttribute('aria-label',t(`city.${id}`));pages[id]=page;
+     }
+-    const select=id=>{tab=id;this.activeTab=id;for(const [key,page]of Object.entries(pages))page.hidden=key!==id;for(const control of navigation.children)control.setAttribute('aria-pressed',String(control.dataset.action===`city-tab-${id}`));if(id==='blueprint')updateBlueprint();else ui.view.setCitySites?.([]);};
++    const childMode = kidUx('014');
++    let navigationToggle, childAction, forecastIcon, forecastText;
++    const select=id=>{
++      tab=id;this.activeTab=id;
++      for(const [key,page]of Object.entries(pages))page.hidden=key!==id;
++      for(const control of navigation.children)control.setAttribute('aria-pressed',String(control.dataset.action===`city-tab-${id}`));
++      if (childMode) {
++        const advanced = id!=='kid';
++        mode.hidden = instructions.hidden = navigation.hidden = !advanced;
++        navigationToggle.textContent = advanced ? '↶ מה כדאי לעשות?' : '⚙ ניהול מלא';
++        navigationToggle.setAttribute('aria-expanded',String(advanced));
++      }
++      if(id==='blueprint')updateBlueprint();else ui.view.setCitySites?.([]);
++    };
+     const mode=node('div','city-mode'),modeText=node('strong'),toggle=button('', 'city-toggle-management',()=>engine.setCityPolicy({enabled:!engine.state.cityManagement.enabled}),'primary-button');
+     const instructions=node('details','city-instructions');instructions.append(node('summary','',t('city.instructions')),node('p','city-explanation',t('city.explanation')));
+-    mode.append(modeText,toggle);modal.append(mode,instructions,navigation,...Object.values(pages));
++    mode.append(modeText,toggle);
++    if (childMode) {
++      navigation.id = 'kid-city-advanced-tabs';
++      navigationToggle = button('', 'kid-city-mode-toggle', () => select(tab==='kid'?'blueprint':'kid'), 'secondary-button kid-city-mode-toggle');
++      navigationToggle.setAttribute('aria-controls', navigation.id);
++      modal.append(navigationToggle);
++      pages.kid = node('section', 'city-page');
++      pages.kid.setAttribute('aria-label', 'מה כדאי לעשות בעיר?');
++      const card = node('article', 'kid-city-next-card');
++      childAction = button('', 'kid-city-next', () => {}, 'primary-button');
++      const forecast = node('div', 'kid-city-forecast');
++      forecastIcon = node('span', 'kid-city-forecast-icon');
++      forecastIcon.setAttribute('aria-hidden', 'true');
++      forecastText = node('strong');
++      forecast.append(forecastIcon, forecastText);
++      card.append(node('h3', '', 'מה כדאי לעשות בעיר?'), forecast, childAction);
++      pages.kid.append(card);
++    }
++    modal.append(mode,instructions,navigation,...Object.values(pages));
+     const stats=node('div','city-summary'),statValues={};
+     for(const id of ['residents','jobs','balance']){const card=node('div','city-stat'),value=node('strong');card.append(node('span','',t(`city.${id}`)),value);stats.append(card);statValues[id]=value;}
+     const demand=node('div','city-demand'),demandValues={};demand.append(node('h3','',t('city.demand')));
+@@ -110,6 +166,13 @@ export class CityManagementInterface{
+       const department=adviceId==='water'?'water':missing;
+       adviceAction.textContent=t(adviceId==='start'?'city.start':adviceId==='roads'?'city.action.roads':adviceId==='jobs'?'city.action.jobs':adviceId==='grow'?'city.action.plan':'city.action.coverage',{department:department?t(`city.${department}`):''});
+       adviceAction.onclick=()=>{if(adviceId==='start')engine.setCityPolicy({enabled:true});else if(adviceId==='grow')select('zones');else{ui.closeModal();if(adviceId==='roads')ui.selectBuilding('road');else if(adviceId==='jobs')ui.startZone('commercial');else this.showOverlay(department);}};
++      if (childMode) {
++        childAction.textContent = adviceAction.textContent;
++        childAction.onclick = adviceAction.onclick;
++        const [icon, text] = childForecast[adviceId];
++        forecastIcon.textContent = icon;
++        forecastText.textContent = text;
++      }
+       for(const id of CITY_DEPARTMENTS){const service=report.services[id],target=serviceValues[id];target.value.textContent=`${service.coverage}%`;target.meter.value=service.coverage;target.description.textContent=`${t('city.coverageAmount',{covered:amount(service.covered),total:service.total})} · ${t('city.capacity',{capacity:amount(service.capacity)})}`;}
+       ledgerValues.existingIncome.textContent=amount(report.budget.income-report.budget.taxes);ledgerValues.taxIncome.textContent=`+${amount(report.budget.taxes)}`;ledgerValues.expenses.textContent=`−${amount(report.budget.expenses)}`;ledgerValues.net.textContent=amount(report.budget.net);
+       for(const [index,control]of taxButtons.entries())control.setAttribute('aria-pressed',String(policy.taxRate===ui.data.config.cityManagement.taxRates[index]));

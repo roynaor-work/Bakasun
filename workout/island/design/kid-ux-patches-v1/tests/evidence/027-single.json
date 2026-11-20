@@ -1,0 +1,85 @@
+{
+  "id": "027",
+  "mode": "single",
+  "checks": [
+    {
+      "pass": true,
+      "observation": "Age 7, question level 4"
+    },
+    {
+      "pass": true,
+      "observation": "Template picture-association; visible written prompt false; choices 🌙 / 🛌 / 🥄"
+    },
+    {
+      "pass": true,
+      "observation": "Visual association example ⛽ → 🚗 ✓"
+    },
+    {
+      "pass": true,
+      "observation": "Hebrew audio availability 🔇 קול בעברית לא זמין · 14px · 10.73:1"
+    },
+    {
+      "pass": true,
+      "observation": "Visible answer 238.671875×92.796875px"
+    },
+    {
+      "pass": true,
+      "observation": "Answer touch result ⭐"
+    },
+    {
+      "pass": true,
+      "observation": "Continued to item 2, level 4, picture-association"
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Level 4, age 7. Browser Hebrew voice inventory is empty. Dev entry opens the normal language-round screen. Answers and progress use trusted touches."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-answer\"]').nth(2).first()",
+      "x": 171.3359375,
+      "y": 266.9921875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "learning-answer",
+        "x": 171.3359375,
+        "y": 266.9921875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"learning-next\"]').first()",
+      "x": 422,
+      "y": 352.40625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "learning-next",
+        "x": 422,
+        "y": 352.40625
+      }
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "complete applied series"
+}

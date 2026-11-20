@@ -1,0 +1,109 @@
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index fe83f3c9..ef168ffe 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -17,7 +17,7 @@ import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261107-15';
+ import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-15';
+ import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-15';
+ import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261107-15';
+-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261107-15';
++import {hoopsClubPanel,hoopsStartCard,prepareHoopsClubLayout} from './hoops-club.mjs?v=island-v2-20261107-15';
+ import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-15';
+ import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-15';
+ import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-15';
+@@ -202,11 +202,14 @@ export class ActivityInterface {
+     const outer=this.modal(game.title,'minigame.progressHint');outer.dataset.stageMap=id;let dialog=outer;
+     // Racing is a league now (racing-v11): no level or stage picker. The saved stages stay in the save untouched; ?racingLevels=1 shows the old map again.
+     if(id==='islandRacing'&&this.racingLeagueOnly()){this.racingLeagueCard(outer);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
++    let clubLayout;
+     // basketball: one card and one button; the club, the stages and the stars fold away
+     if(id==='streetSlam'&&this.engine.hoops){
+       const play=()=>this.start(id,undefined,p.stage);play.refresh=()=>this.stages(id);
+       const more=el('details','hoops-more');more.dataset.hoopsMore='true';more.append(el('summary','',this.t('hoops.start.manage')));
+-      outer.append(hoopsStartCard({engine:this.engine,t:this.t,play}),more);dialog=more;
++      clubLayout=prepareHoopsClubLayout(outer);
++      if(clubLayout)more.firstElementChild.textContent='ניהול הקבוצה';
++      (clubLayout?.scroll||outer).append(hoopsStartCard({engine:this.engine,t:this.t,play,actionBar:clubLayout?.actions}),more);dialog=more;
+     }
+     if(id==='fireRescue')dialog.append(button(this.t('fire.certificates'),'open-certificates',()=>this.certificates()));if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
+     dialog.append(el('p','',this.t('minigame.totalStars',{stars:p.stars.reduce((sum,n)=>sum+n,0)})));
+@@ -235,7 +238,7 @@ export class ActivityInterface {
+       const stage=i+1,locked=stage>p.stage;
+       const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
+       node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+-    });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
++    });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);(clubLayout?.actions||outer).append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
+   }
+   autoLaunch(choice) {
+     if(this.requireDaily(choice.gameId)){this.activity.cancel(choice.eventId);return;}
+diff --git a/workout/island/ui/hoops-club.mjs b/workout/island/ui/hoops-club.mjs
+index e84c3712..969886ea 100644
+--- a/workout/island/ui/hoops-club.mjs
++++ b/workout/island/ui/hoops-club.mjs
+@@ -1,6 +1,7 @@
+ /** Island Pro Basketball club screen (menu, not the court): next game and table, the starting
+  * five, training with its cost and result shown before buying, and match settings. Every
+  * change goes through engine.hoops, which saves and refuses while a game is running. */
++import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-15';
+ import {DRILLS} from '../minigames/hoops-league.mjs?v=island-v2-20261107-15';
+ import {positionName,abilitySummary} from '../minigames/hoops-roles.mjs';
+ 
+@@ -10,7 +11,7 @@ const POS=['PG','SG','SF','PF','C'];
+ 
+ /** The simple start: who we play next, where we stand, and one big button. Everything else
+  * (lineup, training, settings, stages) waits behind "manage the team". */
+-export function hoopsStartCard({engine,t,play}){
++export function hoopsStartCard({engine,t,play,actionBar}){
+  const h=engine.state.hoops,sum=engine.hoops.summary(),root=el('section','hoops-start');root.dataset.hoopsStart='true';
+  const teamName=id=>sum.teams.find(x=>x.id===id)?.name||id;
+  const crest=(id,team)=>{const c=el('span','hoops-club-crest');const look=sum.teams.find(x=>x.id===id)||team;if(look?.primary){c.style.setProperty('--team',look.primary);c.style.setProperty('--team2',look.secondary);}return c;};
+@@ -27,10 +28,48 @@ export function hoopsStartCard({engine,t,play}){
+  if(place)root.append(el('p','hoops-start-place',t('hoops.start.place',{place,teams:sum.table.length})));
+  const go=button(t('hoops.start.play'),'hoops-play-next',play,'primary-button hoops-start-play');
+  if(!sum.next){go.textContent=t('hoops.club.newSeason');go.dataset.action='hoops-new-season';go.onclick=()=>{const r=engine.hoops.newSeason();if(r?.ok)play.refresh?.();};}
+- root.append(go);
++ if(actionBar){
++  root.classList.add('kid-hoops-next-game');
++  actionBar.prepend(go);
++ }else root.append(go);
+  return root;
+ }
+ 
++/** Keep the primary and return actions in view while the management pane scrolls. */
++export function prepareHoopsClubLayout(dialog){
++ if(!kidUx('020'))return null;
++ dialog.classList.add('kid-hoops-club-layout');
++ kidUxStyle('020',`
++  .modal[data-stage-map=streetSlam].kid-hoops-club-layout{max-height:100%;overflow:hidden;display:grid;
++   grid-template-rows:auto auto minmax(0,1fr) auto;gap:6px;padding:12px}
++  .modal[data-stage-map=streetSlam].kid-hoops-club-layout > .modal-close{position:absolute;top:6px;right:auto;left:6px}
++  .modal.kid-hoops-club-layout > [data-action=shell-install]{position:absolute;top:6px;left:68px;margin:0;min-width:48px;min-height:48px}
++  .modal[data-stage-map=streetSlam].kid-hoops-club-layout > h2{grid-row:1;padding-top:0;margin:0 0 0 204px}
++  .modal.kid-hoops-club-layout > .modal-subtitle{grid-row:2;font-size:14px;margin:0 0 0 204px}
++  .modal.kid-hoops-club-layout > .sound-toggle{position:absolute;top:6px;left:122px;right:auto;min-height:48px;max-width:80px;font-size:14px}
++  .modal.kid-hoops-club-layout > .shell-install-help{position:absolute;z-index:6;top:54px;right:8px;left:8px;
++   max-height:calc(100% - 116px);overflow:auto;margin:0;color:#182c3d}
++  .kid-hoops-club-scroll{grid-row:3;overflow:auto;overscroll-behavior:contain;padding:0 5px 10px;min-height:0}
++  .kid-hoops-club-actions{grid-row:4;display:flex;justify-content:center;gap:8px;padding:4px 0}
++  @media(max-width:440px){
++   .modal[data-stage-map=streetSlam].kid-hoops-club-layout > h2{padding-top:48px;margin-left:0}
++   .modal.kid-hoops-club-layout > .modal-subtitle{margin-left:0}
++  }
++  .modal.kid-hoops-club-layout .kid-hoops-club-actions > button{
++   margin:0;min-width:48px;min-height:48px;font-size:16px;padding:6px 13px;color:#172b3a;background:#f2e3ae;
++   border:1px solid #e6d5ad
++  }
++  .modal.kid-hoops-club-layout .kid-hoops-club-actions > .adventure-back{color:#fff;background:#24495d;border-color:#c8e0eb}
++  .modal.kid-hoops-club-layout .kid-hoops-next-game{gap:5px;padding:6px 8px;color:#fff;background:#142d40}
++  .modal.kid-hoops-club-layout .kid-hoops-next-game :is(.hoops-start-place,.hoops-start-line){font-size:14px;opacity:1}
++  .kid-hoops-club-layout .hoops-more > summary{display:list-item;min-height:48px;font-size:16px;color:#fff}
++  .kid-hoops-club-layout :is(.hoops-club-pos,.hoops-club-line){font-size:14px;opacity:1}
++ `);
++ const scroll=el('div','kid-hoops-club-scroll'),actions=el('div','kid-hoops-club-actions');
++ dialog.append(scroll,actions);
++ return {scroll,actions};
++}
++
+ export function hoopsClubPanel({engine,t,refresh,result=()=>{}}){
+  const h=engine.state.hoops,sum=engine.hoops.summary(),root=el('section','hoops-club');root.dataset.hoopsClub='true';
+  const teamName=id=>sum.teams.find(x=>x.id===id)?.name||id;

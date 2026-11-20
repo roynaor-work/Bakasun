@@ -1,0 +1,119 @@
+{
+  "id": "023",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "numbers": [
+          {
+            "number": "1",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "16",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "44",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "63",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "11",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "4",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "27",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "55",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "81",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "14",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "22",
+            "fontPx": 14,
+            "ratio": 17.34
+          },
+          {
+            "number": "31",
+            "fontPx": 14,
+            "ratio": 17.34
+          }
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Development navigation opens the real racing stage map. The season table opens by trusted touch and is scrolled by touch.",
+    "After the touch scroll, the first driver number is repositioned programmatically if needed for the screenshot."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"racing-league-season\"]').first()",
+      "x": 390,
+      "y": 253.796875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "racing-league-season",
+        "x": 390,
+        "y": 253.796875
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 450,
+      "y": 297,
+      "endX": 450,
+      "endY": 118,
+      "steps": 8
+    }
+  ],
+  "screenshots": [
+    "023-after-season-standings.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

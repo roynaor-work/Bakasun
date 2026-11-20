@@ -1,0 +1,135 @@
+{
+  "id": "010",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "close": [
+          36,
+          36
+        ],
+        "destination": [
+          67.38,
+          38
+        ],
+        "closeVisible": 36,
+        "destinationVisible": 38
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "destinationFontPx": 12,
+        "contrast": 8.83,
+        "label": "🏛️ עירייה"
+      }
+    },
+    {
+      "pass": true,
+      "observation": "A trusted touch on the city hall destination closes the map."
+    },
+    {
+      "pass": true,
+      "observation": "The dedicated close target closes the map."
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 422,
+      "y": 340,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 422,
+        "y": 340
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-map\"]').first()",
+      "x": 126.25,
+      "y": 81,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "city-map",
+        "x": 126.25,
+        "y": 81
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-go-cityHall\"]').first()",
+      "x": 371.3125,
+      "y": 256,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "city-go-cityHall",
+        "x": 371.3125,
+        "y": 256
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-map\"]').first()",
+      "x": 126.25,
+      "y": 81,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "city-map",
+        "x": 126.25,
+        "y": 81
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-map-close\"]').first()",
+      "x": 209,
+      "y": 39,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 5,
+        "action": "city-map-close",
+        "x": 209,
+        "y": 39
+      }
+    }
+  ],
+  "screenshots": [
+    "010-before-map.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

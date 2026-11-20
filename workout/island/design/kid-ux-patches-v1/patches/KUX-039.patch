@@ -1,0 +1,91 @@
+diff --git a/workout/island/minigames/hoops-engine.mjs b/workout/island/minigames/hoops-engine.mjs
+index 66e31695..bf744f32 100644
+--- a/workout/island/minigames/hoops-engine.mjs
++++ b/workout/island/minigames/hoops-engine.mjs
+@@ -39,7 +39,7 @@ export function passLaneBlocked(p,q,defenders,laneRadius){
+ /** Effective rating 0..1 (fatigue lowers everything a little). */
+ function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
+ 
+-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play}={}){
++export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play,timeoutFeedback=false}={}){
+  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
+  // M3 gameplay layer (alley-oops, pass kinds, spacing, cuts): config.play, on unless `play:false` (?hoopsPlay=0)
+  const PL=play===false?null:(play&&typeof play==='object'?play:(C.play&&C.play.enabled!==false?C.play:null));
+@@ -299,10 +299,15 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
+ 
+  function timeout(teamIdx){
+   const t=team(teamIdx);
+-  const ok=t.timeouts>0&&(['dead','inbound','break','freethrow'].includes(S.phase)||(S.phase==='live'&&S.possession===teamIdx&&S.ball.state==='held'));
+-  if(!ok)return {ok:false};
++  const stopped=['dead','inbound','break','freethrow'].includes(S.phase);
++  const allowed=stopped||(S.phase==='live'&&S.possession===teamIdx&&S.ball.state==='held');
++  if(t.timeouts<=0||!allowed){
++   if(!timeoutFeedback)return {ok:false};
++   return {ok:false,reason:t.timeouts<=0?'used':S.phase==='live'?'possession':'phase'};
++  }
+   t.timeouts--;
+-  const resume=S.phase==='live'?(()=>{const h=holder();const spot=sidelineSpot(h?h.x:0,teamIdx);startInbound(teamIdx,spot,'keep');}):S.pending?.next||(()=>{});
++  const prior={phase:S.phase,phaseT:S.phaseT,pending:S.pending};
++  const resume=S.phase==='live'?(()=>{const h=holder();const spot=sidelineSpot(h?h.x:0,teamIdx);startInbound(teamIdx,spot,'keep');}):timeoutFeedback?(()=>{S.phase=prior.phase;S.phaseT=prior.phaseT;S.pending=prior.pending;}):S.pending?.next||(()=>{});
+   S.phase='timeout';S.phaseT=0;S.pending={next:resume,delay:C.timing.timeout};
+   for(const tt of S.teams)for(const p of tt.roster)p.energy=Math.min(1,p.energy+C.fatigue.timeoutRecover);
+   emit({type:'timeout',team:teamIdx,left:t.timeouts});
+@@ -707,7 +712,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
+   if((inp.switchPress||inp.altPress)&&!hasBall){
+    switchPlayer(p);
+   }
+-  if(inp.timeoutPress)timeout(p.team);
++  if(inp.timeoutPress&&!timeoutFeedback)timeout(p.team);
+   if(inp.call==='defense'){const t=team(p.team);t.tactics.defense=t.tactics.defense==='zone'?'man':'zone';emit({type:'tactics',team:p.team,defense:t.tactics.defense});}
+   else if(inp.call){team(p.team).call=inp.call;team(p.team).callT=0;team(p.team).tactics.offense=inp.call;emit({type:'playCall',team:p.team,play:inp.call});}
+  }
+@@ -1151,6 +1156,10 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
+   step(inp=NO_INPUT){
+    if(disposed||S.phase==='final')return;
+    S.tick++;const dt=HOOPS_DT;
++   if(timeoutFeedback&&inp?.timeoutPress){
++    const request=timeout(S.userTeam);
++    if(!request.ok)emit({type:'timeoutRejected',team:S.userTeam,reason:request.reason});
++   }
+    if(S.phase!=='live'){
+     if(runPhase(dt,inp)){recordHistory();return;}
+     if(S.phase!=='live'){recordHistory();return;}
+diff --git a/workout/island/minigames/hoops-session.mjs b/workout/island/minigames/hoops-session.mjs
+index 66daaea4..423fa9b3 100644
+--- a/workout/island/minigames/hoops-session.mjs
++++ b/workout/island/minigames/hoops-session.mjs
+@@ -41,7 +41,8 @@ export function startHoops(ctx){
+  // M4 presentation (11/11): automatic replay after dunks, alley-oops and buzzer/winning threes, reactions, crowd moods, HUD polish; `?hoopsShow=0` restores today
+  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
+  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
+- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined});
++ const timeoutFeedback=kidUx('039');
++ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined,timeoutFeedback});
+  engine.setAutoSub(setup.autoSub!==false);
+  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
+  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
+@@ -71,6 +72,13 @@ export function startHoops(ctx){
+  const clock=node('bdi','hoops-clock','0:00'),shotc=node('bdi','hoops-shotclock','24');mid.append(pips,clock,shotc);
+  bug.append(home.s,mid,away.s);
+  const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterYellow=node('span','hoops-meter-yellow'),meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterYellow,meterWin,meterFill);
++ kidUxStyle('039',`
++  .game-screen[data-game=streetSlam] .hoops-toast[data-kind=timeout-rejected]{
++   min-height:44px;height:auto;width:max-content;max-width:calc(100% - 32px);box-sizing:border-box;
++   padding:8px 14px;font-size:16px;text-align:center;direction:rtl;
++   color:#fff;background:#442b19;border-color:#ffe2a2;animation:none
++  }
++ `);
+  const grade=node('div','hoops-grade');grade.hidden=true;let gradeUntil=0;
+  const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
+  // show: the broadcast tag during a replay (Hebrew, no words otherwise on the game screen), gone the moment live play returns
+@@ -158,6 +166,10 @@ export function startHoops(ctx){
+    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
+    if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
+    if(e.type==='timeout'&&e.team===0)openBench();
++   if(e.type==='timeoutRejected'&&e.team===0){
++    const reason={used:'לא נשארו פסקי זמן',possession:'פסק זמן כשהכדור אצלכם',phase:'חכו לחידוש המשחק'};
++    showToast(doc.createTextNode(reason[e.reason]),'timeout-rejected',3200);
++   }
+    // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
+    if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
+    if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}

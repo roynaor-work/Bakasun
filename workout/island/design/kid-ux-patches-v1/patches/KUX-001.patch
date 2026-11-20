@@ -1,0 +1,26 @@
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 74036e3f..b4f6e66c 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -25,6 +25,7 @@ import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107
+ import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-15';
+ import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-15';
+ import { gameGuide, helpReplay } from './kid-ux-help.mjs?v=island-v2-20261107-15';
++import './kid-ux-library.mjs?v=island-v2-20261107-15';
+ 
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+diff --git a/workout/island/ui/kid-ux-library.mjs b/workout/island/ui/kid-ux-library.mjs
+new file mode 100644
+index 00000000..96f0575b
+--- /dev/null
++++ b/workout/island/ui/kid-ux-library.mjs
+@@ -0,0 +1,8 @@
++import { kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++kidUxStyle('001', `
++  .modal.modal[data-game-library] .adventure-game-card .adventure-enter {
++    min-width: 44px;
++    min-height: 48px;
++  }
++`);

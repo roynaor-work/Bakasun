@@ -1,0 +1,89 @@
+{
+  "id": "026",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "gestureAnimations": 0,
+        "visibleHelp": "תדריך קצר\nהחוף בידיים שלכם\n\nבטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק. לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.\n\n1–4 / גלגלת: החלפת נשק. R: טעינה מחדש.\nQ / מטח טילים: פיצוץ באזור הכוונת.\nE / הקפאה: מאטה את כל הפלישה.\nרווח / כוח אש: כשהמד מלא, ירי כפול בלי התחממות.\nP / השהיה: עוצר את הקרב.\n\nהעיניים הזוהרות הן נקודת התורפה: פגיעה בהן כפולה. שריון מחזיר ניצוצות ובולע נזק, פיצוצים חודרים אותו. פגזי מרגמה וטורפדו אפשר להפיל לפני שהם מגיעים. מה שמתחת למים לא נפגע, אז מחכים שהכריש יעלה. הצבת הגדולה של סרטן המצור בולעת כדורים, אז מכוונים לעיניים שעל הגבעולים או יורים פגז. מנטה שמאדימה צוללת אל העמדה, ויורים בה מיד. בגל 5 מגיע מלך הברזל, בגל 10 ספינת הכוורת.\n\nהבנתי, מוכנים ←"
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "continue": {
+          "width": 416,
+          "height": 0,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "הבנתי, מוכנים ←",
+          "contrast": 1.3
+        },
+        "replay": null
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The embedded campaign is the same-origin game iframe. The QA hold freezes its decorative rendering after the menu has loaded."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 649.9453125,
+      "y": 297,
+      "endX": 649.9453125,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-understood\"]').first()",
+      "x": 649.9453125,
+      "y": 328.75,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-understood",
+        "x": 649.9453125,
+        "y": 328.75
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#help').first()",
+      "x": 750.3984375,
+      "y": 354.390625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "help",
+        "x": 750.3984375,
+        "y": 354.390625
+      }
+    }
+  ],
+  "screenshots": [
+    "026-before-touch-briefing.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

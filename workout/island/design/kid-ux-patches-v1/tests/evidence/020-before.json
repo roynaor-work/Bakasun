@@ -1,0 +1,112 @@
+{
+  "id": "020",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "initialActions": [
+          {
+            "text": "למשחק הבא",
+            "fontPx": 18.4,
+            "ratio": 4.07,
+            "width": 260,
+            "height": 56,
+            "visibleWidth": 260,
+            "visibleHeight": 56
+          },
+          {
+            "text": "חזרה למשחק",
+            "fontPx": 12,
+            "ratio": 1.62,
+            "width": 86.75,
+            "height": 44,
+            "visibleWidth": 86.75,
+            "visibleHeight": 0
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "scrollBefore": 112,
+        "scrollAfter": 337,
+        "actions": [
+          {
+            "text": "למשחק הבא",
+            "fontPx": 18.4,
+            "ratio": 4.07,
+            "width": 260,
+            "height": 56,
+            "visibleWidth": 260,
+            "visibleHeight": 1.796875
+          },
+          {
+            "text": "חזרה למשחק",
+            "fontPx": 12,
+            "ratio": 1.62,
+            "width": 86.75,
+            "height": 44,
+            "visibleWidth": 86.75,
+            "visibleHeight": 0
+          }
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 422,
+      "y": 297,
+      "endX": 422,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.hoops-more > summary').first()",
+      "x": 422,
+      "y": 282.796875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "",
+        "x": 422,
+        "y": 282.796875
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 422,
+      "y": 315,
+      "endX": 422,
+      "endY": 75,
+      "steps": 6
+    }
+  ],
+  "screenshots": [
+    "020-before-club-next-game.png",
+    "020-before-club-after-scroll.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

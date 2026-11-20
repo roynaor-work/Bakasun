@@ -1,0 +1,376 @@
+diff --git a/tests/final-naval.test.mjs b/tests/final-naval.test.mjs
+index b575c9a1d126ca0d570a316d2bbf8bd65e04ab5b..43e4506f2e3b8a2392b4fefbd75774bff172da10 100644
+--- a/tests/final-naval.test.mjs
++++ b/tests/final-naval.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ // 11/11/2026 final fix (Fable), ships: spin aim (reach, smoothness, stop, flags), camera follow for spin, edge hint,
+ // anti-air model (aircraft fall into the sea, Vulcan start/stop sounds, stages with attacks) and the air audio contract.
+ import test from 'node:test';
+@@ -108,7 +109,12 @@ test('air audio: ignores other sound names, needs an unlocked context, start the
+  let flag='on';const storage={getItem:k=>k==='island.sound'?flag:null};
+  const audio=createNavalAirAudio({storage,AudioContext:FakeContext,fetch:fetcher});
+  assert.equal(audio.play('vulcanStart'),false,'locked: nothing plays');audio.unlock();await new Promise(r=>setTimeout(r,5));
+- assert.equal(audio.metrics().loaded.length,3);assert.ok(fetched.every(u=>u.includes('assets/game-naval/audio/')&&u.includes('?v=island-v2-20261107-18')),'tagged asset urls');
++ assert.equal(audio.metrics().loaded.length,3);assert.equal(fetched.length,3);
++ for(const path of fetched){
++  const url=new URL(path);
++  assert.match(url.pathname,/\/assets\/game-naval\/audio\//);
++  assert.deepEqual(url.searchParams.getAll('v'),[releaseVersion]);
++ }
+  assert.equal(audio.play('cannon'),false,'other names are ignored');
+  assert.equal(audio.play('vulcanStart'),true);assert.ok(audio.metrics().looping);assert.equal(audio.play('vulcanStart'),false,'already looping');
+  assert.equal(audio.play('vulcanStop'),true);assert.ok(!audio.metrics().looping);assert.equal(audio.play('vulcanStop'),false,'nothing to stop');
+diff --git a/tests/helpers/island-release.mjs b/tests/helpers/island-release.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..5cdee5dc47262d2d3d9413bcdc57af8a6f1e6764
+--- /dev/null
++++ b/tests/helpers/island-release.mjs
+@@ -0,0 +1,18 @@
++import assert from 'node:assert/strict';
++import {readFile} from 'node:fs/promises';
++
++export const {version: releaseVersion} = JSON.parse(await readFile(new URL('../../workout/island/release.json',import.meta.url),'utf8'));
++assert.ok(typeof releaseVersion==='string' && releaseVersion.trim(), 'release.json has a version');
++
++export function assertReleaseReference(source, resource, file = resource) {
++  const escaped = resource.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
++  const versions = [...source.matchAll(new RegExp(escaped + '\\?v=([\\w.-]+)', 'g'))];
++  assert.ok(versions.length > 0, `${file} must reference ${resource} with a version`);
++  for (const [,tag] of versions) assert.equal(tag,releaseVersion,`${file} → ${resource}`);
++}
++
++export function assertReleaseTags(source, file, {required = true} = {}) {
++  const tags = [...source.matchAll(/[?&]v=([\w.-]+)/g)];
++  if (required) assert.ok(tags.length > 0, `${file} must contain a versioned URL`);
++  for (const [,tag] of tags) assert.equal(tag,releaseVersion,file);
++}
+diff --git a/tests/island-alpine-start-lights.test.mjs b/tests/island-alpine-start-lights.test.mjs
+index 1b54c5bc9ff6a71281205c01993e8e3a27b38a8b..986b57da2a47500f54f80ce4e93c0a0f62dd5f81 100644
+--- a/tests/island-alpine-start-lights.test.mjs
++++ b/tests/island-alpine-start-lights.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile} from 'node:fs/promises';
+@@ -57,7 +58,8 @@ test('the gantry DOM: red lamps on, then green; spoken numbers; the flag ?alpine
+
+ test('every ski stage gets the lights from the session, with a beep per lamp and the start cue at green; the flag keeps the old number and cues', async () => {
+   const session = await readFile(new URL('minigames/alpine-session.mjs', root), 'utf8'), css = await readFile(new URL('minigames/alpine-start-lights.css', root), 'utf8');
+-  assert.match(session, /import \{createStartLights,startLightsEnabled\} from '\.\/alpine-start-lights\.mjs\?v=island-v2-20261107-18'/);
++  assert.match(session, /import \{createStartLights,startLightsEnabled\} from '\.\/alpine-start-lights\.mjs\?v=/);
++  assertReleaseReference(session,'./alpine-start-lights.mjs');
+   assert.match(session, /const lightsOn = startLightsEnabled\(\), lights = lightsOn \? createStartLights\(doc/);
+   assert.match(session, /if \(lightsOn\) \{ if \(e\.value === 0\) audio\.cue\('go'\); \} else \{ audio\.cue\(e\.value > 0 \? 'countdown' : 'go'\)/);
+   assert.match(session, /countdown\.hidden = !count \|\| lightsOn;/);
+diff --git a/tests/island-athlete-body-v22.test.mjs b/tests/island-athlete-body-v22.test.mjs
+index 0016aa61a85ae5791b91a2629e3e2024e6b9d6b5..2138d2f516e04307a85c9ec9a402e232353fed5c 100644
+--- a/tests/island-athlete-body-v22.test.mjs
++++ b/tests/island-athlete-body-v22.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile, stat, readdir} from 'node:fs/promises';
+@@ -126,7 +127,7 @@ test('flag wiring: soccer and basketball ask the flag before the Codex body, and
+   // no pre-existing branch lost its code: the MakeHuman bodyFactory and the sleeve geometry are still built when v22 is off
+   assert.match(hoops, /const sleeves=v22\?null:athleteKitGeometry\(THREE,source,'basketball'\)/);
+   // both games import the module with the current release tag
+-  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-18/);
++  for (const s of [soccer, hoops]) assertReleaseReference(s,'athlete-body-v22.mjs');
+ });
+
+ test('roles: soccer is one body, basketball guard / wing / center are their own', () => {
+diff --git a/tests/island-fire-v24.test.mjs b/tests/island-fire-v24.test.mjs
+index d9a6c2a50b0a8a98720a5b8ac0108fa0a5fb5b8e..11ae2fbf77d0db854e6f211b6f6147f793914e89 100644
+--- a/tests/island-fire-v24.test.mjs
++++ b/tests/island-fire-v24.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ // 14/11/2026 fire v24: the building entry inside the campaign stages (Roy: "not separate: you reach the building in the stages and go in;
+ // on a clock; control, understanding and graphics"). Flag, entry stages, plans, the pure room model with its clock and gentle timeout, the
+ // building pick, the merged result, the stage map badge, assets, strings and the offline list. `?fireFlow=v23` keeps v23 untouched.
+@@ -147,7 +148,7 @@ test('door marker: a marker when the door is on screen, an edge arrow when it is
+
+ test('fire entry strings, published module tags and offline packs cover every stage',async()=>{
+   for(const file of ['minigames/fire-v24.mjs','minigames/fire-v24-interior.mjs','minigames/fire-v24-anchors.mjs','minigames/fire-v24-scene.mjs','minigames/fire-v24-session.mjs','minigames/fire-v24-flow.mjs','minigames/fire-v24.css']){
+-    const text=await read(file);for(const m of text.matchAll(/from '\.\.?\/[^']+\.mjs(\?v=[^']*)?'/g))if(!/polish-flag|vendor\//.test(m[0]))assert.equal(m[1],'?v=island-v2-20261107-18',file+': '+m[0]);}
++    const text=await read(file);for(const m of text.matchAll(/from '\.\.?\/[^']+\.mjs(\?v=[^']*)?'/g))if(!/polish-flag|vendor\//.test(m[0]))assert.equal(m[1],'?v='+releaseVersion,file+': '+m[0]);}
+   const used=new Set();for(const file of ['minigames/fire-v24-session.mjs','minigames/fire-v24-flow.mjs','ui/fire-bonus-ui.mjs'])for(const m of (await read(file)).matchAll(/t\('(fire\.v24\.[\w.]+)'[,)]/g))used.add(m[1]);
+   for(const m of (await read('minigames/fire-v24-interior.mjs')).matchAll(/'(fire\.v24\.say\.[\w]+)'/g))used.add(m[1]);
+   for(const key of ['fire.v24.guide.building','fire.v24.guide.arrived','fire.v24.room.living','fire.v24.room.hallway','fire.v24.room.stairwell','fire.v24.friend.girl','fire.v24.friend.cat','fire.v24.friend.dog','fire.v24.tutorial.aim','fire.v24.tutorial.spray','fire.v24.tutorial.rescue'])used.add(key);
+diff --git a/tests/island-g2f.test.mjs b/tests/island-g2f.test.mjs
+index 23532136fcbf3b4dbb4214cd703ff351ced87576..9029fbc2b88c558635e32ac981316411436d3914 100644
+--- a/tests/island-g2f.test.mjs
++++ b/tests/island-g2f.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ // Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by tests/island-phone-fix-c-progression.test.mjs.
+ globalThis.location={search:'?phoneFixC=0'};
+ import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
+@@ -28,7 +29,7 @@ function hitAlien(m,a,damage=1){m.shots.push({x:a.x,y:a.y,vx:0,vy:0,hp:1,damage,
+ function near(actual,expected,label){assert.ok(Math.abs(actual-expected)<1e-7,`${label}: ${actual} !== ${expected}`);}
+ // 25/10/2026 archery aiming: a sea point solves real turret settings; the aim is the predicted landing.
+ const nearPoint=(a,b,eps=.5)=>assert.ok(Math.hypot(a.x-b.x,a.z-b.z)<eps,JSON.stringify({a,b}));
+-test('G2f release pins bundled module edges and all JSON requests',async()=>{assert.equal(DATA_VERSION,'island-v2-20261107-18');const urls=[];await loadData(new URL('../workout/island/',import.meta.url),async url=>{urls.push(url);return {ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))};});for(const u of urls)assert.equal(u.searchParams.get('v'),DATA_VERSION);});
++test('G2f release pins bundled module edges and all JSON requests',async()=>{assert.equal(DATA_VERSION,releaseVersion);const urls=[];await loadData(new URL('../workout/island/',import.meta.url),async url=>{urls.push(url);return {ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))};});assert.ok(urls.length>0);for(const u of urls)assert.deepEqual(u.searchParams.getAll('v'),[releaseVersion]);});
+ test('G2f v6 migration is additive, validates ranks and preserves imported higher ranks',()=>{const e=createEngine(data,{storage:storage()}),old=JSON.parse(e.exportJSON());old.version=6;delete old.alienUpgrades;old.money=543;old.minigameEquipment.alienDefense.damage=2;const before=structuredClone(old),r=migrateSave(old,data,e.registry);assert.equal(CURRENT_VERSION,19);assert.equal(r.ok,true);assert.deepEqual(r.state,{...before,version:19,islandRacingLeague:createLeague(),alienUpgrades:{laser:0,rapid:0,shield:0,wing:0,damage:0}});assert.deepEqual(old,before);for(const rank of [-1,4,1.5,'1']){const s=structuredClone(r.state);s.alienUpgrades.damage=rank;assert.equal(validateSave(s,data,e.registry).ok,false);}const incoming=structuredClone(r.state);incoming.alienUpgrades.damage=2;assert.equal(e.importJSON(incoming).ok,true);incoming.alienUpgrades.damage=1;assert.equal(e.importJSON(incoming).ok,true);assert.equal(e.state.alienUpgrades.damage,2);});
+ test('G2f purchased equipment and awarded permanent choices survive next stage, exit and reload',()=>{const st=storage(),e=createEngine(data,{storage:st});e.state.minigameEquipment.alienDefense.damage=2;const context=gameContext(e,config,12,'alienDefense',1),m=make('alienDefense',1,{...context,onUpgrade:ranks=>{e.state.alienUpgrades=ranks;e.save();}});clear(m);advance(m,.6);assert.equal(m.choosing,true);const id=m.choices[0];m.chooseUpgrade(0);assert.equal(e.state.alienUpgrades[id],1);const reload=createEngine(data,{storage:st}),next=make('alienDefense',2,gameContext(reload,config,12,'alienDefense',2));assert.equal(next.upgrades[id],1);assert.equal(next.equipment.damage,1.5);assert.ok(!Object.hasOwn(next.upgrades,'spread'));});
+ test('G2f cleared waves offer an immediate choice and final clears finish under 1.5 seconds',()=>{const m=make('alienDefense');clear(m);advance(m,.6);assert.ok(m.choosing);assert.ok(m.time<1.5);const b=structuredClone(config.alienDefense);Object.assign(b.levels[0],{waves:1});const final=make('alienDefense',1,{balance:b});clear(final);assert.equal(final.result?.outcome,'win');assert.ok(final.time<1.5);});
+diff --git a/tests/island-g2g.test.mjs b/tests/island-g2g.test.mjs
+index 2fcb2c51c09ccaa206d545d061ebab860de6086e..84b6b6fc707a562ef0051d87f3e25fedb4fbb43d 100644
+--- a/tests/island-g2g.test.mjs
++++ b/tests/island-g2g.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,stat,readdir} from 'node:fs/promises';
+@@ -119,7 +120,7 @@ test('G2g unsupported WebGL preserves procedural model sprites and reports faile
+  const {art,draws}=sprites();await loadOptionalArt(art,config.alienDefense,()=>false,{createRenderer(){throw Error('no WebGL');}});assert.equal(art.modelArt.failed,6);assert.equal(draws.length,0);
+ });
+ test('G2g release and new sounds are present; all runtime versioned imports use the same release',async()=>{
+- assert.equal(DATA_VERSION,'island-v2-20261107-18');for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
++ assert.equal(DATA_VERSION,releaseVersion);for(const event of ['crackle','spray','refill','ladder','rescue','timeout'])assert.ok(SOUND_EVENTS.includes(event));
+  async function walk(url){for(const entry of await readdir(url,{withFileTypes:true})){if(['vendor','verification'].includes(entry.name))continue;const next=new URL(entry.name+(entry.isDirectory()?'/':''),url);if(entry.isDirectory())await walk(next);else if(/\.(mjs|html)$/.test(entry.name)){const source=await readFile(next,'utf8');for(const [,v]of source.matchAll(/(?:\.mjs|\.css)\?v=([^'"\s]+)/g))assert.equal(v,DATA_VERSION,next.pathname);}}}await walk(root);
+ });
+
+diff --git a/tests/island-g2n.test.mjs b/tests/island-g2n.test.mjs
+index fa2a521daf51e87ab5170c797e0aa3eec9febc37..7001cc6d8d141f7f995f4813e8e2bc717b2224d0 100644
+--- a/tests/island-g2n.test.mjs
++++ b/tests/island-g2n.test.mjs
+@@ -1,3 +1,5 @@
++import {releaseVersion} from './helpers/island-release.mjs';
++import {createG2nAudio,G2N_SAMPLES} from '../workout/island/minigames/g2n-audio.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,stat} from 'node:fs/promises';
+@@ -19,4 +21,35 @@ test('G2n clear-window stage requires fully extinguishing the window fire',()=>{
+ test('G2n two-window stage enforces rescue and descent order',()=>{const m=make(6),[first,second]=m.rescues;park(m,second);m.flames[second.fireIndex].heat=0;advance(m,1.3,{rescue:true,x:second.x,y:second.y});assert.equal(second.progress,0);park(m,first);m.flames[first.fireIndex].heat=0;advance(m,1.3,{rescue:true,x:first.x,y:first.y});assert.ok(first.rescued);advance(m,2);park(m,second);advance(m,1.3,{rescue:true,x:second.x,y:second.y});assert.ok(second.rescued);});
+ test('G2n wind requires joystick stabilization and the joystick does not drive the parked truck',()=>{globalThis.location={search:'?fireRescue=v20'};try{wind();}finally{delete globalThis.location;}}); // 11/11/2026: manual balancing is the `?fireRescue=v20` behaviour; the default now balances itself (tests/final-fire.test.mjs)
+ function wind(){const m=make(7),r=park(m);m.flames[r.fireIndex].heat=0;advance(m,1.4,{rescue:true,x:r.x,y:r.y});assert.equal(r.rescued,false);assert.equal(m.ladder.stable,false);const truck={x:m.truck.x,z:m.truck.z};advance(m,4,m=>({rescue:true,x:r.x,y:r.y,moveX:Math.max(-1,Math.min(1,(-m.ladder.wind-m.ladder.sway*3)/b.ladder.stabilizePower))}));assert.ok(r.rescued);assert.deepEqual({x:m.truck.x,z:m.truck.z},truck);}
+-test('G2n CC0 sample bank is local, versioned and within 400 KB',async()=>{const sources=JSON.parse(await readFile(new URL('assets/audio/g2n/sources.json',root)));let bytes=0;for(const s of sources){assert.equal(s.license,'CC0-1.0');assert.ok(s.source.startsWith('https://raw.githubusercontent.com/'));bytes+=(await stat(new URL('assets/audio/g2n/'+s.file,root))).size;}assert.ok(bytes<=400000);const code=await readFile(new URL('minigames/g2n-audio.mjs',root),'utf8');assert.match(code,/island\.sound/);assert.match(code,/island-v2-20261107-18/);});
++test('G2n CC0 sample bank is local, versioned and within 400 KB',async()=>{
++ const sources=JSON.parse(await readFile(new URL('assets/audio/g2n/sources.json',root)));
++ let bytes=0;
++ for(const source of sources){
++  assert.equal(source.license,'CC0-1.0');
++  assert.ok(source.source.startsWith('https://raw.githubusercontent.com/'));
++  bytes+=(await stat(new URL('assets/audio/g2n/'+source.file,root))).size;
++ }
++ assert.ok(bytes<=400000);
++ class AudioContext{
++  state='running'; sampleRate=100; destination={};
++  createGain(){return {gain:{value:1},connect(){},disconnect(){}};}
++  createBuffer(){return {getChannelData:()=>new Float32Array(this.sampleRate*2)};}
++  async close(){}
++ }
++ const requested=[],storageKeys=[];
++ const audio=createG2nAudio({AudioContext,
++  storage:{getItem:key=>{storageKeys.push(key);return 'off';}},
++  fetcher:async url=>{requested.push(url);return {ok:false};}
++ });
++ try{
++  audio.unlock();
++  assert.deepEqual(storageKeys,['island.sound']);
++  assert.equal(audio.snapshot().muted,true);
++  assert.deepEqual(requested.map(url=>url.pathname.split('/').pop()).sort(),G2N_SAMPLES.map(name=>name+'.ogg').sort());
++  for(const url of requested){
++   assert.equal(url.origin,root.origin);
++   assert.ok(url.pathname.startsWith(new URL('assets/audio/g2n/',root).pathname));
++   assert.deepEqual(url.searchParams.getAll('v'),[releaseVersion]);
++  }
++ }finally{audio.dispose();}
++});
+diff --git a/tests/island-g3h.test.mjs b/tests/island-g3h.test.mjs
+index 86f336ce02f72ae15a959aee404d4b567aa6f5c3..6d5374755805fa1f4f5fc56b2f53620f74846e82 100644
+--- a/tests/island-g3h.test.mjs
++++ b/tests/island-g3h.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference,releaseVersion} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,stat} from 'node:fs/promises';
+@@ -59,7 +60,7 @@ test('G3h an unattended home restart resumes; an early human pass releases once
+ });
+ test('G3h soccer delegates its single pause element and glyph to the shell',async()=>{
+  const session=await readFile(new URL('minigames/soccer-session.mjs',root),'utf8'),css=await readFile(new URL('minigames/g3h-soccer.css',root),'utf8'),host=await readFile(new URL('ui/activity.mjs',root),'utf8');
+- assert.equal((host.match(/pause=button\([^\n]*?'game-pause'/g)||[]).length,1);assert.doesNotMatch(session,/element\([^\n]*(?:game-pause|pause-button)|actionIcon\('pause'\)/);assert.match(css,/game-pause::before\s*\{\s*content:'';/);assert.doesNotMatch(css,/content:\s*['"](?:Ⅱ|❚❚|⏸)/);assert.match(session,/g3h-soccer\.css\?v=island-v2-20261107-18/);
++ assert.equal((host.match(/pause=button\([^\n]*?'game-pause'/g)||[]).length,1);assert.doesNotMatch(session,/element\([^\n]*(?:game-pause|pause-button)|actionIcon\('pause'\)/);assert.match(css,/game-pause::before\s*\{\s*content:'';/);assert.doesNotMatch(css,/content:\s*['"](?:Ⅱ|❚❚|⏸)/);assertReleaseReference(session,'./g3h-soccer.css');
+ });
+ test('G3h movement eases up/down, turns the body ahead of momentum and keeps the dribble within a footstep',()=>{
+  const game=createSoccer({config:c}),s=game.getState(),p=s.players[0];for(const other of s.players)if(other!==p)other.recover=100;s.ball.grace=100;
+@@ -73,6 +74,6 @@ test('G3h movement eases up/down, turns the body ahead of momentum and keeps the
+  for(let i=0;i<60;i++)move();assert.ok(footError()<.02&&footError()<turnError,'the touch must settle at the stationary foot');
+ });
+ test('G3h the CC0 bank is local, versioned OGG under 400 KB and the shared mute key suppresses playback',async()=>{
+- let bytes=0;for(const url of Object.values(G3H_AUDIO_FILES)){const u=new URL(url);assert.equal(u.searchParams.get('v'),'island-v2-20261107-18');assert.match(u.pathname,/assets\/audio\/g3h\/.*\.ogg$/);u.search='';bytes+=(await stat(u)).size;}assert.ok(bytes<=400000,bytes);
++ let bytes=0;for(const url of Object.values(G3H_AUDIO_FILES)){const u=new URL(url);assert.deepEqual(u.searchParams.getAll('v'),[releaseVersion]);assert.match(u.pathname,/assets\/audio\/g3h\/.*\.ogg$/);u.search='';bytes+=(await stat(u)).size;}assert.ok(bytes<=400000,bytes);
+  let muted='off';const audio=createG3hAudio({storage:{getItem:key=>{assert.equal(key,'island.sound');return muted;}},AudioContext:null});audio.play('kick');assert.deepEqual(audio.snapshot.counts,{});muted='on';audio.event({type:'goal'});assert.deepEqual(audio.snapshot.counts,{whistle:1,net:1,cheer:1});audio.setPaused(true);audio.play('pass');assert.equal(audio.snapshot.counts.pass,undefined);audio.dispose();assert.equal(audio.snapshot.disposed,true);
+ });
+diff --git a/tests/island-g5.test.mjs b/tests/island-g5.test.mjs
+index 1b59c3dc5a005422d547ead13c3cea1805cd3b8e..461f7eda5598cfe0100195bfd5d4120408303ca5 100644
+--- a/tests/island-g5.test.mjs
++++ b/tests/island-g5.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ import {expectedGameField,expectedGameContent} from './helpers/legacy-game-content.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+@@ -101,7 +102,7 @@ test('G5 rapid close/reopen and reload with a stale game guard settle correctly
+  const target=historyTarget();let nav=new GameNavigation({target});nav.game();nav.menu();nav.leave();nav.menu();target.flush();assert.equal(nav.depth,1);assert.equal(nav.desired,1);nav.game();nav.dispose();nav=new GameNavigation({target});target.flush();assert.equal(nav.depth,0);assert.equal(target.index,1);assert.equal(target.history.length,4);nav.dispose();
+ });
+ test('G5 release and shell modules import from the island with one synchronized version',async()=>{
+- assert.equal(DATA_VERSION,'island-v2-20261107-18');for(const path of ['ui/game-shell.mjs','ui/activity.mjs','minigames/canvas-session.mjs','minigames/soccer-session.mjs','activity/availability.mjs','engine/city-hall.mjs']){const source=await readFile(new URL(path,root),'utf8');for(const version of source.matchAll(/\?v=([\w-]+)/g))assert.equal(version[1],DATA_VERSION,path);assert.doesNotMatch(source,/https?:\/\//);}
++ assert.equal(DATA_VERSION,releaseVersion);for(const path of ['ui/game-shell.mjs','ui/activity.mjs','minigames/canvas-session.mjs','minigames/soccer-session.mjs','activity/availability.mjs','engine/city-hall.mjs']){const source=await readFile(new URL(path,root),'utf8');for(const version of source.matchAll(/\?v=([\w-]+)/g))assert.equal(version[1],DATA_VERSION,path);assert.doesNotMatch(source,/https?:\/\//);}
+ });
+ test('G5 paused audio stays silent through global pointer unlocks and mute changes, then resumes only when requested',()=>{
+  let audio,created=0,resumes=0,starts=0;const gains=[],param=()=>({value:0,setValueAtTime(){},exponentialRampToValueAtTime(){}}),node=()=>({gain:param(),frequency:param(),connect(){},disconnect(){},start(){starts++;},stop(){}});
+diff --git a/tests/island-g6d.test.mjs b/tests/island-g6d.test.mjs
+index aff2420b821f11b545a49e25e7790de0fa944b9a..e928c33c489250ef6b65a4d5a3d9b057fed598ca 100644
+--- a/tests/island-g6d.test.mjs
++++ b/tests/island-g6d.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,stat} from 'node:fs/promises';
+@@ -26,7 +27,7 @@ test('G6d overlapping shells retain their own wind launch while a later torpedo
+ });
+ test('G6d tunings match requested reductions and cached naval modules use current version',async()=>{
+  assert.equal(b.aim.assist,.1);assert.equal(b.aim.autoLead,.3);assert.equal(b.aim.previewFraction,1/3);assert.ok(b.aim.wind.driftScale<.3);assert.equal(b.aim.sway.yaw,.027);assert.ok(Math.abs(b.aim.sway.elevation-.975)<1e-8);
+- const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assert.match(source,/g6d-audio\.mjs\?v=island-v2-20261107-18/);assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
++ const source=await readFile(new URL('../workout/island/minigames/naval.mjs',import.meta.url),'utf8');assertReleaseReference(source,'./g6d-audio.mjs');assert.match(source,/g6d/);assert.ok(b.render.maxTriangles<=90000&&b.render.maxDrawCalls<=70);
+ });
+ test('G6d all eight local CC0 clips fit in 400KB and no-audio platforms are safe',async()=>{
+  const root=new URL('../workout/island/assets/audio/g6d/',import.meta.url);let bytes=0;for(const name of G6D_AUDIO_FILES){const path=new URL(name+'.ogg',root),data=await readFile(path);assert.equal(data.subarray(0,4).toString(),'OggS');bytes+=(await stat(path)).size;}assert.ok(bytes<=400000,bytes);assert.match(await readFile(new URL('LICENSE.txt',root),'utf8'),/CC0 1.0 Universal/);const a=createNavalAudio({AudioContext:null,storage:{getItem:()=> 'off'}});a.unlock();a.play('cannon');a.update(32);assert.equal(a.metrics().muted,true);a.setPaused(true);a.dispose();assert.equal(a.metrics().disposed,true);
+diff --git a/tests/island-offline-v25.test.mjs b/tests/island-offline-v25.test.mjs
+index 5747f92ec1d110e1ce4626549ab0c5b9ecd89da6..9a5ae14c35a79ef1aa6d702fc5dc5647f427fafd 100644
+--- a/tests/island-offline-v25.test.mjs
++++ b/tests/island-offline-v25.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference} from './helpers/island-release.mjs';
+ // Offline v25 (17/11/2026): per-game packages, hashed manifest, partial release update, device-first
+ // worker, persistent storage and install. Node part; the browser part is tests/island-offline-v25-browser.test.mjs.
+ import test from 'node:test';
+@@ -159,7 +160,7 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
+  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
+  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
+  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');
+- assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-18'));
++ assertReleaseReference(html,'./ui/offline-panel.css');
+  for(const [file,source] of [['ui/offline.mjs',offline],['ui/offline-panel.mjs',panel],['ui/offline-install.mjs',install],['offline-sw.js',sw]]){
+   for(const banned of ['localStorage.clear','removeItem','indexedDB','.clear()','sessionStorage','new Worker','createObjectURL','new Blob(','eval(','new Function','innerHTML'])assert.ok(!source.includes(banned),file+' uses '+banned);
+  }
+diff --git a/tests/island-offline.test.mjs b/tests/island-offline.test.mjs
+index 45e1968f5b4d9069400b8321cc7e98405081c806..602cc0785ee4c51277c0536dadbb380134961cf2 100644
+--- a/tests/island-offline.test.mjs
++++ b/tests/island-offline.test.mjs
+@@ -1,3 +1,4 @@
++import {releaseVersion} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import vm from 'node:vm';
+@@ -46,7 +47,7 @@ test('offline worker: classic script with the same managed rule as the page, ver
+  assert.ok(!/^\s*(import|export)\s/m.test(source),'classic worker, not a module');
+  assert.ok(source.includes(MANAGED.source),'worker carries the same managed pattern as ui/offline.mjs');
+  assert.ok(source.includes("'island-assets-'+VERSION"));
+- assert.equal(cacheName('island-v2-20261107-18'),'island-assets-island-v2-20261107-18');
++ assert.equal(cacheName(releaseVersion),'island-assets-'+releaseVersion);
+ });
+
+ function runWorker(version='v1'){
+diff --git a/tests/island-racing-assets-v22.test.mjs b/tests/island-racing-assets-v22.test.mjs
+index 439b0efdef909732b72e876fc94d066a88015770..e8a7cd46df461224e3a543b700b41d638396bb70 100644
+--- a/tests/island-racing-assets-v22.test.mjs
++++ b/tests/island-racing-assets-v22.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseTags} from './helpers/island-release.mjs';
+ // v22 racing assets: four Codex packages (crash FX, broadcast, league, audio v3) wired behind their own URL flags.
+ // Each flag returns the previous behaviour exactly; the files exist in assets/ (byte-identical to design/); the offline list carries them.
+ import test from 'node:test';
+@@ -209,6 +210,6 @@ test('offline list: every new asset is in the racing pack and every new module i
+ });
+ test('the new modules import with the current version tag',async()=>{
+  for(const file of ['minigames/racing-crash-assets.mjs','minigames/racing-broadcast-art.mjs','ui/racing-league-art.mjs']){
+-  const tags=[...(await read(file)).toString().matchAll(/\?v=([\w-]+)/g)].map(m=>m[1]);assert.ok(tags.every(t=>t==='island-v2-20261107-18'),file+' '+tags);
++  assertReleaseTags((await read(file)).toString(),file,{required:false});
+  }
+ });
+diff --git a/tests/island-racing-v24-1.test.mjs b/tests/island-racing-v24-1.test.mjs
+index dc07e3baa9c795d3fc95cc82f95fe338fec4b0d9..808629049896e07678c7e918fe1e6eebaf16765f 100644
+--- a/tests/island-racing-v24-1.test.mjs
++++ b/tests/island-racing-v24-1.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference,assertReleaseTags} from './helpers/island-release.mjs';
+ // Historical optional pit cancellation remains available under rollback; tests/island-phone-fix-d.test.mjs checks mandatory automatic entry.
+ globalThis.location={search:'?phoneFixD=0'};
+ // racing-v24.1 (Roy after v24 on the phone: "a tyre change on only one track, I did not notice whether it went there by itself; the goal is that it goes in for
+@@ -126,5 +127,11 @@ test('session, view and style carry v24.1',async()=>{
+  const view=await read('minigames/racing-view.mjs');assert.match(view,/pits:pitsOn\}=\{\}\)\{/);assert.match(view,/if\(pitsOn!==undefined\?pitsOn:pv\.pitBoxesOn\(stage\)\)\{/);
+  const css=await read('minigames/racing-v24.css');assert.match(css,/racing-pit-button\[data-state=auto\]\{[^}]*animation:racing-pit-auto/);assert.match(css,/prefers-reduced-motion[^\n]*data-state=auto\]\{animation:none\}/);
+  const physics=await read('minigames/racing-physics.mjs');assert.match(physics,/const pitAutoOn=!!config\.pitAuto;/);assert.match(physics,/enabled:!!config\.pit,auto:pitAutoOn\}/);assert.match(physics,/state\.events=pitAutoOn\?state\.events\.filter\(e=>e\.id>stepSerial&&\/\^pit\/\.test\(e\.type\)\):\[\];/);assert.match(physics,/pitCrew\.watch\(car,state\.time\)/);
+- for(const f of ['minigames/racing-pit.mjs','minigames/racing-v24.mjs','minigames/racing-session.mjs','minigames/racing-pit-ui.mjs'])assert.doesNotMatch(await read(f),/\?v=island-v2-20261107-17/,f+' carries the current tag');
++ const pit=await read('minigames/racing-pit.mjs');
++ assertReleaseReference(pit,'./racing-v24.mjs','racing-pit.mjs');
++ assertReleaseReference(session,'./racing-pit-ui.mjs','racing-session.mjs');
++ for(const name of ['racing-pit','racing-v24','racing-session','racing-pit-ui']){
++  const file=`minigames/${name}.mjs`;
++  assertReleaseTags(await read(file),file,{required:name==='racing-pit'||name==='racing-session'});
++ }
+ });
+diff --git a/tests/island-racing-v24-4.test.mjs b/tests/island-racing-v24-4.test.mjs
+index e20ed5df7ae0923f0d7f72400f82638aa2023090..9d9f4c1eca670202dbae9199a684069064f2b3e2 100644
+--- a/tests/island-racing-v24-4.test.mjs
++++ b/tests/island-racing-v24-4.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference} from './helpers/island-release.mjs';
+ // racing-v24.4 (Roy after v24.3 on the phone): the overtake, the idle engine on the grid, the real wheel change (Codex pit sequence v2), no change button, and the
+ // v5 sounds instead of the annoying noise just off the track and in the pit lane. Every behaviour has an address flag that brings v24.3 back (racing-v24-4.mjs).
+ import test from 'node:test';
+@@ -151,6 +152,6 @@ test('wiring: the session sends the flags, the view loads the sequence on the fo
+  const session=await read('minigames/racing-session.mjs'),view=await read('minigames/racing-view.mjs'),seq=await read('minigames/racing-pit-seq.mjs'),audio=await read('minigames/racing-audio.mjs');
+  assert.match(session,/pitSeq:v244\.pitSeq/);assert.match(session,/changeButton:!model\.pit\.seq/);assert.match(session,/v5:v244\.audioV5,idle:v244\.idle&&engineOn,pass:v244\.pass/);
+  assert.match(session,/kerb:v244\.audioV5\?0:/,'the kerb rumble (also all along the pit lane) is off with v5');
+- assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=island-v2-20261107-18'\)/);assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
+- assert.match(seq,/racing-pit-sequence\.mjs\?v=island-v2-20261107-18/);assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
++ assert.match(view,/import\('\.\/racing-pit-seq\.mjs\?v=/);assertReleaseReference(view,'./racing-pit-seq.mjs');assert.match(view,/crewV1\(\);\}\);/);assert.match(view,/get\('racingPitSeq'\)!=='0'/);
++ assertReleaseReference(seq,'racing-pit-sequence.mjs');assert.match(audio,/base5:new URL\('\.\.\/assets\/racing-audio-v5\/'/);
+ });
+diff --git a/tests/island-soccer-assets-v24.test.mjs b/tests/island-soccer-assets-v24.test.mjs
+index 5f288ca645dfa42a85398a9e90c73e5587872ce7..403186535825e94e4c1c8a23def87dfee33b02b3 100644
+--- a/tests/island-soccer-assets-v24.test.mjs
++++ b/tests/island-soccer-assets-v24.test.mjs
+@@ -1,3 +1,4 @@
++import {DATA_VERSION} from '../workout/island/release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,readdir,access} from 'node:fs/promises';
+@@ -264,5 +265,5 @@ test('offline: every v24 file of the default match is listed for soccer, the she
+   for(const f of ['minigames/soccer-v24.mjs','minigames/soccer-v24-pitch.mjs','minigames/soccer-v24-fx.mjs','minigames/soccer-v24-crowd.mjs','minigames/athlete-body-v2.mjs']){
+     const tags=[...(await read(f)).matchAll(/\?v=(island-v2-[0-9-]+)/g)].map(m=>m[1]);for(const tag of tags)assert.equal(tag,release.version,f);
+   }
+-  assert.equal(release.version,'island-v2-20261107-18','release.json is main\'s, not bumped here');
++  assert.equal(release.version,DATA_VERSION,'release.json and the running module agree');
+ });
+diff --git a/tests/island-tennis-crowd-v22.test.mjs b/tests/island-tennis-crowd-v22.test.mjs
+index 503eb17ee37848668adf4749678676b709eb18d1..886696a4796a5a949f7bdc6af2c20b5888b62964 100644
+--- a/tests/island-tennis-crowd-v22.test.mjs
++++ b/tests/island-tennis-crowd-v22.test.mjs
+@@ -1,3 +1,4 @@
++import {assertReleaseReference,assertReleaseTags} from './helpers/island-release.mjs';
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile,access} from 'node:fs/promises';
+@@ -50,7 +51,9 @@ test('tennis crowd v22: ?tennisCrowd3d=0 returns the billboard crowd, and the 3D
+   assert.ok(stadium.includes("crowd:crowd3d?'3d-lod':'billboard'"),'metrics say which crowd runs');
+   assert.ok(stadium.includes('crowd3d.update(')&&stadium.includes('ballPosition')&&stadium.includes('celebration:cheer.value'),'heads follow the ball, cheer lifts the arms');
+   assert.ok(/GLTFLoader:Loader,base:import\.meta\.url,camera\}/.test(view),'the view passes its camera for the LOD distance');
+-  assert.ok(!/island-v2-2026(?!1107-11)\d{4}-\d+/.test(stadium.replace(/island-v2-20261107-18/g,'')),'only the current version tag');
++  assertReleaseReference(stadium,'tennis-stadium-v1/${n}','stadium asset links');
++  assertReleaseReference(stadium,'tennis-crowd-v22/crowd-lod.mjs','crowd loader link');
++  assertReleaseTags(stadium,'minigames/tennis-v12-stadium.mjs');
+ });
+
+ test('tennis crowd v22: the offline list carries the crowd files and the shell list is current',async()=>{

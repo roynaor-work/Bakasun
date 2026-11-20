@@ -1,0 +1,126 @@
+{
+  "id": "020",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "initialActions": [
+          {
+            "text": "למשחק הבא",
+            "fontPx": 16,
+            "ratio": 11.35,
+            "width": 119.25,
+            "height": 48,
+            "visibleWidth": 119.25,
+            "visibleHeight": 48
+          },
+          {
+            "text": "חזרה למשחק",
+            "fontPx": 16,
+            "ratio": 9.61,
+            "width": 141,
+            "height": 48,
+            "visibleWidth": 141,
+            "visibleHeight": 48
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "scrollBefore": 0,
+        "scrollAfter": 160,
+        "actions": [
+          {
+            "text": "למשחק הבא",
+            "fontPx": 16,
+            "ratio": 11.35,
+            "width": 119.25,
+            "height": 48,
+            "visibleWidth": 119.25,
+            "visibleHeight": 48
+          },
+          {
+            "text": "חזרה למשחק",
+            "fontPx": 16,
+            "ratio": 9.61,
+            "width": 141,
+            "height": 48,
+            "visibleWidth": 141,
+            "visibleHeight": 48
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "returnedToBasketballHome": true
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.hoops-more > summary').first()",
+      "x": 422,
+      "y": 267.890625,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "",
+        "x": 422,
+        "y": 267.890625
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 422,
+      "y": 295,
+      "endX": 422,
+      "endY": 119.78125,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=game-home-back]').first()",
+      "x": 358.375,
+      "y": 341,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "game-home-back",
+        "x": 358.375,
+        "y": 341
+      }
+    }
+  ],
+  "screenshots": [
+    "020-after-club-next-game.png",
+    "020-after-club-after-scroll.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

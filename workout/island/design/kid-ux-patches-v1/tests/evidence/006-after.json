@@ -1,0 +1,79 @@
+{
+  "id": "006",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "initial": 0,
+        "speech": [
+          {
+            "lang": "he-IL",
+            "voice": "he-IL",
+            "text": "גִּרְרוּ אֶת הָעִגּוּל וְרוּצוּ אֶל הַכַּדּוּר."
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": "The same button shows a playable visual demonstration when there is no Hebrew device voice."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The real replay control receives trusted touch. The browser voice API fixture exercises Hebrew available, then unavailable.",
+    "Programmatic repositioning for setup: locator('[data-action=\"game-help-again\"]').first()",
+    "Programmatic repositioning for setup: locator('[data-action=\"game-help-again\"]').first()"
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-help-again\"]').first()",
+      "x": 383.59375,
+      "y": 330.5,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-help-again",
+        "x": 383.59375,
+        "y": 330.5
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-help-again\"]').first()",
+      "x": 383.59375,
+      "y": 330.5,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-help-again",
+        "x": 383.59375,
+        "y": 330.5
+      }
+    }
+  ],
+  "screenshots": [
+    "006-after-trusted-replay.png",
+    "006-after-without-hebrew-voice.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "complete applied series"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "039",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "reason": "פסק זמן כשהכדור אצלכם",
+        "remaining": 7,
+        "phase": "live"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "allowedPhase": "timeout",
+        "remaining": 6
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Used the existing perf-hoops.html test entry with the production basketball session, base CSS and synthetic roster. The backing canvas is scaled to 0.35 for software rendering. The browser and touch viewport remain 844×390.",
+    "Synthetic live possessions for rival rejection and legal player request. Trusted touch drives the timeout action."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-hoops-control=timeout]').first()",
+      "x": 96,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "timeout",
+        "x": 96,
+        "y": 36
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-hoops-control=timeout]').first()",
+      "x": 96,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "timeout",
+        "x": 96,
+        "y": 36
+      }
+    }
+  ],
+  "screenshots": [
+    "039-after-timeout-rejected.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

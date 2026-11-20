@@ -1,0 +1,257 @@
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 9dbd650a..b5e39049 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -23,6 +23,8 @@ import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-15';
+ import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-15';
+ import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-15';
+ import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-15';
++import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-15';
++import { gameGuide } from './kid-ux-help.mjs?v=island-v2-20261107-15';
+ 
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+@@ -124,7 +126,9 @@ export class ActivityInterface {
+     dialog.append(cards,offlinePanel());
+   }
+   gameHome(id){
+-    if(this.data?.config?.minigames?.[id]?.embeddedCampaign)return this.launch(id,undefined,1);
++    if(this.data?.config?.minigames?.[id]?.embeddedCampaign){
++      return kidUx('005')?this.start(id,undefined,1):this.launch(id,undefined,1);
++    }
+     const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
+     const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
+     const hero=el('div','adventure-game-hero'),opening=kitIntro(id);
+@@ -236,7 +240,11 @@ export class ActivityInterface {
+     this.eventOpen=false;
+     const highest=this.engine.state.minigameProgress[choice.gameId].stage;
+     const stage=Math.max(1,Math.min(highest,highest+this.data.config.events.eventStageOffset));
+-    // Event countdown is the introduction; play opens directly and help stays reachable.
++    // Keep the event reservation when the first visit uses the illustrated guide.
++    if(kidUx('005')&&!this.engine.state.instructionsSeen.includes(choice.gameId)){
++      this.intro(choice.gameId,choice.eventId,stage);
++      return;
++    }
+     this.launch(choice.gameId,choice.eventId,stage);
+   }
+   narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
+@@ -251,8 +259,27 @@ export class ActivityInterface {
+     if(id==='navalDuel')ensureNavalTheme();
+     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+     dialog.dataset.intro=id;
+-    {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
+-    dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage,undefined,rescue);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
++    const play=this.playButton(id,'game-understood',()=>{
++      this.activity.instructions(id);
++      this.launch(id,eventId,stage,undefined,rescue);
++    });
++    const again=button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id));
++    const guide=kidUx('005')?gameGuide(id):null;
++    if(guide){
++      dialog.dataset.kidUxHelp='';
++      const details=el('details','kid-ux-intro-details');
++      details.append(el('summary','','הוראות נוספות'),this.helpLines(id));
++      const actions=el('div','kid-ux-intro-actions');
++      actions.append(play,again);
++      dialog.append(guide.node,details,actions);
++    }else{
++      const opening=kitIntro(id);
++      if(opening){
++        const card=el('div','island-kit ik-opening ik-opening-small');
++        card.append(opening);dialog.append(card);
++      }
++      dialog.append(this.helpLines(id),play,again);
++    }
+     this.narrateHelp(id);
+   }
+   start(id,eventId,stage) {
+@@ -385,7 +412,12 @@ export class ActivityInterface {
+   racingLeagueGo(){
+     if(this.requireBuilding('islandRacing'))return;
+     if(!this.engine.racingLeague.next())return;
+-    this.launch('islandRacing',undefined,undefined,undefined,{attempts:0,lite:false,league:true});
++    const rescue={attempts:0,lite:false,league:true};
++    if(kidUx('005')&&!this.engine.state.instructionsSeen.includes('islandRacing')){
++      this.intro('islandRacing',undefined,undefined,rescue);
++      return;
++    }
++    this.launch('islandRacing',undefined,undefined,undefined,rescue);
+   }
+   racingLeagueCard(outer){
+     this.leagueModule().then(m=>{if(!outer.isConnected)return;const card=m.leagueCard({engine:this.engine,...this.leagueActions()});outer.querySelector('.modal-subtitle')?.after(card);}).catch(()=>{});
+diff --git a/workout/island/ui/kid-ux-help.mjs b/workout/island/ui/kid-ux-help.mjs
+new file mode 100644
+index 00000000..948efc49
+--- /dev/null
++++ b/workout/island/ui/kid-ux-help.mjs
+@@ -0,0 +1,170 @@
++import { kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++// Each scene connects a visible control and its gesture with a visible game outcome.
++const steps = {
++  soccer: [
++    ['drag', '🕹️', '🏃', '⚽', 'גִּרְרוּ אֶת הָעִגּוּל וְרוּצוּ אֶל הַכַּדּוּר.'],
++    ['tap', '⚽', '⚽', '🥅', 'גַּעֲוּ בִּבְעִיטָה כְּדֵי לִבְעֹט לַשַּׁעַר.'],
++    ['tap', '↗', '⚽', '👟', 'גַּעֲוּ בִּמְסִירָה כְּדֵי לִמְסֹר לְחָבֵר.'],
++  ],
++  tennis: [
++    ['drag', '🕹️', '🏃', '🎾', 'גִּרְרוּ אֶת הָעִגּוּל כְּדֵי לְהִתְקָרֵב לַכַּדּוּר.'],
++    ['hold', '🎾', '🎾', '🏟️', 'הַחֲזִיקוּ אֶת הַמַּחְבֵּט וְשַׁחְרְרוּ כְּשֶׁמַּגִּיעַ הַכַּדּוּר.'],
++    ['double', '⇧', '🎾', '🟢', 'בַּהַגָּשָׁה, גַּעֲוּ פַּעַם לִזְרֹק וּפַעַם לַחֲבֹט כְּשֶׁהַמַּד יָרֹק.'],
++  ],
++  streetSlam: [
++    ['drag', '🕹️', '🏃', '🏀', 'גִּרְרוּ בְּצַד שְׂמֹאל כְּדֵי לָרוּץ.'],
++    ['tap', '↗', '🏀', '🙌', 'גַּעֲוּ בִּמְסִירָה כְּדֵי לִמְסֹר לְחָבֵר קָרוֹב.'],
++    ['hold', '🏀', '🏀', '🏀', 'הַחֲזִיקוּ אֶת כַּפְתּוֹר הַזְּרִיקָה וְשַׁחְרְרוּ כְּשֶׁהַמַּד יָרֹק.', '⛹️‍♂️'],
++  ],
++  islandRacing: [
++    ['drag', '🕹️', '🏎️', '🏁', 'הַמְּכוֹנִית מַאֲצָה לְבַד. גִּרְרוּ אֶת הַהֶגֶה לְכִוּוּן הַמַּסְלוּל.'],
++    ['hold', '■', '🏎️', '🛑', 'הַחֲזִיקוּ אֶת הַבֶּלֶם כְּדֵי לְהָאֵט בַּפְּנִיָּה.'],
++    ['tap', '⚡', '🏎️', '💨', 'גַּעֲוּ בַּבָּרָק כְּדֵי לְהָאִיץ בַּיְּשֹׁרֶת.'],
++  ],
++  boarDefense: [
++    ['drag', '🕹️', '🎯', '🐗', 'גִּרְרוּ מִצַּד שְׂמֹאל כְּדֵי לְכַוֵּן.'],
++    ['hold', '⊕', '✨', '🎯', 'הַחֲזִיקוּ אֶת כַּפְתּוֹר הַיֶּרִי בְּצַד יָמִין.'],
++    ['tap', '🛠️', '🔧', '🛡️', 'בַּמּוּסָךְ בּוֹחֲרִים צִיּוּד לַגַּל הַבָּא.'],
++  ],
++  alienDefense: [
++    ['drag', '🕹️', '🚀', '⭐', 'גִּרְרוּ כְּדֵי לְהָזִיז אֶת הַחֲלָלִית.'],
++    ['hold', '⊕', '✨', '🛸', 'הַחֲזִיקוּ אֶת הַיֶּרִי כְּדֵי לִפְגֹּעַ בַּחֲלָלִיּוֹת.'],
++    ['tap', '✦', '💫', '🛸', 'גַּעֲוּ בַּכּוֹכָב כְּדֵי לְהַפְעִיל יֶרִי מְיֻחָד.'],
++  ],
++  fireRescue: [
++    ['tap', '🔥', '🚒', '🔥', 'גַּעֲוּ בָּאֵשׁ וְהַכַּבָּאִית תִּסַּע אֵלֶיהָ.'],
++    ['hold', '💧', '💦', '🔥', 'הַחֲזִיקוּ רִסּוּס כְּשֶׁאַתֶּם לְיַד הָאֵשׁ.', '✔'],
++    ['tap', '🚰', '🚒', '🚰', 'גַּעֲוּ בַּבֶּרֶז כְּדֵי לְמַלֵּא מַיִם.'],
++  ],
++  navalDuel: [
++    ['drag', '🕹️', '⛵', '🌊', 'גִּרְרוּ אֶת הָעִגּוּל כְּדֵי לְהַשִּׁיט אֶת הַסְּפִינָה.'],
++    ['tap', '🎯', '⊕', '⛴️', 'גַּעֲוּ בַּסְּפִינָה הַשְּׁנִיָּה כְּדֵי לִבְחֹר אוֹתָהּ.'],
++    ['hold', '⊕', '●', '⛴️', 'הַחֲזִיקוּ, גִּרְרוּ כְּדֵי לְכַוֵּן וְשַׁחְרְרוּ כְּדֵי לִירוֹת.'],
++  ],
++  alpineRush: [
++    ['drag', '🕹️', '🏂', '⛷️', 'גִּרְרוּ לַצַּד כְּדֵי לִפְנוֹת עִם הַגַּלְשָׁן.'],
++    ['tap', '⚡', '🏂', '💨', 'גַּעֲוּ בַּבָּרָק כְּדֵי לְהָאִיץ.'],
++    ['tap', '⟳', '🏂', '✨', 'כְּשֶׁאַתֶּם בָּאֲוִיר, גַּעֲוּ בְּכַפְתּוֹר הַתַּרְגִּיל.'],
++  ],
++  catchCriminal: [
++    ['drag', '🕹️', '🚓', '🏎️', 'גִּרְרוּ יָמִינָה וּשְׂמֹאלָה כְּדֵי לִנְהֹג.'],
++    ['tap', '⊕', '◉', '🚙', 'כְּשֶׁהָעִגּוּל יָרֹק, גַּעֲוּ בְּכַפְתּוֹר הַיֶּרִי.'],
++    ['hold', '🕸️', '🕸️', '🏃', 'הַחֲזִיקוּ, כַּוְּנוּ אֶת הָרֶשֶׁת וְשַׁחְרְרוּ.'],
++  ],
++};
++
++const guideCSS = `
++  .modal.modal[data-kid-ux-help] { padding: 14px; width: min(660px, 100%); }
++  .modal[data-kid-ux-help] > h2 {
++    display: flex; align-items: center; min-height: 46px;
++    margin-inline: 76px 120px; font-size: 20px;
++  }
++  .modal[data-kid-ux-help] > .modal-subtitle { display: none; }
++  .modal[data-kid-ux-help] > [data-action="shell-install"] {
++    position: absolute; inset: auto; inset-block-start: 7px; inset-inline-end: 70px;
++    min-width: 44px; min-height: 44px;
++  }
++  .kid-ux-guide { padding: 8px; border: 1px solid #95b8b5; border-radius: 14px; background: #132e36; color: #fff8e8; }
++  .kid-ux-demo { display: grid; grid-template-columns: minmax(64px, 120px) minmax(156px, 226px); justify-content: center; align-items: center; gap: 18px; min-height: 90px; direction: ltr; }
++  .kid-ux-demo-input, .kid-ux-demo-field { position: relative; display: grid; align-items: center; justify-items: center; width: 100%; height: 86px; border-radius: 14px; background: #214751; overflow: hidden; }
++  .kid-ux-demo-control { display: grid; place-items: center; background: #fff2cb; color: #173139; width: 52px; height: 52px; border-radius: 50%; font-size: 26px; }
++  .kid-ux-demo-finger { position: absolute; inset: 48% auto auto 46%; font-size: 26px; transform: translate(6px, 8px); filter: drop-shadow(1px 1px 2px #0b262b); }
++  .kid-ux-demo-trail { position: absolute; inset: auto 24% 5px; height: 5px; border-radius: 8px; background: #d6ff91; transform-origin: left; opacity: .85; }
++  .kid-ux-demo-field { grid-template-columns: 1fr 1fr 1fr; background: #214751; font-size: 29px; }
++  .kid-ux-demo-flight { position: relative; color: #ffed9f; }
++  .kid-ux-demo-target { position: relative; }
++  .kid-ux-demo-success { position: absolute; inset: 0 8px auto auto; color: #c7ff88; font-size: 22px; }
++  .kid-ux-demo-caption { min-height: 22px; margin-block: 5px 1px; font-size: 15px; line-height: 1.35; text-align: center; }
++  .kid-ux-guide-steps, .kid-ux-intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: center; }
++  .kid-ux-guide-steps > span { font-size: 15px; }
++  .kid-ux-guide button, .kid-ux-intro-actions button { min-width: 44px; min-height: 44px; padding-inline: 12px; font-size: 15px; }
++  .kid-ux-guide button { background: #fff2cb; color: #173139; }
++  .kid-ux-guide button:disabled { opacity: .62; }
++  .kid-ux-intro-actions { position: sticky; bottom: -14px; z-index: 2; padding-block: 6px; background: #16313b; border-radius: 10px; }
++  .kid-ux-intro-actions .secondary-button { background: #fff2cb; color: #173139; }
++  .kid-ux-intro-actions .primary-button { background: #126b60; color: #fff8e8; }
++  .kid-ux-intro-details { padding: 4px 2px; font-size: 14px; }
++  .kid-ux-intro-details summary { display: flex; align-items: center; min-width: 44px; min-height: 44px; cursor: pointer; }
++  .kid-ux-intro-details .game-help-lines { margin: 8px 0; }
++  .kid-ux-intro-details .game-help-lines p { font-size: 14px; }
++  @media(max-width: 500px) {
++    .modal[data-kid-ux-help] > h2 { margin-block-start: 54px; margin-inline: 0; }
++  }
++`;
++kidUxStyle('005', guideCSS);
++
++const node = (tag, className, text = '') => {
++  const element = document.createElement(tag);
++  element.className = className;
++  element.textContent = text;
++  return element;
++};
++
++export function gameGuide(gameId) {
++  const scenes = steps[gameId];
++  if (!scenes) return null;
++  const guide = node('section', 'kid-ux-guide');
++  guide.setAttribute('aria-label', 'הדגמת המשחק');
++  const animation = node('div', 'kid-ux-demo');
++  animation.setAttribute('aria-hidden', 'true');
++  const caption = node('p', 'kid-ux-demo-caption');
++  caption.setAttribute('aria-live', 'polite');
++  const navigation = node('div', 'kid-ux-guide-steps');
++  const previous = node('button', '', '→');
++  const next = node('button', '', '←');
++  const count = node('span', '');
++  count.dir = 'ltr';
++  previous.type = next.type = 'button';
++  previous.dataset.kidUxPrevious = '';
++  next.dataset.kidUxNext = '';
++  previous.setAttribute('aria-label', 'הצעד הקודם');
++  next.setAttribute('aria-label', 'הצעד הבא');
++  navigation.append(previous, count, next);
++  guide.append(animation, caption, navigation);
++  let step = 0;
++
++  const show = () => {
++    const [gesture, controlName, actor, target, sentence, outcome = '✓'] = scenes[step];
++    guide.dataset.kidUxStep = String(step + 1);
++    const control = node('span', 'kid-ux-demo-control', controlName);
++    const finger = node('span', 'kid-ux-demo-finger', '👆');
++    const trail = node('span', 'kid-ux-demo-trail');
++    const gesturePanel = node('div', 'kid-ux-demo-input');
++    gesturePanel.append(control, trail, finger);
++    const field = node('div', 'kid-ux-demo-field');
++    const flight = node('span', 'kid-ux-demo-flight', gesture === 'drag' ? '⇢' : '⟶');
++    const targetNode = node('span', 'kid-ux-demo-target', target);
++    const success = node('span', 'kid-ux-demo-success', outcome);
++    const actorNode = node('span', '', actor);
++    field.append(actorNode, flight, targetNode, success);
++    animation.replaceChildren(gesturePanel, field);
++    caption.textContent = sentence;
++    count.textContent = `${step + 1} / ${scenes.length}`;
++    previous.disabled = step === 0;
++    next.disabled = step === scenes.length - 1;
++    if (!finger.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
++
++    const move = gesture === 'drag' ? 'translate(33px, -4px)' : 'translate(0, -10px) scale(.83)';
++    const tap = { transform: move, offset: .39 };
++    const release = { transform: 'translate(6px, 8px)', offset: .60 };
++    const gestureFrames = [{ transform: 'translate(6px, 8px)' }, tap, release];
++    if (gesture === 'double') {
++      gestureFrames.push({ transform: move, offset: .69 });
++    }
++    if (gesture === 'hold') {
++      tap.offset = .22;
++      gestureFrames.splice(2, 0, { transform: move, offset: .58 });
++    }
++    gestureFrames.push({ transform: 'translate(6px, 8px)' });
++    const timing = { duration: 2200, iterations: Infinity, easing: 'ease-in-out' };
++    finger.animate(gestureFrames, timing);
++    trail.animate([{ transform: 'scaleX(.05)' }, { transform: 'scaleX(1)', offset: .58 }, { transform: 'scaleX(1)' }], timing);
++    actorNode.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(0)', offset: .58 }, { transform: 'translateX(90%)', offset: .82 }, { transform: 'translateX(90%)' }], timing);
++    success.animate([{ opacity: 0 }, { opacity: 0, offset: .78 }, { opacity: 1, offset: .84 }, { opacity: 1 }], timing);
++  };
++  previous.onclick = () => { if (step > 0) { step--; show(); } };
++  next.onclick = () => { if (step < scenes.length - 1) { step++; show(); } };
++  show();
++  return { node: guide, sentence: () => scenes[step][4] };
++}
