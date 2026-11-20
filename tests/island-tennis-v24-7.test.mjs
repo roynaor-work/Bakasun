@@ -61,7 +61,7 @@ test('v24.7 pack: the runtime copies are byte-identical to the design package, l
  for(const [path,hash] of Object.entries(want)){assert.ok(path.startsWith(CALLOUT_PACK_DIR)&&CALLOUT_PACK_DIR.startsWith('assets/'));assert.equal(await sha(path),hash,path);assert.ok(manifest.games.tennis.includes(path),`${path} must be in games.tennis`);assert.ok(manifest.files[path],`${path} must be hashed`);}
  for(const path of [...manifest.shell,...Object.values(manifest.games).flat()])assert.ok(!path.includes('design/tennis-callouts-v1'),`${path}: nothing is downloaded from the design package`);
  for(const file of ['minigames/tennis-callouts.mjs','minigames/g4e-audio.mjs','minigames/tennis-session.mjs','minigames/tennis.css'])assert.ok(!/design\/tennis-callouts-v1\/(?!manifest\.json)[\w./-]+\.(?:ogg|mp3|svg|png|js|css)/.test(String(await read(file))),`${file} loads nothing from design/`);
- assert.match(String(await readFile(new URL('../.github/workflows/pages.yml',import.meta.url))),/ tennis-callouts-v1 /,'the design package is not published');
+ assert.match(String(await readFile(new URL('../.github/scripts/stage-pages.py',import.meta.url))),/\btennis-callouts-v1\b/,'the design package is not published');
 });
 test('v24.7 pack: the loader takes the playable format first and falls back to the other',async()=>{
  const context={decodeAudioData:async b=>{if(b.bad)throw Error('bad');return {name:b.name};}},base=new URL('minigames/g4e-audio.mjs',island).href;

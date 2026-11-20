@@ -33,7 +33,7 @@ UNWIRED_DESIGN = set("""
     motion-v10 soccer-motion-v11 soccer-motion-v9 soccer-referee-v1 soccer-tackle-keeper-v2 soccer-whistle-
     crowd-v1 tennis-crowd-audio-v1 tennis-grip-v1 tennis-motion-v1 tennis-stadium-v1 tennis-ui-fx-v1 alien-fx-v1
     alpine-themes-v1 athlete-body-v2 catch-audio-v2 refill-enemyfire-v1 soccer-clips-v13 soccer-crowd-3d-v1
-    soccer-fx-v1 soccer-pitch-v1 torpedo-sub-v1
+    soccer-fx-v1 soccer-pitch-v1 torpedo-sub-v1 tennis-callouts-v1
 """.split())
 REVIEW_DESIGN = ("-audit-v1", "-patches-v1")
 # Licence and attribution notes travel with the files they cover.

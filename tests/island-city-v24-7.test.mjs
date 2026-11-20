@@ -26,7 +26,7 @@ test('city v24.7: both packages load from assets/ and each has its URL flag in a
   assert.match(app,/import\('\.\/assets\/city-missions-v1\/runtime\.mjs\?v=/);
   assert.match(app,/import\('\.\/assets\/city-progression-v1\/island-adapter\.mjs\?v=/);
   assert.match(app,/query\.get\('cityMissions'\) !== '0'/);
-  assert.match(app,/query\.get\('cityProgression'\) !== '0'/);
+  assert.match(app,/query\.get\('cityProgression'\) === '1'/);
   for(const file of ['app.mjs','engine/engine.mjs','ui/interface.mjs','view/island-view.mjs'])assert.ok(!/design\/city-(?:missions|progression|buildings)/.test(await read(file)),file+' must not load a design/ package (not published)');
 });
 
