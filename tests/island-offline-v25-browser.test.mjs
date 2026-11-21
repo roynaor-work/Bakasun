@@ -89,7 +89,7 @@ test('v25: the background download keeps the shell and the main games only; the 
   assert.equal(await t.page.evaluate(()=>document.querySelector('.offline-pack[data-game=tennis] button').textContent),'בטוח? מחיקה','a delete asks once');
   await t.page.locator('.offline-pack[data-game=tennis] [data-action=offline-pack-delete]').click();
   await t.page.waitForFunction(()=>/^(missing|partial)$/.test(document.querySelector('.offline-pack[data-game=tennis]')?.dataset.state),null,{timeout:60000});
-  assert.match(await t.page.evaluate(()=>document.querySelector('.offline-status').textContent),/טניס נמחק מהמכשיר \(\d+ קבצים/);
+  assert.match(await t.page.evaluate(()=>document.querySelector('.offline-status').textContent),/טניס: הוסרו \d+ קבצים מהמכשיר \([\d.]+ MB\)\. ההתקדמות נשמרה\./);
   s=await status(t.page);assert.equal(s.games.tennis,false);assert.equal(s.games.soccer,true,'a shared file was not removed with tennis');
   const shared=pathsFor(manifest,['tennis']).filter(p=>manifest.games.soccer.includes(p));
   if(shared.length)assert.ok(await t.page.evaluate(async href=>Boolean(await (await caches.open((await caches.keys())[0])).match(href)),new URL(shared[0],server.url).href),'shared file kept: '+shared[0]);
