@@ -5,6 +5,8 @@ import { PROGRAMS } from '../programs.js?v=20261010-camera-1';
 import { LocalCapture } from './capture.mjs?v=20261010-camera-1';
 import { CAMERA_EXERCISES, MotionCounter, MOTION_MAX_GAP_MS } from './motion.mjs?v=20261010-camera-1';
 import { PoseTracker } from './tracking.mjs?v=20261010-camera-1';
+import { guide, GuideVoice } from './guide.mjs?v=20261010-camera-1';
+import { cameraV1Enabled } from './flag.mjs?v=20261010-camera-1';
 
 const node = id => document.getElementById(id);
 function text(id, value) {
@@ -69,6 +71,21 @@ let signalReady = false;
 let audio;
 let figure;
 let demoOpen = false;
+// Spoken guidance uses the app's own device-only voice helper, loaded on the tap that opens the camera.
+let speech = null;
+const seenAt = {};
+const voice = new GuideVoice({ speak: line => speech?.speakLocal(line, { quick: true }) });
+function showMove(move = '') {
+  const box = node('camera-preview');
+  if (move) box.dataset.move = move;
+  else delete box.dataset.move;
+}
+function quiet() {
+  voice.reset();
+  delete seenAt.last;
+  showMove();
+  try { speech?.stopSpeak(); } catch { /* no voice on this device */ }
+}
 
 const isTimed = () => item.type === 'time';
 const credit = () => Math.min(item.target, cameraDone + trustDone);
@@ -118,6 +135,7 @@ function closeCamera() {
   clearSignal();
   renderSignal();
   counter?.pause();
+  quiet();
   visible('camera-preview', false);
 }
 
@@ -177,10 +195,14 @@ function onPose(sample) {
     clearSignal();
     renderSignal();
     if (slow) {
+      showMove();
       counter.pause();
       status('slow', 'המצלמה מצלמת לאט כרגע. אפשר להמשיך בלי מצלמה.');
     } else {
-      let message = result.hint?.text || 'מחפשים תנוחה ברורה כדי להמשיך.';
+      const instruction = guide(sample, result.status, policy, seenAt);
+      let message = instruction?.text || result.hint?.text || 'מחפשים תנוחה ברורה כדי להמשיך.';
+      showMove(instruction?.move || '');
+      voice.update(instruction, sample.time);
       if (sample.aspect < 1 && (exercise.place === 'hall' || policy.setup === 'floor') &&
           ['missing', 'move-back', 'center'].includes(result.status)) {
         message += ' אפשר להניח את הטלפון לרוחב כדי שייכנס יותר מהתנועה.';
@@ -192,6 +214,8 @@ function onPose(sample) {
     return;
   }
   renderSignal();
+  showMove();
+  voice.update(null, sample.time);
   if (result.hint?.code === 'demo') {
     demoUntil = sample.time + 3200;
     status('ready', result.hint.text);
@@ -204,7 +228,7 @@ function onPose(sample) {
   const motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect, world: result.pose.world });
   const cameraProgress = isTimed() ? motion.activeMs / 1000 : motion.count;
   cameraDone = Math.min(item.target, Number.isFinite(cameraProgress) ? Math.floor(cameraProgress + 0.00001) : 0);
-  if (cameraDone >= item.target) status('ready', 'הגעת ליעד! אפשר לסיים את התרגיל.');
+  if (cameraDone >= item.target) status('ready', 'הגעת ליעד. אפשר לסיים את התרגיל.');
   else if (node('status').dataset.state !== 'ready' || sample.time >= demoUntil) {
     status('ready', 'מוכנים. אפשר להתחיל לזוז, או לבחור ״הדגם לי״.');
   }
@@ -227,11 +251,7 @@ function onPose(sample) {
 
 function startCamera() {
   if (demoOpen || capture) return;
-  if (navigator.serviceWorker?.controller) {
-    visible('retry', true);
-    status('blocked', 'כדי להפעיל מצלמה, פתח את האימון בכתובת המקומית שמציג השרת.');
-    return;
-  }
+  if (!speech) void import('../speech.js?v=20261014-w2g-1').then(module => { speech = module; }, () => {});
   tracker = new PoseTracker({
     view: policy.view === 'diagonal' ? 'either' : policy.view,
     setup: policy.setup,
@@ -381,7 +401,7 @@ function signal() {
         if (playing.state !== 'closed') void playing.close().catch(() => {});
       };
     }
-    text('signal-status', 'צא!');
+    text('signal-status', 'צא');
     renderSignal();
   }, 1400 + Math.random() * 2000);
   renderSignal();
@@ -399,7 +419,12 @@ function pauseSession() {
 }
 
 function setup() {
-  if (location.protocol !== 'http:' || location.hostname !== '127.0.0.1') {
+  if (!cameraV1Enabled()) {
+    location.replace('../?cameraV1=0');
+    return;
+  }
+  // The camera needs a secure page (the published site, or this device's own address while testing).
+  if (!window.isSecureContext) {
     visible('unavailable', true);
     return;
   }

@@ -30,6 +30,11 @@ import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest
 import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261013-frames-1';
 import { confirmCameraUpload, disableUploadConfig, initializeUploadConfig, UPLOAD_CONTEXTS } from '../cam-lab/upload.mjs?v=20261013-frames-1';
 import { cameraScreen } from './camera-screen.mjs?v=20261014-w2g-1';
+import { cameraV1Enabled, cameraV1Href, cameraV1Redirect } from './camera-v1/flag.mjs?v=20261010-camera-1';
+// camera v1 (21/11/2026): a separate device-only page that follows every catalogue exercise and says where to stand.
+// ?cameraV1=0 hides its links for the visit; ?cameraV1=1 opens it directly.
+{ const direct = cameraV1Redirect(); if (direct) location.replace(direct); }
+const cameraV1Link = id => cameraV1Enabled() ? `<a class="btn big" id="camera-v1-link" style="text-decoration:none" href="${cameraV1Href(id)}">אימון עם מצלמה שמכוונת אותך</a>` : '';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -504,6 +509,7 @@ function exerciseDetail(id) {
     ${ex.place === 'hall' ? `<div class="row wrap">${placePill(ex)}</div>` : ''}
     ${helpButton()}
     ${cameraButton(ex.id)}
+    ${cameraV1Link(ex.id)}
     <div class="tiles">
       <div class="tile"><b>${target}</b>${ex.type === 'time' ? 'שניות ברמה שלך' : 'חזרות ברמה שלך'}</div>
       <div class="tile hot"><b>${p ? p.best : '–'}</b>השיא שלך</div>
@@ -1135,6 +1141,7 @@ function settings() {
       <label class="toggle"><b>אימון עם מצלמה</b><input type="checkbox" id="workout-camera-setting" ${p.camera === true ? 'checked' : ''} aria-describedby="workout-camera-info"></label>
       ${readCameraConsent() ? '<button class="btn chip" id="camera-upload-off">כיבוי שליחת נתוני מצלמה</button>' : ''}
       <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. כדי לאשר שליחה מהאימון, פותחים קישור הגדרה לאפליקציית האימון.</p>
+      ${cameraV1Enabled() ? `<p class="muted small"><a id="camera-v1-settings" href="${cameraV1Href()}">מצלמה לכל התרגילים</a>: הניתוח כולו במכשיר, בלי הקלטה ובלי שליחה, והמצלמה נפתחת רק בלחיצה.</p>` : ''}
       <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listenLocal === true ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
       <p class="muted small">${canListen() ? 'באישור הורה, אפשר להפעיל ספירה במיקרופון אם מותקנת במכשיר שפת זיהוי מקומית. אפשר לספור גם בלחיצה.' : 'זיהוי דיבור מקומי אינו זמין בדפדפן הזה. אפשר לספור בלחיצה.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>

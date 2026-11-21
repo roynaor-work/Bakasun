@@ -29,3 +29,14 @@ video { display: block; width: auto; max-width: min(100%, 24rem); max-height: 47
 #hint { color: #f7ddac; }
 .attest { display: flex; gap: 0.5rem; align-items: center; min-height: 2.8rem; }
 .attest input { width: 1.2rem; height: 1.2rem; flex: none; }
+/* Which way to move, drawn over the mirrored preview: the arrow points where the child should go on the screen. */
+.move { position: absolute; inset-block-start: 50%; translate: 0 -50%; display: none; padding: 0.1rem 0.6rem; border-radius: 0.75rem; background: #17132ad9; color: #ffd47d; font-size: 2.6rem; font-weight: 800; line-height: 1.2; pointer-events: none; }
+[data-move="left"] .move, [data-move="right"] .move, [data-move="back"] .move, [data-move="closer"] .move { display: block; }
+[data-move="left"] .move { left: 4%; }
+[data-move="left"] .move::before { content: "\2190"; }
+[data-move="right"] .move { right: 4%; }
+[data-move="right"] .move::before { content: "\2192"; }
+[data-move="back"] .move, [data-move="closer"] .move { left: 50%; translate: -50% -50%; font-size: 1.3rem; }
+[data-move="back"] .move::before { content: "אחורה"; }
+[data-move="closer"] .move::before { content: "קרוב יותר"; }
+#status[data-state]:not([data-state="ready"]):not([data-state="trust"]):not([data-state="waiting"]) { font-size: 1.2rem; font-weight: 700; color: #ffd47d; }

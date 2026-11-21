@@ -4,9 +4,7 @@ let detector, sampler, measureLight;
 let lastTime = -Infinity;
 
 async function init() {
-  if (self.location.protocol !== 'http:' || self.location.hostname !== '127.0.0.1') {
-    throw new Error('Loopback origin required');
-  }
+  if (!self.isSecureContext) throw new Error('Secure origin required');
   const { FilesetResolver, PoseLandmarker } = await import(new URL('vendor/vision_bundle.mjs', lab).href);
   ({ measureLight } = await import('./tracking.mjs?v=20261010-camera-1'));
   sampler = new OffscreenCanvas(48, 32).getContext('2d', { willReadFrequently: true });

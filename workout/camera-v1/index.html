@@ -14,12 +14,13 @@
 <main>
   <header>
     <h1>האימון שלי</h1>
-    <p>כל האימון נשאר במכשיר. המצלמה פועלת רק אם בוחרים להפעיל אותה.</p>
+    <p>כל האימון נשאר במכשיר. המצלמה פועלת רק אם בוחרים להפעיל אותה. שום דבר לא מוקלט ולא נשמר.</p>
+    <a href="../">חזרה לאימון הרגיל</a>
   </header>
   <noscript>כדי להפעיל את האימון צריך JavaScript.</noscript>
   <section id="unavailable" hidden>
-    <p>האימון המקומי זמין דרך השרת המקומי של חבילת המצלמה.</p>
-    <a href="../?cameraV1=0">חזרה לאימון הרגיל</a>
+    <p>המצלמה נפתחת רק בכתובת מאובטחת של האפליקציה.</p>
+    <a href="../">חזרה לאימון הרגיל</a>
   </section>
   <section id="setup" hidden>
     <div class="controls">
@@ -39,6 +40,7 @@
       <div id="camera-preview" hidden>
         <video id="camera" autoplay muted playsinline aria-label="תצוגה מקומית של המצלמה"></video>
         <div class="guide" aria-hidden="true"></div>
+        <div class="move" aria-hidden="true"></div>
       </div>
       <svg id="demonstration" role="img" aria-label="דמות שמדגימה את התרגיל" hidden></svg>
     </div>
