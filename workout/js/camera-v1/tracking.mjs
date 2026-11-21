@@ -15,6 +15,7 @@ const stayConfidence = .36;
 // A child who was tracked and drops out for a blink (a fast jump, an arm across the body) keeps the
 // calibration for this long, so the count goes on without asking for a still pose in mid-exercise.
 const graceMs = 850;
+const calibrationGapMs = 220;
 
 const MESSAGES = {
   calibrating: 'אפשר להישאר רגע בתנוחת ההתחלה, כדי שנראה איפה הגוף שלך.',
@@ -253,7 +254,7 @@ export class PoseTracker {
     this.demoShown = false;
     this.movedFrames = 0;
     this.movedAt = null;
-    this.readyAt = null;
+    this.seenAt = null;
     this.resumed = false;
     this._dropTrack();
   }
@@ -268,15 +269,18 @@ export class PoseTracker {
   }
 
   _blocked(status) {
-    // A short loss of a tracked child keeps what was learnt; anything longer, or any other reason, starts over.
-    const brief = ['missing', 'center'].includes(status) && this.calibration &&
-      this.readyAt != null && this.lastTime - this.readyAt <= graceMs;
+    // A short loss of a tracked child keeps what was learnt, and one dropped frame while the starting pose is
+    // being measured does not start the measuring over; anything longer, or any other reason, starts over.
+    const allowed = this.calibration ? graceMs : calibrationGapMs;
+    const brief = ['missing', 'center'].includes(status) && this.seenAt != null && this.lastTime - this.seenAt <= allowed;
     if (brief) {
       this.shape = null;
       this.filtered = null;
-      this.resumed = true;
+      this.resumed = Boolean(this.calibration);
     } else this._dropTrack();
-    return { status, ready: false, pose: null, gap: true, calibration: null,
+    // brief: the child was tracked a blink ago. The counter then keeps the repetition under way and decides
+    // by its own clock (the longest gap it bridges) whether the movement can still be followed.
+    return { status, ready: false, pose: null, gap: true, brief: brief && Boolean(this.calibration), calibration: null,
       hint: { code: status, text: MESSAGES[status] } };
   }
 
@@ -355,6 +359,7 @@ export class PoseTracker {
     this.shape = shape;
     this.filtered = smoothPose(person, this.filtered, clamp(dt, 12, 150), shape, this.aspect);
     const starting = !this.calibration;
+    this.seenAt = time;
     this.calibration ??= this._gather(shape, this.filtered, time);
     if (!this.calibration) {
       return { status: 'calibrating', ready: false, pose: null, gap: true, calibration: null,
@@ -362,9 +367,8 @@ export class PoseTracker {
     }
     const hint = this.demoShown ? null : { code: 'demo', text: MESSAGES.demo };
     this.demoShown = true;
-    const gap = starting || this.resumed;
+    const gap = starting;
     this.resumed = false;
-    this.readyAt = time;
     return { status: 'ready', ready: true, pose: this.filtered, gap, calibration: this.calibration, hint };
   }
 }

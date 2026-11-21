@@ -33,8 +33,12 @@ const armsWide = f => f.wristSpread > Math.max(1.40, f.shoulders * 1.7) && f.sid
 const chest = f => f.dy(f.hip, f.shoulder);
 const reachFloor = f => f.clearance(f.main.wrist?.y) <= .24;
 const groundedPlank = f => pushLine(f) && reachFloor(f);
-const kneeRaise = (f, minimum, opposite) => f.sides.find(side =>
-  side.kneeRise >= minimum && f.sides[1 - side.index].kneeRise < opposite)?.index;
+// One knee up: high enough, and clearly above the other. The standing leg's own reading shifts a little
+// when the hips tilt, so it counts either under its limit or by the same gap below the raised knee.
+const kneeRaise = (f, minimum, opposite) => f.sides.find(side => {
+  const other = f.sides[1 - side.index].kneeRise;
+  return side.kneeRise >= minimum && (other < opposite || side.kneeRise - other >= minimum - opposite);
+})?.index;
 const clearKick = (f, height, gap) => f.sides.find(side => side.clearance > height &&
   side.clearance - f.sides[1 - side.index].clearance > gap)?.index;
 const footTogether = f => Math.abs(f.dy(f.left.ankle, f.right.ankle)) < .22;

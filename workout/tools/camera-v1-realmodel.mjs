@@ -72,7 +72,7 @@ export function replay(clip, api, id = clip.cfg.id) {
     const sample = { poses: frame.poses, time: 1000 + frame.t, aspect: clip.aspect, light: frame.light, scene: frame.scene };
     const began = performance.now();
     const result = tracker.update(sample);
-    if (result.gap || !result.ready) counter.pause();
+    if ((result.gap || !result.ready) && !result.brief) counter.pause();
     slowFrames = last != null && sample.time - last > SLOW_GAP ? slowFrames + 1 : Math.max(0, slowFrames - 1);
     last = sample.time;
     const slow = slowFrames >= 3 && (result.ready || result.status === 'calibrating');

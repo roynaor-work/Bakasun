@@ -229,7 +229,8 @@ function useTrust(reason = '') {
 function onPose(sample) {
   wideTip(sample);
   const result = tracker.update(sample);
-  if (result.gap || !result.ready) counter.pause();
+  // A blink of lost tracking does not throw away the repetition under way: the counter bridges it by its own clock.
+  if ((result.gap || !result.ready) && !result.brief) counter.pause();
   slowFrames = lastSample != null && sample.time - lastSample > MOTION_MAX_GAP_MS ? slowFrames + 1 : Math.max(0, slowFrames - 1);
   lastSample = sample.time;
   const slow = slowFrames >= 3 && (result.ready || result.status === 'calibrating');
