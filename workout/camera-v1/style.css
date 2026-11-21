@@ -1,0 +1,31 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #17132a; color: #f7f2ff; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 42rem); margin: 2rem auto; }
+h1, h2, p { margin-block: 0 0.75rem; }
+p, li { line-height: 1.6; }
+section { margin-block: 1rem; padding: 1rem; border: 1px solid #554581; border-radius: 1.25rem; background: #231b3e; }
+button, select, a { font: inherit; }
+button, select { min-height: 2.8rem; border: 1px solid transparent; border-radius: 0.75rem; padding: 0.4rem 0.8rem; }
+button { color: #211135; background: #d7c3ff; font-weight: 700; cursor: pointer; }
+button.secondary, select { background: #372959; color: #fff; border-color: #6e569e; }
+button:disabled { opacity: 0.52; cursor: default; }
+:focus-visible { outline: 3px solid #ffd47d; outline-offset: 3px; }
+a { color: #ddcaff; }
+.controls, .actions { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-block: 0.65rem; }
+.controls label { display: grid; gap: 0.25rem; max-width: 100%; }
+select { max-width: 100%; }
+.stage { display: flex; align-items: flex-start; justify-content: center; flex-wrap: wrap; gap: 0.75rem; }
+#camera-preview { position: relative; display: grid; width: fit-content; max-width: 100%; background: #0a0811; border-radius: 0.8rem; overflow: hidden; }
+video { display: block; width: auto; max-width: min(100%, 24rem); max-height: 47dvh; object-fit: contain; transform: scaleX(-1); }
+.guide { position: absolute; inset: 7%; border: 2px dashed #d6bdffb3; border-radius: 0.75rem; pointer-events: none; }
+#demonstration { width: min(100%, 15rem); max-height: 35dvh; }
+#demonstration .torso, #demonstration .limb, #demonstration .rope, #demonstration .ground { stroke: #d7c3ff; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#demonstration .ground, #demonstration .far { opacity: 0.5; }
+#demonstration .prop, #demonstration .head { fill: #d7c3ff; }
+.score { display: flex; gap: 0.65rem; align-items: baseline; }
+#progress { font-size: clamp(2rem, 9vw, 3rem); font-weight: 800; font-variant-numeric: tabular-nums; }
+#hint { color: #f7ddac; }
+.attest { display: flex; gap: 0.5rem; align-items: center; min-height: 2.8rem; }
+.attest input { width: 1.2rem; height: 1.2rem; flex: none; }
