@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
+import {cacheName} from '../workout/island/ui/offline.mjs';
 
-/** The soccer asset worker must register under the shipped index CSP (script-src 'self'),
+/** The island's offline worker (offline v25; it replaced the soccer-only worker of v3) must register under the shipped index CSP (script-src 'self'),
  * download the asset list once on request, and answer the next match from the device
  * cache: no network request for any cached soccer asset. */
 test('soccer assets download once into the service worker cache and the next match loads without network',{skip:process.env.ISLAND_SOCCER_BROWSER!=='1',timeout:360000},async()=>{
@@ -18,29 +19,35 @@ test('soccer assets download once into the service worker cache and the next mat
    const m=await import('./ui/soccer-card.mjs');const progress=[];
    const done=await m.downloadSoccerAssets((d,t)=>progress.push([d,t]));
    const registration=await navigator.serviceWorker.getRegistration();
-   return {done,progress:progress.length,scope:registration?.scope,script:registration?.active?.scriptURL,keys:await caches.keys()};
+   return {done,progress:{calls:progress.length,first:progress[0],last:progress.at(-1),rising:progress.every(([d],i)=>i===0||d===progress[i-1][0]+1)},scope:registration?.scope,script:registration?.active?.scriptURL,keys:await caches.keys()};
   });
   assert.deepEqual(result.done.failed,[],'every asset downloaded');
-  assert.ok(result.done.total>=40&&result.progress===result.done.total);
-  assert.ok(result.script.endsWith('/workout/island/soccer-sw.js?v='+result.done.version),result.script);
-  assert.deepEqual(result.keys.filter(k=>k.startsWith('island-soccer-')),['island-soccer-'+result.done.version]);
+  // offline v25 (ui/offline.mjs downloadSet): one progress call before the first file (0 of total) and one after every file.
+  assert.ok(result.done.total>=40,'total '+result.done.total);
+  assert.deepEqual(result.progress,{calls:result.done.total+1,first:[0,result.done.total],last:[result.done.total,result.done.total],rising:true});
+  // offline v25: one worker for the island (offline-sw.js, which also removes the old island-soccer-* caches) and one cache per release.
+  assert.ok(new URL(result.script).pathname.endsWith('/workout/island/offline-sw.js')&&new URL(result.script).searchParams.get('v')===result.done.version,result.script);
+  assert.deepEqual(result.keys.filter(k=>/^island-(assets|soccer)-/.test(k)),[cacheName(result.done.version)]);
   // A fresh page in the same context is controlled by the worker: the match's assets come from the cache.
+  // The first page is closed first: two island pages drawing at once on software GL starve each other (the second took minutes to boot),
+  // and the worker and its cache belong to the context, not to that page.
+  await page.close();
   const match=await context.newPage();match.on('pageerror',error=>errors.push(error.message));
   await match.addInitScript(()=>performance.setResourceTimingBufferSize(4000));
   const served=[];match.on('request',request=>served.push(request.url()));
-  await match.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await match.waitForFunction(()=>window.__island&&navigator.serviceWorker.controller);
+  await match.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await match.waitForFunction(()=>window.__island&&navigator.serviceWorker.controller,null,{timeout:120000});
   await match.evaluate(()=>{const {engine:e,ui}=window.__island;e.setAvatar({name:'בדיקת הורדה',created:true});e.skipTutorial();e.state.money=100000;e.state.learning.required=false;if(!e.state.buildings.some(b=>b.typeId==='soccer')){e.enableReadyBuilding();const lot=e.readyPlotForType('soccer');if(!lot.ok)throw Error(JSON.stringify(lot));e.buildReadyPlot(lot.id);}e.save();ui.closeModal();});
   await match.evaluate(()=>window.__island.games.start('soccer',undefined,1));
   if(await match.locator('[data-action=game-understood]').count())await match.locator('[data-action=game-understood]').click();
   await match.waitForFunction(()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';},null,{timeout:120000});
   const snapshot=await match.evaluate(()=>window.__island.games.current.session.snapshot);
-  assert.equal(snapshot.renderMetrics.assetStats.kind,'design-glb-v2');assert.equal(snapshot.renderMetrics.designScene.status,'ready');
+  /* v24: the Codex shared body v2 is the default set. */assert.equal(snapshot.renderMetrics.assetStats.kind,'athlete-body-v2');assert.equal(snapshot.renderMetrics.designScene.status,'ready');
   const report=await match.evaluate(()=>localStorage.getItem('island.soccer.lastLoadReport'));
   assert.match(report,/assets ready · characters design-glb-v2 · scene design/,report);
   const timing=await match.evaluate(()=>performance.getEntriesByType('resource').filter(e=>/\/design\/(characters2|models2|models|environment|motion2|motion|vfx)\//.test(e.name)).map(e=>({name:e.name.split('/island/')[1],worker:e.workerStart>0,transfer:e.transferSize})));
   assert.ok(timing.length>=8,'the match fetched its design assets from the page: '+timing.length+' of '+await match.evaluate(()=>performance.getEntriesByType('resource').length));
   for(const entry of timing)assert.ok(entry.worker&&entry.transfer===0,`${entry.name} should come from the worker cache, not the network`);
-  const fromWorker=await match.evaluate(async()=>{const cache=await caches.open((await caches.keys()).find(k=>k.startsWith('island-soccer-')));return (await cache.keys()).length;});
+  const fromWorker=await match.evaluate(async()=>{const cache=await caches.open((await caches.keys()).find(k=>k.startsWith('island-assets-')));return (await cache.keys()).length;});
   assert.ok(fromWorker>=40,'cache still holds the assets after the match');
   assert.deepEqual(errors,[]);await audit.assertClean();
  }finally{await audit.dispose();await context.close();await browser.close();await server.close();}

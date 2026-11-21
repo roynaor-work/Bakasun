@@ -98,6 +98,8 @@ const begin=async page=>{
  await page.evaluate(()=>window.__island.games.start('soccer',undefined,1));if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
  await page.waitForFunction(()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';},null,{timeout:240000});
 };
+/** The kick clips only the v8 pack has (assets/soccer-v8/clips.json). */
+const V8_KICKS=['v8_pass_short','v8_pass_long','v8_pass_loft','v8_shot'];
 const moveTo=(page,x,z)=>page.evaluate(([x,z])=>{const s=window.__island.games.current.session.debug.model.getState();s.ball.x=x;s.ball.z=z;s.ball.vx=s.ball.vz=0;s.ball.owner=null;const p=s.players[s.controlled];p.x=x;p.z=z;},[x,z]);
 const view=(page,fn,arg)=>page.evaluate(([fn,arg])=>{const v=window.__island.games.current.session.debug.view;return v[fn](arg);},[fn,arg]);
 
@@ -131,11 +133,14 @@ test('v8 flags and fallback: ?soccerV8=0 keeps the old stadium; a failed v8 asse
  const viewport={width:844,height:390};
  try{
   await t.test('flag off',async()=>{
-   const {context,page,errors}=await startMatch(browser,server,viewport,'soccerV8=0');
+   const {context,page,errors}=await startMatch(browser,server,viewport,'soccerV8=0'),requests=[];page.on('request',r=>requests.push(r.url()));
    try{await begin(page);
     const v=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.view.metrics();return {v8:m.v8,stadium:m.stadium,clips:window.__island.games.current.session.debug.view.characters[0].motion.actions};});
     assert.equal(v.v8.status,'off');assert.equal(v.stadium,'Island Design Stadium','the stadium that shipped before is built');
-    assert.ok(!Object.keys(v.clips).some(n=>n.startsWith('v8_')),'no v8 clips loaded');assert.deepEqual(errors,[]);
+    // soccer-feel v2 brings its own repaired slide, first touches and keeper dives under the v8 names from assets/soccer-v12 (soccerV12Overlay, add:true),
+    // also when the v8 pack is off. What ?soccerV8=0 switches off is the pack itself: its file is not fetched and its kick clips are not there.
+    assert.ok(!requests.some(u=>u.includes('assets/soccer-v8/')),'no v8 file is requested: '+requests.filter(u=>u.includes('assets/soccer-v8/')));
+    assert.deepEqual(V8_KICKS.filter(n=>n in v.clips),[],'no v8 kick clips loaded');assert.deepEqual(errors,[]);
    }finally{await context.close();}
   });
   await t.test('a v8 stadium file fails to load',async()=>{
@@ -152,7 +157,7 @@ test('v8 flags and fallback: ?soccerV8=0 keeps the old stadium; a failed v8 asse
    await context.route('**/assets/soccer-v8/clips.json',route=>route.fulfill({status:404,body:'no'}));
    try{await begin(page);
     const names=await page.evaluate(()=>Object.keys(window.__island.games.current.session.debug.view.characters[0].motion.actions));
-    assert.ok(names.includes('run_3')&&!names.some(n=>n.startsWith('v8_')),'v7 clips only');
+    assert.ok(names.includes('run_3'),'the v7 clips are there');assert.deepEqual(V8_KICKS.filter(n=>names.includes(n)),[],'no clip of the failed v8 pack (the repaired v8 names of soccer-feel v2 come from assets/soccer-v12)');
    }finally{await context.close();}
   });
  }finally{await browser.close();await server.close();}

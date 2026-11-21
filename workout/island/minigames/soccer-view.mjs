@@ -536,7 +536,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       ballShown.x=ballRoot.position.x;ballShown.y=ballRoot.position.y;ballShown.z=ballRoot.position.z;ballShown.valid=true;}
     const holder=s.ball.owner==null?null:s.players[s.ball.owner],character=holder&&characters[holder.id];
     restartAttachment=character&&soccerRestartBallAttachment(T,character,holder.restartMotion,config.physics.ballRadius,ballRoot.position)?character.restartContactMetrics:null;
-    if(restartAttachment&&character.v7){
+    // The shared athlete body (v22 / v2) holds the ball lower than the calibrated rig too. Where a v24 clip owns the release (below) nothing changes;
+    // a restart that keeps its own clip on that body (the keeper's punt: hands to the drop) is eased the same way, or the ball jumps 8.5 cm at the drop.
+    if(restartAttachment&&(character.v7||character.athleteBody&&!character.motion?.restartClip)){
       // The v7 body is shorter-armed than the rig the restart ball heights were calibrated on (hands ~17 cm lower at
       // the overhead throw), so the attached ball is eased onto the simulation ball over the last half of the motion
       // instead of snapping at the release edge.

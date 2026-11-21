@@ -99,6 +99,9 @@ test('v25: the background download keeps the shell and the main games only; the 
   // Offline: a new page with no network at all opens the island and plays the downloaded games from the device.
   await t.page.waitForFunction(()=>navigator.serviceWorker.controller);
   await t.context.setOffline(true);
+  // The first page is closed before the offline one opens: two island pages drawing at once on software GL starve each other (CI: the second page
+  // did not finish opening in 180 s). The worker and its cache belong to the context, so the offline page is served exactly as before.
+  await t.page.close();
   const offlinePage=await t.context.newPage();offlinePage.setDefaultTimeout(180000);const errors=[];offlinePage.on('pageerror',e=>errors.push(e.message));
   const failed=[],network=[];offlinePage.on('requestfailed',r=>{if(!/ERR_ABORTED/.test(r.failure()?.errorText||''))failed.push(r.url()+' '+r.failure()?.errorText);});
   offlinePage.on('response',r=>{if(!r.fromServiceWorker()&&r.url().startsWith(server.url))network.push(r.url());});
