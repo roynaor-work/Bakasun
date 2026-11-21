@@ -51,7 +51,7 @@ export function drawNavalV241(p,m,balance,project,width,height){
  // 2. A lock refused (out of the radar's range) or lost (the hull left it): red brackets that fade and one short reason.
  const lost=m.radarOn?m.radarLost:null,span=NAVAL_V241_DEFAULTS.radar.lostSeconds;
  if(lost&&time-lost.time>=0&&time-lost.time<span){const t=live(m,lost.index),b=t&&navalLockBox(t,project,balance),fade=1-(time-lost.time)/span;
-  const word=lost.reason==='range'?NAVAL_V241_WORDS.range:NAVAL_V241_WORDS.lost;
+  const word=lost.reason==='range'?NAVAL_V241_WORDS.range:lost.reason==='track'?NAVAL_V241_WORDS.track:NAVAL_V241_WORDS.lost;
   // The radar's reach as a dashed ring on the water around our ship, so "out of range" shows how far to sail.
   // Only the part of the ring in front of the camera is drawn (the ring is wider than the picture and passes behind the camera).
   const ship=m.playerShip,R=navalRadarRange(m.ammoIndex,m.radarConfig||NAVAL_V241_DEFAULTS.radar);if(ship){p.save();p.globalAlpha=.75*Math.max(0,fade);p.setLineDash([7,6]);p.lineDashOffset=-time*30;let drawn=0,pen=false;p.beginPath();
