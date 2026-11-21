@@ -45,9 +45,9 @@ test('soccer supplied controls in the native game, with real CSP, both orientati
         await page.waitForFunction(()=>{const s=window.__island.games.current?.session.snapshot;return s?.renderMetrics?.assetStatus==='ready'&&s.contractsStatus==='ready';},{},{timeout:120000});
         await page.clock.pauseAt(new Date((await page.evaluate(()=>Date.now()))+10000));
         const snapshot=()=>page.evaluate(()=>window.__island.games.current.session.snapshot);
-        const ready=await snapshot();assert.equal(ready.renderMetrics.assetStats.kind,'design-glb-v2');assert.equal(ready.renderMetrics.modelCount,12);assert.equal(ready.players.length,12);assert.equal(ready.contractsStatus,'ready');assert.equal(ready.renderMetrics.designScene.status,'ready');
+        const ready=await snapshot();/* v24: 11 v 11 on the Codex shared body v2 (athlete-body-v2.mjs); the v7 files are the fallback only. */assert.equal(ready.renderMetrics.assetStats.kind,'athlete-body-v2');assert.ok(ready.renderMetrics.modelCount>0&&ready.renderMetrics.modelCount<=22,'only visible players are counted as models: '+ready.renderMetrics.modelCount);assert.equal(ready.players.length,22);assert.equal(ready.contractsStatus,'ready');assert.equal(ready.renderMetrics.designScene.status,'ready');
         assert.equal(await page.locator('html').getAttribute('dir'),'rtl');assert.notEqual(await page.locator('.game-screen').getAttribute('data-orientation-blocked'),'true');
-        for(const suffix of ['design/controls/soccer.json','design/controls/interaction.json','design/tactics/soccer.json','assets/soccer-v7/player-01-near.glb','design/models2/soccer-stadium.glb'])assert.ok(requests.some(url=>new URL(url).pathname.endsWith(suffix)),suffix+' must be consumed by the native game');
+        for(const suffix of ['design/controls/soccer.json','design/controls/interaction.json','design/tactics/soccer.json','assets/soccer-v24/body/models/soccer.glb','design/models2/soccer-stadium.glb'])assert.ok(requests.some(url=>new URL(url).pathname.endsWith(suffix)),suffix+' must be consumed by the native game');
         await page.evaluate(()=>{window.__soccerControlEvents=[];window.__soccerPointerTrace=[];for(const type of ['pointerdown','pointermove','pointerup','pointercancel','resize'])addEventListener(type,event=>window.__soccerPointerTrace.push({type,id:event.pointerId,x:event.clientX,y:event.clientY,target:event.target?.id,trusted:event.isTrusted,time:performance.now(),width:innerWidth,height:innerHeight}),true);const model=window.__island.games.current.session.debug.model,original=model.drainEvents;model.drainEvents=function(){const events=original.call(this);window.__soccerControlEvents.push(...events);return events;};});
         const fixture=()=>page.evaluate(()=>{
           const session=window.__island.games.current.session,model=session.debug.model,s=model.getState(),config=window.__island.data.config.minigames.soccer;session.setPaused(false);model.clearInput();
@@ -60,6 +60,9 @@ test('soccer supplied controls in the native game, with real CSP, both orientati
         const screenshot=async name=>{if(output)await page.screenshot({path:path.join(output,`${tag}-${name}.png`)});};
         cdp=await context.newCDPSession(page);const touch=(type,points)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:points.map(point=>({...point,radiusX:6,radiusY:6,force:1}))});
 
+        // The game entered fullscreen on the trusted "play" click; Chromium refuses to change the bounds of a fullscreen window
+        // (page.setViewportSize throws), so the viewport is resized through the emulation layer: the page still gets a real resize.
+        const resize=size=>cdp.send('Emulation.setDeviceMetricsOverride',{width:size.width,height:size.height,deviceScaleFactor:1,mobile:false,screenWidth:size.width,screenHeight:size.height});
         await fixture();await page.clock.runFor(32);const start=await centre('#joystick'),shoot=await centre('#shoot'),left={id:11,...start},moving={...left,x:left.x+42},right={id:12,...shoot};
         await touch('touchStart',[left]);await touch('touchMove',[moving]);await page.clock.runFor(160);await touch('touchStart',[moving,right]);await page.clock.runFor(220);
         let current=await snapshot();assert.ok(current.players[0].x>.35);assert.equal(current.charging,true);assert.ok(current.charge>.15);
@@ -67,7 +70,9 @@ test('soccer supplied controls in the native game, with real CSP, both orientati
         // Chromium can coalesce native moves until its next compositor frame.
         // Require that trusted pointer delivery, rather than guessing its delay.
         let dragDelivered=false;
-        for(let attempt=0;attempt<20;attempt++){await page.clock.runFor(16);dragDelivered=await page.evaluate(point=>window.__soccerPointerTrace.some(event=>event.type==='pointermove'&&event.target==='shoot'&&event.trusted&&Math.abs(event.x-point.x)<1&&Math.abs(event.y-point.y)<1),drag);if(dragDelivered)break;}
+        // The compositor frame is real time, not the installed clock: with 22 players on software GL a frame can take longer than
+        // twenty quick polls, so each miss also waits real time (v24, 11 v 11).
+        for(let attempt=0;attempt<80;attempt++){await page.clock.runFor(16);dragDelivered=await page.evaluate(point=>window.__soccerPointerTrace.some(event=>event.type==='pointermove'&&event.target==='shoot'&&event.trusted&&Math.abs(event.x-point.x)<1&&Math.abs(event.y-point.y)<1),drag);if(dragDelivered)break;await new Promise(resolve=>setTimeout(resolve,50));}
         assert.equal(dragDelivered,true,'the second native thumb must deliver a captured move');await page.clock.runFor(32);current=await snapshot();assert.equal(current.kickAim.manual,true);assert.ok(current.kickAim.x>0&&current.kickAim.z<0);await screenshot('two-touch-shot');
         await touch('touchEnd',[]);await page.clock.runFor(64);assert.equal((await events()).filter(event=>event.type==='shot'&&event.player===0).length,1);
 
@@ -80,7 +85,7 @@ test('soccer supplied controls in the native game, with real CSP, both orientati
 
         await fixture();await page.clock.runFor(32);await page.locator('#shoot').focus();await page.keyboard.down('Space');await page.clock.runFor(160);assert.equal((await snapshot()).charging,true);await page.locator('[data-action="game-pause"]').click({force:true});await page.clock.runFor(32);const paused=await snapshot();await page.keyboard.up('Space');await page.clock.runFor(300);const still=await snapshot();assert.equal(still.elapsed,paused.elapsed);assert.deepEqual(still.players,paused.players);await page.locator('[data-action="game-resume"]').click({force:true});await page.clock.runFor(64);assert.equal((await events()).some(event=>event.type==='shot'),false);
 
-        await fixture();await page.clock.runFor(32);await page.locator('#shoot').focus();await page.keyboard.down('Space');await page.clock.runFor(160);await page.setViewportSize({width:viewport.width+1,height:viewport.height});await page.clock.runFor(64);await page.keyboard.up('Space');await page.setViewportSize(viewport);await page.clock.runFor(64);assert.equal((await snapshot()).charging,false);assert.equal((await events()).some(event=>event.type==='shot'),false);
+        await fixture();await page.clock.runFor(32);await page.locator('#shoot').focus();await page.keyboard.down('Space');await page.clock.runFor(160);await resize({width:viewport.width+1,height:viewport.height});await page.clock.runFor(64);await page.keyboard.up('Space');await resize(viewport);await page.clock.runFor(64);assert.equal((await snapshot()).charging,false);assert.equal((await events()).some(event=>event.type==='shot'),false);
 
         // Geometry/state fixtures freeze only model time, after native actions
         // above proved the real running input path. All labels/slots are still
@@ -98,7 +103,12 @@ test('soccer supplied controls in the native game, with real CSP, both orientati
           const visible=[];
           for(const slot of ['primary','secondary','sprint','trick']){
             const expected=contract.states[stateKey].controls.find(entry=>entry.slot===slot),node=page.locator(selectors[slot]);assert.equal(await node.isVisible(),Boolean(expected),stateKey+':'+slot);
-            if(expected){assert.equal(await node.getAttribute('data-design-action'),expected.id);assert.equal(await node.getAttribute('aria-label'),contract.controls[expected.id].aria_label);const box=await node.boundingBox();assert.ok(box.width>=48&&box.height>=48);assert.ok(box.x>=0&&box.y>=0&&box.x+box.width<=viewport.width+.1&&box.y+box.height<=viewport.height+.1);visible.push({slot,id:expected.id,...box});}
+            if(expected){assert.equal(await node.getAttribute('data-design-action'),expected.id);
+              // v24.1: with the ball the fourth button is the lob ("הגבהה") and a high ball renames the kick; the session marks those with data-air.
+              const air=await node.getAttribute('data-air'),aria=await node.getAttribute('aria-label');
+              if(air==='lob'){assert.equal(slot,'trick',stateKey);assert.equal(aria,'מסירה גבוהה');}
+              else if(air)assert.ok(aria&&aria.trim(),stateKey+':'+slot+' has a spoken name for '+air);
+              else assert.equal(aria,contract.controls[expected.id].aria_label,stateKey+':'+slot);const box=await node.boundingBox();assert.ok(box.width>=48&&box.height>=48);assert.ok(box.x>=0&&box.y>=0&&box.x+box.width<=viewport.width+.1&&box.y+box.height<=viewport.height+.1);visible.push({slot,id:expected.id,...box});}
           }
           layouts.push({state:stateKey,controls:visible});if(['attack','defense','throw_in','goalkeeper','keeper_ball'].includes(stateKey))await screenshot('state-'+stateKey);
         }

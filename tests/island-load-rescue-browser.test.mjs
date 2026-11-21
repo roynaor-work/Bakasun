@@ -10,7 +10,7 @@ const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enab
 const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine'}};
 const STUCK=5000;
 
-async function setup(testContext,hold){
+async function setup(testContext,hold,query=''){
  const defer=browserCleanup(testContext);
  const chromium=await islandChromium();
  const server=await serveIsland('/workout/island/');
@@ -27,7 +27,7 @@ async function setup(testContext,hold){
  await context.route('**/*',route=>{if(state.holding&&hold.test(route.request().url())){state.held.push(route);state.intercepted++;return;}return route.continue();});
  state.release=async()=>{state.holding=false;const list=state.held.splice(0);for(const r of list)await r.continue().catch(()=>{});};
  defer(state.release);
- await page.goto(server.url+`?dev=1&loadStuckMs=${STUCK}`,{waitUntil:'domcontentloaded'});
+ await page.goto(server.url+`?dev=1&loadStuckMs=${STUCK}${query}`,{waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
  if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=50000;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;
@@ -75,7 +75,9 @@ for(const [name,g] of Object.entries(GAMES)){
    assert.ok(await t.page.locator('[data-action=rescue-back]').count(),'back to menu is offered');
    const text=await t.page.locator('[data-load-rescue]').innerText();
    assert.ok(!text.includes('!'),'no exclamation marks');
-   assert.match(text,/נתקע\? אתחול המשחק/);
+   // strings-patches-v1 (v24.7): the hint explains the wait and that saves stay; the button says "restart".
+   assert.match(text,/הטעינה נמשכת זמן רב\. אפשר להמתין עוד או להפעיל את המשחק מחדש\. השמירות לא נמחקות\./);
+   assert.equal((await t.page.locator('[data-action=rescue-restart]').first().innerText()).trim(),'הפעלה מחדש');
    await t.page.locator('[data-action=rescue-restart]').first().click();
    await t.state.release();
    await ready(t.page);
@@ -86,6 +88,14 @@ for(const [name,g] of Object.entries(GAMES)){
    await t.csp.assertClean();
  });
 }
+
+test('soccer: ?strings=v246 puts the previous restart wording back on the rescue button',{skip:!enabled,timeout:600000},async tctx=>{
+ const g=GAMES.soccer,t=await setup(tctx,g.hold,'&strings=v246');
+  assert.equal(await launch(t.page,g.id),0,'no rescue box at launch');
+  await t.page.waitForSelector('[data-load-rescue] [data-action=rescue-restart]',{timeout:30000});
+  assert.equal((await t.page.locator('[data-action=rescue-restart]').first().innerText()).trim(),'נתקע? אתחול המשחק');
+  await t.csp.assertClean();
+});
 
 test('ski: second stuck attempt offers the light version, third offers clearing only this game\'s asset cache; saves and other games\' files stay',{skip:!enabled,timeout:600000},async tctx=>{
  const g=GAMES.alpine,t=await setup(tctx,g.hold);
@@ -104,10 +114,13 @@ test('ski: second stuck attempt offers the light version, third offers clearing 
   const ski=manifest.games.alpine[0],soccer=manifest.games.soccer[0];
   await t.page.evaluate(async([a,b,base])=>{const c=await caches.open('island-assets-test');await c.put(new URL(a,base).href,new Response('x'));await c.put(new URL(b,base).href,new Response('y'));localStorage.setItem('island.test.sentinel','1');indexedDB.open('island-test-db');},[ski,soccer,t.server.url]);
   await t.page.locator('[data-action=rescue-clear]').click();
-  await t.page.waitForFunction(async()=> (await (await caches.open('island-assets-test')).keys()).length===1,
-   null,{polling:250,timeout:30000});
-  const left=await t.page.evaluate(async()=>(await (await caches.open('island-assets-test')).keys()).map(r=>new URL(r.url).pathname));
-  assert.equal(left.length,1);assert.ok(left[0].endsWith('/'+soccer),'the soccer file stayed: '+left);
+  // One awaited read per poll: the list that is checked is the list that was counted (a separate wait and read raced the clearing on a busy machine).
+  let left=[];
+  for(const deadline=Date.now()+30000;Date.now()<deadline;await new Promise(resolve=>setTimeout(resolve,250))){
+   left=await t.page.evaluate(async()=>(await (await caches.open('island-assets-test')).keys()).map(r=>new URL(r.url).pathname));
+   if(left.length===1)break;
+  }
+  assert.equal(left.length,1,left.join(' '));assert.ok(left[0].endsWith('/'+soccer),'the soccer file stayed: '+left);
   await t.state.release();
   await ready(t.page);
   const after=await t.page.evaluate(()=>({keys:Object.keys(localStorage).filter(k=>!/lastLoadReport$/.test(k)&&k!=='island.test.sentinel').sort(),sentinel:localStorage.getItem('island.test.sentinel'),report:localStorage.getItem('island.alpine.lastLoadReport')}));

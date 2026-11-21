@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
-import {pathsFor,hrefOf,cacheName} from '../workout/island/ui/offline.mjs';
+import {pathsFor,hrefOf,cacheName,megabytes} from '../workout/island/ui/offline.mjs';
 import {DATA_VERSION} from '../workout/island/release.mjs';
 
 /** Offline v25 in a real browser (ISLAND_CSP_BROWSER=1 or ISLAND_OFFLINE_BROWSER=1): the background
@@ -16,6 +16,9 @@ const island=new URL('../workout/island/',import.meta.url);
 const manifest=JSON.parse(await readFile(new URL('offline-manifest.json',island),'utf8'));
 const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
 const GAMES={soccer:'soccer',hoops:'streetSlam'};
+/** The size a package row must show: the manifest's bytes for that package, so a release that adds files to a package
+ * (v24.7: tennis callouts and crowd recordings, 4.7 -> 4.9 MB) does not need a new literal here. */
+const packSize=game=>megabytes(pathsFor(manifest,[game]).reduce((sum,p)=>sum+(manifest.files?.[p]?.[1]||0),0))+' MB';
 
 async function open(browser,server,{saveData=false,contextOptions={}}={}){
  const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1,...contextOptions});
@@ -69,9 +72,9 @@ test('v25: the background download keeps the shell and the main games only; the 
   await t.page.waitForFunction(()=>document.querySelector('[data-offline-panel][data-v25] .offline-pack[data-game=soccer][data-state=ready]'));
   const rows=await t.page.evaluate(()=>[...document.querySelectorAll('.offline-pack')].map(li=>({game:li.dataset.game,state:li.dataset.state,size:li.querySelector('.offline-pack-size').textContent,action:li.querySelector('button')?.dataset.action})));
   assert.equal(rows.length,12);
-  assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:'24 MB',action:'offline-pack-delete'});
+  assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:packSize('soccer'),action:'offline-pack-delete'});
   const tennis=rows.find(r=>r.game==='tennis');assert.ok(['missing','partial'].includes(tennis.state),'tennis is not ready (files shared with the main games may already be there): '+JSON.stringify(tennis));
-  assert.equal(tennis.size,'4.7 MB');assert.equal(tennis.action,'offline-pack-download');
+  assert.equal(tennis.size,packSize('tennis'));assert.match(tennis.size,/^[1-9][\d.]* MB$/);assert.equal(tennis.action,'offline-pack-download');
   const texts=await t.page.evaluate(()=>({status:document.querySelector('.offline-status').textContent,storage:document.querySelector('[data-offline-storage]').textContent,install:document.querySelector('[data-action=offline-install]').textContent,installState:document.querySelector('[data-offline-panel]').dataset.install}));
   assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 12 משחקים מוכנים/);
   assert.match(texts.storage,/באחסון המכשיר: [\d.]+ MB/);assert.match(texts.storage,/שמירה קבועה: (כן|לא)/);
