@@ -1,6 +1,8 @@
 import { measure, seen } from './geometry.mjs?v=20261010-camera-1';
 import { FORM_HINTS, PROFILES } from './profiles.mjs?v=20261010-camera-1';
 import { HallProgress } from './hall.mjs?v=20261010-camera-1';
+import { RangeMeter, RANGE_COPY } from './range.mjs?v=20261010-camera-1';
+export { RANGE_COPY };
 export { CAMERA_EXERCISES } from './profiles.mjs?v=20261010-camera-1';
 
 export const MOTION_MAX_GAP_MS = 275;
@@ -9,6 +11,9 @@ const ACTIVITY_GAP = 1400;
 const COACH_MS = 950;
 const DEFAULT_CYCLE_MIN = 190;
 const TAU = Math.PI * 2;
+// After a movement returns to the start, the step counter gets this long to count it before the range decides.
+const VERDICT_MS = 450;
+const STEP_GRACE = 140;
 
 export class MotionCounter {
   constructor(id, { goal } = {}) {
@@ -23,6 +28,8 @@ export class MotionCounter {
     this.reference = null;
     this.lastSide = null;
     this.hall = new HallProgress();
+    this.range = new RangeMeter(id);
+    this.partials = 0;
     this.pause();
   }
 
@@ -57,10 +64,14 @@ export class MotionCounter {
     this.signalAt = null;
     this.last = null;
     this.requireNeutral = false;
+    this.range.reset();
+    this.trip = null;
+    this.tripCounted = false;
+    this.tripFromStart = false;
   }
 
   result(event = null, hint = null, side = null) {
-    return { count: this.count, activeMs: this.activeMs, event, hint, side,
+    return { count: this.count, activeMs: this.activeMs, event, hint, side, partials: this.partials, meter: null,
       sideCounts: [...this.sideCounts], sideMs: [...this.sideMs] };
   }
 
@@ -77,9 +88,45 @@ export class MotionCounter {
     const f = measure(points, aspect, this.reference, this.spec.required);
     if (!f) { this.pause(); return this.result('tracking'); }
     this.previous = timestamp;
-    const result = this.process(f, timestamp, gap);
+    const result = this.gauge(this.process(f, timestamp, gap), f, timestamp);
     this.last = f;
     return result;
+  }
+
+  // The range of the movement beside the step counter: the meter, a repetition that stopped short, a rushed
+  // pace, and the child's own range. Counting itself stays with the stages; the range never adds a count.
+  gauge(result, f, t) {
+    if (result.event === 'partial') this.partials++;
+    if (!this.range.spec) return { ...result, partials: this.partials };
+    const moving = this.range.trip != null;
+    const { meter, done } = this.range.update(f, t);
+    // A movement only speaks for a repetition when it began from the exercise's own starting position.
+    if (!moving && this.range.trip) this.tripFromStart = this.origin != null || this.cycle != null;
+    let out = { ...result, meter };
+    if (result.event === 'counted') this.tripCounted = true;
+    // The steps already said "partial" for this movement: the range gives the wording, once.
+    const stepPartial = result.event === 'partial';
+    if (done) { this.trip = { ...done, at: t, counted: this.tripCounted, said: stepPartial, fromStart: this.tripFromStart }; this.tripCounted = false; }
+    else if (stepPartial && this.trip) this.trip.said = true;
+    else if (stepPartial) this.stepPartialAt = t;
+    const trip = this.trip;
+    if (trip && (trip.counted || result.event === 'counted')) {
+      this.trip = null;
+      this.tripCounted = false;
+      out = { ...out, tempo: this.range.rushed(trip) };
+    } else if (trip && (t - trip.at >= VERDICT_MS || stepPartial || result.event === 'form')) {
+      this.trip = null;
+      // An uncounted movement from the starting position teaches the child's own range (two that agree);
+      // from then on the stages read the followed angle on the eased scale (see RangeMeter.eased).
+      const cycle = this.spec.mode === 'cycle' && !this.spec.alternate && !this.spec.twoSides;
+      const own = trip.fromStart && cycle ? this.range.learn(trip) : false;
+      if (!trip.reached && trip.peak >= .35) {
+        if (!trip.said && !(this.stepPartialAt != null && t - this.stepPartialAt < 1500)) this.partials++;
+        out = { ...out, event: 'partial', hint: this.range.spec.cue, short: true, own };
+      } else out = { ...out, own };
+      this.stepPartialAt = null;
+    }
+    return { ...out, partials: this.partials };
   }
 
   process(f, t, gap) {
@@ -219,14 +266,19 @@ export class MotionCounter {
       if (t - pending.issueAt >= 175) pending.issue = issue;
     } else pending.issueAt = null;
     const step = spec.steps[pending.index];
-    const matches = step?.test(f, pending);
+    const matches = step?.test(this.range.eased(f), pending);
     if (matches) {
       pending.stepAt ??= t;
+      pending.missAt = null;
       if (t - pending.stepAt >= step.dwell) {
         pending.index++;
         pending.stepAt = null;
       }
-    } else if (step) pending.stepAt = null;
+    } else if (step && pending.stepAt != null) {
+      // Hysteresis: a joint angle that flickers across its limit for one frame does not restart the stage.
+      pending.missAt ??= t;
+      if (t - pending.missAt > STEP_GRACE) pending.stepAt = pending.missAt = null;
+    }
     const completed = pending.index === spec.steps.length;
     const landed = (spec.finish ? spec.finish(f, pending) : rest) &&
       (!spec.stillFinish || this.last && f.dist(f.hip, this.last.hip) < .053);

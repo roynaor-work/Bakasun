@@ -8,6 +8,15 @@ const LINKS = [[11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28]];
 const minConfidence = .49;
 const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
+// Share of the background (outside the body) that changed between two frames. A frame above sceneStir is a
+// stir; consecutive stirs that add up to sceneMoved mean the phone itself moved.
+const sceneStir = .05, sceneMoved = .2;
+// Hysteresis: a joint must be clear to start (minConfidence), and may dip to this while the child is tracked.
+const stayConfidence = .36;
+// A child who was tracked and drops out for a blink (a fast jump, an arm across the body) keeps the
+// calibration for this long, so the count goes on without asking for a still pose in mid-exercise.
+const graceMs = 850;
+const calibrationGapMs = 220;
 
 const MESSAGES = {
   calibrating: 'אפשר להישאר רגע בתנוחת ההתחלה, כדי שנראה איפה הגוף שלך.',
@@ -24,6 +33,7 @@ const MESSAGES = {
   'face-camera': 'אפשר לפנות אל המצלמה.',
   reacquiring: 'המצלמה מחפשת שוב את תנוחת ההתחלה. אפשר לחכות רגע.',
   stale: 'רגע, המצלמה מחכה לתמונה חדשה.',
+  'phone-moved': 'הטלפון זז. נכוון שוב את המקום שלך בתמונה.',
 };
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -74,6 +84,35 @@ function crediblePerson(pose, aspect) {
   return (upperBody || body) && [...core, ...head].some(point => bounds(point));
 }
 
+// The model sometimes answers twice for one body (two overlapping detections). Two answers whose torsos sit
+// on the same spot at the same size are one person, not a second child in the room.
+function samePerson(a, b, aspect) {
+  const first = describe(a.landmarks, aspect), second = describe(b.landmarks, aspect);
+  if (!first || !second) return false;
+  const size = Math.max(first.torso, second.torso);
+  return distance(first.center, second.center, aspect) < .55 * size && Math.abs(Math.log(first.torso / second.torso)) < .45;
+}
+const clarity = pose => CORE.concat(25, 26, 27, 28).reduce((sum, id) => sum + (finite(pose.landmarks[id]) ? confidence(pose.landmarks[id]) : 0), 0);
+
+// Seen from the side, the far shoulder and leg hide behind the near ones and the model marks them as unsure
+// even when it places them well. A far joint the model still places inside the picture is accepted when its
+// near twin is seen clearly; a joint the model has no idea about (or puts outside) stays hidden. The far
+// arm is left alone: it moves on its own and hides behind the body.
+const TWINS = [[11, 12], [23, 24], [25, 26], [27, 28], [29, 30], [31, 32]];
+// Lying on the floor side-on, the far arm lies along the near one as the far leg does.
+const ARM_TWINS = [[13, 14], [15, 16]];
+const FAR_SIDE = .12;
+function pairSides(pose, arms) {
+  const landmarks = pose.landmarks.map(point => point);
+  for (const pair of arms ? [...TWINS, ...ARM_TWINS] : TWINS) for (const [near, far] of [pair, [pair[1], pair[0]]]) {
+    const a = landmarks[near], b = landmarks[far];
+    if (visible(a) && finite(b) && bounds(b) && confidence(b) >= FAR_SIDE && confidence(b) < minConfidence + .02) {
+      landmarks[far] = { ...b, visibility: minConfidence + .02, presence: Math.max(b.presence ?? 1, minConfidence + .02), paired: true };
+    }
+  }
+  return { ...pose, landmarks };
+}
+
 // An optional normalized rectangle allows capture code to sample around a
 // detected torso as well as across the image. Returns scalars only.
 export function measureLight(rgba, dimensions) {
@@ -118,6 +157,13 @@ export function measureLight(rgba, dimensions) {
   return light;
 }
 
+function fillsPicture(poses) {
+  const points = (Array.isArray(poses) ? poses : []).flatMap(pose => Array.isArray(pose?.landmarks) ? pose.landmarks.filter(point => visible(point, .3)) : []);
+  if (points.length < 3) return false;
+  const xs = points.map(p => clamp(p.x, 0, 1)), ys = points.map(p => clamp(p.y, 0, 1));
+  return (Math.max(...xs) - Math.min(...xs) + .2) * (Math.max(...ys) - Math.min(...ys) + .2) > .72;
+}
+
 function lightStatus(light) {
   if (!light || !Number.isFinite(light.p50) || !Number.isFinite(light.p90)) return null;
   const { p50, p90, subjectP50, subjectP90 } = light;
@@ -129,7 +175,7 @@ function lightStatus(light) {
   return null;
 }
 
-function framing(points, shape, required, setup) {
+function framing(points, shape, required, setup, minimum = minConfidence) {
   if (!shape) return 'missing';
   const body = pointsAt(points, BODY, .40);
   const head = pointsAt(points, HEAD, .40);
@@ -140,7 +186,7 @@ function framing(points, shape, required, setup) {
   const maxY = Math.max(...body.map(p => p.y));
   const headAtTop = head.some(p => p.y < .036) ||
     (head.length === 0 && shape.shoulder.y < .115);
-  const fit = required.find(group => group.every(id => visible(points[id]) && bounds(points[id], .017)));
+  const fit = required.find(group => group.every(id => visible(points[id], minimum) && bounds(points[id], .017)));
   const clipped = !fit && required.some(group => group.some(id => visible(points[id], .35) && !bounds(points[id], .035)));
   if (maxX - minX > .88 || maxY - minY > .89 || shape.torso > .43) return 'move-back';
   if (shape.torso < .057) return 'move-closer';
@@ -214,6 +260,10 @@ export class PoseTracker {
     this.lastTime = null;
     this.upperEdgeSince = null;
     this.demoShown = false;
+    this.movedFrames = this.movedSum = 0;
+    this.movedAt = null;
+    this.seenAt = null;
+    this.resumed = false;
     this._dropTrack();
   }
 
@@ -227,8 +277,18 @@ export class PoseTracker {
   }
 
   _blocked(status) {
-    this._dropTrack();
-    return { status, ready: false, pose: null, gap: true, calibration: null,
+    // A short loss of a tracked child keeps what was learnt, and one dropped frame while the starting pose is
+    // being measured does not start the measuring over; anything longer, or any other reason, starts over.
+    const allowed = this.calibration ? graceMs : calibrationGapMs;
+    const brief = ['missing', 'center'].includes(status) && this.seenAt != null && this.lastTime - this.seenAt <= allowed;
+    if (brief) {
+      this.shape = null;
+      this.filtered = null;
+      this.resumed = Boolean(this.calibration);
+    } else this._dropTrack();
+    // brief: the child was tracked a blink ago. The counter then keeps the repetition under way and decides
+    // by its own clock (the longest gap it bridges) whether the movement can still be followed.
+    return { status, ready: false, pose: null, gap: true, brief: brief && Boolean(this.calibration), calibration: null,
       hint: { code: status, text: MESSAGES[status] } };
   }
 
@@ -255,7 +315,7 @@ export class PoseTracker {
     };
   }
 
-  update({ poses = [], time, aspect = this.aspect, light } = {}) {
+  update({ poses = [], time, aspect = this.aspect, light, scene } = {}) {
     if (!Number.isFinite(time) || time < 0 || (this.lastTime != null && time <= this.lastTime)) {
       this.upperEdgeSince = null;
       return this._blocked('stale');
@@ -267,7 +327,24 @@ export class PoseTracker {
       this._dropTrack();
     }
     if (Number.isFinite(aspect) && aspect > 0) this.aspect = aspect;
-    const people = Array.isArray(poses) ? poses.filter(pose => crediblePerson(pose, this.aspect)) : [];
+    // The phone was knocked or picked up: the floor line and the framing learnt before no longer hold, so the
+    // track is dropped and the framing check and the short calibration run again. One changed frame can be a
+    // door or a passer-by; several in a row are the phone.
+    // A knock takes a few frames: each changes part of the background, and together they change a lot of it.
+    // With the body filling the picture there is too little background left to judge by.
+    // Only a child who is being tracked has anything to lose from a moved phone; before that the framing
+    // check is running anyway.
+    const stir = scene > sceneStir && Boolean(this.calibration) && !fillsPicture(poses);
+    if (stir) { this.movedFrames++; this.movedSum += scene; } else this.movedFrames = this.movedSum = 0;
+    if (this.movedFrames >= 2 && this.movedSum >= sceneMoved) this.movedAt = time;
+    if (this.movedAt != null && time - this.movedAt < 500) {
+      this.upperEdgeSince = null;
+      return this._blocked('phone-moved');
+    }
+    let people = Array.isArray(poses) ? poses.filter(pose => crediblePerson(pose, this.aspect)) : [];
+    if (people.length === 2 && samePerson(people[0], people[1], this.aspect)) {
+      people = [clarity(people[0]) >= clarity(people[1]) ? people[0] : people[1]];
+    }
     const illumination = lightStatus(light);
     if (people.length !== 1 || illumination) {
       this.upperEdgeSince = null;
@@ -277,9 +354,9 @@ export class PoseTracker {
       return this._blocked('missing');
     }
 
-    const person = people[0];
+    const person = this.view === 'side' ? pairSides(people[0], this.setup === 'floor') : people[0];
     const shape = describe(person.landmarks, this.aspect);
-    const looking = framing(person.landmarks, shape, this.required, this.setup);
+    const looking = framing(person.landmarks, shape, this.required, this.setup, this.calibration ? stayConfidence : minConfidence);
     if (looking === 'upper-edge') {
       this.upperEdgeSince ??= time;
       return this._blocked(time - this.upperEdgeSince >= 280 ? 'raise-phone' : 'center');
@@ -295,6 +372,7 @@ export class PoseTracker {
     this.shape = shape;
     this.filtered = smoothPose(person, this.filtered, clamp(dt, 12, 150), shape, this.aspect);
     const starting = !this.calibration;
+    this.seenAt = time;
     this.calibration ??= this._gather(shape, this.filtered, time);
     if (!this.calibration) {
       return { status: 'calibrating', ready: false, pose: null, gap: true, calibration: null,
@@ -302,6 +380,8 @@ export class PoseTracker {
     }
     const hint = this.demoShown ? null : { code: 'demo', text: MESSAGES.demo };
     this.demoShown = true;
-    return { status: 'ready', ready: true, pose: this.filtered, gap: starting, calibration: this.calibration, hint };
+    const gap = starting;
+    this.resumed = false;
+    return { status: 'ready', ready: true, pose: this.filtered, gap, calibration: this.calibration, hint };
   }
 }

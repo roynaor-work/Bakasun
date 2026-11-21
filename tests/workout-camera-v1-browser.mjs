@@ -3,7 +3,7 @@
    1. The real pose model (vendored WASM, CPU) loads under the page policy and answers frames of the fake camera;
       the fake picture holds no person, so the page must say where to stand, in text and through the device voice.
    2. A scripted skeleton replaces the pose worker: off to the side, feet cut, then two squats in the middle.
-   3. The flag: links in the app, ?cameraV1=0 without them, ?cameraV1=1 straight to the page.
+   3. The flag: opt-in. No entry link by default, the settings link stays, ?cameraV1=1 shows the entry link, ?cameraV1=0 hides all.
    Nothing here measures accuracy on a real child. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -175,6 +175,8 @@ test('camera v1: scripted skeleton. Off to the side, feet cut, then two squats c
     assert.equal(await page.locator('#camera-preview').getAttribute('data-parts'), null);
     assert.equal(await page.locator('#camera-preview').getAttribute('data-seen'), 'yes');
     assert.equal(await page.locator('#big-count').textContent(), '2');
+    assert.equal(await page.locator('#range').isVisible(), true, 'the range bar is on the picture for a counted strength exercise');
+    assert.ok(await page.evaluate(() => document.getElementById('meter').value) >= 0);
     await shot(page, '5-two-squats');
     const said = (await page.evaluate(() => audit.said)).map(strip);
     const order = [MOVES.left.say, PARTS.feet.say, LINES.ok.say].map(line => said.findIndex(text => text.includes(strip(line))));
@@ -184,13 +186,22 @@ test('camera v1: scripted skeleton. Off to the side, feet cut, then two squats c
     await page.locator('#finish').tap();
     await page.waitForFunction(() => audit.tracks.every(t => t.readyState === 'ended'));
     assert.match(await page.locator('#summary').textContent(), /2 חזרות לפי תנועה שנראתה/);
+    // The manual fix: plus one, shown apart from what the camera saw; minus brings it back, and never below zero.
+    const fix = page.locator('#results li button');
+    assert.equal(await fix.count(), 2);
+    await fix.nth(1).tap();
+    assert.match(await page.locator('#results').textContent(), /2 חזרות לפי תנועה שנראתה · תיקון שלך: ועוד 1/);
+    await fix.nth(0).tap(); await page.locator('#results li button').nth(0).tap();
+    assert.match(await page.locator('#results').textContent(), /תיקון שלך: פחות 1/);
+    await page.locator('#results li button').nth(0).tap();
+    assert.equal(await page.locator('#results li button').nth(0).isDisabled(), true);
     await shot(page, '6-summary');
     await clean(page, log);
     await context.close();
   } finally { await browser.close(); srv.close(); }
 });
 
-test('camera v1: the flag. Links in the app, ?cameraV1=0 without them, ?cameraV1=1 straight to the page', { skip: !enabled, timeout: 120000 }, async () => {
+test('camera v1: the flag is opt-in. No entry link by default, ?cameraV1=1 shows it, ?cameraV1=0 hides everything', { skip: !enabled, timeout: 120000 }, async () => {
   const { chromium } = await import(pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href);
   const sizes = new Map();
   const { srv, base } = await serve(sizes);
@@ -200,21 +211,23 @@ test('camera v1: the flag. Links in the app, ?cameraV1=0 without them, ?cameraV1
     await context.route(/^(?:https?|wss?):\/\/(?!127\.0\.0\.1)/, r => r.abort());
     const page = await context.newPage();
     await page.goto(base + '#/exercise/squats');
+    await page.locator('#solo').waitFor({ timeout: 30000 });
+    assert.equal(await page.locator('#camera-v1-link').count(), 0, 'no entry link without the opt-in');
+    await page.goto(base + '?cameraV1=1#/exercise/squats');
     const link = page.locator('#camera-v1-link');
     await link.waitFor({ timeout: 30000 });
     assert.equal(await link.getAttribute('href'), 'camera-v1/?ex=squats');
     if (SHOTS) { await link.scrollIntoViewIfNeeded(); await shot(page, '7-app-link'); }
+    sizes.clear();
     await page.goto(base + '?cameraV1=0#/exercise/squats');
     await page.locator('#solo').waitFor({ timeout: 30000 });
     assert.equal(await page.locator('#camera-v1-link').count(), 0);
     assert.ok(![...sizes.keys()].some(u => /camera-v1\/(?!flag)/.test(u)), 'with the flag off the app loads nothing of v1 beyond the flag reader');
     await page.goto(base + 'camera-v1/?cameraV1=0');
     await page.waitForURL(url => url.pathname === '/workout/' && url.search === '?cameraV1=0');
-    await page.goto(base + '?cameraV1=1&ex=squats');
-    await page.waitForURL(url => url.pathname === '/workout/camera-v1/' && url.search === '?ex=squats');
+    await page.goto(base + 'camera-v1/?ex=squats');
     await page.locator('#camera-start').waitFor();
     assert.equal(await page.locator('#exercise').inputValue(), 'squats');
-    await page.goto(base + 'camera-v1/?ex=squats');
     await page.locator('header a').tap();
     await page.waitForURL(url => url.pathname === '/workout/');
     await context.close();
