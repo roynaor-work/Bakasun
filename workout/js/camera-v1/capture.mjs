@@ -1,4 +1,7 @@
-const PERIOD_MS = 62;
+// One frame at a time, aiming at about 15 pose answers a second: the wait after an answer shrinks by the
+// time the model took, so a slower phone is not slowed further (replays lose fast jumps below 10 a second).
+const PERIOD_MS = 66;
+const MIN_WAIT_MS = 12;
 const FRAME_TIMEOUT_MS = 5000;
 const START_TIMEOUT_MS = 25000;
 const stopTracks = stream => stream?.getTracks().forEach(track => track.stop());
@@ -11,6 +14,7 @@ export class LocalCapture {
     this.onError = onError;
     this.cancelled = false;
     this.lastFrame = -1;
+    this.sentAt = 0;
   }
 
   async start() {
@@ -53,18 +57,19 @@ export class LocalCapture {
   schedule(timeout) {
     if (this.cancelled) return;
     this.watchdog = setTimeout(() => this.fail('timeout'), timeout);
-    this.tick = setTimeout(() => this.frame(), PERIOD_MS);
+    const wait = this.sentAt ? Math.max(MIN_WAIT_MS, PERIOD_MS - (performance.now() - this.sentAt)) : MIN_WAIT_MS;
+    this.tick = setTimeout(() => this.frame(), wait);
   }
 
   async frame() {
     if (this.cancelled) return;
     const { videoWidth, videoHeight, currentTime } = this.video;
     if (!videoWidth || !videoHeight || this.lastFrame === currentTime) {
-      this.tick = setTimeout(() => this.frame(), PERIOD_MS);
+      this.tick = setTimeout(() => this.frame(), MIN_WAIT_MS);
       return;
     }
     this.lastFrame = currentTime;
-    const time = performance.now();
+    const time = this.sentAt = performance.now();
     let bitmap;
     try {
       const scale = Math.min(1, 640 / Math.max(videoWidth, videoHeight));

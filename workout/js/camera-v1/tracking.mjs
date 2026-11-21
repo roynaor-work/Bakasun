@@ -170,7 +170,12 @@ function movedTooFast(previous, current, aspect, dt, calibration) {
   // jump is stronger evidence when bones in several parts change together.
   const resized = Math.abs(torsoShift) > .65 || (Math.abs(torsoShift) > .38 && corroboration >= 4);
   const bodySize = Math.max(current.torso, previous.torso, calibration?.torso ?? 0);
-  const relocated = distance(previous.center, current.center, aspect) > Math.max(.075, bodySize * (.51 + dt / 205));
+  // A jump moves the body up and down faster than a walk moves it sideways, and a slow phone sees it in
+  // fewer frames. The vertical allowance therefore grows faster with the frame interval; a sideways
+  // leap of the centre, which is how another person takes over the track, keeps the tight limit.
+  const sideways = Math.abs(previous.center.x - current.center.x) * aspect;
+  const relocated = sideways > Math.max(.075, bodySize * (.51 + dt / 205)) ||
+    distance(previous.center, current.center, aspect) > Math.max(.075, bodySize * (.51 + dt / 110));
   return resized || relocated;
 }
 

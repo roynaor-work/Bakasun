@@ -5,7 +5,9 @@ import { PROGRAMS } from '../programs.js?v=20261010-camera-1';
 import { LocalCapture } from './capture.mjs?v=20261010-camera-1';
 import { CAMERA_EXERCISES, MotionCounter, MOTION_MAX_GAP_MS } from './motion.mjs?v=20261010-camera-1';
 import { PoseTracker } from './tracking.mjs?v=20261010-camera-1';
-import { guide, GuideVoice } from './guide.mjs?v=20261010-camera-1';
+import { guide, GuideVoice, GUIDE_COPY } from './guide.mjs?v=20261010-camera-1';
+
+const { landscape: LANDSCAPE, goal: GOAL } = GUIDE_COPY.LINES;
 import { cameraV1Enabled } from './flag.mjs?v=20261010-camera-1';
 
 const node = id => document.getElementById(id);
@@ -19,6 +21,11 @@ function visible(id, show) {
 function status(state, message) {
   node('status').dataset.state = state;
   text('status', message);
+  text('big-status', message);
+  const box = node('camera-preview');
+  if (state === 'ready') box.dataset.seen = 'yes';
+  else if (['opening', 'waiting', 'paused', 'trust'].includes(state)) delete box.dataset.seen;
+  else box.dataset.seen = 'no';
 }
 function showHint(message = '') {
   text('hint', message);
@@ -73,12 +80,26 @@ let figure;
 let demoOpen = false;
 // Spoken guidance uses the app's own device-only voice helper, loaded on the tap that opens the camera.
 let speech = null;
+let numbers = null;
+let tipDone = false;
+let goalSaid = false;
+const say = line => { try { speech?.speakLocal(line, { quick: true }); } catch { /* text stays on screen */ } };
 const seenAt = {};
 const voice = new GuideVoice({ speak: line => speech?.speakLocal(line, { quick: true }) });
-function showMove(move = '') {
+function showMove(move = '', parts = []) {
   const box = node('camera-preview');
   if (move) box.dataset.move = move;
   else delete box.dataset.move;
+  if (parts.length) box.dataset.parts = parts.join(' ');
+  else delete box.dataset.parts;
+}
+// Running along the corridor and lying on the floor need a wide picture; an upright phone cuts them.
+function wideTip(sample) {
+  const needsWide = sample.aspect < 1 && (exercise.place === 'hall' || policy.setup === 'floor');
+  visible('tip', needsWide);
+  if (!needsWide) return;
+  text('tip', LANDSCAPE.text + '.');
+  if (!tipDone) { tipDone = true; say(LANDSCAPE.say + '.'); }
 }
 function quiet() {
   voice.reset();
@@ -94,6 +115,7 @@ const supportsCamera = () => policy && (!isTimed() || policy.kind !== 'reps');
 function renderProgress() {
   const done = credit();
   text('progress', String(isTimed() ? Math.floor(done + 0.00001) : done));
+  text('big-count', node('progress').textContent);
   text('target', 'מתוך ' + item.target + (isTimed() ? ' שניות' : ' חזרות'));
   node('trust-add').disabled = demoOpen || done >= item.target;
   node('trust-remove').disabled = demoOpen || trustDone <= 0;
@@ -185,6 +207,7 @@ function useTrust(reason = '') {
 }
 
 function onPose(sample) {
+  wideTip(sample);
   const result = tracker.update(sample);
   if (result.gap || !result.ready) counter.pause();
   slowFrames = lastSample != null && sample.time - lastSample > MOTION_MAX_GAP_MS ? slowFrames + 1 : Math.max(0, slowFrames - 1);
@@ -201,12 +224,8 @@ function onPose(sample) {
     } else {
       const instruction = guide(sample, result.status, policy, seenAt);
       let message = instruction?.text || result.hint?.text || 'מחפשים תנוחה ברורה כדי להמשיך.';
-      showMove(instruction?.move || '');
+      showMove(instruction?.move || '', instruction?.parts);
       voice.update(instruction, sample.time);
-      if (sample.aspect < 1 && (exercise.place === 'hall' || policy.setup === 'floor') &&
-          ['missing', 'move-back', 'center'].includes(result.status)) {
-        message += ' אפשר להניח את הטלפון לרוחב כדי שייכנס יותר מהתנועה.';
-      }
       status(result.status, message);
     }
     showHint();
@@ -228,7 +247,10 @@ function onPose(sample) {
   const motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect, world: result.pose.world });
   const cameraProgress = isTimed() ? motion.activeMs / 1000 : motion.count;
   cameraDone = Math.min(item.target, Number.isFinite(cameraProgress) ? Math.floor(cameraProgress + 0.00001) : 0);
-  if (cameraDone >= item.target) status('ready', 'הגעת ליעד. אפשר לסיים את התרגיל.');
+  // The count is read aloud, so a child who looks at the floor or the wall still hears it.
+  if (motion.event === 'counted' && !isTimed() && cameraDone < item.target && numbers) say(numbers.numWordTts(cameraDone));
+  if (cameraDone >= item.target && !goalSaid) { goalSaid = true; say(GOAL.say + '.'); }
+  if (cameraDone >= item.target) status('ready', GOAL.text + '.');
   else if (node('status').dataset.state !== 'ready' || sample.time >= demoUntil) {
     status('ready', 'מוכנים. אפשר להתחיל לזוז, או לבחור ״הדגם לי״.');
   }
@@ -252,6 +274,7 @@ function onPose(sample) {
 function startCamera() {
   if (demoOpen || capture) return;
   if (!speech) void import('../speech.js?v=20261014-w2g-1').then(module => { speech = module; }, () => {});
+  if (!numbers) void import('../count.js?v=20261010-camera-1').then(module => { numbers = module; }, () => {});
   tracker = new PoseTracker({
     view: policy.view === 'diagonal' ? 'either' : policy.view,
     setup: policy.setup,
@@ -281,6 +304,8 @@ function exerciseItem() {
   policy = CAMERA_EXERCISES[exercise.id];
   cameraDone = trustDone = timerElapsed = 0;
   counter = null;
+  tipDone = goalSaid = false;
+  visible('tip', false);
   node('attest').checked = false;
   text('trust-timer', 'התחלת שעון');
   text('exercise-name', exercise.name);

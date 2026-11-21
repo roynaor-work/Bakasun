@@ -40,3 +40,29 @@ video { display: block; width: auto; max-width: min(100%, 24rem); max-height: 47
 [data-move="back"] .move::before { content: "אחורה"; }
 [data-move="closer"] .move::before { content: "קרוב יותר"; }
 #status[data-state]:not([data-state="ready"]):not([data-state="trust"]):not([data-state="waiting"]) { font-size: 1.2rem; font-weight: 700; color: #ffd47d; }
+/* A child stands two or three steps from the phone: the picture fills the width, the count and the
+   instruction are drawn large over it, and the frame colour tells seen (green) from not seen (amber). */
+#camera-preview { width: 100%; border: 4px solid #6e569e; }
+#camera-preview[data-seen="yes"] { border-color: #58d68d; }
+#camera-preview[data-seen="no"] { border-color: #ffb84d; }
+#camera-preview video { width: 100%; max-width: 100%; max-height: 62dvh; }
+#big-count { position: absolute; inset-block-start: 0.4rem; right: 0.5rem; min-width: 4.2rem; padding: 0 0.6rem; border-radius: 1rem; background: #17132ad9; color: #fff; font-size: 4rem; font-weight: 800; line-height: 1.15; text-align: center; font-variant-numeric: tabular-nums; }
+#big-status { position: absolute; inset-inline: 0; inset-block-end: 0; margin: 0; padding: 0.5rem 0.7rem; background: #17132ae6; color: #ffd47d; font-size: 1.45rem; font-weight: 800; line-height: 1.3; text-align: center; }
+#camera-preview[data-seen="yes"] #big-status { color: #b9f5cf; font-size: 1.1rem; font-weight: 700; }
+#big-status:empty, #big-count:empty { display: none; }
+.body-map { position: absolute; inset-block-start: 0.4rem; left: 0.5rem; width: 3.4rem; padding: 0.25rem; border-radius: 0.8rem; background: #17132ad9; display: none; }
+#camera-preview[data-parts] .body-map { display: block; }
+.body-map .part { fill: none; stroke: #d7c3ff; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+[data-parts~="head"] .part-head, [data-parts~="shoulders"] .part-shoulders, [data-parts~="hands"] .part-hands,
+[data-parts~="hips"] .part-hips, [data-parts~="knees"] .part-knees, [data-parts~="feet"] .part-feet { stroke: #ff6b6b; stroke-width: 7; }
+#tip { color: #b8e0ff; font-weight: 700; }
+#setup .actions button { flex: 1 1 100%; min-height: 3.6rem; font-size: 1.2rem; }
+#setup select { min-height: 3.2rem; font-size: 1.05rem; }
+.controls label { flex: 1 1 100%; }
+.actions button { min-height: 3.2rem; font-size: 1.05rem; }
+#finish:not(:disabled) { background: #58d68d; color: #0c2a18; }
+@media (orientation: landscape) and (max-height: 500px) {
+  main { width: min(100% - 1rem, 60rem); margin: 0.4rem auto; }
+  header p, #verification { display: none; }
+  #camera-preview video { max-height: 78dvh; }
+}

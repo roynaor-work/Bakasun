@@ -12,6 +12,7 @@ import { cameraV1Enabled, cameraV1Href, cameraV1Redirect } from '../workout/js/c
 import { PoseTracker } from '../workout/js/camera-v1/tracking.mjs';
 import { CAMERA_EXERCISES } from '../workout/js/camera-v1/profiles.mjs';
 import { EXERCISES } from '../workout/js/exercises.js';
+import { sweep, summary, SHAPES } from '../workout/tools/camera-v1-accuracy.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = path => readFile(new URL(path, root), 'utf8');
@@ -217,4 +218,27 @@ test('measured on synthetic skeleton recordings (no real child): the numbers the
   assert.equal(totals.portraitMatches, 35, 'known gap: hall and four floor exercises stall with the phone upright');
   assert.equal(totals.wrongWithProgress, 0);
   for (const problem of ['dark', 'backlit', 'multiple']) assert.equal(totals.problems[problem].afterWithProgress, 0, problem);
+});
+
+test('accuracy sweep on synthetic skeletons: never an extra or a false count; exact at a normal pose rate in a wide picture', () => {
+  const wide = { 'wide 4:3': SHAPES['wide 4:3'] }, upright = { 'upright 3:4': SHAPES['upright 3:4'] };
+  // Normal conditions: wide picture, 15 pose answers a second, light jitter, normal speed.
+  const normal = summary(sweep(undefined, { shapes: wide, steps: [67], jitters: [.003], speeds: [1] }));
+  assert.equal(normal.exactPercent, 100);
+  assert.equal(normal.shapes['wide 4:3'].exercisesAlwaysExact, 50);
+  // Harder: both picture shapes, a slow phone (8 a second) and a fast child. Misses are allowed, inventions are not.
+  const rows = sweep(undefined, { shapes: { ...wide, ...upright }, steps: [67, 125], jitters: [.003], speeds: [1, 1.25] });
+  const hard = summary(rows);
+  assert.equal(hard.extraReps, 0);
+  assert.equal(hard.falseRuns, 0);
+  assert.equal(hard.wrongRuns, 400);
+  assert.ok(hard.steps['15 a second'].exactPercent >= 95, JSON.stringify(hard.steps));
+  assert.ok(hard.steps['8 a second'].exactPercent >= 75, JSON.stringify(hard.steps));
+  // Known limit, guarded so it is noticed if it changes: three corridor runs need the phone on its side.
+  assert.deepEqual(hard.shapes['upright 3:4'].exercisesNeverExact, ['shuttle-run', 'reaction-sprint', 'floor-wall-run']);
+  // Jumps that the tracker used to drop at a low pose rate (vertical allowance, 21/11/2026).
+  for (const id of ['squat-jumps', 'tuck-jumps', 'step-jumps']) {
+    const row = rows.find(candidate => candidate.id === id);
+    assert.ok(row.shapes['wide 4:3'].exact >= 3, id + ' ' + JSON.stringify(row.shapes));
+  }
 });
