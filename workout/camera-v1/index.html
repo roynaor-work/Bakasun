@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; media-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>האימון שלי · אימון מקומי</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="../js/camera-v1/session.mjs?v=20261010-camera-1"></script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>האימון שלי</h1>
+    <p>כל האימון נשאר במכשיר. המצלמה פועלת רק אם בוחרים להפעיל אותה. שום דבר לא מוקלט ולא נשמר.</p>
+    <a href="../">חזרה לאימון הרגיל</a>
+  </header>
+  <noscript>כדי להפעיל את האימון צריך JavaScript.</noscript>
+  <section id="unavailable" hidden>
+    <p>המצלמה נפתחת רק בכתובת מאובטחת של האפליקציה.</p>
+    <a href="../">חזרה לאימון הרגיל</a>
+  </section>
+  <section id="setup" hidden>
+    <div class="controls">
+      <label>אימון <select id="program"><option value="">תרגיל אחד</option></select></label>
+      <label id="exercise-choice">תרגיל <select id="exercise"></select></label>
+      <label>רמה <select id="level"><option value="easy">קל</option><option value="normal" selected>רגיל</option><option value="hard">חזק</option><option value="pro">אלוף</option></select></label>
+    </div>
+    <div class="actions">
+      <button id="camera-start" type="button">נתחיל עם מצלמה</button>
+      <button id="trust-start" type="button" class="secondary">נתחיל בלי מצלמה</button>
+    </div>
+  </section>
+  <section id="session" hidden>
+    <h2 id="exercise-name" tabindex="-1"></h2>
+    <p id="item-position"></p>
+    <div class="stage">
+      <div id="camera-preview" hidden>
+        <video id="camera" autoplay muted playsinline aria-label="תצוגה מקומית של המצלמה"></video>
+        <div class="guide" aria-hidden="true"></div>
+        <div class="move" aria-hidden="true"></div>
+        <svg class="body-map" viewBox="0 0 60 120" aria-hidden="true">
+          <circle class="part part-head" cx="30" cy="14" r="9"/>
+          <path class="part part-shoulders" d="M14 32 H46"/>
+          <path class="part part-hands" d="M14 32 L8 58 M46 32 L52 58"/>
+          <path class="part part-hips" d="M30 32 V62 M20 62 H40"/>
+          <path class="part part-knees" d="M20 62 L19 86 M40 62 L41 86"/>
+          <path class="part part-feet" d="M19 86 L18 110 H10 M41 86 L42 110 H50"/>
+        </svg>
+        <output id="big-count" aria-hidden="true"></output>
+        <p id="big-status" aria-hidden="true"></p>
+      </div>
+      <svg id="demonstration" role="img" aria-label="דמות שמדגימה את התרגיל" hidden></svg>
+    </div>
+    <div class="actions"><button id="demo" type="button" class="secondary" aria-expanded="false">הדגם לי</button></div>
+    <ol id="steps" hidden></ol>
+    <p id="verification"></p>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p id="side" hidden></p>
+    <p id="signal-status" role="status" aria-live="polite" hidden></p>
+    <div class="score"><output id="progress" aria-label="התקדמות">0</output><span id="target"></span></div>
+    <p id="hint" role="status" aria-live="polite" hidden></p>
+    <p id="tip" hidden></p>
+    <div id="camera-controls" class="actions" hidden>
+      <button id="retry" type="button" hidden>הפעלת מצלמה</button>
+      <button id="switch-trust" type="button" class="secondary">לעבור לאימון בלי מצלמה</button>
+    </div>
+    <div id="trust-controls" hidden>
+      <p>זה אימון על אמון. אנחנו סומכים על הספירה שלך. המצלמה והמיקרופון כבויים.</p>
+      <div class="actions">
+        <button id="trust-add" type="button">עשיתי עוד חזרה</button>
+        <button id="trust-remove" type="button" class="secondary">תיקון חזרה אחת</button>
+        <button id="trust-timer" type="button" hidden>התחלת שעון</button>
+      </div>
+      <label class="attest"><input id="attest" type="checkbox"> שמתי לב לתנועה ולגוף שלי. סימנתי את מה שעשיתי.</label>
+    </div>
+    <div class="actions">
+      <button id="signal" type="button" class="secondary" hidden>אות יציאה</button>
+      <button id="finish" type="button" disabled>סיום התרגיל</button>
+      <button id="skip" type="button" class="secondary">הלאה</button>
+      <button id="stop" type="button" class="secondary">סיום האימון</button>
+    </div>
+  </section>
+  <section id="summary" hidden>
+    <h2 id="summary-title" tabindex="-1">האימון הסתיים</h2>
+    <p id="reward"></p>
+    <ul id="results"></ul>
+    <button id="another" type="button">אימון נוסף</button>
+  </section>
+</main>
+</body>
+</html>

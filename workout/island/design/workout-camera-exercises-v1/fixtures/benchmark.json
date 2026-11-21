@@ -1,0 +1,2892 @@
+{
+  "totals": {
+    "catalog": 50,
+    "repExercises": 35,
+    "timedExercises": 15,
+    "baselineMeasuredReps": 7,
+    "comparable": {
+      "cases": 6,
+      "baselineExactCount": 5,
+      "afterExactCount": 6,
+      "baselineAbsoluteRepError": 2,
+      "afterAbsoluteRepError": 0
+    },
+    "cleanMatches": 50,
+    "cleanRepsMatches": 35,
+    "cleanTimeMatches": 15,
+    "portraitMatches": 35,
+    "landscapeMatches": 50,
+    "wrongMotionClips": 20,
+    "wrongWithProgress": 0,
+    "baselineWrongWithProgress": 1,
+    "problems": {
+      "dark": {
+        "baselineWithProgress": 5,
+        "afterWithProgress": 0
+      },
+      "backlit": {
+        "baselineWithProgress": 5,
+        "afterWithProgress": 0
+      },
+      "multiple": {
+        "baselineWithProgress": 5,
+        "afterWithProgress": 0
+      },
+      "multipleSwap": {
+        "baselineWithProgress": 0,
+        "afterWithProgress": 0
+      },
+      "absent": {
+        "baselineWithProgress": 0,
+        "afterWithProgress": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "jog",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1900,
+          4300
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 10,
+        "ms": 3350
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 10,
+        "ms": 3360
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 8,
+        "ms": 3350
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "arm-circles",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1800,
+          5000
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 3,
+        "ms": 3300
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 3,
+        "ms": 3280
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 3,
+        "ms": 3350
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "ankle-hops",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1400,
+          4000
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 7,
+        "ms": 2950
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 7,
+        "ms": 2960
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 7,
+        "ms": 2948
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "jumping-jacks",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 2,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "squat-jumps",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "high-knees",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1700,
+          4300
+        ]
+      },
+      "baselineReps": 0,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 10,
+        "ms": 3350
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 10,
+        "ms": 3360
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 10,
+        "ms": 3350
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "tuck-jumps",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "side-hops",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1000,
+          3900
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 5,
+        "ms": 2700
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 5,
+        "ms": 2720
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 5,
+        "ms": 2680
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "jump-rope",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1400,
+          4000
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 7,
+        "ms": 3000
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 7,
+        "ms": 3000
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 7,
+        "ms": 2948
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "burpees",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "star-jumps",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "broad-jump",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "single-leg-hops",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "step-jumps",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "hall-sprint",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "run-jump",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "run-vertical",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "bounding",
+      "unit": "reps",
+      "expected": {
+        "count": 1
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 1,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 1,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "shuttle-run",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "reaction-sprint",
+      "unit": "reps",
+      "expected": {
+        "count": 1
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 1,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 1,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "side-shuffle",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "carioca",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "skipping",
+      "unit": "reps",
+      "expected": {
+        "count": 1
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 1,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 1,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "floor-wall-run",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "back-run",
+      "unit": "reps",
+      "expected": {
+        "count": 1
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 1,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 1,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "crunches",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "bicycle",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "leg-raises",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "v-ups",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "plank",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3610
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3640
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3579
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "side-plank",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3610
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3640
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3646
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "hollow-hold",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3410
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 0,
+        "ms": 3378
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "flutter-kicks",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          700,
+          3500
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 8,
+        "ms": 2300
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 8,
+        "ms": 2345
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "russian-twists",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "superman",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "plank-jacks",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 0
+      },
+      "portraitMatch": false,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "crab-kicks",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "mountain-climbers",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          1300,
+          5200
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 8,
+        "ms": 4100
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 8,
+        "ms": 4040
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 8,
+        "ms": 4020
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "squats",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 2,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "lunges",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 0,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "calf-raises",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "glute-bridge",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 2,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "wall-sit",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3410
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3440
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3378
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "push-ups",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 2,
+      "baselineWrongReps": 0,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "knee-push-ups",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": 2,
+      "baselineWrongReps": 2,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": 2,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": 0,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "chair-dips",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "pike-push-ups",
+      "unit": "reps",
+      "expected": {
+        "count": 2
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 2,
+        "ms": 0
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 2,
+        "ms": 0
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 2,
+        "ms": 0
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": true,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "quad-stretch",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3310
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3360
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3378
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "hamstring-stretch",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3510
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3480
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3445
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    },
+    {
+      "id": "calf-stretch",
+      "unit": "time",
+      "expected": {
+        "activeMs": [
+          2700,
+          3800
+        ]
+      },
+      "baselineReps": null,
+      "baselineWrongReps": null,
+      "clean": {
+        "reps": 0,
+        "ms": 3310
+      },
+      "cleanMatch": true,
+      "portrait": {
+        "reps": 0,
+        "ms": 3280
+      },
+      "portraitMatch": true,
+      "landscape": {
+        "reps": 0,
+        "ms": 3244
+      },
+      "landscapeMatch": true,
+      "wrong": {
+        "reps": 0,
+        "ms": 0
+      },
+      "hasWrongMotion": false,
+      "problems": {
+        "dark": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "backlit": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multiple": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "multipleSwap": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        },
+        "absent": {
+          "baselineReps": null,
+          "afterReps": 0,
+          "afterMs": 0
+        }
+      }
+    }
+  ]
+}

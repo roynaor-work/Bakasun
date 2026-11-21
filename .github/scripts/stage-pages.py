@@ -13,6 +13,7 @@ RUNTIME_DIRS = (
     "workout/css/", "workout/icons/", "workout/img/", "workout/js/",
     "workout/royiki/", "workout/snd/", "workout/3d/", "workout/voice-rec/",
     "workout/cam-lab/models/", "workout/cam-lab/vendor/",
+    "workout/camera-v1/",
     *(ISLAND + folder + "/" for folder in (
         "activity", "assets", "data", "engine", "episodes", "extensions",
         "learning", "minigames", "presentation", "ui", "vendor", "view")),
@@ -34,6 +35,7 @@ UNWIRED_DESIGN = set("""
     crowd-v1 tennis-crowd-audio-v1 tennis-grip-v1 tennis-motion-v1 tennis-stadium-v1 tennis-ui-fx-v1 alien-fx-v1
     alpine-themes-v1 athlete-body-v2 catch-audio-v2 refill-enemyfire-v1 soccer-clips-v13 soccer-crowd-3d-v1
     soccer-fx-v1 soccer-pitch-v1 torpedo-sub-v1 tennis-callouts-v1 racing-audio-v6 racing-tracks-v3
+    workout-camera-exercises-v1
 """.split())
 REVIEW_DESIGN = ("-audit-v1", "-patches-v1")
 # Licence and attribution notes travel with the files they cover.

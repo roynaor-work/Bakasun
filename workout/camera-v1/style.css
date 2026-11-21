@@ -1,0 +1,68 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #17132a; color: #f7f2ff; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+main { width: min(100% - 2rem, 42rem); margin: 2rem auto; }
+h1, h2, p { margin-block: 0 0.75rem; }
+p, li { line-height: 1.6; }
+section { margin-block: 1rem; padding: 1rem; border: 1px solid #554581; border-radius: 1.25rem; background: #231b3e; }
+button, select, a { font: inherit; }
+button, select { min-height: 2.8rem; border: 1px solid transparent; border-radius: 0.75rem; padding: 0.4rem 0.8rem; }
+button { color: #211135; background: #d7c3ff; font-weight: 700; cursor: pointer; }
+button.secondary, select { background: #372959; color: #fff; border-color: #6e569e; }
+button:disabled { opacity: 0.52; cursor: default; }
+:focus-visible { outline: 3px solid #ffd47d; outline-offset: 3px; }
+a { color: #ddcaff; }
+.controls, .actions { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-block: 0.65rem; }
+.controls label { display: grid; gap: 0.25rem; max-width: 100%; }
+select { max-width: 100%; }
+.stage { display: flex; align-items: flex-start; justify-content: center; flex-wrap: wrap; gap: 0.75rem; }
+#camera-preview { position: relative; display: grid; width: fit-content; max-width: 100%; background: #0a0811; border-radius: 0.8rem; overflow: hidden; }
+video { display: block; width: auto; max-width: min(100%, 24rem); max-height: 47dvh; object-fit: contain; transform: scaleX(-1); }
+.guide { position: absolute; inset: 7%; border: 2px dashed #d6bdffb3; border-radius: 0.75rem; pointer-events: none; }
+#demonstration { width: min(100%, 15rem); max-height: 35dvh; }
+#demonstration .torso, #demonstration .limb, #demonstration .rope, #demonstration .ground { stroke: #d7c3ff; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#demonstration .ground, #demonstration .far { opacity: 0.5; }
+#demonstration .prop, #demonstration .head { fill: #d7c3ff; }
+.score { display: flex; gap: 0.65rem; align-items: baseline; }
+#progress { font-size: clamp(2rem, 9vw, 3rem); font-weight: 800; font-variant-numeric: tabular-nums; }
+#hint { color: #f7ddac; }
+.attest { display: flex; gap: 0.5rem; align-items: center; min-height: 2.8rem; }
+.attest input { width: 1.2rem; height: 1.2rem; flex: none; }
+/* Which way to move, drawn over the mirrored preview: the arrow points where the child should go on the screen. */
+.move { position: absolute; inset-block-start: 50%; translate: 0 -50%; display: none; padding: 0.1rem 0.6rem; border-radius: 0.75rem; background: #17132ad9; color: #ffd47d; font-size: 2.6rem; font-weight: 800; line-height: 1.2; pointer-events: none; }
+[data-move="left"] .move, [data-move="right"] .move, [data-move="back"] .move, [data-move="closer"] .move { display: block; }
+[data-move="left"] .move { left: 4%; }
+[data-move="left"] .move::before { content: "\2190"; }
+[data-move="right"] .move { right: 4%; }
+[data-move="right"] .move::before { content: "\2192"; }
+[data-move="back"] .move, [data-move="closer"] .move { left: 50%; translate: -50% -50%; font-size: 1.3rem; }
+[data-move="back"] .move::before { content: "אחורה"; }
+[data-move="closer"] .move::before { content: "קרוב יותר"; }
+#status[data-state]:not([data-state="ready"]):not([data-state="trust"]):not([data-state="waiting"]) { font-size: 1.2rem; font-weight: 700; color: #ffd47d; }
+/* A child stands two or three steps from the phone: the picture fills the width, the count and the
+   instruction are drawn large over it, and the frame colour tells seen (green) from not seen (amber). */
+#camera-preview { width: 100%; border: 4px solid #6e569e; }
+#camera-preview[data-seen="yes"] { border-color: #58d68d; }
+#camera-preview[data-seen="no"] { border-color: #ffb84d; }
+#camera-preview video { width: 100%; max-width: 100%; max-height: 62dvh; }
+#big-count { position: absolute; inset-block-start: 0.4rem; right: 0.5rem; min-width: 4.2rem; padding: 0 0.6rem; border-radius: 1rem; background: #17132ad9; color: #fff; font-size: 4rem; font-weight: 800; line-height: 1.15; text-align: center; font-variant-numeric: tabular-nums; }
+#big-status { position: absolute; inset-inline: 0; inset-block-end: 0; margin: 0; padding: 0.5rem 0.7rem; background: #17132ae6; color: #ffd47d; font-size: 1.45rem; font-weight: 800; line-height: 1.3; text-align: center; }
+#camera-preview[data-seen="yes"] #big-status { color: #b9f5cf; font-size: 1.1rem; font-weight: 700; }
+#big-status:empty, #big-count:empty { display: none; }
+.body-map { position: absolute; inset-block-start: 0.4rem; left: 0.5rem; width: 3.4rem; padding: 0.25rem; border-radius: 0.8rem; background: #17132ad9; display: none; }
+#camera-preview[data-parts] .body-map { display: block; }
+.body-map .part { fill: none; stroke: #d7c3ff; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+[data-parts~="head"] .part-head, [data-parts~="shoulders"] .part-shoulders, [data-parts~="hands"] .part-hands,
+[data-parts~="hips"] .part-hips, [data-parts~="knees"] .part-knees, [data-parts~="feet"] .part-feet { stroke: #ff6b6b; stroke-width: 7; }
+#tip { color: #b8e0ff; font-weight: 700; }
+#setup .actions button { flex: 1 1 100%; min-height: 3.6rem; font-size: 1.2rem; }
+#setup select { min-height: 3.2rem; font-size: 1.05rem; }
+.controls label { flex: 1 1 100%; }
+.actions button { min-height: 3.2rem; font-size: 1.05rem; }
+#finish:not(:disabled) { background: #58d68d; color: #0c2a18; }
+@media (orientation: landscape) and (max-height: 500px) {
+  main { width: min(100% - 1rem, 60rem); margin: 0.4rem auto; }
+  header p, #verification { display: none; }
+  #camera-preview video { max-height: 78dvh; }
+}
