@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const { NODE_TEST_CONTEXT, ...cleanEnv } = process.env;
 import { guide, GuideVoice, GUIDE_COPY } from '../workout/js/camera-v1/guide.mjs';
-import { cameraV1Enabled, cameraV1Href, cameraV1Redirect } from '../workout/js/camera-v1/flag.mjs';
+import { cameraV1Enabled, cameraV1Offered, cameraV1Href } from '../workout/js/camera-v1/flag.mjs';
 import { PoseTracker } from '../workout/js/camera-v1/tracking.mjs';
 import { CAMERA_EXERCISES } from '../workout/js/camera-v1/profiles.mjs';
 import { EXERCISES } from '../workout/js/exercises.js';
@@ -145,15 +145,15 @@ test('the voice waits for a steady instruction, does not repeat it at once, and 
   assert.doesNotThrow(() => broken.update(feet, 900));
 });
 
-test('?cameraV1=0 reverts, ?cameraV1=1 opens the page directly, anything else keeps the app with the link', () => {
+test('the entry link is opt-in: only ?cameraV1=1 offers it; ?cameraV1=0 hides everything; the settings link stays otherwise', () => {
+  assert.equal(cameraV1Offered(''), false);
+  assert.equal(cameraV1Offered('?cameraV1=0'), false);
+  assert.equal(cameraV1Offered('?cameraV1=true'), false);
+  assert.equal(cameraV1Offered('?cameraV1=1'), true);
+  assert.equal(cameraV1Offered('?x=2&cameraV1=1'), true);
   assert.equal(cameraV1Enabled(''), true);
   assert.equal(cameraV1Enabled('?cameraV1=0'), false);
   assert.equal(cameraV1Enabled('?cameraV1=1'), true);
-  assert.equal(cameraV1Redirect(''), null);
-  assert.equal(cameraV1Redirect('?cameraV1=0'), null);
-  assert.equal(cameraV1Redirect('?cameraV1=1'), 'camera-v1/');
-  assert.equal(cameraV1Redirect('?cameraV1=1&ex=squats&program=jump-a'), 'camera-v1/?ex=squats&program=jump-a');
-  assert.equal(cameraV1Redirect('?cameraV1=1&ex=%3Cscript%3E'), 'camera-v1/');
   assert.equal(cameraV1Href('squats'), 'camera-v1/?ex=squats');
   assert.equal(cameraV1Href('../x'), 'camera-v1/');
 });
@@ -193,8 +193,9 @@ test('the earlier app is untouched by the flag: index loads app.js, and app.js o
   assert.match(index, /src="js\/app\.js\?v=/);
   assert.doesNotMatch(index, /camera-v1/);
   const app = await read('workout/js/app.js');
-  assert.equal(app.match(/cameraV1Enabled\(\) \?/g).length, 2);
-  assert.match(app, /cameraV1Redirect\(\)/);
+  assert.equal(app.match(/cameraV1Enabled\(\) \?/g).length, 1, 'the settings link');
+  assert.equal(app.match(/cameraV1Offered\(\) \?/g).length, 1, 'the opt-in entry link');
+  assert.doesNotMatch(app, /location\.replace\([^)]*camera/i, 'the app never jumps to the camera page by itself');
   const stage = await read('.github/scripts/stage-pages.py');
   assert.match(stage, /"workout\/camera-v1\/"/);
   assert.match(stage, /workout-camera-exercises-v1/, 'the review pack itself is not published');

@@ -30,11 +30,11 @@ import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest
 import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261013-frames-1';
 import { confirmCameraUpload, disableUploadConfig, initializeUploadConfig, UPLOAD_CONTEXTS } from '../cam-lab/upload.mjs?v=20261013-frames-1';
 import { cameraScreen } from './camera-screen.mjs?v=20261014-w2g-1';
-import { cameraV1Enabled, cameraV1Href, cameraV1Redirect } from './camera-v1/flag.mjs?v=20261010-camera-1';
+import { cameraV1Enabled, cameraV1Offered, cameraV1Href } from './camera-v1/flag.mjs?v=20261010-camera-1';
 // camera v1 (21/11/2026): a separate device-only page that follows every catalogue exercise and says where to stand.
-// ?cameraV1=0 hides its links for the visit; ?cameraV1=1 opens it directly.
-{ const direct = cameraV1Redirect(); if (direct) location.replace(direct); }
-const cameraV1Link = id => cameraV1Enabled() ? `<a class="btn big" id="camera-v1-link" style="text-decoration:none" href="${cameraV1Href(id)}">אימון עם מצלמה שמכוונת אותך</a>` : '';
+// Opt-in until the internal tests pass: the entry link shows only with ?cameraV1=1; the settings link stays;
+// ?cameraV1=0 hides both for the visit.
+const cameraV1Link = id => cameraV1Offered() ? `<a class="btn big" id="camera-v1-link" style="text-decoration:none" href="${cameraV1Href(id)}">אימון עם מצלמה שמכוונת אותך</a>` : '';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
