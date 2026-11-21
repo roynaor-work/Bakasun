@@ -3,8 +3,8 @@
  * tap will hit), an arrow on the edge when the locked hull is out of the picture, a one-word reason when the shot cannot land on the
  * hull now (too far, another hull in the way, a submarine under water), and, until the first lock of a stage, a small "hold to lock"
  * hint over the nearest hull. Nothing is drawn unless lock-on is on (`?navalLock=0` keeps the v22 screen). */
-import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-21';
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
+import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-22';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-22';
 const TAU=Math.PI*2;
 export const NAVAL_LOCK_COLORS=Object.freeze({ready:'#62E6AA',turning:'#FFD166',far:'#FF9A5C',near:'#FF9A5C',blocked:'#FF9A5C',miss:'#FF9A5C',dive:'#FF9A5C',press:'#FFFFFF',outline:'#103847'});
 export const NAVAL_LOCK_WORDS=Object.freeze({far:'רחוק מדי · מתקרבים',blocked:'מטרה אחרת בדרך',dive:'מתחת למים · מחכים',hint:'החזיקו אצבע על ספינה',

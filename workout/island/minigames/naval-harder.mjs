@@ -14,7 +14,7 @@
  *  - Fire: the whole fleet fires `totalRate` of what it fired before (a bit more, not a lot). More hulls fire at once, so the gap between
  *    two shots of one hull (and of a shore gun) is set from the number of hulls on the water: `intervalScale` = hulls now / hulls before / totalRate.
  *    A longer stage with more hulls means more shells over the whole stage, so a hit may cost `damageScale` of the hull it cost before. */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-21';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-22';
 export const navalHarderEnabled=search=>polishValue('navalHarder',search)!=='0';
 export const NAVAL_HARDER_DEFAULTS=Object.freeze({
  lock:Object.freeze({pickScale:[.8,.6],needScale:[1.1,1.15],rangeScale:[.97,.95],marginScale:[.6,.3],graceScale:[.8,.6],

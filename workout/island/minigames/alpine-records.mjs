@@ -1,5 +1,5 @@
-import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-21';
-import {GHOST_KEY} from './alpine-league-ghost.mjs?v=island-v2-20261107-21';
+import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-22';
+import {GHOST_KEY} from './alpine-league-ghost.mjs?v=island-v2-20261107-22';
 
 /** Alpine Rush personal records (best time per course) in their own local key.
  * The island save keeps stages, stars, wins and coins; this file never touches it.

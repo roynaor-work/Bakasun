@@ -2,9 +2,9 @@
  * v15 (final fix, 11/11/2026): the same bar, wider and framed so a child notices it: green while the Vulcan
  * burst runs, red and blinking during the forced cool-down, a steady amber mark while the cannon fires at
  * its normal pace. Hidden when the guns are cold (a burst is ready). */
-import {drawV23Heat} from './alien-v23-draw.mjs?v=island-v2-20261107-21';
-import {drawV24Refills,drawV24Cold} from './alien-v24-draw.mjs?v=island-v2-20261107-21';
-import {drawV25Fx,drawV25Arsenal} from './alien-v25-draw.mjs?v=island-v2-20261107-21';
+import {drawV23Heat} from './alien-v23-draw.mjs?v=island-v2-20261107-22';
+import {drawV24Refills,drawV24Cold} from './alien-v24-draw.mjs?v=island-v2-20261107-22';
+import {drawV25Fx,drawV25Arsenal} from './alien-v25-draw.mjs?v=island-v2-20261107-22';
 export function drawV14Heat(p,m,aspect=1,scale=1){
  // v23 (13/11/2026): the bar shows the Vulcan's own heat (the steady cannon has none); ?alienFire=v15 keeps the v15 bar below.
  // v24 (14/11/2026): the falling Vulcan magazines, and while one keeps the barrels cold a cyan bar in place of the heat bar (?alienRefill=0: v23 as is).
