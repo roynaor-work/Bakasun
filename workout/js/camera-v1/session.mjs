@@ -3,11 +3,11 @@ import { Figure } from '../figure.js?v=20261010-camera-1';
 import { buildItems, workoutReward } from '../logic.js?v=20261014-w2g-1';
 import { PROGRAMS } from '../programs.js?v=20261010-camera-1';
 import { LocalCapture } from './capture.mjs?v=20261010-camera-1';
-import { CAMERA_EXERCISES, MotionCounter, MOTION_MAX_GAP_MS } from './motion.mjs?v=20261010-camera-1';
+import { CAMERA_EXERCISES, MotionCounter, MOTION_MAX_GAP_MS, RANGE_COPY } from './motion.mjs?v=20261010-camera-1';
 import { PoseTracker } from './tracking.mjs?v=20261010-camera-1';
-import { guide, GuideVoice, GUIDE_COPY } from './guide.mjs?v=20261010-camera-1';
+import { guide, GuideVoice, GUIDE_COPY, CueLimiter } from './guide.mjs?v=20261010-camera-1';
 
-const { landscape: LANDSCAPE, goal: GOAL } = GUIDE_COPY.LINES;
+const { landscape: LANDSCAPE, goal: GOAL, tight: TIGHT } = GUIDE_COPY.LINES;
 import { cameraV1Enabled } from './flag.mjs?v=20261010-camera-1';
 
 const node = id => document.getElementById(id);
@@ -85,6 +85,11 @@ let tipDone = false;
 let goalSaid = false;
 const say = line => { try { speech?.speakLocal(line, { quick: true }); } catch { /* text stays on screen */ } };
 const seenAt = {};
+// Corrections of the movement are rationed, so the child is coached and not nagged.
+const cues = new CueLimiter();
+let backSince = null;
+let ownSaid = false;
+const TIGHT_MS = 9000;
 const voice = new GuideVoice({ speak: line => speech?.speakLocal(line, { quick: true }) });
 function showMove(move = '', parts = []) {
   const box = node('camera-preview');
@@ -101,8 +106,23 @@ function wideTip(sample) {
   text('tip', LANDSCAPE.text + '.');
   if (!tipDone) { tipDone = true; say(LANDSCAPE.say + '.'); }
 }
+// The bar shows how far the repetition under way has gone; the word beside it says which way is further.
+function showRange(motion) {
+  const level = motion?.meter;
+  visible('range', Number.isFinite(level));
+  if (!Number.isFinite(level)) return;
+  node('meter').value = level;
+  text('meter-label', level >= 1 ? 'מצוין' : level >= .3 ? counter.range.spec.cue.text : '');
+}
+function showPartials(count = 0) {
+  visible('partials', count > 0);
+  if (count > 0) text('partials', 'כמעט חזרה (לא נספרה): ' + count);
+}
 function quiet() {
   voice.reset();
+  cues.reset();
+  backSince = null;
+  visible('range', false);
   delete seenAt.last;
   showMove();
   try { speech?.stopSpeak(); } catch { /* no voice on this device */ }
@@ -222,10 +242,18 @@ function onPose(sample) {
       counter.pause();
       status('slow', 'המצלמה מצלמת לאט כרגע. אפשר להמשיך בלי מצלמה.');
     } else {
-      const instruction = guide(sample, result.status, policy, seenAt);
+      let instruction = guide(sample, result.status, policy, seenAt);
+      // "Move back" that does not help for a while means the room is too small for this picture shape,
+      // which happens sooner the taller the child: say what else can be done.
+      if (instruction?.move === 'back') backSince ??= sample.time;
+      else backSince = null;
+      if (backSince != null && sample.time - backSince >= TIGHT_MS) {
+        instruction = { ...instruction, code: 'tight', text: TIGHT.text + '.', say: TIGHT.say + '.' };
+      }
       let message = instruction?.text || result.hint?.text || 'מחפשים תנוחה ברורה כדי להמשיך.';
       showMove(instruction?.move || '', instruction?.parts);
       voice.update(instruction, sample.time);
+      visible('range', false);
       status(result.status, message);
     }
     showHint();
@@ -234,6 +262,7 @@ function onPose(sample) {
   }
   renderSignal();
   showMove();
+  backSince = null;
   voice.update(null, sample.time);
   if (result.hint?.code === 'demo') {
     demoUntil = sample.time + 3200;
@@ -254,14 +283,23 @@ function onPose(sample) {
   else if (node('status').dataset.state !== 'ready' || sample.time >= demoUntil) {
     status('ready', 'מוכנים. אפשר להתחיל לזוז, או לבחור ״הדגם לי״.');
   }
-  const hint = motion.hint?.text || (typeof motion.hint === 'string' ? motion.hint : '');
+  showRange(motion);
+  showPartials(isTimed() ? 0 : motion.partials);
+  // One correction at a time: pace first, then the news that the child's own range is used, then the hint of
+  // the movement. "Switch side" is an instruction the child needs to go on, so it is never held back.
+  const words = motion.hint?.text || (typeof motion.hint === 'string' ? motion.hint : '');
+  const cue = motion.tempo ? { code: 'tempo', ...RANGE_COPY.SLOWER }
+    : motion.own && !ownSaid ? { code: 'own', ...RANGE_COPY.OWN, free: true }
+    : words ? { code: motion.event + ':' + words, text: words, say: motion.hint?.say || '', free: motion.event === 'switch' } : null;
+  if (cue?.code === 'own') ownSaid = true;
   if (motion.event === 'counted' && exercise.signal) visible('signal-status', false);
-  if (cameraDone >= item.target || motion.event === 'counted') {
+  if (cameraDone >= item.target || (motion.event === 'counted' && !cue)) {
     showHint();
     hintUntil = -Infinity;
-  } else if (hint) {
-    showHint(hint);
+  } else if (cue && (cue.free || cues.allow(cue.code, sample.time))) {
+    showHint(/[.?]$/.test(cue.text) ? cue.text : cue.text + '.');
     hintUntil = sample.time + 2800;
+    if (cue.say) say(cue.say + '.');
   } else if (sample.time >= hintUntil) showHint();
   if (policy.twoSides) {
     const amounts = isTimed() ? motion.sideMs.map(ms => Math.floor(ms / 1000)) : motion.sideCounts;
@@ -304,7 +342,8 @@ function exerciseItem() {
   policy = CAMERA_EXERCISES[exercise.id];
   cameraDone = trustDone = timerElapsed = 0;
   counter = null;
-  tipDone = goalSaid = false;
+  tipDone = goalSaid = ownSaid = false;
+  showPartials();
   visible('tip', false);
   node('attest').checked = false;
   text('trust-timer', 'התחלת שעון');
@@ -360,12 +399,11 @@ function cleanItem() {
   figure?.stop();
 }
 
-function finishWorkout() {
-  cleanItem();
-  visible('session', false);
-  visible('summary', true);
-  const summary = workoutReward(results);
-  text('reward', summary.message);
+// The end-of-workout list. The camera can miss a repetition or count one too many, so every counted row
+// carries a minus and a plus: the correction is kept apart as "what you marked", never as what was seen.
+function renderSummary() {
+  text('reward', workoutReward(results).message);
+  visible('fix-note', results.some(row => row.type !== 'time' && !row.skipped));
   node('results').replaceChildren(...results.map(row => {
     const li = document.createElement('li');
     const amount = value => value + ' ' + (row.type === 'time'
@@ -373,10 +411,36 @@ function finishWorkout() {
       : value === 1 ? 'חזרה' : 'חזרות');
     const observed = row.verified > 0 ? amount(row.verified) + ' לפי תנועה שנראתה' : '';
     const trust = row.declared > 0 ? amount(row.declared) + ' לפי מה שסימנת' : '';
-    const status = [observed, trust].filter(Boolean).join(' · ') || 'דילגתי';
-    li.textContent = row.name + ' · ' + status;
+    const fixed = row.fix ? 'תיקון שלך: ' + (row.fix > 0 ? 'ועוד ' : 'פחות ') + Math.abs(row.fix) : '';
+    const label = document.createElement('span');
+    label.textContent = row.name + ' · ' + ([observed, trust, fixed].filter(Boolean).join(' · ') || 'דילגתי');
+    li.append(label);
+    if (row.type !== 'time' && !row.skipped) {
+      const base = row.verified + row.declared;
+      for (const [sign, step, name] of [['−', -1, 'חזרה אחת פחות'], ['+', 1, 'חזרה אחת יותר']]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'secondary';
+        button.textContent = sign;
+        button.setAttribute('aria-label', name + ': ' + row.name);
+        button.disabled = step < 0 ? base + (row.fix || 0) <= 0 : base + (row.fix || 0) >= row.target;
+        button.onclick = () => {
+          row.fix = Math.max(-base, Math.min(row.target - base, (row.fix || 0) + step));
+          row.done = base + row.fix;
+          renderSummary();
+        };
+        li.append(button);
+      }
+    }
     return li;
   }));
+}
+
+function finishWorkout() {
+  cleanItem();
+  visible('session', false);
+  visible('summary', true);
+  renderSummary();
   node('summary-title').focus();
 }
 

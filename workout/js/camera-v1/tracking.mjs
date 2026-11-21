@@ -8,6 +8,8 @@ const LINKS = [[11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28]];
 const minConfidence = .49;
 const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
+// Share of the background (outside the body) that changed between two frames: above this the phone itself moved.
+const sceneMoved = .16;
 
 const MESSAGES = {
   calibrating: 'אפשר להישאר רגע בתנוחת ההתחלה, כדי שנראה איפה הגוף שלך.',
@@ -24,6 +26,7 @@ const MESSAGES = {
   'face-camera': 'אפשר לפנות אל המצלמה.',
   reacquiring: 'המצלמה מחפשת שוב את תנוחת ההתחלה. אפשר לחכות רגע.',
   stale: 'רגע, המצלמה מחכה לתמונה חדשה.',
+  'phone-moved': 'הטלפון זז. נכוון שוב את המקום שלך בתמונה.',
 };
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -72,6 +75,33 @@ function crediblePerson(pose, aspect) {
   const body = core.length >= 3 || (core.length >= 2 && (head.length >= 1 || lower.length >= 2) &&
     (describe(points, aspect)?.torso ?? 0) >= .023);
   return (upperBody || body) && [...core, ...head].some(point => bounds(point));
+}
+
+// The model sometimes answers twice for one body (two overlapping detections). Two answers whose torsos sit
+// on the same spot at the same size are one person, not a second child in the room.
+function samePerson(a, b, aspect) {
+  const first = describe(a.landmarks, aspect), second = describe(b.landmarks, aspect);
+  if (!first || !second) return false;
+  const size = Math.max(first.torso, second.torso);
+  return distance(first.center, second.center, aspect) < .55 * size && Math.abs(Math.log(first.torso / second.torso)) < .45;
+}
+const clarity = pose => CORE.concat(25, 26, 27, 28).reduce((sum, id) => sum + (finite(pose.landmarks[id]) ? confidence(pose.landmarks[id]) : 0), 0);
+
+// Seen from the side, the far shoulder and leg hide behind the near ones and the model marks them as unsure
+// even when it places them well. A far joint the model still places inside the picture is accepted when its
+// near twin is seen clearly; a joint the model has no idea about (or puts outside) stays hidden. The far
+// arm is left alone: it moves on its own and hides behind the body.
+const TWINS = [[11, 12], [23, 24], [25, 26], [27, 28], [29, 30], [31, 32]];
+const FAR_SIDE = .12;
+function pairSides(pose) {
+  const landmarks = pose.landmarks.map(point => point);
+  for (const pair of TWINS) for (const [near, far] of [pair, [pair[1], pair[0]]]) {
+    const a = landmarks[near], b = landmarks[far];
+    if (visible(a) && finite(b) && bounds(b) && confidence(b) >= FAR_SIDE && confidence(b) < minConfidence + .02) {
+      landmarks[far] = { ...b, visibility: minConfidence + .02, presence: Math.max(b.presence ?? 1, minConfidence + .02), paired: true };
+    }
+  }
+  return { ...pose, landmarks };
 }
 
 // An optional normalized rectangle allows capture code to sample around a
@@ -214,6 +244,8 @@ export class PoseTracker {
     this.lastTime = null;
     this.upperEdgeSince = null;
     this.demoShown = false;
+    this.movedFrames = 0;
+    this.movedAt = null;
     this._dropTrack();
   }
 
@@ -255,7 +287,7 @@ export class PoseTracker {
     };
   }
 
-  update({ poses = [], time, aspect = this.aspect, light } = {}) {
+  update({ poses = [], time, aspect = this.aspect, light, scene } = {}) {
     if (!Number.isFinite(time) || time < 0 || (this.lastTime != null && time <= this.lastTime)) {
       this.upperEdgeSince = null;
       return this._blocked('stale');
@@ -267,7 +299,19 @@ export class PoseTracker {
       this._dropTrack();
     }
     if (Number.isFinite(aspect) && aspect > 0) this.aspect = aspect;
-    const people = Array.isArray(poses) ? poses.filter(pose => crediblePerson(pose, this.aspect)) : [];
+    // The phone was knocked or picked up: the floor line and the framing learnt before no longer hold, so the
+    // track is dropped and the framing check and the short calibration run again. One changed frame can be a
+    // door or a passer-by; two in a row, or a second within a moment, is the phone.
+    this.movedFrames = scene > sceneMoved ? this.movedFrames + 1 : 0;
+    if (this.movedFrames >= 2) this.movedAt = time;
+    if (this.movedAt != null && time - this.movedAt < 500) {
+      this.upperEdgeSince = null;
+      return this._blocked('phone-moved');
+    }
+    let people = Array.isArray(poses) ? poses.filter(pose => crediblePerson(pose, this.aspect)) : [];
+    if (people.length === 2 && samePerson(people[0], people[1], this.aspect)) {
+      people = [clarity(people[0]) >= clarity(people[1]) ? people[0] : people[1]];
+    }
     const illumination = lightStatus(light);
     if (people.length !== 1 || illumination) {
       this.upperEdgeSince = null;
@@ -277,7 +321,7 @@ export class PoseTracker {
       return this._blocked('missing');
     }
 
-    const person = people[0];
+    const person = this.view === 'side' ? pairSides(people[0]) : people[0];
     const shape = describe(person.landmarks, this.aspect);
     const looking = framing(person.landmarks, shape, this.required, this.setup);
     if (looking === 'upper-edge') {

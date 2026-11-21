@@ -33,6 +33,16 @@ const finite = values => values.filter(Number.isFinite);
 export const max = values => finite(values).length ? Math.max(...finite(values)) : NaN;
 export const min = values => finite(values).length ? Math.min(...finite(values)) : NaN;
 
+// The knee-lift limits of the profiles were tuned on a body whose thigh is this many torso lengths. Children
+// differ (a six-year-old's legs are shorter for the same torso than an eleven-year-old's), so a knee lift
+// is read against the child's own thigh, measured while standing still, and restated on this scale.
+export const NOMINAL_THIGH = .9;
+const standingThigh = f => {
+  if (!(f.torsoUp > .65)) return null;
+  const lengths = f.sides.filter(side => side.kneeAngle >= 150 && Number.isFinite(side.kneeRise) && side.kneeRise < -.3).map(side => -side.kneeRise);
+  return lengths.length ? Math.max(...lengths) : null;
+};
+
 export function measure(points, aspect, reference, required) {
   const p = points.map(q => observed(q) ? { x: q.x * aspect, y: q.y } : null);
   const sides = SIDES.map((ids, index) => {
@@ -46,6 +56,7 @@ export function measure(points, aspect, reference, required) {
   if (!main || !hip || !shoulder) return null;
   const s = reference?.scale ?? distance(main.shoulder || shoulder, main.hip || hip);
   if (!(s >= .035)) return null;
+  const thighScale = reference?.thigh ? Math.max(.8, Math.min(1.7, NOMINAL_THIGH / reference.thigh)) : 1;
   const dx = (a, b) => a && b ? (a.x - b.x) / s : NaN;
   const dy = (a, b) => a && b ? (a.y - b.y) / s : NaN;
   const dist = (a, b) => distance(a, b) / s;
@@ -60,7 +71,7 @@ export function measure(points, aspect, reference, required) {
     side.sole = max([toe?.y, heel?.y, ankle ? ankle.y + .08 * s : NaN]);
     side.armUp = dy(shoulder, wrist);
     side.heelRise = dy(toe, heel);
-    side.kneeRise = dy(hip, knee);
+    side.kneeRise = dy(hip, knee) * thighScale;
   }
   const floor = reference?.floor ?? max(sides.map(side => side.sole));
   const clearance = y => (floor - y) / s;
@@ -70,10 +81,13 @@ export function measure(points, aspect, reference, required) {
   const feet = Math.abs(dx(left.ankle, right.ankle));
   const shoulders = Math.abs(dx(left.shoulder, right.shoulder));
   const face = p[0] && p[7] && p[8] ? dx(p[0], mean(p[7], p[8])) : dx(p[0], shoulder);
-  return { left, right, sides, main, hip, shoulder, nose: p[0], scale: s, floor, face, dx, dy, dist,
+  const out = { left, right, sides, main, hip, shoulder, nose: p[0], scale: s, floor, face, dx, dy, dist, thigh: reference?.thigh ?? null,
     footLift, kneeLift, feet, shoulders, clearance, hipRise: reference ? dy(reference.hip, hip) : 0,
     torsoUp: dy(hip, shoulder), torsoWide: Math.abs(dx(hip, shoulder)),
     kneeWidth: Math.abs(dx(left.knee, right.knee)), wristSpread: Math.abs(dx(left.wrist, right.wrist)),
     ankleOrder: Math.sign(dx(left.ankle, right.ankle)), bodyLine: main.line, kneeLine: main.kneeLine,
     kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle };
+  // A first measurement (no reference yet) of a standing child records the child's own thigh length.
+  if (!reference) out.thigh = standingThigh(out);
+  return out;
 }

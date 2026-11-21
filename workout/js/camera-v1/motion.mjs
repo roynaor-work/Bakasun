@@ -1,6 +1,8 @@
 import { measure, seen } from './geometry.mjs?v=20261010-camera-1';
 import { FORM_HINTS, PROFILES } from './profiles.mjs?v=20261010-camera-1';
 import { HallProgress } from './hall.mjs?v=20261010-camera-1';
+import { RangeMeter, RANGE_COPY } from './range.mjs?v=20261010-camera-1';
+export { RANGE_COPY };
 export { CAMERA_EXERCISES } from './profiles.mjs?v=20261010-camera-1';
 
 export const MOTION_MAX_GAP_MS = 275;
@@ -9,6 +11,8 @@ const ACTIVITY_GAP = 1400;
 const COACH_MS = 950;
 const DEFAULT_CYCLE_MIN = 190;
 const TAU = Math.PI * 2;
+// After a movement returns to the start, the step counter gets this long to count it before the range decides.
+const VERDICT_MS = 450;
 
 export class MotionCounter {
   constructor(id, { goal } = {}) {
@@ -23,6 +27,8 @@ export class MotionCounter {
     this.reference = null;
     this.lastSide = null;
     this.hall = new HallProgress();
+    this.range = new RangeMeter(id);
+    this.partials = 0;
     this.pause();
   }
 
@@ -57,10 +63,13 @@ export class MotionCounter {
     this.signalAt = null;
     this.last = null;
     this.requireNeutral = false;
+    this.range.reset();
+    this.trip = null;
+    this.tripCounted = false;
   }
 
   result(event = null, hint = null, side = null) {
-    return { count: this.count, activeMs: this.activeMs, event, hint, side,
+    return { count: this.count, activeMs: this.activeMs, event, hint, side, partials: this.partials, meter: null,
       sideCounts: [...this.sideCounts], sideMs: [...this.sideMs] };
   }
 
@@ -77,9 +86,47 @@ export class MotionCounter {
     const f = measure(points, aspect, this.reference, this.spec.required);
     if (!f) { this.pause(); return this.result('tracking'); }
     this.previous = timestamp;
-    const result = this.process(f, timestamp, gap);
+    const result = this.gauge(this.process(f, timestamp, gap), f, timestamp);
     this.last = f;
     return result;
+  }
+
+  // The range of the movement beside the step counter: the meter, a repetition that stopped short, a rushed
+  // pace, and the child's own range. The step counter keeps the first word: the range only speaks for a
+  // movement the steps did not count.
+  gauge(result, f, t) {
+    if (result.event === 'partial') this.partials++;
+    if (!this.range.spec) return { ...result, partials: this.partials };
+    const { meter, done } = this.range.update(f, t);
+    let out = { ...result, meter };
+    if (result.event === 'counted') this.tripCounted = true;
+    // The steps already said "partial" for this movement: the range gives the wording, once.
+    const stepPartial = result.event === 'partial';
+    if (done) { this.trip = { ...done, at: t, counted: this.tripCounted, said: stepPartial }; this.tripCounted = false; }
+    else if (stepPartial && this.trip) this.trip.said = true;
+    else if (stepPartial) this.stepPartialAt = t;
+    const trip = this.trip;
+    if (trip && (trip.counted || result.event === 'counted')) {
+      this.trip = null;
+      this.tripCounted = false;
+      const own = this.range.learn(trip);
+      out = { ...out, own, tempo: this.range.rushed(trip) };
+    } else if (trip && (t - trip.at >= VERDICT_MS || stepPartial || result.event === 'form')) {
+      this.trip = null;
+      const own = this.range.learn(trip);
+      if (trip.reached && this.range.need < 1 && result.event !== 'form' && this.spec.mode === 'cycle' &&
+          !this.spec.alternate && !this.spec.twoSides) {
+        // Inside the child's own range: counted, and the half-finished attempt of the step counter is dropped.
+        if (trip.said || this.stepPartialAt != null && t - this.stepPartialAt < 1500) this.partials = Math.max(0, this.partials - 1);
+        this.clearCycle(true, f, t);
+        out = { ...this.creditRep(t), meter, own, adapted: true };
+      } else if (!trip.reached && trip.peak >= .35) {
+        if (!trip.said && !(this.stepPartialAt != null && t - this.stepPartialAt < 1500)) this.partials++;
+        out = { ...out, event: 'partial', hint: this.range.spec.cue, short: true, own };
+      } else out = { ...out, own };
+      this.stepPartialAt = null;
+    }
+    return { ...out, partials: this.partials };
   }
 
   process(f, t, gap) {

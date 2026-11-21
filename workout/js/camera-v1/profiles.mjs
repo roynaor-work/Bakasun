@@ -27,6 +27,8 @@ const bothUp = f => f.sides.every(side => side.armUp > .55);
 const armsDown = f => f.sides.every(side => side.armUp < -.45);
 const feetWide = f => f.feet >= Math.max(.90, f.shoulders * 1.48);
 const feetNarrow = f => f.feet <= Math.max(.75, f.shoulders * 1.15);
+// The stance before a star jump is a comfortable crouch, a little wider than standing at attention.
+const feetComfortable = f => f.feet <= Math.max(.9, f.shoulders * 1.35);
 const armsWide = f => f.wristSpread > Math.max(1.40, f.shoulders * 1.7) && f.sides.every(side => side.armUp > -.24);
 const chest = f => f.dy(f.hip, f.shoulder);
 const reachFloor = f => f.clearance(f.main.wrist?.y) <= .24;
@@ -81,7 +83,8 @@ const plankStart = f => groundedPlank(f) && f.elbowAngle >= 145 && f.kneeAngle >
 
 export const PROFILES = {
   jog: activity({ ...standingSide, required: both(...LEGS) }, 'נרים כל רגל בתורה ונזיז את הידיים בנוחות.',
-    f => upright(f) ? kneeRaise(f, -.48, -.69) : undefined, { cueDwell: 45 }),
+    // An easy jog lifts the knee far less than a high-knee drill: the thigh about 40 degrees from the standing leg.
+    f => upright(f) ? kneeRaise(f, -.66, -.74) : undefined, { cueDwell: 45 }),
   'arm-circles': { ...standingSide, required: either(...ARMS), kind: 'activity', mode: 'circles',
     hint: 'נצייר עיגול גדול עם כף היד סביב הכתף, עם זרוע ארוכה ונינוחה.' },
   'ankle-hops': rep(jumpSide, ankleHint, f => planted(f) && upright(f) && f.kneeAngle > 140,
@@ -118,7 +121,7 @@ export const PROFILES = {
       point(f => reachFloor(f) && f.kneeAngle < 130), point(f => air(f) && bothUp(f), 38)],
     { minCycle: 620, maxCycle: 14000 }),
   'star-jumps': rep(jumpFront, 'נכופף ברכיים, ובקפיצה נפתח ידיים ורגליים לצורת כוכב.',
-    f => planted(f) && f.torsoUp > .45 && feetNarrow(f),
+    f => planted(f) && f.torsoUp > .45 && feetComfortable(f),
     [point(f => f.kneeAngle < 136, 55), point(f => air(f) && feetWide(f) && armsWide(f), 40)], { minCycle: 220 }),
   'broad-jump': rep(jumpSide, 'ניקח את האגן לאחור, נקפוץ קדימה וננחת עם שתי רגליים יחד.',
     f => planted(f) && f.torsoUp > .38, [point(f => f.kneeAngle < 135), point(air, 40)],

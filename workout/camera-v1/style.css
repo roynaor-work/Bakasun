@@ -66,3 +66,12 @@ video { display: block; width: auto; max-width: min(100%, 24rem); max-height: 47
   header p, #verification { display: none; }
   #camera-preview video { max-height: 78dvh; }
 }
+/* How far the current repetition went: a wide bar across the picture, readable from three steps away. */
+#range { position: absolute; inset-inline: 0.5rem; inset-block-end: 3.4rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.5rem; border-radius: 0.8rem; background: #17132ad9; }
+#meter { flex: 1; height: 1.3rem; }
+#meter-label { color: #ffd47d; font-size: 1.25rem; white-space: nowrap; }
+#meter-label:empty { display: none; }
+#partials { color: #f7ddac; }
+#results li { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+#results li span { flex: 1 1 12rem; }
+#results button { min-width: 3rem; font-size: 1.3rem; }

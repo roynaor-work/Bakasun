@@ -33,6 +33,8 @@ const LINES = {
   dark: { text: 'חשוך מדי. הדלק אור מלפנים', say: 'חָשׁוּךְ מִדַּי. הַדְלֵק אוֹר מִלְּפָנִים' },
   backlit: { text: 'האור מאחוריך. הסתובב כך שהאור יאיר עליך מלפנים', say: 'הָאוֹר מֵאֲחוֹרֶיךָ. הִסְתּוֹבֵב כָּךְ שֶׁהָאוֹר יָאִיר עָלֶיךָ מִלְּפָנִים' },
   multiple: { text: 'המצלמה רואה יותר מאדם אחד. רק מי שמתאמן נשאר בתמונה', say: 'הַמַּצְלֵמָה רוֹאָה יוֹתֵר מֵאָדָם אֶחָד. רַק מִי שֶׁמִּתְאַמֵּן נִשְׁאָר בַּתְּמוּנָה' },
+  'phone-moved': { text: 'הטלפון זז. נכוון שוב', say: 'הַטֵּלֵפוֹן זָז. נְכַוֵּן שׁוּב' },
+  tight: { text: 'אין מקום לזוז אחורה? אפשר לסובב את הטלפון, להרחיק אותו, או לבחור תרגיל אחר', say: 'אֵין מָקוֹם לָזוּז אָחוֹרָה? אֶפְשָׁר לְסוֹבֵב אֶת הַטֵּלֵפוֹן, לְהַרְחִיק אוֹתוֹ, אוֹ לִבְחֹר תַּרְגִּיל אַחֵר' },
   'turn-side': { text: 'הסתובב עם הצד אל הטלפון', say: 'הִסְתּוֹבֵב עִם הַצַּד אֶל הַטֵּלֵפוֹן' },
   'face-camera': { text: 'הסתובב עם הפנים אל הטלפון', say: 'הִסְתּוֹבֵב עִם הַפָּנִים אֶל הַטֵּלֵפוֹן' },
   calibrating: { text: 'הישאר רגע בלי לזוז', say: 'הִשָּׁאֵר רֶגַע בְּלִי לָזוּז' },
@@ -90,7 +92,7 @@ const towardMiddle = x => x < .5 ? 'left' : 'right';
 export function guide(sample, status, policy = {}, memory = {}) {
   if (status === 'ready') return null;
   const time = Number.isFinite(sample?.time) ? sample.time : 0;
-  if (['dark', 'backlit', 'multiple', 'turn-side', 'face-camera', 'calibrating', 'reacquiring', 'stale'].includes(status)) {
+  if (['dark', 'backlit', 'multiple', 'turn-side', 'face-camera', 'calibrating', 'reacquiring', 'stale', 'phone-moved'].includes(status)) {
     return { ...line(status, LINES[status]), move: null, parts: [] };
   }
   const points = mainPerson(sample?.poses);
@@ -171,6 +173,38 @@ export class GuideVoice {
   _say(text, time) {
     this.lastTime = time;
     try { this.speak?.(text); } catch { /* a silent device still shows the text */ }
+    return true;
+  }
+}
+
+// Corrections of the movement itself (form, a short repetition, pace) must not nag: never two within the
+// gap, never the same one twice within its own interval, and only every second time its cause comes up.
+export class CueLimiter {
+  constructor({ gapMs = 4500, sameMs = 11000, every = 2 } = {}) {
+    this.gapMs = gapMs;
+    this.sameMs = sameMs;
+    this.every = every;
+    this.reset();
+  }
+
+  reset() {
+    this.last = -Infinity;
+    this.seen = new Map();
+  }
+
+  /** @returns true when the correction named by code may be shown and said at this time */
+  allow(code, time) {
+    const entry = this.seen.get(code) ?? { count: 0, at: -Infinity, shownAt: null };
+    this.seen.set(code, entry);
+    // One cause that lasts (the same hint frame after frame) is one occurrence.
+    if (time - entry.at > 900) entry.count++;
+    entry.at = time;
+    if (time - this.last < this.gapMs) return false;
+    if (entry.shownTime != null && time - entry.shownTime < this.sameMs) return false;
+    if (entry.shownAt != null && entry.count - entry.shownAt < this.every) return false;
+    entry.shownAt = entry.count;
+    entry.shownTime = time;
+    this.last = time;
     return true;
   }
 }
