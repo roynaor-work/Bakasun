@@ -1,15 +1,15 @@
 /** Upgrade offer card at the end of a stage (07/11/2026). Loaded on demand from ui/activity.mjs; the kit (assets/upgrade-offer, Codex PR 354)
  * is display only. Buying goes through the existing paths, so nothing about the save changes. Any failure leaves the result screen as it was.
  * `?upgradeOffer=0` turns it off. */
-import {offerEnabled,stageEligible,stageKey,moneyCandidates,leagueCandidates,pickOffer,createOfferMemory,dismiss,settle} from './upgrade-offer-core.mjs?v=island-v2-20261107-21';
+import {offerEnabled,stageEligible,stageKey,moneyCandidates,leagueCandidates,pickOffer,createOfferMemory,dismiss,settle} from './upgrade-offer-core.mjs?v=island-v2-20261107-22';
 
 const memory=createOfferMemory();
 let kit=null;
 function loadKit(){
-  return kit??=import('../assets/upgrade-offer/offer.mjs?v=island-v2-20261107-21').then(mod=>{
+  return kit??=import('../assets/upgrade-offer/offer.mjs?v=island-v2-20261107-22').then(mod=>{
     if(!document.querySelector('link[data-upgrade-offer-css]')){
       const link=document.createElement('link');link.rel='stylesheet';link.dataset.upgradeOfferCss='true';
-      link.href=new URL('../assets/upgrade-offer/offer.css?v=island-v2-20261107-21',import.meta.url).href;document.head.append(link);
+      link.href=new URL('../assets/upgrade-offer/offer.css?v=island-v2-20261107-22',import.meta.url).href;document.head.append(link);
     }
     return mod;
   }).catch(error=>{kit=null;throw error;});
@@ -32,18 +32,20 @@ export async function offerUpgrade({engine,activity,data,t,gameId,result,place,s
     const mod=await loadKit();
     const host=document.createElement('div');host.dataset.upgradeOffer=offer.id;host.dataset.upgradeGame=gameId;host.dataset.upgradeKey=key;
     host.style.cssText='display:flex;justify-content:center;margin:12px 0;';
+    // v24.7 folds the offer under a "הצעת שדרוג" summary (kid-ux-result.mjs wrapResultOffer): when the card goes, the fold goes with it, so no empty fold stays on the result screen.
+    const drop=()=>{const fold=host.closest('.kid-ux-offer-details');host.remove();fold?.remove();};
     const view={category:offer.category,name:offer.name,icon:offer.icon,unit:offer.unit,price:offer.price,balance:offer.balance,mode:'dark'};
     const card=mod.create(host,{
       initial:view,
       onUpgrade(){
         const bought=offer.kind==='league'?engine.racingLeague.buy(offer.track):activity.upgrade(gameId,offer.kind==='track'?offer.track:undefined);
-        if(!bought?.ok){card.destroy();host.remove();return;}
+        if(!bought?.ok){card.destroy();drop();return;}
         settle(memory,key);
         card.update({...view,balance:offer.balance-offer.price,purchased:true,price:offer.price});
         const later=host.querySelector('.uo-later');if(later)later.textContent='המשך';
         sound?.('win');
       },
-      onLater(){dismiss(memory,key,offer.id,gameId);card.destroy();host.remove();}
+      onLater(){dismiss(memory,key,offer.id,gameId);card.destroy();drop();}
     });
     place(host);
     host.scrollIntoView?.({block:'nearest'});

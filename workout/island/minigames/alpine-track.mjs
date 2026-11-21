@@ -1,4 +1,4 @@
-import {v241Rules, V241_DEFAULTS} from './alpine-v241.mjs?v=island-v2-20261107-21';
+import {v241Rules, V241_DEFAULTS} from './alpine-v241.mjs?v=island-v2-20261107-22';
 
 /** Alpine Rush course model, shared by physics, AI and view.
  * s grows downhill along a curved centreline (metres); x is lateral in the track frame

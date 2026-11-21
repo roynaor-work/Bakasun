@@ -6,10 +6,10 @@
  *  - the clear-sky wait at the end of a stage: a banner over the battle ("a helicopter is up, shoot it down with the Vulcan") and an edge
  *    arrow toward the aircraft when it is off the picture.
  * Nothing is drawn for a part whose switch is off (the model reports `radarOn`, `airFinale`). */
-import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-21';
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
-import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-21';
-import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-21';
+import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-22';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-22';
+import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-22';
+import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-22';
 const TAU=Math.PI*2,OUTLINE=NAVAL_LOCK_COLORS.outline;
 function brackets(p,b,color,arm,alpha=1){
  p.save();p.globalAlpha=alpha;p.lineCap='round';p.lineJoin='round';
@@ -51,7 +51,7 @@ export function drawNavalV241(p,m,balance,project,width,height){
  // 2. A lock refused (out of the radar's range) or lost (the hull left it): red brackets that fade and one short reason.
  const lost=m.radarOn?m.radarLost:null,span=NAVAL_V241_DEFAULTS.radar.lostSeconds;
  if(lost&&time-lost.time>=0&&time-lost.time<span){const t=live(m,lost.index),b=t&&navalLockBox(t,project,balance),fade=1-(time-lost.time)/span;
-  const word=lost.reason==='range'?NAVAL_V241_WORDS.range:NAVAL_V241_WORDS.lost;
+  const word=lost.reason==='range'?NAVAL_V241_WORDS.range:lost.reason==='track'?NAVAL_V241_WORDS.track:NAVAL_V241_WORDS.lost;
   // The radar's reach as a dashed ring on the water around our ship, so "out of range" shows how far to sail.
   // Only the part of the ring in front of the camera is drawn (the ring is wider than the picture and passes behind the camera).
   const ship=m.playerShip,R=navalRadarRange(m.ammoIndex,m.radarConfig||NAVAL_V241_DEFAULTS.radar);if(ship){p.save();p.globalAlpha=.75*Math.max(0,fade);p.setLineDash([7,6]);p.lineDashOffset=-time*30;let drawn=0,pen=false;p.beginPath();

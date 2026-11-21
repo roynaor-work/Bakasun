@@ -3,9 +3,9 @@
  * The clock never punishes: at zero the rest of the crew finishes the room (fires go out, the friend is carried) and the stage goes on
  * with a lower time score. Everything is in metres of the room frame (floor centre, +Y up, open front at +Z); the scene turns a touch into a
  * world point by raycasting the room and hands it here. No DOM, deterministic. */
-import {ROOMS,FRIENDS,EFFECT,V24_TUNING,roomSeconds,timeScore} from './fire-v24.mjs?v=island-v2-20261107-21';
-import {ROOM_FIRE_ANCHORS} from './fire-v24-anchors.mjs?v=island-v2-20261107-21';
-import {createInteriorRescue} from './fire-levels-rescue.mjs?v=island-v2-20261107-21';
+import {ROOMS,FRIENDS,EFFECT,V24_TUNING,roomSeconds,timeScore} from './fire-v24.mjs?v=island-v2-20261107-22';
+import {ROOM_FIRE_ANCHORS} from './fire-v24-anchors.mjs?v=island-v2-20261107-22';
+import {createInteriorRescue} from './fire-levels-rescue.mjs?v=island-v2-20261107-22';
 
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);

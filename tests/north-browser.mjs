@@ -66,7 +66,8 @@ test('north: מסלול קנייה מלא (סל, חריטה, בונה, קופה,
       await p.fill('#pengrave', 'לאבא 2026'); assert.match(await p.textContent('#engtxt'), /לאבא/);
       await p.fill('#pnote', 'מזל טוב'); assert.equal(await p.locator('#cardprev:not(.hide)').count(), 1);
       await p.click('#paddbtn'); await p.waitForSelector('#drawer.open');
-      assert.ok(await p.evaluate(() => !!document.activeElement.closest('#drawer')), tag('מיקוד נכנס למגירה'));
+      /* המיקוד עובר למגירה במשימה הבאה (openDrawer: setTimeout 0), לכן ממתינים לו ולא דוגמים באותו רגע שהמגירה נפתחה */
+      assert.ok(await p.waitForFunction(() => !!document.activeElement.closest('#drawer'), null, { timeout: 5000 }).then(() => true, () => false), tag('מיקוד נכנס למגירה'));
       await p.keyboard.press('Escape'); assert.equal(await p.locator('#drawer.open').count(), 0);
       /* שמירה ברענון: סל ובונה */
       await p.reload(); assert.equal(await p.textContent('#cartn'), '1', tag('סל נשמר'));

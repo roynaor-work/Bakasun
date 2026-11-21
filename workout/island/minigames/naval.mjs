@@ -1,29 +1,30 @@
-import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261107-21';
-import {navalAimLegacy,navalFollowYaw,navalAimSpin,navalSpinFollow} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
-import {createNavalAir,navalAirConfig,navalAirEnabled,navalAirManual} from './naval-air.mjs?v=island-v2-20261107-21';
-import {navalAmmoLimit,navalMagazines,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalAmmoState,navalSupplyConfig,navalLoad,navalBuoyDrift} from './naval-supply.mjs?v=island-v2-20261107-21';
-import {createNavalAirAudio} from './naval-air-audio.mjs?v=island-v2-20261107-21';
-import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-21';
-import {navalLockOn,navalLockConfig,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus} from './naval-lockon.mjs?v=island-v2-20261107-21';
-import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-21';
-import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-21';
-import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-21';
-import {navalBattleCampaign,navalBattleEnabled,navalBattlePriority} from './naval-battle.mjs?v=island-v2-20261107-21';
-import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS,navalBaseRows,navalBaseEnabled} from './naval-campaign.mjs?v=island-v2-20261107-21';
-import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-21';
-import {createNavalAudio} from './g6d-audio.mjs?v=island-v2-20261107-21';
-import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-v2-20261107-21';
-import {createNavalView} from './naval-view.mjs?v=island-v2-20261107-21';
-import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback,navalMarkKind} from './naval-marks.mjs?v=island-v2-20261107-21';
-import {createNavalPatrol,stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles} from './naval-patrol.mjs?v=island-v2-20261107-21';
-import {navalForecast,navalForecastConfig} from './naval-forecast.mjs?v=island-v2-20261107-21';
-import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-v2-20261107-21';
-import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubDiveLeft,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-21';
-import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-21';
-import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-21';
-import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-21';
-import {navalPhoneFixB,navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-21';
-import {drawNavalV241} from './naval-v241-hud.mjs?v=island-v2-20261107-21';
+import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261107-22';
+import {navalAimLegacy,navalFollowYaw,navalAimSpin,navalSpinFollow} from './naval-aim-flag.mjs?v=island-v2-20261107-22';
+import {createNavalAir,navalAirConfig,navalAirEnabled,navalAirManual} from './naval-air.mjs?v=island-v2-20261107-22';
+import {navalAmmoLimit,navalMagazines,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalAmmoState,navalSupplyConfig,navalLoad,navalBuoyDrift} from './naval-supply.mjs?v=island-v2-20261107-22';
+import {createNavalAirAudio} from './naval-air-audio.mjs?v=island-v2-20261107-22';
+import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-22';
+import {navalLockOn,navalLockConfig,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus} from './naval-lockon.mjs?v=island-v2-20261107-22';
+import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-22';
+import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-22';
+import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-22';
+import {navalBattleCampaign,navalBattleEnabled,navalBattlePriority} from './naval-battle.mjs?v=island-v2-20261107-22';
+import {navalHarderEnabled,navalHarderCampaign,navalHarderRadar,navalHarderNeed,navalTrackRate,navalTrackStep,navalEvadeSpeed} from './naval-harder.mjs?v=island-v2-20261107-22';
+import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS,navalBaseRows,navalBaseEnabled} from './naval-campaign.mjs?v=island-v2-20261107-22';
+import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-22';
+import {createNavalAudio} from './g6d-audio.mjs?v=island-v2-20261107-22';
+import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-v2-20261107-22';
+import {createNavalView} from './naval-view.mjs?v=island-v2-20261107-22';
+import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback,navalMarkKind} from './naval-marks.mjs?v=island-v2-20261107-22';
+import {createNavalPatrol,stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles} from './naval-patrol.mjs?v=island-v2-20261107-22';
+import {navalForecast,navalForecastConfig} from './naval-forecast.mjs?v=island-v2-20261107-22';
+import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-v2-20261107-22';
+import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubDiveLeft,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-22';
+import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-22';
+import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-22';
+import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-22';
+import {navalPhoneFixB,navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-22';
+import {drawNavalV241} from './naval-v241-hud.mjs?v=island-v2-20261107-22';
 export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
 export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
 export function navalTrajectory(ship,yaw,elevation,balance){const range=balance.aim.minRange+(elevation-balance.aim.minElevation)*balance.aim.rangePerDegree;return {x:ship.x+Math.cos(yaw)*range,z:(ship.z||0)+Math.sin(yaw)*range};}
@@ -74,9 +75,10 @@ export function createShipEntity(x,maxHp,shield=0){return {x,hp:maxHp,maxHp,shie
 export function navalScreenPoint(x,z,config,balance){return {x:config.width/2+z*.85,y:config.height*.8-(x-balance.shipX)*1.05};}
 export function navalTargetAt(x,y,config,balance){return {x:balance.shipX+(config.height*.8-y)/1.05,z:(x-config.width/2)/.85};}
 /** All live shots freeze a visible reticle; direct firing remains the deterministic fixture API. */
-export function createNavalModel({config,balance,level,random=()=>.5,power=1,equipment=EMPTY,sound=()=>{},seed=0,previousFleet,difficulty='normal',navalBattle=false}){
+export function createNavalModel({config,balance,level,random=()=>.5,power=1,equipment=EMPTY,sound=()=>{},seed=0,previousFleet,difficulty='normal',navalBattle=false,navalHarder=false}){
  const stock=navalCampaignStage(balance,level,seed,previousFleet);
- const campaign=navalBattle?navalBattleCampaign(stock,balance,level):stock;
+ // 21/11/2026 v24.8 (naval-harder.mjs, `?navalHarder=0` keeps v24.7): more hulls, a bit more enemy fire, a lock that is harder to get and to keep.
+ const battleCampaign=navalBattle?navalBattleCampaign(stock,balance,level):stock,campaign=navalHarder?navalHarderCampaign(battleCampaign,balance,level):battleCampaign,hard=campaign.harder||null;
  const {settings,fleet,battle}=campaign,targeting=balance.targeting,mission=settings.base&&navalBaseEnabled()?{...campaign.mission,base:settings.base.variant||'coast',baseBrief:'naval.mission.brief.bases'}:campaign.mission;
  const mode=Object.hasOwn(balance.lock.difficulties,difficulty)?difficulty:'normal',tactics=settings.enemyTactics||{telegraphSeconds:1.8,fireSeconds:10,speedScale:1};
  const playerShip={...createShipEntity(balance.shipX,settings.lives*power*(equipment.hull||1),equipment.shield||0),z:0,heading:0,speed:0};
@@ -102,7 +104,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  // 14/11/2026 v24.1 (naval-v241.mjs): the radar lock takes time and holds fire after the kill (`?navalRadar=v24` locks at once), the stage
  // waits for a clear sky (`?navalAirEnd=v24`), no hit-or-not words (`?navalHint=v24`).
  const phoneFixB=navalPhoneFixB(),radarOn=aimV24&&navalRadarV241(),airEnd=navalAirEndV241(),hint241=navalHintV241();
- let radar=null,radarLost=null,radarBeepAt=0,radarLocks=0,radarBreaks=0,radarRefused=0,killHolds=0,airFinale=false,airFinaleAt=null;
+ let tracker=null,trackBreaks=0,radar=null,radarLost=null,radarBeepAt=0,radarLocks=0,radarBreaks=0,radarRefused=0,killHolds=0,airFinale=false,airFinaleAt=null;
  // v24: the lock also tries the two lowest powers, so a hull close by (down to about 60 units) can still be reached by a steep shot.
  const lockCfgV24=aimV24?{...lockCfg,powers:[...lockCfg.powers,.41,.35]}:lockCfg;
  // 11/11/2026 spin aim: the camera follows the turning turret faster and with a smaller lead, so the landing mark stays near the middle.
@@ -116,7 +118,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const subStage=subV24&&enemies.some(e=>e.subMode==='v24');if(subStage)ammo[2]=navalTorpedoStock(ammo[2],v24.sub);
  // v24.1: a deep submarine is reached by the torpedo alone, so the stage carries a torpedo for every hit each submarine needs, plus spares
  // (never fewer than v24's 3..5), and an empty tube reloads one while a submarine is out (torpedoes never crit: no weak centre under water).
- const v241=navalV241Config(balance),deepStage=subStage&&subDeep,torpedoDamage=settings.damage*power*(equipment.damage||1)*balance.ammo[2].damage*(1+(settings.weaponLevel-1)*.1);
+ const v241base=navalV241Config(balance),v241={...v241base,radar:navalHarderRadar(v241base.radar,hard)},deepStage=subStage&&subDeep,torpedoDamage=settings.damage*power*(equipment.damage||1)*balance.ammo[2].damage*(1+(settings.weaponLevel-1)*.1);
  if(deepStage)ammo[2]=navalDeepTorpedoes(ammo[2],enemies.filter(e=>e.subDeep).map(e=>e.maxHp),torpedoDamage,v241.sub);
  let torpedoReload=0,torpedoReloads=0,pingAt=0;
  let loaded=limited?navalLoad(ammo[0],mags.ammo[0]):Infinity,belt=limited&&airSim?mags.belt:null,sky=null,supplies=0,sunkCount=0,chainBlast=null;
@@ -243,18 +245,22 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const rangeTo=e=>Math.hypot(e.x-playerShip.x,e.z-playerShip.z);
  /** v24.1 radar: starts an acquisition on a live hull inside the radar's reach (a hull out of reach is refused, with the reason on the
   * screen); a lock held on another hull ends at once. `queued`: a tap on Fire is waiting for this lock. Without the radar it locks at once. */
+ /** v24.8 tracker: one frame for the hull the radar is on (acquiring or locked). */
+ function track(e,dt){const now={index:e.index,bearing:Math.atan2(e.z-playerShip.z,e.x-playerShip.x),heading:playerShip.heading,distance:rangeTo(e)},before=tracker?.index===e.index?tracker:null,rate=navalTrackRate(before,now,dt,hard),st=navalTrackStep(before,rate,dt,hard);tracker={...now,lost:st.lost,rate,quality:st.quality};return st;}
  function clearShotLock(){if(!phoneFixB)return;unlock('shot');radar=null;lockPress=null;stickyAt=null;lockedTargetIndex=null;aiming=false;}
  function acquire(index,queued=false){
   if(!radarOn){lockOnto(index);return;}
   const e=enemies.find(x=>x.index===index&&x.active&&x.hp>0);if(!e)return;
   if(!navalRadarInRange(rangeTo(e),ammoIndex,false,v241.radar)){radarLost={index,reason:'range',time};radarRefused++;sound('radarLost');return;}
   if(homing)unlock('switch');
-  radar={index,at:time,need:phoneFixB?3.5:navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0,...(phoneFixB?{sweep:0,scans:0,bearing:Math.atan2(e.z-playerShip.z,e.x-playerShip.x)}:{})};radarBeepAt=time+v241.radar.beepFirst;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
+  radar={index,at:time,need:phoneFixB?navalHarderNeed(3.5,hard):navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0,...(phoneFixB?{sweep:0,scans:0,bearing:Math.atan2(e.z-playerShip.z,e.x-playerShip.x)}:{})};radarBeepAt=time+v241.radar.beepFirst;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
  }
  /** One frame of the radar: the gauge fills; out of reach (past the margin, longer than the grace) the acquisition breaks; full = locked. */
  function radarStep(dt){
   if(!radar)return;const e=enemies.find(x=>x.index===radar.index&&x.active&&x.hp>0);if(!e){radar=null;return;}
   if(!navalRadarInRange(rangeTo(e),ammoIndex,true,v241.radar)){radar.out+=dt;if(radar.out>=v241.radar.graceSeconds){radarLost={index:radar.index,reason:'lost',time};radarBreaks++;radar=null;sound('radarLost');return;}}else radar.out=0;
+  // v24.8: the radar has to track. A fast swing of the bearing slows the gauge (its start moves on), a standstill for too long loses it.
+  if(hard){const tr=track(e,dt);radar.quality=tr.quality;radar.at+=dt*(1-tr.quality);if(tr.broken){radarLost={index:radar.index,reason:'track',time};radarBreaks++;trackBreaks++;radar=null;tracker=null;sound('radarLost');return;}}
   // Keep searching the live hull throughout acquisition, including while the turret turns.
   if(phoneFixB){const elapsed=Math.max(0,time-radar.at);radar.sweep=elapsed*TAU/.9;radar.scans=Math.floor(elapsed/.9);radar.bearing=Math.atan2(e.z-playerShip.z,e.x-playerShip.x);}
   radar.progress=Math.min(1,(time-radar.at)/radar.need);
@@ -368,10 +374,10 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   * (where you are now, plus a bounded scatter), shows it for `telegraph` seconds, then fires; the shell lands where it was shown,
   * so sailing away from the marker is always enough. Cannons reload on staggered timers. */
  // Keep room for the player's three-shell salvo even when shore guns and hulls fire together.
- const enemyDamageScale=battle?.enemyDamageScale??1;
+ const enemyDamageScale=(battle?.enemyDamageScale??1)*(hard?.fire.damageScale??1);
  const canEnemyFire=(count=1)=>!battle||enemyShots.length+extraShots.length+Number(ball.active)+count<=balance.render.effects.maxProjectiles-3;
  function updateBase(e,dt){
-  const type=balance.shipTypes[e.kind],count=e.structure?(e.cannons??0):(e.cannons||2),reload=(e.reload||8)*(fireV24?efc.baseReloadMult:1)*(battle?.fireIntervalScale??1),tele=fireV24?navalTelegraph(e.telegraph??tactics.telegraphSeconds+.4,efc,efc.baseTelegraphMin):e.telegraph??tactics.telegraphSeconds+.4;
+  const type=balance.shipTypes[e.kind],count=e.structure?(e.cannons??0):(e.cannons||2),reload=(e.reload||8)*(fireV24?efc.baseReloadMult:1)*(battle?.fireIntervalScale??1)*(hard?.fire.intervalScale??1),tele=fireV24?navalTelegraph(e.telegraph??tactics.telegraphSeconds+.4,efc,efc.baseTelegraphMin):e.telegraph??tactics.telegraphSeconds+.4;
   e.x=balance.enemyX+(e.baseX??140);e.z=e.baseZ??0;e.vx=e.vz=0;e.heading=Math.PI;e.depth=0;
   const cs=e.cannonState||(e.cannonState=Array.from({length:count},(_,i)=>({at:e.spawnTime+tactics.fireSeconds*.8*(battle?.openingTimeScale??1)+i*reload/count,attack:null})));
   e.attacks=[];e.warning=0;
@@ -405,6 +411,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    const centreX=navalPatrolCentre(e,enemies,{time,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},balance);
    if(!e.patrol||e.patrolSpawn!==e.spawnTime){e.patrol=createNavalPatrol({x:centreX,z:lane,index:e.index,seed,stage:level,behavior:e.behavior,scale:e.hullScale||1},balance);e.patrolSpawn=e.spawnTime;e.x=e.patrol.x;e.z=e.patrol.z;}
    const obstacles=navalPatrolObstacles(e,enemies,playerShip);
+   // v24.8: a hull the radar is on sails faster (the forecast copies the patrol, so the lock's own shot follows it; the speed stands while a shell of ours is in the air, so no shot is spoiled by a change the forecast could not know).
+   if(hard){e.patrol.cruise??=e.patrol.speed;if(!(ball.active||extraShots.length>0))e.patrol.speed=navalEvadeSpeed(e.patrol.speed,e.patrol.cruise,radar?.index===e.index||homing?.index===e.index,dt,hard);}
    stepNavalPatrol(e.patrol,dt,{obstacles,shellAirborne:ball.active||extraShots.length>0,centreX},balance);
    e.x=e.patrol.x;e.z=e.patrol.z;
    e.vx=age<=dt?Math.cos(e.patrol.heading)*e.patrol.speed:(e.x-oldX)/dt;e.vz=age<=dt?Math.sin(e.patrol.heading)*e.patrol.speed:(e.z-oldZ)/dt;e.heading=e.patrol.heading;
@@ -435,7 +443,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    }}else e.warning=0;
   }
  }
- const model={navalBattle:Boolean(battle),get air(){return airSim?.air||[];},get vulcan(){return airSim?{...airSim.state,tracers:airSim.tracers,belt,manual:manualAir}:null;},get sky(){return sky;},get baseHealth(){return baseHealth();},get chainBlast(){return chainBlast;},get belt(){return belt;},get loaded(){return limited?loaded:ammo[0];},get buoys(){return buoys;},get supplies(){return supplies;},magazines:limited?mags:null,get ammoState(){return limited?(ammoIndex===0?navalAmmoState(loaded,mags.ammo[0],supplyCfg.lowShells):navalAmmoState(ammo[ammoIndex],settings.ammunition[ammoIndex],1)):null;},settings,equipment,mission,playerShip,enemies,ammo,cooldowns,ball,aim,blast,trail,extraShots,enemyShots,mines,maxEnemyFleet,statusId:'minigame.navalStatus',difficulty:mode,
+ const model={navalBattle:Boolean(battle),harder:hard,get tracker(){return tracker&&{...tracker};},get air(){return airSim?.air||[];},get vulcan(){return airSim?{...airSim.state,tracers:airSim.tracers,belt,manual:manualAir}:null;},get sky(){return sky;},get baseHealth(){return baseHealth();},get chainBlast(){return chainBlast;},get belt(){return belt;},get loaded(){return limited?loaded:ammo[0];},get buoys(){return buoys;},get supplies(){return supplies;},magazines:limited?mags:null,get ammoState(){return limited?(ammoIndex===0?navalAmmoState(loaded,mags.ammo[0],supplyCfg.lowShells):navalAmmoState(ammo[ammoIndex],settings.ammunition[ammoIndex],1)):null;},settings,equipment,mission,playerShip,enemies,ammo,cooldowns,ball,aim,blast,trail,extraShots,enemyShots,mines,maxEnemyFleet,statusId:'minigame.navalStatus',difficulty:mode,
   beginAim:lock,cancelAim(){aiming=false;lockedTargetIndex=null;},get selectedTargetIndex(){return selectedTargetIndex;},get lockedTargetIndex(){return lockedTargetIndex;},get lockedTarget(){return enemies.find(e=>e.index===lockedTargetIndex)||null;},get reticle(){return reticle&&{...reticle};},
   get missionState(){const ms=navalMissionState(mission,enemies.filter(e=>!e.structure));if(!structures.length)return ms;const main=enemies.filter(e=>e.structure&&e.main!==false),done=main.filter(e=>e.hp<=0).length;return {completed:ms.completed+done,total:ms.total+main.length,complete:ms.complete&&done===main.length,fleet:ms,base:{completed:done,total:main.length}};},get resupplyTime(){return resupplyTime;},get resupplies(){return resupplies;},get lastFeedback(){return lastFeedback;},
   get rangeState(){return navalLockRadius(playerShip,model.lockedTarget||enemies.find(e=>e.index===selectedTargetIndex&&e.active&&e.hp>0)||enemies.find(e=>e.active&&e.hp>0)||enemyShip,balance,level,mode,equipment);},
@@ -488,7 +496,10 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
     if(homing&&!lockTarget())unlock('sunk');
     if(radarOn){radarStep(dt);
      // A lock whose hull leaves the radar's reach (past the margin, longer than the grace) is lost.
-     const held=lockTarget();if(held){if(!navalRadarInRange(rangeTo(held),ammoIndex,true,v241.radar)){homing.out=(homing.out||0)+dt;if(homing.out>=v241.radar.graceSeconds){radarLost={index:homing.index,reason:'lost',time};radarBreaks++;unlock('range');sound('radarLost');}}else homing.out=0;}}
+     const held=lockTarget();if(held){if(!navalRadarInRange(rangeTo(held),ammoIndex,true,v241.radar)){homing.out=(homing.out||0)+dt;if(homing.out>=v241.radar.graceSeconds){radarLost={index:homing.index,reason:'lost',time};radarBreaks++;unlock('range');sound('radarLost');}}else homing.out=0;}
+     // v24.8: a held lock is lost the same way when the radar cannot follow the hull.
+     const kept=hard&&lockTarget();if(kept&&track(kept,dt).broken){radarLost={index:homing.index,reason:'track',time};radarBreaks++;trackBreaks++;tracker=null;unlock('track');sound('radarLost');}
+     if(hard&&!radar&&!homing)tracker=null;}
    }
    if(!homing){
     if(Number.isFinite(input.aimYaw))turret.yaw=input.aimYaw;
@@ -543,7 +554,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(subStage&&input.torpedoShot&&!input.aimCancel){fireTorpedo(input.torpedoTarget);predict();}
   },
   // v24 counters (the aim switch and the aim hint are read through the getters, so a game without a lock snapshots the same with and without ?navalAim=v23).
-  snapshot(){return {v24:{enemyFire:fireV24,sub:subStage,skyLock:skyLock&&{...skyLock},torpedoes:ammo[2],torpedoesFired,underwaterHits,enemySalvos,stickyAt},
+  snapshot(){return {...(hard?{harder:{trackBreaks,tracker:tracker&&{...tracker},extraShips:hard.fleet.extraShips,needScale:hard.lock.needScale}}:{}),v24:{enemyFire:fireV24,sub:subStage,skyLock:skyLock&&{...skyLock},torpedoes:ammo[2],torpedoesFired,underwaterHits,enemySalvos,stickyAt},
    v241:{radarOn,radar:model.radar,radarLost:radarLost&&{...radarLost},radarLocks,radarBreaks,radarRefused,killHolds,airEnd,airFinale,airFinaleAt,hint:hint241,subDeep:deepStage,torpedoReloads},difficulty:mode,homing:model.homing,lockPress:lockPress&&{...lockPress},locksMade,lockEnabled,unlocked:unlocked&&{...unlocked},air:model.air.map(a=>({...a})),vulcan:model.vulcan&&{...model.vulcan,tracers:model.vulcan.tracers.length},sky:sky&&{...sky},baseHealth:baseHealth(),chainBlast:chainBlast&&{...chainBlast},belt,loaded:model.loaded,buoys:buoys.map(b=>({...b})),supplies,magazines:model.magazines,ammoState:model.ammoState,ammo:[...ammo],selectedTargetIndex,lockedTargetIndex,reticle:model.reticle,rangeState:model.rangeState,mission:{...mission,...model.missionState},resupplyTime,resupplies,lastFeedback:lastFeedback&&{...lastFeedback},wind:{...wind},moving,returning:false,returnTime:0,aiming,camera:JSON.parse(JSON.stringify(camera)),fired,hits,heat:0,overheated:false,enemyFired,enemyShots:enemyShots.map(e=>({...e})),composition:fleet.map(e=>e.kind).join(),yaw:turret.yaw,elevation:turret.elevation,power:turret.power,turret:{...turret},prediction:prediction&&{end:{...prediction.end},landing:{...prediction.landing},contact:prediction.contact&&{...prediction.contact},flight:prediction.flight,points:prediction.points.length,guided:Boolean(prediction.guided),forecast:Boolean(prediction.forecast),safe:prediction.safe,kind:navalMarkKind(prediction),over:prediction.over?{...prediction.over}:null,lead:prediction.lead?JSON.parse(JSON.stringify(prediction.lead)):null},lastShot:lastShot&&JSON.parse(JSON.stringify(lastShot)),quickShots,sway:model.sway,playerPercent:healthPercent(playerShip.hp,playerShip.maxHp),enemyPercent:healthPercent(enemyShip.hp,enemyShip.maxHp),extraShots:extraShots.map(p=>({...p})),mines:mines.map(p=>({...p})),repairLife,lastAction:lastAction&&{...lastAction},warningId:model.warningId,lives:playerShip.hp,maxLives:playerShip.maxHp,enemyLives:enemyShip.hp,phase,round:1,wave,time,enemyX:enemyShip.x,score,result,attacker:enemies[0].index,ball:{...ball},blast:{...blast},hud:model.hud?JSON.parse(JSON.stringify(model.hud)):null,aim:{...aim},playerShip:{...playerShip},enemyShip:{...enemyShip},enemyFleetHp:fleetHealth(),maxEnemyFleet,boss:enemyShip.boss,ammoIndex,ammo:[...ammo],cooldowns:[...cooldowns],remaining,enemies:enemies.map(e=>({...e,attack:e.attack&&{...e.attack}}))};}
  };updateFleet(0);turret.yaw=Math.atan2(enemies[0].z-playerShip.z,enemies[0].x-playerShip.x);predict();camera=navalCameraPose(playerShip,aim,false,balance,undefined,0,framing());return model;
 }
@@ -575,14 +586,14 @@ export function drawNaval(p,m,{config,balance,art,quality,view,t}){
 /** Optional 30 ms buzz on a weak-centre hit, on devices that support it, unless turned off. */
 export function navalBuzz(storage,nav=globalThis.navigator){try{if(storage?.getItem('island.naval.vibration')==='off')return false;if(typeof nav?.vibrate!=='function')return false;return nav.vibrate(30)!==false;}catch{return false;}}
 export function startNaval(ctx){
- if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
- if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-v24-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v24.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.navalV24Style='';document.head.append(link);}
- if(!document.querySelector('[data-naval-v241-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v241.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.navalV241Style='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-v2-20261107-22',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-v2-20261107-22',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-v2-20261107-22',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-v24-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v24.css?v=island-v2-20261107-22',import.meta.url).href;link.dataset.navalV24Style='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-v241-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v241.css?v=island-v2-20261107-22',import.meta.url).href;link.dataset.navalV241Style='';document.head.append(link);}
  let model,view,storage,rawUpdate=null,airAudio=null;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage}),v24Audio=navalEnemyFireV24()||navalSubV24()?createNavalV24Audio({storage}):null;let soundLog=null;const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>{audio.unlock();airAudio?.unlock();v24Audio?.unlock();},{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
  try{
-  const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,navalBattle:navalBattleEnabled(),sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);airAudio?.play(name);v24Audio?.play(name);}});if(model.vulcan&&!airAudio)airAudio=createNavalAirAudio({storage});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));
+  const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,navalBattle:navalBattleEnabled(),navalHarder:navalHarderEnabled(),sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);airAudio?.play(name);v24Audio?.play(name);}});if(model.vulcan&&!airAudio)airAudio=createNavalAirAudio({storage});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));
   input.applyHand?.();const dispose=session.dispose,pause=session.setPaused;session.dispose=()=>{picker.dispose();audioEvents.abort();audio.dispose();airAudio?.dispose();v24Audio?.dispose();input.dispose();dispose();};session.setPaused=value=>{audio.setPaused(value);airAudio?.setPaused(value);v24Audio?.setPaused(value);input.reset();pause(value);};if(session.debug){session.debug.audio=audio;session.debug.airAudio=airAudio;session.debug.v24Audio=v24Audio;soundLog=[];session.debug.sounds=soundLog;session.debug.drive=(dt,raw={})=>rawUpdate(dt,raw);}return session;
  }catch(error){picker.dispose();audioEvents.abort();audio.dispose();airAudio?.dispose();v24Audio?.dispose();input.dispose();throw error;}
 }

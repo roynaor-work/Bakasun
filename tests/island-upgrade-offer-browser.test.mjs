@@ -19,6 +19,14 @@ async function boot(browser,server,query,viewport={width:390,height:844}){
   await page.waitForTimeout(2500);
   return {context,page,csp,errors};
 }
+/** v24.7 (kid-ux KUX-008, ui/kid-ux-result.mjs wrapResultOffer): the offer sits folded under "הצעת שדרוג" so the next actions stay above the fold.
+ * The card is in the page but not shown until the child opens it; `?kidUx=0` puts it straight in the result screen as before. */
+const openOffer=async page=>{
+  const fold=page.locator('.kid-ux-offer-details');await fold.waitFor({state:'attached'});
+  assert.equal(await fold.count(),1,'one folded offer');assert.equal(await fold.evaluate(n=>n.open),false,'the offer starts folded');
+  assert.equal((await fold.locator('summary').innerText()).trim(),'הצעת שדרוג');
+  await fold.locator('summary').click();await page.waitForSelector('.uo-card');
+};
 const showTennisWin=async page=>{await page.evaluate(()=>{const ui=window.__island.ui.activityInterface;ui.showResult('tennis',undefined,{outcome:'win',score:120,money:30,parts:0,stars:2,stage:1});});await page.waitForSelector('[data-result=tennis]');};
 
 test('tennis: a won stage with enough coins shows one offer; the upgrade buys through the normal path',{skip:!enabled,timeout:300000},async()=>{
@@ -27,7 +35,7 @@ test('tennis: a won stage with enough coins shows one offer; the upgrade buys th
   const t=await boot(browser,server,'');
   try{
     await showTennisWin(t.page);
-    await t.page.waitForSelector('.uo-card');
+    await openOffer(t.page);
     assert.equal(await t.page.locator('.uo-card').count(),1,'one offer per stage');
     const card=await t.page.evaluate(()=>{const c=document.querySelector('.uo-card'),b=[...c.querySelectorAll('button')].map(x=>{const r=x.getBoundingClientRect();return {text:x.textContent,w:r.width,h:r.height};});return {state:c.dataset.state,dir:c.dir,title:c.querySelector('.uo-title').textContent,name:c.querySelector('.uo-name').textContent,buttons:b,text:c.textContent};});
     assert.equal(card.state,'ready');assert.equal(card.dir,'rtl');assert.deepEqual(card.buttons.map(b=>b.text),['שדרג','אחר כך']);
@@ -41,7 +49,7 @@ test('tennis: a won stage with enough coins shows one offer; the upgrade buys th
     assert.ok(after.money<before.money,'coins were spent');
     assert.ok(JSON.stringify(after.eq)!==JSON.stringify(before.eq)||after.lvl>before.lvl,'an upgrade was applied');
     if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/tennis-bought-390x844.png`});}
-    await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);
+    await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);assert.equal(await t.page.locator('.kid-ux-offer-details').count(),0,'no empty fold is left behind');
     assert.deepEqual(t.errors,[]);await t.csp.assertClean();
   }finally{await t.context.close();await t.csp.dispose();await browser.close();await server.close();}
 });
@@ -51,10 +59,10 @@ test('tennis: "later" removes the card, and the same stage opened again does not
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args});
   const t=await boot(browser,server,'',{width:844,height:390});
   try{
-    await showTennisWin(t.page);await t.page.waitForSelector('.uo-card');
+    await showTennisWin(t.page);await openOffer(t.page);
     const first=await t.page.evaluate(()=>document.querySelector('.uo-card').parentElement.dataset.upgradeOffer);
     if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/tennis-offer-844x390.png`});}
-    await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);
+    await t.page.locator('.uo-later').click();assert.equal(await t.page.locator('.uo-card').count(),0);assert.equal(await t.page.locator('.kid-ux-offer-details').count(),0,'no empty fold is left behind');
     const money=await t.page.evaluate(()=>window.__island.engine.state.money);
     await showTennisWin(t.page);await t.page.waitForTimeout(800);
     const again=await t.page.evaluate(()=>document.querySelector('.uo-card')?.parentElement.dataset.upgradeOffer||null);
@@ -71,7 +79,7 @@ test('racing league: a finished race with enough league coins offers a car part 
   try{
     await t.page.evaluate(()=>{const e=window.__island.engine;e.state.islandRacingLeague.coins=260;e.state.money=5;
       window.__island.ui.activityInterface.showResult('islandRacing',undefined,{outcome:'win',score:5,money:0,parts:0,stars:0,stage:1,league:{place:1,points:25,coins:220,seasonDone:false,season:1,race:0,track:'x',laps:4,order:['player','ai-1','ai-2','ai-3','ai-4']}});});
-    await t.page.waitForSelector('.uo-card');
+    await openOffer(t.page);
     assert.equal(await t.page.locator('.uo-card').count(),1);
     assert.match(await t.page.locator('.uo-category').innerText(),/ליגת המרוצים/);
     if(shots){await t.page.waitForTimeout(800);await t.page.screenshot({path:`${shots}/league-offer-390x844.png`});}

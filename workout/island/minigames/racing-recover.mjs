@@ -9,8 +9,8 @@
 //          for RECOVER.ghost seconds after it the traffic passes through it (car.ghostT), so a car set down at speed 0 on the racing line is not rear-ended at once
 // A slow car that is lost off the track (config.offSlow) gets the same return without the flip: rest, vanish, drop (startSoft).
 // The landing point never passes the next gate, so a recovery never grants one. Pure: positions, timers and events only.
-import {RECOVER} from './racing-v24.mjs?v=island-v2-20261107-21';
-import {racingAngle} from './racing-tracks.mjs?v=island-v2-20261107-21';
+import {RECOVER} from './racing-v24.mjs?v=island-v2-20261107-22';
+import {racingAngle} from './racing-tracks.mjs?v=island-v2-20261107-22';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function createRecovery({track,sector,event,restartLane,crashFx=true,minStrength=.5,fx={min:.6,max:1.1,peak:1.6,time:.55}}){
  const half=()=>track.width/2;

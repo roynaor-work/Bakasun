@@ -1,6 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFile} from 'node:fs/promises';
 import {browserCleanup,serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
+
+const json=async p=>JSON.parse(await readFile(new URL('../workout/island/'+p,import.meta.url),'utf8'));
+const tennisBudget=(await json('data/config.json')).minigames.tennis.render.maxTriangles,crowdLimit=(await json('assets/tennis-crowd-v22/lod-config.json')).crowdTriangleLimit;
+/** The v12 stadium's crowd is settled (3D crowd swapped in, or the flat atlas kept) and a frame was drawn with it: the metrics of that frame. */
+const settled=async page=>{
+  await page.waitForFunction(()=>{const s=window.__tennis.view.metrics().stadium12;return s&&s.crowdLate!=='loading';},null,{timeout:120000});
+  const frames=await page.evaluate(()=>window.__tennis.view.metrics().frames);
+  await page.waitForFunction(f=>window.__tennis.view.metrics().frames>=f+2,frames,{timeout:120000});
+  return page.evaluate(()=>{const m=window.__tennis.view.metrics();return {triangles:m.triangles,drawCalls:m.drawCalls,stadium12:m.stadium12&&{crowd:m.stadium12.crowd,crowdLate:m.stadium12.crowdLate??null}};});
+};
 
 // Opt-in browser integration under the real island CSP (static Draco worker, no blob workers), run separately from the node tests:
 //   ISLAND_CSP_BROWSER=1 ISLAND_PLAYWRIGHT=/path/to/playwright/index.mjs CHROMIUM_PATH=/path/to/chrome node --test tests/island-tennis-v7-browser.test.mjs
@@ -51,13 +62,21 @@ test('tennis v7 in the browser: default, kill switch, blocked files fall back si
   }
     for(const viewport of [{width:844,height:390},{width:390,height:844}]){
      await t.test(`default ${viewport.width}x${viewport.height}`,async()=>{
-      const a=await scenario('default',`tennisV7=1`,{viewport});
+      const a=await scenario('default',`tennisV7=1`,{viewport,after:settled});
       assert.equal(a.metrics.tennisV7,true);assert.equal(a.metrics.surface,'clay');assert.equal(a.metrics.crowd,480);assert.deepEqual(a.metrics.v7Fallbacks,[]);
       if(viewport.width>viewport.height)assert.equal(a.metrics.crowdDrawn,480,'landscape: every stand is in view');
       else assert.ok(a.metrics.standsInView<3&&a.metrics.crowdDrawn<480&&a.metrics.crowdDrawn>0,`portrait: the side stands are outside the camera and are not drawn (${a.metrics.standsInView} stands, ${a.metrics.crowdDrawn} spectators)`);
       assert.deepEqual(a.v7Requests.map(p=>p.replace(/\?.*$/,'')).sort(),['assets/tennis-v7/ball.glb','assets/tennis-v7/court-clay.glb','assets/tennis-v7/crew.glb','assets/tennis-v7/crowd-prototypes.glb','assets/tennis-v7/crowd.json','assets/tennis-v7/net.glb','assets/tennis-v7/venue.glb'],'only the chosen surface and the shared files are requested (lazy)');
       assert.deepEqual(a.requests.filter(p=>/assets\/models\/(adult|palm)/.test(p)),[],'v7 on: the previous crowd and palm models are not downloaded');
-      assert.ok(a.metrics.triangles<=tennis90k,'inside the configured triangle budget: '+a.metrics.triangles);
+      // v22.1 put the 3D crowd (assets/tennis-crowd-v22, 600 fans, ?tennisCrowd3d=0 returns the flat atlas) on top of the scene; with the v25 load it
+      // arrives in the background after the first frames, so the count is read once it is in. Its own ceiling is lod-config.json crowdTriangleLimit.
+      // The scene without it must fit config.render.maxTriangles; with it the scene may exceed that by no more than the crowd's ceiling.
+      assert.equal(a.extra.stadium12?.crowd,'3d-lod','the 3D crowd is the default');
+      assert.ok(a.extra.triangles<=tennisBudget+crowdLimit,`default scene with the 3D crowd: ${a.extra.triangles} triangles (budget ${tennisBudget} + crowd ceiling ${crowdLimit})`);
+      const flat=await scenario('flat-crowd','tennisV7=1&tennisCrowd3d=0',{viewport,after:settled});
+      assert.equal(flat.extra.stadium12?.crowd,'billboard');
+      assert.ok(flat.extra.triangles<=tennisBudget,'inside the configured triangle budget without the 3D crowd: '+flat.extra.triangles);
+      assert.ok(a.extra.triangles-flat.extra.triangles<=crowdLimit,`the 3D crowd costs ${a.extra.triangles-flat.extra.triangles} triangles, inside its ceiling ${crowdLimit}`);
      });
     }
     await t.test('kill switch and silent fallbacks',async()=>{
@@ -81,4 +100,3 @@ test('tennis v7 in the browser: default, kill switch, blocked files fall back si
     const tier=await scenario('tier-2','tennisV7=1&quality=2');assert.equal(tier.metrics.crowd,0,'the lowest tier has no crowd, as before');assert.equal(tier.metrics.tennisV7,true);
     });
 });
-const tennis90k=90000;

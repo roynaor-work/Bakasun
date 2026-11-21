@@ -16,7 +16,7 @@
  *  - Submarine (`?navalSub=v24`, `?navalSub=v23`): "the submarine came out of the water; it should never come out, and only a torpedo
  *    hits it". A v24.1 submarine stays under water for the whole stage (only its tower top and periscope break the surface), so only the
  *    torpedo reaches it; the stage carries enough torpedoes for every submarine, and an empty tube reloads one while a submarine is out. */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-21';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-22';
 /** Phone fixes B: one full radar acquisition per shot; either URL switch restores v24.1. */
 export const navalPhoneFixB=search=>polishValue('phoneFixes',search)!=='0'&&polishValue('phoneFixB',search)!=='0';
 export const navalRadarV241=search=>polishValue('navalRadar',search)!=='v24';
@@ -54,4 +54,4 @@ export function navalDeepTorpedoes(v24Stock,hpList,damage,cfg=NAVAL_V241_DEFAULT
 /** True when the sky still holds an aircraft that keeps the stage open: attacking, flying away or still falling into the sea. */
 export function navalSkyBusy(air){return (air||[]).some(a=>a&&(a.state!=='down'||a.h>0));}
 export const NAVAL_V241_COLORS=Object.freeze({radar:'#FFD166',locked:'#62E6AA',lost:'#FF6B5C',aim:'#CFF3FF',air:'#FFB547'});
-export const NAVAL_V241_WORDS=Object.freeze({range:'מחוץ לטווח המכ״ם',lost:'הנעילה אבדה',air:'מסוק באוויר · הפילו אותו בוולקן',plane:'מטוס באוויר · הפילו אותו בוולקן',leaving:'כלי הטיס מתרחק'});
+export const NAVAL_V241_WORDS=Object.freeze({range:'מחוץ לטווח המכ״ם',lost:'הנעילה אבדה',track:'המכ״ם איבד את המטרה · האטו',air:'מסוק באוויר · הפילו אותו בוולקן',plane:'מטוס באוויר · הפילו אותו בוולקן',leaving:'כלי הטיס מתרחק'});
