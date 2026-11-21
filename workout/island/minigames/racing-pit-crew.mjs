@@ -6,7 +6,7 @@
 //   stop                                 -> the jack operator jack_up
 //   change (2 s, the tap)                -> remove_wheel, then mount_wheel, at the wheels; the light stays red
 //   done                                 -> jack_down, thumbs_up, signal_release, the light turns green; step_back; idle again when the car has gone
-import {pitLane} from './racing-v24.mjs?v=island-v2-20261107-20';
+import {pitLane} from './racing-v24.mjs?v=island-v2-20261107-21';
 const read=search=>{try{return new URLSearchParams(search??globalThis.location?.search??'');}catch{return new URLSearchParams('');}};
 export const pitCrewEnabled=search=>read(search).get('racingPitCrew')!=='0';
 // the player's formula car: wheels at x +-0.85, front z 1.25, rear z -1.31 (racing-view formula.glb). The crew faces the car; +X is the side of the fast lane.
@@ -16,7 +16,7 @@ export const CREW=Object.freeze([
  {id:'jack_operator',x:0,z:3.15,face:Math.PI,rush:true},{id:'light_controller',x:2.7,z:3.4,face:Math.PI*.8,rush:false}
 ]);
 const RUSH=.96,BACK=.64;
-export async function loadPitCrew({T,GLTFLoader,track,lane=pitLane(track),boxIndex=0,count=12,team='#d93228',keep=x=>x,base=new URL('../assets/racing-pit-v1/models/',import.meta.url),version='island-v2-20261107-20'}){
+export async function loadPitCrew({T,GLTFLoader,track,lane=pitLane(track),boxIndex=0,count=12,team='#d93228',keep=x=>x,base=new URL('../assets/racing-pit-v1/models/',import.meta.url),version='island-v2-20261107-21'}){
  const loader=new GLTFLoader(),load=name=>loader.loadAsync(new URL(`${name}.glb?v=${version}`,base).href);
  const [crewGltf,stack,light]=await Promise.all([Promise.all(CREW.map(c=>load(c.id))),load('tire_stack'),load('pit_light_exit')]);
  const root=new T.Group();root.name='racing-pit-crew';const s=lane.boxS(boxIndex,count),q=track.sample(s);

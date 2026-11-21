@@ -1,0 +1,105 @@
+{
+  "id": "026",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "gestureAnimations": 3,
+        "visibleHelp": "תדריך קצר\nהחוף בידיים שלכם\n◉\n🐗\n✷\n👆\n👆\n\nגררו באגודל שמאל כדי לכוון. החזיקו באגודל ימין כדי לירות.\n\n🔊 שמעו את ההוראות\nהבנתי, מוכנים ←"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "continue": {
+          "width": 228,
+          "height": 48,
+          "fontPx": 14,
+          "centerHit": true,
+          "text": "הבנתי, מוכנים ←",
+          "contrast": 12.09
+        },
+        "replay": {
+          "width": 228,
+          "height": 48,
+          "fontPx": 14,
+          "centerHit": true,
+          "text": "🔊 שמעו את ההוראות",
+          "contrast": 13.13
+        }
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The embedded campaign is the same-origin game iframe. The QA hold freezes its decorative rendering after the menu has loaded."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-understood\"]').first()",
+      "x": 499.5546875,
+      "y": 342,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-understood",
+        "x": 499.5546875,
+        "y": 342
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#help').first()",
+      "x": 718.5703125,
+      "y": 281.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "help",
+        "x": 718.5703125,
+        "y": 281.6875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.kid-boar-help-actions .secondary').first()",
+      "x": 540,
+      "y": 303.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "secondary",
+        "x": 540,
+        "y": 303.6875
+      }
+    }
+  ],
+  "screenshots": [
+    "026-after-touch-briefing.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

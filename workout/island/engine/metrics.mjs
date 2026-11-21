@@ -1,4 +1,4 @@
-import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-20';
+import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-21';
 
 export function buildingCenter(building, registry) {
   const type = registry.buildings.get(building.typeId);
@@ -15,11 +15,13 @@ export function levelValue(building, type, field, config) {
 }
 
 export function population(state, registry, config) {
+  state = registry.cityProgress?.operatingState(state) ?? state;
   return state.buildings.reduce((sum, row) => sum + levelValue(row, registry.buildings.get(row.typeId), 'population', config), 0);
 }
 
 /** Service radius is measured between footprint centers, including its boundary. */
 export function coverageForBuilding(state, registry, id, config = { levelMultiplier: 0 },connections) {
+  state = registry.cityProgress?.operatingState(state) ?? state;
   const building = state.buildings.find(row => row.id === id);
   if (!building) return [];
   const type = registry.buildings.get(building.typeId);
@@ -38,6 +40,8 @@ export function coverageForBuilding(state, registry, id, config = { levelMultipl
 
 /** City values are population-weighted service coverage; no per-citizen needs are stored. */
 export function calculateMetrics(state, registry, config) {
+  const fullState = state;
+  state = registry.cityProgress?.operatingState(state) ?? state;
   const connections=state.cityManagement?.enabled?cityConnections(state,registry):null;
   const households = state.buildings.filter(row => levelValue(row, registry.buildings.get(row.typeId), 'population', config) > 0);
   const totalPopulation = population(state, registry, config);
@@ -59,5 +63,5 @@ export function calculateMetrics(state, registry, config) {
     if (typeof metric.calculate === 'function') score = metric.calculate({ state, registry, config, score, population: totalPopulation });
     values[metric.id] = Math.round(Math.min(config.metricMax, Math.max(config.metricMin, score)));
   }
-  return values;
+  return registry.cityProgress?.metrics(fullState, registry, values) ?? values;
 }

@@ -1,0 +1,26 @@
+diff --git a/workout/island/ui/kid-ux-library.mjs b/workout/island/ui/kid-ux-library.mjs
+index 96f0575b..9b86cb2e 100644
+--- a/workout/island/ui/kid-ux-library.mjs
++++ b/workout/island/ui/kid-ux-library.mjs
+@@ -6,3 +6,21 @@ kidUxStyle('001', `
+     min-height: 48px;
+   }
+ `);
++
++kidUxStyle('002', `
++  .modal.modal:is([data-game-library], [data-game-home]) > .modal-close {
++    width: 48px;
++    height: 48px;
++    min-width: 48px;
++    min-height: 48px;
++  }
++  .modal.modal:is([data-game-library], [data-game-home]) > .sound-toggle {
++    min-width: 48px;
++    min-height: 48px;
++    inset-inline-end: 72px;
++    font-size: 14px;
++  }
++  .modal.modal:is([data-game-library], [data-game-home]) > h2 {
++    margin-inline-end: 150px;
++  }
++`);

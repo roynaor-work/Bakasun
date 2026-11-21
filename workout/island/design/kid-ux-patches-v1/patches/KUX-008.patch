@@ -1,0 +1,267 @@
+diff --git a/workout/island/minigames/boar-session.mjs b/workout/island/minigames/boar-session.mjs
+index 8cdc4b6e..e0e3e29b 100644
+--- a/workout/island/minigames/boar-session.mjs
++++ b/workout/island/minigames/boar-session.mjs
+@@ -1,4 +1,5 @@
+ import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-15';
++import { pinBoarResults } from '../ui/kid-ux-result.mjs?v=island-v2-20261107-15';
+ 
+ /** A local frame preserves the original game's CSS, Three.js and campaign.
+  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */
+@@ -44,6 +45,7 @@ export function runBoarSession(ctx) {
+     if(!bridge?.ready){failed();return;}
+     clearTimeout(timeout);error=null;ready=true;ctx.warning.hidden=true;
+     bridge.onExit=()=>ctx.cancel();
++    pinBoarResults(frame.contentDocument,bridge.onExit);
+     bridge.onPause=()=>ctx.dialog.querySelector('[data-action=game-pause]')?.click();
+     bridge.setPaused(paused);syncSound();if(!paused)frame.contentWindow.focus();
+   });
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index b4f6e66c..457d3c9f 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -26,6 +26,7 @@ import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fir
+ import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-15';
+ import { gameGuide, helpReplay } from './kid-ux-help.mjs?v=island-v2-20261107-15';
+ import './kid-ux-library.mjs?v=island-v2-20261107-15';
++import { pinResultActions, wrapResultOffer } from './kid-ux-result.mjs?v=island-v2-20261107-15';
+ 
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+@@ -385,9 +386,13 @@ export class ActivityInterface {
+   }
+   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
+     if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}
+-    if(id==='fireRescue'&&result.fireBonus){fireBonusResult(this,result,eventId);return;}
++    if(id==='fireRescue'&&result.fireBonus){
++      const dialog=fireBonusResult(this,result,eventId);
++      pinResultActions(dialog,()=>this.ui.closeModal());
++      return;
++    }
+     if(id==='alpineRush'&&result.alpineLeague){this.alpineLeagueResult(result,alpineSummary);return;}
+-    if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return;}
++    if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);pinResultActions(dialog,()=>this.ui.closeModal());return;}
+     const game=this.engine.registry.minigames.get(id);
+     this.ui.modalCleanup=null;
+     const dialog=this.modal(result.outcome==='win'?'minigame.win':'minigame.lose','minigame.resultHint',eventId);
+@@ -414,13 +419,14 @@ export class ActivityInterface {
+     dialog.append(button(this.t('minigame.stages'),'game-stages',()=>this.stages(id)),button(this.t('equipment.shop'),'equipment-shop',()=>this.equipment(id)));
+     if(result.outcome==='win'&&result.stage<this.engine.state.minigameProgress[id].stage&&!(id==='soccer'&&this.data.config.minigames.soccer.league&&result.stage>=this.data.config.minigames.soccer.league.leagues.length*this.data.config.minigames.soccer.league.matchesPerLeague))dialog.append(button(this.t('minigame.continue'),'game-next-stage',()=>id==='navalDuel'?this.stages(id):this.start(id,undefined,result.stage+1),'primary-button'));
+     if(id==='alienDefense')dialog.append(button(this.t('hangar.title'),'open-hangar',()=>this.hangar()));
++    pinResultActions(dialog,()=>this.ui.closeModal());
+     this.offerUpgrade(id,result,host=>{if(panel.isConnected)panel.after(host);});
+     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
+     this.engine.narration.announce('minigame.result',result);
+   }
+   /** Upgrade offer after a stage (ui/upgrade-offer.mjs, loaded on first use). Silent on any failure; ?upgradeOffer=0 turns it off. */
+   offerUpgrade(id,result,place){
+-    import('./upgrade-offer.mjs?v=island-v2-20261107-15').then(m=>m.offerUpgrade({engine:this.engine,activity:this.activity,data:this.data,t:this.t,gameId:id,result,place,sound:e=>this.sound.play(e)})).catch(()=>{});
++    import('./upgrade-offer.mjs?v=island-v2-20261107-15').then(m=>m.offerUpgrade({engine:this.engine,activity:this.activity,data:this.data,t:this.t,gameId:id,result,place:host=>place(wrapResultOffer(host)),sound:e=>this.sound.play(e)})).catch(()=>{});
+   }
+   /** Racing league (ui/racing-league.mjs, loaded on first use). ?racingLeague=0 removes every entry point. */
+   racingLeagueOnly(){return this.leagueOn()&&new URLSearchParams(globalThis.location?.search||'').get('racingLevels')!=='1';}
+@@ -448,7 +454,10 @@ export class ActivityInterface {
+       const again={engine:this.engine,...this.leagueActions()};
+       const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
+       dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
+-      if(kind==='result')this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
++      if(kind==='result'){
++        pinResultActions(dialog,()=>this.ui.closeModal());
++        this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
++      }
+     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+   }
+   racingLeagueResult(result){
+@@ -478,6 +487,7 @@ export class ActivityInterface {
+       const actions=this.alpineLeagueActions(),again=()=>this.alpineLeagueGo(result?.alpineLeague?.n);
+       const body=kind==='shop'?m.shopBody({engine:this.engine,refresh:()=>this.alpineLeagueScreen('shop')}):kind==='result'?m.resultBody({engine:this.engine,result,summary,...actions,again}):m.seasonBody({...actions,engine:this.engine,refresh:()=>this.alpineLeagueScreen('season')});
+       dialog.append(body,button('חזרה לליגה','alpine-league-back',()=>this.stages('alpineRush'),'adventure-back'));
++      if(kind==='result')pinResultActions(dialog,()=>this.ui.closeModal());
+     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+   }
+   alpineLeagueResult(result,summary){
+diff --git a/workout/island/ui/kid-ux-result.mjs b/workout/island/ui/kid-ux-result.mjs
+new file mode 100644
+index 00000000..e0f71229
+--- /dev/null
++++ b/workout/island/ui/kid-ux-result.mjs
+@@ -0,0 +1,179 @@
++import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++kidUxStyle('008', `
++  .modal.modal[data-kid-ux-result] {
++    display: flex;
++    flex-direction: column;
++    overflow: hidden;
++    max-height: 100%;
++    padding: 12px;
++  }
++  .modal.modal[data-kid-ux-result] > .modal-close {
++    position: absolute;
++    inset-block-start: 8px;
++    inset-inline-end: 8px;
++    float: none;
++  }
++  .modal.modal[data-kid-ux-result] > h2 {
++    display: flex;
++    align-items: center;
++    flex: none;
++    min-height: 48px;
++    margin-inline: 72px;
++    padding-block: 0;
++  }
++  .modal[data-kid-ux-result] > .modal-subtitle {
++    flex: none;
++    margin-block: 6px;
++    font-size: 14px;
++  }
++  .kid-ux-result-body {
++    min-height: 0;
++    overflow-y: auto;
++    overscroll-behavior: contain;
++  }
++  .kid-ux-result-details {
++    padding-inline: 5px;
++    font-size: 14px;
++  }
++  .kid-ux-offer-details:not(:has([data-upgrade-offer])) { display: none; }
++  .kid-ux-result-details summary {
++    align-content: center;
++    min-height: 44px;
++    padding-inline: 8px;
++    cursor: pointer;
++  }
++  .kid-ux-result-actions {
++    display: flex;
++    flex-wrap: wrap;
++    flex: none;
++    gap: 8px;
++    padding-top: 8px;
++    border-top: 1px solid #95b8b5;
++    margin-top: 8px;
++  }
++  .modal.modal[data-kid-ux-result] .kid-ux-result-actions button {
++    flex: 1 1 max-content;
++    min-width: 44px;
++    min-height: 44px;
++    padding: 5px 10px;
++    margin: 0;
++    border: 1px solid #95b8b5;
++    border-radius: 10px;
++    background: #fff2cb;
++    color: #173139;
++    font-size: 14px;
++    text-align: center;
++  }
++  .modal.modal[data-kid-ux-result] .kid-ux-result-actions button:first-child {
++    background: #c7f5a9;
++  }
++`);
++
++const navigation = [
++  'game-next-stage', 'game-again', 'game-stages', 'fire-bonus-interior',
++  'racing-league-go', 'racing-league-next-season', 'racing-league-restart', 'racing-league-back',
++  'alpine-league-next', 'alpine-league-again', 'alpine-league-back',
++  'soccer-training',
++];
++
++export function pinResultActions(dialog, onExit) {
++  if (!kidUx('008')) return;
++  const document = dialog.ownerDocument;
++  const footer = document.createElement('footer');
++  footer.className = 'kid-ux-result-actions';
++  footer.setAttribute('aria-label', 'פעולות בסיום');
++  for (const action of navigation) {
++    const control = dialog.querySelector(`[data-action="${action}"]`);
++    if (!control) continue;
++    const wrapper = control.parentElement;
++    footer.append(control);
++    if (wrapper.classList.contains('ik-wrap')) wrapper.remove();
++  }
++
++  let exit = dialog.querySelector('[data-action="game-exit"]');
++  if (!exit) {
++    exit = document.createElement('button');
++    exit.type = 'button';
++    exit.dataset.action = 'game-exit';
++    exit.onclick = onExit;
++  }
++  exit.textContent = 'לחזור לאי';
++  footer.append(exit);
++
++  const stats = dialog.querySelector('.game-result');
++  if (stats) {
++    const details = document.createElement('details');
++    details.className = 'kid-ux-result-details';
++    const heading = document.createElement('summary');
++    heading.textContent = 'ניקוד ופרסים';
++    stats.replaceWith(details);
++    details.append(heading, stats);
++  }
++  const body = document.createElement('div');
++  body.className = 'kid-ux-result-body';
++  for (const child of [...dialog.children]) {
++    if (!child.matches('h2, .modal-close, .modal-subtitle, .sound-toggle, link')) body.append(child);
++  }
++  dialog.dataset.kidUxResult = '';
++  dialog.append(body, footer);
++}
++
++export function wrapResultOffer(host) {
++  if (!kidUx('008')) return host;
++  const document = host.ownerDocument;
++  const details = document.createElement('details');
++  details.className = 'kid-ux-result-details kid-ux-offer-details';
++  const summary = document.createElement('summary');
++  summary.textContent = 'הצעת שדרוג';
++  details.append(summary, host);
++  return details;
++}
++
++export function pinBoarResults(document, onExit) {
++  if (!kidUx('008') || !document) return;
++  const defeat = document.querySelector('#gameover .small-panel');
++  const shop = document.querySelector('#shop .shop-footer');
++  if (!defeat || !shop || defeat.querySelector('[data-kid-ux-boar-exit]')) return;
++
++  const style = document.createElement('style');
++  style.textContent = `
++    #gameover .small-panel { max-height: 100%; padding: 12px 18px; overflow: auto; }
++    #gameover #result { margin-block: 5px; line-height: 1.4; font-size: 14px; }
++    .kid-ux-boar-actions {
++      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
++      position: sticky; bottom: -12px; border-radius: 10px; padding: 8px; background: #163743;
++    }
++    #gameover .kid-ux-boar-actions button {
++      flex: 1 1 max-content; width: auto; margin: 0;
++    }
++    #gameover .kid-ux-boar-actions button, #shop:has(#perk-section:not([hidden])) .shop-footer button {
++      min-width: 44px; min-height: 44px; padding: 5px 10px; font-size: 14px;
++    }
++    #shop:has(#perk-section:not([hidden])) .shop-footer {
++      position: sticky; bottom: 0; background: #163743; z-index: 2;
++    }
++    #shop:not(:has(#perk-section:not([hidden]))) [data-kid-ux-boar-win-exit] { display: none; }
++  `;
++  document.head.append(style);
++
++  const makeExit = () => {
++    const exit = document.createElement('button');
++    exit.type = 'button';
++    exit.className = 'secondary';
++    exit.dataset.kidUxBoarExit = '';
++    exit.textContent = 'לחזור לאי';
++    exit.onclick = onExit;
++    return exit;
++  };
++  const footer = document.createElement('footer');
++  footer.className = 'kid-ux-boar-actions';
++  footer.append(defeat.querySelector('#retry'), defeat.querySelector('#death-shop'), makeExit());
++  defeat.append(footer);
++
++  const winExit = makeExit();
++  winExit.dataset.kidUxBoarWinExit = '';
++  shop.append(winExit);
++  const perks = document.querySelector('#perk-section');
++  document.querySelector('#wave-stats').after(perks);
++}

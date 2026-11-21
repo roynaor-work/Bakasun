@@ -27,7 +27,7 @@ export function createLabSpeech({ synth, Utterance, context, fetchFile, now = ()
         u.onend = finish;
         u.onerror = () => { job.onSource('text-only', []); finish(); };
         synth.speak(u);
-        job.onSource(voice.localService === true ? 'hebrew-local' : 'hebrew-network', splitVoiceText(job.text).map(p => p.id));
+        job.onSource('hebrew-local', splitVoiceText(job.text).map(p => p.id));
         return true;
       } catch { job.onSource('text-only', []); return false; }
     },

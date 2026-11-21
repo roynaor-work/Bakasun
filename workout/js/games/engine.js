@@ -34,7 +34,7 @@ function tinted(key, color) { const im = getImg(key); if (!im || !im.complete ||
 // מוזיקת רקע: לופים CC0 מ-OpenGameArt ב-snd/music (battle, crazy, cunning, booxbep). לפי קבוצת המשחק, או def.music; המשחק יכול להחליף באמצע (r.music('crazy') בפקמן במצב כוח)
 const MUSIC_URL = name => new URL(`../../snd/music/${name}.ogg`, import.meta.url).href;
 const ALL_MUSIC = ['booxbep', 'battle', 'cunning', 'crazy']; let lastMusic = null; const pickMusic = () => { const opts = ALL_MUSIC.filter(m => m !== lastMusic); lastMusic = opts[Math.floor(Math.random() * opts.length)]; return lastMusic; };
-export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, recording = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true }) {
+export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true, speak = null, recording = null, demo = false, demoOnly = false, tokens = () => 0, onContinue = null, progress = null, onProgress = null, net = null, music = true, onRoundResult = null }) {
   host.innerHTML = `
     <div class="gamewrap">
       <div class="gamehud">
@@ -180,6 +180,9 @@ export function runGame(def, { seconds = 0, host, best = 0, onEnd, sound = true,
       if (reward.stars) overlay.querySelector('.gmsg b').insertAdjacentHTML('beforebegin', starHtml);
       overlay.querySelector('.gmsg').insertAdjacentHTML('beforeend', `${reward.reasons.map(reason => `<p class="small">⭐ ${reason}</p>`).join('')}<button class="btn primary big" id="gback">ממשיכים 💪</button>`);
       overlay.querySelector('#gback').onclick = () => finish({ score, best: Math.max(best, score), stars: reward.stars, starReasons: reward.reasons });
+      if (onRoundResult && completed && reward.stars > 0) {
+        onRoundResult({score, stars: reward.stars, completed: true}, overlay.querySelector('.gmsg'));
+      }
     };
     if (newBest) {
       // חגיגת שער: מסתירים את ההודעה בזמן הסימולציה, ומראים אותה בסופה

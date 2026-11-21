@@ -302,8 +302,8 @@ test('the child bot (human noise: reaction, missed warnings, taps at its own rhy
 });
 
 // ---------------------------------------------------------------- Data and wiring
-test('words, styles and the offline list: help texts describe the magazine, the tap lock, the red decal and the torpedo; the new modules and Codex copies are cached offline with their licences',async()=>{
- assert.match(strings['minigame.alienDefense.help.1'],/מחסנית וולקן/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/סימון אדום/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);
+test('words, styles and the offline list: help texts describe the magazine, the tap lock, the flashing marker and the torpedo; the new modules and Codex copies are cached offline with their licences',async()=>{
+ assert.match(strings['minigame.alienDefense.help.1'],/מחסנית וולקן/);assert.match(strings['minigame.navalDuel.help.1'],/כפתור הנעילה/);assert.match(strings['minigame.navalDuel.help.3'],/סימון מהבהב על המים/);assert.match(strings['minigame.navalDuel.help.3'],/רק טורפדו/);
  const manifest=JSON.parse(await read('../workout/island/offline-manifest.json'));
  for(const f of ['minigames/alien-v24.mjs','minigames/alien-v24-draw.mjs','minigames/alien-v24-audio.mjs','minigames/alien-v24.css','minigames/naval-v24.mjs','minigames/naval-v24-hud.mjs','minigames/naval-v24-audio.mjs','minigames/naval-v24.css'])assert.ok(manifest.shell.includes(f),f);
  for(const f of ['assets/alien-v24/vulcan-magazine.png','assets/alien-v24/pickup-burst.png','assets/alien-v24/refill-pickup.ogg','assets/alien-v24/overheat.ogg'])assert.ok(manifest.games.alien.includes(f),f);

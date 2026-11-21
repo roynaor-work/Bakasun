@@ -1,3 +1,4 @@
+import {releaseVersion} from './helpers/island-release.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -30,7 +31,8 @@ test('offline manifest: sizes per game and for the island (reported in the relea
  console.log('offline MB',JSON.stringify(Object.fromEntries(Object.entries(sizes).map(([g,b])=>[g,Math.round(b/104857.6)/10])))+' assets '+assetsMb.toFixed(1)+' with app code '+allMb.toFixed(1));
  /* v24.1 (15/11): the cap moved from 80 to 90 MB on purpose: the 3D fire rooms, the referees, the clips and the 3D crowd add 7.5 MB; the offline download is optional and a per-game download is next. */
  /* v24.6 (20/11): 90 -> 92 MB on purpose: the fire truck model was never in the fire pack (+0.3 MB, it now has to be there before the first frame), the fire floors and rescue clips (+1.6 MB) and the new boar pack (weather layers and upgrade icons, +0.8 MB) end at about 91 MB. */
- assert.ok(assetsMb>10&&assetsMb<92,'game assets stay a phone-sized download: '+assetsMb);
+ /* v24.7 (20/11): the Codex v3 racing circuits (48 models, 6 skies) and three v6 sounds add 0.93 MB: about 91.96 MB, 0.04 MB under the cap. The next package needs room made first. */
+ assert.ok(assetsMb>10&&assetsMb<93,'game assets stay a phone-sized download: '+assetsMb);
 });
 
 test('offline manifest: the basketball motion clips and the shell list are complete and up to date',async()=>{
@@ -47,7 +49,7 @@ test('offline worker: classic script with the same managed rule as the page, ver
  assert.ok(!/^\s*(import|export)\s/m.test(source),'classic worker, not a module');
  assert.ok(source.includes(MANAGED.source),'worker carries the same managed pattern as ui/offline.mjs');
  assert.ok(source.includes("'island-assets-'+VERSION"));
- assert.equal(cacheName('island-v2-20261107-20'),'island-assets-island-v2-20261107-20');
+ assert.equal(cacheName(releaseVersion),'island-assets-'+releaseVersion);
 });
 
 function runWorker(version='v1'){
@@ -132,12 +134,12 @@ test('save data safety: the offline code never clears or deletes game saves',asy
 });
 
 test('wiring: one panel in the main games menu, automatic download and release check on every open, reports for all three games',async()=>{
- const activity=await read('ui/activity.mjs'),app=await read('app.mjs'),hoops=await read('minigames/hoops-session.mjs'),alpine=await read('minigames/alpine-session.mjs'),soccer=await read('minigames/soccer-session.mjs'),card=await read('ui/soccer-card.mjs'),panel=await read('ui/offline-panel.mjs');
+ const activity=await read('ui/activity.mjs'),app=await read('app.mjs'),hoops=await read('minigames/hoops-session.mjs'),alpine=await read('minigames/alpine-session.mjs'),soccer=await read('minigames/soccer-session.mjs'),parent=await read('ui/interface.mjs'),panel=await read('ui/offline-panel.mjs');
  assert.ok(activity.includes('dialog.append(cards,offlinePanel())'));
- assert.ok(panel.includes("dataset.action='offline-download-all'")&&panel.includes("dataset.action='offline-check-update'")&&panel.includes('הורדת כל המשחקים למכשיר')&&panel.includes('בדיקת עדכון והורדה'));
+ assert.ok(panel.includes("dataset.action='offline-download-all'")&&panel.includes("dataset.action='offline-check-update'")&&panel.includes('הורדת המשחקים')&&panel.includes('בדיקת עדכון והורדה'));
  assert.ok(app.includes('releaseWatch.poll()')&&app.includes('startAutoDownload(')&&app.includes('prefetchRelease(')&&app.includes('registerOfflineWorker()'));
  assert.ok(app.includes('canRun:()=>!engine.isMinigameActive()'),'the background download waits while a game runs');
- assert.ok(hoops.includes("saveGameReport('hoops'")&&alpine.includes("saveGameReport('alpine'")&&soccer.includes("'island.soccer.lastLoadReport'")&&card.includes("reportPanel('soccer')"));
+ assert.ok(hoops.includes("saveGameReport('hoops'")&&alpine.includes("saveGameReport('alpine'")&&soccer.includes("'island.soccer.lastLoadReport'")&&parent.includes('appendLoadReports(modal)'));
  assert.equal(reportKey('soccer'),'island.soccer.lastLoadReport');assert.equal(reportKey('hoops'),'island.hoops.lastLoadReport');
  assert.ok(hoops.includes('timeout 45 s'),'basketball load has a clear timeout');
 });

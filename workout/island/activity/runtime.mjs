@@ -1,18 +1,18 @@
-import {equipmentOffer} from './equipment.mjs?v=island-v2-20261107-20';
-import {gameAvailability} from './availability.mjs?v=island-v2-20261107-20';
-import {eventEligible} from './eligibility.mjs?v=island-v2-20261107-20';
-import {seededRandom} from '../minigames/context.mjs?v=island-v2-20261107-20';
-import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-v2-20261107-20';
+import {equipmentOffer} from './equipment.mjs?v=island-v2-20261107-21';
+import {gameAvailability} from './availability.mjs?v=island-v2-20261107-21';
+import {eventEligible} from './eligibility.mjs?v=island-v2-20261107-21';
+import {seededRandom} from '../minigames/context.mjs?v=island-v2-20261107-21';
+import {buildingCenter,levelFactor} from '../engine/metrics.mjs?v=island-v2-20261107-21';
 
-export function createActivity(engine,{now=Date.now,random=seededRandom(now()),blocked=()=>false,onLaunch}={}) {
+export function createActivity(engine,{now=Date.now,random=seededRandom(now()),scheduling=true,blocked=()=>false,onLaunch}={}) {
   const {state,data,registry}=engine,config=data.config.events,listeners=new Set();
   let disposed=false,playing=false;
   // Reloads never resume a half-created canvas or award an unfinished result.
-  if(state.events.active?.phase==='playing'){state.events.active.phase='ready';engine.save();}
+  if(scheduling&&state.events.active?.phase==='playing'){state.events.active.phase='ready';engine.save();}
   const emit=()=>{for(const listener of listeners)listener();};
   const save=()=>{const saved=engine.save();engine.city?.emergency();emit();return saved;};
   const busy=()=>blocked()||engine.isMinigameActive()||(!state.tutorial.completed&&!state.tutorial.skipped)||!state.avatar.created;
-  const enabled=id=>data.featureFlags.events&&data.featureFlags[config.types[id]?.featureFlag]&&data.featureFlags.minigames&&data.featureFlags[config.types[id]?.gameId];
+  const enabled=id=>scheduling&&data.featureFlags.events&&data.featureFlags[config.types[id]?.featureFlag]&&data.featureFlags.minigames&&data.featureFlags[config.types[id]?.gameId];
   function bonuses(event=state.events.active) {
     if(event?.typeId!=='fire'||!event.targetId)return {};
     const target=state.buildings.find(b=>b.id===event.targetId);if(!target)return {};
@@ -60,7 +60,7 @@ export function createActivity(engine,{now=Date.now,random=seededRandom(now()),b
       if(disposed)return;
       let repaired=false;for(const [id,until]of Object.entries(state.events.repairs))if(until<=now()||!state.buildings.some(b=>b.id===id)){delete state.events.repairs[id];repaired=true;}
       if(repaired)save();
-      if(busy()||playing)return;
+      if(!scheduling||busy()||playing)return;
       const event=state.events.active;
       if(event){
         if(enabled(event.typeId)&&event.phase==='warning'&&now()>=event.warningUntil){event.phase='ready';save();}

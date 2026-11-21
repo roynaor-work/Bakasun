@@ -227,7 +227,7 @@ test('v7 HUD: tool button, fire button, zone ring and aim dot in a fake DOM; Heb
   ch.state.crim.s = ch.state.s + 12; ch.state.crim.d = ch.state.d + .9; ch.state.crim.targetD = ch.state.crim.d; ch.step(1 / 60); ch.drainEvents();
   const aim = ch.gun.aimInfo(); assert.ok(aim.inRange);
   const z = zoneWorld(ch.track, ch, aim), d = dotWorld(ch.track, ch, aim); assert.ok(Number.isFinite(z.x) && Number.isFinite(d.x) && z.y === aim.zoneY);
-  assert.deepEqual(toolLabel(ch.gun.state, k => resolveText(k => k, k)), {name: 'פנצ׳ר', left: `${ARSENAL.tools.tyres.ammo}/${ARSENAL.tools.tyres.ammo}`});
+  assert.deepEqual(toolLabel(ch.gun.state, k => resolveText(k => k, k)), {name: 'ירי לגלגל', left: `${ARSENAL.tools.tyres.ammo}/${ARSENAL.tools.tyres.ammo}`});
   // fake DOM, enough for the HUD
   const el = tag => { const n = {tag, children: [], dataset: {}, style: {setProperty() {}, removeProperty() {}}, attrs: {}, listeners: {}, hidden: false, className: '', classList: {add() {}, remove() {}}, offsetWidth: 1,
     append(...k) { for (const c of k) { c.parent = n; n.children.push(c); } }, prepend(...k) { n.append(...k); }, remove() { if (n.parent) n.parent.children = n.parent.children.filter(c => c !== n); }, replaceChildren(...k) { n.children = []; n.append(...k); },

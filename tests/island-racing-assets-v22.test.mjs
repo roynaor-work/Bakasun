@@ -1,3 +1,4 @@
+import {assertReleaseTags} from './helpers/island-release.mjs';
 // v22 racing assets: four Codex packages (crash FX, broadcast, league, audio v3) wired behind their own URL flags.
 // Each flag returns the previous behaviour exactly; the files exist in assets/ (byte-identical to design/); the offline list carries them.
 import test from 'node:test';
@@ -209,6 +210,6 @@ test('offline list: every new asset is in the racing pack and every new module i
 });
 test('the new modules import with the current version tag',async()=>{
  for(const file of ['minigames/racing-crash-assets.mjs','minigames/racing-broadcast-art.mjs','ui/racing-league-art.mjs']){
-  const tags=[...(await read(file)).toString().matchAll(/\?v=([\w-]+)/g)].map(m=>m[1]);assert.ok(tags.every(t=>t==='island-v2-20261107-20'),file+' '+tags);
+  assertReleaseTags((await read(file)).toString(),file,{required:false});
  }
 });

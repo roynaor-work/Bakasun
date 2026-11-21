@@ -1,0 +1,39 @@
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 457d3c9f..fe83f3c9 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -250,7 +250,18 @@ export class ActivityInterface {
+     this.launch(choice.gameId,choice.eventId,stage);
+   }
+   narrateHelp(id) {for(let i=1;i<=3;i++){const key=`minigame.${id}.help.${i}`;this.engine.narration.announce(key);this.ui.narrate(key);}}
+-  helpLines(id) {const lines=el('div','game-help-lines');for(let i=1;i<=3;i++)lines.append(el('p','',this.t(`minigame.${id}.help.${i}`)));return lines;}
++  helpLines(id) {
++    const lines=el('div','game-help-lines');
++    const leagueHelp=kidUx('015')&&id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length;
++    if(leagueHelp)lines.dataset.kidUxSoccerLeagueHelp='';
++    for(let i=1;i<=3;i++){
++      const copy=leagueHelp&&i===3
++        ?'בְּמַפַּת הַלִּיגָה בּוֹחֲרִים מִשְׂחָק פָּתוּחַ. אֶפְשָׁר לְהִתְאַמֵּן בְּ״אִמּוּן שַׂחְקָן״ וּלְהַכִּיר אֶת הַשַּׂחְקָנִים בְּכַרְטִיסֵי הַקְּבוּצוֹת.'
++        :this.t(`minigame.${id}.help.${i}`);
++      lines.append(el('p','',copy));
++    }
++    return lines;
++  }
+   soccerHandedness(id='soccer'){
+     const c=this.data.config.minigames[id].controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action=id+'-hand';
+     let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}
+diff --git a/workout/island/ui/kid-ux-help.mjs b/workout/island/ui/kid-ux-help.mjs
+index 2f6cb733..c3b8cf8b 100644
+--- a/workout/island/ui/kid-ux-help.mjs
++++ b/workout/island/ui/kid-ux-help.mjs
+@@ -240,3 +240,10 @@ export function helpReplay({ dialog, gameId, guide, play, again, isMuted, readTe
+   });
+   return stop;
+ }
++
++kidUxStyle('015', `
++  .modal [data-kid-ux-soccer-league-help] p {
++    font-size: 14px;
++    color: #fff8e8;
++  }
++`);

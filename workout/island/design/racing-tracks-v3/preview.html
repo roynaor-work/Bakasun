@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data: blob:; object-src 'none'; base-uri 'none'">
+  <title>מסלולי האי · מרוצים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <main class="lab" aria-label="תצוגת מסלולי המרוצים">
+    <header class="mast">
+      <div class="wordmark">
+        <span class="flag" aria-hidden="true"></span>
+        <h1>מסלולי האי</h1>
+      </div>
+      <label class="weather" for="weather">
+        <span>מזג אוויר</span>
+        <select id="weather" disabled></select>
+      </label>
+    </header>
+
+    <nav class="circuits" id="circuits" aria-label="בחירת מסלול"></nav>
+
+    <div class="views">
+      <section class="card map-card" aria-labelledby="route-name">
+        <canvas id="map" role="img" aria-label="מפת המסלול וקו הנסיעה. אפשר לשנות מיקום באמצעות סרגל ההקפה."></canvas>
+        <div class="route-info">
+          <h2 id="route-name">טוען מסלולים…</h2>
+          <p id="route-metrics"></p>
+        </div>
+        <ul class="map-key" aria-label="מקרא מפה">
+          <li><i class="key-line" aria-hidden="true"></i>קו נסיעה</li>
+          <li><i class="key-pit" aria-hidden="true"></i>פיט</li>
+          <li><i class="key-drs" aria-hidden="true"></i><bdi>DRS</bdi></li>
+          <li><i class="key-bridge" aria-hidden="true"></i>גשר</li>
+          <li><i class="key-runoff" aria-hidden="true"></i>אזור יציאה</li>
+          <li><i class="key-prop" aria-hidden="true"></i>אביזר צד</li>
+        </ul>
+      </section>
+
+      <section class="card chase-card" aria-label="מצלמת מרדף">
+        <canvas id="chase" role="img" aria-label="רכב פורמולה לאורך קו הנסיעה"></canvas>
+        <canvas id="atmosphere" aria-hidden="true"></canvas>
+        <div class="chase-top">
+          <span class="camera-label"><i aria-hidden="true"></i>מצלמת מרדף</span>
+          <span class="drs" id="drs" dir="ltr" aria-label="מצב DRS">DRS</span>
+        </div>
+        <div class="chase-footer">
+          <span class="speed"><bdi id="speed">—</bdi> קמ״ש</span>
+        </div>
+        <p id="scene-status" class="scene-status" role="status"></p>
+      </section>
+    </div>
+
+    <div class="timeline" aria-label="ניגון הקפה">
+      <button class="play" id="play" type="button" aria-label="נגן הקפה" title="נגן הקפה" disabled><i aria-hidden="true"></i></button>
+      <label for="progress">הקפה</label>
+      <input id="progress" type="range" min="0" max="1000" value="0" dir="ltr" disabled>
+      <output id="distance" for="progress" aria-live="off" dir="ltr">—</output>
+    </div>
+    <p id="error" class="error" role="alert" hidden></p>
+    <noscript>יש להפעיל JavaScript כדי להציג את המסלולים.</noscript>
+  </main>
+</body>
+</html>

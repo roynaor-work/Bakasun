@@ -1,0 +1,59 @@
+diff --git a/workout/island/minigames/boar-island/game.js b/workout/island/minigames/boar-island/game.js
+index ef046880..2b84724a 100644
+--- a/workout/island/minigames/boar-island/game.js
++++ b/workout/island/minigames/boar-island/game.js
+@@ -879,12 +879,41 @@ function updateHud(){
+ }
+ 
+ // ---------- shop ----------
++const kidShop=kidUx('025');
++function prepareKidShop(){
++  const panel=$('shop').querySelector('.shop-panel'),body=document.createElement('div');
++  body.className='kid-boar-shop-body';
++  const footer=panel.querySelector('.shop-footer');
++  for(const item of [...panel.children])if(item!==footer)body.append(item);
++  panel.prepend(body);
++  kidUxStyle('025',
++    '#shop.panel-screen{overflow:hidden;align-items:center;padding:12px}' +
++    '#shop .shop-panel{display:flex;flex-direction:column;padding:0;height:min(100%,650px);max-height:100%;overflow:hidden}' +
++    '#shop .kid-boar-shop-body{min-height:0;flex:1;overflow:auto;padding:12px;overscroll-behavior:contain}' +
++    '#shop .kid-boar-shop-body .tabs{position:sticky;top:0;background:#102731;z-index:2;margin-bottom:8px;padding-inline-start:60px}' +
++    '#shop .shop-footer{flex:none;display:flex;flex-wrap:wrap;gap:8px;padding:6px 12px;margin:0;background:#102731;border-top:1px solid #64818e}' +
++    '#shop .shop-footer>span{color:#fff;font-size:14px}' +
++    '#shop .shop-footer #next-wave{background:#ffe088;color:#152534}' +
++    '#shop .shop-footer #shop-back{background:#163d4c;color:#fff}' +
++    '#shop .tabs button,#shop .weapon-card button,#shop .upgrade-card button,#shop .shop-footer button,#shop .perk{min-height:48px;min-width:48px;font-size:14px}' +
++    '#shop .weapon-card details{grid-column:1/-1}' +
++    '#shop .weapon-card summary{display:flex;align-items:center;min-height:44px;font-size:14px;color:#fff;cursor:pointer}' +
++    '#shop .weapon-card h3 small,#shop .weapon-card p,#shop .upgrade-card p,#shop .panel-heading p{font-size:14px;color:#e0eef2}' +
++    '#shop .weapon-card h3{flex-wrap:wrap;gap:4px}' +
++    '#shop .weapon-card .wicon{grid-row:span 2}' +
++    '#shop .weapon-card button{margin-top:2px}' +
++    '#shop .panel-heading{margin-bottom:8px}' +
++    '@media(max-height:450px){#shop .panel-heading{padding-inline-start:60px}#shop .panel-heading .eyebrow{display:none}}'
++  );
++}
++if(kidShop)prepareKidShop();
+ function openShop(from){
+   shopFrom=from;selectedPerk='';setMode('shop');refreshWeaponCache();
++  if(kidShop)$('shop').querySelector('.kid-boar-shop-body').scrollTop=0;
+   $('shop-title').textContent=from==='win'?`גל ${wave} הושלם`:'מוסך החוף';$('shop-eyebrow').textContent=from==='win'?'החוף שלנו · לעת עתה':'חוזרים לקרב חזקים יותר';
+   $('shop-subtitle').textContent=from==='win'?`בחרו שדרוגים ויתרון לגל ${save.nextWave}.`:'נשקים ושדרוגים קבועים ונשמרים במכשיר הזה.';
+   $('wave-stats').hidden=from!=='win';if(from==='win'){const acc=roundShots?Math.round(roundHits/roundShots*100):0;$('wave-stats').innerHTML=`<div><b>${killed}</b><small>רובוטים הופלו</small></div><div><b>${acc}%</b><small>דיוק</small></div><div><b>${roundCrits}</b><small>פגיעות בעין</small></div><div><b>+${roundCoins}</b><small>מטבעות</small></div><div><b>${Math.round(damageTaken)}</b><small>נזק שספגנו</small></div>`;}
+-  $('perk-section').hidden=from!=='win';$('next-wave').textContent=`לגל ${save.nextWave} ←`;$('shop-back').hidden=from==='win';
++  $('perk-section').hidden=from!=='win';$('next-wave').textContent=`לגל ${save.nextWave} ←`;$('shop-back').hidden=from==='win'&&!kidShop;
+   if(from==='win'){const choices=[...PERKS].sort(()=>Math.random()-.5).slice(0,3);$('perks').replaceChildren();for(const p of choices){const b=document.createElement('button');b.className='perk';b.innerHTML=`<strong>${p.name}</strong><small>${p.desc}</small>`;b.onclick=()=>{selectedPerk=p.id;for(const c of $('perks').children)c.classList.toggle('selected',c===b);$('shop-message').textContent=`${p.name} פעיל בגל הבא`;$('next-wave').disabled=false;};$('perks').append(b);}$('next-wave').disabled=true;$('shop-message').textContent='בחרו יתרון אחד כדי להמשיך';}
+   else{$('next-wave').disabled=false;$('shop-message').textContent='כל שדרוג נשמר אוטומטית';}
+   setShopTab(shopTab);
+@@ -900,6 +929,11 @@ function renderShop(){
+       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
+       <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;
+     card.querySelector('button').onclick=()=>{if(buyWeapon(save,k)){persist();sfx.play('buy');refreshWeaponCache();showWeapon(current);buildWeaponBar();renderShop();toast(lv===0?`${w.name} נפתח · מקש ${WEAPON_ORDER.indexOf(k)+1} בקרב`:`${w.name} · דרגה ${save.weapons[k]}`);if(lv===0){current=k;showWeapon(k);buildWeaponBar();}}};
++    if(kidShop){
++      const details=document.createElement('details'),summary=document.createElement('summary');
++      summary.textContent='▸ נתוני הנשק';
++      details.append(summary,card.querySelector('.wstats'));card.append(details);
++    }
+     wg.append(card);}
+   const ug=$('upgrade-grid');ug.replaceChildren();
+   for(const [key,d] of Object.entries(UPGRADE_DEFS)){const lv=save.upgrades[key],cost=upgradeCost(save,key),max=lv>=d.max;const card=document.createElement('article');card.className='upgrade-card';

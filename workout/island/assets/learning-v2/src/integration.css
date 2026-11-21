@@ -1,0 +1,27 @@
+.learning-screen[data-learning-v2] .learning-body {
+  flex: 1 0 auto;
+  min-height: auto;
+  padding-block: 8px;
+}
+.learning-screen[data-learning-v2] .learning-answers {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.learning-screen[data-learning-v2] .learning-answer {
+  font-size: clamp(18px, 3.8vw, 23px);
+  line-height: 1.35;
+}
+.learning-screen[data-learning-v2] .learning-footer {
+  flex-wrap: wrap;
+}
+.learning-screen[data-learning-v2] .learning-feedback[data-state=loading] {
+  color: #285565;
+}
+@media (max-width: 480px) {
+  .learning-screen[data-learning-v2] .learning-answers {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .learning-screen[data-learning-v2] .learning-answer {
+    min-height: 48px;
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "016",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "labels": [
+          {
+            "text": "בעיטה",
+            "fontPx": 11,
+            "inside": true
+          },
+          {
+            "text": "מסירה",
+            "fontPx": 11,
+            "inside": true
+          },
+          {
+            "text": "ריצה",
+            "fontPx": 11,
+            "inside": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "objective": {
+          "text": "כבשו 1 שערים · 0/1",
+          "fontPx": 11,
+          "ratio": 10.22,
+          "width": 97.5,
+          "height": 12,
+          "visibleWidth": 97.5,
+          "visibleHeight": 12
+        }
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "cue": null,
+        "label": "בעיטה",
+        "distance": 0
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: soccer, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.soccer-actions button[data-game-control]:visible').filter({ has: locator('.soccer-action-label') }).first().first()",
+      "x": 792,
+      "y": 338,
+      "hold": 130,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "shoot",
+        "x": 792,
+        "y": 338
+      }
+    }
+  ],
+  "screenshots": [
+    "016-before-soccer-actions.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

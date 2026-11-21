@@ -1,0 +1,123 @@
+{
+  "id": "002",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "screen": "library",
+        "close": [
+          48,
+          48
+        ],
+        "sound": [
+          70.765625,
+          48
+        ],
+        "soundFontPx": 14
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "screen": "soccer home",
+        "close": [
+          48,
+          48
+        ],
+        "sound": [
+          70.765625,
+          48
+        ],
+        "soundFontPx": 14
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap changes mute state."
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap closes the game home."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 717.5,
+      "y": 297,
+      "endX": 717.5,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"soccer\"]').first()",
+      "x": 717.5,
+      "y": 226.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "game-enter",
+        "x": 717.5,
+        "y": 226.6875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-sound\"]').first()",
+      "x": 210.3828125,
+      "y": 45.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "game-sound",
+        "x": 210.3828125,
+        "y": 45.171875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"close-modal\"]').first()",
+      "x": 143,
+      "y": 45.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "close-modal",
+        "x": 143,
+        "y": 45.171875
+      }
+    }
+  ],
+  "screenshots": [
+    "002-after-library-frame.png",
+    "002-after-home-frame.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

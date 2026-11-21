@@ -2,7 +2,7 @@ import {drawV10Pickup} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;
 const clamp=(n,lo=0,hi=1)=>Math.max(lo,Math.min(hi,Number.isFinite(n)?n:lo));
 export const ALIEN_PICKUPS=Object.freeze([
- Object.freeze({id:'spread',label:'ירי מפוזר',color:'#88e7be'}),
+ Object.freeze({id:'spread',label:'ירי מניפה',color:'#88e7be'}),
  Object.freeze({id:'laser',label:'לייזר חודר',color:'#77e9ff'}),
  Object.freeze({id:'rapid',label:'ירי מהיר',color:'#ffd17b'}),
  Object.freeze({id:'shield',label:'מגן אור',color:'#8dbdff'}),

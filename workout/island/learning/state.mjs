@@ -40,12 +40,22 @@ export function recordAnswer(s,correct) {
 export function roundReward(firstTry,retried,total=8) {
   return {money:12+firstTry*6+retried*3,stars:firstTry/total>=.85?3:firstTry/total>=.5?2:1};
 }
-export function completeDailyRound(l,now) {
-  syncLearningDay(l,now);l.roundsToday=Math.min(Number.MAX_SAFE_INTEGER,l.roundsToday+1);if(l.roundsToday>=roundsForAge(l.age))l.lastMissionDate=l.missionDate;
+export function completeDailyRound(l,now,target=roundsForAge(l.age)) {
+  syncLearningDay(l,now);l.roundsToday=Math.min(Number.MAX_SAFE_INTEGER,l.roundsToday+1);if(l.roundsToday>=target)l.lastMissionDate=l.missionDate;
 }
 // Backup settings are restored; earned stars and completed days are merged additively.
 export function mergeLearning(current,incoming,{restoreSettings=true}={}) {
   if(restoreSettings){current.age=incoming.age;current.required=incoming.required;}
+  const profile = incoming.v2;
+  if (profile && integer(profile.age,4,12)) {
+    const local = current.v2 && integer(current.v2.age,4,12) ? current.v2 : null;
+    current.v2 = {
+      age: restoreSettings || !local ? profile.age : local.age,
+      adaptive: local?.adaptive ?? structuredClone(profile.adaptive),
+      generalStars: Math.max(integer(local?.generalStars,0) ? local.generalStars : 0,
+        integer(profile.generalStars,0) ? profile.generalStars : 0),
+    };
+  }
   for(const id of Object.keys(STATIONS)){if(incoming.stations[id].stars>current.stations[id].stars)current.stations[id]=structuredClone(incoming.stations[id]);else current.stations[id].stars=Math.max(current.stations[id].stars,incoming.stations[id].stars);}
   if(incoming.missionDate>current.missionDate){current.missionDate=incoming.missionDate;current.roundsToday=incoming.roundsToday;}
   if(current.missionDate===incoming.missionDate)current.roundsToday=Math.max(current.roundsToday,incoming.roundsToday);

@@ -1,21 +1,40 @@
-import { IndexedDBUploadStore, UPLOAD_TAG, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261013-frames-1';
+import { IndexedDBUploadStore, UPLOAD_CONTEXTS, UPLOAD_VERSION, readUploadLog } from './upload.mjs?v=20261013-frames-1';
 
 export const NEXT_OPEN_MESSAGE = 'השליחה תמשיך בפתיחה הבאה';
-const workerURL = new URL(`../upload-sw.js?v=${UPLOAD_VERSION}`, import.meta.url);
-const scopeURL = new URL('../', import.meta.url);
+const workoutScope = new URL('../', import.meta.url);
+const workerURL = new URL('../upload-sw.js', import.meta.url);
 
-// One registration for both /workout/ and /workout/cam-lab/. No credentials
-// travel in messages, the worker URL, diagnostics or registration options.
+// Disable the former shared authorization without removing queued media.
+async function retireLegacyUploads(sw) {
+  try { globalThis.localStorage?.removeItem('camlab.upload'); } catch { /* IndexedDB is checked separately. */ }
+  const registrations = await sw?.getRegistrations?.() || [];
+  const legacy = registrations.find(registration => registration.scope === workoutScope.href &&
+    [registration.active, registration.waiting, registration.installing].some(worker => {
+      if (!worker) return false;
+      const url = new URL(worker.scriptURL);
+      return url.pathname === workerURL.pathname && !url.searchParams.has('app');
+    }));
+  const databases = await globalThis.indexedDB?.databases?.();
+  if (legacy || databases?.some(db => db.name === 'camlab.upload.queue')) {
+    await new IndexedDBUploadStore({ name: 'camlab.upload.queue' }).clearConfig('camlab.upload');
+  }
+  if (legacy) await legacy.unregister();
+}
+
+// Each app gets its own service-worker scope, queue and consent.
 export class BackgroundUploads {
   constructor({ queue = null, navigator = globalThis.navigator, document = globalThis.document,
-    window = globalThis.window, onSupport = () => {} } = {}) {
-    Object.assign(this, { queue, navigator, document, window, onSupport });
+    window = globalThis.window, context = queue?.context || 'lab', onSupport = () => {} } = {}) {
+    Object.assign(this, { queue, navigator, document, window, context, onSupport });
+    this.scopeURL = context === 'workout' ? workoutScope : new URL('./', import.meta.url);
+    this.workerURL = new URL(workerURL);
+    this.workerURL.search = new URLSearchParams({ v: UPLOAD_VERSION, app: context });
     this.supported = false; this.registration = null;
     this.hidden = () => { if (document.hidden) void this.schedule(); else this.pageClosing = false; };
     this.hide = () => { this.pageClosing = true; void this.schedule(); };
     this.show = () => { this.pageClosing = false; };
     this.message = ({ data }) => {
-      if (data?.type !== 'camlab-upload-status' || !this.queue?.enabled) return;
+      if (data?.type !== 'camlab-upload-status' || data.app !== this.context || !this.queue?.enabled) return;
       // The worker only sends this fixed, safe status shape.
       const status = data.status;
       if (!['sending', 'sent', 'error'].includes(status?.state)) return;
@@ -35,22 +54,23 @@ export class BackgroundUploads {
   }
   async start() {
     const sw = this.navigator?.serviceWorker;
-    if (!this.queue?.enabled) { await this.remove(); return; }
     try {
+      await retireLegacyUploads(sw);
+      if (!this.queue?.enabled) return;
       await this.queue.ready;
       if (!this.queue.enabled) return;
       if (!sw || !('SyncManager' in globalThis)) { this.onSupport(false); return; }
-      const registration = await sw.register(workerURL.href, { scope: scopeURL.pathname, type: 'module', updateViaCache: 'none' });
+      const registration = await sw.register(this.workerURL.href, { scope: this.scopeURL.pathname, type: 'module', updateViaCache: 'none' });
       this.registration = registration;
-      if (!registration.active) await new Promise((resolve, reject) => {
+      if (registration.active?.scriptURL !== this.workerURL.href) await new Promise((resolve, reject) => {
         const worker = registration.installing || registration.waiting;
-        if (!worker) { reject(new Error('worker')); return; }
+        if (worker?.scriptURL !== this.workerURL.href) { reject(new Error('worker')); return; }
         worker.addEventListener('statechange', () => {
           if (worker.state === 'activated') resolve();
           if (worker.state === 'redundant') reject(new Error('worker'));
         });
       });
-      if (!this.queue.enabled) { await this.remove(); return; }
+      if (!this.queue.enabled) return;
       this.supported = !!registration.sync; this.onSupport(this.supported);
       // The worker owns supported foreground requests too: destroying the page
       // must not lose an acknowledgement for a body already received by the server.
@@ -70,7 +90,7 @@ export class BackgroundUploads {
       await this.queue.logUpload({ event: 'sync', time: Date.now(), registered: false }); return false;
     }
     let registered = false;
-    try { await this.registration.sync.register(UPLOAD_TAG); registered = true; }
+    try { await this.registration.sync.register(UPLOAD_CONTEXTS[this.context].tag); registered = true; }
     catch { this.supported = false; this.onSupport(false); }
     await this.queue.logUpload({ event: 'sync', time: Date.now(), registered });
     return registered;
@@ -88,7 +108,7 @@ export class BackgroundUploads {
       const timer = setTimeout(() => finish(false), 210000);
       controller.signal.addEventListener('abort', () => finish(false), { once: true });
       channel.port1.onmessage = ({ data }) => finish(data?.ok === true);
-      try { this.registration.active.postMessage({ type: 'camlab-upload-start' }, [channel.port2]); }
+      try { this.registration.active.postMessage({ type: 'camlab-upload-start', app: this.context }, [channel.port2]); }
       catch { finish(false); }
     });
   }
@@ -102,18 +122,15 @@ export class BackgroundUploads {
   async remove() {
     this.supported = false; this.detach();
     const sw = this.navigator?.serviceWorker;
-    // A fresh private visit never creates an upload database or worker.
     try {
-      const databases = await globalThis.indexedDB?.databases?.();
-      if (databases?.some(db => db.name === 'camlab.upload.queue')) await new IndexedDBUploadStore().revoke();
       for (const registration of await sw?.getRegistrations?.() || []) {
-        if (registration.scope !== scopeURL.href) continue;
+        if (registration.scope !== this.scopeURL.href) continue;
         const worker = registration.active || registration.waiting || registration.installing;
-        if (worker && new URL(worker.scriptURL).pathname === workerURL.pathname) {
-          worker.postMessage({ type: 'camlab-upload-revoked' });
+        if (worker?.scriptURL === this.workerURL.href) {
+          worker.postMessage({ type: 'camlab-upload-revoked', app: this.context });
           await registration.unregister();
         }
       }
-    } catch { /* Private mode still never activates an uploader. */ }
+    } catch { /* The changed consent is also checked by the queue before each send. */ }
   }
 }

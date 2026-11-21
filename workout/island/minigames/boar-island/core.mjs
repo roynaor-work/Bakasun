@@ -3,10 +3,10 @@ export const VERSION = 2;
 
 // Weapons. mode 'heat' = continuous fire limited by heat; 'mag' = magazine + reload.
 export const WEAPONS = {
-  mg:{name:'מקלע חוף',short:'מקלע',icon:'≡',desc:'שני קנים מסתובבים. מהיר, מדויק, מתחמם.',mode:'heat',unlock:0,upBase:110,damage:15,rate:9,pellets:1,spread:.004,heatPerShot:3.1,mag:0,reload:0,splash:0,chain:0,color:'#ffd27a'},
-  shotgun:{name:'רסס סערה',short:'רסס',icon:'⁘',desc:'שמונה רסיסים בכל ירייה. קטלני מקרוב, מתפזר למרחק.',mode:'mag',unlock:420,upBase:130,damage:12,rate:1.9,pellets:8,spread:.045,heatPerShot:0,mag:6,reload:1.7,splash:0,chain:0,color:'#ffb067'},
+  mg:{name:'מקלע חוף',short:'מקלע',icon:'≡',desc:'שני קנים מסתובבים. יורה מהר ומדויק. צריך לתת לו להתקרר.',mode:'heat',unlock:0,upBase:110,damage:15,rate:9,pellets:1,spread:.004,heatPerShot:3.1,mag:0,reload:0,splash:0,chain:0,color:'#ffd27a'},
+  shotgun:{name:'רסס סערה',short:'רסס',icon:'⁘',desc:'שמונה רסיסים בכל ירייה. חזק מקרוב. הרסיסים מתפזרים למרחק.',mode:'mag',unlock:420,upBase:130,damage:12,rate:1.9,pellets:8,spread:.045,heatPerShot:0,mag:6,reload:1.7,splash:0,chain:0,color:'#ffb067'},
   cannon:{name:'תותח נפץ',short:'תותח',icon:'◉',desc:'פגז שמתפוצץ באזור הפגיעה. שובר שריון ורפסודות.',mode:'mag',unlock:850,upBase:160,damage:130,rate:1.15,pellets:1,spread:.002,heatPerShot:0,mag:4,reload:2.3,splash:6.5,chain:0,color:'#ff9a4d'},
-  tesla:{name:'סליל ברק',short:'ברק',icon:'ϟ',desc:'קרן חשמלית שננעלת ומדלגת לעוד שני אויבים. מצוין נגד רחפנים.',mode:'heat',unlock:1400,upBase:190,damage:9.5,rate:14,pellets:1,spread:0,heatPerShot:2.35,mag:0,reload:0,splash:0,chain:2,color:'#8fe9ff'}
+  tesla:{name:'סליל ברק',short:'ברק',icon:'ϟ',desc:'קרן חשמל שמכוונת למטרה וקופצת לעוד שני אויבים. טובה נגד רחפנים.',mode:'heat',unlock:1400,upBase:190,damage:9.5,rate:14,pellets:1,spread:0,heatPerShot:2.35,mag:0,reload:0,splash:0,chain:2,color:'#8fe9ff'}
 };
 export const WEAPON_ORDER = ['mg','shotgun','cannon','tesla'];
 export const WEAPON_MAX = 6;

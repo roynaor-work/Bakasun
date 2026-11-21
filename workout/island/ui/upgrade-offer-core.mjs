@@ -3,8 +3,8 @@
  * (activity.upgrade for island coins, engine.racingLeague.buy for league coins).
  * Rules: only the category that was just played; only an upgrade the child can pay for now; the cheapest one; one offer per stage;
  * "later" is remembered for that stage and upgrade, so the same stage does not ask again. `?upgradeOffer=0` turns it all off. */
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-20';
-import {UPGRADES,UPGRADE_COST,MAX_LEVEL} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-20';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-21';
+import {UPGRADES,UPGRADE_COST,MAX_LEVEL} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-21';
 
 export const offerEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('upgradeOffer')!=='0';
 
@@ -52,7 +52,7 @@ export function leagueCandidates(league){
   const out=[];if(!league||!league.upgrades)return out;
   for(const [key,spec] of Object.entries(UPGRADES)){
     const level=league.upgrades[key];if(!int(level)||level>=MAX_LEVEL)continue;
-    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המירוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
+    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המרוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
   }
   return out;
 }

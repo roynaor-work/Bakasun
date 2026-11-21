@@ -3,7 +3,7 @@ import test from 'node:test';
 import {readFile, mkdir, stat} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {serveIsland, islandChromium, installIslandCspMonitor} from './helpers/island-browser.mjs';
+import {browserCleanup, serveIsland, islandChromium, installIslandCspMonitor} from './helpers/island-browser.mjs';
 
 /** Alpine Rush environments (design/alpine-v5: sunset, fog, floodlit night) and the island UI kit (design/ui-kit-v2).
  * Node part: config -> environment per stage, every file the code can request is in the offline list, size budget,
@@ -70,98 +70,124 @@ test('source contract: silent fallbacks and no game logic in the kit helpers', a
   assert.equal(resolveEnvironmentId({environment: 'nope'}, ''), null); assert.equal(resolveEnvironmentId({}, ''), null);
 });
 
-test('browser: environments per stage, rotate, offline list, silent fallbacks, kit screens',
-  {skip: process.env.ISLAND_CSP_BROWSER !== '1', timeout: 1_500_000}, async () => {
+const browserEnabled = process.env.ISLAND_CSP_BROWSER === '1';
+
+async function alpineBrowser(t) {
   const shots = process.env.ALPINE_ENV_SHOTS ? path.resolve(process.env.ALPINE_ENV_SHOTS) : null; if (shots) await mkdir(shots, {recursive: true});
-  const allowed = new Set([...manifest.core, ...manifest.shell, ...manifest.games.alpine, ...manifest.games.soccer, ...manifest.games.hoops]);
-  const server = await serveIsland(), chromium = await islandChromium();
+  const defer = browserCleanup(t);
+  const chromium = await islandChromium(), server = await serveIsland();
+  defer(() => server.close());
   const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader']});
+  defer(() => browser.close());
   const rel = url => { const u = new URL(url); const i = u.pathname.indexOf('/workout/island/'); return i < 0 ? null : decodeURIComponent(u.pathname.slice(i + '/workout/island/'.length)); };
   async function open(viewport, {query = '', abort = [], page: target = 'tools/perf-alpine.html'} = {}) {
     const context = await browser.newContext({viewport, hasTouch: true, isMobile: true, deviceScaleFactor: 1});
-    const csp = await installIslandCspMonitor(context), p = await context.newPage(), errors = [], outside = [], requested = new Set();
-    p.setDefaultTimeout(180000); await csp.attachPage(p);
-    for (const pattern of abort) await p.route(pattern, route => route.fulfill({status: 404, body: 'missing'}));
-    p.on('pageerror', e => errors.push(e.message));
-    p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
-    p.on('request', r => { const u = new URL(r.url()); if (u.protocol.startsWith('http') && u.origin !== new URL(server.url).origin) outside.push(u.href); const f = rel(r.url()); if (f) requested.add(f); });
-    await p.goto(server.url + target + query, {waitUntil: 'load'});
-    return {p, csp, errors, outside, requested, context, async close() { await csp.assertClean(); await context.close(); await csp.dispose(); }};
+    let csp;
+    try {
+      csp = await installIslandCspMonitor(context);
+      const p = await context.newPage(), errors = [], outside = [], requested = new Set();
+      p.setDefaultTimeout(180000); await csp.attachPage(p);
+      for (const pattern of abort) await p.route(pattern, route => route.fulfill({status: 404, body: 'missing'}));
+      p.on('pageerror', e => errors.push(e.message));
+      p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
+      p.on('request', r => { const u = new URL(r.url()); if (u.protocol.startsWith('http') && u.origin !== new URL(server.url).origin) outside.push(u.href); const f = rel(r.url()); if (f) requested.add(f); });
+      await p.goto(server.url + target + query, {waitUntil: 'load'});
+      return {p, csp, errors, outside, requested, context, async close() { try { await csp.assertClean(); } finally { try { await csp.dispose(); } finally { await context.close(); } } }};
+    } catch (error) {
+      try { await csp?.dispose(); } finally { await context.close(); }
+      throw error;
+    }
   }
+  const shot = async (p, name) => { if (shots) await p.screenshot({path: path.join(shots, name + '.png')}); };
+  return {open, shot};
+}
+
+test('browser: environments per stage, rotate, offline list and silent fallbacks',
+  {skip: !browserEnabled, timeout: 1_200_000}, async t => {
+  const {open, shot} = await alpineBrowser(t);
+  const allowed = new Set([...manifest.core, ...manifest.shell, ...manifest.games.alpine, ...manifest.games.soccer, ...manifest.games.hoops]);
   const loaded = p => p.waitForFunction(() => window.__perfSession?.snapshot.loaded || window.__perfSession?.snapshot.error, null, {timeout: 150000});
   const metrics = p => p.evaluate(() => window.__perfSession.snapshot.renderMetrics);
-  const shot = async (p, name) => { if (shots) await p.screenshot({path: path.join(shots, name + '.png')}); };
+  // 1. Each stage, both orientations: its own environment, no console errors, no outside requests, every file listed.
+  for (const viewport of [{width: 844, height: 390}, {width: 390, height: 844}]) for (const stage of [1, 2, 3]) {
+    const g = await open(viewport, {query: `?autostart=1&seconds=60&stage=${stage}`});
+    try {
+      await loaded(g.p); const m = await metrics(g.p), env = ENV_BY_STAGE[stage];
+      assert.equal(m.environment?.id, env, `stage ${stage} uses ${env}`);
+      assert.deepEqual(m.environment.backgrounds, [viewport.width > viewport.height ? 'landscape' : 'portrait'], 'only the current orientation is loaded');
+      assert.equal(m.designAssets.environment ?? m.environment.id, env); assert.equal(m.background, viewport.width > viewport.height ? 'landscape' : 'portrait');
+      assert.ok(m.environment.markers > 10 && m.environment.decalQuads > 0, JSON.stringify(m.environment));
+      assert.equal(m.environment.towers > 0, env === 'night-floodlit'); assert.equal(m.environment.ribbons > 0, env === 'fog');
+      await g.p.waitForFunction(() => {
+        const s = window.__perfSession?.snapshot;
+        return s?.phase === 'racing' && s.frame?.timeMs > 0 && s.renderMetrics?.calls > 0;
+      }, null, {timeout: 60000});
+      await g.p.evaluate(() => document.querySelector('.perf-panel')?.classList.add('collapsed'));
+      await shot(g.p, `stage${stage}-${env}-${viewport.width}x${viewport.height}`);
+      assert.deepEqual(g.errors, []); assert.deepEqual(g.outside, []);
+      for (const f of g.requested) if (/^(design|assets|vendor)\//.test(f)) assert.ok(allowed.has(f), `${f} was requested but is not in the download list`);
+      for (const f of g.requested) if (f.startsWith(V5)) assert.ok(manifest.games.alpine.includes(f), f);
+      const old = [...g.requested].filter(f => /environment\/backgrounds\/ski-mountains/.test(f)); assert.deepEqual(old, [], 'earlier backdrops are not downloaded with an environment');
+    } finally { await g.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await g.close(); }
+  }
+  // 2. Rotating swaps the background (the old orientation is dropped).
+  const rot = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=60&stage=1'});
   try {
-    // 1. Each stage, both orientations: its own environment, no console errors, no outside requests, every file listed.
-    for (const viewport of [{width: 844, height: 390}, {width: 390, height: 844}]) for (const stage of [1, 2, 3]) {
-      const g = await open(viewport, {query: `?autostart=1&seconds=60&stage=${stage}`});
-      try {
-        await loaded(g.p); const m = await metrics(g.p), env = ENV_BY_STAGE[stage];
-        assert.equal(m.environment?.id, env, `stage ${stage} uses ${env}`);
-        assert.deepEqual(m.environment.backgrounds, [viewport.width > viewport.height ? 'landscape' : 'portrait'], 'only the current orientation is loaded');
-        assert.equal(m.designAssets.environment ?? m.environment.id, env); assert.equal(m.background, viewport.width > viewport.height ? 'landscape' : 'portrait');
-        assert.ok(m.environment.markers > 10 && m.environment.decalQuads > 0, JSON.stringify(m.environment));
-        assert.equal(m.environment.towers > 0, env === 'night-floodlit'); assert.equal(m.environment.ribbons > 0, env === 'fog');
-        await g.p.waitForFunction(() => window.__perfSession?.snapshot.phase === 'racing', null, {timeout: 60000}); await g.p.waitForTimeout(5000);
-        await g.p.evaluate(() => document.querySelector('.perf-panel')?.classList.add('collapsed'));
-        await shot(g.p, `stage${stage}-${env}-${viewport.width}x${viewport.height}`);
-        assert.deepEqual(g.errors, []); assert.deepEqual(g.outside, []);
-        for (const f of g.requested) if (/^(design|assets|vendor)\//.test(f)) assert.ok(allowed.has(f), `${f} was requested but is not in the download list`);
-        for (const f of g.requested) if (f.startsWith(V5)) assert.ok(manifest.games.alpine.includes(f), f);
-        const old = [...g.requested].filter(f => /environment\/backgrounds\/ski-mountains/.test(f)); assert.deepEqual(old, [], 'earlier backdrops are not downloaded with an environment');
-      } finally { await g.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await g.close(); }
-    }
-    // 2. Rotating swaps the background (the old orientation is dropped).
-    const rot = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=60&stage=1'});
+    await loaded(rot.p); await rot.p.waitForFunction(() => window.__perfSession?.snapshot.phase === 'racing', null, {timeout: 60000});
+    await rot.p.setViewportSize({width: 390, height: 844});
+    await rot.p.waitForFunction(() => window.__perfSession.snapshot.renderMetrics?.environment?.backgrounds.join() === 'portrait', null, {timeout: 60000});
+    assert.deepEqual(rot.errors, []); assert.deepEqual(rot.outside, []);
+  } finally { await rot.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await rot.close(); }
+  // 3. env=off is the earlier look; a missing required asset falls back to it silently; a missing optional one only drops that layer.
+  const off = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=2&env=off'});
+  try { await loaded(off.p); const m = await metrics(off.p); assert.equal(m.environment ?? null, null); assert.equal(m.designAssets.loaded, true); assert.deepEqual(off.errors, []); await shot(off.p, 'stage2-before-844x390'); }
+  finally { await off.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await off.close(); }
+  const noFence = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=1', abort: ['**/alpine-v5/models/safety-fence-sunset.glb']});
+  try { await loaded(noFence.p); const m = await metrics(noFence.p); assert.equal(m.environment ?? null, null, 'no environment without its fence'); assert.equal(m.designWorld, true); assert.deepEqual(noFence.errors, []); assert.deepEqual(noFence.outside, []); }
+  finally { await noFence.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noFence.close(); }
+  const noJson = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=3', abort: ['**/alpine-v5/environments/night-floodlit.json']});
+  try { await loaded(noJson.p); const m = await metrics(noJson.p); assert.equal(m.environment ?? null, null); assert.equal(m.designWorld, true); assert.deepEqual(noJson.errors, []); }
+  finally { await noJson.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noJson.close(); }
+  const noFx = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=3', abort: ['**/alpine-v5/atlases/powder-spray.png', '**/alpine-v5/models/floodlight-tower.glb', '**/alpine-v5/decals/route-and-snow.png']});
+  try {
+    await loaded(noFx.p); const m = await metrics(noFx.p);
+    assert.equal(m.environment.id, 'night-floodlit'); assert.ok(!m.environment.atlases.includes('powder-spray')); assert.equal(m.environment.towers, 0); assert.equal(m.environment.decalQuads, 0);
+    assert.equal(m.designAssets.powder, true, 'the earlier powder remains the crash effect'); assert.deepEqual(noFx.errors, []);
+  } finally { await noFx.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noFx.close(); }
+});
+
+test('browser: the ten game cards and Alpine kit screens in both orientations',
+  {skip: !browserEnabled, timeout: 300_000}, async t => {
+  const {open, shot} = await alpineBrowser(t);
+  for (const viewport of [{width: 390, height: 844}, {width: 844, height: 390}]) {
+    const ui = await open(viewport, {query: '?dev=1', page: ''});
     try {
-      await loaded(rot.p); await rot.p.waitForFunction(() => window.__perfSession?.snapshot.phase === 'racing', null, {timeout: 60000});
-      await rot.p.setViewportSize({width: 390, height: 844});
-      await rot.p.waitForFunction(() => window.__perfSession.snapshot.renderMetrics?.environment?.backgrounds.join() === 'portrait', null, {timeout: 60000});
-      assert.deepEqual(rot.errors, []); assert.deepEqual(rot.outside, []);
-    } finally { await rot.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await rot.close(); }
-    // 3. env=off is the earlier look; a missing required asset falls back to it silently; a missing optional one only drops that layer.
-    const off = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=2&env=off'});
-    try { await loaded(off.p); const m = await metrics(off.p); assert.equal(m.environment ?? null, null); assert.equal(m.designAssets.loaded, true); assert.deepEqual(off.errors, []); await shot(off.p, 'stage2-before-844x390'); }
-    finally { await off.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await off.close(); }
-    const noFence = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=1', abort: ['**/alpine-v5/models/safety-fence-sunset.glb']});
-    try { await loaded(noFence.p); const m = await metrics(noFence.p); assert.equal(m.environment ?? null, null, 'no environment without its fence'); assert.equal(m.designWorld, true); assert.deepEqual(noFence.errors, []); assert.deepEqual(noFence.outside, []); }
-    finally { await noFence.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noFence.close(); }
-    const noJson = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=3', abort: ['**/alpine-v5/environments/night-floodlit.json']});
-    try { await loaded(noJson.p); const m = await metrics(noJson.p); assert.equal(m.environment ?? null, null); assert.equal(m.designWorld, true); assert.deepEqual(noJson.errors, []); }
-    finally { await noJson.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noJson.close(); }
-    const noFx = await open({width: 844, height: 390}, {query: '?autostart=1&seconds=30&stage=3', abort: ['**/alpine-v5/atlases/powder-spray.png', '**/alpine-v5/models/floodlight-tower.glb', '**/alpine-v5/decals/route-and-snow.png']});
-    try {
-      await loaded(noFx.p); const m = await metrics(noFx.p);
-      assert.equal(m.environment.id, 'night-floodlit'); assert.ok(!m.environment.atlases.includes('powder-spray')); assert.equal(m.environment.towers, 0); assert.equal(m.environment.decalQuads, 0);
-      assert.equal(m.designAssets.powder, true, 'the earlier powder remains the crash effect'); assert.deepEqual(noFx.errors, []);
-    } finally { await noFx.p.evaluate(() => window.__perfSession?.dispose()).catch(() => {}); await noFx.close(); }
-    // 4. Island menu, opening card, stage map and result screen use the kit (both orientations), under CSP, nothing external.
-    for (const viewport of [{width: 390, height: 844}, {width: 844, height: 390}]) {
-      const ui = await open(viewport, {query: '?dev=1', page: ''});
-      try {
-        await ui.p.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 150000}); await ui.p.locator('[data-action=avatar-start]').tap();
-        await ui.p.evaluate(() => { const e = window.__island.engine; e.skipTutorial(); e.tick = () => ({ok: true}); if (!e.state.instructionsSeen.includes('alpineRush')) e.state.instructionsSeen.push('alpineRush'); });
-        const tag = `${viewport.width}x${viewport.height}`;
-        await ui.p.evaluate(() => window.__island.ui.activityInterface.menu());
-        await ui.p.waitForFunction(() => document.querySelectorAll('.adventure-game-card .ik-game-icon').length >= 9);
-        await ui.p.waitForFunction(() => [...document.querySelectorAll('.adventure-game-card .ik-game-icon')].every(i => i.complete && i.naturalWidth > 0));
-        assert.equal(await ui.p.locator('.adventure-game-card').count(), 9); await shot(ui.p, `menu-${tag}`);
-        await ui.p.evaluate(() => window.__island.ui.activityInterface.gameHome('alpineRush'));
-        await ui.p.waitForFunction(() => { const i = document.querySelector('.modal[data-game-home] .ik-intro'); return i?.complete && i.naturalWidth > 0; });
-        assert.equal(await ui.p.locator('.modal[data-game-home] [data-action=game-play]').evaluate(n => n.classList.contains('ik-primary')), true); await shot(ui.p, `opening-${tag}`);
-        await ui.p.evaluate(() => window.__island.ui.activityInterface.stages('alpineRush'));
-        await ui.p.waitForSelector('.stage-map [data-action=stage-play] .ik-rating-inline');
-        assert.equal(await ui.p.locator('.stage-map [data-action=stage-play]').first().getAttribute('aria-label') !== null, true);
-        assert.equal(await ui.p.locator('.stage-map [data-action=stage-play] .ik-lock').count() >= 1, true, 'locked stages show the kit lock'); await shot(ui.p, `stages-${tag}`);
-        await ui.p.evaluate(() => window.__island.ui.activityInterface.showResult('alpineRush', undefined, {outcome: 'win', stage: 1, score: 1200, money: 40, parts: 0, stars: 2}, undefined, undefined, {rank: 2, totalRiders: 6, elapsedMs: 83000, peakKmh: 91, trickScore: 600, coins: 12, coinTotal: 30}));
-        await ui.p.waitForSelector('.ik-result .ik-rating'); assert.equal(await ui.p.locator('.ik-result .ik-rating').first().getAttribute('data-rating'), '2');
-        assert.equal(await ui.p.locator('.ik-result .ik-rating').first().getAttribute('aria-label') !== null, true);
-        await ui.p.waitForFunction(() => [...document.querySelectorAll('.ik-result img')].every(i => i.complete && i.naturalWidth > 0)); await shot(ui.p, `result-${tag}`);
-        assert.ok(await ui.p.locator('[data-action=game-again]').isVisible()); assert.ok(await ui.p.locator('[data-action=game-exit]').isVisible());
-        assert.deepEqual(ui.errors, []); assert.deepEqual(ui.outside, []);
-        for (const f of ui.requested) if (f.startsWith(KIT) && !f.endsWith('ui-kit.css')) assert.ok(manifest.core.includes(f), `${f} is requested by the island UI but not in core`);
-        assert.equal([...ui.requested].some(f => f.startsWith(KIT + 'verification/')), false);
-      } finally { await ui.close(); }
-    }
-  } finally { await browser.close(); await server.close(); }
+      await ui.p.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 150000}); await ui.p.locator('[data-action=avatar-start]').tap();
+      await ui.p.evaluate(() => { const e = window.__island.engine; e.skipTutorial(); e.tick = () => ({ok: true}); if (!e.state.instructionsSeen.includes('alpineRush')) e.state.instructionsSeen.push('alpineRush'); });
+      const tag = `${viewport.width}x${viewport.height}`;
+      await ui.p.evaluate(() => window.__island.ui.activityInterface.menu());
+      const shown = await ui.p.locator('.adventure-game-card').evaluateAll(cards => cards.map(card => card.dataset.game).sort());
+      assert.deepEqual(shown, [...GAMES, 'catchCriminal'].sort(), 'one card for each of the ten current games');
+      await ui.p.waitForFunction(ids => ids.every(id => {
+        const image = document.querySelector(`.adventure-game-card[data-game="${id}"] .ik-game-icon`);
+        return image?.complete && image.naturalWidth > 0;
+      }), GAMES);
+      await shot(ui.p, `menu-${tag}`);
+      await ui.p.evaluate(() => window.__island.ui.activityInterface.gameHome('alpineRush'));
+      await ui.p.waitForFunction(() => { const i = document.querySelector('.modal[data-game-home] .ik-intro'); return i?.complete && i.naturalWidth > 0; });
+      assert.equal(await ui.p.locator('.modal[data-game-home] [data-action=game-play]').evaluate(n => n.classList.contains('ik-primary')), true); await shot(ui.p, `opening-${tag}`);
+      await ui.p.evaluate(() => window.__island.ui.activityInterface.stages('alpineRush'));
+      await ui.p.waitForSelector('.stage-map [data-action=stage-play] .ik-rating-inline');
+      assert.equal(await ui.p.locator('.stage-map [data-action=stage-play]').first().getAttribute('aria-label') !== null, true);
+      assert.equal(await ui.p.locator('.stage-map [data-action=stage-play] .ik-lock').count() >= 1, true, 'locked stages show the kit lock'); await shot(ui.p, `stages-${tag}`);
+      await ui.p.evaluate(() => window.__island.ui.activityInterface.showResult('alpineRush', undefined, {outcome: 'win', stage: 1, score: 1200, money: 40, parts: 0, stars: 2}, undefined, undefined, {rank: 2, totalRiders: 6, elapsedMs: 83000, peakKmh: 91, trickScore: 600, coins: 12, coinTotal: 30}));
+      await ui.p.waitForSelector('.ik-result .ik-rating'); assert.equal(await ui.p.locator('.ik-result .ik-rating').first().getAttribute('data-rating'), '2');
+      assert.equal(await ui.p.locator('.ik-result .ik-rating').first().getAttribute('aria-label') !== null, true);
+      await ui.p.waitForFunction(() => [...document.querySelectorAll('.ik-result img')].every(i => i.complete && i.naturalWidth > 0)); await shot(ui.p, `result-${tag}`);
+      assert.ok(await ui.p.locator('[data-action=game-again]').isVisible()); assert.ok(await ui.p.locator('[data-action=game-exit]').isVisible());
+      assert.deepEqual(ui.errors, []); assert.deepEqual(ui.outside, []);
+      for (const f of ui.requested) if (f.startsWith(KIT) && !f.endsWith('ui-kit.css')) assert.ok(manifest.core.includes(f), `${f} is requested by the island UI but not in core`);
+      assert.equal([...ui.requested].some(f => f.startsWith(KIT + 'verification/')), false);
+    } finally { await ui.close(); }
+  }
 });

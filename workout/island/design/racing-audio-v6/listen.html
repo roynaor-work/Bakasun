@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>צלילי המרוץ | Island Racing v6</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #111311;
+      --panel: #191c18;
+      --raised: #22251f;
+      --rule: #383e34;
+      --text: #f1eee4;
+      --muted: #aeb7a7;
+      --accent: #d8ef86;
+      --accent-ink: #252c10;
+      --error: #ffb7ac;
+      --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-block-size: 100vh;
+      color: var(--text);
+      background: var(--background);
+    }
+
+    a { color: inherit; }
+
+    button, select, input { font: inherit; }
+
+    button, select {
+      min-block-size: 44px;
+      border: 1px solid var(--rule);
+      color: var(--text);
+      background: var(--raised);
+    }
+
+    button:not(:disabled), select, input[type="range"] { cursor: pointer; }
+
+    button:disabled { opacity: .48; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .frame {
+      margin-inline: auto;
+      padding: 32px clamp(16px, 4vw, 48px) 30px;
+      max-inline-size: 1160px;
+    }
+
+    .masthead {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 16px;
+      padding-block-end: 15px;
+      border-block-end: 1px solid var(--rule);
+    }
+
+    .product {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font: 700 .78rem var(--mono);
+      letter-spacing: .1em;
+    }
+
+    .product::before {
+      content: "";
+      inline-size: 30px;
+      block-size: 12px;
+      background: repeating-linear-gradient(125deg, transparent 0 4px, currentColor 4px 8px);
+    }
+
+    .doc-link {
+      display: inline-flex;
+      min-block-size: 44px;
+      align-items: center;
+      text-underline-offset: .28em;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .doc-link:hover { color: var(--text); }
+
+    .title {
+      margin: 22px 0 20px;
+      font-size: clamp(2.65rem, 2rem + 3.15vw, 4.65rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -.049em;
+    }
+
+    .deck {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px 30px;
+      align-items: end;
+      padding: 17px 19px 15px;
+      border: 1px solid var(--rule);
+      border-inline-start: 3px solid var(--accent);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .track-name {
+      margin: 0 0 4px;
+      overflow-wrap: anywhere;
+      font-size: 1.16rem;
+      font-weight: 750;
+    }
+
+    .status {
+      margin: 0;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .status[data-error] { color: var(--error); }
+
+    .clock {
+      align-self: start;
+      color: var(--muted);
+      white-space: nowrap;
+      font: .82rem var(--mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    progress {
+      grid-column: 1 / -1;
+      appearance: none;
+      inline-size: 100%;
+      block-size: 6px;
+      overflow: hidden;
+      border: 0;
+      border-radius: 9px;
+      background: var(--rule);
+      accent-color: var(--accent);
+    }
+
+    progress::-webkit-progress-bar { background: var(--rule); }
+    progress::-webkit-progress-value { background: var(--accent); }
+    progress::-moz-progress-bar { background: var(--accent); }
+
+    .controls {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 18px;
+      min-inline-size: 0;
+    }
+
+    .controls button, .controls select {
+      border-radius: 5px;
+      padding-inline: .8rem;
+    }
+
+    .control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .control[hidden] { display: none; }
+
+    .control input {
+      inline-size: clamp(70px, 16vw, 130px);
+      min-block-size: 44px;
+      accent-color: var(--accent);
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+      margin-block-start: 22px;
+    }
+
+    .group {
+      min-inline-size: 0;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .group h2 {
+      margin: 0;
+      padding: 12px 15px;
+      border-block-end: 1px solid var(--rule);
+      font-size: 1.02rem;
+      font-weight: 750;
+    }
+
+    .group ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .sample {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 6px 11px;
+      padding: 10px 13px;
+    }
+
+    .sample + .sample { border-block-start: 1px solid var(--rule); }
+    .sample[data-active] { background: #2b3223; }
+
+    .play {
+      display: grid;
+      min-inline-size: 44px;
+      place-items: center;
+      border-radius: 5px;
+      background: var(--background);
+    }
+
+    .play:hover, .sample[data-active] .play {
+      border-color: var(--accent);
+      color: var(--accent-ink);
+      background: var(--accent);
+    }
+
+    .play-icon {
+      inline-size: 0;
+      block-size: 0;
+      border-block: 6px solid transparent;
+      border-inline: 0 solid transparent;
+      border-left: 9px solid currentColor;
+      margin-left: 2px;
+    }
+
+    .sample[data-active] .play-icon {
+      inline-size: 10px;
+      block-size: 10px;
+      margin-left: 0;
+      border: 0;
+      background: currentColor;
+    }
+
+    .sample h3 {
+      margin: 0;
+      font-size: .96rem;
+      font-weight: 720;
+    }
+
+    .sample p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .81rem;
+      line-height: 1.45;
+    }
+
+    .sample-meta { text-align: end; }
+
+    .duration {
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: .73rem;
+    }
+
+    .duration bdi { font-family: var(--mono); }
+    .duration span { margin-inline-start: 4px; color: var(--accent); }
+
+    .files {
+      display: flex;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .files a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-inline-size: 32px;
+      min-block-size: 30px;
+      text-underline-offset: .22em;
+      color: var(--muted);
+      font: 700 .7rem var(--mono);
+    }
+
+    .files a:hover { color: var(--accent); }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0 16px;
+      margin-block-start: 20px;
+      padding-block-start: 4px;
+      border-block-start: 1px solid var(--rule);
+    }
+
+    .footer p {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 750px) {
+      .catalog { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (max-width: 390px) {
+      .deck { column-gap: 12px; padding-inline: 12px; }
+      .controls { column-gap: 12px; }
+      .sample { gap: 6px 8px; padding-inline: 9px; }
+      .files { gap: 3px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <header>
+      <div class="masthead">
+        <div class="product" dir="ltr">ISLAND RACING / V6</div>
+        <a class="doc-link" href="REPORT.md">דוח ומדידות</a>
+      </div>
+      <h1 class="title">צלילי המרוץ</h1>
+    </header>
+
+    <section class="deck" aria-label="נגן תצוגה מקדימה">
+      <div>
+        <p class="track-name" id="track-name">בחר צליל להשמעה</p>
+        <p class="status" id="status" role="status">מוכן</p>
+      </div>
+      <span class="clock" id="clock" aria-hidden="true" dir="ltr">0.00 / 0.00 s</span>
+      <progress id="position" aria-label="התקדמות בהשמעה" value="0" max="1"></progress>
+      <div class="controls">
+        <button id="stop" type="button" disabled>עצירה</button>
+        <label class="control">פורמט
+          <select id="format">
+            <option value="auto">אוטומטי</option>
+            <option value="ogg">OGG</option>
+            <option value="mp3">MP3</option>
+          </select>
+        </label>
+        <label class="control" id="mix-control">רמה
+          <select id="mix">
+            <option value="source">מקור</option>
+            <option value="game">מיקס משחק</option>
+          </select>
+        </label>
+        <label class="control" id="volume-control">עוצמה
+          <input id="volume" type="range" dir="ltr" min="0" max="1" step=".01" value=".65">
+        </label>
+      </div>
+    </section>
+
+    <noscript><p>הפעל JavaScript כדי להשתמש בנגן.</p></noscript>
+    <div class="catalog" id="catalog"></div>
+
+    <footer class="footer">
+      <p id="playback-note"></p>
+      <a class="doc-link" href="manifest.json">רשימת קבצים ומפרט</a>
+    </footer>
+  </main>
+
+  <script type="application/json" id="asset-catalog">{"master_gain_db":-6,"assets":[{"id":"launch-idle","title":"מנוע עומד על הגריד","description":"בעירה בסל״ד נמוך עם רטט של השלדה לפני שחרור הזינוק.","group":"start","loop":true,"duration_seconds":4.0,"mix_gain_db":-12,"files":{"ogg":"assets/launch-idle.ogg","mp3":"assets/launch-idle.mp3"}},{"id":"start-lights","title":"רמזור הזינוק","description":"חמש פעימות קצרות וסימון כיבוי, בתזמון מקוצר להדגמה.","group":"start","loop":false,"duration_seconds":3.15,"mix_gain_db":-8,"files":{"ogg":"assets/start-lights.ogg","mp3":"assets/start-lights.mp3"}},{"id":"launch","title":"זינוק","description":"שחרור מהגריד, אחיזה ראשונית ועלייה מהירה בסל״ד.","group":"start","loop":false,"duration_seconds":1.55,"mix_gain_db":-5,"files":{"ogg":"assets/launch.ogg","mp3":"assets/launch.mp3"}},{"id":"engine-low","title":"מנוע בעומס נמוך","description":"עלייה וירידה בסל״ד בפתיחת מצערת מתונה.","group":"engine","loop":true,"duration_seconds":4.8,"mix_gain_db":-13,"files":{"ogg":"assets/engine-low.ogg","mp3":"assets/engine-low.mp3"}},{"id":"engine-medium","title":"מנוע בעומס בינוני","description":"האצה ושחרור מצערת, עם גוף מפלט בולט יותר.","group":"engine","loop":true,"duration_seconds":4.8,"mix_gain_db":-8,"files":{"ogg":"assets/engine-medium.ogg","mp3":"assets/engine-medium.mp3"}},{"id":"engine-high","title":"מנוע בעומס גבוה","description":"משיכה לסל״ד גבוה, ירידות גובה קצרות בהחלפה והרפיה בסוף המחזור.","group":"engine","loop":true,"duration_seconds":4.8,"mix_gain_db":-4,"files":{"ogg":"assets/engine-high.ogg","mp3":"assets/engine-high.mp3"}},{"id":"overtake-near","title":"עקיפה קרובה","description":"מעבר קצר מצד לצד עם שינוי גובה דופלר ומשב קרוב.","group":"overtake","loop":false,"duration_seconds":1.1,"mix_gain_db":-8,"files":{"ogg":"assets/overtake-near.ogg","mp3":"assets/overtake-near.mp3"}},{"id":"overtake-wide","title":"עקיפה בנתיב רחב","description":"מעבר מרוחק יותר, עם רוח רחבה ותנועה רכה בסטריאו.","group":"overtake","loop":false,"duration_seconds":1.3,"mix_gain_db":-10,"files":{"ogg":"assets/overtake-wide.ogg","mp3":"assets/overtake-wide.mp3"}},{"id":"overtake-fast","title":"עקיפה מהירה","description":"מעבר חד בזמן עם שינוי גובה מהיר ומשב קצר.","group":"overtake","loop":false,"duration_seconds":0.95,"mix_gain_db":-7,"files":{"ogg":"assets/overtake-fast.ogg","mp3":"assets/overtake-fast.mp3"}},{"id":"track-edge","title":"קצה אספלט","description":"חיכוך עמום ופעימות מגע רכות בחריגה קלה מהמסלול.","group":"track","loop":true,"duration_seconds":4.0,"mix_gain_db":-22,"files":{"ogg":"assets/track-edge.ogg","mp3":"assets/track-edge.mp3"}},{"id":"pit-limiter","title":"מנוע בנתיב הפיט","description":"מנוע נמוך עם קטיעות מומנט מעוגלות של המגביל, ללא צפצוף.","group":"pit","loop":true,"duration_seconds":4.0,"mix_gain_db":-15,"files":{"ogg":"assets/pit-limiter.ogg","mp3":"assets/pit-limiter.mp3"}},{"id":"pit-ambience","title":"רקע בנתיב הפיט","description":"אוורור עמום והדי פעילות רחוקים בשכבה עדינה.","group":"pit","loop":true,"duration_seconds":4.0,"mix_gain_db":-28,"files":{"ogg":"assets/pit-ambience.ogg","mp3":"assets/pit-ambience.mp3"}},{"id":"brake","title":"בלימה רכה","description":"חיכוך שמתגבר בהדרגה, יורד בגובה ונרגע בשחרור הבלם.","group":"braking","loop":false,"duration_seconds":1.45,"mix_gain_db":-15,"files":{"ogg":"assets/brake.ogg","mp3":"assets/brake.mp3"}},{"id":"tire-scrub","title":"חריקת צמיג רכה","description":"שפשוף גומי שמתכופף בגובה ודועך במהירות.","group":"braking","loop":false,"duration_seconds":1.3,"mix_gain_db":-16,"files":{"ogg":"assets/tire-scrub.ogg","mp3":"assets/tire-scrub.mp3"}}]}</script>
+  <script>
+    "use strict";
+
+    const { assets, master_gain_db: masterGainDb = 0 } =
+      JSON.parse(document.getElementById("asset-catalog").textContent);
+    const groupTitles = {
+      start: "זינוק",
+      engine: "מנוע",
+      overtake: "עקיפות",
+      track: "קצה המסלול",
+      pit: "נתיב הפיט",
+      braking: "בלימה וצמיגים",
+    };
+    const byId = (id) => document.getElementById(id);
+    const catalog = byId("catalog");
+    const trackName = byId("track-name");
+    const status = byId("status");
+    const stop = byId("stop");
+    const format = byId("format");
+    const mix = byId("mix");
+    const volume = byId("volume");
+    const position = byId("position");
+    const clock = byId("clock");
+    const mediaProbe = document.createElement("audio");
+    const preferredFormats = mediaProbe.canPlayType("audio/ogg; codecs=vorbis")
+      ? ["ogg", "mp3"] : ["mp3", "ogg"];
+    const AudioContextType = window.AudioContext || window.webkitAudioContext;
+    const useDecodedAudio = Boolean(AudioContextType) && location.protocol !== "file:";
+
+    let context;
+    let output;
+    let active;
+    let animation;
+    const buffers = new Map();
+    const samples = new Map();
+
+    if (useDecodedAudio) {
+      byId("playback-note").textContent = "לולאות מושמעות ברצף ברמת הדגימה.";
+    } else {
+      byId("playback-note").textContent =
+        "הנגינה מקובץ מקומי משתמשת בנגן הדפדפן. לפתיחה במצב לולאה מדויקת, ראה את הוראות השרת המקומי בדוח.";
+      mediaProbe.volume = Number(volume.value);
+      if (mediaProbe.volume !== Number(volume.value)) {
+        byId("volume-control").hidden = true;
+        byId("mix-control").hidden = true;
+      }
+    }
+
+    function element(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text) node.textContent = text;
+      return node;
+    }
+
+    function buildSample(asset) {
+      const row = element("li", "sample");
+      const play = element("button", "play");
+      play.type = "button";
+      play.setAttribute("aria-label", "נגן " + asset.title);
+      const icon = element("span", "play-icon");
+      icon.setAttribute("aria-hidden", "true");
+      play.append(icon);
+      play.addEventListener("click", () => {
+        if (active?.asset === asset) end();
+        else start(asset);
+      });
+
+      const details = element("div");
+      details.append(element("h3", "", asset.title), element("p", "", asset.description));
+      const meta = element("div", "sample-meta");
+      const duration = element("div", "duration");
+      const seconds = element("bdi", "", asset.duration_seconds.toFixed(2) + " s");
+      seconds.dir = "ltr";
+      duration.append(seconds);
+      if (asset.loop) duration.append(element("span", "", "לולאה"));
+
+      const files = element("div", "files");
+      files.dir = "ltr";
+      for (const codec of ["ogg", "mp3"]) {
+        const link = element("a", "", codec.toUpperCase());
+        link.href = asset.files[codec];
+        link.download = "";
+        link.setAttribute("aria-label", "הורד " + asset.title + " בפורמט " + codec.toUpperCase());
+        files.append(link);
+      }
+      meta.append(duration, files);
+      row.append(play, details, meta);
+      samples.set(asset.id, { row, play });
+      return row;
+    }
+
+    for (const [group, title] of Object.entries(groupTitles)) {
+      const members = assets.filter((asset) => asset.group === group);
+      if (!members.length) continue;
+      const section = element("section", "group");
+      const heading = element("h2", "", title);
+      heading.id = "group-" + group;
+      section.setAttribute("aria-labelledby", heading.id);
+      const list = element("ol");
+      list.append(...members.map(buildSample));
+      section.append(heading, list);
+      catalog.append(section);
+    }
+
+    function setStatus(message, failed = false) {
+      status.textContent = message;
+      status.toggleAttribute("data-error", failed);
+    }
+
+    function setPosition(elapsed, duration) {
+      position.max = duration || 1;
+      position.value = elapsed;
+      clock.textContent = elapsed.toFixed(2) + " / " + duration.toFixed(2) + " s";
+    }
+
+    function setVolume() {
+      const gainDb = mix.value === "game" && active
+        ? masterGainDb + (active.asset.mix_gain_db ?? 0) : 0;
+      const level = Math.min(1, Number(volume.value) * 10 ** (gainDb / 20));
+      if (output) output.gain.setTargetAtTime(level, context.currentTime, .015);
+      if (active?.media) active.media.volume = level;
+    }
+
+    function end(message = "נעצר", failed = false, finished = false) {
+      const session = active;
+      if (!session) return;
+      active = undefined;
+      session.abort.abort();
+      cancelAnimationFrame(animation);
+      if (session.source && !finished) {
+        const now = context.currentTime;
+        session.gain.gain.cancelScheduledValues(now);
+        session.gain.gain.setTargetAtTime(0, now, .002);
+        session.source.stop(now + .014);
+      }
+      if (session.media) {
+        session.media.pause();
+        session.media.removeAttribute("src");
+        session.media.load();
+      }
+      const { row, play } = samples.get(session.asset.id);
+      row.removeAttribute("data-active");
+      play.setAttribute("aria-label", "נגן " + session.asset.title);
+      stop.disabled = true;
+      const duration = session.duration || session.asset.duration_seconds;
+      setPosition(finished ? duration : 0, duration);
+      setStatus(message, failed);
+    }
+
+    function advance(session) {
+      if (active !== session) return;
+      const elapsed = session.media
+        ? session.media.currentTime
+        : context.currentTime - session.startedAt;
+      const displayed = session.asset.loop && !session.media
+        ? elapsed % session.duration : Math.min(elapsed, session.duration);
+      setPosition(displayed, session.duration);
+      animation = requestAnimationFrame(() => advance(session));
+    }
+
+    async function playDecoded(session, url) {
+      let buffer = buffers.get(url);
+      if (!buffer) {
+        const response = await fetch(url, { signal: session.abort.signal });
+        if (!response.ok) throw new Error("Audio response " + response.status);
+        buffer = await context.decodeAudioData(await response.arrayBuffer());
+        buffers.set(url, buffer);
+      }
+      if (active !== session) return;
+
+      const source = context.createBufferSource();
+      const gain = context.createGain();
+      const now = context.currentTime;
+      source.buffer = buffer;
+      source.loop = session.asset.loop;
+      source.connect(gain);
+      gain.connect(output);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(1, now + .01);
+      source.onended = () => {
+        source.disconnect();
+        gain.disconnect();
+        if (active === session) end("ההשמעה הסתיימה", false, true);
+      };
+      session.source = source;
+      session.gain = gain;
+      session.duration = buffer.duration;
+      session.startedAt = now;
+      source.start(now);
+    }
+
+    async function playLocalFile(session, url) {
+      const media = new Audio();
+      session.media = media;
+      media.loop = session.asset.loop;
+      setVolume();
+      media.src = url;
+      await media.play();
+      if (active !== session) return;
+      session.duration = session.asset.duration_seconds;
+      media.addEventListener("ended", () => {
+        if (active === session) end("ההשמעה הסתיימה", false, true);
+      });
+      media.addEventListener("error", () => {
+        if (active === session) end("הקובץ לא זמין לנגינה", true);
+      });
+    }
+
+    async function start(asset) {
+      end();
+      const session = { asset, abort: new AbortController() };
+      active = session;
+      const { row, play } = samples.get(asset.id);
+      row.setAttribute("data-active", "");
+      play.setAttribute("aria-label", "עצור " + asset.title);
+      stop.disabled = false;
+      trackName.textContent = asset.title;
+      setPosition(0, asset.duration_seconds);
+      setStatus("טוען צליל…");
+
+      if (useDecodedAudio) {
+        try {
+          if (!context) {
+            context = new AudioContextType();
+            output = context.createGain();
+            output.gain.value = Number(volume.value);
+            output.connect(context.destination);
+          }
+          setVolume();
+          await context.resume();
+        } catch {
+          if (active === session) end("הדפדפן לא הצליח להפעיל את הנגן", true);
+          return;
+        }
+      }
+
+      const formats = format.value === "auto" ? preferredFormats : [format.value];
+      for (const codec of formats) {
+        if (active !== session) return;
+        try {
+          if (useDecodedAudio) await playDecoded(session, asset.files[codec]);
+          else await playLocalFile(session, asset.files[codec]);
+
+          if (active !== session) return;
+          setStatus((asset.loop ? "מנגן בלולאה" : "מנגן") + " · " + codec.toUpperCase());
+          advance(session);
+          return;
+        } catch {
+          if (session.media) {
+            session.media.removeAttribute("src");
+            session.media.load();
+            session.media = undefined;
+          }
+        }
+      }
+      if (active === session) end("הקובץ לא זמין לנגינה. נסה פורמט אחר.", true);
+    }
+
+    stop.addEventListener("click", () => end());
+    format.addEventListener("change", () => {
+      if (active) start(active.asset);
+    });
+    volume.addEventListener("input", setVolume);
+    mix.addEventListener("change", setVolume);
+  </script>
+</body>
+</html>

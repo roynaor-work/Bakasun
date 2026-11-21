@@ -1,3 +1,4 @@
+import {assertReleaseReference} from './helpers/island-release.mjs';
 // Offline v25 (17/11/2026): per-game packages, hashed manifest, partial release update, device-first
 // worker, persistent storage and install. Node part; the browser part is tests/island-offline-v25-browser.test.mjs.
 import test from 'node:test';
@@ -155,11 +156,11 @@ test('v25 wiring and safety: flag in the app, package rows and actions in the pa
  const app=await read('app.mjs'),panel=await read('ui/offline-panel.mjs'),offline=await read('ui/offline.mjs'),install=await read('ui/offline-install.mjs'),sw=await read('offline-sw.js'),html=await read('index.html');
  assert.ok(app.includes('v25On()')&&app.includes('switchRelease(')&&app.includes('selectPacks:')&&app.includes('readyRelease===pendingRelease'),'app: flag, release switch after prefetch, packs by games played');
  assert.ok(app.includes('prefetchRelease(')&&app.includes('startAutoDownload(')&&app.includes('registerOfflineWorker()'),'v24 wiring kept');
- for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת כל המשחקים למכשיר','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
+ for(const must of ["dataset.action='offline-download-all'","'offline-check-update'","'offline-pack-download'","'offline-pack-delete'","'offline-install'","'offline-persist'",'הורדת המשחקים','בדיקת עדכון והורדה','מחיקה מהמכשיר','בטוח? מחיקה'])assert.ok(panel.includes(must),must);
  assert.ok(panel.includes('v25On()?offlinePanel25')&&panel.includes('offlinePanel24'),'the v24 panel stays behind ?offlineV25=0');
  assert.ok(sw.includes("PARAMS.get('v25')==='1'")&&sw.includes('if(V25&&hit)return hit;'),'worker: device-first only when registered with the flag');
  assert.ok(offline.includes("searchParams.set('v25','1')"),'the worker is registered with the flag');
- assert.ok(html.includes('./ui/offline-panel.css?v=island-v2-20261107-20'));
+ assertReleaseReference(html,'./ui/offline-panel.css');
  for(const [file,source] of [['ui/offline.mjs',offline],['ui/offline-panel.mjs',panel],['ui/offline-install.mjs',install],['offline-sw.js',sw]]){
   for(const banned of ['localStorage.clear','removeItem','indexedDB','.clear()','sessionStorage','new Worker','createObjectURL','new Blob(','eval(','new Function','innerHTML'])assert.ok(!source.includes(banned),file+' uses '+banned);
  }

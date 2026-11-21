@@ -123,7 +123,8 @@ test('FPS diagnostics compare measured encoding intervals to idle intervals and 
 });
 
 test('frames chunks resume across a new worker queue; older three-part records still upload', async () => {
-  const config = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-key', consentId: 'test' };
+  const config = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-key', consentId: 'test', expiresAt: Date.now() + 60 * 60 * 1000 };
+  const endpoints = [config.endpoint];
   const records = new Map(), sent = [];
   const store = { put: async r => records.set(r.session, structuredClone(r)), list: async () => [...records.values()].map(r => structuredClone(r)), remove: async id => records.delete(id) };
   const frames = new Blob([JSON.stringify({ version: 1, session: 'chunked', frames: [entry('bottom', 1, 3_000_000)] })], { type: 'application/json' });
@@ -133,12 +134,12 @@ test('frames chunks resume across a new worker queue; older three-part records s
     if (fail && body.part === 'frames' && body.chunk === 1) return { ok: true, json: async () => ({ ok: false, error: 'secret' }) };
     return { ok: true, json: async () => ({ ok: true, assembled: body.chunk === body.chunks - 1, bytes: body.totalBytes }) };
   };
-  const queue = new UploadQueue({ config, store, fetchImpl });
+  const queue = new UploadQueue({ config, endpoints, store, fetchImpl });
   await queue.enqueue({ session: 'chunked', diagnostics: '{}', skeleton: '{}', frames, video: new Blob(['video'], { type: 'video/webm' }) });
   assert.equal(await queue.retry(), false); assert.deepEqual(sent.map(b => [b.part, b.chunk]), [['diagnostics', undefined], ['skeleton', undefined], ['frames', 0], ['frames', 1]]);
   assert.deepEqual(records.get('chunked').parts.find(p => p.part === 'frames').ackedChunks, [0]);
   sent.pop(); fail = false;
-  const sw = new UploadQueue({ config, store, fetchImpl, actor: 'sw' }); assert.equal(await sw.retry(), true);
+  const sw = new UploadQueue({ config, endpoints, store, fetchImpl, actor: 'sw' }); assert.equal(await sw.retry(), true);
   assert.deepEqual(UPLOAD_PARTS, ['diagnostics', 'skeleton', 'frames', 'video']);
   const chunks = sent.filter(b => b.part === 'frames');
   assert.deepEqual(chunks.map(b => b.chunk), [0, 1, 2]); assert.ok(chunks.every(b => b.mime === 'application/json'));

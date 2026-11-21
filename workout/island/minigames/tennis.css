@@ -147,6 +147,10 @@
 .game-screen[data-game=tennis] .tennis-out-sign.tennis-call bdi{left:10px;top:9px;width:116px;height:42px;font:900 31px/1 system-ui,sans-serif;letter-spacing:1px;direction:ltr;color:#fff4dc}
 .game-screen[data-game=tennis] .tennis-call-icon{position:absolute;right:8px;top:5px;width:50px;height:50px;background:no-repeat center/contain}
 /* scale only (no fade-in): the plate is readable from its first frame even if the animation is held back */
+/* v24.7 Codex club plaque (assets/tennis-callouts-v1, ?tennisCalloutPack=0 off): the 256 px art at .79, its plate band (x 9..247, y 77..177) fills the box; the word sits on the pack's text anchor (150,126), the symbol is part of the plaque. */
+.game-screen[data-game=tennis] .tennis-out-sign.tennis-call.tennis-call-plaque,.game-screen[data-game=tennis] .tennis-out-sign.tennis-call.tennis-call-plaque[data-call=net]{width:188px;height:79px;border:0;border-radius:0;box-shadow:none;background:no-repeat -7px -61px/202px 202px;filter:drop-shadow(0 3px 6px #0006)}
+.game-screen[data-game=tennis] .tennis-out-sign.tennis-call.tennis-call-plaque bdi{left:63px;top:18px;width:96px;height:42px;font:900 28px/1 system-ui,sans-serif;letter-spacing:.5px;text-shadow:0 1px 0 #fff6}
+.game-screen[data-game=tennis] .tennis-call-plaque .tennis-call-icon{display:none}
 @keyframes tennis-call-pop{from{transform:translateX(-50%) scale(.78)}to{transform:translateX(-50%) scale(1)}}
 @media (prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .tennis-out-sign.tennis-call{animation:none}}
 /* v24.4 controls (tennis-ui2.mjs, ?tennisUi=v24 off): the Codex tennis-ui-v2 plates; positions and sizes are set inline from UI2. */

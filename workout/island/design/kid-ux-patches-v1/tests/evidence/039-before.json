@@ -1,0 +1,77 @@
+{
+  "id": "039",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "reason": null,
+        "remaining": 7,
+        "phase": "live"
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "allowedPhase": "timeout",
+        "remaining": 6
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Existing Bakasun perf-hoops fixture mounts the real basketball session in a minimal game shell. Game backing-store scale 0.35; viewport and touch remain 844×390.",
+    "Used the app’s low graphics profile for software rendering. Game rules and touch controls were active.",
+    "Synthetic live possessions for rival rejection and legal player request. Trusted touch drives the timeout action."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-hoops-control=timeout]').first()",
+      "x": 96,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "timeout",
+        "x": 96,
+        "y": 36
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-hoops-control=timeout]').first()",
+      "x": 96,
+      "y": 36,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "timeout",
+        "x": 96,
+        "y": 36
+      }
+    }
+  ],
+  "screenshots": [
+    "039-before-timeout-rejected.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 0.35,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

@@ -1,0 +1,271 @@
+diff --git a/workout/island/learning/banks.mjs b/workout/island/learning/banks.mjs
+index c4f8f6dd..aa8a2eea 100644
+--- a/workout/island/learning/banks.mjs
++++ b/workout/island/learning/banks.mjs
+@@ -9,6 +9,13 @@ export const WORDS = [
+  ['🚗','מכונית','מְכוֹנִית'],['🚤','סירה','סִירָה'],['🎈','בלון','בַּלּוֹן'],['🕰️','שעון','שָׁעוֹן'],
+  ['☁️','ענן','עָנָן'],['🍓','תות','תּוּת'],['👑','כתר','כֶּתֶר'],['🧦','גרב','גֶּרֶב'],
+ ].map(([icon,word,pointed])=>({icon,word,pointed}));
++// In each group the place and the objects can be recognized without a written label.
++export const PICTURE_LANGUAGE = [
++ ['🏖️',['🐚','🏄','⛱️']], ['🛏️',['🛌','💤','🧸']],
++ ['🎼',['🎻','🎺','🎹']], ['🌧️',['☔','🌂','🌈']],
++ ['🏗️',['🧱','🔨','🦺']], ['🚰',['🧼','🧽','🪥']],
++ ['🌌',['🌙','⭐','🪐']], ['🍽️',['🥄','🍴','🥢']],
++];
+ export const RHYMES = [
+  ['חתול','חיתול','חָתוּל','חִתּוּל','🐱'],['בלון','חלון','בַּלּוֹן','חַלּוֹן','🎈'],
+  ['דג','גג','דָּג','גַּג','🐟'],['תות','חוט','תּוּת','חוּט','🍓'],
+diff --git a/workout/island/learning/interface.mjs b/workout/island/learning/interface.mjs
+index 01410b0c..b1d26ee8 100644
+--- a/workout/island/learning/interface.mjs
++++ b/workout/island/learning/interface.mjs
+@@ -1,6 +1,15 @@
+ import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-15';
+ import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-15';
+ import {unpoint} from './questions.mjs?v=island-v2-20261107-15';
++import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++kidUxStyle('027', `
++  .learning-voice-status { color: #243e4b; background: #fff9ed; border-radius: 12px; padding: 8px; font-size: 14px; font-weight: 700; }
++  .learning-voice-status[hidden], .learning-picture-choice[hidden] { display: none; }
++  .learning-picture-choice { min-width: 48px; min-height: 48px; padding: 4px; font-size: 22px; }
++  .learning-picture-example { color: #243e4b; background: #fff9ed; border-radius: 16px; padding: 4px 12px; font-size: 24px; }
++  .learning-screen[data-template=picture-association] .learning-answers button { min-width: 48px; }
++`);
+ const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
+ const button=(text,action,fn,cls='learning-answer')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
+ const phrase=(text,q)=>q.level<=4?text:unpoint(text);
+@@ -12,8 +21,20 @@ function townImage(seed) {
+ }
+ export class LearningInterface {
+   constructor({ui,engine}) {
+-    Object.assign(this,{ui,engine});ui.learningInterface=this;this.voice=createLearningVoice();
+-    this.stopVoiceListener=this.voice.subscribe(available=>{const q=this.engine.learningRound()?.question;if(this.dialog&&q){if(this.visualNode)this.visualNode.replaceWith(this.visualNode=this.visual(q));if(available)this.voice.speak(q.voice);}});
++    Object.assign(this,{ui,engine});ui.learningInterface=this;this.voice=createLearningVoice({monitorErrors:kidUx('027')});
++    this.stopVoiceListener=this.voice.subscribe(available=>{
++      const q=this.engine.learningRound()?.question;
++      if(!this.dialog||!q)return;
++      if(kidUx('027')&&q.station==='language'){
++        if(!available&&this.engine.useLearningPictures()){
++          this.drawQuestion();
++          return;
++        }
++        this.updateLanguageVoice(q);
++      }
++      if(this.visualNode)this.visualNode.replaceWith(this.visualNode=this.visual(q));
++      if(available)this.voice.speak(q.voice);
++    });
+     this.panel=el('aside','learning-daily-panel panel');
+     this.mapButton=button('','daily-mission',()=>this.daily(),'learning-daily-toggle');this.panel.append(this.mapButton);(ui.tasksContent||ui.root.querySelector('.hud')).append(this.panel);
+     this.unsubscribe=engine.subscribe(()=>this.render());this.render();
+@@ -57,31 +78,52 @@ export class LearningInterface {
+   }
+   start(station){
+     this.ui.closeModal();this.ui.closeInfo();this.ui.cancelPlacement();this.ui.closeDetails();this.ui.setDockOpen(false);
+-    const r=this.engine.startLearning(station);if(!r.ok){this.ui.result(r);return;}
++    const r=this.engine.startLearning(station,{languagePictures:kidUx('027')&&station==='language'&&!this.voice.available});if(!r.ok){this.ui.result(r);return;}
+     const dialog=this.ui.openModal('learning.title','learning.subtitle');dialog.classList.add('learning-screen');dialog.dataset.learning=station;this.dialog=dialog;this.ui.view.paused=true;
+     this.ui.modalCleanup=()=>{this.clearQuestion();clearInterval(this.clockTimer);this.voice.stop();this.engine.cancelLearning();this.ui.view.paused=false;this.dialog=null;};
+     const header=el('header','learning-header'),heading=dialog.querySelector('h2');heading.textContent=`${STATIONS[station].icon} ${STATIONS[station].title}`;
+     this.speaker=button('🔊','learning-replay',()=>{const q=this.engine.learningRound()?.question;if(q)this.voice.speak(q.voice);},'learning-speaker');this.speaker.setAttribute('aria-label','השמעת השאלה שוב');
+     this.counter=el('span','learning-counter');this.clock=el('span','learning-clock');const close=dialog.querySelector('[data-action=close-modal]');close.classList.remove('modal-close');close.classList.add('learning-close');close.textContent='×';header.append(heading,this.counter,this.clock,this.speaker,close);
++    if(kidUx('027')&&station==='language'){
++      this.voiceStatus=el('span','learning-voice-status','🔇 קול בעברית לא זמין');
++      this.voiceStatus.setAttribute('role','status');
++      this.pictureChoice=button('🖼️','learning-picture-choice',()=>{
++        if(this.engine.useLearningPictures())this.drawQuestion();
++      },'learning-small learning-picture-choice');
++      this.pictureChoice.setAttribute('aria-label','לשחק עם תמונות');
++      this.speaker.before(this.voiceStatus,this.pictureChoice);
++    }
+     this.body=el('div','learning-body');this.feedback=el('div','learning-feedback');this.feedback.setAttribute('role','status');this.feedback.setAttribute('aria-live','polite');this.footer=el('div','learning-footer');
+     dialog.replaceChildren(header,this.body,this.feedback,this.footer);const started=this.engine.now();const clock=()=>{const t=Math.floor((this.engine.now()-started)/1000);this.clock.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;};clock();this.clockTimer=setInterval(clock,1000);this.drawQuestion();
+   }
+   clearQuestion(){clearTimeout(this.memoryTimer);this.memoryTimer=null;}
++  updateLanguageVoice(q){
++    this.voiceStatus.hidden=this.voice.available;
++    this.pictureChoice.hidden=!this.voice.available||q.pictureOnly||this.engine.learningRound().attempts>0;
++    this.speaker.disabled=!this.voice.available;
++  }
+   drawQuestion(){
+     this.clearQuestion();const round=this.engine.learningRound();if(!round)return;const q=round.question;
+-    this.dialog.dataset.kind=q.kind;this.dialog.dataset.level=q.level;this.dialog.dataset.pictureOnly=String(q.level<=2);this.dialog.querySelector('h2').textContent=q.level<=2?STATIONS[round.station].icon:`${STATIONS[round.station].icon} ${phrase(STATIONS[round.station].title,q)}`;this.dialog.dataset.template=q.template;this.counter.textContent=q.level<=2?`${round.index+1}/${round.total} · ${q.level}`:`${round.index+1}/${round.total} · ${phrase('רָמָה',q)} ${q.level}`;
++    if(kidUx('027')&&q.station==='language')this.updateLanguageVoice(q);
++    this.dialog.dataset.kind=q.kind;this.dialog.dataset.level=q.level;this.dialog.dataset.pictureOnly=String(q.pictureOnly);this.dialog.querySelector('h2').textContent=q.pictureOnly?STATIONS[round.station].icon:`${STATIONS[round.station].icon} ${phrase(STATIONS[round.station].title,q)}`;this.dialog.dataset.template=q.template;this.counter.textContent=q.pictureOnly?`${round.index+1}/${round.total} · ${q.level}`:`${round.index+1}/${round.total} · ${phrase('רָמָה',q)} ${q.level}`;
+     this.visualNode=null;this.body.replaceChildren();this.footer.replaceChildren();this.feedback.textContent='';this.feedback.dataset.state='';
+-    const prompt=el('h3','learning-prompt',q.level<=2?'':q.prompt);prompt.setAttribute('aria-label',q.prompt);prompt.tabIndex=-1;this.body.append(prompt);
++    const prompt=el('h3','learning-prompt',q.pictureOnly?'':q.prompt);prompt.setAttribute('aria-label',q.prompt);prompt.tabIndex=-1;this.body.append(prompt);
+     if(q.kind==='choice'){
+       this.body.append(this.visualNode=this.visual(q));const answers=el('div','learning-answers');
+       q.options.forEach(value=>{const b=button(value,'learning-answer',()=>this.answer(value));b.dataset.value=value;if(q.optionSizes)b.style.fontSize=q.optionSizes[value]+'px';answers.append(b);});this.body.append(answers);
+     }else if(q.kind==='word')this.word(q);else if(q.kind==='jigsaw')this.jigsaw(q);else this.memory(q);
+-    this.help=button(q.level<=2?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.level<=2?'💡':q.hint;this.voice.speak(q.hint);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
++    this.help=button(q.pictureOnly?'💡':phrase('💡 רֶמֶז',q),'learning-hint',()=>{this.feedback.textContent=q.pictureOnly?'💡':q.hint;this.voice.speak(q.hint);},'learning-small');this.help.setAttribute('aria-label','רמז');this.footer.append(this.help);
+     const instance=this.engine.state.buildings.find(b=>b.typeId===STATIONS[round.station].building);if(instance){const manage=button('🏠','learning-building',()=>{this.ui.closeModal();this.ui.showInfo(instance.id,{manage:true});},'learning-small');manage.setAttribute('aria-label','ניהול מבנה הלימוד');this.footer.append(manage);}
+     this.voice.speak(q.voice);queueMicrotask(()=>prompt.focus());
+   }
+   visual(q){
+     const v=el('div','learning-visual');
++    if(q.visualLanguage){
++      const example=el('span','learning-picture-example','⛽ → 🚗 ✓');
++      example.dir='ltr';
++      example.setAttribute('aria-label','דוגמה: מכונית מתאימה לתחנת דלק');
++      v.append(example);
++    }
+     const fallback=q.level<=2&&!this.voice.available&&q.visual.fallback;v.dataset.voiceFallback=String(Boolean(fallback));
+     if(fallback){v.append(el('div','learning-symbols',q.visual.fallback));return v;}
+     if(q.visual.letter){const letter=el('img','learning-letter-image');letter.alt=q.visual.letter;letter.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="76" text-anchor="middle" font-family="sans-serif" font-size="80" fill="#315d6c">${q.visual.letter}</text></svg>`);v.append(letter);}
+@@ -122,11 +164,13 @@ export class LearningInterface {
+     const round=this.engine.learningRound(),q=round?.question;if(!q)return;const result=this.engine.answerLearning(value);if(!result.ok)return;
+     this.feedback.dataset.state=result.correct?'correct':result.resolved?'revealed':'hint';
+     const spoken=result.correct?phrase('⭐ כָּל הַכָּבוֹד! מַמְשִׁיכִים לִלְמֹד.',q):!result.resolved?`${phrase('נְנַסֶּה שׁוּב. ',q)}${result.hint}`:`${phrase('לוֹמְדִים בְּיַחַד. הַתְּשׁוּבָה: ',q)}${['memory','jigsaw'].includes(q.kind)?phrase('הִנֵּה הַתְּמוּנָה הַשְּׁלֵמָה.',q):(q.answerLabel||result.answer)}`;
+-    this.feedback.textContent=q.level<=2?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):spoken;this.voice.speak(!result.correct&&result.resolved&&q.level<=2?`${phrase('הַתְּשׁוּבָה הִיא: ',q)}${q.answerVoice}`:spoken);
++    if(kidUx('027')&&q.station==='language')this.updateLanguageVoice(q);
++    this.feedback.textContent=q.pictureOnly?(result.correct?'⭐':result.resolved?'👀 💡':'💡 ↻'):spoken;this.voice.speak(!result.correct&&result.resolved&&q.pictureOnly?`${phrase('הַתְּשׁוּבָה הִיא: ',q)}${q.answerVoice}`:spoken);
+     if(!result.resolved){if(q.kind==='choice'){const b=[...this.body.querySelectorAll('[data-action=learning-answer]')].find(b=>b.dataset.value===value);if(b)b.disabled=true;}return;}
+     if(['memory','jigsaw'].includes(q.kind))this.revealPuzzle?.();
+     for(const b of this.body.querySelectorAll('button')){b.disabled=true;if(q.kind==='choice'&&b.dataset.value===q.answer)b.dataset.correct='true';}
+-    this.footer.replaceChildren(button(q.level<=2?'➜':phrase('מַמְשִׁיכִים ←',q),'learning-next',()=>{const next=this.engine.nextLearning();if(!next.ok)return;if(next.done)this.result(next.result);else this.drawQuestion();}));
++    this.footer.replaceChildren(button(q.pictureOnly?'➜':phrase('מַמְשִׁיכִים ←',q),'learning-next',()=>{const next=this.engine.nextLearning();if(!next.ok)return;if(next.done)this.result(next.result);else this.drawQuestion();}));
++    if(q.visualLanguage)this.footer.firstChild.setAttribute('aria-label','ממשיכים לשאלה הבאה');
+     this.footer.firstChild.focus();
+   }
+   result(result){
+diff --git a/workout/island/learning/questions.mjs b/workout/island/learning/questions.mjs
+index b6739fd9..46aaac1a 100644
+--- a/workout/island/learning/questions.mjs
++++ b/workout/island/learning/questions.mjs
+@@ -1,4 +1,4 @@
+-import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS} from './banks.mjs?v=island-v2-20261107-15';
++import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS,PICTURE_LANGUAGE} from './banks.mjs?v=island-v2-20261107-15';
+ export const unpoint = s=>String(s).replace(/[\u0591-\u05c7]/g,'');
+ export function shuffled(items,rng=Math.random) {
+   const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;
+@@ -11,6 +11,15 @@ function choice(prompt,visual,correct,others,hint,rng) {
+   return {kind:'choice',prompt,visual,answer,options:shuffled([answer,...shuffled(pool,rng).slice(0,2)],rng),hint};
+ }
+ const lowChoice=(prompt,visual,answer,others,hint,r)=>({...choice(prompt,visual,answer,others,hint,r),pictureOnly:true});
++function visualLanguage(rng){
++  const [[scene,objects],...distractors]=shuffled(PICTURE_LANGUAGE,rng);
++  return {
++    ...choice('אֵיזוֹ תְּמוּנָה מַתְאִימָה?',{symbols:scene},pick(objects,rng),
++      distractors.slice(0,2).map(([,icons])=>pick(icons,rng)),
++      'חַפְּשׂוּ מַשֶּׁהוּ שֶׁמַּתְאִים לַתְּמוּנָה לְמַעְלָה.',rng),
++    template:'picture-association',visualLanguage:true,
++  };
++}
+ function language(level,r,index) {
+   const w=pick(WORDS.filter(w=>(level>3||w.word.length<=4)&&(level<=2||level>=5||unpoint(w.pointed)===w.word)),r),visual={symbols:w.icon};let q,type;
+   if(level<=2){
+@@ -112,11 +121,11 @@ function puzzles(level,r,index) {
+   return {kind:type,template:type,prompt:'הַרְכִּיבוּ אֶת תְּמוּנַת הָעִיר.',visual:{symbols:'🏘️'},size,order,answer:tiles.join(','),scene:number(1,999999,r),hint:'לַחֲצוּ עַל שְׁנֵי חֲלָקִים כְּדֵי לְהַחְלִיף בֵּינֵיהֶם. הַשָּׁמַיִם לְמַעְלָה.'};
+ }
+ const generators={language,math,animals,puzzles};
+-export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[]}={}) {
++export function createQuestion(station,level,{rng=Math.random,index=0,exclude=[],languagePictures=false}={}) {
+   if(!generators[station]||!Number.isInteger(level)||level<1||level>7)throw Error('learning station or level');
+   for(let attempt=0;attempt<400;attempt++){
+-    const q=generators[station](level,rng,index+Math.floor(attempt/50));
+-    q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2;q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
++    const q=languagePictures&&station==='language'&&level>=3?visualLanguage(rng):generators[station](level,rng,index+Math.floor(attempt/50));
++    q.level=level;q.station=station;q.voice=q.prompt;q.pictureOnly=level<=2||Boolean(q.visualLanguage);q.answerVoice=q.answerVoice||q.answerLabel||q.answer;
+     if(q.visual.equation)q.voice+=' '+q.visual.equation.replace('−','פָּחוֹת').replace('+','וְעוֹד').replace('×','כָּפוּל').replace('÷','חֶלְקֵי').replace('=','שָׁוֶה').replace('?','');
+     if(level>=5){q.prompt=unpoint(q.prompt);q.hint=unpoint(q.hint);if(q.visual.caption)q.visual.caption=unpoint(q.visual.caption);if(q.kind==='choice'){q.answer=unpoint(q.answer);q.options=q.options.map(unpoint);}}
+     q.id=JSON.stringify([q.template,q.prompt,q.visual,q.answer,q.cards,q.order,q.scene,q.optionSizes]);
+diff --git a/workout/island/learning/runtime.mjs b/workout/island/learning/runtime.mjs
+index 674f9b5a..94c76be6 100644
+--- a/workout/island/learning/runtime.mjs
++++ b/workout/island/learning/runtime.mjs
+@@ -1,5 +1,6 @@
+ import {STATIONS,levelForAge,questionsForAge,syncLearningDay,dailyStatus,recordAnswer,roundReward,completeDailyRound} from './state.mjs?v=island-v2-20261107-15';
+ import {createQuestion} from './questions.mjs?v=island-v2-20261107-15';
++import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-15';
+ 
+ /** One in-memory round owns answers and pays once, only after all eight questions. */
+ export function installLearning(engine,changed) {
+@@ -7,7 +8,7 @@ export function installLearning(engine,changed) {
+   const state=engine.state;
+   const nextQuestion=()=>{
+     const s=state.learning.stations[round.station];
+-    round.question=createQuestion(round.station,s.level,{index:round.index,exclude:s.recent});
++    round.question=createQuestion(round.station,s.level,{index:round.index,exclude:s.recent,languagePictures:round.languagePictures});
+     s.recent=[...s.recent,round.question.id].slice(-24);
+     round.attempts=0;round.resolved=false;round.feedback=null;
+   };
+@@ -21,16 +22,27 @@ export function installLearning(engine,changed) {
+     if(!Number.isInteger(age)||age<4||age>10)return {ok:false,reason:'reason.invalid'};
+     if(state.learning.age!==age){state.learning.age=age;for(const s of Object.values(state.learning.stations)){s.level=levelForAge(age);s.successStreak=0;s.errorStreak=0;}round=null;changed('learning-age');}return {ok:true};
+   };
+-  engine.startLearning=station=>{
++  engine.startLearning=(station,{languagePictures=false}={})=>{
+     if(!STATIONS[station]||engine.isMinigameActive())return {ok:false,reason:'reason.gameBusy'};
+     syncLearningDay(state.learning,engine.now());
+-    round={station,total:questionsForAge(state.learning.age),index:0,firstTry:0,retried:0,startedAt:engine.now()};nextQuestion();changed('learning-start');return {ok:true};
++    round={station,total:questionsForAge(state.learning.age),index:0,firstTry:0,retried:0,startedAt:engine.now()};
++    if(kidUx('027')&&languagePictures&&station==='language')round.languagePictures=true;
++    nextQuestion();changed('learning-start');return {ok:true};
++  };
++  if(kidUx('027'))engine.useLearningPictures=()=>{
++    if(round?.station!=='language'||round.languagePictures)return false;
++    round.languagePictures=true;
++    if(round.attempts||round.question.level<=2)return false;
++    const recent=state.learning.stations.language.recent;
++    if(recent.at(-1)===round.question.id)recent.pop();
++    nextQuestion();changed('learning-question');
++    return true;
+   };
+   engine.learningRound=()=>round;
+   engine.answerLearning=answer=>{
+     if(!round||round.resolved)return {ok:false,reason:'reason.invalid'};
+     const correct=String(answer)===round.question.answer,station=state.learning.stations[round.station];
+-    if(!round.attempts)recordAnswer(station,correct);
++    if(!round.attempts&&!round.question.visualLanguage)recordAnswer(station,correct);
+     round.attempts++;
+     if(correct){if(round.attempts===1)round.firstTry++;else round.retried++;}
+     round.resolved=correct||round.attempts>=2;
+@@ -40,7 +52,7 @@ export function installLearning(engine,changed) {
+   engine.nextLearning=()=>{
+     if(!round?.resolved)return {ok:false,reason:'reason.invalid'};
+     if(++round.index<round.total){nextQuestion();changed('learning-question');return {ok:true,done:false};}
+-    const result={...roundReward(round.firstTry,round.retried,round.total),firstTry:round.firstTry,retried:round.retried,total:round.total,station:round.station,level:state.learning.stations[round.station].level,pictureOnly:round.question.level<=2,seconds:Math.max(0,Math.round((engine.now()-round.startedAt)/1000))};
++    const result={...roundReward(round.firstTry,round.retried,round.total),firstTry:round.firstTry,retried:round.retried,total:round.total,station:round.station,level:state.learning.stations[round.station].level,pictureOnly:round.question.pictureOnly,seconds:Math.max(0,Math.round((engine.now()-round.startedAt)/1000))};
+     state.money+=result.money;state.learning.stations[round.station].stars=Math.min(Number.MAX_SAFE_INTEGER,state.learning.stations[round.station].stars+result.stars);completeDailyRound(state.learning,engine.now());round=null;changed('learning-complete',{result});return {ok:true,done:true,result};
+   };
+   engine.cancelLearning=()=>{round=null;};
+diff --git a/workout/island/learning/voice.mjs b/workout/island/learning/voice.mjs
+index cc64fc74..c7fad118 100644
+--- a/workout/island/learning/voice.mjs
++++ b/workout/island/learning/voice.mjs
+@@ -1,6 +1,6 @@
+ /** Replace this adapter with licensed recordings without changing station UI. */
+-export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance}={}) {
+-  let voices=[],previous=false,failed=false;const listeners=new Set();
++export function createLearningVoice({synthesis=globalThis.speechSynthesis,Utterance=globalThis.SpeechSynthesisUtterance,monitorErrors=false}={}) {
++  let voices=[],previous=false,failed=false,active;const listeners=new Set();
+   const refresh=()=>{
+     voices=(synthesis?.getVoices?.()||[]).filter(v=>/^he(?:[-_]|$)/i.test(v.lang)||/^iw(?:[-_]|$)/i.test(v.lang));
+     const available=voices.length>0&&Boolean(Utterance)&&!failed;
+@@ -13,10 +13,20 @@ export function createLearningVoice({synthesis=globalThis.speechSynthesis,Uttera
+     speak(text){
+       refresh();if(!voices.length||!Utterance||failed)return false;
+       try{
+-        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices.find(v=>v.localService)||voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;synthesis.speak(utterance);return true;
++        active=null;
++        synthesis.cancel();const utterance=new Utterance(text);utterance.lang='he-IL';utterance.voice=voices.find(v=>v.localService)||voices[0];utterance.rate=.82;utterance.pitch=1;utterance.volume=1;
++        if(monitorErrors){
++          active=utterance;
++          utterance.onend=()=>{if(active===utterance)active=null;};
++          utterance.onerror=event=>{
++            if(active!==utterance||['canceled','interrupted'].includes(event.error))return;
++            active=null;failed=true;refresh();
++          };
++        }
++        synthesis.speak(utterance);return true;
+       }catch{failed=true;refresh();return false;}
+     },
+-    stop(){try{synthesis?.cancel?.();}catch{}},
++    stop(){active=null;try{synthesis?.cancel?.();}catch{}},
+     subscribe(fn){listeners.add(fn);return ()=>listeners.delete(fn);},
+     dispose(){try{synthesis?.cancel?.();}catch{}synthesis?.removeEventListener?.('voiceschanged',voicesChanged);listeners.clear();},
+   };

@@ -1,9 +1,11 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-20';
-import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-20';
-import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-20';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-20';
-import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-20';
-import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-20';
+import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {catchPracticeStyle, mountCatchPractice} from './catch-kid-practice.mjs?v=island-v2-20261107-21';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-21';
+import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-21';
+import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-21';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-21';
+import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-21';
+import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-21';
 
 /** v7 (13/11, Roy after v22): a softer siren, tools from the first second, aim assist. Flags:
  * ?catchSiren=v6 the v6 siren, ?catchWeapons=0 the v6 tyre gun (armed after 14 s), ?catchAssist=0 the v6/v22 hitting
@@ -42,13 +44,13 @@ const ICONS = {
   turnL: '<path d="M14 5 7 12l7 7M7 12h11"/>', turnR: '<path d="m10 5 7 7-7 7M17 12H6"/>',
 };
 const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS, ...WEAPON_STRINGS,
-  'catch.help7.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.',
-  'catch.help7.4': 'יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.',
-  'catch.help8.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.',
+  'catch.help7.2': 'אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי: ירי לגלגל, רשת דבק, קוצים, גל חשמלי או סימון למעקב. מכניסים את הנקודה לעיגול שעל הרכב. כשהעיגול ירוק, לוחצים ירי. כל פגיעה ממלאת את מד הנזק. כשהמד מלא, הרכב נעצר.',
+  'catch.help7.4': 'מספר הזריקות מוגבל, וצריך לפגוע כמה פעמים. מכוונים קרוב לפושע כדי לקבל עזרה בכיוון. הוא מאט לרגע. העיגול המקווקו מראה לאן הוא רץ.',
+  'catch.help8.2': 'אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי. העיגול מראה את המטרה: הגלגל, הגג, הכביש לפני הרכב, הרכב כולו או תא המטען. מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי. עיגול אפור מסביר למה אי אפשר לירות כרגע.',
   'catch.pop.nitro': 'ניטרו', 'catch.pop.nearBonus': 'עקיפה צמודה, עוד ניטרו', 'catch.pop.crimOil': 'הוא החליק על השמן', 'catch.pop.block': 'מחסום משטרה, נשאר נתיב אחד',
   'catch.help6.1': 'מתחילים במרדף: גוררים ימינה ושמאלה כדי להטות את ההגה, ובפניות מחזיקים לכיוון הפנייה. טורבו ובלם בימין.',
   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
-  'catch.help6.3': 'הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.',
+  'catch.help6.3': 'הפושע בורח ברגל. מחזיקים כדי למתוח את הרשת. גוררים כדי לכוון ומשחררים כדי לזרוק.',
   'catch.help6.4': 'יש כמה זריקות, וצריך כמה פגיעות מדויקות כדי לתפוס. הרוח דוחפת את הרשת הצידה, והחץ למעלה מראה לאן.',
   'catch.bend': 'פנייה', 'catch.lock': 'כוונת', 'catch.pop.nearMiss': 'עקיפה צמודה',
 };
@@ -61,6 +63,26 @@ function svg(name, size = 28) {
   s.innerHTML = ICONS[name] || ''; return s;
 }
 function node(tag, cls, text) { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
+
+const kidNetExamples = {
+  narrow:{shape:'M5 18L59 11L59 25Z',y:18,x:59,text:'לטווח ארוך',voice:'רֶשֶׁת צָרָה מַגִּיעָה רָחוֹק, אֲבָל צָרִיךְ לְכַוֵּן מְדֻיָּק.'},
+  wide:{shape:'M5 18L40 3L40 33Z',y:18,x:40,text:'לטווח קרוב',voice:'רֶשֶׁת רְחָבָה תּוֹפֶסֶת שֶׁטַח גָּדוֹל, כְּשֶׁהַיָּעַד קָרוֹב.'},
+  rope:{shape:'M5 16H57V20H5Z',y:18,x:57,text:'ישר ברוח',voice:'חֶבֶל הַלְּכִידָה טָס יָשָׁר, גַּם בָּרוּחַ.'},
+};
+const kidNetStyle = `
+.catch-hud[data-v6][data-mode=throw][data-kid-nets] .catch-tool{min-width:92px;min-height:66px;padding:4px 6px;background:#122747;color:white;font-size:14px;line-height:1.15}
+.catch-hud[data-v6][data-mode=throw][data-kid-nets] .catch-tool[aria-pressed=true]{background:#174069}
+.catch-kid-net-cone{width:62px;height:28px}
+.catch-kid-net-range{font-size:14px;color:#cfeeff;white-space:nowrap}
+@media(max-width:450px){.catch-hud[data-v6][data-mode=throw][data-kid-nets] .catch-tools{right:8px;bottom:122px;flex-wrap:wrap;justify-content:flex-end}}
+`;
+function kidNetCone(tool,doc) {
+  const n=doc.createElementNS(SVG,'svg');
+  n.classList.add('catch-kid-net-cone');n.setAttribute('viewBox','0 0 66 36');n.setAttribute('aria-hidden','true');
+  const cone=doc.createElementNS(SVG,'path');cone.setAttribute('d',tool.shape);cone.setAttribute('fill','#6fcfff55');cone.setAttribute('stroke','#cfeeff');
+  const target=doc.createElementNS(SVG,'circle');target.setAttribute('cx',tool.x);target.setAttribute('cy',tool.y);target.setAttribute('r','3');target.setAttribute('fill','#ffdf83');
+  n.append(cone,target);return n;
+}
 
 const STYLE6 = `
 .catch-hud[data-v6] .catch-chase{display:contents}
@@ -127,12 +149,14 @@ export function runCatchSession6(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({sirenScale, pack: assets7 ? 'v7' : null, v8: audio8, muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-20', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-21', import.meta.url).href; stageEl.append(css);
   const style6 = doc.createElement('style'); style6.textContent = STYLE6; stageEl.append(style6);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
   // ----- HUD shared by both parts -----
   hud = node('div', 'catch-hud'); hud.dir = 'rtl'; hud.dataset.mode = mode; hud.dataset.arch = '1'; hud.dataset.v6 = '1'; if (v7.weapons) hud.dataset.v7 = '1'; stageEl.append(hud);
+  const kidNets=kidUx('036');
+  if(kidNets){kidUxStyle('036',kidNetStyle);hud.dataset.kidNets='';}
   const top = node('div', 'catch-top');
   const wind = node('div', 'catch-wind'); wind.setAttribute('role', 'img');
   const windArrow = document.createElementNS(SVG, 'svg'); windArrow.setAttribute('viewBox', '0 0 24 24'); windArrow.setAttribute('width', 22); windArrow.setAttribute('height', 22); windArrow.innerHTML = '<path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>';
@@ -156,8 +180,34 @@ export function runCatchSession6(ctx) {
   const popup = node('div', 'catch-popup'); popup.setAttribute('role', 'status'); popup.setAttribute('aria-live', 'polite'); hud.append(popup);
   const loading = node('div', 'catch-loading', t('catch.loading')); hud.append(loading);
   const help = node('div', 'catch-help'); help.hidden = true;
-  { const card = node('div', 'catch-help-card'); for (const k of v7.weapons || v7.assist ? ['6.1', v7.weapons ? (chase8 ? '8.2' : '7.2') : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] : ['6.1', '6.2', '6.3', '6.4']) card.append(node('p', '', t('catch.help' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help6', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
-  const seenHelp = (() => { try { return localStorage.getItem('island.catch.help6') === '1' || localStorage.getItem('island.catch.help2') === '1'; } catch { return true; } })();
+  const kidPractice = kidUx('035'), helpKey = kidPractice ? 'island.catch.kid-practice' : 'island.catch.help6';
+  const helpCard = node('div', 'catch-help-card');
+  const tips = (v7.weapons || v7.assist ?
+    ['6.1', v7.weapons ? (chase8 ? '8.2' : '7.2') : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] :
+    ['6.1', '6.2', '6.3', '6.4']).map(k => t('catch.help' + k));
+  const dismissHelp = () => {
+    help.hidden = true;
+    helpOpen = false;
+    try { localStorage.setItem(helpKey, '1'); } catch { /* private mode */ }
+  };
+  if (kidPractice) {
+    kidUxStyle('035', catchPracticeStyle);
+    help.setAttribute('role', 'dialog');
+    help.setAttribute('aria-label', 'אימון קצר למרדף');
+    mountCatchPractice(helpCard, tips, dismissHelp, kidSpeak);
+  } else {
+    helpCard.append(...tips.map(tip => node('p', '', tip)));
+    const ok = node('button', 'catch-help-ok', t('catch.help.dismiss'));
+    ok.type = 'button';
+    ok.addEventListener('click', dismissHelp);
+    helpCard.append(ok);
+  }
+  help.append(helpCard);
+  hud.append(help);
+  const seenHelp = (() => {
+    try { return localStorage.getItem(helpKey) === '1' || (!kidPractice && localStorage.getItem('island.catch.help2') === '1'); }
+    catch { return true; }
+  })();
   const stars = node('div', 'catch-stars'); stars.hidden = true; hud.append(stars);
 
   // ----- chase HUD -----
@@ -183,10 +233,20 @@ export function runCatchSession6(ctx) {
     toolBar.replaceChildren();
     toolButtons = engine.tools.map(tool => {
       const b = node('button', 'catch-tool'); b.type = 'button'; b.dataset.tool = tool.id; b.setAttribute('aria-label', t(tool.title) + ': ' + t(tool.hint));
-      b.append(svg(tool.icon || tool.id, 26), node('span', '', t(tool.title))); b.addEventListener('click', () => selectTool(tool.id)); toolBar.append(b); return b;
+      const example=kidNets&&kidNetExamples[tool.id];
+      if(example)b.append(kidNetCone(example,doc),node('span','',t(tool.title)),node('span','catch-kid-net-range',example.text));
+      else b.append(svg(tool.icon || tool.id, 26), node('span', '', t(tool.title)));
+      b.addEventListener('click', () => {
+        if(!selectTool(tool.id)||!example)return;
+        try { if(localStorage.getItem('island.sound')!=='off')kidSpeak(example.voice); } catch { /* drawing remains */ }
+      });
+      toolBar.append(b); return b;
     });
   }
-  function selectTool(id) { if (engine?.setTool(id)) { audio?.cue('tool'); refreshTools(); } }
+  function selectTool(id) {
+    if (!engine?.setTool(id)) return false;
+    audio?.cue('tool'); refreshTools(); return true;
+  }
   function refreshTools() { for (const b of toolButtons) { const on = b.dataset.tool === engine.aim.tool; b.setAttribute('aria-pressed', String(on)); b.disabled = engine.state.phase !== 'aim'; } }
   function say(key, kind = '', vars) { popup.textContent = t(key, vars); popup.dataset.kind = kind; popup.classList.remove('show'); void popup.offsetWidth; popup.classList.add('show'); }
   function release() { if (mode !== 'throw' || engine.state.phase !== 'aim' || finished || helpOpen || !view) return; if (v7.assist) { try { assistRelease(engine, stage); } catch { /* the plain release still works */ } } engine.release(); audio?.cue('twang'); audio?.cue('swing'); hud.dataset.phase = 'throw'; }
@@ -257,7 +317,7 @@ export function runCatchSession6(ctx) {
   /** The archery HUD of catch-bow-hud.mjs when it exists; otherwise the v5 drag aim stays usable. */
   async function installBow() {
     try {
-      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-20');
+      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-21');
       bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio, stage: () => view?.bow, project: (x, y, z) => view.project(x, y, z), level: stage, assist: v7.assist ? {} : null});
       bowHud.show?.(true);
     } catch { bowHud = null; }
@@ -433,13 +493,13 @@ export function runCatchSession6(ctx) {
     refreshHud();
   }
 
-  import('./catch-view6.mjs?v=island-v2-20261107-20').then(async ({createCatchView6}) => {
+  import('./catch-view6.mjs?v=island-v2-20261107-21').then(async ({createCatchView6}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView6({canvas, balance, stage, chase, quality, assets7, burst8: v8.burst, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
     try {
-      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-20'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run', fix8: Boolean(chase8)}); }
-      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-20'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
+      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-21'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run', fix8: Boolean(chase8)}); }
+      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-21'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
       fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true;
     } catch { fireHud = null; }
     loading.hidden = true;

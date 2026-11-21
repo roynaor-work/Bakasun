@@ -4,10 +4,11 @@
  * racing-deep-m6 (long league): a scrolling calendar of 12-18 races with circuit, time of day, direction and length tags; a drivers' table of
  * twelve with team colours and the player's row marked; a teams' table of six; the rival box ("היריב שלכם"); the season podium with the prize at
  * the end of a season; a replay of a season that missed its gate; the "short races" setting. Numbers are large for a seven-year-old. */
-import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-20';
-import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-20';
-import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-20';
-import {leagueArtEnabled,crestImg,trophyImg,medalImg,markArt} from './racing-league-art.mjs?v=island-v2-20261107-20';
+import {kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-21';
+import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-21';
+import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-21';
+import {leagueArtEnabled,crestImg,trophyImg,medalImg,markArt} from './racing-league-art.mjs?v=island-v2-20261107-21';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -16,8 +17,12 @@ const num=v=>{const n=el('bdi','',String(v));n.dir='ltr';return n;};
 export const SHOP=Object.freeze([
   ['engine','האצה ומהירות שיא'],['brakes','בלימה מאוחרת לפני פניות'],['aero','יציבות במהירות גבוהה'],['steering','תגובת הגה'],['tires','אחיזה בפניות'],['ers','מאגר אנרגיה גדול יותר לניטרו']]);
 export function ensureLeagueStyle(root=document.head){
+  kidUxStyle('023',
+    '.rl-table .rl-chip{min-width:36px;height:28px;padding:2px 4px}' +
+    '.rl-table .rl-chip .rl-chip-no{min-width:24px;padding:2px 3px;border-radius:4px;background:#101b29;color:#fff;text-shadow:none;font-size:14px;text-align:center}'
+  );
   if(document.querySelector('link[data-racing-league-css]'))return;
-  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-20',import.meta.url).href;root.append(link);
+  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-21',import.meta.url).href;root.append(link);
 }
 const ordinal=place=>`מקום ${place}`;
 const FIELD=LEAGUE_IDS.length;
@@ -59,7 +64,7 @@ function rivalBox(rival){
   const gap=rival.diff>0?`לפניכם ב-${rival.diff} נקודות`:rival.diff<0?`אחריכם ב-${-rival.diff} נקודות`:'באותן נקודות כמוכם';
   box.append(el('p','rl-line',`${rival.team} · ${rival.style} · ${gap}`));
   const cmp=el('div','rl-vs');
-  for(const [label,mine,theirs] of [['נקודות',rival.myPoints,rival.points],['מקום',rival.myPlace,rival.place],['ניצחונות',rival.myWins,rival.wins],['פודיומים',rival.myPodiums,rival.podiums],['מי לפני מי',rival.ahead,rival.behind]]){
+  for(const [label,mine,theirs] of [['נקודות',rival.myPoints,rival.points],['מקום',rival.myPlace,rival.place],['ניצחונות',rival.myWins,rival.wins],['סיומים בשלישייה הראשונה',rival.myPodiums,rival.podiums],['מי לפני מי',rival.ahead,rival.behind]]){
     const row=el('div','rl-vs-row');const a=el('b','rl-vs-mine');a.append(num(mine));const b=el('b','rl-vs-theirs');b.append(num(theirs));row.append(a,el('span','rl-vs-label',label),b);cmp.append(row);}
   const names=el('div','rl-vs-row rl-vs-names');names.append(el('b','rl-vs-mine','אתם'),el('span','rl-vs-label',''),el('b','rl-vs-theirs',rival.name));cmp.prepend(names);box.append(cmp);
   return box;
@@ -78,7 +83,7 @@ export function seasonPodiumBlock(sum,{compact=false}={}){
   if(art){const shelf=el('div','rl-trophies'),driver=sum.podium?.[0],cup=(kind,label)=>{const fig=el('figure','rl-cup');fig.append(trophyImg(kind),el('figcaption','',label));return fig;};
    if(driver)shelf.append(cup('driver',driver==='player'?'אלוף הנהגים: אתם':`אלוף הנהגים: ${driverById(driver)?.name||driver}`));if(team)shelf.append(cup('team',`הקבוצה האלופה: ${team.name}`));if(shelf.childElementCount)facts.append(shelf);}
   const mine=el('p','rl-line rl-big');mine.append(sum.place===1?'אתם האלופים של העונה':`סיימתם במקום ${sum.place} מתוך ${FIELD}`);facts.append(mine);
-  if(sum.seasonPrize){const p=el('p','rl-prize');p.append('פרס סוף העונה: +',num(sum.seasonPrize),' מטבעות');facts.append(p);}
+  if(sum.seasonPrize){const p=el('p','rl-prize');p.append('מטבעות מפרס סוף העונה: +',num(sum.seasonPrize));facts.append(p);}
   box.append(facts);return box;
 }
 /** Short, honest status line under the title. */
@@ -105,7 +110,7 @@ function nextRaceLine(next){
 export function leagueCard({engine,go,season,shop,refresh}){
   ensureLeagueStyle();
   const sum=engine.racingLeague.summary(),next=engine.racingLeague.next(),root=el('section','rl-card');root.dataset.racingLeague='true';root.dataset.long=String(LONG);
-  const head=el('div','rl-head'),title=el('h3','',`ליגת המירוצים · ${sum.season.name}`),coins=el('span','rl-coins');coins.append(num(sum.coins),document.createTextNode(' מטבעות'));
+  const head=el('div','rl-head'),title=el('h3','',`ליגת המרוצים · ${sum.season.name}`),coins=el('span','rl-coins');coins.append('מטבעות ליגה: ',num(sum.coins));
   head.append(title,coins);root.append(head,el('p','rl-line',statusLine(sum)));
   if(next)root.append(nextRaceLine(next));
   if(sum.rival&&!sum.done&&sum.race>0){const r=el('p','rl-line rl-rival-line');r.append('היריב שלכם: ',chip(sum.rival.id),' ',el('strong','',sum.rival.name),sum.rival.diff>0?` · לפניכם ב-${sum.rival.diff} נק׳`:sum.rival.diff<0?` · אחריכם ב-${-sum.rival.diff} נק׳`:' · באותן נקודות');root.append(r);}
@@ -151,7 +156,7 @@ export function shopBody({engine,refresh}){
     for(let i=0;i<MAX_LEVEL;i++){const p=el('i','rl-pip');if(i<level)p.className='rl-pip on';pips.append(p);}
     const gain=Math.round((eq[spec.key]-1)*100);
     const what2=el('span','rl-part-what',what);if(gain){const g=el('bdi','rl-gain',`+${gain}%`);g.dir='ltr';what2.append(' · ',g);}row.append(el('strong','rl-part-name',spec.name),pips,what2);
-    const cost=level>=MAX_LEVEL?null:UPGRADE_COST[level],buy=button(cost===null?'רמה מקסימלית':`שדרוג ב-${cost}`,'racing-league-buy',()=>{const r=engine.racingLeague.buy(key);if(r.ok)refresh();else note.textContent=r.reason==='coins'?`חסרים ${r.need} מטבעות לשדרוג הזה`:'אי אפשר לשדרג עכשיו';},'primary-button');
+    const cost=level>=MAX_LEVEL?null:UPGRADE_COST[level],buy=button(cost===null?'הרמה הגבוהה ביותר':`שדרוג ב-${cost}`,'racing-league-buy',()=>{const r=engine.racingLeague.buy(key);if(r.ok)refresh();else note.textContent=r.reason==='coins'?`מטבעות שחסרים לשדרוג: ${r.need}`:'אי אפשר לשדרג עכשיו';},'primary-button');
     buy.dataset.part=key;buy.disabled=cost===null||l.coins<cost;row.append(buy);root.append(row);
   }
   root.append(el('p','rl-line','מטבעות הליגה מגיעים רק ממרוצי ליגה ונפרדים מכסף האי. השדרוגים נשמרים בין עונות.'));

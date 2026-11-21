@@ -18,7 +18,7 @@ export const UI2=Object.freeze({
 export function applyTennisUi2(actions,base=import.meta.url){
  actions.classList.add('tennis-ui2');
  for(const [id,b]of Object.entries(UI2.buttons)){const button=actions.querySelector('#'+id);if(!button)continue;
-  const art=state=>`url(${new URL(`../assets/tennis-ui-v2/button-${b.art}-${state}.svg?v=island-v2-20261107-20`,base).href})`;
+  const art=state=>`url(${new URL(`../assets/tennis-ui-v2/button-${b.art}-${state}.svg?v=island-v2-20261107-21`,base).href})`;
   button.style.setProperty('--ui2-art',art('idle'));button.style.setProperty('--ui2-pressed',art('pressed'));
   Object.assign(button.style,{right:b.right+'px',bottom:b.bottom+'px',width:b.size+'px',height:b.size+'px',minWidth:b.size+'px',minHeight:b.size+'px'});}
  return actions;

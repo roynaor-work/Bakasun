@@ -7,12 +7,14 @@
 // one standing boar, and the crosshair placed on it. The game is read only (__boar.fx/state/clock: which round and sound each shot used,
 // what flies now). The container renders about a frame a second, so the frame loop is held while a frame is photographed.
 // Frames and boar-fx.json go to verification/naval-boars-v241/.
-import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
+import {browserArtifacts, serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
 import {mkdir,writeFile} from 'node:fs/promises';
 const FX=process.env.FX||'v241',T0=Date.now(),log=(...a)=>console.error(`[${FX} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
-const out=new URL('../verification/naval-boars-v241/',import.meta.url).pathname;await mkdir(out+'frames/',{recursive:true});
-const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
-const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
+const out=await browserArtifacts('boar-fx');await mkdir(out+'frames/',{recursive:true});
+const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
+let browser;
+try {
+browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','on');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(600000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
@@ -54,6 +56,6 @@ for(const key of order){
 const state=await frame.evaluate(()=>({shotsBy:window.__boar.state.shotsBy,audio:window.__boar.state.audio}));
 const result={fx:FX,env,rows,shotsBy:state.shotsBy,errors};await writeFile(`${out}boar-fx-${FX}.json`,JSON.stringify(result,null,1)+'\n');
 console.log(JSON.stringify({fx:FX,rows:rows.map(r=>({key:r.key,shots:r.shots,kinds:r.kinds,sounds:r.sounds,colours:Object.keys(r.streaks||{}),fxShells:r.fxShells})),errors}));
-await browser.close();await server.close();
 const nonButton=Object.entries(state.shotsBy||{}).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
-if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,state.shotsBy);process.exit(1);}
+if(errors.length||nonButton){console.error('FAILED: page errors or shots that did not come from the fire button',errors,state.shotsBy);process.exitCode=1;}
+} finally { try { await browser?.close(); } finally { await server.close(); } }

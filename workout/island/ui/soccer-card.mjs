@@ -1,12 +1,11 @@
-import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-v2-20261107-20';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-20';
+import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-v2-20261107-21';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-21';
 import {installSoccerDesignScreens} from '../minigames/soccer-design-screens.mjs';
-import {registerOfflineWorker,downloadGames} from './offline.mjs?v=island-v2-20261107-20';
-import {reportPanel} from './load-report.mjs?v=island-v2-20261107-20';
+import {registerOfflineWorker,downloadGames} from './offline.mjs?v=island-v2-20261107-21';
 installSoccerDesignScreens();
 // Menu presentation is ready on first entry, before a match creates its renderer.
 if(typeof document!=='undefined'&&!document.querySelector('link[data-ultra-soccer-ui]')){
-  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-v2-20261107-20',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
+  const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('../minigames/ultra-soccer-ui.css?v=island-v2-20261107-21',import.meta.url).href;link.dataset.ultraSoccerUi='';document.head.append(link);
 }
 const node=(tag,cls,text)=>{const n=document.createElement(tag);n.className=cls;n.textContent=text??'';return n;};
 /** The soccer menu warms the match assets while the child reads the card: the
@@ -51,7 +50,7 @@ export function playerCard(state,balance,t,{starsAdded}={}) {
   const profile=identity?rosterCards(balance,{players:state.players.map((p,i)=>({...p,card:state.soccerRoster.players[i]}))},card)[0]:null;
   for(const key of attributes){const row=node('div',''),value=profile?.[{power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key]]??card.attributes[key];row.append(node('dt','',t(`soccer.attribute.${key}`)),node('dd','',String(value)));list.append(row);}root.append(list);
   root.append(node('p','soccer-wallet',t('soccer.wallet',{stars:card.stars})));
-  const savedReport=reportPanel('soccer');if(savedReport)root.append(savedReport);
+
   if(starsAdded!==undefined)root.append(node('p','soccer-stars-added',t('soccer.starsAdded',{stars:starsAdded})));
   return root;
 }

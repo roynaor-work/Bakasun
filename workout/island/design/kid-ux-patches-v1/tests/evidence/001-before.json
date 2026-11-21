@@ -1,0 +1,94 @@
+{
+  "id": "001",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "targets": {
+          "soccer": [
+            132,
+            34
+          ],
+          "tennis": [
+            132,
+            34
+          ],
+          "streetSlam": [
+            132,
+            34
+          ],
+          "islandRacing": [
+            132,
+            34
+          ],
+          "boarDefense": [
+            132,
+            34
+          ],
+          "alienDefense": [
+            132,
+            34
+          ],
+          "fireRescue": [
+            132,
+            34
+          ],
+          "navalDuel": [
+            132,
+            34
+          ],
+          "alpineRush": [
+            132,
+            34
+          ],
+          "catchCriminal": [
+            132,
+            34
+          ]
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": "Trusted tap opens the tennis home from its own card."
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-enter\"][data-game-id=\"tennis\"]').first()",
+      "x": 736,
+      "y": 338.171875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-enter",
+        "x": 736,
+        "y": 338.171875
+      }
+    }
+  ],
+  "screenshots": [
+    "001-before-library.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

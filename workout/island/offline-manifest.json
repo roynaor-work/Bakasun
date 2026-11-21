@@ -106,7 +106,63 @@
   "activity/soccer-team.mjs",
   "activity/state.mjs",
   "app.mjs",
+  "assets/city-missions-v1/board.mjs",
+  "assets/city-missions-v1/catalog.mjs",
+  "assets/city-missions-v1/logic.mjs",
+  "assets/city-missions-v1/runtime.mjs",
+  "assets/city-progression-v1/catalog.mjs",
+  "assets/city-progression-v1/island-adapter.mjs",
+  "assets/city-progression-v1/progression.mjs",
+  "assets/city-progression-v1/storage.mjs",
   "assets/hoops-v241/crowd/runtime/lod-policy.mjs",
+  "assets/learning-v2/data/general.json",
+  "assets/learning-v2/data/hebrew.json",
+  "assets/learning-v2/data/logic.json",
+  "assets/learning-v2/data/math.json",
+  "assets/learning-v2/data/science.json",
+  "assets/learning-v2/src/adaptive.mjs",
+  "assets/learning-v2/src/data.mjs",
+  "assets/learning-v2/src/integration-runtime.mjs",
+  "assets/learning-v2/src/integration.css",
+  "assets/learning-v2/src/integration.mjs",
+  "assets/progress-board-v1/art/badges/city-helper.svg",
+  "assets/progress-board-v1/art/badges/explorer.svg",
+  "assets/progress-board-v1/art/badges/first-step.svg",
+  "assets/progress-board-v1/art/badges/game-progress.svg",
+  "assets/progress-board-v1/art/badges/game-specialist.svg",
+  "assets/progress-board-v1/art/badges/honest-voice.svg",
+  "assets/progress-board-v1/art/badges/keep-trying.svg",
+  "assets/progress-board-v1/art/badges/many-paths.svg",
+  "assets/progress-board-v1/art/badges/new-game.svg",
+  "assets/progress-board-v1/art/badges/new-workout.svg",
+  "assets/progress-board-v1/art/badges/personal-step.svg",
+  "assets/progress-board-v1/art/badges/practice-progress.svg",
+  "assets/progress-board-v1/art/badges/rescue-hand.svg",
+  "assets/progress-board-v1/art/badges/rescue-team.svg",
+  "assets/progress-board-v1/art/badges/seven-in-row.svg",
+  "assets/progress-board-v1/art/badges/stage-collection.svg",
+  "assets/progress-board-v1/art/badges/three-days.svg",
+  "assets/progress-board-v1/art/badges/three-in-row.svg",
+  "assets/progress-board-v1/art/badges/three-stars.svg",
+  "assets/progress-board-v1/art/badges/try-again.svg",
+  "assets/progress-board-v1/art/praise-ribbon.svg",
+  "assets/progress-board-v1/art/unlock/01.svg",
+  "assets/progress-board-v1/art/unlock/02.svg",
+  "assets/progress-board-v1/art/unlock/03.svg",
+  "assets/progress-board-v1/art/unlock/04.svg",
+  "assets/progress-board-v1/art/unlock/05.svg",
+  "assets/progress-board-v1/art/unlock/06.svg",
+  "assets/progress-board-v1/art/unlock/07.svg",
+  "assets/progress-board-v1/art/unlock/08.svg",
+  "assets/progress-board-v1/data/badges.mjs",
+  "assets/progress-board-v1/data/compliments.mjs",
+  "assets/progress-board-v1/src/board.css",
+  "assets/progress-board-v1/src/events.mjs",
+  "assets/progress-board-v1/src/integration.mjs",
+  "assets/progress-board-v1/src/progress.mjs",
+  "assets/progress-board-v1/src/store.mjs",
+  "assets/progress-board-v1/src/view.mjs",
+  "assets/racing-tracks-v3/tracks.mjs",
   "assets/racing/credits.html",
   "assets/soccer-v24/crowd/runtime/lod-policy.mjs",
   "assets/tennis-crowd-v22/crowd-lod.mjs",
@@ -125,6 +181,7 @@
   "data/players.json",
   "data/sports.json",
   "data/strings.he.json",
+  "data/strings.he.v246.json",
   "data/team.json",
   "data/tutorial.json",
   "data/world.json",
@@ -177,11 +234,13 @@
   "extensions/street-slam.mjs",
   "extensions/tennis.mjs",
   "index.html",
+  "kid-ux.mjs",
   "learning/banks.mjs",
   "learning/interface.mjs",
   "learning/learning.css",
   "learning/questions.mjs",
   "learning/runtime.mjs",
+  "learning/spoken-copy.mjs",
   "learning/state.mjs",
   "learning/voice.mjs",
   "manifest.webmanifest",
@@ -314,6 +373,7 @@
   "minigames/catch-engine.mjs",
   "minigames/catch-fire-hud.mjs",
   "minigames/catch-gfx.mjs",
+  "minigames/catch-kid-practice.mjs",
   "minigames/catch-props7.mjs",
   "minigames/catch-session.mjs",
   "minigames/catch-session6.mjs",
@@ -427,6 +487,7 @@
   "minigames/hoops-view.mjs",
   "minigames/hoops.css",
   "minigames/icons.mjs",
+  "minigames/kid-hoops-pass-demo.mjs",
   "minigames/model-art.mjs",
   "minigames/naval-aim-flag.mjs",
   "minigames/naval-aim-view.mjs",
@@ -504,11 +565,13 @@
   "minigames/racing-session.mjs",
   "minigames/racing-speedometer.mjs",
   "minigames/racing-tower.mjs",
+  "minigames/racing-tracks-v3-env.mjs",
   "minigames/racing-tracks.mjs",
   "minigames/racing-unlock.mjs",
   "minigames/racing-v24-4.mjs",
   "minigames/racing-v24-5.mjs",
   "minigames/racing-v24-6.mjs",
+  "minigames/racing-v24-7.mjs",
   "minigames/racing-v24.css",
   "minigames/racing-v24.mjs",
   "minigames/racing-v7-assets.mjs",
@@ -652,6 +715,9 @@
   "ui/hangar-preview.mjs",
   "ui/hoops-club.mjs",
   "ui/interface.mjs",
+  "ui/kid-ux-help.mjs",
+  "ui/kid-ux-library.mjs",
+  "ui/kid-ux-result.mjs",
   "ui/load-report.mjs",
   "ui/load-rescue.mjs",
   "ui/offline-install.mjs",
@@ -1208,6 +1274,13 @@
    "assets/tennis-callouts-rec/out-1.mp3",
    "assets/tennis-callouts-rec/out-1.ogg",
    "assets/tennis-callouts-rec/takes.json",
+   "assets/tennis-callouts-v1/callouts.mp3",
+   "assets/tennis-callouts-v1/callouts.ogg",
+   "assets/tennis-callouts-v1/net-club.svg",
+   "assets/tennis-callouts-v1/out-club.svg",
+   "assets/tennis-crowd-rec/cheer-medium.ogg",
+   "assets/tennis-crowd-rec/cheer-short.ogg",
+   "assets/tennis-crowd-rec/cheer.ogg",
    "assets/tennis-crowd-v22/assets.json",
    "assets/tennis-crowd-v22/lod-config.json",
    "assets/tennis-crowd-v22/runtime/lod0/fan-01.glb",
@@ -1367,6 +1440,12 @@
    "assets/racing-audio-v5/pit-engine-slow.ogg",
    "assets/racing-audio-v5/pit-limiter.mp3",
    "assets/racing-audio-v5/pit-limiter.ogg",
+   "assets/racing-audio-v6/brake.mp3",
+   "assets/racing-audio-v6/brake.ogg",
+   "assets/racing-audio-v6/pit-limiter.mp3",
+   "assets/racing-audio-v6/pit-limiter.ogg",
+   "assets/racing-audio-v6/tire-scrub.mp3",
+   "assets/racing-audio-v6/tire-scrub.ogg",
    "assets/racing-broadcast-v1/card-frame.svg",
    "assets/racing-broadcast-v1/leaderboard-strip.svg",
    "assets/racing-broadcast-v1/podium.webp",
@@ -1443,6 +1522,60 @@
    "assets/racing-rec/engine-away-2.ogg",
    "assets/racing-rec/engine-idle-loop.mp3",
    "assets/racing-rec/engine-idle-loop.ogg",
+   "assets/racing-tracks-v3/props/cedar-bend/cedar-grove.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/fern-clump.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/log-stack.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/moss-boulder.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/ranger-tower.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/saplings.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/trail-board.glb",
+   "assets/racing-tracks-v3/props/cedar-bend/trail-shelter.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/alpine-chalet.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/avalanche-fence.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/cable-tower.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/cairn.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/granite-needle.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/juniper-cluster.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/lookout-deck.glb",
+   "assets/racing-tracks-v3/props/cloud-pass/spillway-box.glb",
+   "assets/racing-tracks-v3/props/frostline/ice-spires.glb",
+   "assets/racing-tracks-v3/props/frostline/plow-depot.glb",
+   "assets/racing-tracks-v3/props/frostline/ski-patrol-hut.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-cannon.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-fence.glb",
+   "assets/racing-tracks-v3/props/frostline/snow-spruce.glb",
+   "assets/racing-tracks-v3/props/frostline/trail-lanterns.glb",
+   "assets/racing-tracks-v3/props/frostline/weather-mast.glb",
+   "assets/racing-tracks-v3/props/neon-quay/glass-towers.glb",
+   "assets/racing-tracks-v3/props/neon-quay/metro-entrance.glb",
+   "assets/racing-tracks-v3/props/neon-quay/neon-pylon.glb",
+   "assets/racing-tracks-v3/props/neon-quay/service-block.glb",
+   "assets/racing-tracks-v3/props/neon-quay/signal-frame.glb",
+   "assets/racing-tracks-v3/props/neon-quay/streetlight.glb",
+   "assets/racing-tracks-v3/props/neon-quay/transit-shelter.glb",
+   "assets/racing-tracks-v3/props/neon-quay/water-tower.glb",
+   "assets/racing-tracks-v3/props/red-mesa/cistern.glb",
+   "assets/racing-tracks-v3/props/red-mesa/dune-grass.glb",
+   "assets/racing-tracks-v3/props/red-mesa/mesa-stack.glb",
+   "assets/racing-tracks-v3/props/red-mesa/saguaro.glb",
+   "assets/racing-tracks-v3/props/red-mesa/sand-fence.glb",
+   "assets/racing-tracks-v3/props/red-mesa/sandstone-arch.glb",
+   "assets/racing-tracks-v3/props/red-mesa/shade-station.glb",
+   "assets/racing-tracks-v3/props/red-mesa/survey-mast.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/beach-umbrella.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/buoy-pair.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/dune-fence.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/fishing-pier.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/lifeguard-hut.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/lighthouse.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/palm-cluster.glb",
+   "assets/racing-tracks-v3/props/saltwater-bay/sailboat.glb",
+   "assets/racing-tracks-v3/skies/cedar-bend.webp",
+   "assets/racing-tracks-v3/skies/cloud-pass.webp",
+   "assets/racing-tracks-v3/skies/frostline.webp",
+   "assets/racing-tracks-v3/skies/neon-quay.webp",
+   "assets/racing-tracks-v3/skies/red-mesa.webp",
+   "assets/racing-tracks-v3/skies/saltwater-bay.webp",
    "assets/racing-v7/cars/apex-lod0.glb",
    "assets/racing-v7/cars/apex-lod1.glb",
    "assets/racing-v7/cars/apex-lod2.glb",
@@ -1689,7 +1822,67 @@
    "assets/models/city/49-fire-truck.glb",
    "assets/models/city/50-police-car.glb",
    "assets/models/city/51-ambulance.glb",
-   "assets/models/city/52-taxi.glb"
+   "assets/models/city/52-taxi.glb",
+   "assets/city-buildings-v2/bakery-complete.glb",
+   "assets/city-buildings-v2/bakery-foundation.glb",
+   "assets/city-buildings-v2/bakery-half-built.glb",
+   "assets/city-buildings-v2/bus-stop-complete.glb",
+   "assets/city-buildings-v2/bus-stop-foundation.glb",
+   "assets/city-buildings-v2/bus-stop-half-built.glb",
+   "assets/city-buildings-v2/cinema-complete.glb",
+   "assets/city-buildings-v2/cinema-foundation.glb",
+   "assets/city-buildings-v2/cinema-half-built.glb",
+   "assets/city-buildings-v2/fire-station-complete.glb",
+   "assets/city-buildings-v2/fire-station-foundation.glb",
+   "assets/city-buildings-v2/fire-station-half-built.glb",
+   "assets/city-buildings-v2/grocery-complete.glb",
+   "assets/city-buildings-v2/grocery-foundation.glb",
+   "assets/city-buildings-v2/grocery-half-built.glb",
+   "assets/city-buildings-v2/harbor-complete.glb",
+   "assets/city-buildings-v2/harbor-foundation.glb",
+   "assets/city-buildings-v2/harbor-half-built.glb",
+   "assets/city-buildings-v2/hospital-complete.glb",
+   "assets/city-buildings-v2/hospital-foundation.glb",
+   "assets/city-buildings-v2/hospital-half-built.glb",
+   "assets/city-buildings-v2/library-complete.glb",
+   "assets/city-buildings-v2/library-foundation.glb",
+   "assets/city-buildings-v2/library-half-built.glb",
+   "assets/city-buildings-v2/lighthouse-complete.glb",
+   "assets/city-buildings-v2/lighthouse-foundation.glb",
+   "assets/city-buildings-v2/lighthouse-half-built.glb",
+   "assets/city-buildings-v2/market-complete.glb",
+   "assets/city-buildings-v2/market-foundation.glb",
+   "assets/city-buildings-v2/market-half-built.glb",
+   "assets/city-buildings-v2/museum-complete.glb",
+   "assets/city-buildings-v2/museum-foundation.glb",
+   "assets/city-buildings-v2/museum-half-built.glb",
+   "assets/city-buildings-v2/park-complete.glb",
+   "assets/city-buildings-v2/park-foundation.glb",
+   "assets/city-buildings-v2/park-half-built.glb",
+   "assets/city-buildings-v2/patisserie-complete.glb",
+   "assets/city-buildings-v2/patisserie-foundation.glb",
+   "assets/city-buildings-v2/patisserie-half-built.glb",
+   "assets/city-buildings-v2/playground-complete.glb",
+   "assets/city-buildings-v2/playground-foundation.glb",
+   "assets/city-buildings-v2/playground-half-built.glb",
+   "assets/city-buildings-v2/police-station-complete.glb",
+   "assets/city-buildings-v2/police-station-foundation.glb",
+   "assets/city-buildings-v2/police-station-half-built.glb",
+   "assets/city-buildings-v2/school-complete.glb",
+   "assets/city-buildings-v2/school-foundation.glb",
+   "assets/city-buildings-v2/school-half-built.glb",
+   "assets/city-buildings-v2/sports-park-complete.glb",
+   "assets/city-buildings-v2/sports-park-foundation.glb",
+   "assets/city-buildings-v2/sports-park-half-built.glb",
+   "assets/city-buildings-v2/swimming-pool-complete.glb",
+   "assets/city-buildings-v2/swimming-pool-foundation.glb",
+   "assets/city-buildings-v2/swimming-pool-half-built.glb",
+   "assets/city-buildings-v2/theatre-complete.glb",
+   "assets/city-buildings-v2/theatre-foundation.glb",
+   "assets/city-buildings-v2/theatre-half-built.glb",
+   "assets/city-buildings-v2/train-station-complete.glb",
+   "assets/city-buildings-v2/train-station-foundation.glb",
+   "assets/city-buildings-v2/train-station-half-built.glb"
   ],
   "catch": [
    "assets/catch-v7/audio/barrier-break.mp3",
@@ -1762,8 +1955,8 @@
  },
  "files": {
   "": [
-   "4e3321dafb713145",
-   2715
+   "ae20a88cb96dad3f",
+   2704
   ],
   "activity/alien-upgrades.mjs": [
    "e0da13756f40f19f",
@@ -1794,8 +1987,8 @@
    2080
   ],
   "activity/runtime.mjs": [
-   "f4c36c137d413c29",
-   8325
+   "19937b887c2d3aeb",
+   8378
   ],
   "activity/soccer-card.mjs": [
    "5cca2e53ea175548",
@@ -1810,12 +2003,12 @@
    1781
   ],
   "activity/state.mjs": [
-   "668c90ffbd5c1003",
+   "581db83256e458d4",
    4546
   ],
   "app.mjs": [
-   "4de18a07167eaeca",
-   7942
+   "dc8b1a0881d35e39",
+   10395
   ],
   "assets/alien-v24/overheat.ogg": [
    "6d01d7168b98edda",
@@ -2532,6 +2725,278 @@
   "assets/catch-v8/audio/gear-shift.ogg": [
    "84675551be699551",
    1363
+  ],
+  "assets/city-buildings-v2/bakery-complete.glb": [
+   "b5340cd23f971e5d",
+   7384
+  ],
+  "assets/city-buildings-v2/bakery-foundation.glb": [
+   "43c3a2308a08d4b0",
+   5592
+  ],
+  "assets/city-buildings-v2/bakery-half-built.glb": [
+   "d1315dc1b2dab1bb",
+   5576
+  ],
+  "assets/city-buildings-v2/bus-stop-complete.glb": [
+   "98c0db49a0e5ccf2",
+   5260
+  ],
+  "assets/city-buildings-v2/bus-stop-foundation.glb": [
+   "cc3d9337ed02b3d1",
+   5916
+  ],
+  "assets/city-buildings-v2/bus-stop-half-built.glb": [
+   "a486b186238b37b9",
+   5476
+  ],
+  "assets/city-buildings-v2/cinema-complete.glb": [
+   "f395cdc551e77e64",
+   7564
+  ],
+  "assets/city-buildings-v2/cinema-foundation.glb": [
+   "80b6c930f89acaef",
+   6540
+  ],
+  "assets/city-buildings-v2/cinema-half-built.glb": [
+   "36188f65ce5fd3c8",
+   6524
+  ],
+  "assets/city-buildings-v2/fire-station-complete.glb": [
+   "419804a1eba3c8a9",
+   5628
+  ],
+  "assets/city-buildings-v2/fire-station-foundation.glb": [
+   "104b826921b90356",
+   5356
+  ],
+  "assets/city-buildings-v2/fire-station-half-built.glb": [
+   "c7f08d0c7d60e340",
+   5416
+  ],
+  "assets/city-buildings-v2/grocery-complete.glb": [
+   "9eea20409f38375b",
+   7320
+  ],
+  "assets/city-buildings-v2/grocery-foundation.glb": [
+   "f5792c696233fe77",
+   5668
+  ],
+  "assets/city-buildings-v2/grocery-half-built.glb": [
+   "19970741868587f4",
+   5484
+  ],
+  "assets/city-buildings-v2/harbor-complete.glb": [
+   "000c94292fe8314e",
+   7208
+  ],
+  "assets/city-buildings-v2/harbor-foundation.glb": [
+   "a1d6b9cf10e60976",
+   5964
+  ],
+  "assets/city-buildings-v2/harbor-half-built.glb": [
+   "4a37a3356716a376",
+   7944
+  ],
+  "assets/city-buildings-v2/hospital-complete.glb": [
+   "f20b51d8fcd5eb31",
+   7732
+  ],
+  "assets/city-buildings-v2/hospital-foundation.glb": [
+   "9c717c5491dd6a4c",
+   5384
+  ],
+  "assets/city-buildings-v2/hospital-half-built.glb": [
+   "ee3c5e86df59ea04",
+   6112
+  ],
+  "assets/city-buildings-v2/library-complete.glb": [
+   "9243a18c96bd9f27",
+   7076
+  ],
+  "assets/city-buildings-v2/library-foundation.glb": [
+   "356865ec3c4aa097",
+   5364
+  ],
+  "assets/city-buildings-v2/library-half-built.glb": [
+   "83c2a9e4bd441798",
+   4848
+  ],
+  "assets/city-buildings-v2/lighthouse-complete.glb": [
+   "f84bb18cf4f02af5",
+   7252
+  ],
+  "assets/city-buildings-v2/lighthouse-foundation.glb": [
+   "fac23bbbaa2e0d07",
+   5292
+  ],
+  "assets/city-buildings-v2/lighthouse-half-built.glb": [
+   "2c2d617a3c71400f",
+   6140
+  ],
+  "assets/city-buildings-v2/market-complete.glb": [
+   "1742145e69d7deb5",
+   8644
+  ],
+  "assets/city-buildings-v2/market-foundation.glb": [
+   "27c72aaff3c3debb",
+   5496
+  ],
+  "assets/city-buildings-v2/market-half-built.glb": [
+   "a5ed06286affcd91",
+   6588
+  ],
+  "assets/city-buildings-v2/museum-complete.glb": [
+   "653cd48cbf26919c",
+   7096
+  ],
+  "assets/city-buildings-v2/museum-foundation.glb": [
+   "762296014b037031",
+   5448
+  ],
+  "assets/city-buildings-v2/museum-half-built.glb": [
+   "5926251fff96272d",
+   6156
+  ],
+  "assets/city-buildings-v2/park-complete.glb": [
+   "9e9806900dac8751",
+   6752
+  ],
+  "assets/city-buildings-v2/park-foundation.glb": [
+   "728d8e24d2cfe446",
+   5276
+  ],
+  "assets/city-buildings-v2/park-half-built.glb": [
+   "27fddb8b595345e0",
+   5572
+  ],
+  "assets/city-buildings-v2/patisserie-complete.glb": [
+   "f7e5457e52e07bbb",
+   7580
+  ],
+  "assets/city-buildings-v2/patisserie-foundation.glb": [
+   "be284b5f362f5c07",
+   5388
+  ],
+  "assets/city-buildings-v2/patisserie-half-built.glb": [
+   "3b3f09562c631d5c",
+   5564
+  ],
+  "assets/city-buildings-v2/playground-complete.glb": [
+   "90b39828c4b20bf8",
+   6124
+  ],
+  "assets/city-buildings-v2/playground-foundation.glb": [
+   "66ede84f9cc9e0a1",
+   5676
+  ],
+  "assets/city-buildings-v2/playground-half-built.glb": [
+   "8b12f37773a7dfd9",
+   6264
+  ],
+  "assets/city-buildings-v2/police-station-complete.glb": [
+   "01355ad79cee9ecf",
+   6224
+  ],
+  "assets/city-buildings-v2/police-station-foundation.glb": [
+   "5ea4420e740848aa",
+   5688
+  ],
+  "assets/city-buildings-v2/police-station-half-built.glb": [
+   "9409b689ed7bfded",
+   5168
+  ],
+  "assets/city-buildings-v2/school-complete.glb": [
+   "6f4b3f0b29e62aa4",
+   9068
+  ],
+  "assets/city-buildings-v2/school-foundation.glb": [
+   "5d038dc8318fe734",
+   5280
+  ],
+  "assets/city-buildings-v2/school-half-built.glb": [
+   "6acc63a2436674cd",
+   6756
+  ],
+  "assets/city-buildings-v2/sports-park-complete.glb": [
+   "998b421f40954536",
+   6732
+  ],
+  "assets/city-buildings-v2/sports-park-foundation.glb": [
+   "a3c9199e9dbf320a",
+   5836
+  ],
+  "assets/city-buildings-v2/sports-park-half-built.glb": [
+   "edcaae17f3bbb3d2",
+   5916
+  ],
+  "assets/city-buildings-v2/swimming-pool-complete.glb": [
+   "6ed1bf639c2a0d02",
+   6476
+  ],
+  "assets/city-buildings-v2/swimming-pool-foundation.glb": [
+   "eb4a91a9d2c2da29",
+   6024
+  ],
+  "assets/city-buildings-v2/swimming-pool-half-built.glb": [
+   "f5c5a731065863df",
+   6176
+  ],
+  "assets/city-buildings-v2/theatre-complete.glb": [
+   "94ad8dcfeb865d38",
+   6260
+  ],
+  "assets/city-buildings-v2/theatre-foundation.glb": [
+   "bd22157348b4287a",
+   5596
+  ],
+  "assets/city-buildings-v2/theatre-half-built.glb": [
+   "11c506c263c1b75c",
+   6088
+  ],
+  "assets/city-buildings-v2/train-station-complete.glb": [
+   "9ee89bab203f218b",
+   8592
+  ],
+  "assets/city-buildings-v2/train-station-foundation.glb": [
+   "85a014dc2d22e5b2",
+   5912
+  ],
+  "assets/city-buildings-v2/train-station-half-built.glb": [
+   "2b0a6c48557ac438",
+   7432
+  ],
+  "assets/city-missions-v1/board.mjs": [
+   "a072e3b1b4e0b14a",
+   5672
+  ],
+  "assets/city-missions-v1/catalog.mjs": [
+   "6510c50c3c454a51",
+   6866
+  ],
+  "assets/city-missions-v1/logic.mjs": [
+   "34b5192227feb50f",
+   12500
+  ],
+  "assets/city-missions-v1/runtime.mjs": [
+   "d895d83d8ee9c6c6",
+   11817
+  ],
+  "assets/city-progression-v1/catalog.mjs": [
+   "a78a89175ec8ba23",
+   9769
+  ],
+  "assets/city-progression-v1/island-adapter.mjs": [
+   "7fa067578a5e922d",
+   6980
+  ],
+  "assets/city-progression-v1/progression.mjs": [
+   "6bb5fb86cdf6d95c",
+   12123
+  ],
+  "assets/city-progression-v1/storage.mjs": [
+   "40787ba573ae5a50",
+   1689
   ],
   "assets/defense-v7/alien-beetle-lod1.glb": [
    "953ec12e7352057d",
@@ -3401,6 +3866,46 @@
    "8d4a630b3468ed55",
    1473368
   ],
+  "assets/learning-v2/data/general.json": [
+   "91ed132cd0d8c2ae",
+   198223
+  ],
+  "assets/learning-v2/data/hebrew.json": [
+   "a56b44c322c5ec7a",
+   174879
+  ],
+  "assets/learning-v2/data/logic.json": [
+   "e72e5a5840a36d5f",
+   211388
+  ],
+  "assets/learning-v2/data/math.json": [
+   "6c4115d9bf4ecc18",
+   180888
+  ],
+  "assets/learning-v2/data/science.json": [
+   "bc9dc71bb61d13e8",
+   216620
+  ],
+  "assets/learning-v2/src/adaptive.mjs": [
+   "6404781ba91f986b",
+   4304
+  ],
+  "assets/learning-v2/src/data.mjs": [
+   "02da2058ad1a8f95",
+   1159
+  ],
+  "assets/learning-v2/src/integration-runtime.mjs": [
+   "197c3790d4a45085",
+   8277
+  ],
+  "assets/learning-v2/src/integration.css": [
+   "536d45c986e78d5c",
+   740
+  ],
+  "assets/learning-v2/src/integration.mjs": [
+   "3780f81558888460",
+   12935
+  ],
   "assets/models/adult-man-512.glb": [
    "951e88d622fda3c2",
    319156
@@ -3584,6 +4089,154 @@
   "assets/naval-v7/textures/fleet-tide-1024.png": [
    "450c0c1f86d7f0cd",
    171882
+  ],
+  "assets/progress-board-v1/art/badges/city-helper.svg": [
+   "915036917c9615e5",
+   1839
+  ],
+  "assets/progress-board-v1/art/badges/explorer.svg": [
+   "301349177eeb3fc4",
+   1881
+  ],
+  "assets/progress-board-v1/art/badges/first-step.svg": [
+   "6d502722320b5570",
+   1920
+  ],
+  "assets/progress-board-v1/art/badges/game-progress.svg": [
+   "538fba465b4e829d",
+   1809
+  ],
+  "assets/progress-board-v1/art/badges/game-specialist.svg": [
+   "c2537a254cb70116",
+   1947
+  ],
+  "assets/progress-board-v1/art/badges/honest-voice.svg": [
+   "ebd16e5a15f072e1",
+   1833
+  ],
+  "assets/progress-board-v1/art/badges/keep-trying.svg": [
+   "4051fed056e4302c",
+   1741
+  ],
+  "assets/progress-board-v1/art/badges/many-paths.svg": [
+   "543a13511a3e8d99",
+   1876
+  ],
+  "assets/progress-board-v1/art/badges/new-game.svg": [
+   "f9e8ccbadc8eb5e7",
+   1964
+  ],
+  "assets/progress-board-v1/art/badges/new-workout.svg": [
+   "912a35cf48a6feb0",
+   1819
+  ],
+  "assets/progress-board-v1/art/badges/personal-step.svg": [
+   "8028cf1eb1c2f6a7",
+   1759
+  ],
+  "assets/progress-board-v1/art/badges/practice-progress.svg": [
+   "f23ad7a2bcaff3f1",
+   1831
+  ],
+  "assets/progress-board-v1/art/badges/rescue-hand.svg": [
+   "dcc53a84298f2ed7",
+   1817
+  ],
+  "assets/progress-board-v1/art/badges/rescue-team.svg": [
+   "c1afc383fd46ce32",
+   1843
+  ],
+  "assets/progress-board-v1/art/badges/seven-in-row.svg": [
+   "ed8e7edbcccf5518",
+   2099
+  ],
+  "assets/progress-board-v1/art/badges/stage-collection.svg": [
+   "e12df04093749b1b",
+   1883
+  ],
+  "assets/progress-board-v1/art/badges/three-days.svg": [
+   "03ba2181f796c90a",
+   1892
+  ],
+  "assets/progress-board-v1/art/badges/three-in-row.svg": [
+   "41aa7a5410d2ee94",
+   1800
+  ],
+  "assets/progress-board-v1/art/badges/three-stars.svg": [
+   "1c2a75d1e2931a00",
+   2055
+  ],
+  "assets/progress-board-v1/art/badges/try-again.svg": [
+   "b49bbbc4a7c161d1",
+   1865
+  ],
+  "assets/progress-board-v1/art/praise-ribbon.svg": [
+   "90c3ca88e996876a",
+   872
+  ],
+  "assets/progress-board-v1/art/unlock/01.svg": [
+   "4eeb467e9b89dfbd",
+   912
+  ],
+  "assets/progress-board-v1/art/unlock/02.svg": [
+   "00dc1fca5ba1ae31",
+   912
+  ],
+  "assets/progress-board-v1/art/unlock/03.svg": [
+   "6430251eae72bc69",
+   912
+  ],
+  "assets/progress-board-v1/art/unlock/04.svg": [
+   "f8d7214246ac49f3",
+   915
+  ],
+  "assets/progress-board-v1/art/unlock/05.svg": [
+   "c9392c38c9f83510",
+   925
+  ],
+  "assets/progress-board-v1/art/unlock/06.svg": [
+   "5f54e2b551e58663",
+   930
+  ],
+  "assets/progress-board-v1/art/unlock/07.svg": [
+   "fc17e5c86858c693",
+   924
+  ],
+  "assets/progress-board-v1/art/unlock/08.svg": [
+   "14146061d26ba302",
+   931
+  ],
+  "assets/progress-board-v1/data/badges.mjs": [
+   "b5b6525d1e8efd03",
+   3208
+  ],
+  "assets/progress-board-v1/data/compliments.mjs": [
+   "a6052bd138ec8f44",
+   72995
+  ],
+  "assets/progress-board-v1/src/board.css": [
+   "72acc697b4a6725b",
+   11958
+  ],
+  "assets/progress-board-v1/src/events.mjs": [
+   "407dccd49188193c",
+   5534
+  ],
+  "assets/progress-board-v1/src/integration.mjs": [
+   "edc84b7d8856776e",
+   4801
+  ],
+  "assets/progress-board-v1/src/progress.mjs": [
+   "473f573fb49ef656",
+   10336
+  ],
+  "assets/progress-board-v1/src/store.mjs": [
+   "c78ebaadd7369169",
+   2793
+  ],
+  "assets/progress-board-v1/src/view.mjs": [
+   "14dc3d1fa55cdbd8",
+   16894
   ],
   "assets/racing-audio-v2/engine-high.mp3": [
    "398d2db676d9bca9",
@@ -3913,6 +4566,30 @@
    "9f12e18e01b28c56",
    10326
   ],
+  "assets/racing-audio-v6/brake.mp3": [
+   "07d8e412538bd8d9",
+   18188
+  ],
+  "assets/racing-audio-v6/brake.ogg": [
+   "afc79dc6d97ab2a9",
+   7721
+  ],
+  "assets/racing-audio-v6/pit-limiter.mp3": [
+   "ce72111046ee81a2",
+   48716
+  ],
+  "assets/racing-audio-v6/pit-limiter.ogg": [
+   "341a5aae965d1915",
+   15288
+  ],
+  "assets/racing-audio-v6/tire-scrub.mp3": [
+   "7924dede14ae5632",
+   16460
+  ],
+  "assets/racing-audio-v6/tire-scrub.ogg": [
+   "ec2364fea090dab9",
+   7448
+  ],
   "assets/racing-broadcast-v1/card-frame.svg": [
    "e56260efad34f620",
    572
@@ -4216,6 +4893,226 @@
   "assets/racing-rec/engine-idle-loop.ogg": [
    "ae0e40f4ee111854",
    36121
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/cedar-grove.glb": [
+   "d771918626f9888b",
+   16760
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/fern-clump.glb": [
+   "54d136a165b5068e",
+   38308
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/log-stack.glb": [
+   "05d12dc1853d416a",
+   40800
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/moss-boulder.glb": [
+   "72adfafa505d6527",
+   13976
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/ranger-tower.glb": [
+   "74cf894e54f2ae80",
+   8092
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/saplings.glb": [
+   "3ef19dc0b572e9ca",
+   12036
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/trail-board.glb": [
+   "6af9c437040e93bd",
+   6404
+  ],
+  "assets/racing-tracks-v3/props/cedar-bend/trail-shelter.glb": [
+   "90372d0ba00437c2",
+   6832
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/alpine-chalet.glb": [
+   "05c70234a0e5da05",
+   6980
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/avalanche-fence.glb": [
+   "0a6d5a57f4286b50",
+   8776
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/cable-tower.glb": [
+   "7f48fab5136f3810",
+   13748
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/cairn.glb": [
+   "d9fb70b2e31e26cb",
+   10616
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/granite-needle.glb": [
+   "62eacea831866f82",
+   12880
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/juniper-cluster.glb": [
+   "d851fa33d40386bb",
+   16736
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/lookout-deck.glb": [
+   "11832ad978be157b",
+   8796
+  ],
+  "assets/racing-tracks-v3/props/cloud-pass/spillway-box.glb": [
+   "0953ba3f8330c27c",
+   5804
+  ],
+  "assets/racing-tracks-v3/props/frostline/ice-spires.glb": [
+   "40d9fa5b22d57cf3",
+   6648
+  ],
+  "assets/racing-tracks-v3/props/frostline/plow-depot.glb": [
+   "b59d008715169bf4",
+   7756
+  ],
+  "assets/racing-tracks-v3/props/frostline/ski-patrol-hut.glb": [
+   "d90976ee2ea0fac9",
+   5544
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-cannon.glb": [
+   "d073c50d279093a5",
+   11656
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-fence.glb": [
+   "93f1223010dfcb78",
+   7408
+  ],
+  "assets/racing-tracks-v3/props/frostline/snow-spruce.glb": [
+   "986b4ae788a840e6",
+   18584
+  ],
+  "assets/racing-tracks-v3/props/frostline/trail-lanterns.glb": [
+   "3bfad4f887e8c61e",
+   6496
+  ],
+  "assets/racing-tracks-v3/props/frostline/weather-mast.glb": [
+   "dc8b4df606069a31",
+   11388
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/glass-towers.glb": [
+   "6a8d79c66fbbf326",
+   177608
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/metro-entrance.glb": [
+   "0e2444461ccb4a7e",
+   6736
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/neon-pylon.glb": [
+   "be0be1e25c5b721c",
+   7096
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/service-block.glb": [
+   "ddf688b7fe14fecb",
+   10708
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/signal-frame.glb": [
+   "ee8204c0b48d459c",
+   7956
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/streetlight.glb": [
+   "45e67cfc4bb0d4fe",
+   5988
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/transit-shelter.glb": [
+   "cb29d2d99d32ff0c",
+   9624
+  ],
+  "assets/racing-tracks-v3/props/neon-quay/water-tower.glb": [
+   "83798d9b2f2bee3f",
+   13512
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/cistern.glb": [
+   "9156877e43c741db",
+   10500
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/dune-grass.glb": [
+   "885ac395cbc949e9",
+   7220
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/mesa-stack.glb": [
+   "e1faa61e21185134",
+   17796
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/saguaro.glb": [
+   "430a9015adce8f88",
+   10664
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/sand-fence.glb": [
+   "7eca16f2ab16e53d",
+   7396
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/sandstone-arch.glb": [
+   "bb26a13735357176",
+   23536
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/shade-station.glb": [
+   "cc023334fa0c13f3",
+   6812
+  ],
+  "assets/racing-tracks-v3/props/red-mesa/survey-mast.glb": [
+   "40f457e28175093d",
+   7384
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/beach-umbrella.glb": [
+   "ea61983eb31cd9e4",
+   5420
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/buoy-pair.glb": [
+   "793c0c67566af97b",
+   12276
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/dune-fence.glb": [
+   "2a64d618076eab12",
+   7396
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/fishing-pier.glb": [
+   "80ca474398db4deb",
+   18300
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/lifeguard-hut.glb": [
+   "f6576d5afc2de061",
+   8096
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/lighthouse.glb": [
+   "aa8275c4f9afc878",
+   28836
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/palm-cluster.glb": [
+   "ad8360fedc57e901",
+   22564
+  ],
+  "assets/racing-tracks-v3/props/saltwater-bay/sailboat.glb": [
+   "5c2a6d64c22560b9",
+   5524
+  ],
+  "assets/racing-tracks-v3/skies/cedar-bend.webp": [
+   "87b3478514be1623",
+   22434
+  ],
+  "assets/racing-tracks-v3/skies/cloud-pass.webp": [
+   "37a1f461af892029",
+   25974
+  ],
+  "assets/racing-tracks-v3/skies/frostline.webp": [
+   "42945e6844ae95a6",
+   23464
+  ],
+  "assets/racing-tracks-v3/skies/neon-quay.webp": [
+   "9b0e9055013e1771",
+   14220
+  ],
+  "assets/racing-tracks-v3/skies/red-mesa.webp": [
+   "6f1f27ab3fc322bf",
+   15352
+  ],
+  "assets/racing-tracks-v3/skies/saltwater-bay.webp": [
+   "2767f4fd63ae04c9",
+   25792
+  ],
+  "assets/racing-tracks-v3/tracks.mjs": [
+   "435cbb69faf05765",
+   43680
   ],
   "assets/racing-v7/cars/apex-lod0.glb": [
    "fafc077c9f3f88d4",
@@ -4656,6 +5553,34 @@
   "assets/tennis-callouts-rec/takes.json": [
    "8d04ec52714a0d8e",
    536
+  ],
+  "assets/tennis-callouts-v1/callouts.mp3": [
+   "80b36979c37b149d",
+   17684
+  ],
+  "assets/tennis-callouts-v1/callouts.ogg": [
+   "6290eb2576d01377",
+   18544
+  ],
+  "assets/tennis-callouts-v1/net-club.svg": [
+   "0d87df2ca746be64",
+   1330
+  ],
+  "assets/tennis-callouts-v1/out-club.svg": [
+   "77db395d8531e327",
+   1317
+  ],
+  "assets/tennis-crowd-rec/cheer-medium.ogg": [
+   "fccf30e965d0684a",
+   25461
+  ],
+  "assets/tennis-crowd-rec/cheer-short.ogg": [
+   "419e8aa58b97f1bd",
+   15173
+  ],
+  "assets/tennis-crowd-rec/cheer.ogg": [
+   "e11c9c0d29719c4d",
+   36805
   ],
   "assets/tennis-crowd-v22/assets.json": [
    "cdfb1c7ed5fa0a56",
@@ -5134,8 +6059,8 @@
    825
   ],
   "data/config.json": [
-   "c997bbaec4bdc31d",
-   287047
+   "f65d0a9d948ee48e",
+   287383
   ],
   "data/extensions.json": [
    "49f688bb9d26a3c1",
@@ -5162,8 +6087,12 @@
    399
   ],
   "data/strings.he.json": [
-   "24b798437fd0d710",
-   139158
+   "f7679a6213630dc4",
+   139323
+  ],
+  "data/strings.he.v246.json": [
+   "f2ea30ad0477cc2a",
+   30931
   ],
   "data/team.json": [
    "82a4168feca9f02a",
@@ -5502,16 +6431,16 @@
    101256
   ],
   "design/controls/hoops.json": [
-   "1ff0b9513bb2303e",
-   21962
+   "3b7e495ef5040c53",
+   21994
   ],
   "design/controls/interaction.json": [
    "f008c0acf34dca7a",
    7474
   ],
   "design/controls/soccer.json": [
-   "3cd3d4b96497ade5",
-   28840
+   "fc0e73c2253a2b0e",
+   28890
   ],
   "design/environment/backgrounds/ski-mountains-landscape.webp": [
    "4ba4cb8ef4c0307a",
@@ -6206,32 +7135,32 @@
    1389
   ],
   "engine/city-depth.mjs": [
-   "9389565e7fdcebd2",
-   8563
+   "bc7e0ee01955f78f",
+   9259
   ],
   "engine/city-hall.mjs": [
    "76de0aa46775f5c2",
    1618
   ],
   "engine/city-management.mjs": [
-   "6f1f40f2f97940e1",
-   14193
+   "d186c13dbe47d934",
+   14412
   ],
   "engine/city-runtime.mjs": [
-   "79772e535a167299",
-   3993
+   "5cd4a6d9cc11539b",
+   4056
   ],
   "engine/city-sites.mjs": [
-   "b43c0be5051b857a",
+   "e4ccdb47ca850193",
    6043
   ],
   "engine/economy.mjs": [
-   "de8c2ba5650ccdc0",
-   3301
+   "ad2e8002592c9b0b",
+   3804
   ],
   "engine/engine.mjs": [
-   "09af46eef2588fd7",
-   39480
+   "6379532260a063c4",
+   42694
   ],
   "engine/episodes.mjs": [
    "fbc9c1bebf54a287",
@@ -6242,36 +7171,36 @@
    499
   ],
   "engine/load-data.mjs": [
-   "8727ba3c8bb75dc5",
+   "c5f35d1d87280507",
    2561
   ],
   "engine/metrics.mjs": [
-   "c977ab3bfba36c4b",
-   3861
+   "af0e54d7949e0266",
+   4146
   ],
   "engine/paths.mjs": [
-   "88833b65b6d5bcff",
+   "ef4ac9d67aed50b4",
    2081
   ],
   "engine/persistence.mjs": [
-   "3e9a4aab07579249",
-   26502
+   "a6a66c32d60f1679",
+   26989
   ],
   "engine/placement-help.mjs": [
-   "2bcd9403852b15eb",
+   "7012fc32bc037996",
    2501
   ],
   "engine/ready-plots.mjs": [
-   "2c22699c039cdf48",
-   16660
+   "cb971c2ef2a1cf46",
+   16721
   ],
   "engine/registry.mjs": [
    "cf1b6e747fe3b54f",
    2810
   ],
   "engine/rules.mjs": [
-   "3a5d7f757a428987",
-   5609
+   "ae95b1d9eabe1ce8",
+   5975
   ],
   "episodes/example-first-visit.json": [
    "d9a595ea0697eb6e",
@@ -6286,19 +7215,19 @@
    364
   ],
   "extensions/alien-defense.mjs": [
-   "c01b3d6f1e13e202",
+   "3692772a7d73b285",
    867
   ],
   "extensions/alpine-rush.mjs": [
-   "295b79a4a5fef14b",
+   "8c9b029fcc9acd95",
    760
   ],
   "extensions/boar-defense.mjs": [
-   "9c570c917523a9c0",
+   "99692f8d0f1854c0",
    415
   ],
   "extensions/catch-criminal.mjs": [
-   "e7b24c34611267dd",
+   "346f956f6be3d92d",
    2198
   ],
   "extensions/example-building.mjs": [
@@ -6322,64 +7251,72 @@
    93
   ],
   "extensions/fire-rescue.mjs": [
-   "d7b631e0e9204f4b",
+   "56f2cbf917a20558",
    521
   ],
   "extensions/island-events.mjs": [
-   "cd6352ec3eb08b84",
+   "bd22a2ec1488e248",
    759
   ],
   "extensions/naval-duel.mjs": [
-   "84a1c61868530c66",
+   "a30477b428719c55",
    512
   ],
   "extensions/racing.mjs": [
-   "d6da01ce233a86a3",
+   "61ecca5b1fc42681",
    519
   ],
   "extensions/soccer.mjs": [
-   "de92ec5249a69497",
+   "31dd1ee1a3729b88",
    414
   ],
   "extensions/street-slam.mjs": [
-   "dcd029752592cc51",
+   "9d0bf47026e2972a",
    569
   ],
   "extensions/tennis.mjs": [
-   "dc97a03fb2ce60fc",
+   "01bf9153ac4483d3",
    400
   ],
   "index.html": [
-   "4e3321dafb713145",
-   2715
+   "ae20a88cb96dad3f",
+   2704
+  ],
+  "kid-ux.mjs": [
+   "891b6c5afe2ed742",
+   2556
   ],
   "learning/banks.mjs": [
-   "1d33ea3a11c29f5a",
-   5650
+   "61ff05db2fc248c0",
+   8214
   ],
   "learning/interface.mjs": [
-   "c0741cde35b1fc16",
-   20350
+   "c5a32025fb3bbd69",
+   31485
   ],
   "learning/learning.css": [
    "5fe66e202ff5f769",
    10071
   ],
   "learning/questions.mjs": [
-   "47ab052e186332e2",
-   15281
+   "2d9031081103a222",
+   20766
   ],
   "learning/runtime.mjs": [
-   "54d71c88e5270efc",
-   3403
+   "0a083334a5dc3129",
+   4065
+  ],
+  "learning/spoken-copy.mjs": [
+   "67ea6581449bb082",
+   2458
   ],
   "learning/state.mjs": [
-   "cdaad0caf8d0d3f2",
-   3996
+   "e6d24f7ccc5d4fdc",
+   4488
   ],
   "learning/voice.mjs": [
-   "3f7e753dd3d006af",
-   1443
+   "a16db91ffe57872c",
+   2139
   ],
   "manifest.webmanifest": [
    "f7908be552b15abf",
@@ -6402,7 +7339,7 @@
    6082
   ],
   "minigames/alien-flight-model.mjs": [
-   "b05ffc738e5cb7b9",
+   "e5a7e3ae3415bd9d",
    52742
   ],
   "minigames/alien-hull.mjs": [
@@ -6422,11 +7359,11 @@
    3465
   ],
   "minigames/alien-session.mjs": [
-   "0a17ebc6c991bb75",
-   15013
+   "2be32c6313ef3f6f",
+   19563
   ],
   "minigames/alien-ui.mjs": [
-   "a57ed537daf455cf",
+   "384db87494da4fb5",
    6145
   ],
   "minigames/alien-v10-draw.mjs": [
@@ -6454,11 +7391,11 @@
    2016
   ],
   "minigames/alien-v13.mjs": [
-   "1607b0f11f2d6b70",
+   "fcb1f996bd2b9f6b",
    1415
   ],
   "minigames/alien-v14-draw.mjs": [
-   "002e7c9f8472d4df",
+   "f4313eca79eafbe7",
    2658
   ],
   "minigames/alien-v14.mjs": [
@@ -6466,7 +7403,7 @@
    1895
   ],
   "minigames/alien-v15-audio.mjs": [
-   "6dec15029a39e958",
+   "9400dfa678a01e10",
    1908
   ],
   "minigames/alien-v15.mjs": [
@@ -6474,11 +7411,11 @@
    7436
   ],
   "minigames/alien-v23-draw.mjs": [
-   "53dfad00e6b90c6b",
+   "c2417dc5d7a57238",
    1496
   ],
   "minigames/alien-v23-ui.mjs": [
-   "8ffe6c25cf2a1c01",
+   "2aaf815f7656069f",
    6309
   ],
   "minigames/alien-v23.css": [
@@ -6490,11 +7427,11 @@
    5427
   ],
   "minigames/alien-v24-audio.mjs": [
-   "efca9340f22c37bc",
+   "d27054373807095f",
    2498
   ],
   "minigames/alien-v24-draw.mjs": [
-   "d439c2dfc9031432",
+   "cac4eda32dd9aefb",
    4511
   ],
   "minigames/alien-v24.css": [
@@ -6510,15 +7447,15 @@
    6626
   ],
   "minigames/alien-v25-audio.mjs": [
-   "90e7d670ef3ceaa0",
+   "d8afa3a48f55c3ba",
    6610
   ],
   "minigames/alien-v25-draw.mjs": [
-   "789c37a3255bd513",
+   "0e1590bf49ee0e5d",
    9008
   ],
   "minigames/alien-v25-ui.mjs": [
-   "37d12824c18c58bb",
+   "527912425716a071",
    4986
   ],
   "minigames/alien-v25.css": [
@@ -6526,7 +7463,7 @@
    4532
   ],
   "minigames/alien-v25.mjs": [
-   "4edbc194d5947c9a",
+   "3e8012bf1c0036ad",
    4890
   ],
   "minigames/alien-v7.mjs": [
@@ -6538,7 +7475,7 @@
    840
   ],
   "minigames/alien-view.mjs": [
-   "3bdf68be84e45f4c",
+   "fe2c2d039bfed18e",
    11041
   ],
   "minigames/alien.css": [
@@ -6546,7 +7483,7 @@
    11380
   ],
   "minigames/aliens.mjs": [
-   "555013c3c2af44ad",
+   "520dc0d30bb48849",
    5794
   ],
   "minigames/alpine-arrows.mjs": [
@@ -6554,7 +7491,7 @@
    1702
   ],
   "minigames/alpine-art.mjs": [
-   "70c08b28bcc531aa",
+   "f0290b154cc63add",
    9839
   ],
   "minigames/alpine-audio.mjs": [
@@ -6594,7 +7531,7 @@
    2459
   ],
   "minigames/alpine-engine.mjs": [
-   "02bf853f38d4cbc8",
+   "2c028e5933193594",
    49116
   ],
   "minigames/alpine-env.mjs": [
@@ -6610,7 +7547,7 @@
    4427
   ],
   "minigames/alpine-fir.mjs": [
-   "da862cf2ea125ea6",
+   "90d300349329a90b",
    6946
   ],
   "minigames/alpine-hud.mjs": [
@@ -6618,31 +7555,31 @@
    1944
   ],
   "minigames/alpine-league-core.mjs": [
-   "0a88e0c779bc3726",
-   16164
+   "fa6a4c70c6269897",
+   16162
   ],
   "minigames/alpine-league-ghost.mjs": [
    "c39b124e53b77d8f",
    4903
   ],
   "minigames/alpine-league-island.mjs": [
-   "f2b9403e519933bd",
+   "9b0965805804da7b",
    4574
   ],
   "minigames/alpine-league-look.mjs": [
-   "e6c05c1b35bf69bc",
+   "ee9830dc66e52c5f",
    16239
   ],
   "minigames/alpine-league-result.mjs": [
-   "28994ca8607d7e4d",
+   "8d03076671f1cecd",
    2121
   ],
   "minigames/alpine-league-stages.mjs": [
-   "54d5914a065be1a6",
+   "9973986b74fdba60",
    14897
   ],
   "minigames/alpine-league-store.mjs": [
-   "8d9194b53153c204",
+   "0b96a7ef00189f0e",
    2268
   ],
   "minigames/alpine-league-theme.mjs": [
@@ -6666,11 +7603,11 @@
    1387
   ],
   "minigames/alpine-records.mjs": [
-   "5b4223b36ee183ab",
+   "c79b1111038216cd",
    5786
   ],
   "minigames/alpine-result.mjs": [
-   "b977d99051d56d63",
+   "168844cea5b3443b",
    2776
   ],
   "minigames/alpine-screen.css": [
@@ -6682,8 +7619,8 @@
    1173
   ],
   "minigames/alpine-session.mjs": [
-   "0b3cb31689b9c11f",
-   37498
+   "b25e58faf0748ede",
+   41473
   ],
   "minigames/alpine-start-lights.css": [
    "f19f7a763dcf5736",
@@ -6698,7 +7635,7 @@
    2540
   ],
   "minigames/alpine-track.mjs": [
-   "9a5a05d397bc5914",
+   "e7fb46ffacc8c36b",
    23327
   ],
   "minigames/alpine-v241.css": [
@@ -6718,7 +7655,7 @@
    16194
   ],
   "minigames/alpine-view.mjs": [
-   "f8311f103ebb1330",
+   "411c79c0eb287e50",
    74851
   ],
   "minigames/alpine.css": [
@@ -6730,7 +7667,7 @@
    12825
   ],
   "minigames/athlete-body-v2.mjs": [
-   "c1c64586e8e3b0a4",
+   "1718f6c49e86c18b",
    9731
   ],
   "minigames/athlete-body-v22.mjs": [
@@ -6754,28 +7691,28 @@
    9415
   ],
   "minigames/boar-island/chain.mjs": [
-   "90174a36a38c56e8",
-   5702
+   "984041b68763dae1",
+   5700
   ],
   "minigames/boar-island/core.mjs": [
-   "877bc7679bd38cd1",
-   13274
+   "bb2ca38f4ab3bb30",
+   13327
   ],
   "minigames/boar-island/creatures.js": [
    "df07c43bbb162f62",
    20402
   ],
   "minigames/boar-island/game.js": [
-   "3a3b62ca83d71850",
-   144643
+   "d3b3fefcfcddcedf",
+   151643
   ],
   "minigames/boar-island/guns.js": [
    "14a972a0df710e2b",
    18509
   ],
   "minigames/boar-island/index.html": [
-   "0699efe7b528cc14",
-   8756
+   "0f7aa021c1940e47",
+   9115
   ],
   "minigames/boar-island/kit.js": [
    "5eb913afd656067c",
@@ -6838,11 +7775,11 @@
    23262
   ],
   "minigames/boar-session.mjs": [
-   "9f98d178289526f5",
-   4988
+   "f687b8137198037c",
+   5390
   ],
   "minigames/canvas-session.mjs": [
-   "32a5cbb64a97cadc",
+   "d6fec1e1f325a569",
    20348
   ],
   "minigames/catch-actors.mjs": [
@@ -6850,15 +7787,15 @@
    11584
   ],
   "minigames/catch-arsenal-hud.mjs": [
-   "067b6e0aa969b3f5",
-   23040
+   "f6728ada2d1ac380",
+   23045
   ],
   "minigames/catch-assist.mjs": [
-   "1b79632a02f1d2f4",
-   8489
+   "1d787cb1d8b6d7a3",
+   8493
   ],
   "minigames/catch-audio.mjs": [
-   "4f92c72ef6e3d782",
+   "89e10f8289be02c2",
    35665
   ],
   "minigames/catch-audio8.mjs": [
@@ -6866,11 +7803,11 @@
    29856
   ],
   "minigames/catch-bow-hud.mjs": [
-   "1eb21fe21aca6113",
+   "c90f94564d3df88f",
    15049
   ],
   "minigames/catch-bow-view.mjs": [
-   "acbb7eddf2eb1310",
+   "02804ecacca7600e",
    30878
   ],
   "minigames/catch-burst8.mjs": [
@@ -6886,7 +7823,7 @@
    11777
   ],
   "minigames/catch-chase6.mjs": [
-   "e47b4be98148f332",
+   "e491ba4de03a9c38",
    28800
   ],
   "minigames/catch-engine.mjs": [
@@ -6894,24 +7831,28 @@
    20080
   ],
   "minigames/catch-fire-hud.mjs": [
-   "c7b98b34b83ea134",
-   15406
+   "e76fea725abec382",
+   15410
   ],
   "minigames/catch-gfx.mjs": [
    "3275704b8d76e028",
    8967
+  ],
+  "minigames/catch-kid-practice.mjs": [
+   "5255a3798c850068",
+   7725
   ],
   "minigames/catch-props7.mjs": [
    "ff237764ceac068f",
    13370
   ],
   "minigames/catch-session.mjs": [
-   "3706b25926632efa",
+   "704b374c571131bc",
    27761
   ],
   "minigames/catch-session6.mjs": [
-   "356391d1153d758f",
-   44819
+   "6bf66470a96fd121",
+   47693
   ],
   "minigames/catch-track.mjs": [
    "a1903969329ef91d",
@@ -6926,23 +7867,23 @@
    5340
   ],
   "minigames/catch-view.mjs": [
-   "864b0f38b451014c",
+   "e71c810dc2b9c527",
    49825
   ],
   "minigames/catch-view6.mjs": [
-   "f7552d8dc7bda173",
+   "341604010c2831fc",
    39101
   ],
   "minigames/catch-weapons.mjs": [
-   "c17dba25f15f4c04",
-   22222
+   "582fe684f6f00b48",
+   22285
   ],
   "minigames/catch.css": [
    "338003e01f465dc5",
    11268
   ],
   "minigames/context.mjs": [
-   "e2848eb89b5458b1",
+   "4bbe78bdd51859ae",
    1269
   ],
   "minigames/controls.mjs": [
@@ -6950,15 +7891,15 @@
    8095
   ],
   "minigames/fire-assistance.mjs": [
-   "9e8e1eab6e5b0ca1",
+   "244abe8b1a7d2628",
    6897
   ],
   "minigames/fire-bonus-draw.mjs": [
-   "9693b5a2b70d675c",
+   "20b1799d1fe5c858",
    17940
   ],
   "minigames/fire-bonus-session.mjs": [
-   "19025c918f2b7b55",
+   "c40aa06b09b77fb0",
    18864
   ],
   "minigames/fire-bonus.mjs": [
@@ -6970,7 +7911,7 @@
    5113
   ],
   "minigames/fire-canvas.mjs": [
-   "30a8cf331b956a4e",
+   "58c0a13d5c11484f",
    11928
   ],
   "minigames/fire-crew.mjs": [
@@ -6978,7 +7919,7 @@
    2593
   ],
   "minigames/fire-interior.mjs": [
-   "ec2159995f00d1db",
+   "e041010a640b900c",
    12063
   ],
   "minigames/fire-ladder.mjs": [
@@ -7010,19 +7951,19 @@
    14279
   ],
   "minigames/fire-session.mjs": [
-   "5ab7ee1e482056d1",
+   "f331bd3f86a053a8",
    13329
   ],
   "minigames/fire-targets.mjs": [
-   "03db1f90d6eeb861",
+   "a8e08f1cd61efd6c",
    9736
   ],
   "minigames/fire-truck.mjs": [
-   "e0cad698d0d2b92b",
+   "dc9793ecb7e8b1b6",
    4825
   ],
   "minigames/fire-ui.mjs": [
-   "390bcb6c1a06d56a",
+   "8efb18763cf4eba6",
    11705
   ],
   "minigames/fire-v23-anchors.mjs": [
@@ -7030,7 +7971,7 @@
    6877
   ],
   "minigames/fire-v23-assets.mjs": [
-   "ea784fabe56feeee",
+   "96eb33349d0cbaaa",
    7777
   ],
   "minigames/fire-v23.css": [
@@ -7042,20 +7983,20 @@
    1431
   ],
   "minigames/fire-v24-flow.mjs": [
-   "24f7561a6695cc6c",
+   "0befdc7b5302bc64",
    12151
   ],
   "minigames/fire-v24-interior.mjs": [
-   "8438ace69eeed4a0",
+   "622ff1c9b26b7101",
    13533
   ],
   "minigames/fire-v24-scene.mjs": [
-   "cdaefbe126551eac",
+   "2795568963a26902",
    33056
   ],
   "minigames/fire-v24-session.mjs": [
-   "006eb5d181b5a7e2",
-   20938
+   "6a50525b37cc0b4a",
+   23279
   ],
   "minigames/fire-v24.css": [
    "d2ab5edd6318c496",
@@ -7070,7 +8011,7 @@
    18091
   ],
   "minigames/fire-view.mjs": [
-   "03844984d858f64e",
+   "36059a1dd451fc32",
    37870
   ],
   "minigames/fire.css": [
@@ -7078,11 +8019,11 @@
    8428
   ],
   "minigames/fire.mjs": [
-   "c2b0ca357dc7c078",
+   "e0bbb5a907331784",
    18995
   ],
   "minigames/g2m-audio.mjs": [
-   "0b587649eafbb7aa",
+   "f35bd8ee21444712",
    9082
   ],
   "minigames/g2m-effects.mjs": [
@@ -7094,7 +8035,7 @@
    1524
   ],
   "minigames/g2n-audio.mjs": [
-   "a38c05cef0f472eb",
+   "86ada4a2dc164eaf",
    9005
   ],
   "minigames/g2n-fire.css": [
@@ -7110,7 +8051,7 @@
    4306
   ],
   "minigames/g3h-soccer.css": [
-   "b745d46622ebf0ea",
+   "ea2fbf611ac19c97",
    8312
   ],
   "minigames/g3j-soccer.css": [
@@ -7118,19 +8059,19 @@
    1553
   ],
   "minigames/g4e-audio.mjs": [
-   "856d8cd00484215a",
-   7514
+   "7f20f2179125ea13",
+   9368
   ],
   "minigames/g4f-tennis.css": [
    "e6413b5d9e9c8c57",
    1329
   ],
   "minigames/g6d-audio.mjs": [
-   "0ae11c1e3765372b",
+   "64b37b62da4cb794",
    5815
   ],
   "minigames/g6d-effects.mjs": [
-   "e3b0b480db5a6e78",
+   "ebf7ce13dc66225c",
    3958
   ],
   "minigames/g6e-naval.css": [
@@ -7142,15 +8083,15 @@
    24973
   ],
   "minigames/hoops-arena.mjs": [
-   "caa2a7462491028c",
+   "76e38fcc65069032",
    17019
   ],
   "minigames/hoops-athlete.mjs": [
-   "1ceddbef7716fcf4",
+   "e4a21d5f3730095f",
    17347
   ],
   "minigames/hoops-audio.mjs": [
-   "a3206a4071e42911",
+   "e0274bca2031ed8a",
    17753
   ],
   "minigames/hoops-baked.mjs": [
@@ -7162,7 +8103,7 @@
    6314
   ],
   "minigames/hoops-body-v2.mjs": [
-   "146f888585700725",
+   "710ba2dbfb4c4234",
    3889
   ],
   "minigames/hoops-controls-profile.mjs": [
@@ -7170,15 +8111,15 @@
    1778
   ],
   "minigames/hoops-controls.mjs": [
-   "8c7e98c8ccb4e613",
-   23455
+   "312c63e6882daf23",
+   23469
   ],
   "minigames/hoops-court.mjs": [
    "1a10df3683057e7c",
    1689
   ],
   "minigames/hoops-crowd3d.mjs": [
-   "46159881546a22ee",
+   "2cfdb0598c01372f",
    18260
   ],
   "minigames/hoops-draco-worker.mjs": [
@@ -7190,15 +8131,15 @@
    1952
   ],
   "minigames/hoops-engine.mjs": [
-   "386bade9cbbe6d9f",
-   70055
+   "77c9c00073bb2021",
+   70578
   ],
   "minigames/hoops-feel.mjs": [
    "7d59f78d5d63028d",
    4256
   ],
   "minigames/hoops-franchise.mjs": [
-   "8065f01107374cdd",
+   "18e876e2e5bc123b",
    9251
   ],
   "minigames/hoops-gltf.mjs": [
@@ -7262,7 +8203,7 @@
    9541
   ],
   "minigames/hoops-referee.mjs": [
-   "9822609eed5be5e5",
+   "2e24138f94664b43",
    8446
   ],
   "minigames/hoops-reflection.mjs": [
@@ -7274,20 +8215,20 @@
    2645
   ],
   "minigames/hoops-role-labels.mjs": [
-   "e6d436d5d7e9f165",
-   3797
+   "cc064cef741d75c6",
+   4251
   ],
   "minigames/hoops-roles.mjs": [
-   "826c8c0214f756e6",
-   1990
+   "6fe422ae3eac2016",
+   1943
   ],
   "minigames/hoops-screens.mjs": [
    "91f253249af598db",
    5458
   ],
   "minigames/hoops-session.mjs": [
-   "e5af69fef7414d40",
-   24246
+   "9562f1e8efa7fdf2",
+   26306
   ],
   "minigames/hoops-show.mjs": [
    "caf45c3a7bea9c51",
@@ -7342,7 +8283,7 @@
    11390
   ],
   "minigames/hoops-view.mjs": [
-   "895f50c0fca080e4",
+   "1135dc385d83f3e7",
    48629
   ],
   "minigames/hoops.css": [
@@ -7353,16 +8294,20 @@
    "fd5785388f151457",
    3801
   ],
+  "minigames/kid-hoops-pass-demo.mjs": [
+   "eaf4dade8749cf23",
+   6989
+  ],
   "minigames/model-art.mjs": [
-   "835f5461aa52a39b",
+   "ee41a4e4e75a37a1",
    5182
   ],
   "minigames/naval-aim-flag.mjs": [
-   "6c2b4ba5776b95c3",
+   "107ddf1d325198c2",
    5127
   ],
   "minigames/naval-aim-view.mjs": [
-   "3afc6a8932ed7e49",
+   "432b15c7dc14339a",
    5245
   ],
   "minigames/naval-aim.css": [
@@ -7370,19 +8315,19 @@
    8012
   ],
   "minigames/naval-air-audio.mjs": [
-   "4cc02710c994aa0f",
+   "061b684d4ce60220",
    3336
   ],
   "minigames/naval-air-view.mjs": [
-   "006965d238da9ee6",
+   "732532eab5c3138b",
    8424
   ],
   "minigames/naval-air.mjs": [
-   "6daf0bc1b4b1d462",
+   "680ecd39d05b104c",
    8883
   ],
   "minigames/naval-assets.mjs": [
-   "43c6de54e2e8dd7c",
+   "094d7c62b93487ca",
    6104
   ],
   "minigames/naval-ballistics.mjs": [
@@ -7390,7 +8335,7 @@
    7741
   ],
   "minigames/naval-base-view.mjs": [
-   "557efcc3987ff4fb",
+   "6d8f687d66feb31a",
    8198
   ],
   "minigames/naval-battle.mjs": [
@@ -7402,11 +8347,11 @@
    8289
   ],
   "minigames/naval-campaign.mjs": [
-   "af4363dade6be3c2",
+   "0910733fc6c86bae",
    6649
   ],
   "minigames/naval-controls.mjs": [
-   "83723e52e7e16a13",
+   "e09f1d495de0bfda",
    27421
   ],
   "minigames/naval-dressing.mjs": [
@@ -7414,16 +8359,16 @@
    7453
   ],
   "minigames/naval-environment.mjs": [
-   "f3890734d030ff16",
+   "37f73345a46313cf",
    9354
   ],
   "minigames/naval-forecast.mjs": [
-   "8d6789cd580aed03",
+   "51ef8d337796e2f3",
    3690
   ],
   "minigames/naval-hud.mjs": [
-   "018bd45d37856001",
-   29328
+   "e35903841503ed86",
+   33670
   ],
   "minigames/naval-icons.mjs": [
    "485eba3728746c6b",
@@ -7438,15 +8383,15 @@
    2610
   ],
   "minigames/naval-lockon-hud.mjs": [
-   "2e86169ec5664df5",
-   6974
+   "46d8e9aa188eebb7",
+   7339
   ],
   "minigames/naval-lockon.mjs": [
-   "22d097614c99a29a",
+   "f3928deae188b441",
    9402
   ],
   "minigames/naval-marks.mjs": [
-   "78093f0cae6e7538",
+   "728fe851437a28fc",
    8498
   ],
   "minigames/naval-patrol.mjs": [
@@ -7454,19 +8399,19 @@
    6360
   ],
   "minigames/naval-projectiles.mjs": [
-   "5809ee082d807d66",
+   "cf670c93efe78844",
    7707
   ],
   "minigames/naval-scenery.mjs": [
-   "ed6d7cdd7280c963",
+   "6b2b84e7d756a336",
    11751
   ],
   "minigames/naval-supply-view.mjs": [
-   "61378c175d51d2e8",
+   "23943bd11a1fdc97",
    2550
   ],
   "minigames/naval-supply.mjs": [
-   "4b234fbbd3e1e973",
+   "27b1479fd4ae1b2d",
    4696
   ],
   "minigames/naval-upgrades.css": [
@@ -7474,15 +8419,15 @@
    4012
   ],
   "minigames/naval-upgrades.mjs": [
-   "b725d13b11581474",
+   "fed4da1a84ac8ca7",
    5183
   ],
   "minigames/naval-v24-audio.mjs": [
-   "298108a1b44c332b",
+   "9841781db271eaa5",
    3024
   ],
   "minigames/naval-v24-hud.mjs": [
-   "87d7e4f35beea0db",
+   "2c5bea26f8bc6650",
    12969
   ],
   "minigames/naval-v24.css": [
@@ -7490,11 +8435,11 @@
    3188
   ],
   "minigames/naval-v24.mjs": [
-   "c946f4fb29d8e33d",
+   "7248be1e46f17162",
    8768
   ],
   "minigames/naval-v241-hud.mjs": [
-   "a6a90ce716508047",
+   "e0030a9f4cb8a3e8",
    7866
   ],
   "minigames/naval-v241.css": [
@@ -7502,15 +8447,15 @@
    909
   ],
   "minigames/naval-v241.mjs": [
-   "c909ed096a65ce71",
+   "26838dcd88f3d250",
    6746
   ],
   "minigames/naval-v7.mjs": [
-   "6a866bd19195fc22",
+   "46128f6cc1774650",
    5488
   ],
   "minigames/naval-view.mjs": [
-   "a9fa4d0951ecae38",
+   "cff17595e3457b3c",
    36906
   ],
   "minigames/naval-visual-atlases.mjs": [
@@ -7518,7 +8463,7 @@
    145386
   ],
   "minigames/naval-visual-effects.mjs": [
-   "0eadc99ed91c16f4",
+   "06ba7caa742cb65a",
    6556
   ],
   "minigames/naval-water.mjs": [
@@ -7530,11 +8475,11 @@
    15335
   ],
   "minigames/naval.mjs": [
-   "3e327e7477840c90",
+   "e2c0c1c38ee5b4d9",
    78560
   ],
   "minigames/patrol-boat.mjs": [
-   "ad682db321c2827f",
+   "ea503410ad8989cc",
    1952
   ],
   "minigames/polish-flag.mjs": [
@@ -7546,19 +8491,19 @@
    809
   ],
   "minigames/racing-audio.mjs": [
-   "168e34e4df00ee0d",
-   30627
+   "af8303f6b87e0328",
+   31053
   ],
   "minigames/racing-broadcast-art.mjs": [
-   "39fd6ee113c8586c",
+   "fb36f996e5a90c9f",
    4180
   ],
   "minigames/racing-broadcast.mjs": [
-   "7c6e5c9805ae3aae",
+   "1640af1549d8e74e",
    16581
   ],
   "minigames/racing-car-look.mjs": [
-   "e5e0d77187455776",
+   "27161fce555a32ff",
    8288
   ],
   "minigames/racing-controls.mjs": [
@@ -7582,19 +8527,19 @@
    8451
   ],
   "minigames/racing-formula-all.mjs": [
-   "3e4b74cbf749ebc1",
+   "43f1da45fdaa434a",
    9892
   ],
   "minigames/racing-league-core.mjs": [
-   "b0621da23c1275cd",
-   28761
+   "791646be67548200",
+   28765
   ],
   "minigames/racing-league-result.mjs": [
-   "ef8bf2f5f150ec26",
+   "91cfc05c9491eb6f",
    2714
   ],
   "minigames/racing-league.mjs": [
-   "cc36692d3bf53e27",
+   "4141170a963dcddd",
    3709
   ],
   "minigames/racing-offtrack.mjs": [
@@ -7602,15 +8547,15 @@
    3140
   ],
   "minigames/racing-physics.mjs": [
-   "f15f93a370d06110",
-   56818
+   "57037850e8bdb139",
+   57943
   ],
   "minigames/racing-pit-crew.mjs": [
-   "8fa8a4bdb2fa4e25",
+   "dd392df9abc2d0d8",
    7245
   ],
   "minigames/racing-pit-seq.mjs": [
-   "7b262c0fcb1f11aa",
+   "abe4307de042e5ca",
    21350
   ],
   "minigames/racing-pit-sequence.mjs": [
@@ -7618,52 +8563,56 @@
    23354
   ],
   "minigames/racing-pit-ui.mjs": [
-   "ee6a593c9e86f86d",
-   7394
+   "52f1f4df44f4e7cf",
+   9201
   ],
   "minigames/racing-pit-view.mjs": [
-   "ab60d19562015b44",
+   "97973838f978686c",
    2027
   ],
   "minigames/racing-pit.mjs": [
-   "95091314e0a45e4c",
+   "e4adb5a66a7b8961",
    11937
   ],
   "minigames/racing-recover.mjs": [
-   "6d13eeebacc0b474",
+   "754f0fb00f759a03",
    6319
   ],
   "minigames/racing-result.mjs": [
-   "fe9ace15018c201b",
+   "76da3a07fba482f5",
    1636
   ],
   "minigames/racing-roadside.mjs": [
-   "1a2ba6715e8b8624",
-   14436
+   "97bd62324e4de4e1",
+   14625
   ],
   "minigames/racing-samples.mjs": [
-   "265954f19a15782b",
-   25409
+   "f1a847fa0d3212a2",
+   30241
   ],
   "minigames/racing-scenery.mjs": [
-   "8528f773fe5f575b",
+   "9786fd1a27c47129",
    7256
   ],
   "minigames/racing-session.mjs": [
-   "0d82ca70232a2a14",
-   20565
+   "015d47b1d94d37d1",
+   23241
   ],
   "minigames/racing-speedometer.mjs": [
    "589c478a61dba093",
    5075
   ],
   "minigames/racing-tower.mjs": [
-   "7f95169d7ac7fb16",
+   "5a9e37015f39601a",
    6026
   ],
+  "minigames/racing-tracks-v3-env.mjs": [
+   "03b7835f6fa6e0a5",
+   4348
+  ],
   "minigames/racing-tracks.mjs": [
-   "43ee6b089eeefe94",
-   30809
+   "9dc0e6090cb8dc06",
+   32816
   ],
   "minigames/racing-unlock.mjs": [
    "a49f7face3a1f921",
@@ -7680,6 +8629,10 @@
   "minigames/racing-v24-6.mjs": [
    "ac1d4921b10f24dc",
    2152
+  ],
+  "minigames/racing-v24-7.mjs": [
+   "7e12612ec59b30a8",
+   4278
   ],
   "minigames/racing-v24.css": [
    "8e684f663b138ad1",
@@ -7698,8 +8651,8 @@
    4718
   ],
   "minigames/racing-view.mjs": [
-   "1bb149ef7691b27a",
-   49176
+   "a8c161e92fbed7b3",
+   50224
   ],
   "minigames/racing.css": [
    "18fa9a640fcec8c8",
@@ -7722,7 +8675,7 @@
    4771
   ],
   "minigames/soccer-assistance.mjs": [
-   "057cee6cdfc8930f",
+   "26bd229d78b969fd",
    19590
   ],
   "minigames/soccer-athlete-body.mjs": [
@@ -7766,11 +8719,11 @@
    8380
   ],
   "minigames/soccer-design-audio.mjs": [
-   "470fc504d66a1d06",
+   "51b501e1d3ff8a0d",
    16760
   ],
   "minigames/soccer-design-character.mjs": [
-   "6af21f980cb552dd",
+   "b1e1d494a78c0958",
    86100
   ],
   "minigames/soccer-design-contracts.mjs": [
@@ -7778,7 +8731,7 @@
    1472
   ],
   "minigames/soccer-design-controls.mjs": [
-   "b1152e590672e755",
+   "0031d2890f8d401d",
    20149
   ],
   "minigames/soccer-design-loader.mjs": [
@@ -7798,7 +8751,7 @@
    6629
   ],
   "minigames/soccer-design-tactics.mjs": [
-   "34f1b5709e4f4a05",
+   "40729f249c965e00",
    31693
   ],
   "minigames/soccer-design-vfx.mjs": [
@@ -7810,7 +8763,7 @@
    6492
   ],
   "minigames/soccer-drill.mjs": [
-   "0e68a50c72669a41",
+   "540b916633a87522",
    2666
   ],
   "minigames/soccer-feel.mjs": [
@@ -7826,7 +8779,7 @@
    895
   ],
   "minigames/soccer-full.mjs": [
-   "850a40d9f757162d",
+   "51926eb7b35b5c67",
    21714
   ],
   "minigames/soccer-headers.mjs": [
@@ -7846,11 +8799,11 @@
    12572
   ],
   "minigames/soccer-motion-v9.mjs": [
-   "f21e019d0174ee4e",
+   "03479747ae14646d",
    3887
   ],
   "minigames/soccer-penalties.mjs": [
-   "725606a56ca3457d",
+   "ff78383c4a9b8d8d",
    3559
   ],
   "minigames/soccer-physics.mjs": [
@@ -7862,15 +8815,15 @@
    1910
   ],
   "minigames/soccer-presentation.mjs": [
-   "e32514182cf1e32b",
+   "8f2f88c7d698ca42",
    11034
   ],
   "minigames/soccer-r241.mjs": [
-   "74885064bc246e10",
-   29534
+   "b3f2908d1e133eb6",
+   29545
   ],
   "minigames/soccer-referee.mjs": [
-   "00d1f4caeef84925",
+   "2cb3e94613b49093",
    3331
   ],
   "minigames/soccer-restart-motion.mjs": [
@@ -7886,7 +8839,7 @@
    12995
   ],
   "minigames/soccer-result.mjs": [
-   "5831312a792df9da",
+   "fff807f8c98d88c7",
    2755
   ],
   "minigames/soccer-rig.mjs": [
@@ -7894,7 +8847,7 @@
    1455
   ],
   "minigames/soccer-rules.mjs": [
-   "e8d3c7051cd0c803",
+   "a7f493a3f19baf71",
    7800
   ],
   "minigames/soccer-scale.mjs": [
@@ -7902,8 +8855,8 @@
    8049
   ],
   "minigames/soccer-session.mjs": [
-   "10fac1691a7bb445",
-   31660
+   "c684675e9dfbe31a",
+   34270
   ],
   "minigames/soccer-shot.mjs": [
    "eac60656cb0ab90c",
@@ -7934,7 +8887,7 @@
    21003
   ],
   "minigames/soccer-tactics.mjs": [
-   "f127663d129835cc",
+   "f252a18b089c3c60",
    6693
   ],
   "minigames/soccer-teamplay.mjs": [
@@ -7954,15 +8907,15 @@
    14537
   ],
   "minigames/soccer-v24-crowd.mjs": [
-   "f126d8db79ae96a5",
+   "7ab8d858b4ee1e25",
    9682
   ],
   "minigames/soccer-v24-fx.mjs": [
-   "c9965deaf15a6e08",
+   "293636580cd243d7",
    10613
   ],
   "minigames/soccer-v24-pitch.mjs": [
-   "c500b73675325407",
+   "f211a6af433c7360",
    8717
   ],
   "minigames/soccer-v24.mjs": [
@@ -7990,11 +8943,11 @@
    2970
   ],
   "minigames/soccer-view.mjs": [
-   "3d9216e23b483f58",
+   "64e6e283881b1aa3",
    76303
   ],
   "minigames/soccer.mjs": [
-   "4cb04eb9e9dfec5b",
+   "ca6b43b9cb974204",
    102453
   ],
   "minigames/sound.mjs": [
@@ -8006,8 +8959,8 @@
    2515
   ],
   "minigames/tennis-callouts.mjs": [
-   "28463502daa441f8",
-   7714
+   "133196dc37693f00",
+   10872
   ],
   "minigames/tennis-controls.mjs": [
    "cec1e71f6693f6fb",
@@ -8026,15 +8979,15 @@
    2926
   ],
   "minigames/tennis-environment.mjs": [
-   "e011fb60c10b4c29",
+   "76e7377e0311332b",
    9113
   ],
   "minigames/tennis-grip.mjs": [
-   "4dd4473b90fd1dd3",
+   "fafc9d62a73ae8bb",
    11600
   ],
   "minigames/tennis-motion.mjs": [
-   "a017a8e379e15e0b",
+   "1f96f4b6b5cedd51",
    5176
   ],
   "minigames/tennis-pose.mjs": [
@@ -8046,15 +8999,15 @@
    1469
   ],
   "minigames/tennis-session.mjs": [
-   "3f7ad5482ce02d29",
-   20910
+   "868bc3cf3d3eeaae",
+   22902
   ],
   "minigames/tennis-ui.mjs": [
-   "8114cf96051629ed",
+   "987a615d76f921ad",
    3132
   ],
   "minigames/tennis-ui2.mjs": [
-   "3a14d9d25744f150",
+   "07f0b817493333c9",
    2883
   ],
   "minigames/tennis-v11-stadium.mjs": [
@@ -8062,11 +9015,11 @@
    8474
   ],
   "minigames/tennis-v12-stadium.mjs": [
-   "839d9b05f33807ce",
+   "8e4eb8b2c0778aa5",
    12222
   ],
   "minigames/tennis-v7-venue.mjs": [
-   "d56b4a5aced40104",
+   "311f60c3652e7b8d",
    18084
   ],
   "minigames/tennis-v7.mjs": [
@@ -8074,19 +9027,19 @@
    6046
   ],
   "minigames/tennis-view.mjs": [
-   "044cd1a474930572",
+   "e2c8be36b706a415",
    41276
   ],
   "minigames/tennis.css": [
-   "e8aad4a12bff6a33",
-   22560
+   "c86b62cb00df803d",
+   23416
   ],
   "minigames/tennis.mjs": [
    "bdc386789e62dbc7",
    50261
   ],
   "minigames/ultra-alien-effects.mjs": [
-   "95be74567f27b680",
+   "c49d27fb808c1592",
    7863
   ],
   "minigames/ultra-alien-environment.mjs": [
@@ -8094,7 +9047,7 @@
    2839
   ],
   "minigames/ultra-alien-feedback.mjs": [
-   "fa75cbd4354dbfaa",
+   "60015db0c5356faa",
    11566
   ],
   "minigames/ultra-alien-fleet.mjs": [
@@ -8110,7 +9063,7 @@
    17760
   ],
   "minigames/ultra-fire-scenery.mjs": [
-   "7493f31deb256455",
+   "04b890c659c1333f",
    1564
   ],
   "minigames/ultra-naval-effects.mjs": [
@@ -8154,7 +9107,7 @@
    3064
   ],
   "release.mjs": [
-   "4fbad9259cf65cbe",
+   "c5df012763374ff5",
    273
   ],
   "styles.css": [
@@ -8162,11 +9115,11 @@
    62159
   ],
   "ui/activity.mjs": [
-   "f491f4d5f9c06ae9",
-   56921
+   "baa0b9b76f8fa469",
+   61930
   ],
   "ui/adventure-emblems.mjs": [
-   "82977f552ab5239d",
+   "fb5b6a66a8026181",
    3133
   ],
   "ui/alpine-league.css": [
@@ -8174,11 +9127,11 @@
    7466
   ],
   "ui/alpine-league.mjs": [
-   "cf134f8798a1126b",
-   17039
+   "4b051be008f05a39",
+   17055
   ],
   "ui/boot-splash-start.mjs": [
-   "254438957fab1e08",
+   "28b55853e1c82af5",
    326
   ],
   "ui/boot-splash.css": [
@@ -8194,31 +9147,31 @@
    5834
   ],
   "ui/city-access.mjs": [
-   "a96c66ef158d96ac",
-   12041
+   "a959f8656c962119",
+   12027
   ],
   "ui/city-depth.css": [
    "113846d32d712655",
    700
   ],
   "ui/city-depth.mjs": [
-   "6fd5e3d87e118c65",
-   5090
+   "5b15d9b2d7dfabff",
+   5079
   ],
   "ui/city-management.css": [
    "9658889140c2f4b9",
    7211
   ],
   "ui/city-management.mjs": [
-   "6d489fd22f52c96f",
-   18075
+   "5d576af66661df23",
+   21800
   ],
   "ui/city-planning.css": [
    "8f268d614651bd62",
    8826
   ],
   "ui/city-preview.mjs": [
-   "80ce9ec9b5b670bb",
+   "1275aea5dde4238d",
    7665
   ],
   "ui/clean-hud.css": [
@@ -8230,7 +9183,7 @@
    4813
   ],
   "ui/fire-bonus-ui.mjs": [
-   "fc2dd80cbf9926a0",
+   "1997e77ab01bc2f5",
    6855
   ],
   "ui/game-shell.css": [
@@ -8238,24 +9191,36 @@
    4511
   ],
   "ui/game-shell.mjs": [
-   "5a332f97df42011d",
-   14620
+   "1e4927b6aee32d45",
+   16503
   ],
   "ui/hangar-preview.mjs": [
-   "22a05387a688a759",
+   "3ee94a4f6babdd7d",
    6231
   ],
   "ui/hoops-club.mjs": [
-   "11869e305f2b7d0d",
-   8653
+   "4aa02d9f457b7f55",
+   11333
   ],
   "ui/interface.mjs": [
-   "005e8b01b5477a8e",
-   52951
+   "58153a88d31edbd1",
+   63290
+  ],
+  "ui/kid-ux-help.mjs": [
+   "8e79c399c8bb428b",
+   14092
+  ],
+  "ui/kid-ux-library.mjs": [
+   "f5ecdbd05af1d720",
+   1977
+  ],
+  "ui/kid-ux-result.mjs": [
+   "cdf4d085d22a8143",
+   5863
   ],
   "ui/load-report.mjs": [
-   "613f0a9e66c786eb",
-   3292
+   "5f5de13b0f021068",
+   3577
   ],
   "ui/load-rescue.mjs": [
    "92c17a04a9fc56c3",
@@ -8270,16 +9235,16 @@
    1427
   ],
   "ui/offline-panel.mjs": [
-   "eb62f09d34faf2ae",
-   16136
+   "fc93c9d60af78c11",
+   15631
   ],
   "ui/offline.mjs": [
    "b036b52548a57afd",
    25787
   ],
   "ui/press.mjs": [
-   "c1c9ae632a225d2e",
-   3905
+   "8aa8a502d8ca750c",
+   3923
   ],
   "ui/racing-league-art.mjs": [
    "4fcb88be275eec83",
@@ -8290,24 +9255,24 @@
    8644
   ],
   "ui/racing-league.mjs": [
-   "80a81579c8dbfa8b",
-   18533
+   "da9cf071952f1c89",
+   18877
   ],
   "ui/ready-plots.css": [
    "fa846d037c8519f5",
    3008
   ],
   "ui/ready-plots.mjs": [
-   "99f14ba3e536370f",
-   6569
+   "23a2f654fc53714f",
+   7113
   ],
   "ui/release-watch.mjs": [
    "51800606a2dd2090",
    937
   ],
   "ui/soccer-card.mjs": [
-   "3fc4dcdb81d7be80",
-   6238
+   "2201346775f42d86",
+   6085
   ],
   "ui/translate.mjs": [
    "9956cdc9c6ffe175",
@@ -8322,11 +9287,11 @@
    4685
   ],
   "ui/upgrade-offer-core.mjs": [
-   "2c97fff119150c4f",
-   6269
+   "41a5b22313e6db04",
+   6267
   ],
   "ui/upgrade-offer.mjs": [
-   "06248014abca312f",
+   "0e0afda05ab40517",
    3338
   ],
   "vendor/BufferGeometryUtils.js": [
@@ -8362,7 +9327,7 @@
    670681
   ],
   "view/avatar.mjs": [
-   "8cdfe2124df01f71",
+   "5cd4a86baafa1942",
    8324
   ],
   "view/batch.mjs": [
@@ -8370,23 +9335,23 @@
    1725
   ],
   "view/buildings.mjs": [
-   "4ca380adfe2463af",
+   "eae24ec87470fca0",
    28931
   ],
   "view/city-citizens.mjs": [
-   "c9d649e33709afe7",
+   "fb97827ffbf6ae3f",
    5399
   ],
   "view/city-depth.mjs": [
-   "423bb5141d171f16",
-   7088
+   "84f337e25c93194a",
+   7090
   ],
   "view/city-growth.mjs": [
    "495e0b44f5e35bab",
    1906
   ],
   "view/city-life.mjs": [
-   "b48d08e77b2d0114",
+   "ca9f31e7f1b1ac30",
    3376
   ],
   "view/city-lighting.mjs": [
@@ -8414,7 +9379,7 @@
    7002
   ],
   "view/city-preview-props.mjs": [
-   "a7db256d15c47dcf",
+   "42a8b5eae7d61feb",
    3180
   ],
   "view/city-sites.mjs": [
@@ -8422,7 +9387,7 @@
    4843
   ],
   "view/city-streets.mjs": [
-   "7729aaceaabb112c",
+   "4249a12656c57e36",
    11607
   ],
   "view/city-traffic-model.mjs": [
@@ -8430,7 +9395,7 @@
    5151
   ],
   "view/city-traffic.mjs": [
-   "cb460a9dfb33179c",
+   "6f7df0920eb88245",
    2951
   ],
   "view/coastal-surfaces.mjs": [
@@ -8438,23 +9403,23 @@
    1703
   ],
   "view/environment.mjs": [
-   "3dca637268984696",
+   "7e8b8985ce79707f",
    4856
   ],
   "view/island-view.mjs": [
-   "1cbece62659eb994",
-   36073
+   "eddad6b84e59bc94",
+   36991
   ],
   "view/learning-buildings.mjs": [
-   "c490569e24b14380",
+   "5a370ef4f4face03",
    1926
   ],
   "view/local-models.mjs": [
-   "9bb7bae168696e24",
+   "c27af966fd71e546",
    3624
   ],
   "view/meshy-pilot.mjs": [
-   "7d0ebb815591930d",
+   "72caadf6210d4212",
    5659
   ],
   "view/planning-frame.mjs": [
@@ -8482,7 +9447,7 @@
    2596
   ],
   "view/ultra-island-flora.mjs": [
-   "d372ffc390fafcc1",
+   "07a31953be5684f9",
    3372
   ],
   "view/ultra-island-roads.mjs": [
@@ -8490,7 +9455,7 @@
    2932
   ],
   "view/ultra-island-scenery.mjs": [
-   "dd7b1cfa5bf56e64",
+   "e249634a353dafd4",
    7698
   ],
   "view/ultra-island-terrain.mjs": [
@@ -8498,7 +9463,7 @@
    5518
   ],
   "view/ultra-island-water.mjs": [
-   "de61c9e4c05589e8",
+   "630ca70685e35b53",
    4692
   ]
  }

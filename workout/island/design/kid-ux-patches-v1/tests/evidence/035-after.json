@@ -1,0 +1,357 @@
+{
+  "id": "035",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "firstChaseParagraphs": 0,
+        "illustratedExercise": 1
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "steer",
+        "exercise": [
+          320,
+          98
+        ],
+        "next": [
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "steer",
+        "confirmed": "✓ הצלחתם",
+        "touches": [
+          {
+            "type": "pointerdown",
+            "trusted": true,
+            "input": "touch",
+            "x": 358,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 372.1666564941406,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 386.3333435058594,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 400.5,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 414.6666564941406,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 428.8333435058594,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 443,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "touchend",
+            "trusted": true,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "tap",
+        "exercise": [
+          320,
+          98
+        ],
+        "next": [
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "tap",
+        "confirmed": "✓ הצלחתם",
+        "touches": [
+          {
+            "type": "pointerdown",
+            "trusted": true,
+            "input": "touch",
+            "x": 422,
+            "y": 160,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointerup",
+            "trusted": true,
+            "input": "touch",
+            "x": 422,
+            "y": 160,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "touchend",
+            "trusted": true,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "release",
+        "exercise": [
+          320,
+          98
+        ],
+        "next": [
+          103.640625,
+          44
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "gesture": "release",
+        "confirmed": "✓ הצלחתם",
+        "touches": [
+          {
+            "type": "pointerdown",
+            "trusted": true,
+            "input": "touch",
+            "x": 358,
+            "y": 174.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 372.1666564941406,
+            "y": 170.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 386.3333435058594,
+            "y": 166.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 400.5,
+            "y": 162.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 414.6666564941406,
+            "y": 158.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 428.8333435058594,
+            "y": 154.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "pointermove",
+            "trusted": true,
+            "input": "touch",
+            "x": 443,
+            "y": 150.6999969482422,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          },
+          {
+            "type": "touchend",
+            "trusted": true,
+            "target": "catch-kid-exercise",
+            "exercise": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "threeExercisesComplete": true,
+        "enteredChase": true
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: catchCriminal, stage 1.",
+    "Decorative 3D replay behind the paused practice card is frozen. Practice gestures still use trusted browser touch.",
+    "Screenshot captured with the CDP viewport fallback."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 358,
+      "y": 174.7,
+      "endX": 443,
+      "endY": 174.7,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.catch-kid-next').first()",
+      "x": 447.671875,
+      "y": 266,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "catch-kid-next",
+        "x": 447.671875,
+        "y": 266
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.catch-kid-exercise:visible').first()",
+      "x": 422,
+      "y": 160,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 3,
+        "action": "catch-kid-exercise",
+        "x": 422,
+        "y": 160
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.catch-kid-next').first()",
+      "x": 447.671875,
+      "y": 266,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "catch-kid-next",
+        "x": 447.671875,
+        "y": 266
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 358,
+      "y": 174.7,
+      "endX": 443,
+      "endY": 150.7,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.catch-kid-next').first()",
+      "x": 447.6796875,
+      "y": 266,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 6,
+        "action": "catch-kid-next",
+        "x": 447.6796875,
+        "y": 266
+      }
+    }
+  ],
+  "screenshots": [
+    "035-after-exercise-1.png",
+    "035-after-exercise-2.png",
+    "035-after-exercise-3.png",
+    "035-after-chase-after-practice.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

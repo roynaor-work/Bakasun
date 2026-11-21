@@ -1,0 +1,56 @@
+diff --git a/js/files.js b/js/files.js
+index fe1287e4..f8af3fa9 100644
+--- a/js/files.js
++++ b/js/files.js
+@@ -36 +36 @@ export async function pdfText(file) {
+-  const pdf = await window.pdfjsLib.getDocument({ data: buf }).promise;
++  const pdf = await window.pdfjsLib.getDocument({ data: buf, isEvalSupported: false }).promise;
+diff --git a/js/pdfedit.js b/js/pdfedit.js
+index e0c121cc..5c50d883 100644
+--- a/js/pdfedit.js
++++ b/js/pdfedit.js
+@@ -16 +16 @@ async function findNumbers(buf, wanted) {
+-  const pdf = await pdfjs.getDocument({ data: buf.slice(0) }).promise;
++  const pdf = await pdfjs.getDocument({ data: buf.slice(0), isEvalSupported: false }).promise;
+diff --git a/sw.js b/sw.js
+index 49d245e8..cedc5108 100644
+--- a/sw.js
++++ b/sw.js
+@@ -2 +2 @@
+-const CACHE = 'bakasun-v60';
++const CACHE = 'bakasun-v61';
+@@ -8 +8,16 @@ const FILES = ['./', './index.html', './css/app.css', './manifest.json', './icon
+-self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
++const SCOPE = new URL(self.registration.scope);
++const SHELL = new Set(FILES.map(path => new URL(path, SCOPE).href));
++const SHARE = new URL('./share', SCOPE).href;
++const mayCache = (response, url) => response.status === 200 && !response.redirected &&
++  response.type === 'basic' && response.url === url &&
++  !/(?:^|,)\s*(?:private|no-store)\b/i.test(response.headers.get('Cache-Control') || '') &&
++  response.headers.get('Vary')?.trim() !== '*';
++
++self.addEventListener('install', e => e.waitUntil((async () => {
++  const cache = await caches.open(CACHE);
++  await Promise.all([...SHELL].map(async url => {
++    const response = await fetch(url, { cache: 'reload', redirect: 'error' });
++    if (mayCache(response, url)) await cache.put(url, response);
++  }));
++  await self.skipWaiting();
++})()));
+@@ -13 +28 @@ self.addEventListener('fetch', e => {
+-  if (e.request.method === 'POST' && new URL(e.request.url).pathname.endsWith('/share')) {
++  if (e.request.method === 'POST' && e.request.url === SHARE) {
+@@ -31,2 +46,11 @@ self.addEventListener('fetch', e => {
+-  if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) return;
+-  e.respondWith(fetch(e.request).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); return r; }).catch(() => caches.match(e.request)));
++  if (e.request.method !== 'GET' || !SHELL.has(e.request.url) ||
++      e.request.headers.has('Authorization') || e.request.headers.has('Range') || e.request.cache === 'no-store') return;
++  e.respondWith((async () => {
++    const cache = await caches.open(CACHE).catch(() => null);
++    let response;
++    try { response = await fetch(e.request); }
++    catch { return await cache?.match(e.request).catch(() => null) || Response.error(); }
++    if (mayCache(response, e.request.url)) await cache?.put(e.request, response.clone()).catch(() => {});
++    else await cache?.delete(e.request).catch(() => {});
++    return response;
++  })());

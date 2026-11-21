@@ -60,11 +60,23 @@ export function v5PitMix(phase,speed=0,toBox=Infinity){
  * take is not used: its shifts come at its own times and cannot follow the game's gearbox (README). Gains put the takes (about -18 LUFS) at the level of the synthesis
  * they replace (measured RMS, the first 0.45 s of an overtake: synthesis -38.5 dBFS, takes -36.7 and -41.1; idle -48.3, take -48.3); a 3.2 kHz low-pass keeps
  * the microphone's rasp out (no air). */
+/** racing-v24.7 (Codex package design/racing-audio-v6, original synthesis, CC0; the three sounds used are copied to assets/racing-audio-v6). Same reference as v5
+ * (0 dB = V5_REF, the files are -18 LUFS like v5), the package's mix gains. v6=true only with the session's flag (?racingAudioV6=0 never loads it); all or nothing.
+ *  limiter  one pit lane loop (engine with the limiter's pulse) instead of the two v5 loops while the car moves in the lane; standing at the box stays v5
+ *  brake    one soft brake sound when the pedal goes down at speed, faded out when it is released, instead of the v5 brake loops
+ *  scrub    a short tyre scrub when the car is pushed wide over its grip (racing-v24-7 TIGHT; `wide` from the race model), at most one every V6.scrubGap s
+ * Left out of the package on purpose (Roy's notes win, and the offline download has a 92 MB cap):
+ *  the three engine loops: each has a gear-change step baked in (v24.6: no tick on a gear change), and looped engine samples were the whine of 11/11;
+ *  launch-idle, start-lights, launch: Roy's own idle recording plays on the grid and "the start is fine" (v24.6); the package's light timing is a demo;
+ *  the three overtakes: Roy's recorded engine driving away is the overtake sound (v24.5); they would only ever play if his take failed to load;
+ *  track-edge: v24.4 made the kerb silent after "an annoying noise when the car goes a little off the track"; pit-ambience: a ventilation "air" bed (v24.5/6: no air). */
+export const V6=Object.freeze({limiter:['pit-limiter',-15],brake:['brake',-15],scrub:['tire-scrub',-16],scrubGap:1.6,brakeFrom:10,release:.09});
+export const V6_IDS=Object.freeze([V6.limiter[0],V6.brake[0],V6.scrub[0]]);
 export const REC=Object.freeze({idle:'engine-idle-loop',away:Object.freeze(['engine-away-1','engine-away-2']),idleGain:.033,passGain:.1,passLength:2.4,lowpass:3200});
 export function windGain(speed,hiss='v24',air='v244'){if(air==='v245')return 0;if(hiss==='v23')return Math.min(.07,.012+speed/55*.055);return speed<12?0:Math.min(.03,Math.pow((speed-12)/38,1.5)*.03);}
-export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',air='v244',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null,rec=false,baseRec=base?new URL('../racing-rec/',base):null,v5=false,base5=base?new URL('../racing-audio-v5/',base):null}){
+export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',air='v244',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null,rec=false,baseRec=base?new URL('../racing-rec/',base):null,v5=false,base5=base?new URL('../racing-audio-v5/',base):null,v6=false,base6=base?new URL('../racing-audio-v6/',base):null}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
-  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false,pitReady=false,v5Ready=false,sideNext=false,recReady=false,recIdle=null,recBus=null,recPasses=0;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0],surface:{},pit:[0,0,0,0],brake5:[0,0,0]};   // racing-v24: the levels last set (levels())
+  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false,pitReady=false,v5Ready=false,sideNext=false,recReady=false,recIdle=null,recBus=null,recPasses=0,v6Ready=false,brakeWas=false,brakeShot=null,wideWas=false,lastScrub=-9,v6Brakes=0,v6Scrubs=0;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0],surface:{},pit:[0,0,0,0],brake5:[0,0,0]};   // racing-v24: the levels last set (levels())
   const bus=context.createGain();bus.gain.value=0;bus.connect(destination);nodes.push(bus);
   const target=(param,value,time,k=.06)=>{try{if(typeof param.setTargetAtTime==='function')param.setTargetAtTime(value,time,k);else param.value=value;}catch{}};
   async function load(){
@@ -84,6 +96,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     if(v4)await loadV4().catch(()=>{});   // racing-v24: the same, for the v4 brake loops and contact shots
     if(pit)await loadPit().catch(()=>{});   // racing-v24: the pit stop sounds, all or nothing
     if(v5)await loadV5().catch(()=>{});   // racing-v24.4: the v5 surface, brake and pit lane loops, all or nothing
+    if(v6)await loadV6().catch(()=>{});   // racing-v24.7: the v6 pit limiter, brake and tyre scrub, all or nothing
     if(rec)await loadRec().catch(()=>{});   // racing-v24.5: Roy's recordings (idle loop, engine driving away), all or nothing
   }
   const V5_IDS=[...V5_SURFACE.gravel,...V5_SURFACE.grass,...V5_BRAKE].map(e=>e[0]).concat(Object.keys(V5_PIT));
@@ -94,6 +107,21 @@ export function createRacingSamples({context,destination=context?.destination,ba
     for(const [id,buffer] of got){buffers.set(id,buffer);const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;source.loop=true;source.loopStart=V5_LOOP[0];source.loopEnd=V5_LOOP[1];
       gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0,V5_LOOP[0]);loops.set(id,{source,gain,spec:{id}});nodes.push(source,gain);}
     v5Ready=true;
+  }
+  async function loadV6(){
+    const got=new Map();
+    await Promise.all(V6_IDS.map(async id=>{const response=await fetchFn(new URL(`${id}.${ext}`,base6).href);if(!response.ok)throw new Error('sample '+id);got.set(id,await context.decodeAudioData(await response.arrayBuffer()));}));
+    if(disposed)return;for(const [id,buffer] of got)buffers.set(id,buffer);
+    for(const id of [V6.limiter[0]]){const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffers.get(id);source.loop=true;   // the whole file is the loop (the package's seam is in the samples)
+      gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0);loops.set('v6:'+id,{source,gain,spec:{id}});nodes.push(source,gain);}
+    v6Ready=true;
+  }
+  /** one v6 one-shot on the sample bus: 15 ms in, the file's own tail; returns the gain node so the brake can be faded out on release */
+  function shot6(id,level,pan){
+    const now=context.currentTime,source=context.createBufferSource(),g=context.createGain(),p=pan!==undefined&&context.createStereoPanner?context.createStereoPanner():null;source.buffer=buffers.get(id);
+    g.gain.value=0;if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(level,now+.015);}else g.gain.value=level;
+    source.connect(g);if(p){p.pan.value=Math.max(-1,Math.min(1,Number(pan)||0));g.connect(p);p.connect(bus);}else g.connect(bus);source.start(now);
+    source.onended=()=>{try{source.disconnect();g.disconnect();p?.disconnect();}catch{}};return g;
   }
   async function loadRec(){
     const ids=[REC.idle,...REC.away],got=new Map();
@@ -144,7 +172,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     source.onended=()=>{try{source.disconnect();g.disconnect();}catch{}};
   }
   /** rpm 0..1 (the physics rpm); level is the overall sample level (0 when muted or paused). */
-  function update({rpm=0,throttle=1,speed=0,drifting=false,braking=false,brakePedal=braking,steer=0,kerb=0,offroad=false,level=1,surface,pitPhase='',toBox=Infinity}={}){
+  function update({rpm=0,throttle=1,speed=0,drifting=false,braking=false,brakePedal=braking,steer=0,kerb=0,offroad=false,level=1,surface,pitPhase='',toBox=Infinity,wide=0}={}){
     if(!ready||disposed)return;const now=context.currentTime;
     target(bus.gain,level,now,.05);
     // fake engine rpm from the physics value: idle 4900 .. redline about 15300; crossfade the two nearest loops (equal power)
@@ -166,11 +194,24 @@ export function createRacingSamples({context,destination=context?.destination,ba
     if(v5Ready){
       const kind=surface==='gravel'||surface==='grass'?surface:null,str=v5Strength(speed),ramp=v5Ramp(speed);
       for(const k of ['gravel','grass'])V5_SURFACE[k].forEach(([id,db],i)=>{const g=k===kind&&i===str?v5Gain(db)*ramp:0;lv.surface[id]=g;target(loops.get(id).gain.gain,g,now,.15);target(loops.get(id).source.playbackRate,.82+.26*Math.min(1,speed/45),now,.2);});
-      const pick=brakePedal&&!drifting&&!offroad&&speed>6&&!pitPhase?v5Strength(speed):-1;
+      const pick=!v6Ready&&brakePedal&&!drifting&&!offroad&&speed>6&&!pitPhase?v5Strength(speed):-1;   // racing-v24.7: the v6 brake sound instead (below)
       V5_BRAKE.forEach(([id,db],i)=>{const g=i===pick?v5Gain(db)*Math.min(1,(speed-4)/10):0;lv.brake5[i]=g;target(loops.get(id).gain.gain,g,now,.06);});
-      const mix=v5PitMix(pitPhase,speed,toBox);Object.entries(V5_PIT).forEach(([id,db],i)=>{const g=v5Gain(db)*mix[i];lv.pit[i]=g;target(loops.get(id).gain.gain,g,now,.22);if(i<2)target(loops.get(id).source.playbackRate,.82+.26*Math.min(1,speed/20),now,.2);});
+      const mix=v5PitMix(pitPhase,speed,toBox);Object.entries(V5_PIT).forEach(([id,db],i)=>{const g=v5Gain(db)*mix[i]*(v6Ready&&i<2&&mix[1]?0:1);   /* racing-v24.7: the v6 limiter loop carries the moving car */lv.pit[i]=g;target(loops.get(id).gain.gain,g,now,.22);if(i<2)target(loops.get(id).source.playbackRate,.82+.26*Math.min(1,speed/20),now,.2);});
     }
-    if(v4Ready){const pick=!v5Ready&&brakePedal&&!drifting&&!offroad&&speed>6?(speed>30?2:speed>18?1:0):-1;V4_LOOPS.forEach((spec,i)=>{const loop=loops.get(spec.id);lv.brake[i]=i===pick?spec.gain*Math.min(1,(speed-4)/10):0;if(loop)target(loop.gain.gain,lv.brake[i],now,.02);});}
+    if(v6Ready){
+      // the pit lane loop while the car moves in the lane
+      lv.limiter6=pitPhase?v5Gain(V6.limiter[1])*v5PitMix(pitPhase,speed,toBox)[1]:0;const lim=loops.get('v6:'+V6.limiter[0]);target(lim.gain.gain,lv.limiter6,now,.22);target(lim.source.playbackRate,.9+.2*Math.min(1,speed/20),now,.2);
+      // the brake: one sound per press at speed, faded out on release
+      const pedal=brakePedal&&!drifting&&!offroad&&!pitPhase;
+      if(pedal&&!brakeWas&&speed>V6.brakeFrom&&level>0){brakeShot=shot6(V6.brake[0],v5Gain(V6.brake[1])*Math.min(1,(speed-4)/14));v6Brakes++;}
+      else if(!pedal&&brakeWas&&brakeShot){target(brakeShot.gain,0,now,V6.release/3);brakeShot=null;}
+      brakeWas=pedal;
+      // the tyre scrub: the car is pushed wide over its grip
+      const over=wide>.5&&speed>14&&!offroad&&!pitPhase;
+      if(over&&!wideWas&&now-lastScrub>=V6.scrubGap&&level>0){lastScrub=now;shot6(V6.scrub[0],v5Gain(V6.scrub[1])*(.6+.4*Math.min(1,wide)));v6Scrubs++;}
+      wideWas=over;
+    }
+    if(v4Ready){const pick=!v5Ready&&!v6Ready&&brakePedal&&!drifting&&!offroad&&speed>6?(speed>30?2:speed>18?1:0):-1;V4_LOOPS.forEach((spec,i)=>{const loop=loops.get(spec.id);lv.brake[i]=i===pick?spec.gain*Math.min(1,(speed-4)/10):0;if(loop)target(loop.gain.gain,lv.brake[i],now,.02);});}
   }
   return {
     load,get ready(){return ready;},get engineLoops(){return engineLoops;},update,
@@ -179,6 +220,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     turbo(){shot('turbo-blowoff',.028,1.2,.45,.32);},crack(){shot(`exhaust-pop-${1+(pop++%3)}`,.03,1.05,.45);},shiftDownSoft(){shot('shift-down',.02,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
     get recReady(){return recReady;},
+    get v6Ready(){return v6Ready;},
     /** racing-v24.5 rec: the recorded idle at `level` 0..1 (the synthesis' idle level), `rate` the playback rate (revs held up on the start lights) */
     recIdle(level=0,rate=1){if(!recReady||disposed)return false;const now=context.currentTime;lv.recIdle=REC.idleGain*Math.max(0,Math.min(1,level));target(recIdle.gain.gain,lv.recIdle,now,.12);target(recIdle.source.playbackRate,Math.max(.7,Math.min(1.8,rate)),now,.08);return true;},
     /** racing-v24.5 rec: the overtake = the passed car's engine driving away (the two takes in turn): the first REC.passLength s, in quickly and fading with the distance,
@@ -202,7 +244,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
       else if(type==='pitDone'){shot('crew_cheer',S.crew_cheer,1,.5);shot('engine_exit',S.engine_exit,1,.5,0,.25);}
       else return false;return true;},
     /** the levels the layer last set (for tests and the audio log): wind, the v2 tyre squeal, the v3 brake squeal, the three v4 brake loops */
-    levels:()=>({...(recReady?{recIdle:lv.recIdle??0,recPass:lv.recPass??null}:{}),wind:lv.wind,squeal:lv.squeal,brakeSqueal:lv.brakeSqueal,brake:[...lv.brake],...(v5Ready?{surface:{...lv.surface},pit:[...lv.pit],brake5:[...lv.brake5]}:{})}),
+    levels:()=>({...(v6Ready?{limiter6:lv.limiter6??0,brakes6:v6Brakes,scrubs6:v6Scrubs}:{}),...(recReady?{recIdle:lv.recIdle??0,recPass:lv.recPass??null}:{}),wind:lv.wind,squeal:lv.squeal,brakeSqueal:lv.brakeSqueal,brake:[...lv.brake],...(v5Ready?{surface:{...lv.surface},pit:[...lv.pit],brake5:[...lv.brake5]}:{})}),
     /** a game event by the audio engine's names ('bump', 'wall', 'crash', 'crashRecover'); intensity 0..1. Does nothing until v3 is ready. */
     event(name,intensity=1,details={}){
       if(disposed)return;

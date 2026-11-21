@@ -1,9 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { UPLOAD_STORAGE_KEY, MAX_UPLOAD_BYTES, initializeUploadConfig, disableUploadConfig,
-  createSessionId, UploadQueue as NativeUploadQueue, IndexedDBUploadStore, blobToBase64, VIDEO_CHUNK_BYTES, requestTimeoutMs, UPLOAD_LOG_KEY, readUploadLog } from '../workout/cam-lab/upload.mjs';
+  createSessionId, UploadQueue as BaseUploadQueue, IndexedDBUploadStore, blobToBase64, VIDEO_CHUNK_BYTES, requestTimeoutMs, UPLOAD_LOG_KEY, readUploadLog } from '../workout/cam-lab/upload.mjs';
 
-const config = { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent' };
+const config = { endpoint: 'https://upload.example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
+const endpoints = [config.endpoint, 'https://other.example.invalid/'];
+class NativeUploadQueue extends BaseUploadQueue {
+  constructor(options = {}) { super({ endpoints, ...options }); }
+}
 const input = (session = '20261010-173000-squats-test') => ({ session,
   video: new Blob(['synthetic-video'], { type: 'video/webm' }), skeleton: '{"frames":[]}', diagnostics: { version: 'test' } });
 const goodResponse = () => ({ ok: true, json: async () => ({ ok: true, assembled: true, duplicate: true }) });
@@ -37,7 +41,7 @@ function setupLink(endpoint = config.endpoint, secret = config.secret, storage =
   const history = { state: { navigation: true }, replaceState(state, title, url) {
     storage.events.push('erase'); assert.deepEqual(state, { navigation: true }); assert.equal(url, '/cam-lab/?test=1'); location.hash = '';
   } };
-  return { location, history, storage };
+  return { location, history, storage, endpoints, approve: () => true };
 }
 
 test('one-time link removes the fragment before reading/saving; key decoding and next-visit consent persist', () => {
@@ -69,9 +73,9 @@ for (const endpoint of ['http://upload.example.invalid/receive', 'javascript:ale
   });
 }
 
-test('localhost HTTP works for local tests and duplicate/missing setup fields fail', () => {
+test('plain HTTP and duplicate or missing setup fields are rejected', () => {
   for (const endpoint of ['http://localhost:8765/', 'http://127.0.0.1:8765/', 'http://[::1]:8765/']) {
-    assert.equal(initializeUploadConfig(setupLink(endpoint)).error, null);
+    assert.equal(initializeUploadConfig(setupLink(endpoint)).config, null);
   }
   for (const hash of ['#key=synthetic', '#upload=https%3A%2F%2Fexample.invalid', '#upload=https%3A%2F%2Fexample.invalid&key=a&key=b']) {
     const context = setupLink(); context.location.hash = hash;
@@ -118,7 +122,7 @@ test('three files are durable before POST, with exact text/plain contract and no
   assert.deepEqual(requests.map(request => request.body.part), ['diagnostics', 'skeleton', 'video']);
   for (const { endpoint, options, body } of requests) {
     assert.equal(endpoint, config.endpoint); assert.equal(options.method, 'POST'); assert.equal(options.headers['Content-Type'], 'text/plain');
-    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'follow'); assert.equal(options.referrerPolicy, 'no-referrer');
+    assert.equal(options.credentials, 'omit'); assert.equal(options.redirect, 'manual'); assert.equal(options.referrerPolicy, 'no-referrer');
     assert.deepEqual(Object.keys(body), body.part === 'video' ? ['secret', 'session', 'part', 'mime', 'chunk', 'chunks', 'totalBytes', 'data'] : ['secret', 'session', 'part', 'mime', 'data']); assert.equal(body.secret, config.secret);
   }
   assert.equal(Buffer.from(requests[2].body.data, 'base64').toString(), 'synthetic-video');
@@ -139,45 +143,31 @@ test('video MIME parameters are stripped at send time without changing queued by
   assert.equal(Buffer.from(requests[2].data, 'base64').toString(), 'synthetic-video');
 });
 
-test('HTTPS redirects to Apps Script response host or configured host acknowledge all three parts', async () => {
-  for (const url of ['https://script.googleusercontent.com/macros/echo?test=synthetic',
-    'https://upload.example.invalid/response']) {
-    const store = new MemoryStore(), parts = [];
-    const queue = new UploadQueue({ config, store, fetchImpl: async (_, options) => {
-      assert.equal(options.redirect, 'follow'); parts.push(JSON.parse(options.body).part);
-      return { ...goodResponse(), redirected: true, url };
-    } });
-    await queue.enqueue(input()); assert.equal(await queue.retry(), true);
-    assert.deepEqual(parts, ['diagnostics', 'skeleton', 'video']); assert.equal(store.records.size, 0);
-  }
-});
-
-test('foreign, non-HTTPS, and malformed redirect URLs fail before JSON is read and retain queued files', async () => {
-  for (const url of ['https://foreign.example.invalid/response',
-    'https://script.googleusercontent.com.foreign.example.invalid/response',
-    'http://script.googleusercontent.com/response', 'http://upload.example.invalid/response', 'invalid']) {
-    const store = new MemoryStore(), statuses = []; let calls = 0, jsonReads = 0;
-    const queue = new UploadQueue({ config, store, onStatus: status => statuses.push(status), fetchImpl: async () => {
+test('redirect responses are terminal and retain the synthetic queued files', async () => {
+  for (const status of [0, 302, 307, 308]) {
+    const store = new MemoryStore(), results = [];
+    let calls = 0, jsonReads = 0;
+    const queue = new UploadQueue({ config, store, onStatus: value => results.push(value), fetchImpl: async (_, options) => {
+      assert.equal(options.redirect, 'manual');
       calls++;
-      return { ok: true, redirected: true, url, json: async () => { jsonReads++; return { ok: true }; } };
+      return { status, type: status === 0 ? 'opaqueredirect' : 'basic', json: async () => { jsonReads++; } };
     } });
-    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
-    assert.equal(calls, 1); assert.equal(jsonReads, 0); assert.equal(store.records.size, 1);
-    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
-    assert.equal(statuses.at(-1).state, 'error');
-    assert.match(statuses.at(-1).message, /השליחה לבדיקה נכשלה/);
-    assert.equal(JSON.stringify(statuses).includes(url), false);
+    await queue.enqueue(input());
+    assert.equal(await queue.retry(), false);
+    assert.equal(calls, 1);
+    assert.equal(jsonReads, 0);
+    assert.equal(store.records.size, 1);
+    assert.equal(results.at(-1).error, 'redirect');
   }
 });
 
-test('allowed redirect still requires successful HTTP and JSON ok strictly true', async () => {
-  for (const [ok, result] of [[false, { ok: true }], [true, { ok: false, error: 'secret' }], [true, { ok: 'true' }]]) {
-    const store = new MemoryStore();
-    const queue = new UploadQueue({ config, store, fetchImpl: async () => ({
-      ok, redirected: true, url: 'https://script.googleusercontent.com/macros/echo?test=synthetic', json: async () => result,
+test('a direct acknowledgement requires successful HTTP and JSON ok strictly true', async () => {
+  for (const [ok, result] of [[false, { ok: true }], [true, { ok: 1 }], [true, {}]]) {
+    const queue = new UploadQueue({ config, store: new MemoryStore(), fetchImpl: async () => ({
+      ok, json: async () => result,
     }) });
-    await queue.enqueue(input()); assert.equal(await queue.retry(), false);
-    assert.equal([...store.records.values()][0].parts.some(part => part.acked), false);
+    await queue.enqueue(input());
+    assert.equal(await queue.retry(), false);
   }
 });
 

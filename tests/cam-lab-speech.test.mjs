@@ -44,7 +44,7 @@ test('an existing catalog WAV plays before every Hebrew voice and reports the re
     events: [{ timeMs: 0, source: 'recording', ids: ['camera-placement-right'] }] });
 });
 
-test('missing or invalid recordings fall back to local Hebrew before network Hebrew', async () => {
+test('missing or invalid recordings use local Hebrew or text', async () => {
   for (const broken of [false, true]) {
     const f = fixture({ recording: broken, broken });
     f.speech.play(PLACEMENT_LINES.arrived.tts); await tick();
@@ -54,7 +54,7 @@ test('missing or invalid recordings fall back to local Hebrew before network Heb
   }
   const f = fixture({ voices: [english, remote] });
   f.speech.play(PLACEMENT_LINES['wrong-side'].tts); await tick();
-  assert.equal(f.spoken[0].voice, remote); assert.equal(f.speech.snapshot().lastSource, 'hebrew-network');
+  assert.equal(f.spoken.length, 0); assert.equal(f.speech.snapshot().lastSource, 'text-only');
 });
 
 test('without any Hebrew voice the recording still works; missing recording gives text only', async () => {
@@ -82,13 +82,13 @@ test('stopping during a delayed WAV fetch prevents stale recording or speech', a
 });
 
 test('diagnostics are bounded, contain only catalog IDs and sources, and reset per attempt', async () => {
-  const f = fixture({ voices: [remote] });
+  const f = fixture({ voices: [local] });
   for (let i = 0; i < 35; i++) { f.advance(100); f.speech.play(PLACEMENT_LINES.near.tts); await tick(); f.spoken.at(-1).onend(); }
   const snapshot = f.speech.snapshot();
-  assert.equal(snapshot.sources['hebrew-network'], 35); assert.equal(snapshot.events.length, 30);
+  assert.equal(snapshot.sources['hebrew-local'], 35); assert.equal(snapshot.events.length, 30);
   assert.deepEqual(Object.keys(snapshot.events[0]), ['timeMs', 'source', 'ids']);
   assert.ok(snapshot.events.every(e => e.ids[0] === 'camera-placement-near'));
-  assert.ok(!JSON.stringify(snapshot).includes(remote.name)); assert.ok(!JSON.stringify(snapshot).includes(PLACEMENT_LINES.near.tts));
+  assert.ok(!JSON.stringify(snapshot).includes(local.name)); assert.ok(!JSON.stringify(snapshot).includes(PLACEMENT_LINES.near.tts));
   snapshot.events[0].ids.length = 0; assert.equal(f.speech.snapshot().events[0].ids.length, 1);
   f.speech.resetDiagnostics(); assert.deepEqual(f.speech.snapshot(), { sources: {}, lastSource: null, events: [] });
 });

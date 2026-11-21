@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createRacing} from '../minigames/racing-physics.mjs';
-import {TRACKS,CLASSIC_TRACKS,RACING_STAGES,RACING_TRACK_SCALE,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
+import {TRACKS,TRACKS_V3,CLASSIC_TRACKS,RACING_STAGES,RACING_TRACK_SCALE,createTrack,getRacingStage,racingAngle} from '../minigames/racing-tracks.mjs';
 import {racingResult} from '../minigames/racing-result.mjs';
 
 const balance=JSON.parse(readFileSync(new URL('../data/config.json',import.meta.url),'utf8')).minigames.islandRacing;
@@ -33,7 +33,8 @@ function driveToResult(stage,seed) {
 test('30 deliberate stage variations use six genuinely distinct closed circuits',()=>{
   assert.equal(TRACKS.length,6);assert.equal(RACING_STAGES.length,30);
   assert.equal(new Set(TRACKS.map(t=>JSON.stringify(t.points))).size,6);
-  assert.deepEqual([...new Set(RACING_STAGES.map(s=>s.trackId))],TRACKS.map(t=>t.id));
+  assert.deepEqual([...new Set(RACING_STAGES.map(s=>s.trackId))],[...TRACKS,...TRACKS_V3].map(t=>t.id));   // racing-v24.7: plus the six Codex v3 circuits on the odd tiers
+  assert.equal(TRACKS_V3.length,6);assert.equal(new Set(TRACKS_V3.map(t=>JSON.stringify(t.points))).size,6);
   assert.equal(getRacingStage(1).laps,2);assert.equal(getRacingStage(12).laps,2);assert.equal(getRacingStage(13).laps,3);assert.equal(getRacingStage(30).laps,3);
   assert.equal(getRacingStage(19).reverse,true);assert.equal(getRacingStage(25).timeOfDay,'night');
   assert.ok(getRacingStage(30).aiSpeed>getRacingStage(1).aiSpeed);

@@ -2,9 +2,9 @@
 // NAVAL_V7_MODE=blocked blocks assets/naval-v7/ so the game must fall back to the earlier Meshy boats (the "before" picture and the silent-fallback test).
 // Writes verification/gpt-v7-naval-fire-defense/naval-<mode>.json and naval-<mode>.png.
 import {verify} from './night-browser.mjs';
-import {writeFile,mkdir} from 'node:fs/promises';
-import {fileURLToPath} from 'node:url';
-const mode=process.env.NAVAL_V7_MODE||'on',out=fileURLToPath(new URL('../verification/gpt-v7-naval-fire-defense/',import.meta.url));await mkdir(out,{recursive:true});
+import {writeFile} from 'node:fs/promises';
+import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
+const mode=process.env.NAVAL_V7_MODE||'on',out=await browserArtifacts('naval-v7');
 await verify('gpt-v7-naval-fire-defense/run-'+mode,[{width:844,height:390}],async({page,tick,snap,start,assert})=>{
  // The island service worker answers asset requests itself, so page.route cannot see them: fail the two loaders in the page (GLB fetch, atlas image).
  if(mode==='blocked')await page.evaluate(()=>{const f=window.fetch.bind(window);window.fetch=(u,...a)=>String(u?.url||u).includes('/naval-v7/')?Promise.reject(new TypeError('blocked')):f(u,...a);const d=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');Object.defineProperty(HTMLImageElement.prototype,'src',{...d,set(v){if(String(v).includes('/naval-v7/')){setTimeout(()=>this.dispatchEvent(new Event('error')),0);return;}d.set.call(this,v);}});});

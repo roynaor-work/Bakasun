@@ -1,9 +1,11 @@
-import { levelFactor, population } from './metrics.mjs?v=island-v2-20261107-20';
-import {productionMultiplier} from './city-depth.mjs?v=island-v2-20261107-20';
-import {municipalBudget} from './city-management.mjs?v=island-v2-20261107-20';
+import { levelFactor, levelValue, population } from './metrics.mjs?v=island-v2-20261107-21';
+import {productionMultiplier} from './city-depth.mjs?v=island-v2-20261107-21';
+import {municipalBudget} from './city-management.mjs?v=island-v2-20261107-21';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config, city) {
+  const fullState = state;
+  state = registry.cityProgress?.operatingState(state) ?? state;
   const active = state.buildings.filter(row => !(state.events?.repairs?.[row.id] > state.updatedAt));
   const result = { money: 0, food: 0, materials: 0, energy: 0, sources: [] };
   const add = (id, resource, amount) => {
@@ -19,9 +21,19 @@ export function calculateIncome(state, registry, config, city) {
       const parks = active.filter(row => row.typeId === 'park').length;
       add(source.id, source.resource, source.basePerMinute + population(state, registry, config) * source.populationRate + parks * source.parkRate);
     } else if (source.kind === 'buildingIncome') {
-      for (const row of active) add(source.id, source.resource, (registry.buildings.get(row.typeId)?.income || 0) * levelFactor(row, config));
+      for (const row of active) {
+        const type = registry.buildings.get(row.typeId);
+        add(source.id, source.resource, type?.cityProgressAsset
+          ? levelValue(row, type, 'income', config)
+          : (type?.income || 0) * levelFactor(row, config));
+      }
     } else if (source.kind === 'production') {
-      for (const row of active) for (const [resource, amount] of Object.entries(registry.buildings.get(row.typeId)?.resources || {})) add(source.id, resource, amount * levelFactor(row, config) * productionMultiplier(state, row.id, city));
+      for (const row of active) {
+        const type = registry.buildings.get(row.typeId);
+        const explicit = type?.cityProgressAsset && type.levels[row.level - 1]?.resources;
+        const multiplier = (explicit ? 1 : levelFactor(row, config)) * productionMultiplier(state, row.id, city);
+        for (const [resource, amount] of Object.entries(explicit || type?.resources || {})) add(source.id, resource, amount * multiplier);
+      }
     } else if (source.kind === 'constant') {
       add(source.id, source.resource, source.perMinute);
     }
@@ -31,7 +43,7 @@ export function calculateIncome(state, registry, config, city) {
     result.municipal=municipal;result.money+=municipal.net;
     result.sources.push({id:'municipalTaxes',resource:'money',amount:municipal.taxes},{id:'municipalServices',resource:'money',amount:-municipal.expenses});
   }
-  return result;
+  return registry.cityProgress?.income(fullState, registry, result) ?? result;
 }
 
 export function accrueIncome(state, registry, config, seconds, city) {

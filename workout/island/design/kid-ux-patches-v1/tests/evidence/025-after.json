@@ -1,0 +1,170 @@
+{
+  "id": "025",
+  "mode": "after",
+  "checks": [
+    {
+      "pass": true,
+      "observation": {
+        "shopTabsFirstPurchaseNextBack": [
+          {
+            "width": 74.6,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "נשקים",
+            "contrast": 7.53
+          },
+          {
+            "width": 125.8,
+            "height": 48,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "ביצורים ויכולות",
+            "contrast": 9.42
+          },
+          {
+            "width": 359,
+            "height": 51.5,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "שדרוג לדרגה 2 · 110 ◆",
+            "contrast": 8.04
+          },
+          {
+            "width": 96.3,
+            "height": 49,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "לגל 1 ←",
+            "contrast": 12.09
+          },
+          {
+            "width": 75.9,
+            "height": 49,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "חזרה",
+            "contrast": 11.63
+          }
+        ]
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "fortificationPurchase": {
+          "width": 222.7,
+          "height": 7.4,
+          "fontPx": 14,
+          "centerHit": false,
+          "text": "שדרוג · 100 ◆",
+          "contrast": 8.04
+        }
+      }
+    },
+    {
+      "pass": true,
+      "observation": {
+        "footerAfterTouchScroll": [
+          {
+            "width": 96.3,
+            "height": 49,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "לגל 1 ←",
+            "contrast": 12.09
+          },
+          {
+            "width": 75.9,
+            "height": 49,
+            "fontPx": 14,
+            "centerHit": true,
+            "text": "חזרה",
+            "contrast": 11.63
+          }
+        ],
+        "scrollTop": 110
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "The embedded campaign is the same-origin game iframe. The QA hold freezes its decorative rendering after the menu has loaded."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"game-understood\"]').first()",
+      "x": 499.5546875,
+      "y": 342,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "game-understood",
+        "x": 499.5546875,
+        "y": 342
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#garage').first()",
+      "x": 535.7265625,
+      "y": 225.6875,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "garage",
+        "x": 535.7265625,
+        "y": 225.6875
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('#tab-upgrades').first()",
+      "x": 615.4375,
+      "y": 141.59375,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "tab-upgrades",
+        "x": 615.4375,
+        "y": 141.59375
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 400,
+      "y": 250,
+      "endX": 400,
+      "endY": 125,
+      "steps": 7
+    }
+  ],
+  "screenshots": [
+    "025-after-garage-first-fold.png",
+    "025-after-garage-scrolled.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "feature-group applied series"
+}

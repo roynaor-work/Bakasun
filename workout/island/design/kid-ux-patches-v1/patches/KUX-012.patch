@@ -1,0 +1,103 @@
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index 679af563..aa1ac5bf 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -7,6 +7,20 @@ import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-2026110
+ import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-15';
+ import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-15';
+ import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-15';
++import { kidUx, kidUxStyle, kidSpeak } from '../kid-ux.mjs?v=island-v2-20261107-15';
++
++kidUxStyle('012', `
++  .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
++  .kid-city-hall-instruction .kid-city-hall-demo{position:relative;min-height:86px;min-width:44px;flex:1;display:grid;place-items:center;gap:3px;padding:9px;background:#e8f4da;color:#183c33;font-size:14px;line-height:1.3}
++  .kid-city-hall-picture{isolation:isolate;position:relative;display:grid;place-items:center;width:58px;height:50px;border-radius:12px;background:#f5dd96;font-size:31px}
++  .kid-city-hall-finger{position:absolute;inset-inline-end:0;bottom:-5px;font-size:24px;animation:kid-city-hall-tap 1.65s ease-in-out infinite}
++  .kid-city-hall-instruction button[data-action=tutorial-city-hall-hear]{min-width:48px;min-height:48px;align-self:center;font-size:21px}
++  .kid-city-hall-confirmed{padding:5px 8px;border-radius:8px;background:#e4f1df;color:#183c33;font-size:14px;font-weight:700}
++  .island-ui.clean-hud .hud-tasks-toggle:has(.kid-city-hall-tasks-icon){font-size:14px}
++  @keyframes kid-city-hall-tap{0%,100%{transform:translate(-6px,5px)}40%,60%{transform:translate(6px,-6px)}}
++  @media(prefers-reduced-motion:reduce){.kid-city-hall-finger{animation:none}}
++`);
++
+ 
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+@@ -224,6 +238,13 @@ export class IslandInterface {
+     this[`${name}Toggle`].setAttribute('aria-expanded', String(open));
+     if(this.tasksToggle){if(name==='mission'){this.mission.hidden=!open;this.tasksToggle.setAttribute('aria-expanded',String(open));}if(open)this.root.dataset.hudPanel=name;}
+     this.setMoreOpen(false);
++    if (kidUx('012') && open && name==='mission' && this.missionSignature==='cityHallIntro') {
++      const hall = this.engine.state.buildings.find(b=>b.typeId==='cityHall');
++      if (hall) {
++        this.view.focusCell(hall.x, hall.z);
++        this.view.highlightCityBuildings?.([hall.id]);
++      }
++    }
+   }
+   setMoreOpen(open,restoreFocus=false){if(!this.morePanel)return;const wasOpen=!this.morePanel.hidden;if(open){this.closeDetails();this.setDockOpen(false);}this.morePanel.hidden=!open;this.moreToggle.setAttribute('aria-expanded',String(open));if(!open&&wasOpen&&restoreFocus)this.moreToggle.focus();}
+   setDockOpen(open) {
+@@ -297,8 +318,31 @@ export class IslandInterface {
+       this.missionDetails.replaceChildren(el('p','',this.t('tutorial.cityHallHint')));
+       const start=button(this.t('tutorial.cityHallContinue'),'tutorial-city-hall','primary-button');
+       start.onclick=()=>{this.cityHallIntro=false;this.missionSignature=null;this.drawMission();const hall=this.engine.state.buildings.find(b=>b.typeId==='cityHall');if(hall){this.view.focusCell(hall.x,hall.z);this.showInfo(hall.id);}};
+-      this.missionDetails.append(start);return;
++      if (kidUx('012')) {
++        const mark = el('span', 'kid-city-hall-tasks-icon', '🏛️ ');
++        mark.setAttribute('aria-hidden', 'true');
++        this.tasksToggle.replaceChildren(mark, document.createTextNode(this.t('hud.tasks')));
++        const instruction = el('div', 'kid-city-hall-instruction');
++        const picture = el('span', 'kid-city-hall-picture', '🏛️');
++        picture.setAttribute('aria-hidden', 'true');
++        picture.append(el('span', 'kid-city-hall-finger', '👆'));
++        start.classList.add('kid-city-hall-demo');
++        start.replaceChildren(picture, el('span', '', 'נוגעים בעירייה'));
++        start.onclick = () => {
++          const hall = this.engine.state.buildings.find(b=>b.typeId==='cityHall');
++          if (hall) this.showInfo(hall.id);
++        };
++        const hear = button('🔊', 'tutorial-city-hall-hear', 'secondary-button');
++        hear.setAttribute('aria-label', 'שמיעת ההוראה');
++        hear.onclick = () => kidSpeak('נִגְּעוּ בָּעִירִיָּה.');
++        instruction.append(start, hear);
++        this.missionDetails.replaceChildren(instruction);
++      } else {
++        this.missionDetails.append(start);
++      }
++      return;
+     }
++    if (this.tasksToggle.querySelector('.kid-city-hall-tasks-icon')) this.tasksToggle.textContent = this.t('hud.tasks');
+     const objective = step ?? this.engine.nextObjective?.();
+     const signature = JSON.stringify([objective, this.selected === step?.buildType, this.engine.state.tutorial.step]);
+     if (signature === this.missionSignature) return;
+@@ -487,10 +531,17 @@ export class IslandInterface {
+       return;
+     }
+     this.closeDetails(); this.setDockOpen(false);
++    if (kidUx('012') && instance?.typeId==='cityHall' && this.missionSignature==='cityHallIntro') {
++      this.cityHallIntro = false;
++      this.cityHallTutorialConfirmed = true;
++      this.missionSignature = null;
++      this.drawMission();
++      this.view.highlightCityBuildings?.([instance.id]);
++    }
+     this.infoId = id;
+     this.drawInfo();
+   }
+-  closeInfo() { this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); this.view.setCityReport?.(this.engine.city?.report(), null); }
++  closeInfo() { if (this.cityHallTutorialConfirmed) this.cityHallTutorialConfirmed = false; this.infoId = null; this.infoSignature = null; this.info.hidden = true; this.view.showRadius(null); this.view.setCityReport?.(this.engine.city?.report(), null); }
+   currentInfoSignature() {
+     const state = this.engine.state;
+     const instance=state.buildings.find(row=>row.id===this.infoId);
+@@ -511,6 +562,11 @@ export class IslandInterface {
+     title.append(el('span', 'building-icon', record.icon), el('h2', '', this.label(record, 'building')), close);
+     const currentLevel = record.levels[instance.level - 1];
+     this.info.append(title, el('span', 'level-badge', `${currentLevel.title ? this.t(currentLevel.title) + ' · ' : ''}${this.t('app.level')} ${instance.level}`));
++    if (record.id==='cityHall' && this.cityHallTutorialConfirmed) {
++      const confirmed = el('p', 'kid-city-hall-confirmed', '✓ הגעתם לעירייה!');
++      confirmed.setAttribute('role', 'status');
++      this.info.append(confirmed);
++    }
+     const effects = el('div', 'info-effects');
+     for (const [id, value] of Object.entries(summary?.effects ?? record.effects ?? record.metrics ?? {})) effects.append(el('span', '', `${this.t(`metric.${id}`)} +${summary ? value.toLocaleString('he-IL') : amount(value)}`));
+     const residents = summary?.population ?? levelValue(instance, record, 'population', this.data.config);

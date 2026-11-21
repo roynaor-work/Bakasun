@@ -1,21 +1,21 @@
-import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-20';
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-20';
-import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-20';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-20';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-20';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-20';
-import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-20';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-20';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-20';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-20';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-20';
-import { cellsFor } from './rules.mjs?v=island-v2-20261107-20';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-20';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-20';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-20';
-import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-20';
-import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-20';
-import {createLeague,validLeague,mergeLeague,normalizeLeague} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-20';
+import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-21';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-21';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-21';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-21';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-21';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-21';
+import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-21';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-21';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-21';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-21';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-21';
+import { cellsFor } from './rules.mjs?v=island-v2-20261107-21';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-21';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-21';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-21';
+import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-21';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-21';
+import {createLeague,validLeague,mergeLeague,normalizeLeague} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-21';
 
 export const CURRENT_VERSION = 19;
 export const STORAGE_KEY = 'island.v1';
@@ -156,6 +156,7 @@ export function validateSave(state, data, registry) {
   const invalid = () => ({ ok: false, reason: 'reason.invalid' });
   if(state?.cityDepthVersion!==1||!validCity(state?.city, state, data))return invalid();
   if(!validCityManagement(state?.cityManagement,state,registry))return invalid();
+  if(registry.cityProgress && !registry.cityProgress.valid(state))return invalid();
   if(!validLearning(state?.learning))return invalid();
   if(!validFireCertificates(state?.fireCertificates,data))return invalid();
   if(!validHangar(state?.hangar,data.config.minigames.alienDefense.hangar))return invalid();
@@ -242,7 +243,7 @@ export function resetWorld(storage, freshState) {
 export function exportWorld(state) { return JSON.stringify({ ...state, version: CURRENT_VERSION }, null, 2); }
 
 /** Import is an additive merge. Current buildings win on conflicts; current progress is never reduced. */
-export function importWorld(raw, current, data, registry) {
+export function importWorld(raw, current, data, registry, { mergeCityMissions } = {}) {
   let parsed;
   try { parsed = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { return { ok: false, reason: 'reason.import' }; }
   const migrated = migrateSave(parsed, data, registry);
@@ -275,10 +276,14 @@ export function importWorld(raw, current, data, registry) {
     if(row.typeId==='cityHall'&&merged.buildings.some(b=>b.typeId==='cityHall'))continue;
     if (ids.has(row.id)) {
       const existing = merged.buildings.find(item => item.id === row.id);
-      if (existing.typeId === row.typeId) existing.level = Math.max(existing.level, row.level);
-      else conflicts++;
+      if (existing.typeId === row.typeId) {
+        // Keep the local paid upgrade and its stage in preference to an imported level.
+        if (!registry.cityProgress?.isPending(merged, row.id)) existing.level = Math.max(existing.level, row.level);
+      } else conflicts++;
       continue;
     }
+    // An unfinished imported foundation belongs to its source city's clock.
+    if (registry.cityProgress?.isOperational(incoming, row.id) === false) { conflicts++; continue; }
     const cells = cellsFor(registry.buildings.get(row.typeId), row.x, row.z).map(cell => cell.join(','));
     if (cells.some(key => occupied.has(key))) { conflicts++; continue; }
     merged.buildings.push(clone(row));
@@ -327,6 +332,7 @@ export function importWorld(raw, current, data, registry) {
     prepareReadyPlan(merged,registry,data.featureFlags);
   }
 
+  mergeCityMissions?.(merged, incoming);
   merged.updatedAt = Date.now();
   const validation = validateSave(merged, data, registry);
   return validation.ok ? { ok: true, state: merged, added, conflicts } : validation;

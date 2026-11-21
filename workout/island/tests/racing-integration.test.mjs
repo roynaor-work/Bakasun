@@ -8,7 +8,7 @@ import {createActivity} from '../activity/runtime.mjs';
 import {gameAvailability} from '../activity/availability.mjs';
 import {ActivityInterface} from '../ui/activity.mjs';
 import {gameArtwork} from '../ui/adventure-emblems.mjs';
-import {getRacingStage,RACING_STAGES,TRACKS} from '../minigames/racing-tracks.mjs';
+import {getRacingStage,RACING_STAGES,TRACKS,TRACKS_V3} from '../minigames/racing-tracks.mjs';
 import {racingResult} from '../minigames/racing-result.mjs';
 
 const root=new URL('../',import.meta.url);
@@ -44,7 +44,8 @@ test('racing stage entries cover 30 stages and six original track layouts',async
   assert.equal(new Set(TRACKS.map(row=>JSON.stringify(row.points))).size,6);
   const strings=JSON.parse(await readFile(new URL('data/strings.he.json',root),'utf8'));
   for(const [index,row]of balance.levels.entries()){
-    const stage=getRacingStage(index+1);assert.equal(row.stage,index+1);assert.equal(row.trackId,stage.trackId);
+    // racing-v24.7: the level rows keep the v2 circuit of their slot; on the odd tiers the stage itself runs the Codex v3 circuit of that slot (TRACKS_V3, ?racingTracksV3=0 = v2)
+    const stage=getRacingStage(index+1),v3=Math.floor(index/6)%2===1;assert.equal(row.stage,index+1);assert.equal(row.trackId,TRACKS[index%6].id);assert.equal(stage.trackId,(v3?TRACKS_V3:TRACKS)[index%6].id);
     assert.equal(row.laps,stage.laps);assert.ok(strings[row.feature]);assert.ok(strings[row.feature].includes(`${stage.laps} הקפות`));assert.ok(row.winMoney>0);
   }
   assert.deepEqual(new Set(balance.levels.map(row=>row.trackId)),new Set(TRACKS.map(row=>row.id)));

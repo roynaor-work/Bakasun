@@ -3,8 +3,8 @@
  * league stage (place, the three goals as stars, coins, table, record ghost, season podium at a boss).
  * Loaded on demand from ui/activity.mjs the first time the ski menu opens. Every change goes through engine.alpineLeague (checks,
  * saves its own key, refuses while a game runs). Hebrew, 56px targets, numbers as LTR islands, nothing hidden. */
-import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-20';
-import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-20';
+import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-21';
+import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-21';
 
 const el = (tag, cls = '', text = '') => { const n = document.createElement(tag); n.className = cls; if (text !== '') n.textContent = text; return n; };
 const button = (text, action, fn, cls = 'secondary-button') => { const n = el('button', cls, text); n.type = 'button'; n.dataset.action = action; n.onclick = fn; return n; };
@@ -22,10 +22,10 @@ export function goalLine(g) {
 }
 export function ensureStyle(root = document.head) {
   if (document.querySelector('link[data-alpine-league-css]')) return;
-  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-20', import.meta.url).href; root.append(link);
+  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-21', import.meta.url).href; root.append(link);
 }
 const accent = (node, themeId) => { node.style.setProperty('--al-accent', THEME_LOOKS[themeId]?.accent || '#3f8f5a'); node.dataset.theme = themeId; return node; };
-function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `${count} כוכבים מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }
+function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `כוכבים: ${count} מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }
 function chip(id) { const c = el('span', 'al-chip'); c.style.background = colorOf(id); c.setAttribute('aria-hidden', 'true'); return c; }
 
 /** The five stages of a theme as big buttons: global stage number, name, stars; locked ones are disabled. */
@@ -35,7 +35,7 @@ function stageStrip(engine, sum, themeIndex, go) {
     const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.stage(n)?.best, open = n <= sum.stage, item = el('li', 'al-stage');
     item.dataset.n = String(n); item.dataset.state = best?.stars ? 'done' : open ? 'next' : 'locked'; if (info.boss) item.dataset.boss = 'true';
     const b = button('', 'alpine-league-stage', () => go(n), 'al-stage-button'); b.disabled = !open; b.dataset.n = String(n);
-    b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, ${best?.stars || 0} כוכבים` : ', נעול'}`);
+    b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, כוכבים: ${best?.stars || 0}` : ', נעול'}`);
     b.append(el('span', 'al-stage-no', String(info.number)), el('span', 'al-stage-name', info.boss ? 'בוס' : `שלב ${info.index}`), open ? starsRow(best?.stars || 0) : el('span', 'al-lock', 'נעול'));
     if (best?.ms) b.append(el('small', 'al-stage-best', clock(best.ms)));
     item.append(b); list.append(item);
@@ -47,7 +47,7 @@ function themeChips(sum, shown, pick) {
   const row = el('div', 'al-themes'); row.setAttribute('role', 'tablist');
   for (const t of sum.themes) {
     const c = button('', 'alpine-league-theme', () => pick(t.index), 'al-theme'); accent(c, t.id); c.disabled = !t.open; c.setAttribute('role', 'tab'); c.setAttribute('aria-selected', String(t.index === shown)); c.dataset.index = String(t.index);
-    c.append(el('b', '', t.name), el('small', '', t.open ? `${t.totalStars}/15 כוכבים${t.result?.rank === 1 ? ' · גביע' : ''}` : 'נעול'));
+    c.append(el('b', '', t.name), el('small', '', t.open ? `כוכבים: ${t.totalStars}/15${t.result?.rank === 1 ? ' · גביע' : ''}` : 'נעול'));
     row.append(c);
   }
   return row;
@@ -69,10 +69,10 @@ export function leagueCard({engine, go, season, shop, refresh}) {
   ensureStyle();
   const sum = engine.alpineLeague.summary(), root = el('section', 'al-card'); root.dataset.alpineLeague = 'true'; accent(root, sum.theme.id);
   let shown = sum.complete ? THEMES.length : Math.ceil(sum.stage / PER_THEME);
-  const head = el('div', 'al-head'), coins = el('span', 'al-coins'); coins.append(num(sum.coins), ' מטבעות ליגה');
+  const head = el('div', 'al-head'), coins = el('span', 'al-coins'); coins.append('מטבעות ליגה: ', num(sum.coins));
   head.append(el('h3', '', `ליגת הסקי · שלבים ${BASE_STAGES + 1} עד ${BASE_STAGES + STAGE_COUNT}`), coins);
   const started = sum.table.some(r => r.points > 0);
-  const status = el('p', 'al-line', `${sum.theme.name} · ${started ? `מקום ${sum.place} בטבלה` : 'העונה מתחילה'} · ${sum.totalStars} כוכבים מתוך ${sum.maxStars}${sum.cups ? ` · גביעים: ${sum.cups}` : ''}`);
+  const status = el('p', 'al-line', `${sum.theme.name} · ${started ? `מקום ${sum.place} בטבלה` : 'העונה מתחילה'} · כוכבים: ${sum.totalStars} מתוך ${sum.maxStars}${sum.cups ? ` · גביעים: ${sum.cups}` : ''}`);
   const stripHost = el('div', 'al-strip-host');
   const draw = () => { stripHost.replaceChildren(stageStrip(engine, sum, shown, go)); chips.replaceWith(chips = themeChips(sum, shown, pick)); };
   const pick = i => { shown = i; draw(); };
@@ -103,7 +103,7 @@ export function seasonBody({engine, go, refresh}) {
   for (const t of sum.themes) {
     const li = el('li', 'al-theme-row'); accent(li, t.id); li.dataset.open = String(t.open);
     const res = t.result ? `מקום ${t.result.rank} בעונה${t.result.rank === 1 ? ' · גביע' : ''} · פרס ${t.result.prize}` : t.live ? 'העונה עכשיו' : t.open ? 'פתוחה' : 'נעולה';
-    li.append(el('strong', '', `${t.name} · שלבים ${t.numbers[0]} עד ${t.numbers[1]}`), el('span', '', t.line), el('em', '', `${res} · ${t.totalStars}/15 כוכבים`)); themes.append(li);
+    li.append(el('strong', '', `${t.name} · שלבים ${t.numbers[0]} עד ${t.numbers[1]}`), el('span', '', t.line), el('em', '', `${res} · כוכבים: ${t.totalStars}/15`)); themes.append(li);
   }
   root.append(el('h4', '', 'שש העונות'), themes);
   root.append(el('p', 'al-line', `נקודות לפי מקום: ${POINTS.join(' · ')}. בשלב בוס הנקודות כפולות. הטבלה מתעדכנת פעם אחת בכל שלב, במרוץ שפתח את השלב הבא.`),
@@ -124,7 +124,7 @@ export function shopBody({engine, refresh}) {
     const pips = el('span', 'al-pips'); pips.setAttribute('role', 'img'); pips.setAttribute('aria-label', `רמה ${level} מתוך ${MAX_LEVEL}`); for (let i = 0; i < MAX_LEVEL; i++) pips.append(el('i', i < level ? 'on' : ''));
     const gain = Math.round((eq[spec.key] - 1) * 100), what = el('span', 'al-part-what', spec.what); if (gain) { const g = el('bdi', 'al-gain', `+${gain}%`); g.dir = 'ltr'; what.append(' · ', g); }
     const cost = level >= MAX_LEVEL ? null : GEAR_COST[level];
-    const buy = button(cost === null ? 'רמה מקסימלית' : `שדרוג ב-${cost}`, 'alpine-league-buy', () => { const r = engine.alpineLeague.buy(key); if (r.ok) refresh(); else note.textContent = r.reason === 'coins' ? `חסרים ${r.need} מטבעות לשדרוג הזה` : 'אי אפשר לשדרג עכשיו'; }, 'primary-button');
+    const buy = button(cost === null ? 'הרמה הגבוהה ביותר' : `שדרוג ב-${cost}`, 'alpine-league-buy', () => { const r = engine.alpineLeague.buy(key); if (r.ok) refresh(); else note.textContent = r.reason === 'coins' ? `מטבעות שחסרים לשדרוג: ${r.need}` : 'אי אפשר לשדרג עכשיו'; }, 'primary-button');
     buy.dataset.part = key; buy.disabled = cost === null || l.coins < cost;
     row.append(el('strong', 'al-part-name', spec.name), pips, what, buy); root.append(row);
   }
@@ -140,7 +140,7 @@ export function resultBody({engine, result, summary, go, again, season, shop}) {
   const medal = el('div', 'al-medal', String(r.place)); medal.dataset.place = String(r.place); medal.setAttribute('aria-label', `מקום ${r.place}`);
   const top = el('div', 'al-result-top'), headline = el('div');
   headline.append(el('h4', '', r.passed ? (r.firstPass && r.n < STAGE_COUNT ? `עברתם את שלב ${info.number}. שלב ${engineStageOf(r.n + 1)} נפתח` : `עברתם את שלב ${info.number}`) : `שלב ${info.number} עוד לא עבר. ${r.completed ? `צריך מקום ${info.targetRank} ומעלה` : 'לא הגעתם לקו הסיום'}`),
-    starsRow(r.stars, `${r.stars} כוכבים מתוך 3`));
+    starsRow(r.stars, `כוכבים: ${r.stars} מתוך 3`));
   top.append(medal, headline); root.append(top);
   const goals = el('ul', 'al-goal-check'); goals.setAttribute('aria-label', 'היעדים');
   for (const g of r.goals) {
@@ -160,7 +160,7 @@ export function resultBody({engine, result, summary, go, again, season, shop}) {
     const box = el('section', 'al-podium'); box.dataset.seasonPodium = String(r.season.theme);
     box.append(el('h4', '', `סיום העונה: ${THEMES[r.season.theme - 1].name}`));
     const row = el('div', 'al-podium-row'); [r.season.podium[1], r.season.podium[0], r.season.podium[2]].forEach((id, k) => { if (!id) return; const place = [2, 1, 3][k], step = el('div', 'al-step place-' + place); if (id === 'player') step.classList.add('you'); step.append(chip(id), el('span', '', nameOf(id)), el('b', '', String(place))); row.append(step); });
-    box.append(row, el('p', 'al-line al-big', r.season.cup ? 'אתם האלופים של העונה. גביע' : `סיימתם את העונה במקום ${r.season.rank}`), el('p', 'al-line', `פרס עונה: +${r.season.prize} מטבעות`));
+    box.append(row, el('p', 'al-line al-big', r.season.cup ? 'אתם האלופים של העונה. גביע' : `סיימתם את העונה במקום ${r.season.rank}`), el('p', 'al-line', `מטבעות מפרס העונה: +${r.season.prize}`));
     root.append(box);
   }
   const actions = el('div', 'al-actions');

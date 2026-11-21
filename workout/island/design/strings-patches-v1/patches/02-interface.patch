@@ -1,0 +1,1083 @@
+diff --git a/workout/island/design/controls/alpine.json b/workout/island/design/controls/alpine.json
+index b921dec..7c1422e 100644
+--- a/workout/island/design/controls/alpine.json
++++ b/workout/island/design/controls/alpine.json
+@@ -86,18 +86,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "grab": {
+-      "label": "אחיזה",
+-      "aria_label": "אחיזה",
++      "label": "תפיסה",
++      "aria_label": "תפיסה",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": false,
+-          "label": "אחיזה",
++          "label": "תפיסה",
+           "icon": "trick"
+         },
+         "update": {
+-          "label": "אחיזה",
++          "label": "תפיסה",
+           "icon": "trick",
+           "disabled": false,
+           "loading": false,
+@@ -137,18 +137,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "flip": {
+-      "label": "היפוך",
+-      "aria_label": "היפוך",
++      "label": "סלטה",
++      "aria_label": "סלטה",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": false,
+-          "label": "היפוך",
++          "label": "סלטה",
+           "icon": "trick"
+         },
+         "update": {
+-          "label": "היפוך",
++          "label": "סלטה",
+           "icon": "trick",
+           "disabled": false,
+           "loading": false,
+diff --git a/workout/island/design/controls/hoops.json b/workout/island/design/controls/hoops.json
+index a10f2aa..a2dfe49 100644
+--- a/workout/island/design/controls/hoops.json
++++ b/workout/island/design/controls/hoops.json
+@@ -113,18 +113,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "sprint": {
+-      "label": "ריצה",
+-      "aria_label": "ריצה",
++      "label": "סיבולת",
++      "aria_label": "סיבולת",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": false,
+-          "label": "ריצה",
++          "label": "סיבולת",
+           "icon": "boost"
+         },
+         "update": {
+-          "label": "ריצה",
++          "label": "סיבולת",
+           "icon": "boost",
+           "disabled": false,
+           "loading": false,
+@@ -167,18 +167,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "screen": {
+-      "label": "מסך",
+-      "aria_label": "מסך",
++      "label": "חסימה",
++      "aria_label": "חסימה",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": false,
+-          "label": "מסך",
++          "label": "חסימה",
+           "icon": "block"
+         },
+         "update": {
+-          "label": "מסך",
++          "label": "חסימה",
+           "icon": "block",
+           "disabled": false,
+           "loading": false,
+diff --git a/workout/island/design/controls/soccer.json b/workout/island/design/controls/soccer.json
+index 730411e..30d9688 100644
+--- a/workout/island/design/controls/soccer.json
++++ b/workout/island/design/controls/soccer.json
+@@ -113,18 +113,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "sprint": {
+-      "label": "ריצה",
+-      "aria_label": "ריצה",
++      "label": "סיבולת",
++      "aria_label": "סיבולת",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": false,
+-          "label": "ריצה",
++          "label": "סיבולת",
+           "icon": "boost"
+         },
+         "update": {
+-          "label": "ריצה",
++          "label": "סיבולת",
+           "icon": "boost",
+           "disabled": false,
+           "loading": false,
+@@ -216,18 +216,18 @@
+       "feedback": "press / held / accepted / rejected לפי interaction.json; הצלחה רק מאירוע מנוע"
+     },
+     "throw": {
+-      "label": "אאוט",
+-      "aria_label": "אאוט",
++      "label": "הוצאת חוץ",
++      "aria_label": "הוצאת חוץ",
+       "hud_kit": {
+         "module": "../hud-kit/action-button.mjs",
+         "export": "create",
+         "options": {
+           "primary": true,
+-          "label": "אאוט",
++          "label": "הוצאת חוץ",
+           "icon": "pass"
+         },
+         "update": {
+-          "label": "אאוט",
++          "label": "הוצאת חוץ",
+           "icon": "pass",
+           "disabled": false,
+           "loading": false,
+@@ -688,7 +688,7 @@
+       "two_fingers": "אצבע שמאל גוררת סטיק; אצבע ימין מפעילה פעולה. ספרינט בלי אצבע שלישית: החזקה בהטיית סטיק או נעילת ריצה מפורשת."
+     },
+     "throw_in": {
+-      "label": "הוצאת אאוט",
++      "label": "הוצאת חוץ",
+       "note": "כדור בידיים · כיוון ונמען גלויים · אין גלישה או בעיטה",
+       "controls": [
+         {
+diff --git a/workout/island/index.html b/workout/island/index.html
+index a2c5cee..59c7b7c 100644
+--- a/workout/island/index.html
++++ b/workout/island/index.html
+@@ -29,7 +29,7 @@
+   <title></title>
+ </head>
+ <body>
+-  <div class="boot-splash" data-boot-splash role="status" aria-live="polite"><p class="boot-splash-text"><span data-boot-text>העיר שלי מתעוררת…</span><span class="boot-splash-dots" aria-hidden="true"><i></i><i></i><i></i></span></p><span class="boot-splash-bar" aria-hidden="true"><i data-boot-fill></i></span><small class="boot-splash-progress" data-boot-progress dir="rtl"></small></div>
++  <div class="boot-splash" data-boot-splash role="status" aria-live="polite"><p class="boot-splash-text"><span data-boot-text>האי מתעורר…</span><span class="boot-splash-dots" aria-hidden="true"><i></i><i></i><i></i></span></p><span class="boot-splash-bar" aria-hidden="true"><i data-boot-fill></i></span><small class="boot-splash-progress" data-boot-progress dir="rtl"></small></div>
+   <canvas id="world"></canvas>
+   <main id="interface"></main>
+   <div id="toast" role="status" aria-live="polite"></div>
+diff --git a/workout/island/minigames/alpine-league-core.mjs b/workout/island/minigames/alpine-league-core.mjs
+index 2d50169..ecfe38b 100644
+--- a/workout/island/minigames/alpine-league-core.mjs
++++ b/workout/island/minigames/alpine-league-core.mjs
+@@ -47,7 +47,7 @@ export const GEAR_COST = Object.freeze([70, 130, 200, 290, 400]);
+ export const GEAR = Object.freeze({
+   skis: Object.freeze({name: 'מגלשיים', key: 'wax', perLevel: .01, what: 'גלישה מהירה יותר'}),
+   helmet: Object.freeze({name: 'קסדה', key: 'helmet', perLevel: .06, what: 'קמים מהר יותר אחרי נפילה'}),
+-  goggles: Object.freeze({name: 'משקפיים', key: 'goggles', perLevel: .08, what: 'הרוח מזיזה פחות, ושער ממלא יותר את המיכל'})
++  goggles: Object.freeze({name: 'משקפיים', key: 'goggles', perLevel: .08, what: 'הרוח מזיזה פחות, ושער ממלא יותר את המכל'})
+ });
+ export const HISTORY_CAP = 60;
+ const GOAL_THIRD = Object.freeze(['gates', 'clean', 'gates', 'clean', 'gates']);
+diff --git a/workout/island/minigames/alpine-session.mjs b/workout/island/minigames/alpine-session.mjs
+index ecd198a..468c86b 100644
+--- a/workout/island/minigames/alpine-session.mjs
++++ b/workout/island/minigames/alpine-session.mjs
+@@ -259,7 +259,7 @@ export function runAlpineSession(ctx) {
+     if (e.objectType === 'ring') { audio.cue('ring'); showCallout('ring', now, 'טבעת', `+${e.value}`); return; }
+     audio.cue('power');
+     if (e.objectType === 'magnet') { showCallout('power', now, 'מגנט', 'מטבעות וכוכבים נמשכים אליכם'); status.textContent = 'מגנט: מטבעות וכוכבים נמשכים אליכם'; }
+-    else { showCallout('power', now, 'מגן', 'הנפילה הבאה לא תפיל'); status.textContent = 'מגן: הנפילה הבאה לא תפיל'; }
++    else { showCallout('power', now, 'מגן', 'המגן מונע את הנפילה הבאה'); status.textContent = 'מגן: מונע את הנפילה הבאה'; }
+   }
+   let coinPulse = 0;
+   function handleEvents(snap, now) {
+diff --git a/workout/island/minigames/boar-island/chain.mjs b/workout/island/minigames/boar-island/chain.mjs
+index 1d6b4d7..bbf53e0 100644
+--- a/workout/island/minigames/boar-island/chain.mjs
++++ b/workout/island/minigames/boar-island/chain.mjs
+@@ -26,7 +26,7 @@ Object.assign(WEAPONS,{
+   mg2:{family:'mg',prev:'mg',name:'מקלע כפול',short:'כפול',icon:'≣',desc:'שני קנים בכל ירייה. מהיר יותר, אותו חום.',mode:'heat',unlock:3200,upBase:320,damage:20,rate:15,pellets:1,spread:.005,heatPerShot:1.9,mag:0,reload:0,splash:0,chain:0,color:'#ffe08a'},
+   shotgun2:{family:'shotgun',prev:'shotgun',name:'רסס כבד',short:'רסס כבד',icon:'⁙',desc:'עשרה רסיסים, מחסנית גדולה, קטלני מקרוב.',mode:'mag',unlock:3600,upBase:340,damage:17,rate:2.2,pellets:10,spread:.05,heatPerShot:0,mag:8,reload:1.8,splash:0,chain:0,color:'#ffc27a'},
+   cannon2:{family:'cannon',prev:'cannon',name:'תותח כבד',short:'תותח כבד',icon:'◎',desc:'פגז גדול יותר, פיצוץ רחב.',mode:'mag',unlock:4200,upBase:380,damage:230,rate:1.3,pellets:1,spread:.002,heatPerShot:0,mag:5,reload:2.4,splash:7.5,chain:0,color:'#ffae66'},
+-  tesla2:{family:'tesla',prev:'tesla',name:'סליל כפול',short:'ברק כפול',icon:'ϟϟ',desc:'קרן חזקה שמדלגת לשלושה אויבים.',mode:'heat',unlock:4800,upBase:420,damage:14,rate:16,pellets:1,spread:0,heatPerShot:1.75,mag:0,reload:0,splash:0,chain:3,color:'#9ff0ff'},
++  tesla2:{family:'tesla',prev:'tesla',name:'ברק כפול',short:'ברק כפול',icon:'ϟϟ',desc:'קרן חזקה שמדלגת לשלושה אויבים.',mode:'heat',unlock:4800,upBase:420,damage:14,rate:16,pellets:1,spread:0,heatPerShot:1.75,mag:0,reload:0,splash:0,chain:3,color:'#9ff0ff'},
+   mg3:{family:'mg',prev:'mg2',name:'מיני-גאן',short:'מיני-גאן',icon:'≋',desc:'קצב אש עצום. לא עוצר.',mode:'heat',unlock:9000,upBase:700,damage:26,rate:24,pellets:1,spread:.007,heatPerShot:1.2,mag:0,reload:0,splash:0,chain:0,color:'#fff0a8'},
+   shotgun3:{family:'shotgun',prev:'shotgun2',name:'תותח רסס',short:'תותח רסס',icon:'⁜',desc:'שנים עשר רסיסים בקצב מהיר. מחסל מקרוב.',mode:'mag',unlock:9800,upBase:740,damage:24,rate:2.6,pellets:12,spread:.055,heatPerShot:0,mag:10,reload:2,splash:0,chain:0,color:'#ffd49a'},
+   cannon3:{family:'cannon',prev:'cannon2',name:'מרגמת נפץ',short:'מרגמה',icon:'◍',desc:'פגז ענק, פיצוץ גדול שמטאטא קבוצות.',mode:'mag',unlock:11000,upBase:800,damage:380,rate:1.5,pellets:1,spread:.002,heatPerShot:0,mag:6,reload:2.6,splash:9,chain:0,color:'#ffc080'},
+diff --git a/workout/island/minigames/boar-island/core.mjs b/workout/island/minigames/boar-island/core.mjs
+index 5bd39ff..99a7afd 100644
+--- a/workout/island/minigames/boar-island/core.mjs
++++ b/workout/island/minigames/boar-island/core.mjs
+@@ -3,10 +3,10 @@ export const VERSION = 2;
+
+ // Weapons. mode 'heat' = continuous fire limited by heat; 'mag' = magazine + reload.
+ export const WEAPONS = {
+-  mg:{name:'מקלע חוף',short:'מקלע',icon:'≡',desc:'שני קנים מסתובבים. מהיר, מדויק, מתחמם.',mode:'heat',unlock:0,upBase:110,damage:15,rate:9,pellets:1,spread:.004,heatPerShot:3.1,mag:0,reload:0,splash:0,chain:0,color:'#ffd27a'},
+-  shotgun:{name:'רסס סערה',short:'רסס',icon:'⁘',desc:'שמונה רסיסים בכל ירייה. קטלני מקרוב, מתפזר למרחק.',mode:'mag',unlock:420,upBase:130,damage:12,rate:1.9,pellets:8,spread:.045,heatPerShot:0,mag:6,reload:1.7,splash:0,chain:0,color:'#ffb067'},
++  mg:{name:'מקלע חוף',short:'מקלע',icon:'≡',desc:'שני קנים מסתובבים. יורה מהר ומדויק. צריך לתת לו להתקרר.',mode:'heat',unlock:0,upBase:110,damage:15,rate:9,pellets:1,spread:.004,heatPerShot:3.1,mag:0,reload:0,splash:0,chain:0,color:'#ffd27a'},
++  shotgun:{name:'רסס סערה',short:'רסס',icon:'⁘',desc:'שמונה רסיסים בכל ירייה. חזק מקרוב. הרסיסים מתפזרים למרחק.',mode:'mag',unlock:420,upBase:130,damage:12,rate:1.9,pellets:8,spread:.045,heatPerShot:0,mag:6,reload:1.7,splash:0,chain:0,color:'#ffb067'},
+   cannon:{name:'תותח נפץ',short:'תותח',icon:'◉',desc:'פגז שמתפוצץ באזור הפגיעה. שובר שריון ורפסודות.',mode:'mag',unlock:850,upBase:160,damage:130,rate:1.15,pellets:1,spread:.002,heatPerShot:0,mag:4,reload:2.3,splash:6.5,chain:0,color:'#ff9a4d'},
+-  tesla:{name:'סליל ברק',short:'ברק',icon:'ϟ',desc:'קרן חשמלית שננעלת ומדלגת לעוד שני אויבים. מצוין נגד רחפנים.',mode:'heat',unlock:1400,upBase:190,damage:9.5,rate:14,pellets:1,spread:0,heatPerShot:2.35,mag:0,reload:0,splash:0,chain:2,color:'#8fe9ff'}
++  tesla:{name:'סליל ברק',short:'ברק',icon:'ϟ',desc:'קרן חשמל שמכוונת למטרה וקופצת לעוד שני אויבים. טובה נגד רחפנים.',mode:'heat',unlock:1400,upBase:190,damage:9.5,rate:14,pellets:1,spread:0,heatPerShot:2.35,mag:0,reload:0,splash:0,chain:2,color:'#8fe9ff'}
+ };
+ export const WEAPON_ORDER = ['mg','shotgun','cannon','tesla'];
+ export const WEAPON_MAX = 6;
+diff --git a/workout/island/minigames/boar-island/game.js b/workout/island/minigames/boar-island/game.js
+index cdd8899..ff052e3 100644
+--- a/workout/island/minigames/boar-island/game.js
++++ b/workout/island/minigames/boar-island/game.js
+@@ -56,7 +56,7 @@ let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AI
+ function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ))),lin=AIM_V241?AIM241.LIN:STICK_LIN;return STICK_V21?mag*(lin+(1-lin)*mag):mag;}
+ function aimSensButton(){const b=document.createElement('button');b.className='text-btn';b.id='aim-sens';const label=()=>{b.textContent=`רגישות כוונון: ${AIM_SENS_NAME[aimSens]}`;};label();
+   b.onclick=()=>{const keys=Object.keys(AIM_SENS);aimSens=keys[(keys.indexOf(aimSens)+1)%keys.length];try{localStorage.setItem('boar-island-aim',aimSens);}catch{}label();};document.querySelector('.menu-links').append(b);}
+-function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
++function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('כלי נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
+ function buildCompactHud(){
+   $('game').classList.add('hudv21');
+   weaponBtn=document.createElement('button');weaponBtn.id='weapon-btn';weaponBtn.type='button';weaponBtn.setAttribute('aria-label','החלפת נשק');
+@@ -66,7 +66,7 @@ function buildCompactHud(){
+ function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCache[current],s=wstate[current];weaponBtn.querySelector('.wicon').textContent=w.icon;weaponBtn.querySelector('.wname').textContent=w.short;
+   if(!ws||!s)return;const bar=weaponBtn.querySelector('.wbar');
+   if(ws.mode==='heat'){weaponBtn.querySelector('.wammo').textContent=s.overheated?'מתקרר':`חום ${Math.round(s.heat)}%`;bar.style.width=`${s.heat}%`;bar.style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';}
+-  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוען':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
++  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוענים':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
+   weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
+ function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
+ function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
+@@ -246,7 +246,7 @@ function init(){
+   if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
+   // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
+   // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
+-  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
++  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת קרובה לחזיר, היא עוזרת לכוון לעיניים שלו. היא עוקבת אחריו כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
+   if(QA)installQA();
+   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
+   islandFrame=requestAnimationFrame(frame);
+@@ -767,7 +767,7 @@ function beginWave(){
+   perk=selectedPerk;selectedPerk='';plan=wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
+   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
+   $('battle-hint').hidden=wave>2;
+-  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
++  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'מכוונים בג׳ויסטיק משמאל · יורים בכפתור הימני':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
+   weatherKind=waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
+   announce(`גל ${String(wave).padStart(2,'0')}`,plan.some(p=>isBoss(p.kind))?'פלישת בוס · החזיקו את קו ההגנה':waveHint(wave));sfx.play('start');
+   const wk=weatherKind;if(wk!=='clear')later(3.4,()=>{if(mode==='battle'&&weatherKind===wk)toast(`${WEATHER[wk].name} · ${WEATHER[wk].rule}`);});
+@@ -868,7 +868,7 @@ function updateHud(){
+     if(ws.mode==='heat'){$('heat-fill').parentElement.hidden=false;$('heat-fill').style.width=`${s.heat}%`;$('heat-fill').style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';$('heat-text').textContent=s.overheated?'מתקרר…':furyTimer>0?'כוח אש פעיל':`חום ${Math.round(s.heat)}%`;$('ammo-pips').replaceChildren();panel.classList.remove('reloading');}
+     else{$('heat-fill').parentElement.hidden=s.reload<=0;$('heat-fill').style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:0}%`;$('heat-fill').style.background='#ffb067';$('heat-text').textContent=s.reload>0?'טוען…':`${s.ammo} / ${ws.mag}`;panel.classList.toggle('reloading',s.reload>0);
+       const pips=$('ammo-pips');if(pips.childElementCount!==ws.mag)pips.replaceChildren(...Array.from({length:ws.mag},()=>document.createElement('i')));[...pips.children].forEach((p,i)=>p.classList.toggle('empty',i>=s.ammo));}
+-    for(const b of $('weapons').children){const k=b.dataset.key,ws2=wsCache[k],s2=wstate[k];if(!save.weapons[k]||!s2)continue;b.querySelector('small').textContent=ws2.mode==='mag'?(s2.reload>0?'טוען':`${s2.ammo}/${ws2.mag}`):(s2.overheated?'חם':`${Math.round(s2.heat)}%`);}
++    for(const b of $('weapons').children){const k=b.dataset.key,ws2=wsCache[k],s2=wstate[k];if(!save.weapons[k]||!s2)continue;b.querySelector('small').textContent=ws2.mode==='mag'?(s2.reload>0?'טוענים':`${s2.ammo}/${ws2.mag}`):(s2.overheated?'חם':`${Math.round(s2.heat)}%`);}
+   }
+   $('rocket-cd').textContent=rocketCooldown>0?`${Math.ceil(rocketCooldown)} שנ׳`:'מוכן';$('frost-cd').textContent=frostCooldown>0?`${Math.ceil(frostCooldown)} שנ׳`:'מוכן';$('rocket').disabled=rocketCooldown>0;$('frost').disabled=frostCooldown>0;
+   $('rocket').querySelector('i').style.width=`${(1-rocketCooldown/st.rocketCd)*100}%`;$('frost').querySelector('i').style.width=`${(1-frostCooldown/st.frostCd)*100}%`;
+@@ -881,7 +881,7 @@ function updateHud(){
+ function openShop(from){
+   shopFrom=from;selectedPerk='';setMode('shop');refreshWeaponCache();
+   $('shop-title').textContent=from==='win'?`גל ${wave} הושלם`:'מוסך החוף';$('shop-eyebrow').textContent=from==='win'?'החוף שלנו · לעת עתה':'חוזרים לקרב חזקים יותר';
+-  $('shop-subtitle').textContent=from==='win'?`בחרו שדרוגים ויתרון לגל ${save.nextWave}.`:'נשקים ושדרוגים קבועים ונשמרים במכשיר הזה.';
++  $('shop-subtitle').textContent=from==='win'?`בחרו שדרוגים ויתרון לגל ${save.nextWave}.`:'כלי הנשק והשדרוגים נשמרים במכשיר הזה.';
+   $('wave-stats').hidden=from!=='win';if(from==='win'){const acc=roundShots?Math.round(roundHits/roundShots*100):0;$('wave-stats').innerHTML=`<div><b>${killed}</b><small>רובוטים הופלו</small></div><div><b>${acc}%</b><small>דיוק</small></div><div><b>${roundCrits}</b><small>פגיעות בעין</small></div><div><b>+${roundCoins}</b><small>מטבעות</small></div><div><b>${Math.round(damageTaken)}</b><small>נזק שספגנו</small></div>`;}
+   $('perk-section').hidden=from!=='win';$('next-wave').textContent=`לגל ${save.nextWave} ←`;$('shop-back').hidden=from==='win';
+   if(from==='win'){const choices=[...PERKS].sort(()=>Math.random()-.5).slice(0,3);$('perks').replaceChildren();for(const p of choices){const b=document.createElement('button');b.className='perk';b.innerHTML=`<strong>${p.name}</strong><small>${p.desc}</small>`;b.onclick=()=>{selectedPerk=p.id;for(const c of $('perks').children)c.classList.toggle('selected',c===b);$('shop-message').textContent=`${p.name} פעיל בגל הבא`;$('next-wave').disabled=false;};$('perks').append(b);}$('next-wave').disabled=true;$('shop-message').textContent='בחרו יתרון אחד כדי להמשיך';}
+@@ -894,7 +894,7 @@ function renderShop(){
+   const wg=$('weapon-grid');wg.replaceChildren();const maxDps=320;
+   for(const k of WEAPON_ORDER){const w=WEAPONS[k],lv=save.weapons[k],cost=weaponCost(save,k);const ws=weaponStats(save,k);const dps=Math.round(sustainedDps(ws,st.cooling));const hit=Math.round(ws.damage*ws.pellets);
+     const card=document.createElement('article');card.className='weapon-card'+(lv?'':' locked');
+-    const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'דרגה מרבית':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
++    const gate=weaponLocked(save,k)&&lv===0,max=weaponMax(),label=lv>=max?'הרמה הגבוהה ביותר':gate?`נפתח אחרי ${WEAPONS[w.prev].name} דרגה ${max}`:lv===0?`פתיחה · ${cost} ◆`:`שדרוג לדרגה ${lv+1} · ${cost} ◆`;
+     card.innerHTML=`<span class="wicon">${w.icon}</span><h3>${w.name}<small>${lv?`דרגה ${lv} / ${max}`:'נעול'}</small></h3><p>${w.desc}${PHONE_FIX_F&&fam(k)==='mg'?' כל דרגת נשק מפחיתה התחממות ב־4%.':''}</p>
+       <div class="wstats"><span>נזק לשנייה</span><div class="bar"><i style="width:${Math.min(100,dps/maxDps*100)}%"></i></div><span>נזק לירייה</span><div class="bar"><i style="width:${Math.min(100,hit/250*100)}%"></i></div><span>${w.mode==='mag'?`מחסנית ${ws.mag}`:'התחממות'}</span><div class="bar"><i style="width:${w.mode==='mag'?Math.min(100,ws.mag/10*100):Math.min(100,ws.heatPerShot*ws.rate/40*100)}%"></i></div></div>
+       <button ${lv>=max||gate||save.coins<cost?'disabled':''}>${label}</button>`;
+diff --git a/workout/island/minigames/boar-island/index.html b/workout/island/minigames/boar-island/index.html
+index 7a43878..34e79c5 100644
+--- a/workout/island/minigames/boar-island/index.html
++++ b/workout/island/minigames/boar-island/index.html
+@@ -2,15 +2,15 @@
+ <html lang="he" dir="rtl">
+ <head>
+   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+-  <meta name="theme-color" content="#102731"><meta name="description" content="הגנו על האי מפני פלישת חזירים רובוטיים. משחק ירי תלת ממדי עם ארבעה נשקים, גלי אויבים, בוסים ושדרוגים.">
++  <meta name="theme-color" content="#102731"><meta name="description" content="הגנו על האי מפני פלישת חזירים רובוטיים. משחק ירי תלת ממדי עם כלי נשק שמשתדרגים, גלי אויבים וארבעה בוסים.">
+   <title>אי החזירים — הגנת החווה</title><link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+   <main id="game" data-mode="menu" aria-label="אי החזירים — הגנת החווה">
+-    <canvas id="scene" tabindex="0" aria-label="זירת המשחק. כוונו בעכבר ולחצו לירי. 1 עד 4 החלפת נשק, R טעינה, Q טיל, E הקפאה, רווח כוח אש, P השהיה."></canvas>
++    <canvas id="scene" tabindex="0" aria-label="זירת המשחק. כוונו בעכבר ולחצו לירי. בחירת נשק במקשים 1 עד 9 או בגלגלת, R טעינה, Q טיל, E הקפאה, רווח כוח אש, P השהיה."></canvas>
+     <div class="vignette" aria-hidden="true"></div><div id="damage-flash" aria-hidden="true"></div><div id="frost-veil" aria-hidden="true"></div>
+     <header id="hud">
+-      <div class="hud-top"><div class="brand"><span class="brand-icon">◈</span><div><strong>אי החזירים</strong><small>ISLAND DEFENSE</small></div></div><div class="top-controls"><button id="sound" class="icon-btn" aria-label="כיבוי צליל" title="צליל">♫</button><button id="pause" class="icon-btn" aria-label="השהיה" title="השהיה (P)">Ⅱ</button><button id="fullscreen" class="icon-btn" aria-label="מסך מלא" title="מסך מלא">⛶</button></div></div>
++      <div class="hud-top"><div class="brand"><span class="brand-icon">◈</span><div><strong>אי החזירים</strong><small>הגנת האי</small></div></div><div class="top-controls"><button id="sound" class="icon-btn" aria-label="כיבוי צליל" title="צליל">♫</button><button id="pause" class="icon-btn" aria-label="השהיה" title="השהיה (P)">Ⅱ</button><button id="fullscreen" class="icon-btn" aria-label="מסך מלא" title="מסך מלא">⛶</button></div></div>
+       <div class="combat-hud"><div class="health-block"><div><span>הגנת האי</span><b id="hp-text">100 / 100</b></div><div class="bar health"><i id="hp-fill"></i></div></div><div class="wave-block"><small>הגל הנוכחי</small><b id="wave">01</b><span id="progress">מוכנים לפלישה</span></div><div class="coin-block"><span class="coin">◆</span><b id="coins">250</b><small>מטבעות</small></div></div>
+     </header>
+     <div id="enemy-labels" aria-hidden="true"></div><div id="crosshair" aria-hidden="true"><span></span><i></i><b></b><em></em></div><div id="hit-marker" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+@@ -20,11 +20,11 @@
+       <div class="ammo-panel"><div><small id="weapon-name">מקלע חוף · דרגה 1</small><strong id="heat-text">מוכן לירי</strong></div><div class="bar heat"><i id="heat-fill"></i></div><div id="ammo-pips" class="ammo-pips"></div></div>
+       <div id="weapons" class="weapons" role="toolbar" aria-label="בחירת נשק"></div>
+       <div class="abilities"><button id="rocket" class="ability"><kbd>Q</kbd><span class="ability-icon">↗</span><strong>מטח טילים</strong><small id="rocket-cd">מוכן</small><i></i></button><button id="frost" class="ability"><kbd>E</kbd><span class="ability-icon">❄</span><strong>גל הקפאה</strong><small id="frost-cd">מוכן</small><i></i></button><button id="fury" class="ability fury"><kbd>רווח</kbd><span class="ability-icon">ϟ</span><strong>כוח אש</strong><small id="fury-text">0%</small><i></i></button></div>
+-      <div class="battle-hint" id="battle-hint">כוונו בעכבר · החזיקו לחיצה לירי <span>1–4 נשק · R טעינה · Q טילים · E הקפאה · P השהיה</span></div>
++      <div class="battle-hint" id="battle-hint">כוונו בעכבר · החזיקו לחיצה לירי <span>1–9 או גלגלת לבחירת נשק · R טעינה · Q טילים · E הקפאה · P השהיה</span></div>
+     </div>
+     <section id="menu" class="overlay menu-screen">
+-      <div class="menu-content"><div class="eyebrow"><span></span> קו ההגנה האחרון של האי</div><h1>אי <span>החזירים</span></h1><p class="subtitle">הגנת החווה</p><div class="menu-line"></div><p class="intro">הם באים מהים. הם עשויים מברזל.<br>ואת היבול שלנו הם לא יקבלו.</p><div class="menu-actions"><button id="start" class="primary">הגנו על האי <span>←</span></button><button id="garage" class="secondary">מוסך ונשקים <span>⚙</span></button></div><div class="menu-meta"><span>◈ גוף ראשון</span><span>ϟ ארבעה נשקים</span><span>♛ שני בוסים</span><span>⚓ כרישים, מנטות וסרטנים</span></div><div class="menu-links"><button id="help" class="text-btn">איך משחקים?</button><button id="quality" class="text-btn">איכות גרפיקה</button></div><p class="save-note" id="save-note">ההתקדמות נשמרת אוטומטית במכשיר הזה</p></div>
+-      <div class="sector-tag"><span>SECTOR 01 / TROPICAL COAST</span><b>חוף הדקלים</b><small>זוהתה תנועה באופק ●</small></div><div class="version">BOAR ISLAND · V0.4.2</div>
++      <div class="menu-content"><div class="eyebrow"><span></span> קו ההגנה האחרון של האי</div><h1>אי <span>החזירים</span></h1><p class="subtitle">הגנת החווה</p><div class="menu-line"></div><p class="intro">הם באים מהים. הם עשויים מברזל.<br>ואת היבול שלנו הם לא יקבלו.</p><div class="menu-actions"><button id="start" class="primary">הגנו על האי <span>←</span></button><button id="garage" class="secondary">מוסך ונשקים <span>⚙</span></button></div><div class="menu-meta"><span>◈ גוף ראשון</span><span>ϟ כלי נשק שמשתדרגים</span><span>♛ ארבעה בוסים</span><span>⚓ כרישים, מנטות וסרטנים</span></div><div class="menu-links"><button id="help" class="text-btn">איך משחקים?</button><button id="quality" class="text-btn">איכות גרפיקה</button></div><p class="save-note" id="save-note">ההתקדמות נשמרת אוטומטית במכשיר הזה</p></div>
++      <div class="sector-tag"><span>אזור 1 · חוף הדקלים</span><b>חוף הדקלים</b><small>זוהתה תנועה באופק ●</small></div><div class="version">BOAR ISLAND · V0.4.2</div>
+     </section>
+     <section id="shop" class="overlay panel-screen" hidden><div class="panel shop-panel"><div class="panel-heading"><div><div class="eyebrow" id="shop-eyebrow">חוזרים לקרב חזקים יותר</div><h2 id="shop-title">מוסך החוף</h2><p id="shop-subtitle">שדרגו את הנשקים ואת ההגנה לפני הגל הבא.</p></div><span class="shop-wallet">◆ <b id="shop-coins">250</b></span></div>
+       <div id="wave-stats" class="wave-stats" hidden></div>
+@@ -34,7 +34,12 @@
+       <div class="shop-footer"><span id="shop-message">כל שדרוג נשמר אוטומטית</span><button id="next-wave" class="primary">יוצאים לקרב ←</button><button id="shop-back" class="secondary">חזרה</button></div></div></section>
+     <section id="pause-screen" class="overlay panel-screen" hidden><div class="panel small-panel"><div class="eyebrow">נשימה לפני המטח הבא</div><h2>האי מחכה לכם</h2><p>הקרב מושהה.</p><button id="resume" class="primary">ממשיכים בקרב ←</button><button id="exit" class="secondary">חזרה לבסיס</button></div></section>
+     <section id="gameover" class="overlay panel-screen" hidden><div class="panel small-panel"><div class="eyebrow">החזירים פרצו את ההגנה</div><h2>נחזור חזקים יותר</h2><p id="result"></p><button id="retry" class="primary">ניסיון נוסף ←</button><button id="death-shop" class="secondary">שדרגו במוסך</button></div></section>
+-    <section id="help-screen" class="overlay panel-screen" hidden><div class="panel small-panel help-panel"><div class="eyebrow">תדריך קצר</div><h2>החוף בידיים שלכם</h2><p>כוונו בעכבר והחזיקו לחיצה כדי לירות. בטלפון: מניחים אצבע בכל מקום וגוררים, הכוונת זזה יחד עם האצבע בלי שהאצבע תסתיר את המטרה. אפשר לכוון גם עם החצים ולירות עם F.</p><p><b>1–4 / גלגלת</b>: החלפת נשק. <b>R</b>: טעינה מחדש.<br><b>Q / מטח טילים</b>: פיצוץ באזור הכוונת.<br><b>E / הקפאה</b>: מאטה את כל הפלישה.<br><b>רווח / כוח אש</b>: כשהמד מלא, ירי כפול בלי התחממות.<br><b>P / השהיה</b>: עוצר את הקרב.</p><p>העיניים הזוהרות הן נקודת התורפה: פגיעה בהן כפולה. שריון מחזיר ניצוצות ובולע נזק, פיצוצים חודרים אותו. פגזי מרגמה וטורפדו אפשר להפיל לפני שהם מגיעים. מה שמתחת למים לא נפגע, אז מחכים שהכריש יעלה. הצבת הגדולה של סרטן המצור בולעת כדורים, אז מכוונים לעיניים שעל הגבעולים או יורים פגז. מנטה שמאדימה צוללת אל העמדה, ויורים בה מיד. בגל 5 מגיע מלך הברזל, בגל 10 ספינת הכוורת.</p><button id="help-close" class="primary">הבנתי, מוכנים ←</button></div></section>
++    <section id="help-screen" class="overlay panel-screen" hidden><div class="panel small-panel help-panel"><div class="eyebrow">תדריך קצר</div><h2>החוף בידיים שלכם</h2><p>כוונו בעכבר והחזיקו לחיצה כדי לירות. בטלפון: מניחים אצבע בכל מקום וגוררים, הכוונת זזה יחד עם האצבע בלי שהאצבע תסתיר את המטרה. אפשר לכוון גם עם החצים ולירות עם F.</p><p><b>1 עד 9 או גלגלת</b>: בחירת נשק. <b>R</b>: טעינה מחדש.<br><b>Q / מטח טילים</b>: פיצוץ באזור הכוונת.<br><b>E / הקפאה</b>: מאטה את כל הפלישה.<br><b>רווח / כוח אש</b>: כשהמד מלא, ירי כפול בלי התחממות.<br><b>P / השהיה</b>: עוצר את הקרב.</p><p>מכוונים לעיניים הזוהרות. פגיעה בהן חזקה פי שניים.
++שריון מחליש פגיעות של כדורים. פיצוצים חודרים אותו.
++אפשר לפגוע בפגזי מרגמה ובטורפדו לפני שהם מגיעים לחוף. מחכים שהכריש יעלה מעל המים לפני שיורים בו.
++מול סרטן המצור מכוונים לעיניים או משתמשים בפגז. הצבת שלו חוסמת כדורים.
++מנטה אדומה עומדת לצלול לעמדה. יורים בה לפני הצלילה.
++בגל 5 מגיע מלך הברזל. בגל 10 מגיעה ספינת הכוורת.</p><button id="help-close" class="primary">הבנתי, מוכנים ←</button></div></section>
+     <section id="error-screen" class="overlay panel-screen" hidden><div class="panel small-panel"><h2>התלת־ממד לא נטען</h2><p id="error-message">נסו לרענן ולוודא שהדפדפן תומך ב־WebGL.</p><button onclick="location.reload()" class="primary">טעינה מחדש</button></div></section>
+   </main><script type="module" src="game.js"></script>
+ </body></html>
+diff --git a/workout/island/minigames/boar-island/source.json b/workout/island/minigames/boar-island/source.json
+index 3f8c703..8764aec 100644
+--- a/workout/island/minigames/boar-island/source.json
++++ b/workout/island/minigames/boar-island/source.json
+@@ -70,5 +70,9 @@
+     "source": "https://github.com/google/fonts/tree/main/ofl/heebo",
+     "license": "OFL-1.1",
+     "sha256": "18f930b583fa8fe6b40b2f8263b7ac6afbac07adc91a12467874e7467d3ace30"
++  },
++  "localizedSha256": {
++    "index.html": "9d31afdc3de96d83d9902b3467509b6dbc91a589a3b8b11b64a2692344c65f2d",
++    "core.mjs": "bb2ca38f4ab3bb30bbeea9af9e638733ff2ad332d9d4ee2cba43580193b9b5ee"
+   }
+ }
+diff --git a/workout/island/minigames/catch-arsenal-hud.mjs b/workout/island/minigames/catch-arsenal-hud.mjs
+index 614d83d..eff58cd 100644
+--- a/workout/island/minigames/catch-arsenal-hud.mjs
++++ b/workout/island/minigames/catch-arsenal-hud.mjs
+@@ -8,8 +8,8 @@
+ import {STRINGS as TOOL_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-18';
+
+ export const STRINGS = Object.freeze({...TOOL_STRINGS,
+-  'catch.fire': 'ירי', 'catch.fireHint7': 'ירי בכלי שנבחר', 'catch.ammo7': 'נשאר: {count}', 'catch.reticle7': 'אזור המטרה של הכלי',
+-  'catch.lockHint7': 'מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי', 'catch.hitChance': 'סיכוי לפגיעה {percent}%',
++  'catch.fire': 'ירי', 'catch.fireHint7': 'ירי בכלי שנבחר', 'catch.ammo7': 'מלאי: {count}', 'catch.reticle7': 'אזור המטרה של הכלי',
++  'catch.lockHint7': 'מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי', 'catch.hitChance': 'סיכוי לפגיעה {percent}%',
+ });
+ const SVG = 'http://www.w3.org/2000/svg';
+ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+diff --git a/workout/island/minigames/catch-assist.mjs b/workout/island/minigames/catch-assist.mjs
+index 2d5e07a..934ca72 100644
+--- a/workout/island/minigames/catch-assist.mjs
++++ b/workout/island/minigames/catch-assist.mjs
+@@ -25,7 +25,7 @@ const DEG = 180 / Math.PI;
+ export const pick = (arr, stage) => Array.isArray(arr) ? arr[clamp(stage, 1, 10) - 1] ?? arr[arr.length - 1] : arr;
+
+ export const STRINGS = Object.freeze({
+-  'catch.assist.lead': 'לשם הוא רץ', 'catch.assist.lock': 'נעול', 'catch.assist.close': 'זמן קרוב',
++  'catch.assist.lead': 'לשם הוא רץ', 'catch.assist.lock': 'נעול', 'catch.assist.close': 'הילוך איטי',
+ });
+
+ /** The v7 levels for the throw engine: the v6 overrides plus a larger catch zone and the extra throws. */
+diff --git a/workout/island/minigames/catch-fire-hud.mjs b/workout/island/minigames/catch-fire-hud.mjs
+index 2b8cd1e..0019971 100644
+--- a/workout/island/minigames/catch-fire-hud.mjs
++++ b/workout/island/minigames/catch-fire-hud.mjs
+@@ -6,7 +6,7 @@
+
+ export const STRINGS = Object.freeze({
+   'catch.fire': 'ירי', 'catch.fireHint': 'ירי לגלגל של הרכב הנמלט', 'catch.ammo': 'כדורים: {count}',
+-  'catch.lockHint': 'כשהכוונת ירוקה לוחצים ירי', 'catch.reloading': 'טוען', 'catch.reticle': 'כוונת על הרכב הנמלט',
++  'catch.lockHint': 'כשהכוונת ירוקה לוחצים ירי', 'catch.reloading': 'טוענים', 'catch.reticle': 'כוונת על הרכב הנמלט',
+   'catch.hitChance': 'סיכוי לפגיעה {percent}%',
+ });
+ const SVG = 'http://www.w3.org/2000/svg';
+diff --git a/workout/island/minigames/catch-session6.mjs b/workout/island/minigames/catch-session6.mjs
+index dc0e72d..b8d11e1 100644
+--- a/workout/island/minigames/catch-session6.mjs
++++ b/workout/island/minigames/catch-session6.mjs
+@@ -42,13 +42,13 @@ const ICONS = {
+   turnL: '<path d="M14 5 7 12l7 7M7 12h11"/>', turnR: '<path d="m10 5 7 7-7 7M17 12H6"/>',
+ };
+ const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS, ...WEAPON_STRINGS,
+-  'catch.help7.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.',
+-  'catch.help7.4': 'יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.',
+-  'catch.help8.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.',
++  'catch.help7.2': 'אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי: ירי לגלגל, רשת דבק, קוצים, גל חשמלי או סימון למעקב. מכניסים את הנקודה לעיגול שעל הרכב. כשהעיגול ירוק, לוחצים ירי. כל פגיעה ממלאת את מד הנזק. כשהמד מלא, הרכב נעצר.',
++  'catch.help7.4': 'מספר הזריקות מוגבל, וצריך לפגוע כמה פעמים. מכוונים קרוב לפושע כדי לקבל עזרה בכיוון. הוא מאט לרגע. העיגול המקווקו מראה לאן הוא רץ.',
++  'catch.help8.2': 'אפשר לירות מההתחלה. מחליפים כלי בכפתור הכלי. העיגול מראה את המטרה: הגלגל, הגג, הכביש לפני הרכב, הרכב כולו או תא המטען. מכניסים את הנקודה לעיגול. כשהעיגול ירוק, לוחצים ירי. עיגול אפור מסביר למה אי אפשר לירות כרגע.',
+   'catch.pop.nitro': 'ניטרו', 'catch.pop.nearBonus': 'עקיפה צמודה, עוד ניטרו', 'catch.pop.crimOil': 'הוא החליק על השמן', 'catch.pop.block': 'מחסום משטרה, נשאר נתיב אחד',
+   'catch.help6.1': 'מתחילים במרדף: גוררים ימינה ושמאלה כדי להטות את ההגה, ובפניות מחזיקים לכיוון הפנייה. טורבו ובלם בימין.',
+   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
+-  'catch.help6.3': 'הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.',
++  'catch.help6.3': 'הפושע בורח ברגל. מחזיקים כדי למתוח את הרשת. גוררים כדי לכוון ומשחררים כדי לזרוק.',
+   'catch.help6.4': 'יש כמה זריקות, וצריך כמה פגיעות מדויקות כדי לתפוס. הרוח דוחפת את הרשת הצידה, והחץ למעלה מראה לאן.',
+   'catch.bend': 'פנייה', 'catch.lock': 'כוונת', 'catch.pop.nearMiss': 'עקיפה צמודה',
+ };
+diff --git a/workout/island/minigames/catch-weapons.mjs b/workout/island/minigames/catch-weapons.mjs
+index 7979a99..649eaf3 100644
+--- a/workout/island/minigames/catch-weapons.mjs
++++ b/workout/island/minigames/catch-weapons.mjs
+@@ -61,14 +61,14 @@ const DEG = 180 / Math.PI;
+
+ export const STRINGS = Object.freeze({
+   'catch.weapon': 'כלי', 'catch.weapon.next': 'החלפת כלי, עכשיו {name}',
+-  'catch.weapon.tyres': 'פנצ׳ר', 'catch.weapon.net': 'רשת דבק', 'catch.weapon.spikes': 'קוצים', 'catch.weapon.emp': 'פולס', 'catch.weapon.mark': 'סימון',
++  'catch.weapon.tyres': 'ירי לגלגל', 'catch.weapon.net': 'רשת דבק', 'catch.weapon.spikes': 'קוצים', 'catch.weapon.emp': 'גל חשמלי', 'catch.weapon.mark': 'סימון למעקב',
+   'catch.weapon.tyres.hint': 'מכוונים לגלגל האחורי', 'catch.weapon.net.hint': 'מכוונים לגג, הרשת תוקעת את המנוע', 'catch.weapon.spikes.hint': 'נוסעים בנתיב שלו, הקוצים נוחתים לפניו',
+-  'catch.weapon.emp.hint': 'מתקרבים ממש, הפולס עוצר את הרכב לרגע', 'catch.weapon.mark.hint': 'מסמנים את תא המטען, המסוק עוקב אחריו',
+-  'catch.damage7': 'נזק לרכב', 'catch.pop.down': 'הרכב נפל, הפושע בורח ברגל',
++  'catch.weapon.emp.hint': 'מתקרבים מאוד. הגל החשמלי עוצר את הרכב לרגע', 'catch.weapon.mark.hint': 'מסמנים את תא המטען, המסוק עוקב אחריו',
++  'catch.damage7': 'נזק לרכב', 'catch.pop.down': 'הרכב נעצר. הפושע בורח ברגל',
+   'catch.pop.net': 'רשת דבק על הגג, המנוע נתקע', 'catch.pop.spikesOut': 'קוצים על הכביש', 'catch.pop.spikes': 'עלה על הקוצים',
+-  'catch.pop.spikesMiss': 'הוא עקף את הקוצים', 'catch.pop.emp': 'פולס, הרכב נעצר לרגע', 'catch.pop.mark': 'מסומן, המסוק עוקב',
+-  'catch.pop.close': 'זמן קרוב, הוא מאט', 'catch.pop.toolMiss': 'החטאה, מתקרבים ומנסים שוב', 'catch.pop.toolEmpty': 'אין עוד, מחליפים כלי',
+-  'catch.chase.down': 'הרכב נפל, הפושע בורח ברגל. זריקות: {throws}',
++  'catch.pop.spikesMiss': 'הוא עקף את הקוצים', 'catch.pop.emp': 'גל חשמלי. הרכב נעצר לרגע', 'catch.pop.mark': 'מסומן, המסוק עוקב',
++  'catch.pop.close': 'הילוך איטי. הפושע מאט', 'catch.pop.toolMiss': 'החטאה, מתקרבים ומנסים שוב', 'catch.pop.toolEmpty': 'הכלי התרוקן. מחליפים כלי',
++  'catch.chase.down': 'הרכב נעצר. הפושע בורח ברגל. זריקות: {throws}',
+   // v8: what each tool aims at (under the ring), why a tap did not fire, and the switch line
+   'catch.target.tyres': 'גלגל', 'catch.target.net': 'גג', 'catch.target.spikes': 'הכביש לפניו', 'catch.target.emp': 'כל הרכב', 'catch.target.mark': 'תא המטען',
+   'catch.range.far': 'רחוק מדי', 'catch.range.near': 'קרוב מדי', 'catch.range.side': 'לא בקו', 'catch.range.behind': 'הוא מאחוריך',
+diff --git a/workout/island/minigames/hoops-controls.mjs b/workout/island/minigames/hoops-controls.mjs
+index 523e724..c759976 100644
+--- a/workout/island/minigames/hoops-controls.mjs
++++ b/workout/island/minigames/hoops-controls.mjs
+@@ -31,7 +31,7 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
+  const all=['shoot','pass','move','fake','block','steal','switch','sprint','timeout'];
+  for(const key of all){
+   const host=node('div','hoops-control-host hoops-host-'+key);
+-  const render={label:key==='move'?'תרגיל':key==='fake'?'פייק':key==='sprint'?'ריצה':label(key),icon:HUD_ICONS[key],disabled:false,loading:false,charge:0,visible:true};
++  const render={label:key==='move'?'תרגיל':key==='fake'?'הטעיה':key==='sprint'?'סיבולת':label(key),icon:HUD_ICONS[key],disabled:false,loading:false,charge:0,visible:true};
+   const hud=createActionButton(host,{primary:key==='shoot'||key==='block',label:render.label,icon:render.icon,initial:render});
+   const button=host.children[0];button.classList.add('hoops-action','hoops-'+key);if(key==='timeout')button.classList.add('hoops-small');
+   button.type='button';button.dataset.gameControl=key;button.dataset.hoopsControl=key;
+@@ -222,8 +222,8 @@ export function createHoopsControls({root,doc=root.ownerDocument,icons,labels={}
+    record.host.hidden=!visible.includes(record.key);
+    const icon=record.key==='move'?'cross':record.key==='shoot'&&mode==='offense'?'jump':record.key;
+    const text=record.key==='shoot'&&mode==='offense'?label('jump'):record.key==='pass'&&mode==='offense'?label('callForBall'):label(record.key);
+-   record.baseLabel=source?.label||(record.key==='move'?'תרגיל':record.key==='fake'?'פייק':record.key==='sprint'?'ריצה':text);
+-   if(record.role==='fake')record.baseLabel='פייק';record.ariaLabel=record.key==='pass'&&record.role==='pass'&&(mode==='ball'||mode==='inbound')?'מסירה קצרה בנגיעה; החזקה למסירה רחוקה':record.key==='move'&&mode==='ball'?label('move'):source?.aria_label||text;
++   record.baseLabel=source?.label||(record.key==='move'?'תרגיל':record.key==='fake'?'הטעיה':record.key==='sprint'?'סיבולת':text);
++   if(record.role==='fake')record.baseLabel='הטעיה';record.ariaLabel=record.key==='pass'&&record.role==='pass'&&(mode==='ball'||mode==='inbound')?'מסירה קצרה בנגיעה; החזקה למסירה רחוקה':record.key==='move'&&mode==='ball'?label('move'):source?.aria_label||text;
+    record.render.icon=source?.hud_kit.update.icon||HUD_ICONS[record.key];record.button.dataset.action=icon;renderRecord(record);
+   }
+   help.hidden=mode!=='ball'&&mode!=='inbound';sprintVisual();layout();
+diff --git a/workout/island/minigames/hoops-roles.mjs b/workout/island/minigames/hoops-roles.mjs
+index 594e28f..f6ddaaf 100644
+--- a/workout/island/minigames/hoops-roles.mjs
++++ b/workout/island/minigames/hoops-roles.mjs
+@@ -1,5 +1,5 @@
+ /** Basketball position profiles are derived for a match; saved ratings stay untouched. */
+-export const POSITION_NAMES=Object.freeze({PG:'פוינט גארד',SG:'שוטינג גארד',SF:'סמול פורוורד',PF:'פאוור פורוורד',C:'סנטר'});
++export const POSITION_NAMES=Object.freeze({PG:'רכז',SG:'קלע',SF:'קיצוני',PF:'שחקן פנים',C:'סנטר'});
+ export const ABILITY_NAMES=Object.freeze({shooting:'קליעה',dunk:'הטבעה',rebound:'ריבאונד',defense:'הגנה',passing:'מסירה',speed:'מהירות'});
+ const FOCUS=Object.freeze({
+  PG:{speed:1.06,pass:1.1,handle:1.06,three:1.01,dunk:.86,rebound:.88,block:.85},
+diff --git a/workout/island/minigames/naval-hud.mjs b/workout/island/minigames/naval-hud.mjs
+index 5a809e7..a3b55b3 100644
+--- a/workout/island/minigames/naval-hud.mjs
++++ b/workout/island/minigames/naval-hud.mjs
+@@ -6,9 +6,9 @@ const TAU=Math.PI*2;
+ const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
+ const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+ const translated=(t,key,fallback)=>{const value=t?.(key);return value&&value!==key?value:fallback;};
+-const feedbackCopy={hit:'פגיעה במטרה',miss:'פספוס · הקדימו מטרה נעה',damage:'נפגענו · המשיכו לשוט',evaded:'הירי חלף לידנו',mine:'מוקש נפרס בנתיב',repair:'גוף הספינה תוקן',full:'גוף הספינה כבר מלא',resupply:'מלאי הפגזים חודש'};
+-const objectiveCopy={fleet:'הטביעו את כל הצי',flagship:'הטביעו את ספינת הדגל',intercept:'יירטו את סירות האגף',subhunt:'הטביעו את הצוללות'};
+-const weaponHints=['ירי מהיר · הקדימו מטרה נעה','עוקב אחרי היעד · גם בצלילה','על פני המים · טוב מקרוב','נפרס בכוונת · חוסם נתיב','שלושה פגזים · מכסה שטח','מתקן רבע גוף · ללא ירי'];
++const feedbackCopy={hit:'פגיעה במטרה',miss:'פספוס · מכוונים לפני הספינה הנעה',damage:'נפגענו · המשיכו לשוט',evaded:'הירי חלף לידנו',mine:'מוקש נפרס בנתיב',repair:'גוף הספינה תוקן',full:'הספינה כבר מתוקנת',resupply:'מלאי הפגזים חודש'};
++const objectiveCopy={fleet:'הטביעו את כל הצי',flagship:'הטביעו את ספינת הדגל',intercept:'עוצרים את הסירות שבצדדים',subhunt:'הטביעו את הצוללות'};
++const weaponHints=['ירי מהיר · מכוונים לפני המטרה הנעה','עוקב אחרי היעד · גם בצלילה','על פני המים · טוב מקרוב','נפרס בכוונת · חוסם נתיב','שלושה פגזים · מכסה שטח','מחזיר רבע ממד החיים של הספינה · ללא ירי'];
+ function clippedText(p,text,x,y,maxWidth){let copy=String(text);while(copy.length>1&&p.measureText(copy).width>maxWidth)copy=copy.slice(0,-2)+'…';p.fillText(copy,x,y);}
+ function panel(p,x,y,w,h,r=12){p.beginPath();p.roundRect(x,y,w,h,r);p.fill();}
+ function glass(p,x,y,w,h,r=12){p.fillStyle='#092a3ce0';panel(p,x,y,w,h,r);p.strokeStyle='#d3e4df36';p.lineWidth=1;p.stroke();p.strokeStyle='#d8bd7a55';p.beginPath();p.moveTo(x+r,y+.5);p.lineTo(x+w-r,y+.5);p.stroke();}
+@@ -31,7 +31,7 @@ function drawDanger(p,marks,time,width,height){
+   for(const mark of marks){
+     p.save();p.strokeStyle=mark.incoming?'#ffad76':'#ffc27b';p.fillStyle='#f39a4d12';p.lineWidth=1.5;p.globalAlpha=.75+Math.sin(time*7)*.15;p.beginPath();for(let i=0;i<mark.points.length;i++){const q=mark.points[i];if(i)p.lineTo(q.x,q.y);else p.moveTo(q.x,q.y);}p.closePath();p.fill();p.stroke();
+     const {x,y}=mark.q;p.beginPath();p.moveTo(x-4,y);p.lineTo(x+4,y);p.moveTo(x,y-3);p.lineTo(x,y+3);p.stroke();p.globalAlpha=1;
+-    const bx=clamp(x,30,width-30),by=clamp(y-25,99,height-131);p.fillStyle='#3d2c1ff0';panel(p,bx-22,by-10,44,19,5);p.strokeStyle='#ffc27b88';p.lineWidth=.8;p.stroke();p.fillStyle='#ffce99';p.font='bold 10px sans-serif';p.direction='ltr';p.textAlign='center';p.fillText((mark.incoming?'↓ ':'! ')+mark.seconds.toFixed(1)+'s',bx,by+3);p.restore();
++    const bx=clamp(x,30,width-30),by=clamp(y-25,99,height-131);p.fillStyle='#3d2c1ff0';panel(p,bx-22,by-10,44,19,5);p.strokeStyle='#ffc27b88';p.lineWidth=.8;p.stroke();p.fillStyle='#ffce99';p.font='bold 10px sans-serif';p.direction='ltr';p.textAlign='center';p.fillText((mark.incoming?'↓ ':'◆ ')+mark.seconds.toFixed(1)+'s',bx,by+3);p.restore();
+   }
+ }
+
+diff --git a/workout/island/minigames/racing-league-core.mjs b/workout/island/minigames/racing-league-core.mjs
+index 3480240..da33ab5 100644
+--- a/workout/island/minigames/racing-league-core.mjs
++++ b/workout/island/minigames/racing-league-core.mjs
+@@ -132,7 +132,7 @@ export const UPGRADES = Object.freeze({
+   tires: { name: 'צמיגים', perLevel: 0.03, key: 'grip', cap: 1.16 },
+   steering: { name: 'היגוי', perLevel: 0.02, key: 'steer', cap: 1.12 },
+   brakes: { name: 'בלמים', perLevel: 0.05, key: 'brakes', cap: 1.3 },
+-  aero: { name: 'אירו', perLevel: 0.04, key: 'aero', cap: 1.25 },
++  aero: { name: 'כנפיים', perLevel: 0.04, key: 'aero', cap: 1.25 },
+   // racing-deep-m6: ERS (equipment.nitro in racing-physics: a bigger store, cheaper use, a bigger harvest cap). Optional in the save: normalizeLeague adds level 0.
+   ers: { name: 'ERS', perLevel: 0.03, key: 'nitro', cap: 1.16 }
+ });
+diff --git a/workout/island/minigames/racing-pit-ui.mjs b/workout/island/minigames/racing-pit-ui.mjs
+index 97703e9..754200d 100644
+--- a/workout/island/minigames/racing-pit-ui.mjs
++++ b/workout/island/minigames/racing-pit-ui.mjs
+@@ -6,19 +6,19 @@ const phoneFixDEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?
+ const ICONS=new URL('../assets/racing-pit-v1/icons/',import.meta.url),icon=name=>new URL(name+'.svg',ICONS).href;
+ /** the wear step of the icon: 0 = new .. 3 = worn (the package's thresholds: a quarter of the tyre each) */
+ export const wearStep=tyre=>Math.max(0,Math.min(3,Math.floor((1-Math.max(0,Math.min(1,Number.isFinite(tyre)?tyre:1)))*4)));
+-const PHASE_TEXT={entry:'כניסה לפיטס',lane:'נתיב הפיטס',stop:'עצירה',change:'מחליפים צמיגים',leave:'יציאה מהפיטס',exit:'חזרה למסלול'};
++const PHASE_TEXT={entry:'כניסה לעצירת צמיגים',lane:'נתיב עצירת הצמיגים',stop:'עצירה',change:'מחליפים צמיגים',leave:'יציאה מעצירת הצמיגים',exit:'חזרה למסלול'};
+ // racing-v24.1 (`auto`, the model's pit.auto): the button shows the automatic stop from the start of its lap (state 'auto', pulsing: Roy did not notice the v24
+ // stop coming), and a tap on it, or on a stop asked by hand, cancels (onCancel) until the car is committed to the entry (then it hides, like during the stop)
+ // racing-v24.4 (changeButton:false, the session's default unless ?racingPitSeq=0; Roy: "remove the change button"): the stop has no tap, so the big button is never
+ // created; the crew changes the wheels by itself and the toast says so
+ export function createPitUi({stage,controls,document:doc=stage.ownerDocument,onRequest,onTap,onCancel,auto=false,changeButton=true,signal,phoneFix=phoneFixDEnabled()}){
+  const node=(tag,cls,text='')=>{const n=doc.createElement(tag);n.className=cls;n.textContent=text;return n;};
+- const meter=node('div','racing-tyres');meter.setAttribute('role','meter');meter.setAttribute('aria-label','בלאי צמיגים');meter.setAttribute('aria-valuemin','0');meter.setAttribute('aria-valuemax','100');
++ const meter=node('div','racing-tyres');meter.setAttribute('role','meter');meter.setAttribute('aria-label','שחיקת הצמיגים');meter.setAttribute('aria-valuemin','0');meter.setAttribute('aria-valuemax','100');
+  const ring=doc.createElement('img');ring.className='racing-tyre-icon';ring.alt='';ring.setAttribute('aria-hidden','true');ring.src=icon('tire_wear_0');ring.draggable=false;let step=0;
+  const bar=node('span','racing-tyre-bar'),fill=node('i','racing-tyre-fill'),value=node('bdi','racing-tyre-value','100%');bar.append(fill);meter.append(ring,bar,value);stage.append(meter);
+- const button=node('button','racing-pit-button');button.type='button';button.dataset.action='racing-pit';button.dataset.state='idle';button.setAttribute('aria-label','כניסה לפיטס להחלפת צמיגים');
++ const button=node('button','racing-pit-button');button.type='button';button.dataset.action='racing-pit';button.dataset.state='idle';button.setAttribute('aria-label','כניסה לעצירת צמיגים להחלפת צמיגים');
+  const pitIcon=doc.createElement('img');pitIcon.className='racing-pit-icon';pitIcon.alt='';pitIcon.setAttribute('aria-hidden','true');pitIcon.src=icon('pit_entry');pitIcon.draggable=false;
+- const label=node('span','racing-pit-label','פיטס'),sub=node('small','racing-pit-sub','');button.append(pitIcon,label,sub);if(!(phoneFix&&auto))controls.append(button);
++ const label=node('span','racing-pit-label','צמיגים'),sub=node('small','racing-pit-sub','');button.append(pitIcon,label,sub);if(!(phoneFix&&auto))controls.append(button);
+  const change=node('button','racing-pit-change');change.type='button';change.dataset.action='racing-pit-change';change.hidden=true;change.setAttribute('aria-label','החלפת צמיגים');
+  const changeIcon=doc.createElement('img');changeIcon.className='racing-pit-change-icon';changeIcon.alt='';changeIcon.setAttribute('aria-hidden','true');changeIcon.src=icon('wheel_change');changeIcon.draggable=false;
+  const changeText=node('strong','racing-pit-change-text','החלפת צמיגים'),changeHint=node('small','racing-pit-change-hint','לחצו'),progress=node('span','racing-pit-progress'),progressFill=node('i','racing-pit-progress-fill');progress.append(progressFill);change.append(changeIcon,changeText,changeHint,progress);if(changeButton)controls.append(change);
+@@ -33,18 +33,18 @@ export function createPitUi({stage,controls,document:doc=stage.ownerDocument,onR
+   const phase=p.pit?.phase||'',last=p.lap>=state.laps,done=(p.pits||0)>0&&!p.pit;
+   const st=phase||(auto&&p.pitGo&&p.pitRequest)?'busy':done?'done':last?'last':p.pitRequest?(auto&&p.pitAuto?'auto':'requested'):'idle';
+   if(st!==lastState){lastState=st;button.dataset.state=st;button.hidden=st==='busy'||st==='done'||st==='last';sub.textContent=st==='auto'?'אוטומטי · לביטול':st==='requested'?(auto?'בהקפה הזו · לביטול':'בהקפה הזו'):'';
+-   button.setAttribute('aria-label',st==='auto'?'פיטס אוטומטי בסוף ההקפה, לחיצה מבטלת':st==='requested'&&auto?'פיטס בסוף ההקפה, לחיצה מבטלת':'כניסה לפיטס להחלפת צמיגים');}
++   button.setAttribute('aria-label',st==='auto'?'עצירת צמיגים אוטומטית בסוף ההקפה, לחיצה מבטלת':st==='requested'&&auto?'עצירת צמיגים בסוף ההקפה, לחיצה מבטלת':'כניסה לעצירת צמיגים להחלפת צמיגים');}
+   meter.dataset.pit=phase?'1':'0';
+   change.hidden=!changeButton||!(phase==='stop'||phase==='change');change.dataset.phase=phase;
+   if(phase==='change'){const P=p.pit;changeText.textContent='מחליפים צמיגים';changeHint.textContent='';progressFill.style.transform=`scaleX(${Math.min(1,(P.t||0)/(P.dur||2))})`;}
+   else if(phase==='stop'){changeText.textContent='החלפת צמיגים';changeHint.textContent='לחצו';progressFill.style.transform='scaleX(0)';}
+  }
+  /** a toast line for a pit event of the player's car (null: nothing to say) */
+- function toast(e){if(e.car!=='player')return null;if(e.type==='pitIn')return PHASE_TEXT.entry;if(e.type==='pitChange'&&!changeButton)return PHASE_TEXT.change;if(e.type==='pitDone')return 'צמיגים חדשים';if(e.type==='pitRequest'&&e.auto)return auto?'בסוף ההקפה: פיטס אוטומטי להחלפת צמיגים':'בסוף ההקפה: פיטס להחלפת צמיגים';if(e.type==='pitCancel')return 'הפיטס בוטל';return null;}
++ function toast(e){if(e.car!=='player')return null;if(e.type==='pitIn')return PHASE_TEXT.entry;if(e.type==='pitChange'&&!changeButton)return PHASE_TEXT.change;if(e.type==='pitDone')return 'צמיגים חדשים';if(e.type==='pitRequest'&&e.auto)return auto?'בסוף ההקפה: עצירת צמיגים אוטומטית להחלפת צמיגים':'בסוף ההקפה: עצירת צמיגים להחלפת צמיגים';if(e.type==='pitCancel')return 'עצירת הצמיגים בוטלה';return null;}
+  /** the timing tower: a "פיטס" tag instead of the gap for every car in the pit lane */
+  function markTower(state){
+   const rows=stage.querySelectorAll?.('.rt-row');if(!rows||!rows.length)return;const inPit=new Map(state.cars.filter(c=>c.pit).map(c=>[c.id,c.pit.phase]));
+-  for(const r of rows){const ph=inPit.get(r.dataset.id);if(ph){r.dataset.pit='1';const g=r.querySelector('.rt-gap');if(g&&g.textContent!=='פיטס')g.textContent='פיטס';}else if(r.dataset.pit)delete r.dataset.pit;}
++  for(const r of rows){const ph=inPit.get(r.dataset.id);if(ph){r.dataset.pit='1';const g=r.querySelector('.rt-gap');if(g&&g.textContent!=='צמיגים')g.textContent='צמיגים';}else if(r.dataset.pit)delete r.dataset.pit;}
+  }
+  return {update,toast,markTower,phaseText:phase=>PHASE_TEXT[phase]||'',dispose(){meter.remove();button.remove();change.remove();}};
+ }
+diff --git a/workout/island/minigames/racing-session.mjs b/workout/island/minigames/racing-session.mjs
+index 0e15fa7..9fb6f49 100644
+--- a/workout/island/minigames/racing-session.mjs
++++ b/workout/island/minigames/racing-session.mjs
+@@ -83,7 +83,7 @@ export function runRacingSession(ctx){
+   if(lastRank&&s.rank<lastRank&&s.phase==='racing'){const passed=s.cars.find(c=>c.rank===s.rank+1&&!c.isPlayer),dx=passed?passed.x-p.x:0,dz=passed?passed.z-p.z:0;audio.event?.('pass',passed?{pan:Math.max(-1,Math.min(1,(dx*-Math.cos(p.heading)+dz*Math.sin(p.heading))/4)),rpm:passed.rpm,speed:passed.speed,mine:p.speed}:{});}lastRank=s.rank;
+  pitUi?.update(s);
+   lapInfo.textContent=p.lapTimes.length?`אחרונה ${fmt(p.lapTimes[p.lapTimes.length-1])} · שיא ${fmt(bestLap)}`:(bestLap?`שיא ${fmt(bestLap)}`:'');draftBadge.hidden=!(p.draft>.15);draftBadge.style.opacity=String(Math.min(1,.4+p.draft));countdown.hidden=Boolean(bc)||s.phase!=='countdown';countdown.textContent=Math.ceil(s.countdown)||'';hint.hidden=s.time>4.5;screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
+-  for(const e of s.events){if(e.car!=='player')continue;if(e.type==='crash'){audio.event?.('crash',e);view.kick?.(1);try{navigator.vibrate?.(60);}catch{}}else if(e.type==='wall'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='post'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='bump'){audio.event?.('bump',e);if(v24.bump==='v24'){view.kick?.(.15+.45*(e.intensity||0));try{navigator.vibrate?.(Math.round(12+28*(e.intensity||0)));}catch{}}}else if(/^pit/.test(e.type)){const line=pitUi?.toast(e);if(line){toastText=line;messageUntil=s.time+(e.type==='pitRequest'&&e.auto&&model.pit?.auto?3:1.8);}if(['pitStop','pitChange','pitDone'].includes(e.type))audio.event?.('pit',{...e,seconds:p.pit?.dur||2,seq:!!model.pit?.seq});}else if(e.type==='crashRecover'){audio.event?.('crashRecover',e);if(e.reason==='offtrack'){toastText=t('racing.recover');messageUntil=s.time+1.6;}}else if(e.type==='ersFull'){toastText='ERS מלא';messageUntil=s.time+1.2;try{navigator.vibrate?.(14);}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
++  for(const e of s.events){if(e.car!=='player')continue;if(e.type==='crash'){audio.event?.('crash',e);view.kick?.(1);try{navigator.vibrate?.(60);}catch{}}else if(e.type==='wall'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='post'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='bump'){audio.event?.('bump',e);if(v24.bump==='v24'){view.kick?.(.15+.45*(e.intensity||0));try{navigator.vibrate?.(Math.round(12+28*(e.intensity||0)));}catch{}}}else if(/^pit/.test(e.type)){const line=pitUi?.toast(e);if(line){toastText=line;messageUntil=s.time+(e.type==='pitRequest'&&e.auto&&model.pit?.auto?3:1.8);}if(['pitStop','pitChange','pitDone'].includes(e.type))audio.event?.('pit',{...e,seconds:p.pit?.dur||2,seq:!!model.pit?.seq});}else if(e.type==='crashRecover'){audio.event?.('crashRecover',e);if(e.reason==='offtrack'){toastText=t('racing.recover');messageUntil=s.time+1.6;}}else if(e.type==='ersFull'){toastText='ERS מלא';messageUntil=s.time+1.2;try{navigator.vibrate?.(14);}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט':'מסלול בוסט';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
+   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;
+   if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
+    // racing-deep-fable (Roy, v21 phone: "finished track 2, it froze with engine noise after showing first place"): the engine falls silent at the finish,
+diff --git a/workout/island/minigames/soccer-r241.mjs b/workout/island/minigames/soccer-r241.mjs
+index 02f3e57..d983462 100644
+--- a/workout/island/minigames/soccer-r241.mjs
++++ b/workout/island/minigames/soccer-r241.mjs
+@@ -76,7 +76,7 @@ export const SOCCER_AIR_V241=Object.freeze({
+   altGrace:.2,
+ });
+ /** Labels and icons the buttons show (the session owns the DOM). */
+-export const SOCCER_AIR_LABELS=Object.freeze({volley:'עף',header:'נגיחה',scissor:'מספרת'});
++export const SOCCER_AIR_LABELS=Object.freeze({volley:'בעיטת עף',header:'נגיחה',scissor:'מספרת'});
+ /** The two ways to meet the high ball, from where each action can meet it (`meets`: the earliest point of its height band he can reach):
+  *  - he can reach it at scissor height: a high ball, the header first and the scissor kick second ("אם המסירה גבוהה גם לעשות מספרת");
+  *  - he can head it from chest height up: the header first and the volley second ("גם כאשר יש הגבהה והיא לא גבוהה אפשר גם במקום לנגוח ... לבעוט");
+diff --git a/workout/island/minigames/soccer-session.mjs b/workout/island/minigames/soccer-session.mjs
+index fe3b9f6..32aeee2 100644
+--- a/workout/island/minigames/soccer-session.mjs
++++ b/workout/island/minigames/soccer-session.mjs
+@@ -171,7 +171,7 @@ export function startSoccer(ctx) {
+       // Full match: the referee lets play go on after a foul (Law 5); the free kick comes back only if the ball is lost within a few seconds.
+       if(event.type==='advantage'){feedback.textContent='יתרון · ממשיכים';feedback.dataset.action='advantage';feedback.hidden=false;feedbackTime=1.6;return;}
+       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
+-      if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial]+'!';feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
++      if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial];feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
+       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
+       if(!key)return;
+       // Ordinary AI touches stay quiet; the selected player's actions get a cue.
+diff --git a/workout/island/minigames/tennis-callouts.mjs b/workout/island/minigames/tennis-callouts.mjs
+index 0355c20..7dbdc05 100644
+--- a/workout/island/minigames/tennis-callouts.mjs
++++ b/workout/island/minigames/tennis-callouts.mjs
+@@ -1,6 +1,6 @@
+ /** Tennis v24.4 line calls (Roy, 18/11/2026, after v24.3 on the phone: "if it is out, a shout of OUT; if it is stuck in the net, NET").
+  * No callout package exists from Codex (codex/tennis-callouts-v1 is not on origin), so both parts are made here:
+- *  - the sign: the v24.1 out plate at the top centre now carries a big call word ("OUT!" / "NET!") next to the Codex tennis-ui-v2 symbol
++ *  - the sign: the v24.1 out plate at the top centre now carries a big call word ("OUT" / "NET") next to the Codex tennis-ui-v2 symbol
+  *    (fx-out.svg: the red X, fx-net.svg: the ball in the net, CC0, copied to assets/tennis-ui-v2), for 1.5 s, on a serve fault and on a rally point;
+  *  - the shout: a short line judge's call synthesised with Web Audio (no recording, no speech engine, works offline): a sawtooth voice whose
+  *    pitch falls like a shout, through three formant band-passes that glide through the vowel ("aa-oo" for OUT, "e" for NET, with a nasal
+@@ -10,7 +10,7 @@ const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}ca
+ export function tennisCalloutsEnabled(search=globalThis.location?.search||''){return param('tennisCallouts',search)!=='0';}
+ /** Which call a new fault mark makes: 'out' | 'net' | null (only out and net are called). */
+ export function calloutFor(mark){return mark?.reason==='out'||mark?.reason==='net'?mark.reason:null;}
+-export const CALL_WORD=Object.freeze({out:'OUT!',net:'NET!'});
++export const CALL_WORD=Object.freeze({out:'OUT',net:'NET'});
+ export const CALL_SECONDS=1.5;
+ /** The voice of one call: f0 [start, end] Hz, formants [[from, to, bandwidth, gain]...], vowel seconds, a nasal start (seconds), the "t" burst. */
+ export const VOICES=Object.freeze({
+diff --git a/workout/island/minigames/ultra-alien-feedback.mjs b/workout/island/minigames/ultra-alien-feedback.mjs
+index 9b72189..41d36a4 100644
+--- a/workout/island/minigames/ultra-alien-feedback.mjs
++++ b/workout/island/minigames/ultra-alien-feedback.mjs
+@@ -2,7 +2,7 @@ import {drawV10Pickup} from './alien-v10-draw.mjs';
+ const TAU=Math.PI*2;
+ const clamp=(n,lo=0,hi=1)=>Math.max(lo,Math.min(hi,Number.isFinite(n)?n:lo));
+ export const ALIEN_PICKUPS=Object.freeze([
+- Object.freeze({id:'spread',label:'ירי מפוזר',color:'#88e7be'}),
++ Object.freeze({id:'spread',label:'ירי מניפה',color:'#88e7be'}),
+  Object.freeze({id:'laser',label:'לייזר חודר',color:'#77e9ff'}),
+  Object.freeze({id:'rapid',label:'ירי מהיר',color:'#ffd17b'}),
+  Object.freeze({id:'shield',label:'מגן אור',color:'#8dbdff'}),
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 9005675..1a9cc77 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -180,9 +180,14 @@ export class ActivityInterface {
+     const list=el('div','equipment-list');
+     for(const [key,track]of Object.entries(this.data.config.minigames[id].equipment)){
+       const rank=this.engine.state.minigameEquipment[id][key],offer=equipmentOffer(this.engine.state,this.data,id,key),row=el('article','equipment-row');
+-      const buy=button(this.t(offer.cost!==undefined?'equipment.buy':'equipment.owned',{title:this.t(track.title),level:offer.rank||rank,cost:offer.cost}),'equipment-buy',()=>{
++      const title=this.t(track.title),hasUpgrade=offer.cost!==undefined;
++      const price=hasUpgrade?offer.cost.toLocaleString('he-IL'):undefined;
++      const buy=button(this.t(hasUpgrade?'equipment.buyShort':'equipment.ownedShort',{cost:price}),'equipment-buy',()=>{
+         const result=this.activity.upgrade(id,key);if(result.ok){this.equipment(id);this.ui.toast('equipment.bought');}else this.ui.result(result);
+-      });buy.dataset.track=key;buy.disabled=!offer.ok;row.append(buy,el('p','',this.t(track.description)));
++      });
++      buy.setAttribute('aria-label',this.t(hasUpgrade?'equipment.buy':'equipment.owned',{title,level:offer.rank??rank,cost:price}));
++      buy.dataset.track=key;buy.disabled=!offer.ok;
++      row.append(el('h3','',this.t('equipment.nameRank',{title,level:rank})),buy,el('p','',this.t(track.description)));
+       if(!offer.ok&&offer.reason==='reason.money')row.append(el('p','',this.t(offer.reason)));
+       if(offer.stars>this.engine.state.minigameProgress[id].stars.reduce((sum,n)=>sum+n,0))row.append(el('p','',this.t('equipment.locked',{stars:offer.stars})));
+       list.append(row);
+@@ -420,7 +425,7 @@ export class ActivityInterface {
+   racingLeagueScreen(kind,result){
+     this.leagueModule().then(m=>{
+       const dialog=this.modal('minigame.islandRacing.title','minigame.subtitle');dialog.dataset.racingLeagueScreen=kind;
+-      const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
++      const titles={season:'ליגת המרוצים · עונה וטבלה',shop:'ליגת המרוצים · שדרוג הרכב',result:'ליגת המרוצים · תוצאת המרוץ'};
+       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
+       const again={engine:this.engine,...this.leagueActions()};
+       const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
+diff --git a/workout/island/ui/alpine-league.mjs b/workout/island/ui/alpine-league.mjs
+index aebd6d9..5e92325 100644
+--- a/workout/island/ui/alpine-league.mjs
++++ b/workout/island/ui/alpine-league.mjs
+@@ -25,7 +25,7 @@ export function ensureStyle(root = document.head) {
+   const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-18', import.meta.url).href; root.append(link);
+ }
+ const accent = (node, themeId) => { node.style.setProperty('--al-accent', THEME_LOOKS[themeId]?.accent || '#3f8f5a'); node.dataset.theme = themeId; return node; };
+-function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `${count} כוכבים מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }
++function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `כוכבים: ${count} מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }
+ function chip(id) { const c = el('span', 'al-chip'); c.style.background = colorOf(id); c.setAttribute('aria-hidden', 'true'); return c; }
+
+ /** The five stages of a theme as big buttons: global stage number, name, stars; locked ones are disabled. */
+@@ -35,7 +35,7 @@ function stageStrip(engine, sum, themeIndex, go) {
+     const n = theme.from + k, info = stageInfo(n), best = engine.alpineLeague.stage(n)?.best, open = n <= sum.stage, item = el('li', 'al-stage');
+     item.dataset.n = String(n); item.dataset.state = best?.stars ? 'done' : open ? 'next' : 'locked'; if (info.boss) item.dataset.boss = 'true';
+     const b = button('', 'alpine-league-stage', () => go(n), 'al-stage-button'); b.disabled = !open; b.dataset.n = String(n);
+-    b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, ${best?.stars || 0} כוכבים` : ', נעול'}`);
++    b.setAttribute('aria-label', `שלב ${info.number}${info.boss ? ', שלב בוס' : ''}${open ? `, כוכבים: ${best?.stars || 0}` : ', נעול'}`);
+     b.append(el('span', 'al-stage-no', String(info.number)), el('span', 'al-stage-name', info.boss ? 'בוס' : `שלב ${info.index}`), open ? starsRow(best?.stars || 0) : el('span', 'al-lock', 'נעול'));
+     if (best?.ms) b.append(el('small', 'al-stage-best', clock(best.ms)));
+     item.append(b); list.append(item);
+@@ -47,7 +47,7 @@ function themeChips(sum, shown, pick) {
+   const row = el('div', 'al-themes'); row.setAttribute('role', 'tablist');
+   for (const t of sum.themes) {
+     const c = button('', 'alpine-league-theme', () => pick(t.index), 'al-theme'); accent(c, t.id); c.disabled = !t.open; c.setAttribute('role', 'tab'); c.setAttribute('aria-selected', String(t.index === shown)); c.dataset.index = String(t.index);
+-    c.append(el('b', '', t.name), el('small', '', t.open ? `${t.totalStars}/15 כוכבים${t.result?.rank === 1 ? ' · גביע' : ''}` : 'נעול'));
++    c.append(el('b', '', t.name), el('small', '', t.open ? `כוכבים: ${t.totalStars}/15${t.result?.rank === 1 ? ' · גביע' : ''}` : 'נעול'));
+     row.append(c);
+   }
+   return row;
+@@ -69,10 +69,10 @@ export function leagueCard({engine, go, season, shop, refresh}) {
+   ensureStyle();
+   const sum = engine.alpineLeague.summary(), root = el('section', 'al-card'); root.dataset.alpineLeague = 'true'; accent(root, sum.theme.id);
+   let shown = sum.complete ? THEMES.length : Math.ceil(sum.stage / PER_THEME);
+-  const head = el('div', 'al-head'), coins = el('span', 'al-coins'); coins.append(num(sum.coins), ' מטבעות ליגה');
++  const head = el('div', 'al-head'), coins = el('span', 'al-coins'); coins.append('מטבעות ליגה: ', num(sum.coins));
+   head.append(el('h3', '', `ליגת הסקי · שלבים ${BASE_STAGES + 1} עד ${BASE_STAGES + STAGE_COUNT}`), coins);
+   const started = sum.table.some(r => r.points > 0);
+-  const status = el('p', 'al-line', `${sum.theme.name} · ${started ? `מקום ${sum.place} בטבלה` : 'העונה מתחילה'} · ${sum.totalStars} כוכבים מתוך ${sum.maxStars}${sum.cups ? ` · גביעים: ${sum.cups}` : ''}`);
++  const status = el('p', 'al-line', `${sum.theme.name} · ${started ? `מקום ${sum.place} בטבלה` : 'העונה מתחילה'} · כוכבים: ${sum.totalStars} מתוך ${sum.maxStars}${sum.cups ? ` · גביעים: ${sum.cups}` : ''}`);
+   const stripHost = el('div', 'al-strip-host');
+   const draw = () => { stripHost.replaceChildren(stageStrip(engine, sum, shown, go)); chips.replaceWith(chips = themeChips(sum, shown, pick)); };
+   const pick = i => { shown = i; draw(); };
+@@ -103,7 +103,7 @@ export function seasonBody({engine, go, refresh}) {
+   for (const t of sum.themes) {
+     const li = el('li', 'al-theme-row'); accent(li, t.id); li.dataset.open = String(t.open);
+     const res = t.result ? `מקום ${t.result.rank} בעונה${t.result.rank === 1 ? ' · גביע' : ''} · פרס ${t.result.prize}` : t.live ? 'העונה עכשיו' : t.open ? 'פתוחה' : 'נעולה';
+-    li.append(el('strong', '', `${t.name} · שלבים ${t.numbers[0]} עד ${t.numbers[1]}`), el('span', '', t.line), el('em', '', `${res} · ${t.totalStars}/15 כוכבים`)); themes.append(li);
++    li.append(el('strong', '', `${t.name} · שלבים ${t.numbers[0]} עד ${t.numbers[1]}`), el('span', '', t.line), el('em', '', `${res} · כוכבים: ${t.totalStars}/15`)); themes.append(li);
+   }
+   root.append(el('h4', '', 'שש העונות'), themes);
+   root.append(el('p', 'al-line', `נקודות לפי מקום: ${POINTS.join(' · ')}. בשלב בוס הנקודות כפולות. הטבלה מתעדכנת פעם אחת בכל שלב, במרוץ שפתח את השלב הבא.`),
+@@ -124,7 +124,7 @@ export function shopBody({engine, refresh}) {
+     const pips = el('span', 'al-pips'); pips.setAttribute('role', 'img'); pips.setAttribute('aria-label', `רמה ${level} מתוך ${MAX_LEVEL}`); for (let i = 0; i < MAX_LEVEL; i++) pips.append(el('i', i < level ? 'on' : ''));
+     const gain = Math.round((eq[spec.key] - 1) * 100), what = el('span', 'al-part-what', spec.what); if (gain) { const g = el('bdi', 'al-gain', `+${gain}%`); g.dir = 'ltr'; what.append(' · ', g); }
+     const cost = level >= MAX_LEVEL ? null : GEAR_COST[level];
+-    const buy = button(cost === null ? 'רמה מקסימלית' : `שדרוג ב-${cost}`, 'alpine-league-buy', () => { const r = engine.alpineLeague.buy(key); if (r.ok) refresh(); else note.textContent = r.reason === 'coins' ? `חסרים ${r.need} מטבעות לשדרוג הזה` : 'אי אפשר לשדרג עכשיו'; }, 'primary-button');
++    const buy = button(cost === null ? 'הרמה הגבוהה ביותר' : `שדרוג ב-${cost}`, 'alpine-league-buy', () => { const r = engine.alpineLeague.buy(key); if (r.ok) refresh(); else note.textContent = r.reason === 'coins' ? `מטבעות שחסרים לשדרוג: ${r.need}` : 'אי אפשר לשדרג עכשיו'; }, 'primary-button');
+     buy.dataset.part = key; buy.disabled = cost === null || l.coins < cost;
+     row.append(el('strong', 'al-part-name', spec.name), pips, what, buy); root.append(row);
+   }
+@@ -140,7 +140,7 @@ export function resultBody({engine, result, summary, go, again, season, shop}) {
+   const medal = el('div', 'al-medal', String(r.place)); medal.dataset.place = String(r.place); medal.setAttribute('aria-label', `מקום ${r.place}`);
+   const top = el('div', 'al-result-top'), headline = el('div');
+   headline.append(el('h4', '', r.passed ? (r.firstPass && r.n < STAGE_COUNT ? `עברתם את שלב ${info.number}. שלב ${engineStageOf(r.n + 1)} נפתח` : `עברתם את שלב ${info.number}`) : `שלב ${info.number} עוד לא עבר. ${r.completed ? `צריך מקום ${info.targetRank} ומעלה` : 'לא הגעתם לקו הסיום'}`),
+-    starsRow(r.stars, `${r.stars} כוכבים מתוך 3`));
++    starsRow(r.stars, `כוכבים: ${r.stars} מתוך 3`));
+   top.append(medal, headline); root.append(top);
+   const goals = el('ul', 'al-goal-check'); goals.setAttribute('aria-label', 'היעדים');
+   for (const g of r.goals) {
+@@ -160,7 +160,7 @@ export function resultBody({engine, result, summary, go, again, season, shop}) {
+     const box = el('section', 'al-podium'); box.dataset.seasonPodium = String(r.season.theme);
+     box.append(el('h4', '', `סיום העונה: ${THEMES[r.season.theme - 1].name}`));
+     const row = el('div', 'al-podium-row'); [r.season.podium[1], r.season.podium[0], r.season.podium[2]].forEach((id, k) => { if (!id) return; const place = [2, 1, 3][k], step = el('div', 'al-step place-' + place); if (id === 'player') step.classList.add('you'); step.append(chip(id), el('span', '', nameOf(id)), el('b', '', String(place))); row.append(step); });
+-    box.append(row, el('p', 'al-line al-big', r.season.cup ? 'אתם האלופים של העונה. גביע' : `סיימתם את העונה במקום ${r.season.rank}`), el('p', 'al-line', `פרס עונה: +${r.season.prize} מטבעות`));
++    box.append(row, el('p', 'al-line al-big', r.season.cup ? 'אתם האלופים של העונה. גביע' : `סיימתם את העונה במקום ${r.season.rank}`), el('p', 'al-line', `מטבעות מפרס העונה: +${r.season.prize}`));
+     root.append(box);
+   }
+   const actions = el('div', 'al-actions');
+diff --git a/workout/island/ui/city-access.mjs b/workout/island/ui/city-access.mjs
+index 07ab505..a4deaf6 100644
+--- a/workout/island/ui/city-access.mjs
++++ b/workout/island/ui/city-access.mjs
+@@ -22,8 +22,8 @@ export class CityAccess{
+     this.tourButton=button('לטיול','city-tour',()=>{this.mapPanel.hidden=true;this.mapButton.setAttribute('aria-expanded','false');this.ui.cancelPlacement();this.ui.closeInfo();this.ui.closeDetails();this.ui.setDockOpen(false);this.ui.view.setTour(!this.ui.view.touring);this.render();},'city-map-button');
+     const zoom=node('div','city-zoom');for(const [label,factor,name]of [['+',1.25,'התקרבות'],['−',.8,'התרחקות']]){const b=button(label,'city-zoom-'+(factor>1?'in':'out'),()=>ui.view.zoomCenter(factor),'city-map-button');b.setAttribute('aria-label',name);zoom.append(b);}
+     this.controls.append(this.mapButton,this.tourButton,zoom);ui.cameraControls.append(this.controls);
+-    this.rotateButton=button('סיבוב המפה בגרירה','city-rotate',()=>{ui.view.cameraMode=ui.view.cameraMode==='orbit'?'pan':'orbit';ui.view.setTour(false);ui.setMoreOpen(false);this.render();});ui.morePanel.append(this.rotateButton);
+-    this.cameraHelp=node('small','city-camera-help','גרירה או חצים לתנועה · +/− לזום');ui.morePanel.append(this.cameraHelp);
++    this.rotateButton=button('סיבוב המפה','city-rotate',()=>{ui.view.cameraMode=ui.view.cameraMode==='orbit'?'pan':'orbit';ui.view.setTour(false);ui.setMoreOpen(false);this.render();});ui.morePanel.append(this.rotateButton);
++    this.cameraHelp=node('small','city-camera-help','גרירה או חצים לתנועה · +/− להתקרבות ולהתרחקות');ui.morePanel.append(this.cameraHelp);
+     this.panButton=button('חזרה לתנועה','city-pan-mode',()=>{ui.view.cameraMode='pan';this.render();},'city-map-button');this.panButton.hidden=true;this.controls.append(this.panButton);
+     this.mapPanel=node('aside','city-map-panel panel');this.mapPanel.id='city-map-panel';this.mapPanel.hidden=true;this.mapPanel.setAttribute('aria-label','מפת העיר');
+     const heading=node('div','city-map-heading');heading.append(node('strong','','לאן נלך?'),button('×','city-map-close',()=>this.toggleMap(false),'city-map-close'));heading.lastChild.setAttribute('aria-label','סגירת המפה');
+@@ -55,10 +55,10 @@ export class CityAccess{
+   }
+   render(){
+     this.controls.hidden=!this.ui.morePanel.hidden;
+-    const orbit=this.ui.view.cameraMode==='orbit';this.panButton.hidden=!orbit;this.rotateButton.setAttribute('aria-pressed',String(orbit));this.rotateButton.textContent=orbit?'תנועה במפה בגרירה':'סיבוב המפה בגרירה';
++    const orbit=this.ui.view.cameraMode==='orbit';this.panButton.hidden=!orbit;this.rotateButton.setAttribute('aria-pressed',String(orbit));this.rotateButton.textContent=orbit?'הזזת המפה':'סיבוב המפה';
+     const touring=Boolean(this.ui.view.touring),tourLabel=touring?'בטיול':'לטיול';if(this.tourButton.textContent!==tourLabel)this.tourButton.textContent=tourLabel;if(this.tourButton.getAttribute('aria-pressed')!==String(touring))this.tourButton.setAttribute('aria-pressed',String(touring));this.tourHint.hidden=!touring||this.ui.modalRoot.children.length>0;
+     this.followButton.hidden=!touring||this.ui.view.following;
+-    const message=this.ui.view.tourDestination?(this.ui.view.route.length?'בדרך! אפשר לגעת ברחוב ולשנות יעד':'הגענו! בחרו יעד נוסף בעיר'):'נוגעים ברחוב כדי לבחור לאן ללכת';if(this.tourText.textContent!==message)this.tourText.textContent=message;
++    const message=this.ui.view.tourDestination?(this.ui.view.route.length?'בדרך. אפשר לגעת ברחוב ולשנות יעד':'הגענו. בחרו יעד נוסף בעיר'):'נוגעים ברחוב כדי לבחור לאן ללכת';if(this.tourText.textContent!==message)this.tourText.textContent=message;
+     if(this.mapPanel.hidden)return;
+     const state=this.engine.state,signature=JSON.stringify([state.world.size,state.buildings.map(b=>[b.id,b.typeId,b.x,b.z])]);
+     if(signature!==this.mapSignature){this.mapSignature=signature;this.destinations.replaceChildren();const seen=new Set();for(const b of state.buildings){const type=this.ui.getBuilding(b.typeId);if(!type||type.isRoad||seen.has(b.typeId))continue;seen.add(b.typeId);this.destinations.append(button(`${type.icon} ${this.ui.label(type,'building')}`,'city-go-'+b.typeId,()=>{const [w,d]=type.footprint;this.goTo(b.x+(w-1)/2,b.z+(d-1)/2);}));}}
+diff --git a/workout/island/ui/city-depth.mjs b/workout/island/ui/city-depth.mjs
+index 497fad4..4e6300c 100644
+--- a/workout/island/ui/city-depth.mjs
++++ b/workout/island/ui/city-depth.mjs
+@@ -1,4 +1,4 @@
+-const resources = {food: 'מזון', materials: 'חומרים', energy: 'אנרגיה'};
++const resources = {food: 'אוכל', materials: 'חומרים', energy: 'אנרגיה'};
+ const number = value => value.toLocaleString('he-IL',{maximumFractionDigits:1});
+ const reasons = {'out-of-range': 'הבית מחוץ לטווח מגדל מים', capacity: 'המגדלים בטווח מלאים', disconnected: 'הבית אינו מחובר לרשת הכבישים', damaged: 'דרוש תיקון', 'max-tier': 'דרגת הייצור הגבוהה ביותר', money: 'אין מספיק מטבעות', 'port-unavailable': 'עדיין אין הזמנות חדשות', 'order-unavailable': 'המשלוח אינו זמין כרגע', 'goal-unavailable': 'היעד עדיין אינו מוכן', invalid: 'הפעולה אינה זמינה'};
+ const node = (tag, className, text) => {const n = document.createElement(tag); n.className = className; if (text != null) n.textContent = text; return n;};
+@@ -42,7 +42,7 @@ export class CityDepthInterface {
+       for (const slot of report.port.slots.filter(slot => slot.harborId === instance.id)) {
+         const order = node('div', 'city-order'); order.dataset.cityOrder = slot.id; order.dataset.state = slot.state;
+         order.append(node('p', '', `${resources[slot.resource]} × ${slot.amount} · תמורה ● ${slot.reward}`));
+-        if (slot.state === 'offered') order.append(this.action('שליחת משלוח', 'city-deliver', slot.deliverable, () => ui.engine.city.deliver(slot.id)), this.action('דילוג', 'city-skip', true, () => ui.engine.city.skip(slot.id)));
++        if (slot.state === 'offered') order.append(this.action('שליחה', 'city-deliver', slot.deliverable, () => ui.engine.city.deliver(slot.id)), this.action('דילוג', 'city-skip', true, () => ui.engine.city.skip(slot.id)));
+         else order.append(node('small', '', slot.state === 'delivered' ? 'המשלוח נשלח' : 'דילגנו על ההזמנה'));
+         panel.append(order);
+       }
+diff --git a/workout/island/ui/interface.mjs b/workout/island/ui/interface.mjs
+index d657d3f..0649e06 100644
+--- a/workout/island/ui/interface.mjs
++++ b/workout/island/ui/interface.mjs
+@@ -8,6 +8,8 @@ import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2
+ import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-18';
+ import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-18';
+
++import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-18';
++
+ const el = (tag, className = '', text = '') => {
+   const node = document.createElement(tag);
+   node.className = className;
+@@ -738,6 +740,7 @@ export class IslandInterface {
+     reset.onclick = () => this.showReset();
+     const controls = el('div', 'parent-controls'); controls.append(exportButton, importButton, copy, restart, edit, reset, file);
+     modal.append(controls, el('p', '', this.t('parent.importHint')), el('small', '', `${this.t('parent.version')} ${this.engine.state.version}`));
++    appendLoadReports(modal);
+     if (this.dev && this.data.featureFlags.devParts) {
+       const dev = button(this.t('dev.parts'), 'dev-parts', 'secondary-button');
+       dev.onclick = () => { window.islandApi.grantParts(this.data.world.partGroup, this.data.config.devGrantParts); this.toast('dev.granted'); };
+diff --git a/workout/island/ui/load-report.mjs b/workout/island/ui/load-report.mjs
+index 31febf0..f1e82d9 100644
+--- a/workout/island/ui/load-report.mjs
++++ b/workout/island/ui/load-report.mjs
+@@ -12,6 +12,7 @@ export function assetSources(entries=globalThis.performance?.getEntriesByType?.(
+   for(const entry of entries){let pathname;try{pathname=new URL(entry.name).pathname;}catch{continue;}if(!isManagedPath(pathname))continue;(entry.workerStart>0&&entry.transferSize===0?cache++:network++);}
+   return {cache,network};
+ }
++const reportName=game=>game==='offline'?'הורדה למכשיר':(OFFLINE_GAMES[game]||game);
+ const manualLines={};
+ /** A manual restart ("אתחול ידני N") goes into the stored report at once and into the next
+  * report this page writes for the game, because the restarted session overwrites it. */
+@@ -25,7 +26,7 @@ export const manualReportLines=game=>[...(manualLines[game]||[])];
+ export function saveGameReport(game,{status,ms,lines=[]}){
+   try{
+     const {cache,network}=assetSources();
+-    const head=[`${OFFLINE_GAMES[game]||game} · island ${DATA_VERSION} · ${new Date().toISOString()}`,`status ${status}${ms!==undefined?` · ${Math.round(ms)} ms`:''} · assets from device ${cache} · from network ${network}`,`screen ${globalThis.innerWidth}x${globalThis.innerHeight} @${globalThis.devicePixelRatio} · saveData ${Boolean(navigator.connection?.saveData)} · online ${navigator.onLine}`,`ua ${navigator.userAgent}`];
++    const head=[`${reportName(game)} · island ${DATA_VERSION} · ${new Date().toISOString()}`,`status ${status}${ms!==undefined?` · ${Math.round(ms)} ms`:''} · assets from device ${cache} · from network ${network}`,`screen ${globalThis.innerWidth}x${globalThis.innerHeight} @${globalThis.devicePixelRatio} · saveData ${Boolean(navigator.connection?.saveData)} · online ${navigator.onLine}`,`ua ${navigator.userAgent}`];
+     const text=[...head,...lines,...(manualLines[game]||[])].join('\n');store()?.setItem(reportKey(game),text);return text;
+   }catch{return null;}
+ }
+@@ -34,9 +35,15 @@ export const readGameReport=game=>{try{return store()?.getItem(reportKey(game))|
+ export function reportPanel(game,doc=document){
+   const text=readGameReport(game);if(!text)return null;
+   const details=doc.createElement('details');details.className='load-report';details.dataset.report=game;
+-  const summary=doc.createElement('summary');summary.textContent=`דוח הטעינה האחרון · ${OFFLINE_GAMES[game]||game}`;
++  const summary=doc.createElement('summary');summary.textContent=`דוח הטעינה האחרון · ${reportName(game)}`;
+   const copy=doc.createElement('button');copy.type='button';copy.className='secondary-button';copy.dataset.action='report-copy';copy.textContent='העתקה';
+   copy.addEventListener('click',()=>{navigator.clipboard?.writeText(text).then(()=>{copy.textContent='הועתק';},()=>{copy.textContent='בחרו את הטקסט והעתיקו';});});
+   const pre=doc.createElement('pre');pre.textContent=text;pre.dir='ltr';
+   details.append(summary,copy,pre);return details;
+ }
++export function appendLoadReports(parent) {
++  for(const game of ['offline',...Object.keys(OFFLINE_GAMES)]){
++    const report=reportPanel(game,parent.ownerDocument);
++    if(report)parent.append(report);
++  }
++}
+diff --git a/workout/island/ui/offline-panel.mjs b/workout/island/ui/offline-panel.mjs
+index 3644f7d..2a64c61 100644
+--- a/workout/island/ui/offline-panel.mjs
++++ b/workout/island/ui/offline-panel.mjs
+@@ -1,13 +1,13 @@
+ // The island's one download panel: "download all games to the device", progress,
+ // honest per-game status counted from the cache, a manual "check for update and
+-// download" and the last load report of each game with a copy button.
++// download". Technical reports are shown in the parent panel.
+ // Offline v25 (17/11/2026): a row per game package with its size, state (not on device /
+ // downloading / ready / update available), its own download and delete buttons, storage
+ // usage and quota with persistent storage, and "install the app". `?offlineV25=0` shows
+ // the v24 panel.
+ import {OFFLINE_GAMES,offlineStatus,downloadGames,checkAndDownload,offlineSupported,megabytes,v25On,deletePack,downloadBusy,persistStorage,storageInfo,loadManifest,pathsFor,bytesFor,prefetchRelease} from './offline.mjs';
+ import {installState,promptInstall,onInstallChange,INSTALL_TEXT} from './offline-install.mjs';
+-import {reportPanel} from './load-report.mjs';
++import {saveGameReport} from './load-report.mjs';
+ import {DATA_VERSION} from '../release.mjs';
+
+ const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+@@ -62,6 +62,16 @@ async function pendingUpdates(fetcher=globalThis.fetch){
+   return {latest,packs:packUpdates(current,next)};
+ }
+
++const downloadFailed='ההורדה לא הושלמה. אפשר לנסות שוב.';
++const statusFailed='לא ניתן לבדוק אילו קבצים נשמרו. אפשר לנסות שוב.';
++function reportIssue(operation,error,latest) {
++  const lines=Array.isArray(error)
++    ?error.slice(0,20).map(failure=>`${failure.href}: ${failure.reason}`)
++    :[String(error?.message??error)];
++  if(latest)lines.push('release: '+latest);
++  saveGameReport('offline',{status:operation,lines});
++}
++
+ export function offlinePanel(options={}){return v25On()?offlinePanel25(options):offlinePanel24(options);}
+
+ function offlinePanel24({onChange=()=>{}}={}){
+@@ -70,7 +80,7 @@ function offlinePanel24({onChange=()=>{}}={}){
+   const status=node('p','offline-status','בודק מה שמור במכשיר...');status.setAttribute('role','status');
+   const bar=node('progress','offline-progress');bar.max=100;bar.value=0;bar.hidden=true;
+   const games=node('ul','offline-games');
+-  const download=node('button','primary-button','הורדת כל המשחקים למכשיר');download.type='button';download.dataset.action='offline-download-all';
++  const download=node('button','primary-button','הורדת המשחקים');download.type='button';download.dataset.action='offline-download-all';
+   const check=node('button','secondary-button','בדיקת עדכון והורדה');check.type='button';check.dataset.action='offline-check-update';
+   const versionRow=node('p','offline-version',versionLine());versionRow.dataset.appVersion='';
+   panel.append(heading,status,bar,games,download,check,versionRow);
+@@ -79,10 +89,8 @@ function offlinePanel24({onChange=()=>{}}={}){
+     try{
+       const s=await offlineStatus();status.textContent=describeStatus(s);panel.dataset.complete=String(Boolean(s.complete));
+       games.replaceChildren(...Object.entries(OFFLINE_GAMES).map(([id,name])=>{const g=s.games[id],li=node('li','',`${name}: ${g?`${g.have} מתוך ${g.total}`:'לא זמין'}`);li.dataset.game=id;li.dataset.complete=String(Boolean(g?.complete));return li;}));
+-      download.textContent=s.complete?'הורדה מחדש (בדיקת קבצים)':'הורדת כל המשחקים למכשיר';
+-    }catch(error){status.textContent='לא ניתן לבדוק מה שמור: '+(error?.message||error);}
+-    panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
+-    for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
++      download.textContent=s.complete?'הורדה מחדש':'הורדת המשחקים';
++    }catch(error){reportIssue('status',error);status.textContent=statusFailed;}
+     onChange();
+   }
+   const progress=p=>{status.textContent=describeProgress(p);bar.value=p.percent;};
+@@ -93,10 +101,10 @@ function offlinePanel24({onChange=()=>{}}={}){
+       const r=await job();
+       const sizeNote=r.bytes?` (${megabytes(r.bytes)} MB הורדו עכשיו)`:'';
+       await refresh();
+-      if(r.failed.length)status.textContent=`${r.total-r.failed.length} מתוך ${r.total} נשמרו. ${r.failed.length} קבצים לא ירדו (${r.failed[0].reason}). המשחק יעלה גם בלי הקבצים האלה, אפשר לנסות שוב.`;
+-      else if(r.newer)status.textContent+=` יצאה גרסה חדשה (${r.latest}). היא תותקן ברקע ותוחלף בפתיחה הבאה.`;
++      if(r.failed.length){reportIssue('download',r.failed,r.latest);status.textContent=downloadFailed;}
++      else if(r.newer)status.textContent+=' יצאה גרסה חדשה. היא תותקן ברקע ותיפתח בכניסה הבאה.';
+       else status.textContent+=sizeNote;
+-    }catch(error){status.textContent='ההורדה נכשלה ('+(error?.message||error)+'). המשחקים ייטענו מהרשת.';}
++    }catch(error){reportIssue('download',error);status.textContent=downloadFailed;}
+     busy(false);
+   }
+   download.addEventListener('click',()=>run(()=>downloadGames({onProgress:progress})));
+@@ -114,7 +122,7 @@ function offlinePanel25({onChange=()=>{}}={}){
+   const persistBtn=btn('שמירה קבועה במכשיר','offline-persist');persistBtn.hidden=true;
+   const games=node('ul','offline-games offline-packs');
+   const actions=node('div','offline-actions');
+-  const download=btn('הורדת כל המשחקים למכשיר','offline-download-all','primary-button');
++  const download=btn('הורדת המשחקים','offline-download-all','primary-button');
+   const check=btn('בדיקת עדכון והורדה','offline-check-update');
+   const install=btn('התקנת האפליקציה','offline-install');
+   const installHint=node('p','offline-install-hint','');installHint.hidden=true;installHint.dataset.installHint='';
+@@ -142,12 +150,10 @@ function offlinePanel25({onChange=()=>{}}={}){
+     try{
+       const s=await offlineStatus();status.textContent=describeStatus25(s)+(note?' '+note:'');panel.dataset.complete=String(Boolean(s.complete));
+       games.replaceChildren(...Object.entries(OFFLINE_GAMES).map(([id,name])=>row(id,name,s.games[id],pending?.packs?.[id])));
+-      download.textContent=s.complete?'הורדה מחדש (בדיקת קבצים)':'הורדת כל המשחקים למכשיר';
++      download.textContent=s.complete?'הורדה מחדש':'הורדת המשחקים';
+       const info=await storageInfo();storageRow.textContent=describeStorage(info);storageRow.hidden=!storageRow.textContent;persistBtn.hidden=info.persisted!==false;
+-    }catch(error){status.textContent='לא ניתן לבדוק מה שמור: '+(error?.message||error);}
++    }catch(error){reportIssue('status',error);status.textContent=statusFailed;}
+     renderInstall();
+-    panel.querySelectorAll('[data-report]').forEach(n=>n.remove());
+-    for(const id of Object.keys(OFFLINE_GAMES)){const r=reportPanel(id);if(r)panel.append(r);}
+     onChange();
+   }
+   const progress=p=>{status.textContent=describeProgress(p);bar.value=p.percent;};
+@@ -157,20 +163,21 @@ function offlinePanel25({onChange=()=>{}}={}){
+     try{
+       const r=await job();
+       const sizeNote=r.bytes?` ${megabytes(r.bytes)} MB הורדו עכשיו.`:'';
+-      if(r.failed?.length)note=`${r.failed.length} קבצים לא ירדו (${r.failed[0].reason}). המשחק יעלה גם בלי הקבצים האלה, אפשר לנסות שוב.`;
+-      else if(r.newer)note=r.prepared?`יצאה גרסה חדשה (${r.latest}): ${r.prepared.downloaded.total} קבצים ירדו ו-${r.prepared.copied} הועתקו מהגרסה הנוכחית. היא תוחלף כשחוזרים לעיר.`:`יצאה גרסה חדשה (${r.latest}). רק הקבצים שהשתנו יורדים ברקע, והיא תוחלף בפתיחה הבאה.`;
++      const failed=r.failed?.length?r.failed:(r.prepared?.downloaded??r.prepared)?.failed;
++      if(failed?.length){reportIssue('download',failed,r.latest);note=downloadFailed;}
++      else if(r.newer)note=r.prepared?'גרסה חדשה תיפתח בחזרה לעיר.':'יצאה גרסה חדשה. הקבצים שהשתנו יורדים ברקע.';
+       else if(r.bad)note=`${r.bad} קבצים פגומים הוחלפו.${sizeNote}`;
+       else note=sizeNote.trim();
+       await refresh();
+       if(r.fresh&&!r.failed?.length)persistStorage().then(()=>refresh()).catch(()=>{});
+-    }catch(error){note='ההורדה נכשלה ('+(error?.message||error)+'). המשחקים ייטענו מהרשת.';await refresh();}
++    }catch(error){note=downloadFailed;await refresh();reportIssue('download',error);}
+     busy(false);
+   }
+   download.addEventListener('click',()=>run(()=>downloadGames({onProgress:progress,verify:panel.dataset.complete==='true'})));
+   check.addEventListener('click',()=>run(async()=>{
+     try{pending=await pendingUpdates();}catch{pending=null;}
+     const r=await checkAndDownload({onProgress:progress});
+-    if(r.newer){status.textContent='מכין את הגרסה החדשה: מעתיק מה שלא השתנה ומוריד רק את השינויים...';try{r.prepared=await prefetchRelease(r.latest,{onProgress:progress});}catch{}}
++    if(r.newer){status.textContent='מכין את הגרסה החדשה: מעתיק מה שלא השתנה ומוריד רק את השינויים...';r.prepared=await prefetchRelease(r.latest,{onProgress:progress});}
+     return r;}));
+   persistBtn.addEventListener('click',async()=>{const ok=await persistStorage();storageRow.textContent=describeStorage(await storageInfo())+(ok===false?' · הדפדפן סירב לשמירה קבועה. בדרך כלל עוזר להתקין את האפליקציה.':'');persistBtn.hidden=ok!==false;});
+   install.addEventListener('click',async()=>{
+@@ -187,8 +194,8 @@ function offlinePanel25({onChange=()=>{}}={}){
+       delete packProgress[id];await refresh();
+     }else if(b.dataset.action==='offline-pack-delete'){
+       if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='בטוח? מחיקה';b.classList.add('offline-danger');return;}
+-      busy(true);try{if(downloadBusy())throw Error('הורדה פעילה');const r=await deletePack(id);note=`${OFFLINE_GAMES[id]} נמחק מהמכשיר (${r.removed} קבצים, ${megabytes(r.bytes)} MB). השמירה של המשחק לא נגעה.`;}
+-      catch(error){note='המחיקה נכשלה ('+(error?.message||error)+').';}
++      busy(true);try{if(downloadBusy())throw Error('הורדה פעילה');const r=await deletePack(id);note=`${OFFLINE_GAMES[id]}: הוסרו ${r.removed} קבצים מהמכשיר (${megabytes(r.bytes)} MB). ההתקדמות נשמרה.`;}
++      catch(error){reportIssue('delete',error);note='המחיקה לא הושלמה. אפשר לנסות שוב.';}
+       await refresh();busy(false);
+     }
+   });
+diff --git a/workout/island/ui/racing-league.mjs b/workout/island/ui/racing-league.mjs
+index 6090ae2..d013938 100644
+--- a/workout/island/ui/racing-league.mjs
++++ b/workout/island/ui/racing-league.mjs
+@@ -59,7 +59,7 @@ function rivalBox(rival){
+   const gap=rival.diff>0?`לפניכם ב-${rival.diff} נקודות`:rival.diff<0?`אחריכם ב-${-rival.diff} נקודות`:'באותן נקודות כמוכם';
+   box.append(el('p','rl-line',`${rival.team} · ${rival.style} · ${gap}`));
+   const cmp=el('div','rl-vs');
+-  for(const [label,mine,theirs] of [['נקודות',rival.myPoints,rival.points],['מקום',rival.myPlace,rival.place],['ניצחונות',rival.myWins,rival.wins],['פודיומים',rival.myPodiums,rival.podiums],['מי לפני מי',rival.ahead,rival.behind]]){
++  for(const [label,mine,theirs] of [['נקודות',rival.myPoints,rival.points],['מקום',rival.myPlace,rival.place],['ניצחונות',rival.myWins,rival.wins],['סיומים בשלישייה הראשונה',rival.myPodiums,rival.podiums],['מי לפני מי',rival.ahead,rival.behind]]){
+     const row=el('div','rl-vs-row');const a=el('b','rl-vs-mine');a.append(num(mine));const b=el('b','rl-vs-theirs');b.append(num(theirs));row.append(a,el('span','rl-vs-label',label),b);cmp.append(row);}
+   const names=el('div','rl-vs-row rl-vs-names');names.append(el('b','rl-vs-mine','אתם'),el('span','rl-vs-label',''),el('b','rl-vs-theirs',rival.name));cmp.prepend(names);box.append(cmp);
+   return box;
+@@ -78,7 +78,7 @@ export function seasonPodiumBlock(sum,{compact=false}={}){
+   if(art){const shelf=el('div','rl-trophies'),driver=sum.podium?.[0],cup=(kind,label)=>{const fig=el('figure','rl-cup');fig.append(trophyImg(kind),el('figcaption','',label));return fig;};
+    if(driver)shelf.append(cup('driver',driver==='player'?'אלוף הנהגים: אתם':`אלוף הנהגים: ${driverById(driver)?.name||driver}`));if(team)shelf.append(cup('team',`הקבוצה האלופה: ${team.name}`));if(shelf.childElementCount)facts.append(shelf);}
+   const mine=el('p','rl-line rl-big');mine.append(sum.place===1?'אתם האלופים של העונה':`סיימתם במקום ${sum.place} מתוך ${FIELD}`);facts.append(mine);
+-  if(sum.seasonPrize){const p=el('p','rl-prize');p.append('פרס סוף העונה: +',num(sum.seasonPrize),' מטבעות');facts.append(p);}
++  if(sum.seasonPrize){const p=el('p','rl-prize');p.append('מטבעות מפרס סוף העונה: +',num(sum.seasonPrize));facts.append(p);}
+   box.append(facts);return box;
+ }
+ /** Short, honest status line under the title. */
+@@ -105,7 +105,7 @@ function nextRaceLine(next){
+ export function leagueCard({engine,go,season,shop,refresh}){
+   ensureLeagueStyle();
+   const sum=engine.racingLeague.summary(),next=engine.racingLeague.next(),root=el('section','rl-card');root.dataset.racingLeague='true';root.dataset.long=String(LONG);
+-  const head=el('div','rl-head'),title=el('h3','',`ליגת המירוצים · ${sum.season.name}`),coins=el('span','rl-coins');coins.append(num(sum.coins),document.createTextNode(' מטבעות'));
++  const head=el('div','rl-head'),title=el('h3','',`ליגת המרוצים · ${sum.season.name}`),coins=el('span','rl-coins');coins.append('מטבעות ליגה: ',num(sum.coins));
+   head.append(title,coins);root.append(head,el('p','rl-line',statusLine(sum)));
+   if(next)root.append(nextRaceLine(next));
+   if(sum.rival&&!sum.done&&sum.race>0){const r=el('p','rl-line rl-rival-line');r.append('היריב שלכם: ',chip(sum.rival.id),' ',el('strong','',sum.rival.name),sum.rival.diff>0?` · לפניכם ב-${sum.rival.diff} נק׳`:sum.rival.diff<0?` · אחריכם ב-${-sum.rival.diff} נק׳`:' · באותן נקודות');root.append(r);}
+@@ -151,7 +151,7 @@ export function shopBody({engine,refresh}){
+     for(let i=0;i<MAX_LEVEL;i++){const p=el('i','rl-pip');if(i<level)p.className='rl-pip on';pips.append(p);}
+     const gain=Math.round((eq[spec.key]-1)*100);
+     const what2=el('span','rl-part-what',what);if(gain){const g=el('bdi','rl-gain',`+${gain}%`);g.dir='ltr';what2.append(' · ',g);}row.append(el('strong','rl-part-name',spec.name),pips,what2);
+-    const cost=level>=MAX_LEVEL?null:UPGRADE_COST[level],buy=button(cost===null?'רמה מקסימלית':`שדרוג ב-${cost}`,'racing-league-buy',()=>{const r=engine.racingLeague.buy(key);if(r.ok)refresh();else note.textContent=r.reason==='coins'?`חסרים ${r.need} מטבעות לשדרוג הזה`:'אי אפשר לשדרג עכשיו';},'primary-button');
++    const cost=level>=MAX_LEVEL?null:UPGRADE_COST[level],buy=button(cost===null?'הרמה הגבוהה ביותר':`שדרוג ב-${cost}`,'racing-league-buy',()=>{const r=engine.racingLeague.buy(key);if(r.ok)refresh();else note.textContent=r.reason==='coins'?`מטבעות שחסרים לשדרוג: ${r.need}`:'אי אפשר לשדרג עכשיו';},'primary-button');
+     buy.dataset.part=key;buy.disabled=cost===null||l.coins<cost;row.append(buy);root.append(row);
+   }
+   root.append(el('p','rl-line','מטבעות הליגה מגיעים רק ממרוצי ליגה ונפרדים מכסף האי. השדרוגים נשמרים בין עונות.'));
+diff --git a/workout/island/ui/soccer-card.mjs b/workout/island/ui/soccer-card.mjs
+index b881478..bc933d8 100644
+--- a/workout/island/ui/soccer-card.mjs
++++ b/workout/island/ui/soccer-card.mjs
+@@ -2,7 +2,6 @@ import {attributes,cardRating} from '../activity/soccer-card.mjs?v=island-v2-202
+ import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-18';
+ import {installSoccerDesignScreens} from '../minigames/soccer-design-screens.mjs';
+ import {registerOfflineWorker,downloadGames} from './offline.mjs?v=island-v2-20261107-18';
+-import {reportPanel} from './load-report.mjs?v=island-v2-20261107-18';
+ installSoccerDesignScreens();
+ // Menu presentation is ready on first entry, before a match creates its renderer.
+ if(typeof document!=='undefined'&&!document.querySelector('link[data-ultra-soccer-ui]')){
+@@ -51,7 +50,6 @@ export function playerCard(state,balance,t,{starsAdded}={}) {
+   const profile=identity?rosterCards(balance,{players:state.players.map((p,i)=>({...p,card:state.soccerRoster.players[i]}))},card)[0]:null;
+   for(const key of attributes){const row=node('div',''),value=profile?.[{power:'shot',pace:'pace',accuracy:'pass',defense:'defense'}[key]]??card.attributes[key];row.append(node('dt','',t(`soccer.attribute.${key}`)),node('dd','',String(value)));list.append(row);}root.append(list);
+   root.append(node('p','soccer-wallet',t('soccer.wallet',{stars:card.stars})));
+-  const savedReport=reportPanel('soccer');if(savedReport)root.append(savedReport);
+   if(starsAdded!==undefined)root.append(node('p','soccer-stars-added',t('soccer.starsAdded',{stars:starsAdded})));
+   return root;
+ }
+diff --git a/workout/island/ui/upgrade-offer-core.mjs b/workout/island/ui/upgrade-offer-core.mjs
+index af6028f..73c5124 100644
+--- a/workout/island/ui/upgrade-offer-core.mjs
++++ b/workout/island/ui/upgrade-offer-core.mjs
+@@ -52,7 +52,7 @@ export function leagueCandidates(league){
+   const out=[];if(!league||!league.upgrades)return out;
+   for(const [key,spec] of Object.entries(UPGRADES)){
+     const level=league.upgrades[key];if(!int(level)||level>=MAX_LEVEL)continue;
+-    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המירוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
++    out.push({id:'league:'+key,kind:'league',track:key,gameId:'islandRacing',category:'ליגת המרוצים',name:spec.name,icon:LEAGUE_ICON[key]||'upgrade',unit:'coins',price:UPGRADE_COST[level],balance:league.coins});
+   }
+   return out;
+ }
+diff --git a/workout/island/view/city-depth.mjs b/workout/island/view/city-depth.mjs
+index b2ecf67..19e4704 100644
+--- a/workout/island/view/city-depth.mjs
++++ b/workout/island/view/city-depth.mjs
+@@ -17,7 +17,7 @@ export class CityDepthView {
+       if (kind === 'water') {
+         c.fillStyle = value === 'capacity' ? '#d58b27' : '#3298b8'; c.beginPath(); c.moveTo(43,17); c.bezierCurveTo(32,36,22,42,22,55); c.bezierCurveTo(22,82,64,82,64,55); c.bezierCurveTo(64,42,53,32,43,17); c.fill();
+         c.strokeStyle = '#fff'; c.lineWidth = 7; c.beginPath(); c.moveTo(28,69); c.lineTo(58,40); c.stroke();
+-        c.fillStyle = '#294e54'; c.font = 'bold 25px sans-serif'; c.textAlign = 'center'; c.fillText(value === 'capacity' ? '!' : '↔',75,37);
++        c.fillStyle = '#294e54'; c.font = 'bold 25px sans-serif'; c.textAlign = 'center'; c.fillText(value === 'capacity' ? '◆' : '↔',75,37);
+       } else {
+         c.fillStyle = '#286c51'; c.font = 'bold 58px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(value),48,49);
+       }

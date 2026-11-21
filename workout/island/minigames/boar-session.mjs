@@ -1,4 +1,5 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-20';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-21';
+import { pinBoarResults } from '../ui/kid-ux-result.mjs?v=island-v2-20261107-21';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */
@@ -28,7 +29,11 @@ export function runBoarSession(ctx) {
   {const v=new URLSearchParams(globalThis.location?.search).get('boarsLevels');if(v==='0'||v==='20')url.searchParams.set('boarsLevels',v);}
   // Forward F's kill switches into the embedded campaign, including when launched from the island URL.
   {const q=new URLSearchParams(globalThis.location?.search);for(const key of ['phoneFixes','phoneFixF'])if(q.has(key))url.searchParams.set(key,q.get(key));}
-  if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
+  const urlFlags=new URLSearchParams(globalThis.location?.search);
+  const kidValue=urlFlags.get('kidUx'),selected=kidValue?.split(',')||[];
+  const boarFlags=['024','025','026'].filter(id=>kidValue==='1'||selected.includes(id));
+  if(boarFlags.length)url.searchParams.set('kidUx',boarFlags.join(','));
+  if(urlFlags.get('dev')==='1')url.searchParams.set('qa','1');
   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
   // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
   if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');
@@ -47,6 +52,7 @@ export function runBoarSession(ctx) {
     if(!bridge?.ready){failed();return;}
     clearTimeout(timeout);error=null;ready=true;ctx.warning.hidden=true;
     bridge.onExit=()=>ctx.cancel();
+    pinBoarResults(frame.contentDocument,bridge.onExit);
     bridge.onPause=()=>ctx.dialog.querySelector('[data-action=game-pause]')?.click();
     bridge.setPaused(paused);syncSound();if(!paused)frame.contentWindow.focus();
   });

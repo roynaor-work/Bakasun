@@ -1,0 +1,108 @@
+{
+  "id": "034",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "fontPx": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "examples": [],
+        "widths": [
+          62,
+          62,
+          62,
+          62,
+          62,
+          62
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "rack": [
+          398,
+          168,
+          424,
+          96
+        ],
+        "visibleEnemyCenters": [
+          {
+            "x": 422.61059918595345,
+            "y": 178.2192251057253,
+            "obscured": true
+          }
+        ]
+      }
+    },
+    {
+      "pass": false,
+      "observation": {
+        "selected": "טיל מונחה",
+        "fontPx": 10
+      }
+    }
+  ],
+  "notes": [
+    "The separate live game scene starts without waiting for the decorative city avatar.",
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev launch used to set up the live game: navalDuel, stage 1."
+  ],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('.naval-weapon-picker').first()",
+      "x": 664,
+      "y": 335,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "naval-weapon-picker",
+        "x": 664,
+        "y": 335
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('.ammo-rack [data-ammo-index=\"1\"]:enabled').first()",
+      "x": 712,
+      "y": 216,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "control-ammo-select",
+        "x": 712,
+        "y": 216
+      }
+    }
+  ],
+  "screenshots": [
+    "034-before-six-illustrated-choices.png",
+    "034-before-selected-weapon.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

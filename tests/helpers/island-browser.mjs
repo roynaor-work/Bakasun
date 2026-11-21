@@ -1,5 +1,6 @@
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, stat } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -202,4 +203,26 @@ export async function serveIsland(prefix = '/Bakasun/workout/island/') {
     csp,
     async close() { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); },
   };
+}
+
+/** Put generated evidence where a test run cannot overwrite a checked-in baseline. */
+export async function browserArtifacts(name) {
+  const base = process.env.ISLAND_CSP_AUDIT_DIR;
+  if (!base) return (await mkdtemp(path.join(tmpdir(), `${path.basename(name)}-`))) + path.sep;
+  const directory = path.resolve(base, name);
+  await mkdir(directory, {recursive: true});
+  return directory + path.sep;
+}
+
+/** Register cleanup before acquiring resources, and release them in reverse order. */
+export function browserCleanup(testContext) {
+  const cleanup = [];
+  testContext.after(async () => {
+    const errors = [];
+    for (const close of cleanup.reverse()) {
+      try { await close(); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, 'Browser fixture cleanup failed');
+  });
+  return close => cleanup.push(close);
 }

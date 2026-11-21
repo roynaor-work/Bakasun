@@ -3,7 +3,8 @@
  * tap will hit), an arrow on the edge when the locked hull is out of the picture, a one-word reason when the shot cannot land on the
  * hull now (too far, another hull in the way, a submarine under water), and, until the first lock of a stage, a small "hold to lock"
  * hint over the nearest hull. Nothing is drawn unless lock-on is on (`?navalLock=0` keeps the v22 screen). */
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-20';
+import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
 const TAU=Math.PI*2;
 export const NAVAL_LOCK_COLORS=Object.freeze({ready:'#62E6AA',turning:'#FFD166',far:'#FF9A5C',near:'#FF9A5C',blocked:'#FF9A5C',miss:'#FF9A5C',dive:'#FF9A5C',press:'#FFFFFF',outline:'#103847'});
 export const NAVAL_LOCK_WORDS=Object.freeze({far:'רחוק מדי · מתקרבים',blocked:'מטרה אחרת בדרך',dive:'מתחת למים · מחכים',hint:'החזיקו אצבע על ספינה',
@@ -29,10 +30,12 @@ function padlock(p,x,y,color,s=1){
  p.fillStyle=NAVAL_LOCK_COLORS.outline;p.beginPath();p.roundRect(-7.5,-1.5,15,11.5,2.5);p.fill();p.fillStyle=color;p.beginPath();p.roundRect(-6,0,12,8.5,2);p.fill();
  p.fillStyle=NAVAL_LOCK_COLORS.outline;p.beginPath();p.arc(0,3.6,1.6,0,TAU);p.fill();p.restore();
 }
-function pill(p,text,x,y,color){
- p.save();p.font='bold 12px sans-serif';p.direction='rtl';p.textAlign='center';p.textBaseline='middle';const w=Math.ceil(p.measureText(text).width)+18;
- p.fillStyle='#092a3ce8';p.beginPath();p.roundRect(x-w/2,y-10,w,20,10);p.fill();p.strokeStyle=color;p.lineWidth=1.4;p.stroke();p.fillStyle='#f3f0e2';p.fillText(text,x,y+.5);p.restore();
- return {x:x-w/2,y:y-10,w,h:20};
+function pill(p,text,x,y,color,width){
+ const kidHud=kidUx('033'),h=kidHud?26:20;
+ p.save();p.font=kidHud?'bold 15px sans-serif':'bold 12px sans-serif';p.direction='rtl';p.textAlign='center';p.textBaseline='middle';const w=Math.ceil(p.measureText(text).width)+18;
+ if(kidHud)x=Math.max(w/2+22,Math.min(width-w/2-12,x));
+ p.fillStyle=kidHud?'#092a3c':'#092a3ce8';p.beginPath();p.roundRect(x-w/2,y-h/2,w,h,h/2);p.fill();p.strokeStyle=color;p.lineWidth=1.4;p.stroke();p.fillStyle='#f3f0e2';p.fillText(text,x,y+.5);p.restore();
+ return {x:x-w/2,y:y-h/2,w,h};
 }
 export function drawNavalLockHud(p,m,balance,project,width,height){
  if(!m?.lockEnabled)return null;
@@ -56,7 +59,7 @@ export function drawNavalLockHud(p,m,balance,project,width,height){
    p.beginPath();p.arc(b.x,b.y,r,0,TAU);p.globalAlpha=.85;p.stroke();p.globalAlpha=1;p.setLineDash([]);
    for(let i=0;i<4;i++){const a=i*Math.PI/2;p.beginPath();p.moveTo(b.x+Math.cos(a)*(r-5),b.y+Math.sin(a)*(r-5));p.lineTo(b.x+Math.cos(a)*(r+5),b.y+Math.sin(a)*(r+5));p.stroke();}
    padlock(p,b.x+box.w/2+11,b.y-box.h/2-4,color,1);
-   const word=status==='dive'&&m.subV24?NAVAL_LOCK_WORDS.diveTorpedo:NAVAL_LOCK_WORDS[status];if(word)out.word={text:word,...pill(p,word,b.x,b.y+box.h/2+16,color)};
+   const kidHud=kidUx('033'),word=kidHud&&status==='ready'?'🔒 נעול · אפשר לירות':status==='dive'&&m.subV24?NAVAL_LOCK_WORDS.diveTorpedo:NAVAL_LOCK_WORDS[status];if(word)out.word={text:word,...pill(p,word,b.x,kidHud?Math.min(height-16,b.y+box.h/2+16):b.y+box.h/2+16,color,width)};
    out.lock={index:h.index,status,x:Math.round(b.x),y:Math.round(b.y),w:Math.round(box.w),h:Math.round(box.h),offscreen:false};
   }else{
    const q=project(locked.x,locked.z,1.5),hint=navalEdgeHint(q,width,height,30);
@@ -68,8 +71,8 @@ export function drawNavalLockHud(p,m,balance,project,width,height){
  // Until the first lock of the stage: a small hint over the nearest hull (open water only, never while aiming or pressing).
  if(!h&&!pressed&&!m.aiming&&!m.radar&&(m.locksMade||0)===0&&(m.time??0)<9){
   const e=find(m.selectedTargetIndex)||(m.enemies||[]).find(x=>x.active&&x.hp>0),b=e&&navalLockBox(e,project,balance);
-  if(b&&b.y>70&&b.y<height-40){const y=Math.max(58,b.y-b.h/2-30),pulse=.5+.5*Math.sin((m.time??0)*5);p.globalAlpha=.75+.25*pulse;
-   const box=pill(p,m.aimV24?NAVAL_LOCK_WORDS.tap:NAVAL_LOCK_WORDS.hint,b.x,y,NAVAL_LOCK_COLORS.turning);padlock(p,box.x-10,y,NAVAL_LOCK_COLORS.turning,.8);p.globalAlpha=1;out.hint={x:Math.round(b.x),y:Math.round(y)};}
+  if(b&&b.y>70&&b.y<height-40){const y=Math.max(58,b.y-b.h/2-30),pulse=.5+.5*Math.sin((m.time??0)*5);p.globalAlpha=kidUx('033')?1:.75+.25*pulse;
+   const box=pill(p,m.aimV24?NAVAL_LOCK_WORDS.tap:NAVAL_LOCK_WORDS.hint,b.x,y,NAVAL_LOCK_COLORS.turning,width);padlock(p,box.x-10,y,NAVAL_LOCK_COLORS.turning,.8);p.globalAlpha=1;out.hint={x:Math.round(b.x),y:Math.round(y)};}
  }
  p.restore();
  return Object.keys(out).length?out:null;

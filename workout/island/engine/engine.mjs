@@ -1,34 +1,36 @@
-import {installCity} from './city-runtime.mjs?v=island-v2-20261107-20';
-import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-20';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-20';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-20';
-import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-20';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-20';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-20';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-20';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-20';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-20';
-import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-20';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-20';
-import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-20';
-import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-20';
-import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-20';
-import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-20';
-import { createRegistry } from './registry.mjs?v=island-v2-20261107-20';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-20';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-20';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-20';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-20';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-20';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-20';
-import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-20';
-import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-20';
+import {installCity} from './city-runtime.mjs?v=island-v2-20261107-21';
+import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-21';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-21';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-21';
+import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-21';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-21';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-21';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-21';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-21';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-21';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-21';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-21';
+import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-21';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-21';
+import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-21';
+import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-21';
+import { createRegistry } from './registry.mjs?v=island-v2-20261107-21';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-21';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-21';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-21';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-21';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-21';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-21';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-21';
+import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-21';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
 /** Pure game state and commands. No DOM, Three.js, timers, network, or audio. */
 export function createEngine(data, options = {}) {
   const registry = createRegistry(data);
+  const progress = data.cityProgress;
+  if (progress) registry.cityProgress = progress;
   const config = data.config;
   const flags = data.featureFlags || {};
   const now = options.now || Date.now;
@@ -36,6 +38,11 @@ export function createEngine(data, options = {}) {
   if (storage === undefined) { try { storage = globalThis.localStorage; } catch { storage = null; } }
   const loaded = loadWorld(storage, data, registry, now());
   const state = loaded.ok && loaded.state ? loaded.state : createInitialState(data, now());
+  if (progress) {
+    const migrating = !Object.hasOwn(state, 'cityProgress');
+    progress.init(state, registry);
+    if (migrating && state.readyPlan && flags.readyPlots) prepareReadyPlan(state, registry, flags);
+  }
   const listeners = new Set(), history = [];
   let activeMinigame = null;
   let saveBlocked = !loaded.ok && loaded.reason !== 'reason.storage';
@@ -55,8 +62,9 @@ export function createEngine(data, options = {}) {
   }
   function changed(type, detail = {}) {
     engine.city?.sync();
+    const cityMissionReward = engine.cityMissions?.update(type, detail);
     const saved = save();
-    notify(type, { ...detail, saved });
+    notify(type, cityMissionReward ? { ...detail, saved, cityMissionReward } : { ...detail, saved });
     return saved;
   }
   function remember(action) {
@@ -145,6 +153,7 @@ export function createEngine(data, options = {}) {
   engine.readyPlotAt = (x,z) => {const cell=typeof x==='object'?x:{x,z};return cell?findReadyCell(state,registry,cell.x,cell.z,flags):null;};
   engine.reset = ({ keepAvatar = false } = {}) => {
     const fresh = createInitialState(data, now());
+    progress?.init(fresh, registry);
     if (keepAvatar) fresh.avatar = clone(state.avatar);
     if(state.readyPlan&&flags.readyPlots){const prepared=prepareIsland(fresh);if(!prepared.ok)return prepared;}
     const result = resetWorld(storage, fresh);
@@ -158,6 +167,7 @@ export function createEngine(data, options = {}) {
   engine.validatePlacement = check;
   engine.nextObjective = nextObjective;
   engine.population = () => population(state, registry, config);
+  engine.cityProgress = () => progress?.report(state, registry) ?? null;
   engine.metrics = () => {
     if (!flags.metrics) return {};
     const values = calculateMetrics(state, registry, config);
@@ -195,18 +205,30 @@ export function createEngine(data, options = {}) {
   const placeBuilding = (typeId, x, z, automatic=false) => {
     const validation = check(typeId, x, z);
     if (!validation.ok) return validation;
+    const learningAccess = engine.learningV2?.access(typeId, x, z, automatic);
+    if (learningAccess && !learningAccess.ok) return learningAccess;
     const type = registry.buildings.get(typeId);
     let id;
     do { id = `building-${state.nextId++}`; } while (state.buildings.some(row => row.id === id));
     state.money -= type.cost;
     const building = { id, typeId, x, z, level: 1 };
     state.buildings.push(building);
-    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost });
+    const resourcesDelta = progress && startConstruction(building);
+    if(!automatic)remember({ kind: 'place', id, moneyDelta: -type.cost, resourcesDelta });
     const reward = onPlaced(typeId);
-    if(!automatic)changed('place', { id, reward });
+    const pendingLearningReward = learningAccess?.reward;
+    const learningReward = pendingLearningReward && grantReward(pendingLearningReward.id, pendingLearningReward)
+      ? pendingLearningReward.money : 0;
+    const learningResult = learningReward ? { learningReward } : {};
+    if(!automatic)changed('place', { id, reward, ...learningResult });
     if (reward) narration.announce(reward.title, { reward: reward.reward });
-    return { ok: true, reason: 'reason.placed', id, reward };
+    return { ok: true, reason: 'reason.placed', id, reward, ...learningResult };
   };
+  function startConstruction(building, upgrade = false) {
+    const before = {...state.resources};
+    progress.start(state, registry, building, {upgrade});
+    return Object.fromEntries(Object.entries(before).map(([key, value]) => [key, state.resources[key] - value]));
+  }
   engine.place = (typeId,x,z) => placeBuilding(typeId,x,z);
   engine.buildReadyPlot = id => {
     if(typeof id!=='string'||!state.readyPlan)return {ok:false,reason:'reason.invalid'};
@@ -240,6 +262,7 @@ export function createEngine(data, options = {}) {
     const index = state.buildings.findIndex(row => row.id === id);
     const building = state.buildings[index];
     const type = registry.buildings.get(building.typeId);
+    if (progress?.isPending(state, id)) return {ok: false, reason: 'progress.pending'};
     const investment = type.cost + type.levels.slice(1, building.level).reduce((sum, level) => sum + level.cost, 0);
     const refund = Math.floor(investment * config.removeRefundRatio);
     remember({ kind: 'remove', building: clone(building), index, moneyDelta: refund });
@@ -252,10 +275,14 @@ export function createEngine(data, options = {}) {
     if (!validation.ok) return validation;
     const building = state.buildings.find(row => row.id === id);
     const nextLevel = validation.nextLevel;
-    remember({ kind: 'upgrade', id, previousLevel: building.level, moneyDelta: -nextLevel.cost });
-    state.money -= nextLevel.cost; building.level++;
+    const previousLevel = building.level;
+    const scheduled = progress?.managesUpgrade(building.typeId, previousLevel) === true;
+    const resourcesDelta = scheduled ? startConstruction(building, true) : undefined;
+    remember({ kind: 'upgrade', id, previousLevel, moneyDelta: -nextLevel.cost, resourcesDelta });
+    state.money -= nextLevel.cost;
+    if (!scheduled) building.level++;
     changed('upgrade', { id });
-    return { ok: true, reason: 'reason.upgraded', id };
+    return { ok: true, reason: scheduled ? 'progress.foundation' : 'reason.upgraded', id };
   };
   engine.undo = () => {
     const action = history.at(-1);
@@ -264,6 +291,7 @@ export function createEngine(data, options = {}) {
     const restored=action.kind==='remove'?action.building:action.kind==='move'?{...state.buildings.find(row=>row.id===action.id),...action.previous}:null;
     if(restored){const keys=new Set(cellsFor(registry.buildings.get(restored.typeId),restored.x,restored.z).map(cell=>cell.join(',')));if(state.buildings.some(row=>row.id!==restored.id&&cellsFor(registry.buildings.get(row.typeId),row.x,row.z).some(cell=>keys.has(cell.join(',')))))return {ok:false,reason:'reason.occupied'};}
     history.pop();
+    if (action.kind === 'place' || action.kind === 'upgrade') progress?.cancel(state, action.id);
     const building = state.buildings.find(row => row.id === action.id);
     if(action.kind==='city-policy')Object.assign(state.cityManagement,action.previous);
     if(action.kind==='city-zone')state.cityManagement.zones=state.cityManagement.zones.filter(row=>row.id!==action.id);
@@ -284,21 +312,33 @@ export function createEngine(data, options = {}) {
     if (!Number.isFinite(seconds) || seconds <= 0) return { ok: false, reason: 'reason.invalid' };
     const duration = Math.min(seconds, config.maxTickSeconds);
     state.updatedAt = now();
-    let gained={},developed=[];
-    if(flags.economy){
-      if(!state.cityManagement.enabled)gained=accrueIncome(state,registry,config,duration,data.city);
-      else{
-        let remaining=duration;
-        while(remaining>0){
-          const seconds=Math.min(remaining,config.cityManagement.growthInterval-state.cityManagement.growthSeconds),step=accrueIncome(state,registry,config,seconds,data.city);
-          for(const [resource,value]of Object.entries(step))gained[resource]=(gained[resource]||0)+value;
-          developed.push(...advanceCity(state,registry,config,seconds,(typeId,x,z)=>placeBuilding(typeId,x,z,true)));remaining-=seconds;
+    const gained = {};
+    const developed = [], progressEvents = [];
+    let remaining = duration;
+    do {
+      const grows = flags.economy && state.cityManagement.enabled;
+      const cityUntil = grows ? config.cityManagement.growthInterval - state.cityManagement.growthSeconds : Infinity;
+      const progressUntil = progress?.nextEvent(state) ?? Infinity;
+      const seconds = Math.min(remaining, cityUntil, progressUntil);
+      if (flags.economy) {
+        const step = accrueIncome(state, registry, config, seconds, data.city);
+        for (const [resource, value] of Object.entries(step)) gained[resource] = (gained[resource] || 0) + value;
+      }
+      if (progress) {
+        progressEvents.push(...progress.advance(state, registry, seconds));
+        const group = data.world.partGroup, parts = progress.parts(state, registry);
+        if (parts > (state.parts[group] ?? 0)) {
+          state.parts[group] = parts;
+          expand();
         }
       }
-    }
+      if (grows) developed.push(...advanceCity(state, registry, config, seconds, (typeId, x, z) => placeBuilding(typeId, x, z, true)));
+      remaining -= seconds;
+    } while (remaining > 0);
     state.playSeconds += duration;
-    changed('tick', { gained,developed });
-    return { ok: true, gained,developed };
+    const result = progress ? {gained, developed, progressEvents} : {gained, developed};
+    changed('tick', result);
+    return {ok: true, ...result};
   };
   engine.setAvatar = input => {
     if (!input || typeof input !== 'object') return { ok: false, reason: 'reason.invalid' };
@@ -329,7 +369,9 @@ export function createEngine(data, options = {}) {
   engine.restartTutorial = () => { Object.assign(state.tutorial, { step: 0, completed: false, skipped: false }); changed('tutorial'); return { ok: true }; };
   engine.exportJSON = () => exportWorld(state);
   engine.importJSON = raw => {
-    const result = importWorld(raw, state, data, registry);
+    const result = importWorld(raw, state, data, registry, {
+      mergeCityMissions: engine.cityMissions?.mergeImport
+    });
     if (!result.ok) return result;
     // Persist before changing the live object, so quota/security errors cannot replace it.
     const saved = saveWorld(storage, result.state);
@@ -429,6 +471,7 @@ export function createEngine(data, options = {}) {
     if(id==='alpineRush'&&context.alpineLeague!=null&&!alpineRun)return {ok:false,reason:'reason.invalid'};
     const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:alpineRun?alpineRun.number:fireBonus?1:(context.level??progress?.stage);
     if(!leagueRun&&!alpineRun&&progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
+    const cityMissionToken = engine.cityMissions?.gameToken(id, stage);
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
@@ -511,7 +554,7 @@ export function createEngine(data, options = {}) {
           }
           if(result.parts){const group=data.world.partGroup;state.parts[group]=(state.parts[group]||0)+result.parts;expand();}
         }
-        changed('minigame', { id, result });
+        changed('minigame', cityMissionToken === undefined ? { id, result } : { id, result, cityMissionToken });
       }
       context.onFinish?.(cancelled ? { cancelled: true } : result);
       return { ok: true, ...(cancelled ? { cancelled: true } : { result }) };
@@ -538,6 +581,18 @@ export function createEngine(data, options = {}) {
   };
   for (const name of ['registerBuilding', 'registerSport', 'registerMinigame', 'registerEventType', 'registerMetric', 'registerIncomeSource']) engine[name] = record => { const result = registry[name](record); notify('registry', { id: record.id }); return result; };
   installLearning(engine,changed);
+  if (options.installLearningV2) engine.learningV2 = options.installLearningV2(engine, { changed });
   installCity(engine,{changed,notify,remember});
+  if (options.createCityMissions) {
+    engine.cityMissions = options.createCityMissions(engine);
+    engine.skipCityMission = token => {
+      const missions = engine.cityMissions;
+      const { active, next } = missions.current() ?? {};
+      if (activeMinigame || !missions.ready() || !active || active.token !== token
+        || (!next && !missions.definition(active)?.event)) return { ok: false, reason: 'reason.invalid' };
+      changed('city-mission-skip', { token });
+      return { ok: true };
+    };
+  }
   return engine;
 }

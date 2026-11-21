@@ -6,7 +6,7 @@ import { refreshVideos, refreshCloud, cloudUpload, setVideoFamily, cloudVideos, 
 import { Figure, cycleMs } from './figure.js?v=20261010-camera-1';
 import { RoyikiStage, hasRoyiki } from './royiki.js?v=20261010-camera-1';
 import { store } from './store.js?v=20261014-w2g-1';
-import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor } from './logic.js?v=20261014-w2g-1';
+import { LEVELS, buildItems, summarize, stats, BADGES, fmtTime, fmtDate, uid, scaleTarget, todayProgram, weekDays, suggestLevel, boostText, MAX_BOOST, MAX_SWAPS, isWorkBlock, START_GAMES, PICKS, unlockCredits, nextUnlockIn, perseveranceLine, honestTime, tokensFor, workoutReward } from './logic.js?v=20261014-w2g-1';
 import { beltCard } from './belts.js?v=20261014-w2g-1';
 import { companionCard, companionKit } from './companion.js?v=20261010-camera-1';
 import { restProgress, restCard, restBadges } from './rest-days.js?v=20261014-w2g-1';
@@ -22,15 +22,26 @@ import { normalizePlan } from './weekly.js?v=20261014-w2g-1';
 import { togetherChoice, buildTogetherWorkout, togetherLabel } from './together.js?v=20261014-w2g-1';
 import { playIntro } from './intro.js?v=20261010-camera-1';
 import { createVoiceCopy, ageBand, voiceCopyEnabled } from './voice-copy.js?v=20261010-camera-1';
-import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, SAY_UI } from './speech.js?v=20261014-w2g-1';
+import { legacyPrivacy } from './privacy-flag.js?v=20261010-camera-1';
+import { speak, speakLang, sayQuick, spokeRecently, stopSpeak, playVoiceRecording, canSpeak, hebrewVoices, bestVoice, speakLocal, SAY_UI } from './speech.js?v=20261014-w2g-1';
 import { exerciseName, workoutName } from './workout-copy.js?v=20261010-camera-1';
 import { SAY } from './say.js?v=20261010-camera-1';
 import { startMinuteTest, advanceMinuteTest, changeMinuteCount, cancelMinuteTest, minuteResult, recordMinuteTest, loadMinuteRecords, saveMinuteRecords } from './minute-test.js?v=20261010-camera-1';
 import { CameraUploads, cameraAvailable, cameraPrivacy, readCameraConsent } from './camera-session.mjs?v=20261013-frames-1';
+import { confirmCameraUpload, disableUploadConfig, initializeUploadConfig, UPLOAD_CONTEXTS } from '../cam-lab/upload.mjs?v=20261013-frames-1';
 import { cameraScreen } from './camera-screen.mjs?v=20261014-w2g-1';
 
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
+const workoutBoardEnabled = new URLSearchParams(location.search).get('progressBoard') !== '0';
+let workoutBoard;
+const workoutProgress = () => workoutBoard ??= import('../island/assets/progress-board-v1/src/integration.mjs?v=20261010-camera-1')
+  .then(({connectWorkout}) => connectWorkout({
+    speak: speakLocal,
+    profileAge: () => store.profile.age,
+    voiceEnabled: () => store.profile.voice !== false,
+  }))
+  .catch(() => { workoutBoard = null; return null; });
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const go = h => { location.hash = h; };
 const plan = () => normalizePlan(store.profile.plan, programById, DEFAULT_PLAN);
@@ -40,6 +51,11 @@ const credits = () => unlockCredits(store.sessions.length, (unlockedList() || GA
 
 let figures = [], activeGame = null, activeCamera = null;
 const cameraFailed = new Set();
+const setupCameraUpload = () => {
+  const setup = initializeUploadConfig({ context: 'workout', approve: confirmCameraUpload });
+  if (setup.error) alert(setup.error);
+};
+setupCameraUpload();
 const cameraUploads = new CameraUploads({ onStatus: status => {
   let box = document.getElementById('camera-upload');
   if (!box) {
@@ -60,7 +76,7 @@ const VC = createVoiceCopy();
 const vcOn = () => voiceCopyEnabled(store.profile, location.search);
 const vcCtx = () => ({ band: ageBand(store.profile), name: store.profile.name || '', hour: new Date().getHours() });
 const vline = (key, legacy) => vcOn() ? VC.pick(key, vcCtx()) : { text: legacy, tts: legacy };
-window.addEventListener('storage', event => { if (event.key === 'camlab.upload') { cameraUploads.refresh(); void cameraUploads.retry(); } });
+window.addEventListener('storage', event => { if (event.key === UPLOAD_CONTEXTS.workout.key) { cameraUploads.refresh(); void cameraUploads.retry(); } });
 function mount(html, full = false) {
   if (activeCamera) { const camera = activeCamera; activeCamera = null; camera.leave('exit'); }
   figures.forEach(f => { f.stop(); if (f.dispose) f.dispose(); }); figures = []; /* dispose: הבמה התלת-ממדית משחררת את ה-WebGL */
@@ -208,12 +224,13 @@ function confetti() {
 
 // ---- ניתוב ----
 const routes = { '': home, home, exercises: exercisesScreen, exercise: exerciseDetail, minute: minuteScreen, history, settings, free, start, workout: workoutScreen, arcade, parent: parentHome, 'parent-together': parentTogether, 'parent-week': parentWeek, together, basketball };
+if (workoutBoardEnabled) routes.progress = progressScreen;
 function route() {
   if (setVideoFamily(store.profile.familyCode) && store.profile.familyCode) refreshCloud(store.profile.familyCode).then(softRoute);
   const [path, arg] = location.hash.replace(/^#\/?/, '').split('/');
   if (!['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) lockParent();
   (routes[path] || home)(arg);
-  renderNav(path);
+  renderNav(workoutBoardEnabled && path === 'progress' ? 'history' : path);
   const reminder = dadTestReminder(store.parent.dadTestDate);
   if (!lastDadReminder && reminder && !['parent', 'parent-together', 'parent-week', 'basketball'].includes(path)) {
     lastDadReminder = reminder.key;
@@ -224,7 +241,12 @@ function renderNav(path) {
   const tabs = [['home', '🏠', 'היום'], ['exercises', '🤸', 'תרגילים'], ['arcade', '🎮', 'משחקים'], ['history', '📈', 'מעקב'], ['settings', '⚙️', 'הגדרות']];
   nav.innerHTML = tabs.map(([k, i, n]) => `<a href="#/${k}" class="${(path || 'home') === k ? 'on' : ''}"><span class="i">${i}</span>${n}</a>`).join('');
 }
-window.addEventListener('hashchange', route);
+window.addEventListener('hashchange', () => {
+  setupCameraUpload();
+  cameraUploads.refresh();
+  void cameraUploads.retry();
+  route();
+});
 
 const name = () => store.profile.name.trim();
 const hi = () => name() ? `היי, ${esc(name())}!` : 'היי, אלוף!';
@@ -715,7 +737,7 @@ function wireReps(it, ex, mainFig) {
       k--; if (k > 0) return say3();
       clearInterval(tick); tick = 0; beep(880, 160); mainFig.onRep = () => step(); mainFig.play(ex, 1);
       // מקשיבים לילד: אם הוא אומר את המספר הבא לפני הדמות, מתקדמים איתו (מתעלמים ממה שנשמע מיד אחרי שהאפליקציה דיברה, כדי לא לספור את עצמה)
-      if (store.profile.listen !== false && canListen()) stopListen = listenCount(m => { if (!counting || spokeRecently(700)) return; if (m === n + 1 || m === n + 2) { if (m === n + 2) { n++; show(); } step(true); } });
+      if ((legacyPrivacy() ? store.profile.listen !== false : store.profile.listenLocal === true) && canListen()) stopListen = listenCount(m => { if (!counting || spokeRecently(700)) return; if (m === n + 1 || m === n + 2) { if (m === n + 2) { n++; show(); } step(true); } });
     }, 1000);
   };
   $('#minus').onclick = () => { if (counting) stopCount(); n = Math.max(0, n - 1); show(); };
@@ -810,9 +832,14 @@ function playDemo(g, onDone) { mount('', true); activeGame = runGame(g, { second
 function playGame(g, onDone) {
   mount('', true);
   const secs = store.profile.gameSeconds || 0; // 0 = בלי הגבלה: משחקים עד שנפסלים
+  const progressRun = workoutBoardEnabled ? uid() : null;
   activeGame = runGame(g, { seconds: secs, host: app, best: store.games.bests[g.id] || 0, sound: store.profile.sound !== false, music: store.profile.music !== false, recording: playVoiceRecording, speak: (t, lang) => lang ? speakLang(t, lang) : speak(t),
     tokens: () => store.tokens - 1, onContinue: () => { if (store.tokens <= 1) return false; store.addToken(-1); return true; }, // המשחק הזה עולה מתנה אחת בסוף; המשך עולה עוד אחת
     progress: store.progress[g.id] || null, onProgress: p => { if (p) store.setProgress(g.id, p); },
+    onRoundResult: progressRun ? (result, target) => {
+      const input = {runId: progressRun, gameId: g.id, label: g.name, seconds: secs, result, at: Date.now()};
+      void workoutProgress().then(board => board?.recordArcade(input, target));
+    } : undefined,
     onEnd({ score }) { store.recordGame(g.id, score, false, g.cost || 1); activeGame = null; onDone(score); } });
 }
 
@@ -969,6 +996,11 @@ function donePhase() {
   </div>`, false);
   wireCompanion(st.workouts);
   wireOutdoor(s);
+  if (workoutBoardEnabled) {
+    const target = app.querySelector('.stack');
+    const summary = {stars: workoutReward(s.items).stars, label: workoutName(s)};
+    void workoutProgress().then(board => board?.recordWorkout(s, summary, target));
+  }
   // mount עוצר הקראה קודמת. המשפט החדש נאמר אחרי שמסך הסיום מוצג.
   if (testSuccess) speak(voiceText('dad-test-success'));
   else speak(FRAGMENTS['companion-upgraded']);
@@ -987,6 +1019,22 @@ function quit() {
 }
 
 // ---- מעקב ----
+function progressScreen() {
+  mount(`<div class="stack">
+    <button class="btn big" data-go="#/history">חזרה למעקב</button>
+    <div id="workout-progress-board" role="status">הלוח נטען</div>
+  </div>`);
+  const target = app.querySelector('#workout-progress-board');
+  void workoutProgress().then(board => {
+    if (board && target.isConnected) {
+      target.removeAttribute('role');
+      void board.mount(target);
+    } else if (target.isConnected) {
+      target.textContent = 'הלוח לא נטען. אפשר לפתוח אותו מחדש.';
+    }
+  });
+}
+
 function history() {
   const st = stats(store.sessions);
   const rest = restProgress(store.sessions);
@@ -997,6 +1045,7 @@ function history() {
   mount(`
   <div class="stack">
     <h1>המעקב שלי 📈</h1>
+    ${workoutBoardEnabled ? '<button class="btn primary big" data-go="#/progress">ההתקדמות שלי</button>' : ''}
     ${beltCard(st.workouts)}
     ${companionCard(st.workouts)}
     ${restCard(rest)}
@@ -1084,9 +1133,10 @@ function settings() {
       <label class="field">סגנון האנימציה בתרגילים<select id="animstyle">${[['royiki', 'רועיקי (דו-ממד מצויר)'], ['3d', 'תלת-ממד מצויר'], ['stick', 'דמות מקלות']].map(([k, n]) => `<option value="${k}" ${k === animStyle() ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <p class="muted small">רועיקי קיים ב-12 תרגילים; בשאר התרגילים מוצג התלת-ממד (דמות המקלות אם הטלפון לא תומך).</p>
       <label class="toggle"><b>אימון עם מצלמה</b><input type="checkbox" id="workout-camera-setting" ${p.camera === true ? 'checked' : ''} aria-describedby="workout-camera-info"></label>
-      <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. הגדרת שליחה נעשית רק דרך קישור המעבדה.</p>
-      <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listen !== false ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
-      <p class="muted small">${canListen() ? 'ב"ספור איתי": האפליקציה סופרת בקול, ואם הוא אומר את המספר הבא לפניה, היא מתקדמת איתו. בפעם הראשונה הטלפון יבקש אישור למיקרופון.' : 'הדפדפן הזה לא מזהה דיבור. בכרום באנדרואיד זה עובד.'}</p>
+      ${readCameraConsent() ? '<button class="btn chip" id="camera-upload-off">כיבוי שליחת נתוני מצלמה</button>' : ''}
+      <p class="muted small" id="workout-camera-info">להורה: ספירה אוטומטית בשבעה תרגילים. ${cameraPrivacy(!!readCameraConsent())}. כדי לאשר שליחה מהאימון, פותחים קישור הגדרה לאפליקציית האימון.</p>
+      <div class="toggle"><b>לשמוע אותו סופר (מיקרופון)</b><input type="checkbox" id="listen" ${p.listenLocal === true ? 'checked' : ''} ${canListen() ? '' : 'disabled'}></div>
+      <p class="muted small">${canListen() ? 'באישור הורה, אפשר להפעיל ספירה במיקרופון אם מותקנת במכשיר שפת זיהוי מקומית. אפשר לספור גם בלחיצה.' : 'זיהוי דיבור מקומי אינו זמין בדפדפן הזה. אפשר לספור בלחיצה.'}</p>
       <label class="field">הקול<select id="voiceName"><option value="">אוטומטי (הטוב ביותר במכשיר)</option>${hebrewVoices().map(v => `<option value="${esc(v.name)}" ${v.name === p.voiceName ? 'selected' : ''}>${esc(v.name)}${v.localService === false ? ' (רשת)' : ''}</option>`).join('')}</select></label>
       <label class="field">קצב דיבור<select id="speechRate">${[[0.8, 'לאט'], [0.92, 'רגיל'], [1.05, 'מהיר']].map(([v, n]) => `<option value="${v}" ${Math.abs(v - (p.speechRate || 0.92)) < 0.01 ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="field">גובה הקול<select id="voiceTone">${[['warm', 'חם ורך (מומלץ)'], ['plain', 'רגיל']].map(([v, n]) => `<option value="${v}" ${(p.voiceTone || 'warm') === v ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
@@ -1163,8 +1213,16 @@ function settings() {
   $('#rest').onchange = e => store.setProfile({ rest: +e.target.value });
   $('#sound').onchange = e => store.setProfile({ sound: e.target.checked });
   $('#voice').onchange = e => store.setProfile({ voice: e.target.checked });
-  $('#listen').onchange = e => store.setProfile({ listen: e.target.checked });
+  $('#listen').onchange = e => store.setProfile({ listenLocal: e.target.checked });
   $('#workout-camera-setting').onchange = e => store.setProfile({ camera: e.target.checked });
+  if ($('#camera-upload-off')) $('#camera-upload-off').onclick = async () => {
+    if (!disableUploadConfig(undefined, 'workout')) { alert('לא ניתן לעדכן את הגדרת השליחה במכשיר.'); return; }
+    const { queue, background } = cameraUploads;
+    await queue?.disable();
+    await background?.remove();
+    cameraUploads.refresh();
+    settings();
+  };
   app.querySelectorAll('input[data-vid]').forEach(inp => inp.onchange = async e => {
     const f = e.target.files[0]; if (!f) return; if (f.size > 60e6) return alert('הסרטון גדול מדי (מעל 60MB). מצלמים קצר יותר.');
     try { await saveVideo(inp.dataset.vid, f); } catch { return alert('לא הצלחתי לשמור את הסרטון במכשיר.'); }

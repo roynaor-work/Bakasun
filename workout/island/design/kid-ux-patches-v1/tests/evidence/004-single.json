@@ -1,0 +1,47 @@
+{
+  "id": "004",
+  "mode": "single",
+  "checks": [
+    {
+      "pass": true,
+      "observation": "Trusted swipes bring the download panel into view."
+    },
+    {
+      "pass": true,
+      "observation": {
+        "background": "rgb(244, 240, 228)",
+        "status": 11.700616835012825,
+        "heading": 11.700616835012825,
+        "statusFont": 14,
+        "text": "בודק מה שמור במכשיר..."
+      }
+    }
+  ],
+  "notes": [
+    "Synthetic progressed city, age 7, with the game and learning buildings.",
+    "Dev API opens the existing games library. Subsequent interactions use CDP touch."
+  ],
+  "touch": [
+    {
+      "type": "swipe",
+      "x": 424,
+      "y": 300,
+      "endX": 424,
+      "endY": 110,
+      "steps": 6
+    }
+  ],
+  "screenshots": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "status": "pass",
+  "expected": "pass",
+  "checkout": "complete applied series"
+}

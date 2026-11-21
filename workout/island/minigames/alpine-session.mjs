@@ -1,17 +1,18 @@
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
 import {createAlpineHud} from './alpine-hud.mjs';
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-20';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-20';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-20';
-import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-20';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-21';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-21';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-21';
+import {loadRecords,recordRun,formatRaceTime,alpineRunBalance,alpineHistoryStorage} from './alpine-records.mjs?v=island-v2-20261107-21';
 import {createQualityGovernor} from './alpine-quality.mjs';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-20';
-import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-20';
-import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-20';
-import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-20';
-import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-20';
-import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-20';
-import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-20';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-21';
+import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-21';
+import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-21';
+import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-21';
+import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-21';
+import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-21';
+import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-21';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -100,18 +101,26 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-20', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-20', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-21', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-21', import.meta.url).href;
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const kitCss=el('link');kitCss.rel='stylesheet';kitCss.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;
   const feelCss=el('link');feelCss.rel='stylesheet';feelCss.href=new URL('./alpine-feel.css',import.meta.url).href;
-  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-20',import.meta.url).href;
+  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-21',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
   const trackName = league ? league.name : t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
   // HUD
   const hud = el('section', 'alpine-hud'); hud.setAttribute('aria-label', t('alpine.hud'));
+  const kidGoal=Boolean(league)&&kidUx('030');
+  if(kidGoal)screen.dataset.kidAlpineGoal='true';
+  if(kidGoal)kidUxStyle('030',
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place]{font-size:14px;background:#f5fbfd;color:#173748}' +
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-goal[data-goal=place] b{display:grid;gap:1px;white-space:nowrap}' +
+    '.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-flight-cue:empty{display:none}' +
+    '@media(max-height:500px){.game-screen[data-game=alpineRush][data-kid-alpine-goal] .alpine-kit-speed>.alpine-flight-cue{top:auto;bottom:0;left:calc(100% + 8px)}}'
+  );
   const rank = el('strong', 'alpine-rank', '06'), position = el('div', 'alpine-position'), of = el('span', 'alpine-of'); of.append(ltr('/ 06'), el('small', '', t('alpine.position')));
   position.append(rank, of);
   const info = el('div', 'alpine-race-info'), trackLine = el('span', 'alpine-track-line'); trackLine.append(t('alpine.trackLabel', {number: trackNumber}), el('i'), trackName);
@@ -179,7 +188,7 @@ export function runAlpineSession(ctx) {
   // Start lights (Formula 1 style) instead of the big number; ?alpineStartLights=0 keeps the number. A beep for every lamp and the start
   // cue at green replace the per-second countdown cues.
   const lightsOn = startLightsEnabled(), lights = lightsOn ? createStartLights(doc, {totalMs: balance.physics.countdownSeconds * 1000, onLamp: () => { audio.cue('countdown'); ctx.sound?.('button'); }}) : null;
-  const lightsCss = lightsOn ? el('link') : null; if (lightsCss) { lightsCss.rel = 'stylesheet'; lightsCss.href = new URL('./alpine-start-lights.css?v=island-v2-20261107-20', import.meta.url).href; }
+  const lightsCss = lightsOn ? el('link') : null; if (lightsCss) { lightsCss.rel = 'stylesheet'; lightsCss.href = new URL('./alpine-start-lights.css?v=island-v2-20261107-21', import.meta.url).href; }
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
   const loading = el('div', 'alpine-loading'), loadingText = el('p', '', t('alpine.loading')); loading.append(el('span', 'alpine-spinner'), loadingText);
   // Footer controls (inside the island controls region)
@@ -209,14 +218,50 @@ export function runAlpineSession(ctx) {
   const boostCaption = el('span', 'alpine-boost-caption', t('alpine.boostReady')); boostCaption.setAttribute('aria-hidden', 'true'); boostCaption.hidden = true;
   actions.append(boostArrow, boostCaption);
   const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
+  const kidTricks=kidUx('029');
+  let trickPreview, trickAnimation;
+  if(kidTricks){
+    screen.dataset.kidAlpineTricks='true';
+    kidUxStyle('029',
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick .alpine-trick-label{font-size:14px;color:#103349;opacity:1}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick[data-ready=false]{opacity:1;background:#edf8fc}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick[data-ready=true]{background:#ffae73;color:#102536}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick-caption{font-size:14px;color:#fff;background:#103349;opacity:1}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .alpine-trick-caption[data-ready=true]{color:#102536;background:#ffae73}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview{position:absolute;right:100%;bottom:36px;margin-inline-start:12px;display:grid;justify-items:center;min-width:96px;padding:6px 12px;border-radius:10px;background:#103349;color:#fff;font-size:14px;line-height:1.2;pointer-events:none;white-space:nowrap}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview[hidden]{display:none}' +
+      '.game-screen[data-game=alpineRush][data-kid-alpine-tricks] .kid-alpine-preview .rider{font-size:29px;line-height:1.1}'
+    );
+    trickPreview=el('div','kid-alpine-preview');
+    const rider=el('span','rider','🏂'),move=el('b');
+    rider.setAttribute('aria-hidden','true');trickPreview.append(rider,move);trickPreview.hidden=true;actions.append(trickPreview);
+    const poses={grab:'translateY(-7px) rotate(-24deg) scale(.77)',spin:'rotateY(360deg)',flip:'rotate(-360deg)',combo:'rotateY(360deg) rotate(-360deg)'};
+    const diagrams={grab:'↑ 🏂',spin:'⟳ 🏂',flip:'↶ 🏂',combo:'⟳ ↶ 🏂'};
+    actions.addEventListener('pointerdown',event=>{
+      const button=event.target.closest?.('button[data-trick]');
+      if(!button||button.dataset.ready==='true')return;
+      const id=button.dataset.trick;
+      trickAnimation?.cancel();
+      if(!trickPreview.hidden&&trickPreview.dataset.trick===id){trickPreview.hidden=true;return;}
+      move.textContent=t('alpine.trick.'+id);
+      trickPreview.dataset.trick=id;trickPreview.hidden=false;
+      if(!rider.animate||doc.defaultView.matchMedia('(prefers-reduced-motion: reduce)').matches)rider.textContent=diagrams[id];
+      else{
+        rider.textContent='🏂';
+        const frames=id==='grab'?['none',poses[id],'none']:['none',poses[id]];
+        trickAnimation=rider.animate(frames.map(transform=>({transform})),{duration:1000,iterations:Infinity});
+      }
+    },{capture:true,signal:abort.signal});
+    abort.signal.addEventListener('abort',()=>trickAnimation?.cancel(),{once:true});
+  }
   const center = el('div', 'alpine-center'); center.append(speed, hint, ...(brakeHint ? [brakeHint] : []));
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading); if (lights) stage.append(lights.node);
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);
   dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, cleanCss, app]};
   if (lights) { screen.append(lightsCss); dom.nodes.push(lights.node, lightsCss); app.dataset.startLights = 'true'; }
-  if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-20', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
-  if (v241) { const v241Css = el('link'); v241Css.rel = 'stylesheet'; v241Css.href = new URL('./alpine-v241.css?v=island-v2-20261107-20', import.meta.url).href; screen.append(v241Css); dom.nodes.push(v241Css); screen.dataset.alpineV241 = 'true'; }
+  if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-21', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
+  if (v241) { const v241Css = el('link'); v241Css.rel = 'stylesheet'; v241Css.href = new URL('./alpine-v241.css?v=island-v2-20261107-21', import.meta.url).href; screen.append(v241Css); dom.nodes.push(v241Css); screen.dataset.alpineV241 = 'true'; }
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
@@ -239,7 +284,7 @@ export function runAlpineSession(ctx) {
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   const loadStart = performance.now();
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: timeout 25 s']}); fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-v2-20261107-20').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {}), ...(ghostTrack ? {ghost: ghostTrack} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-v2-20261107-21').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {}), ...(ghostTrack ? {ghost: ghostTrack} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
@@ -259,7 +304,7 @@ export function runAlpineSession(ctx) {
     if (e.objectType === 'ring') { audio.cue('ring'); showCallout('ring', now, 'טבעת', `+${e.value}`); return; }
     audio.cue('power');
     if (e.objectType === 'magnet') { showCallout('power', now, 'מגנט', 'מטבעות וכוכבים נמשכים אליכם'); status.textContent = 'מגנט: מטבעות וכוכבים נמשכים אליכם'; }
-    else { showCallout('power', now, 'מגן', 'הנפילה הבאה לא תפיל'); status.textContent = 'מגן: הנפילה הבאה לא תפיל'; }
+    else { showCallout('power', now, 'מגן', 'המגן מונע את הנפילה הבאה'); status.textContent = 'מגן: מונע את הנפילה הבאה'; }
   }
   let coinPulse = 0;
   function handleEvents(snap, now) {
@@ -293,6 +338,9 @@ export function runAlpineSession(ctx) {
     const boostFull = !!(snap.boostReady && snap.boostFraction >= .98 && !snap.player?.boosting);
     boostArrow.hidden = boostCaption.hidden = !boostFull; boostButton.dataset.full = String(boostFull);
     trickCaption.dataset.ready = String(!!snap.trickReady);
+    if(snap.trickReady&&trickPreview&&!trickPreview.hidden){
+      trickPreview.hidden=true;trickAnimation?.cancel();
+    }
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
     const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count || lightsOn; }
@@ -326,11 +374,11 @@ export function runAlpineSession(ctx) {
     if (stats) { gatesSeen = stats.gates; crashesSeen = stats.crashes; }
     for (const [kind, g] of Object.entries(goalNodes)) {
       let text = '', state = 'open';
-      if (kind === 'place') { text = `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
+      if (kind === 'place') { text = kidGoal ? 'עכשיו מקום '+snap.rank+'|למעבר: מקום '+g.goal.target+' או טוב יותר' : `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
       else if (kind === 'time') { text = goalClock(g.goal.ms); state = snap.timeMs > g.goal.ms ? 'lost' : racing ? 'ok' : 'open'; }
       else if (kind === 'gates') { text = `${gatesSeen}/${g.goal.count}`; state = gatesSeen >= g.goal.count ? 'ok' : 'open'; }
       else { text = crashesSeen ? 'נפילה' : 'נקי'; state = crashesSeen ? 'lost' : racing ? 'ok' : 'open'; }
-      const key = text + state; if (key !== g.shown) { g.shown = key; g.value.textContent = text; g.node.dataset.state = state; }
+      const key = text + state; if (key !== g.shown) { g.shown = key; if(kidGoal&&kind==='place')g.value.replaceChildren(...text.split('|').map(line=>el('span','',line)));else g.value.textContent = text; g.node.dataset.state = state; }
     }
     if (ghostTrack && racing) {
       const at = ghostTimeAt(ghostTrack, snap.distanceM), gap = at === null ? '' : ((snap.timeMs - at) / 1000).toFixed(1);

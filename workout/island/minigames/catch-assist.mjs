@@ -25,7 +25,7 @@ const DEG = 180 / Math.PI;
 export const pick = (arr, stage) => Array.isArray(arr) ? arr[clamp(stage, 1, 10) - 1] ?? arr[arr.length - 1] : arr;
 
 export const STRINGS = Object.freeze({
-  'catch.assist.lead': 'לשם הוא רץ', 'catch.assist.lock': 'נעול', 'catch.assist.close': 'זמן קרוב',
+  'catch.assist.lead': 'לשם הוא רץ', 'catch.assist.lock': 'נעול', 'catch.assist.close': 'הילוך איטי',
 });
 
 /** The v7 levels for the throw engine: the v6 overrides plus a larger catch zone and the extra throws. */

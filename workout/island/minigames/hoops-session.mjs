@@ -1,20 +1,22 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {installHoopsPassDemo} from './kid-hoops-pass-demo.mjs?v=island-v2-20261107-21';
 import {readHoopsPolish} from './hoops-polish-flags.mjs';
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261107-20';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-20';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-20';
+import {gameContext} from './context.mjs?v=island-v2-20261107-21';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-21';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-21';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-20';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-20';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-20';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-20';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-20';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-20';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-20';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-21';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-21';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-21';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-21';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-21';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-21';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-21';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
 
 const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
@@ -41,8 +43,9 @@ export function startHoops(ctx){
  // M4 presentation (11/11): automatic replay after dunks, alley-oops and buzzer/winning threes, reactions, crowd moods, HUD polish; `?hoopsShow=0` restores today
  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
+ const timeoutFeedback=kidUx('039');
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined,
-  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio});
+  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
@@ -58,7 +61,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-20',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-21',import.meta.url).href;screenEl.append(css);
  screenEl.dataset.hoopsShow=show?'v1':'0';
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
@@ -72,12 +75,32 @@ export function startHoops(ctx){
  const clock=node('bdi','hoops-clock','0:00'),shotc=node('bdi','hoops-shotclock','24');mid.append(pips,clock,shotc);
  bug.append(home.s,mid,away.s);
  const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterYellow=node('span','hoops-meter-yellow'),meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterYellow,meterWin,meterFill);
+ kidUxStyle('039',`
+  .game-screen[data-game=streetSlam] .hoops-toast[data-kind=timeout-rejected]{
+   min-height:44px;height:auto;width:max-content;max-width:calc(100% - 32px);box-sizing:border-box;
+   padding:8px 14px;font-size:16px;text-align:center;direction:rtl;
+   color:#fff;background:#442b19;border-color:#ffe2a2;animation:none
+  }
+ `);
  const grade=node('div','hoops-grade');grade.hidden=true;let gradeUntil=0;
  const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
  // show: the broadcast tag during a replay (Hebrew, no words otherwise on the game screen), gone the moment live play returns
  const replayTag=node('div','hoops-replay-tag','שידור חוזר');replayTag.dir='rtl';replayTag.hidden=true;replayTag.setAttribute('aria-live','polite');
  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
- const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
+ const childBench=kidUx('040');
+ kidUxStyle('040',`
+  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench{
+   box-sizing:border-box;max-width:calc(100% - 24px);padding:10px;bottom:max(10px,env(safe-area-inset-bottom));
+   background:#0c111c
+  }
+  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench .hoops-bench-close{
+   position:static;justify-self:center;display:flex;align-items:center;justify-content:center;gap:8px;
+   box-sizing:border-box;width:auto;min-width:48px;min-height:48px;padding:6px 16px;border-radius:12px;
+   color:#13213c;background:#f9e8b7;font-size:16px;font-weight:700;direction:rtl
+  }
+  .game-screen[data-game=streetSlam] .hoops-bench.kid-bench .hoops-bench-close svg{width:20px;height:20px}
+ `);
+ const benchPanel=node('div',childBench?'hoops-bench kid-bench':'hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה ועצירת כדרור (אחריו אין כדרור, עד 2 צעדים)'));
  const stepEl=node('div','hoops-steps');stepEl.hidden=true;stepEl.setAttribute('role','status');
  const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
@@ -90,6 +113,10 @@ export function startHoops(ctx){
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
  controls=createHoopsControls({root,doc,config:{...balance.controls,doubleTap:(balance.play?.doubleTapMs??260)/1000},onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
+ if(kidUx('019'))installHoopsPassDemo({screen:screenEl,help:controls.elements.help,signal:abort.signal,
+  onOpen(){session.setPaused(true);},
+  onClose(){if(!disposed&&screenEl.dataset.paused!=='true')session.setPaused(false);}
+ });
  doc.addEventListener('visibilitychange',()=>{last=0;loop.reset();controls.setEnabled(!doc.hidden&&!paused&&!view?.replaying);audio.setPaused(paused||doc.hidden);},on);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
  const statusEl=ctx.status;
@@ -114,7 +141,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-20');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-21');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,polish,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}
@@ -155,6 +182,10 @@ export function startHoops(ctx){
    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
    if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
    if(e.type==='timeout'&&e.team===0)openBench();
+   if(e.type==='timeoutRejected'&&e.team===0){
+    const reason={used:'לא נשארו פסקי זמן',possession:'פסק זמן כשהכדור אצלכם',phase:'חכו לחידוש המשחק'};
+    showToast(doc.createTextNode(reason[e.reason]),'timeout-rejected',3200);
+   }
    // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
    if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
    if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
@@ -168,7 +199,12 @@ export function startHoops(ctx){
    const num=node('bdi','hoops-card-num',String(p.number)),bar=node('span','hoops-card-energy');bar.style.setProperty('--e',String(p.energy));const fouls=node('span','hoops-card-fouls');for(let k=0;k<p.fouls;k++)fouls.append(node('i'));
    b.append(num,bar,fouls);b.onclick=()=>{if(!pick){pick=p;b.classList.add('picked');return;}const a=pick.onCourt?pick:p,c=pick.onCourt?p:pick;pick=null;if(a.onCourt&&!c.onCourt){engine.substitute(0,a.id,c.id);}openBench();};r.append(b);}return r;};
   benchPanel.append(row(roster.filter(p=>p.onCourt),'court'),row(roster.filter(p=>!p.onCourt),'bench'));
-  const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));close.onclick=()=>{benchPanel.hidden=true;};benchPanel.append(close);
+  const close=node('button','hoops-bench-close');close.type='button';close.setAttribute('aria-label',t('hoops.close'));close.append(hoopsIcon('back',doc));
+  if(childBench){
+   close.setAttribute('aria-label','חזרה למשחק');
+   close.append(node('span','','חזרה למשחק'));
+  }
+  close.onclick=()=>{benchPanel.hidden=true;if(childBench)controls.elements.timeout.focus();};benchPanel.append(close);
  }
 
  const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
@@ -201,7 +237,7 @@ export function startHoops(ctx){
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
   if(autoReplay&&now>=autoReplay.at&&view&&!view.replaying&&!session.debug?.holdReplay)startAutoReplay(now);
   setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);
-  if(s.phase!=='timeout'&&!benchPanel.hidden&&s.phase==='live')benchPanel.hidden=true;
+  if(s.phase!=='timeout'&&!benchPanel.hidden&&(childBench||timeoutFeedback||s.phase==='live'))benchPanel.hidden=true;
   setData(screenEl,'hoopsPhase',s.phase);
  }
 

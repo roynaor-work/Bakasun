@@ -4,8 +4,9 @@ import { IndexedDBUploadStore, UploadLock, UploadQueue, VIDEO_CHUNK_BYTES, UPLOA
 import { BackgroundUploads, NEXT_OPEN_MESSAGE } from '../workout/cam-lab/upload-background.mjs?v=20261013-frames-1';
 import { uploadIndexedDB } from './helpers/upload-idb.mjs';
 
-const config = { endpoint: 'https://upload.example.invalid/exec', secret: 'synthetic-background-key', consentId: 'synthetic-consent' };
-const storePair = () => { const indexedDB = uploadIndexedDB({ legacy: true }); return [new IndexedDBUploadStore({ indexedDB }), new IndexedDBUploadStore({ indexedDB }), indexedDB]; };
+const config = { endpoint: 'https://upload.example.invalid/exec', secret: 'synthetic-background-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
+const endpoints = [config.endpoint];
+const storePair = () => { const indexedDB = uploadIndexedDB({ legacy: true }); return [new IndexedDBUploadStore({ indexedDB, endpoints }), new IndexedDBUploadStore({ indexedDB, endpoints }), indexedDB]; };
 const payload = session => ({ session, video: new Blob([new Uint8Array(VIDEO_CHUNK_BYTES * 2 + 11)], { type: 'video/webm' }), skeleton: '{}', diagnostics: '{}' });
 
 test('version 1 upgrades in place; config copy updates, revocation clears it and stale saves cannot resurrect it', async () => {
@@ -60,7 +61,7 @@ test('Web Locks uses the shared tag and a busy worker never enters the sender', 
 
 test('page retry waits for worker activation and delegates once without starting a page fetch', async () => {
   const [store] = storePair(); let activate, delegated = 0;
-  const queue = new UploadQueue({ config, store, fetchImpl: () => { throw Error('page must not post'); } });
+  const queue = new UploadQueue({ endpoints, config, store, fetchImpl: () => { throw Error('page must not post'); } });
   queue.backgroundReady = new Promise(resolve => { activate = resolve; });
   queue.remoteRetry = async () => { delegated++; return true; };
   const first = queue.retry(); assert.equal(queue.retry(), first);
@@ -75,11 +76,11 @@ test('a bounded drain checkpoints a video chunk; the worker resumes without repe
     time += body.part === 'video' ? 25000 : 1000;
     return { ok: true, json: async () => ({ ok: true, assembled: body.chunk === body.chunks - 1, bytes: body.totalBytes }) };
   };
-  const page = new UploadQueue({ config, store, locks: null, now: () => time, fetchImpl });
+  const page = new UploadQueue({ endpoints, config, store, locks: null, now: () => time, fetchImpl });
   await page.enqueue(payload('resume'));
   assert.equal(await page.retry({ budgetMs: 85000 }), false);
   assert.deepEqual(sent, [['diagnostics', undefined], ['skeleton', undefined], ['video', 0]]);
-  const worker = new UploadQueue({ config: await other.getConfig(), store: other, actor: 'sw', locks: null,
+  const worker = new UploadQueue({ endpoints, config: await other.getConfig(), store: other, actor: 'sw', locks: null,
     now: () => time, fetchImpl, persistConfig: false });
   assert.equal(await worker.retry({ budgetMs: 180000 }), true);
   assert.deepEqual(sent.slice(3), [['video', 1], ['video', 2]]); assert.deepEqual(await store.list(), []);
@@ -93,17 +94,17 @@ test('page and worker queues use the same fallback lease and read checkpoints af
     const body = JSON.parse(options.body); sent.push(body.part); entered(); await gate;
     return { ok: true, json: async () => ({ ok: true, assembled: true, bytes: body.totalBytes }) };
   };
-  const page = new UploadQueue({ config, store, locks: null, fetchImpl });
+  const page = new UploadQueue({ endpoints, config, store, locks: null, fetchImpl });
   await page.enqueue({ ...payload('concurrent'), video: new Blob(['video']) });
   const active = page.retry(); await started;
-  const sw = new UploadQueue({ config, store: other, actor: 'sw', persistConfig: false, locks: null, fetchImpl });
+  const sw = new UploadQueue({ endpoints, config, store: other, actor: 'sw', persistConfig: false, locks: null, fetchImpl });
   assert.equal(await sw.retry(), false); finish(); assert.equal(await active, true);
   assert.equal(await sw.retry(), true); assert.deepEqual(sent, ['diagnostics', 'skeleton', 'video']);
 });
 
 test('pagehide snapshot waits for the final recorder write; only the final video is uploaded', async () => {
   const [store] = storePair(); let time = 0, finishPause;
-  const sent = [], queue = new UploadQueue({ config, store, actor: 'sw', locks: null, now: () => time,
+  const sent = [], queue = new UploadQueue({ endpoints, config, store, actor: 'sw', locks: null, now: () => time,
     setTimer(fn, delay) { if (delay === 1000) { finishPause = fn; return 0; } return setTimeout(fn, delay); },
     fetchImpl: async (_, options) => {
       const body = JSON.parse(options.body); sent.push(body);
@@ -145,9 +146,9 @@ test('both lifecycle hooks register the same sync tag, including a write complet
   try {
     const background = new BackgroundUploads({ queue, window: host, document: { ...host, hidden: false },
       navigator: { serviceWorker: { ...host, async register(url, options) {
-        assert.match(url, /workout\/upload-sw\.js\?v=20261013-frames-1$/);
-        assert.ok(options.scope.endsWith('/workout/')); assert.equal(options.type, 'module'); assert.equal(options.updateViaCache, 'none');
-        return { active: {}, sync: { async register(tag) { tags.push(tag); } } };
+        assert.match(url, /workout\/upload-sw\.js\?v=privacy-consent-2&app=lab$/);
+        assert.ok(options.scope.endsWith('/workout/cam-lab/')); assert.equal(options.type, 'module'); assert.equal(options.updateViaCache, 'none');
+        return { active: { scriptURL: url }, sync: { async register(tag) { tags.push(tag); } } };
       } } } });
     await background.ready;
     background.document.hidden = true; handlers.visibilitychange();

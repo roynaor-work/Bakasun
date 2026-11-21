@@ -1,0 +1,90 @@
+{
+  "id": "014",
+  "mode": "before",
+  "checks": [
+    {
+      "pass": false,
+      "observation": {
+        "recommendation": null,
+        "forecast": null,
+        "recommendationContrast": null,
+        "baselinePrimaryHeight": 40
+      }
+    }
+  ],
+  "notes": [],
+  "touch": [
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"avatar-start\"]').first()",
+      "x": 422,
+      "y": 340,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 1,
+        "action": "avatar-start",
+        "x": 422,
+        "y": 340
+      }
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"toggle-city\"]').first()",
+      "x": 615,
+      "y": 30,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 2,
+        "action": "toggle-city",
+        "x": 615,
+        "y": 30
+      }
+    },
+    {
+      "type": "swipe",
+      "x": 676,
+      "y": 297,
+      "endX": 676,
+      "endY": 94,
+      "steps": 6
+    },
+    {
+      "type": "tap",
+      "selector": "locator('[data-action=\"city-management\"]').first()",
+      "x": 676,
+      "y": 278,
+      "hold": 45,
+      "event": {
+        "type": "pointerdown",
+        "trusted": true,
+        "pointerType": "touch",
+        "pointerCount": 4,
+        "action": "city-management",
+        "x": 676,
+        "y": 278
+      }
+    }
+  ],
+  "screenshots": [
+    "014-before-recommendation.png"
+  ],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390,
+    "deviceScaleFactor": 1,
+    "touchPoints": 5,
+    "lang": "he",
+    "orientation": "landscape-primary"
+  },
+  "browser": "151.0.7922.173",
+  "status": "fail",
+  "expected": "fail",
+  "checkout": "audit baseline"
+}

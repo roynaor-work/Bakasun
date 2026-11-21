@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>קריאות טניס · תצוגת מגרש</title>
+  <link rel="stylesheet" href="assets/studio.css">
+  <link rel="stylesheet" href="assets/court.css">
+  <script src="assets/manifest.js" defer></script>
+  <script src="assets/player.js" defer></script>
+  <script src="assets/court.js" defer></script>
+</head>
+<body class="preview-page">
+  <main class="preview">
+    <section class="console" aria-labelledby="title">
+      <header>
+        <a class="back-link" href="listen.html">דף האזנה <span aria-hidden="true">←</span></a>
+        <h1 id="title">קריאות טניס</h1>
+      </header>
+      <div class="scenarios" role="group" aria-label="תרחיש הגשה">
+        <button type="button" data-kind="out" aria-pressed="false"><b lang="en">OUT</b><span>מחוץ למגרש</span></button>
+        <button type="button" data-kind="net" aria-pressed="false"><b lang="en">NET</b><span>פגיעה ברשת</span></button>
+        <button type="button" data-kind="good" aria-pressed="false"><b>טוב</b><span>כדור על הקו</span></button>
+        <button type="button" data-kind="fault" aria-pressed="false"><b>פולט</b><span>מחוץ לריבוע</span></button>
+      </div>
+      <fieldset class="style-picker">
+        <legend>סגנון שלט</legend>
+        <div class="swatches">
+          <label><input name="style" value="club" type="radio" checked><span>מועדון</span></label>
+          <label><input name="style" value="score" type="radio"><span>לוח תוצאות</span></label>
+        </div>
+      </fieldset>
+      <label class="sound-toggle"><input id="sound" type="checkbox" checked> קריאת שופט וקהל</label>
+    </section>
+    <div class="scene" data-phase="idle">
+      <svg class="court" viewBox="0 0 586 390" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1">
+            <stop stop-color="#45624a"/><stop offset="1" stop-color="#93946a"/>
+          </linearGradient>
+          <radialGradient id="light" cx=".73" cy=".02" r=".8">
+            <stop stop-color="#fbe5a4" stop-opacity=".55"/><stop offset="1" stop-color="#fbe5a4" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="stands" x2="0" y2="1">
+            <stop stop-color="#3f5241"/><stop offset="1" stop-color="#1c3329"/>
+          </linearGradient>
+          <linearGradient id="apron" x2=".15" y2="1">
+            <stop stop-color="#4b5d39"/><stop offset="1" stop-color="#263823"/>
+          </linearGradient>
+          <linearGradient id="clay" x2=".28" y2="1">
+            <stop stop-color="#c17c55"/><stop offset=".65" stop-color="#af6343"/><stop offset="1" stop-color="#974a32"/>
+          </linearGradient>
+          <linearGradient id="ball-paint" x2=".7" y2="1">
+            <stop stop-color="#fcffc5"/><stop offset=".7" stop-color="#d7e85c"/><stop offset="1" stop-color="#9db145"/>
+          </linearGradient>
+          <pattern id="seats" width="29" height="13" patternUnits="userSpaceOnUse">
+            <path d="M1 2h9v4H1zm13 1h13v3H14zM4 9h12v3H4zm16-1h7v3h-7z" fill="#e0bf8b" opacity=".21"/>
+          </pattern>
+          <pattern id="clay-grain" width="29" height="31" patternUnits="userSpaceOnUse">
+            <path d="M3 5h2m11 5h1m8-7h1M9 18h4m12 5h2M3 28h1m14-3h1" stroke="#fbe0ab" stroke-width=".8" opacity=".21"/>
+            <path d="M2 16h2m5-4h1m10 4h3m-6 5h1m9 8h2M7 23h1" stroke="#682c23" stroke-width=".9" opacity=".23"/>
+          </pattern>
+          <pattern id="mesh" x="3" width="6" height="5" patternUnits="userSpaceOnUse">
+            <path d="M0 0h6M0 0v5" fill="none" stroke="#f3e4bf" stroke-width=".65" opacity=".47"/>
+          </pattern>
+        </defs>
+        <path fill="url(#sky)" d="M0 0h586v155H0z"/>
+        <path fill="url(#light)" d="M0 0h586v155H0z"/>
+        <path fill="#4b6146" d="M0 63 42 51l29 5 66-20 38 8 56-17 85 20 44-13 45 17 80-18 58 17 43-11v112H0z"/>
+        <path fill="#314c3b" d="M0 84l48-15 38 5 50-18 37 10 63-12 59 10 50-5 50 8 66-14 46 7 79-5v86H0z"/>
+        <path d="M0 84 165 101h253l168-17v79H0z" fill="url(#stands)"/>
+        <path d="M0 88 165 105h253l168-17v55l-168-5H165L0 143z" fill="url(#seats)"/>
+        <path d="M0 87 165 104h253l168-17M0 100l165 15h253l168-15M0 114l165 12h253l168-12M0 132l165 5h253l168-5" fill="none" stroke="#9d9a73" stroke-opacity=".57"/>
+        <path d="M92 98l14 48m388-48-14 48M181 105v34m223-34v34" fill="none" stroke="#d5b38a" stroke-width="3" opacity=".5"/>
+        <path d="M0 145h586v16H0z" fill="#243f31"/>
+        <path d="M0 146h586" stroke="#a9a67b" stroke-opacity=".57"/>
+        <path d="M0 159h586v231H0z" fill="url(#apron)"/>
+        <path d="M23 390h540L425 157H159z" fill="#753d2b" opacity=".65"/>
+        <path d="M33 390h520L423 155H163z" fill="url(#clay)"/>
+        <path d="M33 390h520L423 155H163z" fill="url(#clay-grain)"/>
+        <path d="M112 345h362l-80-175H192z" fill="#ffb47d" opacity=".11"/>
+        <path d="M112 345h362l-80-175H192zM144 345l67-175m231 175-67-175M200 198h186m-216 78h246m-123-78v78m0 69v-5m0-170v5"
+              fill="none" stroke="#ffefd6" stroke-width="2.1" stroke-linejoin="round" opacity=".91"/>
+        <path d="M115 347h362l-80-175" fill="none" stroke="#57372a" opacity=".27"/>
+        <path d="M145 231h296l10 6H135z" fill="#3a3125" opacity=".29"/>
+        <g id="net-mesh">
+          <path d="M146 211q147 12 294 0v18H146z" fill="#263b32" opacity=".8"/>
+          <path d="M146 211q147 12 294 0v18H146z" fill="url(#mesh)"/>
+          <path d="M146 211q147 12 294 0" fill="none" stroke="#fff4db" stroke-width="2.6"/>
+          <path d="M146 209v24m294-24v24" stroke="#294537" stroke-width="5" stroke-linecap="round"/>
+          <path d="M146 208v2m294-2v2" stroke="#e2dab9" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <path id="trace" fill="none" stroke="#f6eca3" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="3 6" opacity=".79"/>
+        <g id="mark" hidden>
+          <circle r="10" fill="#58332d" fill-opacity=".43" stroke="currentColor" stroke-width="2"/>
+          <circle r="2" fill="currentColor"/>
+        </g>
+        <image id="flash" href="assets/line-flash.png" width="107" height="107" hidden/>
+        <ellipse id="ball-shadow" rx="6" ry="2.6" fill="#311e17"/>
+        <g id="ball">
+          <circle r="5.3" fill="url(#ball-paint)" stroke="#4d582c" stroke-width=".8"/>
+          <path d="M-3.7-3.3C.3-2.6.5 1.5 3.9 2.9" fill="none" stroke="#fffdd0" stroke-width=".75"/>
+        </g>
+      </svg>
+      <div class="call-sign" id="call-sign" aria-hidden="true" hidden>
+        <img width="256" height="256" alt="">
+        <span dir="ltr" lang="en"></span>
+      </div>
+      <div class="court-caption">
+        <span class="indicator" aria-hidden="true"></span>
+        <output id="court-status" role="status">בחרו תרחיש כדי להדגים הגשה</output>
+      </div>
+      <p id="sound-status" role="status" hidden></p>
+    </div>
+    <audio id="sprite" preload="auto" hidden></audio>
+  </main>
+</body>
+</html>

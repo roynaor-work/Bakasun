@@ -1,0 +1,155 @@
+diff --git a/workout/island/learning/interface.mjs b/workout/island/learning/interface.mjs
+index b1d26ee8..d2a44e74 100644
+--- a/workout/island/learning/interface.mjs
++++ b/workout/island/learning/interface.mjs
+@@ -19,6 +19,28 @@ function townImage(seed) {
+   const clouds=Array.from({length:5},(_,i)=>{const x=20+i*60,y=12+(seed+i*7)%25,r=8+(seed+i)%6;return `<g fill="#fff8ed" opacity=".8"><ellipse cx="${x}" cy="${y+7}" rx="${r+8}" ry="7"/><circle cx="${x-5}" cy="${y+2}" r="${r-2}"/><circle cx="${x+5}" cy="${y}" r="${r}"/></g>`;}).join('');
+   return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2=".71"><stop stop-color="${sky}"/><stop offset="1" stop-color="#edf3ed"/></linearGradient></defs><rect width="300" height="300" fill="url(#sky)"/>${clouds}<circle cx="${45+seed%210}" cy="40" r="22" fill="#f8cd72"/><path d="M0 180Q70 145 150 182T300 173V300H0" fill="#91c9a3"/>${houses}<path d="M0 265L300 218" stroke="#dfc5a3" stroke-width="30"/><path d="M0 265L300 218" stroke="#fff3cf" stroke-width="2" stroke-dasharray="12 10"/><rect x="25" y="198" width="8" height="43" fill="#a27856"/><circle cx="29" cy="195" r="24" fill="#5f9e7e"/><rect x="263" y="176" width="8" height="43" fill="#a27856"/><circle cx="267" cy="173" r="25" fill="#659d78"/></svg>`);
+ }
++kidUxStyle('028', `
++  .modal.learning-daily[data-kid-daily-route]{width:min(680px,100%);padding:14px}
++  .modal.learning-daily[data-kid-daily-route] .modal-subtitle{margin-block:3px 7px;font-size:14px;color:#24443c}
++  .kid-daily-journey{display:flex;align-items:stretch;gap:8px;color:#203f36}
++  .kid-daily-journey ol{list-style:none;display:flex;align-items:stretch;flex:1;gap:5px;margin:0;padding:0;min-width:0}
++  .kid-daily-journey-item{min-width:0;flex:1;display:grid;text-align:center;align-content:center;gap:2px;padding:5px 3px;border-radius:8px;border:2px solid #c7d9c3;background:#edf3e8;font-size:14px;line-height:1.25}
++  .kid-daily-journey-item[aria-current=step]{border-color:#436b39;background:#e7efcb}
++  .kid-daily-journey-item[data-finished=true]{background:#d7e8ca}
++  .kid-daily-journey-item.kid-daily-game{background:#f7e9bb;border-color:#d5b76b}
++  .kid-daily-journey-icon{font-size:23px}
++  .kid-daily-questions{letter-spacing:2px;overflow-wrap:anywhere}
++  .kid-daily-journey button{align-self:center;min-width:48px;min-height:48px;font-size:21px}
++  .modal.learning-daily[data-kid-daily-route] .learning-stations{margin-block:9px;gap:8px}
++  .modal.learning-daily[data-kid-daily-route] .learning-station{min-height:48px;padding:5px;font-size:14px}
++  .kid-daily-result-actions{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:8px;margin-block:8px}
++  .kid-daily-result-actions button{font-size:14px;min-height:48px;flex:1 1 110px;padding:6px 8px}
++  .kid-daily-result-actions [data-action=kid-daily-resume]{flex-basis:100%;background:#285f54;color:#fff}
++  @media(max-width:450px){.kid-daily-journey{flex-wrap:wrap}.kid-daily-journey ol{flex-basis:100%}}
++`);
++
++const dailyGameIcons = {soccer:'⚽',tennis:'🎾',navalDuel:'⚓',fireRescue:'🚒',alienDefense:'🚀',islandRacing:'🏎️',streetSlam:'🏀',alpineRush:'🏂',boarDefense:'🐗',catchCriminal:'🚓'};
++
+ export class LearningInterface {
+   constructor({ui,engine}) {
+     Object.assign(this,{ui,engine});ui.learningInterface=this;this.voice=createLearningVoice({monitorErrors:kidUx('027')});
+@@ -46,7 +68,7 @@ export class LearningInterface {
+     this.mapButton.dataset.complete=String(s.complete);this.mapButton.setAttribute('aria-label',this.mapButton.textContent);
+     const signature=JSON.stringify(s),changed=this.dailySignature&&this.dailySignature!==signature;this.dailySignature=signature;
+     if(changed){
+-      if(this.ui.modalRoot.querySelector('[data-daily-mission]'))this.daily();
++      if(this.ui.modalRoot.querySelector('[data-daily-mission]'))this.daily(this.dailyGameId);
+       for(const card of this.ui.modalRoot.querySelectorAll('.game-card')){
+         const available=this.ui.activityInterface.availability(card.dataset.game),play=card.querySelector('[data-action=game-play]');
+         card.dataset.dailyLocked=String(s.locked);card.dataset.locked=String(s.locked||!available.ok);
+@@ -56,15 +78,49 @@ export class LearningInterface {
+     }
+   }
+   pauseMap(){this.ui.view.paused=true;const cleanup=this.ui.modalCleanup;this.ui.modalCleanup=()=>{cleanup?.();this.ui.view.paused=false;};}
+-  daily(){
++  daily(gameId=null){
++    const selected = kidUx('028') ? this.engine.registry.minigames.get(gameId) : null;
++    this.dailyGameId = selected?.id ?? null;
+     const dialog=this.ui.openModal('learning.daily','learning.dailyHint'),s=this.engine.learningStatus();dialog.dataset.dailyMission='true';dialog.classList.add('learning-daily');this.pauseMap();dialog.querySelector('.modal-subtitle').textContent=s.target===1?'סבב קצר של 5 שאלות פותח את המשחקים':'שני סבבים של 8 שאלות פותחים את המשחקים';
+-    dialog.append(el('div','learning-daily-progress',`${s.complete?'✅':'📚'} ${Math.min(s.target,s.rounds)} / ${s.target}`));
+-    const progress=el('progress');progress.max=s.target;progress.value=Math.min(s.target,s.rounds);progress.setAttribute('aria-label','סבבי לימוד היום');dialog.append(progress);
+-    dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד!':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
++    if (kidUx('028') && s.locked) {
++      const title = selected ? this.ui.t(selected.title) : 'משחקי העיר';
++      dialog.dataset.kidDailyRoute = selected?.id ?? 'games';
++      dialog.querySelector('.modal-subtitle').textContent = selected ? `בוחרים תחנה. אחרי הלימוד חוזרים ל${title}.` : 'בוחרים תחנה. אחרי הלימוד המשחקים נפתחים.';
++      const journey = el('div', 'kid-daily-journey');
++      const steps = el('ol');
++      steps.setAttribute('aria-label', 'הדרך למשחק');
++      const questions = questionsForAge(this.engine.state.learning.age);
++      for(let i=0;i<s.target;i++){
++        const item = el('li', 'kid-daily-journey-item');
++        const icon = el('span', 'kid-daily-journey-icon', i < s.rounds ? '✅' : '🧩');
++        icon.setAttribute('aria-hidden', 'true');
++        const dots = el('span', 'kid-daily-questions', '•'.repeat(questions));
++        dots.setAttribute('aria-label', `${questions} שאלות`);
++        if (i===s.rounds) item.setAttribute('aria-current', 'step');
++        item.dataset.finished = String(i < s.rounds);
++        item.setAttribute('aria-label', `סבב ${i+1}, ${questions} שאלות${i < s.rounds ? ', הושלם' : ''}`);
++        item.append(icon, el('strong', '', `סבב ${i+1}`), dots);
++        steps.append(item);
++      }
++      const goal = el('li', 'kid-daily-journey-item kid-daily-game');
++      const icon = el('span', 'kid-daily-journey-icon', dailyGameIcons[selected?.id] ?? '🎮');
++      icon.setAttribute('aria-hidden', 'true');
++      goal.append(icon, el('strong', '', title)); steps.append(goal);
++      const instruction = s.target===1 ? 'בִּחֲרוּ תַּחֲנָה וְסַיְּמוּ סֶבֶב אֶחָד.' : 'בִּחֲרוּ תַּחֲנָה וְסַיְּמוּ שְׁנֵי סְבָבִים.';
++      const message = instruction + (selected ? ' אַחֲרֵי זֶה חוֹזְרִים לַמִּשְׂחָק.' : ' אַחֲרֵי זֶה הַמִּשְׂחָקִים נִפְתָּחִים.');
++      const hear = button('🔊', 'kid-daily-hear', () => this.voice.speak(message), 'learning-small');
++      hear.setAttribute('aria-label', 'שמיעת ההוראות');
++      journey.append(steps, hear);
++      dialog.append(journey);
++    } else {
++      dialog.append(el('div','learning-daily-progress',`${s.complete?'✅':'📚'} ${Math.min(s.target,s.rounds)} / ${s.target}`));
++      const progress=el('progress');progress.max=s.target;progress.value=Math.min(s.target,s.rounds);progress.setAttribute('aria-label','סבבי לימוד היום');dialog.append(progress);
++      dialog.append(el('p','',s.complete?'הַמִּשְׂחָקִים פְּתוּחִים. אֶפְשָׁר לְהַמְשִׁיךְ לִלְמֹד!':s.firstDay?`בַּיּוֹם הָרִאשׁוֹן הַמִּשְׂחָקִים פְּתוּחִים. מָחָר נַתְחִיל בְּ־${s.target} סְבָבִים.`:!this.engine.state.learning.required?'חובת המשימה כבויה בהגדרות ההורה.':`בְּחַרוּ תַּחֲנָה וְסַיְּמוּ ${s.target} סְבָבִים, גַּם בְּאוֹתָהּ תַּחֲנָה.`));
++    }
+     const choices=el('div','learning-stations');
+     for(const [id,station]of Object.entries(STATIONS)){
+       const built=this.engine.state.buildings.some(b=>b.typeId===station.building),level=this.engine.state.learning.stations[id].level;
+-      const b=button(`${station.icon} ${station.title}\n${built?`רָמָה ${level} · ${questionsForAge(this.engine.state.learning.age)} שְׁאֵלוֹת`:'בּוֹנִים בָּעִיר'}`,'daily-station',()=>{if(built)this.start(id);else{this.ui.closeModal();this.ui.openBuildingCatalog(station.building);}},'learning-station');b.dataset.station=id;choices.append(b);
++      const b=button(`${station.icon} ${station.title}\n${built?`רָמָה ${level} · ${questionsForAge(this.engine.state.learning.age)} שְׁאֵלוֹת`:'בּוֹנִים בָּעִיר'}`,'daily-station',()=>{if(built)this.start(id, selected?.id);else{this.ui.closeModal();this.ui.openBuildingCatalog(station.building);}},'learning-station');b.dataset.station=id;choices.append(b);
+     }
+     dialog.append(choices,el('p','learning-workout','🏃 אִמּוּן הַיּוֹם · אֶפְשָׁר לְהִתְאַמֵּן גַּם בְּאַפְּלִיקַצְיַת הַכֹּשֶׁר.'));
+   }
+@@ -76,7 +132,8 @@ export class LearningInterface {
+     ages.append(el('p','','בחירת גיל קובעת את רמת ההתחלה בכל התחנות. לאחר מכן הרמה מסתגלת לתשובות.'));
+     for(let age=4;age<=10;age++){const b=button(String(age),'learning-age',()=>{this.engine.setLearningAge(age);for(const n of ages.querySelectorAll('button'))n.setAttribute('aria-pressed',String(Number(n.textContent)===age));},'learning-small');b.dataset.age=age;b.setAttribute('aria-label',`גיל ${age}, רמת התחלה ${levelForAge(age)}`);b.setAttribute('aria-pressed',String(this.engine.state.learning.age===age));ages.append(b);}dialog.append(ages);
+   }
+-  start(station){
++  start(station, gameId=null){
++    this.dailyGameId = kidUx('028') ? gameId : null;
+     this.ui.closeModal();this.ui.closeInfo();this.ui.cancelPlacement();this.ui.closeDetails();this.ui.setDockOpen(false);
+     const r=this.engine.startLearning(station,{languagePictures:kidUx('027')&&station==='language'&&!this.voice.available});if(!r.ok){this.ui.result(r);return;}
+     const dialog=this.ui.openModal('learning.title','learning.subtitle');dialog.classList.add('learning-screen');dialog.dataset.learning=station;this.dialog=dialog;this.ui.view.paused=true;
+@@ -176,6 +233,7 @@ export class LearningInterface {
+   result(result){
+     this.ui.closeModal();const dialog=this.ui.openModal('learning.done','learning.doneHint');dialog.classList.add('learning-result');dialog.dataset.learningResult=result.station;
+     this.ui.modalCleanup=()=>this.voice.stop();
++    if(kidUx('028')&&this.dailyGameId)this.pauseMap();
+     const s=this.engine.learningStatus(),stars=el('div','learning-result-stars','★'.repeat(result.stars)+'☆'.repeat(3-result.stars)),money=el('div','learning-result-money',`🪙 +${result.money}`);
+     if(result.pictureOnly){
+       dialog.querySelector('h2').textContent='⭐';dialog.querySelector('.modal-subtitle').remove();
+@@ -185,7 +243,25 @@ export class LearningInterface {
+       dialog.querySelector('h2').textContent=f(dialog.querySelector('h2').textContent);dialog.querySelector('.modal-subtitle').textContent=f(dialog.querySelector('.modal-subtitle').textContent);
+       dialog.append(stars,el('h3','',f(STATIONS[result.station].title)),el('p','',f(`${result.firstTry} מִתּוֹךְ ${result.total} בַּנִּסָּיוֹן הָרִאשׁוֹן · ${result.retried} אַחֲרֵי רֶמֶז`)),money,el('p','',f(`רָמָה ${result.level} · ${Math.min(s.target,s.rounds)}/${s.target} סְבָבִים הַיּוֹם`)));
+     }
+-    const daily=button(result.pictureOnly?'📚':'📚 משימת היום','learning-result-daily',()=>this.daily()),map=button(result.pictureOnly?'🏝️':'🏝️ חוזרים לעיר','learning-result-map',()=>this.ui.closeModal(),'learning-small');daily.setAttribute('aria-label','משימת היום');map.setAttribute('aria-label','חוזרים לעיר');dialog.append(daily,map);
++    const daily=button(result.pictureOnly?'📚':'📚 משימת היום','learning-result-daily',()=>this.daily(this.dailyGameId)),map=button(result.pictureOnly?'🏝️':'🏝️ חוזרים לעיר','learning-result-map',()=>this.ui.closeModal(),'learning-small');daily.setAttribute('aria-label','משימת היום');map.setAttribute('aria-label','חוזרים לעיר');
++    const selected = kidUx('028') ? this.engine.registry.minigames.get(this.dailyGameId) : null;
++    if (selected) {
++      const actions = el('div', 'kid-daily-result-actions');
++      actions.setAttribute('role', 'group');
++      actions.setAttribute('aria-label', 'הצעד הבא');
++      if (s.locked) {
++        daily.textContent = '🧩 ממשיכים לסבב הבא';
++        daily.setAttribute('aria-label', 'ממשיכים לסבב הבא');
++      } else {
++        const resume = button(`${dailyGameIcons[selected.id] ?? '🎮'} חוזרים ל${this.ui.t(selected.title)}`, 'kid-daily-resume', () => this.ui.activityInterface.gameHome(selected.id));
++        actions.append(resume);
++      }
++      actions.append(daily,map);
++      const anchor = dialog.querySelector('.modal-subtitle') ?? dialog.querySelector('h2');
++      anchor.after(actions);
++    } else {
++      dialog.append(daily,map);
++    }
+     this.voice.speak(`כָּל הַכָּבוֹד! סִיַּמְתֶּם סֶבֶב. קִבַּלְתֶּם ${result.money} מַטְבְּעוֹת וְ־${result.stars} כּוֹכָבִים.`);
+   }
+   dispose(){this.clearQuestion();clearInterval(this.dayTimer);clearInterval(this.clockTimer);this.stopVoiceListener();this.voice.dispose();this.unsubscribe();this.panel.remove();}
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index ef168ffe..b3ca6e52 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -78,7 +78,7 @@ export class ActivityInterface {
+   }
+   enabledGames(){return [...this.engine.registry.minigames.values()].filter(g=>this.data.featureFlags.minigames&&(!g.featureFlag||this.data.featureFlags[g.featureFlag]));}
+   availability(id){return gameAvailability(this.engine.state,this.data.config,id);}
+-  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense','catchCriminal'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily();return true;}return false;}
++  requireDaily(id){if(['soccer','tennis','navalDuel','fireRescue','alienDefense','islandRacing','streetSlam','alpineRush','boarDefense','catchCriminal'].includes(id)&&this.engine.learningStatus().locked){this.ui.learningInterface.daily(id);return true;}return false;}
+   requireBuilding(id){if(this.requireDaily(id))return true;const available=this.availability(id);if(available.ok)return false;this.ui.closeModal();this.ui.openBuildingCatalog(available.buildingId);return true;}
+   playButton(id,action,play){const available=this.availability(id),locked=this.engine.learningStatus().locked,run=()=>{if(this.requireDaily(id))return;available.ok?play():this.requireBuilding(id);};return locked?lockedTaskButton(action,run,'primary-button'):button(this.t(available.ok?'minigame.play':available.reason),action,run,'primary-button');}
+   teamLabel(){const team=this.engine.state.team;return this.t('minigame.soccer.teamRank',{team:this.t(team.nameId),wins:team.wins,rank:this.t(this.data.config.minigames.soccer.teamRanks[team.rank].title)});}

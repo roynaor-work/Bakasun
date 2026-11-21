@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#49252d"/>
+      <stop offset="1" stop-color="#211517"/>
+    </linearGradient>
+    <pattern id="pixels" width="5" height="5" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r=".7" fill="#ff806b" opacity=".18"/>
+    </pattern>
+  </defs>
+  <path d="M13 91h210l22 22v34l-15 15H35L13 140z" fill="none" stroke="#ff765f" stroke-opacity=".19" stroke-width="9"/>
+  <path d="M13 88h210l22 22v37l-15 15H35L13 140z" fill="url(#panel)" stroke="#ff826e" stroke-width="2"/>
+  <path d="M13 88h210l22 22v37l-15 15H35L13 140z" fill="url(#pixels)"/>
+  <path d="M17 108v-16h52m120 66h39l13-13m-1-30-19-19h-15" fill="none" stroke="#ffc2ae" stroke-width="2.6"/>
+  <path d="M84 96l-7 60" stroke="#ff9f89" stroke-opacity=".46"/>
+  <path d="M28 112l10-10h28l7 7v30l-10 10H36l-8-8z" fill="#632e38" stroke="#f58178"/>
+  <path d="M44 116v19h14m-9-14 10-6" fill="none" stroke="#ffbfad" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="61" cy="114" r="3.8" fill="#ffe1d8"/>
+  <path d="M211 109l8 8m-1-8 8 8m-13 14 8 8m-1-8 8 8" stroke="#ff826e" stroke-opacity=".42" stroke-width="1.4"/>
+</svg>

@@ -8,7 +8,7 @@ import { selectHebrewVoice, preferredHebrewVoices, voiceId } from './voice-selec
 import { createLabSpeech } from './speech.mjs';
 import { CAMERA_LINES } from '../js/voice-lines.js?v=20261010-camera-1';
 import { SkeletonRecorder } from './recording.mjs';
-import { initializeUploadConfig, disableUploadConfig, UploadQueue, createSessionId } from './upload.mjs?v=20261013-frames-1';
+import { initializeUploadConfig, disableUploadConfig, confirmCameraUpload, UploadQueue, createSessionId, UPLOAD_STORAGE_KEY } from './upload.mjs?v=20261013-frames-1';
 import { BackgroundUploads, NEXT_OPEN_MESSAGE } from './upload-background.mjs?v=20261013-frames-1';
 import { AutoStart } from './auto-start.mjs';
 import { RestCalibration } from './rest-calibration.mjs';
@@ -31,7 +31,7 @@ const instructions = {
   'glute-bridge': 'מבט צד: שכיבה על הגב וברכיים כפופות. מרימים אגן לקו כתפיים–אגן–ברכיים, בלי לקמר גב, ומורידים. עלייה וירידה = חזרה.',
 };
 const spoken = {
-  uploadOff: 'הַשְּׁלִיחָה לִבְדִיקָה כְּבוּיָה בַּטֵּלֵפוֹן הַזֶּה. הַנִּיסָּיוֹן יִישָּׁאֵר רַק בַּטֵּלֵפוֹן וְלֹא יַגִּיעַ לִבְדִיקָה. כְּדֵי לְהַפְעִיל, פּוֹתְחִים פַּעַם אַחַת אֶת קִישּׁוּר הַהַגְדָּרָה.',
+  uploadOff: 'הַשְּׁלִיחָה לִבְדִיקָה כְּבוּיָה בַּטֵּלֵפוֹן הַזֶּה. הַנִּיסָּיוֹן יִישָּׁאֵר רַק בַּטֵּלֵפוֹן וְלֹא יַגִּיעַ לִבְדִיקָה. כְּדֵי לְהַפְעִיל, פּוֹתְחִים אֶת קִישּׁוּר הַהַגְדָּרָה וּמְאַשְּׁרִים אֶת הַיַּעַד.',
   placement: 'מַנִּיחִים אֶת הַמַּכְשִׁיר בְּיַצִּיבוּת עַל הָרִצְפָּה אוֹ עַל כִּסֵּא, בְּלִי הֲטָיָה לַצַּד. מְכַוְּנִים עַד שֶׁרוֹאִים אֶת כָּל הַגּוּף. בִּשְׁנַיִם עוֹמְדִים זֶה לְצַד זֶה בְּאוֹתוֹ מֶרְחָק מֵהַמַּצְלֵמָה.',
   ready: 'רוֹאִים אֶת כָּל הַגּוּף. אֶפְשָׁר לְהַתְחִיל.',
   squats: 'יוֹרְדִים בְּנוֹחוּת כְּאִלּוּ מִתְיַשְּׁבִים, וְאָז עוֹמְדִים שׁוּב. הַבִּרְכַּיִם בְּכִוּוּן אֶצְבְּעוֹת הָרַגְלַיִם.',
@@ -67,7 +67,7 @@ let attemptTimeline = {};
 const mark = name => { if (attemptTimeline[name] == null) attemptTimeline[name] = Math.round(performance.now() - pageOpenedAt); };
 const wakeLock = new ScreenWakeLock();
 let workerLoading = null, workerLoaded = false, configureWaiter = null, workerLoadTimer = 0;
-const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history });
+const uploadSetup = initializeUploadConfig({ location: window.location, history: window.history, approve: confirmCameraUpload });
 let uploadConfig = uploadSetup.config;
 let uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
 const backgroundOptions = { onSupport: supported => {
@@ -87,7 +87,7 @@ function paintUploadConfig() {
   $('upload-off-banner').hidden = !!uploadConfig;
   $('upload-on-banner').hidden = !uploadConfig;
   $('result-upload-off').hidden = !!uploadConfig;
-  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד, האבחון ותמונות מפתח חדות. בסיום הנתונים נשלחים ליעד שהוגדר בקישור. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
+  $('privacy').textContent = uploadConfig ? 'ההורה הפעיל שליחה לבדיקה: המצלמה מוקלטת ללא קול, יחד עם השלד, האבחון ותמונות מפתח חדות. בסיום הנתונים נשלחים ליעד שאושר. אם השליחה נכשלת הם נשמרים במכשיר לניסיון הבא.' :
     'מצב פרטי: עיבוד במכשיר. בלי הגדרת שליחה של ההורה אין צילום וידאו או שליחת נתונים. אפשר להקליט שלד ולהוריד אותו למכשיר.';
   $('record').checked = !!uploadConfig;
   $('record').disabled = !!uploadConfig;
@@ -110,7 +110,7 @@ $('upload-disable').onclick = async () => {
 };
 window.addEventListener('online', () => { if (uploadConfig) void uploadQueue.retry().catch(() => {}); });
 window.addEventListener('storage', event => {
-  if (event.key !== 'camlab.upload') return;
+  if (event.key !== UPLOAD_STORAGE_KEY) return;
   keyframes?.cancel(); uploadQueue?.stop(); backgroundUploads.detach();
   uploadConfig = initializeUploadConfig({ location: { hash: '' } }).config;
   uploadQueue = uploadConfig ? new UploadQueue({ config: uploadConfig, onStatus: paintUploadStatus }) : null;
@@ -145,7 +145,7 @@ function voiceStatus() {
   select.value = selectedVoiceId; select.disabled = !choices.length || !$('voice').checked;
   const voice = guidanceVoice();
   $('voice-status').textContent = !voice ? 'הקלטה בעברית תתנגן כשיש קובץ. אין קול עברי זמין להקראה; אחרת מופיעים רק טקסט וחץ.' :
-    `הקלטה בעברית קודמת להקראה. קול הגיבוי: ${voice.name || voice.lang} — ${voice.localService ? 'עברית מקומית' : 'עברית ברשת למשפטי ההכוונה הקבועים'}.`;
+    `הקלטה בעברית קודמת להקראה. קול הגיבוי: ${voice.name || voice.lang} — עברית מקומית.`;
   announceUploadWarning();
 }
 function cancelSpeech() { voiceGeneration++; placementSpeechActive = false; playingHintEvent = null; labSpeech.stop(); }

@@ -16,10 +16,10 @@
 // Usage: CHROMIUM_PATH=/opt/pw-browsers/chromium PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js RV24_SCENARIO=turbo RV24_PART=racing-v24-fixes/turbo-after \
 //        [RV24_QUERY='racingTurbo=v23'] [RV24_FPS=30] node workout/island/tests/racing-v24-touch-browser.mjs
 import {mkdir,writeFile} from 'node:fs/promises';
-import {fileURLToPath} from 'node:url';
+import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
 import {verify} from './night-browser.mjs';
 const scenario=process.env.RV24_SCENARIO||'turbo',part=process.env.RV24_PART||'racing-v24-fixes/'+scenario,extra=process.env.RV24_QUERY||'',FPS=Number(process.env.RV24_FPS)||30;
-const dir=fileURLToPath(new URL(`../verification/${part}/`,import.meta.url));await mkdir(dir+'frames/',{recursive:true});
+const dir=await browserArtifacts(part);await mkdir(dir+'frames/',{recursive:true});
 const FRAME=Math.round(1000/FPS);
 
 /** In-page audio log, installed before the race session creates its AudioContext: one-shots (buffer sources without loop, oscillators) with the race time,

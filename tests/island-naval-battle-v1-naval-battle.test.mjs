@@ -251,7 +251,7 @@ test('?navalBattle=0 reproduces the v24.5 stock snapshots', async t => {
   t.after(() => rm(root, {recursive: true, force: true}));
   const runtime = join(root, 'workout/island');
   await mkdir(runtime, {recursive: true});
-  const paths = ['activity', 'data', 'engine', 'extensions', 'minigames', 'offline-manifest.json', 'presentation', 'release.mjs', 'ui', 'vendor', 'view'];
+  const paths = ['activity', 'data', 'engine', 'extensions', 'kid-ux.mjs', 'minigames', 'offline-manifest.json', 'presentation', 'release.mjs', 'ui', 'vendor', 'view'];
   await Promise.all([
     ...paths.map(path => cp(join(island, path), join(runtime, path), {recursive: true})),
     cp(join(island, 'design/hud-kit'), join(runtime, 'design/hud-kit'), {recursive: true}),

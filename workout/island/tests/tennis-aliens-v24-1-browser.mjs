@@ -11,8 +11,9 @@
 //      ONLY=aliens|tennis node workout/island/tests/tennis-aliens-v24-1-browser.mjs   (frames and verification.json: verification/tennis-aliens-v24-1/)
 // The load time before/after is measured on a real clock by workout/island/tools/tennis-load-ab.mjs.
 import {verify} from './night-browser.mjs';
-import {mkdir} from 'node:fs/promises';
-const frames=new URL('../verification/tennis-aliens-v24-1/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+import {pathToFileURL} from 'node:url';
+import {browserArtifacts} from '../../../tests/helpers/island-browser.mjs';
+const frames=pathToFileURL(await browserArtifacts('frames'));
 const only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
 const V24={aliens:'&alienVulcan=v24&alienHud=v24&alienArsenal=0&alienEnemyFire=v24',tennis:'&tennisGrip=0&tennisOut=v24&tennisReceive=0&tennisLoad=v24'};
 let failures=[];

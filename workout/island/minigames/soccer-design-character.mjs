@@ -14,15 +14,15 @@ import {soccerFeelEnabled,soccerFeelDiveClip,soccerFeelDivePlan,soccerFeelSlideP
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
 import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
-import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-20'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
-import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-20';
-import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-20';
-import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-20';
+import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-21'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-21';
+import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-21';
+import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-21';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 // v24 (13/11): Codex body v2 (?athleteBodyV2=0), clips v13 (?soccerClipsV13=0)
-import {athleteBodyV2Enabled,soccerClipsV13Enabled,soccerV24ClipsUrl,soccerV24ClipStates,soccerV24RestartClip,SOCCER_V24_SLIDE,soccerV24SlideTime,soccerV24LobClip,soccerV24ChestClip,SOCCER_V24_CHEST,SOCCER_V24_HELD,soccerV24Held} from './soccer-v24.mjs?v=island-v2-20261107-20';
+import {athleteBodyV2Enabled,soccerClipsV13Enabled,soccerV24ClipsUrl,soccerV24ClipStates,soccerV24RestartClip,SOCCER_V24_SLIDE,soccerV24SlideTime,soccerV24LobClip,soccerV24ChestClip,SOCCER_V24_CHEST,SOCCER_V24_HELD,soccerV24Held} from './soccer-v24.mjs?v=island-v2-20261107-21';
 // v24.1 (14/11): Codex tackle-keeper-v2 (?soccerTackleV2=0), volley-scissor-v1 (?soccerAirChoice=0), kicks-v2 (?soccerKicksV2=0); `?soccerV241=0` = all off
-import {soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-20';
+import {soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-21';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));

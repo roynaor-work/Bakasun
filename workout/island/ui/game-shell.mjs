@@ -1,4 +1,51 @@
-import {nativeShellAction} from './press.mjs?v=island-v2-20261107-20';
+import {nativeShellAction} from './press.mjs?v=island-v2-20261107-21';
+import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-21';
+
+kidUxStyle('007', `
+  .game-screen.game-screen[data-paused] .game-header .game-pause[data-kid-ux-pause-label] {
+    flex-direction: column;
+    gap: 3px;
+    padding: 3px;
+    min-width: 56px;
+    min-height: 56px;
+  }
+  .game-screen.game-screen[data-paused] .game-header .game-pause[data-kid-ux-pause-label]::after {
+    content: attr(data-kid-ux-pause-label) / "";
+    display: block !important;
+    font-size: 14px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .game-screen.game-screen .game-pause-card [data-kid-ux-actions] {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .game-screen.game-screen .game-pause-card [data-kid-ux-actions] button {
+    flex: 1 0 72px;
+    width: auto;
+    height: auto;
+    min-width: 48px;
+    min-height: 60px;
+    flex-direction: column;
+    gap: 5px;
+    padding: 7px;
+    background: #244c63;
+    color: #fff8e8;
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  .game-screen.game-screen .game-pause-card [data-kid-ux-actions] button[data-action="game-resume"] {
+    background: #205d3c;
+  }
+  .game-screen.game-screen .game-pause-card [data-kid-ux-actions] button[data-action="game-exit"] {
+    background: #822d35;
+  }
+  .game-screen.game-screen .game-pause-card [data-kid-ux-actions] button svg {
+    width: 27px;
+    height: 27px;
+  }
+`);
+
 
 const entries=new WeakMap();
 export function installedShell(target=window){
@@ -107,6 +154,7 @@ export class GameShell {
   constructor({dialog,stage,controls,pauseButton,sound,t,onExit,landscape=false}) {
     Object.assign(this,{dialog,stage,controls,pauseButton,sound,t,onExit});
     this.events=new AbortController();this.paused=false;this.disposed=false;
+    if(kidUx('007'))pauseButton.dataset.kidUxPauseLabel=t('game.pause');
     const options={signal:this.events.signal};
     pauseButton.addEventListener('click',()=>this.paused?this.resume():this.pause('exit'),options);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.pause();},options);
@@ -162,8 +210,27 @@ export class GameShell {
     if(content)card.append(content);
     const actions=document.createElement('div');actions.className='game-pause-actions';
     const resume=iconButton('game-resume',this.t('game.resume'),'play');resume.onclick=()=>this.resume();
-    const exit=iconButton('game-exit',this.t('game.returnIsland'),'exit');exit.onclick=this.onExit;
-    const mute=iconButton('game-pause-sound',this.t('sound.mute'),'sound');const label=()=>{const text=this.t(this.sound.muted?'sound.unmute':'sound.mute');mute.title=text;mute.setAttribute('aria-label',text);mute.setAttribute('aria-pressed',String(this.sound.muted));mute.replaceChildren(shellIcon(this.sound.muted?'muted':'sound'));};mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();
+    const exitText=kidUx('007')?'לחזור לאי':this.t('game.returnIsland');
+    const exit=iconButton('game-exit',exitText,'exit');exit.onclick=this.onExit;
+    const mute=iconButton('game-pause-sound',this.t('sound.mute'),'sound');
+    const showLabel=(button,text)=>{
+      if(!kidUx('007'))return;
+      const copy=document.createElement('span');
+      copy.textContent=text;
+      button.append(copy);
+    };
+    const label=()=>{
+      const text=this.t(this.sound.muted?'sound.unmute':'sound.mute');
+      mute.title=text;
+      mute.setAttribute('aria-label',text);
+      mute.setAttribute('aria-pressed',String(this.sound.muted));
+      mute.replaceChildren(shellIcon(this.sound.muted?'muted':'sound'));
+      showLabel(mute,text);
+    };
+    if(kidUx('007'))actions.dataset.kidUxActions='';
+    showLabel(resume,this.t('game.resume'));
+    showLabel(exit,exitText);
+    mute.onclick=()=>{this.sound.setMuted(!this.sound.muted);label();};label();
     actions.append(resume,mute,exit);card.append(actions);sheet.append(card);this.dialog.append(sheet);resume.focus();
   }
   resume(){

@@ -6,15 +6,16 @@ import { CameraDemo } from '../workout/js/camera-demo.mjs';
 import { CAMERA_LINES, splitVoiceText, normalizeVoice } from '../workout/js/voice-lines.js';
 import { EXERCISES, byId } from '../workout/js/exercises.js';
 import { honestTime } from '../workout/js/logic.js';
-import { UploadQueue } from '../workout/cam-lab/upload.mjs';
+import { UploadQueue, UPLOAD_CONTEXTS } from '../workout/cam-lab/upload.mjs';
 import { pose } from './cam-lab-fixtures.js';
 
-const consent = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent' };
-const storage = config => ({ getItem: key => key === 'camlab.upload' ? JSON.stringify(config) : null });
+const consent = { endpoint: 'https://example.invalid/receive', secret: 'synthetic-test-key', consentId: 'synthetic-consent', expiresAt: Date.now() + 60 * 60 * 1000 };
+const endpoints = [consent.endpoint];
+const storage = config => ({ getItem: key => key === UPLOAD_CONTEXTS.workout.key ? JSON.stringify(config) : null });
 function harness({ enabled = true, target = 3, initialCount = 0, onEnd } = {}) {
   let time = 0, stopped = 0, videoStarts = 0, videoStops = 0;
   const sent = [], records = new Map(), cues = [], progress = [], rejected = [], statuses = [];
-  const uploads = new CameraUploads({ storage: storage(enabled ? consent : null), onStatus: s => statuses.push(s),
+  const uploads = new CameraUploads({ storage: storage(enabled ? consent : null), endpoints, onStatus: s => statuses.push(s),
     queueFactory: options => new UploadQueue({ ...options, store: {
       put: async record => records.set(record.session, structuredClone(record)),
       list: async () => [...records.values()].map(record => structuredClone(record)),
@@ -43,8 +44,8 @@ test('camera is opt-in for exactly the seven lab exercise identifiers; saved con
   assert.deepEqual(EXERCISES.filter(ex => cameraAvailable({ camera: true }, ex.id)).map(ex => ex.id).sort(),
     ['squats','jumping-jacks','high-knees','lunges','push-ups','knee-push-ups','glute-bridge'].sort());
   globalThis.location = { get hash() { throw Error('router hash must not be read'); } };
-  assert.deepEqual(readCameraConsent(storage(consent)), consent);
-  assert.equal(readCameraConsent(storage({ ...consent, consentId: null })), null);
+  assert.deepEqual(readCameraConsent(storage(consent), endpoints), consent);
+  assert.equal(readCameraConsent(storage({ ...consent, consentId: null }), endpoints), null);
   assert.equal(cameraPrivacy(true), 'הסרטון ותמונות המפתח נשלחים לבדיקה בסיום');
   assert.equal(cameraPrivacy(false), 'הסרטון לא נשמר ולא יוצא מהטלפון');
   delete globalThis.location; delete globalThis.localStorage;

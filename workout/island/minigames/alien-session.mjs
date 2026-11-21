@@ -1,25 +1,53 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-20';
-import {createControls} from './controls.mjs?v=island-v2-20261107-20';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-20';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-20';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-21';
+import {createControls} from './controls.mjs?v=island-v2-20261107-21';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-21';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-21';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-20';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-21';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-20';
-import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-20';
-import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-20';
-import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-20';
-import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-20';
-import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-20';
-import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-20';
-import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-20';
-import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-20';
-import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-20';
-import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-20';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-21';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-21';
+import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-21';
+import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-21';
+import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-21';
+import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-21';
+import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-21';
+import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-21';
+import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-21';
+import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-21';
+import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-21';
+const alienKidStyle = `
+.game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] :is(#shoot,#vulcan,#pass,.alien-special-switch){opacity:1!important}
+.game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] #pass:disabled{opacity:1;border-color:#a4b0c0;color:#a4b0c0}
+.game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] :is(#shoot,#vulcan,#pass,.alien-special-switch) :is(.alien-fire-caption,.alien-kid-caption){
+ position:absolute;right:calc(100% + 8px);left:auto;top:50%;transform:translateY(-50%);
+ display:block;white-space:nowrap;border-radius:5px;background:#102237;color:#fff;
+ padding:2px 5px;font:700 14px/18px system-ui;font-size:14px!important;opacity:1!important;pointer-events:none;
+}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-kid-weapons] #pass .alien-kid-caption{right:0;top:auto;bottom:calc(100% + 6px);transform:none}
+.game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] .alien-special-switch .alien-kid-caption{right:calc(100% + 5px)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-kid-weapons][data-alien-fire=v23][data-alien-hud=v24] #pass .alien-ammo,
+.game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] .alien-special-switch .alien-switch-count{
+ min-width:21px;height:21px;font-size:14px!important;line-height:19px!important;background:#102237;color:white;opacity:1
+}
+.game-screen[data-game=alienDefense] .alien-flight-hud .alien-flight-feedback[data-kid-weapons]{font:700 14px/20px system-ui;background:#102237;color:white}
+.game-screen[data-game=alienDefense] .alien-flight-hud .alien-flight-feedback[data-kid-weapons] span{font-size:14px!important;color:white}
+.alien-kid-demo{position:absolute;z-index:1;top:64px;left:50%;transform:translateX(-50%);padding:5px 10px;border-radius:8px;background:#102237;color:white;pointer-events:none;text-align:center;font:700 14px/20px system-ui}
+.alien-kid-demo span{display:block;direction:ltr;font-size:23px;line-height:27px}
+.alien-kid-demo[hidden]{display:none}
+`;
+const alienKidDemo={
+ shoot:['🚀 · · · → 🛸','ירי רגיל'],
+ vulcan:['🚀 ••••• → 🛸','וולקן'],
+ missile:['🚀 🚀 → 💥','טיל'],
+ lightning:['🚀 ϟ → 🛸 ↝ 🛸','ברק שרשרת'],
+ shockwave:['🚀 ◌ ◎ → 🛸','גל הלם'],
+};
 let v24Styled=false;
 /** v24 HUD stylesheet, once per page. */
-function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-20',import.meta.url).href;document.head.append(link);}
+function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-21',import.meta.url).href;document.head.append(link);}
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */
@@ -85,6 +113,42 @@ export function runAlienSession(ctx,createModel,draw,createView){
  // v25 arsenal (?alienArsenal=0 keeps the missile alone): the special button fires the selected weapon, the switch beside it picks the next one.
  if(model.arsenalOn){ensureAlienV25Style();specialSwitch=createAlienSpecialSwitch({controls,special:missile,missileIcon:missile.querySelector('svg'),labels:{missile:t('minigame.nova'),lightning:t('minigame.lightning'),shockwave:t('minigame.shockwave'),switch:t('minigame.weaponSwitch')},onGesture:()=>{audio.unlock();shotAudio?.unlock();v24Audio?.unlock();v25Audio?.unlock();}});specialSwitch.setEnabled(true);}
  const flightHud=createAlienFlightHud({dialog,controls});if(hudV25){const hudRoot=dialog.querySelector('.alien-flight-hud');if(hudRoot)hudRoot.dataset.low='on';}
+ const kidWeapons=kidUx('032');
+ const kidWeaponEvents=new AbortController();
+ let demo, demoVisual, demoName, specialLabel, demoKey='', demoUntil=0, switchAt=0, lastSpecial='';
+ if(kidWeapons){
+  kidUxStyle('032',alienKidStyle);
+  controls.dataset.kidWeapons='';
+  const notice=dialog.querySelector('.alien-flight-feedback');if(notice)notice.dataset.kidWeapons='';
+  const caption=(target,text)=>{
+   const node=document.createElement('span');node.className='alien-kid-caption';node.textContent=text;node.setAttribute('aria-hidden','true');
+   target.append(node);return node;
+  };
+  if(!vulcan)caption(shoot,'ירי רגיל');
+  specialLabel=caption(missile,t('minigame.nova'));
+  if(specialSwitch)caption(specialSwitch.button,'החלפת נשק');
+  demo=document.createElement('aside');demo.className='alien-kid-demo';demo.hidden=true;
+  demoVisual=document.createElement('span');demoVisual.setAttribute('aria-hidden','true');
+  demoName=document.createElement('strong');demo.append(demoVisual,demoName);dialog.append(demo);
+  for(const [target,key] of [[shoot,'shoot'],[vulcan?.button,'vulcan'],[missile,'special'],[specialSwitch?.button,'switch']]){
+   target?.addEventListener('pointerdown',()=>{
+    demoKey=key==='special'?(SPECIALS[model.special]||'missile'):key;
+    if(key==='switch')switchAt=model.time+2;
+    demoUntil=model.time+2;
+   },{signal:kidWeaponEvents.signal});
+  }
+ }
+ function updateKidWeapons(selected){
+  if(!demo)return;
+  const key=SPECIALS[selected]||'missile';
+  if(key!==lastSpecial){specialLabel.textContent=alienKidDemo[key][1];if(switchAt>model.time)demoKey=key;lastSpecial=key;}
+  const tutorial=model.time<6 ? (model.time<2?'shoot':model.time<4&&vulcan?'vulcan':key) : null;
+  const example=alienKidDemo[model.time<demoUntil?demoKey:tutorial];
+  demo.hidden=paused||document.hidden||!example;
+  if(example&&demoVisual.textContent!==example[0]){
+   demoVisual.textContent=example[0];demoName.textContent=example[1];
+  }
+ }
  const resize=()=>{if(disposed)return;const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height);if(width!==cssWidth||height!==cssHeight)resetInput();cssWidth=width;cssHeight=height;dpr=Math.min(devicePixelRatio||1,quality.low?config.lowDpr:config.maxDpr);canvas.width=Math.round(cssWidth*dpr);canvas.height=Math.round(cssHeight*dpr);model.effectAspect=(cssWidth/cssHeight)/(config.width/config.height);view?.resize(cssWidth,cssHeight);};
  const observer=new ResizeObserver(resize);observer.observe(canvas);resize();
  const events=new AbortController(),options={signal:events.signal};
@@ -111,7 +175,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
    if(model.result){const result=ctx.finish(model.result);if(!result.ok){ctx.cancel();ctx.onError?.(result.reason);}return;}
    paint.setTransform(dpr,0,0,dpr,0,0);paint.save();paint.scale(cssWidth/config.width,cssHeight/config.height);renderContext.pixelAspect=(cssWidth/cssHeight)/(config.width/config.height);draw(paint,model,renderContext);paint.restore();hud();flightHud.update(model,flight.sample(),paused||document.hidden);vulcan?.update(model);v25Audio?.update(model);if(hudV24){const captions=model.time<captionSeconds?'on':'off';if(controls.dataset.alienCaptions!==captions)controls.dataset.alienCaptions=captions;}
    // v25 arsenal: the count, the disabled state and the arc follow the selected special weapon (the missile as before).
-   const sel=model.arsenalOn?model.special:0,ammoNow=model.arsenalOn?model.specialAmmo[sel]:model.novaCharges;specialSwitch?.update(model);
+   const sel=model.arsenalOn?model.special:0,ammoNow=model.arsenalOn?model.specialAmmo[sel]:model.novaCharges;specialSwitch?.update(model);updateKidWeapons(sel);
    count.textContent=String(ammoNow);
    missile.disabled=sel===1?ammoNow<=0||!model.aliens.some(a=>a.y+a.radius>0&&a.y<model.player.y-10):sel===2?ammoNow<=0||model.shockwaves.length>0||!model.aliens.length:!model.aliens.some(a=>a.y+a.radius>0)||model.novaCharges<=0||model.nova.flight>0||model.nova.life>0;
    const charge=model.nova.flight>0?1-model.nova.flight/(model.nova.flightMax||b.nova.throwSeconds):model.nova.life>0?1-model.nova.life/b.nova.seconds:model.novaCharges>0?1:0;
@@ -122,11 +186,11 @@ export function runAlienSession(ctx,createModel,draw,createView){
   }catch(error){dispose();ctx.cancel();ctx.onError?.('reason.gameStart');}
  }
  function dispose(){
-  if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();resetInput();flight.dispose();flightHud.dispose();vulcan?.dispose();specialSwitch?.dispose();if(hudV25)delete controls.dataset.alienLow;if(hudV24){delete controls.dataset.alienHud;delete controls.dataset.alienCaptions;}shared.dispose();audio.dispose({finishTail:model.result?.outcome==='win'});shotAudio?.dispose();v24Audio?.dispose();v25Audio?.dispose();view?.dispose();
+  if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();kidWeaponEvents.abort();demo?.remove();delete controls.dataset.kidWeapons;observer.disconnect();resetInput();flight.dispose();flightHud.dispose();vulcan?.dispose();specialSwitch?.dispose();if(hudV25)delete controls.dataset.alienLow;if(hudV24){delete controls.dataset.alienHud;delete controls.dataset.alienCaptions;}shared.dispose();audio.dispose({finishTail:model.result?.outcome==='win'});shotAudio?.dispose();v24Audio?.dispose();v25Audio?.dispose();view?.dispose();
   for(const value of Object.values(art)){if(value?.getContext)value.width=value.height=0;else if(Array.isArray(value))for(const sprite of value)if(sprite?.getContext)sprite.width=sprite.height=0;}
   canvas.width=canvas.height=0;
  }
- const session={dispose,cancel:ctx.cancel,setPaused(value){paused=Boolean(value);resetInput();shared.setEnabled(!paused&&!document.hidden);flight.setEnabled(!paused&&!document.hidden);vulcan?.setEnabled(!paused&&!document.hidden);flightHud.setPaused(paused);audio.setPaused(paused);shotAudio?.setPaused(paused);v24Audio?.setPaused(paused);v25Audio?.setPaused(paused);last=undefined;},get snapshot(){return {...model.snapshot(),audio:audio.metrics(),shotAudio:shotAudio?.metrics()||null,paused,flightInput:flight.sample(),vulcanButton:vulcan?{held:vulcan.held,level:vulcan.button.dataset.level,blink:vulcan.button.dataset.blink,heat:vulcan.button.style.getPropertyValue('--heat'),locked:vulcan.button.dataset.locked==='true'}:null,hud:hudV25?'v25':hudV24?'v24':vulcan?'v23':'v22',special:model.arsenalOn?{selected:SPECIALS[model.special],ammo:[...model.specialAmmo],switch:Boolean(specialSwitch)}:null,v24Audio:v24Audio?.metrics()||null,v25Audio:v25Audio?.metrics()||null,vulcanV25:Boolean(model.v25),renderMode:view?.mode||'canvas',renderMetrics:view?.metrics?.(),viewport:{width:config.width,height:config.height,modelWidth:config.width,modelHeight:config.height,scale:cssWidth/config.width,scaleY:cssHeight/config.height,offsetX:0,offsetY:0},artModels:art.modelArt};}};
+ const session={dispose,cancel:ctx.cancel,setPaused(value){paused=Boolean(value);resetInput();shared.setEnabled(!paused&&!document.hidden);flight.setEnabled(!paused&&!document.hidden);vulcan?.setEnabled(!paused&&!document.hidden);flightHud.setPaused(paused);if(demo)demo.hidden=paused;audio.setPaused(paused);shotAudio?.setPaused(paused);v24Audio?.setPaused(paused);v25Audio?.setPaused(paused);last=undefined;},get snapshot(){return {...model.snapshot(),audio:audio.metrics(),shotAudio:shotAudio?.metrics()||null,paused,flightInput:flight.sample(),vulcanButton:vulcan?{held:vulcan.held,level:vulcan.button.dataset.level,blink:vulcan.button.dataset.blink,heat:vulcan.button.style.getPropertyValue('--heat'),locked:vulcan.button.dataset.locked==='true'}:null,hud:hudV25?'v25':hudV24?'v24':vulcan?'v23':'v22',special:model.arsenalOn?{selected:SPECIALS[model.special],ammo:[...model.specialAmmo],switch:Boolean(specialSwitch)}:null,v24Audio:v24Audio?.metrics()||null,v25Audio:v25Audio?.metrics()||null,vulcanV25:Boolean(model.v25),renderMode:view?.mode||'canvas',renderMetrics:view?.metrics?.(),viewport:{width:config.width,height:config.height,modelWidth:config.width,modelHeight:config.height,scale:cssWidth/config.width,scaleY:cssHeight/config.height,offsetX:0,offsetY:0},artModels:art.modelArt};}};
  if(new URLSearchParams(location.search).get('dev')==='1')session.debug={model,view};
  frame=requestAnimationFrame(tick);return session;
 }
