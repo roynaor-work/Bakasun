@@ -117,7 +117,15 @@ test('automatic download fills the device cache after open, and a data saver ski
  const fixture=await setup(testContext),{server}=fixture;
  const saver=await open(fixture,{saveData:true});
   await saver.page.goto(server.url,{waitUntil:'networkidle'});await saver.page.waitForFunction(()=>window.__offlineState?.state==='save-data',null,{timeout:60000});
-  assert.deepEqual(await saver.page.evaluate(async()=>(await caches.keys()).length?await (await caches.open((await caches.keys())[0])).keys().then(k=>k.length):0),0,'a data saver downloads nothing in the background');
+  // The worker keeps a copy of any file the page itself asks for once it controls the page (offline-sw.js pass-through),
+  // e.g. a module imported late in the boot (v24.7: progress-board events.mjs). That is not a background download:
+  // a background download starts by reading offline-manifest.json and then fetches files the page never asked for.
+  const bare=u=>{const url=new URL(u);return url.origin+url.pathname;};
+  const cached=await saver.page.evaluate(async()=>{const out=[];for(const name of await caches.keys())for(const r of await (await caches.open(name)).keys())out.push(r.url);return out;});
+  const asked=new Set(saver.requests.map(bare));
+  assert.ok(!saver.requests.some(u=>/offline-manifest\.json/.test(u)),'a data saver does not start the background download');
+  assert.deepEqual(cached.filter(u=>!asked.has(bare(u))),[],'a data saver downloads nothing in the background');
+  assert.ok(cached.length<=5,'only late files of the page itself are kept, not the app shell: '+cached.length);
   await saver.csp.assertClean();
   await saver.context.close();
   const auto=await open(fixture);
