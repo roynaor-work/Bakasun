@@ -216,7 +216,7 @@ test('measured on synthetic skeleton recordings (no real child): the numbers the
   assert.equal(totals.catalog, 50);
   assert.equal(totals.cleanMatches, 50);
   assert.equal(totals.landscapeMatches, 50);
-  assert.equal(totals.portraitMatches, 35, 'known gap: hall and four floor exercises stall with the phone upright');
+  assert.equal(totals.portraitMatches, 36, 'known gap: hall and floor exercises stall with the phone upright (35 before the QA round of 21/11: joint hysteresis and the short-loss grace added one)');
   assert.equal(totals.wrongWithProgress, 0);
   for (const problem of ['dark', 'backlit', 'multiple']) assert.equal(totals.problems[problem].afterWithProgress, 0, problem);
 });

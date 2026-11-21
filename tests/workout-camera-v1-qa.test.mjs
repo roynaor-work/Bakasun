@@ -63,18 +63,19 @@ test('the child\'s own range: two movements that agree set it, never below the f
   const [learnt, need] = two(.8, .78);
   assert.equal(learnt, true);
   assert.ok(Math.abs(need - .92 * .78) < 1e-9);
-  assert.deepEqual(two(1.05, 1.1), [false, 1], 'a child who reaches the full range keeps it');
+  assert.deepEqual(two(1.2, 1.25), [true, 1], 'the needed range is never raised above the nominal one');
   assert.deepEqual(two(.4, .45), [false, 1], 'two nods teach nothing');
   assert.deepEqual(two(.62, .95), [false, 1], 'two movements that disagree teach nothing');
   assert.equal(two(.62, .63)[1], OWN_FLOOR, 'the floor holds');
 });
 
 // The counter with its step logic scripted: the frame only carries the knee angle the range reads.
-function squatCounter(events = {}) {
+function squatCounter({ fromStart = true } = {}) {
   const counter = new MotionCounter('squats', { goal: 20 });
   let time = 0;
   const frame = (kneeAngle, event = null) => {
     time += 100;
+    if (fromStart) counter.origin ??= { kneeAngle: 170 };
     const base = event === 'counted' ? counter.creditRep(time) : counter.result(event, event ? 'hint' : null);
     return counter.gauge(base, { kneeAngle }, time);
   };
@@ -85,7 +86,7 @@ function squatCounter(events = {}) {
     for (let i = 0; i < 6; i++) out.push(frame(170));
     return out;
   };
-  return { counter, frame, movement, events };
+  return { counter, frame, movement };
 }
 
 test('a repetition that stops short is marked as "almost" with the way to go, not passed over in silence', () => {
@@ -111,6 +112,9 @@ test('own range: after two consistent shallower squats the third one counts; a d
   movement(170 - .5 * (170 - 122));
   assert.equal(counter.count, 1, 'half of the range is still short');
   assert.equal(first.filter(r => r.event === 'partial').length, 1);
+  const standing = squatCounter({ fromStart: false });
+  for (let i = 0; i < 4; i++) standing.movement(bottom);
+  assert.equal(standing.counter.count, 0, 'a movement that did not begin from the starting position teaches nothing');
   const deep = squatCounter();
   for (let i = 0; i < 3; i++) deep.movement(118, { counted: true });
   assert.equal(deep.counter.count, 3, 'counted once each, by the steps');

@@ -92,9 +92,9 @@ export const PROFILES = {
     { kind: 'activity', minCycle: 110, form: f => f.kneeAngle < 120 ? ankleHint : null }),
   'jumping-jacks': rep(jumpFront, 'נפתח את הרגליים ונרים את שתי כפות הידיים, ואז נסגור וננחת.',
     f => planted(f) && stand(f) && feetNarrow(f) && armsDown(f),
-    [point(f => feetWide(f) && bothUp(f) && lowAir(f), 40),
-      point(f => planted(f) && feetWide(f) && bothUp(f), 48),
-      point(f => f.sides.every(side => side.clearance > .08) && f.hipRise > .05, 36)], { minCycle: 230 }),
+    // Open (feet wide, both hands up) and back to closed. Whether the feet were caught in the air or on the
+    // floor at the open moment depends on the pose rate and on how the child jumps, so it is not asked.
+    [point(f => feetWide(f) && bothUp(f), 40)], { minCycle: 230 }),
   'squat-jumps': rep(jumpSide, 'נתחיל עם ברכיים כפופות ואגן לאחור, ואז נדחוף את הרצפה עם שתי הרגליים.',
     f => planted(f) && f.torsoUp > .45, [point(squat, 64), point(air, 40)],
     { minCycle: 210, form: f => squattingForm(f) ? 'נכוון את הברכיים לכיוון האצבעות בכפות הרגליים.' : null }),

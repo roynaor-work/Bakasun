@@ -32,13 +32,17 @@ const ask = (w, bitmap, time) => new Promise((resolve, reject) => {
 // pose model was trained on photographs of people. 'plain' removes the outline and the cartoon face, shades
 // the body smoothly and lets the proportions be set, so the picture is nearer to a person (still a rendering).
 const REST = new Map();
+const HUMAN = { head: .6, legs: 1.6, arms: 1.3 };
 function shape(st, look, body = {}) {
   const { ch } = st, b = ch.rig.b;
   if (!ch.toon) { ch.toon = ch.mesh.material; ch.plain = new THREE.MeshLambertMaterial({ map: ch.toon.map }); }
   ch.mesh.material = look === 'plain' ? ch.plain : ch.toon;
   if (ch.outline) ch.outline.visible = look !== 'plain';
   const set = (name, x, y = x, z = x) => { if (b[name]) b[name].scale.set(x, y, z); };
-  const { head = look === 'plain' ? .62 : 1, legs = 1, arms = 1, shoulders = 1 } = body;
+  // The app's figure has legs half as long as a person's for its torso and short arms. HUMAN brings the plain
+  // figure to about a person's proportions; the body option then varies them (a factor of 1 keeps HUMAN).
+  const base = look === 'plain' ? HUMAN : { head: 1, legs: 1, arms: 1 };
+  const head = body.head ?? base.head, legs = (body.legs ?? 1) * base.legs, arms = (body.arms ?? 1) * base.arms, shoulders = body.shoulders ?? 1;
   set('Head', head);
   for (const side of ['Left', 'Right']) {
     set(side + 'UpLeg', legs); set(side + 'Arm', arms);
@@ -56,20 +60,27 @@ function furnish(st, on) {
     const rnd = () => (n = (n * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
     for (let side = 0; side < 4; side++) {
       const wall = new THREE.Group();
-      for (let i = 0; i < 9; i++) {
-        const w = 40 + rnd() * 110, h = 40 + rnd() * 120;
+      for (let i = 0; i < 16; i++) {
+        const w = 60 + rnd() * 160, h = 60 + rnd() * 170;
         const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color().setHSL(rnd(), .35, .3 + rnd() * .4) }));
-        m.position.set(-420 + i * 105 + rnd() * 30, 30 + rnd() * 330, 0);
+        m.position.set(-520 + i * 68 + rnd() * 30, 40 + rnd() * 380, i * .2);
         wall.add(m);
       }
       wall.position.set(0, 0, -330); 
       const turn = new THREE.Group(); turn.add(wall); turn.rotation.y = side * Math.PI / 2;
       st.decor.add(turn);
     }
+    for (let i = 0; i < 26; i++) {
+      const rug = new THREE.Mesh(new THREE.PlaneGeometry(50 + rnd() * 120, 50 + rnd() * 120), new THREE.MeshBasicMaterial({ color: new THREE.Color().setHSL(rnd(), .3, .3 + rnd() * .4) }));
+      rug.rotation.x = -Math.PI / 2; rug.position.set(-420 + rnd() * 840, .3 + i * .02, -420 + rnd() * 840);
+      st.decor.add(rug);
+    }
     st.scene.add(st.decor);
   }
   st.decor.visible = on;
 }
+
+const STAND_FRONT = byId['jumping-jacks'].frames[0][0], STAND_SIDE = byId['squat-jumps'].frames[2][0];
 
 let stage = null, stageKey = '';
 function stageFor(w, h, look) {
@@ -97,8 +108,8 @@ function stageFor(w, h, look) {
  *      idle (true: hold the first pose), shake ({ at, dx, dy }: the phone is knocked at that time)
  */
 window.runClip = async cfg => {
-  const { id, w = 390, h = 844, want = 'side', other = false, dist = 1.25, shiftX = 0, shiftY = 0, dim = 1, blur = 0, trail = 0,
-    noise = 0, step = 50, reps = 4, speed = .7, lead = 1600, tail = 700, idle = false, shake = null, jitter = .6, look = 'plain', body, depth = 1, decor = false } = cfg;
+  const { id, w = 390, h = 844, want = 'side', other = false, dist = 1.25, dim = 1, blur = 0, trail = 0,
+    noise = 0, step = 50, reps = 4, speed = .7, lead = 1600, tail = 700, idle = false, shake = null, jitter = .6, look = 'plain', body, depth = 1, decor = false, stand = false } = cfg;
   const ex = byId[id];
   const st = await stageFor(w, h, look);
   shape(st, look, body);
@@ -108,6 +119,25 @@ window.runClip = async cfg => {
   let yaw = want === 'diagonal' ? Math.PI / 4 : (want === 'front') === st.front ? 0 : Math.PI / 2;
   if (other) yaw += want === 'diagonal' ? Math.PI / 4 : Math.PI / 2;
   st.camAngle = yaw; st.frameCamera(); st.camDist *= dist; st.placeCam();
+  // fill: how much of the picture the standing body takes (its larger side); cut: which side of the body is
+  // pushed out of the picture, by three tenths of the body.
+  let { shiftX = 0, shiftY = 0 } = cfg;
+  const v0 = st._v.clone();
+  const extent = () => {
+    st.ch.rig.apply(stand ? (st.front ? STAND_FRONT : STAND_SIDE) : ex.frames[0][0], st.front);
+    st.scene.updateMatrixWorld(true); st.camera.updateMatrixWorld(true);
+    const xs = [], ys = [];
+    for (const bone of Object.values(TRUTH)) { const b = st.ch.rig.b[bone]; if (!b) continue; b.getWorldPosition(v0); v0.project(st.camera); xs.push((v0.x + 1) / 2); ys.push((1 - v0.y) / 2); }
+    return { left: Math.min(...xs), right: Math.max(...xs), top: Math.min(...ys), bottom: Math.max(...ys) };
+  };
+  if (cfg.fill) for (let pass = 0; pass < 3; pass++) { const e = extent(); st.camDist *= Math.max(e.bottom - e.top, e.right - e.left) / cfg.fill; st.placeCam(); }
+  if (cfg.cut) {
+    const e = extent(), bw0 = e.right - e.left, bh0 = e.bottom - e.top;
+    if (cfg.cut === 'low') shiftY = -(1 + .3 * bh0 - e.bottom);
+    if (cfg.cut === 'high') shiftY = e.top + .3 * bh0;
+    if (cfg.cut === 'left') shiftX = e.left + .3 * bw0;
+    if (cfg.cut === 'right') shiftX = -(1 + .3 * bw0 - e.right);
+  }
   const out = document.getElementById('out');
   out.width = w; out.height = h;
   const g = out.getContext('2d', { willReadFrequently: noise > 0 });
@@ -123,12 +153,15 @@ window.runClip = async cfg => {
     for (let t = 0; t <= total; t += step) {
       const active = !idle && t >= lead && t < lead + motion;
       const ms = idle || t < lead ? 0 : Math.min(motion, t - lead) * speed;
-      const p = depth < 1 ? lerpPose(ex.frames[0][0], poseAt(ex.frames, ms), depth) : poseAt(ex.frames, ms);
+      let p = depth < 1 ? lerpPose(ex.frames[0][0], poseAt(ex.frames, ms), depth) : poseAt(ex.frames, ms);
+      // A child stands still before starting: the lead holds a plain standing pose, then eases into the exercise.
+      if (stand && t < lead) p = lerpPose(st.front ? STAND_FRONT : STAND_SIDE, ex.frames[0][0], Math.max(0, Math.min(1, (t - (lead - 350)) / 350)));
       st.ch.rig.apply(p, st.front); st.updateShadow(p);
-      const knocked = shake && t >= shake.at;
+      // A knock moves the phone over about a fifth of a second, not in one frame.
+      const knocked = shake ? Math.max(0, Math.min(1, (t - shake.at) / 200)) : 0;
       // A propped phone is never perfectly still: a fraction of a pixel of sway each frame.
-      const ox = (shiftX + (knocked ? shake.dx : 0)) * w + (random() - .5) * jitter;
-      const oy = (shiftY + (knocked ? shake.dy : 0)) * h + (random() - .5) * jitter;
+      const ox = (shiftX + knocked * (shake?.dx ?? 0)) * w + (random() - .5) * jitter;
+      const oy = (shiftY + knocked * (shake?.dy ?? 0)) * h + (random() - .5) * jitter;
       st.camera.setViewOffset(w, h, ox, oy, w, h);
       st.renderer.render(st.scene, st.camera);
       const truth = {};

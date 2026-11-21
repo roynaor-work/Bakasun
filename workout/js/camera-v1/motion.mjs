@@ -13,6 +13,7 @@ const DEFAULT_CYCLE_MIN = 190;
 const TAU = Math.PI * 2;
 // After a movement returns to the start, the step counter gets this long to count it before the range decides.
 const VERDICT_MS = 450;
+const STEP_GRACE = 140;
 
 export class MotionCounter {
   constructor(id, { goal } = {}) {
@@ -66,6 +67,7 @@ export class MotionCounter {
     this.range.reset();
     this.trip = null;
     this.tripCounted = false;
+    this.tripFromStart = false;
   }
 
   result(event = null, hint = null, side = null) {
@@ -97,24 +99,28 @@ export class MotionCounter {
   gauge(result, f, t) {
     if (result.event === 'partial') this.partials++;
     if (!this.range.spec) return { ...result, partials: this.partials };
+    const moving = this.range.trip != null;
     const { meter, done } = this.range.update(f, t);
+    // A movement only speaks for a repetition when it began from the exercise's own starting position.
+    if (!moving && this.range.trip) this.tripFromStart = this.origin != null || this.cycle != null;
     let out = { ...result, meter };
     if (result.event === 'counted') this.tripCounted = true;
     // The steps already said "partial" for this movement: the range gives the wording, once.
     const stepPartial = result.event === 'partial';
-    if (done) { this.trip = { ...done, at: t, counted: this.tripCounted, said: stepPartial }; this.tripCounted = false; }
+    if (done) { this.trip = { ...done, at: t, counted: this.tripCounted, said: stepPartial, fromStart: this.tripFromStart }; this.tripCounted = false; }
     else if (stepPartial && this.trip) this.trip.said = true;
     else if (stepPartial) this.stepPartialAt = t;
     const trip = this.trip;
     if (trip && (trip.counted || result.event === 'counted')) {
       this.trip = null;
       this.tripCounted = false;
-      const own = this.range.learn(trip);
-      out = { ...out, own, tempo: this.range.rushed(trip) };
+      out = { ...out, tempo: this.range.rushed(trip) };
     } else if (trip && (t - trip.at >= VERDICT_MS || stepPartial || result.event === 'form')) {
       this.trip = null;
-      const own = this.range.learn(trip);
-      if (trip.reached && this.range.need < 1 && result.event !== 'form' && this.spec.mode === 'cycle' &&
+      // Movements the steps did not count teach the child's own range, and only those that began properly.
+      const taught = this.range.adapted;
+      const own = trip.fromStart ? this.range.learn(trip) : false;
+      if (trip.reached && taught && trip.fromStart && result.event !== 'form' && this.spec.mode === 'cycle' &&
           !this.spec.alternate && !this.spec.twoSides) {
         // Inside the child's own range: counted, and the half-finished attempt of the step counter is dropped.
         if (trip.said || this.stepPartialAt != null && t - this.stepPartialAt < 1500) this.partials = Math.max(0, this.partials - 1);
@@ -269,11 +275,16 @@ export class MotionCounter {
     const matches = step?.test(f, pending);
     if (matches) {
       pending.stepAt ??= t;
+      pending.missAt = null;
       if (t - pending.stepAt >= step.dwell) {
         pending.index++;
         pending.stepAt = null;
       }
-    } else if (step) pending.stepAt = null;
+    } else if (step && pending.stepAt != null) {
+      // Hysteresis: a joint angle that flickers across its limit for one frame does not restart the stage.
+      pending.missAt ??= t;
+      if (t - pending.missAt > STEP_GRACE) pending.stepAt = pending.missAt = null;
+    }
     const completed = pending.index === spec.steps.length;
     const landed = (spec.finish ? spec.finish(f, pending) : rest) &&
       (!spec.stillFinish || this.last && f.dist(f.hip, this.last.hip) < .053);

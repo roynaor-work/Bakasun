@@ -125,6 +125,9 @@ export function guide(sample, status, policy = {}, memory = {}) {
   else if (status === 'raise-phone') move = 'raise';
   else if (cut.left || cut.right) move = cut.left ? 'left' : 'right';
   else if (cut.top || cut.bottom) move = 'back';
+  // A body that takes less than a quarter of the picture is too far for its joints to be told apart,
+  // which happens at a shorter distance the smaller the child is.
+  else if (box.bottom - box.top < .25 && box.right - box.left < .25) move = 'closer';
   else if (middle < .38 || middle > .62) move = towardMiddle(middle);
   else move = names.length ? 'clear' : 'center';
 

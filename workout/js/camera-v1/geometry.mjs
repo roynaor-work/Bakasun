@@ -37,10 +37,13 @@ export const min = values => finite(values).length ? Math.min(...finite(values))
 // differ (a six-year-old's legs are shorter for the same torso than an eleven-year-old's), so a knee lift
 // is read against the child's own thigh, measured while standing still, and restated on this scale.
 export const NOMINAL_THIGH = .9;
+// Only a child who stands on two straight legs gives a true thigh length: a raised or bent knee shortens it.
 const standingThigh = f => {
   if (!(f.torsoUp > .65)) return null;
-  const lengths = f.sides.filter(side => side.kneeAngle >= 150 && Number.isFinite(side.kneeRise) && side.kneeRise < -.3).map(side => -side.kneeRise);
-  return lengths.length ? Math.max(...lengths) : null;
+  const lengths = f.sides.map(side => side.kneeAngle >= 158 && side.kneeRise < -.3 ? -side.kneeRise : NaN);
+  const seen = lengths.filter(Number.isFinite);
+  if (!seen.length || seen.length === 2 && Math.abs(seen[0] - seen[1]) > .12) return null;
+  return Math.max(...seen);
 };
 
 export function measure(points, aspect, reference, required) {

@@ -1,5 +1,5 @@
 // Renders the test clips of camera workout v1 and records what the real pose model answers for each frame.
-// A rendered figure, not a person: see workout/camera-v1/QA.md for what this can and cannot show.
+// A rendered figure, not a person: see workout/tools/camera-v1-QA.md for what this can and cannot show.
 // Usage: PLAYWRIGHT=<playwright index.mjs> [CHROMIUM_PATH=<chrome>] node workout/tools/camera-v1-render.mjs --out <dir>
 //        [--ids squats,lunges] [--sets base,frame] [--parallel 3] [--shots] [--force]
 // One JSON per clip is written to <dir>; score them with workout/tools/camera-v1-realmodel.mjs.
@@ -25,12 +25,14 @@ export const CORE = ['squats', 'jumping-jacks', 'push-ups', 'crunches', 'high-kn
 export const WIDER = [...CORE, 'squat-jumps', 'tuck-jumps', 'jog', 'arm-circles', 'bicycle', 'superman', 'knee-push-ups', 'wall-sit'];
 // Body sizes: the phone stays where a 1.0 figure is framed well, so a smaller child is a smaller figure in
 // the picture. Proportions follow age: a six-year-old has a larger head and shorter legs for the same height.
+// The factors multiply the bench's person-like base (see HUMAN in bench.mjs).
+export const FILL = .55;
 export const BODIES = {
-  'h055': { height: .55, body: { head: .82, legs: .9 } },
-  'h070': { height: .7, body: { head: .72, legs: .95 } },
-  'h085': { height: .85, body: { head: .66 } },
-  'h100': { height: 1, body: { head: .6, legs: 1.06 } },
-  'h110': { height: 1.1, body: { head: .58, legs: 1.1 } },
+  'h055': { height: .55, body: { head: .8, legs: .86 } },
+  'h070': { height: .7, body: { head: .7, legs: .92 } },
+  'h085': { height: .85, body: { head: .64, legs: .97 } },
+  'h100': { height: 1, body: { head: .6, legs: 1.02 } },
+  'h110': { height: 1.1, body: { head: .57, legs: 1.06 } },
   'long-legs': { height: .9, body: { legs: 1.2 } },
   'short-legs': { height: .9, body: { legs: .82 } },
   'broad': { height: .9, body: { shoulders: 1.3 } },
@@ -39,35 +41,38 @@ export const BODIES = {
 export function plan(ids = EXERCISES.map(ex => ex.id), sets = ['base', 'view', 'frame', 'hard', 'idle', 'size', 'rom']) {
   const clips = [];
   for (const id of ids) {
-    const want = CAMERA_EXERCISES[id].view, shape = natural(id), other = shape === PORTRAIT ? LANDSCAPE : PORTRAIT;
-    const hall = EXERCISES.find(ex => ex.id === id).place === 'hall';
-    const add = (set, name, cfg) => sets.includes(set) && clips.push({ name: id + '.' + name, set, condition: name, id, want, step: 67, reps: 3, ...shape, ...cfg });
+    const policy = CAMERA_EXERCISES[id], want = policy.view, shape = natural(id), other = shape === PORTRAIT ? LANDSCAPE : PORTRAIT;
+    const hall = EXERCISES.find(ex => ex.id === id).place === 'hall', core = CORE.indexOf(id);
+    // A child stands still before a standing exercise; on the floor (or on a chair, at the wall) the first pose is the start.
+    const stand = policy.setup === 'standing' && !['chair-dips', 'wall-sit'].includes(id);
+    // The phone stands where a full-size body takes a little over half of the picture, as at two to three metres.
+    const add = (set, name, cfg) => sets.includes(set) && clips.push({ name: id + '.' + name, set, condition: name, id, want, stand, step: 67, reps: 3, fill: FILL, ...shape, ...cfg });
     add('base', 'natural', {});
     if (hall) continue;
+    if (WIDER.includes(id)) add('idle', 'idle', { idle: true, idleMs: 4000 });
+    if (core < 0) continue;
     add('base', 'turned', { ...other });
-    if (CORE.includes(id)) add('view', 'other-view', { other: true, reps: 2 });
-    add('idle', 'idle', { idle: true, idleMs: 4500 });
-    if (CORE.indexOf(id) >= 0 && CORE.indexOf(id) < 8) {
+    if (core < 8) add('view', 'other-view', { other: true, reps: 2 });
+    if (core < 6) {
       add('hard', 'dim', { dim: .2, noise: 14 });
       add('hard', 'slow-blur', { step: 125, trail: .45 });
       add('hard', 'fast', { speed: 1.15 });
     }
-    if (['squats', 'push-ups', 'crunches', 'glute-bridge', 'leg-raises', 'calf-raises'].includes(id)) {
+    if (['squats', 'push-ups', 'crunches', 'glute-bridge'].includes(id)) {
       // Shallow repetitions (the pose only goes part of the way) and rushed ones.
       add('rom', 'shallow-45', { depth: .45, reps: 4 });
       add('rom', 'shallow-78', { depth: .78, reps: 6 });
       add('rom', 'rush', { speed: 2, reps: 5 });
     }
-    if (!CORE.includes(id)) continue;
-    if (CORE.indexOf(id) < 6) add('idle', 'knocked', { shake: { at: 3400, dx: .16, dy: .05 }, decor: true });
-    if (CORE.indexOf(id) >= 6) continue;
-    add('frame', 'far', { dist: 3.4, reps: 1 });
-    add('frame', 'near', { dist: .6, reps: 1 });
-    add('frame', 'cut-low', { shiftY: -.24, reps: 1 });
-    add('frame', 'cut-high', { shiftY: .24, reps: 1 });
-    add('frame', 'cut-left', { shiftX: .42, reps: 1 });
-    add('frame', 'cut-right', { shiftX: -.42, reps: 1 });
-    if (CORE.indexOf(id) < 5) for (const [name, { height, body }] of Object.entries(BODIES)) add('size', 'size-' + name, { dist: 1.25 / height, body, band: name });
+    if (core >= 5) continue;
+    add('idle', 'knocked', { shake: { at: 3400, dx: .16, dy: .05 }, decor: true });
+    add('frame', 'far', { fill: .1, reps: 1 });
+    add('frame', 'near', { fill: 1.5, reps: 1 });
+    add('frame', 'cut-low', { cut: 'low', reps: 1 });
+    add('frame', 'cut-high', { cut: 'high', reps: 1 });
+    add('frame', 'cut-left', { cut: 'left', reps: 1 });
+    add('frame', 'cut-right', { cut: 'right', reps: 1 });
+    if (core < 4) for (const [name, { height, body }] of Object.entries(BODIES)) add('size', 'size-' + name, { fill: FILL * height, body, band: name });
   }
   return clips;
 }
@@ -109,6 +114,7 @@ if (import.meta.url === new URL(process.argv[1], 'file:').href) {
     for (let clip; (clip = queue.shift());) {
       try {
         if (look) { clip.look = look; clip.name += '.' + look; }
+        if (arg('body')) clip.body = { ...JSON.parse(arg('body')), ...clip.body };
         if (shots) clip.shots = [0, 2010, 2680, 3216];
         const result = await page.evaluate(cfg => window.runClip(cfg), clip);
         await writeFile(path.join(out, clip.name + '.json'), JSON.stringify(result));

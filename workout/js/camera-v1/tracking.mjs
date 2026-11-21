@@ -10,6 +10,11 @@ const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
 // Share of the background (outside the body) that changed between two frames: above this the phone itself moved.
 const sceneMoved = .16;
+// Hysteresis: a joint must be clear to start (minConfidence), and may dip to this while the child is tracked.
+const stayConfidence = .36;
+// A child who was tracked and drops out for a blink (a fast jump, an arm across the body) keeps the
+// calibration for this long, so the count goes on without asking for a still pose in mid-exercise.
+const graceMs = 850;
 
 const MESSAGES = {
   calibrating: 'אפשר להישאר רגע בתנוחת ההתחלה, כדי שנראה איפה הגוף שלך.',
@@ -92,10 +97,12 @@ const clarity = pose => CORE.concat(25, 26, 27, 28).reduce((sum, id) => sum + (f
 // near twin is seen clearly; a joint the model has no idea about (or puts outside) stays hidden. The far
 // arm is left alone: it moves on its own and hides behind the body.
 const TWINS = [[11, 12], [23, 24], [25, 26], [27, 28], [29, 30], [31, 32]];
+// Lying on the floor side-on, the far arm lies along the near one as the far leg does.
+const ARM_TWINS = [[13, 14], [15, 16]];
 const FAR_SIDE = .12;
-function pairSides(pose) {
+function pairSides(pose, arms) {
   const landmarks = pose.landmarks.map(point => point);
-  for (const pair of TWINS) for (const [near, far] of [pair, [pair[1], pair[0]]]) {
+  for (const pair of arms ? [...TWINS, ...ARM_TWINS] : TWINS) for (const [near, far] of [pair, [pair[1], pair[0]]]) {
     const a = landmarks[near], b = landmarks[far];
     if (visible(a) && finite(b) && bounds(b) && confidence(b) >= FAR_SIDE && confidence(b) < minConfidence + .02) {
       landmarks[far] = { ...b, visibility: minConfidence + .02, presence: Math.max(b.presence ?? 1, minConfidence + .02), paired: true };
@@ -159,7 +166,7 @@ function lightStatus(light) {
   return null;
 }
 
-function framing(points, shape, required, setup) {
+function framing(points, shape, required, setup, minimum = minConfidence) {
   if (!shape) return 'missing';
   const body = pointsAt(points, BODY, .40);
   const head = pointsAt(points, HEAD, .40);
@@ -170,7 +177,7 @@ function framing(points, shape, required, setup) {
   const maxY = Math.max(...body.map(p => p.y));
   const headAtTop = head.some(p => p.y < .036) ||
     (head.length === 0 && shape.shoulder.y < .115);
-  const fit = required.find(group => group.every(id => visible(points[id]) && bounds(points[id], .017)));
+  const fit = required.find(group => group.every(id => visible(points[id], minimum) && bounds(points[id], .017)));
   const clipped = !fit && required.some(group => group.some(id => visible(points[id], .35) && !bounds(points[id], .035)));
   if (maxX - minX > .88 || maxY - minY > .89 || shape.torso > .43) return 'move-back';
   if (shape.torso < .057) return 'move-closer';
@@ -246,6 +253,8 @@ export class PoseTracker {
     this.demoShown = false;
     this.movedFrames = 0;
     this.movedAt = null;
+    this.readyAt = null;
+    this.resumed = false;
     this._dropTrack();
   }
 
@@ -259,7 +268,14 @@ export class PoseTracker {
   }
 
   _blocked(status) {
-    this._dropTrack();
+    // A short loss of a tracked child keeps what was learnt; anything longer, or any other reason, starts over.
+    const brief = ['missing', 'center'].includes(status) && this.calibration &&
+      this.readyAt != null && this.lastTime - this.readyAt <= graceMs;
+    if (brief) {
+      this.shape = null;
+      this.filtered = null;
+      this.resumed = true;
+    } else this._dropTrack();
     return { status, ready: false, pose: null, gap: true, calibration: null,
       hint: { code: status, text: MESSAGES[status] } };
   }
@@ -321,9 +337,9 @@ export class PoseTracker {
       return this._blocked('missing');
     }
 
-    const person = this.view === 'side' ? pairSides(people[0]) : people[0];
+    const person = this.view === 'side' ? pairSides(people[0], this.setup === 'floor') : people[0];
     const shape = describe(person.landmarks, this.aspect);
-    const looking = framing(person.landmarks, shape, this.required, this.setup);
+    const looking = framing(person.landmarks, shape, this.required, this.setup, this.calibration ? stayConfidence : minConfidence);
     if (looking === 'upper-edge') {
       this.upperEdgeSince ??= time;
       return this._blocked(time - this.upperEdgeSince >= 280 ? 'raise-phone' : 'center');
@@ -346,6 +362,9 @@ export class PoseTracker {
     }
     const hint = this.demoShown ? null : { code: 'demo', text: MESSAGES.demo };
     this.demoShown = true;
-    return { status: 'ready', ready: true, pose: this.filtered, gap: starting, calibration: this.calibration, hint };
+    const gap = starting || this.resumed;
+    this.resumed = false;
+    this.readyAt = time;
+    return { status: 'ready', ready: true, pose: this.filtered, gap, calibration: this.calibration, hint };
   }
 }

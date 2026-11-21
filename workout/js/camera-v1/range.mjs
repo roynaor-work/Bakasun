@@ -17,8 +17,9 @@ export const RANGE_COPY = Object.freeze({
 });
 
 // value: the number followed; start and full: its nominal values at the two ends; cue: which way is "further";
-// minMs: a full repetition faster than this is rushed (jumps have none).
-const range = (value, start, full, cue, minMs = 900) => ({ value, start, full, cue, minMs });
+// minMs: the part of a repetition away from the start (about half of it) shorter than this is rushed: under
+// about a second for the whole repetition. The demonstration's own pace is three times calmer. Jumps have none.
+const range = (value, start, full, cue, minMs = 520) => ({ value, start, full, cue, minMs });
 export const RANGES = {
   squats: range(f => f.kneeAngle, 170, 122, LOWER),
   'squat-jumps': range(f => f.kneeAngle, 170, 122, LOWER, 0),
@@ -32,7 +33,7 @@ export const RANGES = {
   superman: range(shoulderHeight, .14, .32, HIGHER),
   'glute-bridge': range(f => f.clearance(f.hip.y), .16, .46, HIGHER),
   'leg-raises': range(f => Math.min(...f.sides.map(side => side.clearance)), .2, .86, HIGHER),
-  'calf-raises': range(f => f.main.heelRise, .02, .17, HIGHER, 700),
+  'calf-raises': range(f => f.main.heelRise, .02, .17, HIGHER, 400),
 };
 
 const ENTER = .3, LEAVE = .16;
@@ -84,16 +85,19 @@ export class RangeMeter {
     return { meter: Math.min(1, this.level / this.need), done };
   }
 
-  /** Called once per finished movement. Learns the child's range from the first two movements that agree. */
+  /**
+   * Called once per finished movement. Two movements in a row that went about equally far, and far enough,
+   * are how this child does the exercise: from then on a movement that reaches that range counts even when
+   * the step counter did not follow it. The needed range is only ever eased (down to the floor), never raised.
+   * @returns true at the moment the child's own range starts to be used
+   */
   learn(done) {
     if (this.adapted || done.peak < OWN_FLOOR) return false;
     this.peaks.push(done.peak);
     if (this.peaks.length > 2) this.peaks.shift();
     if (this.peaks.length < 2 || Math.abs(this.peaks[0] - this.peaks[1]) > OWN_SPREAD) return false;
     this.adapted = true;
-    // A child who reaches the full range keeps it: the range is only ever eased, never raised.
-    if (Math.min(...this.peaks) >= 1) return false;
-    this.need = Math.max(OWN_FLOOR, .92 * Math.min(...this.peaks));
+    this.need = Math.max(OWN_FLOOR, Math.min(1, .92 * Math.min(...this.peaks)));
     return true;
   }
 

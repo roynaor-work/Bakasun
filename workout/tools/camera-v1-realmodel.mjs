@@ -1,6 +1,6 @@
 // Scores the clips recorded by camera-v1-render.mjs: the real pose model's answers are replayed through the
 // real tracker, counter and guidance, wired as session.mjs wires them, and compared with what the rendered
-// figure truly did. The figure is a cartoon, not a person; see workout/camera-v1/QA.md.
+// figure truly did. The figure is a cartoon, not a person; see workout/tools/camera-v1-QA.md.
 // Usage: node workout/tools/camera-v1-realmodel.mjs --clips <dir> [--modules <dir with camera-v1 modules>] [--json <file>] [--md]
 import path from 'node:path';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
@@ -133,6 +133,8 @@ export function score(clip, api) {
   row.exact = cfg.condition === 'shallow-78' ? row.amount >= cfg.reps - 2 && row.amount <= cfg.reps
     : cfg.idle ? (run.timed ? row.amount < 1 : row.amount === 0)
     : run.timed ? row.amount >= .6 * row.expected && row.amount <= 1.15 * row.expected : row.amount === row.expected;
+  // Counted from the third repetition on, after the first two taught the child's own range.
+  row.learned = !row.exact && !run.timed && run.adapted > 0 && row.amount >= row.expected - 2 && row.amount <= row.expected;
   // Guidance against the true crop.
   const cut = trulyCut(clip.frames[Math.floor(clip.frames.length / 3)]);
   row.cut = { parts: cut.parts, edges: [...cut.edges], middle: Math.round(cut.middle * 100) / 100 };
@@ -191,7 +193,7 @@ const num = v => v == null ? '-' : Math.round(v * 10) / 10;
 export function table(rows, falseRows) {
   const by = {};
   for (const row of rows) (by[row.id] ??= {})[row.condition] = row;
-  const cell = row => !row ? '-' : (row.timed ? num(row.amount) + '/' + num(row.expected) + 's' : row.amount + '/' + row.expected) + (row.exact ? '' : ' ✗');
+  const cell = row => !row ? '-' : row.skip ? 'n/a' : (row.timed ? num(row.amount) + '/' + num(row.expected) + 's' : row.amount + '/' + row.expected) + (row.exact ? '' : row.learned ? ' ~' : ' ✗');
   const out = ['| exercise | detected | joints ok | ready | natural | turned | dim | slow+blur | fast | idle | knocked | foreign | note |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|'];
   for (const [id, c] of Object.entries(by)) {
     const n = c.natural ?? Object.values(c)[0];
@@ -219,6 +221,7 @@ export function summary(rows, falseRows) {
       return [condition, want ? Math.round(100 * list.reduce((n, row) => n + Math.min(row.amount, row.expected), 0) / want) : null]; })),
     extraReps: Object.fromEntries(counting.map(condition => [condition, reps(of(condition)).reduce((n, row) => n + Math.max(0, row.amount - row.expected), 0)])),
     exercisesExactNatural: of('natural').filter(row => row.exact).map(row => row.id),
+    exercisesLearnedNatural: of('natural').filter(row => row.learned).map(row => row.id),
     exercisesFailNatural: of('natural').filter(row => !row.exact).map(row => row.id + ' ' + num(row.amount) + '/' + num(row.expected)),
     idleFalse: rows.filter(row => row.condition === 'idle' && !row.skip && !row.exact).map(row => row.id + ' ' + num(row.amount)),
     foreignFalse: falseRows.filter(row => row.amount > 0).map(row => row.id + '<' + row.other + ' ' + row.amount), foreignRuns: falseRows.length,

@@ -175,6 +175,8 @@ test('camera v1: scripted skeleton. Off to the side, feet cut, then two squats c
     assert.equal(await page.locator('#camera-preview').getAttribute('data-parts'), null);
     assert.equal(await page.locator('#camera-preview').getAttribute('data-seen'), 'yes');
     assert.equal(await page.locator('#big-count').textContent(), '2');
+    assert.equal(await page.locator('#range').isVisible(), true, 'the range bar is on the picture for a counted strength exercise');
+    assert.ok(await page.evaluate(() => document.getElementById('meter').value) >= 0);
     await shot(page, '5-two-squats');
     const said = (await page.evaluate(() => audit.said)).map(strip);
     const order = [MOVES.left.say, PARTS.feet.say, LINES.ok.say].map(line => said.findIndex(text => text.includes(strip(line))));
@@ -184,6 +186,15 @@ test('camera v1: scripted skeleton. Off to the side, feet cut, then two squats c
     await page.locator('#finish').tap();
     await page.waitForFunction(() => audit.tracks.every(t => t.readyState === 'ended'));
     assert.match(await page.locator('#summary').textContent(), /2 חזרות לפי תנועה שנראתה/);
+    // The manual fix: plus one, shown apart from what the camera saw; minus brings it back, and never below zero.
+    const fix = page.locator('#results li button');
+    assert.equal(await fix.count(), 2);
+    await fix.nth(1).tap();
+    assert.match(await page.locator('#results').textContent(), /2 חזרות לפי תנועה שנראתה · תיקון שלך: ועוד 1/);
+    await fix.nth(0).tap(); await page.locator('#results li button').nth(0).tap();
+    assert.match(await page.locator('#results').textContent(), /תיקון שלך: פחות 1/);
+    await page.locator('#results li button').nth(0).tap();
+    assert.equal(await page.locator('#results li button').nth(0).isDisabled(), true);
     await shot(page, '6-summary');
     await clean(page, log);
     await context.close();
