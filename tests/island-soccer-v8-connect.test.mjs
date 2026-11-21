@@ -115,7 +115,9 @@ test('v8 stadium: no bare sky at the four corners, both goal ends, both touchlin
    assert.equal(state.status,'ready',JSON.stringify(state));
    const magentaShare=async()=>{const png=(await page.screenshot()).toString('base64');return page.evaluate(async b64=>{const img=new Image();img.src='data:image/png;base64,'+b64;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=4)if(d[i]>240&&d[i+1]<20&&d[i+2]>240)n++;return n/(d.length/4);},png);};
    await view(page,'skyProbe',true);
-   for(const [name,x,z] of spots){await moveTo(page,x,z);await page.waitForTimeout(2200);assert.equal(await magentaShare(),0,`${name}: backdrop visible`);}
+   // The 11 v 11 camera eases after the ball and a software-GL frame is slow, so 2.2 s is not always enough for it to arrive (CI: 44% backdrop at
+   // "goal west" in portrait on one run, 0 on the runs before). Judged once the camera has settled: up to five looks; a real hole stays on every look.
+   for(const [name,x,z] of spots){await moveTo(page,x,z);let share=1;for(let look=0;look<5&&share>0;look++){await page.waitForTimeout(2200);share=await magentaShare();}assert.equal(share,0,`${name}: backdrop visible`);}
    await page.evaluate(()=>window.__island.games.current.session.debug.view.skyProbe(true,false));
    let worst=0;for(const [,x,z] of spots.slice(0,4)){await moveTo(page,x,z);await page.waitForTimeout(2200);worst=Math.max(worst,await magentaShare());}
    assert.ok(worst>0,'negative control: with the stadium hidden the probe finds backdrop');
