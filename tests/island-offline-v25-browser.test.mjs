@@ -42,7 +42,7 @@ async function play(page,id){
  const started=Date.now();
  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:300000});
  const ms=Date.now()-started;await page.waitForTimeout(2000);
- const status=await page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?');},id);
+ const status=await page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:s.mode==='runner'?'alpineRunner':'alpine'})[id];return s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?');},id);
  return {status,ms};
 }
 const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
@@ -62,21 +62,21 @@ test('v25: the background download keeps the shell and the main games only; the 
   const auto=await t.page.evaluate(()=>window.__offlineState);
   console.log('v25 auto download',Math.round((Date.now()-t0)/1000),'s',JSON.stringify({state:auto.state,wanted:auto.wanted,failed:auto.result?.failed?.length,bytes:auto.result?.bytes}));
   assert.equal(auto.state,'ready',JSON.stringify(auto.result?.failed));
-  assert.deepEqual(auto.wanted,['soccer','hoops','alpine','alpineLeague','city'],'nothing played yet: the three main games and the hub');
+  assert.deepEqual(auto.wanted,['soccer','hoops','alpine','alpineLeague','alpineRunner','city'],'nothing played yet: the three main games and the hub');
   let s=await status(t.page);
-  assert.equal(s.shell,true);for(const g of ['soccer','hoops','alpine','alpineLeague','city'])assert.equal(s.games[g],true,g);
+  assert.equal(s.shell,true);for(const g of ['soccer','hoops','alpine','alpineLeague','alpineRunner','city'])assert.equal(s.games[g],true,g);
   for(const g of ['tennis','racing','naval','boar','fire','alien','catch'])assert.equal(s.games[g],false,g+' is not downloaded before it was played');
   assert.equal((await t.page.evaluate(()=>caches.keys())).length,1);
   // The panel: v25 rows with size and state, storage line, install button or hint.
   await t.page.evaluate(()=>window.__island.ui.activityInterface.menu());
   await t.page.waitForFunction(()=>document.querySelector('[data-offline-panel][data-v25] .offline-pack[data-game=soccer][data-state=ready]'));
   const rows=await t.page.evaluate(()=>[...document.querySelectorAll('.offline-pack')].map(li=>({game:li.dataset.game,state:li.dataset.state,size:li.querySelector('.offline-pack-size').textContent,action:li.querySelector('button')?.dataset.action})));
-  assert.equal(rows.length,12);
+  assert.equal(rows.length,13);
   assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:packSize('soccer'),action:'offline-pack-delete'});
   const tennis=rows.find(r=>r.game==='tennis');assert.ok(['missing','partial'].includes(tennis.state),'tennis is not ready (files shared with the main games may already be there): '+JSON.stringify(tennis));
   assert.equal(tennis.size,packSize('tennis'));assert.match(tennis.size,/^[1-9][\d.]* MB$/);assert.equal(tennis.action,'offline-pack-download');
   const texts=await t.page.evaluate(()=>({status:document.querySelector('.offline-status').textContent,storage:document.querySelector('[data-offline-storage]').textContent,install:document.querySelector('[data-action=offline-install]').textContent,installState:document.querySelector('[data-offline-panel]').dataset.install}));
-  assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 12 משחקים מוכנים/);
+  assert.match(texts.status,/האפליקציה שמורה · 6 מתוך 13 משחקים מוכנים/);
   assert.match(texts.storage,/באחסון המכשיר: [\d.]+ MB/);assert.match(texts.storage,/שמירה קבועה: (כן|לא)/);
   assert.ok(['prompt','manual','ios','installed'].includes(texts.installState),texts.installState);
   if(texts.installState!=='installed'){await t.page.locator('[data-action=offline-install]').click();await t.page.waitForFunction(()=>!document.querySelector('[data-install-hint]').hidden);assert.match(await t.page.evaluate(()=>document.querySelector('[data-install-hint]').textContent),/הוספה למסך הבית|התקנת אפליקציה|מותקנת/);}

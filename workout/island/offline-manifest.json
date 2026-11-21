@@ -316,6 +316,17 @@
   "minigames/alpine-quality.mjs",
   "minigames/alpine-records.mjs",
   "minigames/alpine-result.mjs",
+  "minigames/alpine-runner-engine.mjs",
+  "minigames/alpine-runner-generator/generate.mjs",
+  "minigames/alpine-runner-generator/index.mjs",
+  "minigames/alpine-runner-generator/profiles.mjs",
+  "minigames/alpine-runner-generator/validate.mjs",
+  "minigames/alpine-runner-rules.mjs",
+  "minigames/alpine-runner-session.mjs",
+  "minigames/alpine-runner-themes.mjs",
+  "minigames/alpine-runner-view.mjs",
+  "minigames/alpine-runner-weather.mjs",
+  "minigames/alpine-runner.css",
   "minigames/alpine-screen.css",
   "minigames/alpine-screen.mjs",
   "minigames/alpine-session.mjs",
@@ -1248,6 +1259,172 @@
    "assets/alpine-themes-v23/village/snow.webp",
    "assets/alpine-themes-v23/village/village-pine.glb"
   ],
+  "alpineRunner": [
+   "assets/alpine-runner-themes-v2/aurora/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/aurora/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/aurora/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/aurora/props/array-dish.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/ground-beacon.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/guide-bollard.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/light-rail.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/mica-boulder.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/night-fir.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/observation-pod.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/prism.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/violet-crystals.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/wind-sock.glb",
+   "assets/alpine-runner-themes-v2/aurora/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/aurora/signs/start.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/forest/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/forest/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/forest/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/forest/props/berry-brush.glb",
+   "assets/alpine-runner-themes-v2/forest/props/birch.glb",
+   "assets/alpine-runner-themes-v2/forest/props/boulder.glb",
+   "assets/alpine-runner-themes-v2/forest/props/fir.glb",
+   "assets/alpine-runner-themes-v2/forest/props/footbridge-rail.glb",
+   "assets/alpine-runner-themes-v2/forest/props/larch.glb",
+   "assets/alpine-runner-themes-v2/forest/props/log-stack.glb",
+   "assets/alpine-runner-themes-v2/forest/props/stump.glb",
+   "assets/alpine-runner-themes-v2/forest/props/trail-lantern.glb",
+   "assets/alpine-runner-themes-v2/forest/props/trail-post.glb",
+   "assets/alpine-runner-themes-v2/forest/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/forest/signs/start.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/basalt-column.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/cairn.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/column-cluster.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/copper-ore.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/frosted-shelf.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/frozen-fissure.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/obsidian-fin.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/ridge-marker.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/strata.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/survey-beacon.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/signs/start.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/ice/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/ice/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/ice/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/ice/props/blue-spire.glb",
+   "assets/alpine-runner-themes-v2/ice/props/drift.glb",
+   "assets/alpine-runner-themes-v2/ice/props/frost-lantern.glb",
+   "assets/alpine-runner-themes-v2/ice/props/frozen-arch.glb",
+   "assets/alpine-runner-themes-v2/ice/props/glacial-boulder.glb",
+   "assets/alpine-runner-themes-v2/ice/props/ice-wall.glb",
+   "assets/alpine-runner-themes-v2/ice/props/icefall.glb",
+   "assets/alpine-runner-themes-v2/ice/props/rope-marker.glb",
+   "assets/alpine-runner-themes-v2/ice/props/split-shards.glb",
+   "assets/alpine-runner-themes-v2/ice/props/survey-tripod.glb",
+   "assets/alpine-runner-themes-v2/ice/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/ice/signs/start.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/summit/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/summit/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/summit/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/summit/props/expedition-crate.glb",
+   "assets/alpine-runner-themes-v2/summit/props/rescue-hut.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-flag.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-spire.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-telescope.glb",
+   "assets/alpine-runner-themes-v2/summit/props/rope-stanchion.glb",
+   "assets/alpine-runner-themes-v2/summit/props/stacked-slate.glb",
+   "assets/alpine-runner-themes-v2/summit/props/summit-cairn.glb",
+   "assets/alpine-runner-themes-v2/summit/props/weather-mast.glb",
+   "assets/alpine-runner-themes-v2/summit/props/wind-carved-bank.glb",
+   "assets/alpine-runner-themes-v2/summit/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/summit/signs/start.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/themes.json",
+   "assets/alpine-runner-themes-v2/village/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/village/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/village/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/village/props/chalet.glb",
+   "assets/alpine-runner-themes-v2/village/props/clock-tower.glb",
+   "assets/alpine-runner-themes-v2/village/props/lamp-post.glb",
+   "assets/alpine-runner-themes-v2/village/props/market-stall.glb",
+   "assets/alpine-runner-themes-v2/village/props/planter.glb",
+   "assets/alpine-runner-themes-v2/village/props/sled-rack.glb",
+   "assets/alpine-runner-themes-v2/village/props/snow-bench.glb",
+   "assets/alpine-runner-themes-v2/village/props/split-fence.glb",
+   "assets/alpine-runner-themes-v2/village/props/supply-shed.glb",
+   "assets/alpine-runner-themes-v2/village/props/wood-pile.glb",
+   "assets/alpine-runner-themes-v2/village/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/village/signs/start.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/08-summit.glb",
+   "assets/alpine-runner/content/effects/powder-particle.png",
+   "assets/alpine-runner/content/models/boulder.glb",
+   "assets/alpine-runner/content/models/double-coin.glb",
+   "assets/alpine-runner/content/models/star.glb",
+   "assets/alpine-runner/runner/characters/skier-coral.glb",
+   "assets/alpine-runner/runner/props/coin.glb",
+   "assets/alpine-runner/runner/props/high_beam.glb",
+   "assets/alpine-runner/runner/props/low_fence.glb",
+   "assets/alpine-runner/runner/props/magnet.glb",
+   "assets/alpine-runner/runner/props/shield.glb",
+   "assets/alpine-runner/runner/props/turbo.glb",
+   "assets/alpine-runner/runner/tiles/bridge.glb",
+   "assets/alpine-runner/runner/tiles/forest.glb",
+   "assets/alpine-runner/runner/tiles/gentle_turn.glb",
+   "assets/alpine-runner/runner/tiles/ice_tunnel.glb",
+   "assets/alpine-runner/runner/tiles/slope.glb",
+   "assets/alpine-runner/runner/tiles/straight.glb",
+   "assets/alpine-runner/runner/tiles/summit.glb",
+   "assets/alpine-runner/runner/tiles/village.glb",
+   "assets/alpine-runner/themes/01-pine/textures/sky.png",
+   "assets/alpine-runner/themes/02-ice/textures/sky.png",
+   "assets/alpine-runner/themes/03-volcano/textures/sky.png",
+   "assets/alpine-runner/themes/04-aurora/textures/sky.png",
+   "assets/alpine-runner/themes/05-village/textures/sky.png",
+   "assets/alpine-runner/themes/06-summit/textures/sky.png"
+  ],
   "tennis": [
    "assets/audio/g4e/applause-large.ogg",
    "assets/audio/g4e/applause-medium.ogg",
@@ -2081,6 +2258,662 @@
   "assets/alien-v25/steam-256.png": [
    "d1fb98517ac995ad",
    11871
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/foothills.webp": [
+   "104cd445bf21e71c",
+   26518
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/ridges.webp": [
+   "86cd122ad7a506a1",
+   25936
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/sky.webp": [
+   "3c2cd4fb9ea03e7f",
+   8550
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/array-dish.glb": [
+   "5a529c09a06eef2e",
+   10116
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/ground-beacon.glb": [
+   "fa54402a71c4e9e1",
+   8600
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/guide-bollard.glb": [
+   "25c43651c0076f00",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/light-rail.glb": [
+   "020a74cd073f0c84",
+   9336
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/mica-boulder.glb": [
+   "03c450a5a97b8276",
+   5912
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/night-fir.glb": [
+   "4c4e87246d3ba445",
+   20252
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/observation-pod.glb": [
+   "cf3894f46219ea42",
+   30996
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/prism.glb": [
+   "470914560912ab39",
+   5172
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/violet-crystals.glb": [
+   "07fdc7e2aca6a54d",
+   7784
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/wind-sock.glb": [
+   "edd5b0e2cf35e497",
+   8296
+  ],
+  "assets/alpine-runner-themes-v2/aurora/signs/finish.glb": [
+   "ce3ec2c4a8f64699",
+   40644
+  ],
+  "assets/alpine-runner-themes-v2/aurora/signs/start.glb": [
+   "1e343d163b7af7af",
+   29808
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/01-straight.glb": [
+   "480f419fac6315a5",
+   38800
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/02-gentle_turn.glb": [
+   "740ff5ae2885922c",
+   40564
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/03-slope.glb": [
+   "cacd45c4fb0a8050",
+   40504
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/04-bridge.glb": [
+   "9c517b6d5cb8073f",
+   73308
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/05-ice_tunnel.glb": [
+   "2093b25793d1a9f2",
+   58900
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/06-village.glb": [
+   "79fa1403dc675743",
+   47672
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/07-forest.glb": [
+   "fdf9bf1a15fbb7de",
+   44384
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/08-summit.glb": [
+   "d8b32adf6ffca7e1",
+   44412
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/foothills.webp": [
+   "05db06eb5e24cfbb",
+   40454
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/ridges.webp": [
+   "0ee1957d9babba0e",
+   28874
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/sky.webp": [
+   "e73fcfa8c33f6f47",
+   6266
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/berry-brush.glb": [
+   "9d10a5033d3453c9",
+   16120
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/birch.glb": [
+   "e22ce3afee39167a",
+   34180
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/boulder.glb": [
+   "2ed9f2de102b2a56",
+   5904
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/fir.glb": [
+   "feac4913d60144dd",
+   20240
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/footbridge-rail.glb": [
+   "6fe6f159d30f3cee",
+   8568
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/larch.glb": [
+   "93e75a02620b56ca",
+   20256
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/log-stack.glb": [
+   "6596b421fdada2da",
+   56300
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/stump.glb": [
+   "1bb2625d5631c58a",
+   7156
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/trail-lantern.glb": [
+   "ca08917165aba6a2",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/trail-post.glb": [
+   "c4f91261ecf0a543",
+   5560
+  ],
+  "assets/alpine-runner-themes-v2/forest/signs/finish.glb": [
+   "35705688021830ad",
+   41364
+  ],
+  "assets/alpine-runner-themes-v2/forest/signs/start.glb": [
+   "28d34f04134e44d7",
+   30528
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/01-straight.glb": [
+   "9ebf378f1b754186",
+   38056
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/02-gentle_turn.glb": [
+   "f5d5ba9fb105b8f5",
+   39700
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/03-slope.glb": [
+   "8ed35ec3fea38a58",
+   39668
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/04-bridge.glb": [
+   "fa3f4eb3cc7fc51c",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/05-ice_tunnel.glb": [
+   "a3ba6c016a7d6ceb",
+   58920
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/06-village.glb": [
+   "b9c3862f49331359",
+   47008
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/07-forest.glb": [
+   "863bf76dd204dd60",
+   43692
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/08-summit.glb": [
+   "7a50dfcfd9f51b66",
+   43664
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/foothills.webp": [
+   "bbc373e03114a32c",
+   22302
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/ridges.webp": [
+   "45ea3dc076a2fd62",
+   30074
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/sky.webp": [
+   "3eb2f95ba10ffa8b",
+   6816
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/basalt-column.glb": [
+   "5e795f1265e0dbd6",
+   5636
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/cairn.glb": [
+   "0c641c31558f3ca6",
+   7708
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/column-cluster.glb": [
+   "c2d24688c28a8b56",
+   12408
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/copper-ore.glb": [
+   "b0446e58f47b2971",
+   12936
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/frosted-shelf.glb": [
+   "5d454f044b05b6e2",
+   5916
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/frozen-fissure.glb": [
+   "8767828df9297749",
+   13688
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/obsidian-fin.glb": [
+   "aa3e36ad6bf1b8fb",
+   5912
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/ridge-marker.glb": [
+   "09a620db41ddb355",
+   5560
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/strata.glb": [
+   "46572ac5c545f2b7",
+   5900
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/survey-beacon.glb": [
+   "d8a3f24d8f0b209f",
+   9340
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/signs/finish.glb": [
+   "bdecc356f2ba1c72",
+   39928
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/signs/start.glb": [
+   "8c722730639694b7",
+   29092
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/01-straight.glb": [
+   "ba1e4590759ae649",
+   38060
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/02-gentle_turn.glb": [
+   "7466c588dd63134f",
+   39764
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/03-slope.glb": [
+   "1fc3792d998c31d9",
+   39700
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/04-bridge.glb": [
+   "55285e4f8eaabc19",
+   72564
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/05-ice_tunnel.glb": [
+   "ce149fa6a10b5bca",
+   67968
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/06-village.glb": [
+   "da09dc8a127f1e88",
+   46956
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/07-forest.glb": [
+   "658e1a5ee113f95e",
+   43640
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/08-summit.glb": [
+   "873a8b9394162dd6",
+   43668
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/foothills.webp": [
+   "5e30323dddd62d50",
+   22210
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/ridges.webp": [
+   "563f73aa82f37104",
+   32050
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/sky.webp": [
+   "a6abdd4158f0d047",
+   5892
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/blue-spire.glb": [
+   "5ad5523ff708a6dd",
+   6644
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/drift.glb": [
+   "2e27c9c9265c3e3f",
+   5900
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/frost-lantern.glb": [
+   "84527fffca2ff201",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/frozen-arch.glb": [
+   "f7acc34421c0976d",
+   7048
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/glacial-boulder.glb": [
+   "921a99ceecae9705",
+   5964
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/ice-wall.glb": [
+   "f8b0d9a9b9194b0e",
+   22380
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/icefall.glb": [
+   "f5c1997dbdafb27e",
+   24632
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/rope-marker.glb": [
+   "57a0d76bbc16441f",
+   13080
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/split-shards.glb": [
+   "be786557cb646562",
+   6292
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/survey-tripod.glb": [
+   "a51b15841533fa2e",
+   10312
+  ],
+  "assets/alpine-runner-themes-v2/ice/signs/finish.glb": [
+   "d9d7ef4fdf790dc7",
+   39836
+  ],
+  "assets/alpine-runner-themes-v2/ice/signs/start.glb": [
+   "38957a7847fc3bc3",
+   28996
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/01-straight.glb": [
+   "1781ff0a5a94b55e",
+   38792
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/02-gentle_turn.glb": [
+   "98fd92f36086fb92",
+   40412
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/03-slope.glb": [
+   "30fa4b3ea02ef507",
+   40432
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/04-bridge.glb": [
+   "2439f8cb1cb69350",
+   73324
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/05-ice_tunnel.glb": [
+   "059bb781280be321",
+   65516
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/06-village.glb": [
+   "4af3eb83d0463044",
+   47692
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/07-forest.glb": [
+   "010b626d3292514f",
+   44348
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/08-summit.glb": [
+   "de7b43995896e29e",
+   44400
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/foothills.webp": [
+   "214f5959be6d5f0b",
+   23140
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/ridges.webp": [
+   "743c1c0c6321f415",
+   32134
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/sky.webp": [
+   "512ac2fe91dd6cf9",
+   6218
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/expedition-crate.glb": [
+   "ab09e35156b17ab6",
+   10076
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/rescue-hut.glb": [
+   "e65e6961a4806bd6",
+   30984
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-flag.glb": [
+   "c35f7529f8c6718b",
+   3472
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-spire.glb": [
+   "9c1fdc63e5005d7a",
+   5896
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-telescope.glb": [
+   "87be881b25f8aa9e",
+   10316
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/rope-stanchion.glb": [
+   "88bdcfb7f57d3ae6",
+   13084
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/stacked-slate.glb": [
+   "492f9beea816b3b6",
+   5916
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/summit-cairn.glb": [
+   "6576a408eece0725",
+   8468
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/weather-mast.glb": [
+   "8caf72e0c909459f",
+   11164
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/wind-carved-bank.glb": [
+   "0bc99deaacc24aec",
+   5920
+  ],
+  "assets/alpine-runner-themes-v2/summit/signs/finish.glb": [
+   "ac0ae593e8f82eed",
+   39876
+  ],
+  "assets/alpine-runner-themes-v2/summit/signs/start.glb": [
+   "5e597d41e09a50a1",
+   29040
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/01-straight.glb": [
+   "7ef4581a48c07ec2",
+   38000
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/02-gentle_turn.glb": [
+   "96b835ac01020b36",
+   39672
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/03-slope.glb": [
+   "6105afdbc3f829c8",
+   39696
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/04-bridge.glb": [
+   "e2a121e11eb7c382",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/05-ice_tunnel.glb": [
+   "d765e9f71feab06d",
+   58864
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/06-village.glb": [
+   "b144aebe368e8a25",
+   47008
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/07-forest.glb": [
+   "2fb0c439979eea6b",
+   43664
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/08-summit.glb": [
+   "b25dd38fdf5edad7",
+   43608
+  ],
+  "assets/alpine-runner-themes-v2/themes.json": [
+   "e709d9d5cf89a7a2",
+   27629
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/foothills.webp": [
+   "f03f008a2c6ab375",
+   29118
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/ridges.webp": [
+   "38c897c0ec3ce27d",
+   29044
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/sky.webp": [
+   "bcf247c53759ba34",
+   6040
+  ],
+  "assets/alpine-runner-themes-v2/village/props/chalet.glb": [
+   "60ffef9641a8d72a",
+   30976
+  ],
+  "assets/alpine-runner-themes-v2/village/props/clock-tower.glb": [
+   "8506dbf349ce5300",
+   28900
+  ],
+  "assets/alpine-runner-themes-v2/village/props/lamp-post.glb": [
+   "c0493679dc203eca",
+   8576
+  ],
+  "assets/alpine-runner-themes-v2/village/props/market-stall.glb": [
+   "1515f5d0de07c00c",
+   10792
+  ],
+  "assets/alpine-runner-themes-v2/village/props/planter.glb": [
+   "5a8b4a2db8040799",
+   40864
+  ],
+  "assets/alpine-runner-themes-v2/village/props/sled-rack.glb": [
+   "45d1499f4b04ad0e",
+   10792
+  ],
+  "assets/alpine-runner-themes-v2/village/props/snow-bench.glb": [
+   "9b5954e68dca5287",
+   8556
+  ],
+  "assets/alpine-runner-themes-v2/village/props/split-fence.glb": [
+   "07b44af1491cdc46",
+   8560
+  ],
+  "assets/alpine-runner-themes-v2/village/props/supply-shed.glb": [
+   "044989d305d9a353",
+   30980
+  ],
+  "assets/alpine-runner-themes-v2/village/props/wood-pile.glb": [
+   "ec8d0f9baf89b644",
+   56300
+  ],
+  "assets/alpine-runner-themes-v2/village/signs/finish.glb": [
+   "e36c35fdf3619a5b",
+   41368
+  ],
+  "assets/alpine-runner-themes-v2/village/signs/start.glb": [
+   "df6766c903b86711",
+   30528
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/01-straight.glb": [
+   "22a6ef7bf5fa1926",
+   38084
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/02-gentle_turn.glb": [
+   "b5b15ddbd2e42482",
+   39760
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/03-slope.glb": [
+   "2ae5c436fefe450b",
+   39724
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/04-bridge.glb": [
+   "c3097f9576a4ce05",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/05-ice_tunnel.glb": [
+   "fc58ca947c963c9a",
+   58920
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/06-village.glb": [
+   "7b45861afb6a79ef",
+   46980
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/07-forest.glb": [
+   "d31192c9e28d1906",
+   43692
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/08-summit.glb": [
+   "bca6c580f3698c4e",
+   43692
+  ],
+  "assets/alpine-runner/content/effects/powder-particle.png": [
+   "8d5589686854a47a",
+   1370
+  ],
+  "assets/alpine-runner/content/models/boulder.glb": [
+   "8c2c901b921ac936",
+   11044
+  ],
+  "assets/alpine-runner/content/models/double-coin.glb": [
+   "08485d15c147d13c",
+   24756
+  ],
+  "assets/alpine-runner/content/models/star.glb": [
+   "0e970626de38b8eb",
+   10912
+  ],
+  "assets/alpine-runner/runner/characters/skier-coral.glb": [
+   "b05992706ddf2c79",
+   338840
+  ],
+  "assets/alpine-runner/runner/props/coin.glb": [
+   "a3c7cf5c5296046e",
+   7192
+  ],
+  "assets/alpine-runner/runner/props/high_beam.glb": [
+   "ffef849278b6bc9b",
+   6924
+  ],
+  "assets/alpine-runner/runner/props/low_fence.glb": [
+   "24f90a85c4c8e8d9",
+   7620
+  ],
+  "assets/alpine-runner/runner/props/magnet.glb": [
+   "1a0d94b61cd216e0",
+   6316
+  ],
+  "assets/alpine-runner/runner/props/shield.glb": [
+   "91eefcac51b1c90c",
+   5116
+  ],
+  "assets/alpine-runner/runner/props/turbo.glb": [
+   "0f20446994732c14",
+   3696
+  ],
+  "assets/alpine-runner/runner/tiles/bridge.glb": [
+   "e4598418c70ee8f2",
+   45792
+  ],
+  "assets/alpine-runner/runner/tiles/forest.glb": [
+   "3fd1a704cc541526",
+   72716
+  ],
+  "assets/alpine-runner/runner/tiles/gentle_turn.glb": [
+   "32fee947f878574a",
+   47484
+  ],
+  "assets/alpine-runner/runner/tiles/ice_tunnel.glb": [
+   "0f8cd271e7607b9f",
+   53876
+  ],
+  "assets/alpine-runner/runner/tiles/slope.glb": [
+   "b0f4f2bbffe8eb0f",
+   49032
+  ],
+  "assets/alpine-runner/runner/tiles/straight.glb": [
+   "e81f848b094cd8c6",
+   47408
+  ],
+  "assets/alpine-runner/runner/tiles/summit.glb": [
+   "be432b3c9b856c38",
+   34468
+  ],
+  "assets/alpine-runner/runner/tiles/village.glb": [
+   "80c515be4d418995",
+   66604
+  ],
+  "assets/alpine-runner/themes/01-pine/textures/sky.png": [
+   "c3e58a1bbe836990",
+   33648
+  ],
+  "assets/alpine-runner/themes/02-ice/textures/sky.png": [
+   "e6b6acccf665d0ef",
+   37827
+  ],
+  "assets/alpine-runner/themes/03-volcano/textures/sky.png": [
+   "5229b4685c49f041",
+   29980
+  ],
+  "assets/alpine-runner/themes/04-aurora/textures/sky.png": [
+   "3e8a089a10c4de0d",
+   41408
+  ],
+  "assets/alpine-runner/themes/05-village/textures/sky.png": [
+   "e5d0e4534d98af82",
+   32912
+  ],
+  "assets/alpine-runner/themes/06-summit/textures/sky.png": [
+   "e7a615af3a953363",
+   33354
   ],
   "assets/alpine-rush/granite-v5.webp": [
    "8bf89bf8a0dbabaa",
@@ -6087,8 +6920,8 @@
    399
   ],
   "data/strings.he.json": [
-   "f7679a6213630dc4",
-   139323
+   "c507b9de07ec555b",
+   140661
   ],
   "data/strings.he.v246.json": [
    "f2ea30ad0477cc2a",
@@ -7159,8 +7992,8 @@
    3804
   ],
   "engine/engine.mjs": [
-   "6379532260a063c4",
-   42694
+   "61ee96156f50c1d6",
+   42874
   ],
   "engine/episodes.mjs": [
    "fbc9c1bebf54a287",
@@ -7607,8 +8440,52 @@
    5786
   ],
   "minigames/alpine-result.mjs": [
-   "168844cea5b3443b",
-   2776
+   "b3d2dcf037565b45",
+   3042
+  ],
+  "minigames/alpine-runner-engine.mjs": [
+   "5bfa276bb6a7c146",
+   8680
+  ],
+  "minigames/alpine-runner-generator/generate.mjs": [
+   "1427411881553699",
+   6685
+  ],
+  "minigames/alpine-runner-generator/index.mjs": [
+   "fae7ceb4bf81bfdf",
+   342
+  ],
+  "minigames/alpine-runner-generator/profiles.mjs": [
+   "53cdfe54b7512461",
+   4788
+  ],
+  "minigames/alpine-runner-generator/validate.mjs": [
+   "3ac5afce156ed4bb",
+   12123
+  ],
+  "minigames/alpine-runner-rules.mjs": [
+   "1673fb0c1394722e",
+   2949
+  ],
+  "minigames/alpine-runner-session.mjs": [
+   "58877e3e0f648f91",
+   14773
+  ],
+  "minigames/alpine-runner-themes.mjs": [
+   "5dd57d227a80991f",
+   13377
+  ],
+  "minigames/alpine-runner-view.mjs": [
+   "6aac6c2a15d8521f",
+   22757
+  ],
+  "minigames/alpine-runner-weather.mjs": [
+   "741898f58bdfa243",
+   4555
+  ],
+  "minigames/alpine-runner.css": [
+   "1284d42c19526be2",
+   4637
   ],
   "minigames/alpine-screen.css": [
    "b6948022896f59e8",
@@ -7619,8 +8496,8 @@
    1173
   ],
   "minigames/alpine-session.mjs": [
-   "b25e58faf0748ede",
-   41473
+   "ca46d35e61081e36",
+   41835
   ],
   "minigames/alpine-start-lights.css": [
    "f19f7a763dcf5736",
@@ -9115,8 +9992,8 @@
    62159
   ],
   "ui/activity.mjs": [
-   "baa0b9b76f8fa469",
-   61930
+   "7a222ec6b0691bef",
+   63388
   ],
   "ui/adventure-emblems.mjs": [
    "fb5b6a66a8026181",
@@ -9239,8 +10116,8 @@
    15631
   ],
   "ui/offline.mjs": [
-   "b036b52548a57afd",
-   25787
+   "a33c6c051fa5d866",
+   26010
   ],
   "ui/press.mjs": [
    "8aa8a502d8ca750c",

@@ -13,6 +13,8 @@ import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-21';
 import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-21';
 import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-21';
 import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-21';
+import {alpineRunnerEnabled} from './alpine-runner-rules.mjs?v=island-v2-20261107-21';
+import {runAlpineRunnerSession} from './alpine-runner-session.mjs?v=island-v2-20261107-21';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -47,10 +49,15 @@ export function goalText(g) {
   return 'לגלוש בלי ליפול';
 }
 
+export function runAlpineSession(ctx) {
+  if (ctx.canvas && !ctx.alpineLeague && alpineRunnerEnabled()) return runAlpineRunnerSession(ctx);
+  return runAlpineRaceSession(ctx);
+}
+
 /** Controller for one Alpine Rush session: owns the engine, the view, requestAnimationFrame,
  * input, audio and the HUD. The island engine owns rewards; this file only reports the
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
-export function runAlpineSession(ctx) {
+export function runAlpineRaceSession(ctx) {
   // Ski league v23: the island engine hands a league run its setup (ctx.alpineLeague: stage, theme, goals, gear); the course, rivals and
   // speed come from the league balance of that stage. Without it this is the regular game, unchanged.
   const league = ctx.alpineLeague || null, leagueTheme = league ? THEME_LOOKS[league.theme] : null;

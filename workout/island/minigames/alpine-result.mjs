@@ -1,5 +1,6 @@
 import {alpineReward, alpineTrack} from './alpine-engine.mjs?v=island-v2-20261107-21';
 import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-21';
+import {alpineRunnerEnabled, alpineRunnerResult} from './alpine-runner-rules.mjs?v=island-v2-20261107-21';
 
 /** Island reward contract for Alpine Rush. The settlement is recomputed from the
  * validated race summary; any field that disagrees rejects the whole result. */
@@ -13,6 +14,7 @@ function coinsOn(balance, stage) {
 }
 
 export function alpineResult(raw, ctx, balance) {
+  if (raw?.runner !== undefined && !ctx.alpineLeague && alpineRunnerEnabled()) return raw.alpine === undefined ? alpineRunnerResult(raw, ctx, balance) : null;
   const r = raw?.alpine;
   if (!r || typeof r !== 'object' || Array.isArray(r) || Object.keys(r).length !== FIELDS.length || !FIELDS.every(key => Object.hasOwn(r, key))) return null;
   if (!Number.isInteger(r.stage) || r.stage !== ctx.level || r.stage < 1 || r.stage > balance.levels.length) return null;

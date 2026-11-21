@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>מסלול הפסגה · ערכות נושא</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../alpine-runner-v1/vendor/three.module.js"}}</script>
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <main class="review" aria-labelledby="title">
+    <header class="masthead">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1 id="title">מסלול הפסגה</h1>
+          <p>ערכות נושא לראנר הסקי</p>
+        </div>
+      </div>
+      <div class="files">
+        <a href="manifest.json">מניפסט</a>
+        <a href="REPORT.md">דוח</a>
+      </div>
+    </header>
+
+    <nav class="themes" id="themes" aria-label="בחירת ערכת נושא"></nav>
+
+    <section class="stage" id="stage" aria-label="תצוגת מסלול בתלת־ממד" aria-busy="true">
+      <canvas id="backdrop" aria-hidden="true"></canvas>
+      <canvas id="world" aria-hidden="true"></canvas>
+      <canvas id="atmosphere" aria-hidden="true"></canvas>
+      <div class="scene-title">
+        <h2 id="scene-name">יער המחטים</h2>
+        <p id="scene-weather"></p>
+      </div>
+      <div class="tile-label">
+        <span id="tile-name"></span>
+        <bdi id="tile-number"></bdi>
+      </div>
+      <p class="status" id="status" role="status">טוענים את המסלול…</p>
+    </section>
+
+    <div class="controls" aria-label="שליטה בתצוגה">
+      <button type="button" class="play" id="play" disabled>
+        <span class="play-icon" aria-hidden="true"></span>
+        <span id="play-label">גלישה</span>
+      </button>
+      <div class="timeline">
+        <div class="timeline-label">
+          <label for="distance">מיקום במסלול</label>
+          <output id="progress" for="distance"><bdi id="metres">0 / 240</bdi> מ׳</output>
+        </div>
+        <input id="distance" type="range" min="0" max="240" step="1" value="0" dir="ltr" disabled>
+      </div>
+      <button type="button" class="weather" id="weather-toggle" aria-pressed="true" disabled>
+        <span class="weather-state" aria-hidden="true"></span>מזג אוויר
+      </button>
+    </div>
+  </main>
+</body>
+</html>

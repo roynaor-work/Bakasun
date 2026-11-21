@@ -11,8 +11,9 @@
 // old cache dropped when the new worker takes over, persistent storage, and a worker that
 // answers the app shell from the device first.
 import {DATA_VERSION} from '../release.mjs';
+import {alpineRunnerEnabled} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-21';
 
-export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',tennis:'טניס',racing:'מרוצים',naval:'ספינות',boar:'אי החזירים',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
+export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',alpineRunner:'גלישת סקי אינסופית',tennis:'טניס',racing:'מרוצים',naval:'ספינות',boar:'אי החזירים',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
 export const STATUS_KEY='island.offline.status';
 /** Same rule as offline-sw.js: only these island paths are answered from the cache. */
 export const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
@@ -24,16 +25,16 @@ const islandRoot=new URL('../',import.meta.url);
 export const V25_PARAM='offlineV25';
 export function v25On(search=globalThis.location?.search||''){return new URLSearchParams(search).get(V25_PARAM)!=='0';}
 /** Which offline packages a game (engine id) needs. Boar defense: code in the shell plus the boar pack (campaign weather layers and upgrade icons, 20/11/2026). */
-export const PACKS_OF=Object.freeze({soccer:['soccer'],streetSlam:['hoops'],alpineRush:['alpine','alpineLeague'],tennis:['tennis'],islandRacing:['racing'],navalDuel:['naval'],fireRescue:['fire'],alienDefense:['alien'],catchCriminal:['catch'],boarDefense:['boar']});
+export const PACKS_OF=Object.freeze({soccer:['soccer'],streetSlam:['hoops'],alpineRush:['alpine','alpineLeague','alpineRunner'],tennis:['tennis'],islandRacing:['racing'],navalDuel:['naval'],fireRescue:['fire'],alienDefense:['alien'],catchCriminal:['catch'],boarDefense:['boar']});
 /** The hub itself (city models) is always wanted; the three main games are the default when nothing was played yet. */
 export const ALWAYS_PACKS=Object.freeze(['city']);
-export const DEFAULT_PACKS=Object.freeze(['soccer','hoops','alpine','alpineLeague']);
+export const DEFAULT_PACKS=Object.freeze(['soccer','hoops','alpine','alpineLeague','alpineRunner']);
 /** Packages to keep on the device for the games played so far (engine ids), in manifest order. */
 export function packsForGames(played=[]){
   const wanted=new Set(ALWAYS_PACKS);
   const fromPlay=[...new Set(played)].flatMap(id=>PACKS_OF[id]||[]);
   for(const p of fromPlay.length?fromPlay:DEFAULT_PACKS)wanted.add(p);
-  return Object.keys(OFFLINE_GAMES).filter(p=>wanted.has(p));
+  return Object.keys(OFFLINE_GAMES).filter(p=>wanted.has(p)&&(p!=='alpineRunner'||alpineRunnerEnabled()));
 }
 
 export async function loadManifest(version=DATA_VERSION,fetcher=globalThis.fetch,root=islandRoot){

@@ -24,7 +24,7 @@ test('browser: stick left / actions right in both orientations, floating stick w
         await context.route('**/data/featureFlags.json*', async route => { const response = await route.fetch(); await route.fulfill({response, json: {...await response.json(), events: false}}); });
         const page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
         page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/missing-alpine-rider|404/.test(m.text())) errors.push(m.text()); });
-        await page.goto(server.url + '?dev=1', {waitUntil: 'networkidle'});
+        await page.goto(server.url + '?dev=1&alpineRunner=0', {waitUntil: 'networkidle'});
         await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded);
         await page.locator('[data-action=avatar-start]').tap();
         await page.evaluate(() => { const {engine: e} = window.__island; e.skipTutorial(); e.tick = () => ({ok: true}); });

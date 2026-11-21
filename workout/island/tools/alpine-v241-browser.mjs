@@ -121,7 +121,7 @@ async function islandRun(label, query, {toFinish}) {
   const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page); await page.addInitScript(LOCKSTEP_INIT, FRAME);
   page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
   const touch = await touchKit(page);
-  await page.goto(server.url + '?dev=1&games=1' + query, {waitUntil: 'load'});
+  await page.goto(server.url + '?dev=1&games=1&alpineRunner=0' + query, {waitUntil: 'load'});
   await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 900000, polling: 1000});
   await touch.tap('[data-action=avatar-start]'); await page.waitForSelector('[data-game-library]');
   await touch.tap('[data-action=game-enter][data-game-id=alpineRush]'); await page.waitForSelector('[data-game-home=alpineRush]');

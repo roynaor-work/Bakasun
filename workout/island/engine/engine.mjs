@@ -544,7 +544,8 @@ export function createEngine(data, options = {}) {
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {
-          state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+          // The alpine runner stores its own score. The legacy Alpine score is a race placement.
+          if (id !== 'alpineRush' || raw?.runner === undefined || raw.alpine !== undefined) state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
           if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
           if(id==='tennis'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer,'tennis');

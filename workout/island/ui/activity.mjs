@@ -37,10 +37,12 @@ import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-21
 import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-21';
 import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-21';
 
+import {alpineRunnerEnabled,alpineRunnerGoals} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-21';
 /** Phone fixes B/D (v24.3) changed the naval lock and the racing pit; `.v241` keys keep the v24.1 text for ?phoneFixB=0 / ?phoneFixD=0 (or ?phoneFixes=0). */
 const phoneFixOn=letter=>polishValue('phoneFixes')!=='0'&&polishValue('phoneFix'+letter)!=='0';
 /** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
-function helpKeys(id){
+function helpKeys(id,rescue){
+ if(id==='alpineRush'&&!rescue?.alpineLeague&&alpineRunnerEnabled())return [1,2,3].map(i=>`minigame.alpineRush.runner.help.${i}`);
  const keys=[1,2,3].map(i=>`minigame.${id}.help.${i}`);
  if(polishValue('reviewHelp')==='0')return keys;
  if(id==='islandRacing'){
@@ -161,7 +163,7 @@ export class ActivityInterface {
       return kidUx('005')?this.start(id,undefined,1):this.launch(id,undefined,1);
     }
     const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
-    const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
+    const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=id==='alpineRush'&&alpineRunnerEnabled()?this.t('minigame.alpineRush.runner.description'):art.description;
     const hero=el('div','adventure-game-hero'),opening=kitIntro(id);
     // The kit's opening card leads the game's home screen; the captured frame stays as the fallback and in the library.
     if(opening){const card=el('div','island-kit ik-opening ik-enter');card.dataset.scene=id;opening.onerror=()=>{card.replaceWith(gameEmblem(id));};card.append(opening);hero.append(card);}else hero.append(gameEmblem(id));
@@ -284,11 +286,11 @@ export class ActivityInterface {
     if(id==='alpineRush'&&this.alpineLeagueOn())this.alpineLeagueCard(outer);
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
     if(id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length){outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
-    const map=el('div','stage-map');
+    const map=el('div','stage-map'),runner=id==='alpineRush'&&alpineRunnerEnabled();
     p.stars.forEach((stars,i)=>{
       const stage=i+1,locked=stage>p.stage;
       const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
-      node.title=this.t(this.data.config.minigames[id].levels[i].feature);if(id==='islandRacing')node.title=racingStageFeature(stage,node.title);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+      node.title=runner?this.t(`minigame.alpineRush.runner.stage.${stage}`,{distance:alpineRunnerGoals(stage)[0]}):this.t(this.data.config.minigames[id].levels[i].feature);if(id==='islandRacing')node.title=racingStageFeature(stage,node.title);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
     });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);(clubLayout?.actions||outer).append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
   autoLaunch(choice) {
@@ -303,9 +305,9 @@ export class ActivityInterface {
     }
     this.launch(choice.gameId,choice.eventId,stage);
   }
-  narrateHelp(id) {for(const key of helpKeys(id)){this.engine.narration.announce(key);this.ui.narrate(key);}}
-  helpLines(id) {
-    const lines=el('div','game-help-lines'),keys=helpKeys(id);
+  narrateHelp(id,rescue) {for(const key of helpKeys(id,rescue)){this.engine.narration.announce(key);this.ui.narrate(key);}}
+  helpLines(id,rescue) {
+    const lines=el('div','game-help-lines'),keys=helpKeys(id,rescue);
     const leagueHelp=kidUx('015')&&id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length;
     if(leagueHelp)lines.dataset.kidUxSoccerLeagueHelp='';
     keys.forEach((key,i)=>{
@@ -330,12 +332,14 @@ export class ActivityInterface {
       this.activity.instructions(id);
       this.launch(id,eventId,stage,undefined,rescue);
     });
-    const again=button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id));
-    const guide=kidUx('005')?gameGuide(id):null;
+    const again=button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id,rescue));
+    // The illustrated guide shows the ski race; the three-lane runner has its own written help.
+    const runnerIntro=id==='alpineRush'&&!rescue?.alpineLeague&&alpineRunnerEnabled();
+    const guide=kidUx('005')&&!runnerIntro?gameGuide(id):null;
     if(guide){
       dialog.dataset.kidUxHelp='';
       const details=el('details','kid-ux-intro-details');
-      details.append(el('summary','','הוראות נוספות'),this.helpLines(id));
+      details.append(el('summary','','הוראות נוספות'),this.helpLines(id,rescue));
       const actions=el('div','kid-ux-intro-actions');
       actions.append(play,again);
       dialog.append(guide.node,details,actions);
@@ -345,7 +349,7 @@ export class ActivityInterface {
         const card=el('div','island-kit ik-opening ik-opening-small');
         card.append(opening);dialog.append(card);
       }
-      dialog.append(this.helpLines(id),play,again);
+      dialog.append(this.helpLines(id,rescue),play,again);
     }
     if(kidUx('006')){
       const stop=helpReplay({
@@ -361,7 +365,7 @@ export class ActivityInterface {
         cleanup();
       };
     }else{
-      this.narrateHelp(id);
+      this.narrateHelp(id,rescue);
     }
   }
   start(id,eventId,stage) {
@@ -442,7 +446,8 @@ export class ActivityInterface {
    * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
    * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
   async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
-    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{}),...(rescue.alpineLeague?{alpineLeague:rescue.alpineLeague}:{})};
+    const key=id==='alpineRush'&&!rescue.alpineLeague&&alpineRunnerEnabled()?'alpineRunner':RESCUE_GAMES[id];
+    const next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{}),...(rescue.alpineLeague?{alpineLeague:rescue.alpineLeague}:{})};
     this.closing=true;
     try{this.fpsStop?.();this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
     let count=0;
@@ -571,6 +576,13 @@ export class ActivityInterface {
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
   }
   alpineResult(dialog,summary,a){
+    if(a.mode==='runner'){
+      const best=a.best?.score??a.best;
+      const rows=[['distance',this.t('minigame.alpineRush.runner.distance',{distance:a.distance.toLocaleString('he-IL')})],['time',this.t('minigame.alpineRush.runner.seconds',{time:(a.elapsed/1000).toFixed(1)})],['coins',a.coins]];
+      if(Number.isSafeInteger(best))rows.push([a.newBest?'newBest':'best',best]);
+      for(const [key,value] of rows){const row=el('p','result-row');row.dataset.alpineSummary=key;row.append(el('span','',this.t(`minigame.alpineRush.runner.result.${key}`)),el('bdi','',String(value)));summary.append(row);}
+      return;
+    }
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
     const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261107-21',import.meta.url).href;dialog.append(css);
