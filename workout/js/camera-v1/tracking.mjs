@@ -8,8 +8,9 @@ const LINKS = [[11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28]];
 const minConfidence = .49;
 const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
-// Share of the background (outside the body) that changed between two frames: above this the phone itself moved.
-const sceneMoved = .16;
+// Share of the background (outside the body) that changed between two frames. A frame above sceneStir is a
+// stir; consecutive stirs that add up to sceneMoved mean the phone itself moved.
+const sceneStir = .05, sceneMoved = .2;
 // Hysteresis: a joint must be clear to start (minConfidence), and may dip to this while the child is tracked.
 const stayConfidence = .36;
 // A child who was tracked and drops out for a blink (a fast jump, an arm across the body) keeps the
@@ -156,6 +157,13 @@ export function measureLight(rgba, dimensions) {
   return light;
 }
 
+function fillsPicture(poses) {
+  const points = (Array.isArray(poses) ? poses : []).flatMap(pose => Array.isArray(pose?.landmarks) ? pose.landmarks.filter(point => visible(point, .3)) : []);
+  if (points.length < 3) return false;
+  const xs = points.map(p => clamp(p.x, 0, 1)), ys = points.map(p => clamp(p.y, 0, 1));
+  return (Math.max(...xs) - Math.min(...xs) + .2) * (Math.max(...ys) - Math.min(...ys) + .2) > .72;
+}
+
 function lightStatus(light) {
   if (!light || !Number.isFinite(light.p50) || !Number.isFinite(light.p90)) return null;
   const { p50, p90, subjectP50, subjectP90 } = light;
@@ -252,7 +260,7 @@ export class PoseTracker {
     this.lastTime = null;
     this.upperEdgeSince = null;
     this.demoShown = false;
-    this.movedFrames = 0;
+    this.movedFrames = this.movedSum = 0;
     this.movedAt = null;
     this.seenAt = null;
     this.resumed = false;
@@ -321,9 +329,14 @@ export class PoseTracker {
     if (Number.isFinite(aspect) && aspect > 0) this.aspect = aspect;
     // The phone was knocked or picked up: the floor line and the framing learnt before no longer hold, so the
     // track is dropped and the framing check and the short calibration run again. One changed frame can be a
-    // door or a passer-by; two in a row, or a second within a moment, is the phone.
-    this.movedFrames = scene > sceneMoved ? this.movedFrames + 1 : 0;
-    if (this.movedFrames >= 2) this.movedAt = time;
+    // door or a passer-by; several in a row are the phone.
+    // A knock takes a few frames: each changes part of the background, and together they change a lot of it.
+    // With the body filling the picture there is too little background left to judge by.
+    // Only a child who is being tracked has anything to lose from a moved phone; before that the framing
+    // check is running anyway.
+    const stir = scene > sceneStir && Boolean(this.calibration) && !fillsPicture(poses);
+    if (stir) { this.movedFrames++; this.movedSum += scene; } else this.movedFrames = this.movedSum = 0;
+    if (this.movedFrames >= 2 && this.movedSum >= sceneMoved) this.movedAt = time;
     if (this.movedAt != null && time - this.movedAt < 500) {
       this.upperEdgeSince = null;
       return this._blocked('phone-moved');

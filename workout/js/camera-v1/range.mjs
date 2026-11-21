@@ -19,15 +19,18 @@ export const RANGE_COPY = Object.freeze({
 // value: the number followed; start and full: its nominal values at the two ends; cue: which way is "further";
 // minMs: the part of a repetition away from the start (about half of it) shorter than this is rushed: under
 // about a second for the whole repetition. The demonstration's own pace is three times calmer. Jumps have none.
-const range = (value, start, full, cue, minMs = 520) => ({ value, start, full, cue, minMs });
+// angle: the joint angle the profile's stages read; a child's own (eased) range is applied to it.
+const range = (value, start, full, cue, minMs = 520, angle = null) => ({ value, start, full, cue, minMs, angle });
+const knee = (full, minMs) => range(f => f.kneeAngle, 170, full, LOWER, minMs, 'kneeAngle');
+const elbow = full => range(f => f.elbowAngle, 165, full, LOWER, 520, 'elbowAngle');
 export const RANGES = {
-  squats: range(f => f.kneeAngle, 170, 122, LOWER),
-  'squat-jumps': range(f => f.kneeAngle, 170, 122, LOWER, 0),
+  squats: knee(122),
+  'squat-jumps': knee(122, 0),
   lunges: range(lowestKnee, 170, 112, LOWER),
-  'push-ups': range(f => f.elbowAngle, 165, 106, LOWER),
-  'knee-push-ups': range(f => f.elbowAngle, 165, 106, LOWER),
-  'pike-push-ups': range(f => f.elbowAngle, 165, 116, LOWER),
-  'chair-dips': range(f => f.elbowAngle, 165, 112, LOWER),
+  'push-ups': elbow(106),
+  'knee-push-ups': elbow(106),
+  'pike-push-ups': elbow(116),
+  'chair-dips': elbow(112),
   crunches: range(shoulderHeight, .2, .46, HIGHER),
   'v-ups': range(shoulderHeight, .2, .7, HIGHER),
   superman: range(shoulderHeight, .14, .32, HIGHER),
@@ -86,19 +89,28 @@ export class RangeMeter {
   }
 
   /**
-   * Called once per finished movement. Two movements in a row that went about equally far, and far enough,
-   * are how this child does the exercise: from then on a movement that reaches that range counts even when
-   * the step counter did not follow it. The needed range is only ever eased (down to the floor), never raised.
-   * @returns true at the moment the child's own range starts to be used
+   * Called for a finished movement that began from the starting position and was not counted. Two such
+   * movements in a row that went about equally far (and far enough to be an attempt) are this child's own
+   * range: the needed range is eased to it, never below the floor and never raised.
+   * @returns true at the moment the range is eased
    */
   learn(done) {
-    if (this.adapted || done.peak < OWN_FLOOR) return false;
+    if (this.adapted || !this.spec.angle || done.peak < OWN_FLOOR || done.peak >= 1) return false;
     this.peaks.push(done.peak);
     if (this.peaks.length > 2) this.peaks.shift();
     if (this.peaks.length < 2 || Math.abs(this.peaks[0] - this.peaks[1]) > OWN_SPREAD) return false;
     this.adapted = true;
-    this.need = Math.max(OWN_FLOOR, Math.min(1, .92 * Math.min(...this.peaks)));
+    this.need = Math.max(OWN_FLOOR, .92 * Math.min(...this.peaks));
     return true;
+  }
+
+  /** The frame as the stages should read it: with an eased range, the followed angle is stretched to the nominal scale. */
+  eased(f) {
+    const key = this.spec?.angle;
+    if (!key || this.need >= 1 || this.start == null) return f;
+    const stretch = value => Number.isFinite(value) ? this.start + (value - this.start) / this.need : value;
+    const sides = f.sides.map(side => ({ ...side, [key]: stretch(side[key]) }));
+    return { ...f, sides, left: sides[0], right: sides[1], main: sides[f.main.index], [key]: stretch(f[key]) };
   }
 
   /** Two rushed repetitions in a row ask for a slower pace; a calm one clears the tally. */

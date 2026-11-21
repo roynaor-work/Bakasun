@@ -94,8 +94,7 @@ export class MotionCounter {
   }
 
   // The range of the movement beside the step counter: the meter, a repetition that stopped short, a rushed
-  // pace, and the child's own range. The step counter keeps the first word: the range only speaks for a
-  // movement the steps did not count.
+  // pace, and the child's own range. Counting itself stays with the stages; the range never adds a count.
   gauge(result, f, t) {
     if (result.event === 'partial') this.partials++;
     if (!this.range.spec) return { ...result, partials: this.partials };
@@ -117,16 +116,11 @@ export class MotionCounter {
       out = { ...out, tempo: this.range.rushed(trip) };
     } else if (trip && (t - trip.at >= VERDICT_MS || stepPartial || result.event === 'form')) {
       this.trip = null;
-      // Movements the steps did not count teach the child's own range, and only those that began properly.
-      const taught = this.range.adapted;
-      const own = trip.fromStart ? this.range.learn(trip) : false;
-      if (trip.reached && taught && trip.fromStart && result.event !== 'form' && this.spec.mode === 'cycle' &&
-          !this.spec.alternate && !this.spec.twoSides) {
-        // Inside the child's own range: counted, and the half-finished attempt of the step counter is dropped.
-        if (trip.said || this.stepPartialAt != null && t - this.stepPartialAt < 1500) this.partials = Math.max(0, this.partials - 1);
-        this.clearCycle(true, f, t);
-        out = { ...this.creditRep(t), meter, own, adapted: true };
-      } else if (!trip.reached && trip.peak >= .35) {
+      // An uncounted movement from the starting position teaches the child's own range (two that agree);
+      // from then on the stages read the followed angle on the eased scale (see RangeMeter.eased).
+      const cycle = this.spec.mode === 'cycle' && !this.spec.alternate && !this.spec.twoSides;
+      const own = trip.fromStart && cycle ? this.range.learn(trip) : false;
+      if (!trip.reached && trip.peak >= .35) {
         if (!trip.said && !(this.stepPartialAt != null && t - this.stepPartialAt < 1500)) this.partials++;
         out = { ...out, event: 'partial', hint: this.range.spec.cue, short: true, own };
       } else out = { ...out, own };
@@ -272,7 +266,7 @@ export class MotionCounter {
       if (t - pending.issueAt >= 175) pending.issue = issue;
     } else pending.issueAt = null;
     const step = spec.steps[pending.index];
-    const matches = step?.test(f, pending);
+    const matches = step?.test(this.range.eased(f), pending);
     if (matches) {
       pending.stepAt ??= t;
       pending.missAt = null;

@@ -97,7 +97,7 @@ export function replay(clip, api, id = clip.cfg.id) {
       if (motion.event) bump(events, motion.event);
       if (motion.tempo) tempo++;
       if (motion.own) own++;
-      if (motion.adapted) adapted++;
+      if (motion.bridged) adapted++;
       if (Number.isFinite(motion.meter)) meterTop = Math.max(meterTop ?? 0, motion.meter);
       if (motion.event === 'counted') countedAt.push(frame.t);
       const hint = motion.hint?.text || (typeof motion.hint === 'string' ? motion.hint : '');
@@ -134,7 +134,7 @@ export function score(clip, api) {
     : cfg.idle ? (run.timed ? row.amount < 1 : row.amount === 0)
     : run.timed ? row.amount >= .6 * row.expected && row.amount <= 1.15 * row.expected : row.amount === row.expected;
   // Counted from the third repetition on, after the first two taught the child's own range.
-  row.learned = !row.exact && !run.timed && run.adapted > 0 && row.amount >= row.expected - 2 && row.amount <= row.expected;
+  row.learned = !row.exact && !run.timed && run.own > 0 && row.amount >= row.expected - 2 && row.amount <= row.expected;
   // Guidance against the true crop.
   const cut = trulyCut(clip.frames[Math.floor(clip.frames.length / 3)]);
   row.cut = { parts: cut.parts, edges: [...cut.edges], middle: Math.round(cut.middle * 100) / 100 };

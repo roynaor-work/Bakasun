@@ -63,7 +63,10 @@ test('the child\'s own range: two movements that agree set it, never below the f
   const [learnt, need] = two(.8, .78);
   assert.equal(learnt, true);
   assert.ok(Math.abs(need - .92 * .78) < 1e-9);
-  assert.deepEqual(two(1.2, 1.25), [true, 1], 'the needed range is never raised above the nominal one');
+  assert.deepEqual(two(1.2, 1.25), [false, 1], 'a child who reaches the full range keeps it');
+  const crunch = new RangeMeter('crunches');
+  crunch.learn({ peak: .8 });
+  assert.equal(crunch.learn({ peak: .8 }), false, 'only joint-angle ranges are eased');
   assert.deepEqual(two(.4, .45), [false, 1], 'two nods teach nothing');
   assert.deepEqual(two(.62, .95), [false, 1], 'two movements that disagree teach nothing');
   assert.equal(two(.62, .63)[1], OWN_FLOOR, 'the floor holds');
@@ -100,25 +103,28 @@ test('a repetition that stops short is marked as "almost" with the way to go, no
   assert.equal(movement(166).some(r => r.event === 'partial'), false, 'a small sway is not an attempt');
 });
 
-test('own range: after two consistent shallower squats the third one counts; a deep-enough child is unchanged', () => {
+test('own range: two consistent shallower squats from the start ease the range; the stages then read the knee on the eased scale', () => {
   const { counter, movement } = squatCounter();
   const bottom = 170 - .8 * (170 - 122);
   const first = movement(bottom), second = movement(bottom);
-  assert.equal(counter.count, 0, 'the first two teach');
+  assert.equal(counter.count, 0, 'the range itself never adds a count');
   assert.ok(second.some(r => r.own), 'the range was learnt on the second');
-  const third = movement(bottom);
-  assert.ok(third.some(r => r.event === 'counted' && r.adapted));
-  assert.equal(counter.count, 1);
-  movement(170 - .5 * (170 - 122));
-  assert.equal(counter.count, 1, 'half of the range is still short');
+  assert.ok(Math.abs(counter.range.need - .92 * .8) < .03);
   assert.equal(first.filter(r => r.event === 'partial').length, 1);
+  const frame = { kneeAngle: bottom, main: { index: 0 }, sides: [{ index: 0, kneeAngle: bottom }, { index: 1, kneeAngle: 168 }] };
+  const eased = counter.range.eased(frame);
+  assert.ok(eased.kneeAngle <= 122, 'the child\'s own bottom now reads as the nominal bottom: ' + eased.kneeAngle);
+  assert.ok(eased.main.kneeAngle === eased.sides[0].kneeAngle && eased.sides[1].kneeAngle > 160);
+  const half = counter.range.eased({ ...frame, kneeAngle: 170 - .5 * (170 - 122) });
+  assert.ok(half.kneeAngle > 125, 'half of the range is still short of the stage');
   const standing = squatCounter({ fromStart: false });
   for (let i = 0; i < 4; i++) standing.movement(bottom);
-  assert.equal(standing.counter.count, 0, 'a movement that did not begin from the starting position teaches nothing');
+  assert.equal(standing.counter.range.need, 1, 'a movement that did not begin from the starting position teaches nothing');
   const deep = squatCounter();
   for (let i = 0; i < 3; i++) deep.movement(118, { counted: true });
-  assert.equal(deep.counter.count, 3, 'counted once each, by the steps');
+  assert.equal(deep.counter.count, 3, 'counted once each, by the stages');
   assert.equal(deep.counter.range.need, 1);
+  assert.equal(deep.counter.range.eased(frame), frame, 'no easing: the frame is untouched');
 });
 
 test('pace: two rushed repetitions in a row ask for "slower", a calm pace does not', () => {
