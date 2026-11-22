@@ -18,6 +18,7 @@ import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
 import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-22';
+import {hoopsLookEnabled,HOOPS_LOOK_CROWD_TINT} from './hoops-look-v249.mjs?v=island-v2-20261107-22';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -89,7 +90,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  if(crowdMode!=='off'&&models.arenaV8){
   Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-22'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
    const seats=C.hoopsCrowdSeats(V.seatingLayout(0)),loader=new G.GLTFLoader();
-   const loaded=await C.createHoopsCrowd3d({T:THREE,GLTFLoader:G.GLTFLoader,load:url=>H.loadHoopsGLTF(loader,url),seats,mode:crowdMode,teamColors:[looks[0].primary,looks[1].primary]});
+   const loaded=await C.createHoopsCrowd3d({T:THREE,GLTFLoader:G.GLTFLoader,load:url=>H.loadHoopsGLTF(loader,url),seats,mode:crowdMode,teamColors:[looks[0].primary,looks[1].primary],...(hoopsLookEnabled(search)?{tint:HOOPS_LOOK_CROWD_TINT}:{})});
    if(viewDisposed){loaded.dispose();return;}
    crowd3d=loaded;crowd3dApi=C;scene.add(loaded.root);crowd3dState.status='ready';
   }).catch(error=>{crowd3dState.status='fallback';crowd3dState.error=String(error?.message||error);});
