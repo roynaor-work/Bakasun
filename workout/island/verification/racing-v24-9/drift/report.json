@@ -1,0 +1,231 @@
+{
+ "scenario": "drift",
+ "query": "",
+ "armedBeforeTheMove": null,
+ "viewport": "844x390 touch mobile",
+ "stage": 10,
+ "raceSeconds": 24,
+ "frames": 729,
+ "road": {
+  "x0": 0.27,
+  "x1": 0.66,
+  "y0": 0.2,
+  "y1": 1
+ },
+ "layout": {
+  "slide": {
+   "x": 681,
+   "y": 197,
+   "width": 50,
+   "height": 50
+  },
+  "gas": {
+   "x": 681,
+   "y": 253,
+   "width": 50,
+   "height": 50
+  },
+  "brake": {
+   "x": 678,
+   "y": 314,
+   "width": 59,
+   "height": 59
+  },
+  "nitro": {
+   "x": 751,
+   "y": 300,
+   "width": 73,
+   "height": 73
+  },
+  "auto": {
+   "x": 736,
+   "y": 237,
+   "width": 88,
+   "height": 44
+  },
+  "speedometer": {
+   "x": 550,
+   "y": 258,
+   "width": 106,
+   "height": 106
+  },
+  "energy": {
+   "x": 401.3766784667969,
+   "y": 334,
+   "width": 105.24664306640625,
+   "height": 5
+  },
+  "pause": {
+   "x": 768,
+   "y": 12,
+   "width": 56,
+   "height": 56
+  },
+  "minimap": {
+   "x": 648,
+   "y": 10,
+   "width": 118,
+   "height": 79
+  },
+  "overlaps": []
+ },
+ "textOverRoad": {
+  "frames": 0,
+  "of": 729,
+  "items": [],
+  "instrumentsInThatArea": [
+   {
+    "cls": "[object SVGAnimatedString]",
+    "text": "1",
+    "box": [
+     513,
+     299,
+     527,
+     325
+    ]
+   },
+   {
+    "cls": "racing-energy-tag",
+    "text": "⚡ מטען",
+    "box": [
+     445,
+     314,
+     511,
+     333
+    ]
+   }
+  ]
+ },
+ "tyreTextOutsidePit": {
+  "frames": 0,
+  "items": {}
+ },
+ "tyreMeterOutsidePitFrames": 0,
+ "tyreMeterInPitFrames": 0,
+ "pitFrames": 0,
+ "drift": {
+  "fingerPresses": 4,
+  "brakePresses": 0,
+  "driftingSeconds": 4.4,
+  "driftingWithFingerFrames": 132,
+  "driftingWithoutFingerFrames": 0,
+  "maxSmoke": 10,
+  "maxSkidMarks": 64,
+  "smokeLongAfterDrift": 0,
+  "drifts": 4,
+  "cleanDrifts": 3,
+  "ersFromDrifts": 14.9,
+  "longest": 1.57
+ },
+ "tip": {
+  "seen": true,
+  "gone": true,
+  "stored": "1"
+ },
+ "chips": [
+  {
+   "text": "↔️ גררו הצידה כדי לפנות",
+   "box": [
+    225,
+    13,
+    366,
+    34
+   ],
+   "t": 0
+  },
+  {
+   "text": "» סלפה",
+   "box": [
+    225,
+    13,
+    284,
+    34
+   ],
+   "t": 0.1
+  },
+  {
+   "text": "▲ מקום 2",
+   "box": [
+    225,
+    13,
+    295,
+    34
+   ],
+   "t": 2.6
+  },
+  {
+   "text": "👆 געו בגז כדי להאיץ",
+   "box": [
+    225,
+    13,
+    346,
+    34
+   ],
+   "t": 4.1
+  },
+  {
+   "text": "▼ מקום 3",
+   "box": [
+    225,
+    13,
+    295,
+    34
+   ],
+   "t": 5.8
+  },
+  {
+   "text": "👆 געו בבלם לפני פנייה",
+   "box": [
+    225,
+    13,
+    359,
+    34
+   ],
+   "t": 7.1
+  },
+  {
+   "text": "⚡ דריפט +5",
+   "box": [
+    225,
+    13,
+    309,
+    34
+   ],
+   "t": 11
+  }
+ ],
+ "maxSpeed": 33.7,
+ "gravelSeconds": 0,
+ "flips": 0,
+ "laps": 0,
+ "events": [
+  {
+   "t": 10.97,
+   "type": "driftEnd",
+   "gain": 5.2,
+   "seconds": 0.87,
+   "clean": true
+  },
+  {
+   "t": 14.13,
+   "type": "driftEnd",
+   "gain": 6.1,
+   "seconds": 1.02,
+   "clean": true
+  },
+  {
+   "t": 17.23,
+   "type": "driftEnd",
+   "gain": 3.6,
+   "seconds": 0.95,
+   "clean": true
+  },
+  {
+   "t": 19.95,
+   "type": "driftEnd",
+   "gain": 0,
+   "seconds": 1.57,
+   "clean": true
+  }
+ ]
+}

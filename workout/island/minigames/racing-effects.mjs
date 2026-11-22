@@ -38,9 +38,21 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
  // racing-v24: the car set back on the road after a vanish touches down softly: a little dust, no sparks
  function softLand(c){for(let i=0;i<4;i++){const a=i*1.57+.4;smokeAt(c.x+Math.sin(a)*.9,c.y+.15,c.z+Math.cos(a)*.9,Math.sin(a)*1.1,Math.cos(a)*1.1,.7,.6);}}
  function putSmoke(p,side){const x=p.x+Math.cos(p.heading)*side-Math.sin(p.heading)*1.55,z=p.z-Math.sin(p.heading)*side-Math.cos(p.heading)*1.55;smoke[smokeCursor++%32]={x,y:p.y+.26,z,age:0,life:.9,size:.55,dx:Math.sin(p.heading)*-1.8+side*.25,dz:Math.cos(p.heading)*-1.8};}
+ // racing-v24.9 drift smoke (the drift of the drift button: player.driftT > 0, so never with ?racingDrift=0). The puffs above stay where they were laid, and the chase
+ // camera (about 6 m behind a car doing 30 m/s) is past them in a fifth of a second, at their faintest: a slide showed no smoke at all. These puffs are denser (their
+ // own sprite, alpha .85 in the middle), start with most of the car's speed and fall behind it slowly, so they billow from the rear wheels in front of the camera for
+ // DRIFT_LIFE seconds. One more instanced mesh: one draw call, and none while the car is not sliding. Fixed pool, mutated in place. The mesh and its 64 px sprite
+ // are made at the first slide (ensureDrift), so a race without a drift has exactly the meshes it had.
+ const DRIFT_N=22,DRIFT_LIFE=.7,driftPuffs=Array.from({length:DRIFT_N},()=>({on:false,x:0,y:0,z:0,dx:0,dz:0,age:0,size:1}));let driftCursor=0,driftAge=0;
+ let driftMesh=null;
+ function ensureDrift(){if(driftMesh||disposed)return;const cv=document.createElement('canvas');cv.width=cv.height=64;const c=cv.getContext('2d'),g=c.createRadialGradient(32,32,2,32,32,31);g.addColorStop(0,'rgba(248,250,251,.85)');g.addColorStop(.45,'rgba(240,244,246,.5)');g.addColorStop(1,'rgba(235,240,244,0)');c.fillStyle=g;c.fillRect(0,0,64,64);
+  const map=own(new T.CanvasTexture(cv));map.colorSpace=T.SRGBColorSpace;
+  driftMesh=new T.InstancedMesh(own(new T.PlaneGeometry(1,1)),own(new T.MeshBasicMaterial({map,color:night?'#c3d2dc':'#ffffff',transparent:true,depthWrite:false,opacity:.8})),DRIFT_N);driftMesh.frustumCulled=false;driftMesh.count=0;root.add(driftMesh);}
+ function putDrift(p,side){ensureDrift();const d=driftPuffs[driftCursor++%DRIFT_N],h=p.heading,m=h-(p.slipAngle||0),v=p.speed*.9;d.on=true;d.age=0;d.size=.7+Math.min(.5,Math.abs(p.slipAngle||0)*2);
+  d.x=p.x+Math.cos(h)*side-Math.sin(h)*1.45;d.z=p.z-Math.sin(h)*side-Math.cos(h)*1.45;d.y=p.y+.3;d.dx=Math.sin(m)*v+Math.cos(h)*side*1.4;d.dz=Math.cos(m)*v-Math.sin(h)*side*1.4;}
  function putMark(p,side){const x=p.x+Math.cos(p.heading)*side-Math.sin(p.heading)*1.4,z=p.z-Math.sin(p.heading)*side-Math.cos(p.heading)*1.4;marks[markCursor++%128]={x,y:track.project(x,z,p.s).y+.065,z,heading:p.heading,age:0};}
  function update(state,dt,camera,quality=0){if(disposed)return;const p=state.player;
-  if(dt>0){emitAge+=dt;markAge+=dt;if(p.drifting&&p.speed>12){if(emitAge>.065){emitAge=0;putSmoke(p,-.88);putSmoke(p,.88);}if(markAge>.025){markAge=0;putMark(p,-.88);putMark(p,.88);}}else if(p.offroad&&p.speed>12&&emitAge>.12){emitAge=0;putSmoke(p,-.88);putSmoke(p,.88);}
+  if(dt>0){emitAge+=dt;markAge+=dt;driftAge+=dt;if(p.drifting&&p.driftT>0&&p.speed>12&&driftAge>.055){driftAge=0;putDrift(p,-.88);putDrift(p,.88);}if(p.drifting&&p.speed>12){if(emitAge>.065){emitAge=0;putSmoke(p,-.88);putSmoke(p,.88);}if(markAge>.025){markAge=0;putMark(p,-.88);putMark(p,.88);}}else if(p.offroad&&p.speed>12&&emitAge>.12){emitAge=0;putSmoke(p,-.88);putSmoke(p,.88);}
    for(const e of state.events||[]){
     // racing-deep-m2: a flip (any car) throws dust and sparks from where it happened
     if(e.type==='crash'){const list=state.cars||[],index=list.findIndex(x=>x.id===e.car),c=index>=0?list[index]:(e.car==='player'?p:null);if(!c)continue;for(let i=0;i<6;i++)smoke[smokeCursor++%32]={atlas:true,x:c.x+Math.sin(i*1.05)*.8,y:c.y+.4,z:c.z+Math.cos(i*1.05)*.8,age:0,life:1.4,size:1.1,dx:Math.sin(i*1.05)*1.6,dz:Math.cos(i*1.05)*1.6};for(let i=0;i<10;i++)sparks[sparkCursor++%20]={x:c.x,y:c.y+.4,z:c.z,age:0,dx:Math.sin(c.heading+i*.63)*3.5,dz:Math.cos(c.heading+i*.63)*3.5,dy:1.5+(i%3)*.6};
@@ -53,6 +65,9 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
   let count=0,fxSmoke=0;for(const s of smoke){if(!s)continue;s.age+=dt;if(s.age>s.life)continue;s.x+=s.dx*dt;s.z+=s.dz*dt;s.y+=dt*.7;dummy.position.set(s.x,s.y,s.z);dummy.quaternion.copy(camera.quaternion);
    if(fx&&s.atlas){if(fxSmoke<[24,16,8][quality]){dummy.scale.setScalar(s.size*2.6);dummy.updateMatrix();fx.smoke.mesh.setMatrixAt(fxSmoke,dummy.matrix);frameOf(fx.smoke.frames,fxSmoke++,Math.min(15,Math.floor(s.age/s.life*16)));}continue;}
    dummy.scale.setScalar((s.size+s.age*2)*(1-s.age/s.life));dummy.updateMatrix();if(count<[24,16,8][quality])smokeMesh.setMatrixAt(count++,dummy.matrix);}smokeMesh.count=count;smokeMesh.instanceMatrix.needsUpdate=true;
+  if(driftMesh){count=0;for(const d of driftPuffs){if(!d.on)continue;d.age+=dt;if(d.age>DRIFT_LIFE){d.on=false;continue;}const k=Math.exp(-dt*1.2);d.dx*=k;d.dz*=k;d.x+=d.dx*dt;d.z+=d.dz*dt;d.y+=dt*.9;
+   if(count<[DRIFT_N,16,10][quality]){const u=d.age/DRIFT_LIFE;dummy.position.set(d.x,d.y,d.z);dummy.quaternion.copy(camera.quaternion);dummy.scale.setScalar((d.size+d.age*3.2)*(u>.65?(1-u)/.35:1));dummy.updateMatrix();driftMesh.setMatrixAt(count++,dummy.matrix);}}
+  if(count||driftMesh.count){driftMesh.count=count;driftMesh.instanceMatrix.needsUpdate=true;}}
   if(fx){fx.smoke.mesh.count=fxSmoke;fx.smoke.mesh.instanceMatrix.needsUpdate=true;fx.smoke.frames.needsUpdate=true;}
   count=0;for(const m of marks){if(!m)continue;m.age+=dt;if(m.age>12)continue;dummy.position.set(m.x,m.y,m.z);dummy.rotation.set(-Math.PI/2,0,m.heading);dummy.scale.set(1,1,1);dummy.updateMatrix();if(count<[128,96,64][quality])markMesh.setMatrixAt(count++,dummy.matrix);}markMesh.count=count;markMesh.instanceMatrix.needsUpdate=true;
   count=0;for(const s of sparks){if(!s)continue;s.age+=dt;if(s.age>(fx?.4:.35))continue;s.x+=s.dx*dt;s.z+=s.dz*dt;s.y+=s.dy*dt;s.dy-=8*dt;dummy.position.set(s.x,s.y,s.z);
@@ -87,5 +102,5 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
   fx={sparks,smoke:smokeAtlas,parts,tyre};return true;
  }
  function frameOf(attr,i,frame){attr.setXY(i,(frame%4)/4,(3-Math.floor(frame/4))/4);}
- return {update,setSmokeMap,setCrashAssets,dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const mesh of [smokeMesh,markMesh,sparkMesh,debrisMesh,tyreMesh,...(fx?[fx.sparks.mesh,fx.smoke.mesh,fx.tyre,...fx.parts.map(p=>p.mesh)]:[])])mesh.dispose();},metrics:()=>({smoke:smokeMesh.count,skidMarks:markMesh.count,sparks:sparkMesh.count,debris:debrisMesh.count,tyres:tyreMesh.count,capacity:{smoke:32,skidMarks:128,sparks:20,debris:DEBRIS,tyres:TYRES},crashAssets:!!fx,disposed})};
+ return {update,setSmokeMap,setCrashAssets,dispose(){if(disposed)return;disposed=true;root.removeFromParent();for(const mesh of [...(driftMesh?[driftMesh]:[]),smokeMesh,markMesh,sparkMesh,debrisMesh,tyreMesh,...(fx?[fx.sparks.mesh,fx.smoke.mesh,fx.tyre,...fx.parts.map(p=>p.mesh)]:[])])mesh.dispose();},metrics:()=>({driftSmoke:driftMesh?driftMesh.count:0,smoke:smokeMesh.count,skidMarks:markMesh.count,sparks:sparkMesh.count,debris:debrisMesh.count,tyres:tyreMesh.count,capacity:{smoke:32,skidMarks:128,sparks:20,debris:DEBRIS,tyres:TYRES},crashAssets:!!fx,disposed})};
 }

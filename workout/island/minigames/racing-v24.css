@@ -41,3 +41,34 @@
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-progress-fill{display:block;width:100%;height:100%;background:#4fd27d;transform-origin:left;transform:scaleX(0)}
 .game-screen[data-game=islandRacing] .racing-tower .rt-row[data-pit] .rt-gap{color:#ffe877;font-weight:900}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-tyre-fill{transition:none}.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=auto]{animation:none}}
+
+/* racing-v24.9 (racing-v24-9.mjs). Messages: one small chip in the top row beside the position and lap block (the toast moves into .racing-hud), never in the middle
+   over the road; ?racingText=old keeps the centred toast and card. The drift button above the gas (in its place with the automatic gas); ?racingDrift=0 removes it. */
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast{
+ position:static;transform:none;align-self:flex-start;max-width:170px;margin:3px 0 0;padding:3px 9px;border-radius:3px;border:1px solid #9ac5d238;border-inline-start:3px solid var(--race-nitro);
+ background:#0b1729d9;color:#f4fbff;font:800 12px/1.35 system-ui,sans-serif;direction:rtl;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:none;text-shadow:none
+}
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=up]{border-inline-start-color:#5be28a;color:#8dffb0}
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=down]{border-inline-start-color:#ff9a4a;color:#ffcf8a}
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=fastest]{border-inline-start-color:#b26bff}
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=offroad]{border-inline-start-color:var(--race-yellow);color:#ffe596;background:#281f10e6}
+.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=drift],.game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast[data-kind=ers]{border-inline-start-color:var(--race-yellow)}
+.game-screen[data-game=islandRacing] .racing-slide{
+ position:absolute;left:5px;bottom:140px;width:54px;min-width:54px;height:54px;min-height:54px;padding:6px 3px;border-bottom-color:#ff9a4a;background:#101f31ed
+}
+.game-screen[data-game=islandRacing] .racing-slide svg{width:23px;height:23px}
+.game-screen[data-game=islandRacing] .racing-controls[data-racing-automatic=true] .racing-slide{bottom:78px}
+.game-screen[data-game=islandRacing] .racing-drift-tip{
+ position:absolute;right:calc(max(var(--race-edge),env(safe-area-inset-right)) + 101px);bottom:calc(var(--race-bottom) + 200px);z-index:4;max-width:104px;padding:4px 8px;border-radius:6px;
+ background:#101b29;color:#fff;border:1px solid #ff9a4a;font:800 11px/1.3 system-ui,sans-serif;text-align:center;direction:rtl;pointer-events:none
+}
+.game-screen[data-game=islandRacing] .racing-drift-tip[data-auto=true]{bottom:calc(var(--race-bottom) + 138px)}
+.game-screen[data-game=islandRacing] .racing-drift-tip[hidden]{display:none}
+@media(max-height:400px) and (orientation:landscape){
+ .game-screen[data-game=islandRacing][data-racing-text=corner] .racing-hud .racing-toast{max-width:160px;margin-top:1px;font-size:11px;padding:2px 8px}
+ .game-screen[data-game=islandRacing] .racing-slide{left:3px;bottom:126px;width:50px;min-width:50px;height:50px;min-height:50px}
+ .game-screen[data-game=islandRacing] .racing-slide svg{width:20px;height:20px}
+ .game-screen[data-game=islandRacing] .racing-controls[data-racing-automatic=true] .racing-slide{bottom:70px}
+ .game-screen[data-game=islandRacing] .racing-drift-tip{right:calc(max(var(--race-edge),env(safe-area-inset-right)) + 93px);bottom:calc(var(--race-bottom) + 182px);font-size:10px;max-width:96px}
+ .game-screen[data-game=islandRacing] .racing-drift-tip[data-auto=true]{bottom:calc(var(--race-bottom) + 126px)}
+}

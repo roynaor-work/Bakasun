@@ -180,7 +180,7 @@ test('Codex pit pack (design/racing-pit-v1): the crew files carry the ten clips 
 
 test('session, view, effects and offline list carry v24',async()=>{
  const session=await read('minigames/racing-session.mjs');
- assert.match(session,/v24PhysicsConfig\(v24\)/);assert.match(session,/lastInput=playerInput\(input\.sample\(\),v24\)/);assert.match(session,/createPitUi\(/);assert.match(session,/racing-v24\.css/);
+ assert.match(session,/v24PhysicsConfig\(v24\)/);assert.match(session,/lastInput=driftInput\(playerInput\(sample,v24\),sample,slideOn\)/);   /* racing-v24.9: the drift button's sample goes through driftInput after the v24 mapping */assert.match(session,/createPitUi\(/);assert.match(session,/racing-v24\.css/);
  assert.match(session,/blowoff:v24\.turbo==='v23'/);
  const view=await read('minigames/racing-view.mjs');assert.match(view,/&&!c\.hidden/);assert.match(view,/car\.body\.position\.y=c\.dropY\|\|0/);
  // a car in the pit lane stands on the painted lane (track height): on the sloping verge height it sank 1.2 m under the lane in its box (browser proof, v24 first run)
