@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "existingSuite": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "failedCase": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+    "failure": "Playwright bundled Chromium executable missing; test leaves its server open when browser launch fails. The stuck worker was stopped after it exceeded the declared 600-second test budget.",
+    "logSha256": "0d32517f4be00dc5e803a3e9a2c963922f5f7129311505f9cdff108c42b7264a"
+  },
+  "isolatedBrowser": {
+    "command": "ISLAND_PLAYWRIGHT=system-browser.mjs CHROMIUM_PATH=/usr/bin/chromium node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "environment": "System Chromium via a temporary API wrapper equivalent to tools/system-browser.mjs; simulations paused for this real-time animation check and resumed afterward.",
+    "loadSensitivity": "First isolated rerun while simulations were active observed 3 reps in 2.3s instead of the required 4–8. With CPU contention removed the unchanged test passed.",
+    "logSha256": "8652877c7dd3821d3cca6bbbefa21035b017fd8dfe9d804db5a2911f18b29d1a"
+  },
+  "simulatorStatistics": {
+    "command": "node --test workout/island/design/balance-sim-v1/tools/statistics.test.mjs",
+    "tests": 4,
+    "pass": 4,
+    "fail": 0
+  },
+  "existingTestFilesEdited": false
+}

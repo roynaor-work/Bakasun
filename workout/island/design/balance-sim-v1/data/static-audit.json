@@ -1,0 +1,6529 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Independent source audit; no human difficulty inference and no synthetic win rates.",
+  "inventory": {
+    "levelArrays": [
+      {
+        "id": "alienDefense",
+        "configuredStages": 30
+      },
+      {
+        "id": "fireRescue",
+        "configuredStages": 30
+      },
+      {
+        "id": "navalDuel",
+        "configuredStages": 30
+      },
+      {
+        "id": "soccer",
+        "configuredStages": 30
+      },
+      {
+        "id": "islandRacing",
+        "configuredStages": 30
+      },
+      {
+        "id": "tennis",
+        "configuredStages": 30
+      },
+      {
+        "id": "streetSlam",
+        "configuredStages": 10
+      },
+      {
+        "id": "alpineRush",
+        "configuredStages": 3
+      },
+      {
+        "id": "catchCriminal",
+        "configuredStages": 10
+      }
+    ],
+    "selectableSoccerStages": 15,
+    "racingBaseStages": 30,
+    "racingLeagueRaces": 78,
+    "alpineBaseStages": 3,
+    "alpineLeagueStages": 30,
+    "boarAuthoredWaves": 20,
+    "boarGeneratedWaves": "unbounded",
+    "boarAuditHorizon": 30,
+    "unavailableRequestedGames": []
+  },
+  "defaultRuntimeModes": {
+    "soccer": {
+      "mode": "11v11 full pitch, v241 recovery, v23 control, league",
+      "configuredHalfSeconds": 75,
+      "effectiveHalfSeconds": 90,
+      "evidence": {
+        "path": "workout/island/minigames/soccer-full.mjs",
+        "line": 81,
+        "detail": "applySoccerFull overrides JSON match duration and pitch."
+      }
+    },
+    "racing": {
+      "league": "long",
+      "seasons": 5,
+      "raceCounts": [
+        12,
+        14,
+        16,
+        18,
+        18
+      ],
+      "evidence": {
+        "path": "workout/island/minigames/racing-league-core.mjs",
+        "line": 83,
+        "detail": "Default long-league calendar; game stages are reused circuit/tier IDs."
+      }
+    },
+    "alpine": {
+      "v241": true,
+      "league": true,
+      "engineStages": 33,
+      "evidence": {
+        "path": "workout/island/minigames/alpine-league-core.mjs",
+        "line": 8,
+        "detail": "League stages run as engine4..33 after the original three."
+      }
+    },
+    "fire": {
+      "indoorStages": [
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24,
+        27,
+        30
+      ],
+      "evidence": {
+        "path": "workout/island/minigames/fire.mjs",
+        "line": 118,
+        "detail": "Entry stages wrap street play with v24 interior flow; street-only trials are incomplete."
+      }
+    },
+    "catchCriminal": {
+      "stages": 10,
+      "chase": "chase6 with weapons7/assist7/elements7 and weaponsFix8",
+      "throwing": "archery with levels7 and assistRelease",
+      "evidence": {
+        "path": "workout/island/minigames/catch-session6.mjs",
+        "line": 99,
+        "detail": "Actual browser defaults; canvas-free session skips the chase and must not represent shipped play."
+      }
+    }
+  },
+  "nativeSemantics": {
+    "genericStars": {
+      "thresholds": [
+        0.45,
+        0.8
+      ],
+      "rule": "win: 1 + count(performance >= threshold), loss: 0",
+      "evidence": {
+        "path": "workout/island/minigames/result.mjs",
+        "line": 1,
+        "detail": "Shared alien, naval and fire settlement."
+      }
+    },
+    "soccerStars": {
+      "rule": "Win clean sheet=3, otherwise winning margin>=2=2, otherwise win=1; loss=0 at settlement.",
+      "optionalObjectives": true,
+      "evidence": [
+        {
+          "path": "workout/island/minigames/soccer-result.mjs",
+          "line": 13,
+          "detail": "Native settlement stars."
+        },
+        {
+          "path": "workout/island/minigames/soccer-campaign.mjs",
+          "line": 150,
+          "detail": "Optional achievement is transient; loss can still teach an action."
+        }
+      ]
+    },
+    "fireCertificates": {
+      "distinctFromStageStars": true,
+      "evidence": {
+        "path": "workout/island/minigames/fire.mjs",
+        "line": 100,
+        "detail": "Performance determines stage stars; certificate generated separately."
+      }
+    },
+    "boars": {
+      "nativeStars": false,
+      "nativeFalls": false,
+      "infiniteCampaign": true,
+      "evidence": [
+        {
+          "path": "workout/island/minigames/boar-island/core.mjs",
+          "line": 133,
+          "detail": "Generated wave fallback has no terminal stage."
+        },
+        {
+          "path": "workout/island/minigames/boar-island/game.js",
+          "line": 777,
+          "detail": "Complete wave increments nextWave and opens shop; no stars."
+        }
+      ]
+    },
+    "alpineLeague": {
+      "rule": "Place goal required to pass; stars count passed place, time, and clean/gate goals. Base stages use rank stars.",
+      "evidence": {
+        "path": "workout/island/minigames/alpine-league-core.mjs",
+        "line": 79,
+        "detail": "starsFor returns zero without the place goal."
+      }
+    },
+    "falls": "Only report a native crash/fall counter where supplied. HP loss, missed shots, deaths, contacts and abandonment are not interchangeable with falls."
+  },
+  "guaranteedDurationFloors": [
+    {
+      "game": "soccer",
+      "nativeClockSeconds": 180,
+      "excludes": [
+        "halftime",
+        "goals",
+        "restarts",
+        "optional bonus penalties"
+      ],
+      "evidence": {
+        "path": "workout/island/minigames/soccer-result.mjs",
+        "line": 11,
+        "detail": "Completed result must equal two halfSeconds."
+      }
+    },
+    {
+      "game": "streetSlam",
+      "profile": "quick",
+      "nativeClockSeconds": 360,
+      "excludes": [
+        "pregame",
+        "dead ball",
+        "breaks",
+        "free throws",
+        "overtime"
+      ],
+      "evidence": [
+        {
+          "path": "workout/island/minigames/hoops-franchise.mjs",
+          "line": 19,
+          "detail": "New club defaults quick/normal."
+        },
+        {
+          "path": "workout/island/minigames/hoops-engine.mjs",
+          "line": 986,
+          "detail": "Live game clock decreases by dt, not accelerated time."
+        }
+      ]
+    }
+  ],
+  "soccerStageAliases": [
+    {
+      "requestedStage": 1,
+      "selectable": true,
+      "resolvedStage": 1,
+      "tuning": 1,
+      "difficulty": "easy",
+      "keeper": 0.05
+    },
+    {
+      "requestedStage": 2,
+      "selectable": true,
+      "resolvedStage": 2,
+      "tuning": 2,
+      "difficulty": "easy",
+      "keeper": 0.1
+    },
+    {
+      "requestedStage": 3,
+      "selectable": true,
+      "resolvedStage": 3,
+      "tuning": 3,
+      "difficulty": "easy",
+      "keeper": 0.15
+    },
+    {
+      "requestedStage": 4,
+      "selectable": true,
+      "resolvedStage": 4,
+      "tuning": 4.25,
+      "difficulty": "easy",
+      "keeper": 0.2
+    },
+    {
+      "requestedStage": 5,
+      "selectable": true,
+      "resolvedStage": 5,
+      "tuning": 5.5,
+      "difficulty": "easy",
+      "keeper": 0.25
+    },
+    {
+      "requestedStage": 6,
+      "selectable": true,
+      "resolvedStage": 6,
+      "tuning": 3,
+      "difficulty": "normal",
+      "keeper": 0.3
+    },
+    {
+      "requestedStage": 7,
+      "selectable": true,
+      "resolvedStage": 7,
+      "tuning": 3.5,
+      "difficulty": "normal",
+      "keeper": 0.33
+    },
+    {
+      "requestedStage": 8,
+      "selectable": true,
+      "resolvedStage": 8,
+      "tuning": 4,
+      "difficulty": "normal",
+      "keeper": 0.36
+    },
+    {
+      "requestedStage": 9,
+      "selectable": true,
+      "resolvedStage": 9,
+      "tuning": 4.5,
+      "difficulty": "normal",
+      "keeper": 0.4
+    },
+    {
+      "requestedStage": 10,
+      "selectable": true,
+      "resolvedStage": 10,
+      "tuning": 5,
+      "difficulty": "normal",
+      "keeper": 0.43
+    },
+    {
+      "requestedStage": 11,
+      "selectable": true,
+      "resolvedStage": 11,
+      "tuning": 2.4,
+      "difficulty": "hard",
+      "keeper": 0.46
+    },
+    {
+      "requestedStage": 12,
+      "selectable": true,
+      "resolvedStage": 12,
+      "tuning": 2.65,
+      "difficulty": "hard",
+      "keeper": 0.5
+    },
+    {
+      "requestedStage": 13,
+      "selectable": true,
+      "resolvedStage": 13,
+      "tuning": 2.9,
+      "difficulty": "hard",
+      "keeper": 0.54
+    },
+    {
+      "requestedStage": 14,
+      "selectable": true,
+      "resolvedStage": 14,
+      "tuning": 3.15,
+      "difficulty": "hard",
+      "keeper": 0.58
+    },
+    {
+      "requestedStage": 15,
+      "selectable": true,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 16,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 17,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 18,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 19,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 20,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 21,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 22,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 23,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 24,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 25,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 26,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 27,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 28,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 29,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    },
+    {
+      "requestedStage": 30,
+      "selectable": false,
+      "resolvedStage": 15,
+      "tuning": 3.4,
+      "difficulty": "hard",
+      "keeper": 0.62
+    }
+  ],
+  "staticBoundaries": [
+    {
+      "game": "alienDefense",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.alienDefense.levels[1].enemyKinds",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.alienDefense.levels[1].patternKinds",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.alienDefense.levels[2].patternKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.alienDefense.levels[3].enemyKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.alienDefense.levels[4].enemyKinds",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.alienDefense.levels[4].bossLives",
+      "before": 0,
+      "after": 38,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.alienDefense.levels[4].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.alienDefense.levels[5].alienSpeed",
+      "before": 10,
+      "after": 13,
+      "ratio": 1.3
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.alienDefense.levels[5].bossLives",
+      "before": 38,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.alienDefense.levels[5].bossShots",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.alienDefense.levels[6].enemyKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.alienDefense.levels[6].spawnBudget",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.alienDefense.levels[7].spawnBudget",
+      "before": 1,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.alienDefense.levels[8].waves",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.alienDefense.levels[8].alienSpeed",
+      "before": 12,
+      "after": 16,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.alienDefense.levels[8].enemyKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.alienDefense.levels[9].bossLives",
+      "before": 0,
+      "after": 54,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.alienDefense.levels[9].spawnBudget",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.alienDefense.levels[9].seconds",
+      "before": 96,
+      "after": 130,
+      "ratio": 1.3542
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.alienDefense.levels[9].patternKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.alienDefense.levels[9].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.alienDefense.levels[10].enemyKinds",
+      "before": 5,
+      "after": 2,
+      "ratio": 0.4
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.alienDefense.levels[10].bossLives",
+      "before": 54,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.alienDefense.levels[10].spawnBudget",
+      "before": 1,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.alienDefense.levels[10].bossShots",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.alienDefense.levels[11].enemyKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.alienDefense.levels[12].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.alienDefense.levels[13].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.alienDefense.levels[13].columns",
+      "before": 4,
+      "after": 6,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.alienDefense.levels[13].spawnBudget",
+      "before": 0,
+      "after": 2,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.alienDefense.levels[14].bossLives",
+      "before": 0,
+      "after": 64,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.alienDefense.levels[14].spawnBudget",
+      "before": 2,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.alienDefense.levels[14].patternKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.alienDefense.levels[14].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.alienDefense.levels[15].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.alienDefense.levels[15].enemyKinds",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.alienDefense.levels[15].bossLives",
+      "before": 64,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.alienDefense.levels[15].bossShots",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.alienDefense.levels[16].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.alienDefense.levels[16].enemyKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.alienDefense.levels[17].spawnBudget",
+      "before": 0,
+      "after": 2,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.alienDefense.levels[18].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.alienDefense.levels[18].enemyKinds",
+      "before": 3,
+      "after": 5,
+      "ratio": 1.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.alienDefense.levels[18].spawnBudget",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.alienDefense.levels[18].patternKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.alienDefense.levels[19].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.alienDefense.levels[19].enemyKinds",
+      "before": 5,
+      "after": 3,
+      "ratio": 0.6
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.alienDefense.levels[19].bossLives",
+      "before": 0,
+      "after": 75,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.alienDefense.levels[19].spawnBudget",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.alienDefense.levels[19].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.alienDefense.levels[20].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.alienDefense.levels[20].bossLives",
+      "before": 75,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.alienDefense.levels[20].spawnBudget",
+      "before": 2,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.alienDefense.levels[20].bossShots",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.alienDefense.levels[22].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.alienDefense.levels[22].spawnBudget",
+      "before": 0,
+      "after": 2,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.alienDefense.levels[23].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.alienDefense.levels[23].alienSpeed",
+      "before": 15,
+      "after": 20,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.alienDefense.levels[23].enemyKinds",
+      "before": 3,
+      "after": 5,
+      "ratio": 1.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.alienDefense.levels[23].spawnBudget",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.alienDefense.levels[23].patternKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.alienDefense.levels[24].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.alienDefense.levels[24].enemyKinds",
+      "before": 5,
+      "after": 3,
+      "ratio": 0.6
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.alienDefense.levels[24].bossLives",
+      "before": 0,
+      "after": 85,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.alienDefense.levels[24].spawnBudget",
+      "before": 1,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.alienDefense.levels[24].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.alienDefense.levels[25].bossLives",
+      "before": 85,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.alienDefense.levels[25].spawnBudget",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.alienDefense.levels[25].bossShots",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.alienDefense.levels[26].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.alienDefense.levels[26].alienSpeed",
+      "before": 15,
+      "after": 21,
+      "ratio": 1.4
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.alienDefense.levels[26].spawnBudget",
+      "before": 1,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.alienDefense.levels[26].patternKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.alienDefense.levels[27].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.alienDefense.levels[27].spawnBudget",
+      "before": 0,
+      "after": 3,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.alienDefense.levels[28].rows",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.alienDefense.levels[28].enemyKinds",
+      "before": 3,
+      "after": 5,
+      "ratio": 1.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.alienDefense.levels[28].spawnBudget",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.alienDefense.levels[29].rows",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.alienDefense.levels[29].bossLives",
+      "before": 0,
+      "after": 100,
+      "ratio": null
+    },
+    {
+      "game": "alienDefense",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.alienDefense.levels[29].bossShots",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.fireRescue.levels[1].flames",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.fireRescue.levels[1].growthPerSecond",
+      "before": 0.009,
+      "after": 0.023,
+      "ratio": 2.5556
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.fireRescue.levels[1].spreadSeconds",
+      "before": 20,
+      "after": 12,
+      "ratio": 0.6
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.fireRescue.levels[1].reigniteSeconds",
+      "before": 0,
+      "after": 2,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.fireRescue.levels[2].growthPerSecond",
+      "before": 0.023,
+      "after": 0.032,
+      "ratio": 1.3913
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.fireRescue.levels[2].parWater",
+      "before": 75,
+      "after": 135,
+      "ratio": 1.8
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.fireRescue.levels[2].rescueCount",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.fireRescue.levels[3].flames",
+      "before": 4,
+      "after": 8,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.fireRescue.levels[3].growthPerSecond",
+      "before": 0.032,
+      "after": 0.048,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.fireRescue.levels[3].spreadCount",
+      "before": 5,
+      "after": 1,
+      "ratio": 0.2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.fireRescue.levels[3].fireKinds",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.fireRescue.levels[5].rescueCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.fireRescue.levels[6].fireKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.fireRescue.levels[6].resistance",
+      "before": 1,
+      "after": 1.4,
+      "ratio": 1.4
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.fireRescue.levels[7].wind",
+      "before": 0,
+      "after": 6,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.fireRescue.levels[7].resistance",
+      "before": 1.4,
+      "after": 1.85,
+      "ratio": 1.3214
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.fireRescue.levels[8].wind",
+      "before": 6,
+      "after": 10,
+      "ratio": 1.6667
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.fireRescue.levels[9].rescueCount",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.fireRescue.levels[9].wind",
+      "before": 10,
+      "after": 14,
+      "ratio": 1.4
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].flames",
+      "before": 8,
+      "after": 4,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].water",
+      "before": 83,
+      "after": 110,
+      "ratio": 1.3253
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].growthPerSecond",
+      "before": 0.096,
+      "after": 0.025,
+      "ratio": 0.2604
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].spreadSeconds",
+      "before": 5.85,
+      "after": 22,
+      "ratio": 3.7607
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].spreadCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].parSeconds",
+      "before": 16.2,
+      "after": 28,
+      "ratio": 1.7284
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].parWater",
+      "before": 135,
+      "after": 75,
+      "ratio": 0.5556
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].fireKinds",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].rescueCount",
+      "before": 3,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].wind",
+      "before": 14,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].eruptionSeconds",
+      "before": 5.300000000000001,
+      "after": 24,
+      "ratio": 4.5283
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].resistance",
+      "before": 3.1,
+      "after": 1.05,
+      "ratio": 0.3387
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.fireRescue.levels[10].reigniteSeconds",
+      "before": 2,
+      "after": 4.5,
+      "ratio": 2.25
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.fireRescue.levels[11].spreadCount",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.fireRescue.levels[11].rescueCount",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.fireRescue.levels[12].rescueCount",
+      "before": 1,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.fireRescue.levels[12].reigniteSeconds",
+      "before": 4.5,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.fireRescue.levels[13].spreadCount",
+      "before": 1,
+      "after": 3,
+      "ratio": 3
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.fireRescue.levels[13].rescueCount",
+      "before": 0,
+      "after": 1,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.fireRescue.levels[13].reigniteSeconds",
+      "before": 0,
+      "after": 3.8,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.fireRescue.levels[14].spreadSeconds",
+      "before": 17,
+      "after": 24,
+      "ratio": 1.4118
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.fireRescue.levels[14].spreadCount",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.fireRescue.levels[14].rescueCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.fireRescue.levels[15].spreadCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.fireRescue.levels[15].fireKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.fireRescue.levels[15].rescueCount",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.fireRescue.levels[15].wind",
+      "before": 0,
+      "after": 2,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.fireRescue.levels[16].spreadCount",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.fireRescue.levels[16].wind",
+      "before": 2,
+      "after": 4,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.fireRescue.levels[17].wind",
+      "before": 4,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.fireRescue.levels[17].reigniteSeconds",
+      "before": 4.5,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.fireRescue.levels[18].spreadSeconds",
+      "before": 23,
+      "after": 16,
+      "ratio": 0.6957
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.fireRescue.levels[18].spreadCount",
+      "before": 1,
+      "after": 3,
+      "ratio": 3
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.fireRescue.levels[18].wind",
+      "before": 0,
+      "after": 3,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.fireRescue.levels[18].reigniteSeconds",
+      "before": 0,
+      "after": 3.8,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.fireRescue.levels[19].spreadSeconds",
+      "before": 16,
+      "after": 24,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.fireRescue.levels[19].spreadCount",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.fireRescue.levels[19].rescueCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.fireRescue.levels[19].wind",
+      "before": 3,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.fireRescue.levels[19].eruptionSeconds",
+      "before": 18,
+      "after": 26,
+      "ratio": 1.4444
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.fireRescue.levels[20].rescueCount",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.fireRescue.levels[21].spreadCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.fireRescue.levels[21].rescueCount",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.fireRescue.levels[21].wind",
+      "before": 0,
+      "after": 5,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.fireRescue.levels[22].spreadCount",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.fireRescue.levels[22].rescueCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.fireRescue.levels[22].wind",
+      "before": 5,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.fireRescue.levels[22].reigniteSeconds",
+      "before": 4.5,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.fireRescue.levels[23].water",
+      "before": 76,
+      "after": 100,
+      "ratio": 1.3158
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.fireRescue.levels[23].wind",
+      "before": 0,
+      "after": 3,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.fireRescue.levels[23].reigniteSeconds",
+      "before": 0,
+      "after": 4.5,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.fireRescue.levels[24].spreadCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.fireRescue.levels[24].wind",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.fireRescue.levels[25].spreadSeconds",
+      "before": 19,
+      "after": 25,
+      "ratio": 1.3158
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.fireRescue.levels[25].spreadCount",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.fireRescue.levels[25].rescueCount",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.fireRescue.levels[25].wind",
+      "before": 4,
+      "after": 0,
+      "ratio": 0
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.fireRescue.levels[26].wind",
+      "before": 0,
+      "after": 6,
+      "ratio": null
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.fireRescue.levels[27].spreadSeconds",
+      "before": 24,
+      "after": 16,
+      "ratio": 0.6667
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.fireRescue.levels[27].spreadCount",
+      "before": 1,
+      "after": 3,
+      "ratio": 3
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.fireRescue.levels[27].rescueCount",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.fireRescue.levels[27].wind",
+      "before": 6,
+      "after": 4,
+      "ratio": 0.6667
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.fireRescue.levels[27].eruptionSeconds",
+      "before": 26,
+      "after": 18,
+      "ratio": 0.6923
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.fireRescue.levels[28].spreadSeconds",
+      "before": 16,
+      "after": 23,
+      "ratio": 1.4375
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.fireRescue.levels[28].spreadCount",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.fireRescue.levels[28].rescueCount",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.fireRescue.levels[28].eruptionSeconds",
+      "before": 18,
+      "after": 25,
+      "ratio": 1.3889
+    },
+    {
+      "game": "fireRescue",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.fireRescue.levels[29].spreadCount",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.navalDuel.levels[1].enemyLives",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.navalDuel.levels[1].drift",
+      "before": 2,
+      "after": 3.65,
+      "ratio": 1.825
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.navalDuel.levels[2].enemyLives",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.navalDuel.levels[2].waves",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.navalDuel.levels[2].drift",
+      "before": 3.65,
+      "after": 5.3,
+      "ratio": 1.4521
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.navalDuel.levels[3].enemyLives",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.navalDuel.levels[3].shipKinds",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.navalDuel.levels[3].drift",
+      "before": 5.3,
+      "after": 6.949999999999999,
+      "ratio": 1.3113
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.navalDuel.levels[3].concurrent",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.navalDuel.levels[3].weaponLevel",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.navalDuel.levels[5].waves",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.navalDuel.levels[6].enemyLives",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.navalDuel.levels[6].shipKinds",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.navalDuel.levels[6].concurrent",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.navalDuel.levels[6].weaponLevel",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.navalDuel.levels[8].waves",
+      "before": 3,
+      "after": 5,
+      "ratio": 1.6667
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.navalDuel.levels[9].weaponLevel",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.navalDuel.levels[10].enemyAimError",
+      "before": 0.065,
+      "after": 0.12,
+      "ratio": 1.8462
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.navalDuel.levels[10].waves",
+      "before": 4,
+      "after": 2,
+      "ratio": 0.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.navalDuel.levels[10].shipKinds",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.navalDuel.levels[10].concurrent",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.navalDuel.levels[11].waves",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.navalDuel.levels[11].concurrent",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.navalDuel.levels[12].concurrent",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.navalDuel.levels[13].waves",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.navalDuel.levels[13].concurrent",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.navalDuel.levels[15].waves",
+      "before": 4,
+      "after": 6,
+      "ratio": 1.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.navalDuel.levels[16].waves",
+      "before": 6,
+      "after": 3,
+      "ratio": 0.5
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.navalDuel.levels[16].concurrent",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.navalDuel.levels[17].waves",
+      "before": 3,
+      "after": 4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "navalDuel",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.navalDuel.levels[17].concurrent",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "soccer",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.soccer.levels[1].pressure",
+      "before": 0.3,
+      "after": 0.4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "soccer",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.soccer.levels[1].stealRate",
+      "before": 0.015,
+      "after": 0.08,
+      "ratio": 5.3333
+    },
+    {
+      "game": "soccer",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.soccer.levels[1].keeper",
+      "before": 0.08,
+      "after": 0.16,
+      "ratio": 2
+    },
+    {
+      "game": "soccer",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.soccer.levels[2].stealRate",
+      "before": 0.08,
+      "after": 0.16,
+      "ratio": 2
+    },
+    {
+      "game": "soccer",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.soccer.levels[2].keeper",
+      "before": 0.16,
+      "after": 0.25,
+      "ratio": 1.5625
+    },
+    {
+      "game": "soccer",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.soccer.levels[3].stealRate",
+      "before": 0.16,
+      "after": 0.24,
+      "ratio": 1.5
+    },
+    {
+      "game": "soccer",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.soccer.levels[3].keeper",
+      "before": 0.25,
+      "after": 0.33,
+      "ratio": 1.32
+    },
+    {
+      "game": "soccer",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.soccer.levels[4].stealRate",
+      "before": 0.24,
+      "after": 0.35,
+      "ratio": 1.4583
+    },
+    {
+      "game": "soccer",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.soccer.levels[5].stealRate",
+      "before": 0.35,
+      "after": 0.5,
+      "ratio": 1.4286
+    },
+    {
+      "game": "soccer",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.soccer.levels[6].stealRate",
+      "before": 0.5,
+      "after": 0.7,
+      "ratio": 1.4
+    },
+    {
+      "game": "soccer",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.soccer.levels[7].stealRate",
+      "before": 0.7,
+      "after": 2.2,
+      "ratio": 3.1429
+    },
+    {
+      "game": "soccer",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.soccer.levels[8].stealRate",
+      "before": 2.2,
+      "after": 2.9,
+      "ratio": 1.3182
+    },
+    {
+      "game": "islandRacing",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.islandRacing.levels[12].laps",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "tennis",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.tennis.levels[1].cornerChance",
+      "before": 0,
+      "after": 0.206,
+      "ratio": null
+    },
+    {
+      "game": "tennis",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.tennis.levels[1].netChance",
+      "before": 0,
+      "after": 0.026,
+      "ratio": null
+    },
+    {
+      "game": "tennis",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.tennis.levels[2].cornerChance",
+      "before": 0.206,
+      "after": 0.131,
+      "ratio": 0.6359
+    },
+    {
+      "game": "tennis",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.tennis.levels[2].netChance",
+      "before": 0.026,
+      "after": 0.053,
+      "ratio": 2.0385
+    },
+    {
+      "game": "tennis",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.tennis.levels[2].lobChance",
+      "before": 0,
+      "after": 0.254,
+      "ratio": null
+    },
+    {
+      "game": "tennis",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.tennis.levels[3].netChance",
+      "before": 0.053,
+      "after": 0.098,
+      "ratio": 1.8491
+    },
+    {
+      "game": "tennis",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.tennis.levels[3].lobChance",
+      "before": 0.254,
+      "after": 0.09,
+      "ratio": 0.3543
+    },
+    {
+      "game": "tennis",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.tennis.levels[3].dropChance",
+      "before": 0,
+      "after": 0.179,
+      "ratio": null
+    },
+    {
+      "game": "tennis",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.tennis.levels[3].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.tennis.levels[4].cornerChance",
+      "before": 0.17,
+      "after": 0.306,
+      "ratio": 1.8
+    },
+    {
+      "game": "tennis",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.tennis.levels[4].netChance",
+      "before": 0.098,
+      "after": 0.161,
+      "ratio": 1.6429
+    },
+    {
+      "game": "tennis",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.tennis.levels[4].dropChance",
+      "before": 0.179,
+      "after": 0.062,
+      "ratio": 0.3464
+    },
+    {
+      "game": "tennis",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.tennis.levels[4].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "tennis",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.tennis.levels[5].cornerChance",
+      "before": 0.306,
+      "after": 0.092,
+      "ratio": 0.3007
+    },
+    {
+      "game": "tennis",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.tennis.levels[5].netChance",
+      "before": 0.161,
+      "after": 0.014,
+      "ratio": 0.087
+    },
+    {
+      "game": "tennis",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.tennis.levels[5].lobChance",
+      "before": 0.094,
+      "after": 0.05,
+      "ratio": 0.5319
+    },
+    {
+      "game": "tennis",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.tennis.levels[5].dropChance",
+      "before": 0.062,
+      "after": 0.007,
+      "ratio": 0.1129
+    },
+    {
+      "game": "tennis",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.tennis.levels[6].cornerChance",
+      "before": 0.092,
+      "after": 0.335,
+      "ratio": 3.6413
+    },
+    {
+      "game": "tennis",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.tennis.levels[6].netChance",
+      "before": 0.014,
+      "after": 0.053,
+      "ratio": 3.7857
+    },
+    {
+      "game": "tennis",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.tennis.levels[6].dropChance",
+      "before": 0.007,
+      "after": 0.012,
+      "ratio": 1.7143
+    },
+    {
+      "game": "tennis",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.tennis.levels[7].cornerChance",
+      "before": 0.335,
+      "after": 0.209,
+      "ratio": 0.6239
+    },
+    {
+      "game": "tennis",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.tennis.levels[7].netChance",
+      "before": 0.053,
+      "after": 0.086,
+      "ratio": 1.6226
+    },
+    {
+      "game": "tennis",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.tennis.levels[7].lobChance",
+      "before": 0.044,
+      "after": 0.288,
+      "ratio": 6.5455
+    },
+    {
+      "game": "tennis",
+      "fromStage": 7,
+      "toStage": 8,
+      "parameter": "minigames.tennis.levels[7].dropChance",
+      "before": 0.012,
+      "after": 0.032,
+      "ratio": 2.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.tennis.levels[8].netChance",
+      "before": 0.086,
+      "after": 0.144,
+      "ratio": 1.6744
+    },
+    {
+      "game": "tennis",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.tennis.levels[8].lobChance",
+      "before": 0.288,
+      "after": 0.108,
+      "ratio": 0.375
+    },
+    {
+      "game": "tennis",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.tennis.levels[8].dropChance",
+      "before": 0.032,
+      "after": 0.21,
+      "ratio": 6.5625
+    },
+    {
+      "game": "tennis",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.tennis.levels[8].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.tennis.levels[9].cornerChance",
+      "before": 0.252,
+      "after": 0.439,
+      "ratio": 1.7421
+    },
+    {
+      "game": "tennis",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.tennis.levels[9].netChance",
+      "before": 0.144,
+      "after": 0.213,
+      "ratio": 1.4792
+    },
+    {
+      "game": "tennis",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.tennis.levels[9].dropChance",
+      "before": 0.21,
+      "after": 0.078,
+      "ratio": 0.3714
+    },
+    {
+      "game": "tennis",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.tennis.levels[9].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "tennis",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.tennis.levels[10].cornerChance",
+      "before": 0.439,
+      "after": 0.143,
+      "ratio": 0.3257
+    },
+    {
+      "game": "tennis",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.tennis.levels[10].netChance",
+      "before": 0.213,
+      "after": 0.028,
+      "ratio": 0.1315
+    },
+    {
+      "game": "tennis",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.tennis.levels[10].lobChance",
+      "before": 0.111,
+      "after": 0.061,
+      "ratio": 0.5495
+    },
+    {
+      "game": "tennis",
+      "fromStage": 10,
+      "toStage": 11,
+      "parameter": "minigames.tennis.levels[10].dropChance",
+      "before": 0.078,
+      "after": 0.014,
+      "ratio": 0.1795
+    },
+    {
+      "game": "tennis",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.tennis.levels[11].cornerChance",
+      "before": 0.143,
+      "after": 0.464,
+      "ratio": 3.2448
+    },
+    {
+      "game": "tennis",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.tennis.levels[11].netChance",
+      "before": 0.028,
+      "after": 0.081,
+      "ratio": 2.8929
+    },
+    {
+      "game": "tennis",
+      "fromStage": 11,
+      "toStage": 12,
+      "parameter": "minigames.tennis.levels[11].dropChance",
+      "before": 0.014,
+      "after": 0.023,
+      "ratio": 1.6429
+    },
+    {
+      "game": "tennis",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.tennis.levels[12].cornerChance",
+      "before": 0.464,
+      "after": 0.286,
+      "ratio": 0.6164
+    },
+    {
+      "game": "tennis",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.tennis.levels[12].netChance",
+      "before": 0.081,
+      "after": 0.119,
+      "ratio": 1.4691
+    },
+    {
+      "game": "tennis",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.tennis.levels[12].lobChance",
+      "before": 0.057,
+      "after": 0.323,
+      "ratio": 5.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 12,
+      "toStage": 13,
+      "parameter": "minigames.tennis.levels[12].dropChance",
+      "before": 0.023,
+      "after": 0.041,
+      "ratio": 1.7826
+    },
+    {
+      "game": "tennis",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.tennis.levels[13].netChance",
+      "before": 0.119,
+      "after": 0.191,
+      "ratio": 1.605
+    },
+    {
+      "game": "tennis",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.tennis.levels[13].lobChance",
+      "before": 0.323,
+      "after": 0.125,
+      "ratio": 0.387
+    },
+    {
+      "game": "tennis",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.tennis.levels[13].dropChance",
+      "before": 0.041,
+      "after": 0.241,
+      "ratio": 5.878
+    },
+    {
+      "game": "tennis",
+      "fromStage": 13,
+      "toStage": 14,
+      "parameter": "minigames.tennis.levels[13].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.tennis.levels[14].cornerChance",
+      "before": 0.335,
+      "after": 0.572,
+      "ratio": 1.7075
+    },
+    {
+      "game": "tennis",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.tennis.levels[14].netChance",
+      "before": 0.191,
+      "after": 0.265,
+      "ratio": 1.3874
+    },
+    {
+      "game": "tennis",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.tennis.levels[14].dropChance",
+      "before": 0.241,
+      "after": 0.093,
+      "ratio": 0.3859
+    },
+    {
+      "game": "tennis",
+      "fromStage": 14,
+      "toStage": 15,
+      "parameter": "minigames.tennis.levels[14].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "tennis",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.tennis.levels[15].cornerChance",
+      "before": 0.572,
+      "after": 0.195,
+      "ratio": 0.3409
+    },
+    {
+      "game": "tennis",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.tennis.levels[15].netChance",
+      "before": 0.265,
+      "after": 0.041,
+      "ratio": 0.1547
+    },
+    {
+      "game": "tennis",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.tennis.levels[15].lobChance",
+      "before": 0.128,
+      "after": 0.071,
+      "ratio": 0.5547
+    },
+    {
+      "game": "tennis",
+      "fromStage": 15,
+      "toStage": 16,
+      "parameter": "minigames.tennis.levels[15].dropChance",
+      "before": 0.093,
+      "after": 0.021,
+      "ratio": 0.2258
+    },
+    {
+      "game": "tennis",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.tennis.levels[16].cornerChance",
+      "before": 0.195,
+      "after": 0.594,
+      "ratio": 3.0462
+    },
+    {
+      "game": "tennis",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.tennis.levels[16].netChance",
+      "before": 0.041,
+      "after": 0.108,
+      "ratio": 2.6341
+    },
+    {
+      "game": "tennis",
+      "fromStage": 16,
+      "toStage": 17,
+      "parameter": "minigames.tennis.levels[16].dropChance",
+      "before": 0.021,
+      "after": 0.033,
+      "ratio": 1.5714
+    },
+    {
+      "game": "tennis",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.tennis.levels[17].cornerChance",
+      "before": 0.594,
+      "after": 0.364,
+      "ratio": 0.6128
+    },
+    {
+      "game": "tennis",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.tennis.levels[17].netChance",
+      "before": 0.108,
+      "after": 0.151,
+      "ratio": 1.3981
+    },
+    {
+      "game": "tennis",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.tennis.levels[17].lobChance",
+      "before": 0.069,
+      "after": 0.357,
+      "ratio": 5.1739
+    },
+    {
+      "game": "tennis",
+      "fromStage": 17,
+      "toStage": 18,
+      "parameter": "minigames.tennis.levels[17].dropChance",
+      "before": 0.033,
+      "after": 0.049,
+      "ratio": 1.4848
+    },
+    {
+      "game": "tennis",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.tennis.levels[18].netChance",
+      "before": 0.151,
+      "after": 0.238,
+      "ratio": 1.5762
+    },
+    {
+      "game": "tennis",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.tennis.levels[18].lobChance",
+      "before": 0.357,
+      "after": 0.142,
+      "ratio": 0.3978
+    },
+    {
+      "game": "tennis",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.tennis.levels[18].dropChance",
+      "before": 0.049,
+      "after": 0.272,
+      "ratio": 5.551
+    },
+    {
+      "game": "tennis",
+      "fromStage": 18,
+      "toStage": 19,
+      "parameter": "minigames.tennis.levels[18].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.tennis.levels[19].cornerChance",
+      "before": 0.418,
+      "after": 0.704,
+      "ratio": 1.6842
+    },
+    {
+      "game": "tennis",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.tennis.levels[19].netChance",
+      "before": 0.238,
+      "after": 0.317,
+      "ratio": 1.3319
+    },
+    {
+      "game": "tennis",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.tennis.levels[19].dropChance",
+      "before": 0.272,
+      "after": 0.109,
+      "ratio": 0.4007
+    },
+    {
+      "game": "tennis",
+      "fromStage": 19,
+      "toStage": 20,
+      "parameter": "minigames.tennis.levels[19].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "tennis",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.tennis.levels[20].cornerChance",
+      "before": 0.704,
+      "after": 0.247,
+      "ratio": 0.3509
+    },
+    {
+      "game": "tennis",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.tennis.levels[20].netChance",
+      "before": 0.317,
+      "after": 0.055,
+      "ratio": 0.1735
+    },
+    {
+      "game": "tennis",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.tennis.levels[20].lobChance",
+      "before": 0.146,
+      "after": 0.081,
+      "ratio": 0.5548
+    },
+    {
+      "game": "tennis",
+      "fromStage": 20,
+      "toStage": 21,
+      "parameter": "minigames.tennis.levels[20].dropChance",
+      "before": 0.109,
+      "after": 0.028,
+      "ratio": 0.2569
+    },
+    {
+      "game": "tennis",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.tennis.levels[21].cornerChance",
+      "before": 0.247,
+      "after": 0.723,
+      "ratio": 2.9271
+    },
+    {
+      "game": "tennis",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.tennis.levels[21].netChance",
+      "before": 0.055,
+      "after": 0.136,
+      "ratio": 2.4727
+    },
+    {
+      "game": "tennis",
+      "fromStage": 21,
+      "toStage": 22,
+      "parameter": "minigames.tennis.levels[21].dropChance",
+      "before": 0.028,
+      "after": 0.043,
+      "ratio": 1.5357
+    },
+    {
+      "game": "tennis",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.tennis.levels[22].cornerChance",
+      "before": 0.723,
+      "after": 0.441,
+      "ratio": 0.61
+    },
+    {
+      "game": "tennis",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.tennis.levels[22].netChance",
+      "before": 0.136,
+      "after": 0.184,
+      "ratio": 1.3529
+    },
+    {
+      "game": "tennis",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.tennis.levels[22].lobChance",
+      "before": 0.081,
+      "after": 0.392,
+      "ratio": 4.8395
+    },
+    {
+      "game": "tennis",
+      "fromStage": 22,
+      "toStage": 23,
+      "parameter": "minigames.tennis.levels[22].dropChance",
+      "before": 0.043,
+      "after": 0.058,
+      "ratio": 1.3488
+    },
+    {
+      "game": "tennis",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.tennis.levels[23].netChance",
+      "before": 0.184,
+      "after": 0.284,
+      "ratio": 1.5435
+    },
+    {
+      "game": "tennis",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.tennis.levels[23].lobChance",
+      "before": 0.392,
+      "after": 0.159,
+      "ratio": 0.4056
+    },
+    {
+      "game": "tennis",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.tennis.levels[23].dropChance",
+      "before": 0.058,
+      "after": 0.303,
+      "ratio": 5.2241
+    },
+    {
+      "game": "tennis",
+      "fromStage": 23,
+      "toStage": 24,
+      "parameter": "minigames.tennis.levels[23].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.tennis.levels[24].cornerChance",
+      "before": 0.501,
+      "after": 0.837,
+      "ratio": 1.6707
+    },
+    {
+      "game": "tennis",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.tennis.levels[24].dropChance",
+      "before": 0.303,
+      "after": 0.124,
+      "ratio": 0.4092
+    },
+    {
+      "game": "tennis",
+      "fromStage": 24,
+      "toStage": 25,
+      "parameter": "minigames.tennis.levels[24].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "tennis",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.tennis.levels[25].cornerChance",
+      "before": 0.837,
+      "after": 0.299,
+      "ratio": 0.3572
+    },
+    {
+      "game": "tennis",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.tennis.levels[25].netChance",
+      "before": 0.368,
+      "after": 0.069,
+      "ratio": 0.1875
+    },
+    {
+      "game": "tennis",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.tennis.levels[25].lobChance",
+      "before": 0.163,
+      "after": 0.092,
+      "ratio": 0.5644
+    },
+    {
+      "game": "tennis",
+      "fromStage": 25,
+      "toStage": 26,
+      "parameter": "minigames.tennis.levels[25].dropChance",
+      "before": 0.124,
+      "after": 0.034,
+      "ratio": 0.2742
+    },
+    {
+      "game": "tennis",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.tennis.levels[26].cornerChance",
+      "before": 0.299,
+      "after": 0.852,
+      "ratio": 2.8495
+    },
+    {
+      "game": "tennis",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.tennis.levels[26].netChance",
+      "before": 0.069,
+      "after": 0.163,
+      "ratio": 2.3623
+    },
+    {
+      "game": "tennis",
+      "fromStage": 26,
+      "toStage": 27,
+      "parameter": "minigames.tennis.levels[26].dropChance",
+      "before": 0.034,
+      "after": 0.054,
+      "ratio": 1.5882
+    },
+    {
+      "game": "tennis",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.tennis.levels[27].cornerChance",
+      "before": 0.852,
+      "after": 0.519,
+      "ratio": 0.6092
+    },
+    {
+      "game": "tennis",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.tennis.levels[27].netChance",
+      "before": 0.163,
+      "after": 0.217,
+      "ratio": 1.3313
+    },
+    {
+      "game": "tennis",
+      "fromStage": 27,
+      "toStage": 28,
+      "parameter": "minigames.tennis.levels[27].lobChance",
+      "before": 0.093,
+      "after": 0.426,
+      "ratio": 4.5806
+    },
+    {
+      "game": "tennis",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.tennis.levels[28].netChance",
+      "before": 0.217,
+      "after": 0.331,
+      "ratio": 1.5253
+    },
+    {
+      "game": "tennis",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.tennis.levels[28].lobChance",
+      "before": 0.426,
+      "after": 0.177,
+      "ratio": 0.4155
+    },
+    {
+      "game": "tennis",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.tennis.levels[28].dropChance",
+      "before": 0.067,
+      "after": 0.334,
+      "ratio": 4.9851
+    },
+    {
+      "game": "tennis",
+      "fromStage": 28,
+      "toStage": 29,
+      "parameter": "minigames.tennis.levels[28].shotDepth",
+      "before": 7.2,
+      "after": 4.8,
+      "ratio": 0.6667
+    },
+    {
+      "game": "tennis",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.tennis.levels[29].cornerChance",
+      "before": 0.583,
+      "after": 0.97,
+      "ratio": 1.6638
+    },
+    {
+      "game": "tennis",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.tennis.levels[29].dropChance",
+      "before": 0.334,
+      "after": 0.14,
+      "ratio": 0.4192
+    },
+    {
+      "game": "tennis",
+      "fromStage": 29,
+      "toStage": 30,
+      "parameter": "minigames.tennis.levels[29].shotDepth",
+      "before": 4.8,
+      "after": 6.8,
+      "ratio": 1.4167
+    },
+    {
+      "game": "alpineRush",
+      "fromStage": 1,
+      "toStage": 2,
+      "parameter": "minigames.alpineRush.levels[1].targetRank",
+      "before": 3,
+      "after": 2,
+      "ratio": 0.6667
+    },
+    {
+      "game": "alpineRush",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.alpineRush.levels[2].targetRank",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 2,
+      "toStage": 3,
+      "parameter": "minigames.catchCriminal.levels[2].wind",
+      "before": 0,
+      "after": 0.4,
+      "ratio": null
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.catchCriminal.levels[3].wind",
+      "before": 0.4,
+      "after": 0.6,
+      "ratio": 1.5
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.catchCriminal.levels[3].preview",
+      "before": 0.43,
+      "after": 0.63,
+      "ratio": 1.4651
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.catchCriminal.levels[3].gust",
+      "before": 0,
+      "after": 0.3,
+      "ratio": null
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 3,
+      "toStage": 4,
+      "parameter": "minigames.catchCriminal.levels[3].aimHelp",
+      "before": 2,
+      "after": 1,
+      "ratio": 0.5
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.catchCriminal.levels[4].radiusScale",
+      "before": 2.673,
+      "after": 3.97,
+      "ratio": 1.4852
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.catchCriminal.levels[4].wind",
+      "before": 0.6,
+      "after": 0.8,
+      "ratio": 1.3333
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.catchCriminal.levels[4].gust",
+      "before": 0.3,
+      "after": 0.4,
+      "ratio": 1.3333
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 4,
+      "toStage": 5,
+      "parameter": "minigames.catchCriminal.levels[4].hits",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.catchCriminal.levels[5].radiusScale",
+      "before": 3.97,
+      "after": 2.667,
+      "ratio": 0.6718
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.catchCriminal.levels[5].crew",
+      "before": 1,
+      "after": 2,
+      "ratio": 2
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 5,
+      "toStage": 6,
+      "parameter": "minigames.catchCriminal.levels[5].hits",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 6,
+      "toStage": 7,
+      "parameter": "minigames.catchCriminal.levels[6].preview",
+      "before": 0.65,
+      "after": 0.85,
+      "ratio": 1.3077
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.catchCriminal.levels[8].crew",
+      "before": 2,
+      "after": 3,
+      "ratio": 1.5
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.catchCriminal.levels[8].crewGap",
+      "before": 5.5,
+      "after": 3.2,
+      "ratio": 0.5818
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 8,
+      "toStage": 9,
+      "parameter": "minigames.catchCriminal.levels[8].gust",
+      "before": 0.7,
+      "after": 0.3,
+      "ratio": 0.4286
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.catchCriminal.levels[9].radiusScale",
+      "before": 2.502,
+      "after": 4.628,
+      "ratio": 1.8497
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.catchCriminal.levels[9].flee",
+      "before": 3.4,
+      "after": 5.2,
+      "ratio": 1.5294
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.catchCriminal.levels[9].crew",
+      "before": 3,
+      "after": 1,
+      "ratio": 0.3333
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.catchCriminal.levels[9].gust",
+      "before": 0.3,
+      "after": 0.9,
+      "ratio": 3
+    },
+    {
+      "game": "catchCriminal",
+      "fromStage": 9,
+      "toStage": 10,
+      "parameter": "minigames.catchCriminal.levels[9].hits",
+      "before": 1,
+      "after": 3,
+      "ratio": 3
+    }
+  ],
+  "racingStages": [
+    {
+      "stage": 1,
+      "trackId": "coast",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 34.5,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 260,
+      "grid": 3
+    },
+    {
+      "stage": 2,
+      "trackId": "jungle",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 34.68,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 248,
+      "grid": 3
+    },
+    {
+      "stage": 3,
+      "trackId": "volcano",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 34.1628,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 268,
+      "grid": 3
+    },
+    {
+      "stage": 4,
+      "trackId": "harbor",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 35.04,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 264,
+      "grid": 3
+    },
+    {
+      "stage": 5,
+      "trackId": "summit",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 35.22,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 276,
+      "grid": 3
+    },
+    {
+      "stage": 6,
+      "trackId": "ruins",
+      "laps": 2,
+      "targetRank": 3,
+      "aiSpeed": 35.4,
+      "playerSpeed": 40,
+      "widthScale": 1,
+      "reverse": false,
+      "timeLimit": 254,
+      "grid": 3
+    },
+    {
+      "stage": 7,
+      "trackId": "coast",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 36.5,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 260,
+      "grid": 3
+    },
+    {
+      "stage": 8,
+      "trackId": "jungle",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 36.68,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 248,
+      "grid": 3
+    },
+    {
+      "stage": 9,
+      "trackId": "volcano",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 36.1228,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 268,
+      "grid": 3
+    },
+    {
+      "stage": 10,
+      "trackId": "harbor",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 37.04,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 264,
+      "grid": 3
+    },
+    {
+      "stage": 11,
+      "trackId": "summit",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 37.22,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 276,
+      "grid": 3
+    },
+    {
+      "stage": 12,
+      "trackId": "ruins",
+      "laps": 2,
+      "targetRank": 2,
+      "aiSpeed": 37.4,
+      "playerSpeed": 40.75,
+      "widthScale": 0.975,
+      "reverse": false,
+      "timeLimit": 254,
+      "grid": 3
+    },
+    {
+      "stage": 13,
+      "trackId": "coast",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 38.5,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 14,
+      "trackId": "jungle",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 38.68,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 15,
+      "trackId": "volcano",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 38.0828,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 16,
+      "trackId": "harbor",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 39.04,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 17,
+      "trackId": "summit",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 39.22,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 18,
+      "trackId": "ruins",
+      "laps": 3,
+      "targetRank": 2,
+      "aiSpeed": 39.4,
+      "playerSpeed": 41.5,
+      "widthScale": 0.95,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 19,
+      "trackId": "coast",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 40.5,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 20,
+      "trackId": "jungle",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 40.68,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 21,
+      "trackId": "volcano",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 40.0428,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 22,
+      "trackId": "harbor",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 41.04,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 23,
+      "trackId": "summit",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 41.22,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 24,
+      "trackId": "ruins",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 41.4,
+      "playerSpeed": 42.25,
+      "widthScale": 0.925,
+      "reverse": true,
+      "timeLimit": 295,
+      "grid": 3
+    },
+    {
+      "stage": 25,
+      "trackId": "coast",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 42.5,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    },
+    {
+      "stage": 26,
+      "trackId": "jungle",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 42.68,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    },
+    {
+      "stage": 27,
+      "trackId": "volcano",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 42.0028,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    },
+    {
+      "stage": 28,
+      "trackId": "harbor",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 43.04,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    },
+    {
+      "stage": 29,
+      "trackId": "summit",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 43.22,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    },
+    {
+      "stage": 30,
+      "trackId": "ruins",
+      "laps": 3,
+      "targetRank": 1,
+      "aiSpeed": 43.4,
+      "playerSpeed": 43,
+      "widthScale": 0.9,
+      "reverse": false,
+      "timeLimit": 295,
+      "grid": 5
+    }
+  ],
+  "racingLeagueCalendar": [
+    {
+      "season": 1,
+      "race": 0,
+      "stage": 1,
+      "tier": 0,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 1,
+      "race": 1,
+      "stage": 8,
+      "tier": 1,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 1,
+      "race": 2,
+      "stage": 3,
+      "tier": 0,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 1,
+      "race": 3,
+      "stage": 10,
+      "tier": 1,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 1,
+      "race": 4,
+      "stage": 5,
+      "tier": 0,
+      "circuit": 4,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 1,
+      "race": 5,
+      "stage": 12,
+      "tier": 1,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 1,
+      "race": 6,
+      "stage": 7,
+      "tier": 1,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 1,
+      "race": 7,
+      "stage": 2,
+      "tier": 0,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 1,
+      "race": 8,
+      "stage": 9,
+      "tier": 1,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 1,
+      "race": 9,
+      "stage": 4,
+      "tier": 0,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 1,
+      "race": 10,
+      "stage": 11,
+      "tier": 1,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 1,
+      "race": 11,
+      "stage": 6,
+      "tier": 0,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 0,
+      "stage": 7,
+      "tier": 1,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 2,
+      "race": 1,
+      "stage": 14,
+      "tier": 2,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 2,
+      "stage": 9,
+      "tier": 1,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 2,
+      "race": 3,
+      "stage": 16,
+      "tier": 2,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 4,
+      "stage": 11,
+      "tier": 1,
+      "circuit": 4,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 2,
+      "race": 5,
+      "stage": 18,
+      "tier": 2,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 6,
+      "stage": 13,
+      "tier": 2,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 2,
+      "race": 7,
+      "stage": 8,
+      "tier": 1,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 8,
+      "stage": 15,
+      "tier": 2,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 2,
+      "race": 9,
+      "stage": 10,
+      "tier": 1,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 10,
+      "stage": 17,
+      "tier": 2,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 2,
+      "race": 11,
+      "stage": 12,
+      "tier": 1,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 2,
+      "race": 12,
+      "stage": 7,
+      "tier": 1,
+      "circuit": 0,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 2,
+      "race": 13,
+      "stage": 14,
+      "tier": 2,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 0,
+      "stage": 13,
+      "tier": 2,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 1,
+      "stage": 20,
+      "tier": 3,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 2,
+      "stage": 15,
+      "tier": 2,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 3,
+      "stage": 22,
+      "tier": 3,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 4,
+      "stage": 17,
+      "tier": 2,
+      "circuit": 4,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 3,
+      "race": 5,
+      "stage": 24,
+      "tier": 3,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 6,
+      "stage": 19,
+      "tier": 3,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 7,
+      "stage": 14,
+      "tier": 2,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 8,
+      "stage": 21,
+      "tier": 3,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 9,
+      "stage": 16,
+      "tier": 2,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 10,
+      "stage": 23,
+      "tier": 3,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 11,
+      "stage": 18,
+      "tier": 2,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 12,
+      "stage": 13,
+      "tier": 2,
+      "circuit": 0,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 3,
+      "race": 13,
+      "stage": 20,
+      "tier": 3,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 3,
+      "race": 14,
+      "stage": 15,
+      "tier": 2,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 3,
+      "race": 15,
+      "stage": 22,
+      "tier": 3,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 0,
+      "stage": 13,
+      "tier": 2,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 1,
+      "stage": 20,
+      "tier": 3,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 2,
+      "stage": 27,
+      "tier": 4,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 3,
+      "stage": 16,
+      "tier": 2,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 4,
+      "stage": 23,
+      "tier": 3,
+      "circuit": 4,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 4,
+      "race": 5,
+      "stage": 30,
+      "tier": 4,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 6,
+      "stage": 19,
+      "tier": 3,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 7,
+      "stage": 26,
+      "tier": 4,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 8,
+      "stage": 15,
+      "tier": 2,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 9,
+      "stage": 22,
+      "tier": 3,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 10,
+      "stage": 29,
+      "tier": 4,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 11,
+      "stage": 18,
+      "tier": 2,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 12,
+      "stage": 25,
+      "tier": 4,
+      "circuit": 0,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 4,
+      "race": 13,
+      "stage": 14,
+      "tier": 2,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 14,
+      "stage": 21,
+      "tier": 3,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 15,
+      "stage": 28,
+      "tier": 4,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 4,
+      "race": 16,
+      "stage": 17,
+      "tier": 2,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 4,
+      "race": 17,
+      "stage": 24,
+      "tier": 3,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 0,
+      "stage": 19,
+      "tier": 3,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 1,
+      "stage": 26,
+      "tier": 4,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 2,
+      "stage": 21,
+      "tier": 3,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 3,
+      "stage": 28,
+      "tier": 4,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 4,
+      "stage": 23,
+      "tier": 3,
+      "circuit": 4,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 5,
+      "race": 5,
+      "stage": 30,
+      "tier": 4,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 6,
+      "stage": 25,
+      "tier": 4,
+      "circuit": 0,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 7,
+      "stage": 20,
+      "tier": 3,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 8,
+      "stage": 27,
+      "tier": 4,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 9,
+      "stage": 22,
+      "tier": 3,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 10,
+      "stage": 29,
+      "tier": 4,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 11,
+      "stage": 24,
+      "tier": 3,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 12,
+      "stage": 19,
+      "tier": 3,
+      "circuit": 0,
+      "laps": 2,
+      "distance": 4160,
+      "variant": "short"
+    },
+    {
+      "season": 5,
+      "race": 13,
+      "stage": 26,
+      "tier": 4,
+      "circuit": 1,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 14,
+      "stage": 21,
+      "tier": 3,
+      "circuit": 2,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 15,
+      "stage": 28,
+      "tier": 4,
+      "circuit": 3,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    },
+    {
+      "season": 5,
+      "race": 16,
+      "stage": 23,
+      "tier": 3,
+      "circuit": 4,
+      "laps": 3,
+      "distance": 6400,
+      "variant": "normal"
+    },
+    {
+      "season": 5,
+      "race": 17,
+      "stage": 30,
+      "tier": 4,
+      "circuit": 5,
+      "laps": 3,
+      "distance": 8320,
+      "variant": "long"
+    }
+  ],
+  "alpineLeagueGoals": [
+    {
+      "leagueStage": 1,
+      "engineStage": 4,
+      "n": 1,
+      "number": 4,
+      "theme": "pine",
+      "themeIndex": 1,
+      "themeName": "יער אורנים",
+      "index": 1,
+      "boss": false,
+      "targetRank": 3,
+      "name": "יער אורנים · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 58000
+        },
+        {
+          "kind": "gates",
+          "count": 5,
+          "total": 9
+        }
+      ]
+    },
+    {
+      "leagueStage": 2,
+      "engineStage": 5,
+      "n": 2,
+      "number": 5,
+      "theme": "pine",
+      "themeIndex": 1,
+      "themeName": "יער אורנים",
+      "index": 2,
+      "boss": false,
+      "targetRank": 3,
+      "name": "יער אורנים · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 58500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 3,
+      "engineStage": 6,
+      "n": 3,
+      "number": 6,
+      "theme": "pine",
+      "themeIndex": 1,
+      "themeName": "יער אורנים",
+      "index": 3,
+      "boss": false,
+      "targetRank": 3,
+      "name": "יער אורנים · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 59000
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 17
+        }
+      ]
+    },
+    {
+      "leagueStage": 4,
+      "engineStage": 7,
+      "n": 4,
+      "number": 7,
+      "theme": "pine",
+      "themeIndex": 1,
+      "themeName": "יער אורנים",
+      "index": 4,
+      "boss": false,
+      "targetRank": 3,
+      "name": "יער אורנים · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 59000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 5,
+      "engineStage": 8,
+      "n": 5,
+      "number": 8,
+      "theme": "pine",
+      "themeIndex": 1,
+      "themeName": "יער אורנים",
+      "index": 5,
+      "boss": true,
+      "targetRank": 3,
+      "name": "יער אורנים · בוס היער",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 83500
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 17
+        }
+      ]
+    },
+    {
+      "leagueStage": 6,
+      "engineStage": 9,
+      "n": 6,
+      "number": 9,
+      "theme": "ice",
+      "themeIndex": 2,
+      "themeName": "מערת קרח",
+      "index": 1,
+      "boss": false,
+      "targetRank": 3,
+      "name": "מערת קרח · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 60000
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 17
+        }
+      ]
+    },
+    {
+      "leagueStage": 7,
+      "engineStage": 10,
+      "n": 7,
+      "number": 10,
+      "theme": "ice",
+      "themeIndex": 2,
+      "themeName": "מערת קרח",
+      "index": 2,
+      "boss": false,
+      "targetRank": 3,
+      "name": "מערת קרח · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 60000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 8,
+      "engineStage": 11,
+      "n": 8,
+      "number": 11,
+      "theme": "ice",
+      "themeIndex": 2,
+      "themeName": "מערת קרח",
+      "index": 3,
+      "boss": false,
+      "targetRank": 3,
+      "name": "מערת קרח · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 60500
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 18
+        }
+      ]
+    },
+    {
+      "leagueStage": 9,
+      "engineStage": 12,
+      "n": 9,
+      "number": 12,
+      "theme": "ice",
+      "themeIndex": 2,
+      "themeName": "מערת קרח",
+      "index": 4,
+      "boss": false,
+      "targetRank": 3,
+      "name": "מערת קרח · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 60500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 10,
+      "engineStage": 13,
+      "n": 10,
+      "number": 13,
+      "theme": "ice",
+      "themeIndex": 2,
+      "themeName": "מערת קרח",
+      "index": 5,
+      "boss": true,
+      "targetRank": 3,
+      "name": "מערת קרח · בוס הקרח",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 3
+        },
+        {
+          "kind": "time",
+          "ms": 85000
+        },
+        {
+          "kind": "gates",
+          "count": 11,
+          "total": 19
+        }
+      ]
+    },
+    {
+      "leagueStage": 11,
+      "engineStage": 14,
+      "n": 11,
+      "number": 14,
+      "theme": "lava",
+      "themeIndex": 3,
+      "themeName": "הר געש",
+      "index": 1,
+      "boss": false,
+      "targetRank": 2,
+      "name": "הר געש · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 2
+        },
+        {
+          "kind": "time",
+          "ms": 61000
+        },
+        {
+          "kind": "gates",
+          "count": 8,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "leagueStage": 12,
+      "engineStage": 15,
+      "n": 12,
+      "number": 15,
+      "theme": "lava",
+      "themeIndex": 3,
+      "themeName": "הר געש",
+      "index": 2,
+      "boss": false,
+      "targetRank": 2,
+      "name": "הר געש · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 2
+        },
+        {
+          "kind": "time",
+          "ms": 61500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 13,
+      "engineStage": 16,
+      "n": 13,
+      "number": 16,
+      "theme": "lava",
+      "themeIndex": 3,
+      "themeName": "הר געש",
+      "index": 3,
+      "boss": false,
+      "targetRank": 2,
+      "name": "הר געש · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 2
+        },
+        {
+          "kind": "time",
+          "ms": 62000
+        },
+        {
+          "kind": "gates",
+          "count": 6,
+          "total": 11
+        }
+      ]
+    },
+    {
+      "leagueStage": 14,
+      "engineStage": 17,
+      "n": 14,
+      "number": 17,
+      "theme": "lava",
+      "themeIndex": 3,
+      "themeName": "הר געש",
+      "index": 4,
+      "boss": false,
+      "targetRank": 2,
+      "name": "הר געש · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 2
+        },
+        {
+          "kind": "time",
+          "ms": 62000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 15,
+      "engineStage": 18,
+      "n": 15,
+      "number": 18,
+      "theme": "lava",
+      "themeIndex": 3,
+      "themeName": "הר געש",
+      "index": 5,
+      "boss": true,
+      "targetRank": 2,
+      "name": "הר געש · בוס הר הגעש",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 2
+        },
+        {
+          "kind": "time",
+          "ms": 87000
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 19
+        }
+      ]
+    },
+    {
+      "leagueStage": 16,
+      "engineStage": 19,
+      "n": 16,
+      "number": 19,
+      "theme": "aurora",
+      "themeIndex": 4,
+      "themeName": "לילה עם אורורה",
+      "index": 1,
+      "boss": false,
+      "targetRank": 1,
+      "name": "לילה עם אורורה · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 62500
+        },
+        {
+          "kind": "gates",
+          "count": 12,
+          "total": 21
+        }
+      ]
+    },
+    {
+      "leagueStage": 17,
+      "engineStage": 20,
+      "n": 17,
+      "number": 20,
+      "theme": "aurora",
+      "themeIndex": 4,
+      "themeName": "לילה עם אורורה",
+      "index": 2,
+      "boss": false,
+      "targetRank": 1,
+      "name": "לילה עם אורורה · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 62500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 18,
+      "engineStage": 21,
+      "n": 18,
+      "number": 21,
+      "theme": "aurora",
+      "themeIndex": 4,
+      "themeName": "לילה עם אורורה",
+      "index": 3,
+      "boss": false,
+      "targetRank": 1,
+      "name": "לילה עם אורורה · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 63000
+        },
+        {
+          "kind": "gates",
+          "count": 11,
+          "total": 21
+        }
+      ]
+    },
+    {
+      "leagueStage": 19,
+      "engineStage": 22,
+      "n": 19,
+      "number": 22,
+      "theme": "aurora",
+      "themeIndex": 4,
+      "themeName": "לילה עם אורורה",
+      "index": 4,
+      "boss": false,
+      "targetRank": 1,
+      "name": "לילה עם אורורה · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 63500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 20,
+      "engineStage": 23,
+      "n": 20,
+      "number": 23,
+      "theme": "aurora",
+      "themeIndex": 4,
+      "themeName": "לילה עם אורורה",
+      "index": 5,
+      "boss": true,
+      "targetRank": 1,
+      "name": "לילה עם אורורה · בוס האורורה",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 89000
+        },
+        {
+          "kind": "gates",
+          "count": 13,
+          "total": 24
+        }
+      ]
+    },
+    {
+      "leagueStage": 21,
+      "engineStage": 24,
+      "n": 21,
+      "number": 24,
+      "theme": "village",
+      "themeIndex": 5,
+      "themeName": "כפר אלפיני",
+      "index": 1,
+      "boss": false,
+      "targetRank": 1,
+      "name": "כפר אלפיני · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 64000
+        },
+        {
+          "kind": "gates",
+          "count": 7,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "leagueStage": 22,
+      "engineStage": 25,
+      "n": 22,
+      "number": 25,
+      "theme": "village",
+      "themeIndex": 5,
+      "themeName": "כפר אלפיני",
+      "index": 2,
+      "boss": false,
+      "targetRank": 1,
+      "name": "כפר אלפיני · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 64000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 23,
+      "engineStage": 26,
+      "n": 23,
+      "number": 26,
+      "theme": "village",
+      "themeIndex": 5,
+      "themeName": "כפר אלפיני",
+      "index": 3,
+      "boss": false,
+      "targetRank": 1,
+      "name": "כפר אלפיני · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 64000
+        },
+        {
+          "kind": "gates",
+          "count": 7,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "leagueStage": 24,
+      "engineStage": 27,
+      "n": 24,
+      "number": 27,
+      "theme": "village",
+      "themeIndex": 5,
+      "themeName": "כפר אלפיני",
+      "index": 4,
+      "boss": false,
+      "targetRank": 1,
+      "name": "כפר אלפיני · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 64500
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 25,
+      "engineStage": 28,
+      "n": 25,
+      "number": 28,
+      "theme": "village",
+      "themeIndex": 5,
+      "themeName": "כפר אלפיני",
+      "index": 5,
+      "boss": true,
+      "targetRank": 1,
+      "name": "כפר אלפיני · בוס הכפר",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 90500
+        },
+        {
+          "kind": "gates",
+          "count": 17,
+          "total": 33
+        }
+      ]
+    },
+    {
+      "leagueStage": 26,
+      "engineStage": 29,
+      "n": 26,
+      "number": 29,
+      "theme": "peak",
+      "themeIndex": 6,
+      "themeName": "פסגה ועננים",
+      "index": 1,
+      "boss": false,
+      "targetRank": 1,
+      "name": "פסגה ועננים · שלב 1",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 65000
+        },
+        {
+          "kind": "gates",
+          "count": 9,
+          "total": 18
+        }
+      ]
+    },
+    {
+      "leagueStage": 27,
+      "engineStage": 30,
+      "n": 27,
+      "number": 30,
+      "theme": "peak",
+      "themeIndex": 6,
+      "themeName": "פסגה ועננים",
+      "index": 2,
+      "boss": false,
+      "targetRank": 1,
+      "name": "פסגה ועננים · שלב 2",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 65000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 28,
+      "engineStage": 31,
+      "n": 28,
+      "number": 31,
+      "theme": "peak",
+      "themeIndex": 6,
+      "themeName": "פסגה ועננים",
+      "index": 3,
+      "boss": false,
+      "targetRank": 1,
+      "name": "פסגה ועננים · שלב 3",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 65500
+        },
+        {
+          "kind": "gates",
+          "count": 10,
+          "total": 19
+        }
+      ]
+    },
+    {
+      "leagueStage": 29,
+      "engineStage": 32,
+      "n": 29,
+      "number": 32,
+      "theme": "peak",
+      "themeIndex": 6,
+      "themeName": "פסגה ועננים",
+      "index": 4,
+      "boss": false,
+      "targetRank": 1,
+      "name": "פסגה ועננים · שלב 4",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 66000
+        },
+        {
+          "kind": "clean"
+        }
+      ]
+    },
+    {
+      "leagueStage": 30,
+      "engineStage": 33,
+      "n": 30,
+      "number": 33,
+      "theme": "peak",
+      "themeIndex": 6,
+      "themeName": "פסגה ועננים",
+      "index": 5,
+      "boss": true,
+      "targetRank": 1,
+      "name": "פסגה ועננים · בוס הפסגה",
+      "goals": [
+        {
+          "kind": "place",
+          "target": 1
+        },
+        {
+          "kind": "time",
+          "ms": 92000
+        },
+        {
+          "kind": "gates",
+          "count": 19,
+          "total": 38
+        }
+      ]
+    }
+  ],
+  "catchEffectiveStages": [
+    {
+      "stage": 1,
+      "distance": 19,
+      "hits": 2,
+      "crew": 1,
+      "throws": 5,
+      "assistConeDegrees": 21,
+      "pull": 1,
+      "radiusScale": 1.35,
+      "movement": {
+        "kind": "stand"
+      },
+      "chase": {
+        "seconds": 32,
+        "crimSpeed": 19.7,
+        "density": 0.35,
+        "crimBoost": 999,
+        "skill": 0.55,
+        "gap": 34.4,
+        "curve": 0.3
+      }
+    },
+    {
+      "stage": 2,
+      "distance": 21,
+      "hits": 2,
+      "crew": 1,
+      "throws": 5,
+      "assistConeDegrees": 20.5,
+      "pull": 1,
+      "radiusScale": 1.3,
+      "movement": {
+        "kind": "pace",
+        "amp": 1,
+        "period": 5
+      },
+      "chase": {
+        "seconds": 34,
+        "crimSpeed": 19.7,
+        "density": 0.45,
+        "crimBoost": 999,
+        "skill": 0.6,
+        "gap": 35.3,
+        "curve": 0.4
+      }
+    },
+    {
+      "stage": 3,
+      "distance": 24,
+      "hits": 2,
+      "crew": 1,
+      "throws": 5,
+      "assistConeDegrees": 20,
+      "pull": 1,
+      "radiusScale": 1.25,
+      "movement": {
+        "kind": "pace",
+        "amp": 1.4,
+        "period": 4.6
+      },
+      "chase": {
+        "seconds": 36,
+        "crimSpeed": 19.7,
+        "density": 0.55,
+        "crimBoost": 10,
+        "skill": 0.65,
+        "gap": 28.9,
+        "curve": 0.5
+      }
+    },
+    {
+      "stage": 4,
+      "distance": 27,
+      "hits": 2,
+      "crew": 1,
+      "throws": 6,
+      "assistConeDegrees": 17.5,
+      "pull": 0.97,
+      "radiusScale": 1.15,
+      "movement": {
+        "kind": "pace",
+        "amp": 2,
+        "period": 4.2
+      },
+      "chase": {
+        "seconds": 38,
+        "crimSpeed": 19.7,
+        "density": 0.65,
+        "crimBoost": 9,
+        "skill": 0.7,
+        "gap": 28.3,
+        "curve": 0.6
+      }
+    },
+    {
+      "stage": 5,
+      "distance": 20,
+      "hits": 3,
+      "crew": 1,
+      "throws": 7,
+      "assistConeDegrees": 17,
+      "pull": 0.96,
+      "radiusScale": 1.12,
+      "movement": {
+        "kind": "pace",
+        "amp": 2.4,
+        "period": 3.8
+      },
+      "chase": {
+        "seconds": 40,
+        "crimSpeed": 19.7,
+        "density": 0.75,
+        "crimBoost": 8,
+        "skill": 0.72,
+        "gap": 28,
+        "curve": 0.7
+      }
+    },
+    {
+      "stage": 6,
+      "distance": 32,
+      "hits": 1,
+      "crew": 2,
+      "throws": 6,
+      "assistConeDegrees": 17.5,
+      "pull": 0.95,
+      "radiusScale": 1.1,
+      "movement": {
+        "kind": "dash",
+        "amp": 2.6,
+        "speed": 4.5,
+        "pause": 0.5
+      },
+      "chase": {
+        "seconds": 42,
+        "crimSpeed": 19.7,
+        "density": 0.85,
+        "crimBoost": 7.5,
+        "skill": 0.75,
+        "gap": 28,
+        "curve": 0.8
+      }
+    },
+    {
+      "stage": 7,
+      "distance": 32,
+      "hits": 1,
+      "crew": 2,
+      "throws": 6,
+      "assistConeDegrees": 16,
+      "pull": 0.94,
+      "radiusScale": 1.08,
+      "movement": {
+        "kind": "pace",
+        "amp": 2.6,
+        "period": 3
+      },
+      "chase": {
+        "seconds": 44,
+        "crimSpeed": 19.7,
+        "density": 0.95,
+        "crimBoost": 7,
+        "skill": 0.78,
+        "gap": 28,
+        "curve": 0.9
+      }
+    },
+    {
+      "stage": 8,
+      "distance": 32,
+      "hits": 1,
+      "crew": 3,
+      "throws": 7,
+      "assistConeDegrees": 13,
+      "pull": 0.92,
+      "radiusScale": 1.05,
+      "movement": {
+        "kind": "pace",
+        "amp": 3,
+        "period": 2.8
+      },
+      "chase": {
+        "seconds": 46,
+        "crimSpeed": 19.7,
+        "density": 1.05,
+        "crimBoost": 6.5,
+        "skill": 0.8,
+        "gap": 28.3,
+        "curve": 1
+      }
+    },
+    {
+      "stage": 9,
+      "distance": 32,
+      "hits": 1,
+      "crew": 3,
+      "throws": 7,
+      "assistConeDegrees": 12,
+      "pull": 0.9,
+      "radiusScale": 1.03,
+      "movement": {
+        "kind": "dash",
+        "amp": 2.8,
+        "speed": 5,
+        "pause": 0.4
+      },
+      "chase": {
+        "seconds": 48,
+        "crimSpeed": 19.7,
+        "density": 1.15,
+        "crimBoost": 6,
+        "skill": 0.82,
+        "gap": 24,
+        "curve": 1
+      }
+    },
+    {
+      "stage": 10,
+      "distance": 28,
+      "hits": 3,
+      "crew": 1,
+      "throws": 7,
+      "assistConeDegrees": 11.5,
+      "pull": 0.88,
+      "radiusScale": 1,
+      "movement": {
+        "kind": "dash",
+        "amp": 2.8,
+        "speed": 3.6,
+        "pause": 0.6
+      },
+      "chase": {
+        "seconds": 51,
+        "crimSpeed": 19.7,
+        "density": 1.25,
+        "crimBoost": 5.5,
+        "skill": 0.85,
+        "gap": 32.6,
+        "curve": 1
+      }
+    }
+  ],
+  "navalAmmoBudgets": [
+    {
+      "stage": 1,
+      "mission": "fleet",
+      "fleetHp": 2,
+      "normalEquivalent": 53.4,
+      "ratio": 26.7,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 2,
+      "mission": "fleet",
+      "fleetHp": 3,
+      "normalEquivalent": 61.199999999999996,
+      "ratio": 20.4,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 3,
+      "mission": "fleet",
+      "fleetHp": 4,
+      "normalEquivalent": 69,
+      "ratio": 17.25,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 4,
+      "mission": "fleet",
+      "fleetHp": 6.6,
+      "normalEquivalent": 84.48,
+      "ratio": 12.8,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 5,
+      "mission": "fleet",
+      "fleetHp": 8.04,
+      "normalEquivalent": 93.06,
+      "ratio": 11.574626865671643,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 6,
+      "mission": "fleet",
+      "fleetHp": 9.6,
+      "normalEquivalent": 101.64,
+      "ratio": 10.5875,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 7,
+      "mission": "fleet",
+      "fleetHp": 12.2,
+      "normalEquivalent": 122.87999999999998,
+      "ratio": 10.072131147540983,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 8,
+      "mission": "fleet",
+      "fleetHp": 10.8,
+      "normalEquivalent": 132.23999999999998,
+      "ratio": 12.244444444444442,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 9,
+      "mission": "bases",
+      "fleetHp": 21.000000000000004,
+      "normalEquivalent": 144.95999999999998,
+      "ratio": 6.90285714285714,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 10,
+      "mission": "fleet",
+      "fleetHp": 23.65,
+      "normalEquivalent": 163.54,
+      "ratio": 6.915010570824524,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 11,
+      "mission": "subhunt",
+      "fleetHp": 8.4,
+      "normalEquivalent": 95.15999999999998,
+      "ratio": 11.328571428571426,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 12,
+      "mission": "intercept",
+      "fleetHp": 11.8,
+      "normalEquivalent": 95.15999999999998,
+      "ratio": 8.064406779661015,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 13,
+      "mission": "fleet",
+      "fleetHp": 13.860000000000001,
+      "normalEquivalent": 95.15999999999998,
+      "ratio": 6.865800865800864,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 14,
+      "mission": "subhunt",
+      "fleetHp": 15.96,
+      "normalEquivalent": 95.15999999999998,
+      "ratio": 5.962406015037592,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 15,
+      "mission": "flagship",
+      "fleetHp": 23.904,
+      "normalEquivalent": 108.07999999999998,
+      "ratio": 4.521419009370816,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 16,
+      "mission": "bases",
+      "fleetHp": 28.349999999999994,
+      "normalEquivalent": 138.6,
+      "ratio": 4.888888888888889,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 17,
+      "mission": "subhunt",
+      "fleetHp": 17,
+      "normalEquivalent": 115.08,
+      "ratio": 6.7694117647058825,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 18,
+      "mission": "fleet",
+      "fleetHp": 20.75,
+      "normalEquivalent": 115.08,
+      "ratio": 5.546024096385542,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 19,
+      "mission": "intercept",
+      "fleetHp": 25.75,
+      "normalEquivalent": 120.67999999999999,
+      "ratio": 4.686601941747573,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 20,
+      "mission": "flagship",
+      "fleetHp": 32.065,
+      "normalEquivalent": 122.36,
+      "ratio": 3.8159987525339156,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 21,
+      "mission": "fleet",
+      "fleetHp": 27.5,
+      "normalEquivalent": 126.28,
+      "ratio": 4.592,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 22,
+      "mission": "subhunt",
+      "fleetHp": 26.950000000000003,
+      "normalEquivalent": 126.28,
+      "ratio": 4.685714285714285,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 23,
+      "mission": "fleet",
+      "fleetHp": 31.499999999999996,
+      "normalEquivalent": 131.88,
+      "ratio": 4.186666666666667,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 24,
+      "mission": "bases",
+      "fleetHp": 37.8,
+      "normalEquivalent": 155.39999999999998,
+      "ratio": 4.111111111111111,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 25,
+      "mission": "flagship",
+      "fleetHp": 40.98,
+      "normalEquivalent": 141.3,
+      "ratio": 3.448023426061494,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 26,
+      "mission": "intercept",
+      "fleetHp": 37.82,
+      "normalEquivalent": 148.8,
+      "ratio": 3.934426229508197,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 27,
+      "mission": "subhunt",
+      "fleetHp": 39.370000000000005,
+      "normalEquivalent": 154.8,
+      "ratio": 3.9319278638557273,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 28,
+      "mission": "fleet",
+      "fleetHp": 40.3,
+      "normalEquivalent": 154.8,
+      "ratio": 3.8411910669975193,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 29,
+      "mission": "fleet",
+      "fleetHp": 39.65,
+      "normalEquivalent": 154.8,
+      "ratio": 3.904161412358134,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    },
+    {
+      "stage": 30,
+      "mission": "flagship",
+      "fleetHp": 54.46000000000001,
+      "normalEquivalent": 178.8,
+      "ratio": 3.2831435916268816,
+      "interpretation": "Conservative direct-hit damage capacity only; excludes misses, resupply, splash, mines, priority-target completion and paid upgrades."
+    }
+  ],
+  "boarWaveInventory": [
+    {
+      "stage": 1,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 10,
+      "counts": {
+        "scout": 10
+      },
+      "lastSpawnSeconds": 30.16,
+      "totalHp": 400,
+      "armorAdjustedHp": 400
+    },
+    {
+      "stage": 2,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 15,
+      "counts": {
+        "scout": 11,
+        "runner": 4
+      },
+      "lastSpawnSeconds": 34.01,
+      "totalHp": 626,
+      "armorAdjustedHp": 626
+    },
+    {
+      "stage": 3,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 21,
+      "counts": {
+        "scout": 13,
+        "drone": 4,
+        "runner": 4
+      },
+      "lastSpawnSeconds": 40.38,
+      "totalHp": 971,
+      "armorAdjustedHp": 971
+    },
+    {
+      "stage": 4,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 26,
+      "counts": {
+        "scout": 14,
+        "raft": 3,
+        "runner": 6,
+        "heavy": 3
+      },
+      "lastSpawnSeconds": 41.97,
+      "totalHp": 2148,
+      "armorAdjustedHp": 2840.7955
+    },
+    {
+      "stage": 5,
+      "authored": true,
+      "weather": "clear",
+      "boss": "king",
+      "enemyCount": 18,
+      "counts": {
+        "scout": 12,
+        "king": 1,
+        "runner": 5
+      },
+      "lastSpawnSeconds": 37.15,
+      "totalHp": 5473,
+      "armorAdjustedHp": 7909
+    },
+    {
+      "stage": 6,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 28,
+      "counts": {
+        "scout": 14,
+        "shark": 5,
+        "runner": 6,
+        "mortar": 3
+      },
+      "lastSpawnSeconds": 47.16,
+      "totalHp": 2410,
+      "armorAdjustedHp": 2620.7059
+    },
+    {
+      "stage": 7,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 27,
+      "counts": {
+        "scout": 12,
+        "raft": 3,
+        "runner": 6,
+        "heavy": 3,
+        "crab": 3
+      },
+      "lastSpawnSeconds": 44.78,
+      "totalHp": 4074,
+      "armorAdjustedHp": 6407.5227
+    },
+    {
+      "stage": 8,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 29,
+      "counts": {
+        "scout": 14,
+        "manta": 6,
+        "drone": 6,
+        "mortar": 3
+      },
+      "lastSpawnSeconds": 45.42,
+      "totalHp": 2669,
+      "armorAdjustedHp": 2747.8824
+    },
+    {
+      "stage": 9,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 42,
+      "counts": {
+        "scout": 15,
+        "heavy": 3,
+        "shark": 5,
+        "runner": 8,
+        "raft": 3,
+        "crab": 3,
+        "manta": 5
+      },
+      "lastSpawnSeconds": 56.48,
+      "totalHp": 6691,
+      "armorAdjustedHp": 9555.7393
+    },
+    {
+      "stage": 10,
+      "authored": true,
+      "weather": "clear",
+      "boss": "hive",
+      "enemyCount": 27,
+      "counts": {
+        "scout": 9,
+        "manta": 5,
+        "hive": 1,
+        "drone": 9,
+        "heavy": 3
+      },
+      "lastSpawnSeconds": 46.06,
+      "totalHp": 10047,
+      "armorAdjustedHp": 13226.8788
+    },
+    {
+      "stage": 11,
+      "authored": true,
+      "weather": "fog",
+      "boss": null,
+      "enemyCount": 34,
+      "counts": {
+        "scout": 15,
+        "shark": 6,
+        "runner": 6,
+        "heavy": 2,
+        "raft": 5
+      },
+      "lastSpawnSeconds": 49.29,
+      "totalHp": 5136,
+      "armorAdjustedHp": 6330.0481
+    },
+    {
+      "stage": 12,
+      "authored": true,
+      "weather": "rain",
+      "boss": null,
+      "enemyCount": 32,
+      "counts": {
+        "scout": 12,
+        "mortar": 5,
+        "heavy": 5,
+        "crab": 5,
+        "runner": 5
+      },
+      "lastSpawnSeconds": 47.09,
+      "totalHp": 7969,
+      "armorAdjustedHp": 13204.8021
+    },
+    {
+      "stage": 13,
+      "authored": true,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 42,
+      "counts": {
+        "scout": 9,
+        "manta": 6,
+        "drone": 9,
+        "runner": 18
+      },
+      "lastSpawnSeconds": 47.26,
+      "totalHp": 4008,
+      "armorAdjustedHp": 4008
+    },
+    {
+      "stage": 14,
+      "authored": true,
+      "weather": "storm",
+      "boss": null,
+      "enemyCount": 47,
+      "counts": {
+        "scout": 15,
+        "runner": 8,
+        "shark": 5,
+        "drone": 8,
+        "manta": 5,
+        "heavy": 3,
+        "crab": 3
+      },
+      "lastSpawnSeconds": 60.63,
+      "totalHp": 8868,
+      "armorAdjustedHp": 12479.1979
+    },
+    {
+      "stage": 15,
+      "authored": true,
+      "weather": "rain",
+      "boss": "turtle",
+      "enemyCount": 24,
+      "counts": {
+        "scout": 12,
+        "runner": 5,
+        "turtle": 1,
+        "heavy": 3,
+        "mortar": 3
+      },
+      "lastSpawnSeconds": 43.59,
+      "totalHp": 12264,
+      "armorAdjustedHp": 19141.4991
+    },
+    {
+      "stage": 16,
+      "authored": true,
+      "weather": "fog",
+      "boss": null,
+      "enemyCount": 38,
+      "counts": {
+        "scout": 12,
+        "runner": 6,
+        "drone": 11,
+        "manta": 9
+      },
+      "lastSpawnSeconds": 49.28,
+      "totalHp": 4803,
+      "armorAdjustedHp": 4803
+    },
+    {
+      "stage": 17,
+      "authored": true,
+      "weather": "rain",
+      "boss": null,
+      "enemyCount": 38,
+      "counts": {
+        "scout": 14,
+        "crab": 8,
+        "runner": 5,
+        "heavy": 5,
+        "mortar": 6
+      },
+      "lastSpawnSeconds": 51.34,
+      "totalHp": 13189,
+      "armorAdjustedHp": 22436.385
+    },
+    {
+      "stage": 18,
+      "authored": true,
+      "weather": "storm",
+      "boss": null,
+      "enemyCount": 43,
+      "counts": {
+        "scout": 15,
+        "manta": 3,
+        "shark": 11,
+        "runner": 8,
+        "raft": 6
+      },
+      "lastSpawnSeconds": 54.33,
+      "totalHp": 8795,
+      "armorAdjustedHp": 9899.6176
+    },
+    {
+      "stage": 19,
+      "authored": true,
+      "weather": "storm",
+      "boss": null,
+      "enemyCount": 65,
+      "counts": {
+        "scout": 18,
+        "runner": 9,
+        "shark": 6,
+        "crab": 5,
+        "heavy": 5,
+        "mortar": 5,
+        "drone": 8,
+        "manta": 6,
+        "raft": 3
+      },
+      "lastSpawnSeconds": 70.54,
+      "totalHp": 17483,
+      "armorAdjustedHp": 25341.4519
+    },
+    {
+      "stage": 20,
+      "authored": true,
+      "weather": "storm",
+      "boss": "leviathan",
+      "enemyCount": 23,
+      "counts": {
+        "scout": 11,
+        "manta": 5,
+        "runner": 6,
+        "leviathan": 1
+      },
+      "lastSpawnSeconds": 36.13,
+      "totalHp": 12060,
+      "armorAdjustedHp": 15824.5714
+    },
+    {
+      "stage": 21,
+      "authored": false,
+      "weather": "storm",
+      "boss": null,
+      "enemyCount": 66,
+      "counts": {
+        "scout": 20,
+        "drone": 8,
+        "shark": 5,
+        "mortar": 5,
+        "manta": 5,
+        "crab": 4,
+        "heavy": 5,
+        "runner": 10,
+        "raft": 4
+      },
+      "lastSpawnSeconds": 62.62,
+      "totalHp": 18058,
+      "armorAdjustedHp": 25583.7273
+    },
+    {
+      "stage": 22,
+      "authored": false,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 70,
+      "counts": {
+        "scout": 21,
+        "heavy": 5,
+        "runner": 11,
+        "shark": 5,
+        "crab": 4,
+        "raft": 5,
+        "drone": 9,
+        "mortar": 5,
+        "manta": 5
+      },
+      "lastSpawnSeconds": 64.08,
+      "totalHp": 19492,
+      "armorAdjustedHp": 27387.5856
+    },
+    {
+      "stage": 23,
+      "authored": false,
+      "weather": "rain",
+      "boss": null,
+      "enemyCount": 77,
+      "counts": {
+        "scout": 23,
+        "manta": 6,
+        "runner": 11,
+        "raft": 5,
+        "shark": 6,
+        "crab": 5,
+        "heavy": 6,
+        "drone": 9,
+        "mortar": 6
+      },
+      "lastSpawnSeconds": 68.02,
+      "totalHp": 23209,
+      "armorAdjustedHp": 33140.7326
+    },
+    {
+      "stage": 24,
+      "authored": false,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 81,
+      "counts": {
+        "scout": 24,
+        "crab": 5,
+        "shark": 6,
+        "raft": 5,
+        "runner": 13,
+        "manta": 6,
+        "drone": 10,
+        "mortar": 6,
+        "heavy": 6
+      },
+      "lastSpawnSeconds": 69.29,
+      "totalHp": 24534,
+      "armorAdjustedHp": 34800.3035
+    },
+    {
+      "stage": 25,
+      "authored": false,
+      "weather": "fog",
+      "boss": "king",
+      "enemyCount": 83,
+      "counts": {
+        "scout": 25,
+        "manta": 6,
+        "heavy": 6,
+        "king": 1,
+        "crab": 5,
+        "runner": 13,
+        "mortar": 6,
+        "raft": 5,
+        "shark": 6,
+        "drone": 10
+      },
+      "lastSpawnSeconds": 68.11,
+      "totalHp": 55849,
+      "armorAdjustedHp": 82798.8784
+    },
+    {
+      "stage": 26,
+      "authored": false,
+      "weather": "rain",
+      "boss": null,
+      "enemyCount": 95,
+      "counts": {
+        "scout": 26,
+        "drone": 11,
+        "mortar": 8,
+        "runner": 14,
+        "crab": 6,
+        "manta": 8,
+        "heavy": 8,
+        "raft": 6,
+        "shark": 8
+      },
+      "lastSpawnSeconds": 75.34,
+      "totalHp": 31997,
+      "armorAdjustedHp": 45747.6845
+    },
+    {
+      "stage": 27,
+      "authored": false,
+      "weather": "storm",
+      "boss": null,
+      "enemyCount": 97,
+      "counts": {
+        "scout": 28,
+        "crab": 6,
+        "heavy": 8,
+        "drone": 11,
+        "shark": 8,
+        "mortar": 8,
+        "manta": 8,
+        "raft": 6,
+        "runner": 14
+      },
+      "lastSpawnSeconds": 74.48,
+      "totalHp": 33370,
+      "armorAdjustedHp": 47545.746
+    },
+    {
+      "stage": 28,
+      "authored": false,
+      "weather": "clear",
+      "boss": null,
+      "enemyCount": 101,
+      "counts": {
+        "scout": 29,
+        "runner": 15,
+        "drone": 13,
+        "shark": 8,
+        "raft": 6,
+        "manta": 8,
+        "crab": 6,
+        "heavy": 8,
+        "mortar": 8
+      },
+      "lastSpawnSeconds": 75.24,
+      "totalHp": 35004,
+      "armorAdjustedHp": 49612.2193
+    },
+    {
+      "stage": 29,
+      "authored": false,
+      "weather": "rain",
+      "boss": null,
+      "enemyCount": 108,
+      "counts": {
+        "scout": 30,
+        "manta": 9,
+        "shark": 9,
+        "runner": 15,
+        "drone": 13,
+        "heavy": 9,
+        "mortar": 9,
+        "crab": 8,
+        "raft": 6
+      },
+      "lastSpawnSeconds": 79.37,
+      "totalHp": 40738,
+      "armorAdjustedHp": 59154.2647
+    },
+    {
+      "stage": 30,
+      "authored": false,
+      "weather": "clear",
+      "boss": "hive",
+      "enemyCount": 114,
+      "counts": {
+        "scout": 31,
+        "raft": 8,
+        "heavy": 9,
+        "shark": 9,
+        "hive": 1,
+        "drone": 14,
+        "crab": 8,
+        "mortar": 9,
+        "manta": 9,
+        "runner": 16
+      },
+      "lastSpawnSeconds": 82.78,
+      "totalHp": 73996,
+      "armorAdjustedHp": 103390.5312
+    }
+  ],
+  "limitations": [
+    "Static parameter changes can offset each other; this list is a review queue, not a claim of an observed difficulty spike.",
+    "All fresh-equipment trials test stage requirements at fixed equipment; later-stage failures can reflect intended purchase/training progression.",
+    "Native-completion rates must be separated from patience deadlines so a long mandatory match does not become a fabricated logic loss.",
+    "An endless campaign cannot be exhaustively simulated; the finite wave horizon must be stated prominently."
+  ],
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "sourceDigest": "fd6c9abd3392ab91504777feb75f2f00dd4f521cb0bccf29ae6817534040fd07"
+}
