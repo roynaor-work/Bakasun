@@ -1,4 +1,5 @@
 import {alienV9Enabled} from './alien-v9.mjs';
+import {compactNotice,COMPACT_NOTICE_SECONDS} from './alien-v249.mjs';
 const pickupIds=['spread','laser','rapid','shield','wing','nova'];
 const pickupNames=['ירי מניפה','לייזר','ירי מהיר','מגן','מלווים','טיל נוסף'];
 
@@ -31,19 +32,21 @@ export function alienFlightFeedbackText(feedback){
 
 /** Stable icon/label nodes let the alien visual decorator add authored symbols
  * without a per-frame DOM replacement. All text stays outside the input plane. */
-export function createAlienFlightHud({dialog,controls,documentTarget=globalThis.document}={}){
+export function createAlienFlightHud({dialog,controls,documentTarget=globalThis.document,compact=false}={}){
  const root=documentTarget.createElement('aside');root.className='alien-flight-hud';root.setAttribute('aria-label','מצב החללית');
  const guide=documentTarget.createElement('small');guide.className='alien-flight-control';
  const row=(className,live=false)=>{const node=documentTarget.createElement('div'),icon=documentTarget.createElement('span'),label=documentTarget.createElement('span');node.className=className;icon.dataset.alienHudIcon='true';icon.setAttribute('aria-hidden','true');label.dataset.alienHudLabel='true';node.append(icon,label);if(live){node.setAttribute('role','status');node.setAttribute('aria-live','polite');node.setAttribute('aria-atomic','true');}return {node,label};};
  const weapon=row('alien-flight-weapon'),feedback=row('alien-flight-feedback',true);feedback.node.hidden=true;root.append(guide,weapon.node,feedback.node);dialog.append(root);
+ // v24.9 (?alienText=old: off): one short line at the top edge for a second, no text for a hit on the ship (alien-v249.mjs).
+ if(compact)root.dataset.text='compact';
  let lastId=null,message=null,until=0;
  const text=(node,value)=>{if(node.textContent!==value)node.textContent=value;};
  return {
   update(model,input,paused=false){
    root.hidden=Boolean(paused);root.dataset.side=controls.dataset.movementSide||'left';if(paused)return;
-   const status=alienFlightHudStatus(model,input.active&&input.mode==='stick'?'stick':input.device),notice=alienFlightFeedbackText(model.feedback);
+   const status=alienFlightHudStatus(model,input.active&&input.mode==='stick'?'stick':input.device),full=alienFlightFeedbackText(model.feedback),notice=compact?compactNotice(full,model.feedback?.kind):full;
    text(guide,status.controlText);text(weapon.label,status.weaponText);if(weapon.node.dataset.alienWeapon!==status.weapon)weapon.node.dataset.alienWeapon=status.weapon;
-   if(notice&&notice.id!==lastId){lastId=notice.id;message=notice;until=model.time+Math.max(1.4,model.feedback.life);}
+   if(notice&&notice.id!==lastId){lastId=notice.id;message=notice;until=model.time+(compact?COMPACT_NOTICE_SECONDS:Math.max(1.4,model.feedback.life));}
    const visible=message&&model.time<until;feedback.node.hidden=!visible;
    if(visible){text(feedback.label,message.text);if(message.pickup)feedback.node.dataset.alienPickup=message.pickup;else delete feedback.node.dataset.alienPickup;}
   },

@@ -43,7 +43,11 @@ test('v11 bonuses are guaranteed (pity timer) and short, ten stages in a row nev
  assert.ok(v11.bonusSeconds>=8&&v11.bonusSeconds<=12);
 });
 test('v11 stage 1 lasts about 80-130 s, with and without gear (measured by simulation, no browser)',()=>{
- for(const profile of [{},{equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}}]){
-  const rs=[1,2,3,4,5,6].map(s=>stage(1,s,{profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=80&&avg<=130,`avg ${avg}`);
- }
+ // v24.9: the base calibration is measured without the laser token of wave 1 (?alienLaserSeen=0; it stood at 82 s, 2 s above the floor);
+ // with the token (8 s of laser, the beam at 0.4 damage) this bot's stage 1 must stay above 70 s.
+ const keep=globalThis.location;
+ try{for(const [search,floor] of [['?alienLaserSeen=0',80],['',70]]){globalThis.location={search};
+  for(const profile of [{},{equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}}]){
+   const rs=[1,2,3,4,5,6].map(s=>stage(1,s,{profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=floor&&avg<=130,`${search||'as shipped'}: avg ${avg}`);
+  }}}finally{globalThis.location=keep;}
 });

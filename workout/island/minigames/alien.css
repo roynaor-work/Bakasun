@@ -80,3 +80,20 @@
  .modal[data-hangar=true]>.hangar-actions{grid-row:5}.modal[data-hangar=true]>.hangar-choices{grid-row:6}.modal[data-hangar=true]>.alien-hand{grid-row:7}.modal[data-hangar=true][data-alien-presentation=true]>[data-action=hangar-play]{grid-row:8}
  .modal[data-hangar=true][data-alien-presentation=true]>.modal-close{top:12px;left:12px}.modal[data-hangar=true][data-alien-presentation=true]>.sound-toggle{top:98px;left:24px}
 }
+
+/* v24.9 (Roy, 22/11/2026: "text that gets in the way now and then"; ?alienText=old removes data-alien-text/data-text=compact and keeps v24.8).
+ * One short line at the top edge under the wave dots, 11 px, no plate; no banner; the captions beside the
+ * buttons (the switch's one above it) fade after the opening seconds. Nothing in the middle of the play area. */
+.game-screen[data-game=alienDefense] .alien-flight-hud.alien-flight-hud[data-text=compact],.game-screen[data-game=alienDefense] .alien-flight-hud.alien-flight-hud[data-text=compact][data-side=right]{left:50%;right:auto;bottom:auto;top:calc(max(4px,env(safe-area-inset-top)) + 26px);width:auto;max-width:44vw;transform:translateX(-50%);gap:0}
+.game-screen[data-game=alienDefense] .alien-flight-hud[data-text=compact] :is(.alien-flight-control,.alien-flight-weapon){display:none!important}
+.game-screen[data-game=alienDefense] .alien-flight-hud.alien-flight-hud[data-text=compact] .alien-flight-feedback.alien-flight-feedback{min-height:0;padding:1px 7px;gap:4px;border:0;border-radius:8px;background:#07152299;box-shadow:none;justify-content:center;white-space:nowrap;font:600 11px/15px Assistant,Arial,sans-serif;color:#d9e6ef}
+.game-screen[data-game=alienDefense] .alien-flight-hud.alien-flight-hud[data-text=compact] .alien-flight-feedback.alien-flight-feedback span{font-size:11px!important}
+.alien-kid-demo.alien-kid-demo[data-text=compact]{display:none}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-text=compact] .alien-special-switch .alien-kid-caption{right:auto!important;left:50%!important;top:auto!important;bottom:calc(100% + 3px)!important;transform:translateX(-50%)!important}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-text=compact] :is(#shoot,#vulcan,#pass,.alien-special-switch) :is(.alien-fire-caption,.alien-kid-caption){transition:opacity .5s;font-size:11px!important;line-height:15px;padding:1px 5px}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-text=compact][data-alien-captions=off] :is(#shoot,#vulcan,#pass,.alien-special-switch) :is(.alien-fire-caption,.alien-kid-caption){opacity:0!important}
+/* v24.9 laser chip (?alienLaserSeen=0: none): the laser icon and the seconds left, at the top edge beside the hearts, while the laser bonus runs. */
+.alien-laser-chip{position:absolute;z-index:4;top:calc(max(4px,env(safe-area-inset-top)) + 26px);left:max(10px,env(safe-area-inset-left));display:flex;align-items:center;gap:4px;height:22px;padding:0 8px 0 6px;border-radius:11px;border:1.5px solid #4fe8ff;background:#06202fd9;color:#dffbff;direction:ltr;pointer-events:none;font:700 13px/22px system-ui,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 0 10px #4fe8ff66}
+.alien-laser-chip[hidden]{display:none}
+.alien-laser-chip svg{width:14px;height:16px;flex:none}
+.alien-laser-chip[data-blink=on]{border-color:#fff;color:#fff}
