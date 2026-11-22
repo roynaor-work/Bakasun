@@ -3,6 +3,7 @@ import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-22';
 import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-22';
 import { TYRE, tyreWear, CARRY, shoulderOf, GEARS as LIFT } from './racing-v24-5.mjs?v=island-v2-20261107-22';
 import { BRAKE_DOWN, TIGHT } from './racing-v24-7.mjs?v=island-v2-20261107-22';
+import { DRIFT, driftGrip, driftReward } from './racing-v24-9.mjs?v=island-v2-20261107-22';
 import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-22';
 import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-22';
 
@@ -68,6 +69,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // downshifts before a tight corner (the player's car on the gas)
   // racing-v24.7 (racing-v24-7.mjs): brakeDown = the box comes down a gear every BRAKE_DOWN s while the player brakes; tight = understeer above the tyre's grip
   const brakeDownOn=!!config.brakeDown,tightA=config.tight===true?TIGHT.aLat:finite(config.tight,0),tightOn=tightA>0;
+  // racing-v24.9 (racing-v24-9.mjs): drift249 = the drift of the drift button: a slide that turns tighter than the grip limit, costs DRIFT.decel, fades when held too
+  // long and charges the ERS on a clean release (no drift boost). Off = the v23 drift (uncapped turn, 2.2 m/s^2, the boost on release).
+  const drift249=!!config.drift249;
   const tyreFeelOn=!!config.tyreFeel,carryOn=!!config.carry,gearsOn=!!config.gears&&config.engine!==false,offEdge=track.width*.5+(config.shoulder?shoulderOf(track):.4);
   const EXTRA_NAMES=['נועה','רום','דור','ים','אור','שקד','גל','טל','לב','עמית','פז'];
   // racing-deep-m2: a staggered two-by-N grid on the main straight (track.gridSlots); the player's slot is stage.grid (3rd or 5th). config.grid=false (?racingGrid=0) keeps the old line-up.
@@ -81,7 +85,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     return {id:index===0?'player':`ai-${index}`,name:index>stage.opponents?EXTRA_NAMES[(index-stage.opponents-1)%EXTRA_NAMES.length]:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,scoring:index<=stage.opponents,crashT:0,stuckT:0,crashes:0,crashAir:0,crashDur:0,crashSpin:0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
-      nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
+      nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,driftT:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,gearT:1,gearInit:false,rpm:.2,shiftT:0,charging:0,ersRate:0,ersUsed:0,ersHarvested:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
       number:RACING_NUMBERS[index%RACING_NUMBERS.length],gridSlot:slot,grindT:0,passing:null,passes:0,braking:false,aiStyle:random(),farT:0,offTracks:0,offFlight:null,postHits:0,kx:0,kz:0,slowOffT:0,hidden:false,dropY:0,carryT:0,lifting:false,liftTo:0,wide:0,
@@ -287,12 +291,20 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);if(car.ghostT>0)car.ghostT=Math.max(0,car.ghostT-dt);
     car.padCooldown=Math.max(0,car.padCooldown-dt);car.boostTime=Math.max(0,car.boostTime-dt);
     const drifting=!!input.drift&&car.speed>12&&!car.offroad&&Math.abs(car.steer)>.16;
-    if(drifting)car.driftCharge=clamp(car.driftCharge+dt*(.55+Math.abs(car.steer)*.55),0,2.7);
+    if(drifting){car.driftCharge=clamp(car.driftCharge+dt*(.55+Math.abs(car.steer)*.55),0,2.7);if(drift249)car.driftT+=dt;}
+    else if(car.drifting&&drift249) {
+      // racing-v24.9: a long drift released on the asphalt charges the ERS (no boost by itself); one that ended on the gravel or in a contact gives nothing
+      // (reward = what the rule gives, gain = what fitted into the meter)
+      const reward=driftReward(car.driftT,!car.offroad&&car.crashT<=0),gain=ersOn&&car.isPlayer?Math.max(0,Math.min(100*nitroUpgrade-car.nitro,reward)):0;
+      if(gain>0){car.nitro+=gain;car.ersHarvested+=gain;}
+      event('driftEnd',car,{charge:+car.driftCharge.toFixed(2),seconds:+car.driftT.toFixed(2),reward,gain:+gain.toFixed(1),clean:!car.offroad});
+      car.driftCharge=0;
+    }
     else if(car.drifting) {
       if(car.driftCharge>.32){car.boostTime=Math.max(car.boostTime,Math.min(1.9,car.driftCharge*.8));event('driftBoost',car,{charge:car.driftCharge});}
       car.driftCharge=0;
     }
-    car.drifting=drifting;
+    car.drifting=drifting;if(!drifting)car.driftT=0;
     const nitro=!!input.nitro&&car.nitro>.1&&car.speed>3&&!car.offroad;
     if(nitro){const use=Math.min(car.nitro,dt*29/nitroUpgrade);car.nitro-=use;car.ersUsed+=use;}
     car.boosting=nitro||car.boostTime>0;
@@ -343,7 +355,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       car.gear=g;car.shiftT=Math.max(0,car.shiftT-dt);
       const shape=(1.4-.75*frac)*(revShiftOn&&g<GEARS&&frac>.8?1+REV_PULL*(frac-.8)/.2:1),cut=car.shiftT>0?.06:1;
       const goal=topCapOn?Math.min(target,(top*TOP_CAP*(1+.07*car.draft*aeroUp)+(car.boosting?12:0))*(throttle?1:0)):target;
-      if(throttle&&car.speed<goal){
+      if(drift249&&drifting){}   // racing-v24.9: a sliding car is neither pulled by the engine nor engine-braked: the slide costs DRIFT.decel, whatever the gas does
+      else if(throttle&&car.speed<goal){
         // gears 1-6 pull towards the full top as before (the rise is unchanged); gear 7 pulls towards the natural top, so the car keeps creeping up to it
         const pull=((g>=GEARS?goal:target)-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?2.1:1)*(car.isPlayer?engineUp:1);
         car.speed=Math.min(goal,car.speed+pull*dt);
@@ -352,7 +365,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       car.rpm+=(rpmTarget-car.rpm)*(1-Math.exp(-dt*(car.shiftT>0?30:12)));
     } else car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
     if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27*(car.isPlayer?brakeUp:1));
-    if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
+    if(drifting)car.speed=Math.max(0,car.speed-dt*(drift249?DRIFT.decel:2.2));
     // racing-v24 offSlow: the grass drag fades out at walking pace (8 m/s^2 at 20 m/s and more), so the engine can always move a slow car (v23: it held a standing car)
     if(car.offroad)car.speed=Math.max(0,car.speed-dt*8*(offSlowOn?Math.min(1,car.speed/OFF_SLOW.dragFull):1));
     let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1)*(1-TYRE.steer*tw);
@@ -361,6 +374,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     // racing-v24.7 tight (Roy: "I want it to be necessary to lower the speed in some of the corners"): above the tyre's grip the front pushes wide: the yaw rate is
     // capped at TIGHT.aLat / speed, so a corner tighter than v^2 / aLat cannot be held at speed v and the car runs out of it. No speed is taken away here.
     car.wide=0;
+    // racing-v24.9 drift: the slide holds DRIFT.aLat (more than the grip limit below), less once it is held past DRIFT.fade seconds
+    if(drift249&&drifting&&car.speed>10){const limit=driftGrip(car.driftT)*aeroUp*pitCrew.gripOf(car)*(1-TYRE.grip*tw)/car.speed;if(Math.abs(yaw)>limit){if(car.driftT>DRIFT.fade)car.wide=clamp((Math.abs(yaw)-limit)*car.speed/TIGHT.full,0,1);yaw=Math.sign(yaw)*limit;}}
     if(tightOn&&car.isPlayer&&car.speed>10&&!drifting&&!car.offroad){const limit=tightA*aeroUp*pitCrew.gripOf(car)*(1-TYRE.grip*tw)/car.speed,ask=Math.abs(yaw);if(ask>limit){car.wide=clamp((ask-limit)*car.speed/TIGHT.full,0,1);yaw=Math.sign(yaw)*limit;}}
     // racing-look-v1 cornering scrub (player only; ?racingLook=0 or config.scrub=false removes it): lateral acceleration above 20 m/s^2 bleeds speed (a drift bleeds at half the rate),
     // so a corner of radius R settles near sqrt(20 R). Without it the car held top speed round every bend (Roy: the engine sound stuck at the top).
@@ -392,7 +407,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     car.heading=racingAngle(car.heading+yaw*dt);
     // Heading is the physical body orientation; slip is its angle to the velocity.
     // Tyre grip builds and returns progressively instead of snapping on button release.
-    let targetSlip=drifting?car.steer*.29:0,slipRate=drifting?5.5:3.8;
+    let targetSlip=drifting?car.steer*(drift249?DRIFT.slip:.29):0,slipRate=drifting?5.5:3.8;
     // racing-v24.5 carry (Roy: "in a big long corner the car drifts a little, not on purpose, only from the inertia of the turn"): a sustained cornering load builds a small
     // slip angle on the player's car (the path runs a little wide of where the nose points), more on worn tyres, gone soon after the corner; no speed is lost
     if(carryOn&&car.isPlayer&&!drifting){const load=Math.abs(yaw)*car.speed;
