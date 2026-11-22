@@ -27,6 +27,8 @@ import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './socc
 import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-22';
 // v24.1 (14/11): no radar (Roy: "לא צריך אחד כזה", `?soccerRadar=1` brings it back); volley / header / scissor on the kick and fourth buttons.
 import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-22';
+// v24.9 (soccer-r249.mjs, `?soccerV249=0` = v24.8): closer camera and brighter markers, no text pill for ordinary touches, the stage card steps aside.
+import {applySoccerV249View,soccerHud249Enabled,soccerCueShown,SOCCER_V249} from './soccer-r249.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -68,7 +70,7 @@ export function soccerActionLabels(state,config){
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
   const {balance:sourceBalance,canvas,controls,status,t}=ctx,fullOn=!ctx.drill&&soccerFullEnabled(),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
-  const balance=applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey))));
+  const balance=applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
@@ -215,7 +217,7 @@ export function startSoccer(ctx) {
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
       if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial];feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
-      if(!key)return;
+      if(!key||!soccerCueShown(key,{enabled:hud249}))return;
       // Ordinary AI touches stay quiet; the selected player's actions get a cue.
       if(event.type==='possession'&&event.player!==model.getState().controlled)return;
       feedback.textContent=t(key==='pass'&&event.target==null?'soccer.pass':`soccer.feedback.${key}`,{number:number(event.target??event.player)});feedback.dataset.action=key;feedback.hidden=false;feedbackTime=1.1;
@@ -277,6 +279,8 @@ export function startSoccer(ctx) {
       for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);view.noteEvent?.(event);}
       if(!paused&&dt>0)telemetry?.frame(s,dt,frameMs);
       if(!paused){feedbackTime=Math.max(0,feedbackTime-dt);feedback.hidden=feedbackTime<=0;}
+      // v24.9: the stage card steps aside once play is on (it is back at every stoppage and on pause).
+      if(hud249){const away=!paused&&s.phase==='playing'&&s.halfElapsed>SOCCER_V249.hud.fixtureSeconds&&!view.replaying;if(fixture.classList.contains('soccer-fixture-away')!==away)fixture.classList.toggle('soccer-fixture-away',away);}
       if(hud>=.1){hud=0;updateHud();}
       if(model.result&&!shootout){
         // A short beat after the final whistle before the kicks start; soccerShow v1 lets the winners' finale play first (view.finaleSeconds, 0 when off).
