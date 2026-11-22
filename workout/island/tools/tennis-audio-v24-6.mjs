@@ -51,7 +51,7 @@ try{
  report.tennisEnd=await states();report.contexts=F.contexts;report.audioMetrics=snap;
  const name=n=>n.kind==='oscillator'?`osc:${n.type}`:(n.url||'?').replace(/^assets\//,'');
  const tennisNodes=F.nodes.filter(n=>n.kind!=='filter'&&n.wall!==undefined&&n.wall>=tStart);
- const calls=tennisNodes.filter(n=>/tennis-callouts-rec\//.test(n.url||'')||(n.kind==='oscillator'&&/(sawtooth|square|triangle)/.test(n.type)&&n.ph==='fault'));
+ const calls=tennisNodes.filter(n=>/tennis-callouts-(?:rec|v2)\//.test(n.url||'')||(n.kind==='oscillator'&&/(sawtooth|square|triangle)/.test(n.type)&&n.ph==='fault'));
  report.calls=calls.map(c=>({at:+(c.wall-tStart).toFixed(2),source:name(c),phase:c.ph,alongside:tennisNodes.filter(n=>n!==c&&n.wall>=c.wall-.3&&n.wall<=c.wall+1).map(n=>({dt:+(n.wall-c.wall).toFixed(2),source:name(n),path:n.path}))}));
  const counts={};for(const n of tennisNodes){const k=name(n)+(n.loop?' (loop)':'');counts[k]=(counts[k]||0)+1;}report.tennisSources=counts;
  report.loops=tennisNodes.filter(n=>n.loop).map(name);

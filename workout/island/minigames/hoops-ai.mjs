@@ -16,7 +16,7 @@ export function teamThink(api,dt,mode){
   const T=S.teams[t];
   if(!T.ai)T.ai={assign:{},plan:null,planT:0,lastPossession:null,zoneShift:0};
   const ai=T.ai;
-  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;ai.chain=0;ai.oopTried=null;}
+  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;ai.chain=0;ai.oopTried=null;ai.swap=null;ai.nextExchange=null;}
   ai.transition=Math.max(0,(ai.transition||0)-dt);
   assignDefence(api,t);
   for(const p of api.onCourt(t)){
@@ -146,6 +146,28 @@ function reboundMove(api,p,t){
  if(d<1.6&&b.vy<0&&b.y<reach+1.3&&b.y>reach-0.2&&(b.touchedRim||b.y<rim.y-0.1))api.startJump(p,'rebound');
 }
 
+/** v24.9 motion: which two men trade spots. `mates`: [{id, pos (the spot he holds now), z, busy}], `ballZ` the handler's z. The two on the
+ * side away from the ball (or, with fewer than two there, nobody): the weak side moves, the strong side keeps its passing angles. Pure. */
+export function motionExchangePair(mates,ballZ){
+ const side=ballZ>=0?1:-1,weak=mates.filter(m=>!m.busy&&m.z*side<-0.5);
+ if(weak.length<2)return null;
+ weak.sort((a,b)=>a.z*side-b.z*side||String(a.id).localeCompare(String(b.id)));
+ return [weak[0],weak[1]];
+}
+const segDist=(a,b,o)=>{const dx=b.x-a.x,dz=b.z-a.z,l=dx*dx+dz*dz||1e-6,k=clamp(((o.x-a.x)*dx+(o.z-a.z)*dz)/l,0,1);return hyp(o.x-a.x-dx*k,o.z-a.z-dz*k);};
+/** v24.9 drive and kick: of the spot and the two points `slide` metres either way along the sideline direction (z), the one whose line from the
+ * handler is farthest from every defender and which is not on top of a mate (2.4 m). A tie keeps the spot. Pure. */
+export function motionKickSpot(handler,spotPt,defenders,mates,{slide=1.8,limit=6.6}={}){
+ let best=spotPt,bestV=-Infinity;
+ for(const dz of [0,slide,-slide]){
+  const c={x:spotPt.x,z:clamp(spotPt.z+dz,-limit,limit)};
+  let v=9;for(const o of defenders)v=Math.min(v,segDist(handler,c,o));
+  for(const q of mates)if(hyp(q.x-c.x,q.z-c.z)<2.4)v-=1.5;
+  if(dz===0)v+=0.15;
+  if(v>bestV){bestV=v;best=c;}
+ }
+ return best;
+}
 /** v2: who crashes the offensive boards: the two biggest on the floor (C, PF), never the shooter. */
 export function reboundCrasher(p,mates,shooterId){
  if(p.id===shooterId)return false;
@@ -250,7 +272,19 @@ function offenseMove(api,p,t){
   p.role='roll';setGoal(p,{x:rim.x-s*1.6,z:h.z>0?0.9:-0.9},1,null,true);return;
  }
  p.role=null;
- const pos=FIVE_OUT[p.pos]||SPOTS[p.pos]||[-5,0];
+ // v24.9 motion offence (config play.motion): the weak side trades spots every few seconds instead of standing on five fixed marks
+ const M=api.play&&api.play.motion&&api.play.motion.enabled!==false?api.play.motion:null;
+ if(M&&h&&!transition&&api.court.frontcourt(s,h.x)){
+  const ai=T.ai;
+  if(ai.nextExchange==null)ai.nextExchange=S.tick+Math.round((M.firstExchange??3)*60);
+  if(S.tick>=ai.nextExchange&&S.shotClock>(M.minClock??7)){
+   ai.nextExchange=S.tick+Math.round((M.exchangeEvery??5)*60);
+   const pair=motionExchangePair(api.onCourt(t).filter(q=>q!==h&&(q.id!==S.controlled||S.autopilot)).map(q=>({id:q.id,pos:(ai.swap&&ai.swap[q.id])||q.pos,z:q.z,busy:!!q.intent.catchAt||q.role==='screen'||q.role==='roll'})),h.z);
+   if(pair){ai.swap=ai.swap||{};const [a,b]=pair;ai.swap[a.id]=b.pos;ai.swap[b.id]=a.pos;}
+  }
+ }
+ const spotKey=(M&&T.ai.swap&&T.ai.swap[p.id])||p.pos;
+ const pos=FIVE_OUT[spotKey]||SPOTS[spotKey]||[-5,0];
  let pt=spot(api,t,pos[0],pos[1]);
  if(transition){pt=spot(api,t,pos[0]-1.5,pos[1]*0.9);setGoal(p,pt,1,null,true);return;}
  // cut to the rim when the defender is out of position (behind or far)
@@ -270,6 +304,14 @@ function offenseMove(api,p,t){
   const canWin=!dfd||api.dist(dfd,rim)>api.dist(p,rim)-0.4;
   if(near===p&&canWin&&laneClear(api,t,p,rim,0.8,dfd)){setGoal(p,{x:rim.x-s*1.2,z:p.z>0?0.8:-0.8},1,null,true);p.role='cut';return;}
  }
+ // v24.9 drive and kick: the handler attacks the rim, the men outside slide along the line to the window his pass can reach
+ // (the child's own drive counts: he runs at the rim, his mates open up for the pass out)
+ const hSpeed=h?hyp(h.vx||0,h.vz||0):0,hRim=h?api.dist(h,rim):99;
+ const driving=h&&hRim<(M?.driveRadius??4.8)&&(h.id===S.controlled&&!S.autopilot?hSpeed>2.5&&((rim.x-h.x)*h.vx+(rim.z-h.z)*h.vz)/(hSpeed*Math.max(hRim,0.1))>0.75:!!h.goal&&hyp(h.goal.x-rim.x,h.goal.z-rim.z)<1.7&&!!h.goalSprint);
+ if(M&&M.kick!==false&&driving){
+  const hz=api.court.hz??7.5,best=motionKickSpot(h,pt,api.onCourt(1-t),api.onCourt(t).filter(q=>q!==h&&q!==p),{slide:M.slide??1.8,limit:hz-0.9});
+  setGoal(p,best,api.dist(p,best)>0.8?1:0.6,Math.atan2(h.x-p.x,h.z-p.z));p.role='kick';return;
+ }
  // relocate a little around the spot so the defence has to move
  const wob=Math.sin((S.tick/60+p.slot*1.7)*0.9)*0.9;
  let goal={x:pt.x,z:pt.z+wob};
@@ -277,7 +319,8 @@ function offenseMove(api,p,t){
  // more is pushed out along its own line from the handler (cutters and rollers are exempt: they are the play)
  if(api.play&&api.play.spacing!==false&&h){const R=api.play.spacingRadius??2.5,gd=hyp(goal.x-h.x,goal.z-h.z);
   if(gd<R){const crowd=api.onCourt(t).filter(q=>q!==h&&q!==p&&api.dist(q,h)<R).length;if(crowd>=(api.play.spacingMax??2)){const k=(R+0.4)/Math.max(gd,0.3);goal={x:h.x+(goal.x-h.x)*k,z:h.z+(goal.z-h.z)*k};}}}
- setGoal(p,goal,0.7);
+ // a man trading spots runs there, he does not stroll
+ setGoal(p,goal,M&&spotKey!==p.pos&&hyp(goal.x-p.x,goal.z-p.z)>1.6?1:0.7);
 }
 
 function handlerMove(api,p,t){

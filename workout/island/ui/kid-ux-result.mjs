@@ -1,4 +1,4 @@
-import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-22';
+import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-23';
 
 kidUxStyle('008', `
   .modal.modal[data-kid-ux-result] {

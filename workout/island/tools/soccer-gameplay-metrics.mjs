@@ -23,7 +23,9 @@ export const BOT_PROFILES={
  typical:{latency:9,shotChance:.6,shotCooldown:3,shotRange:1,sprint:true},
  strong:{latency:5,shotChance:.9,shotCooldown:2,shotRange:1.2,sprint:true},
  // Rules v1 (M3): a child who also uses the slide button when chasing a rival carrier.
- child:{latency:9,shotChance:.6,shotCooldown:3,shotRange:1,sprint:true,slide:true}
+ child:{latency:9,shotChance:.6,shotCooldown:3,shotRange:1,sprint:true,slide:true},
+ // v24.9: a child who presses the tackle button a step early (from 2.4 m), as children do; before v24.9 that press only cost the cooldown.
+ eager:{latency:9,shotChance:.6,shotCooldown:3,shotRange:1,sprint:true,slide:true,stealAt:2.4}
 };
 export function createHumanBot(seed,{latency=9,profile='typical'}={}){
   const prof=BOT_PROFILES[profile]||BOT_PROFILES.typical;latency=profile==='typical'?latency:prof.latency;
@@ -56,7 +58,7 @@ export function createHumanBot(seed,{latency=9,profile='typical'}={}){
       }else{
         // Loose ball or rival has it: chase and tap the pass button to tackle.
         steer(b.x+(b.vx||0)*.25,b.z+(b.vz||0)*.25);input.sprintHeld=prof.sprint&&dist(p,b)>4;
-        if(b.owner!==null&&dist(p,b)<c.steal.reach&&stealCooldown<=0){input.passPressed=true;stealCooldown=1.1;}
+        if(b.owner!==null&&dist(p,b)<(prof.stealAt||c.steal.reach)&&stealCooldown<=0){input.passPressed=true;stealCooldown=1.1;}
         // Slide profile: a sliding tackle at a carrier 1.3-2.4 m ahead while running (the kick button in defence).
         else if(prof.slide&&b.owner!==null&&slideCooldown<=0&&Math.hypot(p.vx,p.vz)>2){const m=dist(p,b);if(m>1.3&&m<2.4&&random()<.5){input.kickHeld=true;slideCooldown=2.2;}}
       }
@@ -83,7 +85,7 @@ const makeTeam=()=>({
 const blankInput=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
 /** bot 'idle' = no input at all; with help (stage rows forced to help:true, difficulty easy) the model's own
  * beginner helper drives the selected player, so both sides are pure model AI. */
-export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion,full,v241}){
+export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion,full,v241,v249}){
   // Soccer full (soccer-full.mjs): --full 442|433 is the session's 11 against 11 (it brings its own teams preset; --pitch/--control v23 still apply).
   // v24.1 (soccer-r241.mjs): --v241 all|level|fouls|air (the engine rules are off in node unless asked; `all` also takes the shorter slide get-up).
   const v241Rules=v241===undefined||v241===false?undefined:v241===true||v241==='all'?true:Object.fromEntries(String(v241).split(',').map(k=>[k,true]));
@@ -94,7 +96,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
   if(control==='v23')config=applySoccerControlV23(config,'v23');
   const shotLog=[];let openShot=null;
   if(helpAll)config={...config,stages:config.stages.map(row=>({...row,help:true}))};
-  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{}),...(feel?{feelVersion:feel}:{}),...(switchVersion?{switchVersion}:{}),...(airVersion?{airVersion}:{}),...(v241Rules!==undefined?{v241:v241Rules}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
+  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{}),...(feel?{feelVersion:feel}:{}),...(switchVersion?{switchVersion}:{}),...(airVersion?{airVersion}:{}),...(v241Rules!==undefined?{v241:v241Rules}:{}),...(v249!==undefined?{v249:v249===true||v249==='all'?true:v249===false||v249==='0'?false:typeof v249==='string'?Object.fromEntries(v249.split(',').map(k=>[k,true])):v249}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
   const step=config.match.fixedStep,hx=config.pitch.length/2,L=config.pitch.length;
   const T=[makeTeam(),makeTeam()];
   const m={playingTicks:0,deadTicks:0,restTicks:0,stuckWindows:0,windows:0,maxStuck:0,thirds:[0,0,0],swings:0,progress10:0,progressN:0,coverage:0,coverageN:0,
@@ -103,7 +105,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
   let lastTeam0Event=-9;let restartAt=null;const restartDur={};let prevControlledForShot=game.getState().controlled;let spell=null;let edgeRun=0,maxEdgeRun=0,cornerTicks=0;let duel=null;const duels={engaged:0,won:0,beaten:0,open:0};let pending=null,pendingShot=null,prevOwner=null,lastHolderTeam=null,prevControlled=game.getState().controlled,zone=null,lastSwitchAt=-9,lastSwitchFrom=null,pendingSwitchJudge=null;
   let winStart=null,winX=0,winZ=0,winT=0,xMin=Infinity,xMax=-Infinity,covT=0,restT=0,stuckRun=0,sampleN=0,progAnchor=null;
   let touch=null;
-  let elapsed=0;
+  let elapsed=0;let firstShot=null,parries={corner:0,rebound:0},lunges=0;
   while(!game.result&&elapsed<maxSeconds){
     const s=game.getState();prevControlledForShot=s.controlled;game.update(step,bot(game,step,config));elapsed+=step;
     const cur=game.getState(),b=cur.ball;
@@ -112,10 +114,12 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
       if(e.type==='pass'||e.type==='loft'){const t=T[e.team];t.passes++;if(spell&&spell.team===e.team)spell.passes++;if(e.type==='loft')t.passLoft++;if(e.kind==='through')t.through++;pending={team:e.team,player:e.player,target:e.target,through:e.kind==='through'};}
       else if(e.type==='foul'){T[e.team].fouls++;}
       else if(e.type==='slide'){const q=cur.players[e.player];if(q)T[q.team].slides++;}
-      else if(e.type==='shot'&&!e.punt){const t=T[e.team];t.shots++;const shooter=cur.players[e.player];if(shooter){const dd=Math.abs(cur.attackDir*(e.team===0?1:-1)*hx-shooter.x);t.shotDistance+=dd;if(dd>config.pitch.penaltyDepth+config.pitch.penaltySpot+6)t.shotsFar++;}if(e.team===0&&e.player===prevControlledForShot)t.shotsCtrl++;else t.shotsMate++;pendingShot={team:e.team};pending=null;if(trace){openShot={team:e.team,player:e.player,dist:shooter?Math.abs(cur.attackDir*(e.team===0?1:-1)*hx-shooter.x):null,z:shooter?shooter.z:null,power:e.power,assisted:e.assisted,outcome:'miss',t:elapsed};shotLog.push(openShot);}}
+      else if(e.type==='shot'&&!e.punt){const t=T[e.team];t.shots++;if(e.team===0&&firstShot===null)firstShot=elapsed;const shooter=cur.players[e.player];if(shooter){const dd=Math.abs(cur.attackDir*(e.team===0?1:-1)*hx-shooter.x);t.shotDistance+=dd;if(dd>config.pitch.penaltyDepth+config.pitch.penaltySpot+6)t.shotsFar++;}if(e.team===0&&e.player===prevControlledForShot)t.shotsCtrl++;else t.shotsMate++;pendingShot={team:e.team};pending=null;if(trace){openShot={team:e.team,player:e.player,dist:shooter?Math.abs(cur.attackDir*(e.team===0?1:-1)*hx-shooter.x):null,z:shooter?shooter.z:null,power:e.power,assisted:e.assisted,outcome:'miss',t:elapsed};shotLog.push(openShot);}}
       else if(e.type==='goal'){if(openShot)openShot.outcome='goal';T[e.team].goals++;if(pendingShot&&pendingShot.team===e.team){T[e.team].shotsOnTarget++;pendingShot=null;}if(pending)pending=null;}
       else if(e.type==='post'){if(openShot)openShot.outcome='post';if(pendingShot){T[pendingShot.team].posts++;T[pendingShot.team].shotsOnTarget++;pendingShot=null;}}
       else if(e.type==='header'){T[e.team].headers++;}
+      else if(e.type==='parry'){parries[e.kind]++;if(pendingShot){T[pendingShot.team].shotsOnTarget++;T[e.team].saves++;if(openShot)openShot.outcome='parry';pendingShot=null;}}
+      else if(e.type==='lunge'){lunges++;}
       else if(e.type==='heavy-touch'){T[e.team].heavy++;}
       else if(e.type==='clearance'){T[e.team].clearances++;}
       else if(e.type==='restart'){
@@ -247,6 +251,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
   const sorted=[...m.mismatchRuns].sort((a,b)=>a-b),q=(arr,f)=>arr.length?arr[Math.min(arr.length-1,Math.floor(arr.length*f))]:null;
   const t2m=[...m.touchToMove].sort((a,b)=>a-b);
   out.game={
+    firstShotSeconds:firstShot,parryCorners:parries.corner,parryRebounds:parries.rebound,lunges,
     duelsEngaged:duels.engaged,duelsWon:duels.won,duelsBeaten:duels.beaten,
     totalGoals:T[0].goals+T[1].goals,totalShots:T[0].shots+T[1].shots,
     deadBall:secs?m.deadTicks*step/secs:0,restBall:secs?m.restTicks*step/secs:0,

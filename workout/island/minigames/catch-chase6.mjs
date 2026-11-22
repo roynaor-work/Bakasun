@@ -8,9 +8,9 @@
  * with a catch, the car skids to a halt and the throw stage (archery) starts where it stopped. Ramming still fills a
  * damage meter as a slower second way. When the time runs out the thief reaches the roadblock and bails out further away.
  * Deterministic from (seed, stage, inputs) so tools/catch-sim.mjs can drive it. */
-import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-22';
-import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-22';
-import {createArsenal} from './catch-weapons.mjs?v=island-v2-20261107-22';
+import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-23';
+import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-23';
+import {createArsenal} from './catch-weapons.mjs?v=island-v2-20261107-23';
 
 /** v7 additions (13/11, Roy: "the chase is great, improve it, maybe more elements"), all opt-in through `v7` so v6 stays exact:
  *  weapons  the arsenal of catch-weapons.mjs from the first second (no 14 s wait), every hit fills the damage meter

@@ -34,7 +34,7 @@ test('the session wires the flags: walls from racingWallsOn(), the off-track con
  const src=await readFile(new URL('../workout/island/minigames/racing-session.mjs',import.meta.url),'utf8');
  assert.match(src,/walls:racingWallsOn\(\),offTrack:racingOffTrackOn\(\)\?offTrackConfig\(\):false/);
  assert.match(src,/model\.setObstacles\?\.\(loaded\.obstacles\?\.\(\)\|\|\[\]\)/);
- assert.match(src,/e\.reason==='offtrack'\)\{toastText=t\('racing\.recover'\)/);
+ assert.match(src,/e\.reason==='offtrack'\)say\('recover','',1\.6,t\('racing\.recover'\),s\.time\)/);   // racing-v24.9: the line goes through say() (a corner chip, or the old toast with ?racingText=old)
  assert.doesNotMatch(src,/הפסד/,'no "you lost" anywhere in the race session');
 });
 

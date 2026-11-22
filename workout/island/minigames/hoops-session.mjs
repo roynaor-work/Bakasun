@@ -1,22 +1,22 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
-import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-22';
-import {installHoopsPassDemo} from './kid-hoops-pass-demo.mjs?v=island-v2-20261107-22';
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {installHoopsPassDemo} from './kid-hoops-pass-demo.mjs?v=island-v2-20261107-23';
 import {readHoopsPolish} from './hoops-polish-flags.mjs';
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261107-22';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-22';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-22';
+import {gameContext} from './context.mjs?v=island-v2-20261107-23';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-23';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-23';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-22';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-22';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-22';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-22';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-22';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-22';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-22';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-23';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-23';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-23';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-23';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-23';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-23';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-23';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
 
 const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
@@ -44,7 +44,7 @@ export function startHoops(ctx){
  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
  const timeoutFeedback=kidUx('039');
- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined,
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:(params.get('hoopsV249')==='0'||params.get('hoopsMotion249')==='0')&&balance.play?{...balance.play,motion:null}:undefined,
   rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
@@ -61,7 +61,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-22',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-23',import.meta.url).href;screenEl.append(css);
  screenEl.dataset.hoopsShow=show?'v1':'0';
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
@@ -141,7 +141,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-22');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-23');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,polish,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}

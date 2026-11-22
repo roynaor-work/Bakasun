@@ -3,7 +3,7 @@
  * Mix (probe RMS, tools/catch-audio-probe.html): siren bed ~.10 above the engine bed (~.04 idle, ~.06 boost);
  * one-shot cues below the 'catch' chord peak +20%; a gentle limiter before the destination so stacked cues do not clip.
  * v5 (catch-session.mjs) and v6 (catch-session6.mjs) share this file: every cue name that existed keeps working. */
-import {createAudio8, PACK8} from './catch-audio8.mjs?v=island-v2-20261107-22';
+import {createAudio8, PACK8} from './catch-audio8.mjs?v=island-v2-20261107-23';
 
 const CUE_NAMES = ['tool', 'swing', 'whoosh', 'thud', 'miss', 'catch', 'perfect', 'engine', 'siren', 'count', 'countdown', 'go', 'crash', 'crimCrash', 'pad', 'scrape', 'ram', 'nitro', 'brake', 'near', 'bossHit', 'stars',
   'turn', 'shot', 'shotHit', 'flat', 'skid', 'draw', 'twang', 'whistle', 'hitBody', 'hitHead',

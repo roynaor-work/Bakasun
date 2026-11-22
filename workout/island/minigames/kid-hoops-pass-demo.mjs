@@ -1,4 +1,4 @@
-import {kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-22';
+import {kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-23';
 
 const steps=[
  {id:'tap',label:'נגיעה אחת',path:'M60 88H276'},

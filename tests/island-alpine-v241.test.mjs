@@ -46,7 +46,7 @@ function bench(b, {objects = [], kappa = 0, turnFrom = 0, warm = 8, fast = false
 const run = (e, seconds, steer = 0, extra = null) => { const events = []; for (let i = 0; i < Math.round(seconds * 60); i++) { e.command({type: 'steer', value: steer}); if (extra) e.command(extra); e.step(DT); events.push(...e.drainEvents()); } return events; };
 
 test('?alpineV241=0 is v24 to the millisecond: courses, races, rivals and the bot, base stages and league', () => {
-  // Fingerprints taken from origin/main (v24, island-v2-20261107-22): objects, sums of s and x, coins; races: rank, time, coins, falls,
+  // Fingerprints taken from origin/main (v24, island-v2-20261107-23): objects, sums of s and x, coins; races: rank, time, coins, falls,
   // tricks, gates, finishing order and a checksum of the player's path every second.
   const COURSES = {'ice-peak': [172, 14505249, -5107, 125], 'frost-forest': [213, 18977979, 8201, 130], 'storm-ridge': [210, 21315562, -7474, 95],
     'league-1': [127, 9152324, 9513, 90], 'league-7': [145, 10584630, 3933, 90], 'league-13': [194, 15700334, -17572, 115], 'league-18': [181, 14750599, -20634, 95], 'league-24': [180, 15587862, -4586, 95], 'league-30': [281, 38926021, -32101, 125]};

@@ -1,0 +1,6239 @@
+{
+ "query": "",
+ "flags": {
+  "tyreHud": "pit",
+  "text": "corner",
+  "drift": true
+ },
+ "DRIFT": {
+  "aLat": 42,
+  "decel": 2.6,
+  "slip": 0.26,
+  "minSpeed": 12,
+  "minSteer": 0.16,
+  "fade": 2.4,
+  "fadeOver": 0.8,
+  "faded": 0.6,
+  "clean": 0.8,
+  "ers": 6
+ },
+ "tightALat": 28,
+ "solo": [
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "kid",
+   "finished": true,
+   "time": 140.52,
+   "laps": [
+    75.75,
+    64.77
+   ],
+   "gravelS": 1,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 24.5,
+     "angle": 36,
+     "t": null
+    },
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "t": 6.67
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "t": 7.1
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "t": 12.23
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "t": 6.62
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "t": 5.23
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 139.02,
+   "laps": [
+    74.48,
+    64.53
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 5.1,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 24.5,
+     "angle": 36,
+     "t": null
+    },
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "t": 7.13
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "t": 7.5
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "t": 8.33
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "t": 7.02
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "t": 6.95
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 137.55,
+   "laps": [
+    73.73,
+    63.82
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 20,
+   "cleanDrifts": 8,
+   "driftErs": 0,
+   "driftS": 15.3,
+   "brakeS": 2.3,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 24.5,
+     "angle": 36,
+     "t": null
+    },
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "t": 7.03
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "t": 7.32
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "t": 8.23
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "t": 7
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "t": 6.58
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "reactive",
+   "finished": true,
+   "time": 141.82,
+   "laps": [
+    76.15,
+    65.67
+   ],
+   "gravelS": 0.7,
+   "flips": 2,
+   "drifts": 8,
+   "cleanDrifts": 5,
+   "driftErs": 0,
+   "driftS": 8.7,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 24.5,
+     "angle": 36,
+     "t": null
+    },
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "t": 6.72
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "t": 7.05
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "t": 12.25
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "t": 6.83
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "t": 5.43
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "always",
+   "finished": true,
+   "time": 143.93,
+   "laps": [
+    77.33,
+    66.6
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 25,
+   "cleanDrifts": 21,
+   "driftErs": 8.9,
+   "driftS": 40.7,
+   "brakeS": 0,
+   "maxBeyondM": 2.5,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 24.5,
+     "angle": 36,
+     "t": null
+    },
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "t": 8.12
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "t": 8.32
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "t": 7.88
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "t": 7.6
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "t": 5.93
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "kid",
+   "finished": true,
+   "time": 134,
+   "laps": [
+    72.35,
+    61.65
+   ],
+   "gravelS": 0.4,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 17.3,
+     "angle": 55,
+     "t": null
+    },
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "t": 6.85
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "t": 12.82
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "t": 6.68
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "t": 6.6
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "t": 5.23
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 133.37,
+   "laps": [
+    71.53,
+    61.83
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 5.2,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 17.3,
+     "angle": 55,
+     "t": null
+    },
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "t": 7.52
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "t": 8.67
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "t": 7.42
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "t": 7.23
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "t": 7.05
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 132.17,
+   "laps": [
+    70.97,
+    61.2
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 19,
+   "cleanDrifts": 8,
+   "driftErs": 0,
+   "driftS": 13.6,
+   "brakeS": 2.6,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 17.3,
+     "angle": 55,
+     "t": null
+    },
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "t": 7.75
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "t": 8.53
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "t": 7.15
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "t": 7.12
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "t": 6.58
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "reactive",
+   "finished": true,
+   "time": 136.28,
+   "laps": [
+    73.23,
+    63.05
+   ],
+   "gravelS": 0.8,
+   "flips": 2,
+   "drifts": 8,
+   "cleanDrifts": 6,
+   "driftErs": 0,
+   "driftS": 8.7,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 17.3,
+     "angle": 55,
+     "t": null
+    },
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "t": 7.12
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "t": 12.9
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "t": 6.87
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "t": 6.98
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "t": 5.48
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "always",
+   "finished": true,
+   "time": 136.58,
+   "laps": [
+    73.67,
+    62.92
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 23,
+   "cleanDrifts": 23,
+   "driftErs": 16,
+   "driftS": 40,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 17.3,
+     "angle": 55,
+     "t": null
+    },
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "t": 7.83
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "t": 8.3
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "t": 7.53
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "t": 7.67
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "t": 5.95
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "kid",
+   "finished": true,
+   "time": 164.2,
+   "laps": [
+    89.73,
+    74.47
+   ],
+   "gravelS": 3.1,
+   "flips": 5,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.4,
+     "angle": 51,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "t": 6.9
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "t": 12.68
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "t": 12.83
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "t": 6.87
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "t": 6.7
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "t": 6.87
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "t": 8.12
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "t": 8.25
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "t": 5.67
+    }
+   ],
+   "tightCorners": 10,
+   "corners": 17
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 145.68,
+   "laps": [
+    77.75,
+    67.93
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 6.7,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.4,
+     "angle": 51,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "t": 7.53
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "t": 8.27
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "t": 8.35
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "t": 7.07
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "t": 7.05
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "t": 7.38
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "t": 7.43
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "t": 7.6
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "t": 7.23
+    }
+   ],
+   "tightCorners": 10,
+   "corners": 17
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 145.42,
+   "laps": [
+    77.58,
+    67.83
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 32,
+   "cleanDrifts": 15,
+   "driftErs": 0,
+   "driftS": 22.3,
+   "brakeS": 3.1,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.4,
+     "angle": 51,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "t": 7.75
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "t": 8.37
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "t": 8.05
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "t": 6.93
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "t": 7.07
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "t": 7.25
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "t": 7.38
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "t": 7.58
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "t": 6.9
+    }
+   ],
+   "tightCorners": 10,
+   "corners": 17
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "reactive",
+   "finished": true,
+   "time": 148.37,
+   "laps": [
+    79.27,
+    69.1
+   ],
+   "gravelS": 0.8,
+   "flips": 2,
+   "drifts": 12,
+   "cleanDrifts": 10,
+   "driftErs": 0,
+   "driftS": 14.7,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.4,
+     "angle": 51,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "t": 7.18
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "t": 12.75
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "t": 8.23
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "t": 6.85
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "t": 6.82
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "t": 7.03
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "t": 7.25
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "t": 7.05
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "t": 5.65
+    }
+   ],
+   "tightCorners": 10,
+   "corners": 17
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "always",
+   "finished": true,
+   "time": 151.47,
+   "laps": [
+    81.08,
+    70.38
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 27,
+   "cleanDrifts": 27,
+   "driftErs": 15.8,
+   "driftS": 49.3,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.4,
+     "angle": 51,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "t": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "t": 8.23
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "t": 7.77
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "t": 7.63
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "t": 7.75
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "t": 7.93
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "t": 8.32
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "t": 8.15
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "t": 6.25
+    }
+   ],
+   "tightCorners": 10,
+   "corners": 17
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "kid",
+   "finished": true,
+   "time": 142.98,
+   "laps": [
+    76.85,
+    66.13
+   ],
+   "gravelS": 1.3,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.9,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "t": 6.75
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "t": 7.08
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "t": 12.3
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "t": 6.78
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "t": 5.67
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 141.65,
+   "laps": [
+    75.77,
+    65.88
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 5.5,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.9,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "t": 7.33
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "t": 7.42
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "t": 8.1
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "t": 7.18
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "t": 7.02
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 140.67,
+   "laps": [
+    75.52,
+    65.15
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 21,
+   "cleanDrifts": 10,
+   "driftErs": 0,
+   "driftS": 15.5,
+   "brakeS": 2.6,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.9,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "t": 7.13
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "t": 7.33
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "t": 8.25
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "t": 7.18
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "t": 6.7
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "reactive",
+   "finished": true,
+   "time": 144.28,
+   "laps": [
+    77.72,
+    66.57
+   ],
+   "gravelS": 0.7,
+   "flips": 2,
+   "drifts": 9,
+   "cleanDrifts": 7,
+   "driftErs": 0,
+   "driftS": 10,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.9,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "t": 6.92
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "t": 7.23
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "t": 12.37
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "t": 6.98
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "t": 5.53
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "always",
+   "finished": true,
+   "time": 145.4,
+   "laps": [
+    78.25,
+    67.15
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 23,
+   "cleanDrifts": 23,
+   "driftErs": 13.5,
+   "driftS": 39.8,
+   "brakeS": 0,
+   "maxBeyondM": 2.3,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.9,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "t": 8.08
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "t": 8.48
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "t": 8
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "t": 7.68
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "t": 5.95
+    }
+   ],
+   "tightCorners": 6,
+   "corners": 16
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "kid",
+   "finished": true,
+   "time": 173.17,
+   "laps": [
+    92,
+    81.17
+   ],
+   "gravelS": 1.5,
+   "flips": 6,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18,
+     "angle": 47,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "t": 6.95
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "t": 6.63
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "t": 12.68
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "t": 12.82
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "t": 6.9
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "t": 6.72
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "t": 9.65
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "t": 12.55
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "t": 9.58
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "t": 5.82
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 17
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 152.82,
+   "laps": [
+    81.5,
+    71.32
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 7.7,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18,
+     "angle": 47,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "t": 7.7
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "t": 7.12
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "t": 8.38
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "t": 8.4
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "t": 7.25
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "t": 7.35
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "t": 7.58
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "t": 7.93
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "t": 8.15
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "t": 6.95
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 17
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 150.97,
+   "laps": [
+    80.37,
+    70.6
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 29,
+   "cleanDrifts": 14,
+   "driftErs": 0,
+   "driftS": 24.6,
+   "brakeS": 2.9,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18,
+     "angle": 47,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "t": 7.98
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "t": 7.15
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "t": 8.53
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "t": 8.13
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "t": 7.05
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "t": 7.1
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "t": 7.32
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "t": 7.62
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "t": 7.85
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "t": 6.75
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 17
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "reactive",
+   "finished": true,
+   "time": 154.82,
+   "laps": [
+    82.67,
+    72.15
+   ],
+   "gravelS": 0.8,
+   "flips": 2,
+   "drifts": 17,
+   "cleanDrifts": 14,
+   "driftErs": 0,
+   "driftS": 20.1,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18,
+     "angle": 47,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "t": 7.2
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "t": 6.87
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "t": 12.87
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "t": 8.22
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "t": 6.93
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "t": 7.07
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "t": 7.3
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "t": 7.7
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "t": 7.43
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "t": 5.65
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 17
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "always",
+   "finished": true,
+   "time": 156.03,
+   "laps": [
+    83.4,
+    72.63
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 27,
+   "cleanDrifts": 27,
+   "driftErs": 16.5,
+   "driftS": 50.3,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18,
+     "angle": 47,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "t": 8
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "t": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "t": 8.33
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "t": 7.8
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "t": 7.68
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "t": 7.78
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "t": 8.05
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "t": 8.55
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "t": 8.35
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "t": 6.38
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 17
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "kid",
+   "finished": true,
+   "time": 163.45,
+   "laps": [
+    86.98,
+    76.47
+   ],
+   "gravelS": 1.7,
+   "flips": 6,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.6,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "t": 7
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "t": 6.72
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "t": 12.55
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "t": 13.17
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "t": 6.63
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "t": 6.67
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "t": 6.9
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "t": 12.52
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "t": 13
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "t": 5.92
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 16
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 141.12,
+   "laps": [
+    75.63,
+    65.48
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 7,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.6,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "t": 7.63
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "t": 7.17
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "t": 8.22
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "t": 8.58
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "t": 6.87
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "t": 7.13
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "t": 7.52
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "t": 7.83
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "t": 8.43
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "t": 6.92
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 16
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 138.97,
+   "laps": [
+    74.4,
+    64.57
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 28,
+   "cleanDrifts": 16,
+   "driftErs": 5.9,
+   "driftS": 22.8,
+   "brakeS": 2.7,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.6,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "t": 7.77
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "t": 7.27
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "t": 8.22
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "t": 8.27
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "t": 6.75
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "t": 7.07
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "t": 7.27
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "t": 7.55
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "t": 8.1
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "t": 6.72
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 16
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "reactive",
+   "finished": true,
+   "time": 143.12,
+   "laps": [
+    76.73,
+    66.38
+   ],
+   "gravelS": 0.8,
+   "flips": 2,
+   "drifts": 13,
+   "cleanDrifts": 10,
+   "driftErs": 0,
+   "driftS": 16,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.6,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "t": 7.22
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "t": 6.77
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "t": 12.6
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "t": 8.33
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "t": 6.45
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "t": 6.78
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "t": 7.15
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "t": 7.53
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "t": 7.63
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "t": 5.65
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 16
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "always",
+   "finished": true,
+   "time": 143.22,
+   "laps": [
+    76.9,
+    66.32
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 28,
+   "cleanDrifts": 23,
+   "driftErs": 16.1,
+   "driftS": 44.7,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 18.6,
+     "angle": 45,
+     "t": null
+    },
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "t": 7.95
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "t": 7.85
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "t": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "t": 7.88
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "t": 7.32
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "t": 7.72
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "t": 7.93
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "t": 8.5
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "t": 8.75
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "t": 6.45
+    }
+   ],
+   "tightCorners": 11,
+   "corners": 16
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "kid",
+   "finished": true,
+   "time": 151.8,
+   "laps": [
+    83.37,
+    68.43
+   ],
+   "gravelS": 1,
+   "flips": 4,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "t": 6.62
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "t": 9.83
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "t": 11.92
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "t": 8.83
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "t": 7.35
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "t": 8.73
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "t": 11.6
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 13
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 134.1,
+   "laps": [
+    74.35,
+    59.75
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 3.9,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "t": 7.22
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "t": 7.15
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "t": 7.43
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "t": 6.77
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "t": 7.37
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "t": 6.85
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "t": 6.98
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 13
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 134.65,
+   "laps": [
+    74.63,
+    60.02
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 44,
+   "cleanDrifts": 13,
+   "driftErs": 0,
+   "driftS": 25.7,
+   "brakeS": 0.3,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "t": 7.15
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "t": 6.98
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "t": 7.4
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "t": 6.9
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "t": 7.47
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "t": 6.62
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "t": 6.83
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 13
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "reactive",
+   "finished": true,
+   "time": 130.2,
+   "laps": [
+    72.48,
+    57.72
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 11,
+   "cleanDrifts": 11,
+   "driftErs": 0,
+   "driftS": 14.6,
+   "brakeS": 0,
+   "maxBeyondM": 2.8,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "t": 6.68
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "t": 6.52
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "t": 6.92
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "t": 6.38
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "t": 7.08
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "t": 6.4
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "t": 6.6
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 13
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "always",
+   "finished": true,
+   "time": 142.23,
+   "laps": [
+    78.53,
+    63.7
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 24,
+   "cleanDrifts": 24,
+   "driftErs": 7.4,
+   "driftS": 41.8,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "t": 7.65
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "t": 7.58
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "t": 8.05
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "t": 7.52
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "t": 8.18
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "t": 6.8
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "t": 7.08
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 13
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "kid",
+   "finished": true,
+   "time": 142.32,
+   "laps": [
+    78.22,
+    64.1
+   ],
+   "gravelS": 3.5,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "t": 5.83
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "t": 6.67
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "t": 5.7
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "t": 7.33
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "t": 7.38
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "t": 7
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "t": 5.83
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "t": 5.65
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "t": 10.25
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "t": 12.6
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "t": 11.77
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "t": 7.55
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "t": 6.12
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "t": 6.12
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 139.78,
+   "laps": [
+    76.75,
+    63.03
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 6,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "t": 6.15
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "t": 7.37
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "t": 6.43
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "t": 7.47
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "t": 7.17
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "t": 7.55
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "t": 6.67
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "t": 6.43
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "t": 7.1
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "t": 8
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "t": 7.03
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "t": 7.75
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "t": 6.62
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "t": 6.75
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 139.33,
+   "laps": [
+    76.72,
+    62.62
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 35,
+   "cleanDrifts": 26,
+   "driftErs": 0,
+   "driftS": 32.8,
+   "brakeS": 0.5,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "t": 6.15
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "t": 7.3
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "t": 6.33
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "t": 7.62
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "t": 7.53
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "t": 7.67
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "t": 6.5
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "t": 6.22
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "t": 6.82
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "t": 7.87
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "t": 7.08
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "t": 7.8
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "t": 6.7
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "t": 6.48
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "reactive",
+   "finished": true,
+   "time": 134.63,
+   "laps": [
+    74.27,
+    60.37
+   ],
+   "gravelS": 1.9,
+   "flips": 0,
+   "drifts": 14,
+   "cleanDrifts": 10,
+   "driftErs": 0,
+   "driftS": 15.8,
+   "brakeS": 0,
+   "maxBeyondM": 6.1,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "t": 5.85
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "t": 6.83
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "t": 5.9
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "t": 6.97
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "t": 6.87
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "t": 7
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "t": 6.02
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "t": 5.72
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "t": 6.93
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "t": 8.4
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "t": 7.65
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "t": 7.55
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "t": 6.37
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "t": 6.35
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "always",
+   "finished": true,
+   "time": 147.08,
+   "laps": [
+    80.7,
+    66.38
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 27,
+   "cleanDrifts": 27,
+   "driftErs": 19.9,
+   "driftS": 48.8,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "t": 6.32
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "t": 7.83
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "t": 6.95
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "t": 8.65
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "t": 8.72
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "t": 8.97
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "t": 7.45
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "t": 6.55
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "t": 6.57
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "t": 7.7
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "t": 7.28
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "t": 8.38
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "t": 7.25
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "t": 6.67
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "kid",
+   "finished": true,
+   "time": 140.95,
+   "laps": [
+    77.92,
+    63.03
+   ],
+   "gravelS": 3.4,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 8.9,
+   "sections": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "t": 5.45
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "t": 6.97
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "t": 7.83
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "t": 11.65
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "t": 12.6
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "t": 6
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "t": 6.3
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 12
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 133.25,
+   "laps": [
+    74.07,
+    59.18
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 3.3,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "t": 6.02
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "t": 7
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "t": 7.33
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "t": 7.63
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "t": 7.97
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "t": 5.9
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "t": 6.45
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 12
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 132.23,
+   "laps": [
+    73.57,
+    58.67
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 25,
+   "cleanDrifts": 9,
+   "driftErs": 0,
+   "driftS": 21.2,
+   "brakeS": 0.1,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "t": 5.72
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "t": 6.68
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "t": 7.37
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "t": 7.03
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "t": 7.57
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "t": 5.8
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "t": 6.48
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 12
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "reactive",
+   "finished": true,
+   "time": 130.55,
+   "laps": [
+    72.72,
+    57.83
+   ],
+   "gravelS": 0.3,
+   "flips": 0,
+   "drifts": 11,
+   "cleanDrifts": 7,
+   "driftErs": 0,
+   "driftS": 12.8,
+   "brakeS": 0,
+   "maxBeyondM": 4.1,
+   "sections": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "t": 5.47
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "t": 6.45
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "t": 7.27
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "t": 7.3
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "t": 7.9
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "t": 5.62
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "t": 6.13
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 12
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "always",
+   "finished": true,
+   "time": 140.43,
+   "laps": [
+    77.62,
+    62.82
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 24,
+   "cleanDrifts": 24,
+   "driftErs": 6.3,
+   "driftS": 38.9,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "t": 6.33
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "t": 7.23
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "t": 8.27
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "t": 7.43
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "t": 8.05
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "t": 6.17
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "t": 6.97
+    }
+   ],
+   "tightCorners": 7,
+   "corners": 12
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "kid",
+   "finished": true,
+   "time": 156.6,
+   "laps": [
+    85.62,
+    70.98
+   ],
+   "gravelS": 4.1,
+   "flips": 4,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "t": 5.82
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "t": 5.9
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "t": 9.25
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "t": 11.97
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "t": 6.02
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "t": 5.85
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "t": 6.73
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "t": 7.07
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "t": 7.42
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "t": 6.75
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "t": 8.88
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "t": 11.53
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "t": 8.93
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "t": 7.08
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 142.38,
+   "laps": [
+    78.25,
+    64.13
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 7.2,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "t": 6.35
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "t": 6.98
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "t": 6.82
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "t": 7.72
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "t": 6.02
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "t": 6.85
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "t": 7.28
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "t": 7.25
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "t": 7.4
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "t": 6.63
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "t": 6.88
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "t": 7.38
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "t": 6.9
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "t": 7
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 139.5,
+   "laps": [
+    76.88,
+    62.62
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 45,
+   "cleanDrifts": 20,
+   "driftErs": 5.8,
+   "driftS": 30.6,
+   "brakeS": 1.2,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "t": 6.07
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "t": 6.47
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "t": 6.38
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "t": 7.45
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "t": 5.92
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "t": 6.48
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "t": 6.83
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "t": 6.93
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "t": 7.35
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "t": 6.77
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "t": 6.55
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "t": 6.98
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "t": 6.8
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "t": 7.1
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "reactive",
+   "finished": true,
+   "time": 134.4,
+   "laps": [
+    74.33,
+    60.07
+   ],
+   "gravelS": 1,
+   "flips": 0,
+   "drifts": 19,
+   "cleanDrifts": 14,
+   "driftErs": 0,
+   "driftS": 19.5,
+   "brakeS": 0,
+   "maxBeyondM": 5.2,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "t": 5.82
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "t": 5.9
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "t": 5.93
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "t": 7.32
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "t": 5.65
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "t": 5.9
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "t": 6.38
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "t": 6.67
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "t": 7.1
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "t": 6.43
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "t": 6.28
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "t": 6.68
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "t": 6.38
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "t": 6.72
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "always",
+   "finished": true,
+   "time": 145.33,
+   "laps": [
+    80,
+    65.33
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 29,
+   "cleanDrifts": 29,
+   "driftErs": 15.9,
+   "driftS": 48.7,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "t": 6.22
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "t": 6.75
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "t": 6.67
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "t": 7.93
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "t": 6.7
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "t": 6.63
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "t": 6.73
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "t": 6.8
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "t": 7.33
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "t": 7.12
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "t": 6.93
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "t": 7.27
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "t": 7.12
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "t": 7.5
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 15
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "kid",
+   "finished": true,
+   "time": 145.68,
+   "laps": [
+    79.95,
+    65.73
+   ],
+   "gravelS": 5.2,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "t": 5.82
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "t": 5.98
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "t": 9.73
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "t": 11.98
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "t": 7.48
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "t": 6.38
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "t": 7.3
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "t": 8.57
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "t": 6.35
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "t": 6.12
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "t": 6.4
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "t": 6.63
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "t": 5.88
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "t": 6.23
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 14
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 143.6,
+   "laps": [
+    78.58,
+    65.02
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 7.5,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "t": 6.45
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "t": 7.18
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "t": 7.13
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "t": 8.38
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "t": 7.12
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "t": 6.93
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "t": 7.15
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "t": 8.22
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "t": 6.95
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "t": 7.13
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "t": 6.87
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "t": 6.68
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "t": 5.97
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "t": 6.55
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 14
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 141.15,
+   "laps": [
+    77.6,
+    63.55
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 33,
+   "cleanDrifts": 22,
+   "driftErs": 5.8,
+   "driftS": 32.7,
+   "brakeS": 0.9,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "t": 6.1
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "t": 6.63
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "t": 6.63
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "t": 7.93
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "t": 6.82
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "t": 6.72
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "t": 6.83
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "t": 8.32
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "t": 6.75
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "t": 6.85
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "t": 6.63
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "t": 6.65
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "t": 6.1
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "t": 6.62
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 14
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "reactive",
+   "finished": true,
+   "time": 144.72,
+   "laps": [
+    79.28,
+    65.43
+   ],
+   "gravelS": 0.9,
+   "flips": 2,
+   "drifts": 14,
+   "cleanDrifts": 11,
+   "driftErs": 0,
+   "driftS": 17.8,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "t": 5.85
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "t": 6.13
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "t": 9.8
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "t": 12.17
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "t": 7.68
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "t": 6.42
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "t": 6.53
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "t": 7.98
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "t": 6.52
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "t": 6.52
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "t": 6.08
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "t": 6.02
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "t": 5.63
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "t": 6.35
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 14
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "always",
+   "finished": true,
+   "time": 145.7,
+   "laps": [
+    79.9,
+    65.8
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 28,
+   "cleanDrifts": 28,
+   "driftErs": 15.8,
+   "driftS": 46,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "t": 6.25
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "t": 6.85
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "t": 6.65
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "t": 7.8
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "t": 6.9
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "t": 6.98
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "t": 7.12
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "t": 8.88
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "t": 7.23
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "t": 7.15
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "t": 6.73
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "t": 6.87
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "t": 6.45
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "t": 7
+    }
+   ],
+   "tightCorners": 14,
+   "corners": 14
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "kid",
+   "finished": true,
+   "time": 139.78,
+   "laps": [
+    77.2,
+    62.58
+   ],
+   "gravelS": 2.4,
+   "flips": 2,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 0,
+   "maxBeyondM": 9.4,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "t": 5.85
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "t": 5.72
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "t": 8.83
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "t": 11.92
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "t": 11.82
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "t": 6.88
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "t": 5.88
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "t": 5.18
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "t": 5.4
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "t": 5.53
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "t": 6.55
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "t": 7.02
+    }
+   ],
+   "tightCorners": 12,
+   "corners": 13
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "braker",
+   "aLat": 28,
+   "finished": true,
+   "time": 134.57,
+   "laps": [
+    74.6,
+    59.97
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 0,
+   "cleanDrifts": 0,
+   "driftErs": 0,
+   "driftS": 0,
+   "brakeS": 4.2,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "t": 6.1
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "t": 6.65
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "t": 6.85
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "t": 7.35
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "t": 6.53
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "t": 6.63
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "t": 6.25
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "t": 5.67
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "t": 5.95
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "t": 6.33
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "t": 6.78
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "t": 6.78
+    }
+   ],
+   "tightCorners": 12,
+   "corners": 13
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "drifter",
+   "aDrift": 40,
+   "finished": true,
+   "time": 133.67,
+   "laps": [
+    73.93,
+    59.73
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 26,
+   "cleanDrifts": 21,
+   "driftErs": 5,
+   "driftS": 26,
+   "brakeS": 0.1,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "t": 6.15
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "t": 6.28
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "t": 6.58
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "t": 7.42
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "t": 6.9
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "t": 6.93
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "t": 6.25
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "t": 5.52
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "t": 5.77
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "t": 5.98
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "t": 6.4
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "t": 6.98
+    }
+   ],
+   "tightCorners": 12,
+   "corners": 13
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "reactive",
+   "finished": true,
+   "time": 127.9,
+   "laps": [
+    71.22,
+    56.68
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 9,
+   "cleanDrifts": 9,
+   "driftErs": 0,
+   "driftS": 11.3,
+   "brakeS": 0,
+   "maxBeyondM": 2.2,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "t": 5.85
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "t": 5.88
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "t": 6.18
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "t": 6.83
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "t": 6.22
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "t": 6.38
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "t": 5.83
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "t": 5.2
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "t": 5.4
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "t": 5.57
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "t": 6.1
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "t": 6.77
+    }
+   ],
+   "tightCorners": 12,
+   "corners": 13
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "always",
+   "finished": true,
+   "time": 140.75,
+   "laps": [
+    77.68,
+    63.07
+   ],
+   "gravelS": 0,
+   "flips": 0,
+   "drifts": 26,
+   "cleanDrifts": 24,
+   "driftErs": 7.2,
+   "driftS": 39.4,
+   "brakeS": 0,
+   "maxBeyondM": 0,
+   "sections": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "t": 6.4
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "t": 6.58
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "t": 7.05
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "t": 8.07
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "t": 7.5
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "t": 7.67
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "t": 6.93
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "t": 5.92
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "t": 6
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "t": 6.23
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "t": 6.77
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "t": 7.38
+    }
+   ],
+   "tightCorners": 12,
+   "corners": 13
+  }
+ ],
+ "tight": [
+  {
+   "stage": 1,
+   "corners": [
+    {
+     "n": 5,
+     "radius": 38,
+     "angle": 71,
+     "braker": 7.13,
+     "drifter": 7.03,
+     "always": 8.12
+    },
+    {
+     "n": 6,
+     "radius": 30.9,
+     "angle": 87,
+     "braker": 7.5,
+     "drifter": 7.32,
+     "always": 8.32
+    },
+    {
+     "n": 8,
+     "radius": 14.3,
+     "angle": 142,
+     "braker": 8.33,
+     "drifter": 8.23,
+     "always": 7.88
+    },
+    {
+     "n": 11,
+     "radius": 36.8,
+     "angle": 72,
+     "braker": 7.02,
+     "drifter": 7,
+     "always": 7.6
+    },
+    {
+     "n": 16,
+     "radius": 16.5,
+     "angle": 59,
+     "braker": 6.95,
+     "drifter": 6.58,
+     "always": 5.93
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "corners": [
+    {
+     "n": 4,
+     "radius": 37.4,
+     "angle": 69,
+     "braker": 7.52,
+     "drifter": 7.75,
+     "always": 7.83
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 137,
+     "braker": 8.67,
+     "drifter": 8.53,
+     "always": 8.3
+    },
+    {
+     "n": 10,
+     "radius": 35.6,
+     "angle": 77,
+     "braker": 7.42,
+     "drifter": 7.15,
+     "always": 7.53
+    },
+    {
+     "n": 11,
+     "radius": 37,
+     "angle": 74,
+     "braker": 7.23,
+     "drifter": 7.12,
+     "always": 7.67
+    },
+    {
+     "n": 16,
+     "radius": 15,
+     "angle": 61,
+     "braker": 7.05,
+     "drifter": 6.58,
+     "always": 5.95
+    }
+   ]
+  },
+  {
+   "stage": 3,
+   "corners": [
+    {
+     "n": 3,
+     "radius": 37.7,
+     "angle": 75,
+     "braker": 7.53,
+     "drifter": 7.75,
+     "always": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 15,
+     "angle": 133,
+     "braker": 8.27,
+     "drifter": 8.37,
+     "always": 8.23
+    },
+    {
+     "n": 8,
+     "radius": 16.3,
+     "angle": 132,
+     "braker": 8.35,
+     "drifter": 8.05,
+     "always": 7.77
+    },
+    {
+     "n": 10,
+     "radius": 38.6,
+     "angle": 73,
+     "braker": 7.07,
+     "drifter": 6.93,
+     "always": 7.63
+    },
+    {
+     "n": 11,
+     "radius": 41.5,
+     "angle": 70,
+     "braker": 7.05,
+     "drifter": 7.07,
+     "always": 7.75
+    },
+    {
+     "n": 12,
+     "radius": 35.4,
+     "angle": 76,
+     "braker": 7.38,
+     "drifter": 7.25,
+     "always": 7.93
+    },
+    {
+     "n": 13,
+     "radius": 33.2,
+     "angle": 79,
+     "braker": 7.43,
+     "drifter": 7.38,
+     "always": 8.32
+    },
+    {
+     "n": 14,
+     "radius": 43.9,
+     "angle": 67,
+     "braker": 7.6,
+     "drifter": 7.58,
+     "always": 8.15
+    },
+    {
+     "n": 17,
+     "radius": 14.5,
+     "angle": 67,
+     "braker": 7.23,
+     "drifter": 6.9,
+     "always": 6.25
+    }
+   ]
+  },
+  {
+   "stage": 4,
+   "corners": [
+    {
+     "n": 6,
+     "radius": 32.3,
+     "angle": 81,
+     "braker": 7.33,
+     "drifter": 7.13,
+     "always": 8.08
+    },
+    {
+     "n": 7,
+     "radius": 34.7,
+     "angle": 80,
+     "braker": 7.42,
+     "drifter": 7.33,
+     "always": 8.48
+    },
+    {
+     "n": 9,
+     "radius": 13.6,
+     "angle": 145,
+     "braker": 8.1,
+     "drifter": 8.25,
+     "always": 8
+    },
+    {
+     "n": 11,
+     "radius": 37.5,
+     "angle": 71,
+     "braker": 7.18,
+     "drifter": 7.18,
+     "always": 7.68
+    },
+    {
+     "n": 16,
+     "radius": 14.1,
+     "angle": 68,
+     "braker": 7.02,
+     "drifter": 6.7,
+     "always": 5.95
+    }
+   ]
+  },
+  {
+   "stage": 5,
+   "corners": [
+    {
+     "n": 3,
+     "radius": 34.8,
+     "angle": 75,
+     "braker": 7.7,
+     "drifter": 7.98,
+     "always": 8
+    },
+    {
+     "n": 5,
+     "radius": 33.7,
+     "angle": 78,
+     "braker": 7.12,
+     "drifter": 7.15,
+     "always": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 14.4,
+     "angle": 138,
+     "braker": 8.38,
+     "drifter": 8.53,
+     "always": 8.33
+    },
+    {
+     "n": 8,
+     "radius": 16.6,
+     "angle": 132,
+     "braker": 8.4,
+     "drifter": 8.13,
+     "always": 7.8
+    },
+    {
+     "n": 10,
+     "radius": 36,
+     "angle": 74,
+     "braker": 7.25,
+     "drifter": 7.05,
+     "always": 7.68
+    },
+    {
+     "n": 11,
+     "radius": 35.1,
+     "angle": 78,
+     "braker": 7.35,
+     "drifter": 7.1,
+     "always": 7.78
+    },
+    {
+     "n": 12,
+     "radius": 39.1,
+     "angle": 74,
+     "braker": 7.58,
+     "drifter": 7.32,
+     "always": 8.05
+    },
+    {
+     "n": 13,
+     "radius": 24.6,
+     "angle": 98,
+     "braker": 7.93,
+     "drifter": 7.62,
+     "always": 8.55
+    },
+    {
+     "n": 14,
+     "radius": 32,
+     "angle": 82,
+     "braker": 8.15,
+     "drifter": 7.85,
+     "always": 8.35
+    },
+    {
+     "n": 17,
+     "radius": 16.4,
+     "angle": 60,
+     "braker": 6.95,
+     "drifter": 6.75,
+     "always": 6.38
+    }
+   ]
+  },
+  {
+   "stage": 6,
+   "corners": [
+    {
+     "n": 3,
+     "radius": 35.5,
+     "angle": 78,
+     "braker": 7.63,
+     "drifter": 7.77,
+     "always": 7.95
+    },
+    {
+     "n": 4,
+     "radius": 37.5,
+     "angle": 74,
+     "braker": 7.17,
+     "drifter": 7.27,
+     "always": 7.85
+    },
+    {
+     "n": 6,
+     "radius": 15.3,
+     "angle": 127,
+     "braker": 8.22,
+     "drifter": 8.22,
+     "always": 7.95
+    },
+    {
+     "n": 7,
+     "radius": 17,
+     "angle": 130,
+     "braker": 8.58,
+     "drifter": 8.27,
+     "always": 7.88
+    },
+    {
+     "n": 9,
+     "radius": 43.7,
+     "angle": 65,
+     "braker": 6.87,
+     "drifter": 6.75,
+     "always": 7.32
+    },
+    {
+     "n": 10,
+     "radius": 36.1,
+     "angle": 72,
+     "braker": 7.13,
+     "drifter": 7.07,
+     "always": 7.72
+    },
+    {
+     "n": 11,
+     "radius": 32.9,
+     "angle": 79,
+     "braker": 7.52,
+     "drifter": 7.27,
+     "always": 7.93
+    },
+    {
+     "n": 12,
+     "radius": 29.8,
+     "angle": 87,
+     "braker": 7.83,
+     "drifter": 7.55,
+     "always": 8.5
+    },
+    {
+     "n": 13,
+     "radius": 29.5,
+     "angle": 88,
+     "braker": 8.43,
+     "drifter": 8.1,
+     "always": 8.75
+    },
+    {
+     "n": 16,
+     "radius": 17.8,
+     "angle": 54,
+     "braker": 6.92,
+     "drifter": 6.72,
+     "always": 6.45
+    }
+   ]
+  },
+  {
+   "stage": 7,
+   "corners": [
+    {
+     "n": 2,
+     "radius": 44.9,
+     "angle": 75,
+     "braker": 7.22,
+     "drifter": 7.15,
+     "always": 7.65
+    },
+    {
+     "n": 3,
+     "radius": 27.9,
+     "angle": 86,
+     "braker": 7.15,
+     "drifter": 6.98,
+     "always": 7.58
+    },
+    {
+     "n": 4,
+     "radius": 27.2,
+     "angle": 94,
+     "braker": 7.43,
+     "drifter": 7.4,
+     "always": 8.05
+    },
+    {
+     "n": 5,
+     "radius": 35.9,
+     "angle": 62,
+     "braker": 6.77,
+     "drifter": 6.9,
+     "always": 7.52
+    },
+    {
+     "n": 6,
+     "radius": 33,
+     "angle": 99,
+     "braker": 7.37,
+     "drifter": 7.47,
+     "always": 8.18
+    },
+    {
+     "n": 9,
+     "radius": 36.3,
+     "angle": 70,
+     "braker": 6.85,
+     "drifter": 6.62,
+     "always": 6.8
+    },
+    {
+     "n": 10,
+     "radius": 25.8,
+     "angle": 83,
+     "braker": 6.98,
+     "drifter": 6.83,
+     "always": 7.08
+    }
+   ]
+  },
+  {
+   "stage": 8,
+   "corners": [
+    {
+     "n": 1,
+     "radius": 34.5,
+     "angle": 46,
+     "braker": 6.15,
+     "drifter": 6.15,
+     "always": 6.32
+    },
+    {
+     "n": 2,
+     "radius": 40.8,
+     "angle": 87,
+     "braker": 7.37,
+     "drifter": 7.3,
+     "always": 7.83
+    },
+    {
+     "n": 3,
+     "radius": 27,
+     "angle": 52,
+     "braker": 6.43,
+     "drifter": 6.33,
+     "always": 6.95
+    },
+    {
+     "n": 4,
+     "radius": 37.2,
+     "angle": 89,
+     "braker": 7.47,
+     "drifter": 7.62,
+     "always": 8.65
+    },
+    {
+     "n": 5,
+     "radius": 37.1,
+     "angle": 76,
+     "braker": 7.17,
+     "drifter": 7.53,
+     "always": 8.72
+    },
+    {
+     "n": 6,
+     "radius": 37.9,
+     "angle": 93,
+     "braker": 7.55,
+     "drifter": 7.67,
+     "always": 8.97
+    },
+    {
+     "n": 7,
+     "radius": 31.8,
+     "angle": 53,
+     "braker": 6.67,
+     "drifter": 6.5,
+     "always": 7.45
+    },
+    {
+     "n": 8,
+     "radius": 35.7,
+     "angle": 55,
+     "braker": 6.43,
+     "drifter": 6.22,
+     "always": 6.55
+    },
+    {
+     "n": 9,
+     "radius": 25.2,
+     "angle": 76,
+     "braker": 7.1,
+     "drifter": 6.82,
+     "always": 6.57
+    },
+    {
+     "n": 10,
+     "radius": 25.6,
+     "angle": 111,
+     "braker": 8,
+     "drifter": 7.87,
+     "always": 7.7
+    },
+    {
+     "n": 11,
+     "radius": 32.4,
+     "angle": 61,
+     "braker": 7.03,
+     "drifter": 7.08,
+     "always": 7.28
+    },
+    {
+     "n": 12,
+     "radius": 32.3,
+     "angle": 100,
+     "braker": 7.75,
+     "drifter": 7.8,
+     "always": 8.38
+    },
+    {
+     "n": 13,
+     "radius": 37.8,
+     "angle": 56,
+     "braker": 6.62,
+     "drifter": 6.7,
+     "always": 7.25
+    },
+    {
+     "n": 15,
+     "radius": 35.3,
+     "angle": 72,
+     "braker": 6.75,
+     "drifter": 6.48,
+     "always": 6.67
+    }
+   ]
+  },
+  {
+   "stage": 9,
+   "corners": [
+    {
+     "n": 3,
+     "radius": 35.9,
+     "angle": 42,
+     "braker": 6.02,
+     "drifter": 5.72,
+     "always": 6.33
+    },
+    {
+     "n": 4,
+     "radius": 30.4,
+     "angle": 88,
+     "braker": 7,
+     "drifter": 6.68,
+     "always": 7.23
+    },
+    {
+     "n": 5,
+     "radius": 42.4,
+     "angle": 92,
+     "braker": 7.33,
+     "drifter": 7.37,
+     "always": 8.27
+    },
+    {
+     "n": 8,
+     "radius": 30.3,
+     "angle": 95,
+     "braker": 7.63,
+     "drifter": 7.03,
+     "always": 7.43
+    },
+    {
+     "n": 9,
+     "radius": 29.5,
+     "angle": 113,
+     "braker": 7.97,
+     "drifter": 7.57,
+     "always": 8.05
+    },
+    {
+     "n": 10,
+     "radius": 33.1,
+     "angle": 35,
+     "braker": 5.9,
+     "drifter": 5.8,
+     "always": 6.17
+    },
+    {
+     "n": 11,
+     "radius": 40.1,
+     "angle": 61,
+     "braker": 6.45,
+     "drifter": 6.48,
+     "always": 6.97
+    }
+   ]
+  },
+  {
+   "stage": 10,
+   "corners": [
+    {
+     "n": 1,
+     "radius": 36.2,
+     "angle": 47,
+     "braker": 6.35,
+     "drifter": 6.07,
+     "always": 6.22
+    },
+    {
+     "n": 2,
+     "radius": 31.4,
+     "angle": 61,
+     "braker": 6.98,
+     "drifter": 6.47,
+     "always": 6.75
+    },
+    {
+     "n": 3,
+     "radius": 29.8,
+     "angle": 47,
+     "braker": 6.82,
+     "drifter": 6.38,
+     "always": 6.67
+    },
+    {
+     "n": 4,
+     "radius": 26.4,
+     "angle": 102,
+     "braker": 7.72,
+     "drifter": 7.45,
+     "always": 7.93
+    },
+    {
+     "n": 6,
+     "radius": 38.2,
+     "angle": 39,
+     "braker": 6.02,
+     "drifter": 5.92,
+     "always": 6.7
+    },
+    {
+     "n": 7,
+     "radius": 23.5,
+     "angle": 64,
+     "braker": 6.85,
+     "drifter": 6.48,
+     "always": 6.63
+    },
+    {
+     "n": 8,
+     "radius": 22.9,
+     "angle": 75,
+     "braker": 7.28,
+     "drifter": 6.83,
+     "always": 6.73
+    },
+    {
+     "n": 9,
+     "radius": 26.4,
+     "angle": 76,
+     "braker": 7.25,
+     "drifter": 6.93,
+     "always": 6.8
+    },
+    {
+     "n": 10,
+     "radius": 28.7,
+     "angle": 93,
+     "braker": 7.4,
+     "drifter": 7.35,
+     "always": 7.33
+    },
+    {
+     "n": 11,
+     "radius": 39.8,
+     "angle": 63,
+     "braker": 6.63,
+     "drifter": 6.77,
+     "always": 7.12
+    },
+    {
+     "n": 12,
+     "radius": 31.2,
+     "angle": 63,
+     "braker": 6.88,
+     "drifter": 6.55,
+     "always": 6.93
+    },
+    {
+     "n": 13,
+     "radius": 24.4,
+     "angle": 85,
+     "braker": 7.38,
+     "drifter": 6.98,
+     "always": 7.27
+    },
+    {
+     "n": 14,
+     "radius": 29.4,
+     "angle": 57,
+     "braker": 6.9,
+     "drifter": 6.8,
+     "always": 7.12
+    },
+    {
+     "n": 15,
+     "radius": 32.9,
+     "angle": 74,
+     "braker": 7,
+     "drifter": 7.1,
+     "always": 7.5
+    }
+   ]
+  },
+  {
+   "stage": 11,
+   "corners": [
+    {
+     "n": 1,
+     "radius": 33.8,
+     "angle": 43,
+     "braker": 6.45,
+     "drifter": 6.1,
+     "always": 6.25
+    },
+    {
+     "n": 2,
+     "radius": 32.2,
+     "angle": 68,
+     "braker": 7.18,
+     "drifter": 6.63,
+     "always": 6.85
+    },
+    {
+     "n": 3,
+     "radius": 26,
+     "angle": 44,
+     "braker": 7.13,
+     "drifter": 6.63,
+     "always": 6.65
+    },
+    {
+     "n": 4,
+     "radius": 19.8,
+     "angle": 130,
+     "braker": 8.38,
+     "drifter": 7.93,
+     "always": 7.8
+    },
+    {
+     "n": 5,
+     "radius": 26,
+     "angle": 65,
+     "braker": 7.12,
+     "drifter": 6.82,
+     "always": 6.9
+    },
+    {
+     "n": 6,
+     "radius": 34.4,
+     "angle": 64,
+     "braker": 6.93,
+     "drifter": 6.72,
+     "always": 6.98
+    },
+    {
+     "n": 7,
+     "radius": 27.3,
+     "angle": 91,
+     "braker": 7.15,
+     "drifter": 6.83,
+     "always": 7.12
+    },
+    {
+     "n": 8,
+     "radius": 36.5,
+     "angle": 130,
+     "braker": 8.22,
+     "drifter": 8.32,
+     "always": 8.88
+    },
+    {
+     "n": 9,
+     "radius": 28.8,
+     "angle": 77,
+     "braker": 6.95,
+     "drifter": 6.75,
+     "always": 7.23
+    },
+    {
+     "n": 10,
+     "radius": 30.4,
+     "angle": 73,
+     "braker": 7.13,
+     "drifter": 6.85,
+     "always": 7.15
+    },
+    {
+     "n": 11,
+     "radius": 23.6,
+     "angle": 68,
+     "braker": 6.87,
+     "drifter": 6.63,
+     "always": 6.73
+    },
+    {
+     "n": 12,
+     "radius": 31.6,
+     "angle": 54,
+     "braker": 6.68,
+     "drifter": 6.65,
+     "always": 6.87
+    },
+    {
+     "n": 13,
+     "radius": 43.4,
+     "angle": 40,
+     "braker": 5.97,
+     "drifter": 6.1,
+     "always": 6.45
+    },
+    {
+     "n": 14,
+     "radius": 37.6,
+     "angle": 74,
+     "braker": 6.55,
+     "drifter": 6.62,
+     "always": 7
+    }
+   ]
+  },
+  {
+   "stage": 12,
+   "corners": [
+    {
+     "n": 2,
+     "radius": 44.5,
+     "angle": 50,
+     "braker": 6.1,
+     "drifter": 6.15,
+     "always": 6.4
+    },
+    {
+     "n": 3,
+     "radius": 28.9,
+     "angle": 64,
+     "braker": 6.65,
+     "drifter": 6.28,
+     "always": 6.58
+    },
+    {
+     "n": 4,
+     "radius": 30.2,
+     "angle": 61,
+     "braker": 6.85,
+     "drifter": 6.58,
+     "always": 7.05
+    },
+    {
+     "n": 5,
+     "radius": 33.6,
+     "angle": 93,
+     "braker": 7.35,
+     "drifter": 7.42,
+     "always": 8.07
+    },
+    {
+     "n": 6,
+     "radius": 36.4,
+     "angle": 62,
+     "braker": 6.53,
+     "drifter": 6.9,
+     "always": 7.5
+    },
+    {
+     "n": 7,
+     "radius": 44.3,
+     "angle": 71,
+     "braker": 6.63,
+     "drifter": 6.93,
+     "always": 7.67
+    },
+    {
+     "n": 8,
+     "radius": 38.4,
+     "angle": 54,
+     "braker": 6.25,
+     "drifter": 6.25,
+     "always": 6.93
+    },
+    {
+     "n": 9,
+     "radius": 44.9,
+     "angle": 25,
+     "braker": 5.67,
+     "drifter": 5.52,
+     "always": 5.92
+    },
+    {
+     "n": 10,
+     "radius": 37.3,
+     "angle": 45,
+     "braker": 5.95,
+     "drifter": 5.77,
+     "always": 6
+    },
+    {
+     "n": 11,
+     "radius": 31,
+     "angle": 46,
+     "braker": 6.33,
+     "drifter": 5.98,
+     "always": 6.23
+    },
+    {
+     "n": 12,
+     "radius": 33.7,
+     "angle": 70,
+     "braker": 6.78,
+     "drifter": 6.4,
+     "always": 6.77
+    },
+    {
+     "n": 13,
+     "radius": 44.9,
+     "angle": 76,
+     "braker": 6.78,
+     "drifter": 6.98,
+     "always": 7.38
+    }
+   ]
+  }
+ ],
+ "field": [
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "braker",
+   "rank": 1,
+   "time": 139.1,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.52,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 1,
+   "track": "coast",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 137.9,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.83,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "braker",
+   "rank": 1,
+   "time": 133.8,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 75.97,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 2,
+   "track": "jungle",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 132.4,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 77.75,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "braker",
+   "rank": 1,
+   "time": 145.7,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 86.47,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 3,
+   "track": "volcano",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 145.7,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 85.5,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "braker",
+   "rank": 1,
+   "time": 141.7,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 83.02,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 4,
+   "track": "harbor",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 140.8,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 82.4,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "braker",
+   "rank": 1,
+   "time": 152.4,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 88.13,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 5,
+   "track": "summit",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 151,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 87.68,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "braker",
+   "rank": 1,
+   "time": 141.3,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.52,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 6,
+   "track": "ruins",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 139.3,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.5,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "braker",
+   "rank": 1,
+   "time": 134.2,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 80.72,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 7,
+   "track": "saltwater-bay",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 135.6,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 78.7,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "braker",
+   "rank": 1,
+   "time": 142.1,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 82.55,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 8,
+   "track": "cedar-bend",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 144,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 79.93,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "braker",
+   "rank": 1,
+   "time": 136.4,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 79.9,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 9,
+   "track": "red-mesa",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 134.3,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 77.48,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "braker",
+   "rank": 1,
+   "time": 145.6,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 85.3,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 10,
+   "track": "neon-quay",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 139.6,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 83.32,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "braker",
+   "rank": 1,
+   "time": 144.3,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 83.33,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 11,
+   "track": "cloud-pass",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 140.9,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 83.75,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "braker",
+   "rank": 1,
+   "time": 134.5,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.08,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  },
+  {
+   "stage": 12,
+   "track": "frostline",
+   "mode": "drifter",
+   "rank": 1,
+   "time": 133.5,
+   "playerFlips": 0,
+   "aiFinished": "0/9",
+   "aiBestLap": 81.08,
+   "aiFlips": 0,
+   "aiCrashes": 0,
+   "aiDrifting": false
+  }
+ ]
+}

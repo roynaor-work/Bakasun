@@ -8,7 +8,10 @@ import {alienLaserV25Enabled,laser25Config,laserPierceCount,shotPierces,drawLase
 import {drawUltraAlienEffects} from '../workout/island/minigames/ultra-alien-effects.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames;
 const step=1/60;
-function make({search='',weapon=0,count=2,ys=[160,280]}={}){
+// v24.9: a round is a piercing beam only while the laser bonus clock runs (bonus:true takes the token); the permanent laser alone stops at the
+// first hull (tests/island-alien-v24-9.test.mjs). BEAM keeps the v24.6 burst out of the way so only the round is measured.
+const BEAM='?alienLaserBurst=0';
+function make({search='',weapon=0,count=2,ys=[160,280],bonus=false}={}){
  globalThis.location={search};
  const balance=structuredClone(config.alienDefense);
  Object.assign(balance.levels[0],{rows:1,columns:count,waves:1,enemyRoster:[0],enemyKinds:1});
@@ -18,6 +21,7 @@ function make({search='',weapon=0,count=2,ys=[160,280]}={}){
  model.hull={pxPerUnit:390/480};
  model.aliens.forEach((a,i)=>Object.assign(a,{x:180,y:ys[i],baseX:180,baseY:ys[i],originY:ys[i],entry:0,entrySide:0,hp:100,maxHp:100,shield:0,diveAge:-1,launched:100}));
  model.player.x=180;
+ if(bonus){model.pickups.push({kind:1,x:model.player.x,y:model.player.y,vy:0});model.update(.001,{});}
  return {model,balance};
 }
 /** One real round from the production fire gate, alone on the field, straight up the column. */
@@ -33,8 +37,8 @@ test('laser v24.5 is on by default and ?alienLaser=0 (or phoneFixC=0, which pier
  const {model:b}=make({search:'?phoneFixC=0',weapon:2});assert.equal(b.laser25,undefined);
  assert.equal(laserPierceCount(config.alienDefense,0,laser25Config(config.alienDefense)),config.alienDefense.pickups.laserPierce);
 });
-test('laser v24.5: the weapon-2 laser beam pierces the front hull and hits the aligned ship behind, each once',()=>{
- const {model}=make({weapon:2}),[rear,front]=model.aliens,shot=oneRound(model);
+test('laser v24.5: the laser beam (bonus running) pierces the front hull and hits the aligned ship behind, each once',()=>{
+ const {model}=make({weapon:2,bonus:true,search:BEAM}),[rear,front]=model.aliens,shot=oneRound(model);
  assert.equal(shot.kind,1);assert.ok(shotPierces(shot),'a cannon laser round is a beam');
  let flashes=0;for(let i=0;i<72;i++){model.update(step,{});flashes=Math.max(flashes,model.laserHits.length);}
  assert.ok(front.hp<100&&rear.hp<100,`both ships take the beam (front ${front.hp}, rear ${rear.hp})`);
@@ -42,7 +46,7 @@ test('laser v24.5: the weapon-2 laser beam pierces the front hull and hits the a
  assert.equal(flashes,2,'a flash on each ship it passed');assert.equal(model.laserHits.length,0,'the flashes expire');
 });
 test('laser v24.5: a beam stops after laserPierce ships (4), not across the whole screen',()=>{
- const ys=[40,100,160,220,280,340-60];const {model}=make({weapon:2,count:6,ys});const shot=oneRound(model);Object.assign(shot,{y:400});fly(model,1.5);
+ const ys=[40,100,160,220,280,340-60];const {model}=make({weapon:2,count:6,ys,bonus:true,search:BEAM});const shot=oneRound(model);Object.assign(shot,{y:400});fly(model,1.5);
  const hit=model.aliens.filter(a=>a.hp<100).length;assert.equal(hit,laserPierceCount(config.alienDefense,0,LASER25_DEFAULTS));assert.equal(model.shots.length,0);
 });
 test('laser v24.5: plain cannon rounds and Vulcan rounds still stop at the first hull (the v24.3/v24.4 fix stays)',()=>{
@@ -52,7 +56,7 @@ test('laser v24.5: plain cannon rounds and Vulcan rounds still stop at the first
   assert.ok(front.hp<100);assert.equal(rear.hp,100,'a Vulcan round with the laser on must not go through');}
 });
 test('laser v24.5: a shield takes a charge and the beam goes on',()=>{
- const {model}=make({weapon:2}),[rear,front]=model.aliens;front.shield=1;oneRound(model);fly(model,1.2);
+ const {model}=make({weapon:2,bonus:true,search:BEAM}),[rear,front]=model.aliens;front.shield=1;oneRound(model);fly(model,1.2);
  assert.equal(front.shield,0);assert.equal(front.hp,100,'the shield took that hit');assert.ok(rear.hp<100,'the beam reached the ship behind');
 });
 test('laser v24.5: the pickup laser lasts 16 s on its own clock; rapid fire or a shield picked up meanwhile does not end it',()=>{

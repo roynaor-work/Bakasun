@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-22';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-22';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-22';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-22';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-22';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-23';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-23';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-23';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-23';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-23';
 import {createSoccerSurround} from './soccer-surround.mjs';
 import {soccerV8Enabled} from './soccer-v8.mjs';
 import {loadStadium as loadV8Stadium} from './soccer-v8-stadium.mjs';
@@ -18,29 +18,29 @@ import {soccerShowEnabled,soccerShowConfig} from './soccer-show.mjs';
 import {createSoccerShowView} from './soccer-show-view.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-22';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-23';
 import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL,withSoccerV7Kits} from './soccer-v7.mjs';
-import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-22';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-22';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-22';
-import {passDestination} from './soccer.mjs?v=island-v2-20261107-22';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-22';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-22';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-23';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-23';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-23';
+import {passDestination} from './soccer.mjs?v=island-v2-20261107-23';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-23';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-23';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-22';
-import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-22';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-23';
+import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-23';
 // v24 (13/11): Codex pitch kit, effects, 3D fans (each behind its own switch, see soccer-v24.mjs)
-import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-22';
-import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-22';
-import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-22';
+import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-23';
+import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-23';
+import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-23';
 // v24.1 (14/11): the referee on the pitch (`?soccerReferee=0` = none), full match only
-import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-22';
-import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-22';
-import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-22';
+import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-23';
+import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-23';
+import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-23';
 import {crowdPlacements,LEVELS as V8_LEVELS,TIERS as V8_TIERS} from './soccer-v8-layout.mjs';
 // Soccer full (14/11): the 11 against 11 broadcast camera and the distance LOD / off-camera culling of the 22 bodies (`?soccerFull=0` = none of it).
-import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-22';
+import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-23';
 const FX_REPLACED=new Set(['confetti','landing-dust']);
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
@@ -122,6 +122,8 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const shadows=new T.InstancedMesh(track(new T.PlaneGeometry(2.3,2.3)),track(new T.MeshBasicMaterial({map:stadium.shadowMap,transparent:true,opacity:.8,depthWrite:false})),roster.length+1);shadows.frustumCulled=false;scene.add(shadows);
   const selector=new T.Mesh(track(new T.RingGeometry(.68,.74,40)),track(new T.MeshBasicMaterial({color:config.team.colors[0],side:T.DoubleSide})));selector.rotation.x=-Math.PI/2;scene.add(selector);
   const arrow=new T.Mesh(track(new T.ConeGeometry(.15,.26,3)),track(new T.MeshBasicMaterial({color:'#e8dab0'})));arrow.rotation.z=Math.PI;scene.add(arrow);
+  // v24.9 (soccer-r249.mjs, `?soccerCam249=0`): a bright, larger arrow over the selected player that no body hides, a wider ring, a larger ball.
+  const look249=config.v249View||null;if(look249){arrow.scale.setScalar(look249.arrowScale);arrow.material.color.set(look249.arrowColor);arrow.material.depthTest=false;arrow.renderOrder=6;}
   const aimArrow=new T.Group(),aimMaterial=track(new T.MeshBasicMaterial({color:config.team.colors[0],side:T.DoubleSide}));
   const shaft=new T.Mesh(track(new T.PlaneGeometry(config.view.aimArrowWidth,config.view.aimArrowLength)),aimMaterial);shaft.position.z=config.view.aimArrowLength/2;shaft.rotation.x=-Math.PI/2;aimArrow.add(shaft);
   const head=new T.Mesh(track(new T.ConeGeometry(.13,.32,3)),aimMaterial);head.rotation.x=Math.PI/2;head.position.z=config.view.aimArrowLength;aimArrow.add(head);scene.add(aimArrow);
@@ -130,7 +132,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const arcDots=new T.InstancedMesh(track(new T.SphereGeometry(config.passing.arcRadius,6,4)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,depthTest:false})),config.passing.arcDots);arcDots.frustumCulled=false;scene.add(arcDots);
   const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
   const releaseBlend={x:0,y:0,z:0,ox:0,oy:0,oz:0,held:false,age:-1}; // v24: the shown ball after a Codex v13 throw clip lets go
-  const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
+  const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';if(config.v249View)ballRoot.scale.setScalar(config.v249View.ballScale);const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
   // Soccer full: per-player LOD plan and frustum test (allocated once), and the camera's footprint on the grass for the radar.
   const fullLodCfg=config.full?.lod||null,fullFrustum=new T.Frustum(),fullProj=new T.Matrix4(),fullSphere=new T.Sphere(new T.Vector3(),1.25),fullRay=new T.Vector3(),fullLevels=[],fullVisible=[],fullDistance=[],fullOrder=[],groundFrame=[{x:0,z:0},{x:0,z:0},{x:0,z:0},{x:0,z:0}];let fullStats=null;
@@ -519,7 +521,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
     turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
-    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);arrow.visible=markers;selector.visible=markers&&!fx?.ringActive;if(!markers)requests.count=0;fx?.update(s,dt,{quality,camera,markers,kitGoals:kitReady,controlled,calm}); // v24: the soccer-fx-v1 selection ring replaces the plain one
+    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,(look249?look249.arrowHeight:2.4)+Math.sin(time*4)*.08,controlled.z);arrow.visible=markers;selector.visible=markers&&!fx?.ringActive;if(!markers)requests.count=0;fx?.update(s,dt,{quality,camera,markers,kitGoals:kitReady,controlled,calm,ringScale:look249?look249.ringScale:1}); // v24: the soccer-fx-v1 selection ring replaces the plain one
     const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
     const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
     aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);

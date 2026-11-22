@@ -8,8 +8,8 @@
 // Game time -> sequence time (racing-pit.mjs with config.pitSeq): the last 6 m before the box = 'enter' (0 .. 0.38), the stop (0.1 s) = 'stop' (0.38 .. 0.46), the
 // change (PIT_SEQ.change s) = 'jack_up' .. 'signal' (0.46 .. 2.30), the leave phase = 'exit' (2.30 .. 2.88). ?racingPitSeq=0 keeps the v1 crew (racing-pit-crew.mjs).
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
-import {samplePitSequence,validateSequence} from './racing-pit-sequence.mjs?v=island-v2-20261107-22';
-import {pitLane} from './racing-v24.mjs?v=island-v2-20261107-22';
+import {samplePitSequence,validateSequence} from './racing-pit-sequence.mjs?v=island-v2-20261107-23';
+import {pitLane} from './racing-v24.mjs?v=island-v2-20261107-23';
 const read=search=>{try{return new URLSearchParams(search??globalThis.location?.search??'');}catch{return new URLSearchParams('');}};
 export const pitSeqEnabled=search=>read(search).get('racingPitSeq')!=='0';
 const clamp01=v=>Math.max(0,Math.min(1,v));
@@ -25,7 +25,7 @@ export function seqTime(pit,{toBox=Infinity,change=2.4,stop=.1}={}){
  return null;
 }
 export async function loadPitSeq({T,GLTFLoader,track,lane=pitLane(track),boxIndex=0,count=12,team='#d93228',keep=x=>x,car,
- base=new URL('../assets/racing-pit-seq-v2/',import.meta.url),crewBase=new URL('../assets/racing-pit-v1/models/',import.meta.url),version='island-v2-20261107-22',fetchFn=globalThis.fetch}){
+ base=new URL('../assets/racing-pit-seq-v2/',import.meta.url),crewBase=new URL('../assets/racing-pit-v1/models/',import.meta.url),version='island-v2-20261107-23',fetchFn=globalThis.fetch}){
  if(!car||!car.body||!Array.isArray(car.wheels))throw new Error('pit seq: no player car');
  const realWheels=new Map(car.wheels.map(w=>[w.name,w]));
  const config=await (await fetchFn(new URL(`sequence.json?v=${version}`,base).href)).json();

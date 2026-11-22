@@ -15,11 +15,12 @@ import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 import {decodeTallPack,buildTallClips,TALL_PROFILES,TALL_REQUIRED,tallEnabled} from './hoops-tall.mjs';
 import {loadV8Motion,buildV8Clips,v8MotionEnabled} from './hoops-v8-motion.mjs';
 import {athletesEnabled,unifyTallPack} from './athletes-gait.mjs';
-import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-22';
-import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-22';
-import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-22';
-import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-22';
-import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-22';
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,v22SkinFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-23';
+import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-23';
+import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-23';
+import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-23';
+import {hoopsLookEnabled,cullBodyGeometry,applyHoopsLook,hoopsLookKit} from './hoops-look-v249.mjs?v=island-v2-20261107-23';
+import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-23';
 
 /** The athlete body is used when the tall library is on and the flag does not say otherwise. */
 export function hoopsAthleteEnabled(cfg,params,quality=2){return athleteBodyEnabled(params?.toString?.()?'?'+params.toString():'')&&tallEnabled(cfg,params,quality);}
@@ -101,6 +102,9 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   if(!v22)try{v22=await loadAthleteV22(url=>loadHoopsGLTF(loader,url),{T:THREE,bodies:TALL_PROFILES});}
   catch(error){v22=null;onFallback?.('athlete-body-v22',error);}
  }
+ // v24.9 look (hoops-look-v249.mjs, `?hoopsLook=0` keeps v24.8): the body triangles under the jersey and the shorts go, once per body file
+ const lookV249=!!v22?.v2&&hoopsLookEnabled(search);let lookCull=null;
+ if(lookV249){try{lookCull={};for(const id of TALL_PROFILES){let mesh=null;v22.bodies[id].scene.traverse(o=>{if(!mesh&&o.isSkinnedMesh)mesh=o;});lookCull[id]=cullBodyGeometry(THREE,mesh);}}catch(error){lookCull=null;onFallback?.('hoops look cull',error);}}
  const source=v22?v22.bodies[TALL_PROFILES[0]]:await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
  let unified=null;
  if(t.athletes&&athletesEnabled(t,params||'')){
@@ -144,22 +148,26 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  }
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
- return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,fakeV13:params?.get?.('hoopsFakeV13')!=='0',
+ return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',lookV249,lookCull,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,fakeV13:params?.get?.('hoopsFakeV13')!=='0',
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
+   const lookOn=lookV249;
    if(v22){
     // the Codex body: team colours painted by region into this player's own vertex colours, one shared material, role body (guard / wing / centre)
     const h22=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100,pr=HOOPS_PROFILES[Math.abs(card.look?.skin??card.number??0)%HOOPS_PROFILES.length];
     const kit22=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
     if(look?.shortsBase)kit22.shorts=look.shortsBase;
+    if(lookOn)Object.assign(kit22,hoopsLookKit(kit22));
     const inst=createAthleteV22Instance(THREE,v22,{bodyId:profile,cloneRig:cloneSkinned,appearance:{skin:pr.skin,hair:pr.hair,hairStyle:v22HairFor(pr,card.number??cell)},kit:kit22,style:'basketball',height:h22,track});
     inst.root.userData.characterVersion=v22.v2?12:11;
     const palmPack=pack.profiles[profile].palms;
     for(const [side,key] of [['Left','l'],['Right','r']]){const pp=palmPack?.[side+'Hand']?.palmPoint;if(pp)inst.palms[key].position.fromArray(pp);}
     // v24.1 body v2: the player's number on the back and the shorts in the kit's trim colour (the soccer v24 decoration, the body's own width)
     const decoration=v22.v2?decorateAthleteV2(THREE,inst,{number:card.number??null,gloves:false,kit:kit22,appearance:{skin:pr.skin,hair:pr.hair},style:'basketball',shape:HOOPS_V2_BODY_SHAPES[profile]}):null;
-    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,decoration,
-     applyKit(k){const next={...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'};inst.paint({kit:next});if(decoration){decoration.uniforms.athleteTrim.value.set(next.secondary);decoration.uniforms.athleteSecondary.value.set(next.shorts);}},
+    let lookCtl=null;
+    if(lookOn&&decoration){try{lookCtl=applyHoopsLook(THREE,inst,{skin:v22SkinFor(pr.skin),shirt:kit22.primary,hair:pr.hair,height:h22});}catch(error){lookCtl=null;onFallback?.('hoops look',error);}}
+    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,decoration,look:lookCtl,
+     applyKit(k){const next={...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'};if(lookCtl){Object.assign(next,hoopsLookKit(next));lookCtl.setKit(next);}inst.paint({kit:next});if(decoration){decoration.uniforms.athleteTrim.value.set(next.secondary);decoration.uniforms.athleteSecondary.value.set(next.shorts);}},
      setLod:level=>inst.setLod(level),get lod(){return inst.lod;},
      dispose(){decoration?.dispose();inst.dispose();}};
    }
