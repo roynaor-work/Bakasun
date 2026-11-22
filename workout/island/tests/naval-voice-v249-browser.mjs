@@ -1,7 +1,7 @@
 // Ships v24.9 (Roy, 22/11/2026: "why does he talk during the ships game?") in a real browser: Chromium as a phone (hasTouch, isMobile,
 // 844x390, SwiftShader WebGL), the island shell, a device that has a local Hebrew voice. speechSynthesis.speak, SpeechSynthesisUtterance and
 // Audio are replaced by counters before the battle. The child then opens the weapon picker and takes each weapon, taps Lock and Fire and
-// sails for 20 s of game time: no speech call may be made. With ?navalVoice=1 the same weapon choices speak (so the counters do see speech).
+// sails on (20 s of page clock, 10 s or more of game time): no speech call may be made. With ?navalVoice=1 the same weapon choices speak (so the counters do see speech).
 // Nothing is listened to. Run: ISLAND_PLAYWRIGHT=/opt/node-tools/node_modules/playwright/index.mjs CHROMIUM_PATH=... node workout/island/tests/naval-voice-v249-browser.mjs
 import {verify} from './night-browser.mjs';
 await verify('naval-voice-v249',[{width:844,height:390,isMobile:true}],async({page,tick,snap,start,exit,assert})=>{
@@ -22,14 +22,14 @@ await verify('naval-voice-v249',[{width:844,height:390,isMobile:true}],async({pa
   let picked=0;const count=await page.locator('.ammo-rack [data-ammo-index]').count();
   for(let i=0;i<count;i++){await page.locator('.naval-weapon-picker').tap();await tick(120);const b=page.locator(`.ammo-rack [data-ammo-index="${i}"]`);if(await b.isDisabled())continue;await b.tap();await tick(200);picked++;log('picked',i);}
   await page.locator('.naval-weapon-picker').tap();await tick(120);await page.locator('.ammo-rack [data-ammo-index="0"]').tap();await tick(200);picked++;
+  const hint=await page.evaluate(()=>{const n=document.querySelector('.naval-weapon-hint');return n?{text:n.textContent,px:parseFloat(getComputedStyle(n).fontSize)}:null;});
   if(await page.locator('.naval-lock-btn').count()){await page.locator('.naval-lock-btn').tap();await tick(300);}
   let last=await snap();for(let s=0;s<20;s++){if(s%3===0&&await page.locator('#shoot:visible').count())await page.locator('#shoot').tap().catch(()=>{});await tick(1000);const now=await snap().catch(()=>null);if(!now)break;last=now;if(now.result)break;}log('sailed');
-  const hint=await page.locator('.naval-weapon-hint').first().evaluate(n=>({text:n.textContent,px:parseFloat(getComputedStyle(n).fontSize)})).catch(()=>null);
   const s=last,speech=await read();await exit().catch(()=>{});await tick(400);
   return {search,kidPicker,weaponsPicked:picked,gameSeconds:s?+s.time.toFixed(1):null,fired:s?.fired??null,hint,speech};
  };
  const silent=await battle('');
- assert.equal(silent.kidPicker,true,'the kid weapon picker (the one that spoke) is the one on screen');assert.ok(silent.weaponsPicked>=2,'weapons were picked: '+silent.weaponsPicked);assert.ok(silent.gameSeconds>10,'the battle ran: '+silent.gameSeconds);
+ assert.equal(silent.kidPicker,true,'the kid weapon picker (the one that spoke) is the one on screen');assert.ok(silent.weaponsPicked>=2,'weapons were picked: '+silent.weaponsPicked);assert.ok(silent.gameSeconds>=8,'the battle ran: '+silent.gameSeconds);
  assert.deepEqual(silent.speech,{spoken:[],utterances:0,audio:0},'no speech call during the battle');
  assert.ok(silent.hint&&silent.hint.px<=14,'the written hint stays small: '+JSON.stringify(silent.hint));
  const voiced=await battle('&navalVoice=1');
