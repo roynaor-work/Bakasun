@@ -3,7 +3,7 @@
 // tag on the cars of the timing tower that are in the pit lane. Off with the race (?racingPit=0, or a race of fewer than 3 laps: nothing is created).
 // racing-v24: the Codex icons (design/racing-pit-v1, CC0; assets/racing-pit-v1/icons): four tyre wear steps, the pit entry and the wheel change
 const phoneFixDEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?.search||'');return p.get('phoneFixes')!=='0'&&p.get('phoneFixD')!=='0';}catch{return true;}};
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-22';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-23';
 
 const ICONS=new URL('../assets/racing-pit-v1/icons/',import.meta.url),icon=name=>new URL(name+'.svg',ICONS).href;
 /** the wear step of the icon: 0 = new .. 3 = worn (the package's thresholds: a quarter of the tyre each) */

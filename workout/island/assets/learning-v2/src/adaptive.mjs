@@ -1,4 +1,4 @@
-import {DOMAINS, MIN_AGE, MAX_AGE} from './data.mjs?v=island-v2-20261107-22';
+import {DOMAINS, MIN_AGE, MAX_AGE} from './data.mjs?v=island-v2-20261107-23';
 
 export const RECENT_LIMIT = 24;
 const DIFFICULTIES = 3;

@@ -2,7 +2,7 @@
  * the v15 bar. Green, yellow, red as the Vulcan heats; while it is locked the bar blinks red and white and drains, with
  * a warning mark on top. Hidden when the gauge is cold and the Vulcan is open. The steady cannon never shows here: it
  * has no heat. Reads model state only (vulcanHeat, vulcanLocked, time). */
-import {vulcanLevel,vulcanBlink,VULCAN_COLORS} from './alien-v23.mjs?v=island-v2-20261107-22';
+import {vulcanLevel,vulcanBlink,VULCAN_COLORS} from './alien-v23.mjs?v=island-v2-20261107-23';
 export function drawV23Heat(p,m,aspect=1,scale=1){
  const locked=Boolean(m.vulcanLocked),heat=Math.max(0,Math.min(1,m.vulcanHeat||0));
  if(!locked&&!(heat>.03))return;

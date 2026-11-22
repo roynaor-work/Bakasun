@@ -1,8 +1,8 @@
-import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-22';
-import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-22';
-import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-22';
-import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-22';
-import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-22';
+import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-23';
+import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-23';
+import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-23';
+import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-23';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
