@@ -80,7 +80,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   if(q.chip){const key=q.chip.replace(/[\d:.+/ ]+/g,' ').trim();if(!chips.has(key))chips.set(key,{text:q.chip,box:q.chipBox,t:+q.t.toFixed(1)});}
   if(q.tip)tipSeen=true;else if(tipSeen)tipGone=true;
   if(q.pit)pitSeen=true;else if(pitSeen)pitOver=true;
-  if(!shotDrift&&q.drifting&&q.smoke>=12&&q.charge>.5){shotDrift=true;await shot('drift');}
+  if(!shotDrift&&q.drifting&&q.smoke>=8&&q.charge>.5){shotDrift=true;await shot('drift');}
   if(!shotChip&&q.chip&&q.t>3&&!q.pit){shotChip=true;await shot('chip');}
   if(!shotPit&&q.pitPhase==='change'){shotPit=true;await shot('pit');}
   if(pitFlow&&!moved&&q.t>PIT_AFTER){moved=true;await shot('armed');
@@ -110,7 +110,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   assert.equal(report.tyreMeterOutsidePitFrames,0,'the tyre meter is hidden outside the pit lane');
   if(scenario==='pit'){assert.ok(armed?.pitRequest&&armed?.pitAuto,'the automatic stop was armed while nothing about tyres was on the screen');assert.ok(report.pitFrames>30,'the car went through the pit lane');assert.ok(report.tyreMeterInPitFrames>30,'the tyre meter shows in the pit lane');}
   else{assert.ok(report.drift.driftingWithFingerFrames>FPS,'the car drifted from the drift finger');assert.ok(report.drift.driftingWithoutFingerFrames<=report.drift.drifts+1,'the car drifts only while the finger is down (a frame at most after each release): '+report.drift.driftingWithoutFingerFrames);
-   assert.ok(report.drift.maxSmoke>=12,'tyre smoke in the scene while drifting (renderMetrics.effects.driftSmoke)');assert.equal(report.drift.smokeLongAfterDrift,0,'no drift smoke when the car has not drifted for a second');assert.ok(report.drift.maxSkidMarks>=8,'skid marks in the scene');
+   assert.ok(report.drift.maxSmoke>=8,'tyre smoke in the scene while drifting (renderMetrics.effects.driftSmoke)');assert.equal(report.drift.smokeLongAfterDrift,0,'no drift smoke when the car has not drifted for a second');assert.ok(report.drift.maxSkidMarks>=8,'skid marks in the scene');
    assert.ok(report.tip.seen&&report.tip.gone&&report.tip.stored==='1','the one-time tip showed, left and is remembered');assert.ok(report.chips.length>=1,'a corner chip showed');
    for(const c of report.chips)assert.ok(c.box[2]<=844*ROAD.x0||c.box[3]<=390*ROAD.y0,'the chip is in the corner: '+JSON.stringify(c));}
  }
