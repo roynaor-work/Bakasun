@@ -15,6 +15,7 @@ import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,s
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
 import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-22'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
+import {applySoccerLook249} from './soccer-look249.mjs';
 import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-22';
 import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-22';
 import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-22';
@@ -776,6 +777,8 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
         const inst=createAthleteV22Instance(T,athleteSource,{bodyId:'soccer',cloneRig:cloneSoccerRig,appearance:{skin:profile.skin,hair:profile.hair,hairStyle:v22HairFor(profile,id)},kit,style:'soccer',track:own,height:v22Height('soccer','field',isKeeper?(a.keeperHeight||height*1.033):height),lods:fullLods});
         // v24 body v2: gloves on the keepers, the card's number on every back (set each frame from the player, see update)
         const decoration=athleteV2?decorateAthleteV2(T,inst,{number:slot.matchNumber??null,gloves:isKeeper,kit,appearance:{skin:profile.skin,hair:profile.hair}}):null;
+        // v24.9 look (soccer-look249.mjs, `?soccerLook=0`): wider shoulders, longer and thicker arms, a smaller head and boots, as rest scales of the joints
+        if(config.v249Look)applySoccerLook249(inst.bones);
         const pivot=new T.Group();pivot.add(inst.root);scene.add(pivot);
         triangles+=v22Triangles(inst);lowTriangles+=v22Triangles(inst,fullLods?1:0);mobileTriangles+=v22Triangles(inst,fullLods?2:0);
         const mixer=new T.AnimationMixer(inst.root),motion=createSoccerDesignMotion(mixer,clipSets[0],data,config);
