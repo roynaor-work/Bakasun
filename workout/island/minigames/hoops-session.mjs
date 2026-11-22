@@ -44,7 +44,7 @@ export function startHoops(ctx){
  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
  const timeoutFeedback=kidUx('039');
- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined,
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:(params.get('hoopsV249')==='0'||params.get('hoopsMotion249')==='0')&&balance.play?{...balance.play,motion:null}:undefined,
   rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
